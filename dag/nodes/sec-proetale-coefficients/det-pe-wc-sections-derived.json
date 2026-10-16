@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wc-sections-derived",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived sections over a w-contractible affine",
@@ -19,28 +19,131 @@
   ]
  },
  "stmt_deps": [
-  "det-pe-wc-sections-exact"
+  "det-pe-wc-sections-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
  ],
  "proof": [
   {
-   "text": "The category of $\\mathcal R$-modules is a Grothendieck abelian category, so $K$ has a\nK-injective resolution $K\\to I$ (Stacks, Tag 079P), and $R\\Gamma(U,K)=\\Gamma(U,I)$ by\ndefinition. The map $K(U)\\to I(U)$ is a quasi-isomorphism: its cone is $\\Gamma(U,-)$ of the\ncone of $K\\to I$, which is acyclic; and an exact functor\n([det-pe-wc-sections-exact]) carries acyclic complexes to acyclic complexes, since\nacyclicity means exactness of $C^{n-1}\\to C^n\\to C^{n+1}$ for all $n$ and exact functors\npreserve images and kernels. This proves the first assertion. Taking $K=F$ in degree $0$\ngives $H^q(U,F)=H^q(F(U)[0])=0$ for $q>0$.",
+   "text": "Work in the common universe and small skeleton of [def-weil-size-convention]. Put $\\mathcal A=\\Mod(X_{\\mathrm{proét}},\\mathcal R)$ and $\\mathcal B=\\Mod(\\mathcal R(U))$, and write $E=\\Gamma(U,-)$. The category $\\mathcal B$ is abelian by [lem-weil-pbc-ring-modules-enough-injectives], used only for its abelian-category assertion. The ring sheaf need not be commutative. The small-site hypotheses of [lem-weil-pbc-ring-sheaves-grothendieck] apply in this universe, so $\\mathcal A$ is Grothendieck abelian. Hence [lem-sfb-grothendieck-k-injective] gives a quasi-isomorphism $s:K\\to I$ with $I$ K-injective, even when $K$ is unbounded. Evaluation is additive: addition of module morphisms is sectionwise, and $E(f+g)=(f+g)_U=f_U+g_U=E(f)+E(g)$ by [def-weil-sheaf-of-modules-category].",
    "uses": [
-    "det-pe-wc-sections-exact"
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ring-modules-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q (remark-existence-D), final sentence; Tag 079P (theorem-K-injective-embedding-grothendieck); blueprint proof, first sentence"
+   }
+  },
+  {
+   "text": "By [det-pe-wc-sections-exact], $E$ is exact. Here is the degreewise argument, with cohomology as in [def-weil-abstract-derived-category]. For any complex $C$, put $Z^n=\\ker d_C^n$ and $B^n=\\operatorname{im}d_C^{n-1}$. Apply $E$ to $0\\to Z^n\\to C^n\\to B^{n+1}\\to0$ and $0\\to B^n\\to Z^n\\to H^n(C)\\to0$. The first resulting exact sequence identifies $E(Z^n)$ with $\\ker E(d_C^n)$; in the factorization $C^{n-1}\\twoheadrightarrow B^n\\hookrightarrow C^n$, the epimorphism and monomorphism remain such, so $E(B^n)=\\operatorname{im}E(d_C^{n-1})$. The second resulting sequence therefore gives $H^n(E(C))\\cong E(H^n(C))$. These identifications commute with maps of complexes because the maps on the kernels, images and quotients are induced by their degreewise components. In particular $H^n(E(s))$ corresponds to $E(H^n(s))$ and is invertible for every $n$. Thus $E(s):K(U)\\to I(U)$ is a quasi-isomorphism. This calculation uses only two adjacent differentials in each degree and imposes no boundedness hypothesis.",
+   "uses": [
+    "det-pe-wc-sections-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof: expanded kernel/image calculation; blueprint proof, second sentence"
+   }
+  },
+  {
+   "text": "Use [def-sfb-right-derived-functor] for the additive functor $E$ and the K-injective resolutions from step 1; this defines $R\\Gamma(U,-)=RE$ and its unit $\\eta$. Write $Q_{\\mathcal A},Q_{\\mathcal B}$ for the localizations of [def-weil-abstract-derived-category]. Since $I$ is K-injective, $\\eta_I$ is invertible. Since $s$ is a quasi-isomorphism, $Q_{\\mathcal A}(s)$ and therefore $RE(Q_{\\mathcal A}(s))$ are invertible. The resolution comparison $c_s=\\eta_I^{-1}\\circ RE(Q_{\\mathcal A}(s)):RE(Q_{\\mathcal A}K)\\to Q_{\\mathcal B}(E(I))$ is consequently invertible. Naturality of $\\eta$ gives $c_s\\circ\\eta_K=Q_{\\mathcal B}(E(s))$. Step 2 and localization make the right-hand side invertible. Hence the specified natural map $\\eta_K:Q_{\\mathcal B}(K(U))\\to R\\Gamma(U,K)$ is invertible, not merely an abstract isomorphism between the two objects.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined); blueprint proof, resolution computation and first conclusion"
+   }
+  },
+  {
+   "text": "Take $K=F[0]$. By the definition of cohomology and its factorization through localization in [def-weil-abstract-derived-category], $H^q(U,F)=H^q(R\\Gamma(U,F[0]))\\cong H^q(F(U)[0])$. For $q>0$, the term of $F(U)[0]$ in degree $q$ is zero, so its kernel and its cohomology quotient in that degree are zero. Thus $H^q(U,F)=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-derived.proof.md",
+    "place": "Final sentence: take K equal to F in degree zero"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-wc-sections-exact"
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "det-pe-wc-sections-exact",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-derived.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-derived.proof.md",
+  "place": "Entire proof, with the K-injective route of Stacks Tags 079P, 070K and 070Y and the explicit degreewise calculation of Tag 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|wContractible|[Ww]eakly.[Cc]ontractible|rightDerivedFunctorIsoMapDerivedCategory",
+   "results": "0 hits: ; no theorem states the unbounded derived evaluation comparison over a weakly contractible affine.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact evaluation functor on module sheaves computes unbounded derived sections termwise",
+   "results": "8 hits: PresheafOfModules.evaluation, SheafOfModules.evaluation, SheafOfModules.sectionsFunctor, CategoryTheory.sheafSectionsNatIsoEvaluation, SheafOfModules.Finite.evaluationPreservesFiniteLimits, PresheafOfModules.evaluation_obj, PresheafOfModules.evaluation_map, SheafOfModules.evaluationPreservesLimitsOfShape; no theorem states the unbounded derived evaluation comparison over a weakly contractible affine.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans; no theorem states the unbounded derived evaluation comparison over a weakly contractible affine.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an arbitrary unbounded complex of sheaves of modules over a weakly contractible affine compute derived sections because evaluation is exact",
+   "results": "8 hits: SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, CategoryTheory.HasGlobalSectionsFunctor, SheafOfModules.sectionsFunctor_obj, SheafOfModules.instAbelian, instAbelianCondensedMod, CategoryTheory.Sheaf.H, Ext, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; no theorem states the unbounded derived evaluation comparison over a weakly contractible affine.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|rightDerivedFunctorPlus|isIso.*rightDerived",
+   "results": "17 hits: Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; searched Mathlib/Algebra/Homology; read ExactFunctor.lean:25-65 and RightDerivedFunctorPlus.lean:25-58. These construct the induced functor or a bounded-below right derived functor; they do not give the stated unbounded pro-etale evaluation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId; read ExactFunctor.lean:25-65 and RightDerivedFunctorPlus.lean:25-58. These construct the induced functor or a bounded-below right derived functor; they do not give the stated unbounded pro-etale evaluation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian categories has total right derived functor canonically isomorphic to its termwise functor on unbounded complexes",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; returned mapDerivedCategoryFactors(h), mapDerivedCategorySingleFunctor and degree-zero rightDerived results do not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -54,5 +157,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-wc-sections"
+ "unit": "sk-cor-pe-wc-sections",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wc-sections-derived",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused existing arbitrary-ring ringed-site Grothendieck and K-injective-resolution nodes; expanded exact evaluation into a natural cohomology calculation and identified the specified comparison using the derived-functor unit. All dependencies were read and quoted; no new nodes, no Lean writing or compilation.",
+  "blueprint": "Follows the main-20261015 det-pe-wc-sections-derived proof: step 1 realizes Grothendieckness and the K-injective replacement; step 2 expands exactness on complexes; step 3 proves invertibility of the natural comparison; step 4 realizes the final cohomology-vanishing sentence. The containing sk-cor-pe-wc-sections unit is followed without change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieckness for modules over any ring sheaf on a small site; the unit supplies exact evaluation, not this ambient categorical fact. This node is already Lean-closed."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic unbounded K-injective resolution existence used exactly at the blueprint first sentence; it is already Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-c26c28194",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-c26c28194 (reviewer sub-agent of L); spot-checked: Read the full item, blueprint route, cited DAG statements, Stacks sources (079P, 079Q, 015F, 070K, 070Y), Mathlib search results, and edge cases. All four proof steps are mathematically sound for arbitrary ring sheaves and unbounded complexes; the natural derived-unit comparison is correctly identified. No new nodes, duplicates, SGA citations, missing hypotheses, or repairs."
+ }
 }
