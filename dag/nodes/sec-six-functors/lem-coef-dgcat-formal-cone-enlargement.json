@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-dgcat-formal-cone-enlargement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite mapping-complex adjunction before total inverse limit: the strict representable-module embedding and cone matrices used for the coherent-equivalence generator in the dg-category model.",
+   "via": [
+    "lem-coef-dgcat-equivalence-cell-calculus",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict dg Yoneda embedding and the formal cone enlargement",
+ "statement": "Let $R$ be a commutative ring and let $\\mathcal A$ be a small $R$-linear cochain dg category with signed Leibniz composition as in [lem-coef-dgcat-free-cell-calculus]. A right dg $\\mathcal A$-module is a family of cochain complexes $M(z)$ with unital associative actions $M(y)\\otimes_R\\mathcal A(z,y)\\to M(z)$ satisfying $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$. A homogeneous module map of degree $n$ consists of degree-$n$ $R$-linear maps commuting with these right actions; its differential is $\\partial q=d_Nq-(-1)^nq d_M$. Write $\\mathrm{dgMod}(\\mathcal A)$ for the dg category with these objects and morphism complexes. Composition is composition of the underlying graded maps. Put $h_x(z)=\\mathcal A(z,x)$ with its composition action. For every right dg module $M$, evaluation at $1_x$ is an isomorphism of complexes $\\operatorname{Hom}_{\\mathrm{dgMod}(\\mathcal A)}(h_x,M)\\cong M(x)$, with inverse sending $m$ to the map $a\\mapsto ma$.\n\nThere is a small dg category $\\operatorname{Cone}(\\mathcal A)$ whose labelled objects are all $h_x$ and, for each closed degree-zero $u:x\\to y$, a labelled object $C_u$ represented by the right dg module $h_y\\oplus h_x[1]$, with $h_x[1]^j=h_x^{j+1}$, the unchanged right graded action, and differential\n$$D_u=\\begin{pmatrix}d_{h_y}&u\\circ-\\\\ 0&-d_{h_x}\\end{pmatrix}.$$\nIts morphism complexes consist of all homogeneous module maps between these objects, with the differential above. The embedding $\\mathcal A\\to\\operatorname{Cone}(\\mathcal A)$, $x\\mapsto h_x$, identifies every original morphism complex with the corresponding morphism complex, preserving composition and units. In particular\n$$\\operatorname{Cone}(\\mathcal A)(h_z,C_u)\\cong\\operatorname{Cone}\\bigl(\\mathcal A(z,x)\\xrightarrow{u\\circ-}\\mathcal A(z,y)\\bigr),$$\nwhere $\\operatorname{Cone}(v)^j=\\mathcal A(z,y)^j\\oplus\\mathcal A(z,x)^{j+1}$ with differential $(a,b)\\mapsto(da+vb,-db)$. The graded decomposition of $C_u$ gives degree-zero maps $\\iota_y:h_y\\to C_u$, $\\pi_y:C_u\\to h_y$, a degree-$-1$ map $\\iota_x:h_x\\to C_u$ and a degree-$1$ map $\\pi_x:C_u\\to h_x$. They satisfy $\\pi_y\\iota_y=1$, $\\pi_x\\iota_x=1$, $\\pi_y\\iota_x=\\pi_x\\iota_y=0$ and $\\iota_y\\pi_y+\\iota_x\\pi_x=1_{C_u}$ as graded maps; they need not be closed. A degree-$n$ map $C_u\\to C_v$, for $v:x'\\to y'$, is a matrix with entries in\n$$\\begin{pmatrix}\\mathcal A(y,y')^n&\\mathcal A(x,y')^{n-1}\\\\ \\mathcal A(y,x')^{n+1}&\\mathcal A(x,x')^n\\end{pmatrix}.$$\nComposition is matrix multiplication on the underlying graded modules and the differential is $M\\mapsto D_vM-(-1)^nMD_u$. Every dg functor $F:\\mathcal A\\to\\mathcal B$ extends to these small labelled cone categories, taking $h_x$ to $h_{F(x)}$, $C_u$ to $C_{F(u)}$, and applying $F$ to the matrix entries. These extensions preserve identities and composition of dg functors.",
+ "source": {
+  "document": "https://arxiv.org/pdf/0710.4303",
+  "place": "Chapter 1, section 1.2, Definition 1.4 and its preceding paragraph, printed p. 26 (right modules, graded module maps and Yoneda); Proposition 1.7, printed p. 27 (representable cone matrices); and Lemma 1.10, printed p. 29 (L_0 embedded in modules, L_1 its full cone enlargement). Strict dg Yoneda and functorial finite-matrix formulation spelled out by the agent. Read online; not locally archived. No corresponding Stacks tag."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-free-cell-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Pretriangulated\", \"Enriched\"",
+   "results": "{\"t\": \"2026-10-16T14:46:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pretriangulated\\\", \\\"Enriched\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedComplex|pretriangulated|dg[Cc]at|DGCategory|Kontsevich",
+   "results": "{\"t\": \"2026-10-16T14:46:56Z\", \"tool\": \"grep\", \"query\": \"TwistedComplex|pretriangulated|dg[Cc]at|DGCategory|Kontsevich\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"dec55ce4ddb4fe3d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful differential graded category embedding formal cone category of matrices",
+   "results": "{\"t\": \"2026-10-16T14:46:56Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful differential graded category embedding formal cone category of matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.FreydMitchell.instFullModuleCatEmbeddingRingFunctor\", \"CategoryTheory.Functor.Full\", \"CategoryTheory.Mat_.Embedding.instFaithfulEmbedding\", \"CategoryTheory.Mat_.embedding\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.Preadditive.ofFullyFaithful\", \"CategoryTheory.Mat_.Embedding.instFullEmbedding\", \"CategoryTheory.Limits.FormalCoproduct.fullyFaithfulIncl\"], \"digest\": \"85f361c02ecdbede\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded category embeds fully faithfully in a category of finite sums shifts and formal mapping cones with matrix morphism complexes",
+   "results": "{\"t\": \"2026-10-16T14:46:58Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded category embeds fully faithfully in a category of finite sums shifts and formal mapping cones with matrix morphism complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory\", \"ComplexShape.Embedding.fullyFaithfulExtendFunctor\", \"HomologicalComplex.dgoEquivHomologicalComplex_functor\", \"HomotopyCategory.singleFunctor\", \"HomotopyCategory.singleFunctors\", \"DerivedCategory.instFaithfulSingleFunctor\", \"HomologicalComplex.dgoToHomologicalComplex\", \"ComplexShape.Embedding.instFullHomologicalComplexExtendFunctor\"], \"digest\": \"4bdd6242a634795e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite twisted complexes over an R linear dg category have Hom matrices and extend dg functors entrywise",
+   "results": "{\"t\": \"2026-10-16T14:46:59Z\", \"tool\": \"leanfinder\", \"query\": \"Finite twisted complexes over an R linear dg category have Hom matrices and extend dg functors entrywise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.extend.mapX\", \"HomologicalComplex.extend.mapX_some\", \"HomologicalComplex.dgoToHomologicalComplex_map_f\", \"CategoryTheory.Functor.mapMat__map\", \"ComplexShape.Embedding.extendFunctor_map\", \"ComplexShape.Embedding.instAdditiveHomologicalComplexExtendFunctor\", \"CategoryTheory.Mat_.Hom\", \"HomologicalComplex.homologicalComplexToDGO_map_f\"], \"digest\": \"d3b3e5963b115ed2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedComplex|dg[Cc]at|DGCategory|dg.?module|differential graded categor",
+   "results": "{\"t\": \"2026-10-16T14:49:06Z\", \"tool\": \"grep\", \"query\": \"TwistedComplex|dg[Cc]at|DGCategory|dg.?module|differential graded categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"mappingCone\"",
+   "results": "{\"t\": \"2026-10-16T14:49:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"mappingCone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are ordinary complexes, shape extension or additive Mat_. Read Mathlib/CategoryTheory/Preadditive/Mat.lean:20-105 and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:25-70. Mat_ supplies ordinary finite biproduct matrices, not all graded module maps over an arbitrary dg category, their differential, the strict dg Yoneda isomorphism, or the functorial cone enlargement. The focused dg-category/module source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DgModule|dgYoneda|Enriched.*[Cc]one|[Cc]one.*Enriched",
+   "results": "{\"t\": \"2026-10-16T15:22:39Z\", \"tool\": \"grep\", \"query\": \"DGModule|DgModule|dgYoneda|Enriched.*[Cc]one|[Cc]one.*Enriched\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"80fad12cdc0ebed2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits concern ordinary derived categories or mapping cones of complexes. Read DerivedCategory/Basic.lean:13-25,59-96; none states strict dg-module Yoneda or a cone enlargement. The grep hits are the ordinary limit cone coneFunctorEnrichedHom, read Enriched/FunctorCategory.lean:333-342, not a mapping cone. Loogle returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T15:22:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits concern ordinary derived categories or mapping cones of complexes. Read DerivedCategory/Basic.lean:13-25,59-96; none states strict dg-module Yoneda or a cone enlargement. The grep hits are the ordinary limit cone coneFunctorEnrichedHom, read Enriched/FunctorCategory.lean:333-342, not a mapping cone. Loogle returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category enriched in cochain complexes embeds in representable dg modules and admits a functorial category of mapping cones",
+   "results": "{\"t\": \"2026-10-16T15:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"A category enriched in cochain complexes embeds in representable dg modules and admits a functorial category of mapping cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"CochainComplex.cm5b.instInjectiveXIntMappingConeIdI\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory\", \"HasDerivedCategory\", \"DerivedCategory.Q\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.IsKProjective\"], \"digest\": \"22247ed49c6fd659\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits concern ordinary derived categories or mapping cones of complexes. Read DerivedCategory/Basic.lean:13-25,59-96; none states strict dg-module Yoneda or a cone enlargement. The grep hits are the ordinary limit cone coneFunctorEnrichedHom, read Enriched/FunctorCategory.lean:333-342, not a mapping cone. Loogle returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dgcat-equivalence-cell-calculus",
+  "date": "2026-10-16",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

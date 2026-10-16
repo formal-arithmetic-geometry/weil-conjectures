@@ -25,9 +25,128 @@
  "stmt_deps": [
   "lem-coef-dgcat-free-cell-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First the specified differential defines a dg category: its square is zero on $f,g,r_0,r_1$, and $d(fr_0-r_1f)=f(gf-1)-(fg-1)f=0$. Extend it to words by the signed Leibniz rule, using the free dg presentation. For (a), choose a closed $v:y\\to x$ representing $[u]^{-1}$ and degree-$-1$ arrows $a,b$ with $da=vu-1_x$ and $db=uv-1_y$. Such choices mean exactly that the two compositions represent the identity in $H^0$. Put $z=ua-bu$; then $dz=u(vu-1)-(uv-1)u=0$. Set $b'=b+zv$ and $w=za$. Directly $db'=uv-1_y$ and $dw=-z( vu-1_x)=ua-b'u$. The assignment $f\\mapsto u$, $g\\mapsto v$, $r_0\\mapsto a$, $r_1\\mapsto b'$, $t\\mapsto w$ respects every differential and hence extends by the free presentation. This proves (a) without a cone-contractibility criterion.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Proposition 1.7 and Proposition 1.13, realization; explicit correction of the chosen inverse homotopies supplied here."
+   }
+  },
+  {
+   "text": "Record the cone matrix dictionary, to be used twice below. In the cone enlargement of the cited node, for a closed $u:x\\to y$ write a degree-$-1$ endomorphism of $C_u=h_y\\oplus h_x[1]$ as $H=\\begin{pmatrix}-b&-w\\\\ v&a\\end{pmatrix}$. Computing $\\partial H=D_uH+HD_u$ gives the four entries $-db+uv$, $-dw+ua-bu$, $-dv$, and $vu-da$, respectively. Thus $\\partial H=1$ is exactly the four equations $dv=0$, $da=vu-1_x$, $db=uv-1_y$, $dw=ua-bu$. The correspondence is entrywise, bijective and commutes with dg functors. The minus signs in the upper row implement our cochain-shift convention.",
+   "uses": [
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Proposition 1.7, printed p. 27; matrix multiplication with cochain-shift signs made explicit."
+   }
+  },
+  {
+   "text": "For (b), let $\\mathcal L_0$ be obtained from $\\mathcal C$ by adding a new object $H$ with endomorphisms $R$, initially no morphisms to or from old objects, and then a free closed arrow $s:c\\to H$ of degree zero. Equivalently adjoin the object first and then the complex $R[0]$ of arrows. The free-word formula shows that $\\mathcal L_0(X,Y)=\\mathcal C(X,Y)$ for old $X,Y$, that $\\mathcal L_0(X,H)=s\\mathcal C(X,c)$ for old $X$, and that $\\mathcal L_0(H,Y)=0$ for old $Y$. In particular postcomposition by $s$ is an isomorphism of complexes $\\mathcal L_0(X,c)\\to\\mathcal L_0(X,H)$. Let $\\mathcal L_1$ be the full subcategory of $\\operatorname{Cone}(\\mathcal L_0)$ on all labelled representables and $Z=C_s$. Its old-object morphism complexes remain exactly those of $\\mathcal L_0$.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 29: L_0, Yoneda and L_1; the free-arrow Hom calculation written out."
+   }
+  },
+  {
+   "text": "Freely adjoin $h:Z\\to Z$ of degree $-1$ to $\\mathcal L_1$ with $dh=1_Z$, obtaining $\\mathcal L_2$, and let $\\mathcal L_3$ be its full subcategory on the objects of $\\mathcal L_0$. We identify $\\mathcal L_3$ with the required pushout $\\mathcal E$. Use the graded maps $\\iota_H,\\pi_H$ of degree zero, $\\iota_c:c\\to Z$ of degree $-1$, and $\\pi_c:Z\\to c$ of degree $1$ from the cone statement; all four are actual homogeneous arrows of $\\mathcal L_1$, so no shift object has to belong to it. Define $g=\\pi_ch\\iota_H$, $r_0=\\pi_ch\\iota_c$, $r_1=-\\pi_Hh\\iota_H$ and $t=-\\pi_Hh\\iota_c$. Their degrees are $0,-1,-1,-2$, respectively, and step 2 gives their differential identities. Their equations give a functor $\\mathcal E\\to\\mathcal L_3$ fixing $\\mathcal C,H,s$. Conversely the presentation of $\\mathcal E$ gives $\\mathcal L_0\\to\\mathcal E$; extend it to cone enlargements using the cited functoriality. In $\\operatorname{Cone}(\\mathcal E)$ the images of $g,r_0,r_1,t$ assemble by step 2 to a contraction of $C_s$. Hence the restricted functor on $\\mathcal L_1$ extends across the free arrow $h$ to $\\mathcal L_2\\to\\operatorname{Cone}(\\mathcal E)$. On $\\mathcal L_3$ it lands in the representables, whose Hom complexes are those of $\\mathcal E$, giving $\\mathcal L_3\\to\\mathcal E$. These maps are inverse: the composite on $\\mathcal E$ fixes each displayed generator; for the other composite expand every morphism incident to $Z$ in its row or column components and use $1_Z=\\iota_H\\pi_H+\\iota_c\\pi_c$ as a graded identity. In particular the exact expansion is $h=-\\iota_Hr_1\\pi_H-\\iota_Ht\\pi_c+\\iota_cg\\pi_H+\\iota_cr_0\\pi_c$. Insert this formula at each occurrence of $h$, and the graded identity at every adjacent cone coefficient, to express every old-to-old word in the four entries and original $\\mathcal L_0$ coefficients; recombination gives the original word. Therefore the composite fixes every word and every old coefficient. This verifies the strict identification on morphism complexes, not just a quasi-equivalence.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 29: identification M=L_3; inverse maps and the matrix expansion are explicit."
+   }
+  },
+  {
+   "text": "For old $X,Y$, apply the free-arrow filtration to $\\mathcal L_1\\to\\mathcal L_2$ at the arrow $h$. Its length-zero term is $\\mathcal C(X,Y)$. For $m\\geq1$ the length-$m$ quotient is the tensor complex\n$$\\mathcal L_1(Z,Y)\\otimes_R Rh\\otimes_R(\\mathcal L_1(Z,Z)\\otimes_R Rh)^{\\otimes_R(m-1)}\\otimes_R\\mathcal L_1(X,Z),$$\nwhere $Rh$ is $R$ in degree $-1$ with zero differential. The terms differentiating $h$ lower length because $dh=1_Z$. The filtration is exhaustive and its inclusions split as graded modules. These statements are precisely the arbitrary-arrow-degree case of the cited free-cell lemma; no tensor product is being assumed to preserve a mere quasi-isomorphism.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed pp. 29-30: length filtration for the freely adjoined contraction."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal C(X,c)$. The cone Hom formula and step 3 identify $\\mathcal L_1(X,Z)$ with the cone of $1_A$, whose differential on $A^n\\oplus A^{n+1}$ is $(a,b)\\mapsto(da+b,-db)$. The degree-$-1$ map $k(a,b)=(0,a)$ satisfies $dk+kd=1$. Consequently each positive-length quotient in step 5 is contractible, even when the other Hom complexes are nonflat: if $T$ denotes all preceding tensor factors, the degree-$-1$ operator on $T\\otimes\\mathcal L_1(X,Z)$ is $q\\otimes v\\mapsto(-1)^{|q|}q\\otimes k(v)$. The tensor differential gives $dK+Kd=1$ by cancelling the two terms involving $dq$.",
+   "uses": [
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 30: cone of the isomorphism s_*; explicit contraction and tensor sign."
+   }
+  },
+  {
+   "text": "Here is the filtration argument without a convergence assumption. In $F_m/F_0$ every cycle has a top-length component. Since $F_m/F_{m-1}$ is contractible for $m>0$, that component is a boundary; subtract the differential of a graded lift of a primitive to reduce its length. Induction on $m$ makes it zero modulo $F_0$, proving $F_m/F_0$ acyclic. Every element of $\\bigcup_m F_m/F_0$ has finite length, so the same finite induction proves the union quotient acyclic. Finally the inclusion $F_0\\to\\bigcup_mF_m$ is a cohomology isomorphism directly: a cycle projects to a boundary in the quotient, so subtract a lifted boundary to obtain a cycle in $F_0$; if a cycle in $F_0$ bounds upstairs, its primitive projects to a cycle in the quotient, and subtracting a lifted primitive there puts that bounding element in $F_0$. All lifts used here exist degreewise. Together with step 4 this proves the old-object quasi-isomorphisms of (b).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 30: exhaustive filtration argument expanded by finite-length cycle and boundary reduction."
+   }
+  },
+  {
+   "text": "The object set in the presentation of $\\mathcal E$ consists of the old objects and exactly the new label $H$; adjoining arrows changes no objects. Its closed arrows $f:c\\to H$ and $g:H\\to c$ satisfy $gf-1_c=dr_0$ and $fg-1_H=dr_1$. Their $H^0$ classes are inverse, so $H$ is isomorphic to $c$ in $H^0(\\mathcal E)$. This finishes (b). The temporary cone object $Z$ is omitted when taking $\\mathcal L_3$; it is not an extra object of the pushout.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 30: essential surjectivity, with the new-object bookkeeping clarified."
+   }
+  },
+  {
+   "text": "For (c), keep the specified closed arrow $u:x\\to x'$ fixed throughout. In the functorial cone enlargements form $C_u$ and $C_{p(u)}$ and their endomorphism dg algebras $A$ and $B$. The functor $p$ induces a unital dg algebra map $P:A\\to B$. Each homogeneous endomorphism is a four-entry matrix in shifts of the original Hom modules; degreewise surjectivity of $p$ on those four Hom complexes therefore makes $P$ degreewise surjective. By (a) and the matrix dictionary of step 2 there is $h_0\\in A^{-1}$ with $dh_0=1$. The given bottom functor supplies, by that same dictionary, a particular $h_D\\in B^{-1}$ with $dh_D=1$. This uses no equivalence or acyclicity hypothesis on $p$ and changes none of its prescribed bottom entries.",
+   "uses": [
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Proposition 1.13, printed p. 32: cone endomorphism map, its degreewise surjectivity and the supplied contractions."
+   }
+  },
+  {
+   "text": "Choose any graded lift $k\\in A^{-1}$ of $h_D$, and let $e=dk-1\\in A^0$. Then $de=0$ and $P(e)=0$. Set $h=k-h_0e$. The signed Leibniz rule gives $d(h_0e)=e$, so $dh=1$, and $P(h)=h_D$ because $P(e)=0$. By the four-entry dictionary, $h$ now gives lifts of precisely the prescribed $g,r_0,r_1,t$ satisfying all four equations simultaneously. The fixed $u$ remains the image of $f$. The free presentation extends these images to the required dg-functor filler; the object equalities in the hypothesis make both sides of the square strict. This proves (c).",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Proposition 1.13, printed p. 32: contraction lifting, here proved by the explicit kernel correction k-h_0(dk-1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-formal-cone-enlargement",
+  "lem-coef-dgcat-free-cell-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/0710.4303",
+  "place": "Chapter 1, Proposition 1.7, Lemma 1.10 and Proposition 1.13, printed pp. 27-32; read online, not locally archived. Explicit algebraic corrections, signs, inverse maps and finite-filtration argument written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +189,45 @@
    "results": "{\"t\": \"2026-10-16T13:10:17Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: hits concern homotopy equivalences of complexes or ShortComplex, not a coherent free dg-category interval, its pushouts, or lifting prescribed inverse data. The focused dg-category source grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\", \"Enriched\"",
+   "results": "{\"t\": \"2026-10-16T14:47:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyEquiv\\\", \\\"Enriched\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are HomotopyEquiv for ordinary cochain complexes, derived localization or ShortComplex, not the free Kontsevich dg interval with its pushout and prescribed inverse-data lifting. Read the existing general-complex candidate context; the focused dg-category/interval grep returns zero hits. No exact declaration or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval",
+   "results": "{\"t\": \"2026-10-16T14:47:56Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are HomotopyEquiv for ordinary cochain complexes, derived localization or ShortComplex, not the free Kontsevich dg interval with its pushout and prescribed inverse-data lifting. Read the existing general-complex candidate context; the focused dg-category/interval grep returns zero hits. No exact declaration or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kontsevich dg interval with a homotopy inverse two homotopies and degree minus two coherence has quasi isomorphisms on old Hom complexes after pushout",
+   "results": "{\"t\": \"2026-10-16T14:47:58Z\", \"tool\": \"leanfinder\", \"query\": \"Kontsevich dg interval with a homotopy inverse two homotopies and degree minus two coherence has quasi isomorphisms on old Hom complexes after pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyIntUp\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"ComplexShape.QFactorsThroughHomotopy\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"instQFactorsThroughHomotopyDown\", \"homotopyEquivalences_le_quasiIso\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\"], \"digest\": \"6127503c2c5aa3b0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are HomotopyEquiv for ordinary cochain complexes, derived localization or ShortComplex, not the free Kontsevich dg interval with its pushout and prescribed inverse-data lifting. Read the existing general-complex candidate context; the focused dg-category/interval grep returns zero hits. No exact declaration or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent homotopy inverse with two homotopies extends across a surjective dg functor",
+   "results": "{\"t\": \"2026-10-16T14:47:59Z\", \"tool\": \"leansearch\", \"query\": \"A coherent homotopy inverse with two homotopies extends across a surjective dg functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.inv\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"HomotopyEquiv.homotopyInvHomId\", \"CategoryTheory.ShortComplex.HomotopyEquiv.inv\", \"CategoryTheory.ShortComplex.HomotopyEquiv.homotopyHomInvId\", \"CategoryTheory.ShortComplex.HomotopyEquiv.homotopyInvHomId\", \"CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId\", \"CochainComplex.homotopyOpEquiv\"], \"digest\": \"4f0fd8b74117c608\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are HomotopyEquiv for ordinary cochain complexes, derived localization or ShortComplex, not the free Kontsevich dg interval with its pushout and prescribed inverse-data lifting. Read the existing general-complex candidate context; the focused dg-category/interval grep returns zero hits. No exact declaration or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Freely adjoining a coherent homotopy equivalence to a differential graded category and lifting it through surjective morphism complexes",
+   "results": "{\"t\": \"2026-10-16T14:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"Freely adjoining a coherent homotopy equivalence to a differential graded category and lifting it through surjective morphism complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy\", \"instQFactorsThroughHomotopyIntUp\", \"HomotopyCategory.quotient_obj_surjective\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"HomotopyCategory\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"HomotopyEquiv\"], \"digest\": \"d8823c2bd940dca2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are HomotopyEquiv for ordinary cochain complexes, derived localization or ShortComplex, not the free Kontsevich dg interval with its pushout and prescribed inverse-data lifting. Read the existing general-complex candidate context; the focused dg-category/interval grep returns zero hits. No exact declaration or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-model-structure",
   "by": "worker",
@@ -89,5 +243,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dgcat-equivalence-cell-calculus",
+  "worker": "stage1",
+  "summary": "Checked every clause against Tabuada Chapter 1. Kept the statement unchanged. Proved realization by an explicit correction, pushout invariance by a cone-word filtration, and the specified simultaneous lift by a kernel correction in the cone endomorphism algebra. Added only a generic strict dg Yoneda/cone enlargement statement, after DAG, blueprint, project Lean and logged Mathlib searches.",
+  "blueprint": "Realizes the coherent-equivalence cell calculus needed by the quasi-equivalence model in the finite mapping-complex adjunction of paragraph 2 of prop-coef-integral-exceptional-adjoint. Steps 1-2 give realization and cone coordinates, 3-8 the pushout, and 9-10 strict prescribed lifting. The ancestor chain and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-2591febfe",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-2591febfe (reviewer sub-agent of L); spot-checked: Read all mathematics and checked all ten steps against Tabuada, pp. 26–32; no mathematical gap, circularity, duplicate or missing hypothesis found. Corrected the §1.3 source location and supplied missing new-node audit/default metadata. Full checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
  }
 }
