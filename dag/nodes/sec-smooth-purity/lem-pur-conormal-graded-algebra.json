@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-conormal-graded-algebra",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Statement, the expression Spec_Z of the direct sum of ideal-power quotients: the graded algebra must first be constructed on Z, with its degree-one conormal sheaf.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Conormal graded algebra on a closed subscheme",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] with quasi-coherent ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf] and powers $\\mathcal I^n$ [def-sbc-ideal-sheaf-powers]. There is a canonical quasi-coherent sheaf of commutative graded $\\mathcal O_Z$-algebras $\\mathcal G=\\bigoplus_{n\\geq0}\\mathcal G_n$, called the conormal algebra, characterized by\n$$i_*\\mathcal G_n\\cong\\mathcal I^n/\\mathcal I^{n+1},\\qquad \\mathcal G_0=\\mathcal O_Z,\\qquad \\mathcal G_1=\\mathcal C:=i^*\\mathcal I.$$\nThe quotients are sheaf cokernels; $i^*$ is tensor pullback [def-pc-module-pullback], and quasi-coherence is [pqf-def-coherent]. The product of classes of local sections $a\\in\\mathcal I^m$ and $b\\in\\mathcal I^n$ is the class of $ab$ in degree $m+n$. The unit is the identity in degree zero. For every affine open $U=\\operatorname{Spec}R\\subseteq X$, put $J=\\mathcal I(U)$ and $W=i^{-1}U=\\operatorname{Spec}(R/J)$. There are canonical identifications, compatible with restrictions,\n$$\\mathcal G_n|_W\\cong\\widetilde{J^n/J^{n+1}},\\qquad \\mathcal G(W)\\cong\\operatorname{gr}_J(R):=\\bigoplus_{n\\geq0}J^n/J^{n+1}$$\nas graded algebras, with the multiplication of [def-weil-pbc-associated-graded-ring]. For every $z\\in Z$, writing $R_z=\\mathcal O_{X,i(z)}$ and $J_z=\\mathcal I_{i(z)}\\subset R_z$, one has\n$$\\mathcal O_{Z,z}=R_z/J_z,\\qquad \\mathcal G_z\\cong\\operatorname{gr}_{J_z}(R_z),\\qquad \\mathcal C_z\\cong J_z/J_z^2.$$\nThere is a canonical graded algebra morphism\n$$\\psi:\\operatorname{Sym}_{\\mathcal O_Z}(\\mathcal C)\\longrightarrow\\mathcal G$$\nfrom the symmetric algebra sheaf [lem-weil-pbc-symmetric-algebra-sheaf-construction], whose value on a degree-one generator $c$ is $c\\in\\mathcal G_1$. Under the canonical identification $(\\operatorname{Sym}(\\mathcal C))_z\\cong\\operatorname{Sym}_{R_z/J_z}(J_z/J_z^2)$, its stalk map sends $a\\bmod J_z^2$ to the degree-one class of $a$. If $X$ is locally Noetherian [pqf-def-locnoeth], then each $\\mathcal G_n$ is coherent on $Z$ [pqf-def-coherent].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630 (definition-conormal-sheaf), 0631 (equation-conormal-in-degree-n), 0632 (equation-conormal-algebra-quotient), 0633 (lemma-affine-conormal-sheaf); coherence on locally Noetherian schemes follows from coherent.tex Tag 01XZ (lemma-coherent-Noetherian), affine finite modules J^n/J^(n+1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-weil-pbc-associated-graded-ring",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conormal|graded.*sheaf|sheaf.*graded",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; source directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: closed subscheme/ideal-sheaf and Proj constructions do not give the graded algebra on Z, its stalk descriptions or the symmetric-algebra comparison; checked the cited source files"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conormal\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: closed subscheme/ideal-sheaf and Proj constructions do not give the graded algebra on Z, its stalk descriptions or the symmetric-algebra comparison; checked the cited source files"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conormal algebra of a closed immersion is a quasi coherent graded algebra on the closed subscheme with affine sections direct sum I powers modulo successive powers and stalks the associated graded of the local ideal",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.IsClosedImmersion.Spec_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: closed subscheme/ideal-sheaf and Proj constructions do not give the graded algebra on Z, its stalk descriptions or the symmetric-algebra comparison; checked the cited source files"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded conormal sheaf algebra on a closed subscheme from ideal power quotients, with degree zero the structure sheaf and degree one I modulo I squared",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal, AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: closed subscheme/ideal-sheaf and Proj constructions do not give the graded algebra on Z, its stalk descriptions or the symmetric-algebra comparison; checked the cited source files"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conormal graded algebra on a closed subscheme associated to the powers of its quasi coherent ideal sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|associated.?graded|quasi.?regular|normal.?cone",
+   "results": "14 hits: Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Pi.lean, Mathlib/Algebra/Algebra/Spectrum/Pi.lean, Mathlib/Algebra/Algebra/Spectrum/Pi.lean; source directory Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "no match: closed subscheme/ideal-sheaf and Proj constructions do not give the graded algebra on Z, its stalk descriptions or the symmetric-algebra comparison; checked the cited source files"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "def-pur-normal-bundle",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv"
+}

@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pur-normal-bundle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Normal bundle and zero section",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a closed immersion with ideal sheaf\n$\\mathcal I$. The *normal cone* is\n$N_{Z/X}=\\operatorname{Spec}_Z\\bigl(\\bigoplus_{r\\geq0}\\mathcal I^r/ \\mathcal I^{r+1}\\bigr)$; if $i$ is a\nregular immersion of pure\ncodimension $c$, the conormal sheaf\n$\\mathcal I/\\mathcal I^2$ is locally free of rank $c$, and\n$N_{Z/X}\\to Z$ is a *vector bundle* of rank $c$ with a canonical\n*zero section* $z:Z\\hookrightarrow N_{Z/X}$.",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a closed immersion with ideal sheaf\n$\\mathcal I$. The *normal cone* is\n$N_{Z/X}=\\operatorname{Spec}_Z\\bigl(\\bigoplus_{r\\geq0}\\mathcal I^r/ \\mathcal I^{r+1}\\bigr)$; if $i$ is a\nregular immersion of pure\ncodimension $c$, the conormal sheaf\n$\\mathcal I/\\mathcal I^2$ is locally free of rank $c$, and\n$N_{Z/X}\\to Z$ is a *vector bundle* of rank $c$ with a canonical\n*zero section* $z:Z\\hookrightarrow N_{Z/X}$.\n\nHere the ideal sheaf is that of [def-sbc-closed-immersion-ideal-sheaf] and its powers are [def-sbc-ideal-sheaf-powers]. The displayed direct sum is the quasi-coherent graded $\\mathcal O_Z$-algebra $\\mathcal G$ of [lem-pur-conormal-graded-algebra], so the spectrum is the relative spectrum of [lem-weil-pbc-affine-morphism-relative-spec]. The notation $\\mathcal I/\\mathcal I^2$ on $Z$ means the conormal module $\\mathcal C=i^*\\mathcal I$ [def-pc-module-pullback], not an $\\mathcal O_X$-module regarded without change as a sheaf on $Z$. Locally free of rank $c$ is [def-amb-finite-locally-free-module], and vector bundle with zero section is [def-pur-vector-bundle-zero-section]; its zero section here is induced by the projection $\\mathcal G\\to\\mathcal G_0=\\mathcal O_Z$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-normal-bundle.md",
   "place": "node def-pur-normal-bundle, order 1894"
@@ -15,14 +15,155 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-pur-regular-immersion",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-pc-module-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-pur-vector-bundle-zero-section"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Take the quasi-coherent conormal algebra $\\mathcal G$ supplied by [lem-pur-conormal-graded-algebra]. This supplies its multiplication, its $\\mathcal O_Z$-algebra structure, the degree-zero identification with $\\mathcal O_Z$, and the degree-one identification with $\\mathcal C=i^*\\mathcal I$. In particular the direct sum appearing in the definition is a sheaf algebra on $Z$: on $X$ its degree-$n$ pushforward is $\\mathcal I^n/\\mathcal I^{n+1}$, whereas on $Z\\cap\\operatorname{Spec}R$ it has algebra of sections $\\operatorname{gr}_J(R)$ for the defining ideal $J$.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630 (definition-conormal-sheaf), 0631 (equation-conormal-in-degree-n), 0633 (lemma-affine-conormal-sheaf)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-morphism-relative-spec](2) to this quasi-coherent algebra and define $N_{Z/X}=\\underline{\\operatorname{Spec}}_Z(\\mathcal G)$ with its affine projection $p$ to $Z$. The nonnegative grading makes the projection $\\epsilon:\\mathcal G\\to\\mathcal G_0=\\mathcal O_Z$ multiplicative: the only products with total degree zero have both factors of degree zero. Thus it is an algebra map and is a left inverse of the structural inclusion. The anti-equivalence in clause (3) defines $z:Z\\to N_{Z/X}$ and gives $p z=\\mathrm{id}_Z$. On any affine open $W=\\operatorname{Spec}B$ of $Z$, the inverse image $p^{-1}W=\\operatorname{Spec}\\mathcal G(W)$ is affine, and $z$ is induced by the surjective map $\\epsilon_W$, which fixes constants. Since $z^{-1}(p^{-1}W)=W$, these opens cover $N_{Z/X}$ with affine inverse images and surjective structure maps. The converse affine-cover criterion [lem-weil-pbc-closed-immersion-affine-cover-criterion](2) proves that $z$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0636 (definition-normal-cone); relative spectrum is constructions.tex Tag 01LX (lemma-spec-properties), and closedness uses morphisms.tex Tag 01QO (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "Now assume $i$ is regular of pure codimension $c$. The part of [def-pur-regular-immersion] used here is precisely that $X,Z$ are finite type over $k$ and that for each $z\\in Z$ the ideal $J_z\\subset R_z=\\mathcal O_{X,i(z)}$ is generated by an $R_z$-regular sequence of length $c$; the claimed smooth-pair equivalence in that node is not used. The field $k$ is Noetherian, since its ideals are $0$ and $k$, generated by $0$ and $1$. Therefore [lem-weil-pbc-finite-type-over-noetherian] makes $X$ and $Z$ Noetherian. By [lem-pur-conormal-graded-algebra], $\\mathcal C=\\mathcal G_1$ is coherent and $\\mathcal C_z=J_z/J_z^2$. Apply [lem-weil-pbc-regular-sequence-conormal-free] in $R_z$: these stalks are free of rank $c$ over $R_z/J_z=\\mathcal O_{Z,z}$. The coherent free-stalk criterion [lem-sc-coherent-free-stalks-locally-free] makes $\\mathcal C$ finite locally free. Its local rank is $c$: a rank-$r$ trivialization at $z$ yields $\\mathcal C_z\\cong\\mathcal O_{Z,z}^r$, and reduction modulo the maximal ideal compares vector-space dimensions $r=c$. This proves the exact conormal-rank assertion.",
+   "uses": [
+    "def-pur-regular-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-sc-coherent-free-stalks-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063M (lemma-quasi-regular-immersion), rank argument at stalks; algebra.tex Tag 00LN (lemma-regular-quasi-regular), degree one; local freeness via algebra.tex Tag 0GWM (lemma-finitely-presented-localization-free)"
+   }
+  },
+  {
+   "text": "Use the canonical graded algebra map $\\psi:\\operatorname{Sym}(\\mathcal C)\\to\\mathcal G$ and its stalk description in [lem-pur-conormal-graded-algebra]. Fix $z$ and a regular generating sequence $f_1,\\ldots,f_c$ of $J_z$. By [lem-weil-pbc-regular-sequence-conormal-free] its classes form a basis of $\\mathcal C_z=J_z/J_z^2$. The basis-to-polynomial isomorphism [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identifies $\\operatorname{Sym}_{R_z/J_z}(J_z/J_z^2)$ with $(R_z/J_z)[T_1,\\ldots,T_c]$, taking the class of $f_j$ to $T_j$ (the isomorphism for a chosen basis follows by the symmetric-algebra universal property, with inverse sending the standard basis back to these classes). Under this identification $\\psi_z$ sends $T_j$ to $[f_j]_1$ and fixes constants. It is therefore exactly the map $\\theta$ of [lem-pur-regular-sequence-graded-polynomial], which is an isomorphism. This uses all degrees, rather than inferring the associated-graded identification from its degree-one part.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular) and Tag 061P (definition-quasi-regular-sequence); divisors.tex Tag 0632 (equation-conormal-algebra-quotient)"
+   }
+  },
+  {
+   "text": "The underlying module map of $\\psi$ is bijective on all stalks by Step 4, so [lem-weil-pbc-module-iso-on-stalks] makes it an isomorphism. Its inverse is an algebra map as well: apply $\\psi$ to each addition, multiplication, scalar and unit identity for the inverse and use injectivity. Applying the relative-spectrum anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec](3) to $\\psi:\\operatorname{Sym}(\\mathcal C)\\xrightarrow{\\sim}\\mathcal G$ gives an isomorphism over $Z$ from $N_{Z/X}$ to $\\underline{\\operatorname{Spec}}_Z(\\operatorname{Sym}(\\mathcal C))$. Together with the rank-$c$ locally free module of Step 3 this is exactly the vector-bundle data of [def-pur-vector-bundle-zero-section]. No choice of a globally trivial bundle has been made.",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-pur-vector-bundle-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0636 (definition-normal-cone), 0637 (equation-normal-cone-in-normal-bundle); constructions.tex Tag 01M2 (definition-vector-bundle)"
+   }
+  },
+  {
+   "text": "The augmentation of $\\operatorname{Sym}(\\mathcal C)$ in [def-pur-vector-bundle-zero-section] fixes constants and sends every degree-one generator to zero. The composite $\\epsilon\\psi$ has these same two properties, since $\\psi$ preserves degrees and $\\epsilon$ is projection to degree zero. Uniqueness in [lem-weil-pbc-quasi-coherent-symmetric-algebra-core] makes these algebra maps equal. Contravariance of the anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec](3) says precisely that the isomorphism of Step 5 carries the section $z$ of Step 2 to the vector-bundle zero section. This proves its canonicity and compatibility with the displayed normal-cone construction.",
+   "uses": [
+    "def-pur-vector-bundle-zero-section",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M2 (definition-vector-bundle), augmentation to degree zero; divisors.tex Tag 0637 (equation-normal-cone-in-normal-bundle)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-pur-regular-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-sc-coherent-free-stalks-locally-free",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-pur-vector-bundle-zero-section",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630/0631/0632/0633/0636/0637 and Lemma 063M, reduced explicitly to Algebra Lemma 00LN and the existing coherent free-stalk criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalCone|normalBundle|conormal|associatedGraded",
+   "results": "0 hits: none; source directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: normalization and closed-subscheme constructors do not construct the actual normal cone or prove its regular-immersion vector-bundle identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normal cone of a regular closed immersion is the vector bundle associated to its conormal sheaf with its zero section",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.instIsClosedImmersionLiftCoborder",
+   "date": "2026-10-16",
+   "verdict": "no match: normalization and closed-subscheme constructors do not construct the actual normal cone or prove its regular-immersion vector-bundle identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: normalization and closed-subscheme constructors do not construct the actual normal cone or prove its regular-immersion vector-bundle identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal cone of a regular immersion as a vector bundle and its canonical zero section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative spectrum of the associated graded ideal algebra of a closed subscheme has a zero section and is the normal bundle for a regular immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap",
+   "date": "2026-10-16",
+   "verdict": "no match: normalization and closed-subscheme constructors do not construct the actual normal cone or prove its regular-immersion vector-bundle identification"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -49,5 +190,69 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-normal-bundle",
+  "worker": "stage1",
+  "summary": "Expanded the implicit O_Z typing of the conormal algebra; constructed the actual relative spectrum and its augmentation section; proved conormal local freeness using existing regular-sequence and free-stalk nodes, then proved the full symmetric-algebra identification on stalks and matched augmentations. Created only two unsplit supporting algebra statements, searched by the prescribed command. NormalConeData is explicitly not tied to the immersion and is not an attachment.",
+  "blueprint": "The defining Spec_Z formula and both regular-immersion clauses in the statement of the blueprint node, also the normal-cone sentence of sk-def-purity-conv; the unit has no proof steps to replace. Steps 1-2 construct the cone and section, Step 3 proves the conormal rank, Steps 4-6 prove the vector-bundle and zero-section identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type schemes over the Noetherian field k are Noetherian; this generic finiteness tool is not a purity theorem."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "The regular generating sequence gives the degree-one basis at each stalk; no node of this unit states that ring lemma."
+   },
+   {
+    "node": "lem-sc-coherent-free-stalks-locally-free",
+    "why": "Coherent modules with free stalks are locally free; this generic local algebra tool proves the sheaf assertion without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Converts a conormal basis into polynomial coordinates on its symmetric algebra; generic algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-universal-property",
+    "why": "Transports the standard free-module symmetric-algebra identification to the chosen basis by its generator formula."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Detects the canonical symmetric-to-conormal algebra map as an isomorphism via its underlying sheaf of modules."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Constructs the normal cone and sends the algebra comparison and augmentation to scheme morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Proves closedness of the augmentation section from its surjective maps on affine charts."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "why": "Identifies the two augmentations by the symmetric-algebra universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-sc-coherent-free-stalks-locally-free",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-6cf902d6b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6cf902d6b (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, both new nodes, unit/chapter route, cited node statements, and cited Stacks sources. Verified hypotheses, constructions, dependencies, searches, duplicate distinctions, base cases, nonregular edge cases, and all six proof steps. No mathematical or citation faults found; review.md written."
+ }
 }
