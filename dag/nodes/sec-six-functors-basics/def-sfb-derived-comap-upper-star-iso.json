@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-derived-comap-upper-star-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived restriction of scalars commutes with $D(f^*)$",
@@ -18,24 +18,157 @@
  ],
  "proof": [
   {
-   "text": "Both functors are exact, so their levelwise extensions to derived categories are defined; the\nlevelwise extension is compatible with composition and with natural isomorphisms, and the\nisomorphism of [def-sfb-comap-upper-star-iso] therefore induces the asserted one.",
+   "text": "Work throughout with the categories of module objects in abelian sheaves on the small pro-étale sites, over the pulled-back commutative condensed rings. The small pro-étale sites are essentially small ([sk-def-sfb-sheaf-tensor] lists them as admissible sites), and $\\otimes_{\\mathbf Z}$ on $\\Ab$ is additive in each variable, so [lem-weil-pbc-sheaf-tensor-closed] with $\\mathcal A=\\Ab$ gives that each $\\Sh(X_{\\mathrm{proét}},\\Ab)$ is a Grothendieck abelian category (in particular it has all limits and colimits, so equalizers and coequalizers). By [sk-def-sfb-sheaf-tensor] these sheaf tensor products are closed symmetric monoidal and preserve colimits in either variable; tensoring is also additive: preservation of the zero object and binary coproducts preserves their injections and zero maps, hence their projections (characterized by their composites with the injections). It therefore preserves the biproduct diagonal and codiagonal, and the formula $u+v=\\nabla\\circ(u\\oplus v)\\circ\\Delta$ gives preservation of addition. Thus the hypotheses of clauses 2–4 of [sk-def-sfb-change-of-scalars] hold. Clause 4 gives exactness of $\\operatorname{Res}_{a_X}$ and $\\operatorname{Res}_{a_Y}$ for every coefficient morphism $a$. Restriction is additive: it is the identity on underlying morphisms and the addition of module morphisms is the underlying addition.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "First clause: exactness of restriction of scalars"
+   }
+  },
+  {
+   "text": "For each of $\\Lambda$ and $\\Lambda'$, [def-sfb-module-upper-star] defines module pullback as $\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})$ and states its additivity. Apply [lem-sfb-finite-upper-star-exact] with coefficient category $\\Ab$ to obtain preservation of finite limits and finite colimits by $f^*_{\\Ab}$. In particular it preserves the zero object and binary biproducts, so the diagonal/codiagonal calculation in step 1 gives its additivity. Thus it is additive and exact as required by the lifting theorem. The transport in [sk-def-sfb-transport] commutes with the forgetful functors, so [det-prop-sfb-module-pullback-exact-lifted], with $F=f^*_{\\Ab}$ and $G=\\operatorname{mapMod}(f^*_{\\Ab})$, gives exactness of this transport. Its ambient module categories satisfy the right-exact tensor hypotheses by [sk-def-sfb-sheaf-tensor]. By [lem-sfb-alpha-iso], $\\alpha_f$ is invertible. Since $\\alpha_f$ is an isomorphism of monoid objects onto the commutative ring $\\Lambda_X$, the monoid $f^*_{\\Ab}\\Lambda_Y$ is commutative as well (transport the commutativity identity along $\\alpha_f$ and naturality of the symmetry), so the hypotheses of clauses 2–3 of [sk-def-sfb-change-of-scalars] hold for both $\\alpha_f$ and $\\alpha_f^{-1}$, the ambient category being abelian by step 1. Clauses 4–5 of [sk-def-sfb-change-of-scalars] identify $\\operatorname{Ext}_{\\alpha_f}$ with the exact functor $\\operatorname{Res}_{\\alpha_f^{-1}}$. Consequently module pullback is exact, for both coefficient rings. This uses invertibility of $\\alpha_f$, not flatness of $a$.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-transport",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "First clause: exactness of module pullback for pulled-back coefficients"
+   }
+  },
+  {
+   "text": "Write $C(F)$ for the functor applying an additive exact functor $F$ termwise to cochain complexes, and $Q_{\\mathcal T}:\\mathrm{CoCh}(\\mathcal T)\\to D(\\mathcal T)$ for localization. By [lem-weil-pbc-exact-functor-derived-factorization], each of the four exact functors above sends quasi-isomorphisms to quasi-isomorphisms and has a levelwise functor $D(F)$ with a natural factorization $D(F)Q_{\\mathcal T}\\cong Q_{\\mathcal T'}C(F)$. These are the levelwise unbounded derived functors of [sk-def-sfb-derived-categories]; no resolution or boundedness assumption is required.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "First clause: existence of the levelwise derived functors; Stacks Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{Res}_{a_X}\\circ f^*_{\\Lambda'}$ and $R=f^*_{\\Lambda}\\circ\\operatorname{Res}_{a_Y}$. Write $\\eta:P\\xrightarrow{\\sim}R$ for [def-sfb-comap-upper-star-iso]. For a complex $K$, define the degree-$n$ component of $C(\\eta)_K$ to be $\\eta_{K^n}$. Naturality of $\\eta$ for $d_K^n$ says $R(d_K^n)\\eta_{K^n}=\\eta_{K^{n+1}}P(d_K^n)$, so these components form a chain map. The inverse chain map has degree-$n$ component $\\eta_{K^n}^{-1}$: multiplying the differential equation by the inverse components gives $P(d_K^n)\\eta_{K^n}^{-1}=\\eta_{K^{n+1}}^{-1}R(d_K^n)$, and the two composites are identities in each degree. For a chain map $h:K\\to L$, naturality of $\\eta$ gives $R(h^n)\\eta_{K^n}=\\eta_{L^n}P(h^n)$ in every degree, proving naturality on complexes. This constructs $C(P)\\cong C(R)$; applying a composite termwise agrees with composing the termwise functors, on objects, differentials and morphisms.",
    "uses": [
     "def-sfb-comap-upper-star-iso"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "Second clause: levelwise extension of the underived natural isomorphism"
+   }
+  },
+  {
+   "text": "Put $\\mathcal A=\\Mod_{\\Lambda'_Y}$ and $\\mathcal B=\\Mod_{\\Lambda_X}$. Define $U=D(\\operatorname{Res}_{a_X})\\circ D(f^*_{\\Lambda'})$ and $V=D(f^*_{\\Lambda})\\circ D(\\operatorname{Res}_{a_Y})$. Applying successively the two factorization isomorphisms from [lem-weil-pbc-exact-functor-derived-factorization] gives\n$$UQ_{\\mathcal A}\\cong D(\\operatorname{Res}_{a_X})Q_{\\Mod_{\\Lambda'_X}}C(f^*_{\\Lambda'})\\cong Q_{\\mathcal B}C(\\operatorname{Res}_{a_X})C(f^*_{\\Lambda'})=Q_{\\mathcal B}C(P),$$\nand, in the same order for the other pair,\n$$VQ_{\\mathcal A}\\cong D(f^*_{\\Lambda})Q_{\\Mod_{\\Lambda_Y}}C(\\operatorname{Res}_{a_Y})\\cong Q_{\\mathcal B}C(f^*_{\\Lambda})C(\\operatorname{Res}_{a_Y})=Q_{\\mathcal B}C(R).$$\nCompose the first isomorphism with $Q_{\\mathcal B}C(\\eta)$ from step 4 and the inverse of the second. This is a natural isomorphism $UQ_{\\mathcal A}\\cong VQ_{\\mathcal A}$. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $Q_{\\mathcal A}$, the quasi-isomorphisms, and target $D(\\mathcal B)$: the two functors $Q_{\\mathcal B}C(P)$ and $Q_{\\mathcal B}C(R)$ invert quasi-isomorphisms by step 3, and $U,V$ are their lifts by the displayed factorizations. The resulting natural isomorphism $U\\cong V$ is, by construction, the levelwise derived comparison in the statement. Its source is $D(\\Mod_{\\Lambda'_Y})$ and its target is $D(\\Mod_{\\Lambda_X})$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "Second clause: compatibility with composition and descent of the natural isomorphism; Stacks Tags 04VG and 05RU for localization, with natural-transformation lifting as stated in the cited Mathlib leaf"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-comap-upper-star-iso"
+  "def-sfb-comap-upper-star-iso",
+  "def-sfb-module-upper-star",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for condensed coefficient rings commutes with exact pullback on unbounded derived categories",
+   "results": "8 hits: Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, LightCondensed.instMonoidalClosedLightCondMod, CategoryTheory.Functor.mapExactFunctor_smul and two internally-projective criteria. None states the coefficient/pullback comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between two composites of exact functors on abelian categories gives an isomorphism of the corresponding composites on derived categories",
+   "results": "8 hits including CategoryTheory.Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, mapDerivedCategory and mapDerivedCategorySingleFunctor; generic factorization ingredients only.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; supporting factorization is already an existing DAG Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with pullback on unbounded derived categories for condensed rings",
+   "results": "8 hits: ModuleCat.restrictScalars, RestrictScalars, ModuleCat.preservesLimit_restrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj. None concerns the given module-object derived pullback.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits include generic derived exact functors, NatTrans.mapDerivedCategory and mapDerivedCategoryCompIso in the online index; not the geometric comparison. The pinned local grep lacks the latter declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComapUpperStarIso|comapUpperStarIso|mapDerivedCategoryNatIso|mapDerivedCategoryCompIso",
+   "results": "0 hits in the pinned Mathlib source. The first two names occur only in upstream master, and generic helpers are in the project WeilConjectures/Mathlib rather than pinned Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def (mapDerivedCategory|liftNatIso)|mapDerivedCategoryFactors",
+   "results": "10 hits in Algebra/Homology/DerivedCategory: ExactFunctor.lean:36 mapDerivedCategory, :41 mapDerivedCategoryFactors, :47–49 factorization naturality; Ext/Map.lean uses those factorizations.",
+   "date": "2026-10-16",
+   "verdict": "supporting factorization, not the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, liftNatIso_hom and liftNatIso_inv, Mathlib.CategoryTheory.Localization.Predicate. This supplies the formal descent already stated by lem-weil-pbc-localization-universal-property.",
+   "date": "2026-10-16",
+   "verdict": "supporting existing Mathlib leaf, not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of additive exact functors induces a natural isomorphism on localized categories of cochain complexes",
+   "results": "8 hits, including Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, derived-factorization lifting and shift instances, mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app and its reassociation lemma, and Abelian.Ext.mapExactFunctor_hom. These are generic supporting statements already used through existing DAG nodes; none states the geometric coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "supporting existing DAG nodes; no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|mapDerivedCategoryFactors",
+   "results": "25 hits, including Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:41 mapDerivedCategoryFactors and its naturality lemmas at 47–51, and uses of Localization.liftNatIso in localization and model-category files. The existing factorization and localization nodes supply these generic ingredients; no declaration in the results states the whole item.",
+   "date": "2026-10-17",
+   "verdict": "supporting existing DAG nodes; no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -56,5 +189,46 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-comap-upper-star-iso",
+  "worker": "stage1",
+  "summary": "Verified the current blueprint and underived comparison, expanded exactness for arbitrary commutative condensed coefficient rings, and constructed the comparison explicitly degreewise before descending it through the existing localization universal-property node. Removed the earlier attempt’s redundant new derived-functor lemma: existing Mathlib-leaf nodes already supply factorization and lifting. No statement change, no new nodes, no Lean work. Second reading made tensor and inverse-image additivity explicit, and wrote the inverse chain-map and chain-map naturality equations.",
+  "blueprint": [
+   "Unit sk-def-sfb-coefficient-comparisons, step 2, final clause: restriction commutes with pullback levelwise on derived categories. Steps 1–3 realize the first clause of the item proof (exactness and levelwise extension); steps 4–5 realize its second clause (compatibility with natural isomorphisms and composition)."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Exactness of inverse image with coefficient category Ab, needed for module transport; the coefficient-comparison unit supplies no inverse-image exactness theorem."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic lifting of exactness from underlying abelian sheaves to module objects; it verifies a hypothesis of the levelwise construction rather than replacing any unit step."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Invertibility of the cartesian coefficient morphism, explicitly invoked by step 2 of the comparison unit; this holds for every condensed ring."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic structure theorem for sheaves on an essentially small site: Sh(X_proét, Ab) is Grothendieck abelian with additive closed tensor, the abelian/limit hypotheses of change-of-scalars clauses 3-4 and of the lifted-exactness lemma; no node of the route states abelianness of these sheaf categories (same accepted tool as in lem-sfb-module-upper-star-kflat-quasi-iso)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-upper-star-exact",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-43f651436",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-43f651436 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item's statement and all 5 steps in full, plus the full statement of all 11 cited nodes. I also read the blueprint main-20261015 item and its proof, the item it rests on (def-sfb-comap-upper-star-iso) and that item's proof, the unit sk-def-sfb-coefficient-comparisons, and Stacks 015F (derived.tex:5884); the 04VG and 05RU labels match tags/tags. The statement is unchanged and verbatim from the blueprint: arbitrary commutative a, arbitrary f, no flatness assumption. It matches upstream derivedComapUpperStarIso (ChangeOfCoefficients.lean:191-196): same type and same composition order. Steps 3-5 are correct: the factorization leaf's hypotheses are met for all four exact functors; C(eta) is degreewise and genuinely elementary; and clause (2) of the localization leaf lifts Q_B C(eta) to U≅V with matching types. Fault fixed in step 1, a missing citation (C1/E1): no cited node says Sh(X_proét,Ab) is abelian or has (co)equalizers, yet change-of-scalars clause 4 and det-prop-sfb-module-pullback-exact-lifted both need this. I cited lem-weil-pbc-sheaf-tensor-closed (1) with A=Ab. It is unsplit, so no cycle arises, and the sibling node lem-sfb-module-upper-star-kflat-quasi-iso already uses it as an accepted tool. Fault fixed in step 2: clause 5 applied to alpha_f needs f^*Lambda_Y commutative, which the step did not check; I added that commutativity transports along the monoid isomorphism alpha_f. proof_deps and split_report.tool_uses are updated. Accepted tool_uses: det-prop-sfb-module-pullback-exact-lifted, lem-sfb-alpha-iso (unit step 2 itself calls on cartesian coefficients), and lem-weil-pbc-sheaf-tensor-closed. lem-sfb-finite-upper-star-exact is on the route, so it needs no tool use. The delivery has no new nodes. Duplicate search found nothing that states this comparison: derived-restrict-levelwise, the kflat node and derived-comap-lower-star-iso all state other things. Edge cases checked: identity a and f, zero ring, empty scheme, non-flat Z→Z/2, unbounded complexes. No SGA source is used.\n; 1 file(s) fixed by the reviewer"
+ }
 }
