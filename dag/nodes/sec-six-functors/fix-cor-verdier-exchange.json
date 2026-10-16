@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "fix-cor-verdier-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Verdier-duality exchange",
@@ -14,41 +14,84 @@
  },
  "stmt_deps": [
   "def-fix-six-functor-datum",
-  "def-weil-derived-pullback-tensor-hom",
   "def-weil-exceptional-adjoint-admissibility"
  ],
  "proof": [
   {
-   "text": "Step 1: the relation $Rf^!\\omega_{Y,\\Lambda}\\cong\\omega_{X,\\Lambda}$.\nThe composition law $R(a_Y\\circ f)_!\\cong R(a_Y)_!Rf_!$ of\n[thm-sf-comp-composition] and the adjunctions of\n[fix-prop-adjunctions] give, by the mate calculus for a\ncomposite adjunction (the pasted units and counits of\n[fix-prop-adjunctions]), the canonical isomorphism\n\n$$\nRf^!\\omega_{Y,\\Lambda}=Rf^!Ra_Y^!\\Lambda\n\\xrightarrow{\\ \\sim\\ }Ra_X^!\\Lambda=\\omega_{X,\\Lambda}.\n$$",
+   "text": "Step 1: the structure-morphism mate. Put $s=\\operatorname{Spec}k$, so $a_X=a_Y\\circ f$. Use the composition isomorphism $\\alpha:R(a_Y)_!Rf_!\\xrightarrow{\\sim}Ra_X{}_!$ in [def-fix-six-functor-datum]; at finite coefficients its direction is the one of [thm-sf-comp-composition]. For every $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_c(s,\\Lambda)$, the adjunctions and their pasted units and counits in [fix-prop-adjunctions] give\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(K,Rf^!Ra_Y^!L)\n&\\cong\\operatorname{Hom}_Y(Rf_!K,Ra_Y^!L)\\\\\n&\\cong\\operatorname{Hom}_s(R(a_Y)_!Rf_!K,L)\\\\\n&\\xrightarrow{\\ h\\mapsto h\\circ\\alpha_K^{-1}\\ }\n\\operatorname{Hom}_s(Ra_X{}_!K,L)\\\\\n&\\cong\\operatorname{Hom}_X(K,Ra_X^!L).\n\\end{aligned}\n$$\nThis natural chain and its inverse define inverse natural maps $Rf^!Ra_Y^!L\\rightleftarrows Ra_X^!L$: their composites induce identity maps on every displayed Hom group and hence are identities, by taking the identity as test morphism. Denote the resulting canonical mate at $L=\\Lambda$ by $c_\\Lambda:Rf^!\\omega_{Y,\\Lambda}\\xrightarrow{\\sim}\\omega_{X,\\Lambda}$. This uses the composition law in the operation datum at every coefficient stage, rather than applying the finite-level theorem directly to integral or field coefficients.",
    "uses": [
+    "def-fix-six-functor-datum",
     "thm-sf-comp-composition",
     "fix-prop-adjunctions"
    ],
    "elementary": false
   },
   {
-   "text": "Step 2: the exchange. Applying [fix-lem-tensor-adjunction]\nwith $N=\\omega_{Y,\\Lambda}$ (an object of $D^b_{ctf}(Y,\\Lambda)$\nby the finite-Tor preservation of\n[def-weil-exceptional-inverse-image]) gives\n\n$$\n\\begin{aligned}\nD_Y(Rf_!M)\n&=R\\mathcal Hom_Y(Rf_!M,\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ \\sim\\ }Rf_*R\\mathcal Hom_X(M,f^!\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ \\sim\\ }Rf_*R\\mathcal Hom_X(M,\\omega_{X,\\Lambda})\n=Rf_*D_X(M),\n\\end{aligned}\n$$\n\nthe first isomorphism being the one of\n[fix-lem-tensor-adjunction], the second the transport along\nstep 1. Step 3: the compatibilities. Naturality in $M$ and the\ncompatibility with finite reduction, scalar extension, and shifts are\nthose of [fix-lem-tensor-adjunction] and of step 1.",
+   "text": "Step 2: the exchange and its domain. The constant coefficient object $\\Lambda$ on $s$ is a free rank-one object in degree zero, hence is constructible with Tor amplitude $[0,0]$. The finite-Tor restriction of the exceptional adjunction in [fix-prop-adjunctions], applied to $a_Y$ and $f$, gives $\\omega_{Y,\\Lambda}\\in D^b_{ctf}(Y,\\Lambda)$ and $Rf_!M\\in D^b_{ctf}(Y,\\Lambda)$. Finite-Tor preservation of exceptional inverse image is also explicitly recorded in [def-weil-exceptional-inverse-image]. Thus [fix-lem-tensor-adjunction] applies with $N=\\omega_{Y,\\Lambda}$ and yields\n$$\n\\begin{aligned}\nD_Y(Rf_!M)\n&=R\\mathcal Hom_Y(Rf_!M,\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ \\sim\\ }Rf_*R\\mathcal Hom_X(M,Rf^!\\omega_{Y,\\Lambda})\\\\\n&\\xrightarrow{\\ Rf_*R\\mathcal Hom_X(M,c_\\Lambda)\\ }\nRf_*R\\mathcal Hom_X(M,\\omega_{X,\\Lambda})=Rf_*D_X(M).\n\\end{aligned}\n$$\nThe first arrow is the inverse of the stated tensor-adjunction isomorphism, and the second is the displayed functor applied to the isomorphism $c_\\Lambda$ of step 1. Their composite is the claimed canonical isomorphism.",
    "uses": [
+    "fix-prop-adjunctions",
     "fix-lem-tensor-adjunction",
     "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Step 3: naturality and comparisons. Write $\\theta_M$ for the first arrow of step 2. For $u:M\\to M'$, naturality in [fix-lem-tensor-adjunction] gives the contravariant naturality square for $\\theta$. The square for the second arrow commutes by bifunctoriality of $R\\mathcal Hom$: precomposition by $u$ commutes with postcomposition by $c_\\Lambda$. Pasting these two squares proves naturality of the exchange.\n\nFor a stipulated reduction or scalar extension $C$ from coefficients $A$ to $B$, let $q_f:C_XRf_A^!\\to Rf_B^!C_Y$ be the exceptional comparison, and let $\\kappa_T:C_T\\omega_{T,A}\\to\\omega_{T,B}$ be the comparison for $a_T$ evaluated on the coefficient object ($T=X,Y$). These are the adjunction-mate comparisons of [def-weil-exceptional-adjoint-admissibility]. The operation comparisons preserve the units and counits by [lem-fix-operation-reduction]. The pasted-unit/counit description in [fix-prop-adjunctions] therefore gives\n$$\n\\kappa_X\\circ C_X(c_A)\n=c_B\\circ Rf_B^!(\\kappa_Y)\\circ q_{f,\\omega_{Y,A}}.\n$$\nTo check this equation, transpose its two sides through the adjunctions in step 1. Both transposes apply the $f$-counit followed by the $a_Y$-counit, with the compact-support comparison inserted; the comparison preserves each counit, and the counit for $a_X=a_Yf$ is precisely this pasted counit. The Hom bijections in step 1 are injective, so equality of those transposes proves the equation. Applying internal Hom and $Rf_*$ gives the comparison square for the second arrow of step 2. The square for $\\theta$ is exactly the comparison asserted by [fix-lem-tensor-adjunction]; pasting proves the required coefficient compatibility. This concerns the specified comparison maps on their stated domains and does not assert an extra coefficient-change isomorphism for arbitrary ordinary direct images or internal Homs.\n\nFinally the Hom adjunction chain of step 1 commutes with simultaneous shifts because the adjunctions are derived adjunctions, so $c$ commutes with those shifts. Replacing $M$ by $M[r]$ identifies both outputs in step 2 with their values at $M$ shifted by $[-r]$. The shift compatibility in [fix-lem-tensor-adjunction] identifies the first arrow under these identifications, and functoriality of $R\\mathcal Hom_X(-,c_\\Lambda)$ identifies the second. Hence their composite has the stated shift compatibility.",
+   "uses": [
+    "fix-lem-tensor-adjunction",
+    "fix-prop-adjunctions",
+    "def-weil-exceptional-adjoint-admissibility",
+    "lem-fix-operation-reduction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sf-comp-composition",
-  "fix-prop-adjunctions",
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-exceptional-inverse-image",
   "fix-lem-tensor-adjunction",
-  "def-weil-exceptional-inverse-image"
+  "fix-prop-adjunctions",
+  "lem-fix-operation-reduction",
+  "thm-sf-comp-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-cor-verdier-exchange.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchange internal Hom exceptional direct image",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism coevaluation/evaluation declarations and CategoryTheory.tensorRightHomEquiv/tensorLeftHomEquiv; no project-specific Verdier-duality exchange declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory, RHom, Verdier",
+   "results": "0 hits; Loogle reports unknown identifier 'RHom'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|rightDerivedLowerShriek",
+   "results": "25 hits in Mathlib source, all generic Verdier-thesis citations or triangulated-category infrastructure (for example Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:24,29); no project-specific Verdier duality or exceptional direct-image declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical Verdier duality exchange isomorphism for compact support direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -83,5 +126,29 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fix-cor-verdier-exchange",
+  "worker": "stage1",
+  "summary": "Second reading retained the statement and three-step route, expanded the structure-morphism mate as explicit Hom bijections, checked finite-Tor domains, and wrote naturality and coefficient/shift compatibility as equations of the specified maps. Cited the existing operation-reduction node for preservation of units and counits, and the six-functor datum for composition at all coefficient stages; the finite-level composition theorem is only applied at its finite stage. No new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 realizes the blueprint relation Rf^! omega_Y ≅ omega_X; Step 2 realizes the tensor–Hom exchange specialized to N = omega_Y; Step 3 realizes naturality and coefficient/shift compatibilities from those constructions.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Step 3 uses preservation of adjunction units and counits under the stipulated coefficient comparisons to compare the structure-morphism mates. The unit supplies the mate and tensor-Hom route, but none of its cited-route statements supplies this coefficient-coherence assertion; this generic tool does not replace that route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-506c0741d",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-506c0741d (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and master sources, and unit/chapter route in full; checked mate direction, finite-Tor domains, coefficient comparisons, shifts, small cases and cycles. Added the missing split_report.tool_uses declaration for accepted lem-fix-operation-reduction; mathematics unchanged. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }
