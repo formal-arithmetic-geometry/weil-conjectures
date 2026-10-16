@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.CondensedPointBasisEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Scalar functions and geometric evaluation for bounded condensed coefficients

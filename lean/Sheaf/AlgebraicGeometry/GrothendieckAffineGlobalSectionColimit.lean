@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.Paper.EtaleFiniteDataDescent
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Global-section continuity for inverse systems of affine schemes -/
 
