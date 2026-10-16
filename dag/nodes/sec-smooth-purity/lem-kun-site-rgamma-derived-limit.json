@@ -24,9 +24,76 @@
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\Gamma(U,-):\\mathcal A\\to\\operatorname{Ab}$. It sends a sheaf morphism to its component over $U$ and preserves sums of morphisms because those sums are sectionwise [def-weil-sheaf-of-modules-category]; hence $G$ is additive. The small-site existence theorem [prop-pur-kinjective-resolutions-exist] gives K-injective resolutions in $\\mathcal A$. It also gives them in $\\operatorname{Ab}$: take the one-object category with only its identity, the topology whose only cover is the identity, and the ring sheaf $\\mathbf Z$; a module sheaf there is precisely an abelian group. The source and target are abelian, by [def-weil-sheaf-of-modules-category] and this same one-object identification. Write $Q$ for localization from complexes and $F=R\\Gamma(U,-)$. On K-injective complexes $I$, the definition in the item gives $F(QI)\\cong QG(I)$. These identifications respect chain maps: by [lem-weil-pbc-kinjective-hom-derived], maps into $QI$ are uniquely represented up to homotopy, and applying the additive functor $G$ preserves a chain homotopy by applying it to the equations defining that homotopy. Thus on K-injective representatives $F$ applies $G$ to the representative maps. Uniqueness of their homotopy classes makes this compatible with composition and addition.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, first sentence; K-injective existence: Tag 079P, label theorem-K-injective-embedding-grothendieck; derived morphisms: derived.tex Tag 070I, label lemma-K-injective"
+   }
+  },
+  {
+   "text": "Choose K-injective representatives $I_n$ and isomorphisms $a_n:QI_n\\xrightarrow{\\sim}K_n$ using Step 1. By [lem-weil-pbc-module-sheaves-limits-sectionwise], each degreewise product $J^r=\\prod_n I_n^r$ exists; its differential is the map whose components are $d_{I_n}\\circ\\pi_n$, and the equation $d^2=0$ follows after each projection. Apply [lem-pc-ringed-space-product-kinjective] to the abelian category $\\mathcal A$, the set $\\mathbf N$, and these complexes: $J$ is K-injective and $QJ$ with projections $Q\\pi_n$ is a product of the $QI_n$. The isomorphisms $a_n$ make $QJ$ a product of the $K_n$. Its unique isomorphism $b:QJ\\xrightarrow{\\sim}P$ to the prescribed product is characterized by $\\operatorname{pr}_n\\circ b=a_n\\circ Q\\pi_n$. To check invertibility, construct the opposite product map with components $a_n^{-1}\\circ\\operatorname{pr}_n$; both composites are identities after every projection.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, label lemma-product-K-injective; applied in the product argument of injectives.tex Tag 08U1"
+   }
+  },
+  {
+   "text": "Again by [lem-weil-pbc-module-sheaves-limits-sectionwise], evaluation gives the degreewise identification $G(J^r)=\\prod_nG(I_n^r)$, including the coordinate maps and differentials. Thus $G(J)$ is the termwise product complex of the $G(I_n)$. Products of abelian groups are exact by [lem-pc-abelian-groups-exact-products]. Clause (2) of [lem-weil-derived-limit-existence], applied to $\\operatorname{Ab}$, therefore says that $QG(J)$ with the localized coordinate maps is a product of the $QG(I_n)$ in $D(\\operatorname{Ab})$. The K-injective recipe and its compatibility with chain maps from Step 1 identify this cone with $(F(QJ),F(Q\\pi_n))$. Finally apply $F$ to the isomorphisms $b$ and $a_n$ of Step 2. This makes $F(P)$, with coordinate maps $F(\\operatorname{pr}_n)$, a product of the $F(K_n)$. Let $P'=\\prod_nF(K_n)$ with projections $\\rho_n$. The unique product isomorphism $e:F(P)\\xrightarrow{\\sim}P'$ satisfies $\\rho_n\\circ e=F(\\operatorname{pr}_n)$ for every $n$. No exactness of products of sheaves is used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, product comparison; target products: derived.tex Tag 07KC, label lemma-products"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-right-derived-functor-triangulated] to the additive section functor $G$ from Step 1. Its right derived functor is $F=R\\Gamma(U,-)$, so the lemma sends the prescribed triangle to a distinguished triangle, with last map $c_L\\circ F(\\delta)$, where $c_L:F(L[1])\\xrightarrow{\\sim}F(L)[1]$ is its shift isomorphism. Put $f'_n=F(f_n)$ and define $s'$ on $P'$ by $\\rho_n\\circ s'=f'_n\\circ\\rho_{n+1}$. Additivity and functoriality give\n$$\\rho_n\\circ e\\circ F(1-s)=F(\\operatorname{pr}_n)-F(f_n)\\circ F(\\operatorname{pr}_{n+1})=\\rho_n\\circ(1-s')\\circ e.$$\nThe projections detect equality, so $e\\circ F(1-s)\\circ e^{-1}=1-s'$. Transport the image triangle along the identity of $F(L)$ and the isomorphism $e$ at each product vertex. The resulting distinguished triangle is\n$$F(L)\\xrightarrow{e\\circ F(p)}P'\\xrightarrow{1-s'}P'\\xrightarrow{c_L\\circ F(\\delta)\\circ e^{-1}}F(L)[1].$$\nThe first and third triangle squares follow by cancellation of $e^{-1}e$, and the middle square is the displayed equality; the component at the shifted vertex is the shift of the identity. By [def-weil-derived-limit] this is a derived-limit triangle for the image tower. Its $n$-th projection from $F(L)$ is $\\rho_n\\circ e\\circ F(p)=F(\\operatorname{pr}_n\\circ p)$, as required.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-derived-limit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6K, label lemma-RGamma-commutes-with-Rlim, first assertion; triangle argument from injectives.tex Tag 08U1 and derived.tex Tag 08TC, label definition-derived-limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-weil-derived-limit-existence",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, label lemma-RGamma-commutes-with-Rlim; explicit proof following the online Stacks 08U1 K-injective product argument. Local Stacks source files are absent in this checkout (WANTED in report.md)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +164,101 @@
    "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, CategoryTheory.Functor.rightDerived, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Functor.leftDerived, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, LightCondMod.ofSheafLightProfinite",
    "date": "2026-10-16",
    "verdict": "no match: independently checked; cohomological support, ordinary sheafification and Grothendieck category results do not assert reconstruction or preservation of derived products by unbounded sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections on a ringed site preserve countable products and derived limits",
+   "results": "8 hits: SheafOfModules.evaluationPreservesLimit, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, Condensed.instPreservesFiniteProductsOppositeProfiniteVal, CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf limits and finite/degreewise derived-functor infrastructure do not state the unbounded derived-sections comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor, PreservesLimitsOfShape, countable products",
+   "results": "0 hits: none; loogle: unknown identifier 'Functor.rightDerivedFunctor'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*PreservesLimitsOfShape|derived.*sections.*product",
+   "results": "Search command ran with invalid subdirectory Mathlib/CategoryTheory (duplicated Mathlib/ prefix); its zero-hit output supplies no evidence of absence. 0 hits: none; subdirectory argument: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid source-search path; corrected source searches recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of sheaves commute with countable products and derived inverse limits",
+   "results": "0 hits: none; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived evaluation on sheaves preserves countable products",
+   "results": "8 hits: CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, CategoryTheory.Presieve.preservesProduct_of_isSheafFor, CategoryTheory.Presieve.isSheafFor_iff_preservesProduct, CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal, Condensed.instPreservesFiniteProductsOppositeProfiniteVal, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf limits and finite/degreewise derived-functor infrastructure do not state the unbounded derived-sections comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|PreservesLimitsOfShape.*Discrete",
+   "results": "Search command ran with invalid subdirectory Mathlib/Algebra/Homology (duplicated Mathlib/ prefix); its zero-hit output supplies no evidence of absence. 0 hits: none; subdirectory argument: Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid source-search path; corrected source searches recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived sections functor on sheaves of modules preserves countable products",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal, Condensed.instPreservesFiniteProductsOppositeProfiniteVal, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, CategoryTheory.instPreservesFiniteProductsOppositeVal, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf limits and finite/degreewise derived-functor infrastructure do not state the unbounded derived-sections comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedFunctor PreservesLimitsOfShape Discrete",
+   "results": "0 hits: none; loogle: Unknown identifier `rightDerivedFunctor`",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimitsOfShape|rightDerivedFunctor|KInjective.*product",
+   "results": "Search command ran with invalid subdirectory Mathlib/Algebra/Homology (duplicated Mathlib/ prefix); its zero-hit output supplies no evidence of absence. 0 hits: none; subdirectory argument: Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid source-search path; corrected source searches recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationPreservesLimit|preserves.*[Ll]imit",
+   "results": "18 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory argument: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf limits and finite/degreewise derived-functor infrastructure do not state the unbounded derived-sections comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Pp]roduct|[Pp]roduct.*rightDerived|homotopyLimit|IsDerivedLimitTriangle|RGamma.*[Ll]im",
+   "results": "0 hits: none; subdirectory argument: Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a Grothendieck abelian category to abelian groups preserving countable products has an unbounded derived functor preserving homotopy inverse limits",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf limits and finite/degreewise derived-functor infrastructure do not state the unbounded derived-sections comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"product\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0bkz",
   "by": "worker",
@@ -117,5 +275,62 @@
    "state": "none"
   }
  },
- "import_flags": []
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-site-rgamma-derived-limit",
+  "worker": "stage1",
+  "summary": "Kept the site-level statement and proved it directly in four steps using existing nodes: K-injective models and maps, the source derived product, the target derived product via exact products in Ab, and an explicit transport of the Roos triangle with projection equations. No new nodes are needed. Reviewed arbitrary-site hypotheses against the actual cited statements and the online Stacks sources; no scheme-only or ringed-space-only specialization was used.",
+  "blueprint": {
+   "statement": "Realizes the derived-limit passage in the proof of blueprint ancestor lem-kun-0bkz, made explicit by Stacks 0D6K and equation 0BKX.",
+   "steps": {
+    "1": "K-injective interpretation of derived sections over the chosen object",
+    "2": "source product model in the 08U1 argument underlying the displayed abutment",
+    "3": "derived-section product comparison in that argument",
+    "4": "image Roos triangle and its induced projections, needed for the abutment"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective existence for modules on an arbitrary small ringed site, including the one-object site realizing Ab; no Kunneth-unit node replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic identification of derived morphisms into K-injectives with homotopy classes, used to track the product projections under derived evaluation."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Despite its title, the statement is for every abelian category with degreewise products; supplies the K-injective source product model."
+   },
+   {
+    "node": "lem-pc-abelian-groups-exact-products",
+    "why": "Exact products in the target Ab are the hypothesis needed to compute derived products termwise; exactness of products of site sheaves is not assumed."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Only clause (2) is used, for termwise products of arbitrary complexes in D(Ab) once exact countable products have been verified."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic unbounded derived-functor triangle and shift structure; the unit has no independent substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-weil-derived-limit-existence",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-0b9c6ffa4",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-0b9c6ffa4 (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements, unit/chapter route, and cited sources. All four proof steps check: K-injective product models, target exact products, and explicit Roos-triangle maps require no extra hypotheses. No new nodes, duplicates, cycles, or coefficient-category substitutions found. Accepted six declared generic tool uses; detailed checks recorded in review.md."
+ }
 }
