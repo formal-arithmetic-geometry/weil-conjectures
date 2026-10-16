@@ -3,65 +3,279 @@
  "blueprint": {
   "is": "cor-pur-affine-space-zero-section-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Zero-section purity in affine space",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $B$ be a\nseparated finite-type\n$k$-scheme and let $z:B\\hookrightarrow\\mathbf A^c_B$ be the zero\nsection of the affine space of [def-sbc-affine-space]. The\n$c$-fold exterior product of the normalized affine-line orientation of\n[thm-pur-affine-line-orientation] is a canonical, base-change\ncompatible isomorphism\n\n$$\n\\Lambda_B\\xrightarrow{\\ \\sim\\ }Rz^!\\Lambda_{\\mathbf A^c_B}(c)[2c],\n$$\n\ni.e. $Rz^!\\Lambda\\cong\\Lambda_B(-c)[-2c]$; the product of the Kummer\nboundaries of the coordinates $t_1,\\dots,t_c$ corresponds to $1$.\nMoreover this isomorphism is the inverse of the composite\n$Rz^!\\Lambda_{\\mathbf A^c_B}(c)[2c]\\xrightarrow{Rz^!(\\gamma_{p_c,\\Lambda_B})}\nRz^!Rp_c^!\\Lambda_B\\cong\\Lambda_B$, where $\\gamma_{p_c,\\Lambda_B}$ is the\naffine-space purity comparison of [def-pur-affine-space-comparison]\n(an isomorphism by [cor-pur-affine-space-purity]) and the last\nidentification is the composition law for $p_cz=\\operatorname{id}_B$:\nthe affine-space purity comparison, restricted along the zero section,\nis normalized by the product of the Kummer boundaries of the\ncoordinates. Equivalently, the integration map transposed from\n$\\gamma_{p_c,\\Lambda_B}$ sends the class of the zero section,\n$\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$, to $1$.",
+ "statement": "Work in the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ for any $n\\geq1$. Let $B$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism], let $c\\geq0$, and let $p_c:\\mathbf A^c_B\\to B$ and $z:B\\hookrightarrow\\mathbf A^c_B$ be the projection and zero section of [def-sbc-affine-space]. Use the specified Tate twists [def-coefficient-twists-detailed] and exceptional inverse image [def-weil-exceptional-inverse-image].\n\nFor every coordinate divisor $D_i=\\{t_i=0\\}$ use the supported Cartier-Kummer class of [lem-amb-cartier-kummer-map]: form the ordinary etale Kummer boundary with $\\mu_{\\ell^a}\\otimes_{\\mathbf Z/\\ell^a}A$ for any $a\\geq1$ such that $\\ell^aA=0$, then realize it on the specified pro-etale Tate twist. This prescription is independent of $a$ and is the normalized affine-line orientation of [thm-pur-affine-line-orientation] on the domain of its affine-line datum; it specifies that same boundary at every $n\\geq1$. Products mean the supported cup product of [def-pur-supported-cup], transported by the exact monoidal site comparison. The $c$-fold product, or unit for $c=0$, gives a canonical isomorphism\n$$\n\\mathrm{th}_c:A_B\\xrightarrow{\\sim}Rz^!A_{\\mathbf A^c_B}(c)[2c],\n$$\ncompatible with every base change $B'\\to B$ between separated finite-type $k$-schemes. Under this isomorphism $1$ is the class $\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_c)$; equivalently $Rz^!A_{\\mathbf A^c_B}\\cong A_B(-c)[-2c]$.\n\nLet $\\gamma_{p_c,A_B}$ be the ordered affine-space comparison of [def-pur-affine-space-comparison], using the all-finite-level integration-transposed affine-line maps of [def-pur-affine-line-purity-comparison]. Then $\\mathrm{th}_c$ is the inverse of\n$$\nRz^!A_{\\mathbf A^c_B}(c)[2c]\\xrightarrow{Rz^!(\\gamma_{p_c,A_B})}Rz^!Rp_c^!A_B\\xrightarrow{\\sim}A_B,\n$$\nwhere the last map is the adjunction-preserving composition identification for $p_cz=\\operatorname{id}_B$. Equivalently, the integration map transposed from $\\gamma_{p_c,A_B}$ sends the class of the zero section to $1$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.md",
   "place": "node cor-pur-affine-space-zero-section-purity, order 1981"
  },
  "stmt_deps": [
   "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
   "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "lem-amb-cartier-kummer-map",
   "thm-pur-affine-line-orientation",
+  "def-pur-affine-line-datum",
+  "def-pur-supported-cup",
   "def-pur-affine-space-comparison",
-  "cor-pur-affine-space-purity",
-  "def-weil-scheme-morphism-properties"
+  "def-pur-affine-line-purity-comparison"
  ],
  "proof": [
   {
-   "text": "First work on the ordinary etale site. The explicit adjunction of\n[cor-amb-affine-space-adjunction] gives\n$p_c^\\times\\Lambda_B=\\Lambda_{\\mathbf A^c_B}(c)[2c]$.\nComposition of adjunctions, as in\n[def-weil-exceptional-inverse-image], and\n$p_cz=\\operatorname{id}_B$ therefore identify\n$Rz^!\\Lambda_{\\mathbf A^c_B}(c)[2c]$ with $\\Lambda_B$.\nIn rank one this is the supported coordinate orientation: the\nCartier map of [lem-amb-cartier-kummer-map] integrates to $1$\nunder [def-amb-p1-trace], which is the normalization of\n[thm-pur-affine-line-orientation]. Iterating the affine-line\nadjunctions, the corresponding section classes are the ordered\nproduct of these Cartier maps; their residues multiply to $1$.\nThe even shifts and twists add by [def-coefficient-twists-detailed].\nThe comparison [thm-sf-ambient-adjoint-class] transports the\ncomposition and counits to the stated finite etale-origin objects.\nFinally the rank-one orientations commute with base change by\n[prop-pur-affine-line-orientation-base-change], and all the Cartier maps\nand the explicit affine-space counits commute with base change, by\n[lem-amb-cartier-kummer-map], [prop-asd-smooth-base-change].\nHence the resulting zero-section isomorphism has the claimed\nnormalization and base-change compatibility. No general relative\nKunneth assertion with closed support is needed for this calculation.\nFinally, $\\gamma_{p_c,\\Lambda_B}$ is the transpose of the composite\naffine-line adjunction ([thm-pur-affine-line-purity] identifies each\naffine-line comparison with the adjoint of the normalized trace, and\n[def-pur-affine-space-comparison] composes them along the tower), so\nthe identification $Rz^!\\Lambda_{\\mathbf A^c_B}(c)[2c]\\cong\\Lambda_B$\nobtained above from $p_c^\\times\\Lambda_B=\\Lambda_{\\mathbf A^c_B}(c)[2c]$\nand $p_cz=\\operatorname{id}_B$ is exactly $Rz^!(\\gamma_{p_c,\\Lambda_B})$\nfollowed by the composition isomorphism, which is the stated\ncompatibility with the affine-space purity comparison.",
+   "text": "Put $X_r=\\mathbf A^r_B$, $p_r:X_r\\to B$, $q_r:X_{r+1}\\to X_r$ forgetting $t_{r+1}$, and $s_r:X_r\\hookrightarrow X_{r+1}$ setting it to zero. On affine charts $R[t_1,\\ldots,t_{r+1}]=R[t_1,\\ldots,t_r][t_{r+1}]$, hence $p_{r+1}=p_rq_r$, $z_{r+1}=s_rz_r$, and $q_rs_r=1$. The polynomial generators give finite type and the coordinate differences cut out the diagonals, hence separatedness. The standard affine chart in projective space and properness of projective space give compactifications. All these schemes are Noetherian, by finite type over the Noetherian field $k$, and have finite dimension. These check the geometry and dimension-bound hypotheses of the ordinary adjunction and comparison nodes below. Choose $a=n$, $N=\\ell^a$: since $\\ell\\in(\\varpi_E)$, $NA=0$, and $N$ is invertible on all $k$-schemes here. The ordinary etale line $L_T=\\mu_{N,T}\\otimes_{\\mathbf Z/N}A$ is locally free of rank one, and $L_T^{\\otimes r}$ is likewise flat. Its comparison pullback is the specified $A_T(1)$ and its tensor powers by the projection-induced maps of [lem-pur-vector-integration-site-comparison]. In particular no freeness of $A$ over $\\mathbf Z/N$ and no divisibility of $n$ by the ramification index is needed. Each coordinate remains a nonzerodivisor in every polynomial base change, so its divisor is Cartier even when $B$ is nonreduced.",
    "uses": [
-    "cor-amb-affine-space-adjunction",
-    "def-weil-exceptional-inverse-image",
-    "lem-amb-cartier-kummer-map",
-    "def-amb-p1-trace",
-    "thm-pur-affine-line-orientation",
-    "def-coefficient-twists-detailed",
-    "thm-sf-ambient-adjoint-class",
-    "prop-pur-affine-line-orientation-base-change",
-    "prop-asd-smooth-base-change",
-    "thm-pur-affine-line-purity",
-    "def-pur-affine-space-comparison"
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-vector-integration-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "First sentence: ordinary etale calculation; geometric and coefficient hypotheses made explicit"
+   }
+  },
+  {
+   "text": "For any intermediate base $T=X_r$, write $p:\\mathbf A^1_T\\to T$, $j:\\mathbf A^1_T\\hookrightarrow P=\\mathbf P^1_T$ and $q:P\\to T$. Work first on ordinary etale derived categories, with $F_p=Rq_*Dj_!$. The open $j$ is etale; it is separated finite type, since on the standard two charts it is either the identity or the principal localization adjoining the inverse coordinate. [lem-amb-etale-adjoint-locality] gives $Dj_!\\dashv j^*$. Compose this with the actual normalized adjunction $Rq_*\\dashv q^*(-)\\otimes L_P[2]$ of [lem-asd-ordinary-finite-p1-adjunction]. Pullback of the Tate line and pullback composition identify the composite right adjoint with $G_pK=p^*K\\otimes L_{\\mathbf A^1_T}[2]$. The composite-counit formula gives\n$$\\epsilon_{p,K}=(1_K\\otimes I_p)\\operatorname{PF}^{-1},\\qquad I_p=t_q\\circ Rq_*(j_!L[2]\\to L_P[2]).$$\nHere the initial map is the open counit, identity on the open and zero on extension-by-zero sections off it. To check the displayed formula, its counit on $q^*K\\otimes L_P[2]$ is $(1\\otimes u)\\rho$, where $u:j_!L[2]\\to L_P[2]$ and $\\rho$ is the open tensor identification. The compactification definition of the projection map is the open tensor map followed by the proper projection map; its naturality with respect to $u$ changes $(1\\otimes t_q)\\operatorname{PF}_q^{-1}Rq_*((1\\otimes u)\\rho)$ into $(1\\otimes I_p)\\operatorname{PF}_p^{-1}$. All projection maps used here are invertible on the bounded constructible finite-Tor inputs by [lem-weil-finite-compact-projection-formula]. Conjugating the identity of $F_p$ between this adjunction and its exceptional adjunction gives an isomorphism $\\gamma^e_{p,K}:G_pK\\xrightarrow{\\sim}p^\\times K$; it is exactly the transpose of this counit, and is natural in $K$.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-finite-compact-projection-formula",
+    "def-pur-affine-line-purity-comparison",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "First sentence and final sentences: actual normalized affine-line adjunction and its transpose"
+   }
+  },
+  {
+   "text": "Let $s:T\\hookrightarrow\\mathbf A^1_T$ be the zero section and $D_0$ its divisor in $P$. The local equations of $D_0$ on the two standard charts are $t$ and $1$; their dual ideal generators have the transition of $\\mathcal O_P(1)$. Thus $\\mathcal O_P(D_0)=\\mathcal O_P(1)$. The supported Kummer morphism $c_{D_0,A}$ of [lem-asd-ordinary-supported-kummer] forgets to $c_1(\\mathcal O_P(1))=h$. Consequently the image of the supported coordinate class under $I_p$ is $t_qh=1$, by [def-amb-p1-trace]. This computes the actual morphism, not merely its stalkwise generator. The zero section is proper, so its identity-open compactification gives $Rs_!=Rs_*$. Compact-support composition and $ps=1$, with the composite-adjunction Hom bijection, identify this evaluation with\n$$A_T\\xrightarrow{u_s}Rs^!A_{\\mathbf A^1_T}(1)[2]\\xrightarrow{Rs^!\\gamma_{p,A_T}}Rs^!Rp^!A_T\\xrightarrow{\\sim}A_T.$$\nTransport this calculation to the pro-etale site: [lem-pur-vector-integration-site-comparison] identifies the actual twists, restricted projective-line trace, projection maps and adjoint transposes in Step 2. [lem-amb-cartier-kummer-map] identifies the supported boundary itself, and [thm-sf-ambient-adjoint-class] supplies the relative Hom bijections on these bounded-below etale-origin objects. The fully faithful comparison [thm-weil-pbc-site-comparison] identifies the exceptional object with the transported ordinary adjoint as in [def-weil-exceptional-inverse-image]. Conjugation and mate pasting identify the composition maps; hence the displayed pro-etale composite is also the identity. Since $\\gamma_{p,A_T}$ and the composition identification are isomorphisms, $u_s$ is an isomorphism. On the original affine-line-datum domain it is precisely [thm-pur-affine-line-orientation], since both are the adjoint of the same supported Kummer boundary. This proves the needed rank-one assertion for every coefficient index.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-asd-ordinary-supported-kummer",
+    "def-amb-p1-trace",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-amb-etale-compact-support",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-amb-cartier-kummer-map",
+    "thm-sf-ambient-adjoint-class",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "lem-weil-pbc-mate-pasting",
+    "thm-pur-affine-line-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Rank-one Cartier map integrates to 1; finite etale-origin transport of composition and counits"
+   }
+  },
+  {
+   "text": "Record the twisted form of Step 3. Put $T_r=A_T(r)[2r]$. The finite Tate line is locally free of rank one, so $T_r$ is invertible. [lem-pur-immersion-twist] identifies\n$$Rs^!\\bigl(A_{\\mathbf A^1_T}(1)[2]\\otimes p^*T_r\\bigr)\\cong Rs^!A_{\\mathbf A^1_T}(1)[2]\\otimes T_r.$$\nLet $u_{s,T_r}:T_r\\to Rs^!A_{\\mathbf A^1_T}(r+1)[2r+2]$ be $u_s\\otimes1_{T_r}$ through this identification. It is an isomorphism. Its adjoint is $c_{s,A}\\otimes1_{p^*T_r}$ through the proper projection map $s_*T_r\\cong s_*A_T\\otimes p^*T_r$. Under the compact-support projection map and $ps=1$, the transpose of $Rs^!\\gamma_{p,T_r}\\circ u_{s,T_r}$ is\n$$T_r\\otimes A_T\\xrightarrow{1\\otimes I_p(c_{s,A})}T_r\\otimes A_T=T_r.$$\nIndeed substitute the definition $\\gamma_{p,T_r}=\\Phi((1_{T_r}\\otimes I_p)\\operatorname{PF}^{-1})$ and the preceding adjoint of $u_{s,T_r}$; naturality of the projection isomorphism moves $c_{s,A}$ through it. The composite-counit formula then leaves exactly the displayed tensor of the rank-one evaluation. Step 3 says $I_p(c_{s,A})=1$, so after $Rs^!Rp^!\\cong1$ this composite is $1_{T_r}$. Twists reassociate by their tensor-power definition and shifts by $2+2r=2r+2$; all crossings of these shifts have sign $+1$.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-immersion-twist",
+    "def-coefficient-twists-detailed",
+    "lem-weil-finite-compact-projection-formula",
+    "def-pur-affine-line-purity-comparison",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Even shifts and twists add; expanded twisted rank-one counit calculation"
+   }
+  },
+  {
+   "text": "Induct on $c$ to construct the specified orientation, with $T_r=A_{X_r}(r)[2r]$. At $c=0$ both maps are identities, $z_0=p_0=1$, and the empty supported product is $1$. Given $\\mathrm{th}_r:A_B\\xrightarrow{\\sim}Rz_r^!T_r$, use Step 4 over $T=X_r$ to define\n$$\\mathrm{th}_{r+1}=c_{s_r,z_r}^{-1}\\circ Rz_r^!(u_{s_r,T_r})\\circ\\mathrm{th}_r:A_B\\longrightarrow Rz_{r+1}^!T_{r+1}.$$\nThe composition isomorphism here is the conjugate of compact-support composition: [thm-sf-comp-composition] gives the left-functor isomorphism on bounded-below etale-origin inputs and [lem-weil-pbc-mate-pasting] gives its adjunction-preserving right-functor conjugate. Every factor is invertible by the induction hypothesis and Step 4. To identify its class, let $C_r:z_{r*}A_B\\to T_r$ be the adjoint of $\\mathrm{th}_r$. Its next adjoint is explicitly\n$$z_{r+1,*}A_B=s_{r*}z_{r*}A_B\\xrightarrow{s_{r*}C_r}s_{r*}T_r\\cong s_{r*}A_{X_r}\\otimes q_r^*T_r\\xrightarrow{c_{s_r,A}\\otimes1}T_{r+1}.$$\nThis is the supported cup product of $q_r^*C_r$ with the last-coordinate class: [def-pur-supported-cup] defines that product by tensoring the supported morphisms and the multiplication isomorphism from the tensor of closed supported constants to the constant on their intersection. Under this multiplication the restriction of $q_r^*C_r$ to $s_r(X_r)$ is $C_r$, since $q_rs_r=1$; the displayed map is exactly that tensor product, using the same proper projection identification. Thus by induction $C_c$ is the ordered product of all coordinate Cartier-Kummer boundaries. The exact comparison is monoidal by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so this equality on ordinary etale witnesses gives the same equality on the specified pro-etale twists and supported maps. No isomorphism for a relative supported Kunneth map is used.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-coefficient-twists-detailed",
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-finite-compact-projection-formula",
+    "def-pur-supported-cup",
+    "lem-amb-cartier-kummer-map",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Iteration of the affine-line section classes; ordered product and addition of twists"
+   }
+  },
+  {
+   "text": "Now identify the inverse, keeping the actual ordered comparisons. Write $\\gamma_r=\\gamma_{p_r,A_B}:T_r\\to Rp_r^!A_B$ and let $b_r:Rz_r^!T_r\\to A_B$ be $Rz_r^!\\gamma_r$ followed by composition for $p_rz_r=1$. The definition [def-pur-affine-space-comparison] gives\n$$\\gamma_{r+1}=c_{p_r,q_r}^{-1}\\circ\\gamma_{q_r,Rp_r^!A_B}\\circ(q_r^*\\gamma_r)(1)[2].$$\nThe case $r=0$ is the identity. Inductively $\\gamma_r$ is an isomorphism; its target is isomorphic to the bounded constructible finite-Tor twist $T_r$, so Step 2 applies to that input of $\\gamma_{q_r,-}$. Hence $\\gamma_{r+1}$ is an isomorphism too. Naturality of the rank-one comparison, proved in Step 2 and preserved by the site comparison, changes the last two factors into $Rq_r^!(\\gamma_r)\\circ\\gamma_{q_r,T_r}$. Apply $Rs_r^!$ and then $Rz_r^!$. Under $Rs_r^!Rq_r^!\\cong1$ the twisted rank-one identity of Step 4 cancels $Rs_r^!\\gamma_{q_r,T_r}\\circ u_{s_r,T_r}$. Associativity of the compact-support composition and its adjunction conjugate identifies the remaining composite with $b_r\\mathrm{th}_r$. More explicitly, with the same composition maps in both recursions,\n$$b_{r+1}\\mathrm{th}_{r+1}=Rz_r^!(\\gamma_r)\\circ Rz_r^!\\bigl(Rs_r^!\\gamma_{q_r,T_r}\\circ u_{s_r,T_r}\\bigr)\\circ\\mathrm{th}_r=b_r\\mathrm{th}_r,$$\nwhere the composition $Rz_r^!Rp_r^!\\cong1$ is understood in the middle expression. The identity and associativity clauses of [thm-sf-comp-composition], together with mate pasting, justify these rebracketings. Since $b_0\\mathrm{th}_0=1$, induction gives $b_c\\mathrm{th}_c=1$. Step 5 already made $\\mathrm{th}_c$ invertible, so $b_c=\\mathrm{th}_c^{-1}$, which is the required normalization.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-line-purity-comparison",
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: ordered comparison is the transpose of the iterated normalized counit"
+   }
+  },
+  {
+   "text": "For any $g:B'\\to B$ in the stated finite-type setting, all coordinate divisors and their intersections pull back to the same coordinate divisors over $B'$; they remain Cartier by Step 1. The supported maps $c_{D_i,A}$ pull back to $c_{D_i',A}$ by [lem-amb-cartier-kummer-map]. Their tensor product therefore pulls back to $C_c'$: the multiplication of supported constants in [def-pur-supported-cup] restricts and multiplies sections on the intersection, and these operations commute with inverse image. The derived tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Taking adjoints gives precisely the square carrying $g^*\\mathrm{th}_c$ to $\\mathrm{th}_c'$ under the closed exceptional base-change mate; this follows from the mate-pasting formula, applied to the closed direct-image exchange used in the Cartier-Kummer statement. Hence the constructed isomorphism is compatible with every such base change, without requiring $g$ to be flat or smooth. The choices of an annihilating exponent do not enter it: the supported Cartier-Kummer maps and the twist and integration site comparisons are independent of that exponent. The coordinate order is the specified one; if factors are interchanged their degrees are two, giving the tensor sign $(-1)^{2\\cdot2}=1$.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "def-pur-supported-cup",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Base-change compatibility of rank-one classes and the resulting ordered product"
+   }
+  },
+  {
+   "text": "Finally transpose the equality $b_c\\mathrm{th}_c=1$ under the composite adjunction for $Rp_{c!}Rz_{c*}\\cong1$. If $a_c:Rp_{c!}T_c\\to A_B$ is the transpose of $\\gamma_c$ and $C_c:z_{c*}A_B\\to T_c$ is the supported class from Step 5, the composite-counit formula says exactly\n$$a_c\\circ Rp_{c!}(C_c):A_B=Rp_{c!}Rz_{c*}A_B\\longrightarrow A_B=1_{A_B}.$$\nThus the integration transposed from the comparison sends the coordinate-supported zero-section class to $1$. Inverting the Tate line and reversing the shift in the isomorphism of Step 5, by [lem-pur-immersion-twist], also gives $Rz_c^!A_{X_c}\\cong A_B(-c)[-2c]$. For $c=0$ every map in this paragraph is the identity.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-affine-space-comparison",
+    "lem-pur-immersion-twist",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Last assertion: integration evaluation equivalent to the zero-section inverse identity"
+   }
   }
  ],
  "proof_deps": [
-  "cor-amb-affine-space-adjunction",
-  "def-weil-exceptional-inverse-image",
-  "lem-amb-cartier-kummer-map",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-vector-integration-site-comparison",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-finite-compact-projection-formula",
+  "def-pur-affine-line-purity-comparison",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pc-divisor-line-bundle",
+  "lem-asd-ordinary-supported-kummer",
   "def-amb-p1-trace",
-  "thm-pur-affine-line-orientation",
-  "def-coefficient-twists-detailed",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-cartier-kummer-map",
   "thm-sf-ambient-adjoint-class",
-  "prop-pur-affine-line-orientation-base-change",
-  "prop-asd-smooth-base-change",
-  "thm-pur-affine-line-purity",
-  "def-pur-affine-space-comparison",
-  "lem-pur-kunneth-supported",
-  "lem-pur-support-localization-triangle"
+  "thm-weil-pbc-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-mate-pasting",
+  "thm-pur-affine-line-orientation",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-immersion-twist",
+  "def-coefficient-twists-detailed",
+  "thm-sf-comp-composition",
+  "def-pur-supported-cup",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-affine-space-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Expanded ordinary normalized adjunction and coordinate-tower proof; current unit integration route, with the zero-section normalization from the recorded sk-prop-an Steps 1, 5(d), and 6"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zeroSection.*[Pp]urit|[Pp]urit.*zeroSection|[Kk]ummer|rightDerivedUpperShriek",
+   "results": "No hits. Search directory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Thom class of the zero section of affine n-space is the cup product of coordinate Kummer boundaries and integrates to one",
+   "results": "Bundle.contMDiffOn_zeroSection, Bundle.mdifferentiableOn_zeroSection, Bundle.contMDiffAt_zeroSection, Bundle.contMDiff_zeroSection, Bundle.mdifferentiable_zeroSection, Bundle.mdifferentiableWithinAt_zeroSection, Bundle.contMDiffWithinAt_zeroSection, ContMDiffSection.coe_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace.zeroSection",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.AffineSpace.zeroSection'",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity for the zero section of affine space in etale cohomology with finite coefficients: exceptional inverse image of the constant sheaf is a Tate twist shifted by twice the codimension",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|fundamentalClass|supportedCup|TateTwist",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": "Lean.Macro.State, Lean.Macro.instInhabitedState, Lean.Macro.State.macroScope, EStateM.dummySave, _private.Init.Prelude.0.Lean.Macro.State.expandedMacroDecls, EStateM, EStateM.Backtrackable, EStateM.Result",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local cohomology fundamental class of the origin in relative affine n space with torsion coefficients is the product of divisor cycle classes and the compact support trace sends it to one",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, ClassGroup.mkMMem, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ClassGroup.exists_mk0_eq_mk0, AlgebraicGeometry.StructureSheaf.const_mul_rev, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned results do not state finite-coefficient zero-section purity or its normalized supported class"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -107,5 +321,129 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-pur-affine-space-zero-section-purity",
+  "worker": "stage1",
+  "summary": "Expanded the single imported paragraph into eight steps: checked geometry and coefficient domains, constructed the actual normalized line adjunction, computed its supported evaluation, proved the twisted identity, iterated orientations and identified the cup product, proved the inverse identity by induction, checked base change, and transposed to integration. STATEMENT-DISPUTED: made the all-finite-level Cartier-Kummer interpretation explicit, since the imported named rank-one datum has an implicit e|n domain while this corollary allows arbitrary n. No hypothesis or conclusion was weakened. Removed unused supported Kunneth/localization edges. No new nodes and no Lean changes.",
+  "blueprint": "Steps 1-3 expand the ordinary adjunction, rank-one residue and etale-origin sentences of the current detailed proof; Steps 4-6 expand its iteration, even-twist and final comparison-identification sentences, realizing the recorded unit Steps 1, 5(d), 6 and the current unit local-integration paragraph; Step 7 realizes its base-change sentences; Step 8 realizes the integration equivalent of normalization.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Supplies the standard affine chart compactification of the coordinate projection."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Supplies properness of the standard projective compactification."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Checks the finite compactification-dimension bound in the comparison adjunction."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic Finite torsion Tate twists are etale locally free lines used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Identifies actual etale and pro-etale traces, projection maps and adjoint transposes at arbitrary ramified finite coefficient levels; it is a site-comparison tool, not the smooth-purity agreement theorem."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Identifies the composite ordinary pullback with projection pullback as module functors."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Specifies the actual open counit used to identify integration, including its normalization."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Identifies the normalized counit and the twist-tensored supported map via the specified projection isomorphism."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Generic A Cartier divisor gives a supported Kummer map used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic The exceptional adjoint on the bounded comparison class used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Identifies the transported exceptional adjoint on bounded-below etale-origin objects."
+   },
+   {
+    "node": "thm-pur-affine-line-orientation",
+    "why": "Generic Global orientation and its normalization used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Checks invertibility and finite-Tor domains of the finite Tate factors."
+   },
+   {
+    "node": "lem-pur-immersion-twist",
+    "why": "Moves an invertible Tate twist through the closed exceptional functor; this is generic closed co-projection, not smooth purity."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$ used in the indicated step to make the normalized adjunction calculation explicit; no step of the unit integration route is replaced."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Transports bounded-below supported maps and isomorphisms to the pro-etale site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Transports the tensor-defined supported cup product by the exact monoidal comparison and by base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-kun-dimension-finite-type",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-cartier-kummer-map",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison",
+  "thm-pur-affine-line-orientation",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-immersion-twist",
+  "thm-sf-comp-composition",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-af6843131",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-af6843131 (reviewer sub-agent of L); spot-checked: FIX: one repair; review in review.md. Read the full item (8 steps), the master and main-20261015 blueprint text, unit sk-prop-an, the statement of every cited node, the proofs of thm-pur-affine-line-orientation, thm-pur-affine-line-purity and lem-amb-cartier-kummer-map, and the three citers. Statement: the delivery's all-level change is a strengthening that keeps every blueprint clause (canonical isomorphism, base change, inverse of Rz^!gamma plus composition, integration of the class to 1). def-pur-affine-line-datum really assumes e|n while the corollary allows every n; the counterexample e=2, n=1 is valid. lem-amb-cartier-kummer-map explicitly covers arbitrary m and is independent of r. Coefficient category is pro-etale D^b_ctf(-,A_{E,n}); the base-change map is the closed exceptional mate, with no flatness assumed. Steps: Step 2 is a valid all-level version of the etale adjunction argument in thm-pur-affine-line-purity steps 2-4. Step 3: O_P(D_0)=O_P(1) (checked against the chart transitions), and t_q h=1 by def-amb-p1-trace. Steps 4-6: the induction matches unit Step 1, cancels via lem-pur-immersion-twist and naturality of the rank-one comparison, and starts from 1 at c=0. Step 7 is the mate formula. Step 8 is the transpose. Edge cases checked: c=0, c=1, empty, disconnected or nonreduced B, l=2. The identification with pur_s on e|n is only asserted, as in the already-reviewed thm-pur-affine-line-purity step 6 and thm-pur-finite-reduction-of-purity step 3. A sign convention between the two Kummer boundaries should be fixed across the DAG, not in this item. No cycle. Off-route statements lem-kun-dimension-finite-type, lem-pur-vector-integration-site-comparison, lem-weil-finite-compact-projection-formula and lem-pur-immersion-twist are declared tools and accepted. No duplicate: pur9-def-thom-class-affine is only a definition. No SGA cited. No new nodes. Fix: added def-pur-affine-line-datum to the item's stmt_deps, because the statement names that datum's domain (B3).; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -26,11 +26,74 @@
   "place": "Lemma 5.1.5.5(1), Lemma 5.1.5.3 and Proposition 4.3.2.17 (with Corollary 4.3.2.16), printed pp. 325-327 and 284-285; restriction of the pointwise left Kan extension to an intermediate full subcategory has the same representable slice diagrams. Online source read, not archived in literature/. No Stacks tag states this infinity-categorical fact."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the original small universe $\\mathcal U$ fixed and choose a larger containing universe $\\mathcal W$ for all the categories and functor categories used below; in the two cited nodes take $\\mathcal U\\prime=\\mathcal W$. This does not change $\\mathcal S_{\\mathcal U}$ or the colimits required of $H$. The quasicategory $D$ is $\\mathcal U$-small, so it fits in $\\mathcal W$ and has $\\mathcal U$-small mapping spaces; the last assertion of the first paragraph of [lem-coef-infinity-yoneda-presheaf-limits], applied with $\\mathcal E=D$, says that the Yoneda functor $y:D\\to\\mathcal P(D)$, $d\\mapsto\\operatorname{Map}_D(-,d)$, is fully faithful: the maps $\\operatorname{Map}_D(d,d\\prime)\\to\\operatorname{Map}_{\\mathcal P(D)}(y(d),y(d\\prime))$ are equivalences. Since $E$ is a full subcategory of $\\mathcal P(D)$ containing every $y(d)$, its right-pinched mapping spaces between objects of $E$ are those of $\\mathcal P(D)$, so the induced functor $y_E:D\\to E$ is fully faithful. Apply [lem-coef-infinity-full-essential-image] with $\\mathcal X=D$ and $\\mathcal Y=E$; both fit in $\\mathcal W$, and that statement imposes no $\\mathcal U$-smallness requirement on $E$. Obtain its full replete essential image $A\\subseteq E$ and a coherent quasi-inverse $K:A\\to D$, with coherent unit and counit equivalences.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.2, printed pp. 324-325, and Proposition 5.1.3.1, printed p. 320 (fully faithful Yoneda, stated in lem-coef-infinity-yoneda-presheaf-limits); the coherent essential-image equivalence is the statement of lem-coef-infinity-full-essential-image, not Corollary 4.3.2.16."
+   }
+  },
+  {
+   "text": "For $c\\in E$, write $F=c$ in $\\mathcal P(D)$. The node [lem-coef-infinity-presheaf-representable-slice-density] supplies the essentially $\\mathcal U$-small slice $A_{/F}$ and its canonical colimiting cocone $\\delta_F$. The full essential image $A$ of step 1 is precisely the $A$ in that node, since $E$ is full and replete and contains all representables. In every degree, a simplex of $A\\times_E E_{/c}$ is a simplex of $\\mathcal P(D)$ with initial face in $A$ and final vertex $c$. All its vertices belong to $E$, so fullness gives equality with $A_{/F}$, respecting every simplex operator and the appended-vertex cocone. Colimiting cocones in the sense of [def-cbc-enhanced-diagrams-cones] are exactly $p$-colimit diagrams for the map $p$ to $\\Delta^0$: for $q:K^{\\triangleright}\\to\\mathcal C$ with boundary $f$, apex $x$ and coherent cocone $\\alpha$, [lem-coef-infinity-relative-cone-constant-test] says that $q$ is a $p$-colimit diagram if and only if, for every $z$, its square is a homotopy pullback. The lower row of that square is a map between copies of $\\Delta^0$, since $\\operatorname{Fun}(K,\\Delta^0)=\\Delta^0$ and each right-pinched mapping space of $\\Delta^0$ has one simplex in each degree; the path-pullback model is then the upper-right corner itself. So the condition says that $u\\mapsto\\Delta_K(u)\\alpha$, $\\operatorname{Map}_{\\mathcal C}(x,z)\\to\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(f,\\Delta_Kz)$, is an equivalence for every $z$, which by the cocone dual of the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] says that $\\alpha$ is colimiting. This translation is used in both directions below, for $\\mathcal C=\\mathcal P(D)$ and $\\mathcal C=Z$. Choose a $\\mathcal U$-small quasicategory $R$ and an equivalence $e:R\\simeq A_{/F}$. The maps from $\\mathcal P(D)$ and $Z$ to $\\Delta^0$ are inner fibrations, since their inner-horn lifting conditions are exactly the quasicategory conditions. By [lem-coef-infinity-relative-cone-equivalence](2), with the target map $\\mathcal P(D)\\to\\Delta^0$, the cocone $\\delta_Fe^{\\triangleright}$ is colimiting. All its vertices are in $E$, so it factors through $E$. Applying $H$ makes this small cocone colimiting in $Z$ by the hypothesis on $H$. Apply the same equivalence-invariance statement with target map $Z\\to\\Delta^0$ to conclude that $(H|_E)$ applied to the entire canonical cocone on $A\\times_E E_{/c}$ is colimiting. This uses small colimit preservation only for the diagram indexed by $R$; it requires no colimit closure of $E$ and no property of $G$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-representable-slice-density",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3, printed p. 325, and the forward direction of Lemma 5.1.5.5(1), printed pp. 326-327; equality of full-subcategory slices is checked degree by degree."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-kan-mapping-restriction] with source quasicategory $E$, full subcategory $A$, target $Z$, first functor $H|_E$ and second functor $G$. Step 2 supplies its colimit hypothesis at every object of $E$, so restriction gives an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(E,Z)}(H|_E,G)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A,Z)}(H|_A,G|_A).$$\nThe comparison is the actual restriction map and is coherent in all parameters by that node.",
+   "uses": [
+    "lem-coef-infinity-kan-mapping-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030M",
+    "place": "Corollary 7.3.6.9, applied to the representable full subcategory of E"
+   }
+  },
+  {
+   "text": "Work in the containing universe $\\mathcal W$ chosen in step 1. Let $J:D\\to A$ be the factorization of $y_E$ from step 1. Precomposition defines $J^*:\\operatorname{Fun}(A,Z)\\to\\operatorname{Fun}(D,Z)$ and $K^*$ in the reverse direction. Whiskering the unit and counit of [lem-coef-infinity-full-essential-image] gives coherent transformations $J^*K^*\\simeq1$ and $K^*J^*\\simeq1$: their components are obtained by applying each functor to the unit or counit equivalence. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes these equivalences in the functor categories, and its mapping-space clause makes $J^*$ induce an equivalence on the right-hand mapping space of step 3. The composite with restriction to $A$ is restriction along $y_E$ itself. In degree $n$, both composites precompose a map $E\\times\\Delta^n\\to Z$ with $y_E\\times1$; this equality also holds with every further simplex parameter. Thus it commutes with changes in $H,G$ and with restriction to another intermediate full subcategory. The homotopy fiber over any transformation $Hy\\to Gy_E$ is contractible because the restriction map is an equivalence of spaces. Taking the transformation given by the stated identification with $Gy_E$ gives the final comparison. Functor categories are formed in a sufficiently large containing universe, so this argument places no $\\mathcal U$-smallness requirement on $E$.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Functor equivalence and mapping-space calculus, Proposition 1.2.7.3 and Section 1.2.10; the precise statements used are lem-coef-infinity-full-essential-image and lem-cbc-enhanced-functor-cone-calculus. Degreewise restriction verifies the stated naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-kan-mapping-restriction",
+  "lem-coef-infinity-presheaf-representable-slice-density",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded from HTT Lemma 5.1.5.3, printed p. 325; forward implication of Lemma 5.1.5.5(1), printed pp. 326-327; Kerodon Corollary 7.3.6.9 (030M). Second reading uses canonical full-image slices and the existing equivalence-invariance and functor-cone calculus statements. HTT read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-colimit-completion",
@@ -98,5 +161,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-intermediate-presheaf-kan",
+  "worker": "stage1",
+  "summary": "Four steps: fully faithful Yoneda and its coherent essential-image equivalence; canonical Yoneda-image slice density, degreewise equality of the E and presheaf slices, and small replacement before applying H; the existing Kan mapping restriction theorem; explicit precomposition quasi-inverses and mapping-space calculus. One statement-only canonical density input. Second reading corrected source attributions, size handling, citations and coherent transport. No Lean written or compiled. Repair of returned head 9eb31b7981: compared every retained citation with the current DAG; the Yoneda-evaluation and essential-image nodes now state their universes independently of the complete-algebroid definition. Explicitly instantiate their larger universe without changing the small-colimit universe, recheck the quasi-inverse application in steps 1 and 4, and record the inner-fibration hypotheses in step 2. All citation quotes refreshed from current statements. Maintainer reading: step 1 now takes full faithfulness of Yoneda from the statement of lem-coef-infinity-yoneda-presheaf-limits (an abstract identification of the two mapping spaces does not show the specific map is an equivalence); step 2 now writes out the identification of absolute colimiting cocones with p-colimit diagrams over Delta^0 through lem-coef-infinity-relative-cone-constant-test and the cocone criterion of lem-cbc-enhanced-functor-cone-calculus; stmt_deps adds def-coef-infinity-category-of-spaces for S_U.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 supporting fact after “Supporting fact: Colimit-preserving presheaf extensions have the Kan mapping property on intermediate full subcategories”; the four item steps realize HTT Lemma 5.1.5.5(1), Lemma 5.1.5.3 and Proposition 4.3.2.17.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor, mapping-space and componentwise equivalence calculus is needed to interpret the Kan restriction and coherent transport; this unit has no replacement for that generic infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-59f36ff1e",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-59f36ff1e (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full (def-cbc, def-coef-infinity-category-of-spaces, yoneda-evaluation, full-essential-image, relative-cone-equivalence (1)-(4), kan-mapping-restriction, cbc functor-cone-calculus, def-coef-infinity-relative-cone). Also read the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 and the unit record. The item statement is true and unchanged; it follows HTT 5.1.5.3/5.1.5.5(1) and Kerodon 7.3.6.9. Small cases checked: D empty, D a point, E=A, E=P(D). The new node presheaf-representable-slice-density is HTT 5.1.5.3 in replete form and is true: A_{/F} is equivalent to D x_{P(D)} P(D)_{/F}, which is U-small. It is self-contained, statement-only and not a clause of the item. It is not a duplicate of space-yoneda-density, presheaf-free-cocompletion (where this appears only inside the proof), yoneda-presheaf-limits or accessible-compact-slice-density. Three repairable faults were fixed in fixes/.../lem-coef-infinity-intermediate-presheaf-kan.json. (1) C3/E5, step 1: full faithfulness was argued from an abstract identification Map(yd,yd') = y(d')(d), which does not show that the map induced by y is an equivalence. It now cites the Yoneda full-faithfulness clause of lem-coef-infinity-yoneda-presheaf-limits (same unit, no cycle), and yoneda-evaluation is dropped. (2) C1, step 2: relative-cone-equivalence(2) is about p-colimit diagrams, while the new node, H's hypothesis and kan-mapping-restriction use def-cbc colimiting cocones. The identification over Delta^0 is now written out through lem-coef-infinity-relative-cone-constant-test plus the cocone criterion of cone-calculus (the lower row is Delta^0 -> Delta^0, so the path pullback is the corner). (3) B3: the item's stmt_deps add def-coef-infinity-category-of-spaces for S_U. proof_deps are updated and the split_report is annotated. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic quasicategory calculus, steps 2 and 4). Steps 3-4 were checked against the kan-mapping-restriction hypotheses and the whiskering/precomposition argument, and are correct. HTT and Kerodon are not archived (WANTED already recorded). Citation quotes for steps 1-2 need refreshing.; 1 file(s) fixed by the reviewer"
  }
 }

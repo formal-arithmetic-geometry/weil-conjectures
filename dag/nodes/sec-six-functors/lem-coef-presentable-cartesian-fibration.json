@@ -29,9 +29,133 @@
   "def-coef-presentable-infinity-category",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f^*=G(f)$ for $f:b\\to b'$ and choose its left adjoint $f_!$. For $x\\in\\mathcal E_b$, the unit $x\\to f^*f_!x$ followed by the Cartesian lift $f^*f_!x\\to f_!x$ gives an edge $s:x\\to f_!x$ over $f$. We verify that $s$ is cocartesian. For $z$ over $c$, compare $\\operatorname{Map}_{\\mathcal E}(f_!x,z)$ with $\\operatorname{Map}_{\\mathcal E}(x,z)\\times^h_{\\operatorname{Map}_{\\mathcal B}(b,c)}\\operatorname{Map}_{\\mathcal B}(b',c)$, by precomposition with $s$. Both spaces lie over the SAME base $\\operatorname{Map}_{\\mathcal B}(b',c)$. Over $v:b'\\to c$, their fibers identify with $\\operatorname{Map}_{\\mathcal E_{b'}}(f_!x,v^*z)$ and $\\operatorname{Map}_{\\mathcal E_b}(x,f^*v^*z)$. These identifications follow by applying the opposite of [lem-coef-infinity-cocartesian-mapping-criterion] to the Cartesian lifts of $v$ and $vf$, then taking the fibers over identity arrows at their sources. Under them the comparison is $h\\mapsto f^*(h)\\eta_x$, exactly the given mapping-space adjunction equivalence. It is natural in $v$ by the coherent classification $G$ and the unit. Apply [lem-coef-spaces-homotopy-fiber-detection] over the identity of that common base. The comparison is an equivalence, so [lem-coef-infinity-cocartesian-mapping-criterion] says that $s$ is cocartesian. This gives every cocartesian lift required by [def-coef-infinity-fibrations]; thus $p$ is also cocartesian, with transport $f_!$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Remark 10.2, expanded mapping-space verification of adjoint transports."
+   }
+  },
+  {
+   "text": "The base and fibers admit all small colimits by their assumed presentability. Each $f_!$ preserves those colimits because it has right adjoint $f^*$, by [lem-coef-presentable-infinity-adjoints]. Apply [lem-coef-infinity-grothendieck-limits-colimits]. For a small coherent diagram $e:J\\to\\mathcal E$, put $b=\\operatorname{colim}_J pe$. With base cocone arrows $t_j:pe(j)\\to b$, that node constructs its total colimit as $\\operatorname{colim}_j t_{j,!}e(j)$ in the fiber over $b$. Hence $\\mathcal E$ has all small colimits. Moreover the image of this constructed total colimit cocone under $p$ is exactly the chosen base colimit cocone, so $p$ preserves it. Every other colimit cocone of $e$ is equivalent to this one, and its image remains equivalent to the same base colimit cone. Thus $p$ preserves all small colimits, including the empty one. In particular it preserves small filtered colimits, which already proves its asserted accessibility.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-grothendieck-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 10.7 and first sentence of the proof of Theorem 10.3; projection preservation read directly from the existing colimit formula."
+   }
+  },
+  {
+   "text": "Let $\\kappa_0$ be the regular cardinal in the hypothesis on $G$, and let $\\alpha$ witness accessibility of $\\mathcal B$ in [def-coef-presentable-infinity-category]. Choose an infinite cardinal $\\theta\\geq\\alpha,\\kappa_0$ and put $\\kappa=(2^\\theta)^+$. Then $\\kappa$ is an uncountable regular cardinal, and for $a<\\kappa$ and $b<\\alpha$ we have $a^b\\leq(2^\\theta)^\\theta=2^\\theta<\\kappa$. Apply [lem-coef-accessible-infinity-rank-calculus] to see that $\\mathcal B$ is $\\kappa$-accessible. A $\\kappa$-filtered diagram is also $\\kappa_0$-filtered, since every $\\kappa_0$-small shape is $\\kappa$-small. Thus $G$ still takes these filtered colimits to limits. By [lem-coef-accessible-compact-slice-density], the full category of $\\kappa$-compact objects is essentially small; choose a small equivalent full model $i:A\\to\\mathcal B$. For each $b$, the compact-source slice $A_{/b}$ is essentially small and $\\kappa$-filtered, and the canonical diagram $(a,i(a)\\to b)\\mapsto i(a)$ has colimit $b$. We always replace these slices by small equivalent diagrams before applying the hypothesis on $G$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-accessible-infinity-rank-calculus",
+    "lem-coef-accessible-compact-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Theorem 10.3, first paragraph: choose a compatible cardinal and a small compact base. The cardinal bound and slice presentation are made explicit."
+   }
+  },
+  {
+   "text": "By [lem-coef-spaces-small-colimits-universe], small spaces admit all small colimits, and their inclusion into spaces in the containing universe is fully faithful and preserves those colimits. By [lem-coef-infinity-presheaf-presentability], $\\mathcal P(A)$ admits all small colimits since $A$ is small. Define $j:\\mathcal B\\to\\mathcal P(A)$ by $j(b)(a)=\\operatorname{Map}_{\\mathcal B}(i(a),b)$. Compactness from [def-coef-presentable-infinity-category] says that each mapping-space evaluation preserves small $\\kappa$-filtered colimits in the containing universe. The universe inclusion just cited reflects colimit cocones with small-space apex: restrict their mapping-space universal property to test objects in the fully faithful small-space subcategory. Thus every evaluation of $j$ preserves these colimits in small spaces as well. The pointwise criterion of [lem-coef-infinity-yoneda-presheaf-limits] therefore says that $j$ preserves those colimits. Since $i$ is fully faithful, $j(i(a))=y(a)$, the Yoneda presheaf. Applying $j$ to the slice presentation of step 3 gives $j(b)\\simeq\\operatorname{colim}_{A_{/b}}y(a)$. The colimit mapping formulas of [lem-coef-infinity-yoneda-presheaf-limits] and the full Yoneda evaluation equivalence of [lem-coef-infinity-pointwise-yoneda-evaluation], applied with its category equal to the small category $A$ and its presheaf equal to $j(c)$, now give, naturally in $b,c$, $\\operatorname{Map}_{\\mathcal P(A)}(j(b),j(c))\\simeq\\lim_{A_{/b}^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal B}(i(a),c)\\simeq\\operatorname{Map}_{\\mathcal B}(b,c)$. Thus $j$ is fully faithful and accessible. This establishes the needed presheaf embedding directly, rather than using an uncited assertion about Ind categories.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-presheaf-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Theorem 10.3, presheaf embedding of the compactly generated base; direct density proof of the portion needed here."
+   }
+  },
+  {
+   "text": "The restriction $H=G\\circ i^{\\mathrm{op}}$ is indexed by the small infinity category $A^{\\mathrm{op}}$, has presentable values, and has right adjoint arrows by the hypotheses on $G$. Apply [lem-coef-small-right-adjoint-diagram-compact-model]. It supplies one uncountable regular $\\lambda$ and a coherent functor $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ with a natural equivalence $H\\simeq\\operatorname{Ind}^{\\mathrm R}_\\lambda F_0^{\\mathrm{op}}$. This changes the size of the compact fibers, not the variance: $F_0(f)$ extends to the left adjoint transport and its right adjoint is $G(i(f))$. The smallness used here is only smallness of $A$, not of the original base $\\mathcal B$.",
+   "uses": [
+    "lem-coef-small-right-adjoint-diagram-compact-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Theorem 10.3, final paragraph: the uniform lambda and the compact-object diagram."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-ind-presheaf-fibration-accessibility] to $A$, $\\lambda$ and $F_0$ from step 5. Its hypotheses are exactly that $A$ and each $F_0(a)$ are small, the fibers admit $\\lambda$-small colimits and the arrows preserve these. The lemma gives a limit extension $\\widehat G:\\mathcal P(A)^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ of $H$. Apply the opposite of [lem-coef-cocartesian-straightening] in a containing universe to obtain its Cartesian unstraightening $\\widehat p:\\widehat{\\mathcal E}\\to\\mathcal P(A)$. The presheaf-fibration lemma now says that this total category and projection are accessible. The base $\\mathcal P(A)$ is presentable by [lem-coef-infinity-presheaf-presentability], since $A$ is small in the original universe. Thus every category in the pullback argument below is accessible in that same universe; enlarging the containing universe only accommodates their collections of objects.",
+   "uses": [
+    "lem-coef-ind-presheaf-fibration-accessibility",
+    "lem-coef-infinity-presheaf-presentability",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 and the final paragraph of the proof of Theorem 10.3."
+   }
+  },
+  {
+   "text": "We identify the pullback along $j$ explicitly. In the category-of-elements formula of [lem-coef-ind-presheaf-fibration-accessibility], take $X=j(b)$. Apply [lem-coef-infinity-pointwise-yoneda-evaluation] with its category equal to $A$ and its presheaf equal to $j(b)$. Its universe and local-smallness hypotheses hold because $A$ is small in the original universe and $j(b)$ is small-space-valued. By its full Yoneda evaluation equivalence, a map $y(a)\\to j(b)$ is a point of $j(b)(a)=\\operatorname{Map}_{\\mathcal B}(i(a),b)$, with the same coherent triangles and higher homotopies. Its element category is therefore the compact-source slice $A_{/b}$ from step 3. There is a canonical comparison $G(b)\\to\\widehat G(j(b))\\simeq\\lim_{A_{/b}^{\\mathrm{op}}}G(i(a))$ induced by the arrows $i(a)\\to b$. It is an equivalence: the slice is small after replacement, is $\\kappa$-filtered, and has colimit $b$, so the hypothesis on $G$ applies. The comparisons are natural in $b$: a map $b\\to c$ postcomposes every arrow $i(a)\\to b$, and contravariance of $G$ identifies its two induced cone maps by composition; the coherent classification retains all these homotopies. Hence $G\\simeq\\widehat G\\circ j^{\\mathrm{op}}$ as coherent functors. Apply the opposite of [lem-coef-cocartesian-straightening] in a containing universe: its classification and base-change compatibility identify the given $\\mathcal E$ over $\\mathcal B$ with the infinity-categorical pullback $\\mathcal B\\times_{\\mathcal P(A)}\\widehat{\\mathcal E}$. No pullback over a globally small $\\mathcal B$ is assumed.",
+   "uses": [
+    "lem-coef-ind-presheaf-fibration-accessibility",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-pointwise-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Theorem 10.3, pullback square; the comparison cone and its variance are written explicitly."
+   }
+  },
+  {
+   "text": "The two functors into $\\mathcal P(A)$ are accessible: $j$ by step 4 and $\\widehat p$ by step 6. Their sources are accessible: $\\mathcal B$ by assumption and $\\widehat{\\mathcal E}$ by step 6; the target is accessible by its presheaf presentability. Thus [lem-coef-accessible-infinity-pullback] applies to the pullback identified in step 7 and makes $\\mathcal E$ accessible. Together with all small colimits from step 2, this is presentability by [def-coef-presentable-infinity-category]. The projection is accessible by the explicit colimit calculation in step 2, so no stronger functorial conclusion than the statement of the pullback node has been used.",
+   "uses": [
+    "lem-coef-accessible-infinity-pullback",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Theorem 10.3, application of HTT Proposition 5.4.6.6 and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "def-coef-infinity-fibrations",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-infinity-grothendieck-limits-colimits",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-accessible-infinity-rank-calculus",
+  "lem-coef-accessible-compact-slice-density",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-infinity-presheaf-presentability",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-ind-presheaf-fibration-accessibility",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-accessible-infinity-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Adaptation of the proof of Theorem 10.3, using Proposition 10.5 and the existing DAG density and colimit formulas; online sources read, shared archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +198,59 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cartesian fibration with presentable base and fibers and right adjoint transition functors has presentable total infinity category if its classifying functor sends sufficiently filtered colimits to limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib/CategoryTheory/Presentable/Presheaf\", \"type\": \"∀ {A : Type u'} [inst : CategoryTheory.Category.{v', u'} A] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable A κ] [CategoryTheory.Limits.HasPullbacks A] (C : Type w)\\n  [inst_4 : CategoryTheory.SmallCategory C],\\n  CategoryTheory.IsCardinalLocallyPresentabl\", \"doc\": \"If $\\\\mathcal{A}$ is a locally presentable category with respect to a regular cardinal $\\\\kappa$ and admits pullbacks, then the category of presheaves $[\\\\mathcal{C}^{\\\\text{op}}, \\\\mathcal{A}]$ (functors \"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib/CategoryTheory/Presentable/Presheaf\", \"type\": \"∀ {A : Type u'} [inst : CategoryTheory.Category.{v', u'} A] [CategoryTheory.IsLocallyPresentable.{w, v', u'} A]\\n  [CategoryTheory.Limits.HasPullbacks A] (C : Type w) [inst_3 : CategoryTheory.SmallCategory C],\\n  CategoryTheory.IsLocallyPresentable.{w, max v' w, max (max (max u' w) v') w} (CategoryThe\", \"doc\": \"If $\\\\mathcal{A}$ is a locally presentable category with pullbacks and $\\\\mathcal{C}$ is a small category, then the category of functors $\\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathcal{A}$ is also locally present\"}\n  {\"name\": \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"module\": \"Mathlib/CategoryTheory/Presentable/ColimitPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} {I : J → Type w}\\n  [inst_1 : CategoryTheory.SmallCategory J] [inst_2 : (j : J) → CategoryTheory.SmallCategory (I j)]\\n  {D : CategoryTheory.Functor J C} {P : (j : J) → CategoryTheory.Limits.ColimitPresentation (I j) (D.obj j)}\\n  [C\", \"doc\": \"If each component of a family of colimit presentations is filtered and the objects in their diagrams are finitely presentable, then the total colimit presentation formed by their dependent sum is also\"}\n  {\"name\": \"CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsFinitelyAccessibleCategory C] (X : C),\\n  CategoryTheory.IsFiltered\\n    (CategoryTheory.CostructuredArrow (CategoryTheory.ObjectProperty.isFinitelyPresentable C).ι X)\", \"doc\": \"For any finitely accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from finitely presentable objects to $X$ is a filtered categ\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"CategoryTheory.IsFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Finite\", \"type\": \"{C : Type u} → [CategoryTheory.Category.{v, u} C] → C → Prop\", \"doc\": \"An object $ X $ in the category $ C $ is finitely presentable if it is $ \\\\aleph_0 $-presentable, meaning that the hom-functor $ \\\\mathrm{Hom}(X, -) $ preserves $ \\\\aleph_0 $-filtered colimits.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsFibered, CategoryTheory.IsLocallyPresentable",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "presentable.*fibration|fibration.*presentable|IsFibered",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"21\", \"text\": \"- `IsFibered p` expresses `𝒳` is fibered over `𝒮` via a functor `p : 𝒳 ⥤ 𝒮`, as in SGA VI.6.1.\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"27\", \"text\": \"notion above, and we give an alternate constructor `IsFibered.of_exists_isCartesian'` for\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"65\", \"text\": \"class Functor.IsFibered (p : 𝒳 ⥤ 𝒮) : Prop extends IsPreFibered p where\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"69\", \"text\": \"instance (p : 𝒳 ⥤ 𝒮) [p.IsFibered] {R S T : 𝒮} (f : R ⟶ S) (g : S ⟶ T) {a b c : 𝒳} (φ : a ⟶ b)\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"71\", \"text\": \"  IsFibered.comp f g φ ψ\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"line\": \"219\", \"text\": \"variable [IsFibered p] {R S : 𝒮} {a : 𝒳} {b : Fib p R}\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"line\": \"79\", \"text\": \"instance : IsFibered (forget F) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"line\": \"80\", \"text\": \"  IsFibered.of_exists_isStronglyCartesian (fun a _ f ↦\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentability of the total quasicategory of a presentable Cartesian fibration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"{p : 𝒳 ⥤ 𝒮} (h : ∀ (a : 𝒳) (R : 𝒮) (f : R ⟶ p.obj a), ∃ (b : 𝒳) (φ : b ⟶ a), IsStronglyCartesian p f φ) : IsFibered p\", \"doc\": \"Given categories $\\\\mathcal{X}$ and $\\\\mathcal{S}$, and a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, if for every object $a \\\\in \\\\mathcal{X}$, every object $R \\\\in \\\\mathcal{S}$, and every morphism $f : R \"}\n  {\"name\": \"HasFibers.noConfusion\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"{P : Sort u} →\\n  {𝒮 : Type u₁} →\\n    {𝒳 : Type u₂} →\\n      {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} →\\n        {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳} →\\n          {p : CategoryTheory.Functor 𝒳 𝒮} →\\n            {t : HasFibers p} →\\n              {𝒮' : Type u₁} →\\n                {𝒳' : Type u₂} \", \"doc\": \"A structure on a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ indicating that it is a fibered category, with fibers over each object in the base category $ \\\\mathcal{S} $ and Cartesian lifts for morphis\"}\n  {\"name\": \"HasFibers.fiber_factorization\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"(ha : p.obj a = S) {b : Fib p R} (f : R ⟶ S) (φ : (ι R).obj b ⟶ a) [IsHomLift p f φ] :\\n  ∃ (b' : Fib p R) (τ : b ⟶ b') (ψ : (ι R).obj b' ⟶ a), IsStronglyCartesian p f ψ ∧ (((ι R).map τ) ≫ ψ = φ)\", \"doc\": \"Given a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, a morphism $ f : R \\\\to S $ in $ \\\\mathcal{S} $, and a morphism $ \\\\phi : \\\\iota_R(b) \\\\to a \"}\n  {\"name\": \"CategoryTheory.IsPreFibered.exists_isCartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"(p : 𝒳 ⥤ 𝒮) [p.IsPreFibered] {a : 𝒳} {R S : 𝒮} (ha : p.obj a = S) (f : R ⟶ S) :\\n  ∃ (b : 𝒳) (φ : b ⟶ a), IsCartesian p f φ\", \"doc\": \"For a pre-fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, and a morphism $ f : R \\\\to S $ in $ \\\\mathcal{S} $, there exists an object $ b \\\\i\"}\n  {\"name\": \"HasFibers.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \"Sort u →\\n  {𝒮 : Type u₁} →\\n    {𝒳 : Type u₂} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n          {p : CategoryTheory.Functor 𝒳 𝒮} →\\n            HasFibers p →\\n              {𝒮' : Type u₁} →\\n                {𝒳' : Type u₂} →\\n          \", \"doc\": \"A structure on a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ indicating that it is a fibered category, with fibers over each object in the base category $ \\\\mathcal{S} $ and Cartesian lifts for morphis\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_exists_isCartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"(p : 𝒳 ⥤ 𝒮) (h : ∀ (a : 𝒳) (R : 𝒮) (f : R ⟶ p.obj a), ∃ (b : 𝒳) (φ : b ⟶ a), IsStronglyCartesian p f φ) {R S : 𝒮}\\n  (f : R ⟶ S) {a b : 𝒳} (φ : a ⟶ b) [p.IsCartesian f φ] : p.IsStronglyCartesian f φ\", \"doc\": \"Given a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, if for every object $ a \\\\in \\\\mathcal{X} $, object $ R \\\\in \\\\mathcal{S} $, and morphism $ f : R \\\\to p(a) $ in $ \\\\mathcal{S} $, there exists a\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} [self : p.IsFibered], p.IsPreFibered\", \"doc\": \"If a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ is a Cartesian fibration (fibered), then it satisfies the axioms of a pre-fibration.\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] → CategoryTheory.Functor 𝒳 𝒮 → Prop\", \"doc\": \"Given categories $ \\\\mathcal{S} $ and $ \\\\mathcal{X} $, and a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, the proposition that $ F $ is fibered (i.e., a Cartesian fibration).\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessible total Grothendieck construction for a contravariant right adjoint diagram of presentable infinity categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalAccessibleCategory C κ] (X : C),\\n  CategoryTheory.IsCardinalFiltered (CategoryTheory.CostructuredArrow (CategoryTheory.isCardinalPresentable C κ).ι X) κ\", \"doc\": \"For any κ-accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from κ-presentable objects to $X$ is κ-filtered. This means that fo\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a $\\\\kappa$-accessible category and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a $\\\\kappa$-accessible, full, and faithful functor in an adjunction, then $\\\\mathcal{D}$ is also a $\\\\kappa$-ac\"}\n  {\"name\": \"CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsFinitelyAccessibleCategory C] (X : C),\\n  CategoryTheory.IsFiltered\\n    (CategoryTheory.CostructuredArrow (CategoryTheory.ObjectProperty.isFinitelyPresentable C).ι X)\", \"doc\": \"For any finitely accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from finitely presentable objects to $X$ is a filtered categ\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredColimits C κ],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCardinalPresentable X κ ∧ CategoryTheory.IsCardinalPr\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ with $\\\\kappa$-filtered colimits, and a morphism property $W$ where every $W$-morphism has $\\\\kappa$-presentable domain and codomain, the incl\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular] {J : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} J] [CategoryTheory.EssentiallySmall.{w, v', u'} J]\\n  [CategoryTheory.IsCardinalFiltered J κ] {X : C} (p : (CategoryTheory.isCardinalPrese\", \"doc\": \"Given a κ-presentable object $X$ in a category $\\\\mathcal{C}$ that is expressed as the colimit of a κ-filtered diagram $J$, the costructured arrow functor associated to this colimit is a final functor.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "def ran|def rightKanExtension|class IsRightKanExtension",
+   "results": "{\"t\": \"2026-10-16T21:51:16Z\", \"tool\": \"grep\", \"query\": \"def ran|def rightKanExtension|class IsRightKanExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Image.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\"], \"digest\": \"f71b5695c3b959c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:289-320 (ordinary right Kan extensions) and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-43 and StrictBicategory.lean:49-60 (quasicategory definition and its Cat-enriched ordinary category). These do not state the required infinity-categorical accessibility or compact-diagram theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Indization|Quasicategory|quasicategory",
+   "results": "{\"t\": \"2026-10-16T21:51:16Z\", \"tool\": \"grep\", \"query\": \"Indization|Quasicategory|quasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"dd0c3f628e97cf10\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:289-320 (ordinary right Kan extensions) and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-43 and StrictBicategory.lean:49-60 (quasicategory definition and its Cat-enriched ordinary category). These do not state the required infinity-categorical accessibility or compact-diagram theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -97,5 +270,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presentable-cartesian-fibration",
+  "worker": "stage1",
+  "summary": "Read GHN v3 Theorem 10.3 and its proof, compact-object/Ind duality in HTT 5.5.7, and every cited DAG statement. Kept the statement. Gave the adjoint-to-cocartesian mapping argument, colimit formula including projection preservation, compatible compact base and accessible restricted Yoneda, uniform compact-fiber model, presheaf extension and accessible pullback. Added only the uniform compact-diagram theorem and GHN Proposition 10.5 as statement-only nodes. No Lean attachment or Mathlib match. Repair after the landing return: rebuilt against the current DAG, reread all cited statements, made the small-category hypotheses of Yoneda explicit in steps 4 and 7, and refreshed their stale citation quotes. No missing-node surrogate or new dependency was introduced.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: supporting operadic-algebra presentability, via the presentable Cartesian fibration theorem. The steps supply the supporting presentable-total-category theorem used by lem-coef-operadic-algebra-presentability, step 9, without replacing the finite-level mapping-complex route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-d6c7409ce",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-d6c7409ce (reviewer sub-agent of L); spot-checked: The split follows GHN arXiv:1501.02161v3 §10 step for step. GHN is not in literature/, so I read it at arxiv.org/html; the WANTED line stands. Item statement (unchanged): it matches GHN Def 10.1 and Thm 10.3. Accessibility of p is proved inside GHN's proof, so the statement is not weakened. Steps: (1) Remark 10.2: the adjunction comparison over v is checked through the mapping square and fibre detection over the identity. (2) Lemma 10.7: the total colimit lies over colim pa, so p preserves colimits; the empty diagram is covered. (3) kappa=(2^theta)^+ satisfies a^b<=2^theta<kappa, the hypothesis of the rank calculus; slice density follows. (4) Restricted Yoneda j: compactness is reflected through the small-spaces inclusion, the objectwise criterion applies, and full faithfulness follows from the colimit-mapping clause and Yoneda evaluation. (5) and (6) are GHN's final paragraph and Prop 10.5; straightening is applied with the universe pair shifted up, which that node allows. (7) The element category of j(b) is A_/b; the kappa-filtered hypothesis on G gives G≃Ĝ∘j^op, and naturality is sketched by postcomposition, which is acceptable. (8) HTT 5.4.6.6 through the accessible-pullback node, plus step 2. proof_deps equals the union of the uses, every cited statement is in the item's own unit, there are no tool_uses and no cycle. New nodes: (a) the compact-model node is true (small arrow set, a uniform lambda with all ranks ≪ lambda, Pr^R_lambda ≃ (Cat^rex(lambda))^op) and checked on an empty A, a point and an arrow. (b) The presheaf-fibration node is GHN Prop 10.5 exactly; 'lambda uncountable' only weakens it and the item supplies it; checked on an empty A, terminal F0 and a representable X. It is a special case of the item, but GHN prove it separately (Cor 9.17, Lemma 10.6) and the item's steps 3–7 are a real reduction, so D1/D2 are not violated. No duplicates (the Ind-kappa, common-rank, compact-approximation, free-cocompletion and pullback nodes were checked). No changes, no fixes."
  }
 }

@@ -3,31 +3,93 @@
  "blueprint": {
   "is": "def-trf-global-operator",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-operator"
+  ]
  },
  "kind": "definition",
  "title": "Global operator of a correspondence",
- "statement": "In the setting of [def-trf-correspondence], assume that the\nordinary leg $c_2$ is\nproper. The\n*global operator* of a correspondence $u$ is\n\n$$\nT_c(u):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\n\nthe composite\n\n$$\n\\begin{aligned}\nR\\Gamma_c(X,K)&\\xrightarrow{\\eta^*_{c_2}}\nR\\Gamma_c(X,Rc_{2*}Lc_2^*K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(C,Lc_2^*K)\\\\\n&\\xrightarrow{R\\Gamma_c(C,u)}\nR\\Gamma_c(C,Rc_1^!K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(X,Rc_{1!}Rc_1^!K)\\\\\n&\\xrightarrow{R\\Gamma_c(X,\\varepsilon_{c_1})}R\\Gamma_c(X,K),\n\\end{aligned}\n$$\n\nwhere $R\\Gamma_c$ is the compact-support cohomology of the\ncoefficient conventions\n(computed with the\ncompact-support direct\nimage, and:\n\n1. the first arrow is the unit of the adjunction\n$Lc_2^*\\dashv Rc_{2*}$ of the\nderived direct image, applied\nto $K$ on $X$: this is the canonical arrow $K\\to Rc_{2*}Lc_2^*K$;\n1. the first isomorphism is the identification $Rc_{2*}\\simeq Rc_{2!}$ for the\nproper $c_2$ (the\nproper-coincidence clause of the six-operations package,\n[prop-functor-package], item (3)), applied to $Lc_2^*K$ and\ncomposed with the identity naturality of the compact-support\nconstruction;\n1. the second isomorphism is the *composition law* of the\ncompact-support direct image for the composite\n$a_X\\circ c_1=a_C$ ([prop-functor-package], item (3)),\n$$\nRa_{X!}Rc_{1!}\\xrightarrow{\\ \\sim\\ }R(a_X\\circ c_1)_!=Ra_{C!},\n$$\nwhich is correctly an isomorphism of functors with the associativity\ncompatibility: this arrow transports the compact-support cohomology of\n$C$ to that of $X$ along the exceptional leg (it is *not* the\nprojection formula; the projection formula is not used here, and the\ncoinage of the terminology in earlier drafts was a slip);\n1. the last arrow is the counit\n$\\varepsilon_{c_1}:Rc_{1!}Rc_1^!\\to\\operatorname{id}$ of the\nadjunction $Rc_{1!}\\dashv Rc_1^!$ of [def-trf-admissibility],\napplied to $K$ and then to\n$R\\Gamma_c(X,-)$ (exact, so it maps the counit to an arrow in the\nderived category).\n\nThe composite is a morphism of $D^b_{\\mathrm{fin}}(A)$\nby [lem-trf-global-operator-perfect], and",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and the finite coefficient conventions [def-trf-coefficient-conventions], with $A=A_{E,n}$ and $s=\\operatorname{Spec}k$. Let $X$ and $C$ be separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with structure morphisms $a_X$ and $a_C$. Let $c=(c_1,c_2):C\\to X\\times_sX$ and $u:Lc_2^*K\\to Rc_1^!K$, for $K\\in D^b_{ctf}(X,A)$, be a cohomological correspondence as in [def-trf-correspondence], with the constructible exceptional adjunction of [def-trf-admissibility]. Assume that the ordinary leg $c_2$ is proper. All operations below are at the same finite coefficient stage $A$.\n\nUse the derived direct image [def-weil-derived-direct-image], derived pullback [def-weil-derived-pullback-tensor-hom], and compact-support direct image [def-compact-support-direct-image-detailed]. For the complexes occurring below, write\n$$\nR\\Gamma_c(Z,M)=\\operatorname{Fib}_s(Ra_{Z!}M)\n$$\nas in [def-trf-coefficient-conventions]. The formal composite before applying $\\operatorname{Fib}_s$ is the global-operator construction of [sk-d-operator]. Here its components are evaluated on the stated constructible objects using the canonical adjunctions and comparisons specified below; no unrestricted ambient exceptional adjoint is required. The global operator of $u$ is the resulting composite endomorphism in $D(A)$\n$$\n\\begin{aligned}\nT_c(u):R\\Gamma_c(X,K)&\\xrightarrow{R\\Gamma_c(X,\\eta_{c_2,K})}\nR\\Gamma_c(X,Rc_{2*}Lc_2^*K)\n\\xrightarrow{\\alpha_{c_2,Lc_2^*K}}\nR\\Gamma_c(C,Lc_2^*K)\\\\\n&\\xrightarrow{R\\Gamma_c(C,u)}\nR\\Gamma_c(C,Rc_1^!K)\n\\xrightarrow{\\gamma_{c_1,Rc_1^!K}^{-1}}\nR\\Gamma_c(X,Rc_{1!}Rc_1^!K)\\\\\n&\\xrightarrow{R\\Gamma_c(X,\\varepsilon_{c_1,K})}\nR\\Gamma_c(X,K).\n\\end{aligned}\n$$\nHere the maps and isomorphisms have the following specified meanings.\n\n1. $\\eta_{c_2,K}:K\\to Rc_{2*}Lc_2^*K$ is the unit at $K$ of $Lc_2^*\\dashv Rc_{2*}$, given by clause (1) of [fix-prop-adjunctions].\n2. Write $p_f:Rf_!\\xrightarrow{\\sim}Rf_*$ for the proper-coincidence isomorphism for a proper $f$, and $\\gamma_f:Ra_{X!}Rf_!\\xrightarrow{\\sim}Ra_{C!}$ for compact-support composition when $f:C\\to X$ and $a_X\\circ f=a_C$. Both are the canonical comparisons of clause (3) of [prop-functor-package], with its identity and associativity compatibilities. Then\n$$\n\\alpha_{c_2,M}=\\operatorname{Fib}_s(\\gamma_{c_2,M})\\circ\n\\operatorname{Fib}_s\\bigl(Ra_{X!}(p_{c_2,M}^{-1})\\bigr):\nR\\Gamma_c(X,Rc_{2*}M)\\xrightarrow{\\sim}R\\Gamma_c(C,M).\n$$\nIn the displayed composite, $\\gamma_{c_1,N}^{-1}$ denotes the image under $\\operatorname{Fib}_s$ of the inverse composition isomorphism, evaluated at $N=Rc_1^!K$.\n3. $\\varepsilon_{c_1,K}:Rc_{1!}Rc_1^!K\\to K$ is the counit at $K$ of the constructible adjunction $Rc_{1!}\\dashv Rc_1^!$ specified in [def-trf-admissibility].\n\nThus both intermediate identifications use compact-support composition; the first also uses the properness of $c_2$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-operator/def-trf-global-operator.md",
   "place": "node def-trf-global-operator, order 2288"
  },
  "stmt_deps": [
-  "def-trf-correspondence",
-  "prop-functor-package",
-  "def-trf-admissibility",
-  "def-compact-support-direct-image-detailed",
-  "def-trf-coefficient-conventions",
-  "def-weil-derived-direct-image",
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties"
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-trf-correspondence",
+  "def-trf-admissibility",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-compact-support-direct-image-detailed",
+  "fix-prop-adjunctions",
+  "prop-functor-package",
+  "sk-d-operator"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globalOperator|cohomological[Cc]orrespondence|compactSupport",
+   "results": "25 hits: Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned compact support of functions, not derived compact-support cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global operator of a cohomological correspondence on compactly supported cohomology",
+   "results": "8 hits: CompactlySupported.term_→C_c_, term_→Co_, CompactlySupportedContinuousMap.compMulHom, CompactlySupportedContinuousMap.compLinearMap, CompactlySupportedContinuousMap.compAddMonoidHom, CompactlySupportedContinuousMap.comp, CochainComplex.HomComplex.CohomologyClass.mk, CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are compactly supported continuous maps or generic derived-functor and endomorphism constructions, not the specified geometric operator"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Functor.isEquivalence_of_isRightAdjoint, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: generic unit/counit identities do not supply the geometric functors and comparison isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global operator of a cohomological correspondence on compactly supported cohomology via pullback unit proper direct image comparison and exceptional counit",
+   "results": "8 hits: TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, TopCat.Presheaf.pullbackHomIsoPushforwardInv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackIso, TopCat.Presheaf.pullbackInvIsoPushforwardHom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary pullback/pushforward of sheaves, not the derived compact-support operator with exceptional inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]orrespondence|[Ll]owerShriek|[Uu]pperShriek",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: two occurrences of correspondence in unrelated scheme comments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Six functors cohomological correspondence induced endomorphism derived category sheaves",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapEnd_apply, CategoryTheory.Functor.mapEnd, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.InducedCategory.endEquiv_apply, CategoryTheory.Functor.mapExtAddHom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are compactly supported continuous maps or generic derived-functor and endomorphism constructions, not the specified geometric operator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Endomorphism on derived compact support cohomology induced by an algebraic geometric correspondence using six functors",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, SheafOfModules.pushforward_map_val",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary pullback/pushforward of sheaves, not the derived compact-support operator with exceptional inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|mapDerivedCategory|structure Adjunction",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction data only; no geometric correspondence operator"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -80,5 +142,34 @@
   "statement": "In the setting of [def-trf-correspondence], assume that the\nordinary leg $c_2$ is\nproper. The\n*global operator* of a correspondence $u$ is\n\n$$\nT_c(u):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\n\nthe composite\n\n$$\n\\begin{aligned}\nR\\Gamma_c(X,K)&\\xrightarrow{\\eta^*_{c_2}}\nR\\Gamma_c(X,Rc_{2*}Lc_2^*K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(C,Lc_2^*K)\\\\\n&\\xrightarrow{R\\Gamma_c(C,u)}\nR\\Gamma_c(C,Rc_1^!K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(X,Rc_{1!}Rc_1^!K)\\\\\n&\\xrightarrow{R\\Gamma_c(X,\\varepsilon_{c_1})}R\\Gamma_c(X,K),\n\\end{aligned}\n$$\n\nwhere $R\\Gamma_c$ is the compact-support cohomology of the\ncoefficient conventions\n(computed with the\ncompact-support direct\nimage), and:\n\n1. the first arrow is the unit of the adjunction\n$Lc_2^*\\dashv Rc_{2*}$ of the\nderived direct image, applied\nto $K$ on $X$: this is the canonical arrow $K\\to Rc_{2*}Lc_2^*K$;\n1. the first isomorphism is the identification $Rc_{2*}\\simeq Rc_{2!}$ for the\nproper $c_2$ (the\nproper-coincidence clause of the six-operations package,\n[prop-functor-package], item (3)), applied to $Lc_2^*K$ and\ncomposed with the identity naturality of the compact-support\nconstruction;\n1. the second isomorphism is the *composition law* of the\ncompact-support direct image for the composite\n$a_X\\circ c_1=a_C$ ([prop-functor-package], item (3)),\n$$\nRa_{X!}Rc_{1!}\\xrightarrow{\\ \\sim\\ }R(a_X\\circ c_1)_!=Ra_{C!},\n$$\nwhich is correctly an isomorphism of functors with the associativity\ncompatibility: this arrow transports the compact-support cohomology of\n$C$ to that of $X$ along the exceptional leg (it is *not* the\nprojection formula);\n1. the last arrow is the counit\n$\\varepsilon_{c_1}:Rc_{1!}Rc_1^!\\to\\operatorname{id}$ of the\nadjunction $Rc_{1!}\\dashv Rc_1^!$ of [def-trf-admissibility],\napplied to $K$ and then to\n$R\\Gamma_c(X,-)$ (exact, so it maps the counit to an arrow in the\nderived category).\n\nThe composite is a morphism of $D^b_{\\mathrm{fin}}(A)$\nby [lem-trf-global-operator-perfect].",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-global-operator",
+  "worker": "stage1",
+  "summary": "Audited the current blueprint definition and all ten direct statement dependencies. Made the finite coefficient and point-fibre conventions explicit, added the ordinary-adjunction and pullback interfaces, wrote both compact-support composition comparisons and their directions, and retained perfectness as the existing forward pointer rather than a circular definition dependency. No new nodes are required. The current generic definition sk-d-operator is cited for the formal composite before point-fibre evaluation, preserving the unit links to sk-d-corr and sk-d-six.",
+  "blueprint": "Realizes the entire displayed composite and clauses (1)-(4) of the main-20261015 definition, and the sk-d-operator unit statement. The first isomorphism explicitly includes compact-support composition along c2; the inverse along c1 is written in the displayed direction. The final perfectness sentence belongs to the existing lemma pointer. The existing sk-d-operator records the pre-fibre composite and supplies the unit route links; the finite-stage construction here uses only the stated constructible components.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Clause (1) supplies the actual ordinary derived adjunction and its unit used in the construction; this is a generic operation interface, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Clause (3) supplies canonical proper coincidence and coherent compact-support composition for the displayed construction; no separate theorem of this unit supplies these six-functor interfaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-cec754422",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-cec754422 (reviewer sub-agent of L); spot-checked: PASS, no fixes written; details in review.md. The item's statement matches main-20261015 def-trf-global-operator.md (order 2632), which equals its blueprint_update.statement; the diff against the master copy is only the parenthesis, the removed 'slip' sentence and the final 'and'. The source says the first isomorphism is 'Rc2*≃Rc2! composed with identity naturality', which does not reach RΓ_c(C,-); the item writes out the needed composition, α=Fib(γ_c2)∘Fib(Ra_X!(p_c2^-1)), using clause (3) of prop-functor-package. The second isomorphism is γ_c1^-1 at Rc1^!K, in the source's direction. These directions agree with the sk-d-operator sketch (μ2∘P2^-1, then μ1^-1) and with slopmaster2 Correspondence.lean:810-866. The unit comes from fix-prop-adjunctions(1) on D^b_c, and the counit from the constructible adjunction on D^b_ctf in def-trf-admissibility, which holds for every separated finite-type morphism, so no restriction is added. Hypotheses checked: each c_i is separated and of finite type, a_X∘c_i=a_C, properness is used only at c2, the finite stage A_{E,n} is the same throughout, and RΓ_c(C,-) is written explicitly as Fib_s∘Ra_C!. Perfectness is correctly left as the pointer to lem-trf-global-operator-perfect (citing it would make a cycle). Small cases: K=0 and C empty give 0; identity legs give RΓ_c(u); the graph case gives the composite of prop-trf-graph-operator. There are no new nodes. All 11 stmt_deps exist and none is merged; the transitive closure does not contain the item, so there is no cycle; every DAG node mentioning the global operator is a user of the item, not a duplicate (sk-d-operator is correctly recorded in same_as). Unit record: only realized.statement and realized_by changed; the unit has no steps. Accepted tool_uses: fix-prop-adjunctions and prop-functor-package, as generic six-functor interfaces. Not attaching the slopmaster2 globalOperator is correct: it takes a supplied GeometricOperations package and has no Fib_s. One harmless report inaccuracy: source.document still names the master copy, although the report says it was updated."
  }
 }

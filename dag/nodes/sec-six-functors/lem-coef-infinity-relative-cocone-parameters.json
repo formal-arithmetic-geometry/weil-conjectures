@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 .proof.md, finite-level graph adjunction via fixed-object enriched rectification: coherent parameter extension and relative universality of pointwise cocones, used in section-colimit construction.",
+   "place": "Historical ancestor prop-coef-integral-exceptional-adjoint, general coherent section-colimit infrastructure: immediate parent lem-coef-cocartesian-section-colimits, step 2, requires coherent extension of specified vertex relative cocones over a fixed base and their pointwise relative universality. The main-20261015 ancestor proof paragraph 2 computes integral adjunction mapping complexes and has no separate paragraph stating this generic infrastructure.",
    "via": [
     "lem-coef-cocartesian-section-colimits",
     "lem-coef-operadic-colorwise-sifted-colimits",
@@ -31,40 +31,234 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "Relative colimits of an inner fibration of infinity categories assemble pointwise over a simplicial parameter space",
-   "results": "{\"t\": \"2026-10-16T21:22:05Z\", \"tool\": \"leansearch\", \"query\": \"Relative colimits of an inner fibration of infinity categories assemble pointwise over a simplicial parameter space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pointwiseIsColimit\", \"CategoryTheory.Limits.sigmaObjIso\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.functorCategoryHasColimit\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.isColimitCoconeOfHasColimitCurryCompColim\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\"], \"digest\": \"972fdf38c2f2f57a\"}",
-   "date": "2026-10-17",
-   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:108-145 (ordinary categories and set-valued natural transformations), Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55 (ordinary Grothendieck construction), and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 (ordinary cocartesian morphisms). None states a relative colimit theorem for quasicategories or a coherent extension over an arbitrary simplicial parameter. The AlgebraicTopology grep and Loogle query returned no hits; LeanFinder also returned horn/cell colimits, which are ordinary colimits of simplicial sets, not relative colimits inside quasicategories."
+   "text": "Use the quasicategory and degreewise-pullback conventions of [def-cbc-enhanced-diagrams-cones]. Put $L=K^{\\triangleright}$, $F=\\operatorname{Fun}(L,\\mathcal C)$, $G=\\operatorname{Fun}(K,\\mathcal C)$, $H=\\operatorname{Fun}(L,\\mathcal D)$, $J=\\operatorname{Fun}(K,\\mathcal D)$ and $T=G\\times_J H$. All four functor simplicial sets are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. The pure-factor inclusion $K\\hookrightarrow L$ is degreewise injective by the join formula in [def-coef-infinity-relative-cone]. The restriction clause of [lem-coef-infinity-isofibration-exponentiation], applied to the quasicategory $\\mathcal D$, makes $v:H\\to J$ an isofibration, hence an inner fibration. This does not apply the isofibration assertion to $U$. The pullback $T$ is a quasicategory: given an inner horn in $T$, extend its $G$-coordinate to a simplex since $G$ is a quasicategory, map that simplex to $J$, and use the inner-fibration property of $v$ to extend the $H$-coordinate over exactly that $J$-simplex. The two coordinates give the required inner-horn filler in the degreewise pullback.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7, restriction-corner construction; Corollary 4.4.5.3 (01F3) for restriction. Pullback horn argument written out here."
+   }
   },
   {
+   "text": "Use internal functors as in [def-cbc-enhanced-diagrams-cones] and the lifting convention of [def-coef-infinity-fibrations]. Define $r:F\\to T$ by $r(u)=(u|_K,Uu)$. This is an inner fibration. Indeed, transposing an inner-horn lifting problem for $r$ gives a lifting problem for $U$ whose left map, up to interchanging factors, is\n$$(L\\times\\Lambda_i^n)\\amalg_{K\\times\\Lambda_i^n}(K\\times\\Delta^n)\\longrightarrow L\\times\\Delta^n.$$\nThe inner horn inclusion is inner anodyne because every inner fibration lifts it, and $K\\hookrightarrow L$ is degreewise injective. Thus [lem-coef-inner-anodyne-pushout-product] makes the displayed map inner anodyne. Its defining lifting property against the inner fibration $U$ supplies a filler with both restriction and base fixed. Transposition gives the required filler for $r$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7, induced inner fibration, using Proposition 4.1.4.1; explicit pushout-product lifting argument."
+   }
+  },
+  {
+   "text": "We now compare mapping spaces of $T$ with a path pullback, without assuming $U$ an isofibration. For vertices $x,y\\in T$, let $x_Z,y_Z$ be their coordinates in $Z=G,H,J$, and use the arrow mapping spaces $U_Z(x_Z,y_Z)$ defined in [lem-coef-infinity-pinch-comparison]. A simplex in $U_T(x,y)$ is a map $\\Delta^n\\times\\Delta^1\\to T$ with constant endpoints. Giving such a map is exactly giving its $G$- and $H$-coordinate maps with constant endpoints and equal composites to $J$. Consequently there is a degreewise identity, commuting with every operator,\n$$U_T(x,y)=U_G(x_G,y_G)\\times_{U_J(x_J,y_J)}U_H(x_H,y_H).$$\nAll these arrow mapping spaces are Kan. Since $v:H\\to J$ is an inner fibration by step 1, the final assertion of [lem-coef-infinity-isofibration-exponentiation] says that $U_H(x_H,y_H)\\to U_J(x_J,y_J)$ is a Kan fibration. Apply [lem-coef-kan-pullback-path-comparison] to obtain a weak homotopy equivalence\n$$c_U:U_T(x,y)\\longrightarrow P(U_G\\to U_J\\leftarrow U_H)$$\nby inserting the constant path. The Kan-fibration hypothesis is on restriction $v$, not on postcomposition by $U$.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7 (0329); arrow mapping-space fibration Proposition 4.6.1.22 (01P8). Degreewise pullback calculation is agent-written."
+   }
+  },
+  {
+   "text": "Write $M_Z=\\operatorname{Map}_Z(x_Z,y_Z)$ for $Z=G,H,J$ and $M_T=\\operatorname{Map}_T(x,y)$, using right-pinched mapping spaces. Restriction and insertion of a constant path define $c_M:M_T\\to P(M_G\\to M_J\\leftarrow M_H)$. The natural pinch inclusions $j_Z:M_Z\\to U_Z$ of [lem-coef-infinity-pinch-comparison] form a strictly commuting square\n$$P(j_G,j_J,j_H)c_M=c_Uj_T.$$\nTo check this equality on an $n$-simplex, both sides first precompose the same map $\\Delta^{n+1}\\to T$ by the pinch map $\\Delta^n\\times\\Delta^1\\to\\Delta^{n+1}$, then take its two coordinate maps and the constant interval at their common image in $J$. The pinch inclusions are homotopy equivalences of Kan complexes, hence weak homotopy equivalences. By [lem-coef-kan-homotopy-pullback-invariance], $P(j_G,j_J,j_H)$ is a weak homotopy equivalence. So are $c_U$ by step 3 and $j_T$ by pinch comparison. It follows that $c_M$ is a weak homotopy equivalence: on components and each based homotopy group, cancel the isomorphism induced by $P(j_G,j_J,j_H)$ in the displayed equality. This uses exactly the weak-homotopy-equivalence convention in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 (01L5), natural pinch inclusions; Proposition 3.4.0.9 (032B). Explicit comparison square and cancellation written by the agent."
+   }
+  },
+  {
+   "text": "Use weak homotopy equivalences with the component and homotopy-group meaning of [def-cbc-enhanced-diagrams-cones]. For $u,t\\in F$, take $x=r(u)$ and $y=r(t)$ in step 4. The constant-path comparison in the definition of a $U$-colimit diagram is the composite\n$$\\operatorname{Map}_F(u,t)\\xrightarrow{r_*}\\operatorname{Map}_T(r(u),r(t))\\xrightarrow{c_M}P\\bigl(\\operatorname{Map}_G(u|_K,t|_K)\\to\\operatorname{Map}_J(Uu|_K,Ut|_K)\\leftarrow\\operatorname{Map}_H(Uu,Ut)\\bigr).$$\nIndeed, on each simplex both maps record its restriction to $K$, its image under $U$, and the constant path at their equal further images. Since $c_M$ is a weak homotopy equivalence by step 4, this composite is a weak homotopy equivalence if and only if $r_*$ is, by cancellation on components and based homotopy groups. Quantifying over all $t\\in F$, [def-coef-infinity-relative-cone] and the mapping-space predicate in [lem-coef-infinity-relative-initial-boundary] give: $u$ is a $U$-colimit diagram if and only if $u$ is $r$-initial. This is proved here for every inner fibration between quasicategories and every small $K$; no isofibration property of $U$ was used. In particular all specified $c_b$ are $r$-initial.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, condition (2), colimit dual. The inner-fibration corner comparison is proved in steps 1-5 rather than taken from the isofibration-only corner node."
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{sk}_0(B)$, the simplicial subset consisting of the degeneracies of vertices of $B$. It is the disjoint union of one $\\Delta^0$ for each vertex. By the internal-functor definition [def-cbc-enhanced-diagrams-cones], the prescribed $c_b$ give a map $g:P\\to F$. Transpose $a$ and $h$ to maps $B\\to G$ and $B\\to H$. The equation $Ua=h|_{B\\times K}$ says their composites to $J$ agree, so they define $q:B\\to T$. The two specified equations for each $c_b$ give $rg=q|_P$ strictly. Thus the extension problem is the lifting square $P\\xrightarrow{g}F$, $B\\xrightarrow{q}T$ through $r$, with $P\\hookrightarrow B$ as its left map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7, transposed lifting square; Corollary 7.1.8.8 (02XG), choice A = sk_0(B)."
+   }
+  },
+  {
+   "text": "Use the degreewise products, pullbacks and internal-functor convention of [def-cbc-enhanced-diagrams-cones]. Apply [lem-coef-infinity-monomorphism-boundary-cells] to $P\\hookrightarrow B$. Its relative skeleta begin at $P$ and have union $B$. There are no 0-cell attachments, because $P$ contains all vertices. Suppose a lift to $F$ has been defined on one skeleton over the fixed map $q$. Each attached nondegenerate $d$-simplex $\\sigma$ has $d>0$, its boundary is already lifted, and its initial vertex $\\sigma(0)$ lies in $P$. The boundary lift therefore takes that vertex to the prescribed $c_{\\sigma(0)}$, which is $r$-initial by step 5. The boundary criterion [lem-coef-infinity-relative-initial-boundary] for the inner fibration $r:F\\to T$ supplies a lift of $q\\sigma$ agreeing on the entire boundary. Choose these fillers for the coproduct of cells, glue by its pushout, and continue over the skeleta; their compatible degreewise union is a map $\\widehat c:B\\to F$ with $r\\widehat c=q$ and $\\widehat c|_P=g$. Uncurrying gives $c:B\\times L\\to\\mathcal C$. Its $G$-coordinate equation is $c|_{B\\times K}=a$, its $H$-coordinate equation is $Uc=h$, and its restriction to $P$ fixes every $c_b$ exactly. This proves the existence clause. All fillers in this step are in $F$ over $T$, not in $\\mathcal C$ over $\\mathcal D$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7, minimal-simplex extension; implemented by relative skeleta from 0077 instead of maximality; Corollary 7.1.8.8 (02XG)."
+   }
+  },
+  {
+   "text": "Use the inner-fibration lifting convention of [def-coef-infinity-fibrations] and relative initiality as in [lem-coef-infinity-relative-initial-boundary]. For the second clause let $c$ be any map with every vertex restriction a $U$-colimit, and let $\\widehat c:B\\to F$ be its transpose. By step 5, $\\widehat c(b)$ is $r$-initial for every $b$. The functor simplicial sets $\\operatorname{Fun}(B,F)$ and $\\operatorname{Fun}(B,T)$ are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Both $r_B=\\operatorname{Fun}(B,r)$ and $U_B=\\operatorname{Fun}(B,U)$ are inner fibrations: transpose an inner horn against either map and apply [lem-coef-inner-anodyne-pushout-product] with the degreewise injection $\\varnothing\\hookrightarrow B$, so that its pushout-product is $B\\times\\Lambda_i^n\\hookrightarrow B\\times\\Delta^n$. The defining inner-anodyne lifting property supplies the filler. It remains to show that the vertex $\\widehat c$ of $\\operatorname{Fun}(B,F)$ is $r_B$-initial.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Proposition 7.1.8.10, reduction to relative initiality; the needed inner-fibration assertions are proved directly."
+   }
+  },
+  {
+   "text": "Use standard simplices and internal functors as in [def-cbc-enhanced-diagrams-cones]. Fix $n>0$ and a boundary lifting problem for $r_B$ whose boundary map takes vertex $0$ to $\\widehat c$. Uncurrying gives a map $f:S=\\partial\\Delta^n\\times B\\to F$ and a prescribed map $q_n:\\Delta^n\\times B\\to T$ with $rf=q_n|_S$ and $f(0,b)=\\widehat c(b)$. Filter $S\\hookrightarrow\\Delta^n\\times B$ by [lem-coef-infinity-monomorphism-boundary-cells]. Every vertex belongs to $S$, since $n>0$, so no 0-cell is attached. If an attached simplex is $(\\alpha,\\beta):\\Delta^d\\to\\Delta^n\\times B$, then $\\alpha:[d]\\to[n]$ is surjective: a nonsurjective monotone map misses a vertex and lies in the corresponding proper face, which would put the simplex in $S$. Thus $\\alpha(0)=0$ and $d\\geq n>0$. At its initial vertex the current boundary map has the fixed value $\\widehat c(\\beta(0))$, which is $r$-initial by step 8. Apply [lem-coef-infinity-relative-initial-boundary] to $r:F\\to T$ and the base simplex $q_n(\\alpha,\\beta)$ to fill this cell in $F$ over $T$. Fill the coproduct of cells, glue by each pushout, and take the compatible union. This produces $\\Delta^n\\times B\\to F$ over $q_n$, extending all of $f$. After currying it is the required boundary filler for $r_B$. Since this works for every $n>0$ and $r_B$ is an inner fibration between quasicategories, the same criterion proves $\\widehat c$ is $r_B$-initial.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Proposition 7.1.8.10, boundary problem (7.10), A empty. Explicit product-simplex and skeletal argument, with all fillers over T."
+   }
+  },
+  {
+   "text": "Use the internal-functor and right-pinched mapping-space formulas of [def-cbc-enhanced-diagrams-cones] and relative initiality as in [lem-coef-infinity-relative-initial-boundary]. Let $\\widetilde c:L\\to\\operatorname{Fun}(B,\\mathcal C)$ be the other transpose of $c$, and let $s$ be the restriction corner for $U_B$ along $K\\hookrightarrow L$. Currying identifies $s$ with $r_B=\\operatorname{Fun}(B,r)$, not with $r$. More explicitly, an $n$-simplex in its source is a map $L\\times B\\times\\Delta^n\\to\\mathcal C$; interchange $L$ and $B$ to obtain an $n$-simplex of $\\operatorname{Fun}(B,F)$. An $n$-simplex of its target is a pair of maps $K\\times B\\times\\Delta^n\\to\\mathcal C$ and $L\\times B\\times\\Delta^n\\to\\mathcal D$ whose further maps on $K\\times B\\times\\Delta^n$ agree. Interchanging coordinates identifies this pair with an $n$-simplex of $\\operatorname{Fun}(B,T)$. These bijections commute with every simplicial operator, restriction, and postcomposition, hence identify the maps $s$ and $r_B$ and the vertices $\\widetilde c$ and $\\widehat c$. A simplicial isomorphism induces an isomorphism on the right-pinched mapping spaces by their defining formulas, so step 9 gives $s$-initiality of $\\widetilde c$. Apply the argument of steps 1-5 to the inner fibration $U_B$ (proved inner in step 8) between its functor quasicategories. Its corner is $s$, so it identifies this $s$-initiality with the $U_B$-colimit condition of [def-coef-infinity-relative-cone]. This proves the universality clause without any additional existence hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Proposition 7.1.8.10, A empty; currying and the inner-fibration corner comparison proved in steps 1-5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "mathlib_searches": [
+  {
    "tool": "leanfinder",
-   "query": "A lifting problem for a diagram of cocones over an inner fibration has a solution when each vertex has a relative colimit cocone",
-   "results": "{\"t\": \"2026-10-16T21:22:06Z\", \"tool\": \"leanfinder\", \"query\": \"A lifting problem for a diagram of cocones over an inner fibration has a solution when each vertex has a relative colimit cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.AttachCells.isColimit₁\", \"HomotopicalAlgebra.AttachCells.isColimit₂\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.LiftsToColimit.toLiftableCocone\", \"CategoryTheory.SmallObject.llp_rlp_ιObj\"], \"digest\": \"7c857a9fa7abd50e\"}",
+   "query": "A relative colimit cocone for each vertex of a simplicial parameter assembles coherently over the parameter",
+   "results": "{\"t\": \"2026-10-16T21:54:54Z\", \"tool\": \"leanfinder\", \"query\": \"A relative colimit cocone for each vertex of a simplicial parameter assembles coherently over the parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.combineCocones\", \"SimplicialObject.Splitting.cofan'\", \"SimplicialObject.Splitting.isColimit\", \"SimplicialObject.Splitting.isColimit'\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"HomotopicalAlgebra.AttachCells.cofan₁\"], \"digest\": \"bbc4b027dd93ee7a\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:108-145 (ordinary categories and set-valued natural transformations), Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55 (ordinary Grothendieck construction), and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 (ordinary cocartesian morphisms). None states a relative colimit theorem for quasicategories or a coherent extension over an arbitrary simplicial parameter. The AlgebraicTopology grep and Loogle query returned no hits; LeanFinder also returned horn/cell colimits, which are ordinary colimits of simplicial sets, not relative colimits inside quasicategories."
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"Functor\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:54:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"Functor\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?colimit|Functor.*inner.?fibration|pointwise.*cocone",
+   "results": "{\"t\": \"2026-10-16T21:54:54Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|Functor.*inner.?fibration|pointwise.*cocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise relative colimits over an arbitrary simplicial parameter for an inner fibration",
+   "results": "{\"t\": \"2026-10-16T21:54:55Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise relative colimits over an arbitrary simplicial parameter for an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pointwiseIsColimit\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.pointwiseCocone\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtension\", \"CategoryTheory.Limits.functorCategoryHasColimit\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Limits.sigmaObjIso\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.hasPointwiseLeftKanExtension\"], \"digest\": \"2c40bfc4d4fc7bb3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?initial|relative.?colimit|pointwise.*cocone",
+   "results": "{\"t\": \"2026-10-16T23:05:25Z\", \"tool\": \"grep\", \"query\": \"relative.?initial|relative.?colimit|pointwise.*cocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative colimit diagrams for inner fibrations are pointwise over arbitrary simplicial parameters",
+   "results": "{\"t\": \"2026-10-16T23:05:25Z\", \"tool\": \"leansearch\", \"query\": \"Relative colimit diagrams for inner fibrations are pointwise over arbitrary simplicial parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.sigmaObjIso\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.coconePointwiseProduct\", \"SSet.hasColimits\", \"SimplicialObject.Splitting.isColimit'\"], \"digest\": \"1a18a24eb0f7e20c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
   },
   {
    "tool": "loogle",
    "query": "\"InnerFibration\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-16T21:22:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T23:05:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:108-145 (ordinary categories and set-valued natural transformations), Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55 (ordinary Grothendieck construction), and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 (ordinary cocartesian morphisms). None states a relative colimit theorem for quasicategories or a coherent extension over an arbitrary simplicial parameter. The AlgebraicTopology grep and Loogle query returned no hits; LeanFinder also returned horn/cell colimits, which are ordinary colimits of simplicial sets, not relative colimits inside quasicategories."
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative initial objects of an inner fibration give coherent lifts of simplicial diagrams with prescribed vertex cocones",
+   "results": "{\"t\": \"2026-10-16T23:05:25Z\", \"tool\": \"leanfinder\", \"query\": \"Relative initial objects of an inner fibration give coherent lifts of simplicial diagrams with prescribed vertex cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.modelCategoryQuillen.J\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\"], \"digest\": \"c7a8af6dba29defc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary-category colimits, strict Segal simplicial sets, or Quillen all-horn fibrations; none states relative colimits of quasicategories with fixed base and vertex cones."
   },
   {
    "tool": "grep",
-   "query": "relative.?colimit|relative.?initial|colimit.*[Ff]ibration",
-   "results": "{\"t\": \"2026-10-16T21:22:02Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|relative.?initial|colimit.*[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:108-145 (ordinary categories and set-valued natural transformations), Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55 (ordinary Grothendieck construction), and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 (ordinary cocartesian morphisms). None states a relative colimit theorem for quasicategories or a coherent extension over an arbitrary simplicial parameter. The AlgebraicTopology grep and Loogle query returned no hits; LeanFinder also returned horn/cell colimits, which are ordinary colimits of simplicial sets, not relative colimits inside quasicategories."
+   "query": "Quasicategory.*[Cc]olimit|[Rr]elative[Ii]nitial|[Rr]elative[Cc]olimit|[Pp]ointwise.*[Ii]nitial",
+   "results": "{\"t\": \"2026-10-16T23:23:13Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Cc]olimit|[Rr]elative[Ii]nitial|[Rr]elative[Cc]olimit|[Pp]ointwise.*[Ii]nitial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the actual source grep returned zero hits for the recorded regular expression across Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInitial\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T23:23:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInitial\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isInitialConst\", \"CategoryTheory.Functor.isInitialConst_to_app\", \"CategoryTheory.Under.equivalenceOfIsInitial_functor\", \"CategoryTheory.Functor.Elements.isInitialOfCorepresentableBy\", \"CategoryTheory.Functor.Elements.isInitialOfRepresentableBy\", \"CategoryTheory.Functor.Elements.isInitial\", \"CategoryTheory.Functor.Elements.isInitialYonedaObj\", \"CategoryTheory.Functor.initial_fromPUnit_of_isInitial\"], \"digest\": \"b4b653fa7c08608f\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. CategoryTheory.Functor.isInitial (Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Terminal.lean:37-41) has ordinary categories and absolute initiality; isInitialConst is also absolute. Neither covers an arbitrary simplicial parameter, a relative initial object of an inner fibration, or strictly prescribed relative cocones."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor categories preserve relative initial objects pointwise for inner fibrations of quasicategories",
+   "results": "{\"t\": \"2026-10-16T23:23:15Z\", \"tool\": \"leanfinder\", \"query\": \"Functor categories preserve relative initial objects pointwise for inner fibrations of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.CostructuredArrow.initial_pre\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.WithInitial.prelaxfunctor\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SimplexCategory.Truncated.initial_incl\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.initial_of_initial_comp\"], \"digest\": \"179e3a17f80bd947\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read the returned types: StrictSegal.isPointwiseRightKanExtension concerns the right Kan extension of a strict Segal simplicial set along truncated simplex inclusion (Coskeletal.lean:186-188,224-226); the other hits concern ordinary initial functors or Kan fibrations. None states relative initiality in coherent functor quasicategories or prescribed-base relative cocone extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-section-colimits",
@@ -84,5 +278,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02XG",
+  "place": "Agent-written expansion of online Kerodon 7.1.8.8 (02XG) and 7.1.8.10 (02XK), with the inner-fibration corner comparison explicitly established in steps 1-5. Online sources read; archival copies WANTED."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-cocone-parameters",
+  "worker": "stage1",
+  "summary": "Repair of the returned six-step split. Ten steps now prove the inner-fibration corner comparison via arrow mapping spaces, a Kan-fibration strict/path-pullback comparison and natural pinch transfer; transpose the extension to a lift of sk_0(B) into F through r over T; prove Fun(B,r)-initiality by product boundary cells; and identify the final corner with Fun(B,r). Statement preserved, no new nodes.",
+  "blueprint": "Historical ancestry through prop-coef-integral-exceptional-adjoint: general coherent section-colimit infrastructure used in lem-coef-cocartesian-section-colimits, step 2. The current main-20261015 proof paragraph 2 computes integral adjunction mapping complexes and does not itself give this generic infrastructure. Steps 1-5 establish its relative-corner input; steps 6-7 realize the parameter extension of Kerodon 02XG; steps 8-10 realize the pointwise relative universality of 02XK.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its generic closure of coherent functor simplicial sets under quasicategory formation is used in steps 1 and 8. The unit has no replacement statement for that general foundational closure; no geometric purity or change of the unit route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-c66b29457",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-c66b29457 (reviewer sub-agent of L); spot-checked: Read the item in full: 10 steps, 11 existing dependencies, no new nodes. I also read every cited statement, the parent lem-coef-cocartesian-section-colimits step 2, and the possible duplicates relative-cone-initial-corner (needs an isofibration) and parameter-cone-extension (absolute target). The statement keeps the clauses of Kerodon 02XG and 02XK (A empty): inner fibration only, arbitrary small B and K, h fixed, c_b fixed exactly. Kerodon is online only and marked WANTED, so I checked the statement and every step against the cited node statements rather than an archival copy. Steps 1-5 prove 'U-colimit iff r-initial' for any inner U, in order: (1) T is a quasicategory, using the isofibration property only on the restriction H->J; (2) r is inner, by the pushout product of the inner horn with K->L; (3) arrow spaces of T are a strict pullback, with Kan fibration U_H->U_J from the last clause of isofibration-exponentiation, then kan-pullback-path-comparison; (4) the pinch square P(j)c_M=c_U j_T commutes simplexwise, with homotopy-pullback invariance and cancellation; (5) the U-colimit comparison factors as c_M after r_*. Steps 6-7: lift sk_0 B -> B through r by cell filtration; every attached cell has dimension > 0 and its first vertex goes to an r-initial c_b. Steps 8-10: r_B and U_B are inner (pushout product with the empty set into B); boundary cells of Delta^n x B have surjective first coordinate, so the first vertex value is r-initial c-hat; the corner s is identified with Fun(B,r). Edge cases checked: B empty, K empty, B a point, B=Delta^1, identity U, an inner fibration that is not an isofibration. One minor convention point: 'homotopy equivalence implies weak homotopy equivalence' in step 4 is used the same way by existing nodes, so I accepted it. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for quasicategory closure only. No SGA, no cycle, no fixes."
  }
 }
