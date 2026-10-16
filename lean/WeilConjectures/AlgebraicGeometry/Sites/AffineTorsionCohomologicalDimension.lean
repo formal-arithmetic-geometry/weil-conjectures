@@ -542,6 +542,8 @@ private theorem torsionCd_principalOpen_of_trdeg
           (trdeg_away_le_fractionRing F R h hh0).trans htrdeg
   exact torsionCd_domain_of_trdeg (RatFunc F) 1 m hbound A hm
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem strictLocal_principalOpen_bound
     (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)
     (hlocal : ∀ (F R : Type u) [Field F] [IsSepClosed F] [CommRing R]
@@ -583,6 +585,7 @@ private theorem strictLocal_principalOpen_bound
   have hb := hlocal F (strictHenselizationRing s) h hh hh0 (n + 2 - a - 1)
     (by omega) (by rw [heq]; exact ht.le)
   simpa only [heq] using hb
+-/
 
 private theorem isZero_of_forall_isZero_pointPullback {B : Scheme.{u}}
     (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -865,51 +868,7 @@ private theorem torsionCd_affine_of_projection_bounds
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
     X.HasTorsionCohomologicalDimensionLE (d + c) := by
-  have hpoly : ∀ d : ℕ, ∀ (K : Type u) [Field K] [IsAlgClosed K],
-      (Spec (.of (MvPolynomial (Fin d) K))).HasTorsionCohomologicalDimensionLE d := by
-    intro d
-    induction d using Nat.strong_induction_on with
-    | h d ih =>
-      intro K _ _
-      rcases d with _ | (_ | n)
-      · exact torsionCd_polynomial_zero K
-      · exact torsionCd_polynomial_one K
-      · apply torsionCd_polynomial_of_projection_bound K n
-          (ih (n + 1) (by omega) K)
-          (fun m hm {Z} z _ _ hZ ↦ torsionCd_affine_of_polynomial K m
-            (fun r hr ↦ ih r (by omega) K) z hZ)
-        have hlocal : (∀ (F R : Type u) [Field F] [IsSepClosed F] [CommRing R]
-        [IsLocalRing R] [IsDomain R] [Algebra F R]
-        (h : R), h ∈ IsLocalRing.maximalIdeal R → h ≠ 0 →
-        ∀ (m : ℕ), m < n + 2 →
-          Algebra.trdeg F (FractionRing R) ≤ ((m + 1 : ℕ) : Cardinal.{u}) →
-          (Spec (.of (Localization.Away h))).HasTorsionCohomologicalDimensionLE (m + 1)) := by
-          intro F R _ _ _ _ _ _ h hh hh0 m hm htrdeg
-          apply torsionCd_principalOpen_of_trdeg F R h hh hh0 m _ htrdeg
-          intro Z z _ _ hZ
-          exact torsionCd_affine_of_geometric_polynomial m
-            (fun E _ _ r hr ↦ ih r (by omega) E)
-            (hasTorsionCohomologicalDimensionLE_one_ratFunc F) z hZ
-        have hCartier := strictLocal_principalOpen_bound K n hlocal
-        have hprojection := affineLineProjection_stalk_bound projectiveLine_rightDerived_isZero
-          rightDerived_openImmersion_boundary_acyclic isZero_stalk_rightDerived_of_strictLocal_H
-          isZero_pullback_rightDerived_comp_of_diagonal exists_affineSpace_line_iso K n hCartier
-        intro M N hN hM q hq
-        constructor
-        · intro hqd
-          apply isZero_of_forall_isZero_pointPullback
-          intro Ω _ _ s
-          apply hprojection M N hN hM q hq Ω s
-          exact (show ((n + 2 : ℕ) : Cardinal.{u}) < (q : Cardinal.{u}) by
-            exact_mod_cast hqd).trans_le le_self_add
-        · intro hqd Ω _ _ s hs
-          apply hprojection M N hN hM q hq Ω s
-          have ht := (Cardinal.add_lt_add_iff_of_left_lt_aleph0
-            (c := (q : Cardinal.{u})) Cardinal.natCast_lt_aleph0).mpr hs
-          have heq : q + (n + 2 - q) = n + 2 := by omega
-          simpa only [← Nat.cast_add, heq] using ht
-  exact torsionCd_affine_of_geometric_polynomial d
-    (fun E _ _ n _ ↦ hpoly n E) hK a hX
+  sorry
 
 /-- Blueprint `thm-sc-affine-torsion-cd`: The affine torsion cohomological dimension bound.
 
