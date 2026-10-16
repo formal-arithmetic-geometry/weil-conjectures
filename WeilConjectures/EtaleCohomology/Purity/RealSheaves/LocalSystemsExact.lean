@@ -43,7 +43,7 @@ lemma isOpen_setOf_apply_eq_of_subset {V : Type*} [AddCommGroup V] [Module Λ V]
   refine isOpen_iff_forall_mem_open.2 fun g₀ hg₀ ↦ ⟨(g₀ * ·) '' S, ?_,
     (Homeomorph.mulLeft g₀).isOpenMap S hS, ⟨1, h1, mul_one g₀⟩⟩
   rintro _ ⟨h, hh, rfl⟩
-  simp only [Set.mem_setOf_eq, map_mul, Module.End.mul_apply, hSv h hh]
+  simp only [Set.mem_ofPred_eq, map_mul, Module.End.mul_apply, hSv h hh]
   exact hg₀
 
 instance isFiniteContinuous_isClosedUnderSubobjects :
@@ -54,7 +54,7 @@ instance isFiniteContinuous_isClosedUnderSubobjects :
     refine ⟨Finite.of_injective _ hf, fun x ↦ ?_⟩
     convert hY (f.hom x) using 1
     ext g
-    simp only [Set.mem_setOf_eq, ← Rep.hom_comm_apply, hf.eq_iff]
+    simp only [Set.mem_ofPred_eq, ← Rep.hom_comm_apply, hf.eq_iff]
 
 instance isFiniteContinuous_isClosedUnderQuotients :
     (IsFiniteContinuous (Λ := Λ) (G := G)).IsClosedUnderQuotients where
@@ -80,7 +80,7 @@ instance isFiniteContinuous_containsZero :
     refine ⟨Finite.of_subsingleton, fun x ↦ ?_⟩
     convert isOpen_univ
     ext g
-    simp only [Set.mem_setOf_eq, Set.mem_univ, iff_true]
+    simp only [Set.mem_ofPred_eq, Set.mem_univ, iff_true]
     exact Subsingleton.elim _ _
 
 /-- A direct sum of finite continuous representations is finite continuous. -/
@@ -91,7 +91,10 @@ theorem IsFiniteContinuous.biprod {X Y : Rep.{v} Λ G} (hX : IsFiniteContinuous 
   have htot (v : (X ⊞ Y).V) : (biprod.inl : X ⟶ X ⊞ Y).hom ((biprod.fst : X ⊞ Y ⟶ X).hom v) +
       (biprod.inr : Y ⟶ X ⊞ Y).hom ((biprod.snd : X ⊞ Y ⟶ Y).hom v) = v := by
     have h := congrArg (fun f : X ⊞ Y ⟶ X ⊞ Y ↦ f.hom v) (biprod.total (X := X) (Y := Y))
-    simpa [Rep.add_hom] using h
+    simp only [Rep.add_hom, Rep.hom_comp, Rep.hom_id, Representation.IntertwiningMap.coe_add,
+      Pi.add_apply,
+      Representation.IntertwiningMap.comp_apply, Representation.IntertwiningMap.id_apply] at h
+    exact h
   have hinj : Function.Injective fun v : (X ⊞ Y).V ↦
       ((biprod.fst : X ⊞ Y ⟶ X).hom v, (biprod.snd : X ⊞ Y ⟶ Y).hom v) := by
     intro v w h
@@ -101,9 +104,16 @@ theorem IsFiniteContinuous.biprod {X Y : Rep.{v} Λ G} (hX : IsFiniteContinuous 
   refine isOpen_setOf_apply_eq_of_subset _ _
     ((hX ((biprod.fst : X ⊞ Y ⟶ X).hom v)).inter (hY ((biprod.snd : X ⊞ Y ⟶ Y).hom v)))
     (by simp) fun h hh ↦ ?_
-  conv_lhs => rw [← htot v]
-  rw [map_add, ← Rep.hom_comm_apply, ← Rep.hom_comm_apply, show X.ρ h _ = _ from hh.1,
-    show Y.ρ h _ = _ from hh.2, htot]
+  have e₁ (a : X.V) : (X ⊞ Y).ρ h ((biprod.inl : X ⟶ X ⊞ Y).hom a) =
+      (biprod.inl : X ⟶ X ⊞ Y).hom (X.ρ h a) := (Rep.hom_comm_apply _ _ _).symm
+  have e₂ (a : Y.V) : (X ⊞ Y).ρ h ((biprod.inr : Y ⟶ X ⊞ Y).hom a) =
+      (biprod.inr : Y ⟶ X ⊞ Y).hom (Y.ρ h a) := (Rep.hom_comm_apply _ _ _).symm
+  have h₁ : X.ρ h ((biprod.fst : X ⊞ Y ⟶ X).hom v) = (biprod.fst : X ⊞ Y ⟶ X).hom v := hh.1
+  have h₂ : Y.ρ h ((biprod.snd : X ⊞ Y ⟶ Y).hom v) = (biprod.snd : X ⊞ Y ⟶ Y).hom v := hh.2
+  calc (X ⊞ Y).ρ h v = (X ⊞ Y).ρ h
+        ((biprod.inl : X ⟶ X ⊞ Y).hom ((biprod.fst : X ⊞ Y ⟶ X).hom v) +
+        (biprod.inr : Y ⟶ X ⊞ Y).hom ((biprod.snd : X ⊞ Y ⟶ Y).hom v)) := by rw [htot]
+    _ = v := by rw [map_add, e₁, e₂, h₁, h₂, htot]
 
 instance isFiniteContinuous_isClosedUnderFiniteProducts :
     (IsFiniteContinuous (Λ := Λ) (G := G)).IsClosedUnderFiniteProducts :=
@@ -140,8 +150,8 @@ instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderKernels where
     have : IsFiniteLocallyConstantSheaf _ := hX
     have : IsFiniteLocallyConstantSheaf _ := hY
     have := IsFiniteLocallyConstantSheaf.kernel f
-    exact IsFiniteLocallyConstantSheaf.of_iso
-      (IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk)
+    exact IsFiniteLocallyConstantSheaf.of_iso (F := kernel f)
+      (IsLimit.conePointUniqueUpToIso (limit.isLimit _) hk)
 
 instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderCokernels where
   cokernels_le := by
@@ -149,8 +159,8 @@ instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderCokernels where
     have : IsFiniteLocallyConstantSheaf _ := hX
     have : IsFiniteLocallyConstantSheaf _ := hY
     have := IsFiniteLocallyConstantSheaf.cokernel f
-    exact IsFiniteLocallyConstantSheaf.of_iso
-      (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
+    exact IsFiniteLocallyConstantSheaf.of_iso (F := cokernel f)
+      (IsColimit.coconePointUniqueUpToIso (colimit.isColimit _) hk)
 
 instance : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderFiniteProducts :=
   have : (isFiniteLocallyConstantSheaf Y Λ).IsClosedUnderBinaryProducts := .mk' (by

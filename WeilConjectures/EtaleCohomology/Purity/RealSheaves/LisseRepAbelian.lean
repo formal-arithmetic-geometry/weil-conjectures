@@ -56,14 +56,18 @@ theorem isLisseRep.biprod {X Y : Rep.{u} (PadicAlgCl l) W.carrier} (hX : W.isLis
   have htot (v : (X ⊞ Y).V) : (biprod.inl : X ⟶ X ⊞ Y).hom ((biprod.fst : X ⊞ Y ⟶ X).hom v) +
       (biprod.inr : Y ⟶ X ⊞ Y).hom ((biprod.snd : X ⊞ Y ⟶ Y).hom v) = v := by
     have h := congrArg (fun f : X ⊞ Y ⟶ X ⊞ Y ↦ f.hom v) (biprod.total (X := X) (Y := Y))
-    simpa [Rep.add_hom] using h
+    simp only [Rep.add_hom, Rep.hom_comp, Rep.hom_id, Representation.IntertwiningMap.coe_add,
+      Pi.add_apply,
+      Representation.IntertwiningMap.comp_apply, Representation.IntertwiningMap.id_apply] at h
+    exact h
   have hinj : Function.Injective (LinearMap.prod (biprod.fst : X ⊞ Y ⟶ X).hom.toLinearMap
       (biprod.snd : X ⊞ Y ⟶ Y).hom.toLinearMap) := by
     intro v w h
-    simp only [LinearMap.prod_apply, Prod.mk.injEq] at h
-    rw [← htot v, ← htot w]
-    simp only [Representation.IntertwiningMap.coe_toLinearMap] at h
-    rw [h.1, h.2]
+    have h₁ : (biprod.fst : X ⊞ Y ⟶ X).hom v = (biprod.fst : X ⊞ Y ⟶ X).hom w :=
+      congrArg Prod.fst h
+    have h₂ : (biprod.snd : X ⊞ Y ⟶ Y).hom v = (biprod.snd : X ⊞ Y ⟶ Y).hom w :=
+      congrArg Prod.snd h
+    rw [← htot v, ← htot w, h₁, h₂]
   refine ⟨Module.Finite.of_injective _ hinj, IsLisse.of_continuous_apply fun φ v ↦ ?_⟩
   have key (g : W.geometric) : φ ((X ⊞ Y).ρ g v) =
       (φ ∘ₗ (biprod.inl : X ⟶ X ⊞ Y).hom.toLinearMap) (X.ρ g ((biprod.fst : X ⊞ Y ⟶ X).hom v)) +

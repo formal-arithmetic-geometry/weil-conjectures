@@ -66,6 +66,8 @@ theorem exists_equivalence_localPolynomial_stalk :
 
 variable {W l}
 
+omit [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
+  [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- If an equivalence `e` identifies the stalks of lisse Weil sheaves with their Weil
 fundamental representations, then the local polynomial `P_x(ℱ, T)` of a lisse Weil sheaf is
 `det (1 - T σ(g) ∣ V')` for every representation `σ` equivalent to the representation of `ℱ` and
@@ -149,11 +151,13 @@ theorem exists_equivalence_localPolynomial_operations :
   refine ⟨e, hP, fun F x g hg ↦ ?_, fun F G x g hg ↦ ?_, fun F G x g hg ↦ ?_⟩
   · have := (e.functor.obj F).property.1
     obtain ⟨b⟩ := hdu F
-    exact localPolynomial_stalk_eq_charpolyRev_of_equiv e hst _ hg b
+    exact localPolynomial_stalk_eq_charpolyRev_of_equiv e hst
+      ⟨F.obj.dual F.property, F.property.dual⟩ hg b
   · have := (e.functor.obj F).property.1
     have := (e.functor.obj G).property.1
     obtain ⟨b⟩ := hte F G
-    exact localPolynomial_stalk_eq_charpolyRev_of_equiv e hst _ hg b
+    exact localPolynomial_stalk_eq_charpolyRev_of_equiv e hst
+      ⟨F.obj.tensorObj G.obj F.property, F.property.tensorObj G.property⟩ hg b
   · obtain ⟨b⟩ := WeilSheaf.nonempty_equiv_stalk_biprod F.obj G.obj x
     rw [b.localPolynomial_eq, FrobeniusModule.localPolynomial_prod, hP F x g hg, hP G x g hg]
 

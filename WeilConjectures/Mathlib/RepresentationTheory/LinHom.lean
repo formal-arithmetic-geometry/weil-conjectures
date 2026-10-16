@@ -7,12 +7,13 @@ module
 
 public import Mathlib.LinearAlgebra.Contraction
 public import Mathlib.RepresentationTheory.Intertwining
+public import WeilConjectures.RepresentationTheory.Filtration
 
 /-!
 # Equivalences of representations: tensor products, homs and duals
 
-Congruence of the tensor product `ρ ⊗ σ` and of the representation `linHom ρ σ` on linear maps
-along equivalences of representations, the bidual `ρ ≅ ρ^∨∨` of a finite-dimensional
+Congruence of the representation `linHom ρ σ` on linear maps along equivalences of
+representations, the bidual `ρ ≅ ρ^∨∨` of a finite-dimensional
 representation, and the identification `ρ^∨ ⊗ σ ≅ Hom(ρ, σ)` given by `dualTensorHom`. Together
 they identify `ρ ⊗ σ` with `Hom(ρ', σ)` for any representation `ρ'` equivalent to the
 contragredient `ρ^∨` (`Representation.Equiv.tprodEquivLinHomOfDual`).
@@ -34,15 +35,6 @@ lemma map_apply (e : ρ.Equiv ρ') (g : G) (v : V) : e (ρ g v) = ρ' g (e v) :=
 
 lemma symm_map_apply (e : ρ.Equiv ρ') (g : G) (v : V') : e.symm (ρ' g v) = ρ g (e.symm v) :=
   e.symm.map_apply g v
-
-/-- The tensor product of two equivalences of representations. -/
-noncomputable def tprodCongr (e₁ : ρ.Equiv ρ') (e₂ : σ.Equiv σ') :
-    (ρ.tprod σ).Equiv (ρ'.tprod σ') :=
-  .mk (TensorProduct.congr e₁.toLinearEquiv e₂.toLinearEquiv) fun g ↦
-    TensorProduct.ext' fun v w ↦ by
-      simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, tprod_apply,
-        TensorProduct.map_tmul, TensorProduct.congr_tmul]
-      exact congrArg₂ _ (e₁.map_apply g v) (e₂.map_apply g w)
 
 /-- The representation on linear maps `Hom(ρ, σ)` is functorial in equivalences: `f ↦ e₂ ∘ f ∘
 e₁⁻¹`. -/
