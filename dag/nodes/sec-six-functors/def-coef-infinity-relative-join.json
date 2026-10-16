@@ -20,7 +20,7 @@
  },
  "kind": "definition",
  "title": "The simplicial relative join",
- "statement": "Use simplicial sets, products and degreewise pullbacks from [def-cbc-enhanced-diagrams-cones], and joins and join cones from [def-coef-infinity-relative-cone]. Given simplicial maps $f:A\\to C$ and $g:B\\to C$, define\n$$A\\star_C B=(A\\star B)\\times_{C\\star C}(\\Delta^1\\times C),$$\nwhere the first map is $f\\star g$. The map $\\rho:\\Delta^1\\times C\\to C\\star C$ sends an $n$-simplex $(\\epsilon,\\sigma)$, with $\\epsilon:[n]\\to[1]$ monotone, to the ordered concatenation of the restriction of $\\sigma$ to the initial $\\epsilon=0$ block in the first copy and its restriction to the final $\\epsilon=1$ block in the second copy. If either block is empty, use the simplex in the other copy. Faces and degeneracies are restrictions and repetitions of these ordered lists. The relative join has inclusions $i_A:A\\to A\\star_C B$ and $i_B:B\\to A\\star_C B$ over the constant parameter values $0$ and $1$. A commuting pair of maps over a base map induces the relative-join map by its maps on these pullback coordinates. In particular $C\\star_C C$ identifies with $\\Delta^1\\times C$. For $u:A\\to C$, put $A_c=A\\times_C\\{c\\}$ and let $j_c:A_c^{\\triangleright}\\to A\\star_C C$ be the map induced by $A_c\\to A$ and $\\{c\\}\\to C$. All objects are small in a fixed sufficiently large universe. These formulas specify data only, with no quasicategory or universal-cone assertion.",
+ "statement": "Use simplicial sets, standard simplices, products and degreewise pullbacks from [def-cbc-enhanced-diagrams-cones], and joins and join cones from [def-coef-infinity-relative-cone]. All objects are small in the fixed sufficiently large universe. Given simplicial maps $f:A\\to C$ and $g:B\\to C$, define the relative join by\n$$A\\star_C B=(A\\star B)\\times_{C\\star C}(\\Delta^1\\times C).$$\nHere $f\\star g$ sends each join summand $A_i\\times B_j$ to $C_i\\times C_j$ by $(a,b)\\mapsto(f(a),g(b))$, with the unique map on a formal degree $-1$ factor. The other pullback map $\\rho_C:\\Delta^1\\times C\\to C\\star C$ sends $(\\epsilon,\\sigma)$ in degree $n$, where $\\epsilon:[n]\\to[1]$ is monotone and $\\sigma\\in C_n$, to the join summand with initial block $\\epsilon^{-1}(0)$ and final block $\\epsilon^{-1}(1)$, using the restrictions of $\\sigma$ to those blocks. An empty block uses the unique formal degree $-1$ element. Thus an $n$-simplex of the relative join is a pair $(z,(\\epsilon,\\sigma))$ satisfying $(f\\star g)(z)=\\rho_C(\\epsilon,\\sigma)$. For a monotone $\\alpha:[m]\\to[n]$, its simplicial operator is\n$$(z,(\\epsilon,\\sigma))\\longmapsto(\\alpha^*z,(\\epsilon\\alpha,\\alpha^*\\sigma)).$$\n\nWrite $p_C:A\\star_C B\\to C$ for $(z,(\\epsilon,\\sigma))\\mapsto\\sigma$. If $\\iota_A:A\\to A\\star B$ and $\\iota_B:B\\to A\\star B$ are the pure-factor inclusions, the relative-join inclusions are\n$$i_A(a)=(\\iota_A(a),(0,f(a))),\\qquad i_B(b)=(\\iota_B(b),(1,g(b))),$$\nwhere $0,1:[n]\\to[1]$ are the constant parameters in degree $n$.\nGiven also simplicial maps $f':A'\\to C'$ and $g':B'\\to C'$, and simplicial maps $a:A\\to A'$, $b:B\\to B'$, $h:C\\to C'$ with $f'a=hf$ and $g'b=hg$, the induced relative-join map is\n$$(z,(\\epsilon,\\sigma))\\longmapsto((a\\star b)(z),(\\epsilon,h(\\sigma))).$$\nWhen both maps $C\\to C$ are identities, identify $C\\star_C C$ with $\\Delta^1\\times C$ by the second pullback projection; its inverse is $(\\epsilon,\\sigma)\\mapsto(\\rho_C(\\epsilon,\\sigma),(\\epsilon,\\sigma))$.\n\nFor a simplicial map $u:A\\to C$ and a vertex $c\\in C_0$, let $\\{c\\}$ mean the copy of $\\Delta^0$ mapping constantly to $c$, and put $A_c=A\\times_C\\{c\\}$. The fiber-cone map\n$$j_c:A_c^{\\triangleright}=A_c\\star\\Delta^0\\longrightarrow A\\star_C C$$\nsends $w$ in degree $n$, with join-block parameter $\\epsilon$, to $((r\\star c)(w),(\\epsilon,c_n))$, where $r:A_c\\to A$ is the pullback projection, $c:\\Delta^0\\to C$ is the vertex map and $c_n$ its degenerate $n$-simplex. These formulas specify data only, with no quasicategory or universal-cone assertion.",
  "source": {
   "document": "https://kerodon.net/tag/0242",
   "place": "Construction 5.2.3.1 and Remark 4.3.3.23; relative joins, inclusions, induced maps, and their fiber cones. Kerodon identifiers, not Stacks tags. Read online; archival copy WANTED."
@@ -102,10 +102,87 @@
    "results": "{\"t\": \"2026-10-16T19:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a relative join of simplicial sets by pulling back the ordinal sum along the simplicial cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.S1\", \"HomotopicalAlgebra.Precylinder.trans_I\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"37c370134715c06e\"}",
    "date": "2026-10-16",
    "verdict": "No match. Independent second reading: returned signatures concern ordinary categories, Quillen Kan fibrations, nerves, or the primitive inner-horn property. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-123. None states this relative quasicategorical assertion; no one-line specialization. The exact-name global grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Jj]oin|relative_join|relativeJoin|SSet.Join",
+   "results": "{\"t\": \"2026-10-16T20:14:48Z\", \"tool\": \"grep\", \"query\": \"relative.?[Jj]oin|relative_join|relativeJoin|SSet.Join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the exact relative-join search has no hits; the broader join search in AlgebraicTopology/SimplicialSet returns substrings of adjoint, jointly and disjoint, not a simplicial relative-join construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T20:14:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"f4b4f5f75c1ca3f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern neighborhoods, subdivision adjunctions or joint surjectivity, not relative joins of simplicial sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define the relative join of two simplicial sets over a common base by a simplicial pullback",
+   "results": "{\"t\": \"2026-10-16T20:14:50Z\", \"tool\": \"leansearch\", \"query\": \"Define the relative join of two simplicial sets over a common base by a simplicial pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"SSet.RelativeMorphism.map\", \"SSet.finite_of_isPullback\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.ctorIdx\", \"SSet.RelativeMorphism\", \"SSet.RelativeMorphism.ext_iff\", \"SSet.RelativeMorphism.mk\"], \"digest\": \"5be0f292597b85f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. RelativeMorphism fixes the restriction of a map to subcomplexes; instFinitePullback is finiteness of a pullback, and neither defines the relative join. Horn pushouts, Quillen generating maps, enriched homs, nerves, augmentation, subdivision and cylinder endpoint inclusions likewise do not define this pullback along the interval-splitting map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative join of simplicial sets as the pullback of their join along the interval times the base",
+   "results": "{\"t\": \"2026-10-16T20:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Relative join of simplicial sets as the pullback of their join along the interval times the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.BicartSq\", \"SSet.RelativeMorphism\", \"SSet.instFinitePullback\", \"SSet.horn₂₁.isPushout\", \"SSet.PtSimplex.RelStruct.map\", \"SSet.PtSimplex.RelStruct\", \"SSet.hasColimits\"], \"digest\": \"4fd175b7e1a22eb0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. RelativeMorphism fixes the restriction of a map to subcomplexes; instFinitePullback is finiteness of a pullback, and neither defines the relative join. Horn pushouts, Quillen generating maps, enriched homs, nerves, augmentation, subdivision and cylinder endpoint inclusions likewise do not define this pullback along the interval-splitting map."
+  },
+  {
+   "tool": "grep",
+   "query": "join|Join",
+   "results": "{\"t\": \"2026-10-16T20:15:05Z\", \"tool\": \"grep\", \"query\": \"join|Join\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\"], \"digest\": \"8730131fc116a237\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the exact relative-join search has no hits; the broader join search in AlgebraicTopology/SimplicialSet returns substrings of adjoint, jointly and disjoint, not a simplicial relative-join construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\" \"Join\"",
+   "results": "{\"t\": \"2026-10-16T20:15:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\" \\\"Join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"SSet\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"Join\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error (not evidence of absence): loogle: Function expected at\n  \"SSet\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"Join\"; corrected by the subsequently recorded comma-separated query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial relative join over C using the map from Delta1 times C to C join C given by splitting a simplex into initial and final blocks",
+   "results": "{\"t\": \"2026-10-16T20:15:09Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial relative join over C using the map from Delta1 times C to C join C given by splitting a simplex into initial and final blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.Augmented.stdSimplex\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SSet.S1\", \"SSet.Augmented\", \"SSet.ι₀\", \"SSet.ι₁\"], \"digest\": \"20c0dabf089964c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. RelativeMorphism fixes the restriction of a map to subcomplexes; instFinitePullback is finiteness of a pullback, and neither defines the relative join. Horn pushouts, Quillen generating maps, enriched homs, nerves, augmentation, subdivision and cylinder endpoint inclusions likewise do not define this pullback along the interval-splitting map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T20:15:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SSet.relativeCellComplexOfMono.ιSigmaStdSimplex_jointly_surjective\", \"SSet.Subcomplex.Pairing.RankFunction.ιSigmaStdSimplex_jointly_surjective\", \"SSet.Subcomplex.Pairing.RankFunction.ιSigmaHorn_jointly_surjective\", \"SSet.instIsLeftAdjointSd\", \"SSet.instIsRightAdjointEx\"], \"digest\": \"6ca3962a6a3d08c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern neighborhoods, subdivision adjunctions or joint surjectivity, not relative joins of simplicial sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets tensor ordinal sum join relative to a base via cylinder pullback",
+   "results": "{\"t\": \"2026-10-16T20:25:32Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets tensor ordinal sum join relative to a base via cylinder pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.ι₀\", \"SSet.ι₁\", \"AugmentedSimplexCategory.tensorObjOf\", \"AugmentedSimplexCategory.inl'\", \"SSet.instMonoidalClosed\", \"SSet.instFiniteTensorObj\", \"SSet.instHasDimensionLETensorObjHAddNat\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\"], \"digest\": \"aaec91cfccdcfd42\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: inspected all eight signatures and Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:46-57, SimplicialSet/Monoidal.lean:173-196. AugmentedSimplexCategory.tensorObjOf is ordinal sum of simplex-category objects, not a join of arbitrary simplicial sets or its relative version. SSet.ι₀ and ι₁ are cylinder endpoints; the remaining hits are Cartesian monoidal structure and finiteness bounds. None defines this relative-join pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "([Rr]elative|[Ff]iberwise|[Ff]ibrewise).*[Jj]oin|[Jj]oin.*[Ss]implicial|[Ss]implicial.*[Jj]oin",
+   "results": "{\"t\": \"2026-10-16T20:25:21Z\", \"tool\": \"grep\", \"query\": \"([Rr]elative|[Ff]iberwise|[Ff]ibrewise).*[Jj]oin|[Jj]oin.*[Ss]implicial|[Ss]implicial.*[Jj]oin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/Analysis/Convex/SimplicialComplex/Basic.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\"], \"digest\": \"45e23f6b9afe9d4c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: all six actual grep hits were inspected. They contain adjoint, disjoint or relatively prime; none concerns the relative join. Read Subdivision.lean:43-61 to check the simplicial-set adjoint hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Augmented\"",
+   "results": "{\"t\": \"2026-10-16T20:25:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Augmented\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Augmented\", \"SSet.Augmented.stdSimplex\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.Augmented.stdSimplex_obj_left\", \"SSet.Augmented.stdSimplex_obj_hom_app\", \"SSet.Augmented.stdSimplex_map_left\", \"SSet.Augmented.stdSimplex_map_right\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\"], \"digest\": \"53c15e6363e900f7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: read Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean:190-193 and StdSimplex.lean:815-829. SSet.Augmented is the category of augmented simplicial objects; its stdSimplex is the terminal augmentation of a standard simplex, not the relative join. The other hits give extra degeneracies of those augmented simplices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-kan-existence",
@@ -113,5 +190,21 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-coef-infinity-relative-join",
+  "worker": "stage1",
+  "summary": "Checked the relative-join definition against Kerodon 0242 and 0234 and both existing definition dependencies. Expanded the pullback simplex coordinates, induced map, endpoints, identity-base inverse and fiber-cone formula; no hypotheses or mathematical clauses changed. No new node or Mathlib leaf is needed. Project-source searches found no attachment.",
+  "blueprint": "Realizes the relative-join data used for local cone filling in the inherited chain from prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction); preserves the inherited ancestor and via list. This is not the unit key node. Whole-blueprint searches for relative join and 0242 found no duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-295008a95",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-295008a95 (reviewer sub-agent of L); spot-checked: I read the whole item and its base (unsplit live) text, both dependency statements, the three DAG citers, the unit record and Kerodon 0242 (Construction 5.2.3.1) and 0234 (Remark 4.3.3.23) online. In Kerodon, ρ:Δ¹×E→E⋆E is the map (projection, id on the 0-fibre into the left copy, id on the 1-fibre into the right copy). This matches the node's block-restriction ρ_C, with the same orientation and the join convention of def-coef-infinity-relative-cone. The delivery only writes out coordinates the base already specified. The hypotheses (arbitrary simplicial sets, no fibrancy) are unchanged and nothing is weakened. I computed each clause myself: ρ is simplicial; i_A and i_B satisfy the pullback equation; the induced map works because (h⋆h)ρ_C=ρ_{C'}(1×h); with identity maps over C the pullback is Δ¹×C; and j_c lands at ρ_C(ε,c_n). Small cases: C=Δ⁰ gives the ordinary join; A or B empty, or C empty, gives the expected result; a mixed edge has f(a)=d₁σ and g(b)=d₀σ; for C=Δ¹ the mixed edge is present; A_c empty gives the apex. Every datum the citers use (J=K⋆_C C, i_K, i_C, j_c, δ⋆1) is defined here. Duplicate search over dag/nodes and blueprint main-20261015 found none. Mathlib has no match (no join of SSet). The item adds no new nodes and no tool_uses, cites no SGA, and leaves the unit unchanged. The only blemish is that the letter a names both simplices of A and the map A→A'; each use is typed, so I left it. I wrote no fixes."
+ }
 }
