@@ -185,5 +185,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-3645d05c4 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full (two colimit/simplicial definitions, def-cbc-enhanced-diagrams-cones, lem-weil-pbc-filtered-category-directed-cofinal, lem-coef-sset-gluing-filtered-equivalences and lem-coef-kan-quillen-right-proper). The statement is unchanged and true: arbitrary small filtered I, no injectivity assumed. Both nodes define weak equivalence the same way: path components and pi_r at every base point of the realization. Step 1: the directed-cofinal node is Lean-closed, so it is a tool and needs no tool_uses entry. Its clause (1) matches Stacks 0032 (categories.tex lemma-directed-category-system). definition-directed-set confirms a directed set is only a preorder, so step 2's antisymmetrization is needed. I checked by hand the cocone equation of step 2, mu_[a'] Z(a->r[a']) = mu_[a] Z(a->r[a]), and both round trips; the step is elementary. Step 3: the directed-poset clause of the gluing node has exactly these hypotheses (small nonempty poset with upper bounds of finite subsets, componentwise weak equivalences, arbitrary transition maps). Step 4: g u_X = u_Y h holds by the uniqueness of the colimit map, and isomorphisms preserve weak equivalences. No new nodes and no cycle (transitive walk over 72 dependencies). The route stays in sk-prop-sf-biduality-general. The gluing node is a strict special case, not a duplicate, and the split is a real reduction. Edge case: the idempotent monoid {1,e} relies on 0032's cofinal A, which is correct; the report's one-object remark is wrong only for that case and is not in the node. I did not open Kerodon 00XE (not archived, WANTED) and checked the mathematics directly. Fix: proof_origin by:document with an unarchived Kerodon URL, although the proof is an agent-written reduction, so I set it to by:agent with an explicit place. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-filtered-colimit-weak-equivalences.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-835c9cf5b",
+  "group": "Q81",
+  "result": "pass",
+  "note": "The Lean statement matches the node clause by clause: small filtered I (IsFiltered, no order or thinness assumed), X Y : I ⥤ SSet.{u}, f : X ⟶ Y, hf : ∀ i, IsWeakHomotopyEquivalence (f.app i) using the single predicate recorded under def-cbc-enhanced-diagrams-cones, conclusion IsWeakHomotopyEquivalence (colimMap f) on degreewise colimits, no Mono assumption. The one universe u is explicit and is the standard size convention. Edge cases checked: empty I excluded as in the node, one-object and idempotent indices, empty simplicial sets, non-injective transitions, parallel arrows. The only proof is sorry; no definitions; the module and theorem docstrings carry Kerodon 00XE and the blueprint id, and the theorem docstring gives the node's four proof steps. Imports are correct: the statement's modules public, the directed-reindexing proof dependency non-public, nothing imported for the gluing lemma, which has no Lean declaration. The node differs from base only in lean, and lean.statement is verbatim equal to the file's signature. No Mathlib or project duplicate found. nt_compile --json: rc=0, no diagnostics; a control copy showed the tool reports errors. Worker report and Second reading sections are present. Cosmetic only: a scrubber replaced '3.2.8.3' in report.md; no change needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FilteredColimitWeakHomotopyEquivalence",
+  "declaration": "SSet.Enhanced.isWeakHomotopyEquivalence_colimMap_of_isFiltered",
+  "file": "lean/Sheaf/AlgebraicTopology/FilteredColimitWeakHomotopyEquivalence.lean",
+  "statement": "theorem isWeakHomotopyEquivalence_colimMap_of_isFiltered (I : Type u) [SmallCategory I] [IsFiltered I] (X Y : I ⥤ SSet.{u}) (f : X ⟶ Y) (hf : ∀ i : I, IsWeakHomotopyEquivalence (f.app i)) : IsWeakHomotopyEquivalence (colimMap f)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
