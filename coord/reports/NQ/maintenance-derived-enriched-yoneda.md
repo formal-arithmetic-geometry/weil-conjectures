@@ -17,12 +17,19 @@ side snapshot so synchronization and workers agree. Both edits are committed
 under their repository's merge lock, with sibling `.maint-NQ-1792141173.bak`
 backups. No Lean file, compiler setting, tool, brief or retry limit is changed.
 
-The premature NQ claim is released through the normal claim tool after queue
-regeneration, with a non-abandonment reason. This is dependency ordering, not
-giving up because of the failure count. The prerequisite tasks/deliveries
-remain available to the normal pipeline. The target becomes stage-2 eligible
-again after both prerequisite interfaces are stated and their own statement
-dependencies are grounded.
+Normal synchronization retired the premature NQ claim at 2026-10-16 17:06:44
+server time, before a manual release was needed. This is queue eligibility,
+not giving up because of the failure count. The existing prerequisite delivery
+branch is preserved. The target can become stage-2 eligible again when reached
+from an active target route, after both prerequisite interfaces are stated and
+their own statement dependencies are grounded.
+
+During validation, an independent launcher update changed reach traversal to
+stop at unsplit nodes (`130d1d3a84` in the side project). The current target route
+therefore also stops above this consumer. The original/corrected eligibility
+comparison and both-interface future-resumption simulation passed before that
+update. The metadata correction remains needed when this route is reopened.
+No runtime failure counter, give-up list, or dispatcher process was edited.
 
 Next worker: use the current node and the prerequisite declarations/imports
 when the queue offers it again. Do not duplicate these foundations or replace
