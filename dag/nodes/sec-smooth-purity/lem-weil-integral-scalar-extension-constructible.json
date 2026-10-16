@@ -291,5 +291,29 @@
    "result": "pass",
    "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-415fd7a9f",
+  "group": "N9",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, dependencies, sources, declarations, docstrings, edge cases, universes, and report sections. Reproduced clean per-file compilation in sandbox and library contexts. No defects or fixes needed; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic",
+  "declaration": "WeilConjectures.sfIntegralScalarExtension_constructible",
+  "declarations": [
+   "WeilConjectures.sfIntegralScalarExtension_constructible",
+   "WeilConjectures.sfConstructibleIntegralScalarExtension",
+   "WeilConjectures.sfConstructibleIntegralScalarExtension_smul"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralScalarExtensionConstructibleIntrinsic.lean",
+  "statement": "theorem sfIntegralScalarExtension_constructible (p l : ℕ) [Fact l.Prime] (_hl : l ≠ p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u}) (K : DerivedCategory (scalarReductionSource.{u, u} l E Y)) (hK : sfIntegralConstructible l E Y K) : sfIntegralConstructible l L Y ((integralScalarExtension l E L ι Y).obj K)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Add the intrinsic preservation statement and its restricted functor for the currently recorded sfIntegralConstructible predicate. Preserve the legacy IntegralScalarExtensionConstructible module and all its declarations unchanged. The linearity equality uses the published canonical integralScalarDerivedAction on ambient morphisms and the identical morphism maps of the full subcategory, avoiding an extra assumed Linear instance."
  }
 }
