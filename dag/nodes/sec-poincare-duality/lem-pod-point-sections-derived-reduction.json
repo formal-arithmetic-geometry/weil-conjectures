@@ -22,7 +22,8 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-abstract-derived-category",
   "def-weil-completed-integral-coefficients",
-  "def-weil-integral-derived-reduction"
+  "def-weil-integral-derived-reduction",
+  "lem-weil-point-sections-finiteness"
  ],
  "proof": [
   {
@@ -353,5 +354,41 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-bda129e5d (reviewer sub-agent of L); spot-checked: Read all ten steps, cited node statements, local sources, and unit/chapter route. Verified completed coefficients, the D(A)-linear comparison, naturality, cone signs, and small cases. No new nodes, cycles, missing dependencies, or repairs. Accepted all ten declared tool uses; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aee40048c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Reviewed the immutable packet, source, dependencies, Lean module, docstrings, edge cases, and report. Verified per-file compilation via scompile.py with sandbox and library overlays; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsDerivedReduction",
+  "declaration": "WeilConjectures.point_sections_derived_reduction",
+  "declarations": [
+   "WeilConjectures.pointReductionDatumAlgClosed",
+   "WeilConjectures.pointReductionModuleDerived",
+   "WeilConjectures.pointReductionIntegralEvalLimits",
+   "WeilConjectures.pointReductionIntegralEvalColimits",
+   "WeilConjectures.pointReductionIntegralLimits",
+   "WeilConjectures.pointReductionIntegralColimits",
+   "WeilConjectures.pointReductionFiniteEvalLimits",
+   "WeilConjectures.pointReductionFiniteEvalColimits",
+   "WeilConjectures.pointReductionFiniteLimits",
+   "WeilConjectures.pointReductionFiniteColimits",
+   "WeilConjectures.pointReductionQuotient",
+   "WeilConjectures.pointReductionModuleTensor",
+   "WeilConjectures.pointReductionTensorSections",
+   "WeilConjectures.pointReductionSectionsTensor",
+   "WeilConjectures.point_sections_derived_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/PointSectionsDerivedReduction.lean",
+  "statement": "theorem point_sections_derived_reduction (_hl : l ≠ D.p) (n : ℕ) : Nonempty (pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n) ∧ (∀ (N : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (C : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ), Nonempty (DerivedCategory.Q.obj C ≅ (pointIntegralSections l E D.k).mapDerivedCategory.obj N.obj) → Nonempty (((ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (pointReductionQuotient l E n)).mapDerivedCategory).obj ((pointReductionTensorSections D l E n).obj N) ≅ DerivedCategory.Q.obj (CochainComplex.mappingCone ((ULift.up (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)) • 𝟙 C)))) ∧ ∀ r : ℤ, Nonempty (pointReductionTensorSections D l E n ⋙ DerivedCategory.homologyFunctor _ r ≅ (sfIntegralConstructible l E (Spec (.of D.k))).ι ⋙ scalarReductionDerivedExtension l E (Spec (.of D.k)) n ⋙ DerivedCategory.homologyFunctor _ r ⋙ pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Index n denotes exponent n+1, covering exactly all positive exponents. The comparison is a natural isomorphism on sfIntegralConstructibleCategory with the actual derived quotient tensor in the quotient-module category. The other conjuncts explicitly give the multiplication-cone representative after restriction and the natural homology/sections isomorphism. Ordinary coefficient rings and their actions are transported only by the already recorded ULift size convention."
  }
 }
