@@ -51,6 +51,8 @@ Source: Stacks Project, Tag 04HX.
 noncomputable def strictHenselizationPointEvaluation
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω := by
-  sorry
+  exact ((smallStrictHenselizationColimitIso barY).inv ≫
+    colimit.desc (smallStrictHenselizationDiagram barY)
+      (strictHenselizationPointCocone barY)).hom
 
 end AlgebraicGeometry.Scheme
