@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-subfield-flat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$F_X$ is flat over $E_X$",
@@ -18,24 +18,152 @@
  ],
  "proof": [
   {
-   "text": "$F_X$ is finite free over $E_X$. On the point, an $E$-basis $b_1,\\dots,b_n$ of $F$ gives an\nisomorphism of $\\underline E$-modules $C(-,F)\\cong C(-,E)^n$, $h\\mapsto(h_i)$ with\n$h=\\sum_ih_ib_i$ (the coordinate functions $F\\to E$ are continuous). The inverse image $p_X^*$\nof [sk-def-sfb-pullback-from-point] is additive and monoidal, so $F_X\\cong E_X^n$ as\n$E_X$-modules. Hence $F_X\\otimes_{E_X}M\\cong M^n$ naturally in $M$, and finite direct sums are\nexact.",
+   "text": "Put $k=\\mathbf Q_\\ell$ and choose an $E$-basis $b_1,\\ldots,b_n$ of $F$. Such a finite basis exists directly from the finite-extension hypotheses: a finite $k$-spanning list of $F$ also spans over $E$; a maximal $E$-linearly independent sublist spans, since any omitted vector outside its span would enlarge it. Write $c:F\\xrightarrow{\\sim}E^n$ for the $E$-linear coordinate map, so $c^{-1}(a_i)=\\sum_i a_i b_i$. Regard $c$ as a $k$-linear equivalence. Both spaces are Hausdorff topological $k$-vector spaces for their norm topologies, addition and scalar multiplication being continuous by the absolute-value inequalities; $F$ is finite-dimensional over $k$. The field $k$ is complete by [def-weil-l-adic-numbers] and nontrivially normed since $|\\ell|_\\ell=\\ell^{-1}\\ne1$. Thus [lem-weil-pbc-finite-dimensional-linear-homeomorphism] makes $c$ and $c^{-1}$ continuous. In particular every coordinate $q_i:F\\to E$ is continuous. This argument uses completeness of $k$, and does not assume completeness of $\\Qlb$.",
    "uses": [
-    "sk-def-sfb-pullback-from-point"
+    "def-weil-l-adic-numbers",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+    "place": "LinearEquiv.toContinuousLinearEquiv, lines 367-372; realizes the blueprint proof sentence about continuous coordinate functions"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-condensed-ring], on each profinite set $S$ the maps\n$$\\beta_S:C(S,E)^n\\longrightarrow C(S,F),\\quad (h_i)\\longmapsto\\sum_i b_i h_i,\\qquad c_S(h)=(q_i\\circ h)_i$$\nare defined on continuous functions. They are inverse, commute with restriction by precomposition, and are $C(S,E)$-linear. Consequently they define inverse morphisms of condensed $\\underline E$-modules, $\\underline E^{\\,n}\\cong\\underline F$. The module-morphism equations of [sk-def-sfb-module-objects] hold because both sides are the same pointwise bilinear multiplication maps; the sheaf tensor product in [sk-def-sfb-sheaf-tensor] is the sheafification of the sectionwise tensor, so equality on these bilinear maps is equality of the internal action maps.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "first two sentences: the basis isomorphism on the point"
+   }
+  },
+  {
+   "text": "Let $P=p_X^*$. The left adjoint and strong monoidal properties in [sk-def-sfb-pullback-from-point] transport the preceding isomorphism to an $E_X$-module isomorphism $E_X^{\\,n}\\cong F_X$. Here is the finite-sum justification: for its right adjoint $Q$, the adjunction identifies $\\operatorname{Hom}(P(A^{\\oplus n}),B)$ with $\\operatorname{Hom}(A^{\\oplus n},Q(B))=\\prod_i\\operatorname{Hom}(P(A),B)$, and likewise $P(0)=0$. Hence $P$ preserves the finite coproduct and its zero morphisms. The projections characterized by $\\pi_i\\iota_j=\\delta_{ij}$ are therefore preserved too; the diagonal and codiagonal defining addition show that $P$ is additive. Strong monoidality transports each equation expressing $\\underline E$-linearity to the corresponding equation over $P(\\underline E)$. The ring actions and the inclusion are exactly the transported ones by [sk-def-sfb-pulled-back-coefficients] and [def-sfb-subfield-coefficient-map]. Write $b_i^X$ and $q_i^X:F_X\\to E_X$ for the resulting basis sections and coordinate morphisms; they satisfy $q_i^X(b_j^X)=\\delta_{ij}$ and $s=\\sum_i b_i^X q_i^X(s)$.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-subfield-coefficient-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "third sentence: transport by the additive monoidal inverse image from the point"
+   }
+  },
+  {
+   "text": "Set $R=E_X$ and $B=F_X$. Internal modules in [sk-def-sfb-module-objects] are the ordinary sheaves of modules over these ring sheaves as defined in [def-weil-sheaf-of-modules-category]: an internal action $R\\otimes M\\to M$, with tensor as in [sk-def-sfb-sheaf-tensor], is precisely a family of bilinear sectionwise maps $R(U)\\times M(U)\\to M(U)$ compatible with restrictions, and the internal unit and associativity equations are precisely the sectionwise module laws. This follows by the tensor and sheafification universal properties and applies to both $R$ and $B$. We may therefore use [lem-weil-pbc-module-sheaves-limits-sectionwise]: small limits of these modules exist and their underlying groups and actions are computed sectionwise. In particular restriction from $B$ to $R$ takes a limit to the same sectionwise limit with restricted action.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-sheaf-of-modules-category",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; the internal-module identification uses the sheafified tensor definition"
+   }
+  },
+  {
+   "text": "Use the coequalizer defining $\\operatorname{Ext}(M)=B\\otimes_R M$ in [sk-def-sfb-change-of-scalars]. After restriction to $R$, define natural inverse maps\n$$\\Phi_M(s\\otimes m)=(q_i^X(s)m)_i,\\qquad \\Psi_M((m_i)_i)=\\sum_i b_i^X\\otimes m_i.$$\nThe first formula is $R$-balanced because each $q_i^X$ is $R$-linear, so it factors through the displayed coequalizer; both formulas are morphisms of sheaves by [sk-def-sfb-sheaf-tensor]. Their composites are identities: $q_i^X(b_j^X)=\\delta_{ij}$ gives $\\Phi_M\\Psi_M=1$, and balancing gives\n$$\\Psi_M\\Phi_M(s\\otimes m)=\\sum_i b_i^X\\otimes q_i^X(s)m=\\Bigl(\\sum_i b_i^Xq_i^X(s)\\Bigr)\\otimes m=s\\otimes m.$$\nThese equalities on elementary tensors extend by bilinearity and sheafification. For a module morphism $f$, the formula $f(q_i^X(s)m)=q_i^X(s)f(m)$ proves naturality. Thus $\\operatorname{Res}\\operatorname{Ext}(M)\\cong M^n$ naturally as $R$-modules; no $B$-linear structure is asserted on a tuple without transporting the $B$-action.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "last sentence: the explicit natural tensor-with-a-basis isomorphism"
+   }
+  },
+  {
+   "text": "Let $D:J\\to\\operatorname{Mod}_R$ be a finite diagram and $L=\\lim_jD_j$. By [lem-weil-pbc-module-sheaves-limits-sectionwise] and the natural isomorphism in the preceding step, the underlying $R$-module of the canonical comparison\n$$\\operatorname{Ext}(L)\\longrightarrow\\lim_j\\operatorname{Ext}(D_j)$$\nis the comparison $L^n\\to\\lim_j(D_j^n)$. On sections this is an isomorphism: an $n$-tuple of compatible families $(x_{i,j})_j$ is the same family of $n$-tuples $(x_{i,j})_i$, with the same compatibility equations for every arrow of $J$. The comparison is $B$-linear. Its inverse as an $R$-linear sheaf morphism is also $B$-linear: for the comparison $a$, injectivity of $a$ and $a(b\\,a^{-1}(y))=b\\,y=a(a^{-1}(b\\,y))$ give the required equation. Hence the comparison is an isomorphism in $\\operatorname{Mod}_B$. For the empty diagram, both underlying limits are the zero sheaf, which also confirms the terminal-object case. Therefore extension of scalars preserves every finite limit, as claimed.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; explicit finite-coordinate limit comparison completes the blueprint proof"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-pullback-from-point"
+  "def-weil-l-adic-numbers",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-subfield-coefficient-map",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "sk-def-sfb-change-of-scalars"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "entire basis proof, expanded using the existing finite-dimensional linear homeomorphism and sectionwise module-limit leaves"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicSubfieldRingObjMap|preservesFiniteLimits_extendScalars|flat.*sheaf|sheaf.*flat",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the finite p-adic coefficient extension on internal module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars between sheaves of modules along a finite extension of p-adic coefficient fields is exact",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, \"extendScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no Mathlib declaration for the internal module-object scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of p-adic coefficient fields the extension of scalars functor on pro-etale sheaves of modules preserves finite limits",
+   "results": "8 hits: instHasFiniteLimitsLightCondMod, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.Finite.forgetPreservesFiniteLimits, instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, PresheafOfModules.toPresheaf_preservesFiniteLimits, PresheafOfModules.evaluation_preservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the finite p-adic coefficient extension on internal module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree|finite_free|Free.*Flat|flat_of_free",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the finite p-adic coefficient extension on internal module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"preservesFiniteLimits\"",
+   "results": "1 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary modules over a ring only; neither the finite-free sheaf construction nor flatness of this coefficient map is supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free sheaf of modules is flat because tensor product with it is a finite direct sum of the identity functor",
+   "results": "8 hits: Module.Flat.of_free, SheafOfModules.isFinitePresentation, Module.FaithfullyFlat.instOfNontrivialOfFree, SheafOfModules.IsFinitePresentation, Module.Flat.of_projective, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.FaithfullyFlat.toFlat, Module.Flat.out",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-module flatness and sheaf finite-presentation results do not state the coefficient-sheaf assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -54,5 +182,21 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-subfield-flat",
+  "worker": "stage1",
+  "summary": "Expanded the original finite-basis proof into six steps. Reused the existing Mathlib leaf for finite-dimensional linear homeomorphisms, applied over Q_ell to avoid assuming that the algebraic closure is complete, and the existing Mathlib leaf for sectionwise module-sheaf limits. Wrote out condensed coordinates, additive monoidal transport, the internal-to-sectionwise module identification, inverse tensor maps, naturality, and the finite-limit comparison including reflection of isomorphisms. No new nodes, no statement correction, and no Lean work. The imported finite-free sibling depends on this item and was not cited.",
+  "blueprint": "Realizes every sentence of lem-sfb-subfield-flat.proof.md: finite basis and continuous coordinates (steps 1-2), additive monoidal pullback (step 3), tensor power and exactness (steps 4-6). Retains the finite-free coefficient route of sk-prop-sfb-cartesian-coefficients, clause 2; does not cite its circular finite-free sibling.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-8533e905f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-8533e905f (reviewer sub-agent of L); spot-checked: Read the full delivery, instructions, report, item, proof, cited DAG nodes, blueprint sources, and finite-free route. Verified all six proof steps, coefficient morphism/category, Mathlib hypotheses, finite-limit comparison, dependency acyclicity, duplicate checks, and edge cases including E=F, Q_l, zero, empty/equalizer diagrams, and X empty. No new nodes or repairs; review.md records the checks. No SGA, Lean, compiler, Lake, git, ssh, or live project use."
+ }
 }
