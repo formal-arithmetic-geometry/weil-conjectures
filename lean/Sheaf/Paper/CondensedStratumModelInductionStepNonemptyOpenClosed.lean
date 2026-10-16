@@ -7,6 +7,16 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.CategoryTheory.ExtOneExtensionClassification
+import Sheaf.Paper.CondensedSheafExtContinuity
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! Intermediate support-induction branch. -/
 

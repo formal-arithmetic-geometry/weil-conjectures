@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 public import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
+import Sheaf.CategoryTheory.FilteredComplexDecalage
 
 /-! # Decalage and the canonical quotient sequence
 

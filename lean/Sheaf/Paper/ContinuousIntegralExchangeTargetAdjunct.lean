@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralComparisons
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.ContinuousIntegralScalarExact
 
 /-! # Coherence of integral localization and the specified exchange map -/
 

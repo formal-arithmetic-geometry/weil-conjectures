@@ -6,6 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
+import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Independence of the corank of a local presentation

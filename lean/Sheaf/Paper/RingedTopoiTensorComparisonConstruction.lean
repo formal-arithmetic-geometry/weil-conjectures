@@ -7,6 +7,9 @@ module
 public import Sheaf.Paper.RingedTopoiTensorComparisonData
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
 
 /-! # Existence of the normalized ringed-topos tensor comparison -/
 
