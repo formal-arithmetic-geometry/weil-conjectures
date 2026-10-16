@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-base-field-cd-cochains",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuous cochains compute Galois cohomology",
- "statement": "Let $G$ be a profinite group and let $\\mathcal C_G$ be the abelian category of\ndiscrete $G$-modules (abelian groups with a $G$-action whose stabilizers are\nopen). Let $C^\\bullet(G,M)$ be the complex of continuous inhomogeneous cochains\n$G^s\\to M$ with the usual differential.\n\n1. $M\\mapsto H^s(C^\\bullet(G,M))$ is a universal $\\delta$-functor on\n   $\\mathcal C_G$ with $H^0=M^G$; hence it is the right derived functor of\n   $M\\mapsto M^G$, i.e. $H^s(G,M)$ as in [def-exc-continuous-cohomology].\n2. If $M=\\bigcup_\\alpha M_\\alpha$ is a directed union of submodules, then\n   $H^s(G,M)=\\varinjlim_\\alpha H^s(G,M_\\alpha)$.\n3. If $G=\\varprojlim_NG/N$ over open normal subgroups $N$ acting trivially on $M$,\n   then $C^\\bullet(G,M)=\\varinjlim_NC^\\bullet(G/N,M)$ along inflation, and\n   $H^s(G,M)=\\varinjlim_NH^s(G/N,M)$.",
+ "statement": "Let $G$ be a profinite group (a compact Hausdorff topological group with a neighbourhood basis of the identity consisting of open normal subgroups), and let $\\mathcal C_G=\\operatorname{Mod}^{\\mathrm{disc}}(\\mathbf Z,G)$ [def-exc-discrete-modules-category]. Thus its objects are abelian groups $M$ with a $G$-action by automorphisms and open element stabilizers, and its arrows are equivariant homomorphisms. Give $M$ the discrete topology. Write $M^G=\\{m\\in M:gm=m\\text{ for all }g\\in G\\}$, and let $H^s(G,-)=R^s((-)^G)$ on $\\mathcal C_G$ [def-sp-left-exact-additive].\n\nLet $C^n(G,M)=\\operatorname{Cont}(G^n,M)$ for $n\\geq0$, with $d^0m(g)=gm-m$ and\n$$d^nc(g_1,\\ldots,g_{n+1})=g_1c(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jc(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}c(g_1,\\ldots,g_n)\\quad(n\\geq1).$$\nHere $H^s(C^\\bullet)=\\ker d^s/\\operatorname{im}d^{s-1}$, with zero incoming image in degree zero. Then:\n\n1. $M\\mapsto H^s(C^\\bullet(G,M))$ is a universal $\\delta$-functor [def-weil-pbc-delta-functor] on $\\mathcal C_G$, with $H^0=M^G$. Hence it is naturally isomorphic, as a $\\delta$-functor, to $H^s(G,M)$.\n2. If $M=\\bigcup_\\alpha M_\\alpha$ is a union of $G$-stable subgroups indexed by a small nonempty directed partially ordered set, with transition maps the inclusions, then the canonical map $\\varinjlim_\\alpha H^s(G,M_\\alpha)\\to H^s(G,M)$ is an isomorphism for every $s\\geq0$ [def-weil-pbc-category-colimit].\n3. If $G=\\varprojlim_N G/N$ over the open normal subgroups $N$ acting trivially on $M$, then the canonical inflation maps identify $C^\\bullet(G,M)$ with $\\varinjlim_N C^\\bullet(G/N,M)$, and $H^s(G,M)$ with $\\varinjlim_N H^s(G/N,M)$ for every $s\\geq0$. The system is ordered by reverse inclusion; for $N'\\subseteq N$, inflation is pullback along $(G/N')^n\\to(G/N)^n$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.md",
   "place": "node det-base-field-cd-cochains, order None",
@@ -19,39 +19,177 @@
   ]
  },
  "stmt_deps": [
-  "def-exc-continuous-cohomology"
+  "def-exc-discrete-modules-category",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-delta-functor",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "A continuous map from the compact space $G^s$ to a discrete set is locally\nconstant with finite image, and is constant on the cosets of $N^s$ for some open\nnormal subgroup $N$.",
-   "uses": [],
-   "elementary": null
+   "text": "Work in the discrete integer representation category of [def-exc-discrete-modules-category], identified with $\\mathcal C_G$ by the unique integer-module structure on each abelian group. It is abelian [def-sp-abelian]: kernels inherit open stabilizers, the stabilizer of a quotient class contains the open stabilizer of any representative, and a pair in a finite direct sum is fixed by the intersection of its two open stabilizers. Thus kernels, cokernels and finite biproducts are those of abelian groups with the induced actions; image and coimage have the same induced action and the usual quotient-to-image identification. This verifies the abelian-category hypothesis of the later tools without imposing finite coefficients.",
+   "uses": [
+    "def-exc-discrete-modules-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, definition-G-module-continuous; elementary kernel, cokernel and biproduct verification"
+   }
   },
   {
-   "text": "*(1).* If $0\\to M'\\to M\\to M''\\to0$ is exact in $\\mathcal C_G$, then\n$0\\to C^s(G,M')\\to C^s(G,M)\\to C^s(G,M'')\\to0$ is exact: injectivity and\nexactness in the middle are clear, and a continuous cochain with values in\n$M''$ takes finitely many values on finitely many clopen pieces, each of which\ncan be lifted to $M$, giving a continuous lift. The long exact cohomology\nsequences make $H^\\bullet(C^\\bullet(G,-))$ a $\\delta$-functor, and\n$H^0=M^G$.\n\nEffaceability: let $I=\\operatorname{Map}_{\\mathrm{cont}}(G,M)$ with\n$(hf)(g)=f(gh)$. A locally constant $f$ is constant on the cosets $gN$ for some\nopen normal $N$, so $hf=f$ for $h\\in N$; thus $I\\in\\mathcal C_G$. The map\n$m\\mapsto\\varphi_m$, $\\varphi_m(g)=gm$, is equivariant\n($(h\\varphi_m)(g)=ghm=\\varphi_{hm}(g)$) and injective ($\\varphi_m(1)=m$). Use\nhomogeneous cochains, i.e. equivariant continuous $F\\colon G^{r+1}\\to I$, which\ncompute the same cohomology as inhomogeneous ones by the usual change of\nvariables. Such $F$ correspond bijectively to arbitrary continuous\n$f\\colon G^{r+1}\\to M$ via $f(g_0,\\dots,g_r)=F(g_0,\\dots,g_r)(1)$ and\n$F(g_0,\\dots,g_r)(t)=f(tg_0,\\dots,tg_r)$, compatibly with the alternating-sum\ndifferentials. On the complex of all continuous $f$, the operator\n$(hf)(g_0,\\dots,g_{r-1})=f(1,g_0,\\dots,g_{r-1})$ satisfies $dh+hd=\\mathrm{id}$ in\npositive degrees, so $H^s(G,I)=0$ for $s>0$. An effaceable $\\delta$-functor is\nuniversal (Stacks Project, Tag 010T); the right derived functors of invariants\nform a universal $\\delta$-functor with the same $H^0$, so the two agree.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-sc-discrete-integer-invariants-infrastructure] with $\\mathcal A=\\mathcal C_G$ and the identity equivalence to the discrete integer representation category. It gives enough injectives and finite-limit preservation by $V(M)=M^G$. This functor is additive because restrictions of equivariant homomorphisms to invariant subgroups preserve sums, and the invariants of a finite direct sum are the direct sum of the invariant subgroups. Thus $R^sV$ is defined by injective resolutions as in [def-sp-left-exact-additive].",
+   "uses": [
+    "lem-sc-discrete-integer-invariants-infrastructure",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 04JF, lemma-G-modules; etale-cohomology.tex Tags 04JP and 04JR, invariants and derived invariants"
+   }
   },
   {
-   "text": "*(2).* A continuous cochain has finite image, which lies in some $M_\\alpha$;\nhence $C^\\bullet(G,M)=\\varinjlim_\\alpha C^\\bullet(G,M_\\alpha)$, and cohomology\ncommutes with filtered colimits of complexes of abelian groups.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-sc-locally-constant-cochains-effaceable] with the same identity equivalence. Continuous maps to a discrete group are exactly locally constant maps: inverse images of singletons are open in either description. Consequently its additive coordinate equivalences identify its complex functor $C$ naturally with the inhomogeneous complex in the statement. Its contract formula multiplies adjacent entries and has a last term dropping the last entry, so its differential is exactly the displayed $d^n$, including $d^0m(g)=gm-m$. The cited statement supplies a cohomological delta-functor $T^s=H^s(C^\\bullet(G,-))$, the natural equality $T^0\\cong V$, and a monomorphism killing $T^s$ for every $s>0$. No comparison theorem with a finite coefficient ring is used.",
+   "uses": [
+    "lem-sc-locally-constant-cochains-effaceable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
+    "place": "Proof (1), the exact continuous cochains, degree-zero identification and coinduced effacement paragraphs; the cited integer-cochain result carries precisely these constructions"
+   }
   },
   {
-   "text": "*(3).* By the first remark every continuous cochain on $G^s$ factors through\n$(G/N)^s$ for some open normal $N$, which may be shrunk to act trivially on $M$;\nthe transition maps are inflations, i.e. pullback of cochains. Cohomology\ncommutes with the filtered colimit.",
+   "text": "By [lem-weil-pbc-effaceable-delta-functor-universal], the effacements from the previous step make $T$ universal. By [lem-weil-pbc-right-derived-universal-delta-functor], applicable using step 2, the derived functors $R^sV$ form a universal delta-functor with degree zero $V$. Extend the degree-zero identification in each direction by universality. Each composite extends the degree-zero identity, so uniqueness makes both composites the identity in every degree. This proves the natural comparison, compatible with connecting maps, and proves clause (1).",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010T, lemma-efface-implies-universal; derived.tex Tags 015B, lemma-higher-derived-functors, and 05TE, lemma-right-derived-delta-functor"
+   }
+  },
+  {
+   "text": "A continuous $c:G^n\\to M$ has finite image: its open fibres cover the compact domain, and a finite subcover contains every nonempty fibre. Moreover it factors through $(G/K)^n$ for an open normal $K$. For each tuple choose a box $\\prod_j x_jK_x$ contained in its fibre, using the open-normal neighbourhood basis; take finitely many such boxes covering $G^n$ and put $K=\\bigcap_x K_x$. Multiplication of any coordinate on the right by an element of $K$ preserves every box of this cover, hence preserves $c$. Therefore $c$ is constant on the fibres of $G^n\\to(G/K)^n$. For $n=0$ the domain is a singleton and the assertion is immediate.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
+    "place": "Opening paragraph: finite image and factorization through an open normal finite quotient; explicit finite-cover argument"
+   }
+  },
+  {
+   "text": "For the union in clause (2), the finite image of any degree-$n$ cochain is contained in some $M_\\alpha$, by directedness and nonemptiness. A function with values in $M_\\alpha$ is continuous exactly when the same function with values in $M$ is continuous, since both have the discrete topology. The maps on cochains are injective, and their union is all $C^n(G,M)$. The differential preserves $M_\\alpha$ because it is $G$-stable, and its formula is unchanged by inclusion. Thus $C^\\bullet(G,M)$ is the degreewise directed colimit of these subcomplexes, with its canonical maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
+    "place": "Proof (2), first sentence: finite-image cochains descend to a coefficient submodule"
+   }
+  },
+  {
+   "text": "Here is the cohomology comparison for either filtered complex system used in clauses (2) and (3). For a small directed diagram $K_i^\\bullet$ of abelian-group complexes, put $Z_i^n=\\ker d_i^n$ and $B_i^n=\\operatorname{im}d_i^{n-1}$, with $B_i^0=0$. Apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to the exact sequences $0\\to Z_i^n\\to K_i^n\\to B_i^{n+1}\\to0$ and $0\\to B_i^n\\to Z_i^n\\to H^n(K_i)\\to0$. Their colimits remain exact. Since $\\varinjlim B_i^{n+1}\\to\\varinjlim K_i^{n+1}$ is injective, the first sequence identifies $\\varinjlim Z_i^n$ with the cycles in $\\varinjlim K_i$; its surjection identifies $\\varinjlim B_i^{n+1}$ with the boundaries there. The second sequence therefore identifies the canonical map $\\varinjlim H^n(K_i)\\to H^n(\\varinjlim K_i)$ as an isomorphism. Apply this to step 6 and then apply the natural comparison from step 4 to obtain clause (2).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB, lemma-directed-colimit-exact, applied to cycles and boundaries"
+   }
+  },
+  {
+   "text": "For clause (3), first choose an open normal $N_0$ acting trivially on all of $M$. Such a subgroup exists under its hypothesis: if the family of all such subgroups were empty its inverse limit would be the one-element group, so the asserted identification would make $G$ trivial, in which case $G$ itself belongs to the family. Intersections keep the family directed under reverse inclusion. For any cochain, step 5 supplies $K$ through which it factors; replace $K$ by $N=K\\cap N_0$. Then $N$ acts trivially on $M$, and the descended cochain on $(G/N)^n$ has the same differential: in the first term $(g_1N)m=g_1m$, and all other terms use quotient multiplication. Conversely every cochain on a finite quotient inflates to a continuous one on $G$. Each inflation into $C^n(G,M)$ is injective because the quotient map is surjective. If two representatives inflate to the same cochain, their pullbacks already agree at the common refinement $N\\cap N'$. These statements prove the canonical degreewise colimit identification, including its differential and all transition maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
+    "place": "Proof (3), finite-quotient factorization with K intersect N_0; the whole-module triviality hypothesis is retained"
+   }
+  },
+  {
+   "text": "The subgroup family of step 8 is a set, and reverse inclusion is nonempty and directed. The argument of step 7, using [lem-weil-pbc-filtered-colimit-abelian-groups-exact], therefore applies to its complexes. Combine it with the chain-level identification from step 8 and clause (1) for $G$ and for each finite (hence profinite) $G/N$. The maps are precisely cochain inflation, so $\\varinjlim_NH^s(G/N,M)\\to H^s(G,M)$ is the claimed canonical isomorphism. This proves clause (3).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB, lemma-directed-colimit-exact; blueprint cochains proof (3), final sentence"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-abelian",
+  "lem-sc-discrete-integer-invariants-infrastructure",
+  "def-sp-left-exact-additive",
+  "lem-sc-locally-constant-cochains-effaceable",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-cochains.proof.md",
+  "place": "Opening finite-cover argument and clauses (1)-(3), supplemented by Stacks Tags 04JP, 04JR, 04JF, 010T, 015B, 05TE and 00DB, and the existing integer-cochain effaceability tool"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous cohomology of a profinite group is derived invariants and commutes with filtered colimits",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, ProfiniteGrp.toLimit_fun_continuous, ProfiniteAddGrp.noConfusionType, ProfiniteGrp.instHasLimit, Profinite.hasColimits",
+   "date": "2026-10-16",
+   "verdict": "Related topological or abstract group cohomology only; no match for this profinite discrete-module derived-invariants theorem and both continuity clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|profinite.*cohomology|cohomology.*[Ff]iltered",
+   "results": "13 hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean; inspected RepresentationTheory/Homological/ContCohomology/Basic.lean:19-41,129-132 and LowDegree.lean:83-87: TopRep homogeneous homology and degree zero, with exactness/comparison listed as TODOs.",
+   "date": "2026-10-16",
+   "verdict": "Related topological or abstract group cohomology only; no match for this profinite discrete-module derived-invariants theorem and both continuity clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology",
+   "results": "12 hits: continuousCohomology, ContinuousCohomology.map_id, ContinuousCohomology.map, ContinuousCohomology.π_map, ContinuousCohomology.map_comp, ContinuousCohomology.π_map_assoc, ContinuousCohomology.map_comp_assoc, ContinuousCohomology.zeroIso",
+   "date": "2026-10-16",
+   "verdict": "Related topological or abstract group cohomology only; no match for this profinite discrete-module derived-invariants theorem and both continuity clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cochains compute right derived invariants for discrete modules of a profinite group and commute with directed unions and finite quotients",
+   "results": "8 hits: ContinuousCohomology.invariants, continuousCohomology, ContinuousCohomology.instLinearActionTopModuleCatInvariants, ContinuousCohomology.MultiInd.functor, ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.homogeneousCochains, Condensed.profiniteSolid, ContinuousCohomology.MultiInd.complex",
+   "date": "2026-10-16",
+   "verdict": "Related topological or abstract group cohomology only; no match for this profinite discrete-module derived-invariants theorem and both continuity clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "derived|effacea|colimit|[Ff]iltered",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\", \"colimit\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Profinite group cohomology of discrete abelian groups is a universal effaceable delta functor and continuous cochains factor through finite quotients",
+   "results": "8 hits: continuousCohomology, groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.epi_δ_of_isZero, ContinuousCohomology.homogeneousCochains, groupCohomology, groupCohomologyIso, groupCohomology.isIso_δ_of_isZero, groupCohomology.shortComplexH0_exact",
+   "date": "2026-10-16",
+   "verdict": "Related topological or abstract group cohomology only; no match for this profinite discrete-module derived-invariants theorem and both continuity clauses."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -62,5 +200,44 @@
   "def-exc-continuous-cohomology"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-base-field-cd-cochains",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary discrete abelian coefficient scope and the blueprint effacement/filtered-colimit route. Replaced the ill-scoped finite-ring definition pointer by the existing arbitrary-ring category and general derived-functor definitions. Reused existing integer-cochain effaceability, injective infrastructure, delta universality and AB5 nodes; wrote out compactness, directed coefficient descent, cycle/boundary colimit comparison and finite quotient inflation. No new nodes.",
+  "blueprint": "Steps 1-4 realize proof (1), including the coinduced-effacement and universal-delta argument; step 5 realizes the opening compactness paragraph; steps 6-7 realize proof (2); steps 8-9 realize proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-discrete-integer-invariants-infrastructure",
+    "why": "General existence of injective resolutions and left exact invariants in the arbitrary integer-coefficient category; this is infrastructure for the blueprint derived-invariants comparison, not a replacement route."
+   },
+   {
+    "node": "lem-sc-locally-constant-cochains-effaceable",
+    "why": "Reuses the existing integer-cochain construction, degree-zero comparison and coinduced effacement required by the unit; no finite-ring comparison suffices."
+   },
+   {
+    "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+    "why": "General effaceability criterion explicitly invoked as Tag 010T in the unit and item proof."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "General derived-functor universality required to identify the two delta-functors, not an alternate group-cohomology route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-discrete-integer-invariants-infrastructure",
+  "lem-sc-locally-constant-cochains-effaceable",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-7272ea268",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-7272ea268 (reviewer sub-agent of L); spot-checked: Read the full item, cited DAG statements, blueprint route, and cited Stacks locations. Verified all nine proof steps, arbitrary integer coefficients, delta-functor comparison, filtered-colimit cycle/boundary argument, finite-quotient inflation, edge cases, and the conditional whole-module triviality hypothesis. No duplicate or new-node issue; review written to review.md."
+ }
 }
