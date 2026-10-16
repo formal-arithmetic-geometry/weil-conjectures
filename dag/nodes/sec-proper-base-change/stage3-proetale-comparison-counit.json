@@ -1,0 +1,148 @@
+{
+ "id": "stage3-proetale-comparison-counit",
+ "kind": "statement",
+ "title": "Counit normalization of the canonical derived comparison",
+ "statement": "Let Λ be a commutative ring, f : U → V a quasi-compact quasi-separated scheme morphism, and K an object of D⁺(U_et, Mod_Λ). Write C_T = ι ⋙ D(ν_T^*) for the comparison on bounded-below inputs, a_f : l_f ⋙ C_U ≅ C_V ⋙ p_f for the specified left-derived pullback comparison [lem-weil-pbc-comparison-pullback], and b_f : r_f ⋙ C_V ≅ C_U ⋙ s_f for the specified derived direct-image comparison [lem-weil-pbc-comparison-direct-image-canonical-mate]. Here l_f ⊣ r_f is the bounded-below etale adjunction and p_f ⊣ s_f is the unbounded pro-etale adjunction. The following equality holds: a_f(r_f K) ≫ p_f(b_f(K)) ≫ ε_pro(C_U K) = C_U(ε_et(K)). The comparisons are exactly the constructions named in the attached Lean statement, including the Plus-to-unbounded comparison isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 2"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [
+  {
+   "text": "the underived direct-image comparison is the inverse mate of the restriction\ncomparison. The pullback comparison is the adjoint conjugate of the same restriction\ncomparison. The mate counit identity therefore holds on sheaves. Apply it to complexes;\nthe defining unit factorization of rightDerivedFunctorPlusBaseChange and uniqueness of\nright derived transformations give the identity on D+. The Plus-to-unbounded compatibility\nisomorphisms transport the two counits to the indicated unbounded counit. This identifies\nthese fixed maps, without choosing a new direct-image isomorphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; specialization and exact-derived transport as in parent proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|homEquiv_counit",
+   "results": [
+    "Mathlib/Algebra/Category/Grp/Adjunctions.lean",
+    "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+    "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+    "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+    "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+    "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+    "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+    "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean"
+   ],
+   "date": "2026-10-16",
+   "verdict": "Generic mate calculus is available; no specialized site-comparison identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": [
+    "CategoryTheory.mateEquiv",
+    "CategoryTheory.mateEquiv_counit",
+    "CategoryTheory.mateEquiv_counit_symm",
+    "CategoryTheory.unit_mateEquiv",
+    "CategoryTheory.unit_mateEquiv_symm",
+    "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+    "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+    "CategoryTheory.mateEquiv_vcomp"
+   ],
+   "date": "2026-10-16",
+   "verdict": "Generic mate calculus is available; no specialized site-comparison identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by coherent pullback comparison isomorphisms preserves adjunction base change mates",
+   "results": [
+    "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+    "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+    "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+    "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+    "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+    "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+    "CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm",
+    "CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm"
+   ],
+   "date": "2026-10-16",
+   "verdict": "Generic mate calculus is available; no specialized site-comparison identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taking the mate of a commutative square of left adjoints is compatible with coherent natural comparison isomorphisms",
+   "results": [
+    "CategoryTheory.mateEquiv_square",
+    "CategoryTheory.unit_mateEquiv",
+    "CategoryTheory.Bicategory.mateEquiv",
+    "CategoryTheory.mateEquiv_apply",
+    "CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso",
+    "CategoryTheory.Bicategory.mateEquiv_square",
+    "CategoryTheory.mateEquiv_counit",
+    "CategoryTheory.mateEquiv"
+   ],
+   "date": "2026-10-16",
+   "verdict": "Generic mate formulas are available and used in the proved transport calculation; they do not identify the fixed derived site comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange",
+  "date": "2026-10-16",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-transport-identifies-exchange",
+   "place": "Proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_counit",
+  "statement": "theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (leftDerivedUpperStarComparisonIso f Λ).hom.app\n        (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≫\n      L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).map\n        ((rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).hom.app K) ≫\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app\n        ((DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).obj K) =\n    (DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).map\n      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bf717",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T135931-L-3400934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bf717",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T135931-L-3400934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, Lean files, DAG nodes, change record, report, and compilation matched the stage-3 review requirements; all delivered modules compiled successfully and mechanical findings were empty."
+ }
+}
