@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-bar-resolution-cochains",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-base-field-cd-inflation",
+   "place": "Proof paragraph 3, “It computes inflation”: “the bar resolutions give the cochain description of inflation”; the explicit bar complex used to compare arbitrary resolutions.",
+   "via": [
+    "lem-sfb-resolution-inflation-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral bar resolution and its cochain complex",
+ "statement": "Let $G$ be a group and let $R=\\mathbf Z[G]$ be its integral group ring. For $n\\geq0$ let $B_n(G)$ be the free left $R$-module with basis $[g_1|\\cdots|g_n]$ indexed by $G^n$ (the empty tuple gives the basis element $[\\ ]$ of $B_0(G)=R$). For $n\\geq1$ prescribe the $R$-linear differential by\n$$d_n[g_1|\\cdots|g_n]=g_1[g_2|\\cdots|g_n]+\\sum_{j=1}^{n-1}(-1)^j[g_1|\\cdots|g_jg_{j+1}|\\cdots|g_n]+(-1)^n[g_1|\\cdots|g_{n-1}].$$\nLet $\\epsilon_B:B_0(G)\\to\\mathbf Z$ send $\\sum_g a_g g[\\ ]$ to $\\sum_g a_g$, where $\\mathbf Z$ has trivial $G$-action. These data form an exact augmented nonnegative chain complex [def-weil-pbc-module-chain-complex-homology] (augmented exactness means that $\\epsilon_B$ is surjective, $\\ker\\epsilon_B=\\operatorname{im}d_1$, and $\\ker d_n=\\operatorname{im}d_{n+1}$ for $n\\geq1$) whose terms are projective: every $R$-linear map from $B_n(G)$ lifts through every surjective $R$-linear map. For any abelian group $M$ with $G$-action by automorphisms, the assignment $a\\mapsto((g_1,\\ldots,g_n)\\mapsto a([g_1|\\cdots|g_n]))$ identifies $\\operatorname{Hom}_R(B_\\bullet(G),M)$, with differential $a\\mapsto a\\circ d$, with the complex of all functions $G^n\\to M$ and differential\n$$(\\delta c)(g_1,\\ldots,g_{n+1})=g_1c(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^{n}(-1)^jc(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}c(g_1,\\ldots,g_n).$$",
+ "source": {
+  "document": "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+  "place": "Rep.barComplex.d at line 346, d_single at 351, barComplex at 405, Rep.barResolution at 430–434; groupCohomology.inhomogeneousCochainsIso, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean:148–154 (differential:86–109)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The homogeneous bar resolution of a group is a free projective resolution of the trivial representation and its Hom complex is the inhomogeneous group cochain complex",
+   "results": "{\"t\": \"2026-10-16T15:51:17Z\", \"tool\": \"leanfinder\", \"query\": \"The homogeneous bar resolution of a group is a free projective resolution of the trivial representation and its Hom complex is the inhomogeneous group cochain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.standardResolution\", \"Rep.barResolution_complex\", \"Rep.standardComplex.x_projective\", \"Rep.FiniteCyclicGroup.resolution\", \"Rep.barComplex\", \"Rep.barComplex.isoStandardComplex\", \"Rep.FiniteCyclicGroup.resolution.π_f\"], \"digest\": \"3c4de93cef9d2b26\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bar complex with terms free group ring modules on G to the n and bar differential is a projective resolution whose Hom complex is group cochains",
+   "results": "{\"t\": \"2026-10-16T15:52:21Z\", \"tool\": \"leanfinder\", \"query\": \"The bar complex with terms free group ring modules on G to the n and bar differential is a projective resolution whose Hom complex is group cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barComplex\", \"Rep.standardResolution\", \"Rep.barResolution_complex\", \"Rep.standardComplex.x_projective\", \"groupCohomology\", \"groupCohomology.inhomogeneousCochainsIso\", \"groupHomology.inhomogeneousChains\"], \"digest\": \"9d35597fcdde56ae\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barResolution\"",
+   "results": "{\"t\": \"2026-10-16T15:51:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"barResolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barResolution_complex\", \"Rep.barResolution.extIso\"], \"digest\": \"d9f9fae41cf325bb\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inhomogeneousCochainsIso\"",
+   "results": "{\"t\": \"2026-10-16T15:52:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"inhomogeneousCochainsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\"], \"digest\": \"ee6754e61512fc5b\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "grep",
+   "query": "def barResolution",
+   "results": "{\"t\": \"2026-10-16T15:53:12Z\", \"tool\": \"grep\", \"query\": \"def barResolution\", \"sub\": \"RepresentationTheory/Homological/Resolution.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"430\", \"438\"], \"digest\": \"6cd6ff7acdf2ca0e\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "grep",
+   "query": "def barResolution|def barComplex|def d |d_single|def inhomogeneousCochainsIso",
+   "results": "{\"t\": \"2026-10-16T15:52:22Z\", \"tool\": \"grep\", \"query\": \"def barResolution|def barComplex|def d |d_single|def inhomogeneousCochainsIso\", \"sub\": \"RepresentationTheory/Homological/Resolution.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"180\", \"193\", \"346\", \"351\", \"369\"], \"digest\": \"73ef2e9ae52266d6\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "grep",
+   "query": "def inhomogeneousCochainsIso|def d |def groupCohomologyIso",
+   "results": "{\"t\": \"2026-10-16T15:52:22Z\", \"tool\": \"grep\", \"query\": \"def inhomogeneousCochainsIso|def d |def groupCohomologyIso\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"86\", \"148\", \"205\", \"213\"], \"digest\": \"64348302f14c2d41\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The bar resolution computes group cohomology by applying Hom and identifying with functions on powers of the group",
+   "results": "{\"t\": \"2026-10-16T15:52:23Z\", \"tool\": \"leansearch\", \"query\": \"The bar resolution computes group cohomology by applying Hom and identifying with functions on powers of the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barResolution_complex\", \"groupCohomologyIsoExt\", \"groupCohomology\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.barComplex\", \"Rep.barResolution.extIso\", \"groupCohomology.inhomogeneousCochainsIso\"], \"digest\": \"790a9dfc303e7edf\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154), specialized to k = ℤ. Read the free terms, differential, augmentation, and component evaluation: Resolution.lean:340–355,393–434; Basic.lean:86–109,148–154. The group-ring module and integral representation descriptions are the same action data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complex of inhomogeneous cochains is isomorphic to linear Yoneda applied to the free bar complex of a representation",
+   "results": "{\"t\": \"2026-10-16T16:11:56Z\", \"tool\": \"leanfinder\", \"query\": \"The complex of inhomogeneous cochains is isomorphic to linear Yoneda applied to the free bar complex of a representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\", \"groupHomology.inhomogeneousChainsIso\", \"inhomogeneousCochains.d_eq\", \"Rep.standardResolution.extIso\", \"Rep.barResolution.extIso\", \"groupHomology.chainsIso₁\", \"groupCohomology.cochainsIso₁\", \"groupCohomologyIso\"], \"digest\": \"f15e3ffbf29940d2\"}",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader search confirms the declarations in mathlib_match; read the cited source clauses and lines, including the augmentation equations for homotopyEquiv and the basis-evaluation components of inhomogeneousCochainsIso."
+  },
+  {
+   "tool": "grep",
+   "query": "def barResolution|def inhomogeneousCochainsIso|theorem d_def",
+   "results": "{\"t\": \"2026-10-16T16:12:52Z\", \"tool\": \"grep\", \"query\": \"def barResolution|def inhomogeneousCochainsIso|theorem d_def\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"417879c4e8a2f143\"}",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader search confirms the declarations in mathlib_match; read the cited source clauses and lines, including the augmentation equations for homotopyEquiv and the basis-evaluation components of inhomogeneousCochainsIso."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Rep.barResolution, groupCohomology.inhomogeneousCochainsIso",
+  "file": "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+  "line": 430,
+  "how": "specializes in one line: set k = ℤ in Rep.barResolution (Resolution.lean:430–434) and groupCohomology.inhomogeneousCochainsIso (GroupCohomology/Basic.lean:148–154). The former has terms Rep.free ℤ G (Fin n → G), i.e. the free ℤ[G]-modules on G^n, and the displayed differential is its definition barComplex.d at Resolution.lean:346–355,405–415; its augmentation at 433 is the sum-of-coefficients augmentation through isoStandardComplex (420–423) and standardComplex.ε (261–264). The latter is the complex isomorphism whose components are evaluation at the free basis, with displayed cochain differential Basic.lean:86–109. A ℤ-linear representation of G is exactly an abelian group with the extended ℤ[G]-module action; no additional hypothesis or comparison theorem is needed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-resolution-inflation-comparison",
+  "date": "2026-10-16",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd"
+}

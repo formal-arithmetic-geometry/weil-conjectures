@@ -19,55 +19,142 @@
  "stmt_deps": [
   "def-weil-pbc-module-chain-complex-homology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bar-resolution-cochains] to $G$ and $G'$, obtaining the exact augmented projective resolutions $B=B(G)$ and $B'=B(G')$ and the evaluation identifications of their Hom complexes with the inhomogeneous group cochains. Write $\\epsilon_B$ and $\\epsilon_{B'}$ for their augmentations. Both resolve the same underlying trivial abelian group $\\mathbf Z$ over their respective group rings.",
+   "uses": [
+    "lem-sfb-bar-resolution-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "Let $\\pi_R:\\mathbf Z[G']\\to\\mathbf Z[G]$ be the ring map induced by $\\pi$. On the free basis in [lem-sfb-bar-resolution-cochains], define $b_n:B'_n\\to\\operatorname{Res}_\\pi B_n$ by $b_n(a[g'_1|\\cdots|g'_n])=\\pi_R(a)[\\pi(g'_1)|\\cdots|\\pi(g'_n)]$. This is $\\mathbf Z[G']$-linear. Each term in the displayed bar differential is preserved: $\\pi(g'_1g'_2)=\\pi(g'_1)\\pi(g'_2)$ and $\\pi_R(g')=\\pi(g')$, while the signs are unchanged. Thus $d_B b=b d_{B'}$; in degree zero the sum of coefficients is preserved, giving $\\epsilon_B b_0=\\epsilon_{B'}$. Under evaluation, precomposition by $b_n$ sends $c$ to $c\\circ\\pi^n$, exactly the inflation cochain map.",
+   "uses": [
+    "lem-sfb-bar-resolution-cochains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-projective-resolution-homotopy-equivalence], with $R=\\mathbf Z[G]$ and $T=\\mathbf Z$, choose augmentation preserving chain homotopy inverse maps $u:P\\to B$ and $v:B\\to P$. Apply the same node over $\\mathbf Z[G']$ to choose $u':P'\\to B'$ and $v':B'\\to P'$. The bar complexes have the required projectivity and augmented exactness by [lem-sfb-bar-resolution-cochains], and $P,P'$ have them by hypothesis. No restriction-of-scalars functor is used in these applications.",
+   "uses": [
+    "lem-sfb-projective-resolution-homotopy-equivalence",
+    "lem-sfb-bar-resolution-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "Here is the elementary effect of a chain homotopy on Hom cohomology. If $a-a'=d_K h+h d_L$ for maps $L\\to K$, and $z:K_s\\to M$ is a cocycle, then $z(a_s-a'_s)=z d^K_{s+1}h_s+z h_{s-1}d^L_s=(z h_{s-1})d^L_s$, a coboundary; for $s=0$ it is zero because $h_{-1}=0$. Applying this calculation to the homotopy inverse equations supplied by [lem-sfb-projective-resolution-homotopy-equivalence] shows that precomposition $u^*:H^s\\operatorname{Hom}_G(B,M)\\to H^s\\operatorname{Hom}_G(P,M)$ is an isomorphism with inverse $v^*$, and likewise for $u',v'$.",
+   "uses": [
+    "lem-sfb-projective-resolution-homotopy-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "These identifications are canonical: any two augmentation preserving maps $P\\to B$ are homotopic by [new-t4-augmented-resolution-lift-homotopy], applied in $\\mathbf Z[G]$-modules with source $P$ and target $B$, and hence induce the same Hom cohomology map by Step 4. The same applies over $\\mathbf Z[G']$. To check the categorical hypotheses explicitly, kernels and cokernels of module maps carry the induced $R$-actions. For an $R$-linear map $t:X\\to Y$, the coimage-to-image map $X/\\ker t\\to\\operatorname{im}t$, $[x]\\mapsto t(x)$, is a well-defined bijection and is $R$-linear since $t(rx)=rt(x)$; its inverse is therefore $R$-linear. Together with the zero module and finite direct sums, these constructions verify that the category of left modules over either group ring is abelian. Epimorphisms are exactly surjections: a nonsurjective map has a nonzero quotient cokernel, whose quotient map and zero map witness failure to be an epimorphism; a surjection is right cancellable on elements. Thus the module lifting property in the hypotheses is also categorical projectivity. Exactness at $B_0$ and every $B_n$ is given by [lem-sfb-bar-resolution-cochains], and the degree-zero augmentation composite with $d_1$ is zero because it is an augmented chain complex. Projectivity of the source terms is part of the hypotheses on $P,P'$. Thus the isomorphisms in Step 4, composed with Step 1's evaluation maps, are precisely the canonical projective-resolution identifications in the statement.",
+   "uses": [
+    "new-t4-augmented-resolution-lift-homotopy",
+    "lem-sfb-bar-resolution-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "Consider $A=(\\operatorname{Res}_\\pi u)\\circ f$ and $A'=b\\circ u'$ from $P'$ to $\\operatorname{Res}_\\pi B$. They are $\\mathbf Z[G']$-linear chain maps and $\\epsilon_B A_0=\\epsilon f_0=\\epsilon'$, while $\\epsilon_B A'_0=\\epsilon_{B'}u'_0=\\epsilon'$. Restricting the action leaves the underlying groups, differentials, kernels and images unchanged, so the augmented target $\\operatorname{Res}_\\pi B$ remains exact by [lem-sfb-bar-resolution-cochains]. Apply [new-t4-augmented-resolution-lift-homotopy] with source $P'$ and this exact target: its statement requires projectivity only of the source, which holds by hypothesis. We obtain a $\\mathbf Z[G']$-linear homotopy $A-A'=d_Bh+h d_{P'}$. In particular no projectivity of $\\operatorname{Res}_\\pi B$ or $\\operatorname{Res}_\\pi P$ is assumed.",
+   "uses": [
+    "lem-sfb-bar-resolution-cochains",
+    "new-t4-augmented-resolution-lift-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  },
+  {
+   "text": "For a $G$-linear cocycle $z:B_s\\to M$, restriction makes $z$ a $G'$-linear cocycle. The homotopy from Step 6 gives $z u_s f_s-z b_s u'_s=(z h_{s-1})d^{P'}_s$, with zero difference for $s=0$, by Step 4. Thus on cohomology $f^*u^*=(u')^*b^*$. Step 2 identifies $b^*$ with inflation on group cochains, and Steps 4–5 identify $u^*$ and $(u')^*$ with the canonical projective-resolution isomorphisms. Conjugating this equality by those isomorphisms proves that precomposition by the given $f$ induces inflation for every $s\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bar-resolution-cochains",
+  "lem-sfb-projective-resolution-homotopy-equivalence",
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+  "place": "Paragraph 3, “It computes inflation”; comparison and bar-resolution details supplied here, with the lifting argument of Stacks Tag 00LS (lemma-compare-resolutions)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "infNatTrans|cochainsMap|def map",
-   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"grep\", \"query\": \"infNatTrans|cochainsMap|def map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"52\", \"63\", \"64\", \"68\"], \"digest\": \"efebf8d8ba404b6f\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:31Z\", \"tool\": \"grep\", \"query\": \"infNatTrans|cochainsMap|def map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"52\", \"63\", \"64\", \"68\"], \"digest\": \"efebf8d8ba404b6f\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   },
   {
    "tool": "grep",
    "query": "inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map",
-   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"grep\", \"query\": \"inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\"], \"digest\": \"53d72e389c2188a7\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:31Z\", \"tool\": \"grep\", \"query\": \"inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\"], \"digest\": \"9ece91e9b7390e68\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   },
   {
    "tool": "leansearch",
    "query": "Any equivariant map of projective resolutions lifting the identity computes pullback along a group homomorphism in group cohomology",
-   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Any equivariant map of projective resolutions lifting the identity computes pullback along a group homomorphism in group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"groupCohomology.map_id\", \"groupCohomology.cochainsMap_id_f_hom_eq_compLeft\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"groupCohomology.H1Map_id\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"groupCohomology.cochainsMap_id\", \"CategoryTheory.ProjectiveResolution.liftIdHomotopy\"], \"digest\": \"37d573ccbe651270\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:37Z\", \"tool\": \"leansearch\", \"query\": \"Any equivariant map of projective resolutions lifting the identity computes pullback along a group homomorphism in group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"groupCohomology.map_id\", \"groupCohomology.cochainsMap_id_f_hom_eq_compLeft\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"groupCohomology.H1Map_id\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"groupCohomology.cochainsMap_id\", \"CategoryTheory.ProjectiveResolution.liftIdHomotopy\"], \"digest\": \"37d573ccbe651270\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   },
   {
    "tool": "loogle",
    "query": "\"liftHomotopy\"",
-   "results": "{\"t\": \"2026-10-16T11:47:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"liftHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp_assoc\", \"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc\"], \"digest\": \"5851bd1161da94bc\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"liftHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp_assoc\", \"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc\"], \"digest\": \"5851bd1161da94bc\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   },
   {
    "tool": "leanfinder",
    "query": "A chain map between projective resolutions lifting the identity induces the inflation map on group cohomology",
-   "results": "{\"t\": \"2026-10-16T11:42:19Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map between projective resolutions lifting the identity induces the inflation map on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomologyIso\", \"groupCohomology.coindIso\", \"groupCohomology.π_comp_H1Iso_hom\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles\", \"groupCohomology.isoShortComplexH1_hom\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"groupCohomology.π_comp_H0Iso_hom\"], \"digest\": \"4431b9b53cb9619a\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:53Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map between projective resolutions lifting the identity induces the inflation map on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomologyIso\", \"groupCohomology.coindIso\", \"groupCohomology.π_comp_H1Iso_hom\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles\", \"groupCohomology.isoShortComplexH1_hom\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"groupCohomology.π_comp_H0Iso_hom\"], \"digest\": \"4431b9b53cb9619a\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   },
   {
    "tool": "leanfinder",
    "query": "Naturality of the projective resolution isomorphism for group cohomology under a quotient group homomorphism",
-   "results": "{\"t\": \"2026-10-16T11:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the projective resolution isomorphism for group cohomology under a quotient group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.infNatTrans\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomology.map_H0Iso_hom_f\", \"groupCohomology.π_comp_H1Iso_hom\", \"groupCohomology.map_H0Iso_hom_f_apply\", \"groupCohomology.H1π_comp_map_apply\", \"groupCohomology.H1π_comp_map\", \"groupCohomology.π_comp_H2Iso_hom\"], \"digest\": \"b6c77e4e9b7e47fd\"}",
+   "results": "{\"t\": \"2026-10-16T15:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the projective resolution isomorphism for group cohomology under a quotient group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.π_map_apply\", \"groupCohomology.infNatTrans\", \"groupCohomology.infNatTrans_app\", \"groupCohomology.π_map\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomology.π_map_assoc\", \"groupCohomology.map_H0Iso_hom_f_assoc\", \"groupCohomology.cocyclesMap_cocyclesIso₀_hom_f\"], \"digest\": \"7dd653c26dd5587d\"}",
    "date": "2026-10-16",
    "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-base-field-cd-inflation",
@@ -83,5 +170,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-resolution-inflation-comparison",
+  "worker": "stage1",
+  "summary": "Wrote the bar-resolution comparison square explicitly, using two new Mathlib leaves for the integral bar resolution and augmentation preserving homotopy equivalence of projective resolutions. Reused the existing arbitrary-exact-target homotopy lemma instead of incorrectly treating a quotient-restricted resolution as projective. Wrote the cocycle/coboundary calculation including degree zero. Statement and maintainer metadata preserved from the live DAG.",
+  "blueprint": "Realizes det-base-field-cd-inflation proof paragraph 3: the bar-cochain description of inflation, comparison with chosen resolutions, and homotopy independence of quotient-equivariant identity lifts.",
+  "tool_uses": [
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic comparison uniqueness into an arbitrary exact augmented target; after quotient restriction the bar resolution need not be projective. No node in sk-lem-base-field-cd supplies this exact-target statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-b16e11bfb",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-b16e11bfb (reviewer sub-agent of L); spot-checked: Read all seven steps, both new nodes, cited statements, sources, and unit/chapter route. The exact-target homotopy lemma validates quotient restriction; the comparison square proves inflation explicitly. Mathlib matches, duplicate searches, edge cases, 1,548 finite-basis checks, and dependency checks passed. Accepted the declared homotopy tool use. Findings recorded in review.md; no repairs needed."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-derived-nakayama-first-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived Nakayama from the first reduction",
@@ -14,40 +14,190 @@
  },
  "stmt_deps": [
   "sk-def-pe-derived-completion",
-  "def-weil-derived-complete"
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "*Vanishing.* Suppose $K_1=0$. By [det-pe-derived-nakayama-resolution] there is a\ntriangle $K_1\\to K_{n+1}\\to K_n\\to$ for every $n\\geq1$. If $K_n=0$, its outer terms\nvanish, so $K_{n+1}=0$. By induction all $K_n$ vanish, hence\n$R\\varprojlim_nK_n=0$, and completeness gives $K\\cong R\\varprojlim_nK_n=0$.",
+   "text": "Put $R=\\mathcal O_{E,X}$ and $\\pi=\\pi_E$. Use the cone and shift conventions of [def-weil-abstract-derived-category]. For a representative complex $M$, [det-pe-derived-nakayama-resolution] identifies its $n$-th reduction with $D_n(M)=\\operatorname{Cone}(\\pi^n:M\\to M)$. Explicitly $D_n(M)^q=M^q\\oplus M^{q+1}$ and $d(x,y)=(dx+\\pi^ny,-dy)$. The transition $D_{n+1}(M)\\to D_n(M)$ is $(x,y)\\mapsto(x,\\pi y)$, and the reduction map is $j_n(m)=(m,0)$. Indeed the map between the two-term coefficient resolutions is multiplication by $\\pi$ in degree $-1$ and the identity in degree $0$, and its augmentation is the quotient map; it is a chain map since $\\pi^n\\pi=\\pi^{n+1}$. Thus these models give the actual reduction tower and compatible reduction maps of [sk-def-pe-derived-completion], not merely unrelated isomorphisms of its levels.",
    "uses": [
-    "det-pe-derived-nakayama-resolution"
+    "def-weil-abstract-derived-category",
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-pe-derived-completion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, first two sentences: functorial finite reductions"
+   }
   },
   {
-   "text": "*Cones.* Represent $f$ by a map of complexes of $\\mathcal O_{E,X}$-modules and let\n$C=\\operatorname{cone}(f)$ be the mapping cone. By\n[det-pe-derived-nakayama-resolution], $K_n$ is represented functorially by the\nmapping cone of $\\pi_E^n$ on the complex $K$, and $R\\varprojlim_n$ of a strict\ntower of complexes $(M_n)$ is represented by the fibre of\n$1-\\text{shift}\\colon\\prod_nM_n\\to\\prod_nM_n$ formed termwise; this computes the\nderived limit because countable products are exact on $X_{\\Proet}$\n([sk-prop-pe-products]). Both constructions are functorial on complexes and\ncommute with mapping cones up to canonical isomorphism, so the canonical maps\n$K\\to R\\varprojlim_nK_n$, $L\\to R\\varprojlim_nL_n$ and\n$C\\to R\\varprojlim_nC_n$ form a morphism of distinguished triangles. If the\nfirst two are isomorphisms, so is the third, by the five lemma on cohomology\nsheaves. Shifts are clear. So $C$ is derived complete.",
+   "text": "For a chain map $f:A\\to B$, write $C=\\operatorname{Cone}(f)$. In degree $q$ the map\n$$D_n(C)^q\\longrightarrow\\operatorname{Cone}(D_n(f))^q,\\qquad(b,a,b',a')\\longmapsto(b,b',a,-a')$$\nis a chain isomorphism: applying the source differential gives $(d_Bb+fa+\\pi^nb',-d_Aa+\\pi^na',-d_Bb'-fa',d_Aa')$, whose signed permutation is exactly the target differential of $(b,b',a,-a')$. It commutes with cone inclusions, cone projections (including their signs), and the transitions $(x,y)\\mapsto(x,\\pi y)$ of Step 1. Likewise $D_n(M[r])\\cong D_n(M)[r]$ is $(x,y)\\mapsto(x,(-1)^r y)$ for every integer $r$. These are direct substitutions in the cone and shift formulas of [def-weil-abstract-derived-category].",
    "uses": [
-    "det-pe-derived-nakayama-resolution"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, sentence asserting that the reduction construction commutes with cones and shifts; expanded signed calculation"
+   }
   },
   {
-   "text": "*Isomorphisms.* With $C$ as above, $C_1=\\operatorname{cone}(f_1)=0$ when $f_1$ is\nan isomorphism. By the first part $C=0$, so $f$ is an isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "For any strict tower of complexes $N=(N_n,t_n)$ put $P(N)=\\prod_{n\\geq1}N_n$, $s=1-T$ where $\\operatorname{pr}_nT=t_n\\operatorname{pr}_{n+1}$, and $H(N)=\\operatorname{Cone}(s)[-1]$. By [det-pe-products-derived] this termwise product is the derived-category product, and the cone triangle of [def-weil-abstract-derived-category], rotated and with the usual sign isomorphism, exhibits $H(N)$ as a derived limit in precisely the sense of [def-weil-derived-limit]. In reordered coordinates,\n$$H(N)^q=P(N)^q\\oplus P(N)^{q-1},\\qquad d(v,u)=(dv,-du-sv).$$\nAll constructions respect quasi-isomorphisms. For $D_n$ this follows by applying [lem-sf-triangle-morphism-iso] to the two cone triangles of multiplication by $\\pi^n$; their first two vertical maps are the given quasi-isomorphism. For $H$, a levelwise quasi-isomorphism induces a quasi-isomorphism of products by [det-pe-products-derived], and the same triangle criterion applied to the two Roos triangles gives a quasi-isomorphism of $H$. Consequently $F(M)=H((D_n(M))_n)$ induces a functor on the derived category: on complexes it preserves identities and composition coordinatewise, and the localization property in [def-weil-abstract-derived-category] applies because it inverts every quasi-isomorphism. It is additive because each displayed formula is additive in the input chain map. Its canonical comparison is represented by\n$$c_M:M\\to F(M),\\qquad m\\longmapsto(((m,0))_{n\\geq1},0);$$\nthis is a chain map because $s((m,0)_n)=0$, is natural in $M$, and has components $j_n$. This is the strict-model realization of the completion map in [sk-def-pe-derived-completion].",
+   "uses": [
+    "det-pe-products-derived",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit",
+    "lem-sf-triangle-morphism-iso",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, Roos-fibre sentence and canonical completion maps; Stacks 07KC and 08TC through the cited product and derived-limit statements"
+   }
+  },
+  {
+   "text": "The Roos construction also commutes with cone triangles, with compatible shifts. For a map $f:N\\to N'$ of strict towers, products identify $P(\\operatorname{Cone}(f))$ with $\\operatorname{Cone}(P(f))$: by [def-weil-category-product], the maps $((b_n,a_n))_n\\mapsto((b_n)_n,(a_n)_n)$ and $((b_n)_n,(a_n)_n)\\mapsto((b_n,a_n))_n$ are inverse morphisms, commuting with inclusions, projections and differentials. Write a degree-$q$ element of $H(\\operatorname{Cone}(f))$ as $(b,a,b',a')\\in P(N')^q\\oplus P(N)^{q+1}\\oplus P(N')^{q-1}\\oplus P(N)^q$. Then\n$$H(\\operatorname{Cone}(f))\\longrightarrow\\operatorname{Cone}(H(f)),\\qquad(b,a,b',a')\\longmapsto(b,b',a,-a')$$\nis a chain isomorphism. Indeed the source differential is $(d b+fa,-d a,-d b'-fa'-s'b,d a'-s a)$ and its signed permutation equals the target differential. The equality $s'P(f)=P(f)s$ is exactly compatibility with tower transitions. The cone inclusions and signed projections commute with this map. For shifts the isomorphism $H(N[r])\\to H(N)[r]$ is $(v,u)\\mapsto(v,(-1)^r u)$. Combining these formulas with Step 2 shows that $F$ preserves the actual cone triangles and shifts of [def-weil-abstract-derived-category]. Under these isomorphisms $c_{\\operatorname{Cone}(f)}$ is the cone map of $(c_A,c_B)$: its two nonzero entries are the constant tuples of $(b,0)$ and $(a,0)$, and the signed permutations change neither. For the shift comparison, the second cone coordinate and the fibre coordinate of $c_{M[r]}$ are both zero, so multiplication of either by $(-1)^r$ fixes the tuple; hence the displayed shift maps send $c_{M[r]}$ exactly to $c_M[r]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, sentence asserting commutation with cones; explicit four-summand identity and compatibility with the canonical maps"
+   }
+  },
+  {
+   "text": "Suppose $K_1=0$. The base of induction is $n=1$. If $K_n=0$, [det-pe-derived-nakayama-resolution] supplies a distinguished triangle $K_1\\to K_{n+1}\\to K_n\\to K_1[1]$. The unique maps from this triangle to the distinguished zero triangle (the $X=0$ instance of TR1 in [def-weil-triangulated-category]) form a morphism of triangles. Its first and third components are isomorphisms because $K_1$ and $K_n$ are zero objects. By [lem-sf-triangle-morphism-iso] the middle component is an isomorphism, so $K_{n+1}=0$. Induction gives $K_n=0$ for every $n\\geq1$.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Vanishing paragraph, induction using successive coefficient triangles"
+   }
+  },
+  {
+   "text": "For the tower in Step 5 every factor is zero, so its derived-category product is zero: by [def-weil-category-product], a map from any object to this product is precisely a family of maps to its zero factors, so is unique; in the additive category the resulting terminal object is also initial, since its identity is zero. The product exists by [det-pe-products-derived]. In the Roos triangle of [def-weil-derived-limit] both product terms are therefore zero. Comparing that triangle with the zero triangle, [lem-sf-triangle-morphism-iso] shows that its first term $R\\varprojlim_nK_n$ is zero as well. Since $K$ is derived complete, [sk-def-pe-derived-completion] identifies $K$ with this derived limit, giving $K=0$.",
+   "uses": [
+    "det-pe-products-derived",
+    "def-weil-derived-limit",
+    "lem-sf-triangle-morphism-iso",
+    "sk-def-pe-derived-completion",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Vanishing paragraph, final sentence: completeness and the zero derived limit"
+   }
+  },
+  {
+   "text": "Let $T=(K\\xrightarrow{f}L\\to C\\to K[1])$ be a distinguished triangle with $K,L$ derived complete. By [def-weil-abstract-derived-category] there are a chain map $g:A\\to B$, its localized cone triangle $T_0$, and an isomorphism of triangles $(a,b,e):T_0\\xrightarrow{\\sim}T$. Steps 2–4 give a distinguished triangle $F(T_0)$, where the last arrow uses the shift comparison $\\sigma_M:F(M[1])\\xrightarrow{\\sim}F(M)[1]$, and a morphism of triangles $(c_A,c_B,c_{\\operatorname{Cone}(g)}):T_0\\to F(T_0)$. Applying $F$ to $a,b,e$ gives isomorphisms on the three objects; the last square commutes because the signed shift formulas of Steps 2 and 4 are natural in chain maps and hence in their localization. Thus $(F(a),F(b),F(e))$ identifies $F(T_0)$ with $F(T)$, so $F(T)$ is distinguished. Naturality of $c$ gives the explicit component identities\n$$c_K=F(a)c_Aa^{-1},\\qquad c_L=F(b)c_Bb^{-1},\\qquad c_C=F(e)c_{\\operatorname{Cone}(g)}e^{-1}.$$\nThe conjugate of the displayed morphism $T_0\\to F(T_0)$ is therefore exactly $(c_K,c_L,c_C):T\\to F(T)$, including the last square with $c_K[1]$. The first two components are isomorphisms by [sk-def-pe-derived-completion]; [lem-sf-triangle-morphism-iso] therefore makes $c_C$ an isomorphism. Thus $C$ is derived complete. For every $r\\in\\mathbf Z$, the signed shift isomorphism $\\sigma_{M,r}:F(M[r])\\xrightarrow{\\sim}F(M)[r]$ of Steps 2 and 4 satisfies $\\sigma_{M,r}c_{M[r]}=c_M[r]$: both send $m$ to the constant tuple of $(m,0)$ with zero fibre component. A shift functor sends the inverse of $c_K$ to the inverse of $c_K[r]$; hence $c_{K[r]}=\\sigma_{K,r}^{-1}c_K[r]$ is an isomorphism. All shifts of complete complexes are complete.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "sk-def-pe-derived-completion",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, morphism of distinguished triangles, two-isomorphism criterion and shifts"
+   }
+  },
+  {
+   "text": "Finally suppose $f:K\\to L$ is a morphism of derived complete complexes and $f_1$ is an isomorphism. Complete it to a distinguished triangle, with cone $C$, using [def-weil-triangulated-category]. Step 7 makes $C$ complete. The first reduction of this triangle is a distinguished cone triangle $K_1\\xrightarrow{f_1}L_1\\to C_1\\to K_1[1]$ by the natural cone comparison in Step 2 (represent the triangle as in Step 7). The zero-cone criterion [lem-kun-distinguished-cone-zero] gives $C_1=0$. Steps 5–6 then give $C=0$. Apply the same zero-cone criterion to the original triangle to conclude that $f$ is an isomorphism.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Isomorphisms paragraph, reduction of the cone and the two zero-cone implications"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-derived-nakayama-resolution"
+  "def-weil-abstract-derived-category",
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-pe-derived-completion",
+  "det-pe-products-derived",
+  "def-weil-derived-limit",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-category-product",
+  "def-weil-triangulated-category",
+  "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Vanishing, Cones and Isomorphisms paragraphs, expanded at chain level with the cited Stacks cone, triangle and product statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived adically complete complex of sheaves is zero if its derived reduction modulo a uniformizer is zero; derived complete complexes are closed under cones",
+   "results": "8 hits: AdicCompletion.mk_zero_of, AdicCompletion.map_exact, IsAdicComplete, IsAdicComplete.toIsPrecomplete, isAdicComplete_iff, Hausdorffification, AdicCompletion, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"complete\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.*[Nn]akayama|[Nn]akayama.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex in the derived category is derived complete and is zero when its derived tensor reduction modulo a principal ideal is zero",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.ShortComplex.exact_iff_isZero_homology, CategoryTheory.ShortComplex.exact_iff_homology_iso_zero, CategoryTheory.ShortComplex.LeftHomologyData.exact_iff, HomologicalComplexUpToQuasiIso, DerivedCategory.instHasZeroObject",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Nakayama: a derived complete object is zero if its first finite quotient tensor is zero, and reduction detects isomorphisms",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.map_exact, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.map_injective, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, IsPrecomplete, IsAdicComplete",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "complete|[Nn]akayama",
+   "results": "6 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean; grep subdirectory Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: hits concern ordinary adic completion, derived-category foundations or triangle completion, not derived completeness for the pulled-back integral coefficient sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|homotopy.*[Ll]imit|[Nn]akayama|adicCompletion",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; grep subdirectory Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match: mapping-cone spectral objects and homological-functor exactness do not state the completion functor or its fixed-object criterion; the grep hits are an open command and an unrelated limitSequence construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy inverse limit of the cones of powers of an endomorphism is an exact functor; its fixed objects are closed under mapping cones",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.map_distinguished_exact, HomotopyCategory.spectralObjectMappingCone_ω₁, CategoryTheory.Functor.homologySequenceComposableArrows₅_exact, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_exact₃",
+   "date": "2026-10-16",
+   "verdict": "no match: mapping-cone spectral objects and homological-functor exactness do not state the completion functor or its fixed-object criterion; the grep hits are an open command and an unrelated limitSequence construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -66,5 +216,29 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-pe-derived-nakayama"
+ "unit": "sk-lem-pe-derived-nakayama",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-derived-nakayama-first-reduction",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and its coefficient category fixed. Replaced the incomplete imported cone argument by explicit strict reduction and Roos models, signed cone and shift comparisons, a localization/naturality check, finite-reduction induction, and the cited two-isomorphism and zero-cone criteria. Reused existing nodes throughout; removed the unused completed-coefficient definition from statement dependencies. No new nodes. Second reading added explicit product-universal-property citations and the conjugation equations for arbitrary distinguished triangles; no new nodes or statement change.",
+  "blueprint": "Steps 5–6 realize Vanishing; Steps 1–4 and 7 realize Cones, including the functoriality and signs formerly left implicit; Step 8 realizes Isomorphisms. This follows the sole step of sk-lem-pe-derived-nakayama: successive coefficient triangles, completeness, closure under cones, then detection modulo the first power.",
+  "tool_uses": [
+   {
+    "node": "det-pe-products-derived",
+    "why": "The Cones paragraph explicitly requires termwise derived products to form the Roos model. This general theorem for any ring sheaf, and its preservation of quasi-isomorphisms, is in the products unit; no statement of the present Nakayama unit supplies that tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-products-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-7425a1867",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-7425a1867 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all eight proof steps, cited node statements, blueprint/unit route, and cited literature. Cone, shift, Roos, induction, completeness, and reduction-detection arguments check with the stated pulled-back coefficient category; edge cases and signs were tested. No new nodes, duplicates, false statements, route violations, or missing citations found. Review written to review.md."
+ }
 }
