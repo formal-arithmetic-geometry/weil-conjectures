@@ -1,6 +1,6 @@
 # Work queue
 
-19 items; claim with `tools/claim.py next <group> [--stage N]`.
+18 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (19)
+## Stage 3: modules to prove (18)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -17,7 +17,7 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientExchange` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalModelGluing` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarFunctionPresentations` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
 | `Sheaf.Paper.ContinuousEtaleLocalLattices` | 7 | 1 | proof |
 | `Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars` | 8 | 1 | proof |
@@ -27,7 +27,6 @@
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 10 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiTensorComparisonConstruction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing` | 11 | 1 | proof |
-| `Sheaf.Algebra.Homology.RingedToposAdaptedFlatResolution` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
