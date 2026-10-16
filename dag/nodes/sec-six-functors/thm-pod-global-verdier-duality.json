@@ -3,7 +3,10 @@
  "blueprint": {
   "is": "thm-pod-global-verdier-duality",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-thm-sf-global-duality",
+   "thm-sf-global-duality"
+  ]
  },
  "kind": "statement",
  "title": "Global Verdier duality at the point",
@@ -18,45 +21,100 @@
  ],
  "proof": [
   {
-   "text": "Apply the independently proved exchange [fix-cor-verdier-exchange]\nto $f=a_X$ and the coefficient object at $s$:\n\n$$\nD_sRa_{X!}K\\cong Ra_{X*}D_XK.\n$$",
+   "text": "Instantiate the Verdier exchange [fix-cor-verdier-exchange] at $f=a_X:X\\to s$, $Y=s$, and $M=K$. The smooth separated finite-type scheme and the admissibility of $a_X$ are given by [def-pod-conventions]. The remaining structure morphism is $a_s=\\operatorname{id}_s$. It satisfies [def-weil-exceptional-adjoint-admissibility]: take the identity compactification, cohomological-dimension bound $0$, identity right adjoint with identity unit and counit, and interval shifts $c^- = c^+ =0$; all coefficient comparisons are identities. Thus all three admissibility hypotheses of the exchange hold. It gives the canonical isomorphism $e_{\\Lambda,K}:D_s(Ra_{X!}K)\\xrightarrow{\\sim}Ra_{X*}D_XK$, natural in $K$ and compatible with the specified coefficient comparisons and shifts.",
    "uses": [
-    "fix-cor-verdier-exchange"
+    "def-pod-conventions",
+    "fix-cor-verdier-exchange",
+    "def-weil-exceptional-adjoint-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "first displayed paragraph"
+   }
   },
   {
-   "text": "By [lem-pod-point-dualizing-complex], $D_s$ is the derived\ncoefficient dual. Apply the point equivalence of\n[def-weil-finite-coefficient-point]; the two resulting global\nfunctors are those of [def-weil-ordinary-compact-cohomology].\nThis proves the asserted isomorphism and its naturality and shift\ncompatibility. Its construction uses only tensor–Hom adjunction,\nthe compact-support projection formula, and the adjunction for\n$Ra_{X!}$; it does not use global Poincare duality.\nFor $K$ site-perfect in the sense of\n[def-weil-site-perfect-complex], the tensor, internal-Hom,\nevaluation, and cohomology comparisons are\n[lem-fix-operation-reduction]. The smooth dualizing object and\nits counit reduce compatibly by\n[thm-pur-finite-reduction-of-purity]. Each constituent of the\nadjunction comparison therefore commutes with coefficient change,\nso their composite does too. Finally $D_X\\Lambda_X=\\omega_X$\nby tensor–Hom evaluation of the unit object, giving the specialization.\nProperness of $X_0$ is used nowhere above: the exchange\n[fix-cor-verdier-exchange] needs only that $a_X$ is exceptionally\nadmissible, $Ra_{X!}$ and $Ra_{X*}$ enter as different functors with no\ncomparison between them, and the smooth dualizing object and its finite\nreduction ([thm-pur-finite-reduction-of-purity]) are stated for smooth\nseparated morphisms. The same argument applies word for word to a smooth\nproper $X$ over $k$ that is not defined over $k_0$, which is the proper\ncase of [thm-sf-global-duality].",
+   "text": "Apply the functor $\\operatorname{Fib}_s$ defined at all four coefficient stages in [def-weil-finite-coefficient-point] to $e_{\\Lambda,K}$; functors carry an isomorphism and its inverse to inverse morphisms. For $C=Ra_{X!}K$, [lem-pod-point-dualizing-complex] identifies the evaluated $D_sC$ with the derived coefficient dual of $\\operatorname{Fib}_s C$. By [def-weil-ordinary-compact-cohomology], $\\operatorname{Fib}_s C=R\\Gamma_c(X,K)$ and $\\operatorname{Fib}_s(Ra_{X*}D_XK)=R\\Gamma(X,\\mathbb D_XK)$. These identifications give the displayed canonical isomorphism. Their functoriality and the naturality and shift compatibility of $e$ give naturality in $K$ and shift compatibility of the result. No assertion that evaluation is an equivalence is needed for this step.",
    "uses": [
     "lem-pod-point-dualizing-complex",
     "def-weil-finite-coefficient-point",
-    "def-weil-ordinary-compact-cohomology",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph, first half"
+   }
+  },
+  {
+   "text": "Let $K$ be site-perfect as defined in [def-weil-site-perfect-complex]. For a stipulated finite reduction or scalar extension $Q$, write $L_Q$ and $R_Q$ for the comparison maps on the source and target of the exchange $e_{\\Lambda,K}$. The coefficient compatibility in the statement of [fix-cor-verdier-exchange] is the equality $R_Q\\circ Q(e_{\\Lambda,K})=e_{\\Lambda',QK}\\circ L_Q$. Apply the point functor of step 2 to this equality. The tensor, internal-Hom and evaluation identifications used to read its left side as coefficient duality respect coefficient change by [lem-fix-operation-reduction], on its stated domains: finite-quotient internal Hom uses the site-perfect first variable, integral reduction uses its derived-complete domain, and field stages use rationalization and common-stage scalar extension. That lemma also preserves the adjunction units and counits and the compact-support comparisons. For $f=a_X$ (smooth separated of pure relative dimension $d$ between separated finite-type $k$-schemes) and the unit on $s$, the smooth orientation $\\eta_X=\\gamma_{a_X,\\Lambda}$ is compatible with every stipulated coefficient change: for $A_{E,n}\\to A_{E,m}$ with $1\\le m\\le n$, [thm-pur-finite-reduction-of-purity] identifies the reduced orientation with the orientation at level $m$ and identifies the corresponding smooth traces; for $\\mathcal O_E\\to A_{E,n}$, [thm-pur-adic-reconstruction] says the integral orientation reduces exactly to $\\gamma_{a_X,\\Lambda_n}$ at every level $n$; for integral scalar extension $E\\subset F$, the integral orientations chosen in [lem-pur-adic-purity-scalar-naturality] satisfy its comparison equation $b_{F/E}\\circ C_{F/E}(\\gamma_E)=\\gamma_F\\circ a_{F/E}$; and [thm-pur-rational-and-qbar-purity] says rationalization and finite extension of coefficient fields carry that adic orientation to the $E$- and $\\Qlb$-orientations. Substituting these identifications in the displayed equality gives the required compatibility of the global isomorphism under the smooth orientation comparisons. In particular, this argument uses the comparison square supplied by the exchange; it does not infer a new finite-quotient ordinary-direct-image comparison isomorphism from the operation-reduction lemma.",
+   "uses": [
     "def-weil-site-perfect-complex",
+    "fix-cor-verdier-exchange",
     "lem-fix-operation-reduction",
     "thm-pur-finite-reduction-of-purity",
-    "fix-cor-verdier-exchange",
-    "thm-sf-global-duality"
+    "thm-pur-adic-reconstruction",
+    "lem-pur-adic-purity-scalar-naturality",
+    "thm-pur-rational-and-qbar-purity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph, site-perfect compatibility"
+   }
+  },
+  {
+   "text": "For the unit object, [def-pod-conventions] gives $\\mathbb D_X\\Lambda_X=R\\mathcal Hom_X(\\Lambda_X,\\omega_{X,\\Lambda})$. The unit Hom identity is evaluation at $1$: $h\\mapsto h(1)$, with inverse $x\\mapsto(r\\mapsto rx)$. Since internal Hom from the free rank-one unit is already the identity exact functor, its derived functor is the identity as well. Thus $\\mathbb D_X\\Lambda_X\\cong\\omega_{X,\\Lambda}$, and substitution in step 2 gives $R\\Gamma_c(X,\\Lambda_X)^\\vee\\cong R\\Gamma(X,\\omega_{X,\\Lambda})$.",
+   "uses": [
+    "def-pod-conventions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph, final specialization"
+   }
+  },
+  {
+   "text": "For $X=X_0\\times_{k_0}k$, steps 1--4 apply to every separated smooth $X_0$ in [def-pod-conventions]: no step replaces $Ra_{X!}$ by $Ra_{X*}$, so properness is not needed. For the alternative smooth proper geometrically connected $k$-scheme $X$ of pure dimension $d$, use the proper branch of [thm-sf-global-duality]. Its hypotheses require no descent to $k_0$ and its conclusion supplies the canonical global isomorphism, naturality, shifts, coefficient compatibilities and unit specialization. Applying $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point] reads its isomorphism in the point category as the displayed isomorphism of coefficient complexes. These imply the requested clauses, with coefficient compatibility restricted to site-perfect $K$; its comparisons are read under the smooth orientation of the smooth separated $a_X$ through the same orientation compatibilities as in step 3 ([thm-pur-finite-reduction-of-purity], [thm-pur-adic-reconstruction], [lem-pur-adic-purity-scalar-naturality], [thm-pur-rational-and-qbar-purity]), which require no descent and no properness. This appeal uses its constructible exceptional adjoint and does not assume that properness supplies the stronger ambient admissibility condition.",
+   "uses": [
+    "def-pod-conventions",
+    "thm-sf-global-duality",
+    "def-weil-finite-coefficient-point",
+    "thm-pur-finite-reduction-of-purity",
+    "thm-pur-adic-reconstruction",
+    "lem-pur-adic-purity-scalar-naturality",
+    "thm-pur-rational-and-qbar-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph, properness and non-descent clause"
+   }
   }
  ],
  "proof_deps": [
-  "fix-cor-verdier-exchange",
-  "lem-pod-point-dualizing-complex",
+  "def-pod-conventions",
+  "def-weil-exceptional-adjoint-admissibility",
   "def-weil-finite-coefficient-point",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-site-perfect-complex",
+  "fix-cor-verdier-exchange",
   "lem-fix-operation-reduction",
+  "lem-pod-point-dualizing-complex",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-adic-reconstruction",
   "thm-pur-finite-reduction-of-purity",
+  "thm-pur-rational-and-qbar-purity",
   "thm-sf-global-duality"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "the proof paragraphs"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -86,5 +144,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pod-global-verdier-duality",
+  "worker": "stage1",
+  "summary": "Audited the imported theorem against the current main-20261015 blueprint and the slopmaster2 source. No new child nodes are needed: the exchange, point dualizing complex, point equivalences, ordinary/compact cohomology, site-perfect coefficient comparisons, and finite reduction of smooth purity already exist. Rewrote the proof into five cited steps, separating the exchange, point identification, site-perfect coefficient compatibility, unit specialization, and the proper non-descent case; no sorry-free declaration states the full canonical natural theorem. Second reading explicitly checks admissibility at the point, applies evaluation only as a functor, and uses the exchange comparison square without claiming extra finite-quotient ordinary-direct-image isomorphisms. The unit Hom identity is written out and statement/proof provenance is separated. Maintainer reader fix: the smooth-orientation compatibility in steps 3 and 5 now cites the orientation comparisons for integral reduction, integral scalar extension, rationalization and common-stage extension (thm-pur-adic-reconstruction, lem-pur-adic-purity-scalar-naturality, thm-pur-rational-and-qbar-purity), not only the finite-level square.",
+  "blueprint": "Realizes the two proof paragraphs of thm-pod-global-verdier-duality: Verdier exchange and point identification; site-perfect reduction/scalar extension; unit specialization; and the proper non-descent observation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-52f41b76c",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-52f41b76c (reviewer sub-agent of L); spot-checked: Read the item, its main-20261015 and master sources (statement byte-identical, unchanged), every cited node statement and the unit sk-thm-sf-package. Step 1: the exchange hypotheses hold. a_X is admissible by def-pod-conventions, whose 'finite coefficient' wording covers all four stages. id_s is admissible: FullCD(id;0), identity adjoint, c±=0. The adjoint is the same constructible Ra^! throughout. Step 2: lem-pod-point-dualizing-complex (stmt_dep finite-coefficient-point) gives Fib_s D_s C ≅ (Fib_s C)^∨, and def-weil-ordinary-compact-cohomology defines RΓ and RΓ_c, as the step says. Step 3 correctly limits itself to the domains of lem-fix-operation-reduction (site-perfect first variable, no finite-quotient Ra_*). Step 4 is genuinely elementary. Step 5's proper non-descent branch is covered by thm-sf-global-duality, which drops the admissibility hypothesis. The route is fine and the graph stays acyclic. The slopmaster2 GlobalDuality.lean declarations are Nonempty-only and correctly not attached. No new nodes, no SGA. One fault, now repaired (C4/E5): steps 3 and 5 claimed compatibility 'under the smooth orientation' for scalar extension and integral reduction but cited only the finite-level square thm-pur-finite-reduction-of-purity. I added on-route citations: thm-pur-adic-reconstruction (O_E→A_n), lem-pur-adic-purity-scalar-naturality (integral E⊂F) and thm-pur-rational-and-qbar-purity (rationalization and Q̄_ℓ). Step 5 now also applies Fib_s to the point-category isomorphism. Recomputed proof_deps. The fix is in fixes/dag/nodes/sec-six-functors/thm-pod-global-verdier-duality.json.; 1 file(s) fixed by the reviewer"
+ }
 }

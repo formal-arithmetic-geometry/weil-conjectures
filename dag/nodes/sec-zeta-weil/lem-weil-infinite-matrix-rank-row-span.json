@@ -7,7 +7,7 @@
    "place": "step 1 of its split (source: ## Proof, first paragraph; the Hankel formulation of rationality is literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (proof of (1.7)⇒(1.6): rationality means that the Hankel determinants vanish), stated without proof)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rank of an infinite matrix and its row span",
@@ -26,27 +26,201 @@
   "def-weil-vector-space-dimension",
   "def-weil-finite-dimensional-subspace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix $r\\geq1$ and $r$ linearly independent rows $A_{i_1},\\ldots,A_{i_r}$. Their indices are distinct, since a repeated row gives a nontrivial relation. Relabel the family so $i_1<\\cdots<i_r$; relabeling the coefficients in a linear relation preserves independence. Let $U$ be their span. By [lem-weil-dimension-span-independent-family], $U$ is finite-dimensional of dimension $r$. By [lem-weil-finite-coordinate-detection], there is a finite set $J$ of column indices such that restriction $U\\to K^J$ is injective; list $J$ in increasing order. The restricted rows remain independent: a relation among their restrictions is the restriction of a vector in $U$, so injectivity makes that vector zero, and original independence makes all coefficients zero. By [lem-weil-dimension-span-independent-family] and [def-weil-matrix-rank], the resulting finite rectangular matrix has rank $r$. The last clause of [def-weil-matrix-rank] supplies an $r\\times r$ square minor with nonzero determinant, and that square matrix itself has rank $r$ (the same rank characterization gives at least $r$, and a square matrix of size $r$ has no larger minor). The minor selects subsets of the already increasing row and column lists, so it is a finite square submatrix of $A$ in the precise sense of [def-weil-submatrix]. Thus any independent family of $r$ rows yields a finite square submatrix of rank $r$, and $\\rho(A)\\geq r$ by [def-weil-extended-natural-supremum].",
+   "uses": [
+    "lem-weil-dimension-span-independent-family",
+    "lem-weil-finite-coordinate-detection",
+    "def-weil-matrix-rank",
+    "def-weil-submatrix",
+    "def-weil-sequence-subspace",
+    "def-weil-extended-natural-supremum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "first paragraph (the proof is in this companion file): independent rows are detected by finitely many coordinates, then by a nonzero square minor; conversely a nonzero minor detects independent rows"
+   }
+  },
+  {
+   "text": "Now suppose $V$ is finite-dimensional, of dimension $d$, and let $B$ be any finite square submatrix. Apply [lem-weil-span-independent-subfamily] to the finite family of rows of $B$, obtaining $k$ independent rows spanning its row space. By [lem-weil-dimension-span-independent-family] and [def-weil-matrix-rank], $k=\\operatorname{rank}(B)$. The corresponding $k$ original rows of $A$ are independent as infinite sequences: any relation among them restricts on the columns of $B$ to a relation among the independent selected rows of $B$, so all its coefficients vanish. These original rows lie in $V$. By [lem-weil-independent-family-card-le-dimension], $k\\leq d$. Thus every finite square submatrix has rank at most $d$, and [def-weil-extended-natural-supremum] gives $\\rho(A)\\leq d$. This includes the empty submatrix, whose row span is zero.",
+   "uses": [
+    "lem-weil-span-independent-subfamily",
+    "lem-weil-dimension-span-independent-family",
+    "def-weil-matrix-rank",
+    "def-weil-submatrix",
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-extended-natural-supremum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "first paragraph (the proof is in this companion file): independent rows are detected by finitely many coordinates, then by a nonzero square minor; conversely a nonzero minor detects independent rows"
+   }
+  },
+  {
+   "text": "Still assuming $V$ finite-dimensional, choose finitely many generators of $V$ using [def-weil-finite-dimensional-subspace]. Each generator is, by the meaning of span, a finite linear combination of original rows. The union of the finitely many row indices appearing in these combinations is finite, and those rows span $V$: their span contains the generators and is contained in $V$. By [lem-weil-span-independent-subfamily], this finite row family has an independent subfamily spanning $V$. If it has $k$ elements, [lem-weil-dimension-span-independent-family] gives $k=\\dim_KV=d$. If $d>0$, Step 1 therefore supplies a finite square submatrix of rank $d$, so $\\rho(A)\\geq d$; combined with Step 2 this gives equality. If $d=0$, Step 2 and the nonnegativity in [def-weil-extended-natural-supremum] give $0\\leq\\rho(A)\\leq0$, again equality.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-sequence-subspace",
+    "lem-weil-span-independent-subfamily",
+    "lem-weil-dimension-span-independent-family",
+    "def-weil-extended-natural-supremum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "first paragraph (the proof is in this companion file): independent rows are detected by finitely many coordinates, then by a nonzero square minor; conversely a nonzero minor detects independent rows"
+   }
+  },
+  {
+   "text": "If $V$ is not finite-dimensional, construct independent original rows of every finite length by induction. The empty family starts the induction. Given independent rows $A_{i_1},\\ldots,A_{i_r}$, if every original row belonged to their span, that finite family would span $V$, contradicting [def-weil-finite-dimensional-subspace]. Choose a row $A_j$ outside this span. In a relation $\\sum_{t=1}^r b_tA_{i_t}+cA_j=0$, a nonzero $c$ would express $A_j=-c^{-1}\\sum_t b_tA_{i_t}$ in the old span; hence $c=0$, and old independence forces every $b_t=0$. This extends the independent family and proves the induction. For each $r\\geq1$, Step 1 gives a finite square submatrix of rank $r$. These ranks are unbounded, so [def-weil-extended-natural-supremum] gives $\\rho(A)=\\infty$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-sequence-subspace",
+    "def-weil-extended-natural-supremum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "first paragraph (the proof is in this companion file): independent rows are detected by finitely many coordinates, then by a nonzero square minor; conversely a nonzero minor detects independent rows"
+   }
+  },
+  {
+   "text": "By Steps 3 and 4, the finite-dimensional case gives $\\rho(A)=\\dim_KV\\in\\mathbf N$ and the other case gives $\\rho(A)=\\infty$. Since $\\infty$ is distinct from every natural number in [def-weil-extended-natural-supremum], $\\rho(A)$ is finite if and only if $V$ is finite-dimensional.",
+   "uses": [
+    "def-weil-extended-natural-supremum",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "first paragraph (the proof is in this companion file): independent rows are detected by finitely many coordinates, then by a nonzero square minor; conversely a nonzero minor detects independent rows"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extended-natural-supremum",
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-matrix-rank",
+  "def-weil-sequence-subspace",
+  "def-weil-submatrix",
+  "def-weil-vector-space-dimension",
+  "lem-weil-dimension-span-independent-family",
+  "lem-weil-finite-coordinate-detection",
+  "lem-weil-independent-family-card-le-dimension",
+  "lem-weil-span-independent-subfamily"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+  "place": "first paragraph; expanded finite-coordinate/minor argument, including finite row basis extraction and the independent-row induction"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -n 'cRank\\|eRank\\|iSup\\|⨆' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Rank.lean; grep -rn 'eRank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean | grep -v Matrix/Rank.lean",
-   "results": "Matrix.cRank / Matrix.eRank (Rank.lean:62, 101): for arbitrary (also infinite) index types, the dimension of the span of the columns, as a cardinal / in ℕ∞; eRank_submatrix_le (:111): the eRank of any submatrix is at most that of the matrix; eRank_le_card_width/height; no iSup or ⨆ in the file; other eRank hits are Matroid.eRank (unrelated)",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has the row-span dimension of an infinite matrix (eRank of the transpose) and the inequality ρ(A) ≤ eRank Aᵀ via eRank_submatrix_le with eRank_toNat_eq_rank for finite blocks, but not the equality with the supremum over finite square submatrices"
+   "tool": "leanfinder",
+   "query": "supremum of ranks of finite square submatrices equals dimension of row span of an infinite matrix over a field",
+   "results": "8 hits: Matrix.eRank, Matrix.cRank, Matrix.rank, Matrix.eRank_le_card_height, Matrix.eRank_le_card_width, rank_matrix, Matrix.eRank_toNat_eq_finrank, Matrix.rank_eq_finrank_span_row",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.eRank, Matrix.rank_eq_finrank_span_row, BddAbove",
+   "results": "0 hits: No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'rank.*submatrix.*det\\|det.*submatrix.*rank\\|exists_submatrix' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Data/Matrix",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "query": "bddAbove_range_rank_submatrix_iff|eRank_submatrix_le|rank_eq_finrank_span_row",
+   "results": "4 hits: Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean; Mathlib subdirectory LinearAlgebra/Matrix",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite square submatrix ranks supremum row span dimension infinite matrix",
+   "results": "8 hits: Matrix.rank, Matrix.rank_eq_finrank_span_row, Matrix.rank_submatrix_le, Matrix.eRank_submatrix_le, Matrix.finiteDimensional, rank_matrix_module, rank_matrix, rank_span_of_finset",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension of subspace and linear map image bounded by dimension of a finite dimensional vector space",
+   "results": "8 hits: Submodule.finrank_map_le, LinearMap.finrank_range_le, rank_map_le, lift_rank_map_le, LinearMap.rank_le_range, rank_range_le, Submodule.finrank_map_subtype_eq, lift_rank_range_le",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.finrank_mono",
+   "results": "1 hits: Submodule.finrank_mono",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_mono|finrank_map_le|finiteDimensional_submodule|finiteDimensional_range",
+   "results": "20 hits: Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean; Mathlib subdirectory LinearAlgebra",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension of a linear map range is at most domain dimension and dimension of a subspace is at most ambient dimension",
+   "results": "8 hits: LinearMap.rank_le_domain, LinearMap.finrank_range_le, lift_rank_range_le, LinearMap.rank_le_range, Submodule.finrank_map_le, LinearMap.finrank_range_add_finrank_ker, rank_range_le, LinearMap.rank",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extended rank of an arbitrary infinite matrix is the supremum of the ranks of finite submatrices",
+   "results": "8 hits: Matrix.eRank, Matrix.cRank, Matrix.eRank_submatrix_le, Matrix.eRank_le_card_height, Matrix.eRank_le_card_width, Matrix.eRank_toNat_eq_rank, Matrix.eRank_toNat_eq_finrank, Matrix.lift_cRank_submatrix_le",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "iSup.*[Rr]ank|[Rr]ank.*iSup|rank.*submatrix|submatrix.*rank",
+   "results": "8 hits: Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Echelon/Pivot.lean, Mathlib/LinearAlgebra/Matrix/Echelon/Pivot.lean, Mathlib/LinearAlgebra/Matrix/Echelon/Decomposition.lean; Mathlib subdirectory LinearAlgebra/Matrix",
+   "date": "2026-10-16",
+   "verdict": "no match: no finite-submatrix supremum equality; the hits are definitions, inequalities, or finite-dimensional ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinite matrix has rank equal to the supremum of its finite restrictions; finite independent functions remain independent on some finite set",
+   "results": "8 hits: LinearMap.le_rank_iff_exists_linearIndependent_finset, LinearMap.le_rank_iff_exists_linearIndependent, LinearIndependent.aleph0_le_rank, Module.le_rank_iff_exists_finset, natCast_le_rank_iff_finset, LinearIndependent.rank_matrix, LinearIndependent.finrank_eq_zero_of_infinite, rank_le",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not identify the supremum of finite square submatrix ranks with the dimension of the full row span"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.eRank, iSup",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not identify the supremum of finite square submatrix ranks with the dimension of the full row span"
+  },
+  {
+   "tool": "grep",
+   "query": "iSup|sSup|exists.*submatrix|rank.*submatrix",
+   "results": "23 hits: Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean; source subdirectory LinearAlgebra/Matrix",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not identify the supremum of finite square submatrix ranks with the dimension of the full row span"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the space spanned by the rows of an infinite matrix is the supremum of the ranks of all finite square submatrices.",
+   "results": "8 hits: Matrix.rank_eq_finrank_span_row, Matrix.rank, Matrix.finiteDimensional, rank_matrix_module, Matrix.rank_eq_finrank_span_cols, Module.rank_def, rank_matrix_module', Matrix.eRank",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not identify the supremum of finite square submatrix ranks with the dimension of the full row span"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +240,20 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-criterion"
+ "unit": "sk-prop-criterion",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-infinite-matrix-rank-row-span",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint finite-coordinate/minor proof without changing the statement. Every finite rank is bounded using an independent subfamily of its rows and the existing independent-family cardinal bound. Finite generators of the global row span involve only finitely many original rows, so existing finite-subfamily and dimension leaves produce a row basis. Infinite-dimensionality gives arbitrarily many independent rows by an explicit induction. No new nodes: the existing finite-coordinate detection lemma and three existing Mathlib leaves supply every non-elementary linear-algebra input.",
+  "blueprint": "Realizes prop-weil-rationality-criterion, main-20261015 companion prop-weil-rationality-criterion.proof.md, first paragraph: finite-coordinate detection, extraction of a nonzero square minor, and the converse independence argument. This paragraph is identical to the historical master proof cited in the original item source."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-9aa98afe0",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-9aa98afe0 (reviewer sub-agent of L); spot-checked: I read the whole item and wrote no fixes. It has no new nodes and the statement is unchanged. The proof follows the first paragraph of the blueprint proof of prop-weil-rationality-criterion (main-20261015 prop-weil-rationality-criterion.proof.md), which is identical to the master ## Proof first paragraph. Step 1: r independent rows span a space of dimension r (lem-weil-dimension-span-independent-family). lem-weil-finite-coordinate-detection applies because that span is a finite-dimensional subspace of K^N, and gives finitely many columns that keep the rows independent. The minor clause of def-weil-matrix-rank then gives a nonzero r-by-r minor, which is a submatrix with increasing indices as def-weil-submatrix requires. Step 2: an independent spanning subfamily of the rows of B has rank(B) elements. The matching original rows are independent, because any relation among them restricts to B's columns, and they lie in V. The card-le-dimension leaf is applied only after V is assumed finite-dimensional. Step 3: finitely many generators involve only finitely many rows, so a row basis of size d exists; d=0 is handled separately. Step 4: the induction (empty base, extension by a row outside the span, c^{-1} argument) gives every r, so the sup is infinite. Step 5 combines the two cases. Checked cases: zero matrix (rho 0), repeated nonzero rows (rho 1), all-ones matrix (rho 1), infinite identity (rho infinite). Route: the item stays inside unit sk-prop-criterion; the three sk-thm-weil1 nodes are Mathlib leaves used as tools, so no tool_uses is needed. Duplicates: rg over the DAG and the main-20261015 blueprint found no node stating this equality, so same_as [] is correct. Lean: slopmaster2 Matrix.bddAbove_range_rank_submatrix_iff (Rank.lean:86-89) only proves bounded iff finite-dimensional, not the value of rho, so there is nothing to attach. This is not a target node, so the base-change and coefficient checks do not apply. No SGA source is used."
+ }
 }

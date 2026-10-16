@@ -3,38 +3,138 @@
  "blueprint": {
   "is": "lem-sf-detection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Detection of isomorphisms at the point",
- "statement": "In the setting of [lem-sf-point], let $u:P\\to Q$ be a morphism of the\npoint category. Then $u$ is an isomorphism if and only if\n$\\operatorname{Hom}_s(\\Lambda[-r],u)$ is an isomorphism for every\n$r\\in\\mathbf Z$.",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], with $q=p^a$ and $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Let $n\\ge1$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Put $s=\\operatorname{Spec}k$. Use the bounded constructible point category $D^b_c(s,\\Lambda)$ of [def-weil-finite-coefficient-point], on the small pro-etale site of $s$: at integral coefficients this is the derived-complete category, at $E$ the rationalized category, and at $\\overline{\\mathbf Q}_\\ell$ the common finite-stage category specified there. Let $\\Lambda_s$ be its coefficient unit, with the stage-specific meaning of [def-weil-ordinary-compact-cohomology] (the constant finite coefficient sheaf, the completed integral coefficient sheaf, or its rationalized/common-stage image), placed in cohomological degree zero. For every $P,Q\\in D^b_c(s,\\Lambda)$ and every morphism $u:P\\to Q$, $u$ is an isomorphism if and only if for every $r\\in\\mathbf Z$ the postcomposition map\n$$\n\\operatorname{Hom}_{D^b_c(s,\\Lambda)}(\\Lambda_s[-r],P)\\longrightarrow\\operatorname{Hom}_{D^b_c(s,\\Lambda)}(\\Lambda_s[-r],Q),\\qquad g\\longmapsto u\\circ g,\n$$\nis an isomorphism of $\\Lambda$-modules (equivalently, is bijective).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-identification/lem-sf-detection.md",
   "place": "node lem-sf-detection, order 2183"
  },
  "stmt_deps": [
-  "lem-sf-point"
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof": [
   {
-   "text": "By [lem-sf-point] the functor $\\Fib_s$ is an exact equivalence, so it\nsuffices to decide the question for bounded complexes of $A_{E,n}$-modules\nwith finite cohomology. There a morphism is an isomorphism in the derived\ncategory if and only if it is a quasi-isomorphism, i.e. if and only if it\ninduces isomorphisms on all cohomology modules; and\n$H^r(-)=\\operatorname{Hom}_s(\\Lambda[-r],-)$ by [lem-sf-point].\nEquivalently, the cone of $u$ has vanishing cohomology, and a bounded\ncomplex with vanishing cohomology is zero.",
+   "text": "If $u$ is invertible, postcomposition with $u^{-1}$ is inverse to postcomposition with $u$ on $\\operatorname{Hom}_s(\\Lambda[-r],-)$: $(u^{-1}\\circ u)\\circ g=g$ and $(u\\circ u^{-1})\\circ h=h$. This proves the forward implication for every integer $r$, at every coefficient stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-identification/lem-sf-detection.md",
+    "place": "Proof, implication from an isomorphism to isomorphisms on all cohomology modules"
+   }
+  },
+  {
+   "text": "Conversely assume all the displayed Hom maps are isomorphisms. Write $F=\\operatorname{Fib}_s$ and $v=F(u)$. Use the four actual targets of $F$ in [def-weil-finite-coefficient-point]: $D^b_{\\mathrm{fin}}(A_{E,n})$, $D^b_{\\mathrm{fg}}(\\mathcal O_E)$, $D^b_{\\mathrm{fd}}(E)$, and the common-stage category $D^b_{\\mathrm{fd}}(\\Qlb)$. Each $F$ is an exact equivalence by [lem-weil-point-fibre-equivalence]. Use only the last, cohomological identity in [lem-sf-point], interpreted with these coefficient-specific targets. Its natural identifications $\\theta^r_C:\\operatorname{Hom}_s(\\Lambda[-r],C)\\simeq H^r(F(C))$ give $H^r(v)\\theta^r_P=\\theta^r_Q\\operatorname{Hom}_s(\\Lambda[-r],u)$. Thus each $H^r(v)$ is invertible. Use the cohomology functors and their action on morphisms from [def-weil-coefficient-cohomology-modules]. At $\\Qlb$, this means the map on the cohomology vector spaces obtained by scalar extension to $\\Qlb$ from a common finite field of definition is bijective. The target $D^b_{\\mathrm{fin}}(A_{E,n})$ printed in [lem-sf-point] is used only at finite coefficients; its unqualified use at the other stages is a source error, not an identification used here.",
    "uses": [
-    "lem-sf-point"
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-point",
+    "def-weil-coefficient-cohomology-modules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "The three displayed point equivalences and the final stagewise equivalence; item proof, cohomology/Hom identification"
+   }
+  },
+  {
+   "text": "For $\\Lambda=A_{E,n},\\mathcal O_E$, or $E$, regard $v$ in the ordinary derived category of $\\Lambda$-modules. These target categories are full subcategories, as specified in [def-weil-finite-coefficient-point]. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] with $\\mathcal A=\\operatorname{Mod}_\\Lambda$: the cohomology maps from step 2 make $v$ invertible in $D(\\Lambda)$. Its inverse is a morphism between the same two objects and hence lies in the full subcategory. Finally the equivalence [lem-weil-point-fibre-equivalence] reflects this inverse: lift it by fullness to $w:Q\\to P$; faithfulness applied to $F(wu)=1$ and $F(uw)=1$ gives $wu=1$ and $uw=1$. Thus $u$ is invertible at these three stages.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, label lemma-acyclic; cohomological criterion also in Mathlib DerivedCategory.isIso_iff, HomologySequence.lean:88-89"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\Qlb$, use [def-weil-point-fd-qlbar-category], rather than identifying that category with an ambient category of arbitrary sheaves or arbitrary $\\Qlb$-complexes. The two objects and $v$ have a representative $v_L:V\\to W$ in $D^b_{\\mathrm{fd}}(L)$ over a common finite extension $L/\\Ql$. By the definition of cohomology at the algebraically closed stage in [def-weil-coefficient-cohomology-modules], together with the scalar-extension cohomology formula in the common-stage definition, step 2 says that $H^r(v_L)\\otimes_L\\Qlb$ is bijective for every $r$. In bases the matrix of $H^r(v_L)$ has entries in $L$; its rank is the largest size of a nonzero minor, and a minor is nonzero in $L$ exactly when it is nonzero in $\\Qlb$. Hence its rank equals both source and target dimensions already over $L$, so $H^r(v_L)$ is bijective. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to $\\operatorname{Mod}_L$ to invert $v_L$ in $D(L)$; the inverse belongs to the same full finite-dimensional bounded subcategory. Write $F(P)=(E_0,A)$, $F(Q)=(E_1,B)$ and $v=[L,v_L]$, so $V=T_{L/E_0}A$ and $W=T_{L/E_1}B$. The class $[L,v_L^{-1}]$ is a morphism $F(Q)\\to F(P)$. By the defining composition rule its composites with $v$ are $[L,\\operatorname{id}_V]$ and $[L,\\operatorname{id}_W]$. These are the identities of $F(P)$ and $F(Q)$: their identity representatives at $E_0$ and $E_1$ transition to $\\operatorname{id}_V$ and $\\operatorname{id}_W$ at $L$, since the transition is a functor conjugated by the tower isomorphisms. The equivalence [lem-weil-point-fibre-equivalence] reflects this inverse by the fullness-and-faithfulness argument of step 3. This proves the converse also at the algebraically closed stage.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final displayed equivalence and preceding definition of the common finite-stage colimit; item proof, reduction to module complexes"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-point"
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-fibre-equivalence",
+  "lem-sf-point",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-point-fd-qlbar-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-identification/lem-sf-detection.md",
-  "place": "## Proof"
+  "place": "Proof: point equivalence, cohomological isomorphism criterion, and shifted-unit cohomology; corrected coefficient targets from def-weil-finite-coefficient-point"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of bounded constructible complexes on a geometric point is an isomorphism if Hom from every shift of the constant coefficient sheaf is bijective",
+   "results": "8 hits: HomologicalComplex.instRespectsIsoQuasiIso, QuasiIso, CategoryTheory.ShortComplex.quasiIso_of_isIso, quasiIso_of_isIso, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.ShortComplex.QuasiIso, quasiIsoAt_of_isIso, CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison'_of_homologyData",
+   "date": "2026-10-16",
+   "verdict": "no match for the point-category item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in a derived category is an isomorphism if and only if its maps on all cohomology objects are isomorphisms",
+   "results": "8 hits: DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.isIso_Qh_map_iff, HomotopyCategory.mem_quasiIso_iff, CochainComplex.quasiIsoAt₀_iff, HomologicalComplex.mem_quasiIso_iff, HomotopyCategory.quasiIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the point-category item"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "no result: query rejected for unknown identifier; corrected by the subsequent quoted-name query"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*(homology|cohomology)|isIso_of.*(homology|cohomology)",
+   "results": "9 hits: Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean; directory Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the point-category item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted coefficient unit objects jointly detect isomorphisms in the bounded constructible derived category of the small pro-etale site of an algebraically closed field",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-16",
+   "verdict": "no match for the point-category item"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isIso_iff\"",
+   "results": "2 hits: DerivedCategory.isIso_iff, DerivedCategory.Plus.isIso_iff",
+   "date": "2026-10-16",
+   "verdict": "generic cohomological criterion found, already carried by lem-weil-pbc-unbounded-derived-iso-cohomology; the item still needs the geometric-point comparison, so it is not a one-line Mathlib specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isIso_iff|theorem isIso_iff",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; directory Algebra/Homology/DerivedCategory; HomologySequence.lean:88-89 (DerivedCategory.isIso_iff), Plus.lean:214 (DerivedCategory.Plus.isIso_iff), read in source",
+   "date": "2026-10-16",
+   "verdict": "generic cohomological criterion found, already carried by lem-weil-pbc-unbounded-derived-iso-cohomology; the item still needs the geometric-point comparison, so it is not a one-line Mathlib specialization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +156,36 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-identification"
+ "unit": "sk-thm-sf-identification",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-detection",
+  "worker": "stage1",
+  "summary": "Replaced the imported one-paragraph proof by four steps. Reused the existing general cohomological isomorphism Mathlib leaf and the correct four-stage point-equivalence theorem. Expanded the inherited context into a self-contained statement without changing its claim or any coefficient stage; avoided the rejected etale Lean attachment and the erroneous use of the finite coefficient target at nonfinite coefficients. Wrote naturality and the common finite-stage rank/inverse argument explicitly. No new nodes.",
+  "blueprint": "Current main-20261015 statement, order 2527, has the same mathematical claim, with the standing context and coefficient unit now explicit. The master proof paragraph is realized by step 1 (forward functoriality), step 2 (point equivalence and H^r=Hom), step 3 (module cohomological criterion and reflection of inverses), and step 4 (the same reduction at the common finite-stage algebraically closed coefficient). The optional cone reformulation is unnecessary. The unit identification argument is not replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic point-category equivalence with the correct target at all four coefficient stages; the unit uses the point evaluation reduction but lem-sf-point prints only the finite-stage target, incorrectly unqualified."
+   }
+  ],
+  "source_errors": [
+   {
+    "place": "lem-sf-point statement and imported lem-sf-detection proof: unqualified target D^b_fin(A_{E,n})",
+    "error": "The setting permits Lambda=O_E,E,Qlb as well as A_{E,n}; a Lambda point category cannot be identified with A_{E,n}-complexes at the nonfinite stages. For example the integral unit has endomorphism ring O_E, whereas multiplication by varpi_E^n is zero on the finite coefficient unit.",
+    "repair": "Use the existing lem-weil-point-fibre-equivalence with its four coefficient-specific targets. Use only the cohomology/Hom clause of lem-sf-point. Do not edit the separately owned prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-fibre-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-73f15c22c",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-73f15c22c (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. It is the item plus its report: no new nodes, no fixes, no SGA citation. Statement: the claim of blueprint lem-sf-detection (master order 2183, main-20261015 order 2527) is kept exactly. Its 'In the setting of' is replaced by the explicit datum: four coefficient stages, s = Spec k, the point category of def-weil-finite-coefficient-point, and Λ_s from def-weil-ordinary-compact-cohomology. Both implications, every shift r and arbitrary morphisms are kept; nothing is weakened. Source error: confirmed. lem-sf-point's unqualified target D^b_fin(A_{E,n}) is false at the stages O_E, E and Q̄_ℓ. End(Λ_s) = O_E has characteristic 0, while every endomorphism ring in D(A_{E,n}) is killed by ℓ^n, and any additive equivalence preserves endomorphism rings. The item uses only lem-sf-point's H^r = Hom_s(Λ[-r],-) clause, which is true at all four stages, together with lem-weil-point-fibre-equivalence for the correct targets. Step 1 is elementary. Step 2 uses the naturality of that clause (an identity of functors) and the H^i functors of def-weil-coefficient-cohomology-modules, including the Q̄_ℓ-stage formula. Step 3 uses the Mathlib leaf DerivedCategory.isIso_iff (lem-weil-pbc-unbounded-derived-iso-cohomology) over Mod_Λ, the full-subcategory clauses of the targets, and reflection of the inverse by fullness and faithfulness. Step 4 I checked against the full definition of def-weil-point-fd-qlbar-category: the rank of a matrix does not change under field extension, v_L is inverted at a common stage L, and the composites [L,id] are the transported identities. Edge cases I checked: zero objects, negative r, n = 1, integral torsion, zero-dimensional cohomology. Route: lem-sf-point's unit sk-thm-sf-global-duality is cited by the item's unit. sk-def-sf-admissible is also reached transitively, so the declared tool_use is harmless and I accept it. Duplicate search with rg over snapshot/dag/nodes found none. Leaving out the étale Lean attachment is correct. Minor point: at the Q̄_ℓ stage the Hom sets are only defined as colimits of abelian groups, so 'isomorphism of Λ-modules' rests on the parenthetical 'equivalently bijective'; acceptable as written. Note for the owner of thm-sf-identification: its step 3 concludes that two maps are equal from this lemma, which only detects isomorphisms. Details are in review.md."
+ }
 }

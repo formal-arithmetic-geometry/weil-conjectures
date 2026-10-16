@@ -32,9 +32,120 @@
   "def-coef-infinity-relative-join",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-relative-join-cocartesian-projection] to $u:X\\to S$. Thus $Y$ is a quasicategory, $\\pi:Y\\to S$ is cocartesian, and $i_X$ preserves cocartesian edges. The formulas of [def-coef-infinity-relative-join] identify $Y_s$ with $X_s^{\\triangleright}$, including the map $j_s$: over a constant simplex at $s$, the pullback condition says exactly that the initial join block belongs to $X_s$ and the final block is the unique simplex of a point. They also identify $T\\times_S Y$ with $(T\\times_S X)\\star_T T$ for every $T\\to S$: retain the same join blocks, interval parameter and base simplex, now labeled by the simplex of $T$. When $T$ is a quasicategory, $T\\times_S X$ is a quasicategory: fill an inner horn in $T$, then lift its chosen filler along $u$. The pulled-back projection is cocartesian directly from its horn and edge-lift definitions: pair each chosen lift or filler in $X$ with the prescribed simplex in $T$. Consequently, applying the cited join lemma over $T=\\Delta^1$ shows that the inclusion on each edge pullback preserves all cocartesian edges. The inclusion $i_X$ is degreewise injective by its pure-block formula.",
+   "uses": [
+    "lem-coef-infinity-relative-join-cocartesian-projection",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Opening construction of the join projection; fiber and edge-pullback identifications. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "For $Z=X,Y$ and $E=D,B$, define $H_Z(E)_m$ to consist of pairs $(\\sigma,h)$ with $\\sigma:\\Delta^m\\to S$ and $h:\\Delta^m\\times_S Z\\to E$, with operators given by restriction. Its projection is a cartesian fibration, and $H_Z(E)$ is a quasicategory, by the opposite dual of [lem-cbc-enhanced-relative-exponential]. Explicitly reverse each ordinal: an operator $\\alpha:[k]\\to[m]$ becomes $j\\mapsto m-\\alpha(k-j)$. This reverses the two outer horns and their distinguished edges, so $Z^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ is cartesian. Apply that node with target $E^{\\mathrm{op}}$ and reverse back; degreewise its relative Hom is exactly $H_Z(E)$. Its edge criterion becomes: an edge is cartesian precisely when its associated map $\\Delta^1\\times_S Z\\to E$ sends cocartesian edges to equivalences. Postcomposition by $p$ preserves these edges since a simplicial map preserves the inverse-triangle witnesses of equivalences. Restriction along $i_X$ also preserves them, by the edge-pullback preservation proved in Step 1. The strict fiber at $s$ is $\\operatorname{Fun}(Z_s,E)$ by the displayed degreewise formula. Finally, maps $K\\to H_Z(E)$ over $S$ are exactly maps $K\\times_S Z\\to E$: the local maps on the simplices of $K$ glue degreewise by the restriction identities. This last description applies to arbitrary simplicial $K$, not just quasicategories.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Equation (7.22), relative functor categories and their cartesian-edge criterion; Corollary 5.3.6.9 (0472). Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "First combine clause (1) of [lem-coef-joyal-quasicategory-characterizations] with [lem-coef-joyal-model-structure]: between quasicategories, the inner-fibration and source-prescribed equivalence-lifting condition is equivalent to being a Joyal fibration, hence to exact lifting against every degreewise injective categorical equivalence. We use this criterion in both directions below. Postcomposition $H_X(D)\\to H_X(B)$ is an isofibration. Indeed fix any degreewise injective categorical equivalence $K\\hookrightarrow L$ and any lifting square for this map. Its common projection gives $L\\to S$. For $Z=X,Y$ write $K_Z=K\\times_S Z$ and $L_Z=L\\times_S Z$. By [lem-coef-cocartesian-categorical-base-change], $K_Z\\hookrightarrow L_Z$ is a categorical equivalence; it is degreewise injective. The adjunction of Step 2 turns the postcomposition square into $K_X\\to D$, $L_X\\to B$ against $p$. Apply this criterion to $p$ and this inclusion, then curry the exact lift. The same criterion applied between the quasicategories $H_X(D),H_X(B)$ proves the assertion. Restriction $H_Y(B)\\to H_X(B)$ is an isofibration as well: the corresponding extension problem into $B$ has domain $W=K_Y\\amalg_{K_X}L_X\\subseteq L_Y$. The map $K_Y\\to W$ is a pushout of the trivial cofibration $K_X\\to L_X$ in [lem-coef-joyal-model-structure], hence is a trivial cofibration: push out the left lifting property in its weak factorization system. Since $K_Y\\to L_Y$ is a categorical equivalence, two-out-of-three makes $W\\to L_Y$ a categorical equivalence; it is a monomorphism because both pieces are subsets of $L_Y$ with intersection $K_X$. The quasicategory $B$ is fibrant in that model structure, so the lifting axiom extends every map $W\\to B$. Currying and the categorical-lifting criterion prove the restriction assertion. No small-index colimit theorem is used: this pushout is the degreewise union just described.",
+   "uses": [
+    "lem-coef-cocartesian-categorical-base-change",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Proof that the maps on relative functor categories are isofibrations; categorical equivalence of the pushout inclusion. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "Put $Q=H_X(D)\\times_{H_X(B)}H_Y(B)$, with its common projection to $S$. Apply [lem-coef-infinity-cartesian-fibration-pullback] with $E_0=H_Y(B)$, $E_1=H_X(D)$ and $H=H_X(B)$, identifying its pullback with $Q$ by the explicit simplicial swap $(h_B,h_D)\\mapsto(h_D,h_B)$. Step 2 gives the cartesian fibrations, the inner fibration $H\\to S$ and preservation of cartesian edges by both comparison maps; Step 3 gives the required isofibration $F_1$, namely postcomposition. Thus $Q$ is a quasicategory, $Q\\to S$ is cartesian, and its cartesian edges are precisely pairs of cartesian edges. Define $R:H_Y(D)\\to Q$ by $R(h)=(h|_X,ph)$. It preserves cartesian edges by Step 2 and this componentwise criterion. It is an isofibration: a lifting square against $K\\hookrightarrow L$ as in Step 3 transposes into the square against $p$ with top domain $W=K_Y\\amalg_{K_X}L_X$ and bottom domain $L_Y$. Step 3 already proved that $W\\to L_Y$ is a monomorphic categorical equivalence; the criterion of Step 3 for $p$ supplies an exact lift on $L_Y$. Curry it and apply that criterion once more, now between the established quasicategories $H_Y(D)$ and $Q$. In particular $R$ is an inner fibration.",
+   "uses": [
+    "lem-coef-infinity-cartesian-fibration-pullback",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "The pullback projection T-prime of equation (7.22) and the proof that V is an isofibration. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "Let $f=a|_{i_X(X)}$, identified with a map $X\\to D$. The given $b:Y\\to B$ and $pf=b|_X$ define a section $\\beta:S\\to Q$: on a simplex $\\sigma$, its components are $f\\operatorname{pr}_X$ and $b\\operatorname{pr}_Y$. Likewise $a$ on $\\pi^{-1}(\\partial S)$ defines $\\alpha:\\partial S\\to H_Y(D)$ by $\\alpha(\\sigma)=(\\sigma,a\\operatorname{pr}_Y)$. Its restriction component is $f\\operatorname{pr}_X$, and its postcomposition component is $b\\operatorname{pr}_Y$, because $pa=b|_M$. Thus $R\\alpha=\\beta|_{\\partial S}$ exactly. All these assignments commute with simplicial operators by restriction. Since $n\\geq1$, vertex zero is in $\\partial S$, so $\\alpha(0)$ is the originally specified cone $c=aj_0$, including all its simplices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Rewriting equation (7.21) by the relative-Hom adjunction, without replacing any boundary map. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "Take the strict fiber of $R$ at zero. Step 1 identifies $Y_0=X_0^{\\triangleright}$ with the actual inclusion $j_0$, and Step 2 identifies this fiber functor with the corner map $\\operatorname{Fun}(X_0^{\\triangleright},D)\\to\\operatorname{Fun}(X_0,D)\\times_{\\operatorname{Fun}(X_0,B)}\\operatorname{Fun}(X_0^{\\triangleright},B)$. The hypothesis says that $c=\\alpha(0)$ is a $p$-colimit diagram, in precisely the relative sense used by [lem-coef-infinity-relative-cone-initial-corner]. Apply its colimit clause with $K=X_0$ and the given isofibration $p$. It says that $c$ is initial relative to this entire corner map. By the definition of relative initiality in [lem-coef-infinity-relative-initial-boundary], for every $t\\in H_Y(D)_0$ this gives the weak homotopy equivalence $\\operatorname{Map}_{H_Y(D)_0}(c,t)\\to\\operatorname{Map}_{Q_0}(R_0c,R_0t)$. In particular no base diagram of $t$ is required to be fixed.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Final paragraph: relative colimit implies relative initiality for the fiber corner, Proposition 7.1.6.13. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cartesian-initial-boundary-lift] to the cartesian fibrations $H_Y(D)\\to S$ and $Q\\to S$, the inner fibration $R$, and the square $(\\alpha,\\beta)$. Preservation of cartesian edges was checked in Step 4, the outgoing mapping-space equivalences in the strict zero fiber are Step 6, and the dimension is positive. The theorem provides $\\gamma:S\\to H_Y(D)$ with $\\gamma|_{\\partial S}=\\alpha$ and $R\\gamma=\\beta$ exactly. Since $R$ is over $S$ and $\\beta$ is a section, $\\gamma$ is a section as well. Only the initial fiber cone was used; the theorem imposes no preservation of its colimit under transport.",
+   "uses": [
+    "lem-coef-infinity-cartesian-initial-boundary-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Relative initiality through cartesian fibrations and exact boundary lifting, Proposition 7.1.5.19(2) and Corollary 7.1.5.17. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  },
+  {
+   "text": "Uncurry the section $\\gamma$ as follows. For an $m$-simplex $y:\\Delta^m\\to Y$, set $\\sigma=\\pi y$, write $\\gamma(\\sigma)=(\\sigma,h_\\sigma)$, and set $\\widetilde a(y)=h_\\sigma(\\operatorname{id}_{\\Delta^m},y)$ on the diagonal simplex of $\\Delta^m\\times_S Y$. Restriction identities $h_{\\sigma\\theta}=h_\\sigma\\circ(\\theta\\times\\mathrm{id})$ make this a simplicial map. The restriction component of $R\\gamma=\\beta$ gives $\\widetilde a|_{i_X(X)}=a|_{i_X(X)}$, while its postcomposition component gives $p\\widetilde a=b$. The equality $\\gamma|_{\\partial S}=\\alpha$ gives $\\widetilde a=a$ on $\\pi^{-1}(\\partial S)$. These subsets have union $M$ and agree on the intersection by the original map $a$, so $\\widetilde a|_M=a$ exactly. This proves both required equations. The argument allows $X_0$ to be empty, in which case the assumed cone is simply a relative initial object; it never assumes colimits at any other vertex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Uncurrying the lift and checking both exact triangles on the full prescribed union. Agent expansion using the cited statements; online source, archival copy wanted."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-cocartesian-categorical-base-change",
+  "lem-coef-infinity-cartesian-fibration-pullback",
+  "lem-coef-infinity-cartesian-initial-boundary-lift",
+  "lem-coef-infinity-relative-cone-initial-corner",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-relative-join-cocartesian-projection",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02ZR",
+  "place": "Agent expansion of Lemma 7.3.4.5 specialized to the full boundary of a positive-dimensional simplex, using the cited DAG statements; the online source is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -140,10 +251,45 @@
    "results": "{\"t\": \"2026-10-16T21:48:01Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial relative cone extensions over a cocartesian fibration with initial universal cone and a prescribed simplex boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Functor.Initial.extendCone\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"CategoryTheory.Limits.Cones.extend\", \"CategoryTheory.Limits.Cone.extensions\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Limits.Cone.extend\"], \"digest\": \"c645f511812dafb1\"}",
    "date": "2026-10-17",
    "verdict": "No match. Fresh second reader: inspected the returned types. The StrictSegal and Truncated hits construct ordinary Set-valued right Kan extensions from a truncated simplex category. The remaining hits use ordinary Category instances and ordinary cones. None states a relative quasicategorical colimit or a prescribed full-boundary extension over an isofibration. Loogle and the AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a relative join over a positive dimensional simplex with prescribed full boundary and an initial relative colimit cone",
+   "results": "{\"t\": \"2026-10-16T22:25:36Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a relative join over a positive dimensional simplex with prescribed full boundary and an initial relative colimit cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.horn\", \"SSet.horn_eq_iSup\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn_obj\", \"SSet.PtSimplex.RelStruct\"], \"digest\": \"103e162992947518\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give horn colimits in the ordinary category SSet, ordinary cocones, or the StrictSegal Set-valued right Kan extension (read SimplicialSet/Coskeletal.lean:38-85). None fills a whole prescribed boundary for a relative colimit over an arbitrary quasicategory isofibration. Focused Loogle and grep returned no hits. Ordinary cocartesian morphism declarations require Category instances and are not one-line generalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of universal cocones on a cocartesian fibration admits an exact lift over an isofibration with simplex boundary fixed",
+   "results": "{\"t\": \"2026-10-16T22:25:43Z\", \"tool\": \"leanfinder\", \"query\": \"A family of universal cocones on a cocartesian fibration admits an exact lift over an isofibration with simplex boundary fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property'\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\"], \"digest\": \"b94e961f259cb819\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give horn colimits in the ordinary category SSet, ordinary cocones, or the StrictSegal Set-valued right Kan extension (read SimplicialSet/Coskeletal.lean:38-85). None fills a whole prescribed boundary for a relative colimit over an arbitrary quasicategory isofibration. Focused Loogle and grep returned no hits. Ordinary cocartesian morphism declarations require Category instances and are not one-line generalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative colimit cones extend a diagram from a simplex boundary through a relative join",
+   "results": "{\"t\": \"2026-10-16T22:25:43Z\", \"tool\": \"leansearch\", \"query\": \"Relative colimit cones extend a diagram from a simplex boundary through a relative join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.extendCofan\", \"CategoryTheory.extendCofanIsColimit\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.Limits.Cone.extend\", \"CategoryTheory.Limits.IsColimit.OfNatIso.cocone_fac\", \"CategoryTheory.Limits.PushoutCocone.isColimitAux\"], \"digest\": \"300f88221fa5d7e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give horn colimits in the ordinary category SSet, ordinary cocones, or the StrictSegal Set-valued right Kan extension (read SimplicialSet/Coskeletal.lean:38-85). None fills a whole prescribed boundary for a relative colimit over an arbitrary quasicategory isofibration. Focused Loogle and grep returned no hits. Ordinary cocartesian morphism declarations require Category instances and are not one-line generalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T22:25:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give horn colimits in the ordinary category SSet, ordinary cocones, or the StrictSegal Set-valued right Kan extension (read SimplicialSet/Coskeletal.lean:38-85). None fills a whole prescribed boundary for a relative colimit over an arbitrary quasicategory isofibration. Focused Loogle and grep returned no hits. Ordinary cocartesian morphism declarations require Category instances and are not one-line generalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Jj]oin|[Rr]elative[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T22:25:44Z\", \"tool\": \"grep\", \"query\": \"relative.?[Jj]oin|[Rr]elative[Cc]olimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give horn colimits in the ordinary category SSet, ordinary cocones, or the StrictSegal Set-valued right Kan extension (read SimplicialSet/Coskeletal.lean:38-85). None fills a whole prescribed boundary for a relative colimit over an arbitrary quasicategory isofibration. Focused Loogle and grep returned no hits. Ordinary cocartesian morphism declarations require Category instances and are not one-line generalizations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-fiberwise-relative-join",
@@ -163,5 +309,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-join-simplex-extension",
+  "worker": "stage1",
+  "summary": "Expanded the local relative-join extension into eight steps using cartesian relative functor families, a categorical-equivalence pushout calculation, relative initiality and exact uncurrying. Reused existing relative-Hom, categorical-base-change, Joyal characterization, relative-initial corner and cartesian boundary-lift results. Added two statement-only structural inputs: relative-join projection and cartesian-fibration pullback. Removed the prior redundant isofibration/categorical-lifting node after opening lem-coef-joyal-quasicategory-characterizations. Kept the statement unchanged; checked source hypotheses, strict boundary equalities and empty fibers.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived coefficient adjunction via coherent finite adjunction diagrams; technical relative-join step in the pointwise Kan mapping-space construction of lem-coef-infinity-fiberwise-relative-join. Realizes the relative-join local filling used in the existing ancestry, with 02ZR opening construction, equation (7.22), the categorical-pushout proof of isofibration, and its final relative-initiality argument. The current main-20261015 ancestor proof paragraph 2 is the displayed derived coefficient adjunction; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Generic relative-Hom cartesian-fibration and edge criterion, applied by explicit opposite reversal. No statement of this historical unit supplies the fibration structure; this is a tool inside the existing pointwise Kan route, not a replacement for any geometric step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-0e9f7775a",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-0e9f7775a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 13 cited statements in full, plus the unit record and the main-20261015 ancestor proof. Item: the statement matches Kerodon 02ZR (Lemma 7.3.4.5) specialized to C=Delta^n, C_0=boundary, n>=1. The boundary contains every vertex, and every simplex outside it starts at 0, so condition (*) reduces to the single cone at vertex 0, and M is the source pushout. No hypothesis is added or dropped. The eight steps follow the 02ZR proof in order and I checked each one. Step 1: the new join node gives the fibers and the edge pullbacks. Step 2: I verified the opposite dual of lem-cbc-enhanced-relative-exponential by explicit ordinal reversal; it gives a cartesian H_Z(E) with fiber Fun(Z_s,E), the edge criterion and currying. Step 3: the Joyal clause (1) criterion holds in both directions; lem-coef-cocartesian-categorical-base-change needs no fibrancy; W=K_Y union L_X with intersection K_X is a pushout, a trivial cofibration under K_Y, and by two-out-of-three W->L_Y is a categorical equivalence. Step 4: the 02VV roles are right (F_1 is postcomposition, an isofibration), and R is an isofibration preserving cartesian edges. Steps 5 and 8 are elementary and exact. Step 6: the corner-initial node with K=X_0. Step 7: all hypotheses of the cartesian-initial-boundary-lift node hold. New node lem-coef-infinity-relative-join-cocartesian-projection is a correct specialization of 02RH/02RG (square U=u, V=id, then composition with Delta^1 x S -> S); I sanity-checked it over a point. New node lem-coef-infinity-cartesian-fibration-pullback matches every hypothesis of 02VV (Prop 5.1.4.21); its added claim that P is a quasicategory follows because P is inner over E_0. Neither new node restates a clause of the item, and both are statement-only. rg over dag/nodes for the Kerodon tags and the concepts, and over the blueprint, found no duplicate (about 11 candidates read). The dependency-closure check shows no cycle, no SGA source is used, and the route stays in the unit. I accept the declared tool use of lem-cbc-enhanced-relative-exponential (sk-prop-sf-cbc) as a generic relative-Hom black box. Edge cases checked: n=1, n=0 excluded, X empty, X_0 empty, u=id. The new nodes lack lean_audit, which is maintainer-owned and filled at merge, so this is not a delivery fault. No fixes."
  }
 }
