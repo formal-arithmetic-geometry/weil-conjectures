@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Paper.ContinuousIntegralComparisons
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.ContinuousIntegralScalarExact
 
 /-! # Composition coherence of the specified integral pull comparisons -/
 

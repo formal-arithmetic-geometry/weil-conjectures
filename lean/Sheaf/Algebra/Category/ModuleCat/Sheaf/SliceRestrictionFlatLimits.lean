@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.RingedSliceExtensionExactness
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
 /-!
 # Finite-limit part of flatness after restriction to a slice

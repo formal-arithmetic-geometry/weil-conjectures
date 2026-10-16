@@ -11,6 +11,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 public import Mathlib.LinearAlgebra.Matrix.ToLin
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Paper.CondensedPointBasisEvaluation
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Function presentations of finitely presented condensed modules

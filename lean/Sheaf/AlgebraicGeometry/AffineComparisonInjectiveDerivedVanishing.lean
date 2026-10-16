@@ -7,6 +7,12 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.Paper.EtaleFiniteDataDescent
+import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndPrincipalZariski
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
 /-!
 # Affine comparison vanishing for Grothendieck abelian coefficients

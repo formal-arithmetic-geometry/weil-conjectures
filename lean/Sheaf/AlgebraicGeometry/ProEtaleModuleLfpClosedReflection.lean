@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Reflection of local finite presentations across a surjective closed immersion -/
 

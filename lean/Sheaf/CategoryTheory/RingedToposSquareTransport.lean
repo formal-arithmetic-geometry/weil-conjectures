@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Mathlib.CategoryTheory.Equivalence
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Transporting a ringed geometric square across equivalences
