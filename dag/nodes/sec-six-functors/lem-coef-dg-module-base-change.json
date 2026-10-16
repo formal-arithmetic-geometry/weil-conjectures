@@ -1,0 +1,107 @@
+{
+ "id": "lem-coef-dg-module-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: realizing finite mapping-complex adjunctions in dg enhancements; change of dg-module indices and values in the bimodule mapping-space construction.",
+   "via": [
+    "lem-coef-dgcat-bimodule-mapping-space",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar extension and cofibrant evaluation for dg modules",
+ "statement": "Use small dg categories and quasi-equivalences as in [lem-coef-dgcat-model-structure], the module Hom complexes of [lem-coef-dg-module-projective-resolution], and the projective model structures on dg-module categories of [lem-coef-dg-module-diagram-classification]. For a dg category $\\mathcal C$ write $\\operatorname{Mod}(\\mathcal C)$ for covariant dg functors $\\mathcal C\\to\\mathrm{Ch}(\\mathbf Z)$; thus right $\\mathcal B$-modules are $\\operatorname{Mod}(\\mathcal B^{\\mathrm{op}})$. All tensor products of dg categories use object pairs, tensor products of morphism complexes over $\\mathbf Z$, and the Koszul sign in interchanging homogeneous factors.\n\nFor any dg functor $u:\\mathcal C\\to\\mathcal E$, restriction $u^*$ has a left adjoint $u_!$ given by\n$$(u_!M)(e)=\\int^{c\\in\\mathcal C}\\mathcal E(u(c),e)\\otimes_{\\mathbf Z}M(c).$$\nHere the coend is the quotient of the direct sum over objects $c$ by the two action relations indexed by the morphism complexes of $\\mathcal C$, using the graded symmetry when factors are interchanged. This is a Quillen adjunction for the projective model structures: $u_!$ preserves cofibrations and trivial cofibrations, equivalently $u^*$ preserves fibrations and trivial fibrations. Its derived left adjoint is computed by applying $u_!$ to a projectively cofibrant replacement. If $u$ is a quasi-equivalence, this adjunction is a Quillen equivalence: the derived unit and counit are isomorphisms on the localized module categories. The analogous assertions for right modules use $u^{\\mathrm{op}}$. For a right representable $h_b=\\mathcal B(-,b)$ and $v:\\mathcal B\\to\\mathcal E$, extension on right modules sends $h_b$ canonically to $h_{v(b)}$, and sends cofibrant modules to cofibrant modules and weak equivalences between cofibrant modules to weak equivalences. Scalar extensions have their canonical unital associative isomorphisms $(vu)_!\\cong v_!u_!$, satisfying the unit and pentagon identities.\n\nLet $\\mathcal C,\\mathcal B$ be small dg categories and assume each $\\mathcal C(c,c')$ is projectively cofibrant as a complex. Evaluation at any $c$ from $\\operatorname{Mod}(\\mathcal C\\otimes\\mathcal B^{\\mathrm{op}})$ to right $\\mathcal B$-modules sends projectively cofibrant objects to projectively cofibrant objects. Equivalently, a projectively cofibrant diagram of right $\\mathcal B$-modules indexed by such a $\\mathcal C$ has cofibrant values.\n\nA complex is homotopically flat if tensoring it with any quasi-isomorphism is a quasi-isomorphism. If $u:\\mathcal C\\to\\mathcal E$ is a quasi-equivalence and both categories have homotopically flat morphism complexes, then $u\\otimes\\mathrm{id}_{\\mathcal D}$ is a quasi-equivalence for every small dg category $\\mathcal D$, with no flatness assumption on $\\mathcal D$. Consequently restriction along this tensor functor induces an equivalence of localized module categories, with inverse its derived extension of scalars. In particular this applies when $\\mathcal C,\\mathcal E$ are cofibrant dg categories.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0408337",
+  "place": "Section 3, Proposition 3.2 (complexes as coefficient model category), Proposition 3.3 and Corollary 3.4; Section 4, tensor product and derived tensor product paragraphs before Definition 4.1. For the homotopically flat formulation compare Keller, On differential graded categories, Section 4.2, the definition of k-flat and rep(A,B) before Theorem 4.2; the tensor argument uses K-flat complexes. Coend adjunction and its unit/associativity are the scalar-extension construction in Section 3. Read online; absent locally. No Stacks tag supplies these dg-module assertions."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-dg-module-diagram-classification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projective model categories of dg modules admit scalar extension Quillen adjunctions and quasi equivalences of dg categories induce equivalences of their derived module categories",
+   "results": "{\"t\": \"2026-10-16T13:09:47Z\", \"tool\": \"leanfinder\", \"query\": \"Projective model categories of dg modules admit scalar extension Quillen adjunctions and quasi equivalences of dg categories induce equivalences of their derived module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"instHasExtModuleCatOfSmall\", \"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"HomotopyEquiv.isKProjective\", \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\"], \"digest\": \"6bb547b8c4eb8b0e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuillenAdjunction\"",
+   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuillenAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?representable|dg.?module|dg.?categor",
+   "results": "{\"t\": \"2026-10-16T13:09:45Z\", \"tool\": \"grep\", \"query\": \"quasi.?representable|dg.?module|dg.?categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a quasi equivalence of dg categories induces a Quillen equivalence of module categories and evaluation preserves cofibrant modules for locally cofibrant sources",
+   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a quasi equivalence of dg categories induces a Quillen equivalence of module categories and evaluation preserves cofibrant modules for locally cofibrant sources\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\"], \"digest\": \"5f202c680f0b01fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an enriched equivalence gives an equivalence of derived module categories",
+   "results": "{\"t\": \"2026-10-16T13:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars along an enriched equivalence gives an equivalence of derived module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_inverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse_obj\"], \"digest\": \"3778b4556d6c96cd\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: TransportEnrichment.forgetEnrichmentEquiv (CategoryTheory/Enriched/Ordinary/Basic.lean:250-323) compares forgetting and transporting enrichment, not dg-module scalar extension; mapDerivedCategory (Algebra/Homology/DerivedCategory/ExactFunctor.lean:14-60) derives an exact abelian functor, not a quasi-equivalence of dg indices. Independent dg-module/Quillen-equivalence source grep had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule",
+   "results": "{\"t\": \"2026-10-16T13:25:45Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: TransportEnrichment.forgetEnrichmentEquiv (CategoryTheory/Enriched/Ordinary/Basic.lean:250-323) compares forgetting and transporting enrichment, not dg-module scalar extension; mapDerivedCategory (Algebra/Homology/DerivedCategory/ExactFunctor.lean:14-60) derives an exact abelian functor, not a quasi-equivalence of dg indices. Independent dg-module/Quillen-equivalence source grep had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of enriched functor categories along a differential graded quasi equivalence has a derived inverse given by enriched left Kan extension",
+   "results": "{\"t\": \"2026-10-16T14:13:02Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of enriched functor categories along a differential graded quasi equivalence has a derived inverse given by enriched left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.singleFunctorsPostcompQIso_inv_hom\"], \"digest\": \"ec6553f0f5bbe2e7\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. ExactFunctor.lean:14-60 constructs mapDerivedCategory for an exact functor between abelian categories; Localization gives ordinary homological-complex factorization. Neither gives derived extension of dg-module indices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftQuillen\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftQuillen\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match; the actual Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial",
+   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"grep\", \"query\": \"enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The sole source hit is SingularSet.lean:37, a TODO to prove the geometric realization/singular-set adjunction is a Quillen equivalence; it states none of this node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-dgcat-bimodule-mapping-space",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

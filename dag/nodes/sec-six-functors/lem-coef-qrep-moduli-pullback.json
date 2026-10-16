@@ -1,0 +1,108 @@
+{
+ "id": "lem-coef-qrep-moduli-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: gluing the finite enhanced adjunction comparison; descent of the bimodule moduli in the target argument.",
+   "via": [
+    "lem-coef-dgcat-bimodule-mapping-space",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopy pullback descent for quasi-representable module moduli",
+ "statement": "Use the dg-category model structure of [lem-coef-dgcat-model-structure], dg modules of [lem-coef-dg-module-projective-resolution], scalar extension of [lem-coef-dg-module-base-change], and nerves and spaces of [def-cbc-enhanced-diagrams-cones]. Fix a small cofibrant dg category $\\mathcal C$. For a small dg category $\\mathcal B$ let $\\mathcal W_{\\mathcal C}(\\mathcal B)$ be the category of dg functors $T:\\mathcal C\\otimes\\mathcal B^{\\mathrm{op}}\\to\\mathrm{Ch}(\\mathbf Z)$ whose right $\\mathcal B$-module values $T(c,-)$ are projectively cofibrant and isomorphic, in the localization at objectwise quasi-isomorphisms, to some representable $\\mathcal B(-,b_c)$. Morphisms in $\\mathcal W_{\\mathcal C}(\\mathcal B)$ are just objectwise quasi-isomorphisms. The tensor category has object pairs and tensor products of morphism complexes with the Koszul sign, and opposite reverses morphisms with this sign. For $v:\\mathcal B\\to\\mathcal E$, postcomposition on these moduli is scalar extension on each right-module value; it is defined on these cofibrant values without further replacement and is coherent under composition by the canonical scalar-extension associators.\n\nSuppose $\\mathcal B_1\\xrightarrow{p}\\mathcal B_3\\xleftarrow{q}\\mathcal B_2$ is a diagram of small dg categories with $p$ a fibration in the stated model structure, and set $\\mathcal B=\\mathcal B_1\\times_{\\mathcal B_3}\\mathcal B_2$ (the strict dg-category pullback). Then the comparison square of nerves under these extension functors is homotopy cartesian. Explicitly the canonical map\n$$N\\mathcal W_{\\mathcal C}(\\mathcal B)\\longrightarrow N\\mathcal W_{\\mathcal C}(\\mathcal B_1)\\mathop{\\times}^{h}_{N\\mathcal W_{\\mathcal C}(\\mathcal B_3)}N\\mathcal W_{\\mathcal C}(\\mathcal B_2)$$\nis a weak homotopy equivalence; its compatibility homotopy is induced by the canonical isomorphism between the two composite scalar-extension functors from $\\mathcal B$ to $\\mathcal B_3$. Here the homotopy pullback of spaces $X\\to Z\\leftarrow Y$ is modeled, after replacing by Kan complexes, by $X\\times_{Z,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,Z)\\times_{\\operatorname{ev}_1,Z}Y$.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0408337",
+  "place": "Section 4, Sublemma 4.7 and its proof, printed pp. 24-27. This is descent of the module moduli functor over a fibration pullback, not the mapping-space classification of Theorem 4.2. Read online; absent locally. No Stacks tag."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-dg-module-base-change",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The moduli space of right quasi representable dg bimodules preserves pullbacks of dg categories along fibrations",
+   "results": "{\"t\": \"2026-10-16T13:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"The moduli space of right quasi representable dg bimodules preserves pullbacks of dg categories along fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Functor.relativelyRepresentable.isPullback'\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullback_of_right\", \"CategoryTheory.Functor.relativelyRepresentable.isPullback\"], \"digest\": \"bf965fe80f19d681\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: instFibrationFstOfIsStableUnderBaseChangeFibrations and similar instances are closure properties of an assumed fibration class. MorphismProperty.DescendsAlong and relativelyRepresentable concern ordinary categorical morphism properties, not moduli spaces of dg modules. Read Monoidal/Bimod.lean:80-120: Bimod.Hom is an ordinary bimodule morphism for monoid objects, without derived or quasi-representability conditions. Both semantic phrasings were inspected, and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: instFibrationFstOfIsStableUnderBaseChangeFibrations and similar instances are closure properties of an assumed fibration class. MorphismProperty.DescendsAlong and relativelyRepresentable concern ordinary categorical morphism properties, not moduli spaces of dg modules. Read Monoidal/Bimod.lean:80-120: Bimod.Hom is an ordinary bimodule morphism for monoid objects, without derived or quasi-representability conditions. Both semantic phrasings were inspected, and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?representable|bimodule.*homotopy|moduli.*pullback",
+   "results": "{\"t\": \"2026-10-16T13:09:45Z\", \"tool\": \"grep\", \"query\": \"quasi.?representable|bimodule.*homotopy|moduli.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: instFibrationFstOfIsStableUnderBaseChangeFibrations and similar instances are closure properties of an assumed fibration class. MorphismProperty.DescendsAlong and relativelyRepresentable concern ordinary categorical morphism properties, not moduli spaces of dg modules. Read Monoidal/Bimod.lean:80-120: Bimod.Hom is an ordinary bimodule morphism for monoid objects, without derived or quasi-representability conditions. Both semantic phrasings were inspected, and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent for quasi representable bimodules over a homotopy pullback of differential graded categories",
+   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"leansearch\", \"query\": \"Descent for quasi representable bimodules over a homotopy pullback of differential graded categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.DescendsAlong.mk'\", \"Bimod\", \"CategoryTheory.MorphismProperty.of_isPullback_of_descendsAlong\", \"CategoryTheory.MorphismProperty.DescendsAlong.of_isPullback\", \"CategoryTheory.MorphismProperty.of_pullback_fst_of_descendsAlong\", \"Bimod.instCategory\", \"Bimod.TensorBimod.X\", \"Bimod.Hom\"], \"digest\": \"2dd71513cfd23834\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: instFibrationFstOfIsStableUnderBaseChangeFibrations and similar instances are closure properties of an assumed fibration class. MorphismProperty.DescendsAlong and relativelyRepresentable concern ordinary categorical morphism properties, not moduli spaces of dg modules. Read Monoidal/Bimod.lean:80-120: Bimod.Hom is an ordinary bimodule morphism for monoid objects, without derived or quasi-representability conditions. Both semantic phrasings were inspected, and the dg grep and Loogle have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space of representable differential graded module diagrams satisfies descent along homotopy fiber products of categories",
+   "results": "{\"t\": \"2026-10-16T13:25:01Z\", \"tool\": \"leanfinder\", \"query\": \"The space of representable differential graded module diagrams satisfies descent along homotopy fiber products of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"instQFactorsThroughHomotopyIntUp\", \"ComplexShape.QFactorsThroughHomotopy\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"HomologicalComplex.homotopyCofiber.desc\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\"], \"digest\": \"03e901cbcec35490\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Algebra/Homology/Localization.lean:14-55 states factorization of the ordinary localization of complexes through chain homotopy; HomotopyCofiber gives chain-complex universal properties. None states descent for moduli spaces of quasi-representable modules. The independent dg-module source grep had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule",
+   "results": "{\"t\": \"2026-10-16T13:25:45Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Algebra/Homology/Localization.lean:14-55 states factorization of the ordinary localization of complexes through chain homotopy; HomotopyCofiber gives chain-complex universal properties. None states descent for moduli spaces of quasi-representable modules. The independent dg-module source grep had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of equivalences of representable enriched module diagrams preserves homotopy fiber products of enriched categories",
+   "results": "{\"t\": \"2026-10-16T14:13:03Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of equivalences of representable enriched module diagrams preserves homotopy fiber products of enriched categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.nerveFunctor\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerveAdjunction\", \"SSet.QCat.catEnrichedOrdinaryCategory\"], \"digest\": \"67a4d0f93780c596\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. NerveAdjunction.lean:16-36 describes the ordinary categorical nerve adjunction and preservation of finite cartesian products. These are not derived moduli spaces or fibration-pullback descent for quasi-representable modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftQuillen\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftQuillen\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match; the actual Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial",
+   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"grep\", \"query\": \"enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The sole source hit is SingularSet.lean:37, a TODO to prove the geometric realization/singular-set adjunction is a Quillen equivalence; it states none of this node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-dgcat-bimodule-mapping-space",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

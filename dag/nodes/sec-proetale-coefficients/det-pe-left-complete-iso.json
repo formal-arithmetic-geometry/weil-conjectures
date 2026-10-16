@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-left-complete-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Postnikov convergence in the pro-étale derived category",
@@ -12,34 +12,230 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.md",
   "place": "node det-pe-left-complete-iso, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "det-pe-milnor-sequence"
+ ],
  "proof": [
   {
-   "text": "In degree $q$ the fibre is $(\\prod_n\\tau_{\\geq-n}K)^q\\oplus(\\prod_n\\tau_{\\geq-n}K)^{q-1}$\nwith differential $(x,y)\\mapsto(dx,(1-T)x-dy)$. Since the quotient maps are compatible with\nthe transitions, $(1-T)((\\bar k_n)_n)=(\\bar k_n-t_n(\\bar k_{n+1}))_n=0$, so $\\iota$ is a map\nof complexes; composed with the projection to $\\prod_n\\tau_{\\geq-n}K$ it is the family of\nquotient maps.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the good truncations of [def-kun-truncations], with their canonical quotient maps. Put $K_n=\\tau_{\\geq-n}K$, $P=\\prod_{n\\in\\mathbf N}K_n$, $T((x_n)_n)=(t_n(x_{n+1}))_n$, and $F=\\operatorname{Cone}(1-T)[-1]$. Use the cone and shift convention of [def-weil-abstract-derived-category]: identify a standard shifted-cone pair $(b,a)$ with $(x,y)=(a,-b)$. In degree $q$ the fibre is $(\\prod_n\\tau_{\\geq-n}K)^q\\oplus(\\prod_n\\tau_{\\geq-n}K)^{q-1}$\nwith differential $(x,y)\\mapsto(dx,(1-T)x-dy)$. Since the quotient maps are compatible with\nthe transitions, $(1-T)((\\bar k_n)_n)=(\\bar k_n-t_n(\\bar k_{n+1}))_n=0$, so $\\iota$ is a map\nof complexes; composed with the projection to $\\prod_n\\tau_{\\geq-n}K$ it is the family of\nquotient maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
+    "place": "First paragraph of the proof"
+   }
   },
   {
-   "text": "By [det-pe-milnor-sequence] there is a short exact sequence\n$0\\to R^1\\varprojlim_nH^{q-1}(\\tau_{\\geq-n}K)\\to H^q(R\\varprojlim_n\\tau_{\\geq-n}K)\\to\n\\varprojlim_nH^q(\\tau_{\\geq-n}K)\\to0$, whose second map is induced by the projection to\nthe product. By [det-pe-left-complete-truncation-tower] (applied in degrees $q-1$ and $q$)\nthe first term vanishes and the composite\n$H^q(K)\\xrightarrow{H^q\\iota}H^q(R\\varprojlim_n\\tau_{\\geq-n}K)\\to\n\\varprojlim_nH^q(\\tau_{\\geq-n}K)$, which is induced by the quotient maps, is an\nisomorphism. Hence $H^q\\iota$ is an isomorphism for every $q$.",
+   "text": "The rotated cone triangle of [def-weil-abstract-derived-category] is $F\\xrightarrow{p}P\\xrightarrow{1-T}P\\to F[1]$, where $p(x,y)=x$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] is exact at the middle three terms of\n$$H^{q-1}(P)\\xrightarrow{1-T}H^{q-1}(P)\\to H^q(F)\\xrightarrow{H^q(p)}H^q(P)\\xrightarrow{1-T}H^q(P).$$\nBy [det-pe-products-derived], the canonical map $H^r(P)\\to\\prod_nH^r(K_n)$ is an isomorphism; its $n$th component is $H^r(\\mathrm{pr}_n)$, so the $n$th component of $H^r(T)$ is $H^r(t_n)\\circ H^r(\\mathrm{pr}_{n+1})$. Thus the kernel of the last arrow consists precisely of the compatible families, namely $\\varprojlim_nH^q(K_n)$. Exactness gives\n$$0\\to\\operatorname{coker}(1-T:\\prod_nH^{q-1}(K_n)\\to\\prod_nH^{q-1}(K_n))\\to H^q(F)\\xrightarrow{\\rho_q}\\varprojlim_nH^q(K_n)\\to0,$$\nwhere $\\rho_q$ is induced by $p$. In particular the $n$th component of $\\rho_q\\circ H^q(\\iota)$ is $H^q(K\\to K_n)$, by step 1.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "det-pe-products-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, label proposition-enough-weakly-contractibles, proof of (6) and (7); expanded map identification for the second paragraph of det-pe-left-complete-iso.proof.md"
+   }
+  },
+  {
+   "text": "By clause 2 of [det-pe-milnor-sequence], the cokernel in step 2 is $R^1\\varprojlim_nH^{q-1}(K_n)$. Clause 2 of [det-pe-left-complete-truncation-tower], in degree $q-1$, makes this term zero, so the short exact sequence in step 2 makes $\\rho_q$ an isomorphism. The same clause in degree $q$ says that the map $H^q(K)\\to\\varprojlim_nH^q(K_n)$ induced by the quotient maps is an isomorphism. Step 2 identifies this map with $\\rho_q\\circ H^q(\\iota)$; hence $H^q(\\iota)=\\rho_q^{-1}\\circ(\\rho_q\\circ H^q(\\iota))$ is an isomorphism. This holds for every $q\\in\\mathbf Z$, so $\\iota$ is a quasi-isomorphism.",
    "uses": [
     "det-pe-milnor-sequence",
     "det-pe-left-complete-truncation-tower"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
+    "place": "Second paragraph of the proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "lem-sf-derived-homology-long-exact",
+  "det-pe-products-derived",
   "det-pe-milnor-sequence",
   "det-pe-left-complete-truncation-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-iso.proof.md",
+  "place": "First and second proof paragraphs, with the projection-compatible Milnor sequence expanded using Stacks Tag 0947"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Postnikov convergence derived category inverse limit truncations quasi-isomorphism",
+   "results": "Hits HomologicalComplex.quasiIsoAt_ιTruncLE, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, HomologicalComplex.quasiIsoAt_πTruncGE, CochainComplex.quasiIso_ιTruncLE_iff, and DerivedCategory.IsLE-related declarations; none states left completeness via a derived inverse limit.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, HomotopyLimit, IsIso",
+   "results": "0 hits; loogle reported unknown identifier HomotopyLimit.",
+   "date": "2026-10-16",
+   "verdict": "no usable result: Loogle rejected the query; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "left.complete|leftComplete|Postnikov|truncation",
+   "results": "The wrapper reported zero hits, but its WeilConjectures subdirectory resolves to a nonexistent directory beneath Mathlib/. This command supplies no evidence about Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "invalid search path; not used as evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every cochain complex, the canonical map to the derived inverse limit of its connective truncations is a quasi-isomorphism",
+   "results": "Hits CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_truncLEMap_iff, and related truncation quasi-isomorphism declarations; no derived-limit statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left completeness of the standard t-structure derived category inverse limit connective truncations",
+   "results": "Hits DerivedCategory.IsLE, IsGE, TStructure.t, isLE_iff, and existence results for bounded objects; no left-completeness theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso (K ⟶ DerivedCategory...)",
+   "results": "0 hits; loogle reported a parse error for the pattern.",
+   "date": "2026-10-16",
+   "verdict": "no usable result: Loogle rejected the query; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "left.complete|leftComplete|Postnikov|R.?lim|quasiIso.*trunc",
+   "results": "The wrapper reported zero hits, but its Mathlib/Algebra/Homology subdirectory duplicates the Mathlib/ prefix and resolves to a nonexistent directory. This command supplies no evidence about Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "invalid search path; not used as evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map from a complex to the derived inverse limit of its canonical connective truncations is a quasi-isomorphism",
+   "results": "Hits truncation quasi-isomorphism declarations including CochainComplex.quasiIso_ιTruncLE_iff and HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; no derived-limit statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.quasiIso_truncGEMap_iff",
+   "results": "One hit: CochainComplex.quasiIso_truncGEMap_iff, a finite truncation map criterion, not the inverse-limit convergence statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*trunc|trunc.*quasiIso|DerivedLimit|derivedLimit",
+   "results": "Hits finite truncation quasi-isomorphism lemmas in Mathlib/Algebra/Homology/Embedding and DerivedCategory/Fractions; no derived inverse-limit left-completeness theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex in an abelian category with exact countable products is quasi-isomorphic to the homotopy limit of its good truncations",
+   "results": "Eight hits: derived-category calculus of fractions, finite-truncation quasi-isomorphisms and an injective factorization; none states convergence of the inverse truncation tower.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "LeftComplete|left_complete|leftComplete|Postnikov|homotopyLimit",
+   "results": "Zero hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"lim\"",
+   "results": "Eleven hits, including finite limits/colimits of bounded-below complexes, a limitSequence of cochains and Cech complex functors; none states the inverse-limit convergence theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*trunc|trunc.*quasiIso|LeftComplete|leftComplete|Postnikov",
+   "results": "25 hits in Algebra/Homology: finite truncation quasi-isomorphisms including CochainComplex.quasiIsoAt_πTruncGE and CochainComplex.quasiIsoAt_ιTruncLE; source read in Embedding/CochainComplex.lean:40–95. None concerns the inverse truncation tower.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a pro-etale site the canonical map from any unbounded complex to the homotopy limit of its good truncations is a quasi-isomorphism",
+   "results": "Eight finite-truncation hits: HomologicalComplex.quasiIsoAt_ιTruncLE, quasiIsoAt_πTruncGE, the corresponding instances, CochainComplex.quasiIso_ιTruncLE_iff and related supported-complex criteria. None states inverse-limit convergence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "R.?lim|left.complete|Postnikov|truncation",
+   "results": "25 hits: Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/CochainComplexPlus.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean; Mathlib subdirectory Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned results concern a single finite truncation, its cohomology or other ordinary limits, not convergence of the inverse truncation tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical map from an unbounded complex to the derived inverse limit of its connective truncations is a quasi-isomorphism",
+   "results": "8 hits: CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.quasiIso_truncLEMap_iff, HomologicalComplex.instQuasiIsoAtπTruncGEF, HomologicalComplex.quasiIso_truncLEMap_iff, HomologicalComplex.instQuasiIsoAtιTruncLEF, CochainComplex.ιTruncLE.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned results concern a single finite truncation, its cohomology or other ordinary limits, not convergence of the inverse truncation tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, truncation, quasiIso, limit",
+   "results": "0 hits: none; loogle: unknown identifier 'truncation'.",
+   "date": "2026-10-16",
+   "verdict": "no usable result: the query parser rejected an identifier; not used as evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every complex of modules on a pro-etale site, the canonical map to the derived inverse limit of connective truncations is a quasi-isomorphism",
+   "results": "8 hits: HomologicalComplex.quasiIsoAt_ιTruncLE, HomologicalComplex.quasiIsoAt_πTruncGE, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.instQuasiIsoAtπTruncGEF, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_ιTruncLE_iff.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned results concern a single finite truncation, its cohomology or other ordinary limits, not convergence of the inverse truncation tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"πTruncGE\"",
+   "results": "9 hits: CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, CochainComplex.isIso_πTruncGE_iff, CochainComplex.instQuasiIsoAtIntπTruncGE, CochainComplex.πTruncGE, CochainComplex.quasiIsoAt_πTruncGE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.πTruncGE_naturality.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned results concern a single finite truncation, its cohomology or other ordinary limits, not convergence of the inverse truncation tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an AB4 star abelian category a cochain complex is the homotopy inverse limit of its truncations bounded below",
+   "results": "8 hits: CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.IsKInjective, CochainComplex.πTruncGE, CochainComplex.IsKProjective.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: semantic and name-pattern hits concern individual truncations or ordinary finite limits; no convergence theorem was returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"limit\"",
+   "results": "11 hits: CochainComplex.Plus.instHasFiniteColimits, CochainComplex.Plus.instHasFiniteLimits, CochainComplex.Plus.instIsClosedUnderColimitsOfShapeIntPlusOfFinCategoryOfHasColimitsOfShape, CochainComplex.Plus.instIsClosedUnderLimitsOfShapeIntPlusOfFinCategoryOfHasLimitsOfShape, CochainComplex.Plus.instMonoIntHomFullSubcategoryPlusOfHasLimitsOfShapeWalkingCospan, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo, CategoryTheory.Limits.FormalCoproduct.cochainComplexFunctor.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: semantic and name-pattern hits concern individual truncations or ordinary finite limits; no convergence theorem was returned"
+  },
+  {
+   "tool": "grep",
+   "query": "AB4|left.?complete|homotopy.?limit|Postnikov",
+   "results": "0 hits. Source subdirectory: Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no matching terminology in the existing Mathlib/Algebra/Homology source directory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -53,5 +249,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-left-complete"
+ "unit": "sk-prop-pe-left-complete",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-left-complete-iso",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and Stacks Tag 0947; verified the cone signs and quotient-map compatibility, derived the projection-compatible Milnor sequence from cited cone, long-exact-sequence and product statements, and applied the stated truncation-tower vanishing. Added existing definition dependencies for the site, module category, complexes and canonical truncations; no new nodes.",
+  "blueprint": "Step 1 realizes the first paragraph of det-pe-left-complete-iso.proof.md, with the shifted-cone sign identification explicit. Steps 2 and 3 realize its second paragraph, expanding the projection-map identification by Stacks Tag 0947 (proposition-enough-weakly-contractibles), proof of (6) and (7).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-53f11c731",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-53f11c731 (reviewer sub-agent of L); spot-checked: Read the complete item, cited nodes, unit/chapter route, blueprint proofs, Stacks sources, and required governance files. Verified all three proof steps, cone signs, Milnor projection, truncation stabilization, hypotheses, coefficient category, edge cases, searches, duplicates, and acyclicity. No new nodes or repairs are needed; review.md records the checks and accepted tool_uses (none)."
+ }
 }
