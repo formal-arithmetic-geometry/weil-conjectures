@@ -3,57 +3,137 @@
  "blueprint": {
   "is": "lem-sfb-eta-id",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\eta$ is compatible with identities",
- "statement": "Let $\\Lambda$ be a condensed ring and $X$ a scheme. Then\n$\\eta_{\\mathrm{id}_X}\\colon\\Lambda_X\\to(\\mathrm{id}_X)_*\\Lambda_X$\n([def-sfb-eta]) is the inverse of the identity isomorphism\n$(\\mathrm{id}_X)_*\\cong\\mathrm{id}$ of\n[sk-def-sfb-finite-pushforward-pullback] at $\\Lambda_X$.",
+ "statement": "Let $\\Lambda$ be a condensed ring ([sk-def-sfb-condensed-ring]) and $X$ a scheme. Then\n$\\eta_{\\mathrm{id}_X}\\colon\\Lambda_X\\to(\\mathrm{id}_X)_*\\Lambda_X$\n([def-sfb-eta]) is the inverse of the canonical identity isomorphism\n$i_X\\colon(\\mathrm{id}_X)_*\\cong\\mathrm{id}$ at $\\Lambda_X$.\nHere the pushforward is that of [def-sfb-finite-lower-star], and $i_X$ is induced\nby the canonical projection $V\\times_X X\\cong V$ on every object $V$ of\n$X_{\\mathrm{proét}}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.md",
   "place": "node lem-sfb-eta-id, order 1566"
  },
  "stmt_deps": [
-  "def-sfb-eta"
+  "def-sfb-eta",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-condensed-ring"
  ],
  "proof": [
   {
-   "text": "Write $F=p^*\\Lambda$, a sheaf on $(\\Spec\\Z)_{\\mathrm{proét}}$, so that\n$\\Lambda_X=\\pi_X^*F$ for every scheme $X$. Let $f\\colon X\\to Y$. By\n[def-sfb-alpha] and [def-sfb-pullback-from-point-comp-iso],\n$\\alpha_f$ is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*F\\cong f^*\\pi_Y^*F$, followed by $\\pi_Y\\circ f=\\pi_X$. By\n[def-sfb-eta], $\\eta_f$ is the mate of $\\alpha_f$ under $f^*\\dashv f_*$.",
+   "text": "Put $\\pi=\\pi_X\\colon X\\to\\Spec\\Z$, $F=p^*\\Lambda$, $L=\\pi^*$ and $R=\\pi_*$. By [def-sfb-upper-star-from-point] and [def-sfb-alpha], $\\Lambda_X=LF$. Write $A=(\\mathrm{id}_X)^*$ and $B=(\\mathrm{id}_X)_*$. By [def-sfb-alpha] and [def-sfb-pullback-from-point-comp-iso], $\\alpha_{\\mathrm{id}_X}$ is the component $d_F\\colon ALF\\to LF$ of the inverse pullback composition isomorphism, with $\\pi\\circ\\mathrm{id}_X=\\pi$ understood. If $v$ is the unit of $A\\dashv B$, [def-sfb-eta] gives $\\eta_{\\mathrm{id}_X}=B(d_F)\\circ v_{LF}$.",
    "uses": [
+    "def-sfb-upper-star-from-point",
     "def-sfb-alpha",
     "def-sfb-pullback-from-point-comp-iso",
     "def-sfb-eta"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.proof.md",
+    "place": "Proof, paragraph 1: identify the coefficient sheaf, alpha and eta"
+   }
   },
   {
-   "text": "The composition isomorphism of pullbacks is, by definition, conjugate to the\ncomposition isomorphism of pushforwards\n([sk-def-sfb-finite-pushforward-pullback]). So under the adjunction\n$\\pi_Y^*\\dashv\\pi_{Y*}$, the morphism $\\eta_f\\colon\\pi_Y^*F\\to f_*\\pi_X^*F$\ncorresponds to\n$$\nF\\longrightarrow\\pi_{X*}\\pi_X^*F\\cong\\pi_{Y*}f_*\\pi_X^*F,\n$$\nthe unit of $\\pi_X^*\\dashv\\pi_{X*}$ followed by the inverse of the\ncomposition isomorphism $\\pi_{Y*}f_*\\cong(\\pi_Y\\circ f)_*=\\pi_{X*}$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $u$ be the unit of $L\\dashv R$, using [def-sfb-finite-upper-lower-star-adjunction], and let $c\\colon RB\\xrightarrow{\\sim}R$ be the pushforward composition isomorphism of [def-sfb-finite-lower-star-comp], identifying $\\pi\\circ\\mathrm{id}_X$ with $\\pi$. By [def-sfb-finite-upper-star-comp], the inverse comparison component $d\\colon AL\\to L$ is the conjugate of $c^{-1}\\colon R\\to RB$; this is the inverse-direction form of the defining conjugation for the pullback comparison. The composite adjunction $AL\\dashv RB$ has unit $R(v_{LF})\\circ u_F$ by [def-weil-pbc-composite-adjunction]. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=AL$, $R_1=RB$, $L_2=L$, $R_2=R$, and $\\delta=c^{-1}$. Its unit equation, followed by substitution from Step 1 and functoriality of $R$, is\n$$\nR(\\eta_{\\mathrm{id}_X})\\circ u_F\n=RB(d_F)\\circ R(v_{LF})\\circ u_F\n=c^{-1}_{LF}\\circ u_F.\n$$",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-lower-star-comp",
+    "def-sfb-finite-upper-star-comp",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.proof.md",
+    "place": "Proof, paragraph 2: the adjoint of eta, with the composite unit written out"
+   }
   },
   {
-   "text": "For $f=\\mathrm{id}_X$, both sides of the claim correspond, under\n$\\pi_X^*\\dashv\\pi_{X*}$, to morphisms $F\\to\\pi_{X*}(\\mathrm{id}_X)_*\\pi_X^*F$.\nThese morphisms agree by the left unit law relating the composition\nisomorphism $\\pi_{X*}(\\mathrm{id}_X)_*\\cong\\pi_{X*}$ and the identity\nisomorphism $(\\mathrm{id}_X)_*\\cong\\mathrm{id}$.",
-   "uses": [],
-   "elementary": null
+   "text": "For any sheaf $G$ on $X_{\\mathrm{proét}}$ and $V$ on $(\\Spec\\Z)_{\\mathrm{proét}}$, put $W=V\\times_{\\Spec\\Z}X$. By [def-sfb-finite-lower-star] and [def-sfb-finite-lower-star-comp], both $c_G^{-1}$ and $R(i_{X,G}^{-1})$ on sections over $V$ are the restriction map\n$$G(W)\\longrightarrow G(W\\times_X X)$$\nalong $q\\colon W\\times_X X\\to W$, the first projection. Indeed the canonical pasting map $(V\\times_{\\Spec\\Z}X)\\times_X X\\to V\\times_{\\Spec\\Z}X$ has projections to $V$ and $X$ equal to $\\operatorname{pr}_V\\circ q$ and $\\operatorname{pr}_X\\circ q$: the latter equality is the defining fibre-product relation. These projections determine the map to $V\\times_{\\Spec\\Z}X$, so it is $q$. Equality at every $V$ gives $c_G^{-1}=R(i_{X,G}^{-1})$.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-lower-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.proof.md",
+    "place": "Proof, paragraphs 3–4: establish the left unit law on sections by its two projections"
+   }
   },
   {
-   "text": "That unit law holds on sections. The pushforwards are restrictions along base\nchange functors, and both sides are the restriction along the same canonical\nisomorphism $V\\times_{\\Spec\\Z}X\\times_XX\\cong V\\times_{\\Spec\\Z}X$. Maps into a\nfibre product are determined by their projections.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply Step 3 with $G=LF=\\Lambda_X$ to Step 2. We obtain\n$$R(\\eta_{\\mathrm{id}_X})\\circ u_F=R(i_{X,LF}^{-1})\\circ u_F.$$\nUnder the Hom bijection of [def-sfb-finite-upper-lower-star-adjunction] for $\\pi$, a morphism $h\\colon LF\\to BLF$ corresponds to $R(h)\\circ u_F$. Since that correspondence is injective, the displayed equality proves $\\eta_{\\mathrm{id}_X}=i_{X,\\Lambda_X}^{-1}$, as required.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.proof.md",
+    "place": "Proof, paragraph 3: compare adjoints and use injectivity of the Hom bijection"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-upper-star-from-point",
   "def-sfb-alpha",
   "def-sfb-pullback-from-point-comp-iso",
-  "def-sfb-eta"
+  "def-sfb-eta",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-lower-star-comp",
+  "def-sfb-finite-upper-star-comp",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-sfb-finite-lower-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-id.proof.md",
+  "place": "Proof, all four paragraphs; expanded using the existing composite-adjunction and conjugate-unit-equation Mathlib leaves"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedPushforwardHom|unitCompUpperStarComp_id|lowerStarId",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of the pullback composition comparison for the identity is the inverse of the pushforward identity comparison",
+   "results": "8 hits, including Scheme.Modules.conjugateEquiv_pullbackId_hom and SheafOfModules.conjugateEquiv_pullbackId_hom; these concern module sheaves on different sites, not the condensed coefficient map. Other hits concern pullback functors.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+   "results": "12 hits: conjugateEquiv and its identity, inverse, isomorphism and unitor lemmas in Mathlib.CategoryTheory.Adjunction.Mates. These are generic tools, not the coefficient statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient morphism for a condensed ring sheaf pulled back from the point along the identity scheme morphism is the inverse of the pushforward identity isomorphism",
+   "results": "8 hits concerning Scheme.Modules pushforwardId, pullbackId, and conjugateEquiv_pullbackId_hom, plus SheafOfModules.conjugateEquiv_pullbackId_hom and StructureSheaf.comap_id_eq_map; none constructs the pro-etale condensed coefficient comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_apply|conjugateEquiv_symm_apply|conjugateEquiv_pullbackId_hom|conjugateEquiv.*Unitor",
+   "results": "13 hits in CategoryTheory: Adjunction.Unique uses component formulas; Adjunction.Mates.lean:534 and :540 are conjugateEquiv_leftUnitor_hom and conjugateEquiv_rightUnitor_hom; Bicategory.Adjunction.Mate has generic conjugation formulas. Source Mates.lean:275–315 read; unit compatibility is already the existing DAG Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction unit followed by the mate of the inverse composition isomorphism for identity pushforward equals inverse identity natural isomorphism",
+   "results": "['CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom', 'AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom', 'CategoryTheory.ExponentiableMorphism.pushforwardId', 'SheafOfModules.conjugateEquiv_pullbackId_hom', 'CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit', 'SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app', 'CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom_assoc', 'CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc']",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic adjunction tools reused from existing DAG leaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -72,5 +152,34 @@
   "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-eta-id",
+  "worker": "stage1",
+  "summary": "Kept the mathematical identity claim, replaced the missing umbrella reference by the actual pushforward definition and an explicit identity isomorphism, and completed the blueprint argument with the composite unit, conjugate unit equation and projection computation. No new nodes: the generic categorical tools already have Mathlib leaves in the DAG.",
+  "blueprint": "Proof paragraph 1 is Step 1; paragraph 2 is Step 2; paragraphs 3–4 are Step 3 (unit law on sections) and Step 4 (injectivity of the adjunction bijection).",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic formula for the unit of AL adjoint to RB; it implements the blueprint mate calculation, without replacing the coefficients route."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic unit compatibility for the conjugate comparison; it implements the blueprint second paragraph for the two specified adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-7501480c1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-7501480c1 (reviewer sub-agent of L); spot-checked: Reviewed the item, all four proof steps, every cited node, blueprint route, source statements, base-change morphism, coefficient category, edge cases, searches, and DAG duplication/cycle concerns. The split is mathematically sound and needs no repair."
+ }
 }
