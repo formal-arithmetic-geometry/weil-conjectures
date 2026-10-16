@@ -26,9 +26,65 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $\\operatorname{Map}_J(j,t)$ is weakly contractible for every $j$. Apply [lem-coef-infinity-normalized-final-cone] to obtain $F:J^{\\triangleright}\\to J$ restricting to $\\operatorname{id}_J$ and constant at $t$ on $\\{t\\}^{\\triangleright}$. Denote the base inclusions by $b:J\\hookrightarrow J^{\\triangleright}$ and $a:\\{t\\}\\hookrightarrow\\{t\\}^{\\triangleright}$, and the constant map by $q:\\{t\\}^{\\triangleright}\\to\\{t\\}$. Then $Fb=\\operatorname{id}_J$ and $qa=\\operatorname{id}_{\\{t\\}}$.",
+   "uses": [
+    "lem-coef-infinity-normalized-final-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (1) to (2), using the normalized slice-section criterion."
+   }
+  },
+  {
+   "text": "Write $i:\\{t\\}\\hookrightarrow J$ and $e=i^{\\triangleright}:\\{t\\}^{\\triangleright}\\hookrightarrow J^{\\triangleright}$. The map $i$ is degreewise injective, so [lem-coef-infinity-cone-mono-right-anodyne] makes $e$ right anodyne. The pairs $(a,b)$ and $(q,F)$ define maps of arrows $i\\to e\\to i$: the first square commutes by functoriality of the cone, and the second because $Fe=iq$, the normalization of $F$. Their composite on the domain is $qa=\\operatorname{id}$ and on the codomain is $Fb=\\operatorname{id}$. Thus $i$ is a retract of $e$, and is right anodyne by the retract clause in its definition. This proves the mapping-space condition implies right anodyneness.",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (2) to (3): the displayed retract diagram, using the right-cone lemma."
+   }
+  },
+  {
+   "text": "Conversely assume $i:\\{t\\}\\hookrightarrow J$ is right anodyne. Apply the pushout-join assertion of [lem-coef-infinity-anodyne-cocones] with $A=\\{t\\}$, $B=J$, $K=\\varnothing$, and $L=\\Delta^0$. Since $X\\star\\varnothing=X$, it states that the inclusion $m:M=J\\amalg_{\\{t\\}}\\{t\\}^{\\triangleright}\\hookrightarrow J^{\\triangleright}$ is inner anodyne. Define $h:M\\to J$ to be $\\operatorname{id}_J$ on the first summand and the constant map at $t$ on the second. The two maps agree on $\\{t\\}$, so the pushout supplies $h$.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (3) to (2), pushout-join construction."
+   }
+  },
+  {
+   "text": "The quasicategory definition in [def-cbc-enhanced-diagrams-cones] extends maps from each inner horn into $J$. This extension property holds for the whole weakly saturated class defining inner anodyne maps in [lem-coef-infinity-anodyne-cocones]: for an isomorphism use its inverse; for a pushout extend on the attached summand and glue; for a transfinite composite choose compatible extensions successively and use the colimit at limit stages; for a retract compose the map with the retraction of domains, extend across the larger arrow, and restrict along the section of codomains. Consequently $h$ extends across $m$ to $F:J^{\\triangleright}\\to J$. Because $F$ extends $h$, it is the identity on $J$ and constant at $t$ on $\\{t\\}^{\\triangleright}$, including its cone point and degenerate identity edge. The reverse implication of [lem-coef-infinity-normalized-final-cone] now makes every $\\operatorname{Map}_J(j,t)$ weakly contractible. Together with step 2 this proves the equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-infinity-normalized-final-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (3) to (2), extension into an inner-horn-filling target; then the normalized cone criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-normalized-final-cone",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Expansion of the derived coefficient-adjunction enhancement branch: written from the online proof of Kerodon Corollary 4.7.3.22 (02J5), using Corollary 4.7.3.21, Lemma 4.3.7.8 and the existing pushout-join node. Marked agent pending archival of the online Kerodon source, requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -47,21 +103,21 @@
   {
    "tool": "loogle",
    "query": "\"Quasicategory\", \"anodyne\"",
-   "results": "{\"t\": \"2026-10-16T08:52:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T12:49:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: hornFilling and Quasicategory (Quasicategory/Basic.lean:39-52, read) give inner horn fillers, not the final-vertex characterization. modelCategoryQuillen.J (SimplicialSet/CategoryWithFibrations.lean:46-49, read) includes all horns, not just right horns. isTerminalHoFunctorDeltaZero (SimplicialSet/HomotopyCat.lean:560-561, read) concerns the ordinary terminal homotopy category of the zero simplex. Neither is this assertion."
   },
   {
    "tool": "leanfinder",
    "query": "A vertex t of a quasicategory is a final object exactly when inclusion of t is right anodyne",
-   "results": "{\"t\": \"2026-10-16T08:52:02Z\", \"tool\": \"leanfinder\", \"query\": \"A vertex t of a quasicategory is a final object exactly when inclusion of t is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.stdSimplex.isTerminalObj₀\", \"SSet.modelCategoryQuillen.I\", \"SSet.S.IsUniquelyCodimOneFace\", \"SSet.instFiniteInitial\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.Subcomplex.isInitialBot\"], \"digest\": \"ce9e36342ee5cc26\"}",
+   "results": "{\"t\": \"2026-10-16T12:49:09Z\", \"tool\": \"leanfinder\", \"query\": \"A vertex t of a quasicategory is a final object exactly when inclusion of t is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.stdSimplex.isTerminalObj₀\", \"SSet.modelCategoryQuillen.I\", \"SSet.S.IsUniquelyCodimOneFace\", \"SSet.instFiniteInitial\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.Subcomplex.isInitialBot\"], \"digest\": \"ce9e36342ee5cc26\"}",
    "date": "2026-10-16",
    "verdict": "no match: hornFilling and Quasicategory (Quasicategory/Basic.lean:39-52, read) give inner horn fillers, not the final-vertex characterization. modelCategoryQuillen.J (SimplicialSet/CategoryWithFibrations.lean:46-49, read) includes all horns, not just right horns. isTerminalHoFunctorDeltaZero (SimplicialSet/HomotopyCat.lean:560-561, read) concerns the ordinary terminal homotopy category of the zero simplex. Neither is this assertion."
   },
   {
    "tool": "leanfinder",
    "query": "An infinity category has a terminal vertex if and only if the point inclusion is generated by right horn inclusions",
-   "results": "{\"t\": \"2026-10-16T08:52:24Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category has a terminal vertex if and only if the point inclusion is generated by right horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.stdSimplex.isTerminalObj₀\", \"SSet.horn_obj_zero\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.isInitialBot\"], \"digest\": \"6ba592df2fa789d3\"}",
+   "results": "{\"t\": \"2026-10-16T12:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category has a terminal vertex if and only if the point inclusion is generated by right horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.stdSimplex.isTerminalObj₀\", \"SSet.horn_obj_zero\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.isInitialBot\"], \"digest\": \"6ba592df2fa789d3\"}",
    "date": "2026-10-16",
    "verdict": "no match: hornFilling and Quasicategory (Quasicategory/Basic.lean:39-52, read) give inner horn fillers, not the final-vertex characterization. modelCategoryQuillen.J (SimplicialSet/CategoryWithFibrations.lean:46-49, read) includes all horns, not just right horns. isTerminalHoFunctorDeltaZero (SimplicialSet/HomotopyCat.lean:560-561, read) concerns the ordinary terminal homotopy category of the zero simplex. Neither is this assertion."
   },
@@ -106,10 +162,45 @@
    "results": "{\"t\": \"2026-10-16T09:05:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.instRespectsIsoStrongInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\"], \"digest\": \"b97f00b65ea0e3df\"}",
    "date": "2026-10-16",
    "verdict": "no match: independently read AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-91 (Kan anodyne), AnodyneExtensions/Inner/Basic.lean:38-60,89-98 (inner anodyne), and AnodyneExtensions/Inner/PushoutProduct.lean:93-100. The last declaration concerns the Cartesian pushout-product of an inner anodyne map and a monomorphism, not the join of a right anodyne map with a monomorphism. Quasicategory/Basic.lean:39-52 supplies inner horn fillers only. CategoryTheory/Limits/Final.lean:283-287 is about ordinary cocones. None states right-anodyne finality, the pushout-join assertion, or the coherent cocone restriction equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of a final object in a quasicategory is a weakly saturated composite of right horn inclusions",
+   "results": "{\"t\": \"2026-10-16T11:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of a final object in a quasicategory is a weakly saturated composite of right horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn_obj_zero\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory\"], \"digest\": \"94b0303c085c6e4e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only Quasicategory.hornFilling, primitive horn inclusions and all-horn modelCategoryQuillen.I/J; read Quasicategory/Basic.lean:39-52 and SimplicialSet/CategoryWithFibrations.lean:38-55. None characterizes final vertices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vertex t of an infinity category is terminal precisely when the inclusion of that point is right anodyne",
+   "results": "{\"t\": \"2026-10-16T11:50:11Z\", \"tool\": \"leanfinder\", \"query\": \"A vertex t of an infinity category is terminal precisely when the inclusion of that point is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.stdSimplex.isTerminalObj₀\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.isInitialBot\", \"SSet.instFiniteInitial\", \"SSet.KanComplex\", \"SSet.Truncated.HomotopyCategory.isTerminal\"], \"digest\": \"204e834d89c6fd55\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only primitive Quasicategory inner-horn fillers, all-horn Kan fibrations or no hits; sources read at AlgebraicTopology/Quasicategory/Basic.lean:39-52 and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-55. No right-anodyne final-vertex characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"anodyne\"",
+   "results": "{\"t\": \"2026-10-16T12:49:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only primitive Quasicategory inner-horn fillers, all-horn Kan fibrations or no hits; sources read at AlgebraicTopology/Quasicategory/Basic.lean:39-52 and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-55. No right-anodyne final-vertex characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|rightAnodyne|terminal.*vertex|vertex.*terminal",
+   "results": "{\"t\": \"2026-10-16T12:49:08Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|rightAnodyne|terminal.*vertex|vertex.*terminal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only primitive Quasicategory inner-horn fillers, all-horn Kan fibrations or no hits; sources read at AlgebraicTopology/Quasicategory/Basic.lean:39-52 and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-55. No right-anodyne final-vertex characterization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "point inclusion in a quasicategory is right anodyne iff mapping spaces into the point are contractible",
+   "results": "{\"t\": \"2026-10-16T12:49:08Z\", \"tool\": \"leansearch\", \"query\": \"point inclusion in a quasicategory is right anodyne iff mapping spaces into the point are contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.Quasicategory.casesOn\", \"SSet.Quasicategory.recOn\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.QCat\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory.mk\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"fcec114dc2f9e651\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only primitive Quasicategory inner-horn fillers, all-horn Kan fibrations or no hits; sources read at AlgebraicTopology/Quasicategory/Basic.lean:39-52 and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-55. No right-anodyne final-vertex characterization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-final-index-colimit",
   "by": "worker",
@@ -125,5 +216,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-terminal-anodyne",
+  "worker": "stage1",
+  "summary": "Replaced the inherited two-step invocation of the desired Kerodon equivalence with the actual normalized-cone/retract and pushout-join/extension proof. Added exactly two statement-only lemmas, the normalized identity-cone criterion and the right-cone monomorphism lemma, after whole-DAG/blueprint/source and logged Mathlib searches. Retained the imported statement verbatim and reused the existing pushout-join node.",
+  "blueprint": "Expands the derived coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint through its existing enhancement/final-index-colimit ancestry. The final-vertex clause is in the inherited ancestry description, not a literal sentence of the current blueprint proof."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-d70b3cc9e",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-d70b3cc9e (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited DAG statements, unit/chapter route, blueprint source, and delivery-errors A–F. Kerodon 02J5, 02J4, 0196, 018J, 014U, 01KX, 01L0, and 01L5 match all hypotheses and orientations. Retract, pushout-join, and inner-anodyne extension steps are justified; edge cases, duplicates, cycles, Mathlib candidates, and route constraints pass. Review written to review.md; no repairs or tool_uses accepted."
  }
 }

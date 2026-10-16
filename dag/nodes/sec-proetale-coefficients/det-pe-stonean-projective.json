@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-stonean-projective",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Gleason: extremally disconnected equals projective",
@@ -15,40 +15,301 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*2 $\\Rightarrow$ 3.* Apply 2 to $p=q$ and $f=\\mathrm{id}_S$.",
+   "text": "*2 $\\Rightarrow$ 3.* Apply the lifting property to $p=q$ and $f=\\mathrm{id}_S$. Its lift $\\sigma:S\\to P$ is continuous and satisfies $q\\circ\\sigma=\\mathrm{id}_S$, which is precisely a section.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proof, implication (3) to (2) in the source numbering."
+   }
   },
   {
-   "text": "*3 $\\Rightarrow$ 2.* Given $p$ and $f$, the fibre product\n$P=S\\times_YX=\\{(s,x):f(s)=p(x)\\}$ is closed in $S\\times X$, hence compact Hausdorff, and\nits projection $q\\colon P\\to S$ is surjective because $p$ is. A section $\\sigma$ of $q$\ngives $g=\\mathrm{pr}_X\\circ\\sigma$ with $p\\circ g=f\\circ q\\circ\\sigma=f$.",
-   "uses": [],
-   "elementary": null
+   "text": "*3 $\\Rightarrow$ 2, admissibility of the pullback.* Given $p:X\\to Y$ and $f:S\\to Y$ as in 2, set $P=\\{(s,x)\\in S\\times X:f(s)=p(x)\\}$ with the subspace topology. The product $S\\times X$ is quasi-compact by [lem-weil-pbc-tychonoff-product-quasi-compact] with a two-element index set. It is Hausdorff: distinct pairs differ in a coordinate, whose disjoint neighbourhoods pull back to disjoint product neighbourhoods. The subset $P$ is closed: if $f(s)\\ne p(x)$, disjoint open neighbourhoods of these points in $Y$ pull back to a product neighbourhood of $(s,x)$ avoiding $P$. Thus [lem-weil-pbc-closed-in-quasi-compact] makes $P$ quasi-compact, and intersecting disjoint ambient neighbourhoods with $P$ makes it Hausdorff.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proof, pullback argument; Tag 08ZU, theorem-tychonov; Tag 005C, lemma-closed-in-quasi-compact."
+   }
   },
   {
-   "text": "*3 $\\Rightarrow$ 1.* Let $U\\subset S$ be open. The space\n$P=\\overline U\\sqcup(S\\setminus U)$ (disjoint union of two closed subspaces) is compact\nHausdorff and maps onto $S$ by the inclusions. Let $\\sigma$ be a section. A point of $U$\nhas its only preimage in the first summand, so $\\sigma(U)$ lies in the closed first summand,\nand by continuity so does $\\sigma(\\overline U)$. A point outside $\\overline U$ has its only\npreimage in the second summand. Hence $\\sigma^{-1}(\\text{first summand})=\\overline U$, which\nis open since the summand is clopen in $P$.",
+   "text": "*3 $\\Rightarrow$ 2, lift.* The projection $q:P\\to S$ is continuous, and it is surjective because for any $s$ surjectivity of $p$ supplies $x$ with $p(x)=f(s)$. Apply 3 to this compact Hausdorff source to obtain a continuous section $\\sigma$. The second projection gives $g=\\mathrm{pr}_X\\circ\\sigma$; for each $s$, membership $\\sigma(s)\\in P$ gives $p(g(s))=f(q(\\sigma(s)))=f(s)$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proof, pullback argument, with its omitted details supplied."
+   }
   },
   {
-   "text": "*1 $\\Rightarrow$ 3.* Let $q\\colon P\\to S$ be a continuous surjection with $P$ compact\nHausdorff. Order the closed subsets $P'\\subset P$ with $q(P')=S$ by inclusion. A chain\n$(P_i)$ has lower bound $\\bigcap_iP_i$: for $s\\in S$ the sets $q^{-1}(s)\\cap P_i$ are\nnonempty, compact and totally ordered by inclusion, so their intersection is nonempty. By\nZorn's lemma there is a minimal such $P_0$; put $q_0=q|_{P_0}$. Minimality means that no\nproper closed subset of $P_0$ surjects onto $S$.\n\nFor open $V\\subset P_0$ put $V^*=S\\setminus q_0(P_0\\setminus V)$. It is open ($q_0$ is a\nclosed map, compact to Hausdorff), contained in $q_0(V)$ (every point of $S$ has a preimage\nin $P_0$, and points of $V^*$ have none outside $V$), and nonempty if $V\\neq\\emptyset$\n(otherwise the proper closed subset $P_0\\setminus V$ would surject).\n\nWe show $q_0$ is injective. Suppose $a\\neq b$ in $P_0$ with $q_0(a)=q_0(b)=s$. Choose\ndisjoint open neighbourhoods $A\\ni a$, $B\\ni b$ in $P_0$. Then $A^*\\cap B^*=\\emptyset$: a\npoint of both would have its whole (nonempty) fibre inside $A\\cap B=\\emptyset$. Moreover\n$s\\in\\overline{A^*}$: for an open neighbourhood $N$ of $s$, the set $V=q_0^{-1}(N)\\cap A$ is\na nonempty open set (it contains $a$), and $\\emptyset\\neq V^*\\subset q_0(V)\\cap A^*\\subset\nN\\cap A^*$. Similarly $s\\in\\overline{B^*}$. By 1, $\\overline{A^*}$ is open; it contains\n$s\\in\\overline{B^*}$, hence meets $B^*$. But $B^*$ is open and disjoint from $A^*$, so it is\ndisjoint from $\\overline{A^*}$, a contradiction.\n\nSo $q_0$ is a continuous bijection from a compact space to a Hausdorff space, hence a\nhomeomorphism, and $q_0^{-1}$ followed by the inclusion $P_0\\subset P$ is a section of $q$.",
-   "uses": [],
-   "elementary": null
+   "text": "*3 $\\Rightarrow$ 1, the test surjection.* For open $U\\subset S$, put $A=\\overline U$ and $B=S\\setminus U$ with their subspace topologies. Both are closed in $S$, hence quasi-compact by [lem-weil-pbc-closed-in-quasi-compact], and Hausdorff by restriction of disjoint neighbourhoods in $S$. Give $P=A\\sqcup B$ the disjoint union topology. It is quasi-compact: restrict an open covering to each summand, take finite subcoverings there, and unite the two finite families. It is Hausdorff by separation within a summand and by the disjoint open summands for points in different summands. The two inclusions define a continuous surjection $q:P\\to S$, since $A\\cup B=S$. By 3 it has a continuous section $\\sigma$.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proof, last paragraph: the surjection from the disjoint union of the closure and complement."
+   }
   },
   {
-   "text": "*Total disconnectedness.* Let $S$ satisfy 1 and $x\\neq y$. Choose disjoint open $U\\ni x$,\n$V\\ni y$. Then $\\overline U$ is clopen, contains $x$, and misses $y$ because the open set\n$V$ is disjoint from $U$, hence from $\\overline U$. So points are separated by clopen sets,\nand a compact Hausdorff space with this property is profinite.",
+   "text": "*3 $\\Rightarrow$ 1, identify the clopen inverse image.* The first summand of $P$ is clopen, so $C=\\sigma^{-1}(A\\text{ in the first summand})$ is clopen in $S$. For $s\\in U$, its fibre under $q$ has no point in the second summand, hence $U\\subset C$. Closedness gives $\\overline U\\subset C$. Conversely $s\\in C$ implies $s=q(\\sigma(s))\\in A=\\overline U$. Thus $C=\\overline U$, so $\\overline U$ is open.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proof, last paragraph, equality of the inverse image with the closure expanded."
+   }
+  },
+  {
+   "text": "*1 $\\Rightarrow$ 3, chain intersections.* Fix a continuous surjection $q:P\\to S$ with $P$ compact Hausdorff and assume 1. Let $\\mathcal E$ be the set of closed subsets $E\\subseteq P$ with $q(E)=S$; it contains $P$. For a nonempty inclusion chain $\\mathcal C\\subseteq\\mathcal E$ put $E_{\\mathcal C}=\\bigcap_{E\\in\\mathcal C}E$, a closed subset of $P$. Fix $s\\in S$. The fibre $q^{-1}(\\{s\\})$ is closed: a singleton is closed in a Hausdorff space, since every other point has an open neighbourhood avoiding it; now use continuity. The closed sets $E\\cap q^{-1}(\\{s\\})$ are nonempty and have nonempty finite intersections, since a finite nonempty subchain has a smallest member. If their total intersection were empty, their open complements in $P$ would cover $P$, and a finite subcover would contradict that finite-intersection property. (The empty finite subfamily also has nonempty intersection $P$, because $s$ has a preimage.) Thus $s\\in q(E_{\\mathcal C})$, so $E_{\\mathcal C}\\in\\mathcal E$. For the empty chain use the lower bound $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YM, lemma-find-compact-subset, chain/fibre argument; the finite-intersection fact is proved directly by the open-cover definition of compactness."
+   }
+  },
+  {
+   "text": "*Minimal closed source.* To use [lem-weil-pbc-zorn-lemma] in its stated upper-bound form, apply it to $\\mathcal O=\\{P\\setminus E:E\\in\\mathcal E\\}\\subseteq\\mathcal P(P)$. Complementation turns a chain in $\\mathcal O$ into a chain in $\\mathcal E$. Step 6 makes the complement of its intersection an upper bound in $\\mathcal O$; for the empty chain the upper bound is $\\varnothing=P\\setminus P$. Hence Zorn gives a maximal $O_0\\in\\mathcal O$. Set $P_0=P\\setminus O_0$. It is closed, maps onto $S$, and is minimal among closed subsets of $P$ mapping onto $S$. It is compact by [lem-weil-pbc-closed-in-quasi-compact] and Hausdorff by restricting separating neighbourhoods in $P$. Write $q_0=q|_{P_0}$. A closed subset $F$ of $P_0$ is closed in $P$, since $P_0$ is closed; consequently no proper closed $F\\subset P_0$ maps onto $S$.",
+   "uses": [
+    "lem-weil-pbc-zorn-lemma",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YM, lemma-find-compact-subset, Zorn argument; complement duality supplies the upper-bound form of the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "*The restricted map is closed.* For any closed $F\\subseteq P_0$, [lem-weil-pbc-closed-in-quasi-compact] makes $F$ compact. If $s\\notin q_0(F)$, choose for each $x\\in F$ disjoint open neighbourhoods $U_x\\ni q_0(x)$ and $N_x\\ni s$ in $S$. The sets $F\\cap q_0^{-1}(U_x)$ cover $F$, so finitely many suffice. The intersection of the corresponding $N_x$ is an open neighbourhood of $s$ avoiding $q_0(F)$. For $F=\\varnothing$ take that neighbourhood to be $S$. Thus $q_0(F)$ is closed. This proves closedness directly from compactness and Hausdorff separation, rather than importing an unrecorded closed-map theorem.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YL, lemma-isomorphism, closedness input; Tag 08YD, lemma-closed-map. The elementary finite-subcover proof of closedness is supplied here."
+   }
+  },
+  {
+   "text": "*The opens $V^*$.* For each open $V\\subseteq P_0$ set $V^*=S\\setminus q_0(P_0\\setminus V)$. Step 8 shows $V^*$ is open. Every fibre of $q_0$ is nonempty, and a point lies in $V^*$ exactly when its whole fibre lies in $V$; in particular $V^*\\subseteq q_0(V)$. If $V\\ne\\varnothing$, then $P_0\\setminus V$ is proper closed, so minimality from Step 7 makes $V^*$ nonempty. If $V\\subseteq W$ then $V^*\\subseteq W^*$ by the same fibre description.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YJ, lemma-image-open-technical; the definition and elementary properties of V-star are those of the current blueprint, paragraph following the minimal-source construction."
+   }
+  },
+  {
+   "text": "*Density at an image point.* If $a\\in A\\subseteq P_0$ with $A$ open and $s=q_0(a)$, then $s\\in\\overline{A^*}$. Indeed for any open neighbourhood $N$ of $s$, the set $V=A\\cap q_0^{-1}(N)$ is nonempty open, since it contains $a$. Step 9 gives $\\varnothing\\ne V^*\\subseteq A^*$ and $V^*\\subseteq q_0(V)\\subseteq N$. Thus every such $N$ meets $A^*$, which is precisely membership in its closure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YJ, lemma-image-open-technical, neighbourhood argument, in the V-star notation of the current blueprint."
+   }
+  },
+  {
+   "text": "*Injectivity from extremal disconnectedness.* Suppose $a\\ne b$ in $P_0$ with $q_0(a)=q_0(b)=s$. Hausdorffness of $P_0$ gives disjoint open neighbourhoods $A\\ni a$, $B\\ni b$. Their opens $A^*$ and $B^*$ are disjoint: a common point would have a nonempty fibre contained in $A\\cap B=\\varnothing$. Step 10 gives $s\\in\\overline{A^*}\\cap\\overline{B^*}$. Condition 1 makes $\\overline{A^*}$ open, and this open neighbourhood of $s\\in\\overline{B^*}$ must meet $B^*$. But an open set $B^*$ disjoint from $A^*$ is disjoint from $\\overline{A^*}$, because any point of their intersection would have the neighbourhood $B^*$ meeting $A^*$. This contradiction proves $q_0$ injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08YK, lemma-intersection-empty, and 08YL, lemma-isomorphism, injectivity argument. The disjoint-open/closure argument is written out, as in the current blueprint."
+   }
+  },
+  {
+   "text": "*The section.* Now $q_0:P_0\\to S$ is a continuous bijection, with compact source and Hausdorff target. Apply [lem-weil-pbc-compact-hausdorff-bijection] with its ambient spaces $P,S$ and subsets $P_0,S$: $q_0$ is a homeomorphism. Its inverse composed with the continuous subspace inclusion $P_0\\hookrightarrow P$ is a continuous section of $q$, since $q\\circ(P_0\\hookrightarrow P)\\circ q_0^{-1}=q_0\\circ q_0^{-1}=\\mathrm{id}_S$. This proves 3; together with Steps 1–5 it proves all three equivalences.",
+   "uses": [
+    "lem-weil-pbc-compact-hausdorff-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YN, proposition-projective-in-category-hausdorff-qc, extremally disconnected implies sections, via Tags 08YM and 08YL; Tag 08YE, lemma-bijective-map."
+   }
+  },
+  {
+   "text": "*Total disconnectedness.* Assume 1. If $x\\ne y$, choose disjoint open neighbourhoods $U\\ni x$ and $V\\ni y$ by Hausdorffness. The closure $\\overline U$ is clopen and contains $x$. It misses $y$, because the open neighbourhood $V$ avoids $U$. Any connected subset containing both $x$ and $y$ would then be separated into its nonempty intersections with $\\overline U$ and its complement. Hence every connected subset has at most one point, which is total disconnectedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YI, paragraph after definition-extremally-disconnected; the separating-clopen argument of the blueprint, final paragraph."
+   }
+  },
+  {
+   "text": "*Profinite realization, including the empty space.* If $S=\\varnothing$, it is the inverse limit of the diagram consisting of the empty finite discrete space. Assume now that $S\\ne\\varnothing$. Let $\\mathcal P$ be the set of finite partitions of $S$ into nonempty clopen subsets. It contains $\\{S\\}$. Give it an arrow $\\mathcal Q'\\to\\mathcal Q$ when $\\mathcal Q'$ refines $\\mathcal Q$, and send each block of $\\mathcal Q'$ to its unique containing block of $\\mathcal Q$. Nonempty intersections of blocks give common refinements; thus this is a cofiltered inverse system of finite discrete block sets. The map $h:S\\to L=\\varprojlim_{\\mathcal Q\\in\\mathcal P}\\mathcal Q$ sends a point to its block. It is continuous: the inverse image of a basic product neighbourhood restricted to $L$ is a finite intersection of unions of clopen blocks, hence open. Step 13 separates distinct points by clopens, and the partition into such a clopen and its complement separates their images, so $h$ is injective. For a compatible family $(C_{\\mathcal Q})_{\\mathcal Q}\\in L$ and finitely many partitions $\\mathcal Q_1,\\ldots,\\mathcal Q_n$, choose a common refinement $\\mathcal R$. Compatibility gives $\\varnothing\\ne C_{\\mathcal R}\\subseteq\\bigcap_{i=1}^n C_{\\mathcal Q_i}$. Thus these selected closed blocks have the finite intersection property. If their total intersection were empty, their open complements would cover $S$; a finite subcover would contradict the displayed nonempty finite intersection. Any point in the total intersection maps to the given family, proving surjectivity. Distinct points of $L$, as a subspace of a product of finite discrete spaces, differ in a coordinate and have disjoint coordinate neighbourhoods, so $L$ is Hausdorff. Apply [lem-weil-pbc-compact-hausdorff-bijection] to $h$ (taking both subsets there to be the entire spaces): it is a homeomorphism. Thus $S$ is profinite in the inverse-limit definition.",
+   "uses": [
+    "lem-weil-pbc-compact-hausdorff-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, proof of (2) implies (1); Tag 08YE, lemma-bijective-map. The clopen separation needed in that proof is established in Step 13."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-zorn-lemma",
+  "lem-weil-pbc-compact-hausdorff-bijection"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-projective.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08YN (proposition-projective-in-category-hausdorff-qc), 08YM (lemma-find-compact-subset), 08YJ (lemma-image-open-technical), 08YK (lemma-intersection-empty), 08YL (lemma-isomorphism), 08YI (paragraph after definition-extremally-disconnected), and 08ZY (lemma-profinite). The full minimal-closed-surjective-subspace route of the current blueprint is realized in Steps 6–12; elementary compactness and closure arguments are expanded."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projective_iff_extremallyDisconnected|Gleason|totallyDisconnectedSpace",
+   "results": "24 hits; Mathlib/Topology/Category/CompHausLike/Basic.lean; Mathlib/Topology/Category/CompHausLike/Basic.lean; Mathlib/Topology/Category/CompHausLike/Basic.lean; Mathlib/Topology/Category/Profinite/Product.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; subdirectory Topology/Category",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extremally disconnected compact Hausdorff space is projective and totally disconnected",
+   "results": "8 hits; CompactT2.ExtremallyDisconnected.projective; Profinite.projective_of_extrDisc; CompactT2.Projective; CompactT2.projective_iff_extremallyDisconnected; CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective; CompHaus.toStonean; instTotallySeparatedSpaceOfExtremallyDisconnectedOfT2Space; ExtremallyDisconnected",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projective_iff_extremallyDisconnected\"",
+   "results": "1 hits; CompactT2.projective_iff_extremallyDisconnected",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact Hausdorff space is extremally disconnected if and only if it is projective, equivalently every continuous surjection onto it admits a continuous section, and it is totally disconnected",
+   "results": "8 hits; CompactT2.projective_iff_extremallyDisconnected; CompactT2.Projective.extremallyDisconnected; CompactT2.ExtremallyDisconnected.projective; CompHaus.Gleason; CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective; Profinite.projective_of_extrDisc; Stonean.instProjective; CompHaus.toStonean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projective_iff\", \"split\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff|hasSection|HasSection|splitEpi|SplitEpi",
+   "results": "17 hits; Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean; Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; subdirectory CategoryTheory/Preadditive",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff.*[Ss]plit|projective.*[Ss]plitEpi|projective_of.*[Ss]plit|split.*[Pp]rojective|Projective",
+   "results": "5 hits; 15; 17; 19; 20; 22; subdirectory CategoryTheory/Preadditive/Projective/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff_extremallyDisconnected|instTotallySeparatedSpace|Projective|def ExtremallyDisconnected",
+   "results": "5 hits; 15; 21; 23; 25; 30; subdirectory Topology/ExtremallyDisconnected.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem CompactT2.projective_iff|^instance \\[ExtremallyDisconnected|^def CompactT2.Projective|^protected theorem CompactT2",
+   "results": "5 hits; Mathlib/Topology/ExtremallyDisconnected.lean; Mathlib/Topology/ExtremallyDisconnected.lean; Mathlib/Topology/ExtremallyDisconnected.lean; Mathlib/Topology/ExtremallyDisconnected.lean; Mathlib/Topology/ExtremallyDisconnected.lean; subdirectory Topology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff.*[Ss]plit|projective_of.*[Ss]plit|split.*[Pp]rojective|split_of_projective|projective_of_split",
+   "results": "2 hits; Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean; Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/Opposite.lean; subdirectory CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object in a category with pullbacks is projective if every epimorphism onto it splits",
+   "results": "8 hits; CategoryTheory.isProjective; CategoryTheory.Projective; CategoryTheory.EnoughProjectives; CategoryTheory.projective_iff_llp_epimorphisms_zero; CategoryTheory.Projective.inst; CategoryTheory.Projective.factors; CategoryTheory.Projective.instHasLiftingPropertyOfEpi; CategoryTheory.ProjectivePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"IsSplitEpi\"",
+   "results": "1 hits; CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact Hausdorff space is projective if and only if every continuous surjection from a compact Hausdorff space onto it admits a continuous right inverse",
+   "results": "8 hits; CompactT2.Projective; Stonean.instProjectiveCompHausCompHaus; Stonean.instProjectiveProfiniteObjToProfinite; CompactT2.ExtremallyDisconnected.projective; CompHaus.instEnoughProjectives; Stonean.instProjective; CompHaus.projective_ultrafilter; CompHaus.Gleason",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Cc]ompactSpace.*(Prod|×)|theorem.*[Cc]ompact.*prod|isCompact_prod|isCompact_univ_pi",
+   "results": "21 hits; Mathlib/Topology/Separation/Hausdorff.lean; Mathlib/Topology/UniformSpace/Ascoli.lean; Mathlib/Topology/MetricSpace/ProperSpace.lean; Mathlib/Topology/Order/Compact.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean; subdirectory Topology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of two compact spaces is a compact space",
+   "results": "8 hits; instCompactSpaceProd; TopologicalSpace.Compacts.instSProdProd; Function.compactSpace; Pi.compactSpace; TopologicalSpace.Compacts.prod; IsCompact.prod; isCompact_univ_pi; instSigmaCompactSpaceProd",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isCompact_prod\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of two compact topological spaces is compact",
+   "results": "8 hits; instCompactSpaceProd; Pi.compactSpace; TopologicalSpace.Compacts.instSProdProd; TopologicalSpace.Compacts.prod; isCompact_univ_pi; IsCompact.prod; isCompact_pi_infinite; TopologicalSpace.NonemptyCompacts.prod",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits cover the Gleason equivalence, its notions, or supporting facts, not all three equivalent conditions and the profiniteness conclusion in one exact or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Gleason|projective|extremally disconnected",
+   "results": "25 hits; Mathlib/NumberTheory/ModularForms/Cusps.lean; Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/Projectivization.lean; Mathlib/NumberTheory/Height/Projectivization.lean; Mathlib/NumberTheory/Height/Projectivization.lean; Mathlib/NumberTheory/Height/Projectivization.lean; Mathlib/NumberTheory/Height/Basic.lean; Mathlib/NumberTheory/Padics/RingHoms.lean",
+   "date": "2026-10-16",
+   "verdict": "supporting matches only: read the Gleason equivalence, lifting definition, and total-separation instance; the section criterion still needs Steps 1–5, so these do not make the complete item a Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact Hausdorff space, every continuous surjection onto that space splits if and only if closures of open sets are open",
+   "results": "8 hits; CompHaus.Gleason; CompactT2.projective_iff_extremallyDisconnected; CompactT2.ExtremallyDisconnected.projective; CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective; CompactT2.Projective; CompactT2.Projective.extremallyDisconnected; Stonean.instProjective; Stonean.instProjectiveCompHausCompHaus",
+   "date": "2026-10-16",
+   "verdict": "supporting matches only: read the Gleason equivalence, lifting definition, and total-separation instance; the section criterion still needs Steps 1–5, so these do not make the complete item a Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff_extremallyDisconnected|TotallySeparatedSpace|def CompactT2.Projective",
+   "results": "3 hits; 58; 78; 285; subdirectory Topology/ExtremallyDisconnected.lean",
+   "date": "2026-10-16",
+   "verdict": "supporting matches only: read the Gleason equivalence, lifting definition, and total-separation instance; the section criterion still needs Steps 1–5, so these do not make the complete item a Mathlib leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -57,5 +318,20 @@
  "blueprint_order": null,
  "blueprint_uses": [],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-stonean-projective",
+  "worker": "stage1",
+  "summary": "Repair of the returned step-6 route substitution: removed the continuous-section theorem citation and restored the substantive minimal closed surjective source proof. Steps 6–12 prove chain intersection surjectivity, use the existing subset Zorn leaf via complements, establish compactness and closedness, prove the V-star density and injectivity arguments, and construct the section from a homeomorphism. Full statement preserved, no new nodes, four existing Mathlib leaves reused, no Lean or compilation.",
+  "blueprint": "Blueprint det-pe-stonean-projective.proof.md paragraphs 1–3 are Steps 1–5; paragraph 4 (chain intersections and minimal source) is Steps 6–7; paragraph 5 (V-star opens) is Steps 8–9; paragraph 6 (density and injectivity) is Steps 10–11; paragraph 7 (homeomorphism and section) is Step 12; paragraph 8 (clopen separation) is Step 13, expanded to the profinite realization in Step 14 using Stacks 08ZY. This also realizes the minimal-source route explicitly named by sk-prop-pe-stonean.proof.md. No route exception or tool-use exception is sought. Whole-blueprint duplicate searches are retained. The imported item has no chapter/unit metadata and the corresponding chapter/unit records are absent, so maintainer metadata is preserved and current blueprint section/proof files are read directly."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-80a2ebade",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-80a2ebade (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, Stacks sources, and all four cited DAG leaves. Steps 1–14 are mathematically sound, hypotheses and edge cases are handled, the repaired minimal-source argument is explicit, no duplicate/new-node issue exists, and no banned SGA or tool-use exception appears. Review written to review.md."
+ }
 }

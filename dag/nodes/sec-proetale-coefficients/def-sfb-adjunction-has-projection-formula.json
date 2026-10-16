@@ -3,22 +3,76 @@
  "blueprint": {
   "is": "def-sfb-adjunction-has-projection-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Adjunctions satisfying the projection formula",
- "statement": "Let $P\\dashv S$ be an adjunction, with $P\\colon\\mathcal C\\to\\mathcal D$ and\n$S\\colon\\mathcal D\\to\\mathcal C$, unit $u$, and $S$ strong monoidal with structure maps\n$\\mu^S$. The *projection formula map*\n$$\nP(SL\\otimes M)\\to L\\otimes PM\\qquad(L\\in\\mathcal D,\\ M\\in\\mathcal C)\n$$\nis the adjoint of\n$SL\\otimes M\\xrightarrow{SL\\otimes u_M}SL\\otimes SPM\\xrightarrow{\\mu^S_{L,PM}}S(L\\otimes PM)$.\nThe adjunction *satisfies the projection formula* if all projection formula maps are\nisomorphisms.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category]. Let $P\\dashv S$ be an adjunction, with $P\\colon\\mathcal C\\to\\mathcal D$ and\n$S\\colon\\mathcal D\\to\\mathcal C$, unit $u$, and hom-set bijections as in [lem-weil-pbc-adjunction-of-natural-bijection]. Suppose $S$ is strong monoidal with structure maps\n$\\mu^S$ [def-sfb-strong-monoidal-functor]. The *projection formula map*\n$$\nP(SL\\otimes M)\\to L\\otimes PM\\qquad(L\\in\\mathcal D,\\ M\\in\\mathcal C)\n$$\nis the adjoint of\n$SL\\otimes M\\xrightarrow{\\mathrm{id}_{SL}\\otimes u_M}SL\\otimes SPM\\xrightarrow{\\mu^S_{L,PM}}S(L\\otimes PM)$.\nHere the adjoint is the inverse image under the bijection\n$\\operatorname{Hom}_{\\mathcal D}(P(SL\\otimes M),L\\otimes PM)\\cong\\operatorname{Hom}_{\\mathcal C}(SL\\otimes M,S(L\\otimes PM))$.\nThe adjunction *satisfies the projection formula* if all projection formula maps are\nisomorphisms, that is, each has a two-sided inverse.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-has-projection-formula.md",
   "place": "node def-sfb-adjunction-has-projection-formula, order 1604"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction with strong monoidal right adjoint satisfies the projection formula when the canonical maps P(S L tensor M) to L tensor P M are isomorphisms",
+   "results": "Adjunction.unit_app_tensor_comp_map_δ, rightAdjointLaxMonoidal_μ, map_μ_comp_counit_app_tensor and tensorRightAdjunction; these concern monoidal adjunctions or rigid categories, not the projection-formula predicate for an arbitrary adjunction with monoidal right adjoint.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "Adjunction.map_η_comp_η, ε_comp_map_ε, IsMonoidal.instIsMonoidalCounit/Unit and mapMon; those assume monoidality of an adjunction and do not define the requested map or predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasProjectionFormula|projectionFormulaMap|projection.formula",
+   "results": "No hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for an adjunction with a monoidal right adjoint is invertibility of its adjoint tensor comparison morphisms",
+   "results": "CategoryTheory.frobeniusMorphism (Mathlib.CategoryTheory.Monoidal.Closed.Functor), rightAdjointLaxMonoidal and tensorRightAdjunction. Read Frobenius source: only cartesian monoidal categories, so not a match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius reciprocity morphism for a lax monoidal functor and its left adjoint, defined as mate of multiplication and the adjunction unit",
+   "results": "Adjunction.rightAdjointLaxMonoidal_μ, IsMonoidal.leftAdjoint_μ, unit_app_tensor_comp_map_δ and related monoidal adjunction identities. No general projection-formula predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.frobeniusMorphism",
+   "results": "frobeniusMorphism and its invertibility criteria in Mathlib.CategoryTheory.Monoidal.Closed.Functor. They assume cartesian monoidal categories.",
+   "date": "2026-10-16",
+   "verdict": "no match: only a special case"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|Frobenius|frobenius",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:51 docstring, :61 frobeniusMorphism; read lines 43–62: both categories CartesianMonoidalCategory, and construction uses product comparison. Rigid/Basic.lean:383 only a docstring mentioning Frobenius reciprocity.",
+   "date": "2026-10-16",
+   "verdict": "no match: only cartesian or rigid special cases"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -32,5 +86,20 @@
  "blueprint_lean_not_found": [
   "CategoryTheory.Adjunction.HasProjectionFormula"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-adjunction-has-projection-formula",
+  "worker": "stage1",
+  "summary": "Definition-only split. Made the ambient monoidal categories and transpose hom-set explicit without changing the canonical map or the all-objects isomorphism condition. Reused the existing Mathlib leaf for adjunction hom-set bijections; created two searched Mathlib definition leaves for monoidal categories and strong monoidal functors. Checked the current blueprint and upstream master reference; no finished slopmaster2 attachment exists.",
+  "blueprint": "Realizes the complete definition in def-sfb-adjunction-has-projection-formula.md, equivalently the construction and invertibility condition in sk-def-sfb-transport clause 4. The later coherence and linearization assertions belong to other nodes and are not used here."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-6debb79de",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-6debb79de (reviewer sub-agent of L); spot-checked: Reviewed the item and both new nodes against the current blueprint, Stacks Tags 0FFK/0FFL, cited DAG statements, and recorded Mathlib matches. Projection-map types, adjunction mate direction, strong monoidal structure, hypotheses, small cases, dependencies, searches, duplicate audit, and metadata repair all check out. Review written to review.md."
+ }
 }

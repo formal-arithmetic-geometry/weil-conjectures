@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-monoidal-category",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-adjunction-has-projection-formula",
+   "place": "Statement, the tensor products in P(SL tensor M) and L tensor PM; ambient monoidal categories in sk-def-sfb-transport, opening sentence and clause 4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Monoidal categories and tensor notation",
+ "statement": "A monoidal category is a category $\\mathcal C$ [def-nagata-category] equipped with a bifunctor $\\otimes:\\mathcal C\\times\\mathcal C\\to\\mathcal C$, a specified object $\\mathbf1$, and natural isomorphisms\n$\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\xrightarrow{\\sim}X\\otimes(Y\\otimes Z)$,\n$\\lambda_X:\\mathbf1\\otimes X\\xrightarrow{\\sim}X$ and $\\rho_X:X\\otimes\\mathbf1\\xrightarrow{\\sim}X$.\nFor all objects $W,X,Y,Z$ the pentagon identity is\n$$\n(\\mathrm{id}_W\\otimes\\alpha_{X,Y,Z})\\circ\\alpha_{W,X\\otimes Y,Z}\\circ(\\alpha_{W,X,Y}\\otimes\\mathrm{id}_Z)\n=\\alpha_{W,X,Y\\otimes Z}\\circ\\alpha_{W\\otimes X,Y,Z},\n$$\nand the triangle identity is\n$$\n(\\mathrm{id}_X\\otimes\\lambda_Y)\\circ\\alpha_{X,\\mathbf1,Y}\n=\\rho_X\\otimes\\mathrm{id}_Y.\n$$\nHere $f\\otimes g$ denotes the image of the pair of morphisms $(f,g)$ under the tensor bifunctor, and composition $b\\circ a$ means first $a$, then $b$.\nAn isomorphism is a morphism with a specified two-sided inverse; naturality means that these structural isomorphisms commute with the morphisms induced by the tensor bifunctor.\nHere a bifunctor assigns an object to each pair of objects and a morphism to each pair of morphisms, preserving identities and componentwise composition.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FFK, definition-monoidal-category, with the preceding associativity constraint (equation-pentagon) and unit (equation-triangle) in section-monoidal; use the inverse of the Stacks associator, so alpha has the Mathlib orientation. Specify a chosen unit and its unitors, as the paragraph following the definition does."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal category has a tensor bifunctor, unit object, associator and unitors satisfying triangle and pentagon axioms",
+   "results": "CategoryTheory.MonoidalCategoryStruct, CategoryTheory.MonoidalCategory.toMonoidalCategoryStruct and CategoryTheory.MonoidalCategory in Mathlib/CategoryTheory/Monoidal/Category; the full MonoidalCategory includes the axioms.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory",
+   "results": "CategoryTheory.MonoidalCategory in Mathlib.CategoryTheory.Monoidal.Category; also tensorLeft, tensorRight and curriedTensor.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^class MonoidalCategory|^class MonoidalCategoryStruct",
+   "results": "Mathlib/CategoryTheory/Monoidal/Category.lean:87 MonoidalCategoryStruct; :162 MonoidalCategory. Read lines 87–107 and 151–210: the specified tensor, unit, associator, unitors, naturality, pentagon and triangle are exactly the data and equations here.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal category consists of a tensor product, unit, associator and unitors with pentagon and triangle identities",
+   "results": "CategoryTheory.MonoidalCategory, MonoidalCategory.mk and MonoidalCategoryStruct in Mathlib.CategoryTheory.Monoidal.Category.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor category with a chosen identity object, associative tensor product up to natural isomorphism, pentagon and triangle coherence",
+   "results": "Returned CategoryTheory.MonoidalCategory, MonoidalCategoryStruct and their tensorUnit/tensorObj fields, alongside SingleObj and coherence notation. The full MonoidalCategory declaration at Category.lean:162 is the match.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.pentagon",
+   "results": "Returned CategoryTheory.MonoidalCategory.pentagon in Mathlib.CategoryTheory.Monoidal.Category; the equation agrees with the displayed pentagon after reversing diagrammatic composition.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^structure CoreMonoidal|^class MonoidalCategory",
+   "results": "[grep] OK 3 hit(s): Mathlib/CategoryTheory/Monoidal/Category.lean:87 MonoidalCategoryStruct; :162 MonoidalCategory; Mathlib/CategoryTheory/Monoidal/Functor.lean:620 CoreMonoidal.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of a tensor category with associativity isomorphism and left and right identity constraints",
+   "results": "{\"t\": \"2026-10-16T12:31:51Z\", \"tool\": \"leanfinder\", \"query\": \"Definition of a tensor category with associativity isomorphism and left and right identity constraints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.term_⊗ᵢ_\", \"CategoryTheory.MonoidalCategoryStruct.tensorObj\", \"CategoryTheory.MonoidalCategory\", \"CategoryTheory.MonoidalCategoryStruct\", \"CategoryTheory.MonoidalCoherence\", \"CategoryTheory.Mon_\", \"CategoryTheory.MonoidalCategory.ofTensorHom\", \"CategoryTheory.MonoidalCategory.toMonoidalCategoryStruct\"], \"digest\": \"c6a3aed736688549\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.triangle",
+   "results": "{\"t\": \"2026-10-16T12:32:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.triangle\"], \"digest\": \"654cfea333cd328a\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "structure CoreMonoidal|class MonoidalCategory",
+   "results": "{\"t\": \"2026-10-16T12:31:52Z\", \"tool\": \"grep\", \"query\": \"structure CoreMonoidal|class MonoidalCategory\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\"], \"digest\": \"706daee16edc40f9\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MonoidalCategory",
+  "file": "Mathlib/CategoryTheory/Monoidal/Category.lean",
+  "how": "exact: CategoryTheory.MonoidalCategory at line 162, extending MonoidalCategoryStruct at line 87, with tensor bifunctor laws and naturality at lines 163–197, pentagon at line 201 and triangle at line 208. The statement uses the same specified unit and unitors and the same orientation of associator.",
+  "line": 162
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-sfb-adjunction-has-projection-formula",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence"
+}

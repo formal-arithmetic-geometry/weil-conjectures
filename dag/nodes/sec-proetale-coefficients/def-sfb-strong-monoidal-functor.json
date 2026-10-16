@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-strong-monoidal-functor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-adjunction-has-projection-formula",
+   "place": "Statement, S strong monoidal with structure maps mu^S; the arrow SL tensor SPM to S(L tensor PM) in the defining composite. This is the strong monoidal functor in sk-def-sfb-transport clause 4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Strong monoidal functors and their structure maps",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category], with unit objects $\\mathbf1_{\\mathcal C},\\mathbf1_{\\mathcal D}$, associators $\\alpha^{\\mathcal C},\\alpha^{\\mathcal D}$ and unitors $\\lambda^{\\mathcal C},\\rho^{\\mathcal C},\\lambda^{\\mathcal D},\\rho^{\\mathcal D}$.\nA strong monoidal structure on a functor $F:\\mathcal C\\to\\mathcal D$ consists of an isomorphism\n$e:\\mathbf1_{\\mathcal D}\\xrightarrow{\\sim}F\\mathbf1_{\\mathcal C}$ and isomorphisms\n$\\mu_{X,Y}:FX\\otimes FY\\xrightarrow{\\sim}F(X\\otimes Y)$ natural in $X,Y$.\nWriting $e,\\mu$ also for their forward morphisms, they satisfy, for all $X,Y,Z\\in\\mathcal C$,\n$$\nF(\\alpha^{\\mathcal C}_{X,Y,Z})\\circ\\mu_{X\\otimes Y,Z}\\circ(\\mu_{X,Y}\\otimes\\mathrm{id}_{FZ})\n=\\mu_{X,Y\\otimes Z}\\circ(\\mathrm{id}_{FX}\\otimes\\mu_{Y,Z})\\circ\\alpha^{\\mathcal D}_{FX,FY,FZ},\n$$\n$$\nF(\\lambda^{\\mathcal C}_X)\\circ\\mu_{\\mathbf1_{\\mathcal C},X}\\circ(e\\otimes\\mathrm{id}_{FX})=\\lambda^{\\mathcal D}_{FX},\\qquad\nF(\\rho^{\\mathcal C}_X)\\circ\\mu_{X,\\mathbf1_{\\mathcal C}}\\circ(\\mathrm{id}_{FX}\\otimes e)=\\rho^{\\mathcal D}_{FX}.\n$$\nAn isomorphism is a morphism with a specified two-sided inverse; the inverse structure maps are $\\mu_{X,Y}^{-1}$ and $e^{-1}$. No braiding or symmetry is required.\nHere a functor assigns objects and morphisms preserving identities and composition. Naturality of the tensorator means that for morphisms $f:X\\to X'$ and $g:Y\\to Y'$,\n$$F(f\\otimes g)\\circ\\mu_{X,Y}=\\mu_{X',Y'}\\circ(F(f)\\otimes F(g)).$$",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FFL, definition-functor-monoidal-categories, with the chosen unit convention after Tag 0FFK. The displayed associativity diagram uses the inverse associator orientation to alpha. Here the unit preservation is recorded as a coherent unit isomorphism, as in Mathlib Functor.CoreMonoidal."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor has invertible tensor comparison and unit comparison, satisfying associativity and unitality",
+   "results": "CategoryTheory.Functor.CoreMonoidal, Functor.Monoidal.instIsIsoμ, CoreMonoidal.μIso, Monoidal.μIso, Functor.Monoidal and Monoidal.ofLaxMonoidal in Mathlib/CategoryTheory/Monoidal/Functor.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Functor.Monoidal in Mathlib.CategoryTheory.Monoidal.Functor; CoreMonoidal.toMonoidal and the toLaxMonoidal and toOplaxMonoidal projections also returned.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^class LaxMonoidal|^class Monoidal|^class CoreMonoidal|^structure CoreMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean:65 LaxMonoidal, :389 Monoidal, :620 CoreMonoidal. Read CoreMonoidal lines 620–651: unit and tensor isomorphisms with exactly the naturality, associativity and two unit equations in this node; Monoidal at 389 stores mutually inverse lax and oplax maps.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The definition of a strong monoidal functor between arbitrary monoidal categories",
+   "results": "CategoryTheory.Functor.Monoidal, Functor.Monoidal.mk, Functor.CoreMonoidal.toMonoidal, Functor.CoreMonoidal and CoreMonoidal.mk in Mathlib.CategoryTheory.Monoidal.Functor.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong tensor functor specified by a unit isomorphism and natural tensor isomorphisms satisfying the unit and associator diagrams",
+   "results": "Returned Functor.CoreMonoidal, Functor.Monoidal, CoreMonoidal.muIso (rendered μIso by the service), LaxMonoidal and bifunctor constructors. Read CoreMonoidal at Functor.lean:620–651: the data and equations match.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "Returned CategoryTheory.Functor.CoreMonoidal with arbitrary monoidal categories, its unit/tensor isomorphisms and toMonoidal/toLaxMonoidal/toOplaxMonoidal constructions. Exact definition match at Functor.lean:620.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^structure CoreMonoidal|^class MonoidalCategory",
+   "results": "[grep] OK 3 hit(s): Mathlib/CategoryTheory/Monoidal/Category.lean:87 MonoidalCategoryStruct; :162 MonoidalCategory; Mathlib/CategoryTheory/Monoidal/Functor.lean:620 CoreMonoidal.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserves tensor products by natural isomorphisms and preserves the identity object with coherent associator and unit diagrams",
+   "results": "{\"t\": \"2026-10-16T12:32:24Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserves tensor products by natural isomorphisms and preserves the identity object with coherent associator and unit diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal\", \"CategoryTheory.Functor.CoreMonoidal\", \"CategoryTheory.Functor.CoreMonoidal.toMonoidal\", \"CategoryTheory.Functor.CoreMonoidal.μIso\", \"CategoryTheory.Functor.LaxMonoidal\", \"CategoryTheory.Functor.Monoidal.map_tensor_assoc\", \"CategoryTheory.Functor.CoreMonoidal.ofBifunctor\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\"], \"digest\": \"794b3a701529b910\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal.μIso",
+   "results": "{\"t\": \"2026-10-16T12:31:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.CoreMonoidal.μIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CoreMonoidal.μIso\", \"CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal_μ\", \"CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal_δ\", \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso\", \"CategoryTheory.Functor.CoreMonoidal.μIso_hom_natural_left\", \"CategoryTheory.Functor.CoreMonoidal.μIso_hom_natural_right\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_hom\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_inv\"], \"digest\": \"cbb1273a9723313a\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "structure CoreMonoidal|class MonoidalCategory",
+   "results": "{\"t\": \"2026-10-16T12:31:52Z\", \"tool\": \"grep\", \"query\": \"structure CoreMonoidal|class MonoidalCategory\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\"], \"digest\": \"706daee16edc40f9\"}",
+   "date": "2026-10-16",
+   "verdict": "match; second reader checked the named declaration in the pinned Mathlib source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.CoreMonoidal",
+  "file": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "how": "exact: CoreMonoidal at line 620, fields at lines 622–651, is precisely the unit isomorphism, natural tensor isomorphisms and three coherence equations stated. Its toMonoidal construction converts these to Functor.Monoidal; conversely Monoidal at line 389 stores the forward and inverse structure maps, with εIso and μIso at lines 404 and 411.",
+  "line": 620
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-sfb-adjunction-has-projection-formula",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence"
+}
