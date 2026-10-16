@@ -76,6 +76,28 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         before += len(d["sorry_before"]); after += len(d["sorry_after"])
         proved += [k for k in d["sorry_before"] if k in d["new"] and k not in d["sorry_after"]]
         new_sorry += d["new_sorry"]
+    # the human, 2026-10-17 (upstream sync e47efb5a5): statements in the adopted source library stay verbatim; a
+    # delivery may fill proof bodies of existing theorems there and add private helpers, nothing else
+    UPNOTE = "upstream statements are verbatim; prove it or state the needed variant in a `Sheaf` module"
+    for m in D["modules"]:
+        if not m["file"].startswith("lean/WeilConjectures/"):
+            continue
+        d = m["diff"]
+        if m["role"] == "new" or m.get("old") is None:
+            refuse.append(f"{m['module']}: new module in the source library tree ({UPNOTE})"); continue
+        bad = []
+        if d["statement_changed"]: bad.append("changes the statement of " + short(d["statement_changed"]))
+        if d["removed"]: bad.append("removes " + short(d["removed"]))
+        if d["public_added"]: bad.append("adds public declaration(s) " + short(d["public_added"]))
+        data = [k for k in d["body_changed"] if d["old"][k]["kw"] not in ("theorem", "lemma")]
+        if data: bad.append("changes the body of non-theorem declaration(s) " + short(data))
+        attrs = [k for k in d["new"] if k in d["old"] and d["old"][k].get("head") != d["new"][k].get("head")]
+        if attrs: bad.append("changes attributes of " + short(attrs))
+        sheaf_imp = [i for i in d["added_imports"] if i.startswith("Sheaf.")]
+        if sheaf_imp: bad.append("imports " + short(sheaf_imp))
+        if d["public_imports_changed"]: bad.append("changes public imports " + short(d["public_imports_changed"]))
+        if bad:
+            refuse.append(f"{m['module']}: " + "; ".join(bad) + f" ({UPNOTE})")
     if new_sorry and not proved and after >= before:
         refuse.append(f"adds `sorry` ({short(new_sorry)}) but proves no declaration that had one, and the sorry count of "
                       f"the delivered modules does not fall ({before} -> {after})")

@@ -150,7 +150,8 @@ def decl_table(text: str) -> dict[str, dict]:
         head = text[d["start"]:d["kw_pos"]]
         out[key] = {"kw": d["kw"], "name": d["name"], "statement": d["statement"], "body": s2.normalize(d["body"]),
                     "sorry": len(SORRY.findall(sig)) + len(SORRY.findall(d["body"])),
-                    "private": bool(re.search(r"\bprivate\b", head)), "doc": d["docstring"] or ""}
+                    "private": bool(re.search(r"\bprivate\b", head)), "doc": d["docstring"] or "",
+                    "head": " ".join(re.sub(r"/--.*?-/", "", head, flags=re.S).split())}
     return out
 
 
