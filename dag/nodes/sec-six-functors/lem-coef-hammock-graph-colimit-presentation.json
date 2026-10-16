@@ -272,5 +272,40 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-cab9132c6 (reviewer sub-agent of L); spot-checked: Read the item's full statement and all five steps, the statements of both cited nodes (def-coef-zigzag-homotopy-calculus, lem-coef-proper-word-colimit-invariance; both in unit sk-prop-sf-biduality-general, so no tool uses) and Dwyer–Kan, Calculating simplicial localizations, printed pp.19–24 (2.1, 3.4, 4.1, 4.4, 5.1, 5.3, 5.4, 5.5) from the scan at the node's URL. The paper is still not in literature/, so proof_origin=agent is correct. The statement matches DK 5.4/5.5 with 3.4, hypothesis by hypothesis: wide T as in O-Cat, endpoint identities, leftward and vertical arrows in T, length 0 exactly when x=y. DK number columns in composition order (letter n+1-i) and the item numbers them left to right. Reversing positions is an automorphism of II that keeps maps monotone and sign-preserving, so the colimit is the same. Nothing is weakened. This is not a target node, so no coefficient category or base-change morphism is involved. Step 1: checked the vertex bookkeeping k_i=|{j:f(j)<=i}| (k_0=0, k_l=l', each fibre is one consecutive single-sign block) and functoriality. Step 2: a square with identity horizontal sides forces its two verticals to be equal, which gives injectivity and the image-intersection condition, including the empty intersection. Step 3: checked all first-move overlap cases myself; the Newman-style strong induction is set up properly and is not circular. Step 4: every word map factors as surjection then injection; R(alpha R)=R alpha gives well-defined reduced simplicial operators and the bijection. Step 5: RFR=RF and RFR alpha=RF alpha=R alpha F=R alpha RF are correct. Small cases tested: empty word, a one-letter word, a discrete category, inverse arrows in a groupoid composing to an identity, and a functor collapsing everything to the terminal category (which shows the apply-then-reduce formula is needed). Duplicate check over the 60 hammock nodes: none states this colimit presentation, and the parent lem-coef-hammock-pair-homotopy-invariance uses it as one input, so it is not a restated clause. A Mathlib grep for hammock/Dwyer found nothing, and the recorded searches cover all three kinds. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockGraphColimitPresentation",
+  "declaration": "SSet.Hammock.hammock_graph_colimit_presentation",
+  "declarations": [
+   "SSet.Hammock.letters",
+   "SSet.Hammock.vertices",
+   "SSet.Hammock.rowData",
+   "SSet.Hammock.verticalData",
+   "SSet.Hammock.pathChains",
+   "SSet.Hammock.stepData",
+   "SSet.Hammock.pathRowData",
+   "SSet.Hammock.ColumnComposite",
+   "SSet.Hammock.BlockImages",
+   "SSet.Hammock.WordImage",
+   "SSet.Hammock.GridRepresents",
+   "SSet.Hammock.PresentationData",
+   "SSet.Hammock.NaturalFor",
+   "SSet.Hammock.hammock_graph_colimit_presentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HammockGraphColimitPresentation.lean",
+  "statement": "theorem hammock_graph_colimit_presentation (T : MorphismProperty C) [T.IsMultiplicative] (x y : C) : ∃ P : PresentationData T x y, NaturalFor T P",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The fixed-word nerves, fiberwise column-composition maps, reduced simplices, row operators, reduction cocone and colimit isomorphism are specified on every actual grid. Naturality uses entrywise marked functors followed by reduction. Existing HammockInfinityLocalization helper definitions are reused without using its downstream localization theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e7b6da35",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read the delivery diff: 3 files; only the item's lean record is added; statement verbatim, no statement_change. Read both statement deps (SignedWord/Hom/IsProper; zigzag Diagram/Hom/zigzagNerve) and the reused HammockInfinityLocalization helpers. Every node clause matches the Lean: T IsMultiplicative; G with fixedWord iso to the zigzag nerve; GridRepresents keeps all row and vertical data; WordImage/BlockImages/ColumnComposite compose the fibres in order, with identity columns of the target sign for empty fibres; IsProper; H ≃ ReducedHammock, length 0 iff x=y; rowOperators reduce after the row operation; canonical cocone, reduction formula, colimit iso and legs; NaturalFor applies the functor entrywise and reduces, with the colimMap square. The existential is fully pinned down, not hollow. Edge cases checked: empty word, empty intersection, q=0, repeated-sign words, collapsing functors, independent universes u,v. Same-universe naturality targets are forced by SSet typing and hammockMapPath, and source and citer are covered. Helpers hosted in the DAG-downstream HammockInfinityLocalization module are reused, which is acyclic and established practice, and its theorem is unused. No duplicate found (rg on Mathlib, side, slopmaster2). Docstrings, the sorry-only proof, line width, declarations list and imports are fine. Report has a real Worker report and Second reading by NU. nt_compile.py --json against the local side overlay: exit 0, 2.4 s, no warnings."
  }
 }

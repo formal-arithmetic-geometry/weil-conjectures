@@ -258,5 +258,34 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-2591febfe (reviewer sub-agent of L); spot-checked: Read all mathematics and checked all ten steps against Tabuada, pp. 26–32; no mathematical gap, circularity, duplicate or missing hypothesis found. Corrected the §1.3 source location and supplied missing new-node audit/default metadata. Full checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCategoryEquivalenceCellCalculus",
+  "declaration": "CategoryTheory.Dg.equivalenceCellCalculus",
+  "declarations": [
+   "CategoryTheory.Dg.mulAt",
+   "CategoryTheory.Dg.mulAtDegree",
+   "CategoryTheory.Dg.IsH0Iso",
+   "CategoryTheory.Dg.DegreewiseSurjective",
+   "CategoryTheory.Dg.IsCellPushout",
+   "CategoryTheory.Dg.IsFreeCell",
+   "CategoryTheory.Dg.EquivalenceCellCalculus",
+   "CategoryTheory.Dg.equivalenceCellCalculus"
+  ],
+  "statement": "theorem equivalenceCellCalculus : Nonempty (EquivalenceCellCalculus R)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/DgCategoryEquivalenceCellCalculus.lean",
+  "fixed_by": "NT-stage2-cc-ed1517114"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed1517114",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Statement is correct against the node, the free-cell dependency and Tabuada 1.3.1 (pp. 27-32). K_R is built on the dependency's Cat R with the right generators, degrees and four differential identities (right-to-left via mul). IsFreeCell is the strict universal property (the dependency's FinitePresentation.universal specialised to 2 objects, 5 generators, 0 relations), so Nonempty of the structure is not hollow. realize, pushout (universal property, old-Hom QuasiIso, object coverage, H0 iso of the image of f) and lift (degreewise surjective p, square object equations, strict filler q = F >> p) match (a), (b), (c) with no extra hypotheses. Edge cases: zero ring, x = y, all degrees, single universe u. Searches found no duplicate. No hollow definition, only the theorem's sorry, node copy changed only in lean. Fixed H8: added source and blueprint docstrings to mulAt and mulAtDegree (none before) and to IsH0Iso, DegreewiseSurjective, IsCellPushout and EquivalenceCellCalculus (plain comments before); the theorem docstring now carries the 10 proof steps; lean.declarations now lists mulAt and mulAtDegree. Signatures and statement unchanged. nt_compile: delivered rc 0 (7.8 s), fixed rc 0 (7.1 s), no diagnostics; check_lean_text clean."
  }
 }

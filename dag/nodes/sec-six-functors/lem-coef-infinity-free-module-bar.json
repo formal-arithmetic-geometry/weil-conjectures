@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-split-augmentation-colimit"
+  "lem-coef-infinity-split-augmentation-colimit",
+  "def-coef-coherent-monad-modules"
  ],
  "proof": [
   {
@@ -211,5 +212,30 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-6900f3d4c (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the three new nodes and the cited statements (split-augmentation-colimit, pointwise-adjoint-criterion, def-cbc-enhanced-diagrams-cones, def-coef-monoidal-infinity-category), and checked them against Higher Algebra 2017: Cor 4.2.3.2 and 4.2.3.5 (pp. 527-529), Def 4.2.4.1 and Cor 4.2.4.6-8 (pp. 530-531), Constr 4.4.2.7 and Ex 4.4.2.12 (pp. 576-578), Rem 4.7.2.3-4 and Ex 4.7.2.5/4.7.2.7 (pp. 677-679). The item statement is unchanged and is not a target, so no base-change morphism or coefficient category is involved. Face, degeneracy and extra-degeneracy indices check out, including r=0, r=1, T=id and h_r = eta_{T^{r+1}A} from f(0)=-1. Step 2: the hypothesis composite mu_c T(eta_c) is the identity by the right unit law, so HA 4.2.4.6 applies. Step 3 is correctly elementary: the inverse formula is a_M T(g), two lines from the module-map property. Steps 5-6 are exactly HA Ex 4.7.2.7 and Ex 4.7.2.5; the splitting is absolute, so applying any H in End(C) to it gives a colimit and Cor 4.2.3.5(2) applies. Each new node is a true general HA statement, strictly more general than the item, not a restatement of one of its clauses, and not a duplicate (I searched the DAG with rg and read the near hits). There is no cycle, proof_deps equal the union of the uses, all route citations are in unit sk-prop-sf-biduality-general, no tool_uses are needed and no SGA is used. Minor, non-blocking: the bar node's ordered-word/unit-block clause is phrased informally, and the item text describes monoidal Fun(C,C) inline without citing def-coef-monoidal-infinity-category. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfcc7bdc2",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read item node, report (Worker report + Second reading by Q68 present), both delivered modules, deps EnhancedDiagramsCones (comma/IsInitial/mappingSpace) and InfinitySplitAugmentationColimit, Mathlib ordinal-sum tensor. New def-coef-coherent-monad-modules is real data (RV walking-monad action; equalizer over the action graph); left factor below right, so the graph imposes exactly left equivariance. Clauses: conservativity direction correct; F with F≫V=T and free diagram strict; adjunction as initial (F c, η_c) in comma c↓V; η edge endpoints c and Tc consistent. R augmentation/degree equalities; E determined by unique right-adjoint ordinals; hand-checked faces T^iμ/T^r a, degeneracies T^{i+1}η, extra degeneracies η_A and η_{T^{r+1}A}, augmentation a; colimit via dependency predicate; no realization hypotheses. Node statement unchanged vs side clone; lean.statement verbatim; no duplicate notion. nt_compile --json of both files rc=0, no errors/warnings. Note only: inverse a_M T(g) implied by universal arrow rather than stated separately."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityFreeModuleBar",
+  "declaration": "SSet.Enhanced.infinity_free_module_bar",
+  "declarations": [
+   "SSet.Enhanced.CoherentSplitWeightRelation",
+   "SSet.Enhanced.coherentBarDegree",
+   "SSet.Enhanced.coherentBarAt",
+   "SSet.Enhanced.infinity_free_module_bar"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityFreeModuleBar.lean",
+  "statement": "theorem infinity_free_module_bar {C : SSet.{u}} [Quasicategory C] (T : CoherentMonad C) : Quasicategory (coherentMonadModules T) ∧ (∀ e : (coherentMonadModules T) _⦋1⦌, IsEquivalenceEdge C ((coherentModuleForget T).app _ e) → IsEquivalenceEdge (coherentMonadModules T) e) ∧ ∃ F : C ⟶ coherentMonadModules T, F ≫ coherentModuleDiagram T = coherentFreeDiagram T ∧ F ≫ coherentModuleForget T = coherentMonadFunctor T ∧ (∀ c : C _⦋0⦌, ∃ t : (comma (coherentMonadModules T) C (coherentModuleForget T) c false) _⦋0⦌, t.1.1 = F.app _ c ∧ t.1.2 = (coherentMonadUnit T).app _ c ∧ IsInitial (comma (coherentMonadModules T) C (coherentModuleForget T) c false) t) ∧ ∃ (R : splitAugmentedIndex ⊗ coherentMonadModules T ⟶ coherentMonadModules T) (E : splitExtendedIndex ⊗ coherentMonadModules T ⟶ C), lift (SSet.const splitAugmentationVertex) (𝟙 (coherentMonadModules T)) ≫ R = 𝟙 _ ∧ (∀ r : ℕ, lift (SSet.const (coherentBarDegree r)) (𝟙 (coherentMonadModules T)) ≫ R = coherentModuleForget T ≫ coherentMonadPower T r ≫ F) ∧ (splitExtensionIndexMap ▷ coherentMonadModules T) ≫ E = R ≫ coherentModuleForget T ∧ (∀ (k : SimplexCategoryᵒᵖ) (z : splitExtendedIndex.obj k) (w : coherentAlgebraWeight.obj k), CoherentSplitWeightRelation z.down w.down → ∀ m : (coherentMonadModules T).obj k, E.app k (z, m) = ((ihom.ev coherentAlgebraWeight).app C).app k (w, (coherentModuleDiagram T).app k m)) ∧ ∀ M : (coherentMonadModules T) _⦋0⦌, IsSplitAugmentationColimit (coherentBarAt R M)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the explicit walking-monad weighted-limit model. The free adjunction is encoded by initial universal unit arrows in the coherent comma category c↓V; the full bar splitting is specified on every simplex by the canonical right-adjoint ordinal relation. No realization hypotheses are added."
  }
 }
