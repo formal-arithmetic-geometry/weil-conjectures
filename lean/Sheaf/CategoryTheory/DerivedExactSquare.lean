@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-! # Localization formula for a square of exact functors
 
