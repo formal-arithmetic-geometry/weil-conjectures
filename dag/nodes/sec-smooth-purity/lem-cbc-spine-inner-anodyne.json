@@ -201,5 +201,27 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-6b0581361 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement (Sp[n] = simplices with σ(r) ≤ σ(0)+1; inner anodyne = LLP against inner fibrations; any n ≥ 0) is unchanged and self-contained. Kerodon 00JA and 00J6 are not in literature/, so I could not open them here: WANTED is recorded, proof_origin is agent, and the proof stands on its own. Step 1: unique factorization through the image, so nondegenerate simplices are nonempty subsets; L_1 = Sp[n] and L_max(1,n) = Δ^n. Step 2: inserting or removing min+1 is a bijection between normalized and nonnormalized simplices of span k ≥ 2, with face index 1. Step 3: I checked closure of A_{k,r} under every face type, A_{k,1} = L_{k-1}, and A_{k,n} = L_k (a nonnormalized simplex misses a+1, so its dimension is ≤ n-1). Step 4: the faces of Δ^S outside A_{k,r-1} are exactly S and d_1S, so the intersection is Λ^r_1. Different cells do not overlap outside A_{k,r-1}; I checked directly that any S' ⊇ d_1S with S' ≠ S has span > k or is not normalized. Step 5: the inner horn is in llp(inner fibrations) by definition. Sequential pushouts and finite composition then follow from the identity, composition and pushout clauses of the Mathlib leaf lem-coef-lifting-class-closure, which I checked against LiftingProperty.lean:35-77. It needs no hypotheses on the category or the class and is a tool, not a route step, so no tool_uses entry is needed. Small cases n=0..3 were checked by hand; my own sequential-attachment enumeration for n ≤ 10 passed every horn-intersection, stage and final-equality check. The parent lem-cbc-simplicial-composition-spine uses exactly this statement. The rg duplicate search for spine/Segal/00JA/00J6/inner anodyne found no node stating the result. The blueprint from.place under thm-cbc-finite-level-proetale's opening compactification sentence is accurate. No new nodes, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplexSpineInnerAnodyne",
+  "declaration": "SSet.simplexSpine_innerAnodyne",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplexSpineInnerAnodyne.lean",
+  "statement": "theorem simplexSpine_innerAnodyne (n : ℕ) : innerAnodyneExtensions.{u} (simplexSpine.{u} n).ι",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SSet.simplexSpine",
+   "SSet.simplexSpine_innerAnodyne"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-875e76fc1",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Only the module, report and node lean field changed; node otherwise identical to the clone. SSet.simplexSpine is a real Δ[n] subcomplex with predicate σ(last).val ≤ σ(0).val+1 (Kerodon 00JA Ex. 1.5.7.7(a)) and a complete closure proof. Conclusion innerAnodyneExtensions.{u} (simplexSpine.{u} n).ι uses Mathlib innerFibrations.llp / innerHornInclusions.rlp, which match the node's definitions; no extra hypotheses, single bound universe u. Edge cases n=0,1 (identity) and n=2 (Λ²₁) correct. No duplicate in Mathlib or the project. Five-step proof docstring checked against 00J6. lean.statement verbatim, docstrings give source and blueprint, only sorry is the main theorem, report has Worker report and Second reading by NJ. nt_compile.py on the snapshot file: rc=0, no errors or warnings. No findings."
  }
 }

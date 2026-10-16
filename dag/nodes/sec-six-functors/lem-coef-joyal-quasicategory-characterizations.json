@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-joyal-model-structure"
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [
   {
@@ -251,5 +252,24 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-089e1f108 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all four cited statements in full: def-cbc-enhanced-diagrams-cones, the current lem-coef-joyal-model-structure, lem-coef-infinity-isofibration-exponentiation and lem-coef-infinity-core-kan-fibration. Cisinski's CatLR.pdf is not archived under literature/ (WANTED) and network access is blocked for reviewers, so I could not open it at the cited places. I checked every claim mathematically myself instead, and proof_origin=agent is correct. Steps 1-7 all check. Step 1: the single-edge and triangle-iff clauses make the edge u itself an equivalence, not just some edge in its class. Step 2: sigma and tau give [b][a]=1 and [a][c]=1 in hJ, so b=c; the J-map is u, v, v with the def-cbc triangles; s_{0,0}={0}->J is a trivial cofibration, and the lifted edge has source exactly x. Step 3: every edge of J is invertible in hJ, so v:J->T lands in the core of T (T is a quasicategory by the exponentiation node). Step 4: the core-Kan node plus a written saturation argument lift the Kan-anodyne endpoint; uncurrying fixes both pieces of the square, and n=0 is covered. Steps 5-6: E=C test, essential surjectivity, then full faithfulness, with step 1 producing actual equivalence edges in Fun. Step 7: the whiskering map (H,t)->H∘eps_t is simplicial and its two prism triangles give naturality on the generating edges; the variances are right (f*g*≅1 via eta, g*f*≅1 via eps). New nodes, both true. The interval node: the endpoints are Kan anodyne (Lambda^1, then Lambda^2_0- and Lambda^2_2-pushouts); s_{eps,n} is a Joyal trivial cofibration (Fun(J,C)->C is a trivial fibration and the Joyal structure is cartesian); the fibration test between quasicategories holds. The edge/triangle node is Boardman-Vogt; the Mathlib edge-quotient candidate correctly keeps it unsplit. Neither node restates a clause of the item (D1), and neither duplicates invertible-interval, relative-categorical-cylinder-criterion, presheaf-cylinder-model-recognition, the model node or cbc-equivalence-outer-horn-filling. No cycle: the closures of all cited nodes avoid the item. All cited statements are in sk-prop-sf-biduality-general, so tool_uses is empty. No SGA source; not a target node. FIX: split_report.summary still described the removed pointwise-core node as delivered; I rewrote only that field in fixes/dag/nodes/sec-six-functors/lem-coef-joyal-quasicategory-characterizations.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalQuasicategoryCharacterizations",
+  "declaration": "SSet.joyal_quasicategory_characterizations",
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalQuasicategoryCharacterizations.lean",
+  "statement": "theorem joyal_quasicategory_characterizations (M : HomotopicalAlgebra.ModelCategory SSet.{u}) (hcof : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithCofibrations.cofibrations i ↔ ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) (hweak : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences i ↔ ∀ (E : SSet.{max u v}), E.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app E)).toFunctor).IsEquivalence) {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (f : C ⟶ D) : (M.categoryWithFibrations.fibrations f ↔ Enhanced.IsIsofibration f) ∧ (M.categoryWithWeakEquivalences.weakEquivalences f ↔ Enhanced.IsFunctorEquivalence f)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The model parameter and its two class identifications are exactly those supplied by exists_joyal_model_structure. IsIsofibration is reused from the landed exponentiation node, added to stmt_deps; no replacement notion or choice of model data is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b87839185",
+  "group": "NM",
+  "result": "pass",
+  "note": "Statement matches the node verbatim in substance. M is fixed by hcof/hweak, word for word from exists_joyal_model_structure, and fibrations follow as RLP of trivial cofibrations from the model axioms. (1) is IsIsofibration: inner-horn lifting plus source-fixed, exact-image equivalence-edge lifting. (2) is IsFunctorEquivalence: g with equivalence edges f≫g≃𝟙C and g≫f≃𝟙D, each with both inverse triangles. Universes u,v bound, v arbitrary. Node diff only adds the lean block and the isofibration-exponentiation stmt_dep (already a proof_dep, no cycle). lean.statement verbatim in file. No definitions, sorry only, docstrings carry source, blueprint tag and 7-step proof plan, no duplicate notion, worker report and second reading present. nt_compile --json rc 0, clean, 1.2 s. Cisinski PDF not opened by this reviewer; mathematics checked directly."
  }
 }

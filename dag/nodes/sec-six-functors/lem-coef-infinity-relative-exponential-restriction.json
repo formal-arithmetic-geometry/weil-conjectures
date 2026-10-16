@@ -218,5 +218,33 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-320216504 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement is byte-identical to the base copy. I read its six steps, the new node lem-coef-cocartesian-categorical-base-change, and the full statements of def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations and lem-coef-joyal-model-structure (same unit). Each cited clause is there: monos as cofibrations, the lifting characterisations of both weak factorization systems, two-out-of-three, inner horns as trivial cofibrations, and fibrant exactly when a quasicategory. Step 1 (relative-exponential correspondence) is elementary and correct. Step 2 (H_Z is a quasicategory) extends the horn's projection in S, then applies the new node to the horn, which need not be a quasicategory, so the pulled-back horn inclusion is a mono categorical equivalence, and E is fibrant. In step 3 the union inside Δ^m×_S Y is an actual pushout; this uses that j is injective in each degree and that qj=p. Steps 4–6 cover pulling back along p and q, pushout stability of trivial cofibrations through the lifting property, two-out-of-three applied to v∘c=a_Y, and a strict filler. No hypothesis is missing and no off-unit statement is used, so no tool_uses are needed. The new node is true: pullback along a cocartesian fibration preserves categorical equivalences, as in HTT 3.3.1.3/B.3 and Kerodon §5.6.7 (029H). It is not archived; WANTED is filed and the proof is marked agent. I tested S=Δ^0, u=id, r=id and Z empty. It is statement-only, all its notions come from its three stmt_deps, its blueprint from/via are correct, and same_as is [] (the main-20261015 blueprint never mentions cocartesian or categorical equivalence). It has no Mathlib match: the Mathlib in this checkout has no Joyal model structure, and innerFibration_pullbackObjObjπ is a non-relative map. My DAG search over the Joyal, isofibration, marked, straightening and relative-exponential nodes found no duplicate. Item edge cases checked: S a point, X empty, X=Y, non-full j. The parent's use of the item is consistent with its hypotheses. No fixes and no dropped nodes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeExponentialRestriction",
+  "declaration": "SSet.Enhanced.relativeExponentialRestriction_innerFibration",
+  "declarations": [
+   "SSet.Enhanced.RelativeExponentialSimplex",
+   "SSet.Enhanced.relativeExponentialMap",
+   "SSet.Enhanced.relativeExponential",
+   "SSet.Enhanced.relativeExponentialProjection",
+   "SSet.Enhanced.relativeExponentialRestrictionMap",
+   "SSet.Enhanced.relativeExponentialRestriction",
+   "SSet.Enhanced.relativeExponentialRestriction_innerFibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeExponentialRestriction.lean",
+  "statement": "theorem relativeExponentialRestriction_innerFibration (S X Y E : SSet.{u}) (p : X ⟶ S) (q : Y ⟶ S) (j : X ⟶ Y) [SSet.Quasicategory S] [SSet.Quasicategory X] [SSet.Quasicategory Y] [SSet.Quasicategory E] (hp : cocartesianFibration p) (hq : cocartesianFibration q) (hcomm : j ≫ q = p) (hmono : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (j.app n)) : SSet.Quasicategory (relativeExponential E p) ∧ SSet.Quasicategory (relativeExponential E q) ∧ SSet.InnerFibration (relativeExponentialRestriction E p q j hcomm)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The relative exponential and its canonical projection/restriction are real degreewise constructions belonging to this node. A simplex is expressed as its natural family of values on the degreewise pullback; sigma uses Yoneda. Only the stated theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce1a8241a",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations incl. full cocartesianFibration/IsCocartesianEdge), the module, report (Worker report + Second reading by NE), Kerodon 02ZR/0472 source place. Every clause matches: S,X,Y,E quasicategories in one universe u; hp/hq recorded cocartesianFibration; hmono degreewise injectivity and hcomm j≫q=p, no fullness/colimit assumptions; RelativeExponentialSimplex (sigma via Yoneda + natural value family on the degreewise pullback, Prop-valued pullback equation) is exactly a map Δ^n×_S Z→E; operators, projection and restriction R are the canonical ones, strictly over S; conclusion = both quasicategory clauses ∧ Mathlib SSet.InnerFibration (inner horns 0<i<n, strict lifts). Edge cases (empty X/Y/S/E, j=id, S=Δ[0], non-full j, universes) covered. No existing declaration in Mathlib/side lean/DAG records; helpers listed in lean.declarations; node copy differs from base only in lean; lean.statement verbatim in file. No hollow defs, one sorry (axioms checked), source/blueprint docstrings, six-step proof docstring, Joyal proof dep imported privately. nt_compile.py --json rc 0, no messages. Only a cosmetic 'Lemma the project server' text artifact in the second reading; non-blocking."
  }
 }

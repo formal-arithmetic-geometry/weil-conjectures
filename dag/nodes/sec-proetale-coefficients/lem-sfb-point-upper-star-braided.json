@@ -215,5 +215,27 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-78957c9ae (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependency statements, and current blueprint sources. All five steps check: inverse coherence, sheafification symmetry, adjunction mates, and braided comparison. No new nodes, circularity, coefficient substitution, or repairs. Source locations, edge cases, DAG overlap checks, and target scope are recorded in review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.monoidal_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
+  ],
+  "statement": "noncomputable instance laxBraided_pointUpperStar : pointUpperStar.{u}.LaxBraided",
+  "branch": "slopmaster2",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "note": "The published pro-etale framework already supplies the exact structures for this statement. monoidal_pointUpperStar gives the strong monoidal structure on p^*, while laxBraided_pointUpperStar states the braiding compatibility and explicitly documents that p^* is braided because it is strong monoidal. These are the canonical tensor comparison maps from the recorded point-upper-star unit and tensor dependencies; no duplicate module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3331ba1d4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Existing binding to AlgebraicGeometry.ProEtale.monoidal_pointUpperStar and laxBraided_pointUpperStar in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic, exact. The monoidal structure is built from the adjunction's oplax structure with the recorded unit and tensor comparisons (isIso_η, isIso_δ). LaxBraided.braided is the symmetry square with mu = inv delta (compiled by simp). The instance monoidal and braided structures on both sheaf categories are rfl-equal to sfbSheafTensorStructure (sk-def-sfb-sheaf-tensor). The statement field matches the source verbatim and agrees with blueprint_lean. No extra hypotheses or universe restriction. Only the lean field and the report changed, and both report sections are present. nt_compile check file: no errors; standard axioms only. No findings."
+ }
 }

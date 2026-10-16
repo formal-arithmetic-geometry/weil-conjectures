@@ -263,5 +263,23 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-7d9f08ded (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged, and it is exactly what step 1 of the parent det-prop-sfb-cartesian-coefficients-finite-free uses: O_F is the integral closure of O_E, taken before the finite-closure theorem (032L). The delivery creates no new nodes, so no drop is needed. Steps checked against the cited statements: (1) Q_l is complete and its norm is nontrivial (|l|=1/l<1). With base Q_l, V=F and W=Q_l^d, every hypothesis of lem-weil-pbc-finite-dimensional-linear-homeomorphism holds, so the coordinate maps are continuous. (2) The ε-box argument shows that every power x^n, including n=0, lies in L=sum Z_l l^{-N} b_i. (3) A DVR is a PID, hence Noetherian (lem-weil-pbc-pid-noetherian-normal). Z_l[x] is a submodule of L, so it is finite by lem-weil-pbc-noetherian-submodule-finite; the step does not claim L is a ring. (4) finite-algebra-is-integral applies to Z_l[x]. Since Z_l is contained in O_E, the same monic equation makes x integral over O_E. (5) The ultrametric estimate t^r<=t^{r-1}<t^r for t=|x|>1 is a genuinely elementary step. proof_deps equals the union of the step uses. Small cases pass: x=0, units, E=F=Q_l, l=2, r=1, and the totally ramified Q_l(l^{1/e}). There is no cycle: the closure of the 9 dependencies (28 nodes) does not reach the item, and its only citer is the parent. Off-unit citations are only Mathlib leaves and a definition, so no tool_uses is needed; removing the self-written request was correct (C8). Duplicate check over dag/nodes and the main-20261015 blueprint: the DVR, localization and Gauss-lemma nodes and the normalization nodes are not duplicates, so same_as=[] is right. Mathlib: Valuation.Integers.isIntegral_iff_v_le_one (Integral.lean:35) assumes O is the whole unit ball in the same ring, so it is not a leaf; the searches cover all three required kinds. Serre is honestly recorded as WANTED, with proof_origin=agent. No SGA is used and this is not a target node. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.PadicIntegersIntegralClosure",
+  "declaration": "Padic.padic_integers_integralClosure",
+  "file": "lean/Sheaf/NumberTheory/Padics/PadicIntegersIntegralClosure.lean",
+  "statement": "theorem padic_integers_integralClosure (l : ℕ) [Fact l.Prime] (E : Type u) (F : Type v) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F) (x : F) : x ∈ coefficientExtensionIntegers l F ↔ x ∈ @integralClosure (coefficientExtensionIntegers l E) F _ _ ((i.toRingHom.comp (coefficientExtensionIntegers l E).subtype).toAlgebra)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-644845964",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Padic.padic_integers_integralClosure renders the node exactly: prime l, finite fields E (Type u) and F (Type v) over Q_l, inclusion i : E →ₐ[ℚ_[l]] F, any x : F; x ∈ coefficientExtensionIntegers l F ↔ x ∈ integralClosure of O_E in F, with the algebra structure O_E ⊂ E →i F. Compatibility of the spectral absolute values along i is automatic (the minimal polynomial is preserved), so no hypothesis was dropped and none is stronger. Degree-0 monic is 1 ≠ 0, which matches n ≥ 1. The recorded dependency declarations are used and no duplicate exists in Mathlib or lean/Sheaf. The node changes only in its lean record, and lean.statement is verbatim the file's signature. The report has a real worker report and second reading. Docstrings carry the source place, the blueprint tag and the five proof steps; the proof is sorry only; no definitions; lines ≤ 100. Edge cases checked: x=0, x=1, E=F, E=Q_l, l=2, ramified extensions, separate universes. nt_compile.py --json against the side overlay compiles clean (1.3 s, exit 0), and a deliberately broken control copy did report its error. No findings, no fixes."
  }
 }
