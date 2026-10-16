@@ -305,5 +305,36 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-02cc6cc29 (reviewer sub-agent of L); spot-checked: Read the item, the report and both cited node statements in full: def-coef-zigzag-homotopy-calculus and lem-coef-thomason-grothendieck-comparison, including its Th/Gr morphism formulas and its last objectwise-invariance assertion. Also read the parent's citing step in lem-coef-homotopy-fractions-hammock-comparison and the blueprint ancestor's paragraph 2. The statement is unchanged and correct. Endpoint variances: first − covariant, first + contravariant, last + covariant, last − contravariant. Step 2: in Th_P D_u the first-letter-minus seam square is h'k = w h. Step 3: Gr over P^op has fiber U -> w^*U' with square k h = h' w. Step 4: target naturality of F^p is strict, by associativity in both last-letter cases and for one-letter u. Step 5: Th over Q for a last + and Gr over Q^op for a last −, with the components being the step-3 equivalences. All of these were checked against the cited formulas. Tested empty p and q, one-letter u, W = C on [1], and u = '−', v = '−−' identity insertion. No invertibility, nonemptiness or 2-of-3 is used. Both cited nodes are in the item's unit sk-prop-sf-biduality-general, so there are no tool_uses. The comparison node's 50-node closure excludes the item, so the graph stays acyclic. Searched the DAG for concatenation, Grothendieck construction, DK 9.4/9.6 and zigzag: the aspherical-base-change, special-resolution, special-hammock, hammock-pair, free-factor and DK-cofibrant nodes state different results, so there is no duplicate, and there are no new nodes. Mathlib searches span all three kinds, verdict no match. Dwyer–Kan and Low are not in the local literature, so the source could not be read at the cited place; the proof is correctly marked agent-written and the WANTED lines stand. Not a target node; no SGA source. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f3bce903",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, stmt dep def-coef-zigzag-homotopy-calculus and its module (Diagram/Square/Commutes/Hom), proof dep (no lean record; proof-only), module, report. All 11 node clauses matched: IsMultiplicative W, +/- letters for r,s,p,q, r,s nonempty with equal head?/getLast?, F.functor family, pointwise nerve WHE hypothesis, arbitrary (possibly empty) p,q and x,y, ∃G with IsReplacement (objects = cut/apply F/glue; prefix/suffix arrows retained, middle = F.map of the induced rectangle) ∧ WHE(nerveMap G). EndpointNaturalFamily checked against Square: elementary source/target rectangles give the four variances (first − covariant, first + contravariant, last + covariant, last − contravariant); unique rectangle factorization shows it is equivalent to strict naturality, with no extra hypothesis and not vacuous. Edge cases: empty p/q, one-letter words, trivial W, universes max u v. Gates: real helper constructions, single sorry, docstrings carry source, blueprint tag and 5-step proof; lean.statement verbatim; 10 declarations present; node changed only in lean; no duplicate in Mathlib or Sheaf; report has both sections. nt_compile.py --json: overlay deps and module compiled, exit 0, no errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.ZigzagConcatenationInvariance",
+  "declaration": "CategoryTheory.RelativeZigzag.zigzag_concatenation_invariance",
+  "declarations": [
+   "CategoryTheory.RelativeZigzag.Rectangle",
+   "CategoryTheory.RelativeZigzag.EndpointNaturalFamily",
+   "CategoryTheory.RelativeZigzag.cutDiagram",
+   "CategoryTheory.RelativeZigzag.glueDiagram",
+   "CategoryTheory.RelativeZigzag.prefixVertex",
+   "CategoryTheory.RelativeZigzag.suffixVertex",
+   "CategoryTheory.RelativeZigzag.middleDiagram",
+   "CategoryTheory.RelativeZigzag.replacementObject",
+   "CategoryTheory.RelativeZigzag.IsReplacement",
+   "CategoryTheory.RelativeZigzag.zigzag_concatenation_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/ZigzagConcatenationInvariance.lean",
+  "statement": "theorem zigzag_concatenation_invariance [W.IsMultiplicative] (r s : List Letter) (_hr : r ≠ []) (_hs : s ≠ []) (_hletters : (∀ l ∈ r, l = .forward ∨ l = .backward) ∧ ∀ l ∈ s, l = .forward ∨ l = .backward) (_hfirst : r.head? = s.head?) (_hlast : r.getLast? = s.getLast?) (F : EndpointNaturalFamily W r s) (_hF : ∀ a b : C, SSet.Enhanced.IsWeakHomotopyEquivalence (nerveMap (F.functor a b))) (p q : List Letter) (_hp : ∀ l ∈ p, l = .forward ∨ l = .backward) (_hq : ∀ l ∈ q, l = .forward ∨ l = .backward) (x y : C) : ∃ G : Diagram W (p ++ (r ++ q)) x y ⥤ Diagram W (p ++ (s ++ q)) x y, IsReplacement W F p q x y G ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (nerveMap G)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded relative Diagram, Vertical, Commutes, category and realization weak equivalence. Helper declarations specify strict endpoint composition by preservation of elementary rectangles and characterize the replacement on every object and vertical arrow; no arbitrary action or unspecified comparison is assumed. The source statement is unchanged."
  }
 }
