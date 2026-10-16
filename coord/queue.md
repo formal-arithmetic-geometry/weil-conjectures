@@ -1,6 +1,6 @@
 # Work queue
 
-40 items; claim with `tools/claim.py next <group> [--stage N]`.
+37 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (40)
+## Stage 3: modules to prove (37)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,12 +19,12 @@
 | `Sheaf.Paper.ContinuousConstructibleIntegralSingle` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
-| `Sheaf.Paper.IntegralConstructibleKernels` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
+| `Sheaf.Paper.IntegralMatrixPivotCover` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
@@ -43,12 +43,9 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore` | 9 | 1 | proof |
-| `Sheaf.Paper.CondensedFiniteFreeHomEvaluation` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteTypeResidueTrdeg` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent` | 40 | 1 | proof |
