@@ -15313,3 +15313,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: merged deliver/E3/WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution (stage 3; reviewer PASS; first push; landing 20261016T003158-L-3926706 (interface); batch 20261016T003156; modules 9; new nodes 8)
 - 00:31 L: merged deliver/E4/Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261016T003159-L-3926928 (proof); batch 20261016T003156; modules 1; new nodes 0)
 - 00:32 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ClosedPointField (stage 3; reviewer PASS; first push; landing 20261016T003159-L-3927115 (proof); batch 20261016T003156; modules 1; new nodes 0)
+- 00:32 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg (stage 3; reviewer PASS; first push; landing 20261016T003200-L-3927285 (proof); batch 20261016T003156; modules 1; new nodes 0)

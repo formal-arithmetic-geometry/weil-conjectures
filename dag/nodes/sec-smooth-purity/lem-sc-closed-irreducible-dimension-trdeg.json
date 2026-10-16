@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to the closed subset $C$ to obtain a reduced closed immersion $i:Y\\to X$ whose image is $C$. By [def-weil-closed-immersion], $i$ identifies $|Y|$ homeomorphically with $C$ with its subspace topology. Thus $Y$ is nonempty and irreducible, and hence integral by [def-pc-integral-scheme]. The inverse image $\\eta_Y$ of $\\eta$ is a generic point of $Y$: the homeomorphism takes the closure of $\\{\\eta_Y\\}$ to the closure of $\\{\\eta\\}$ in $C$, which is all of $C$. By [lem-weil-pbc-homeomorphism-krull-dimension], $\\dim Y=\\dim C$.",
+   "text": "Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to the closed subset $C$ to obtain a reduced closed immersion $i:Y\\to X$ whose image is $C$. By [def-weil-closed-immersion], $i$ identifies $|Y|$ homeomorphically with $C$ with its subspace topology. Thus $Y$ is nonempty and irreducible, and hence integral by [def-pc-integral-scheme]. The inverse image $\\eta_Y$ of $\\eta$ is a generic point of $Y$: the homeomorphism takes the closure of $\\{\\eta_Y\\}$ to the closure of $\\{\\eta\\}$ in $C$, which is all of $C$. By [lem-weil-pbc-homeomorphism-krull-dimension], $\\dim Y=\\dim C$. In Lean, use the concrete vanishingIdeal subscheme, take the homeomorphism to its range, and use uniqueness of a generic point in the ambient T0 space to identify i(genericPoint Y) with the prescribed eta.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "def-weil-closed-immersion",
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "Use the affine cover in the definition [def-weil-finite-type-morphism] for $Y\\to\\operatorname{Spec}K$ and choose a member $U=\\operatorname{Spec}A$ containing $\\eta_Y$. Then $U$ is nonempty and $A$ is a finitely generated $K$-algebra; since $Y$ is integral, $A$ is an integral domain by [def-pc-integral-scheme]. Apply [lem-sc-integral-locally-algebraic-opens-dimension] to obtain $\\dim U=\\dim Y$. The affine identification and [lem-weil-pbc-homeomorphism-krull-dimension] give $\\dim U=\\dim\\operatorname{Spec}A$, and the explicit prime-chain identification in [def-weil-pbc-krull-dimension-ring] gives $\\dim\\operatorname{Spec}A=\\dim A$. Thus $\\dim C=\\dim A$.",
+   "text": "Use the affine cover in the definition [def-weil-finite-type-morphism] for $Y\\to\\operatorname{Spec}K$ and choose a member $U=\\operatorname{Spec}A$ containing $\\eta_Y$. Then $U$ is nonempty and $A$ is a finitely generated $K$-algebra; since $Y$ is integral, $A$ is an integral domain by [def-pc-integral-scheme]. Apply [lem-sc-integral-locally-algebraic-opens-dimension] to obtain $\\dim U=\\dim Y$. The affine identification and [lem-weil-pbc-homeomorphism-krull-dimension] give $\\dim U=\\dim\\operatorname{Spec}A$, and the explicit prime-chain identification in [def-weil-pbc-krull-dimension-ring] gives $\\dim\\operatorname{Spec}A=\\dim A$. Thus $\\dim C=\\dim A$. The proved private helper integral_dimension_trdeg assembles steps 3--5, using IsAffineOpen.algebra_finiteType_of_field, topologicalKrullDim_opens_eq and IsAffineOpen.topologicalKrullDim_eq.",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-pc-integral-scheme",
@@ -68,7 +68,7 @@
    }
   },
   {
-   "text": "By [lem-sc-integral-function-field-affine-fraction] applied to the integral scheme $Y$ and its nonempty affine open $U$, the generic stalk $F=\\mathcal O_{Y,\\eta_Y}$ is a field of fractions of $A$ via the germ map $A\\to F$. Explicitly, the map $\\operatorname{Frac}(A)\\to F$, $g/h\\mapsto g_{\\eta_Y}h_{\\eta_Y}^{-1}$, is well-defined and injective by cross multiplication and injectivity of the germ map, and is surjective by the cited fraction description. It respects $K$ because germs of constant sections give the structure map $K\\to F$. By [def-weil-residue-field], $\\kappa_Y(\\eta_Y)=F/(0)$ since $F$ is a field; the map $F/(0)\\to F$, $[f]\\mapsto f$, is a $K$-field isomorphism. Thus $\\kappa_Y(\\eta_Y)$ is canonically a fraction field of $A$ with its prescribed $K$-structure.",
+   "text": "By [lem-sc-integral-function-field-affine-fraction] applied to the integral scheme $Y$ and its nonempty affine open $U$, the generic stalk $F=\\mathcal O_{Y,\\eta_Y}$ is a field of fractions of $A$ via the germ map $A\\to F$. Explicitly, the map $\\operatorname{Frac}(A)\\to F$, $g/h\\mapsto g_{\\eta_Y}h_{\\eta_Y}^{-1}$, is well-defined and injective by cross multiplication and injectivity of the germ map, and is surjective by the cited fraction description. It respects $K$ because germs of constant sections give the structure map $K\\to F$. By [def-weil-residue-field], $\\kappa_Y(\\eta_Y)=F/(0)$ since $F$ is a field; the map $F/(0)\\to F$, $[f]\\mapsto f$, is a $K$-field isomorphism. Thus $\\kappa_Y(\\eta_Y)$ is canonically a fraction field of $A$ with its prescribed $K$-structure. In Lean, use functionField_isFractionRing_of_isAffineOpen and FractionRing.algEquiv. Give the function field its K-algebra through the affine sections. RingEquiv.ofBijective applied to the residue map identifies the generic stalk with its residue field: the map is injective because its source is a field and surjective by residue_surjective. Compatibility with K follows by Spec.algebraMap_residueFieldIso_inv_assoc, residue_residueFieldMap, germ_res_assoc and Hom.germ_stalkMap_assoc. These identities identify both maps with constants followed by germ followed by residue.",
    "uses": [
     "lem-sc-integral-function-field-affine-fraction",
     "def-weil-residue-field"
@@ -91,7 +91,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-closed-immersion-residue-field-iso], $i$ induces an isomorphism $\\kappa_X(\\eta)\\to\\kappa_Y(\\eta_Y)$. It respects $K$ because the structure morphism of $Y$ is the composite through $i$. Such an isomorphism preserves algebraic independence: a polynomial over $K$ vanishes on a tuple if and only if it vanishes on its image, by injectivity and $K$-linearity, and the inverse isomorphism gives the reverse correspondence. Thus their transcendence degrees agree by [def-kun-transcendence-degree]. Substitution in step 5 proves $\\dim C=\\operatorname{trdeg}_K\\kappa_X(\\eta)$.",
+   "text": "By [lem-weil-pbc-closed-immersion-residue-field-iso], $i$ induces an isomorphism $\\kappa_X(\\eta)\\to\\kappa_Y(\\eta_Y)$. It respects $K$ because the structure morphism of $Y$ is the composite through $i$. Such an isomorphism preserves algebraic independence: a polynomial over $K$ vanishes on a tuple if and only if it vanishes on its image, by injectivity and $K$-linearity, and the inverse isomorphism gives the reverse correspondence. Thus their transcendence degrees agree by [def-kun-transcendence-degree]. Substitution in step 5 proves $\\dim C=\\operatorname{trdeg}_K\\kappa_X(\\eta)$. The Lean algebra equivalence uses Hom.residueFieldAlgebraMap_comp for its commutes field and AlgEquiv.trdeg_eq for invariance of transcendence degree. Substitute the generic-point equality only after the two algebra structures have been compared.",
    "uses": [
     "lem-weil-pbc-closed-immersion-residue-field-iso",
     "def-kun-transcendence-degree"
@@ -335,5 +335,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Wrote review.md. Checked all six statement dependencies, source and declaration semantics, edge cases, verbatim signature, docstrings, and pilot gates. Server-only compile reproduced cleanly in 1.4 seconds. No delivery defects found; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927285",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
