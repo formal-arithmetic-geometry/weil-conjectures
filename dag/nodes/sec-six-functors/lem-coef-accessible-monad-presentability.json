@@ -29,9 +29,112 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Each $\\mathcal C_s$ is accessible by the definition of local presentability. Apply the small-product clause of [lem-coef-accessible-pie-closure] to obtain accessibility of $\\mathcal C=\\prod_s\\mathcal C_s$. Its Hom sets are small: $\\operatorname{Hom}_{\\mathcal C}(X,Y)=\\prod_s\\operatorname{Hom}_{\\mathcal C_s}(X_s,Y_s)$ is a small product of small sets.",
+   "uses": [
+    "lem-coef-accessible-pie-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; Ching--Riehl Appendix A, PIE-closure theorem before Definition A.3, product case."
+   }
+  },
+  {
+   "text": "For a small diagram $D:J\\to\\mathcal C$, choose the colimit $L_s$ of each component diagram $D_s:J\\to\\mathcal C_s$. The component cocones assemble to a cocone $D\\to(L_s)_s$. A cocone $D\\to Y$ determines a unique map $L_s\\to Y_s$ for each $s$, and these give the unique map $(L_s)_s\\to Y$ factoring that cocone, by [def-weil-pbc-category-colimit]. Thus $\\mathcal C$ is cocomplete. Along with Step 1 this is local presentability as defined in the statement, including the empty product.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; agent verification of the componentwise colimit universal property."
+   }
+  },
+  {
+   "text": "By [lem-coef-accessible-completeness-characterization], the locally presentable category $\\mathcal C$ is complete. Both $T$ and $1_{\\mathcal C}$ are accessible: the first by the stated preservation hypothesis, the second because it preserves every existing colimit. Form $\\mathcal I=\\operatorname{Ins}(T,1_{\\mathcal C})$. By [lem-coef-accessible-pie-closure], $\\mathcal I$ and its forgetful projection $p:\\mathcal I\\to\\mathcal C$ are accessible. Concretely an object is $(A,a:TA\\to A)$, with no laws yet, and its morphisms satisfy exactly $fa=bT(f)$. There is a tautological natural transformation $\\alpha:Tp\\Rightarrow p$ with component $a$.",
+   "uses": [
+    "lem-coef-accessible-completeness-characterization",
+    "lem-coef-accessible-pie-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; Ching--Riehl Appendix A proof of Proposition A.1, first stage, with the inserter reversed for monads."
+   }
+  },
+  {
+   "text": "On $\\mathcal I$, the two transformations $\\alpha\\circ\\eta_p$ and $1_p$ have the same accessible source and target functor $p$. Their components are $a\\eta_A$ and $1_A$. They are natural since $fa=bT(f)$ and $T(f)\\eta_A=\\eta_Bf$ imply $fa\\eta_A=b\\eta_Bf$. Take their equifier $\\mathcal E\\hookrightarrow\\mathcal I$. By [lem-coef-accessible-pie-closure], $\\mathcal E$ and its inclusion are accessible. It is the full subcategory satisfying the unit law.",
+   "uses": [
+    "lem-coef-accessible-pie-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; Ching--Riehl Appendix A proof of Proposition A.1, second stage, with monad unit in place of comonad counit."
+   }
+  },
+  {
+   "text": "Write $q:\\mathcal E\\to\\mathcal C$ for the composite forgetful functor and again $\\alpha:Tq\\Rightarrow q$ for the restriction. Composites of the accessible functors occurring here are accessible: choose a regular cardinal at least as large as their finitely many preservation cardinals and the cardinals witnessing existence of filtered colimits in each intervening accessible category. A diagram filtered for this cardinal is filtered for each smaller one, so all its intermediate colimits exist and every functor preserves them. For two such functors $F,G$ and a colimit cocone $D\\to L$, applying $F$ and then $G$ gives successive colimit cocones, hence $GF(L)$ with its induced cocone is the colimit of $GF(D)$. This proves accessibility of $q$ and $T^2q$. The transformations $\\alpha\\circ T\\alpha$ and $\\alpha\\circ\\mu_q:T^2q\\Rightarrow q$ are natural. Explicitly $faT(a)=bT(f)T(a)=bT(fa)=bT(b)T^2(f)$, whereas $fa\\mu_A=bT(f)\\mu_A=b\\mu_BT^2(f)$. Their equifier is accessible by [lem-coef-accessible-pie-closure]. Its objects satisfy exactly $a\\eta_A=1_A$ and $aT(a)=a\\mu_A$, and its arrows are exactly those of the given $T$-algebra category. Hence that category is accessible.",
+   "uses": [
+    "lem-coef-accessible-pie-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; Ching--Riehl Appendix A proof of Proposition A.1, third stage, with multiplication in place of comultiplication."
+   }
+  },
+  {
+   "text": "Construct limits in the algebra category directly. For a small diagram $j\\mapsto(A_j,a_j)$, use completeness from Step 3 to choose an underlying limit $(L,p_j)$ in $\\mathcal C$. The maps $a_jT(p_j):TL\\to A_j$ form a cone: for a diagram arrow $f:A_i\\to A_j$, one has $fa_iT(p_i)=a_jT(f)T(p_i)=a_jT(p_j)$. There is therefore a unique $a:TL\\to L$ with $p_ja=a_jT(p_j)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; agent calculation from the limit universal property and the displayed monad algebra identities. Structure map and cone compatibility."
+   }
+  },
+  {
+   "text": "For the structure map $a:TL\\to L$ constructed in Step 6, verify the two algebra laws. The projections are jointly monic by their limit universal property. Naturality of $\\eta$ gives $p_ja\\eta_L=a_j\\eta_{A_j}p_j=p_j$, so $a\\eta_L=1_L$. Likewise\n$$p_jaT(a)=a_jT(p_ja)=a_jT(a_j)T^2(p_j)=a_j\\mu_{A_j}T^2(p_j)=a_jT(p_j)\\mu_L=p_ja\\mu_L,$$\nso the associativity law holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; agent calculation from the limit universal property and the displayed monad algebra identities. Unit and multiplication laws, checked after limit projections."
+   }
+  },
+  {
+   "text": "For the algebra $(L,a)$ from Steps 6-7, verify the limit universal property. For a cone of algebra maps $h_j:(B,b)\\to(A_j,a_j)$, its unique underlying mediator $h:B\\to L$ satisfies $p_jhb=h_jb=a_jT(h_j)=p_jaT(h)$; joint monicity gives $hb=aT(h)$. Thus this cone is a limit in the algebra category. The construction also works for the empty diagram: uniqueness of every map into the underlying terminal object gives all the required equalities. No preservation of limits by $T$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; agent calculation from the limit universal property and the displayed monad algebra identities. Algebra mediator and uniqueness, including the empty diagram."
+   }
+  },
+  {
+   "text": "The algebra category has small Hom sets because each Hom set is a subset of a Hom set of $\\mathcal C$, cut out by $fa=bT(f)$. It is accessible by Steps 3-5 and complete by Steps 6-8, so [lem-coef-accessible-completeness-characterization] implies that it is locally presentable and cocomplete as well. This proves every asserted existence of small limits and colimits. The accessibility theorem allows its cardinal to grow, so the argument imposes no equality between the base's and algebra category's presentability cardinals.",
+   "uses": [
+    "lem-coef-accessible-completeness-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 categorical foundation; Ching--Riehl Appendix A, Theorem A.2 and Remark A.4, monad version."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-pie-closure",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-completeness-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 categorical input. Agent adaptation to monads of Ching--Riehl Appendix A, proof of Proposition A.1; the online source is not archived, and the limit calculation is written here in full."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,10 +205,45 @@
    "results": "{\"t\": \"2026-10-16T16:21:17Z\", \"tool\": \"leanfinder\", \"query\": \"Accessible Eilenberg Moore algebra categories of a monad on a locally presentable category are locally presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.Monad.Algebra.eilenbergMoore\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.Monad.forgetCreatesColimits\", \"CategoryTheory.IsLocallyFinitelyPresentable\"], \"digest\": \"a07ee7c1f2df2910\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reader inspected the returned statements. Ordinary monad algebras, full faithful presentability transfer, ordinary derived categories and ordinary Beck coequalizers do not assert this general foundation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessible monads on locally presentable categories have locally presentable Eilenberg Moore categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsAccessibleCategory.{w, v, u} C] (X : C),\\n  CategoryTheory.IsPresentable.{w, v, u} X\", \"doc\": \"In an accessible category, every object is presentable. Specifically, if $\\\\mathcal{C}$ is an accessible category and $X$ is an object of $\\\\mathcal{C}$, then $X$ is presentable in the sense that the ho\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a $\\\\kappa$-accessible category and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a $\\\\kappa$-accessible, full, and faithful functor in an adjunction, then $\\\\mathcal{D}$ is also a $\\\\kappa$-ac\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredColimits C κ],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCardinalPresentable X κ ∧ CategoryTheory.IsCardinalPr\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ with $\\\\kappa$-filtered colimits, and a morphism property $W$ where every $W$-morphism has $\\\\kappa$-presentable domain and codomain, the incl\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleObjOppositeFunctorTypeUliftCoyonedaOpOfIsCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (X : C) (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalPresentable X κ],\\n  (CategoryTheory.uliftCoyoneda.{t, v₁, u₁}.obj (Opposite.op X)).IsCardinalAccessible κ\", \"doc\": \"For any κ-presentable object $X$, the opposite of the universe-lifted Yoneda functor applied to $X$ is κ-accessible. This means that if $X$ can be presented by a κ-small diagram, then the correspondin\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidate Adjunction.isCardinalLocallyPresentable (Presentable/Adjunction.lean:77-84) assumes a full and faithful right adjoint. A monad forgetful functor need not be full. Monad colimit-creation hits require preservation of the relevant colimits and do not imply local presentability. Product colimit existence does not establish accessibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad.Algebra, CategoryTheory.IsLocallyPresentable",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidate Adjunction.isCardinalLocallyPresentable (Presentable/Adjunction.lean:77-84) assumes a full and faithful right adjoint. A monad forgetful functor need not be full. Monad colimit-creation hits require preservation of the relevant colimits and do not imply local presentability. Product colimit existence does not establish accessibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(Monad|Algebra).*(IsLocallyPresentable|IsAccessibleCategory)|(IsLocallyPresentable|IsAccessibleCategory).*(Monad|Algebra)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidate Adjunction.isCardinalLocallyPresentable (Presentable/Adjunction.lean:77-84) assumes a full and faithful right adjoint. A monad forgetful functor need not be full. Monad colimit-creation hits require preservation of the relevant colimits and do not imply local presentability. Product colimit existence does not establish accessibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of a small family of locally presentable categories and accessible monad algebras are locally presentable",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"[IsLocallyPresentable.{w} C] : IsAccessibleCategory.{w} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.Limits.hasProductsOfShape_of_small\", \"module\": \"Mathlib.CategoryTheory.Limits.EssentiallySmall\", \"type\": \"(β : Type w₂) [Small.{w₁} β] [HasProducts.{w₁} C] : HasProductsOfShape β C\", \"doc\": \"If a category $\\\\mathcal{C}$ has all products and $\\\\beta$ is a small type, then $\\\\mathcal{C}$ has products indexed by the discrete category constructed from $\\\\beta$.\"}\n  {\"name\": \"CategoryTheory.Limits.instHasColimitProd\", \"module\": \"Mathlib.CategoryTheory.Limits.Fubini\", \"type\": \": HasColimit G\", \"doc\": \"If categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ both admit colimits of shape $\\\\mathcal{J}$, then their product category $\\\\mathcal{C} \\\\times \\\\mathcal{D}$ also admits colimits of shape $\\\\mathcal{J}$. The \"}\n  {\"name\": \"CategoryTheory.Monad.Algebra\", \"module\": \"Mathlib.CategoryTheory.Monad.Algebra\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v₁, u₁} C] → CategoryTheory.Monad C → Type (max u₁ v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with objects in Type $u_1$ and morphisms in Type $\\\\max(u_1, v_1 + 1)$, and a monad $T$ on $\\\\mathcal{C}$, this constructs the category of $T$-algebras where objects are p\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} [hC : CategoryTheory.Category.{v, u} C],\\n  (∃ κ, ∃ (x : Fact κ.IsRegular), CategoryTheory.IsCardinalLocallyPresentable C κ) →\\n    CategoryTheory.IsLocallyPresentable.{w, v, u} C\", \"doc\": \"If there exists a regular cardinal $\\\\kappa$ such that the category $\\\\mathcal{C}$ is locally presentable with respect to $\\\\kappa$, then $\\\\mathcal{C}$ is locally presentable.\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"[IsCardinalLocallyPresentable C κ] : IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidate Adjunction.isCardinalLocallyPresentable (Presentable/Adjunction.lean:77-84) assumes a full and faithful right adjoint. A monad forgetful functor need not be full. Monad colimit-creation hits require preservation of the relevant colimits and do not imply local presentability. Product colimit existence does not establish accessibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local presentability of Eilenberg Moore algebras for a filtered colimit preserving monad",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monad.forget_creates_colimits_of_monad_preserves\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} {J : Type u}\\n  [inst_1 : CategoryTheory.Category.{v, u} J] [CategoryTheory.Limits.PreservesColimitsOfShape J T.toFunctor]\\n  (D : CategoryTheory.Functor J T.Algebra) [CategoryTheory.Limits.HasColimit (D.comp T.fo\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if $ T $ preserves colimits of shape $ J $, then for any diagram $ D : J \\\\to \\\\text{Algebra}(T) $, the existence of a colimit for the composition $ D \"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimit\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          (D : CategoryTheory.Functor J T.Algebra) →\\n            [CategoryTheory.Limits.PreservesColimit (D.comp T.forget) T.t\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimits\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      [CategoryTheory.Limits.PreservesColimitsOfSize.{v, u, v₁, v₁, u₁, u₁} T.toFunctor] →\\n        CategoryTheory.CreatesColimitsOfSize.{v, u, v₁, v₁, max u₁ v₁, u₁} T.forget\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a monad $T$ on $\\\\mathcal{C}$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of a specified size, then the forgetful functor $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          [CategoryTheory.Limits.PreservesColimitsOfShape J T.toFunctor] →\\n            CategoryTheory.CreatesColimitsOfShape J\", \"doc\": \"Given a category $\\\\mathcal{C}$, a monad $T$ on $\\\\mathcal{C}$, and a small category $J$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of shape $J$, then the forget\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          {D : CategoryTheory.Functor J T.Algebra} →\\n            (c : CategoryTheory.Limits.Cocone (D.comp T.forget)) →\\n      \", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          {D : CategoryTheory.Functor J T.Algebra} →\\n            (c : CategoryTheory.Limits.Cocone (D.comp T.forget)) →\\n      \", \"doc\": \"Given a cocone in the Eilenberg-Moore category of a monad $ T $ on $ \\\\mathcal{C} $, if its image under the forgetful functor is a colimit in $ \\\\mathcal{C} $, then the apex of the cocone admits a $ T $\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.Limits.instPreservesFilteredColimitsOfSizeUnderForget\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Over\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X : C},\\n  CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u_2, u_3, v_1, v_1, max u_1 v_1, u_1}\\n    (CategoryTheory.Under.forget X)\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$, the forgetful functor from the under category (coslice category) of $X$ to $\\\\mathcal{C}$ preserves filtered colimits of a given size. This means that ap\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidate Adjunction.isCardinalLocallyPresentable (Presentable/Adjunction.lean:77-84) assumes a full and faithful right adjoint. A monad forgetful functor need not be full. Monad colimit-creation hits require preservation of the relevant colimits and do not imply local presentability. Product colimit existence does not establish accessibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -113,5 +251,20 @@
   "group": "Q42"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-monad-presentability",
+  "worker": "stage1",
+  "summary": "Checked the ordinary categorical theorem against Ching--Riehl Appendix A online. Derived the small-product case via accessibility and componentwise colimits, constructed monad algebras using one inserter and two equifiers, and verified all small algebra limits directly. Created only the two general categorical foundations, not another accessible-monad theorem. Statement unchanged; no exact project or Mathlib attachment found. Second reading separated the underlying-limit construction, algebra laws and mediator into three elementary steps.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: the derived mapping-complex adjunction before the displayed inverse-limit formula, through its existing strict-section-model input. Steps 1-2 realize the many-sorted base; Steps 3-9 realize its accessible-monad foundation (Steps 3-5 accessibility of algebras, Steps 6-8 their limits, Step 9 local presentability)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-02ff2f3ad",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-02ff2f3ad (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, both new nodes, the parent quillen-section-rectification Step 1, def-weil-pbc-category-colimit and the blueprint ancestor prop-coef-integral-exceptional-adjoint paragraph 2. I checked them against Ching-Riehl arXiv:1403.5303v2 (jhu.edu gave 403, so I used the arXiv PDF through pdftotext): Def 1.1 on p.2; the Appendix A opening and the sentence giving the dual to AR 2.78 on p.9; Thm A.2 (AR 2.47); the Makkai-Pare 5.1.6 PIE paragraph; Def A.3 on p.10; the three stages of the proof of Prop A.1 and Rem A.4 on pp.10-11. The item statement is true and not weakened (AR 2.78 plus small products), and the parent's colimit-preserving T_0 meets its hypotheses. Ins(T,1) is the correct dual of Ins(1,c). I recomputed every naturality chain in Steps 4-5 (for alpha.eta_p vs 1_p, and alpha.T alpha vs alpha.mu_q, both of type T^2q=>q). I also recomputed the cone, both algebra laws, the mediator and the empty diagram in Steps 6-8; no limit preservation by T is used. The composite-accessibility argument in Step 5 is sound. pie-closure is true (MP 5.1.6, AR 2.67): its weaker definition of accessible functor is equivalent to AR's via sharply larger cardinals, and small products are PIE-limits even though Def A.3 shows only the binary product. completeness-characterization is exactly Thm A.2. Small cases checked: empty products and empty factors, Ins(1,1), the empty equifier, the terminal and empty categories, the identity monad. Both new nodes are statement-only, self-contained, single-escaped, with correct blueprint from/via and all three search kinds. Neither restates a clause of the item. A Mathlib Presentable grep found no leaf. A DAG scan for inserter/equifier/accessible/locally presentable/AR 2.47/2.78 found no duplicate; I read the nearest dozen candidates in full. All citations are in the same unit, so no tool_uses. FIX: the item's split_report.blueprint said 'Steps 3-7' after the renumbering to 9 steps; I corrected it to Steps 3-9 in fixes/dag/nodes/sec-six-functors/lem-coef-accessible-monad-presentability.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }
