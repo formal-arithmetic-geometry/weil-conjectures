@@ -15568,3 +15568,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:35 L: merged deliver/C2/Sheaf.Paper.InverseImageModuleFlat (stage 3; reviewer PASS; first push; landing 20261016T173552-L-1931552 (interface); batch 20261016T173548; modules 3; new nodes 2)
 - 17:35 L: merged deliver/D4/Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp (stage 3; reviewer PASS; first push; landing 20261016T173553-L-1931754 (interface); batch 20261016T173548; modules 3; new nodes 2)
 - 17:47 L: merged deliver/C4/Sheaf.Paper.CondensedCoefficientPointUnitPasting (stage 3; reviewer PASS; first push; landing 20261016T174700-L-2075957 (proof); batch 20261016T174657; modules 1; new nodes 0)
+- 17:54 L: merged deliver/A3/Sheaf.Paper.FiniteDiscreteCoefficientTerminal (stage 3; reviewer PASS; first push; landing 20261016T175419-L-2154166 (proof); batch 20261016T175416; modules 1; new nodes 1; change records: coord/changes/A3-finite-discrete-terminal-baseline.md)
