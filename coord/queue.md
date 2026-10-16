@@ -17,14 +17,14 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientExchange` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionPresentations` | 7 | 1 | proof |
 | `Sheaf.Paper.ContinuousEtaleLocalLattices` | 7 | 1 | proof |
 | `Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueComparisons` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
-| `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CondensedFieldEvaluationFunctors` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralLfpLocallyFreeResolution` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPointwiseRank` | 9 | 1 | proof |
