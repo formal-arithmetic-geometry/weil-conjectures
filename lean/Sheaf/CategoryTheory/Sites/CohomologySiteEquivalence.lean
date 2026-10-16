@@ -6,8 +6,6 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Mathlib.CategoryTheory.Sites.Continuous
 import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
 import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceFixedDegree
 import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceCovering

@@ -9,15 +9,12 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-public import Mathlib.Algebra.Module.ULift
 public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 import Sheaf.Algebra.TorDimensionShiftNatural
 import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.RingTheory.Filtration
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Tor against ideal-power quotients is strictly pro-zero

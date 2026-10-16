@@ -5,9 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 
 /-!

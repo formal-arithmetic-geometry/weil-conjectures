@@ -6,13 +6,9 @@ Authors: SHEAF group T1
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation
-import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
 import WeilConjectures.ConstructibleSheaf.Biproduct
 
 /-!

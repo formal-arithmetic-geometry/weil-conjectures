@@ -1,8 +1,6 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
-public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Algebra.Category.Ring.Instances
 
 @[expose] public section
 universe u

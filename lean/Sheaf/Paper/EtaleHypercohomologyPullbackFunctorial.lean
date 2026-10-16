@@ -6,8 +6,6 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.Paper.EtaleHypercohomologyPullbackMaps
 import Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws

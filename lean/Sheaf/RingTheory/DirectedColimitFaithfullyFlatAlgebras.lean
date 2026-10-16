@@ -6,8 +6,6 @@ Authors: SHEAF group NY
 module
 
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
-public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
 import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule

@@ -5,11 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.QuasiIso
-public import Mathlib.CategoryTheory.Abelian.Basic
-public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence

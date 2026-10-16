@@ -5,24 +5,9 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import WeilConjectures.RepresentationTheory.SylowModuleFiltration
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.SixFunctors.Finite.GlobalSections
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.NormalGenericConstant
 import Sheaf.AlgebraicGeometry.Curve.GenericFiniteSecondReduction
 
 /-! # Finite generic sheaves and second cohomology

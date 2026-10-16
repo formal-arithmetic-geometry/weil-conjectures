@@ -8,8 +8,6 @@ module
 public import Sheaf.RingTheory.PopescuSolutionModulo
 import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
 import Sheaf.RingTheory.ArtinianTranscendentalLocalization
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Enlarging a solution modulo a prime power
