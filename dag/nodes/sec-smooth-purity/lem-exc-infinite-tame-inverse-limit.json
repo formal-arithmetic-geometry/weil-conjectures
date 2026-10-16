@@ -223,5 +223,29 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-0cf4b3adc (reviewer sub-agent of L); spot-checked: Read in full: item statement and all 8 steps, the statements of the 3 cited nodes (all Mathlib leaves, checked at ProfiniteGrp/Basic.lean:249, CofilteredSystem.lean:111,312 and Separation/Hausdorff.lean:682), parent lem-exc-henselian-dvr-tame-sequence steps 2 and 4, the unit record and delivery-errors A–H. Sources: Stacks pione.tex 0BUA lemma-structure-decomposition, whose final paragraph omits the inverse-limit exactness details and whose earlier paragraph omits continuity; the steps supply exactly those details (D5). Blueprint main-20261015 lem-exc-dvr-galois.proof.md, second paragraph: 'where P is pro-p'. The statement is unchanged and faithful, and the parent supplies every hypothesis: surjective u, v and kernel maps, the identity and composition laws, and a nonempty directed poset. Checks per step: closedness of I, C and P via cylinder complements (1); profiniteness from the closed-subgroup leaf (2); continuity, kernel and normality of theta (3); surjectivity via finite nonempty fibres, using left multiplication by b in P_mu, re-checked for nonabelian groups (4); homeomorphism I/P to C via the compact-to-Hausdorff quotient leaf and q^{-1}(thetabar^{-1}W)=theta^{-1}W (5); surjective projections P to P_lambda (6); a finite-coordinate neighbourhood inside ker f, including the case J empty (7); factorization and fibre counting giving p-power order (8). Small cases checked: singleton Lambda, trivial groups, P_lambda=1, C_lambda=1, and Z_p, which is not a torsion group but has only p-power finite continuous quotients. No new nodes. The rg search found no duplicate. All citations are Mathlib leaves, so no tool_uses are needed. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.InfiniteTameInverseLimit",
+  "declaration": "ProfiniteGrp.finiteExtension_inverseLimit_exact_pro_p",
+  "declarations": [
+   "ProfiniteGrp.finiteExtensionLimitMap",
+   "ProfiniteGrp.finiteExtensionLimitKernel",
+   "ProfiniteGrp.finiteExtension_inverseLimit_exact_pro_p"
+  ],
+  "file": "lean/Sheaf/GroupTheory/InfiniteTameInverseLimit.lean",
+  "statement": "theorem finiteExtension_inverseLimit_exact_pro_p {Λ : Type u} [PartialOrder Λ] [Nonempty Λ] [IsDirectedOrder Λ] (p : ℕ) (hp : p.Prime) (I C : Λᵒᵖ ⥤ ProfiniteGrp.{u}) [∀ j : Λᵒᵖ, Finite (I.obj j)] [∀ j : Λᵒᵖ, Finite (C.obj j)] [∀ j : Λᵒᵖ, DiscreteTopology (I.obj j)] [∀ j : Λᵒᵖ, DiscreteTopology (C.obj j)] (P : ∀ j : Λᵒᵖ, Subgroup (I.obj j)) [∀ j : Λᵒᵖ, (P j).Normal] (hPorder : ∀ j : Λᵒᵖ, ∃ n : ℕ, Nat.card (P j) = p ^ n) (θ : I ⟶ C) (hθsurj : ∀ j : Λᵒᵖ, Function.Surjective (θ.app j)) (hθker : ∀ j : Λᵒᵖ, (θ.app j).hom.toMonoidHom.ker = P j) (hIsurj : ∀ {j k : Λᵒᵖ} (f : j ⟶ k), Function.Surjective (I.map f)) (hCsurj : ∀ {j k : Λᵒᵖ} (f : j ⟶ k), Function.Surjective (C.map f)) (hPsurj : ∀ {j k : Λᵒᵖ} (f : j ⟶ k), (P j).map (I.map f).hom.toMonoidHom = P k) : (∀ (x : limit I) (j : Λᵒᵖ), (finiteExtensionLimitMap θ x).val j = θ.app j (x.val j)) ∧ Function.Surjective (finiteExtensionLimitMap θ) ∧ (finiteExtensionLimitMap θ).toMonoidHom.ker = finiteExtensionLimitKernel I P ∧ IsClosed (finiteExtensionLimitKernel I P : Set (limit I)) ∧ (∃ hnormal : (finiteExtensionLimitKernel I P).Normal, ∃ e : @ContinuousMulEquiv (limit I ⧸ finiteExtensionLimitKernel I P) inferInstance (limit C) inferInstance (@QuotientGroup.Quotient.group (limit I) inferInstance (finiteExtensionLimitKernel I P) hnormal).toMul inferInstance, ∀ x : limit I, e (QuotientGroup.mk x) = finiteExtensionLimitMap θ x) ∧ (∀ (Q : Type v) [Group Q] [Finite Q] [TopologicalSpace Q] [DiscreteTopology Q] (f : finiteExtensionLimitKernel I P →ₜ* Q), Function.Surjective f → ∃ n : ℕ, Nat.card Q = p ^ n)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two helper definitions specialize Mathlib constructions to the canonical limit map and the coordinatewise subgroup of this node. The normality witness supplies the quotient group structure explicitly, without a let binder or a file-local instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baddb9dcd",
+  "group": "N6",
+  "result": "pass",
+  "note": "Item node changed only in lean, and the dependency node is unchanged; lean.statement is verbatim in the file and the theorem's only proof is sorry. Each hypothesis matches the Lean exactly: nonempty directed partial order, finite discrete groups as functors from Λᵒᵖ to ProfiniteGrp, surjective transitions, normal p-power-order P_λ, θ natural with surjective components and kernel P_λ, and u(P_μ)=P_λ. Each conclusion clause matches: coordinate formula of the canonical limit map, surjectivity, ker=P, closedness, normality witness, a ContinuousMulEquiv from I/P (quotient topology) to C fixed to agree with θ on cosets, and every finite discrete continuous quotient of P (any universe) of order p^n. Helpers have real data from Mathlib constructions; no duplicate found by the searches. Docstrings carry the source (Stacks 0BUA, final paragraph checked in pione.tex), the blueprint tag and all 8 proof steps; lines ≤100; non-public imports are the proof-dependency modules. Edge cases checked: empty Λ excluded as in the node, singleton, non-linear orders, trivial groups, p=2, nonabelian groups, trivial quotient. nt_compile.py --json: rc 0, clean; a control compile confirmed the tool reports errors and showed the signature and axioms. Note only: index and groups share universe u, mirroring ProfiniteGrp.limit; disclosed in the report, harmless and compatible with the citer."
  }
 }
