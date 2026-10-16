@@ -3,39 +3,240 @@
  "blueprint": {
   "is": "det-lem-coefficient-heart-small",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\mathrm{Cons}(X,\\Lambda)$ is essentially small",
- "statement": "Let $X$ be a Noetherian scheme, $\\Lambda=E$ or $\\Qlb$, and let $X_{\\mathrm{proét}}$ be defined\nin a fixed universe. Then the isomorphism classes of objects of $\\Cons(X,\\Lambda)$ form a set.",
+ "statement": "Let $X$ be a Noetherian scheme, $\\Lambda=E$ or $\\Qlb$, and let $X_{\\mathrm{proét}}$ be defined\nin a fixed universe. Then the isomorphism classes of objects of $\\Cons(X,\\Lambda)$ form a set.\nHere $\\ell$ is a prime, $E$ is a finite subextension of a fixed algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and the coefficient rings are the condensed rings of [def-sfb-padic-subfield-condensed-ring] and [sk-def-sfb-qlbar-condensed], pulled back as $\\Lambda_X=p_X^*\\Lambda$ in [sk-def-sfb-pulled-back-coefficients]. In particular these are not the discrete constant coefficient sheaves. The full category $\\Cons(X,\\Lambda)$ is that of [sk-def-sfb-constructible]. Noetherian means locally Noetherian and quasi-compact. Sets and small site skeletons are taken in the larger universe $\\mathcal V$ of [def-weil-size-convention], with the schemes and coefficient data in its fixed smaller bound $\\mathcal U\\in\\mathcal V$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.md",
   "place": "node det-lem-coefficient-heart-small, order None"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-padic-subfield-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible"
  ],
  "proof": [
   {
-   "text": "Let $F$ be constructible. Choose a finite stratification $X=\\coprod_aS_a$ with $F|_{S_a}$ lisse\n([det-lem-coefficient-heart-closure]), and for each $a$ a finite cover by quasi-compact\nobjects $U_{a,k}\\in(S_a)_{\\mathrm{proét}}$ with $F|_{U_{a,k}}\\cong\\Lambda^{r_{a,k}}$ ($S_a$ is\nquasi-compact, and covers have finite quasi-compact refinements). Then $F|_{S_a}$ is\ndetermined up to isomorphism by the descent datum: the transition matrices in\n$\\GL_{r}(\\Lambda(U_{a,k}\\times_{S_a}U_{a,k'}))$. Moreover $F$ is determined up to isomorphism\nby the $F|_{S_a}$ together with the gluing data, by induction on the number of strata: for an\nopen stratum $u$ with closed complement $i$, $F$ is the extension of $i_*i^*F$ by $u_!u^*F$\nclassified by an element of $\\operatorname{Ext}^1(i_*i^*F,u_!u^*F)$, a set.",
-   "uses": [],
-   "elementary": false
+   "text": "Use the sectionwise presentation of the coefficient module objects, justified as follows. By [sk-def-sfb-sheaf-tensor], the tensor of abelian sheaves is the sheafification of the pointwise tensor over $\\mathbf Z$. Thus an action $\\Lambda_X\\otimes M\\to M$ of [sk-def-sfb-module-objects] is, by the universal property in [def-weil-pbc-sheafification] and the defining universal property of the ordinary tensor product, precisely a natural family of bilinear maps $\\Lambda_X(V)\\times M(V)\\to M(V)$. The unit and associativity diagrams are exactly $1m=m$ and $(ab)m=a(bm)$, checked on pure tensors; morphisms are exactly the sectionwise linear maps. This gives an equivalence, retaining the underlying abelian sheaf, with [def-weil-sheaf-of-modules-category]. We use it for the coefficient ring sheaf itself, without making that ring constant. Now use the bounded schemes and compatible small site skeletons of [def-weil-size-convention]. All sets below are $\\mathcal V$-sets. The collection of $\\mathcal U$-bounded schemes and their morphisms is a set in $\\mathcal V$: their underlying spaces, rings, sheaf maps and structure maps are set-theoretic data in the set $\\mathcal U$. Thus the finite lists of locally closed immersions into the fixed $X$ form a set, and the subcollection that are stratifications also forms a set [def-constructible-stratification]. The Noetherian scheme $X$ is quasi-compact by the stated convention and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Hence the qcqs clause of [sk-def-sfb-constructible] applies: every constructible $F$ admits one of these finite stratifications $a:S_a\\to X$ on which its restrictions have finite constant local models. These models are finite free, as the following elementary calculation shows. Evaluation at the one-point profinite set in [def-sfb-padic-subfield-condensed-ring] and [sk-def-sfb-qlbar-condensed] gives the scalar field $R=\\Lambda(*)=E$ or $\\Qlb$; every element of $\\Qlb$ lies in a finite subextension because it is algebraic. For each finitely presented scalar module $P$, its finite presentation [def-sfb-finitely-presented-module], specialized to ordinary $R$-modules, supplies finitely many spanning vectors. Choose a maximal linearly independent sublist. For every omitted vector, maximality gives a dependence with the independent sublist; the coefficient on the omitted vector must be nonzero and can be divided out, expressing it in the span. This gives $P\\cong R^r$ with $r\\geq0$. The induced isomorphism $\\Lambda_U\\otimes_R P\\cong\\Lambda_U^r$ sends $b\\otimes\\sum_j c_je_j$ to $(bc_j)_j$ and has inverse $(b_j)_j\\mapsto\\sum_j b_j\\otimes e_j$. The balanced bilinear relations make these maps well defined and inverse; these formulas first define maps on the constant models and then extend to their sheafifications by the universal property already cited. Thus $a^*F$ is lisse. Clause (2) of [det-lem-coefficient-heart-common-stratification] also preserves this property on every refinement. Here and below lisse means pro-etale locally isomorphic to a finite direct sum of the coefficient ring sheaf. We shall bound the possible lisse restrictions by descent data, and then bound the additional gluing between strata.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-size-convention",
+    "def-constructible-stratification",
+    "sk-def-sfb-constructible",
+    "det-lem-coefficient-heart-common-stratification",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-sfb-padic-subfield-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.proof.md",
+    "place": "First paragraph, choice of an adapted finite stratification; second paragraph, set of finite stratifications"
+   }
   },
   {
-   "text": "The finite stratifications of $X$ form a set; the quasi-compact objects of\n$(S_a)_{\\mathrm{proét}}$ lie in the fixed universe, so finite families of them form a set;\nthe transition matrices form a set; and the Ext groups are sets. Hence the isomorphism\nclasses of such data, and so the isomorphism classes of constructible sheaves, form a set.",
-   "uses": [],
-   "elementary": null
+   "text": "We first identify inverse image along a site object with slice restriction, including for the present nonconstant coefficient rings. If $u:U\\to S$ is an object of $S_{\\mathrm{proét}}$, clause (1) of [lem-weil-proetale-weakly-etale-localization] identifies $U_{\\mathrm{proét}}$ with $S_{\\mathrm{proét}}/U$. For an object $T\\to U$, an index $(V,T\\to U\\times_S V)$ in the inverse-image formula of [def-weil-proetale-inverse-image] is equivalently an $S$-map $T\\to V$. The index $(T,\\mathrm{id}_T)$ is initial in this category, hence terminal in the opposite indexing category of that formula. The presheaf inverse image at $T$ is consequently $M(T)$, with the original restriction maps. This is already a sheaf because coverings in the slice are the original coverings, so sheafification does nothing. The same calculation applies to the coefficient ring and its action. By [sk-prop-sfb-cartesian-coefficients], $u^*$ on coefficient modules is this inverse image and $u^{-1}\\Lambda_S\\simeq\\Lambda_U$. Therefore a trivialization $u^*L\\simeq\\Lambda_U^r$ identifies $L(T)$ with $\\Lambda_S(T)^r$ naturally for every $T\\to U$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00XZ (localization), inverse-image formula; site identification uses more-morphisms.tex Tags 094T/0951 through the cited localization node"
+   }
+  },
+  {
+   "text": "Fix a stratum $S$ and a lisse $L$. On the chosen small skeleton choose a trivializing covering $\\{U_i\\to S\\}_{i\\in I}$ and integers $r_i\\geq0$. Remove repetitions of the same site object, choosing one trivialization for each remaining object; repetitions do not affect the covering condition in [def-weil-pbc-proetale-site]. Thus $I$ can be a subset of the set of site objects. There is no need to make the covering finite. On $U_{ij}=U_i\\times_SU_j$, the two trivializations differ by mutually inverse matrices $g_{ij}$ and $g_{ij}^{-1}$, of sizes $r_j\\times r_i$ and $r_i\\times r_j$, with entries in $\\Lambda_S(U_{ij})$. Write $g_{ij}$ in the direction from the $i$-coordinates to the $j$-coordinates. On $U_i\\times_SU_j\\times_SU_k$ the cocycle equation is $p_{jk}^*g_{jk}\\,p_{ij}^*g_{ij}=p_{ik}^*g_{ik}$. On the diagonal $\\delta_i:U_i\\to U_i\\times_SU_i$ it is $\\delta_i^*g_{ii}=I_{r_i}$. No equation $g_{ii}=I$ on the entire self-overlap is imposed: the two projections of a non-monomorphic cover can give different trivializations there. Indeed a module-sheaf map between finite free modules is determined by the images of its standard basis sections; naturality and linearity give the same matrix on every test object [def-weil-sheaf-of-modules-category]. Different ranks are allowed, including empty overlaps. All these codes form a set: take subsets $I$ of the fixed object set, functions $I\\to\\mathbf N$, and products of the matrix-entry sets over pairs of indices, then impose the equations by separation. All coefficient section sets and index sets lie in $\\mathcal V$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.proof.md",
+    "place": "First paragraph, transition data; arbitrary small covers in place of the unnecessary finite quasi-compact refinement"
+   }
+  },
+  {
+   "text": "A code gives an explicit model rather than requiring a choice from a class of sheaves. For $V\\in S_{\\mathrm{proét}}$ put $L_c(V)$ equal to the families $s_i\\in\\Lambda_S(V\\times_SU_i)^{r_i}$ such that $s_j=g_{ij}s_i$ on $V\\times_SU_i\\times_SU_j$, with restrictions componentwise and the $\\Lambda_S(V)$-action induced by restriction. This is a sheaf: along any covering of $V$, each component glues uniquely by the coefficient sheaf axiom, and each matrix equality holds after gluing because it holds on that covering. This is exactly the equalizer sheaf condition in [def-weil-pbc-sites-and-cohomology], applied componentwise; base change of coverings is part of [def-weil-pbc-proetale-site]. If $L$ produces the code $c$, the isomorphisms of step 2 and the sheaf axiom for the covering $\\{V\\times_SU_i\\to V\\}$ identify $L(V)$ with $L_c(V)$: a section gives its compatible tuple, and conversely the tuple glues to a unique section. These identifications respect restrictions, addition and scalar multiplication [def-weil-sheaf-of-modules-category]. Hence $L\\simeq L_c$, and the set of codes provides a set of actual sheaves containing an isomorphic copy of every lisse restriction. For an empty stratum the same equalizer is the zero module sheaf.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VM/00VR, definition-sheaf-sets/definition-sheaf; direct equalizer construction, also the gluing-of-maps argument of Tag 04TQ, lemma-glue-maps"
+   }
+  },
+  {
+   "text": "Fix a finite stratification and one model $L_a$ on each $S_a$. Put $H=\\prod_a a_*L_a$, a fixed $\\Lambda_X$-module sheaf. This finite product is computed sectionwise: componentwise gluing verifies the sheaf axiom, with componentwise ring action. The functors and adjunctions $a^*\\dashv a_*$ exist for these condensed coefficients by [sk-def-sfb-module-pushforward-pullback]. Given $F$ and isomorphisms $\\alpha_a:a^*F\\simeq L_a$, let $t:F\\to H$ have components $a_*\\alpha_a\\circ\\eta_a(F)$. We claim $t$ is monic. Let $k:K\\to F$ be its kernel, which is sectionwise by [def-weil-sheaf-of-modules-category]. The equation $t_a k=0$ implies $\\eta_a(F)k=0$, since $a_*\\alpha_a$ is invertible. Apply the exact functor $a^*$ of [sk-prop-sfb-cartesian-coefficients] and compose with the adjunction counit. The triangle identity $\\varepsilon_{a,a^*F}\\circ a^*\\eta_a(F)=1_{a^*F}$ gives $a^*k=0$. Exactness also makes $a^*k$ monic, so $a^*K=0$ for every stratum. Clause (3) of [det-lem-coefficient-heart-common-stratification] detects exactness on the strata; applied to $0\\to K\\to0$, it gives $K=0$. Thus $F$ is isomorphic to a subsheaf of $H$. This argument does not require strata to factor through one another or any chosen reduced complement.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-lem-coefficient-heart-common-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.proof.md",
+    "place": "First paragraph, additional gluing between strata: explicit encoding by a subsheaf of the product of the stratum pushforwards, using exact stratum detection"
+   }
+  },
+  {
+   "text": "For each fixed $H$, its subsheaves form a set. A monomorphism $N\\to H$ is injective on sections because kernels are sectionwise [def-weil-sheaf-of-modules-category]; identify $N$ with its sectionwise images. Such a subsheaf is determined by the family of subsets $N(V)\\subseteq H(V)$, one for each object of the fixed small site, since its operations and restrictions are inherited from $H$. These families lie in the set $\\prod_V\\mathcal P(H(V))$; imposing module, restriction, and sheaf conditions selects a subset. Therefore subsheaves of $H$ supply a set of representatives containing, up to isomorphism, all the $F$ of step 5. Finally take the union over the set of finite stratifications from step 1 and, for each, over the finite products of sets of codes from steps 3--4. This is a set in $\\mathcal V$ [def-weil-size-convention] containing a representative of every constructible sheaf. Retain the representatives that are constructible and quotient this set by isomorphism; the result is precisely the asserted set of isomorphism classes. Rank zero and empty strata cause no exception; when $X$ is empty, the empty-stratum detection of step 5 gives $F=0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.proof.md",
+    "place": "Second paragraph, set of all data and isomorphism classes; explicit power-set bound for the additional gluing data"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-constructible-stratification",
+  "sk-def-sfb-constructible",
+  "det-lem-coefficient-heart-common-stratification",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-sfb-padic-subfield-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-finitely-presented-module",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-proetale-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-small.proof.md",
+  "place": "Both paragraphs; descent reconstructed by the sheaf equalizer, with gluing between strata encoded by subsheaves rather than an unproved Ext-size assertion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall.*(Sheaf|Constructible)|[Cc]onstructible.*[Ss]mall",
+   "results": "Three hits: sheaf subobject classifier in Mathlib/CategoryTheory/Topos/Sheaf.lean:231 and sheafification on essentially small sites in Sites/Equivalence.lean:216,219; no constructible-sheaf essential-smallness theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves on a noetherian scheme have a set of isomorphism classes",
+   "results": "Eight hits: TopCat.Sheaf.forget; CategoryTheory.Sheaf.isConstant_of_iso, isConstant_congr, IsConstant.mk, isConstant_of_isIso_counit_app; TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, isIso_of_stalkFunctor_map_iso; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app. None bounds the constructible category.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "EssentiallySmall, Sheaf",
+   "results": "Zero hits; Loogle reported unknown identifier 'EssentiallySmall'. Retried with fully qualified names below; this response is not evidence of absence.",
+   "date": "2026-10-16",
+   "verdict": "query rejected; retried with qualified names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of constructible sheaves of modules on a Noetherian scheme is essentially small",
+   "results": "Eight hits include instEssentiallySmallFGModuleCat, CategoryTheory.Noetherian.toEssentiallySmall, Sheaf.isGrothendieckAbelian_of_essentiallySmall, PresheafOfModules.wellPowered and light condensed-module infrastructure. Read FGModuleCat/EssentiallySmall.lean:28-85 and CategoryTheory/Noetherian.lean:36-40: the first is for single-ring finite modules, while categorical Noetherian already assumes essential smallness. Neither applies to the sheaf category in one line.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Ww]ell[Pp]owered|[Ss]mall.*[Ss]ubobject",
+   "results": "23 hits in CategoryTheory: HasDetector.wellPowered (Generator/Basic.lean:927), HasSeparator.wellPowered (:930), WellPowered definitions and IsGrothendieckAbelian.wellPowered (Abelian/GrothendieckCategory/Basic.lean:106), sheaf subobject classifier (Topos/Sheaf.lean:231). These concern subobjects of a fixed object; the item additionally needs the descent and stratum embedding arguments.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall",
+   "results": "12 hits: EssentiallySmall, essentiallySmallSelf, SmallModel, locallySmall_of_essentiallySmall, small_skeleton_of_essentiallySmall, essentiallySmall_of_small_of_locallySmall, essentiallySmall_iff and associated small-model infrastructure. These require a smallness witness; none constructs one for the present category.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free finite rank sheaves are classified by cocycles and constructible sheaves are essentially small",
+   "results": "Eight hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators: LocalGeneratorsData.IsFiniteType, localGeneratorsDataOfIsFiniteType, LocalGeneratorsData.IsFiniteType.isFiniteType, IsFiniteType.exists_localGeneratorsData, LocalGeneratorsData.I, .X, .generators; also Sheaf/Free.free. These supply generators/local finite-type data, not the essential-smallness conclusion.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall, CategoryTheory.Sheaf",
+   "results": "Six hits: smallSheafify, smallSheafificationAdjunction, hasColimitsEssentiallySmallSite, hasLimitsEssentiallySmallSite, Sheaf.isGrothendieckAbelian_of_essentiallySmall, Sheaf.instHasSubobjectClassifierTypeOfEssentiallySmall. Read Topos/Sheaf.lean:219-234: subobject classifiers concern a fixed sheaf, not a set of constructible isomorphism classes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally free finite rank modules over a sheaf of rings form an essentially small category",
+   "results": "Eight hits, including instEssentiallySmallFGModuleCat, the section-size instance in Sheaf/Limits, PresheafOfModules.freeYoneda.instSmall, and local-generator/finite-presentation infrastructure. FGModuleCat/EssentiallySmall.lean:84-87 concerns modules over one ring; no hit states the constructible-sheaf category assertion or yields it by one specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall, SheafOfModules",
+   "results": "The service returned zero hits and no error.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall.*(Module|Sheaf)|locallyFree.*[Ss]mall|[Ss]mall.*locallyFree",
+   "results": "Six hits: Sites/Equivalence.lean:216,219; Topos/Sheaf.lean:231; FGModuleCat/EssentiallySmall.lean:84,85,87. Read the finite-module instance and sheaf subobject-classifier instance: neither proves essential smallness of constructible coefficient sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves locally generated by finitely many basis vectors on a small site have only a set of isomorphism types",
+   "results": "Eight hits: local-generator and finite-presentation/finite-type declarations in Sheaf/Generators and Sheaf/Quasicoherent. Read Generators.lean:138-144; these concern locally finite generation, not a bound on isomorphism types of constructible sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall, SheafOfModules",
+   "results": "The service returned zero hits and no error.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ssentially[Ss]mall.*[Ss]heaf|[Ss]heaf.*[Ee]ssentially[Ss]mall|[Ww]ell[Pp]owered.*[Ss]heaf",
+   "results": "13 hits, including Presheaf/Generator.lean:98 (wellPowered), Topos/Sheaf.lean:231 (subobject classifier), Sites/Equivalence.lean:216,219, and Grothendieck/sheafification instances for light condensed and etale sheaves. Read Generator.lean:76-99 and Topos/Sheaf.lean:219-234: fixed-object subobject bounds do not give this constructible-category bound in one line.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -55,5 +256,20 @@
   "det-lem-coefficient-heart-closure"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-coefficient-heart"
+ "unit": "sk-lem-coefficient-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-coefficient-heart-small",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes. Checked the project Lean and all cited statements. Made the coefficient and universe conventions explicit, built lisse models from small covering/matrix codes by the sheaf equalizer, and encoded cross-stratum gluing as subsheaves of a fixed finite product of pushforwards. Exact pullback, adjunction triangles and existing stratum detection prove the required embedding. Rectangular transition matrices and arbitrary small covers avoid unnecessary common-rank and finite-refinement assumptions. No Lean written or compiled. Independent second reading supplied the finite-basis and scalar-tensor calculation and the precise cocycle/diagonal equations for non-monomorphic covers.",
+  "blueprint": "Realizes unit sk-lem-coefficient-heart proof (2): finite adapted stratifications (step 1), finite-rank descent data on a covering (steps 2--4), and set of global data (steps 5--6). Within the detail node, the uncited Ext-set sentence is replaced by an explicit subsheaf encoding of the same cross-stratum gluing; the unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NL-a3ae6d83a",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-a3ae6d83a (reviewer sub-agent of L); spot-checked: I read the whole item. The statement matches the main-20261015 blueprint det-lem-coefficient-heart-small.md word for word (Noetherian X, Lambda=E or Qlb, fixed universe, a set of isomorphism classes); the added conventions only spell out existing meanings and weaken nothing. There are no new nodes. The duplicate scan found only the unit sk-lem-coefficient-heart (clause 2) and its citers. The dependency closure (2338 nodes) does not contain the item, so there is no cycle. Steps 1-4 and 6 follow unit step (2): stratification, then descent codes, then a set. Step 5 replaces the blueprint's unsupported Ext^1 sentence with a sound embedding F into the product of a_*L_a. Step 1: Noetherian gives qcqs (Mathlib leaf 01OY), so sk-def-sfb-constructible clause (2) applies; Lambda(*) is E or Qlb (a field), so finitely presented modules are free and the local models are Lambda^r. A stratification using schemes outside the bound can be replaced by an isomorphic one inside it; this is implicit and takes one line. Step 2: (T,can) is initial in I_T, so the colimit over I_T^op is M(T); with localization clause (1) and cartesian-coefficients this gives L(T)=Lambda_S(T)^r for the condensed coefficients themselves. Step 3: codes use rectangular inverse matrices, the triple cocycle and the diagonal normalization; rank 0, empty overlaps and non-monomorphic covers are handled. Step 4: L_c is a sheaf for every code by the 00VM/00VR equalizer, and L is isomorphic to L_c for a code coming from L; no effective-descent theorem is used, and step 6 filters by constructibility. Step 5: the triangle identity gives a^*k=0; exactness of a^* (cartesian-coefficients) and common-stratification (3) give K=0. Step 6: subobjects inject into the product over V of P(H(V)), which is a V-set. Stacks tags 00XZ, 00VM, 00VR, 04TQ, 094T, 0951 and 01OY all resolve to the cited labels. All three kinds of Mathlib search are recorded, with no match. Accepted tool_uses: lem-weil-proetale-weakly-etale-localization (clause 1, slice-site identification) and sk-prop-sfb-cartesian-coefficients (coefficient inverse image and exact module pullback); both are generic and replace no unit step. No changes."
+ }
 }

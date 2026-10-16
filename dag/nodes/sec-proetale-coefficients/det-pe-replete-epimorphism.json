@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-replete-epimorphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The pro-étale topos is replete",
@@ -13,34 +13,144 @@
   "place": "node det-pe-replete-epimorphism, order None"
  },
  "stmt_deps": [
+  "sk-def-pe-site",
   "det-pe-replete-definition"
  ],
  "proof": [
   {
-   "text": "By [det-pe-replete-definition] it suffices to show that $p_m$ is locally surjective. Let\n$U$ be an object and $y\\in F_m(U)$. By [det-pe-wcb-cover] there is a covering\n$\\{W_k\\to U\\}$ by affines $W_k=\\operatorname{Spec}D_k$ with $D_k$ w-contractible; these are\nweakly contractible ([det-pe-weak-contractible-equivalences]). By\n[det-pe-replete-on-contractible] each $y|_{W_k}$ is the image of some\n$x_k\\in(\\varprojlim_nF_n)(W_k)$. So $y$ is locally in the image of $p_m$.",
+   "text": "Fix a scheme $X$, an inverse sequence $(F_n,t_n)$ as in the statement, and $m\\in\\mathbf N$. Put $L=\\varprojlim_n F_n$ and let $p_m:L\\to F_m$ be the coordinate projection of [det-pe-replete-definition]. By [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], it suffices, for every object $U$ of $X_{\\mathrm{proét}}$ and $y\\in F_m(U)$, to find a covering on which $y$ lifts to $L$. Fix such $U$ and $y$.",
    "uses": [
     "det-pe-replete-definition",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WM (definition-sheaves-injective-surjective), part (2), and 00WN (lemma-mono-epi-sheaves); blueprint proof, first sentence"
+   }
+  },
+  {
+   "text": "By [det-pe-wcb-cover], there is a covering $\\{W_i\\to U\\}$ in $X_{\\mathrm{proét}}$ with $W_i=\\operatorname{Spec}D_i$ and every $D_i$ w-contractible. The final assertion of [det-pe-weak-contractible-equivalences] applies to each of these affine site objects, so every $W_i$ is weakly contractible. The covering assertion applies to the arbitrary object $U$ chosen in step 1; no quasi-compactness of $U$ or $X$ is required.",
+   "uses": [
     "det-pe-wcb-cover",
-    "det-pe-weak-contractible-equivalences",
+    "det-pe-weak-contractible-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-epimorphism.proof.md",
+    "place": "Proof, second and third sentences: the w-contractible affine covering and its weak contractibility; compare Bhatt–Scholze Proposition 4.2.8 and Stacks proetale.tex Tags 098I and 098H"
+   }
+  },
+  {
+   "text": "For every $i$, apply [det-pe-replete-on-contractible] to the original inverse sequence of sheaves on $X_{\\mathrm{proét}}$ and the weakly contractible object $W_i$ of step 2. Its hypotheses hold because all $t_n$ are epimorphisms by assumption. It gives surjectivity of $p_m(W_i):L(W_i)\\to F_m(W_i)$. In particular there exists $x_i\\in L(W_i)$ with $p_m(W_i)(x_i)=y|_{W_i}$. This is a lift in the limit of the original sequence, rather than a lift at only finitely many stages.",
+   "uses": [
     "det-pe-replete-on-contractible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-epimorphism.proof.md",
+    "place": "Proof, fourth sentence: apply the sectionwise sequential-limit lemma; Bhatt–Scholze Proposition 3.2.3(1), proof"
+   }
+  },
+  {
+   "text": "The covering of step 2 and the lifts of step 3 show that every section $y\\in F_m(U)$ is locally in the image of $p_m$. Thus [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] makes $p_m$ an epimorphism. Since $m$ and the inverse sequence were arbitrary, [det-pe-replete-definition] now gives repleteness of $\\Sh(X_{\\mathrm{proét}})$. The lifts on different covering members need no overlap compatibility: the required conclusion is local surjectivity, for which these separate lifts suffice.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "det-pe-replete-definition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WN (lemma-mono-epi-sheaves); Bhatt–Scholze Definition 3.1.1 and Proposition 3.2.3(1), proof; blueprint proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
   "det-pe-replete-definition",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "det-pe-wcb-cover",
   "det-pe-weak-contractible-equivalences",
   "det-pe-replete-on-contractible"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-epimorphism.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.1.1 (p.16), Proposition 3.2.3(1) and its proof (p.18), applied using the weakly contractible pro-étale basis of Proposition 4.2.8 (p.29); local-surjectivity argument expanded as in the current blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "replete|epi.*limit.*π|limit.*π.*epi",
+   "results": "{\"t\": \"2026-10-16T19:37:32Z\", \"tool\": \"grep\", \"query\": \"replete|epi.*limit.*π|limit.*π.*epi\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\"], \"digest\": \"f9405b2d7190426e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the coherent-site sequential-limit theorem requires a coherent-site presentation and preservation of effective epimorphisms by sequential limit projections; these are not automatic hypotheses for this scheme statement and are not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse sequence of sheaves of sets on the pro-etale site with surjective transitions has epimorphic limit projections",
+   "results": "{\"t\": \"2026-10-16T19:37:33Z\", \"tool\": \"leansearch\", \"query\": \"An inverse sequence of sheaves of sets on the pro-etale site with surjective transitions has epimorphic limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.instEpiAppOppositeNatπAsLimitCone\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone\", \"LightProfinite.proj_surjective\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"Profinite.Extend.isLimitCone\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\"], \"digest\": \"cb9ab37908b69148\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the coherent-site sequential-limit theorem requires a coherent-site presentation and preservation of effective epimorphisms by sequential limit projections; these are not automatic hypotheses for this scheme statement and are not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Epi, Limits.limit.π",
+   "results": "{\"t\": \"2026-10-16T19:37:33Z\", \"tool\": \"loogle\", \"query\": \"Sheaf, Epi, Limits.limit.π\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier Sheaf); superseded by the fully qualified Loogle query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every scheme the topos of sheaves on the pro-etale site is replete: inverse limits of sequences with epimorphic transition maps have epimorphic projections",
+   "results": "{\"t\": \"2026-10-16T19:37:35Z\", \"tool\": \"leanfinder\", \"query\": \"For every scheme the topos of sheaves on the pro-etale site is replete: inverse limits of sequences with epimorphic transition maps have epimorphic projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"LightCondensed.epi_π_app_zero_of_epi\"], \"digest\": \"e2a5d709adf397cb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the coherent-site sequential-limit theorem requires a coherent-site presentation and preservation of effective epimorphisms by sequential limit projections; these are not automatic hypotheses for this scheme statement and are not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Epi",
+   "results": "{\"t\": \"2026-10-16T19:37:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.Epi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\", \"CategoryTheory.instEpiSheafTypeToImage\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.GeneratingSections.instIsFiniteTypeOfEpi\", \"SheafOfModules.GeneratingSections.ofEpi_I\"], \"digest\": \"566058fcef79abd1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the local-surjectivity criterion matches the existing leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a site has enough weakly contractible projective objects then projections from sequential inverse limits of epimorphic sheaves are epimorphisms",
+   "results": "{\"t\": \"2026-10-16T19:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"If a site has enough weakly contractible projective objects then projections from sequential inverse limits of epimorphic sheaves are epimorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.Projective.π_epi\", \"LightProfinite.instEpiAppOppositeNatπAsLimitCone\", \"LightCondensed.epi_π_app_zero_of_epi\", \"Profinite.presentation.epi_π\", \"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\", \"CategoryTheory.instEpiSheafTypeToImage\"], \"digest\": \"1df89643eaa60dc0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the coherent-site sequential-limit theorem requires a coherent-site presentation and preservation of effective epimorphisms by sequential limit projections; these are not automatic hypotheses for this scheme statement and are not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_π_app_zero_of_epi|isLocallySurjective_π_app_zero_of_isLocallySurjective_map|replete",
+   "results": "{\"t\": \"2026-10-16T19:38:43Z\", \"tool\": \"grep\", \"query\": \"epi_π_app_zero_of_epi|isLocallySurjective_π_app_zero_of_isLocallySurjective_map|replete\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\"], \"digest\": \"c669ed2d579d782e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the coherent-site sequential-limit theorem requires a coherent-site presentation and preservation of effective epimorphisms by sequential limit projections; these are not automatic hypotheses for this scheme statement and are not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.*[Ss]heaf|[Ss]heaf.*Projective|epi_π_app|IsReplete",
+   "results": "{\"t\": \"2026-10-16T19:56:45Z\", \"tool\": \"grep\", \"query\": \"Projective.*[Ss]heaf|[Ss]heaf.*Projective|epi_π_app|IsReplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Algebra/Homology/LeftResolution/Basic.lean\"], \"digest\": \"e34f4d5b89d519c6\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no exact match. Read Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean:36-120 and Mathlib/Condensed/Light/Epi.lean:101-118. The former has additional coherent-site and effective-epimorphic-limit hypotheses; the latter is for light condensed modules and would need a comparison theorem. Neither is a leaf for this scheme-specific statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi, \"π\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-16T19:56:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Epi, \\\"π\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.ofEpi_π\", \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\"], \"digest\": \"1a75da3db8d5363c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The two returned declarations concern generating sections of module sheaves and a coequalizer projection of sheafed spaces, respectively; neither states sequential-limit projection epimorphy for set sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sequential limit projection is epi for sheaves of types on a site admitting covering families of projective representable objects",
+   "results": "{\"t\": \"2026-10-16T19:56:49Z\", \"tool\": \"leanfinder\", \"query\": \"Sequential limit projection is epi for sheaves of types on a site admitting covering families of projective representable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instEpiSheafTypeToImage\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.Projective.π_epi\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\"], \"digest\": \"51b81d1f31d7149b\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no exact match. Read CategoryTheory.coherentTopology.epi_π_app_zero_of_epi at Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean:113, with assumptions at lines 36-42, 76, and 93-94. It requires a coherent-site presentation and the separate effective-epimorphic sequential-limit projection hypothesis h; neither is a one-line specialization of this pro-etale statement. The local-surjectivity hits are already carried by the cited existing Mathlib leaf."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -56,5 +166,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-replete"
+ "unit": "sk-prop-pe-replete",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-replete-epimorphism",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph local lifting argument into four steps. Reused the existing affine covering, weak-contractibility, and sectionwise sequential-limit nodes, and cited the existing Mathlib leaf for the categorical epimorphism/local-surjectivity equivalence. Added the site statement dependency. Read the current blueprint and Bhatt–Scholze proof, checked each cited statement and hypotheses, searched the project Lean and Mathlib with two phrasings, and created no nodes. The statement is unchanged.",
+  "blueprint": "The four steps realize respectively the first sentence (local test), second/third sentences (w-contractible affine cover), fourth sentence (lifting the given section on each cover member), and final sentence (epimorphism and repleteness) of det-pe-replete-epimorphism.proof.md, hence the second paragraph of unit sk-prop-pe-replete. The first paragraph of that unit is carried by existing det-pe-replete-on-contractible."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-429d315ae",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-429d315ae (reviewer sub-agent of L); spot-checked: Read the item, all five cited node statements, the unit record and the main-20261015 blueprint .md and .proof.md, and Bhatt–Scholze Def 3.1.1 (p.16), Def 3.2.1 and Prop 3.2.3(1) with its proof (pp.17–18) and Prop 4.2.8 (p.29). The statement matches the blueprint word for word and the B–S definition of replete; nothing is weakened and no hypothesis is added. Step 1 reduces to local surjectivity: the definition node and the Mathlib leaf Sheaf.isLocallySurjective_iff_epi say the same thing, so citing the leaf is redundant but correct. Step 2: det-pe-wcb-cover covers an arbitrary U (no quasi-compactness needed) and the last sentence of det-pe-weak-contractible-equivalences makes each Spec D_i weakly contractible. Step 3: the every-m projection-surjectivity clause of det-pe-replete-on-contractible applies to the original sequence on X_proét. Step 4 applies the local-surjectivity quantifiers without needing the lifts to agree on overlaps. proof_deps equals the union of the uses. The route stays within unit sk-prop-pe-replete and the units it cites, and realized (step 1 by on-contractible, step 2 and the statement by this item) is correct. Edge cases checked: m=0, empty F_m(U), empty X or U, non-quasi-compact or disconnected U, constant towers. No new nodes, no duplicate (rg replete over dag/nodes), Mathlib searches cover all three kinds, no tool_uses needed, no SGA. Not this delivery's fault: chapter nodes cite two pro-étale site definitions (sk-def-pe-site and def-weil-pbc-proetale-site) that differ only in universe convention; worth unifying at stage 2. No fixes."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-proper-unbounded-window-ii",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image preserves direct sums",
@@ -17,36 +17,223 @@
  ],
  "proof": [
   {
-   "text": "First let $(M_\\alpha)$ be a family with cohomology in a common finite interval of degrees. Then the map\n$\\bigoplus_\\alpha Rp_*M_\\alpha\\to Rp_*(\\bigoplus_\\alpha M_\\alpha)$ is an isomorphism in\n$\\D(Y_{\\mathrm{proét}},\\Lambda)$, by induction on the length of the interval. For length zero, $M_\\alpha$ is a\nshifted object of $\\IndCons(X,\\Lambda)$, and this is the direct-sum assertion of\n[sk-lem-proper-heart-bound] in each degree. For the inductive step, sum the truncation triangles that split\noff the top cohomology sheaf and apply the five lemma to the long exact cohomology sequences\n([det-proper-unbounded-window-ii-bounded]).",
+   "text": "Fix a small family $(K_\\alpha)$ in $\\Dic(X,\\Lambda)$ and write $S=\\bigoplus_\\alpha K_\\alpha$. By [det-ambient-ind-derived-sums], $S$ lies in $\\Dic(X,\\Lambda)$ and these sums are the ambient derived sums. Let $c:\\bigoplus_\\alpha Rp_*K_\\alpha\\to Rp_*S$ be the canonical comparison: if $i_\\alpha:K_\\alpha\\to S$ and $j_\\alpha:Rp_*K_\\alpha\\to\\bigoplus_\\beta Rp_*K_\\beta$ are the coprojections, then $c j_\\alpha=Rp_*(i_\\alpha)$. We will prove that this particular map is an isomorphism locally on $Y$. No integer bounding the fibres of $p$ globally is chosen.",
    "uses": [
-    "sk-lem-proper-heart-bound",
-    "det-proper-unbounded-window-ii-bounded"
+    "det-ambient-ind-derived-sums"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Paragraph 2: the arbitrary family and its canonical comparison."
+   }
   },
   {
-   "text": "Now let $(K_\\alpha)$ be arbitrary and fix $q$. Direct sums of sheaves are exact, so cohomology and\ntruncations commute with direct sums. The objects $\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K_\\alpha$ have cohomology in\nthe common interval $[q-2d-1,q]$. Applying the window isomorphism of [sk-lem-proper-unbounded-window] to\neach $K_\\alpha$ and to $\\bigoplus_\\alpha K_\\alpha$, and the first paragraph to the truncated family, shows\nthat $\\bigoplus_\\alpha Rp_*K_\\alpha\\to Rp_*(\\bigoplus_\\alpha K_\\alpha)$ is an isomorphism on $\\mathcal H^q$. As\n$q$ is arbitrary, it is an isomorphism ([det-proper-unbounded-window-ii-general]).",
+   "text": "Let $a:U\\hookrightarrow Y$ be an affine open and put $X_U=X\\times_YU$, $b:X_U\\hookrightarrow X$, and $p_U:X_U\\to U$. By [lem-weil-pbc-proper-base-change], $p_U$ is proper, hence of finite type by [def-weil-proper-morphism]. The affine $U$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain an integer $d_U\\geq0$ such that every ordinary fibre $(X_U)_y$, $y\\in U$, has topological Krull dimension at most $d_U$. The definition [def-weil-finite-type-morphism] supplies affine charts $\\operatorname{Spec}C$ over affine opens $\\operatorname{Spec}A$ of $U$ with $C$ a finitely generated $A$-algebra; tensoring a finite generating set with $\\kappa(y)$ shows that the fibre charts $\\operatorname{Spec}B_i$, $B_i=C_i\\otimes_A\\kappa(y)$, are finite type over $\\kappa(y)$, and they form an open cover of $(X_U)_y$. All dimensions below are topological Krull dimensions. An open subspace has dimension at most that of the ambient space, and a space covered by opens has dimension the supremum of theirs (Stacks 0B7I, `topology.tex`, `lemma-dimension-supremum-local-dimensions`, and the remark before it); both are elementary from the chain definition. Hence $\\dim\\operatorname{Spec}B_i\\leq d_U$. The geometric fibre $(X_U)_{\\bar y}=(X_U)_y\\times_{\\kappa(y)}\\operatorname{Spec}\\overline{\\kappa(y)}$ is covered by the opens $\\operatorname{Spec}(\\overline{\\kappa(y)}\\otimes_{\\kappa(y)}B_i)$, whose dimensions equal $\\dim\\operatorname{Spec}B_i$ by [lem-weil-pbc-dimension-preserved-field-extension]; so $\\dim(X_U)_{\\bar y}\\leq d_U$. An empty fibre stays empty. The integer may vary with $U$.",
    "uses": [
-    "sk-lem-proper-unbounded-window",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Local repair of paragraph 2, before choosing its finite window: use Stacks 0A3V and 00P3 on each affine base open."
+   }
+  },
+  {
+   "text": "For either open immersion $h=a,b$, [lem-weil-proetale-weakly-etale-localization] identifies its pro-etale site with the corresponding localized site. The ringed restriction comparison [lem-weil-pbc-proetale-ringed-open-comparison] and [sk-prop-sfb-cartesian-coefficients] identify $h^*$ with ordinary restriction with the actual ring $\\Lambda$ pulled back from the point; it is exact. Here $E$ is a finite subextension of the fixed $\\Qlb/\\mathbf Q_\\ell$, and $\\Qlb$ has the condensed finite-subextension convention specified in that theorem. We use only its untwisted assertion, which imposes no invertibility hypothesis on $\\ell$. Thus $H^n(h^*L)=h^*H^n(L)$. The adjunction $h^*\\dashv h_*$ of [sk-def-sfb-module-pushforward-pullback] shows that $h^*$ preserves colimits: maps from $h^*(\\operatorname{colim}M_i)$ to $N$ are compatible families of maps $M_i\\to h_*N$, equivalently compatible families of maps $h^*M_i\\to N$. By [sk-def-sfb-module-derived-pushpull], the derived adjunction is $Lh^*\\dashv Rh_*$. The exact-functor clause of [sk-def-sfb-derived-categories] identifies $Lh^*$ with termwise restriction; the same Hom calculation gives $h^*(\\bigoplus L_i)\\simeq\\bigoplus h^*L_i$ in the unbounded derived categories, with the coprojections preserved. For open restriction $h:W\\hookrightarrow Z$ ($h=b$) and $C$ constructible on $Z$ by [sk-def-sfb-constructible], we show $h^*C$ is constructible on $W$. First, on a qcqs scheme the global condition (a finite stratification by constructible locally closed subschemes on whose strata the module has a finite constant local model) and the affine-local condition agree. Global implies local: for an affine open $V$, $V\\to Z$ is quasi-compact, so the traces $Z_a\\cap V$ are constructible locally closed in $V$, they stratify $V$ via $Z_a\\times_ZV\\to V$, and a local model on $\\{U_i\\to Z_a\\}$ pulls back along $U_i\\times_ZV$ because $\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i$ restricts to $\\Lambda_{U_i\\times_ZV}\\otimes_{\\Lambda(*)}P_i$. Local implies global: choose a finite affine cover $V_1,\\dots,V_m$; the sets $V_k\\setminus(V_1\\cup\\dots\\cup V_{k-1})$ are constructible locally closed (quasi-compact opens of a qcqs scheme are retrocompact), and intersecting them with the strata of $V_k$ gives a finite stratification of the required kind, again by restricting local models. Thus in all cases the condition can be tested on affine opens. Now every affine open $V$ of $W$ is an affine open of $Z$, and $(h^*C)|_V=C|_V$ because the restriction identifications compose by evaluation on the localized sites; so $h^*C$ satisfies the affine-local condition, without requiring $h$ to be quasi-compact. Since $X_U$ is qcqs (proper over the affine $U$), the equivalence just proved makes $h^*C$ constructible in the global sense on $X_U$ as well. Restricting a filtered presentation of $H^n(K_\\alpha)$ therefore proves $b^*K_\\alpha\\in\\Dic(X_U,\\Lambda)$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Local restriction of paragraph 2, preserving coefficients, sums, and the input class; Stacks 00XZ and the displayed module adjunctions."
+   }
+  },
+  {
+   "text": "There is a natural isomorphism $\\theta_L:a^*Rp_*L\\xrightarrow{\\sim}Rp_{U,*}b^*L$ for every unbounded $L$. Indeed, the definition [def-sfb-finite-lower-star] gives $(p_*M)(T)=M(T\\times_YX)$ on underlying abelian sheaves; [sk-def-sfb-module-pushforward-pullback] gives this same pushforward with its induced module action. If $T\\to U$ is pro-etale, $T\\times_YX=T\\times_UX_U$, so $a^*p_*M=p_{U,*}b^*M$, including the actions, naturally in $M$: a coefficient section on $T$ acts on $M(T\\times_YX)$ through its pullback to $T\\times_YX$, and under $T\\times_YX=T\\times_UX_U$ this is the identical coefficient section and action on $M(T\\times_UX_U)$. Choose a K-injective resolution $L\\to I$. By [sk-def-sfb-module-lower-shriek], $b^*$ is right adjoint to the exact module functor $b_!$. Therefore [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $b^*I$ K-injective. By [sk-def-sfb-module-derived-pushpull], $p_*I$ and $p_{U,*}b^*I$ compute the two derived images. The preceding equality of complexes and exactness of restriction yield $\\theta_L$. Naturality holds because the equality is natural on complexes and hence on their localization.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Local restriction of paragraph 2: K-injective computation of the canonical open restriction comparison; Stacks 08BJ and 08FI."
+   }
+  },
+  {
+   "text": "Apply [det-proper-unbounded-window-ii-general] with its schemes $X,Y$ replaced by $X_U,U$, its proper morphism by $p_U$, its geometric-fibre bound $d$ by the nonnegative integer $d_U$ from step 2, and its family by $(b^*K_\\alpha)$, whose terms lie in $\\Dic(X_U,\\Lambda)$ by step 3. Its coefficients remain the same $E$ or $\\Qlb$. Its conclusion is invertibility of the canonical comparison $c_U:\\bigoplus_\\alpha Rp_{U,*}b^*K_\\alpha\\to Rp_{U,*}(\\bigoplus_\\alpha b^*K_\\alpha)$. Thus it applies with exactly its stated global-bound hypothesis on this restricted morphism. The existing detail node carries the bounded-family induction and finite-window argument; this step uses only its statement.",
+   "uses": [
     "det-proper-unbounded-window-ii-general"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Paragraph 2, existing general detail node, now applied on the affine open $U$."
+   }
+  },
+  {
+   "text": "Under the coproduct identifications of step 3 and $\\theta$ of step 4, $a^*c$ is exactly $c_U$. To check the map, identify $b^*S$ with $\\bigoplus_\\alpha b^*K_\\alpha$. On the $\\alpha$th coprojection the transported $a^*c$ is $\\theta_S\\,a^*(Rp_*i_\\alpha)\\,\\theta_{K_\\alpha}^{-1}=Rp_{U,*}(b^*i_\\alpha)$ by naturality of $\\theta$. These are precisely the defining components of $c_U$, so the coproduct universal property gives equality. Thus $a^*c$ is an isomorphism for every affine open $U\\subseteq Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Paragraph 2: compatibility of the canonical comparison with restriction; explicit coprojection calculation."
+   }
+  },
+  {
+   "text": "For each integer $n$, exactness of restriction gives $a^*H^n(c)=H^n(a^*c)$, an isomorphism on every affine open. Hence the kernel and cokernel of $H^n(c)$ restrict to zero on an affine cover. A module sheaf zero on this cover is zero: for any pro-etale $T\\to Y$, the opens $T\\times_YU$ cover $T$, and every section vanishes on them, so vanishes by the separatedness axiom of a sheaf. Thus both kernel and cokernel are zero, and $H^n(c)$ is an isomorphism. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] for all $n$ to conclude that $c$ is an isomorphism in the ambient unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Paragraph 2, final cohomological isomorphism test, with Zariski locality written out (Stacks 05RT)."
+   }
+  },
+  {
+   "text": "Finally, the functor $Rp_*:\\Dic(X,\\Lambda)\\to\\Dic(Y,\\Lambda)$ of the statement is the one the statement cites, [sk-lem-proper-unbounded-window]: that node supplies it, i.e. proves $Rp_*(\\Dic(X,\\Lambda))\\subseteq\\Dic(Y,\\Lambda)$, for $p$ proper together with an integer $d$ bounding the dimensions of all geometric fibres of $p$ (the setting of the source, where $p$ and $d$ are those of the heart-bound lemma that the cited node names). In that setting it gives $Rp_*K_\\alpha\\in\\Dic(Y,\\Lambda)$ for every $\\alpha$ and $Rp_*S\\in\\Dic(Y,\\Lambda)$, using $S\\in\\Dic(X,\\Lambda)$ from step 1. The category $\\Dic(Y,\\Lambda)$ is by definition the full subcategory of the ambient derived category on objects whose cohomology is ind-constructible, with ambient morphisms. By [det-ambient-ind-derived-sums] it is closed under ambient coproducts, which are therefore its coproducts: the same morphisms and the ambient coprojection universal property give the universal property in this full subcategory. Consequently $c$, which is the canonical comparison in $\\Dic(Y,\\Lambda)$, and its ambient inverse from step 7 are morphisms of $\\Dic(Y,\\Lambda)$, and the two inverse equations still hold. The canonical coproduct comparison is invertible there for every small family, as asserted. Steps 1--7 do not use $d$: for an arbitrary proper $p$, e.g. $\\coprod_n\\mathbf P^n_k\\to\\coprod_n\\operatorname{Spec}k$ with unbounded fibre dimensions, they still give invertibility of the ambient comparison $c$; only the membership of its source and target in $\\Dic(Y,\\Lambda)$ is taken from [sk-lem-proper-unbounded-window].",
+   "uses": [
+    "sk-lem-proper-unbounded-window",
+    "det-ambient-ind-derived-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/_section.md",
+    "place": "Statement of sk-lem-proper-unbounded-window: '$Rp_*$ ... maps $\\Dic(X,\\Lambda)$ into $\\Dic(Y,\\Lambda)$', with $p,d$ as in sk-lem-proper-heart-bound; conclusion of the unit statement."
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-proper-heart-bound",
-  "det-proper-unbounded-window-ii-bounded",
-  "sk-lem-proper-unbounded-window",
-  "det-proper-unbounded-window-ii-general"
+  "det-ambient-ind-derived-sums",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "def-weil-finite-type-morphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "det-proper-unbounded-window-ii-general",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "sk-lem-proper-unbounded-window"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+  "place": "Existing bounded-fibre detail argument reused on affine opens; locality repair uses Stacks 0A3V, 00P3, 00XZ, 08BJ, 08FI and 05RT."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*(coproduct|direct.sum)|indconstructible|IndCons",
+   "results": "25 hit(s): Mathlib/Algebra/DirectSum/Module.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of unbounded ind-constructible pro-etale complexes commutes with arbitrary direct sums",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, DirectSum, SheafOfModules.pushforwardComp, IsBaseChange.directSum, CategoryTheory.Sieve.functorPushforward_union, instInhabitedDirectSum, AlgebraicGeometry.Scheme.Modules.pushforwardComp, Module.Flat.directSum",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesCoproducts, CategoryTheory.Functor",
+   "results": "0 hit(s): ; loogle: unknown identifier 'CategoryTheory.Limits.PreservesCoproducts'; this pattern did not resolve, so the later resolved PreservesColimitsOfShape query was also run",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes, derived direct image on pro-etale complexes with ind-constructible E or Qlbar cohomology preserves arbitrary direct sums",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|indConstructible|pro[Ee]tale|[Pp]roetale",
+   "results": "10 hit(s): Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfShape, Discrete",
+   "results": "0 hit(s): ; loogle: unknown identifier 'Discrete'; this pattern did not resolve, so the later resolved PreservesColimitsOfShape query was also run",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor of finite cohomological dimension commutes with coproducts of arbitrary unbounded complexes if its cohomology on the heart commutes with coproducts",
+   "results": "8 hit(s): CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh|def rightDerived",
+   "results": "7 hit(s): Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "12 hit(s): CategoryTheory.Limits.PreservesColimitsOfShape, CategoryTheory.Limits.preservesColimitsOfShape_subsingleton, CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape, CategoryTheory.Limits.PreservesColimitsOfSize.mk, CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit, CategoryTheory.Limits.preservesColimitsOfShape_of_equiv, CategoryTheory.Limits.PreservesColimitsOfShape.mk, CategoryTheory.Limits.reflectsColimitsOfShape_of_reflectsIsomorphisms",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of sheaves with a uniform cohomological amplitude preserves small coproducts when all higher pushforwards preserve sums on the heart",
+   "results": "8 hit(s): CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; the derived-category hits require an exact underived functor, the sheaf pushforward hit constructs an underived functor, and the remaining hits give Grothendieck category structure. None states the required proper-derived coproduct result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Cc]oproduct|[Cc]oproduct.*[Rr]ight[Dd]erived|[Rr]ight[Dd]erived.*[Cc]oproduct",
+   "results": "25 hit(s): Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean;  Second-reader audit: these are underived sheaf-pushforward, adjunction, exact-colimit, or finite-coproduct results, not the proper-derived ind-constructible comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward of sheaves along a proper morphism preserves coproducts of unbounded complexes with ind constructible cohomology",
+   "results": "8 hit(s): CategoryTheory.Functor.sheafPushforwardCocontinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousComp, Condensed.hasExactColimitsOfShape, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso;  Second-reader audit: these are underived sheaf-pushforward, adjunction, exact-colimit, or finite-coproduct results, not the proper-derived ind-constructible comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -64,5 +251,67 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window-ii"
+ "unit": "sk-lem-proper-unbounded-window-ii",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-proper-unbounded-window-ii",
+  "worker": "stage1",
+  "summary": "Eight-step split, no new nodes. Steps 1-7 prove invertibility of the canonical ambient comparison for every proper p, by restriction to affine opens U of Y, a local geometric-fibre bound d_U, the existing det-proper-unbounded-window-ii-general on p_U, and Zariski descent of the isomorphism. Step 8 identifies it with the coproduct comparison in Dic(Y), taking membership of Rp_*K_alpha and Rp_*S in Dic(Y) from sk-lem-proper-unbounded-window, the functor the statement cites (proved there under a global geometric-fibre bound d, the source's setting). Landing-refusal repair: step 3 updated to the current cartesian-coefficient and derived-category statements; the hypothesis-restricted triangulated-subcategory citation removed. Maintainer reader (2026-10-17): step 8 now cites the window lemma for membership; step 3 writes out agreement of the global and affine-local constructibility conditions on qcqs schemes; step 2 uses topological dimensions throughout (Stacks 0B7I) instead of the local-ring dimension of lem-pc-dimension-affine-open-cover, which is no longer cited. The imported statement is unchanged; no statement correction is made.",
+  "blueprint": "Unit paragraph 1 is realized by det-proper-unbounded-window-ii-bounded through det-proper-unbounded-window-ii-general. Paragraph 2 is applied on each affine open of Y in steps 2-5 via det-proper-unbounded-window-ii-general; steps 6-7 descend the canonical comparison. Step 8 gives the displayed restricted-functor conclusion using the corestriction of sk-lem-proper-unbounded-window cited in the statement.",
+  "tool_uses": [
+   {
+    "node": "det-ambient-ind-derived-sums",
+    "why": "Ambient sums and cohomology, and Dic closure under sums; no proper-image argument is replaced."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Local finite fibre dimension bound on a quasi-compact base; the unit does not supply its geometric dimension argument."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Replace ordinary fibres by geometric fibres without changing the chart dimensions."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identify open pro-etale restriction with localization, without using a proper base-change theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Identify the actual ringed module pullback with slice restriction for the pulled-back condensed coefficients."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "The coefficient comparison is invertible and module pullback is exact for E and Qlb."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Exact open extension by zero makes its right adjoint preserve K-injective resolutions."
+   }
+  ],
+  "proof_correction": "The unit's second paragraph uses a global d, which is available in its setting (p and d as in sk-lem-proper-heart-bound, inherited through the statement's citation of sk-lem-proper-unbounded-window) but not from properness alone: coprod_n P^n_k -> coprod_n Spec k is proper with unbounded fibre dimensions. Steps 2-7 prove the ambient comparison using affine-local bounds d_U for arbitrary proper p, which is what the citer det-proper-image-localizing-proper uses. Membership in Dic(Y) of source and target of the comparison (step 8) is taken from sk-lem-proper-unbounded-window and therefore needs its global bound; whether Rp_* preserves Dic without such a bound is not asserted or proved here. No statement correction is made.",
+  "source_error": "The existing bounded detail proof has H^n(C[-a])=H^{n+a}(C); the correct cohomological convention is H^n(C[-a])=H^{n-a}(C). For C concentrated in degree zero and a=1, C[-1] is in degree 1. Only the bounded detail statement is used through the existing general node. The separate source/dependency typo is reported for maintenance, not reproduced or edited here.",
+  "citation_revalidation": {
+   "returned_head": "815741ad57",
+   "date": "2026-10-17",
+   "node": "det-proper-unbounded-window-ii-general",
+   "result": "Read the full current statement in server main and authoritative live DAG: both give the same proper/bounded-geometric-fibres E-or-Qlb theorem, matching the current quote. The returned head now also contains that text, so no enduring statement difference is claimed. Step 5 explicitly checks all substitutions. Full comparison found changed cartesian-coefficients and derived-categories statements; step 3 and their quotations were repaired. Removed the hypothesis-restricted triangulated-subcategory citation from step 8. During the fresh second reading, shared DAG synchronization expanded the general-detail statement to specify all coefficient, category, size and canonical-map conventions. Re-read its complete expanded statement and refreshed the step-5 quote; the properness, geometric bound and family substitutions remain exactly valid."
+  }
+ },
+ "tool_uses": [
+  "det-ambient-ind-derived-sums",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-1a6968f69",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-1a6968f69 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, all 8 steps, the full statement of every cited node, and the blueprint main-20261015 ii/window/heart-bound sources (_section.md and the bounded/general proofs), plus Stacks 0B7I. There are no new nodes and no SGA. The statement is unchanged and is not weakened. Its functor Rp_*: Dic(X)->Dic(Y) is the one the cited sk-lem-proper-unbounded-window supplies, and that lemma only proves Rp_*(Dic(X)) lies in Dic(Y) when p is proper and a global d bounds the geometric fibres; this is the source's setting. Faults repaired in fixes/dag/nodes/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii.json: (1) C1/C3/E1: step 8 took the corestriction for granted after the form revert and cited nothing for membership in Dic(Y). It now cites sk-lem-proper-unbounded-window for Rp_*K_alpha and Rp_*S lying in Dic(Y), is marked non-elementary, and says openly that membership without a global bound is not proved. Steps 1-7 still prove the ambient comparison for every proper p, using affine-local bounds d_U; the counterexample coprod P^n -> coprod Spec k shows the global bound can fail. (2) E1/E5: step 3 used only the affine-local constructibility condition, but sk-def-sfb-constructible gives a global stratification condition on qcqs schemes such as X_U. Both directions of their agreement are now written out. (3) The split_report summary and proof_correction were stale: they claimed a statement correction and a step-8 window citation that the file did not contain. Both are rewritten to match the file. Also tightened: step 2 now uses topological Krull dimensions throughout (Stacks 0B7I) and no longer cites lem-pc-dimension-affine-open-cover, which concerns local-ring dimension; that node is removed from proof_deps and tool_uses. Every other hypothesis checked passes: step 5 det-proper-unbounded-window-ii-general with (X_U,U,p_U,d_U,(b^*K_alpha)); step 4 K-injective open restriction; step 7 Zariski descent of the isomorphism; the untwisted cartesian-coefficient clause; E/Qlb condensed coefficients throughout. No cycle. The sole citer, det-proper-image-localizing-proper, uses only the ambient comparison, so it is unaffected. Accepted tool_uses: det-ambient-ind-derived-sums, lem-fin-finite-type-fibre-dimension-bound, lem-weil-pbc-dimension-preserved-field-extension, lem-weil-proetale-weakly-etale-localization, lem-weil-pbc-proetale-ringed-open-comparison, sk-prop-sfb-cartesian-coefficients, lem-weil-pbc-right-adjoint-preserves-kinjective. Full step-by-step checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
