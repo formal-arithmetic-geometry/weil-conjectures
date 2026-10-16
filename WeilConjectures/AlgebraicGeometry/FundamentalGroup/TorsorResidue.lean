@@ -136,7 +136,7 @@ section KummerResidue
 
 variable [IsLocallyNoetherian C]
 
-omit [Nonempty U] in
+omit [Nonempty U] [IsLocallyNoetherian C] in
 /-- An element of `Ω` fixed by `Gal(Ω / k(C))` lies in `k(C)`. -/
 lemma exists_algebraMap_eq_of_forall_apply_eq {y : Ω}
     (h : ∀ σ : Gal(Ω/C.functionField), σ y = y) :
@@ -254,5 +254,66 @@ theorem kummerResidue_add {χ χ' : Gal(Ω/C.functionField) → ZMod N} (z : C) 
   rfl
 
 end KummerResidue
+
+section Residue
+
+variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k))
+
+/-- The constants `k → k(C)` of the function field of a `k`-scheme `C`. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Hom.functionFieldConstants :
+    k →+* C.functionField :=
+  (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp
+    (p.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
+
+omit [IsLocallyNoetherian C] in
+/-- **Kummer elements of torsors.** For `N` invertible in `k` and `k` containing a primitive
+`N`-th root of unity, every `ℤ / N`-torsor has a Kummer element against every `N`-th root of unity
+`ξ` of `k`: `x ≠ 0` in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x`. -/
+theorem exists_kummerElement [NeZero (N : k)] [HasEnoughRootsOfUnity k N] {ξ : k}
+    (hξ : ξ ^ N = 1) :
+    ∃ x : Ω, ∃ f : C.functionField, x ≠ 0 ∧ algebraMap C.functionField Ω f = x ^ N ∧
+      ∀ σ : Gal(Ω/C.functionField), σ x =
+        algebraMap C.functionField Ω (p.functionFieldConstants ξ) ^ (T.galoisCharacter j σ).val *
+          x := by
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  set ι : k →+* Ω := (algebraMap C.functionField Ω).comp p.functionFieldConstants
+  have hζ : IsPrimitiveRoot (ι ζk) N := hζk.map_of_injective ι.injective
+  obtain ⟨x₀, hx₀, hx₀σ⟩ := T.exists_kummer_element (T.genericFiberPoint j) hζ
+  have hχ₀ (σ : Gal(Ω/C.functionField)) : σ x₀ = ι ζk ^ (T.galoisCharacter j σ).val * x₀ :=
+    hx₀σ σ.toRingEquiv _ (σ.commutes _) (T.specMap_comp_eq_comp_vadd_galoisCharacter j σ _
+      (T.genericFiberPoint_comp j))
+  obtain ⟨b, -, hb⟩ := hζk.eq_pow_of_pow_eq_one hξ
+  have hχ (σ : Gal(Ω/C.functionField)) :
+      σ (x₀ ^ b) = ι ξ ^ (T.galoisCharacter j σ).val * x₀ ^ b := by
+    rw [map_pow, hχ₀, mul_pow, ← hb, map_pow, ← pow_mul, ← pow_mul, mul_comm b]
+  obtain ⟨f, hf⟩ := exists_algebraMap_eq_of_forall_apply_eq (C := C) (y := (x₀ ^ b) ^ N)
+    fun σ ↦ by
+      rw [map_pow, hχ, mul_pow, ← pow_mul, mul_comm _ N, pow_mul, ← map_pow, hξ, map_one,
+        one_pow, one_mul]
+  exact ⟨x₀ ^ b, f, pow_ne_zero _ hx₀, hf, hχ⟩
+
+/-- The **residue** `res_z(T) ∈ Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` of a `ℤ / N`-torsor `T` on `U`
+at a point `z` of `C` (blueprint `lem-wf-open-curve-residue-sequence`): an `N`-th root of unity
+`ξ` is sent to `ord_z (x ^ N) mod N`, for a Kummer element `x` of `T` against `ξ`, i.e. `x ≠ 0`
+in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x` for `σ ∈ Gal(Ω / k(C))`. -/
+noncomputable def residue [NeZero (N : k)] [HasEnoughRootsOfUnity k N] (z : C) :
+    Additive (rootsOfUnity N k) →+ ZMod N where
+  toFun ξ := kummerResidue C (T.galoisCharacter j) z
+    (algebraMap C.functionField Ω (p.functionFieldConstants ((ξ.toMul : kˣ) : k)))
+  map_zero' := by
+    rw [kummerResidue_eq z one_ne_zero (f := 1) (by rw [map_one, one_pow]) (fun σ ↦ by
+      simp)]
+    have h := Scheme.ord_mul (x := z) (one_ne_zero (α := C.functionField)) one_ne_zero
+    rw [mul_one] at h
+    rw [show C.ord 1 z = 0 by omega, Int.cast_zero]
+  map_add' ξ ξ' := by
+    have hN (η : Additive (rootsOfUnity N k)) : ((η.toMul : kˣ) : k) ^ N = 1 := by
+      rw [← Units.val_pow_eq_pow_val, (mem_rootsOfUnity N _).1 η.toMul.2, Units.val_one]
+    obtain ⟨x, f, hx, hf, hχ⟩ := T.exists_kummerElement j p (hN ξ)
+    obtain ⟨x', f', hx', hf', hχ'⟩ := T.exists_kummerElement j p (hN ξ')
+    rw [toMul_add, Subgroup.coe_mul, Units.val_mul, map_mul, map_mul]
+    exact kummerResidue_mul z hx hf hχ hx' hf' hχ'
+
+end Residue
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
