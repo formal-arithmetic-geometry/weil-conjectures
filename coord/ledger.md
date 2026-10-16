@@ -15342,3 +15342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:52 L: merged deliver/F4/Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel (stage 3; reviewer PASS; first push; landing 20261016T015248-L-722121 (interface); batch 20261016T015243; modules 3; new nodes 2)
 - 01:52 L: merged deliver/G4/Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison (stage 3; reviewer PASS; first push; landing 20261016T015249-L-722295 (interface); batch 20261016T015243; modules 7; new nodes 6)
 - 01:52 L: merged deliver/H1/Sheaf.CategoryTheory.SpectralObjectPageTwoMap (stage 3; reviewer PASS; first push; landing 20261016T015249-L-722449 (interface); batch 20261016T015243; modules 2; new nodes 1)
+- 02:03 L: returned deliver/C1/Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm (reviewer RETURN: (the landing tools, head 53bc3826e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
