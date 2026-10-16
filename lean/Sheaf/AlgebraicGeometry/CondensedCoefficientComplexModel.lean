@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
 public import Mathlib.CategoryTheory.Limits.Final
+import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit
+import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexCompatibility
 
 /-! # Termwise coefficient complex construction
 
@@ -79,6 +81,12 @@ theorem exists_condensed_coefficient_complex_model
                   (finiteCoefficientDerivedTensorCompIso X ℓ (hf i)).hom.app
                     (DerivedCategory.Q.obj C)) =
               DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
-  sorry
+  refine ⟨coefficientComplexDiagram X ℓ C H he hf,
+    coefficientComplexCocone X ℓ C H he hf,
+    nonempty_isColimit_coefficientComplexCocone X ℓ C H he hf, fun _ ↦ rfl,
+    coefficientComplexVertexIso X ℓ C,
+    (fun i ↦ coefficientComplexStageIso X ℓ (he i) (hf i) C), ?_⟩
+  intro i
+  exact coefficientComplexToAlgCl_derived_compatibility X ℓ (he i) (hf i) C
 
 end AlgebraicGeometry.ProEtale

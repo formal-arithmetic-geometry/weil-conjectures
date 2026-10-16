@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-condensed-coefficient-complex-compatibility",
+ "kind": "statement",
+ "title": "The canonical scalar-inclusion arrow is the derived tensor-comparison mate",
+ "statement": "For the explicit constructions of [def-weil-pbc-condensed-coefficient-complex-diagram] and the fixed derived adjunctions and tensor comparisons of [def-weil-pbc-finite-derived-tensor-comparison], let E,F,G be finite intermediate coefficient fields with E≤G and F≤G, and C any complex of F_X-modules. Transpose the explicit stage comparison under the finite derived adjunction, extend to the algebraic closure, conjugate by the prescribed tensor comparisons, and transpose under the algebraic-closure adjunction. The resulting morphism equals Q of the explicitly constructed scalar-inclusion map followed by the explicit vertex comparison. This assertion has no filtered category, finality, cocone universal property, or existential choice of complexes or isomorphisms.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-coefficient-complex-diagram",
+  "def-weil-pbc-finite-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Exact localization carries the ordinary tensor-comparison mate to the prescribed derived mate, with the explicit stage and vertex comparison isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-complex-derived-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary tensor-comparison mate is the actual coefficient-inclusion morphism of complexes. Rewrite this equality under Q to obtain the claimed canonical-arrow equation.",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-complex-underived-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-coefficient-complex-derived-transport",
+  "lem-weil-pbc-condensed-coefficient-complex-underived-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedCoefficientComplexCompatibility.lean",
+  "place": "Explicit E1 proof from scalar-extension universal properties and exact-derived factorization equations; coefficient-algebra argument of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of composition of extension of scalars is the coefficient inclusion after localization to the derived category",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exists N cocone filtered coefficient complex",
+   "results": "HomologicalComplex.isColimitOfEval and degreewise colimit APIs; no existing theorem constructing this internal coefficient diagram and its derived compatibility.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemma used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app in Mathlib.CategoryTheory.Adjunction.Unique. Gives the ordinary scalar tensor comparison unit formula.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemma used"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalarsIsoOfEq|derived_unit_comp_iso|isColimitPadicAlgClRingObjCocone",
+   "results": "Located the actual scalar adjunction and scalar transitivity constructors, exact-derived factorization APIs, and the proved coefficient-ring colimit in the source library. The complex model itself was not already proved.",
+   "date": "2026-10-16",
+   "verdict": "supporting declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-weil-pbc-condensed-coefficient-complex-model",
+   "place": "The canonical scalar-inclusion arrow is the derived tensor-comparison mate",
+   "via": [
+    "thm-weil-pbc-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedCoefficientComplexCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoefficientComplexCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComplexToAlgCl_derived_compatibility",
+  "statement": "theorem coefficientComplexToAlgCl_derived_compatibility\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)\n    (C : CochainComplex\n      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :\n    finiteCoefficientDerivedAlgClHomEquiv X ℓ E\n      (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _\n      ((finiteCoefficientDerivedTensorCompIso X ℓ he).inv.app\n          (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) ≫\n        (finiteCoefficientDerivedToAlgCl X ℓ G).map\n          ((finiteCoefficientDerivedHomEquiv X ℓ he\n              (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _).symm\n            (coefficientComplexStageIso X ℓ he hf C).hom) ≫\n        (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)) =\n      DerivedCategory.Q.map (coefficientComplexToAlgCl X ℓ he hf C) ≫\n        (coefficientComplexVertexIso X ℓ (E := E) C).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

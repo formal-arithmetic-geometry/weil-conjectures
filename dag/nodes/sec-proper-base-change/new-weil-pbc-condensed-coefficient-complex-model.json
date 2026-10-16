@@ -15,34 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Extend C termwise from F to H(i), restrict to E, and use coefficient inclusions tensor the identity to define the transition maps. They are E-linear; inclusion identities and composition give the diagram. Use extension to Ω, restricted to E, as the cocone vertex.",
+   "text": "Take the actual coefficientComplexDiagram and coefficientComplexCocone. Their terms are definitionally the termwise extension/restriction required by the statement.",
    "uses": [
-    "def-weil-pbc-finite-derived-tensor-comparison"
+    "def-weil-pbc-condensed-coefficient-complex-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient ring cocone is a colimit after final whiskering by H and pullback to X. Express balanced tensor as the coequalizer of its action maps; ordinary tensor preserves colimits, and colimits commute. Underlying module functors create colimits and complex colimits are degreewise, proving the cocone universal property.",
+   "text": "The explicit coefficient cocone is a colimit by the balanced-tensor coequalizer argument carried out degreewise.",
    "uses": [
-    "def-weil-pbc-finite-derived-tensor-comparison"
+    "lem-weil-pbc-condensed-coefficient-complex-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Exactness identifies localization of termwise scalar extension and restriction with the fixed derived functors, giving the comparison isomorphisms. The underived unit and multiplication formulas commute with coefficient inclusion. Localize their equality and apply the factorization equations of the derived comparison constructors, giving the equation for the canonical localized cocone arrow. No boundedness is used in these degreewise constructions.",
+   "text": "Take coefficientComplexVertexIso and coefficientComplexStageIso as the comparison isomorphisms. Apply the single-stage derived compatibility identity separately to each object of H.",
    "uses": [
-    "def-weil-pbc-finite-derived-tensor-comparison"
+    "def-weil-pbc-condensed-coefficient-complex-diagram",
+    "lem-weil-pbc-condensed-coefficient-complex-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-derived-tensor-comparison"
+  "def-weil-pbc-condensed-coefficient-complex-diagram",
+  "lem-weil-pbc-condensed-coefficient-complex-colimit",
+  "lem-weil-pbc-condensed-coefficient-complex-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "Coefficient algebra part of the original presentation proof, separated from the bounded representative and isomorphism-transport arguments by B2 second reading."
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedCoefficientComplexModel.lean",
+  "place": "E1: actual scalar-inclusion diagram, explicit cocone and derived isomorphisms; proved coequalizer colimit; pointwise derived compatibility."
  },
  "mathlib_searches": [
   {
@@ -116,12 +119,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261015T220938-L-2554367",
+  "landing": "20261016T005128-L-4190424",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
