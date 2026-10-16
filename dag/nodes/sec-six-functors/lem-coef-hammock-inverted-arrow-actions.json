@@ -29,9 +29,74 @@
  "stmt_deps": [
   "lem-coef-hammock-graph-colimit-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R$ for reduction and write composition in functional order: $BA$ means first $A$, then $B$. Concatenating two degree-$n$ hammocks, then applying $R$, defines composition. To see explicitly that this is simplicial, a row operator $\\alpha$ commutes with raw concatenation and sends each identity-column deletion or same-direction composition to the same valid reduction move. The reduction/colimit identification of [lem-coef-hammock-graph-colimit-presentation] therefore gives $R\\alpha R(D)=R\\alpha(D)$. Reducing either factor before concatenation gives the same reduced diagram as reducing the whole concatenation: the reductions of each factor are still valid moves inside it. Consequently both parenthesizations are reduction of the same three concatenated diagrams, and an empty hammock is a strict identity. For $u:x\\to y$ let $a\\in H(x,y)_0$ be the rightward one-arrow hammock $x\\xrightarrow{u}y$, and let $b\\in H(y,x)_0$ be the leftward one-arrow hammock $y\\xleftarrow{u}x$, with reduction understood if $u$ is an identity. The latter is allowed because $u\\in W$. A vertex used in degree $n$ means its constant $(n+1)$-row degeneracy. Composition with these constant hammocks gives simplicial maps in both variables.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19; explicit composition and row-operator verification for Proposition 3.3"
+   }
+  },
+  {
+   "text": "There are two cancellation edges. In $H(x,x)$ take the two-row diagram of word $+-$ whose top row is $x\\xrightarrow{1_x}x\\xleftarrow{1_x}x$ and whose bottom row is $x\\xrightarrow{u}y\\xleftarrow{u}x$. The endpoint vertical arrows are $1_x$ and the middle vertical arrow is $u:x\\to y$. Both squares commute by the unit laws, all vertical arrows and both leftward arrows lie in $W$, and reduction of the top row is $1_x$. Thus this hammock gives an edge $e_x:\\Delta^1\\to H(x,x)$ from $1_x$ to $ba$. In $H(y,y)$ take the two-row diagram of word $-+$ whose top row is $y\\xleftarrow{u}x\\xrightarrow{u}y$ and bottom row is $y\\xleftarrow{1_y}y\\xrightarrow{1_y}y$, with endpoint vertical arrows $1_y$ and middle vertical arrow $u:x\\to y$. Again both squares commute by units and all required arrows lie in $W$. It gives an edge $e_y:\\Delta^1\\to H(y,y)$ from $ab$ to $1_y$. These are maps from the standard simplex: at a monotone map $\\theta:[n]\\to[1]$ take the corresponding repeated/deleted rows of the displayed two-row hammock and reduce, as prescribed by [lem-coef-hammock-graph-colimit-presentation]. In particular the construction remains valid when $x=y$, when $u$ is a nonidentity endomorphism, or when $u$ is an identity.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1 and Proposition 3.3, printed pp.19,21; the two explicit cancellation hammocks"
+   }
+  },
+  {
+   "text": "Fix $v$. Put $A=H(v,x)$ and $B=H(v,y)$, and define $P:A\\to B$ by $P(D)=aD$ and $Q:B\\to A$ by $Q(E)=bE$. The simplicial maps\n$$A\\times\\Delta^1\\to A,\\quad(D,\\theta)\\longmapsto e_x(\\theta)D,\\qquad B\\times\\Delta^1\\to B,\\quad(E,\\theta)\\longmapsto e_y(\\theta)E$$\nare obtained by concatenating the degree-$n$ representatives and reducing. They commute with each simplicial operator by step 1; equivalently one restricts $e_x$ or $e_y$ along $\\theta$, concatenates its $n+1$ rows with those of $D$ or $E$, and reduces. Their endpoint maps are respectively $1_A,QP$ and $PQ,1_B$, using associativity and the strict identity from step 1. Thus the specific target-composition map in the statement has the explicit simplicial inverse candidate $Q$ and the required endpoint homotopies.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 3.3, printed p.21, postcomposition assertion; explicit prism on arbitrary input hammocks"
+   }
+  },
+  {
+   "text": "For the source-composition assertion put $A'=H(y,v)$ and $B'=H(x,v)$. Define $P':A'\\to B'$ by $P'(D)=Da$ and $Q':B'\\to A'$ by $Q'(E)=Eb$. The maps\n$$A'\\times\\Delta^1\\to A',\\quad(D,\\theta)\\longmapsto D e_y(\\theta),\\qquad B'\\times\\Delta^1\\to B',\\quad(E,\\theta)\\longmapsto E e_x(\\theta)$$\nare simplicial by exactly the row-operator equality established in step 1. Their endpoint maps are $Q'P',1_{A'}$ and $1_{B'},P'Q'$ respectively, since $Q'P'(D)=D(ab)$ and $P'Q'(E)=E(ba)$. This writes both source-composition homotopies explicitly; no reversal of a simplicial edge is assumed.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 3.3, printed p.21, precomposition assertion; explicit prism and its two endpoint formulas"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-realization-cylinder] to each of $A,B,A',B'$. These are small simplicial sets because $C$ is small and their simplices are finite diagrams in it, modulo reduction. The natural homeomorphism $|K\\times\\Delta^1|\\cong |K|\\times[0,1]$, with its stated endpoint behavior, turns the four maps in steps 3–4 into continuous homotopies between the realizations of the indicated composites and identities. Where the identity occurs first, replace the continuous time parameter $t$ by $1-t$; this needs no simplicial reversal. Hence $|P|,|Q|$ and $|P'|,|Q'|$ are mutually inverse up to continuous homotopy. By [lem-coef-homotopy-equivalence-weak], applied separately to these two pairs, $P$ and $P'$ induce bijections on components and isomorphisms on every based homotopy group. This is precisely the weak homotopy equivalence required. The cited theorem allows nonstationary basepoints and empty spaces. The only condition on $W$ used in constructing the cancellation diagrams was that it is wide and contains $u$; there was no freeness, calculus of fractions, or two-out-of-three assumption.",
+   "uses": [
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 3.3, printed p.21; realization and homotopy-group conclusion using the separately cited topological results"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hammock-graph-colimit-presentation",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Definition 2.1 and Proposition 3.3, printed pp.19,21. The paper states the cancellation consequence without writing these two-row prisms; the argument here supplies them. Source read online; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +146,45 @@
    "results": "{\"t\": \"2026-10-16T19:43:16Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|[Ff]ree.*[Ss]implicial|[Zz]igzag.*[Cc]ontract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading; path/free-groupoid and model-category declarations do not state this reduced-hammock assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Dwyer.*Kan|inverse.*hammock",
+   "results": "{\"t\": \"2026-10-16T20:18:19Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer.*Kan|inverse.*hammock\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned model-category homotopy classes, weak-equivalence classes or truncated nerve edges, not reduced-hammock mapping sets for an arbitrary pair (C,W). Source grep and Loogle have no hammock hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "results": "{\"t\": \"2026-10-16T20:18:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned model-category homotopy classes, weak-equivalence classes or truncated nerve edges, not reduced-hammock mapping sets for an arbitrary pair (C,W). Source grep and Loogle have no hammock hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism with a homotopy inverse in a simplicial category induces weak equivalences on mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:18:20Z\", \"tool\": \"leansearch\", \"query\": \"A morphism with a homotopy inverse in a simplicial category induces weak equivalences on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences_op_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.weakEquivalences_op\", \"HomotopyEquiv.inv\", \"HomotopicalAlgebra.instWeakEquivalenceOppositeOp\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\", \"HomotopyEquiv.homotopyInvHomId\", \"HomotopyEquiv.symm\"], \"digest\": \"d9989c4914f9f0b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned model-category homotopy classes, weak-equivalence classes or truncated nerve edges, not reduced-hammock mapping sets for an arbitrary pair (C,W). Source grep and Loogle have no hammock hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition with a weak equivalence in a hammock localization is a homotopy equivalence of mapping simplicial sets",
+   "results": "{\"t\": \"2026-10-16T20:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"Composition with a weak equivalence in a hammock localization is a homotopy equivalence of mapping simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.RightHomotopyClass\"], \"digest\": \"cd796822947d7eb7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned model-category homotopy classes, weak-equivalence classes or truncated nerve edges, not reduced-hammock mapping sets for an arbitrary pair (C,W). Source grep and Loogle have no hammock hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced hammocks: a marked arrow and its reverse zigzag give inverse morphisms up to simplicial homotopy",
+   "results": "{\"t\": \"2026-10-16T20:18:40Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced hammocks: a marked arrow and its reverse zigzag give inverse morphisms up to simplicial homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Truncated.HomotopicR.symm\", \"CategoryTheory.nerve.homEquiv_apply\", \"SSet.Truncated.HomotopicL.symm\", \"SSet.Truncated.HomotopyCategory.homMk\"], \"digest\": \"2c7fbf8f916fa828\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned model-category homotopy classes, weak-equivalence classes or truncated nerve edges, not reduced-hammock mapping sets for an arbitrary pair (C,W). Source grep and Loogle have no hammock hit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-comparison",
@@ -92,5 +192,21 @@
   "group": "Q26"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hammock-inverted-arrow-actions",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and its only statement dependency. Wrote two explicit two-row cancellation hammocks, the induced postcomposition and precomposition prisms, and the realization/basepoint conclusion. Reused existing realization-cylinder and homotopy-equivalence results; no new nodes or project Lean attachments. Repeated Mathlib searches found no hammock result.",
+  "blueprint": "Technical endpoint-transport input Proposition 3.3 in the free-factor hammock comparison below prop-coef-integral-exceptional-adjoint, paragraph 2 derived coefficient adjunction. Realizes the existing blueprint.from.place without replacing a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-dde07c0ca",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-dde07c0ca (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full. I read Dwyer–Kan from the scanned Rochester PDF: Definition 2.1 (printed p.19) and Proposition 3.3 (printed p.21). The item states Prop. 3.3 exactly: W is a wide subcategory, u: x→y lies in W, and both maps H(v,x)→H(v,y) and H(y,v)→H(x,v) are weak equivalences, with no extra hypotheses. The delivery creates no new nodes. Step 1: composition by concatenation followed by reduction is simplicial and strictly associative and unital; this follows from the colimit/reduction isomorphism stated in lem-coef-hammock-graph-colimit-presentation. Step 2: I rechecked both two-row cancellation diagrams. The squares commute by units, all vertical and leftward arrows lie in W, and the face maps give the edges e_x: 1_x→ba and e_y: ab→1_y. The cases u an identity, x=y and u a non-identity endomorphism all work. Steps 3–4: the endpoint formulas are 1_A,QP and PQ,1_B for postcomposition, and Q'P'=D(ab), 1 and 1, P'Q'=E(ba) for precomposition; all are well-typed. Step 5: the statements of lem-coef-simplicial-realization-cylinder (homeomorphism with endpoints at 0 and 1) and lem-coef-homotopy-equivalence-weak (orientation gf at time 0, moving basepoints allowed, empty spaces allowed) give exactly the conclusion after reversing time where needed. All three cited nodes are in the item's unit, so there are no tool_uses. Mathlib searches cover leansearch, loogle/leanfinder and grep. Checked: no cycle in the 108-node dependency closure; no duplicate among the nodes mentioning hammocks; the citer lem-coef-free-factor-hammock-comparison uses only the postcomposition map, which the item supplies; no SGA source. No changes made; the archival copy of Dwyer–Kan is still WANTED."
+ }
 }

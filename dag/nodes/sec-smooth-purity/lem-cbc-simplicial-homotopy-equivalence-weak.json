@@ -24,9 +24,86 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first construct the realization of an arbitrary cylinder homotopy $h:K\\times\\Delta^1\\to L$, with endpoint maps $h_0,h_1:K\\to L$, using the quotient realization of [def-cbc-enhanced-diagrams-cones]. For $a\\in K_n$ and $\\lambda=(\\lambda_0,\\ldots,\\lambda_n)\\in|\\Delta^n|$, put $S_i=\\sum_{j=i}^n\\lambda_j$ and $S_{n+1}=0$. The closed regions $R_i=\\{(\\lambda,t):S_{i+1}\\leq t\\leq S_i\\}$ cover $|\\Delta^n|\\times[0,1]$. Let $r_i:[n+1]\\to[n]$ repeat $i$, and let $e_i:[n+1]\\to[1]$ take indices $0,\\ldots,i$ to $0$ and indices $i+1,\\ldots,n+1$ to $1$. On $R_i$ use the point of $|L|$ represented by the $(n+1)$-simplex $h(K(r_i)a,e_i)$ and weights\n$$(\\lambda_0,\\ldots,\\lambda_{i-1},S_i-t,t-S_{i+1},\\lambda_{i+1},\\ldots,\\lambda_n).$$\nAll weights are nonnegative and their sum is one. For fixed $a,i$ they depend continuously on $(\\lambda,t)$, so the characteristic map of this simplex gives a continuous map on $R_i$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 (0148), for a 1-simplex in Fun(K,L); explicit agent prism expansion of the continuous realization homotopy. Corollary 3.6.2.2 (013E) supplies the source's finite-factor product identification; the argument below constructs the homotopy directly instead."
+   }
+  },
+  {
+   "text": "At an adjacent seam $t=S_i$, the formula on $R_{i-1}$ assigns weight zero to the copy of $(i-1,1)$, and the formula on $R_i$ assigns weight zero to the copy of $(i,0)$. After deleting these zero-weight vertices both formulas use the same ordered list\n$$(0,0),\\ldots,(i-1,0),(i,1),\\ldots,(n,1)$$\nin $[n]\\times[1]$, with weights $(\\lambda_0,\\ldots,\\lambda_n)$. Their images agree because $h$ commutes with face maps. Nonadjacent overlaps have the intervening $\\lambda_j=0$, and repeated deletion gives the same equality. Thus the formulas agree on all intersections. They paste continuously on the prism: the inverse image of a closed subset of $|L|$ is a finite union of subsets closed in the closed $R_i$, hence closed in the prism. This uses exactly the face identifications and characteristic maps specified in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 (0148), for a 1-simplex in Fun(K,L); explicit agent prism expansion of the continuous realization homotopy. Corollary 3.6.2.2 (013E) supplies the source's finite-factor product identification; the argument below constructs the homotopy directly instead."
+   }
+  },
+  {
+   "text": "The prism formulas respect every realization relation in [def-cbc-enhanced-diagrams-cones]. For a face, insert a zero coordinate at the omitted vertex. If the cut is at that vertex, both split weights are zero; otherwise the omitted weight is zero at its one level. Deleting these entries gives exactly the lower-dimensional formula. For a degeneracy, two consecutive coordinates $\\lambda_j,\\lambda_{j+1}$ correspond to a repeated vertex of $a$. If the cut is outside that pair, both entries are at the same level in $[1]$ and the realization relation adds their weights. If the cut is inside the pair, write $T=\\sum_{k>j+1}\\lambda_k$. The total weight of this repeated vertex at level $1$ is $\\min(\\lambda_j+\\lambda_{j+1},\\max(0,t-T))$, and its level-$0$ weight is the complementary weight. These are precisely the split weights for the merged coordinate $\\lambda_j+\\lambda_{j+1}$; each consecutive repetition at a fixed level is removed by a degeneracy relation. The cumulative sums away from the pair are unchanged. Hence both cases give the formula for the un-repeated simplex. Every monotone map factors as a surjection followed by an injection, so faces and degeneracies check all relations. The prism maps therefore define a function $\\widetilde h:|K|\\times[0,1]\\to|L|$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 (0148), for a 1-simplex in Fun(K,L); explicit agent prism expansion of the continuous realization homotopy. Corollary 3.6.2.2 (013E) supplies the source's finite-factor product identification; the argument below constructs the homotopy directly instead."
+   }
+  },
+  {
+   "text": "Let $q:\\coprod_{n,a\\in K_n}|\\Delta^n|\\to|K|$ be the defining quotient map of [def-cbc-enhanced-diagrams-cones]. Its product with $[0,1]$ pulls $\\widetilde h$ back to the continuous prism maps just constructed, one on each disjoint summand. The interval is locally compact: every relative neighborhood of $t$ contains $[\\max(0,t-\\epsilon),\\min(1,t+\\epsilon)]$ as a compact relative neighborhood for sufficiently small $\\epsilon>0$. Apply [lem-cbc-quotient-cylinder-continuity] with $X_0=\\coprod_{n,a}|\\Delta^n|$, $X=|K|$, $T=[0,1]$, and $Z=|L|$. It gives continuity of $\\widetilde h$ for the ordinary product topology, with no compactness or Kan condition on $K,L$. At $t=0$ use $R_n$: the final level-$1$ weight is zero, so the endpoint is $|h_0|$. At $t=1$ use $R_0$: the initial level-$0$ weight is zero, so the endpoint is $|h_1|$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 (0148), for a 1-simplex in Fun(K,L); explicit agent prism expansion of the continuous realization homotopy. Corollary 3.6.2.2 (013E) supplies the source's finite-factor product identification; the argument below constructs the homotopy directly instead."
+   }
+  },
+  {
+   "text": "Apply this construction to $H$ and $J$. For any simplicial map $f:K\\to L$, its realization is $[a,\\lambda]\\mapsto[f(a),\\lambda]$: it is continuous by the quotient definition in [def-cbc-enhanced-diagrams-cones] and respects the relations because $f$ is simplicial. This same formula proves $|vu|=|v|\\circ|u|$, $|uv|=|u|\\circ|v|$, and $|\\mathrm{id}|=\\mathrm{id}$. Thus the two constructed continuous homotopies have endpoints $|v|\\circ|u|,\\mathrm{id}_{|A|}$ and $|u|\\circ|v|,\\mathrm{id}_{|B|}$. If one is in the opposite order, precompose its interval coordinate with the continuous function $t\\mapsto1-t$. The two orders can be adjusted independently. Hence $|u|$ and $|v|$ are two-sided continuous homotopy inverses.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 (0148), for a 1-simplex in Fun(K,L); explicit agent prism expansion of the continuous realization homotopy. Corollary 3.6.2.2 (013E) supplies the source's finite-factor product identification; the argument below constructs the homotopy directly instead."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-homotopy-equivalence-weak] with $X=|A|$, $Y=|B|$, $f=|u|$, $g=|v|$ and the homotopies just oriented from the composites to the identities. Its hypotheses are continuous maps and two continuous homotopies for ordinary product topologies, all supplied in Steps 4 and 5. It gives a bijection on path components and a group isomorphism $\\pi_n(|A|,x)\\to\\pi_n(|B|,|u|(x))$ for every $n\\geq1$ and every $x\\in|A|$, even though the homotopies need not fix basepoints. By [def-cbc-enhanced-diagrams-cones] these are exactly the weak homotopy equivalence conditions for $u$. If either simplicial set is empty, existence of both $u$ and $v$ forces both to be empty; the component map is then the empty bijection and there are no source basepoints. The construction and conclusion also apply in this case.",
+   "uses": [
+    "lem-coef-homotopy-equivalence-weak",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed pp. 341–342 (PDF pp. 5–6), change of basepoint and the paragraph before Proposition 4.1; applied after the explicit realization homotopies. Compare Kerodon Proposition 3.1.7.13 (00UB), forward implication."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-quotient-cylinder-continuity",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0148",
+  "place": "Construction 3.6.5.1, expanded by an explicit prism formula and quotient-cylinder continuity; final topological implication is Hatcher, Section 4.1, pp. 341–342. Online sources read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -104,10 +181,59 @@
    "results": "{\"t\": \"2026-10-16T18:54:00Z\", \"tool\": \"grep\", \"query\": \"simplicial.*homotop|homotop.*realiz|realiz.*homotop\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\"], \"digest\": \"cb19a2c7c245f9dc\"}",
    "date": "2026-10-16",
    "verdict": "Fresh second-reading source search: hits describe combinatorial simplicial homotopies, their induced chain homotopies, and homotopy-category functors. None states that a simplicial homotopy inverse induces isomorphisms of all realized based homotopy groups; the returned general model-category files assume the weak-equivalence structure. Retain the unsplit realization-invariance statement."
+  },
+  {
+   "tool": "grep",
+   "query": "realiz.*homotop|homotop.*realiz|toTop.*[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-16T20:24:00Z\", \"tool\": \"grep\", \"query\": \"realiz.*homotop|homotop.*realiz|toTop.*[Hh]omotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the source search over AlgebraicTopology returned zero hits for realization/homotopy combinations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial homotopy equivalences become continuous homotopy equivalences after geometric realization",
+   "results": "{\"t\": \"2026-10-16T20:24:00Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial homotopy equivalences become continuous homotopy equivalences after geometric realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv\", \"ContinuousMap.term_≃ₕ_\", \"ContinuousMap.HomotopyEquiv.mk\", \"SSet.toTop\", \"sSetTopAdj\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\"], \"digest\": \"4399d21f8d513b51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SingularSet.lean:65-96 (realization and adjunction) and Topology/Homotopy/Equiv.lean:38-53 (continuous inverse data). Neither states realization of simplicial homotopies or the asserted weak equivalence; simple connectivity alone is insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop, ContinuousMap.HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-16T20:24:00Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, ContinuousMap.HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the fully qualified query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial map with a two-sided inverse up to simplicial cylinder homotopy induces a weak homotopy equivalence on geometric realizations",
+   "results": "{\"t\": \"2026-10-16T20:24:02Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map with a two-sided inverse up to simplicial cylinder homotopy induces a weak homotopy equivalence on geometric realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₁\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₀\", \"HomotopicalAlgebra.Cylinder\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy\"], \"digest\": \"a40ed140f9c8f634\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic HomotopicalAlgebra cylinder and path-object declarations assume an already specified weak-equivalence class; LeftHomotopy.lean:139-145 does not supply realization weak equivalences or realization of simplicial homotopies. The chain-complex cylinder result is for different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omotopy|toTop|[Ww]eak",
+   "results": "{\"t\": \"2026-10-16T20:24:19Z\", \"tool\": \"grep\", \"query\": \"[Hh]omotopy|toTop|[Ww]eak\", \"sub\": \"AlgebraicTopology/SingularSet.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"24\", \"30\", \"32\", \"55\"], \"digest\": \"133f1cb268413715\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: five source-description hits in SingularSet.lean:23-32,55; read lines 45-110. They describe the realization/singular adjunction only, with no homotopy-invariance theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric realization carries a homotopy A times the standard one-simplex into A to a continuous interval homotopy; a simplicial homotopy equivalence is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T20:24:27Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization carries a homotopy A times the standard one-simplex into A to a continuous interval homotopy; a simplicial homotopy equivalence is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.h\", \"TopCat.toSSetObjEquiv\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.RelativeMorphism.Homotopy.refl_h\", \"SSet.RelativeMorphism.HomotopyClass\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"ContinuousMap.HomotopyEquiv\"], \"digest\": \"83284ab06eda2c38\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeMorphism.lean supplies cylinder homotopy data and its pre/postcomposition, not continuous realization homotopies or all realized homotopy-group isomorphisms. ExtraDegeneracy.homotopyEquiv concerns chain complexes; ContinuousMap.HomotopyEquiv defines continuous inverse data only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric realization functor sends simplicial interval homotopies to homotopies of continuous maps",
+   "results": "{\"t\": \"2026-10-16T20:39:57Z\", \"tool\": \"leanfinder\", \"query\": \"The geometric realization functor sends simplicial interval homotopies to homotopies of continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.toTop₀_map\", \"SimplexCategory.toTop_map\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.Truncated.mapHomotopyCategory_homMk\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"GenLoop.homotopyFrom\", \"ContinuousMap.Homotopy.apply_one_path\", \"GenLoop.homotopyFrom_apply\"], \"digest\": \"3eb592a1cf1f4399\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no exact match. The returned toTop_map and toTop₀_map compute monotone-map actions on individual topological simplices; RelativeMorphism.Homotopy.h supplies a simplicial cylinder map as input, not its continuous realization. The remaining hits concern homotopy categories, generalized loops, or fundamental groupoids, not realization of a simplicial cylinder homotopy."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-fibration-fiber-criterion",
@@ -115,5 +241,29 @@
   "group": "NR"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Kerodon 00UB/0148 and Hatcher pp. 341–342. Wrote the prism homotopy, seam and realization-relation checks, quotient-product continuity, endpoints and independent interval reversals, then applied the existing topological homotopy-equivalence statement. Reused the quotient-cylinder Mathlib leaf; no new nodes or attachment. Avoided a cycle through the broader basepoint-change node. All fresh Mathlib searches used msearch.py and are recorded verbatim from its log.",
+  "blueprint": "Opening sentence of thm-cbc-finite-level-proetale.proof.md (main-20261015, sec-six-functors-basics/sk-prop-sf-cbc): Choose a compactification c=(j,p). The inherited via-chain expands compactification-choice coherent cones and the Kan fiber criterion. Steps 1–6 supply the agent-added homotopy-invariance foundation required there, not an assertion that the blueprint itself contains this topological proof. Chapter and unit bindings are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-homotopy-equivalence-weak",
+    "why": "Generic theorem for arbitrary topological homotopy equivalences, used only after constructing actual realization homotopies. This unit has no separate topological homotopy-group invariance statement; using this black box does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-60d63f5a3",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-60d63f5a3 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and the full statements of def-cbc-enhanced-diagrams-cones, lem-cbc-quotient-cylinder-continuity (Mathlib Topology.IsQuotientMap.continuous_lift_prod_left, CompactOpen.lean:587-598, read) and lem-coef-homotopy-equivalence-weak. Statement and stmt_deps match the side base byte for byte; only split-owned fields changed; no new nodes. Recomputed the prism: weights sum to 1, the projections are lambda and level-1 total t, and the seams at t=S_i reduce to the same face (0,0)..(i-1,0),(i,1)..(n,1). Face relation: lambda'_k=0 makes R'_k the slice t=S'_k. Degeneracy relation with the cut inside the pair: level weights S_j-t and t-S_{j+2} on both R_j and R_{j+1}. Endpoints: R_n at t=0 gives h_0, R_0 at t=1 gives h_1. The quotient/locally-compact hypotheses and the topological lemma's orientation, ordinary-product and moving-basepoint hypotheses are all supplied, and its conclusion matches the definition's weak-equivalence clause, including the empty case. Closure check: no cited node reaches the item, so no cycle. DAG and blueprint duplicate scans found nothing (same_as=[]). Accepted tool_use: lem-coef-homotopy-equivalence-weak, from unit sk-prop-sf-biduality-general, as a generic topology black box. No SGA. Kerodon and Hatcher are not archived; WANTED with proof_origin=agent, which is appropriate. No fixes."
+ }
 }
