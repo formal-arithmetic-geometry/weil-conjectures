@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-proper-unbounded-window-bounded-below",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image of bounded-below ind-constructible complexes",
@@ -15,29 +15,136 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Since $K$ is bounded below, the hypercohomology (Cartan–Eilenberg) spectral sequence\n\n$$\nE_2^{u,v}=R^up_*\\mathcal H^v(K)\\Longrightarrow\\mathcal H^{u+v}(Rp_*K)\n$$\n\nlies in the region $u\\geq0$, $v\\geq a$ and converges. By [sk-lem-proper-heart-bound],\n$E_2^{u,v}=0$ for $u>2d+1$ and $E_2^{u,v}\\in\\IndCons(Y,\\Lambda)$. Hence only the columns $0\\leq u\\leq2d+1$\nare nonzero, the differentials $d_r$ vanish for $r>2d+2$, and $E_\\infty=E_{2d+3}$. Each $E_r^{u,v}$ is a\nsubquotient (kernel of a map modulo the image of a map) of objects of $\\IndCons(Y,\\Lambda)$, and the\ndifferentials are maps in that category; by part (2) of [sk-prop-ind-heart] (closure under kernels and\ncokernels) every $E_r^{u,v}$, in particular $E_\\infty^{u,v}$, lies in $\\IndCons(Y,\\Lambda)$. The abutment\n$\\mathcal H^n(Rp_*K)$ has a finite filtration (at most $2d+2$ steps) with graded pieces $E_\\infty^{u,n-u}$,\nso it is an iterated extension of objects of $\\IndCons(Y,\\Lambda)$ and lies in it by closure under\nextensions.",
+   "text": "Write $\\mathcal A_Z=\\Mod_{\\Lambda_Z}$ for $Z=X,Y$. The module-object action is equivalently a sheafwise ring-module action: by the universal property of the sheaf tensor product, a map $\\Lambda_Z\\otimes M\\to M$ is a bilinear sheaf action, with the same unit and associativity equations. Thus the ringed-site Grothendieck theorem [lem-pur-ringed-site-grothendieck-abelian] applies to these categories. The functor $p_*$ is additive and left exact by [def-sfb-module-lower-star], and $Rp_*$ is computed on K-injective resolutions in this very module category by [sk-def-sfb-module-derived-pushpull]. Choose $a_0\\in\\mathbf Z$ with $\\mathcal H^v(K)=0$ for $v<a_0$; canonical truncation below $a_0$ replaces a representative of K by a quasi-isomorphic bounded-below complex. Apply [thm-sp-truncation-e2] to obtain $E_2^{u,v}=R^up_*\\mathcal H^v(K)\\Longrightarrow\\mathcal H^{u+v}(Rp_*K)$, supported in $u\\geq0$, $v\\geq a_0$. Parts (5) and (6) give a finite exhaustive separated decreasing filtration $F^u\\mathcal H^n(Rp_*K)$, with $F^0=\\mathcal H^n(Rp_*K)$, $F^u=0$ for sufficiently large u, and $F^u/F^{u+1}\\cong E_\\infty^{u,n-u}$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-module-derived-pushpull",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+    "place": "proof, first paragraph: the hypercohomology spectral sequence and its finite abutment filtration"
+   }
+  },
+  {
+   "text": "For every v, the sheaf $\\mathcal H^v(K)$ lies in $\\IndCons(X,\\Lambda)$ because K is an object of $\\Dic(X,\\Lambda)$. Applying [sk-lem-proper-heart-bound] to this sheaf gives $E_2^{u,v}=R^up_*\\mathcal H^v(K)=0$ for $u>2d+1$ and places every nonzero $E_2^{u,v}$ in $\\IndCons(Y,\\Lambda)$.",
    "uses": [
     "sk-lem-proper-heart-bound"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+    "place": "proof, first paragraph: application of sk-lem-proper-heart-bound to the E2-page"
+   }
   },
   {
-   "text": "*Amplitude.* If $\\mathcal H^v(K)=0$ for $v<a$, then $E_2^{u,v}=0$ for $u+v<a$, so $\\mathcal H^n(Rp_*K)=0$ for\n$n<a$. If $\\mathcal H^v(K)=0$ for $v>b$, then $E_2^{u,v}=0$ for $u+v>b+2d+1$, so $\\mathcal H^n(Rp_*K)=0$ for\n$n>b+2d+1$.",
-   "uses": [],
-   "elementary": null
+   "text": "Set $c=2d+1$. Starting with the E2-page of Step 2, induct on $r\\geq2$. By [def-sp-exact-couple] the next page is $E_{r+1}^{u,v}=\\ker(d_r^{u,v})/\\operatorname{im}(d_r^{u-r,v+r-1})$, and the incoming image lies in the outgoing kernel because $d_r^2=0$. For a differential $f:A\\to B$ between page terms, [det-ind-heart-kernels-cokernels] puts $\\ker f$ and $\\coker f$ in $\\IndCons(Y,\\Lambda)$; then $\\operatorname{im}f=\\ker(B\\to\\coker f)$ lies there too. Apply the same closure to the map from the incoming image into the outgoing kernel: its cokernel is $E_{r+1}^{u,v}$, hence is ind-constructible. This also shows that a zero page position stays zero, so every page is supported in $0\\leq u\\leq c$. Since $d_r$ has bidegree $(r,1-r)$ by [thm-sp-truncation-e2], when $r>c$ every differential between these columns has zero source or zero target. Choose an integer $R\\geq2$ with $R>c$. All pages from R onward coincide; thus $E_\\infty^{u,v}=E_R^{u,v}$ is ind-constructible by the finite induction, including when the column interval is empty.",
+   "uses": [
+    "def-sp-exact-couple",
+    "thm-sp-truncation-e2",
+    "det-ind-heart-kernels-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+    "place": "proof, first paragraph: passage from E2 to Er and E-infinity by kernels and cokernels"
+   }
+  },
+  {
+   "text": "For fixed n, use the finite decreasing filtration of Step 1. Its graded pieces $E_\\infty^{u,n-u}$ are ind-constructible by Step 3; those outside $0\\leq u\\leq2d+1$ are zero. Start with $F^N=0$ for sufficiently large N, which is ind-constructible since the zero sheaf is constructible. For each $u=N-1,\\ldots,0$ the short exact sequence $0\\to F^{u+1}\\to F^u\\to E_\\infty^{u,n-u}\\to0$ has ind-constructible left and right terms. Apply [det-ind-heart-extensions] at each of these finitely many steps. It follows that $F^0=\\mathcal H^n(Rp_*K)$ lies in $\\IndCons(Y,\\Lambda)$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "det-ind-heart-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+    "place": "proof, first paragraph: finite filtration and closure under extensions"
+   }
+  },
+  {
+   "text": "If $\\mathcal H^v(K)=0$ for $v<a$ and $n<a$, then any position $u+v=n$ with $u\\geq0$ has $v\\leq n<a$, so its E2-term is zero. Page recursion preserves this zero, and all graded pieces of the finite filtration of $\\mathcal H^n(Rp_*K)$ vanish. Descending through that filtration gives $\\mathcal H^n(Rp_*K)=0$. If instead $\\mathcal H^v(K)=0$ for $v>b$ and $n>b+2d+1$, then in each possible column $0\\leq u\\leq2d+1$ one has $v=n-u>b$, while all remaining columns are zero by Step 2. Thus all E2-terms of total degree n are zero, all corresponding stable terms are zero, and every successive quotient in the finite abutment filtration is zero. Starting at its zero end and descending to $F^0$ gives $\\mathcal H^n(Rp_*K)=0$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "sk-lem-proper-heart-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+    "place": "proof, second paragraph: the two amplitude bounds read from the spectral-sequence support"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-proper-heart-bound"
+  "def-sfb-module-lower-star",
+  "def-sp-exact-couple",
+  "det-ind-heart-extensions",
+  "det-ind-heart-kernels-cokernels",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-lem-proper-heart-bound",
+  "thm-sp-truncation-e2"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-bounded-below.proof.md",
+  "place": "proof, first and second paragraphs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded-below proper direct image hypercohomology spectral sequence IndCons cohomology amplitude",
+   "results": "Eight hits on derived-category support and truncation, but no proper-direct-image hypercohomology theorem or IndCons amplitude statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.grothendieckSpectralSequence, CategoryTheory.exists_truncationHypercohomology, SpectralSequence.AbutsTo",
+   "results": "0 hits; the first identifier was reported as an unknown identifier.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|truncationHypercohomology|proper.*direct.*image in Mathlib/",
+   "results": "No matching declarations in Mathlib/.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercohomology spectral sequence for a bounded-below complex under a proper direct image with finite cohomological dimension",
+   "results": "Eight generic hits on proper maps, truncations, and homology; none states the requested spectral sequence or amplitude result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|hypercohomology|SpectralSequence",
+   "results": "0 hits: .  No declaration states proper direct-image preservation of ind-constructible cohomology and these amplitude bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor preserves bounded below complexes and gives a cohomological amplitude bound when its higher derived functors vanish above a fixed degree",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.isGE_Q_obj_iff.  No declaration states proper direct-image preservation of ind-constructible cohomology and these amplitude bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "12 hits: CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor.  No declaration states proper direct-image preservation of ind-constructible cohomology and these amplitude bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +158,44 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window"
+ "unit": "sk-lem-proper-unbounded-window",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-unbounded-window-bounded-below",
+  "worker": "stage1",
+  "summary": "Five explicit steps realize the bounded-below spectral-sequence argument without new nodes: verify the module-category hypotheses; bound the E2 columns by the proper-heart theorem; form subsequent pages by kernels and cokernels and prove finite stabilization; assemble the finite abutment filtration by extensions; derive both amplitude inequalities. Tool-use entries below are proposals for maintainer review, not accepted top-level tool_uses.",
+  "blueprint": "Steps 1–4 realize the first paragraph of the bounded-below proof (spectral sequence, proper-heart bound, passage to E-infinity, and finite filtration); Step 5 realizes the second paragraph (the two amplitude bounds).",
+  "tool_uses": [
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "The local unit needs the generic truncation hypercohomology spectral sequence and its finite abutment filtration."
+   },
+   {
+    "node": "det-ind-heart-kernels-cokernels",
+    "why": "The spectral-sequence page recursion uses closure of IndCons under kernels and cokernels."
+   },
+   {
+    "node": "det-ind-heart-extensions",
+    "why": "The finite abutment filtration is assembled by extensions in IndCons."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site theorem verifies the Grothendieck hypotheses for the pro-etale variable coefficient module categories. The unit does not state this ambient theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-truncation-e2",
+  "det-ind-heart-kernels-cokernels",
+  "det-ind-heart-extensions",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-52d9596b6",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-52d9596b6 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, cited nodes and sources, spectral-sequence argument, hypotheses, edge cases, and dependency/tool-use audit in full. The split is mathematically correct; no repairs, duplicate nodes, cycles, or statement errors found. Review written to review.md."
+ }
 }
