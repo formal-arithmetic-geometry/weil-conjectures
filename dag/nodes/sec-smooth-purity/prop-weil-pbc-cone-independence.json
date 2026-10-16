@@ -1,283 +1,307 @@
 {
-  "id": "prop-weil-pbc-cone-independence",
-  "blueprint": {
-    "is": "prop-weil-pbc-cone-independence",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Compatibility and independence of common-stage cones",
-  "statement": "If $M\\subset N$, exactness of $T_{N/M}$ identifies the scalar extension of a\ncone triangle for $u$ with a cone triangle for $u_N$. If two representatives\ndefine the same morphism of $\\mathcal P_T$, their cone triangles become\nisomorphic after passage to a field where the representatives agree. Any two\ncone triangles selected for one finite-stage morphism are isomorphic by a\nmorphism of triangles whose first two components are identities. Thus\ndistinguishedness in [def-weil-pbc-common-stage-cones] is independent of\nevery representative, common field, and cone choice.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-    "place": "node prop-weil-pbc-cone-independence, order 1539",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 014B"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 014A"
-      }
-    ],
-    "note": [
-      "*Source note:* no Stacks Project entry states this independence: the\nblueprint adds the proof that distinguishedness of a common-stage triangle\nis independent of the representative, the common field and the chosen cone,\nwhich is what makes the pair category a triangulated category below. The\nfixed-category input is Stacks': Lemma 13.4.7 ([Tag\n014B](https://stacks.math.columbia.edu/tag/014B), fetched and quoted) states\nthat a morphism $f:X\\to Y$ of a pre-triangulated category has a\ndistinguished triangle $(X,Y,Z,f,g,h)$ unique up to (nonunique) isomorphism\nof triangles, more precisely that a second such triangle is related to the\nfirst by an isomorphism $(1,1,c)$ — exactly the assertion that two cone\ntriangles are isomorphic by a morphism of triangles with identity on source\nand target — with Lemma 13.4.3 ([Tag\n014A](https://stacks.math.columbia.edu/tag/014A), if two of the three\ncomponents of a morphism of distinguished triangles are isomorphisms so is\nthe third). Difference: 014B is internal to one pre-triangulated category,\nwhereas the blueprint must also compare the cone triangles of the scalar\nextensions $T_{N/M}$ and of different representatives of one morphism of\n$\\mathcal P_T$."
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-common-stage-cones",
+ "id": "prop-weil-pbc-cone-independence",
+ "blueprint": {
+  "is": "prop-weil-pbc-cone-independence",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compatibility and independence of common-stage cones",
+ "statement": "If $M\\subset N$, exactness of $T_{N/M}$ identifies the scalar extension of a\ncone triangle for $u$ with a cone triangle for $u_N$. If two representatives\ndefine the same morphism of $\\mathcal P_T$, their cone triangles become\nisomorphic after passage to a field where the representatives agree. Any two\ncone triangles selected for one finite-stage morphism are isomorphic by a\nmorphism of triangles whose first two components are identities. Thus\ndistinguishedness in [def-weil-pbc-common-stage-cones] is independent of\nevery representative, common field, and cone choice.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+  "place": "node prop-weil-pbc-cone-independence, order 1539",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 014B"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 014A"
+   }
+  ],
+  "note": [
+   "*Source note:* no Stacks Project entry states this independence: the\nblueprint adds the proof that distinguishedness of a common-stage triangle\nis independent of the representative, the common field and the chosen cone,\nwhich is what makes the pair category a triangulated category below. The\nfixed-category input is Stacks': Lemma 13.4.7 ([Tag\n014B](https://stacks.math.columbia.edu/tag/014B), fetched and quoted) states\nthat a morphism $f:X\\to Y$ of a pre-triangulated category has a\ndistinguished triangle $(X,Y,Z,f,g,h)$ unique up to (nonunique) isomorphism\nof triangles, more precisely that a second such triangle is related to the\nfirst by an isomorphism $(1,1,c)$ — exactly the assertion that two cone\ntriangles are isomorphic by a morphism of triangles with identity on source\nand target — with Lemma 13.4.3 ([Tag\n014A](https://stacks.math.columbia.edu/tag/014A), if two of the three\ncomponents of a morphism of distinguished triangles are isomorphisms so is\nthe third). Difference: 014B is internal to one pre-triangulated category,\nwhereas the blueprint must also compare the cone triangles of the scalar\nextensions $T_{N/M}$ and of different representatives of one morphism of\n$\\mathcal P_T$."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [
+  {
+   "text": "Fix the scheme, coefficient fields, rational categories $\\mathcal C_E(T)$ and coherent extension functors of [def-weil-pbc-finite-stage-pair-category]. The finite-stage pre-triangulated structures are part of the exact-functor assertion of [prop-weil-pbc-scalar-extension], where exact has the meaning of [def-weil-triangulated-category]. Let $u:X_M\\to Y_M$ represent $f:(E,K)\\to(F,L)$, with $X_M=T_{M/E}K$, $Y_M=T_{M/F}L$, and choose the distinguished triangle $X_M\\xrightarrow{u}Y_M\\xrightarrow{i}Z\\xrightarrow{p}X_M[1]$ of [def-weil-pbc-common-stage-cones]. For $M\\subseteq N$ put $H=T_{N/M}$, $A_X=a_{N,M,E,K}$ and $A_Y=a_{N,M,F,L}$. Exactness of $H$ [prop-weil-pbc-scalar-extension], in the meaning of [def-weil-triangulated-category], says that\n$$HX_M\\xrightarrow{H(u)}HY_M\\xrightarrow{H(i)}HZ\\xrightarrow{\\sigma_{N/M,X_M}\\circ H(p)}(HX_M)[1]$$\nis distinguished. Replace its first and second objects using $A_X,A_Y$. The resulting triangle has arrows\n$$u_N=A_Y\\circ H(u)\\circ A_X^{-1},\\quad i_N=H(i)\\circ A_Y^{-1},\\quad p_N=A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p).$$\nThe triple $(A_X,A_Y,1_{HZ})$ is a triangle isomorphism: substitution verifies each of its three squares. TR1 therefore makes this a distinguished cone triangle of exactly the transported representative $u_N$.",
+   "uses": [
     "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-pbc-common-stage-cones",
     "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-common-stage-calculus",
     "def-weil-triangulated-category",
     "def-weil-pbc-triangles-with-shift"
-  ],
-  "proof": [
-    {
-      "text": "Fix the scheme, coefficient fields, rational categories $\\mathcal C_E(T)$ and coherent extension functors of [def-weil-pbc-finite-stage-pair-category]. The finite-stage pre-triangulated structures are part of the exact-functor assertion of [prop-weil-pbc-scalar-extension], where exact has the meaning of [def-weil-triangulated-category]. Let $u:X_M\\to Y_M$ represent $f:(E,K)\\to(F,L)$, with $X_M=T_{M/E}K$, $Y_M=T_{M/F}L$, and choose the distinguished triangle $X_M\\xrightarrow{u}Y_M\\xrightarrow{i}Z\\xrightarrow{p}X_M[1]$ of [def-weil-pbc-common-stage-cones]. For $M\\subseteq N$ put $H=T_{N/M}$, $A_X=a_{N,M,E,K}$ and $A_Y=a_{N,M,F,L}$. Exactness of $H$ [prop-weil-pbc-scalar-extension], in the meaning of [def-weil-triangulated-category], says that\n$$HX_M\\xrightarrow{H(u)}HY_M\\xrightarrow{H(i)}HZ\\xrightarrow{\\sigma_{N/M,X_M}\\circ H(p)}(HX_M)[1]$$\nis distinguished. Replace its first and second objects using $A_X,A_Y$. The resulting triangle has arrows\n$$u_N=A_Y\\circ H(u)\\circ A_X^{-1},\\quad i_N=H(i)\\circ A_Y^{-1},\\quad p_N=A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p).$$\nThe triple $(A_X,A_Y,1_{HZ})$ is a triangle isomorphism: substitution verifies each of its three squares. TR1 therefore makes this a distinguished cone triangle of exactly the transported representative $u_N$.",
-      "uses": [
-        "def-weil-pbc-finite-stage-pair-category",
-        "def-weil-pbc-common-stage-cones",
-        "prop-weil-pbc-scalar-extension",
-        "def-weil-triangulated-category",
-        "def-weil-pbc-triangles-with-shift"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-        "place": "## Proof, first sentence: scalar extension and endpoint identifications"
-      }
-    },
-    {
-      "text": "For two distinguished triangles of the same finite-stage arrow $w:X\\to Y$, the first square with $a=1_X,b=1_Y$ commutes, since both composites are $w$. TR3 of [def-weil-triangulated-category] gives $c:Z\\to Z'$ satisfying $c i=i'$ and $p'c=p$, hence a morphism of triangles $(1_X,1_Y,c)$. Both identity components are invertible; [lem-sf-triangle-morphism-iso] therefore makes $c$ invertible. By the componentwise criterion of [def-weil-pbc-triangles-with-shift], this is an isomorphism of triangles with the required identity first two components. This proves finite-stage cone-choice independence without asserting a unique or functorial choice of $c$.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-sf-triangle-morphism-iso",
-        "def-weil-pbc-triangles-with-shift"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 014B, lemma-cone-triangle-unique-isomorphism, proof using TR3 and Tag 014A, lemma-third-isomorphism-triangle"
-      }
-    },
-    {
-      "text": "Suppose $(M,u)$ and $(N,v)$ represent the same morphism with the same pair-category endpoints. By [def-weil-pbc-finite-stage-pair-category] there is a finite overfield $Q\\supseteq M,N$ such that $u_Q=v_Q$ as maps $T_{Q/E}K\\to T_{Q/F}L$. Apply Step 1 to both chosen cone triangles; both resulting triangles in $\\mathcal C_Q(T)$ are distinguished, and their first arrows agree literally, not merely as classes. Step 2 supplies an isomorphism between them with identity on these two common endpoints. If a further field is used, transport transitivity $(u_Q)_{Q'}=u_{Q'}$ and the finite-diagram equality criterion of [prop-weil-pbc-common-stage-calculus] preserve the equality, so Step 1 again gives two distinguished triangles with the identical first arrow $u_{Q'}=v_{Q'}$, and Step 2 gives an isomorphism with identity first two components at $Q'$. Thus different representatives and different common overfields are compared at a finite stage where they agree.",
-      "uses": [
-        "def-weil-pbc-finite-stage-pair-category",
-        "prop-weil-pbc-scalar-extension",
-        "prop-weil-pbc-common-stage-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-        "place": "## Proof, second sentence: equivalent representatives over a common field"
-      }
-    },
-    {
-      "text": "We verify that the scalar-extended triangle in Step 1 gives the same triangle in $\\mathcal P_T$, up to an isomorphism with identity on $(E,K)$ and $(F,L)$. Its old cone is $(M,Z)$ and its new cone is $(N,HZ)$. Define $\\eta:(M,Z)\\to(N,HZ)$ and its inverse by the representatives $[N,1_{HZ}]$ in the two directions. These are typed because $T_{N/M}Z=HZ$ and $T_{N/N}=1$. The composition formula of [def-weil-pbc-finite-stage-pair-category] gives identities at stage $N$, which represent the pair identities by the unit equations and representative-independence of [prop-weil-pbc-common-stage-calculus]. The second-arrow square is precisely $i_N=H(i)A_Y^{-1}$. For the third arrow, the coherence of shift comparisons with associators in [prop-weil-pbc-scalar-extension] reads\n$$A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(\\sigma_{M/E,K})=\\sigma_{N/E,K}\\circ a_{N,M,E,K[1]}.$$\nConsequently transport of the old third-arrow representative is\n$$a_{N,M,E,K[1]}\\circ H(\\sigma_{M/E,K}^{-1}\\circ p)=\\sigma_{N/E,K}^{-1}\\circ A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p)=\\sigma_{N/E,K}^{-1}\\circ p_N.$$\nThis is exactly the new third arrow prescribed by [def-weil-pbc-common-stage-cones]. The first-arrow square is equality of the two representatives of $f$. The definition of triangle morphisms and its componentwise isomorphism criterion [def-weil-pbc-triangles-with-shift] now give the claimed pair-category triangle isomorphism.",
-      "uses": [
-        "def-weil-pbc-finite-stage-pair-category",
-        "prop-weil-pbc-common-stage-calculus",
-        "prop-weil-pbc-scalar-extension",
-        "def-weil-pbc-common-stage-cones",
-        "def-weil-pbc-triangles-with-shift"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-        "place": "## Proof, transport via common-stage calculus and sigma comparisons, all three squares expanded"
-      }
-    },
-    {
-      "text": "For the two triangles compared over $Q$ in Step 3, put $W=T_{Q/M}Z$ and $W'=T_{Q/N}Z'$ and write their third-component isomorphism as $c:W\\to W'$. The corresponding common-stage cone triangles at $Q$ have cone objects $(Q,W)$ and $(Q,W')$. Their comparison has third component $[Q,c]:(Q,W)\\to(Q,W')$, with inverse $[Q,c^{-1}]$; these composites are the pair identities $[Q,1_W]$ and $[Q,1_{W'}]$ by [def-weil-pbc-finite-stage-pair-category]. The first two components are the pair identities, so their first square is equality of the classes of $u_Q=v_Q$. The second square is $c i_Q=i'_Q$. The last square is\n$$\\sigma_{Q/E,K}^{-1}p'_Q c=\\sigma_{Q/E,K}^{-1}p_Q,$$\nobtained by composing $p'_Q c=p_Q$ with $\\sigma_{Q/E,K}^{-1}$; these are exactly the third arrows of [def-weil-pbc-common-stage-cones]. The pair identity on $(E,K)$ shifts to the identity on $(E,K[1])$ by [prop-weil-pbc-common-stage-calculus]. Thus [def-weil-pbc-triangles-with-shift] gives an isomorphism $\\gamma$ between the two cone triangles at $Q$. Write $\\alpha$ and $\\beta$ for the Step 4 isomorphisms from the original triangles to their respective extensions at $Q$. Then $\\beta^{-1}\\gamma\\alpha$ is a typed triangle isomorphism between the original choices, with identity first two components. Its cone component is $[Q,c]:(M,Z)\\to(N,Z')$, since the cone components of $\\alpha$ and $\\beta$ are represented at $Q$ by identities. Taking $M=N=Q$ covers two cone choices for a single representative.",
-      "uses": [
-        "def-weil-pbc-finite-stage-pair-category",
-        "prop-weil-pbc-common-stage-calculus",
-        "def-weil-pbc-common-stage-cones",
-        "def-weil-pbc-triangles-with-shift",
-        "prop-weil-pbc-scalar-extension"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-        "place": "## Proof, comparison over the agreement field and passage to pair-category triangles"
-      }
-    },
-    {
-      "text": "By [def-weil-pbc-common-stage-cones], distinguishedness means that a triangle is isomorphic to a common-stage cone triangle. Steps 4 and 5 show that replacing any representative, common field or cone changes this witness only by a triangle isomorphism. Compose the witnessing isomorphism with the comparison to obtain a witness using the replacement, and use the inverse comparison for the converse. Composition and inverses are those of the triangle category [def-weil-pbc-triangles-with-shift]. This proves independence of distinguishedness in its defined, existential sense.",
-      "uses": [
-        "def-weil-pbc-common-stage-cones",
-        "def-weil-pbc-triangles-with-shift"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-        "place": "## Proof, final sentence: independence of distinguishedness"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "def-weil-pbc-common-stage-cones",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-triangulated-category",
-    "def-weil-pbc-triangles-with-shift",
-    "lem-sf-triangle-morphism-iso",
-    "prop-weil-pbc-common-stage-calculus"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
-    "place": "## Proof, expanded using Stacks Tags 014B and 014A"
+    "place": "## Proof, first sentence: scalar extension and endpoint identifications"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "cone.*independen|independen.*cone|common.stage|finite.stage.pair",
-      "results": "Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean, Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean",
-      "date": "2026-10-14",
-      "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Pretriangulated.Triangle, CategoryTheory.Functor.IsTriangulated",
-      "results": "CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Triangulated.Octahedron.map, CategoryTheory.Triangulated.Octahedron.map_m₁, CategoryTheory.Triangulated.Octahedron.map_m₃",
-      "date": "2026-10-14",
-      "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "common stage scalar extension cone triangles independent of representatives in filtered colimit of triangulated categories",
-      "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂, CategoryTheory.Triangulated.TStructure.exists_triangle, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.Triangulated.TStructure.triangle_map_ext",
-      "date": "2026-10-14",
-      "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "two distinguished triangles with the same first arrow are isomorphic with identity first and second components",
-      "results": "CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃, CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃, CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
-      "date": "2026-10-14",
-      "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
-    },
-    {
-      "tool": "leansearch",
-      "query": "scalar extension compatible cone triangles filtered colimit triangulated categories",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "isoTriangleOfIso₁₂|exists_iso_of_arrow_iso|map_distinguished",
-      "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
-      "date": "2026-10-14",
-      "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
-    },
-    {
-      "tool": "grep",
-      "query": "Pretriangulated.*iso|mapTriangleIso|IsTriangulated",
-      "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
-      "date": "2026-10-14",
-      "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"isoTriangleOfIso₁₂\"",
-      "results": "CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₂",
-      "date": "2026-10-14",
-      "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "filtered diagram of pretriangulated categories exact transition functors cones of equivalent morphisms are isomorphic in colimit category",
-      "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.triangleOfSESIso, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.triangle_iso_exists, CategoryTheory.Functor.IsHomological.exact, CochainComplex.mappingCone.mapTriangleIso",
-      "date": "2026-10-14",
-      "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1539,
-  "blueprint_uses": [
-    "def-weil-pbc-common-stage-cones",
+  {
+   "text": "For two distinguished triangles of the same finite-stage arrow $w:X\\to Y$, the first square with $a=1_X,b=1_Y$ commutes, since both composites are $w$. TR3 of [def-weil-triangulated-category] gives $c:Z\\to Z'$ satisfying $c i=i'$ and $p'c=p$, hence a morphism of triangles $(1_X,1_Y,c)$. Both identity components are invertible; [lem-sf-triangle-morphism-iso] therefore makes $c$ invertible. By the componentwise criterion of [def-weil-pbc-triangles-with-shift], this is an isomorphism of triangles with the required identity first two components. This proves finite-stage cone-choice independence without asserting a unique or functorial choice of $c$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014B, lemma-cone-triangle-unique-isomorphism, proof using TR3 and Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "Suppose $(M,u)$ and $(N,v)$ represent the same morphism with the same pair-category endpoints. By [def-weil-pbc-finite-stage-pair-category] there is a finite overfield $Q\\supseteq M,N$ such that $u_Q=v_Q$ as maps $T_{Q/E}K\\to T_{Q/F}L$. Apply Step 1 to both chosen cone triangles; both resulting triangles in $\\mathcal C_Q(T)$ are distinguished, and their first arrows agree literally, not merely as classes. Step 2 supplies an isomorphism between them with identity on these two common endpoints. If a further field is used, transport transitivity $(u_Q)_{Q'}=u_{Q'}$ and the finite-diagram equality criterion of [prop-weil-pbc-common-stage-calculus] preserve the equality, so Step 1 again gives two distinguished triangles with the identical first arrow $u_{Q'}=v_{Q'}$, and Step 2 gives an isomorphism with identity first two components at $Q'$. Thus different representatives and different common overfields are compared at a finite stage where they agree.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-scalar-extension",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+    "place": "## Proof, second sentence: equivalent representatives over a common field"
+   }
+  },
+  {
+   "text": "We verify that the scalar-extended triangle in Step 1 gives the same triangle in $\\mathcal P_T$, up to an isomorphism with identity on $(E,K)$ and $(F,L)$. Its old cone is $(M,Z)$ and its new cone is $(N,HZ)$. Define $\\eta:(M,Z)\\to(N,HZ)$ and its inverse by the representatives $[N,1_{HZ}]$ in the two directions. These are typed because $T_{N/M}Z=HZ$ and $T_{N/N}=1$. The composition formula of [def-weil-pbc-finite-stage-pair-category] gives identities at stage $N$, which represent the pair identities by the unit equations and representative-independence of [prop-weil-pbc-common-stage-calculus]. The second-arrow square is precisely $i_N=H(i)A_Y^{-1}$. For the third arrow, the coherence of shift comparisons with associators in [prop-weil-pbc-scalar-extension] reads\n$$A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(\\sigma_{M/E,K})=\\sigma_{N/E,K}\\circ a_{N,M,E,K[1]}.$$\nConsequently transport of the old third-arrow representative is\n$$a_{N,M,E,K[1]}\\circ H(\\sigma_{M/E,K}^{-1}\\circ p)=\\sigma_{N/E,K}^{-1}\\circ A_X[1]\\circ\\sigma_{N/M,X_M}\\circ H(p)=\\sigma_{N/E,K}^{-1}\\circ p_N.$$\nThis is exactly the new third arrow prescribed by [def-weil-pbc-common-stage-cones]. The first-arrow square is equality of the two representatives of $f$. The definition of triangle morphisms and its componentwise isomorphism criterion [def-weil-pbc-triangles-with-shift] now give the claimed pair-category triangle isomorphism.",
+   "uses": [
     "def-weil-pbc-finite-stage-pair-category",
     "prop-weil-pbc-common-stage-calculus",
-    "prop-weil-pbc-scalar-extension"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_notes": [
-    {
-      "label": "source_note",
-      "text": "*Source note:* no Stacks Project entry states this independence: the\nblueprint adds the proof that distinguishedness of a common-stage triangle\nis independent of the representative, the common field and the chosen cone,\nwhich is what makes the pair category a triangulated category below. The\nfixed-category input is Stacks': Lemma 13.4.7 ([Tag\n014B](https://stacks.math.columbia.edu/tag/014B), fetched and quoted) states\nthat a morphism $f:X\\to Y$ of a pre-triangulated category has a\ndistinguished triangle $(X,Y,Z,f,g,h)$ unique up to (nonunique) isomorphism\nof triangles, more precisely that a second such triangle is related to the\nfirst by an isomorphism $(1,1,c)$ — exactly the assertion that two cone\ntriangles are isomorphic by a morphism of triangles with identity on source\nand target — with Lemma 13.4.3 ([Tag\n014A](https://stacks.math.columbia.edu/tag/014A), if two of the three\ncomponents of a morphism of distinguished triangles are isomorphisms so is\nthe third). Difference: 014B is internal to one pre-triangulated category,\nwhereas the blueprint must also compare the cone triangles of the scalar\nextensions $T_{N/M}$ and of different representatives of one morphism of\n$\\mathcal P_T$.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "prop-weil-pbc-cone-independence",
-    "worker": "stage1",
-    "summary": "Expanded the imported single paragraph into six steps. Reused TR3 and the existing two-isomorphisms Mathlib leaf rather than creating a cone-uniqueness node. Wrote endpoint conjugation, the sigma-associator identity, the pair-category comparison and the final existential witness argument explicitly; kept the imported statement and its coefficient categories unchanged. No exact project attachment or Mathlib match for the whole item was found. Second reading corrected the endpoints and composition of the Step 5 triangle comparison, expanded the further-stage argument, and made the finite-stage pre-triangulated input explicit.",
-    "blueprint": "The first sentence is Step 1; finite-stage uniqueness is Step 2; agreement-field comparison is Step 3; transport and sigma comparisons are Steps 4-5; the last sentence is Step 6.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-scalar-extension",
-        "why": "Exact scalar-extension functors, their associators and coherent shift comparisons are the given finite-stage package; no node of this compact-support unit reconstructs that package."
-      },
-      {
-        "node": "prop-weil-pbc-common-stage-calculus",
-        "why": "Finite-diagram representation, equality detection and shift calculus are generic tools for the pair category, needed to compare representatives; no node of this unit states these laws."
-      }
-    ]
-  },
-  "tool_uses": [
     "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-common-stage-calculus"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NU-426456752",
-    "group": "NU",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-426456752 (reviewer sub-agent of L); spot-checked: The statement and six-step argument are mathematically sound, with source, route, coefficient category, hypotheses, edge cases, and cited nodes checked. Step 5 uses scalar-extension data to form the transported triangles and comparison maps α, β, but omitted `prop-weil-pbc-scalar-extension` from its `uses`; corrected DAG JSON is in `fixes/dag/nodes/sec-smooth-purity/prop-weil-pbc-cone-independence.json`.; 1 file(s) fixed by the reviewer"
+    "def-weil-pbc-common-stage-cones",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+    "place": "## Proof, transport via common-stage calculus and sigma comparisons, all three squares expanded"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "If $M\\subset N$, exactness of $T_{N/M}$ identifies the scalar extension of a\ncone triangle for $u$ with a cone triangle for $u_N$. If two representatives\ndefine the same morphism of $\\mathcal P_T$, their cone triangles become\nisomorphic after passage to a field where the representatives agree. Any two\ncone triangles selected for one finite-stage morphism are isomorphic by a\nmorphism of triangles whose first two components are identities. Thus\ndistinguishedness in [def-weil-pbc-common-stage-cones] is independent of\nevery representative, common field, and cone choice.",
-    "proof": [
-      {
-        "text": "For $M\\subset N$, the functor $T_{N/M}$ of\n[prop-weil-pbc-scalar-extension] is exact and its shift comparison carries\nthe cone triangle for $u$ in $\\mathcal C_M$ to a distinguished triangle of\n$\\mathcal C_N$ which is a cone triangle for $u_N$, identifying the scalar\nextension of the first with a cone triangle of the second. If\n$(M,u)\\sim(N,v)$, then $u_P=v_P$ for some finite $P$, and transporting the\ntwo cone triangles to $P$ via the transport of\n[prop-weil-pbc-common-stage-calculus] and the $\\sigma$-comparisons of\n[prop-weil-pbc-scalar-extension] makes them isomorphic over $P$ by the\nfinite-stage axiom TR3, with identity components on the common source and\ntarget; any two cone triangles selected for one finite-stage morphism are\nisomorphic by a morphism of triangles whose first two components are\nidentities (the finite-stage uniqueness of cones up to noncanonical\nisomorphism). Combining these facts, distinguishedness in\n[def-weil-pbc-common-stage-cones] is independent of the representative, of\nthe common field and of the cone choice, in the sense of the category of\n[def-weil-pbc-finite-stage-pair-category].",
-        "uses": [
-          "prop-weil-pbc-scalar-extension",
-          "prop-weil-pbc-common-stage-calculus",
-          "def-weil-pbc-common-stage-cones",
-          "def-weil-pbc-finite-stage-pair-category"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For the two triangles compared over $Q$ in Step 3, put $W=T_{Q/M}Z$ and $W'=T_{Q/N}Z'$ and write their third-component isomorphism as $c:W\\to W'$. The corresponding common-stage cone triangles at $Q$ have cone objects $(Q,W)$ and $(Q,W')$. Their comparison has third component $[Q,c]:(Q,W)\\to(Q,W')$, with inverse $[Q,c^{-1}]$; these composites are the pair identities $[Q,1_W]$ and $[Q,1_{W'}]$ by [def-weil-pbc-finite-stage-pair-category]. The first two components are the pair identities, so their first square is equality of the classes of $u_Q=v_Q$. The second square is $c i_Q=i'_Q$. The last square is\n$$\\sigma_{Q/E,K}^{-1}p'_Q c=\\sigma_{Q/E,K}^{-1}p_Q,$$\nobtained by composing $p'_Q c=p_Q$ with $\\sigma_{Q/E,K}^{-1}$; these are exactly the third arrows of [def-weil-pbc-common-stage-cones]. The pair identity on $(E,K)$ shifts to the identity on $(E,K[1])$ by [prop-weil-pbc-common-stage-calculus]. Thus [def-weil-pbc-triangles-with-shift] gives an isomorphism $\\gamma$ between the two cone triangles at $Q$. Write $\\alpha$ and $\\beta$ for the Step 4 isomorphisms from the original triangles to their respective extensions at $Q$. Then $\\beta^{-1}\\gamma\\alpha$ is a typed triangle isomorphism between the original choices, with identity first two components. Its cone component is $[Q,c]:(M,Z)\\to(N,Z')$, since the cone components of $\\alpha$ and $\\beta$ are represented at $Q$ by identities. Taking $M=N=Q$ covers two cone choices for a single representative.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-common-stage-cones",
+    "def-weil-pbc-triangles-with-shift",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+    "place": "## Proof, comparison over the agreement field and passage to pair-category triangles"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-common-stage-cones], distinguishedness means that a triangle is isomorphic to a common-stage cone triangle. Steps 4 and 5 show that replacing any representative, common field or cone changes this witness only by a triangle isomorphism. Compose the witnessing isomorphism with the comparison to obtain a witness using the replacement, and use the inverse comparison for the converse. Composition and inverses are those of the triangle category [def-weil-pbc-triangles-with-shift]. This proves independence of distinguishedness in its defined, existential sense.",
+   "uses": [
+    "def-weil-pbc-common-stage-cones",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+    "place": "## Proof, final sentence: independence of distinguishedness"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-common-stage-cones",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift",
+  "lem-sf-triangle-morphism-iso",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-weil-pbc-cone-independence.md",
+  "place": "## Proof, expanded using Stacks Tags 014B and 014A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cone.*independen|independen.*cone|common.stage|finite.stage.pair",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean, Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Triangulated.Octahedron.map, CategoryTheory.Triangulated.Octahedron.map_m₁, CategoryTheory.Triangulated.Octahedron.map_m₃",
+   "date": "2026-10-14",
+   "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "common stage scalar extension cone triangles independent of representatives in filtered colimit of triangulated categories",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂, CategoryTheory.Triangulated.TStructure.exists_triangle, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.Triangulated.TStructure.triangle_map_ext",
+   "date": "2026-10-14",
+   "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two distinguished triangles with the same first arrow are isomorphic with identity first and second components",
+   "results": "CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃, CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃, CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
+   "date": "2026-10-14",
+   "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scalar extension compatible cone triangles filtered colimit triangulated categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoTriangleOfIso₁₂|exists_iso_of_arrow_iso|map_distinguished",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the common-stage pair-category statement; generic finite-stage ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "Pretriangulated.*iso|mapTriangleIso|IsTriangulated",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-14",
+   "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoTriangleOfIso₁₂\"",
+   "results": "CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₂",
+   "date": "2026-10-14",
+   "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered diagram of pretriangulated categories exact transition functors cones of equivalent morphisms are isomorphic in colimit category",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.triangleOfSESIso, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.triangle_iso_exists, CategoryTheory.Functor.IsHomological.exact, CochainComplex.mappingCone.mapTriangleIso",
+   "date": "2026-10-14",
+   "verdict": "fixed-category ingredients only; no declaration states the filtered pair-category comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1539,
+ "blueprint_uses": [
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "source_note",
+   "text": "*Source note:* no Stacks Project entry states this independence: the\nblueprint adds the proof that distinguishedness of a common-stage triangle\nis independent of the representative, the common field and the chosen cone,\nwhich is what makes the pair category a triangulated category below. The\nfixed-category input is Stacks': Lemma 13.4.7 ([Tag\n014B](https://stacks.math.columbia.edu/tag/014B), fetched and quoted) states\nthat a morphism $f:X\\to Y$ of a pre-triangulated category has a\ndistinguished triangle $(X,Y,Z,f,g,h)$ unique up to (nonunique) isomorphism\nof triangles, more precisely that a second such triangle is related to the\nfirst by an isomorphism $(1,1,c)$ — exactly the assertion that two cone\ntriangles are isomorphic by a morphism of triangles with identity on source\nand target — with Lemma 13.4.3 ([Tag\n014A](https://stacks.math.columbia.edu/tag/014A), if two of the three\ncomponents of a morphism of distinguished triangles are isomorphisms so is\nthe third). Difference: 014B is internal to one pre-triangulated category,\nwhereas the blueprint must also compare the cone triangles of the scalar\nextensions $T_{N/M}$ and of different representatives of one morphism of\n$\\mathcal P_T$.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-cone-independence",
+  "worker": "stage1",
+  "summary": "Expanded the imported single paragraph into six steps. Reused TR3 and the existing two-isomorphisms Mathlib leaf rather than creating a cone-uniqueness node. Wrote endpoint conjugation, the sigma-associator identity, the pair-category comparison and the final existential witness argument explicitly; kept the imported statement and its coefficient categories unchanged. No exact project attachment or Mathlib match for the whole item was found. Second reading corrected the endpoints and composition of the Step 5 triangle comparison, expanded the further-stage argument, and made the finite-stage pre-triangulated input explicit.",
+  "blueprint": "The first sentence is Step 1; finite-stage uniqueness is Step 2; agreement-field comparison is Step 3; transport and sigma comparisons are Steps 4-5; the last sentence is Step 6.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Exact scalar-extension functors, their associators and coherent shift comparisons are the given finite-stage package; no node of this compact-support unit reconstructs that package."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Finite-diagram representation, equality detection and shift calculus are generic tools for the pair category, needed to compare representatives; no node of this unit states these laws."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-426456752",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-426456752 (reviewer sub-agent of L); spot-checked: The statement and six-step argument are mathematically sound, with source, route, coefficient category, hypotheses, edge cases, and cited nodes checked. Step 5 uses scalar-extension data to form the transported triangles and comparison maps α, β, but omitted `prop-weil-pbc-scalar-extension` from its `uses`; corrected DAG JSON is in `fixes/dag/nodes/sec-smooth-purity/prop-weil-pbc-cone-independence.json`.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "If $M\\subset N$, exactness of $T_{N/M}$ identifies the scalar extension of a\ncone triangle for $u$ with a cone triangle for $u_N$. If two representatives\ndefine the same morphism of $\\mathcal P_T$, their cone triangles become\nisomorphic after passage to a field where the representatives agree. Any two\ncone triangles selected for one finite-stage morphism are isomorphic by a\nmorphism of triangles whose first two components are identities. Thus\ndistinguishedness in [def-weil-pbc-common-stage-cones] is independent of\nevery representative, common field, and cone choice.",
+  "proof": [
+   {
+    "text": "For $M\\subset N$, the functor $T_{N/M}$ of\n[prop-weil-pbc-scalar-extension] is exact and its shift comparison carries\nthe cone triangle for $u$ in $\\mathcal C_M$ to a distinguished triangle of\n$\\mathcal C_N$ which is a cone triangle for $u_N$, identifying the scalar\nextension of the first with a cone triangle of the second. If\n$(M,u)\\sim(N,v)$, then $u_P=v_P$ for some finite $P$, and transporting the\ntwo cone triangles to $P$ via the transport of\n[prop-weil-pbc-common-stage-calculus] and the $\\sigma$-comparisons of\n[prop-weil-pbc-scalar-extension] makes them isomorphic over $P$ by the\nfinite-stage axiom TR3, with identity components on the common source and\ntarget; any two cone triangles selected for one finite-stage morphism are\nisomorphic by a morphism of triangles whose first two components are\nidentities (the finite-stage uniqueness of cones up to noncanonical\nisomorphism). Combining these facts, distinguishedness in\n[def-weil-pbc-common-stage-cones] is independent of the representative, of\nthe common field and of the cone choice, in the sense of the category of\n[def-weil-pbc-finite-stage-pair-category].",
+    "uses": [
+     "prop-weil-pbc-scalar-extension",
+     "prop-weil-pbc-common-stage-calculus",
+     "def-weil-pbc-common-stage-cones",
+     "def-weil-pbc-finite-stage-pair-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-396f61b50",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all clauses, dependencies, sources, universes, edge cases, docstrings, and report sections. Immutable module compiled cleanly through scompile.py in both locations. No fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcConeIndependence",
+  "declaration": "AlgebraicGeometry.Scheme.pbcConeIndependence",
+  "declarations": [
+   "CategoryTheory.StageSystem.transportedCone",
+   "CategoryTheory.StageSystem.ConeIndependenceSpec",
+   "AlgebraicGeometry.Scheme.pbcConeIndependence"
+  ],
+  "file": "lean/Sheaf/Paper/PbcConeIndependence.lean",
+  "statement": "theorem pbcConeIndependence (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (T : Scheme.{u}) [IsNoetherian T] [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] : StageSystem.ConeIndependenceSpec (pbcScalarSystem l Ω T hDim.out hInv.out)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The main theorem specializes the clause-by-clause ConeIndependenceSpec to the actual pbcScalarSystem, with the published stage/pair shifts and pretriangulations. transportedCone explicitly constructs the scalar-extended triangle with associator endpoint identifications. The recorded scalar-extension module is imported for the proof plan."
+ }
 }
