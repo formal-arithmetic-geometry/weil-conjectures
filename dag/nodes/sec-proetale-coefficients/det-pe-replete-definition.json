@@ -157,5 +157,23 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-b9c9c0690 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the report, unit sk-def-pe-replete, the main-20261015 blueprint files (_section.md, det-pe-replete-definition.md and .proof.md), every cited node's statement, and the Stacks and Mathlib places cited. The statement matches the blueprint text exactly and agrees with the unit, so nothing is weakened. No target, base-change morphism or coefficient category is involved; this is a definition about sheaves of sets only. Shape: one commit with the item and its report, no new nodes, no unit edit, tool_uses empty. Step 1 cites def-weil-pbc-sites-and-cohomology(1) for the site, sheaf and morphism conventions (Stacks 00VH and 00VM, both confirmed in tags/tags). The finite composites, the compatible-tuple presheaf and its universal map are genuinely elementary. Step 2 cites the Mathlib leaf lem-weil-pbc-site-sheaf-sets-limits-sectionwise(1) (Sites/Limits.lean:139 and :151, read). Its only hypothesis is a small index category, which N^op is, and it needs nothing about the transition maps. Stacks 00W2, lemma-limit-sheaf at sites.tex:1680, says the same. Step 3 cites the Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective (LocallySurjective.lean:378, isLocallySurjective_iff_epi, read). It states exactly that categorical epimorphisms are the locally surjective maps, matching Stacks 00WM(2) and 00WN at sites.tex:2240 and :2256. This replaces the blueprint proof's uncited image-sheaf and cokernel-pair argument with an exact existing leaf. The unit has no steps, so this is not a route departure; no route statement outside the unit is used and no SGA source is cited. Duplicates: searching dag/nodes for 'replete' finds sk-def-pe-replete, correctly listed under same_as and not cited, plus det-pe-replete-epimorphism and det-pe-replete-on-contractible, which are pro-étale theorems built on this definition and not duplicates. There are no new nodes, so nothing restates a clause of the item. Edge cases checked: a constant identity tower; the one-point site, where the condition reduces to the classical fact about towers of surjections of sets; objects with an empty covering, where every section set is a singleton; and m=0. All are consistent. I made no fixes and wrote no fixes files."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e3a7272b",
+  "group": "Q43",
+  "result": "pass",
+  "note": "IsReplete on Sheaf J (Type (max u v w)) matches the node clause by clause: every inverse sequence F : ℕᵒᵖ ⥤ Sheaf; premise ∀ n, Epi of the adjacent transition; conclusion ∀ m, Epi (limit.π F (op m)). Sheaf.createsLimitsOfShape gives the compatible-tuple limit and Sheaf.isLocallySurjective_iff_epi gives epi = local surjectivity, with no extra hypotheses. Universe order is u,v,w; w occurs only in the body, which is legitimate, and w = 0 matches the pro-étale framework's Type (u+1) sheaves. The node and blueprint statement match verbatim; only the lean field was added; the statement field matches the signature. Docstrings carry the source place, the blueprint tag and the proof content; real Prop body, no sorry. Both report sections are real. nt_compile.py compiled the module cleanly (no errors, no warnings; axioms propext, Classical.choice, Quot.sound). Edge cases m=0, constant identity tower, one-point site, empty sections, empty covering and empty category are all covered. Non-blocking note: the worker's search missed the framework's EpiπAppZeroOfEpi, which covers index 0 only and is stated for an arbitrary category, so it is not an exact match and the new module is justified."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RepleteSheafTopos",
+  "declaration": "CategoryTheory.GrothendieckTopology.IsReplete",
+  "file": "lean/Sheaf/CategoryTheory/RepleteSheafTopos.lean",
+  "statement": "def IsReplete {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
