@@ -1,6 +1,6 @@
 # Work queue
 
-100 items; claim with `tools/claim.py next <group> [--stage N]`.
+101 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (100)
+## Stage 3: modules to prove (101)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -47,6 +47,7 @@
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk` | 8 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeffData` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteEncodedPresentation` | 9 | 3 | proof |
 | `Sheaf.Paper.GeometricFieldProfiniteDenseSubsite` | 9 | 6 | proof |
@@ -63,7 +64,7 @@
 | `Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization` | 12 | 2 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientTerminal` | 12 | 1 | proof |
-| `Sheaf.Paper.FiniteEtaleLocallyFreeModels` | 12 | 3 | proof |
+| `Sheaf.Paper.FiniteEtaleLocallyFreeModels` | 12 | 4 | proof |
 | `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
 | `Sheaf.RingTheory.PopescuLiftChartFlat` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore` | 13 | 1 | proof |
