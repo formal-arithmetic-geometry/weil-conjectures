@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1298**, closure **23**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1293**, closure **15**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -44,23 +44,23 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1103 | 21 |
+| Sheaf | 1098 | 13 |
 | WeilConjectures | 195 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2284 | 756 | 1528 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2238 | 754 | 1484 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 21 | 1960 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2284 | 751 | 1533 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2238 | 749 | 1489 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 14 | 1967 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3630 |
+| proved | 3634 |
 | decomposed | 52 |
-| moved | 4018 |
-| pruned | 131 |
+| moved | 4021 |
+| pruned | 132 |
 | other | 609 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
@@ -69,21 +69,21 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
-| A3 | 124 | 120 | 80 | 40 | 55/124 (44.4%) |
-| A4 | 73 | 77 | 47 | 30 | 37/73 (50.7%) |
+| A3 | 125 | 121 | 81 | 40 | 56/125 (44.8%) |
+| A4 | 74 | 78 | 47 | 31 | 37/74 (50.0%) |
 | B2 | 128 | 134 | 86 | 48 | 54/128 (42.2%) |
-| B3 | 145 | 152 | 89 | 63 | 62/145 (42.8%) |
+| B3 | 146 | 153 | 91 | 62 | 63/146 (43.2%) |
 | B4 | 67 | 70 | 47 | 23 | 32/67 (47.8%) |
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
-| C2 | 124 | 119 | 84 | 35 | 57/124 (46.0%) |
+| C2 | 125 | 120 | 84 | 36 | 57/125 (45.6%) |
 | C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
-| C4 | 54 | 55 | 33 | 22 | 21/54 (38.9%) |
+| C4 | 55 | 56 | 33 | 23 | 21/55 (38.2%) |
 | D2 | 139 | 139 | 89 | 50 | 61/139 (43.9%) |
-| D3 | 108 | 119 | 68 | 51 | 49/108 (45.4%) |
-| D4 | 67 | 64 | 47 | 17 | 28/67 (41.8%) |
+| D3 | 109 | 120 | 70 | 50 | 50/109 (45.9%) |
+| D4 | 68 | 65 | 47 | 18 | 28/68 (41.2%) |
 | E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
 | E2 | 123 | 118 | 85 | 33 | 60/123 (48.8%) |
-| E3 | 112 | 113 | 95 | 18 | 59/112 (52.7%) |
+| E3 | 113 | 116 | 95 | 21 | 59/113 (52.2%) |
 | E4 | 49 | 56 | 27 | 29 | 19/49 (38.8%) |
 | F1 | 145 | 151 | 107 | 44 | 71/145 (49.0%) |
 | F2 | 148 | 157 | 98 | 59 | 61/148 (41.2%) |
@@ -174,24 +174,19 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | A2 |
 | Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis | 4 | 1 | A3 |
-| Sheaf.Paper.CondensedQbarPullbackCube | 5 | 1 | D4 |
 | Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | C3 |
-| Sheaf.Paper.CondensedLocalModelGluing | 7 | 1 | A3 |
-| Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | B3 |
 | Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | D2 |
+| Sheaf.Paper.CondensedFiniteLocalSubmodules | 8 | 1 | C1 |
+| Sheaf.Paper.CondensedQbarScalarPullback | 8 | 1 | C2 |
 | Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | E1 |
-| Sheaf.Paper.IntegralResidueProjectionNormalization | 8 | 1 | D3 |
 | WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf | 8 | 1 | E2 |
-| Sheaf.AlgebraicGeometry.ComparisonDirectImage | 9 | 3 | E3 |
-| Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | A4 |
+| Sheaf.Paper.CondensedQbarFieldEvaluationLinearity | 9 | 1 | C4 |
 | Sheaf.Paper.ContinuousModuleEncodingLattices | 9 | 1 | E4 |
-| Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity | 10 | 1 | F1 |
-| Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear | 11 | 1 | F2 |
+| Sheaf.Paper.IntegralResidueTensorGeometry | 10 | 1 | A4 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
+| Sheaf.Paper.IntegralResiduePullSquare | 11 | 1 | B2 |
 | Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
-| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 14 | 1 | C4 |
-| Sheaf.Paper.LatticePairMatrixAtBasis | 14 | 1 | C2 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | B3 |
 
 Modules pruned since the imports baseline:
 
@@ -287,6 +282,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields`
 - `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints`
 - `Sheaf.AlgebraicGeometry.EtaleFieldGsets`
+- `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
 - `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
 - `Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent`
@@ -352,6 +348,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
 - `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
+- `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis`
@@ -505,6 +502,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.SiteFilteredColimitSections`
 - `Sheaf.CategoryTheory.SiteLerayDegenerate`
 - `Sheaf.CategoryTheory.SiteMorphismComposition`
+- `Sheaf.CategoryTheory.SitePullbackAbelianExact`
 - `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
@@ -561,6 +559,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.FiniteHypercoverDescent`
 - `Sheaf.Paper.FiniteSplitEtaleHypercover`
 - `Sheaf.Paper.GaloisLisseRepresentations`
+- `Sheaf.Paper.HypercoverCohomology`
 - `Sheaf.Paper.HypercoverCohomologyColimit`
 - `Sheaf.Paper.HypercoverFreeResolution`
 - `Sheaf.Paper.ImagePresheafSheafificationIso`
