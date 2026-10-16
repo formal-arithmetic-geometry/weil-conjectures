@@ -1,0 +1,120 @@
+{
+ "id": "new-comap-upper-star-iso-composition",
+ "kind": "statement",
+ "title": "General coefficient restriction-pullback composition",
+ "statement": "For any morphism a : Λ ⟶ Λ′ of commutative condensed rings, with the ordinary module pullbacks, scalar restrictions, and canonical comparisons of [def-weil-pbc-residue-exchange-comparison-interface], every pair of composable scheme maps f,g and target-coefficient module N satisfies the equality in lean.statement. Equivalently, upperStarComp followed by the two inverse restriction/pullback comparisons equals the comparison for f ≫ g followed by restriction of upperStarComp.",
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; coefficient-map and adjunction coherence in the general condensed-ring case"
+ },
+ "proof": [
+  {
+   "text": "Identify the inverse restriction/pullback comparison for each of f, g and f ≫ g as the mate of the restriction/pushforward comparison, using [new-comap-upper-star-iso-mate].",
+   "uses": [
+    "new-comap-upper-star-iso-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By faithfulness of module forgetful functors, restriction/pushforward comparisons respect composition: their underlying maps are identities and both pushforward composition maps are the same sheaf map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply mateEquiv_hcomp and the two conjugate/mate whiskering identities from Mathlib. upperStarComp is defined as the inverse conjugate of lowerStarComp; consequently, the pullback comparison composition square is the transpose of the proved pushforward square. Evaluate at N and cancel the comparison isomorphisms to get the displayed equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-comap-upper-star-iso-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; ordinary coefficient change, proved via the canonical constructions and Mathlib adjunction mates",
+  "note": "D4 second reader proved the full generalized composition equation from the proved one-map mate identity and pushforward composition. No admitted theorem remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "date": "2026-10-17",
+   "results": "10 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_comp_id_right, CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical comparison restriction scalars inverse image modules ring isomorphism coherent composition mates adjunction",
+   "date": "2026-10-17",
+   "results": "8 hits: ModuleCat.restrictScalarsComp', ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp, ModuleCat.restrictScalarsComp'App_inv_apply, ModuleCat.restrictScalarsComp'_inv_app",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|mateEquiv_hcomp|conjugateEquiv_mateEquiv",
+   "date": "2026-10-17",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of scalars pullback comparison for modules over ring objects is the mate of the restriction pushforward comparison and respects composition of pullbacks.",
+   "date": "2026-10-17",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, RingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, ModuleCat.restrictScalarsComp'.congr_simp, RestrictScalars, ModuleCat.restrictScalarsComp, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "verdict": "Ordinary ModuleCat and presheaf-of-modules analogues have different categories and comparison constructions. The proof uses Mathlib mate/adjoint-uniqueness primitives instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp",
+  "date": "2026-10-17",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-ordinary-restrict-pull-comp",
+   "place": "General coefficient-map coherence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComapUpperStarIsoComposition",
+  "file": "lean/Sheaf/Paper/ComapUpperStarIsoComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.comapUpperStarIso_comp",
+  "statement": "theorem comapUpperStarIso_comp\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n      (condensedRingObj Λ' Z)) :\n    (upperStarComp Λ f g).hom.app ((Mod.comap (coefficientMap a Z)).obj N) =\n      (comapUpperStarIso a (f ≫ g)).inv.app N ≫\n        (Mod.comap (coefficientMap a X)).map\n          ((upperStarComp Λ' f g).hom.app N) ≫\n        (comapUpperStarIso a f).hom.app ((g)^*⟦Λ'⟧.obj N) ≫\n        (f)^*⟦Λ⟧.map ((comapUpperStarIso a g).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T173553-L-1931754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T173553-L-1931754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

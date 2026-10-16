@@ -1,0 +1,116 @@
+{
+ "id": "new-comap-upper-star-iso-mate",
+ "kind": "statement",
+ "title": "Ordinary coefficient restriction comparison is an adjunction mate",
+ "statement": "For commutative condensed rings Λ, Λ′ and a ring-object morphism a : Λ ⟶ Λ′, let f : X ⟶ Y be any scheme map. The ordinary adjunctions and canonical coefficient comparisons of [def-weil-pbc-residue-exchange-comparison-interface] satisfy: the mate of the inverse comapUpperStarIso a f is exactly the hom of comapLowerStarIso a f. The square and its orientation are specified verbatim in lean.statement. No flatness, properness or nonemptiness hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; the explicit comapUpperStarIso and comapLowerStarIso constructions in lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean, and upperStarLowerStarAdjunction in UpperLowerStar/Defs.lean"
+ },
+ "proof": [
+  {
+   "text": "Along an isomorphism φ of ring objects, extendScalarsIsoComapInv is leftAdjointUniq against the inverse restriction equivalence. Its hom composed after extendUnitHom is the identity by homEquiv_leftAdjointUniq_hom_app, since the equivalence counit is the identity on underlying objects. Therefore its inverse has underlying map extendUnitHom.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the module pullback unit: it is the underlying sheaf pullback unit followed by pushforward of extendUnitHom. Naturality of extendScalarsIsoComapInv for mapModComapIso identifies the underlying inverse comapUpperStarIso with the source scalar-isomorphism hom followed by the target scalar-isomorphism inverse. The underlying comapLowerStarIso is the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting unit square commutes after cancelling extendUnitHom followed by the scalar-isomorphism hom. Apply faithfulness of Mod.forget and injectivity of the ordinary pull/push homEquiv, then unit_mateEquiv_symm, to identify the mate with comapLowerStarIso. This calculation is valid on every module, including zero modules, and on empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; canonical ordinary module constructions and Mathlib adjunction uniqueness",
+  "note": "D4 second reading: fully proved single-map normalization supporting the composition argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq_hom_app|homEquiv_leftAdjointUniq|unit_mateEquiv_symm",
+   "date": "2026-10-17",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"unit\"",
+   "date": "2026-10-17",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction scalars comparison inverse image direct image is adjunction mate for commutative internal ring objects",
+   "date": "2026-10-17",
+   "results": "8 hits: ModuleCat.instIsRightAdjointRestrictScalars, ModuleCat.extendRestrictScalarsAdj, CommRingCat.monoidAlgebraAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, CommRingCat.forget₂Adj, ModuleCat.restrictCoextendScalarsAdj",
+   "verdict": "The generic adjunction identities are used in the formal proof; ordinary ModuleCat results have different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of scalars pullback comparison for modules over ring objects is the mate of the restriction pushforward comparison and respects composition of pullbacks.",
+   "date": "2026-10-17",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, RingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, ModuleCat.restrictScalarsComp'.congr_simp, RestrictScalars, ModuleCat.restrictScalarsComp, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "verdict": "Ordinary ModuleCat and presheaf-of-modules analogues have different categories and comparison constructions. The proof uses Mathlib mate/adjoint-uniqueness primitives instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp",
+  "date": "2026-10-17",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-ordinary-restrict-pull-comp",
+   "place": "Single-map adjunction normalization used in the composition proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComapUpperStarIsoMate",
+  "file": "lean/Sheaf/Paper/ComapUpperStarIsoMate.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.comapUpperStarIso_mate",
+  "statement": "theorem comapUpperStarIso_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    mateEquiv (upperStarLowerStarAdjunction Λ' f) (upperStarLowerStarAdjunction Λ f)\n      (TwoSquare.mk _ _ _ _ (comapUpperStarIso a f).inv) =\n      TwoSquare.mk _ _ _ _ (comapLowerStarIso a f).hom",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T173553-L-1931754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T173553-L-1931754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
