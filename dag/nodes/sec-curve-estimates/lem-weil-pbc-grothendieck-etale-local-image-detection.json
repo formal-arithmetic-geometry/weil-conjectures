@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-grothendieck-etale-local-image-detection",
+ "kind": "statement",
+ "title": "Local lifts detect zero on the categorical local image",
+ "statement": "For a scheme X, a Grothendieck abelian category A, a morphism p:F→G of A-valued small-etale sheaves, an etale object W, and maps x:B→G(W), g:B→T [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves], suppose x factors through localImage(p,W) [def-weil-pbc-grothendieck-etale-local-image]. If every π:B′→B for which πx lifts through p on a covering sieve satisfies πg=0, then g=0. No epimorphism assumption on p or qcqs assumption on W is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-grothendieck-etale-local-image"
+ ],
+ "proof": [
+  {
+   "text": "Write localImage as its small directed union and pull back along x. The factoring assumption and the directed-pullback theorem make the union of these inverse images equal to B.",
+   "uses": [
+    "def-weil-pbc-grothendieck-etale-local-image",
+    "lem-weil-pbc-grothendieck-directed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each member S, pull its witnessing epimorphism P→S back along the map from the inverse-image subobject to S. The composite to B has the covering sieve and local lifts inherited from P. The hypothesis kills its composite with g; cancel the pulled-back epimorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every inverse-image subobject now lies in ker(g). Their union is top, so ker(g)=top and g=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-grothendieck-etale-local-image",
+  "lem-weil-pbc-grothendieck-directed-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients.. Agent-written categorical argument; all new Lean declarations are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The union of subobjects of a sheaf value which have local lifts after an epimorphism of their sources forms a local image for arbitrary Grothendieck abelian coefficient categories",
+   "results": "Returned: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_isIso, CategoryTheory.Sheaf.isLocallySurjective_iff_epi, SheafOfModules.GeneratingSections.ofEpi, CategoryTheory.Sheaf.toImage_val, CategoryTheory.Sheaf.image_val, CategoryTheory.instHasImagesSheafType, CategoryTheory.imageFactorization No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally liftable maps detect zero maps on the local image subobject in a Grothendieck abelian category",
+   "results": "Returned: CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.exists_d_comp_eq_d, CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.Abelian.Pseudoelement.zero_of_map_zero, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Abelian.Pseudoelement.mono_of_zero_of_map_zero No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocal.*[Ii]mage|[Ii]mage.*[Ll]ocal",
+   "results": "Returned: Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImageDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleLocalImageDetection.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.eq_zero_of_factors_localImage",
+  "statement": "theorem eq_zero_of_factors_localImage {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) (W : X.Etale) (B T : A) (x : B ⟶ G.obj.obj (op W)) (g : B ⟶ T) (hx : (localImage p W).Factors x) (hkill : ∀ (B' : A) (π : B' ⟶ B) (R : Sieve W), R ∈ X.smallEtaleTopology W → (∀ (Z : X.Etale) (f : Z ⟶ W), R f → ∃ l : B' ⟶ F.obj.obj (op Z), l ≫ p.hom.app (op Z) = π ≫ x ≫ G.obj.map f.op) → π ≫ g = 0) : g = 0",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

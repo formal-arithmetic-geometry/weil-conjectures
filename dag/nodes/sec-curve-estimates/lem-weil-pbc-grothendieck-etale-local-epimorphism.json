@@ -23,32 +23,47 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the qcqs etale basis via its sheaf equivalence, preserving epimorphisms. Let Q be the pointwise image of p. For each finite cover C=(W_i→W), let L_C⊆G(W) be the pullback of ∏Q(W_i) along restriction to ∏G(W_i). Their distinct subobjects form a small directed poset under cover refinement, by well-poweredness. The union L is a subsheaf of G: for a fixed finite basis cover W_i→W, its matching object is the kernel of the difference of the two restriction maps from ∏L(W_i) to the finite product of G on overlaps. By AB5 this is the filtered colimit of the kernels obtained by replacing L(W_i) by L_{C_i}(W_i), indexed by finite tuples of covers. Glue each such matching kernel in G and compose the covers C_i to get its factorization through L_C(W). The colimit universal property gives the inverse matching map. No arbitrary source is assumed to factor through a stage of a union. It contains the image of p, so p being epic forces L=G.",
+   "text": "Construct the canonical local image and its qcqs extension. The presheaf qcqsLocalImagePresheaf(p) has a monic natural inclusion in G and p factors through it by toQcqsLocalImage.",
    "uses": [
-    "def-sp-grothendieck-abelian",
-    "def-weil-pbc-etale-sheaves"
+    "def-weil-pbc-grothendieck-etale-local-image"
    ],
    "elementary": false
   },
   {
-   "text": "Pull this filtered union back along x. AB5 gives a filtered family B_C⊆B with union B. Pull back the finite product of image epimorphisms F(W_i)→Q(W_i) to obtain an epimorphism P_C→B_C. The composites P_C→B have lifts on the chosen covers and hence on their generated covering sieves.",
-   "uses": [],
-   "elementary": true
+   "text": "The qcqs extension is a sheaf, using finite-cover descent and finite affine refinements on each qcqs test object. It is therefore a subsheaf of G.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-local-image-sheaf"
+   ],
+   "elementary": false
   },
   {
-   "text": "The hypothesis kills g on each P_C. Cancel the epimorphism to B_C and use the union B_C=B to obtain g=0. Empty W is covered by the empty family, whose zero lifts test π=id_B; zero source and zero coefficients are immediate.",
-   "uses": [],
-   "elementary": true
+   "text": "Because p is epic, its factorization through the subsheaf makes the inclusion epic. It is also monic, so the abelian sheaf category makes it an isomorphism. At qcqs W its subobject equals localImage(p,W), hence that local image is top.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-grothendieck-etale-local-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since localImage(p,W)=top, x factors through it. Apply local-image detection with the given hkill to conclude g=0. No map out of an arbitrary coefficient object is required to factor through one stage of a directed union.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-local-image-detection"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-grothendieck-abelian",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-grothendieck-etale-local-image",
+  "lem-weil-pbc-grothendieck-etale-local-image-detection",
+  "lem-weil-pbc-grothendieck-etale-local-image-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Agent-written categorical coefficient generalization of the local image and local primitive arguments in Stacks Tags 00WL and 01H0. Those sources themselves concern set-valued and abelian sheaves, respectively. Finite matching diagrams and AB5 provide the general-coefficient argument recorded here."
+  "place": "Categorical local-image proof following Stacks Tags 00WL and 079A. Finite-cover descent is proved by source-refinement induction; sheafhood is proved using finite affine refinements on qcqs test objects, instead of the planned finite matching-kernel argument. Every helper is proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -127,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-ca2e2",
-  "group": "C2",
+  "reviewer": "X-aba3a",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261016T062622-L-449034",
+  "landing": "20261016T073458-L-1079934",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report matched against the packet and published clone; all delivered modules and the direct importer compile successfully."
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
  }
 }

@@ -1,0 +1,162 @@
+{
+ "id": "def-weil-pbc-grothendieck-etale-local-image",
+ "kind": "definition",
+ "title": "Canonical categorical local image and its qcqs extension",
+ "statement": "For a scheme X and a morphism p:F→G of small-etale sheaves valued in a Grothendieck abelian category A [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves], say x:B→G(W) lifts locally when some covering sieve R on W admits lifts of all restrictions of x through p, without requiring compatibility. A subobject S of G(W) is a local-image member if an epimorphism P→S makes its inclusion lift locally. Define localImage(p,W) as the supremum of these members. They form a small nonempty directed family and restriction preserves their union. Define qcqsLocalImage(p,W) as the intersection, over all qcqs Z and arrows Z→W, of the pullbacks of localImage(p,Z). It equals localImage on qcqs W, is functorial under restriction, and constructs a subpresheaf of G through which p factors.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Construct locally liftable maps by a covering-sieve predicate, local-image members by an epimorphic witness, and their union by sSup in the complete subobject lattice. The image of p(W) is a member, using the top covering sieve and naturality of p.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition preserves local lifts; restriction pulls back the witnessing sieve. Image pushforward of a member is a member using the epimorphism onto its image. The image/pullback Galois connection gives restriction of the union.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Two members have a common upper member: take their supremum, use the biproduct of their witness epimorphisms followed by the canonical epimorphism onto the supremum, and use the intersection of the covering sieves for the biproduct lifts. Shrink the subtype of members using well-poweredness and express sSup as its iSup.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intersect the pullbacks from all qcqs test objects. Restriction follows by composition of tests. The original local image lies in every test by restriction, and on qcqs W the identity test gives the reverse inequality. Define presheaf restriction maps by factorThru; uniqueness against the subobject arrow proves the functor laws. Define the inclusion and the factorization of p by the same unique factorization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients.. Agent-written categorical argument; all new Lean declarations are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The union of subobjects of a sheaf value which have local lifts after an epimorphism of their sources forms a local image for arbitrary Grothendieck abelian coefficient categories",
+   "results": "Returned: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_isIso, CategoryTheory.Sheaf.isLocallySurjective_iff_epi, SheafOfModules.GeneratingSections.ofEpi, CategoryTheory.Sheaf.toImage_val, CategoryTheory.Sheaf.image_val, CategoryTheory.instHasImagesSheafType, CategoryTheory.imageFactorization No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subpresheaf defined as the local image of a morphism of sheaves valued in a Grothendieck abelian category is a sheaf",
+   "results": "Returned: CategoryTheory.Sheaf.image, CategoryTheory.instHasImagesSheafType, CategoryTheory.Sheaf.image_val, CategoryTheory.Sheaf.toImage_val, CategoryTheory.Sheaf.toImage, CategoryTheory.Sheaf.imageι, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.imageFactorization No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocal.*[Ii]mage|[Ii]mage.*[Ll]ocal",
+   "results": "Returned: Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleLocalImage.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImage",
+  "statement": "def localImage (W : X.Etale) : Subobject (G.obj.obj (op W))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.LocallyLifts",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.LocalImageMember",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.locallyLifts_precomp",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.locallyLifts_restrict",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageMember_image",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageMember_exists",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImage_restrict",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.locallyLifts_p",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.locallyLifts_of_cover",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageMember_sup",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.LocalImageIndex",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageFamily",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageFamily_mem",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageIndex_nonempty",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImageFamily_directed",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.iSup_localImageFamily",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImage",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImage_restrict",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImage_le_qcqsLocalImage",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImage_eq",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImagePresheaf",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImageι",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImage_contains_p",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.toQcqsLocalImage",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.toQcqsLocalImage_ι"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

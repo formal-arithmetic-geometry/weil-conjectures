@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+ "kind": "statement",
+ "title": "A covering sieve on a quasi-compact etale object contains a finite affine cover",
+ "statement": "For any universe u, let X : Scheme.{u}, W : X.Etale with [CompactSpace W.left], and R : Sieve W a covering sieve, R ∈ X.smallEtaleTopology W [def-weil-pbc-etale-site]. There exist n : ℕ, U : Fin n → X.Etale, and g : ∀ a, U a ⟶ W such that (∀ a, R (g a)), (∀ a, IsAffine (U a).left), and ⋃ a, Set.range (g a).left = Set.univ. Thus every chosen arrow belongs to R, every source is affine, and the arrows are jointly surjective on W. The base X need not be quasi-compact or quasi-separated, and no quasi-separatedness of W is assumed. The finite index n may be zero, including when W is empty.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean",
+  "place": "Line 71, AlgebraicGeometry.Scheme.exists_finite_affine_of_mem_smallEtaleTopology; universe u and implicit base X at lines 60-66."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Unpack covering-sieve membership into an etale scheme cover whose arrows generate a subsieve of R. Each etale covering arrow is an open map, so this cover is a QuasiCompactCover.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply QuasiCompactCover.exists_isAffineOpen_of_isCompact to the compact open Set.univ of W. Compactness of W.left gives finitely many affine opens V a in selected members of the cover, with their images covering W.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let U a be the etale X-object obtained by restricting that selected cover member to V a. Define g a by composing the open inclusion with the cover arrow. The sieve is downward closed, so R (g a). The affine-open property makes (U a).left affine, and the equality of the union of the images of V a with Set.univ gives ⋃ a, Set.range (g a).left = Set.univ. The construction allows n=0.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean",
+  "place": "Line 71, AlgebraicGeometry.Scheme.exists_finite_affine_of_mem_smallEtaleTopology; universe u and implicit base X at lines 60-66.; proof steps transcribe the existing proved Lean argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every covering sieve on an etale scheme with compact underlying space contains finitely many morphisms with affine sources whose images cover the scheme",
+   "results": "Returned: AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact, AlgebraicGeometry.Scheme.Hom.cover, AlgebraicGeometry.Scheme.instSmallPrecoverage, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A covering sieve on a quasi compact etale scheme contains a finite jointly surjective family of affine etale schemes",
+   "results": "Returned: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.Scheme.JointlySurjective.exists_eq, AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.QuasiCompactCover.singleton",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "inf_iSup_of_directed|exists_finite_affine_of_mem_smallEtaleTopology",
+   "results": "No Mathlib matches. Source-library and Sheaf search by rg: Exact declaration at WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean:71. Sheaf uses include AlgebraicGeometry/EtaleFilteredInjectiveAcyclic.lean:121 and AlgebraicGeometry/CartesianHigherImageAffineSectionLocalVanishing.lean:219. lem-weil-pbc-etale-covering-affine-refinement has affine base and cover-family input, and attaches QuasiCompactCover.exists_hom, not this exact compact-object covering-sieve declaration.",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_affine_of_mem_smallEtaleTopology",
+  "statement": "lemma exists_finite_affine_of_mem_smallEtaleTopology {W : X.Etale} [CompactSpace W.left]\n    {R : Sieve W} (hR : R ∈ X.smallEtaleTopology W) :\n    ∃ (n : ℕ) (U : Fin n → X.Etale) (g : ∀ a, U a ⟶ W), (∀ a, R (g a)) ∧\n      (∀ a, IsAffine (U a).left) ∧ ⋃ a, Set.range (g a).left = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "note": "Existing proved source declaration, not a new module. Context, verbatim: universe u; namespace AlgebraicGeometry.Scheme; variable {X : Scheme.{u}}. CompactSpace W.left is the only compactness hypothesis; no quasi-separatedness is required."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

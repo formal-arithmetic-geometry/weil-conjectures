@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-grothendieck-directed-pullback",
+ "kind": "statement",
+ "title": "Directed subobject unions pull back to the source of a factoring map",
+ "statement": "In a Grothendieck abelian category C [def-sp-grothendieck-abelian], let S_i be a nonempty small directed family of subobjects of Y. If f:X→Y factors through their supremum, then the supremum of the inverse-image subobjects f⁻¹(S_i) is top in Subobject X.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079A (section-grothendieck-conditions), AB5 exactness of filtered colimits; directed-intersection distributivity is already proved in the source library"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For a monomorphism f, push each inverse image forward to im(f)∩S_i and use the proved library lemma IsGrothendieckAbelian.inf_iSup_of_directed in WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject. The factoring assumption makes im(f)∩sup_i S_i equal im(f); injectivity of subobject pushforward along a mono gives the result.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-grothendieck-directed-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an epimorphism f and sup_i S_i=top, let U be the union of the inverse images. It contains ker(f), since the family is nonempty, and its image under f is top, because image pushforward preserves suprema and epis are stable under pullback. The cokernel of U descends through f. Its composite with the image of U is zero, so that descended map vanishes, making the cokernel of U zero. Hence U=top.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Factor a general f as an epi onto its image followed by a mono. Apply the mono case to the original family and then the epi case to the resulting family of inverse images. Pullback along a composite finishes the proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-grothendieck-directed-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079A (section-grothendieck-conditions), AB5 exactness of filtered colimits; directed-intersection distributivity is already proved in the source library. Agent-written categorical argument; all new Lean declarations are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck abelian category, pullback of a directed family of subobjects whose supremum is top has supremum top",
+   "results": "Returned: CategoryTheory.Subobject.pullback_top, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.F_obj, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.Limits.CompleteLattice.pullback_eq_inf, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Subobject.sSup, CategoryTheory.Subobject.pullback_self No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback preserves directed unions of subobjects in a Grothendieck abelian category",
+   "results": "Returned: CategoryTheory.IsGrothendieckAbelian.subobjectMk_of_isColimit_eq_iSup, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.pushouts_ofLE_le_largerSubobject, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_larger_subobject, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Subobject.sSup, CategoryTheory.Subobject.sSup_le, CategoryTheory.Subobject.le_sSup, CategoryTheory.Subobject.instCompleteLattice No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*iSup|iSup.*pullback|inf_iSup_of_directed",
+   "results": "No matches. No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDirectedPullback",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDirectedPullback.lean",
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.iSup_pullback_eq_top_of_factors",
+  "statement": "theorem iSup_pullback_eq_top_of_factors (f : X ⟶ Y) (S : ι → Subobject Y) (hS : Directed (· ≤ ·) S) (h : (⨆ i, S i).Factors f) : (⨆ i, (Subobject.pullback f).obj (S i)) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-grothendieck-etale-local-image-sheaf",
+ "kind": "statement",
+ "title": "The qcqs extension of the local image is a sheaf",
+ "statement": "For any scheme X, any Grothendieck abelian coefficient category A, and any morphism p:F→G of small-etale sheaves [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves], the presheaf qcqsLocalImagePresheaf(p) constructed by [def-weil-pbc-grothendieck-etale-local-image] is a sheaf. There is no epimorphism assumption on p and no qcqs assumption on X.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL, image subsheaves, together with etale-cohomology.tex Tag 03Q4 (section-colimit), qcqs covers by quasi-compact objects. Finite affine refinement itself is the proved source-library lemma cited in step 2; the general-coefficient sheaf argument is agent-written."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-grothendieck-etale-local-image"
+ ],
+ "proof": [
+  {
+   "text": "Test the sheaf condition after Hom(B,-). Map a compatible family into G and glue there, obtaining x. For every qcqs V→W, pull the given covering sieve back to V.",
+   "uses": [
+    "def-weil-pbc-grothendieck-etale-local-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved source-library theorem Scheme.exists_finite_affine_of_mem_smallEtaleTopology from WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit: the pulled-back cover has a finite affine refinement. This is the finite-refinement ingredient of the qcqs-covering node, without needing its stronger overlap assertion.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each restriction of x to a finite affine member is the given family map followed by the subobject inclusion. Since affine objects are qcqs, it factors through the ordinary local image there. Finite-cover descent gives factorization of x|V through localImage(p,V).",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-local-image-descent",
+    "def-weil-pbc-grothendieck-etale-local-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For all qcqs tests these factorizations give the inequalities defining qcqsLocalImage(p,W); hence x factors through it. This factor is the required amalgamation. Cancel monic inclusions to verify restrictions and uniqueness using the corresponding statements in G. Empty refinements are covered by the same finite-cover descent theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+  "def-weil-pbc-grothendieck-etale-local-image",
+  "lem-weil-pbc-grothendieck-etale-local-image-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL, image subsheaves, together with etale-cohomology.tex Tag 03Q4 (section-colimit), qcqs covers by quasi-compact objects. Finite affine refinement itself is the proved source-library lemma cited in step 2; the general-coefficient sheaf argument is agent-written.. Agent-written categorical argument; all new Lean declarations are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The union of subobjects of a sheaf value which have local lifts after an epimorphism of their sources forms a local image for arbitrary Grothendieck abelian coefficient categories",
+   "results": "Returned: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_isIso, CategoryTheory.Sheaf.isLocallySurjective_iff_epi, SheafOfModules.GeneratingSections.ofEpi, CategoryTheory.Sheaf.toImage_val, CategoryTheory.Sheaf.image_val, CategoryTheory.instHasImagesSheafType, CategoryTheory.imageFactorization No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subpresheaf defined as the local image of a morphism of sheaves valued in a Grothendieck abelian category is a sheaf",
+   "results": "Returned: CategoryTheory.Sheaf.image, CategoryTheory.instHasImagesSheafType, CategoryTheory.Sheaf.image_val, CategoryTheory.Sheaf.toImage_val, CategoryTheory.Sheaf.toImage, CategoryTheory.Sheaf.imageι, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.imageFactorization No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocal.*[Ii]mage|[Ii]mage.*[Ll]ocal",
+   "results": "Returned: Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImageSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleLocalImageSheaf.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.qcqsLocalImage_isSheaf",
+  "statement": "theorem qcqsLocalImage_isSheaf {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) : Presheaf.IsSheaf X.smallEtaleTopology (qcqsLocalImagePresheaf p)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

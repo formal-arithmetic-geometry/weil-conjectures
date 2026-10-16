@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-grothendieck-directed-intersection",
+ "kind": "statement",
+ "title": "Intersection commutes with nonempty small directed unions of subobjects",
+ "statement": "Let u, v, w be universe levels, C : Type u a category with homs in Type v, and assume [Abelian C] and [IsGrothendieckAbelian.{w} C] [def-sp-grothendieck-abelian]. For X : C, a nonempty index type ι : Type w, a subobject S of X, and T : ι → Subobject X with Directed (· ≤ ·) T, one has S ⊓ (⨆ i, T i) = ⨆ i, S ⊓ T i. The index universe w is the same universe as the Grothendieck-abelian instance; no equality of u, v, and w is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject.lean",
+  "place": "Line 53, CategoryTheory.IsGrothendieckAbelian.inf_iSup_of_directed; universe and section hypotheses at lines 32-47; AB5 context: Stacks Tag 079A."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Put the preorder induced by T on ι. Directedness and nonemptiness make it filtered. The monotone families T i and S ⊓ T i define diagrams of monomorphisms over X. Their suprema are colimits of the underlying diagrams in C, by the Grothendieck-abelian subobject-colimit theorem.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each i, the sequence S ⊓ T i → T i → cokernel(S.arrow) is exact: the first map is the kernel of the second. Assemble these sequences into a short complex of functors on ι. Exactness of filtered colimits and connectedness of ι give the exact sequence (⨆ i, S ⊓ T i) → (⨆ i, T i) → cokernel(S.arrow).",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel universal property factors the inclusion of S ⊓ (⨆ i, T i) through ⨆ i, S ⊓ T i, proving the forward inequality. Each S ⊓ T i is bounded by both S and ⨆ i, T i, so their supremum gives the reverse inequality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject.lean",
+  "place": "Line 53, CategoryTheory.IsGrothendieckAbelian.inf_iSup_of_directed; universe and section hypotheses at lines 32-47; AB5 context: Stacks Tag 079A.; proof steps transcribe the existing proved Lean argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck abelian category, intersection with a fixed subobject commutes with the supremum of a nonempty small directed family of subobjects",
+   "results": "Returned: CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.IsGrothendieckAbelian.subobjectMk_of_isColimit_eq_iSup, CategoryTheory.Subobject.sSup, CategoryTheory.IsGrothendieckAbelian.hasColimits, CategoryTheory.Subfunctor.iSup_min, CategoryTheory.IsGrothendieckAbelian.instIsStableUnderTransfiniteCompositionMonomorphisms, Directed.iSup_inf_eq",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection distributes over nonempty directed suprema in the subobject lattice of a Grothendieck abelian category",
+   "results": "Returned: CategoryTheory.IsGrothendieckAbelian.subobjectMk_of_isColimit_eq_iSup, CategoryTheory.Subobject.inf, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject, CategoryTheory.Subobject.inf_def, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.pushouts_ofLE_le_largerSubobject, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.lt_largerSubobject, CategoryTheory.Subobject.completeSemilatticeInf",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "inf_iSup_of_directed|exists_finite_affine_of_mem_smallEtaleTopology",
+   "results": "No Mathlib matches. Source-library and Sheaf search by rg: Exact declaration at WeilConjectures/Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject.lean:53. Uses at WeilConjectures/CategoryTheory/GrothendieckAbelian/CardinalGenerated.lean:145 and AcyclicSwallowing.lean:257; no existing DAG node attaches this declaration.",
+   "date": "2026-10-16",
+   "verdict": "The exact proved declaration is in the source library; attach it without a new Lean declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject",
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.inf_iSup_of_directed",
+  "statement": "lemma inf_iSup_of_directed (S : Subobject X) (T : ι → Subobject X)\n    (hT : Directed (· ≤ ·) T) : S ⊓ (⨆ i, T i) = ⨆ i, S ⊓ T i",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "note": "Existing proved source declaration, not a new module. Context, verbatim: universe w v u; variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]; variable {X : C} {ι : Type w} [Nonempty ι]."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

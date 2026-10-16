@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-grothendieck-etale-local-image-descent",
+ "kind": "statement",
+ "title": "Finite-cover descent of local-image factorization",
+ "statement": "For a morphism p:F→G of sheaves with Grothendieck abelian coefficients on a scheme’s small-etale site [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves], let (U_i→W) indexed by Fin n be a covering family and x:B→G(W). If every restricted map x|U_i factors through localImage(p,U_i) [def-weil-pbc-grothendieck-etale-local-image], then x factors through localImage(p,W). No compactness, projectivity, or presentability of B is assumed, and n=0 is allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-grothendieck-etale-local-image"
+ ],
+ "proof": [
+  {
+   "text": "Let c be the cokernel of localImage(p,W)→G(W). If every restricted map actually lifts locally, compose those covering sieves using transitivity to make x locally liftable on W. Its image is a local-image member, so xc=0.",
+   "uses": [
+    "def-weil-pbc-grothendieck-etale-local-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on a finite set of cover indices whose local-lifting assumptions have been removed. To remove index i, apply local-image detection to x|U_i and xc. After a source map makes the ith restriction locally liftable, the induction hypothesis applies: all other local lifts are preserved by precomposition. The same induction works for every source map into B, which is exactly the quantification needed by detection.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-local-image-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Taking the full finite index set removes all assumptions and gives xc=0. The abelian monoLift universal property gives factorization of x through the local-image inclusion. If n=0, the starting case already has no assumptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-grothendieck-etale-local-image",
+  "lem-weil-pbc-grothendieck-etale-local-image-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WL (section-sheaves-injective), image subsheaf argument for epimorphisms. The construction using epimorphic source maps is an agent-written extension to arbitrary Grothendieck abelian coefficients.. Agent-written categorical argument; all new Lean declarations are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Factoring a map through the local image of a morphism of sheaves with Grothendieck abelian coefficients can be checked on a finite covering family",
+   "results": "Returned: CategoryTheory.imageFactorization, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective, CategoryTheory.Sheaf.toImage_ι, CategoryTheory.imageMonoFactorization, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.functorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.image, CategoryTheory.Sheaf.instIsLocallySurjectiveHomObjForgetTypeToImage No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally liftable maps detect zero maps on the local image subobject in a Grothendieck abelian category",
+   "results": "Returned: CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.exists_d_comp_eq_d, CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.Abelian.Pseudoelement.zero_of_map_zero, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Abelian.Pseudoelement.mono_of_zero_of_map_zero No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*cover.*(image|factor)|local.*(image|factor).*cover",
+   "results": "Returned: Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean No direct match in this generality; related infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "No direct match in this generality; related infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: local lifting for the finite hypercover computation",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImageDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleLocalImageDescent.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.localImage_factors_of_finite_cover",
+  "statement": "theorem localImage_factors_of_finite_cover {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) (W : X.Etale) (B : A) (x : B ⟶ G.obj.obj (op W)) (n : ℕ) (U : Fin n → X.Etale) (f : ∀ i, U i ⟶ W) (hf : Sieve.ofArrows U f ∈ X.smallEtaleTopology W) (hx : ∀ i, (localImage p (U i)).Factors (x ≫ G.obj.map (f i).op)) : (localImage p W).Factors x",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-aba3a",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079934",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and signatures against DAG statements, published declarations, source lemmas, change record, report, and earlier return; compilation and axiom checks passed."
+ }
+}

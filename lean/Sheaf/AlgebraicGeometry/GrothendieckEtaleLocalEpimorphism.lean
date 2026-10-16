@@ -4,7 +4,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImageSheaf
+import Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalImageDetection
 
 /-! # Local lifting families for general Grothendieck coefficients
 
@@ -23,52 +24,67 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
+private lemma localImage_eq_top_of_isSheaf
+    {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) [Epi p]
+    (hs : Presheaf.IsSheaf X.smallEtaleTopology (qcqsLocalImagePresheaf p))
+    (W : X.Etale) [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
+    localImage p W = ⊤ := by
+  let L : Sheaf X.smallEtaleTopology A := ⟨qcqsLocalImagePresheaf p, hs⟩
+  let i : L ⟶ G := ⟨qcqsLocalImageι p⟩
+  let q : F ⟶ L := ⟨toQcqsLocalImage p⟩
+  have hi : q ≫ i = p := by
+    apply Sheaf.hom_ext
+    exact toQcqsLocalImage_ι p
+  have : Epi i := epi_of_epi_fac hi
+  have (Z : X.Etaleᵒᵖ) : Mono (i.hom.app Z) :=
+    inferInstanceAs (Mono (qcqsLocalImage p Z.unop).arrow)
+  have : Mono i.hom := NatTrans.mono_of_mono_app _
+  have : Mono ((sheafToPresheaf X.smallEtaleTopology A).map i) := ‹Mono i.hom›
+  have : Mono i := (sheafToPresheaf X.smallEtaleTopology A).mono_of_mono_map inferInstance
+  have : IsIso i := isIso_of_mono_of_epi i
+  have : IsIso ((sheafToPresheaf X.smallEtaleTopology A).map i) := inferInstance
+  have : IsIso i.hom := this
+  have : IsIso ((qcqsLocalImage p W).arrow) :=
+    inferInstanceAs (IsIso (i.hom.app (op W)))
+  exact (qcqsLocalImage_eq p W).symm.trans (Subobject.eq_top_of_isIso_arrow _)
+
+-- Retain the original qcqs assumptions on X in the public interface.
+set_option linter.unusedSectionVars false in
 /-- Maps admitting local lifts through a sheaf epimorphism jointly detect zero maps.
 Source: Stacks Project, Sites, Tag 00WL, the image subsheaf argument, and
 Hypercoverings, Tag 01H0, the local primitive step. This is the categorical
 finite-cover version for Grothendieck abelian coefficients.
 (blueprint: lem-weil-pbc-grothendieck-etale-local-epimorphism).
 
-Proof: restrict to the qcqs etale basis. It has finite covering families and is
-stable under the finite fiber products used in their matching diagrams.
-Restriction to this basis is an equivalence of sheaf categories, so p remains
-epic there. Let Q be the pointwise image of p, viewed as a subpresheaf of G.
-For a finite cover
-C = (Wᵢ → W), define L_C as the inverse image in G(W) of the subobject
-∏ Q(Wᵢ) of ∏ G(Wᵢ). Refining a cover enlarges L_C, and common refinements make
-these subobjects a directed family. Use the poset of distinct subobjects L_C,
-which is small by well-poweredness, as the filtered index; no filteredness of
-the raw category of covering maps is required. Set L(W) equal to their union.
-Restriction maps carry L_C into the analogous subobject for the pulled-back
-cover, so L is a subpresheaf of G. To check its sheaf condition on a fixed finite basis cover
-(Wᵢ → W), write its matching object as the kernel of the difference
-of the two restriction maps from ∏ L(Wᵢ) to the finite product of G on the
-overlaps. This uses monicity of L → G. AB5 expresses this kernel as the filtered colimit
-of the analogous
-kernels with L(Wᵢ) replaced by L_{Cᵢ}(Wᵢ), for finite tuples of covers Cᵢ.
-For each such tuple, glue in G and compose the finite covers Cᵢ with Wᵢ → W.
-The glued map then factors through L_C(W) for this composite cover C, by the
-defining pullback of L_C. These maps induce the inverse of the matching map
-for L by the colimit universal property. Uniqueness follows from monicity.
-This is an equality of subobjects; no compactness or projectivity of an
-arbitrary source B is used to factor a map through one stage of a union.
-The resulting subsheaf L of G contains the image of p. Since p is epic,
-L → G is both monic and epic; thus L(W) = G(W).
+Proof: define the local image at each etale object as the union of subobjects whose
+inclusions lift locally after an epimorphism onto their source. These subobjects form a
+small directed family: use well-poweredness for smallness, and biproducts and intersection
+of covering sieves for directedness. Restriction preserves the family. Extend from qcqs
+objects by intersecting the pullbacks of their local-image subobjects over all qcqs tests.
+This constructs a subpresheaf of G containing the image of p.
 
-Pull this filtered union back along x : B → G(W). AB5, or exactness of
-filtered colimits applied to the defining pullback kernels, shows that the
-subobjects B_C = B ×_{G(W)} L_C have union B. Over B_C form
-P_C = B_C ×_{∏ Q(Wᵢ)} ∏ F(Wᵢ). Finite products of the image epimorphisms
-F(Wᵢ) → Q(Wᵢ) are epic, and epis are stable under pullback in an abelian
-category, so P_C → B_C is epic. The composite π_C : P_C → B admits the
-specified local lifts on C. The same lifts extend to every arrow of its
-generated covering sieve by restriction; choose one factorization for each
-such arrow, with no compatibility requirement. The hypothesis gives
-π_C ≫ g = 0. Cancel P_C → B_C to obtain B_C.arrow ≫ g = 0 for every C.
-Since the filtered union of B_C is B, g = 0. This proof uses filtered unions,
-not pullback stability of an arbitrary jointly epic family. When W is empty,
-G(W) is terminal, and the zero lifts on the empty covering sieve test the
-identity map of B. Zero coefficients or a zero source are included. -/
+The union pulls back to the whole source of any map factoring through it, by AB5.
+For each pulled-back member, pull back its witnessing epimorphism. The resulting map into
+the source has local lifts. The vanishing hypothesis kills it; cancel the epimorphism.
+All the pulled-back members therefore lie in the kernel of g, and their union is the
+whole source. This proves the detection assertion for maps into the local image.
+
+To show that the constructed subpresheaf is a sheaf, first prove finite-cover descent
+for factoring through the local image. Compose a proposed map with the cokernel of the
+local-image inclusion. When all its restrictions actually lift locally, transitivity of
+covering sieves kills this composite. Remove those lifting assumptions one cover member
+at a time using the detection assertion and finite induction. Thus factorization through
+the local image descends along a finite cover. For an arbitrary compatible family, glue
+it in G. Pull the covering sieve back to each qcqs test object, refine to a finite affine
+cover, and apply finite-cover descent. The glued map factors through the constructed
+subpresheaf. Monicity gives uniqueness, so it is a subsheaf.
+
+The factorization of p through this subsheaf makes its inclusion epic. It is also monic,
+hence an isomorphism in the abelian sheaf category. On qcqs W the extended local image
+equals the original one, which is therefore top. Apply the detection assertion to x.
+Neither a fixed projective source nor factorization through one stage of a directed union
+is used. Empty finite covers, empty W, zero coefficients, and zero source are included. -/
 theorem eq_zero_of_locally_liftable_maps
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) [Epi p]
     (W : X.Etale) [CompactSpace W.left] [QuasiSeparatedSpace W.left]
@@ -77,6 +93,11 @@ theorem eq_zero_of_locally_liftable_maps
       (∀ (Z : X.Etale) (f : Z ⟶ W), R f →
         ∃ l : B' ⟶ F.obj.obj (op Z), l ≫ p.hom.app (op Z) = π ≫ x ≫ G.obj.map f.op) →
       π ≫ g = 0) : g = 0 := by
-  sorry
+  have htop : localImage p W = ⊤ :=
+    localImage_eq_top_of_isSheaf A p (qcqsLocalImage_isSheaf A p) W
+  apply eq_zero_of_factors_localImage A p W B T x g
+  · rw [htop]
+    exact Subobject.top_factors x
+  · exact hkill
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck
