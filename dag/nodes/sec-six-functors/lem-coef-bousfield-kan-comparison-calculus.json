@@ -28,60 +28,149 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Separate the two simplicial directions: put $B(X)_{p,q}=\\coprod_{c_0\\to\\cdots\\to c_p}X(c_0)_q$ and $T(X)_{p,q}=\\coprod_{c_p\\to\\cdots\\to c_0}X(c_p)_q$. In the $p$ direction use composition/deletion and identity insertion, applying $X$ when deleting the element-carrying endpoint; in the $q$ direction use the operators of $X$. The $p$ identities follow from associativity, identities and functoriality of $X$; the two directions commute because every $X(a)$ is a simplicial map. Thus these are bisimplicial sets and their diagonals are exactly the stated replacements. A transformation $X\\to Y$ acts on the element, and a reindexing functor acts on the chain. Both commute with every operator by naturality and preservation of composition/identities, and respect identity and composite transformations/functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  },
+  {
+   "text": "Fix $p$. The row map $B(X)_{p,\\bullet}\\to B(Y)_{p,\\bullet}$ is the disjoint union, over the same set of chains, of the weak homotopy equivalences $X(c_0)\\to Y(c_0)$. Realization is the quotient by simplex-operator relations, none of which change the chain label in this row, so its realization is the topological disjoint union of the corresponding realized maps. Path components are the disjoint union of components, and a based map from a connected sphere (and any based homotopy) stays in its one summand. Hence the map induces the required bijection of components and all homotopy-group isomorphisms. This also proves the analogous row assertion for $T$, with $c_p$ instead of $c_0$, including empty coproducts. These are exactly the weak equivalences defined in [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-bisimplicial-diagonal-equivalence] to the two rowwise weak equivalences just proved. Their diagonals are the induced maps $\\mathrm{BK}_C X\\to\\mathrm{BK}_C Y$ and $\\mathrm{KB}_C X\\to\\mathrm{KB}_C Y$ from step 1, so this proves objectwise invariance for both replacements. No finiteness or fibrancy is assumed, and smallness of $C$ ensures that every indexing collection is a set.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  },
+  {
+   "text": "For $Z$ fix its second degree $q$ and set $K=Z_{\\bullet,q}$. The column $T(Z)_{\\bullet,q}$ is $NE(K)$: an index chain in $\\Delta^{\\mathrm{op}}$ written $[n_p]\\to\\cdots\\to[n_0]$ is a chain $[n_0]\\to\\cdots\\to[n_p]$ in $\\Delta$, and its element $x\\in K_{n_p}$ determines every earlier simplex by restriction. This bijection commutes with all faces and degeneracies. The last-vertex map of [lem-coef-simplex-category-last-vertex] therefore gives $T(Z)_{\\bullet,q}\\to Z_{\\bullet,q}$, a weak equivalence. Its formula on a $p$-chain is $K(v)x$ with $v(i)$ the image of the last vertex $n_i$ in $[n_p]$. The vertex assignment is monotone since $a_{i+1}(n_i)\\leq n_{i+1}$ and all subsequent maps are monotone. Naturality of the cited theorem makes these maps commute with operators in $q$, so they assemble to a bisimplicial map $T(Z)\\to Z$.",
+   "uses": [
+    "lem-coef-simplex-category-last-vertex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  },
+  {
+   "text": "For the other replacement $B(Z)_{\\bullet,q}=N(E(K)^{\\mathrm{op}})$. A chain is $[n_p]\\xrightarrow{f_p}\\cdots\\xrightarrow{f_1}[n_0]$ in $\\Delta$, with $x\\in K_{n_0}$. Define $u:[p]\\to[n_0]$ by $u(i)=f_1\\cdots f_i(0)$ and use $K(u)x$. The map $u$ is monotone since $f_{i+1}(0)\\geq0$ and the earlier $f_j$ are monotone. To see this is a natural simplicial weak equivalence, let $K^{\\mathrm{rev}}$ be obtained by reversing each simplex order: $a:[m]\\to[n]$ becomes $a^{\\mathrm{rev}}(j)=n-a(m-j)$. The functor fixing $([n],x)$ and sending an arrow $a$ to $a^{\\mathrm{rev}}$ gives an isomorphism $E(K^{\\mathrm{rev}})\\cong E(K)$: its arrow condition is $K(a^{\\mathrm{rev}})y=x$, and applying reversal twice is the identity. Reverse the nerve simplicial order too; $N(E(K))^{\\mathrm{rev}}\\cong N(E(K)^{\\mathrm{op}})$. Under these identifications the reversed last-vertex map of [lem-coef-simplex-category-last-vertex] is precisely the displayed $u$ formula, since reversing a last vertex yields the first vertex $0$. Reversal preserves weak homotopy equivalences: the maps on realizations sending barycentric coordinates $(t_0,\\ldots,t_p)$ to $(t_p,\\ldots,t_0)$ respect every defining quotient relation and are mutually inverse homeomorphisms, natural in simplicial maps. Thus $B(Z)_{\\bullet,q}\\to K$ is a weak equivalence. Naturality in $K$ again assembles these maps into a bisimplicial map $B(Z)\\to Z$.",
+   "uses": [
+    "lem-coef-simplex-category-last-vertex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  },
+  {
+   "text": "The two maps of steps 4–5 are columnwise weak equivalences. Apply the exchanged-direction assertion of [lem-coef-bisimplicial-diagonal-equivalence]. Their diagonal maps are the required $\\mathrm{BK}_{\\Delta^{\\mathrm{op}}}Z\\to\\operatorname{diag}Z$ and $\\mathrm{KB}_{\\Delta^{\\mathrm{op}}}Z\\to\\operatorname{diag}Z$. All chain identifications and vertex formulas commute with maps of $Z$, so the diagonal maps are natural. In degree zero on the summand $[n_0]=[0]$, both $u$ and $v$ are the identity $[0]\\to[0]$; the resulting map on $Z_{0,0}$ is therefore the identity.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplex-category-last-vertex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1409.8062",
+  "place": "Definition 1.1, Remark 1.2 and Lemmas 1.3–1.4, pp. 3–5; explicit agent proof via simplex categories and diagonal invariance"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Bousfield Kan homotopy colimit preserves objectwise weak homotopy equivalences and compares naturally with the diagonal of a bisimplicial set",
-   "results": "[leanfinder] OK 8 hit(s); top hits: CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex, CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, SSet.Truncated.HomotopyCategory.BinaryProduct.mapHomotopyCategoryProdIdCompInverseIso, SSet.Truncated.HomotopyCategory.BinaryProduct.idProdMapHomotopyCategoryCompInverseIso, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass",
+   "results": "{\"t\": \"2026-10-16T15:53:50Z\", \"tool\": \"leanfinder\", \"query\": \"Bousfield Kan homotopy colimit preserves objectwise weak homotopy equivalences and compares naturally with the diagonal of a bisimplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.Truncated.hoFunctor₂_naturality\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"e1c3ba690b291bb2\"}",
    "date": "2026-10-16",
    "verdict": "no match: the Bousfield hits are ordinary categorical localizations; semantic hits concern the homotopy category of 2-truncated simplicial sets, realization adjunctions or Dold-Kan chain homotopy. None states homotopy-colimit invariance or the bisimplicial comparison."
   },
   {
    "tool": "loogle",
    "query": "\"SimplicialReplacement\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "results": "{\"t\": \"2026-10-16T15:53:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialReplacement\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the Bousfield hits are ordinary categorical localizations; semantic hits concern the homotopy category of 2-truncated simplicial sets, realization adjunctions or Dold-Kan chain homotopy. None states homotopy-colimit invariance or the bisimplicial comparison."
   },
   {
    "tool": "grep",
    "query": "Bousfield|KanColimit|homotopyColimit|HomotopyColimit|simplicialReplacement",
-   "results": "[grep] OK 16 hit(s); top hits: Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean, Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean",
+   "results": "{\"t\": \"2026-10-16T15:53:46Z\", \"tool\": \"grep\", \"query\": \"Bousfield|KanColimit|homotopyColimit|HomotopyColimit|simplicialReplacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"7bdd3bbe06d45627\"}",
    "date": "2026-10-16",
    "verdict": "no match: the Bousfield hits are ordinary categorical localizations; semantic hits concern the homotopy category of 2-truncated simplicial sets, realization adjunctions or Dold-Kan chain homotopy. None states homotopy-colimit invariance or the bisimplicial comparison."
   },
   {
    "tool": "leansearch",
    "query": "The Bousfield Kan simplicial replacement of a simplicial diagram of simplicial sets maps by a weak homotopy equivalence to its diagonal",
-   "results": "[leansearch] OK 8 hit(s); top hits: CategoryTheory.SimplicialObject.diagonal, SSet.toTop, sSetTopAdj, CategoryTheory.SimplicialObject.isCoskeletal_iff, CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension, instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex, CategoryTheory.Idempotents.DoldKan.N_map, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
+   "results": "{\"t\": \"2026-10-16T15:53:46Z\", \"tool\": \"leansearch\", \"query\": \"The Bousfield Kan simplicial replacement of a simplicial diagram of simplicial sets maps by a weak homotopy equivalence to its diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.diagonal\", \"SSet.toTop\", \"sSetTopAdj\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\"], \"digest\": \"71d68b6748863ec5\"}",
    "date": "2026-10-16",
    "verdict": "no match: the Bousfield hits are ordinary categorical localizations; semantic hits concern the homotopy category of 2-truncated simplicial sets, realization adjunctions or Dold-Kan chain homotopy. None states homotopy-colimit invariance or the bisimplicial comparison."
   },
   {
    "tool": "leanfinder",
    "query": "A weak equivalence of diagrams of simplicial sets induces a weak equivalence of simplicial replacements; the replacement of a simplicial diagram compares to the diagonal",
-   "results": "[leanfinder] OK 8 hit(s); top: SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.instCategoryWithFibrations, CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff, CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex",
+   "results": "{\"t\": \"2026-10-16T15:54:38Z\", \"tool\": \"leanfinder\", \"query\": \"A weak equivalence of diagrams of simplicial sets induces a weak equivalence of simplicial replacements; the replacement of a simplicial diagram compares to the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.SimplicialObject.sk\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\"], \"digest\": \"13cc48f530b633f2\"}",
    "date": "2026-10-16",
    "verdict": "no match: Model structures, product comparison and skeletal/Cech constructions do not state homotopy-colimit invariance or the replacement-to-diagonal comparison."
   },
   {
    "tool": "grep",
    "query": "homotopy.?colimit|simplicial.?replacement|Bousfield.Kan",
-   "results": "[grep] OK 0 hit(s); top: ",
+   "results": "{\"t\": \"2026-10-16T15:54:34Z\", \"tool\": \"grep\", \"query\": \"homotopy.?colimit|simplicial.?replacement|Bousfield.Kan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: Model structures, product comparison and skeletal/Cech constructions do not state homotopy-colimit invariance or the replacement-to-diagonal comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-special-resolution-zigzag-nerve",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-bousfield-kan-comparison-calculus",
+  "worker": "stage1",
+  "summary": "Proved invariance using disjoint-union rows and the existing diagonal theorem. Constructed the comparison bisimplicially using the last-vertex theorem for categories of simplices, with the first-vertex version obtained by explicit order reversal. Checked naturality, empty indexing cases, and degree-zero normalization. One new statement-only node carries the general last-vertex theorem.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint paragraph 2; supplies Low Definition 1.1 and Lemmas 1.3–1.4 as required in the special-resolution zigzag comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-218f32297",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-218f32297 (reviewer sub-agent of L); spot-checked: I read the item, the one new node (lem-coef-simplex-category-last-vertex), and the statements of all cited nodes: def-weil-pbc-simplicial-set, lem-coef-kan-quillen-right-proper and lem-coef-bisimplicial-diagonal-equivalence. Sources: I downloaded Low arXiv:1409.8062 and read pp.3-5 (Def 1.1, Rem 1.2, Lem 1.3-1.4). The item's BK/KB chain and face conventions match Low exactly, and the statement is unchanged. The degree-zero [0]-summand clause is not in Low; it comes from the imported statement, the Thomason citer needs it, and step 6 proves it. Kerodon 01NA/02QS/00X4: the last-vertex map from the full category of simplices (all nondecreasing arrows) is a weak homotopy equivalence for every S. The new node states exactly this. I checked by hand that the last-vertex map is simplicial (faces d_p, inner faces, degeneracies). Step 4: T(Z) column = NE(K). Step 5: B(Z) column = N(E(K)^op); u is monotone and simplicial, and the reversal composite equals u(i)=f_1...f_i(0); |S^rev|=|S| holds. Step 6: the exchanged-direction clause of the diagonal lemma applies, and u=v=id on [0]. Step 2: coproduct realization gives the weak equivalence elementarily, including empty index sets. Step 3: the main clause of the diagonal lemma. No cycle: the diagonal lemma's deps do not reach the item or the new node. Small cases tested on the new node: K empty, K=Delta^0 (Delta has a terminal object), K discrete, K=Delta^1. Duplicate search: the DAG grep (last vertex, category of simplices, Thomason, hocolim) and blueprint_refs search (0 hits) found nothing; the aspherical route would be circular via Thomason. Mathlib Simplices.lean has only a preorder and Elements^op, with no theorem; slopmaster2 has nothing. The blueprint ancestor and via are correct. All cited nodes are in the same unit, so no tool_uses are needed. No SGA. No changes made."
+ }
 }
