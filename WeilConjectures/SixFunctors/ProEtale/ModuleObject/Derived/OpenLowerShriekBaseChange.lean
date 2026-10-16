@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
 /-!
@@ -31,15 +30,19 @@ with `j` and `j'` open immersions.
   (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange`) is an
   isomorphism for a cartesian square
   (`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`).
-* **Interchanging proper direct image and extension by zero.** For the inverse of this
-  isomorphism, the mate under the adjunctions `Lg'^* ⊣ Rg'_*` and `Lg^* ⊣ Rg_*` is the *exchange
-  morphism* `Rg'_* ⋙ j_! ⟶ j'_! ⋙ Rg_*`
+* **The exchange morphism.** For the inverse of this isomorphism, the mate under the adjunctions
+  `Lg'^* ⊣ Rg'_*` and `Lg^* ⊣ Rg_*` is the *exchange morphism* `Rg'_* ⋙ j_! ⟶ j'_! ⋙ Rg_*`
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`, where
   the square is written `IsPullback p i' j p'`). For a cartesian square with `g` proper it is an
-  isomorphism, for the coefficient rings `E̲` of a finite extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ`
-  (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`):
-  this is part (3) of the blueprint lemma `det-sf-comp-composition-interchange`, the input of the
-  independence of the lower shriek from the compactification and of its composition law.
+  isomorphism, for the coefficient rings `E̲` of a finite extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ`: this
+  is part (3) of the blueprint lemma `det-sf-comp-composition-interchange`, proved in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange`.
+
+Both morphisms are the exchange morphisms `CategoryTheory.Adjunction.exchangeLeft` and
+`CategoryTheory.Adjunction.exchangeRight` of the abstract mate calculus of
+`WeilConjectures.CategoryTheory.Adjunction.ExchangeMate`
+(`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft`
+and `..._eq_exchangeRight` for the exchange morphism).
 
 ## Main definitions
 
@@ -53,13 +56,6 @@ with `j` and `j'` open immersions.
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`: base
   change for extension by zero (blueprint `sk-def-sfb-open-base-change`).
-- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`
-  and its `_padicAlgCl` version: interchanging proper direct image and extension by zero
-  (blueprint `det-sf-comp-composition-interchange`). The proof restricts to the open `X ⊆ Z`,
-  where it is open base change, and to its closed complement, where both sides vanish by proper
-  base change (`isIso_boundedConstructibleBaseChange_of_isProper`); it needs the pullback along
-  closed immersions and the joint conservativity of the restrictions to an open and its closed
-  complement, which are not available for module objects over `Λ`.
 
 -/
 
@@ -164,6 +160,22 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : C
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep Λ ℓ sq).hom ≫
       boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Λ ℓ j g j'
 
+/-- The exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is the exchange morphism
+`CategoryTheory.Adjunction.exchangeLeft` of the pullback comparison of the square under the
+adjunctions `j_! ⊣ Lj^*` and `j'_! ⊣ Lj'^*`. -/
+lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
+    (sq : CommSq g' j' j g) :
+    boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq =
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ sq.flip) := by
+  unfold boundedConstructibleOpenImmersionLowerShriekBaseChange
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep
+    boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Adjunction.exchangeLeft
+  rfl
+
 /-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
 square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
 an isomorphism.
@@ -261,44 +273,34 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep Λ ℓ sq).hom ≫
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep Λ ℓ
 
+
+/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` is the exchange morphism
+`CategoryTheory.Adjunction.exchangeRight` of the extension-by-zero base-change isomorphism under
+the adjunctions `Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`. -/
+lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchangeRight
+    (sq : IsPullback p i' j p') :
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq =
+      Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq) := by
+  unfold boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
+    Adjunction.exchangeRight
+  rfl
+
+/-- The inverse of the extension-by-zero base-change isomorphism is the exchange morphism
+`CategoryTheory.Adjunction.exchangeLeft` of the pullback comparison. -/
+lemma boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv
+    (sq : IsPullback p i' j p') :
+    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).inv =
+      Adjunction.exchangeLeft
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ sq.toCommSq.flip) :=
+  boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft Λ ℓ sq.toCommSq
+
 end Exchange
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-section ExchangeIsIso
-
-variable {X Z X' Z' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
-  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
-  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-  [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p'.left]
-
-/-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`E`-sheaves (blueprint `det-sf-comp-composition-interchange`, part (3)): the exchange morphism
-`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. Over the
-open `X ⊆ Z` it is the identification `Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed
-complement `Z ∖ X` the stalks of `Rp'_*(i'_! K)` are, by proper base change, the cohomology of
-the fibres of `p'` over `Z ∖ X`, which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`,
-hence vanish. (In the blueprint the square is cartesian by part (1), from the density of `X'`
-in `Z'`.) -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-    (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.continuousMapRingObj E) ℓ sq) :=
-  sorry
-
-/-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`ℚ̄_ℓ`-sheaves (blueprint `det-sf-comp-composition-interchange`, part (3)): the exchange morphism
-`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
-    (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
-  sorry
-
-end ExchangeIsIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing
