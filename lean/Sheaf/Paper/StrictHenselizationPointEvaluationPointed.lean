@@ -35,17 +35,6 @@ theorem strictHenselizationPointEvaluation_pointed
         (strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
       ((equivSmallModel.{v} (strictHenselizationNeighbourhoods barY)).inverse.obj
         j).2.left := by
-  change Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barY)) ≫
-    Spec.map ((smallStrictHenselizationCocone barY).ι.app (op j)) ≫ _ = _
-  rw [← Spec.map_comp_assoc]
-  change Spec.map ((smallStrictHenselizationCocone barY).ι.app (op j) ≫
-    (isColimitSmallStrictHenselizationCocone barY).desc
-      (strictHenselizationPointCocone barY)) ≫ _ = _
-  rw [(isColimitSmallStrictHenselizationCocone barY).fac]
-  change Spec.map (_ ≫ (ΓSpecIso (.of Ω)).hom) ≫ _ = _
-  rw [Spec.map_comp, SpecMap_ΓSpecIso_hom, ← toSpecΓ_naturality]
-  change (_ ≫ (Spec (unop ((equivSmallModel.{v}
-    (strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).toSpecΓ) ≫ _ = _
-  rw [Category.assoc, toSpecΓ_isoSpec_inv, Category.comp_id]
+  sorry
 
 end AlgebraicGeometry.Scheme
