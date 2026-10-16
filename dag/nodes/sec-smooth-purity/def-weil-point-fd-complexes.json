@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, the clause: “let $D^b_{\\mathrm{fd}}(E)$ be the bounded derived category of finite-dimensional $E$-vector spaces”",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Bounded complexes with finite-dimensional cohomology over a field",
@@ -17,22 +17,116 @@
   "place": "the definition of $D^b_{\\mathrm{fd}}(E)$ in the statement"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-finite-dimensional-subspace",
+  "def-sf-induced-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "The full subcategory of the derived category of vector spaces over a field consisting of objects with bounded finite-dimensional cohomology",
+   "results": "CochainComplex.IsKProjective; CategoryTheory.hasExt_iff, HasExt, hasExt_of_hasDerivedCategory; DerivedCategory IsGE/IsLE instances; related Ext/Grothendieck results. No bounded finite-dimensional full-subcategory definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -n 'abbrev Bounded' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; grep -rn 'Abelian (FGModuleCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "DerivedCategory.Bounded (TStructure.lean:207) and instance Abelian (FGModuleCat k) (Algebra/Category/FGModuleCat/Abelian.lean:35): so DerivedCategory.Bounded (FGModuleCat F) is the abstract bounded derived category of finite-dimensional spaces, a different realization; its equivalence with the full subcategory of D(F) defined here is not in Mathlib",
-   "date": "2026-10-09",
+   "query": "finiteDimensional|finite_dimensional|pointFinite|bounded",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:200-207, including DerivedCategory.Bounded at 207; Plus, Ext/TStructure and derivability files. Read Bounded: the bounded subcategory has no finite-dimensionality restriction. Bounded (FGModuleCat F) is a different ambient derived category and cannot identify this item by definition. Search subdirectory: Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded derived category of vector spaces with finite dimensional homology",
+   "results": "HasDerivedCategory.standard; HasDerivedCategory; DerivedCategory and instCategory; CategoryWithHomology.mk; HomologicalComplexUpToQuasiIso and Q; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. These supply ambient categories or bounded representatives, not the joint finiteness predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, FiniteDimensional",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.FullSubcategory",
+   "results": "0 hits; Loogle reported unknown identifier 'ObjectProperty.FullSubcategory'. This is an index/name error, not evidence of absence; local grep located the declaration.",
+   "date": "2026-10-16",
+   "verdict": "unavailable: identifier not indexed by Loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the category of complexes of modules over a field whose homology vanishes outside a finite set and is finite dimensional in each degree",
+   "results": "HomologicalComplex.isGrothendieckAbelian; DerivedCategory.isLE_iff, isGE_iff, isZero_of_isGE; HomotopyCategory acyclic definitions and criteria; HomologicalComplex.Acyclic. Read isLE_iff/isGE_iff: only the cohomological vanishing conditions, not finite-dimensionality.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def FullSubcategory|abbrev FiniteDimensional|def homologyFunctor|def ModuleCat|IsFiniteLength",
+   "results": "25 reported hits, including FiniteDimensional (Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean:75), ModuleCat.isFG (Algebra/Category/FGModuleCat/Basic.lean:49), HomologicalComplexUpToQuasiIso.homologyFunctor (Algebra/Homology/Localization.lean:59), and unrelated finite-length results. Read DerivedCategory.homologyFunctor and homologyFunctorFactors in HomologySequence.lean:34,39 as well. Only constituents.",
+   "date": "2026-10-16",
+   "verdict": "match: constituents only; not the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteDimensional",
+   "results": "FiniteDimensional; finiteDimensional_self; finiteDimensional_pi; fintypeBasisIndex; Module.Basis.finiteDimensional_of_finite; of_finite_basis; related finrank criteria, all in Mathlib.LinearAlgebra.FiniteDimensional.Defs. Read Defs.lean:75-76: abbreviation for Module.Finite. The existing def-weil-finite-dimensional-subspace already carries this notion.",
+   "date": "2026-10-16",
+   "verdict": "match: constituent only; not the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "structure FullSubcategory|instance FullSubcategory.category|def homMk",
+   "results": "CategoryTheory.ObjectProperty.FullSubcategory, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:39; category instance:45; homMk:83. Source read: objects carry P, morphisms are induced from the ambient category. The first file-restricted search printed line numbers as file names; the directory-restricted repeat restored correct file paths. Search subdirectory: CategoryTheory/ObjectProperty/FullSubcategory.lean",
+   "date": "2026-10-16",
+   "verdict": "match: generic full-subcategory construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "structure ModuleCat|def ModuleCat|instance.*[Aa]belian|abelian",
+   "results": "ModuleCat, Mathlib/Algebra/Category/ModuleCat/Basic.lean:56; ModuleCat.abelian, Algebra/Category/ModuleCat/Abelian.lean:75, alongside unrelated hits in ModuleCat files. Read both declarations: specialize to a field F to obtain the abelian category of F-vector spaces. Search subdirectory: Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "match: ambient vector-space category only"
+  },
+  {
+   "tool": "grep",
+   "query": "structure FullSubcategory|instance FullSubcategory.category|def homMk",
+   "results": "CategoryTheory.ObjectProperty.FullSubcategory, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:39; category instance:45; homMk:83. Source read: objects carry P, morphisms are induced from the ambient category. The first file-restricted search printed line numbers as file names; the directory-restricted repeat restored correct file paths. Search subdirectory: CategoryTheory/ObjectProperty",
+   "date": "2026-10-16",
+   "verdict": "match: generic full-subcategory construction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of the derived category of modules having finite total homology over a field",
+   "results": "HasDerivedCategory, DerivedCategory, DerivedCategory.IsGE, IsLE, TStructure.t, isGE_iff, isLE_iff, exists_iso_Q_obj_of_isLE. Inspected the cohomological vanishing definitions; no combined finite-dimensional bounded subcategory. Independent second-reader phrasing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|isPerfect_iff|FiniteDimensional|Module.Finite|finiteTotal",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory. The separate upstream WeilConjectures/CategoryTheory/DerivedCategory/Perfect.lean:96-98 defines IsPerfect by bounded finite-projective representatives, and :479-481 proves its cohomological characterization; these are outside Mathlib and do not define the requested subcategory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteDimensional|Module.Finite|finite.*homology",
+   "results": "8 hits in Mathlib/Algebra/Homology: short-complex homology-preservation declarations and EulerCharacteristic.lean:44. Read EulerCharacteristic.lean:16-45: Euler-characteristic definitions on graded objects and complexes, with finite-support summation results; no derived-category full subcategory.",
+   "date": "2026-10-16",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +168,20 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The node has no recorded Lean declaration or exact Mathlib match. This delivery supplies its existing DAG notion rather than a new helper notion. Defines bounded finite-dimensional cohomology inside D(F), without replacing it by D(FGModuleCat F)."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-point-fd-complexes",
+  "worker": "stage1",
+  "summary": "Definition-only split, with statement unchanged. Read blueprint order 1509, Stacks 05RU and 001D, and the existing Mathlib leaves. Added the existing bounded-derived-subcategories and finite-dimensional-subspace definition nodes to stmt_deps; the existing abstract-derived-category node supplies the ambient category and cohomology functors. The remaining full-subcategory construction and category of vector spaces are basic Mathlib constructions (ObjectProperty.FullSubcategory and ModuleCat F). No new nodes and no proof obligations are needed. Two semantic phrasings and Loogle/LeanSearch/grep searches found the constituents, but no exact named predicate for the joint bounded finite-dimensional condition. Preserved all Lean and audit metadata, and did not use the perfect-complex comparison as an attachment. Second reading: also linked the existing Mathlib leaf def-sf-induced-category for the full-subcategory construction, and made blueprint.from.place identify the exact defining clause.",
+  "blueprint": "Realizes the statement clause in def-weil-finite-coefficient-point, order 1509: “let D^b_fd(E) be the bounded derived category of finite-dimensional E-vector spaces”, in the existing node’s expressly stipulated realization as a full subcategory of D(E). The ancestor has no proof steps; this definition creates neither the comparison with D(FGModuleCat E) nor the point-fibre equivalences. Chapter and unit records are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-fbe9c981c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-fbe9c981c (reviewer sub-agent of L); spot-checked: Read the complete item, report, four dependency statements, master source, Stacks 05RU/001C/001D, and chapter/unit route. Checked small cases, duplicates, and dependency acyclicity. No new nodes or repairs. This definition asserts no comparison with condensed coefficient categories and changes no target hypotheses or base-change morphism. Full findings are in review.md."
  }
 }
