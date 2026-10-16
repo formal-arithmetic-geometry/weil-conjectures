@@ -226,6 +226,58 @@ lemma toZModPow_torsionDualLimitAddEquiv_apply (ψ : torsionDualLimit ℓ M) (t 
         (coordTorsion t n) :=
   toZModPow_dualEval ψ t n
 
+
+section CongrOfTorsion
+
+variable {N : Type*} [AddCommGroup N]
+  (e : ∀ n : ℕ, AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n) ≃+ AddSubgroup.torsionBy N ((ℓ : ℤ) ^ n))
+
+omit [Fact ℓ.Prime] in
+/-- The inverses of compatible isomorphisms of torsion subgroups are compatible. -/
+lemma symm_zsmul_of_torsion
+    (he : ∀ (n : ℕ) (x : AddSubgroup.torsionBy M ((ℓ : ℤ) ^ (n + 1))),
+      (e n ⟨(ℓ : ℤ) • (x : M), AddSubgroup.zsmul_mem_torsionBy_pow x.2⟩ : N) =
+        (ℓ : ℤ) • (e (n + 1) x : N)) (n : ℕ) (y : AddSubgroup.torsionBy N ((ℓ : ℤ) ^ (n + 1))) :
+    ((e n).symm ⟨(ℓ : ℤ) • (y : N), AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ : M) =
+      (ℓ : ℤ) • ((e (n + 1)).symm y : M) := by
+  have h : (⟨(ℓ : ℤ) • (y : N), AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ :
+      AddSubgroup.torsionBy N ((ℓ : ℤ) ^ n)) =
+      e n ⟨(ℓ : ℤ) • ((e (n + 1)).symm y : M),
+        AddSubgroup.zsmul_mem_torsionBy_pow ((e (n + 1)).symm y).2⟩ :=
+    Subtype.ext (by rw [he, AddEquiv.apply_symm_apply])
+  rw [h, AddEquiv.symm_apply_apply]
+
+/-- **Tate modules from compatible isomorphisms of torsion subgroups.** Isomorphisms
+`M[ℓⁿ] ≃ N[ℓⁿ]` compatible with multiplication by `ℓ` induce a `ℤ_ℓ`-linear isomorphism
+`T_ℓ M ≃ T_ℓ N`, acting coordinatewise. -/
+noncomputable def congrOfTorsion
+    (he : ∀ (n : ℕ) (x : AddSubgroup.torsionBy M ((ℓ : ℤ) ^ (n + 1))),
+      (e n ⟨(ℓ : ℤ) • (x : M), AddSubgroup.zsmul_mem_torsionBy_pow x.2⟩ : N) =
+        (ℓ : ℤ) • (e (n + 1) x : N)) : tateModule ℓ M ≃ₗ[ℤ_[ℓ]] tateModule ℓ N where
+  toFun t := ⟨fun n ↦ (e n (coordTorsion t n) : N), fun n ↦ (e n _).2, fun n ↦
+    (he n (coordTorsion t (n + 1))).symm.trans
+      (congrArg (fun z ↦ (e n z : N)) (Subtype.ext (zsmul_coe_succ t n)))⟩
+  invFun t := ⟨fun n ↦ ((e n).symm (coordTorsion t n) : M), fun n ↦ ((e n).symm _).2,
+    fun n ↦ (symm_zsmul_of_torsion e he n (coordTorsion t (n + 1))).symm.trans
+      (congrArg (fun z ↦ ((e n).symm z : M)) (Subtype.ext (zsmul_coe_succ t n)))⟩
+  left_inv t := Subtype.ext <| funext fun n ↦
+    congrArg Subtype.val ((e n).symm_apply_apply (coordTorsion t n))
+  right_inv t := Subtype.ext <| funext fun n ↦
+    congrArg Subtype.val ((e n).apply_symm_apply (coordTorsion t n))
+  map_add' s t := Subtype.ext <| funext fun n ↦
+    congrArg Subtype.val (map_add (e n) (coordTorsion s n) (coordTorsion t n))
+  map_smul' a t := Subtype.ext <| funext fun n ↦
+    congrArg Subtype.val (map_zsmul (e n) ((a.appr n : ℕ) : ℤ) (coordTorsion t n))
+
+lemma coe_congrOfTorsion_apply
+    (he : ∀ (n : ℕ) (x : AddSubgroup.torsionBy M ((ℓ : ℤ) ^ (n + 1))),
+      (e n ⟨(ℓ : ℤ) • (x : M), AddSubgroup.zsmul_mem_torsionBy_pow x.2⟩ : N) =
+        (ℓ : ℤ) • (e (n + 1) x : N)) (t : tateModule ℓ M) (n : ℕ) :
+    ((congrOfTorsion e he t : tateModule ℓ N) : ∀ _ : ℕ, N) n = e n (coordTorsion t n) :=
+  rfl
+
+end CongrOfTorsion
+
 end tateModule
 
 omit [Fact ℓ.Prime] in
