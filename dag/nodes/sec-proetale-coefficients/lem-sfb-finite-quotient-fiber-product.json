@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-finite-quotient-fiber-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-profinite-to-proetale-finite-limits",
+   "place": "Fibre products paragraph: \"Every finite quotient of S_1 times_S S_2 is dominated by one of the form A_1 times_C A_2\", made precise by the compatible-partition inverse system.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-pullback-from-point",
+ "kind": "statement",
+ "title": "A profinite span is approximated by compatible finite quotient spans",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $S_1,S,S_2$ be compact Hausdorff totally disconnected spaces in the smaller universe, and let $f_r:S_r\\to S$ for $r=1,2$ be continuous maps. Here compact means that every open cover has a finite subcover; Hausdorff means that distinct points have disjoint open neighbourhoods; totally disconnected means that every connected subset has at most one point. A finite clopen partition means a finite set of pairwise disjoint nonempty open and closed subsets whose union is the whole space; the partition of the empty space is empty. Let $I$ be the set of triples $i=(\\alpha_{1,i},\\gamma_i,\\alpha_{2,i})$ of such partitions of $S_1,S,S_2$, respectively, such that each block of $\\alpha_{r,i}$ is contained in $f_r^{-1}(c)$ for a block $c\\in\\gamma_i$. Order $I$ by simultaneous refinement, with $i\\le j$ when the partitions at $j$ refine those at $i$. Let $A_{r,i}$ and $C_i$ be the finite sets of blocks of $\\alpha_{r,i}$ and $\\gamma_i$; let $g_{r,i}:A_{r,i}\\to C_i$ send a block to the block containing its image. Give all these finite sets the discrete topology. Set $B_i=\\{(a_1,a_2)\\in A_{1,i}\\times A_{2,i}:g_{1,i}(a_1)=g_{2,i}(a_2)\\}$. Refinement induces maps $b_{ji}:B_j\\to B_i$ for $i\\le j$.\n\nLet $P=\\{(s_1,s_2)\\in S_1\\times S_2:f_1(s_1)=f_2(s_2)\\}$ with the subspace topology, and let $p_i:P\\to B_i$ send a pair to its two blocks. The space $P$ is compact Hausdorff and totally disconnected. The canonical map\n$$P\\longrightarrow\\{(x_i)\\in\\prod_{i\\in I}B_i:b_{ji}(x_j)=x_i\\text{ for every }i\\le j\\},\\qquad p\\longmapsto(p_i(p))_i,$$\nis a homeomorphism, where the set on the right has the subspace topology of the product of the finite discrete spaces $B_i$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY (lemma-profinite, proof by finite clopen partitions) and 0A2P (lemma-describe-limits). The simultaneous compatible-partition assertion is the agent-written topological input to the Fibre products paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md, not a verbatim standalone Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a span of profinite spaces, compatible finite quotient spans approximate its pullback and finite stage images stabilize to the image of the inverse limit",
+   "results": "[leanfinder] OK 8 hit(s); Profinite.NobelingProof.spanCone_isLimit; Profinite.NobelingProof.spanCone; Profinite.NobelingProof.spanFunctor; Profinite.indexCone_isLimit; LightDiagram'.toProfinite; Profinite.indexCone; Profinite.indexFunctor; Profinite.NobelingProof.spanFunctorIsoIndexFunctor_hom_app_hom_hom_apply_coe",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"limit\"",
+   "results": "[loogle] OK 12 hit(s); Profinite.hasColimits; Profinite.hasLimits; Profinite.toTopCat.createsLimits; Profinite.toCompHaus.createsLimits; Profinite.limitCone; Profinite.limitConeIsLimit; Profinite.forget_preservesLimits; Profinite.asLimitCone; Profinite.asLimit; Profinite.isoAsLimitConeLift; Profinite.asLimitConeIso; Profinite.isIso_asLimitCone_lift",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_locallyConstant|image.*limit|limit.*image|finite.*quotient",
+   "results": "[grep] OK 10 hit(s); Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:55:   -- are preimages of clopens from the factors in the limit.; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:109: theorem exists_locallyConstant_fin_two (hC : IsLimit C) (f : LocallyConstant C.pt (Fin 2)) :; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:124: theorem exists_locallyConstant_finite_aux {α : Type*} [Finite α] (hC : IsLimit C); Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:130:   have hff := fun a : α => exists_locallyConstant_fin_two _ hC (ff a); Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:156: theorem exists_locallyConstant_finite_nonempty {α : Type*} [Finite α] [Nonempty α]; Mathlib/Topology/Category/Profinite/Basic.lean:95: to Profinite spaces, given by quotienting a space by its connected components. -/; Mathlib/Topology/Category/Profinite/AsLimit.lean:15: discrete (hence finite) quotients.; Mathlib/Topology/Category/Profinite/Extend.lean:25: the indexing category is `StructuredArrow S toProfinite` instead of `DiscreteQuotient S`.; Mathlib/Topology/Category/Profinite/Extend.lean:48:   obtain ⟨i, g, h⟩ := exists_locallyConstant.{_, u} c hc f'; Mathlib/Topology/Category/Profinite/Nobeling/Span.lean:233:   obtain ⟨J, g, h⟩ := @Profinite.exists_locallyConstant (Finset I)ᵒᵖ _ _ _",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md",
+   "subdirectory": "Topology/Category/Profinite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Profinite pullbacks are inverse limits of pullbacks of compatible finite quotients and images stabilize at a finite stage",
+   "results": "[leansearch] OK 8 hit(s); Profinite.asLimit; Profinite.asLimitConeIso; Profinite.lim; ProfiniteGrp.toLimit_fun; ProfiniteGrp.isIso_toLimit; ProfiniteGrp.isoLimittoFiniteQuotientFunctor; Profinite.isoAsLimitConeLift; ProfiniteAddGrp.instHasLimit",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a pullback of compact totally disconnected spaces to a finite discrete set factors through a pullback of finite clopen partitions",
+   "results": "[leanfinder] OK 8 hit(s); Profinite.instHasExplicitPullbacksTotallyDisconnectedSpaceCarrier; ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal; CompHausLike.HasExplicitPullback; LightProfinite.instHasExplicitPullbacksAndTotallyDisconnectedSpaceCarrierSecondCountableTopology; Profinite.indexFunctor; CompHausLike.pullback.lift; Profinite.NobelingProof.iso_map; CompHausLike.pullback.fst",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A profinite pullback is the inverse limit of finite pullbacks indexed by simultaneous compatible clopen partitions of the three spaces",
+   "results": "[leanfinder] OK 8 hit(s); CompHausLike.pullback; CompHausLike.pullback.isLimit; CompHausLike.pullback.lift; CompHausLike.HasExplicitPullbacks.hasProp; CompHausLike.pullback.isLimit_lift; CompHausLike.HasExplicitPullback; CompHausLike.pullback.fst; CompHausLike.instHasPullbacksOfHasExplicitPullbacks",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete statement; related hits audited in report.md"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofiltered limit of finite discrete pullbacks recovers the pullback of profinite spaces via compatible clopen partitions",
+   "results": "OK 8 hit(s); CompHausLike.pullback.isLimit_lift; CompHausLike.pullback.isLimit; Profinite.instHasExplicitPullbacksTotallyDisconnectedSpaceCarrier; Profinite.asLimitCone; Profinite.limitConeIsLimit; LightProfinite.instHasExplicitPullbacksAndTotallyDisconnectedSpaceCarrierSecondCountableTopology; Profinite.indexCone_isLimit; Profinite.asLimitindexConeIso",
+   "date": "2026-10-16",
+   "verdict": "No complete match: AsLimit concerns all discrete quotients of a single space; explicit pullbacks concern one span; Product.indexCone uses images of finite coordinate projections. None constructs this simultaneous compatible-partition inverse system."
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteQuotient.*(pullback|limit)|preserves.*[Ll]imits|[Ll]imit.*[Pp]ullback|[Pp]ullback.*[Ll]imit",
+   "results": "OK 6 hit(s); Mathlib/Topology/Category/Profinite/CofilteredLimit.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/AsLimit.lean; Mathlib/Topology/Category/Profinite/AsLimit.lean; Mathlib/Topology/Category/Profinite/Extend.lean",
+   "date": "2026-10-16",
+   "verdict": "No complete match: AsLimit concerns all discrete quotients of a single space; explicit pullbacks concern one span; Product.indexCone uses images of finite coordinate projections. None constructs this simultaneous compatible-partition inverse system.",
+   "subdirectory": "Topology/Category/Profinite"
+  },
+  {
+   "tool": "grep",
+   "query": "asLimit|limitComp|commute.*limit|[Pp]ullback",
+   "results": "OK 17 hit(s); first candidates: Mathlib/Topology/Category/Profinite/Product.lean; Mathlib/Topology/Category/Profinite/Product.lean; Mathlib/Topology/Category/Profinite/Product.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Extend.lean; Mathlib/Topology/Category/Profinite/Extend.lean; Mathlib/Topology/Category/Profinite/Extend.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match or one-line specialization. CompHaus.limitConeIsLimit constructs the limit of a supplied diagram; Profinite.asLimitCone uses all discrete quotients of one space; Profinite.indexCone_isLimit uses finite coordinate images of a compact subset. None identifies the specified simultaneous compatible-partition diagram of a span. Loogle returns quotient epimorphism/finality instances, and source grep returns these same general constructions and ordinary explicit pullbacks.",
+   "subdirectory": "Topology/Category/Profinite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"Profinite\"",
+   "results": "OK 3 hit(s); first candidates: LightProfinite.instCountableDiscreteQuotient; Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone; Condensed.instFinalOppositeDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceCostructuredArrowFintypeCatProfiniteOpToProfiniteOpPtAsLimitConeFunctorOp",
+   "date": "2026-10-16",
+   "verdict": "No exact match or one-line specialization. CompHaus.limitConeIsLimit constructs the limit of a supplied diagram; Profinite.asLimitCone uses all discrete quotients of one space; Profinite.indexCone_isLimit uses finite coordinate images of a compact subset. None identifies the specified simultaneous compatible-partition diagram of a span. Loogle returns quotient epimorphism/finality instances, and source grep returns these same general constructions and ordinary explicit pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram of Stone spaces is the inverse limit of its finite discrete quotient diagrams, and limits commute with pullbacks",
+   "results": "OK 8 hit(s); first candidates: CompHaus.limitConeIsLimit; CompHaus.limitCone; Profinite.indexCone_isLimit; Profinite.asLimitCone; Profinite.presentation; Profinite.limitCone; LightProfinite.limitCone; Profinite.isIso_indexCone_lift",
+   "date": "2026-10-16",
+   "verdict": "No exact match or one-line specialization. CompHaus.limitConeIsLimit constructs the limit of a supplied diagram; Profinite.asLimitCone uses all discrete quotients of one space; Profinite.indexCone_isLimit uses finite coordinate images of a compact subset. None identifies the specified simultaneous compatible-partition diagram of a span. Loogle returns quotient epimorphism/finality instances, and source grep returns these same general constructions and ordinary explicit pullbacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-to-proetale-finite-limits",
+  "date": "2026-10-16"
+ }
+}

@@ -3,56 +3,219 @@
  "blueprint": {
   "is": "det-ind-heart-extensions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Ind-constructible sheaves are closed under extensions",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$ and let $0\\to N\\to M\\to B\\to0$ be exact in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ with\n$N,B\\in\\IndCons(X,\\Lambda)$. Then $M\\in\\IndCons(X,\\Lambda)$.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda$ be $\\underline E$ or $\\underline{\\Qlb}$, with the condensed coefficient conventions of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed]. Put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and $\\mathcal A=\\Mod_{\\Lambda_X}(\\Sh(X_{\\mathrm{proét}},\\Ab))$, the module-object category [sk-def-sfb-module-objects]. All diagrams and colimits are small in the fixed universe of the site and coefficient sheaves [def-weil-pbc-category-colimit].\n\nWrite $\\Cons(X,\\Lambda)$ for the constructible sheaves [sk-def-sfb-constructible] and $\\IndCons(X,\\Lambda)$ for the full subcategory of $\\mathcal A$ consisting of objects isomorphic to filtered colimits in $\\mathcal A$ of objects of $\\Cons(X,\\Lambda)$. If\n$$0\\longrightarrow N\\longrightarrow M\\longrightarrow B\\longrightarrow0$$\nis a short exact sequence [def-weil-pbc-exact-sequence] in $\\mathcal A$ with $N,B\\in\\IndCons(X,\\Lambda)$, then $M\\in\\IndCons(X,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.md",
   "place": "node det-ind-heart-extensions, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-exact-sequence"
+ ],
  "proof": [
   {
-   "text": "Write $N=\\varinjlim_\\beta D_\\beta$ and $B=\\varinjlim_\\alpha C_\\alpha$ as filtered colimits of\nconstructible sheaves.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Pullback to $C_\\alpha$.* Let $M_\\alpha=M\\times_BC_\\alpha$; it is an extension\n$0\\to N\\to M_\\alpha\\to C_\\alpha\\to0$, with class $e_\\alpha\\in\\Ext^1_\\Lambda(C_\\alpha,N)$. By\n[sk-lem-constructible-ext-continuity] (degree $1$, targets in degree $0$),\n\n$$\n\\Ext^1_\\Lambda(C_\\alpha,N)=\\varinjlim_\\beta\\Ext^1_\\Lambda(C_\\alpha,D_\\beta),\n$$\n\nso $e_\\alpha$ is the pushout along $D_\\beta\\to N$ of an extension\n$0\\to D_\\beta\\to M_{\\alpha\\beta}\\to C_\\alpha\\to0$ for some $\\beta$. For $\\beta'\\geq\\beta$ let\n$M_{\\alpha\\beta'}$ be its pushout along $D_\\beta\\to D_{\\beta'}$. Each $M_{\\alpha\\beta'}$ is an extension\nof constructible sheaves, hence constructible (part (1) of [sk-lem-coefficient-heart]).",
+   "text": "The ambient category $\\mathcal A$ has all small colimits and exact filtered colimits. Indeed, [sk-def-sfb-sheaf-tensor] supplies the usual closed symmetric monoidal Grothendieck coefficient category $\\Ab$ and its sheaf tensor product. Apply [lem-weil-pbc-sheaf-tensor-closed] to the small pro-étale site and $\\Ab$: the category $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ is Grothendieck abelian, closed symmetric monoidal, with additive tensor. The ring object $\\Lambda_X$ is commutative. Thus [lem-sfb-modobj-grothendieck] applies to $(\\mathcal C,\\Lambda_X)$ and makes $\\mathcal A$ Grothendieck abelian. Its small colimits and exact filtered colimits are precisely the axioms in [def-sp-grothendieck-abelian].",
    "uses": [
-    "sk-lem-constructible-ext-continuity",
-    "sk-lem-coefficient-heart"
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "def-sp-grothendieck-abelian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); blueprint Extensions proof, final paragraph, ambient exactness"
+   }
   },
   {
-   "text": "*Colimit over $\\beta'$.* Pushouts commute with colimits, so\n$\\varinjlim_{\\beta'}M_{\\alpha\\beta'}$ is the pushout of $M_{\\alpha\\beta}$ along $D_\\beta\\to N$, which\nrepresents $e_\\alpha$, i.e. is isomorphic to $M_\\alpha$ as an extension. Thus\n$M_\\alpha\\in\\IndCons(X,\\Lambda)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Colimit over $\\alpha$.* Filtered colimits are exact, so\n$\\varinjlim_\\alpha M_\\alpha=M\\times_B\\varinjlim_\\alpha C_\\alpha=M\\times_BB=M$. By\n[det-ind-heart-filtered-colimits], $M\\in\\IndCons(X,\\Lambda)$.",
+   "text": "Choose small filtered presentations $N=\\varinjlim_{i\\in I}D_i$ and $B=\\varinjlim_{a\\in H}C_a$, with all $D_i,C_a$ constructible, by the definition of $\\IndCons$ in the statement. For each $a$ let $M_a=M\\times_B C_a$. Pulling back gives $0\\to N\\to M_a\\to C_a\\to0$: apply [lem-weil-pbc-pushout-short-exact-sequence] in $\\mathcal A^{\\mathrm{op}}$ to the reversed original sequence and $C_a^{\\mathrm{op}}\\leftarrow B^{\\mathrm{op}}$. This is legitimate because the axioms of [def-sp-abelian] are self-dual (kernels exchange with cokernels and monomorphisms with epimorphisms). Reversing the resulting pushout sequence gives the claimed pullback sequence, with the map from $N$ induced by its injection into $M$ and the zero map to $C_a$. For every arrow $a\\to a'$ the universal property of the pullback gives $M_a\\to M_{a'}$; these maps fix $N$ and commute with $C_a\\to C_{a'}$, and uniqueness proves the identity and composition laws.",
    "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pullback construction (1); Tags 08N3 and 08N4; blueprint Pullback to C_alpha"
+   }
+  },
+  {
+   "text": "Fix $a$. By the degree-one case of [lem-coef-yoneda-derived-ext-comparison] the pullback extension has a class $e_a\\in\\operatorname{Ext}^1_{\\mathcal A}(C_a,N)$, with Ext interpreted in the ordinary derived category. The final field-coefficient clause of [sk-lem-constructible-ext-continuity] applies: $X$ is Noetherian, $C_a$ is constructible, the coefficient ring is one of the two allowed field coefficients, and the diagram $D_i[0]$ is uniformly zero in degrees below $0$. It gives the canonical isomorphism\n$$\\varinjlim_{i\\in I}\\operatorname{Ext}^1_{\\mathcal A}(C_a,D_i)\\xrightarrow{\\sim}\\operatorname{Ext}^1_{\\mathcal A}(C_a,N).$$",
+   "uses": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "sk-lem-constructible-ext-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
+    "place": "Pullback to C_alpha, displayed Ext continuity isomorphism"
+   }
+  },
+  {
+   "text": "Choose a class $t\\in\\operatorname{Ext}^1(C_a,D_i)$ whose image is $e_a$ for some $i$. Here the passage from a colimit element to one stage is elementary: the colimit of a diagram of abelian groups is the quotient of their direct sum by the transition relations, as follows by testing homomorphisms out of that quotient; every element is a finite sum of stage elements, and filteredness moves that sum to one common stage. By [lem-coef-yoneda-derived-ext-comparison], $t$ is represented by $0\\to D_i\\to T\\to C_a\\to0$. Its pushout $L=N\\amalg_{D_i}T$ is short exact over $(N,C_a)$ by [lem-weil-pbc-pushout-short-exact-sequence]. Naturality of the Yoneda-to-derived-Ext isomorphism in its second variable identifies its class with the image of $t$, namely $e_a$. Thus $L$ and $M_a$ are equivalent Yoneda one-extensions. Every morphism in a zigzag of such one-extensions has identity endpoint maps, so [lem-weil-pbc-short-five-lemma] makes its middle map an isomorphism. Composing these maps and their inverses gives $L\\cong M_a$ as extensions. No such isomorphisms for different $a$ need to be chosen compatibly.",
+   "uses": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XU (lemma-yoneda-extension), 06XV (lemma-ext-1); homology.tex Tag 010I pushout functoriality; blueprint Pullback to C_alpha, finite-stage extension"
+   }
+  },
+  {
+   "text": "Use the small undercategory $J=i/I$: its objects are arrows $u:i\\to j$, and its morphisms are arrows between the targets commuting with $u$. It is filtered by the three axioms in [def-weil-pbc-category-colimit]: it contains $1_i$; for $u:i\\to j$ and $v:i\\to k$, choose $r:j\\to l$ and $s:k\\to l$, then equalize the parallel arrows $ru,sv:i\\to l$ by $t:l\\to l'$, so $tru=tsv$ gives a common target in $J$; and for parallel arrows $h,h':u\\to v$ in $J$, an arrow $q$ in $I$ equalizing their underlying arrows gives a morphism in $J$ equalizing them. It is nonempty, with initial object $1_i$. The diagram $u\\mapsto D_j$ has colimit $N$. To check this directly, a cocone on this diagram extends to $I$ by sending $D_k$ through a chosen common target of $k$ and $i$. Two choices give the same map after taking a common target and equalizing the two induced arrows from $k$ and the two from $i$; the cocone relations then give equality. For an arrow $f:k\\to k'$, compute the map from $D_k$ using a common target of $i$ and $k'$ and the composite from $k$ through $f$; independence of choices gives exactly the map from $D_{k'}$ composed with $D(f)$. An extension is unique because compatibility with each chosen arrow from $k$ to a common target forces that component. Thus the two cocone universal properties coincide. A constant diagram with identity transitions over $J$ has its displayed object as colimit, since $J$ has initial object $1_i$ and is connected.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition Tag 002V (definition-directed); colimit universal property; blueprint Colimit over beta-prime, categorical meaning of beta-prime >= beta"
+   }
+  },
+  {
+   "text": "For $u:i\\to j$ set $P_u=D_j\\amalg_{D_i}T$, using $D(u)$ and the injection $D_i\\to T$. By [lem-weil-pbc-pushout-short-exact-sequence] it fits in $0\\to D_j\\to P_u\\to C_a\\to0$. Both endpoints are constructible. The Noetherian consequence of [det-lem-coefficient-heart-closure], which states part (1) of the unit's cited coefficient-heart lemma in the needed setting, makes $P_u$ constructible. A morphism $u\\to v$ in $J$ induces $P_u\\to P_v$ by the pushout universal property, using the transition $D_j\\to D_{j'}$ and $1_T$; uniqueness proves functoriality. This constructs a small filtered diagram of constructible sheaves.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
+    "place": "Pullback to C_alpha, pushouts of the finite-stage extension and constructible extension closure"
+   }
+  },
+  {
+   "text": "The maps $P_u\\to L=N\\amalg_{D_i}T$ induced by $D_j\\to N$ and $1_T$ exhibit $L$ as $\\varinjlim_{u\\in J}P_u$. Indeed a cocone $P_u\\to W$ is exactly a compatible family $D_j\\to W$ together with maps $T\\to W$ agreeing on $D_i$. All the maps from $T$ are the same because $1_i$ is initial in $J$ and all transition maps on $T$ are identities. By step 5 the family from the $D_j$ is uniquely a map $N\\to W$; its compatibility with $T\\to W$ is precisely agreement on $D_i$. Such a pair is uniquely a map $N\\amalg_{D_i}T\\to W$. This proves the colimit assertion by its universal property [def-weil-pbc-category-colimit], rather than invoking an uncited commutation theorem for pushouts and colimits. Steps 4 and 6 therefore express $M_a\\cong L$ as a small filtered colimit of constructible sheaves, so $M_a\\in\\IndCons(X,\\Lambda)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
+    "place": "Colimit over beta-prime, explicit universal-property verification"
+   }
+  },
+  {
+   "text": "Take the filtered colimit over $a\\in H$ of the exact sequences from step 2. It is exact by the ambient Grothendieck property proved in step 1 and [def-sp-grothendieck-abelian]. The colimit of the constant $N$-diagram is $N$, because $H$ is nonempty and any two objects have a common target, so every cocone on a constant identity diagram is a single map out of $N$. The colimit of $(C_a)$ is $B$ by the chosen presentation. Hence the maps $M_a\\to M$ yield a commutative diagram of short exact sequences with top row $0\\to N\\to\\varinjlim_a M_a\\to B\\to0$, bottom row the given sequence, and endpoint maps identities. By [lem-weil-pbc-short-five-lemma], the canonical map $\\varinjlim_a M_a\\to M$ is an isomorphism. Each $M_a$ is ind-constructible by step 7, so [det-ind-heart-filtered-colimits] gives $\\varinjlim_a M_a\\in\\IndCons(X,\\Lambda)$. The definition of this full subcategory is invariant under isomorphism, and therefore $M\\in\\IndCons(X,\\Lambda)$.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-short-five-lemma",
     "det-ind-heart-filtered-colimits"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
+    "place": "Colimit over alpha; Stacks sites-modules.tex Tag 03DB for exactness and homology.tex Tag 05QB for short five lemma"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "def-sp-abelian",
+  "lem-coef-yoneda-derived-ext-comparison",
   "sk-lem-constructible-ext-continuity",
-  "sk-lem-coefficient-heart",
+  "lem-weil-pbc-short-five-lemma",
+  "def-weil-pbc-category-colimit",
+  "det-lem-coefficient-heart-closure",
   "det-ind-heart-filtered-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.proof.md",
+  "place": "Complete extension argument of the blueprint, supplemented by the categorical constructions in Stacks Tags 010I, 06XU, 06XV, 03DA and 03DB. The inherited Noetherian standing setting is made explicit."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extensions of two sheaves that are filtered colimits of constructible pro etale sheaves are ind constructible",
+   "results": "8 hits; ; LightProfinite.hasSheafify, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern existence of sheafification and colimits of (light) condensed objects, not extension closure of ind-constructible pro-etale modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"extension\"",
+   "results": "12 hits; ; Lean.MapDeclarationExtension.find?, Lean.Parser.ParserExtension.Entry.kind, Lean.Parser.ParserExtension.OLeanEntry.kind, Lean.Parser.ParserExtension.State.kinds, Lean.NameMapExtension.find?, Lean.Compiler.LCNF.CacheExtension.find?, Lean.Meta.Grind.Extension, Lean.Meta.Grind.ExtensionState",
+   "date": "2026-10-16",
+   "verdict": "No match: the substring query returns Lean environment/parser extensions, not mathematical extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|[Ii]nd[Cc]onstructible|[Cc]onstructible.*[Ee]xtension",
+   "results": "5 hits; ; Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: regex hits are Lean environment ConstantKind declarations, not constructible sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subcategory of ind constructible sheaves is closed under extensions",
+   "results": "8 hits; ; CategoryTheory.ObjectProperty.IsClosedUnderExtensions, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.recOn, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.casesOn, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.rec, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "No match: ObjectProperty.IsClosedUnderExtensions defines the property; the Serre-class implication assumes the required closure information. Neither proves ind-constructible extension closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category if a small extension closed subcategory has Ext1 commuting with filtered colimits then its ind objects are closed under extensions",
+   "results": "8 hits; ; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.hasExt_iff_small_ext, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.instAbelianInd, CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize, CategoryTheory.hasExt_iff",
+   "date": "2026-10-16",
+   "verdict": "No match: isGrothendieckAbelian_ind and instAbelianInd concern the abstract ind-category, not extension closure of its image in the ambient module category. Existence of Ext does not give Ext continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind, CategoryTheory.ObjectProperty.IsClosedUnderExtensions",
+   "results": "0 hits; ; ",
+   "date": "2026-10-16",
+   "verdict": "No match: no theorem combines Ind objects and IsClosedUnderExtensions."
+  },
+  {
+   "tool": "grep",
+   "query": "extension|ShortExact",
+   "results": "0 hits; ; ; subdirectory CategoryTheory/Abelian/Indization.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: the Indization source has no extension or ShortExact theorem; read the file, which establishes only the abstract ind-category Abelian instance."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|IsSerreClass|EssImage",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "No match: no declaration for extension closure of the essential image of Ind objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If finitely presented objects form a Serre subcategory of a locally coherent Grothendieck abelian category then filtered colimits of those objects are extension closed",
+   "results": "8 hits; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize, CategoryTheory.ObjectProperty.IsSerreClass, CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.IsGrothendieckAbelian.hasColimits, CategoryTheory.ObjectProperty.instIsSerreClassTop",
+   "date": "2026-10-16",
+   "verdict": "No match: the Serre-class implication assumes extension closure, and the abstract Ind Grothendieck theorem does not establish closure of its image in this ambient category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"essImage\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "No match: no declaration for extension closure of the essential image of Ind objects."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -67,5 +230,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ind-heart"
+ "unit": "sk-prop-ind-heart",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ind-heart-extensions",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: X and the coefficient data were not introduced, and the imported proof invoked constructible Ext continuity without its required Noetherian hypothesis. Restore the Noetherian standing setting explicitly, retain the module-object/condensed coefficient conventions, and define IndCons inline. The source route is retained with exact pullbacks, Yoneda extension classes, filtered undercategories, explicit pushout-colimit universal properties, and short five lemma. Reused all necessary generic nodes; no new nodes. All eight steps have checked citation statements and verbatim quotes.",
+  "blueprint": "The opening presentation and Pullback to C_alpha are realized in steps 1-4 and 6; Colimit over beta-prime in steps 5-7; Colimit over alpha in step 8. The Noetherian correction is the same ambient correction already reviewed for sk-lem-constructible-ext-continuity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf-category Grothendieck and closed tensor structure needed to apply the existing module-object theorem; no statement of the ind-heart unit supplies the ambient category structure."
+   },
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Generic classification and naturality of Yoneda extensions versus derived Ext, used to descend an extension class and identify its pushout; the ind-heart unit does not state this homological algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-coef-yoneda-derived-ext-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-2f3791292",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-2f3791292 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All eight steps check, including Ext descent, nonmonic pushouts, filtered undercategories, and both colimit identifications. The reported Noetherian restriction fits the target setting. Accepted both declared generic tool uses; no new nodes or repairs. Detailed checks are in review.md."
+ }
 }
