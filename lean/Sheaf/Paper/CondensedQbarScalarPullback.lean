@@ -6,6 +6,8 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.Paper.CondensedQbarCoefficientConstruction
+import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Compatibility of bounded coefficient constructions
 Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.

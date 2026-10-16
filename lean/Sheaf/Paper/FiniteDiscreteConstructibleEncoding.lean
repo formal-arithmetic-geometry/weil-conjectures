@@ -8,6 +8,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Finite presentations under the common coefficient encoding -/
 

@@ -8,6 +8,9 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-!
 # Descending compatible local submodules to one finite coefficient field

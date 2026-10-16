@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.IntegralResidueTensorPresentation
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
 public import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResiduePullSquare
 
 /-! # Ordinary pullback data and the derived residue tensor square
 

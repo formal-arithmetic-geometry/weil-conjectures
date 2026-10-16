@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Scalar-basis decompositions for the finite-subextension-valued algebraic closure
 

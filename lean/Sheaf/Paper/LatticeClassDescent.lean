@@ -6,6 +6,10 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.Paper.LatticeSheafBasic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
 
 /-!
 # Descent of integral lattice classes

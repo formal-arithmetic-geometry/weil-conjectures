@@ -5,6 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteDerivedCoefficientData
 import Sheaf.CategoryTheory.ThreeStepAdjunctionComparison
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-! # The specified exchange from coherent coefficient comparisons -/
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CondensedQbarCoefficientConstruction
 public import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Compatibility of bounded coefficient constructions
 Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.

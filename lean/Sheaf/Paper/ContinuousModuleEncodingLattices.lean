@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientNormalization
+import Sheaf.AlgebraicGeometry.LisseLatticeCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.Paper.ContinuousCoefficientRealizations
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Lattice compatibility of the continuous module encoding
 
