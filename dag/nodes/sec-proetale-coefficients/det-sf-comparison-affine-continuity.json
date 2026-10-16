@@ -329,5 +329,39 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-ac110523c (reviewer sub-agent of L); spot-checked: I read the whole item, all 18 proof-dependency statements, the main-20261015 statement and proof, and Stacks 099W (proetale.tex l.3986 lemma-compare-cohomology) and 0GIT (etale-cohomology.tex l.7852 lemma-colimit-complexes); every tag/label pair matches tags/tags. The statement is the blueprint's verbatim, for an arbitrary scheme and an arbitrary unital ring. It is true and not weakened. Step 1 shows that module and abelian RΓ agree through acyclicity, using 03FD evaluation comparison and Leray (3) with Ab made Grothendieck through the constant integer sheaf; it does not assume that forgetting preserves injectives. Step 2 uses only site clause 1 of the presentation node, the weakly-étale localization node with A=Z, the 0GLZ sectionwise formula and the uniqueness-characterized composition isomorphism. Step 3 uses unrestricted 099W(1) on the underlying sheaves of injective modules. Step 4 applies lem-weil-pbc-derived-etale-cohomology-limit with T=X; it needs only qcqs affine stages and affine transitions. This replaces the DAG's finite-commutative continuity node, which cannot cover arbitrary Λ. Step 5 builds one injective model on X and gets the degreewise colimit from step 4 applied to each I^m[0]. Step 6 is genuinely elementary from exact filtered colimits. There are no new nodes. A closure traversal of 1016 nodes finds no cycle, and the DAG has no duplicate or generalization of the item. No SGA source is used. One fault (B2/B7) is fixed in fixes/dag/nodes/sec-proetale-coefficients/det-sf-comparison-affine-continuity.json. The convention 'left-derived colimit of the coherent geometric diagram ..., as justified in the proof' was undefined. It is now the explicit degreewise colimit of the strict diagram I^•(U_i), for any bounded-below injective representative I^• of K, which inducing the displayed composite on H^n. def-sp-injective-resolutions is added to stmt_deps, and steps 5 and 6 are aligned with the new wording; the displayed assertion is unchanged. Recommended tool_uses (maintainer-owned): the 12 off-unit lem-weil-pbc-*/lem-weil-proetale-*/lemma-weil-pbc-* statement tools listed in review.md. The unit record sk-prop-sf-comparison is stale maintainer metadata: it carries chapter sec-smooth-purity, the old finite-ring statement, uses=[] and no steps.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01cf37b75",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Item node changed only in lean; statement verbatim equals the file signature; all 13 declarations exist. Clause check: arbitrary scheme X, arbitrary Ring Λ : Type (u+1) (project convention, same as proEtaleSiteComparisonModules and parent unit; ULift covers Type u rings), D+ of Sheaf (ModuleCat Λ), small nonempty cofiltered I, affine étale stages, affine transitions, U the limit in schemes (hc), any bounded-below injective representative L with e. Conclusions: étale continuity map iso (unit along c.pt.hom plus graph restriction), pro-étale composite iso (comparisonAdjunction unit plus restriction along c.π, evaluation at c.pt), per-stage computation iso; derived isos give every H^n. True by Stacks 0GIT/099W/03FD. Helpers are real data; #print axioms shows sorryAx only in the main theorem; source and blueprint docstrings present; six-step proof docstring; Mathlib Scheme.ProEt and the general comparisonUpperStar, no substitute. Consistent with parent unit affineBoundedBelowComparison (same encoding; it cites this item). Report has Worker report and Second reading by Q38. nt_compile.py: exit 0, no errors or warnings, 4.0 s; probe import confirmed the signatures. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleAffineContinuity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.affineContinuityEtaleCone",
+   "AlgebraicGeometry.ProEtale.affineContinuityEtaleUnit",
+   "AlgebraicGeometry.ProEtale.affineContinuityProEtaleUnit",
+   "AlgebraicGeometry.ProEtale.affineContinuityDiagram",
+   "AlgebraicGeometry.ProEtale.affineContinuityEtaleCocone",
+   "AlgebraicGeometry.ProEtale.affineContinuityProEtaleCocone",
+   "AlgebraicGeometry.ProEtale.affineContinuitySectionsAdditive",
+   "AlgebraicGeometry.ProEtale.affineContinuityDerivedUnit",
+   "AlgebraicGeometry.ProEtale.affineContinuityTargetComparison",
+   "AlgebraicGeometry.ProEtale.affineContinuityStageRestriction",
+   "AlgebraicGeometry.ProEtale.affineContinuityEtaleMap",
+   "AlgebraicGeometry.ProEtale.affineContinuityProEtaleMap",
+   "AlgebraicGeometry.ProEtale.proEtaleAffineContinuity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineContinuity.lean",
+  "statement": "theorem proEtaleAffineContinuity {I : Type u} [SmallCategory I] [IsCofiltered I] (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] (D : I ⥤ X.Etale) (c : Cone (D ⋙ Scheme.toProEt X)) (hc : IsLimit ((Scheme.ProEt.forget X ⋙ Over.forget X).mapCone c)) [∀ i : I, IsAffine (D.obj i).left] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (L : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a : ℤ) [L.IsStrictlyGE a] [∀ n : ℤ, Injective (L.X n)] (e : DerivedCategory.Q.obj L ≅ K.obj) : IsIso (affineContinuityEtaleMap D c K.obj L e) ∧ IsIso (affineContinuityProEtaleMap D c K.obj L e) ∧ ∀ i : I, IsIso (DerivedCategory.Q.map (affineContinuityStageRestriction (D.obj i) L) ≫ affineContinuityTargetComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.obj i).hom) (Scheme.Etale.mk (𝟙 (D.obj i).left)) K.obj L e)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing fixed-coefficient Sheaf (ModuleCat Λ) encoding and unrestricted upstream comparison inverse image; no finiteness or commutativity restriction. The maps are built from the strict diagram of section complexes of any bounded-below injective representative, adjunction units, sheaf restrictions, and derived evaluation units. Invertibility of the two arrows with common colimit source is the canonical two-arrow assertion; the second displayed arrow is uniquely determined by their factorization. The final clause records that each stage complex computes its specified derived sections."
  }
 }

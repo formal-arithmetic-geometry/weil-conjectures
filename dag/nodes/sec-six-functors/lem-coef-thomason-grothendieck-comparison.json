@@ -248,5 +248,42 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a5c405047 (reviewer sub-agent of L); spot-checked: I read all of the item, both new nodes and every cited node statement. Low (arXiv 1409.8062) is not in literature/, so I fetched it and read Def. 1.1, Rem. 1.2, Lem. 1.3, Def. 1.5 and Thm. 1.6 on pp. 3-6. The item's Th and Gr arrow directions and its BK/KB conventions match Low exactly, and the statement is unchanged. I recomputed all 8 steps and they are correct: the simplicial structure of tau_F, the comma resolution with R_c strictly natural and a natural unit (u,1), the decomposition B_{.,q} = coproduct over NE_q of N(pi(e_q) under C), the commuting eta squares in the prism and its simplicial compatibility via a_{ji}a_{0j}=a_{0i}, and the identities Gr_C F = (Th_C F^op)^op and KB_C X = (BK_C X^op)^op for the same C. Small cases checked: C empty, empty fibres, C terminal, constant terminal fibres. Both new nodes are true, statement-only and not duplicates. The cylinder node is |K x Delta^1| = |K| x I (one compact factor, Hovey 3.1.8), with correct endpoints. The basepoint node's concentric-cube beta_gamma has the right direction (Hatcher Lemma 1.19 and section 4.1). Both are needed for the Step 5 prism, because diag B is not a nerve. Hovey and Hatcher are online-only, so I checked those two mathematically rather than against page text. One fault, C5: Steps 2 and 4 re-derive the existing unsplit node lem-coef-nerve-natural-homotopy-equivalence (same unit) instead of citing it. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-thomason-grothendieck-comparison.json: Steps 2 and 4 now cite that node, proof_deps is recomputed and there is no cycle. No node dropped and no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0425d1831",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read the node, both statement deps (BK/KB module defs, Kan-Quillen weak-equivalence class), Mathlib Grothendieck/opFunctor/nerve and the full module. Th = Grothendieck F and Gr = (Grothendieck (F ⋙ Cat.opFunctor))ᵒᵖ match the node's arrow directions exactly. thVertex/thArrow and grVertex/grArrow are the node's step-1 chain map and its dual, with the element at c_0 for BK and c_r for KB as in the dependency. All 5 conjuncts match the node: both weak equivalences; both naturality squares via bkMap/kbMap and nerveMap of Grothendieck.map/grMap; reindexing with independent D universes; degree-zero normalization; objectwise invariance with the exact hypothesis. No extra assumptions and all universes bound. Only 4 theorems use sorry, and I recomputed thArrow_laws, grArrow_laws and simplex_naturality as true; definitions have real data. Node differs from the clone only in lean; statement is verbatim; docstrings carry source and blueprint; worker and second-reading sections are present. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings. Non-blocking observation: Mathlib's pseudofunctor CoGrothendieck has the same arrow shape as Gr, but Gr is an abbrev of Mathlib constructions, not a duplicate notion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ThomasonGrothendieckComparison",
+  "declaration": "SSet.Thomason.comparison",
+  "declarations": [
+   "SSet.Thomason.Th",
+   "SSet.Thomason.Gr",
+   "SSet.Thomason.grMap",
+   "SSet.Thomason.grPre",
+   "SSet.Thomason.thVertex",
+   "SSet.Thomason.thArrow",
+   "SSet.Thomason.thArrow_laws",
+   "SSet.Thomason.thSimplex",
+   "SSet.Thomason.grVertex",
+   "SSet.Thomason.grArrow",
+   "SSet.Thomason.grArrow_laws",
+   "SSet.Thomason.grSimplex",
+   "SSet.Thomason.simplex_naturality",
+   "SSet.Thomason.thComparison",
+   "SSet.Thomason.grComparison",
+   "SSet.Thomason.comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ThomasonGrothendieckComparison.lean",
+  "statement": "theorem comparison (C : Type v) [Category.{w} C] : (∀ F : C ⥤ Cat.{t, u}, Enhanced.IsWeakHomotopyEquivalence (thComparison F) ∧ Enhanced.IsWeakHomotopyEquivalence (grComparison F)) ∧ (∀ (F G : C ⥤ Cat.{t, u}) (η : F ⟶ G), BousfieldKan.bkMap (Functor.whiskerRight η nerveFunctor) ≫ thComparison G = thComparison F ≫ nerveMap (Grothendieck.map η) ∧ BousfieldKan.kbMap (Functor.whiskerRight η nerveFunctor) ≫ grComparison G = grComparison F ≫ nerveMap (grMap η)) ∧ (∀ (D : Type v') [Category.{w'} D] (U : D ⥤ C) (F : C ⥤ Cat.{t, u}) (n : SimplexCategoryᵒᵖ), (∀ x : BousfieldKan.BKObj D (U ⋙ F ⋙ nerveFunctor) n, thSimplex F n (BousfieldKan.bkReindexApp U (F ⋙ nerveFunctor) n x) = thSimplex (U ⋙ F) n x ⋙ Grothendieck.pre F U) ∧ (∀ x : BousfieldKan.KBObj D (U ⋙ F ⋙ nerveFunctor) n, grSimplex F n (BousfieldKan.kbReindexApp U (F ⋙ nerveFunctor) n x) = grSimplex (U ⋙ F) n x ⋙ grPre U F)) ∧ (∀ (F : C ⥤ Cat.{t, u}) (c : C) (z : F.obj c), (thComparison F).app (op ⦋0⦌) ⟨ComposableArrows.mk₀ c, ComposableArrows.mk₀ z⟩ = ComposableArrows.mk₀ (⟨c, z⟩ : Th C F) ∧ (grComparison F).app (op ⦋0⦌) ⟨ComposableArrows.mk₀ (op c), ComposableArrows.mk₀ z⟩ = ComposableArrows.mk₀ (op (⟨c, op z⟩ : Grothendieck (F ⋙ Cat.opFunctor)))) ∧ (∀ (F G : C ⥤ Cat.{t, u}) (η : F ⟶ G), (∀ c, Enhanced.IsWeakHomotopyEquivalence (nerveMap (η.app c).toFunctor)) → Enhanced.IsWeakHomotopyEquivalence (nerveMap (Grothendieck.map η)) ∧ Enhanced.IsWeakHomotopyEquivalence (nerveMap (grMap η)))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Explicit comparison maps on every simplex, with separately named functor-law and simplicial-naturality obligations already belonging to this node. Both naturality clauses, vertex normalization, and objectwise invariance are stated. The oplax category reuses the opposite of Mathlib Grothendieck on opposite fibers; no additional category is axiomatized."
  }
 }
