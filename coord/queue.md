@@ -1,6 +1,6 @@
 # Work queue
 
-22 items; claim with `tools/claim.py next <group> [--stage N]`.
+21 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,13 +8,13 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (22)
+## Stage 3: modules to prove (21)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 1 | disputed |
-| `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis` | 4 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 1 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalModelGluing` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
@@ -32,5 +32,4 @@
 | `Sheaf.Paper.LatticeClassDescent` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero` | 14 | 1 | proof |
 | `Sheaf.Paper.LatticePairMatrixAtBasis` | 14 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
