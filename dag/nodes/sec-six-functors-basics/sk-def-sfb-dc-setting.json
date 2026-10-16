@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-dc-setting",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Setting for $D_{\\mathrm{cons}}$: schemes of finite type over a field",
@@ -16,30 +16,246 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-nagata-sketch-data"
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-module-objects",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sfb-compactification-over-field"
  ],
  "proof": [
   {
-   "text": "The scheme $\\operatorname{Spec}k$ is affine, hence quasi-compact and quasi-separated. So\n[lem-sfb-compactification-over-base] with $S=\\operatorname{Spec}k$ shows that every morphism\nof the setting has a compactification, and $c_f$ is the choice of\n[def-sfb-compactification-over-field]. For a compactification $c=(i,p)$ of $f\\colon X\\to Y$, the\nstructure morphism $Z\\to\\operatorname{Spec}k$ is the composite of the proper morphism $p$ with\n$Y\\to\\operatorname{Spec}k$. Both factors are separated and of finite type, hence so is the\ncomposite. The morphisms $p$ and $i$ are over $k$ because $p$ is, by construction, and\n$p\\circ i=f$ is.",
+   "text": "For the commutative condensed ring $\\Lambda$, use [sk-def-sfb-pulled-back-coefficients] to read $\\Lambda_X=p_X^*\\Lambda$ as a commutative ring object in abelian sheaves on $X_{\\mathrm{proét}}$. The category $\\Mod_{\\Lambda_X}$ is exactly the module-object category of [sk-def-sfb-module-objects]. Specialize the definition [sk-def-sfb-bounded-constructible] to this ring object and to abelian sheaves: its objects are the bounded complexes with constructible cohomology, and its morphisms are the ambient derived morphisms. The notation $D_{\\mathrm{cons}}(X,\\Lambda)$ abbreviates this full subcategory. This introduces notation, with no additional condition on $\\Lambda$.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement, paragraphs 1–2 and the first display (the coefficient-category notation)."
+   }
+  },
+  {
+   "text": "Put $S=\\operatorname{Spec}k$ and write $a_X:X\\to S$ and $a_Y:Y\\to S$ for the structure morphisms. The affine-scheme lemma [lem-weil-pbc-affine-scheme-qcqs] makes $S$ quasi-compact and quasi-separated. By [def-weil-finite-type-morphism], finite type of $a_X$ and $a_Y$ includes quasi-compactness. Also $Y$ is quasi-compact as a scheme: apply clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to the quasi-compact map $a_Y$ and the quasi-compact base $S$. Thus $X$ is separated and of finite type over $S$, and $Y$ is separated and quasi-compact over $S$, as required in the next step.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement, paragraph 3, compactification-existence assertion; imported proof first sentence, with the quasi-compactness hypotheses made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-compactification-over-base] with this $S$, these structure morphisms, and the given $S$-morphism $f:X\\to Y$. Every hypothesis was checked in step 2, so a compactification $c=(X\\xrightarrow{i}Z\\xrightarrow{p}Y)$ exists. Unpacking [sk-def-nagata-sketch-data], $i$ is a quasi-compact open immersion, $p$ is proper, and $p\\circ i=f$. In particular the open-immersion clause in the statement holds with the stronger quasi-compactness included in the referenced definition.",
    "uses": [
     "lem-sfb-compactification-over-base",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement, paragraph 3, first sentence; imported proof application of lem-sfb-compactification-over-base."
+   }
+  },
+  {
+   "text": "For any such $c$, give $Z$ the structure morphism $a_Z=a_Y\\circ p$. By [def-weil-proper-morphism], properness of $p$ includes separatedness and finite type. By [def-weil-finite-type-morphism], $p$ and $a_Y$ are locally of finite type and quasi-compact. Apply clause (e) of [lem-weil-pbc-proper-fp-permanence] to $p$ and $a_Y$: their composite $a_Z$ is separated and locally of finite type. To check its quasi-compactness using only the cited statements, first apply clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to $p$ and the quasi-compact scheme $Y$ of step 2; this makes $Z$ quasi-compact. Its map $a_Z$ to the quasi-separated scheme $S$ is then quasi-compact by clause (1) of that same node. The definition of finite type now gives that $a_Z$ is of finite type. Consequently $Z$ belongs to the setting.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU (lemma-separated-permanence), composition clause; morphisms.tex Tags 01W1 (definition-proper) and 01T3 (lemma-composition-finite-type). Quasi-compactness is checked via the two clauses of the cited permanence node."
+   }
+  },
+  {
+   "text": "With $a_Z=a_Y\\circ p$, the equality saying that $p$ is over $k$ is its definition. The equality saying that $i$ is over $k$ is $a_Z\\circ i=(a_Y\\circ p)\\circ i=a_Y\\circ(p\\circ i)=a_Y\\circ f=a_X$: the middle identity uses the compactification equality in [sk-def-nagata-sketch-data], and the last identity is precisely the hypothesis that $f$ is a $k$-morphism in [def-weil-scheme-over-base]. Thus both maps stay over the same field, without imposing any additional hypothesis.",
+   "uses": [
+    "sk-def-nagata-sketch-data",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement, paragraph 3, sentence that i and p are k-morphisms; imported proof last sentence, with the structure morphism and equality written out."
+   }
+  },
+  {
+   "text": "The definition [def-sfb-compactification-over-field] fixes one compactification $c_f$ for precisely these hypotheses on $X$, $Y$ and $f$. Here $Y$ is quasi-compact over $k$ by step 2. Use that already specified choice for the displayed $c_f$; steps 4–5 apply to it as to every compactification. The last sentence of the item records which compactification subsequent shriek constructions use; it does not construct a shriek functor or assert preservation of constructibility or existence of an adjoint for every condensed ring.",
+   "uses": [
     "def-sfb-compactification-over-field"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+    "place": "Statement, final display and the naming of the chosen compactification; imported proof reference to def-sfb-compactification-over-field."
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-bounded-constructible",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-sfb-compactification-over-base",
+  "sk-def-nagata-sketch-data",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-scheme-over-base",
   "def-sfb-compactification-over-field"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
-  "place": "## Proof"
+  "place": "The definition and compactification assertion, expanded from the imported proof paragraph and the existing compactification-over-base and choice nodes; geometric permanence checked against Stacks Tags 01KU, 01T3, 01W1."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|compactificationOverField|HasCompactification",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible derived category of modules over condensed coefficient rings on a scheme with chosen compactification",
+   "results": "Condensed, CondensedMod, LightCondMod and categorical instances; none states the full setting.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsSeparated",
+   "results": "IsProper.toIsSeparated and isProper_iff, Proper.lean; geometric component already represented by def-weil-proper-morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; existing geometry matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated schemes of finite type over a field, the bounded constructible derived category with condensed ring coefficients and the choice of a Nagata compactification of every morphism",
+   "results": "No exact match; hits include affine transition limits, constructible images, and condensed modules; none gives the setting or its condensed coefficient derived category.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparated.comp|locallyOfFiniteType_comp|LocallyOfFiniteType.comp|QuasiCompact.comp",
+   "results": "Separated.lean:262 IsSeparated.comp_iff; FiniteType.lean:68 locallyOfFiniteType_comp; QuasiCompact.lean:69 quasiCompact_comp and :150 compactSpace_of_compactSpace. Existing permanence nodes cover the needed clauses.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; existing geometry matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.CategoryStruct.comp",
+   "results": "IsSeparated.instCompScheme, IsSeparated.of_comp, IsSeparated.comp_iff and related results; composition clause read at Separated.lean:75.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; existing geometry matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism to a separated finite type scheme over a field has separated finite type source, composition preserves separated morphisms and finite type morphisms",
+   "results": "IsProper multiplicativity, IsSeparated multiplicativity and IsProper.toIsSeparated; these are existing geometric dependencies, not the coefficient-category definition.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; existing geometry matches"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|Compactification",
+   "results": "FinitePresentation.lean:117–124: constructible image of a morphism of finite presentation; no compactification or constructible derived category.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full subcategory of the derived category of sheaves on a scheme pro-etale site consisting of bounded complexes with constructible cohomology, coefficients pulled back from a condensed commutative ring",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Condensed and LightCondensed constructions; no pro-etale condensed-coefficient constructibility setting.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification for a morphism between varieties over a field and bounded constructible complexes of sheaves of modules",
+   "results": "8 hits, including compactSpace_of_universallyClosed, Scheme.Hom.normalization, and affine-transition-limit lemmas. None states the combined compactification and condensed module-object category setting.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "8 hits: quasi-finiteness characterizations, normalization open immersions, local flat descent, and the proper valuative criterion. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|DCons|DerivedCategoryBoundedConstructible|compactification",
+   "results": "Scoped to Mathlib/AlgebraicGeometry: zero hits. The same pattern over all Mathlib returned unrelated affine vaddConst names and topological compactifications.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible derived categories of module objects over condensed commutative rings for separated finite type schemes over a field with chosen Nagata compactifications",
+   "results": "8 hits: Condensed.finFree, CondensedMod, LightCondAb, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod, and AB4/AB4Star instances. These describe condensed modules for an ordinary ring; none states the pro-etale module-object category and chosen compactifications of this setting.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Compactification\"",
+   "results": "0 hits; the service answered successfully.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism of separated schemes of finite type over a field has a compactification whose ambient scheme is separated and of finite type over the field",
+   "results": "8 hits: isProper_eq, IsProper.mk, IsProper.toIsSeparated, IsSeparated, Scheme.instIsSeparatedOfIsSeparated, IsSeparated.instQuasiSeparated, compactSpace_of_universallyClosed, and IsSeparated.mk. These give properness/separatedness facts, not existence of a compactification or the complete item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasCompactification|compactificationOverField|DerivedCategoryBoundedConstructible",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata theorem: compactify a map of varieties, proper intermediate scheme over the target; constructible derived sheaves of modules for a condensed ring object",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafStonean, CondensedMod, Condensed.profiniteFree, CondensedMod.IsSolid, Scheme.Hom.normalizationDiagram, and CondensedMod.ofSheafProfinite. These give ordinary-ring condensed modules or normalization diagrams, not the pro-etale condensed-ring-object setting and Nagata choice.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsProper",
+   "results": "7 hits: HasOfPostcompProperty for proper/separated, IsProper.toIsSeparated, IsProper.mk, isProper_iff, IsProper.of_comp, isProper_eq, and a Zariski-main finite-image lemma. These are properness components already covered by existing dependencies, not the entire setting.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; existing geometry matches"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|compactificationOverField|ModuleObject.*Constructible|D_cons",
+   "results": "Scoped to Mathlib/AlgebraicGeometry: 2 hits, EllipticCurve/Jacobian/Basic.lean:90 and EllipticCurve/Projective/Basic.lean:90, both Matrix.head_cons tactic syntax. Neither concerns Nagata compactification or constructible module-object derived categories.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -64,5 +280,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-dc-setting",
+  "worker": "stage1",
+  "summary": "Kept the source statement exactly. Added the existing definition dependencies for module objects, schemes over a base, finite type, properness, and the specified compactification choice. Expanded the imported geometric proof into six steps; existence uses the existing over-base lemma, and closure of the ambient scheme uses existing permanence leaves. Checked every cited statement, its hypotheses, the field structure morphism, and the distinction between fixed categorical sheaf coefficients in slopmaster2 and condensed ring-object coefficients here. No new nodes, attachments, or new Mathlib leaves.",
+  "blueprint": "The current sk-def-sfb-dc-setting statement paragraphs 1–2 and first display are step 1; paragraph 3 existence is steps 2–3; its closure-in-the-setting sentence is steps 4–5; the final display and choice convention are step 6. The imported proof paragraph is expanded without changing the route. The current _section.md has no separate Proof section."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-69aa93c8f",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-69aa93c8f (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, checked every cited statement against current blueprint and Stacks sources, and verified compactification hypotheses, coefficient category, field-structure equalities, edge cases, duplicates, and dependency acyclicity. No new nodes or repairs needed. Detailed checks are in review.md."
+ }
 }

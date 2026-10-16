@@ -17,62 +17,290 @@
  },
  "kind": "statement",
  "title": "Augmented injective coresolutions detect Ext of cycles",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $T\\in\\mathcal A$, and fix an injective resolution [def-sp-injective-resolutions] $0\\to T\\xrightarrow{\\varepsilon}I^0\\to I^1\\to\\cdots$. Define the acyclic integer cochain complex $E(T)$ by $E(T)^0=T$, $E(T)^{k+1}=I^k$ for $k\\geq0$, and $E(T)^k=0$ for $k<0$, with differential $\\varepsilon$ in degree zero and the resolution differentials thereafter. Let $X$ be an acyclic integer cochain complex and assume $\\operatorname{Ext}^1_{\\mathcal A}(X^1,T)=0$, where $\\operatorname{Ext}^1$ denotes short exact extension classes. Put $Z^nX=\\ker d_X^n$. With $\\operatorname{Hom}^r(X,E(T))=\\prod_n\\operatorname{Hom}_{\\mathcal A}(X^n,E(T)^{n+r})$ and differential $\\delta h=d_Eh-(-1)^rhd_X$, there is a natural isomorphism\n$$H^0\\operatorname{Hom}^{\\bullet}(X,E(T))\\cong\\operatorname{Ext}^1_{\\mathcal A}(Z^2X,T).$$\nFor a cochain map $f:X\\to E(T)$, the corresponding extension class is the pushout of $0\\to Z^1X\\to X^1\\to Z^2X\\to0$ along the unique map $Z^1X\\to T$ through which $f^0:X^0\\to T$ factors via $d_X^0:X^0\\twoheadrightarrow Z^1X$.",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $T\\in\\mathcal A$, and fix an injective resolution [def-sp-injective-resolutions] $0\\to T\\xrightarrow{\\varepsilon}I^0\\to I^1\\to\\cdots$. Define the acyclic integer cochain complex $E(T)$ by $E(T)^0=T$, $E(T)^{k+1}=I^k$ for $k\\geq0$, and $E(T)^k=0$ for $k<0$, with differential $\\varepsilon$ in degree zero and the resolution differentials thereafter. Let $X=(X^n,d_X^n)_{n\\in\\mathbf Z}$ be an integer cochain complex, meaning $d_X^{n+1}d_X^n=0$, that is acyclic, meaning $\\operatorname{im}d_X^{n-1}=\\ker d_X^n$ in every degree, and assume $\\operatorname{Ext}^1_{\\mathcal A}(X^1,T)=0$, where $\\operatorname{Ext}^1$ denotes isomorphism classes of short exact extension sequences (short exactness is as in [def-weil-pbc-exact-sequence]) with the Baer addition; the displayed vanishing means that every short exact extension of $X^1$ by $T$ splits. Put $Z^nX=\\ker d_X^n$. With $\\operatorname{Hom}^r(X,E(T))=\\prod_n\\operatorname{Hom}_{\\mathcal A}(X^n,E(T)^{n+r})$ and differential $\\delta h=d_Eh-(-1)^rhd_X$, define $H^0\\operatorname{Hom}^{\\bullet}(X,E(T))$ as $\\ker(\\delta:\\operatorname{Hom}^0\\to\\operatorname{Hom}^1)/\\operatorname{im}(\\delta:\\operatorname{Hom}^{-1}\\to\\operatorname{Hom}^0)$. There is a natural isomorphism\n$$H^0\\operatorname{Hom}^{\\bullet}(X,E(T))\\cong\\operatorname{Ext}^1_{\\mathcal A}(Z^2X,T).$$\nFor a cochain map $f:X\\to E(T)$, the corresponding extension class is the pushout of $0\\to Z^1X\\to X^1\\to Z^2X\\to0$ along the unique map $Z^1X\\to T$ through which $f^0:X^0\\to T$ factors via $d_X^0:X^0\\twoheadrightarrow Z^1X$; the isomorphism is natural under cochain maps of such acyclic sources and morphisms of augmented injective resolutions (with the displayed Ext-one vanishing for each source involved).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
   "place": "Agent-formulated tool for proof paragraph 2: Injective-tail test for cycles of an acyclic dg-left complex; WANTED: Gillespie (2004), the enough-injectives part of Theorem 3.12. Agent-formulated explicit test; no Stacks tag states this formula for an unbounded source."
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i_n:Z^nX\\hookrightarrow X^n$ for the kernel inclusion and $p_n:X^n\\twoheadrightarrow Z^{n+1}X$ for the differential with its codomain restricted to its image; thus $d_X^n=i_{n+1}p_n$. Acyclicity and the exactness definition give $\\operatorname{im}d_X^{n-1}=Z^nX$. To check that $p_n$ is epic without an elementwise-surjectivity assumption, take $y:D\\to Z^{n+1}X$. Exactness and part (b) of the refinement lemma lift $i_{n+1}y$ through $d_X^n$ after an epimorphism $\\rho:D'\\twoheadrightarrow D$. Cancelling $i_{n+1}$ gives a lift of $y\\rho$ through $p_n$. Part (a) of that lemma makes $p_n$ epic. Consequently $0\\to Z^nX\\xrightarrow{i_n}X^n\\xrightarrow{p_n}Z^{n+1}X\\to0$ is short exact for every $n$. By the cited cokernel statement, $p_n$ is a cokernel of $i_n$; every map out of $X^n$ killing $i_n$ therefore factors uniquely through $p_n$. The same resolution exactness says that $E(T)$ is acyclic: in degree zero $\\varepsilon$ is monic, in positive degrees its consecutive images equal kernels, and all negative terms are zero.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-sp-injective-resolutions",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction below proof paragraph 2 (derived coefficient adjunction): cycle sequences and the augmented injective tail. Epimorphic refinement: homology.tex Tags 05PK and 08N5; cokernel property: homology.tex Tags 010E and 010C, as recorded in the cited exact-epi-cokernel node."
+   }
+  },
+  {
+   "text": "Let $M$ be the abelian group of cochain maps $X\\to E(T)$. In degree zero, $\\delta f=0$ is precisely $d_E^nf^n=f^{n+1}d_X^n$ for all $n$. In degree minus one, $\\delta h=d_Eh+hd_X$. Thus $H^0\\operatorname{Hom}^{\\bullet}(X,E(T))=M/\\{d_Eh+hd_X\\}$, with the operations induced by addition of maps. This is a substitution into the differential specified in the statement, and fixes the homotopy sign.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent calculation below proof paragraph 2: degree-zero cocycles and degree-minus-one coboundaries."
+   }
+  },
+  {
+   "text": "For $f\\in M$, the degree-minus-one chain equation says $f^0d_X^{-1}=0$. Since $d_X^{-1}=i_0p_{-1}$ with $p_{-1}$ epic, $f^0i_0=0$. Step 1 gives a unique $g_f:Z^1X\\to T$ with $f^0=g_fp_0$. This assignment $r:M\\to\\operatorname{Hom}(Z^1X,T)$ is additive, by uniqueness of factorization. To lift a given $g$, set $f^0=gp_0$ and all $f^n=0$ for $n<0$; these satisfy the chain equations in negative degrees.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent calculation below proof paragraph 2: the factor through the first cycle and the initial values for upward induction."
+   }
+  },
+  {
+   "text": "Suppose $n\\ge0$ and the components $f^k$ through $n$ have been chosen with the chain equations in degrees $k<n$. Put $w=d_E^nf^n$. Then $w d_X^{n-1}=d_E^nd_E^{n-1}f^{n-1}=0$ (at $n=0$ this follows also from $f^0i_0=0$). Cancel the epic $p_{n-1}$ to get $wi_n=0$, and factor $w=v_np_n$ by Step 1. The target of $v_n:Z^{n+1}X\\to E(T)^{n+1}=I^n$ is injective, so extend $v_n$ along $i_{n+1}$ to $f^{n+1}:X^{n+1}\\to I^n$. Then $f^{n+1}d_X^n=f^{n+1}i_{n+1}p_n=v_np_n=d_E^nf^n$. Ordinary induction on $n$ gives a cochain map with $r(f)=g$; in particular $r$ is surjective. For $n=0$, $v_0=\\varepsilon g$, so this is the promised extension of the prescribed augmentation data.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof below proof paragraph 2: injective extension at each positive degree. Injectivity is the extension property in def-sp-injective-resolutions; no boundedness of X or enough injectives for other objects is used."
+   }
+  },
+  {
+   "text": "If $k=f'-f=d_Eh+hd_X$, then $E(T)^{-1}=0$ gives $k^0=h^1d_X^0$. Cancelling $p_0$ in $g_kp_0=h^1i_1p_0$ gives $g_{f'}-g_f=h^1i_1$. Conversely suppose $g_{f'}-g_f=ui_1$ for $u:X^1\\to T$. Put $h^n=0$ for $n\\le0$ and $h^1=u$. Then $k^0=h^1d_X^0$, and the homotopy equations hold in every degree at most zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof below proof paragraph 2: necessary restriction condition for a homotopy, and its initial degree-zero equation."
+   }
+  },
+  {
+   "text": "For the converse in Step 5, suppose $n\\ge1$, $h^n$ has been chosen, and $k^j=d_E^{j-1}h^j+h^{j+1}d_X^j$ for all $j<n$. Define $w_n=k^n-d_E^{n-1}h^n$. Since $k$ is a cochain map, $w_nd_X^{n-1}=d_E^{n-1}(k^{n-1}-h^nd_X^{n-1})=d_E^{n-1}d_E^{n-2}h^{n-1}=0$. Thus $w_ni_n=0$, and $w_n=v_np_n$. Now $E(T)^n=I^{n-1}$ is injective, so extend $v_n$ along $i_{n+1}$ to $h^{n+1}:X^{n+1}\\to E(T)^n$. This gives the next homotopy equation. Induction constructs all components. It follows from Steps 3–6 that the rule $[f]\\mapsto[g_f]$ is a well-defined bijective homomorphism\n$$H^0\\operatorname{Hom}^{\\bullet}(X,E(T))\\longrightarrow Q:=\\operatorname{Hom}(Z^1X,T)/\\operatorname{im}\\bigl(\\operatorname{Hom}(X^1,T)\\xrightarrow{i_1^*}\\operatorname{Hom}(Z^1X,T)\\bigr).$$\nSurjectivity is Step 4; injectivity is this homotopy construction applied to a difference whose factor extends to $X^1$. This uses no map from homotopy classes into the unquotiented Hom group.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof below proof paragraph 2: full null-homotopy induction, including its base and residual equation, and the resulting quotient identification."
+   }
+  },
+  {
+   "text": "Put $A=Z^1X$, $B=X^1$, $C_0=Z^2X$, $i=i_1$, $p=p_1$. For each $g:A\\to T$, apply the pushout theorem to $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C_0\\to0$. Denote its exact pushout by $0\\to T\\xrightarrow{j_g}P_g\\xrightarrow{q_g}C_0\\to0$, with $v_g:B\\to P_g$, $v_gi=j_gg$, and $q_gv_g=p$. Define $\\partial(g)=[P_g]$. We will prove directly that $\\partial$ is additive, has kernel $\\operatorname{im}i^*$, and is surjective; no derived Ext or smallness hypothesis on Ext in all degrees is introduced.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks homology.tex, Tag 010I (section-extensions), item (2): pushout extension. Agent expansion of the connecting-map hint for Tag 05E2 (lemma-six-term-sequence-ext)."
+   }
+  },
+  {
+   "text": "If $g=ui$ for some $u:B\\to T$, the pair $1_T,u$ descends by the pushout universal property to $a:P_g\\to T$ with $aj_g=1_T$ and $av_g=u$. Also $v_g-j_gu$ kills $i$ and hence equals $sp$ for a unique $s:C_0\\to P_g$. Since $q_gsp=p$ and $p$ is epic, $q_gs=1_{C_0}$, so $P_g$ splits. Conversely, a section $s$ of $q_g$ makes $q_g(v_g-sp)=0$. The kernel description of $j_g$ in the short exact sequence gives $u:B\\to T$ with $j_gu=v_g-sp$. Restriction to $A$ and cancellation of $j_g$ give $ui=g$. Thus the pushout class is split exactly when $g$ extends to $B$. We also record the full equality criterion without assuming any Baer group laws: if $\\phi:P_g\\to P_h$ is an isomorphism of extensions, then $\\phi v_g-v_h$ has zero composite with $q_h$, so it equals $j_hu$ for a unique $u:B\\to T$; restriction to $A$ gives $ui=g-h$. Conversely if $ui=g-h$, the maps $j_h:T\\to P_h$ and $v_h+j_hu:B\\to P_h$ agree on $A$ via $g$, so the pushout property gives $P_g\\to P_h$ inducing identities on the endpoints. The five lemma makes it an isomorphism. Thus $[P_g]=[P_h]$ if and only if $g-h$ extends to $B$.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks homology.tex, Tag 010I (section-extensions): explicit pushout universal-property proof of the zero-class test in the Tag 05E2 connecting map."
+   }
+  },
+  {
+   "text": "For clarity, pullbacks of extensions used below are exact without assuming sections of epimorphisms. Given $0\\to V\\xrightarrow{j}N\\xrightarrow{q}W\\to0$ and $a:U\\to W$, form $L=\\ker((a,-q):U\\oplus N\\to W)$; it is the pullback, since its maps to $U,N$ satisfy $a\\pi_U=q\\pi_N$ and have the universal property by the kernel universal property. The map $V\\to L$ with components $(0,j)$ is monic and is the kernel of $\\pi_U$. To show $\\pi_U$ epic, take any $b:D\\to U$. By the epimorphic-refinement criterion, $ab$ lifts through $q$ after some epimorphism $D'\\twoheadrightarrow D$. The pair of that lift and $b|_{D'}$ gives a lift to $L$. The same criterion now makes $\\pi_U$ epic. Hence $0\\to V\\to L\\to U\\to0$ is short exact. This construction applies equally to $V=T\\oplus T$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks homology.tex, Tag 010I (section-extensions), item (1), and Tags 05PK and 08N5 as stated in lem-sp-abelian-refinements: expanded proof of exactness of extension pullbacks."
+   }
+  },
+  {
+   "text": "To verify additivity, form $L=P_g\\times_{C_0}P_h$. Its sequence $0\\to T\\oplus T\\to L\\to C_0\\to0$ is exact: project to $P_g$, using Step 9 on the extension $P_h$ to see that projection is epic; composing with $q_g$ is epic, and its kernel consists, by the two kernel universal properties, of the pairs $(j_gt_1,j_ht_2)$, namely $T\\oplus T$. Push out this sequence along the sum $T\\oplus T\\to T$, obtaining $R$. This is the Baer sum defining addition of extension classes. The pair $(v_g,v_h):B\\to L$ has restriction $(j_gg,j_hh)$ on $A$, so its composite $b:B\\to R$ satisfies $bi=j_R(g+h)$. The pushout property gives $P_{g+h}\\to R$ inducing identity maps on $T$ and $C_0$. The five lemma for the exact rows $0\\to T\\to P_{g+h}\\to C_0\\to0$ and $0\\to T\\to R\\to C_0\\to0$ makes it an isomorphism. Thus $\\partial(g+h)=\\partial(g)+\\partial(h)$. Also $\\partial(0)$ is split by Step 8; therefore $\\partial$ preserves the specified addition and its zero fibre is $\\operatorname{im}i^*$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks homology.tex, Tag 010I (section-extensions), Baer-sum construction; Tag 05QB (lemma-five-lemma). Agent-written verification of additivity rather than an invocation of the omitted proof of Tag 05E2."
+   }
+  },
+  {
+   "text": "Let $0\\to T\\xrightarrow{j}N\\xrightarrow{q}C_0\\to0$ be any extension. Pull it back along $p:B\\to C_0$ by Step 9, obtaining an extension of $B$ by $T$. The stated vanishing hypothesis $\\operatorname{Ext}^1(B,T)=0$ makes the pullback isomorphic to the split sequence $0\\to T\\to T\\oplus B\\to B\\to0$, hence split. A section of its projection to $B$, followed by its projection to $N$, is a morphism $b:B\\to N$ with $qb=p$. Since $qbi=0$, there is a unique $g:A\\to T$ with $jg=bi$. The pushout property gives $P_g\\to N$ with components $j,b$, inducing identity maps on $T$ and $C_0$. Apply the five lemma to the two extension rows to see it is an isomorphism. Thus $\\partial$ is surjective. The equality criterion of Step 8 and surjectivity give a bijection $Q\\to\\operatorname{Ext}^1(C_0,T)$; Step 10 shows that this bijection carries the quotient group operation to Baer addition. In particular it also proves the required abelian-group laws for Baer addition here, with the split extension as zero, and yields $Q\\cong\\operatorname{Ext}^1(C_0,T)$. Composing with Step 6 is the required isomorphism, and its value on $[f]$ is the pushout along the unique factor $g_f$, exactly as specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks homology.tex, Tag 010I (section-extensions), pullback and pushout constructions; Tag 05QB. Agent-written surjectivity proof of the Tag 05E2 boundary under the given Ext-one vanishing."
+   }
+  },
+  {
+   "text": "We check naturality without making any functorial claim about the arbitrary injective extensions. For a cochain map $u:Y\\to X$ between admissible acyclic sources, $p_0^Xu^0=Z^1(u)p_0^Y$, so $g_{fu}=g_fZ^1(u)$. More generally for a commuting map $(a,b,c)$ between short exact rows $(A'\\to B'\\to C')\\to(A\\to B\\to C)$, pushout along $ga$ in the top row has a map to $P_g\\times_CC'$: its $B'$ component is $(v_gb,p')$ and its $T$ component is $(j_g,0)$. It is well defined because $bi'=ia$, and is identity on $T,C'$, hence an isomorphism by the five lemma and Step 9. Thus $\\partial'(ga)=c^*\\partial(g)$, which proves source naturality for the cycle rows. For $t:T\\to T'$ and a map $e:E(T)\\to E(T')$ with $e^0=t$, the factor satisfies $g_{ef}=tg_f$. Iterated pushout universal properties identify the extension pushed out first by $g_f$ and then by $t$ with the pushout by $tg_f$, proving coefficient naturality. Such an augmented comparison exists: apply the lifting construction of Steps 3–4 with source $E(T)$, target $E(T')$, and $g=t$ after identifying $Z^1E(T)$ with $T$ by the monomorphism $\\varepsilon$. Two such comparisons are homotopic by Steps 5–6 with $u=0$ since their degree-zero components agree. In particular different injective resolutions give the same identification with Ext, and comparisons for identity and composition give the identity and composite maps. Assume the displayed Ext-one vanishing holds for each source pair under consideration. The countably many positive-degree choices make actual morphisms in the Hom product even if X is unbounded in either direction.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent naturality argument below proof paragraph 2, using Stacks homology.tex Tag 010I pushout/pullback universal properties and Tag 05QB; the comparison induction is already proved in Steps 3–6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-sp-injective-resolutions",
+  "lem-sp-abelian-refinements",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "def-sp-abelian",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: technical cycle-test foundation introduced in lem-coef-hereditary-cotorsion-complex-lift, Step 9. Explicit lifting and homotopy inductions, and an expanded Yoneda pushout argument from homology.tex Tags 010I and 05E2 (whose proof is omitted there). No literature source states the full augmented-tail formula verbatim."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Homotopy classes from an exact cochain complex into an augmented injective coresolution detect Ext1 of its cycles",
-   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.HasExt.standard, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.sub_extMk, CategoryTheory.Abelian.Ext",
-   "date": "2026-10-16",
-   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Acyclic complex Hom into injective resolution with augmentation computes Ext1 of cycle objects",
-   "results": "8 hits: CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extMk",
-   "date": "2026-10-16",
-   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"HomComplex\", \"IsKInjective\"",
-   "results": "4 hits: CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_symm_apply",
-   "date": "2026-10-16",
-   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
-  },
-  {
    "tool": "grep",
-   "query": "(augmented|augmentation).*(injective|Injective)|Ext.*(cocycle|cycle)",
-   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+   "query": "(augmented|augmentation).*(injective|Injective)|Ext.*(cycle|cocycle)",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/Ab.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean; subdirectory Algebra/Homology",
    "date": "2026-10-16",
-   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
   },
   {
    "tool": "leansearch",
    "query": "An augmented injective resolution detects first Ext of cycles of an exact complex",
-   "results": "8 hits: CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.mk, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.mk, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
    "date": "2026-10-16",
-   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"InjectiveResolution\", \"Ext\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes from an exact cochain complex into an augmented injective coresolution detect Ext1 of its cycles",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.ProjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass|extAddEquivCohomologyClass|extClass_naturality|equivOfIsKInjective",
+   "results": "12 hits; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic complex Hom into injective resolution with augmentation computes Ext1 of cycle objects",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extMk",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass|extAddEquivCohomologyClass|extClass_naturality|equivOfIsKInjective",
+   "results": "2 hits; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean; subdirectory Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomComplex InjectiveResolution Ext",
+   "results": "0 hits; ; loogle: Unknown identifier `HomComplex`",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented injective resolution detects first Ext of cycles of an exact complex",
+   "results": "8 hits; CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.InjectiveResolution.extMk_eq_zero_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: read Injective/Ext.lean:34–82 (Ext from a single object into the unaugmented injective resolution) and DerivedCategory/KInjective.lean:85–88 (requires a K-injective target). The augmented exact E(T) contains the arbitrary T term, so neither specializes in one line. ExtClass.lean:131–139 supplies naturality of derived extension classes, not this classification of maps from an arbitrary unbounded acyclic source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps modulo cochain homotopy from exact complexes to injective coresolutions classify extensions of cycles",
+   "results": "{\"t\": \"2026-10-16T12:25:31Z\", \"tool\": \"leanfinder\", \"query\": \"Maps modulo cochain homotopy from exact complexes to injective coresolutions classify extensions of cycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extMk\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.sub_extMk\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.ProjectiveResolution.extMk\"], \"digest\": \"a4c1fc6fa748626a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independently read Injective/Ext.lean:34–82 and HomotopyCategory/KInjective.lean:104–125. The former computes Ext from a single object into an unaugmented resolution; the latter constructs one next homotopy component under exactness and injectivity. Neither states the augmented-tail cycle quotient or the requested Yoneda extension identification."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-hereditary-cotorsion-complex-lift",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-augmented-injective-cycle-test",
+  "worker": "stage1",
+  "summary": "Preserved all hypotheses, the cycle degree, and the specified pushout formula; made complex, acyclicity, H^0 quotient, Baer extension-class, and naturality conventions explicit. Wrote twelve steps with upward lift and homotopy recursions, an exact pullback construction without sectionwise lifts, the pushout zero-class calculation, Baer additivity, surjectivity under the sole Ext-one hypothesis, and both naturalities. Second reading clarified why the Ext-one vanishing splits the pullback. Reused existing generic tool lemmas; no new nodes and no Lean/compiler work. The second reading also proved the full extension-equality criterion and obtained the Baer group laws by transporting the quotient operation, avoiding an uncited general theorem.",
+  "blueprint": "Technical foundation below the derived coefficient adjunction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint; specifically the cycle test used in Step 9 of lem-coef-hereditary-cotorsion-complex-lift. The blueprint paragraph itself does not state or prove this formula. The new snapshot moves the ancestor to sec-six-functors/sk-thm-sf-package; historical ancestry and unit metadata are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "why": "Generic exact-epimorphism cokernel property factors maps killing cycles; needed for both explicit inductions. No theorem of this unit supplies this generic abelian-category interface."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic pushout exactness supplies the actual extension representing the stated class and the Baer-sum pushouts. No theorem of this unit supplies this generic abelian-category interface."
+   },
+   {
+    "node": "lem-sp-abelian-refinements",
+    "why": "Generic abelian epimorphic-refinement criterion proves that the cycle projections and pullback projections are epic, as required by the two inductions and the stated Ext-one vanishing; no assumption of lifts before refinement. No theorem of this unit supplies this generic abelian-category interface."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Generic five lemma identifies extension morphisms which induce the identities on both endpoints. No theorem of this unit supplies this generic abelian-category interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-sp-abelian-refinements",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-62d16bb37",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-62d16bb37 (reviewer sub-agent of L); spot-checked: Read the full item, twelve proof steps, cited statements, sources, and route. Checked lifting, homotopies, pushout classification, naturality, nonzero integer examples, and duplicate candidates. No mathematical faults found; four generic tool uses accepted. Detailed checks are in review.md. No repairs or new nodes."
+ }
 }

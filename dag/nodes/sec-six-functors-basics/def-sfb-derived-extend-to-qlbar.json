@@ -3,25 +3,102 @@
  "blueprint": {
   "is": "def-sfb-derived-extend-to-qlbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived extension of scalars $T_{E,\\Qlb}$",
- "statement": "Let $\\ell$ be a prime, $X$ a scheme and $E$ a finite extension of $\\mathbf Q_\\ell$ inside $\\Qlb$.\nThe derived extension of scalars\n\n$$\nT_{E,\\Qlb}=\\overline{\\mathbf Q}_{\\ell,X}\\otimes^{\\mathrm L}_{E_X}-=L(\\operatorname{Ext}_{E_X\\to\\overline{\\mathbf Q}_{\\ell,X}})\\colon\nD(\\Mod_{E_X})\\longrightarrow D(\\Mod_{\\overline{\\mathbf Q}_{\\ell,X}})\n$$\n\nis the derived extension of scalars of [sk-def-sfb-derived-extension-of-scalars] along the\ninclusion $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ of [def-sfb-subfield-to-qlbar-coefficient-map].",
+ "statement": "Let $\\ell$ be a prime, $X$ a scheme and $E$ a finite extension of $\\mathbf Q_\\ell$ inside $\\Qlb$.\nThe derived extension of scalars\n\n$$\nT_{E,\\Qlb}=\\overline{\\mathbf Q}_{\\ell,X}\\otimes^{\\mathrm L}_{E_X}-=L(\\operatorname{Ext}_{E_X\\to\\overline{\\mathbf Q}_{\\ell,X}})\\colon\nD(\\Mod_{E_X})\\longrightarrow D(\\Mod_{\\overline{\\mathbf Q}_{\\ell,X}})\n$$\n\nis the derived extension of scalars of [sk-def-sfb-derived-extension-of-scalars] along the\ninclusion $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ of [def-sfb-subfield-to-qlbar-coefficient-map].\n\nHere $\\Mod_{\\Lambda_X}$ denotes the category of module objects in\n$\\Sh(X_{\\mathrm{proét}},\\Ab)$ of [sk-def-sfb-module-objects], and $D$ denotes the\nunbounded derived category of [sk-def-sfb-derived-categories]. Equivalently, this is the\nfunctor $T^X$ of [sk-def-sfb-coefficient-change] for the condensed inclusion\n$\\underline E\\to\\underline{\\Qlb}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-to-qlbar.md",
   "place": "node def-sfb-derived-extend-to-qlbar, order 1759"
  },
  "stmt_deps": [
   "sk-def-sfb-derived-extension-of-scalars",
-  "def-sfb-subfield-to-qlbar-coefficient-map"
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-coefficient-change"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedExtendScalars|padicSubfieldRingObjToPadicAlgCl|padicAlgClRingObj|Mod.extendScalars",
+   "results": "0 hits in pinned Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars between sheaves of modules over a p-adic field and its algebraic closure",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj; ModuleCat.extendRestrictScalarsAdj; LinearEquiv.extendScalarsOfIsLocalizationEquiv; PadicAlgCl.instCoePadic; SheafOfModules.restrictScalars; ModuleCat.tildeInModuleCat; PresheafOfModules.pullback; PresheafOfModules.Sheafify.instNonemptySMulCandidate. Read ModuleCat.ChangeOfRings lines 400 and 885: ordinary modules, not the required derived module-object construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, Functor.leftDerived",
+   "results": "0 hits; Loogle reports unknown identifier 'Functor.leftDerived'. Replaced by the later totalLeftDerived query.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars from a finite extension of the p-adic numbers to its algebraic closure for pro-etale sheaves of module objects",
+   "results": "8 hits: Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; BDeRhamPlus; BDeRham; Algebra.FormallyEtale.comp; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.FormallyEtale.localization_base; Algebra.FormallyEtale.localization_map. None defines a derived functor on pro-etale module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|leftDerived|KFlat",
+   "results": "25 displayed hits under Mathlib/CategoryTheory, including general derived-functor APIs and Tor. Read Monoidal/Tor.lean lines 39–52: indexed Tor functors require projective resolutions, not this total derived coefficient change. Read Functor/Derived/LeftDerived.lean: the generic construction requires a HasLeftDerivedFunctor hypothesis.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\"",
+   "results": "12 hits, all for LinearMap/LinearEquiv/AlgHom/AlgEquiv.extendScalarsOfSurjective and related equations. These change the scalar linearity of maps; none is the requested functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functor of extension of scalars for modules over a commutative ring object in a symmetric monoidal abelian category",
+   "results": "8 hits: CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; ModuleCat.instIsLeftAdjointExtendScalars; CategoryTheory.Tor'_obj_map; Ext; Rep.Tor. Ordinary ModuleCat adjunction and indexed projective-derived Tor do not give this functor on unbounded derived categories of sheaf module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalars|def extendRestrictScalarsAdj|def restrictScalars",
+   "results": "5 displayed hits in ChangeOfRings.lean at lines 85, 169, 199, 218, 248, all restrictScalars definitions. Passing a single file to the wrapper omits the file-name column; repeated the relevant query on its directory below.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Category/ModuleCat/ChangeOfRings.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalLeftDerived\"",
+   "results": "3 hits in Mathlib.CategoryTheory.Functor.Derived.LeftDerived: CategoryTheory.Functor.totalLeftDerived, its IsLeftDerivedFunctor instance and totalLeftDerivedCounit. Source read: this generic construction assumes HasLeftDerivedFunctor and does not supply the sheaf module-object extension or its existence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalars|def extendRestrictScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean: extendScalars line 400, extendRestrictScalarsAdj line 885, extendScalarsId line 954, extendScalarsComp line 984. Read lines 398–405 and 882–889; these concern ordinary modules over rings, not module objects over pulled-back condensed rings on the pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Category/ModuleCat"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -39,5 +116,20 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.derivedExtendScalarsToPadicAlgCl"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-extend-to-qlbar",
+  "worker": "stage1",
+  "summary": "Audited this definition against the current blueprint and upstream master TwoColimit.lean:126–129, with no attachment available in slopmaster2. Its data is the existing general derived extension applied to the existing inclusion of pulled-back coefficient rings. Made the module-object and unbounded-derived-category conventions explicit, and named the existing general condensed coefficient-change construction as an equivalent specialization. No new nodes or proof claims are needed; Mathlib candidates concern ordinary modules, Tor, or an abstract derived-functor API with an existence hypothesis.",
+  "blueprint": "The entire displayed definition and final sentence of def-sfb-derived-extend-to-qlbar.md; in the unit sk-thm-sfb-qlbar-two-colimit proof, the paragraph beginning \"The cocone itself\" (the scalar-extension-to-Qlbar component). This is a definition split by statement dependencies, not a proof of the subsequent constructibility or two-colimit claims."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-b8069d5cb",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-b8069d5cb (reviewer sub-agent of L); spot-checked: Reviewed the definition, dependencies, current blueprint route, exact master implementation, coefficient morphism, searches, duplicates, and edge cases. No mathematical or structural fault found; review.md records all checks."
+ }
 }

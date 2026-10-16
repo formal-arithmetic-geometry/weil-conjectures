@@ -3,34 +3,83 @@
  "blueprint": {
   "is": "lem-sfb-coefficient-map-id",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The coefficient change of the identity",
- "statement": "For every condensed abelian group $\\Lambda$ (in particular every condensed ring) and every scheme\n$X$, the coefficient change of the identity is the identity:\n$(\\mathrm{id}_\\Lambda)_X=\\mathrm{id}_{\\Lambda_X}$ ([def-sfb-coefficient-map]).",
+ "statement": "For every condensed abelian group $\\Lambda$ (in particular every condensed ring) and every scheme\n$X$, the coefficient change of the identity is the identity:\n$(\\mathrm{id}_\\Lambda)_X=\\mathrm{id}_{\\Lambda_X}$ ([def-sfb-coefficient-map]).\nHere $\\Lambda_X:=p_X^*\\Lambda$ and $(\\mathrm{id}_\\Lambda)_X:=p_X^*(\\mathrm{id}_\\Lambda)$, where $p_X^*$ is the functor on condensed abelian groups of [sk-def-sfb-pullback-from-point], part 4. This extends the notation of [def-sfb-coefficient-map] from ring morphisms to the underlying abelian-group morphisms.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-map-id.md",
   "place": "node lem-sfb-coefficient-map-id, order 1722"
  },
  "stmt_deps": [
-  "def-sfb-coefficient-map"
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pullback-from-point"
  ],
- "proof": [
-  {
-   "text": "$(\\mathrm{id}_\\Lambda)_X=p_X^*(\\mathrm{id}_\\Lambda)$, and the functor $p_X^*$ preserves\nidentities.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-map-id.md",
-  "place": "## Proof"
+  "place": "Original one-line proof, lem-sfb-coefficient-map-id.proof.md; implemented by the Mathlib specialization recorded in mathlib_match"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_id|structure Functor",
+   "results": "Mathlib/CategoryTheory/Functor/Basic.lean:40 defines Functor; :47 is CategoryTheory.Functor.map_id, map (𝟙 X) = 𝟙 (obj X). Read lines 30–58. Other hits include OfSequence.map_id and Functorial.map_id. Grep subdirectory: CategoryTheory/Functor.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of an identity morphism under a functor is an identity morphism",
+   "results": "CategoryTheory.Functor.map_id (Mathlib.CategoryTheory.Functor.Basic) is the exact general identity law; also Functorial.map_id, FunctorToTypes.map_id_apply and Functor.id_map.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id",
+   "results": "CategoryTheory.Functor.map_id (Mathlib.CategoryTheory.Functor.Basic), with full signature for arbitrary categories and any functor. The remaining hits concern monads, Over/Under and presheaves of modules.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor maps the identity morphism of any object to the identity of its image; apply to inverse image of condensed abelian groups on a scheme",
+   "results": "Condensed.id_val, LightCondensed.id_val, Scheme.id_app, Scheme.Modules.restrictFunctorId, Scheme.Hom.id_app, Scheme.id_appTop, Scheme.Modules.pullbackId, Scheme.Hom.id_appTop. These concern underlying identities or identity scheme pullback; none is the required general functor identity law. The match was found by Loogle, LeanSearch and grep.",
+   "date": "2026-10-16",
+   "verdict": "no match in these hits; match found by other searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map, CategoryTheory.CategoryStruct.id",
+   "results": "Second reading: service returned OK with 0 hits for this broader type-pattern query.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_id.*:|map_id \\(",
+   "results": "Second reading: 9 hits under CategoryTheory/Functor, including Functor/Basic.lean:47 with map_id : ∀ X : C, map (𝟙 X) = 𝟙 (obj X). Read lines 30–60.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every functor preserves identity arrows as part of its defining axioms",
+   "results": "Second reading: 8 hits. First is CategoryTheory.Functor.map_id in Mathlib/CategoryTheory/Functor/Basic, with signature for arbitrary categories C,D, a functor self and X:C: self.map (id X) = id (self.obj X). Also Functorial.map_id and unrelated identity-transformation/identity-functor laws.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.map_id",
+  "file": "Mathlib/CategoryTheory/Functor/Basic.lean",
+  "how": "specializes in one line: apply CategoryTheory.Functor.map_id (Mathlib/CategoryTheory/Functor/Basic.lean:47) to the inverse-image functor p_X^* of sk-def-sfb-pullback-from-point and the condensed abelian group Λ. By the notation a_X := p_X^*a of def-sfb-coefficient-map and Λ_X := p_X^*Λ, this is exactly (id_Λ)_X = id_{Λ_X}. No ring, commutativity, finiteness, or geometric hypothesis is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -48,5 +97,21 @@
   "AlgebraicGeometry.ProEtale.coefficientMap_id"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-coefficient-map-id",
+  "worker": "stage1",
+  "summary": "The identity law is a one-line specialization of Mathlib CategoryTheory.Functor.map_id at p_X^*. Confirmed its complete signature and source line, searched the full DAG/blueprint and slopmaster2 for attachments, and retained the original statement. Added the inverse-image definition as a statement dependency to make the condensed-abelian-group scope explicit. No new nodes. Second reading made the inverse-image notation explicit in the statement, repairing the cited ring-only definition’s domain mismatch without changing any hypothesis or conclusion.",
+  "blueprint": "Realizes the sole paragraph of lem-sfb-coefficient-map-id.proof.md, namely p_X^*(id_Λ)=id_{p_X^*Λ}, as a Mathlib leaf. This is the identity-functoriality clause of sk-def-sfb-coefficient-change/_section.md; no unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-b3dcce6e1",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-b3dcce6e1 (reviewer sub-agent of L); spot-checked: Reviewed report written to review.md. The identity lemma is exactly Functor.map_id for p_X^*, with coefficient category and master-source hypotheses verified; no duplicate, gap, cycle, or route violation found."
+ }
 }

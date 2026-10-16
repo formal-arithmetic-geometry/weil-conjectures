@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-ring-object-sheaf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sheaves of rings are ring objects of abelian sheaves",
@@ -13,35 +13,172 @@
   "place": "node det-def-sfb-ring-object-sheaf, order None"
  },
  "stmt_deps": [
-  "det-def-sfb-ring-object-presheaf"
+  "det-def-sfb-ring-object-presheaf",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-def-sfb-ring-object-monoid",
+  "def-weil-pbc-sheafification"
  ],
  "proof": [
   {
-   "text": "The forgetful functor from rings to abelian groups preserves limits, so the sheaf condition for\n$\\mathcal R$ (a limit condition) gives the sheaf condition for $\\mathcal R_{\\Ab}$. As\n$\\mathcal R_{\\Ab}$ is a sheaf, the counit $\\epsilon\\colon a(\\mathcal R_{\\Ab})\\to\\mathcal R_{\\Ab}$ is\nan isomorphism. Transport the ring object structure of $a(\\mathcal R_{\\Ab})$\n([det-def-sfb-ring-object-presheaf]) along $\\epsilon$: put\n$\\mu:=\\epsilon\\circ\\mu_{a\\mathcal R}\\circ(\\epsilon^{-1}\\otimes\\epsilon^{-1})$ and\n$\\eta:=\\epsilon\\circ\\eta_{a\\mathcal R}$. The axioms are preserved under conjugation by an\nisomorphism, and this is the unique structure making $\\epsilon$ a morphism of ring objects. By\nconstruction $\\mu_{a\\mathcal R}=a(\\mu_p)$ for the objectwise multiplication $\\mu_p$, so the\ncomposite of $\\mu$ with the unit $\\mathcal R_{\\Ab}\\otimes_p\\mathcal R_{\\Ab}\\to a(\\mathcal R_{\\Ab}\\otimes_p\\mathcal R_{\\Ab})$\nis $\\mu_p$, by naturality of the units and counits of $a$; uniqueness of such an extension holds\nbecause $\\mathcal R_{\\Ab}$ is a sheaf. The same applies to $\\eta$. Commutativity is transported.",
-   "uses": [
-    "det-def-sfb-ring-object-presheaf"
-   ],
-   "elementary": false
+   "text": "Put $S=\\mathcal R_{\\Ab}$ and write $i$ for the inclusion of abelian sheaves in abelian presheaves. Forgetting the ring operations does not change the section sets or the restriction functions. Consequently a compatible family of sections of $S$ on a covering sieve is exactly a compatible family for $\\mathcal R$, and has the same unique glued section. Gluing is additive: the sum of the glued sections of two families restricts to the sum of those families, hence is their sum's glued section by uniqueness; zero and negatives behave in the same way. Thus the matching-family bijection is an isomorphism of abelian groups, and $S$ is an abelian sheaf. This is the direct matching-family argument underlying Stacks Tag 00YR, not an appeal to an uncited preservation-of-limits theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR, section-sheaves-algebraic-structures, assertion (alpha) and the description of rings as sextuples"
+   }
   },
   {
-   "text": "For a morphism $f\\colon\\mathcal R\\to\\mathcal R'$ of sheaves of rings, naturality of the counit gives\n$f=\\epsilon'\\circ a(f)\\circ\\epsilon^{-1}$. Here $a(f)$ is a morphism of ring objects by\n[det-def-sfb-ring-object-presheaf] and $\\epsilon$, $\\epsilon'$ are isomorphisms of ring objects, so\n$f$ is a morphism of ring objects.",
+   "text": "Use the sheafification universal property of [def-weil-pbc-sheafification], with values in abelian groups. Write $t_F:F\\to iaF$ for its universal map. The identity of $iS$ extends uniquely to $e:a(iS)\\to S$, so $i(e)t_{iS}=1_{iS}$. Since the inclusion is full, $t_{iS}$ itself is a sheaf morphism $q:S\\to a(iS)$. Then $eq=1_S$, while $qe=1_{a(iS)}$: both latter maps have the same composite with $t_{iS}$, and uniqueness of extension proves equality. Hence $e$ is the counit isomorphism and $i(q)=t_{iS}$. Naturality, to be used below, follows from the same uniqueness: for $h:F\\to G$, $i(ah)t_F=t_Gh$, since both sides are the extension data defining $ah$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "First paragraph, counit isomorphism; Stacks Tags 00WH (proposition-sheafification-adjoint) and 00YR, assertion (epsilon)"
+   }
+  },
+  {
+   "text": "Let $P=iS$ be the abelian presheaf underlying $\\mathcal R$. Apply [det-def-sfb-ring-object-presheaf] to this presheaf of rings. It gives the ring object $A=aP$, with multiplication $m=a(\\mu_p)\\circ c_{P,P}$ and unit $u=a(\\eta_p)$, where $\\mu_p:P\\otimes_pP\\to P$ and $\\eta_p:\\underline{\\mathbf Z}_p\\to P$ are the objectwise ring maps, $c_{P,P}:aP\\otimes aP\\xrightarrow{\\sim}a(P\\otimes_pP)$ is the strong monoidal comparison, and the unit of the sheaf category is $a(\\underline{\\mathbf Z}_p)$. It also gives commutativity of $A$ when the section rings are commutative, and preservation of ring-object structures by the sheafification of any presheaf ring morphism.",
    "uses": [
     "det-def-sfb-ring-object-presheaf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "First paragraph, ring-object structure on the sheafification from det-def-sfb-ring-object-presheaf"
+   }
+  },
+  {
+   "text": "Define $\\mu=e\\circ m\\circ(q\\otimes q)$ and $\\eta=e\\circ u$, using $e:A\\xrightarrow{\\sim}S$ and $q=e^{-1}$ from step 2. Check the equations of [det-def-sfb-ring-object-monoid] explicitly. If $Q=((q\\otimes q)\\otimes q)$, cancellation of $qe$ and tensor functoriality give $\\mu(\\mu\\otimes1_S)=e\\,m(m\\otimes1_A)Q$; naturality of the associator gives $\\mu(1_S\\otimes\\mu)\\alpha_S=e\\,m(1_A\\otimes m)\\alpha_AQ$. These agree by associativity of $m$. The left unit composite is $\\mu(\\eta\\otimes1_S)=e\\,m(u\\otimes1_A)(1_{\\mathbf1}\\otimes q)=e\\lambda_A(1_{\\mathbf1}\\otimes q)=\\lambda_S$, by naturality of the unitor; the right unit composite is $e\\,m(1_A\\otimes u)(q\\otimes1_{\\mathbf1})=e\\rho_A(q\\otimes1_{\\mathbf1})=\\rho_S$. Also $\\mu(e\\otimes e)=em$ and $\\eta=eu$, so $e$ is a ring-object morphism; the inverse identities $q\\mu=m(q\\otimes q)$ and $q\\eta=u$ make $q$ one as well. Any other structure making $e$ a morphism must satisfy these same two equations, and cancellation of $e\\otimes e$ forces precisely $\\mu=e m(q\\otimes q)$ and $\\eta=eu$. This proves the required uniqueness.",
+   "uses": [
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "First paragraph, explicit conjugation, its axioms and uniqueness"
+   }
+  },
+  {
+   "text": "Identify these structure maps with the asserted extensions. By [det-def-sfb-sheaf-tensor-structure], $S\\otimes S=a(P\\otimes_pP)$, the tensor of sheaf morphisms is the sheafification of their presheaf tensor. Clause 3 of [det-def-sfb-sheaf-tensor-local-iso] ensures that the unit-induced tensor comparison is invertible after sheafification; the canonical strong monoidal comparison $c_{P,P}$ of the specified tensor construction is its inverse, namely the inverse of $a(t_P\\otimes_p t_P):a(P\\otimes_pP)\\to a(iaP\\otimes_piaP)=A\\otimes A$. The identification $i(q)=t_P$ from step 2 therefore gives $c_{P,P}(q\\otimes q)=1_{a(P\\otimes_pP)}$. Substituting into step 4 yields $\\mu=e\\,a(\\mu_p)$, while $\\eta=e\\,a(\\eta_p)$ already. Naturality of $t$ now gives $i(\\mu)t_{P\\otimes_pP}=i(e)i(a\\mu_p)t_{P\\otimes_pP}=i(e)t_P\\mu_p=\\mu_p$, and likewise $i(\\eta)t_{\\underline{\\mathbf Z}_p}=\\eta_p$. Since $S$ is a sheaf, [def-weil-pbc-sheafification] says that extension through either universal map is unique. Thus the product extends $a\\otimes b\\mapsto ab$ and the unit extends $n\\mapsto n\\cdot1$, with the integer presheaf distinguished from its sheafification.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "First paragraph, concrete multiplication and unit; canonical comparison of det-def-sfb-sheaf-tensor-structure"
+   }
+  },
+  {
+   "text": "If every section ring is commutative, step 3 gives $m\\beta_{A,A}=m$. Naturality of the sheaf symmetry and the formula of step 4 imply $\\mu\\beta_{S,S}=e\\,m(q\\otimes q)\\beta_{S,S}=e\\,m\\beta_{A,A}(q\\otimes q)=\\mu$. This is exactly the commutativity condition of [det-def-sfb-ring-object-monoid]. No commutativity assumption was used in the construction or the associativity and unit checks.",
+   "uses": [
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "End of first paragraph, commutativity"
+   }
+  },
+  {
+   "text": "Let $f:\\mathcal R\\to\\mathcal R'$ be a sheaf ring morphism, and denote its underlying presheaf map by $f_p:P\\to P'$. It is a presheaf ring morphism, so [det-def-sfb-ring-object-presheaf] gives $f_p\\mu_p=\\mu'_p(f_p\\otimes_p f_p)$ and $f_p\\eta_p=\\eta'_p$. The maps $f\\mu$ and $\\mu'(f\\otimes f)$ from $a(P\\otimes_pP)$ to the target sheaf have equal composites with $t_{P\\otimes_pP}$: for the first this is $f_p\\mu_p$ by step 5; for the second it is $\\mu'_p(f_p\\otimes_p f_p)$, by naturality of $t$ and the formula $f\\otimes f=a(f_p\\otimes_p f_p)$ of [det-def-sfb-sheaf-tensor-structure]. Uniqueness in [def-weil-pbc-sheafification] gives $f\\mu=\\mu'(f\\otimes f)$. Similarly the two maps $f\\eta,\\eta'$ from $a(\\underline{\\mathbf Z}_p)$ have the same restriction $f_p\\eta_p=\\eta'_p$, hence agree. These are the two morphism equations of [det-def-sfb-ring-object-monoid], proving the last clause.",
+   "uses": [
+    "det-def-sfb-ring-object-presheaf",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "Second paragraph, preservation of multiplication and unit by sheaf ring morphisms, using the equivalent unique-extension argument"
+   }
   }
  ],
  "proof_deps": [
-  "det-def-sfb-ring-object-presheaf"
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-ring-object-presheaf",
+  "det-def-sfb-ring-object-monoid",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-def-sfb-sheaf-tensor-local-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.proof.md",
+  "place": "Both paragraphs; explicit matching families, universal-property argument, conjugation identities and strong-monoidal comparison calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monObj_sheafCompose|sheafifyRingPresheaf|ringMonObj|isMonHom_sheafCompose",
+   "results": "{\"t\": \"2026-10-16T11:59:38Z\", \"tool\": \"grep\", \"query\": \"monObj_sheafCompose|sheafifyRingPresheaf|ringMonObj|isMonHom_sheafCompose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: hits supply general monoidal sheafification, cartesian sheaf tensors, or sheaves of modules; none includes all ring-object, counit, extension and functoriality clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of rings are monoid objects of abelian sheaves for the sheafified tensor product",
+   "results": "{\"t\": \"2026-10-16T11:59:38Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of rings are monoid objects of abelian sheaves for the sheafified tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObj_obj\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"PresheafOfModules.monoidalCategory\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafIsAbelian\"], \"digest\": \"54ff04097b81762a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: hits supply general monoidal sheafification, cartesian sheaf tensors, or sheaves of modules; none includes all ring-object, counit, extension and functoriality clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, MonObj",
+   "results": "{\"t\": \"2026-10-16T11:59:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, MonObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: query rejected because MonObj was unqualified; corrected qualified query run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of rings defines a monoid object in the monoidal category of sheaves of abelian groups, with multiplication the sheafified tensor multiplication",
+   "results": "{\"t\": \"2026-10-16T11:59:48Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf of rings defines a monoid object in the monoidal category of sheaves of abelian groups, with multiplication the sheafified tensor multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unit\", \"SheafOfModules\", \"SheafOfModules.unit_val\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafToPresheafMonoidal\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"78f9549ecce932bf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: hits supply general monoidal sheafification, cartesian sheaf tensors, or sheaves of modules; none includes all ring-object, counit, extension and functoriality clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "MonObj|MonoidObject|monoid.*sheaf",
+   "results": "{\"t\": \"2026-10-16T12:00:03Z\", \"tool\": \"grep\", \"query\": \"MonObj|MonoidObject|monoid.*sheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/CartesianClosed.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\"], \"digest\": \"cac2b2b85201c60f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: hits supply general monoidal sheafification, cartesian sheaf tensors, or sheaves of modules; none includes all ring-object, counit, extension and functoriality clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoid structure on a presheaf of abelian groups which is a sheaf induces uniquely a monoid structure on the sheaf by transport through the sheafification counit",
+   "results": "{\"t\": \"2026-10-16T12:00:07Z\", \"tool\": \"leanfinder\", \"query\": \"A monoid structure on a presheaf of abelian groups which is a sheaf induces uniquely a monoid structure on the sheaf by transport through the sheafification counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"CategoryTheory.sheafToPresheafMonoidal\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"CategoryTheory.plusPlusSheaf_obj_val\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.cartesianMonoidalCategory\"], \"digest\": \"3ff0f9cde2d1a5ce\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: hits supply general monoidal sheafification, cartesian sheaf tensors, or sheaves of modules; none includes all ring-object, counit, extension and functoriality clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj.ofIso",
+   "results": "{\"t\": \"2026-10-16T12:00:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonObj.ofIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.MonObj.ofIso\", \"CategoryTheory.isMonHom_ofIso\", \"CategoryTheory.MonObj.ofIso_one\", \"CategoryTheory.MonObj.ofIso_mul\"], \"digest\": \"64060e2ab6834634\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match: general isomorphism transport only, not the item; its elementary equations are written out in step 4"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIso|IsIso|counit",
+   "results": "{\"t\": \"2026-10-16T12:00:55Z\", \"tool\": \"grep\", \"query\": \"ofIso|IsIso|counit\", \"sub\": \"CategoryTheory/Monoidal/Mon\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: directory query returned no hits; the general ofIso candidate was subsequently read in CategoryTheory/Monoidal/Mon.lean:112 and 232"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofIso|isMonHom_ofIso",
+   "results": "{\"t\": \"2026-10-16T12:03:14Z\", \"tool\": \"grep\", \"query\": \"def ofIso|isMonHom_ofIso\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"e388db0807ce17c1\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: MonObj.ofIso in Mathlib/CategoryTheory/Monoidal/Mon.lean:112 and isMonHom_ofIso at line 232 give general isomorphism transport, whose equations are elementary and written out in step 4; they do not state the full sheaf-ring item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -52,5 +189,20 @@
   "det-def-sfb-ring-object-presheaf"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-ring-object-sheaf",
+  "worker": "stage1",
+  "summary": "Reused five existing nodes; separated underlying sheafness, counit isomorphism, sheafification structure, explicit isomorphism transport, tensor-comparison cancellation, commutativity and morphism compatibility. No new nodes. Corrected the proof-level omission of the strong monoidal comparison without changing the statement.",
+  "blueprint": "Realizes the first paragraph of det-def-sfb-ring-object-sheaf.proof.md in steps 1–6 and its second paragraph in step 7; this is clause 3 of sk-def-sfb-ring-object. Step 7 uses uniqueness of extension to prove the same morphism assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-7512e33ca",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-7512e33ca (reviewer sub-agent of L); spot-checked: Read the item, blueprint proof, cited nodes, Stacks Tags 00YR/00WH, and route sources in full. All seven steps are mathematically sound, correctly typed, cited, acyclic, and preserve the exact ring/sheaf hypotheses and tensor comparison. Edge cases (terminal site, zero ring, empty covers, noncommutative matrix rings) check out. No new nodes, repairs, duplicate faults, or tool uses. Snapshot lacks chapter/unit metadata, recorded as maintenance only."
+ }
 }
