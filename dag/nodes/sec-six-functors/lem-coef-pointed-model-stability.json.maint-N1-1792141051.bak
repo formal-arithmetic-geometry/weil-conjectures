@@ -1,0 +1,240 @@
+{
+ "id": "lem-coef-pointed-model-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit: flat models for the simultaneous enriched finite-level adjunctions. Agent-formulated generic homotopy-theoretic foundation for the stable enhancement of proof paragraph 2. No Stacks tag supplies the coherent stability criterion. WANTED: model-category localization and the pointed suspension criterion (for example Hovey, Model Categories, Chapter 7), with the passage to the homotopy coherent localization. This reference is not archived in literature/.",
+   "via": [
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization and suspension criterion for a pointed model category",
+ "statement": "Let $\\mathcal M$ be a complete and cocomplete category, in particular admitting finite limits and colimits [def-galois-finite-limits-colimits], with a zero object and a model structure: classes of cofibrations, fibrations and weak equivalences, the latter closed under retracts and satisfying two-out-of-three, with weak factorization systems (cofibration, trivial fibration) and (trivial cofibration, fibration), and functorial factorizations. Trivial means also a weak equivalence; a weak factorization system means factorization of every map and mutually characterized diagonal lifting classes. An object is cofibrant if the map from zero is a cofibration. Let $\\mathcal M_\\infty$ be the homotopy coherent localization at the weak equivalences, meaning the universal homotopy theory in which these maps are inverted, retaining mapping spaces and composition homotopies. Then $\\mathcal M_\\infty$ has a zero object and finite homotopy limits and colimits, and its ordinary homotopy category is the ordinary localization of $\\mathcal M$ at its weak equivalences. A span of cofibrant objects whose two outgoing maps are cofibrations has its homotopy pushout represented by its ordinary pushout. Its suspension functor $\\Sigma$ is the homotopy pushout $0\\coprod_X^h0$ and is left adjoint to the loop functor given by the homotopy pullback $0\\times_X^h0$. If the induced suspension on the ordinary homotopy category is an equivalence, $\\mathcal M_\\infty$ is stable: a square is a homotopy pushout exactly when it is a homotopy pullback.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Agent-formulated generic homotopy-theoretic foundation for the stable enhancement of proof paragraph 2. No Stacks tag supplies the coherent stability criterion. WANTED: model-category localization and the pointed suspension criterion (for example Hovey, Model Categories, Chapter 7), with the passage to the homotopy coherent localization. This reference is not archived in literature/. Independently checked: Lurie, Higher Algebra (August 3, 2012), Proposition 1.4.2.11 and Corollary 1.4.2.27, https://people.math.harvard.edu/~lurie/papers/HA2012.pdf, give the infinity-categorical suspension criterion; the model-localization comparison remains part of the stated foundation."
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\mathcal M_\\infty$ and let $q:\\mathcal M\\to\\mathcal C$ be localization. The homotopy category has the same objects and morphism sets $\\pi_0\\operatorname{Map}_{\\mathcal C}(X,Y)$. For any ordinary category $D$, a functor from $\\mathcal C$ to its nerve is exactly a functor $h\\mathcal C\\to D$: all higher homotopies become the equalities of composition. The localization universal property therefore identifies functors $h\\mathcal C\\to D$ with functors $\\mathcal M\\to D$ that invert weak equivalences, including their natural transformations. This is precisely the ordinary localization universal property, proving $h\\mathcal C\\simeq\\mathcal M[W^{-1}]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument from the two localization universal properties; this is the homotopy-category comparison in the item."
+   }
+  },
+  {
+   "text": "Consider the direct category $I=(b\\leftarrow a\\to c)$, with degrees $0$ at $a$ and $1$ at $b,c$. By [lem-coef-finite-reedy-localization], every coherent span in $\\mathcal C$ is represented up to coherent equivalence by a strict span $B\\leftarrow A\\to C$ in $\\mathcal M$. Factor $0\\to A$ as a cofibration $0\\to QA$ followed by a trivial fibration $QA\\to A$, and factor the composites $QA\\to B,C$ as cofibrations $QA\\to B',C'$ followed by trivial fibrations $B'\\to B,C'\\to C$. This is an objectwise weak equivalence of spans. Its latching maps are $0\\to QA$, $QA\\to B'$, $QA\\to C'$, so it is Reedy cofibrant. The derived colimit adjunction of the cited lemma says that $B'\\coprod_{QA}C'$ with its cocone represents the pushout of the original coherent span, since being left adjoint to the constant diagram is the mapping-space universal property of colimit. For a given span of cofibrant objects with both outgoing maps cofibrations, those three latching maps are already cofibrations; its ordinary pushout itself thus represents its homotopy pushout. No left properness is used.",
+   "uses": [
+    "lem-coef-finite-reedy-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction using finite direct Reedy localization, supplying homotopy pushouts for the stable flat-model foundation of paragraph 2."
+   }
+  },
+  {
+   "text": "Dually take $J=(a\\to c\\leftarrow b)$, with degree $1$ at $a,b$ and $0$ at $c$. Its inverse-diagram comparison in [lem-coef-finite-reedy-localization] represents any coherent cospan by $A\\to C\\leftarrow B$. Choose a fibrant replacement $C\\to RC$ by factoring $C\\to0$ into a trivial cofibration and a fibration, and factor $A\\to RC$ and $B\\to RC$ into trivial cofibrations $A\\to A'$, $B\\to B'$ and fibrations $A'\\to RC$, $B'\\to RC$. The matching maps are $RC\\to0$, $A'\\to RC$, $B'\\to RC$; hence the replacement cospan is Reedy fibrant. The cited infinity adjunction identifies $A'\\times_{RC}B'$ and its cone with the pullback. This proves existence of all homotopy pullbacks without right properness.",
+   "uses": [
+    "lem-coef-finite-reedy-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent dual inverse-Reedy construction for the finite homotopy limits used in paragraph 2."
+   }
+  },
+  {
+   "text": "Use [lem-coef-finite-reedy-localization] also with the empty category, which is both direct and inverse. There is a unique empty diagram and its replacements are itself. Its ordinary colimit is the initial object $0$ of $\\mathcal M$, and its ordinary limit is the terminal object, the same $0$. The two derived adjunctions show that $q(0)$ is initial and terminal in $\\mathcal C$, so it is a zero object in the mapping-space sense. Combining this with the pushouts of Step 2 and pullbacks of Step 3, [lem-coef-infinity-finite-shape-generation] gives all finite homotopy colimits and limits. This uses finite coherent shapes, rather than claiming that finite limits in $h\\mathcal C$ are homotopy limits.",
+   "uses": [
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-infinity-finite-shape-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent passage from empty/span/cospan shapes to finite coherent (co)limits; HTT Corollary 4.4.2.4 and its dual, checked online, not archived."
+   }
+  },
+  {
+   "text": "Define $\\Sigma X=0\\coprod_X^h0$ and $\\Omega Y=0\\times_Y^h0$, functorially by their universal properties. The natural mapping-space identities are\n$$\\operatorname{Map}(\\Sigma X,Y)\\simeq *\\times^h_{\\operatorname{Map}(X,Y)}*\\simeq\\operatorname{Map}(X,\\Omega Y).$$\nThe first is the pushout universal property with the two contractible spaces $\\operatorname{Map}(0,Y)$; the second is the pullback universal property with the two contractible spaces $\\operatorname{Map}(X,0)$. Basepoints are the zero morphisms. These natural equivalences are the definition of an infinity-categorical adjunction $\\Sigma\\dashv\\Omega$. In particular its unit $\\eta_X:X\\to\\Omega\\Sigma X$ is the map supplied by the suspension square, with its canonical nullhomotopies; its counit is the dual map. On $\\pi_0$ this gives an ordinary adjunction on $h\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent verification of the suspension-loop adjunction from mapping-space universal properties, following the pointed constructions of HA 1.4.2."
+   }
+  },
+  {
+   "text": "Assume now $h\\Sigma$ is an equivalence. Its full faithfulness makes the ordinary adjunction unit an isomorphism, as follows explicitly. For an ordinary adjunction $L\\dashv R$ with fully faithful $L$, choose $r:RLX\\to X$ with $Lr=\\epsilon_{LX}$ by fullness. The first triangle identity and faithfulness give $r\\eta_X=1$. Naturality and the second triangle give $\\eta_Xr=RLr\\,\\eta_{RLX}=R\\epsilon_{LX}\\,\\eta_{RLX}=1$. The counit is then invertible at every $LX$ by the first triangle, and at every object by essential surjectivity of $L$ and naturality. Apply this to $h\\Sigma\\dashv h\\Omega$. A morphism in an infinity category is an equivalence exactly when its class in its homotopy category is invertible. Thus every actual unit and counit component of Step 5 is an equivalence. They are coherent natural transformations from that adjunction, and give inverse equivalences $\\Sigma,\\Omega$ on $\\mathcal C$, not just on its homotopy category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent explicit unit/counit argument that upgrades the assumed equivalence on the homotopy category to the suspension-loop equivalence."
+   }
+  },
+  {
+   "text": "Let $\\tau=(W\\to X,W\\to Y,X\\to Z,Y\\to Z)$ be an arbitrary homotopy pushout square of $\\mathcal C$, and put $P=X\\times_Z^hY$, $a:W\\to P$. Apply [lem-coef-suspension-square-comparison] with both categories equal to $\\mathcal C$ and $F=\\mathrm{id}$. Its hypotheses hold by Step 4; $F$ is reduced since it fixes zero. It supplies $\\theta:P\\to\\Omega\\Sigma W$, with $\\theta a\\simeq\\eta_W$ and $(\\Omega a_{\\Sigma\\tau})\\theta\\simeq u$. Here $u:P\\to\\Omega\\Sigma X\\times_{\\Omega\\Sigma Z}^h\\Omega\\Sigma Y$ is the map on pullbacks of the unit maps at $X,Y,Z$. Those three unit maps are equivalences by Step 6, so $u$ is an equivalence: their inverses are a coherent inverse transformation, and taking the pullback gives inverse maps on these two pullbacks. The loop on $a_{\\Sigma\\tau}$ is essential for the second composite to have the displayed domain.",
+   "uses": [
+    "lem-coef-suspension-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent application of the technical comparison of HA Lemma 1.4.2.15, with its suspended comparison written with the required loop."
+   }
+  },
+  {
+   "text": "The equations of Step 7 give a right inverse $r=a\\eta_W^{-1}$ for $\\theta$, and a left inverse $l=u^{-1}\\Omega a_{\\Sigma\\tau}$ for $\\theta$. In the homotopy category, $l=l(\\theta r)=(l\\theta)r=r$, so $\\theta$ is invertible, hence an equivalence. Since $\\theta a=\\eta_W$ and $\\eta_W$ is an equivalence, $a$ is an equivalence as well. That is exactly the pullback universal property for $\\tau$. This proves that every homotopy pushout square is a homotopy pullback.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent inverse calculation, the retract argument in the proof of HA Proposition 1.4.2.13; no excision criterion is used as a black box."
+   }
+  },
+  {
+   "text": "Work in $\\mathcal E=\\mathcal C^{\\mathrm{op}}$. By Step 4 it is pointed and has finite limits and colimits, with their roles exchanged. Its suspension is $(\\Omega_{\\mathcal C})^{\\mathrm{op}}$, its loop is $(\\Sigma_{\\mathcal C})^{\\mathrm{op}}$, and its adjunction unit $\\eta^{\\mathcal E}$ is the opposite of the counit of Step 5, hence has equivalence components by Step 6. For any pushout square $\\tau$ in $\\mathcal E$, put $P=X\\times_ZY$ and let $a:W\\to P$ be its comparison. Apply [lem-coef-suspension-square-comparison] to the identity of $\\mathcal E$, obtaining $\\theta:P\\to\\Omega_{\\mathcal E}\\Sigma_{\\mathcal E}W$ with $\\theta a\\simeq\\eta^{\\mathcal E}_W$ and $b\\theta\\simeq u$, where $b=\\Omega_{\\mathcal E}a_{\\Sigma_{\\mathcal E}\\tau}$ and $u$ is the map between pullbacks induced by $\\eta^{\\mathcal E}$ at $X,Y,Z$. The inverse natural transformation to $\\eta^{\\mathcal E}$ induces the inverse map between these pullbacks, so $u$ is an equivalence. Set $r=a(\\eta^{\\mathcal E}_W)^{-1}$ and $l=u^{-1}b$. In $h\\mathcal E$ we have $\\theta r=1$, $l\\theta=1$ and $l=l(\\theta r)=(l\\theta)r=r$. Therefore $\\theta$ is invertible, and $a=\\theta^{-1}\\eta^{\\mathcal E}_W$ is invertible. Thus the square is a pullback in $\\mathcal E$. A pullback in $\\mathcal C$ is a pushout in $\\mathcal E$, so this proves that every homotopy pullback in $\\mathcal C$ is a homotopy pushout. Step 8 gives the other implication.",
+   "uses": [
+    "lem-coef-suspension-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent dual comparison argument for the reverse implication; HA Proposition 1.4.2.11 explains the opposite-category passage."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-reedy-localization",
+  "lem-coef-infinity-finite-shape-generation",
+  "lem-coef-suspension-square-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: agent-written model and suspension argument; Hovey/Reedy localization, HTT 4.4.2.4 and HA 1.4.2.15 are WANTED rather than archived proof documents."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pointed model category is stable if its derived suspension and loop adjunction is an equivalence; homotopy pushout squares are homotopy pullback squares",
+   "results": "8 hits: HomotopicalAlgebra.ModelCategory.mk', HomotopicalAlgebra.ModelCategory, HomotopicalAlgebra.FibrantObject, HomotopicalAlgebra.BifibrantObject, HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences, HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood, HomotopicalAlgebra.PathObject.instIsFibrantP, HomotopicalAlgebra.PathObject.IsVeryGood",
+   "date": "2026-10-16",
+   "verdict": "no match: general ModelCategory constructors, cofibrant localizations and ordinary derived-category localizations do not assert the suspension criterion or finite coherent homotopy (co)limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Suspension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general ModelCategory constructors, cofibrant localizations and ordinary derived-category localizations do not assert the suspension criterion or finite coherent homotopy (co)limits."
+  },
+  {
+   "tool": "grep",
+   "query": "StableModel|stableModel|[Ss]tability.*[Mm]odel|[Mm]odel.*[Ss]uspension|[Ss]uspension.*[Mm]odel",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general ModelCategory constructors, cofibrant localizations and ordinary derived-category localizations do not assert the suspension criterion or finite coherent homotopy (co)limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pointed model category whose suspension functor is an equivalence has stable homotopy localization",
+   "results": "8 hits: CategoryTheory.Functor.IsLocalization.isEquivalence, HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization, CategoryTheory.Functor.IsLocalization.mk, HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences, CategoryTheory.Functor.IsLocalization.of_equivalence_target, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism, HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences",
+   "date": "2026-10-16",
+   "verdict": "no match: general ModelCategory constructors, cofibrant localizations and ordinary derived-category localizations do not assert the suspension criterion or finite coherent homotopy (co)limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived mapping complexes of a differential graded model category are computed on cofibrant fibrant replacements, and invertible suspension implies a stable infinity category",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.right_fac, DerivedCategory.left_fac, DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: general ModelCategory constructors, cofibrant localizations and ordinary derived-category localizations do not assert the suspension criterion or finite coherent homotopy (co)limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy colimits in pointed model categories and suspension equivalence characterize a stable infinity category",
+   "date": "2026-10-16",
+   "results": "8 hits: HomotopicalAlgebra.CofibrantObject.HoCat, HomotopicalAlgebra.ModelCategory.cm1b, HomotopicalAlgebra.LeftHomotopyClass.whitehead, HomotopicalAlgebra.RightHomotopyClass.whitehead, HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences, HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk, HomotopicalAlgebra.CofibrantObject.toHoCat",
+   "verdict": "no match: independently read the returned declarations; none states this foundation. The recognition hits provide injective factorizations or assume model axioms, the flat hits are K-injective/K-projective orthogonality, and the stability hits concern ordinary localization only."
+  },
+  {
+   "tool": "grep",
+   "query": "suspension.*[Ee]quivalence|[Ss]table.*[Ii]nfinity|homotopy[Pp]ushout",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "no match: independently read the returned declarations; none states this foundation. The recognition hits provide injective factorizations or assume model axioms, the flat hits are K-injective/K-projective orthogonality, and the stability hits concern ordinary localization only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed model category with invertible derived suspension has a stable infinity categorical localization",
+   "results": "{\"t\": \"2026-10-16T07:41:46Z\", \"tool\": \"leanfinder\", \"query\": \"A pointed model category with invertible derived suspension has a stable infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"HasDerivedCategory\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\"], \"digest\": \"10edb2640e7f3041\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned model homotopy localizations and shifts on chain homotopy categories do not assert finite coherent limits or suspension recognition of stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Suspension\"",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Suspension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned model homotopy localizations and shifts on chain homotopy categories do not assert finite coherent limits or suspension recognition of stability."
+  },
+  {
+   "tool": "grep",
+   "query": "StableModel|[Ss]table.*[Ii]nfinity|[Mm]odel.*[Ss]uspension",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"grep\", \"query\": \"StableModel|[Ss]table.*[Ii]nfinity|[Mm]odel.*[Ss]uspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned model homotopy localizations and shifts on chain homotopy categories do not assert finite coherent limits or suspension recognition of stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed homotopy theory is stable when the suspension on its ordinary homotopy category is an equivalence",
+   "results": "{\"t\": \"2026-10-16T07:42:21Z\", \"tool\": \"leanfinder\", \"query\": \"A pointed homotopy theory is stable when the suspension on its ordinary homotopy category is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.hasShift\", \"instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences\", \"HomotopyCategory\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopyCategory.commShiftQuotient\"], \"digest\": \"106ab307e9dcfe4b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned model homotopy localizations and shifts on chain homotopy categories do not assert finite coherent limits or suspension recognition of stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointed model categories with invertible derived suspension have stable localization",
+   "results": "{\"t\": \"2026-10-16T07:42:21Z\", \"tool\": \"leansearch\", \"query\": \"Pointed model categories with invertible derived suspension have stable localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.MorphismProperty.Localization'\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\"], \"digest\": \"bc03f8d9f3c57472\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned model homotopy localizations and shifts on chain homotopy categories do not assert finite coherent limits or suspension recognition of stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-sheaf-flat-model",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-pointed-model-stability",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote nine proof steps: ordinary localization; explicit cofibrant span and fibrant cospan replacements; empty shapes and finite coherent shapes; mapping-space suspension-loop adjunction; explicit unit/counit lifting from the homotopy category; technical suspension comparison and two inverse calculations, including the opposite category. Three statement-only foundational obligations replace the former opaque stability claim. Checked against the exact node statements and searched the entire blueprint/DAG and project Lean before creating them.",
+  "blueprint": "Realizes the stable flat-model foundation of proof paragraph 2 of prop-coef-integral-exceptional-adjoint, before forming the enriched finite coefficient adjunction in the displayed derived inverse limit. The blueprint itself does not contain a model-localization proof. No unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-81dcf8d77",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-81dcf8d77 (reviewer sub-agent of L); spot-checked: Read all mathematics and checked every step against Hovey, Cisinski, HTT, and HA; no mathematical gap, duplicate, cycle, or target weakening found. Corrected missing creation author/date in all three new nodes. Whole corrected JSON files are under fixes/dag/nodes/sec-six-functors/; concrete source, hypothesis, route, and edge-case checks are in review.md.; 3 file(s) fixed by the reviewer"
+ }
+}
