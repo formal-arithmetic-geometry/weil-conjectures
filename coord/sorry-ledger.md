@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1333**, closure **36**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1324**, closure **37**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -45,22 +45,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1132 | 33 |
-| WeilConjectures | 201 | 3 |
+| Sheaf | 1123 | 30 |
+| WeilConjectures | 201 | 7 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2280 | 787 | 1493 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2234 | 785 | 1449 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1978 | 34 | 1944 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2282 | 780 | 1502 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2236 | 778 | 1458 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1980 | 36 | 1944 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3591 |
+| proved | 3601 |
 | decomposed | 52 |
-| moved | 3987 |
+| moved | 3990 |
 | pruned | 131 |
 | other | 603 |
 
@@ -75,25 +75,25 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | B2 | 125 | 131 | 83 | 48 | 52/125 (41.6%) |
 | B3 | 143 | 150 | 85 | 65 | 60/143 (42.0%) |
 | B4 | 65 | 68 | 45 | 23 | 30/65 (46.2%) |
-| C1 | 140 | 143 | 107 | 36 | 72/140 (51.4%) |
-| C2 | 121 | 116 | 82 | 34 | 55/121 (45.5%) |
-| C3 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
-| C4 | 51 | 52 | 31 | 21 | 20/51 (39.2%) |
+| C1 | 141 | 144 | 107 | 37 | 72/141 (51.1%) |
+| C2 | 122 | 117 | 83 | 34 | 56/122 (45.9%) |
+| C3 | 114 | 119 | 79 | 40 | 55/114 (48.2%) |
+| C4 | 52 | 53 | 31 | 22 | 20/52 (38.5%) |
 | D2 | 137 | 137 | 89 | 48 | 61/137 (44.5%) |
-| D3 | 106 | 117 | 68 | 49 | 49/106 (46.2%) |
-| D4 | 64 | 61 | 44 | 17 | 26/64 (40.6%) |
-| E1 | 158 | 184 | 104 | 80 | 80/158 (50.6%) |
-| E2 | 119 | 115 | 84 | 31 | 58/119 (48.7%) |
+| D3 | 107 | 118 | 68 | 50 | 49/107 (45.8%) |
+| D4 | 65 | 62 | 46 | 16 | 27/65 (41.5%) |
+| E1 | 159 | 185 | 104 | 81 | 80/159 (50.3%) |
+| E2 | 120 | 116 | 84 | 32 | 58/120 (48.3%) |
 | E3 | 110 | 111 | 94 | 17 | 58/110 (52.7%) |
-| E4 | 45 | 53 | 27 | 26 | 19/45 (42.2%) |
+| E4 | 46 | 54 | 27 | 27 | 19/46 (41.3%) |
 | F1 | 143 | 149 | 106 | 43 | 70/143 (49.0%) |
 | F2 | 146 | 155 | 98 | 57 | 61/146 (41.8%) |
-| F3 | 97 | 99 | 62 | 37 | 43/97 (44.3%) |
-| F4 | 60 | 55 | 42 | 13 | 28/60 (46.7%) |
+| F3 | 98 | 100 | 62 | 38 | 43/98 (43.9%) |
+| F4 | 61 | 56 | 42 | 14 | 28/61 (45.9%) |
 | G1 | 139 | 140 | 112 | 28 | 75/139 (54.0%) |
-| G2 | 137 | 135 | 91 | 44 | 63/137 (46.0%) |
+| G2 | 138 | 136 | 91 | 45 | 63/138 (45.7%) |
 | G3 | 101 | 104 | 66 | 38 | 45/101 (44.6%) |
-| G4 | 55 | 47 | 31 | 16 | 20/55 (36.4%) |
+| G4 | 56 | 48 | 31 | 17 | 20/56 (35.7%) |
 | H1 | 134 | 132 | 106 | 26 | 74/134 (55.2%) |
 | H2 | 113 | 110 | 89 | 21 | 65/113 (57.5%) |
 | H3 | 120 | 135 | 96 | 39 | 66/120 (55.0%) |
@@ -176,22 +176,22 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | A3 |
 | Sheaf.Paper.CondensedFlatCoefficientCalculus | 4 | 1 | G2 |
 | Sheaf.Paper.ContinuousIntegralPushComparison | 4 | 1 | B2 |
-| Sheaf.Paper.FiniteDiscreteExchangeComparison | 4 | 1 | — |
-| Sheaf.Paper.IntegralResidueExchange | 4 | 1 | C2 |
+| Sheaf.Paper.FiniteDiscreteExchangeComparison | 4 | 1 | A3 |
 | Sheaf.Paper.ProfinitePointPullback | 4 | 1 | D2 |
 | Sheaf.Paper.CondensedQcqsPushforwardContinuity | 5 | 1 | D3 |
-| Sheaf.Paper.ContinuousConstructibleIntegralGluing | 5 | 1 | C1 |
 | Sheaf.Paper.ContinuousConstructibleIntegralStratum | 5 | 1 | C4 |
-| Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct | 5 | 1 | E4 |
 | Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct | 5 | 1 | F1 |
-| Sheaf.Paper.IntegralMatrixPivotCover | 5 | 1 | C3 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | 5 | 1 | G1 |
+| Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal | 6 | 1 | E3 |
 | Sheaf.AlgebraicGeometry.ProEtaleSiteComparison | 6 | 1 | U4 |
 | Sheaf.Paper.CondensedLfpCoefficientModel | 6 | 1 | A4 |
 | Sheaf.Paper.CondensedQbarLfpMatrixRefinement | 6 | 1 | E3 |
-| Sheaf.Paper.CondensedQcqsPushforwardLocalComparison | 6 | 1 | G2 |
 | WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic | 6 | 1 | V2 |
-| Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation | 7 | 1 | B4 |
+| Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation | 7 | 1 | B2 |
+| Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover | 7 | 1 | E4 |
+| Sheaf.Paper.CondensedConstructibleOneStep | 7 | 1 | J1 |
+| Sheaf.Paper.IntegralConstructibleSheafHom | 7 | 1 | B3 |
+| Sheaf.Paper.IntegralMatrixAnalyticCover | 7 | 1 | C1 |
 
 Modules pruned since the imports baseline:
 
@@ -539,7 +539,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings`
 - `Sheaf.LinearAlgebra.TriangularChangeOfBasis`
 - `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules`
-- `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen`
 - `Sheaf.Paper.AdicTowerReconstruction`
 - `Sheaf.Paper.AffineProjectiveComplexDerivedHom`
 - `Sheaf.Paper.BoundaryCechCompatibility`
@@ -552,7 +551,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.ConstantSheafOpenMaps`
 - `Sheaf.Paper.CyclicExtensionCocycle`
 - `Sheaf.Paper.DerivationExtendsFiniteType`
-- `Sheaf.Paper.EtaleFiniteDataDescent`
 - `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial`
 - `Sheaf.Paper.EtaleStandardCoverCech`
 - `Sheaf.Paper.FiniteHypercoverDescent`
