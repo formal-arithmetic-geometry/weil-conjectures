@@ -3,44 +3,207 @@
  "blueprint": {
   "is": "det-lem-constructible-ext-continuity-devissage",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuity of Hom out of $C$ is closed under extensions and shifts",
- "statement": "Let $\\mathcal T=D(X_{\\mathrm{proét}},\\Lambda)$ for a condensed ring $\\Lambda$, and fix a filtered\ndiagram $(K_i^\\bullet)$ of complexes of $\\Lambda_X$-modules with colimit $K^\\bullet$. Let\n$\\mathcal C$ be the class of $C\\in\\mathcal T$ such that\n$\\varinjlim_i\\Hom(C,K_i[q])\\to\\Hom(C,K[q])$ is bijective for every $q\\in\\mathbf Z$. Then\n$\\mathcal C$ is closed under shifts, isomorphisms and extensions: if $C'\\to C\\to C''\\to C'[1]$\nis distinguished with $C',C''\\in\\mathcal C$, then $C\\in\\mathcal C$. Consequently, if every $a_!L$\nlies in $\\mathcal C$, so does every object obtained from them by finitely many extensions\nand shifts; for $\\Lambda=E,\\Qlb$ this includes $\\Dbc(X,\\Lambda)$\n([det-cor-coefficient-heart-ii-generation]).",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Lambda$ a condensed ring [sk-def-sfb-condensed-ring]. Put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and let $\\mathcal T=D(\\operatorname{Mod}_{\\Lambda_X})=D(X_{\\mathrm{proét}},\\Lambda)$ be the ordinary unbounded derived category of sheaves of left $\\Lambda_X$-modules [sk-def-sfb-module-objects, def-weil-abstract-derived-category], with its shifts and distinguished triangles [def-weil-triangulated-category]. Let $I$ be a small filtered category and $(K_i^\\bullet)_{i\\in I}$ a diagram of complexes of these modules. Let $K^\\bullet=\\varinjlim_i K_i^\\bullet$ be its termwise colimit, with structure maps $\\kappa_i:K_i^\\bullet\\to K^\\bullet$ [def-weil-pbc-category-colimit]. Write $K_i,K$ for their images in $\\mathcal T$. No common lower bound is required for this formal assertion.\n\nFor $C\\in\\mathcal T$ and $q\\in\\mathbf Z$ let\n$$\n\\theta_{C,q}:\\varinjlim_i\\operatorname{Hom}_{\\mathcal T}(C,K_i[q])\\longrightarrow\\operatorname{Hom}_{\\mathcal T}(C,K[q]),\\qquad [h_i]\\longmapsto\\kappa_i[q]\\circ h_i,\n$$\nwhere the colimit is in abelian groups. Let $\\mathcal C$ consist of those $C$ for which $\\theta_{C,q}$ is bijective for every $q$. Then $\\mathcal C$ is closed under shifts, isomorphisms and extensions: if $C'\\to C\\to C''\\to C'[1]$ is distinguished and $C',C''\\in\\mathcal C$, then $C\\in\\mathcal C$. More generally, any finite construction by extensions, shifts and isomorphisms from any collection $\\mathcal G\\subseteq\\mathcal C$ stays in $\\mathcal C$. This applies in particular to any supplied family of objects $a_!L$ satisfying the comparison condition.\n\nFor the constructible specialization, assume in addition that $X$ is Noetherian, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a finite intermediate extension $E/\\mathbf Q_\\ell$. Take $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$ with the condensed coefficient conventions [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]. Here $D^b_c(X,\\Lambda)$ means bounded complexes with constructible cohomology in the finite constant local model sense of [sk-def-sfb-constructible]. Here a locally closed immersion $a:S\\hookrightarrow X$ is a composite $a=i\\circ u$ with $u:S\\hookrightarrow Z$ an open immersion [def-weil-open-immersion] and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-closed-immersion]. For such a factorization put $a_!L=i_*u_!L$ using module pushforward [def-sfb-module-lower-star] and open extension by zero [def-sfb-module-open-lower-shriek]. A lisse $\\Lambda_S$-module means a module locally isomorphic for the pro-étale topology to a finite direct sum of $\\Lambda_S$. If every such $a_!L$ lies in $\\mathcal C$, then every object of $D^b_c(X,\\Lambda)$ lies in $\\mathcal C$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.md",
   "place": "node det-lem-constructible-ext-continuity-devissage, order None"
  },
  "stmt_deps": [
-  "det-cor-coefficient-heart-ii-generation"
+  "def-pc-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-constructible",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
  ],
  "proof": [
   {
-   "text": "Shifts: $\\Hom(C[n],K[q])=\\Hom(C,K[q-n])$ for both sides, compatibly with the map. Isomorphisms\nare clear.",
-   "uses": [],
-   "elementary": null
+   "text": "For every $C,q$ the maps $h\\mapsto\\kappa_i[q]\\circ h$ are additive and compatible with the transition maps, since $\\kappa_j\\circ K(\\alpha)=\\kappa_i$ for $\\alpha:i\\to j$. The colimit universal property gives the stated $\\theta_{C,q}$. A shift is an additive equivalence, so applying $[-n]$ gives natural additive bijections $\\operatorname{Hom}(C[n],K_i[q])\\cong\\operatorname{Hom}(C,K_i[q+(-n)])$ and the analogous bijection for $K$. Their inverses apply $[n]$. They commute with postcomposition by $\\kappa_i[q]$, hence identify $\\theta_{C[n],q}$ with $\\theta_{C,q-n}$. This proves shift closure. If $e:D\\xrightarrow{\\sim}C$, precomposition with $e$ and $e^{-1}$ gives inverse additive bijections of the two Hom diagrams and their targets, commuting with $\\theta$, so isomorphism closure follows. Also $0\\in\\mathcal C$, since every Hom group out of $0$ is zero.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.proof.md",
+    "place": "Shifts paragraph; definition of the comparison map"
+   }
   },
   {
-   "text": "Extensions: $\\Hom(-,K_i[q])$ and $\\Hom(-,K[q])$ are cohomological functors, so the triangle\ngives long exact sequences\n$$\n\\Hom(C'[1],K_i[q])\\to\\Hom(C'',K_i[q])\\to\\Hom(C,K_i[q])\\to\\Hom(C',K_i[q])\\to\\Hom(C''[-1],K_i[q]),\n$$\nnatural in $i$ and mapping to the corresponding sequence for $K$. Filtered colimits of\nabelian groups are exact, so the colimit over $i$ of the first sequence is exact. The four\nouter comparison maps are bijective because $C',C''\\in\\mathcal C$ (and $\\mathcal C$ is\nclosed under shifts), so the middle one is bijective by the five lemma.",
-   "uses": [],
-   "elementary": null
+   "text": "Write the given distinguished triangle as $C'\\xrightarrow{u}C\\xrightarrow{v}C''\\xrightarrow{w}C'[1]$. For any $W\\in\\mathcal T$ form the five-term row\n$$\\operatorname{Hom}(C'[1],W)\\xrightarrow{w^*}\\operatorname{Hom}(C'',W)\\xrightarrow{v^*}\\operatorname{Hom}(C,W)\\xrightarrow{u^*}\\operatorname{Hom}(C',W)\\xrightarrow{(-w[-1])^*}\\operatorname{Hom}(C''[-1],W).$$\nHere $t^*(h)=h\\circ t$, with the usual shift identifications. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] gives exactness at the second term and clause (i) gives it at the third. Apply clause (i) to the inverse-rotated distinguished triangle $C''[-1]\\xrightarrow{-w[-1]}C'\\xrightarrow{u}C\\xrightarrow{v}C''$ to obtain exactness at the fourth term. Its rotation has arrows $u,v,-(-w[-1])[1]=w$, under the shift identifications, so TR2 gives precisely the original triangle and proves that this inverse rotation is distinguished. Clause (i) of [lem-weil-pbc-hom-into-triangle-exact], applied also to rotations, says that the consecutive triangle composites vanish; hence each consecutive pair in this Hom row has zero composite, as required for exactness. All three uses are for a pre-triangulated category and an arbitrary $W$; there is no boundedness condition.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0145 (definition-triangulated-category), 0146 (lemma-composition-zero), 0149 (lemma-representable-homological); inverse rotation"
+   }
   },
   {
-   "text": "The consequence follows by induction along the finite construction; for $\\Lambda=E,\\Qlb$,\nevery object of $\\Dbc$ is built from objects $a_!L[n]$ with $L$ lisse, i.e. finite locally\nfree, by finitely many cones.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $q$. Apply the row of step 2 to $W=K_i[q]$ for every $i$ and to $W=K[q]$. Every horizontal arrow is precomposition with a fixed arrow $t$ in the triangle or its inverse rotation. Postcomposition with any transition map commutes with it by associativity. The same calculation with the cocone maps gives\n$$\\theta_{A,q}([h_i\\circ t])=\\kappa_i[q]\\circ h_i\\circ t=\\theta_{B,q}([h_i])\\circ t$$\nfor $t:A\\to B$. This includes $t=-w[-1]$, by additivity. Thus these are diagrams of exact rows and the five comparison maps give a commutative ladder. By [lem-weil-pbc-filtered-colimit-abelian-groups-exact], taking the colimit over the small filtered category $I$ leaves the first row exact at its three inner terms. The target row is exact by step 2. All colimits in this step are of abelian groups, not colimits in the derived category.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB, lemma-directed-colimit-exact; applied spotwise to the Hom rows of Tag 0149"
+   }
+  },
+  {
+   "text": "Suppose $C',C''\\in\\mathcal C$. By step 1, $C'[1]$ and $C''[-1]$ also belong to $\\mathcal C$. Consequently the first, second, fourth and fifth vertical arrows in the ladder of step 3 are bijective homomorphisms of abelian groups, hence isomorphisms. In particular the first is epic and the fifth is monic. The rows are exact at the three inner terms, so [lem-weil-pbc-five-lemma], with $\\mathcal A=\\mathrm{Ab}$, makes the middle vertical arrow $\\theta_{C,q}$ an isomorphism. Since $q$ was arbitrary, $C\\in\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05QB, lemma-five-lemma, applied to the five-term Hom ladder"
+   }
+  },
+  {
+   "text": "Let a finite construction start with objects of $\\mathcal G\\subseteq\\mathcal C$ (and, if allowed, $0$). Induct on its number of operations. The starting objects and $0$ lie in $\\mathcal C$. A shift or an isomorphic replacement stays in $\\mathcal C$ by step 1, and an extension stays in it by step 4. This proves the finite-construction assertion. For later use it also gives closure under cones: if $A\\to B\\to D\\to A[1]$ is distinguished and $A,B\\in\\mathcal C$, its rotation $B\\to D\\to A[1]\\to B[1]$ is distinguished. Shift closure puts $A[1]$ in $\\mathcal C$, and extension closure then puts $D$ in $\\mathcal C$. The minus sign in the rotated final arrow does not affect which vertices belong to the class.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.proof.md",
+    "place": "The consequence paragraph: induction along the finite construction, with cones reduced to extensions by rotation"
+   }
+  },
+  {
+   "text": "Now impose the hypotheses of the constructible specialization. They are exactly the Noetherian-scheme and field-coefficient hypotheses of [det-cor-coefficient-heart-ii-generation]. That node says that every $M\\in D^b_c(X,\\Lambda)$ has a finite witness whose entries are $a_!L[n]$ or cones of morphisms between earlier entries, up to shifts and isomorphisms. Each generator there is $a_!L[n]$ with $a_!L=i_*u_!L$ formed through the factorization $a=i\\circ u$ of the locally closed immersion through the closure of its image, $u$ open and $i$ closed, and with $L$ locally free of finite rank for the pro-étale topology. That factorization is one of the open-then-closed factorizations admitted in our hypothesis and $L$ is lisse in our sense (locally isomorphic to a finite direct sum of $\\Lambda_S$), so the assumed membership gives $a_!L\\in\\mathcal C$, and step 1 puts every $a_!L[n]$ in $\\mathcal C$. Induct along the witness: an entry in the generating class lies in $\\mathcal C$ as just shown; an entry isomorphic to $\\operatorname{Cone}(f)[m]$ for a morphism $f$ between earlier entries lies in $\\mathcal C$ by the cone closure of step 5, followed by the shift and isomorphism closure of step 1. Hence the last object $M$ lies in $\\mathcal C$. This includes the zero and empty-scheme cases. Only the finite constant local model constructibility occurring in the cited generation theorem is used; there is no identification with an arbitrary ring-object local finite presentation predicate.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.md",
+    "place": "Statement: finite-cone generation for Noetherian X and Lambda = E or Qlb; devissage proof final paragraph"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "det-cor-coefficient-heart-ii-generation"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/sk-lem-constructible-ext-continuity-devissage.proof.md",
+  "place": "All three proof paragraphs, with the Hom row justified by Stacks Tags 0146/0149, filtered-colimit exactness by Tag 00DB, and the five lemma by Tag 05QB"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a filtered diagram of complexes, the objects C such that Hom(C, K[q]) commutes with its colimit for all q are closed under shifts and extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ab5OfSize\", \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"DerivedCategory.IsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"HomologicalComplex.isGrothendieckAbelian\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsLE\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the eight hits concern AB5 for homological complexes and derived support/truncation classes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "Matches only the existing Hom-exactness tool, not the filtered-diagram comparison or constructible consequence. Source read at Pretriangulated.lean:248-257."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*triangulated|IsTriangulated.*compact|colimit.*yoneda|yoneda.*colimit",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the 25 capped hits concern general colimit and Yoneda constructions, injectivity/projectivity, and presentability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom continuity out of objects of a triangulated category is closed under extensions and shifts",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Subcategory.ext₁'\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₂\", \"CategoryTheory.Functor.IsHomological.mk\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂'\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the eight hits concern closure properties and homological-functor definitions, without constructing the Hom-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a natural transformation of cohomological functors and all its shifts is an isomorphism is a triangulated subcategory",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.homologicalKernel\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Functor.IsHomological.mk'\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the homological-kernel hits assert vanishing and inverted-morphism loci, not the isomorphism locus of this comparison. The source definition and class IsHomological were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso\", \"IsHomological\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the quoted isIso and IsHomological pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(IsHomological|[Tt]riangulated)|(IsHomological|[Tt]riangulated).*isIso|[Cc]ompact",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"CategoryTheory/Triangulated\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits in CategoryTheory/Triangulated for the isomorphism/triangulated or compactness pattern."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a fixed filtered diagram the comparison from colimit of Hom groups into Hom of the colimit is an isomorphism on an extension if it is so on both endpoints in every degree",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit.homIso'\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.colimit.homIso\", \"CategoryTheory.Limits.IsColimit.homIso_hom\", \"CategoryTheory.Limits.IsColimit.homIso'\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimit'\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.Limits.IsColimit.homEquiv\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the eight hits are universal properties of colimits and filtered-colimit/finite-limit interchange, not this Hom-continuity locus."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(homological|Homological)|((homological|Homological).*(isIso|IsIso))",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: the results concern morphisms of distinguished triangles or the homological kernel of a single functor, not this natural transformation from a filtered Hom colimit and its constructible consequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between homological functors to abelian groups which is an isomorphism on two objects of a distinguished triangle is an isomorphism on the third if it is an isomorphism on their shifts",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂\", \"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\", \"CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso\", \"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₃\", \"CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\"], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: the results concern morphisms of distinguished triangles or the homological kernel of a single functor, not this natural transformation from a filtered Hom colimit and its constructible consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.isIso_of_isHomological",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatTrans.isIso_of_isHomological'\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "Not a usable search pattern: Loogle reported an unknown identifier; this run gives no evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomological\", \"NatTrans\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the IsHomological and NatTrans name fragments."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -53,5 +216,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-constructible-ext-continuity"
+ "unit": "sk-lem-constructible-ext-continuity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-constructible-ext-continuity-devissage",
+  "worker": "stage1",
+  "summary": "Checked the exact main-20261015 statement and all three proof paragraphs, project Lean, the existing generation theorem and generic Mathlib tools. Replaced null elementary flags and uncited assertions by six justified steps, spelling out inverse rotation, the five-term exact row, naturality, all four outer comparisons and finite-cone induction. No new node is required. STATEMENT-DISPUTED: made the missing Noetherian hypothesis explicit for the constructible consequence only, in agreement with the cited generation theorem and the already corrected parent node; also specified the small index, ordinary derived category, coefficient conventions and constructibility predicate.",
+  "blueprint": "Proof paragraph 1 (Shifts) is step 1; paragraph 2 (Extensions) is steps 2-4; paragraph 3 (The consequence) is steps 5-6. The formal main argument needs no uniform lower bound; the Noetherian field-coefficient specialization follows exactly the original generation route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-517cb2ff0",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-517cb2ff0 (reviewer sub-agent of L); spot-checked: I read the item, all three blueprint paragraphs (main-20261015), the unit sk-lem-constructible-ext-continuity, its parent and the citer det-lem-int-ext-continuity, the generation node (statement and all five steps), the a_! convention in sk-lem-coefficient-heart, and all 15 stmt_deps and 8 proof_deps (all exist, none merged). The Stacks tags check out in the tag table: 0145, 0146, 0149, 00DB, 05QB. No SGA is used. Statement: the formal closure is kept for any scheme and condensed ring, which is what the O_E citer needs. Noetherian X is added only to the constructible specialization, matching the generation node and the corrected parent; the infinite disjoint union of Spec F_2 shows why it is needed. The coefficients are condensed E or Qlb, and Dbc is the finite-constant-local-model notion of sk-def-sfb-constructible, the same as the generation node. Steps: step 1 shift sign q-n checked for n=±1. Step 2 matches each exactness spot to hom-out (ii)/(i) and to (i) on the inverse rotation; TR2 gives -(-w[-1])[1]=w, and hom-into (i) gives the zero composites. Step 3: the filtered-colimit leaf is applied at the three inner terms, and the ladder commutes by associativity. Step 4: the five-lemma hypotheses hold for C'[1], C'', C', C''[-1]. Step 5: a cone becomes an extension by rotation. FIX: in step 6 I wrote out how the generation node's generators (a_!L = i_*u_!L through the closure, L locally free of finite rank) fall under the item's hypothesis on every open-then-closed factorization, and how a cone-up-to-shift entry of the witness is handled (step 5, then the shift and isomorphism closure of step 1). Text only, no citation change. Duplicate candidate lem-weil-pbc-hom-colimit-extension is in another unit (sk-thm-properbasechange) and not Lean-closed; the item is an imported node that proves the clause from Mathlib leaves, so it is acceptable. No new nodes, no tool_uses. Edge cases: zero object, empty scheme, field, A->A->0, cone of 0->B, unbounded K_i.; 1 file(s) fixed by the reviewer"
+ }
 }

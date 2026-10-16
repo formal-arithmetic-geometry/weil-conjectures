@@ -26,9 +26,112 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the object-space projection $p_{\\mathcal V}:\\operatorname{Algd}(\\mathcal V)\\to\\mathcal S$ of [lem-coef-algebroid-object-space-fibration], which is a Cartesian (hence inner) fibration for any monoidal $\\mathcal V$. Its fiber is $\\operatorname{Alg}_X(\\mathcal V)$, and its mapping-space homotopy fiber over $f:X\\to Y$ is $\\operatorname{Map}(A,f^*B)$. The same cited statement constructs postcomposition by $F$ as a functor $F_*$ over $\\mathcal S$ commuting coherently with restriction. Thus its object space is unchanged and its fiber functor $H_X$ is postcomposition on algebras. No cocontinuity assertion is being taken from this node.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.6.1, 3.6.12 and 4.3.1; Lemma 4.3.9. Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "Put $q(X)=L_{\\mathrm{gen}}\\Delta_X^{\\mathrm{op}}$. The natural equivalence of [lem-coef-many-object-operad-accessibility] identifies $\\operatorname{Alg}_{q(X)}(\\mathcal V)$ with $\\operatorname{Alg}_X(\\mathcal V)$, for every monoidal $\\mathcal V$. It commutes with restriction in $X$ and postcomposition in $\\mathcal V$: both are composition with the same unit $\\Delta_X^{\\mathrm{op}}\\to q(X)$. Each $q(X)$ is a small ordinary nonsymmetric infinity operad; by the Segal condition at $[0]$ in [lem-coef-operadic-algebra-presentability], its zero-fiber is contractible. Consequently for every $f:X\\to Y$, $q(f)$ is an equivalence on zero-fibers and satisfies the hypotheses of [lem-coef-operadic-cocomplete-extensions]. Apply that node to $q(f)$, and transport its adjunction along these natural equivalences, obtaining $f_!^{\\mathcal V}\\dashv f^*$. Also [lem-coef-operadic-algebra-colimit-change] applied to $q(X)$ gives all small fiber colimits, and says that each $H_X$ preserves them. These applications use only cocompleteness and separate tensor cocontinuity, not presentability. We use $q(f)$ here, not $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$, whose zero-fiber map need not be an equivalence.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-operadic-cocomplete-extensions",
+    "lem-coef-operadic-algebra-colimit-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary 3.2.14; Remark 4.3.2; Theorem A.4.6; Corollary A.5.7; Proposition A.5.10. Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "For $A$ in the fiber over $X$, use the unit $A\\to f^*f_!^{\\mathcal V}A$ to form the arrow $A\\to f_!^{\\mathcal V}A$ over $f:X\\to Y$ in the total category. This is cocartesian. Indeed, for a test object $C$ over $Z$ and a map $g:Y\\to Z$, the homotopy fibers over $g$ of its mapping-space comparison are, by [lem-coef-algebroid-object-space-fibration], respectively $\\operatorname{Map}(f_!^{\\mathcal V}A,g^*C)$ and $\\operatorname{Map}(A,f^*g^*C)$. Precomposition with this unit identifies them by the adjunction in [lem-coef-operadic-cocomplete-extensions]; the identifications are natural in $g,C$. Comparing the mapping square to its homotopy pullback over $\\operatorname{Map}_{\\mathcal S}(Y,Z)$, apply [lem-coef-spaces-homotopy-fiber-detection] with the identity on that base: the comparison is an equivalence because it is so on every homotopy fiber. This proves exactly the cocartesian mapping-square criterion of [lem-coef-infinity-grothendieck-limits-colimits]. Together with the inner-fibration property in step 1, it makes $p_{\\mathcal V}$ a cocartesian fibration with transport $f_!^{\\mathcal V}$. The argument applies equally to $\\mathcal W$. Each transport preserves all small colimits, by the following universal-property argument. The dual coherent-adjunction assertion of [lem-coef-parametric-universal-arrows] applied to $f^*$ and its unit extends the adjunction to $K$-diagram functor categories. For a small fiber diagram $B$, write $\\ell=\\operatorname{colim} B$, whose existence follows from [lem-coef-operadic-algebra-colimit-change]. For every target $C$, the adjunction, the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], and the coherent-diagram adjunction give\n$$\\operatorname{Map}(f_!\\ell,C)\\simeq\\operatorname{Map}(\\ell,f^*C)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Alg}_X)}(B,\\operatorname{const}(f^*C))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Alg}_Y)}(f_!B,\\operatorname{const}(C)).$$\nAll three maps are the specified precomposition maps from the unit and the image cocone. The dual cocone criterion therefore says that $f_!\\ell$ with this cocone is a colimit of $f_!B$. This proves transport cocontinuity, including the empty diagram, without assuming a pointwise formula for algebra colimits.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-operadic-cocomplete-extensions",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-grothendieck-limits-colimits",
+    "lem-coef-operadic-algebra-colimit-change",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.6.6 and the mapping-space definition of cocartesian arrows; Proposition A.4.3. Read online; agent reconstruction, archive WANTED. Generic coherent-adjunction and cocone mapping criteria are supplied by the cited existing nodes."
+   }
+  },
+  {
+   "text": "The base $\\mathcal S$ admits all small colimits: [lem-coef-accessible-infinity-pullback] states that spaces are presentable and every presentable infinity category has small colimits. Apply [lem-coef-infinity-grothendieck-limits-colimits] to the cocartesian fibrations of step 3 and the cocomplete fibers of step 2. This proves both total categories are cocomplete and gives the actual colimit cocones. More explicitly, for the given small $K$-diagram $A$, put $X=\\operatorname{colim}_K X_k$ with cocone $f_k:X_k\\to X$. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to its coherent base transformation to the constant diagram at $X$. The resulting transported diagram $D$ lies in $\\operatorname{Fun}(K,\\operatorname{Alg}_X(\\mathcal V))$, with $D_k=f_{k,!}^{\\mathcal V}A_k$ and a coherent cocartesian transformation $A\\to D$. Thus it is a coherent diagram, not just the list of transported objects. The total-colimit formula says that $L=\\operatorname{colim}^{\\operatorname{Alg}_X(\\mathcal V)}_K D$ equipped with the composite cocone from $A$ is a colimit of $A$ in $\\operatorname{Algd}(\\mathcal V)$.",
+   "uses": [
+    "lem-coef-accessible-infinity-pullback",
+    "lem-coef-infinity-grothendieck-limits-colimits",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-operadic-algebra-colimit-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.6.9 and Lemma 4.3.7; the cocartesian total-category colimit formula used there. Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "For every $f:X\\to Y$, apply the coefficient-change mate of [lem-coef-operadic-cocomplete-extensions] to $q(f)$, as justified in step 2. It yields a natural equivalence\n$$f_!^{\\mathcal W}H_X\\xrightarrow{\\sim}H_Yf_!^{\\mathcal V}.$$\nIts defining unit formula says that the image under $F_*$ of the cocartesian unit arrow $A\\to f_!^{\\mathcal V}A$ is the $\\mathcal W$-cocartesian unit arrow $H_XA\\to f_!^{\\mathcal W}H_XA$ followed by this equivalence in the fiber over $Y$. It is therefore cocartesian: precomposition by a fiber equivalence leaves the mapping-space pullback criterion unchanged. Any other cocartesian lift over $f$ with the same source has the same mapping-space universal property: the two properties give maps between the targets over the identity of $Y$, and their composites are homotopic to the respective identities by uniqueness in those mapping-space fibers. Hence their targets are equivalent in the fiber. It follows that $F_*$ preserves all cocartesian arrows. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to the transformation $A\\to D$ from step 4. Its image $F_*A\\to H_XD$ has cocartesian components, and hence is a cocartesian lift of the same coherent base transformation. The cited node's coherent transport and mapping-space formula identify the transported diagram for $F_*A$ with $H_XD$, including its cocone from $F_*A$. Thus the equivalences here identify transformations and their higher simplices, not just object values.",
+   "uses": [
+    "lem-coef-operadic-cocomplete-extensions",
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-infinity-grothendieck-limits-colimits",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma A.4.7 and the proof of Proposition 3.6.10. Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "By [lem-coef-operadic-algebra-colimit-change], the fiber functor $H_X$ preserves the $K$-colimit of $D$; hence the canonical fiber comparison $\\operatorname{colim}^{\\operatorname{Alg}_X(\\mathcal W)}_K H_XD\\to H_XL$ is an equivalence compatible with the fiber cocone. The formula of [lem-coef-infinity-grothendieck-limits-colimits], using the coherent transported diagram identified in step 5, identifies its source with $\\operatorname{colim}_K F_*A$. Its target, regarded in the total category over $X$, is $F_*L$. The compatibility with the transported cocones shows that this arrow is precisely the canonical comparison in the item. For $K$ empty the base colimit is $X=\\varnothing$, the transported diagram is empty, and the same fiber theorem sends its initial object to the initial object in the fiber over $\\varnothing$. The total-colimit formula then makes the comparison an equivalence for the empty diagram too. This proves every asserted colimit preservation statement under the original hypotheses.",
+   "uses": [
+    "lem-coef-operadic-algebra-colimit-change",
+    "lem-coef-infinity-grothendieck-limits-colimits",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.6.10; Proposition A.5.10; the same fiber argument as Lemma 4.3.7. Read online; agent reconstruction, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-algebroid-object-space-fibration",
+  "def-coef-complete-algebroid",
+  "lem-coef-many-object-operad-accessibility",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-operadic-cocomplete-extensions",
+  "lem-coef-operadic-algebra-colimit-change",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-grothendieck-limits-colimits",
+  "lem-coef-parametric-universal-arrows",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-accessible-infinity-pullback",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Reconstruction from Proposition 3.6.10 and the proof of Lemma 4.3.7, using Theorem A.4.6, Lemma A.4.7, Corollary A.5.7 and Proposition A.5.10. Sources read online; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +188,45 @@
    "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "Algd|Operad|preserves.*colimit",
+   "results": "{\"t\": \"2026-10-16T18:17:48Z\", \"tool\": \"grep\", \"query\": \"Algd|Operad|preserves.*colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/GlueData.lean\", \"Mathlib/CategoryTheory/GlueData.lean\", \"Mathlib/CategoryTheory/GlueData.lean\", \"Mathlib/CategoryTheory/GlueData.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\"], \"digest\": \"e4ed32900811a556\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: strict ordinary enrichment (Mathlib/CategoryTheory/Enriched/Basic.lean:58), ordinary actions (Action/Limits.lean:258), and ordinary colimit-preserving functors do not state cocontinuity on infinity-operadic algebroids."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapActionPreservesColimitsOfShapeOfPreserves, CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor",
+   "results": "{\"t\": \"2026-10-16T18:17:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapActionPreservesColimitsOfShapeOfPreserves, CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.mapActionPreservesColimitsOfShapeOfPreserves'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: query returned no hits; loogle: unknown identifier 'CategoryTheory.Functor.mapActionPreservesColimitsOfShapeOfPreserves' Other semantic and source searches below cover the concept."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A colimit preserving strong monoidal functor induces a colimit preserving functor on operadic enriched infinity algebroids",
+   "results": "{\"t\": \"2026-10-16T18:17:48Z\", \"tool\": \"leansearch\", \"query\": \"A colimit preserving strong monoidal functor induces a colimit preserving functor on operadic enriched infinity algebroids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.Functor.mapActionPreservesColimit_of_preserves\", \"Action.Functor.mapActionPreservesColimitsOfShapeOfPreserves\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"Action.Functor.preservesColimitsOfSize_of_preserves\", \"CategoryTheory.Limits.PreservesColimit.mk\", \"CategoryTheory.Adjunction.colim_preservesColimits\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.instPreservesColimitsTensorLeft\"], \"digest\": \"6a84bfcb2af66290\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: strict ordinary enrichment (Mathlib/CategoryTheory/Enriched/Basic.lean:58), ordinary actions (Action/Limits.lean:258), and ordinary colimit-preserving functors do not state cocontinuity on infinity-operadic algebroids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving strong monoidal functor induces a colimit preserving functor on operadic enriched infinity algebroids",
+   "results": "{\"t\": \"2026-10-16T18:17:49Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit preserving strong monoidal functor induces a colimit preserving functor on operadic enriched infinity algebroids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_map\"], \"digest\": \"15eb4aef6d793039\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: strict ordinary enrichment (Mathlib/CategoryTheory/Enriched/Basic.lean:58), ordinary actions (Action/Limits.lean:258), and ordinary colimit-preserving functors do not state cocontinuity on infinity-operadic algebroids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Without presentability operadic algebra colimits are preserved by cocontinuous changes of monoidal enrichment",
+   "results": "{\"t\": \"2026-10-16T18:25:06Z\", \"tool\": \"leanfinder\", \"query\": \"Without presentability operadic algebra colimits are preserved by cocontinuous changes of monoidal enrichment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"Action.preservesColimitsOfSize_of_preserves\"], \"digest\": \"94f11c079e46edb7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the inspected Mathlib results are ordinary category theory. CategoryTheory.Monad.forget_creates_colimits_of_monad_preserves (Mathlib/CategoryTheory/Monad/Limits.lean:263) is for ordinary monads, Action.Functor.mapActionPreservesColimit_of_preserves (Mathlib/CategoryTheory/Action/Limits.lean:258) is for ordinary actions, and SSet.hasColimits is for simplicial sets. None concerns generalized nonsymmetric infinity-operadic algebras or all their colimits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-bilinear-colimits",
@@ -96,5 +234,29 @@
   "group": "Q05"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-cocontinuous-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reconstructed the unary cocontinuity proof without presentability, using ordinary operadic replacements q(X), free extensions and their specified coefficient-change mate, and the existing coherent total-category colimit formula. Created two fixed-operad foundation nodes; reused the object-space Cartesian fibration, fiber-detection and coherent-transport statements after checking their exact hypotheses. Neither a presentable-only adjunction nor an external tensor-product preservation claim is used.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim; supports the unary enrichment-change input of the enriched tensor calculus, through the recorded blueprint ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 3 uses the dual cocone mapping-space criterion to prove directly that the free-extension left adjoints preserve small colimits. This is generic quasicategory universal-property calculus; no in-unit statement gives this criterion, and it does not replace any mathematical step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-908a4a4de",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-908a4a4de (reviewer sub-agent of L); spot-checked: I read the full item, both new nodes, every cited node statement, the unit (it has no steps) and the chapter. I checked the Gepner–Haugseng sources directly in arXiv:1312.3178v4 (PDF text extracted to /tmp). The item is GH Prop. 3.6.10 plus Lemma 4.3.7 pulled back to Algd, with no presentability, which matches the source; the statement is unchanged and not weakened. New node lem-coef-operadic-cocomplete-extensions matches Thm A.4.6, Prop. A.4.3 and Lemma A.4.7 exactly: Kan zero-fibres, u_[0] an equivalence, the kappa bound met by smallness, and the mate f_!F_* -> F_*f_! adjoint to F_* -> f^*F_*f_!. New node lem-coef-operadic-algebra-colimit-change matches Cor. A.5.7 and Prop. A.5.10; it adds a smallness assumption, which only weakens it. Step 2 correctly applies the free-extension theorem to q(f)=L_gen of the map, not the raw Delta_X^op -> Delta_Y^op, whose zero-fibre map X -> Y fails A.4.6's hypothesis. Steps 3-6 are the cocartesian-fibration argument (GHN 9.8 and Prop. 3.6.10), and each cited statement says what the step takes from it. Edge cases checked: the empty diagram (object space empty, Alg_empty a point), X a point (associative algebras), and identity F. The candidate duplicates (operadic-free-extension, change-enrichment, enrichment-change-adjunction, colorwise-sifted-colimits, active-slice formula, free-cocone characterization, algebroid-presentability) all assume presentability or cover only sifted colimits, so none is a duplicate. The dependency closure does not contain the item (no cycle), every dependency exists, the searches have all three kinds, the blueprint fields are correct and no SGA is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic dual cocone criterion. No fixes."
+ }
 }

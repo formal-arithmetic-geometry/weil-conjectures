@@ -20,44 +20,247 @@
  },
  "kind": "statement",
  "title": "Relative Cartesian model structure on marked simplicial sets",
- "statement": "Use the universes, marked simplicial sets, markings $K^\\flat,K^\\sharp$, marked products and model-category conventions of [lem-coef-marked-point-cartesian-model], and the cartesian and cocartesian fibrations of [def-coef-infinity-fibrations]. Let $S$ be a small simplicial set. An object of $\\mathsf M_S$ is a marked simplicial set $X$ with a simplicial map to $S$; maps lie over $S$ and preserve markings. Define\n$$\\operatorname{Map}^{\\sharp}_S(X,Y)_n=\\operatorname{Hom}_{\\mathsf M_S}(X\\times(\\Delta^n)^\\sharp,Y),$$\nwhere the base map of the product ignores the second factor. For a cartesian fibration $q:Z\\to S$, let $Z^\\natural$ mark exactly its cartesian edges. A Cartesian equivalence $f:X\\to Y$ is a map for which $\\operatorname{Map}^{\\sharp}_S(Y,Z^\\natural)\\to\\operatorname{Map}^{\\sharp}_S(X,Z^\\natural)$ is a weak homotopy equivalence for every small cartesian fibration $Z\\to S$.\n\nThe category $\\mathsf M_S$ has a left proper combinatorial simplicial model structure with monomorphisms as cofibrations and Cartesian equivalences as weak equivalences; its fibrant objects are exactly the $Z^\\natural$. Its Kan enrichment is $\\operatorname{Map}^{\\sharp}_S$, and all objects are cofibrant. For fibrant $X^\\natural,Y^\\natural$, this enrichment is the core of the full subcategory of $\\operatorname{Fun}_{/S}(X,Y)$ on cartesian-edge-preserving functors. A map between these fibrant objects is a weak equivalence if and only if every map of vertex fibers is an equivalence of quasicategories, and if and only if it has a marked inverse over $S$ up to coherent natural equivalences over $S$.\n\nFor every simplicial map $a:T\\to S$, composition $a_!:\\mathsf M_T\\to\\mathsf M_S$ is left Quillen and its right adjoint is degreewise pullback $a^*$. Pullbacks of cartesian fibrations represent homotopy pullbacks in the Joyal model structure. Taking opposites gives the cocartesian model structure with these assertions and cocartesian edges in place of cartesian edges.",
+ "statement": "Use the universes, marked simplicial sets, markings $K^\\flat,K^\\sharp$, marked products and model-category conventions of [lem-coef-marked-point-cartesian-model], and the simplicial conventions of [def-cbc-enhanced-diagrams-cones]. Extend the horn definitions of [def-coef-infinity-fibrations] to arbitrary small simplicial sets: an edge of an inner fibration $q:Z\\to S$ is cartesian when every final-horn lifting problem $\\Lambda_n^n\\subseteq\\Delta^n$, $n\\geq2$, with that edge on $\\{n-1,n\\}$ has a filler; $q$ is a cartesian fibration when every edge $s\\to q(z)$ has such a lift with target $z$. No quasicategory hypothesis on $S$ is imposed. The cocartesian definitions are the opposite horn definitions. Let $S$ be a small simplicial set. An object of $\\mathsf M_S$ is a marked simplicial set $X$ with a simplicial map to $S$; maps lie over $S$ and preserve markings. Define\n$$\\operatorname{Map}^{\\sharp}_S(X,Y)_n=\\operatorname{Hom}_{\\mathsf M_S}(X\\times(\\Delta^n)^\\sharp,Y),$$\nwhere the base map of the product ignores the second factor. For a cartesian fibration $q:Z\\to S$, let $Z^\\natural$ mark exactly its cartesian edges. A Cartesian equivalence $f:X\\to Y$ is a map for which $\\operatorname{Map}^{\\sharp}_S(Y,Z^\\natural)\\to\\operatorname{Map}^{\\sharp}_S(X,Z^\\natural)$ is a weak homotopy equivalence for every small cartesian fibration $Z\\to S$.\n\nThe category $\\mathsf M_S$ has a left proper combinatorial simplicial model structure with monomorphisms as cofibrations and Cartesian equivalences as weak equivalences; its fibrant objects are exactly the $Z^\\natural$, and all objects are cofibrant. Its simplicial enrichment is $\\operatorname{Map}^{\\sharp}_S$, which is Kan whenever the target is fibrant. For fibrant $X^\\natural,Y^\\natural$, this enrichment is the core of the full subcategory of $\\operatorname{Fun}_{/S}(X,Y)$ on cartesian-edge-preserving maps; here $\\operatorname{Fun}_{/S}(X,Y)_n$ is explicitly the set of simplicial maps $X\\times\\Delta^n\\to Y$ over $S$, whether or not the total spaces are quasicategories. That full subcategory is a quasicategory. A map between these fibrant objects is a weak equivalence if and only if every map of vertex fibers is an equivalence of quasicategories, and if and only if it has a marked inverse over $S$ up to coherent natural equivalences over $S$, meaning paths between the composites and the identity vertices in the relative sharp mapping Kan complexes.\n\nFor every simplicial map $a:T\\to S$, composition $a_!:\\mathsf M_T\\to\\mathsf M_S$ is left Quillen and its right adjoint is degreewise pullback $a^*$. Every degreewise pullback square of a cartesian fibration is a homotopy pullback in the Joyal model structure: equivalently its comparison with the pullback of a fibrant replacement of the cospan is a categorical equivalence. Taking opposites gives the cocartesian model structure with these assertions and cocartesian edges in place of cartesian edges.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Propositions 3.1.3.3, 3.1.3.5, 3.1.3.7, 3.1.4.1; Corollaries 3.1.4.4 and 3.3.1.4; base-change Quillen adjunction follows from pullback preserving fibrant test objects (as in the proof of 3.1.3.7) Read HTT.pdf, downloaded into the delivery sandbox; no Stacks tag states this simplicial result."
  },
  "stmt_deps": [
   "lem-coef-marked-point-cartesian-model",
-  "def-coef-infinity-fibrations",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Limits and colimits exist: take the degreewise simplicial limit or colimit over $S$, marking an edge in a limit exactly when all its projections are marked, and in a colimit when it comes from a marked edge. The terminal object is $S^\\sharp$. Every marked object over $S$ is the filtered union of its finite simplicial subobjects with induced markings and base maps; finite means finitely many nondegenerate simplices. Such finite objects have Hom preserving filtered colimits: their maps and all relations involve finitely many simplices. There is a set of them, since they are finite diagrams labelled by simplices of the small set $S$. This proves local finite presentability. Let $I_S$ consist of $(\\partial\\Delta^n)^\\flat\\to(\\Delta^n)^\\flat$ labelled by every simplex of $S$, including $n=0$, and $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ labelled by every edge of $S$. Every monomorphism is built by adjoining its missing simplices using the boundary-cell description of monomorphisms, then adjoining its missing markings. Thus its weakly saturated closure is precisely all monomorphisms. The displayed limit/colimit and finite-subobject checks are degreewise set calculations, and $\\varnothing\\to X$ is always a monomorphism.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7, category and generating cofibrations"
+   }
+  },
+  {
+   "text": "Regard objects over $S$ as marked maps to $S^\\sharp$. The relative lifting criterion says that right lifting against the marked-anodyne class is exactly being naturally marked cartesian. Use the small generating set of marked-anodyne maps, with every possible map of its codomain to $S$, in the small-object factorization of $X\\to S^\\sharp$. Its domains are countable, and maps from a countable domain to a continuous $\\aleph_1$-chain of monomorphisms factor through one stage, as do equalities between two such maps. The required smallness hypothesis is therefore satisfied. This produces a functorial marked-anodyne $X\\to RX=Q_X^\\natural$ over $S$. Relative restriction along it is a trivial Kan fibration into every $Z^\\natural$, so it belongs to $W_S$. The same relative lifting statement also supplies Kan mapping complexes for every source and cartesian target.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.1.10; Lemma 3.1.3.6; proof of Proposition 3.1.4.1"
+   }
+  },
+  {
+   "text": "A marked map with a marked homotopy inverse over $S$ belongs to $W_S$: precomposition with the two maps and their sharp homotopies gives simplicial homotopy inverse maps on every sharp mapping Kan complex. Conversely let $f:X^\\natural\\to Y^\\natural$ belong to $W_S$. The test target $X^\\natural$ makes precomposition surjective on $\\pi_0$, so choose $r:Y^\\natural\\to X^\\natural$ and a path $rf\\simeq1_X$. The test target $Y^\\natural$ makes precomposition injective on $\\pi_0$; since $(fr)f\\simeq f=1_Yf$, it follows that $fr\\simeq1_Y$. Paths can be composed and reversed in the Kan mapping complexes. Restricting these data to a vertex of $S$ gives functor quasi-inverses of the vertex fibers, which are quasicategories by the inner-horn condition over a point. Thus $W_S$ between natural cartesian objects implies fiberwise equivalence.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, (1) implies (2) and (2) implies (3)"
+   }
+  },
+  {
+   "text": "Suppose now that $f:X^\\natural\\to Y^\\natural$ induces equivalences at every vertex. Construct $r:Y^\\natural\\to X^\\natural$ and $h:rf\\simeq1_X$ by induction over a boundary-cell construction of $S$ from the empty set. Pullback of a union or a boundary pushout over $S$ is computed degreewise and preserves that gluing, so compatible maps on the pieces glue. At a $0$-cell choose a quasi-inverse and its unit homotopy for the specified fiber equivalence; over a point the sharp mapping complex is the core of the functor category. At an $n$-cell with $n\\geq1$, pull back to $\\Delta^n$. The fibrations and natural markings pull back, all its vertex-fiber maps are equivalences, and the already constructed boundary values are exactly the data in the simplex inverse-extension lemma. Extend them without changing the boundary. At limits take the union. This supplies global $r,h$. Each $r_s$ is an equivalence because $r_sf_s\\simeq1$ and $f_s$ is an equivalence; repeat the same construction for $r$ to obtain $t:X\\to Y$ with $tr\\simeq1_Y$. Whiskering $rf\\simeq1_X$ by $t$ gives $trf\\simeq t$, hence $f\\simeq t$, and then $fr\\simeq tr\\simeq1_Y$. All these homotopies are paths in the relative Kan mapping complexes, so Step 3 gives $f\\in W_S$. This proves both equivalence characterizations without straightening.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-cartesian-simplex-inverse-extension",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, (3) implies (2), induction over the base simplices"
+   }
+  },
+  {
+   "text": "Steps 3–4 establish the fiber criterion required as a hypothesis of the finite relative saturation lemma. Applied with that criterion, this lemma makes $W_S$ perfect in precisely the sense required by model recognition. To check the remaining pushout hypothesis, let $A\\to B$ be in $W_S$ and $A\\hookrightarrow C$ a monomorphism. For a cartesian test object $Z^\\natural$, mapping out of $B\\amalg_A C$ is the strict pullback of the mapping complexes for $B$ and $C$ over that for $A$. The map $\\operatorname{Map}^\\sharp_S(C,Z^\\natural)\\to\\operatorname{Map}^\\sharp_S(A,Z^\\natural)$ is a Kan fibration by relative restriction. The other leg is a weak homotopy equivalence by the definition of $W_S$. Kan right properness therefore says that restriction from the pushout to $C$ is a weak homotopy equivalence. This proves pushout stability along every monomorphism, not merely along weak monomorphisms.",
+   "uses": [
+    "lem-coef-relative-cartesian-equivalence-saturation",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7, conditions (1) and (3)"
+   }
+  },
+  {
+   "text": "If $p:U\\to V$ is $I_S$-injective, its underlying simplicial map has right lifting against all boundary inclusions, and it reflects marked edges: apply the marking-addition generator to each edge of $U$ whose image is marked. The underlying map is therefore a trivial Kan fibration. Lift $\\varnothing\\to V$ against it to get a section $s$, which preserves markings by reflection. Lift the monomorphism $U\\times\\partial\\Delta^1\\to U\\times\\Delta^1$ against $p$, prescribing $sp$ and $1_U$ at the endpoints and $p\\operatorname{pr}_U$ below. The lift is marked as a map $U\\times(\\Delta^1)^\\sharp\\to U$: the image under $p$ of each marked edge is marked, so reflection applies. This is a homotopy over $V$, hence over $S$, from $sp$ to $1_U$, and $ps=1_V$. Step 3 gives $p\\in W_S$. We have now verified completeness, cocompleteness, local presentability, the small cofibration generators, perfectness of $W_S$, pushout stability, and inclusion of $I_S$-injectives in $W_S$. Apply perfect-class model recognition to obtain the asserted left proper combinatorial model structure with cofibrations the monomorphisms and weak equivalences $W_S$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-perfect-weak-equivalence-model-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7, condition (4) and conclusion"
+   }
+  },
+  {
+   "text": "For a natural cartesian $Z^\\natural$ and a trivial cofibration $i$, relative restriction on sharp maps into $Z^\\natural$ is a Kan fibration and, by $i\\in W_S$, a weak homotopy equivalence. It is a trivial Kan fibration, hence surjective on vertices, which supplies every required lift of $i$ against $Z^\\natural\\to S^\\sharp$. Thus $Z^\\natural$ is model-fibrant. Conversely, for any model-fibrant $V$, Step 2 gives a marked-anodyne monomorphism $V\\to RV$ belonging to $W_S$, hence a trivial cofibration. Fibrancy gives a retraction $RV\\to V$ over $S$. The map $V\\to S^\\sharp$ is therefore a retract of an RLP map and has RLP against all marked-anodyne maps; the relative criterion identifies it as naturally marked cartesian. Also all objects are cofibrant by Step 1.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.4.1"
+   }
+  },
+  {
+   "text": "There is a simplicial action $X\\otimes K=X\\times K^\\sharp$ over $S$. Its right adjoint in $X$ is the relative cotensor $Y^{K^\\sharp}\\times_{(S^\\sharp)^{K^\\sharp}}S^\\sharp$, where the map from $S^\\sharp$ is the constant-diagram map; the exponentials are the marked internal Homs. Transposition gives both tensor-cotensor adjunctions. In degree $n$ the enrichment is exactly the displayed $\\operatorname{Map}^\\sharp_S$, with operators given by precomposition on $\\Delta^n$. To compose two $n$-simplices apply the first map, the second map, and the diagonal $\\Delta^n\\to\\Delta^n\\times\\Delta^n$; identity maps give units. The diagonal is associative and unital, so this is an enrichment compatible with the action. These are identities of marked maps and require no extra exactness theorem.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.4, enrichment, tensor and cotensor formulas"
+   }
+  },
+  {
+   "text": "Products are external: $\\mathsf M_S\\times\\mathsf M_T\\to\\mathsf M_{S\\times T}$. Fix $f:X\\to Y$ in $W_S$ and any marked $V\\to T$. Apply the functorial replacements of Step 2 to get the commutative square from $f$ to $Rf$. Its vertical maps are marked anodyne and hence in $W_S$, so $Rf$ is in $W_S$ by two-out-of-three; Step 3 supplies a marked inverse for $Rf$. Taking its product with $V$ retains this inverse and its sharp homotopies, so $(Rf)\\times V$ belongs to $W_{S\\times T}$. The two vertical replacement maps times $V$ are marked anodyne by the marked-anodyne pushout-product result, applied with the monomorphism $\\varnothing\\to V$, and hence belong to $W_{S\\times T}$. Two-out-of-three proves $f\\times V\\in W_{S\\times T}$. Exchange the factors to obtain the assertion in either variable. No claim about a fiber-product monoidal structure over $S$ is used.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.4.2"
+   }
+  },
+  {
+   "text": "For monomorphisms $i:A\\hookrightarrow B$ over $S$ and $j:U\\hookrightarrow V$ over $T$, the external pushout product $(B\\times U)\\amalg_{A\\times U}(A\\times V)\\to B\\times V$ is a monomorphism, degreewise the inclusion of the union of the two subobjects, with the same union of markings. If $i\\in W_S$, then $A\\times U\\to B\\times U$ and $A\\times V\\to B\\times V$ are weak by Step 9. Push the first map along the monomorphism $A\\times U\\to A\\times V$. Left properness makes $A\\times V\\to(B\\times U)\\amalg_{A\\times U}(A\\times V)$ weak; two-out-of-three makes the pushout product weak. Exchanging variables proves this when $j$ is weak. For the simplicial axiom take $T=\\Delta^0$ and $j=K^\\sharp\\to L^\\sharp$ for a Kan-Quillen cofibration $K\\to L$. This marked map is a cofibration; when $K\\to L$ is trivial it is a weak equivalence in the marked point model, by its simplicial axiom applied to $\\varnothing\\to(\\Delta^0)^\\sharp$. The external result now proves the required simplicial pushout-product axiom. Along with Step 8 this makes the relative model simplicial.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 3.1.4.3 and 3.1.4.4"
+   }
+  },
+  {
+   "text": "For natural cartesian $X,Y$, an $n$-simplex of $\\operatorname{Map}^\\flat_S(X^\\natural,Y^\\natural)$ is a map $X\\times\\Delta^n\\to Y$ over $S$ preserving exactly the pairs consisting of a cartesian edge of $X$ and a degenerate edge of $\\Delta^n$. These pairs are precisely the cartesian edges at each parameter vertex. Thus the marking condition says exactly that every vertex map preserves cartesian edges, with no condition on a parameter edge between distinct vertices. Consequently this mapping object is the full simplicial subcategory on cartesian-preserving maps. The relative calculus says that the flat mapping object is a quasicategory and its core is $\\operatorname{Map}^\\sharp_S(X^\\natural,Y^\\natural)$. This also respects composition because all compositions are the same substitution of simplicial maps. More generally its sharp mapping complex is Kan for every marked source whenever the target is natural cartesian, so Step 7 gives the asserted Kan property for fibrant targets. No claim that arbitrary total spaces over $S$ are quasicategories is needed.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1; Corollary 3.1.4.4"
+   }
+  },
+  {
+   "text": "For $a:T\\to S$, the adjunction $a_!\\dashv a^*$ is the degreewise identity between a map into a pullback and a map with the stated base composite. The relative base-change lemma makes $a^*(Z^\\natural)=(T\\times_S Z)^\\natural$ a cartesian test object over $T$. Consequently $\\operatorname{Map}^\\sharp_S(a_!U,Z^\\natural)=\\operatorname{Map}^\\sharp_T(U,a^*Z^\\natural)$ in every degree, compatibly with simplicial operators. This identity shows directly that $a_!$ preserves $W_T$. It preserves monomorphisms as it changes only the base map. It therefore preserves cofibrations and trivial cofibrations, proving that the displayed adjunction is Quillen.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Base-change mapping identity following Definition 3.1.3.4 and Proposition 3.1.3.7"
+   }
+  },
+  {
+   "text": "Apply the conditional base-equivalence lemma to the family of model structures constructed for every base in Steps 1–12: Step 6 supplies the left proper combinatorial structures, Step 7 their fibrant objects, Steps 3–4 the fiber and inverse criteria, Steps 8–11 the sharp simplicial structure, and Step 12 the Quillen adjunctions. Thus every hypothesis of that lemma is established before it is used. Consider $Z\\xrightarrow{q}S\\xleftarrow{a}T$ with $q$ cartesian. Use Joyal factorization to choose a categorical-equivalence monomorphism $i:S\\to S'$ with $S'$ a quasicategory. Cartesian base-equivalence extension gives $q':Z'\\to S'$ and $u:Z\\to S\\times_{S'}Z'$ whose pullback to every $T\\to S$ is a categorical equivalence. The projection $S\\times_{S'}Z'\\to Z'$ is a categorical equivalence by part (1) of that same base-equivalence lemma, so $Z\\to Z'$ is one by two-out-of-three. Factor $T\\to S'$ as a categorical equivalence $T\\to T'$ followed by a Joyal fibration $T'\\to S'$. Since $S'$ is fibrant, $T'$ is a quasicategory. Also $q'$ is a Joyal fibration by the relative lifting lemma, and $Z'$ is a quasicategory. Thus the new cospan has fibrant objects and fibration legs, and its ordinary pullback $T'\\times_{S'}Z'$ is a fibrant-cospan model for the Joyal homotopy pullback. The comparison from the original pullback factors as\n$$T\\times_S Z\\longrightarrow T\\times_{S'}Z'\\longrightarrow T'\\times_{S'}Z'.$$\nThe first map is a categorical equivalence by the universal assertion about $u$, and the second is one by part (1) of the base-equivalence lemma applied to $T\\to T'$ and the cartesian fibration $T'\\times_{S'}Z'\\to T'$. Their composite is a categorical equivalence. This proves the claimed homotopy-pullback assertion for arbitrary $S,T$, without assuming the Joyal model is right proper.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-cartesian-base-equivalence-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.1.4, with Corollary 3.3.1.2 and Proposition 3.3.1.3"
+   }
+  },
+  {
+   "text": "Reverse the order in every simplex and retain the corresponding marked edges. This gives an involution on marked simplicial sets, with bases changed from $S$ to $S^{op}$, preserving degreewise limits, colimits and monomorphisms. It exchanges inner horn indices $i$ and $n-i$, and the final-edge lifting condition with the initial-edge condition. Thus it exchanges cartesian and cocartesian fibrations and their natural markings. In degree $n$, reversing the parameter simplex identifies the opposite of $\\operatorname{Map}^\\sharp_{S^{op}}(X^{op},Y^{op})$ with $\\operatorname{Map}^\\sharp_S(X,Y)$. Reversing barycentric coordinates gives a homeomorphism of realizations, so this identification preserves the weak homotopy equivalences used in the mapping tests and preserves the Kan property. Define a cocartesian weak equivalence or fibration $f$ to mean respectively a cartesian weak equivalence or fibration $f^{op}$ over $S^{op}$; cofibrations are still monomorphisms. Factor $f^{op}$ by each of the two cartesian factorizations and take opposites of both factors. A lifting square for the resulting classes is exactly the opposite of a cartesian lifting square, and the opposite of its diagonal is the required diagonal. This proves both weak factorization systems, while two-out-of-three and retract closure follow from the same identities. Local presentability and the generating sets follow by taking opposites of their diagrams and maps. Colimits and pushouts are preserved by this involution, giving left properness. For the simplicial axiom, the opposite of the pushout product of $i$ with $K^\\sharp\\to L^\\sharp$ is the cartesian pushout product of $i^{op}$ with $(K^{op})^\\sharp\\to(L^{op})^\\sharp$; reversal preserves the Kan cofibrations and weak equivalences. The tensor remains $X\\times K^\\sharp$, with the enrichment just identified. Degreewise pullbacks and the composition/pullback adjunctions obey the same opposite identities. Finally $\\operatorname{Fun}(A^{op},C^{op})=\\operatorname{Fun}(A,C)^{op}$ identifies the categorical-equivalence tests after taking opposite homotopy categories, and hence preserves Joyal fibrations by their lifting characterization. Taking opposites of a fibrant replacement cospan and its pullback therefore proves the cocartesian homotopy-pullback assertion.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opposite convention for the cocartesian model; dual of Corollary 3.3.1.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-cartesian-simplex-inverse-extension",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-relative-cartesian-equivalence-saturation",
+  "lem-coef-perfect-weak-equivalence-model-recognition",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-cartesian-base-equivalence-invariance",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Detailed argument following the source places of the individual steps. Independent second reading used HTT-second-reading.pdf and its extracted text in this sandbox; the source is still absent from project literature/. See the explicit statement repairs and the conditional base-equivalence repair in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Marked simplicial sets over a base with the Cartesian model structure and a Quillen straightening adjunction",
-   "results": "{\"t\": \"2026-10-16T18:25:14Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets over a base with the Cartesian model structure and a Quillen straightening adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.Augmented\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.QCat.bicategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet\"], \"digest\": \"1c2090a41021e0ae\"}",
+   "query": "relative Cartesian model structure on marked simplicial sets over a simplicial base",
+   "results": "{\"t\": \"2026-10-16T19:35:46Z\", \"tool\": \"leanfinder\", \"query\": \"relative Cartesian model structure on marked simplicial sets over a simplicial base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Augmented\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.over\"], \"digest\": \"20a168fcf0fe0a5f\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic search returned SSet.QCat, the Kan-Quillen model on unmarked simplicial sets and generic model-category axioms. grep returned no marked simplicial set or relative Cartesian model implementation. lem-coef-marked-point-cartesian-model is only the absolute point case."
+   "verdict": "no match: unmarked SSet Kan-Quillen cofibration/fibration classes and SSet.QCat bicategory do not give the relative marked Cartesian model. The ordinary ModelCategory.over instance uses inherited total weak equivalences, not the mapping tests here."
   },
   {
    "tool": "leansearch",
-   "query": "The relative Cartesian model structure on marked simplicial sets and the marked cone straightening Quillen equivalence",
-   "results": "{\"t\": \"2026-10-16T18:25:39Z\", \"tool\": \"leansearch\", \"query\": \"The relative Cartesian model structure on marked simplicial sets and the marked cone straightening Quillen equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.cofibrations_eq\"], \"digest\": \"ee1662a8087056ef\"}",
+   "query": "relative Cartesian model structure on marked simplicial sets over a simplicial base",
+   "results": "{\"t\": \"2026-10-16T19:35:54Z\", \"tool\": \"leansearch\", \"query\": \"relative Cartesian model structure on marked simplicial sets over a simplicial base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.over\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.RelativeMorphism.map\"], \"digest\": \"0090b760cdbd64bb\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic search returned SSet.QCat, the Kan-Quillen model on unmarked simplicial sets and generic model-category axioms. grep returned no marked simplicial set or relative Cartesian model implementation. lem-coef-marked-point-cartesian-model is only the absolute point case."
+   "verdict": "no match: unmarked SSet Kan-Quillen cofibration/fibration classes and SSet.QCat bicategory do not give the relative marked Cartesian model. The ordinary ModelCategory.over instance uses inherited total weak equivalences, not the mapping tests here."
   },
   {
    "tool": "grep",
-   "query": "MarkedSSet|MarkedSimplicial|CartesianModel|StPlus|UnPlus",
-   "results": "{\"t\": \"2026-10-16T18:26:12Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|CartesianModel|StPlus|UnPlus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "cartesian.?equivalence|marked.?simplicial",
+   "results": "{\"t\": \"2026-10-16T19:35:47Z\", \"tool\": \"grep\", \"query\": \"cartesian.?equivalence|marked.?simplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic search returned SSet.QCat, the Kan-Quillen model on unmarked simplicial sets and generic model-category axioms. grep returned no marked simplicial set or relative Cartesian model implementation. lem-coef-marked-point-cartesian-model is only the absolute point case."
+   "verdict": "no match: unmarked SSet Kan-Quillen cofibration/fibration classes and SSet.QCat bicategory do not give the relative marked Cartesian model. The ordinary ModelCategory.over instance uses inherited total weak equivalences, not the mapping tests here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial model category of marked simplicial sets over an arbitrary base with fiberwise categorical weak equivalences",
+   "results": "{\"t\": \"2026-10-16T19:50:28Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial model category of marked simplicial sets over an arbitrary base with fiberwise categorical weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"61ec2d4387733edb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: unmarked SSet Kan-Quillen cofibration/fibration classes and SSet.QCat bicategory do not give the relative marked Cartesian model. The ordinary ModelCategory.over instance uses inherited total weak equivalences, not the mapping tests here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-16T19:50:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\"], \"digest\": \"c07b5afca0134e97\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: unmarked SSet Kan-Quillen cofibration/fibration classes and SSet.QCat bicategory do not give the relative marked Cartesian model. The ordinary ModelCategory.over instance uses inherited total weak equivalences, not the mapping tests here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "N9 second reader",
   "item": "lem-coef-cocartesian-straightening",
@@ -65,5 +268,21 @@
   "group": "N9"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-relative-cartesian-model",
+  "worker": "stage1",
+  "summary": "Four supporting statement-only nodes isolate relative lifting, finite saturation/perfectness, boundary-compatible inverse extension and categorical-equivalence base change. Fourteen proof steps verify model recognition, construct inverse data over arbitrary bases, prove the external simplicial axiom and give the Quillen and Joyal pullback comparisons. Corrected the arbitrary-base typing and the overbroad all-pairs Kan claim. No straightening cycle and no pullback stability claim for marked-anodyne maps. Second reading made the base-equivalence input conditional on the model structures already constructed in Steps 1–12, matching its source and preventing a hidden foundational cycle. The saturation input explicitly assumes the fiber criterion supplied in Steps 3–4. The opposite construction is written out on factorizations and simplicial pushout products.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction preceding derived inverse limit, via the original ancestry through algebroid external product. No unit step is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-a90e2e7e9",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a90e2e7e9 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full. I checked them against HTT (Remark 3.1.1.10, Remark 3.1.3.1, Prop 3.1.3.3, Prop 3.1.3.5 with its whole proof, Lemma 3.1.3.6, Prop 3.1.3.7 proof (1)-(3), Remark 3.1.3.9, Props 3.1.4.1-3.1.4.2, Cor 3.1.4.4, Prop 3.3.1.1, Cor 3.3.1.2, Prop 3.3.1.3, Cor 3.3.1.4), read locally with pdftotext. Statement repairs: both are correct and neither is a weakening. (a) def-coef-infinity-fibrations restricts cartesian fibrations to quasicategories, which would exclude id over Λ^2_1; the item now uses the arbitrary-base horn definition. (b) 'Kan enrichment' was false over a point: Map^♯((Δ^0)^♯,(Δ^1)^♯)=Δ^1, which is not Kan; it is now Kan only for fibrant targets, as in Remark 3.1.3.1. The two citers use only the clauses that were kept. Steps: 1-7 follow the proofs of 3.1.3.5, 3.1.3.7 and 3.1.4.1, and every hypothesis of the recognition theorem is checked. 9-10 follow 3.1.4.2-3.1.4.4. 13 follows the proof of 3.3.1.4 without Joyal right properness. 14 is the opposite construction. proof_deps equals the union of uses, the graph is acyclic, all cited statements are in the item's unit and tool_uses is empty. New nodes: the relative calculus is true, including the converse on base-changed cartesian edges, and generalizes the point and cocartesian-quasicategory lemmas. The saturation node is 3.1.3.7(1) plus A.2.6.14, with the fiber criterion as a hypothesis that Steps 3-4 discharge. The simplex extension is exactly the n≥1 step of 3.1.3.5; I checked that r automatically preserves cartesian edges. The base-equivalence node is 3.3.1.2-3.3.1.3; its conclusions are true even without its extra hypotheses, so it introduces no cycle. Its future split cannot cite the straightening nodes, which depend on this item, and needs a straightening-free route (HTT 3.2.2.7 or Kerodon flatness). No duplicates, no SGA, all four searches recorded, no fixes needed. Minor: the item's source.place (a maintainer-owned field) still mentions a sandbox download, which is cosmetic."
+ }
 }
