@@ -29,7 +29,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-joyal-model-structure"
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-pushout-join-saturation"
  ],
  "proof": [
   {
@@ -320,5 +321,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9be8b5d23",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and Kerodon 01HW. Four arbitrary SSet.{u} with no extra assumptions; hf/hg/conclusion are verbatim the hoFunctor/MonoidalClosed.pre/uliftFunctor.{v,u} test of SSet.exists_joyal_model_structure (same convention as the landed blunt-sharp and functor-test modules; CoherentNerve.IsCategoricalEquivalence is a different convention and not the cited one). f⋆g is the landed real orderedJoinFunctor.map (f,g). Node copy differs from the clone only in lean and the acyclic, landed stmt_dep lem-coef-infinity-pushout-join-saturation; statement unchanged; lean.statement verbatim in the file. No definitions, proof only sorry, source/blueprint docstrings with all 8 proof steps, worker report and second reading present. Edge cases (empty factors, Δ0, degree 0, emptied blocks, universes) fine. nt_compile.py --json on the snapshot: exit 0, no errors or warnings. Only a cosmetic text-substitution glitch in the second reading. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoinPreservesCategoricalEquivalences",
+  "declaration": "SSet.Enhanced.join_preserves_categorical_equivalences",
+  "file": "lean/Sheaf/AlgebraicTopology/JoinPreservesCategoricalEquivalences.lean",
+  "statement": "theorem join_preserves_categorical_equivalences {X X' Y Y' : SSet.{u}} (f : X ⟶ X') (g : Y ⟶ Y') (hf : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{v, u}.map f)).app C)).toFunctor).IsEquivalence) (hg : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{v, u}.map g)).app C)).toFunctor).IsEquivalence) : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{v, u}.map (orderedJoinFunctor.map ((f, g) : (X, Y) ⟶ (X', Y'))))).app C)).toFunctor).IsEquivalence",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false,
+  "branch": "newtargets-dag"
  }
 }
