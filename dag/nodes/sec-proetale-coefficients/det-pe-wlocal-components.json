@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wlocal-components",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Components of a w-local space",
@@ -23,40 +23,159 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-spectral-space",
   "sk-def-pe-wlocal",
-  "def-weil-pbc-w-local"
+  "def-weil-pbc-w-local",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof": [
   {
-   "text": "*1.* A closed subspace of a spectral space is spectral, so $T^c$ is spectral, and every\npoint of $T^c$ is closed. In a spectral space the constructible (patch) topology is compact\nHausdorff with a basis of clopen sets, it is finer than the given topology, and a subset\nthat is closed in the constructible topology and stable under specialization is closed\n(Stacks, Topology, section on spectral spaces). In $T^c$ the specialization order is\ntrivial, so every patch-closed subset is closed: the topology of $T^c$ equals its patch\ntopology, which is profinite.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $S=T^c$ with its subspace topology. Since $S$ is closed in the spectral space $T$, [lem-weil-pbc-spectral-closed-subspace] makes $S$ spectral. Each singleton of $S$ is closed, since it is the trace of a closed singleton of $T$. Thus $S$ has no nontrivial specializations.",
+   "uses": [
+    "lem-weil-pbc-spectral-closed-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0902, lemma-spectral-sub, closed-subspace case; Tag 0905, lemma-characterize-profinite-spectral, (6) implies (5)"
+   }
   },
   {
-   "text": "*2.* Every point $x$ specializes to some closed point, since $\\overline{\\{x\\}}$ is a\nnonempty quasi-compact closed subset; by Zorn's lemma and quasi-compactness it contains a\nminimal nonempty closed subset, which is a single point since $T$ is sober and $T_0$; that\npoint is closed in $T$. By\nhypothesis it is unique, so $r$ is well defined, and $r|_{T^c}=\\mathrm{id}$. Continuity of\n$r$ under the stated hypotheses (spectral, $T^c$ closed, unique closed specializations) is\nStacks, Tag 096A (see also Tags 0968, 0969).\n\nLet $c\\in T^c$ and $G_c=r^{-1}(c)$, the set of generalizations of $c$. For $x\\in G_c$ the\nclosure of $\\{x\\}$ in the subspace $G_c$ is irreducible and contains $c$; so $G_c$ is a\nunion of connected subsets all containing $c$, hence connected. If $C$ is a connected\ncomponent of $T$, then $r(C)$ is a connected subset of the profinite, hence totally\ndisconnected, space $T^c$, so $r(C)=\\{c\\}$ for one $c$ and $C\\subset G_c$; as $G_c$ is\nconnected and meets $C$, $C=G_c$. So the components are exactly the fibres of $r$, and each\ncontains exactly one closed point. The map $\\pi_0(T)\\to T^c$ induced by $r$ is continuous\n(quotient topology) and inverse to $T^c\\to T\\to\\pi_0(T)$, which is continuous; hence\n$T^c\\to\\pi_0(T)$ is a homeomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $U$ be a quasi-compact open subset of $S$. By [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact] it is retrocompact, hence constructible by [def-weil-constructible-subset]: use the single term $U\\cap(S\\setminus\\varnothing)$. Apply [lem-weil-pbc-spectral-proconstructible-closure-specialization] to the one-member family $E_*=U$. Every $x\\in\\overline U$ is a specialization of some $u\\in U$; since $S$ has closed singletons, $x=u$. Thus $\\overline U=U$, so every quasi-compact open of $S$ is clopen.",
+   "uses": [
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 005H (lemma-constructible), 0903 (lemma-constructible-stable-specialization-closed), and 0905 (lemma-characterize-profinite-spectral), (5) implies (4)"
+   }
   },
   {
-   "text": "*3.* Let $x\\in T$ and let $C$ be its component, with unique closed point $c$. A closed\nspecialization $c'$ of $x$ lies in $\\overline{\\{x\\}}$, which is connected and contains\n$x$, so $c'\\in C$ and $c'=c$. Existence of a closed specialization was shown in 2.",
-   "uses": [],
-   "elementary": null
+   "text": "By the definition of spectral space [def-weil-spectral-space], $S$ is quasi-compact and its quasi-compact opens form a basis. Sobriety implies $T_0$: two topologically indistinguishable points would both be generic points of the same irreducible closed singleton closure. Hence distinct points of $S$ are separated by a basis open $U$ containing exactly one; $U$ and its complement are disjoint open neighbourhoods. This makes $S$ Hausdorff. Any connected subset containing two distinct points would be separated by the same clopen $U$ and its complement. Therefore $S$ is totally disconnected. Being quasi-compact Hausdorff and totally disconnected is precisely being profinite, proving clause 1.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0905, lemma-characterize-profinite-spectral, (4) implies (2) and the final paragraph; the separation arguments written out"
+   }
   },
   {
-   "text": "*4.* The primes contained in $\\mathfrak m$ are the generalizations of $\\mathfrak m$, i.e.\nthe image of $\\operatorname{Spec}R_{\\mathfrak m}$; by 2 this set is the component of\n$\\mathfrak m$.",
-   "uses": [],
-   "elementary": null
+   "text": "For every $x\\in T$, apply [lem-sc-quasi-compact-kolmogorov-closed-point] to the nonempty closed subset $\\overline{\\{x\\}}$ of $T$. Its hypotheses hold: $T$ is quasi-compact and sober, hence $T_0$ as in step 3. It supplies a point $c\\in\\overline{\\{x\\}}$ closed in $T$, so $x$ specializes to $c$. Also $\\overline{\\{x\\}}$ is connected: in a separation into two relatively open nonempty parts, $x$ lies in one part, while every nonempty relatively open subset of its closure must contain $x$, contradicting disjointness. Consequently $x$ and every specialization of $x$ lie in the same connected component.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005E, lemma-quasi-compact-closed-point; used in proetale.tex Tag 0968, lemma-spectral-split; connectedness of a singleton closure written out"
+   }
+  },
+  {
+   "text": "Assume now that closed specializations are unique. The hypotheses of [lem-weil-pbc-w-local-closed-points-components-homeomorphism] hold: $T$ is spectral, $S$ is closed, and two closed specializations of one point are equal. Thus the canonical map $h:S\\to\\pi_0(T)$ is a homeomorphism. Write $q:T\\to\\pi_0(T)$ for the continuous quotient map and define $r=h^{-1}\\circ q$. If $c$ is the closed specialization of $x$, step 4 gives $q(x)=q(c)=h(c)$, so $r(x)=c$. This both identifies $r$ with the asserted specialization map and proves its continuity. For $c\\in S$, $q(c)=h(c)$ gives $r(c)=c$, so it is a retraction. Since $h$ is bijective, $r^{-1}(c)=q^{-1}(h(c))$, exactly the connected component of $c$; by the preceding identification this is exactly the generalizations of $c$. Finally $h$ transports the compact Hausdorff totally disconnected topology established in clause 1 to $\\pi_0(T)$. This proves every assertion of clause 2.",
+   "uses": [
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0968, lemma-spectral-split, (2) implies (1), first paragraph; paragraph after Tag 096A, definition-w-local; quotient-map argument made explicit"
+   }
+  },
+  {
+   "text": "Conversely, suppose every connected component of $T$ has exactly one closed point. Step 4 provides a closed specialization of every $x$. Every such specialization lies in the component of $x$, so the component hypothesis makes it unique. Combined with clause 2, this proves equivalence of the two closed-point conditions, with closedness of $S$ retained on both sides. On affine spectra the definition of w-local in [sk-def-pe-wlocal] is therefore exactly the definition in [def-weil-pbc-w-local]. No assertion that uniqueness alone implies closedness is used.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0968, lemma-spectral-split, (2) implies (1); Tag 096A, definition-w-local, and following paragraph; Tag 0969 explains why closedness must be retained"
+   }
+  },
+  {
+   "text": "For clause 4, take $T=\\operatorname{Spec}R$ and a maximal ideal $\\mathfrak m$. The localization $R_{\\mathfrak m}$ is at $M=R\\setminus\\mathfrak m$ by [def-weil-pbc-localization-at-prime]. The image formula in [lem-weil-pbc-localization-spectrum-embedding] gives the image as the primes $\\mathfrak p$ with $\\mathfrak p\\cap M=\\varnothing$, equivalently $\\mathfrak p\\subseteq\\mathfrak m$. In the Zariski topology, $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$: a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, and $V(\\mathfrak p)$ is the smallest such set. Thus these are precisely the generalizations of $\\mathfrak m$, which clause 2 already identifies with its connected component. This proves clause 4.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, with the elementary Zariski closure computation; proetale.tex paragraph following Tag 096A"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-closed-subspace",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "def-weil-spectral-space",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-spectrum-embedding"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-wlocal/det-pe-wlocal-components.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 0902, 0903, 0905, 005E; combined with proetale.tex Tags 0968, 096A and algebra.tex Tag 00E3"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "t2Space|totallyDisconnected|profinite|exists_isClosed_specializes",
+   "results": "Hits: Mathlib/Topology/Spectral/Prespectral.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, T1Space",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A spectral space whose closed points form a closed subset has profinite closed point subspace; for unique closed specializations this subspace is homeomorphic to the space of connected components",
+   "results": "Hits: CompHaus.toProfinite_obj', SpectralSpace.toPrespectralSpace, PrimeSpectrum.instPrespectralSpace, SpectralSpace, PrimeSpectrum.instSpectralSpace, SpectralSpace.toQuasiSober, PrespectralSpace, Profinite.instTotallyDisconnectedSpaceCarrierToTop",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A spectral space with closed set of closed points and unique closed specializations retracts continuously onto its closed points",
+   "results": "Hits: SpectralSpace, PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, SpectralSpace.mk, MaximalSpectrum.toPrimeSpectrum_range, IsLocalRing.specializes_closedPoint, SpectralSpace.toQuasiSober, PrimeSpectrum.instSpectralSpace, PrespectralSpace.of_isClosedEmbedding",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A T1 spectral space is compact Hausdorff and totally disconnected",
+   "results": "Hits: Profinite.of, Profinite.instHasPropTotallyDisconnectedSpaceCarrier, LightProfinite.of, Profinite, Stonean.of, Stonean.compHaus, LightCondSet.LocallyConstant.instHasPropAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySubtypeToTop, LightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  },
+  {
+   "tool": "grep",
+   "query": "WLocal|w.local|closedPoints|connectedComponents",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full four-clause item; hits concern spectral-space structure, profinite constructors, or local-ring specializations only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -69,5 +188,74 @@
   "def-weil-pbc-w-local"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wlocal-components",
+  "worker": "stage1",
+  "summary": "Proved the four clauses using existing nodes only. Expanded spectral T1 profiniteness through constructible closure, reused the already closed w-local components homeomorphism, derived continuity via its inverse composed with the quotient, and supplied the converse and localization-image arguments. No statement changes and no new nodes.",
+  "blueprint": "Steps 1-3 realize blueprint proof paragraph 1; steps 4-5 realize paragraph 2 (existence, continuity, fibers and homeomorphism); step 6 realizes paragraph 3; step 7 realizes paragraph 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-closed-subspace",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "def-weil-spectral-space",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "def-weil-pbc-w-local",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "def-weil-pbc-localization-at-prime",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localization-spectrum-embedding",
+    "why": "Generic topology or localization tool used in the corresponding proof step; the local-hierarchy unit gives no separate lemma with this statement. The unit route through closed points, components and prime localization is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-closed-subspace",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "def-weil-spectral-space",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-spectrum-embedding"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q64-cb2dfb2e6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-cb2dfb2e6 (reviewer sub-agent of L); spot-checked: Reviewed the item, all seven proof steps, cited node statements, blueprint route, and Stacks sources (Tags 0902, 0903, 0905, 005E, 0968, 096A, 0969, 00E3). Checked hypotheses, edge cases, localization image, continuity/retraction, duplicate status, Mathlib searches, and route compliance. No mathematical fault or repair is needed. The null chapter/unit metadata is recorded as a maintainer synchronization issue per coord/dag-sync.md."
+ }
 }
