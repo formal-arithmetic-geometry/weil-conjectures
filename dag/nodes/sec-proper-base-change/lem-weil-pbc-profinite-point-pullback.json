@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "Construct the module direct-image identity component by Mod.isoMk on lowerStarId. Its linearity follows from the coefficient identity and monoidality; uniqueness follows from faithfulness of Mod.forget. Show that the module direct-image composition has underlying map lowerStarComp, using the mapMod and comap component formulas. Faithfulness then lifts direct-image unit and associativity equations to modules. Conjugate these equations under the specified module adjunctions to obtain both units and associativity of module inverse images. The separate compatibility with the scalar-extension forgetful isomorphism remains open with its original statement. Its square consequence is proved: transport the forgetful comparison along the equality of scheme morphisms, apply the existing composition-compatibility declaration to both routes, and cancel the mapped inverse/hom pair. The proof uses a raw-morphism diagram lemma, avoiding intermediate component isomorphisms and mapIso constructions.",
+   "text": "Construct the module direct-image identity by Mod.isoMk on lowerStarId and prove uniqueness by faithfulness. Compute the underlying module direct-image composition using the mapMod and comap component formulas. For compatibility with the scalar-extension forgetful isomorphism, use the unit equation for leftAdjointUniq: the extension/restriction unit followed by extendScalarsIsoComapInv has identity underlying map. Expand the composed module adjunction unit to deduce that forgetting it, then applying the pullback comparison, gives the abelian unit. The same equation with the inverse comparison follows by cancellation. For identities, apply unit_conjugateEquiv to both module and abelian identity comparisons; the underlying direct-image identity and injectivity of the abelian adjunction hom equivalence identify their maps. For composition, naturality of the abelian unit and the single-arrow unit equation give the composite unit equation. Apply unit_conjugateEquiv to both composition comparisons and use naturality of lowerStarComp; a generic raw-morphism lemma using the adjunction hom equivalence then gives precisely the requested forgetful compatibility. Existing direct-image unit and associativity arguments conjugate to the module inverse-image coherence, and its normalized square consequence follows by transport and cancellation. No new unproved input is used.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product",
@@ -104,9 +104,9 @@
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
-  "by": "B4",
+  "by": "D2",
   "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-  "place": "Stage 3, 2026-10-15: source FiniteCoefficient.UpperLowerStar.CoherenceLegacy, ModuleObject.UpperLowerStar.Defs, CategoryTheory.Monoidal.Conjugate, CategoryTheory.Sites.MonObj, and CategoryTheory.DerivedCategory.MapDerivedCategoryMate; Mathlib adjunction mates and derived localization. Thirteen of fourteen original holes closed; only profinite_point_pullback_module_comparison remains open. No statement, definition or blueprint-unit route changed."
+  "place": "Stage 3, 2026-10-16: completed the last remaining module comparison using scalar-extension adjunction uniqueness, Mathlib unit_conjugateEquiv, naturality and the existing direct-image underlying-map calculations. All original public statements and definitions remain unchanged; private helper lemmas are proved in the item module. No new sorry or split-off node."
  },
  "mathlib_searches": [
   {
@@ -281,13 +281,13 @@
   "note": "Reviewed all statements, dependencies, sources, and 28 declarations; no substantive or mechanical faults found. Immutable module compiled cleanly through scompile.py in sandbox and library modes. Review recorded in review.md; branch unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-a8a1b",
-  "group": "B4",
+  "reviewer": "X-d4f95",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261015T172915-L-557856",
+  "landing": "20261016T054832-L-155254",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, definitions, proofs, relocation and remaining hole matched against the node, original declarations, compiler results and axiom checks."
+  "note": "independent Codex review: Delivered Lean module, DAG node, proof axioms, and all 11 direct importers matched the packet and compiled successfully."
  }
 }
