@@ -30,9 +30,126 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify each monomorphism with its degreewise image inclusion. In each simplicial degree the domain of $\\theta_{i,k}$ is the union $(A\\times L)\\cup(B\\times K)$ inside $B\\times L$, and the intersection is $A\\times K$; hence the displayed map is the pushout inclusion. Products and these unions are preserved by every simplicial operator, so this degreewise identification is simplicial. Commutative squares in either input induce commutative squares of $\\theta$-maps, preserving identities and composition. In particular, section and retraction squares in either variable induce section and retraction squares of the corresponding $\\theta$-maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, degreewise construction and functoriality of the Cartesian pushout product."
+   }
+  },
+  {
+   "text": "Fix a monomorphism $k:K\\hookrightarrow L$ and let $T_k$ be the class of monomorphisms $i$ for which $\\theta_{i,k}$ belongs to $W$. If $i$ is an isomorphism, then the union in Step 1 is all of $B\\times L$, so $\\theta_{i,k}$ is an isomorphism and belongs to $W$. Thus $T_k$ contains all isomorphisms.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of the weak-saturation assertion for fixed $k$, isomorphism case."
+   }
+  },
+  {
+   "text": "Suppose $i_0:A_0\\hookrightarrow B_0$ lies in $T_k$ and form a pushout $i':A'\\to B'=B_0\\amalg_{A_0}A'$ along an arbitrary, possibly non-injective, map $g:A_0\\to A'$. Degreewise, $B'$ is the quotient of $A'\\amalg B_0$ identifying each $a\\in A_0$ with $g(a)$; since $i_0$ is injective, $B'$ is the disjoint union of $A'$ and $B_0\\setminus A_0$, so $i'$ is again a monomorphism. Write $D_0=(A_0\\times L)\\cup(B_0\\times K)\\subseteq B_0\\times L$ and $D'=(A'\\times L)\\cup(B'\\times K)\\subseteq B'\\times L$ (Step 1). Consider the commutative square with top $D_0\\to D'$ induced by $g$ and $B_0\\to B'$, left side $\\theta_{i_0,k}:D_0\\hookrightarrow B_0\\times L$, right side $\\theta_{i',k}:D'\\hookrightarrow B'\\times L$ and bottom $B_0\\times L\\to B'\\times L$. In each degree the left side is injective, so the pushout of $D'\\leftarrow D_0\\hookrightarrow B_0\\times L$ is $D'$ disjoint union the complement $(B_0\\times L)\\setminus D_0=(B_0\\setminus A_0)\\times(L\\setminus K)$. The complement of $D'$ in $B'\\times L=(A'\\amalg(B_0\\setminus A_0))\\times L$ is also $(B_0\\setminus A_0)\\times(L\\setminus K)$, and the bottom map is the identity on it; hence the canonical map from that pushout to $B'\\times L$ is bijective in each degree. Since colimits of simplicial sets are computed degreewise, the square is a pushout. Hence $\\theta_{i',k}$ lies in $W$ by pushout closure, so $T_k$ is closed under pushouts.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T$ under pushouts."
+   }
+  },
+  {
+   "text": "Let $(X_\\alpha)_{\\alpha\\leq\\lambda}$ be a continuous ordinal chain of monomorphisms in $T_k$. Degreewise, a chain of injective maps has injective maps into its colimit (two elements become equal only after a later transition identifies them, which cannot happen for injections), so after replacing each stage by its image we may regard it as nested simplicial subsets of $X_\\lambda$. Put $P_\\alpha=(X_\\alpha\\times L)\\cup(X_\\lambda\\times K)$ inside $X_\\lambda\\times L$. For each $\\alpha<\\lambda$, put $E_\\alpha=(X_\\alpha\\times L)\\cup(X_{\\alpha+1}\\times K)$. Directly degreewise, $P_\\alpha\\cap(X_{\\alpha+1}\\times L)=E_\\alpha$ and $P_\\alpha\\cup(X_{\\alpha+1}\\times L)=P_{\\alpha+1}$, so $P_\\alpha\\to P_{\\alpha+1}$ is a pushout of $\\theta_{X_\\alpha\\hookrightarrow X_{\\alpha+1},k}$ and belongs to $W$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T$ under transfinite compositions, successor stages."
+   }
+  },
+  {
+   "text": "At every nonzero limit ordinal $\\delta$, every simplex of $X_\\delta$ lies in some earlier $X_\\alpha$, so the union formula gives $P_\\delta=\\bigcup_{\\alpha<\\delta}P_\\alpha$. Hence the chain $(P_\\alpha)_{\\alpha\\leq\\lambda}$ is continuous; it starts at $P_0=(X_0\\times L)\\cup(X_\\lambda\\times K)$, the domain of $\\theta_{X_0\\hookrightarrow X_\\lambda,k}$, and ends at $P_\\lambda=X_\\lambda\\times L$, its codomain, and its composite $P_0\\hookrightarrow P_\\lambda$ is $\\theta_{X_0\\hookrightarrow X_\\lambda,k}$. The composite $X_0\\to X_\\lambda$ is a monomorphism by Step 4. Closure of $W$ under transfinite compositions makes $\\theta_{X_0\\hookrightarrow X_\\lambda,k}$ lie in $W$; the zero-length chain is the isomorphism case. Therefore $T_k$ is closed under transfinite compositions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T$ under transfinite compositions, limit stages."
+   }
+  },
+  {
+   "text": "Let $i:A\\to B$ be a retract of $j:A''\\hookrightarrow B''$ in $T_k$ in the category of maps, with section maps $a:A\\to A''$, $b:B\\to B''$ and retraction maps $r:A''\\to A$, $s:B''\\to B$, $ra=1_A$. Then $i$ is a monomorphism: if $i(x)=i(y)$ then $j(a(x))=b(i(x))=b(i(y))=j(a(y))$, so $a(x)=a(y)$ and $x=ra(x)=ra(y)=y$, degreewise. By Step 1 the section and retraction squares induce a section and retraction of $\\theta_{i,k}$ from $\\theta_{j,k}$. Since $W$ is closed under retracts, membership of $\\theta_{j,k}$ in $W$ implies membership of $\\theta_{i,k}$. Thus $T_k$ is closed under retracts. Together with Steps 2--5, $T_k$ is weakly saturated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T$ under retracts and conclusion for fixed $k$."
+   }
+  },
+  {
+   "text": "Now fix a monomorphism $i:A\\hookrightarrow B$ and let $T_i'$ be the class of monomorphisms $k$ for which $\\theta_{i,k}$ belongs to $W$. The same degreewise union argument as in Step 1 shows that isomorphisms in the second variable give isomorphisms $\\theta_{i,k}$, hence $T_i'$ contains all isomorphisms.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of the weak-saturation assertion for fixed $i$, isomorphism case."
+   }
+  },
+  {
+   "text": "Let $k_0:K_0\\hookrightarrow L_0$ lie in $T_i'$ and let $k':K'\\to L'=L_0\\amalg_{K_0}K'$ be its pushout along an arbitrary, possibly non-injective, map $K_0\\to K'$. Degreewise, $L'$ is the quotient of $K'\\amalg L_0$ identifying each element of $K_0$ with its image in $K'$; since $k_0$ is injective, $L'$ is the disjoint union of $K'$ and $L_0\\setminus K_0$, so $k'$ is a monomorphism. Write $D_0=(A\\times L_0)\\cup(B\\times K_0)\\subseteq B\\times L_0$ and $D'=(A\\times L')\\cup(B\\times K')\\subseteq B\\times L'$, and consider the square with top $D_0\\to D'$, left side $\\theta_{i,k_0}$, right side $\\theta_{i,k'}$ and bottom $B\\times L_0\\to B\\times L'$. Since the left side is injective in each degree, its pushout is $D'$ disjoint union $(B\\times L_0)\\setminus D_0=(B\\setminus A)\\times(L_0\\setminus K_0)$, which is exactly the complement of $D'$ in $B\\times L'=B\\times(K'\\amalg(L_0\\setminus K_0))$, with the bottom map the identity there. Hence the square is a degreewise, so simplicial, pushout. Pushout closure of $W$ gives $\\theta_{i,k'}\\in W$, so $T_i'$ is closed under pushouts.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T'$ under pushouts."
+   }
+  },
+  {
+   "text": "For a continuous ordinal chain $(Y_\\alpha)_{\\alpha\\leq\\lambda}$ in $T_i'$, the same degreewise injectivity argument as in Step 4 shows that $Y_0\\to Y_\\lambda$ is a monomorphism and lets us represent the stages as nested subsets of $Y_\\lambda$. Put $Q_\\alpha=(B\\times Y_\\alpha)\\cup(A\\times Y_\\lambda)$. The same intersection and union calculation gives that each successor $Q_\\alpha\\to Q_{\\alpha+1}$ is a pushout of $\\theta_{i,Y_\\alpha\\hookrightarrow Y_{\\alpha+1}}$, while at a limit $Q_\\delta=\\bigcup_{\\alpha<\\delta}Q_\\alpha$. Transfinite-composition closure of $W$ therefore puts $\\theta_{i,Y_0\\hookrightarrow Y_\\lambda}$ in $W$; the zero-length case is an isomorphism.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T'$ under transfinite compositions."
+   }
+  },
+  {
+   "text": "If $k$ is a retract of $l\\in T_i'$ in the category of maps, then $k$ is a monomorphism by the same degreewise computation as in Step 6, and Step 1 makes $\\theta_{i,k}$ a retract of $\\theta_{i,l}$. Retract closure of $W$ gives $\\theta_{i,k}\\in W$. Thus $T_i'$ is closed under retracts, and Steps 7--10 show that it is weakly saturated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof of closure of $T'$ under retracts and conclusion for fixed $i$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0153",
+  "place": "Expanded from Kerodon Proposition 4.2.5.3; the degreewise pushout, ordinal-chain and retract arguments are written explicitly for both variables."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +206,38 @@
    "results": "{\"t\": \"2026-10-16T15:52:21Z\", \"tool\": \"grep\", \"query\": \"pushoutObjObj|IsWeaklySaturated|WeaklySaturated\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/PushoutObjObj.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/PushoutObjObj.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/PushoutObjObj.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/PushoutObjObj.lean\"], \"digest\": \"7b39404e26c6c71e\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: the semantic hits are ordinary cobase-change closure (MorphismProperty/Limits), the Loogle query has zero hits, and the grep hits provide PushoutObjObj constructions and lifting adjunctions. Read CategoryTheory/LiftingProperties/ParametrizedAdjunction.lean:37-171 and Monoidal/PushoutProduct.lean:105-170: neither asserts weak saturation of either inverse-image class for arbitrary W. Retain the statement-only helper."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian pushout product with fixed monomorphism preserves weak saturation of map classes",
+   "results": "CategoryTheory.MorphismProperty.le_pushouts; pushouts_le; instIsStableUnderCobaseChangeIndOfHasPushouts; isStableUnderCobaseChange_iff_pushouts_le; IsStableUnderCobaseChange; instIsStableUnderCobaseChangePushouts; pushouts_monotone. No declaration states the simplicial Cartesian theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cobase-change properties do not state preservation of pushout products under transfinite compositions and retracts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushoutObjObj\", \"IsStableUnder\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "pushoutObjObj|WeaklySaturated|transfinite [AlgebraicTopology]",
+   "results": "Mathlib hits include SSet pushoutObjObj and generic transfinite-composition/AnodyneExtensions infrastructure, but no right-anodyne Cartesian weak-saturation theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a weakly saturated class of simplicial maps, Cartesian pushout product with a fixed monomorphism is weakly saturated",
+   "results": "HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations; SSet.Subcomplex.prod; CategoryTheory.MorphismProperty.isStableUnderCobaseChange_iff_pushouts_le; other generic product/pushout declarations; no exact theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-right-anodyne-product",
@@ -100,5 +245,20 @@
   "group": "Q39"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-right-anodyne-saturation",
+  "worker": "stage1",
+  "summary": "Expanded the Kerodon Proposition 4.2.5.3 weak-saturation proof into explicit degreewise arguments for isomorphisms, pushouts, continuous ordinal compositions and retracts, first with the second map fixed and then symmetrically with the first map fixed. No new node was needed: all non-elementary notions are supplied by the existing simplicial-set, colimit, and right-anodyne definition nodes.",
+  "blueprint": "Realizes the ancestor proof's weak-saturation assertion for the two variables (the closure reduction preceding the generating-horn calculation)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-1feeab41e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-1feeab41e (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and 10 steps. I also read the statements of def-cbc-enhanced-diagrams-cones (degreewise products) and def-weil-pbc-category-colimit (colimits), and the parent lem-coef-infinity-right-anodyne-product in full, which applies this lemma with W = the right-anodyne maps. The source is Kerodon Prop. 4.2.5.3 (tag 0153); it is not under literature/, and the report's WANTED line is appropriate. The generalization to an arbitrary weakly saturated W is true because only the four closure properties of W are used. This is a strengthening, not a weakening. There are no new nodes and no tool_uses, and the steps cite only definitions. Duplicate search with rg over dag/nodes: pushout-join-saturation (joins/inner), sset-anodyne-pushout-product (Kan), inner-anodyne-pushout-product and transfinite-left-lifting are all different; same_as [] stands. The item is not a clause of its parent, which still needs the horn and prism steps. Small cases tested: K empty (θ = i×L); k an isomorphism; A empty, B = Δ⁰ (θ = k); a pushout along a non-injective map; the zero-length chain. I also checked the P_α and Q_α intersection/union identities and the limit-stage unions. Three wording/gap repairs to the step texts, in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-right-anodyne-saturation.json; statement, deps and source unchanged: (1) Steps 3 and 8 claimed the square's 'intersection is D_0' even when the attaching map is non-injective; they now argue by degreewise complements, B' = A' ⊔ (B_0∖A_0) with new cells (B_0∖A_0)×(L∖K), and say that i' (and k') is a monomorphism. (2) Step 5's undefined θ_{X_0,k} is now θ_{X_0↪X_λ,k}, with its domain P_0 and codomain P_λ named. (3) Steps 6 and 10 omitted that a retract of a monomorphism is a monomorphism, which T_k and T_i' need; the two-line argument is added, and Steps 5 and 9 now say the composite is a monomorphism.; 1 file(s) fixed by the reviewer"
+ }
 }

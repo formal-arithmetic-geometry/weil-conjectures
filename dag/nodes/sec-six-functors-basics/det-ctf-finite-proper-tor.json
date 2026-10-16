@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-ctf-finite-proper-tor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image preserves finite Tor amplitude",
- "statement": "Let $A$ be a finite $\\ell$-primary ring, $p\\colon X\\to Y$ proper, and $d$ a uniform bound for the\n$\\ell$-cohomological dimensions of the geometric fibres of $p$. If $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ has Tor amplitude\nin $[a,b]$, then $Rp_*C\\in\\Dctf(Y_{\\mathrm{ét}},A)$ with Tor amplitude in $[a,b+d]$.",
+ "statement": "Fix a prime $\\ell$ and the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $p>0$ with $p\\ne\\ell$, $X,Y$ are separated schemes of finite type over $k$, and $p_X:X\\to Y$ is a proper $k$-morphism [def-weil-proper-morphism]. Let $A$ be a finite commutative ring with $\\ell^r A=0$ for some $r\\ge1$. Work on the small etale sites with constant $A$-coefficients and the ordinary derived categories [def-weil-pbc-derived-categories]. Write $\\Dctf(T_{\\mathrm{et}},A)$ for the full subcategory of $\\Dbc(T_{\\mathrm{et}},A)$ [def-weil-pbc-constructible-complexes] consisting of complexes of finite Tor amplitude [def-kun-tor-amplitude].\n\nLet $d\\in\\mathbf Z_{\\ge0}$ be a uniform bound for the $\\ell$-cohomological dimensions of the geometric fibres: for every geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point], every $\\ell$-power torsion abelian sheaf $F$ on $(X_{\\bar y})_{\\mathrm{et}}$, where $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\Omega$ [def-pc-base-change] and $\\ell$-power torsion means that every local section of $F$ is killed by some power of $\\ell$, and every $i>d$, assume $H^i((X_{\\bar y})_{\\mathrm{et}},F)=0$, with etale cohomology as in [def-weil-pbc-etale-cohomology]. For integers $a\\le b$ and $C\\in\\Dctf(X_{\\mathrm{et}},A)$ of Tor amplitude in $[a,b]$, the total right derived direct image $Rp_{X,*}C$ belongs to $\\Dctf(Y_{\\mathrm{et}},A)$ and has Tor amplitude in $[a,b+d]$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.md",
   "place": "node det-ctf-finite-proper-tor, order None",
@@ -18,40 +18,174 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-direct-image"
+ ],
  "proof": [
   {
-   "text": "*Constructibility.* $Rp_*C\\in\\Dbc(Y_{\\mathrm{ét}},A)$ by [lem-fin-proper-bounded-constructible].",
+   "text": "Put $K=Rp_{X,*}C$. Take $N_0=\\ell^r$. The finite coefficient convention [sbc-def-coefficient-conventions] holds on $X$ and $Y$: $N_0 A=0$, and $\\ell$ is a nonzero element of $k$, hence a unit, whose image stays a unit on every $k$-scheme. The morphism $p_X$ is proper between finite-type $k$-schemes, exactly the hypotheses of [lem-fin-proper-bounded-constructible]. Since $C\\in\\Dbc(X_{\\mathrm{et}},A)$, that lemma gives $K\\in\\Dbc(Y_{\\mathrm{et}},A)$.",
    "uses": [
+    "sbc-def-coefficient-conventions",
     "lem-fin-proper-bounded-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
+    "place": "Constructibility paragraph; Stacks Tag 0GL0 (more-etale-theorem-constructible-shriek) applies in the standing finite-type setting"
+   }
   },
   {
-   "text": "*Stalks of tensor products.* Let $N$ be an $A$-module and $\\bar y$ a geometric point of $Y$. The projection\nformula for a constant module (Stacks, Tag 0F12) gives $(Rp_*C)\\otimes^{\\mathbf L}_AN_Y\\simeq Rp_*(C\\otimes^{\\mathbf L}_AN_X)$,\nand proper base change ([sk-thm-properbasechange]) identifies its stalk at $\\bar y$ with\n\n$$\nR\\Gamma\\bigl(X_{\\bar y},C|_{X_{\\bar y}}\\otimes^{\\mathbf L}_AN_{X_{\\bar y}}\\bigr).\n$$\n\nThe complex $C\\otimes^{\\mathbf L}_AN$ has cohomology sheaves in $[a,b]$ by the Tor amplitude hypothesis, and\n$H^p(X_{\\bar y},-)$ vanishes on torsion sheaves for $p>d$; the hypercohomology spectral sequence gives\ncohomology in $[a,b+d]$.",
+   "text": "Fix an arbitrary $A$-module $N$, with no finite generation or flatness assumption, and let $N_Y$ be its constant sheaf [def-kun-constant-sheaf]. Exactness of constant-coefficient module inverse image [prop-weil-pbc-inverse-image-modules-exact] identifies $Lp_X^*N_Y$ with the degree-zero sheaf $p_X^{-1}N_Y$. Thus $B_N=C\\otimes_A^{\\mathbf L}p_X^{-1}N_Y$ has cohomology only in $[a,b]$, by the definition [def-kun-tor-amplitude]. Apply [lem-etale-proper-projection-formula-finite] with $M=C$ and its second argument $N_Y[0]$. Its ring and properness hypotheses hold and it imposes no boundedness or Tor hypothesis on $N_Y$. It gives\n$$K\\otimes_A^{\\mathbf L}N_Y\\simeq Rp_{X,*}B_N.$$\nThis is the proper projection formula (Stacks Tag 0F0G); Tag 0F12 alone states a formula for global sections and is not directly a relative pushforward theorem.",
    "uses": [
-    "sk-thm-properbasechange"
+    "def-kun-constant-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-tor-amplitude",
+    "lem-etale-proper-projection-formula-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F0G (lemma-projection-formula-proper-mod-n) and 0F12 (lemma-pull-out-constant-mod-n); realizes the first sentence of the blueprint Stalks of tensor products paragraph"
+   }
   },
   {
-   "text": "*From constant modules to all sheaves.* Tor amplitude in $[a,b+d]$ means that\n$Rp_*C\\otimes^{\\mathbf L}_AM$ has cohomology in $[a,b+d]$ for every sheaf of $A$-modules $M$; this can be tested on\nstalks, and $(Rp_*C\\otimes^{\\mathbf L}_AM)_{\\bar y}=(Rp_*C)_{\\bar y}\\otimes^{\\mathbf L}_AM_{\\bar y}$ (a flat resolution of\n$Rp_*C$ restricts at every geometric point to a flat resolution of the stalk, and tensor products are\ncomputed stalkwise). Taking $N=M_{\\bar y}$ above, $(Rp_*C)_{\\bar y}\\otimes^{\\mathbf L}_AN=(Rp_*C\\otimes^{\\mathbf L}_AN_Y)_{\\bar y}$\nhas cohomology in $[a,b+d]$. Hence $Rp_*C$ has Tor amplitude in $[a,b+d]$.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$, let $i:X_{\\bar y}\\to X$ and $p_{\\bar y}:X_{\\bar y}\\to P$ be the fibre projections. Apply [det-properbasechange-modules] to $B_N$ and this Cartesian square. The complex is bounded below by step 2 and all its cohomology sheaves are annihilated by $\\ell^r$, so the required underlying torsion condition holds. It gives\n$$\\bar y^{-1}Rp_{X,*}B_N\\simeq Rp_{\\bar y,*}i^{-1}B_N.$$\nBy [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], the fibre complex $E=i^{-1}B_N$ still has cohomology only in $[a,b]$. By [lem-weil-pbc-geometric-point-pullback-stalk], sections on $P_{\\mathrm{et}}$ are an exact equivalence with $A$-modules, and sections of $\\bar y^{-1}G$ equal $G_{\\bar y}$ naturally (apply its abelian statement to the underlying sheaf and retain the action). Applying this exact functor termwise identifies the left side with $(Rp_{X,*}B_N)_{\\bar y}$ and the right side with $R\\Gamma(X_{\\bar y},E)$: choose a bounded below K-injective representative $I$ of $E$ using [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. The equality $\\Gamma(P,p_{\\bar y,*}I)=\\Gamma(X_{\\bar y},I)$ computes the right side, since the exact equivalence $\\Gamma(P,-)$ preserves quasi-isomorphisms. Hence\n$$(K\\otimes_A^{\\mathbf L}N_Y)_{\\bar y}\\simeq R\\Gamma(X_{\\bar y},E).$$",
+   "uses": [
+    "det-properbasechange-modules",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
+    "place": "Stalks of tensor products paragraph: proper base change and fibre formula; Stacks Tags 095T, 03Q1 (lemma-stalk-pullback), 04JQ (lemma-equivalence-abelian-sheaves-point)"
+   }
+  },
+  {
+   "text": "Here are all hypotheses and the vanishing argument for the fibre hypercohomology sequence. The categories of $A$-module sheaves on $X_{\\bar y}$ and $P$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. The direct image $v=p_{\\bar y,*}$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. These module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and [lem-weil-pbc-dplus-injective-representative] supplies a bounded below K-injective complex representing $E$, so [thm-sp-truncation-e2] applies to $v$ and that complex. Its $E_2$-page, finite exhaustive separated abutment filtrations, and the exact point-section equivalence of step 3 give\n$$E_2^{s,t}=H^s(X_{\\bar y},\\mathcal H^t(E))\\Longrightarrow H^{s+t}(X_{\\bar y},E).$$\nFor the module-valued $H^s$ in this formula, [lem-weil-pbc-etale-module-cohomology-forget] identifies its underlying group with abelian sheaf cohomology. Each $\\mathcal H^t(E)$ is killed by $\\ell^r$, so the stated $\\ell$-cohomological bound makes this zero for $s>d$. It is also zero for $s<0$ by the spectral sequence theorem and for $t\\notin[a,b]$ by step 3. Therefore $E_2^{s,t}=0$ outside the rectangle $0\\le s\\le d$, $a\\le t\\le b$. Zero entries remain zero on later pages, since the next page is a kernel modulo an image. If $n\\notin[a,b+d]$, all entries on $s+t=n$ are zero, so all associated graded objects of the finite abutment filtration of $H^n(X_{\\bar y},E)$ are zero. Successively $F^j/F^{j+1}=0$ makes $F^j=F^{j+1}$; start at the zero end of the finite filtration and reach the exhaustive end. Thus $H^n(X_{\\bar y},E)=0$. This proves the constant-module tensor bound at every geometric stalk without assuming constructibility of $N$ or $E$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), E2 page and finite convergence; realizes the final two sentences of the blueprint Stalks of tensor products paragraph"
+   }
+  },
+  {
+   "text": "Let $M$ now be any sheaf of $A$-modules on $Y_{\\mathrm{et}}$. At a geometric point $\\bar y:P\\to Y$, use [prop-weil-pbc-inverse-image-modules-exact] to identify $L\\bar y^*$ with exact inverse image. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the ringed-topos morphism with constant coefficient rings $A_Y,A_P$; use a site skeleton small relative to the module universe [def-weil-size-convention]. Its coefficient ring map is an isomorphism by the inverse-image theorem, and its K-flat pullback clause justifies the derived tensor comparison. Under the exact equivalence of [lem-weil-pbc-geometric-point-pullback-stalk] this reads\n$$(K\\otimes_A^{\\mathbf L}M)_{\\bar y}\\simeq K_{\\bar y}\\otimes_A^{\\mathbf L}M_{\\bar y}.$$\nThe point equivalence identifies tensor products on $P$ with ordinary module tensors: both are characterized by $A$-balanced bilinear maps, The equivalence and its inverse preserve exact complexes and tensor products, hence preserve flat modules and K-flat complexes (tensoring with an acyclic complex remains acyclic under the equivalence). Applying it termwise to K-flat resolutions with flat terms therefore gives the displayed derived version. Put $N=M_{\\bar y}$. The constant sheaf $N_Y$ [def-kun-constant-sheaf] has stalk $N$: every section of its sheafification is locally represented by a constant, giving surjectivity from $N$ to the stalk. If two constants have equal germs, they agree after restriction to an etale neighbourhood carrying the geometric point. Such a neighbourhood is nonempty; a covering of it has a nonempty member, and restriction in the constant presheaf does not change the element of $N$. Thus the two constants are equal, proving injectivity. Applying the same derived comparison with $N_Y$ therefore identifies the right side with $(K\\otimes_A^{\\mathbf L}N_Y)_{\\bar y}$. Steps 3-4 show that this complex has zero cohomology outside $[a,b+d]$. Exactness of the point equivalence and [lem-weil-pbc-exact-functor-complex-cohomology] identify these cohomology modules with the stalks of $\\mathcal H^n(K\\otimes_A^{\\mathbf L}M)$. For $n$ outside the interval the underlying abelian sheaf has zero stalks, so [lemma-weil-pbc-geometric-stalk-conservative], applied to its map to zero, makes it zero. Its module structure is then zero as well. Since $M$ was arbitrary, [def-kun-tor-amplitude] gives Tor amplitude $[a,b+d]$ for $K$. Together with step 1 and the stated definition of $\\Dctf$, this proves the conclusion.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-size-convention",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-kun-constant-sheaf",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); blueprint From constant modules to all sheaves paragraph, with exact stalks 03Q1 and conservativity 03Q2"
+   }
   }
  ],
  "proof_deps": [
+  "sbc-def-coefficient-conventions",
   "lem-fin-proper-bounded-constructible",
-  "sk-thm-properbasechange"
+  "def-kun-constant-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-tor-amplitude",
+  "lem-etale-proper-projection-formula-finite",
+  "det-properbasechange-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-size-convention",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
+  "place": "All three paragraphs: constructibility, constant-module projection and geometric-fibre bound, then stalkwise testing against arbitrary sheaves; detailed with Stacks 0F0G, 015J and 07A4."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image preserves finite Tor amplitude for a finite ell-primary coefficient ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"RingHom.finite_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Finite\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.Finite\", \"doc\": \"For commutative rings $A, B, A', B'$ with compatible algebra structures, if $B$ is finitely generated as an $A$-module via a ring homomorphism $A \\\\to B$, then the base change $B' = A' \\\\otimes_A B$ is \"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Finite (PrimeSpectrum R)] [Algebra.QuasiFinite R S], Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.EssFiniteType\", \"doc\": \"If $ S $ is an essentially finitely generated $ R $-algebra, then for any commutative ring $ R' $ with compatible algebra structures, the base change $ S' = S \\\\otimes_R R' $ is an essentially finitely\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"RingHom.finiteType_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.FiniteType\", \"doc\": \"For any commutative rings $ A, B, A', B' $ with compatible algebra structures and scalar tower conditions, if $ B $ is a finitely generated $ A $-algebra, then the base change $ B \\\\otimes_A A' $ is a \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.Finite R M], Function.Surjective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"For a finite $ R $-module $ M $, the canonical linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{M}_I $ from the tensor product of the $ I $-adic completion of $ R $ with $ M $ to the $ I $-adic com\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn, proper pushforward",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'DerivedCategory.torAmplitudeIn'\n",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: unknown identifier; superseded by the successful DerivedCategory query"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.change|torAmplitudeIn",
+   "directory": "Mathlib",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image preserves finite Tor amplitude",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ₑ D) : PreservesFiniteColimits F.obj\", \"doc\": \"Every exact functor between categories preserves finite colimits. That is, if $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an exact functor (preserving both finite limits and colimits), then $ F $ preserves\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"CategoryTheory.rightExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"The property of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserving all finite colimits, i.e., for any finite diagram in $ \\\\mathcal{C} $, the image of its colimit under $ F $ is the colimit of th\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived pushforward of finite cohomological dimension maps bounded complexes of finite Tor dimension to complexes of bounded Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : Type (max u v)\", \"doc\": \"The derived category of an abelian category. \"}\n  {\"name\": \"instCategoryDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u_2) [CategoryTheory.Category.{u_3, u_2} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Category.{u_1, max u_2 u_3} (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instHasZeroObject\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Limits.HasZeroObject (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instPreadditive\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Preadditive (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instHasShiftInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.HasShift (DerivedCategory C) ℤ\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"The single functor `C ⥤ DerivedCategory C` which sends `X : C` to the\\nsingle cochain complex with `X` sitting in degree `n : ℤ`. \"}\n  {\"name\": \"DerivedCategory.singleFunctors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.SingleFunctors C (DerivedCategory C) ℤ\", \"doc\": \"The single functors `C ⥤ DerivedCategory C` for all `n : ℤ` along with\\ntheir compatibilities with shifts. \"}\n  {\"name\": \"DerivedCategory.instAdditiveSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instPretriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Pretriangulated (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instIsTriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.IsTriangulated (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instAdditiveShiftFunctorInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (CategoryTheory.shiftFunctor (DerivedCategory C) n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Functor (CochainComplex C ℤ) (DerivedCategory C)\", \"doc\": \"The localization functor `CochainComplex C ℤ ⥤ DerivedCategory C`. \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]or[Aa]mplitude|[Pp]rojection[Ff]ormula|[Pp]roper.*[Dd]erived",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"51\", \"text\": \"`W : MorphismProperty C` if it has a pointwise right derived functor at `X`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"52\", \"text\": \"`W : MorphismProperty C` if it has a pointwise left derived functor at `X`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"line\": \"91\", \"text\": \"  refine ((MorphismProperty.isomorphisms (DerivedCategory C)).arrow_iso_iff\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state preservation of finite Tor amplitude by proper etale derived pushforward or the claimed [a,b+d] bound"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -66,5 +200,95 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ctf-finite-proper"
+ "unit": "sk-prop-ctf-finite-proper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-ctf-finite-proper-tor",
+  "worker": "stage1",
+  "summary": "Restored the explicit standing finite-type k-scheme hypotheses needed for constructibility, with a non-finite-presentation closed-immersion counterexample to the unqualified imported wording. Reused all existing DAG nodes; no new nodes. Corrected the relative use of Stacks 0F12 to the existing proper projection-formula node (0F0G), replaced the absent unit-id citation by the actual bounded-below module base-change node, verified the spectral-sequence hypotheses and finite-filtration vanishing, and supplied the derived tensor stalk justification. Recorded actual Mathlib searches and verbatim citations.",
+  "blueprint": "Step 1 realizes Constructibility. Steps 2-4 realize Stalks of tensor products, with precisely the [a,b+d] bound and no finiteness condition on N. Step 5 realizes From constant modules to all sheaves. The constant-module/proper-base-change route of unit step 1 is retained.",
+  "statement_dispute": "STATEMENT-DISPUTED: without the standing setting, take Y=Spec(k[t_1,t_2,...]), X=Spec(k) defined by I=(t_1,t_2,...), p the closed immersion, and A=F_ell with ell different from char(k). The constant C=A_X[0] has Tor amplitude [0,0], and every geometric fibre has ell-cohomological dimension zero. But p_*A_X has nonconstructible support {I}, since this closed point is not a constructible subset of Y (no finitely many polynomial equations cut it out). Thus the claimed Dctf conclusion fails. The corrected statement explicitly restores the chapter standing setting of sk-def-sfb-dc-setting, already required by lem-fin-proper-bounded-constructible, and writes out the etale Dctf notion for arbitrary finite commutative A. No target statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-proper-bounded-constructible",
+    "why": "Proper bounded constructibility is precisely the imported first paragraph input; no node of this unit states its sheaf finiteness argument."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exactness of inverse image for constant coefficient module sheaves, needed for degree-zero tests and fibre restrictions."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite",
+    "why": "Generic proper projection formula, used only with a constant degree-zero module exactly as unit step 1 requires; this is the relative form of its stated Stacks 0F12 input."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "Actual bounded-below etale module base-change statement realizing the imported sk-thm-properbasechange unit citation, whose unit id is not a node."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor/cohomology comparison for inverse image and geometric stalks."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic identification of pullback to an algebraically closed field with stalks and of the field-point module category with modules."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Grothendieck property checking the two category hypotheses of the fibre spectral sequence."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic additivity and left exactness of the module direct image used in the fibre spectral sequence."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives hypothesis for the bounded-below representative."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic bounded-below K-injective representative required by the cited spectral-sequence theorem."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic truncation spectral sequence with E2 identification and finite abutment filtrations, exactly the unit spectral-sequence argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic coefficient-forgetting comparison needed to apply the stated abelian ell-cohomological fibre bound."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor/pullback and K-flat theorem supplying the stalkwise tensor computation explicitly required by unit step 1."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of etale geometric stalks, used to detect zero cohomology sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-proper-bounded-constructible",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-etale-proper-projection-formula-finite",
+  "det-properbasechange-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-114f3a90a",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-114f3a90a (reviewer sub-agent of L); spot-checked: I read the whole item: statement, five steps and all 27 cited node statements. I checked the blueprint main-20261015 statement and its three proof paragraphs, unit sk-prop-ctf-finite-proper step 1, the chapter setting sk-def-sfb-dc-setting, and Stacks 0F0G (projection formula for proper f, torsion ring, unbounded complexes) and 0GL0 (needs finite presentation and qcqs). The restored standing setting is a valid correction, not a weakening. Counterexample checked: for the closed immersion Spec k -> Spec k[t1,t2,...] with F_l coefficients, the direct image i_*F_l is not constructible, because {I} would be clopen in a spectral stratum but its complement is not quasi-compact. The coefficient category is etale A_T-module sheaves with Dbc and Tor amplitude from the existing etale definitions, so nothing is silently identified with pro-etale. The base-change map is Ex from det-properbasechange-modules (the blueprint's sk-thm-properbasechange), used in D^+ with torsion cohomology, which are its hypotheses. Step checks: step 2 gives Lp^*N_Y = p^{-1}N_Y in degree 0, so B_N has cohomology in [a,b] and 0F0G applies. Step 3 uses bounded-below base change at a geometric point, the point equivalence and a K-injective representative. Step 4 supplies every hypothesis of thm-sp-truncation-e2, and the rectangle 0<=s<=d, a<=t<=b with the finite filtration gives [a,b+d]. Step 5 uses the stalk tensor via the K-flat pullback lemma, the constant-sheaf stalk and conservativity. Small case P^1 -> Spec kbar gives [0,2], which is sharp. thm-sf-direct-image-tor-amplitude (A_{E,n} coefficients, UDV hypothesis) and sk-thm-sf-direct-image-tor-amplitude (2d bound) differ, so they are not duplicates. There are no new nodes. I accept the 14 tool_uses. One fix: the statement's 'l-primary torsion abelian sheaf F' was undefined and could be read two ways. I rewrote it as l-power torsion (every local section killed by some power of l), matching sk-def-cd and det-cd-etale-comparison. No proof step changes. The fix is in fixes/dag/nodes/sec-six-functors-basics/det-ctf-finite-proper-tor.json.; 1 file(s) fixed by the reviewer"
+ }
 }

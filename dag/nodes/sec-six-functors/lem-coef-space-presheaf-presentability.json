@@ -26,9 +26,103 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=N(D)$ and $B=C^{\\mathrm{op}}$. Their simplices are finite strings of arrows of the small category $D$, so $C$ and $B$ are small. The discrete simplicial category on $D$ is locally Kan; [lem-coef-coherent-nerve-comparison] identifies its coherent nerve with $N(D)$ and makes it a quasicategory. Use the coherent functor category of [def-cbc-enhanced-diagrams-cones]. By [lem-coef-accessible-infinity-pullback], $\\mathcal S$ is presentable and has all small colimits. To construct a colimit of an arbitrary small diagram $H:J\\to\\operatorname{Fun}(B,\\mathcal S)$, regard it as $B\\times J\\to\\mathcal S$. Let $P\\subseteq B$ be the discrete simplicial subset of all its vertices, and choose a colimiting cocone on $H(b,-)$ for each vertex $b$. These choices give the prescribed map on $(B\\times J)\\amalg_{P\\times J}(P\\times J^{\\triangleright})$. Apply [lem-coef-infinity-parameter-cone-extension]: $P$ contains every vertex and every required initial-vertex cocone is colimiting, so it supplies an extension $B\\times J^{\\triangleright}\\to\\mathcal S$. Thus the pointwise cocones do assemble coherently. The objectwise characterization in [lem-coef-infinity-yoneda-presheaf-limits] now says that this is a colimit cocone in $\\mathcal P(C)$. It also says that evaluation at any $c$ preserves it. This works for every small simplicial $J$, including $J=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-accessible-infinity-pullback",
+    "lem-coef-infinity-parameter-cone-extension",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 1.1.5.10, Corollaries 5.1.2.2-5.1.2.4, and Example 5.5.1.8. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  },
+  {
+   "text": "We record the needed universe bound without replacing mapping spaces by sets of components. Use the model of $\\mathcal S$ as the coherent nerve of small Kan complexes with their simplicial mapping complexes. For any small family $T$ of presheaves, the collection of Kan complexes $F(c)$, for $F\\in T$ and $c\\in C_0$, is small. The full simplicial category on this collection has small mapping complexes: their $n$-simplices are maps $A\\times\\Delta^n\\to B$ between small simplicial sets. Its coherent nerve $\\mathcal S_T$ is small, since the formula for $N_{\\mathrm{hc}}$ in [lem-coef-coherent-nerve-comparison] uses finitely many objects and small mapping data in each degree; it is a quasicategory by that node. It is the full subcategory of the chosen model of $\\mathcal S$ on these Kan complexes. Every presheaf in $T$ factors through $\\mathcal S_T$, and $\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S_T)$ is a small full simplicial subcategory of $\\mathcal P(C)$: its simplices are maps between small simplicial sets, and fullness follows degreewise from the definition in [def-cbc-enhanced-diagrams-cones]. The full subcategory on the objects of $T$ is therefore small in this model. Taking $T=\\{F,G\\}$ proves that every mapping space $\\operatorname{Map}_{\\mathcal P(C)}(F,G)$ is small. In particular $\\mathcal P(C)$ is locally small. We will also use the same construction for the family of generators below.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Coherent-nerve construction in section 1.1.5 and Proposition 1.1.5.10; explicit universe bookkeeping for full subcategories of presheaves. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-family-regular-bound] to the one-member family with value $\\mathbb N$. It gives an infinite regular $\\kappa$ in the smaller universe with $\\aleph_0<\\kappa$. For each vertex $c$ of $C$, [lem-coef-space-yoneda-density] identifies $\\operatorname{Map}_{\\mathcal P(C)}(h_c,-)$ naturally with evaluation at $c$. Step 1 and [lem-coef-infinity-yoneda-presheaf-limits] show that this evaluation preserves every small colimit. Thus each $h_c$ is $\\kappa$-compact in precisely the mapping-space sense of [def-coef-presentable-infinity-category]. No claim is made that every presheaf is already a filtered colimit of individual representables.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lemmas 5.1.5.2-5.1.5.3 and Corollary 5.1.2.3; compactness definition in section 5.3.4. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  },
+  {
+   "text": "Let $A$ be a set of representative pairs $(K,p)$ with $K$ a $\\kappa$-small simplicial set and $p:K\\to C$ a simplicial map. This can be chosen small: since $\\kappa$ is uncountable, the degeneracies of fewer than $\\kappa$ nondegenerate simplices still form fewer than $\\kappa$ simplices. Relabel them by a subset of the fixed set $\\kappa$; the degree sets, simplicial operators and maps to the fixed small set of simplices of $C$ then range over subsets and functions on fixed small sets. Their collection is small in the smaller universe, even though it need not have size less than $\\kappa$. For every representative choose a colimiting cocone on $h\\circ p$, using step 1, and let $\\mathcal G$ be the small family of its apices. These are choices of universal objects, determined up to equivalence by the displayed diagrams. All vertex values $h_{p(v)}$ are $\\kappa$-compact by step 3, and $\\mathcal P(C)$ is locally small and has all small $\\kappa$-filtered colimits by steps 1-2. Therefore [lem-coef-compact-small-colimits] makes every object of $\\mathcal G$ $\\kappa$-compact. Include the representative $K=\\varnothing$, so the initial presheaf is among these apices. The small-full-subcategory construction of step 2, applied to $\\mathcal G$, gives a small full subcategory $\\mathcal A\\subseteq\\mathcal P(C)$ on these chosen objects.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Bounded-diagram family in the proof of Proposition 5.3.5.12; Corollary 5.3.4.15. Relabeling and universe bookkeeping are written out here. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  },
+  {
+   "text": "Fix any presheaf $F$. By [lem-coef-space-yoneda-density] it has a colimiting coherent cocone $h\\circ p_F\\to F$ on a small simplicial set $E_F$. Apply [lem-coef-colimit-subdiagram-approximation] to this diagram in $\\mathcal P(C)$, which has all small colimits by step 1, with the uncountable regular cardinal of step 3. For each $\\kappa$-small simplicial subset $L\\subseteq E_F$, relabel $(L,p_F|_L)$ by its representative in $A$ and transport the already chosen colimiting cocone from step 4 along that isomorphism. Thus its apex $q_L$ is literally one of the chosen objects of $\\mathcal G$. The prescribed-cocone clause of the approximation node assembles these very apices into a coherent diagram $Q:N(I_\\kappa(E_F))\\to\\mathcal P(C)$ and a colimiting cocone $Q\\to F$. Every vertex of $Q$ belongs to $\\mathcal A$, so, by the definition of a full subcategory in [def-cbc-enhanced-diagrams-cones], the entire simplicial map $Q$ factors through $\\mathcal A$. Its index is small and $\\kappa$-filtered by the approximation node. Consequently every $F$ is a small $\\kappa$-filtered colimit of objects of the same small full subcategory $\\mathcal A$. We require only universe-smallness of this index, not that it has fewer than $\\kappa$ elements.",
+   "uses": [
+    "lem-coef-space-yoneda-density",
+    "lem-coef-colimit-subdiagram-approximation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lemma 5.1.5.3; Proposition 4.2.3.4, Remark 4.2.3.9, Corollary 4.2.3.10, and the directed-union construction in the proof of Corollary 4.2.3.11. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  },
+  {
+   "text": "Steps 1-2 give local smallness and all small colimits of $\\mathcal P(C)$. Steps 3-5 give a regular cardinal $\\kappa$ in the smaller universe and a small full subcategory $\\mathcal A$ of $\\kappa$-compact objects generating every presheaf under small $\\kappa$-filtered colimits. These are exactly the clauses of $\\kappa$-accessibility in [def-coef-presentable-infinity-category]. Together with all small simplicial colimits, that definition gives presentability. With $C=N(D)$ this is the stated assertion. If $D$ is empty, the bounded family still includes the empty colimit, the presheaf category is terminal, and the same construction applies; no nonemptiness hypothesis has been added.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Remark 5.5.3.7, with the accessibility argument expanded as in Proposition 5.3.5.12. Read online; the assembly and cardinal bookkeeping here are written by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-accessible-infinity-pullback",
+  "lem-coef-infinity-parameter-cone-extension",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-space-yoneda-density",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-colimit-subdiagram-approximation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Worker-written assembly of the online HTT results cited in the steps, including the explicit bounded-family and universe arguments. HTT is not archived in literature/: see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,15 +151,66 @@
    "results": "{\"t\": \"2026-10-16T13:37:13Z\", \"tool\": \"leansearch\", \"query\": \"Functor infinity categories of small diagrams with values in spaces admit all colimits and are accessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.functorCategoryHasColimitsOfShape\", \"CategoryTheory.Functor.IsAccessible.mk\", \"CategoryTheory.Limits.functorCategoryHasColimit\", \"CategoryTheory.Limits.HasColimitsOfSize.recOn\", \"CategoryTheory.Limits.functorCategoryHasColimitsOfSize\", \"TopCat.topCat_hasColimitsOfShape\", \"TopCat.topCat_hasColimitsOfSize\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\"], \"digest\": \"18467d6fe4d769bf\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks (Mathlib/CategoryTheory/Presentable/Presheaf.lean:90-95, read) concerns ordinary Category instances and Hom sets; the functor-category colimit declarations are ordinary too. They do not state accessibility/presentability of coherent space-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of functors from a small simplicial set into a presentable infinity category is presentable",
+   "results": "{\"t\": \"2026-10-16T17:00:05Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of functors from a small simplicial set into a presentable infinity category is presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.QCat\", \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.IsPresentable\", \"SSet.Finite.exists_epi_from_isCardinalPresentable\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\"], \"digest\": \"75a4480350deca1d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the presentability hits concern ordinary Type-valued functor categories (Mathlib/CategoryTheory/Presentable/Presheaf.lean:90-95, read). SSet.QCat is a definition of quasicategories; the SSet.Finite instances concern ordinary presentability of individual simplicial sets. No hit states accessibility and colimits of coherent space-valued presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor, IsPresentable, IsAccessible",
+   "results": "{\"t\": \"2026-10-16T17:00:06Z\", \"tool\": \"loogle\", \"query\": \"Functor, IsPresentable, IsAccessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsPresentable'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query rejected by Loogle: loogle: unknown identifier 'IsPresentable'"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPresentable|IsAccessible|Functor",
+   "results": "{\"t\": \"2026-10-16T17:00:06Z\", \"tool\": \"grep\", \"query\": \"IsPresentable|IsAccessible|Functor\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\"], \"digest\": \"7fb6a4ae576f4ca4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the presentability hits concern ordinary Type-valued functor categories (Mathlib/CategoryTheory/Presentable/Presheaf.lean:90-95, read). SSet.QCat is a definition of quasicategories; the SSet.Finite instances concern ordinary presentability of individual simplicial sets. No hit states accessibility and colimits of coherent space-valued presheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor infinity category on a small shape with values in a presentable infinity category is presentable",
+   "results": "{\"t\": \"2026-10-16T17:00:06Z\", \"tool\": \"leansearch\", \"query\": \"Functor infinity category on a small shape with values in a presentable infinity category is presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Limits.functorCategoryHasLimitsOfShape\", \"CategoryTheory.Limits.functorCategoryHasColimitsOfShape\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize\", \"CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape\", \"CategoryTheory.Limits.functorCategoryHasLimitsOfSize\", \"CategoryTheory.Limits.PreservesFiniteColimits.preservesFiniteColimits\"], \"digest\": \"3a51c313be51b8b5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the presentability hits concern ordinary Type-valued functor categories (Mathlib/CategoryTheory/Presentable/Presheaf.lean:90-95, read). SSet.QCat is a definition of quasicategories; the SSet.Finite instances concern ordinary presentability of individual simplicial sets. No hit states accessibility and colimits of coherent space-valued presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\"",
+   "results": "{\"t\": \"2026-10-16T17:01:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\"], \"digest\": \"e46204d87a8b441a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the presentability hits concern ordinary Type-valued functor categories (Mathlib/CategoryTheory/Presentable/Presheaf.lean:90-95, read). SSet.QCat is a definition of quasicategories; the SSet.Finite instances concern ordinary presentability of individual simplicial sets. No hit states accessibility and colimits of coherent space-valued presheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-combinatorial-localization-presentability",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-presheaf-presentability",
+  "worker": "stage1",
+  "summary": "Kept the item statement unchanged. Constructed all coherent colimits from objectwise cocones using the existing parameter-cone extension theorem, rather than assuming coherent assembly from a pointwise characterization. Proved local smallness and smallness of the full generator family in the concrete Kan/coherent-nerve model. Chose an uncountable regular bound, proved representables compact by evaluation, formed a bounded small family of compact colimits of representables, and reconstructed arbitrary presheaves as filtered colimits of that family. Three genuinely smaller foundational statements are unsplit; no ordinary Mathlib analogue is treated as an infinity-categorical match.",
+  "blueprint": "Supports paragraph 2 of current main-20261015 prop-coef-integral-exceptional-adjoint, the displayed coherent finite-coefficient mapping-complex adjunction before R lim, through the existing enhanced-localization/small-presentation ancestry. The chapter/unit route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N0-2067ea1a5",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-2067ea1a5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps, the three new nodes and every cited statement, against HTT 1.1.5, 4.2.3.4/4.2.3.8-11, 5.1.5.2-3, 5.3.4.15 and 5.5.1.8/5.5.3.6-7. HTT is not archived here and is listed as WANTED, so these checks rest on my knowledge of the HTT statements, not on reading them in literature/. The item statement is unchanged and true, including D empty. Step 1 meets every hypothesis of the parameter-cone-extension node: P is the full vertex set and the cocone at sigma(0) is a colimit for every simplex outside P. Only after that extension does it apply the objectwise characterisation, so existence is not inferred from a characterisation (C4 is fine). Step 2 is a correct universe count: Fun(C^op,S_T) is a full simplicial subset because every vertex of an n-simplex lands among the T-values. Step 3 gets uncountable kappa from the regular-bound leaf with X = N, and representables are compact because Map(h_c,-) is equivalent to evaluation at c. Step 4's count is correct: fewer than kappa nondegenerate simplices plus countably many degeneracies each stays below kappa because kappa is uncountable. All hypotheses of compact-small-colimits are met, including local smallness. Step 5 relabels each bounded subdiagram so its apex is literally a stored generator, and the approximation node with prescribed cocones then gives Q factoring through the full subcategory A. Step 6 is the definition. The new nodes are true and tested on small cases: density on C empty and C a point (nontrivial spaces); compactness on the empty diagram, a single vertex and a finite coproduct; approximation on K empty and K already kappa-small, with kappa-filteredness from regularity. None restates the item (D1/D2). None duplicates lem-coef-infinity-yoneda-presheaf-limits (full faithfulness only), lem-coef-derived-enriched-yoneda (dg), the triangulated lem-sc/pc-compact-* nodes, the lem-pc/galois Yoneda nodes, or lem-coef-infinity-grothendieck-limits-colimits. My first whole-DAG duplicate scan hit the time limit and was stopped; a faster rerun of the same search finished and is the one these duplicate checks rely on. All cited statements are in unit sk-prop-sf-biduality-general or are definitions or Mathlib leaves, so no tool_uses are needed and none are declared. No SGA is used. This is not a target node. One repairable fault (B3) is fixed in fixes/dag/nodes/sec-six-functors/lem-coef-colimit-subdiagram-approximation.json: the statement now cites def-weil-pbc-simplicial-set for simplicial subsets and nondegenerate simplices, and that node is added to stmt_deps. No mathematical change. Caution for a later split, not a fault of this delivery: the clause 'S is presentable' in lem-coef-accessible-infinity-pullback is the case D = point of this item, so whoever splits that node must not route it through this item.; 1 file(s) fixed by the reviewer"
+ }
 }

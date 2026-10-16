@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-constructible-extend-subfield",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$T_{E,F}$ on bounded constructible complexes",
@@ -20,9 +20,87 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functor on bounded constructible derived categories induced by extension of scalars between finite p-adic subfields",
+   "results": "CommRingCat.moduleCatExtendScalarsPseudofunctor; Condensed.profiniteSolidCounit; Condensed.finFree; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; ComplexShape.Embedding.extendFunctor_obj; Condensed.profiniteSolid; Condensed.profiniteFree; Condensed.profiniteSolidification. None states the project-specific bounded constructible pro-etale functor.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/condensed and derived-category constructions do not state this project-specific functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, DerivedCategory, extendScalars",
+   "results": "0 hits; query reports unknown identifier extendScalars.",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleExtendScalars|bounded.*constructible|extendScalars",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars restricts to bounded constructible complexes over finite p-adic coefficient fields",
+   "results": "RestrictScalars; ModuleCat.extendRestrictScalarsAdj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; Bornology.IsVonNBounded.extend_scalars; ModuleCat.restrictCoextendScalarsAdj; Bornology.IsVonNBounded.restrict_scalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; instSeminormedAddCommGroupRestrictScalars. None states the project-specific functor.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scalar-extension declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleExtendScalars|boundedConstructible|constructible.*extend|extend.*constructible",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a functor between derived categories of sheaf modules to full subcategories of bounded complexes with constructible cohomology",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Sheaf.H; DerivedCategory.Q; DerivedCategory.singleFunctor; HasDerivedCategory.standard; DerivedCategory.singleFunctors; DerivedCategory.instLinearCochainComplexIntQ. These are general derived-category constructions and do not define the finite p-adic constructible scalar-extension functor.",
+   "date": "2026-10-17",
+   "verdict": "no match for the coefficient-specific definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.lift",
+   "results": "12 hits, including CategoryTheory.ObjectProperty.lift, liftCompιIso, liftCompιOfLEIso, lift_map, and inclusion formulas. Read Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:153-171; lift is at line 159 and sends objects to pairs with their property proof, with unchanged ambient morphisms.",
+   "date": "2026-10-17",
+   "verdict": "supporting generic construction; the full item also requires the project coefficient categories, ambient derived extension and preservation theorem, supplied by its three existing dependencies"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|def liftCompιIso",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 (lift), :165 (liftCompιIso), :183 (liftCompιOfLEIso); directory CategoryTheory/ObjectProperty. Read lines 153-171.",
+   "date": "2026-10-17",
+   "verdict": "supporting generic full-subcategory lift; no whole-item Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|def lift|restrict.*[Ff]unctor",
+   "results": "4 hits: Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean; Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean; Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean; Mathlib/CategoryTheory/ObjectProperty/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "supporting generic construction: read FullSubcategory.lean:153-171 (lift at 159 and liftCompιIso at 165) and Basic.lean:158-166 (map at 159); no coefficient-specific functor or preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.map",
+   "results": "12 hits: CategoryTheory.ObjectProperty.map; CategoryTheory.ObjectProperty.prop_map_obj; CategoryTheory.ObjectProperty.instNonemptyMap; CategoryTheory.ObjectProperty.strictMap_le_map; CategoryTheory.ObjectProperty.prop_map_iff; CategoryTheory.ObjectProperty.map_monotone; CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsMap; CategoryTheory.ObjectProperty.isoClosure_strictMap",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: map is the essential-image object property, not the restricted scalar-extension functor; read Basic.lean:158-166"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving object properties induces a functor on the corresponding full subcategories",
+   "results": "8 hits: CategoryTheory.ObjectProperty.lift; CategoryTheory.ObjectProperty.lift_map; CategoryTheory.ObjectProperty.ιOfLE; CategoryTheory.ObjectProperty.instFullFullSubcategoryLift; CategoryTheory.ObjectProperty.ιOfLE_map; CategoryTheory.ObjectProperty.instFaithfulFullSubcategoryLift; CategoryTheory.ObjectProperty.ι; CategoryTheory.ObjectProperty.ιOfLE_obj_obj",
+   "date": "2026-10-17",
+   "verdict": "supporting generic construction: ObjectProperty.lift supplies the full-subcategory lift; the coefficient categories, derived functor and bounded constructibility preservation are the three existing project dependencies, so this is not a whole-item Mathlib leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -43,5 +121,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-constructible-extend-subfield",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its current blueprint, unit and chapter route, all three statement dependencies, and the read-only source checkouts. The finite-subfield bounded constructible categories, ambient derived scalar extension and its preservation theorem already supply every constituent of the restriction. Retained the exact statement and dependency lists, marked the definition split, filled same_as, and recorded authentic Mathlib searches including the generic full-subcategory lift. No new nodes, proof steps, attachments or Lean work. Independent second reading confirms the source and all three dependency statements, repeats searches with object-property vocabulary, and verifies the object/morphism restriction and small cases; no mathematical repair is needed.",
+  "blueprint": "The complete displayed definition in def-sfb-constructible-extend-subfield.md (order 1766), and unit sk-thm-sfb-qlbar-two-colimit step 9, the clause that derived scalar extension restricts to the categories def-sfb-dcons-subfield. The item is imported, hence blueprint.from remains null.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-12e2625cb",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-12e2625cb (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item's statement matches main-20261015 def-sfb-constructible-extend-subfield.md (order 1766) word for word, with the same hypotheses: prime ℓ, any scheme X, finite E≤F inside Q̄_ℓ. Its stmt_deps are the blueprint's uses. I read the three cited statements in full: def-sfb-dcons-subfield (full subcategory of D(Mod_{E_X}) of bounded complexes with constructible cohomology, E_X=p_X^*E), def-sfb-derived-extend-subfield (L(Ext) along E_X→F_X, from def-sfb-subfield-coefficient-map) and lem-sfb-extend-subfield-constructible (any scheme, preserves the same sk-def-sfb-bounded-constructible predicate). Together they supply the categories, the functor and the preservation fact the lift needs. The upstream TwoColimit.lean:118/155/165-171/183-187 has the same categories, coefficient morphism and construction (ObjectProperty.lift). Its preservation lemma is sorry, so it is reference only and is not attached. The definition has no hollow data and does not cite a lemma about itself. Small cases E=F, K=0, X empty and non-qcqs X all work. The in_cycle flag is historical: the item does not reach itself (399 nodes walked). The only nodes citing it are comp-iso, cocone and the unit node. Duplicate search found nothing that restates it: def-sfb-bounded-constructible-extend-scalars is O_E→E; the pbc coefficient-comparisons and finite-derived-tensor-comparison nodes are ambient data; prop-weil-pbc-qbar-condensed-two-colimit is a Noetherian theorem; extend-to-qlbar is the E→Q̄_ℓ analogue. Mathlib searches cover all three kinds and the verdicts are fair. There are no new nodes, no fixes and no tool_uses."
+ }
 }
