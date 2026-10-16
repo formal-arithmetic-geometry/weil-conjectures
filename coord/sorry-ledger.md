@@ -181,17 +181,17 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | E1 |
 | Sheaf.Paper.CondensedQbarFieldEvaluationLinearity | 9 | 1 | C4 |
 | Sheaf.Paper.IntegralResidueTensorGeometry | 10 | 1 | A4 |
-| Sheaf.Paper.ProEtaleLisseOrigin | 10 | 1 | — |
-| Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum | 11 | 1 | — |
-| Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk | 11 | 1 | — |
-| Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk | 11 | 1 | — |
-| Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf | 11 | 1 | — |
+| Sheaf.Paper.ProEtaleLisseOrigin | 10 | 1 | D3 |
+| Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum | 11 | 1 | D4 |
+| Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk | 11 | 1 | E2 |
+| Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk | 11 | 1 | E3 |
+| Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf | 11 | 1 | E4 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.IntegralResiduePullSquare | 11 | 1 | B2 |
-| Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk | 12 | 1 | — |
+| Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk | 12 | 1 | F3 |
 | Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
-| Sheaf.Paper.ProEtaleLocallyConstantSheaf | 12 | 2 | — |
-| WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange | 12 | 1 | — |
+| Sheaf.Paper.ProEtaleLocallyConstantSheaf | 12 | 2 | F4 |
+| WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange | 12 | 1 | G1 |
 
 Modules pruned since the imports baseline:
 
