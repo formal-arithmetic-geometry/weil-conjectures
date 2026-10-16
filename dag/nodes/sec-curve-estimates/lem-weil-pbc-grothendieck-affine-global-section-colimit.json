@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-grothendieck-affine-global-section-colimit",
+ "kind": "statement",
+ "title": "Directed affine global-section continuity with Grothendieck coefficients",
+ "statement": "Let A be a Grothendieck abelian category [def-sp-grothendieck-abelian], J a small nonempty directed preorder, D:J^op -> Sch a diagram of affine schemes [def-weil-pbc-scheme-conventions], and c a limiting cone. Let pi:D -> const S be a compatible family of structure maps to an affine scheme S and p:c.pt -> S their limit map. For a small-etale A-valued sheaf G on S [def-weil-pbc-etale-site, def-weil-pbc-inverse-image], consider any supplied diagram H:J -> A identified objectwise with Gamma(D_j, pi_j^* G) [def-weil-pbc-global-sections-functor]. Assume its transitions are the adjunction-unit global-section maps followed by inverse-image composition. Let K be a supplied cocone whose point is identified with Gamma(c.pt, p^* G) and whose legs are those same canonical maps for the cone projections. Then K is a colimit. The normalization equalities and all their directions are exactly those in the Lean statement.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients.",
+  "external": [
+   {
+    "document": "Stacks Project, Étale Cohomology",
+    "place": "Tag 09YQ, degree zero (abelian coefficients); arbitrary Grothendieck coefficients by the categorical finite-matching argument stated in the proof"
+   },
+   {
+    "document": "Stacks Project, Sites",
+    "place": "Tag 0738(4), finite-cover section-colimit argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof": [
+  {
+   "text": "Work on the affine etale bases over the fixed affine base S and over the affine stages. Affine etale finite-presentation objects at the limit, their arrows, equalities, finite covers, and covering pullbacks descend simultaneously to sufficiently late stages. Their model categories are filtered, and later-stage restrictions are independent of every choice by eventual equality. The later base changes of any fixed model are cofinal among all models, by descent of comparison maps and eventual equality. This computes each required colimit over a u-small upper tail.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each limit affine etale object V form Q(V) as the filtered colimit in A over all its stage presentations of the stage inverse-image sections. Lift arrows at common stages and use the colimit universal property for restrictions. Descend a finite affine cover together with its matching diagram. AB5 commutes its finite matching limit with this filtered colimit, so Q is a sheaf on the affine etale basis; the empty cover gives zero. Extend along the affine basis equivalence.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write p_j for the limit projection. A morphism from Q to M is a compatible family of morphisms pi_j^*G -> (p_j)_*M. By the stage adjunction these are morphisms G -> (pi_j)_*(p_j)_*M; composition of direct images identifies these Hom sets and their transition maps with the constant set Hom(G,p_*M). Directedness and nonemptiness identify a compatible family with one such morphism. Identity presentations and adjunction units show the constructions are inverse, identifying Q with p^*G and its comparison maps with the canonical units. Evaluate at the terminal affine object and transport by the supplied component and point isomorphisms. This proves the universal property of K without choosing arbitrary data from a holed existence theorem.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-finite-data-descent",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof paragraph 2, categorical finite-matching extension of Stacks 09YQ degree zero and 0738(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a directed inverse limit of affine schemes, global sections of inverse images of a fixed sheaf valued in a Grothendieck abelian category form a filtered colimit",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize and CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize provide existence of filtered colimits. AlgebraicGeometry.exists_appTop_π_eq_of_isLimit and AlgebraicGeometry.preservesColimit_Γ concern structure sheaf rings. None proves inverse-system continuity for arbitrary A-valued etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a fixed sheaf with values in a Grothendieck abelian category pulled back to a directed inverse limit of affine schemes form a filtered colimit",
+   "results": "Mathlib.AlgebraicGeometry.AffineTransitionLimit: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone and exists_appTop_π_eq_of_isAffine_of_isLimit concern structure-sheaf rings, not arbitrary etale sheaves. No match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Sheaf",
+   "results": "Mathlib.CategoryTheory.Sites.Limits: CategoryTheory.Sheaf.isColimitSheafifyCocone and createsColimitOfIsSheaf; ingredients for construction, no inverse-system continuity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*[Cc]olimit|isColimit.*[Aa]ffine|AB5OfSize",
+   "results": "Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim: AB5 makes filtered colimits left exact; Mathlib.AlgebraicGeometry.AffineTransitionLimit: structure-sheaf continuity. Source library ProEtale.Comparison.Continuity assumes etale stage schemes over a fixed base. None states arbitrary affine-transition etale-sheaf continuity with general A.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckEtaleRelativeSectionColimit",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-grothendieck-etale-relative-section-colimit",
+   "place": "Affine global-section core after finite affine gluing and pullback normalization",
+   "via": [
+    "lem-weil-pbc-grothendieck-etale-relative-section-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckAffineGlobalSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.affine_globalSections_limit_isColimit_of_directed",
+  "statement": "theorem affine_globalSections_limit_isColimit_of_directed\n    {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] {S : Scheme.{u}}\n    [IsAffine S]\n    (D : Jᵒᵖ ⥤ Scheme.{u}) [∀ j, IsAffine (D.obj j)]\n    (π : D ⟶ (Functor.const Jᵒᵖ).obj S) (c : Cone D) (hc : IsLimit c)\n    (p : c.pt ⟶ S) (hp : ∀ j : J, p = c.π.app (op j) ≫ π.app (op j))\n    (G : Sheaf S.smallEtaleTopology A) (H : J ⥤ A)\n    (e : ∀ j : J, H.obj j ≅ (Sheaf.Γ (D.obj (op j)).smallEtaleTopology A).obj\n      ((upperStar A (π.app (op j))).obj G))\n    (hH : ∀ (j k : J) (f : j ⟶ k), H.map f ≫ (e k).hom =\n      (e j).hom ≫ globalSectionsUpperStarMap A (D.map f.op)\n        ((upperStar A (π.app (op j))).obj G) ≫\n      (Sheaf.Γ (D.obj (op k)).smallEtaleTopology A).map\n        ((upperStarComp A (D.map f.op) (π.app (op j)) (π.app (op k))\n          (by simpa only [Functor.const_obj_obj, Functor.const_obj_map,\n            Category.comp_id] using (π.naturality f.op).symm)).inv.app G))\n    (K : Cocone H) (eK : K.pt ≅ (Sheaf.Γ c.pt.smallEtaleTopology A).obj\n      ((upperStar A p).obj G))\n    (hK : ∀ j : J, K.ι.app j ≫ eK.hom =\n      (e j).hom ≫ globalSectionsUpperStarMap A (c.π.app (op j))\n        ((upperStar A (π.app (op j))).obj G) ≫\n      (Sheaf.Γ c.pt.smallEtaleTopology A).map\n        ((upperStarComp A (c.π.app (op j)) (π.app (op j)) p (hp j)).inv.app G)) :\n    Nonempty (IsColimit K)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-357ec",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T081350-L-1435770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-357ec",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T081350-L-1435770",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof reductions with both DAG nodes, the published interface, change record, report, and earlier return; compiled both modules and the sole direct importer; audited all declarations' axioms."
+ }
+}

@@ -24,22 +24,29 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the cofiltered category of stages mapping to i; its forgetful functor is initial, so the cone remains limiting. Finite-presentation descent of qcqs étale objects, their morphisms and their equalities, together with descent of finite covers, identifies the qcqs étale basis at the limit with the filtered colimit of stage bases. On that basis, the presheaf inverse-image formula is the pointwise filtered colimit of stage sections. Refine any cover of a qcqs object to a finite affine cover; its pairwise intersections are qcqs. The sheaf matching diagram is a finite equalizer between finite products. AB5 commutes these finite limits with the filtered colimit, so the presheaf colimit is already a sheaf on the basis. Uniqueness of inverse image identifies it with the limit inverse-image sheaf. The adjunction-unit normalization identifies its comparison legs with the explicit canonical cocone, giving the stated colimit. Empty objects are handled by the empty-cover terminal-object condition.",
+   "text": "Choose a finite affine open cover of the qcqs etale object, and finite affine covers of its pairwise intersections. The constructed one-hypercover has finite matching shape. Apply the affine case on its components; the sheaf multiforks are limits at every stage and at the cocone point. AB5 and the colimit universal property prove the evaluated cocone is colimiting. The helpers finiteHypercoverColimit and qcqsColimitOfAffine contain this full categorical argument, including the empty-cover case.",
+   "uses": [
+    "def-weil-pbc-grothendieck-etale-relative-section-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an affine etale U, restrict D to Over i and pull the cone back along U.hom. Initiality and connected pullback pasting prove the new cone limiting; affine transition maps make its stages affine. Explicit etale localization/global-section isomorphisms are compatible with transitions and cone legs, by the proved localization-unit and inverse-image composition calculations. Rebase the coefficient sheaf along U.hom using the proved inverse-image composition associativity, so the fixed base is the affine scheme U itself. A coinitial directed reindexing reduces the result to directed affine global-section continuity; finality reflects its colimit. The terminal-evaluation/ΓRes identity is reused directly from AlgebraicGeometry.Etale.terminalEvaluation_eq_res in EtaleObjectSections via a proof-only import all; no duplicate identity is declared.",
    "uses": [
     "def-weil-pbc-grothendieck-etale-relative-section-diagram",
-    "lem-weil-pbc-etale-finite-data-descent"
+    "lem-weil-pbc-grothendieck-affine-global-section-colimit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-grothendieck-etale-relative-section-diagram",
-  "lem-weil-pbc-etale-finite-data-descent"
+  "lem-weil-pbc-grothendieck-affine-global-section-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients."
+  "place": "Detailed proof paragraph 2; finite affine one-hypercover gluing, pullback/global-section normalization, and directed reindexing formalized by C3."
  },
  "mathlib_searches": [
   {
@@ -108,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-357ec",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261016T061026-L-327514",
+  "landing": "20261016T081350-L-1435770",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proof reductions with both DAG nodes, the published interface, change record, report, and earlier return; compiled both modules and the sole direct importer; audited all declarations' axioms."
  }
 }
