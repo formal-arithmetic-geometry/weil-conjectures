@@ -330,5 +330,28 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-f20f5b062 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All six steps check, including unbounded colimit passage, K-flatness, shift signs, and S-module vanishing. No duplicate or dependency cycle found; seven tool uses accepted. Archived master coefficient categories remain distinguished. Detailed checks recorded in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-362f22c5e",
+  "group": "NW",
+  "result": "pass",
+  "note": "Wrote review.md. Audited both clauses, all five statement dependencies, sources, helper construction, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduced cleanly; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds",
+  "declaration": "SheafOfModules.ringedTensorCohomologicalBounds",
+  "declarations": [
+   "SheafOfModules.ringedDerivedScalarExtension",
+   "SheafOfModules.ringedTensorCohomologicalBounds"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorCohomologicalBounds.lean",
+  "statement": "theorem ringedTensorCohomologicalBounds {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R))] [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S))] (a : ℤ) : (∀ M : DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)), M.IsLE a → ((ringedDerivedScalarExtension φ).obj M).IsLE a) ∧ (∀ M : DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)), M.IsGE a → (∀ (q : ℤ), a ≤ q → ∀ (p : ℕ), 0 < p → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S)) (-(p : ℤ))).obj ((ringedDerivedScalarExtension φ).obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)) 0).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)) q).obj M)))))) → ((ringedDerivedScalarExtension φ).obj M).IsGE a)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper selects the universal derived scalar-extension functor from lem-pur-derived-change-of-rings, whose ordinary objects and maps and derived universal property determine it up to the isomorphism used downstream. Higher Tor is written directly as the specified negative cohomology of the image of a degree-zero module; no second Tor definition is introduced."
  }
 }
