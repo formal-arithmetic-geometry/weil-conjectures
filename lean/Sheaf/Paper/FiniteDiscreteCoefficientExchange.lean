@@ -6,7 +6,10 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.Paper.FiniteDiscreteRealizationFunctor
-import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
+import Sheaf.Paper.FiniteDiscreteConstructibleEncoding
+import Sheaf.Paper.FiniteDiscreteCondensedRing
+import Sheaf.Paper.InternalModuleAbEquivalence
+import Sheaf.Paper.CoefficientExchangeFromComparisons
 
 /-! # Realization of finite discrete coefficient sheaves and exchange steps
 
@@ -45,6 +48,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
+set_option linter.unusedVariables false in
 /-- Finite discrete realization on constructible sheaves and on the three exchange steps.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3;
 Stacks Project, Tag 09AK
@@ -113,6 +117,21 @@ theorem finiteDiscreteExchange_coefficientRealization [DiscreteTopology B] [Fini
         (ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} B)] ⋙ E0.functor).essImage M) ∧
       finiteDiscreteExchangeSteps B ℓ k sq
         (finiteDiscreteRealization B X E0) (finiteDiscreteRealization B Y' E1) := by
-  sorry
+  have _ := heR
+  have _ := hEncoding
+  obtain ⟨e, he⟩ := Profinite.finiteDiscreteCondensedRing_constant.{u} B
+  let := he
+  obtain ⟨G, hG, hforget⟩ := internalModuleAb_equivalence (ULift.{u + 1} B)
+  let := hG
+  let E := finiteDiscreteCoefficientEquivalence B e G hforget
+  refine ⟨E X, E Y', ?_, ?_⟩
+  · intro M hM
+    obtain ⟨A, _, ⟨i⟩⟩ :=
+      ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj (ULift.{u + 1} B)
+        (finiteDiscreteCoefficient_constructible B e G hforget X M hM)
+    exact ⟨A, ⟨(E X).functor.mapIso i ≪≫ (E X).counitIso.app M⟩⟩
+  · obtain ⟨P⟩ := finiteDiscreteCoefficient_derivedComparisonData B e G hforget
+    exact coefficientComparisonData_exchangeSteps B ℓ k hB sq
+      (fun T ↦ finiteDiscreteRealization B T (E T)) (P.toComparisonData B)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

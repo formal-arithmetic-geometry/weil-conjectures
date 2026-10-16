@@ -1,0 +1,136 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-three-step-adjunction-comparison",
+ "kind": "statement",
+ "title": "Explicit three-factor comparison from compatible adjunctions",
+ "statement": "Take two commutative pullback-square isomorphisms theta:G V to U H and theta_e:G_e V_e to U_e H_e in two four-category diagrams, four vertical comparison functors T_i, adjunctions U adjoint R, V adjoint S and their e analogues. Give invertible comparisons for the four pullbacks and the two right adjoints. Assume the mate unit and counit equations and the displayed pullback cube. Then for every K in the second source category there are four vertex isomorphisms making each of the unit insertion, square transport and counit contraction squares commute. No invertibility of either assembled exchange arrow is assumed.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "unit_mateEquiv and mateEquiv_counit; explicit naturality calculation"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "At the first vertex compose the horizontal pullback comparison with the first right-adjoint comparison. At the middle vertices insert the second right-adjoint comparison, the vertical pullback comparisons, and the images of the first comparison; at the last vertex use the other horizontal comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality and the unit mate equation give the first square. The coherent pullback cube, right-adjoint naturality, and theta_e naturality give the second. The counit mate equation, inverse cancellation and the last pullback comparison naturality give the third.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "unit_mateEquiv and mateEquiv_counit; explicit naturality calculation",
+  "note": "H2: constructive encoding and explicit categorical assembly; any remaining geometric theorem is separately identified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Sheaves of modules over a constant finite ring are equivalent to internal modules in abelian sheaves and the equivalence is compatible with pullback and constructibility",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules, sheafificationCompPullback, IsFiniteType, and PullbackConstruction.adjunction.",
+   "verdict": "These concern external sheaves of modules; none identifies the internal coefficient construction used here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a constant ring sheaf and sheaves of modules preserves constructible sheaves and coherently commutes with derived inverse and direct images",
+   "date": "2026-10-16",
+   "results": "8 generic SheafOfModules hits, including toSheafCompSheafToPresheafIso and pushforwardPushforwardAdj.",
+   "verdict": "Use existing constant-internal encoding and the generic adjunction infrastructure; no complete coefficient theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"unit\"",
+   "date": "2026-10-16",
+   "results": "mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm, and a bicategorical identity.",
+   "verdict": "The unit and counit identities are available and used; the coherent three-factor assembly must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*[Ee]quiv|[Ee]quiv.*mapMod|mateEquiv_counit|unit_mateEquiv",
+   "date": "2026-10-16",
+   "results": "7 hits, primarily Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123--151. Local blueprint searches for constant internal module, finite discrete constructible encoding, and unit counit mate found no duplicate blueprint nodes.",
+   "verdict": "No existing statement for this internal coefficient construction; generic mate formulas suffice for the categorical calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories of sheaves of modules preserves finite locally presented modules and locally constant finite modules under restriction",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, CompHausLike.LocallyConstantModule.functor, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "verdict": "Second reading: External SheafOfModules finite-presentation and condensed locally constant module APIs; none supplies this internal coefficient transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "date": "2026-10-16",
+   "results": "10 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_comp_id_right, CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "verdict": "Second reading: Generic mateEquiv_vcomp and mateEquiv_hcomp laws; no complete specified restricted exchange theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful.*(unit|counit)|mateEquiv.*[Cc]omp|[Cc]omp.*mateEquiv",
+   "date": "2026-10-16",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Second reading: Restriction unit/counit formulas and generic mate composition identities; these support the formal argument but do not identify the internal coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientExchange",
+  "date": "2026-10-16",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Compatible coefficient encodings and sheaf-level origin; H2: Explicit three-factor comparison from compatible adjunctions",
+   "via": [
+    "lem-weil-pbc-finite-discrete-coefficient-realization",
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ThreeStepAdjunctionComparison",
+  "file": "lean/Sheaf/CategoryTheory/ThreeStepAdjunctionComparison.lean",
+  "declaration": "CategoryTheory.Adjunction.threeStepComparison",
+  "statement": "theorem threeStepComparison\n    (θ : G ⋙ V ≅ U ⋙ H) (θe : Ge ⋙ Ve ≅ Ue ⋙ He)\n    (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)\n    (αG : G ⋙ T₃ ≅ T₁ ⋙ Ge) (αH : H ⋙ T₄ ≅ T₂ ⋙ He)\n    (δ : R ⋙ T₁ ≅ T₂ ⋙ Re) (δ' : S ⋙ T₃ ≅ T₄ ⋙ Se)\n    (hunit : ∀ K, T₃.map (b.unit.app K) ≫ δ'.hom.app (V.obj K) ≫\n      Se.map (αV.hom.app K) = be.unit.app (T₃.obj K))\n    (hcounit : ∀ K, Ue.map (δ.hom.app K) ≫ ae.counit.app (T₂.obj K) =\n      αU.inv.app (R.obj K) ≫ T₂.map (a.counit.app K))\n    (hcube : ∀ K, T₄.map (θ.hom.app K) ≫ αH.hom.app (U.obj K) ≫\n        He.map (αU.hom.app K) =\n      αV.hom.app (G.obj K) ≫ Ve.map (αG.hom.app K) ≫ θe.hom.app (T₁.obj K))\n    (K : C₂) :\n    Nonempty (FiniteDiscreteThreeStepComparison\n      (T₃.map (b.unit.app (G.obj (R.obj K))))\n      (T₃.map (S.map (θ.hom.app (R.obj K))))\n      (T₃.map (S.map (H.map (a.counit.app K))))\n      (be.unit.app (Ge.obj (Re.obj (T₂.obj K))))\n      (Se.map (θe.hom.app (Re.obj (T₂.obj K))))\n      (Se.map (He.map (ae.counit.app (T₂.obj K)))))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-6c3e9",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261016T093727-L-2050954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-6c3e9",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261016T093727-L-2050954",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all six node records, existing signatures and change records; compiled 14 delivered modules and checked all 47 direct importers with published-baseline comparisons."
+ }
+}

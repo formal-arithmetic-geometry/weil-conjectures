@@ -1,0 +1,143 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "def-weil-pbc-common-finite-discrete-encoding",
+ "kind": "definition",
+ "title": "Common sectionwise coefficient equivalence",
+ "statement": "Let B be a topological commutative ring, let e identify its sheafified constant ring with its continuous-function condensed ring at the profinite point, monoidally. Fix an equivalence G from internal ULift B-modules in abelian groups to ordinary ULift B-modules with literal equality of the forgetful functors. On every scheme T, use this same G sectionwise, sheafify, and transport scalars along the ring isomorphism induced from e. The resulting explicitly constructed equivalence E_T goes from module-valued pro-etale sheaves to internal modules over the pulled-back condensed ring. Its functor preserves the underlying abelian sheaf up to the displayed natural isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the explicit sectionwise sheafEncoding, not a choice from its existence theorem.",
+   "uses": [
+    "lem-weil-pbc-constant-internal-module-sheaf-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose its inverse equivalence with the inverse of comap along the ring identification pulled back from the point. The underlying-sheaf isomorphism is the whiskered sheafEncodingForgetIso and its counit.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
+  "note": "H2: constructive encoding and explicit categorical assembly; any remaining geometric theorem is separately identified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Sheaves of modules over a constant finite ring are equivalent to internal modules in abelian sheaves and the equivalence is compatible with pullback and constructibility",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules, sheafificationCompPullback, IsFiniteType, and PullbackConstruction.adjunction.",
+   "verdict": "These concern external sheaves of modules; none identifies the internal coefficient construction used here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a constant ring sheaf and sheaves of modules preserves constructible sheaves and coherently commutes with derived inverse and direct images",
+   "date": "2026-10-16",
+   "results": "8 generic SheafOfModules hits, including toSheafCompSheafToPresheafIso and pushforwardPushforwardAdj.",
+   "verdict": "Use existing constant-internal encoding and the generic adjunction infrastructure; no complete coefficient theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"unit\"",
+   "date": "2026-10-16",
+   "results": "mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm, and a bicategorical identity.",
+   "verdict": "The unit and counit identities are available and used; the coherent three-factor assembly must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*[Ee]quiv|[Ee]quiv.*mapMod|mateEquiv_counit|unit_mateEquiv",
+   "date": "2026-10-16",
+   "results": "7 hits, primarily Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123--151. Local blueprint searches for constant internal module, finite discrete constructible encoding, and unit counit mate found no duplicate blueprint nodes.",
+   "verdict": "No existing statement for this internal coefficient construction; generic mate formulas suffice for the categorical calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories of sheaves of modules preserves finite locally presented modules and locally constant finite modules under restriction",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, CompHausLike.LocallyConstantModule.functor, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "verdict": "Second reading: External SheafOfModules finite-presentation and condensed locally constant module APIs; none supplies this internal coefficient transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "date": "2026-10-16",
+   "results": "10 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_comp_id_right, CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "verdict": "Second reading: Generic mateEquiv_vcomp and mateEquiv_hcomp laws; no complete specified restricted exchange theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful.*(unit|counit)|mateEquiv.*[Cc]omp|[Cc]omp.*mateEquiv",
+   "date": "2026-10-16",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Second reading: Restriction unit/counit formulas and generic mate composition identities; these support the formal argument but do not identify the internal coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientExchange",
+  "date": "2026-10-16",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Compatible coefficient encodings and sheaf-level origin; H2: Common sectionwise coefficient equivalence",
+   "via": [
+    "lem-weil-pbc-finite-discrete-coefficient-realization",
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientEncoding",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficientEquivalence",
+  "statement": "def finiteDiscreteCoefficientEquivalence (T : Scheme.{u}) :\n    FiniteDiscreteProEtaleSheaves B T ≌ FiniteDiscreteInternalModules B T",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-6c3e9",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261016T093727-L-2050954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-6c3e9",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261016T093727-L-2050954",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all six node records, existing signatures and change records; compiled 14 delivered modules and checked all 47 direct importers with published-baseline comparisons."
+ }
+}

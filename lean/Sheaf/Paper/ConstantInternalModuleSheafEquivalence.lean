@@ -6,8 +6,8 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import Sheaf.Paper.InternalModuleAbEquivalence
 
 /-! # Encoding internal modules over a constant ring sheaf
@@ -26,18 +26,20 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
+namespace ConstantInternalModuleSheafEncoding
+
 section PresheafEncoding
 
 
 variable {C : Type u} [Category.{v} C] (R : Type w) [Ring R]
 
-private instance evaluationMonoidal (U : C) : ((evaluation C Ab.{w}).obj U).Monoidal :=
+local instance evaluationMonoidal (U : C) : ((evaluation C Ab.{w}).obj U).Monoidal :=
   Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
 
-private abbrev A : C ⥤ Ab.{w} :=
+abbrev A : C ⥤ Ab.{w} :=
   (Functor.const C).obj (RingCat.of R) ⋙ forget₂ RingCat.{w} Ab.{w}
 
-private noncomputable def presheafToFunctor : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R) ⥤
+noncomputable def presheafToFunctor : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R) ⥤
     (C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) where
   obj M :=
     { obj U := (((evaluation C Ab.{w}).obj U).mapMod (A (C := C) R)).obj M
@@ -52,7 +54,7 @@ private noncomputable def presheafToFunctor : CategoryTheory.Mod (C ⥤ Ab.{w}) 
   map_id M := by ext U; rfl
   map_comp φ ψ := by ext U; rfl
 
-private noncomputable def functorToPresheafObj
+noncomputable def functorToPresheafObj
     (F : C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) :
     CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R) := by
   let X := F ⋙ CategoryTheory.Mod.forget (AddCommGrpCat.of R)
@@ -64,20 +66,20 @@ private noncomputable def functorToPresheafObj
     (NatTrans.ext (funext fun U ↦ ModObj.mul_smul_self (AddCommGrpCat.of R) (F.obj U).X))
   exact ⟨X⟩
 
-private noncomputable def preimageMap {M N : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R)}
+noncomputable def preimageMap {M N : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R)}
     (φ : (presheafToFunctor R).obj M ⟶ (presheafToFunctor R).obj N) : M ⟶ N :=
   CategoryTheory.Mod.homMk
     { app U := (φ.app U).hom
       naturality _ _ f := congrArg CategoryTheory.Mod.Hom.hom (φ.naturality f) }
     (NatTrans.ext (funext fun U ↦ CategoryTheory.Mod.act_hom (φ.app U)))
 
-private noncomputable def presheafToFunctorFullyFaithful :
+noncomputable def presheafToFunctorFullyFaithful :
     (presheafToFunctor (C := C) R).FullyFaithful where
   preimage φ := preimageMap R φ
   map_preimage φ := by ext U; rfl
   preimage_map φ := CategoryTheory.Mod.hom_ext _ _ (by ext U; rfl)
 
-private noncomputable def realizationIso (F : C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) :
+noncomputable def realizationIso (F : C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) :
     (presheafToFunctor R).obj (functorToPresheafObj R F) ≅ F :=
   NatIso.ofComponents (fun U ↦ CategoryTheory.Mod.isoMk (Iso.refl _) (by simp))
     (fun _ ↦ CategoryTheory.Mod.hom_ext _ _ rfl)
@@ -94,14 +96,14 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 variable (A : Cᵒᵖ ⥤ Ab.{w}) [MonObj A]
 
-private noncomputable abbrev moduleLocalizationAdjunction :=
+noncomputable abbrev moduleLocalizationAdjunction :=
   (sheafificationAdjunction J Ab.{w}).mapModAdjunction A
 
-private noncomputable abbrev moduleLocalizationRight :=
+noncomputable abbrev moduleLocalizationRight :=
   (sheafificationAdjunction J Ab.{w}).modRight
     ((sheafificationAdjunction J Ab.{w}).unit.app A)
 
-private noncomputable def moduleLocalizationRightFullyFaithful :
+noncomputable def moduleLocalizationRightFullyFaithful :
     (moduleLocalizationRight J A).FullyFaithful := by
   let adj := moduleLocalizationAdjunction J A
   have : ∀ N, IsIso (adj.counit.app N) := by
@@ -127,11 +129,11 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
-private noncomputable def modulePresheafEncoding
+noncomputable def modulePresheafEncoding
     (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R) :=
   presheafToFunctor (C := Cᵒᵖ) R ⋙ (Functor.whiskeringRight Cᵒᵖ _ _).obj G
 
-private lemma modulePresheafEncoding_forget
+lemma modulePresheafEncoding_forget
     (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R)
     (hG : G ⋙ forget₂ (ModuleCat.{w} R) Ab.{w} = CategoryTheory.Mod.forget (AddCommGrpCat.of R)) :
     modulePresheafEncoding (C := C) R G ⋙
@@ -142,13 +144,13 @@ private lemma modulePresheafEncoding_forget
   rw [hG]
   rfl
 
-private instance presheafToFunctorIsEquivalence :
+instance presheafToFunctorIsEquivalence :
     (presheafToFunctor (C := Cᵒᵖ) R).IsEquivalence where
   faithful := (presheafToFunctorFullyFaithful R).faithful
   full := (presheafToFunctorFullyFaithful R).full
   essSurj := ⟨fun F ↦ ⟨functorToPresheafObj R F, ⟨realizationIso R F⟩⟩⟩
 
-private noncomputable def sheafEncoding
+noncomputable def sheafEncoding
     (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R)
     (hG : G ⋙ forget₂ (ModuleCat.{w} R) Ab.{w} = CategoryTheory.Mod.forget (AddCommGrpCat.of R))
     [J.HasSheafCompose (forget₂ (ModuleCat.{w} R) Ab.{w})]
@@ -184,20 +186,20 @@ variable (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R
     [PreservesLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
     [ReflectsLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
 
-private instance localizationRightFull :
+instance localizationRightFull :
     (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Full :=
   (moduleLocalizationRightFullyFaithful J _).full
 
-private instance localizationRightFaithful :
+instance localizationRightFaithful :
     (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Faithful :=
   (moduleLocalizationRightFullyFaithful J _).faithful
 
-private instance moduleEncodingIsEquivalence :
+instance moduleEncodingIsEquivalence :
     (modulePresheafEncoding (C := C) R G).IsEquivalence := by
   unfold modulePresheafEncoding
   infer_instance
 
-private instance sheafEncodingFull : (sheafEncoding J R G hG).Full := by
+instance sheafEncodingFull : (sheafEncoding J R G hG).Full := by
   have : (modulePresheafEncoding (C := C) R G).Full :=
     (moduleEncodingIsEquivalence R G).full
   have : (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Full :=
@@ -207,7 +209,7 @@ private instance sheafEncodingFull : (sheafEncoding J R G hG).Full := by
     (H := moduleLocalizationRight J (A (C := Cᵒᵖ) R) ⋙ modulePresheafEncoding (C := C) R G)
     (Iso.refl _)
 
-private instance sheafEncodingFaithful : (sheafEncoding J R G hG).Faithful := by
+instance sheafEncodingFaithful : (sheafEncoding J R G hG).Faithful := by
   have : (modulePresheafEncoding (C := C) R G).Faithful :=
     (moduleEncodingIsEquivalence R G).faithful
   have : (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Faithful :=
@@ -217,7 +219,7 @@ private instance sheafEncodingFaithful : (sheafEncoding J R G hG).Faithful := by
     (H := moduleLocalizationRight J (A (C := Cᵒᵖ) R) ⋙ modulePresheafEncoding (C := C) R G)
     (Iso.refl _)
 
-private instance sheafEncodingEssSurj : (sheafEncoding J R G hG).EssSurj where
+instance sheafEncodingEssSurj : (sheafEncoding J R G hG).EssSurj where
   mem_essImage N := by
     let P := modulePresheafEncoding (C := C) R G
     let M := P.objPreimage N.obj
@@ -237,6 +239,38 @@ private instance sheafEncodingEssSurj : (sheafEncoding J R G hG).EssSurj where
       rw [Adjunction.mapModAdjunction_unit_app_hom]
       exact isIso_toSheafify J hM
     exact ⟨_, ⟨ObjectProperty.isoMk _ ((P.mapIso (asIso (adj.unit.app M))).symm ≪≫ e)⟩⟩
+
+instance sheafEncodingIsEquivalence : (sheafEncoding J R G hG).IsEquivalence where
+
+/-- The sectionwise encoding leaves the underlying abelian sheaf unchanged. -/
+noncomputable def sheafEncodingForgetIso :
+    sheafEncoding J R G hG ⋙ sheafCompose J (forget₂ (ModuleCat.{w} R) Ab.{w}) ≅
+      CategoryTheory.Mod.forget _ := by
+  let U := sheafToPresheaf J Ab.{w}
+  let e : (sheafEncoding J R G hG ⋙
+      sheafCompose J (forget₂ (ModuleCat.{w} R) Ab.{w})) ⋙ U ≅
+      CategoryTheory.Mod.forget ((presheafToSheaf J Ab.{w}).obj (A (C := Cᵒᵖ) R)) ⋙ U :=
+    eqToIso (congrArg (fun P ↦ moduleLocalizationRight J (A (C := Cᵒᵖ) R) ⋙ P)
+      (modulePresheafEncoding_forget (C := C) R G hG))
+  exact ((Functor.FullyFaithful.ofFullyFaithful U).whiskeringRight _).preimageIso e
+
+end SheafEncoding
+
+end ConstantInternalModuleSheafEncoding
+
+section SheafEncoding
+
+open ConstantInternalModuleSheafEncoding
+
+variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
+  [HasWeakSheafify J Ab.{w}] [(J.W (A := Ab.{w})).IsMonoidal]
+  (R : Type w) [Ring R]
+  [J.HasSheafCompose (forget₂ (ModuleCat.{w} R) Ab.{w})]
+  [HasLimitsOfSize.{v, u} (ModuleCat.{w} R)]
+  [PreservesLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
+  [ReflectsLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 /-- Internal modules over the sheafified constant ring are module-valued sheaves,
 compatibly with the underlying abelian sheaves.
