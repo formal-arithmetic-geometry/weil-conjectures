@@ -5,20 +5,19 @@ Authors: SHEAF group NU
 -/
 module
 
-public import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-public import Sheaf.CategoryTheory.ModulePullbackTensorIso
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.CategoryTheory.AlgebraicInverseImage
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Sheaf.Paper.RingedTopoiTensorComparisonData
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
+import Mathlib.CategoryTheory.Limits.Types.Products
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-!
@@ -241,6 +240,206 @@ set_option backward.isDefEq.respectTransparency false
 
 universe w
 
+section TensorSections
+
+attribute [local irreducible] monoidalCategory
+
+open scoped ChangeOfRings TensorProduct
+set_option synthInstance.maxSize 2048
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+variable {D : Type u} [Category.{u} D] {J : GrothendieckTopology D}
+  (A B : Sheaf J CommRingCat.{u})
+set_option hygiene false in
+local notation "𝓡" R => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+
+@[no_expose] private noncomputable def ts (M N : SheafOfModules.{u} (𝓡 B))
+    (W : Dᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
+    ((monoidalCategory B).tensorObj M N).val.obj W :=
+  (tensorObjIsoSheafification M N).inv.val.app W
+    (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
+      (M.val ⊗ N.val)).app W (m ⊗ₜ[B.obj.obj W] n))
+private theorem ts_naturality (M N : SheafOfModules.{u} (𝓡 B))
+    {W V : Dᵒᵖ} (i : W ⟶ V) (m : M.val.obj W) (n : N.val.obj W) :
+    ((monoidalCategory B).tensorObj M N).val.map i (ts B M N W m n) =
+      ts B M N V (M.val.map i m) (N.val.map i n) := by
+  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)
+  let v := m ⊗ₜ[B.obj.obj W] n
+  have hi := PresheafOfModules.naturality_apply
+    (tensorObjIsoSheafification M N).inv.val i ((adj.unit.app (M.val ⊗ N.val)).app W v)
+  have hu := PresheafOfModules.naturality_apply (adj.unit.app (M.val ⊗ N.val)) i v
+  exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
+@[no_expose] private noncomputable def tensorPair (M N : SheafOfModules.{u} (𝓡 B))
+    (Z : Sheaf J (Type u))
+    (x : Z ⟶ ((toSheaf (𝓡 B) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M))
+    (y : Z ⟶ ((toSheaf (𝓡 B) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj N)) :
+    Z ⟶ ((toSheaf (𝓡 B) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj
+      ((monoidalCategory B).tensorObj M N)) :=
+  ⟨{ app := fun W ↦ ↾fun t ↦ ts B M N W (x.hom.app W t) (y.hom.app W t)
+     naturality := by
+       intro W V i
+       ext t
+       have hx := NatTrans.naturality_apply x.hom i t
+       have hy := NatTrans.naturality_apply y.hom i t
+       change ts B M N V (x.hom.app V (Z.obj.map i t))
+           (y.hom.app V (Z.obj.map i t)) =
+         ((monoidalCategory B).tensorObj M N).val.map i
+           (ts B M N W (x.hom.app W t) (y.hom.app W t))
+       rw [hx, hy]
+       exact (ts_naturality B M N i _ _).symm }⟩
+
+private theorem productElements {E : Type u} [Category.{v} E] [HasBinaryProducts E]
+    (F : E ⥤ Type v) (X Y : E) [PreservesLimit (pair X Y) F]
+    (x : F.obj X) (y : F.obj Y) :
+    ∃ t : F.obj (X ⨯ Y), F.map prod.fst t = x ∧ F.map prod.snd t = y := by
+  let e := asIso (prodComparison F X Y) ≪≫ Types.binaryProductIso (F.obj X) (F.obj Y)
+  have hf : e.hom ≫ ↾_root_.Prod.fst = F.map prod.fst := by
+    dsimp only [e, Iso.trans_hom, asIso_hom]
+    rw [Category.assoc, Types.binaryProductIso_hom_comp_fst, prodComparison_fst]
+  have hs : e.hom ≫ ↾_root_.Prod.snd = F.map prod.snd := by
+    dsimp only [e, Iso.trans_hom, asIso_hom]
+    rw [Category.assoc, Types.binaryProductIso_hom_comp_snd, prodComparison_snd]
+  refine ⟨e.inv (x, y), ?_, ?_⟩
+  · rw [← hf]
+    change (e.hom (e.inv (x, y))).1 = x
+    rw [Iso.inv_hom_id_apply]
+  · rw [← hs]
+    change (e.hom (e.inv (x, y))).2 = y
+    rw [Iso.inv_hom_id_apply]
+
+variable (c : A ⟶ B)
+
+@[no_expose] private noncomputable def ins (M : SheafOfModules.{u} (𝓡 A))
+    (W : Dᵒᵖ) (m : M.val.obj W) : (changeOfRings.{u, u, u} c M).val.obj W :=
+  (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
+    (changeOfRingsPresheaf.{u, u, u} c M)).app W
+      ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
+set_option maxHeartbeats 600000 in
+-- Expand the two scalar extensions through the sheafification adjunction.
+private theorem scalar_tensor_ext
+    (M N : SheafOfModules.{u} (𝓡 A)) (H : SheafOfModules.{u} (𝓡 B))
+    {f g : (monoidalCategory B).tensorObj (changeOfRings.{u, u, u} c M)
+      (changeOfRings.{u, u, u} c N) ⟶ H}
+    (h : ∀ W m n, f.val.app W (ts B _ _ W (ins A B c M W m) (ins A B c N W n)) =
+      g.val.app W (ts B _ _ W (ins A B c M W m) (ins A B c N W n))) : f = g := by
+  let := monoidalCategory B
+  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)
+  let S := PresheafOfModules.sheafification (𝟙 (𝓡 B).obj)
+  let E := changeOfRingsPresheaf.{u, u, u} c M
+  let F := changeOfRingsPresheaf.{u, u, u} c N
+  let ηE := adj.unit.app E
+  let ηF := adj.unit.app F
+  have hη (G : PresheafOfModules.{u} (𝓡 B).obj) :
+      (J.W.inverseImage (PresheafOfModules.toPresheaf (𝓡 B).obj)) (adj.unit.app G) := by
+    rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
+      (𝟙 (𝓡 B).obj)]
+    change IsIso (S.map (adj.unit.app G))
+    dsimp only [S, adj]
+    infer_instance
+  have hηη := (J.W.inverseImage (PresheafOfModules.toPresheaf (𝓡 B).obj)).tensorHom_mem
+    ηE ηF (hη E) (hη F)
+  have hi : IsIso (S.map (ηE ⊗ₘ ηF)) := by
+    rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
+      (𝟙 (𝓡 B).obj)] at hηη
+    exact hηη
+  let q := S.map (ηE ⊗ₘ ηF) ≫ (tensorObjIsoSheafification (S.obj E) (S.obj F)).inv
+  have : IsIso q := inferInstance
+  apply (cancel_epi q).mp
+  apply (adj.homEquiv (E ⊗ F) H).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply PresheafOfModules.hom_ext
+  intro W
+  let : CommRing ((𝓡 B).obj.obj W) := inferInstanceAs (CommRing (B.obj.obj W))
+  let a : (E.obj W) ⊗[(𝓡 B).obj.obj W] (F.obj W) →ₗ[(𝓡 B).obj.obj W]
+      H.val.obj W := ((adj.unit.app (E ⊗ F) ≫
+        (forget (𝓡 B) ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡 B).obj)).map
+          (q ≫ f)).app W).hom
+  let b : (E.obj W) ⊗[(𝓡 B).obj.obj W] (F.obj W) →ₗ[(𝓡 B).obj.obj W]
+      H.val.obj W := ((adj.unit.app (E ⊗ F) ≫
+        (forget (𝓡 B) ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡 B).obj)).map
+          (q ≫ g)).app W).hom
+  have hh : ModuleCat.ofHom (X := E.obj W)
+      (Y := ModuleCat.of ((𝓡 B).obj.obj W) ((F.obj W) →ₗ[(𝓡 B).obj.obj W] H.val.obj W))
+        (TensorProduct.curry a) = ModuleCat.ofHom (X := E.obj W)
+        (Y := ModuleCat.of ((𝓡 B).obj.obj W) ((F.obj W) →ₗ[(𝓡 B).obj.obj W] H.val.obj W))
+          (TensorProduct.curry b) := by
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    change TensorProduct.curry a _ = TensorProduct.curry b _
+    have hm : ModuleCat.ofHom (X := F.obj W) (Y := H.val.obj W)
+        (TensorProduct.curry a ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) =
+        ModuleCat.ofHom (X := F.obj W) (Y := H.val.obj W)
+          (TensorProduct.curry b ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) := by
+      apply ModuleCat.ExtendScalars.hom_ext
+      intro n
+      have hn := adj.unit.naturality (ηE ⊗ₘ ηF)
+      have he := congrArg (fun k ↦ (k.app W)
+        (((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m) ⊗ₜ[B.obj.obj W]
+          ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n))) hn
+      change (adj.unit.app ((S.obj E).val ⊗ (S.obj F).val)).app W
+          (ηE.app W ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)
+            ⊗ₜ[B.obj.obj W]
+            ηF.app W ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n)) =
+        (S.map (ηE ⊗ₘ ηF)).val.app W
+          ((adj.unit.app (E ⊗ F)).app W
+            (((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m) ⊗ₜ[B.obj.obj W]
+              ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n))) at he
+      change f.val.app W ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W
+          ((S.map (ηE ⊗ₘ ηF)).val.app W ((adj.unit.app (E ⊗ F)).app W _))) =
+        g.val.app W ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W
+          ((S.map (ηE ⊗ₘ ηF)).val.app W ((adj.unit.app (E ⊗ F)).app W _)))
+      exact (congrArg (fun v ↦ f.val.app W
+        ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W v)) he.symm).trans
+          ((h W m n).trans (congrArg (fun v ↦ g.val.app W
+            ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W v)) he))
+    exact congrArg ModuleCat.Hom.hom hm
+  exact ModuleCat.hom_ext (TensorProduct.curry_injective (congrArg ModuleCat.Hom.hom hh))
+
+private theorem ts_cast
+    (M N : SheafOfModules.{u} (𝓡 A))
+    (X Y : SheafOfModules.{u} (𝓡 B))
+    (hx : X = changeOfRings.{u, u, u} c M)
+    (hy : Y = changeOfRings.{u, u, u} c N)
+    (W : Dᵒᵖ) (m : (changeOfRings.{u, u, u} c M).val.obj W)
+    (n : (changeOfRings.{u, u, u} c N).val.obj W) :
+    (eqToHom (congrArg₂ (monoidalCategory B).tensorObj hx.symm hy.symm)).val.app W
+      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W m n) =
+    ts B X Y W ((eqToHom hx.symm).val.app W m)
+      ((eqToHom hy.symm).val.app W n) := by
+  subst X
+  subst Y
+  rfl
+
+private theorem scalarTensorSections_hom_ext
+    (M N : SheafOfModules.{u} (𝓡 A))
+    (X Y H : SheafOfModules.{u} (𝓡 B))
+    (hx : X = changeOfRings.{u, u, u} c M)
+    (hy : Y = changeOfRings.{u, u, u} c N)
+    {f g : (monoidalCategory B).tensorObj X Y ⟶ H}
+    (h : ∀ W m n, f.val.app W (ts B X Y W
+      ((eqToHom hx.symm).val.app W (ins A B c M W m))
+      ((eqToHom hy.symm).val.app W (ins A B c N W n))) =
+      g.val.app W (ts B X Y W
+        ((eqToHom hx.symm).val.app W (ins A B c M W m))
+        ((eqToHom hy.symm).val.app W (ins A B c N W n)))) : f = g := by
+  let e := eqToHom (congrArg₂ (monoidalCategory B).tensorObj hx.symm hy.symm)
+  apply (cancel_epi e).mp
+  apply scalar_tensor_ext A B c M N H
+  intro W m n
+  change f.val.app W (e.val.app W
+      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W
+        (ins A B c M W m) (ins A B c N W n))) =
+    g.val.app W (e.val.app W
+      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W
+        (ins A B c M W m) (ins A B c N W n)))
+  dsimp only [e]
+  rw [ts_cast A B c M N X Y hx hy]
+  exact h W m n
+
+end TensorSections
+
+
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
   (R : Sheaf JC CommRingCat.{u}) (S RI : Sheaf JD CommRingCat.{u})
@@ -257,77 +456,33 @@ open scoped ChangeOfRings
 Source: Stacks 03EK (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the
 four zero and addition laws of MonoidalPreadditive. Assemble those four laws. -/
-noncomputable abbrev ringedTensorPreadditive :
+theorem ringedTensorPreadditive :
     @MonoidalPreadditive (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) _ _ (monoidalCategory R) :=
-  Classical.choice (tensorClosed R).1
+  by
+    let := monoidalCategory R
+    exact
+      { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
+        zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
+        whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
+        add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
 
-/-- The ordinary tensor comparison with its pure-tensor characterization.
-The maps q insert 1 in scalar extension; the generalized-element equation fixes
-mu on the inverse images of all pure tensors, hence on their sheafification.
-Source: Stacks, Modules on Sites, 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
-structure CanonicalRingedTensorComparison where
-  /-- Scalar-extension insertion, as a map of underlying sheaves of sets. -/
-  q : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
-      ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj RI) ⋙ sheafCompose JD
-    (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.modules.obj M)) ⟶
-      ((toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⋙ sheafCompose JD
-        (CategoryTheory.forget AddCommGrpCat.{u})).obj (L.obj M))
-  /-- Insertion is specifically m mapped to 1 tensor m. -/
-  q_one : ∀ (M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
-      (W : Dᵒᵖ) (m : (I.modules.obj M).val.obj W),
-    (q M).hom.app W m = (eqToHom (hobj M).symm).val.app W
-      (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose JD (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj S).obj)).unit.app
-        (changeOfRingsPresheaf.{u, u, u} c (I.modules.obj M))).app W
-          ((1 : S.obj.obj W) ⊗ₜ[RI.obj.obj W, (c.hom.app W).hom] m))
-  /-- Tensor preservation with the orientation of 07A4. -/
-  mu : ∀ M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
-    L.obj ((monoidalCategory R).tensorObj M N) ≅
-      (monoidalCategory S).tensorObj (L.obj M) (L.obj N)
-  /-- Naturality in both variables. -/
-  naturality : ∀ {M M' N N' : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj R)} (f : M ⟶ M') (g : N ⟶ N'),
-    L.map ((monoidalCategory R).tensorHom f g) ≫ (mu M' N').hom =
-      (mu M N).hom ≫ (monoidalCategory S).tensorHom (L.map f) (L.map g)
-  /-- Canonical generalized pure-tensor formula, rather than an arbitrary tensor iso. -/
-  pure : ∀ (M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj
-      R)) (Z : Sheaf JC (Type u))
-    (x : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙
-      sheafCompose JC
-      (CategoryTheory.forget AddCommGrpCat.{u})).obj M))
-    (y : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙
-      sheafCompose JC
-      (CategoryTheory.forget AddCommGrpCat.{u})).obj N))
-    (z : Z ⟶ ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙
-      sheafCompose JC
-      (CategoryTheory.forget AddCommGrpCat.{u})).obj
-        ((monoidalCategory R).tensorObj M N))),
-    (∀ (W : Cᵒᵖ) (t : Z.obj.obj W), z.hom.app W t =
-      (tensorObjIsoSheafification M N).inv.val.app W
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose JC (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj R).obj)).unit.app
-          (M.val ⊗ N.val)).app W (x.hom.app W t ⊗ₜ[R.obj.obj W] y.hom.app W t))) →
-    ∀ (W : Dᵒᵖ) (t : (uInv.obj Z).obj.obj W),
-      (uInv.map z ≫ I.moduleUnderlying.inv.app ((monoidalCategory R).tensorObj M N) ≫
-        q ((monoidalCategory R).tensorObj M N) ≫
-          (toSheaf ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⋙ sheafCompose JD
-            (CategoryTheory.forget AddCommGrpCat.{u})).map (mu M N).hom).hom.app W t =
-      (tensorObjIsoSheafification (L.obj M) (L.obj N)).inv.val.app W
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose JD (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj S).obj)).unit.app
-          ((L.obj M).val ⊗ (L.obj N).val)).app W
-            ((uInv.map x ≫ I.moduleUnderlying.inv.app M ≫ q M).hom.app W t
-              ⊗ₜ[S.obj.obj W]
-              (uInv.map y ≫ I.moduleUnderlying.inv.app N ≫ q N).hom.app W t))
+section TensorUniqueness
 
+attribute [local irreducible] monoidalCategory
+
+set_option backward.isDefEq.respectTransparency.types false
+
+set_option maxHeartbeats 600000 in
+-- Compare bilinear maps through sheafification and the scalar-extension adjunctions.
 /-- The pure-tensor conditions determine the ordinary comparison uniquely and are attainable.
 Source: Stacks 03EL (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
-Proof: apply the ordinary comparison theorem to the given inverse-image lift.
-Its generalized-element normalization gives q and mu. Scalar-extension pure tensors
-generate after sheafification, giving uniqueness of q. Bilinear generalized pure tensors
-generate the sheaf tensor, giving uniqueness of mu; proof irrelevance handles the laws. -/
+Proof: use the separate existence construction for the specified inverse-image lift.
+For uniqueness, q_one fixes q on every section. Preservation of binary products lifts
+every pair of inverse-image sections to a generalized pair. The two pure equations
+then identify the inverse tensorators on inserted pure tensors. Cancel tensor
+sheafification and apply the two scalar-extension adjunctions to obtain equality
+on the whole tensor product. Proof irrelevance identifies all remaining law fields. -/
 theorem canonicalRingedTensorComparison_existsUnique
     (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
@@ -336,7 +491,74 @@ theorem canonicalRingedTensorComparison_existsUnique
       eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫
         eqToHom (hobj N).symm) :
     Nonempty (CanonicalRingedTensorComparison R S RI uInv I c L hobj) ∧
-      Subsingleton (CanonicalRingedTensorComparison R S RI uInv I c L hobj) := sorry
+      Subsingleton (CanonicalRingedTensorComparison R S RI uInv I c L hobj) := by
+  refine ⟨canonicalRingedTensorComparison_nonempty R S RI uInv I c L hobj uPush adj hmap, ?_⟩
+  refine ⟨fun a b ↦ ?_⟩
+  rcases a with ⟨qa, hqa, ma, hna, hpa⟩
+  rcases b with ⟨qb, hqb, mb, hnb, hpb⟩
+  have hqq : qa = qb := by
+    funext M
+    ext W m
+    exact (hqa M W m).trans (hqb M W m).symm
+  subst qb
+  have hmm : ma = mb := by
+    funext M N
+    apply Iso.ext_inv
+    apply scalarTensorSections_hom_ext RI S c (I.modules.obj M) (I.modules.obj N)
+      (L.obj M) (L.obj N) _ (hobj M) (hobj N)
+    intro W m n
+    let UR := toSheaf ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙
+      sheafCompose JC (CategoryTheory.forget AddCommGrpCat.{u})
+    let Z := UR.obj M ⨯ UR.obj N
+    let x : Z ⟶ UR.obj M := prod.fst
+    let y : Z ⟶ UR.obj N := prod.snd
+    let z := tensorPair R M N Z x y
+    let ev := sheafToPresheaf JD (Type u) ⋙ (CategoryTheory.evaluation Dᵒᵖ (Type u)).obj W
+    obtain ⟨t, htx, hty⟩ := productElements (uInv ⋙ ev) (UR.obj M) (UR.obj N)
+      ((I.moduleUnderlying.hom.app M).hom.app W m)
+      ((I.moduleUnderlying.hom.app N).hom.app W n)
+    have hm : (uInv.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t = m := by
+      change (I.moduleUnderlying.inv.app M).hom.app W ((uInv.map x).hom.app W t) = m
+      change (uInv.map x).hom.app W t = _ at htx
+      rw [htx]
+      exact congrArg (fun f ↦ f.hom.app W m) (I.moduleUnderlying.app M).hom_inv_id
+    have hn : (uInv.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t = n := by
+      change (I.moduleUnderlying.inv.app N).hom.app W ((uInv.map y).hom.app W t) = n
+      change (uInv.map y).hom.app W t = _ at hty
+      rw [hty]
+      exact congrArg (fun f ↦ f.hom.app W n) (I.moduleUnderlying.app N).hom_inv_id
+    have hz : ∀ V s, z.hom.app V s = ts R M N V (x.hom.app V s) (y.hom.app V s) := by
+      intros
+      rfl
+    have ha := hpa M N Z x y z hz W t
+    have hb := hpb M N Z x y z hz W t
+    let v := (uInv.map z ≫ I.moduleUnderlying.inv.app
+      ((monoidalCategory R).tensorObj M N) ≫ qa
+        ((monoidalCategory R).tensorObj M N)).hom.app W t
+    change (ma M N).hom.val.app W v = ts S (L.obj M) (L.obj N) W
+      ((qa M).hom.app W ((uInv.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t))
+      ((qa N).hom.app W ((uInv.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t)) at ha
+    rw [hm, hn] at ha
+    change (mb M N).hom.val.app W v = ts S (L.obj M) (L.obj N) W
+      ((qa M).hom.app W ((uInv.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t))
+      ((qa N).hom.app W ((uInv.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t)) at hb
+    rw [hm, hn] at hb
+    have hai := congrArg (fun w ↦ (ma M N).inv.val.app W w) ha
+    have hbi := congrArg (fun w ↦ (mb M N).inv.val.app W w) hb
+    have hai' : (ma M N).inv.val.app W ((ma M N).hom.val.app W v) = v :=
+      congrArg (fun f ↦ f.val.app W v) (ma M N).hom_inv_id
+    have hbi' : (mb M N).inv.val.app W ((mb M N).hom.val.app W v) = v :=
+      congrArg (fun f ↦ f.val.app W v) (mb M N).hom_inv_id
+    rw [hai'] at hai
+    rw [hbi'] at hbi
+    have hi := hai.symm.trans hbi
+    rw [hqa M W m, hqa N W n] at hi
+    exact hi
+  cases hmm
+  rfl
+
+
+end TensorUniqueness
 
 /-- The ordinary unit normalization of the canonical tensor comparison.
 Source: Stacks 03EL, pure tensors with the second factor the coefficient ring
@@ -410,6 +632,8 @@ noncomputable def CanonicalRingedTensorComparison.totalIso [L.Additive]
       RingCat.{u})).obj R)) ℤ) :=
   @asIso _ _ _ _ (k.total R S RI uInv I c L hobj P Q)
     (k.total_isIso R S RI uInv I c L hobj V am P Q)
+
+attribute [local irreducible] CanonicalRingedTensorComparison.totalIso monoidalCategory
 
 set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in
@@ -593,7 +817,9 @@ noncomputable def ringedTopoiCanonicalDerivedTensorComparison
       SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am :
       uStar ⊣ V) :
     TR ⋙ LF ≅ (LF.prod LF) ⋙ TS :=
-  Classical.choose (ringedTopoiCanonicalDerivedTensorPullback uInv uPush adj I c uStar
+  Classical.choose (ringedTopoiCanonicalDerivedTensorPullback
+    (C := C) (D := D) (JC := JC) (JD := JD) (R := R) (S := S) (RI := RI)
+    uInv uPush adj I c uStar
     hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am).2.exists
 
 end SheafOfModules

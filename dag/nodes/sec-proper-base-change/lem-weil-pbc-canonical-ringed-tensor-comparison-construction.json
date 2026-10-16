@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+ "kind": "statement",
+ "title": "Construction of the normalized ordinary tensor comparison",
+ "statement": "Let $(C,J),(D,K)$ be small sites, $uInv\\dashv uPush$ a geometric morphism of sheaf topoi with $uInv$ preserving finite limits, $R,RI,S$ commutative ring sheaves, $I$ an algebraic inverse-image presentation of $uInv$ [def-weil-pbc-algebraic-inverse-image], and $c:RI\\to S$. Let $L$ be the specified module pullback, with $hobj:L(M)=S\\otimes_{RI}I(M)$ and hmap saying that $L(f)$ is extension of scalars of $I(f)$, transported by hobj. Then a normalized CanonicalRingedTensorComparison for these given data exists [def-weil-pbc-canonical-ringed-tensor-comparison]. This statement asserts construction only; uniqueness is proved separately in the parent item.",
+ "stmt_deps": [
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; the canonical pure-tensor map and scalar-extension construction"
+ },
+ "proof": [
+  {
+   "text": "Use the given sheaf adjunction uInv ⊣ uPush and finite-product preservation to transport balanced bilinear maps. Apply the graph equations of AlgebraicInverseImage to the universal pairs and triples: the mates preserve addition and the RI-action. The sheaf tensor universal property then yields I(M⊗R N)≅I(M)⊗RI I(N), natural and characterized on generalized pure tensors. This uses the given algebraic lift; the existential module-adjunction theorem is not an identification of this lift.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend scalars by the mutually inverse balanced formulas s⊗(m⊗n) ↦ (s⊗m)⊗(1⊗n) and (s⊗m)⊗(t⊗n) ↦ st⊗(m⊗n). Check balancing and restriction compatibility, then sheafify. Checking inverse identities on pure tensors gives an isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose both comparisons, transport by hobj, and define q by insertion of 1. The explicit formulas prove q_one and the generalized-element pure equation; naturality and hmap prove simultaneous naturality. These supply the fields of the normalized comparison.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-canonical-ringed-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; the canonical pure-tensor map and scalar-extension construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit preserving inverse image functor on sheaves induces a canonical isomorphism of tensor products of sheaves of modules, compatible with extension of scalars and pure tensors",
+   "results": "8 hits: tensorProd_isSheaf, sheafToPresheaf_μ, sheafToPresheaf_δ, ordinary sheaf monoidal structures and light condensed module sheafification.",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the given algebraic inverse-image presentation or its normalized tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, tensorObjIsoSheafification",
+   "results": "0 hits; unknown identifier tensorObjIsoSheafification.",
+   "date": "2026-10-16",
+   "verdict": "No match; the tensor/sheafification comparison belongs to the source library and is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage.*tensor|tensor.*AlgebraicInverseImage|pullback.*tensorIso",
+   "results": "0 Mathlib hits. Project search finds the item structure and a generic auxiliary tail lacking algebraic-operation compatibility.",
+   "date": "2026-10-16",
+   "verdict": "Reuse existing module tensor and algebraic inverse-image definitions; no applicable construction theorem for the specified lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite limit preserving inverse image functor on sheaves induces a canonical isomorphism of tensor products of sheaves of modules, compatible with extension of scalars and pure tensors",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. The other three recorded searches were performed.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a geometric morphism preserves universal balanced bilinear pairings of sheaves of modules",
+   "results": "8 hits: locally bijective sheaf Hom equivalence, continuous-site pullback composition and free-module comparisons; none constructs the normalized comparison for the specified AlgebraicInverseImage.",
+   "date": "2026-10-16",
+   "verdict": "Second reading A4: no applicable replacement for this strict existence conjunct."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: extendScalars, extendRestrictScalarsAdj, its HomEquiv and unit/counit, and extendScalarsComp; these are sectionwise scalar-extension APIs, not the given inverse-image tensor comparison.",
+   "date": "2026-10-16",
+   "verdict": "Second reading A4: no applicable replacement for this strict existence conjunct."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ilinear|[Ss]trong[Mm]onoidal|[Mm]onoidal.*[Pp]ullback",
+   "results": "25 capped broad Mathlib hits unrelated to sheaf inverse image; targeted rg in project module-pullback and tensor files finds only the reported incompatible arbitrary-lift tail and site/topological special cases.",
+   "date": "2026-10-16",
+   "verdict": "Second reading A4: no applicable replacement for this strict existence conjunct."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiCanonicalTensorPullback",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Ordinary pure-tensor comparison: separate its existing data from existence so uniqueness can be proved independently",
+   "via": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedTopoiTensorComparisonConstruction",
+  "file": "lean/Sheaf/Paper/RingedTopoiTensorComparisonConstruction.lean",
+  "declaration": "SheafOfModules.canonicalRingedTensorComparison_nonempty",
+  "statement": "theorem canonicalRingedTensorComparison_nonempty\n    (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (hmap : ∀ {M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj\n      R)} (f : M ⟶ N), L.map f =\n      eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫\n        eqToHom (hobj N).symm) :\n    Nonempty (CanonicalRingedTensorComparison R S RI uInv I c L hobj)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-40a17",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T011142-L-263526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-40a17",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T011142-L-263526",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet; all 13 delivered/importer modules compile cleanly, interface changes are recorded, statements and DAG nodes agree, and no prohibited declarations or unaccounted adaptations were found."
+ }
+}
