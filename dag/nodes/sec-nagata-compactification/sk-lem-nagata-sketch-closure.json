@@ -189,5 +189,23 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-74a27a1f6 (reviewer sub-agent of L); spot-checked: Read the whole item, the four cited nodes (with blueprint_update), the definition nodes, main-20261015 _section.md and proof.md, Stacks morphisms.tex 01R8 (l.849), 01RG (l.1139), 01RH (l.1212), definition-scheme-theoretic-image (smallest), definition-scheme-theoretically-dense and 01RE, and the closed slopmaster2 Lean Separated.lean:339-380. The statement matches main-20261015 word for word. The added conventions (smallest closed factor; density as injectivity of O_X -> j_*O_V, equivalent to Stacks' definition by 01RE) add no hypothesis and drop none, and the uniqueness open is still not assumed quasi-compact. Step 1: the image node and its universal property give the smallest closed factor. Step 2: the open-in-image node, which is Stacks 01RG in the quasi-compact case, gives the open immersion and density. Step 3: the rigidity node applies with (s,a,b,j); its kernel ideal is zero because it is the largest quasi-coherent ideal inside the zero kernel; no reducedness and no quasi-compactness of j are used. The rigidity node is Lean-closed, so it is a tool, not part of the route; no tool_uses needed. No cycle, no new nodes, unit realization acceptable. Edge cases checked: empty U; i the identity or a closed immersion; and k[x,e]/(e^2,xe) with D(x), which is topologically but not schematically dense. FIX: step 2 used the cited node's density notion (image equal to the whole target) without translating it to the item's injectivity convention. I added the one-line translation: q is quasi-compact, so the kernel of O_Ubar -> q_*O_U is the quasi-coherent kernel ideal. Only the step 2 text changed; uses, proof_deps and the statement are unchanged. For maintenance: def-nagata-scheme-theoretic-image's current DAG text says 'largest' (wrong; the update and Stacks say 'smallest'), and the unit record still carries the stale master text.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-17ad4a8e1",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, and report; scompile.py passed locally and with server confirmation. No defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.NagataSketchClosure",
+  "declaration": "AlgebraicGeometry.nagata_sketch_closure",
+  "file": "lean/Sheaf/Compactification/NagataSketchClosure.lean",
+  "statement": "theorem nagata_sketch_closure : (∀ {U T : Scheme.{u}} (i : U ⟶ T) [QuasiCompact i] [IsImmersion i] [QuasiSeparatedSpace T], IsClosedImmersion i.imageι ∧ IsOpenImmersion i.toImage ∧ (∀ V : i.image.Opens, Function.Injective (i.toImage.app V)) ∧ ∀ (Z : Scheme.{u}) (k : Z ⟶ T) (_hk : IsClosedImmersion k) (f : U ⟶ Z), f ≫ k = i → ∃! l : i.image ⟶ Z, i.toImage ≫ l = f ∧ l ≫ k = i.imageι) ∧ (∀ {U T S Y : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (hj : ∀ V : T.Opens, Function.Injective (j.app V)) (s : Y ⟶ S) [IsSeparated s] {a b : T ⟶ Y}, a ≫ s = b ≫ s → j ≫ a = j ≫ b → a = b)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
