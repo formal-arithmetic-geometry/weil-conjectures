@@ -27,18 +27,16 @@ categories `C` (for `D(X)`) and `D` (for `D(Y)`) are monoidal closed, and
   `WeilConjectures.PoincareDuality.ProjectionFormula`), and is here an arbitrary natural
   transformation.
 
+The projection morphisms of a single adjunction are
+`CategoryTheory.Adjunction.rightAdjointProjectionMap` (`G A ⊗ B ⟶ G (A ⊗ F B)` for `F ⊣ G` with
+`F` oplax monoidal) and `CategoryTheory.Adjunction.projectionMap` (`P (M ⊗ S N) ⟶ P M ⊗ N` for
+`P ⊣ S` with `S` lax monoidal), of `WeilConjectures.CategoryTheory.Adjunction.ProjectionMap`.
+
 The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with this convention
 `K` is always the *left* tensor factor, matching the direction of `PF^!`.
 
 ## Main definitions
 
-* `CategoryTheory.Adjunction.projectionMorphism`: for `F ⊣ G` with `F` oplax monoidal, the
-  projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)`, the mate of
-  `F (G A ⊗ B) ⟶ F G A ⊗ F B ⟶ A ⊗ F B` (the morphism `PF^*` of
-  `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`).
-* `CategoryTheory.Adjunction.projectionComparison`: for `P ⊣ S` with `S` lax monoidal, the
-  comparison `P (M ⊗ S N) ⟶ P M ⊗ N`, adjoint to `M ⊗ S N ⟶ S P M ⊗ S N ⟶ S (P M ⊗ N)` (the
-  morphism `q_j` for an open immersion `j`).
 * `CategoryTheory.Verdier.exchangePairing` and `CategoryTheory.Verdier.exchange`: the Verdier
   exchange morphism `Φ_{K,L} : G RHom(K, S L) ⟶ RHom(P K, L)`, the transpose of the pairing
   `P K ⊗ G RHom(K, S L) ⟶ P (K ⊗ F G RHom(K, S L)) ⟶ P (K ⊗ RHom(K, S L)) ⟶ P S L ⟶ L`.
@@ -75,79 +73,6 @@ namespace CategoryTheory
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
 
-/-! ### The projection morphisms -/
-
-namespace Adjunction
-
-section ProjectionMorphism
-
-/-!
-In the application, `adj : F ⊣ G` is the derived adjunction `Lg^* ⊣ Rg_*` along the proper half
-`g` of a compactification, and `projectionMorphism` is
-`ProEtale.CondensedRing.properProjectionMorphism`.
--/
-
-variable {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
-
-/-- The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` of an adjunction `F ⊣ G` with `F` oplax
-monoidal: the adjoint of `F (G A ⊗ B) ⟶ F G A ⊗ F B ⟶ A ⊗ F B`. -/
-noncomputable def projectionMorphism (A : C) (B : D) : G.obj A ⊗ B ⟶ G.obj (A ⊗ F.obj B) :=
-  adj.homEquiv _ _ (δ F (G.obj A) B ≫ adj.counit.app A ▷ F.obj B)
-
-/-- The projection morphism is natural in its second variable. -/
-@[reassoc]
-lemma projectionMorphism_natural_right (A : C) {B B' : D} (h : B ⟶ B') :
-    G.obj A ◁ h ≫ adj.projectionMorphism A B' =
-      adj.projectionMorphism A B ≫ G.map (A ◁ F.map h) := by
-  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
-    ← homEquiv_naturality_right]
-  congr 1
-  rw [← δ_natural_right_assoc, whisker_exchange, Category.assoc]
-  rfl
-
-end ProjectionMorphism
-
-section ProjectionComparison
-
-/-!
-In the application, `adj : P ⊣ S` is the derived adjunction `Dj_! ⊣ Lj^*` along the open
-immersion half `j` of a compactification (for which `Lj^* = Rj^!`), and `projectionComparison` is
-`ProEtale.CondensedRing.openImmersionProjectionComparison`.
--/
-
-variable {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.LaxMonoidal]
-
-/-- The projection comparison `P (M ⊗ S N) ⟶ P M ⊗ N` of an adjunction `P ⊣ S` with `S` lax
-monoidal: the adjoint of `M ⊗ S N ⟶ S P M ⊗ S N ⟶ S (P M ⊗ N)`. -/
-noncomputable def projectionComparison (M : C) (N : D) :
-    P.obj (M ⊗ S.obj N) ⟶ P.obj M ⊗ N :=
-  (adj.homEquiv _ _).symm (adj.unit.app M ▷ S.obj N ≫ μ S (P.obj M) N)
-
-/-- The projection comparison is natural in its second variable. -/
-@[reassoc]
-lemma projectionComparison_natural_right (M : C) {N N' : D} (h : N ⟶ N') :
-    P.map (M ◁ S.map h) ≫ adj.projectionComparison M N' =
-      adj.projectionComparison M N ≫ P.obj M ◁ h := by
-  rw [projectionComparison, projectionComparison, ← homEquiv_naturality_left_symm,
-    ← homEquiv_naturality_right_symm, Category.assoc, ← μ_natural_right]
-  congr 1
-  rw [whisker_exchange_assoc]
-  rfl
-
-/-- The inverse of the projection comparison, when it is an isomorphism, is natural in the
-second variable. -/
-@[reassoc]
-lemma inv_projectionComparison_natural_right (M : C) {N N' : D} (h : N ⟶ N')
-    [IsIso (adj.projectionComparison M N)] [IsIso (adj.projectionComparison M N')] :
-    P.obj M ◁ h ≫ inv (adj.projectionComparison M N') =
-      inv (adj.projectionComparison M N) ≫ P.map (M ◁ S.map h) := by
-  rw [IsIso.eq_inv_comp, ← projectionComparison_natural_right_assoc, IsIso.hom_inv_id,
-    Category.comp_id]
-
-end ProjectionComparison
-
-end Adjunction
-
 /-! ### Verdier exchange, trace and Poincaré duality -/
 
 namespace Verdier
@@ -173,13 +98,13 @@ naturality in `B` is used below (`pf_naturality_right`), in the Yoneda argument 
 and in the trace–cup comparison.
 
 The natural transformation `pf` is an input rather than being built from `adj` and `adj'`:
-neither `Adjunction.projectionMorphism` (which concerns `G = Rf_*`, not `P = Rf_!`) nor
-`Adjunction.projectionComparison` (which goes the other way and involves `S = Rf^!`, not
-`F = Lf^*`) produces it for a general `f`, and the two adjunctions alone give no canonical such
-morphism. In the application it depends on a compactification `f = g ∘ j`, with `j` an open
-immersion and `g` proper: it is the composite of `projectionMorphism` for `Lg^* ⊣ Rg_*`, the
-inverse of `projectionComparison` for `Dj_! ⊣ Lj^*`, and `Lj^* Lg^* ≅ Lf^*`
-(`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification`).
+neither `Adjunction.rightAdjointProjectionMap` of `adj` (which concerns `G = Rf_*`, not
+`P = Rf_!`) nor `Adjunction.projectionMap` of `adj'` (which goes the other way and involves
+`S = Rf^!`, not `F = Lf^*`) produces it for a general `f`, and the two adjunctions alone give no
+canonical such morphism. In the application it depends on a compactification `f = g ∘ j`, with
+`j` an open immersion and `g` proper: it is the composite of `rightAdjointProjectionMap` for
+`Lg^* ⊣ Rg_*`, the inverse of `projectionMap` for `Dj_! ⊣ Lj^*`, and `Lj^* Lg^* ≅ Lf^*`
+(`ProEtale.CondensedRing.exceptionalProjectionOfCompactification`).
 -/
 
 variable [MonoidalClosed C] [MonoidalClosed D]
@@ -189,7 +114,15 @@ variable [MonoidalClosed C] [MonoidalClosed D]
     curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
 
 omit [MonoidalClosed C] [MonoidalClosed D] in
-/-- The naturality of the projection morphism `pf` in its second variable, written out. -/
+/-- The naturality of the projection morphism `pf` in its second variable, written out:
+```
+P K ⊗ B ---pf---> P (K ⊗ F B)
+   |                  |
+P K ◁ h        P (K ◁ F h)
+   v                  v
+P K ⊗ B' --pf---> P (K ⊗ F B')
+```
+-/
 @[reassoc]
 lemma pf_naturality_right (K : C) {B B' : D} (h : B ⟶ B') :
     P.obj K ◁ h ≫ (pf.app K).app B' = (pf.app K).app B ≫ P.map (K ◁ F.map h) :=
@@ -287,9 +220,16 @@ noncomputable def cupProduct : P.obj (𝟙_ C) ⊗ G.obj T ⟶ P.obj T :=
   (pf.app (𝟙_ C)).app (G.obj T) ≫ P.map (𝟙_ C ◁ adj.counit.app T) ≫ P.map (λ_ T).hom
 
 /-- **Poincaré duality is the trace–cup pairing.** The transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the
-Poincaré duality morphism is exactly the cup product followed by the trace. In particular the
-Poincaré duality morphism, the trace and the pairing share the normalization of the purity
-isomorphism. -/
+Poincaré duality morphism is exactly the cup product followed by the trace:
+```
+P 𝟙 ⊗ G T ---uncurry PD---> 𝟙
+      \                     ^
+   cupProduct               | trace
+        \                   |
+         -------------->  P T
+```
+In particular the Poincaré duality morphism, the trace and the pairing share the normalization
+of the purity isomorphism. -/
 theorem uncurry_poincareMap :
     uncurry (poincareMap adj adj' pf pur) = cupProduct adj pf ≫ trace adj' pur := by
   rw [poincareMap, uncurry_natural_left, uncurry_exchange, exchangePairing,
