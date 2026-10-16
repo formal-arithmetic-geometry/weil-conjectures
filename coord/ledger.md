@@ -15637,3 +15637,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/K3/Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons (stage 3; reviewer PASS; first push; landing 20261016T221616-L-1616846 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K4/Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized (stage 3; reviewer PASS; first push; landing 20261016T221616-L-1616954 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617064 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617167 (proof); batch 20261016T221550; modules 1; new nodes 0)
