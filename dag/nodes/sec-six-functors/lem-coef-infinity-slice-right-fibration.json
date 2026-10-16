@@ -26,7 +26,8 @@
   "place": "Proposition 4.3.6.1 (018F), right-slice projection and quasicategory assertion; Construction 4.6.5.1 (01KX) identifies the vertex fibers, and Proposition 4.6.5.5 (01L0) says they are Kan. These are Kerodon tags, not Stacks tags. Online source read; archival copy WANTED in report.md."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pushout-join-saturation"
  ],
  "proof": [
   {
@@ -279,5 +280,37 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-968186fbb (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all five proof steps, cited node statements, Kerodon 018F/018J/01KX/01L0/019E, edge cases, and Mathlib searches. The join pushout, right-fibration extension, quasicategory, and right-pinched Kan-fiber arguments are correct; no missing hypotheses, cycles, duplicates, restated nodes, or coefficient/base-change issue apply. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JoinSliceRightFibration",
+  "declaration": "SSet.Enhanced.joinSlice_right_fibration",
+  "declarations": [
+   "SSet.Enhanced.joinEmptySimplex",
+   "SSet.Enhanced.joinGenerator",
+   "SSet.Enhanced.orderedJoinInl",
+   "SSet.Enhanced.orderedJoinInr",
+   "SSet.Enhanced.joinStandardFunctor",
+   "SSet.Enhanced.JoinSliceSimplex",
+   "SSet.Enhanced.joinSlice",
+   "SSet.Enhanced.joinSliceProjection",
+   "SSet.Enhanced.joinSliceFiber",
+   "SSet.Enhanced.joinPointTopSimplex",
+   "SSet.Enhanced.joinSlice_right_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/JoinSliceRightFibration.lean",
+  "statement": "theorem joinSlice_right_fibration (C K : SSet.{u}) [Quasicategory C] (p : K ⟶ C) : (∀ (n : SimplexCategory) (σ : (joinStandardFunctor K).obj n ⟶ C), orderedJoinInr (stdSimplex.obj n) K ≫ σ = p → ∃! s : JoinSliceSimplex p n, s.extension = σ) ∧ Quasicategory (joinSlice p) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι (joinSliceProjection p)) ∧ ∀ (t x : C _⦋0⦌), KanComplex (joinSliceFiber (SSet.yonedaEquiv.symm t) x).toSSet ∧ ∃ e : (joinSliceFiber (SSet.yonedaEquiv.symm t) x).toSSet ≅ mappingSpace C x t, ∀ (n : ℕ) (s : (joinSliceFiber (SSet.yonedaEquiv.symm t) x).toSSet _⦋n⦌), (e.hom.app (op ⦋n⦌) s).val = s.val.extension.app (op ⦋n + 1⦌) (joinPointTopSimplex n)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the published orderedJoinFunctor and the dependency mappingSpace. The slice stores its uniquely determined initial restriction and restriction equations under every simplex operator; the theorem explicitly states that each join map over p occurs exactly once, so this presentation has precisely the stipulated simplices. The strict fiber is identified with the right-pinched mapping space by an isomorphism whose component formula is specified in every degree."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b3846e041",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Immutable delivery is correct; required per-file compilation succeeded with no findings."
  }
 }
