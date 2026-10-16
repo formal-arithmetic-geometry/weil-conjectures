@@ -29,9 +29,110 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the elementary equivalence-edge consequence of [lem-coef-quasicategory-edge-triangle-presentation]. In any quasicategory $Q$, an equivalence edge gives an isomorphism in $hQ$ by its two inverse triangles. Conversely, if $[u]$ is invertible, represent its inverse by an edge $v$ using that node, and realize both equations $[v][u]=1$ and $[u][v]=1$ by its triangle clause. The SAME edge $v$ then supplies both inverse triangles of [def-cbc-enhanced-diagrams-cones]. Thus an isomorphism in $hQ$ can always be represented by an equivalence edge with the exact prescribed vertices. Any simplicial map preserves equivalence edges: apply it to the edge, its inverse, and the two triangles.",
+   "uses": [
+    "lem-coef-quasicategory-edge-triangle-presentation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.6.6 and Corollary 1.6.8, with the equivalence-edge consequence derived explicitly."
+   }
+  },
+  {
+   "text": "Let $J,a,b,c,s_{\\varepsilon,n}$ be the explicit interval and tests of [lem-coef-joyal-interval-boundary-tests]. In $hJ$ the two attaching triangles give $[b][a]=1_0$ and $[a][c]=1_1$; hence $[b]=[b][a][c]=[c]$, and all three generating edges are invertible. Now suppose $f:\\mathcal C\\to\\mathcal D$ is a Joyal fibration. The current statement of [lem-coef-joyal-model-structure] makes every inner horn a trivial cofibration and characterizes fibrations by right lifting against trivial cofibrations. Applying that lifting assertion gives every inner-horn lift for $f$. For an equivalence $u:f(x)\\to y$, use its inverse twice and its two inverse triangles to define a simplicial map $J\\to\\mathcal D$ whose distinguished edge $a$ is $u$. There is a square with left side $s_{0,0}:\\{0\\}\\to J$, top vertex $x$, and right side $f$. This map is a trivial cofibration by the interval-test node, so the model lifting axiom gives $J\\to\\mathcal C$ over the prescribed map to $\\mathcal D$. Its edge $a$ starts at exactly $x$ and maps to exactly $u$. Its class is invertible because the functor $hJ\\to h\\mathcal C$ preserves the displayed inverse equations. Step 1 makes that edge an equivalence, proving the forward direction of (1).",
+   "uses": [
+    "lem-coef-joyal-interval-boundary-tests",
+    "lem-coef-joyal-model-structure",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 3.3.1 and Remark 3.3.17; the inverse equations, prescribed source and exact edge equality are written out."
+   }
+  },
+  {
+   "text": "For the converse of (1), assume $f$ lifts all inner horns and all equivalence edges with the prescribed source. It is therefore an isofibration in the precise definition of [lem-coef-infinity-isofibration-exponentiation]. Fix $n\\geq0$ and $\\varepsilon\\in\\{0,1\\}$, and put $A=\\partial\\Delta^n$, $B=\\Delta^n$. That node applied to $A\\hookrightarrow B$ gives an isofibration between quasicategories\n$$q:S=\\operatorname{Fun}(B,\\mathcal C)\\longrightarrow T=\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D).$$\nA lifting square against $s_{\\varepsilon,n}$ of [lem-coef-joyal-interval-boundary-tests] consists of compatible maps $A\\times J\\to\\mathcal C$, $B\\to\\mathcal C$ at endpoint $\\varepsilon$, and $B\\times J\\to\\mathcal D$. Currying gives a map $v:J\\to T$ and a vertex $s\\in S$ with $q(s)=v(\\varepsilon)$. The inverse equations in $hJ$ from step 2 make every edge of $J$ invertible in $hJ$. Applying $hv$ and step 1 in the quasicategory $T$ shows that every edge of $J$ maps to an equivalence in $T$. Thus $v$ factors through the core $T^\\simeq$ as defined in [def-cbc-enhanced-diagrams-cones]: every edge of the image of every simplex is an equivalence. The vertex $s$ belongs to $S^\\simeq$, since this core contains all vertices. Consequently the curried square is a square from $\\{\\varepsilon\\}\\hookrightarrow J$ to $q^\\simeq:S^\\simeq\\to T^\\simeq$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-joyal-interval-boundary-tests",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.1, interval lifting argument; here the already available exponential isofibration is restricted to cores. The factorization of J through the core is proved from the explicit inverse equations, without an identification of a pullback core."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-core-kan-fibration] to the isofibration $q$ from step 3. It says exactly that $q^\\simeq:S^\\simeq\\to T^\\simeq$ is a Kan fibration. It therefore lifts the endpoint inclusion $\\{\\varepsilon\\}\\to J$, which is Kan anodyne by [lem-coef-joyal-interval-boundary-tests]. The lifting assertion follows directly from the definition of Kan anodyneness: right lifting holds for horn generators by the Kan-fibration definition in [lem-coef-infinity-isofibration-exponentiation]; for a pushout translate a square to its attaching map and glue the lift; along a transfinite chain choose compatible lifts at successor stages and use their colimit at limit stages; for a retract compose with the section square, lift, then compose with the retraction. Isomorphisms lift using inverses. This produces a map $J\\to S^\\simeq\\subseteq\\operatorname{Fun}(\\Delta^n,\\mathcal C)$. Uncurrying it gives $\\Delta^n\\times J\\to\\mathcal C$ whose restrictions equal both prescribed pieces and whose composite with $f$ is the prescribed base map. Currying sends a degree-$r$ simplex $j:\\Delta^r\\to J$ to restriction along $1\\times j$; evaluation is its inverse, and both commute with operators. Thus $f$ lifts every $s_{\\varepsilon,n}$ as well as the assumed inner horns. The fibration test of the interval node proves $f$ is a Joyal fibration. At $n=0$ the boundary is empty and the same square and corner formula still apply.",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-joyal-interval-boundary-tests",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7, applied to the existing exponential-corner isofibration; interval recognition is Cisinski Remark 3.3.4 and Theorem 2.4.19. Kan-anodyne lifting closure and uncurrying are written explicitly."
+   }
+  },
+  {
+   "text": "For (2), first assume $f$ is a Joyal weak equivalence. Use the current convention of [lem-coef-joyal-model-structure]: its simplicial sets, inner horns and quasicategories are those of [def-cbc-enhanced-diagrams-cones], and its weak equivalences are the categorical equivalences defined by the generated $h$ and the displayed $h\\operatorname{Fun}$ tests. Thus, for every quasicategory $E$, the ordinary functor\n$$F_E=f^*:h\\operatorname{Fun}(\\mathcal D,E)\\longrightarrow h\\operatorname{Fun}(\\mathcal C,E)$$\nis an equivalence. The internal functor simplicial sets used here are quasicategories: apply the final restriction assertion of [lem-coef-infinity-isofibration-exponentiation] to the inclusion $\\varnothing\\hookrightarrow K$ for the required shape $K$. Essential surjectivity of $F_{\\mathcal C}$ at $1_{\\mathcal C}$ gives a simplicial map $g:\\mathcal D\\to\\mathcal C$ and an isomorphism $[gf]\\to[1_{\\mathcal C}]$ in $h\\operatorname{Fun}(\\mathcal C,\\mathcal C)$. Step 1 represents it by an actual equivalence edge $\\eta:gf\\to1_{\\mathcal C}$. Postcomposition with $f$ gives an equivalence edge $f\\eta:fgf\\to f$ in $\\operatorname{Fun}(\\mathcal C,\\mathcal D)$, since postcomposition is simplicial and preserves both inverse triangles.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-quasicategory-edge-triangle-presentation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.8 (iii) and Corollary 3.6.6; explicit two-test Yoneda argument replaces a bare citation of their conclusion."
+   }
+  },
+  {
+   "text": "Full faithfulness of $F_{\\mathcal D}$ now supplies the unique morphism $\\alpha:fg\\to1_{\\mathcal D}$ in $h\\operatorname{Fun}(\\mathcal D,\\mathcal D)$ whose restriction is $[f\\eta]$, because $F_{\\mathcal D}(fg)=fgf$ and $F_{\\mathcal D}(1_{\\mathcal D})=f$. Lift $[f\\eta]^{-1}$ by fullness in the reverse hom set to $\\beta:1_{\\mathcal D}\\to fg$. Their composites restrict to identities; faithfulness gives $\\beta\\alpha=1_{fg}$ and $\\alpha\\beta=1_{1_{\\mathcal D}}$. Thus $\\alpha$ is an isomorphism. Apply step 1 in the quasicategory $\\operatorname{Fun}(\\mathcal D,\\mathcal D)$ to represent it by an equivalence edge $\\epsilon:fg\\to1_{\\mathcal D}$. The map $g$ and the edges $\\eta,\\epsilon$ are exactly the coherent quasi-inverse data of [def-cbc-enhanced-diagrams-cones]. No triangle identities beyond those in the definition of each equivalence edge have been imposed.",
+   "uses": [
+    "lem-coef-quasicategory-edge-triangle-presentation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.8 (iii) implies coherent quasi-invertibility for quasicategories; full faithfulness and both inverse equations are explicit."
+   }
+  },
+  {
+   "text": "Conversely, suppose $g,\\eta:gf\\simeq1_{\\mathcal C}$ and $\\epsilon:fg\\simeq1_{\\mathcal D}$ are the stipulated data, orienting the equivalence edges as displayed by taking their inverses when necessary. Fix any quasicategory $E$ in a sufficiently large universe. Restriction gives functors $f^*:h\\operatorname{Fun}(\\mathcal D,E)\\to h\\operatorname{Fun}(\\mathcal C,E)$ and $g^*$ in the reverse direction. For a diagram $H:\\mathcal D\\to E$, postcomposition of $\\epsilon$ with $H$ gives an equivalence edge $Hfg\\to H$. For a diagram $L:\\mathcal C\\to E$, postcomposition of $\\eta$ gives an equivalence edge $Lgf\\to L$. These edges vary coherently: for example the first family is adjoint to the simplicial map\n$$\\operatorname{Fun}(\\mathcal D,E)\\times\\Delta^1\\longrightarrow\\operatorname{Fun}(\\mathcal D,E),\\qquad (H,t)\\longmapsto H\\circ\\epsilon_t,$$\nwhere evaluation is degreewise evaluation and $\\epsilon$ is viewed as $\\mathcal D\\times\\Delta^1\\to\\mathcal D$. To check ordinary naturality, apply this map to an edge $H\\to H'$ times $\\Delta^1$. The two triangles of $\\Delta^1\\times\\Delta^1$ identify the two composites round its square in the category generated by triangle relations. This proves naturality on edge generators; it then holds on composites and the defining quotient relations. Each component is invertible in $h$ by its inverse triangles. The same construction using $\\eta$ on $\\operatorname{Fun}(\\mathcal C,E)$ gives a natural isomorphism $f^*g^*\\cong1$, while $\\epsilon$ gives $g^*f^*\\cong1$. Hence $f^*$ is an equivalence of ordinary categories for every such $E$, exactly the test in [lem-coef-joyal-model-structure]. Therefore $f$ is a Joyal weak equivalence. This also proves the final sentence of (2), with the given hFun convention, rather than requiring a further identification theorem.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 3.6.5, Corollary 3.6.6 and Theorem 3.6.8, with the hFun implication proved directly by whiskering and the two prism triangles."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-quasicategory-edge-triangle-presentation",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-interval-boundary-tests",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Repaired second reading: explicit proof following the interval/core argument of Theorem 3.6.1. The weak-equivalence part is the written two-test Yoneda and whiskering argument using the supplied hFun model convention, consistent with Corollary 3.6.6 and Theorem 3.6.8. Source read online/private sandbox only, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +189,45 @@
    "results": "{\"t\": \"2026-10-16T16:56:32Z\", \"tool\": \"leanfinder\", \"query\": \"A categorical fibration between infinity categories is an inner fibration which lifts isomorphisms in the homotopy category; categorical equivalences are homotopy invertible functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CategoryWithFibrations\", \"HomotopicalAlgebra.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.FibrantObject\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"3d5097af0e257c0b\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-103: J uses all horns, so the returned modelCategoryQuillen fibrations are Kan fibrations, not the Joyal class. Read Quasicategory/InnerFibration.lean:64-108: inner-horn lifting alone gives no equivalence lifting or Joyal weak-equivalence characterization. ModelCategory/JoyalTrick.lean:40-91 concerns abstract lifting axioms; SimplicialObject/Basic.lean:997-1010 is an ordinary equivalence of augmented (co)simplicial object categories. Generic fibration_iff and FibrantObject declarations only unpack a chosen class. Loogle returned zero hits. None states this dictionary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joyal fibrations between quasicategories are inner fibrations with equivalence lifting and weak equivalences are coherent quasi-inverses",
+   "results": "SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.fibration_iff; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι; HomotopicalAlgebra.FibrantObject.instIsFibrantObjι; SSet.modelCategoryQuillen.instCategoryWithCofibrations; HomotopicalAlgebra.FibrantObject.mk_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib's Quillen classes use all horn inclusions and do not state Joyal equivalence lifting or coherent quasi-inverses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Quasicategory, WeakEquivalence, Equivalence",
+   "results": "none; loogle: unknown identifier 'Quasicategory'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported an unknown identifier; this query provides no evidence of absence. Valid quoted Loogle queries and actual semantic/grep searches are recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|isofibration|Quasicategory (AlgebraicTopology)",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean:13,17,40,44,69; Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:9,51; Mathlib/AlgebraicTopology/Quasicategory/Basic.lean and Nerve.lean quasicategory declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: JoyalTrick is an abstract lifting trick; quasicategory declarations provide horn filling only, with no equivalence lifting or weak-equivalence dictionary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of quasicategories is a Joyal fibration iff it lifts inner horns and equivalence edges, and categorical equivalences admit coherent quasi-inverses",
+   "results": "SSet.modelCategoryQuillen.fibration_iff; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.Quasicategory; SSet.modelCategoryQuillen.instCategoryWithFibrations; HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick; HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual; SSet.Quasicategory.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Quillen all-horn and generic Joyal-trick declarations, not the stated Joyal fibrant-object characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joyal fibration between quasicategories inner horn equivalence edge lifting and weak equivalence coherent quasi inverse",
+   "results": "SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.horn_ι_mem_J; SSet.Quasicategory.hornFilling; SSet.Quasicategory.hornFilling'; SSet.modelCategoryQuillen.fibrations_eq; SSet.Truncated.HomotopicL; SSet.Truncated.HomotopicR",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Quillen all-horn fibrations and quasicategory horn filling, not Joyal equivalence lifting or coherent quasi-inverse."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-isofibration-base-change",
@@ -99,5 +235,21 @@
   "group": "Q26"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-quasicategory-characterizations",
+  "worker": "stage1",
+  "summary": "Second reading replaced three uncited source-theorem restatements by seven explicit steps. Two strictly supporting statement-only nodes supply the interval boundary tests (lem-coef-joyal-interval-boundary-tests) and the edge/triangle presentation of hQ (lem-coef-quasicategory-edge-triangle-presentation); a third, pointwise-core node proposed earlier was removed before delivery and is not created. Steps 3-4 apply the existing core Kan-fibration theorem (lem-coef-infinity-core-kan-fibration) to the existing exponential-corner isofibration (lem-coef-infinity-isofibration-exponentiation), factoring the J-shaped base map through the target core by the inverse equations in hJ; no pointwise-core/pullback identification is used. Clause (2) is proved by essential surjectivity, full faithfulness, and whiskering directly from the supplied hFun definition; the item statement is unchanged. Returned-citation repair: revalidated the current model-structure statement, whose opening definition reference changed from def-coef-complete-algebroid to def-cbc-enhanced-diagrams-cones. Steps 2 and 5 explicitly invoke its current lifting and weak-equivalence conventions.",
+  "blueprint": "The historical blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, coherent finite-adjunction/derived-limit realization: the source-attachment comparison needs the Joyal fibration/weak-equivalence dictionary. Steps 2-4 give its lifting part through interval tests; steps 5-7 give its equivalence part. Step 1 supplies the exact triangle/equivalence bridge. No blueprint statement or unit binding changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-089e1f108",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-089e1f108 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all four cited statements in full: def-cbc-enhanced-diagrams-cones, the current lem-coef-joyal-model-structure, lem-coef-infinity-isofibration-exponentiation and lem-coef-infinity-core-kan-fibration. Cisinski's CatLR.pdf is not archived under literature/ (WANTED) and network access is blocked for reviewers, so I could not open it at the cited places. I checked every claim mathematically myself instead, and proof_origin=agent is correct. Steps 1-7 all check. Step 1: the single-edge and triangle-iff clauses make the edge u itself an equivalence, not just some edge in its class. Step 2: sigma and tau give [b][a]=1 and [a][c]=1 in hJ, so b=c; the J-map is u, v, v with the def-cbc triangles; s_{0,0}={0}->J is a trivial cofibration, and the lifted edge has source exactly x. Step 3: every edge of J is invertible in hJ, so v:J->T lands in the core of T (T is a quasicategory by the exponentiation node). Step 4: the core-Kan node plus a written saturation argument lift the Kan-anodyne endpoint; uncurrying fixes both pieces of the square, and n=0 is covered. Steps 5-6: E=C test, essential surjectivity, then full faithfulness, with step 1 producing actual equivalence edges in Fun. Step 7: the whiskering map (H,t)->H∘eps_t is simplicial and its two prism triangles give naturality on the generating edges; the variances are right (f*g*≅1 via eta, g*f*≅1 via eps). New nodes, both true. The interval node: the endpoints are Kan anodyne (Lambda^1, then Lambda^2_0- and Lambda^2_2-pushouts); s_{eps,n} is a Joyal trivial cofibration (Fun(J,C)->C is a trivial fibration and the Joyal structure is cartesian); the fibration test between quasicategories holds. The edge/triangle node is Boardman-Vogt; the Mathlib edge-quotient candidate correctly keeps it unsplit. Neither node restates a clause of the item (D1), and neither duplicates invertible-interval, relative-categorical-cylinder-criterion, presheaf-cylinder-model-recognition, the model node or cbc-equivalence-outer-horn-filling. No cycle: the closures of all cited nodes avoid the item. All cited statements are in sk-prop-sf-biduality-general, so tool_uses is empty. No SGA source; not a target node. FIX: split_report.summary still described the removed pointwise-core node as delivered; I rewrote only that field in fixes/dag/nodes/sec-six-functors/lem-coef-joyal-quasicategory-characterizations.json.; 1 file(s) fixed by the reviewer"
+ }
 }

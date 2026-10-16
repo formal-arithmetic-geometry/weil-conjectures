@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization. Technical input: Cartesian simplicial model of marked simplicial sets over a point. Foundational sublemma: Finite saturation detects marked equivalences and proves perfectness.",
+   "place": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; finite marked-anodyne saturation provides the replacement T, detects marked equivalences by quasicategory targets, and yields the perfect weak-equivalence class.",
    "via": [
     "lem-coef-marked-point-cartesian-model",
     "lem-coef-infinity-functor-pushout",
@@ -31,55 +31,140 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-anodyne-lifting-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "CartesianEquivalence|cartesianEquivalence|marked.*replacement|perfectClass",
-   "results": "{\"t\": \"2026-10-16T16:47:47Z\", \"tool\": \"grep\", \"query\": \"CartesianEquivalence|cartesianEquivalence|marked.*replacement|perfectClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: no hits."
+   "text": "First describe the needed colimits: take the degreewise colimit of underlying simplicial sets and mark the images of marked edges. The cocone universal property follows because a cocone of marked maps carries those images to marked edges. Every marked simplicial set is the filtered union of its finite marked subobjects, where finite means finitely many nondegenerate simplices. A map from a finite marked object to a filtered colimit is specified by finitely many simplex images, face equations and marked-edge conditions: choose representatives at a common stage and then a later stage satisfying all those equations and conditions. Equality of two maps is witnessed at a further stage. There is a small set of finite marked objects up to isomorphism, so this proves local finite presentability. Omitting markings proves local finite presentability of simplicial sets as well.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), elementary degreewise colimit and finite presentability verification for its small-object construction."
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "The class of Cartesian equivalences of marked simplicial sets is accessible and closed under filtered colimits",
-   "results": "{\"t\": \"2026-10-16T16:47:47Z\", \"tool\": \"leansearch\", \"query\": \"The class of Cartesian equivalences of marked simplicial sets is accessible and closed under filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"SSet.hasColimits\", \"CategoryTheory.Functor.IsAccessible.mk\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\"], \"digest\": \"273dff949a210142\"}",
+   "text": "Let $\\mathcal J_{\\mathrm{fin}}$ be the small family in [lem-coef-finite-marked-fibrancy-criterion]. For every input $X$ put $X_0=X$ and form $X_{m+1}$ by the pushout of the coproduct of $a:A_a\\to B_a$ over all pairs $(a,u)$ with $a\\in\\mathcal J_{\\mathrm{fin}}$ and $u:A_a\\to X_m$. The attaching map on the $(a,u)$ summand is $u$. Set $T(X)=\\operatorname{colim}_{m<\\omega}X_m$ and let $\\eta_X$ be its first cocone map. A map of inputs induces a map of these pushout diagrams by $(a,u)\\mapsto(a,gu)$ at each stage, so identities and composition give an actual functor and natural unit. Each $A_a$ and $B_a$ is finite; a map $A_a\\to T(X)$ therefore factors through some $X_m$ and gets its specified extension $B_a\\to X_{m+1}$. Thus $T(X)$ has the finite lifting property, and the cited criterion gives $T(X)=Q_X^\\natural$. The finite-map factorization and equality check of step 1 says $\\operatorname{Hom}(A_a,-)$ preserves filtered colimits. Copowering $B_a$ by these Hom sets, taking the displayed coproducts and pushouts, and then taking the countable colimit all commute with filtered colimits by their cocone universal properties. Induction on $m$ therefore proves that $T$ preserves filtered colimits.",
+   "uses": [
+    "lem-coef-finite-marked-fibrancy-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5, explicit omega-stage construction with finite domains, and Proposition 3.1.3.7(1), finite replacement."
+   }
+  },
+  {
+   "text": "Fix a quasicategory $C$. The marked-anodyne lifting calculus says restriction along types (i), (ii), (iii) is a trivial Kan fibration on $\\operatorname{Map}^\\sharp(-,C^\\natural)$, and restriction along $A^\\flat\\to A$ is an isomorphism. Mapping the pushout in step 2 into $C^\\natural$ identifies each successor restriction with a pullback of the product of these maps. It has fillers against every boundary: choose a filler on each factor and use the pullback equations. The restriction $\\operatorname{Map}^\\sharp(T(X),C^\\natural)\\to\\operatorname{Map}^\\sharp(X,C^\\natural)$ is the inverse limit of the successor restrictions. Given a boundary square for this restriction, start with its prescribed simplex at stage zero, and use the boundary lifting property successively to choose compatible simplices at stages $1,2,\\ldots$; their limit is the required filler. This restriction is therefore a trivial Kan fibration and in particular a weak homotopy equivalence. Hence every $\\eta_X$ lies in $W$. This argument uses the isomorphism assertion for $A^\\flat\\to A$, without asserting it is marked anodyne.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), mapping tests for the finite attachments; Lemma 3.1.3.6 and Remark 3.1.3.4."
+   }
+  },
+  {
+   "text": "For naturally marked quasicategories $P,Q$, the flat mapping object is $\\operatorname{Fun}(P,Q)$: its degree-$n$ marking condition asks only that the functor on each $P$-slice over a vertex of $\\Delta^n$ preserve equivalences, and a functor preserves their inverse-triangle witnesses. The anodyne calculus therefore identifies the sharp mapping object with the core of this functor quasicategory. For composable marked maps the testing maps on Kan complexes compose in the reverse order, so identities and two-out-of-three for weak homotopy equivalences give these properties for $W$. For $p:P^\\natural\\to Q^\\natural$ in $W$, surjectivity on $\\pi_0$ of restriction with target $P^\\natural$ gives $g:Q^\\natural\\to P^\\natural$ with $gp\\simeq1_P$. Postcomposing this path by $p$ gives $pgp\\simeq p$. Injectivity on $\\pi_0$ of restriction with target $Q^\\natural$ then implies $pg\\simeq1_Q$, since $pg$ and $1_Q$ restrict to $pgp$ and $p$. The mapping complexes are Kan, so these components supply edge paths, and the identification with the core of the flat mapping quasicategory makes them coherent natural equivalences. Conversely $gp\\simeq1_P$ and $pg\\simeq1_Q$ induce simplicial homotopies on every sharp mapping complex by precomposition with the marked parameter interval; thus its two restriction maps are homotopy inverses and $p\\in W$. Every underlying functor between naturally marked quasicategories preserves equivalences, since it sends inverse triangles to inverse triangles, so the marked inverse condition is the underlying functor inverse condition. By clause (2) of [lem-coef-joyal-quasicategory-characterizations], this is also the usual categorical-equivalence condition. For arbitrary $f:X\\to Y$, the naturality equation $T(f)\\eta_X=\\eta_Y f$ and step 3 reduce $f\\in W$ to $T(f)\\in W$ by two-out-of-three. This proves the asserted detection by $Q_X\\to Q_Y$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5 over a point, with both inverse homotopies explicitly obtained from the two testing targets."
+   }
+  },
+  {
+   "text": "Let $U$ forget the markings and put $F=UT$. The degreewise colimit description in step 1 shows that $U$ preserves colimits, so $F$ preserves filtered colimits. By step 4, $W=F^{-1}E$, where $E$ is the class of categorical equivalences in [lem-coef-joyal-filtered-equivalences]. For a filtered diagram of arrows $f_i\\in W$, the arrow $F(\\operatorname{colim}_i f_i)$ is canonically isomorphic to $\\operatorname{colim}_i F(f_i)$; the cited closure of $E$ under filtered colimits proves $\\operatorname{colim}_i f_i\\in W$. This uses a covariant detector $F$, rather than commuting contravariant mapping spaces with filtered colimits.",
+   "uses": [
+    "lem-coef-joyal-filtered-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), passage to the unmarked detector; Theorem 2.2.5.1, proof (1)."
+   }
+  },
+  {
+   "text": "To obtain the small generating family, first regard $E$ as an accessible full subcategory of the arrow category of simplicial sets. Conjugating the testing functors by simplicial isomorphisms shows that $E$ is replete. Here is the conversion of small generation and filtered-colimit closure to the accessibility hypothesis. Choose an uncountable small regular cardinal $\\kappa$. Every filtered indexing category is the union of its subcategories having fewer than $\\kappa$ arrows and themselves filtered: close any set of fewer than $\\kappa$ arrows under identities, composition and chosen cocones for finite diagrams, repeating countably often. Regularity and $\\kappa>\\omega$ keep this closure smaller than $\\kappa$. These subcategories form a $\\kappa$-filtered poset, since fewer than $\\kappa$ of them admit a common closure of their union. Write any arrow of $E$ as a filtered colimit of the small family $E_0$ of [lem-coef-categorical-equivalences-small-generation], and regroup that colimit over these subcategories. Each inner colimit is still in $E$ by [lem-coef-joyal-filtered-equivalences]. There is a small set of possible inner diagrams: their values lie in $E_0$, their arrows in the union of its small Hom sets, and their sizes are less than $\\kappa$. The colimits of representatives of these inner diagrams therefore give a small family generating $E$ under $\\kappa$-filtered colimits. Together with closure under those colimits this is precisely accessible subcategory as defined in [lem-coef-accessible-arrow-inverse-image]. Both categories in step 1 are locally presentable, and $F$ preserves filtered colimits, so that inverse-image theorem applies to $F$ and $E$. It gives a small family of arrows in $F^{-1}E=W$ generating $W$ under $\\lambda$-filtered colimits for some infinite regular $\\lambda$. Such colimits are filtered colimits. Combined with steps 4 and 5, this proves all four perfectness clauses. The small family is not asserted to consist of finite attachment arrows.",
+   "uses": [
+    "lem-coef-categorical-equivalences-small-generation",
+    "lem-coef-joyal-filtered-equivalences",
+    "lem-coef-accessible-arrow-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.14 via the existing Corollary A.2.6.7 inverse-image node; explicit regrouping verifies the accessible-subcategory hypothesis."
+   }
+  },
+  {
+   "text": "For input in $\\mathcal U$, the countable family of finite generator shapes, the Hom sets indexing each coproduct, the pushouts and the countable union in step 2 all belong to $\\mathcal U$; the family of generators is countable and every generator is finite. Thus $T(X)$ and $\\eta_X$ are constructed in the input universe. Fix a quasicategory $C$ in any larger universe. The universe-relative restriction assertions in the marked-anodyne calculus give trivial Kan fibrations for each finite attachment of types (i)-(iii) into this $C$, and an isomorphism for the $A$ attachment. A boundary lifting square for one successor restriction is solved in each coproduct factor and the fillers obey its pullback equations. For a boundary square for the entire tower, start with the prescribed simplex at stage zero and choose a compatible extension at each successive stage; the compatible sequence gives a simplex at the inverse limit. Thus restriction along $\\eta_X$ has every boundary filler, including dimension zero, and is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. In particular $\\eta_X$ passes the sharp mapping test against this larger $C$. The finite lifting criterion identifies $Q_X$ inside $\\mathcal U$ independently of the testing universe. An inverse and its coherent homotopies for $Q_X\\to Q_Y$ are maps between these fixed small simplicial sets (with a finite interval parameter), hence their existence is also unchanged by universe enlargement. This proves the unit assertion in the statement and the required universe compatibility.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-finite-marked-fibrancy-criterion",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), universe-relative finite saturation and mapping tests."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-finite-marked-fibrancy-criterion",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-joyal-filtered-equivalences",
+  "lem-coef-categorical-equivalences-small-generation",
+  "lem-coef-accessible-arrow-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.1.3.7(1), Proposition 3.1.3.5 over a point, Theorem 2.2.5.1 proof (1), Definition A.2.6.12 and Corollaries A.2.6.7 and A.2.6.14; explicit finite colimit and accessibility regrouping arguments supplied in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite marked anodyne saturation detects equivalences and forms a perfect class",
+   "results": "{\"t\": \"2026-10-16T19:08:53Z\", \"tool\": \"leanfinder\", \"query\": \"finite marked anodyne saturation detects equivalences and forms a perfect class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.Pairing.instFiniteSubtypeElemNIIAncestralRel\", \"SSet.finite_subcomplex_top_iff\", \"SSet.Subcomplex\", \"SSet.Subcomplex.PairingCore.instIsRegularPairingOfIsRegular\", \"SSet.Subcomplex.PairingCore.instIsProperPairingOfIsProper\", \"SSet.Subcomplex.PairingCore.IsRegular.toIsProper\", \"SSet.Subcomplex.PairingCore.IsRegular\"], \"digest\": \"430c76f86ad07f6c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: generic accessibility and unmarked finite presentability do not prove marked equivalence accessibility."
+   "verdict": "no match: semantic hits concern unmarked simplicial sets and finite subcomplexes, not marked saturation or perfectness."
   },
   {
    "tool": "loogle",
-   "query": "\"CartesianEquivalence\"",
-   "results": "{\"t\": \"2026-10-16T16:47:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "SSet marked equivalence filtered colimit",
+   "results": "{\"t\": \"2026-10-16T19:08:53Z\", \"tool\": \"loogle\", \"query\": \"SSet marked equivalence filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  marked\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: no hits."
+   "verdict": "unavailable for this malformed query: parser error, not evidence of absence; replaced by successful quoted-name searches in the second reading."
   },
   {
-   "tool": "leanfinder",
-   "query": "Small object replacement of a marked simplicial set by a quasicategory marked at equivalences detects Cartesian equivalences and forms a perfect class",
-   "results": "{\"t\": \"2026-10-16T16:47:53Z\", \"tool\": \"leanfinder\", \"query\": \"Small object replacement of a marked simplicial set by a quasicategory marked at equivalences detects Cartesian equivalences and forms a perfect class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.StrictSegalCore\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.Quasicategory₂\", \"SSet.QCat\", \"SSet.QCat.bicategory\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.Quasicategory\"], \"digest\": \"f094af232e1f2bfc\"}",
+   "tool": "grep",
+   "query": "marked.*anodyne|filtered.*colimit|perfect.*class",
+   "results": "{\"t\": \"2026-10-16T19:08:53Z\", \"tool\": \"grep\", \"query\": \"marked.*anodyne|filtered.*colimit|perfect.*class\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexEvaluation.lean\"], \"digest\": \"55627d77ceea3129\"}",
    "date": "2026-10-17",
-   "verdict": "no match: unmarked horn generators, QCat and Quasicategory do not give marked saturation or perfectness."
+   "verdict": "no match: only generic simplicial-set monomorphism and subcomplex filtered-colimit results."
   },
   {
-   "tool": "leanfinder",
-   "query": "Filtered colimit preserving saturation functor detects marked categorical equivalences after fibrant replacement",
-   "results": "{\"t\": \"2026-10-16T16:48:53Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimit preserving saturation functor detects marked categorical equivalences after fibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"e04b439cad80876c\"}",
+   "tool": "leansearch",
+   "query": "finite marked anodyne saturation preserves filtered colimits and detects categorical equivalences",
+   "results": "{\"t\": \"2026-10-16T19:08:54Z\", \"tool\": \"leansearch\", \"query\": \"finite marked anodyne saturation preserves filtered colimits and detects categorical equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFinitelyAccessible\", \"CategoryTheory.instPreservesColimitsOfShapeFunctorIndLimOfFinCategoryOfHasColimitsOfShape\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\"], \"digest\": \"dfa18d995c018a57\"}",
    "date": "2026-10-17",
-   "verdict": "no match: generic bifibrant homotopy-category results assume an existing model structure, and do not construct this saturation."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Finitary completion of marked simplicial sets under horn fillers and marking invertible arrows commutes with filtered colimits",
-   "results": "{\"t\": \"2026-10-16T16:57:58Z\", \"tool\": \"leanfinder\", \"query\": \"Finitary completion of marked simplicial sets under horn fillers and marking invertible arrows commutes with filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.hasColimits\", \"SSet.sk\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"90f355ce1ce90475\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: finite unmarked presentability and unmarked horn/colimit constructions do not state marked saturation, its units or perfectness."
+   "verdict": "no match: generic accessibility and finite-limit preservation results do not state marked saturation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -87,5 +172,21 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-saturation-perfect-equivalences",
+  "worker": "stage1",
+  "summary": "Constructed the countable finite-generator saturation explicitly and proved its mapping tests and equivalence detection. Perfectness is pulled back from the unmarked categorical-equivalence class using the existing accessible inverse-image theorem with all hypotheses verified. Replaced the faulty finite-cell node by the finite lifting criterion and the independent perfectness theorem for unmarked simplicial sets. Repair of returned landing: revalidated the categorical-equivalence convention against the current reviewed Joyal node; made identity and triangle relations explicit in the supporting perfectness statement and refreshed the corresponding verbatim citations. No Joyal cartesianness or perfectness clause is assumed. Current second reading removed duplicated unmarked clauses: small generation is the only new unmarked assertion; existing Joyal filtered-colimit and quasicategory-characterization nodes now supply their exact conclusions. The larger-universe boundary-filling argument is explicit.",
+  "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation: steps 1-3 construct its finite marked replacement foundation; step 4 proves equivalence detection; steps 5-6 give perfectness for model recognition; step 7 checks universes. The historical ancestry remains prop-coef-integral-exceptional-adjoint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-d19e860b6",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-d19e860b6 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the unit record and the citers in full; review.md has the details. The item statement is unchanged. Each of the 7 steps was checked against what its cited statements actually say. Step 2: an honest functorial omega-stage attachment, with filtered-colimit preservation by compactness of finite marked objects. Step 3: restriction along the successor stages is a pullback of a product of trivial fibrations, and the tower limit has boundary fillers. I checked independently that restriction along A^flat->A is an isomorphism. Step 4: the two test targets P and Q give gp~1 and pg~1, clause (2) of the Joyal characterizations node gives the converse, and naturality plus two-out-of-three handles arbitrary f. Step 5: F=UT detects W and filtered closure comes from joyal-filtered-equivalences. Step 6: the kappa-small regrouping meets the definition in accessible-arrow-inverse-image. A BFS confirms that both alternatives the delivery rejected (model-weak-equivalences-accessible, relative-cartesian-equivalence-saturation) would create cycles. Step 7: the universe argument is sound. finite-marked-fibrancy-criterion is true: I reproved it, including the Lambda^3_0 filling that marks equivalences, and tested empty Z, the point, N(Delta^1)^flat and its non-invertible marking. It is strictly smaller than the item and not a clause of the calculus node, because replacing generator (iv) by A takes a real argument. categorical-equivalences-small-generation is true (HTT A.2.6.12(4), used in 2.2.5.1(1)), uses the current hFun convention, and correctly excludes empty->point. No duplicate exists in the DAG, there are no cycles, and every cited statement is on the unit's route. No Mathlib leaf; Mathlib grep confirms this. No SGA source; no tool_uses. HTT is not archived and the sandbox blocked a network fetch, so I checked the HTT places by rederiving the mathematics rather than reopening the PDF. No fixes made."
+ }
 }
