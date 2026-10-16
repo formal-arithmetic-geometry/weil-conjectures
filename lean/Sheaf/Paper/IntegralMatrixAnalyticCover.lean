@@ -5,10 +5,10 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.Paper.ContinuousCoefficientRealizations
-public import Mathlib.Data.Matrix.Basic
-import Sheaf.Paper.ContinuousIntegralCoefficients
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+public import Sheaf.Paper.IntegralMatrixAnalyticData
+import Sheaf.Paper.FiniteContinuousUltrametricPivot
+import Sheaf.Paper.IntegralMatrixZeroNeighborhood
+import Sheaf.Paper.IntegralMatrixFunctionsPullback
 
 /-! # Continuous functions for integral matrix charts
 
@@ -24,61 +24,26 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Evaluate the regular-module coefficients of a finite free map at the unit section,
-after a supplied continuous-function realization of the coefficient ring.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization.
-(blueprint: lem-weil-pbc-integral-matrix-analytic-cover) -/
-noncomputable def integralMatrixFunctions (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
-    (e : condensedRingObj (integralCoeff ℓ E) X ⟶
-      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-        (continuousMapRingSheaf X (continuousIntegers ℓ E))) [IsIso e]
-    {n t : ℕ}
-    (f : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶
-      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t) :
-    Matrix (Fin t) (Fin n) C(X, continuousIntegers ℓ E) := fun i j ↦
-  let p := biproduct.ι _ j ≫ f ≫ biproduct.π _ i
-  (((inv e ≫ p.hom ≫ e).hom.app (op (Scheme.ProEt.mk (𝟙 X)))) (ULift.up 1)).down
+private theorem cover_of_open_neighborhoods {X : Scheme.{u}}
+    (V : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    (P : ∀ (Y : Scheme.{u}), (Y ⟶ X) → Prop)
+    (h : ∀ k (x : V.X k), ∃ U : (V.X k).Opens,
+      x ∈ U ∧ P U.toScheme (U.ι ≫ V.f k)) :
+    ∃ W : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
+      ∀ k, P (W.X k) (W.f k) := by
+  classical
+  choose U hxU hU using h
+  let C (k : V.I₀) : (V.X k).OpenCover :=
+    (V.X k).openCoverOfIsOpenCover (U k) (by
+      apply eq_top_iff.mpr
+      intro x _
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxU k x⟩)
+  let D (k : V.I₀) : Scheme.Cover.{u} Scheme.proetalePrecoverage (V.X k) :=
+    ((C k).changeProp (Q := @Etale) (fun _ ↦ inferInstance)).weaken
+      Scheme.etalePrecoverage_le_proetalePrecoverage
+  exact ⟨V.bind D, fun k ↦ hU k.1 k.2⟩
 
-/-- The inclusion of continuous integral functions into continuous field-valued functions.
-Source: the continuous coefficient inclusion O_E to E.
-(blueprint: lem-weil-pbc-integral-matrix-analytic-cover) -/
-noncomputable def integralFunctionInclusion (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :=
-  (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-    (continuousMapRingSheafMap X (continuousIntegers ℓ E).subtype continuous_subtype_val)
-
-instance (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
-    [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :
-    IsMonHom (integralFunctionInclusion ℓ E X) := by
-  dsimp [integralFunctionInclusion]
-  infer_instance
-
-/-- The actual standard basis after normalized integral coefficient pullback.
-Source: preservation of finite biproducts and the coefficient pullback isomorphism.
-(blueprint: lem-weil-pbc-integral-matrix-analytic-cover) -/
-noncomputable def integralFiniteFreePullbackIso (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-    {X Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
-    let R := condensedRingObj (integralCoeff ℓ E) X
-    let T := (ProEtale.upperStar Ab.{u + 1} f).mapMod R ⋙
-      Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) f))
-    T.obj (Mod.finiteFree R n) ≅
-      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) Y) n := by
-  let R := condensedRingObj (integralCoeff ℓ E) X
-  let P := (ProEtale.upperStar Ab.{u + 1} f).mapMod R
-  let α := condensedPullbackHom (integralCoeff ℓ E) f
-  let Q := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (inv α)
-  let T := P ⋙ Q
-  let e₀ : P.obj (Mod.regular R) ≅
-      Mod.regular ((ProEtale.upperStar Ab.{u + 1} f).obj R) :=
-    Mod.isoMk (Iso.refl _) (by simp [Mod.act])
-  let e₁ : T.obj (Mod.regular R) ≅
-      Mod.regular (condensedRingObj (integralCoeff ℓ E) Y) :=
-    Q.mapIso e₀ ≪≫ Mod.regularIsoOfIsIso α
-  exact T.mapBiproduct (fun _ : Fin n ↦ Mod.regular R) ≪≫
-    biproduct.mapIso (fun _ ↦ e₁)
-
+set_option linter.unusedVariables false in
 /-- After a rational cokernel trivialization, a map between standard finite free modules
 admits analytic pivot charts.
 
@@ -125,6 +90,47 @@ theorem integralMatrix_analytic_cover (ℓ : ℕ) [Fact ℓ.Prime]
           ‖(integralMatrixFunctions ℓ E (V.X k)
             (chartComparison (V.X k) (continuousIntegers ℓ E)) f r s x).val‖ ≤
           ‖(integralMatrixFunctions ℓ E (V.X k)
-            (chartComparison (V.X k) (continuousIntegers ℓ E)) f i j x).val‖ := by sorry
+            (chartComparison (V.X k) (continuousIntegers ℓ E)) f i j x).val‖ := by
+  classical
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  obtain ⟨V, hV⟩ := integralMatrix_zero_neighborhood ℓ E n t₀ X a hC
+  have hlocal (k : V.I₀) (x : V.X k) :
+      ∃ U : (V.X k).Opens, x ∈ U ∧
+        ((integralMatrixPullback ℓ E (U.ι ≫ V.f k)).map a = 0 ∨
+          ∃ (i : Fin t₀) (j : Fin n),
+            (∀ y : U.toScheme,
+              (integralMatrixPullbackFunctions ℓ E (U.ι ≫ V.f k) a i j y).val ≠ 0) ∧
+            ∀ r s (y : U.toScheme),
+              ‖(integralMatrixPullbackFunctions ℓ E (U.ι ≫ V.f k) a r s y).val‖ ≤
+              ‖(integralMatrixPullbackFunctions ℓ E (U.ι ≫ V.f k) a i j y).val‖) := by
+    by_cases hz : ∀ i j, integralMatrixPullbackFunctions ℓ E (V.f k) a i j x = 0
+    · obtain ⟨U, hxU, hU⟩ := hV k x hz
+      exact ⟨U, hxU, Or.inl hU⟩
+    · push Not at hz
+      obtain ⟨i, j, hij⟩ := hz
+      let b : Fin t₀ × Fin n → C(V.X k, E) := fun p ↦
+        ⟨fun y ↦ (integralMatrixPullbackFunctions ℓ E (V.f k) a p.1 p.2 y).val,
+          continuous_subtype_val.comp
+            (integralMatrixPullbackFunctions ℓ E (V.f k) a p.1 p.2).continuous⟩
+      have hb : ∃ p, b p x ≠ 0 :=
+        ⟨(i, j), fun h ↦ hij (Subtype.ext h)⟩
+      obtain ⟨W, p, hW, hxW, hp, hbound⟩ :=
+        ContinuousMap.exists_open_dominating_member b x hb
+      let U : (V.X k).Opens := ⟨W, hW⟩
+      refine ⟨U, hxW, Or.inr ⟨p.1, p.2, ?_, ?_⟩⟩
+      · intro y
+        rw [integralMatrixFunctions_pullback]
+        exact hp y.val y.property
+      · intro r s y
+        rw [integralMatrixFunctions_pullback, integralMatrixFunctions_pullback]
+        exact hbound (r, s) y.val y.property
+  have hcover := cover_of_open_neighborhoods V
+    (fun Y g ↦ (integralMatrixPullback ℓ E g).map a = 0 ∨
+      ∃ (i : Fin t₀) (j : Fin n),
+        (∀ y, (integralMatrixPullbackFunctions ℓ E g a i j y).val ≠ 0) ∧
+        ∀ r s y, ‖(integralMatrixPullbackFunctions ℓ E g a r s y).val‖ ≤
+          ‖(integralMatrixPullbackFunctions ℓ E g a i j y).val‖) hlocal
+  simpa only [integralMatrixPullbackFunctions, integralMatrixPullbackMap,
+    integralMatrixPullback] using hcover
 
 end AlgebraicGeometry.ProEtale.CondensedRing

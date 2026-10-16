@@ -13,38 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Refine the supplied rational cokernel covering. Choose the finite-free bases of the given rational cokernel on each member; Use the actual standard-basis pullback isomorphisms defined by preservation of finite biproducts, the regular-module pullback isomorphism, and the coefficient pullback comparison. The actual condensed coefficients identify with continuous O_E and E functions by the totally disconnected coefficient realization, compatible with the inclusion O_E→E and with restriction.",
+   "text": "Use the zero-neighborhood theorem to obtain a cover on which a point with all zero coefficients has a zero open neighborhood.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "lem-weil-pbc-continuous-coefficient-realizations"
+    "lem-weil-pbc-integral-matrix-zero-neighborhood"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the rational cokernel presentation at an algebraically closed residue field over every point. Exact evaluation preserves the cokernel and finite free modules and identifies the entries with their point values. Thus the evaluated rank is target rank minus the fixed rational cokernel rank. If it vanishes at one point, it vanishes everywhere on that member and the continuous matrix is zero. This gives the zero branch, also for empty matrices or empty members.",
+   "text": "At every other point apply the finite continuous ultrametric maximum lemma to all pairs of row and column indices. It yields an open neighborhood with a nowhere-zero dominating coefficient.",
    "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation"
+    "lem-weil-pbc-finite-continuous-ultrametric-pivot"
    ],
    "elementary": false
   },
   {
-   "text": "On a member of positive rank every point has a nonzero entry. Choose a maximal norm entry at that point. Intersect the finitely many open neighborhoods where the change of each entry has norm smaller than that positive maximum. The ultrametric inequality keeps the selected pivot norm constant and bounds every other entry. Restrict the bases and compatible coefficient realizations to these opens, and compose these open coverings with the original pro-etale covering.",
+   "text": "Restrict the coefficient inequalities to the open neighborhood by canonical pullback compatibility. Assemble the open neighborhoods into an open cover of each original member and bind these covers to the original pro-etale cover.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-weil-pbc-integral-matrix-functions-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-geometric-field-proetale-evaluation"
+  "lem-weil-pbc-integral-matrix-zero-neighborhood",
+  "lem-weil-pbc-finite-continuous-ultrametric-pivot",
+  "lem-weil-pbc-integral-matrix-functions-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.8, continuous-function pivot reduction, Analytic coefficient charts with a dominating nowhere-zero matrix entry",
-  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
+  "note": "The delivered analytic proof is complete from the pointwise-rank and continuous-chart scheme-naturality statements. Both residual statements are strictly geometric parts of the argument; finite maximum, regular and matrix-entry functoriality, zero detection and covering assembly are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -116,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-35556",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261016T043121-L-2930597",
+  "landing": "20261016T064221-L-581921",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
  }
 }

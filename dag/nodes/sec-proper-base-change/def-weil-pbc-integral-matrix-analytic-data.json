@@ -1,0 +1,111 @@
+{
+ "id": "def-weil-pbc-integral-matrix-analytic-data",
+ "kind": "definition",
+ "title": "Named normalized integral-matrix pullback data",
+ "statement": "For the actual integral coefficient object of [def-weil-pbc-continuous-integral-coefficients] and its canonical continuous realization [lem-weil-pbc-continuous-coefficient-realizations], define normalized module pullback, its regular and standard finite-free comparison isomorphisms, and the continuous coefficients of the conjugated pulled-back matrix. The constructions are explicit and involve no choice of unspecified data. Also construct sectionwise continuous-function direct image explicitly and prove its section and unit formulas. The three existing matrix-chart constructions are reexported unchanged from this lower module.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
+  "note": "The matrix argument is an agent reduction, not a matrix argument stated in Lemma 6.8.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A matrix with continuous nonarchimedean coefficients and locally free rational cokernel has an open zero locus",
+   "date": "2026-10-16",
+   "results": "8 hits, including RingedSpace.zeroLocus, Module.isOpen_freeLocus and IsOpen.matrix; no matching internal-module analytic cover theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficients of finite free sheaf module morphisms commute with inverse image of schemes",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.freeHomEquiv_symm_comp and pullbackObjFreeIso_hom_naturality; these concern ordinary sheaf modules, not the internal Mod category used here."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*Pullback.*Realization|chartComparison|integralMatrix",
+   "date": "2026-10-16",
+   "results": "No Mathlib hits. Repository rg finds canonical charts and the given integral-matrix definitions, but no scheme-natural coefficient formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixAnalyticCover",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Analytic integral-matrix charts: Named normalized integral-matrix pullback data",
+   "via": [
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixAnalyticData",
+  "file": "lean/Sheaf/Paper/IntegralMatrixAnalyticData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixPullbackFunctions",
+  "statement": "def integralMatrixPullbackFunctions (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    {X Y : Scheme.{u}} (g : Y ⟶ X) {n t : ℕ}\n    (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t) :\n    Matrix (Fin t) (Fin n) C(Y, continuousIntegers ℓ E)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralRegularCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixFunctions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFunctionInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralRegularPullbackIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteFreePullbackIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixPullbackMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixPullbackFunctions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPushforward",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPushforward_app",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPushforward_app_one"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
+ }
+}

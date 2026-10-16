@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-zero-neighborhood",
+ "kind": "statement",
+ "title": "A zero integral matrix fiber has a zero open neighborhood",
+ "statement": "Under the locally free rational-cokernel hypothesis for a finite-free integral matrix, there is a pro-etale cover such that, whenever all canonical coefficients vanish at a point of a member, some open neighborhood has zero normalized pullback morphism. Coordinates and pullback are the explicit constructions of [def-weil-pbc-integral-matrix-analytic-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-matrix-analytic-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the constant pointwise rank cover. A zero coefficient matrix at a point forces rank zero everywhere on that member. A matrix of rank zero is the zero matrix.",
+   "uses": [
+    "lem-weil-pbc-integral-matrix-pointwise-rank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the whole member as an open neighborhood. Compatibility under further pullback makes all coefficients of its composite pullback zero.",
+   "uses": [
+    "lem-weil-pbc-integral-matrix-functions-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate each regular entry to the continuous regular module. Its coefficient determines it, so every entry is zero. Biproduct extensionality and the faithful coefficient equivalence make the original normalized pullback morphism zero.",
+   "uses": [
+    "lem-weil-pbc-continuous-regular-functions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-regular-functions",
+  "lem-weil-pbc-integral-matrix-functions-pullback",
+  "lem-weil-pbc-integral-matrix-pointwise-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
+  "note": "The matrix argument is an agent reduction, not a matrix argument stated in Lemma 6.8.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A matrix with continuous nonarchimedean coefficients and locally free rational cokernel has an open zero locus",
+   "date": "2026-10-16",
+   "results": "8 hits, including RingedSpace.zeroLocus, Module.isOpen_freeLocus and IsOpen.matrix; no matching internal-module analytic cover theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficients of finite free sheaf module morphisms commute with inverse image of schemes",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.freeHomEquiv_symm_comp and pullbackObjFreeIso_hom_naturality; these concern ordinary sheaf modules, not the internal Mod category used here."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*Pullback.*Realization|chartComparison|integralMatrix",
+   "date": "2026-10-16",
+   "results": "No Mathlib hits. Repository rg finds canonical charts and the given integral-matrix definitions, but no scheme-natural coefficient formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixAnalyticCover",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Analytic integral-matrix charts: A zero integral matrix fiber has a zero open neighborhood",
+   "via": [
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixZeroNeighborhood",
+  "file": "lean/Sheaf/Paper/IntegralMatrixZeroNeighborhood.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_zero_neighborhood",
+  "statement": "theorem integralMatrix_zero_neighborhood (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (n t : ℕ) (X : Scheme.{u})\n    (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t)\n    (hC : ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj\n          (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj\n          ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n            (cokernel a)))) :\n    ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k (x : V.X k),\n      (∀ i j, integralMatrixPullbackFunctions ℓ E (V.f k) a i j x = 0) →\n        ∃ U : (V.X k).Opens, x ∈ U ∧\n          (integralMatrixPullback ℓ E (U.ι ≫ V.f k)).map a = 0",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_zero_neighborhood"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
+ }
+}

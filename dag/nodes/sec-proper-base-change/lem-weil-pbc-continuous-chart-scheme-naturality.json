@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-continuous-chart-scheme-naturality",
+ "kind": "statement",
+ "title": "Canonical continuous coefficient charts commute with scheme direct image",
+ "statement": "For a topological ring O and a scheme morphism f:Y→X, the canonical coefficient pushforward followed by the direct image of the continuous chart over Y equals the chart over X followed by sectionwise continuous-function pushforward. The latter map precomposes sections with the first scheme-pullback projection.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-matrix-analytic-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the adjunction from condensed coefficients to sheaves over X. Unit compatibility with composition identifies the coefficient pushforward mate with the adjoint chart over Y followed by inverse pushforward composition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On every relative profinite test object and section, both adjoints precompose the continuous function with the same projection to the profinite set, by pullback pasting. Extensionality and injectivity of the adjunction Hom equivalence give the square.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
+  "note": "The matrix argument is an agent reduction, not a matrix argument stated in Lemma 6.8.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A matrix with continuous nonarchimedean coefficients and locally free rational cokernel has an open zero locus",
+   "date": "2026-10-16",
+   "results": "8 hits, including RingedSpace.zeroLocus, Module.isOpen_freeLocus and IsOpen.matrix; no matching internal-module analytic cover theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficients of finite free sheaf module morphisms commute with inverse image of schemes",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.freeHomEquiv_symm_comp and pullbackObjFreeIso_hom_naturality; these concern ordinary sheaf modules, not the internal Mod category used here."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*Pullback.*Realization|chartComparison|integralMatrix",
+   "date": "2026-10-16",
+   "results": "No Mathlib hits. Repository rg finds canonical charts and the given integral-matrix definitions, but no scheme-natural coefficient formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixAnalyticCover",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Analytic integral-matrix charts: Canonical continuous coefficient charts commute with scheme direct image",
+   "via": [
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousChartSchemeNaturality",
+  "file": "lean/Sheaf/Paper/ContinuousChartSchemeNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousChart_scheme_naturality",
+  "statement": "theorem continuousChart_scheme_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] :\n    condensedPushforwardHom (Profinite.continuousMapRingObj O) f ≫\n      (ProEtale.lowerStar Ab.{u + 1} f).map (chartComparison Y O) =\n    chartComparison X O ≫ continuousFunctionPushforward f O",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousChart_scheme_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
+ }
+}

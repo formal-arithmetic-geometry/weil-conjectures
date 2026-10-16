@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-pointwise-rank",
+ "kind": "statement",
+ "title": "Pointwise rank is constant on a free rational-cokernel cover",
+ "statement": "Let a:R_X^n→R_X^t be an integral finite-free matrix. If scalar extension of coker(a) is pro-etale locally finite free, there is a pro-etale cover V→X such that the E-valued matrix of its normalized integral pullback, in the canonical coordinates [def-weil-pbc-integral-matrix-analytic-data], has the same rank at every pair of points of each member.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-matrix-analytic-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the supplied cover and a finite free rational-cokernel basis of rank q on each member. Pull the cokernel presentation to an algebraic closure of each residue field; inverse image preserves the presentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use exact final-object evaluation over the algebraically closed field. Identify the coefficient ring with E and the evaluated map with the pointwise continuous coefficient matrix via the canonical chart. The evaluated target and cokernel have dimensions t and q.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rank-nullity gives matrix rank t-q at every point of the member. The scalar inclusion carries each integral entry to its E-valued entry. Empty members and zero ranks require no extra assumptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
+  "note": "The matrix argument is an agent reduction, not a matrix argument stated in Lemma 6.8.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A matrix with continuous nonarchimedean coefficients and locally free rational cokernel has an open zero locus",
+   "date": "2026-10-16",
+   "results": "8 hits, including RingedSpace.zeroLocus, Module.isOpen_freeLocus and IsOpen.matrix; no matching internal-module analytic cover theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficients of finite free sheaf module morphisms commute with inverse image of schemes",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.freeHomEquiv_symm_comp and pullbackObjFreeIso_hom_naturality; these concern ordinary sheaf modules, not the internal Mod category used here."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*Pullback.*Realization|chartComparison|integralMatrix",
+   "date": "2026-10-16",
+   "results": "No Mathlib hits. Repository rg finds canonical charts and the given integral-matrix definitions, but no scheme-natural coefficient formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixAnalyticCover",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Analytic integral-matrix charts: Pointwise rank is constant on a free rational-cokernel cover",
+   "via": [
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixPointwiseRank",
+  "file": "lean/Sheaf/Paper/IntegralMatrixPointwiseRank.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_pointwise_rank",
+  "statement": "theorem integralMatrix_pointwise_rank (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (n t : ℕ) (X : Scheme.{u})\n    (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t)\n    (hC : ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj\n          (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj\n          ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n            (cokernel a)))) :\n    ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k (x y : V.X k),\n      Matrix.rank (fun i j ↦ (integralMatrixPullbackFunctions ℓ E (V.f k) a i j x).val) =\n        Matrix.rank (fun i j ↦ (integralMatrixPullbackFunctions ℓ E (V.f k) a i j y).val)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_pointwise_rank"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-35556",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T064221-L-581921",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
+ }
+}
