@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-exceptional-inverse-image",
-   "place": "Theorem 2.18(2), Corollary 2.19 (printed p. 12), Construction 2.26 and Proposition 2.29(2) (printed pp. 14–16), specialized to schemes over Spec k. Supplies the finite-coefficient tensor input to the adic-stage paragraph of def-weil-exceptional-inverse-image.",
+   "place": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": the finite-level constant-coefficient tensor comparison needed to compare derived reductions.",
    "via": [
     "lem-pur-etale-coefficient-system-adjoint"
    ]
@@ -28,9 +28,212 @@
   "def-weil-pbc-constant-sheaf",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A field is Noetherian, so $X,Y,\\overline X$ are Noetherian by finite type over a Noetherian base, and hence quasi-compact and quasi-separated. Here $\\overline X$ is finite type over $k$: on a finite affine cover of $Y$, take finite affine covers of the inverse images under the finite-type map $p_f$; a finite list of $k$-algebra generators for each base algebra, together with the chosen algebra generators upstairs, generates the upstairs algebra over $k$. Thus this assertion follows directly from the definition of finite type. Choose $d\\ge0$ bounding the dimensions of the scheme-theoretic fibres of $f$, using quasi-compactness of $Y$. Extension of the residue field to an algebraic closure preserves the dimension of each finite-type fibre, so the same $d$ bounds the geometric fibres. This choice depends only on $f$. If $X$ or $Y$ is empty choose $d=0$; all compact-support values on an empty source are zero. In the rest of the proof any geometric fibre bound $d$ is allowed, and $N_f=2d$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-dimension-extension",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), Tag 0A3V (lemma-morphism-finite-type-bounded-dimension); quasi-separatedness is Tag 01OY in properties.tex; field-extension invariance is the cited lem-kun-dimension-extension."
+   }
+  },
+  {
+   "text": "The termwise $j_!$ is exact and left adjoint to $j^*$, so its functor on the unbounded derived category is exact and preserves arbitrary coproducts. The total derived $Rp_{f,*}$ is exact by the K-injective derived-functor theorem and preserves arbitrary coproducts by the proper coproduct theorem. Thus $F=Rp_{f,*}j_!$ is exact and preserves arbitrary coproducts. Module sheaves have enough injectives; a bounded-below object in $D^{\\ge b}$ has a K-injective representative with zero terms below $b$. Applying the additive $p_{f,*}$ termwise to such a representative shows that $Rp_{f,*}$, and therefore $F$, preserves this lower bound. For a sheaf $H$ on $X$, the compact-support cohomological-dimension theorem applies: $C$ is finite and its additive exponent is invertible since $\\ell\\ne p$. It gives $F(H)\\in D^{[0,2d]}$, for arbitrary $H$, with no constructibility assumption.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-sf-exact-functor-derived-triangulated",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-amb-proper-coproducts",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-dg-compact-support-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Corollary 2.19; unbounded coproducts as in Proposition 2.15. K-injective exactness uses the cited general derived-functor tools."
+   }
+  },
+  {
+   "text": "Let $K\\in D^{\\le a}$. Replace it by a complex with zero terms in degrees $>a$, using good truncation. Its brutal lower subcomplexes $B_m=\\sigma_{\\ge a-m}K$, $m\\ge0$, form an increasing sequence with termwise colimit $K$. Each $B_m$ has a finite filtration by its individual terms in their original degrees, so exactness of $F$ and the sheaf bound of step 2 give $F(B_m)\\in D^{\\le a+2d}$: at a filtration step the cohomology long exact sequence keeps the upper bound. The complex-colimit theorem identifies $K$ with the telescope of $(B_m)$, and the hocolimit-preservation theorem identifies $F(K)$ with a telescope of $(F(B_m))$. Coproducts are termwise in these derived categories, since module sheaves are Grothendieck abelian; their exactness means that a coproduct of objects in $D^{\\le a+2d}$ is still in this subcategory. The telescope triangle and its long exact cohomology sequence therefore give $F(K)\\in D^{\\le a+2d}$. No convergence assertion for an unbounded spectral sequence is needed. Together with step 2, on bounded intervals this gives $F(D^{[r,s]})\\subset D^{[r,s+2d]}$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Telescope argument (homotopy colimits); the complex-colimit and exact-functor telescope lemmas cited above."
+   }
+  },
+  {
+   "text": "For any $L\\in D(Y_{\\mathrm{et}},C)$ and $K\\in D(X_{\\mathrm{et}},C)$ compose the proper projection isomorphism and the open-immersion tensor isomorphism:\n$$L\\otimes^L Rp_{f,*}j_!K\\ \\cong\\ Rp_{f,*}(p_f^*L\\otimes^L j_!K)\\ \\cong\\ Rp_{f,*}j_!(j^*p_f^*L\\otimes^L K)=F(f^*L\\otimes^L K).$$\nBoth cited statements apply on the ordinary etale sites to arbitrary unbounded complexes and the given finite commutative ring $C$. The pullbacks here are termwise exact inverse images for the constant coefficient ring. Their composite is $f^*$, and $f^*V_Y=V_X$ because inverse image carries the constant ring and constant-module sheafification to the same constant coefficients. The composite is the compact-support projection map: the proper map is the counit projection map with the indicated tensor symmetries, and the open map is the extension-by-zero tensor map. In particular taking $L=V_Y$ proves the first displayed isomorphism in the statement. We retain the stronger formula for arbitrary $L$ for use in the next step.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Theorem 2.18(2); equivalently compose the proper and open projection formulas."
+   }
+  },
+  {
+   "text": "Apply the compact-generation lemma to $X$ and $Y$; its hypotheses require finite type over the algebraically closed field and invertibility of $\\ell$, not separatedness of either scheme over $k$. Let $(E_s)$ be its family on $X$, and include all integer shifts in the indexing set. To show that $F(E_s)$ is compact, first its cohomology is bounded constructible: the constructible sheaf finiteness theorem applies to each of the finitely many constructible cohomology sheaves of $E_s$, and the successive good-truncation triangles give a finite Postnikov filtration, and exactness of $F$ gives constructibility of $F(E_s)$: the long exact cohomology sequence expresses each new cohomology sheaf as an extension of a kernel and a cokernel of maps between constructible sheaves, which are constructible. Suppose $E_s$ has Tor amplitude $[r,s']$. For every module sheaf $N$ on $Y$, $f^*N$ is a sheaf and step 4 gives\n$$F(E_s)\\otimes^L N\\ \\cong\\ F(E_s\\otimes^L f^*N).$$\nThe input on the right lies in $D^{[r,s']}$, so steps 2–3 place the output in $D^{[r,s'+2d]}$. Thus $F(E_s)$ has finite Tor amplitude, and compactness on $Y$ follows from the compact-generation lemma. This argument allows nonregular finite rings $C$; no assertion that every finite $C$-module is perfect is used.",
+   "uses": [
+    "lem-pur-etale-finite-ring-compact-generators",
+    "sbc-thm-finiteness-finite-type",
+    "def-kun-truncations",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.4.8, with the finite-Tor interpretation of Definition 6.3.1; compact-support constructibility uses the cited finiteness theorem."
+   }
+  },
+  {
+   "text": "The adjunction $F\\dashv G$ is the fixed one in the item. The test family $(E_s[n])$ consists of compact objects, detects isomorphisms, and has compact images under $F$ by step 5. All categories have set-indexed coproducts and the required locally small Hom spaces. Apply the compact-test right-adjoint coproduct theorem to conclude that $G$ preserves arbitrary coproducts. Explicitly its comparison $\\bigoplus_iGM_i\\to G(\\bigoplus_iM_i)$ induces, on testing with $E_s[n]$, the isomorphism\n$$\\bigoplus_i\\operatorname{Hom}(FE_s[n],M_i)\\ \\cong\\ \\operatorname{Hom}(FE_s[n],\\bigoplus_iM_i),$$\nby adjunction and compactness of $FE_s[n]$. Detection makes the comparison an isomorphism.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-pur-etale-finite-ring-compact-generators",
+    "lem-sc-compact-tests-right-adjoint-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9R, the Hom-adjunction compactness calculation stated in lem-sc-compact-tests-right-adjoint-coproducts; compactness is Definition 07LS in derived.tex."
+   }
+  },
+  {
+   "text": "Equip $G$ with the unique shift structure compatible with the exact functor $F$ and its fixed adjunction. The adjunction-shift theorem supplies it, with the counit equation\n$$\\epsilon_{M[n]}=\\epsilon_M[n]\\circ c_{F,n,GM}\\circ F(c_{G,n,M}).$$\nThe triangulated-right-adjoint theorem then makes $G$ exact with this structure. The constant-complex functor $V\\mapsto V_T$ is exact and preserves coproducts: the constant presheaf functor does so sectionwise, and sheafification is exact and preserves all colimits. Passing to complexes preserves shifts and cones; termwise coproducts compute derived coproducts. For fixed $M$ it follows that\n$$A_M(V)=V_X\\otimes^L GM,\\qquad B_M(V)=G(V_Y\\otimes^L M)$$\nare exact functors of $V\\in D(C\\text{-}\\mathrm{Mod})$ and preserve arbitrary coproducts, by the exactness and direct-sum properties of derived tensor and by step 6.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-kun-derived-tensor-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D (lemma-adjoint-is-exact), with the explicitly adjunction-compatible shifts; exactness and sums as in the cited tensor and sheafification lemmas."
+   }
+  },
+  {
+   "text": "The projection isomorphism of step 4 is natural, unital and compatible with shifts in the coefficient variable $L$. For the proper factor this is the ringed-topos projection-mate exactness theorem. For the open factor use the canonical extension-by-zero tensor map of the cited open tensor theorem. The extension-by-zero stalk theorem identifies its stalk with the identity where the point lies in $X$ and with $0\\to0$ outside $X$; the stalk-tensor theorem identifies the tensor factors. These are equalities on sheaf maps: exactness and conservativity of geometric stalks detect zero morphisms by applying the stalk functors to the image of their difference. Apply this degreewise to complexes. These maps commute with the tensor differential $d(x\\otimes y)=dx\\otimes y+(-1)^{\\deg x}x\\otimes dy$ and with the usual shift constraints. When factors are interchanged, the symmetry sends $x\\otimes y$ to $(-1)^{\\deg x\\deg y}y\\otimes x$, so the same coefficient-shift square still commutes. The tensor-unit map is the identity under the unit constraints. Composition preserves shift compatibility; thus, denoting step 4's coefficient projection map by $P$, the transformation $P^{-1}_{V,GM}$ commutes with coefficient shifts and has $P^{-1}_{C,GM}=1_{FGM}$ under tensor-unit identifications.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-etale-open-derived-tensor",
+    "def-kun-derived-tensor",
+    "lem-kun-tensor-unit",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); the open factor uses Tag 03S5 (proposition-describe-jshriek) in etale-cohomology.tex, with the stated degreewise sign calculation."
+   }
+  },
+  {
+   "text": "Define $\\alpha_{V,M}:A_M(V)\\to B_M(V)$ by transposing\n$$F(V_X\\otimes^L GM)\\xrightarrow{P^{-1}_{V,GM}}V_Y\\otimes^L FGM\\xrightarrow{1\\otimes\\epsilon_M}V_Y\\otimes^L M.$$\nNaturality of $P$, of $\\epsilon$, and of the adjunction bijection proves naturality in $V,M$. For completeness the coefficient shift square for $\\alpha$ is obtained by transposing its two sides under $F\\dashv G$: after using the equation for $\\epsilon$ in step 7, the two transposes are precisely the coefficient shift square for $P^{-1}$ from step 8 followed by $1\\otimes\\epsilon_M$. That square commutes, and the adjunction bijection is injective, so $\\alpha$ is compatible with the specified shifts. Under $V=C$, step 8 identifies the transpose with $\\epsilon_M$. The adjunction triangle identity says the transpose of $1_{GM}$ is $\\epsilon_M$; hence $\\alpha_{C,M}=1_{GM}$.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 2.26, with shift compatibility verified by transposition and the counit equation."
+   }
+  },
+  {
+   "text": "Fix $M$ and let $\\mathcal L_M$ consist of the coefficient complexes $V$ for which $\\alpha_{V,M}$ is invertible. It contains $C$ by step 9. Exactness of both functors and the proved shift compatibility imply that it is closed under shifts, distinguished triangles and retracts by the generating-class invertibility theorem. It is also closed under arbitrary coproducts: under the coproduct comparisons for $A_M$ and $B_M$, naturality along every coprojection identifies $\\alpha_{\\oplus V_i,M}$ with $\\oplus\\alpha_{V_i,M}$, which is invertible if each summand is. The derived-module free-generation theorem therefore gives $\\mathcal L_M=D(C\\text{-}\\mathrm{Mod})$. Thus the second displayed map in the item is an isomorphism for every unbounded $V$ and $M$. Both maps are constructed from functors, natural maps and the fixed adjunction on the derived categories; changing resolutions computes these same maps, rather than defining a new comparison. This follows for the first map from its proper projection and open tensor construction in step 4, and for the second from the bijectivity of transposition. The argument uses generation only to propagate invertibility, never to infer equality of transformations from their values on generators, and asserts no tensor formula for $G$ with a nonconstant sheaf complex.",
+   "uses": [
+    "lem-sf-generating-class-determination",
+    "lem-pc-derived-module-free-generation",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PB (remark-P-resolution) as recorded in lem-pc-derived-module-free-generation; the mate is Zheng Construction 2.26."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "def-weil-finite-type-morphism",
+  "lem-amb-etale-adjoint-locality",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-amb-proper-coproducts",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-dg-compact-support-amplitude",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-kun-truncations",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pur-etale-finite-ring-compact-generators",
+  "sbc-thm-finiteness-finite-type",
+  "thm-constructible-serre",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-sc-compact-tests-right-adjoint-coproducts",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-unit",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sf-generating-class-determination",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.4 and Proposition 6.4.8 give compactness; combined with compact-support projection, finiteness and module generation. This proves Zheng Proposition 2.29(2) for constant coefficients without its smooth-purity proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,15 +290,204 @@
    "results": "[]",
    "date": "2026-10-16",
    "verdict": "no match: returned declarations concern light condensed closed monoidal structures, internal projectivity, or Gabriel-Popescu tensor adjunctions; none asserts an etale exceptional-adjoint constant-tensor isomorphism. The shriek/tensor source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale exceptional inverse image commutes with tensor by arbitrary constant coefficient complexes",
+   "results": "[\"Algebra.Etale.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.instTensorProduct\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.Etale.exists_subalgebra_fg\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic etaleness, constant-sheaf adjunctions, ordinary derived adjunctions and representation cohomology, not the constant-tensor calculus for an unbounded exceptional etale adjoint."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic etaleness, constant-sheaf adjunctions, ordinary derived adjunctions and representation cohomology, not the constant-tensor calculus for an unbounded exceptional etale adjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*tensor|compactlySupported.*tensor",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic etaleness, constant-sheaf adjunctions, ordinary derived adjunctions and representation cohomology, not the constant-tensor calculus for an unbounded exceptional etale adjoint."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale exceptional adjoint constant coefficient tensor formula on unbounded derived categories",
+   "results": "[\"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.Etale.baseChange\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Adjunction.derived\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic etaleness, constant-sheaf adjunctions, ordinary derived adjunctions and representation cohomology, not the constant-tensor calculus for an unbounded exceptional etale adjoint."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary pullback tensor formula for arbitrary scalar complexes over a finite torsion ring and bounded compact support cohomology",
+   "results": "[\"groupCohomology.mapShortComplex₂\", \"Rep.torIso\", \"groupCohomology.isoShortComplexH2_hom\", \"groupCohomology.δ_apply\", \"groupCohomology.isoShortComplexH1_hom\", \"groupCohomology.π_map_apply\", \"groupCohomology.H1InfRes\", \"groupCohomologyIsoExt\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic etaleness, constant-sheaf adjunctions, ordinary derived adjunctions and representation cohomology, not the constant-tensor calculus for an unbounded exceptional etale adjoint."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-etale-coefficient-system-adjoint",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-etale-exceptional-constant-tensor",
+  "worker": "stage1",
+  "summary": "Statement retained, including arbitrary finite commutative ell-primary C, arbitrary unbounded V and nonseparated Y. Ten-step independent compactness proof: bound from sheaves via brutal truncations and telescopes; full compact-support projection via proper/open; compact support sends finite-Tor constructible generators to compacts; right adjoint preserves sums; shift-compatible tensor mate is invertible by free generation of D(C). One new statement-only compact-generation lemma is needed because existing finite compactness nodes impose the separated standing setting. No smooth purity or SGA route is used. Audited the inherited attempt, supplied explicit stalk tools for the shift square, cited the Postnikov construction, and corrected source labels and exact blueprint ancestry places. The statement is unchanged. Maintainer review replaces the pro-etale special-coefficient open-tensor citation by lem-pur-etale-open-derived-tensor (Stacks 0GL1) on the ordinary etale site; the statement and argument are unchanged.",
+  "blueprint": "Supplies the finite-level constant tensor input to the adic-stage coefficient-system construction of def-weil-exceptional-inverse-image: maps from derived reductions are compared via finite coefficient right adjoints, before forming inverse limits. Matches the item source Zheng Theorem 2.18(2), Corollary 2.19, Construction 2.26 and Proposition 2.29(2).",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Step 1 obtains a coefficient-independent geometric dimension bound; this is geometry of finite-type morphisms, not a six-operations construction. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Step 1 turns the bound on scheme-theoretic fibres into a bound on geometric fibres. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Step 2 uses only exactness and the whole-derived-category adjunction for open extension by zero, a special case of its etale clause. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Step 2 constructs the total right derived proper pushforward and uses the bounded-below K-injective clause. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Step 2 uses only that an additive functor derived with K-injectives is exact as a triangulated functor. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-amb-proper-coproducts",
+    "why": "Step 2 needs preservation of arbitrary unbounded coproducts for the proper part of the given compactification. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Step 2 supplies enough injectives to obtain a representative with the specified lower degree bound. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-dg-compact-support-amplitude",
+    "why": "Step 2 uses the prime-to-characteristic sheaf vanishing above twice the geometric fibre dimension. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Step 3 identifies an unbounded complex with the telescope of its brutal lower truncations. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "Step 3 carries that telescope through the exact coproduct-preserving compact-support functor. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Step 3 uses exactness of coproducts and the Grothendieck hypothesis for the derived-coproduct theorem. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Steps 3 and 7 compute derived coproducts by termwise sums, including the empty family. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Steps 4 and 10 use the canonical proper projection isomorphism for arbitrary unbounded complexes. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Step 4 identifies pullback of constant coefficients with exact inverse image. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "sbc-thm-finiteness-finite-type",
+    "why": "Step 5 uses only compact-support constructibility for a separated finite-type morphism and finite constructible prime-to-characteristic sheaves. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Steps 6, 9 and 10 use the fixed whole-etale-derived-category adjunction and its counit. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-sc-compact-tests-right-adjoint-coproducts",
+    "why": "Step 6 uses the abstract Hom-test criterion for the right adjoint to preserve sums after checking compactness of the tests and their images. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Step 7 needs exactness of tensor in the coefficient variable. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "Step 7 needs preservation of arbitrary direct sums by tensor in each variable. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Step 8 needs the connecting-square and unit compatibility of the specified proper projection map, not just its invertibility. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Steps 8 and 9 identify the coefficient-ring component of the canonical mate with the identity. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Step 8 computes the open tensor map inside and outside the open subscheme. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Step 8 uses only clause (1), the stalk-tensor identification and its compatibility with symmetry and units. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Step 8 uses conservativity to conclude that a sheaf with zero geometric stalks is zero. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-sf-generating-class-determination",
+    "why": "Step 10 uses propagation of invertibility for a shift-compatible transformation between exact functors; it does not use any equality-on-generators claim. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Step 10 uses localizing generation of the full coefficient derived category by the coefficient ring and its shifts. This supplies a tool below the finite-level definition, without replacing any unit step."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Step 5 uses exactly kernel, cokernel and extension closure for finite-ring ordinary etale constructible sheaves, in the long exact cohomology sequences of the finite Postnikov filtration. This is an abelian-category tool below the finite-level definition; the definition unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-extension",
+  "lem-amb-etale-adjoint-locality",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-amb-proper-coproducts",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-dg-compact-support-amplitude",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-amb-proper-coproducts-projection",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-thm-finiteness-finite-type",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-sc-compact-tests-right-adjoint-coproducts",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-kun-tensor-unit",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sf-generating-class-determination",
+  "lem-pc-derived-module-free-generation",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-391e5dd50",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-391e5dd50 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Repaired C4: the open-tensor citation covered pro-étale special coefficients, not ordinary étale arbitrary finite rings; added a statement-only lemma from Stacks 0GL1 and replaced all citations. Completed child metadata. Verified Zheng’s specified mate, Bhatt–Scholze compact generation, all ten steps, edge cases, duplicates and acyclicity. Review and corrected JSON files written.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
