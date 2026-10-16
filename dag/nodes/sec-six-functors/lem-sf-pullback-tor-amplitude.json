@@ -17,7 +17,10 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties",
   "def-weil-finite-tor-amplitude",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof": [
   {
@@ -249,5 +252,28 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-f4b741cc5 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages, and unit/chapter routes. All four proof steps preserve the exact coefficient category and Tor interval; accepted all four declared tool uses. Confirmed the repaired blueprint flatness gap, checked edge cases and target-source morphisms/categories, and found no new nodes or dependency cycle. Review written to review.md; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackTorAmplitude",
+  "declaration": "WeilConjectures.sf_pullback_torAmplitude",
+  "declarations": [
+   "WeilConjectures.sfFiniteDerivedPullback",
+   "WeilConjectures.sf_pullback_torAmplitude",
+   "WeilConjectures.sf_pullback_finiteTorConstructible"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackTorAmplitude.lean",
+  "statement": "theorem sf_pullback_torAmplitude (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing l E n)) (hK : intrinsicFiniteTorsionConstructible l E n hn Y.left K) (a b : ℤ) (hTor : HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing l E n) K a b) : intrinsicFiniteTorsionConstructible l E n hn X.left ((sfFiniteDerivedPullback l E n hn f.left).obj K) ∧ HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing l E n) ((sfFiniteDerivedPullback l E n hn f.left).obj K) a b",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8ed363759",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source correspondence, all eight statement dependencies, canonical pullback, hypotheses, conclusions, universes, edge cases, docstrings, reports, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library modes. No defects found; branch unchanged."
  }
 }

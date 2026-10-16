@@ -270,5 +270,30 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-cb905d585 (reviewer sub-agent of L); spot-checked: Reviewed the corrected item, all five proof steps, cited DAG statements, blueprint/unit route, literature sources, citers, searches, and edge cases. The conditional comparison plus canonical roof-based independence is mathematically valid for the stated pro-etale constant-sheaf coefficient category. No new nodes or repairs are required. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorResolutionIndependent",
+  "declaration": "AlgebraicGeometry.Scheme.derivedTensor_resolution_independent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.derivedTensor_resolution_independent",
+   "AlgebraicGeometry.Scheme.resolutionTensor",
+   "AlgebraicGeometry.Scheme.resolutionTensorMap",
+   "AlgebraicGeometry.Scheme.resolutionTensorMapQ"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorResolutionIndependent.lean",
+  "statement": "theorem derivedTensor_resolution_independent (K₁ K₂ : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) : (∀ (P P' : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) (q : P ⟶ K₁) (q' : P' ⟶ K₁), QuasiIso q → QuasiIso q' → P.IsKFlat → P'.IsKFlat → ∀ (α : P ⟶ P'), Homotopy (α ≫ q') q → QuasiIso (resolutionTensorMap Y A K₂ α)) ∧ ∃! c : ∀ (P P' : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) (q : P ⟶ K₁) (q' : P' ⟶ K₁) (hq : QuasiIso q) (hq' : QuasiIso q') (hP : P.IsKFlat) (hP' : P'.IsKFlat), (derivedTensor Y A K₁ K₂ P q hq hP ≅ derivedTensor Y A K₁ K₂ P' q' hq' hP'), (∀ (P P' : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) (q : P ⟶ K₁) (q' : P' ⟶ K₁) (hq : QuasiIso q) (hq' : QuasiIso q') (hP : P.IsKFlat) (hP' : P'.IsKFlat) (α : P ⟶ P'), Homotopy (α ≫ q') q → (c P P' q q' hq hq' hP hP').hom = resolutionTensorMapQ Y A K₁ K₂ q q' hq hq' hP hP' α) ∧ (∀ (P : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) (q : P ⟶ K₁) (hq : QuasiIso q) (hP : P.IsKFlat), c P P q q hq hq hP hP = Iso.refl _) ∧ (∀ (P P' P'' : CochainComplex (SheafOfModules.{w + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj (CommRingCat.of (ULift.{w + 1, w} A))))) ℤ) (q : P ⟶ K₁) (q' : P' ⟶ K₁) (q'' : P'' ⟶ K₁) (hq : QuasiIso q) (hq' : QuasiIso q') (hq'' : QuasiIso q'') (hP : P.IsKFlat) (hP' : P'.IsKFlat) (hP'' : P''.IsKFlat), c P P' q q' hq hq' hP hP' ≪≫ c P' P'' q' q'' hq' hq'' hP' hP'' = c P P'' q q'' hq hq'' hP hP'')",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Includes the total-tensor specialization and its map/localized map as real-data helpers; the theorem characterizes a unique coherent comparison family without assuming a direct comparison exists."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-360e2daef",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, source mathematics, exact declarations, universes, edge cases, helpers, docstrings, report sections, and verbatim signature. Per-file scompile.py passed in sandbox and library modes without diagnostics. No delivery faults found; branch unchanged."
  }
 }

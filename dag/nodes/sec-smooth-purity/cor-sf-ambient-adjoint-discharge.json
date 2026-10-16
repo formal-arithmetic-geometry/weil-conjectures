@@ -228,5 +228,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-f4e4957a6 (reviewer sub-agent of L); spot-checked: Read the full item, all six cited statements and sources, unit/chapter route, and archived target declarations. All three steps respect finite-stage coefficients and restricted adjunction scope; accepted the FullCD tool use. No new nodes or repairs. review.md records concrete checks and the inherited, unused false identification of étale-origin with constructible sheaves."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmbientAdjointDischarge",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_boundedConstructibleAdjointDischarge",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmbientAdjointDischarge.lean",
+  "statement": "theorem exists_boundedConstructibleAdjointDischarge (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-af54e9e3f",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed immutable statements, all six dependencies, sources, canonical normalizations, universes, edge cases, and report. Both files compile cleanly through scompile.py; signatures match node records verbatim. No delivery faults found. Detailed evidence is in review.md."
  }
 }

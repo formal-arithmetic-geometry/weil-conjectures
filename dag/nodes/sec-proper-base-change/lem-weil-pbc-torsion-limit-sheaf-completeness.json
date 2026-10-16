@@ -24,7 +24,9 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-noetherian-ring",
   "def-pc-cochain-complex-modules",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -266,5 +268,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TorsionLimitSheafCompleteness",
+  "declaration": "AlgebraicGeometry.Scheme.torsionLimitSheaf_completeness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.torsionCompletionRing",
+   "AlgebraicGeometry.Scheme.torsionCompletionModuleRing",
+   "AlgebraicGeometry.Scheme.TorsionCompletionModules",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotient",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientModule",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientOne",
+   "AlgebraicGeometry.Scheme.torsionCompletionQuotientMap",
+   "AlgebraicGeometry.Scheme.torsionCompletionIdeal",
+   "AlgebraicGeometry.Scheme.torsionCompletionIdealInclusion",
+   "AlgebraicGeometry.Scheme.torsionCompletionSheafify",
+   "AlgebraicGeometry.Scheme.torsionCompletionSliceSheafify",
+   "AlgebraicGeometry.Scheme.TorsionCompletionDerived",
+   "AlgebraicGeometry.Scheme.torsionCompletionLocalization",
+   "AlgebraicGeometry.Scheme.IsTorsionCompletionComplete",
+   "AlgebraicGeometry.Scheme.IsTorsionCompletionCompleteSheaf",
+   "AlgebraicGeometry.Scheme.IsAnnihilatedByModuleIdeal",
+   "AlgebraicGeometry.Scheme.IsLocallyPowerTorsionLimit",
+   "AlgebraicGeometry.Scheme.torsionLimitSheaf_completeness"
+  ],
+  "file": "lean/Sheaf/Paper/TorsionLimitSheafCompleteness.lean",
+  "statement": "theorem torsionLimitSheaf_completeness (X : Scheme.{t}) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hI : I.FG) : (∀ (F₁ F₂ F₃ F₄ F₅ : TorsionCompletionModules X A) (a : F₁ ⟶ F₂) (b : F₂ ⟶ F₃) (c : F₃ ⟶ F₄) (d : F₄ ⟶ F₅) (hab : a ≫ b = 0) (hbc : b ≫ c = 0) (hcd : c ≫ d = 0), (ShortComplex.mk a b hab).Exact → (ShortComplex.mk b c hbc).Exact → (ShortComplex.mk c d hcd).Exact → IsTorsionCompletionCompleteSheaf X I F₁ → IsTorsionCompletionCompleteSheaf X I F₂ → IsTorsionCompletionCompleteSheaf X I F₄ → IsTorsionCompletionCompleteSheaf X I F₅ → IsTorsionCompletionCompleteSheaf X I F₃) ∧ (∀ (F : ℕ → TorsionCompletionModules X A) (f : ∀ n : ℕ, F (n + 1) ⟶ F n), (∀ n : ℕ, IsTorsionCompletionCompleteSheaf X I (F n)) → IsTorsionCompletionCompleteSheaf X I (limit (Functor.ofOpSequence f))) ∧ (∀ (F : TorsionCompletionModules X A) (n : ℕ), 1 ≤ n → IsAnnihilatedByModuleIdeal (torsionCompletionModuleRing X A) (torsionCompletionIdeal X (I ^ n)) (torsionCompletionIdealInclusion X (I ^ n)) F → IsTorsionCompletionCompleteSheaf X I F) ∧ (∀ F : TorsionCompletionModules X A, IsLocallyPowerTorsionLimit X I F → IsTorsionCompletionCompleteSheaf X I F) ∧ (∀ K : CochainComplex (TorsionCompletionModules X A) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (K.X i)) → (∀ i : ℤ, IsLocallyPowerTorsionLimit X I (K.X i)) → IsTorsionCompletionComplete X I ((torsionCompletionLocalization X A).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing coefficient-sized AsSmall model and its induced topology (def-weil-proetale-inverse-image), as permitted by the small-site definition. Completeness reuses IsLocallyDerivedRingedIdealComplete on this equivalent site, with the actual kernel of the constant quotient map as the extended ideal. Helpers only expand this node’s coefficient, annihilation and local-inverse-limit clauses; no arbitrary transport or comparison map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-57b626869",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Wrote review.md. All hypotheses, five conclusions, dependencies, canonical constructions, universes, edge cases, docstrings, and report sections checked. Snapshot matches the immutable commit; lean.statement matches verbatim. Independent scompile.py sandbox and library checks passed without diagnostics. No corrections required."
  }
 }

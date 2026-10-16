@@ -104,5 +104,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-507f7587d (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited nodes, blueprint, and Stacks sources 095R and 03QP. The statement and mathematics are correct, including coefficient hypotheses and edge cases. Step 2 unnecessarily cites the off-route abelian exactness node lemma-weil-pbc-finite-direct-image-exact even though fin4-thm-finite-morphisms-constructible already states the required module-sheaf vanishing; split_report.tool_uses is empty. Corrected item and unit realization are in fixes/dag/. No new nodes or target weakening.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstructiblePushforwardVanishing",
+  "declaration": "AlgebraicGeometry.Etale.constructible_lowerStar_and_higherDirectImage_vanishing_of_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstructiblePushforwardVanishing.lean",
+  "statement": "theorem constructible_lowerStar_and_higherDirectImage_vanishing_of_finite (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] (hcoeff : IsSmoothBaseChangeCoefficients N Λ (Spec (.of k))) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : @Scheme.IsConstructibleEtaleModuleSheaf X Λ _ hcoeff.2.1 F) : @Scheme.IsConstructibleEtaleModuleSheaf Y Λ _ hcoeff.2.1 ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ∧ ∀ q : ℤ, 0 < q → IsZero (higherDirectImage Λ f q F)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2875be5d",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Recorded full review in review.md. Statement, dependencies, sources, edge cases, universes, docstrings, and verbatim signature check pass; immutable module compiled cleanly through scompile.py. No delivery repairs required."
  }
 }

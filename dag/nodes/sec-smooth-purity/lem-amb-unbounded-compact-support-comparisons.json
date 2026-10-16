@@ -529,5 +529,50 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-bc85994b3 (reviewer sub-agent of L); spot-checked: Read the item, new node, all cited statements, unit/chapter route, and Stacks Tags 0F7B/0F7C/0F7D/0F7F plus 0F7H–0F7L. Checked every proof step, hypotheses, coefficient category, base-change direction, edge cases, duplicate candidates, and route/tool use. No mathematical or structural faults found; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons",
+  "declaration": "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupportBaseChange",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_comparison_coherence",
+   "AlgebraicGeometry.Etale.unboundedEtaleRefinementOpenComparison",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_refinement_normalization",
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_tower",
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCongr",
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekId",
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_assoc",
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_units",
+   "AlgebraicGeometry.Etale.unboundedEtaleUpperStarCompIso",
+   "AlgebraicGeometry.Etale.unboundedEtaleUpperStarIdIso",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupportExchange",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange_id",
+   "AlgebraicGeometry.Etale.unboundedEtaleProperOpenRestriction",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_tower_adjunct",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_exchange_normalization",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange_comp",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_baseChange_composition",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_comparison_plus",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_composition_plus",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_exchange_plus",
+   "AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_open_beta"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedEtaleCompactSupportComparisons.lean",
+  "statement": "theorem unboundedEtaleCompactSupport_baseChange (A : Type (u + 1)) [CommRing A] [Finite A] {X X' Y Y' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y'] {f : X ⟶ Y} {f' : X' ⟶ Y'} {v : Y' ⟶ Y} {v' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback v' f' f v) : IsIso (unboundedEtaleCompactSupportBaseChange A sq) ∧ ∀ c : Compactification f, unboundedEtaleCompactSupportBaseChange A sq = Functor.whiskerRight (rightDerivedLowerShriekIso A c).inv (upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory ≫ unboundedEtaleCompactSupportExchange A sq c ≫ Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) v').mapDerivedCategory (rightDerivedLowerShriekIso A (c.ofIsPullback sq)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The module states the complete unbounded comparison package through the listed declarations: common-refinement identity/cocycle, arbitrary proper-refinement normalization, every-tower composition normalization, units and associativity, the proper-open adjunct normalization, exact proper/open exchange normalization, compactification independence, identity and composite base changes, compatibility with composition, and equality of the comparison/composition/exchange maps on bounded-below inputs. Candidates and pairwise isomorphisms reuse the existing ordinary etale ModuleCat-valued API. Composition is assembled by the explicit ofComp tower used in the existing unbounded composition theorem, never by choosing a bare Nonempty isomorphism. Helper definitions only assemble these canonical maps and transport the existing L-upper-star exchange to exact termwise inverse image. The refinement normalization holds for every existing graph-normalized family N; its nonemptiness is supplied by lem-asd-etale-compact-support-normalization, so it adds no assumption on the schemes or coefficients. No source statement was changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fb63d9cef",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all 24 declarations, fifteen statement dependencies, source normalizations, hypotheses, edge cases, universes, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library forms. No findings; branch unchanged."
  }
 }

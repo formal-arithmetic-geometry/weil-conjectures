@@ -118,5 +118,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-be0feeeaf (reviewer sub-agent of L); spot-checked: Read the full item, unit, cited DAG statements, blueprint sources, chapter route, source declarations, and delivery-error criteria. The finite-coefficient étale projection statement and hypotheses match the master source; the sole step correctly specializes the existing compact-support projection lemma, with no pro-étale comparison or hidden proof use. Edge cases and coefficient-category typing checked; no new nodes or repairs required. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientEtaleProjectionFormula",
+  "declaration": "AlgebraicGeometry.Etale.isIso_projectionMap_coefficientExtensionRing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteCoefficientProjectionCompactification",
+   "AlgebraicGeometry.Etale.isIso_projectionMap_coefficientExtensionRing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientEtaleProjectionFormula.lean",
+  "statement": "theorem isIso_projectionMap_coefficientExtensionRing (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X) (L : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y) (_hKc : ∀ i : ℤ, Scheme.IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)))).obj ((_root_.DerivedCategory.homologyFunctor _ i).obj K))) (_hKb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K)) (_hLc : ∀ i : ℤ, Scheme.IsConstructibleEtaleSheafOfSets ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)))).obj ((_root_.DerivedCategory.homologyFunctor _ i).obj L))) (_hLb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj L)) (_hLt : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a b L) : _root_.DerivedCategory.TStructure.t.plus (((derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (finiteCoefficientProjectionCompactification D f)).obj K).obj L) ∧ _root_.DerivedCategory.TStructure.t.plus (((rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (finiteCoefficientProjectionCompactification D f)).obj K).obj L) ∧ IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (finiteCoefficientProjectionCompactification D f)).app K).app L)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The existing canonical projectionMapOfCompactification is used at the Nagata compactification obtained from the stated geometric hypotheses. The helper only specializes this existing construction, deriving target compactness and quasi-separatedness from its structure morphism. Both endpoints are asserted to lie in D+; IsIso is checked in the ambient derived category, equivalently in that full subcategory. Naturality in both variables is built into the existing transformation of bifunctors. Constructible cohomology uses exactly the underlying-set-sheaf predicate recorded by def-weil-pbc-etale-sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0de0dbb19",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all ten dependencies, source agreement, exact declarations, hypotheses, conclusions, universes, edge cases and maintainer gates. Signature matches verbatim; per-file sandbox and library compiles passed without diagnostics. No fixes required."
  }
 }

@@ -80,5 +80,28 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean",
+  "statement": "theorem exists_comparisonClassAdjunction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ComparisonClassAdjunction",
+   "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction"
+  ],
+  "note": "Unstated prerequisite: no Lean record or Mathlib match was available. States the finite-coefficient full comparison-class adjunction without an extra bounded-below-adjoint hypothesis. The helper is specialized to a finite commutative coefficient ring; its comparison_normalized equation identifies every comparison on every bounded-below etale representative with the existing rightDerivedLowerShriekOfCompactificationOriginIso, the transport of the canonical etale comparison. There is no freely chosen comparison family or typeclass dictionary. The right functor is the actual comparison composite with an ordinary etale right adjoint, rather than an ambient pro-etale adjoint. Repairs the H3/H13 return on dde2fa25c670. Second reading also passes the chosen compactification and actual etale adjunction to the helper; homEquiv_normalized fixes the Hom bijection at that compactification to the canonical comparison/adjunction chain. Comparison compatibility fixes the other bijections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-af54e9e3f",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed immutable statements, all six dependencies, sources, canonical normalizations, universes, edge cases, and report. Both files compile cleanly through scompile.py; signatures match node records verbatim. No delivery faults found. Detailed evidence is in review.md."
+ }
 }

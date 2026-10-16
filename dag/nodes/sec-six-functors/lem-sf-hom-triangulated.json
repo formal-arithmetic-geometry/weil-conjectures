@@ -197,5 +197,24 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-ef53b58dc (reviewer sub-agent of L); spot-checked: Read the full item, report, master source, unit/chapter route, all cited statements, and Stacks Tags 08J7/08JC. Verified both variance clauses, shifts, hypotheses, coefficient/site typing, source inconsistency and its documented correction, edge cases, citations, searches, and acyclicity. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfHomTriangulated",
+  "declaration": "AlgebraicGeometry.Etale.sf_internalHom_triangulated",
+  "file": "lean/Sheaf/Paper/SfHomTriangulated.lean",
+  "statement": "theorem sf_internalHom_triangulated (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u + 1} ((sheafCompose X.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))))] : (∀ M, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).IsTriangulated) ∧ (∀ K, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).IsTriangulated)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two conjuncts express the two image-triangle conclusions using Mathlib Functor.IsTriangulated and CommShift, in the same interface as ringedInternalHom_exact. The first uses the opposite pretriangulated category (negative shift); the second is covariant. The category is written literally as D(Mod(A_X)), as in the node, and the operation is the recorded derivedInternalHomOfUniverses specialized at the constant ring sheaf. Universes: site objects u+1, arrows u, coefficients and modules u+1, localization w. HasDerivedCategory is the structural localization parameter, with no extra mathematical finiteness assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-40d892775",
+  "group": "N2",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean module, report sections, edge cases, universes, and declarations. scompile.py sandbox and library checks passed; no substantive findings."
  }
 }
