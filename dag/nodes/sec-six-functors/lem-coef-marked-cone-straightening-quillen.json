@@ -31,9 +31,212 @@
   "lem-coef-marked-relative-cartesian-model",
   "lem-coef-simplicial-model-coherent-diagrams"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First use the same cone formula for arbitrary small simplicial indexing categories, so the canonical index $\\mathfrak C[S]^{\\mathrm{op}}$ is allowed even when it is not locally Kan. The projective model structures exist by [lem-coef-simplicial-projective-model-calculus]. The simplicial-model tensor acts using the sharp marking on the acting simplicial set. If a marked cone edge is $g^*\\widetilde e$ and $h$ is any acting edge, its image is $(gh)^*\\widetilde e$, again in the prescribed marking; identities and composition follow from those in $D_X$. A map of marked objects carries these generators to the corresponding generators, so the construction is functorial. It preserves small colimits: the pushout presents its arrows by strings of old-category arrows followed by cone arrows, with exactly the relations from the simplices of $X$; gluing $X$ glues these generators and relations, and gluing markings takes their image-union. Equivalently a compatible family of maps from these cone diagrams into a fixed diagram is exactly the family of simplexwise cone maps satisfying the face/degeneracy relations and the marked-edge conditions. This also verifies colimit preservation when vertices of $X$ are identified in the colimit.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Construction preceding Definition 3.2.1.2, Definition 3.2.1.2 and Proposition 3.2.1.4(1)."
+   }
+  },
+  {
+   "text": "Construct the right adjoint directly. For a diagram $F$, an $n$-simplex of $U_\\phi F$ over $\\sigma:\\Delta^n\\to S$ is a marked enriched natural map $\\operatorname{St}^+_\\phi((\\Delta^n)^\\flat_\\sigma)\\to F$. Operators are precomposition. Mark an edge precisely when its map extends to $\\operatorname{St}^+_\\phi((\\Delta^1)^\\sharp_\\sigma)\\to F$. This extension, if it exists, is unique, because changing a marking changes no underlying cone simplicial set. Constant edges have the extension, so this is a marked object. Decompose any marked $X$ into its minimally marked simplices and the additional marked edges. The colimit property in step 1 identifies maps from $X$ into this $U_\\phi F$ with marked enriched natural maps $\\operatorname{St}^+_\\phi X\\to F$, naturally in both variables. Thus $U_\\phi=\\operatorname{Un}^+_\\phi$ with the actual unit and counit of this bijection.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.2.1.5, direct construction alternative; simplexwise adjunction supplied explicitly."
+   }
+  },
+  {
+   "text": "If $a:T\\to S$, the two cone pushouts for a marked $X\\to T$ are identical after replacing the structure map by $a$; the generated markings are identical too. This gives the base-substitution isomorphism for straightening. For $\\pi:C\\to D$, maps from the cone diagram for $\\pi^{\\mathrm{op}}\\phi$ into a $D$-diagram $G$ are precisely maps from the original cone diagram into $\\pi^*G$: a cone arrow at $d$ is a composite of an old $D^{\\mathrm{op}}$ arrow with an original cone arrow, and the relation is exactly the enriched coend relation for $\\pi_!$. The same assertion holds with markings, since marked generators are their precomposites. This proves $\\operatorname{St}^+_{\\pi^{\\mathrm{op}}\\phi}\\cong\\pi_!\\operatorname{St}^+_\\phi$. The coend exists since the marked category is cocomplete and tensored; restriction has the objectwise limits needed for the enriched Kan adjunction. Taking the Hom bijections of these two left-adjoint identifications gives respectively $a^*U_\\phi\\cong U_{\\phi\\mathfrak C[a]}$ and $U_{\\pi^{\\mathrm{op}}\\phi}\\cong U_\\phi\\pi^*$. For two substitutions the cone generators have the same image and the same relations in either order. Hence the canonical comparisons agree for composites and identities, as do their right mates.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(2)-(3); composition and identity checked on cone generators."
+   }
+  },
+  {
+   "text": "Every monomorphism of marked objects is obtained by attaching missing nondegenerate simplices by $(\\partial\\Delta^n)^\\flat\\to(\\Delta^n)^\\flat$ and then adjoining missing marked edges by $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$, with the specified maps to $S$. The generator calculations of [lem-coef-marked-cone-generator-calculations], followed by the two substitutions in step 3, show that straightening carries these generators to projective cofibrations. For any indexing functor, restriction preserves objectwise fibrations and trivial fibrations, so its enriched left Kan adjoint preserves projective cofibrations and trivial cofibrations by the lifting characterization. Colimit preservation now extends the result to all cofibrations. Apply the same argument to the four marked-anodyne generator types and use their weak saturation: the image of every marked-anodyne map is a projective trivial cofibration. This last assertion concerns marked-anodyne maps, not yet all Cartesian trivial cofibrations.",
+   "uses": [
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.7 and Proposition 3.2.1.11, reduction to canonical generator calculations."
+   }
+  },
+  {
+   "text": "We prove the point comparison, retaining its map. Use the quotient $Q^n$ and maximum augmentation of [lem-coef-marked-cone-generator-calculations] to obtain $\\alpha:T\\to\\mathrm{id}$. On a simplex with marking generated by a chosen edge, its image is that same edge (or a degenerate edge); thus the augmentation is a marked map, as also supplied by the calculation. It is an isomorphism on a vertex and on either marking of an edge. The inclusion $j:\\operatorname{Sp}[n]\\hookrightarrow\\Delta^n$ has the left lifting property against inner fibrations by [lem-cbc-spine-inner-anodyne]. Here is the passage to the marked generating class. Factor $j$ by repeatedly attaching all inner-horn lifting problems over $\\Delta^n$, starting at the spine, and take the union after countably many rounds. Each horn has finitely many nondegenerate simplices, so every horn problem into this union occurs at one round; the remaining map $p:Z\\to\\Delta^n$ is an inner fibration. The lifting property of $j$ against $p$ makes $j$ a retract, in the arrow category, of the inner-horn cell inclusion $\\operatorname{Sp}[n]\\to Z$. Minimal marking preserves these pushouts, unions and retracts, so $j^\\flat$ is marked anodyne by generator (i) of [lem-coef-marked-anodyne-lifting-calculus]. Its $T$-image is a weak equivalence by step 4, and $j^\\flat$ itself is a point-model weak equivalence by that node's mapping tests. The augmentation on the spine is an isomorphism, since the spine is the colimit of its vertices and edges. Two-out-of-three proves the assertion on every minimally marked simplex. Induction on finite cell attachments proves it for finite marked simplicial sets: both sides preserve the gluing pushout, the attaching maps and their $T$-images are cofibrations, and these are homotopy pushouts for the following explicit reason. In a span $B\\leftarrow A\\hookrightarrow C$, factor $A\\to B$ as a cofibration $A\\hookrightarrow B^{\\prime}$ followed by a trivial fibration to $B$. The span with $B^{\\prime}$ is projectively cofibrant, since all objects are cofibrant and both legs are cofibrations (extend a lift first on $A$, then on each leg). Its pushout maps to the original pushout by the pushout of $B^{\\prime}\\to B$ along the cofibration $B^{\\prime}\\hookrightarrow B^{\\prime}\\amalg_A C$, hence by a weak equivalence using left properness of [lem-coef-marked-relative-cartesian-model]. By [lem-coef-model-colimit-localization-comparison] these squares become pushouts in the infinity localization. Their universal mapping-space property implies that an objectwise equivalence of the spans induces an equivalence of their pushouts, which is an actual weak equivalence by [lem-coef-model-localization-detects-weak-equivalences]. Adjoining markings is the same argument with the two marked-edge cells. Finally every marked simplicial set is a filtered union of its finite marked subobjects; $T$ preserves that union and the weak-equivalence class is closed under filtered colimits by [lem-coef-marked-saturation-perfect-equivalences]. Therefore every $\\alpha_X$ is a weak equivalence, including $X=\\varnothing$.",
+   "uses": [
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-cbc-spine-inner-anodyne",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-saturation-perfect-equivalences",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.14, with the spine, attachment and filtered-colimit reductions written out."
+   }
+  },
+  {
+   "text": "Specialize the external-product comparison of [lem-coef-marked-cone-external-product] to a second base point, then compose with $\\alpha_K$ from step 5. Products preserve point-model weak equivalences by [lem-coef-marked-point-cartesian-model], so\n$$\\operatorname{St}^+_\\phi(X\\times K)\\longrightarrow\\operatorname{St}^+_\\phi(X)\\times K$$\nis an objectwise weak equivalence. Take $K=(\\Delta^1)^\\sharp$. The final-vertex inclusion into this marked interval is a marked-anodyne generator; therefore its retraction to a point is a weak equivalence. Products preserve this equivalence, so the straightening of the projection $X\\times K\\to X$ is a weak equivalence. Its two endpoint sections consequently become the same inverse in the homotopy category. A marked homotopy $X\\times K\\to Y$ therefore becomes equality of the two endpoint maps after straightening. A Cartesian equivalence between fibrant relative marked objects has a marked inverse up to coherent natural equivalences by [lem-coef-marked-relative-cartesian-model]; these equivalences are edges in $\\operatorname{Map}^{\\sharp}_S$ and thus give the stated marked interval homotopies. Its straightening is invertible in the localized category and is a weak equivalence by [lem-coef-model-localization-detects-weak-equivalences].",
+   "uses": [
+    "lem-coef-marked-cone-external-product",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.2.1.15 and the fibrant-object argument of Corollary 3.2.1.16; equality uses the two sections of the projection."
+   }
+  },
+  {
+   "text": "For any Cartesian equivalence $f:X\\to Y$ over $S$, use [lem-coef-relative-marked-anodyne-replacement] to choose $X\\to X'$ marked anodyne with $X'$ fibrant, and then choose a marked-anodyne fibrant replacement $Y\\amalg_X X'\\to Y'$. The map $Y\\to Y'$ is a composite of marked-anodyne maps and is a Cartesian equivalence. Hence $X'\\to Y'$ is a Cartesian equivalence between fibrant objects by two-out-of-three. Step 6 treats that map, and step 4 treats the other two maps of the commutative square. Thus $\\operatorname{St}^+_\\phi(f)$ is an objectwise weak equivalence. Together with step 4 and the adjunction of step 2, this proves the left Quillen assertion. The derived infinity adjunction, with its actual unit and counit, is furnished by [lem-coef-model-infinity-derived-adjunction]. No simplicial-functor assertion about straightening is needed.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-replacement",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.2.1.16 and Theorem 3.2.0.1(1)."
+   }
+  },
+  {
+   "text": "At a point the left derived functor of $T$ is $T$ itself, since all marked objects are cofibrant, and step 5 identifies it with the identity. Its right derived adjoint is therefore an inverse equivalence. More explicitly, the two triangle identities of the derived adjunction show that an adjoint to an equivalence is its inverse, and that both unit and counit are invertible. Denote the point right adjoint by $U$. For any projectively fibrant diagram $F$ and vertex $s$ of a base, the substitutions of step 3 identify the marked fiber $(U_\\phi F)_s$ with $U(F(\\phi(s)))$: the left adjoint to that fiber is inclusion at $s$, and the corresponding straightening is the enriched free diagram at $\\phi(s)$ applied to $T$. If $\\phi$ is essentially surjective, $\\mathbf RU_\\phi$ detects equivalences. Indeed a weak equivalence of its fibrant outputs is a vertexwise equivalence by [lem-coef-marked-relative-cartesian-model], so $U(F(\\phi(s)))\\to U(G(\\phi(s)))$ is a point weak equivalence for every $s$. The point equivalence makes $F(\\phi(s))\\to G(\\phi(s))$ a weak equivalence. An equivalence in $\\pi_0C$ is represented by vertices whose composites are joined to the identities by finite zigzags of edges; evaluation of a fibrant enriched diagram gives corresponding zigzags of simplicial homotopies, hence inverse maps in its homotopy category. Naturality and two-out-of-three extend the test to every object of $C$. Thus the map of diagrams is an objectwise weak equivalence. Every morphism of the localized diagram category is represented by an actual map from a cofibrant replacement of its source to a fibrant target, by [lem-coef-simplicial-model-nerve-localization]; when the source was fibrant that replacement remains fibrant. The test just proved therefore implies conservativity on the full infinity localization.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.1 and Lemma 3.2.3.2; the point comparison was proved in step 5."
+   }
+  },
+  {
+   "text": "Consider the canonical straightening over $\\Delta^n$, with index $\\mathfrak C[\\Delta^n]^{\\mathrm{op}}$. We prove that its derived unit is invertible. By [lem-coef-cartesian-mapping-simplex-presentation], any relative fibrant replacement of $X$ is Cartesian equivalent to some $M^m(A)$; naturality of the derived unit therefore reduces to that mapping simplex. Choose a weak equivalence $\\operatorname{St}^+_{\\Delta^n}M^m(A)\\to F$ with $F$ projectively fibrant and let $j:M^m(A)\\to U_{\\Delta^n}F$ be its adjoint. Its marked fiber at $i$ is $A_i^\\flat\\to U(F(i))$. By the point adjunction equivalence of step 8, this is a weak equivalence precisely when its adjoint $T(A_i^\\flat)\\to F(i)$ is. That adjoint is exactly\n$$T(A_i^\\flat)\\longrightarrow\\operatorname{St}^+_{\\Delta^n}M^m(A)(i)\\longrightarrow F(i).$$\nThe first map is a weak equivalence by [lem-coef-mapping-simplex-cone-fibers], the second by the choice of $F$. The marked equivalence criterion of [lem-coef-cartesian-mapping-simplex-presentation] now applies to $j$ (its target is fibrant), so $j$ is a Cartesian equivalence. This proves the unit assertion for the simplex. The conservative right derived functor of step 8 and the triangle identity then make its counit invertible as well: applying the right derived functor to the counit gives the inverse of the unit at its right-adjoint image. Hence the canonical adjunction is an equivalence over every simplex.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-mapping-simplex-cone-fibers",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.3.4; mapping-simplex calculation is Lemma 3.2.3.3, rather than a restatement of the unit assertion."
+   }
+  },
+  {
+   "text": "We pass to arbitrary bases using the full homotopy theories, including mapping spaces. Put $\\mathcal D(S)=(\\mathsf M^{\\mathfrak C[S]^{\\mathrm{op}}})[W^{-1}]_\\infty$ and $\\mathcal E(S)=\\mathsf M_S[W^{-1}]_\\infty$. By [lem-coef-simplicial-model-nerve-localization], $\\mathcal E(S)$ is modeled by the simplicial category of fibrant relative objects with mapping spaces $\\operatorname{Map}^{\\sharp}_S$. The right derived functors of step 7 and the substitutions of step 3 give a transformation $\\beta_S:\\mathcal D(S)\\to\\mathcal E(S)$ compatible with restrictions, with their coherent composition data. Restriction preserves fibrant objects; the coherent naturality is induced by the same simplexwise adjunction bijections, not by separate identifications of fibers. The category $\\mathcal D$ sends disjoint unions to products, monomorphic pushouts to pullbacks and increasing sequences of bases to inverse limits by [lem-coef-enriched-diagram-homotopy-descent]. We show that the class of bases where $\\beta_S$ is an equivalence is closed under these operations.",
+   "uses": [
+    "lem-coef-enriched-diagram-homotopy-descent",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.4, proof of Theorem 3.2.0.1; Corollary A.3.6.18 supplies diagram descent."
+   }
+  },
+  {
+   "text": "For a pushout $P=B\\amalg_A C$ with $A\\hookrightarrow C$, suppose $\\beta_A,\\beta_B,\\beta_C$ are equivalences. Restriction gives $\\alpha:\\mathcal E(P)\\to\\mathcal E(B)\\times^h_{\\mathcal E(A)}\\mathcal E(C)$, and $\\alpha\\beta_P$ is an equivalence by the descent assertion for $\\mathcal D$. For fibrant relative objects $X,Y$ over $P$, their restrictions are fibrant. A marked map over $P$, with a simplex parameter, is exactly two marked maps over $B$ and $C$ agreeing over $A$, since pullback of $X$ to this pushout is the corresponding degreewise pushout. Consequently the square of their four $\\operatorname{Map}^{\\sharp}$ spaces is a strict pullback. The map from the $C$-mapping space to the $A$-mapping space is a Kan fibration: after adjunction a horn lifting problem is the pushout product of the cofibration $X_A\\hookrightarrow X_C$ over $C$ and a simplicial horn inclusion, lifted against the fibrant object $Y_C$. The relative simplicial model axiom gives the lift. All four spaces are Kan, so the strict pullback is weakly equivalent to the path-space homotopy pullback by [lem-coef-kan-pullback-path-comparison], i.e. it computes the homotopy pullback of spaces. Its mapping-space criterion, with the factorization $\\alpha\\beta_P$, shows $\\alpha$ is an equivalence; two-out-of-three now makes $\\beta_P$ an equivalence. The case with the other leg monic is obtained by exchanging $B,C$.",
+   "uses": [
+    "lem-coef-enriched-diagram-homotopy-descent",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.4.2 and the pushout argument of Theorem 3.2.0.1; mapping-space criterion is Corollary A.3.2.28."
+   }
+  },
+  {
+   "text": "For a disjoint union of bases, marked objects, fibrant objects and their mapping spaces decompose as products. The limit mapping-space test of [lem-coef-enriched-diagram-homotopy-descent], and its assertion for $\\mathcal D$, therefore gives closure under disjoint unions, including the empty base (both homotopy theories are terminal). For an increasing sequence $S_n$ with union $S$, assume all $\\beta_{S_n}$ are equivalences. As above the composite $\\mathcal D(S)\\xrightarrow{\\beta_S}\\mathcal E(S)\\xrightarrow{\\alpha}\\lim_n\\mathcal E(S_n)$ is an equivalence. For fibrant $X,Y$ over $S$, their mapping Kan complex is exactly the strict inverse limit of the restriction mapping complexes over $S_n$, degree by degree. Every successive restriction is a Kan fibration by the lifting argument in step 11; hence that inverse limit is the homotopy limit by [lem-coef-enriched-diagram-homotopy-descent]. Its mapping-space criterion makes $\\alpha$ and then $\\beta_S$ equivalences. Finally build any small $S$ by its skeleta: $\\operatorname{sk}_0S$ is a coproduct of points, and $\\operatorname{sk}_{n-1}S\\to\\operatorname{sk}_nS$ is a pushout of the coproduct of boundary inclusions over its nondegenerate $n$-simplices. Each boundary is a finite union of lower-dimensional simplices, built by the same pushout induction, so step 9 and induction give all finite skeleta. The increasing union of the skeleta is $S$. This proves the canonical straightening equivalence for every small base.",
+   "uses": [
+    "lem-coef-enriched-diagram-homotopy-descent",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.4, increasing-union case filled in; skeletal generation underlying Lemma 2.2.3.5."
+   }
+  },
+  {
+   "text": "For the original Dwyer--Kan equivalence $\\phi:\\mathfrak C[S]\\to C^{\\mathrm{op}}$, its opposite $v:\\mathfrak C[S]^{\\mathrm{op}}\\to C$ is Dwyer--Kan. By [lem-coef-simplicial-projective-model-calculus], $v_!\\dashv v^*$ is a Quillen equivalence of marked projective diagram models, with no local Kan condition on the source. Step 3 identifies the original straightening adjunction with the composite of this adjunction and the canonical one proved equivalent in step 12. Their derived adjunctions are therefore inverse equivalences. By [lem-coef-model-infinity-derived-adjunction] their units and counits are the images of the ordinary adjunction maps with the specified replacements. Thus $X\\to U_\\phi R\\operatorname{St}^+_\\phi X$ is a weak equivalence, using detection of model weak equivalences by localization. For projectively fibrant $F$, its right derived image is $U_\\phi F$ itself and this is cofibrant, because every object of $\\mathsf M_S$ is cofibrant. Therefore the ordinary counit $\\operatorname{St}^+_\\phi U_\\phi F\\to F$ already computes the derived counit and is an objectwise weak equivalence. This proves both displayed assertions with exactly the replacements in the statement. Step 3 proved all substitution and coherence clauses; step 5 proved the asserted natural weak equivalence at the point.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1(2), reduction via Proposition A.3.3.8, and the derived unit/counit representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-marked-cone-generator-calculations",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-cbc-spine-inner-anodyne",
+  "lem-coef-marked-saturation-perfect-equivalences",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-marked-cone-external-product",
+  "lem-coef-relative-marked-anodyne-replacement",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-mapping-simplex-cone-fibers",
+  "lem-coef-enriched-diagram-homotopy-descent",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit one-level split following HTT Sections 3.2.1–3.2.4, read online; six technical inputs stated separately. The book is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +258,45 @@
    "results": "{\"t\": \"2026-10-16T18:26:12Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|CartesianModel|StPlus|UnPlus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: no marked cone straightening construction was returned; QCat and ordinary category IsCocartesian do not state the marked-model unit/counit theorem. grep for MarkedSSet, MarkedSimplicial, CartesianModel, StPlus and UnPlus returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked cone straightening and unstraightening form a Quillen equivalence for Cartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T19:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"Marked cone straightening and unstraightening form a Quillen equivalence for Cartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.WithTerminal.coneEquiv_counitIso_hom_app_hom\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_functor\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_inverse\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_counitIso\", \"CategoryTheory.Over.ConstructProducts.conesEquivInverse_obj\", \"CategoryTheory.Over.ConstructProducts.conesEquivInverse\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_unitIso\"], \"digest\": \"81d825f1b96cdc95\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary cone categories, Grothendieck categories, the unmarked SSet cofibration/fibration classes, and the definition of the coherent nerve. None constructs marked cone straightening or proves its Quillen equivalence. SimplicialNerve.lean:26-33 leaves even the locally Kan nerve theorem as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Quillen\"",
+   "results": "{\"t\": \"2026-10-16T19:39:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\"], \"digest\": \"c07b5afca0134e97\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary cone categories, Grothendieck categories, the unmarked SSet cofibration/fibration classes, and the definition of the coherent nerve. None constructs marked cone straightening or proves its Quillen equivalence. SimplicialNerve.lean:26-33 leaves even the locally Kan nerve theorem as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|MarkedSSet|MarkedSimplicial|Dwyer.?Kan",
+   "results": "{\"t\": \"2026-10-16T19:39:06Z\", \"tool\": \"grep\", \"query\": \"straighten|unstraighten|MarkedSSet|MarkedSimplicial|Dwyer.?Kan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary cone categories, Grothendieck categories, the unmarked SSet cofibration/fibration classes, and the definition of the coherent nerve. None constructs marked cone straightening or proves its Quillen equivalence. SimplicialNerve.lean:26-33 leaves even the locally Kan nerve theorem as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Straightening of marked simplicial sets into projective enriched diagrams",
+   "results": "{\"t\": \"2026-10-16T19:39:06Z\", \"tool\": \"leansearch\", \"query\": \"Straightening of marked simplicial sets into projective enriched diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialNerve\", \"SSet.toTop\", \"sSetTopAdj\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.instCartesianMonoidalCategory\"], \"digest\": \"eaa20c6d10a7d503\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary cone categories, Grothendieck categories, the unmarked SSet cofibration/fibration classes, and the definition of the coherent nerve. None constructs marked cone straightening or proves its Quillen equivalence. SimplicialNerve.lean:26-33 leaves even the locally Kan nerve theorem as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck construction classifies Cartesian fibrations by diagrams of infinity categories",
+   "results": "{\"t\": \"2026-10-16T19:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction classifies Cartesian fibrations by diagrams of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck\", \"CategoryTheory.Grothendieck.functorFrom\", \"CategoryTheory.Grothendieck.functorFrom_obj\", \"CategoryTheory.Grothendieck.grothendieckTypeToCatInverse\", \"CategoryTheory.Grothendieck.instCategory\", \"CategoryTheory.Pseudofunctor.Grothendieck.category\", \"CategoryTheory.Grothendieck.Hom\", \"CategoryTheory.Pseudofunctor.Grothendieck.ext_iff\"], \"digest\": \"6d2497b968e98077\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary cone categories, Grothendieck categories, the unmarked SSet cofibration/fibration classes, and the definition of the coherent nerve. None constructs marked cone straightening or proves its Quillen equivalence. SimplicialNerve.lean:26-33 leaves even the locally Kan nerve theorem as future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "N9 second reader",
   "item": "lem-coef-cocartesian-straightening",
@@ -66,5 +304,29 @@
   "group": "N9"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-cone-straightening-quillen",
+  "worker": "stage1",
+  "summary": "Read the marked cone construction and HTT Sections 3.2.1–3.2.4 online. Preserved the statement. Constructed the adjoint by simplex tests, proved substitutions on cone generators, derived the point comparison by spine/cell induction, proved weak-equivalence preservation, obtained the simplex unit using mapping-simplex presentations, and carried out the global mapping-space gluing and skeletal induction before deriving both actual unit and counit. Six statement-only technical children, no Mathlib leaves or project attachments. No Stacks tag covers the marked simplicial inputs.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 uses coherent finite-coefficient adjunction diagrams. This item supplies the marked straightening foundation below its algebroid external-product construction, through the recorded via chain. Steps 1–7 realize the cone/Quillen construction; steps 8–13 realize the straightening equivalence and its actual unit/counit, and step 3 gives the substitution coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-spine-inner-anodyne",
+    "why": "Generic inner-anodyne inclusion of the spine, needed to reduce the point augmentation to vertices and edges; no coefficient unit statement supplies this simplicial tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-spine-inner-anodyne"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-fef7043c4",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-fef7043c4 (reviewer sub-agent of L); spot-checked: Read the item, all 13 steps, all six new nodes and every cited statement in full. HTT is not in literature/; this is recorded as agent proof plus WANTED, so I checked the steps against HTT 2.2.2, 3.1.1.6, 3.1.3.4, 3.2.1.4–3.2.1.16, 3.2.2.7/3.2.2.14, 3.2.3.1–3.2.3.4, 3.2.4, A.3.3.8 and A.3.6.18 as I know them, and recomputed the small cases myself. The item statement is unchanged from base and the variance is correct: tilde e goes from {x,v} to {x,y,v}, the substitution mates are correct, and Un F is cofibrant, which removes Q from the counit. Checked: the projective model has no local-Kan hypothesis; spine to type-(i) marked anodyne by the small-object and retract argument; left-proper homotopy pushouts; the external product at a point with {1} in (Delta^1)^sharp a generator; Map-sharp homotopy inverses; relative replacement and two-out-of-three; free-diagram fibre U(F(phi s)); the adjoint of the fibre is T(A_i)->St M(i)->F(i); the strict Map-sharp pullback with an SM7 Kan fibration; towers and skeleta; DK change of index. New nodes tested on small cases: Q^1 = Delta^1 with max an isomorphism; the subset-cube quotient matches the cone mapping space via the retraction J -> J cap [max J_0, n]; the mapping simplex over Delta^1 at i=0,1; empty and point bases. None restates a clause of the item. The spine tool use (sk-prop-sf-cbc) is accepted. Two duplicate clauses were repaired: (1) the explicit Q^n quotient and max map in lem-coef-marked-cone-generator-calculations restated the existing lem-coef-pinched-cube-latching, so that node is now cited and added to stmt_deps; (2) the Kan strict-pullback clause in lem-coef-enriched-diagram-homotopy-descent restated lem-coef-kan-pullback-path-comparison, so the clause is removed and item step 11 now cites that node (in uses and proof_deps). No cycles. Minor, unchanged: the report says the item's source.place was rewritten, but it is identical to base.; 3 file(s) fixed by the reviewer"
+ }
 }
