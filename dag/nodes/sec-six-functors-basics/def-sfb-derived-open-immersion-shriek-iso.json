@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-derived-open-immersion-shriek-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension by zero commutes with $T$",
- "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings, with derived\nextensions of scalars $T^X$ ([sk-def-sfb-coefficient-change]), and $j\\colon U\\to X$ an open\nimmersion. The natural isomorphism\n\n$$\nT^X\\circ D(j_!)\\;\\cong\\;D(j_!)\\circ T^U\\colon D(\\Mod_{\\Lambda_U})\\longrightarrow\nD(\\Mod_{\\Lambda'_X})\n$$\n\non the unbounded derived categories, with $D(j_!)$ the levelwise extension by zero\n([sk-def-sfb-module-lower-shriek]), is the conjugate ([def-sfb-conjugate-pull-iso]) of the\nisomorphism $D(\\operatorname{Res}_{a_U})\\circ D(j^*)\\cong D(j^*)\\circ D(\\operatorname{Res}_{a_X})$\nof [def-sfb-derived-comap-upper-star-iso] along the adjunctions $D(j_!)\\dashv D(j^*)$\n([sk-prop-sfb-module-derived-factorization]) and $T\\dashv D(\\operatorname{Res})$\n([sk-def-sfb-derived-extension-of-scalars]). No flatness of $a$ is needed.",
+ "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings, with derived\nextensions of scalars $T^X$ ([sk-def-sfb-coefficient-change]), let $X$ and $U$ be schemes, and let\n$j\\colon U\\to X$ be an open immersion. The natural isomorphism\n\n$$\nT^X\\circ D(j_!)\\;\\cong\\;D(j_!)\\circ T^U\\colon D(\\Mod_{\\Lambda_U})\\longrightarrow\nD(\\Mod_{\\Lambda'_X})\n$$\n\non the unbounded derived categories, with $D(j_!)$ the levelwise extension by zero\n([sk-def-sfb-module-lower-shriek]), is the conjugate ([def-sfb-conjugate-pull-iso]) of the\nisomorphism $D(\\operatorname{Res}_{a_U})\\circ D(j^*)\\cong D(j^*)\\circ D(\\operatorname{Res}_{a_X})$\nof [def-sfb-derived-comap-upper-star-iso] along the adjunctions $D(j_!)\\dashv D(j^*)$\n([sk-def-sfb-module-lower-shriek], [lem-weil-pbc-localization-universal-property]) and $T\\dashv D(\\operatorname{Res})$\n([sk-def-sfb-derived-extension-of-scalars]). No flatness of $a$ is needed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
   "place": "node def-sfb-derived-open-immersion-shriek-iso, order 1745"
@@ -17,14 +17,121 @@
   "sk-def-sfb-module-lower-shriek",
   "def-sfb-conjugate-pull-iso",
   "def-sfb-derived-comap-upper-star-iso",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient ring $B=\\Lambda,\\Lambda'$, the exact extension by zero $j_!^B$ and its adjunction $j_!^B\\dashv j_B^*$ are supplied by [sk-def-sfb-module-lower-shriek]. Write $F_B=D(j_!^B)$ and $G_B=D(j_B^*)$. Here $D$ is localization of cochain complexes at quasi-isomorphisms, using only the opening unbounded-localization convention of the current [sk-def-sfb-derived-categories]. Its conditional assertions about resolution-computed derived functors are not needed: we construct the termwise functor directly as follows. To construct $F_B$ without any resolution hypotheses, apply exactness of $j_!^B$ to $0\\to Z^nC\\to C^n\\to B^{n+1}C\\to0$ and $0\\to B^nC\\to Z^nC\\to H^nC\\to0$. These exact sequences identify the cycles and boundaries of $j_!^BC$ with $j_!^BZ^nC$ and $j_!^BB^nC$, and give $H^n(j_!^BC)\\cong j_!^BH^n(C)$, naturally in $C$. Consequently termwise $j_!^B$ preserves quasi-isomorphisms. Let $Q_U^B,Q_X^B$ be the cochain localization functors defining the unbounded derived categories. Apply clause (1) of [lem-weil-pbc-localization-universal-property] to $Q_X^B\\circ\\mathrm{CoCh}(j_!^B)$: it sends every quasi-isomorphism to an isomorphism, so it descends to $F_B$ with its termwise factorization isomorphism. The termwise pullbacks $G_\\Lambda,G_{\\Lambda'}$, including their factorization isomorphisms, are the functors appearing in [def-sfb-derived-comap-upper-star-iso] specialized to $f=j$. Apply the underived adjunction degreewise to cochain complexes: its natural unit $\\eta^B$ and counit $\\varepsilon^B$ are chain maps, since their naturality equations applied to each differential are exactly the chain-map equations. The two triangle identities hold in each degree. With the termwise factorization identifications, clause (2) of [lem-weil-pbc-localization-universal-property] descends $Q_U^B\\eta^B$ to $\\bar\\eta^B:1\\to G_BF_B$ and $Q_X^B\\varepsilon^B$ to $\\bar\\varepsilon^B:F_BG_B\\to1$. On $Q_U^BC$ and $Q_X^BE$, respectively, the composites $\\bar\\varepsilon^B_{F_B(-)}\\circ F_B(\\bar\\eta^B)$ and $G_B(\\bar\\varepsilon^B)\\circ\\bar\\eta^B_{G_B(-)}$ are the images of the degreewise triangle identities, hence identities. Clause (3) of the same localization statement makes these identities of natural transformations on the whole derived categories. Thus these descended maps define $F_B\\dashv G_B$, precisely the ambient levelwise adjunction required in the statement.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-derived-categories",
+    "def-sfb-derived-comap-upper-star-iso",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+    "place": "Definition, ambient adjunction input; coefficient-comparisons unit proof, Extension by zero paragraph. Descent expanded by lem-weil-pbc-localization-universal-property: Stacks Tag 04VG, categories.tex, lemma-properties-left-localization (3), for functor descent; natural-transformation descent and equality detection are the fully faithful precomposition formulation, as in Mathlib CategoryTheory/Localization/Predicate.lean:278-292."
+   }
+  },
+  {
+   "text": "Apply [def-sfb-conjugate-pull-iso] with $\\mathcal A=D(\\Mod_{\\Lambda_X})$, $\\mathcal B=D(\\Mod_{\\Lambda'_X})$, $\\mathcal A'=D(\\Mod_{\\Lambda_U})$, and $\\mathcal B'=D(\\Mod_{\\Lambda'_U})$. Set $E_1=T^X$, $E_2=T^U$, $\\mathrm{Res}_1=D(\\operatorname{Res}_{a_X})$, $\\mathrm{Res}_2=D(\\operatorname{Res}_{a_U})$, $U_1=F_\\Lambda$, $U_2=F_{\\Lambda'}$, $L_1=G_\\Lambda$ and $L_2=G_{\\Lambda'}$. The two coefficient adjunctions are part of [sk-def-sfb-coefficient-change] (equivalently the derived extension/restriction adjunction of [sk-def-sfb-derived-extension-of-scalars]); the two open adjunctions are step 1. The isomorphism of [def-sfb-derived-comap-upper-star-iso] for $f=j$ is exactly $e:\\mathrm{Res}_2L_2\\cong L_1\\mathrm{Res}_1$. Its conjugate therefore has source $E_1U_1=T^X D(j_!^\\Lambda)$ and target $U_2E_2=D(j_!^{\\Lambda'})T^U$. Define the comparison in this node to be that conjugate. This specifies the actual natural isomorphism, not merely its existence. All four categories are unbounded, and none of the cited inputs assumes flatness of $a$; hence the construction requires no such hypothesis.",
+   "uses": [
+    "def-sfb-conjugate-pull-iso",
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "def-sfb-derived-comap-upper-star-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+    "place": "Entire definition: conjugation of derivedComapUpperStarIso, and final no-flatness clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-derived-comap-upper-star-iso",
+  "lem-weil-pbc-localization-universal-property",
+  "def-sfb-conjugate-pull-iso",
+  "sk-def-sfb-coefficient-change",
   "sk-def-sfb-derived-extension-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+  "place": "Definition; unit Extension by zero paragraph, with descent of the ambient adjunction expanded explicitly by the localization universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedOpenImmersionShriekIso|conjugateIsoEquiv|derived.*[Ee]xtend.*[Aa]djunction",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-17",
+   "verdict": "Generic conjugation/derived-adjunction tools only; read Mates.lean:425-437 and Derived/Adjunction.lean:38-62,92-150. These do not supply the project module-object functors or their derived open adjunction, so do not state the whole comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-17",
+   "verdict": "Generic conjugation/derived-adjunction tools only; read Mates.lean:425-437 and Derived/Adjunction.lean:38-62,92-150. These do not supply the project module-object functors or their derived open adjunction, so do not state the whole comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived change of coefficients commutes with extension by zero for an open immersion of schemes",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc; AlgebraicGeometry.Scheme.Hom.appIso; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom; AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary module scalar extension, scheme structure-sheaf restriction, or generic derived-adjunction declarations; none states this pro-etale condensed-coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with extension by zero for modules on the pro-etale site along an open immersion, by conjugating the restriction pullback isomorphism",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv; ModuleCat.homEquiv_extendScalarsComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; SheafOfModules.freeFunctorCompPullbackIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary module scalar extension, scheme structure-sheaf restriction, or generic derived-adjunction declarations; none states this pro-etale condensed-coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between composites of left adjoints from a commutation isomorphism of the right adjoints, specialized to unbounded derived extension of scalars and extension by zero",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary module scalar extension, scheme structure-sheaf restriction, or generic derived-adjunction declarations; none states this pro-etale condensed-coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|mapDerivedCategory.*[Aa]dj|derivedAdjunction",
+   "results": "5 hits: Mathlib/CategoryTheory/Localization/Predicate.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean",
+   "date": "2026-10-17",
+   "verdict": "Read Localization/Predicate.lean:260-292 and Functor/Derived/Adjunction.lean:38-150. Generic localization and derived-adjunction interfaces only; none states the condensed-coefficient comparison or provides its geometric functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact adjunction induces an adjunction on localizations of categories of cochain complexes at quasi-isomorphisms",
+   "results": "8 hits: CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-17",
+   "verdict": "Read Localization/Predicate.lean:260-292 and Functor/Derived/Adjunction.lean:38-150. Generic localization and derived-adjunction interfaces only; none states the condensed-coefficient comparison or provides its geometric functors."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedOpenImmersionShriekIso|derivedExtendMapDerivedCategoryAdjunction|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/Condensed/Light/Small.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search. Generic derived adjunction and conjugation tools only; read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:38-62 and Mathlib/CategoryTheory/Adjunction/Mates.lean:425-437. These do not state the condensed-coefficient geometric comparison; conjugation is already represented by def-sfb-conjugate-pull-iso."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint functors induced on derived categories commute with a change of coefficients by uniqueness of left adjoints to naturally isomorphic composites of right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search. Generic derived adjunction and conjugation tools only; read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:38-62 and Mathlib/CategoryTheory/Adjunction/Mates.lean:425-437. These do not state the condensed-coefficient geometric comparison; conjugation is already represented by def-sfb-conjugate-pull-iso."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -48,5 +155,29 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-derived-open-immersion-shriek-iso",
+  "worker": "stage1",
+  "summary": "Revalidated the returned delivery against every current cited statement, especially the revised sk-def-sfb-derived-categories. Step 1 now explicitly limits that citation to its unbounded-localization convention; exactness gives preservation of quasi-isomorphisms by the displayed cycle/boundary calculation, and localization descends the unit, counit and triangles without resolution hypotheses. Step 2 substitutes the four adjunctions into conjugation. Preserved the geometric statement and route, repaired the dangling unit citation, and refreshed the report and citation evidence; no new nodes. Independent second reading: made the functor supplied to localization explicit, corrected the source pinpoint to Tag 04VG with the separate fully faithful precomposition attribution, and repeated semantic and source searches; all statements and dependencies are retained.",
+  "blueprint": "Realizes the complete definition at order 1745 and the Extension by zero paragraph (step 4) of sk-def-sfb-coefficient-comparisons. The parenthetical sk-prop-sfb-module-derived-factorization is a unit record: its open-adjunction clause is expanded in step 1 rather than cited as a nonexistent DAG node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization descent of unit and counit, and equality detection, supplies the missing ambient levelwise adjunction without restricting schemes or coefficients or replacing the unit conjugation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-463dc0b8e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-463dc0b8e (reviewer sub-agent of L); spot-checked: I read the whole item, the unit sk-def-sfb-coefficient-comparisons, unit sk-prop-sfb-module-derived-factorization clause 6 and the main-20261015 blueprint item at order 1745. The statement matches the source. The only changes are that X and U are now named as schemes and that a citation which pointed to a unit, not a DAG node, was replaced. No hypothesis was added, none was dropped and none was weakened. The coefficient category is layer B, D(Mod(Sh(X_proet,Ab),Lambda_X)). Step 1 builds the adjunction D(j_!) ⊣ D(j^*) on the unbounded derived categories. Exactness of j_! comes from sk-def-sfb-module-lower-shriek. The calculation of cycles, boundaries and cohomology shows that termwise j_! preserves quasi-isomorphisms. lem-weil-pbc-localization-universal-property clause (1) then descends the functor, clause (2) descends the unit and counit, and clause (3) extends the triangle identities from objects of the form Q(C) to all objects. I checked this against Stacks 04VG (categories.tex:4406) and Mathlib Localization/Predicate.lean:274-290. The pullback j^* is the same module pullback that def-sfb-derived-comap-upper-star-iso uses. The step uses no resolutions, no boundedness and no flatness. Step 2 puts these adjunctions into def-sfb-conjugate-pull-iso (A=D(Lambda_X), B=D(Lambda'_X), A'=D(Lambda_U), B'=D(Lambda'_U)). I checked every functor's domain and codomain. The isomorphism e is def-sfb-derived-comap-upper-star-iso at f=j, from D(Lambda'_X) to D(Lambda_U). Its conjugate is T^X D(j_!) ≅ D(j_!) T^U, the stated direction. sk-def-sfb-coefficient-change supplies T ⊣ D(Res) for any a. The localization lemma is a Mathlib leaf, so it is a tool, not part of the route. The declared tool_use is not needed, but it is accurate and I accept it. There are no new nodes. None of def-sfb-open-immersion-shriek-iso, def-sfb-dc-open-lower-shriek-adjunction, def-sfb-finite-derived-extension-by-zero-adjunction (layer A) or det-prop-scalar-six-pullback (2) states the item. Edge cases pass: j = id, U empty, the nonflat map Z to Z/2, and unbounded complexes. One minor remark, not a fault: step 1 repeats what the existing leaf lem-weil-pbc-exact-functor-derived-factorization already states. No fixes were written."
+ }
 }

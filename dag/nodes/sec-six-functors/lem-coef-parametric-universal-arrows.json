@@ -28,62 +28,164 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a universe containing all the simplicial sets in question. Form the coherent comma quasicategory\n$$E=\\mathcal C\\times_{\\mathcal D,\\mathrm{ev}_0}\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\mathrm{ev}_1,\\mathcal D}\\mathcal D_0.$$\nWrite its objects as $e=(c,d,a:Tc\\to\\iota d)$ and its target projection as $p:E\\to\\mathcal D_0$. Here and below the same construction may be made for any two functors into a quasicategory. Endpoint restriction is an isofibration by [lem-coef-infinity-isofibration-exponentiation], applied to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and $\\mathcal D\\to *$. Its pullback gives $E$ as a quasicategory by [lem-coef-infinity-isofibration-pullback-limit]. The projection $p$ is an isofibration: the pullback endpoint map is one, and the projection $\\mathcal C\\times\\mathcal D_0\\to\\mathcal D_0$ fills inner horns using those of $\\mathcal C$ and lifts an equivalence with the identity of its $\\mathcal C$-coordinate.\nFor $e'=(c',d',a')$, the mapping-space calculation is\n$$\\operatorname{Map}_E(e,e')\\simeq\\operatorname{Map}_{\\mathcal C}(c,c')\\mathop{\\times}^{h}_{\\operatorname{Map}_{\\mathcal D}(Tc,\\iota d')}\\operatorname{Map}_{\\mathcal D_0}(d,d'),\\tag{*}$$\nwith legs $h\\mapsto a'Th$ and $b\\mapsto\\iota(b)a$. To justify (*) rather than assume a comma theorem: in the arrow mapping-space model $U$, maps in this degreewise pullback are the pullback of $U_{\\operatorname{Arr}(\\mathcal D)}(a,a')$ along $U_{\\mathcal C}(c,c')\\times U_{\\mathcal D_0}(d,d')$. The endpoint map on these $U$ spaces is a Kan fibration by the last clause of [lem-coef-infinity-isofibration-exponentiation]. Thus this strict pullback computes the homotopy pullback by [lem-coef-kan-quillen-right-proper]. Use the endpoint-compatible square formula [lem-coef-infinity-arrow-morphism-square], the natural pinch equivalences [lem-coef-infinity-pinch-comparison], and homotopy-pullback invariance [lem-coef-kan-homotopy-pullback-invariance] to obtain (*). Its projection to the second factor is the actual functor $p$ on mapping spaces. All comparisons preserve the specified endpoint projections and coherent composition. Explicitly, after the endpoint base change the path-space model consists of triples $(h,b,\\gamma)$ with $\\gamma:a'Th\\simeq\\iota(b)a$, which is exactly the right side of (*). If an endpoint comparison commutes only by its specified homotopy, insert that homotopy before or after $\\gamma$; the inverse comparison inserts the reverse homotopy. Path concatenation and cancellation give inverse homotopies. Thus the use of homotopy-pullback invariance does not assume that a merely homotopy-commutative square commutes strictly.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: comma construction and its mapping-space formula from the existing endpoint theorems"
+   }
+  },
+  {
+   "text": "Let $U\\subset E$ be the full subcategory of universal arrows, namely those $(r,d,\\epsilon)$ for which $h\\mapsto\\epsilon Th$ is an equivalence for every $c\\in\\mathcal C$. This is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. If the target $u=(r,d',\\epsilon)$ is in $U$, the first leg of (*) is an equivalence, even when its source $e=(c,d,a)$ is an arbitrary object of $E$. Its pullback therefore makes\n$$p_*:\\operatorname{Map}_E(e,u)\\xrightarrow{\\sim}\\operatorname{Map}_{\\mathcal D_0}(d,d')$$\nan equivalence; this is the pullback of an equivalence of spaces, justified by [lem-coef-kan-quillen-right-proper]. In particular $p_U=p|_U$ is fully faithful. It hits every object of $\\mathcal D_0$ by the hypothesis of the item. Its full essential image is therefore all of $\\mathcal D_0$, so [lem-coef-infinity-full-essential-image] supplies a coherent inverse $s:\\mathcal D_0\\to U$ and a specified equivalence $\\beta:p_Us\\simeq\\mathrm{id}$. Project $s$ to $\\mathcal C$ to get $R$. The arrows of $s$, followed by $\\iota\\beta$, give $\\epsilon:TR\\to\\iota$. Composing a universal arrow with an equivalence of targets preserves its mapping-space universal property. This constructs the requested partial adjoint without requiring that $TR(d)$ land in $\\mathcal D_0$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: full universal-arrow subcategory is equivalent to the partial domain"
+   }
+  },
+  {
+   "text": "The choice space is the space of sections of $p_U$, or equivalently its homotopy-section space consisting of $(s,\\beta:p_Us\\simeq\\mathrm{id})$. These include the representing arrows, hence precisely the data $(R,\\epsilon)$ in the assertion, with their higher coherences. We verify the equivalence of these models. Universality is invariant under equivalences in $E$: the two endpoint components are equivalences by [lem-cbc-enhanced-functor-cone-calculus], and conjugating (*) by their inverse edges preserves its universal maps. Thus $U$ is replete in $E$. The isofibration $p$ of Step 1 lifts equivalences to objects still in $U$, so $p_U$ is an isofibration. [lem-coef-infinity-isofibration-exponentiation] makes $\\operatorname{Fun}(\\mathcal D_0,p_U)$ an isofibration. Its strict fiber at the identity computes the homotopy fiber on cores by [lem-coef-infinity-isofibration-pullback-limit]. Postcomposition with $p_U$ is an equivalence of functor quasicategories: whisker the inverse $s$ and the two coherent inverse equivalences of Step 2. Whiskering is the simplicial exponential operation, and the resulting transformations are equivalences by the componentwise criterion [lem-cbc-enhanced-functor-cone-calculus]. Hence the map on cores is an equivalence. Its homotopy fiber at the identity is contractible: transport along an inverse identifies it with pairs $(x,\\gamma:x\\simeq x_0)$, which contract to $(x_0,\\mathrm{id})$ by their specified paths. The core of the strict section fiber is therefore contractible as well. This establishes the choice-space assertion; it is not a claim that the space of representing objects with their arrows forgotten is contractible.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: contractibility of the complete representing data, via sections of an equivalence"
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow E$. For each $e=(c,d,a)$ choose a universal $u_d=(r_d,d,\\epsilon_d)$. The homotopy fiber over $a$ of the universal equivalence $\\operatorname{Map}_{\\mathcal C}(c,r_d)\\to\\operatorname{Map}_{\\mathcal D}(Tc,d)$ is contractible and nonempty. A point of it is a morphism $v_e:e\\to j(u_d)$ together with a specified path $p(v_e)\\simeq\\mathrm{id}_d$, by the projection-compatible formula (*). For any $u\\in U$, both $\\operatorname{Map}_U(u_d,u)\\to\\operatorname{Map}_{\\mathcal D_0}(d,p_Uu)$ and $\\operatorname{Map}_E(e,ju)\\to\\operatorname{Map}_{\\mathcal D_0}(d,p_Uu)$ are equivalences by Step 2. Precomposition with $v_e$ commutes with these projections up to the specified path $p(v_e)\\simeq\\mathrm{id}_d$, so it too is an equivalence. These are precisely the objectwise hypotheses of [lem-coef-infinity-local-adjoint-criterion] for the functor $j$. It gives $L:E\\to U$, a coherent unit $\\eta:\\mathrm{id}_E\\to jL$, a counit, and coherent triangle identities. Moreover $p\\eta:p\\to p_UL$ is a natural equivalence. Indeed at $e$ both $v_e$ and $\\eta_e$ are universal arrows into $j$; their universal equivalences produce mutually inverse comparison maps between their targets (each composite represents the original arrow). Thus $\\eta_e$ is $v_e$ followed by $j$ of an equivalence. Its image under $p$ is an equivalence, and the componentwise criterion [lem-cbc-enhanced-functor-cone-calculus] proves the claim about $p\\eta$.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: auxiliary reflection of arbitrary comma arrows into universal arrows"
+   }
+  },
+  {
+   "text": "Fix any simplicial set $K$, enlarging the universe to make it small. All functor simplicial sets used here are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Whisker the adjunction $L\\dashv j$ of Step 4 by $K$. This gives the equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(a,jV)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,U)}(La,V).$$\nHere the forward map is $k\\mapsto\\delta_V\\circ Lk$, with $\\delta$ the counit; its inverse is $h\\mapsto jh\\circ\\eta_a$. Naturality and the two triangle identities from [lem-coef-infinity-local-adjoint-criterion] make these composites homotopic to the identity on the entire mapping spaces, including higher simplices. These are the same formulas applied to maps $K\\times\\Delta^n$, so they hold for arbitrary simplicial $K$, not just nerves. Also $\\operatorname{Fun}(K,p_U)$ is an equivalence by whiskering its inverse as in Step 3, and thus induces equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. Combining the two gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(a,jsB)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal D_0)}(p_ULa,p_UsB).$$\nPrecompose with the equivalence $p\\eta_a:pa\\simeq p_ULa$ and postcompose with $\\beta B:p_UsB\\simeq B$. Naturality of $\\eta$ and the adjunction triangle identify the resulting map with $k\\mapsto\\beta B\\circ p(k)$. Thus this actual target-projection map is an equivalence to $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal D_0)}(pa,B)$. Composition by the specified equivalences is invertible on mapping spaces using their inverse transformations and their inverse homotopies.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: whiskered reflection; explicit inverse formulas instead of assuming a pointwise mapping theorem"
+   }
+  },
+  {
+   "text": "Now fix $A:K\\to\\mathcal C$, $B:K\\to\\mathcal D_0$, and a transformation $\\alpha:TA\\to\\iota B$. It is exactly a diagram $a=(A,B,\\alpha):K\\to E$. Degreewise exponential identities identify $\\operatorname{Fun}(K,E)$ with the comma construction for $T_*:\\operatorname{Fun}(K,\\mathcal C)\\to\\operatorname{Fun}(K,\\mathcal D)$ and $\\iota_*:\\operatorname{Fun}(K,\\mathcal D_0)\\to\\operatorname{Fun}(K,\\mathcal D)$: reorder $K\\times\\Delta^n\\times\\Delta^1$ and take degreewise pullbacks. Thus the calculation (*) from Step 1 applies to these functor quasicategories as well. It identifies the homotopy fiber over $\\mathrm{id}_B$ of the target-projection map in Step 5 with the homotopy fiber over $\\alpha$ of\n$$\\Phi_{A,B}:\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(A,RB)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal D)}(TA,\\iota B),\\qquad h\\longmapsto(\\epsilon B)\\circ T(h).$$\nThe comparison $\\beta B$ in Step 5 is exactly the one used to define $\\epsilon$, so this is the displayed map in the item. Step 5 makes every such fiber contractible. The source and target of $\\Phi_{A,B}$ are Kan complexes by [lem-cbc-enhanced-functor-cone-calculus]. [lem-cbc-kan-fibration-fiber-criterion] now makes $\\Phi_{A,B}$ an equivalence; if its target is empty, its source must be empty and the same criterion still applies. All constructions are functors, endpoint restriction, coherent composition and the same whiskered unit/counit, so restricting $K$ to any vertex or along any simplicial map $K'\\to K$ commutes with the map $\\Phi$ and its coherence homotopies. This proves naturality and both parameter compatibilities. Reversing simplex order gives the dual argument for $T^{\\mathrm{op}}$, with $\\mathcal D_0^{\\mathrm{op}}$ still full. The opposite mapping-space homotopy types are identified by the natural pinch equivalences [lem-coef-infinity-pinch-comparison] and reversal of the arrow interval; reversal of realization coordinates identifies the opposite Kan complex with the same homotopy type. Taking parameter $K^{\\mathrm{op}}$ gives the partial left adjoint and the dual formula. No presentability, global completeness, or smaller-universe bound was used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: fiberwise proof of the parametric mapping equivalence, naturality and duality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Independent six-step comma-category proof for the partial universal-arrow assembly needed by paragraph 2. The blueprint motivates the application; it does not contain this general infinity-categorical proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "universalArrow|UniversalArrow|partialAdjoint|PartialAdjoint|representable.*profunctor",
-   "results": "{\"t\": \"2026-10-16T16:35:15Z\", \"tool\": \"grep\", \"query\": \"universalArrow|UniversalArrow|partialAdjoint|PartialAdjoint|representable.*profunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"01d20007ee5acd56\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean and the returned ordinary whiskering adjunctions. partialRightAdjoint concerns hom-set bijections in ordinary categories; this node needs equivalences of coherent mapping spaces, including the partial-domain and arbitrary simplicial parameter clauses. The nerve/hoFunctor adjunctions do not assert that result."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"UniversalArrow\"",
-   "results": "{\"t\": \"2026-10-16T16:35:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversalArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean and the returned ordinary whiskering adjunctions. partialRightAdjoint concerns hom-set bijections in ordinary categories; this node needs equivalences of coherent mapping spaces, including the partial-domain and arbitrary simplicial parameter clauses. The nerve/hoFunctor adjunctions do not assert that result."
+   "query": "partialRightAdjoint|UniversalArrow|universal.*arrow|representable.*profunctor",
+   "results": "{\"t\": \"2026-10-16T19:31:19Z\", \"tool\": \"grep\", \"query\": \"partialRightAdjoint|UniversalArrow|universal.*arrow|representable.*profunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\"], \"digest\": \"10c6286771613bc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read PartialAdjoint.lean and the returned signatures. PartialRightAdjointSource, partialRightAdjoint and its object/map constructions use ordinary Category instances and hom-set representability. They do not state the quasicategorical partial adjoint, contractible counit-data choice space or simplicial-parameter formula. Other hits concern the ordinary nerve/hoFunctor or ordinary Kan-extension adjunctions."
   },
   {
    "tool": "leansearch",
-   "query": "Universal morphisms for infinity categorical functors assemble a right adjoint on representable objects",
-   "results": "{\"t\": \"2026-10-16T16:35:16Z\", \"tool\": \"leansearch\", \"query\": \"Universal morphisms for infinity categorical functors assemble a right adjoint on representable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightAdjoint_of_leftAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.IsRightKanExtension.mk\", \"CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_iff\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Adjunction.representableBy\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_of_isLimit\"], \"digest\": \"e50dc9e7e39ff877\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean and the returned ordinary whiskering adjunctions. partialRightAdjoint concerns hom-set bijections in ordinary categories; this node needs equivalences of coherent mapping spaces, including the partial-domain and arbitrary simplicial parameter clauses. The nerve/hoFunctor adjunctions do not assert that result."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Universal arrows for a functor over a full subcategory assemble a partial right adjoint coherently and induce universal arrows on functor categories",
-   "results": "{\"t\": \"2026-10-16T16:35:23Z\", \"tool\": \"leanfinder\", \"query\": \"Universal arrows for a functor over a full subcategory assemble a partial right adjoint coherently and induce universal arrows on functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.partialRightAdjoint_obj\", \"CategoryTheory.Functor.partialRightAdjointObj\", \"CategoryTheory.Functor.PartialRightAdjointSource\", \"CategoryTheory.Functor.partialRightAdjointMap\", \"CategoryTheory.Functor.partialRightAdjoint_map\", \"CategoryTheory.Functor.partialRightAdjointHomEquiv\", \"CategoryTheory.Functor.partialLeftAdjoint\"], \"digest\": \"f4468b98aa17b0e4\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean and the returned ordinary whiskering adjunctions. partialRightAdjoint concerns hom-set bijections in ordinary categories; this node needs equivalences of coherent mapping spaces, including the partial-domain and arbitrary simplicial parameter clauses. The nerve/hoFunctor adjunctions do not assert that result."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An adjunction of quasicategories induces adjunctions by postcomposition on all coherent functor categories",
-   "results": "{\"t\": \"2026-10-16T16:35:26Z\", \"tool\": \"leanfinder\", \"query\": \"An adjunction of quasicategories induces adjunctions by postcomposition on all coherent functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialObject.coskAdj\", \"SSet.coskAdj\", \"CategoryTheory.Adjunction.whiskerLeft\", \"CategoryTheory.Adjunction.whiskerRight\", \"CategoryTheory.SimplicialObject.skAdj\"], \"digest\": \"e52869a5089f79ea\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean and the returned ordinary whiskering adjunctions. partialRightAdjoint concerns hom-set bijections in ordinary categories; this node needs equivalences of coherent mapping spaces, including the partial-domain and arbitrary simplicial parameter clauses. The nerve/hoFunctor adjunctions do not assert that result."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Relative adjunction representability of mapping spaces functor categories quasicategory",
-   "results": "{\"t\": \"2026-10-16T16:50:58Z\", \"tool\": \"leanfinder\", \"query\": \"Relative adjunction representability of mapping spaces functor categories quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.MorphismProperty.relative.rep\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"sSetTopAdj\", \"CategoryTheory.Adjunction.representableBy\", \"CategoryTheory.Functor.PartialRightAdjointSource\"], \"digest\": \"91e0d747ba6feb46\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second reading. SimplicialNerve.lean:193-207 defines the nerve only; PartialAdjoint.lean:200-229 is an ordinary hom-set representation and Whiskering.lean:28-55 is an ordinary-category adjunction. None states the coherent space-valued classification or the partial quasicategory mapping-space theorem. Returned signatures and these source lines were read."
+   "query": "coherent universal arrows over a full subcategory assemble a partial right adjoint and induce a mapping equivalence on functor categories",
+   "results": "{\"t\": \"2026-10-16T19:31:19Z\", \"tool\": \"leansearch\", \"query\": \"coherent universal arrows over a full subcategory assemble a partial right adjoint and induce a mapping equivalence on functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.partialLeftAdjoint\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.partialRightAdjointObj\", \"CategoryTheory.Functor.partialRightAdjointMap\", \"CategoryTheory.Functor.partialRightAdjoint_obj\", \"CategoryTheory.Adjunction.rightAdjointOfEquiv\", \"CategoryTheory.Functor.pointwiseRightKanExtensionIsUniversal\", \"CategoryTheory.adjunctionOfCostructuredArrowTerminals\"], \"digest\": \"80a98b5fe5f91f82\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read PartialAdjoint.lean and the returned signatures. PartialRightAdjointSource, partialRightAdjoint and its object/map constructions use ordinary Category instances and hom-set representability. They do not state the quasicategorical partial adjoint, contractible counit-data choice space or simplicial-parameter formula. Other hits concern the ordinary nerve/hoFunctor or ordinary Kan-extension adjunctions."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet.QCat\", \"Adjunction\"",
-   "results": "{\"t\": \"2026-10-16T16:52:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.QCat\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second reading. SimplicialNerve.lean:193-207 defines the nerve only; PartialAdjoint.lean:200-229 is an ordinary hom-set representation and Whiskering.lean:28-55 is an ordinary-category adjunction. None states the coherent space-valued classification or the partial quasicategory mapping-space theorem. Returned signatures and these source lines were read."
+   "query": "CategoryTheory.Functor.partialRightAdjoint, CategoryTheory.Adjunction.representableBy, CategoryTheory.Functor.PartialRightAdjoint",
+   "results": "{\"t\": \"2026-10-16T19:31:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.partialRightAdjoint, CategoryTheory.Adjunction.representableBy, CategoryTheory.Functor.PartialRightAdjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.PartialRightAdjoint'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported the unknown identifier CategoryTheory.Functor.PartialRightAdjoint. This is not evidence of absence; the corrected two-identifier Loogle query was run subsequently and is separately recorded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "partial right adjoint on a full subcategory from coherent universal arrows and mapping space equivalences for every simplicial parameter",
+   "results": "{\"t\": \"2026-10-16T19:31:21Z\", \"tool\": \"leanfinder\", \"query\": \"partial right adjoint on a full subcategory from coherent universal arrows and mapping space equivalences for every simplicial parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.partialRightAdjointMap\", \"CategoryTheory.Functor.partialRightAdjoint_map\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.partialLeftAdjoint\", \"sSetTopAdj\"], \"digest\": \"20ed340b4e7875af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read PartialAdjoint.lean and the returned signatures. PartialRightAdjointSource, partialRightAdjoint and its object/map constructions use ordinary Category instances and hom-set representability. They do not state the quasicategorical partial adjoint, contractible counit-data choice space or simplicial-parameter formula. Other hits concern the ordinary nerve/hoFunctor or ordinary Kan-extension adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "def partialRightAdjoint|abbrev PartialRightAdjointSource|def partialRightAdjointHomEquiv|representableBy|noncomputable section",
+   "results": "{\"t\": \"2026-10-16T19:43:14Z\", \"tool\": \"grep\", \"query\": \"def partialRightAdjoint|abbrev PartialRightAdjointSource|def partialRightAdjointHomEquiv|representableBy|noncomputable section\", \"sub\": \"CategoryTheory/Adjunction/PartialAdjoint.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"61\", \"80\", \"86\", \"111\", \"140\"], \"digest\": \"84cbe35f0f26992f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read PartialAdjoint.lean and the returned signatures. PartialRightAdjointSource, partialRightAdjoint and its object/map constructions use ordinary Category instances and hom-set representability. They do not state the quasicategorical partial adjoint, contractible counit-data choice space or simplicial-parameter formula. Other hits concern the ordinary nerve/hoFunctor or ordinary Kan-extension adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|[Uu]niversal|[Cc]omma|[Rr]epresentab",
+   "results": "{\"t\": \"2026-10-16T19:43:14Z\", \"tool\": \"grep\", \"query\": \"adjoint|[Uu]niversal|[Cc]omma|[Rr]epresentab\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the quasicategory-directory grep returned zero hits for adjoints, universal arrows, comma categories or representability."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.partialRightAdjoint, CategoryTheory.Adjunction.representableBy",
+   "results": "{\"t\": \"2026-10-16T19:43:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.partialRightAdjoint, CategoryTheory.Adjunction.representableBy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the corrected Loogle query returned zero hits; the service was available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal morphisms in quasicategories give coherent partial adjoints, unique with their counits up to a contractible space, and universal arrows on diagram categories",
+   "results": "{\"t\": \"2026-10-16T19:43:20Z\", \"tool\": \"leanfinder\", \"query\": \"Universal morphisms in quasicategories give coherent partial adjoints, unique with their counits up to a contractible space, and universal arrows on diagram categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.QCat.bicategory\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Quasicategory\"], \"digest\": \"6cf281702b3040af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the signatures of the horn-filler, QCat bicategory and nerve/hoFunctor adjunction hits. None constructs partial mapping-space adjoints, their full counit-data choice space or the arbitrary-simplicial-parameter formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-presheaf-limits",
@@ -91,5 +193,34 @@
   "group": "Q66"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-parametric-universal-arrows",
+  "worker": "NC",
+  "summary": "Restored the base statement verbatim and removed the rejected auxiliary Yoneda node. Replaced both the rejected profunctor proof and the first incomplete relative-Kan attempt by a six-step comma-category proof from existing endpoint mapping-space calculus, full-essential-image equivalence and local adjoint criterion. Constructed the partial adjoint and its full choice space, then proved the arbitrary-simplicial-parameter formula by an auxiliary reflection, explicit whiskered unit/counit inverses, and homotopy fibers. Updated source attribution, title, searches and report consistently. No new nodes.",
+  "blueprint": "Proof paragraph 2, the first and last R Hom / R inverse-limit comparisons: coherent space-valued mapping functors, cone spaces and functorial universal arrows.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure, componentwise equivalence and mapping-space invariance for coherent functor quasicategories; needed for comma/full subcategories and whiskered inverse equivalences, not a replacement of the geometric unit route."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic criterion that a map of Kan complexes is an equivalence iff all homotopy fibers are contractible, used to conclude the explicit parameter comparison; no coefficient-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-82375baf7",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-82375baf7 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the statements of the ten cited nodes, the two definition dependencies, the unit record, the blueprint place (main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph 2) and the three citers. The restored statement is the true partial right adjoint (universal arrow) theorem for quasicategories, and the citers use exactly these clauses. Edge cases checked: TR(d) outside D_0 in the poset x<d; empty K; empty D_0; a groupoid case showing that epsilon must stay in the choice space. Step checks: (1) the comma E is a pullback of the exponentiation corner isofibration, and (*) follows from the Kan-fibration clause, right properness, arrow-square and pinch, with homotopy insertion written out. (2) A universal target makes the first leg of (*) an equivalence, so p_U is fully faithful; the hypothesis gives surjectivity, and full-essential-image gives s and beta. (3) U is replete, so p_U is an isofibration; the section fiber of Fun(D_0,U) is exactly the (R,epsilon) data, and its core is the homotopy fiber of an equivalence, hence contractible. (4) The local adjoint criterion applied to j: U to E has exactly its objectwise hypotheses verified, and p(eta) is an equivalence. (5) The whiskered L, j and the explicit target-projection map check. (6) The comma identification of Fun(K,E), the fiber match with Phi using the same beta, the fiber criterion, restriction naturality, and the dual via reversing Delta^1 all check. No new nodes. Not duplicates: lem-coef-infinity-local-adjoint-criterion and lem-coef-infinity-pointwise-adjoint-criterion are total and non-parametric. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion (generic, with precedent in the unit). Kerodon is not archived; the proof is correctly marked agent-written, and the report's WANTED tags differ cosmetically from source 03NQ. The report mentions a sandbox citations.json that is not in the commit; this has no effect. No fixes written."
+ }
 }

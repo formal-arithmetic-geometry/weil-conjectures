@@ -1,0 +1,99 @@
+{
+ "id": "lem-sfb-category-center-linear",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-rationalization-linear",
+   "place": "Proof, last three sentences: R acts through a ring map to the center, and 'A ring map to the center is the same as a linear structure'.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ring maps to the center construct linear structures",
+ "statement": "Let $\\mathcal C$ be a preadditive category [def-weil-preadditive-category]. Define its center $Z(\\mathcal C)$ to consist of families $z=(z_X:X\\to X)_{X\\in\\mathcal C}$ such that $z_Y\\circ f=f\\circ z_X$ for every $f:X\\to Y$; equivalently these are natural endomorphisms of the identity functor. Addition and negation are componentwise, multiplication is composition, and the identity is $(\\mathrm{id}_X)_X$; these operations make $Z(\\mathcal C)$ a commutative ring. Let $B$ be a commutative ring. Any $B$-linear structure on $\\mathcal C$ [def-weil-linear-category] gives a ring homomorphism $\\rho:B\\to Z(\\mathcal C)$ with $\\rho(b)_X=b\\cdot\\mathrm{id}_X$. Conversely, every ring homomorphism $\\phi:B\\to Z(\\mathcal C)$ defines a $B$-linear structure on the fixed morphism groups by $b\\cdot f=f\\circ\\phi(b)_X=\\phi(b)_Y\\circ f$ for $f:X\\to Y$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Center/Linear.lean",
+  "place": "CategoryTheory.Linear.toCatCenter, lines 36-47; ofRingMorphism, lines 101-105; smulOfRingMorphism_smul_eq and smulOfRingMorphism_smul_eq', lines 62-71. The center and its commutativity are Center/Basic.lean:33-63, and its addition is Center/Preadditive.lean:26-36. The End ring instance is CategoryTheory/Preadditive/Basic.lean:214-217, applied in the preadditive functor category (Preadditive/FunctorCategory.lean:36, functorCategoryPreadditive)."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-linear-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a preadditive category the center is a commutative ring of natural endomorphisms of identity and ring maps into the center give linear structures on Hom groups.",
+   "results": "CategoryTheory.Linear.ofRingMorphism, toCatCenter, homModuleOfRingMorphism, smulOfRingMorphism, toCatCenter_apply_app, smulOfRingMorphism_smul_eq and smulOfRingMorphism_smul_eq' (Mathlib/CategoryTheory/Center/Linear); CatCenter.app_add (Center/Preadditive).",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ofRingMorphism\"",
+   "results": "CategoryTheory.Linear.ofRingMorphism, smulOfRingMorphism, homModuleOfRingMorphism, smulOfRingMorphism_smul_eq and smulOfRingMorphism_smul_eq' (Mathlib.CategoryTheory.Center.Linear).",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toCatCenter\"",
+   "results": "CategoryTheory.Linear.toCatCenter and toCatCenter_apply_asHom_app (Mathlib.CategoryTheory.Center.Linear).",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^def ofRingMorphism|^def toCatCenter|^lemma smulOfRingMorphism_smul_eq|^abbrev CatCenter|^instance : IsMulCommutative",
+   "results": "Search in CategoryTheory/Center: Mathlib/CategoryTheory/Center/Basic.lean:33 CatCenter and :60 commutativity instance; Center/Linear.lean:36 toCatCenter, :62 and :67 scalar formulas, :101 ofRingMorphism.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring homomorphism into the center of a preadditive category gives a linear structure, and an R linear category has the scalar ring homomorphism into its center.",
+   "results": "CategoryTheory.Linear.ofRingMorphism, toCatCenter, homModuleOfRingMorphism and smulOfRingMorphism (Mathlib.CategoryTheory.Center.Linear); the Linear structure and constructor infrastructure also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^instance.*[Rr]ing|^def.*[Rr]ing",
+   "results": "Search in CategoryTheory/Preadditive: Mathlib/CategoryTheory/Preadditive/Basic.lean:207 Semiring (End X) and :214 Ring (End X); unrelated additive functor and matrix category instances also returned.",
+   "date": "2026-10-17",
+   "verdict": "match for the center ring structure, applied to the identity functor in the preadditive functor category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar ring homomorphisms to natural endomorphisms of the identity functor of a preadditive category induce modules on every Hom set",
+   "results": "8 hits, including CategoryTheory.Linear.homModuleOfRingMorphism, smulOfRingMorphism, ofRingMorphism, homModule, Preadditive.moduleEndRight, and Linear.instModuleEnd.",
+   "date": "2026-10-17",
+   "verdict": "match; checked Center/Linear.lean:57-105 against each clause"
+  },
+  {
+   "tool": "grep",
+   "query": "homModuleOfRingMorphism|functor_linear|functorCategoryPreadditive",
+   "results": "15 hits, including Localization/Linear.lean:41 functor_linear, Preadditive/FunctorCategory.lean:36 functorCategoryPreadditive, and Center/Linear.lean:79 homModuleOfRingMorphism and :102 its use.",
+   "date": "2026-10-17",
+   "verdict": "match; source read, including hypotheses"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.CatCenter, CategoryTheory.Linear.toCatCenter, CategoryTheory.Linear.ofRingMorphism, CategoryTheory.Linear.smulOfRingMorphism_smul_eq, CategoryTheory.Linear.smulOfRingMorphism_smul_eq'",
+  "file": "Mathlib/CategoryTheory/Center/Linear.lean",
+  "line": 36,
+  "how": "One declaration per clause: CatCenter is End (identity C) at Center/Basic.lean:33, with naturality at :48-50, composition multiplication at :52-58 and IsMulCommutative at :60-63. Its ring structure is the End ring instance at Preadditive/Basic.lean:214-217 in the preadditive functor category (functorCategoryPreadditive, Preadditive/FunctorCategory.lean:36); open scoped IsMulCommutative supplies the CommRing instance in one line, as in Center/Linear.lean:33-36. toCatCenter at Center/Linear.lean:36-47 is the displayed scalar ring map; ofRingMorphism at :101-105 (with homModuleOfRingMorphism at :79-96) gives the reverse construction; smulOfRingMorphism_smul_eq and its primed version at :62-71 give the two formulas. All these places were read; the node only specializes their ring parameter to CommRing."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-rationalization-linear",
+  "date": "2026-10-17",
+  "group": "NJ"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-rationalization"
+}

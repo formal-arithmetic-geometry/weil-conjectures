@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-rationalization-linear",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Linear structure of the rationalization",
@@ -13,28 +13,134 @@
   "place": "node def-sfb-rationalization-linear, order 1636"
  },
  "stmt_deps": [
-  "def-sfb-rationalization-quotient"
+  "def-sfb-rationalization-quotient",
+  "def-weil-linear-category",
+  "lem-weil-pbc-ring-localization-universal-property"
  ],
  "proof": [
   {
-   "text": "Write $Y\\cong Q(X)$. Then $m\\cdot\\mathrm{id}_{Q(X)}=Q(m\\cdot\\mathrm{id}_X)$ is invertible,\nbecause $m\\cdot\\mathrm{id}_X\\in W_M$ [lem-sfb-smul-id-in-w] and $Q$ inverts $W_M$.\nInvertibility transfers along the isomorphism to $m\\cdot\\mathrm{id}_Y$. So $R$ acts on\n$\\mathcal T[M^{-1}]$ through a ring map $R\\to Z(\\mathcal T[M^{-1}])$ to the center (the\nendomorphisms of the identity functor), which sends $M$ to units. By the universal\nproperty of localization, it extends uniquely to $A\\to Z(\\mathcal T[M^{-1}])$. A ring map\nto the center is the same as a linear structure.",
+   "text": "Put $\\mathcal D=\\mathcal T[M^{-1}]$ and let $Q:\\mathcal T\\to\\mathcal D$ be the triangulated localization of [def-sfb-rationalization-quotient]. By the definitions of [def-weil-triangulated-category], a triangulated category is additive, hence preadditive, and a triangulated (exact) functor is an additive functor. Apply [lem-sfb-additive-localization-linear] to $Q$ and $W_M$: equip $\\mathcal D$ with its induced $R$-linear structure, so $Q(rf)=rQ(f)$. The same node says that $Q$ inverts $W_M$ and that every $Y\\in\\mathcal D$ has an isomorphism $e:Q(X)\\xrightarrow{\\sim}Y$.",
    "uses": [
-    "lem-sfb-smul-id-in-w"
+    "def-sfb-rationalization-quotient",
+    "def-weil-triangulated-category",
+    "lem-sfb-additive-localization-linear"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+    "place": "First sentence and the R-linearity implicit in the second sentence."
+   }
+  },
+  {
+   "text": "Fix $m\\in M$ and $Y\\in\\mathcal D$. Choose $e:Q(X)\\xrightarrow{\\sim}Y$ as above. By [lem-sfb-smul-id-in-w], $m\\cdot\\mathrm{id}_X\\in W_M$, so [lem-sfb-additive-localization-linear] makes $Q(m\\cdot\\mathrm{id}_X)=m\\cdot\\mathrm{id}_{Q(X)}$ invertible. Bilinearity gives $e\\circ(m\\cdot\\mathrm{id}_{Q(X)})\\circ e^{-1}=m\\cdot(e\\circ e^{-1})=m\\cdot\\mathrm{id}_Y$. Its inverse is $e\\circ(m\\cdot\\mathrm{id}_{Q(X)})^{-1}\\circ e^{-1}$, as direct multiplication of the two composites shows. This proves the first clause for every object, rather than only for objects written literally as $Q(X)$.",
+   "uses": [
+    "lem-sfb-smul-id-in-w",
+    "lem-sfb-additive-localization-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+    "place": "First three sentences: invert the scalar map and transfer along an isomorphism."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-category-center-linear] to form the commutative ring $Z(\\mathcal D)$ of natural endomorphisms of the identity and the scalar ring map $\\rho:R\\to Z(\\mathcal D)$, $\\rho(r)_Y=r\\cdot\\mathrm{id}_Y$. Every $\\rho(m)$, $m\\in M$, is a unit: set $u_Y=(m\\cdot\\mathrm{id}_Y)^{-1}$. For $f:X\\to Y$, naturality of $\\rho(m)$ says $\\rho(m)_Y\\circ f=f\\circ\\rho(m)_X$; multiplying on the left by $u_Y$ and on the right by $u_X$ gives $f\\circ u_X=u_Y\\circ f$. Thus $u=(u_Y)$ belongs to $Z(\\mathcal D)$, and its two products with $\\rho(m)$ are the identity componentwise. This explicitly supplies the units required for ring localization.",
+   "uses": [
+    "lem-sfb-category-center-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+    "place": "Fourth sentence: the ring map to the center sends M to units."
+   }
+  },
+  {
+   "text": "Let $i:R\\to A$ be any localization at $M$. Apply [lem-weil-pbc-ring-localization-universal-property] to $\\rho:R\\to Z(\\mathcal D)$, which sends $M$ to units by step 3. This gives a unique ring map $\\phi:A\\to Z(\\mathcal D)$ with $\\phi(i(r))=\\rho(r)$, and $\\phi(i(r)i(m)^{-1})=\\rho(r)\\rho(m)^{-1}$. The cited node uses the fraction model $M^{-1}R$; for any other localization model $A$, the universal maps between $A$ and $M^{-1}R$ are inverse because each composite extends the original map from $R$, and uniqueness makes each composite the identity. Compose the displayed map with this canonical identification. No assumption that $R\\to A$ is injective is used.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, existence and uniqueness; applied as in the fifth sentence of the blueprint proof."
+   }
+  },
+  {
+   "text": "Apply the reverse construction of [lem-sfb-category-center-linear] to $\\phi$: on each morphism group set $a\\cdot f=f\\circ\\phi(a)_X$ for $f:X\\to Y$. The cited node supplies the module laws and bilinearity of composition, hence this is an $A$-linear structure. For $r\\in R$, the formula in step 4 gives $i(r)\\cdot f=f\\circ\\rho(r)_X=f\\circ(r\\cdot\\mathrm{id}_X)=r\\cdot f$, using the original $R$-bilinearity in the last equality. This is the asserted compatibility with the $R$-action.",
+   "uses": [
+    "lem-sfb-category-center-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+    "place": "Last sentence and the compatibility formula in the item statement."
+   }
+  },
+  {
+   "text": "For uniqueness, let $\\star$ be another $A$-linear structure on the same preadditive category extending the given $R$-action. By [lem-sfb-category-center-linear], $\\psi(a)_X=a\\star\\mathrm{id}_X$ defines a ring map $\\psi:A\\to Z(\\mathcal D)$, and compatibility gives $\\psi(i(r))=\\rho(r)$. Uniqueness in [lem-weil-pbc-ring-localization-universal-property] implies $\\psi=\\phi$. Finally $a\\star f=f\\circ(a\\star\\mathrm{id}_X)=f\\circ\\psi(a)_X=f\\circ\\phi(a)_X=a\\cdot f$, where the first equality is bilinearity and the identity law. Thus the scalar operations, and hence the linear structures on the fixed morphism groups, coincide.",
+   "uses": [
+    "lem-sfb-category-center-linear",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+    "place": "The uniqueness in the fifth sentence and the equivalence claimed in the last sentence, with the recovery of scalar action written out."
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-smul-id-in-w"
+  "def-sfb-rationalization-quotient",
+  "def-weil-triangulated-category",
+  "lem-sfb-additive-localization-linear",
+  "lem-sfb-smul-id-in-w",
+  "lem-sfb-category-center-linear",
+  "lem-weil-pbc-ring-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/def-sfb-rationalization-linear.proof.md",
+  "place": "Complete proof paragraph, expanded using Mathlib category-center and additive-localization interfaces and Stacks Tag 00CP."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An R linear triangulated category localized by M torsion objects is linear over the localization of R at M, uniquely extending scalar multiplication.",
+   "results": "Generic CategoryTheory.Localization.linear, instLinearLocalization and instLinearLocalizationQ, and linear-shift results; no declaration covering the torsion Verdier quotient and unique extension together.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic additive localization is a separate Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, IsLocalization",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined type pattern; not a proof of absence alone"
+  },
+  {
+   "tool": "grep",
+   "query": "ofRingMorphism|toCatCenter|linear.*[Ll]ocaliz|[Ll]ocaliz.*linear",
+   "results": "Search in CategoryTheory: Center/Linear.lean:36 toCatCenter and scalar-action definitions; Localization/Linear.lean:38 linear and :47 scalar compatibility; Shift/Linear.lean:33 linear_of_localization.",
+   "date": "2026-10-17",
+   "verdict": "generic tools only; no torsion-rationalization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Verdier quotient of a linear triangulated category by torsion objects is linear over a localization of the coefficient ring.",
+   "results": "CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Localization.linear and functor_linear; quotient linearity and shifted localization structures.",
+   "date": "2026-10-17",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive localization functor from an R linear preadditive category gives a canonical R linear structure on the target, preserving scalar multiplication.",
+   "results": "CategoryTheory.Localization.linear, functor_linear, instLinearLocalization and instLinearLocalizationQ (Mathlib/CategoryTheory/Localization/Linear); functor_linear_iff also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -57,5 +163,25 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-rationalization"
+ "unit": "sk-def-sfb-rationalization",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-rationalization-linear",
+  "worker": "stage1",
+  "summary": "Kept the statement and the center/localization route. The project Lean supplies scalar invertibility, existence and algebraMap_smul, but no declaration asserting uniqueness, so the aggregate item is split rather than attached. Expanded the imported single paragraph into six steps, including inverse naturality and a proof that the extended scalar action is unique. Reused the existing arbitrary-submonoid ring-localization universal property. Added two generic Mathlib leaves, searched by all required services and checked in source, for additive-localization linearity/representatives and center-to-linear constructions. No Lean was written or compiled.",
+  "blueprint": "Steps 1-2 realize the first three sentences of def-sfb-rationalization-linear.proof.md; step 3 expands its sentence on the center and units; step 4 is its localization universal property (Stacks 00CP); steps 5-6 construct the linear structure, verify compatibility, and justify uniqueness in its last two sentences.",
+  "tool_uses": [],
+  "new_nodes": [
+   "lem-sfb-additive-localization-linear",
+   "lem-sfb-category-center-linear"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3cf18a37d",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3cf18a37d (reviewer sub-agent of L); spot-checked: I read the item, both new Mathlib leaves, every cited statement, the blueprint main-20261015 statement and proof, the unit record, the Mathlib sources (Localization/Linear.lean 30-56, Predicate.lean 139-140 and 201-206, Center/Linear.lean 29-105, Center/Basic.lean 29-70, Center/Preadditive.lean, Preadditive/Basic.lean 205-217) and slopmaster2 Rationalization.lean 170-220. The item statement is identical to the blueprint and to the live node, which is still imported, so it is not weakened and not superseded. slopmaster2 provides isIso_smul_id, toCatCenter, linear and algebraMap_smul but nothing for uniqueness, so splitting instead of attaching is correct. Steps 2-6 check out: conjugation and its inverse; inverse naturality giving a unit of the commutative center; the localization universal property with a commutative target; the transfer to an arbitrary localization model without using injectivity; ofRingMorphism compatibility; and uniqueness through psi(a)=a*id. Both new nodes are exact Mathlib leaves with one declaration per clause, and their line numbers are correct. Neither restates a clause of the item, and the rg search of the DAG found no duplicate. Small cases tested: M={1}, 0 in M, R=Z/6 with M generated by 2, M made of units, the empty category, and a one-object category. One fault, fixed: step 1 said 'triangulated category is preadditive, triangulated functor is additive' with no citation (Stacks proves additivity as a lemma, 05QY). The corrected file fixes/dag/nodes/sec-proetale-coefficients/def-sfb-rationalization-linear.json makes step 1 cite def-weil-triangulated-category, whose definition includes both facts, and adds that node to uses and proof_deps. No nodes dropped, no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

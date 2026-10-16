@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-additive-localization-linear",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-rationalization-linear",
+   "place": "Proof, first two sentences: 'Write Y ≅ Q(X)' and 'm·id_{Q(X)} = Q(m·id_X)', including Q inverting W_M.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Linearity and object representatives for an additive localization",
+ "statement": "Let $R$ be a commutative ring, let $\\mathcal C$ and $\\mathcal D$ be preadditive categories [def-weil-preadditive-category], and equip $\\mathcal C$ with an $R$-linear structure [def-weil-linear-category]. Let $W$ be a class of morphisms of $\\mathcal C$ and let $L:\\mathcal C\\to\\mathcal D$ be an additive functor (it preserves sums on each morphism group) which is a localization at $W$ in the sense of [lem-weil-pbc-localization-universal-property]. Then $\\mathcal D$ has a canonical $R$-linear structure for which $L$ is $R$-linear [def-weil-linear-functor], so $L(rf)=rL(f)$ for every $r\\in R$ and morphism $f$. Moreover $L(w)$ is an isomorphism for every $w\\in W$, and every object $Y$ of $\\mathcal D$ admits an object $X$ of $\\mathcal C$ and an isomorphism $L(X)\\cong Y$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Localization/Linear.lean",
+  "place": "CategoryTheory.Localization.linear, line 38, and functor_linear, lines 41-48; inverts and essSurj in Mathlib/CategoryTheory/Localization/Predicate.lean, lines 139-140 and 201-206."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive localization functor from an R linear preadditive category gives a canonical R linear structure on the target, preserving scalar multiplication.",
+   "results": "CategoryTheory.Localization.linear, functor_linear, instLinearLocalization and instLinearLocalizationQ (Mathlib/CategoryTheory/Localization/Linear); functor_linear_iff also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functor_linear\"",
+   "results": "CategoryTheory.Localization.functor_linear and functor_linear_iff (Mathlib.CategoryTheory.Localization.Linear); unrelated ShortComplex linear functors also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def linear|lemma functor_linear|lemma essSurj|theorem essSurj|lemma inverts|theorem inverts",
+   "results": "Search in CategoryTheory/Localization: Mathlib/CategoryTheory/Localization/Linear.lean:38 linear, :41 functor_linear; Predicate.lean:139 inverts, :201 essSurj; other localizer/calculus/resolution results also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive localization functor of a preadditive R linear category is R linear for the induced linear structure on the localization.",
+   "results": "CategoryTheory.Localization.functor_linear, linear, instLinearLocalization, instLinearLocalizationQ and primed versions (Mathlib.CategoryTheory.Localization.Linear); additive-localization results in CalculusOfFractions.Preadditive also returned.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.linear\"",
+   "results": "3 hits: IsLocalization.linearMap_compatibleSMul, IsLocalization.linearIndepOn_finsetIntegerMultiple, and CategoryTheory.Localization.linear. The last declaration has exactly the displayed preadditive, additive and localization hypotheses.",
+   "date": "2026-10-17",
+   "verdict": "match; declaration read at Localization/Linear.lean:30-48"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preserve scalar multiplication after localizing a preadditive category by an additive functor L which satisfies IsLocalization W",
+   "results": "8 hits, including CategoryTheory.Localization.functor_linear, instLinearLocalization, instLinearLocalizationQ, their primed versions, preadditive, and functor_additive.",
+   "date": "2026-10-17",
+   "verdict": "match; generic additive localization, no abelian-category hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "homModuleOfRingMorphism|functor_linear|functorCategoryPreadditive",
+   "results": "15 hits, including Localization/Linear.lean:41 functor_linear, Preadditive/FunctorCategory.lean:36 functorCategoryPreadditive, and Center/Linear.lean:79 homModuleOfRingMorphism and :102 its use.",
+   "date": "2026-10-17",
+   "verdict": "match; source read, including hypotheses"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Localization.linear, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.inverts, CategoryTheory.Localization.essSurj",
+  "file": "Mathlib/CategoryTheory/Localization/Linear.lean",
+  "line": 38,
+  "how": "One declaration per clause, specialized to a commutative ring: Localization.linear at line 38 gives Linear R D under the displayed preadditive, additive and localization hypotheses; functor_linear at lines 41-48 gives preservation of scalar multiplication for that structure. Localization.inverts at Predicate.lean:139-140 gives inversion of W, and Localization.essSurj at Predicate.lean:201-206 gives the object and isomorphism. Sources read in full for Linear.lean and at these places in Predicate.lean."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-rationalization-linear",
+  "date": "2026-10-17",
+  "group": "NJ"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-rationalization"
+}

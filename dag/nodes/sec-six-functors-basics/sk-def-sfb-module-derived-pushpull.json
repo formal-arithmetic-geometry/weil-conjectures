@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-module-derived-pushpull",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived pushforward and pullback of module objects",
@@ -18,28 +18,173 @@
  ],
  "proof": [
   {
-   "text": "The category $\\Mod_{\\Lambda_X}$ is a closed symmetric monoidal Grothendieck abelian\ncategory with functorial flat resolutions ([sk-prop-sfb-module-category]), so it has\nK-injective resolutions, enough injectives and K-flat resolutions, and the right\nderived functors $R(f_*)$, $R^+(f_*)$ of the additive functor $f_*$ exist\n([sk-def-sfb-derived-categories]). The K-flat left derived functor $L(f^*)$ exists\nbecause $f^*$ sends quasi-isomorphisms between K-flat complexes to\nquasi-isomorphisms ([lem-sfb-module-upper-star-kflat-quasi-iso], which uses\n[sk-prop-sfb-module-pullback-exact]). The derived adjunction is\n[def-sfb-module-derived-pushpull-adjunction].",
+   "text": "For $T=X,Y$, work on the small skeleton of $T_{\\mathrm{proét}}$ in [def-weil-pbc-proetale-site], and put $\\mathcal C_T=\\Sh(T_{\\mathrm{proét}},\\Ab)$. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the constant ring sheaf $\\mathbf Z$: a sheaf of abelian groups has a unique compatible $\\mathbf Z$-action, given by repeated addition, and every additive map preserves it. Thus $\\mathcal C_T$ is Grothendieck abelian. By [sk-def-sfb-sheaf-tensor] it has the closed symmetric sheafified tensor product, with tensoring on either side preserving colimits. In particular tensoring preserves zero objects and finite biproducts and is additive: the sum of maps is the composite of their biproduct with diagonal and codiagonal.",
    "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4: the ambient abelian-sheaf category"
+   }
+  },
+  {
+   "text": "Let $\\mathbf Z_U$ be the sheafified free abelian presheaf on an object $U$ of this site. By [lem-weil-pbc-free-sheaf-flat] with $P=\\mathbf Z$, tensoring with $\\mathbf Z_U$ preserves finite limits, since tensoring with $\\mathbf Z$ is the identity. It preserves cokernels by [sk-def-sfb-sheaf-tensor], hence is exact; symmetry gives the other tensor functor. Set $P_T(M)=\\bigoplus_{(U,s),\\ s\\in M(U)}\\mathbf Z_U$. A morphism $h:M\\to N$ maps the summand $(U,s)$ identically to $(U,h_U(s))$, which defines a functor. On the summand $(U,s)$, define evaluation before sheafification by sending the generator indexed by $\\varphi:V\\to U$ to $M(\\varphi)(s)\\in M(V)$. For $\\psi:V'\\to V$, the equality $M(\\varphi\\psi)(s)=M(\\psi)(M(\\varphi)(s))$ proves compatibility with restrictions, so the map extends uniquely to the sheafification and then to the coproduct. The equality $h_V(M(\\varphi)(s))=N(\\varphi)(h_U(s))$ proves naturality in $M$. Evaluation $P_T(M)\\to M$ is surjective on sections: $s\\in M(U)$ is the image of the identity generator in the summand $(U,s)$. It is therefore an epimorphism, since two maps out of $M$ agreeing after evaluation agree on every section. Each $P_T(M)$ is flat: tensor distributes over its coproduct by [sk-def-sfb-sheaf-tensor], and direct sums of exact sequences are exact, being filtered colimits of their finite subsums; the filtered-colimit exactness is in [lem-weil-pbc-ring-sheaves-grothendieck]. Thus $P_T$ with evaluation supplies functorial flat resolutions in $\\mathcal C_T$.",
+   "uses": [
+    "lem-weil-pbc-free-sheaf-flat",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4: the functorial epimorphism from the sum of free abelian sheaves"
+   }
+  },
+  {
+   "text": "The coefficient $\\Lambda_T=p_T^*\\Lambda$ is commutative by [sk-def-sfb-pulled-back-coefficients], and [sk-def-sfb-module-objects] defines $\\Mod_{\\Lambda_T}$ as its module-object category in $\\mathcal C_T$. Apply [lem-sfb-modobj-grothendieck], [def-sfb-modobj-symmetric-tensor], and [def-sfb-modobj-internal-hom] to obtain its closed symmetric monoidal Grothendieck abelian structure. All their ambient hypotheses hold by step 1, including coequalizers and preservation of colimits by tensor. Apply [lem-sfb-modobj-flat-resolutions] using step 2 to obtain functorial flat resolutions. Closedness and symmetry make both relative tensor functors left adjoints, so they preserve colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. In particular they preserve finite biproducts and are additive by the diagonal-codiagonal formula from step 1. The Grothendieck property supplies countable coproducts and exact filtered colimits; $(\\mathbf Z,\\leq)$ is filtered since any two integers have a common upper bound. Consequently its colimits are exact and preserved by tensor, which verifies every structural hypothesis of the left-derived clause of [sk-def-sfb-derived-categories].",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Parts 3 and 4: module structures and the hypotheses for K-flat resolutions"
+   }
+  },
+  {
+   "text": "The pushforward clause of the current [sk-def-sfb-module-pushforward-pullback] identifies the functor in the item with the functor of [def-sfb-module-lower-star]: it is the full composite $\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f_*^{\\Ab})$ and is additive. By step 3 its source is Grothendieck abelian, so [sk-def-sfb-derived-categories] gives K-injective resolutions and the total right derived functor $Rf_*$. For a K-injective resolution $M\\to I$, it is computed by $f_*I$. By [lem-sp-grothendieck-enough-injectives] the source also has enough injectives; applying [lem-weil-pbc-right-derived-plus-injective] gives $R^+f_*:D^+(\\Mod_{\\Lambda_X})\\to D^+(\\Mod_{\\Lambda_Y})$, computed on bounded below complexes of injectives. The compatibility isomorphism of [src-right-derived-functor-plus-compatibility], applied to this additive $f_*$ with the enough-injectives and K-injective-resolution hypotheses just checked, identifies this functor after inclusion with the restriction of $Rf_*$ to $D^+$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-lower-star",
     "sk-def-sfb-derived-categories",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/sk-def-sfb-module-derived-pushpull.proof.md",
+    "place": "Proof paragraph: existence and resolution computation of R(f_*) and R^+(f_*)"
+   }
+  },
+  {
+   "text": "The current definition [sk-def-sfb-module-pushforward-pullback] identifies the pullback as the full composite $f^*=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})$ and records its tensor formula; [def-sfb-module-upper-star] gives the same formula and additivity in detail. By [lem-sfb-module-upper-star-kflat-quasi-iso] it sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms. With step 3, the left-derived clause of [sk-def-sfb-derived-categories] therefore constructs $Lf^*$ on the unbounded derived categories, computed on K-flat resolutions. For $P\\to M$ such a resolution, $Lf^*M$ is represented by $f^*P$. Applying the explicit formula in [def-sfb-module-upper-star] in every degree, including the differentials, identifies this representative with $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}P$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-upper-star",
     "lem-sfb-module-upper-star-kflat-quasi-iso",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/sk-def-sfb-module-derived-pushpull.proof.md",
+    "place": "Proof paragraph: existence of L(f^*) and the displayed K-flat computation"
+   }
+  },
+  {
+   "text": "The adjunction clause of the current [sk-def-sfb-module-pushforward-pullback] states $f^*\\dashv f_*$ for exactly the full composites in steps 4 and 5, using that $\\eta_f$ is the mate of $\\alpha_f$. Apply the derived-adjunction clause of [sk-def-sfb-derived-categories] with $\\mathcal C=\\Mod_{\\Lambda_Y}$, $\\mathcal D=\\Mod_{\\Lambda_X}$, left functor $f^*$ and right functor $f_*$. Step 3 supplies the left source's monoidal and flat-resolution hypotheses and the right source's K-injective resolutions; steps 4 and 5 give additivity of both functors and preservation of quasi-isomorphisms between K-flat complexes by $f^*$. This yields $Lf^*\\dashv Rf_*$ for the functors already constructed, exactly the adjunction specified in [def-sfb-module-derived-pushpull-adjunction]. The coefficient maps in this application have their abelian-sheaf meaning: $\\alpha_f:f^*_{\\Ab}\\Lambda_Y\\to\\Lambda_X$ and $\\eta_f:\\Lambda_Y\\to f_*^{\\Ab}\\Lambda_X$. Extension along $\\alpha_f$ remains part of $f^*$, without choosing an inverse. All total derived constructions therefore apply to the module composites themselves, as asserted; no factorization through derived abelian-sheaf functors is used.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-derived-categories",
     "def-sfb-module-derived-pushpull-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/sk-def-sfb-module-derived-pushpull.proof.md",
+    "place": "Proof paragraph: the derived adjunction and the convention to derive the full composites"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-free-sheaf-flat",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-lower-star",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "src-right-derived-functor-plus-compatibility",
+  "def-sfb-module-upper-star",
   "lem-sfb-module-upper-star-kflat-quasi-iso",
   "def-sfb-module-derived-pushpull-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/sk-def-sfb-module-derived-pushpull.proof.md",
+  "place": "Proof paragraph after the front matter"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total derived functors of pullback and pushforward for modules over a condensed coefficient ring on the pro etale site",
+   "results": "8 hits, including SheafOfModules.pullbackPushforwardAdjunction (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous) and Condensed.profiniteSolid (Mathlib/Condensed/Solid); these are underived adjunctions or condensed-module functors.",
+   "date": "2026-10-17",
+   "verdict": "no match: does not state the complete condensed module-object derived-functor construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalLeftDerived\"",
+   "results": "3 hits: CategoryTheory.Functor.totalLeftDerived, instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, totalLeftDerivedCounit in Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; read lines 185-206: existence is assumed.",
+   "date": "2026-10-17",
+   "verdict": "no match: does not state the complete condensed module-object derived-functor construction"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|totalLeftDerived|HasKFlatResolutions|rightDerivedFunctorPlus",
+   "results": "7 hits in CategoryTheory: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:16,19,193,197,198; Mathlib/CategoryTheory/Abelian/RightDerived.lean:46,47. Generic interfaces, no condensed pro-etale module construction.",
+   "date": "2026-10-17",
+   "verdict": "no match: does not state the complete condensed module-object derived-functor construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived adjunction for inverse image and direct image of sheaves of modules over a condensed ring",
+   "results": "8 hits including AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules.PullbackConstruction.adjunction; underived, different categories or insufficient resolution conclusions.",
+   "date": "2026-10-17",
+   "verdict": "no match: does not state the complete condensed module-object derived-functor construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived adjunction from K-flat inverse image and K-injective direct image on ringed sites",
+   "results": "8 hits: underived sheaf-module adjunctions and CategoryTheory.Adjunction.derived with auxiliary definitions. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean: existing derived functors and absoluteness are required.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; generic inputs remain necessary"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.derived\"",
+   "results": "12 hits including CategoryTheory.Adjunction.derived and its unit/counit and auxiliary definitions in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; read the declaration and its assumptions.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: no construction of the module composites or their resolutions"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLeftDerivedFunctor|pullbackPushforwardAdjunction|isGrothendieckAbelian",
+   "results": "25 displayed hits in CategoryTheory, including abstract derived-functor existence and Grothendieck sheaf-category instances; no full condensed-module derived pushpull statement.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -69,5 +214,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-module-derived-pushpull"
+ "unit": "sk-def-sfb-module-derived-pushpull",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sfb-module-derived-pushpull",
+  "worker": "stage1",
+  "summary": "Repair of the landing return at a216a0348a on the current DAG. Revalidated all cited statements; explicitly identify the current aggregate pushforward in step 4 and derive its current underived adjunction in step 6 via the generic derived-adjunction clause, with all hypotheses checked. Preserve the retained six-step route, tensor formula, sources and unit realization. Refresh verbatim quotes and record the actual renewed Mathlib searches. Statement unchanged; no new nodes or Mathlib leaves. Independent second reading confirms the current statements and all 27 verbatim citations; makes evaluation and its restriction/naturality identities explicit in step 2, and appends the required signed second-reading section and fresh search evidence.",
+  "blueprint": "Steps 1–3 expand the reference to sk-prop-sfb-module-category using Parts 3–4 of its proof. Step 4 realizes the existence of R(f_*) and R^+(f_*), step 5 the K-flat existence and formula for L(f^*), and step 6 the derived-adjunction sentence, in the proof of sk-def-sfb-module-derived-pushpull."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-16f410e67",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-16f410e67 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote review.md; no fixes were needed. The item statement is byte-equal to main-20261015 sk-def-sfb-module-derived-pushpull/_section.md: arbitrary commutative condensed Λ and arbitrary f, the full composites Res_η∘mapMod(f_*^Ab) and Ext_α∘mapMod(f^*_Ab), unbounded D plus R^+, the K-flat formula and Lf^*⊣Rf_*, nothing weakened. The coefficient category is module objects in Sh(X_proét,Ab) with the sheafified ⊗_Z (layer B of sk-def-sfb-derived-categories). There are no new nodes. proof_deps equals the union of the step uses, and a transitive walk over all dependencies (358 nodes) never returns to the item, so there is no cycle. The six steps follow the blueprint route: Part 4 then Part 3 of the sk-prop-sfb-module-category proof, then the item's own paragraph. Step 1: Grothendieck property via the ring-sheaves lemma applied to constant Z on the V-small skeleton, closed tensor preserving colimits, additivity. Step 2: free-sheaf-flat with P=Z (Stacks 03EV), ⊕Z_U flat by coproduct preservation plus AB5, evaluation epi on sections. Step 3: Λ_T commutative; the hypotheses of modobj-grothendieck, symmetric-tensor, internal-hom and flat-resolutions are met, flatness means the same in both nodes, and ⊗_R is a left adjoint (Stacks 0038), so every structural hypothesis of the left-derived clause holds. Step 4: f_* is additive, K-injective resolutions give Rf_*, enough injectives plus rightDerivedFunctorPlus (Stacks 05TI/05TH) give R^+, and the compatibility node's hypotheses are checked. Step 5: the K-flat quasi-isomorphism lemma has exactly the arbitrary-Λ, arbitrary-f scope, and the termwise formula keeps Ext_α. Step 6: the derived-adjunction clause applies with C=Mod_ΛY and D=Mod_ΛX, which is the existing adjunction node. Edge cases checked: empty scheme, identity morphism, discrete field, M=0 (P_T(0)≠0 is harmless), complexes in degree 0. No SGA is cited. Accepted tool uses: lem-weil-pbc-ring-sheaves-grothendieck, lem-weil-pbc-free-sheaf-flat, src-right-derived-functor-plus-compatibility, lem-sfb-modobj-grothendieck, lem-sfb-modobj-flat-resolutions. The unit's realized fields are correct."
+ }
 }
