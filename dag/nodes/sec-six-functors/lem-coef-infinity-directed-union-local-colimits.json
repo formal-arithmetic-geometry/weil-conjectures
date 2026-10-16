@@ -29,9 +29,109 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the following small simplicial subset $M\\subseteq K\\star N(I)$. It contains $K$ and $N(I)$; a mixed simplex is a simplex $\\sigma$ of $K$ followed by a chain $i_0\\leq\\cdots\\leq i_r$, and belongs to $M$ exactly when $\\sigma\\in K_{i_0}$. Deleting initial chain vertices preserves membership by monotonicity, and all other operators preserve it because every $K_i$ is a simplicial subset. In particular $K_i\\star\\{i\\}$ is the right cone on $K_i$. Replace each chosen coherent cocone by a join representative on this right cone. The fixed-boundary, fixed-vertex comparison in the cited join-cone lemma (applied to opposites) supplies these representatives with their specified equivalences to the chosen cocones; their vertices are still $c_i$. For the subset functor $F:i\\mapsto(K_i\\hookrightarrow K)$, this $M$ is exactly the simplicial set $K_F$ defined in [lem-coef-decomposition-local-colimit-cocones]: a compatible family of lifts of a lower simplex is uniquely determined by its membership in $K_{i_0}$. This identifies every pure and mixed summand and all their operators, not merely the vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1 and Remark 4.2.3.2; join/coherent-comma comparison"
+   }
+  },
+  {
+   "text": "Construct $q:M\\to\\mathcal E$ with $q|_K=p$ by adjoining the nondegenerate simplices of $N(I)$ in increasing dimension, and well ordering the simplices within each dimension. At a vertex $i$ attach the chosen map on $K_i\\star\\{i\\}$. At a positive-dimensional chain $\\tau=(i_0<\\cdots<i_n)$, the new part is the pushout attachment of $K_{i_0}\\star\\Delta^n$ along $K_{i_0}\\star\\partial\\Delta^n$: the map $K_{i_0}\\star\\Delta^n\\to M$ is injective because $\\tau$ is, the simplices over $\\tau$ itself are new, and the old simplices it meets are exactly those of $K_{i_0}\\star\\partial\\Delta^n$ (old simplices $\\sigma\\star\\rho$ with $\\rho$ in the face omitting $i_0$ and $\\sigma\\in K_{i_1}\\setminus K_{i_0}$ are not in its image). Its faces already occur, including its first-vertex cone, which is the chosen colimiting representative on $p|_{K_{i_0}}$. To extend over this cell, write $a=p|_{K_{i_0}}$ and let $J_a$ be the join slice of [lem-coef-join-slice-cocone-comparison], whose $m$-simplices are the maps $K_{i_0}\\star\\Delta^m\\to\\mathcal E$ restricting to $a$. Since $K_{i_0}\\star\\partial\\Delta^n$ is degreewise the union of the simplicial subsets $K_{i_0}\\star\\Delta^{F}$ over the proper faces $F$, with $K_{i_0}\\star\\Delta^F\\cap K_{i_0}\\star\\Delta^{F'}=K_{i_0}\\star\\Delta^{F\\cap F'}$, the map already given on $K_{i_0}\\star\\partial\\Delta^n$ is exactly a map $b:\\partial\\Delta^n\\to J_a$, and an extension over $K_{i_0}\\star\\Delta^n$ fixing it is exactly an extension of $b$ to $\\Delta^n$. By [lem-coef-join-slice-cocone-comparison], $J_a$ is a quasicategory (it is functor-equivalent to the cocone category) and its vertex $b(0)$ is initial, because its associated coherent cocone, read through $K_{i_0}\\times\\Delta^1\\to K_{i_0}\\star\\Delta^0$, is the chosen colimiting cocone. Apply [lem-coef-infinity-relative-initial-boundary] to the inner fibration $J_a\\to\\Delta^0$: $\\operatorname{Map}_{\\Delta^0}$ is a point, so being initial relative to $J_a\\to\\Delta^0$ means being initial, and its boundary-filling condition for $n\\geq1$, applied to the boundary map $b$ with first vertex $b(0)$ and the unique map $\\Delta^n\\to\\Delta^0$, extends $b$ to $\\Delta^n$ with the entire boundary fixed. This includes $K_{i_0}=\\varnothing$, where $J_a=\\mathcal E$ and $b(0)=c_{i_0}$ is initial. At a limit ordinal take the union of the already agreeing simplicial maps, degree by degree. Every simplex occurs, so this constructs $q$ on all of $M$. Put $c=q|_{N(I)}$. The triangle on a simplex of $K_i$ followed by $i\\leq j$ identifies the leg to $c_j$ with its composite through $c_i$; longer chains give the required higher compatibilities. Thus the transitions are induced by restriction of the chosen cocones.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, the induction on simplices of N(I): extension of a boundary in the cocone quasicategory from its initial first vertex"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-decomposition-local-colimit-cocones] to the small ordinary category $I$, its subset functor $F$ and the particular extension $q$ of step 2. Its local cone $q\\iota_i$ is the chosen colimiting join representative on $K_i\\star\\{i\\}$, so its only local-colimit hypothesis holds for every $i$. The identification $M=K_F$ in step 1 identifies its actual restriction map with\n$$\\alpha_t:\\operatorname{Map}_{\\operatorname{Fun}(M,\\mathcal E)}(q,\\Delta_Mt)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_Kt).$$\nThe cited statement makes this an equivalence, natural in $t$ and compatible with coherent postcomposition of cocones. Its hypotheses explicitly allow arbitrary simplicial subsets, including empty ones, and assume no colimits beyond the displayed local cocones.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4, last assertion, printed pp.249-251; coherent-cocone formulation of the cited existing node."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-directed-decomposition-right-anodyne] to $I$ and the same family. Its hypotheses are exactly the given smallness, nonemptiness, finite upper bounds, monotonicity and degreewise covering. The degreewise formula for its $K_F$ agrees with $M$: a mixed simplex is a lower simplex in the first indexed subset followed by an upper chain. The face deleting the first upper vertex uses precisely $K_{i_0}\\subseteq K_{i_1}$. Thus its conclusion gives that $N(I)\\hookrightarrow M$ is right anodyne. Neither the indexing subsets nor $M$ is being assumed a quasicategory.",
+   "uses": [
+    "lem-coef-directed-decomposition-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.8 and Remark 4.2.3.9, printed p.252; existing directed-subset specialization."
+   }
+  },
+  {
+   "text": "Apply right-anodyne cocone restriction to $N(I)\\hookrightarrow M$ and $q$. It gives a natural equivalence\n$$\\beta_t:\\operatorname{Map}_{\\operatorname{Fun}(M,\\mathcal E)}(q,\\Delta_Mt)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(c,\\Delta_{N(I)}t).$$\nThe span $\\alpha_t\\beta_t^{-1}$ is the claimed equivalence, natural in $t$. Inversion is coherent because a transformation of space-valued diagrams whose components are equivalences is an equivalence, by the cited functor-cone calculus. The comparison of legs is explicit: restrict a cocone on $q$ to $K_i\\star\\{i\\}$; its mixed triangles identify the leg on $p|_{K_i}$ with $p|_{K_i}\\xrightarrow{\\lambda_i}c_i\\to t$. These triangles and all higher mixed simplices give compatibility on overlaps. The equivalence $\\beta_t$ says every cocone on $c$ admits just this extension up to a contractible space of choices.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 4.2.3.10, with its two restriction maps"
+   }
+  },
+  {
+   "text": "For corresponding cocones with apex $x$, their maps from $\\operatorname{Map}_{\\mathcal E}(x,t)$ to the two spaces of $t$-valued cocones agree under the comparison: both postcompose their legs by $x\\to t$. The dual cone criterion in the functor-cone calculus says either cocone is colimiting exactly when all these maps are equivalences. Since the two target spaces are naturally equivalent, the criteria agree.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 4.2.3.10, colimit identification by universal properties"
+   }
+  },
+  {
+   "text": "Finally use $Hq:M\\to\\mathcal E'$ and the same simplicial collage. Its local cone maps are the images of the chosen ones and are colimiting by the stated hypothesis. Thus [lem-coef-decomposition-local-colimit-cocones] gives the counterpart of $\\alpha$ for $Hq$, while the right-anodyne inclusion from step 4 and [lem-coef-infinity-anodyne-cocones] give the counterpart of $\\beta$. Postcomposition sends the restriction span $(\\alpha_t,\\beta_t)$ to that span for $Hq$ and $H(t)$: both squares commute because restriction and postcomposition commute as simplicial maps. Their inverses therefore commute up to coherent equivalence. The local-cone representatives are also carried to representatives of the image cocones, since the join-to-transformation map is fixed on the indexing sets. This proves functor compatibility with assembly $Hc$. If $K_i$ is empty the required local cocone is an initial object and the cell extension of step 2 still applies, with $J_a=\\mathcal E$. If $K$ is empty, then every $K_i$ is empty and $M=N(I)$; the right-anodyne comparison is the identity, and the first restriction equivalence compares with the one-point space of empty cocones. Hence both empty cases are included and only the displayed local colimits have been used.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones",
+    "lem-coef-infinity-anodyne-cocones",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4 and Corollary 4.2.3.10; functor compatibility of restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-decomposition-local-colimit-cocones",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-directed-decomposition-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Notation 4.2.3.1 and Proposition 4.2.3.4, Proposition 4.2.3.8, Remark 4.2.3.9 and Corollary 4.2.3.10, printed pp.248-253. Directed-subset assembly, with explicit cellwise construction and existing general restriction comparisons; online source, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +174,45 @@
    "results": "{\"t\": \"2026-10-16T20:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent colimits over a filtered covering of simplicial sets can be computed from the left Kan extensions on the pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.instIsRegularEpiCategory\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.Truncated.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\"], \"digest\": \"6b0a204c0468c3b5\"}",
    "date": "2026-10-17",
    "verdict": "No match. SSet.hasColimits and Subcomplex.MulticoequalizerDiagram.isColimit' concern ordinary colimits of simplicial sets; none states coherent cocone assembly in an arbitrary quasicategory. Second reader used the filtered-cover/left-Kan-extension vocabulary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory coherent colimits along a directed union of simplicial subsets assemble using only the local colimits",
+   "results": "{\"t\": \"2026-10-16T21:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory coherent colimits along a directed union of simplicial subsets assemble using only the local colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.hasColimits\", \"SSet.hasDimensionLT_of_isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.range_eq_iSup_of_isColimit\"], \"digest\": \"25f59809839e5506\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary subcomplex colimits, ordinary cocones and ordinary filtered categories do not provide coherent cocone assembly in an arbitrary quasicategory; source read at SubcomplexColimits.lean:51-77 and Quasicategory/Basic.lean:34-59."
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasicategory|[Qq]uasiCategory|colimit.*[Ss]ubcomplex",
+   "results": "{\"t\": \"2026-10-16T21:39:16Z\", \"tool\": \"grep\", \"query\": \"[Qq]uasicategory|[Qq]uasiCategory|colimit.*[Ss]ubcomplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"9b340826eeb0500f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary subcomplex colimits, ordinary cocones and ordinary filtered categories do not provide coherent cocone assembly in an arbitrary quasicategory; source read at SubcomplexColimits.lean:51-77 and Quasicategory/Basic.lean:34-59."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cocones on a union of directed simplicial subdiagrams are cocones on their local colimit diagram",
+   "results": "{\"t\": \"2026-10-16T21:39:17Z\", \"tool\": \"leansearch\", \"query\": \"Coherent cocones on a union of directed simplicial subdiagrams are cocones on their local colimit diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Functor.coconeTypes\", \"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\", \"CategoryTheory.Limits.coconeOfCoconeUncurry\", \"CategoryTheory.Limits.Types.TypeMax.colimitCocone\", \"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected\"], \"digest\": \"028b8ebde7b0e001\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary subcomplex colimits, ordinary cocones and ordinary filtered categories do not provide coherent cocone assembly in an arbitrary quasicategory; source read at SubcomplexColimits.lean:51-77 and Quasicategory/Basic.lean:34-59."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"Subcomplex\"",
+   "results": "{\"t\": \"2026-10-16T21:39:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"Subcomplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Subcomplex.instPreservesColimitsOfShapeToSSetFunctorOfIsFilteredOrEmpty\"], \"digest\": \"6e904db1d1eb10ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary subcomplex colimits, ordinary cocones and ordinary filtered categories do not provide coherent cocone assembly in an arbitrary quasicategory; source read at SubcomplexColimits.lean:51-77 and Quasicategory/Basic.lean:34-59."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces of cocones on a filtered union in an infinity category can be calculated by gluing local universal cones",
+   "results": "{\"t\": \"2026-10-16T21:39:18Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces of cocones on a filtered union in an infinity category can be calculated by gluing local universal cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.SmallObject.SuccStruct.ofCocone_map_to_top\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.IsCardinalFiltered.toMax\", \"CategoryTheory.IsFiltered.cocone\"], \"digest\": \"af71daf34459e7a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary subcomplex colimits, ordinary cocones and ordinary filtered categories do not provide coherent cocone assembly in an arbitrary quasicategory; source read at SubcomplexColimits.lean:51-77 and Quasicategory/Basic.lean:34-59."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-limits-products-pullbacks",
@@ -97,5 +232,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-directed-union-local-colimits",
+  "worker": "stage1",
+  "summary": "Constructed the covering collage and coherent assembly cell by cell, extending each cell through the join slice of the existing join-slice comparison and the existing relative-initial boundary-filling lemma, then used the existing decomposition-local-colimit-cocones and directed-decomposition-right-anodyne nodes for the two natural restriction comparisons. Proved the leg, colimit and functor compatibilities without cocompleteness. No new node: the proposed finite-simplex attachment node was folded into step 2 by the maintainer reader, since it is a few-line consequence of existing nodes; an exact duplicate proposed join node had already been removed.",
+  "blueprint": "Proof paragraph 2, the mapping-complex adjunction infrastructure: Passing from the skeleta to their union in HTT Proposition 4.4.2.6, used in Proposition 4.4.2.7; local colimit comparison, with no assumption of all small colimits. The seven steps supply the local directed-union comparison needed in the inherited HTT skeletal colimit infrastructure.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone mapping-space criterion and componentwise equivalence criterion; used as universal-property tools, not as an alternative geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-851e8c83a",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-851e8c83a (reviewer sub-agent of L); spot-checked: Read the item, the new node, all seven cited node statements and the unit/chapter route. Also read the possible duplicates: relative-initial-boundary, join-slice-cocone-comparison, terminal-boundary-extension, fiber-cocone-simplex-extension, parameter-cone-extension, relative-join-simplex-extension, directed-cover-colimit-assembly (with proof), colimit-subdiagram-approximation and directed-cone-cover (with proof). Checked against HTT §4.2.3: Notation 4.2.3.1, Prop 4.2.3.4, Prop 4.2.3.8, Rem 4.2.3.9 and Cor 4.2.3.10. HTT is not archived and remains WANTED, so printed pages were not checked. The item statement is the directed-subset case of 4.2.3.10, with no cocompleteness, no weakening, and the empty K/K_i cases included. Tested: K=Δ¹ with I={0<1}; two points with I={0,1<2}; K=∅; some K_i empty. Step 1: M equals both cited K_F constructions degreewise and operatorwise; join representatives come from the fixed-boundary, fixed-vertex join-cone equivalence. Steps 3–7: every hypothesis of decomposition-local-colimit-cocones, directed-decomposition-right-anodyne and anodyne-cocones holds; the colimit criterion and H-compatibility are correct. No cycles. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus as a generic criterion. Fault (C1/C5): the new node lem-coef-infinity-universal-simplex-attachment is true but follows in a few lines from existing same-unit nodes, which the worker's search missed. These are lem-coef-join-slice-cocone-comparison (J_a is a quasicategory, and a vertex is initial iff its cocone is colimiting, L=∅ included) and lem-coef-infinity-relative-initial-boundary over Δ⁰ (an initial first vertex fills the boundary for n≥1). The parallel directed-cover-colimit-assembly step 2 makes the same calculation. Fixed: folded it into step 2 with an explicit pushout and join-slice identification, updated step 7, recomputed proof_deps, updated split_report.summary, and removed every citation of the dropped node. Note: the report says created.item was changed, but the file correctly keeps lem-coef-infinity-limits-products-pullbacks; left unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

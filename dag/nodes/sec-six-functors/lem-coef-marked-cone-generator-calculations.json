@@ -33,9 +33,147 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the pushout (P_X=I^{\\mathrm{op}}\\amalg_{\\mathfrak C[X]}\\mathfrak C[X\\star\\Delta^0]). The coherent-realization construction is defined by colimits over simplices, and composition in each coherent simplex is union of subsets, so the pushout has the stated cone vertex (v), cone arrows, and relations. Precomposition by (I^{\\mathrm{op}}) gives the (I)-diagram structure. The simplicial tensor in the marked model acts by the sharp marking, hence every edge of an acting mapping simplicial set is marked; applying it to the triangle for (e:x\\to y) gives (g^*\\widetilde e), and the union composition law sends it to ((hg)^*\\widetilde e). Marked edges and all degeneracies are therefore closed under the action. A map of marked (X\\to S) carries these generators to the corresponding generators, so (L_u) is functorial. The projective diagram model exists for the small simplicial category (I), with objectwise weak equivalences and fibrations, and no local-Kan condition on (I) is needed.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Construction preceding Definition 3.2.1.2 and Definition 3.2.1.2; Proposition 3.2.1.4(1); Appendix A.3.3."
+   }
+  },
+  {
+   "text": "For $S=\\Delta^n$, write $F_0(W)=I(0,-)\\otimes W$ for the free diagram at vertex $0$. Since $I=\\mathfrak C[\\Delta^n]^{\\mathrm{op}}$, it is $W$ at $0$ and empty at every other vertex. The full cone evaluated at $k$ is the subset cube $(\\Delta^1)^{\\{k+1,\\ldots,n\\}}$. In the minimally marked simplex, a cube edge is marked exactly when the maximum of its two endpoint subsets (including $k$) agrees: it is then an acting mapping edge applied to a degenerate cone edge. For $k>0$, the face omitting $0$ already gives the entire evaluated cube. At $0$, the boundary contributes every coordinate-$0$ face by omission of that vertex and every coordinate-$1$ face by composition through that vertex; their intersections are the corresponding simultaneous coordinate conditions, by union of subsets. Thus its evaluation is exactly the cubical boundary, with the restricted marking. The relative diagram is the pushout of $F_0(\\partial C\\hookrightarrow C)$ for this marked cube $C$. At $n=0$ this means $F_0(\\varnothing\\to\\Delta^0)$, not an attachment of a new cone object to an already nonempty evaluation. The cube-boundary map is injective, hence a marked cofibration. Evaluation preserves projective trivial fibrations, so its left adjoint $F_0$ preserves cofibrations by adjointing lifting squares. The asserted boundary map is therefore a projective cofibration.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.7, boundary computation expanded using the subset cubes."
+   }
+  },
+  {
+   "text": "For any fixed underlying $X\\to S$, adding a marking on an edge $e:x\\to y$ changes no underlying cone simplicial set. It is exactly a pushout of the free diagram at $u(x)$ applied to $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$, along the map represented by $\\widetilde e$. Indeed the free action tensors with the sharp marking on the acting mapping simplicial set, so the new marked edges are precisely all $g^*\\widetilde e$ in the definition. Coproducts of these pushouts handle any set of newly marked edges. Each free map is a projective cofibration by the evaluation/free adjunction, since the marked edge inclusion is a cofibration. This proves the canonical marking assertion and also shows that all the pure-marking maps used below are projective cofibrations. Here is the maps-out verification of colimit preservation. Given a marked $I$-diagram $Y$, form a simplicial category $R_Y$ with objects $\\operatorname{Ob}(I)\\amalg\\{v\\}$, old mapping objects those of $I^{\\mathrm{op}}$, mapping objects $R_Y(i,v)=Y(i)$, $R_Y(v,i)=\\varnothing$ and $R_Y(v,v)=\\Delta^0$; composition into $v$ is the diagram action. A map $L_u(X)\\to Y$ is exactly a simplicial functor $\\mathfrak C[X\\star\\Delta^0]\\to R_Y$ extending $u|_{\\mathfrak C[X]}$, taking the cone vertex to $v$, and taking each marked elementary cone edge to a marked edge. Naturality forces preservation of all its acting images. For a colimit $X=\\operatorname{colim}_a X_a$ over $S$, cone simplices are precisely simplices from the $X_a$ with the cone vertex adjoined, modulo the original identifications and the common cone vertex. Coherent realization preserves these colimits by its simplex-colimit definition. Thus such functors are exactly compatible functors from the original cones; the marking on the colimit is the union of the images of their marking generators. This proves colimit preservation, including the empty colimit, whose cone contributes no maps from old objects to $v$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2 and Proposition 3.2.1.4(1); marking case of Proposition 3.2.1.7."
+   }
+  },
+  {
+   "text": "Let $j:(\\Lambda_i^n)^\\flat\\to(\\Delta^n)^\\flat$, $0<i<n$, and use $S=\\Delta^n$. Every evaluation at $k>0$ is unchanged, since its cone cube uses only vertices $k,\\ldots,n$, all lying in a face of the horn. At $0$ put $K=(\\Delta^1)^{\\{1,\\ldots,n\\}\\setminus\\{i\\}}$, $K'=\\partial K$, and use coordinate $i$ as the last factor of $K\\times\\Delta^1$. The subset formula gives the relative cube domain $B=(K'\\times\\Delta^1)\\cup(K\\times\\{1\\})$: omitting a vertex different from $i$ gives its coordinate-$0$ face, and composing through a vertex gives its coordinate-$1$ face. The only missing face is coordinate $i=0$. Put $A=\\{J\\subseteq\\{1,\\ldots,n\\}\\setminus\\{i\\}:J\\text{ contains some }j>i\\}$. The nondegenerate vertical edge over $J$ has unchanged maximum exactly when $J\\in A$. All other marked edges of the full cube already lie in $B$: their common maximum gives either a constantly $1$ coordinate of $K$ or the face $i=1$. Consequently the relative marked cube is a pushout of the selectively marked cylinder of [lem-coef-selectively-marked-terminal-cylinder], adding the already present markings on $B$. A nondegenerate simplex of $K$ outside $\\partial K$ is a chain of subsets whose union is the full coordinate set; its final vertex therefore contains $n>i$ and lies in $A$. The cylinder lemma applies. The whole relative diagram is the pushout of $F_0$ of this marked-anodyne map. A marked-anodyne map is a marked trivial cofibration: its restriction maps into every fibrant target are trivial Kan fibrations by the lifting-calculus statement, and the marked-model weak-equivalence test applies. The free/evaluation adjunction therefore makes this a projective trivial cofibration.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-selectively-marked-terminal-cylinder",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(1), with Lemma 3.2.1.9; the affected vertex is 0 (the later v_n in the printed proof is a subscript typo)."
+   }
+  },
+  {
+   "text": "For the final-horn generator with $n>1$, put $K=(\\Delta^1)^{\\{1,\\ldots,n-1\\}}$, $K'=\\partial K$, use coordinate $n$ as the interval factor, and put $A=\\{J:n-1\\in J\\}$. The noninitial evaluations are unchanged. At $0$ the same subset calculation gives $B=(\\partial K\\times\\Delta^1)\\cup(K\\times\\{1\\})$: faces omitting $j<n$ give coordinate $j=0$, composites through $j$ give coordinate $j=1$, and only coordinate $n=0$ is absent. The marked final input edge (marked in source and target alike) contributes, among the vertical edges, precisely those above subsets containing $n-1$; in the source only those lying in $B$ are present. Every other marked edge outside this specified vertical set lies in $B$, since a fixed maximum or a fixed $n-1$ coordinate lies on a cube face. Every simplex of $K$ outside its boundary ends at the full subset, which contains $n-1$. The selectively marked cylinder lemma applies with these data, and the relative diagram is again a pushout of its image under $F_0$, hence a projective trivial cofibration. For $n=1$, the horn is the vertex $1$; its evaluation at $0$ is the endpoint inclusion $\\{1\\}^\\sharp\\to(\\Delta^1)^\\sharp$, which is exactly the dimension-one final-horn generator. Evaluation at $1$ is the identity. Its free-at-$0$ pushout proves this remaining case without a positive-dimensional-cube assumption.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-selectively-marked-terminal-cylinder",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(2), with explicit changed coordinates and n=1 case."
+   }
+  },
+  {
+   "text": "We will use the following consequence of the cited marked-model and composition statements. Suppose $E\\subseteq E'$ are markings on the same simplicial set $V$, and every map $h:V\\to Z$ to a quasicategory that carries $E$ to equivalences also carries $E'$ to equivalences. Then $V_E\\to V_{E'}$ is a marked weak equivalence. Indeed an $r$-simplex of $\\operatorname{Map}^\\sharp(V_E,Z^\\natural)$ is a map $H:V\\times\\Delta^r\\to Z$. Each slice at a vertex of $\\Delta^r$ carries $E'$ to equivalences by hypothesis. For an edge $(e,\\alpha)$ with $e\\in E'$, the product has a triangle decomposing it into $(e,\\mathrm{id})$ followed by $(\\mathrm{id},\\alpha)$. The first image is an equivalence by the slice assertion, and the second is an equivalence by the original sharp mapping condition. Their diagonal is an equivalence by composition in $hZ$. Thus $H$ preserves $E'\\times(\\Delta^r)^\\sharp$. The two sharp mapping simplicial sets are equal, and the weak-equivalence test applies. This uses the statement of [lem-coef-infinity-mapping-composition], which identifies composition from triangles and equivalences with invertible classes, not any unstated property of its proof.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.10; direct proof using the sharp mapping-space criterion."
+   }
+  },
+  {
+   "text": "For the third generator the only changed evaluation is at $0$. It has underlying square $(\\Delta^1)^2$, whose vertices we call $a=(0,0),b=(1,0),c=(0,1),d=(1,1)$. Here $a,b,c,d$ are the subsets $\\varnothing,\\{1\\},\\{2\\},\\{1,2\\}$ of the cube over $\\{1,2\\}$. The source marks $ab,bd,cd$ and the degenerate edges: $ab=\\widetilde{01}$, $bd$ is the vertex $\\{0,1\\}$ acting on $\\widetilde{12}$, and $cd$ is an acting edge of $\\mathfrak C[\\Delta^2](0,2)$ on the cone vertex $\\widetilde 2$ (equal maxima). The target marks in addition $ac=\\widetilde{02}$. The diagonal $ad$ is not of the form $g^*\\widetilde e$ (it is marked in neither, since markings are not closed under composition); it suffices that the argument below covers it as well. For any map of the square to a quasicategory preserving the source markings, the triangle $abd$ gives $[ad]=[bd][ab]$, hence $ad$ is an equivalence; the triangle $acd$ gives $[ad]=[cd][ac]$, hence $ac$ is an equivalence. These are all the previously unmarked nondegenerate edges, so in particular every edge marked in the target is carried to an equivalence. Step 6 therefore makes this evaluation a marked weak equivalence. All other evaluations are isomorphisms, and step 3 makes the entire pure-marking diagram map a projective cofibration. Objectwise weak equivalences are projective weak equivalences, so this is a projective trivial cofibration. No unsupported claim that objectwise cofibrations are projective cofibrations is used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(3); two explicit square triangles replace the final marking-anodyne shortcut."
+   }
+  },
+  {
+   "text": "For the fourth generator $K^\\flat\\to K^\\sharp$, the underlying cone diagram is unchanged. Write its markings at a vertex $v$ as $E_v\\subseteq E'_v$ on $X_v$. By the definition of $L$, every added marking is $g^*\\widetilde e$, for an edge $e:x\\to y$ of $K$ and $g\\in\\mathfrak C[K](v,x)_1$. We prove precisely that maps to a quasicategory preserving $E_v$ carry these edges to equivalences; no assertion about every edge being literally an elementary cone edge is needed. First, for any map $h:X_x\\to Z$ preserving $E_x$, fill the $\\Lambda^2_0$ horn in $K$ with edges $01=e$, $02=\\mathrm{id}_x$. This gives $e':y\\to x$ and the triangle $(e,e',\\mathrm{id}_x)$. Fill a second $\\Lambda^2_0$ horn with edges $01=e'$, $02=\\mathrm{id}_y$, giving $e'':x\\to y$ and the triangle $(e',e'',\\mathrm{id}_y)$. These are allowed horns because $K$ is Kan; we do not assume that $e''=e$. The coherent cone square of the first triangle has successive upper/right edges $\\widetilde e$ and $e^*\\widetilde e'$. Its other two sides are the degenerate cone edge for $\\mathrm{id}_x$ and an acting mapping edge on a cone vertex, so both are marked in $E_x$. The two triangle equations in $hZ$ show that $ba$ is invertible, where $a=[h(\\widetilde e)]$ and $b=[h(e^*\\widetilde e')]$. Pull back the cone square of the second triangle by the constant action of $e$. Its two other sides are still marked, and it gives invertible $cb$, where $c=[h(e^*(e')^*\\widetilde e'')]$. Put $q=ba$ and $r=cb$. Then $R=a q^{-1}$ satisfies $bR=1$, and $L=r^{-1}c$ satisfies $Lb=1$. The equality $L=L(bR)=(Lb)R=R$ makes $b$ invertible, and $a=b^{-1}q$ is invertible as well. The cited composition statement identifies these invertible classes with equivalence edges. For a constant mapping edge $g$ at a vertex of $\\mathfrak C[K](v,x)$, apply this argument to $h\\circ g^*$; precomposition preserves the original marking. For arbitrary $g$, the monotone map $\\min:[1]\\times[1]\\to[1]$ gives $G(s,t)=g(\\min(s,t))$. Acting on $\\widetilde e$ gives the square $(s,t)\\mapsto G(s,t)^*\\widetilde e(s)$ in $X_v$. Its bottom edge is the constant-$g(0)$ case and its top edge is $g^*\\widetilde e$. The sides act on cone vertices, so are in $E_v$. The two triangle equations therefore imply that the top edge is an equivalence whenever $h$ preserves $E_v$. Every added marking has this form, so step 6 proves objectwise marked weak equivalence. Step 3 supplies the projective cofibration; this proves the fourth generator case. If $K$ is empty the diagram category has no evaluations and the assertion is vacuous. The contraction uses $g$ itself, with no Kan hypothesis on $\\mathfrak C[K](v,x)$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4); inverse-triangle and min-contraction arguments written out."
+   }
+  },
+  {
+   "text": "For terminal (I) and (S=\\Delta^0), write (T=L_u). The cone pushout for ((\\Delta^n)^\\flat) is (\\mathfrak C[J^n](x,y)), so the pinched-cube calculation identifies its underlying simplicial set with (Q^n), including the subset-cube quotient and the maps induced by (J\\mapsto\\max J). Because coherent realization is a colimit over simplices, these identifications assemble to the coend (T(X)=\\int^{[n]\\in\\Delta}X_n\\times Q^n). The maximum maps give a natural map (T(X)\\to X); a marked cone generator maps to its original marked edge (or to a degenerate edge), so this map preserves markings. For (X=(\\Delta^0)^\\flat,(\\Delta^1)^\\flat,(\\Delta^1)^\\sharp), the quotient has respectively one vertex, the two endpoint/edge simplices, and the same edge with its marking, hence the augmentation is an isomorphism of marked simplicial sets.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, explicit (Q^n) calculation; Proposition 3.2.1.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-selectively-marked-terminal-cylinder",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction; explicit calculations from HTT §§2.2.2 and 3.2.1, with source Lemma 3.2.1.9 isolated as a strictly smaller cylinder input. Second reading checked the official PDF."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,21 +205,35 @@
   },
   {
    "tool": "leanfinder",
-   "query": "Projective cofibrations obtained from coherent realization of marked horns",
-   "results": "{\"t\": \"2026-10-16T19:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"Projective cofibrations obtained from coherent realization of marked horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"1a8ee605379df45c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: The SSet I/J and anodyneExtensions hits concern unmarked Kan horns; they do not compute marked cone diagrams, their projective cell maps, or the quotient cosimplicial cone object. Read CategoryWithFibrations.lean:36-79 and AnodyneExtensions/Basic.lean:25-85."
+   "query": "enriched projective diagram free representable tensor cofibration",
+   "results": "{\"t\": \"2026-10-16T21:49:50Z\", \"tool\": \"leanfinder\", \"query\": \"enriched projective diagram free representable tensor cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"Rep.free_projective\", \"CategoryTheory.InternallyProjective\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"b3dcc51c445b7771\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern ordinary algebraic projectivity of condensed modules and representations, not enriched marked cone cells."
   },
   {
    "tool": "leanfinder",
-   "query": "simplicial set cone rigidification mapping space poset subsets",
-   "results": "{\"t\": \"2026-10-16T20:02:24Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial set cone rigidification mapping space poset subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.face\", \"SSet.stdSimplex.objMk\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.horn\", \"SSet.PtSimplex\", \"SSet.stdSimplex.face_obj\", \"SSet.horn_obj\", \"SSet.stdSimplex.faceRepresentableBy\"], \"digest\": \"2140023f0e3caaa1\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search returned related ordinary simplicial, enriched-category or model-category declarations, but none states this marked-cone result."
+   "query": "marked cone straightening generator calculations projective cofibrations marked anodyne trivial cofibrations",
+   "results": "{\"t\": \"2026-10-16T22:27:01Z\", \"tool\": \"leanfinder\", \"query\": \"marked cone straightening generator calculations projective cofibrations marked anodyne trivial cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.const\", \"SSet.horn.ι\", \"SSet.horn₃₂.desc.multicofork_π_one\", \"SSet.horn₃₁.desc.multicofork_π_two\", \"SSet.horn₃₁.desc.multicofork_π_three\"], \"digest\": \"7975451468bcc6af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned ordinary unmarked horn/anodyne declarations, generic projective-object preservation, and functorial cone maps. None states the coherent marked cone generator calculations. The ordinary SSet types in CategoryWithFibrations.lean:37-56 and AnodyneExtensions/Basic.lean:30-85 were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent marked cone functor sends marked anodyne generators to projective trivial cofibrations",
+   "results": "{\"t\": \"2026-10-16T22:27:03Z\", \"tool\": \"leansearch\", \"query\": \"Coherent marked cone functor sends marked anodyne generators to projective trivial cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesProjectiveObjects.mk\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.Functor.mapCone\", \"CategoryTheory.Functor.mapCocone\", \"CategoryTheory.Limits.Cones.functoriality_obj_π_app\", \"CategoryTheory.Limits.Cocone.toCostructuredArrow_comp_proj\", \"CategoryTheory.Limits.Cone.toCostructuredArrow\"], \"digest\": \"03f608b15650e68b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned ordinary unmarked horn/anodyne declarations, generic projective-object preservation, and functorial cone maps. None states the coherent marked cone generator calculations. The ordinary SSet types in CategoryWithFibrations.lean:37-56 and AnodyneExtensions/Basic.lean:30-85 were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-16T22:29:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned ordinary unmarked horn/anodyne declarations, generic projective-object preservation, and functorial cone maps. None states the coherent marked cone generator calculations. The ordinary SSet types in CategoryWithFibrations.lean:37-56 and AnodyneExtensions/Basic.lean:30-85 were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -101,5 +253,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-cone-generator-calculations",
+  "worker": "stage1",
+  "summary": "Reviewed and completed the earlier attempt: retained the free-at-initial-vertex cube attachments, selectively marked cylinder input, four separate marked-anodyne calculations, and terminal coend calculation. Replaced the unnecessary all-edges generation argument in the Kan case by a test of exactly the newly added markings, wrote two explicit outer-horn fillings with independently named inverse edges, completed new-node metadata, refreshed recorded searches, and rewrote the report to describe the actual nine-step split. The imported statement is unchanged. Independent second reading expanded the colimit maps-out argument and wrote both categorical inverse formulas in step 8; no statement or dependency changed.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient-adjunction: realizes the marked-cone generator input below the finite-coefficient coherent mapping-complex adjunction. Steps 1-3 construct and compute projective cells; steps 4-8 prove the four marked-anodyne cases; step 9 computes the terminal Q/max augmentation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-d2a94a489",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-d2a94a489 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and the seven proof dependencies, checked against HTT §3.2.1 (pp. 170-177: Def 3.2.1.2, Prop 3.2.1.4/3.2.1.7, Lemmas 3.2.1.8-3.2.1.10, Prop 3.2.1.11 cases 1-4, Prop 3.2.1.14). The item statement is unchanged and matches HTT. Steps 1-6, 8 and 9 hold: I checked the subset-cube evaluations, the marked-edge criterion (equal maxima), B = ∂K×Δ^1 ∪ K×{1} with the right set A, the final-vertex hypothesis, n=0 and n=1 edge cases, Lemma 3.2.1.10 (2)⇒(1), the ba/cb inverse algebra and the min-square, and Q^0, Q^1. The new node lem-coef-selectively-marked-terminal-cylinder is exactly HTT Lemma 3.2.1.9. It is true (tested on empty K, K'=K, a point, and the Δ^1 square via Λ^2_1 then a marked Λ^2_2) and duplicates no existing node; the endpoint-prism node marks all vertical edges, and nothing else states 3.2.1.8 or 3.2.1.9. Its source and the search records are correct. The route stays within sk-prop-sf-biduality-general; there are no tool_uses and no SGA. Repaired in fixes/: step 7 claimed the target marks every edge of the square, but the diagonal ad = ∅→{1,2} is not of the form g^*ẽ, so it is unmarked; the conclusion was unaffected and the text now gives the correct markings. Step 5's 'newly marked' wording was also corrected. Note: the report says the new node's Lean audits are 'none', but the node has no lean_audit key. That is a maintainer field for the merge to fill.; 1 file(s) fixed by the reviewer"
  }
 }

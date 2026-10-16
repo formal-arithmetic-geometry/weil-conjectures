@@ -28,9 +28,113 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The corestriction of $d_E^{-1}$ to $\\ker d_E^0$ exists since $d_E^0d_E^{-1}=0$; the other differentials are those of $E$, so $t(E)$ is a chain complex. Directly taking kernels modulo images gives $H_0(t(E))=\\ker d_E^0/\\operatorname{im}d_E^{-1}=H^0(E)$. For $m>1$ the adjacent three terms are unchanged, giving $H_m(t(E))=H^{-m}(E)$. For $m=1$, corestricting $d_E^{-1}$ to the kernel does not change its kernel; its incoming image is still $\\operatorname{im}d_E^{-2}$, giving the same formula. A cochain map restricts to degree-zero kernels and commutes with these quotient identifications, so all of this is natural.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Section 3.3, the connective truncation adjunction following Fact 3.14, with chain degree m equal to cochain degree -m."
+   }
+  },
+  {
+   "text": "Modules satisfy the stated abelian-category axioms: Hom sets are additive groups with bilinear composition, the zero module is a zero object, finite biproducts are direct sums, kernels are submodule kernels, and cokernels are quotients by images. A monomorphism is injective, since an element of its kernel gives a map from the free rank-one module that it kills; an epimorphism is surjective, since otherwise its nonzero quotient-by-image map would distinguish it from zero. Thus an injection identifies its source with the kernel of its quotient cokernel, and a surjection identifies its target with the cokernel of its kernel: the map from the quotient by its kernel to its image sends an element class to its image and is bijective. Apply the normalization equivalence to modules and put $S(E)=\\Gamma t(E)$, forgetting the module structure only when taking the underlying simplicial set. Its counit gives $N(S(E))\\cong t(E)$ naturally. We will also use its concrete simplex model. For any nonnegative chain complex $C$, full faithfulness and the counit identify $\\operatorname{Hom}_{\\mathrm{Ch}}(N(F(n)),C)$ with $\\operatorname{Hom}_{\\mathrm{sMod}}(F(n),\\Gamma C)$. The latter is exactly $(\\Gamma C)_n$: a simplicial linear map is determined by the image $x$ of the identity $[n]\\to[n]$ and sends the basis vector $\\theta:[r]\\to[n]$ to $(\\Gamma C)(\\theta)x$; this formula gives the inverse. The natural chain isomorphism $q_n$ in the simplex input consequently identifies $(\\Gamma C)_n$ with $\\operatorname{Hom}_{\\mathrm{Ch}}(P(n),C)$. The simplicial operators are precomposition with $P(\\alpha)$, and maps in $C$ are postcomposition. This fixes the inverse model and its comparisons naturally, without choosing values from an unproved existence assertion.",
+   "uses": [
+    "lem-cbc-dold-kan-normalization-equivalence",
+    "lem-cbc-normalized-simplex-chain-diagonal",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.2.3.12 and Lemma 1.2.3.13; normalized simplex representability derived here explicitly from the normalization equivalence."
+   }
+  },
+  {
+   "text": "Here is the Kan argument, including outer horns. Write $X=S(E)$ and let $x_i\\in X_{n-1}$, $i\\ne k$, satisfy $d_i x_j=d_{j-1}x_i$ for $i<j$, the compatibility equations for a horn. Start with $u=0\\in X_n$. Successively for $r=0,\\ldots,k-1$ replace $u$ by $u+s_r(x_r-d_ru)$. The simplicial identities give $d_rs_r=\\mathrm{id}$; for $i<r$, $d_i(x_r-d_ru)=d_{r-1}(x_i-d_iu)=0$, so earlier prescribed faces stay fixed. Next, for $r=n,n-1,\\ldots,k+1$, replace $u$ by $u+s_{r-1}(x_r-d_ru)$. This fixes face $r$ since $d_rs_{r-1}=\\mathrm{id}$, preserves faces $i<k$ by the same compatibility equations, and preserves faces $i>r$ because $d_{i-1}(x_r-d_ru)=d_r(x_i-d_iu)=0$. The final $u$ fills the horn. Empty loops cover $k=0,n$, including $n=1$. The face/degeneracy identities used are obtained by applying the simplicial functor to the corresponding equalities of monotone maps.",
+   "uses": [
+    "lem-cbc-dold-kan-normalization-equivalence",
+    "def-weil-pbc-simplicial-object",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Stacks Tag 08NZ, lemma-simplicial-group-kan: its two horn-correction inductions written additively."
+   }
+  },
+  {
+   "text": "Apply the Moore-cycle homotopy theorem to $X=S(E)$ and combine its natural identifications with $N\\Gamma t(E)\\cong t(E)$ and step 1. This gives the claimed components and positive homotopy groups, with no boundedness condition on $E$. For a vertex $a$, translation in degree $n$ by the constant degeneracy of $a$ is a simplicial isomorphism sending zero to $a$, with inverse translation by $-a$; it identifies all based groups. For a map $f:E\\to F$, additivity gives $S(f)(x+a)=S(f)(x)+S(f)(a)$, so the identifications commute with the induced based maps. It follows that isomorphisms on $H^r$ for all $r\\leq0$ give a bijection on components and isomorphisms on groups at every vertex, and the converse follows at zero. Every point of the realization lies in a realized simplex and is joined inside that simplex to a vertex. For completeness, a path from a vertex $v$ to a point $p$ changes the base point of a cube representative by rescaling that representative to an inner cube and mapping the surrounding radial collar along the path, from $v$ on its inner boundary to $p$ on its outer boundary. This construction respects relative-boundary homotopies; the reversed path gives its inverse because a path followed by its reverse contracts relative to its endpoints. Postcomposing the cube and its collar with the realized map is exactly the collar construction for the image path, so the induced homotopy-group maps are conjugate by these base-point isomorphisms. Thus the same criterion holds for all base points as required by the definition of weak homotopy equivalence.",
+   "uses": [
+    "lem-cbc-simplicial-module-moore-homotopy",
+    "lem-cbc-dold-kan-normalization-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 3.14(3)–(4), plus the translation and base-point arguments written here; comparison is with realization homotopy groups, not merely algebraic chain homotopies."
+   }
+  },
+  {
+   "text": "In the simplex model define the binary map on two simplices $a:P(n)\\to t(E)$ and $b:P(n)\\to t(F)$ by $(a\\otimes b)D_n$, followed by $t(E)\\otimes t(F)\\to t(E\\otimes F)$. The last chain map is induced by the degreewise maps of the nonpositive cochain terms into the full complexes, using the degree-zero cycle inclusions; in degree zero its image is a cycle since both factors are cycles. Explicitly, the tensor cochain complex has $(E\\otimes F)^r=\\bigoplus_{i+j=r}E^i\\otimes_\\Lambda F^j$ and $d(e\\otimes f)=d_Ee\\otimes f+(-1)^i e\\otimes d_Ff$ for $e\\in E^i$. The tensor of the truncations has the direct-sum terms and differential defined in the simplex input. Its sign $(-1)^p$ in chain degree $p$ equals $(-1)^{-p}$ in cochain degree $-p$, so the displayed maps commute with differentials, including the corestriction into cycles at degree zero. The chain-map assertion for $D_n$ makes the composite a chain map. Naturality of $D_n$ makes this binary operation simplicial and natural in $E,F$. The unit is $\\epsilon_n:P(n)\\to\\Lambda[0]$. Coassociativity says both triple products use $(a\\otimes b\\otimes c)(D_n\\otimes\\mathrm{id})D_n=(a\\otimes b\\otimes c)(\\mathrm{id}\\otimes D_n)D_n$; the counit equations give the two unit equations. The degreewise maps respect the tensor associators and unit because each sends every pure tensor to the same pure tensor in the total complex. These formulas give precisely the Alexander–Whitney lax monoidal structure of $S$.",
+   "uses": [
+    "lem-cbc-normalized-simplex-chain-diagonal",
+    "lem-cbc-dold-kan-normalization-equivalence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 1.2.3.22 and Example 1.2.3.26; Construction 1.3.1.13. No symmetric monoidal assertion is used."
+   }
+  },
+  {
+   "text": "For objects $x,y$ of $\\mathcal B$, set $\\mathcal B_\\Delta(x,y)=S(\\mathcal B(x,y))$. For $b:P(n)\\to t\\mathcal B(y,z)$ and $a:P(n)\\to t\\mathcal B(x,y)$ their composite is the chain map $m(b\\otimes a)D_n$, where $m$ is the given dg composition, corestricted to the connective truncation. Its degree-zero value is a cycle by the chain-map property of dg composition. The two triple composites agree by the coassociativity equation in step 5 and the associativity of $m$. The identity at $x$ is the simplex $\\mathrm{id}_x\\epsilon_n$; the two counit equations and the dg unit equations verify both identity laws. At $n=0$ the formula is exactly the given composition of closed degree-zero arrows, since $P(0)=\\Lambda[0]$ and $D_0[0]=[0]\\otimes[0]$. A dg functor acts on these chain maps by postcomposition with its Hom-complex maps; these preserve $m$ and identities, so they define a simplicial functor. The equality of postcomposition and precomposition with each $P(\\alpha)$ proves naturality for all simplex operators, and the same displayed formulas prove compatibility with composition.",
+   "uses": [
+    "lem-cbc-normalized-simplex-chain-diagonal",
+    "lem-cbc-dold-kan-normalization-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 1.3.1.13 and Remark 1.3.1.14; enriched associativity, units and dg-functor naturality verified using the explicit chain diagonal."
+   }
+  },
+  {
+   "text": "All mapping simplicial sets of $\\mathcal B_\\Delta$ are Kan by step 3, and they and the object set are small in the fixed universes. Apply the locally Kan clause of the coherent-nerve comparison. It gives a quasicategory $N_{\\mathrm{hc}}(\\mathcal B_\\Delta)$ and natural equivalences $S(\\mathcal B(x,y))\\simeq\\operatorname{Map}_{N_{\\mathrm{hc}}(\\mathcal B_\\Delta)}(x,y)$ sending vertices to their edges and respecting enriched composition with its coherent homotopies. This is the simplicial-realization presentation of the underlying infinity category of the dg category: its objects, mapping objects and composition are obtained from the dg enrichment by the construction in steps 2 and 5–6, followed by the coherent-nerve presentation theorem. In particular its homotopy category has morphisms $H^0\\mathcal B(x,y)$ by step 4, and its actual mapping spaces retain all $H^{-m}$, rather than only these components. Naturality for simplicial functors in the cited comparison, applied to the dg-functor construction in step 6, gives the asserted naturality and coherent compatibility with composition.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 1.3.1.13 and Remark 1.3.1.14, with the locally Kan coherent-nerve presentation and mapping comparison supplied by lem-coef-coherent-nerve-comparison. The underlying infinity category is expressed in its simplicial-realization model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-cbc-dold-kan-normalization-equivalence",
+  "lem-cbc-normalized-simplex-chain-diagonal",
+  "def-sp-abelian",
+  "def-weil-pbc-simplicial-object",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-module-moore-homotopy",
+  "lem-coef-coherent-nerve-comparison",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Agent-written assembly of Stacks 019G/08NZ and the cited online Higher Algebra and Choudhury–Gallauer inputs; the latter are not archived locally (WANTED in report.md)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,10 +212,38 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"line\": \"306\", \"text\": \"def Γ₀' : ChainComplex C ℕ ⥤ SimplicialObject.Split C where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"line\": \"320\", \"text\": \"def Γ₀ : ChainComplex C ℕ ⥤ SimplicialObject C :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"line\": \"327\", \"text\": \"def Γ₂ : Karoubi (ChainComplex C ℕ) ⥤ Karoubi (SimplicialObject C) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\", \"line\": \"145\", \"text\": \"noncomputable def natTransPInfty : alternatingFaceMapComplex C ⟶ alternatingFaceMapComplex C where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\", \"line\": \"153\", \"text\": \"noncomputable def natTransPInfty_f (n : ℕ) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Normalized.lean\", \"line\": \"130\", \"text\": \"def N₁_iso_normalizedMooreComplex_comp_toKaroubi : N₁ ≅ normalizedMooreComplex A ⋙ toKaroubi _ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"line\": \"165\", \"text\": \"noncomputable def nondegComplex : ChainComplex C ℕ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"line\": \"325\", \"text\": \"noncomputable def nondegComplexFunctor : Split C ⥤ ChainComplex C ℕ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean\", \"line\": \"142\", \"text\": \"def N : SimplicialObject A ⥤ ChainComplex A ℕ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean\", \"line\": \"146\", \"text\": \"def Γ : ChainComplex A ℕ ⥤ SimplicialObject A :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean\", \"line\": \"168\", \"text\": \"def equivalence : SimplicialObject A ≌ ChainComplex A ℕ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"line\": \"62\", \"text\": \"def equivalence₀ : A ≌ B' :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"line\": \"70\", \"text\": \"def equivalence₁ : A ≌ B' := (equivalence₀ eA e').changeFunctor hF\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"line\": \"77\", \"text\": \"def equivalence₁CounitIso : (e'.inverse ⋙ eA.inverse) ⋙ F ≅ 𝟭 B' :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"line\": \"96\", \"text\": \"def equivalence₁UnitIso : 𝟭 A ≅ F ⋙ e'.inverse ⋙ eA.inverse :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"line\": \"116\", \"text\": \"def equivalence₂ : A ≌ B :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean\", \"line\": \"60\", \"text\": \"def N [IsIdempotentComplete C] [HasFiniteCoproducts C] : SimplicialObject C ⥤ ChainComplex C ℕ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean\", \"line\": \"65\", \"text\": \"def Γ [IsIdempotentComplete C] [HasFiniteCoproducts C] : ChainComplex C ℕ ⥤ SimplicialObject C :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean\", \"line\": \"95\", \"text\": \"def equivalence : SimplicialObject C ≌ ChainComplex C ℕ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"130\", \"text\": \"def natTrans : (N₁ : SimplicialObject C ⥤ _) ⋙ Γ₂ ⟶ toKaroubi _ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"165\", \"text\": \"def Γ₂N₂ToKaroubiIso : toKaroubi (SimplicialObject C) ⋙ N₂ ⋙ Γ₂ ≅ N₁ ⋙ Γ₂ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"171\", \"text\": \"def natTrans : (N₂ : Karoubi (SimplicialObject C) ⥤ _) ⋙ Γ₂ ⟶ 𝟭 _ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"249\", \"text\": \"def Γ₂N₂ : 𝟭 _ ≅ (N₂ : Karoubi (SimplicialObject C) ⥤ _) ⋙ Γ₂ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"254\", \"text\": \"def Γ₂N₁ : toKaroubi _ ≅ (N₁ : SimplicialObject C ⥤ _) ⋙ Γ₂ :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Projections.lean\", \"line\": \"156\", \"text\": \"def natTransP (q : ℕ) : alternatingFaceMapComplex C ⟶ alternatingFaceMapComplex C where\"}\n",
    "date": "2026-10-17",
    "verdict": "no match for the whole statement: Equivalence.lean:142,146,168 gives normalization, Gamma and the Dold–Kan equivalence; HomotopyEquivalence.lean concerns chain homotopies, not the topological homotopy groups of simplicial modules. The inspected SimplicialNerve.lean:14–34 lists even the locally Kan nerve theorem as future work. No hit supplies the Alexander–Whitney dg realization and its compatibility with coherent mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dold Kan normalized Moore complex gives an equivalence between simplicial objects in an abelian category and nonnegative chain complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.normalizedMooreComplex\", \"module\": \"Mathlib/AlgebraicTopology/MooreComplex\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (ChainComplex C ℕ)\", \"doc\": \"The normalized Moore complex functor associates to each simplicial object $X$ in an abelian category $\\\\mathcal{C}$ a chain complex $\\\\text{NormalizedMooreComplex}(X)$ in $\\\\mathcal{C}$, where each degre\"}\n  {\"name\": \"AlgebraicTopology.normalizedMooreComplex_obj\", \"module\": \"Mathlib/AlgebraicTopology/MooreComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (X : CategoryTheory.SimplicialObject C),\\n  (AlgebraicTopology.normalizedMooreComplex C).obj X = AlgebraicTopology.NormalizedMooreComplex.obj X\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and simplicial object $X$ in $\\\\mathcal{C}$, the object mapping of the normalized Moore complex functor applied to $X$ is equal to the normalized Moore complex of\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.N\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence\", \"type\": \"{A : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n    [inst_1 : CategoryTheory.Abelian A] → CategoryTheory.Functor (CategoryTheory.SimplicialObject A) (ChainComplex A ℕ)\", \"doc\": \"The functor $ N $ associated to the Dold-Kan correspondence, which maps a simplicial object $ X $ in an abelian category $ \\\\mathcal{A} $ to its normalized Moore complex $ \\\\mathrm{N}(X) $. This chain c\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  (X : CategoryTheory.SimplicialObject C),\\n  CategoryTheory.Idempotents.DoldKan.N.obj X =\\n \", \"doc\": \"The functor $ N $ establishes an equivalence between the category of simplicial objects in a preadditive, idempotent complete category $ \\\\mathcal{C} $ with finite coproducts and the category of chain \"}\n  {\"name\": \"CategoryTheory.Preadditive.DoldKan.N\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalenceAdditive\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      CategoryTheory.Functor (CategoryTheory.Idempotents.Karoubi (CategoryTheory.SimplicialObject C))\\n        (CategoryTheory.Idempotents.Karoubi (ChainComplex C ℕ))\", \"doc\": \"The functor $ N $ extends the normalized chain complex construction $ N_1 $ to the Karoubi envelope of simplicial objects in category $ \\\\mathcal{C} $. It maps objects in $ \\\\Karoubi(\\\\text{SimplicialObj\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₁\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorN\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (CategoryTheory.Idempotents.Karoubi (ChainComplex C ℕ))\", \"doc\": \"The functor $ N_1 $ maps a simplicial object $ X $ in category $ \\\\mathcal{C} $ to the Karoubi envelope of chain complexes over $ \\\\mathcal{C} $ indexed by $ \\\\mathbb{N} $. For each object $ X $, it cons\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₂\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorN\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      CategoryTheory.Functor (CategoryTheory.Idempotents.Karoubi (CategoryTheory.SimplicialObject C))\\n        (CategoryTheory.Idempotents.Karoubi (ChainComplex C ℕ))\", \"doc\": \"The functor $ N_2 $ extends the normalized chain complex functor $ N_1 $ to the Karoubi envelope of simplicial objects in category $ \\\\mathcal{C} $. It maps objects in $ \\\\Karoubi(\\\\text{SimplicialObject\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.N\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.IsIdempotentComplete C] →\\n        [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (ChainComplex \", \"doc\": \"The functor $ N $ maps a simplicial object $ X $ in a preadditive, idempotent complete category $ \\\\mathcal{C} $ with finite coproducts to the normalized chain complex over $ \\\\mathcal{C} $ indexed by $\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match only: normalization equivalence. This does not state the whole item, including topological homotopy groups and dg enriched composition/coherent realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.DoldKan.equivalence",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.equivalence\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Abelian A] : CategoryTheory.SimplicialObject A ≌ ChainComplex A ℕ\", \"doc\": \"The Dold-Kan equivalence for abelian categories \"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.equivalence_functor\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Abelian A] : CategoryTheory.Abelian.DoldKan.equivalence.functor = CategoryTheory.Abelian.DoldKan.N\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.equivalence_inverse\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Abelian A] : CategoryTheory.Abelian.DoldKan.equivalence.inverse = CategoryTheory.Abelian.DoldKan.Γ\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match only: normalization equivalence. This does not state the whole item, including topological homotopy groups and dg enriched composition/coherent realization."
+  },
+  {
+   "tool": "grep",
+   "query": "^def N |^def Γ |^def equivalence |^theorem equivalence_inverse",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"142\", \"line\": \"def N \", \"text\": \" SimplicialObject A ⥤ ChainComplex A ℕ :=\"}\n  {\"file\": \"146\", \"line\": \"def Γ \", \"text\": \" ChainComplex A ℕ ⥤ SimplicialObject A :=\"}\n  {\"file\": \"168\", \"line\": \"def equivalence \", \"text\": \" SimplicialObject A ≌ ChainComplex A ℕ :=\"}\n  {\"file\": \"171\", \"line\": \"theorem equivalence_inverse \", \"text\": \" (equivalence : SimplicialObject A ≌ _).inverse = Γ :=\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match only: normalization equivalence. This does not state the whole item, including topological homotopy groups and dg enriched composition/coherent realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dold Kan equivalence of simplicial objects and nonnegative chain complexes in an abelian category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.Γ\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \": ChainComplex A ℕ ⥤ SimplicialObject A\", \"doc\": \"The Γ functor establishes the Dold-Kan equivalence between chain complexes and simplicial objects in an abelian category $\\\\mathcal{A}$. It maps chain complexes over $\\\\mathcal{A}$ (with natural number \"}\n  {\"name\": \"CategoryTheory.Preadditive.DoldKan.Γ\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalenceAdditive\", \"type\": \": Karoubi (ChainComplex C ℕ) ⥤ Karoubi (SimplicialObject C)\", \"doc\": \"The Γ functor establishes an equivalence between the Karoubi envelope of chain complexes over a preadditive category $\\\\mathcal{C}$ with natural number grading and the Karoubi envelope of simplicial ob\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.Γ\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.IsIdempotentComplete C] →\\n        [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor (ChainComplex C ℕ) (CategoryTheory.SimplicialObjec\", \"doc\": \"The Γ functor establishes the Dold-Kan equivalence between chain complexes and simplicial objects in a preadditive, idempotent-complete category with finite coproducts. It maps chain complexes over su\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.comparisonN\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \": (N : SimplicialObject A ⥤ _) ≅ Idempotents.DoldKan.N\", \"doc\": \"The natural isomorphism establishes that the normalized chain complex functor $ N $ is equivalent to the composition of the normalized Moore complex functor with the Karoubi envelope embedding, as par\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.N_map\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  {X Y : CategoryTheory.SimplicialObject C} (f : X ⟶ Y),\\n  CategoryTheory.Idempotents.DoldK\", \"doc\": \"The functor $ N $ maps a simplicial object $ X $ in a preadditive, idempotent complete category $ \\\\mathcal{C} $ with finite coproducts to the normalized chain complex over $ \\\\mathcal{C} $ indexed by $\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  (X : CategoryTheory.SimplicialObject C),\\n  CategoryTheory.Idempotents.DoldKan.N.obj X =\\n \", \"doc\": \"The functor $ N $ establishes an equivalence between the category of simplicial objects in a preadditive, idempotent complete category $ \\\\mathcal{C} $ with finite coproducts and the category of chain \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.NCompGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (X : CategoryTheory.SimplicialObject C)\\n  (Δ : SimplexCategoryᵒᵖ),\\n  (AlgebraicTopology.DoldKan.Γ₂N₁.natTrans.app X).f.app Δ =\\n    (Algebrai\", \"doc\": \"The composition of the Γ₂ functor (from chain complexes to simplicial objects) and the N₁ functor (from simplicial objects to chain complexes) is naturally isomorphic to the identity functor. This est\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.ε\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.IsIdempotentComplete C] →\\n        [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor.id (CategoryTheory.SimplicialObj\", \"doc\": \"A natural isomorphism between the identity functor on the category of simplicial objects in a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts and the composition of the \"}",
+   "date": "2026-10-17",
+   "verdict": "partial match only: normalization equivalence. This does not state the whole item, including topological homotopy groups and dg enriched composition/coherent realization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-presheaf-dg-function-complex",
@@ -131,5 +263,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-dold-kan-homology",
+  "worker": "stage1",
+  "summary": "Split the algebraic mapping-space foundation into explicit truncation, inverse-model, Kan horn-filling, Moore homotopy, Alexander–Whitney, enriched composition and coherent-nerve steps. Kept the full statement, used the existing coherent-nerve theorem only for its actual locally Kan mapping comparison, and created a normalization Mathlib leaf plus two smaller generic algebraic/topological inputs. No Lean source matches the item.",
+  "blueprint": "Current main-20261015 thm-cbc-finite-level-proetale proof opening 'Choose a compactification': generic algebraic mapping-space foundation of the historical affine-local compactification repair, used in bounded-below-hypersheaf-model step 4 and hyperdescent-local-orthogonality steps 2–3.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic locally Kan coherent-nerve presentation and its natural, composition-preserving mapping comparisons; no node of sk-prop-sf-cbc supplies this foundational conversion of enrichment to an infinity category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-81f45b0e2",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-81f45b0e2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit; the item's statement and stmt_deps are byte-identical to the unsplit base. Sources: Stacks simplicial.tex 019G (l.4045), 08NZ (l.5756, full proof) and 017V; pinned Mathlib Equivalence.lean lines 142/146/168/171 and MooreComplex.lean lines 64/79/116/156, all line numbers correct. Higher Algebra and Choudhury–Gallauer are not archived; WANTED is recorded and proof_origin.by is agent. Step 1 (t(E) homology, including m=0,1) is correct and elementary. Step 2: full faithfulness, the counit and q_n give (ΓC)_n = Hom(P(n),C) naturally. Step 3: I checked both additive horn-correction loops index by index (d_r s_r, d_r s_{r-1}, d_i s_{r-1} = s_{r-2} d_i for i<k, d_i s_{r-1} = s_{r-1} d_{i-1} for i>r); this is the additive form of 08NZ. Step 4: Moore input, translation commuting with linear maps, and change of base point to every realization point; the converse holds at 0. Step 5: AW product with tE⊗tF→t(E⊗F); the Koszul signs match, and no flatness is needed. Step 6: composition m(b⊗a)D_n; associativity and units hold, and n=0 gives the original composition. Step 7: the tool use of lem-coef-coherent-nerve-comparison (locally Kan clause plus natural mapping comparisons) is generic and accepted. The 'underlying infinity category' clause is read as the HA 1.3.1.13 realization model; no DAG node defines a separate dg nerve, and the only citer (presheaf-dg-function-complex steps 4–5) uses only what the steps prove. New nodes: the normalization leaf is an exact match for CategoryTheory.Abelian.DoldKan.equivalence in the same convention (positive faces, d_0). The simplex diagonal is true: q_n is an iso via the degenerate splitting; I checked the chain-map property by hand on P(2), the counit, and that P(α) kills collapsed strings. The Moore node is true, including π_0 = X_0/d_0(ker d_1). Neither unsplit node restates a clause of the item. They are not duplicates: the existing AW nodes are cosimplicial sheaf constructions, and no other Moore or simplicial-group node exists. Blueprint, created and search fields are present; no SGA is cited. No fixes."
  }
 }
