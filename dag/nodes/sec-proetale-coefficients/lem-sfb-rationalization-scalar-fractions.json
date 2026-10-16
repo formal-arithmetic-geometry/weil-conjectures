@@ -125,12 +125,18 @@
   "CategoryTheory.Rationalization.map_eq_map_iff"
  ],
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap",
+  "declaration": "CategoryTheory.Rationalization.exists_smul_eq_map",
   "declarations": [
    "CategoryTheory.Rationalization.exists_smul_eq_map",
    "CategoryTheory.Rationalization.map_eq_map_iff"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 20:35 UTC for group Q117, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: exists_smul_eq_map gives clause 1, and map_eq_map_iff gives clause 2."
+  "statement": "lemma exists_smul_eq_map {X Y : C} (φ : (Q M C).obj X ⟶ (Q M C).obj Y) :\n    ∃ m ∈ M, ∃ f : X ⟶ Y, m • φ = (Q M C).map f",
+  "branch": "slopmaster2",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The two existing declarations state clauses 1 and 2 respectively, with exactly the common R-linear triangulated-category and R-linear integer-shift hypotheses and arbitrary Submonoid R. Read in the current published source using scompile.py --source: the live module is DerivedCategory.RationalizationMap, outside the stale Complete directory. Its Q is the canonical functor of sk-def-sfb-rationalization. The main signature records clause 1 verbatim; map_eq_map_iff supplies clause 2. No duplicate module or theorem is introduced; the existing attachment is made into a complete stage-2 record."
  },
  "lean_audit": {
   "master": {
@@ -168,5 +174,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce91d83ef",
+  "group": "NA",
+  "result": "pass",
+  "note": "The existing-declaration record for lem-sfb-rationalization-scalar-fractions is correct and only the node's lean field changed. exists_smul_eq_map (clause 1) and map_eq_map_iff (clause 2) in the live module WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap have exactly the node's hypotheses: CommRing R, Preadditive and Linear R C, zero object, additive and R-linear integer shifts, Pretriangulated, IsTriangulated, and an arbitrary Submonoid M. Q is the recorded rationalization functor of sk-def-sfb-rationalization. Both conclusions match the node with the same quantifier order, and the upstream proofs follow the source paragraph. Edge cases checked: M={1}, 0 in M, zero ring, independent universes. An nt_compile.py probe with #check, #print axioms and both clauses restated in the node's variables compiled clean; neither theorem uses sorry. check_existing and check_record found no failures and the statement matches verbatim. The report has a real Worker report and Second reading by NA. No findings."
  }
 }

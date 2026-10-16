@@ -27,7 +27,10 @@
   "place": "Proof of Proposition 5.3.1.16, printed pp. 383-384: retraction onto K for a directed family of subsets with final vertices; the right-cone special case. The construction uses Proposition 4.2.3.4, Proposition 4.2.3.8, Remark 4.2.3.9 and Proposition 4.1.1.8. Read online 2026-10-17; archive WANTED. No Stacks tag states this coherent result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -262,5 +265,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd9f189a",
+  "group": "NP",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_cofinal_of_directed_cone_cover against the node and the dependency definitions coconeCategory/IsColimiting (EnhancedDiagramsCones), orderedJoinFunctor (PushoutJoinSaturation), orderedJoinInr (JoinSliceRightFibration) and gluingCoconeRestrict (InfinityColimitGluing): poset, finite-upper-bound and Nonempty hypotheses, monotone subcomplex cover with iSup = top, data isos L_a join Delta0 to K_a with no quasicategory assumption on K_a or L_a, t_a as the pure-right vertex, j chosen before E/H/c, colimiting iff for the canonical restriction that keeps the apex and precomposes the whole transformation, no colimit-existence assumption. Single universe u is forced by the coconeCategory interface and the theorem is universe-polymorphic, so no silent restriction. Node diff vs side: only lean and stmt_deps (+3 landed owners, no cycle, lean_audit kept). lean.statement verbatim equal to the file. No statement_change, no definitions or axioms, only sorry. Docstrings carry source, blueprint marker and the 8 proof steps. Worker report and Second reading by NP present. nt_compile --json clean (rc=0, 1.8 s; warn.sorry=false; an injected type error was reported, so errors are caught). HTT checked from knowledge only: not archived, no network. No findings needing correction."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityDirectedConeCover",
+  "declaration": "SSet.Enhanced.exists_cofinal_of_directed_cone_cover",
+  "file": "lean/Sheaf/CategoryTheory/InfinityDirectedConeCover.lean",
+  "statement": "theorem exists_cofinal_of_directed_cone_cover (K : SSet.{u}) [Quasicategory K] (A : Type u) [PartialOrder A] [Nonempty A] (hA : ∀ s : Finset A, ∃ b : A, ∀ a ∈ s, a ≤ b) (B : A → K.Subcomplex) (hB : Monotone B) (hcover : iSup B = ⊤) (L : A → SSet.{u}) (e : ∀ a : A, orderedJoinFunctor.obj (L a, Δ[0]) ≅ (B a).toSSet) : ∃ j : nerve A ⟶ K, (∀ a : A, j.app (op ⦋0⦌) (ComposableArrows.mk₀ a) = (B a).ι.app (op ⦋0⦌) ((e a).hom.app (op ⦋0⦌) ((orderedJoinInr (L a) Δ[0]).app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm 0)))) ∧ ∀ (E : SSet.{u}) [Quasicategory E] (H : K ⟶ E) (c : (coconeCategory H) _⦋0⦌), IsColimiting H c ↔ IsColimiting (j ≫ H) ((gluingCoconeRestrict j H).app (op ⦋0⦌) c)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The supplied right-cone presentations use the landed orderedJoinFunctor and orderedJoinInr; cocones use the existing gluingCoconeRestrict, which fixes the apex and precomposes the whole coherent transformation. Added their three landed owners to stmt_deps under brief-stage2 §5. No statement correction or dependency repair; the theorem is only stated."
  }
 }
