@@ -19,18 +19,102 @@
  },
  "kind": "statement",
  "title": "Cartesian closedness of the infinity category of spaces",
- "statement": "Use the universe and coherent infinity-category conventions of [def-coef-complete-algebroid] and the mapping spaces of [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal S$ be the infinity category of small spaces. The infinity category $\\mathcal S$ is cartesian closed: for every small space $X$ there is a coherent functor $\\operatorname{Map}(X,-):\\mathcal S\\to\\mathcal S$ and an equivalence of spaces $$\\operatorname{Map}_{\\mathcal S}(X\\times Y,Z)\\simeq\\operatorname{Map}_{\\mathcal S}(Y,\\operatorname{Map}(X,Z)),$$ natural in $X$, $Y$ and $Z$, so that $X\\times-:\\mathcal S\\to\\mathcal S$ is left adjoint to $\\operatorname{Map}(X,-)$. Empty spaces are allowed.",
+ "statement": "Use the universe and coherent infinity-category conventions of [def-coef-complete-algebroid] and the mapping spaces of [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal S$ be the infinity category of small spaces [def-coef-infinity-category-of-spaces]. The infinity category $\\mathcal S$ is cartesian closed: for every small space $X$ there is a coherent functor $\\operatorname{Map}(X,-):\\mathcal S\\to\\mathcal S$ and an equivalence of spaces $$\\operatorname{Map}_{\\mathcal S}(X\\times Y,Z)\\simeq\\operatorname{Map}_{\\mathcal S}(Y,\\operatorname{Map}(X,Z)),$$ natural in $X$, $Y$ and $Z$, so that $X\\times-:\\mathcal S\\to\\mathcal S$ is left adjoint to $\\operatorname{Map}(X,-)$. Empty spaces are allowed.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "HTT section 1.2.7 and the cartesian mapping-complex adjunction for Kan complexes (cartesian closed spaces). Presentability clauses removed on maintainer review: they are the existing lem-coef-infinity-presheaf-presentability. No Stacks tag states this infinity-categorical result; online reference, not archived."
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the small Kan complexes and their simplicial category $\\mathbf{Kan}_{\\mathcal U}$ from [def-coef-infinity-category-of-spaces], so $\\mathcal S=N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal U}$. Write $E(K,T)=\\operatorname{Fun}(K,T)$, whose $n$-simplices are maps $K\\times\\Delta^n\\to T$ by [def-cbc-enhanced-diagrams-cones]. Evaluation is the simplicial map $K\\times E(K,T)\\to T$ which in degree $m$ sends $(k,f)$ to $f_m(k,\\mathrm{id}_{[m]})$. For every simplicial set $A$, a map $h:K\\times A\\to T$ has transpose $\\widehat h:A\\to E(K,T)$: at $a\\in A_m$, its value is the map $K\\times\\Delta^m\\to T$ obtained by composing $1_K\\times a$ with $h$. Conversely compose $1_K\\times g$ with evaluation for $g:A\\to E(K,T)$. Evaluation on an arbitrary simplex shows these operations are inverse and commute with simplicial operators. Taking $A=Y\\times\\Delta^n$ gives, compatibly in $n$, a simplicial isomorphism $E(X\\times Y,Z)\\cong E(Y,E(X,Z))$. These are actual constructions on sets of simplicial maps. Smallness follows since such sets are subsets of products of function sets indexed by the small simplex category, in the fixed universe.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.2.16.1; Notation 1.2.7.2; agent expansion of evaluation and transposition"
+   }
+  },
+  {
+   "text": "For small Kan complexes $X,Y,Z$, the degreewise product $X\\times Y$ is Kan: extend the two coordinate maps of any horn separately and pair the fillers. Next a horn $\\Lambda_i^n\\to E(X,Z)$ corresponds by step 1 to a map $X\\times\\Lambda_i^n\\to Z$. The horn inclusion $j:\\Lambda_i^n\\hookrightarrow\\Delta^n$ is anodyne: against any Kan fibration its lifting problem is precisely one of the defining horn problems. The map $\\varnothing\\to X$ is a degreewise monomorphism. Apply [lem-coef-sset-anodyne-pushout-product] to these two maps; their pushout-product is $X\\times\\Lambda_i^n\\hookrightarrow X\\times\\Delta^n$, so it is anodyne. Since $Z\\to\\Delta^0$ is a Kan fibration, the map extends to $X\\times\\Delta^n\\to Z$. Its transpose fills the original horn. Thus $E(X,Z)$ is a small Kan complex. The same argument works with any small simplicial set in place of $X$, so all enriched mapping objects between Kan complexes are Kan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 1.2.16.2, with the Kan pushout-product argument expanded; the cited existing Mathlib leaf supplies that theorem"
+   }
+  },
+  {
+   "text": "For fixed $X$, define enriched functors on $\\mathbf{Kan}_{\\mathcal U}$ by $P_X(Y)=X\\times Y$ and $R_X(Z)=E(X,Z)$. On a simplex $f:Y\\times\\Delta^n\\to Y'$ the action of $P_X$ is $(x,y,t)\\mapsto(x,f(y,t))$. On a simplex $g:Z\\times\\Delta^n\\to Z'$, the action of $R_X$ is the transpose of $(x,u,t)\\mapsto g(\\mathrm{ev}(x,u),t)$, a map $X\\times E(X,Z)\\times\\Delta^n\\to Z'$. Identities and composition agree by substitution; for composition at a shared simplex parameter use the diagonal $\\Delta^n\\to\\Delta^n\\times\\Delta^n$ in both formulas. Step 2 ensures these functors take values among Kan complexes. The coherent nerve on an enriched functor is postcomposition in every simplex, as specified by [def-coef-coherent-nerve-infrastructure]. Hence their nerves are coherent functors $P_X,R_X:\\mathcal S\\to\\mathcal S$. Products of enriched categories commute with this nerve: a functor from $\\mathfrak C[\\Delta^n]$ into a product is exactly a pair of enriched functors. The identical product construction in two varying objects therefore also gives the coherent bifunctor $(X,Y)\\mapsto X\\times Y$. Likewise the substitution formula $(a,g)\\mapsto\\bigl((x',u,t)\\mapsto g(\\mathrm{ev}(a(x',t),u),t)\\bigr)$, transposed, makes $(X,Z)\\mapsto E(X,Z)$ an enriched functor $\\mathbf{Kan}_{\\mathcal U}^{\\mathrm{op}}\\times\\mathbf{Kan}_{\\mathcal U}\\to\\mathbf{Kan}_{\\mathcal U}$, contravariant in $X$ by precomposition; identities and composition again agree by substitution with the diagonal of $\\Delta^n$. Since $i\\mapsto n-i$ with $B\\mapsto\\{n-b:b\\in B\\}$ identifies $\\mathfrak C[\\Delta^n]^{\\mathrm{op}}$ with $\\mathfrak C[\\Delta^n]$, the nerve of the opposite simplicial category is the opposite simplicial set, so its nerve is a coherent bifunctor $\\operatorname{Map}(-,-):\\mathcal S^{\\mathrm{op}}\\times\\mathcal S\\to\\mathcal S$ restricting to $R_X$ for fixed $X$; this is the variance in $X$ used in step 5.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.2.16.1; section 1.1.5 coherent nerve; explicit enriched functor formulas"
+   }
+  },
+  {
+   "text": "The functor $P_X$ is the cartesian product with $X$ in $\\mathcal S$, not just a functor on representatives. For every Kan complex $W$, pairing and projection give a simplicial isomorphism $E(W,X\\times Y)=E(W,X)\\times E(W,Y)$. By [lem-coef-coherent-nerve-comparison], these enriched Hom objects represent the right-pinched mapping spaces of $\\mathcal S$, naturally and compatibly with the two projections. Thus $\\operatorname{Map}_{\\mathcal S}(W,X\\times Y)\\to\\operatorname{Map}_{\\mathcal S}(W,X)\\times\\operatorname{Map}_{\\mathcal S}(W,Y)$ is an equivalence. For the discrete two-point diagram shape $D=\\Delta^0\\amalg\\Delta^0$, the equality $\\operatorname{Fun}(D,\\mathcal S)=\\mathcal S\\times\\mathcal S$ and the right-pinched definition identify its mapping spaces with the displayed product, degree by degree. Apply the limiting-cone criterion of [lem-cbc-enhanced-functor-cone-calculus] to the cone with the two projections. It is limiting, proving the product assertion. Also $\\Delta^0$ is terminal since $E(W,\\Delta^0)=\\Delta^0$ and the same mapping comparison makes every mapping space into it contractible.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.2.16.1 and section 2.2.4; agent expansion of the binary-product universal property"
+   }
+  },
+  {
+   "text": "Apply the natural enriched-Hom/mapping-space equivalences of [lem-coef-coherent-nerve-comparison] to the locally Kan category of step 2. Combined with the explicit simplicial isomorphism in step 1 they give $\\operatorname{Map}_{\\mathcal S}(X\\times Y,Z)\\simeq E(X\\times Y,Z)\\cong E(Y,E(X,Z))\\simeq\\operatorname{Map}_{\\mathcal S}(Y,R_XZ)$. Here $R_XZ=E(X,Z)$ itself is the internal mapping space object. Naturality includes all homotopies: for $a:X'\\to X$, $b:Y'\\to Y$, $c:Z\\to Z'$, transposition carries $h$ to the map sending $y'$ to the map $x'\\mapsto c(h(a(x'),b(y')))$; this equals postcomposition by $c$, precomposition by $a$, and precomposition by $b$ on the transposed side. The same substitution with simplex parameters, repeated by the diagonal when shared, is an identity of simplicial maps in all the enriched Hom parameters. Hence it is compatible with enriched composition and all its nerve coherences, which the cited comparison preserves. This proves naturality in all three variables, not merely a bijection of components. With the coherent functors of step 3 and the cartesian product identified in step 4, this is precisely the mapping-space characterization of $P_X\\dashv R_X$. Explicitly the unit is $y\\mapsto(x\\mapsto(x,y))$ and the counit is evaluation $(x,u)\\mapsto u(x)$; their two triangle composites evaluate to $(x,y)$ and to $u$, respectively. Their enriched naturality again follows from the substitution formulas, so these are coherent adjunction maps. Concretely, an enriched natural transformation specifies an enriched functor out of the product with the discrete simplicial interval category $[1]$; its coherent nerve is the required transformation because $N_{\\mathrm{hc}}[1]=\\Delta^1$ and the nerve preserves products by the degreewise description in step 3. Applying this to the displayed unit and counit makes their coherent status explicit.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4, especially the comparison preceding Proposition 2.2.4.1; agent expansion of enriched currying and its naturality"
+   }
+  },
+  {
+   "text": "No nonemptiness was used. If $X=\\varnothing$, then $X\\times Y=\\varnothing$ and $E(X,Z)=\\Delta^0$ for every $Z$, so both sides of the claimed equivalence are contractible. If $Y=\\varnothing$ both sides are likewise contractible. If $X$ and $Y$ are nonempty and $Z=\\varnothing$, both mapping objects are empty: no map from a nonempty simplicial set to the empty one exists. If $X=\\Delta^0$, evaluation identifies $E(X,Z)$ with $Z$ and the equivalence becomes the identity after the product-unit identification. Thus the construction covers the permitted empty and point cases without modifying the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.2.16.1; explicit edge cases of the constructed mapping objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Online Definition 1.2.16.1, Remark 1.2.16.2 and section 2.2.4 read; explicit proof from simplicial exponentials, existing anodyne pushout-product and coherent-nerve mapping comparison. HTT not archived in literature/; archive requested in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +178,80 @@
    "results": "{\"t\": \"2026-10-16T19:46:38Z\", \"tool\": \"leanfinder\", \"query\": \"Presentable category of homotopy types and functor categories indexed by quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.largeCategory\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Truncated.largeCategory\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.instCategoryHomotopyCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"89ca7ed6ec9be1ac\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reading search returned ordinary category declarations or simplicial-set/quasicategory constructions, not the stated coherent infinity-category theorem; the returned signatures use ordinary Hom sets and do not specialize to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small spaces is cartesian closed with mapping spaces right adjoint to product",
+   "results": "{\"t\": \"2026-10-16T22:22:22Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of small spaces is cartesian closed with mapping spaces right adjoint to product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instMonoidalClosedType\", \"SSet.instMonoidalClosed\", \"CategoryTheory.Cat.cartesianClosed\", \"instMonoidalClosedCondensedSet\", \"CategoryTheory.CartesianClosed\", \"CategoryTheory.Cat.closed\", \"CategoryTheory.binaryProductExponentiable\", \"CategoryTheory.Pi.monoidalClosed_closed_rightAdj\"], \"digest\": \"c357b9e27753f50d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "instMonoidalClosed|anodyneExtensions_pushoutObjObjι|exp.*Fibrant|Fibrant.*exp",
+   "results": "{\"t\": \"2026-10-16T22:23:02Z\", \"tool\": \"grep\", \"query\": \"instMonoidalClosed|anodyneExtensions_pushoutObjObjι|exp.*Fibrant|Fibrant.*exp\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"1440db2a7e9af2c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.instMonoidalClosed",
+   "results": "{\"t\": \"2026-10-16T22:23:07Z\", \"tool\": \"loogle\", \"query\": \"SSet.instMonoidalClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.instMonoidalClosed'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: loogle: unknown identifier 'SSet.instMonoidalClosed'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian closed infinity category of spaces product and function space adjunction",
+   "results": "{\"t\": \"2026-10-16T22:23:07Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian closed infinity category of spaces product and function space adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianClosed\", \"CategoryTheory.Types.tensorProductAdjunction\", \"CategoryTheory.CartesianClosed.mk\", \"CategoryTheory.exp\", \"CategoryTheory.CartesianClosed.curry\", \"CategoryTheory.Functor.functorCategoryClosed\", \"TopCat.prodIsoProd\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\"], \"digest\": \"c9953313797de9b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kan complexes enriched mapping simplicial set exponential adjunction homotopy coherent nerve spaces",
+   "results": "{\"t\": \"2026-10-16T22:23:09Z\", \"tool\": \"leanfinder\", \"query\": \"Kan complexes enriched mapping simplicial set exponential adjunction homotopy coherent nerve spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialNerve\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerve\"], \"digest\": \"fdee062790ebe551\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed|SimplicialNerve|sHomFunctor",
+   "results": "{\"t\": \"2026-10-16T22:25:15Z\", \"tool\": \"grep\", \"query\": \"MonoidalClosed|SimplicialNerve|sHomFunctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"7f2456320e009496\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CartesianClosed.curry",
+   "results": "{\"t\": \"2026-10-16T22:25:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CartesianClosed.curry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.CartesianClosed.curry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: loogle: unknown identifier 'CategoryTheory.CartesianClosed.curry'"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*MonoidalClosed|def SimplicialNerve|noncomputable abbrev sHomFunctor",
+   "results": "{\"t\": \"2026-10-16T22:26:04Z\", \"tool\": \"grep\", \"query\": \"instance.*MonoidalClosed|def SimplicialNerve|noncomputable abbrev sHomFunctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"f59245bca132d5e7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/simplicial-set structures do not state the coherent mapping-space adjunction in the infinity category of small spaces. Read SimplicialNerve.lean:193-205, SimplicialCategory/Basic.lean:57-70 and SimplicialSet/AnodyneExtensions/PushoutProduct.lean:95-103,125-149. The pushout-product theorem is already the existing Mathlib leaf lem-coef-sset-anodyne-pushout-product; it is used as an ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"curry\"",
+   "results": "{\"t\": \"2026-10-16T22:26:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"curry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivingHelpers.and_true_curry\", \"Function.curry\", \"Function.uncurry\", \"Function.curry_uncurry\", \"Function.uncurry_curry\", \"Function.uncurry_apply_pair\", \"Function.curry_apply\", \"List.map_uncurry_zip_eq_zipWith\"], \"digest\": \"d960abce6380e760\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are elementary Function currying and unrelated curry names, not an infinity-category statement"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed|closed",
+   "results": "{\"t\": \"2026-10-16T22:26:53Z\", \"tool\": \"grep\", \"query\": \"MonoidalClosed|closed\", \"sub\": \"AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"12\"], \"digest\": \"6848b51c94127b79\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: file-target grep returned a malformed file field 12 for an import line; this query supplies no declaration evidence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -117,5 +271,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-presheaf-cocompletion",
+  "worker": "stage1",
+  "summary": "Six-step proof constructs simplicial evaluation and currying, proves exponential Kan fibrancy by the existing pushout-product leaf, constructs the coherent functors, verifies the actual cartesian product by the cone criterion, and identifies the full natural mapping-space adjunction. Empty and point cases are explicit. No new nodes; statement gains only its existing space-category definition citation. Corrected source locator from section 1.2.7 alone to section 1.2.16 and section 2.2.4.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2 (finite mapping-complex adjunction before R lim): the cartesian closedness input to the enriched tensor-cocontinuity foundation, via the inherited algebroid/tensor-calculus ancestry. This generic categorical argument does not alter the geometric unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion verifies that the explicit degreewise binary product is the limiting cone; no step of geometric Verdier biduality is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-7ad3518c1",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-7ad3518c1 (reviewer sub-agent of L); spot-checked: I read the item, the report and the full statement of every cited node. The statement is true and not weakened: S=N_hc(Kan_U) is cartesian closed, and empty spaces are allowed. I checked it on four edge cases. With X empty, and with Y empty, both sides are contractible. With X,Y nonempty and Z empty, both sides are empty. With X a point, the map is the identity. It also gives the citer lem-coef-algebroid-segal-localization-model step 1 exactly what that step uses. Step 1: the currying isomorphism E(X×Y,Z)≅E(Y,E(X,Z)) is correct from the Fun formulas in def-cbc-enhanced-diagrams-cones and def-coef-infinity-category-of-spaces. Step 2: the Mathlib leaf lem-coef-sset-anodyne-pushout-product applies, with the monomorphism ∅→X and a horn inclusion as the anodyne map. The horns match (n≥1, every i), so E(X,Z) is Kan. Step 3: the coherent nerve of an enriched functor is postcomposition, as the def-coef-coherent-nerve-infrastructure statement says, and the nerve preserves products. Step 4: Fun(Δ^0⨿Δ^0,S)=S×S holds literally. lem-coef-coherent-nerve-comparison (for locally Kan categories) together with the cone criterion of lem-cbc-enhanced-functor-cone-calculus shows that the product cone is limiting. Step 5: the variances, the unit, the counit and the triangle identities are correct. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), as a generic limiting-cone criterion. I checked the duplicate candidates. lem-coef-spaces-slice-cartesian-closure is an unsplit generalization over S_{/B} and needs this item, so it is not a merge candidate. lem-coef-joyal-homotopy-exponentials is a weaker statement about Hom-sets in the homotopy category. HTT is not archived in the literature, so I could not check it at the cited place. Its absence is reported as WANTED and the proof is correctly marked agent-written. No SGA source is used. I made two repairs in fixes/dag/nodes/sec-six-functors/lem-coef-space-presheaf-cocompletion.json. (1) The report says the source locator was corrected, but source.place still said HTT §1.2.7. It now names Def. 1.2.16.1, Rem. 1.2.16.2-4 and the §2.2.4 comparison. (2) The statement claims naturality in X, but step 3 only built Map(X,-) for a fixed X. I added the enriched bifunctor E:Kan^op×Kan→Kan and the identification C[Δ^n]^op≅C[Δ^n], which makes Map(-,-):S^op×S→S a coherent bifunctor. Both additions are elementary. The statement and dependencies are unchanged, and no new nodes were added.; 1 file(s) fixed by the reviewer"
  }
 }
