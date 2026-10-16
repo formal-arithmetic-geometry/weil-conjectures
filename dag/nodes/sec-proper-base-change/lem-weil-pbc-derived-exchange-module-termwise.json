@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-derived-exchange-module-termwise",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-exchange",
+   "place": "sk-def-exchange/_section.md lines 60-64: the exchange represented by the termwise underived exchange followed by an injective replacement, independently of choices",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "K-injective representative of the module derived exchange mate",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$ form a cartesian square of schemes [def-weil-pbc-cartesian-square], so $fg'=gf'$. Work in the constant-ring module categories $\\Mod(T_{\\Et},\\Lambda)$ and their unbounded derived categories $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Use the exact inverse-image adjunctions $u^{-1}\\dashv u_*$ of [prop-weil-pbc-inverse-image-modules-exact], with sheaf counits $\\varepsilon_u^0$, and the derived functors, derived adjunctions and square comparison specified in [def-kun-unbounded-exchange]. Write $Q_T$ for localization of complexes on $T$ into $D(T_{\\Et},\\Lambda)$. Let $\\theta^0_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ be the module sheaf composition isomorphism whose termwise descent is the square comparison of that definition. Define $\\Ex^0_{\\square,F}:g^{-1}f_*F\\to f'_*g'^{-1}F$ to be the transpose of $g'^{-1}\\varepsilon^0_{f,F}\\circ\\theta^0_{\\square,f_*F}$ under the module adjunction, equivalently its unit-square-counit mate [def-weil-pbc-adjunction-mate].\n\nFor any $K\\in D(X_{\\Et},\\Lambda)$, choose a K-injective complex $I$, an isomorphism $s:K\\xrightarrow{\\sim}Q_XI$, and a quasi-isomorphism $j:g'^{-1}I\\to J$ with $J$ K-injective [def-weil-pbc-kinjective-resolutions]. There is no boundedness assumption on $K,I,J$. Naturality of $\\Ex^0$ gives a morphism of complexes, and put\n$$e=f'_*(j)\\circ\\Ex^0_{\\square,I}:g^{-1}f_*I\\longrightarrow f'_*J.$$\nUse the canonical K-injective direct-image comparisons of [def-kun-unbounded-exchange], that is, the derived-functor comparisons $Q(u_*P)\\xrightarrow{\\sim}Ru_*(QP)$ for K-injective $P$ of [lem-weil-pbc-kinjective-total-derived], to define $\\chi_{I,s}:Q_Y(f_*I)\\xrightarrow{\\sim}Rf_*K$ and $\\chi_{J,t}:Q_{Y'}(f'_*J)\\xrightarrow{\\sim}Rf'_*g'^{-1}K$, where $\\varphi^u_P:u^{-1}Q_TP\\xrightarrow{\\sim}Q_S(u^{-1}P)$ is the exact termwise comparison for $u:S\\to T$ in that definition and $t=Q_{X'}(j)\\circ\\varphi^{g'}_I\\circ g'^{-1}(s)$. Thus $\\chi_{I,s}$ is the canonical comparison $Q_Y(f_*I)\\cong Rf_*Q_XI$ followed by $Rf_*(s^{-1})$, and $\\chi_{J,t}$ is the canonical comparison $Q_{Y'}(f'_*J)\\cong Rf'_*Q_{X'}J$ followed by $Rf'_*(t^{-1})$. Set\n$$\\sigma_{\\rm src}=g^{-1}(\\chi_{I,s})\\circ(\\varphi^g_{f_*I})^{-1},\\qquad\\sigma_{\\rm tgt}=\\chi_{J,t}.$$\nThe specified unbounded module exchange mate $\\Ex_{\\square,K}$ of [def-kun-unbounded-exchange] satisfies\n$$\\Ex_{\\square,K}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q_{Y'}(e).$$\nConsequently every such pair of representatives gives the same exchange morphism after these canonical identifications. In particular this applies to bounded below $K$, a bounded below injective resolution $I$ and any K-injective replacement $j$; no preservation of K-injectivity by $g'^{-1}$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 (lemma-base-change-map-flat-case), injective-complex construction, and Tag 07A7 (remark-base-change), derived adjoint transpose; comparison for arbitrary module K-injective representatives, with derived.tex Tags 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies) and 0DVC (lemma-pre-derived-adjoint-functors). The comparison is an agent-formulated supporting statement, not quoted as a Stacks theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate defining derived base change for etale Lambda module sheaves is computed by the underived mate on a K-injective complex followed by a K-injective replacement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedη",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CategoryTheory.Adjunction.derivedη_fac_app"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.derived",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derivedBaseChange|baseChangeMap",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "Algebra/Homology",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for module sheaves computed on an arbitrary K-injective resolution",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "IsBaseChange.dual",
+     "KaehlerDifferential.mapBaseChange.congr_simp",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "KaehlerDifferential.mapBaseChange",
+     "PresheafOfModules.Derivation",
+     "KaehlerDifferential.tensorKaehlerEquivBase",
+     "PresheafOfModules.Derivation'"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived Beck Chevalley mate of exact inverse images equals the localized termwise underived base change followed by injective replacement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CochainComplex.IsKInjective.Qh_map_bijective"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|baseChangeMap|mateEquiv",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "CategoryTheory/Functor/Derived",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an adjunction between complexes induces a derived counit compatible with a K-injective fibrant replacement and the exchange mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+     "CategoryTheory.Adjunction.derivedη"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no full match: derived unit/counit compatibility is an ingredient, not the four-edge module exchange representative equality; read Adjunction.lean lines 103-131"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|derivedη_fac_app|mateEquiv",
+   "results": {
+    "hits": 2,
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "directory": "CategoryTheory/Functor/Derived",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no full match: derived unit/counit compatibility is an ingredient, not the four-edge module exchange representative equality; read Adjunction.lean lines 103-131"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε_fac_app"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no full match: derived unit/counit compatibility is an ingredient, not the four-edge module exchange representative equality; read Adjunction.lean lines 103-131"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-exchange",
+  "date": "2026-10-17",
+  "group": "NE"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange"
+}

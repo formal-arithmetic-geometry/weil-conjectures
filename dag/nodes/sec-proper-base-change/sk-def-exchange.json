@@ -3,25 +3,359 @@
  "blueprint": {
   "is": "sk-def-exchange",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-kun-unbounded-exchange",
+   "def-weil-pbc-derived-exchange",
+   "sbc-def-base-change-map"
+  ]
  },
  "kind": "definition",
  "title": "Derived exchange",
- "statement": "Consider a cartesian square\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\n{\\scriptstyle f'}\\downarrow & & \\downarrow{\\scriptstyle f}\\\\\nY' & \\xrightarrow{g} & Y.\n\\end{array}\n$$\n\nThe commutativity of the square supplies the canonical composition\nisomorphism of functors $\\Sh(Y_{\\Et})\\to\\Sh(X'_{\\Et})$\n\n$$\n\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\ \\sim\\ }g'^{-1}f^{-1}.\n$$\n\nSince inverse images are exact, $\\theta_\\square$ also denotes the induced\nisomorphism of functors $D^+(Y_{\\Et},\\Lambda)\\to D^+(X'_{\\Et},\\Lambda)$. (For\n$F\\in\\Sh(X_{\\Et})$ the *underived exchange map*\n$\\Ex^0_{\\square,F}:g^{-1}f_*F\\to f'_*g'^{-1}F$ in $\\Sh(Y'_{\\Et})$ is the\nadjoint, under $f'^{-1}\\dashv f'_*$, of\n$f'^{-1}g^{-1}f_*F\\xrightarrow{\\theta_\\square}g'^{-1}f^{-1}f_*F\n\\xrightarrow{g'^{-1}\\varepsilon_f}g'^{-1}F$, with $\\varepsilon_f$ the counit;\nit is natural in $F$, and likewise for sheaves of $\\Lambda$-modules.)\n\n**Definition (derived exchange).** For $K\\in D^+(X_{\\Et},\\Lambda)$, the\n*exchange morphism*\n\n$$\n\\Ex_{\\square,K}:g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n\\qquad\\text{in }D^+(Y'_{\\Et},\\Lambda)\n$$\n\nis the adjoint, under $f'^{-1}\\dashv Rf'_*$, of\n\n$$\nf'^{-1}g^{-1}Rf_*K\\xrightarrow{\\ \\theta_\\square\\ }g'^{-1}f^{-1}Rf_*K\n\\xrightarrow{\\ g'^{-1}\\varepsilon_f\\ }g'^{-1}K\n\\qquad\\text{in }D^+(X'_{\\Et},\\Lambda),\n$$\n\nwhere $\\varepsilon_f:f^{-1}Rf_*\\to\\mathrm{id}$ now denotes the derived counit\non $D^+(X_{\\Et},\\Lambda)$. The morphism is natural in $K$, so\n$\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$ is a natural transformation of\nfunctors $D^+(X_{\\Et},\\Lambda)\\to D^+(Y'_{\\Et},\\Lambda)$.\n\nThe derived adjunction exists because inverse image is exact and its right\nadjoint preserves injectives. The construction needs only a commutative\nsquare; the cartesian hypothesis matters for the question whether it is an\nisomorphism. Concretely, for a bounded below injective resolution\n$K\\to I^\\bullet$ and an injective replacement $g'^{-1}I^\\bullet\\to J^\\bullet$,\nthe exchange is represented by the morphism of complexes\n$g^{-1}f_*I^\\bullet\\xrightarrow{\\Ex^0_{\\square,I^\\bullet}}f'_*g'^{-1}I^\\bullet\n\\to f'_*J^\\bullet$, independently of the choices.",
+ "statement": "Fix the discrete commutative coefficient ring $\\Lambda$ of [sk-def-pbc-conventions] and the module derived categories of [def-weil-pbc-derived-categories]. In the derived formulas below, $\\Ex_\\square$ and $\\theta_\\square$ are the module exchange mate and termwise square comparison of [def-kun-unbounded-exchange], restricted to the full bounded below subcategories. Inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]; derived direct image restricts to $D^+$ and is computed there by bounded below injective complexes by the module-sheaf clause of [def-weil-pbc-direct-image]. Hence this restriction has the displayed endpoints in $D^+$ and the same adjunction unit and counit.\n\nAt the sheaf level, the inverse-image adjunction on sheaves of sets is [lem-weil-pbc-sets-etale-inverse-image-exact]; the abelian underived exchange is [def-weil-pbc-underived-exchange]. On constant-ring module sheaves the underived exchange is the same adjoint-mate formula using [prop-weil-pbc-inverse-image-modules-exact]; its linearity and naturality are [lem-weil-pbc-underived-exchange-module-linear]. The module composition isomorphisms are [lem-weil-pbc-inverse-image-composition-module-linear]. On sheaves of sets, for $u:Y\\to X$ and $v:Z\\to Y$ the composition isomorphism $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(uv)^{-1}$ is the unique isomorphism whose conjugate [def-weil-pbc-adjunction-conjugate], for $(uv)^{-1}\\dashv(uv)_*$ and the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ [def-weil-pbc-composite-adjunction] of the set adjunctions of [lem-weil-pbc-sets-etale-inverse-image-exact], is the identification $(uv)_*F\\cong u_*v_*F$ given by restriction along the canonical isomorphisms $(W\\times_XY)\\times_YZ\\cong W\\times_XZ$ [def-pc-fibre-product]; the set-level $\\theta_\\square$ is formed from these by the same formula as below. All occurrences of the resolution formula below concern this fixed module mate and are the bounded below case of [lem-weil-pbc-derived-exchange-module-termwise]; this is a comparison theorem, not a new definition of the exchange.\n\nFor the comment about a merely commutative square, form $\\theta^0=(c_{f,g'})^{-1}c_{g,f'}$ using $fg'=gf'$ and the module composition isomorphisms just cited. For a complex $P$, naturality gives $d\\,\\theta^0_{P^r}=\\theta^0_{P^{r+1}}\\,d$ in every degree $r$, so the components form an isomorphism of complexes. Each termwise inverse-image functor preserves quasi-isomorphisms by exactness. The localization property used in [def-kun-unbounded-exchange] therefore descends this isomorphism and its inverse to the derived categories. Apply [def-weil-pbc-adjunction-mate] to this descended square isomorphism and the edge adjunctions already specified. This construction uses only $fg'=gf'$, with no pullback identification.\n\nConsider a cartesian square\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\n{\\scriptstyle f'}\\downarrow & & \\downarrow{\\scriptstyle f}\\\\\nY' & \\xrightarrow{g} & Y.\n\\end{array}\n$$\n\nThe commutativity of the square supplies the canonical composition\nisomorphism of functors $\\Sh(Y_{\\Et})\\to\\Sh(X'_{\\Et})$\n\n$$\n\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\ \\sim\\ }g'^{-1}f^{-1}.\n$$\n\nSince inverse images are exact, $\\theta_\\square$ also denotes the induced\nisomorphism of functors $D^+(Y_{\\Et},\\Lambda)\\to D^+(X'_{\\Et},\\Lambda)$. (For\n$F\\in\\Sh(X_{\\Et})$ the *underived exchange map*\n$\\Ex^0_{\\square,F}:g^{-1}f_*F\\to f'_*g'^{-1}F$ in $\\Sh(Y'_{\\Et})$ is the\nadjoint, under $f'^{-1}\\dashv f'_*$, of\n$f'^{-1}g^{-1}f_*F\\xrightarrow{\\theta_\\square}g'^{-1}f^{-1}f_*F\n\\xrightarrow{g'^{-1}\\varepsilon_f}g'^{-1}F$, with $\\varepsilon_f$ the counit;\nit is natural in $F$, and likewise for sheaves of $\\Lambda$-modules.)\n\n**Definition (derived exchange).** For $K\\in D^+(X_{\\Et},\\Lambda)$, the\n*exchange morphism*\n\n$$\n\\Ex_{\\square,K}:g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n\\qquad\\text{in }D^+(Y'_{\\Et},\\Lambda)\n$$\n\nis the adjoint, under $f'^{-1}\\dashv Rf'_*$, of\n\n$$\nf'^{-1}g^{-1}Rf_*K\\xrightarrow{\\ \\theta_\\square\\ }g'^{-1}f^{-1}Rf_*K\n\\xrightarrow{\\ g'^{-1}\\varepsilon_f\\ }g'^{-1}K\n\\qquad\\text{in }D^+(X'_{\\Et},\\Lambda),\n$$\n\nwhere $\\varepsilon_f:f^{-1}Rf_*\\to\\mathrm{id}$ now denotes the derived counit\non $D^+(X_{\\Et},\\Lambda)$. The morphism is natural in $K$, so\n$\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$ is a natural transformation of\nfunctors $D^+(X_{\\Et},\\Lambda)\\to D^+(Y'_{\\Et},\\Lambda)$.\n\nThe derived adjunction exists because inverse image is exact and its right\nadjoint preserves injectives. The construction needs only a commutative\nsquare; the cartesian hypothesis matters for the question whether it is an\nisomorphism. Concretely, for a bounded below injective resolution\n$K\\to I^\\bullet$ and an injective replacement $g'^{-1}I^\\bullet\\to J^\\bullet$,\nthe exchange is represented by the morphism of complexes\n$g^{-1}f_*I^\\bullet\\xrightarrow{\\Ex^0_{\\square,I^\\bullet}}f'_*g'^{-1}I^\\bullet\n\\to f'_*J^\\bullet$, independently of the choices.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-exchange/_section.md",
   "place": "node sk-def-exchange, order 1044"
  },
  "stmt_deps": [
-  "sk-def-conv",
-  "sk-def-pbc-conventions"
+  "sk-def-pbc-conventions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-kun-unbounded-exchange",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-derived-exchange-module-termwise",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-pc-fibre-product"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChangeMap|derivedBaseChangeMapPlus|baseChange",
+   "results": "0 hits: ; subdirectory: Mathlib",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory (the search command already prefixes Mathlib/); repeated with the corrected path, not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, DerivedCategory.Plus, rightDerivedFunctorPlus",
+   "results": "0 hits: ; loogle: unknown identifier 'rightDerivedFunctorPlus'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no conclusion about absence; successful mateEquiv searches supersede it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived exchange morphism cartesian square underived exchange K-injective resolution",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.desc, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.Hom, CategoryTheory.InjectiveResolution.descFZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived exchange morphism for a cartesian square of etale sheaves as mate of counit",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.sheafComposeNatTrans_fac, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|exchange.*[Dd]erived|[Dd]erived.*exchange",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no full derived etale module exchange construction among these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "generic mate correspondence only, not the full derived etale module exchange construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change natural transformation on bounded below categories of etale sheaves of modules computed on injective resolutions",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.NatTrans.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation from exact inverse image of right derived pushforward to right derived pushforward of inverse image, defined as the adjoint mate of the counit on etale module sheaves",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|beckChevalley|derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived",
+   "results": "7 hits: Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/CartanCriterion.lean",
+   "date": "2026-10-16",
+   "verdict": "no full derived etale module exchange construction among these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-16",
+   "verdict": "generic mate correspondence only, not the full derived etale module exchange construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley natural transformation for exact left adjoints and right derived right adjoints in a square of sheaf categories",
+   "results": "8 hits: CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived exchange transformation for etale sheaves of modules on D plus defined as mate of derived square isomorphism",
+   "results": "8 hits: PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.Derivation.Universal, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.HasDifferentials, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv DerivedCategory.Plus",
+   "results": "0 hits: ; loogle: Application type mismatch: The argument\n  DerivedCategory.Plus\nhas type\n  (C : Type ?u.9) →\n    [inst : CategoryTheory.Category.{?u.10, ?u.9} C] →\n      [inst_1 : CategoryTheory.Abelian C] → [HasDeriv",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no conclusion about absence; successful mateEquiv searches supersede it"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMapPlus|baseChangeMap",
+   "results": "0 hits: ; subdirectory: Mathlib",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory (the search command already prefixes Mathlib/); repeated with the corrected path, not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "generic mate correspondence only, not the full derived etale module exchange construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change map for a commutative square of schemes computed on injective complexes of sheaves of modules",
+   "results": "8 hits: KaehlerDifferential.mapBaseChange, KaehlerDifferential.cotangentComplexBaseChange, CategoryTheory.InjectiveResolution.desc_commutes, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, KaehlerDifferential.tensorKaehlerEquivBase, IsBaseChange.toDual_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian|HasSheafify|HasSmallSiteSheafify",
+   "results": "0 hits: ; subdirectory: Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory (the search command already prefixes Mathlib/); repeated with the corrected path, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation from exact pullback of derived direct image to derived direct image of pullback on bounded below sheaf categories",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPushforwardContinuousNatTrans, SheafOfModules.pushforwardNatIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the derived etale module exchange with its mate and replacement clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMapPlus|baseChangeMap",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no full derived etale module exchange construction among these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian|HasSheafify|HasSmallSiteSheafify",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory: Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no full derived etale module exchange construction among these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|BaseChange|exchange",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "CategoryTheory/Abelian/RightDerived",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory: RightDerived is a .lean file, not a directory; no absence conclusion; repeated over CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.rightDerived",
+   "results": {
+    "hits": 5,
+    "top": [
+     "CategoryTheory.NatTrans.rightDerived",
+     "CategoryTheory.NatTrans.rightDerived_id",
+     "CategoryTheory.NatTrans.rightDerived_comp",
+     "CategoryTheory.NatTrans.rightDerived_comp_assoc",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no full match: the declarations induce the individual R^n of natural transformations between additive functors; they do not construct the total derived etale base-change mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functors of pushforward and exact pullback have a canonical Beck Chevalley mate for sheaves of modules",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.pushforward_assoc",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no full match: these are underived module sheaf adjunctions and composition comparisons, not the total derived exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|beckChevalley|derivedBaseChange|baseChangeMap",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "CategoryTheory",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the queried exchange names in CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate defining derived base change for etale Lambda module sheaves is computed by the underived mate on a K-injective complex followed by a K-injective replacement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedη",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CategoryTheory.Adjunction.derivedη_fac_app"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.derived",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derivedBaseChange|baseChangeMap",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "Algebra/Homology",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for module sheaves computed on an arbitrary K-injective resolution",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "IsBaseChange.dual",
+     "KaehlerDifferential.mapBaseChange.congr_simp",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "KaehlerDifferential.mapBaseChange",
+     "PresheafOfModules.Derivation",
+     "KaehlerDifferential.tensorKaehlerEquivBase",
+     "PresheafOfModules.Derivation'"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived Beck Chevalley mate of exact inverse images equals the localized termwise underived base change followed by injective replacement",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CochainComplex.IsKInjective.Qh_map_bijective"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|baseChangeMap|mateEquiv",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "CategoryTheory/Functor/Derived",
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: generic adjunction, localization or individual derived-functor infrastructure only; no module exchange representative equality"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -48,5 +382,44 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-exchange",
+  "worker": "stage1",
+  "summary": "Repair C4/C5/B9/G1: all derived module data now comes from the stored reviewed def-kun-unbounded-exchange, restricted to D+ via the stored module direct-image definition. Removed every reliance on unadopted blueprint_update fields. A new statement-only unbounded Lambda-module K-injective representative comparison supplies the resolution clause with typed canonical comparisons, using the specified unbounded mate throughout. Record the existing duplicate constructions in same_as. Retain the source sketch verbatim after explicit identifications. No source-facing hypotheses change. Second reading writes out the commutative-square descent and the target representative comparison.",
+  "blueprint": "main-20261015 sk-def-exchange/_section.md lines 10-64; the mate is the existing unbounded module mate restricted to D+, and the final resolution paragraph is its new module K-injective comparison statement.",
+  "tool_uses": [
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "Stored definition of the same canonical module derived mate for arbitrary Lambda; reused by restriction to D+, while this unit's older detailed stored definition is abelian-only. This supplies the same construction rather than replacing a proof route."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-module-linear",
+    "why": "Generic linearity and naturality of the underived exchange on constant-ring modules; the unit's stored underived definition is abelian-only."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic module composition comparisons used to specify the sheaf theta; no stored module statement in this unit supplies these comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Generic exact inverse-image adjunction on set-valued small etale sheaves for the source sketch's sheaf-level clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-sets-etale-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NE-44ef51e46",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-44ef51e46 (reviewer sub-agent of L); spot-checked: FIX for two missing citations; the mathematics is correct and nothing else changes. I read the item, the new node, every cited stored statement, the verbatim main-20261015 sketch (lines 10-64) and Stacks 0736/07A7, and checked the tag labels 0736, 07A7, 070I, 070K and 0DVC in tags/tags. Item: the derived exchange is the module mate of def-kun-unbounded-exchange (arbitrary commutative Lambda, constant-ring module sheaves, K-injective Ru_*) restricted to D+. That is valid: exact inverse image keeps the lower bound, and for K in D+ the bounded-below injective I of def-weil-pbc-direct-image is K-injective, so Q(u_*I) is in D+. Theta is c_{f,g'}^{-1} c_{g,f'} with the right orientation, the transpose is g'^{-1}eps_f o theta, and the commutative-square descent is sound. This matches Lean Etale.baseChange (MorphismDefs l.95-213): unit, then theta = (upperStarPlusComp f' g).symm >> eqToIso >> upperStarPlusComp g' f, then counit, with the D+ adjunction restricted from the unbounded one and only a CommSq needed. No coefficient category is silently identified, no target is weakened, no blueprint_update is used and no SGA is cited. New node lem-weil-pbc-derived-exchange-module-termwise: the domains and codomains of s, t, chi, sigma and e type-check, and both sides of the equation go from Q(g^{-1}f_*I) to Rf'_*g'^{-1}K. It is true because f'_* preserves K-injectives, the derived counit is the localized termwise counit and the triangle identities apply. I tested the identity square, f = id, K = 0, the zero ring, empty schemes and an acyclic K-injective representing 0. It is not a duplicate: lem-weil-pbc-derived-exchange-termwise, the unbounded-transport lemma, the replacement lemma, lem-kun-unbounded-exchange-agrees and sbc-def-base-change-map are abelian, D+-only, Z-only or H^0-only. It is statement-only, a claim moved out of a definition and not a restatement of a clause. The graph stays acyclic. Repairs (B3/C4), written in fixes/: (1) the item's set-level theta cited no node; I added c_{u,v} as the conjugate [def-weil-pbc-adjunction-conjugate] of (uv)_* = u_*v_* under the composite adjunction [def-weil-pbc-composite-adjunction] of the set adjunctions, via [def-pc-fibre-product], with stmt_deps added. (2) The new node now cites [lem-weil-pbc-kinjective-total-derived] for the canonical comparison Q(u_*P) = Ru_*QP on an arbitrary K-injective P. I accept the four tool_uses as notions or generic tools. The stale 'unreachable' flag is wrong (sk-thm-properbasechange cites the item) and is left for the maintainer to regenerate.; 2 file(s) fixed by the reviewer"
+ }
 }
