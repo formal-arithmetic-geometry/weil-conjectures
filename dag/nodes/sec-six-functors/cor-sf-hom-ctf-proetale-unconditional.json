@@ -20,7 +20,9 @@
   "def-weil-pbc-constructible-complexes",
   "def-weil-proetale-tor-amplitude",
   "def-pur-derived-internal-hom",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-modules",
+  "def-kun-tor-amplitude"
  ],
  "proof": [
   {
@@ -211,5 +213,28 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-4e7556336 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All four proof steps match their cited conclusions and hypotheses; the finite-coefficient Hom comparison and sharp Tor interval are correct. Accepted the declared dimension-bound tool use. No new nodes, circular dependencies through the item, or repairs found. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fae8663f4",
+  "group": "N4",
+  "result": "pass",
+  "note": "All hypotheses, conclusions, dependencies, universes, edge cases, docstrings, canonical pro-etale comparison, and compile evidence checked; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtalePerfectHomTorAmplitude",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficientComparisonRHom_boundedConstructible_torAmplitude",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteCoefficientComparisonRHom",
+   "AlgebraicGeometry.Scheme.finiteCoefficientComparisonRHom_boundedConstructible_torAmplitude"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtalePerfectHomTorAmplitude.lean",
+  "statement": "theorem finiteCoefficientComparisonRHom_boundedConstructible_torAmplitude (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (a b c d : ℤ) (_hab : a ≤ b) (_hcd : c ≤ d) (K M : Etale.DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X) (_hK : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : ULift.{u + 1} (Padic.coefficientExtensionRing l E n) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) X K) (_hM : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : ULift.{u + 1} (Padic.coefficientExtensionRing l E n) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) X M) (_hKt : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X a b K) (_hMt : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X c d M) (_hPerfect : Etale.DerivedCategory.IsSitePerfect K) : intrinsicFiniteTorsionConstructible l E n hn X (finiteCoefficientComparisonRHom X (Padic.coefficientExtensionRing l E n) (Padic.finite_coefficientExtensionRing l E n hn) K M) ∧ HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E n) (finiteCoefficientComparisonRHom X (Padic.coefficientExtensionRing l E n) (Padic.finite_coefficientExtensionRing l E n hn) K M) (c - b) (d - a)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The site-perfect hypothesis reuses the existing upstream Etale.DerivedCategory.IsSitePerfect, with its etale cover and bounded finite-free retract models. The helper composes the recorded intrinsic derived comparison with the recorded universe-general K-injective internal Hom; its coefficient-finiteness proof is supplied by the recorded coefficient theorem. Two already-landed statement dependencies are cited for that canonical comparison and the etale Tor predicate."
  }
 }

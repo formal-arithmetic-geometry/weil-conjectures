@@ -7,13 +7,16 @@
  },
  "kind": "statement",
  "title": "Scalar extension is an exact triangulated functor",
- "statement": "Let $E\\subset L$ be a finite extension of $\\Ql$ and let $Y$ be a scheme. The\nscalar-extension functor\n\n$$\n -\\otimes_E L:D^b_c(Y,E)\\longrightarrow D^b_c(Y,L)\n$$\n\nof [def-weil-rationalization-karoubi] is an exact triangulated functor: it\npreserves shifts and carries distinguished triangles of $D^b_c(Y,E)$ to\ndistinguished triangles of $D^b_c(Y,L)$.",
+ "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, and a\n$\\mathbf Q_\\ell$-algebra inclusion $E\\hookrightarrow L$. Let $Y$ be any scheme.\nThe scalar-extension functor\n$$\n-\\otimes_E L:D^b_c(Y,E)\\longrightarrow D^b_c(Y,L)\n$$\nof [def-weil-rationalization-karoubi], obtained from the completed integral\nscalar extension [def-weil-integral-scalar-extension] restricted by\n[lem-weil-integral-scalar-extension-constructible] and then rationalized, is an\nexact triangulated functor: it preserves shifts and carries distinguished\ntriangles of $D^b_c(Y,E)$ to distinguished triangles of $D^b_c(Y,L)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
   "place": "node lem-weil-scalar-extension-exact-triangulated, order 1883"
  },
  "stmt_deps": [
-  "def-weil-rationalization-karoubi"
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-field-fiber",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible"
  ],
  "proof": [
   {
@@ -242,5 +245,57 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-33b76c38d (reviewer sub-agent of L); spot-checked: Reviewed the complete item, DAG route, cited statements, blueprint, Stacks/Bhatt–Scholze sources, coefficient categories, cone signs, derived/K-flat hypotheses, localization morphisms, searches, duplicates, and edge cases. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4c615dbbe",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Verified statements, dependencies, source correction and all citers, canonical constructions, universes, edge cases, and records. All four immutable Lean modules compiled cleanly through scompile.py. No fixes required.; reverted the delivery's change of existing node(s) def-weil-integral-scalar-extension, def-weil-rationalization-karoubi, lem-weil-integral-scalar-extension-constructible (--revert-nodes; kept as on newtargets-dag)",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionExactTriangulated",
+  "declaration": "WeilConjectures.scalarExtension_exact_triangulated",
+  "file": "lean/Sheaf/Paper/ScalarExtensionExactTriangulated.lean",
+  "statement": "theorem scalarExtension_exact_triangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{u}) : ∃ h : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ, (fun [commShift : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦ (rationalScalarExtension D l hl E Y L ι).IsTriangulated) (commShift := h)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.scalarExtension_exact_triangulated"
+  ]
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "NY stage 2",
+  "old_statement": "Let $E\\subset L$ be a finite extension of $\\Ql$ and let $Y$ be a scheme. The\nscalar-extension functor\n\n$$\n -\\otimes_E L:D^b_c(Y,E)\\longrightarrow D^b_c(Y,L)\n$$\n\nof [def-weil-rationalization-karoubi] is an exact triangulated functor: it\npreserves shifts and carries distinguished triangles of $D^b_c(Y,E)$ to\ndistinguished triangles of $D^b_c(Y,L)$.",
+  "what": "Make explicit the finite-field datum and l ≠ p already assumed throughout the source defining the categories. Specify E ⊂ L as an inclusion of Q_l-algebras, and expose the already specified completed integral construction in statement dependencies so its missing dependency interfaces are supplied with this delivery. No geometric or coefficient case is removed.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/lem-weil-scalar-extension-exact-triangulated.md",
+   "place": "The opening reference to def-weil-rationalization-karoubi, whose first paragraph fixes the global finite-field datum and l ≠ p; its final paragraph defines scalar extension on integral representatives."
+  },
+  "citers": [
+   {
+    "id": "prop-functor-package",
+    "holds": true,
+    "note": "Clause (1) uses the same exact finite coefficient extension, within its fixed six-functor datum and prime convention."
+   },
+   {
+    "id": "lem-fix-operation-reduction",
+    "holds": true,
+    "note": "Its derived-complete coefficient stages already use the global prime convention; transporting the comparisons still uses the identical completed rational functor."
+   },
+   {
+    "id": "def-weil-algebraically-closed-coefficients",
+    "holds": true,
+    "note": "It fixes the same global finite-field datum and l ≠ p; IntermediateField.inclusion is exactly a Q_l-algebra inclusion, including equality."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-rationalization-karoubi"
+  ]
  }
 }

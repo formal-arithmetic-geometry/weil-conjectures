@@ -310,25 +310,38 @@
   ]
  },
  "lean": {
-  "module": "Sheaf.Paper.SequentialDerivedInverseLimitFunctor",
-  "declaration": "AlgebraicGeometry.ProEtale.sequentialDerivedInverseLimit_functorial",
+  "module": "Sheaf.Paper.CompletedTowerDerivedLimitFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.completedTowerRlim_properties",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.sequentialDerivedInverseLimit_functorial"
+   "AlgebraicGeometry.Scheme.completedTowers_hasKInjectiveResolutions",
+   "AlgebraicGeometry.Scheme.completedTowerLimit_additive",
+   "AlgebraicGeometry.Scheme.completedTowerRlim",
+   "AlgebraicGeometry.Scheme.completedTowerConstant",
+   "AlgebraicGeometry.Scheme.completedTowerConstant_exact",
+   "AlgebraicGeometry.Scheme.completedTowerConstant_additive",
+   "AlgebraicGeometry.Scheme.completedTowerConstant_finiteLimits",
+   "AlgebraicGeometry.Scheme.completedTowerConstant_finiteColimits",
+   "AlgebraicGeometry.Scheme.completedDerivedConstant",
+   "AlgebraicGeometry.Scheme.completedConstantLimitUnit",
+   "AlgebraicGeometry.Scheme.completedConstantRlimUnit_exists",
+   "AlgebraicGeometry.Scheme.completedConstantRlimUnit",
+   "AlgebraicGeometry.Scheme.completedTowerRlim_properties",
+   "AlgebraicGeometry.Scheme.completedTowerRlim_roos"
   ],
-  "file": "lean/Sheaf/Paper/SequentialDerivedInverseLimitFunctor.lean",
-  "statement": "theorem sequentialDerivedInverseLimit_functorial (T : Scheme.{t}) {A : Type t} [CommRing A] (d : Scheme.AdicCoefficientDatum A) [EnoughInjectives (Scheme.CompletedAdicTowers T d)] (I : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ ⥤ CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) (η : 𝟭 (CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) ⟶ I) (hI : ∀ M : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ, QuasiIso (η.app M) ∧ (I.obj M).IsKInjective) : ∃ (RF : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)) (_ε : DerivedCategory.Q ⋙ RF ≅ I ⋙ (lim : Scheme.CompletedAdicTowers T d ⥤ Scheme.CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q), (∃ (_ : RF.CommShift ℤ), RF.IsTriangulated) ∧ (∀ M : DerivedCategory (Scheme.CompletedAdicTowers T d), IsAdicSequentialDerivedLimit T d M (RF.obj M)) ∧ ∀ (J : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ ⥤ CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) (ν : 𝟭 (CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) ⟶ J), (∀ M : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ, QuasiIso (ν.app M) ∧ (J.obj M).IsKInjective) → ∀ (RF' : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)), Nonempty (DerivedCategory.Q ⋙ RF' ≅ J ⋙ (lim : Scheme.CompletedAdicTowers T d ⥤ Scheme.CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) → Nonempty (RF ≅ RF')",
+  "file": "lean/Sheaf/Paper/CompletedTowerDerivedLimitFunctor.lean",
+  "statement": "theorem completedTowerRlim_properties (T : Scheme.{u}) : (∃ (_ : (completedTowerRlim d T).CommShift ℤ), (completedTowerRlim d T).IsTriangulated) ∧ ∀ (RF : DerivedCategory (pbcTowers T (pbcAdicCompletion T d)) ⥤ DerivedCategory (pbcModules T (pbcAdicCompletion T d))) (η : (lim : pbcTowers T (pbcAdicCompletion T d) ⥤ pbcModules T (pbcAdicCompletion T d)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF), RF.IsRightDerivedFunctor η (HomotopyCategory.quasiIso (pbcTowers T (pbcAdicCompletion T d)) (.up ℤ)) → Nonempty (RF ≅ completedTowerRlim d T)",
   "branch": "newtargets-dag",
-  "by": "Q09",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): the newly recorded sequential interface uses scheme-sized coefficients and the CompletedAdicTowers presentation. This consumer retains independent coefficient size u+1 on the small site with object/Hom sizes u+1/u. The ordinary strict-tower limit and its universal K-injective right derived functor retain triangulatedness and invariance under resolution choice, with the canonical constant-tower unit."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-383f89834",
-  "group": "Q09",
+  "reviewer": "NT-stage2-Codex-c2271f7ed",
+  "group": "Q31",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, declarations, correction audit, universes, edge cases, and report. Both modules compile cleanly through scompile.py’s local side overlay; signatures match verbatim. No faults found. Recorded in review.md; branch and project clones unchanged.",
-  "statement_corrected": true
+  "note": "Statement, dependencies, source alignment, edge cases, canonical constructions, docstrings, and recorded scompile/dry-run evidence checked; no findings.; reverted the delivery's change of existing node(s) def-weil-pbc-derived-inverse-limit (--revert-nodes; kept as on newtargets-dag)"
  }
 }

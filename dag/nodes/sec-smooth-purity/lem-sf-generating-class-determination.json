@@ -290,5 +290,38 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-5e57e05a3 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit, chapter route, cited DAG statements, recorded source locations, all 13 proof steps, edge cases, searches, and report. The shift-compatibility correction is necessary and valid; the dual-number counterexample checks out. No new-node, citation, cycle, route, or mathematical defect requires repair. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-690e615e9",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Wrote review.md. Checked every statement clause, dependencies, source text, canonical construction, edge cases, universes, docstrings, report sections, and verbatim signature. Immutable module reproduced cleanly through scompile.py; no delivery errors found. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination",
+  "declaration": "CategoryTheory.GeneratingClassCounterexample.exists_dualNumber_counterexample",
+  "declarations": [
+   "CategoryTheory.NatTrans.isIso_app_of_triangEnvelope",
+   "CategoryTheory.NatTrans.isIso_of_isClassicalTriangulatedGenerator",
+   "CategoryTheory.NatTrans.isIso_app_shift_iff",
+   "CategoryTheory.NatTrans.isIso_app_of_retract",
+   "CategoryTheory.GeneratingClassCounterexample.Ring",
+   "CategoryTheory.GeneratingClassCounterexample.delta",
+   "CategoryTheory.GeneratingClassCounterexample.perfect",
+   "CategoryTheory.GeneratingClassCounterexample.inclusion",
+   "CategoryTheory.GeneratingClassCounterexample.shiftedInclusion",
+   "CategoryTheory.GeneratingClassCounterexample.generator",
+   "CategoryTheory.GeneratingClassCounterexample.InducedByPartial",
+   "CategoryTheory.GeneratingClassCounterexample.exists_dualNumber_counterexample"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/GeneratingClassDetermination.lean",
+  "statement": "theorem exists_dualNumber_counterexample : ∃ (hR : perfect generator) (P : CochainComplex (ModuleCat.{0} Ring) ℤ) (e₀ : P.X 0 ≅ ModuleCat.of Ring Ring) (e₁ : P.X 1 ≅ ModuleCat.of Ring Ring) (hP : perfect (DerivedCategory.Q.obj P)), P.IsStrictlyGE 0 ∧ P.IsStrictlyLE 1 ∧ (∀ r : Ring, (e₀.inv ≫ P.d 0 1 ≫ e₁.hom).hom r = DualNumber.eps * r) ∧ (ObjectProperty.singleton generator).triangEnvelope = perfect ∧ ∃ η : inclusion ⟶ shiftedInclusion, InducedByPartial η ∧ η.app ⟨generator, hR⟩ = 0 ∧ (∃ e : (DerivedCategory.Q.obj P ⟶ (DerivedCategory.Q.obj P)⟦(1 : ℤ)⟧) ≃+ Ring ⧸ Ideal.span {DualNumber.eps}, (∀ f : P ⟶ P⟦(1 : ℤ)⟧, e (DerivedCategory.Q.map f ≫ (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app P) = Ideal.Quotient.mk (Ideal.span {DualNumber.eps}) ((e₀.inv ≫ f.f 0 ≫ (P.shiftFunctorObjXIso (1 : ℤ) 0 1 rfl).hom ≫ e₁.hom).hom 1)) ∧ e (η.app ⟨DerivedCategory.Q.obj P, hP⟩) = 1) ∧ η.app ⟨DerivedCategory.Q.obj P, hP⟩ ≠ 0 ∧ ∃ T : (inclusion ⊞ shiftedInclusion) ≅ (inclusion ⊞ shiftedInclusion), T.hom = 𝟙 _ + biprod.fst ≫ η ≫ biprod.inr ∧ T.hom.app ⟨generator, hR⟩ = 𝟙 ((inclusion ⊞ shiftedInclusion).obj ⟨generator, hR⟩) ∧ T.hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≠ 𝟙 ((inclusion ⊞ shiftedInclusion).obj ⟨DerivedCategory.Q.obj P, hP⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Mixed record: the imported upstream NatTrans lemmas state the invertibility and generation conclusions; this module supplies the explicit dual-number counterexample and its commutator characterization. Apply the upstream envelope lemma to the given class with zero adjoined to cover an empty class. Perfect objects use the recorded universe-general IsPerfectRingComplex, and their transformations are expressed through the fully faithful inclusion into D(R)."
  }
 }

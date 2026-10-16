@@ -252,5 +252,28 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-c2147fe03 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All five steps establish the unchanged statement, including specified closed-fibre morphisms and the full fpqc covering condition. No new nodes, circular dependencies, duplicate extension lemma, or repairs found. Both declared generic tool uses accepted. Detailed checks written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5ae2d884",
+  "group": "NH",
+  "result": "pass",
+  "note": "Existing theorem matches the node and source exactly; dependencies, proof body, docstrings, edge cases, and dry-run compilation passed."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension",
+  "declaration": "AlgebraicGeometry.exists_ofArrows_closedLiftCover_mem_proetalePrecoverage",
+  "declarations": [
+   "AlgebraicGeometry.exists_ofArrows_closedLiftCover_mem_proetalePrecoverage",
+   "AlgebraicGeometry.closedLiftCoverObj",
+   "AlgebraicGeometry.closedLiftCoverHom"
+  ],
+  "statement": "theorem exists_ofArrows_closedLiftCover_mem_proetalePrecoverage\n    (hJ : IsCompact (PrimeSpectrum.zeroLocus (J : Set B))ᶜ) [Finite ι]\n    [∀ a, Algebra.IndEtale (B ⧸ J) (C a)]\n    (hC : ∀ p : PrimeSpectrum (B ⧸ J), ∃ a,\n      p ∈ Set.range (PrimeSpectrum.comap (algebraMap (B ⧸ J) (C a)))) :\n    ∃ (κ : Type u) (_ : Finite κ) (f : κ → B), (∀ b, f b ∈ J) ∧\n      (⋃ b, (PrimeSpectrum.basicOpen (f b) : Set (PrimeSpectrum B))) =\n        (PrimeSpectrum.zeroLocus (J : Set B))ᶜ ∧\n      Presieve.ofArrows _ (closedLiftCoverHom C f) ∈ Scheme.proetalePrecoverage (Spec (.of B)) ∧\n      (∀ a, Function.Bijective (Algebra.ClosedLift.reduction B (C a) J)) ∧\n      ∀ b, Subsingleton\n        (Localization.Away (f b) ⧸ J.map (algebraMap B (Localization.Away (f b))))",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing upstream theorem explicitly names this blueprint node. It states the finite covering extension in affine coordinates W = Spec B and Z_W = Spec(B/J). The input finite affine ind-etale covering is encoded by ind-etale quotient algebras and joint surjectivity on prime spectra (equivalent here to the full pro-etale covering condition). The output uses the same Algebra.ClosedLift as the recorded closedSiteLift, together with principal affine opens in the complement; it includes the full proetalePrecoverage condition, bijectivity of the specified closed reduction maps, and zero complementary reduction rings. Server source checked with scompile.py --source on 2026-10-16. No new module and no proof-closure claim."
  }
 }

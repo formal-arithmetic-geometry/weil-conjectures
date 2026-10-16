@@ -161,27 +161,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-0c5241de0 (reviewer sub-agent of L); spot-checked: Read the complete definition, dependencies, master blueprint, cited Stacks statements, unit/chapter route, and exact master target category and base-change construction. Uniform bound, all finite levels, and both interval-preserving pullbacks are explicit. No new nodes or repairs. review.md records inherited FIN ambiguity and downstream cycles; target coefficient comparisons remain uncertified."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FiniteLevelAmplification",
-  "declaration": "AlgebraicGeometry.ProEtale.HasFiniteLevelAmplification",
+  "module": "Sheaf.Paper.FiniteLevelAmplification",
+  "declaration": "AlgebraicGeometry.Scheme.HasFiniteLevelAmplification",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteCoefficientCohomologyIn",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientPullbackAmplifies",
-   "AlgebraicGeometry.ProEtale.HasFiniteLevelAmplification"
+   "AlgebraicGeometry.Scheme.HasFiniteLevelAmplification"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLevelAmplification.lean",
-  "statement": "def HasFiniteLevelAmplification {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) (_square : ChosenCartesianSquare g' f' f g) (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.FG) (htorsion : IsAddTorsion (A ⧸ I)) [hfinite : ∀ m : ℕ+, Finite (A ⧸ I ^ (m : ℕ))] (hperfect : ∀ m : ℕ+, @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) ((@DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _) 0).obj (ModuleCat.of A (A ⧸ I ^ (m : ℕ))))) [IsNoetherian Y] [IsNoetherian Y'] (hDimY : ∃ k : ℕ, topologicalKrullDim Y ≤ (k : WithBot ℕ∞)) (hDimY' : ∃ k : ℕ, topologicalKrullDim Y' ≤ (k : WithBot ℕ∞)) (hInvertY : ∀ (n : ℕ+) (a : A ⧸ I ^ (n : ℕ)) (y : Y), IsUnit (addOrderOf a : Y.presheaf.stalk y)) (hInvertY' : ∀ (n : ℕ+) (a : A ⧸ I ^ (n : ℕ)) (y : Y'), IsUnit (addOrderOf a : Y'.presheaf.stalk y)) (c : ℕ) : Prop",
+  "file": "lean/Sheaf/Paper/FiniteLevelAmplification.lean",
+  "statement": "def HasFiniteLevelAmplification {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (c : ℕ) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q08",
-  "date": "2026-10-15",
+  "by": "Q31",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "The arithmetic coefficient datum is written explicitly using the actual ring and ideal and the recorded perfect-ring-complex predicate; the completed coefficient sheaf and strict reduction tower do not enter AMP. The two local helper predicates render clause (2) and the final interval notation. Existing delivered Q07 FIN is reused; no statement correction."
+  "note": "Section 1(B): the published AMP predicate takes Noetherianity, finite dimension and coefficient invertibility as external parameters, so cannot directly be tested on arbitrary squares. Reuse AlgebraicGeometry.ProEtale.HasFiniteLevelAmplification verbatim under existential packaging of exactly these FIN conventions. All arithmetic hypotheses come from the recorded AdicCoefficientDatum. The existing FIN, finite operations, bounded constructibility and amplitude predicates are reused, not copied; no new geometric hypothesis on TOW is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-595d5c368",
-  "group": "Q08",
+  "reviewer": "NT-stage2-Codex-c2271f7ed",
+  "group": "Q31",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, canonical constructions, universes, edge cases, docstrings and report sections. All three delivered modules compiled cleanly through scompile.py. No findings; branch unchanged."
+  "note": "Statement, dependencies, source alignment, edge cases, canonical constructions, docstrings, and recorded scompile/dry-run evidence checked; no findings.; reverted the delivery's change of existing node(s) def-weil-pbc-derived-inverse-limit (--revert-nodes; kept as on newtargets-dag)"
  }
 }

@@ -412,5 +412,33 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-9d33f3d88 (reviewer sub-agent of L); spot-checked: Full maintainer reread completed. The corrected qcqs hypothesis in (a), coefficient categories, base-change morphism, tensor symmetries, all eight proof steps, cited DAG statements, Stacks sources 0F14/0F0F/0F0E/0F0C/0F0G/0F10/0F12/0B56/07A4/0DV0/02GL, edge cases, duplicate searches, and Mathlib searches check out. No new nodes or repairs are needed; review.md records the detailed audit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e78f8829f",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Review recorded in review.md. Canonical maps, hypotheses, conclusions, dependencies, universes, edge cases, docstrings, and verbatim signatures checked. Both immutable Lean files passed scompile.py together. No fixes required; branch head unchanged.; reverted the delivery's change of existing node(s) lem-kun-0f0f (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KunnethMapAgrees",
+  "declaration": "AlgebraicGeometry.Etale.kunnethMap_agrees_with_leray_projection_formula_integral",
+  "declarations": [
+   "AlgebraicGeometry.Etale.kunnethMap_agrees_with_leray_projection_formula_integral",
+   "AlgebraicGeometry.Etale.kunnethMap_agrees_with_leray_projection_formula_modN",
+   "AlgebraicGeometry.Etale.kunnethLerayExchange",
+   "AlgebraicGeometry.Etale.kunnethLerayProjection",
+   "AlgebraicGeometry.Etale.kunnethLerayConstantProjection",
+   "AlgebraicGeometry.Etale.kunnethLerayInverse",
+   "AlgebraicGeometry.Etale.KunnethLerayAgreement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KunnethMapAgrees.lean",
+  "statement": "theorem kunnethMap_agrees_with_leray_projection_formula_integral {k : Type u} [Field k] [IsSepClosed k] {X Y W : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [IsProper f] [CompactSpace Y] [QuasiSeparatedSpace Y] (p : W ⟶ X) (q : W ⟶ Y) (sq : IsPullback p q f g) (E : DerivedCategoryModule (ULift.{u + 1} ℤ) X) (K : DerivedCategoryModule (ULift.{u + 1} ℤ) Y) (hE : ∃ a : ℤ, _root_.DerivedCategory.IsGE E a) (hK : ∃ b : ℤ, _root_.DerivedCategory.IsGE K b) (hEt : DerivedCategory.torsionCohomology (ULift.{u + 1} ℤ) X E) : KunnethLerayAgreement (ULift.{u + 1} ℤ) sq.toCommSq E K",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Both cases are stated. The displayed six-arrow inverse is written in D(S_et,Λ), before the exact monoidal evaluation equivalence specified in the statement. Under that equivalence PF_g(K,Rf(E)) is exactly the recorded constant projection map r, as in node proof step 1. No isomorphism is assumed in either case theorem."
  }
 }
