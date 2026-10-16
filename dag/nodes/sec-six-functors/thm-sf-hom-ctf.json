@@ -3,44 +3,214 @@
  "blueprint": {
   "is": "thm-sf-hom-ctf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived internal Hom at finite coefficients",
- "statement": "Let $A=A_{E,n}$, let $X$ be a finite-type $\\overline{\\mathbf F}_q$-scheme,\nand let $K,M\\in D^b_{ctf}(X_{\\Et},A)$ have Tor amplitude in\n$[a,b]$ and $[c,d]$, and suppose $\\dim X\\leq m$.\nThen $R\\mathcal Hom_A(K,M)$ belongs to $D^b_{ctf}(X_{\\Et},A)$,\nwith Tor amplitude in $[c-b-2m,d-a+2m]$.\nIf $K$ is site-perfect, the sharper interval $[c-b,d-a]$ holds.",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism] with $\\dim X\\leq m$ for $m\\in\\mathbf Z_{\\geq0}$, using topological Krull dimension [def-kun-topological-krull-dimension]. Work on the small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site] with constant coefficient sheaf $A_X$. Write $D^b_{ctf}(X_{\\mathrm{et}},A)$ for bounded constructible complexes [def-weil-pbc-constructible-complexes] of finite Tor amplitude: the etale version of [def-weil-finite-tor-amplitude], meaning that tensoring with any $A_X$-module sheaf in degree zero has cohomology only in some fixed finite interval. Let $K,M$ be in this category, with Tor amplitude in $[a,b]$ and $[c,d]$, respectively, for integers $a\\leq b$ and $c\\leq d$. Then the derived internal Hom $R\\mathcal Hom_A(K,M)$ [def-pur-derived-internal-hom] belongs to $D^b_{ctf}(X_{\\mathrm{et}},A)$ and has Tor amplitude in $[c-b-2m,d-a+2m]$. If $K$ is site-perfect, meaning that locally on $X_{\\mathrm{et}}$ it is isomorphic to a bounded complex of direct summands of finite free $A$-module sheaves [def-weil-pbc-strict-perfect-coefficient-package], the sharper interval $[c-b,d-a]$ holds.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
   "place": "node thm-sf-hom-ctf, order 2199"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
  "proof": [
   {
-   "text": "The assertion is local on $X$; a finite affine cover reduces to\nthe separated case without increasing the dimension bound.\nThe general assertion and its dimension-dependent interval are\n[cor-weil-finite-constructible-hom], proved from geometric\nVerdier biduality and tensor preservation.\nFor the sharper assertion, locally on the site choose a finite projective model $P$ of $K$\nin $[a,b]$, as in [def-weil-site-perfect-complex]. By\n[lem-sf-hom-finite-projective], internal Hom is\n$P^\\vee\\otimes_A^LM$. A bounded flat model of $M$, supplied by\n[lem-sf-flat-model], makes this a bounded flat complex in\n$[c-b,d-a]$. This proves the Tor bound; bounded constructibility is\n[lem-sf-ext-sheaf-constructible]. Both assertions are local on the site.",
+   "text": "We first record explicitly the restriction calculation used below. On any slice of $X_{\\mathrm{et}}$, restriction is exact by [lem-weil-pbc-site-restriction-exact], hence commutes with cohomology. Represent both tensor factors by K-flat complexes with flat terms, as allowed by [lem-weil-pbc-site-derived-tensor-descent]. Restriction is module pullback for the localized ringed topos with unchanged coefficient ring; [lem-weil-pbc-supplied-ringed-topos-kflat-pullback] makes the restricted representatives K-flat with flat terms. Apply the underived tensor comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] degreewise and take total complexes. The same representative calculation gives $(L\\otimes_A^LN)|_U\\cong L|_U\\otimes_A^LN|_U$ for arbitrary $L,N$. Finally [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives $H|_U\\cong R\\mathcal Hom_A(K|_U,M|_U)$ for $H=R\\mathcal Hom_A(K,M)$. These are slice restrictions, not arbitrary pullbacks of internal Hom and not stalk-Hom identifications.",
    "uses": [
-    "cor-weil-finite-constructible-hom",
-    "def-weil-site-perfect-complex",
-    "lem-sf-hom-finite-projective",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, first and last sentences: the restriction comparisons implicit in locality"
+   }
+  },
+  {
+   "text": "Since the base is affine, the finite-type definition [def-weil-finite-type-morphism] gives a finite affine open cover $X=\\bigcup_iU_i$, with each $U_i$ affine of finite type over $k$. Each structure morphism $U_i\\to\\operatorname{Spec}k$ is separated by [lem-weil-pbc-affine-source-morphism-separated], and $\\dim U_i\\leq\\dim X\\leq m$ by [lem-weil-pbc-open-subspace-dimension-monotone]. The field is Noetherian (its ideals are $0$ and $k$), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian; in particular $X$ is quasi-compact and quasi-separated. Indeed every open in a Noetherian space is quasi-compact, including intersections of affine opens. The empty scheme is allowed: take the empty cover, on which all sheaf vanishing statements are vacuous.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, first sentence: finite affine reduction with the same dimension bound"
+   }
+  },
+  {
+   "text": "Apply the etale equivalence in [lem-sf-flat-model] to $K$ and $M$, giving bounded flat models in $[a,b]$ and $[c,d]$. By [lem-weil-pbc-slice-restriction-flat] their restrictions to $U_i$ remain flat, and Step 1 preserves their derived isomorphisms. They therefore give the same Tor intervals on $U_i$, by the reverse implication of [lem-sf-flat-model]. Their cohomology sheaves are constructible there: the global-to-local direction of [lem-weil-pbc-constructible-qcqs-affine-local], together with exact restriction in Step 1, gives precisely this; their bounds also restrict. Thus $K|_{U_i},M|_{U_i}$ satisfy every finite-Tor constructibility hypothesis of the separated theorem.",
+   "uses": [
     "lem-sf-flat-model",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-weil-pbc-constructible-qcqs-affine-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, first sentence: verify the hypotheses after affine restriction"
+   }
+  },
+  {
+   "text": "Apply [cor-weil-finite-constructible-hom] on the small etale site of each separated finite-type $U_i$, with its dimension parameter equal to $m$ (not to a dimension that varies with $i$), and with $L=M|_{U_i}$. It gives bounded constructibility of $R\\mathcal Hom_A(K|_{U_i},M|_{U_i})$ and the common Tor interval $I=[c-b-2m,d-a+2m]$. By Step 1 these are the restrictions $H|_{U_i}$. This is exactly the geometric Verdier-biduality and tensor-preservation route of the unit; no assertion that internal Hom commutes with geometric stalks is used.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, second sentence: the general bound from geometric Verdier duality"
+   }
+  },
+  {
+   "text": "For any $A_X$-module sheaf $N$ in degree zero and any $r\\notin I$, Steps 1 and 4 show that $\\mathcal H^r(H\\otimes_A^LN)|_{U_i}=0$ for every $i$. A sheaf vanishing on a cover is zero: restrict any section to the pullback cover and use uniqueness in the sheaf axiom. Thus $H$ has Tor interval $I$; taking $N=A_X$ gives a single global cohomological bound. To realize explicitly the finiteness unit's role in constructibility, fix $r$ and put $G=\\mathcal H^r(H)$. All $G|_{U_i}$ are constructible by Step 4. Write $U_{ij}=U_i\\cap U_j$ and let $j_i,j_{ij}$ denote the open inclusions into $X$. The intersections need not be affine. They are Noetherian quasi-compact opens; [lem-weil-pbc-qc-open-immersion-finite-type] makes their inclusions into $U_i$ finite type, hence they are finite type over $k$. Here finite-type composition follows directly by adjoining finite generating sets for the two affine coordinate algebras. Their restrictions $G|_{U_{ij}}$ are constructible: cover $U_{ij}$ by affine opens of $U_i$ and use the global-to-local and local-to-global directions of [lem-weil-pbc-constructible-qcqs-affine-local]. Apply [thm-fin-open-immersion] in degree zero to $j_i$ and $j_{ij}$; its finite prime-to-characteristic coefficients are exactly $A$, and $R^0j_*B=j_*B$ here: left exactness of $j_*$ in [def-weil-pbc-direct-image] applied to $0\\to B\\to J^0\\to J^1$ identifies $j_*B$ with $\\ker(j_*J^0\\to j_*J^1)$ for an injective resolution of $B$. Consequently all $j_{i,*}(G|_{U_i})$ and $j_{ij,*}(G|_{U_{ij}})$ are constructible. The direct images have the section formula of [def-weil-pbc-direct-image]. The sheaf gluing axiom, applied on every etale object $V\\to X$ to the open cover $V\\times_XU_i$, therefore identifies $G$ with the kernel of the difference-of-restrictions map\n$$\n\\bigoplus_i j_{i,*}(G|_{U_i})\\longrightarrow\n\\bigoplus_{i<j}j_{ij,*}(G|_{U_{ij}}).\n$$\nBoth sums are finite; finite sums are constructible by the extension clause of [thm-constructible-serre], and its kernel clause makes $G$ constructible. This proves the full general assertion. For an empty cover, the sheaf category on the empty scheme has only the zero object, so the conclusion is the same.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "thm-fin-open-immersion",
+    "def-weil-pbc-direct-image",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, first two sentences: finite-affine reduction and descent; unit proof, constructibility clause, with the sk-prop-sf-finiteness open-immersion statement applied to the two Cech sheaf terms"
+   }
+  },
+  {
+   "text": "Now suppose $K$ is site-perfect on the etale site in the explicit sense in the statement. Apply [lem-sf-site-perfect-tor-window] to the ringed site $(X_{\\mathrm{et}},A_X)$ and to the given Tor interval of $K$. It gives a site cover with representatives $P$ that are finite-projective termwise and zero outside $[a,b]$. This supplies the prescribed degrees; merely citing the definition of site-perfectness would not supply them. Independently take a bounded flat representative $F$ of $M$ in $[c,d]$ by [lem-sf-flat-model]; its restriction to each member of this cover is still flat by [lem-weil-pbc-slice-restriction-flat].",
+   "uses": [
+    "lem-sf-site-perfect-tor-window",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-slice-restriction-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, sentence beginning \"For the sharper assertion\": obtain the two correctly bounded models"
+   }
+  },
+  {
+   "text": "On a member of this cover, $R\\mathcal Hom_A(P,F)$ is represented by the ordinary Hom complex $C=\\mathcal Hom^\\bullet_A(P,F)$ of [def-pur-hom-complex]. Here is the extension from modules to complexes, rather than an application of a module lemma to a complex. For a single term $P^i$, choose a retraction of $A^s$ onto $P^i$. Applying sheaf Hom gives a retraction of $F^{\\oplus s}$ onto $\\mathcal Hom(P^i,F)$; thus $\\mathcal Hom(P^i,-)$ is exact and preserves quasi-isomorphisms. The finite-projective evaluation map is the coordinate identity for $A^s$ and remains an isomorphism on the retraction, so $\\mathcal Hom(P^i,F^j)=(P^i)^\\vee\\otimes_AF^j$. For a bounded $P$, induction on its number of nonzero terms shows that $\\mathcal Hom^\\bullet(P,T)$ is acyclic for every acyclic $T$: the base follows from exactness of $\\mathcal Hom(P^i,-)$, and deleting an endpoint term gives a degreewise split short exact sequence of Hom complexes, whose cohomology exact sequence is [lem-weil-pbc-complex-ses-homology-long-exact]. For a quasi-isomorphism $q:T\\to T'$, its mapping cone is acyclic, as follows from the same long exact sequence for $T'\\to\\operatorname{Cone}(q)\\to T[1]$. The Hom differential identifies $\\mathcal Hom^\\bullet(P,\\operatorname{Cone}(q))$ with $\\operatorname{Cone}(\\mathcal Hom^\\bullet(P,q))$, so the latter is acyclic. Thus $\\mathcal Hom^\\bullet(P,-)$ preserves quasi-isomorphisms. Therefore applying this to a K-injective replacement $F\\to J$ makes $\\mathcal Hom^\\bullet(P,F)\\to\\mathcal Hom^\\bullet(P,J)$ a quasi-isomorphism, and [def-pur-derived-internal-hom] identifies the latter with derived internal Hom. The differentials are exactly $d_Ff-(-1)^nf d_P$ from [def-pur-hom-complex]. Step 1 identifies this local object with $H$ restricted to the cover.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, sentence \"internal Hom is P-dual tensor M\": explicit bounded-complex extension of the finite-projective calculation"
+   }
+  },
+  {
+   "text": "In degree $r$ the complex just constructed is the finite sum $C^r=\\bigoplus_{i=a}^b\\mathcal Hom_A(P^i,F^{i+r})$. Each summand is a direct summand of a finite sum of $F^{i+r}$, hence flat (its tensor functor is a direct summand of an exact functor). It vanishes unless $c\\leq i+r\\leq d$ for some $a\\leq i\\leq b$, which implies $c-b\\leq r\\leq d-a$. Equivalently $C$ is the bounded flat model $P^\\vee\\otimes_AF$. For a bounded flat complex, tensor with any acyclic complex is acyclic by induction on the number of its terms: a single flat term preserves each exact cycles sequence, and a degreewise split endpoint filtration reduces the general case to that one-term case by the cohomology exact sequence of [lem-weil-pbc-complex-ses-homology-long-exact]. Thus $C$ is K-flat by [def-pc-kflat-complex], computes tensor with every degree-zero sheaf, and this tensor is still zero outside $[c-b,d-a]$. It follows directly that $H$ has the sharper Tor interval on every member of the cover.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, bounded-flat-complex sentence: termwise flatness and the sharper endpoints"
+   }
+  },
+  {
+   "text": "For any degree-zero sheaf $N$, Step 1 restricts $H\\otimes_A^LN$ to the corresponding tensor on each member of the site cover in Step 6. Step 8 makes its cohomology zero outside $[c-b,d-a]$ there. The sheaf-axiom argument of Step 5 therefore makes it zero globally, giving the sharper Tor interval and also boundedness by $N=A_X$. For this site-perfect case [lem-sf-ext-sheaf-constructible] supplies constructibility of every cohomology sheaf of $H$, so this case also proves membership in $D^b_{ctf}$ without using the general-case Verdier-duality argument.",
+   "uses": [
     "lem-sf-ext-sheaf-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, last two sentences: constructibility and site-local descent of the sharper bound"
+   }
   }
  ],
  "proof_deps": [
-  "cor-weil-finite-constructible-hom",
-  "def-weil-site-perfect-complex",
-  "lem-sf-hom-finite-projective",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sf-flat-model",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "cor-weil-finite-constructible-hom",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "thm-fin-open-immersion",
+  "def-weil-pbc-direct-image",
+  "thm-constructible-serre",
+  "lem-sf-site-perfect-tor-window",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-pc-kflat-complex",
   "lem-sf-ext-sheaf-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-  "place": "## Proof"
+  "place": "Proof; expanded locality, prescribed Tor-window models, and finite-projective Hom-complex calculation. Stacks 08G7 supplies the new supporting statement."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible etale sheaves with finite Tor amplitude and dimension dependent bound",
+   "results": "8 hits; top results: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.H, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, LightCondensed.free_internallyProjective_iff_tensor_condition. Read the returned signatures. These concern ordinary derived-category bounds, projective dimensions, K-projective complexes, or abstract sheaf categories, not the asserted ringed-site finite-projective window or constructible internal-Hom theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|torAmplitudeIn|constructibleFiniteTor",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of bounded constructible etale complexes preserves finite Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor dimension internal derived Hom of constructible complexes on a finite dimensional scheme",
+   "results": "8 hits; top results: CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.hasExt_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsLE. Read the returned signatures. These concern ordinary derived-category bounds, projective dimensions, K-projective complexes, or abstract sheaf categories, not the asserted ringed-site finite-projective window or constructible internal-Hom theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +236,89 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-hom-ctf"
+ "unit": "sk-thm-sf-hom-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-sf-hom-ctf",
+  "worker": "stage1",
+  "summary": "Checked the unit, the exact separated duality corollary, restriction/locality statements, and source Stacks 08G7. Expanded the implicit finite coefficient and etale site conventions without changing the mathematical claim. Separated affine restriction, uniform-bound gluing, local perfect-model shortening, ordinary Hom-complex calculation and its Tor estimate. One new statement-only generic ringed-site model lemma; no new definitions or clause-restating nodes. Lean general-case wrappers still depend on explicit sorries, so no attachment is claimed. The finiteness unit is realized genuinely by expressing each cohomology sheaf as the kernel between two finite sums of open direct images; open-immersion finiteness makes both terms constructible.",
+  "blueprint": "Steps 1–5 realize the first two sentences (finite affine reduction, geometric Verdier-duality corollary, locality). Steps 6–9 realize the remaining sentences (prescribed finite-projective model, Hom as dual tensor, bounded flat model, constructibility and descent). The unit's one proof step is carried by thm-sf-hom-ctf; the general branch retains cor-weil-finite-constructible-hom and its biduality/tensor route. Step 5 explicitly realizes the unit's sk-prop-sf-finiteness citation by the two-term sheaf-gluing kernel, without invoking a derived Cech resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-open-subspace-dimension-monotone",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-slice-restriction-flat",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-qcqs-affine-local",
+    "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic tool for the finite-type overlaps and constructible kernel in the explicit finiteness-unit gluing step; no replacement of the duality route."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic tool for the finite-type overlaps and constructible kernel in the explicit finiteness-unit gluing step; no replacement of the duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-dd588e03d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-dd588e03d (reviewer sub-agent of L); spot-checked: Read the theorem, all nine steps, the new lemma, cited statements and source locations. Verified coefficient/site hypotheses, prescribed Tor-window models, gluing, endpoint signs, edge cases, duplicates and unit route. Accepted declared tool uses; no repairs needed. Detailed checks are in review.md."
+ }
 }
