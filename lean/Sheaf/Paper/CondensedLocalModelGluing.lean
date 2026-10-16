@@ -8,6 +8,12 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
 
 /-!
 # Gluing local finite coefficient models after enlarging the field

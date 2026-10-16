@@ -15,6 +15,10 @@ import Sheaf.Paper.FiniteDiscreteSchemeRing
 import Sheaf.Paper.ContinuousRegularFunctions
 import Sheaf.Paper.ContinuousCoefficientRealizations
 import Mathlib.CategoryTheory.Sites.Adjunction
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.Paper.FiniteBiproductPivot
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.IntegralMatrixAnalyticCover
 
 /-! # Local integral torsion and quotient charts -/
 
