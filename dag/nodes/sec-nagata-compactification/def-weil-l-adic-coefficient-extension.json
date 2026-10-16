@@ -25,9 +25,37 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-valued-dvr-finite-quotients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the finite coefficient-ring clause, specialize Padic.extension_integers_dvr to the recorded spectral absolute value, using spectralNorm_extends. Its two chosen witnesses are definitionally coefficientExtensionIntegers and coefficientExtensionMaximalIdeal. Extract the finite residue quotient clause.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The recorded uniformizer is the chosen witness of the generator clause of the same theorem. Its choose_spec gives span {coefficientExtensionUniformizer} = coefficientExtensionMaximalIdeal. Rewrite the finite residue quotient along this equality.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Ideal.finite_quotient_pow to the singleton-generated ideal, with Submodule.fg_span_singleton providing finite generation and the preceding finite quotient supplying the Finite instance. By the definitions of coefficientExtensionIdeal and coefficientExtensionRing this is precisely the required quotient at level n. The argument also works at n = 0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "worker F4",
+  "document": "Mathlib/RingTheory/Ideal/Quotient/Index.lean",
+  "place": "Ideal.finite_quotient_pow, line 101, applied to the uniformizer ideal; specializes the existing finite coefficient-ring proof plan in Padic.finite_coefficientExtensionRing."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -109,5 +137,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Wrote review.md. Checked all eight statement dependencies, source correspondence, exact declarations, universes, edge cases, docstrings, uniqueness, and verbatim signatures. Both immutable Lean files compile through scompile.py with the local side overlay. No repairs required; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261016T041812-L-2679374",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

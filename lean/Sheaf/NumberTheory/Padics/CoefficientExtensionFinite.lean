@@ -6,7 +6,7 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-!
 # Finiteness interface for finite p-adic coefficient extensions
@@ -43,6 +43,19 @@ theorem finite_coefficientExtensionRing
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) :
     Finite (Padic.coefficientExtensionRing l E n) := by
-  sorry
+  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hfinite : Finite (coefficientExtensionIntegers l E ⧸
+      coefficientExtensionMaximalIdeal l E) :=
+    h.2.2.2.2.2.2.2.2.2.2.2.1
+  have hgen : Ideal.span ({coefficientExtensionUniformizer l E} :
+      Set (coefficientExtensionIntegers l E)) = coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have : Finite (coefficientExtensionIntegers l E ⧸
+      Ideal.span ({coefficientExtensionUniformizer l E} :
+        Set (coefficientExtensionIntegers l E))) := by
+    rw [hgen]
+    exact hfinite
+  exact Ideal.finite_quotient_pow (Submodule.fg_span_singleton _) n
 
 end Padic
