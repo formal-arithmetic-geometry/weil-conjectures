@@ -245,5 +245,40 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-be69fe1c9 (reviewer sub-agent of L); spot-checked: Read all mathematics in full; review.md records checks of all eleven steps, three new nodes, Low and Dwyer–Kan sources, small cases, dependencies, duplicates and routes. No mathematical repairs needed. Inherited maintainer-owned source metadata retains a stale reference; the proof citations are correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecialHammockReduction",
+  "declaration": "CategoryTheory.specialHammockReduction",
+  "declarations": [
+   "CategoryTheory.SpecialThreeArrow",
+   "CategoryTheory.SpecialThreeArrowHom",
+   "CategoryTheory.specialThreeArrowCategory",
+   "CategoryTheory.specialThreeArrowU",
+   "CategoryTheory.specialThreeArrowV",
+   "CategoryTheory.specialHammockU",
+   "CategoryTheory.specialHammockV",
+   "CategoryTheory.specialHammockPath",
+   "CategoryTheory.IsSpecialHammockReduction",
+   "CategoryTheory.specialThreeArrowActual",
+   "CategoryTheory.SpecialHammockPullback",
+   "CategoryTheory.SpecialHammockPushout",
+   "CategoryTheory.specialHammockPre",
+   "CategoryTheory.specialHammockPost",
+   "CategoryTheory.specialHammockReduction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpecialHammockReduction.lean",
+  "statement": "theorem specialHammockReduction {C : Type u} [Category.{v} C] [ModelCategory C] [HasLimits C] [HasColimits C] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] (H : HammockLocalization (weakEquivalences C)) : ∃ ρ : ∀ x y : C, nerve (SpecialThreeArrow x y) ⟶ H.enrichment.Hom x y, (∀ x y, IsSpecialHammockReduction H (ρ x y)) ∧ (∀ x y, SSet.Enhanced.IsWeakHomotopyEquivalence (ρ x y)) ∧ (∀ {x y : C} (f : x ⟶ y), HammockReduces (hammockActualPath (weakEquivalences C) 0 f) (H.simplices x y 0 ((ρ x y).app _ (ComposableArrows.mk₀ (specialThreeArrowActual f)))).val) ∧ (∀ (x' x y : C) (a : x' ⟶ x), ∃ (P : SpecialHammockPullback a y) (A : 𝟙_ SSet.{max u v} ⟶ H.enrichment.Hom x' x), (∀ k : ℕ, HammockReduces (hammockActualPath (weakEquivalences C) k a) (H.simplices x' x k (A.app _ PUnit.unit)).val) ∧ Nonempty (SSet.Homotopy (nerveMap P.functor ≫ ρ x' y) (ρ x y ≫ specialHammockPre H A))) ∧ (∀ (x y y' : C) (b : y ⟶ y'), ∃ (P : SpecialHammockPushout x b) (B : 𝟙_ SSet.{max u v} ⟶ H.enrichment.Hom y y'), (∀ k : ℕ, HammockReduces (hammockActualPath (weakEquivalences C) k b) (H.simplices y y' k (B.app _ PUnit.unit)).val) ∧ Nonempty (SSet.Homotopy (ρ x y ≫ specialHammockPost H B) (nerveMap P.functor ≫ ρ x y')))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1b3cf5ed2",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, Lean declarations, edge cases, docstrings, report sections, and compiler evidence all checked; no findings."
  }
 }
