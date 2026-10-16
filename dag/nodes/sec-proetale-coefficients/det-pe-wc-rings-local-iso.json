@@ -46,11 +46,14 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "Algebra.WeaklyEtale.bijective_localRingHom_of_isStrictlyHenselianLocalRing"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 22:46 UTC for group Q117, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: For commutative rings with the given algebra structure, weak étaleness, primality of n, and strict henselianity at its contraction, substituting m = n.comap"
+  "module": "Sheaf.RingTheory.StrictHenselianMaximalLocalRingIso",
+  "declaration": "Algebra.WeaklyEtale.bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing",
+  "statement": "theorem bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing\n    {R : Type u} {B : Type v} [CommRing R] [CommRing B] [Algebra R B]\n    [Algebra.WeaklyEtale R B] (m : Ideal R) [m.IsMaximal]\n    [IsStrictlyHenselianLocalRing (Localization.AtPrime m)]\n    (n : Ideal B) [n.IsPrime] (hmn : m = n.comap (algebraMap R B)) :\n    Function.Bijective (Localization.localRingHom m n (algebraMap R B) hmn)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact published stage-2 statement, originally written by Q32 and confirmed using scompile.py --source. Retains both independent ring universes, the maximal ideal, strict henselianity, the prime above it, and bijectivity of the canonical localization homomorphism. No new Lean module is supplied. The upstream IndWeaklyEtale theorem is a more general prime-contraction version; the published Sheaf declaration matches the node explicitly."
  },
  "lean_audit": {
   "master": {
@@ -79,10 +82,10 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-6a2fa52e8",
-  "group": "Q32",
+  "reviewer": "NT-stage2-cc-a3d3eef2d",
+  "group": "Q35",
   "result": "pass",
-  "note": "Statement, hypotheses, canonical localization map, docstrings, dependencies, edge cases, and source declarations checked. scompile.py sandbox and library compiles passed with no errors or warnings; review.md written."
+  "note": "Existing-only delivery: node lean field changed to Q32's published Sheaf.RingTheory.StrictHenselianMaximalLocalRingIso declaration bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing; no other node field changed; record complete, statement verbatim. Clause-by-clause exact against node and blueprint source (independent universes, WeaklyEtale, maximal m, strictly henselian R_m, prime n with m = comap n, bijective canonical localRingHom); docstrings with source and blueprint id, proof steps, sorry only, nothing hollow. Replaced slopmaster2 attachment is single-universe (A B : Type u), so not exact; item still in stage-2 queue. nt_compile of module + probe clean, signature confirmed. Minor: lean.note calls the upstream theorem 'more general' though it is less general in universes."
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-pe-wc-rings"
