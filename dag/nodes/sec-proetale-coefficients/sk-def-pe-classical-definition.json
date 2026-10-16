@@ -3,24 +3,94 @@
  "blueprint": {
   "is": "sk-def-pe-classical-definition",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-pe-classical-definition-continuity-map"
+  ]
  },
  "kind": "definition",
  "title": "Classical pro-étale sheaves",
- "statement": "In this subsection $\\Lambda$ denotes a discrete commutative ring and\n$\\Lambda_X$ its constant sheaf on $X_{\\Proet}$.\n\nA sheaf $F$ on $X_{\\Proet}$ is *classical* if, for every pro-étale affine\npresentation $U=\\varprojlim_i U_i$ with $U_i$ affine and étale over $X$, its\nrestriction maps induce a bijection\n\n$$\n\\varinjlim_i F(U_i)\\xrightarrow{\\ \\sim\\ }F(U).\n$$\n\nFor sheaves of modules the map is required to be an isomorphism of modules. A\ncomplex is classical if all its cohomology sheaves are classical.",
+ "statement": "Let $X$ be a scheme and let $X_{\\Proet}$ be its small pro-étale site\n[sk-def-pe-site]. Let $\\Lambda$ be a discrete commutative ring and let\n$\\Lambda_X$ be its constant sheaf of rings [def-weil-pbc-constant-sheaf].\n\nFor a sheaf of sets $F$ on $X_{\\Proet}$ and each pro-étale affine presentation\n$U\\cong\\varprojlim_{i\\in I}U_i$ as defined in\n[det-pe-classical-definition-continuity-map], write\n$$\nc_{F,U}\\colon\\varinjlim_{i\\in I^{\\mathrm{op}}}F(U_i)\\longrightarrow F(U)\n$$\nfor the canonical map induced by restriction along the projections $U\\to U_i$.\nHere $I$ is a small cofiltered category, the $U_i$ are affine and étale over\n$X$, and the limit and transition morphisms are over $X$; the colimit is over\nthe corresponding filtered diagram of sections.\n\nThe sheaf $F$ is *classical* if $c_{F,U}$ is bijective for every such\npresentation. For a sheaf of $\\Lambda_X$-modules\n[def-weil-sheaf-of-modules-category], the colimit and canonical map are taken\nin $\\Lambda$-modules, and *classical* means that each $c_{F,U}$ is an\nisomorphism of $\\Lambda$-modules. A cochain complex $K$ of $\\Lambda_X$-module\nsheaves is *classical* if every cohomology sheaf $H^q(K)$, $q\\in\\mathbf Z$, is\nclassical, with cohomology taken in the abelian category of module sheaves\n[def-weil-abstract-derived-category].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/_section.md",
   "place": "node sk-def-pe-classical-definition, order 723"
  },
  "stmt_deps": [
-  "sk-def-pe-site"
+  "sk-def-pe-site",
+  "def-weil-pbc-constant-sheaf",
+  "det-pe-classical-definition-continuity-map",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "classicalSheaf|IsClassical|[Pp]ro[Ee]tale|[Pp]roetale",
+   "results": "15 hits: Scheme.proetalePrecoverage (Sites/Proetale.lean:52), proetaleTopology, ellAdicSheaf, and IsClassicalTriangulatedGenerator. The site and ell-adic coefficient sheaf do not define classicality; classical triangulated generators are unrelated.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "classical sheaves on the pro-etale site defined by continuity under inverse limits of affine etale schemes",
+   "results": "8 hits: TopCat.isSheaf_of_isLimit, CategoryTheory.Functor.IsContinuous.mk, LightCondensed, Condensed.lanSheafProfinite, Scheme.etalePretopology and sheaf-limit instances. None defines classical pro-etale sheaves; the condensed construction concerns profinite spaces.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\"",
+   "results": "12 hits, including AlgebraicGeometry.Scheme.proetalePrecoverage, proetaleTopology, and stability/subcanonical instances in Mathlib.AlgebraicGeometry.Sites.Proetale. These define the topology, not the continuity predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the pro-etale site is classical when sections commute with cofiltered inverse limits of affine etale schemes",
+   "results": "8 hits: Scheme.etaleTopology, Scheme.smallEtaleTopology, LightCondensed.ofSheafForgetLightProfinite, Condensed.isSheafProfinite and related condensed constructors. None defines the continuity predicate on pro-etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "classical|continuity|colimit",
+   "results": "14 hits in AlgebraicGeometry/Sites: AffineEtale.lean filtered-colimit hypotheses, ElladicCohomology.lean:34 comparison TODO, BigZariski and SmallAffineZariski colimit lemmas. No classical pro-etale sheaf predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves in the essential image of inverse image from the etale to the proetale topos are classical sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant.mk, mem_essImage_of_isConstant, Equivalence.sheafCongr and Condensed.lanSheafProfinite. Constant sheaves are not all classical sheaves, and the equivalence hits concern equivalent sites rather than this comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of a sheaf of sets: colimit of sections over affine etale stages is bijective to sections over their inverse limit",
+   "results": "8 hits: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, exists_appTop_π_eq_of_isAffine_of_isLimit and related structure-sheaf section descent lemmas in AffineTransitionLimit; affine Zariski and gluing colimits. These concern the structure sheaf or scheme colimits, not a definition for arbitrary pro-etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on weakly etale schemes has sections preserving filtered colimits of coordinate rings along etale affine stages",
+   "results": "8 hits, all defining étale scheme morphisms, the category Scheme.Etale and its forgetful functor, or locality/composition properties of étale ring maps. Read the returned signatures and Morphisms/Etale.lean:157-177; none defines a predicate on pro-étale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClassical|ClassicalSheaf|classical.*sheaf|sheaf.*classical|PreservesFilteredColimits",
+   "results": "1 hit in AlgebraicGeometry: Sites/AffineEtale.lean:103, the hypothesis PreservesFilteredColimitsOfSize on the forgetful functor from a category of values. Read lines 95-121: this is a sheafification/equivalence setup for the affine étale site, not classicality of pro-étale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -35,5 +105,20 @@
  "uses_not_cited": [
   "sk-def-pe-site"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-pe-classical-definition",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. Made X and the filtered/opposite indexing explicit, retained the sets, discrete-ring module and all-cohomology clauses, and cited the existing continuity-map definition and the constant-sheaf, module-sheaf and abstract-cohomology definitions. Searched slopmaster2 and Mathlib; no exact project attachment or Mathlib match. The detailed blueprint node already states the notion, so it is reused rather than duplicated.",
+  "blueprint": "Current main-20261015 sk-def-pe-classical-definition/_section.md: first paragraph (discrete coefficients), display and preceding paragraph (continuity for every affine etale presentation), final paragraph (module and cohomology clauses). Its existing detailed node det-pe-classical-definition-continuity-map supplies presentations and the canonical map. This is a definition: no proof steps or unit-proof realization is required."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-310ec4a17",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-310ec4a17 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. Discrete coefficients, presentation quantifiers, continuity-map direction, module scalars, and all-degree cohomology match the current blueprint. Checked edge cases, duplicate candidates, dependency cycles, and archived target categories. No new nodes, repairs, or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
