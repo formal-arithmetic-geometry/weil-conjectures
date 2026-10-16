@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1300**, closure **18**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1300**, closure **19**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -45,22 +45,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1104 | 16 |
+| Sheaf | 1104 | 17 |
 | WeilConjectures | 196 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
 | 889327369 (Queue at the start of stage 3) | library | 2284 | 758 | 1526 | 103 | 17 |
 | 660345513 (Application of proof-dependency imports) | library | 2238 | 756 | 1482 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 18 | 1963 | 57 | 0 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 19 | 1962 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3625 |
+| proved | 3626 |
 | decomposed | 52 |
-| moved | 4010 |
+| moved | 4014 |
 | pruned | 131 |
 | other | 608 |
 
@@ -71,10 +71,10 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
 | A3 | 123 | 119 | 79 | 40 | 54/123 (43.9%) |
-| A4 | 71 | 75 | 47 | 28 | 37/71 (52.1%) |
+| A4 | 72 | 76 | 47 | 29 | 37/72 (51.4%) |
 | B2 | 127 | 133 | 85 | 48 | 53/127 (41.7%) |
-| B3 | 144 | 151 | 87 | 64 | 61/144 (42.4%) |
-| B4 | 66 | 69 | 46 | 23 | 31/66 (47.0%) |
+| B3 | 145 | 152 | 89 | 63 | 62/145 (42.8%) |
+| B4 | 67 | 70 | 47 | 23 | 32/67 (47.8%) |
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
 | C2 | 124 | 119 | 84 | 35 | 57/124 (46.0%) |
 | C3 | 116 | 121 | 80 | 41 | 56/116 (48.3%) |
@@ -83,7 +83,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D3 | 108 | 119 | 68 | 51 | 49/108 (45.4%) |
 | D4 | 67 | 64 | 47 | 17 | 28/67 (41.8%) |
 | E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
-| E2 | 122 | 117 | 84 | 33 | 59/122 (48.4%) |
+| E2 | 123 | 118 | 85 | 33 | 60/123 (48.8%) |
 | E3 | 112 | 113 | 95 | 18 | 59/112 (52.7%) |
 | E4 | 48 | 55 | 27 | 28 | 19/48 (39.6%) |
 | F1 | 145 | 151 | 107 | 44 | 71/145 (49.0%) |
@@ -97,7 +97,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | H1 | 135 | 132 | 106 | 26 | 74/135 (54.8%) |
 | H2 | 113 | 110 | 89 | 21 | 65/113 (57.5%) |
 | H3 | 121 | 136 | 97 | 39 | 67/121 (55.4%) |
-| H4 | 58 | 55 | 41 | 14 | 30/58 (51.7%) |
+| H4 | 59 | 56 | 42 | 14 | 31/59 (52.5%) |
 | J1 | 124 | 131 | 75 | 56 | 53/124 (42.7%) |
 | J2 | 103 | 105 | 70 | 35 | 51/103 (49.5%) |
 | J3 | 119 | 125 | 77 | 48 | 54/119 (45.4%) |
@@ -177,19 +177,20 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | 5 | 1 | F3 |
 | Sheaf.Paper.FiniteDiscreteCoefficientExchange | 6 | 1 | H2 |
 | Sheaf.Paper.CondensedLocalModelGluing | 7 | 1 | A3 |
-| Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | — |
+| Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | B3 |
 | Sheaf.Paper.ContinuousEtaleLocalLattices | 7 | 1 | B2 |
-| Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent | 7 | 1 | E2 |
-| Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars | 8 | 1 | B4 |
 | Sheaf.Paper.IntegralResidueProjectionNormalization | 8 | 1 | D3 |
+| Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | — |
 | Sheaf.Paper.IntegralMatrixPointwiseRank | 9 | 1 | E4 |
-| Sheaf.Paper.IntegralLfpLocalTorsionCharts | 10 | 1 | A4 |
-| Sheaf.Paper.LatticeSheafLocallyConstant | 10 | 1 | B3 |
 | Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing | 11 | 1 | H4 |
+| Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
+| Sheaf.Paper.LatticeClassDescent | 11 | 1 | B4 |
+| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux | 13 | 1 | — |
+| Sheaf.Paper.LatticePairMatrixAtBasis | 13 | 1 | C2 |
+| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 15 | 1 | — |
 | Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit | 16 | 1 | A4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent | 40 | 1 | D2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | C2 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | C1 |
 
 Modules pruned since the imports baseline:
 
@@ -300,7 +301,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne`
 - `Sheaf.AlgebraicGeometry.ExtEvaluation`
-- `Sheaf.AlgebraicGeometry.FibreProductLimit`
 - `Sheaf.AlgebraicGeometry.FieldDiscreteModules`
 - `Sheaf.AlgebraicGeometry.FindGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
@@ -428,7 +428,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
-- `Sheaf.CategoryTheory.ArrowsFunctor`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
@@ -456,7 +455,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.EssentiallyConstantSplitting`
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
 - `Sheaf.CategoryTheory.ExactCoupleMorphism`
-- `Sheaf.CategoryTheory.ExistsDirectedReindexing`
 - `Sheaf.CategoryTheory.FilteredColimitCategories`
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
 - `Sheaf.CategoryTheory.FilteredPageTwoModel`
@@ -544,6 +542,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings`
 - `Sheaf.LinearAlgebra.TriangularChangeOfBasis`
 - `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules`
+- `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen`
 - `Sheaf.Paper.AdicTowerReconstruction`
 - `Sheaf.Paper.AffineProjectiveComplexDerivedHom`
 - `Sheaf.Paper.BoundaryCechCompatibility`
