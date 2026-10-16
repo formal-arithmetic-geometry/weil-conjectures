@@ -28,9 +28,142 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones] and the explicit joins and relative predicates of [def-coef-infinity-relative-cone]. Apply [lem-coef-infinity-isofibration-exponentiation] to $P\\hookrightarrow B$: its restriction clause gives the two functor quasicategories and the isofibration $r$, including equivalence lifting. This part does not require the vertex hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3"
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Fun}(K^{\\triangleright},\\mathcal E)$, $Y=\\operatorname{Fun}(K,\\mathcal E)$ and let $q:X\\to Y$ be restriction. It is an isofibration by [lem-coef-infinity-isofibration-exponentiation]. Curry $v$ to compatible maps $g:P\\to X$ and $f:B\\to Y$. For a simplex $\\sigma$ outside $P$, $g(\\sigma(0))$ is the supplied ordinary colimit cocone. By [lem-coef-infinity-cocone-restriction-initial], restriction induces a weak equivalence $\\operatorname{Map}_X(g(\\sigma(0)),t)\\to\\operatorname{Map}_Y(qg(\\sigma(0)),qt)$ for every $t\\in X$, including arbitrary boundary diagrams $qt$. This is exactly $q$-initiality as defined in [lem-coef-infinity-relative-initial-boundary].",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-cocone-restriction-initial",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Proposition 7.1.6.13, colimit dual; terminal-base conversion"
+   }
+  },
+  {
+   "text": "Here is the lifting construction we will use twice. Let $A\\subseteq T$ contain every vertex, with compatible maps $a:A\\to X$ and $b:T\\to Y$, and suppose $a(\\tau(0))$ is $q$-initial for every simplex $\\tau$ outside $A$. Use the relative skeletal pushouts of [lem-coef-infinity-monomorphism-boundary-cells], starting from $A$. At stage $d$ attach the nondegenerate $d$-simplices outside $A$; their boundaries were attached earlier. There are no $0$-cells, since all vertices lie in $A$. For each attaching simplex the existing boundary map has initial vertex $a(\\tau(0))$, so [lem-coef-infinity-relative-initial-boundary] gives a filler over its prescribed $Y$-simplex. Choose fillers for this small set of cells, glue by the attaching pushout, and continue by induction on $d$. The compatible maps on all stages induce a map on their colimit $T$; its restriction to $A$ and projection to $Y$ are the original maps, because both equalities hold at every stage. The dual construction uses $q$-final vertices $a(\\tau(d))$ and the final-vertex boundary criterion.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7 proof, explicit relative skeletal version of the extension argument"
+   }
+  },
+  {
+   "text": "Apply the construction of step 3 with $A=P$, $T=B$, and $(a,b)=(g,f)$ from step 2. Its hypotheses hold because the vertex condition is assumed and all required vertices were proved $q$-initial in step 2. It yields $h:B\\to X$ with $h|_P=g$ and $qh=f$. By the formula for internal functor simplicial sets, uncurrying gives $\\bar v:B\\times K^{\\triangleright}\\to\\mathcal E$. These two equalities say exactly that it extends both parts of the prescribed pushout union.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Terminal-base extension, uncurrying the constructed lift"
+   }
+  },
+  {
+   "text": "Fix any such extension $h$, not only the one constructed above. Form\n$$Q:\\operatorname{Fun}(B,X)\\longrightarrow\\operatorname{Fun}(P,X)\\times_{\\operatorname{Fun}(P,Y)}\\operatorname{Fun}(B,Y).$$\nIt is an isofibration between quasicategories by [lem-coef-infinity-isofibration-exponentiation], applied to $q$ and $P\\hookrightarrow B$. To test whether $h$ is $Q$-initial, the boundary criterion of [lem-coef-infinity-relative-initial-boundary] asks for lifts of $\\partial\\Delta^n\\to\\operatorname{Fun}(B,X)$ over a prescribed $\\Delta^n$ in the target, with $n>0$ and initial vertex $h$. Uncurrying gives a map into $X$ on\n$$S=(\\partial\\Delta^n\\times B)\\cup(\\Delta^n\\times P)\\subseteq T=\\Delta^n\\times B$$\nover a prescribed map $T\\to Y$. The overlap equation is exactly the pullback equation in the target of $Q$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Proposition 7.1.8.10 proof, boundary lifting after replacing the original functor by cone restriction"
+   }
+  },
+  {
+   "text": "Every vertex of $T$ lies in $S$ because $n>0$. A simplex $(\\alpha,\\beta):\\Delta^d\\to\\Delta^n\\times B$ outside $S$ has $\\alpha$ surjective on $[n]$ (otherwise it belongs to a boundary face) and $\\beta$ not in $P$. Hence $\\alpha(0)=0$. The specified map $S\\to X$ at its initial vertex is therefore $h(\\beta(0))=g(\\beta(0))$, since $P$ contains all vertices. It is $q$-initial by step 2 applied to $\\beta$. The skeletal construction of step 3, using [lem-coef-infinity-monomorphism-boundary-cells] and [lem-coef-infinity-relative-initial-boundary], fills $T$ over $Y$ while fixing $S$. Currying yields the required $Q$-boundary lift. The converse implication of the boundary criterion now proves that $h$ is $Q$-initial.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Proof of Proposition 7.1.8.10; use the union with the factor Delta^n times P"
+   }
+  },
+  {
+   "text": "Currying exchanges $B$ and $K^{\\triangleright}$ and also exchanges $P$ and $K$ in the lower corners. Degree by degree, $Q$ is thus the corner of $r$ along $K\\hookrightarrow K^{\\triangleright}$: its source becomes $\\operatorname{Fun}(K^{\\triangleright},\\operatorname{Fun}(B,\\mathcal E))$ and its target becomes\n$$\\operatorname{Fun}(K,\\operatorname{Fun}(B,\\mathcal E))\\times_{\\operatorname{Fun}(K,\\operatorname{Fun}(P,\\mathcal E))}\\operatorname{Fun}(K^{\\triangleright},\\operatorname{Fun}(P,\\mathcal E)).$$\nThese identifications are induced by permuting product coordinates and commute with all simplicial operators. The relative-initial condition on mapping spaces is unchanged by these isomorphisms. Since $r$ is an isofibration, [lem-coef-infinity-relative-cone-initial-corner] converts step 6 into precisely the required $r$-colimit predicate for this arbitrary extension.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XM",
+    "place": "Corollary 7.1.8.11, via the cone-corner characterization"
+   }
+  },
+  {
+   "text": "For the limit data set $X^-=\\operatorname{Fun}(K^{\\triangleleft},\\mathcal E)$, $Y=\\operatorname{Fun}(K,\\mathcal E)$ and $q^-:X^-\\to Y$ the restriction isofibration from [lem-coef-infinity-isofibration-exponentiation]. Curry the prescribed union to $g^-:P\\to X^-$ and $f:B\\to Y$. Fix a simplex $\\sigma$ outside $P$ and let $u=g^-(\\sigma(d))$, with apex $y$ and boundary $F$. Its coherent cone $\\mu:\\Delta_Ky\\to F$ is limiting. The criterion in [lem-cbc-enhanced-functor-cone-calculus] says that $e_x:\\operatorname{Map}_{\\mathcal E}(x,y)\\to\\operatorname{Map}_Y(\\Delta_Kx,F)$, $a\\mapsto\\mu\\Delta_K(a)$, is a weak equivalence for every $x$. For any $t\\in X^-$ with apex $x$, boundary $G$, and cone $\\lambda$, [lem-coef-infinity-join-cone-calculus] identifies restriction $\\operatorname{Map}_{X^-}(t,u)\\to\\operatorname{Map}_Y(G,F)$ with projection from the homotopy pullback of $e_x$ along $b\\mapsto b\\lambda$. This projection is a weak equivalence: apply [lem-coef-kan-homotopy-pullback-invariance] to replace $e_x:V\\to W$ by $1_W:W\\to W$ (the maps on the other factor and on $W$ are identities), then use [lem-coef-kan-pullback-path-comparison] with the Kan fibration $1_W$ to compare the new path pullback with its strict pullback $\\operatorname{Map}_Y(G,F)$. Both comparisons commute with projection, so two-out-of-three gives the claim. Consequently $u$ is $q^-$-final by the definition in [lem-coef-infinity-relative-initial-boundary]. The final-vertex construction in step 3, using [lem-coef-infinity-monomorphism-boundary-cells], gives $h^-:B\\to X^-$ over $f$ extending $g^-$; uncurrying gives an extension on $B\\times K^{\\triangleleft}$ fixing the entire given union.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Opposite dual, with the final-vertex boundary criterion"
+   }
+  },
+  {
+   "text": "For any limit extension $h^-$ form the corner $Q^-$ of $q^-$ along $P\\hookrightarrow B$, an isofibration by [lem-coef-infinity-isofibration-exponentiation]. Test the final-vertex boundary condition of [lem-coef-infinity-relative-initial-boundary]: a boundary of positive dimension $n$ whose last vertex is $h^-$ again uncurries to a map on $S=(\\partial\\Delta^n\\times B)\\cup(\\Delta^n\\times P)$ over $T=\\Delta^n\\times B$. For every missing simplex $(\\alpha,\\beta)$, $\\alpha$ is surjective and $\\beta$ is outside $P$; now $\\alpha(d)=n$, so its final-vertex value is $h^-(\\beta(d))=g^-(\\beta(d))$, which is $q^-$-final by step 8. Apply the final-vertex skeletal construction using [lem-coef-infinity-monomorphism-boundary-cells] to fill $T$ fixing $S$. Thus every required boundary lifts and $h^-$ is $Q^-$-final. Permuting product coordinates identifies $Q^-$ with the corner of $r$ along $K\\hookrightarrow K^{\\triangleleft}$; [lem-coef-infinity-relative-cone-initial-corner] now makes this arbitrary extension an $r$-limit diagram.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-cone-initial-corner"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XK",
+    "place": "Opposite dual of the boundary-lifting proof of Proposition 7.1.8.10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocone-restriction-initial",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-cone-initial-corner",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/06A5",
+  "place": "Proposition 7.1.8.7 and Proposition 7.1.8.10 (02XK), expanded by skeletal induction; Corollary 7.1.8.11 (02XM) and the limit duals. Online sources read; archive wanted."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +220,66 @@
    "results": "{\"t\": \"2026-10-16T15:52:10Z\", \"tool\": \"grep\", \"query\": \"[Ii]sofibration|[Cc]ategorical[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the actual source grep returned zero hits for this query in the recorded source directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parameterized cone extension along a simplicial subset containing all vertices in a quasicategory",
+   "results": "SSet.Quasicategory.hornFilling; SSet.Quasicategory.hornFilling'; CategoryTheory.Limits.Cones.extend; SSet.Truncated.rightExtensionInclusion; no parameterized extension declaration",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Functor, IsIso",
+   "results": "unknown identifier IsIso; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|isofibration|relative.*colimit [AlgebraicTopology/Quasicategory]",
+   "results": "25 hits, chiefly SSet.Quasicategory and horn-filling declarations; no relative cone extension",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a parameterized coherent cocone in an infinity category from a simplicial subset containing all vertices",
+   "results": "CategoryTheory.Functor.Final.extendCocone; CategoryTheory.Functor.coconeOfIsLeftKanExtension; ordinary cocone extensions only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative colimit diagram extension for Fun(B,E) to Fun(P,E) quasicategories",
+   "results": "SSet.horn.isColimit; SSet.StrictSegal.isPointwiseRightKanExtensionAt; no relative Fun(B,E) extension",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, SSet.InnerFibration",
+   "results": "SSet.quasicategory_of_innerFibration; SSet.quasicategory_iff_innerFibration; no parameterized cone extension",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.*Quasicategory|InnerFibration [AlgebraicTopology]",
+   "results": "12 hits in InnerFibration and pushout-product files; no relative cone extension",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative colimit diagram in a quasicategory and extension over a cone",
+   "results": "CategoryTheory.Limits.colimit.desc_extend; CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension; ordinary category results only",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-kan-mapping-restriction",
@@ -98,5 +287,29 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-parameter-cone-extension",
+  "worker": "stage1",
+  "summary": "Second-reader repair: use the existing cocone-restriction statement for colimit vertices and derive the limit-vertex assertion explicitly from the existing join-cone mapping formula and coherent limit criterion. Removed the redundant new join-comparison node. Retain the general relative-initial boundary criterion and relative-cone corner criterion; the item supplies the skeletal extension and product-boundary universality arguments.",
+  "blueprint": "Generic coherent-diagram infrastructure along the existing historical prop-coef-integral-exceptional-adjoint ancestry, supporting the derived coefficient adjunction. The current main-20261015 ancestor has no proof paragraph numbering; the item spells out the local cone-filling construction used by its existing created-node chain. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 8 takes its coherent limit criterion (a cone mu is limiting iff a -> mu Delta_K(a) is an equivalence for every x) and its mapping-space invariance under functor equivalences; these are generic coherent-diagram tools of sk-prop-sf-cbc with no node in the biduality unit, already declared the same way on lem-coef-infinity-finite-poset-kan-extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-645f2577d",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-645f2577d (reviewer sub-agent of L); spot-checked: I read the item and its 9 steps in full, the two new nodes, and the statements of all 9 cited nodes. I also read Kerodon 06A5, 02XK, 02WS and 02XB online, since Kerodon is not archived. Statement: it is 06A5 with D a point, plus 02XK with corner F' = r and the structural clause of 01F3 (exponentiation node), plus the opposite duals. No hypothesis is dropped and the target is not weakened. Source error confirmed: the 02XK proof prints the second factor as Delta^n x B; uncurrying gives Delta^n x A, and the item correctly uses (dDelta^n x B) u (Delta^n x P). Steps: step 2 is cocone-restriction-initial, which is exactly q-initiality. Step 3 is a sound skeletal induction: all cells have positive dimension, vertex 0 of each cell is in A, and both equations hold at every stage. In steps 6 and 9 every missing product simplex has a surjective first coordinate, so it starts at 0 or ends at n, and the value there is g(beta(0)) or g^-(beta(d)). Step 7: the coordinate-permutation iso of Q with r_> checked factor by factor. Step 8: from the join-cone mapping formula, e_x an equivalence, invariance with (id, e_x, id), the 1_W path comparison and two-out-of-three, the restriction is an equivalence. New nodes: relative-initial-boundary is 02WS (1)<=>(3) with the mapping meaning of 02WR; it is not cartesian-initial-boundary-lift, which only gives the forward direction. relative-cone-initial-corner is 02XB specialized to isofibrations and agrees with the homotopy-pullback square of def-coef-infinity-relative-cone. Both tested on n=1, p=id, a discrete two-object category and K empty. No cycle and no restated parent clause. Fix: step 8 uses lem-cbc-enhanced-functor-cone-calculus from unit sk-prop-sf-cbc, which the biduality unit does not cite, and split_report.tool_uses was empty. I declared it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-parameter-cone-extension.json and accept it as a generic coherent-limit tool; the same use is already accepted on the parent finite-poset-kan-extension. No other changes.; 1 file(s) fixed by the reviewer"
+ }
 }

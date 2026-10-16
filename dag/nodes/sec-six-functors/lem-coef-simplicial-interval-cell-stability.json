@@ -28,9 +28,123 @@
  "stmt_deps": [
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record how an isomorphism in $\\pi_0C$ changes the objects of a mapping set. Represent it and its inverse by vertices $e:a\\to b$ and $v:b\\to a$. The vertices $ve,ev$ are connected to the relevant identity vertices by finite zigzags of edges in the mapping sets. To identify this edge relation with path components of realization, partition vertices by finite edge zigzags. All vertices of any simplex are joined by its edges, so the simplicial set is the disjoint union of the simplicial subsets belonging to these classes. Realization preserves that disjoint union by [lem-coef-realization-finite-limits]; each resulting summand is path connected because every point in a realized simplex can be joined inside that simplex to a vertex, and the vertices are joined by the edge zigzags. Thus these summands are precisely the path components. Composition with each edge defines a map $\\Delta^1\\times C(z,a)\\to C(z,a)$, or the corresponding map for precomposition. By [lem-coef-realization-finite-limits], realization naturally preserves finite products in the category $\\mathcal K$ of k-spaces, and the realized pair $(|\\Delta^1|,|\\partial\\Delta^1|)$ is an interval with its two endpoints. Thus realization of the displayed simplicial map gives a homotopy, with parameter $[0,1]$, of the corresponding composition maps in $\\mathcal K$. Thus the realized compositions with $e$ and $v$ are mutually inverse up to homotopy (concatenate the finitely many homotopies, reversing their direction when necessary). In particular composition with $e$ is a weak homotopy equivalence on all affected mapping sets. The argument applies to arbitrary simplicial mapping sets.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 3.1, expansion of the object-transport used in two-out-of-three; agent supplies the edge-zigzag argument"
+   }
+  },
+  {
+   "text": "We prove two-out-of-three for $A\\xrightarrow{f}B\\xrightarrow{g}C$. If $f,g$ are DK-equivalences, their composite is locally a weak equivalence by the simplicial-set two-out-of-three property [lem-coef-kan-quillen-right-proper], and its component functor is an equivalence by composing fully faithful essentially surjective functors. If $g,gf$ are DK-equivalences, local two-out-of-three gives the local property for $f$; for any $b\\in B$, essential surjectivity of $gf$ gives an isomorphism $gf(a)\\cong g(b)$, and full faithfulness of $\\pi_0g$ lifts it and its inverse to an isomorphism $f(a)\\cong b$. If $f,gf$ are DK-equivalences, $g$ is essentially surjective because $gf$ is; local two-out-of-three first proves its local property on pairs $f(a),f(a')$. For arbitrary $b,b'$, choose isomorphisms $f(a)\\cong b$ and $f(a')\\cong b'$ in $\\pi_0B$. Choose vertices $e:f(a)\\to b$, $e':f(a')\\to b'$ and a vertex $v:b\\to f(a)$ representing the inverse of $e$. The comparison map $B(f(a),f(a'))\\to B(b,b')$ sends $k$ to $e'kv$. On the $C$-mapping sets use $g(e')(-)g(v)$. These maps commute strictly with $g$ by preservation of composition; both comparison maps are weak equivalences by step 1. The composite from $B(f(a),f(a'))$ to $C(gb,gb')$ is therefore a weak equivalence, and two-out-of-three with the first comparison map proves the local property for $g$ at $(b,b')$. A locally weak equivalence is fully faithful after $\\pi_0$, which completes each case. For a retract $f:A\\to B$ of a DK-equivalence $h:A'\\to B'$ in the arrow category, each mapping-set map of $f$ is a retract of that of $h$ at the section images of its objects, hence a weak equivalence by [lem-coef-kan-quillen-right-proper]. For $b\\in B$, apply essential surjectivity of $h$ to the section image of $b$ and apply the retraction functor to its witnessing isomorphism. This gives $f(a)\\cong b$ and proves retract closure.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 3.1; complete verification of retract closure and all three two-out-of-three cases"
+   }
+  },
+  {
+   "text": "Consider a horn cell attached to a simplicial category $C$ with object set $O$. Its attaching functor sends the two objects to some $a,b\\in O$, possibly equal. Let $F_{a,b}(K)$ denote the free $O$-object simplicial category on a simplicial set of arrows $K$ from $a$ to $b$: in each degree its morphisms are composable words in these generators, including empty identity words; faces and degeneracies act on each letter. Maps $F_{a,b}(K)\\to T$ in $\\mathrm{sCat}_O$ are exactly simplicial maps $K\\to T(a,b)$. The variable-object horn pushout is the fixed-object pushout of $F_{a,b}(\\Lambda_i^n)\\to F_{a,b}(\\Delta^n)$. To check this even against a target $T$ with arbitrary object set, fix a functor $C\\to T$. An extension over either proposed pushout is exactly a simplicial map $\\Delta^n\\to T(Fa,Fb)$ restricting to the prescribed horn map. The object choices are already fixed by $C\\to T$ because the horn generator changes no objects. For the fixed-object calculation use the $O$-labelled category $T_F$ with $T_F(s,t)=T(Fs,Ft)$ and identities and compositions from $T$, even when different labels have the same image. The free-arrow bijection applied to $T_F$ gives the same extensions on the fixed-object side, and their uniqueness proves the variable-object pushout universal property. By [lem-coef-kan-quillen-right-proper] horns have the left lifting property against all Kan fibrations; the displayed bijection of maps translates a lifting square against an objectwise fibration in $\\mathrm{sCat}_O$ into precisely such a horn square. Hence this free horn map, and its pushout $C\\to D$, have the left lifting property against every fibration in the fixed-object model of [lem-coef-simplicial-interval-lifting]. The model axioms make $C\\to D$ a trivial cofibration there. It is locally a weak equivalence, fixes all objects, and is consequently a DK-equivalence. When $a=b$ the free words are loops, and the bijection of maps just proved still sends a generator to an arbitrary simplex of $T(a,a)$; its horn-lifting conclusion therefore includes coincident attaching objects.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, horn case; explicit free-arrow/lifting argument also treating coincident attaching objects"
+   }
+  },
+  {
+   "text": "For an interval cell write $D=C\\amalg_{\\{x\\}}H$, renaming the attaching object of $C$ as $x$, and write $y$ for the other, new object of $H$. Put $O=\\operatorname{Ob}C$ and $X=O\\amalg\\{y\\}$. A set used as an enriched category here is discrete (identity mapping sets $\\Delta^0$, all other mapping sets empty). Put $C'=C\\amalg\\{y\\}$ and $H'=(O\\setminus\\{x\\})\\amalg H$. Then $D=H'\\amalg_X C'$ by the pushout universal property, and $X\\to H'$ is a cofibration in $\\mathrm{sCat}_X$: a lifting problem against an objectwise trivial fibration restricts to the given cofibration of $H$ on $\\{x,y\\}$; at the other objects only identities need lifting. Choose a cofibrant replacement $q:C_0\\to C$ in $\\mathrm{sCat}_O$ by factoring the map from the discrete category $O$ (the initial object of $\\mathrm{sCat}_O$) to $C$ as a cofibration $O\\to C_0$ followed by an objectwise trivial Kan fibration $q$, using the model structure of [lem-coef-simplicial-interval-lifting]; thus $q$ is in particular an objectwise weak homotopy equivalence. Set $C''=C_0\\amalg\\{y\\}$. To lift $X\\to C''$ against an objectwise trivial fibration $T\\to S$ in $\\mathrm{sCat}_X$, restrict its square to $O$ and lift $O\\to C_0$ using cofibrancy of $C_0$ in $\\mathrm{sCat}_O$. Extend this lift at $y$ by its required identity map $\\Delta^0\\to T(y,y)$; every mapping set from $y$ to $O$ or from $O$ to $y$ in $C''$ is empty, so its unique map imposes no further condition. This is an enriched lift, proving $X\\to C''$ is a cofibration. The map $q'=q\\amalg1:C''\\to C'$ is an objectwise trivial fibration: its restriction to $O$ is $q$, its new off-diagonal maps are $\\varnothing\\to\\varnothing$, and its new endomorphism map is $\\Delta^0\\to\\Delta^0$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, interval case, printed pp. 10-11; choose the replacement to leave the new isolated object unchanged"
+   }
+  },
+  {
+   "text": "Let $E$ be the disjoint union of the discrete category on $O\\setminus\\{x\\}$ with the ordinary groupoid on $x,y$ having exactly one morphism for each ordered pair, regarded as a constant simplicial category. The canonical functor $h:H'\\to E$ is an objectwise weak homotopy equivalence: each of the four mapping sets of $H$ is weakly contractible; all remaining mapping-set maps are identities. Define $D''=H'\\amalg_X C''$ and $P''=E\\amalg_X C''$. The map $D''\\to D$ is the pushout of $q'$ along the cofibration $C''\\to D''$ obtained from $X\\to H'$. The map $D''\\to P''$ is the pushout of $h$ along the cofibration $H'\\to D''$ obtained from $X\\to C''$. The two asserted cofibrations can be checked directly from the lifting definition: a square from a pushout inclusion against a trivial fibration restricts to a square from the original cofibration; its lift and the given map from the other leg agree on $X$, so glue to the required lift. Both maps are objectwise weak equivalences by [lem-coef-fixed-object-scat-left-proper]. These are two applications of left properness in $\\mathrm{sCat}_X$, with all stated cofibration hypotheses checked; neither is an appeal to an as-yet-unconstructed variable-object model structure.",
+   "uses": [
+    "lem-coef-fixed-object-scat-left-proper",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, interval case, comparisons of the three fixed-object spans, printed p. 11"
+   }
+  },
+  {
+   "text": "Compute $P''$ explicitly. Let $r:X\\to O$ be the identity on $O$ and send $y$ to $x$. The category with mapping sets $P''(u,v)=C_0(r(u),r(v))$ and composition inherited from $C_0$ is the required pushout. Indeed a compatible pair of enriched functors from $C''$ and $E$ to any simplicial category $T$ consists of a functor from $C_0$, an object for $y$, and a strict isomorphism $u:T(x)\\to T(y)$. Its unique extension sends a morphism in $C_0(r(s),r(t))$ to $u_t\\,F(-)\\,u_s^{-1}$, where $u_s=1$ for $s\\in O$ and $u_y=u$. These formulas preserve composition because $u_s^{-1}u_s=1$, and prove the universal property. In particular the composite $C_0\\to D''\\to P''$ induces the identity of $C_0(a,b)$ for all $a,b\\in O$. Since $D''\\to P''$ is locally a weak equivalence, local two-out-of-three makes $C_0(a,b)\\to D''(a,b)$ a weak equivalence. In the square with horizontal maps $C_0(a,b)\\to D''(a,b)$ and $C(a,b)\\to D(a,b)$ the vertical maps are weak equivalences by $q$ and step 5. Thus $C(a,b)\\to D(a,b)$ is a weak equivalence by [lem-coef-kan-quillen-right-proper]. Finally $D$ has exactly the objects $O\\amalg\\{y\\}$, and the vertices of $H(x,y)$ and $H(y,x)$ give inverse arrows in $\\pi_0D$: their two composites and the identities have the same components since $\\pi_0H$ has one arrow per ordered pair. Hence $C\\to D$ is essentially surjective and is a DK-equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 3.4, printed p. 11: expanded duplicate-object pushout calculation and deduction of the actual local maps"
+   }
+  },
+  {
+   "text": "A continuous ordinal sequence $C_\\alpha$ of these single-cell attachments has injective object maps: a horn cell keeps the object set and an interval cell adds precisely one new object. At a nonzero limit ordinal $\\lambda$, the object set of $C_\\lambda$ is their union. For objects $a,b$ occurring by a stage $\\beta<\\lambda$, its mapping set is $C_\\lambda(a,b)=\\varinjlim_{\\beta\\leq\\alpha<\\lambda} C_\\alpha(a,b)$. To verify this formula without a Kan assumption, form the degreewise colimit of the mapping sets on the union of objects: two representatives are equal just when their images agree at a later stage. Two composable representatives occur together at some stage, so their composite is defined there and is independent of the chosen stage. Associativity, units and simplicial operators hold because each involves only finitely many representatives and equations, all verifiable at a common later stage. The resulting enriched category has exactly the colimit universal property. No assertion that arbitrary enriched pushouts are pointwise is being used.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proof of Proposition 3.3, directed-colimit sentence; explicit filtered enriched-colimit construction"
+   }
+  },
+  {
+   "text": "Prove by transfinite induction that every $C_0\\to C_\\alpha$ is a DK-equivalence. The identity is the base case; the successor case is steps 3 and 6 followed by step 2. At a nonzero limit $\\lambda$, fix $a,b\\in C_0$. The tail of ordinals below $\\lambda$ is a nonempty filtered category, and the compatible maps from the constant simplicial set $C_0(a,b)$ to $C_\\alpha(a,b)$ are weak equivalences by induction. The colimit of this constant source diagram is $C_0(a,b)$: all transition maps are identities, and any two stages have a common later stage, so the colimit identifies precisely the copies of the same simplex. Apply [lem-coef-filtered-colimit-weak-equivalences] and the explicit colimit of step 7 to obtain the local weak equivalence into $C_\\lambda$. Every object $z\\in C_\\lambda$ occurs at an earlier stage, where the inductive essential-surjectivity assertion supplies an isomorphism between $z$ and the image of an object of $C_0$. Its vertices and inverse relations remain such in the colimit, so essential surjectivity also holds. If $C_0$ is empty there are no intervals to attach (their singleton domain has no map to it), and no horn domain admits an object map either; the sequence stays empty. Thus this edge case also satisfies the induction.",
+   "uses": [
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proof of Proposition 3.3, transfinite cell-construction argument; limit step supplied by Kerodon Tag 00XE"
+   }
+  },
+  {
+   "text": "For the arbitrary coproducts in a relative $J$-cell presentation, well-order the set of cells attached at each successor stage and attach them singly in that order, composing each original attaching map with the current structure map. At every intermediate limit take the colimit. A functor from the result to any $T$ is exactly a functor from the starting stage together with an extension over each original cell agreeing on its domain: this proves that the refined result is the original simultaneous pushout. The same universal-property argument identifies the colimits after concatenating these refinements over the original ordinal presentation. Apply step 8 to this single-cell refinement. The empty family and the zero-length construction give identities. We have proved every asserted relative $J$-cell map is in $W$, with no fibrancy restriction, as well as retract closure and two-out-of-three from step 2.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proof of Proposition 3.3; expansion from iterated single cells to arbitrary coproduct cells and continuous transfinite presentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-fixed-object-scat-left-proper",
+  "lem-coef-filtered-colimit-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0406507",
+  "place": "Proposition 3.1 and Lemma 3.4 / Proposition 3.3, with an explicit isolated-object cofibrant replacement and duplicate-object calculation. Source read online, not archived in literature."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +173,45 @@
    "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"line\": \"424\", \"text\": \"/-- If `i : X ⟶ Y` is a monomorphism of simplicial sets, then it is a relative cell\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.RelativeCellComplex\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"35\", \"text\": \"`Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean`\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: simplicial-set cell generation and formal model-category lemmas do not prove weak equivalence after attaching enriched intervals before the enriched model structure exists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative cell complexes generated by horns and cofibrant contractible two object simplicial categories are Dwyer Kan equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {X Y : HomotopicalAlgebra.CofibrantObject C} [HomotopicalAlgebra.IsFibrant Y.obj],\\n  Equivalence fun x1 x2 => HomotopicalAlgebra.CofibrantObject.homRel C x1 x2\", \"doc\": \"For cofibrant objects $X$ and $Y$ in a model category $\\\\mathcal{C}$, if $Y$ is fibrant, then the right homotopy relation on morphisms $X \\\\to Y$ forms an equivalence relation. This means the binary rel\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"SSet.Truncated 2 → Type u_1\", \"doc\": \"The homotopy category of 2-truncated simplicial sets, which assigns to each 2-truncated simplicial set its homotopy category (a category encoding equivalence classes of objects under homotopy).\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) → [inst : CategoryTheory.Category.{v_1, u_1} C] → [HomotopicalAlgebra.ModelCategory C] → Type u_1\", \"doc\": \"The quotient category of the full subcategory of cofibrant objects in a model category, where morphisms are identified up to right homotopy. This category is constructed by taking the homotopy relatio\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cells, the sHom interface, and abstract model-category consequences do not establish the Bergner generating interval pushout theorem; assuming its model structure here would be circular."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"WeakEquivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cells, the sHom interface, and abstract model-category consequences do not establish the Bergner generating interval pushout theorem; assuming its model structure here would be circular."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer|Bergner|simplicial.*[Cc]ell|[Cc]ell.*simplicial",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"line\": \"424\", \"text\": \"/-- If `i : X ⟶ Y` is a monomorphism of simplicial sets, then it is a relative cell\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.RelativeCellComplex\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"35\", \"text\": \"`Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean`\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cells, the sHom interface, and abstract model-category consequences do not establish the Bergner generating interval pushout theorem; assuming its model structure here would be circular."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushouts and transfinite composites of Bergner generating trivial cofibrations are local weak homotopy equivalences and essentially surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialCofibrations C ≤ weakEquivalences C\", \"doc\": \"The trivial cofibrations in category $\\\\mathcal{C}$, defined as morphisms that are both cofibrations and weak equivalences, form a subset of the weak equivalences in $\\\\mathcal{C}$.\"}\n  {\"name\": \"HomotopicalAlgebra.instIsMultiplicativeTrivialCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (trivialCofibrations C).IsMultiplicative\", \"doc\": \"In a category equipped with cofibrations and weak equivalences, the class of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) is closed under composition.\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[(trivialCofibrations C).IsStableUnderCobaseChange] [Cofibration g] [WeakEquivalence g] :\\n  WeakEquivalence (pushout.inl f g)\", \"doc\": \"If trivial cofibrations are stable under cobase change and a morphism $ g $ is both a cofibration and a weak equivalence, then the inclusion morphism $ Y \\to \\text{pushout}(f, g) $ is a weak equivalence\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[(trivialCofibrations C).IsStableUnderCobaseChange] [Cofibration f] [WeakEquivalence f] :\\n  WeakEquivalence (pushout.inr f g)\", \"doc\": \"In a category with cofibrations and weak equivalences, if the trivial cofibrations are stable under cobase change and a morphism $ f $ is both a cofibration and a weak equivalence, then the right incl\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceITrivialCofibrationsFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": WeakEquivalence h.i\", \"doc\": \"In a category equipped with cofibrations, fibrations, and weak equivalences, the morphism $ h.i $ is a weak equivalence. This instance asserts that morphisms classified as trivial cofibrations (those \"}\n  {\"name\": \"HomotopicalAlgebra.mem_trivialCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"[Cofibration f] [WeakEquivalence f] : trivialCofibrations C f\", \"doc\": \"If a morphism $ f $ in a category $ \\\\mathcal{C} $ with cofibrations and weak equivalences is both a cofibration and a weak equivalence, then $ f $ is a trivial cofibration in $ \\\\mathcal{C} $.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialFibrations C ≤ weakEquivalences C\", \"doc\": \"In a category equipped with fibrations and weak equivalences, every trivial fibration (a morphism that is both a fibration and a weak equivalence) is a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": MorphismProperty C\", \"doc\": \"The morphism property in category $\\\\mathcal{C}$ defined as the intersection of the cofibration property and the weak equivalence property, i.e., morphisms that are both cofibrations and weak equivalen\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cells, the sHom interface, and abstract model-category consequences do not establish the Bergner generating interval pushout theorem; assuming its model structure here would be circular."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Attaching a contractible cofibrant enriched interval preserves mapping spaces of a simplicial category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialCategory.homEquiv'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.SimplicialCategory C] →\\n      (K L : C) → (K ⟶ L) ≃ (CategoryTheory.SimplicialCategory.sHom K L).obj (Opposite.op (SimplexCategory.mk 0))\", \"doc\": \"For any objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, there is a natural equivalence between the hom-set $\\\\text{Hom}(K, L)$ in $\\\\mathcal{C}$ and the se\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHom\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → C → C → SSet\", \"doc\": \"For objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, this denotes the simplicial set of morphisms from $K$ to $L$, defined as the internal hom $K \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"{J : Type u_1} →\\n  [inst : LinearOrder J] → CategoryTheory.SimplicialThickening J → CategoryTheory.SimplicialThickening J → SSet\", \"doc\": \"For objects $i$ and $j$ in the simplicial thickening category associated with a linearly ordered set $J$, the hom-set $\\\\text{Hom}(i, j)$ is defined as the nerve of the category of morphisms from $i$ t\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.SimplicialCategory.id\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"{J : Type u_1} →\\n  [inst : LinearOrder J] →\\n    (i : CategoryTheory.SimplicialThickening J) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶\\n        CategoryTheory.SimplicialThickening.SimplicialCategory.Hom i i\", \"doc\": \"For a linearly ordered set $ J $, the identity morphism for an object $ i $ in the simplicial thickening category is the constant natural transformation from the identity functor on simplicial sets to\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"{J : Type u_1} →\\n  [inst : LinearOrder J] →\\n    (i j k : CategoryTheory.SimplicialThickening J) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorObj (CategoryTheory.SimplicialThickening.SimplicialCategory.Hom i j)\\n          (CategoryTheory.SimplicialThickening.SimplicialCategory.Hom j k) ⟶\\n      \", \"doc\": \"For objects $i, j, k$ in the simplicial thickening category associated with a linearly ordered set $J$, the composition map $\\\\mathrm{Hom}(i,j) \\\\times \\\\mathrm{Hom}(j,k) \\\\to \\\\mathrm{Hom}(i,k)$ combines \"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(J : Type u_1) → [inst : LinearOrder J] → CategoryTheory.SimplicialCategory (CategoryTheory.SimplicialThickening J)\", \"doc\": \"For any linearly ordered set $ J $, the simplicial thickening associated with $ J $ forms a simplicial category. In this category, the hom-objects between any two elements $ i $ and $ j $ are simplici\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.functor_id\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"∀ (J : Type u) [inst : LinearOrder J],\\n  CategoryTheory.SimplicialThickening.functor OrderHom.id =\\n    CategoryTheory.EnrichedFunctor.id SSet (CategoryTheory.SimplicialThickening J)\", \"doc\": \"For any linearly ordered set $ J $, the enriched functor induced by the identity order-preserving map on $ J $ is equal to the identity enriched functor on the simplicial thickening category of $ J $.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cells, the sHom interface, and abstract model-category consequences do not establish the Bergner generating interval pushout theorem; assuming its model structure here would be circular."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -70,5 +219,21 @@
   "group": "Q62"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-interval-cell-stability",
+  "worker": "stage1",
+  "summary": "Rebased the retained split onto the current DAG after the landing refusal. Re-read every cited statement: realization-finite-limits now defines the simplex boundary explicitly, without changing its product or interval clauses. Step 1 now specifies finite products and homotopies in k-spaces and its quote names only the used clauses. Reused the current lem-coef-filtered-colimit-weak-equivalences at step 8 and removed its duplicate sandbox node. All nine proof steps and the full statement are preserved; one new statement-only node remains, fixed-object left properness. No Mathlib leaf or project attachment.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2: the displayed derived coefficient-adjunction / inverse-limit calculation, followed by naturality and triangle identities. This item is foundational coherent-localization infrastructure for that calculation through its inherited via chain; it replaces no geometric step of the unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-db0f1b4d9",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-db0f1b4d9 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the one new node (lem-coef-fixed-object-scat-left-proper) and the full statements of the 5 cited nodes: interval-lifting, realization-finite-limits, kan-quillen-right-proper, filtered-colimit-weak-equivalences and the new node. I also read both citers of the item (coherent-nerve-comparison and rigidification-equivalence-detection), the unit file and the main-20261015 proof of the ancestor (prop-coef-integral-exceptional-adjoint). Source check: network access is blocked for reviewers, so I could not reopen Bergner math/0406507, Dwyer-Kan Prop. 7.3 or Kerodon 00XE (none is in literature/; the WANTED lines are kept). Instead I checked each step against the cited statements. The item statement is unchanged and is Bergner's theorem: the DK class is retract-closed and has two-out-of-three, and J-cell maps are DK with no Kan condition, exactly as the citers use it. Step 1: edge homotopies are realized through k-space products and the (|Δ^1|,|∂Δ^1|) pair; correct. Step 2: I checked all three two-out-of-three cases, including the e'kv comparison square and retract essential surjectivity. Step 3: the free-arrow bijection and the T_F device work, including a=b. Step 4: X→H' and X→C'' are cofibrations and q' is an objectwise trivial fibration. Step 5: two left-properness pushouts in sCat_X with every hypothesis met. Step 6: the explicit P'' conjugation formula, the square with q, and y≅x in π0D. Step 7: the directed colimit is computed on mapping sets. Step 8: the constant source over a filtered tail, the empty start, and essential surjectivity. Step 9: the single-cell refinement is elementary. New node: it is true. I checked it independently: reduce to I-cell attachments, filter by word length, then use the gluing lemma in left-proper sSet, as in HTT A.3.2. It holds for O empty and O a singleton. It does not restate the item and is not a duplicate: all-cofibrant-left-proper needs all objects cofibrant; fixed-object-simplicial-free-calculus gives only free-product invariance and sits above the item, so citing it would make a cycle. Its searches cover all three kinds and its blueprint fields are correct. No cycles, everything is in one unit, no tool_uses, no SGA. The fix: in fixes/, only step 4's text changes, saying that the cofibrant replacement q comes from factoring O→C as a cofibration followed by an objectwise trivial Kan fibration. The step's later claim that q' is a trivial fibration needs this.; 1 file(s) fixed by the reviewer"
+ }
 }
