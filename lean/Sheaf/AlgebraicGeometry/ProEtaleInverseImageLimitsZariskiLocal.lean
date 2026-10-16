@@ -5,7 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import WeilConjectures.Mathlib.CategoryTheory.NatIso
 
 /-!
 # Zariski locality of preservation of pro-etale inverse-image limits
