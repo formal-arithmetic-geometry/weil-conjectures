@@ -24,9 +24,148 @@
  "stmt_deps": [
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S^+=S\\cup\\{G\\}$. By the definition of $\\mathcal T$ and $\\mathcal L$, $S\\subseteq\\mathcal L$ and $\\mathcal L^{\\perp_1}=\\mathcal T$: one inclusion follows from $S\\subseteq\\mathcal L$, and the other from $\\mathcal L={}^{\\perp_1}\\mathcal T$. Since $G\\in\\mathcal L$, adding $G$ does not change the right orthogonal, so $(S^+)^{\\perp_1}=\\mathcal T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument, orthogonal definitions; compare Saorin-Stovicek, Section 1.3, read online."
+   }
+  },
+  {
+   "text": "For each $C\\in S^+$ and subset $J\\subseteq\\operatorname{Hom}(G,C)$ whose evaluation $\\rho_{C,J}:G^{(J)}\\to C$ is epic, choose its kernel $i_{C,J}:K_{C,J}\\hookrightarrow G^{(J)}$. Let $I$ consist of all these maps and also $0\\to G$. It is a set in the fixed universe: $S^+$ is a set, each Hom is a set, and the power set of each such Hom is a set. Each cokernel is in $S^+$, because in an abelian category an epimorphism is the cokernel of its kernel. Coproducts and kernels exist by the cited definitions. Each $C$ has at least one such $J$: an epimorphic coproduct of copies of $G$ onto $C$ factors through the full evaluation indexed by $\\operatorname{Hom}(G,C)$, so that evaluation is epic.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction after Saorin-Stovicek Proposition 2.7(2), read online; kernels and epimorphisms are used only as in the definition of an abelian category."
+   }
+  },
+  {
+   "text": "For any short exact sequence $0\\to T\\xrightarrow{u}E\\xrightarrow{q}C\\to0$ with $C\\in S^+$, set $J=\\{qf:f:G\\to E\\}\\subseteq\\operatorname{Hom}(G,C)$. The full evaluation onto $E$ is epic by the generator hypothesis, so its composite with $q$ is epic; this composite factors through $\\rho_{C,J}$ by sending each summand indexed by $f$ to the summand indexed by $qf$. Thus $\\rho_{C,J}$ is epic. Choose for each $j\\in J$ one $f_j:G\\to E$ with $qf_j=j$. Their coproduct gives $h:G^{(J)}\\to E$ with $qh=\\rho_{C,J}$. Since $qhi_{C,J}=0$, the kernel property gives $a:K_{C,J}\\to T$ with $ua=hi_{C,J}$. This provides a morphism of short exact sequences with identity on the quotient $C$, for every such extension; no projectivity or lifting of arbitrary maps from $G$ was assumed.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction after Saorin-Stovicek Proposition 2.7(2), read online; choices are only among the maps defining J."
+   }
+  },
+  {
+   "text": "Suppose $p:X\\to Y$ has the right lifting property against $I$. Testing $0\\to G$ says every $G\\to Y$ lifts to $X$. Choose an epimorphism $G^{(H)}\\to Y$; lift its summands and assemble them to factor that epimorphism through $p$, proving $p$ epic. Write $k:T\\hookrightarrow X$ for its kernel. For $i:A\\to B$ in $I$ and $a:A\\to T$, apply lifting to the square with top $ka$ and bottom $0:B\\to Y$. Its filler $d:B\\to X$ satisfies $pd=0$, so factors through $k$ and extends $a$. Consequently every map from the domain of any map in $I$ to $T$ extends across that map.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument; Saorin-Stovicek Lemma 2.2(2), read online, with the pullback calculation written via kernels."
+   }
+  },
+  {
+   "text": "Apply the preceding extension property to the map $a:K_{C,J}\\to T$ of step 3, obtaining $r:G^{(J)}\\to T$ with $ri_{C,J}=a$. Then $h-ur$ vanishes on $K_{C,J}$ and factors through its cokernel $\\rho_{C,J}$ as $s:C\\to E$. Since $q(h-ur)=\\rho_{C,J}$ and $\\rho_{C,J}$ is epic, $qs=1_C$. Thus every extension of each $C\\in S^+$ by $T$ splits, and $T\\in\\mathcal T$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument after Saorin-Stovicek Lemma 2.5, read online; the explicit difference h-ur replaces any uncited pushout or extension theorem."
+   }
+  },
+  {
+   "text": "Conversely, let $p:X\\to Y$ be epic with kernel $T\\in\\mathcal T$. For each $i\\in I$, its cokernel belongs to $S^+$ and hence is Ext-orthogonal to $T$ by step 1. Apply the lifting clause of [lem-coef-cotorsion-orthogonality-calculus] to $i$ and $p$; it gives a filler in every square. Therefore $I^{\\square}$ is exactly the epimorphisms with kernel in $\\mathcal T$.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument using the existing generic orthogonality/lifting node; compare Saorin-Stovicek Lemma 2.5."
+   }
+  },
+  {
+   "text": "By [lem-coef-grothendieck-locally-presentable], $\\mathcal A$ is locally presentable in the same universe. Apply [lem-coef-presentable-cellular-factorization] to the set $I$ of step 2. Every map $f$ factors as $f=pj$, with $p\\in I^{\\square}$ and $j$ a continuous small ordinal composite of pushouts of small coproducts of maps of $I$. The cited factorization explicitly supplies the cellular form of $j$, not merely a left lifting property.",
+   "uses": [
+    "lem-coef-grothendieck-locally-presentable",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent use of cellular small-object factorization; Saorin-Stovicek Proposition 2.1, read online, and the locally-presentable input."
+   }
+  },
+  {
+   "text": "We now turn the cellular map $j:X\\to Z$ of step 7 into a chain with single-cell successor quotients. At one stage, well-order the attaching set $T$ and write its maps as $i_t:A_t\\to B_t$. If the stage starts at $V$, with attaching map $\\bigoplus_t A_t\\to V$, define $V_\\beta=V\\amalg_{\\bigoplus_{t<\\beta}A_t}\\bigoplus_{t<\\beta}B_t$. The coproduct and pushout universal properties identify $V_0=V$, the final $V_\\beta$ with the original simultaneous attachment, and each successor with the pushout of the single map $i_\\beta$; at limits the same universal properties give the colimit of preceding stages. We use monicity only for these refined single-cell successor maps: each is monic by [lem-weil-pbc-abelian-pushout-mono], with cokernel $\\operatorname{Coker}(i_\\beta)\\in S^+$ by [lem-weil-pbc-pushout-cokernel-iso]. Thus no exactness or monicity assertion for a coproduct of the $i_t$ is needed. Concatenate these small ordinal refinements over the original small ordinal. At a limit, exact filtered colimits preserve the monomorphisms from every fixed earlier stage: apply exactness to the chains $0\\to V_\\alpha\\to V_\\gamma$ for $\\gamma\\geq\\alpha$. Thus the full chain consists of subobjects and $j$ is monic. Quotient its terms by the initial $X$: at successors the quotient-of-quotient universal property leaves the same successor cokernel, and at limits exact filtered colimits applied to $0\\to X\\to V_\\gamma\\to V_\\gamma/X\\to0$ give continuity. Hence $Z/X$ is $S^+$-filtered; when $X=0$, $Z$ itself is $S^+$-filtered.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-abelian-pushout-mono",
+    "lem-weil-pbc-pushout-cokernel-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent refinement and quotient argument; Stacks 08N4 (lemma-cartesian-cocartesian), 08N3 (lemma-cartesian-kernel), and exact filtered colimits from the Grothendieck definition."
+   }
+  },
+  {
+   "text": "Every $S^+$-filtered object $F$ belongs to $\\mathcal L$. Indeed, take $T\\in\\mathcal T$ and any extension $0\\to T\\to E\\xrightarrow{q}F\\to0$. For its continuous filtration $F_\\alpha$, construct compatible maps $s_\\alpha:F_\\alpha\\to E$ with $qs_\\alpha$ the inclusion in $F$. Start with the zero map. At a successor apply [lem-coef-cotorsion-orthogonality-calculus] to $F_\\alpha\\hookrightarrow F_{\\alpha+1}$ and $q$: the cokernel lies in $S^+$ and its Ext against $\\operatorname{Ker}(q)=T$ vanishes. The filler extends $s_\\alpha$. At each limit the colimit property [def-weil-pbc-category-colimit] defines the compatible map, whose composite with $q$ remains the inclusion because it agrees on all preceding terms. The final map is a section of $q$. Thus $F\\perp_1T$ for every $T\\in\\mathcal T$.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent transfinite lifting proof; compare Saorin-Stovicek Proposition 2.12, read online. All successor lifting is supplied by the cited node, all limit lifting by the colimit definition."
+   }
+  },
+  {
+   "text": "Apply step 7 to $0\\to X$: it gives $0\\to T\\to F\\to X\\to0$, where the right map is epic with kernel $T\\in\\mathcal T$ by steps 4-6, and $F$ is $S^+$-filtered by step 8, hence belongs to $\\mathcal L$ by step 9. Apply it to $X\\to0$: step 8 gives a monomorphism $X\\to T'$ with $S^+$-filtered cokernel $F'$, and steps 4-6 give $T'\\in\\mathcal T$ because the kernel of $T'\\to0$ is $T'$. Thus $0\\to X\\to T'\\to F'\\to0$ is the other required sequence, with $F'\\in\\mathcal L$. Together with step 1 this proves completeness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent substitution into the cellular factorization already proved in steps 7-9; compare Saorin-Stovicek Theorem 2.13(4)-(5)."
+   }
+  },
+  {
+   "text": "If $X\\in\\mathcal L$, its first sequence from step 10 splits since its kernel is in $\\mathcal T$. A section $X\\to F$ and the epimorphism $F\\to X$ exhibit $X$ as a retract of the $S^+$-filtered object $F$. Conversely, a retract of an $S^+$-filtered object belongs to $\\mathcal L$ by step 9 and the retract-closure clause of [lem-coef-cotorsion-orthogonality-calculus]. This proves the final characterization. No step used enough projectives.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent splitting/retract argument; compare Saorin-Stovicek Theorem 2.13(6) and Corollary 2.15(2), read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-abelian",
+  "lem-coef-cotorsion-orthogonality-calculus",
+  "lem-coef-grothendieck-locally-presentable",
+  "lem-coef-presentable-cellular-factorization",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-abelian-pushout-mono",
+  "lem-weil-pbc-pushout-cokernel-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Generic cotorsion infrastructure for proof paragraph 2; explicit generator-indexed extension and transfinite lifting proof after Saorin-Stovicek arXiv:1005.3248v2, Proposition 2.7, Proposition 2.12, Theorem 2.13, read online but not archived. WANTED references are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +222,45 @@
    "results": "2 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsLeftOrthogonal, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsRightOrthogonal",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Ambient sheaf/Grothendieck, Ext and K-projective/K-injective declarations do not state this cotorsion theorem; generatingMonomorphisms_rlp is for all monomorphisms, and neither a general Ext-detecting set nor the prescribed flat classes are supplied. Kaplansky hits concern dimension, factorization, or topological rings. Loogle orthogonal-closure hits alone cannot supply the theorem and their module is absent from the pinned local Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|stronglyHomological|Eklof|deconstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: cotorsion completeness and specified-kernel lifting are not stated. generatingMonomorphisms and its small-object instance concern all monomorphisms and injective kernels, not the specified set S."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Grothendieck category has a complete cotorsion pair cogenerated by a set containing a generator",
+   "results": "8 hits: CategoryTheory.Grothendieck.instCategory, CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_pushouts, CategoryTheory.IsGrothendieckAbelian.mk, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_transfiniteCompositionOfShape, CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize, CategoryTheory.IsGrothendieckAbelian.hasColimits",
+   "date": "2026-10-16",
+   "verdict": "no match: cotorsion completeness and specified-kernel lifting are not stated. generatingMonomorphisms and its small-object instance concern all monomorphisms and injective kernels, not the specified set S."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CotorsionPair\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: cotorsion completeness and specified-kernel lifting are not stated. generatingMonomorphisms and its small-object instance concern all monomorphisms and injective kernels, not the specified set S."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set cogenerated cotorsion pair containing a generator is complete and its left objects are retracts of filtered objects",
+   "results": "8 hits: CategoryTheory.AreCardinalFilteredGenerators, CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator, CategoryTheory.HasCardinalFilteredGenerator, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms, CategoryTheory.HasCardinalFilteredGenerators, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure",
+   "date": "2026-10-16",
+   "verdict": "no match: cotorsion completeness and specified-kernel lifting are not stated. generatingMonomorphisms and its small-object instance concern all monomorphisms and injective kernels, not the specified set S."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Grothendieck abelian category cotorsion pair cogenerated by a set with a generator in the left orthogonal admits small generators and approximation sequences",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms, CategoryTheory.IsGrothendieckAbelian.instIsSmallGeneratingMonomorphismsOfSmallSubobject, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms, CategoryTheory.IsGrothendieckAbelian.enoughInjectives, CategoryTheory.IsGrothendieckAbelian.hasSeparator",
+   "date": "2026-10-16",
+   "verdict": "no match: cotorsion completeness and specified-kernel lifting are not stated. generatingMonomorphisms and its small-object instance concern all monomorphisms and injective kernels, not the specified set S."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-flat-complex-cotorsion-pairs",
   "by": "worker",
@@ -102,5 +276,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-generating-set-cotorsion-smallness",
+  "worker": "stage1",
+  "summary": "Constructed the Ext-detecting monomorphism set explicitly from subsets of Hom(G,C), proved both directions of its right lifting characterization, and derived completeness and the retract-filtration characterization using a generic cellular small-object input. The uniform cellular factorization is the only new statement-only node; existing abelian pushout, lifting, and local-presentability nodes are reused. No Lean was written or compiled and no statement was changed.",
+  "blueprint": "Realizes the generic flat-cotorsion smallness infrastructure under the ancestor proof paragraph 2, \"use ... derived coefficient adjunction to compute\", before the displayed derived inverse limit. It does not change the unit route or the ancestor adjunction statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-d037209c0",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-d037209c0 (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, the new node, cited statements, and relevant sources. Mathematics, hypotheses, filtrations, edge cases, and dependency closure check out; no duplicate or restated split found. Corrected only missing new-node provenance/bookkeeping fields under fixes/dag/nodes. Full findings are in review.md; no target statements changed.; 1 file(s) fixed by the reviewer"
  }
 }

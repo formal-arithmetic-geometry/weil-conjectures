@@ -1,0 +1,100 @@
+{
+ "id": "lem-coef-presentable-cellular-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: \"use ... derived coefficient adjunction to compute\", before the displayed derived inverse limit; generic cellular small-object input for the flat cotorsion construction supporting that adjunction.",
+   "via": [
+    "lem-coef-generating-set-cotorsion-smallness",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cellular small object factorizations in locally presentable categories",
+ "statement": "Let $\\mathcal C$ be a category with Hom sets in a fixed universe $\\mathcal U$ and all $\\mathcal U$-small colimits [def-weil-pbc-category-colimit]. Suppose $\\mathcal C$ is locally presentable: for some infinite regular cardinal $\\lambda\\in\\mathcal U$, a $\\mathcal U$-small set of objects $\\mathcal P$ generates every object under $\\lambda$-filtered colimits and $\\operatorname{Hom}(P,-)$ preserves those colimits for every $P\\in\\mathcal P$. Here $\\lambda$-filtered means that every diagram with fewer than $\\lambda$ morphisms admits a cocone, and regular means that a union of fewer than $\\lambda$ sets of size less than $\\lambda$ has size less than $\\lambda$. Let $I$ be a $\\mathcal U$-small set of morphisms. For every $f:X\\to Y$ there is a factorization $X\\xrightarrow{j}Z\\xrightarrow{p}Y$ with $pj=f$, such that $p$ has the right lifting property against $I$ and $j$ is a transfinite composition of pushouts of small coproducts of maps of $I$. Explicitly, there are a $\\mathcal U$-small ordinal $\\theta$ and objects $Z_\\alpha$ for $\\alpha\\leq\\theta$, with $Z_0=X$, $Z_\\theta=Z$, and $j$ their composite, continuous at every limit ordinal, such that $Z_\\alpha\\to Z_{\\alpha+1}$ is a pushout of $\\coprod_{t\\in T_\\alpha}i_t$ for a $\\mathcal U$-small set $T_\\alpha$ and maps $i_t\\in I$. Continuity means $Z_\\beta=\\varinjlim_{\\alpha<\\beta}Z_\\alpha$ at every nonzero limit $\\beta\\leq\\theta$. Right lifting means that for every $i:A\\to B$ in $I$ and square $pa=bi$ with $a:A\\to Z$, $b:B\\to Y$, there is $h:B\\to Z$ with $hi=a$ and $ph=b$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Generic cellular refinement of the small-object input for proof paragraph 2. WANTED: Hovey, Model Categories, Theorem 2.1.14; Adamek and Rosicky, Locally Presentable and Accessible Categories, presentability of every object. Saorin and Stovicek, arXiv:1005.3248v2, Proposition 2.1 (read online, not archived) gives the cellular conclusion under domain smallness. No Stacks tag gives this whole locally-presentable cellular factorization statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasFunctorialFactorization|relativeCell|IsCardinalForSmallObjectArgument|presentable.*[Ss]mallObject",
+   "results": "25 hits: Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean, Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasSmallObjectArgument\"",
+   "results": "8 hits: CategoryTheory.MorphismProperty.HasSmallObjectArgument, CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument, CategoryTheory.MorphismProperty.HasSmallObjectArgument.exists_cardinal, CategoryTheory.MorphismProperty.HasSmallObjectArgument.mk, CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument', CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms, SSet.instHasSmallObjectArgumentJ, SSet.instHasSmallObjectArgumentInnerHornInclusions",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small object argument cellular factorization for every set of morphisms in a locally presentable category",
+   "results": "8 hits: CategoryTheory.MorphismProperty.HasSmallObjectArgument.mk, CategoryTheory.SmallObject.ιObj_πObj, CategoryTheory.MorphismProperty.HasSmallObjectArgument, CategoryTheory.SmallObject.hasFunctorialFactorization, CategoryTheory.SmallObject.obj, CategoryTheory.SmallObject.objMap, CategoryTheory.SmallObject.isSmall, CategoryTheory.SmallObject.functorialFactorizationData",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally presentable category any set of morphisms yields factorizations as a transfinite composition of pushouts followed by a morphism with right lifting property",
+   "results": "8 hits: CategoryTheory.OrthogonalReflection.transfiniteCompositionOfShapeReflection, CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp, CategoryTheory.SmallObject.hasFunctorialFactorization, CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument, CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument', CategoryTheory.SmallObject.functorialFactorizationData, CategoryTheory.MorphismProperty.transfiniteCompositions_pushouts_coproducts_le_llp_rlp, CategoryTheory.SmallObject.transfiniteCompositionsOfShape_ιObj",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "grep",
+   "query": "transfiniteCompositionsOfShape_ιObj|hasFunctorialFactorization|piObj|πObj",
+   "results": "7 hits: Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/Basic.lean, Mathlib/CategoryTheory/SmallObject/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transfiniteCompositionsOfShape_ιObj\"",
+   "results": "1 hits: CategoryTheory.SmallObject.transfiniteCompositionsOfShape_ιObj",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism in a locally presentable category factors through a relative cell complex generated by any given small set of arrows",
+   "results": "8 hits: CategoryTheory.SmallObject.relativeCellComplexιObj, CategoryTheory.SmallObject.locallySmall, CategoryTheory.SmallObject.hasFunctorialFactorization, CategoryTheory.SmallObject.functorialFactorizationData, CategoryTheory.SmallObject.attachCellsOfSuccStructProp, CategoryTheory.MorphismProperty.HasSmallObjectArgument, CategoryTheory.SmallObject.llp_rlp_ιObj, CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument",
+   "date": "2026-10-16",
+   "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-generating-set-cotorsion-smallness",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
