@@ -1,0 +1,80 @@
+{
+ "id": "lem-exc-weakly-etale-ring-base-change-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: \"localization and strict henselization preserve excellence\"; Greco Theorem 5.3(iv) reduces this ascent assertion to Theorem 5.3(iii). In the present refinement: Weakly etale ring maps are stable under base change and composition.",
+   "via": [
+    "lem-exc-weakly-etale-locally-nagata-catenary",
+    "lem-exc-weakly-etale-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Weakly etale ring maps are stable under base change and composition",
+ "statement": "Let $A,B,C,A^{\\prime}$ be commutative rings. If $A\\to B$ is weakly etale [def-weil-pbc-ind-etale-algebra] and $A\\to A^{\\prime}$ is any ring map, then $A^{\\prime}\\to A^{\\prime}\\otimes_A B$ is weakly etale. If $A\\to B$ and $B\\to C$ are weakly etale, then their composite $A\\to C$ is weakly etale.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 092H (lemma-base-change-weakly-etale), part (2), and 092J (lemma-composition-weakly-etale), part (2). Exact Mathlib interfaces in RingTheory/Etale/Weakly.lean:63-64 and 80-83."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weakly etale algebra maps are preserved under composition and tensor product base change",
+   "results": "{\"t\": \"2026-10-16T02:35:26Z\", \"tool\": \"leanfinder\", \"query\": \"Weakly etale algebra maps are preserved under composition and tensor product base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.comp\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.comp\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.stableUnderComposition\", \"RingHom.etale_algebraMap\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"862e94e8b6160fe0\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Loogle returns Algebra.WeaklyEtale.instTensorProduct and Algebra.WeaklyEtale.trans; their source signatures give the two clauses exactly."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.WeaklyEtale",
+   "results": "{\"t\": \"2026-10-16T02:35:26Z\", \"tool\": \"loogle\", \"query\": \"Algebra.WeaklyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Algebra.WeaklyEtale\", \"Algebra.WeaklyEtale.instOfEtale\", \"Algebra.WeaklyEtale.flat\", \"Algebra.WeaklyEtale.ulift_iff\", \"Algebra.WeaklyEtale.trans\", \"Algebra.WeaklyEtale.instTensorProduct\", \"Algebra.WeaklyEtale.flat_lmul'\", \"Algebra.WeaklyEtale.mk\"], \"digest\": \"ecd836b5df52ff43\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Loogle returns Algebra.WeaklyEtale.instTensorProduct and Algebra.WeaklyEtale.trans; their source signatures give the two clauses exactly."
+  },
+  {
+   "tool": "grep",
+   "query": "092H|092J|lemma trans|instance.*Type",
+   "results": "{\"t\": \"2026-10-16T02:35:45Z\", \"tool\": \"grep\", \"query\": \"092H|092J|lemma trans|instance.*Type\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"1317bd77a1920b89\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Loogle returns Algebra.WeaklyEtale.instTensorProduct and Algebra.WeaklyEtale.trans; their source signatures give the two clauses exactly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale algebra maps are stable under tensor product base change and composition",
+   "results": "{\"t\": \"2026-10-16T02:35:26Z\", \"tool\": \"leansearch\", \"query\": \"Weakly etale algebra maps are stable under tensor product base change and composition\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-16T02:49:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeaklyEtale\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.WeaklyEtale.instTensorProduct\"], \"digest\": \"84f71b9255d729a5\"}",
+   "date": "2026-10-16",
+   "verdict": "match for base-change clause: Algebra.WeaklyEtale.instTensorProduct; independently read trans at lines 80–95 for composition."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.WeaklyEtale.instTensorProduct, Algebra.WeaklyEtale.trans",
+  "file": "Mathlib/RingTheory/Etale/Weakly.lean",
+  "how": "exact: instTensorProduct at lines 63-64 states arbitrary base change; trans at lines 80-83 states composition with the compatible scalar tower. Read bodies at lines 65-75 and 84-95. The ring maps give the algebra structures and scalar tower.",
+  "line": 63
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-exc-weakly-etale-locally-nagata-catenary",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}
