@@ -9,6 +9,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover
+import Sheaf.CategoryTheory.DerivedCategory.BoundedBelowSectionModel
+import Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverQuasiIso
+import Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverRowComparison
+import Sheaf.Paper.CondensedHypercoverInjectiveRow
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.CondensedQcqsPushforwardLocalComparison
@@ -16,11 +21,6 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.Algebra.Category.Grp.EpiMono
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover
-import Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Continuity of ordinary condensed-coefficient pushforward
@@ -224,19 +224,85 @@ theorem condensed_qcqs_pushforward_continuity
     exact condensed_qcqs_pushforward_local_comparison Λ f D a ha q V hV hweak
   exact isIso_of_reflects_iso _ (Mod.forget (condensedRingObj Λ Y))
 
+private theorem comparison_isIso_of_bounded_model
+    {A : Type v} [Category.{w} A] [Abelian A]
+    {B : Type u} [Category.{z} B]
+    {I : Type x} [Category.{y} I]
+    (D : I ⥤ CochainComplex A ℤ) (a : ℤ)
+    (T H : CochainComplex A ℤ ⥤ B)
+    [HasColimit (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A)]
+    [HasColimit (D ⋙ T)] [HasColimitsOfShape I A]
+    [PreservesColimit (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A) H]
+    (hπ : ∀ i, IsIso (T.map ((D.obj i).πTruncGE a)))
+    (e : ∀ (K : CochainComplex A ℤ) (_ : K.IsStrictlyGE a), T.obj K ≅ H.obj K)
+    (he : ∀ (K L : CochainComplex A ℤ) (hK : K.IsStrictlyGE a)
+      (hL : L.IsStrictlyGE a) (f : K ⟶ L),
+      T.map f ≫ (e L hL).hom = (e K hK).hom ≫ H.map f) :
+    IsIso (condensedContinuityComparison D a T) := by
+  let E : I ⥤ CochainComplex A ℤ :=
+    D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A
+  let c := colimit.cocone E
+  have hE (i : I) : (E.obj i).IsStrictlyGE a := by
+    change ((D.obj i).truncGE a).IsStrictlyGE a
+    infer_instance
+  have hc : CochainComplex.IsStrictlyGE c.pt a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    intro n hn
+    exact (isColimitOfPreserves (HomologicalComplex.eval A (.up ℤ) n)
+      (colimit.isColimit E)).isZero_pt
+        (Functor.isZero _ fun i ↦ (E.obj i).isZero_of_isStrictlyGE a n hn)
+  let η : D ⋙ T ⟶ E ⋙ H :=
+    Functor.whiskerRight (Functor.whiskerLeft D
+      ((ComplexShape.embeddingUpIntGE a).πTruncGENatTrans A)) T ≫
+      { app := fun i ↦ (e (E.obj i) (hE i)).hom
+        naturality := fun i j f ↦ by
+          change T.map (E.map f) ≫ (e (E.obj j) (hE j)).hom =
+            (e (E.obj i) (hE i)).hom ≫ H.map (E.map f)
+          exact he (E.obj i) (E.obj j) (hE i) (hE j) (E.map f) }
+  have hη (i : I) : IsIso (η.app i) := by
+    have := hπ i
+    dsimp only [η, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    change IsIso (T.map ((D.obj i).πTruncGE a) ≫ (e (E.obj i) (hE i)).hom)
+    infer_instance
+  have : IsIso η := NatIso.isIso_of_isIso_app η
+  have hcolim : IsColimit (H.mapCocone c) :=
+    isColimitOfPreserves H (colimit.isColimit E)
+  let k := colimit.desc (D ⋙ T)
+    ((Cocone.precompose η).obj (H.mapCocone c))
+  have hk : IsIso k := by
+    have hcolim' : IsColimit ((Cocone.precompose η).obj (H.mapCocone c)) :=
+      (IsColimit.precomposeHomEquiv (asIso η) (H.mapCocone c)).symm hcolim
+    exact (colimit.isColimit (D ⋙ T)).coconePointUniqueUpToIso hcolim' |>.isIso_hom
+  have heq : condensedContinuityComparison D a T ≫ (e c.pt hc).hom = k := by
+    apply colimit.hom_ext
+    intro i
+    simp only [condensedContinuityComparison, colimit.ι_desc_assoc]
+    rw [colimit.ι_desc]
+    change T.map ((D.obj i).πTruncGE a ≫ c.ι.app i) ≫ (e c.pt hc).hom =
+      (T.map ((D.obj i).πTruncGE a) ≫ (e (E.obj i) (hE i)).hom) ≫ H.map (c.ι.app i)
+    rw [T.map_comp, Category.assoc, he _ _ (hE i) hc, Category.assoc]
+  have : IsIso (condensedContinuityComparison D a T ≫ (e c.pt hc).hom) := by
+    rw [heq]
+    exact hk
+  exact IsIso.of_isIso_comp_right _ (e c.pt hc).hom
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
+set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary derived global sections of a qcqs scheme satisfy the same comparison.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
 (blueprint: lem-weil-pbc-condensed-qcqs-pushforward-continuity).
 
-Proof: apply the finite-diagonal hypercover calculation in the pushforward proof
-directly to W=X. Exact evaluation on weakly contractible affines commutes with the
-filtered colimit, and a common lower bound makes every total diagonal finite.
-Filtered colimits of modules are exact, so taking cohomology gives precisely the
-map induced by derived sections of each original cocone leg. Forgetting the scalar
-action gives the asserted isomorphism of abelian groups. -/
+Proof: choose an affine weakly contractible hypercover of W=X and form its actual
+section total after forgetting the internal module action. The existing proved
+internal-module row theorem gives injective row descent. Bounded-below row and column
+comparison then identify this total naturally with the actual right derived global-sections functor.
+Affine
+evaluation and diagonal coproducts commute with filtered colimits; homology does
+so because these colimits are exact. Good truncation is a quasi-isomorphism under
+the given cohomological bound. Transporting its colimit cocone through the natural
+model identifies its universal map with the stated canonical comparison. -/
 theorem condensed_qcqs_globalSections_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -250,7 +316,79 @@ theorem condensed_qcqs_globalSections_continuity
     IsIso (condensedContinuityComparison D a
       (DerivedCategory.Q ⋙ (condensedModuleSections Λ X).rightDerivedFunctor ⋙
         DerivedCategory.homologyFunctor _ q)) := by
-  sorry
+  let W : X.ProEt := Scheme.ProEt.mk (𝟙 X)
+  have : CompactSpace W.left := by change CompactSpace X; infer_instance
+  have : QuasiSeparatedSpace W.left := by change QuasiSeparatedSpace X; infer_instance
+  obtain ⟨U, haff, hweak, hzero, hone, hhigher⟩ :=
+    Scheme.ProEt.exists_affine_weaklyContractible_hypercover X W
+  let F := condensedModuleSections Λ X
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+    (condensedRingObj Λ X)
+  let forget : A ⥤ Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    Mod.forget (condensedRingObj Λ X)
+  let P : CochainComplex.Plus A ⥤
+      CochainComplex.Plus (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) :=
+    ObjectProperty.lift _
+      (CochainComplex.Plus.ι A ⋙ forget.mapHomologicalComplex (.up ℤ)) (fun K ↦ by
+        obtain ⟨N, hN⟩ := K.property
+        have := hN
+        refine ⟨N, ?_⟩
+        change CochainComplex.IsStrictlyGE
+          ((forget.mapHomologicalComplex (.up ℤ)).obj K.obj) N
+        infer_instance)
+  let H := forget.mapHomologicalComplex (.up ℤ) ⋙ Scheme.ProEt.abelianHypercoverTotal X W U
+  let α : F.mapHomologicalComplex (.up ℤ) ⟶ H :=
+    Functor.whiskerLeft (forget.mapHomologicalComplex (.up ℤ))
+      (Scheme.ProEt.abelianHypercoverAugmentation X W U)
+  have hH (K L : CochainComplex.Plus A) (f : K ⟶ L) (hf : QuasiIso f.hom) :
+      QuasiIso (H.map f.hom) := by
+    have := hf
+    have : QuasiIso (P.map f).hom := by
+      change QuasiIso ((forget.mapHomologicalComplex (.up ℤ)).map f.hom)
+      infer_instance
+    exact Scheme.ProEt.abelianHypercoverTotal_map_quasiIso_of_weaklyContractible
+      X W U haff hweak (P.obj K) (P.obj L) (P.map f) inferInstance
+  have hα (J : CochainComplex.Plus A) (hJ : ∀ n : ℤ, Injective (J.obj.X n)) :
+      QuasiIso (α.app J.obj) := by
+    apply Scheme.ProEt.abelianHypercoverAugmentation_quasiIso_of_rows X W U (P.obj J)
+    intro n
+    have := hJ n
+    exact condensedHypercoverInjectiveRow Λ X W U hzero hone hhigher (J.obj.X n)
+  obtain ⟨e, he⟩ := CategoryTheory.Functor.boundedBelow_sectionModel F H α hH hα a
+  let G := HomologicalComplex.homologyFunctor AddCommGrpCat (.up ℤ) q
+  let T := DerivedCategory.Q ⋙ F.rightDerivedFunctor ⋙
+    DerivedCategory.homologyFunctor AddCommGrpCat q
+  let eqv (K) (hK : CochainComplex.IsStrictlyGE K a) : T.obj K ≅ (H ⋙ G).obj K :=
+    (DerivedCategory.homologyFunctor AddCommGrpCat q).mapIso (e K hK) ≪≫
+      (DerivedCategory.homologyFunctorFactors AddCommGrpCat q).app (H.obj K)
+  have hnat (K L) (hK : CochainComplex.IsStrictlyGE K a)
+      (hL : CochainComplex.IsStrictlyGE L a) (f : K ⟶ L) :
+      T.map f ≫ (eqv L hL).hom = (eqv K hK).hom ≫ (H ⋙ G).map f := by
+    dsimp only [eqv, T, Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom]
+    rw [← Category.assoc, ← Functor.map_comp, he K L hK hL f, Functor.map_comp,
+      Category.assoc]
+    have hn := (DerivedCategory.homologyFunctorFactors AddCommGrpCat q).hom.naturality
+      (H.map f)
+    change (DerivedCategory.homologyFunctor AddCommGrpCat q).map (e K hK).hom ≫ _ = _
+    simpa only [G, Functor.comp_map, Category.assoc, Iso.app_hom] using congrArg
+      (fun t ↦ (DerivedCategory.homologyFunctor AddCommGrpCat q).map (e K hK).hom ≫ t) hn
+  have : PreservesColimitsOfSize.{u + 1, u + 1}
+      (Scheme.ProEt.abelianHypercoverTotal X W U) :=
+    Scheme.ProEt.abelianHypercoverTotal_preservesColimits X W U haff hweak
+  have : PreservesColimitsOfShape I H := by
+    dsimp [H]
+    infer_instance
+  apply comparison_isIso_of_bounded_model D a T (H ⋙ G) _ eqv hnat
+  intro i
+  have : (D.obj i).IsGE a := by
+    rw [CochainComplex.isGE_iff]
+    intro n hn
+    rw [HomologicalComplex.exactAt_iff_isZero_homology]
+    exact ha i n hn
+  have : QuasiIso ((D.obj i).πTruncGE a) := inferInstance
+  change IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat q).map
+    (F.rightDerivedFunctor.map (DerivedCategory.Q.map ((D.obj i).πTruncGE a))))
+  infer_instance
 
 private theorem condensedContinuityComparison_isIso_of_iso
     {A : Type v} [Category.{w} A] [Abelian A]

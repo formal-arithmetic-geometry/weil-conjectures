@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-bounded-below-section-model",
+ "kind": "statement",
+ "title": "A bounded-below section model computes the actual derived functor",
+ "statement": "Let A and B be abelian categories with derived categories, A with enough injectives and K-injective resolutions, F:A→B additive, and H a functor on cochain complexes with a natural augmentation F(complex)→H(complex). Suppose H inverts bounded-below quasi-isomorphisms and the augmentation is a quasi-isomorphism on bounded-below complexes of injectives. For every integer a and each complex K strictly zero below a there is an isomorphism RF(QK)≅Q(HK), natural for all maps between such complexes. Derived functors have the convention of [def-sp-kinjective-bridge].",
+ "stmt_deps": [
+  "def-sp-kinjective-bridge"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, comparison with bounded-below injective resolutions."
+ },
+ "proof": [
+  {
+   "text": "Choose bounded-below injective resolutions using Mathlib’s proved existence theorem. Their terms are concrete complexes; resolution uniqueness supplies only equality information. The resolution map, the assumed augmentation, and the K-injective derived unit give the desired isomorphism.",
+   "uses": [
+    "def-sp-kinjective-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift each coefficient map to the chosen injective resolutions up to homotopy. Use the existing AlgebraicGeometry.Scheme.ProEt.map_eq_of_boundedBelow_homotopy from [lem-weil-pbc-proetale-hypercover-computes-bounded-complex] for both Q followed by RF and H followed by Q. Its bounded-below cylinder argument identifies the two homotopic maps. Naturality of the derived unit and of the augmentation gives the comparison square.",
+   "uses": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, comparison with bounded-below injective resolutions; the homotopy-invariance step reuses the existing bounded-below homotopy theorem in Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor right derived functor agrees naturally with a bounded below total complex model computed on injective resolutions",
+   "date": "2026-10-15",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "verdict": "Used existing tensor/free, sheafification, exactness and derived-category APIs; no returned declaration is the required internal-module hypercover statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"quasiIso\"",
+   "date": "2026-10-15",
+   "results": "3 hits: HomotopyCategory.Plus.instHasPointwiseRightDerivedFunctorQuasiIso, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso",
+   "verdict": "Used existing tensor/free, sheafification, exactness and derived-category APIs; no returned declaration is the required internal-module hypercover statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below complex model with injective augmentation computes the right derived functor naturally",
+   "date": "2026-10-15",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*hypercover|hypercover.*injective",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "Used existing tensor/free, sheafification, exactness and derived-category APIs; no returned declaration is the required internal-module hypercover statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below global-sections continuity: A bounded-below section model computes the actual derived functor",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedBelowSectionModel",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedBelowSectionModel.lean",
+  "declaration": "CategoryTheory.Functor.boundedBelow_sectionModel",
+  "statement": "theorem boundedBelow_sectionModel\n    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]\n    {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]\n    [Abelian.HasKInjectiveResolutions A] [EnoughInjectives A]\n    (F : A ⥤ B) [F.Additive] (H : CochainComplex A ℤ ⥤ CochainComplex B ℤ)\n    (α : F.mapHomologicalComplex (.up ℤ) ⟶ H)\n    (hH : ∀ (K L : CochainComplex.Plus A) (f : K ⟶ L),\n      QuasiIso f.hom → QuasiIso (H.map f.hom))\n    (hα : ∀ (J : CochainComplex.Plus A), (∀ n : ℤ, Injective (J.obj.X n)) →\n      QuasiIso (α.app J.obj)) (a : ℤ) :\n    ∃ e : ∀ (K : CochainComplex A ℤ) (_ : K.IsStrictlyGE a),\n        F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj (H.obj K),\n      ∀ (K L : CochainComplex A ℤ) (hK : K.IsStrictlyGE a) (hL : L.IsStrictlyGE a)\n        (f : K ⟶ L),\n        F.rightDerivedFunctor.map (DerivedCategory.Q.map f) ≫ (e L hL).hom =\n          (e K hK).hom ≫ DerivedCategory.Q.map (H.map f)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T065200-L-672913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T065200-L-672913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
