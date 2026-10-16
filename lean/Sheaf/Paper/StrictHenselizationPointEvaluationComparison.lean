@@ -23,9 +23,9 @@ namespace AlgebraicGeometry.Scheme
 
 set_option maxHeartbeats 800000 in
 -- The nested chart, triple and small-model diagram comparisons need extra elaboration.
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- The coordinate-ring colimit comparison preserves geometric evaluation.
 Source: Stacks Project, Tag 04HX, and `etale_local_ring_triples`.
 (blueprint: lem-weil-pbc-strict-henselization-point-evaluation-comparison)

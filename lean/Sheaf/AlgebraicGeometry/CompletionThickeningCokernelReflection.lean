@@ -35,9 +35,9 @@ private theorem product_zero_of_epi {X : Scheme.{u}} {J F Q : X.Modules}
   simpa using hz
 -/
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 private theorem supported_of_power_zero {X : Scheme.{u}}
     (K : X.IdealSheafData) (q : ℕ) (F : X.Modules)
     (h : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2 F)) :
@@ -100,9 +100,9 @@ private theorem supported_completion_faithful {X Z : Scheme.{u}}
   apply (E.functor ⋙ H).map_injective
   simpa using hfg
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- Completion on a fixed closed thickening reflects a uniform cokernel torsion bound.
 Source: Stacks Project, Tag 088A, the second use of Remark 0888 and the identification
 of coherent modules killed by the thickening ideal (Tag 087T).

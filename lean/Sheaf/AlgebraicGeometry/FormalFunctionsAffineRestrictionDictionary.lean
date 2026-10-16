@@ -66,9 +66,9 @@ private noncomputable def affineRestrictionSectionsIso {X Y : Scheme.{u}}
       M.presheaf.map (eqToHom V.ι_image_top).op ≫ t.app (V.ι ''ᵁ ⊤)
     exact (t.mapPresheaf.naturality _).symm
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- The affine chart identifies the original sections and quotient system with the
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.

@@ -30,13 +30,13 @@ private local instance quotientProjection_epi {X : Scheme.{u}} (I : X.IdealSheaf
   dsimp [formalModuleQuotientπ]
   infer_instance
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ⟶
@@ -60,9 +60,9 @@ private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
 -/
 -/
 
-@[reassoc (attr := simp)]
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+@[reassoc (attr := simp)]
 private theorem quotientSwapMap_projection {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotientπ K e H ≫

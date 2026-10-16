@@ -24,9 +24,9 @@ namespace AlgebraicGeometry.Scheme
 
 set_option maxHeartbeats 800000 in
 -- Comparing the nested chart, triple and small-model diagrams requires extra elaboration.
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- In any affine open chart through which the geometric point factors, the structural
 ring map extends the distinguished prime to the maximal ideal of the strict henselization.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.

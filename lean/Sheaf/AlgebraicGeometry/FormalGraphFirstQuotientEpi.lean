@@ -177,9 +177,9 @@ private theorem formal_zero_of_level {X : Scheme.{u}} [IsNoetherian X]
     apply (cancel_epi (T.obj.map (homOfLE hmn).op)).mp
     simpa only [hf, comp_zero, zero_comp] using f.hom.naturality (homOfLE hmn).op
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- The first projection of the finite comparison graph is surjective modulo J.
 No torsion condition on the comparison arrow is required for this closed-fibre assertion.
 

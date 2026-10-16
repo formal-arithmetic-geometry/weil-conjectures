@@ -201,9 +201,9 @@ private theorem affine_hom_zero {X : Scheme.{u}} {M N : X.Modules}
     rw [← app_res, map_zero]
     exact hb i.1 _
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- Evaluation zero forces eventual vanishing on a single affine open. No compactness
 of the ambient scheme is required.
 

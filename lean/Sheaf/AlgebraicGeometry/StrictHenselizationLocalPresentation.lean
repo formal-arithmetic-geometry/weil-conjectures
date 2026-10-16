@@ -25,9 +25,9 @@ namespace AlgebraicGeometry.Scheme
 
 set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 private theorem chart_local_presentation
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]

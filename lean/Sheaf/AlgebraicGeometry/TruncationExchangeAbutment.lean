@@ -256,9 +256,9 @@ private theorem imageGradedIso_π.{u₁, v₁}
         (Subobject.ofLE _ _ ((F.image i.hom).antitone_step (by omega : p ≤ p + 1))) := by
   simp only [imageGradedIso, cokernel.mapIso_hom, cokernel.map, cokernel.π_desc]
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 private theorem imageFiltration_factor.{u₁, v₁}
     {B : Type u₁} [Category.{v₁} B] [Abelian B]
     (X : BigradedExactCouple B 0) (n : ℤ) (A : X.AlphaColimit n)

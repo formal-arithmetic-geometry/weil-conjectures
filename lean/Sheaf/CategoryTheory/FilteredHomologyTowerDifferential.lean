@@ -35,9 +35,9 @@ private theorem quotient_homology_heq
   subst p' n'
   rfl
 
-set_option linter.unusedVariables false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option linter.unusedVariables false in
 / -- The canonical derived-couple differential differentiates simultaneous filtered
 representatives. The maps into the tower are fixed by their initial-homology
 normalization; no quotient isomorphism is supplied or asserted here.

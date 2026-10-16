@@ -24,10 +24,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem quotient_sections_iso {Y : Scheme.{u}}
     (J : Y.IdealSheafData) (H : Y.Modules) [H.IsQuasicoherent]
     (U : Y.Opens) (hU : IsAffineOpen U) (n : ℕ) :

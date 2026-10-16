@@ -100,9 +100,9 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 / -- Every direct-image germ has an affine representative, and the canonical comparison
 with sections on the strict henselization pullback is the unique map with the unit and
 restriction formula, and is bijective.

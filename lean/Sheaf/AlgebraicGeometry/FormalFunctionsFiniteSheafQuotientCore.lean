@@ -69,9 +69,9 @@ private theorem tensor_unit_factor {A B C : Scheme.{u}} (i : A ⟶ B) (g : B ⟶
     Iso.symm_hom, Adjunction.comp_unit_app, Category.assoc] using hu.symm
 
 
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
 private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
     (n : ℕ) (F : B.Modules) :
     ∃ e : formalModuleQuotient J n F ≅

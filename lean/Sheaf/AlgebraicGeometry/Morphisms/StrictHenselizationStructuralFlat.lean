@@ -18,10 +18,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 / -- The ring map inducing the canonical strict henselization structural map is flat.
 Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph.
 (blueprint: lem-sbc-affine-strict-henselization-structural-flat)
