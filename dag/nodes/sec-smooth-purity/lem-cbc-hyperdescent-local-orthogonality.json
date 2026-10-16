@@ -26,9 +26,92 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T\\in\\mathcal C$ set $L_T(V)=\\Lambda[\\operatorname{Hom}_{\\mathcal C}(V,T)]$. For $U_\\bullet\\to h_T$ form the complex $A_U^{-n}=\\bigoplus_\\alpha L_{S_{n,\\alpha}}$ for $n\\ge0$, zero in positive degrees, with alternating-face differential, and augmentation $e_U:A_U\\to L_T[0]$. For $i<j$, the identity $d_i d_j=d_{j-1}d_i$ pairs the terms in the square of the differential with opposite signs; in degree one, the two composites to $h_T$ agree, so the augmentation kills $d_0-d_1$. For any presheaf $M$, a module-presheaf map $L_T\\to M$ is uniquely determined by the image of the generator $\\mathrm{id}_T$, and that element $x\\in M(T)$ gives the map taking the generator $a:V\\to T$ to $M(a)x$. Thus $\\operatorname{Hom}_{\\mathcal P}(L_T,M)=M(T)$; maps from a coproduct give the product of these evaluations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definitions 5.1 and 5.3, printed pp. 17-18; free-representable evaluation and alternating-face construction written out Online source read; archived copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-presheaf-dg-function-complex] to $L_T[0]$ and $A_U$: both are bounded above and termwise coproducts of free representables, whereas $G$ need not be bounded. It gives $R\\operatorname{Hom}_{\\mathcal P}(L_T[0],G)\\simeq G(T)$ and computes $R\\operatorname{Hom}_{\\mathcal P}(A_U,G)$ by the ordinary Hom complex. Its degree $r$ is $\\prod_{n\\ge0}G(U_n)^{r-n}$. Regrade the component $h_n$ in degree $r$ by $h_n\\mapsto(-1)^{rn+n(n-1)/2}h_n$. In the Hom differential $d_Gh_n-(-1)^r h_{n-1}d_A$, this changes the internal coefficient to $(-1)^n$ and the coface coefficient to $1$. Hence it identifies the complex with $\\operatorname{Tot}_{\\Pi}(n\\mapsto G(U_n))$ having differential $\\delta+(-1)^n d_G$. By [lem-cbc-cosimplicial-complex-holim] this is the coherent homotopy limit. The map induced by $e_U$ has only its $n=0$ component, namely restriction from $T$; the augmentation clause of that same node identifies it with the given descent map. Therefore condition (1) is equivalent to $R\\operatorname{Hom}_{\\mathcal P}(e_U,G)$ being a quasi-isomorphism for every hypercover.",
+   "uses": [
+    "lem-cbc-presheaf-dg-function-complex",
+    "lem-cbc-cosimplicial-complex-holim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definition 5.3 and Remark 5.4, printed p. 18, with Lemma 3.19, printed p. 13; explicit cochain sign and augmentation comparison Online source read; archived copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "For any complex map $a:X\\to Y$, [lem-cbc-presheaf-dg-function-complex] identifies the map of homotopy groups of $\\operatorname{Map}(a[k],G)$ in degree $m\\ge0$ with the map on $H^{-m-k}R\\operatorname{Hom}_{\\mathcal P}(a,G)$. These are maps of simplicial abelian group models, so translation treats every basepoint. If the derived Hom map is a quasi-isomorphism, all these mapping-space maps are equivalences. Conversely, equivalence for every $k$ implies, already at $m=0$, an isomorphism on $H^{-k}$ for every integer $k$, hence a quasi-isomorphism by [def-weil-abstract-derived-category]. In particular Step 2 identifies (1) with space-locality for all shifted augmentations $e_U[k]$.",
+   "uses": [
+    "lem-cbc-presheaf-dg-function-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Proof of Lemma 5.10, printed p. 19; cochain reindexing and all integer shifts Online source read; archived copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "Choose the small set $\\mathcal H_0$ and its set $S$ of shifted augmentation maps from [lem-cbc-hypercover-localization-generation]. That node states that $\\mathbf D(\\mathcal P)$ is presentable, so [lem-coef-infinity-small-localization-saturation] applies to this genuinely small $S$ in the chosen universes. It says precisely that every arrow in $\\langle S\\rangle$ induces an equivalence of mapping spaces into each $S$-local object. The generation node identifies the image of every local quasi-isomorphism of complexes with an arrow in this class. This invocation uses the generic small-localization theorem in the objectwise presheaf derived category, without identifying that category with derived sheaves.",
+   "uses": [
+    "lem-cbc-hypercover-localization-generation",
+    "lem-coef-infinity-small-localization-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 5.2 and Theorem 5.11, printed pp. 17 and 19-21; strong-saturation restatement via the cited generic localization theorem Online source read; archived copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "Assume (1). Steps 2-3 show that $G$ is $S$-local. Let $f:P\\to Q$ be any local quasi-isomorphism. For every $k\\in\\mathbf Z$, the shifted map $f[k]$ is still a local quasi-isomorphism, since its $r$-th cohomology presheaf map is the $(r+k)$-th cohomology presheaf map of $f$. Step 4 and [lem-coef-infinity-small-localization-saturation] therefore give equivalences $\\operatorname{Map}(Q[k],G)\\to\\operatorname{Map}(P[k],G)$ for all $k$. The comparison of [lem-cbc-presheaf-dg-function-complex] on $\\pi_0$ gives isomorphisms on $H^{-k}R\\operatorname{Hom}_{\\mathcal P}(f,G)$ for every integer $k$. These are all cohomology groups, so this derived Hom map is a quasi-isomorphism. This proves (2) for arbitrary unbounded $P,Q$.",
+   "uses": [
+    "lem-cbc-hypercover-localization-generation",
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-cbc-presheaf-dg-function-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Theorem 5.11 and Definition 5.9, printed pp. 19-21; argument on all shifts, using the defining local-object property expanded in Step 4 Online source read; archived copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "Assume (2). For every hypercover $U_\\bullet\\to h_T$, [lem-cbc-hypercover-localization-generation] says that $e_U:A_U\\to L_T[0]$ itself is a local quasi-isomorphism, including hypercovers outside the chosen small family. Apply (2) to this actual map of complexes. The resulting quasi-isomorphism of derived Hom complexes is identified in Step 2, using [lem-cbc-presheaf-dg-function-complex] and [lem-cbc-cosimplicial-complex-holim], with the map $G(T)\\to\\operatorname{holim}_nG(U_n)$ and its specified augmentation cone. Thus (1) holds for every hypercover. All matching objects used above were presheaf matching objects, so this argument used neither fibre products in $\\mathcal C$ nor subcanonicity, and none of the three cited foundations imposes a bound on $G$.",
+   "uses": [
+    "lem-cbc-hypercover-localization-generation",
+    "lem-cbc-presheaf-dg-function-complex",
+    "lem-cbc-cosimplicial-complex-holim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definitions 5.1 and 5.3, Fact 5.5, Theorem 5.11, printed pp. 17-21; reverse implication and augmentation compatibility Online source read; archived copy WANTED in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-presheaf-dg-function-complex",
+  "lem-cbc-cosimplicial-complex-holim",
+  "def-weil-abstract-derived-category",
+  "lem-cbc-hypercover-localization-generation",
+  "lem-coef-infinity-small-localization-saturation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification repair, through bounded-below hypersheaf model steps 4-5. Explicit mapping/totalization/saturation argument checked against Choudhury--Gallauer, arXiv:1511.02828v1, Lemmas 3.16, 3.19, Definitions 5.3 and 5.9, Lemma 5.10 and Theorem 5.11, read online; archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +161,52 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-16",
    "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of module presheaves on a site satisfies hypercover descent exactly when derived Hom into it inverts local quasi-isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.isSheafFor_presieve₀\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} C] {K : CategoryTheory.GrothendieckTopology C}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type u_3)} {S : C} (E : K.OneHypercover S),\\n  CategoryTheory.Presieve.IsSheaf K P → CategoryTheory.Presieve.IsSheafFor P E.presieve₀\", \"doc\": \"If a presheaf $ P $ is a sheaf with respect to a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then for any one-step hypercover $ E $ of an object $ X \\\\in \\\\mathcal{C} $, the zeroth presie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a generating family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, and a covering sieve $S$ containing the zeroth sie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over a diagram indexed by a covering sieve $S$ con\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.isSheaf_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] (H : J.OneHypercoverFamily) (P : CategoryTheory.Functor Cᵒᵖ A)\\n  [H.IsGenerating],\\n  CategoryTheory.Presheaf.IsSheaf J P ↔\\n    ∀ ⦃X : C⦄ \", \"doc\": \"A presheaf $ P $ on a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $ is a sheaf if and only if, for every object $ X \\\\in \\\\mathcal{C} $ and every one-step hypercover $ E $ of $ X \"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] [J.IsGeneratedByOneHypercovers] (P : CategoryTheory.Functor Cᵒᵖ A),\\n  CategoryTheory.Presheaf.IsSheaf J P ↔\\n    ∀ ⦃X : C⦄ (E : J.OneHyper\", \"doc\": \"A presheaf $ P $ is a sheaf with respect to a Grothendieck topology $ J $ generated by one-step hypercovers if and only if, for every object $ X $ and every one-step hypercover $ E $ of $ X $, the mul\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] (H : J.OneHypercoverFamily) (P : CategoryTheory.Functor Cᵒᵖ A),\\n  (∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.Limi\", \"doc\": \"Given a generating family of hypercovers in a site $(\\\\mathcal{C}, J)$, for any object $X$ and covering sieve $S$ on $X$, if two morphisms $x, y: T \\\\to P(X)$ satisfy $x \\\\circ P(f^{\\\\text{op}}) = y \\\\circ\"}\n  {\"name\": \"CategoryTheory.Functor.op_comp_isSheaf_of_preservesOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) {A : Type u} [inst_2 : CategoryTheory.Category.{t, u} A]\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves one-step hypercovers with respect to Grothendieck topologies $ J $ on $ \\\\mathcal{C} $ and $ K $ on $ \\\\mathcal{D} $, and $ J $ is generated by\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary 1-hypercover sheaf conditions do not give unbounded hyperdescent or the derived mapping-complex criterion. Read Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean:10-34."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"quasiIso\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary 1-hypercover sheaf conditions do not give unbounded hyperdescent or the derived mapping-complex criterion. Read Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean:10-34."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperdescent|hypersheaf|local.?quasi.?iso",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary 1-hypercover sheaf conditions do not give unbounded hyperdescent or the derived mapping-complex criterion. Read Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean:10-34."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover descent for unbounded presheaf complexes is orthogonality to quasi-isomorphisms after sheafification",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercomplete complexes on a Grothendieck site are precisely right local objects for morphisms with acyclic associated cohomology sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (u_1 + 1))\", \"doc\": \"For a site $(\\\\mathcal{C}, J)$ with Grothendieck topology $J$ and an object $S \\\\in \\\\mathcal{C}$, this is the quotient category of one-step hypercovers of $S$ obtained by identifying homotopic morphisms\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.IsGeneratedByOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"The property that the Grothendieck topology $ J $ is generated by one-step hypercovers, meaning that every hypercover can be constructed from one-step hypercovers using the axioms of $ J $.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.isSheafFor_presieve₀\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} C] {K : CategoryTheory.GrothendieckTopology C}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type u_3)} {S : C} (E : K.OneHypercover S),\\n  CategoryTheory.Presieve.IsSheaf K P → CategoryTheory.Presieve.IsSheafFor P E.presieve₀\", \"doc\": \"If a presheaf $ P $ is a sheaf with respect to a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then for any one-step hypercover $ E $ of an object $ X \\\\in \\\\mathcal{C} $, the zeroth presie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {X : C} → J.OneHypercover X → CategoryTheory.Functor C D → CategoryTheory.GrothendieckTopology D →\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$ respectively, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $H$ of $X$, and a functor $F : \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsGenerating\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → {J : CategoryTheory.GrothendieckTopology C} → J.OneHypercoverFamily → Prop\", \"doc\": \"A property of a family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$ asserting that it generates all hypercovers through the axioms of the Grothendieck topology $J$.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsLocal.mk_of_zeroHypercover\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C}\\n  {K : CategoryTheory.Precoverage C} [P.IsClosedUnderIsomorphisms],\\n  (∀ ⦃X : C⦄ (𝒰 : K.ZeroHypercover X), P X ↔ ∀ (i : 𝒰.I₀), P (𝒰.X i)) → P.IsLocal K\", \"doc\": \"If an object property $P$ is closed under isomorphisms and for every object $X$ and every zero hypercover $\\\\mathcal{U}$ of $X$, $P(X)$ holds if and only if $P(Y)$ holds for all objects $Y$ in $\\\\mathca\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsGeneratedByOneHypercovers\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C),\\n  J.IsGeneratedByOneHypercovers\", \"doc\": \"The Grothendieck topology $ J $ is generated by one-step hypercovers, meaning that every hypercover can be constructed from one-step hypercovers using the axioms of $ J $.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {S : C}\\n  {E : J.OneHypercover S} {F : J.OneHypercover S} [CategoryTheory.Limits.HasPullbacks C] (f g : E.Hom F),\\n  ∃ W h,\\n    Nonempty\\n      (CategoryTheory.PreOneHypercover.Homotopy (CategoryTheory\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for any two morphisms $f, g : E \\\\to F$ between one-step hypercovers $E$ and $F$ of an object $S$, there exists a one-step hyperco\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary 1-hypercover sheaf conditions do not give unbounded hyperdescent or the derived mapping-complex criterion. Read Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean:10-34."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|hyperdescent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.SheafOfTypes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"13\", \"text\": \"# Saturation of a `0`-hypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"15\", \"text\": \"Given a `0`-hypercover `E`, we define a `1`-hypercover `E.saturate`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"20\", \"text\": \"namespace CategoryTheory.PreZeroHypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.SheafOfTypes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\", \"line\": \"28\", \"text\": \"namespace GrothendieckTopology.OneHypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\", \"line\": \"32\", \"text\": \"/-- Glue a family of morphisms along a `1`-hypercover for a subcanonical topology. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\", \"line\": \"33\", \"text\": \"noncomputable def glueMorphisms {S T : C} (E : J.OneHypercover S) (f : ∀ i, E.X i ⟶ T)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\", \"line\": \"39\", \"text\": \"variable {S T : C} (E : J.OneHypercover S) (f : ∀ i, E.X i ⟶ T)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.One\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"13\", \"text\": \"# The category of `1`-hypercovers up to homotopy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"15\", \"text\": \"In this file we define the category of `1`-hypercovers up to homotopy. This is the category of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"16\", \"text\": \"`1`-hypercovers, but where morphisms are considered up to existence of a homotopy.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"20\", \"text\": \"- `CategoryTheory.PreOneHypercover.Homotopy`: A homotopy of refinements `E ⟶ F` is a family of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\", \"line\": \"12\", \"text\": \"# 0-hypercovers\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\", \"line\": \"15\", \"text\": \"of `0`-hypercovers of an object `S : C`. They consist of a covering family\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\", \"line\": \"32\", \"text\": \"/-- The categorical data that is involved in a `0`-hypercover of an object `S`. This\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\", \"line\": \"35\", \"text\": \"structure PreZeroHypercover (S : C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean\", \"line\": \"43\", \"text\": \"namespace PreZeroHypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Zero\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"14\", \"text\": \"# 1-hypercovers\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"17\", \"text\": \"`1`-hypercovers of an object `S : C`. They consist of a covering family\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"23\", \"text\": \"The definition `OneHypercover.isLimitMultifork` shows that if `E` is a\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"24\", \"text\": \"`1`-hypercover of `S`, and `F` is a sheaf, then `F.obj (op S)`\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary 1-hypercover sheaf conditions do not give unbounded hyperdescent or the derived mapping-complex criterion. Read Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean:10-34."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-bounded-below-hypersheaf-model",
@@ -89,5 +214,29 @@
   "group": "Q44"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-hyperdescent-local-orthogonality",
+  "worker": "stage1",
+  "summary": "Preserved the complete arbitrary-site, unbounded statement. Read the cited dg-sheaves paper online and split the proof into explicit free-augmentation mapping calculations, the signed product totalization, all-shift mapping-space detection, small hypercover generation and the two implications. Added three independent statement-only foundations after DAG, blueprint, Lean and logged Mathlib searches. Reused the existing generic strong-saturation theorem as a declared tool. Archive of the online paper is WANTED; the split is agent-authored under the standing brief.",
+  "blueprint": "Realizes the current main-20261015 opening 'Choose a compactification c=(j,p)' through the existing affine-local compactification repair and lem-cbc-bounded-below-hypersheaf-model steps 4 (recognition) and 5 (reconstruction). Ancestry and unit binding are unchanged; no key-unit realized field is edited.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-small-localization-saturation",
+    "why": "Step 4 uses the general theorem identifying strong saturation of a small set of arrows in a presentable infinity category with equivalences detected by its local objects. The compact-support unit supplies no general localization theorem; this does not replace its geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-small-localization-saturation"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c38dc81b6",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c38dc81b6 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes (presheaf-dg-function-complex, cosimplicial-complex-holim, hypercover-localization-generation), every cited statement (size, abstract-derived-category, enhanced-diagrams-cones, sheafification, presentable, infinity-small-localization-saturation), the parent bounded-below-hypersheaf-model steps 4-5, and the unit, chapter and main-20261015 opening. Item statement unchanged and true: objects local for local quasi-isos are the hypercomplete sheaves, which are the objects with hyperdescent; no boundedness needed. Step 2: I recomputed the sign regrading eps=(-1)^{rn+n(n-1)/2}. It gives D=delta+(-1)^n d_G, and eps(r,0)=1 so the augmentation is restriction. Step 3: H^0 RHom(X[k],G)=H^{-k}, so all shifts cover all degrees. Steps 4-6: the generation node supplies a small set S and the HTT tool's closure conventions match. The new nodes are true by K-projectivity of bounded-above complexes of projectives with Dold-Kan of tau<=0, the filtered/Milnor proof that Tot_Pi computes holim over Delta, and the Bousfield localization at hypercovers in the style of Dugger-Hollander-Isaksen. I tested them on the empty site, the topology where the empty sieve covers, the trivial topology, Lambda=0 and a constant cosimplicial diagram. They are not duplicates of K-projective, mapping-comparison, Roos-limit, coproduct-total or hypercover-free-module nodes; none restates a parent clause and there is no cycle. Accepted tool_use: lem-coef-infinity-small-localization-saturation, a generic HTT black box. Caveat: Choudhury-Gallauer arXiv:1511.02828 is not archived and this machine has no network, so the cited place numbers are unverified; it stays WANTED with proof_origin agent, as for the accepted parent. No SGA source. No fixes."
+ }
 }

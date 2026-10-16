@@ -28,9 +28,94 @@
  "stmt_deps": [
   "def-kun-subspace-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M=C(Y,Z)$ with the subspace topology in the statement [def-kun-subspace-topology]. We first unpack the definition of $k$. The identity $kT\\to T$ is continuous, and any continuous $a:C\\to T$ with $C$ compact Hausdorff is continuous as a map to $kT$, since the inverse image of every $k$-open set is open by definition. Consequently a function $v:kT\\to W$ is continuous if and only if $v\\circ a:C\\to W$ is continuous for every such ordinary test map into $T$. The forward implication uses the lift of $a$, and the reverse says precisely that $v^{-1}(U)$ is $k$-open for each open $U\\subseteq W$. If $A$ is a k-space and $f:A\\to T$ is continuous, then $f:A\\to kT$ is continuous: for a $k$-open $V\\subseteq T$, test $f^{-1}(V)$ against each $b:C\\to A$, obtaining the open set $(fb)^{-1}(V)$. Tests into $T$ and $kT$ therefore coincide, so $k(kT)=kT$.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "For any two compact Hausdorff test spaces $C,D$, their ordinary product $C\\times D$ is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], specialized to a two-element index set. It is Hausdorff: two unequal pairs differ in one coordinate, and inverse images under that projection of disjoint neighbourhoods separate them. Thus every ordinary continuous map $C\\times D\\to T$ lifts to $kT$ by step 1. Also, each compact Hausdorff $D$ is locally compact in the neighbourhood-basis sense: its whole space is a compact neighbourhood of each point, so [lem-coef-hausdorff-compact-neighborhood-basis] applies. These assertions include empty test spaces.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-coef-hausdorff-compact-neighborhood-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "Let $h:k(X\\times Y)\\to Z$ be continuous. For fixed $x\\in X$, the function $h_x(y)=h(x,y)$ is continuous on $Y$: for every compact Hausdorff test $a:D\\to Y$, the map $d\\mapsto(x,a(d))$ is continuous into $X\\times Y$, hence into its $k$-ification by step 1, so $h_xa$ is continuous; the definition that $Y$ is a k-space now proves continuity of $h_x$. Thus $g(x)=h_x$ belongs to $M$. Fix a test $b:C\\to X$ and a subbasic set $S(a,U)\\cap M$, where $a:D\\to Y$ is a compact Hausdorff test. By step 2, $(c,d)\\mapsto(b(c),a(d))$ lifts continuously to $k(X\\times Y)$. Apply the continuous-transpose clause of [lem-coef-compact-open-currying] to $H(c,d)=h(b(c),a(d))$. It gives a continuous map $C\\to\\operatorname{Cont}(D,Z)$ with the ordinary compact-open topology, since $D$ is locally compact by step 2. The inverse image of the subbasic open $[D,U]$ under this transpose is exactly $(gb)^{-1}(S(a,U)\\cap M)$. Hence $gb:C\\to M$ is continuous for every test $b$.",
+   "uses": [
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "Since $X$ is a k-space, the last assertion of step 3 proves that $g:X\\to M$ is continuous: the preimage of any open of $M$ is open after every compact Hausdorff test into $X$. The lifting calculation in step 1 then proves that the same function $g:X\\to kM$ is continuous. This constructs currying on the stated set of continuous maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "Fix a compact Hausdorff $D$ and a continuous $q:D\\to Y$. Restriction $R_q:M\\to\\operatorname{Cont}(D,Z)$, $R_q(f)=f\\circ q$, is continuous for the ordinary compact-open topology on the target. Indeed, if $L\\subseteq D$ is compact, its subspace is compact by the definition of compactness for a subset, and is Hausdorff by restricting disjoint neighbourhoods from $D$. The restriction $q|_L:L\\to Y$ is therefore an allowed test, and $R_q^{-1}([L,U])=S(q|_L,U)\\cap M$, which is open by the subbasis defining $M$. The induced topology [def-kun-subspace-topology] ensures that these are precisely opens in the continuous-map subset.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "Conversely let $g:X\\to kM$ be continuous and set $h(x,y)=g(x)(y)$. For any compact Hausdorff test $r:D\\to X\\times Y$ into the ordinary product, write $p=\\operatorname{pr}_Xr$ and $q=\\operatorname{pr}_Yr$. Then $D\\xrightarrow{p}X\\xrightarrow{g}kM\\to M\\xrightarrow{R_q}\\operatorname{Cont}(D,Z)$ is continuous by step 5 and the identity $kM\\to M$. The compact-neighbourhood-basis lemma applied to $D$ makes $D$ locally compact. Thus the continuous-evaluation clause of [lem-coef-compact-open-currying], with $A=K=D$, gives the continuous function $F:D\\times D\\to Z$, $F(d,e)=g(p(d))(q(e))$. Pulling back along the continuous diagonal $d\\mapsto(d,d)$ gives $h\\circ r$. Step 1 now proves that $h:k(X\\times Y)\\to Z$ is continuous. Local compactness has been used only for $D$, never for $X$ or $Y$.",
+   "uses": [
+    "lem-coef-hausdorff-compact-neighborhood-basis",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "The formulas in steps 3 and 6 are inverse pointwise: $h^\\sharp(x)(y)=h(x,y)$ and $g^\\flat(x,y)=g(x)(y)$. They give the required bijection, including the empty-space cases. For naturality let $u:X^{\\prime}\\to X$, $v:Y^{\\prime}\\to Y$, and $w:Z\\to Z^{\\prime}$ be continuous maps of k-spaces. The ordinary map $M\\to C(Y^{\\prime},Z^{\\prime})$, $f\\mapsto w\\circ f\\circ v$, is continuous because the inverse image of $S(a,U)$ is $S(v\\circ a,w^{-1}(U))$. The $k$-lifting calculation of step 1 makes the same map continuous between the $k$-ified mapping spaces; it likewise gives continuity of the induced map $k(X^{\\prime}\\times Y^{\\prime})\\to k(X\\times Y)$. Both orders of currying and these pre/postcompositions evaluate at $(x^{\\prime},y^{\\prime})$ to $w(h(u(x^{\\prime}),v(y^{\\prime})))$, proving naturality in all three variables.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22(5), printed p.58 (PDF page 68); compact-test proof supplied by the worker, using the cited Mathlib leaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-coef-hausdorff-compact-neighborhood-basis",
+  "lem-coef-compact-open-currying"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Proposition 2.4.22(5), printed p.58; the reference states the result and refers the proof to Lewis Appendix. The compact-test argument here is supplied by the worker rather than attributed to a locally available proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +165,45 @@
    "results": "{\"t\": \"2026-10-16T17:21:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompactlyGenerated\\\", \\\"MonoidalClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read Mathlib/Topology/Category/CompactlyGenerated.lean:13-23, where Cartesian closure is TODO. Returned concrete-category, condensed adjunction and condensed closed-category declarations do not state this k-space exponential law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exponential law for compactly generated Kelley spaces with kified compact test open function spaces",
+   "results": "{\"t\": \"2026-10-16T19:17:03Z\", \"tool\": \"leanfinder\", \"query\": \"Exponential law for compactly generated Kelley spaces with kified compact test open function spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"uCompactlyGeneratedSpace_of_continuous_maps\", \"CondensedSet.compactlyGeneratedAdjunctionCounitHomeo\", \"ContinuousMap.compactOpen_eq\", \"compactlyGeneratedSpace_of_continuous_maps\", \"continuous_from_uCompactlyGeneratedSpace\", \"continuous_from_compactlyGenerated\", \"continuous_from_compactlyGeneratedSpace\", \"CompactlyGenerated.ofHom\"], \"digest\": \"a376ce1d8026d080\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the compactly generated category file lists Cartesian closure as TODO (Mathlib/Topology/Category/CompactlyGenerated.lean:18-21). Read ContinuousMap.curry and uncurry in Mathlib/Topology/CompactOpen.lean:430-467: uncurry requires local compactness of its second source and does not give the item for arbitrary k-spaces. The restriction/test argument is additional. Homeomorph.piCurry concerns all functions with the pointwise topology, not this compact-test continuous-map topology; condensed Cartesian closure is a different category."
+  },
+  {
+   "tool": "grep",
+   "query": "curry|exponential|TODO|MonoidalClosed",
+   "results": "{\"t\": \"2026-10-16T19:16:53Z\", \"tool\": \"grep\", \"query\": \"curry|exponential|TODO|MonoidalClosed\", \"sub\": \"Topology/Category/CompactlyGenerated.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"18\"], \"digest\": \"97ce7b1b08d86613\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the compactly generated category file lists Cartesian closure as TODO (Mathlib/Topology/Category/CompactlyGenerated.lean:18-21). Read ContinuousMap.curry and uncurry in Mathlib/Topology/CompactOpen.lean:430-467: uncurry requires local compactness of its second source and does not give the item for arbitrary k-spaces. The restriction/test argument is additional. Homeomorph.piCurry concerns all functions with the pointwise topology, not this compact-test continuous-map topology; condensed Cartesian closure is a different category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompactlyGeneratedSpace\", \"ContinuousMap\"",
+   "results": "{\"t\": \"2026-10-16T19:16:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompactlyGeneratedSpace\\\", \\\"ContinuousMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the compactly generated category file lists Cartesian closure as TODO (Mathlib/Topology/Category/CompactlyGenerated.lean:18-21). Read ContinuousMap.curry and uncurry in Mathlib/Topology/CompactOpen.lean:430-467: uncurry requires local compactness of its second source and does not give the item for arbitrary k-spaces. The restriction/test argument is additional. Homeomorph.piCurry concerns all functions with the pointwise topology, not this compact-test continuous-map topology; condensed Cartesian closure is a different category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian closure of Kelley spaces with kification of compact open mapping spaces",
+   "results": "{\"t\": \"2026-10-16T19:16:53Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian closure of Kelley spaces with kification of compact open mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homeomorph.curry\", \"Function.compactSpace\", \"ContinuousMap.compactOpen\", \"TopologicalSpace.CompactOpens.map\", \"TopologicalSpace.CompactOpens.coe_prod\", \"instMonoidalClosedCondensedSet\", \"CompHausLike.cartesianMonoidalCategory\", \"instCategoryCompactum\"], \"digest\": \"2dc2848f7cd00133\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the compactly generated category file lists Cartesian closure as TODO (Mathlib/Topology/Category/CompactlyGenerated.lean:18-21). Read ContinuousMap.curry and uncurry in Mathlib/Topology/CompactOpen.lean:430-467: uncurry requires local compactness of its second source and does not give the item for arbitrary k-spaces. The restriction/test argument is additional. Homeomorph.piCurry concerns all functions with the pointwise topology, not this compact-test continuous-map topology; condensed Cartesian closure is a different category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying continuous functions from a kified product of compactly generated spaces to kification of the compactly generated mapping space",
+   "results": "{\"t\": \"2026-10-16T19:18:43Z\", \"tool\": \"leanfinder\", \"query\": \"Currying continuous functions from a kified product of compactly generated spaces to kification of the compactly generated mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.curry\", \"ContinuousMap.continuous_curry\", \"Homeomorph.curry\", \"ContinuousMap.uncurry\", \"ContinuousMap.uncurry_apply\", \"ContinuousMap.continuous_uncurry\", \"ContinuousMap.continuous_uncurry_of_continuous\", \"ContinuousMap.curry_apply\"], \"digest\": \"3b0c80520e49e8fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the compactly generated category file lists Cartesian closure as TODO (Mathlib/Topology/Category/CompactlyGenerated.lean:18-21). Read ContinuousMap.curry and uncurry in Mathlib/Topology/CompactOpen.lean:430-467: uncurry requires local compactness of its second source and does not give the item for arbitrary k-spaces. The restriction/test argument is additional. Homeomorph.piCurry concerns all functions with the pointwise topology, not this compact-test continuous-map topology; condensed Cartesian closure is a different category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-realization-finite-limits",
@@ -91,5 +211,21 @@
   "group": "Q61"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kspace-exponential-law",
+  "worker": "stage1",
+  "summary": "Proved the compact-test exponential law in seven steps, without separation assumptions on X,Y,Z. Reused the existing locally compact compact-open currying leaf and Tychonoff leaf. Added only the general Hausdorff compact-neighbourhood-basis theorem as a Mathlib leaf. Explicitly proved all k-lifting, restriction and diagonal-test calculations and the three naturality formulas. No statement change.",
+  "blueprint": "Supports proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the recorded realization/cosimplicial-frame ancestry: compact-test mapping spaces supply the exponential adjunction used in the foundational topological model. The current main-20261015 proof has the same displayed derived Hom / inverse-limit calculation. This item is not the key statement of its bound unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-c13fd0b77",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c13fd0b77 (reviewer sub-agent of L); spot-checked: I read all seven steps of lem-coef-kspace-exponential-law and the new leaf lem-coef-hausdorff-compact-neighborhood-basis in full. The item's statement is unchanged. It matches Hovey Def 2.4.21 / Prop 2.4.22(5) on all k-spaces, with no weak-Hausdorff condition; Hovey is not in literature/ and is recorded as WANTED, with proof_origin.by=agent. The parent lem-coef-realization-finite-limits step 7 uses exactly this bijection and k(kT)=kT. Step checks: (1) the k-test criterion, the lifting from k-spaces and k(kT)=kT are correct and elementary. (2) C×D is compact by Tychonoff over two indices and Hausdorff by the explicit argument; D is locally compact by the new leaf, using the whole space as a compact neighbourhood. (3) I checked (gb)^{-1}(S(a,U)∩M)=(H^♯)^{-1}[D,U]; the transpose is applied with K=D, which is locally compact. (4) Continuity into M, then lifting to kM, is correct. (5) R_q^{-1}[L,U]=S(q|_L,U)∩M, where L⊆D compact is compact Hausdorff. (6) Evaluation with A=K=D, restricted to the diagonal, gives h∘r, so h is continuous on k(X×Y). (7) The two formulas are pointwise inverse, the preimage of S(a',U') is S(va',w^{-1}U'), and naturality is written out. proof_deps equals the union of the uses, only cited statements are used, and there is no cycle. New leaf: it is Stacks 08ZR, lemma-locally-quasi-compact-Hausdorff (topology.tex 2021-2041, 'if' direction). The Mathlib match is WeaklyLocallyCompactSpace.locallyCompactSpace (Separation/Basic.lean:1170-1171, in the R1Space section at line 914 under WeaklyLocallyCompactSpace at line 1155), with T2Space.r1Space (Hausdorff.lean:120-121); the classes at Defs/Filter.lean:295-312 match the hypothesis and conclusion exactly, so it is a valid one-line leaf. B1-B9 hold. A DAG-wide scan found no duplicate, and the node does not restate a clause of the item. Edge cases checked: empty X, Y, Z and tests, a singleton, the Sierpinski space, and [0,1]. All cited nodes are Mathlib leaves or definitions, so there are no tool_uses. No SGA source. No fixes."
+ }
 }
