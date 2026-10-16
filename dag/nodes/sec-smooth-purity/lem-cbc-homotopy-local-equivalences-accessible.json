@@ -1,0 +1,96 @@
+{
+ "id": "lem-cbc-homotopy-local-equivalences-accessible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Opening 'Choose a compactification c=(j,p)': the arbitrary-site descent foundation of the affine-local compactification repair, below lem-cbc-dg-presheaf-model-localizations. General set localization, not a new hypercover or exchange theorem. Barwick, Lemma 4.6, using Lemma 4.5, printed p. 43.",
+   "via": [
+    "lem-cbc-general-bousfield-localization",
+    "lem-cbc-dg-presheaf-model-localizations",
+    "lem-cbc-hypercover-localization-generation",
+    "lem-cbc-hyperdescent-local-orthogonality",
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Accessibility of derived local equivalences in a combinatorial model category",
+ "statement": "Use the universes of [def-weil-size-convention] and the model-category, locally presentable and combinatorial terminology of [lem-coef-combinatorial-localization-presentability]. Let $\\mathcal M$ be a combinatorial model category with functorial factorizations, and let $S$ be a small set of its arrows. Use the original homotopy function complexes $\\operatorname{Map}^h$ of [lem-coef-cosimplicial-frame-mapping]. Call an originally fibrant object $Z$ local if $\\operatorname{Map}^h(B,Z)\\to\\operatorname{Map}^h(A,Z)$ is an equivalence for every $(A\\to B)\\in S$. Let $W_S$ be the full subcategory of the ordinary arrow category $\\mathcal M^{[1]}$ whose objects are those $f:X\\to Y$ for which $\\operatorname{Map}^h(Y,Z)\\to\\operatorname{Map}^h(X,Z)$ is an equivalence for every such local $Z$; morphisms in the arrow category are commuting squares. Then $W_S$ is replete, accessible, and accessibly embedded: for some infinite regular cardinal $\\lambda$, it is closed under small $\\lambda$-filtered colimits computed in $\\mathcal M^{[1]}$ and is generated under those colimits by a small set of its objects. Replete means closed under isomorphisms in the arrow category. Here $\\lambda$-filtered means that every diagram with fewer than $\\lambda$ morphisms admits a cocone, and regular means that a union of fewer than $\\lambda$ sets of size less than $\\lambda$ has size less than $\\lambda$. No left properness or simplicial enrichment is assumed, and the endpoints of the arrows of $S$ need not be cofibrant.",
+ "source": {
+  "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+  "place": "Barwick, Lemma 4.6, using Lemma 4.5, printed p. 43. Read online 2026-10-17; not archived in literature/. No Stacks tag states this model-category result."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-cosimplicial-frame-mapping"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a combinatorial model category the local equivalences for a small set of maps form an accessibly embedded accessible full subcategory of the arrow category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ]\\n  [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheor\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ locally presentable with respect to $\\\\kappa$, a small morphism property $W$ in $\\\\mathcal{C}$, and the condition that every morphism in $W$ h\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredColimits C κ],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCardinalPresentable X κ ∧ CategoryTheory.IsCardinalPr\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ with $\\\\kappa$-filtered colimits, and a morphism property $W$ where every $W$-morphism has $\\\\kappa$-presentable domain and codomain, the incl\"}\n  {\"name\": \"CategoryTheory.SmallObject.locallySmall\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  CategoryTheory.LocallySmall.{w, v, u} C\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on $P$-morphisms required for the small object argument.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (J : Type u')\\n  [inst_1 : CategoryTheory.Category.{v', u'} J] [CategoryTheory.EssentiallySmall.{w, v', u'} J] (κ : Cardinal.{w})\\n  [inst_3 : Fact κ.IsRegular] [CategoryTheory.IsCardinalFiltered J κ],\\n  (\", \"doc\": \"Let $\\\\mathcal{C}$ be a category, $W$ a morphism property in $\\\\mathcal{C}$, $J$ a $\\\\kappa$-filtered category for a regular cardinal $\\\\kappa$, and assume every morphism $f \\\\in W$ has $\\\\kappa$-presentabl\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalAccessibleCategory C κ] (X : C),\\n  CategoryTheory.IsCardinalFiltered (CategoryTheory.CostructuredArrow (CategoryTheory.isCardinalPresentable C κ).ι X) κ\", \"doc\": \"For any κ-accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from κ-presentable objects to $X$ is κ-filtered. This means that fo\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  {inst_1 : Fact κ.IsRegular} {inst_2 : OrderBot κ.ord.ToType} [self : I.IsCardinalForSmallObjectArgument κ],\\n  CategoryTheory.LocallySmall.{w, v, u} C\", \"doc\": \"If a category $\\\\mathcal{C}$ has a morphism property $I$ that satisfies cardinality constraints compatible with $\\\\kappa$-filtered colimits for a regular cardinal $\\\\kappa$, then $\\\\mathcal{C}$ is locally\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: OrthogonalReflection.lean:95-103,472-480 treats ordinary Hom-set orthogonality, not homotopy function complexes or the derived local-equivalence arrow class. The second semantic phrasing returns model axioms and homotopy classes, not this accessibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Accessible\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: OrthogonalReflection.lean:95-103,472-480 treats ordinary Hom-set orthogonality, not homotopy function complexes or the derived local-equivalence arrow class. The second semantic phrasing returns model axioms and homotopy classes, not this accessibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "localEquivalence|local.*equivalence.*accessib|Bousfield.*accessib",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: OrthogonalReflection.lean:95-103,472-480 treats ordinary Hom-set orthogonality, not homotopy function complexes or the derived local-equivalence arrow class. The second semantic phrasing returns model axioms and homotopy classes, not this accessibility theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy orthogonality to the fibrant objects local for a set of arrows is an accessible class of arrows in a combinatorial model category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Homotopy\", \"type\": \"(f : X ⟶ Y) : leftHomotopyClassEquivRightHomotopyClass (.mk f) = .mk f\", \"doc\": \"For any morphism $f : X \\to Y$ in a model category $\\\\mathcal{C}$, where $X$ is cofibrant and $Y$ is fibrant, the left homotopy class of $f$ corresponds to its right homotopy class under the canonical e\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \": MorphismProperty.IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)\", \"doc\": \"In any model category $\\\\mathcal{C}$, the class of cofibrations and the class of trivial fibrations (morphisms that are both fibrations and weak equivalences) form a weak factorization system. This mea\"}\n  {\"name\": \"HomotopicalAlgebra.fibrantObjects\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": ObjectProperty C\", \"doc\": \"The property of an object $X$ in a category with cofibrations where the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \": MorphismProperty.IsWeakFactorizationSystem (trivialCofibrations C) (fibrations C)\", \"doc\": \"In any model category $ \\\\mathcal{C} $, the classes of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and fibrations form a weak factorization system. This means ever\"}\n  {\"name\": \"HomotopicalAlgebra.isFibrant_of_fibration\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\", \"type\": \"[(fibrations C).IsStableUnderComposition] {X Y : C} (p : X ⟶ Y) [Fibration p] [hY : IsFibrant Y] : IsFibrant X\", \"doc\": \"In a category with cofibrations where fibrations are stable under composition, if there exists a fibration $ p : X \\to Y $ and the target object $ Y $ is fibrant, then the source object $ X $ is also f\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"[CategoryWithFibrations C] [CategoryWithCofibrations C] [CategoryWithWeakEquivalences C] [HasFiniteLimits C]\\n  [HasFiniteColimits C] [(weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)]\\n  [IsWeakFactorizationSystem (trivialCofibrations \", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"[CategoryWithWeakEquivalences C] {X Y : C} [IsFibrant X] [IsFibrant Y] (f : X ⟶ Y) :\\n  WeakEquivalence (homMk f) ↔ WeakEquivalence f\", \"doc\": \"Given a category with weak equivalences $\\\\mathcal{C}$, and fibrant objects $X,Y \\\\in \\\\mathcal{C}$, a morphism $f : X \\\\to Y$ is a weak equivalence in the full subcategory of fibrant objects if and only \"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": Type u\", \"doc\": \"The full subcategory of a category with cofibrations consisting of objects $X$ for which the unique morphism from $X$ to the terminal object is a fibration.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: OrthogonalReflection.lean:95-103,472-480 treats ordinary Hom-set orthogonality, not homotopy function complexes or the derived local-equivalence arrow class. The second semantic phrasing returns model axioms and homotopy classes, not this accessibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of arrows detected as equivalences by derived hom into a small orthogonality class is accessible and closed under filtered colimits",
+   "results": "{\"t\": \"2026-10-16T22:51:49Z\", \"tool\": \"leanfinder\", \"query\": \"The full subcategory of arrows detected as equivalences by derived hom into a small orthogonality class is accessible and closed under filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.ObjectProperty.isCardinalFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.ObjectProperty.ind_iff_exists\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.MorphismProperty.ind_iff_exists\", \"CategoryTheory.IsAccessibleCategory\"], \"digest\": \"8d60ff8528c2db9a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader inspected OrthogonalReflection.lean:74-103 and ObjectProperty/Local.lean:41-52. These concern ordinary Hom-set bijections for local objects, not equivalences of derived mapping spaces or the local-equivalence arrow category. The broad grep also returned unrelated linear orthogonality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLocal\", \"isCardinalAccessible\"",
+   "results": "{\"t\": \"2026-10-16T22:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"isLocal\\\", \\\"isCardinalAccessible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"32777ddd4a269f3c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader inspected OrthogonalReflection.lean:74-103 and ObjectProperty/Local.lean:41-52. These concern ordinary Hom-set bijections for local objects, not equivalences of derived mapping spaces or the local-equivalence arrow category. The broad grep also returned unrelated linear orthogonality."
+  },
+  {
+   "tool": "grep",
+   "query": "isCardinalAccessible.*isLocal|isLocallyPresentable_isLocal|[Oo]rthogonal",
+   "results": "{\"t\": \"2026-10-16T22:51:48Z\", \"tool\": \"grep\", \"query\": \"isCardinalAccessible.*isLocal|isLocallyPresentable_isLocal|[Oo]rthogonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Inversion/Calculus.lean\", \"Mathlib/Geometry/Euclidean/Inversion/Calculus.lean\"], \"digest\": \"fb6660e84e70ba50\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader inspected OrthogonalReflection.lean:74-103 and ObjectProperty/Local.lean:41-52. These concern ordinary Hom-set bijections for local objects, not equivalences of derived mapping spaces or the local-equivalence arrow category. The broad grep also returned unrelated linear orthogonality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-general-bousfield-localization",
+  "date": "2026-10-17",
+  "group": "Q13"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

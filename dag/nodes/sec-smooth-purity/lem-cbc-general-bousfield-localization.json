@@ -28,9 +28,140 @@
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-cosimplicial-frame-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $W_0,C$ for the old weak equivalences and cofibrations, and $W$ for the $S$-equivalences in the statement. The old localization sends every $W_0$-map to an equivalence, so its mapping spaces send it to equivalences; hence $W_0\\subseteq W$. The definition of locality also gives $S\\subseteq W$. Precomposition into any fixed local object respects identities and composition; equivalences of spaces satisfy two-out-of-three and are retract closed. Testing separately at every fibrant local object therefore shows that $W$ contains isomorphisms, has two-out-of-three, and is retract closed. Locality is invariant under old weak equivalences between old fibrant objects, since the corresponding maps of derived mapping spaces are equivalences.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Definition 4.2 and the first verification in Theorem 4.7."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-homotopy-local-equivalences-accessible] to the original combinatorial model and the given small set $S$. It says precisely that this $W$ is a replete accessible full subcategory of the ordinary arrow category, closed under sufficiently filtered colimits in that arrow category. This establishes the accessibility hypothesis of Smith recognition before any localized model structure is constructed. No enrichment, cofibrant endpoints, or already existing localization is used.",
+   "uses": [
+    "lem-cbc-homotopy-local-equivalences-accessible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, printed p. 43."
+   }
+  },
+  {
+   "text": "The class $C$, as a left diagonal-lifting class, contains isomorphisms and is closed under pushouts and retracts by [lem-coef-lifting-class-closure]; [lem-coef-transfinite-left-lifting] gives closure under all small continuous transfinite compositions. Choose a small old generating set $I$ of cofibrations, so $I^{\\square}$ is the old trivial fibrations. The accessible small-object factorization writes any $c:A\\to B$ in $C$ as $p a$, with $a$ in the weak saturation of $I$ and $p\\in I^{\\square}$. Lift $c$ against $p$ in the square with top $a$ and bottom $1_B$: the resulting $h:B\\to\\operatorname{cod}(a)$ has $hc=a$ and $ph=1_B$. Thus $c$ is an arrow retract of $a$. The reverse containment holds because $I\\subseteq C$ and $C$ is weakly saturated. Therefore $C$ is weakly saturated and small-generated, exactly as Smith recognition requires.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Theorem 4.7, choice of generating cofibrations; Proposition 2.2 and small-object/retract argument."
+   }
+  },
+  {
+   "text": "The intersection $C\\cap W$ is closed under pushouts. Indeed if $i:A\\to B$ belongs to it and $A\\to X$ is arbitrary, [lem-cbc-left-proper-derived-cell-colimits](a) identifies mapping out of $B\\amalg_A X$ into a local fibrant $Z$ with the homotopy pullback of $\\operatorname{Map}^h(B,Z)\\to\\operatorname{Map}^h(A,Z)\\leftarrow\\operatorname{Map}^h(X,Z)$. The first map is an equivalence, so restriction to $\\operatorname{Map}^h(X,Z)$ is an equivalence. The pushout map is therefore in $W$, and it is in $C$ by step 3. For a small continuous transfinite chain of maps in $C\\cap W$, prove by transfinite induction that the map from its initial stage to each stage is in $W$. The successor case is composition. At a nonzero limit, the diagram consists of cofibrations by step 3, and part (b) of the same cell-colimit node identifies the derived mapping space of the colimit with the homotopy limit of the earlier mapping spaces. By the induction hypothesis the restrictions give an objectwise equivalence from this diagram of spaces to the constant diagram with value $\\operatorname{Map}^h(X_0,Z)$. The opposite ordinal has terminal object $0$, and the maps to $0$ give a contraction of its nerve. Thus the homotopy limit of that constant diagram is $\\operatorname{Map}^h(X_0,Z)$, with evaluation at $0$ as the equivalence. Taking limits of the objectwise equivalence proves the required restriction equivalence at the limit. The zero stage is the identity. Retracts and isomorphisms were handled in steps 1 and 3. Thus $C\\cap W$ is weakly saturated. The comparisons explicitly allow noncofibrant initial objects and limits of every small cofinality.",
+   "uses": [
+    "lem-cbc-left-proper-derived-cell-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed pp. 43-44; expanded continuous-chain limit verification."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-smith-model-recognition] with $\\mathcal A=\\mathcal N$ and the classes $C,W$. Completeness and local presentability are part of the original combinatorial hypothesis. Step 3 supplies small generation and weak saturation of $C$, step 4 the weak saturation of $C\\cap W$, step 2 accessibility of $W$, and step 1 two-out-of-three. Finally $C^{\\square}$ is the class of old trivial fibrations by the old weak factorization system, so $C^{\\square}\\subseteq W_0\\subseteq W$. Recognition produces a combinatorial model on the same category with cofibrations $C$, weak equivalences $W$, fibrations $(C\\cap W)^{\\square}$, and functorial factorizations. Call it $L_S\\mathcal N$. Applying its functorial trivial-cofibration/fibration factorization to $X\\to1$ gives functorial fibrant replacement.",
+   "uses": [
+    "lem-coef-smith-model-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Theorem 4.7, application of Proposition 2.2."
+   }
+  },
+  {
+   "text": "To check new left properness, push out $f:X\\to Y$ in $W$ along $c:X\\to X'$ in $C$. Factor $f=p i$ in the old model with $i:X\\to E$ a cofibration and $p:E\\to Y$ an old trivial fibration. Since $p\\in W_0\\subseteq W$, two-out-of-three gives $i\\in C\\cap W$. Put $E'=E\\amalg_X X'$. By step 4, $X'\\to E'$ is in $W$. The map $E\\to E'$ is the pushout of $c$, so is an old cofibration. Old left properness, applied to $p$ along this map, shows $E'\\to Y\\amalg_E E'$ is in $W_0\\subseteq W$. The pushout universal property identifies $Y\\amalg_E E'$ with $Y\\amalg_X X'$ and the composite with the pushed-out $f$. Composition proves the claim. The identity preserves $C$ and old trivial cofibrations, since $W_0\\subseteq W$, so it is left Quillen. Both models have the same trivial fibrations, namely $C^{\\square}$, and the same cofibrant objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Theorem 4.7, left properness and identity adjunction, expanded directly from the two model structures."
+   }
+  },
+  {
+   "text": "A new fibrant $Z$ is old fibrant, since it lifts against all new trivial cofibrations, which include all old ones. Choose old cofibrant replacements $QX\\to X$ and old cosimplicial frames on $QX$. These replacements are also new trivial fibrations by step 6; the frames have the same latching cofibrations and their augmentation equivalences lie in $W_0\\subseteq W$, so they are also new frames. Apply [lem-coef-cosimplicial-frame-mapping] separately in the two models. The identical Kan complexes $\\operatorname{Hom}((QX)^\\bullet,Z)$ compute the old and new derived mapping spaces into $Z$, naturally in $X$ and restriction maps. Every $s\\in S$ lies in $W$ by step 1, so it induces an equivalence of the new mapping spaces into $Z$, and hence of the old ones. Therefore every new fibrant object is old fibrant and $S$-local.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Theorem 4.7(4.7.4); agent expansion by comparison of old/new frames, using Barwick Scholium 3.64."
+   }
+  },
+  {
+   "text": "First note that a $W$-map $u:U\\to V$ between old fibrant local objects is in $W_0$. The category formed from components of the old localization mapping spaces is an ordinary localization: apply the coherent localization universal property to nerves of arbitrary ordinary categories. Thus its morphisms are those of the old homotopy category. On components of old derived mapping spaces, precomposition by $u$ is bijective for targets $U$ and $V$. The first surjectivity gives $g:V\\to U$ in the old homotopy category with $gu=1_U$. The second injectivity, applied to $(ug)u=u=1_Vu$, gives $ug=1_V$. Thus $u$ is invertible there, and [lem-coef-model-localization-detects-weak-equivalences] gives $u\\in W_0$. Now let $Z$ be old fibrant local and factor $Z\\to1$ in the new model as a new trivial cofibration $j:Z\\to RZ$ followed by a new fibration. Step 7 makes $RZ$ old fibrant local. The observation just proved makes $j$ an old weak equivalence, and $j$ is an old cofibration, so it is an old trivial cofibration. Old fibrancy of $Z$ gives a retraction $r:RZ\\to Z$ of $j$ by lifting against $Z\\to1$. Hence $Z\\to1$ is an arrow retract of the new fibration $RZ\\to1$, and is a new fibration by retract closure of lifting classes. This proves the reverse fibrancy implication. No ordinary extension assertion was inferred merely from a derived mapping-space equivalence.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Theorem 4.7(4.7.4); agent expansion of the fibrant-object identification by Yoneda cancellation and a retract."
+   }
+  },
+  {
+   "text": "Let $F:\\mathcal N\\rightleftarrows\\mathcal T:G$ satisfy the hypothesis in the statement. For every fibrant $Y$ of $\\mathcal T$, $GY$ is old fibrant. Apply [lem-coef-model-infinity-derived-adjunction] to the original Quillen adjunction: the old derived mapping spaces $\\operatorname{Map}^h_{\\mathcal N}(-,GY)$ are naturally $\\operatorname{Map}^h_{\\mathcal T}(LF(-),Y)$. For $s\\in S$, choose an old functorial cofibrant replacement of its source and target. Its image under $F$ represents $LF(s)$ and is an actual map of $\\mathcal T$. The assumption that this is invertible in the homotopy category implies it is a weak equivalence by [lem-coef-model-localization-detects-weak-equivalences]. It therefore induces equivalences of all these mapping spaces. Thus $GY$ is $S$-local. This uses neither simplicial enrichment nor any combinatorial hypothesis on $\\mathcal T$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Definition 4.2(4.2.1); agent expansion of the universal-property verification deferred in the proof of Theorem 4.7."
+   }
+  },
+  {
+   "text": "For an old fibration $p:U\\to V$ between old fibrant local objects, factor $p=q a$ in the new model, with $a:U\\to E$ a new trivial cofibration and $q:E\\to V$ a new fibration. Step 8 makes $V$ new fibrant, so $E$ is new fibrant and thus old fibrant local by step 7. The observation in step 8 makes $a$ an old weak equivalence, hence an old trivial cofibration. Lift $a$ against the old fibration $p$ using top $1_U$ and bottom $q$, obtaining $r:E\\to U$ with $ra=1_U$ and $pr=q$. This exhibits $p$ as an arrow retract of $q$, so it is a new fibration. Now $G$ sends fibrations between fibrant objects of $\\mathcal T$ to old fibrations between old fibrant local objects by step 9 and the original Quillen adjunction, hence to new fibrations by this argument. It sends trivial fibrations of $\\mathcal T$ to old trivial fibrations, which are new trivial fibrations by step 6. The hypotheses of [lem-coef-quillen-fibrant-test] for the same ordinary adjunction $F\\dashv G$ between $L_S\\mathcal N$ and $\\mathcal T$ are therefore verified. That node makes it Quillen, establishing the claimed universal property without assuming the source of a new trivial cofibration is cofibrant.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-quillen-fibrant-test",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Definition 4.2 and Theorem 4.7 universal property; retract argument and unenriched fibrant-object Quillen test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-cbc-homotopy-local-equivalences-accessible",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-cbc-left-proper-derived-cell-colimits",
+  "lem-coef-smith-model-recognition",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-quillen-fibrant-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+  "place": "Definition 4.2, Lemmas 4.5-4.6 and proof of Theorem 4.7, pp.42-44, read online; not archived. Smith construction follows the source; properness, fibrancy and Quillen universal property are expanded in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +225,31 @@
    "results": "{\"t\": \"2026-10-16T21:54:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Semantic hits give cofibrant-object homotopy categories; grep gives ordinary Hom-set orthogonality, read in Mathlib/CategoryTheory/Localization/Bousfield.lean:13-57 and Presentable/OrthogonalReflection.lean:328-355; Loogle gives zero hits. None constructs a localized model structure."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|locali[sz]ation.*model",
+   "results": "{\"t\": \"2026-10-16T22:37:39Z\", \"tool\": \"grep\", \"query\": \"Bousfield|locali[sz]ation.*model\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Opposite.lean\", \"Mathlib/CategoryTheory/Localization/Opposite.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"7f4cf0210333e109\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Hom-set orthogonal reflection and model-category axioms do not construct a set-localized unenriched model structure. Read Bousfield.lean:13-57 and OrthogonalReflection.lean:95-103,472-480."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Bousfield localization gives a combinatorial model structure with unchanged cofibrations and local equivalences as weak equivalences",
+   "results": "{\"t\": \"2026-10-16T22:37:39Z\", \"tool\": \"leansearch\", \"query\": \"Left Bousfield localization gives a combinatorial model structure with unchanged cofibrations and local equivalences as weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.LeftBousfield.W\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.Localization.LeftBousfield.W_eq_inverseImage_isomorphisms\", \"CategoryTheory.Localization.LeftBousfield.W_iff_isIso_map\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"49f16f431b304cb6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Hom-set orthogonal reflection and model-category axioms do not construct a set-localized unenriched model structure. Read Bousfield.lean:13-57 and OrthogonalReflection.lean:95-103,472-480."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left proper combinatorial model category admits a left Bousfield model localization at any small set of arrows without simplicial enrichment",
+   "results": "{\"t\": \"2026-10-16T22:37:42Z\", \"tool\": \"leanfinder\", \"query\": \"A left proper combinatorial model category admits a left Bousfield model localization at any small set of arrows without simplicial enrichment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"04b81bb1b77cfac5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Hom-set orthogonal reflection and model-category axioms do not construct a set-localized unenriched model structure. Read Bousfield.lean:13-57 and OrthogonalReflection.lean:95-103,472-480."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-dg-presheaf-model-localizations",
@@ -117,5 +269,64 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-general-bousfield-localization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the Barwick/Smith construction into ten proof steps, with two strictly supporting statement-only children: accessibility of the local-equivalence arrow class and derived mapping-space comparisons for left proper cell colimits. Checked arbitrary noncofibrant endpoints, small ordinal limits, original versus new mapping complexes, both fibrancy implications, and the universal property for arbitrary unenriched target model categories. No attachment or Mathlib leaf.",
+  "blueprint": "Opening 'Choose a compactification c=(j,p)': the arbitrary-site descent foundation of the affine-local compactification repair, below lem-cbc-dg-presheaf-model-localizations. General set localization, not a new hypercover or exchange theorem. Read the current main-20261015 ancestor proof, opening compactification paragraph. This primitive supports the existing arbitrary-site descent foundation; it neither changes the unit statement nor asserts the hypercover characterization.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Unenriched frames compute old/new derived mapping spaces and preserve their restriction maps; the compact-support unit has no replacement for this model-category tool."
+   },
+   {
+    "node": "lem-coef-lifting-class-closure",
+    "why": "Arrow retract and pushout closure for lifting classes; this is a generic category-theoretic tool, not a replacement for the compact-support route."
+   },
+   {
+    "node": "lem-coef-transfinite-left-lifting",
+    "why": "Transfinite closure of a diagonal-lifting class, used to check Smith small generation."
+   },
+   {
+    "node": "lem-coef-accessible-small-object-factorization",
+    "why": "Functorial small-object factorization of the old generating cofibrations, used only in the small-generation check."
+   },
+   {
+    "node": "lem-coef-smith-model-recognition",
+    "why": "General combinatorial recognition theorem applied after checking every hypothesis; the unit supplies no model-recognition theorem."
+   },
+   {
+    "node": "lem-coef-model-localization-detects-weak-equivalences",
+    "why": "Saturation of any model category, used for maps between local objects and for the derived-functor hypothesis."
+   },
+   {
+    "node": "lem-coef-model-infinity-derived-adjunction",
+    "why": "Unenriched mapping-space adjunction and preservation of fibrations by the original right Quillen functor."
+   },
+   {
+    "node": "lem-coef-quillen-fibrant-test",
+    "why": "General test promoting preservation of trivial fibrations and fibrations between fibrants to a Quillen adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-smith-model-recognition",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-quillen-fibrant-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-9b496466f",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-9b496466f (reviewer sub-agent of L); spot-checked: Barwick's paper is not in literature/, so I fetched it read-only, extracted the text in /tmp and checked it. Definition 4.2, Lemmas 4.5-4.6 and Theorem 4.7 with its proof (pp. 42-44) match the item, whose statement is unchanged: left proper combinatorial N, S-local fibrant objects, derived-mapping S-equivalences, same cofibrations, left proper combinatorial result, and the Quillen universal property of 4.2.1. Lemma 4.6 does not assume left properness, which matches the accessibility node. I checked each step. Step 3: the lift h in the square (a, 1_B) satisfies hc=a and ph=1, so c is a retract of a. Step 4: the pushout step is a base change of an equivalence. At a limit stage the opposite ordinal has 0 as terminal object, so its nerve is contractible and the homotopy limit of the constant diagram is evaluation at 0; the proof uses this correctly rather than claiming the limit equals the value at 0. Step 5: Smith hypotheses (i)-(v) are matched to steps 3, 4, 2 and 1, with C^square equal to the old trivial fibrations, inside W_0 and hence W. Step 6 is the left-properness argument by factor-and-pushout. Step 7: old frames are also new frames, so the same Hom complexes compute both mapping spaces. Step 8: Yoneda on pi_0 gives gu=1 and ug=1, then the detection lemma and an actual retraction prove the reverse fibrancy implication. Step 9: GY is local through the derived adjunction and detection applied to F(Qs). Step 10: the lift gives ra=1 and pr=q, so p is a retract of q, and the Quillen fibrant test finishes. proof_deps equals the union of uses. Both new nodes are true, are statement-only, are not duplicates (checked against model-weak-equivalences-accessible, accessible-arrow-inverse-image, small-right-lifting-accessibility, cofibrant-colimit-comparison, model-colimit-localization-comparison, sifted-good-diagram-calculus and perfect-weak-equivalence-model-recognition), and do not restate clauses of the item. Their searches cover all three kinds and their created/blueprint fields are correct. I accept the eight declared tool_uses: generic model-category tools from sk-prop-sf-biduality-general. No SGA source; no target, base-change morphism or coefficient category is affected. No fixes."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-thm-sf-pf-adic-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral proper base change on localizing categories",
@@ -12,29 +12,152 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.md",
   "place": "node det-thm-sf-pf-adic-base-change, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
  "proof": [
   {
-   "text": "On $\\Dbc(X,\\mathcal O_E)$ the base change map is an isomorphism: this is the\ncompleted proper base change (the case $f=p$ proper of\n[thm-cbc-complete-proetale]), where completed and uncompleted pullback agree\non integral constructible complexes. Both $g^*Rp_*$ and $Rp'_*g'^*$ are exact\nand preserve direct sums on the localizing categories: $g^*$, $g'^*$ always\ndo, and $Rp_*$, $Rp'_*$ do by [sk-prop-int-compactness]. The objects on which\nthe natural transformation is an isomorphism thus form a localizing\nsubcategory containing $\\Dbc(X,\\mathcal O_E)$, hence all of\n$\\Loc(\\Dbc(X,\\mathcal O_E))$ ([sk-lem-sf-determination]). This is the\nargument of [sk-prop-proper-base-change-unbounded] with the integral\nestimates of [sk-prop-int-compactness].",
+   "text": "Use the standing scheme and coefficient setting [sk-def-sfb-dc-setting]: the four schemes are separated of finite type over a field of positive characteristic different from $\\ell$, the arrows are morphisms over that field, and $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$. For $K\\in\\Dbc(X,\\mathcal O_E)$, clause (3) of [det-thm-sfb-proper-base-change-integral] states that the canonical ordinary proper base-change map $\\beta_K:g^*Rp_*K\\to Rp'_*g'^*K$ is an isomorphism. Its clause (1) places $Rp_*K$ in $\\Dbc(Y,\\mathcal O_E)$; [sk-lem-integral-models] (3) preserves $\\Dbc$ under $g^*$ and $g'^*$, and [lem-weil-pbc-proper-fp-permanence] (b) gives properness of $p'$, so the same clause (1) for $p'$ places the other endpoint in $\\Dbc(Y',\\mathcal O_E)$. Thus the transformation to be extended is already invertible on the bounded constructible generators, with the ordinary module-object coefficients and ordinary inverse images used in the statement.",
    "uses": [
-    "thm-cbc-complete-proetale",
-    "sk-lem-sf-determination"
+    "sk-def-sfb-dc-setting",
+    "det-thm-sfb-proper-base-change-integral",
+    "sk-lem-integral-models",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.proof.md",
+    "place": "Proof paragraph, first sentence (invertibility on Dbc), using the existing stronger integral theorem; its blueprint proof, clause (3), supplies the finite-reduction and derived-completeness argument."
+   }
+  },
+  {
+   "text": "The functors $g^*Rp_*$ and $Rp'_*g'^*$ restrict to exact functors between the indicated localizing categories and preserve all small direct sums. Indeed [det-proper-image-localizing-proper] gives these properties for proper direct images with $\\mathcal O_E$ coefficients, while [det-proper-base-change-unbounded-pullback] gives them for both inverse images; [lem-weil-pbc-proper-fp-permanence] supplies properness of $p'$. The opening assertion of [sk-lem-integral-models] gives $\\Dctf(T,\\mathcal O_E)=\\Dbc(T,\\mathcal O_E)$ for each of the four standing schemes $T$. Their localizing closures are therefore equal: in the definition [sk-def-localizing-closure] the collections of full replete triangulated subcategories containing the generators and closed under ambient sums are identical. Hence both composites have exactly the source and target in the statement. For every edge $u$, clause (1) and the final paragraph of [sk-prop-sfb-cartesian-coefficients] identify $u^{-1}\\mathcal O_{E,T}$ with $\\mathcal O_{E,T'}$ and make module pullback exact. The coefficient identifications come from pullback of the same condensed ring along the structure maps to the point, so the two composites around the square agree. The exact-functor clause of [sk-def-sfb-derived-categories] identifies $Lu^*$ canonically with the termwise functor $D(u^*)$. Under these identifications, [lem-weil-pbc-proetale-derived-pullback-composition] states that the derived pullback composition comparison $c_{h,k}$ is, on a K-flat complex with flat terms, the class of the termwise canonical isomorphism of module pullbacks; its coefficient-compatibility hypothesis is the agreement of the two composite identifications just checked. On each term this sheaf-level isomorphism is the one of [def-sfb-module-upper-star-comp]: both are natural isomorphisms $(kh)^*\\cong h^*k^*$ between left adjoints whose conjugate [def-weil-pbc-adjunction-conjugate] is the composition isomorphism $k_*h_*\\cong(kh)_*$ of direct images, which on underlying sheaves is the identity of sections $G(Z\\times_W(W\\times_VT))=G(Z\\times_VT)$ in both constructions; conjugation is a bijection, so the two pullback comparisons coincide. Since $u^*$ is exact, every complex computes $Lu^*$ termwise, so the composite $\\theta$ of step 3 and the $\\theta_\\square$ of [def-weil-pbc-ambient-ringed-exchange] agree; the derived adjunctions give the corresponding units and counits. Thus [def-weil-pbc-ambient-ringed-exchange] gives precisely the unit/comparison/counit transformation of the extension lemma in step 3. Its component is $\\beta_K=Rp'_*g'^*(\\varepsilon_{p,K})\\circ Rp'_*(\\theta_{Rp_*K})\\circ\\eta_{p',g^*Rp_*K}$, where $\\theta:p'^*g^*\\cong g'^*p^*$. All operations and sums are in the ordinary unbounded module-object categories specified by [sk-def-localizing-closure].",
+   "uses": [
+    "det-proper-image-localizing-proper",
+    "det-proper-base-change-unbounded-pullback",
+    "lem-weil-pbc-proper-fp-permanence",
+    "sk-lem-integral-models",
+    "sk-def-localizing-closure",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-derived-categories",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-sfb-module-upper-star-comp",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.proof.md",
+    "place": "Proof paragraph, second sentence: exactness and direct-sum preservation on the localizing categories"
+   }
+  },
+  {
+   "text": "Apply [det-proper-base-change-unbounded-extension] with $\\Lambda=\\mathcal O_E$ and the given cartesian square. Its scheme setting and admissible coefficient hypotheses are those fixed in step 1. It specifies the very same base-change map as step 2: the unit for $p'$, the canonical comparison of the two composed pullbacks, and the counit for $p$, in that order. In particular its conclusion concerns the stated canonical morphism. By the opening assertion of [sk-lem-integral-models], $\\Dctf(X,\\mathcal O_E)=\\Dbc(X,\\mathcal O_E)$, so step 1 proves invertibility on every generator required in that lemma's hypothesis. Its conclusion gives invertibility on $\\Loc(\\Dctf(X,\\mathcal O_E))=\\Loc(\\Dbc(X,\\mathcal O_E))$. Together with the restricted functor types from step 2, this proves the claimed isomorphism of functors. The extension lemma states the result for this specified exchange transformation; no inference from mere naturality to shift compatibility is needed.",
+   "uses": [
+    "det-proper-base-change-unbounded-extension",
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.proof.md",
+    "place": "Final two sentences: extension by localizing determination, using the existing generic extension lemma in the explicitly cited proper-base-change-unbounded unit."
+   }
   }
  ],
  "proof_deps": [
-  "thm-cbc-complete-proetale",
-  "sk-lem-sf-determination"
+  "sk-def-sfb-dc-setting",
+  "det-thm-sfb-proper-base-change-integral",
+  "sk-lem-integral-models",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-proper-image-localizing-proper",
+  "det-proper-base-change-unbounded-pullback",
+  "sk-def-localizing-closure",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "det-proper-base-change-unbounded-extension",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-adjunction-conjugate"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.proof.md",
+  "place": "Entire proof paragraph: bounded integral base case, exact sum-preserving restrictions, then localizing determination using the existing extension lemma."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper base change on the localizing closure of bounded constructible integral pro-etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally and iff_exists_appLE (Morphisms/RingHomProperties), sourceLocalClosure stability instances (Morphisms/LocalClosure), and IsEtale postcomposition instances (Morphisms/Etale). These concern geometric morphism properties, not derived sheaf base change.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper|localizing.*closure [AlgebraicGeometry]",
+   "results": "25 displayed hits in Mathlib/AlgebraicGeometry, including ValuativeCriterion.lean:224, Sites/SheafQuasiCompact.lean:28, Sites/Pretopology.lean:14,37 and Morphisms/Integral.lean:58. They concern stability of geometric morphism properties under base change; no derived integral-sheaf exchange theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for derived integral constructible sheaves on a pro-etale site",
+   "results": "8 hits: IsProper.isStableUnderBaseChange (Morphisms.Proper), KaehlerDifferential.isBaseChange_of_formallyEtale, Condensed.lanCondensedSet and lanSheafProfinite, Algebra.Etale.baseChange, GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage, RingHom.Etale.isStableUnderBaseChange and IsEtale.instIsStableUnderBaseChangeScheme. No integral derived sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exchange transformation between proper derived pushforward and pullback is invertible on the localizing triangulated category generated by integral constructible complexes",
+   "results": "8 hits: Functor.isHomological_of_localization, instIsTriangulatedDerivedCategoryMapDerivedCategory, complete_distinguished_essImageDistTriang_morphism, mem_mapTriangle_essImage_of_distinguished, Triangulated.Localization.isTriangulated, and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, exists_iso_singleFunctor_obj_of_isGE_of_isLE, exists_iso_Q_obj_of_isGE. They give exactness, localization and representatives, not this exchange theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingClosure|pro.etale|[Cc]onstructible.*[Dd]erived|[Dd]erived.*[Bb]ase[Cc]hange [CategoryTheory]",
+   "results": "OK, 0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper pushforward exchange morphism for l-adic integer sheaves is an isomorphism on the triangulated subcategory generated under coproducts by bounded constructible objects",
+   "results": "8 hits: sheafPushforwardCocontinuousCompSheafToPresheafIso and components, sheafPushforwardContinuousIso and inclusion comparison, SheafOfModules.pushforwardNatIso, IsSolid.isIso_solidification_map and IsIsoPullbackObjUnitToUnitOfFinal. These concern underived sheaves or solidification, not integral derived proper exchange on a localizing category.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.NatTrans",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(exchange|pushforward)|localizing.*(constructible|baseChange)|baseChange.*[Ii]sIso",
+   "results": "One hit in AlgebraicGeometry/Gluing.lean:499, a geometric isomorphism-property stability construction. No derived proper exchange theorem. Search scoped to AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -62,5 +185,69 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sf-pf-adic-base-change",
+  "worker": "stage1",
+  "summary": "Three-step localizing proof using existing bounded integral proper base change, explicit restricted functor types, and the generic extension lemma for the specified exchange. Corrected the stale integral-models tool-use description and replaced the unsupported inference from naturality to shift compatibility by an existing statement that already extends this exchange. Preserved the statement and all imported metadata. No new nodes. Second reading replaces the unnecessary qcqs route for Dctf=Dbc by the already cited integral-models equality and checks the ordinary/termwise exchange identification using exact coefficient pullbacks and derived-functor identifications. Codex maintainer reading: step 2 now cites the derived pullback-composition lemma and the conjugate comparison of the two termwise pullback composition isomorphisms.",
+  "blueprint": "First sentence: step 1 supplies the bounded integral base case via det-thm-sfb-proper-base-change-integral (1),(3). Second sentence: step 2 supplies exactness, sums and functor types. Final two sentences: step 3 applies the existing det-proper-base-change-unbounded-extension, which realizes sk-lem-sf-determination for exactly this mate. The current unit route (proper-base-change-unbounded and integral localizing estimates) is retained; only node-level tools are reused.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Its opening equality Dctf=Dbc identifies the generator categories and their localizing closures in the standing integral setting; clause (3) preserves bounded constructible integral objects under the two inverse images."
+   },
+   {
+    "node": "det-proper-image-localizing-proper",
+    "why": "Provides proper direct-image preservation and exact sum-preserving restrictions on the localizing categories."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-pullback",
+    "why": "Provides exact sum-preserving inverse-image restrictions on localizing categories."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Ensures the base-changed vertical map p' is proper."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-integral",
+    "why": "Its clause (3) supplies the ordinary integral base-change isomorphism on Dbc, and clause (1) its constructible endpoints. This existing stronger bounded theorem is the base case of the same localizing determination argument; no new clause-restatement node is created."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-extension",
+    "why": "Generic conditional extension lemma for the specified unit/comparison/counit exchange, in the proper-base-change-unbounded unit explicitly cited by the current blueprint. It carries the shift-compatible determination argument; step 1 supplies its bounded-generator hypothesis."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Clause (1) and its final paragraph identify the pulled-back coefficient sheaves and make module pullback exact, checking the ringed-square and termwise-pullback hypotheses of the canonical exchange comparison."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "The exact-functor clause identifies the derived inverse images with the termwise functors used by the generic extension statement, including the induced composition comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "States that the derived pullback composition comparison used in the ambient exchange theta is the class of the termwise module-pullback composition isomorphism; step 2 uses it to identify the ambient exchange with the termwise map of the extension lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-integral-models",
+  "det-proper-image-localizing-proper",
+  "det-proper-base-change-unbounded-pullback",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-proper-base-change-unbounded-extension",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-a36f35885",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-a36f35885 (reviewer sub-agent of L); spot-checked: I read the item against the main-20261015 blueprint statement and proof, the unit _section.md, and every cited node's full statement, plus all 10 proof steps of det-thm-sfb-proper-base-change-integral. The statement is verbatim and not weakened: p proper, g arbitrary, O_E module-object coefficients, ordinary uncompleted Loc(Dbc) in the standing setting (separated finite-type k-schemes, char k>0, char k≠ℓ). Step 1: clause (3) of the bounded integral theorem gives invertibility on Dbc of the ambient exchange of def-weil-pbc-ambient-ringed-exchange, for any g of the setting; its own step 7 confirms which map. Clause (1), integral-models (3) and permanence (b) give the endpoints. The blueprint takes this base case from thm-cbc-complete-proetale, which needs compact-support, etale-origin and completion comparisons; the bounded integral theorem states exactly the bounded fact needed, so I accept it as a tool use. Step 2: det-proper-image-localizing-proper (its unconditional O_E paragraph) and the pullback node give exact sum-preserving functors on Loc; Dctf=Dbc gives Loc(Dctf)=Loc(Dbc). Step 3: the extension lemma's hypotheses hold (O_E admissible, square cartesian, p proper) and its beta_K is the item's map, so step 1 discharges its Dctf hypothesis and it gives invertibility on all of Loc. Fault repaired (C1/C4): step 2 identified the composition comparison inside theta_square with the termwise one without citing lem-weil-pbc-proetale-derived-pullback-composition, and without showing that this termwise isomorphism equals the one of def-sfb-module-upper-star-comp used by the extension lemma. The corrected item file cites that lemma and adds the conjugation argument: both pullback comparisons are conjugates of the pushforward composition, which is the identity on sections, and conjugation is a bijection (def-weil-pbc-adjunction-conjugate). Three citations and one split_report tool_uses entry were added; the statement, stmt_deps and steps 1 and 3 are unchanged. No new nodes, and the reachability check finds no cycle (the only citer is sk-thm-sf-pf-adic). No SGA source is used. Small cases checked: K=0, empty scheme, g=id, empty coproduct, non-flat g, and non-complete infinite sums. The unit record sk-thm-sf-pf-adic.json still points at the older master sketch; that is a maintainer metadata issue, not a fault of this delivery.; 1 file(s) fixed by the reviewer"
  }
 }
