@@ -203,5 +203,38 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-4b03817d3 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, all cited DAG statements, Stacks sources 099U/099V/099W/072W/03FD/079Q/079H, and the recorded searches. The arbitrary-ring module argument is mathematically sound, hypotheses and base-change action are checked, edge cases pass, no new nodes or duplicates exist, and dependency traversal is acyclic. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedComparisonInjectiveAcyclicity",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_homology_comparisonRingedModuleDirectImage_of_injective",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.comparisonEtaleModel",
+   "AlgebraicGeometry.Scheme.comparisonEtaleModelTopology",
+   "AlgebraicGeometry.Scheme.comparisonEtaleRing",
+   "AlgebraicGeometry.Scheme.comparisonRingAdjunction",
+   "AlgebraicGeometry.Scheme.comparisonProEtaleRing",
+   "AlgebraicGeometry.Scheme.comparisonModelInclusion",
+   "AlgebraicGeometry.Scheme.comparisonModelInclusion_isContinuous",
+   "AlgebraicGeometry.Scheme.comparisonModelRingUnit",
+   "AlgebraicGeometry.Scheme.comparisonRingedModuleInverseImage",
+   "AlgebraicGeometry.Scheme.comparisonRingedModuleDirectImage",
+   "AlgebraicGeometry.Scheme.comparisonRingedModuleDirectImage_additive",
+   "AlgebraicGeometry.Scheme.isZero_homology_comparisonRingedModuleDirectImage_of_injective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedComparisonInjectiveAcyclicity.lean",
+  "statement": "theorem isZero_homology_comparisonRingedModuleDirectImage_of_injective (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (I : ringedSiteModules.{u + 1} (comparisonEtaleRing X Λ)) [Injective I] (J : InjectiveResolution ((comparisonRingedModuleInverseImage X Λ).obj I)) (q : ℕ) (hq : 0 < q) : IsZero (((comparisonRingedModuleDirectImage X Λ).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex |>.homology q)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Arbitrary discrete commutative coefficients, intrinsic ringed-site modules. The pro-etale ring is the actual inverse image of the constant etale ring; module inverse image uses the canonical ring unit and constructed module pullback on AsSmall models, followed by transport back. Vanishing is stated as H^q of direct image applied to EVERY injective module resolution, precisely the node's stated definition of R^q, using InjectiveResolution.isoRightDerivedObj. The resolution binder is universally quantified, not a choice of an acyclic resolution or an additional property of I. All helper data is constructed; only the main theorem is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-27e42076c",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked sources, all statement dependencies, canonical constructions, universes, edge cases, exact statement field, docstrings and reports. scompile.py passed both checks without warnings; no changes needed."
  }
 }
