@@ -7,7 +7,7 @@
    "place": "step 2 of its split (source: ## Proof, second paragraph; the equivalence of the Hankel condition with rationality is stated in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157 (Bourbaki, Algèbre IV.5, Exercise 3(d), quoted in the proof of Lemma 27.9) without proof)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite shift span gives a linear recurrence",
@@ -19,13 +19,71 @@
  "stmt_deps": [
   "def-weil-field",
   "def-weil-sequence-subspace",
+  "def-weil-submodule-span",
   "def-weil-finite-dimensional-subspace",
   "def-weil-vector-space-dimension",
   "def-weil-eventual-linear-recurrence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D=\\dim_K V$. Each $R_j$ belongs to $V$ by the definition of $V$. If $D=0$, then $V=\\{0\\}$, so every $R_j=0$; taking $d=1$ and $a_0=0$ gives $R_1+a_0R_0=0$, and $1=\\max(D,1)$. This handles the zero-dimensional case.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-vector-space-dimension",
+    "def-weil-sequence-subspace",
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, second paragraph: choose the least d≥1 for which R_0,…,R_d are dependent"
+   }
+  },
+  {
+   "text": "Assume $D>0$. Then $V\\neq\\{0\\}$, so some $R_j\\neq0$, i.e. some $c_{j+s}\\neq0$; hence $R_0=(c_s)_{s\\geq0}\\neq0$ and the one-element family $R_0$ is linearly independent. The family $R_0,\\ldots,R_D$ in the finite-dimensional space $V$ cannot be linearly independent: if it were, the cited dimension bound would give $D+1\\le D$. Hence there is a least integer $d\\ge1$ for which $R_0,\\ldots,R_d$ are linearly dependent, and $d\\le D$. The family $R_0,\\ldots,R_{d-1}$ is linearly independent: for $d=1$ because $R_0\\neq0$, for $d\\geq2$ by the minimality of $d$. Thus $1\\le d\\le D=\\max(D,1)$.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, second paragraph: choose the least d≥1 for which R_0,…,R_d are dependent"
+   }
+  },
+  {
+   "text": "Because $R_0,\\ldots,R_d$ are dependent, there are coefficients $b_0,\\ldots,b_d\\in K$, not all zero, with $\\sum_{i=0}^d b_iR_i=0$. The coefficient $b_d$ is nonzero: otherwise the same relation would contradict the linear independence of $R_0,\\ldots,R_{d-1}$. Divide by $b_d$ and set $a_i=b_i/b_d$ for $0\\le i<d$. Then $R_d+a_{d-1}R_{d-1}+\\cdots+a_0R_0=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, second paragraph: choose the least d≥1 for which R_0,…,R_d are dependent"
+   }
+  },
+  {
+   "text": "Evaluating this equality of sequences at coordinate $n\\ge0$ gives $c_{n+d}+a_{d-1}c_{n+d-1}+\\cdots+a_0c_n=0$ for every $n$. This is precisely the asserted recurrence from index $0$ on, hence also the stated eventual-recurrence formulation.",
+   "uses": [
+    "def-weil-eventual-linear-recurrence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+    "place": "## Proof, second paragraph: reading the coordinate n of the relation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-sequence-subspace",
+  "def-weil-submodule-span",
+  "lem-weil-independent-family-card-le-dimension",
+  "def-weil-eventual-linear-recurrence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
+  "place": "## Proof, second paragraph. The source states the finite-dimensional dependence argument without proof; the argument here spells out the zero-dimensional case, minimal dependent index, normalization of the leading coefficient, and coordinatewise recurrence."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,10 +98,17 @@
    "results": "the ingredients (a maximal independent subfamily, card of an independent family ≤ finrank, LinearIndependent.fin_cons characterisations) exist; no statement producing a relation R_d ∈ span(R_0,…,R_{d-1}) among shifted sequences",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear independent family cardinality at most finite dimension field",
+   "results": "8 hits, including LinearIndependent.fintype_card_le_finrank, LinearIndependent.finset_card_le_finrank, and cardinality/rank variants in Mathlib/LinearAlgebra/Dimension/Finite and StrongRankCondition; these provide the existing independent-family dimension bound node, but no exact shift-span recurrence theorem.",
+   "date": "2026-10-16",
+   "verdict": "existing dimension bound only; no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +128,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-criterion"
+ "unit": "sk-prop-criterion",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-shift-span-linear-recurrence",
+  "worker": "stage1",
+  "summary": "Checked the statement against the rationality-criterion blueprint and Milne's quotation of Bourbaki. No exact declaration exists in the source checkout: the existing closed theorem produces a recurrence but does not state the required order bound. Split the finite-dimensional dependence argument into four steps, including the D=0 case, the minimal dependent index, normalization of its nonzero leading coefficient, and coordinatewise reading. Reused the existing Mathlib-backed dimension bound node; no new node was needed.",
+  "blueprint": "Realizes the second-paragraph instruction to choose the least d≥1 for which R_0,…,R_d are dependent and then read coordinates of the resulting relation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-0de9ff443",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-0de9ff443 (reviewer sub-agent of L); spot-checked: I read the item, the unit sk-prop-criterion, the parent prop-weil-rationality-criterion (step 2 is its only use of the item), all six stmt_deps (each is a Mathlib leaf), and lem-weil-independent-family-card-le-dimension (Mathlib leaf LinearIndependent.fintype_card_le_finrank). I also read the main-20261015 blueprint proof, second paragraph; its text is the same as master's ## Proof. Milne LEC p.157 quotes Bourbaki Algèbre IV.5 Ex.3 without a proof. The statement is true and is not weakened: arbitrary field and sequence, 1<=d<=max(dim V,1), and the same sign convention as def-weil-eventual-linear-recurrence. Small cases checked: c=0; (1,1,...); (1,0,0,...); (0,1,0,...); Fibonacci. Step 1 (D=0 gives V=0, take d=1, a_0=0) is fine. Step 2 had one gap: 'by minimality R_0..R_{d-1} are independent' does not cover d=1, because minimality over d>=1 says nothing about R_0 alone, and it fails if R_0=0. The blueprint treats R_0=0 as a separate case. Fixed in fixes/dag/nodes/sec-zeta-weil/lem-weil-shift-span-linear-recurrence.json, step 2 text only: D>0 gives V nonzero, so some c_n is nonzero, so R_0=c is nonzero; independence of R_0..R_{d-1} then holds for d=1 by this and for d>=2 by minimality; d<=D comes from R_0..R_D being dependent. Steps 3 and 4 (nonzero leading coefficient, normalize, read coordinate n with m=0) are elementary and correct. proof_deps equals the union of the uses. No new nodes. No duplicate found in the DAG: lem-weil-linear-recurrence-shift-span is the converse, and lem-weil-rational-series-finite-shift-span is a different equivalence in another unit. No off-unit non-leaf citation, so no tool_uses are needed or accepted. No SGA is cited. This is not a target node, so no base-change or coefficient-category check applies.; 1 file(s) fixed by the reviewer"
+ }
 }
