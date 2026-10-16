@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-dc-upper-shriek-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The adjunction $Rf_!\\dashv Rf^!$ on $D_{\\mathrm{cons}}$",
@@ -17,12 +17,98 @@
   "sk-def-sfb-dc-lower-shriek",
   "def-sfb-dc-upper-shriek-of-compactification-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Use the chosen compactification $c_f$ in [def-sfb-dc-upper-shriek-functor]. By that definition $Rf^!=Rf^!_{c_f}$, and by [sk-def-sfb-dc-lower-shriek] $Rf_!=Rf_!^{c_f}$. The assumed right adjoint of $Rp_{f*}$ is precisely the hypothesis needed to take $c=c_f$ in [def-sfb-dc-upper-shriek-of-compactification-adjunction]. Define the required adjunction to be that datum $Rf_!^{c_f}\\dashv Rf^!_{c_f}$; substituting the two defining equalities gives $Rf_!\\dashv Rf^!$. Its right-hand functor and the adjunction datum witness that $Rf_!$ is a left adjoint, and its left-hand functor and the same datum witness that $Rf^!$ is a right adjoint. No independence of compactification or additional existence theorem is used.",
+   "uses": [
+    "def-sfb-dc-upper-shriek-functor",
+    "sk-def-sfb-dc-lower-shriek",
+    "def-sfb-dc-upper-shriek-of-compactification-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/def-sfb-dc-upper-shriek-adjunction.md",
+    "place": "Entire definition; chosen-compactification specialization and final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dc-upper-shriek-functor",
+  "sk-def-sfb-dc-lower-shriek",
+  "def-sfb-dc-upper-shriek-of-compactification-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/def-sfb-dc-upper-shriek-adjunction.md",
+  "place": "Entire definition; expanding the definitional specialization at $c_f$"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*Shriek|UpperShriekAdjunction|upperShriekAdjunction",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits including CategoryTheory.Adjunction.comp and its homEquiv/unit/counit lemmas in Mathlib.CategoryTheory.Adjunction.Basic; source read at Mathlib/CategoryTheory/Adjunction/Basic.lean:567. This composes abstract adjunctions; it does not define this chosen-compactification adjunction on bounded constructible pro-etale module complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image right adjoint to compactly supported pushforward on bounded constructible pro-etale derived categories",
+   "results": "8 hits: TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Sheaf.pullback, generic sheaf pushforward right-adjoint instances, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, TopCat.Sheaf.pullbackPushforwardAdjunction. These concern ordinary pullback/pushforward, not the specified constructible exceptional adjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded constructible pro-etale complexes with condensed ring coefficients, define the lower shriek upper shriek adjunction using the chosen compactification",
+   "results": "8 hits concerning LightCondSet.topCatAdjunction, locally constant condensed/light condensed sets and modules, and Condensed.lanCondensedSet. None is a compactly supported derived pushforward or exceptional inverse image on bounded constructible pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an adjunction for each compactification, define the exceptional pullback adjunction by evaluating at a fixed chosen compactification",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, LightCondSet.topCatAdjunction, TopCat.Sheaf.instIsLeftAdjointPullback, CondensedSet.compactlyGeneratedAdjunction, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.ev. None supplies the project-specific chosen compactification functors or this adjunction datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def comp |def isLeftAdjoint|def isRightAdjoint|theorem isLeftAdjoint|theorem isRightAdjoint",
+   "results": "3 hits in CategoryTheory/Adjunction: Comma.lean:159,164, and Basic.lean:567 (CategoryTheory.Adjunction.comp). Basic.lean:206 was also read: isLeftAdjoint is the elementary existential witness from an adjunction, with the dual generated by to_dual. No project-specific chosen-compactification definition appears.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isLeftAdjoint",
+   "results": "One exact generic hit: CategoryTheory.Adjunction.isLeftAdjoint. Read Mathlib/CategoryTheory/Adjunction/Basic.lean:206 and the existential class definitions at lines 134 and 139. This proves the final elementary consequence from an adjunction datum; it does not define the specified chosen-compactification datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between two functors supplies an IsLeftAdjoint instance for the first and an IsRightAdjoint instance for the second",
+   "results": "Eight hits, including CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, the two chosen-adjoint instances, ofIsLeftAdjoint, ofIsRightAdjoint, and two notation declarations. These confirm the final existential witnesses, but none defines the bounded constructible condensed-module adjunction at the chosen compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(inverse|pullback)|constructible.*adjunction|compactification.*adjunction",
+   "results": "No hits in Mathlib. Independent second-reader search with more general exceptional-inverse-image and constructible-adjunction vocabulary.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -34,5 +120,20 @@
   "def-sfb-dc-upper-shriek-of-compactification-adjunction",
   "sk-def-sfb-dc-lower-shriek"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-upper-shriek-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the main-20261015 definition and all three statement dependencies unchanged. Checked the source and each dependency statement: specialization of the existing compactification adjunction at the very same chosen compactification supplies the datum. Wrote the definitional substitution and the two existential adjoint witnesses as one elementary step. Searched the full blueprint/DAG and slopmaster2 sources; searched Mathlib by both semantic phrasings, Loogle and grep. No project attachment or exact Mathlib definition was found. No new node is needed.",
+  "blueprint": "The entire definition in def-sfb-dc-upper-shriek-adjunction.md, especially the sentence identifying the adjunction with that for c_f and the final left/right adjoint sentence. This realizes the chosen-compactification clause of sk-def-sfb-dc-upper-shriek/_section.md without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-056a1c890",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-056a1c890 (reviewer sub-agent of L); spot-checked: Read the item, route, cited DAG statements, blueprint sources, delivery report, and exact master declaration. The chosen compactification, coefficient category, right-adjoint hypothesis, and adjunction specialization all match. The single proof step is elementary and complete; no duplicate, circularity, missing hypothesis, route violation, or repair is present. Review written to review.md."
+ }
 }
