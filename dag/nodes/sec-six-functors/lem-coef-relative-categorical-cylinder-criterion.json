@@ -265,5 +265,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCategoricalCylinderCriterion",
+  "declaration": "SSet.Enhanced.relative_categorical_cylinder_criterion",
+  "declarations": [
+   "SSet.Enhanced.endpointPushoutMap",
+   "SSet.Enhanced.RelativeCategoricalMappingCylinder",
+   "SSet.Enhanced.relativeFunctorSubcomplex",
+   "SSet.Enhanced.RelativeEquivalenceEdge",
+   "SSet.Enhanced.relative_categorical_cylinder_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeCategoricalCylinderCriterion.lean",
+  "statement": "theorem relative_categorical_cylinder_criterion {A B Q : SSet.{u}} (i : A ⟶ B) (hi : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) [Quasicategory Q] (f_A : A ⟶ Q) (f₀ f₁ : B ⟶ Q) (h₀ : i ≫ f₀ = f_A) (h₁ : i ≫ f₁ = f_A) (c : RelativeCategoricalMappingCylinder.{u, v} i) : (∃ e : (relativeFunctorSubcomplex i f_A).toSSet _⦋1⦌, RelativeEquivalenceEdge i f_A f₀ f₁ e) ↔ ∃ f : c.carrier ⟶ Q, c.s₀ ≫ f = f₀ ∧ c.s₁ ≫ f = f₁",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48e0e5adf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, both stmt deps (def-cbc IsEquivalenceEdge/diagramVertex, Joyal exists_joyal_model_structure), Kerodon 01K5/01KD place, module, report. Every clause matches: degreewise-injective i; pushout i i with canonical pushout.desc injective degreewise; cylinder fields sections/relative/endpoint_injective and categoricalEquivalence copied verbatim from the Joyal weak-equivalence test (universe v free, no equation); strict fiber subcomplex with real closure proof; equivalence edge with inverse and triangles inside the fiber, correct source δ1/target δ0; extension over the same given cylinder; quantifier order correct. Proved in /tmp by rfl that pre i sends diagramVertex f to diagramVertex (i≫f), so the conventions agree. Edge cases A=∅, A=B, B=∅, Q=∅, f0=f1, Δ0→Δ1 ok. Gates: no hollow defs, source/blueprint docstrings, 5-step proof docstring, only sorry, node differs only in lean, statement verbatim, Worker report and Second reading by Q46 present, snapshot identical to commit. nt_compile.py --json: module compiles clean, no warnings. Non-blocking note: relativeFunctorSubcomplex coincides with calculusFiber of a non-dependency node."
  }
 }

@@ -29,7 +29,8 @@
   "place": "Dual of Proposition 7.7.1, printed p. 396 (PDF p. 411), using the ordinary all-cofibrant case of Definition 7.4.12. No Stacks tag states this arbitrary-product infinity-localization comparison. Read online on 2026-10-17; not archived in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -251,5 +252,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownLocalizationProducts",
+  "declaration": "SSet.Enhanced.brown_localization_products",
+  "declarations": [
+   "SSet.Enhanced.brownProductLocalizationMap",
+   "SSet.Enhanced.brown_localization_products"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BrownLocalizationProducts.lean",
+  "statement": "theorem brown_localization_products (J : Type w) (A : J → Type u) [∀ j : J, Category.{v} (A j)] (zero : ∀ j : J, A j) (hzero : ∀ j : J, CategoryTheory.Limits.IsInitial (zero j)) (C W : ∀ j : J, MorphismProperty (A j)) (hCiso : ∀ j : J, MorphismProperty.isomorphisms (A j) ≤ C j) (hWiso : ∀ j : J, MorphismProperty.isomorphisms (A j) ≤ W j) [∀ j : J, (C j).IsStableUnderComposition] [∀ j : J, (W j).HasTwoOutOfThreeProperty] [∀ j : J, (W j).IsStableUnderRetracts] (hcof : ∀ (j : J) (X : A j), C j ((hzero j).to X)) [∀ j : J, MorphismProperty.HasFactorization (C j) (W j)] (hpush : ∀ (j : J) (X Y Z : A j) (i : X ⟶ Y) (f : X ⟶ Z), C j i → HasPushout i f) [∀ j : J, (C j).IsStableUnderCobaseChange] [∀ j : J, (C j ⊓ W j).IsStableUnderCobaseChange] (L : J → SSet.{max u v w t}) (q : ∀ j : J, largeNerve.{u, v, max w t} (A j) ⟶ L j) (hq : ∀ j : J, IsLocalization (W j) (q j)) : IsLocalization.{max w u, max w v, t} (MorphismProperty.pi W) (brownProductLocalizationMap.{u, v, w, t} A L q)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed coherent localization definition without restating it. The only helper constructs the specified product map via the nerves of coordinate projections and the categorical simplicial product; all product universes include the independent index universe. Adds the already-landed definition node def-coef-coherent-localization-interface to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a84f5dbd4",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Every node clause matches the Lean exactly (checked against the Mathlib definitions of MorphismProperty.pi, HasFactorization (C then W), IsStableUnderCobaseChange, HasTwoOutOfThreeProperty, the Pi category) and against the landed FiniteReedy.IsLocalization interface (quasicategory, inverts W, equivalence on the whole functor category equal to precomposition). The product map is canonical (Pi.lift of projection nerves then q_j) with real data; the only theorem proof is sorry. Empty, singleton and infinite J, and unsaturated W, are covered. Universes u v w t are independent and bound; both sides live in SSet.{max u v w t}. The node differs from the base only in lean and the added landed stmt_dep def-coef-coherent-localization-interface; lean.statement is verbatim; docstrings carry the source and blueprint; the plan matches all 7 proof steps; report has Worker report and Second reading by Q56. nt_compile --json: exit 0, no errors or warnings, reproduced twice. Non-blocking note: proof input lem-coef-brown-fibrant-localization-pullbacks now has a module, importable when the proof is written."
  }
 }
