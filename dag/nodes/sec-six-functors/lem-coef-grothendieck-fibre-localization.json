@@ -27,9 +27,115 @@
   "lem-coef-model-infinity-derived-adjunction",
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first in covariant notation. Put $C=B^{\\mathrm{op}}$ and $H(c)=F(c)^{\\mathrm{op}}$, with opposite model structures and opposite transition functors. Its ordinary opfibration total category $T$ is $E^{\\mathrm{op}}$: arrows over $a:c\\to d$ have components $a_!X\\to Y$, where $a_!=H(a)$. Its weak equivalences $W_T$ are precisely arrows with invertible base and weak-equivalence component. The opposite model axioms follow by interchanging the two lifting/factorization systems, and every $a_!$ preserves weak equivalences by hypothesis. We shall prove the covariant localization statement for this diagram. By [lem-coef-hammock-infinity-localization], a locally Kan replacement of $L^H(T,W_T)$ presents the localization $\\mathcal L$ and its mapping spaces, naturally in relative functors. The projection to $C$ carries $W_T$ to isomorphisms, hence induces $p:\\mathcal L\\to NC$ by that universal property. Concretely, composing each row of a hammock after inverting its leftward base isomorphisms gives a base arrow. Commutativity of its squares and the identity endpoint vertical maps show that all rows give the same arrow; column reduction preserves it and concatenation composes it. This defines a simplicial functor $L^H(T,W_T)\\to C$, where $C$ has discrete mapping sets, extending the ordinary projection. For computations over $NC$ apply the functorial locally Kan replacement fixing discrete categories of [lem-coef-coherent-nerve-comparison] to this functor; this retains a map of mapping spaces to the discrete sets $\\operatorname{Hom}_C(c,d)$ and presents the projection $p$ above. Fix containing universes $\\mathcal U\\in\\mathcal U'$ large enough that $C$, $T$, all slices, their hammock mapping simplicial sets, the locally Kan replacements, and (for the final clause) the values of the given diagram $G$ in this proof are $\\mathcal U$-small; form their functor and fibration infinity categories in $\\mathcal U'$. This is the size convention required when applying straightening below.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Section 4.2, Definition 4.13 and Corollary 4.15; agent slice-adjunction proof replacing the defective even-length reduction in Theorem 4.19 / Proposition 4.20."
+   }
+  },
+  {
+   "text": "Fix $d\\in C$ and form $T_d=(C_{/d})\\times_C T$. Explicitly an object is $(\\alpha:c\\to d,X\\in H(c))$; a morphism to $(\\beta:c'\\to d,X')$ is $(a,u)$ with $\\beta a=\\alpha$ and $u:a_!X\\to X'$. Let $W_d$ consist of arrows whose underlying arrow in $T$ lies in $W_T$. There are functors $r_d:T_d\\to H(d)$ and $j_d:H(d)\\to T_d$ given by $r_d(\\alpha,X)=\\alpha_!X$, $r_d(a,u)=\\beta_!u$, and $j_dY=(1_d,Y)$. Both preserve weak equivalences: for $r_d$ use preservation of weak equivalences by $\\beta_!$; for $j_d$ the base is an identity. The arrow $\\eta_{(\\alpha,X)}:(\\alpha,X)\\to j_dr_d(\\alpha,X)$ has base $\\alpha$ and component $1_{\\alpha_!X}$. Every arrow $(\\alpha,X)\\to j_dY$ is uniquely its composite with $j_d(v)$ for $v:\\alpha_!X\\to Y$. Thus $r_d\\dashv j_d$, $r_dj_d=1$, the counit is the identity, and $r_d\\eta=1$, $\\eta j_d=1$, as strict natural identities. No model structure on $T$ or $T_d$ has been assumed or constructed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent proof: explicit opfibration over the ordinary slice C/d; the factorization of arrows used in Proposition 4.20."
+   }
+  },
+  {
+   "text": "Localize these relative functors using [lem-coef-hammock-infinity-localization], obtaining $R_d:\\mathcal L_d\\to H(d)_\\infty$ and $J_d:H(d)_\\infty\\to\\mathcal L_d$, where $\\mathcal L_d=T_d[W_d^{-1}]_\\infty$. The same universal property includes full functor categories, so the ordinary unit, after composing with localization, extends to a coherent transformation $\\eta_\\infty:1\\to J_dR_d$; its uniqueness includes the mapping spaces of transformations. It also extends $r_dj_d=1$, $r_d\\eta=1$, and $\\eta j_d=1$ to their coherent identities. For $x\\in\\mathcal L_d$ and $y\\in H(d)_\\infty$, the maps of spaces $h\\mapsto J_d(h)\\eta_{\\infty,x}$ and $k\\mapsto R_d(k)$ give inverse equivalences between $\\operatorname{Map}_{H(d)_\\infty}(R_dx,y)$ and $\\operatorname{Map}_{\\mathcal L_d}(x,J_dy)$. Indeed the first composite is $h\\mapsto hR_d(\\eta_{\\infty,x})=h$; the other is $k\\mapsto J_dR_d(k)\\eta_{\\infty,x}=\\eta_{\\infty,J_dy}k=k$, by naturality and the two unit identities. These are homotopies of maps of mapping spaces, and the functor-category universal property makes them coherent and natural, rather than merely identities on components. In particular this proves a localized adjunction without any Quillen assumption on $r_d$ or $j_d$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent proof from the full functor-category localization universal property; slice replacement for Proposition 4.20."
+   }
+  },
+  {
+   "text": "For $X\\in H(c)$, $Y\\in H(d)$ and $\\phi:c\\to d$, projection $T_d\\to T$ induces an isomorphism of simplicial sets\n$$L^H(T_d,W_d)((\\phi,X),(1_d,Y))\\cong L^H(T,W_T)(X,Y)_\\phi.$$\nHere the subscript is the inverse image of $\\phi$ under the map to the discrete set of base arrows. To construct the inverse, take any reduced hammock on the right. In each row assign to every vertex over $c_i$ the arrow $\\alpha_i:c_i\\to d$ obtained by composing the remaining base arrows towards the final vertex $Y$, using the inverse base arrow whenever the horizontal arrow points left. These inverses exist because all leftward arrows are in $W_T$. Its first and last arrows to $d$ are $\\phi$ and $1_d$. Every horizontal arrow over $a$ satisfies $\\alpha_{i+1}a=\\alpha_i$ (or the reversed equation for a leftward arrow), so lifts uniquely to $T_d$. For every vertical arrow over $v$, commutativity of the suffix of the hammock and the identity at $Y$ give $\\alpha'_iv=\\alpha_i$, so that arrow also lifts uniquely and remains in $W_d$. This constructs a unique hammock upstairs. Deleting/repeating rows, composing adjacent columns and deleting identity columns leave precisely the same suffix composites; thus lifting commutes with faces, degeneracies and reduction. These operations are the hammock operations specified by [lem-coef-hammock-infinity-localization]. That node and the mapping-space comparison of [lem-coef-coherent-nerve-comparison] therefore identify the corresponding localized mapping spaces. Taking a single component over a discrete set preserves the weak equivalences here; it is also a homotopy fibre, by [lem-coef-kan-quillen-right-proper] since maps of Kan spaces to a discrete set are Kan fibrations (a horn has constant base value).",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent proof using full reduced hammocks of Definition 4.13 / Corollary 4.15, not the fixed four-arrow categories in Proposition 4.20."
+   }
+  },
+  {
+   "text": "Combining steps 3 and 4 with $x=(\\phi,X)$ and $y=Y$ gives\n$$\\operatorname{Map}_{\\mathcal L}(X,Y)_\\phi\\simeq\\operatorname{Map}_{H(d)_\\infty}(\\phi_!X,Y).$$\nThe map from right to left is postcomposition with the fibre inclusion followed by precomposition with the image of the ordinary cocartesian arrow $\\bar\\phi:X\\to\\phi_!X$: in step 3 it is $h\\mapsto J_d(h)\\eta_x$, and projection sends $\\eta_x$ to $\\bar\\phi$. Thus the comparison has the required map, not just the required homotopy type. It is natural in endpoint arrows and in relative maps of the diagrams: the suffix formula in step 4 commutes with these maps, and the unit and counit in step 3 are the stated natural transformations. All mapping spaces decompose as the coproduct of these components, because the base mapping set is discrete.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent deduction of the conclusion of Proposition 4.20 from the slice calculation; explicit comparison map."
+   }
+  },
+  {
+   "text": "The image of $\\bar\\phi:X\\to\\phi_!X$ in $\\mathcal L$ is cocartesian by the intrinsic criterion in [lem-coef-cocartesian-straightening]. To check it, fix $Z\\in H(e)$ and $g:d\\to e$. On the homotopy fibres over $g$ and $g\\phi$, the map induced by precomposition with $\\bar\\phi$ becomes, by step 5,\n$$\\operatorname{Map}_{H(e)_\\infty}(g_!\\phi_!X,Z)\\longrightarrow\\operatorname{Map}_{H(e)_\\infty}((g\\phi)_!X,Z),$$\nwhich is the identity under strict functoriality of $H$. More precisely, if $I_e:H(e)_\\infty\\to\\mathcal L$ is the fibre inclusion, the equivalence of step 5 sends $h$ to $I_e(h)\\bar g_{\\phi_!X}$. Precomposing once more with $\\bar\\phi_X$ gives $I_e(h)\\bar g_{\\phi_!X}\\bar\\phi_X=I_e(h)\\overline{g\\phi}_X$, the equivalence of step 5 for $g\\phi$. This equality holds on the ordinary lifts and gives the coherent homotopy on localized mapping spaces by step 1. Thus the assertion concerns the actual precomposition map. Hence the whole square is a homotopy pullback: its bottom spaces are discrete and its homotopy fibres are the displayed equivalences, using [lem-coef-kan-quillen-right-proper]. Such lifts exist for every base arrow and every source, so $p$ is intrinsically a cocartesian fibration and has a simplicial cocartesian replacement over $NC$, as that straightening node explicitly permits. Write $\\mathcal P_c=\\mathcal L\\times_{NC}\\{c\\}$ for the intrinsic fibre, to distinguish it from the localized slice $\\mathcal L_c$ of step 3. At $\\phi=1_c$, step 5 identifies the mapping spaces of $H(c)_\\infty$ with the homotopy fibres over $1_c$ of the mapping spaces of $\\mathcal L$. These are precisely the mapping spaces between its image objects in $\\mathcal P_c$, so the canonical map $H(c)_\\infty\\to\\mathcal P_c$ is fully faithful. It is essentially surjective also for the intrinsic homotopy fibre: an object there is represented by an object $Z\\in H(a)$ and a base isomorphism $\\sigma:a\\to c$. The ordinary lift $Z\\to\\sigma_!Z$ lies in $W_T$, since its component is an identity and its base is invertible. Its image therefore identifies that fibre object with the object $\\sigma_!Z$ represented by $H(c)$. The object-fixing hammock replacement represents all objects of $\\mathcal L$, so this accounts for every fibre object, including after a cocartesian replacement over $NC$. By [lem-coef-infinity-full-essential-image] this is a fibre equivalence.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.21, mapping-space criterion, with its mapping comparison supplied by steps 2-5 instead of the fixed-length zigzag argument."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-straightening] to $p$. Its classifying diagram has the localized fibres just identified, and its transport is localized $\\phi_!$, because its chosen lifts are the images of $\\bar\\phi$. These identifications are coherent. By step 1 the localization $q:NT\\to\\mathcal L$ lies over $NC$, and by step 6 it carries every ordinary cocartesian arrow $\\bar\\phi$ to a cocartesian arrow of $p$. The ordinary opfibration $NT\\to NC$ is a cocartesian fibration with these lifts, classified by the strict diagram $NH$ of nerves: for a fibre arrow $t:X\\to X'$ over $c$ the equality $\\bar\\phi_{X'}t=(\\phi_!t)\\bar\\phi_X$ is the ordinary naturality square, and for a composable string the strict equalities $\\bar\\psi\\bar\\phi=\\overline{\\psi\\phi}$ hold before localization. Hence $q$ is a morphism of $\\operatorname{coCart}(NC)$, and by the equivalence $\\operatorname{St}_{NC}$ of [lem-coef-cocartesian-straightening] it corresponds to a coherent transformation $\\theta:NH\\to\\operatorname{St}(p)$ in $\\operatorname{Fun}(NC,\\operatorname{Cat}_\\infty)$ whose component at $c$ is the fibre functor $H(c)\\to\\mathcal P_c$, namely the localization at $W_c$ followed by the fibre equivalence of step 6. Now use [lem-coef-system-localization-universal]: localization $L$ is left adjoint to $G(\\mathcal E)=(\\mathcal E,\\operatorname{Eq}(\\mathcal E))$, and its value on $(NH(c),W_c)$ is canonically the hammock localization of [lem-coef-hammock-infinity-localization], both having the same universal property. Postcomposition with this adjunction is an adjunction between $\\operatorname{Fun}(NC,\\mathsf{WCat}_\\infty)$ and $\\operatorname{Fun}(NC,\\operatorname{Cat}_\\infty)$; its left adjoint sends the relative diagram $c\\mapsto(NH(c),W_c)$ (transitions preserve $W$) to $H_\\infty=L\\circ(H,W)$, the diagram obtained by localizing every fibre and transition functor, and its unit $\\lambda:NH\\to H_\\infty$ has the fibre localizations as components. Every component of $\\theta$ inverts $W_c$, so $\\theta$ is a transformation $(H,W)\\to G\\circ\\operatorname{St}(p)$ and factors as $\\theta=\\bar\\theta\\lambda$ for a coherent transformation $\\bar\\theta:H_\\infty\\to\\operatorname{St}(p)$, unique up to a contractible space of choices. Its components $H(c)_\\infty\\to\\mathcal P_c$ are the equivalences of step 6, so by the vertexwise criterion of [lem-cbc-enhanced-functor-cone-calculus] $\\bar\\theta$ is an equivalence, and its transport components are the localized $\\phi_!$. Thus $\\operatorname{St}(p)\\simeq H_\\infty$, and straightening gives $\\mathcal L\\simeq\\int_C H_\\infty$ over $NC$. Reverse opposites to return to $B,F$. Explicitly, for every target infinity category $\\mathcal D$, taking opposites gives $\\operatorname{Fun}(\\mathcal L^{\\mathrm{op}},\\mathcal D)\\simeq\\operatorname{Fun}(\\mathcal L,\\mathcal D^{\\mathrm{op}})^{\\mathrm{op}}$, reversing coherent transformations as well as arrows. Restriction along $q^{\\mathrm{op}}$ corresponds under this identification to the opposite of restriction along $q$; the latter identifies $\\operatorname{Fun}(\\mathcal L,\\mathcal D^{\\mathrm{op}})$ with the full subcategory of $\\operatorname{Fun}(NT,\\mathcal D^{\\mathrm{op}})$ carrying $W_T$ to equivalences. The universal property of [lem-coef-hammock-infinity-localization] therefore identifies the localization of $(T^{\\mathrm{op}},W_T^{\\mathrm{op}})$ with $\\mathcal L^{\\mathrm{op}}$, naturally; cocartesian lifts then become Cartesian lifts. This gives the asserted comparison over $NB$. The covariant mapping formula in step 5 becomes exactly\n$$\\coprod_{f:b\\to c}\\operatorname{Map}_{F(b)_\\infty}(X,f^*Y).$$\nThe ordinary factorization $(f,u)=(f,1)\\circ(1,u)$ shows the specified action on arrows; hammock composition and strict composition of the ordinary lifts give its composition and higher coherences. Its fibre restriction is the original localization functor by construction.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 4.22 and the classifying-diagram identification, proved here by the slice adjunction and straightening; opposite convention as in the item source."
+   }
+  },
+  {
+   "text": "Finally a coherent transformation $F_\\infty\\to G$ is a morphism in $\\operatorname{Fun}(NB^{\\mathrm{op}},\\operatorname{Cat}_\\infty)$. Under the opposite form of [lem-coef-cocartesian-straightening] it induces a functor over $NB$ preserving Cartesian edges. If its fibre components are equivalences, [lem-cbc-enhanced-functor-cone-calculus] says exactly that this coherent transformation is an equivalence in the functor infinity-category. Its image under the inverse straightening equivalence is then an equivalence of Cartesian fibrations, hence an equivalence of their total infinity-categories. This applies to arbitrary coherent transformations of the localized diagrams, with no strict natural transformation on the original model categories required.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.6 / Remark 4.7 interpreted as straightening; formal coherent transformation clause from the existing functor-category criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-system-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: coherent finite-coefficient mapping-complex adjunction. Agent slice-adjunction and full-hammock proof of the needed Grothendieck localization; Haugseng 4.19 even-length reduction is false, as detailed in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +192,115 @@
    "results": "{\"t\": \"2026-10-16T16:40:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
    "date": "2026-10-16",
    "verdict": "Independent second reading: no match: the single hit is sheafification for a Grothendieck topology, not a Grothendieck total category."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|fibrewise.?localiz|fiberwise.?localiz|relative.?nerve",
+   "results": "{\"t\": \"2026-10-16T18:32:11Z\", \"tool\": \"grep\", \"query\": \"unstraighten|fibrewise.?localiz|fiberwise.?localiz|relative.?nerve\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, Sites/Localization.lean:40-65, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean and Bifibrant.lean. These give ordinary fibres, ordinary sheaf or model homotopy-category localizations, not homotopy coherent localization of Cartesian total categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian Grothendieck construction commutes with infinity categorical localization of all fibers",
+   "results": "{\"t\": \"2026-10-16T18:32:12Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian Grothendieck construction commutes with infinity categorical localization of all fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.category\", \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_obj_fiber\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\"], \"digest\": \"d10fe08b25d3f02e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, Sites/Localization.lean:40-65, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean and Bifibrant.lean. These give ordinary fibres, ordinary sheaf or model homotopy-category localizations, not homotopy coherent localization of Cartesian total categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T18:32:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, Sites/Localization.lean:40-65, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean and Bifibrant.lean. These give ordinary fibres, ordinary sheaf or model homotopy-category localizations, not homotopy coherent localization of Cartesian total categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hammock localization of a relative Grothendieck construction gives the unstraightening of its diagram of infinity categories",
+   "results": "{\"t\": \"2026-10-16T18:32:23Z\", \"tool\": \"leanfinder\", \"query\": \"Hammock localization of a relative Grothendieck construction gives the unstraightening of its diagram of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.preInv\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.ι\", \"CategoryTheory.Pseudofunctor.Grothendieck.map\", \"CategoryTheory.Pseudofunctor.CoGrothendieck\", \"CategoryTheory.Pseudofunctor.Grothendieck\", \"CategoryTheory.Grothendieck.mapWhiskerRightAsSmallFunctor\", \"CategoryTheory.Grothendieck.ιCompFunctorFrom\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map\"], \"digest\": \"bde7d4e75685f26e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, Sites/Localization.lean:40-65, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean and Bifibrant.lean. These give ordinary fibres, ordinary sheaf or model homotopy-category localizations, not homotopy coherent localization of Cartesian total categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a Grothendieck fibration of model categories at fiber weak equivalences is the Cartesian infinity category of localized fibers",
+   "results": "{\"t\": \"2026-10-16T18:32:23Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a Grothendieck fibration of model categories at fiber weak equivalences is the Cartesian infinity category of localized fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"506ed61f019b19e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, Sites/Localization.lean:40-65, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean and Bifibrant.lean. These give ordinary fibres, ordinary sheaf or model homotopy-category localizations, not homotopy coherent localization of Cartesian total categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unstraightening a diagram of localized relative categories agrees with localization of the Grothendieck opfibration",
+   "results": "{\"t\": \"2026-10-16T19:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"Unstraightening a diagram of localized relative categories agrees with localization of the Grothendieck opfibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_obj\", \"CategoryTheory.Localization.liftingLift\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.Localization.structuredArrowEquiv_apply\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"CategoryTheory.Localization.fac\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ_lift\"], \"digest\": \"e998ca26d87655c5\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: no match. All eight hits are ordinary localization functor constructions, universal-property composition and whiskering; none is a statement about quasicategorical unstraightening or hammock mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at vertical weak equivalences of a Grothendieck opfibration is the infinity categorical unstraightening of the localized diagram",
+   "results": "{\"t\": \"2026-10-16T19:46:08Z\", \"tool\": \"leanfinder\", \"query\": \"Localization at vertical weak equivalences of a Grothendieck opfibration is the infinity categorical unstraightening of the localized diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"CategoryTheory.Localization.liftingLift\", \"CategoryTheory.Localization.fac\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"CategoryTheory.Localization.isEquivalence\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"489b39e17b7ed172\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categorical localization and homotopy categories, not total infinity categories or their mapping spaces; read Localization/Composition.lean:29-65 and CofibrantObjectHomotopy.lean:234-258."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unstraightening commutes with homotopy coherent localization of every fiber in a relative diagram of categories",
+   "results": "{\"t\": \"2026-10-16T19:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"Unstraightening commutes with homotopy coherent localization of every fiber in a relative diagram of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.Localization.Lifting.compRight\", \"CategoryTheory.Grothendieck.ιCompFunctorFrom\", \"CategoryTheory.Localization.liftingLift\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.Localization.Lifting₂.iso'\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"6381ed3c3c6c65c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categorical localization and homotopy categories, not total infinity categories or their mapping spaces; read Localization/Composition.lean:29-65 and CofibrantObjectHomotopy.lean:234-258."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T19:46:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hit is ordinary sheafification for a Grothendieck topology; read Sites/Localization.lean:35-85."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|[Uu]nstraighten|[Ff]ibrewise.?localiz|[Ff]iberwise.?localiz",
+   "results": "{\"t\": \"2026-10-16T19:46:05Z\", \"tool\": \"grep\", \"query\": \"hammock|[Uu]nstraighten|[Ff]ibrewise.?localiz|[Ff]iberwise.?localiz\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no source hits in CategoryTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing the fibers of a Cartesian Grothendieck construction computes the localization of its total category",
+   "results": "{\"t\": \"2026-10-16T19:46:06Z\", \"tool\": \"leansearch\", \"query\": \"Localizing the fibers of a Cartesian Grothendieck construction computes the localization of its total category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.category\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Grothendieck.Hom.fiber\", \"CategoryTheory.Grothendieck.map_obj_fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct\"], \"digest\": \"228a45ebb34e8475\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits describe ordinary Grothendieck objects, fibres and morphisms or ordinary localization categories; read FiberedCategory/Grothendieck.lean:30-86."
+  },
+  {
+   "tool": "grep",
+   "query": "laxColimit|lax_colimit|fiberwiseLocalization|fibrewiseLocalization|unstraightening",
+   "results": "{\"t\": \"2026-10-16T20:00:59Z\", \"tool\": \"grep\", \"query\": \"laxColimit|lax_colimit|fiberwiseLocalization|fibrewiseLocalization|unstraightening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: No match: successful Mathlib source search returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"LocalizerMorphism\"",
+   "results": "{\"t\": \"2026-10-16T20:00:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"LocalizerMorphism\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: No match: successful query returned zero declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relative category valued functor, inverting vertical equivalences in the category of elements computes its infinity categorical lax colimit",
+   "results": "{\"t\": \"2026-10-16T20:01:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category valued functor, inverting vertical equivalences in the category of elements computes its infinity categorical lax colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\", \"CategoryTheory.Functor.Final.zigzag_of_eqvGen_colimitTypeRel\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\", \"CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv\"], \"digest\": \"ea7ca0499d488231\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: No match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:210-251; the returned colimitIsoColimitGrothendieck and its component formulas concern colimits in ordinary categories, not localization of total infinity categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing vertical weak equivalences in the category of elements of a relative functor gives the cocartesian infinity category classified by its localized values",
+   "results": "{\"t\": \"2026-10-16T20:01:16Z\", \"tool\": \"leansearch\", \"query\": \"Localizing vertical weak equivalences in the category of elements of a relative functor gives the cocartesian infinity category classified by its localized values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Functor.IsLocalization.isEquivalence\", \"CategoryTheory.Localization.lift\", \"CategoryTheory.Localization.Construction.objEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_target\", \"CategoryTheory.Functor.q_isLocalization\"], \"digest\": \"8305747fcd5905a6\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: No match: read Mathlib/CategoryTheory/Localization/Predicate.lean:44-87; IsLocalization and the lifted functors concern ordinary categories and do not state the fibre mapping-space or unstraightening assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-fibre-assembly",
@@ -97,5 +308,29 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-grothendieck-fibre-localization",
+  "worker": "stage1",
+  "summary": "No project Lean attachment or Mathlib match. Proved the unchanged statement by lifting full hammocks over a fixed base arrow to the ordinary base slice, then localizing its explicit relative adjunction to the target fibre and applying existing straightening. Created no nodes. The proposed source four-arrow auxiliary reduction fails for the constant terminal diagram over [2]; recorded the explicit counterexample and supplied the slice proof instead. Maintainer reader (2026-10-17): step 7's coherent identification of the classifying diagram with the pointwise localization now cites lem-coef-system-localization-universal (diagram-level localization adjunction) and the vertexwise criterion explicitly.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent finite-coefficient adjunction before derived inverse limit, through the existing enriched-fibre-assembly / enriched-rectification chain. Both master proof paragraph 2 and the current main-20261015 statement were read. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 7 and 8 use only the generic vertexwise equivalence criterion in a functor infinity category, with target Cat_infinity; no node of this unit provides that criterion and no geometric or coefficient proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N0-5ab341cfd",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-5ab341cfd (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, every cited statement, the citer lem-coef-enriched-fibre-assembly, the unit record, the master ancestor prop-coef-integral-exceptional-adjoint paragraph 2, and Haugseng 1312.3881v4 §4.2 (Def 4.12-4.17, Thm 4.19, Prop 4.20, Thm 4.21, Cor 4.22, Thm 4.6/Rem 4.7) online. The statement is unchanged and true; it is the Cartesian form of Haugseng 4.21/4.22 with base and fibres reversed. Base isos in W_E are already isomorphisms in E. Small cases checked: empty, terminal, discrete, [1] and a group base. Steps re-derived: step 2 slice adjunction (forced base alpha, r(a,u)=beta_!u by strictness, strict triangle identities; elementary is justified). Step 3 descends the unit and proves the localized adjunction. Step 4: hammock labels are uniquely forced right to left (leftward arrows have iso base) and reductions commute with lifting, giving an isomorphism; the component over a discrete set is a homotopy fibre. Step 6: cocartesian criterion via the composite-lift identity; fibre is fully faithful at phi=1 and essentially surjective via Z->sigma_!Z in W_T. Step 8 is straightening plus the vertexwise criterion. One gap, fixed: step 7's coherent identification St(p) ~ H_infinity used a diagram-level localization universal property that the single-category hammock node does not state. I rewrote it: q is a coCart(NC) morphism, straightening gives theta: NH->St(p), theta factors through NH->H_infinity by the L -| G adjunction of lem-coef-system-localization-universal (same unit, split, no cycle) applied in Fun(NC,-), and the factorization is an equivalence by the vertexwise criterion. Its uses now add lem-coef-system-localization-universal and lem-cbc-enhanced-functor-cone-calculus, and proof_deps was recomputed. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, for the generic vertexwise equivalence criterion only (why updated to steps 7-8). No new nodes and no duplicate found. The worker's source-error report on Haugseng 4.19 (terminal diagram over [2], three components against a contractible space) is internally correct for the stated word convention; I could not read Def 4.12's exact word. The proof does not depend on it. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-grothendieck-fibre-localization.json.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -28,9 +28,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\operatorname{Fun}(K,\\mathcal C)$, with its degreewise internal-hom definition from [def-cbc-enhanced-diagrams-cones]. First $H$ is a quasicategory. A horn $\\Lambda_i^n\\to H$, $0<i<n$, transposes to $K\\times\\Lambda_i^n\\to\\mathcal C$. Apply [lem-coef-inner-anodyne-pushout-product] to $\\Lambda_i^n\\hookrightarrow\\Delta^n$ and $\\varnothing\\hookrightarrow K$ (and interchange the product factors). The first inclusion is inner anodyne by the stated lifting-class definition, since every inner fibration lifts it. The second is degreewise injective. The resulting inclusion $K\\times\\Lambda_i^n\\hookrightarrow K\\times\\Delta^n$ therefore lifts against $\\mathcal C\\to\\Delta^0$, which is an inner fibration by quasicategory horn filling. Transposing this filler supplies the required inner simplex in $H$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, via Proposition 4.4.4.9 (023A) and Lemma 4.4.4.8 (01DP); explicit inverse-triangle expansion by the worker."
+   }
+  },
+  {
+   "text": "If $\\tau$ is an equivalence in $H$, choose an inverse edge and its two inverse $2$-simplices, as in [def-cbc-enhanced-diagrams-cones]. Restriction to $\\{k\\}\\times\\Delta^r$ for $r=1,2$ sends the inverse edge and both triangles to inverse data for $\\tau_k$ in $\\mathcal C$: it preserves every face and degeneracy by the internal-hom formula. Thus every $\\tau_k$ is an equivalence. This direction uses no converse pointwise criterion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, via Proposition 4.4.4.9 (023A) and Lemma 4.4.4.8 (01DP); explicit inverse-triangle expansion by the worker."
+   }
+  },
+  {
+   "text": "Conversely assume every $\\tau_k$ is an equivalence. Form a map $\\Lambda_0^2\\to H$ on vertices $(F,G,F)$ by specifying edge $01$ to be $\\tau$ and edge $02$ to be the degenerate identity edge of $F$. These two edges agree at vertex $0$, so the degreewise product formula transposes this map to $K\\times\\Lambda_0^2\\to\\mathcal C$. Apply [lem-cbc-invertible-prism-extension] with $Q=\\mathcal C$, $A=\\varnothing$, $B=K$, $n=2$. Its distinguished component at each vertex of $B$ is exactly $\\tau_k$, hence equivalent by hypothesis. The extension $K\\times\\Delta^2\\to\\mathcal C$ transposes to a $2$-simplex $T$ in $H$. Its edge $12$ defines $\\sigma:G\\to F$ and its other edges are $01=\\tau$, $02=\\mathrm{id}_F$. Thus $T$ is the first required inverse triangle.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, via Proposition 4.4.4.9 (023A) and Lemma 4.4.4.8 (01DP); explicit inverse-triangle expansion by the worker."
+   }
+  },
+  {
+   "text": "Produce the second triangle for this same $\\sigma$, without selecting unrelated pointwise inverses. On the three faces of $\\Lambda_0^3$ specify face $012$ to be $T$, face $013$ to be $s_1\\tau$ (vertices $F,G,G$, edges $01=03=\\tau$, $13=\\mathrm{id}_G$), and face $023$ to be $s_0\\tau$ (vertices $F,F,G$, edges $02=\\mathrm{id}_F$, $03=23=\\tau$). The overlaps of these faces are respectively edges $01$, $02$, $03$; the displayed values agree exactly, so they define a simplicial map $\\Lambda_0^3\\to H$. Transpose and apply [lem-cbc-invertible-prism-extension] again with $Q=\\mathcal C$, $A=\\varnothing$, $B=K$, now $n=3$. Its distinguished edges are still precisely $\\tau_k$, with no condition on $\\sigma_k$ or on the edges of $K$. Transpose the extension back to a $3$-simplex in $H$. Its face $123$ has vertices $(G,F,G)$ and edges $12=\\sigma$, $23=\\tau$, $13=\\mathrm{id}_G$, giving the second inverse triangle.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, via Proposition 4.4.4.9 (023A) and Lemma 4.4.4.8 (01DP); explicit inverse-triangle expansion by the worker."
+   }
+  },
+  {
+   "text": "The edge $\\sigma$ from step 3 and the triangles $012$ and $123$ constructed in steps 3 and 4 witness both inverse equations for $\\tau$. By the equivalence-edge definition in [def-cbc-enhanced-diagrams-cones], $\\tau$ is an equivalence in $H$. Together with step 2 this proves the asserted equivalence for every small simplicial set $K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4, via Proposition 4.4.4.9 (023A) and Lemma 4.4.4.8 (01DP); explicit inverse-triangle expansion by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01DK",
+  "place": "Theorem 4.4.4.4 via 023A and 01DP; the worker expands the inverse criterion into the explicit 2-simplex and 3-simplex constructions. Online sources read; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +126,45 @@
    "results": "{\"t\": \"2026-10-16T16:43:09Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between diagrams in a quasicategory is an equivalence if and only if each component at a vertex is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.OneTruncation₂.nerveHomEquiv\"], \"digest\": \"6be5b3936a563d3c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the semantic results concern ordinary functors/nerves, ordinary natural isomorphisms, or two-truncated homotopy relations. Loogle returns no hits. Read pinned Quasicategory/StrictBicategory.lean:14-70: its hom categories are homotopy categories of internal Homs and it supplies no vertexwise equivalence criterion. The grep hits in TwoTruncated.lean concern equivalence relations on edges rather than equivalence edges in arbitrary functor quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "pointwise|equivalence|isIso|[Ii]somorphism",
+   "results": "{\"t\": \"2026-10-16T19:53:54Z\", \"tool\": \"grep\", \"query\": \"pointwise|equivalence|isIso|[Ii]somorphism\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:14-70 and TwoTruncated.lean:180-250; these concern the strict homotopy bicategory and homotopy relations, not invertible edges in arbitrary internal homs. LeanSearch returns NatTrans.isIso_iff_isIso_app (CategoryTheory/NatIso.lean:227-229), which assumes ordinary category functors and does not apply to arbitrary quasicategories or simplicial indexing sets. Loogle has no hits. Two semantic phrasings were run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of diagrams in an infinity category is invertible if each component is invertible",
+   "results": "{\"t\": \"2026-10-16T19:53:55Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation of diagrams in an infinity category is invertible if each component is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.isIso_iff_isIso_app\", \"CategoryTheory.NatIso.isIso_inv_app\", \"CategoryTheory.NatIso.isIso_app_of_isIso\", \"CategoryTheory.NatIso.pi'_inv\", \"CategoryTheory.NatIso.hom_app_isIso\", \"CategoryTheory.NatIso.inv_app_isIso\", \"CategoryTheory.Sigma.natIso_inv\", \"CategoryTheory.NatIso.naturality_1'\"], \"digest\": \"9a9de10fe7844c84\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:14-70 and TwoTruncated.lean:180-250; these concern the strict homotopy bicategory and homotopy relations, not invertible edges in arbitrary internal homs. LeanSearch returns NatTrans.isIso_iff_isIso_app (CategoryTheory/NatIso.lean:227-229), which assumes ordinary category functors and does not apply to arbitrary quasicategories or simplicial indexing sets. Loogle has no hits. Two semantic phrasings were run."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-16T19:53:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:14-70 and TwoTruncated.lean:180-250; these concern the strict homotopy bicategory and homotopy relations, not invertible edges in arbitrary internal homs. LeanSearch returns NatTrans.isIso_iff_isIso_app (CategoryTheory/NatIso.lean:227-229), which assumes ordinary category functors and does not apply to arbitrary quasicategories or simplicial indexing sets. Loogle has no hits. Two semantic phrasings were run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge in a functor quasicategory is an equivalence exactly when all its vertex components are equivalences",
+   "results": "{\"t\": \"2026-10-16T19:53:58Z\", \"tool\": \"leanfinder\", \"query\": \"An edge in a functor quasicategory is an equivalence exactly when all its vertex components are equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.edgeMk\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"SSet.Truncated.instSetoidEdge\"], \"digest\": \"2da64636c514e0d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:14-70 and TwoTruncated.lean:180-250; these concern the strict homotopy bicategory and homotopy relations, not invertible edges in arbitrary internal homs. LeanSearch returns NatTrans.isIso_iff_isIso_app (CategoryTheory/NatIso.lean:227-229), which assumes ordinary category functors and does not apply to arbitrary quasicategories or simplicial indexing sets. Loogle has no hits. Two semantic phrasings were run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial internal hom into a quasicategory, invertible edges can be tested by restriction to vertices of the domain",
+   "results": "{\"t\": \"2026-10-16T20:07:46Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial internal hom into a quasicategory, invertible edges can be tested by restriction to vertices of the domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Truncated.HomotopyCategory\\u2082.homMk\"], \"digest\": \"45a6537dc67e36c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader phrasing returned HomotopicL/R, the left/right homotopy comparison, a setoid on edges, and the morphism constructor in the 2-truncated homotopy category. Their returned types concern relations on pairs of edges in one truncated simplicial set, not invertibility of an edge in an arbitrary internal hom detected by every vertex of its domain."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-isofibration-exponentiation",
@@ -70,5 +172,29 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pointwise-equivalences",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps prove functor-quasicategory horn filling, evaluation of inverse witnesses, and construct a coherent inverse and both inverse triangles using existing absolute prism extension at dimensions 2 and 3. Zero new nodes; fresh four-kind Mathlib searches found only ordinary natural-isomorphism or truncated-homotopy facts. Every dependency statement and its acyclic closure was checked.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. The joint endpoint restriction is an isofibration; its action on unpinched morphism spaces is a Kan fibration. Detecting the lifted coherent transformation as an equivalence from its prescribed vertex components.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Generic absolute outer-horn prism extension (Kerodon 01DP) supplies coherent inverse triangles; no node of the coefficient unit supplies this independent small lifting interface, and its closure does not reach the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-2d08fcf7c",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-2d08fcf7c (reviewer sub-agent of L); spot-checked: I read the whole item, all 3 cited node statements, the unit record and blueprint paragraph 2, and Kerodon 01DK and 01DP online. The statement matches Kerodon 01DK (Thm 4.4.4.4) hypothesis by hypothesis: arbitrary quasicategory C, arbitrary small simplicial set K, an actual edge of Fun(K,C), tested at every vertex. Nothing is added or dropped, and it is unchanged. lem-cbc-invertible-prism-extension is exactly Kerodon 01DP (Lemma 4.4.4.8) at S=Δ^0. Step 1 (Fun(K,C) is a quasicategory, via the Mathlib pushout-product leaf with ∅→K) is correct but not needed by steps 3-5, since the DAG's equivalence-edge definition does not need it; it is harmless. Step 2 holds because evaluation at a vertex is a simplicial map; it is elementary. Step 3 is correct: the horn on Λ^2_0 has 01=τ and 02=id_F, the prism with A=∅ and n=2 has distinguished edge τ_k, and the filled triangle T gives σ with σ∘τ≃id_F. Step 4: I recomputed the 0-horn on Λ^3_0 with faces 012=T, 013=s_1τ (edges 01=τ, 03=τ, 13=id_G) and 023=s_0τ (edges 02=id_F, 03=τ, 23=τ). The overlaps 01, 02, 03 agree. The prism with n=3 has distinguished edge τ, and face 123 of the result has edges σ, τ, id_G, giving τ∘σ≃id_G for the same σ. Step 5 is elementary. Edge cases checked: K empty, K a point, K=Δ^1 or with non-invertible edges, C a nerve, and n=2,3 both ≥2. Duplicate check: lem-cbc-enhanced-functor-cone-calculus contains this as one clause, but citing it would create a cycle. lem-coef-infinity-equivalence-prism-extension is a different relative statement. No other node states the item. I computed the dependency closures by script (4, 11 and 10 nodes) and none reaches the item, so the graph is acyclic. The unit cites only sk-def-sf-operations and sk-prop-sf-rf-shriek-preservation, so the prism is off-route. I accept its declared tool_use as a generic simplicial lifting lemma used as a black box. The Mathlib searches cover all three kinds with actual results, and there is no leaf. There are 0 new nodes, no SGA is used, and no fixes were made."
+ }
 }

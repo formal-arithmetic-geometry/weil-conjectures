@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-comap-lower-star-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars commutes with $f_*$",
@@ -19,28 +19,129 @@
  ],
  "proof": [
   {
-   "text": "On module objects $f_*=\\operatorname{Res}_{\\eta_f}\\circ\\mathrm{mapMod}(f_*)$\n([sk-def-sfb-module-pushforward-pullback]), with $f_*$ on abelian sheaves lax monoidal. Apply\n[def-sfb-comap-mapmod-square] to $F=f_*$, $\\varphi_X=a_X$, $\\varphi_Y=a_Y$, $\\eta_R=\\eta_f$,\n$\\eta_S=\\eta'_f$; the required square commutes by [lem-sfb-coefficient-pushforward-square].",
+   "text": "Write $F=f^{\\Ab}_*\\colon\\Sh(X_{\\mathrm{proét}},\\Ab)\\to\\Sh(Y_{\\mathrm{proét}},\\Ab)$ for pushforward of abelian sheaves. The coefficient maps have types $\\eta_f\\colon\\Lambda_Y\\to F\\Lambda_X$ and $\\eta'_f\\colon\\Lambda'_Y\\to F\\Lambda'_X$, as in [sk-def-sfb-module-pushforward-pullback]. By [sk-def-sfb-module-pushforward-pullback], the functor $F$ acts on abelian sheaves, is lax monoidal, and the module pushforward is defined as $\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(F)$; applying that clause to $\\Lambda$ and $\\Lambda'$ gives $f_*^\\Lambda=\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(F)$ and $f_*^{\\Lambda'}=\\operatorname{Res}_{\\eta'_f}\\circ\\operatorname{mapMod}(F)$. Thus the two functors to be compared have the form required by the restriction/transport square, with source $\\Mod_{\\Lambda'_X}$ and target $\\Mod_{\\Lambda_Y}$. Here $\\operatorname{Res}_\\varphi$ is restriction from modules over the codomain of $\\varphi$ to modules over its domain, with action $\\gamma_N\\circ(\\varphi\\otimes N)$ and unchanged underlying objects and arrows, as in clause 1 of [sk-def-sfb-change-of-scalars].",
    "uses": [
     "sk-def-sfb-module-pushforward-pullback",
-    "def-sfb-comap-mapmod-square",
-    "lem-sfb-coefficient-pushforward-square"
+    "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-lower-star-iso.proof.md",
+    "place": "proof, the pushforward formula and specialization of the commutative-square construction"
+   }
+  },
+  {
+   "text": "By [lem-sfb-coefficient-pushforward-square], applied to the condensed abelian-group morphism underlying the ring morphism $a$, the coefficient maps satisfy $F(a_X)\\circ\\eta_f=\\eta'_f\\circ a_Y\\colon\\Lambda_Y\\to F\\Lambda'_X$. By [sk-def-sfb-coefficient-morphisms], $\\eta_f$ and $\\eta'_f$ are ring-object morphisms, and [sk-def-sfb-coefficient-change] says that $a_X$ and $a_Y$ are ring-object morphisms. Thus the maps $R_X=\\Lambda_X$, $S_X=\\Lambda'_X$, $R_Y=\\Lambda_Y$, $S_Y=\\Lambda'_Y$, $\\varphi_X=a_X$, $\\varphi_Y=a_Y$, $\\eta_R=\\eta_f$, and $\\eta_S=\\eta'_f$ form the commutative square of monoid-object morphisms used in the next step. Here the square lemma's $f_*$ on coefficient objects and arrows is precisely the abelian-sheaf functor $F$, not either of the two module pushforwards; its ring-coefficient clause identifies its $\\eta$ maps with those in step 1.",
+   "uses": [
+    "sk-def-sfb-coefficient-change",
+    "lem-sfb-coefficient-pushforward-square",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-lower-star-iso.proof.md",
+    "place": "proof, the pushforward formula and specialization of the commutative-square construction"
+   }
+  },
+  {
+   "text": "Define the comparison to be the isomorphism of [def-sfb-comap-mapmod-square] for the square in step 2 and the lax monoidal functor in step 1. Substitution in its source and target gives $\\operatorname{Res}_{a_Y}\\circ f_*^{\\Lambda'}\\cong f_*^\\Lambda\\circ\\operatorname{Res}_{a_X}$. Its statement also identifies both functors with transport by $\\operatorname{mapMod}(F)$ followed by restriction along the common composite $\\eta'_f\\circ a_Y=F(a_X)\\circ\\eta_f\\colon\\Lambda_Y\\to F\\Lambda'_X$, exactly the specified normalization. Naturality and invertibility are supplied by that natural isomorphism.",
+   "uses": [
+    "def-sfb-comap-mapmod-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-lower-star-iso.proof.md",
+    "place": "proof, the pushforward formula and specialization of the commutative-square construction"
+   }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-module-pushforward-pullback",
-  "def-sfb-comap-mapmod-square",
-  "lem-sfb-coefficient-pushforward-square"
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-change",
+  "lem-sfb-coefficient-pushforward-square",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-comap-mapmod-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-lower-star-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-lower-star-iso.proof.md",
+  "place": "proof, the pushforward formula and specialization of the commutative-square construction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comapMapMod|comapLowerStar|restrictScalars.*[Pp]ushforward|[Pp]ushforward.*restrictScalars",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with direct image of sheaves of modules",
+   "results": "8 hits: Submodule.restrictScalars_map, PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, RestrictScalars, PresheafOfModules.restrictScalars, AlgHom.restrictScalars, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.RestrictScalars.obj'",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"mapMod\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for commutative condensed coefficient rings commutes with pushforward of module objects on pro-etale sites",
+   "results": "8 hits: PresheafOfModules.pushforward_obj_obj, PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.pushforward_obj_map_apply, PresheafOfModules.pushforward_map_app_apply', PresheafOfModules.pushforward_map_app_apply, SheafOfModules.pushforwardCongr, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_map_val",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "def (mapMod|comap)|restrictScalars.*[Ii]so|pushforward.*[Ii]so",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Mod.lean. Subdirectory Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod.comap\"",
+   "results": "8 hits: CategoryTheory.AddMod.comap, CategoryTheory.Mod.comap, CategoryTheory.AddMod.comap_obj_X, CategoryTheory.Mod.comap_obj_X, CategoryTheory.AddMod.comap_obj_addMod, CategoryTheory.Mod.comap_obj_mod, CategoryTheory.AddMod.comap_map_hom, CategoryTheory.Mod.comap_map_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a lax monoidal functor and a commutative square of monoid objects, transport of module objects commutes with restriction of scalars",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, CategoryTheory.Mod_.comap",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction-of-scalars and ordinary presheaf/sheaf-of-modules constructions do not state this normalized square isomorphism for internal module objects on pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModComap|comapComp|comapIsoOfEq|comapMapMod",
+   "results": "4 hits: Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: internal scalarRestriction and comap only define restriction; Pi.comapComp concerns reindexing families, not transport of internal modules by a lax monoidal functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor carries scalar restriction of internal modules to scalar restriction along the image monoid homomorphism",
+   "results": "8 hits: CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalars.map_apply, CategoryTheory.Mod_.comap_map_hom, CategoryTheory.Mod_.comap_obj_X",
+   "date": "2026-10-16",
+   "verdict": "no match: internal scalarRestriction and comap only define restriction; Pi.comapComp concerns reindexing families, not transport of internal modules by a lax monoidal functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct image functor on internal modules is compatible with restricting the coefficient monoid along a natural commutative square",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, PresheafOfModules.restrictScalarsObj_map, CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.comap_obj_mod, ModuleCat.restrictScalarsComp'App_hom_naturality, PresheafOfModules.restrictScalars, CommRingCat.moduleCatRestrictScalarsPseudofunctor",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: returned internal scalar restriction definitions, ordinary ring-module restriction composition, and presheaf scalar restriction; none states lax-monoidal transport compatibility with the coefficient square."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -66,5 +167,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-comap-lower-star-iso",
+  "worker": "stage1",
+  "summary": "Retained the three-step blueprint construction and unchanged item statement while repairing landing return L at reviewed head bce29786aa. Re-read all six current cited statements. Expanded the module-pushforward citation to include the general coefficient assumptions and the explicit abelian-pushforward codomain of eta; step 1 now gives the ambient abelian-sheaf functor and both eta types, and step 2 consistently uses F on coefficient arrows. Revalidated every citation verbatim, including the revised coefficient-square ring-specialization clause. No new nodes or Mathlib leaves; the required no-push delivery rebases the retained split onto current main.",
+  "blueprint": "The entire proof of def-sfb-comap-lower-star-iso.proof.md: its first sentence is step 1; its square hypothesis is step 2; its application of def-sfb-comap-mapmod-square is step 3. This realizes the underived pushforward comparison in unit sk-def-sfb-coefficient-comparisons, step 2."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-72636e158",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-72636e158 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, the three steps, and the main-20261015 source def-sfb-comap-lower-star-iso.md and .proof.md. I also read the unit sk-def-sfb-coefficient-comparisons, its _section.md and its proof paragraph 'Pushforward and pullback'. The item statement matches the blueprint word for word: arbitrary morphisms a and f, source Mod_{Λ'_X}, target Mod_{Λ_Y}, and the common-composite normalization. Nothing is weakened. Step 1 is elementary: it instantiates the current sk-def-sfb-module-pushforward-pullback, where f_*=Res_{η_f}∘mapMod(f^Ab_*) with f^Ab_* lax monoidal and η_f: Λ_Y→f^Ab_*Λ_X, together with clause 1 of sk-def-sfb-change-of-scalars. In Step 2, lem-sfb-coefficient-pushforward-square applies to the underlying abelian-group map and its ring clause holds. It gives f_*a_X∘η_f=η'_f∘a_Y, which is the orientation def-sfb-comap-mapmod-square requires. The ring-object morphism facts come from sk-def-sfb-coefficient-morphisms and sk-def-sfb-coefficient-change, and the latter also states the square itself. In Step 3, I substituted the four corners and four arrows into the statement of def-sfb-comap-mapmod-square (reviewed by L/Q52). This gives exactly Res_{a_Y}∘f_*^{Λ'}≅f_*^Λ∘Res_{a_X} on Mod_{Λ'_X}→Mod_{Λ_Y}, together with the normalization. All cited units are on the route, with no tool use and no cycle (I checked the transitive closure). The delivery has no new nodes. rg over dag/nodes found no duplicate: the other hits are sibling comparisons or unrelated nodes in other chapters. Edge cases checked: identity a or f, the zero ring, empty X, and noninvertible Z→F_p; none needs flatness or invertibility. The searches do not give a Mathlib leaf (Mod.comap only defines restriction). The master Lean files named in the report are not in the literature, and they are not needed because this is not a target node. No fixes were made."
+ }
 }

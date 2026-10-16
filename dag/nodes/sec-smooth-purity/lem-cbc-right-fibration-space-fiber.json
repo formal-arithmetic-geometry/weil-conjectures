@@ -10,10 +10,102 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "First $X$ is a quasicategory. Given an inner horn in $X$, fill its projection in the Kan complex $S$, then lift that chosen base simplex using the positive-index lifting property of $q$. Thus $q$ is an inner fibration between quasicategories. Every edge in $S$ is an equivalence by the final-horn converse in [lem-cbc-equivalence-outer-horn-filling], since every final horn in $S$ fills. The same converse shows that every edge $e$ of $X$ is an equivalence: for each final horn in $X$ with final edge $e$, first fill its projection in $S$ and then lift the chosen simplex using the right-fibration property. This argument establishes the absolute extension property needed by the converse, without presupposing any initial-horn lifting for $q$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "Theorem 4.4.2.6, final-horn converse; projected-horn lifting supplies its hypothesis."
+   }
+  },
+  {
+   "text": "Now fix a lifting problem $a:\\Lambda_0^n\\to X$ over a specified $\\beta:\\Delta^n\\to S$, with $n\\geq2$. Its edge $a|_{[0,1]}$ is an equivalence by Step 1. Apply [lem-cbc-inner-fibration-equivalence-outer-horn-lift] to the inner fibration $q$ of Step 1. It gives a filler $\\widetilde\\beta$ extending $a$ with $q\\widetilde\\beta=\\beta$. The equality with this particular base simplex is part of the cited statement; an absolute outer-horn filler alone would not suffice.",
+   "uses": [
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, initial-horn dual."
+   }
+  },
+  {
+   "text": "For the dimension-one lifting problem, the horn $\\Lambda_0^1=\\{0\\}$ prescribes $x\\in X$ over $s_0$, and the specified base edge is $u:s_0\\to s_1$. By Step 1, $u$ is an equivalence, so choose an inverse $v:s_1\\to s_0$ and a witnessing base $2$-simplex with ordered vertices $(s_0,s_1,s_0)$ and edges $01=u$, $12=v$, $02=1_{s_0}$. Lift $v$ with prescribed target $x$ using the right horn $\\Lambda_1^1=\\{1\\}$, obtaining $t:z\\to x$ with $q(z)=s_1$. The edges $12=t$ and $02=1_x$ give a right horn $\\Lambda_2^2$ over exactly that base inverse triangle. Its lift has missing edge $01:x\\to z$ lying over $u$, so it solves the original lifting problem with its prescribed source and base edge.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01NV",
+    "place": "Corollary 4.4.3.8, right-fibration to Kan-fibration implication; explicit right 1- and 2-horn inverse-triangle calculation."
+   }
+  },
+  {
+   "text": "The hypothesis supplies every positive-index horn lift, and Steps 2 and 3 supply every index-zero horn lift. Hence $q$ is a Kan fibration. For any horn in $X$, first choose a filler for its projection in the Kan base $S$, then apply this all-horn lifting property over the chosen simplex. The resulting simplex fills the original horn, so $X$ is Kan. No dimension-zero filler or nonemptiness is required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01NV",
+    "place": "Corollary 4.4.3.8; total-space Kan condition by projected-horn lifting."
+   }
+  },
+  {
+   "text": "Put $I=\\Delta^1$ and fix $s\\in S$. Let $H=X\\times_{S,\\operatorname{ev}_0}\\operatorname{Fun}(I,S)\\times_{\\operatorname{ev}_1,S}\\{s\\}$ and $L=\\operatorname{Fun}(I,X)\\times_{\\operatorname{ev}_1,X}X_s$. There are maps $r:L\\to H$, $\\alpha\\mapsto(\\alpha(0),q\\alpha,s)$, and $e:L\\to X_s$, $\\alpha\\mapsto\\alpha(1)$. Apply [lem-coef-infinity-right-fibration-exponentiation] to $X\\to\\Delta^0$ and the right horn $\\{1\\}=\\Lambda_1^1\\hookrightarrow I$. It makes $\\operatorname{ev}_1:\\operatorname{Fun}(I,X)\\to X$ a trivial Kan fibration. Its pullback $e$ is trivial Kan: a boundary lifting problem in the pullback is a boundary lifting problem upstairs with the prescribed target coordinate retained. To treat the other endpoint, reverse simplex orders explicitly: $\\theta:[a]\\to[b]$ becomes $\\theta^{\\mathrm{rev}}(j)=b-\\theta(a-j)$. This gives an involution on simplicial sets, carries $\\Lambda_i^m$ to $\\Lambda_{m-i}^m$, preserves products and boundary inclusions, and interchanges the two vertices of $I$. Since $q$ lifts all horns by Step 4, its opposite is a right fibration. Apply the same exponentiation statement to this opposite map and $\\{1\\}\\hookrightarrow I$, then undo the involution. One obtains a trivial Kan fibration $\\rho_0:\\operatorname{Fun}(I,X)\\to\\operatorname{Fun}(I,S)\\times_{\\operatorname{ev}_0,S}X$, $\\alpha\\mapsto(q\\alpha,\\alpha(0))$. More explicitly, an $n$-simplex $\\alpha:I\\times\\Delta^n\\to X$ corresponds to the map $R_n(\\alpha):I\\times\\Delta^n\\to X^{\\mathrm{op}}$ whose value on an $m$-simplex $(i:[m]\\to[1],\\theta:[m]\\to[n])$ is $\\alpha_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}})$. The identity $(\\theta\\eta)^{\\mathrm{rev}}=\\theta^{\\mathrm{rev}}\\eta^{\\mathrm{rev}}$ verifies the simplicial-map equation and shows that these involutive bijections identify $\\operatorname{Fun}(I,X)^{\\mathrm{op}}$ with $\\operatorname{Fun}(I,X^{\\mathrm{op}})$. At endpoint $1$ the formula uses the original endpoint $0$. Applying the involution to a boundary lifting square therefore gives exactly a boundary lifting square for $\\rho_0$, and reversing its filler returns a filler of the original square. The map $r$ is its pullback along $H\\to\\operatorname{Fun}(I,S)\\times_S X$, $(x,\\gamma,s)\\mapsto(\\gamma,x)$: the endpoint equation forces $q\\alpha(1)=s$, exactly the condition defining $L$. Thus $r$ is also a trivial Kan fibration, with dimension-zero boundary lifting included.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-fibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, applied to the final-vertex horn and its explicit opposite; degreewise pullbacks supply r and e."
+   }
+  },
+  {
+   "text": "The boundary-lifting maps $e$ and $r$ lift all degreewise injections by [lem-weil-pbc-trivial-kan-lifts-monomorphisms], so in particular they are Kan fibrations. The trivial-Kan/weak-equivalence equivalence of [lem-cbc-kan-fibration-fiber-criterion] now makes both $e$ and $r$ weak homotopy equivalences. The constant-path map $c:X_s\\to L$ satisfies $ec=\\mathrm{id}_{X_s}$. On path components and every based homotopy group after realization, $c$ therefore induces the inverse of the isomorphism induced by $e$; consequently $c$ is a weak homotopy equivalence. The composite $rc:X_s\\to H$ is exactly the displayed constant-path inclusion. Its realized maps on components and homotopy groups are composites of isomorphisms, so it is a weak homotopy equivalence. This also covers an empty strict fiber, since the two trivial Kan fibrations include surjectivity on vertices.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Trivial Kan fibrations from Step 5; existing boundary-lifting and Kan-fibration criterion nodes supply the weak-equivalence implications."
+   }
+  },
+  {
+   "text": "For a commutative square given by $f:X\\to X^\\prime$ and $g:S\\to S^\\prime$ with $q^\\prime f=gq$ and $g(s)=s^\\prime$, the strict-fiber map sends $x$ to $f(x)$. The path-pullback map sends $(x,\\gamma,s)$ to $(f(x),g\\gamma,s^\\prime)$ in every simplicial degree. Since $g$ carries the constant path at $q(x)$ to the constant path at $gq(x)=q^\\prime f(x)$, the comparison maps commute strictly with this square. Thus the weak equivalences of Step 6 are natural, also for empty fibers.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/010B",
+    "place": "Construction 3.4.0.3, explicit degreewise functoriality of the path pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01NV",
+  "place": "Corollary 4.4.3.8, expanded using 019F and 01H0; dimension-one inverse triangle written out. The constant-path comparison is proved by the endpoint exponentiation theorem 0154 and the existing trivial-Kan criterion, avoiding the cyclic current path-pullback-comparison dependency. Path model: 010B. Online sources read; archival copies WANTED in report.md."
+ },
+ "status": "split",
  "mathlib_match": null,
  "blueprint": {
   "is": null,
@@ -79,6 +171,58 @@
    "results": "{\"t\": \"2026-10-16T17:21:41Z\", \"tool\": \"grep\", \"query\": \"homotopy.?fiber|strict.?fiber|right.?fibration|isRightFibration\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: zero matches in AlgebraicTopology/SimplicialSet for the right-fibration or strict/homotopy-fiber comparison vocabulary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right fibration over a Kan complex is a Kan fibration and its strict fibers are weakly equivalent to homotopy fibers",
+   "results": "{\"t\": \"2026-10-16T18:08:12Z\", \"tool\": \"leanfinder\", \"query\": \"A right fibration over a Kan complex is a Kan fibration and its strict fibers are weakly equivalent to homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.fibration_r\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.instFibrationSndOfIsFibrant\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.fibration_iff\"], \"digest\": \"f706b6ab62815f33\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: simplicial Quillen fibration definitions and abstract path-object projections do not state the right-fibration-over-Kan theorem or its strict/homotopy-fiber comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "KanComplex, Fibration, homotopy fiber",
+   "results": "{\"t\": \"2026-10-16T18:08:13Z\", \"tool\": \"loogle\", \"query\": \"KanComplex, Fibration, homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'KanComplex'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|homotopy.?fiber|constant.?path",
+   "results": "{\"t\": \"2026-10-16T18:08:13Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|homotopy.?fiber|constant.?path\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: simplicial Quillen fibration definitions and abstract path-object projections do not state the right-fibration-over-Kan theorem or its strict/homotopy-fiber comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "right fibration over Kan complex strict fiber homotopy fiber",
+   "results": "{\"t\": \"2026-10-16T18:08:14Z\", \"tool\": \"leansearch\", \"query\": \"right fibration over Kan complex strict fiber homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.ctorIdx\", \"HomotopicalAlgebra.fibrations_over_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.Fibration.mk\"], \"digest\": \"2e7cf53fe3ee3ed1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: simplicial Quillen fibration definitions and abstract path-object projections do not state the right-fibration-over-Kan theorem or its strict/homotopy-fiber comparison."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-right-fibration-space-fiber",
+  "worker": "stage1",
+  "summary": "Repair of the returned stale delivery: rebased the retained item on current DAG metadata; restored the missing general relative outer-horn theorem as a statement-only new node after duplicate, project-source and logged Mathlib searches. Corrected the retained proof, which confused absolute and relative fillers and reversed the dimension-one horn convention. The item statement and statement dependencies are unchanged; the proof now retains the prescribed base simplex in every dimension. Re-read the current definition, absolute horn criterion and Kan path-pullback comparison. The current path-pullback-comparison dependency leads back to this item through right properness and cone calculus; replaced that citation by an explicit two-endpoint lift-space proof using acyclic existing nodes.",
+  "blueprint": "Opening sentence, Choose a compactification c=(j,p): the inherited coherent cone-comparison foundation; strict versus homotopy fibers of its right-fibration lift space. The current main-20261015 blueprint has no separate right-fibration statement.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-right-fibration-exponentiation",
+    "why": "Generic relative exponential lifting theorem supplies the two trivial Kan maps on interval-lift spaces. The compact-support unit has no such lifting theorem; applied only after q and X are proved Kan."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-right-fibration-exponentiation"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-ND-f21094a83",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f21094a83 (reviewer sub-agent of L); spot-checked: I read the item, the new node and all five cited statements in full, plus Kerodon 01H0, 01NV, 0329 and 010B online. Item statement: agrees with 01NV (3)=>(1) and with 0329 (Kan-fibration leg q, vertex inclusion) using the 010B endpoint order; not weakened. Steps: Step 1's quasicategory, inner-fibration and every-edge-equivalence arguments correctly verify the hypothesis of the final-horn converse. Step 2 meets every hypothesis of the new node. I checked Step 3's dimension-one inverse-triangle and Lambda_2^2 construction by hand: correct horn convention, faces and projections. Step 4 is correct. In Step 5, ev1 from Lambda_1^1 into Delta^1 and the op-dual rho_0 are trivial Kan, and I checked degreewise that L is the pullback giving r. In Step 6, trivial Kan => Kan fibration => weak equivalence via the fiber criterion; ec=id and rc=constant-path map are elementary; empty fibers are handled. Step 7 commutes strictly. New node lem-cbc-inner-fibration-equivalence-outer-horn-lift: it is exactly 01H0 plus its op-dual and keeps all hypotheses (inner fibration of quasicategories, n>=2, filler over the prescribed beta). I tested it on p=id, p to a point, functor nerves at n=2, and counterexamples that show the equivalence-edge and n>=2 hypotheses are needed. It is statement-only, self-contained, blueprint from/via correct, searches recorded. It duplicates no DAG node: the def of p-cocartesian edges only defines; the prism, relative-initial-boundary and cartesian-boundary nodes concern other inclusions or hypotheses. It is strictly smaller than the item and not a restated clause. No dependency closure reaches the item, nothing cited is missing or merged, and proof_deps equals the union of uses. Accepted tool_use: lem-coef-infinity-right-fibration-exponentiation (generic black box). FIX (B5/C, citation): the item's source.place still cited 'Section 3.4 (0106)' although the report says it was replaced. The corrected item file in fixes/ cites Proposition 3.4.0.7 (0329) and Construction 3.4.0.3 (010B), both verified online; no other field changed. If source is not split-owned, the maintainer should apply it.; 1 file(s) fixed by the reviewer"
+ }
 }
