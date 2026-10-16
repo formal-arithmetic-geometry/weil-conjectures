@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-system-level-left-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Construction 4.1 (printed p. 21), evaluation and its derived left adjoint. The general sheaf-ring and subsequence versions are the same left-extension construction on the enhanced section category; they serve the adic-stage paragraph of def-weil-exceptional-inverse-image, before taking any inverse limit.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived left extension from coefficient levels",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Let $\\mathscr S(B)$ be the category of strict semilinear systems: an object consists of $B_n$-module sheaves $M_n$ [def-weil-sheaf-of-modules-category] and $B_{n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{B_{n+1}\\to B_n}M_n$; morphisms commute with these maps [lem-coef-semilinear-derived-sections]. Restriction of scalars has the meaning of [def-pc-sheaf-restrict-scalars]. Use its unbounded derived category [def-weil-abstract-derived-category]. Then $\\mathscr S(B)$ is Grothendieck abelian [def-sp-grothendieck-abelian]. Its coproducts and cohomology, and the coproducts of its unbounded derived category, are evaluated componentwise. The exact evaluations $e_n:D(\\mathscr S(B))\\to D(B_n)$ jointly detect isomorphisms and cohomological bounds.\n\nFor each $n\\ge1$, $e_n$ has a left adjoint $L_n$, with natural evaluation formulas\n$$e_mL_nP=\\begin{cases}B_m\\otimes^L_{B_n}P&m\\le n,\\\\0&m>n.\\end{cases}$$\nHere derived change of ring has the meaning of [lem-pur-derived-change-of-rings]. More generally, let $r:\\mathbf Z_{\\ge1}\\to\\mathbf Z_{\\ge1}$ be strictly increasing and unbounded, let $B_r=(B_{r(i)})_{i\\ge1}$, and let $U_r:D(\\mathscr S(B))\\to D(\\mathscr S(B_r))$ be exact restriction of systems. It has a left adjoint $L_r$. Put $t(m)=\\min\\{i:r(i)\\ge m\\}$. There is a natural formula\n$$e_mL_rN=B_m\\otimes^L_{B_{r(t(m))}}N_{t(m)}.$$\nMore precisely, put $a=t(m)$ and $b=t(m+1)$. The adjoint transition from $m+1$ to $m$ is\n$$B_m\\otimes^L_{B_{m+1}}e_{m+1}L_rN\\cong B_m\\otimes^L_{B_{r(b)}}N_b\\longrightarrow B_m\\otimes^L_{B_{r(a)}}N_a=e_mL_rN,$$\nwhere the arrow is induced by the adjoint structure map $B_{r(a)}\\otimes^L_{B_{r(b)}}N_b\\to N_a$ of $N$. For $a=b$ this structure map is the identity; for $a<b$ it is the specified selected-level transition. All identifications use the canonical derived tensor associators. These are functors and adjunctions on the derived category of strict systems, with actual natural units and counits, not just formulas for unrelated evaluated objects. Under the enhanced semilinear-section equivalence of [lem-coef-semilinear-derived-sections] they are left Kan extensions with the displayed evaluations. Their adjunction identifications are compatible with composition of subsequence restrictions and the canonical tensor associators. No flatness of $B_{n+1}\\to B_n$, normalization, or boundedness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 (printed p. 21), evaluation and its derived left adjoint. The general sheaf-ring and subsequence versions are the same left-extension construction on the enhanced section category; they serve the adic-stage paragraph of def-weil-exceptional-inverse-image, before taking any inverse limit."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(evaluation|eval).*(leftAdjoint|LeftAdjoint)|leftKanExtension.*Module",
+   "results": "[\"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "[\"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationAdjunctionRight_unit_app\", \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"CategoryTheory.evaluationAdjunctionLeft_unit_app_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived left Kan extension for inverse diagrams of sheaves of modules with changing coefficient rings",
+   "results": "[\"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_app\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.LeftExtension\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension\", \"CategoryTheory.TwoSquare.lanBaseChange\", \"CategoryTheory.Functor.lanCompIsoOfPreserves_inv_app\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on derived inverse systems of modules has a derived left adjoint given by extension of scalars to lower levels",
+   "results": "[\"localCohomology.diagram\", \"Condensed.profiniteSolidification\", \"Condensed.profiniteSolid\", \"localCohomology.ofDiagram\", \"Condensed.profiniteSolidCounit\", \"localCohomology\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.instIsLeftAdjointExtendScalars\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(derived|adjoint)|derived.*(sequence|evaluation)|Grothendieck.*SheafOfModules",
+   "results": "[\"Mathlib/Topology/CantorBendixson.lean\", \"Mathlib/Topology/CantorBendixson.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck abelian category of modules over an inverse sequence of rings and left adjoint to cofinal restriction of derived sections",
+   "results": "[\"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint\", \"Condensed.instAB5CondensedMod\", \"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read generic CategoryTheory.evaluationAdjunctionLeft/Right in Mathlib/CategoryTheory/Adjunction/Evaluation.lean and the returned Kan-extension signatures; these concern fixed-value functor categories, not unbounded derived semilinear sections over changing sheaf rings. Other hits concern local cohomology, condensed objects, or unrelated sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to evaluation of a diagram of modules over a diagram of rings given by extension of scalars and zero elsewhere",
+   "results": "[\"ModuleCat.instIsRightAdjointCoextendScalars\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"PresheafOfModules.freeAdjunction\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: returned scalar adjunctions and free module-presheaf adjunctions have no derived varying-ring system evaluation or cofinal restriction formula; Evaluation.lean:38-76 concerns a fixed target functor category."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation|[Ss]emilinear.*[Ss]ection",
+   "results": "[\"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: returned scalar adjunctions and free module-presheaf adjunctions have no derived varying-ring system evaluation or cofinal restriction formula; Evaluation.lean:38-76 concerns a fixed target functor category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations"
+}

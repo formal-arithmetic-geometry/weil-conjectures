@@ -24,9 +24,176 @@
   "lem-pur-coefficient-system-derived-comparison",
   "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prepare the coefficient and site hypotheses. The valuation-ring theorem gives a DVR $O$ with finite residue field and factorization $x=u\\varpi^v$. Its finite-quotient theorem gives finite rings $A_n$ and the surjective coefficient transitions. The absolute value extending that of $\\mathbf Q_\\ell$ has $|\\ell|<1$, so a power of $\\ell$ lies in $(\\varpi^n)$; thus each $A_n$ is annihilated by an integer invertible on $k$. Completeness of $E$ makes its closed valuation subring complete: a $\\varpi$-adic Cauchy sequence is Cauchy in $E$ and its limit still has absolute value at most one. Hence $O=\\varprojlim O/\\varpi^n$. Finite-type schemes over $k$, including $\\overline X$, are Noetherian by the finite-type-over-Noetherian theorem (a field is Noetherian). The system comparison theorem therefore supplies the unbounded derived direct image and its evaluated comparisons. Extension by zero for $j$ is exact and left adjoint to restriction; its termwise version acts on strict systems and on the enhanced section models. Consequently $F=Rp_{A,*}j_{!,A}$ is a well-defined exact functor, and $e_nF\\cong F_{f,A_n}e_n$, with actual units, counits, and coefficient transition maps. The left-extension lemma supplies Grothendieckness, levelwise coproducts and detection by evaluation.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-amb-etale-adjoint-locality",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Constructions 4.1 and 5.14–5.15; Lemma 4.10."
+   }
+  },
+  {
+   "text": "First construct the coefficient projection square at an ordinary finite level. For any homomorphism of finite $\\ell$-primary rings $C\\to D$, let $T=-\\otimes_C^LD$ and let $U$ be exact restriction of scalars. The module tensor/restriction adjunction derives to $T\\dashv U$: restriction is exact and derived tensor is computed by K-flat resolutions. Composition for unbounded derived direct images, applied to the square of identity-topos ring-change morphisms and the geometric proper map, gives $URp_{*,D}\\cong Rp_{*,C}U$. It also gives $UF_{f,D}\\cong F_{f,C}U$, since extension by zero commutes with restriction. Form the $D$-linear map $q:T_YF_{f,C}\\to F_{f,D}T_X$ by tensor/restriction adjunction from $F_{f,C}$ applied to the scalar unit. After forgetting $D$, this is exactly the constant-coefficient projection map for $V=D$, hence is invertible by the finite-level tensor lemma (equivalently use the proper projection formula and the exact open extension). Restriction detects isomorphisms, so $q$ is invertible as a $D$-linear map. This argument applies to non-flat quotient maps as well as finite-free extensions. On the enhanced section models the same counit-transpose construction supplies an actual map, not a choice of componentwise lifts. Evaluation of that map is the map just constructed. Its identity and composite-extension squares agree: on K-flat representatives the scalar units send $x$ to $x\\otimes1$, and the associator sends $(x\\otimes d)\\otimes d'$ to $x\\otimes dd'$; these give the same transpose for either composite.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-amb-proper-coproducts-projection",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Theorem 2.18(2); Construction 2.26; Construction 5.15 and Lemma 5.16."
+   }
+  },
+  {
+   "text": "The preceding squares, with $C=A_n,D=A_m$ for $m\\le n$, give $FL_n\\cong L_nF_{f,A_n}$: at $m\\le n$ it is precisely $q$, and at $m>n$ both evaluations are zero. The section-model construction and the transition formulas for $L_n$ identify the maps and their coherences, so this is an isomorphism of functors on derived systems. Also $F$ preserves arbitrary set-indexed coproducts. Indeed $j_!$ preserves them as a left adjoint, proper $Rp_*$ preserves them for each finite ring by the proper-coproduct theorem, and evaluation computes coproducts and detects isomorphisms. Apply the Grothendieck-derived Brown theorem to this exact coproduct-preserving functor, obtaining an actual right adjoint $G$. Its additive and $O$-linear structure is specified by the adjunction: the map induced by $a\\in O$ is the unique transpose of multiplication by $a$ on $F$; the identities for sums and products follow from the Hom bijection. Similarly $G(M[t])\\cong(GM)[t]$ is the unique adjunction-induced shift isomorphism. The shift cocycle and compatibility of the unit and counit follow by transposition from those for $F$. The triangulated-right-adjoint lemma then proves $G$ exact.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-coef-semilinear-derived-sections",
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-proper-coproducts",
+    "lem-grothendieck-derived-brown-right-adjoint",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.16 and the Brown right adjoint following it."
+   }
+  },
+  {
+   "text": "For $P\\in D(X_{\\mathrm{et}},A_n)$ and $M\\in D(\\mathsf S_A(Y_{\\mathrm{et}}))$, use the following natural Hom bijections:\n$$\\operatorname{Hom}(P,e_nGM)=\\operatorname{Hom}(L_nP,GM)=\\operatorname{Hom}(FL_nP,M)=\\operatorname{Hom}(L_nF_{f,A_n}P,M)=\\operatorname{Hom}(F_{f,A_n}P,e_nM)=\\operatorname{Hom}(P,f_n^\\times e_nM).$$\nTaking the images of identity morphisms in the two directions produces inverse natural maps $e_nG\\cong f_n^\\times e_n$; their inverse equations follow immediately by composing the displayed bijections. This is the Yoneda argument written out, not an appeal to full faithfulness of a representable embedding. The adjunction formulas define the comparison to preserve the evaluated counits and units. For $m\\ge n$, the structure map is the mate of the transition together with the coefficient square $q$ of step 2: its adjoint transition is the scalar comparison $T_{A_n/A_m}f_m^\\times(M_m)\\to f_n^\\times(T_{A_n/A_m}M_m)$ followed by $f_n^\\times$ of the adjoint input transition. This equation follows by transposing both maps, which yields the input transition composed with the same evaluated counit and $q^{-1}$. It therefore identifies transitions as maps, including composition for three indices.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22, including its proof by the two adjunctions in Lemma 5.16."
+   }
+  },
+  {
+   "text": "Choose the uniform integer $N_f$ from the finite-level amplitude lemma. If $H\\in D^{\\le b}(\\mathsf S_A(X_{\\mathrm{et}}))$, its evaluations satisfy the same bound; therefore $FH\\in D^{\\le b+N_f}$ by that lemma and evaluation detection. If $M\\in D^{\\ge a}$ and $H\\in D^{\\le a-N_f-1}$, then\n$$\\operatorname{Hom}(H,GM)=\\operatorname{Hom}(FH,M)=0.$$\nThe orthogonality characterization of the standard cohomological truncations gives $GM\\in D^{\\ge a-N_f}$. To spell out the characterization used here, take $H=\\tau_{\\le a-N_f-1}GM$; its canonical map to $GM$ must vanish, whereas it induces the identity on all cohomology in those degrees, so those groups vanish. Thus $c_f=N_f$ works independently of the level.",
+   "uses": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-system-level-left-extension",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 5.15, amplitude [0,2d], and its right adjoint after Lemma 5.16."
+   }
+  },
+  {
+   "text": "Show that the finite-level right adjoints commute with every constant finite change of coefficients, including non-flat quotients. With $T,U,q$ as in step 2, adjunction gives\n$$\\operatorname{Hom}(K,UG_{f,D}N)=\\operatorname{Hom}(T_XK,G_{f,D}N)=\\operatorname{Hom}(F_{f,D}T_XK,N)=\\operatorname{Hom}(T_YF_{f,C}K,N)=\\operatorname{Hom}(K,G_{f,C}U N).$$\nIdentity morphisms again give $UG_{f,D}\\cong G_{f,C}U$. Define $b:T_XG_{f,C}M\\to G_{f,D}T_YM$ as the transpose of\n$$F_{f,D}T_XG_{f,C}M\\xrightarrow{q^{-1}}T_YF_{f,C}G_{f,C}M\\xrightarrow{T_Y\\epsilon_C}T_YM.$$\nUnder the preceding restriction identification, $Ub$ is exactly $D\\otimes_C^LG_{f,C}M\\to G_{f,C}(D\\otimes_C^LM)$, the constant-tensor map of the finite-level lemma with $V=D$. That lemma makes it invertible; exact restriction is conservative, hence $b$ is invertible. For a normalized system $M$, step 4 identifies its output's adjoint transition as\n$$A_n\\otimes^L_{A_m}G_{f,A_m}M_m\\xrightarrow{b}G_{f,A_n}(A_n\\otimes^L_{A_m}M_m)\\xrightarrow{G_{f,A_n}(\\alpha_{m,n})}G_{f,A_n}M_n.$$\nBoth arrows are isomorphisms. Thus $GM$ is normalized, and step 5 supplies boundedness below when $M$ is bounded below. This uses only the explicitly stated derived-transition definition of normalization; no unbounded equivalence with completion is presumed.",
+   "uses": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 2.29(2); Lemma 5.22 and its observation on weak normalization; Proposition 5.24. The normalization convention is the transition condition of the item."
+   }
+  },
+  {
+   "text": "Verify the coefficient-field hypotheses for $E\\subset E'$. Uniqueness of the extending absolute value identifies the restriction of $|\\cdot|_{E'}$ with $|\\cdot|_E$, so $O\\subset O'$. DVR factorization in $O'$ gives $\\varpi=u(\\varpi')^e$ with $e\\ge1$, and hence $(\\varpi^n)O'=((\\varpi')^{en})$. The finite-quotient theorem makes $O'/\\varpi O'$ finite, and $\\bigcap_n\\varpi^nO'=0$ since $|\\varpi|<1$. As in step 1, completeness of $E$ makes $O$ complete for $(\\varpi)$. The finite-over-complete-ring theorem applied to the $O$-module $O'$ now makes $O'$ finite over $O$: its residue quotient is a finite set, hence finitely generated. It is torsion-free because both rings lie in fields. The finite-torsion-free-over-DVR theorem therefore makes $O'$ finite free over $O$. Reducing a basis modulo $\\varpi^n$ makes $B_n$ finite free over $A_n$, so termwise $T_{B/A}$ is exact. The same completeness and finite-quotient arguments apply to $O'$ with the non-zero-divisor $\\varpi$, whose powers are cofinal among the uniformizer powers.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-over-complete-ring",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, allowing any principal non-zero-divisor with complete adic topology; coefficient change used in Proposition 2.29(2)."
+   }
+  },
+  {
+   "text": "On derived systems let $U$ be exact restriction of scalars for $B_\\bullet/A_\\bullet$. Tensor/restriction adjunction derives to $T\\dashv U$, with evaluations and units computed termwise; here finite freeness also makes $T$ exact. The enhanced section models supply the actual projection square $q:T_YF_A\\xrightarrow{\\sim}F_BT_X$ constructed in step 2; its evaluations are those finite-level isomorphisms, so it is invertible. Define the actual system transformation $b:T_XG_A\\to G_BT_Y$ by the identical transpose formula $T\\epsilon_A\\circ q^{-1}$ used in step 6. Step 4 and the compatibility of transposition with the specified section models identify its evaluations with the finite-level $b$ of step 6. They are all invertible, so $b$ is an isomorphism of derived-system functors. For an identity coefficient extension its transpose is the counit and $b$ is the identity. For two extensions, transpose the composite of their $b$ maps and use the defining equations $\\epsilon_D\\circ F_Db=T\\epsilon_C\\circ q^{-1}$ twice. Naturality of the counits reduces the result to $T'T\\epsilon_C$ preceded by the composite inverse projection square. The associativity equation for $q$ in step 2 identifies this with the transpose defining $b$ for the composite extension. The Hom bijection is injective, so the two actual system maps agree. This argument also applies to diagrams containing quotient maps, using derived tensor for their non-flat edges. It proves the requested coherences with identities, composition, quotients and the canonical tensor associators; it does not use faithfulness of evaluation on morphisms.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Constructions 2.26 and 5.15; Proposition 2.29(2)."
+   }
+  },
+  {
+   "text": "Finally consider any strictly increasing unbounded subsequence $r$. Its restriction $U_r$ has left adjoint $L_r$ by the left-extension lemma. The explicit formula for $L_r$ and the coefficient projection squares of step 2 give $F_{\\mathrm{full}}L_r\\cong L_rF_r$ as actual functors: at level $m$ use $q$ for $B_{r(t(m))}\\to B_m$; the transition formulas and the scalar-unit calculation in step 2 give the required compatible maps. For any $N$ in the subsequence source category and $M$ in the full target category, the bijections\n$$\\operatorname{Hom}(N,U_rG_{\\mathrm{full}}M)=\\operatorname{Hom}(L_rN,G_{\\mathrm{full}}M)=\\operatorname{Hom}(F_{\\mathrm{full}}L_rN,M)=\\operatorname{Hom}(L_rF_rN,M)=\\operatorname{Hom}(N,G_rU_rM)$$\ngive the canonical counit-preserving isomorphism $U_rG_{\\mathrm{full}}\\cong G_rU_r$. It is natural on maps and coherent under composed subsequences by composition of these Hom bijections, or equivalently by equality of their counit transposes. Apply it to the $O'$ tower indexed by $\\varpi'$ and $r(n)=en$. The coefficient ideals identified in step 7 identify its restricted ring system with $B_n=O'/\\varpi^nO'$, so this is exactly the required comparison with the construction using $\\varpi$. Every comparison above was defined by derived operations and an adjunction transpose, which are independent of resolutions by the change-of-rings, system comparison and enhanced-model lemmas; no inverse limit or integral output was introduced.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and the adjunction argument of Lemma 5.22; restriction to the cofinal powers (varpi prime)^(en)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-amb-etale-adjoint-locality",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-proper-coproducts",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-sf-triangulated-right-adjoint",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1, 5.14–5.15; Lemmas 5.16 and 5.22; Proposition 2.29(2). Explicit adjunction-mate arguments expand the coefficient and cofinal-index comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +264,52 @@
    "results": "",
    "date": "2026-10-16",
    "verdict": "no match: inspected returned signatures; ordinary sheaf pullback, generic derived linearity/evaluation, local cohomology and normalized Moore complexes do not state the derived varying-ring-system comparison or exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*system|coefficientSystem",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction\", \"DerivedCategory\"",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to derived compact support on inverse systems of etale sheaves compatible with coefficient reduction",
+   "results": "[\"Condensed.profiniteSolidification\", \"Condensed.profiniteSolidCounit\", \"LightCondSet.topCatAdjunctionUnit\", \"LightCondMod.LocallyConstant.adjunction\", \"LightCondSet.LocallyConstant.adjunction\", \"LightCondensed.lanLightCondSet\", \"CompHausLike.LocallyConstant.adjunction\", \"Condensed.lanSheafProfinite\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extraordinary inverse image on derived projective systems of torsion coefficient sheaves",
+   "results": "[\"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj\", \"SheafOfModules.pushforwardNatIso_inv\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveSystem|inverseSystem|coefficient.*system",
+   "results": "[\"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/ModelTheory/DirectLimit.lean\", \"Mathlib/Order/DirectedInverseSystem.lean\", \"Mathlib/Order/DirectedInverseSystem.lean\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability for exceptional inverse image on a ringed topos of inverse coefficient towers",
+   "results": "[\"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"PresheafOfModules.pullback\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; ordinary sheaf adjunctions, generic functor-category evaluation, root/inverse systems and local cohomology do not state the strict varying-coefficient-system exceptional adjoint theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-weil-exceptional-inverse-image",
   "by": "worker",
@@ -116,5 +325,109 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Constructed the ambient system right adjoint by Brown, evaluated it with derived left extensions, derived the uniform lower bound by truncation orthogonality, and proved normalization using constant-coefficient tensor rather than flatness of quotient rings. Two new prerequisites: generic derived left-extension calculus for semilinear systems and finite-level constant-tensor/amplitude calculus. Actual coefficient and subsequence maps are defined by counit transposition; coherence is proved before evaluation. No Lean was written or compiled.",
+  "blueprint": "Adic-stage paragraph of def-weil-exceptional-inverse-image: supplies the coherent finite-level output system before any derived inverse limit, including the finite-free coefficient and cofinal-index maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR structure, finite residue field and uniformizer factorization for O and O prime give finite coefficient rings and cofinal powers. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finite uniformizer-power quotients ensure Brown and the finite-ring proper/exceptional theorems apply at every level. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Uniqueness of the extended absolute value identifies O as a subring of O prime and verifies positive valuations of ell and varpi. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Completeness of each coefficient field gives completeness of its closed valuation subring, required for the principal-adic system setup. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type schemes over k, including the chosen compactification, are Noetherian as required by the proper-image tools. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Its arbitrary-ring first clause supplies exact extension by zero and its unbounded adjunction for the compactification open immersion. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Enhanced varying-ring sections supply actual projection/mate maps and their coherence, beyond unrelated levelwise object formulas. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The generic module extension/restriction adjunction is the underived input to the finite-ring and system scalar adjunctions. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Derives scalar tensor/restriction adjunction using everywhere-defined K-flat extension and exact restriction. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Unbounded composition for ringed-topos direct image identifies forgetting finite-ring scalars before and after proper direct image. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Its unbounded proper projection formula verifies the coefficient projection comparison used in left-extension and scalar squares. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-amb-proper-coproducts",
+    "why": "Proper direct image preserves arbitrary coproducts at finite coefficient levels, needed before Brown is applied. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Constructs the ambient system right adjoint from Grothendieckness, exactness and coproduct preservation; no compact generation is assumed. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-sf-triangulated-right-adjoint",
+    "why": "Proves exactness of the Brown right adjoint after its shift structure and unit/counit compatibility have been defined by transposition. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Supplies ordinary unbounded finite-ring right adjoints for the Hom calculation identifying evaluation of the system adjoint. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Makes O prime finitely generated over O from completeness, separatedness and its finite residue quotient, without using downstream exceptional-scalar results. This generic input is not supplied by another node of the item unit."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Turns the finite torsion-free O-module O prime into a free module; reduction gives exact finite-free scalar extension at each level. This generic input is not supplied by another node of the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-etale-adjoint-locality",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-proper-coproducts",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-sf-triangulated-right-adjoint",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-63ee45da1",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-63ee45da1 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited DAG statements, Zheng source locations, unit route, and delivery requirements. Verified all nine proof steps, hypotheses, derived non-flat coefficient changes, normalization, adjunction mates, amplitude bounds, cofinal restriction, small cases, duplicate searches, and Mathlib searches. Wrote review.md; no repairs needed."
  }
 }
