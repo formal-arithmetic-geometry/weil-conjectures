@@ -244,5 +244,31 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-d7517a3d6 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet, item, twelve proof steps, cited definitions, unit/chapter route, Kerodon 018J, current blueprint source, reports, DAG candidates, and recorded searches. Verified hypotheses, edge cases, ordered-variable pushout filtrations, weak-saturation closures, acyclicity, and no duplicate/new helper node. Wrote review.md; no repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ac6fd31b3",
+  "group": "NM",
+  "result": "pass",
+  "note": "Audited node, source, dependency, Lean declarations, docstrings, edge cases, searches, and exact statement; reproduced scompile successfully with local side overlay. No findings or fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PushoutJoinSaturation",
+  "declaration": "SSet.Enhanced.pushout_join_weak_saturation",
+  "declarations": [
+   "SSet.Enhanced.joinAugmentation",
+   "SSet.Enhanced.orderedJoinFunctor",
+   "SSet.Enhanced.pushoutJoin",
+   "SSet.Enhanced.WeaklySaturated",
+   "SSet.Enhanced.pushout_join_weak_saturation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PushoutJoinSaturation.lean",
+  "statement": "theorem pushout_join_weak_saturation : (∀ {K L : SSet.{u}} (k : K ⟶ L), Mono k → WeaklySaturated (fun {A B : SSet.{u}} (i : A ⟶ B) ↦ Mono i ∧ innerAnodyneExtensions (pushoutJoin i k))) ∧ (∀ {A B : SSet.{u}} (i : A ⟶ B), Mono i → WeaklySaturated (fun {K L : SSet.{u}} (k : K ⟶ L) ↦ Mono k ∧ innerAnodyneExtensions (pushoutJoin i k)))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The ordered join is constructed by terminal augmentation and Day convolution along ordinal concatenation, using Mathlib Kan extensions with real data. pushoutJoin is the canonical pushout.desc with the exact displayed source. No arbitrary join or comparison-map parameters remain."
  }
 }
