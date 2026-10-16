@@ -28,9 +28,65 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $F:I\\to\\mathcal C$ be any coherent diagram indexed by a small $\\kappa$-filtered quasicategory, with a colimiting cocone and apex $d$. For each vertex $v\\in K_0$, the $\\kappa$-compactness of $p(v)$ gives a natural equivalence $\\operatorname{Map}_{\\mathcal C}(p(v),d)\\simeq\\operatorname{colim}_{i\\in I}\\operatorname{Map}_{\\mathcal C}(p(v),F(i))$. This is exactly the mapping-space clause in [def-coef-presentable-infinity-category], applied to the vertex object $p(v)$. Write $a_v$ for this canonical map in the direction from the colimit to the mapping space. Functoriality of precomposition makes the $a_v$ a coherent transformation of $K^{\\mathrm{op}}$-diagrams.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 5.3.4.5, printed p. 393; Corollary 5.3.4.15, printed p. 398"
+   }
+  },
+  {
+   "text": "Because the given cocone $p\\to c$ is colimiting, the coherent Yoneda mapping-space criterion [lem-coef-infinity-yoneda-presheaf-limits] identifies, naturally in $d$, $\\operatorname{Map}_{\\mathcal C}(c,d)$ with the $K$-shaped limit $\\lim_{v\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(p(v),d)$. The opposite indexing is the one in the cited statement for a cocone.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 5.3.4.15, printed p. 398, using the coherent mapping-space criterion"
+   }
+  },
+  {
+   "text": "Put $X(v,i)=\\operatorname{Map}_{\\mathcal C}(p(v),F(i))$, a coherent diagram $K^{\\mathrm{op}}\\times I\\to\\mathcal S$. Its values are small up to equivalence by local smallness. Reversing the order of simplices preserves nondegeneracy and their number, so $K^{\\mathrm{op}}$ is $\\kappa$-small. The canonical maps $a_v$ of Step 1 are equivalences at every vertex, hence form an equivalence of coherent diagrams by [lem-cbc-enhanced-functor-cone-calculus]. Applying the limit functor gives an equivalence $\\lim_v\\operatorname{colim}_i X(v,i)\\to\\lim_v\\operatorname{Map}_{\\mathcal C}(p(v),d)$. Since $I$ is small and $\\kappa$-filtered, [lem-coef-spaces-kappa-limit-filtered-colimit] gives the equivalence $q:\\operatorname{colim}_i\\lim_v X(v,i)\\to\\lim_v\\operatorname{colim}_i X(v,i)$. Thus the composite $(\\lim_v a_v)\\circ q$ is an equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, printed pp. 391-392, and Corollary 5.3.4.15, printed p. 398"
+   }
+  },
+  {
+   "text": "For each $i$, [lem-coef-infinity-yoneda-presheaf-limits] gives the natural equivalence $r_i:\\operatorname{Map}_{\\mathcal C}(c,F(i))\\to\\lim_v X(v,i)$; Step 2 gives $r_d$ with target $\\lim_v\\operatorname{Map}_{\\mathcal C}(p(v),d)$. Let $b:\\operatorname{colim}_i\\operatorname{Map}_{\\mathcal C}(c,F(i))\\to\\operatorname{Map}_{\\mathcal C}(c,d)$ be the compactness comparison. The coherent diagram formed by these maps satisfies $r_d\\circ b\\simeq(\\lim_v a_v)\\circ q\\circ\\operatorname{colim}_i r_i$: restricting along the $i$th colimit cocone and the $v$th limit projection, both composites send a map $h:c\\to F(i)$ to $p(v)\\to c\\xrightarrow{h}F(i)\\to d$; the coherences are those of the two given cocones and functorial composition. Thus the equality holds for the entire induced cone, not only its vertices. Both $r_d$ and the right-hand composite are equivalences, so $b$ is an equivalence. Since $F$ was arbitrary, [def-coef-presentable-infinity-category] makes $c$ $\\kappa$-compact. For $K=\\varnothing$, the same proof uses the empty limit, namely the terminal space, and the empty-shape clause of the interchange theorem. For $K=\\Delta^0$, it recovers precisely the assumed compactness of $p(v)$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 5.3.4.15, printed p. 398"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-spaces-kappa-limit-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Corollary 5.3.4.15, printed p. 398"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-presheaf-presentability",
@@ -84,5 +140,29 @@
   "group": "N0"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-small-colimits",
+  "worker": "stage1",
+  "summary": "Mapping-space compactness calculation, with coherent vertexwise comparison, explicit canonical-map compatibility, and one auxiliary κ-small-limit/κ-filtered-colimit theorem for small diagrams of spaces.",
+  "blueprint": "Technical foundational input along the recorded ancestry from lem-coef-space-presheaf-presentability to prop-coef-integral-exceptional-adjoint, serving its second proof paragraph: the displayed finite-coefficient mapping-complex adjunction before the derived inverse limit. The current main-20261015 proof has no literal compactness clause; the four steps prove the supporting compactness lemma rather than attribute that sentence to the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Its vertexwise criterion recognizes the coherent canonical compactness transformation as an equivalence; this is a general quasicategory tool, not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-938be65d0",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-938be65d0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-spaces-kappa-limit-filtered-colimit, the full statements of the cited nodes (def-coef-presentable-infinity-category, def-cbc-enhanced-diagrams-cones, lem-coef-infinity-yoneda-presheaf-limits, lem-cbc-enhanced-functor-cone-calculus) and the parent's use (lem-coef-space-presheaf-presentability step 4), all in full. The item is HTT Cor. 5.3.4.15 with the DAG's universe conventions. The parent's step 4 meets its hypotheses: locally small, all small kappa-filtered colimits, kappa-small K, compact representables. Tested: K empty (initial object; a kappa-filtered colimit of points is a point), K a point, two points (finite coproducts); and a non-kappa-small K is false (N in Set is not omega-compact), so that hypothesis is needed and is kept. Steps: step 1 is the compactness clause of the definition node; steps 2 and 4 are the cocone clause of the Yoneda node with opposite indexing; step 3 uses the vertexwise-equivalence clause of cone-calculus and the new interchange node with K^op kappa-small and I small. Step 4 writes out the compatibility of the canonical maps on the (i,v) components. The new node is HTT Prop. 5.3.3.3 (1)=>(2) for small I. It is statement-only and self-contained with correct stmt_deps, and correct on K empty, I terminal and kappa=omega. It is strictly smaller than the item, not a restatement. My own rg duplicate search of the DAG (compact, filtered/commute/preserve, 5.3.3.3/5.3.4.15) found no equivalent; the nearby candidates I read do not state it. Mathlib: three kinds of search; the hits are ordinary Type-valued analogues, so no match is correct. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, for its generic vertexwise criterion only. No SGA. Residue: HTT is not archived in literature/ (it is WANTED; page numbers are unverified locally), and a metadata nit: the new node's blueprint.from.via omits the item at its front. No fixes written."
+ }
 }

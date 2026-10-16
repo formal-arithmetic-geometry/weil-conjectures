@@ -31,62 +31,137 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-filtered-category-directed-cofinal] to the small filtered category $I$. It supplies a nonempty directed set $A$, a functor $F:A\\to I$, and the clause that every colimit cocone on a diagram over $I$ remains a colimit after whiskering with $F$. Whisker $X$, $Y$, and $f$ with $F$; each component of the resulting natural transformation is still a weak homotopy equivalence.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (1); directed sets are preorders, not necessarily partial orders (definition-directed-set)."
+   }
+  },
+  {
+   "text": "The directed set $A$ need not be antisymmetric. Put $a\\sim a^{\\prime}$ if $a\\le a^{\\prime}$ and $a^{\\prime}\\le a$, and let $B=A/{\\sim}$ with $[a]\\le[a^{\\prime}]$ if $a\\le a^{\\prime}$. This is a small nonempty partial order; a common upper bound in $A$ gives one in $B$, hence every finite subset of $B$ has an upper bound. Choose representatives $r:B\\to A$. They form a monotone functor since the quotient order is independent of representatives. For any diagram $Z:A\\to\\mathrm{sSet}$, cocones on $Zr$ and on $Z$ correspond: a cocone $(\\mu_b)$ on $Zr$ extends to the legs $\\lambda_a=\\mu_{[a]}\\circ Z(a\\to r([a]))$. If $a\\le a^{\\prime}$, the two composites from $a$ to $r([a^{\\prime}])$ are the same arrow in the preorder, giving the cocone equation. Restriction and extension are inverse: $r([a])\\sim a$ gives inverse arrows, while $[r(b)]=b$ and the arrow $r(b)\\to r(b)$ is the identity. These operations preserve the apex and commute with postcomposition; by the universal property [def-weil-pbc-category-colimit], a colimit cocone on $Z$ restricts to a colimit cocone on $Zr$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition directed-set and elementary antisymmetrization and cocone calculation, written here."
+   }
+  },
+  {
+   "text": "Apply the directed-colimit clause of [lem-coef-sset-gluing-filtered-equivalences] to $XFr,YFr:B\\to\\mathrm{sSet}$ and $fr$. Step 2 proves that $B$ is small, nonempty and partially ordered with finite upper bounds. Each component of $fr$ is $f_{F(r(b))}$, so is a weak homotopy equivalence by hypothesis. The resulting degreewise colimit map $h:C_X=\\operatorname{colim}_B XFr\\to C_Y=\\operatorname{colim}_B YFr$ is therefore a weak homotopy equivalence. No condition on transition maps has been used.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XE",
+    "place": "Proposition 3.2.8.3 (00XE), filtered-colimit assertion specialized to a directed partial order; the cited existing node states precisely this specialization."
+   }
+  },
+  {
+   "text": "Let $(L_X,\\iota_i)$ and $(L_Y,\\kappa_i)$ be the original degreewise colimit cocones and $g:L_X\\to L_Y$ the map induced by $f$. Clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal] and the cocone correspondence of step 2 show that $(L_X,\\iota_{F(r(b))})$ and $(L_Y,\\kappa_{F(r(b))})$ are colimit cocones over $B$. If $j_b,k_b$ denote the legs into $C_X,C_Y$, the universal property [def-weil-pbc-category-colimit] gives isomorphisms $u_X:C_X\\to L_X$, $u_Y:C_Y\\to L_Y$ characterized by $u_Xj_b=\\iota_{F(r(b))}$ and $u_Yk_b=\\kappa_{F(r(b))}$. Both $g u_X$ and $u_Yh$, after composition with $j_b$, equal $\\kappa_{F(r(b))}f_{F(r(b))}$, so uniqueness gives $g u_X=u_Yh$. Thus $g=u_Yh u_X^{-1}$. A simplicial isomorphism realizes to a homeomorphism (realization applies its inverse), hence induces bijections on components and isomorphisms on every based homotopy group. The defining maps on these invariants for $g$ are composites of those for $u_Y,h,u_X^{-1}$, so $g$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (1), followed by the displayed universal-property calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00XE",
+  "place": "Agent-written reduction of the filtered-colimit assertion of Kerodon Proposition 3.2.8.3 (00XE; not archived in literature/, WANTED) to the directed-poset clause of lem-coef-sset-gluing-filtered-equivalences via Stacks Tag 0032 (categories.tex, lemma-directed-category-system) and an antisymmetrization written here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "filtered.*weak|weak.*filtered|IsStableUnderFilteredColimits",
-   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"line\": \"37\", \"text\": \"instance : MorphismProperty.IsStableUnderFilteredColimits.{u, u} (monomorphisms SSet.{u}) where\"}\n",
+   "query": "weakEquivalence.*colimit|colimit.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T18:12:55Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*colimit|colimit.*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"43ea0a3dee0de344\"}",
    "date": "2026-10-16",
-   "verdict": "no match: IsStableUnderFilteredColimits is a generic property, and the pinned SSet instance is only for monomorphisms (Monomorphisms.lean:37-41). The generic model-category hits prove coproduct stability, not filtered-colimit stability for realization weak equivalences."
+   "verdict": "No exact match: hits concern model-category structures or homotopy localization, not weak-equivalence stability under filtered colimits."
   },
   {
-   "tool": "leanfinder",
-   "query": "A filtered colimit of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {J : Type u_1} {X Y : J → C} (f : (i : J) → X i ⟶ Y i) [inst_4 : C\", \"doc\": \"In a category equipped with a weak factorization system where the left class consists of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and the right class consists \"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"Any category equipped with a model category structure (consisting of weak equivalences, fibrations, and cofibrations satisfying the model category axioms) necessarily has all finite colimits.\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject Y)\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [(HomotopicalAlgebra.weakEquivalences C).ContainsIdentities] \", \"doc\": \"In a homotopical category where the class of weak equivalences satisfies the two-out-of-three property and contains all identity morphisms, if two morphisms $ f_0, f_1 : X \\\\to Y $ are right homotopic \"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [HomotopicalAlgebra.IsFibrant X]\\n  [HomotopicalAlgebra.IsFibrant Y] (f : X ⟶ Y) [HomotopicalAlgebra.WeakEquivalence\", \"doc\": \"In a model category, if $ X $ and $ Y $ are both cofibrant and fibrant objects, and $ f: X \\\\to Y $ is a weak equivalence, then there exists a morphism $ g: Y \\\\to X $ such that $ f \\\\circ g $ is right h\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [HomotopicalAlgebra.IsFibrant X]\\n  [HomotopicalAlgebra.IsFibrant Y] (f : X ⟶ Y) [HomotopicalAlgebra.WeakEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a model category, and let $X,Y \\\\in \\\\mathcal{C}$ be objects that are both cofibrant and fibrant. If $f : X \\\\to Y$ is a weak equivalence, then there exists a morphism $g : Y \\\\to X$ \"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C} (Z : C)\\n  [HomotopicalAlgebra.IsFibrant Z] (f : X ⟶ Y) [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y]\\n  [HomotopicalAlgebra.WeakEquivalence f], Function.Bijective f\", \"doc\": \"In a category with weak equivalences, if $ f : X \\to Y $ is a weak equivalence between cofibrant objects $ X $ and $ Y $, and $ Z $ is a fibrant object, then the function induced by precomposition with\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] (X : C) {Y Z : C}\\n  [HomotopicalAlgebra.IsCofibrant X] (g : Y ⟶ Z) [HomotopicalAlgebra.IsFibrant Y] [HomotopicalAlgebra.IsFibrant Z]\\n  [HomotopicalAlgebra.WeakEquivalence g], Function.Bijective fun\", \"doc\": \"Given a cofibrant object $X$ and fibrant objects $Y,Z$ in a model category, if $g : Y \\\\to Z$ is a weak equivalence, then the function mapping left homotopy classes $f : X \\\\to Y$ to their postcompositi\"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → C → C → [HomotopicalAlgebra.CategoryWithWeakEquivalences C] → Type v\", \"doc\": \"The quotient of morphisms $f,g: X \\to Y$ in a category with weak equivalences by the right homotopy relation. Two morphisms are identified if there exists a path object $P(Y)$ and a morphism $h: X \\to P\"}\n",
+   "tool": "loogle",
+   "query": "SSet, weak equivalence, filtered colimit",
+   "results": "{\"t\": \"2026-10-16T18:12:56Z\", \"tool\": \"loogle\", \"query\": \"SSet, weak equivalence, filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `weak`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: IsStableUnderFilteredColimits is a generic property, and the pinned SSet instance is only for monomorphisms (Monomorphisms.lean:37-41). The generic model-category hits prove coproduct stability, not filtered-colimit stability for realization weak equivalences."
+   "verdict": "query rejected: loogle: Unknown identifier `weak`"
   },
   {
    "tool": "leansearch",
-   "query": "Weak equivalences of simplicial sets are stable under directed colimits in the arrow category",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderColimitsOfShape.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {W : CategoryTheory.MorphismProperty C} {J : Type u_1}\\n  [inst_1 : CategoryTheory.Category.{v_1, u_1} J],\\n  (∀ (X₁ X₂ : CategoryTheory.Functor J C) (c₁ : CategoryTheory.Limits.Cocone X₁) (c₂ : CategoryTheory.Limits.Cocone X₂)\\n      (h₁ : Categ\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $W$ in $\\\\mathcal{C}$, and a category $\\\\mathcal{J}$, this constructor provides a proof that $W$ is stable under colimits of shape $\\\\mathcal{J}$. Spec\"}\n  {\"name\": \"CategoryTheory.Arrow.hasColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Comma\", \"type\": \"[HasColimits T] : HasColimits (Arrow T)\", \"doc\": \"If a category $\\\\mathcal{T}$ has all colimits, then its arrow category (whose objects are morphisms $f : X \\\\to Y$ in $\\\\mathcal{T}$ and whose morphisms are pairs $(a : X \\\\to X', b : Y \\\\to Y')$ satisfyin\"}\n  {\"name\": \"HomotopicalAlgebra.weakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": MorphismProperty C\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with weak equivalences, this defines the morphism property where each morphism is declared a weak equivalence, as part of the homotopical category structure.\"}\n  {\"name\": \"CategoryTheory.Arrow.hasColimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Comma\", \"type\": \"(F : J ⥤ Arrow T) [i₁ : HasColimit (F ⋙ leftFunc)] [i₂ : HasColimit (F ⋙ rightFunc)] : HasColimit F\", \"doc\": \"For a functor $ F : J \\to \\text{Arrow}(T) $, if the compositions of $ F $ with the left projection functor (mapping morphisms to their domains) and the right projection functor (mapping morphisms to the\"}\n  {\"name\": \"CategoryTheory.Arrow.hasColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Limits.Comma\", \"type\": \"[HasColimitsOfShape J T] : HasColimitsOfShape J (Arrow T)\", \"doc\": \"If a category $\\\\mathcal{T}$ has colimits of shape $J$, then its arrow category $\\\\text{Arrow}(\\\\mathcal{T})$, whose objects are morphisms in $\\\\mathcal{T}$, also has colimits of shape $J$.\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[CategoryWithWeakEquivalences C] [(weakEquivalences C).IsStableUnderComposition] [hf : WeakEquivalence f]\\n  [hg : WeakEquivalence g] : WeakEquivalence (f ≫ g)\", \"doc\": \"In a category equipped with weak equivalences that is stable under composition, the composition of two weak equivalences $f$ and $g$ is itself a weak equivalence. This asserts that the property of bei\"}\n  {\"name\": \"CategoryTheory.TransfiniteCompositionOfShape.ofArrowIso_isColimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Preorder.TransfiniteCompositionOfShape\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} [inst_1 : LinearOrder J] [inst_2 : OrderBot J]\\n  {X Y : C} {f : X ⟶ Y} [inst_3 : SuccOrder J] [inst_4 : WellFoundedLT J]\\n  (c : CategoryTheory.TransfiniteCompositionOfShape J f) {X' Y' : C} {f' : X' ⟶ Y'}\\n  (e : CategoryTheory.Arr\", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered set $J$ with a bottom element and successor structure, and an isomorphism $e : f \\\\cong f'$ between morphisms $f : X \\\\to Y$ and $f' : X' \\\\to Y'$ in $\\\\math\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[IsWeakFactorizationSystem (trivialCofibrations C) (fibrations C)] [∀ i, WeakEquivalence (f i)] :\\n  WeakEquivalence (Limits.Sigma.map f)\", \"doc\": \"In a category equipped with a weak factorization system where the left class consists of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and the right class consists \"}\n",
+   "query": "A filtered colimit of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T18:12:56Z\", \"tool\": \"leansearch\", \"query\": \"A filtered colimit of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.isStableUnderColimitsOfShape\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.casesOn\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.recOn\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\"], \"digest\": \"dd207e6751e86469\"}",
    "date": "2026-10-16",
-   "verdict": "no match: IsStableUnderFilteredColimits is a generic property, and the pinned SSet instance is only for monomorphisms (Monomorphisms.lean:37-41). The generic model-category hits prove coproduct stability, not filtered-colimit stability for realization weak equivalences."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits",
-   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) : Prop\", \"doc\": \"The condition that a property of morphisms is stable by filtered colimits. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] : CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{w, w', v, u} (CategoryTheory.MorphismProperty.isomorphisms C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.isStableUnderColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {W : CategoryTheory.MorphismProperty C} [self : CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{w, w', v, u} W] (J : Type w') [CategoryTheory.Category.{w, w'} J] [CategoryTheory.IsFiltered J] : W.IsStableUnderColimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {W : CategoryTheory.MorphismProperty C} (isStableUnderColimitsOfShape : ∀ (J : Type w') [inst : CategoryTheory.Category.{w, w'} J] [CategoryTheory.IsFiltered J], W.IsStableUnderColimitsOfShape J := by infer_instance) : CategoryTheory.MorphismProperty.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderTransfiniteComposition.instOfIsMultiplicativeOfRespectsIsoOfIsStableUnderFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) [W.IsMultiplicative] [W.RespectsIso] [CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{w, w, v, u} W] : W.IsStableUnderTransfiniteComposition\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderTransfiniteCompositionOfShapeOfIsMultiplicativeOfRespectsIsoOfIsStableUnderFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (J : Type w) [LinearOrder J] [SuccOrder J] [OrderBot J] [WellFoundedLT J] [W.IsMultiplicative] [W.RespectsIso] [CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{w, w, v, u} W] : W.IsStableUnderTran\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsMonomorphismsOfAB5OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasFilteredColimitsOfSize.{v', u', v, u} C] [CategoryTheory.AB5OfSize.{v', u', v, u} C] : CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{v', u', v, u} (CategoryTheory.MorphismProperty.monomorphisms C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Types.instIsStableUnderFilteredColimitsMonomorphismsType\", \"module\": \"Mathlib.CategoryTheory.Types.Monomorphisms\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{v', u', u, u + 1} (CategoryTheory.MorphismProperty.monomorphisms (Type u))\", \"doc\": \"\"}\n  {\"name\": \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monomorphisms\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.{u, u, u, u + 1} (CategoryTheory.MorphismProperty.monomorphisms SSet)\", \"doc\": \"\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: IsStableUnderFilteredColimits is a generic property, and the pinned SSet instance is only for monomorphisms (Monomorphisms.lean:37-41). The generic model-category hits prove coproduct stability, not filtered-colimit stability for realization weak equivalences."
-  },
-  {
-   "tool": "loogle",
-   "query": "SSet, IsStableUnderFilteredColimits",
-   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsStableUnderFilteredColimits'\n",
-   "date": "2026-10-16",
-   "verdict": "invalid pattern: loogle: unknown identifier 'IsStableUnderFilteredColimits'; corrected Loogle search is recorded separately"
-  },
-  {
-   "tool": "grep",
-   "query": "(weakEquivalences|weakEquivalence|WeakEquivalence).*(colimit|ex\\b)|(colimit|\\bex\\b).*(weakEquivalences|weakEquivalence|WeakEquivalence)",
-   "results": "{\"t\": \"2026-10-16T17:18:15Z\", \"tool\": \"grep\", \"query\": \"(weakEquivalences|weakEquivalence|WeakEquivalence).*(colimit|ex\\\\b)|(colimit|\\\\bex\\\\b).*(weakEquivalences|weakEquivalence|WeakEquivalence)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"be6a453fca618d89\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search; actual msearch metadata copied verbatim. The hits concern nerve simplices, generic adjunctions, model structure definitions or stability of monomorphisms/coproducts, and do not state this node."
+   "verdict": "No exact match: hits concern model-category structures or homotopy localization, not weak-equivalence stability under filtered colimits."
   },
   {
    "tool": "leanfinder",
-   "query": "Weak homotopy equivalences in SSet are closed under filtered colimits of morphisms",
-   "results": "{\"t\": \"2026-10-16T17:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"Weak homotopy equivalences in SSet are closed under filtered colimits of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.hasColimits\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\"], \"digest\": \"2de5f093cd916111\"}",
+   "query": "filtered colimits preserve weak homotopy equivalences of simplicial sets",
+   "results": "{\"t\": \"2026-10-16T18:12:57Z\", \"tool\": \"leanfinder\", \"query\": \"filtered colimits preserve weak homotopy equivalences of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"7c710d522e2f5069\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search; actual msearch metadata copied verbatim. The hits concern nerve simplices, generic adjunctions, model structure definitions or stability of monomorphisms/coproducts, and do not state this node."
+   "verdict": "No exact match: hits concern model-category structures or homotopy localization, not weak-equivalence stability under filtered colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits preserve weak homotopy equivalences simplicial sets",
+   "results": "{\"t\": \"2026-10-16T18:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"filtered colimits preserve weak homotopy equivalences simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"273d034e583e31ee\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: hits concern model-category structures or homotopy localization, not weak-equivalence stability under filtered colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "simplicial sets filtered colimit weak equivalence",
+   "results": "{\"t\": \"2026-10-16T18:35:52Z\", \"tool\": \"loogle\", \"query\": \"simplicial sets filtered colimit weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `simplicial`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "query rejected: loogle: Unknown identifier `simplicial`"
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence colimit simplicial",
+   "results": "{\"t\": \"2026-10-16T18:35:52Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence colimit simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism property of weak equivalences in the Kan Quillen model category is stable under filtered colimits",
+   "results": "{\"t\": \"2026-10-16T18:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"The morphism property of weak equivalences in the Kan Quillen model category is stable under filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\"], \"digest\": \"3f7940b231e43964\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: inspected Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:198-218 (pushout trivial-cofibration instances), SimplicialSet/CategoryWithFibrations.lean:65-99 (model structure TODO) and SimplicialSet/Monomorphisms.lean:37-41 (only mono stability), none states the required weak-homotopy-equivalence closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"colimMap\"",
+   "results": "{\"t\": \"2026-10-16T18:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"colimMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: inspected Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:198-218 (pushout trivial-cofibration instances), SimplicialSet/CategoryWithFibrations.lean:65-99 (model structure TODO) and SimplicialSet/Monomorphisms.lean:37-41 (only mono stability), none states the required weak-homotopy-equivalence closure."
+  },
+  {
+   "tool": "grep",
+   "query": "(weakEquivalences|weakEquivalence|WeakEquivalence).*(colimit|[Ff]iltered)|(colimit|[Ff]iltered).*(weakEquivalences|weakEquivalence|WeakEquivalence)",
+   "results": "{\"t\": \"2026-10-16T18:42:04Z\", \"tool\": \"grep\", \"query\": \"(weakEquivalences|weakEquivalence|WeakEquivalence).*(colimit|[Ff]iltered)|(colimit|[Ff]iltered).*(weakEquivalences|weakEquivalence|WeakEquivalence)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"43ea0a3dee0de344\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: inspected Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:198-218 (pushout trivial-cofibration instances), SimplicialSet/CategoryWithFibrations.lean:65-99 (model structure TODO) and SimplicialSet/Monomorphisms.lean:37-41 (only mono stability), none states the required weak-homotopy-equivalence closure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ex-infinity-finite-products",
@@ -94,5 +169,21 @@
   "group": "NZ"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-colimit-weak-equivalences",
+  "worker": "stage1",
+  "summary": "Four steps, no new nodes: obtain a directed preorder, explicitly pass to its partial-order quotient with an apex-preserving cocone correspondence, apply the existing directed-poset weak-equivalence theorem, and compute the canonical comparison equation to recover the original map.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph's smaller input Proposition 3.2.8.3 (00XE), with the directed reindexing transport made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-3645d05c4",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-3645d05c4 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full (two colimit/simplicial definitions, def-cbc-enhanced-diagrams-cones, lem-weil-pbc-filtered-category-directed-cofinal, lem-coef-sset-gluing-filtered-equivalences and lem-coef-kan-quillen-right-proper). The statement is unchanged and true: arbitrary small filtered I, no injectivity assumed. Both nodes define weak equivalence the same way: path components and pi_r at every base point of the realization. Step 1: the directed-cofinal node is Lean-closed, so it is a tool and needs no tool_uses entry. Its clause (1) matches Stacks 0032 (categories.tex lemma-directed-category-system). definition-directed-set confirms a directed set is only a preorder, so step 2's antisymmetrization is needed. I checked by hand the cocone equation of step 2, mu_[a'] Z(a->r[a']) = mu_[a] Z(a->r[a]), and both round trips; the step is elementary. Step 3: the directed-poset clause of the gluing node has exactly these hypotheses (small nonempty poset with upper bounds of finite subsets, componentwise weak equivalences, arbitrary transition maps). Step 4: g u_X = u_Y h holds by the uniqueness of the colimit map, and isomorphisms preserve weak equivalences. No new nodes and no cycle (transitive walk over 72 dependencies). The route stays in sk-prop-sf-biduality-general. The gluing node is a strict special case, not a duplicate, and the split is a real reduction. Edge case: the idempotent monoid {1,e} relies on 0032's cofinal A, which is correct; the report's one-object remark is wrong only for that case and is not in the node. I did not open Kerodon 00XE (not archived, WANTED) and checked the mathematics directly. Fix: proof_origin by:document with an unarchived Kerodon URL, although the proof is an agent-written reduction, so I set it to by:agent with an explicit place. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-filtered-colimit-weak-equivalences.json.; 1 file(s) fixed by the reviewer"
+ }
 }

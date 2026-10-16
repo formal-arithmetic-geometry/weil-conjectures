@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-def-sfb-base-change-morphism-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The pullback comparison of a commutative square",
- "statement": "Work in the setting of [sk-def-sfb-dc-setting] with a commutative condensed ring $\\Lambda$, and\nlet\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{\\;g'\\;} & X\\\\\n{\\scriptstyle f'}\\downarrow & & \\downarrow{\\scriptstyle f}\\\\\nY' & \\xrightarrow{\\;g\\;} & Y\n\\end{array}\n\\qquad f\\circ g'=g\\circ f'\n$$\nbe a commutative square of the setting. Write $c_{a,b}\\colon L(b\\circ a)^*\\xrightarrow{\\sim}La^*\\circ Lb^*$\nfor the composition isomorphisms of the restricted pullbacks on $D_{\\mathrm{cons}}$\n([def-sfb-dc-upper-star], [def-sfb-dc-upper-star-comp]). The *pullback comparison* of the square is\nthe natural isomorphism of functors $D_{\\mathrm{cons}}(Y,\\Lambda)\\to D_{\\mathrm{cons}}(X',\\Lambda)$\n$$\n\\theta_{sq}\\colon Lf'^*\\circ Lg^*\\xrightarrow{\\ c_{f',g}^{-1}\\ }L(g\\circ f')^*=L(f\\circ g')^*\\xrightarrow{\\ c_{g',f}\\ }Lg'^*\\circ Lf^* .\n$$\nThe middle equality uses only $g\\circ f'=f\\circ g'$. As a composite of natural isomorphisms,\n$\\theta_{sq}$ is a natural isomorphism.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\neq\\ell$. Let $X,X^{\\prime},Y,Y^{\\prime}$ be separated schemes of finite type over $k$, and let all four arrows below be morphisms of $k$-schemes ([sk-def-sfb-dc-setting]). Fix a commutative condensed ring $\\Lambda$ ([sk-def-sfb-condensed-ring]), and let\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{\\;g'\\;} & X\\\\\n{\\scriptstyle f'}\\downarrow & & \\downarrow{\\scriptstyle f}\\\\\nY' & \\xrightarrow{\\;g\\;} & Y\n\\end{array}\n\\qquad f\\circ g'=g\\circ f'\n$$\nbe a commutative square. Write $c_{a,b}\\colon L(b\\circ a)^*\\xrightarrow{\\sim}La^*\\circ Lb^*$\nfor the composition isomorphisms of the restricted pullbacks on $D_{\\mathrm{cons}}$\n([def-sfb-dc-upper-star], [def-sfb-dc-upper-star-comp]). The *pullback comparison* of the square is\nthe natural isomorphism of functors $D_{\\mathrm{cons}}(Y,\\Lambda)\\to D_{\\mathrm{cons}}(X',\\Lambda)$\n$$\n\\theta_{sq}\\colon Lf'^*\\circ Lg^*\\xrightarrow{\\ c_{f',g}^{-1}\\ }L(g\\circ f')^*=L(f\\circ g')^*\\xrightarrow{\\ c_{g',f}\\ }Lg'^*\\circ Lf^* .\n$$\nThe middle equality uses only $g\\circ f'=f\\circ g'$. As a composite of natural isomorphisms,\n$\\theta_{sq}$ is a natural isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-base-change-morphism/det-def-sfb-base-change-morphism-comparison.md",
   "place": "node det-def-sfb-base-change-morphism-comparison, order None"
@@ -15,14 +15,135 @@
  "stmt_deps": [
   "sk-def-sfb-dc-setting",
   "def-sfb-dc-upper-star",
+  "def-sfb-dc-upper-star-comp",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use [sk-def-sfb-dc-setting] and [def-sfb-dc-upper-star] to regard all four restricted pullbacks as functors between the displayed bounded constructible categories for the fixed commutative condensed ring $\\Lambda$. The composites $g\\circ f'$ and $f\\circ g'$ are again morphisms of $k$-schemes between the same schemes, so [def-sfb-dc-upper-star-comp] applies to $(f',g)$ and $(g',f)$ with no additional coefficient hypothesis. It supplies natural isomorphisms $c_1=c_{f',g}:L(g\\circ f')^*\\xrightarrow{\\sim}Lf'^*\\circ Lg^*$ and $c_2=c_{g',f}:L(f\\circ g')^*\\xrightarrow{\\sim}Lg'^*\\circ Lf^*$. Both have source and target functors from $D_{\\mathrm{cons}}(Y,\\Lambda)$ to $D_{\\mathrm{cons}}(X',\\Lambda)$.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "def-sfb-dc-upper-star",
+    "def-sfb-dc-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-base-change-morphism/det-def-sfb-base-change-morphism-comparison.md",
+    "place": "Definition: composition isomorphisms, commutative-square equality, and final natural-isomorphism sentence"
+   }
+  },
+  {
+   "text": "The hypothesis $g\\circ f'=f\\circ g'$ identifies the two scheme morphisms indexing the restricted functors of [def-sfb-dc-upper-star]. Substitution in this equality therefore gives an equality of functors $L(g\\circ f')^*=L(f\\circ g')^*$, on objects and morphisms. Let $e$ be its equality-induced natural isomorphism: after substituting one composite for the other, $e$ and its inverse are the identity natural transformation. This step uses only the commutativity equation, and does not require that the square be cartesian.",
+   "uses": [
+    "def-sfb-dc-upper-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-base-change-morphism/det-def-sfb-base-change-morphism-comparison.md",
+    "place": "Definition: composition isomorphisms, commutative-square equality, and final natural-isomorphism sentence"
+   }
+  },
+  {
+   "text": "Put $A=Lf'^*\\circ Lg^*$, $B=L(g\\circ f')^*$, $C=L(f\\circ g')^*$ and $D=Lg'^*\\circ Lf^*$. Define $\\theta_{sq}=c_2\\circ e\\circ c_1^{-1}:A\\to D$ and componentwise $\\psi=c_1\\circ e^{-1}\\circ c_2^{-1}:D\\to A$. For a morphism $u:K\\to L$ in $D_{\\mathrm{cons}}(Y,\\Lambda)$, the naturality equations of $c_2$, $e$, and $c_1^{-1}$ give $D(u)c_{2,K}e_Kc_{1,K}^{-1}=c_{2,L}C(u)e_Kc_{1,K}^{-1}=c_{2,L}e_LB(u)c_{1,K}^{-1}=c_{2,L}e_Lc_{1,L}^{-1}A(u)$. Hence $\\theta_{sq}$ is natural. At each object, associativity and the inverse equations of the three factors give $\\psi\\theta_{sq}=c_1e^{-1}(c_2^{-1}c_2)ec_1^{-1}=c_1(e^{-1}e)c_1^{-1}=1_A$ and $\\theta_{sq}\\psi=c_2e(c_1^{-1}c_1)e^{-1}c_2^{-1}=c_2(ee^{-1})c_2^{-1}=1_D$. Multiplying the naturality equation $D(u)\\theta_K=\\theta_LA(u)$ on the left by $\\psi_L$ and on the right by $\\psi_K$ gives $\\psi_LD(u)=A(u)\\psi_K$, so $\\psi$ is natural too. Thus the specified comparison is a natural isomorphism with the required orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-base-change-morphism/det-def-sfb-base-change-morphism-comparison.md",
+    "place": "Definition: composition isomorphisms, commutative-square equality, and final natural-isomorphism sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-dc-upper-star",
   "def-sfb-dc-upper-star-comp"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-base-change-morphism/det-def-sfb-base-change-morphism-comparison.md",
+  "place": "Definition: composition isomorphisms, commutative-square equality, and final natural-isomorphism sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructiblePullbackSquareComparison|pullbackSquareComparison",
+   "results": "{\"t\": \"2026-10-16T17:59:27Z\", \"tool\": \"grep\", \"query\": \"boundedConstructiblePullbackSquareComparison|pullbackSquareComparison\", \"sub\": \"SixFunctors\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "uninformative: Mathlib has no SixFunctors subdirectory; superseded by the whole-Mathlib grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullbackSquareComparison, upperStarComp, CommSq",
+   "results": "{\"t\": \"2026-10-16T17:59:28Z\", \"tool\": \"loogle\", \"query\": \"pullbackSquareComparison, upperStarComp, CommSq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pullbackSquareComparison'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no matching result; unknown-identifier query is superseded by the valid generic Iso/eqToIso query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition isomorphism derived pullback comparison commutative square bounded constructible condensed coefficients",
+   "results": "{\"t\": \"2026-10-16T17:59:28Z\", \"tool\": \"leansearch\", \"query\": \"composition isomorphism derived pullback comparison commutative square bounded constructible condensed coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Over.pullbackComp\", \"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback\", \"CategoryTheory.NatTrans.PullbackShift.natIsoComp\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_obj_iso_hom_app\", \"CategoryTheory.IsPullback.isoIsPullback_hom_snd\"], \"digest\": \"a1b41308bec6a720\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback comparison natural isomorphism for a commutative square of schemes on bounded constructible derived categories with condensed coefficients",
+   "results": "{\"t\": \"2026-10-16T17:59:31Z\", \"tool\": \"leanfinder\", \"query\": \"pullback comparison natural isomorphism for a commutative square of schemes on bounded constructible derived categories with condensed coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\"], \"digest\": \"ea1f45f359af53c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|def trans|def eqToIso",
+   "results": "{\"t\": \"2026-10-16T18:00:35Z\", \"tool\": \"grep\", \"query\": \"pullbackComp|def trans|def eqToIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean\", \"Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"271a1c9b7aa17bb9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism of two composite inverse image functors obtained from composition isomorphisms and equality of composite morphisms",
+   "results": "{\"t\": \"2026-10-16T18:00:36Z\", \"tool\": \"leansearch\", \"query\": \"Natural isomorphism of two composite inverse image functors obtained from composition isomorphisms and equality of composite morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.isoInverseComp\", \"CategoryTheory.NatIso.naturality_1\", \"CategoryTheory.Iso.isoInverseOfIsoFunctor\", \"CategoryTheory.NatIso.naturality_2'_assoc\", \"CategoryTheory.Grothendieck.mapCompIso\", \"CategoryTheory.Equivalence.invFunIdAssoc\", \"CategoryTheory.NatIso.naturality_2\", \"CategoryTheory.Iso.isoFunctorOfIsoInverse\"], \"digest\": \"4ca08012ce6f3e70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans, CategoryTheory.eqToIso",
+   "results": "{\"t\": \"2026-10-16T18:00:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Iso.trans, CategoryTheory.eqToIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.eqToIso_trans\", \"CategoryTheory.eqToIso_map_trans\", \"CategoryTheory.Cat.Hom.toNatIso_rightUnitor\", \"CategoryTheory.MonoOver.mapIso_counitIso\", \"CategoryTheory.MonoOver.mapIso_unitIso\", \"SheafOfModules.Presentation.ofIsIso_relations\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\"], \"digest\": \"6dbb1038b19852bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given inverse image functors with composition isomorphisms, a commutative square induces a natural isomorphism between the two iterated pullbacks",
+   "results": "{\"t\": \"2026-10-16T18:00:37Z\", \"tool\": \"leanfinder\", \"query\": \"Given inverse image functors with composition isomorphisms, a commutative square induces a natural isomorphism between the two iterated pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.mkNatIso\", \"CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_hom_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_inv_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_fst_app\"], \"digest\": \"23898f3d532f8f2a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|pullbackSquareComparison|upperStarComp",
+   "results": "{\"t\": \"2026-10-16T18:00:46Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|pullbackSquareComparison|upperStarComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackComp|def pullback",
+   "results": "{\"t\": \"2026-10-16T18:01:13Z\", \"tool\": \"grep\", \"query\": \"def pullbackComp|def pullback\", \"sub\": \"AlgebraicGeometry/Modules/Sheaf.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"183\", \"189\", \"219\", \"241\", \"261\"], \"digest\": \"ccb67db259ed11f1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: hits, if any, provide generic category operations or ordinary scheme-module pullbacks, not the named restricted condensed-coefficient derived construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudofunctor assigns a natural isomorphism of inverse image composites to a commuting diamond, via its compositor and equality of the two composite maps",
+   "results": "{\"t\": \"2026-10-16T18:30:06Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudofunctor assigns a natural isomorphism of inverse image composites to a commuting diamond, via its compositor and equality of the two composite maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isoMapOfCommSq\", \"CategoryTheory.Pseudofunctor.mapComp'_inv_comp_mapComp'_hom\", \"CategoryTheory.Pseudofunctor.isoMapOfCommSq_eq\", \"CategoryTheory.Pseudofunctor.mapComp'₀₁₃_inv\", \"CategoryTheory.Pseudofunctor.mapComp'₀₂₃_inv\", \"CategoryTheory.Pseudofunctor.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app\", \"CategoryTheory.Pseudofunctor.mapComp'₀₁₃_inv_app\", \"CategoryTheory.Pseudofunctor.mapComp'₀₂₃_inv_comp_mapComp'₀₁₃_hom_app\"], \"digest\": \"e2b29aacb4a36eff\"}",
+   "date": "2026-10-17",
+   "verdict": "Generic candidate only: Pseudofunctor.isoMapOfCommSq at Mathlib/CategoryTheory/Bicategory/Strict/Pseudofunctor.lean:195-196 requires a supplied pseudofunctor. The cited project nodes provide the specified restricted functors and composition isomorphisms, but no such bundled pseudofunctor. Constructing that bundle and identifying its compositor would be extra work, so this is not a one-line specialization or an exact Mathlib leaf. Generic Iso.trans and eqToIso already suffice for the elementary construction."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -36,5 +157,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-base-change-morphism"
+ "unit": "sk-def-sfb-base-change-morphism",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-def-sfb-base-change-morphism-comparison",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the current blueprint node and the upstream reference declaration. No sorry-free declaration in WeilConjectures of weil-src-slopmaster2 states this exact bounded-constructible condensed-coefficient comparison; the similarly named Etale.pullbackSquareComparison is on bounded-below derived categories with a fixed abelian coefficient category and therefore is not an attachment. The definition is already completely built from the three existing statement dependencies sk-def-sfb-dc-setting, def-sfb-dc-upper-star, and def-sfb-dc-upper-star-comp, so no subordinate nodes are needed. Recorded the required LeanFinder, Loogle, Mathlib grep, and LeanSearch queries; all found only generic or differently typed pullback comparisons. Wrote three elementary construction checks: type the two composition isomorphisms, obtain the equality-induced identity comparison by substitution, and explicitly compose natural transformations and their inverses. Added the direct condensed-ring definition dependency. Generic Iso.trans and eqToIso package the elementary operations but do not construct the project functors or their composition isomorphisms. The first server dry run rejected the imported opening in the setting of as non-self-contained (B2). Expanded it to the same prime, positive-characteristic field, distinct-prime condition, separated finite-type schemes and k-morphism hypotheses explicitly stated by sk-def-sfb-dc-setting. No hypothesis or mathematical content changed. Independent second reading expanded the final step into the component naturality calculation and both inverse equations; no change to the definition or its dependencies.",
+  "blueprint": "Realizes the entire blueprint node det-def-sfb-base-change-morphism-comparison: the commutative square hypotheses, the two composition isomorphisms c_{f',g} and c_{g',f}, the equality supplied by square commutativity, and the conclusion that their composite is a natural isomorphism. The three elementary steps check the construction and its inverse without replacing the parent unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-c655c519a",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-c655c519a (reviewer sub-agent of L); spot-checked: I read the whole item, the report, the blueprint main-20261015 source (det-def-sfb-base-change-morphism-comparison.md, _section.md, and siblings -bc and -adjunct), and the statements of every cited node: sk-def-sfb-dc-setting, def-sfb-dc-upper-star, def-sfb-dc-upper-star-comp, sk-def-sfb-condensed-ring. Statement: it matches the source, except that 'in the setting of' is spelled out as the setting node's exact hypotheses (prime l, char p>0 with p!=l, separated finite-type k-schemes, k-morphisms). Lambda stays an arbitrary commutative condensed ring and the square is only commutative, so nothing is weakened. Master check: MorphismDefs.lean is not archived, so I read a read-only upstream copy of boundedConstructiblePullbackSquareComparison: (UpperStarComp f' g).symm, then eqToIso sq.w, then UpperStarComp g' f. Its Lambda is a Sheaf(coherentTopology Profinite, Ab) with MonObj and IsCommMonObj, on bounded constructible module objects, with the same field and scheme instances. This agrees with theta_sq = c_{g',f} o e o c_{f',g}^{-1} in orientation and endpoints. Both proper targets use it through boundedConstructibleBaseChange; this item does not touch BC. Steps: step 1 applies the composition statement to (f',g) and (g',f) with the correct direction. Step 2 is equality elimination with no cartesian hypothesis. In step 3 I rechecked the naturality chain, both inverse identities and the naturality of psi; it is elementary and complete. proof_deps equals the union of uses; there is no cycle, no off-route use, no tool_uses and no SGA. Edge cases: identity square gives theta = id; the noncartesian square with empty X' works; Lambda = 0 works. Duplicates: grepping all of dag/nodes, only the parent unit contains theta_sq, as one clause of a larger definition. There are no new nodes. Mathlib: 11 genuine searches. Iso.trans (Iso.lean:131), eqToIso (EqToHom.lean:214) and Scheme.Modules.pullbackComp (Sheaf.lean:241) are generic or about other categories, so there is no leaf. No fixes were needed."
+ }
 }
