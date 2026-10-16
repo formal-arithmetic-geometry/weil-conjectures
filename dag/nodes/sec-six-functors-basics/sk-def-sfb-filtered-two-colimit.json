@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-def-sfb-filtered-two-colimit",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-def-sfb-filtered-two-colimit-conditions"
+  ]
  },
  "kind": "definition",
  "title": "Filtered 2-colimits of categories",
@@ -12,28 +14,132 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
   "place": "node sk-def-sfb-filtered-two-colimit, order 1691"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-def-sfb-filtered-two-colimit-cocone",
+  "det-def-sfb-filtered-two-colimit-conditions"
+ ],
  "proof": [
   {
-   "text": "The two final assertions are (Obj) and (Hom-inj) restated.",
-   "uses": [],
-   "elementary": null
+   "text": "The data in the statement are exactly a cocone of categories as defined in [det-def-sfb-filtered-two-colimit-cocone]: the isomorphism component has source $\\Phi_j(T_{ij}x)$ and target $\\Phi_i(x)$. On these data impose the conjunction (Obj), (Hom-surj), (Hom-inj) of [det-def-sfb-filtered-two-colimit-conditions]. This defines a predicate without imposing directedness, identities or composition constraints on the transition functors. The formula in (Hom-surj) is typed because $\\theta_{ik,x}^{-1}$ goes from $\\Phi_i(x)$ to $\\Phi_k(T_{ik}x)$ and $\\theta_{jk,y}$ goes from $\\Phi_k(T_{jk}y)$ to $\\Phi_j(y)$.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-cocone",
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
+    "place": "Definition: cocone data and three conditions"
+   }
   },
   {
-   "text": "The conditions characterise the 2-colimit. Suppose $I$ is directed and the transition functors\nare coherent (a pseudofunctor $I\\to\\mathrm{Cat}$, with the $\\theta_{ij}$ compatible with its\nstructure isomorphisms). The 2-colimit is then modelled by the ordinary category $\\mathcal C_\\infty$\nwhose objects are pairs $(i,x)$ with $x\\in\\mathcal C_i$ and whose morphisms are\n$\\Hom((i,x),(j,y))=\\operatorname{colim}_{k\\ge i,j}\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)$, a\nfiltered colimit of sets, with composition defined after passing to a common index. The cocone\ninduces a comparison functor $\\Phi\\colon\\mathcal C_\\infty\\to\\mathcal D$,\n$(i,x)\\mapsto\\Phi_i(x)$. It is essentially surjective if and only if (Obj) holds. On morphisms\nit is the canonical map $\\operatorname{colim}_k\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)\\to\n\\Hom_{\\mathcal D}(\\Phi_i x,\\Phi_j y)$: (Hom-surj) is its surjectivity, and since the colimit is\nfiltered, two elements with the same image can be represented at a common index $k$, where\n(Hom-inj) makes them equal at a later index; so (Hom-surj) and (Hom-inj) say that $\\Phi$ is\nfully faithful. Hence, under these assumptions, the cocone is a filtered 2-colimit if and only if\n$\\Phi$ is an equivalence of categories.",
-   "uses": [],
-   "elementary": null
+   "text": "For the two concluding assertions, fix an object $d$ of $\\mathcal D$ and take its witnesses $i,x$ and $d\\cong\\Phi_i(x)$ from (Obj). Next fix $k$, $x,y\\in\\mathcal C_k$ and $g,g^{\\prime}:x\\to y$ whose images under $\\Phi_k$ agree; (Hom-inj) supplies $k^{\\prime}\\ge k$ and equality of their images under $T_{kk^{\\prime}}$. These are precisely the asserted finite-stage conclusions. Neither implication uses coherence or directedness.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-conditions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
+    "place": "Final paragraph; direct elimination of (Obj) and (Hom-inj)"
+   }
+  },
+  {
+   "text": "For the separate interpretation by a comparison category, assume additionally that $I$ is directed and that the cocone has the coherent normalized structure explicitly specified in [det-def-sfb-filtered-two-colimit-model]. That node gives the category of pairs $\\mathcal C_\\infty$, its filtered Hom-set colimits and its comparison functor $\\Phi$. Under these same hypotheses [det-def-sfb-filtered-two-colimit-characterization] identifies essential surjectivity of $\\Phi$ with (Obj), fullness with (Hom-surj), and faithfulness with (Hom-inj), and concludes that their conjunction is equivalent to $\\Phi$ being an equivalence. This interpretation concerns the additional coherent normalized case; it is not a hypothesis of the predicate defined above.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-model",
+    "det-def-sfb-filtered-two-colimit-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.md",
+    "place": "Statement, clauses 1–3 and final equivalence; model hypotheses from det-def-sfb-filtered-two-colimit-model"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-def-sfb-filtered-two-colimit-cocone",
+  "det-def-sfb-filtered-two-colimit-conditions",
+  "det-def-sfb-filtered-two-colimit-model",
+  "det-def-sfb-filtered-two-colimit-characterization"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
-  "place": "## Proof"
+  "place": "Definition and final paragraph; optional coherent normalized interpretation from the existing model and characterization nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CategoryCocone|IsFilteredTwoColimit|HomSurj|HomInj",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered 2-colimit of ordinary categories",
+   "results": "CategoryTheory.Limits.HasFilteredColimits; CategoryTheory.Limits.HasFilteredColimitsOfSize.mk; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf; CategoryTheory.Limits.hasColimitsOfShape_of_has_filtered_colimits; MonCat.FilteredColimits.colimit; CommMonCat.FilteredColimits.colimitCocone; MonCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern colimits of types, finite presentability, finality or small-object constructions, not this predicate on a family of categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CategoryCocone",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.CategoryCocone'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered two-colimit of categories characterized by essential surjectivity and morphisms and equalities descending to a finite stage",
+   "results": "CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.Functor.final_of_exists_of_isFiltered; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'; CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂; CategoryTheory.Functor.final_iff_of_isFiltered; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered; CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern colimits of types, finite presentability, finality or small-object constructions, not this predicate on a family of categories"
+  },
+  {
+   "tool": "grep",
+   "query": "two.?colimit|2.colimit|bicolimit|jointly.*(full|faithful|surjective)",
+   "results": "Mathlib/CategoryTheory/Presentable/Type.lean; Mathlib/CategoryTheory/Presentable/Type.lean; Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean; Mathlib/CategoryTheory/Presentable/Basic.lean; Mathlib/CategoryTheory/Presentable/Basic.lean; Mathlib/CategoryTheory/Presentable/Limits.lean; Mathlib/CategoryTheory/Presentable/Finite.lean; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern joint faithfulness or surjectivity in ordinary colimits, not eventual equality along the transition categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "CategoryTheory.Pseudofunctor; CategoryTheory.Pseudofunctor.id; CategoryTheory.Pseudofunctor.instInhabited; CategoryTheory.Pseudofunctor.toLax; CategoryTheory.Pseudofunctor.toOplax; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.Pseudofunctor.hasCoeToLax; CategoryTheory.Pseudofunctor.hasCoeToOplax",
+   "date": "2026-10-16",
+   "verdict": "no match: pseudofunctors require coherent identity/composition data, absent from this definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of functors from categories indexed by a preorder to a vertex category with natural isomorphisms and joint essential surjectivity and eventual equality of arrows",
+   "results": "CategoryTheory.SmallObject.SuccStruct.arrowMap; CategoryTheory.SmallObject.FunctorObjIndex; CategoryTheory.Functor.IsLocallyDirected; CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.ext; CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq; CategoryTheory.SmallObject.SuccStruct.Iteration.F; CategoryTheory.Functor.toEventualRanges; CategoryTheory.SmallObject.succStruct",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern colimits of types, finite presentability, finality or small-object constructions, not this predicate on a family of categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocone of categories is essentially surjective jointly full and faithful after passing to an upper bound in a preorder",
+   "results": "CategoryTheory.SmallObject.coconeOfLE; Preorder.coconeOfUpperBound_ι_app; CategoryTheory.SmallObject.SuccStruct.ofCocone; CategoryTheory.SmallObject.coconeOfLE_pt; CategoryTheory.SmallObject.SuccStruct.ofCocone.obj; CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone; CategoryTheory.SmallObject.coconeOfLE_ι_app; PrincipalSeg.cocone",
+   "date": "2026-10-16",
+   "verdict": "no match: returned cocones of diagrams in a single category or a preorder, not a predicate on a family of transition categories"
+  },
+  {
+   "tool": "grep",
+   "query": "EssSurj.*Full.*Faithful|Jointly.*(Full|Faithful)|TwoColimit|Bicolimit",
+   "results": "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: JointlyFaithful has a common source and immediate equality; this predicate has varying stage sources and eventual equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.EssSurj",
+   "results": "CategoryTheory.Functor.instEssSurjId; CategoryTheory.Functor.EssSurj; CategoryTheory.Functor.objPreimage; CategoryTheory.Functor.EssSurj.mem_essImage; CategoryTheory.Functor.EssSurj.mk; CategoryTheory.Functor.essSurj_of_surj; CategoryTheory.Functor.EssSurj.toEssImage; CategoryTheory.Functor.objObjPreimageIso",
+   "date": "2026-10-16",
+   "verdict": "no match: essential surjectivity of a single functor is only one clause after constructing a comparison category, and does not define this arbitrary incoherent cocone predicate"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -63,5 +169,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-filtered-two-colimit",
+  "worker": "stage1",
+  "summary": "Preserved the definition verbatim. Reused the existing cocone and conditions definitions, checked the Hom-surj composition types, and proved the final assertions by projections. Replaced the unsupported optional comparison-category prose with citations to the already imported model and characterization, expressly under their directed coherent normalized hypotheses. No new nodes or Mathlib leaves. No slopmaster2 attachment; upstream master is reference only.",
+  "blueprint": "Realizes the main-20261015 _section.md definition and its final paragraph. Original imported proof paragraph 1 is step 2; paragraph 2 is retained as an explicitly conditional coherent normalized interpretation using the existing model/characterization detail nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-5f14d1271",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-5f14d1271 (reviewer sub-agent of L); spot-checked: Read the item, all three steps, four cited node statements, current blueprint sources and proofs, chapter route, and report in full. Definition matches its source exactly; comparison interpretation retains directedness, coherence and normalization. Small cases, whole-DAG duplicate searches and dependency traversal found no mathematical fault or cycle. No new nodes, fixes or accepted tool_uses. Detailed checks recorded in review.md."
+ }
 }
