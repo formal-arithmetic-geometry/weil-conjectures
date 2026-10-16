@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-padic-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The condensed ring $\\underline{\\mathbf Q}_\\ell$",
@@ -15,30 +15,106 @@
  "stmt_deps": [
   "def-sfb-continuous-map-condensed-ring",
   "def-sfb-continuous-map-condensed-ring-map",
-  "def-sfb-padic-int-condensed-ring"
+  "def-sfb-padic-int-condensed-ring",
+  "def-weil-l-adic-numbers"
  ],
  "proof": [
   {
-   "text": "$\\mathbf Q_\\ell$ is a commutative topological ring, so\n[def-sfb-continuous-map-condensed-ring] applies. The inclusion\n$\\mathbf Z_\\ell\\subseteq\\mathbf Q_\\ell$ is a ring homomorphism, and it is continuous\nbecause $\\mathbf Z_\\ell$ carries the subspace topology. So\n[def-sfb-continuous-map-condensed-ring-map] applies.",
+   "text": "Use the complete nonarchimedean valued field $\\mathbf Q_\\ell$ and its absolute value from [def-weil-l-adic-numbers], with metric $d(x,y)=|x-y|_\\ell$. The field operations are commutative. Their continuity follows directly from $|(x+y)-(a+b)|_\\ell\\leq\\max(|x-a|_\\ell,|y-b|_\\ell)$, $|(-x)-(-a)|_\\ell=|x-a|_\\ell$, and $|xy-ab|_\\ell\\leq\\max(|x-a|_\\ell|y|_\\ell,|a|_\\ell|y-b|_\\ell)$. Indeed, if $|y-b|_\\ell<1$, then $|y|_\\ell\\leq M:=\\max(1,|b|_\\ell)$; for a prescribed $\\varepsilon>0$ take both input distances less than $\\min(1,\\varepsilon/(1+M+|a|_\\ell))$. The displayed bounds prove continuity, so $\\mathbf Q_\\ell$ is a commutative topological ring.",
    "uses": [
-    "def-sfb-continuous-map-condensed-ring",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-condensed-ring.md",
+    "place": "statement: the prime and the ell-adic topology"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring] to this commutative topological ring. Define $\\underline{\\mathbf Q}_\\ell$ to be the resulting sheaf, whose sections are $C(S,\\mathbf Q_\\ell)$, whose restrictions are precomposition, and whose operations are pointwise. The same cited statement gives its underlying ring object and its commutativity. This supplies exactly the section-defined condensed ring; no localization construction is used.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/_section.md",
+    "place": "paragraph defining the sections of underline T and the first ell-adic bullet"
+   }
+  },
+  {
+   "text": "The valuation-ring description in [def-weil-l-adic-numbers] identifies $\\mathbf Z_\\ell$ with the subring $\\{x\\in\\mathbf Q_\\ell:|x|_\\ell\\leq1\\}$. Its inclusion $i$ preserves $0,1,+,\\cdot$ because these are restricted field operations. For $x,y\\in\\mathbf Z_\\ell$ and $n\\geq0$, put $z=(y-x)/\\ell^n$ in $\\mathbf Q_\\ell$. Since $|\\ell|_\\ell=\\ell^{-1}$, multiplicativity gives $|z|_\\ell=\\ell^n|y-x|_\\ell$; the cited valuation-ring equality therefore gives $y\\in x+\\ell^n\\mathbf Z_\\ell$ if and only if $|y-x|_\\ell\\leq\\ell^{-n}$. Nonzero absolute values are integral powers of $\\ell$, so this closed ball is also the open ball $|y-x|_\\ell<\\ell^{1-n}$. As $\\ell>1$ and $\\ell^{-n}\\to0$, these balls form a neighborhood basis for the restricted metric. Thus the $\\ell$-adic topology on $\\mathbf Z_\\ell$, defined by the cosets $x+\\ell^n\\mathbf Z_\\ell$, is the subspace topology. Restricting the continuous ring operations of step 1 makes $\\mathbf Z_\\ell$ a commutative topological ring. Its distance is the restricted distance, so $d(i(x),i(y))=d(x,y)$; the same epsilon proves continuity. Thus $i$ is an injective continuous ring homomorphism.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-condensed-ring.md",
+    "place": "last paragraph: the inclusion of the ell-adic integers"
+   }
+  },
+  {
+   "text": "By [def-sfb-padic-int-condensed-ring], the source sheaf has sections $\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell)$. Apply [def-sfb-continuous-map-condensed-ring-map] to $i$ from step 3: the component on $S$ is $a\\mapsto i\\circ a$, a morphism of condensed rings with target the sheaf constructed in step 2. It is an inclusion on sections: if $i\\circ a=i\\circ b$, then injectivity of $i$ gives $a(s)=b(s)$ for every $s$, hence $a=b$. This is precisely the indicated morphism $\\underline{\\mathbf Z}_\\ell\\to\\underline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "def-sfb-padic-int-condensed-ring",
     "def-sfb-continuous-map-condensed-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-condensed-ring.md",
+    "place": "last paragraph: postcomposition gives the inclusion of condensed rings"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-l-adic-numbers",
   "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-padic-int-condensed-ring",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-condensed-ring.md",
-  "place": "## Proof"
+  "place": "definition and its final inclusion clause; expanded continuity checks using the existing valued-field node"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The condensed commutative ring of continuous maps from profinite sets to the p-adic numbers, with inclusion from the p-adic integers",
+   "results": "8 hits; PadicComplex, PadicAlgCl, Padic, BDeRham, BDeRhamPlus, instCommRingBDeRhamPlus, PadicInt, Padic.instCommRing",
+   "date": "2026-10-16",
+   "verdict": "no match: p-adic field or ring data only; no condensed-ring sheaf and induced integral inclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.continuousFunctions",
+   "results": "3 hits; TopCat.continuousFunctions, TopCat.continuousFunctions.map, TopCat.continuousFunctions.pullback",
+   "date": "2026-10-16",
+   "verdict": "no exact match: continuous-function rings and presheaves, discrete set-valued sheaves, or module constructions do not state this section-defined sheaf of rings with its commutative ring object and integral inclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "TopCommRingCat|commRingYoneda|continuousFunctions",
+   "results": "8 hits; Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/Forget.lean, Mathlib/Topology/Sheaves/PresheafOfFunctions.lean, Mathlib/Topology/Sheaves/PresheafOfFunctions.lean; searched Mathlib/Topology/Sheaves",
+   "date": "2026-10-16",
+   "verdict": "no exact match: continuous-function rings and presheaves, discrete set-valued sheaves, or module constructions do not state this section-defined sheaf of rings with its commutative ring object and integral inclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensed ring of p-adic numbers and the map from p-adic integers",
+   "results": "8 hits; PadicInt.Coe.ringHom, PadicInt.isOpenEmbedding_coe, PadicInt.algebraMap_apply, PadicInt.instCoePadic, PadicInt.lift, PadicInt.mem_subring_iff, PadicInt, PadicInt.Coe.ringHom_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: p-adic field or ring data only; no condensed-ring sheaf and induced integral inclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative topological ring defines a sheaf of rings on profinite sets by continuous functions with pointwise operations",
+   "results": "8 hits; Condensed.lanSheafProfinite, TopCat.presheafToTopCommRing, Condensed.locallyConstantPresheaf, TopCat.continuousFunctions, Condensed.profiniteFree, TopCat.commRingYoneda, LightCondensed.locallyConstantPresheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no exact match: continuous-function rings and presheaves, discrete set-valued sheaves, or module constructions do not state this section-defined sheaf of rings with its commutative ring object and integral inclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -57,5 +133,20 @@
   "Profinite.padicCondensedRing"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-padic-condensed-ring",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; added the existing Mathlib-valued-field node as a statement dependency, expanded the topological-ring and inclusion-continuity checks including the valuation-ball neighborhood basis and restricted operations, then specialized the existing continuous-map sheaf and postcomposition constructions. No new nodes or attachments.",
+  "blueprint": "Realizes the entire definition at order 1526 and its final inclusion clause, following the section-defined coefficient-ring construction in sk-def-sfb-condensed-ring/_section.md. The inequalities fill the imported proof's two implicit continuity arguments."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-dd4eb342d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-dd4eb342d (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source places. All four steps check out, including continuity, valuation-ball topology, commutativity and the injective postcomposition morphism. No new nodes, cycles, target weakening or SGA use. Inherited missing unit/chapter metadata is documented in review.md; no mathematical repairs needed."
+ }
 }
