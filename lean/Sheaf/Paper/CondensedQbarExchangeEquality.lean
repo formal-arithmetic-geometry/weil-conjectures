@@ -6,8 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.Paper.CondensedQbarComparisons
-import Sheaf.Paper.CondensedQbarExchangeLeftAdjunct
-import Sheaf.Paper.CondensedQbarExchangeRightAdjunct
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.CondensedFlatCoefficientCalculus
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # The exchange equality for condensed finite-to-Qbar coefficient change -/
 
@@ -90,9 +91,6 @@ theorem constructibleToQbar_exchange_equality
       (constructibleToPadicAlgCl Y' ℓ E).map
           ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app K) ≫
         constructibleToQbarTargetHom ℓ k E f' g' K := by
-  apply ((boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ k f').homEquiv _ _).symm.injective
-  exact (constructibleToQbar_exchange_left_adjunct ℓ k E f g f' g' sq K).trans
-    (constructibleToQbar_exchange_right_adjunct ℓ k E f g f' g' sq K).symm
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -97,7 +97,6 @@ variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories, obtained from the
 composition isomorphisms `boundedConstructibleUpperStarComp` and the commutativity of the
 square. -/
-@[no_expose]
 noncomputable def boundedConstructiblePullbackSquareComparison (sq : CommSq g' f' f g) :
     boundedConstructibleUpperStar Λ ℓ k g ⋙ boundedConstructibleUpperStar Λ ℓ k f' ≅
       boundedConstructibleUpperStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g' :=

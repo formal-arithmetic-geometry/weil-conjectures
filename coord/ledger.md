@@ -15495,4 +15495,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:04 L: merged deliver/H4/Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing (stage 3; reviewer PASS; after a return; landing 20261016T090411-L-1838030 (interface); batch 20261016T090409; modules 8; new nodes 6; change records: coord/changes/h4-affine-comparison-local-products.md, coord/changes/h4-affine-comparison-shared-geometric-helpers.md)
 - 09:09 L: returned deliver/A2/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible (reviewer RETURN: (reviewer X-61157, head 61157f63b) H10: Include an adaptation of lean/Sheaf/Paper/CondensedLfpHomContinuity.lean. At lin)
 - 09:12 L: returned deliver/D3/Sheaf.Paper.IntegralResidueProjectionNormalization (reviewer RETURN: (the landing tools, head 5d481b7cd) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
-- 09:13 L: merged deliver/A3/Sheaf.Paper.CondensedQbarExchangeEquality (stage 3; reviewer PASS; after a return; landing 20261016T091300-L-1890425 (interface); batch 20261016T091259; modules 6; new nodes 5; change records: coord/changes/condensed-pullback-square-interface.md, coord/changes/condensed-qbar-right-artifact-index.md)
+
+- 17:18 L: batch 20261016T091259 dependency take-out
