@@ -1,89 +1,10 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.ResolutionScalarAction
-import Sheaf.AlgebraicGeometry.ResolutionSectionsHomologyScalar
+public import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 
-/-! # Scalar compatibility of the normalized resolution class
-
-Source: Stacks Project, Tags 01E4, 01E5 and 03FD.
-(blueprint: lem-pc-resolution-section-scalar-map)
--/
-
-@[expose] public section
-
-universe u
-set_option autoImplicit false
-open CategoryTheory CategoryTheory.Limits Opposite
-noncomputable section
-namespace AlgebraicGeometry.Scheme.Modules
-attribute [local instance] enoughInjectives
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1000000 in
--- Explicit section comparisons require unfolding several categorical functor composites.
-/-- The canonical section class map intertwines multiplication endomorphisms.
-No Ext comparison, affine open, finiteness or quasi-coherence is assumed.
-Source: Stacks Project, Tags 01E4 and 01E5; naturality of derived functors.
-(blueprint: lem-pc-resolution-section-scalar-map)
-
-Proof: Module-valued derived global sections take multiplication by b on the module
-M to scalar multiplication on cohomology, by moduleCohomology_map_smulHom. The
-module-valued resolution comparison e is linear, so it preserves b. The middle
-three arrows T preserve the pulled-back scalar by resolutionSectionsHomology_scalar.
-The evaluated sectionCohomologyTheta is a module morphism and hence preserves a;
-the same holds for the final inverse resolution comparison. Compose these four
-pointwise equalities. No comparison of lifts or vanishing argument is needed.
-Degree zero is multiplication on sections, and empty opens and zero modules are
-covered by the same module and homology maps. -/
-theorem resolutionSectionClass_map_smulHom
-    {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)
-    (p : ℕ) (V : S.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) :
-    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-    let M := (restrictFunctor (f ⁻¹ᵁ V).ι).obj F
-    let C := RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p
-    let c := resolutionSectionClass R.resolution
-      (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
-      V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V
-    ∀ (a : Γ(S, V)) (x : C.obj M),
-      c ((C.map (M.smulHom (((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a))).hom x) =
-        a • c x := by
-  dsimp only
-  intro a x
-  let U := f ⁻¹ᵁ V
-  let M := (restrictFunctor U.ι).obj F
-  let b := ((Scheme.ΓSpecIso Γ(S, V)).inv ≫
-    (f.resLE V U le_rfl ≫ V.toSpecΓ).appTop).hom a
-  have hscalar := moduleCohomology_map_smulHom M R.resolution p b x
-  let := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
-  let e := R.resolution.isoRightDerivedObj
-    (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) p
-  have hs := resolutionSectionsHomology_scalar f F I p V R a (e.hom.hom x)
-  let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
-  let θ := (sectionCohomologyTheta K p).app (op V)
-  have hi := Hom.app_smul (I.isoRightDerivedObj (pushforward f) p).inv a
-  let T := (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
-      (forget₂ _ AddCommGrpCat.{u})).inv ≫
-    (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
-      R.sections.hom ≫
-    (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
-        (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
-          (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V))).hom
-  let δ := Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V
-  have hT : T (b • e.hom.hom x) = a •
-      (show (sectionCohomologyPresheaf K p).obj (op V) from T (e.hom.hom x)) := hs
-  change δ (θ.hom (T (e.hom.hom
-    (((RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).map
-      (M.smulHom b)).hom x)))) = a • δ (θ.hom (T (e.hom.hom x)))
-  rw [hscalar, e.hom.hom.map_smul, hT, θ.hom.map_smul]
-  exact hi _
-
-end AlgebraicGeometry.Scheme.Modules
+/-! Retired at the upstream sync to slopmaster2 e47efb5a5: the source library now has
+this module's declarations in `WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap`; this module re-exports it. -/
