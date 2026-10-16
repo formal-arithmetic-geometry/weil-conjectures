@@ -8,15 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import all Sheaf.AlgebraicGeometry.AffinePushforwardIdealProduct
+import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Adic conditions for the explicit pushforward system
@@ -60,7 +58,11 @@ private theorem power_inclusion_iso {X : Scheme.{v}} (J : X.IdealSheafData)
     (n : ℕ) (hn : 0 < n) :
     ∃ e : (Scheme.idealSheafPower J.toModulesι n).1 ≅ (J ^ n).toModules,
       e.hom ≫ (J ^ n).toModulesι = (Scheme.idealSheafPower J.toModulesι n).2 := by
-  sorry
+  have _ := hn
+  obtain ⟨e, he⟩ := (idealData_recursive_power_comparison J n).2
+  refine ⟨e.symm, ?_⟩
+  change e.inv ≫ (J ^ n).toModulesι = _
+  rw [← he, Iso.inv_hom_id_assoc]
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
