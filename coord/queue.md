@@ -1,6 +1,6 @@
 # Work queue
 
-28 items; claim with `tools/claim.py next <group> [--stage N]`.
+25 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (28)
+## Stage 3: modules to prove (25)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,20 +23,17 @@
 | `Sheaf.Paper.ContinuousIntegralPullComposition` | 6 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientExchange` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionPresentations` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixAnalyticCover` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 7 | 2 | proof |
-| `WeilConjectures.ConstructibleSheaf.Noetherian` | 7 | 4 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralLfpLocallyFreeResolution` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleModuleLfpClosedReflection` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing` | 11 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 12 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleModuleLfpClosedReflection` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.GrothendieckEtaleRelativeSectionColimit` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
