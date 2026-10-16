@@ -13,7 +13,7 @@
  },
  "kind": "definition",
  "title": "Condensed pro-etale Tate twists",
- "statement": "Let $\\ell$ be a prime and $X$ an arbitrary scheme, using the small pro-etale site of [def-weil-pbc-proetale-site]. Use the geometric coefficient pullback $p_X^*$ and internal module objects of [def-weil-pbc-condensed-e-module-category]. Let $\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell)$ on profinite sets, and let $\\underline\\Omega$ be the condensed ring whose sections on $S$ are continuous maps with values in one finite intermediate extension of $\\mathbf Q_\\ell$ in $\\Omega=\\overline{\\mathbf Q}_\\ell$, as specified in [prop-weil-pbc-qbar-condensed-two-colimit]. Put $R_X=p_X^*\\underline{\\mathbf Z}_\\ell$ and $B_X=p_X^*\\underline\\Omega$; thus $B_X$ is exactly condensedRingObj (Profinite.padicAlgClRingObj ell) X. The ring map $R_X\\to B_X$ is the pullback of the inclusion $\\underline{\\mathbf Z}_\\ell\\to\\underline\\Omega$ through the bottom finite intermediate field $\\mathbf Q_\\ell$.\n\nFor every $n\\in\\mathbf N$, including $n=0$, let $F_n=R_X\\otimes_{\\mathbf Z}\\mu_{\\ell^n,X}$ be the free internal $R_X$-module on the abelian roots-of-unity sheaf of [def-pur-roots-of-unity-sheaf]. Here free means tensoring the abelian sheaf with the ring object, not the free module on its underlying set. Its transition $F_{n+1}\\to F_n$ is induced by the $\\ell$-th-power map on roots of unity. Define $T_X=\\varprojlim_{n\\in\\mathbf N^{op}}F_n$ in internal $R_X$-modules, and $L_X=B_X\\otimes_{R_X}T_X$ by extension of scalars. Use the inverse-limit and sheaf-tensor constructions of [def-pur-sheaf-inverse-limit, def-pur-sheaf-tensor-product] in these module categories.\n\nDefine $B_X(0)=B_X$ (the tensor unit), $B_X(d+1)=B_X(d)\\otimes_{B_X}L_X$ for $d\\in\\mathbf N$, and $B_X(-d-1)=\\mathcal Hom_{B_X}(B_X(d+1),B_X)$ using the internal Hom of [def-pur-sheaf-hom]. Define tateTwistDerived X ell m for every $m\\in\\mathbf Z$ to be this internal module $B_X(m)$ placed in degree zero of $D(\\operatorname{Mod}_{B_X})$. These are the actual constructions tateModuleLevel, tateModuleTransition, tateModuleSystem, tateModule, tateTwistOne, tateTwistNat, tateTwist and tateTwistDerived at the recorded upstream revision. No finite-field structure on $X$, invertibility hypothesis on $\\ell$ on $X$, choice of a trivialization, local-freeness theorem, or identification with the common-stage coefficient category is part of this definition.",
+ "statement": "Use the universe and small-site convention of [def-weil-size-convention]. Let $\\ell$ be a prime, with $\\mathbf Z_\\ell\\subset\\mathbf Q_\\ell$ as in [def-weil-l-adic-numbers], and let $X$ be an arbitrary scheme, using the small pro-etale site of [def-weil-pbc-proetale-site]. Use the geometric coefficient pullback $p_X^*$ and internal module objects of [def-weil-pbc-condensed-e-module-category]. Let $\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell)$ on profinite sets, and let $\\underline\\Omega$ be the condensed ring whose sections on $S$ are continuous maps with values in one finite intermediate extension of $\\mathbf Q_\\ell$ in $\\Omega=\\overline{\\mathbf Q}_\\ell$, as specified in [prop-weil-pbc-qbar-condensed-two-colimit]. Put $R_X=p_X^*\\underline{\\mathbf Z}_\\ell$ and $B_X=p_X^*\\underline\\Omega$; thus $B_X$ is exactly condensedRingObj (Profinite.padicAlgClRingObj ell) X. The ring map $R_X\\to B_X$ is the pullback of the inclusion $\\underline{\\mathbf Z}_\\ell\\to\\underline\\Omega$ through the bottom finite intermediate field $\\mathbf Q_\\ell$.\n\nFor every $n\\in\\mathbf N$, including $n=0$, let $F_n=R_X\\otimes_{\\mathbf Z}\\mu_{\\ell^n,X}$ be the free internal $R_X$-module on the abelian roots-of-unity sheaf of [def-pur-roots-of-unity-sheaf]. Here free means tensoring the abelian sheaf with the ring object, not the free module on its underlying set: $R_X$ acts on $R_X\\otimes_{\\mathbf Z}\\mu_{\\ell^n,X}$ by multiplication on the first factor, $r\\cdot(a\\otimes z)=(ra)\\otimes z$. Its transition $F_{n+1}\\to F_n$ is $1_{R_X}\\otimes(u\\mapsto u^\\ell)$ on these tensor products; for $m\\geq n$ the system map $F_m\\to F_n$ is the composite of the successive transitions, with identity at $m=n$. Define $T_X=\\varprojlim_{n\\in\\mathbf N^{op}}F_n$ in internal $R_X$-modules, and $L_X=B_X\\otimes_{R_X}T_X$ by extension of scalars. Use the inverse-limit and sheaf-tensor constructions of [def-pur-sheaf-inverse-limit, def-pur-sheaf-tensor-product] in these module categories. To read these as constructions on internal modules, use [def-weil-pbc-internal-abelian-sheaf-module-equivalence]: the associated section-ring sheaf has multiplication and unit induced by the ring object, and internal modules are the corresponding sectionwise module sheaves [def-weil-sheaf-of-modules-category]. The tensor product is sheafified sectionwise tensor, with the sheafification comparison of [lem-pc-sites-module-sheafification-tensor]; extension of scalars carries the $B_X$-action on its first tensor factor. The inverse limit is indexed by all $n\\geq0$ (equivalently apply the positive-index convention to the tower $G_r=F_{r-1}$ for $r\\geq1$).\n\nDefine $B_X(0)=B_X$ (the tensor unit), $B_X(d+1)=B_X(d)\\otimes_{B_X}L_X$ for $d\\in\\mathbf N$, and $B_X(-d-1)=\\mathcal Hom_{B_X}(B_X(d+1),B_X)$ using the internal Hom of [def-pur-sheaf-hom]. Define tateTwistDerived X ell m for every $m\\in\\mathbf Z$ to be this internal module $B_X(m)$ placed in degree zero of $D(\\operatorname{Mod}_{B_X})$: take the complex with $B_X(m)$ in degree zero, zero objects in all other degrees, and all differentials zero, and apply the localization of [def-weil-abstract-derived-category]. These are the actual constructions tateModuleLevel, tateModuleTransition, tateModuleSystem, tateModule, tateTwistOne, tateTwistNat, tateTwist and tateTwistDerived at the recorded upstream revision. No finite-field structure on $X$, invertibility hypothesis on $\\ell$ on $X$, choice of a trivialization, local-freeness theorem, or identification with the common-stage coefficient category is part of this definition.",
  "source": {
   "document": "coord/reports/maintenance/nt-target-smooth-purity-qbar.md",
   "place": "Verbatim source exhibit WeilConjectures/TateTwist/ProEtale.lean: coefficient map lines 79-108; levels, transitions and limit lines 119-144; scalar extension, signed powers and degree-zero inclusion lines 148-179. Git blob b26295f63a04264246319a1fd5f8b4f6421eb78c; SHA-256 b9554907baced298abbb0648fe084ac9eaffcf576c4e03e6f26a90ff3f0fff2f.",
@@ -26,7 +26,13 @@
   "def-pur-roots-of-unity-sheaf",
   "def-pur-sheaf-inverse-limit",
   "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-weil-size-convention",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
@@ -52,10 +58,87 @@
    "results": "{\"t\": \"2026-10-16T07:49:23Z\", \"tool\": \"grep\", \"query\": \"tateTwist|tateModuleLevel|padicIntRingObjToPadicAlgCl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No occurrence of any of the three construction names in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|tateModuleLevel|padicIntRingObjToPadicAlgCl",
+   "results": "{\"t\": \"2026-10-16T07:56:00Z\", \"tool\": \"grep\", \"query\": \"tateTwist|tateModuleLevel|padicIntRingObjToPadicAlgCl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: none of the exact condensed Tate construction names occurs in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist defined by inverse limit of roots of unity on proetale site as module over condensed p-adic field",
+   "results": "{\"t\": \"2026-10-16T07:56:01Z\", \"tool\": \"leansearch\", \"query\": \"Tate twist defined by inverse limit of roots of unity on proetale site as module over condensed p-adic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.toFun\", \"PadicInt\", \"CondensedMod.isDiscrete_tfae\", \"CondensedMod\", \"Condensed\", \"LightCondAb\", \"CondensedAb\"], \"digest\": \"0be372ec97e52153\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: cyclotomicCharacter is a character of field automorphisms; PadicInt and fixed-ring condensed modules do not give the displayed sheaf construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTwist\"",
+   "results": "{\"t\": \"2026-10-16T07:56:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"tateTwist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: no declaration name contains tateTwist."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twists of condensed coefficient internal modules on the pro-etale site, inverse limit of roots of unity extended from p-adic integers to algebraic closure of p-adic numbers",
+   "results": "{\"t\": \"2026-10-16T07:56:03Z\", \"tool\": \"leanfinder\", \"query\": \"Tate twists of condensed coefficient internal modules on the pro-etale site, inverse limit of roots of unity extended from p-adic integers to algebraic closure of p-adic numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Condensed.profiniteFree\", \"Condensed.profiniteSolid\", \"CondensedMod\", \"LightCondMod\", \"Condensed.free\", \"CondensedMod.LocallyConstant.functor\"], \"digest\": \"6c024aa63af5fce2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: BDeRham, Condensed.profiniteFree, Condensed.free and fixed-ring condensed modules have different objects and sites; none constructs the displayed pro-etale internal coefficient twists."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.module|Tate.twist|rootsOfUnitySheaf|ellAdicSheaf",
+   "results": "{\"t\": \"2026-10-16T07:56:25Z\", \"tool\": \"grep\", \"query\": \"Tate.module|Tate.twist|rootsOfUnitySheaf|ellAdicSheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"46814415533aaa1b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Scheme.ellAdicSheaf is the continuous p-adic integer coefficient sheaf, not the inverse-limit roots-of-unity module or its scalar extension and signed powers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf Tate module inverse system of roots of unity tensored with algebraic closure of l-adic numbers",
+   "results": "{\"t\": \"2026-10-16T07:56:25Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf Tate module inverse system of roots of unity tensored with algebraic closure of l-adic numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInModuleCat\", \"TopCat.Sheaf.forget\", \"TopCat.sheafToType\", \"AlgebraicGeometry.Scheme.Modules\", \"ModuleCat.tilde\", \"SheafOfModules.Finite.hasFiniteLimits\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"TopCat.sheafToTypes\"], \"digest\": \"748679f27e392a04\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: affine tilde modules, fixed-value sheaves and generic finite limits are ingredients, not this condensed pro-etale Tate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|tateModule|TateTwist|ellAdicSheaf",
+   "results": "{\"t\": \"2026-10-16T08:02:41Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity|tateModule|TateTwist|ellAdicSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\"], \"digest\": \"cb1f822d8ef62523\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: this broad case-insensitive grep is capped at 25 hits; the displayed cyclotomic roots or geometric mentions do not match. Followed with a focused AlgebraicGeometry/Sites search; no exhaustive absence claim from the capped output."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateModule\"",
+   "results": "{\"t\": \"2026-10-16T08:02:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateModule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no declaration name contains TateModule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse system of roots of unity in sheaves of abelian groups, free module over a ring object, extension of scalars and integral tensor powers",
+   "results": "{\"t\": \"2026-10-16T08:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse system of roots of unity in sheaves of abelian groups, free module over a ring object, extension of scalars and integral tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv\", \"Condensed.profiniteFree\", \"Condensed.free\", \"Condensed.freeAb\", \"LightCondensed.free\", \"LocallyConstant.freeOfProfinite\", \"Condensed.profiniteSolid\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\"], \"digest\": \"9e7f1245319d7636\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: free modules on a type or condensed set, and their maps, are not free internal modules on an abelian sheaf and do not define the Tate tower. Read SheafOfModules.Free and Condensed.Module."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|ellAdic|rootsOfUnity",
+   "results": "{\"t\": \"2026-10-16T08:02:52Z\", \"tool\": \"grep\", \"query\": \"Tate|ellAdic|rootsOfUnity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"e802bafff6ccf678\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: this broad case-insensitive grep is capped at 25 hits; the displayed cyclotomic roots or geometric mentions do not match. Followed with a focused AlgebraicGeometry/Sites search; no exhaustive absence claim from the capped output."
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|TateTwist|ellAdicSheaf|rootsOfUnitySheaf",
+   "results": "{\"t\": \"2026-10-16T08:03:12Z\", \"tool\": \"grep\", \"query\": \"tateModule|TateTwist|ellAdicSheaf|rootsOfUnitySheaf\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"46814415533aaa1b\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: the five hits are the continuous p-adic integer coefficient sheaf and its cohomology, not the roots-of-unity tower and condensed Tate twists. Read ElladicCohomology.lean lines 49-81."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "chapter": "sec-smooth-purity",
@@ -64,5 +147,20 @@
   "by": "L maintenance",
   "item": "nt-target-smooth-purity-qbar",
   "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-condensed-tate-twists",
+  "worker": "stage1",
+  "summary": "Checked the full exact archived TateTwist/ProEtale.lean exhibit and ModuleObjects/Free.lean against the definition. Retained all schemes, the finite-extension-valued condensed coefficient ring and bottom-field inclusion, all natural-number levels including zero, scalar extension over R_X, signed powers and the degree-zero single complex. Made the free action and all tower maps explicit. Added the existing internal-to-sectionwise module equivalence and sheafification-tensor comparison to justify using the existing general sheaf limit, tensor and Hom constructions, plus direct size, p-adic number, module-category and derived-category dependencies. No new nodes, property claims or proof steps are required for this definition. Fresh recorded Mathlib searches, including a second semantic phrasing and broader source grep, found only ingredients. No exact project attachment was found.",
+  "blueprint": "Supports the condensed Tate endpoint in nt-target-smooth-purity-qbar, statement and proof Step 5, descended from thm-pur-rational-and-qbar-purity. This is a definition supporting unit sk-thm-purity-transport Step 3, not a replacement for its proof route. The common-stage coefficient-twist blueprint node has a different coefficient category; same_as remains empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-8a57d2162",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8a57d2162 (reviewer sub-agent of L); spot-checked: Read the full definition, report, thirteen cited statements, unit/chapter route, and exact source exhibit; independently verified its recorded hashes. Checked coefficient map/category, tower including level zero, scalar extension, signed internal duals, derived placement, edge cases, duplicates, and dependency cycles. No faults or fixes. Concrete checks recorded in review.md."
  }
 }
