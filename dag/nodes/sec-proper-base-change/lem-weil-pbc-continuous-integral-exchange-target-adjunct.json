@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-exchange-target-adjunct",
+ "kind": "statement",
+ "title": "Adjunction normal form for the target side of integral exchange",
+ "statement": "Under exactly the prime, normed coefficient, characteristic, finite-type separated scheme and commutative square hypotheses of [lem-weil-pbc-continuous-integral-exchange-equality], the inverse bounded f′ adjunction hom-equivalence sends the target side of the exchange identity to the explicit composite f′_E(α_g(Rf_I K)) ≫ θ_E(T_Y Rf_I K) ≫ g′_E(α_f(Rf_I K) inverse) ≫ g′_E(T_X ε_f(K)). This is a calculation of only one side; it does not assert equality of the source and target sides.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the bounded f′ adjunction to the target composite. Counit naturality moves the g′ pull comparison past the f′ counit. The mate/counit identity replaces the f′ push comparison. Naturality of the inverse f′ pull comparison moves scalar extension of integral exchange past it. Expand the integral exchange adjunct and use naturality of the g′ pull comparison. Coherence of the specified pull comparisons with composition, obtained by right deriving the restriction/pushforward composition diagram and conjugating through adjunctions, gives the pull square cube. Precompose that cube with inverse f′ pull comparison and postcompose with g′ pullback of inverse f pull comparison. Cancel these two isomorphisms and postcompose with scalar extension of the integral counit. This is the displayed composite. No push comparison or exchange is inverted.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-comparisons",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change; actual ChangeOfCoefficients and derived pullback composition constructions",
+  "note": "A3: isolated pure pull coherence, a strict part of the original exchange argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedPullIso.*(comp|square)|comapLowerStarIso.*comp",
+   "date": "2026-10-16",
+   "results": "",
+   "verdict": "Composition and mate infrastructure; no match for the specified derived coefficient pull-comparison cube."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_hcomp",
+   "verdict": "Composition and mate infrastructure; no match for the specified derived coefficient pull-comparison cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars commutes with composition of pullbacks and the pullback square comparison",
+   "date": "2026-10-16",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp; PresheafOfModules.pullback_comp_id; CategoryTheory.ChosenPullbacksAlong.pullbackComp; PresheafOfModules.pullback_assoc; SheafOfModules.pullbackComp; CategoryTheory.Over.pullbackComp; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc",
+   "verdict": "Composition and mate infrastructure; no match for the specified derived coefficient pull-comparison cube."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars commutes with composition of pullbacks and the pullback square comparison",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralExchangeEquality",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-integral-exchange-equality",
+   "place": "Separate target side adjunct calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralExchangeTargetAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible_exchange_target_adjunct",
+  "statement": "theorem integralConstructible_exchange_target_adjunct\n    (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :\n    ((boundedConstructibleUpperStarLowerStarAdjunction\n      (Profinite.continuousMapRingObj E) ℓ k f').homEquiv _ _).symm\n      ((integralScalarConstructible ℓ E Y').map\n          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app K) ≫\n        integralConstructibleTargetHom ℓ E k f' g' K) =\n    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f').map\n        (integralConstructiblePullHom ℓ E k g\n          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)) ≫\n      (boundedConstructiblePullbackSquareComparison\n        (Profinite.continuousMapRingObj E) ℓ k sq).hom.app\n          ((integralScalarConstructible ℓ E Y).obj\n            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)) ≫\n      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').map\n        (integralConstructiblePullIso ℓ E k f\n          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv ≫\n      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').map\n        ((integralScalarConstructible ℓ E X).map\n          ((boundedConstructibleUpperStarLowerStarAdjunction\n            (integralCoeff ℓ E) ℓ k f).counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-14632",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T015245-L-720904",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-14632",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T015245-L-720904",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and adjunct normal forms match all three DAG nodes; delivered modules and direct importer ContinuousIntegralExchangeSquare compile; axioms are permitted plus expected sorryAx."
+ }
+}
