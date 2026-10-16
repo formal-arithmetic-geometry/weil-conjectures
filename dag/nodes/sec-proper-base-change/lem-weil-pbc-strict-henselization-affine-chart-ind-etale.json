@@ -23,38 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Factor the geometric point through i using its singleton spectrum. Apply etale_local_ring_triples to obtain the initial chart subcategory, its equivalence E with residue triples, and compatible coordinate-ring colimit comparisons. Compare the small model defining strictHenselizationRing with the affine neighbourhood colimit using strictHenselizationAffineInclusion_isEquivalence.",
+   "text": "Factor s through the affine chart using the singleton spectrum of Ω. Apply etale_local_ring_triples to obtain cofiltered affine neighbourhoods, their initial chart subcategory, the equivalence E with etale residue triples, and the compatible ring-colimit comparison t.",
    "uses": [
     "lem-weil-pbc-etale-local-ring-triples"
    ],
    "elementary": false
   },
   {
-   "text": "Use etaleResidueTriples_filtered_colimit to obtain filteredness and a universal ring cocone c with a compatible structural map rho. Only these clauses are needed; no locality, residue-field calculation, root lifting or henselianity is used.",
-   "uses": [
-    "lem-weil-pbc-etale-triples-filtered-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the canonical colimit comparison isomorphisms to identify strictHenselizationRing with c.pt. For the chart neighbourhood, the coprojection identities and the R-map clause of the diagram comparison show that Spec(rho followed by the inverse comparison), followed by i, is strictHenselizationStructuralMap. The structural-map characterization supplies the last equality.",
+   "text": "The incoming-arrow clause of the same theorem transfers cofilteredness to the chart subcategory. Its opposite is filtered, so E transfers filteredness to triples. Choose one triple t₀ and set rho = t₀.alpha followed by its colimit leg. For any arrow, R-linearity and cocone naturality identify the two resulting R-maps. A common successor shows every triple has the same resulting map rho.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The affine chart subcategory is essentially small since the affine neighbourhood category is equivalent to its small representative model and full subcategories inherit essential smallness. Take its opposite small model and compose with E. Transfer filteredness from triples and whisker c along this equivalence. Full faithfulness of Spec turns e into a ring isomorphism to A. Extend the cocone along the composite ring isomorphism. Cancellation of the mono i and faithfulness of Spec, applied to ha, identify the transported map with a. Structural maps of triples form a natural transformation from the constant R diagram; each is etale by HasRingHomProperty.Spec_iff, and each composite with a cocone leg is a. Apply RingHom.IndEtale.iff_exists to this small filtered etale presentation.",
+   "text": "Identify strictHenselizationRing with the affine-neighbourhood colimit using colimit.isoColimitCocone, and then with the triple colimit by t. Use the pointed affine chart itself as a neighbourhood, with identity chart factorization. The diagram and coprojection compatibility equations identify rho transported back to the strict-henselization ring with this chart coprojection. The strict-localization cone structural-map identity then identifies its spectrum composed with i with strictHenselizationStructuralMap.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Shrink the chart category to a small model, using essential smallness of affine pointed neighbourhoods and full subcategories. Whisker the triple colimit along its equivalence with this model. Full faithfulness of Spec turns e into a ring isomorphism to A; extend the colimit along it. Cancel the mono i and use faithfulness of Spec on ha to identify the transported R-map with a. The triple structural maps form a natural transformation from the constant R diagram, are etale by HasRingHomProperty.Spec_iff, and compose with all colimit legs to a. Apply RingHom.IndEtale.iff_exists.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-etale-triples-filtered-colimit"
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
-  "place": "Tag 04HX proof; Tag 04GW filtered triple-colimit presentation; categorical transport written by G2, reusing the coprojection comparison in StrictHenselizationChartMaximalIdeal"
+  "place": "Tag 04HX proof; Tag 04GW filtered etale presentation. C4 reconstructs and simplifies the previous G2 comparison proof for the available strict-localization API: filteredness is transferred from the chart category and the chart itself identifies the structural map."
  },
  "mathlib_searches": [
   {
@@ -113,12 +113,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261012T184259-L-4003061",
+  "landing": "20261016T221600-L-1612112",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

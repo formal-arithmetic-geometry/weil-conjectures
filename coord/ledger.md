@@ -15606,3 +15606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient (stage 3; reviewer PASS; first push; landing 20261016T221558-L-1611743 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:15 L: merged deliver/C3/Sheaf.Paper.SectionModuleAlgebraicInverseImage (stage 3; reviewer PASS; first push; landing 20261016T221559-L-1611841 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/C3/Sheaf.Paper.StrictHenselizationPointedMap (stage 3; reviewer PASS; first push; landing 20261016T221600-L-1611985 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/C4/Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale (stage 3; reviewer PASS; first push; landing 20261016T221600-L-1612112 (proof); batch 20261016T221550; modules 1; new nodes 0)
