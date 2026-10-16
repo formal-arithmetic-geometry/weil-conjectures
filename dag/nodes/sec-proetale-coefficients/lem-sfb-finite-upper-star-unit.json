@@ -60,12 +60,14 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_upperStar_η",
+  "statement": "instance ProEtale.isIso_upperStar_η : IsIso (η (g)^*[A])",
   "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback",
-   "AlgebraicGeometry.ProEtale.isIso_upperStar_η"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 12:01 UTC for group Q62, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The first proves invertibility of the unit comparison defined as the adjoint mate of the pushforward unit, an"
+  "by": "Q85",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing comparison-isomorphism instance, read from the canonical finite-coefficient module using scompile.py --source and checked with scompile.py. Its oplax unit is definitionally ((upperStarLowerStarAdjunction A g).homEquiv _ _).symm (Functor.LaxMonoidal.ε (lowerStar A g)), the mate specified by the node. The surrounding parameters are A : Type u', Category.{u + 1} A, Abelian A, IsGrothendieckAbelian.{u + 1} A, MonoidalCategory A, BraidedCategory A, arbitrary Z Y : Scheme.{u} and g : Z ⟶ Y, and monoidality of both sheaf localizations. The node's SymmetricCategory and MonoidalClosed hypotheses supply the braiding and localization hypotheses automatically; a scratch consumer with exactly these assumptions compiled. No restriction on g is needed. #print axioms reports only propext, Classical.choice and Quot.sound. No new module or duplicate declaration."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -97,5 +99,13 @@
   }
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9116ca655",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Existing-declaration record AlgebraicGeometry.ProEtale.isIso_upperStar_η (FiniteCoefficient/UpperLowerStar/Monoidal.lean:91, identical in side and live trees); node changes only lean; statement field verbatim. Hypotheses: Braided (weaker than the node's symmetric), W.IsMonoidal inferred from MonoidalClosed, arbitrary g, independent universes u'/u. Map: η (g)^*[A] equals (upperStarLowerStarAdjunction A g).homEquiv.symm (ε (g)_*[A]) by rfl, i.e. the mate of the recorded laxMonoidal_lowerStar unit under the recorded adjunction. The conclusion IsIso matches the node exactly. Live lcompile of a check file with exactly the node's hypotheses (SymmetricCategory, MonoidalClosed, autoImplicit false): exit 0, no warnings; axioms propext/Classical.choice/Quot.sound, no sorryAx. nt_compile not used: it only accepts files in the side lean/ tree. Report has real Worker report and Second reading by Q85 sections. No new modules or definitions, no proof added. Findings: none."
+ }
 }

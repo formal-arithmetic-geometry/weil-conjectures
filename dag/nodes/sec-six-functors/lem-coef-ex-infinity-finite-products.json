@@ -235,5 +235,37 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, all three new nodes and every cited statement in full: simplicial-set and colimit defs, def-cbc-enhanced-diagrams-cones, lem-coef-kan-quillen-right-proper, and the 002W filtered/finite interchange leaf. The item statement is unchanged and true, with nothing weakened. Step 1: the section a↦{0..a} of λ_n gives injective j, so stage maps into the colimit are injective. Step 2: Q=P∖{V,V∖{i}} is exactly the horn's face set, and the image-of-faces hypothesis max(C)∈Q holds. Step 3: r(C)⊆T∪{i} still omits T's missing vertex j≠i, and r(C)={i} otherwise; hand-checked on n=1 and n=2. Step 4: both transposes checked; j_Y f transposes to f λ_Λ by naturality of λ, then to f̄ Sd(λ_Λ). Step 5: finite stage plus injectivity glue the horn; the m≥1 shift is right; n=1 and empty K are fine. Step 6: one-step equivalences, composition, filtered colimit over N with the constant diagram's colimit K. Steps 7–9: Hom/limit, the 002W interchange with N small filtered and J finite, and the projection/unit equations. New nodes: face-poset calculus (true; Sd A≅N(F) for downward-closed chain families; image rule tested on [1]→[0]), one-step Ex comparison (Kan's theorem), and filtered-colimit stability (true without monicity). Each is self-contained, statement-only and strictly smaller than the item; none restates one of its clauses. A whole-DAG statement scan found no duplicates. Pinned Mathlib Subdivision.lean has only sd/ex and the adjunction, with the face comparison left as TODO, so there is no leaf. No cycle; route is within sk-prop-sf-biduality-general apart from definition and leaf nodes; no tool_uses needed. Kerodon is not archived locally: the delivery says so, gives WANTED lines and uses proof_origin agent. I could not open the online tags, so I checked the mathematics directly. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ExInfinityFiniteProducts",
+  "declaration": "SSet.ex_infinity_finite_products",
+  "declarations": [
+   "SSet.sdLastVertexOrderHom",
+   "SSet.sdLastVertex",
+   "SSet.sdLastVertexCosimplicial",
+   "SSet.exLastVertexUnit",
+   "SSet.exIter",
+   "SSet.exIterTransition",
+   "SSet.exTowerFunctor",
+   "SSet.exInfinityFunctor",
+   "SSet.exInfinity",
+   "SSet.exInfinityUnit",
+   "SSet.ex_infinity_finite_products"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ExInfinityFiniteProducts.lean",
+  "statement": "theorem ex_infinity_finite_products : (∀ K : SSet.{u}, KanComplex (exInfinity K) ∧ Enhanced.IsWeakHomotopyEquivalence (exInfinityUnit.app K)) ∧ PreservesFiniteLimits exInfinityFunctor.{u} ∧ (∀ (I : Type v) [Finite I] (K : I → SSet.{u}), IsIso (piComparison exInfinityFunctor.{u} K) ∧ ∀ i : I, piComparison exInfinityFunctor.{u} K ≫ Pi.π (fun a : I ↦ exInfinityFunctor.obj (K a)) i = exInfinityFunctor.map (Pi.π K i) ∧ exInfinityUnit.app (∏ᶜ K) ≫ piComparison exInfinityFunctor.{u} K ≫ Pi.π (fun a : I ↦ exInfinityFunctor.obj (K a)) i = Pi.π K i ≫ exInfinityUnit.app (K i)) ∧ IsIso (terminalComparison exInfinityFunctor.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper definitions construct the exact last-vertex comparison into Mathlib SSet.ex, its iterates and sequential functor-category colimit, and the natural stage-zero unit. All have real data; only the node theorem is postponed. The finite-product clauses quantify over every finite index type in an independent universe and specify both projection equations and the terminal comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a60ae47c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, report (Worker report + Second reading by Q24 present), module. Lean matches every clause: SimplexCategory.sd = nerve of nonempty subsets (linear order), SSet.ex = Hom(Sd Δ^n,K), last vertex = max' with real naturality proofs, j_K = precomposition, transitions whiskerLeft (exIter n) j (rfl/ofSequence checked), colimit tower, KanComplex (all horns incl. outer, no nonemptiness), Enhanced.IsWeakHomotopyEquivalence (same notion as Kan-Quillen dep; printed: π0 + all π_r, all basepoints), PreservesFiniteLimits, piComparison iso for any Finite I : Type v, terminalComparison iso, both projection equations in the right order. No extra hypotheses or universe restriction; edge cases (empty K, n=0, empty/singleton I, stage 0 = id) covered. 10 helpers with real data; only the theorem uses sorry (#print axioms); docstrings carry source/blueprint and the 9 proof steps; lean.statement verbatim; declarations exist; Mathlib has no Ex^∞. nt_compile.py: module compiles in 3.4 s, no errors or warnings. Cosmetic: report source line has a redaction artefact ('the project server'), no fix needed."
  }
 }

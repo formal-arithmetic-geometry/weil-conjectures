@@ -228,5 +228,24 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-feae1a9e8 (reviewer sub-agent of L); spot-checked: I read the whole item, the cited def-weil-pbc-category-colimit and the parent's steps 2 and 3. I checked the item against Hovey, Model Categories, pp. 49-50: Section 2.4 on colimits in Top, Lemma 2.4.1, the definition of closed T1 inclusion and Proposition 2.4.2 with its proof, plus Def. 2.1.4 for 'finite relative to'. Hovey is not under literature/. The worker filed a WANTED line and marked the proof as written by an agent (proof_origin.by=agent). I read the online PDF and extracted text only to /tmp. The statement agrees with Hovey clause by clause, is unchanged from the base and is not weakened. Hovey's printed 'not in Y\\f(X)' is a typo, which Lemma 2.4.5's proof confirms, and the item uses the corrected meaning. The source's final 'discrete in a compact space' step is incomplete; steps 4-5 fix it by proving every subset of S closed in X and giving an explicit open cover of A. All 7 steps are correct and elementary. Step 7 uses only the universal property and canonical map of the colimit definition, which is a Mathlib leaf. I tested the empty source, a non-T1 X_0, lambda=omega, an internal supremum mu<lambda for uncountable-cofinality lambda, and mu=lambda. Hovey's Sierpinski example shows the T1 hypothesis is needed. A DAG search found no duplicate; the only other hits are unrelated 'finite relative Tor dimension' nodes. Mathlib's TopCat limits have no match, and the 14 recorded searches are adequate. The proof cites no statement from another unit, so no tool_uses are needed and there is no cycle. No fixes were made; the details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CompactClosedT1Chain",
+  "declaration": "TopCat.compact_closedT1_chain_factorization",
+  "file": "lean/Sheaf/Topology/CompactClosedT1Chain.lean",
+  "statement": "theorem compact_closedT1_chain_factorization (κ : Ordinal.{u}) (hκ : Order.IsSuccLimit κ) (F : Set.Iio κ ⥤ TopCat.{v}) [F.IsWellOrderContinuous] (hclosed : ∀ (i j : Set.Iio κ) (hij : i ⋖ j), IsClosedEmbedding (F.map (homOfLE hij.le))) (hT1 : ∀ (i j : Set.Iio κ) (hij : i ⋖ j) (y : F.obj j), y ∉ Set.range (F.map (homOfLE hij.le)) → IsClosed ({y} : Set (F.obj j))) (c : Cocone F) (hc : IsColimit c) (A : TopCat.{v}) [CompactSpace A] : (∀ f : A ⟶ c.pt, ∃ (i : Set.Iio κ) (g : A ⟶ F.obj i), g ≫ c.ι.app i = f) ∧ ∀ (s : Cocone (F ⋙ coyoneda.obj (op A))) (hs : IsColimit s), Function.Bijective (hs.desc ((coyoneda.obj (op A)).mapCocone c))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The final-topology union is represented by an arbitrary TopCat colimit cocone. The second conjunct asserts bijectivity of the canonical IsColimit.desc for every chosen colimit cocone of the continuous-map-set diagram; no extra existence assumption is placed on the factorization conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8c47a3b3",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read node, def-weil-pbc-category-colimit dependency, Hovey Prop 2.4.2/Lemma 2.4.1 source place, module, docstrings, report (both sections present and substantive), Mathlib IsWellOrderContinuous. Every clause matches with nothing stronger: IsSuccLimit κ = nonzero limit; F : Set.Iio κ ⥤ TopCat with well-order continuity; covering pairs carry IsClosedEmbedding and relative T1 (points outside the range closed); arbitrary IsColimit cocone for the final-topology union; CompactSpace A; factorization conjunct plus bijectivity of the canonical hs.desc for every colimit of F ⋙ coyoneda(op A). Re-checked the proof (selected points avoid X_0, μ<λ and μ=λ both covered). Edge cases: empty A, κ=ω, non-T1 X_0; independent universes u,v (pp.universes check), no HasColimits instance. Node unchanged except lean; statement verbatim; no definitions, single sorry; source/blueprint docstrings; no duplicate. nt_compile.py --json: CompactClosedT1Chain.lean 2.7 s, exit 0, no errors or other warnings. No findings."
  }
 }

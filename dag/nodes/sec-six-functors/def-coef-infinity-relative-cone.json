@@ -26,7 +26,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-source-gluing"
  ],
  "proof": [],
  "proof_deps": [],
@@ -192,5 +195,34 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7753cf44d (reviewer sub-agent of L); spot-checked: I read the definition in full. I checked it against Kerodon 02X1 (Proposition 7.1.6.19, condition (2)) and 02KG (Definition 7.1.6.1), both online. The source takes an arbitrary functor U and quantifies over every comparison diagram g. For limits the square uses Hom(g,f), and the item's p-colimit and p-limit squares match this variance with no added isofibration or existence hypothesis. Using (2) as the definition is legitimate because the source proves it equivalent to the slice definition. The join formula with degree -1 augmentation gives A_0⊔B_0 in degree 0 and correct operators, and K^▷ and K^◁ are oriented correctly; it agrees with the inline joins in the other lem-coef-infinity nodes, and no join definition node exists. The path-pullback model is correct because ev0×ev1 is a Kan fibration for Kan D, and the constant-path comparison is simplicial. Edge cases hold: K empty gives the p-initial/p-final condition, p=id is trivial, and p to Δ^0 gives the ordinary colimit condition. Both stmt_deps are reviewed and say what is used: def-cbc supplies the primitives, and lem-cbc-enhanced-functor-cone-calculus supplies the quasicategory and Kan-mapping-space clauses. Neither reaches the item, so there is no cycle. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a well-definedness black box. The three citers use the predicate consistently. There are no new nodes, no duplicate, no SGA citation, and the unit and ancestry are unchanged. This is not a target node, so the base-change and coefficient-category checks do not apply. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeInfinityCone",
+  "declaration": "SSet.Enhanced.IsRelativeColimitDiagram",
+  "declarations": [
+   "SSet.Enhanced.rightJoinCone",
+   "SSet.Enhanced.leftJoinCone",
+   "SSet.Enhanced.rightJoinConeInclusion",
+   "SSet.Enhanced.leftJoinConeInclusion",
+   "SSet.Enhanced.homotopyPullbackComparison",
+   "SSet.Enhanced.IsHomotopyPullbackSquare",
+   "SSet.Enhanced.IsRelativeColimitDiagram",
+   "SSet.Enhanced.IsRelativeLimitDiagram"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeInfinityCone.lean",
+  "statement": "def IsRelativeColimitDiagram {K D B : SSet.{u}} [Quasicategory D] [Quasicategory B] (p : D ⟶ B) (q : rightJoinCone K ⟶ D) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The join, terminal augmentation, pure-factor inclusions and path pullback reuse the existing landed constructions. Helpers construct the canonical constant-path comparison and its weak-equivalence predicate. Both relative predicates quantify over every comparison diagram, using outgoing mapping spaces for colimits and incoming mapping spaces for limits. The three added statement dependencies already have landed Lean records; no existing node is restated or repaired."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3115426dd",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Node diff is only lean + stmt_deps (3 landed, reviewed nodes; full dependency closure of 77 nodes has no cycle). Module RelativeInfinityCone.lean has 8 real definitions and no sorry, theorem or choice. Reuses the landed orderedJoinFunctor, orderedJoinInl/Inr and simplicialHomotopyPullback (exactly the node's path pullback P). homotopyPullbackComparison is the constructed constant-path map; IsHomotopyPullbackSquare = strict commutativity plus weak equivalence of that map. IsRelativeColimitDiagram tests every t with corners Map(q,t), Map(q|K,t|K), Map(pq,pt), Map(pq|K,pt|K): restriction across, postcomposition by p down. IsRelativeLimitDiagram uses the left cone and (t,q) variance, matching Kerodon 02X1(2)/02KG. No isofibration, existence or extra universe assumption. Edge cases (empty K, K=Δ0, empty D, empty mapping spaces, p=id, B=Δ0) are fine. lean.statement matches the file signature verbatim; docstrings carry the source and blueprint tag; report has Worker report and Second reading by Q84 sections. nt_compile.py --json on the byte-identical snapshot file: exit 0, 2.6 s, no errors or warnings. Only cosmetic issue: the report prose has 'Kerodon Proposition the project server' where 7.1.6.19 should be."
  }
 }

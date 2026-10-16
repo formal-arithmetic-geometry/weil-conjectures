@@ -180,5 +180,29 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-c32879954 (reviewer sub-agent of L); spot-checked: Item statement is word for word the main-20261015 statement (arbitrary g; arbitrary Grothendieck abelian A from def-sfb-finite-lower-star; g^* = a_D∘Lan_{b^op}∘ι_C with b(V)=V×_Y Z, as in def-sfb-finite-upper-star). Nothing is weakened. Step 1: checked against Stacks 098M, the between-objects, base-change and composition clauses of sk-lem-pe-weakly-etale-stability (a unit-cited node), and both clauses of the terminal/pullback Mathlib leaf; the fibre-product bijection for b is correct. Step 2: matches Stacks 00X3 (lemma-directed); nonempty, product refinement and equalizer lift are all written, so elementary is justified. Steps 3-4: Stacks 00VC/00VE colimit formula; Mathlib lanEvaluationIsoColim (Flat.lean:293-322) is a NatIso; CostructuredArrow b.op (op W) is I_W^op with F(a):F(V')→F(V); smallness checked. AB5 is GrothendieckAxioms/Basic.lean:71/:300 and GrothendieckCategory/Basic.lean:73,99,102; evaluation detection and objectwise finite limits close the argument, including the empty diagram. Step 5: composite of three functors that preserve finite limits. Step 6: left adjoint preserves colimits, then additivity and preservation of kernels and cokernels. New nodes: two Mathlib leaves verified line by line. lem-sfb-grothendieck-sheafification is a true unsplit general-coefficient input, realized by slopmaster2 hasSheafify_of_isGrothendieckAbelian plus Mathlib sheafIsAbelian; its Stacks 00WJ source is explicitly a set-valued prototype; it is not a restatement of a clause of the item. Duplicate search over dag/nodes and the blueprint found only narrower-coefficient nodes; det-pe-topos-functoriality-inverse-image is correctly avoided (cycle). Route stays in the unit; tool_uses is empty. Edge cases checked: empty C, b=id, empty Y or Z, empty J, zero A. No changes made."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs",
+  "declaration": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_upperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_upperStar",
+   "AlgebraicGeometry.ProEtale.additive_upperStar",
+   "AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction",
+   "AlgebraicGeometry.ProEtale.preservesHomology_upperStar"
+  ],
+  "statement": "instance ProEtale.preservesFiniteLimits_upperStar\n    [PreservesFiniteLimits ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.lan :\n      (Y.ProEtᵒᵖ ⥤ A) ⥤ Z.ProEtᵒᵖ ⥤ A)] :\n    PreservesFiniteLimits (g)^*[A]",
+  "branch": "slopmaster2",
+  "by": "Q61",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The current source module gives the exact result for arbitrary g and Grothendieck abelian A. preservesFiniteLimits_upperStar is the finite-limit clause; upperStarLowerStarAdjunction supplies the stated left-adjoint clause; additive_upperStar and preservesHomology_upperStar provide additivity and the resulting abelian exactness. The global Grothendieck-abelian Kan-extension instance discharges the finite-limit premise for every g. Second reading: the premise-supplying global instance AlgebraicGeometry.ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian is in WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension, publicly imported by the recorded module. A clean scompile.py probe checked finite limits, finite colimits, additivity, homology preservation, and ShortComplex.ShortExact.map_of_exact with arbitrary A : Type v, Category.{u+1} A and g : Z ⟶ Y, without WeaklyEtale g or an additional Kan premise. Both primary preservation declarations have only propext, Classical.choice and Quot.sound. The authoritative current source was read with scompile.py --source: the old UpperLowerStar.Defs is a compatibility re-export, so this record names the canonical FiniteCoefficient.UpperLowerStar.Defs module that actually declares the unchanged constants."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd74509dc",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Existing attachment, no new module; node changes only its lean field. The statement is verbatim the blueprint 1512 text. preservesFiniteLimits_upperStar has arbitrary g : Z ⟶ Y (WeaklyEtale g only in the earlier KanExtension section) and arbitrary Grothendieck abelian A with the same binders as the deps upperStar and upperStarLowerStarAdjunction. Its PreservesFiniteLimits-of-Lan instance premise is discharged for all g by the global ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian (HasLeftKanExtension.lean:475, publicly imported). Exactness is covered by additive_upperStar, preservesHomology_upperStar and PreservesFiniteColimits; ShortExact.map_of_exact typechecks. The lean.statement is a verbatim substring of the live FiniteCoefficient/UpperLowerStar/Defs.lean; the old UpperLowerStar/Defs is a 5-line re-export in the live tree, so the module relocation is correct (the local side clone is stale and reversed), and def-weil-proetale-module-direct-image already records this module on branch slopmaster2. nt_compile.py --json probe compiled with no errors; axioms are only propext, Classical.choice, Quot.sound. Edge cases (empty diagram, identity g, empty schemes, zero A), universes, one-definition-per-notion and the maintainer gates all checked; no findings."
  }
 }

@@ -199,5 +199,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, def-cbc-enhanced-diagrams-cones and the parent step that cites the item, all in full. The item statement is byte-identical to the live copy, which is still unsplit: nothing was changed or weakened. Step 1: Kan closure from lem-cbc-kan-functor-space-kan, whose statement allows any source K. Step 2: lem-cbc-realization-weak-equivalence (i)=>(ii) with W=Fun(K,Z); its condition (i) is word for word the item's hypothesis. Step 3: I checked the currying formulas and the naturality identity H_s(D(b)d,K(b)k,tb)=Z(b)H_m(d,k,t) by hand. They give Fun(K,Fun(D,Z)) ≅ Fun(D,Fun(K,Z)), natural in D, so u-precomposition becomes postcomposition with u^*. Step 4: Yoneda argument with test shapes K=Y (surjectivity) and K=X (injectivity) gives [fg]=[id] and [gf]=[id]; correct. Step 5: the horns are right (Λ^2_0 with 01=e and 02=id gives the reversed edge; Λ^2_1 gives composition), filled in the Kan complexes Fun(Y,Y) and Fun(X,X), producing single Δ^1 homotopies and the π0 inverse. Mathlib leaf: I read Mathlib PushoutProduct.lean:155-156, instance [KanComplex X] : KanComplex ((ihom A).obj X) with A arbitrary; a one-line specialization up to the internal-Hom isomorphism. The realization node is statement-only, self-contained and true (Kerodon 03X7/00UA, Kan–Quillen); I tested it on the empty map, the empty set to a point, Δ^1 to a point and ∂Δ^1 to a point. It is not a restatement of the item (D1/D2 satisfied). If 03X7 phrases its condition as a homotopy equivalence of realizations, whoever splits the node next needs Whitehead's theorem as an extra step. Duplicate search: rg over the DAG for 'weak homotopy equivalence' and 'Kan complex' (about 75 nodes); I read the nearest ones in full (kan-quillen-right-proper, kan-realization-serre, isofibration-exponentiation, internal-hom-quasicategory, enhanced-functor-cone-calculus) and none duplicates the item or a new node. Route: everything stays in unit sk-prop-sf-cbc, no tool_uses, no SGA. Edge cases checked: empty A and B, Z empty, Z discrete, Z a point, zero-length zigzags. Kerodon is not archived; WANTED is raised and proof_origin.by is agent. The report mentions a citations.json that was not delivered; this affects only the report. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanMappingHomotopyInvariance",
+  "declaration": "SSet.Enhanced.kan_mapping_homotopy_invariance",
+  "file": "lean/Sheaf/CategoryTheory/KanMappingHomotopyInvariance.lean",
+  "statement": "theorem kan_mapping_homotopy_invariance {A B Z : SSet.{u}} [KanComplex Z] (u : A ⟶ B) (hu : IsWeakHomotopyEquivalence u) : KanComplex ((ihom A).obj Z) ∧ KanComplex ((ihom B).obj Z) ∧ (∃ g : (ihom A).obj Z ⟶ (ihom B).obj Z, Nonempty (SSet.Homotopy (((MonoidalClosed.pre u).app Z) ≫ g) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (g ≫ ((MonoidalClosed.pre u).app Z)) (𝟙 _))) ∧ Function.Bijective (SSet.mapπ₀ ((MonoidalClosed.pre u).app Z))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f99d064b2",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read item node (only lean field changed vs base), def-cbc-enhanced-diagrams-cones and its IsWeakHomotopyEquivalence (realization pi0 + all pi_r, r>=1, every basepoint), Mathlib SSet.Homotopy (Homotopy.lean:48, cylinder X⊗Δ[1] with ι0/ι1 endpoints), SSet.π₀/mapπ₀ (PiZero.lean, EqvGen of edges), KanComplex Prop abbrev and ihom Kan instance (PushoutProduct.lean:155). Clauses match Kerodon 03PJ/00TN/03X7 exactly: [KanComplex Z], canonical pre u, ∃ inverse g with two cylinder homotopies correctly oriented, bijective mapπ₀; no extra hypotheses; single bound universe consistent with node's 'universe containing A,B,Z'. Edge cases (empty A=B, empty Z, point/discrete Z, identity) fine. No hollow defs (no defs), sorry only, docstrings with source/blueprint and 5-step proof, lines <=100, lean.statement verbatim, report has Worker report and Second reading by NG. No duplicate in Mathlib/project. nt_compile.py --json reproduced clean compile (rc=0, no errors or warnings shown). Minor: PushoutProduct import serves only the proof plan; stale worker-report helper text explicitly superseded."
  }
 }
