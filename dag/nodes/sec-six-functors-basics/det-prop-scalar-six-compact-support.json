@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-prop-scalar-six-compact-support",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-sfb-coefficient-comparisons-compact-support"
+  ]
  },
  "kind": "statement",
  "title": "Coefficient comparison for compactly supported direct image",
@@ -13,49 +15,195 @@
   "place": "node det-prop-scalar-six-compact-support, order None"
  },
  "stmt_deps": [
-  "sk-thm-existence"
+  "sk-thm-existence",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback"
  ],
  "proof": [
   {
-   "text": "*Isomorphism.* $j_!K\\in\\Dctf(\\overline X,\\Lambda)$ ([sk-thm-sf-ctf-stability]), so the first\narrow, the direct-image comparison of [det-prop-scalar-six-direct-image] for $p$, is an\nisomorphism; the second is the extension-by-zero identification of\n[det-prop-scalar-six-pullback] (2). Both sides lie in $\\Dctf(Y,\\Lambda')$ by\n[sk-thm-existence] (2) and [det-prop-scalar-six-ctf].",
+   "text": "Write $T^V=(-)_{\\Lambda'}$ and write $\\delta_{a,M}:T(a_!M)\\xrightarrow{\\sim}a_!T(M)$ for [det-prop-scalar-six-pullback] (2). All schemes appearing in a compactification are standing schemes, hence qcqs, and their open immersions are quasi-compact ([sk-def-sfb-dc-setting]). Apply [det-sf-comp-coherence-single] to the compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{\\mathrm{id}}\\overline X$ of $j$: it gives $j_!K\\in\\Dctf(\\overline X,\\Lambda)$, including finite Tor amplitude. Thus [det-prop-scalar-six-direct-image] (1) for $p$ makes $\\gamma_{p,j_!K}$ an isomorphism. Composing with $Rp_*\\delta_{j,K}$ gives the displayed $\\gamma^!_{f,K}$. By [sk-thm-existence] (2), $Rf_!K\\in\\Dctf(Y,\\Lambda)$; [det-prop-scalar-six-ctf] (3) gives both $T^Y Rf_!K\\in\\Dctf(Y,\\Lambda')$ and $T^XK\\in\\Dctf(X,\\Lambda')$. Applying existence again to $T^XK$ puts $Rf_!T^XK$ in the same target category.",
    "uses": [
+    "sk-def-sfb-dc-setting",
+    "det-sf-comp-coherence-single",
     "det-prop-scalar-six-direct-image",
     "det-prop-scalar-six-pullback",
     "sk-thm-existence",
     "det-prop-scalar-six-ctf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism; the compactification-model lemma supplies the missing finite-Tor hypothesis"
+   }
   },
   {
-   "text": "*Independence.* Two compactifications are dominated by a third, so it suffices\nto compare $\\overline X$ with a refinement $h\\colon\\overline X'\\to\\overline X$ (proper, with\n$h\\circ j'=j$ and $p'=p\\circ h$). The identification of $Rp_*j_!$ with $Rp'_*j'_!$ comes\nfrom the refinement map $e\\colon j_!K\\to Rh_*j'_!K$, which is the unique map restricting\nto the identity of $K$ on $X$ (by the adjunction $j_!\\dashv j^*$ and\n$j^*Rh_*j'_!K=K$, as $h$ is an isomorphism over the dense open $X$). The two composites\n$(j_!K)_{\\Lambda'}\\to Rh_*j'_!(K_{\\Lambda'})$, \"refine then compare\"\n$\\gamma_{h,j'_!K}\\circ(e)_{\\Lambda'}$ (after the $j'_!$-identification) and \"compare then\nrefine\" $e_{K_{\\Lambda'}}$ (after the $j_!$-identification), are both formed from the\nsame pullback identifications and adjunction maps and restrict to the identity of\n$K_{\\Lambda'}$ on $X$; by the adjunction $j_!\\dashv j^*$ they are equal. Applying $Rp_*$ and\nthe compatibility of $\\gamma$ with composition $R(ph)_*=Rp_*Rh_*$\n([det-prop-scalar-six-direct-image] (2)) shows that the comparisons defined with\n$\\overline X$ and $\\overline X'$ agree.",
+   "text": "First consider dense compactifications $c=(j:X\\to Z,p:Z\\to Y)$ and $c'=(j':X\\to Z',p':Z'\\to Y)$ with $p'=ph$ and a proper refinement $h:Z'\\to Z$ satisfying $h^{-1}(X)=X$. Write $e_{h,K}$ for [det-sf-comp-coherence-refinement]. The precise coefficient/refinement identity is\n$$Rh_*\\delta_{j',K}\\circ\\gamma_{h,j'_!K}\\circ T^Z(e_{h,K})=e_{h,T^XK}\\circ\\delta_{j,K}.$$\nBoth maps have source $T^Zj_!K$ and target $Rh_*j'_!T^XK$. Identify the source with $j_!T^XK$ using $\\delta_j$. By $j_!\\dashv j^*$ and $j^*Rh_*j'_!T^XK=T^XK$, maps of this type are determined by their restriction to $X$ ([det-sf-comp-coherence-refinement] (1)). The right side restricts to the identity. For the left side expand $\\gamma_h$ as the unit, pullback comparison and scalar-extended counit in [det-prop-scalar-six-direct-image]. Over $X$, $h$ is the identity, the pullback comparison is the identity comparison of [det-prop-scalar-six-pullback] (1), and the unit followed by counit is the identity by the adjunction triangle identity. The $\\delta_j,\\delta_{j'}$ restrictions are identities: they are the adjunction-conjugate comparisons of [def-sfb-derived-open-immersion-shriek-iso]. Thus the left side also restricts to the identity, proving the equation. Put $\\phi_{h,K}=Rp_*e_{h,K}$. Naturality of $\\gamma_p$ for $e_{h,K}$, followed by the composition formula $\\gamma_{ph}=Rp_*\\gamma_h\\circ\\gamma_p$ of [det-prop-scalar-six-direct-image] (2), now gives\n$$\\phi_{h,T^XK}\\circ\\gamma^{!,c}_{f,K}=\\gamma^{!,c'}_{f,K}\\circ T^Y(\\phi_{h,K}).$$\nThis also covers replacement of an arbitrary compactification by its schematic closure: [sk-lem-nagata-density-normalization] identifies $j_!K=i_*j_{0!}K$ for the closed inclusion $i:Z_0\\to Z$, with the identification restricting to the identity on $X$. The derived adjunction $j_!\\dashv j^*$ stated in [def-sfb-derived-open-immersion-shriek-iso] makes it the unique such map, so the preceding displayed calculation applies with $h=i$; here $j^*Ri_*j_{0!}K=K$ follows by restricting the density-normalization identification. The compactification closures are Noetherian, since standing schemes are finite type over a field ([lem-weil-pbc-finite-type-over-noetherian]). After this normalization, [prop-compactification-refinement] supplies common refinements of two compactifications. The scheme hypotheses hold because all maps are between separated finite-type schemes over the standing field. Normalize a common refinement to be dense. For either resulting proper map $h:Z_3\\to Z_a$, [lem-weil-pbc-proper-open-section] says that $X$ is open and closed in $h^{-1}(X)$. Since $X$ is dense in $Z_3$, it is dense in this open inverse image; being also closed there, it is all of it. Thus $h^{-1}(X)=X$ as open subschemes, exactly the extra hypothesis of the refinement lemma. The maps $\\phi_h$ are isomorphisms and transitive by [det-sf-comp-coherence-refinement] (2),(3), and [det-sf-comp-coherence-cocycle] identifies the comparisons through common dense refinements independently of that choice. The displayed commuting square for each refinement and normalization therefore proves independence of $\\gamma^!$ for all compactifications.",
    "uses": [
-    "det-prop-scalar-six-direct-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Composition.* The isomorphism $R(gf)_!\\simeq Rg_!Rf_!$ is built from proper direct\nimages, extensions by zero, and the base-change isomorphism\n$j_!Rq_*\\simeq Rq'_*j'_!$ in a compactification of a composite, which is again\ncharacterized by restricting to the identity on an open subscheme. The\ncomparison maps commute with each of these: with proper direct images by\n[det-prop-scalar-six-direct-image] (2), with extensions by zero by\n[det-prop-scalar-six-pullback] (2), and with the interchange maps by the\nrestriction argument of the previous paragraph. Hence $\\gamma^!$ respects\ncomposition.",
-   "uses": [
+    "det-sf-comp-coherence-refinement",
     "det-prop-scalar-six-direct-image",
-    "det-prop-scalar-six-pullback"
+    "det-prop-scalar-six-pullback",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "sk-lem-nagata-density-normalization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "prop-compactification-refinement",
+    "det-sf-comp-coherence-cocycle",
+    "lem-weil-pbc-proper-open-section"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence; explicit refinement equation and reduction from arbitrary to dense compactifications"
+   }
+  },
+  {
+   "text": "Choose compactifications $f=pj$ and $g=qi$, where $j:X\\to\\overline X$ and $i:Y\\to\\overline Y$ are open. Compactify $ip$ densely as $\\overline X\\xrightarrow{j'}W\\xrightarrow{r}\\overline Y$. Put $A=j_!K$, which lies in $\\Dctf$ by step 1. The statement [det-sf-comp-composition-interchange] gives $r^{-1}(Y)=\\overline X$ and the unique isomorphism $\\iota_A:i_!Rp_*A\\to Rr_*j'_!A$ restricting to $\\mathrm{id}_{Rp_*A}$. The coefficient-compatibility equation for this map is\n$$Rr_*\\delta_{j',A}\\circ\\gamma_{r,j'_!A}\\circ T^{\\overline Y}(\\iota_A)=\\iota_{T^{\\overline X}A}\\circ i_!\\gamma_{p,A}\\circ\\delta_{i,Rp_*A}.$$\nBoth sides have source $T^{\\overline Y}i_!Rp_*A$ and target $Rr_*j'_!T^{\\overline X}A$. Under $\\delta_i$, restrict them to $Y$. The right side restricts to $\\gamma_{p,A}$. For the left side, restrict the unit/pullback/counit formula of [det-prop-scalar-six-direct-image] to $Y$: since $r^{-1}(Y)=\\overline X$ and $r|_{\\overline X}=p$, this is exactly the unit/pullback/counit formula for $\\gamma_{p,A}$; $\\iota_A$ restricts to the identity and $\\delta_{j'}$ restricts to the identity on $\\overline X$. Hence both restrictions are $\\gamma_{p,A}$. This is an isomorphism by [det-prop-scalar-six-direct-image] (1), as $A\\in\\Dctf$. After identifying the source by $i_!\\gamma_{p,A}\\circ\\delta_i$, both maps thus restrict to the identity of $Rp_*T^{\\overline X}A$; uniqueness in [det-sf-comp-composition-interchange] (2) proves the equation. The normalizations of the $\\delta$ restrictions are those of [def-sfb-derived-open-immersion-shriek-iso]. Apply $Rq_*$ to this equation. Combine the proper factors using [det-prop-scalar-six-direct-image] (2), and combine the open factors $j'_!j_!$ using the composition clause of [det-prop-scalar-six-pullback] (2). The two resulting composites from $T Rq_*i_!Rp_*j_!K$ to $R(qr)_*(j'j)_!T K$ are equal. On these compactification models, construct the canonical compositor as $Rq_*i_!Rp_*j_!\\xrightarrow{Rq_*\\iota}Rq_*Rr_*j'_!j_!\\simeq R(qr)_*(j'j)_!$. Its first arrow is the isomorphism of [det-sf-comp-composition-interchange] (3); the last identification composes proper direct images and extensions by zero, with the same identifications used in [det-prop-scalar-six-direct-image] (2) and [det-prop-scalar-six-pullback] (2). The equality just proved is compatibility with this model compositor. This constructs the compositor used here directly for the admissible coefficients and standing field of the item. Step 2 identifies the comparison for this composite compactification with the one for any chosen compactification of $gf$. Consequently, if $\\alpha_{g,f}:Rg_!Rf_!\\to R(gf)_!$ denotes this compositor, the equality obtained is\n$$\\gamma^!_{gf,K}\\circ T(\\alpha_{g,f,K})=\\alpha_{g,f,TK}\\circ Rg_!(\\gamma^!_{f,K})\\circ\\gamma^!_{g,Rf_!K}.$$\nAll its arguments lie in $\\Dctf$ by step 1 and [sk-thm-existence] (2).",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "sk-thm-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition; explicit interchange square and resulting compositor equation"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "det-prop-scalar-six-ctf",
   "det-prop-scalar-six-direct-image",
   "det-prop-scalar-six-pullback",
-  "sk-thm-existence",
-  "det-prop-scalar-six-ctf"
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-coherence-refinement",
+  "det-sf-comp-coherence-single",
+  "det-sf-comp-composition-interchange",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-open-section",
+  "prop-compactification-refinement",
+  "sk-def-sfb-dc-setting",
+  "sk-lem-nagata-density-normalization",
+  "sk-thm-existence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived compactly supported direct image commutes with extension of coefficients for constructible complexes",
+   "results": "ComplexShape.Embedding.homRestrict_comp_extendMap; HomologicalComplex.homologyπ_extendHomologyIso_hom; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc; HomologicalComplex.extendMap_comp; ComplexShape.Embedding.liftExtend.comm_assoc; HomologicalComplex.extendMap_comp_assoc; HomologicalComplex.extendOpcyclesIso; HomologicalComplex.pOpcycles_extendOpcyclesIso_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: homological-complex extension identities, not sheaf-theoretic compact-support coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso, compact support pushforward coefficient comparison",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support|lowerShriek|coefficient.*comparison",
+   "results": "0 hits; searched scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient comparison for compactly supported derived direct image",
+   "results": "Algebra.SubmersivePresentation.HasCoeffs.coeffs_subset_range; ContDiffMapSupportedIn.coe_smul; HasCompactSupport.deriv; IsLocalFrameOn.coeff.congr_simp; ContDiffMapSupportedIn.toFun_eq_coe; TestFunction.coe_ofSupportedInLM; TestFunction.coe_ofSupportedIn; CategoryTheory.Abelian.FunctorCategory.coimageImageComparison_app",
+   "date": "2026-10-16",
+   "verdict": "no match: unrelated algebra/topology results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactification independence and composition compatibility of coefficient change for Rf_!",
+   "results": "PresheafOfModules.pushforwardComp; SheafOfModules.pushforwardComp; SheafOfModules.pushforward_assoc; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; AlgebraicGeometry.StructureSheaf.comap_comp; SheafOfModules.pushforward_id_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf pushforward/pullback pseudofunctor results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso, Functor.comp, IsIso",
+   "results": "loogle: unknown identifier 'NatIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek|composition",
+   "results": "0 hits; searched scope Mathlib/SixFunctors",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rf shriek composition law compactification",
+   "results": "OnePoint.map_comp; HasCompactMulSupport.comp_isClosedEmbedding; HasCompactSupport.comp_isClosedEmbedding; IsProperMap.comp; AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp; AlgebraicGeometry.LocallyRingedSpace.comp; HasCompactMulSupport.comp_homeomorph; AlgebraicGeometry.StructureSheaf.comap_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: unrelated topological and scheme-map composition results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with extension by zero for an open immersion and proper pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary structure-sheaf module adjunctions, not derived compact-support coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionOfScalars|extension_of_scalars|lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match for extension by zero or coefficient comparison in CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "generic mates and pasting identities only; these do not state the geometric compact-support comparison or Dctf preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek|extensionOfScalars",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for compactification, lowerShriek, or extensionOfScalars in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension commutes with compactly supported sheaf cohomology",
+   "results": "CategoryTheory.Sheaf.H; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.Sheaf.instAddCommGroupH; SheafOfModules.sheafificationCompPullback; CompHausLike.LocallyConstant.counit; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; CategoryTheory.Sheaf.cohomologyPresheaf; CompactlySupportedContinuousMap.instSMulCommClass",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf cohomology definitions, ordinary pullback/sheafification, and unrelated topology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with compactly supported pushforward and its compactification composition isomorphism",
+   "results": "ModuleCat.extendScalarsComp; ModuleCat.extendScalars_assoc'; CompactlySupportedContinuousMap.compLinearMap; ModuleCat.extendScalars_assoc_assoc; PresheafOfModules.pushforwardComp; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalars_assoc; SheafOfModules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module extension-of-scalars coherence and sheaf pushforward composition, not the geometric derived compact-support comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "^noncomputable def extendScalarsComp|^def mateEquiv |^theorem mateEquiv_vcomp|^noncomputable def pushforwardComp :",
+   "results": "7 hits: Sheaf/PushforwardContinuous.lean:139 and Presheaf/Pushforward.lean:149 (pushforwardComp); ChangeOfRings.lean:984 (extendScalarsComp); CategoryTheory/Adjunction/Mates.lean:84,170 and CategoryTheory/Bicategory/Adjunction/Mate.lean:148,216 (mateEquiv and mateEquiv_vcomp). All paths are under Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match: candidate ordinary-module scalar composition, sheaf pushforward composition, and abstract mate identities do not state the geometric derived compact-support theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -71,5 +219,64 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-scalar-six"
+ "unit": "sk-prop-scalar-six",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-scalar-six-compact-support",
+  "worker": "stage1",
+  "summary": "Rechecked all three comparison equations, finite-Tor typing, normalization and dense-refinement hypotheses against current statements. Removed the package-level compositor citation, whose finite-field/coefficient hypotheses are narrower than this item, and constructed the model compositor directly from the cited proper/open interchange and proper/open composition identifications. The target statement is unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "The three steps realize the Isomorphism, Independence, and Composition paragraphs of det-prop-scalar-six-compact-support.proof.md.",
+  "tool_uses": [
+   {
+    "node": "prop-compactification-refinement",
+    "why": "The scalar-comparison unit needs the generic existence of common compactification refinements."
+   },
+   {
+    "node": "det-sf-comp-coherence-refinement",
+    "why": "The scalar-comparison unit needs the generic restriction-characterized refinement map and its transitivity."
+   },
+   {
+    "node": "det-sf-comp-coherence-cocycle",
+    "why": "The scalar-comparison unit needs independence and cocycle coherence of compactification comparisons."
+   },
+   {
+    "node": "det-sf-comp-composition-interchange",
+    "why": "The scalar-comparison unit needs the generic proper/open interchange map used to define the compact-support compositor."
+   },
+   {
+    "node": "det-sf-comp-coherence-single",
+    "why": "Applied to the identity proper factor in a compactification of an open immersion; supplies Dctf preservation including finite Tor amplitude."
+   },
+   {
+    "node": "sk-lem-nagata-density-normalization",
+    "why": "Generic schematic-closure normalization is needed because the target allows nondense compactifications but the refinement uniqueness lemma assumes density."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian input for schematic-closure normalization over the standing field."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-section",
+    "why": "Coefficient-independent geometric clopen-section lemma verifies that a proper map from a dense common compactification has inverse image of X exactly X, as required by the refinement-map statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-compactification-refinement",
+  "det-sf-comp-coherence-refinement",
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-composition-interchange",
+  "det-sf-comp-coherence-single",
+  "sk-lem-nagata-density-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-open-section"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-e0c699364",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-e0c699364 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three proof steps pass, including finite-Tor typing, nondense compactification normalization, refinement independence and composition compatibility. Fixed B3 by adding the canonical direct-image and extension-by-zero comparison nodes to stmt_deps; statement and proof unchanged. Review and corrected whole JSON written under the review directory; eight generic tool uses accepted.; 1 file(s) fixed by the reviewer"
+ }
 }

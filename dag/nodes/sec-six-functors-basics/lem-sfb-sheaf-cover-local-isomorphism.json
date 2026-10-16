@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-sheaf-cover-local-isomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-finite-lower-shriek",
+   "place": "Proof final clause, expanded in prop-sfb-finite-lower-shriek-proper.proof.md: the restrictions to the clopen image and its open complement are jointly conservative",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Isomorphisms of category-valued sheaves are detected on a covering family of objects",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ (a collection $J(V)$ of covering sieves on each object $V$, satisfying the maximal-sieve, pullback, and transitivity axioms); a sieve is a collection of arrows with fixed target closed under precomposition. Use the site and set-sheaf terminology of [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal A$ be any category. An $\\mathcal A$-valued $J$-sheaf is a functor $F:\\mathcal C^{\\mathrm{op}}\\to\\mathcal A$ such that $\\operatorname{Hom}_{\\mathcal A}(a,F(-))$ is a sheaf of sets for every $a\\in\\mathcal A$ (matching families on covering sieves have unique amalgamations). Write $\\Sh(J,\\mathcal A)$ for their category, with natural transformations as morphisms. Let $(C_i)_{i\\in I}$ be a small family of objects such that for every $V\\in\\mathcal C$ the sieve of arrows $W\\to V$ whose domain $W$ admits a morphism to some $C_i$ is in $J(V)$. For $C_i$, the slice category $\\mathcal C/C_i$ has arrows $W\\to C_i$ as objects and commuting triangles as morphisms. Its induced topology declares a sieve on $W\\to C_i$ covering exactly when its underlying arrows to $W$ form a sieve in $J(W)$. Let $r_i:\\Sh(J,\\mathcal A)\\to\\Sh(J|_{C_i},\\mathcal A)$ be restriction, $(r_i F)(W\\to C_i)=F(W)$. If $\\varphi:F\\to G$ is a morphism of $J$-sheaves and $r_i\\varphi$ is an isomorphism for every $i\\in I$, then $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps, lines 5638-5674 (gluing maps on localized sites). The arbitrary-category cover-local isomorphism criterion is the exact Mathlib theorem CategoryTheory.Sheaf.isIso_of_coversTop, Mathlib/CategoryTheory/Sites/LocalProperties.lean:35-64; CoversTop is defined in CategoryTheory/Sites/CoversTop/Basic.lean:41-42."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves valued in any category is an isomorphism if its restrictions to localized sites along a family covering the site are isomorphisms",
+   "results": "8 hits: Sheaf.isLocallyBijective_iff_isIso, Functor.IsCoverDense.iso_of_restrict_iso, Sheaf.isLocallySurjective_of_iso, GrothendieckTopology.WEqualsLocallyBijective.mk', Sheaf.isLocallyInjective_of_iso, W_sheafToPreheaf_map_iff_isIso, W_sheafToPresheaf_map_iff_isIso, Functor.IsCoverDense.sheafIso. None is the arbitrary-category family criterion; Loogle gives it exactly.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in these hits; exact match from Loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf isIso of coversTop restriction to over category",
+   "results": "8 hits: Functor.IsCoverDense.isoOver, sheafIso, Types.sheafIso, iso_of_restrict_iso, TopCat.Sheaf.restrictHomEquivHom, Functor.IsCoverDense.presheafIso, Types.presheafIso, GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso. These concern dense subsites or localization, rather than the family criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in these hits; exact match from Loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isIso_of_coversTop",
+   "results": "1 hit: CategoryTheory.Sheaf.isIso_of_coversTop, Mathlib.CategoryTheory.Sites.LocalProperties, for arbitrary C,A,K, hX : K.CoversTop X, and invertible K.overPullback restrictions.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_coversTop|def CoversTop",
+   "results": "Mathlib/CategoryTheory/Sites/LocalProperties.lean:35 and :70; Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean:41. Subdirectory CategoryTheory/Sites. Read LocalProperties.lean:27-64 and CoversTop/Basic.lean:34-53; exact hypothesis and conclusion.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf morphism isomorphism detected on covering family of localized sites",
+   "results": "8 hits: W_sheafToPreheaf_map_iff_isIso, Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, W_sheafToPresheaf_map_iff_isIso, Precoverage.ZeroHypercover.instIsLocalAtTargetIsomorphisms, Functor.IsCoverDense.Types.sheafIso, Sheaf.isLocallyBijective_iff_isIso, Sheaf.isLocallyInjective_of_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso. Not the exact family criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in these hits; exact match from Loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility of a natural transformation between sheaves can be checked after pullback to over categories for a top covering family",
+   "results": "8 hits: Functor.IsCoverDense.isoOver, GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, Functor.IsCoverDense.iso_of_restrict_iso, GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, Functor.IsCoverDense.presheafIso, Functor.IsCoverDense.sheafIso, Functor.IsCoverDense.Types.sheafIso, GrothendieckTopology.Point.W_isInvertedBy_presheafFiber. None is the precise CoversTop criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in these hits; exact match already recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isIso_iff_of_coversTop",
+   "results": "1 hit: CategoryTheory.Sheaf.isIso_iff_of_coversTop in Mathlib.CategoryTheory.Sites.LocalProperties; arbitrary C,A,K and K.CoversTop X, with IsIso f iff all K.overPullback images are IsIso. Read lines 68-70, which invoke the exact one-way leaf at lines 35-64.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff_of_coversTop|isIso_of_coversTop",
+   "results": "4 hits in Mathlib/CategoryTheory/Sites/LocalProperties.lean: documentation at 18, declarations at 35 and 68, invocation at 70. Read both declaration statements.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category valued sheaf isomorphism restriction over objects covering top",
+   "results": "8 hits: Sheaf.ΓRes, SheafedSpace.restrictTopIso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, PresheafedSpace.toRestrictTop, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, Functor.IsCoverDense.Types.sheafIso, Functor.IsCoverDense.sheafIso, TopCat.Sheaf.forget. No exact CoversTop criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in these hits; exact match already recorded"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isIso_of_coversTop",
+  "file": "Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+  "line": 35,
+  "how": "exact: lines 27-38 quantify arbitrary categories C and A, a Grothendieck topology K, a family X, hX : K.CoversTop X, and a sheaf morphism f. The displayed sieve condition is precisely CoversTop (Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean:41-42); r_i is K.overPullback A (X i), restriction to Over (X i), and the conclusion is IsIso f. No concrete, abelian, or stalk hypothesis is used."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sfb-finite-lower-shriek",
+  "date": "2026-10-16",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-finite-lower-shriek"
+}

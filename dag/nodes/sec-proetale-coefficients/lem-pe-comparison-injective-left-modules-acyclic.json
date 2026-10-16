@@ -1,0 +1,155 @@
+{
+ "id": "lem-pe-comparison-injective-left-modules-acyclic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-comparison",
+   "place": "Derived-unit display, injective-acyclicity input to the imported first proof paragraph: comparison pullbacks of the terms of an injective resolution must be comparison-direct-image acyclic. The current statement allows any ring.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison pullbacks of injective left-module sheaves are acyclic for arbitrary rings",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Lambda$ a discrete associative unital ring, not assumed commutative, in the coefficient universe. Use the small étale and pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site] in a common larger universe in which their underlying categories are small. A $\\Lambda$-module sheaf means a sheaf of left $\\Lambda$-modules; equivalently it is a sheaf of modules [def-weil-sheaf-of-modules-category] over the constant sheaf of rings, the sheafification of the constant ring presheaf [def-weil-pbc-constant-sheaf]. Let $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ be the comparison geometric morphism [def-weil-pbc-site-comparison-morphism]. On module sheaves, $\\nu_X^*$ applies its set inverse image to addition, zero, negation and each scalar endomorphism of the underlying abelian sheaf; $\\nu_{X,*}$ is restriction to the étale subsite, with its induced scalar actions. Compute $R^q\\nu_{X,*}$ by injective resolutions in these module categories [def-sp-left-exact-additive, def-sp-injective-resolutions]. Then for every injective left $\\Lambda$-module sheaf $I$ on $X_{\\mathrm{ét}}$ and every integer $q>0$,\n$$\nR^q\\nu_{X,*}(\\nu_X^*I)=0.\n$$\nNo affineness, quasi-compactness, torsion or finite-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099V (lemma-relative-comparison), first proof paragraph, using Tag 099U (lemma-affine-vanishing); arbitrary-left-module extension, retaining the module coefficient category throughout. Source-library generic theorem: WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean, lines 107-111."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme and any discrete ring, not necessarily commutative, the proetale inverse image of an injective sheaf of left modules on the etale site is acyclic for comparison direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.etaleTopology; LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; PresheafOfModules.IsLocallyInjective; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; PresheafOfModules.instIsLocallyInjectiveToSheafify; CategoryTheory.Sheaf.isLocallyInjective_forget",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, \"rightDerived\"",
+   "results": "3 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Aa]cyclic|[Aa]cyclic.*comparison",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of the proetale comparison vanish on comparison pullbacks of injective etale sheaves of left modules over an arbitrary ring",
+   "results": "8 hits: SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso.congr_simp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the etale to pro etale geometric morphism, higher derived pushforward of the inverse image of an injective module sheaf vanishes, with coefficients in left modules over any associative ring",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.IsEtale.instFormallyUnramified; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; SheafOfModules.bijective_pushforwardSections; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.formallyEtale; SheafOfModules.instAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_rightDerived_obj_injective_succ|comparisonLowerStar|comparisonUpperStar",
+   "results": "2 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic higher-derived vanishing theorem requires an injective INPUT, whereas the comparison pullback of an injective is not asserted injective; site, module-pullback and locally injective morphism results do not imply comparison acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "RightAcyclic|rightAcyclic|IsAcyclic",
+   "results": "13 hits: Mathlib/Combinatorics/SimpleGraph/Star.lean; Mathlib/Combinatorics/SimpleGraph/Star.lean; Mathlib/Combinatorics/SimpleGraph/Star.lean; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean; Mathlib/Combinatorics/SimpleGraph/Acyclic.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no matching comparison acyclicity statement. The sections-bijection hit is underived; local injectivity concerns morphisms, not injective objects. RightDerived.lean:153 requires its input itself to be injective, which is not known of the comparison pullback. The broad acyclic grep returns graph theory, and the focused abelian grep returns derived-functor infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sites, the inverse image of an injective sheaf is acyclic for pushforward when etale and proetale cohomology agree, for modules over a noncommutative ring",
+   "results": "8 hits: SheafOfModules.bijective_pushforwardSections; PresheafOfModules.IsLocallyInjective; CategoryTheory.Presheaf.isLocallyInjective_of_whisker; CategoryTheory.Presheaf.isLocallyInjective_of_injective; CategoryTheory.Presheaf.isLocallyInjective_whisker; CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no matching comparison acyclicity statement. The sections-bijection hit is underived; local injectivity concerns morphisms, not injective objects. RightDerived.lean:153 requires its input itself to be injective, which is not known of the comparison pullback. The broad acyclic grep returns graph theory, and the focused abelian grep returns derived-functor infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no matching comparison acyclicity statement. The sections-bijection hit is underived; local injectivity concerns morphisms, not injective objects. RightDerived.lean:153 requires its input itself to be injective, which is not known of the comparison pullback. The broad acyclic grep returns graph theory, and the focused abelian grep returns derived-functor infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|acyclic",
+   "results": "6 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean; subdirectory CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no matching comparison acyclicity statement. The sections-bijection hit is underived; local injectivity concerns morphisms, not injective objects. RightDerived.lean:153 requires its input itself to be injective, which is not known of the comparison pullback. The broad acyclic grep returns graph theory, and the focused abelian grep returns derived-functor infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of an injective etale module object is acyclic for restriction from the proetale site over a scheme with arbitrary ring coefficients",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.Scheme.etaleTopology; Algebra.Etale.formallyEtale; PresheafOfModules.instIsLocallyInjectiveToSheafify; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "Current independent second reading: no match. The derived-vanishing declarations require the input itself to be injective (RightDerived.lean:153-159); the locally-injective declarations concern sheafification morphisms. The site grep gives topology definitions and ell-adic coefficient constructions, not comparison acyclicity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Injective",
+   "results": "2 hits; recorded top results: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective",
+   "date": "2026-10-16",
+   "verdict": "Current independent second reading: no match. The derived-vanishing declarations require the input itself to be injective (RightDerived.lean:153-159); the locally-injective declarations concern sheafification morphisms. The site grep gives topology definitions and ell-adic coefficient constructions, not comparison acyclicity."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison|proetale|Proetale",
+   "results": "11 hits; recorded top results: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean. Subdirectory: AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "Current independent second reading: no match. The derived-vanishing declarations require the input itself to be injective (RightDerived.lean:153-159); the locally-injective declarations concern sheafification morphisms. The site grep gives topology definitions and ell-adic coefficient constructions, not comparison acyclicity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-prop-sf-comparison",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-comparison",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+     "lines": [
+      107,
+      111
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ]
+  }
+ }
+}

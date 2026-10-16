@@ -3,51 +3,224 @@
  "blueprint": {
   "is": "sk-def-sfb-finite-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension by zero and lower shriek (finite coefficients)",
- "statement": "Let $\\mathcal A$ be a Grothendieck abelian category.\n\nFor an open immersion $j\\colon U\\to X$, the *extension by zero*\n$j_!\\colon\\Sh(U_{\\mathrm{proét}},\\mathcal A)\\to\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is\nsheafification composed with the left Kan extension along the opposite of the\nlocalization functor $U_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$,\n$(T\\to U)\\mapsto(T\\to U\\to X)$. It is left adjoint to the pullback $j^*$ of\n[sk-def-sfb-finite-pushforward-pullback], exact, and fully faithful.\n\nFor a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ of $f\\colon X\\to Y$\n[sk-def-nagata-sketch-data], put $f_!^c:=g_*\\circ i_!$. For $f$ admitting a\ncompactification, the *lower shriek* is $f_!:=f_!^c$ for a chosen compactification $c$\nof $f$. There is a canonical natural transformation $f_!\\to f_*$, and it is an\nisomorphism when $f$ is proper.",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category.\n\nFor an open immersion $j\\colon U\\to X$, the *extension by zero*\n$j_!\\colon\\Sh(U_{\\mathrm{proét}},\\mathcal A)\\to\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is\nsheafification composed with the left Kan extension along the opposite of the\nlocalization functor $U_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$,\n$(T\\to U)\\mapsto(T\\to U\\to X)$. It is left adjoint to the pullback $j^*$ of\n[def-sfb-finite-upper-star], exact, and fully faithful.\n\nFor a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ of $f\\colon X\\to Y$\n[sk-def-nagata-sketch-data], put $f_!^c:=g_*\\circ i_!$. For $f$ admitting a\ncompactification, the *lower shriek* is $f_!:=f_!^c$ for a chosen compactification $c$\nof $f$. There is a canonical natural transformation $f_!\\to f_*$, and it is an\nisomorphism when $f$ is proper.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/_section.md",
   "place": "node sk-def-sfb-finite-lower-shriek, order 1680"
  },
  "stmt_deps": [
+  "def-weil-pbc-proetale-site",
   "sk-def-nagata-sketch-data",
-  "def-weil-pbc-proetale-site"
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-extension-by-zero",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
  ],
  "proof": [
   {
-   "text": "The extension by zero is [def-sfb-finite-extension-by-zero]. It is left adjoint to $j^*$\nby [def-sfb-finite-extension-by-zero-adjunction], exact by\n[lem-sfb-finite-extension-by-zero-exact] and fully faithful by\n[lem-sfb-finite-extension-by-zero-fully-faithful]. The functors $f_!^c$ and $f_!$ are\n[def-sfb-finite-lower-shriek-compactification] and [def-sfb-finite-lower-shriek]. The\ncomparison $f_!\\to f_*$ is [def-sfb-finite-lower-shriek-to-lower-star], and it is an\nisomorphism for proper $f$ by [prop-sfb-finite-lower-shriek-proper].",
+   "text": "Use the construction of [def-sfb-finite-extension-by-zero]: for the localization $\\ell:(T\\to U)\\mapsto(T\\to U\\to X)$, define $j_!=\\operatorname{sheafify}\\circ\\operatorname{Lan}_{\\ell^{\\mathrm{op}}}$ on the underlying presheaf of a sheaf. This is exactly the extension-by-zero functor in the statement, on the chosen small pro-étale sites [def-weil-pbc-proetale-site].",
    "uses": [
     "def-sfb-finite-extension-by-zero",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "First sentence: extension-by-zero construction"
+   }
+  },
+  {
+   "text": "The statement of [def-sfb-finite-extension-by-zero-adjunction] gives $j_!\\dashv j^*$ and identifies $j^*$ with restriction, $(j^*G)(T\\to U)=G(T\\to U\\to X)$. The finite-limit preservation and exactness assertion is precisely [lem-sfb-finite-extension-by-zero-exact], and full faithfulness is [lem-sfb-finite-extension-by-zero-fully-faithful]. These results apply with the same Grothendieck abelian $\\mathcal A$ and the given open immersion; no finiteness condition on $\\mathcal A$ or on $U\\to X$ is added.",
+   "uses": [
     "def-sfb-finite-extension-by-zero-adjunction",
     "lem-sfb-finite-extension-by-zero-exact",
-    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "First sentence: adjunction, exactness and full faithfulness"
+   }
+  },
+  {
+   "text": "For a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ as in [sk-def-nagata-sketch-data], compose extension by zero along $i$ with the direct image along $g$. The construction [def-sfb-finite-lower-shriek-compactification] gives $f_!^c=g_*i_!$; [def-sfb-finite-lower-shriek] fixes $f_!=f_!^{c(f)}$ for a chosen compactification. All these are functors between the fixed-$\\mathcal A$ sheaf categories, with $g_*$ as in [def-sfb-finite-lower-star].",
+   "uses": [
+    "sk-def-nagata-sketch-data",
     "def-sfb-finite-lower-shriek-compactification",
     "def-sfb-finite-lower-shriek",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "Second sentence: the two compactification definitions"
+   }
+  },
+  {
+   "text": "Write $\\delta:i^*i_*\\xrightarrow{\\sim}\\mathrm{id}$ for the invertible counit furnished by [def-sfb-finite-lower-shriek-to-lower-star], and $\\epsilon:i_!i^*\\to\\mathrm{id}$ for the counit of [def-sfb-finite-extension-by-zero-adjunction]. The natural comparison at $F$ is $\\alpha_F=\\epsilon_{i_*F}\\circ i_!(\\delta_F^{-1}):i_!F\\to i_*F$. Applying $g_*$ and then the sectionwise associativity isomorphism $g_*i_*\\cong f_*$ of [def-sfb-finite-lower-star-comp] gives the natural transformation $\\iota_f:f_!\\to f_*$ of [def-sfb-finite-lower-shriek-to-lower-star]. This defines the map for the chosen compactification without claiming compactification independence.",
+   "uses": [
+    "def-sfb-finite-lower-shriek-to-lower-star",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sfb-finite-lower-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "Last sentence: construction of the comparison"
+   }
+  },
+  {
+   "text": "Suppose now $f$ is proper [def-weil-proper-morphism]. The factorization $X\\xrightarrow{\\mathrm{id}}X\\xrightarrow{f}Y$ is a compactification by [sk-def-nagata-sketch-data]. For any chosen compactification $c$, $g$ is proper, hence separated. Apply [lem-weil-pbc-proper-to-separated] to the $Y$-morphism $i:X\\to\\bar X$: its composite to $Y$ is the proper morphism $f$, so $i$ is proper. By [lem-weil-pbc-proper-closed-image], $i(X)$ is closed. It is also open because $i$ is an open immersion [def-weil-open-immersion]. Thus, identifying $X$ with its open image $U\\subseteq\\bar X$, the complementary subset $W=\\bar X\\setminus U$ is open; write $j:U\\hookrightarrow\\bar X$ and $k:W\\hookrightarrow\\bar X$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "sk-def-nagata-sketch-data",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-closed-image",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "Final properness clause, expanded in prop-sfb-finite-lower-shriek-proper.proof.md, first paragraph"
+   }
+  },
+  {
+   "text": "For a sheaf $F$ on $U$ and $T\\to W$, restriction [def-sfb-finite-extension-by-zero-adjunction] and the direct-image formula [def-sfb-finite-lower-star] give $(k^*j_*F)(T)=F(T\\times_{\\bar X}U)=F(\\varnothing)=0$. Here the fibre product is empty since $T$ maps into $W$, and the empty covering of the empty scheme forces a sheaf's value there to be terminal in $\\mathcal A$, hence its zero object. Reversing $j,k$ gives $j^*k_*H=0$ for every sheaf $H$ on $W$. These equalities hold as sheaves, since the component identifications commute with restriction and all maps between zero objects are unique.",
+   "uses": [
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sfb-finite-lower-star",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/prop-sfb-finite-lower-shriek-proper.proof.md",
+    "place": "Final properness clause: second bullet of the clopen argument"
+   }
+  },
+  {
+   "text": "Using $k^*\\dashv k_*$ from [def-sfb-finite-upper-lower-star-adjunction] and $j_!\\dashv j^*$ from [def-sfb-finite-extension-by-zero-adjunction], for every $H$ on $W$ we have $\\operatorname{Hom}(k^*j_!F,H)\\cong\\operatorname{Hom}(j_!F,k_*H)\\cong\\operatorname{Hom}(F,j^*k_*H)=\\operatorname{Hom}(F,0)$, a singleton by step 6. Thus $k^*j_!F$ is initial, so it is the zero sheaf (the objectwise zero sheaf is both initial and terminal). Consequently $k^*\\alpha_F$ is a map between zero objects, and is invertible.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/prop-sfb-finite-lower-shriek-proper.proof.md",
+    "place": "Final properness clause: third bullet of the clopen argument"
+   }
+  },
+  {
+   "text": "For completeness, the unit $\\eta:\\mathrm{id}\\to j^*j_!$ of [def-sfb-finite-extension-by-zero-adjunction] is invertible using [lem-sfb-finite-extension-by-zero-fully-faithful] as follows. Put $L=j_!$, $M=j^*$. Fullness gives $v:MLF\\to F$ with $L(v)=\\epsilon_{LF}$. Faithfulness and the first triangle identity give $v\\eta_F=\\mathrm{id}$; naturality of $\\eta$ and the other triangle identity give $\\eta_Fv=ML(v)\\eta_{MLF}=M(\\epsilon_{LF})\\eta_{MLF}=\\mathrm{id}$. Thus $\\eta$ is an isomorphism. Applying $j^*$ to the formula of [def-sfb-finite-lower-shriek-to-lower-star], the factor $j^*\\epsilon_{j_*F}$ is the inverse of $\\eta_{j^*j_*F}$ by the triangle identity, and the other factor is $j^*j_!(\\delta_F^{-1})$, also invertible. Hence $j^*\\alpha_F$ is invertible. This checks the actual comparison map, not merely the existence of some isomorphism between its source and target.",
+   "uses": [
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
     "def-sfb-finite-lower-shriek-to-lower-star"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/prop-sfb-finite-lower-shriek-proper.proof.md",
+    "place": "Final properness clause: first bullet of the clopen argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-cover-local-isomorphism] on $\\bar X_{\\mathrm{proét}}$ to the two objects $U,W$. They cover the site in its stated sense: for every object $V\\to\\bar X$, the opens $V_U=V\\times_{\\bar X}U$ and $V_W=V\\times_{\\bar X}W$ cover $V$. The pro-étale covering definition [def-weil-pbc-proetale-covering] is satisfied: the maps are open immersions, hence weakly étale, and every affine open of $V$ has a finite subcover by affine opens contained in $V_U$ or $V_W$ (take the affine-open basis refinement and use quasi-compactness of that affine). Their sieve is contained in the sieve of objects admitting a map to $U$ or $W$, so the latter is covering. To identify localized restriction with $j^*,k^*$, an object over $U$ in this localized site is a factorization $T\\to U\\to\\bar X$; its map to $U$ is the base change of $T\\to\\bar X$ because an open immersion is a monomorphism: after identifying $U$ with the open subscheme given by [def-weil-open-immersion], a morphism into $U$ over $\\bar X$ is uniquely determined by its composite into $\\bar X$. The fibre-product universal property therefore identifies $T\\times_{\\bar X}U$ with $T$. It is therefore weakly étale by [lem-weil-pbc-weakly-etale-composition-base-change]. Conversely composition takes a pro-étale object over $U$ to one over $\\bar X$ by the localization construction of [def-sfb-finite-extension-by-zero]; morphisms and covering families are unchanged. Thus these localized restrictions are exactly the sectionwise restrictions of [def-sfb-finite-extension-by-zero-adjunction], and likewise for $W$. Steps 7 and 8 now imply $\\alpha_F$ is invertible for every $F$. Its inverses are natural (the naturality square for $\\alpha$ can be multiplied by the component inverses), so $\\alpha:j_!\\to j_*$ is a natural isomorphism.",
+   "uses": [
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-sfb-finite-extension-by-zero",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/prop-sfb-finite-lower-shriek-proper.proof.md",
+    "place": "Final properness clause: joint conservativity on the two-open cover"
+   }
+  },
+  {
+   "text": "For the open immersion $i$ of the chosen compactification, step 9 gives the invertibility of $i_!\\to i_*$. Applying the functor $g_*$ preserves its inverse, so $g_*i_!\\to g_*i_*$ is invertible. Composing with the isomorphism $g_*i_*\\cong f_*$ of [def-sfb-finite-lower-star-comp] proves that the precise comparison $\\iota_f$ defined by [def-sfb-finite-lower-shriek-to-lower-star] is an isomorphism whenever $f$ is proper.",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "def-sfb-finite-lower-shriek-to-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/sk-def-sfb-finite-lower-shriek.proof.md",
+    "place": "Final properness clause: apply g_* and the composition isomorphism"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-finite-extension-by-zero",
+  "def-weil-pbc-proetale-site",
   "def-sfb-finite-extension-by-zero-adjunction",
   "lem-sfb-finite-extension-by-zero-exact",
   "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "sk-def-nagata-sketch-data",
   "def-sfb-finite-lower-shriek-compactification",
   "def-sfb-finite-lower-shriek",
-  "def-sfb-finite-lower-shriek-to-lower-star"
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-shriek-to-lower-star",
+  "def-sfb-finite-lower-star-comp",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-closed-image",
+  "def-weil-open-immersion",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/prop-sfb-finite-lower-shriek-proper.proof.md",
+  "place": "The unit proof and the clopen-cover proof of prop-sfb-finite-lower-shriek-proper, with the categorical unit argument and the site-cover verification written out; proper-to-separated geometry is Stacks Tag 01W6, local sheaf gluing is Tag 04TQ."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes extension by zero of proetale sheaves with Grothendieck abelian coefficients is exact fully faithful and compactification lower shriek agrees with pushforward for proper morphisms",
+   "results": "8 hits, all Scheme.Modules facts: instFullPushforward, instFaithfulPushforward, instIsLeftAdjointRestrictFunctor, restrictAdjunction, restrictFunctor, instIsIsoFunctorCounitRestrictAdjunction, restrictFunctorAdjCounitIso, restrictFunctorIsoPullback. These concern structure-sheaf modules, not fixed-category sheaves on the pro-étale site or compactification lower shriek.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open subscheme defined as sheafification of left Kan extension along localization with values in an abelian category",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.X, ModuleCat.Tilde.toOpen, ModuleCat.tilde, SheafOfModules.LocalGeneratorsData.I, ModuleCat.Tilde.const, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.sectionsSubmodule, SheafOfModules.LocalGeneratorsData. No extension-by-zero or compactification construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.LeftExtension",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|lowerShriekToLowerStar|extension.by.zero",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proetale extension by zero compactification lower shriek proper pushforward",
+   "results": "8 hits including Scheme.Modules.instFullPushforward, restrictFunctorAdjCounitIso, HasCompactSupport.extend_zero, StructureSheaf.toPushforwardStalk_comp, Scheme.Cover.pushforwardIso_I₀, Scheme.Etale, IsProper.isStableUnderBaseChange, IsProper.instCompScheme. None states the item; the properness tools already have DAG nodes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -90,5 +263,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-finite-lower-shriek"
+ "unit": "sk-def-sfb-finite-lower-shriek",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-finite-lower-shriek",
+  "worker": "stage1",
+  "summary": "Reused the seven existing same-unit construction/property nodes, replaced the imported unsupported final-clause citation by the explicit clopen-open-complement proof, and retained one generic Mathlib leaf for cover-local isomorphism detection. Replaced the dangling umbrella-unit reference in the statement by the existing pullback definition, with no change to its mathematics. Checked all cited statements, both complement vanishings, the actual comparison after restriction, the pro-étale covering condition, and the slice-site identification. No Lean written or compiled; the refused umbrella attachment is not repeated.",
+  "blueprint": "Steps 1-2 realize the first sentence of the unit proof; step 3 the two lower-shriek definitions; step 4 its comparison definition; steps 5-10 expand its final properness assertion following prop-sfb-finite-lower-shriek-proper.proof.md. Whole-blueprint searches for extension by zero, lower shriek, local isomorphism, localization and isIso_of_coversTop find no other blueprint node stating the entire item or the arbitrary-category cover criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Step 5 needs the generic proper-to-separated-target triangle theorem, Stacks 01W6; this unit contains no geometry lemma stating it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "Step 5 needs closedness of the image of a proper morphism; generic scheme geometry, not an alternative six-functor route."
+   },
+   {
+    "node": "def-sfb-finite-upper-lower-star-adjunction",
+    "why": "Step 7 needs k^* ⊣ k_* for the complementary open; this is the ordinary pullback/pushforward adjunction of the unit cited by the blueprint."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Step 9 needs stability under base change to identify the localized pro-étale site with the small site of the open; a generic site tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-covering",
+    "why": "Step 9 checks the actual fpqc covering condition, rather than using joint surjectivity alone."
+   },
+   {
+    "node": "def-sfb-finite-lower-star",
+    "why": "Steps 3 and 6 use its sectionwise formula for direct image, from the ordinary pushforward unit cited by this unit."
+   },
+   {
+    "node": "def-sfb-finite-lower-star-comp",
+    "why": "Steps 4 and 10 use its sectionwise composition isomorphism, from that same ordinary-pushforward unit."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Steps 1 and 6 use the existing chosen small pro-étale site and its covering definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-closed-image",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-proetale-covering",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-star-comp",
+  "def-weil-pbc-proetale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-d91d90b88",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d91d90b88 (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements, source passages, and unit/chapter route. All ten steps check; the canonical comparison and arbitrary Grothendieck abelian coefficients are preserved. Verified the exact Mathlib leaf, fpqc cover, edge cases, duplicate candidates, and dependency checks. No repairs needed. Detailed findings and accepted tool uses are recorded in review.md."
+ }
 }

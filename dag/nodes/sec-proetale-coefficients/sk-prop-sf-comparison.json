@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-prop-sf-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded-below cohomology comparison",
- "statement": "Let $X$ be a scheme, $\\Lambda$ a ring, and $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$\nthe comparison morphism. For $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$ the unit of the\nadjunction between\n$\\nu_X^*:D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+(X_{\\mathrm{proét}},\\Lambda)$ and\n$R\\nu_{X,*}$ is an isomorphism\n\n$$\nK\\xrightarrow{\\ \\sim\\ }R\\nu_{X,*}\\nu_X^*K\\quad\\text{in }D^+(X_{\\mathrm{ét}},\\Lambda).\n$$\n\nConsequently $\\nu_X^*:D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+(X_{\\mathrm{proét}},\\Lambda)$ is\nfully faithful, and there is a canonical isomorphism in the derived category\nof $\\Lambda$-modules\n\n$$\nR\\Gamma(X_{\\mathrm{proét}},\\nu_X^*K)\\simeq R\\Gamma(X_{\\mathrm{ét}},K).\n$$\n\nMore generally, for a pro-étale affine $U=\\varprojlim_iU_i$ with $U_i$\naffine and étale over $X$,\n\n$$\nR\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\n\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K|_{U_i}).\n$$\n\nThe colimit here is a filtered derived colimit, so its cohomology is the\nfiltered colimit of the cohomology groups.",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a ring, and $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$\nthe comparison morphism. For $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$ the unit of the\nadjunction between\n$\\nu_X^*:D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+(X_{\\mathrm{proét}},\\Lambda)$ and\n$R\\nu_{X,*}$ is an isomorphism\n\n$$\nK\\xrightarrow{\\ \\sim\\ }R\\nu_{X,*}\\nu_X^*K\\quad\\text{in }D^+(X_{\\mathrm{ét}},\\Lambda).\n$$\n\nConsequently $\\nu_X^*:D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+(X_{\\mathrm{proét}},\\Lambda)$ is\nfully faithful, and there is a canonical isomorphism in the derived category\nof $\\Lambda$-modules\n\n$$\nR\\Gamma(X_{\\mathrm{proét}},\\nu_X^*K)\\simeq R\\Gamma(X_{\\mathrm{ét}},K).\n$$\n\nMore generally, for a pro-étale affine $U=\\varprojlim_iU_i$ with $U_i$\naffine and étale over $X$,\n\n$$\nR\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\n\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K|_{U_i}).\n$$\n\nThe colimit here is a filtered derived colimit, so its cohomology is the\nfiltered colimit of the cohomology groups.\n\nCoefficients are discrete, and modules are left modules. Thus module sheaves mean sheaves of left $\\Lambda$-modules, equivalently modules over the constant ring sheaf [def-weil-sheaf-of-modules-category], in a common larger universe in which the underlying site categories are small. The small sites and comparison geometric morphism are those of [def-weil-pbc-site-comparison-morphism], with its set inverse image applied to addition and every scalar action for any ring $\\Lambda$. Derived categories are the localizations at quasi-isomorphisms [def-weil-abstract-derived-category]; $D^+$ means cohomology vanishes sufficiently far below [def-weil-pbc-bounded-derived-subcategories]. The right derived functors of comparison direct image and sections at the terminal object use [lem-weil-pbc-right-derived-plus-injective]. A pro-étale affine is as in [sk-def-pe-morphisms]; the presentation above is indexed by a nonempty small cofiltered category, and the colimit is over its opposite filtered category.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/_section.md",
   "place": "node sk-prop-sf-comparison, order 728",
@@ -26,32 +26,238 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "sk-def-pe-morphisms",
+  "def-weil-sheaf-of-modules-category"
+ ],
  "proof": [
   {
-   "text": "Choose a bounded-below injective resolution $I^\\bullet$ of $K$. By\n[sk-lem-pe-injective-acyclicity], $\\nu_X^*I^\\bullet$ is a resolution by\n$\\nu_{X,*}$-acyclic sheaves, so applying $\\nu_{X,*}$ termwise computes\n$R\\nu_{X,*}\\nu_X^*K$. The underived unit is an isomorphism on every term, so\nthis complex is $I^\\bullet$, which proves that the derived unit\n$K\\to R\\nu_{X,*}\\nu_X^*K$ is an isomorphism (Stacks, Tag 099V). Full\nfaithfulness follows by adjunction. Composing derived right adjoints,\n$R\\Gamma(X_{\\mathrm{proét}},-)=R\\Gamma(X_{\\mathrm{ét}},-)\\circ R\\nu_{X,*}$, gives\nthe statement on global sections (Stacks, Tag 099W).",
+   "text": "Put $L=\\nu_X^*$ and $R=\\nu_{X,*}$ on left $\\Lambda$-module sheaves. The geometric morphism [def-weil-pbc-site-comparison-morphism] acts on addition and each scalar endomorphism; finite-product preservation gives addition on inverse images, and each scalar action is carried over separately. The unit and counit respect addition and every scalar action by naturality; thus both directions of the Hom transpose preserve module homomorphisms. This restricts the set adjunction to a module adjunction for any ring. For morphisms $f,g$, finite-product preservation identifies $L(f+g)=L(+)(Lf,Lg)\\Delta$ with $Lf+Lg$, and sends zero to zero; $R$ preserves sums and zero by its sectionwise restriction formula. Thus both functors are additive. Module-sheaf kernels are sectionwise and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category]. The underlying inverse image preserves finite limits, hence $L$ preserves kernels; its module left-adjoint property gives preservation of cokernels. Thus $L$ is exact. $R$ is additive and left exact, since the Hom adjunction transports the universal property of kernels. The general coefficient unit theorem [lem-weil-pbc-comparison-grothendieck-unit] explicitly includes left modules over any ring and makes $F\\to RLF$ invertible. By [lem-weil-pbc-exact-functor-bounded-below], termwise $L$ preserves quasi-isomorphisms and $D^+$.",
    "uses": [
-    "sk-lem-pe-injective-acyclicity"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099T (lemma-fully-faithful), 099V (lemma-relative-comparison); retain the module actions throughout"
+   }
   },
   {
-   "text": "For the affine formula, apply the global sections statement to $U$ and then\ncontinuity of étale cohomology under affine limits (Stacks, Tag 03Q6). This\ngives the formula in each degree for a sheaf. For a bounded-below complex\nonly finitely many terms of the hypercohomology spectral sequence contribute\nto each total degree, and filtered colimits are exact.",
+   "text": "Choose a representative $C$ of $K$ and a cohomology lower bound $a$. Replace it by the good truncation zero below $a$, with degree $a$ term $\\operatorname{coker}d_C^{a-1}$. The quotient map in degree $a$, the identity above $a$ and zero below $a$ define a morphism of complexes from $C$ to this truncation. The kernel of the truncation differential out of degree $a$ is $\\ker d_C^a/\\operatorname{im}d_C^{a-1}=H^a(C)$, and higher cohomology is unchanged. Below $a$ both cohomologies vanish by the choice of $a$, so this replacement is a quasi-isomorphism. Apply [lem-sc-bounded-below-injective-resolution] on either small ringed site to choose bounded-below termwise-injective K-injective resolutions; in particular choose $I$ representing $K$, so $LI$ represents $LK$. These module categories have enough injectives: resolve $F[0]$ this way, and starting at the lowest degree below zero split off its injective term and the next term as a contractible pair. Each such monomorphism splits by injectivity, and a direct summand of an injective is injective by extending into the larger object and projecting. After finitely many removals $F$ embeds into the remaining injective degree-zero term. Sections at the terminal object are additive and left exact, since addition and kernels are sectionwise [def-weil-sheaf-of-modules-category]. Thus [lem-weil-pbc-right-derived-plus-injective] constructs the bounded-below right derived functor $\\mathbf R R$ and both derived section functors, computed on these resolutions. Neither cited statement restricts the ring to be finite.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "013J, 013K, 05TI (lemma-enough-injectives-right-derived); ringed-site resolutions 07A5"
+   }
+  },
+  {
+   "text": "Construct the actual derived adjunction. For arbitrary objects of the two $D^+$ categories, choose bounded-below representing complexes $M$ on the étale site and $N$ on the pro-étale site as in step 2, and resolve $N\\to J$. By [lem-weil-pbc-right-adjoint-preserves-kinjective], $RJ$ is K-injective since $L$ is exact. The localization bijection [lem-weil-pbc-kinjective-hom-derived], termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy], and injective calculation [lem-weil-pbc-right-derived-plus-injective] give natural bijections\n$$\\operatorname{Hom}_{D^+}(LM,N)=\\operatorname{Hom}_{K^+}(LM,J)\n=\\operatorname{Hom}_{K^+}(M,RJ)=\\operatorname{Hom}_{D^+}(M,\\mathbf R R N).$$\nThe identity of $LM$, represented by a resolution $j:LM\\to J$, transposes to $Rj\\circ\\eta_M$. Hence the derived unit is precisely represented by $M\\to RLM\\to RJ$.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "08BJ (lemma-adjoint-preserve-K-injectives) and 070I (lemma-K-injective); the Hom-adjunction argument is written out here on D^+, rather than assuming an unbounded derived adjunction"
+   }
+  },
+  {
+   "text": "Each $LI^r$ is $R$-acyclic by [lem-pe-comparison-injective-left-modules-acyclic], explicitly stated for arbitrary, possibly noncommutative $\\Lambda$. Resolve $LI\\xrightarrow{j}J$ by [lem-sc-bounded-below-injective-resolution]. The terms of $J$ are $R$-acyclic by clause 1 of [lemma-weil-pbc-leray-acyclicity]. Thus [lem-weil-pbc-leray-acyclicity-quasi-iso], with a common lower bound, makes $Rj:RLI\\to RJ$ a quasi-isomorphism. The unit $I\\to RLI$ is termwise invertible by [lem-weil-pbc-comparison-grothendieck-unit]; naturality gives $RL(d_I^r)\\eta_{I^r}=\\eta_{I^{r+1}}d_I^r$, hence $d_I^r\\eta_{I^r}^{-1}=\\eta_{I^{r+1}}^{-1}RL(d_I^r)$. Thus the inverse components also form a chain map. Step 3 therefore represents the derived unit at $K$ by a composite of quasi-isomorphisms. This proves the claimed natural unit isomorphism.",
+   "uses": [
+    "lem-pe-comparison-injective-left-modules-acyclic",
+    "lem-sc-bounded-below-injective-resolution",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "lem-weil-pbc-comparison-grothendieck-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099V (lemma-relative-comparison), second paragraph, using 099U (lemma-affine-vanishing) and Derived Categories 015E (lemma-leray-acyclicity)"
+   }
+  },
+  {
+   "text": "The derived adjunction identifies $\\operatorname{Hom}(LK,LH)$ with $\\operatorname{Hom}(K,\\mathbf R R LH)$. It sends $L(f)$ to $\\mathbf R R(Lf)\\eta_K=\\eta_H f$. Composition with the invertible $\\eta_H$ is a bijection, so the actual map $f\\mapsto L(f)$ is bijective. This is full faithfulness.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099V (lemma-relative-comparison), consequence by the Hom adjunction"
+   }
+  },
+  {
+   "text": "For an arbitrary object of $D^+(X_{\\mathrm{proét}},\\Lambda)$ choose a bounded-below representing complex $N$ and a bounded-below injective resolution $N\\to J$ [lem-sc-bounded-below-injective-resolution]. $R$ preserves injectives: a map $A\\to RJ^r$ transposes to $LA\\to J^r$, extends along $LA\\hookrightarrow LB$ for a monomorphism $A\\hookrightarrow B$ by exactness of $L$, and transposes back to $B\\to RJ^r$. Hence $RJ$ is termwise injective. By [lem-weil-pbc-right-derived-plus-injective], derived sections of $\\mathbf R R N$ are represented by $\\Gamma(X_{\\mathrm{ét}},RJ)$, while those of $N$ are represented by $\\Gamma(X_{\\mathrm{proét}},J)$. These are the same complex: [def-weil-pbc-site-comparison-morphism] defines $R$ as restriction, and the inclusion sends the terminal object $X$ to $X$. The equality commutes with differentials and morphisms of complexes. Morphisms in the derived category between the chosen resolutions are represented uniquely up to homotopy by [lem-weil-pbc-kinjective-hom-derived]; applying the equal section complexes to those representatives therefore gives the canonical natural derived-sections comparison. For $N=LK$, compose it with derived sections of the unit in step 4, then invert, to obtain the displayed orientation of global sections.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099W (lemma-compare-cohomology), computed at the terminal object on injective resolutions"
+   }
+  },
+  {
+   "text": "Apply the existing detailed input [det-sf-comparison-affine-continuity] to the same scheme $X$, arbitrary ring $\\Lambda$, bounded-below $K$, and small cofiltered affine étale presentation of $U$. Its statement gives the two canonical cohomology isomorphisms and their equivalent filtered-derived-colimit formula, for exactly $(\\nu_X^*K)|_U$. The transition maps are affine: for a map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ induced by $\\varphi:A\\to B$, the inverse image of every principal open $D(f)$ is the affine $D(\\varphi(f))=\\operatorname{Spec}B_{\\varphi(f)}$. This uses the existing arbitrary-ring statement, rather than the older finite-coefficient continuity theorem outside its hypotheses. Finally [lem-weil-pbc-ring-modules-grothendieck-abelian] gives exact filtered colimits of left modules over any ring. Exactness applied to kernels, images and quotients yields $H^n(\\varinjlim C_i)=\\varinjlim H^n(C_i)$; termwise filtered colimit therefore computes the derived colimit and its claimed cohomology.",
+   "uses": [
+    "det-sf-comparison-affine-continuity",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.md",
+    "place": "Statement, the existing detailed affine-continuity input; Stacks 03Q6 (etale-cohomology-lemma-directed-colimit-cohomology) and 00DB (algebra-lemma-directed-colimit-exact)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-pe-injective-acyclicity"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pe-comparison-injective-left-modules-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "det-sf-comparison-affine-continuity",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/_section.md",
-  "place": "## Proof"
+  "place": "Agent expansion of the bounded-below unit/global-sections argument in Stacks 099V (lemma-relative-comparison) and 099W (lemma-compare-cohomology), preserving module actions; affine clause uses existing blueprint input det-sf-comparison-affine-continuity. The current blueprint source contains the statement but no Proof section."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded-below derived comparison between etale and pro-etale cohomology full faithfulness global sections affine continuity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale.forget; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete bounded-below pro-etale comparison and affine-continuity package; returned site, Kan-extension, condensed and structure-sheaf results do not state it"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Plus, comparisonUpperStar, rightDerivedLowerStar",
+   "results": "0 hits: ; loogle: unknown identifier 'comparisonUpperStar'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: comparisonUpperStar is an unknown identifier in Mathlib; this error is not evidence of absence. Replaced by the successful CategoryTheory.Sheaf, CategoryTheory.Adjunction search."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*comparison|comparison.*pro.?etale",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete bounded-below pro-etale comparison and affine-continuity package; returned site, Kan-extension, condensed and structure-sheaf results do not state it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded-below derived comparison between etale and pro-etale cohomology full faithfulness global sections affine continuity",
+   "results": "8 hits: LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.Scheme.AffineZariskiSite.instFaithfulOpensToOpensFunctor; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete bounded-below pro-etale comparison and affine-continuity package; returned site, Kan-extension, condensed and structure-sheaf results do not state it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image from etale sheaves to proetale sheaves preserves the bounded below derived comparison unit and affine limit cohomology",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.hasExactLimitsOfShape, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete bounded-below pro-etale comparison and affine-continuity package; returned site, Kan-extension, condensed and structure-sheaf results do not state it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ring, the etale to proetale inverse image is fully faithful on bounded below derived categories and compares derived global sections and affine inverse limits",
+   "results": "8 hits: CondensedMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.fullyFaithfulFunctor; lightProfiniteToLightCondSetFullyFaithful; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; LightCondSet.LocallyConstant.functorFullyFaithful; AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-16",
+   "verdict": "no match: returned sheafification, condensed-module, site or structure-sheaf statements do not give the bounded-below etale/pro-etale comparison with affine continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme X and any ring, etale to proetale inverse image gives an isomorphism K to derived pushforward of its pullback for bounded below complexes, comparing global cohomology and affine inverse limits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: returned sheafification, condensed-module, site or structure-sheaf statements do not give the bounded-below etale/pro-etale comparison with affine continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|plusPlusAdjunction",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Abelian.lean; Mathlib/CategoryTheory/Sites/Localization.lean; Mathlib/CategoryTheory/Sites/Localization.lean; Mathlib/CategoryTheory/Sites/Localization.lean; Mathlib/CategoryTheory/Sites/Localization.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; searched Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: returned sheafification, condensed-module, site or structure-sheaf statements do not give the bounded-below etale/pro-etale comparison with affine continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComparisonAdjunction|comparisonUpperStar|nonempty_iso_comparison",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: generic sheaf composition, adjunction full-faithfulness, or free-module pullback results do not state the derived etale/pro-etale comparison and affine continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image of sheaves is fully faithful when the adjunction unit is invertible and higher direct images vanish on pulled back injectives",
+   "results": "8 hits: CategoryTheory.fullyFaithfulSheafCompose; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans; CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: generic sheaf composition, adjunction full-faithfulness, or free-module pullback results do not state the derived etale/pro-etale comparison and affine continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Full",
+   "results": "12 hits: CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful; CategoryTheory.Adjunction.counitSplitMonoOfRFull; CategoryTheory.Adjunction.counit_isSplitMono_of_R_full; CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app; CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app; CategoryTheory.Adjunction.unitSplitEpiOfLFull; CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: generic sheaf composition, adjunction full-faithfulness, or free-module pullback results do not state the derived etale/pro-etale comparison and affine continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any discrete ring the etale to proetale inverse image is fully faithful on bounded below derived categories and identifies derived global sections and affine inverse limit cohomology",
+   "results": "8 hits: lightProfiniteToLightCondSetFullyFaithful; CondensedMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.fullyFaithfulFunctor; CondensedSet.LocallyConstant.functorFullyFaithful; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget",
+   "date": "2026-10-16",
+   "verdict": "no match for this whole comparison theorem: the returned condensed locally constant functors, generic derived adjunctions, sheafification adjunctions and site definitions do not supply the pro-étale comparison unit, global sections and affine continuity package"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.plusPlusAdjunction; CategoryTheory.sheafificationAdjunction; CategoryTheory.HasSheafify.mk'; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction; CategoryTheory.GrothendieckTopology.W_adj_unit_app; CategoryTheory.sheafComposeNatIso; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-16",
+   "verdict": "no match for this whole comparison theorem: the returned condensed locally constant functors, generic derived adjunctions, sheafification adjunctions and site definitions do not supply the pro-étale comparison unit, global sections and affine continuity package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived unit from etale sheaves to proetale sheaves is invertible for bounded below complexes with arbitrary discrete ring coefficients",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; CategoryTheory.Equivalence.sheafCongr.unitIso_inv_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_inv_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app; StandardEtalePair.HasMap.isUnit_derivative_f; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match for this whole comparison theorem: the returned condensed locally constant functors, generic derived adjunctions, sheafification adjunctions and site definitions do not supply the pro-étale comparison unit, global sections and affine continuity package"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?[eé]tale|comparisonUpperStar|derivedComparisonAdjunction",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for this whole comparison theorem: the returned condensed locally constant functors, generic derived adjunctions, sheafification adjunctions and site definitions do not supply the pro-étale comparison unit, global sections and affine continuity package"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -79,5 +285,74 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-prop-sf-comparison",
+  "worker": "stage1",
+  "summary": "Retained all clauses for arbitrary discrete rings. Expanded the bounded-below injective-resolution proof and actual derived unit; reused the existing affine-continuity node. Repaired a stale citation whose present statement only permits commutative rings by adding one strictly sheaf-level arbitrary-left-ring acyclicity input. Stale unit metadata is reported.",
+  "blueprint": "Current main-20261015 statement: displayed derived unit (steps 1-4), consequent full faithfulness (step 5), global sections display (step 6), and affine derived-colimit display and final cohomology sentence (step 7). The current source has no proof section; the imported two-paragraph proof is expanded along its injective/acyclic-resolution route. The older sec-smooth-purity unit is not the current statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-grothendieck-unit",
+    "why": "Supplies the underived comparison unit for left modules over an arbitrary ring; the older finite-coefficient site-comparison statement does not cover that coefficient generality."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Transfers the elementary sheaf-level exactness to quasi-isomorphisms and D^+; this is a generic exact-functor tool, not a replacement for comparison acyclicity."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Supplies bounded-below termwise-injective K-injective resolutions on each small ringed site, for the resolution argument required by the imported proof."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Defines bounded-below derived direct image and sections and computes them on termwise-injective complexes; the comparison unit and acyclicity remain proved by this chapter route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Ensures R sends K-injectives to K-injectives once L is proved exact; used only to construct the bounded-below Hom adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Identifies Hom into a K-injective resolution with derived Hom; used to identify the actual unit and naturality of the sections comparison."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Provides the Hom transpose on homotopy categories including its formula; this generic tool makes the actual derived unit explicit."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Only its first clause, injectives are acyclic for a left exact functor, is used on the pro-etale injective replacement."
+   },
+   {
+    "node": "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "why": "Supplies the bounded-below acyclic-complex calculation: Rj is a quasi-isomorphism after both complexes are checked termwise R-acyclic."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Its exact filtered-colimit clause identifies the cohomology of the derived colimit with the filtered colimit of cohomology modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-5dee6af2a",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-5dee6af2a (reviewer sub-agent of L); spot-checked: Read both nodes, all cited statements, blueprint route and source passages. Seven proof steps and arbitrary left-module acyclicity pass; dependency closures are acyclic. Repaired three missing auxiliary-node records, including its open source-theorem audit. Documented the inherited stale unit binding in review.md; no statements or targets changed.; 1 file(s) fixed by the reviewer"
+ }
 }

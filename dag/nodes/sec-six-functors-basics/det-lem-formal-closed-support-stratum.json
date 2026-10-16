@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-lem-formal-closed-support-stratum",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-lem-formal-closed-support-stratum-hom"
+  ]
  },
  "kind": "statement",
  "title": "Hom out of an extension by zero from a stratum",
@@ -18,36 +20,205 @@
  ],
  "proof": [
   {
-   "text": "*First isomorphism.* $a_!L=i_*(u_!L)$, and $i_*\\dashv R\\underline\\Gamma_Z$ in the\n$R\\operatorname{Hom}$ form ([det-lem-formal-closed-support-derived] (1)).",
+   "text": "The statement defines $a_!:=i_*u_!$ for the given factorization through $Z$, so $a_!L=i_*(u_!L)$. Apply clause (1) of [det-lem-formal-closed-support-derived] with $A=u_!L$; it gives the first natural isomorphism $R\\operatorname{Hom}_X(a_!L,K)\\simeq R\\operatorname{Hom}_Z(u_!L,R\\underline\\Gamma_ZK)$. This uses the composite stipulated here, not a comparison between different locally closed factorizations.",
    "uses": [
     "det-lem-formal-closed-support-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-stratum.proof.md",
+    "place": "First isomorphism"
+   }
   },
   {
-   "text": "*Second isomorphism.* On module sheaves $u_!$ is exact and left adjoint to the\nexact functor $u^*$ ([sk-prop-sf-open-closed-triangle], applied on $Z$). As\nin the proof of [det-lem-formal-closed-support-derived] (3), exactness of $u_!$\nimplies that $u^*$ preserves K-injective complexes. Representing\n$R\\underline\\Gamma_ZK$ by a K-injective complex $J^\\bullet$, we get\n$R\\operatorname{Hom}_Z(u_!L,J^\\bullet)=\\Hom^\\bullet(u_!L,J^\\bullet)=\\Hom^\\bullet(L,u^*J^\\bullet)=R\\operatorname{Hom}_S(L,u^*J^\\bullet)$.",
+   "text": "Work on the small representatives of the sites fixed in [def-weil-size-convention], with their actual pulled-back commutative ring sheaves. The functor $u_!$ is exact by [def-sfb-module-open-lower-shriek] and left adjoint to $u^*$ by [def-sfb-module-open-lower-shriek-adjunction]. The pullback $u^*$ is exact by [sk-prop-sfb-cartesian-coefficients]. Choose a K-injective representative $J^\\bullet$ of $R\\underline\\Gamma_ZK$ using [prop-pur-kinjective-resolutions-exist]. Since $u^*$ is right adjoint to the exact functor $u_!$, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $u^*J^\\bullet$ K-injective. In degree $q$, the ordinary adjunction identifies $\\operatorname{Hom}_Z(u_!L,J^q)$ with $\\operatorname{Hom}_S(L,u^*J^q)$, and its naturality in $J^q$ identifies the differentials. Thus the termwise adjunction gives $\\operatorname{Hom}^\\bullet_Z(u_!L,J^\\bullet)\\cong\\operatorname{Hom}^\\bullet_S(L,u^*J^\\bullet)$, and these complexes compute the two derived Hom complexes, proving the second isomorphism.",
    "uses": [
-    "det-lem-formal-closed-support-derived"
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-open-lower-shriek-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-size-convention"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), applied to the exact adjunction in the blueprint second isomorphism"
+   }
   },
   {
-   "text": "*Third isomorphism.* Locally on $S_{\\mathrm{proét}}$, $L$ is a direct summand of\n$\\Lambda_S^m$. For such $L$ the natural map\n$L^\\vee\\otimes_{\\Lambda_S}N\\to\\mathcal Hom_{\\Lambda_S}(L,N)$ is an isomorphism for\nevery $\\Lambda_S$-module $N$: this is clear for $L=\\Lambda_S^m$, it is\ncompatible with direct summands, and it may be checked locally. Both sides\nare exact in $N$, since $L$ and $L^\\vee$ are flat. Moreover\n$\\mathcal Hom(L,-)$ preserves K-injective complexes, because its left adjoint\n$L\\otimes-$ is exact. Hence for $N^\\bullet=u^*J^\\bullet$ (K-injective)\n$$\nR\\operatorname{Hom}_S(L,N^\\bullet)=R\\Gamma\\bigl(S,\\mathcal Hom(L,N^\\bullet)\\bigr)=R\\Gamma(S,L^\\vee\\otimes N^\\bullet),\n$$\nand $L^\\vee\\otimes N^\\bullet$ computes the derived tensor product since $L^\\vee$\nis flat.\n\nEvery step is natural in $K$ (through the K-injective resolution, natural up\nto homotopy). Taking $H^q$ gives the last assertion.",
-   "uses": [],
-   "elementary": null
+   "text": "For any $\\Lambda_S$-module $N$, evaluation $e_N:L^\\vee\\otimes N\\to\\mathcal Hom(L,N)$ sends $\\varphi\\otimes n$ to $(l\\mapsto\\varphi(l)n)$, using [def-pur-sheaf-hom] and [def-pur-sheaf-tensor-product]. For $L=\\Lambda_S^m$ it is the coordinate identity on $N^m$. On a covering with $L\\oplus L^{\\prime}=\\Lambda_S^m$, evaluation is block diagonal for this decomposition; its $L$ block is therefore invertible. The local inverses glue because they invert the same map. The dual of the splitting also makes $L^\\vee$ a summand of a finite free sheaf. Thus tensoring by $L$ or $L^\\vee$ is locally a summand of a finite power of the identity and preserves exact sequences. Here kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category]; lifts through a sheaf epimorphism in finitely many coordinates exist on a common covering refinement. For any acyclic complex $B$, its tensor with either sheaf is locally a direct summand of $B^m$, hence acyclic. This is exactly K-flatness of $L[0]$ and $L^\\vee[0]$ under [def-pc-kflat-complex].",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), finite-projective evaluation calculation written out here, and 06YN (definition-K-flat)"
+   }
+  },
+  {
+   "text": "Put $I=u^*J^\\bullet$, representing $N=u^*R\\underline\\Gamma_ZK$, and $C=\\mathcal Hom^\\bullet(L[0],I)$. By [def-pur-derived-internal-hom], $C$ represents $R\\mathcal Hom_S(L,N)$, and by [lem-pur-hom-kflat-into-kinjective] it is K-injective, since step 3 proves $L[0]$ K-flat. The definition in [def-pur-ringed-site-zeroth-hypercohomology] specifies that the unbounded functor $R\\Gamma$ is computed on K-injective complexes. Consequently $R\\Gamma(S,C)$ is represented by $\\Gamma(S,C)$, whose degree-$q$ term is $\\operatorname{Hom}_S(L,I^q)$ by [def-pur-sheaf-hom]. This is the global Hom complex computing $R\\operatorname{Hom}_S(L,N)$. The maps $e_{I^q}$ of step 3 commute with $d_I$ by their explicit evaluation formula, and give an isomorphism of sheaf complexes $L^\\vee\\otimes I\\cong C$. Hence $R\\Gamma(S,L^\\vee\\otimes N)\\cong R\\Gamma(S,C)\\cong R\\operatorname{Hom}_S(L,N)$, as required. Exactness of tensor with $L^\\vee$ makes the termwise tensor a representative of the ordinary exact tensor functor on $N$, and K-flatness of $L^\\vee[0]$ identifies it with derived tensor.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08J7 (section-internal-hom), and 07A5 (section-unbounded, construction RF(F)=F(I)); comparison illustrated by Tag 08JA (lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "All comparisons are induced by adjunction or evaluation, so commute with chain maps of K-injective representatives. By [lem-weil-pbc-kinjective-hom-derived], these maps modulo homotopy compute derived morphisms, and quasi-isomorphisms between K-injective representatives are homotopy equivalences. Additive functors and the displayed evaluation maps preserve these homotopies, so the comparisons are natural in $K$ independently of its representative. For a K-injective representative $T$ of $K$, its shift $T[q]$ is K-injective: for every acyclic $B$, $\\operatorname{Hom}_{K(X)}(B,T[q])\\cong\\operatorname{Hom}_{K(X)}(B[-q],T)=0$, since $B[-q]$ is acyclic. A degree-$q$ cocycle in the global Hom complex from $a_!L[0]$ to $T$ is a map $a_!L\\to T^q$ killed by $d_T^q$. It defines a chain map $a_!L[0]\\to T[q]$; boundaries are maps $d_T^{q-1}h$. A null-homotopy into $T[q]$ has its only possibly nonzero component $s:a_!L\\to T^{q-1}$, and yields the map $(-1)^q d_T^{q-1}s$. Setting $h=(-1)^q s$ identifies these maps exactly with the boundaries, by the differential of [def-pur-hom-complex]. Thus the quotient is $\\operatorname{Hom}_{K(X)}(a_!L[0],T[q])$, and the same K-injective comparison identifies it with $\\operatorname{Hom}_{D(X)}(a_!L,K[q])$. Taking degree-$q$ cohomology of the three isomorphisms therefore gives the stated $H^q(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK)$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Z (equation-global-cohomology-hom-complex) and 08JA (lemma-section-RHom-over-U), together with the explicit cocycle calculation for shifts"
+   }
   }
  ],
  "proof_deps": [
-  "det-lem-formal-closed-support-derived"
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "det-lem-formal-closed-support-derived",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-stratum.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-stratum.proof.md",
+  "place": "First, second and third isomorphisms and final shifted-Hom assertion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from an extension by zero along a locally closed immersion equals global sections of the dual tensor closed-support complex",
+   "results": "CategoryTheory.Abelian.Ext.mk₀_hom; CategoryTheory.Abelian.Ext.zero_hom; DerivedCategory.instHasZeroObject; ComplexShape.Embedding.AreComplementary.hom_ext'; CategoryTheory.hasExt_of_hasDerivedCategory; AlgebraicGeometry.Scheme.Modules.Hom.zero_app; ComplexShape.Embedding.AreComplementary.hom_ext; HomologicalComplex.instIsStrictlySupportedExtend",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a finite locally projective sheaf extended by zero and closed supports",
+   "results": "CategoryTheory.Sheaf.H; localCohomology.diagram; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Ext; CategoryTheory.Sheaf.cohomologyPresheafFunctor; SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.map_π_eq; CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.KIsInjective, Sheaf.Hom",
+   "results": "Query returned 0 hits; unknown identifier CategoryTheory.KIsInjective",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|closed.?support|KInjective.*Hom",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Topology/LocallyFinsupp.lean; no declaration for this sheaf formula",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complex adjunction for exact extension by zero and restriction on sheaves",
+   "results": "Homotopy.ofExtend_extend; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc; HomologicalComplex.stupidTruncMap; HomologicalComplex.stupidTrunc; ComplexShape.Embedding.homEquiv; ComplexShape.Embedding.homRestrict_precomp; ComplexShape.Embedding.homRestrict.comm_assoc; ComplexShape.Embedding.homRestrict_f",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective dual tensor internal Hom in a ringed site",
+   "results": "LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; PresheafOfModules.Monoidal.tensorObj; LightCondensed.ihomPoints; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKInjective, Adjunction, HomologicalComplex",
+   "results": "Query returned 0 hits; unknown identifier IsKInjective",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective.*Qh_map_bijective|Adjunction.*homEquiv|Hom.*tensor Mathlib/Algebra/Homology",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory.IsKInjective, CategoryTheory.Adjunction",
+   "results": "loogle: unknown identifier 'HomotopyCategory.IsKInjective'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: identifier not recognized by Loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "closedUpperShriek|sectionsWithSupport|extensionByZero",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale closed-support stratum formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of extension by zero of a finite projective sheaf equals hypercohomology of its dual tensor exceptional restriction",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Abelian.Ext.homLinearEquiv; Ext; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom; isZero_Ext_succ_of_projective; CategoryTheory.Sheaf.cohomologyPresheafFunctor; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.extMk_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale closed-support stratum formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "CochainComplex.IsKInjective; CochainComplex.isKInjective_of_injective; HomotopyEquiv.isKInjective; CochainComplex.isKInjective_of_iso; CochainComplex.isKInjective_iff_of_iso; CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX; CochainComplex.instIsKInjectiveObjIntShiftFunctor; CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-16",
+   "verdict": "Generic K-injective definitions, shift stability and homotopy facts only; no match for the full pro-etale closed-support stratum formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules finite locally free dual tensor Hom derived global sections",
+   "results": "SheafOfModules.freeHomEquiv; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_freeMap; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.freeHomEquiv_comp_apply; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.freeMap",
+   "date": "2026-10-16",
+   "verdict": "Free-sheaf Hom and its naturality only; no derived stratum formula."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|dual.*tensor.*[Hh]om",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "No match in the searched sheaf-module directory."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.freeHomEquiv",
+   "results": "SheafOfModules.freeHomEquiv; SheafOfModules.sectionsMap_freeHomEquiv_symm_freeSection; SheafOfModules.freeHomEquiv_apply; SheafOfModules.freeHomEquiv_freeMap; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_comp_apply; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.GeneratingSections.mk",
+   "date": "2026-10-16",
+   "verdict": "Free-sheaf Hom and its naturality only; no derived stratum formula."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -62,5 +233,89 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-formal-closed-support"
+ "unit": "sk-lem-formal-closed-support",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-formal-closed-support-stratum",
+  "worker": "stage1",
+  "summary": "Audited the imported three-isomorphism proof against the current basics blueprint. The item has no finished declaration in WeilConjectures. Replaced the under-cited imported steps with five complete steps: closed-support adjunction, exact open extension adjunction and K-injectives, finite-projective evaluation/K-flatness, derived internal Hom and global sections, and shifted-Hom naturality. No new DAG nodes were needed; the parallel smooth-purity node is recorded as same_as. Corrected the earlier attempt’s step 4 by distinguishing sheaf complexes from global-section complexes and citing the full K-injective definition of RΓ rather than inferring an isomorphism from cohomology groups. The a_! identity is the item’s own definition; the coefficient-heart result, whose coefficients and closure factorization are narrower, is not invoked as a theorem. Second reading made shift stability of K-injectives and the null-homotopy sign explicit, strengthened three truncated citation quotes to include their formulas, and independently searched Mathlib for the finite-free sheaf Hom formulation.",
+  "blueprint": "First isomorphism: step 1; second isomorphism and K-injective restriction: step 2; finite-projective dual/tensor calculation: step 3; third isomorphism: step 4; naturality and final H^q formula: step 5.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exactness of the pullback on the actual pulled-back condensed coefficient sheaves."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective representatives on the small pro-etale ringed sites."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The exact left adjoint u_! implies u^* preserves K-injectives."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Global sections of the internal Hom are the ordinary Hom complexes in the finite-projective calculation."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Identifies the tensor product used in the evaluation map and its termwise complex."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Supplies the abelian sheaf-module setting and sectionwise kernels used in the direct-summand exactness argument."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Provides the K-flat notion used to justify ordinary tensor computing derived tensor."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Defines the derived internal Hom model used for the third isomorphism."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Makes the internal Hom complex K-injective when the first argument is K-flat."
+   },
+   {
+    "node": "def-pur-ringed-site-zeroth-hypercohomology",
+    "why": "Identifies derived global sections with ordinary sections on a K-injective representative."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Compares homotopy and derived morphisms into K-injective representatives."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Defines the Hom-complex differential used to identify shifted morphisms with degree-q cohomology."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Makes the ringed sites small in the fixed universe, as required for the generic unbounded K-injective results; this is a size convention, not a change of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-hom-complex",
+  "def-weil-size-convention"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-b22578ee6",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-b22578ee6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All five steps match the current blueprint and cited Stacks statements; coefficient categories, K-injective hypotheses, evaluation, naturality, and integer shifts check out. No new nodes or repairs. Accepted proposed tool uses; recorded one unrelated inherited missing DAG reference."
+ }
 }

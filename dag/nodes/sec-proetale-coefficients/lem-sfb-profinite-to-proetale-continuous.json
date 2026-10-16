@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-profinite-to-proetale-continuous",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$S\\mapsto\\Spec LC(S,\\Z)$ is continuous",
@@ -12,29 +12,90 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.md",
   "place": "node lem-sfb-profinite-to-proetale-continuous, order 1538"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sfb-profinite-to-proetale"
+ ],
  "proof": [
   {
-   "text": "By [lem-sfb-profinite-to-proetale-finite-limits], $u$ is a finite-limit\npreserving functor between finitely complete categories. Hence it is\nrepresentably flat, and so it preserves compatible families. By\n[lem-sfb-profinite-to-proetale-cover-preserving] it is cover preserving. A\ncover preserving functor that preserves compatible families is continuous.",
+   "text": "By [lem-sfb-profinite-to-proetale-finite-limits], $u$ preserves finite limits. The source category $\\mathbf{Profinite}$ has finite limits by the inferred Mathlib instance `Profinite.hasLimits` (Mathlib/Topology/Category/Profinite/Basic.lean:217-218). Apply clause (2) of [lem-weil-pbc-presheaf-pullback-sets-left-exact] with $\\mathcal C=\\mathbf{Profinite}$, $\\mathcal D=(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{pro\\acute et}}$ and $b=u$, placing their object and morphism sets in a common larger universe. For each $Y\\in\\mathcal D$, its category $\\mathcal I_Y$ has objects $(S,\\phi:Y\\to u(S))$ and morphisms $a:S\\to S\\prime$ with $u(a)\\phi=\\phi\\prime$. These are exactly the objects and morphisms of $(Y\\downarrow u)$. Clause (2) says $\\mathcal I_Y^{\\mathrm{op}}$ is filtered, hence $(Y\\downarrow u)$ is cofiltered. Thus $u$ is representably flat, in the sense spelled out in the leaf used in step 2. Only the comma-category conclusion is used; no presheaf colimit or change of coefficient category is needed.",
    "uses": [
     "lem-sfb-profinite-to-proetale-finite-limits",
-    "lem-sfb-profinite-to-proetale-cover-preserving"
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.proof.md",
+    "place": "Proof, first two sentences: finite-limit preservation implies representable flatness"
+   }
+  },
+  {
+   "text": "Let $K$ be the pro-étale Grothendieck topology on $(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{pro\\acute et}}$. Apply [lem-sfb-representably-flat-compatible-preserving] with $G=u$ and this $K$, using the representable flatness obtained in step 1. It gives the compatibility condition for every $K$-sheaf and every presieve, including the set universe needed by the continuity criterion.",
+   "uses": [
+    "lem-sfb-representably-flat-compatible-preserving"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.proof.md",
+    "place": "Proof, second sentence: 'and so it preserves compatible families'"
+   }
+  },
+  {
+   "text": "Put $J=$ the coherent topology on profinite sets. By [lem-sfb-profinite-to-proetale-cover-preserving], $u$ is cover-preserving from $J$ to $K$. Combining this with step 2, [lem-sfb-cover-compatible-continuous] gives continuity. Its conclusion explicitly says that every $K$-sheaf $G$ restricts to the $J$-sheaf $S\\mapsto G(u(S))=G(\\operatorname{Spec}LC(S,\\mathbf Z))$, which is the required assertion.",
+   "uses": [
+    "lem-sfb-profinite-to-proetale-cover-preserving",
+    "lem-sfb-cover-compatible-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.proof.md",
+    "place": "Proof, final two sentences: cover preservation and compatibility imply continuity"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-cover-compatible-continuous",
+  "lem-sfb-profinite-to-proetale-cover-preserving",
   "lem-sfb-profinite-to-proetale-finite-limits",
-  "lem-sfb-profinite-to-proetale-cover-preserving"
+  "lem-sfb-representably-flat-compatible-preserving",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-continuous.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the functor S to Spec of locally constant integer valued functions on a profinite set is continuous for the pro etale topology",
+   "results": "8 hits; CompHausLike.LocallyConstant.functor, LocallyConstant.continuous, CompHausLike.LocallyConstant.functorToPresheavesIso, Profinite.NobelingProof.Nobeling_aux, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.lanLightCondSet, LightCondSet.LocallyConstant.functor, Condensed.lanSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern condensed locally constant sheaves or continuous functions, not this functor to the pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "precomposition by the functor from profinite sets to schemes Spec of locally constant integer functions preserves sheaves",
+   "results": "8 hits; Condensed.isSheafProfinite, Condensed.lanSheafProfinite, CompHausLike.LocallyConstantModule.functor, Condensed.locallyConstantPresheaf, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, Condensed.ofSheafForgetProfinite, Condensed.ofSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Profinite to CompHaus restriction and condensed sheaves, not schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isContinuous_of_coverPreserving",
+   "results": "1 hits; CategoryTheory.Functor.isContinuous_of_coverPreserving",
+   "date": "2026-10-16",
+   "verdict": "generic criterion found; application needs the two existing item-specific lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|LocallyConstant.*IsContinuous",
+   "results": "0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match: 0 hits in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +115,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-profinite-to-proetale-continuous",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint proof and the pinned Mathlib criteria against their hypotheses. Retained its finite-limits, representable-flatness, compatibility, continuity route. Second reading removed the redundant new flatness leaf: clause (2) of the existing Mathlib leaf lem-weil-pbc-presheaf-pullback-sets-left-exact already supplies the required cofiltered comma categories. The remaining two new leaves are exact generic Mathlib criteria. Added the defining-functor statement dependency; the item statement is unchanged.",
+  "blueprint": "Realizes the sole proof paragraph of lem-sfb-profinite-to-proetale-continuous.proof.md: finite limits give representable flatness and compatible families, then cover preservation plus compatibility gives continuity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-53d2905af",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-53d2905af (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and sources, and unit/chapter route in full. Both new leaves match Mathlib; comma-category directions, universes, and continuity hypotheses check out. Small cases and whole-DAG duplicate searches found no fault; 189 reachable nodes have no missing references or cycles. Checked master target coefficients and base-change morphism without accepting seeded comparisons. Wrote review.md; no fixes needed."
+ }
 }

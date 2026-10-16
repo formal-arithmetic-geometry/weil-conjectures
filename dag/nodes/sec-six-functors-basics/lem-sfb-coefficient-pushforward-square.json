@@ -3,41 +3,211 @@
  "blueprint": {
   "is": "lem-sfb-coefficient-pushforward-square",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient changes commute with $\\eta_f$",
- "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed abelian groups (in particular of\ncondensed rings), $f\\colon X\\to Y$ a morphism of schemes, and\n$\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda_X$, $\\eta'_f\\colon\\Lambda'_Y\\to f_*\\Lambda'_X$ the\ncoefficient morphisms of [sk-def-sfb-coefficient-morphisms], with $f_*$ the pushforward of\nabelian sheaves ([sk-def-sfb-finite-pushforward-pullback]). Then\n\n$$\nf_*a_X\\circ\\eta_f=\\eta'_f\\circ a_Y\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda'_X ,\n$$\n\nwith $a_X$, $a_Y$ the coefficient changes of [def-sfb-coefficient-map].",
+ "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed abelian groups, i.e. sheaves of abelian groups on profinite sets with the coherent topology, and let $f\\colon X\\to Y$ be a morphism of schemes. For $T=X,Y$, let $p_T^*$ be the inverse image from the point of [def-sfb-upper-star-from-point], and put $\\Lambda_T=p_T^*\\Lambda$, $\\Lambda'_T=p_T^*\\Lambda'$ and $a_T=p_T^*a$. Let $f^*$ and $f_*$ be the pullback and pushforward of abelian pro-étale sheaves of [def-sfb-finite-upper-star] and [def-sfb-finite-lower-star], with adjunction $f^*\\dashv f_*$ of [def-sfb-finite-upper-lower-star-adjunction] and unit $u\\colon\\mathrm{id}\\to f_*f^*$. Write $c_f\\colon f^*p_Y^*\\cong p_X^*$ for the natural isomorphism of [def-sfb-pullback-from-point-comp-iso], and define\n$$\n\\alpha_f=(c_f)_\\Lambda,\\qquad \\alpha'_f=(c_f)_{\\Lambda'},\\qquad\n\\eta_f=f_*\\alpha_f\\circ u_{\\Lambda_Y},\\qquad\n\\eta'_f=f_*\\alpha'_f\\circ u_{\\Lambda'_Y}.\n$$\nWhen $\\Lambda$, $\\Lambda'$ are condensed rings and $a$ is a ring morphism, these are exactly the underlying abelian-sheaf constructions of [def-sfb-coefficient-map] and [sk-def-sfb-coefficient-morphisms]. Then\n$$\nf_*a_X\\circ\\eta_f=\\eta'_f\\circ a_Y\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda'_X.\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.md",
   "place": "node lem-sfb-coefficient-pushforward-square, order 1725"
  },
  "stmt_deps": [
-  "sk-def-sfb-coefficient-morphisms",
-  "def-sfb-coefficient-map"
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-coefficient-morphisms"
  ],
  "proof": [
   {
-   "text": "By [sk-def-sfb-coefficient-morphisms], $\\eta_f$ is the unit $u_{\\Lambda_Y}\\colon\\Lambda_Y\\to\nf_*f^*\\Lambda_Y$ of the adjunction $f^*\\dashv f_*$ of\n[sk-def-sfb-finite-pushforward-pullback] followed by $f_*\\alpha_f$, and likewise for $\\eta'_f$.\nHence, using [lem-sfb-coefficient-pullback-square] in the second step and the naturality of the\nunit in the third,\n\n$$\nf_*a_X\\circ\\eta_f=f_*(a_X\\circ\\alpha_f)\\circ u_{\\Lambda_Y}\n=f_*\\alpha'_f\\circ f_*f^*a_Y\\circ u_{\\Lambda_Y}\n=f_*\\alpha'_f\\circ u_{\\Lambda'_Y}\\circ a_Y=\\eta'_f\\circ a_Y .\n$$",
+   "text": "The current definition [def-sfb-pullback-from-point-comp-iso] explicitly constructs $c_f$ on abelian pro-étale sheaves by precomposing the inverse pullback-composition isomorphism with $p^*$, followed by the identification from $\\pi_Y\\circ f=\\pi_X$. It states that this composite is a natural isomorphism on all condensed abelian groups. Thus its naturality equation at $a$ is\n$$\n\\alpha'_f\\circ f^*(p_Y^*a)=p_X^*a\\circ\\alpha_f.\n$$\nSubstituting $a_Y=p_Y^*a$ and $a_X=p_X^*a$ gives $\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f$, an equality from $f^*\\Lambda_Y$ to $\\Lambda'_X$. This expands the blueprint's pullback-square step using the stated naturality of the current comparison; no ring structure is required.",
    "uses": [
-    "sk-def-sfb-coefficient-morphisms",
-    "lem-sfb-coefficient-pullback-square"
+    "def-sfb-pullback-from-point-comp-iso"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.proof.md",
+    "place": "Complete proof: naturality of the coefficient comparison, then naturality of the adjunction unit"
+   }
+  },
+  {
+   "text": "The unit $u$ of [def-sfb-finite-upper-lower-star-adjunction] is a natural transformation $\\mathrm{id}\\to f_*f^*$, so its defining naturality equation at $a_Y$ is $f_*f^*a_Y\\circ u_{\\Lambda_Y}=u_{\\Lambda'_Y}\\circ a_Y$. Expand the two mates using the formulas in the statement, use functoriality of $f_*$ and the preceding step, then this naturality equation:\n$$\n\\begin{aligned}\nf_*a_X\\circ\\eta_f\n&=f_*(a_X\\circ\\alpha_f)\\circ u_{\\Lambda_Y}\\\\\n&=f_*\\alpha'_f\\circ f_*f^*a_Y\\circ u_{\\Lambda_Y}\\\\\n&=f_*\\alpha'_f\\circ u_{\\Lambda'_Y}\\circ a_Y\n=\\eta'_f\\circ a_Y.\n\\end{aligned}\n$$\nEvery composite has source $\\Lambda_Y$ and target $f_*\\Lambda'_X$. Only the definitions of natural transformation and functor, and associativity of composition, enter this calculation.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.proof.md",
+    "place": "Complete proof: naturality of the coefficient comparison, then naturality of the adjunction unit"
+   }
+  },
+  {
+   "text": "For the ring specialization, [def-sfb-coefficient-map] defines $a_T=p_T^*a$ for $T=X,Y$. To compare the two named comparisons, use their explicit construction in [def-sfb-pullback-from-point-comp-iso] and [sk-def-sfb-pullback-from-point-comp]. Write $d\\colon(\\pi_Y\\circ f)^*\\xrightarrow{\\sim}f^*\\pi_Y^*$ for the composition isomorphism appearing in both definitions, and $e\\colon(\\pi_Y\\circ f)^*\\xrightarrow{\\sim}\\pi_X^*$ for their identification using $\\pi_Y\\circ f=\\pi_X$. For every condensed abelian group $H$, both underlying comparisons have component\n$$\ne_{p^*H}\\circ d^{-1}_{p^*H}\\colon f^*\\pi_Y^*p^*H\\longrightarrow\\pi_X^*p^*H.\n$$\nIn particular they agree at $H=\\Lambda$ and $H=\\Lambda'$, by substitution of the definitions, independently of the monoidal structures. Now [sk-def-sfb-coefficient-morphisms] defines $\\alpha_f$ as that component at $\\Lambda$, and $\\eta_f$ as the adjunction unit followed by $f_*\\alpha_f$. Hence its underlying maps are exactly $(c_f)_\\Lambda$ and $f_*((c_f)_\\Lambda)\\circ u_{\\Lambda_Y}$, and likewise for $\\Lambda'$. This proves the conditional identification in the statement. The equality from step 2 already holds for every condensed abelian-group morphism, including those without ring structures.",
+   "uses": [
+    "def-sfb-coefficient-map",
+    "def-sfb-pullback-from-point-comp-iso",
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.proof.md",
+    "place": "Opening sentence: eta is the unit followed by pushforward of alpha; definitions of coefficient change and comparison"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-coefficient-morphisms",
-  "lem-sfb-coefficient-pullback-square"
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-coefficient-morphisms"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pushforward-square.proof.md",
+  "place": "Complete proof: naturality of the coefficient comparison, then naturality of the adjunction unit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedPushforwardHom_comp_map_coefficientMap|coefficientMap.*pushforward",
+   "results": "0 hits; subdirectory argument Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "invalid subtree argument (msearch already prefixes Mathlib/); no absence conclusion drawn; repeated below with a valid subtree"
+  },
+  {
+   "tool": "loogle",
+   "query": "condensedPushforwardHom, coefficientMap, map_comp",
+   "results": "0 hits; loogle: unknown identifier 'condensedPushforwardHom'",
+   "date": "2026-10-16",
+   "verdict": "invalid query or unknown project identifier; no absence conclusion drawn"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of coefficient change with pushforward sheaf adjunction unit",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.unitToPushforwardObjUnit; CategoryTheory.toSheafify_naturality_assoc; SheafOfModules.pushforwardSections_unitHomEquiv; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; SheafOfModules.pushforwardNatTrans_app_val_app_apply; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient changes commute with pushforward unit eta_f condensed sheaves",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardSections_unitHomEquiv; CondensedMod.hom_naturality_apply; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*naturality|map.*coefficientMap",
+   "results": "0 hits; subdirectory argument Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "invalid subtree argument (msearch already prefixes Mathlib/); no absence conclusion drawn; repeated below with a valid subtree"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- _ ≫ _ = _ ≫ _",
+   "results": "0 hits; loogle: <input>:1:5: expected end of input",
+   "date": "2026-10-16",
+   "verdict": "invalid query or unknown project identifier; no absence conclusion drawn"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward map of coefficientMap commutes with unit of pullback pushforward adjunction",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.coev; SheafOfModules.unitToPushforwardObjUnit; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of adjunction unit under coefficient morphism and pushforward",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.ExponentiableMorphism.coev_naturality; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.unitToPushforwardObjUnit; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPushforwardHom|coefficientMap",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match in the searched source"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "unit :|unit.*⟶|naturality",
+   "results": "5 hits: 110; 112; 113; 116; 166; subdirectory argument CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality",
+   "results": "5 hits: 16; 19; 50; 56; 57; subdirectory argument CategoryTheory/NatTrans.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*naturality|naturality.*unit",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; subdirectory argument CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic adjunction/naturality statements do not state the specific condensed-coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of taking adjuncts of components of a natural transformation between composed functors",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_app; CategoryTheory.Adjunction.leftAdjointCompNatTrans; CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one; CategoryTheory.mateEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic adjunction composition and Hom-equivalence naturality. Basic.lean:226–276,291–293 and CompositionIso.lean:60–66 were read. The square lemma requires the pullback square as a hypothesis; comparison naturality must still establish it. These do not directly state the complete project-specific coefficient identity; retain the two elementary steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic adjunction composition and Hom-equivalence naturality. Basic.lean:226–276,291–293 and CompositionIso.lean:60–66 were read. The square lemma requires the pullback square as a hypothesis; comparison naturality must still establish it. These do not directly state the complete project-specific coefficient identity; retain the two elementary steps."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_(left|right)",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; subdirectory CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic adjunction composition and Hom-equivalence naturality. Basic.lean:226–276,291–293 and CompositionIso.lean:60–66 were read. The square lemma requires the pullback square as a hypothesis; comparison naturality must still establish it. These do not directly state the complete project-specific coefficient identity; retain the two elementary steps."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompNatTrans_app|homEquiv_naturality_left_square|homEquiv_naturality_right_square",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; subdirectory CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: read Basic.lean:226–276 and CompositionIso.lean:58–74. The general Hom-square theorem needs comparison naturality as input; composition-of-adjoints transformations do not state the project coefficient maps. Keep the explicit elementary calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: read Basic.lean:226–276 and CompositionIso.lean:58–74. The general Hom-square theorem needs comparison naturality as input; composition-of-adjoints transformations do not state the project coefficient maps. Keep the explicit elementary calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct components of a natural transformation form a natural transformation after applying a right adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_app; CategoryTheory.Adjunction.leftAdjointCompNatTrans; CategoryTheory.FunctorToTypes.rightAdj_map_app_app; CategoryTheory.FunctorToTypes.rightAdj_map_app; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.LiftRightAdjoint.otherMap; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.conjugateEquiv",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: read Basic.lean:226–276 and CompositionIso.lean:58–74. The general Hom-square theorem needs comparison naturality as input; composition-of-adjoints transformations do not state the project coefficient maps. Keep the explicit elementary calculation."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -60,5 +230,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-change"
+ "unit": "sk-def-sfb-coefficient-change",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-coefficient-pushforward-square",
+  "worker": "stage1",
+  "summary": "Repaired the imported statement interface without changing its abelian-group generality or conclusion: explicitly defined coefficient changes and the mate maps on all condensed abelian groups, since the cited ring-only definitions do not type this generality, and replaced the nonexistent finite-pushforward-pullback section id by existing definition nodes. Wrote out comparison naturality and unit naturality as two elementary steps, using existing abelian-sheaf definitions and no new nodes. Searched the whole DAG/blueprint, project Lean and Mathlib. No slopmaster2 attachment or exact Mathlib match. Repair of the refused landing: re-read all current statement and proof dependencies, and added an explicit definition-level identification with the now-reviewed coefficient-morphism node, including the underlying monoidal comparison and adjunction-unit formula. Revalidated all citation quotes on the current DAG; no new hypotheses, nodes, or Mathlib leaves. Latest repair of returned head 35192aa3d4: comparison-definition statement changed from the old umbrella citation to the explicit upper-star composition definition. Re-read all eight current dependencies and compared their statement fingerprints; only this comparison changed. Rewrote step 1 against its current formulation and expanded step 3 componentwise as e_(p*H) composed with d inverse_(p*H); refreshed the literal comparison quotes for both steps. Read the now-present chapter and unit records; their route remains unchanged.",
+  "blueprint": "Realizes the complete displayed calculation of lem-sfb-coefficient-pushforward-square.proof.md in the coefficient-change unit: step 1 writes out its invocation of the pullback square as the defining naturality of the comparison, and step 2 expands the mates and applies unit naturality. The coefficient-change unit proof still obtains its eta square from this lemma. The current DAG binds the item to chapter sec-six-functors-basics and unit sk-def-sfb-coefficient-change; their records were read. This child lemma realizes the second-square clause of the unit proof, so it does not change the key-unit realization fields. Step 3 checks the opening identification of eta against the current coefficient-morphism definition, after forgetting ring structure.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-upper-star-from-point",
+    "why": "Unfolds the inverse images defining the coefficient objects; the unit uses these point functors and does not redefine them."
+   },
+   {
+    "node": "def-sfb-finite-upper-star",
+    "why": "Supplies the ambient abelian-sheaf pullback used in the unit, without replacing any coefficient-change argument."
+   },
+   {
+    "node": "def-sfb-finite-lower-star",
+    "why": "Supplies the ambient abelian-sheaf pushforward for arbitrary scheme morphisms, as used by the unit."
+   },
+   {
+    "node": "def-sfb-finite-upper-lower-star-adjunction",
+    "why": "Supplies the generic adjunction and its unit for the blueprint calculation; the coefficient-change unit does not construct this adjunction."
+   },
+   {
+    "node": "def-sfb-pullback-from-point-comp-iso",
+    "why": "Supplies the natural comparison whose component defines alpha; naturality is expanded here to realize the unit pullback square."
+   },
+   {
+    "node": "def-sfb-coefficient-map",
+    "why": "Supplies the ring-specialization definition a_T=p_T^*a explicitly invoked by the unit."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-morphisms",
+    "why": "Supplies the alpha-component and eta-mate definitions explicitly invoked by the unit."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point-comp",
+    "why": "Identifies the ring-level comparison with the same underlying inverse-composition construction; it is a definition check, not an alternative coefficient-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-1e2588e93",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-1e2588e93 (reviewer sub-agent of L); spot-checked: Reviewed item, route, all cited statements and sources, exact master lemma, hypotheses, coefficient category, comparison direction, edge cases, duplicate audit, and searches. No new nodes or mathematical faults; review.md records the checks."
+ }
 }
