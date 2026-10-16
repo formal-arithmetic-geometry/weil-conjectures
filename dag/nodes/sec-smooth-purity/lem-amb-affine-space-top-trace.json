@@ -23,7 +23,8 @@
   "def-amb-p1-trace",
   "lem-amb-etale-compact-comparisons",
   "def-weil-pbc-composite-adjunction",
-  "thm-cbc-finite-torsion"
+  "thm-cbc-finite-torsion",
+  "def-amb-affine-trace-tower"
  ],
  "proof": [
   {
@@ -446,5 +447,43 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-8d67c8610 (reviewer sub-agent of L); spot-checked: Read the complete item, all nine proof steps, unit/chapter route, every cited node statement, and cited Stacks passages. Verified hypotheses, ordinary finite-etale coefficients, projective-line trace normalization, compactifications, bounded-below scopes, tower induction, canonical base-change morphism, edge cases, searches, and duplicate/cycle risks. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1af793b28",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) def-amb-p1-trace (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "declaration": "AlgebraicGeometry.Etale.exists_affineSpaceTopTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLineLeft",
+   "AlgebraicGeometry.Etale.affineTraceLineRight",
+   "AlgebraicGeometry.Etale.affineTraceLineAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceLeft",
+   "AlgebraicGeometry.Etale.affineTraceRight",
+   "AlgebraicGeometry.Etale.affineTraceAdjunction",
+   "AlgebraicGeometry.Etale.affineTraceCounit",
+   "AlgebraicGeometry.Etale.affineTraceLeftPlus",
+   "AlgebraicGeometry.Etale.affineTraceCompactSupportComparison",
+   "AlgebraicGeometry.Etale.affineTracePlusCompatibility",
+   "AlgebraicGeometry.Etale.affineTraceLineExchange",
+   "AlgebraicGeometry.Etale.affineTraceExchange",
+   "AlgebraicGeometry.Etale.affineTraceOpenPullbackSquare",
+   "AlgebraicGeometry.Etale.affineTraceLineRightBaseChange",
+   "AlgebraicGeometry.Etale.affineTraceRightBaseChangeStep",
+   "AlgebraicGeometry.Etale.affineTraceRightBaseChange",
+   "AlgebraicGeometry.Etale.exists_affineSpaceTopTrace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpaceTopTrace.lean",
+  "statement": "theorem exists_affineSpaceTopTrace (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) : ∃ (t : OrdinaryFiniteTwistTransport A N hA) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))), OrdinaryFiniteP1Datum A N hA t T hT), OrdinaryFiniteP1BaseChange A N hA t D ∧ ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ), Nonempty (affineTraceRight A N hA S d ≅ ordinaryFinitePullback A (affineTraceProjection S d) ⋙ derivedTensorRight (ModuleCat.{u + 1} A) (affineTraceTower S d) ((_root_.DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateSheaf A N (affineTraceTower S d) hA (d : ℤ))) ⋙ shiftFunctor _ (2 * (d : ℤ))) ∧ _root_.DerivedCategory.TStructure.t.plus ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ∧ IsIso (affineTraceCounit A N hA t D S hS d) ∧ ∀ (S' : Scheme.{u}) [IsNoetherian S'] (g : S' ⟶ S), affineTraceExchange A g d ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫ (affineTraceLeft A S' d).map ((affineTraceRightBaseChange A N hA t g hS d (ordinaryFiniteUnit A S)).hom ≫ (affineTraceRight A N hA S' d).map (ordinaryFiniteUnitPullback A g).hom) ≫ affineTraceCounit A N hA t D S' (affineTracePullbackInvertible N g hS) d = (ordinaryFinitePullback A g).map (affineTraceCounit A N hA t D S hS d) ≫ (ordinaryFiniteUnitPullback A g).hom",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The affine d-space is represented by its coordinate tower, with identity as the zeroth stage. Both adjunctions and exchanges are literal composites. The existing normalized projective-line datum determines the trace; no independent map or orientation is chosen. The canonical D+ comparison and its ambient restriction compatibility are real constructions."
  }
 }

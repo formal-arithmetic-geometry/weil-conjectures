@@ -1,0 +1,144 @@
+{
+ "id": "def-amb-affine-trace-tower",
+ "kind": "definition",
+ "title": "Coordinate tower and standard charts for the affine-space trace",
+ "status": "split",
+ "statement": "For a scheme $S$ [def-pc-scheme], define $X_0(S)=S$ and $X_{d+1}(S)=\\mathbf A^1_{X_d(S)}$ [def-sbc-affine-space]. Set $p_0=1_S$ and $p_{d+1}=p_d\\circ u_d$, where $u_d$ is the affine-line projection. For $g:S^\\prime\\to S$ define $g_0=g$ and $g_{d+1}=\\mathbf A^1(g_d)$. The canonical coordinate morphism identifies this tower with the recorded affine $d$-space. Its affine restriction over $\\operatorname{Spec}B$ has coordinate algebra $B[t_1,\\ldots,t_d]$. Each $p_d$ is separated [def-weil-proper-morphism] and finite type [def-weil-finite-type-morphism]; if $S$ is Noetherian then every $X_d(S)$ is Noetherian. For each $T$ use the standard affine chart $j_T:\\mathbf A^1_T\\hookrightarrow\\mathbf P^1_T$ and projection $q_T$ [def-nagata-projective-space-base-change] as a compactification [def-weil-compactifications-refinements] of the line projection, with $q_Tj_T=u_T$. For every $g:T^\\prime\\to T$, the square of $j_T,j_{T^\\prime}$ with the coordinatewise affine and projective base-change maps is Cartesian. If an integer $N$ is invertible on $S$, its images are invertible after arbitrary change of base, on every coordinate stage, and on every projective-line compactification.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Steps 5(b) and 6: standard affine-line compactification and coordinate tower"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine space compactly supported trace etale derived adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coordinate tower of affine lines standard projective line chart base change",
+   "results": "8 hits: WeierstrassCurve.Projective.Point.toAffineAddEquiv, WeierstrassCurve.Projective.Point.toAffine_of_equiv, WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply, WeierstrassCurve.Projective.toAffine, WeierstrassCurve.Projective.Point.toAffine_smul, WeierstrassCurve.Projective.Point.toAffineAddEquiv_symm_apply, AlgebraicGeometry.AffineSpace.map_appTop_coord, WeierstrassCurve.Projective.Point.toAffineLift",
+   "date": "2026-10-16",
+   "verdict": "No complete coordinate-tower/chart-square interface; existing affine-space and projective-line definitions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "AffineSpace.map, AffineSpace",
+   "results": "0 hits: ; loogle: unknown identifier 'AffineSpace.map'",
+   "date": "2026-10-16",
+   "verdict": "Invalid unqualified-name query; not evidence of absence. Superseded by the qualified AlgebraicGeometry.AffineSpace.map search below."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*tower|tower.*affine|affine.*trace",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No complete coordinate-tower/chart-square interface; existing affine-space and projective-line definitions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate tower|affine.line.*tower|tower of affine; upstream and lean/Sheaf affineTraceTower|affine.*trace",
+   "results": "The DAG mentions the tower only in the present trace and its downstream purity nodes. Upstream gives individual AffineSpace maps, ProjectiveLine.affineChart and its over equation. No affineTraceTower declaration or chart/map pullback theorem. The side library has no affine-space trace or tower construction.",
+   "date": "2026-10-16",
+   "verdict": "No duplicate notion: this node specifies the coordinate tower and chart interface used by the existing item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace.map",
+   "results": "12 hits: AlgebraicGeometry.AffineSpace.map, map_id, functor_obj_map, map_comp, map_reindex, isPullback_map, map_toSpecMvPoly, map_over, and reassociated map lemmas.",
+   "date": "2026-10-16",
+   "verdict": "The exact existing single-stage maps and Cartesian projection square are reused. No ordered iterated affine-line tower or projective-chart square is supplied by these declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterating affine line bundles gives affine n space with ordered polynomial coordinates and standard projective charts",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.reindex, instIsAffine, coord, functor_obj_obj, AffineSpace, functor, toSpecMvPoly, isoOfIsAffine.",
+   "date": "2026-10-16",
+   "verdict": "Existing affine-space components are reused; none states the ordered tower and chart-square interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-affine-space-top-trace",
+  "date": "2026-10-16",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-space-top-trace",
+   "place": "Proof paragraphs 1 and 3: coordinatewise standard compactifications and change of base",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceTower",
+  "declaration": "AlgebraicGeometry.affineTraceTower",
+  "declarations": [
+   "AlgebraicGeometry.affineTraceTower",
+   "AlgebraicGeometry.affineTraceProjection",
+   "AlgebraicGeometry.affineTraceMap",
+   "AlgebraicGeometry.affineTraceCoordinate",
+   "AlgebraicGeometry.affineTraceToAffineSpace",
+   "AlgebraicGeometry.affineTraceToAffineSpace_isIso",
+   "AlgebraicGeometry.affineTraceAffineSpaceIso",
+   "AlgebraicGeometry.affineTraceNoetherian",
+   "AlgebraicGeometry.affineTraceLineCompactification",
+   "AlgebraicGeometry.affineTraceChart_isPullback",
+   "AlgebraicGeometry.affineTraceProjection_properties",
+   "AlgebraicGeometry.affineTraceProjection_isSeparated",
+   "AlgebraicGeometry.affineTraceProjection_locallyOfFiniteType",
+   "AlgebraicGeometry.affineTraceProjection_quasiCompact",
+   "AlgebraicGeometry.affineTraceInvertible",
+   "AlgebraicGeometry.affineTracePullbackInvertible",
+   "AlgebraicGeometry.affineTraceProjectiveInvertible"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceTower.lean",
+  "statement": "def affineTraceTower (S : Scheme.{u}) : ℕ → Scheme.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1af793b28",
+  "group": "Q24",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1af793b28",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) def-amb-p1-trace (--revert-nodes; kept as on newtargets-dag)"
+ }
+}

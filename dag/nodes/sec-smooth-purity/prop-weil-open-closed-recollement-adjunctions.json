@@ -307,27 +307,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-f332f240a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, and cited Stacks sources. Verified hypotheses, coefficient/base-change data, six proof steps, derived adjunction and counit computations, edge cases, searches, and delivery-error checks. Wrote review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.OpenClosedRecollementAdjunctions",
-  "declaration": "WeilConjectures.openClosedRecollement_adjunctions",
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryDerivedOpenClosedAdjunctions",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleOpenClosedAdjunctions",
   "declarations": [
-   "WeilConjectures.openClosedCoefficient_finite",
-   "WeilConjectures.openClosedCoefficientMap_isIso",
-   "WeilConjectures.openClosedDerivedPullback",
-   "WeilConjectures.openClosedRecollement_adjunctions"
+   "AlgebraicGeometry.ProEtale.proEtaleOpenClosedAdjunctions",
+   "AlgebraicGeometry.Etale.ordinaryDerivedOpenClosedAdjunctions",
+   "AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction",
+   "AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction"
   ],
-  "file": "lean/Sheaf/Paper/OpenClosedRecollementAdjunctions.lean",
-  "statement": "theorem openClosedRecollement_adjunctions (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) {X U Z : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)] [∀ x : U, Invertible (l : U.residueField x)] [∀ x : Z, Invertible (l : Z.residueField x)] (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (_hU : Set.range j = (Set.range i)ᶜ) : ∃ (aj : (sfIntrinsicExtensionByZero j (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory ⊣ openClosedDerivedPullback l E n j) (ai : openClosedDerivedPullback l E n i ⊣ proEtaleConstantDerivedDirectImage i (Padic.coefficientExtensionRing l E (n + 1))), IsIso aj.unit ∧ IsIso ai.counit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryDerivedOpenClosedAdjunctions.lean",
+  "statement": "theorem proEtaleOpenClosedAdjunctions (A : Type (u + 1)) [CommRing A] [Finite A] {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (_hij : Set.range i.base = (Set.range j.base)ᶜ) : IsIso (AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).unit ∧ IsIso (AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).counit",
   "branch": "newtargets-dag",
-  "by": "N8",
+  "by": "Q24",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": "Lean-only interface repair for this ordinary-etale arbitrary-finite-ring consumer. The current recorded WeilConjectures.openClosedRecollement_adjunctions in Sheaf.Paper.OpenClosedRecollementAdjunctions was read after its concurrent landing: it specializes to Padic.coefficientExtensionRing l E (n + 1), requires a prime l and a finite-dimensional p-adic field E with residue-field invertibility assumptions, and uses pro-etale ring-sheaf modules. It cannot be instantiated for the arbitrary finite commutative A of this item (including mixed-characteristic product rings). This module supplies the ordinary-etale fixed-scalar helper needed by the item, together with the pro-etale fixed-scalar open-unit and closed-counit statement required by the dependency generic finite-constant-coefficient assertion. Both use existing canonical adjunctions; no additional coefficient or residue-characteristic hypothesis is imposed. The earlier sandbox record had only the ordinary-etale helper, which is why the pro-etale clause was supplied in the prior reading."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f7af7f9a2",
-  "group": "N8",
+  "reviewer": "NT-stage2-Codex-1af793b28",
+  "group": "Q24",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable source, all statement dependencies, exact constructions, hypotheses, conclusions, universes, edge cases, docstrings, and report sections. Statement field matches verbatim. scompile.py passed sandbox and library-path checks cleanly. No findings; branch unchanged."
+  "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) def-amb-p1-trace (--revert-nodes; kept as on newtargets-dag)"
  }
 }
