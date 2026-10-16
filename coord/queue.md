@@ -1,6 +1,6 @@
 # Work queue
 
-16 items; claim with `tools/claim.py next <group> [--stage N]`.
+15 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,13 +8,12 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (16)
+## Stage 3: modules to prove (15)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis` | 4 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 1 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteConstructibleEncoding` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteLocalSubmodules` | 8 | 1 | proof |
