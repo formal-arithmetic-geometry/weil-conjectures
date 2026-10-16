@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-compact-support-direct-image-triangulated",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Triangulatedness of the finite-level compact-support direct image",
- "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}$. For every object $c\\in\\operatorname{Comp}(f)$ of the\ncompactification category [def-weil-compactifications-refinements], the\nfunctor\n\n$$\n Rf_{!,n}=Rf_{!,n}^{c}:\n D(X_{\\mathrm{proet}},A_{E,n})\\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n})\n$$\n\nof [def-compact-support-direct-image-detailed] is a triangulated functor: it\npreserves shifts and carries distinguished triangles to distinguished\ntriangles.",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}$ [def-weil-l-adic-coefficient-extension]. For every object $c\\in\\operatorname{Comp}(f)$ of the\ncompactification category [def-weil-compactifications-refinements], the\nfunctor\n\n$$\n Rf_{!,n}=Rf_{!,n}^{c}:\n D(X_{\\mathrm{proet}},A_{E,n})\\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n})\n$$\n\nof [def-compact-support-direct-image-detailed] is a triangulated functor [def-weil-triangulated-category]: it\npreserves shifts and carries distinguished triangles to distinguished\ntriangles.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
   "place": "node lem-compact-support-direct-image-triangulated, order 1493"
@@ -15,42 +15,191 @@
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
   "def-weil-compactifications-refinements",
-  "def-compact-support-direct-image-detailed"
+  "def-compact-support-direct-image-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-triangulated-category"
  ],
  "proof": [
   {
-   "text": "Write $c=(j,\\bar f)$, so that $j$ is an open immersion\n[def-weil-scheme-morphism-properties], $\\bar f$ is proper, and, by\n[def-weil-compact-support-candidate], the candidate attached to $c$ in the\ncompactification category [def-weil-compactifications-refinements] is\n$Rf_{!,n}^{c}=R\\bar f_{*,n}\\,j_!$. The extension-by-zero functor\n[def-weil-extension-by-zero] $j_!$ is exact by\n[lem-weil-extension-by-zero-exact], and the derived direct image\n[def-weil-derived-direct-image] $R\\bar f_{*,n}$ is computed by a K-injective\nresolution, hence carries distinguished triangles of $D(\\overline\nX_{\\mathrm{proet}},A_{E,n})$ to distinguished triangles of\n$D(Y_{\\mathrm{proet}},A_{E,n})$. The composite $Rf_{!,n}=Rf_{!,n}^{c}$ of\n[def-compact-support-direct-image-detailed] therefore preserves shifts and\ndistinguished triangles. The finite-torsion coefficients of\n[def-weil-finite-torsion-constructibility] enter only through the ambient\ncategories, so the argument applies verbatim to every object\n$c\\in\\operatorname{Comp}(f)$.",
+   "text": "Fix an arbitrary compactification $c=(j,p)$, with $j:X\\hookrightarrow\\overline X$ open and $p:\\overline X\\to Y$ proper. By [def-weil-compact-support-candidate], the candidate is the composite $Rf_{!,n}^c=Rp_{*,n}\\circ j_!$. For $T=X,\\overline X,Y$, write $\\mathcal A_T=\\Sh(T_{\\mathrm{proet}},A)$ for modules over the constant sheaf of rings $A_T$, and $D_T=D(\\mathcal A_T)$. These are precisely the abelian categories and their unbounded derived categories specified by [def-weil-pbc-proetale-site]; take the small skeleton there inside its larger universe. In particular, the source category of the ringed-site resolution theorem used below is small in the working universe.",
    "uses": [
-    "def-weil-scheme-morphism-properties",
     "def-weil-compact-support-candidate",
-    "def-weil-compactifications-refinements",
-    "def-weil-extension-by-zero",
-    "lem-weil-extension-by-zero-exact",
-    "def-weil-derived-direct-image",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-finite-torsion-constructibility"
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
+    "place": "Proof, first sentence: write the compactification and the composite; size convention made explicit from def-weil-pbc-proetale-site"
+   }
+  },
+  {
+   "text": "The coefficient ring $A=A_{E,n}$ is a finite commutative ring by clause 4 of [def-weil-l-adic-coefficient-extension]. The sheaf functor $j_!:\\mathcal A_X\\to\\mathcal A_{\\overline X}$ is exact by [lem-weil-extension-by-zero-exact], whose statement explicitly includes $A_{E,n}$. Apply [lem-sf-exact-functor-derived-triangulated] to this exact functor between the abelian categories of step 1. The termwise functor $J=j_!:D_X\\to D_{\\overline X}$ is therefore triangulated, with natural shift isomorphisms $\\varphi_K:J(K[1])\\xrightarrow{\\sim}J(K)[1]$. This is exactly the termwise factor used in the candidate, rather than a right derived functor of the underived composite.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
+    "place": "Proof, assertion that j_! is exact; expanded using Stacks Tag 015F, derived-lemma-right-derived-exact-functor (Mathlib ExactFunctor.lean:36,80,104)"
+   }
+  },
+  {
+   "text": "Apply [prop-pur-kinjective-resolutions-exist] to each of the small sites from step 1 with its constant ring sheaf $A_T$. The categories $\\mathcal A_T$ are Grothendieck abelian and have K-injective resolutions for all cochain complexes, with no boundedness assumption. The functor $p_*:\\mathcal A_{\\overline X}\\to\\mathcal A_Y$ is additive and left exact by [lem-weil-proetale-module-direct-image-left-exact], applied to the scheme morphism $p$ and the commutative ring $A$. The schemes $Y$ and $\\overline X$ both map to $\\operatorname{Spec}K_0$ (for $\\overline X$, compose $p$ with the structure morphism of $Y$). The element $\\ell\\in K_0^\\times$ has inverse $\\ell^{-1}$, and their images in every structure sheaf still multiply to $1$; hence $\\ell$ is invertible on both schemes, as [def-weil-derived-direct-image] requires. By that definition, $P=Rp_{*,n}$ is the finite-level unbounded right derived functor of $p_*$ computed from those K-injectives; its separate integral tower construction is not used here. Now apply [lem-pc-right-derived-functor-triangulated] to $\\mathcal A_{\\overline X},\\mathcal A_Y$ and $p_*$. All of its hypotheses hold: abelian categories, their derived categories, K-injective resolutions, and an additive functor. Thus $P:D_{\\overline X}\\to D_Y$ is triangulated and has natural isomorphisms $\\psi_L:P(L[1])\\xrightarrow{\\sim}P(L)[1]$. No cohomological-dimension bound and no restriction to etale-origin objects is used.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "def-weil-derived-direct-image",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
+    "place": "Proof, assertion that K-injective derived direct image preserves distinguished triangles; expanded using Stacks Tags 079P (injectives-theorem-K-injective-embedding-grothendieck) and 070K (derived-lemma-enough-K-injectives-implies), and the project RightDerivedFunctor/Triangulated.lean:94-99"
+   }
+  },
+  {
+   "text": "For the composite $H=P\\circ J=Rf_{!,n}^c$, equip shifts with $\\chi_K=\\psi_{JK}\\circ P(\\varphi_K):H(K[1])\\xrightarrow{\\sim}H(K)[1]$. This is natural as a composite of natural isomorphisms. More generally, the integer-shift commutations of $J$ and $P$ from steps 2 and 3 give $H(K[m])\\cong H(K)[m]$ for every $m\\in\\mathbf Z$, by first applying $P$ to $J(K[m])\\cong J(K)[m]$ and then using $P(J(K)[m])\\cong P(J(K))[m]$. By [lem-weil-pbc-triangulated-functor-composite], for every distinguished triangle $K\\xrightarrow{u}L\\xrightarrow{v}M\\xrightarrow{w}K[1]$ in $D_X$, the triangle $HK\\xrightarrow{Hu}HL\\xrightarrow{Hv}HM\\xrightarrow{\\chi_K\\circ H(w)}(HK)[1]$ is distinguished in $D_Y$. Concretely, the last arrow after applying $J$ is $\\varphi_K\\circ J(w)$. Applying $P$ and its shift map gives $\\psi_{JK}\\circ P(\\varphi_K\\circ J(w))$. Functoriality of $P$ rewrites this as $\\psi_{JK}\\circ P(\\varphi_K)\\circ PJ(w)=\\chi_K\\circ H(w)$, the last arrow displayed above. Hence $H$ preserves shifts and distinguished triangles. The notation $Rf_{!,n}=Rf_{!,n}^c$ in [def-compact-support-direct-image-detailed] denotes this very composite. Since the compactification in step 1 was arbitrary, this proves the assertion for every $c$, without invoking a comparison between two compactifications.",
+   "uses": [
+    "lem-weil-pbc-triangulated-functor-composite",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
+    "place": "Proof, final conclusion for the composite; Stacks Tag 014Y, derived-lemma-composition-exact, with its composite shift isomorphism written out"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-scheme-morphism-properties",
   "def-weil-compact-support-candidate",
-  "def-weil-compactifications-refinements",
-  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
   "lem-weil-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-module-direct-image-left-exact",
   "def-weil-derived-direct-image",
-  "def-compact-support-direct-image-detailed",
-  "def-weil-finite-torsion-constructibility"
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "def-compact-support-direct-image-detailed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-compact-support-direct-image-triangulated.md",
-  "place": "## Proof"
+  "place": "Expansion of the imported Proof paragraph by Q19, using existing DAG statements, project source and online Stacks Tags 015F, 079P, 070K, 014Y; archived literature files unavailable on this machine (WANTED in report)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite constant coefficient sheaves on pro-etale sites, the compact support derived direct image Rf! = Rp* j! is a triangulated functor on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete item: generic exact-functor or composite results do not supply the pro-etale compact-support factors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.comp",
+   "results": "12 hits: CategoryTheory.Functor.IsTriangulated.instComp, CategoryTheory.Functor.isTriangulated_of_precomp, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.Functor.isTriangulated_of_precomp_iso, CategoryTheory.Triangulated.Octahedron.map, CategoryTheory.Triangulated.Octahedron.map_m₁, CategoryTheory.Triangulated.Octahedron.map_m₃, CategoryTheory.ObjectProperty.inverseImage_trW_isInverted",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete item: generic exact-functor or composite results do not supply the pro-etale compact-support factors"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compact.support|extension.by.zero",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete item: generic exact-functor or composite results do not supply the pro-etale compact-support factors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compactly supported direct image of sheaves is a triangulated functor",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|IsTriangulated",
+   "results": "19 hits: Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete item: generic exact-functor or composite results do not supply the pro-etale compact-support factors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived pushforward on the unbounded derived category is exact for triangles, and exact extension by zero induces a functor preserving distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated",
+   "date": "2026-10-15",
+   "verdict": "no match for the complete item: generic exact-functor or composite results do not supply the pro-etale compact-support factors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on complexes localized at quasi-isomorphisms commutes with translation and sends cone triangles to distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.isHomological_of_localization, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-15",
+   "verdict": "second reading: generic exact-derived declarations confirm the existing leaf; no declaration for the complete pro-etale compact-support assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|lowerShriek|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "second reading: generic exact-derived declarations confirm the existing leaf; no declaration for the complete pro-etale compact-support assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-15",
+   "verdict": "second reading: generic exact-derived declarations confirm the existing leaf; no declaration for the complete pro-etale compact-support assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*[Tt]riangulated|[Tt]riangulated.*compactification",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "second reading: existing generic exact-derived and composition tools are confirmed; no complete compact-support assertion found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian categories induces an exact functor on the localization of unbounded cochain complexes",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-15",
+   "verdict": "second reading: existing generic exact-derived and composition tools are confirmed; no complete compact-support assertion found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"comp\"",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated.instComp, CategoryTheory.Functor.isTriangulated_of_precomp, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.isTriangulated_of_precomp_iso, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Adjunction.IsTriangulated.comp",
+   "date": "2026-10-15",
+   "verdict": "second reading: existing generic exact-derived and composition tools are confirmed; no complete compact-support assertion found"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification|extensionByZero",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: generic exact-derived functors only; the full finite-constant-coefficient pro-etale compact-support assertion is not stated by these declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsTriangulated\"",
+   "results": "1 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: generic exact-derived functors only; the full finite-constant-coefficient pro-etale compact-support assertion is not stated by these declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived functor of an open immersion extension functor composed with a derived pushforward preserves distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: generic exact-derived functors only; the full finite-constant-coefficient pro-etale compact-support assertion is not stated by these declarations."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +228,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-compact-support-direct-image-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded the imported paragraph into four steps: the fixed-compactification/category setup, exact termwise extension by zero, unbounded K-injective right derived pushforward, and composition with its shift and third triangle arrow. Reused existing generic theorems; no new nodes. Repair of returned head 0c9ff83b4d (2026-10-16): reread all eleven current cited statements and all six statement definitions, checked every verbatim quote and the coefficient, site-size and unboundedness hypotheses, and confirmed all eleven statement fingerprints are unchanged from the saved review. Expanded step 4 to derive the last arrow explicitly using functoriality of P. Replaced stale return/second-reader approval text with the review of this exact merge-lock return, preserving the actual Mathlib search records. Required delivery packaging reconstructs the commit on current origin/newtargets-dag; author runs --no-push only. Fresh second reading remains required.",
+  "blueprint": "Realizes all sentences of the imported proof of lem-compact-support-direct-image-triangulated: c=(j,p), exact j_!, K-injective Rp_*, and triangulated composite, in unit sk-def-sf-operations clause (iv). Chapter/unit route retained; no unit record edit because this is not its key node.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic theorem for module sheaves on an arbitrary small ringed site supplies unbounded K-injective resolutions; the unit has no replacement resolution-existence statement."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulatedness theorem for any additive functor computed on K-injectives, applied directly to constant-ring pro-etale module categories; not a replacement for compact-support construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-18ca8533e",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-18ca8533e (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, master sources and unit/chapter route. All four steps correctly establish unbounded triangulatedness with finite constant coefficients; no condensed-coefficient or base-change comparison is assumed. No new nodes or repairs. Accepted both declared generic tool uses. Detailed checks are in review.md."
+ }
 }
