@@ -154,5 +154,30 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-7759468d4 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, every cited node and source, all proof steps, hypotheses, naturality, cone signs, coefficient category, edge cases, and Mathlib searches. No mathematical or DAG faults found; review.md records the checks and accepted tool uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-93c19ee44",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, constructions, universes, edge cases, report sections, and pro-etale/Roos declarations checked; scompile.py sandbox and library compiles passed with no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.milnor_sequence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernel",
+   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernelMap",
+   "AlgebraicGeometry.Scheme.ProEt.milnorCohomologyTower",
+   "AlgebraicGeometry.Scheme.ProEt.milnorSingleTower",
+   "AlgebraicGeometry.Scheme.ProEt.milnor_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleMilnorSequence.lean",
+  "statement": "theorem milnor_sequence (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{max u (t + 1)}) : ∃ (e₀ : ∀ M : ℕᵒᵖ ⥤ (ringedSiteModules.{max u (t + 1)} R), (WeilConjectures.integralOperationsRoos (milnorSingleTower M)).homology 0 ≅ limit M) (e₁ : ∀ M : ℕᵒᵖ ⥤ (ringedSiteModules.{max u (t + 1)} R), (WeilConjectures.integralOperationsRoos (milnorSingleTower M)).homology 1 ≅ milnorTowerCokernel M), (∀ (M : ℕᵒᵖ ⥤ (ringedSiteModules.{max u (t + 1)} R)) (p : ℤ), p ≠ 0 → p ≠ 1 → IsZero ((WeilConjectures.integralOperationsRoos (milnorSingleTower M)).homology p)) ∧ (∀ (M N : ℕᵒᵖ ⥤ (ringedSiteModules.{max u (t + 1)} R)) (f : M ⟶ N), HomologicalComplex.homologyMap (WeilConjectures.integralOperationsRoosMap (Functor.whiskerRight f (HomologicalComplex.single (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) 0))) 0 ≫ (e₀ N).hom = (e₀ M).hom ≫ limMap f ∧ HomologicalComplex.homologyMap (WeilConjectures.integralOperationsRoosMap (Functor.whiskerRight f (HomologicalComplex.single (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) 0))) 1 ≫ (e₁ N).hom = (e₁ M).hom ≫ milnorTowerCokernelMap f) ∧ ∀ q : ℤ, ∃ (a : ∀ K : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ, milnorTowerCokernel (milnorCohomologyTower K (q - 1)) ⟶ (WeilConjectures.integralOperationsRoos K).homology q) (b : ∀ K : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ, (WeilConjectures.integralOperationsRoos K).homology q ⟶ limit (milnorCohomologyTower K q)), (∀ K : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ, ∃ h : a K ≫ b K = 0, (ShortComplex.mk (a K) (b K) h).ShortExact) ∧ (∀ (K L : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) (f : K ⟶ L), milnorTowerCokernelMap (Functor.whiskerRight f (HomologicalComplex.homologyFunctor (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) (q - 1))) ≫ a L = a K ≫ HomologicalComplex.homologyMap (WeilConjectures.integralOperationsRoosMap f) q ∧ HomologicalComplex.homologyMap (WeilConjectures.integralOperationsRoosMap f) q ≫ b L = b K ≫ limMap (Functor.whiskerRight f (HomologicalComplex.homologyFunctor (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) q))) ∧ ∀ K : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ, ∃ h : (e₁ (milnorCohomologyTower K (q - 1))).hom ≫ a K ≫ b K = 0, (ShortComplex.mk ((e₁ (milnorCohomologyTower K (q - 1))).hom ≫ a K) (b K) h).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
