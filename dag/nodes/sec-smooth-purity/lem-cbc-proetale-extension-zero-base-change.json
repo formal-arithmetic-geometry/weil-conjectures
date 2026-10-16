@@ -253,27 +253,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-a93ce76e4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source passages. All five steps preserve hypotheses, coefficient typing, canonical-map orientation, and unbounded derived descent. No new nodes, duplicates, cycles, or repairs found. Accepted all five proposed tool_uses; concrete checks are recorded in review.md."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.BaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso",
+  "module": "Sheaf.AlgebraicGeometry.SfFiniteOpenExtensionBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.sfFixedDerivedOpenExtensionBaseChangeIso",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekBaseChangeMap",
-   "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap",
-   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekBaseChangeIso",
-   "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso"
+   "AlgebraicGeometry.ProEtale.sfFixedPullbackSquareIso",
+   "AlgebraicGeometry.ProEtale.sfFixedDerivedBaseChange",
+   "AlgebraicGeometry.ProEtale.sfFixedOpenExtensionBaseChange",
+   "AlgebraicGeometry.ProEtale.sfFixedOpenExtensionBaseChange_isIso",
+   "AlgebraicGeometry.ProEtale.sfFixedDerivedOpenExtensionBaseChangeIso"
   ],
-  "statement": "def derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' j g'') :\n    D((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ D((g'')^*[A])",
-  "branch": "slopmaster2",
-  "by": "NG",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "§1(B): The dependency has no recorded Lean declaration although the published upstream module gives this exact construction and theorem. Its underlying map is the conjugate of weakly-etale right-adjoint base change. The inverse of the displayed isomorphism is the node map g inverse-image j shriek to j-prime shriek gU inverse-image. Derived passage is degreewise because the four functors are exact, with no boundedness or constructibility assumption."
+  "file": "lean/Sheaf/AlgebraicGeometry/SfFiniteOpenExtensionBaseChange.lean",
+  "statement": "def sfFixedDerivedOpenExtensionBaseChangeIso (A : Type u) [CommRing A] [Finite A] {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g) : (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙ sfFixedDerivedPullback A g ≅ sfFixedDerivedPullback A gU ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j').mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): the recorded upstream module imports the legacy pro-etale definitions, which duplicate names from the recorded intrinsic finite-coefficient modules. This module states the same canonical extension-by-zero exchange in the compatible finite-coefficient interface. Its inverse-image and direct-image squares are actual mates, its underived extension exchange is their conjugate, and its degreewise derived isomorphism is in the node direction. Returned compilation repair: directly imports SfIntrinsicRealizationTransport for sfFixedDerivedPullback and the finite-coefficient UpperLowerStar.Iso module for upperStarCompIso; no exceptional-functor import is needed."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-760802677",
-  "group": "NG",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, edge cases, docstrings, report sections, and per-file scompile evidence; no substantive or mechanical findings."
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  }
 }

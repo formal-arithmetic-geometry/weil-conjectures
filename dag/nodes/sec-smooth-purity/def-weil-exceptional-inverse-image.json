@@ -59,29 +59,36 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.ConstructibleExceptionalInverseImage",
-  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicExceptionalInverseImage",
-  "file": "lean/Sheaf/Paper/ConstructibleExceptionalInverseImage.lean",
-  "statement": "abbrev sfIntrinsicExceptionalInverseImage",
+  "module": "Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.sfFiniteExceptional",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfPositiveCoefficient_finite",
+   "AlgebraicGeometry.ProEtale.sfFixedCompactSupport",
+   "AlgebraicGeometry.ProEtale.sfFiniteExceptionalFixed",
+   "AlgebraicGeometry.ProEtale.sfFiniteExceptional",
+   "AlgebraicGeometry.ProEtale.sfComparisonOpenRestrictionIso",
+   "AlgebraicGeometry.ProEtale.sfDerivedComparisonOpenRestrictionIso",
+   "AlgebraicGeometry.ProEtale.sfToProEtBaseChange_naturality",
+   "AlgebraicGeometry.ProEtale.sfToProEtBaseChangeIso",
+   "AlgebraicGeometry.ProEtale.sfComparisonDirectImageCompIso",
+   "AlgebraicGeometry.ProEtale.sfComparisonPullbackIso",
+   "AlgebraicGeometry.ProEtale.sfDerivedComparisonPullbackIso",
+   "AlgebraicGeometry.ProEtale.sfFiniteExceptionalOpenComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfFiniteExceptionalInverseImage.lean",
+  "statement": "def sfFiniteExceptional (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A",
   "branch": "newtargets-dag",
-  "by": "Q42",
+  "by": "NY",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B), intrinsic finite-coefficient interface. The current recorded Sheaf.Paper.FiniteTypeExceptionalInverseImage returns fixed-scalar sheaves and imports the legacy ProEtale.UpperLowerStar.Defs. The intrinsic constructible-interval and Tor predicates use modules over the constant ring sheaf and the finite-coefficient API, whose UpperLowerStar.Defs has duplicate declaration names. This module spells out the identical canonical composite nu_X^* f^times Rnu_Y,* in the intrinsic presentation, conjugated by the specified finiteCoefficientIntrinsicRealization and its asEquivalence inverse. It imports the comparison module directly, without importing extension by zero. exceptionalInverseImage obtains Nagata compactification and quotient finiteness from the source hypotheses. No alternative arbitrary equivalence, ambient pro-etale adjoint, or preservation assumption is introduced. Higher coefficient stages are not consumed by this theorem.",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.sfIntrinsicExceptionalInverseImage",
-   "WeilConjectures.PurityFiniteSetting.ringFinite",
-   "WeilConjectures.PurityFiniteSetting.coefficientFinite",
-   "WeilConjectures.PurityFiniteSetting.exceptionalInverseImage"
-  ],
-  "fixed_by": "NT-stage2-Codex-3d2a3c907"
+  "note": "§1(B): the current published Scheme.finiteExceptionalInverseImage supplies the intrinsic finite-level transport over a field but fixes compactifiability through Nagata, and supplies no comparison on a specified compactification and its specified base change. The present consumer needs those coordinates for the canonical exceptional mate. This module gives the same ν_X^* f× Rν_Y* composite for a specified Compactification f, in compatible fixed-scalar coordinates and its canonical intrinsic realization, and constructs the comparison-site paste of the canonical etale exceptional mate. It asserts no ambient pro-etale adjunction. Only finite-level coefficients, D+ and the bounded constructible scope are consumed here; higher coefficient transitions are not replaced. The exact fixed-scalar derived-pullback abbreviation is owned by the inverse-image dependency module and imported from there."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-3d2a3c907",
-  "group": "Q42",
-  "result": "fix",
-  "note": "Wrote review.md and complete replacements under fixes/. Statements, dependencies, sources, universes and edge cases checked. Reused the published intrinsic exceptional functor through transparent aliases; preservation statement unchanged. All four original and corrected modules passed scompile.py without diagnostics. Branch head unchanged."
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  }
 }

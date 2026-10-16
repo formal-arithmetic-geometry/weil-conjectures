@@ -70,21 +70,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-fullcd-etale-origin",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension",
-  "declaration": "AlgebraicGeometry.ProEtale.HasCohomologicalDimensionLEOnEtaleOrigin",
-  "statement": "def HasCohomologicalDimensionLEOnEtaleOrigin {X Y : Scheme.{u}} (p : X ⟶ Y) (c : ℕ) : Prop",
-  "branch": "slopmaster2",
-  "by": "NL",
+  "module": "Sheaf.AlgebraicGeometry.SfClassFullCohomologicalDimension",
+  "declaration": "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfClassFullCohomologicalDimension.lean",
+  "statement": "def sfClassFullCohomologicalDimension {X Y : Scheme.{u}} (p : X ⟶ Y) (A : Type u) [CommRing A] (c : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NY",
   "date": "2026-10-16",
-  "existing": true,
-  "note": "Unrecorded prerequisite. The published upstream definition has exactly the two displayed vanishing clauses: etale-origin sheaves on the original source and their pullbacks under every small-pro-etale base change. It is parametrized by the coefficient category, specialized here to modules over A_E,n. It does not assert the false identification of all etale-origin sheaves with constructible sheaves in the explanatory sentence; see the worker report."
+  "existing": false,
+  "note": "§1(B): the now-published HasCohomologicalDimensionLEOnEtaleOrigin has the two required vanishing clauses, but its FullCohomologicalDimension module imports legacy pro-etale Derived.Comparison and ExceptionalAdjoint modules, incompatible with the recorded intrinsic finite-coefficient import closure. This module renders those same two clauses using the compatible finite-coefficient operations and canonical chosen pullbacks. It uses the essential-image definition of etale origin, without the false explanatory identification of all such sheaves with constructible sheaves."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-af54e9e3f",
-  "group": "NL",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
   "result": "pass",
-  "note": "Reviewed immutable statements, all six dependencies, sources, canonical normalizations, universes, edge cases, and report. Both files compile cleanly through scompile.py; signatures match node records verbatim. No delivery faults found. Detailed evidence is in review.md."
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  }
 }

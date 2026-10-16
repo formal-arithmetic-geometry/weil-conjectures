@@ -247,49 +247,32 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-dfe87e1f2 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, unit route, and source locations. All five steps and edge cases check; no new nodes or repairs are needed. Generic cross-unit tools are listed for merge recording."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-684e4b6db",
-  "group": "N0",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and recorded per-file scompile evidence checked; no defects found."
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImage",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
+  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleBaseChange",
-   "AlgebraicGeometry.Scheme.proEtaleBaseChange_isContinuous",
-   "AlgebraicGeometry.Scheme.proEtaleBaseChange_preservesFiniteLimits",
-   "AlgebraicGeometry.Scheme.proEtaleBaseChangeCoverPreserving",
-   "AlgebraicGeometry.Scheme.proEtaleSheafDirectImage",
-   "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
-   "AlgebraicGeometry.Scheme.proEtaleSheafAdjunction",
-   "AlgebraicGeometry.Scheme.proEtaleConstantDirectImageMap",
-   "AlgebraicGeometry.Scheme.proEtaleConstantInverseImageMap",
-   "AlgebraicGeometry.Scheme.proEtaleSiteModel",
-   "AlgebraicGeometry.Scheme.proEtaleModelTopology",
-   "AlgebraicGeometry.Scheme.proEtaleModelUp_isContinuous",
-   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange",
-   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange_isContinuous",
-   "AlgebraicGeometry.Scheme.proEtaleModuleToModel",
-   "AlgebraicGeometry.Scheme.proEtaleModuleFromModel",
-   "AlgebraicGeometry.Scheme.proEtaleModelRingUnit",
-   "AlgebraicGeometry.Scheme.proEtaleModuleInverseImage",
-   "AlgebraicGeometry.Scheme.proEtaleInverseImageIndex",
-   "AlgebraicGeometry.Scheme.proEtaleConstantRing",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageMap",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientInverseImageMap",
-   "AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage",
-   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullback",
-   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullbackMap"
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence",
+   "AlgebraicGeometry.Scheme.sfIntrinsicRealizationUnit",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison",
+   "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
+   "AlgebraicGeometry.ProEtale.sfFixedDerivedPullback"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImage.lean",
-  "statement": "abbrev proEtaleSheafInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] : Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfIntrinsicRealizationTransport.lean",
+  "statement": "def sfIntrinsicConstantModuleAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] : sfIntrinsicPullback A f ⊣ proEtaleConstantModuleDirectImage f A",
   "branch": "newtargets-dag",
-  "by": "N0",
-  "date": "2026-10-15",
+  "by": "NY",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B): the existing source imports the legacy pro-etale UpperLowerStar.Defs, which collides with the finite-coefficient interface already imported by the completed-coefficient dependencies. Preserve every definition and statement verbatim, changing only that import to the upstream FiniteCoefficient.UpperLowerStar.Defs with the same canonical operations."
+  "note": "§1(B): proEtaleConstantModulePullback supplies only an object map. Reuse the already published sfIntrinsicPullback and sfIntrinsicDerivedPullback from ProEtaleIntrinsicFiniteOperations; this module adds their actual adjunction to the recorded intrinsic direct image, the specified derived realization equivalence, and direct-image comparisons uniquely normalized on constant-unit sections and K-injective representatives. No inverse-image notion is redefined, and no arbitrary equivalence or natural isomorphism is chosen. The original arbitrary-ring site inverse-image and module constructions remain reexported; the added normalized realization helpers serve only the finite-coefficient consumer. Returned compilation repair: the exact fixed-scalar derived-pullback abbreviation is owned by the inverse-image module and imported directly by the extension-by-zero module."
  }
 }

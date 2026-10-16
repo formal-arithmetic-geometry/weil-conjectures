@@ -230,21 +230,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-f4e4957a6 (reviewer sub-agent of L); spot-checked: Read the full item, all six cited statements and sources, unit/chapter route, and archived target declarations. All three steps respect finite-stage coefficients and restricted adjunction scope; accepted the FullCD tool use. No new nodes or repairs. review.md records concrete checks and the inherited, unused false identification of étale-origin with constructible sheaves."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AmbientAdjointDischarge",
-  "declaration": "AlgebraicGeometry.ProEtale.exists_boundedConstructibleAdjointDischarge",
-  "file": "lean/Sheaf/AlgebraicGeometry/AmbientAdjointDischarge.lean",
-  "statement": "theorem exists_boundedConstructibleAdjointDischarge (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
+  "module": "Sheaf.AlgebraicGeometry.SfConstructibleExceptionalAdjointDischarge",
+  "declaration": "AlgebraicGeometry.ProEtale.sfConstructibleExceptionalAdjointDischarge",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfConstructibleExceptionalAdjointDischarge"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfConstructibleExceptionalAdjointDischarge.lean",
+  "statement": "theorem sfConstructibleExceptionalAdjointDischarge (Dk : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ Dk.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of Dk.k))] [Y.Over (Spec (CommRingCat.of Dk.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of Dk.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of Dk.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of Dk.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of Dk.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of Dk.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : sfClassFullCohomologicalDimension c.g (Padic.coefficientExtensionRing l E (n + 1)) (2 * d) ∧ ∃ eps : ∀ (L : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))) (_hL : DerivedCategory.TStructure.t.plus L), (sfFixedCompactSupport (Padic.coefficientExtensionRing l E (n + 1)) c).obj ((sfFiniteExceptionalFixed (Padic.coefficientExtensionRing l E (n + 1)) c).obj L) ⟶ L, (∀ (L) (hL : DerivedCategory.TStructure.t.plus L) (K) (_hK : (DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X).mapDerivedCategory).essImage K), Function.Bijective (fun a : K ⟶ (sfFiniteExceptionalFixed (Padic.coefficientExtensionRing l E (n + 1)) c).obj L ↦ (sfFixedCompactSupport (Padic.coefficientExtensionRing l E (n + 1)) c).map a ≫ eps L hL)) ∧ ∀ (L L') (hL : DerivedCategory.TStructure.t.plus L) (hL' : DerivedCategory.TStructure.t.plus L') (a : L ⟶ L'), (sfFixedCompactSupport (Padic.coefficientExtensionRing l E (n + 1)) c).map ((sfFiniteExceptionalFixed (Padic.coefficientExtensionRing l E (n + 1)) c).map a) ≫ eps L' hL' = eps L hL ≫ a",
   "branch": "newtargets-dag",
-  "by": "NL",
+  "by": "NY",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": "§1(B): the now-published exists_boundedConstructibleAdjointDischarge restricts its test objects to bounded constructible objects, whereas the node proof specifies every bounded-below etale-origin test object; the item also needs arbitrary degree-zero etale-origin sheaves. Its module imports the legacy pro-etale closure, incompatible with the recorded intrinsic coefficient modules. This replacement states class vanishing and the relative natural Hom bijections for all the specified bounded-below etale-origin tests, using the explicit transported etale functor and no unrestricted ambient datum. The relative counit is propositionally asserted; no canonical map is selected from it."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-af54e9e3f",
-  "group": "NL",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
   "result": "pass",
-  "note": "Reviewed immutable statements, all six dependencies, sources, canonical normalizations, universes, edge cases, and report. Both files compile cleanly through scompile.py; signatures match node records verbatim. No delivery faults found. Detailed evidence is in review.md."
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  }
 }

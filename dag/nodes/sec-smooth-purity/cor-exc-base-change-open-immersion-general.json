@@ -21,7 +21,9 @@
   "def-weil-exceptional-inverse-image",
   "cor-sf-ambient-adjoint-discharge",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-sf-fullcd-class"
  ],
  "proof": [
   {
@@ -405,5 +407,34 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-097ce2e4e (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, master sources and unit/chapter route. Accepted the seven-step argument and coefficient-category distinction; the FullCD existence child remains unsplit. Completed six omitted generic tool-use declarations in the corrected item under fixes/. No mathematical statements changed. Concrete source, hypothesis, mate-orientation, duplicate and edge-case checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.sfAmbientExceptionalOpenBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfIntrinsicOpenExtensionComparison",
+   "AlgebraicGeometry.ProEtale.sfIntrinsicCompactSupportComparison",
+   "AlgebraicGeometry.ProEtale.sfFixedAmbientRightAdjoint",
+   "AlgebraicGeometry.ProEtale.sfFixedAmbientAdjunction",
+   "AlgebraicGeometry.ProEtale.sfFixedCompactSupportExchange",
+   "AlgebraicGeometry.ProEtale.sfAmbientExceptionalOpenComparison",
+   "AlgebraicGeometry.ProEtale.sfAmbientExceptionalOpenBaseChange",
+   "AlgebraicGeometry.ProEtale.sfFiniteExceptionalOpenBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfOpenExceptionalBaseChange.lean",
+  "statement": "theorem sfAmbientExceptionalOpenBaseChange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (S X Y : Scheme.{u}) [X.Over S] [Y.Over S] (_hS : ∀ x : S, IsUnit (l : S.presheaf.stalk x)) [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] (f : X ⟶ Y) [f.IsOver S] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification f) (D : SfAmbientExceptionalRightAdjointDatum (Padic.coefficientExtensionRing l E (n + 1)) f c) {Y' : Scheme.{u}} (g : Y' ⟶ Y) [IsOpenImmersion g] : ∃ c_cd : ℕ, sfFullCohomologicalDimension c.g (Padic.coefficientExtensionRing l E (n + 1)) c_cd ∧ sfFullCohomologicalDimension (c.ofIsPullback (IsPullback.of_hasPullback f g)).g (Padic.coefficientExtensionRing l E (n + 1)) c_cd ∧ ∃ D' : SfAmbientExceptionalRightAdjointDatum (Padic.coefficientExtensionRing l E (n + 1)) (pullback.snd f g) (c.ofIsPullback (IsPullback.of_hasPullback f g)), ∃ hEx : IsIso (sfFixedCompactSupportExchange (Padic.coefficientExtensionRing l E (n + 1)) (IsPullback.of_hasPullback f g) c), IsIso (sfAmbientExceptionalOpenComparison (Padic.coefficientExtensionRing l E (n + 1)) (IsPullback.of_hasPullback f g) c D D' (hEx := hEx))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two main theorem declarations together render the two independent clauses. Positive levels are indexed n+1. The ordinary intrinsic categories are identified by the specified derived realization equivalences, with the supplied ambient adjunction transported through the section-normalized support comparison. The second theorem has no ambient-datum assumption. The canonical fibre-product square is used, covering every chosen Cartesian square by its recorded projection-preserving identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
  }
 }
