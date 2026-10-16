@@ -6,6 +6,8 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapOpenSquareCube
+public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
+public import Sheaf.AlgebraicGeometry.PerfectOverlapRestrictedComposition
 public import Sheaf.AlgebraicGeometry.PerfectOverlapOpenSquareComponents
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositionCube
 
