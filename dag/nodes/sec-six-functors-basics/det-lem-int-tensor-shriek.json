@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-lem-int-tensor-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero and closed direct image preserve $\\Dbc(-,\\mathcal O_E)$",
@@ -18,63 +18,309 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "def-constructible-stratification",
+  "def-weil-triangulated-category",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
  "proof": [
   {
-   "text": "By [sk-prop-integral-criterion], $K\\in\\D(X_{\\mathrm{proét}},\\mathcal O_E)$ lies in\n$\\Dbc(X,\\mathcal O_E)$ if and only if $K$ is derived complete\n([sk-def-pe-derived-completion]) and\n$K/\\pi_E:=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E)_X$ lies in\n$\\Dbc(X,\\mathcal O_E/\\pi_E)$. We verify both conditions.",
+   "text": "Use the coefficient ring $A_X=\\mathcal O_{E,X}$ pulled back from the point. By [sk-prop-sfb-cartesian-coefficients], its inverse image on each subscheme $T$ is $A_T$, and module pullback is the exact inverse image. Every open of the Noetherian topological space $X$ is quasi-compact, also after restricting to an affine open. Thus $j$ and the open complement of $i$ are quasi-compact morphisms. Give the closed complement of $j$ its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme] (2). Apply [lem-weil-pbc-proetale-ringed-open-closed] with this ring sheaf (separately to $j$ and its complement, and to $i$ and its complement). It gives exactness of $j_!$ and $i_*$ and the four restriction identities $j^*j_!\\cong\\mathrm{id}$, $i^*i_*\\cong\\mathrm{id}$, $i^*j_!=0$, $j^*i_*=0$ for a complementary pair. The exact functors act termwise on derived categories and preserve distinguished triangles by [lem-weil-pbc-exact-functor-derived-factorization]. The same reasoning applies on every closed subspace used below: its topology is Noetherian, so its open complements remain quasi-compact.",
    "uses": [
-    "sk-def-pe-derived-completion"
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Exactness and limits paragraph; Stacks 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open), 09BN (lemma-open-immersion)"
+   }
   },
   {
-   "text": "*Exactness and limits.* Since $X$ is Noetherian, $j$ is quasi-compact. By\n[sk-prop-sf-open-closed-triangle] (Stacks, Tags 09BP, 09BM, 09AA), $j_!$ and\n$i_*$ are exact on module sheaves, so they act on complexes termwise without\nderiving, and both preserve products and derived inverse limits of module\ncomplexes ($j_!$ by loc. cit., $i_*$ because it is exact and a right adjoint).\nBoth are $\\mathcal O_E$-linear and the coefficient sheaves are compatible with\npullback, so for $F\\in\\{j_!,i_*\\}$ there is a natural isomorphism\n$F(K\\otimes^{\\mathbf L}(\\mathcal O_E/\\pi_E^n))\\simeq F(K)\\otimes^{\\mathbf L}(\\mathcal O_E/\\pi_E^n)$:\nboth sides are the cone of $\\pi_E^n$ on $F(K)$, because the resolution\n$\\mathcal O_E\\xrightarrow{\\pi_E^n}\\mathcal O_E$ of $\\mathcal O_E/\\pi_E^n$ computes the reduction\nand $F$ is exact.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Derived completeness.* If $K\\to R\\varprojlim_nK\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ is an\nisomorphism, applying $F$ and the two compatibilities of the previous\nparagraph shows that $F(K)\\to R\\varprojlim_nF(K)\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ is an\nisomorphism. So $F$ preserves derived completeness.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Reduction.* $F(K)/\\pi_E\\simeq F(K/\\pi_E)$, so it suffices that $F$ preserves bounded\nconstructible complexes with coefficients $\\mathcal O_E/\\pi_E$. Being exact, $F$\ncommutes with cohomology sheaves, so it preserves boundedness and it suffices\nto treat a constructible sheaf $G$ ([sk-def-sfb-constructible]). If $G$ on $U$\nis constructible for a stratification $(U_a)$ of $U$, then the $U_a$ together\nwith $X\\setminus U$ form a finite stratification of $X$ by locally closed\nsubschemes; $j_!G$ restricts to $G|_{U_a}$ on $U_a$ (as $j^*j_!=\\mathrm{id}$) and to\n$0$ on $X\\setminus U$, so $j_!G$ is constructible. If $G$ on $Z$ is constructible\nfor a stratification $(Z_b)$ of $Z$, then the $Z_b$ (locally closed in $X$)\ntogether with $X\\setminus Z$ stratify $X$; $i_*G$ restricts to $G|_{Z_b}$ on $Z_b$\n(as $i^*i_*=\\mathrm{id}$) and to $0$ on $X\\setminus Z$, so $i_*G$ is constructible.\n\nThis proves (1) for $j_!$ and $i_*$, and hence for the composite $a_!=i_*u_!$.",
+   "text": "The required limit statements hold for module coefficients, not just constant sheaves. For $j_!$, apply [det-sf-open-closed-extension-zero-limits] (2) with $B=A_X$: it preserves products and sequential derived inverse limits. For $i_*$, use the module adjunction $i^*\\dashv i_*$ of [sk-def-sfb-module-pushforward-pullback]. By [lem-weil-pbc-right-adjoint-preserves-limits] it preserves products of module sheaves. Countable products of modules over each of these pro-etale ring sheaves are exact by [lem-weil-proetale-countable-products-exact]; [lem-weil-derived-limit-products-core] consequently says that termwise countable products represent the products in the derived category. Since $i_*$ is exact and acts termwise, its sheaf product comparisons give the derived product comparisons. Apply either functor $F=j_!$ or $i_*$ to the Roos triangle of [def-weil-derived-limit]. It preserves its two products, the morphism $1-s$ (its $n$th component is $\\operatorname{pr}_n-f_n\\operatorname{pr}_{n+1}$), and distinguished triangles by [lem-weil-pbc-exact-functor-derived-factorization]. Thus it preserves sequential derived limits. Concretely, with a strict complex tower use the shifted mapping cone of $1-s$ on its termwise product. The product comparisons and termwise cone comparisons define a natural chain isomorphism of these models, compatible with maps of strict towers and the maps from a complex to its reduction tower. This specifies the comparison on completion maps, rather than choosing arbitrary abstract cone isomorphisms.",
    "uses": [
-    "sk-def-sfb-constructible"
+    "det-sf-open-closed-extension-zero-limits",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "def-weil-derived-limit",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Unit step 1 and detail proof, Exactness and limits; Stacks Tags 09BP (lemma-j-shriek-limits), 09AA and 08TC"
+   }
   },
   {
-   "text": "*(2)* By [sk-lem-int-integral-heart] (in the form of its local-model statement)\nthere is a finite stratification of $X$ such that on each stratum $S$ the\nrestriction $K|_S$ is pro-étale locally $P\\otimes_{\\mathcal O_E}\\mathcal O_{E,S}$ for a\nbounded complex $P$ of finite free $\\mathcal O_E$-modules. This local-model property\npasses to refinements: if $T\\subseteq S$ is locally closed, then $K|_T$ is locally\n$P\\otimes_{\\mathcal O_E}\\mathcal O_{E,T}$ on the base-changed cover.\n\nWe prove, by Noetherian induction on the closed subscheme $Y\\subseteq X$, that for\nevery $K\\in\\Dbc(Y,\\mathcal O_E)$ with such local models on a finite stratification\nof $Y$, the object $K$ is an iterated extension of objects $b_!M$ with\n$b\\colon S\\hookrightarrow Y$ a stratum of a refinement and $M$ a local model; for\n$Y=X$ this is (2), and pushing forward along the closed immersion $Y\\hookrightarrow X$\n(exact, and $i_*b_!=(ib)_!$) gives the analogous statement on $X$.",
+   "text": "For $n\\geq1$, [det-pe-derived-nakayama-resolution] gives the exact rank-one free resolution $[A_T\\xrightarrow{\\pi_E^n}A_T]$ of $(\\mathcal O_E/\\pi_E^n)_T$ on every scheme $T$. Thus $K_n=K\\otimes^{\\mathbf L}_{A_T}(\\mathcal O_E/\\pi_E^n)_T$ is represented by the mapping cone of $\\pi_E^n$ on a complex representing $K$. For $F=j_!$ or $i_*$, exactness and coefficient linearity identify this cone termwise with the cone of $\\pi_E^n$ on $FK$: its terms are the same finite sums, with the same differentials and scalar multiplication. Hence $F(K_n)\\simeq(FK)_n$. To check tower compatibility, the map from the resolution for $n+1$ to that for $n$ is multiplication by $\\pi_E$ in degree $-1$ and the identity in degree $0$; the equality $\\pi_E^n\\pi_E=\\pi_E^{n+1}$ makes it a chain map. Applying $F$ leaves these maps unchanged. The comparison therefore respects every reduction transition and the map from $K$ to its reduction tower. Here $F(K_n)$ has the quotient coefficient action induced by $F$; the same cone comparison after forgetting that action is the comparison in $D(A_X)$.",
    "uses": [
-    "sk-lem-int-integral-heart"
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Unit step 1 and detail proof, Exactness and limits: reduction compatibility for every n"
+   }
   },
   {
-   "text": "*An open stratum.* Let $\\eta$ be the generic point of an irreducible component of\n$Y$ and $Y_a$ the stratum containing it. For $b\\neq a$, $\\eta\\notin\\overline{Y_b}$:\n$Y_b$ is constructible, so its closure consists of specializations of points of\n$Y_b$, and the only point specializing to the generic point $\\eta$ of a component\nis $\\eta$ itself, which is not in $Y_b$. Hence\n$W=Y\\setminus\\bigcup_{b\\neq a}\\overline{Y_b}$ is a nonempty open subset of $Y$ contained in\n$Y_a$. Replace $Y_a$ by the two strata $W$ and $Y_a\\setminus W=Y_a\\cap(Y\\setminus W)$ (locally\nclosed); by the previous paragraph the local models persist.",
-   "uses": [],
-   "elementary": null
+   "text": "If $K$ is derived complete in the sense of [sk-def-pe-derived-completion], apply $F$ to its completion isomorphism. The product-and-cone comparison of step 2 and the compatible reduction comparisons of step 3 identify the resulting map with $FK\\to R\\varprojlim_n(FK)_n$. It is an isomorphism. Thus both $j_!$ and $i_*$ preserve derived completeness. For an input $K\\in\\Dbc(T,\\mathcal O_E)$ this hypothesis and bounded constructibility of $K_1$ follow from clause (2) of [sk-lem-integral-models], the integral criterion used in the source. Only this criterion is used, not that node's preservation clause (3).",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "sk-lem-integral-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Unit step 1 and detail proof, Derived completeness and the opening integral criterion"
+   }
   },
   {
-   "text": "*Induction step.* Let $j\\colon W\\hookrightarrow Y$ and $i\\colon Y'=Y\\setminus W\\hookrightarrow Y$ (reduced\nclosed complement, a proper closed subscheme). The localization sequence of\n[sk-prop-sf-open-closed-triangle], applied termwise, gives a distinguished\ntriangle\n$$\nj_!j^*K\\longrightarrow K\\longrightarrow i_*i^*K\\longrightarrow j_!j^*K[1].\n$$\nHere $j^*K=K|_W$ is a local model on the stratum $W$, so $j_!j^*K$ is a\ngenerator. The complex $i^*K$ lies in $\\Dbc(Y',\\mathcal O_E)$ (inverse image along a\nclosed immersion is exact, preserves limits, hence derived completeness, and\npreserves constructibility by restricting stratifications), and it has local\nmodels on the induced stratification of $Y'$. By the induction hypothesis\n$i^*K$ is an iterated extension of objects $b_!M$ for strata\n$b\\colon S\\hookrightarrow Y'$; then $i_*i^*K$ is an iterated extension of\n$i_*b_!M=(ib)_!M$, as $i_*$ is exact. Hence $K$ lies in the stated subcategory.\n(The base case $Y=\\emptyset$ is trivial.)",
-   "uses": [],
-   "elementary": null
+   "text": "Apply this argument both to the integral coefficient ring $A=\\mathcal O_E$ and to the finite residue coefficient ring $A=\\mathcal O_E/\\pi_E$, writing $A_T$ for its pulled-back coefficient sheaf. Let $G$ be a constructible $A_U$-module. In the definition [sk-def-sfb-constructible], take a finite stratification $(U_a)$ on which it has finite constant local models. The $U_a$ and the closed complement of $U$ partition $X$ into locally closed subsets. The restriction of $j_!G$ to $U_a$ is $G|_{U_a}$ and its restriction to the complement is zero, by the identities in step 1 and composition of pullbacks [sk-def-sfb-module-pushforward-pullback]. Zero has the finite presentation with zero generators and relations. Hence $j_!G$ is constructible. Similarly, for constructible $G$ on $Z$, use its strata $(Z_b)$, now locally closed in $X$, and the open complement of $Z$. The restrictions of $i_*G$ are $G|_{Z_b}$ and zero. Hence $i_*G$ is constructible as well. Local closedness here is literal: intersect the defining open and closed sets of a stratum with the open $U$, respectively the closed $Z$.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Reduction paragraph: the two stratifications and the zero restrictions"
+   }
+  },
+  {
+   "text": "For finite residue coefficients, exactness gives $H^q(FL)\\cong F(H^qL)$ by [lem-sp-exact-functor-preserves-homology]. Step 5 and the definition [sk-def-sfb-bounded-constructible] therefore show that $F$ preserves bounded constructible residue-coefficient complexes. Apply this to $L=K_1$ of step 4. The reduction comparison gives $(FK)_1\\simeq F(K_1)$. The induced cohomology isomorphisms are linear over $(\\mathcal O_E/\\pi_E)_X$: they are $A_X$-linear and both scalar actions factor through that quotient. Consequently $(FK)_1$ is bounded constructible as a residue-coefficient complex. Since the residue ring is a finite discrete field, [sk-thm-pe-constructible-comparison] says this complex is pulled back from the bounded constructible etale category. Step 4 proves that $FK$ is derived complete. The reverse implication of clause (2) of [sk-lem-integral-models] now gives $FK\\in\\Dbc(X,\\mathcal O_E)$. Exactness also preserves the original cohomological bounds by the same homology comparison. This proves (1) for $j_!$ and $i_*$. For $a=i\\circ u$, apply the two conclusions successively to the definition $a_!=i_*u_!$. All coefficient identifications use $\\mathcal O_{E,T}$ pulled back from the point.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "sk-def-sfb-bounded-constructible",
+    "sk-thm-pe-constructible-comparison",
+    "sk-lem-integral-models",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Unit step 1 and detail proof, Reduction and conclusion of (1)"
+   }
+  },
+  {
+   "text": "Restrictions of $K\\in\\Dbc(X,\\mathcal O_E)$ to all locally closed subschemes are again in $\\Dbc$. Indeed pullback is exact by [sk-prop-sfb-cartesian-coefficients], so its cohomology is the pullback of the cohomology by [lem-sp-exact-functor-preserves-homology]. Pull back an adapted finite stratification using [lemma-constructible-pullback-stratification]. On a pulled-back cover the presentation of each cohomology sheaf remains the same finite matrix over $\\mathcal O_E$: exact inverse image preserves the cokernel and finite direct sums and carries the coefficient ring to the coefficient ring. Pullbacks compose by [sk-def-sfb-module-pushforward-pullback]. This verifies exactly the finite constant local models of [sk-def-sfb-constructible], and the cohomological bounds persist. Apply [sk-def-sfb-bounded-constructible]. The pulled-back family is a cover: its arrows are weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and it is fpqc by [lem-galois-fpqc-covering-base-change], which together are precisely the two conditions in the covering definition.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sp-exact-functor-preserves-homology",
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Induction step: membership of the open and closed restrictions in the integral bounded-constructible category"
+   }
+  },
+  {
+   "text": "Apply [det-lem-int-integral-heart-local-model] (1) to $K$. It supplies a finite stratification $(S_a)$ on which the entire complex, not merely each cohomology sheaf, is pro-etale locally $P\\otimes_{\\mathcal O_E}A_{S_a}$, with $P$ a bounded finite free complex and scalar-matrix differentials. Under an actual morphism $T\\to S_a$, base-change the model cover. Exact inverse image and the coefficient identification of [sk-prop-sfb-cartesian-coefficients] carry its terms and differentials to the same finite free complex over $A_T$; use composition of pullbacks [sk-def-sfb-module-pushforward-pullback]. Thus these local models persist on scheme-theoretic refinements. The pulled-back family is a cover: its arrows are weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and it is fpqc by [lem-galois-fpqc-covering-base-change], which together are precisely the two conditions in the covering definition.",
+   "uses": [
+    "det-lem-int-integral-heart-local-model",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "(2), first paragraph: the bounded-complex local model and its restriction to a refinement"
+   }
+  },
+  {
+   "text": "One must also allow refinements that change a stratum's scheme structure. If $T$ and $S$ are locally closed subschemes of $X$ with $|T|\\subseteq|S|$, form $B=T\\times_X S$. The projection $B\\to T$ is a surjective closed immersion: factor $S$ as a closed subscheme of an open of $X$ using [def-weil-closed-immersion]; since the image of $T$ is in that open, its base change to $T$ is closed by [lem-weil-pbc-proper-fp-permanence] (b), and is surjective: over any point $t$ of $T$, the equations of $S$ vanish in $\\kappa(t)$ because the image of $t$ belongs to $|S|$, so the fibre is $\\operatorname{Spec}\\kappa(t)$. Pull the models on $S$ to $B$ as in step 8. The module pullback along $B\\to T$ is an equivalence by [new-lem-weil-pbc-condensed-surjective-closed-equivalence], applied to the condensed ring $\\underline{\\mathcal O_E}$. By [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement], refine the model cover of $B$ by a pro-etale cover of $T$ with the displayed pullback squares. Each square has a surjective closed-immersion projection by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] (and closed-immersion base change in [lem-weil-pbc-proper-fp-permanence]), so pullback on every member is again this exact equivalence and carries $A_T$ to $A_B$ by [sk-prop-sfb-cartesian-coefficients]. An exact quasi-inverse also acts termwise and preserves quasi-isomorphisms; the two inverse identities on module sheaves therefore induce inverse identities on the localized categories of complexes. Hence this derived equivalence is fully faithful and lifts the local isomorphism with the pullback of $P\\otimes A_T$: the pullback is exact, acts termwise, and sends the finite free terms and scalar-matrix differentials to their counterparts. The local model on $B$ consequently gives the required local model on $T$. This handles nilpotents without inferring scheme factorization from containment of point sets.",
+   "uses": [
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "(2), refinement paragraph and reduced closed complements; Stacks 09AB (lemma-thickening), with the existing cover-refinement theorem"
+   }
+  },
+  {
+   "text": "Apply only the topological assertion (1) of [det-lem-coefficient-heart-common-stratification] to the stratification of step 8. Although that node fixes $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, its clause (1) contains no sheaf or coefficient parameter: choose $\\Lambda=E$ there. It yields a finite refinement with subsets $T_1,\\ldots,T_m$ ordered so that $V_r=T_1\\cup\\cdots\\cup T_r$ is open in $X$. Put $Y_0=X$ and $c_0=\\mathrm{id}_X$ and, for $1\\le r\\le m$, give $X\\setminus V_r$ its reduced closed subscheme structure $Y_r$. Write $e_r:W_r=Y_{r-1}\\setminus|Y_r|\\hookrightarrow Y_{r-1}$ and $h_r:Y_r\\hookrightarrow Y_{r-1}$ for the complementary open and closed immersions, and $c_r:Y_r\\hookrightarrow X$. Each $W_r$ has underlying subset $T_r$, so step 9 gives a local model for $M_r=K|_{W_r}$. Step 7 gives $M_r\\in\\Dbc(W_r,\\mathcal O_E)$. The $W_r$ are actual locally closed subschemes of $X$ and form a finite stratification. Discard empty terms if desired. The reduced structures exist by [lem-weil-pbc-reduced-induced-closed-subscheme] (2). The closed map $h_r$ exists scheme-theoretically: for $r=1$, the defining ideal of $Y_0=X$ is zero and is contained in the ideal of $Y_1$. For $r\\geq2$, on an affine open the radical ideals $I_{r-1}$ and $I_r$ cutting out $Y_{r-1}$ and $Y_r$ satisfy $I_{r-1}\\subseteq I_r$ because $|Y_r|\\subseteq |Y_{r-1}|$. Thus in every case the quotient maps factor, and their restrictions agree on overlaps. This argument allows $X$ to be nonreduced. Thus $c_{r-1}h_r=c_r$ as scheme maps.",
+   "uses": [
+    "det-lem-coefficient-heart-common-stratification",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "An open stratum and Induction step paragraphs: finite ordered refinement instead of repeating Noetherian induction"
+   }
+  },
+  {
+   "text": "For each $r$, apply the short exact open/closed sequence of [lem-weil-pbc-proetale-ringed-open-closed] with ring $A_{Y_{r-1}}$ to every term of a complex representing $K|_{Y_{r-1}}$. Coefficient compatibility identifies $h_r^*K|_{Y_{r-1}}=K|_{Y_r}$ and $e_r^*K|_{Y_{r-1}}=M_r$. Exactness and [lem-weil-pbc-complex-ses-triangle] give the distinguished triangle\n$$e_{r!}M_r\\longrightarrow K|_{Y_{r-1}}\\longrightarrow h_{r*}(K|_{Y_r})\\longrightarrow e_{r!}M_r[1].$$\nThis is the localization triangle actually needed for generation, with ordinary closed inverse image, not exceptional inverse image.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-complex-ses-triangle",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Induction step, displayed localization triangle; Stacks 09AH (lemma-ses-associated-to-open) and 0152 (lemma-derived-canonical-delta-functor)"
+   }
+  },
+  {
+   "text": "Apply $c_{r-1,*}$ to this triangle. It is exact on sheaves by step 1, hence triangulated on derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. The pushforward composition isomorphism [def-sfb-module-lower-star-comp] identifies $c_{r-1,*}h_{r*}$ with $c_{r,*}$. If $a_r=c_{r-1}\\circ e_r$, the definition $a_{r!}=c_{r-1,*}e_{r!}$ identifies the first vertex with the required generator $a_{r!}M_r$. Thus, putting $Q_r=c_{r,*}(K|_{Y_r})$, we obtain distinguished triangles\n$$a_{r!}M_r\\longrightarrow Q_{r-1}\\longrightarrow Q_r\\longrightarrow a_{r!}M_r[1],\\qquad 1\\le r\\le m.$$\nThe coefficient ring for each composition is the pullback from the same point, so this is composition of the module functors, not an identification of different coefficient categories.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-module-lower-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Induction step, final sentences: exact closed pushforward and the equality of the locally closed extension functors"
+   }
+  },
+  {
+   "text": "The generating class contains zero: take the trivial stratification with stratum $X$ and the local model given by the zero finite free complex. This also covers $X=\\varnothing$. Since $Y_m=\\varnothing$, its pro-etale site has the empty covering; the sheaf condition forces every abelian module sheaf on it to be zero, so $Q_m=0$ ([def-weil-pbc-proetale-covering]). Starting at $r=m$ and descending, the triangle of step 12 and closure under extensions put $Q_{r-1}$ in the subcategory whenever $Q_r$ is in it, because $a_{r!}M_r$ is a generator. Finally $c_0=\\mathrm{id}_X$ and $Q_0=K$. This proves (2) by exactly $m$ triangles.",
+   "uses": [
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "Induction step: base case and conclusion of (2)"
+   }
   }
  ],
  "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "det-sf-open-closed-extension-zero-limits",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-limit",
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-sfb-module-lower-shriek",
+  "def-weil-l-adic-coefficient-extension",
   "sk-def-pe-derived-completion",
+  "sk-lem-integral-models",
   "sk-def-sfb-constructible",
-  "sk-lem-int-integral-heart"
+  "lem-sp-exact-functor-preserves-homology",
+  "sk-def-sfb-bounded-constructible",
+  "sk-thm-pe-constructible-comparison",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-proetale-covering",
+  "det-lem-int-integral-heart-local-model",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-lem-coefficient-heart-common-stratification",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-module-lower-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
-  "place": "## Proof"
+  "place": "Companion det-lem-int-tensor-shriek.proof.md and unit sk-lem-int-tensor.proof.md, first paragraph: exactness, derived limits, uniformizer reduction, completeness criterion, local models and finite open/closed localization."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|extensionByZero|lowerShriek",
+   "results": "No hits; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of integral pro-etale sheaves are generated by extension by zero of locally perfect complexes on strata",
+   "results": "Hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instHasZeroObject, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instIsStrictlySupportedOfNat, AlgebraicGeometry.Scheme.etalePretopology, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Hits: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed immersion direct image preserve bounded constructible integral pro-etale complexes; generation by strata locally perfect complexes",
+   "results": "Hits: AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|boundedConstructible|constructibleSheaf",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed pro-etale site, open extension by zero and closed pushforward preserve bounded complexes with constructible cohomology",
+   "results": "Hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, Condensed.lanSheafProfinite, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, LightCondensed.lanLightCondSet, LightCondMod.ofSheafLightProfinite, SheafOfModules.bijective_pushforwardSections; no declaration states both preservation and integral local-model devissage. The constructible hits are topological subsets; the proetale hits define sites and ell-adic cohomology, and the derived-category hits concern support bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible.*(lowerShriek|extension|strat)|(?:lowerShriek|extensionByZero).*Constructible",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization triangle for an open subset and its closed complement expresses a constructible complex as extensions of its restrictions to finitely many strata",
+   "results": "Hits: Topology.IsConstructible.isLocallyConstructible, Topology.IsLocallyConstructible.of_isOpenCover', AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.isConstructible_basicOpen. The returned types concern constructible subsets or structure-sheaf fractions; none states derived localization or generation for integral constructible module complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -93,5 +339,189 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-tensor"
+ "unit": "sk-lem-int-tensor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-int-tensor-shriek",
+  "worker": "stage1",
+  "summary": "Repaired return 5570df060c against the current shared base, which now supplies the authoritative chapter/unit binding and records. Restored the prescribed completeness/reduction route: derived limits, compatible uniformizer cones, completeness, finite-coefficient constructibility, and the integral criterion. Retained the finite localization tower implementing the unit devissage. Unsupported blueprint equivalence remains removed. No statement change and no new nodes. Second reading corrects the restriction-step reference, the initial nonreduced closed-ideal case, and supplies the derived-equivalence descent argument.",
+  "blueprint": "Unit sk-lem-int-tensor step 1 is realized: item steps 1-2 supply exactness and derived limits; step 3 reduction modulo every pi_E^n with transition compatibility; step 4 preservation of derived completeness and the input criterion; steps 5-6 residue constructibility and the output criterion; steps 7-9 restricted whole-complex integral local models and refinements; steps 10-13 finite open/closed localization along a stratification. The ordered tower implements the unit prescribed localization; only the below-unit detail proof used Noetherian induction. No unit route departure or established source error is claimed. Unit steps 2-4 belong to other items, not this detail lemma.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Clause (2) is the generic ringed pro-etale product/derived-limit tool explicitly needed by unit step 1; it states no integral constructibility or generation conclusion."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic categorical preservation of products by the sheaf right adjoint i_*, used before passage to termwise derived products in unit step 1."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact countable products for any pro-etale ring sheaf, making the unit first-paragraph derived-limit comparisons concrete on complexes."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic AB4* homological tool: termwise products compute derived products, so the exact closed pushforward preserves them."
+   },
+   {
+    "node": "def-weil-derived-limit",
+    "why": "Roos triangle definition identifies sequential derived limits from products and 1-s, as required by unit step 1."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "The uniformizer free resolution and cone formula supply the unit step 1 reduction calculation; only those clauses are used."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Coefficient-module definition supplies linearity of extension by zero for the cone calculation."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Definition of finite quotient coefficients and their transition maps; the residue coefficient is a finite field."
+   },
+   {
+    "node": "sk-def-pe-derived-completion",
+    "why": "Definition of completeness used in the unit first paragraph."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Only clause (2), the integral criterion, supplies the source opening criterion sk-prop-integral-criterion (whose key id is absent); no inverse-image, tensor or immersion-preservation clause (3) is used. This realizes the prescribed criterion route."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "sk-def-sfb-bounded-constructible",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic finite discrete coefficient comparison makes the bounded constructible residue reduction classical for the precise integral criterion; it does not replace the unit immersion argument."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic geometric base-change or definition tool: supplies the stated cover or closed fiber-product property used in model refinement, without replacing the unit route."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic geometric base-change or definition tool: supplies the stated cover or closed fiber-product property used in model refinement, without replacing the unit route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-covering",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "det-lem-int-integral-heart-local-model",
+    "why": "The unit explicitly cites the integral-heart route; this is its whole-complex local-model clause."
+   },
+   {
+    "node": "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "why": "Generic invariance under surjective closed immersions handles actual scheme structures of refined strata."
+   },
+   {
+    "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "why": "Generic cover-lifting tool makes local finite free complex models descend through the surjective closed comparison."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "The pullback square in the cover-refinement theorem is a surjective closed immersion, so its coefficient/module equivalence applies after base change."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic geometric base-change or definition tool: supplies the stated cover or closed fiber-product property used in model refinement, without replacing the unit route."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic geometric base-change or definition tool: supplies the stated cover or closed fiber-product property used in model refinement, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic geometric base-change or definition tool: supplies the stated cover or closed fiber-product property used in model refinement, without replacing the unit route."
+   },
+   {
+    "node": "det-lem-coefficient-heart-common-stratification",
+    "why": "Only coefficient-independent clause (1) is used to order a finite refinement; this is a topological tool, not a field-coefficient sheaf theorem."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Existence of the reduced closed subscheme structures in the finite localization tower."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   },
+   {
+    "node": "def-sfb-module-lower-star-comp",
+    "why": "Generic definition or functorial/homological tool for the unit's prescribed exact open/closed localization and stratification route; no geometric step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "det-sf-open-closed-extension-zero-limits",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-limit",
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-sfb-module-lower-shriek",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "sk-lem-integral-models",
+  "sk-def-sfb-constructible",
+  "lem-sp-exact-functor-preserves-homology",
+  "sk-def-sfb-bounded-constructible",
+  "sk-thm-pe-constructible-comparison",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-proetale-covering",
+  "det-lem-int-integral-heart-local-model",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-lem-coefficient-heart-common-stratification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-module-lower-star-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-5227741f2",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-5227741f2 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all 13 proof steps, 33 cited statements, and cited Stacks/blueprint sources. The statement, coefficient category, base-change maps, reduction tower, localization generation, edge cases, and route all check. No new nodes, duplicates, SGA citations, or unresolved gaps. Review written to review.md."
+ }
 }

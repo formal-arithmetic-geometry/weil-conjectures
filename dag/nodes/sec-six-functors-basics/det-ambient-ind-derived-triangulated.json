@@ -3,32 +3,195 @@
  "blueprint": {
   "is": "det-ambient-ind-derived-triangulated",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\Dic(X,\\Lambda)$ is a triangulated subcategory",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$. $\\Dic(X,\\Lambda)$ contains $0$, is closed under shifts in both directions and\nunder isomorphisms, and if $K\\to L\\to M\\to K[1]$ is a distinguished triangle in $\\D(X_{\\mathrm{proét}},\\Lambda)$\nwith two of $K,L,M$ in $\\Dic(X,\\Lambda)$, then so is the third. Hence $\\Dic(X,\\Lambda)$ is a full\ntriangulated subcategory.",
+ "statement": "Let $\\Lambda=E$ or $\\Qlb$. $\\Dic(X,\\Lambda)$ contains $0$, is closed under shifts in both directions and\nunder isomorphisms, and if $K\\to L\\to M\\to K[1]$ is a distinguished triangle in $\\D(X_{\\mathrm{proét}},\\Lambda)$\nwith two of $K,L,M$ in $\\Dic(X,\\Lambda)$, then so is the third. Hence $\\Dic(X,\\Lambda)$ is a full\ntriangulated subcategory.\n\nHere $\\ell$ is a prime, $k$ is a field of characteristic $p>0$ with $p\\ne\\ell$, and $X$ is a separated finite-type $k$-scheme in the standing setting of [sk-def-sfb-dc-setting]; $\\Qlb$ is an algebraic closure of $\\mathbf Q_\\ell$, and $E\\subseteq\\Qlb$ is a finite extension of $\\mathbf Q_\\ell$. The coefficient ring is the pulled-back condensed ring $\\Lambda_X=p_X^*\\underline\\Lambda$, as in [def-sfb-subfield-coefficient-ring] and [def-sfb-qlbar-coefficient-ring], and $\\Mod(X_{\\mathrm{proét}},\\Lambda)=\\Mod_{\\Lambda_X}$ is the category of module objects of [sk-def-sfb-module-objects]. The ambient $\\D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$ is the ordinary derived category [pur713-def-module-category], [def-weil-abstract-derived-category]. Write $\\Cons(X,\\Lambda)$ for the constructible modules of [sk-def-sfb-constructible]. The full subcategory $\\IndCons(X,\\Lambda)$ consists of modules isomorphic to small filtered colimits, computed in $\\Mod_{\\Lambda_X}$, of objects of $\\Cons(X,\\Lambda)$. Finally,\n$$\n\\Dic(X,\\Lambda)=\\{K\\in D(\\Mod_{\\Lambda_X}) : H^n(K)\\in\\IndCons(X,\\Lambda)\\text{ for every }n\\in\\mathbf Z\\}.\n$$\nFull triangulated subcategory has the meaning of [def-weil-triangulated-subcategory].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.md",
   "place": "node det-ambient-ind-derived-triangulated, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-coefficient-ring",
+  "sk-def-sfb-module-objects",
+  "pur713-def-module-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory"
+ ],
  "proof": [
   {
-   "text": "Shifts permute cohomology sheaves, and $0\\in\\IndCons(X,\\Lambda)$. By rotation it suffices to treat $M$\nwhen $K,L\\in\\Dic(X,\\Lambda)$. The long exact sequence\n\n$$\nH^n(K)\\xrightarrow{\\alpha}H^n(L)\\to H^n(M)\\to H^{n+1}(K)\\xrightarrow{\\beta}H^{n+1}(L)\n$$\n\ngives a short exact sequence\n\n$$\n0\\to\\coker\\alpha\\to H^n(M)\\to\\ker\\beta\\to0\n$$\n\nin $\\Mod(X_{\\mathrm{proét}},\\Lambda)$. Since $\\alpha,\\beta$ are maps in $\\IndCons(X,\\Lambda)$, part (2) of\n[sk-prop-ind-heart] gives $\\coker\\alpha,\\ker\\beta\\in\\IndCons(X,\\Lambda)$, and closure under extensions\ngives $H^n(M)\\in\\IndCons(X,\\Lambda)$.",
-   "uses": [],
-   "elementary": null
+   "text": "The zero module is constructible: on each affine open use the single stratum and the zero finitely presented scalar module in [sk-def-sfb-constructible]. It is therefore ind-constructible, using the constant diagram on the one-object filtered category. The zero complex has $H^n(0)=0$ for every $n$, by the cohomology formula in [def-weil-abstract-derived-category], so $0\\in\\Dic(X,\\Lambda)$. If $K\\simeq L$, the cohomology functors carry this to $H^n(K)\\simeq H^n(L)$ for every $n$; the definition of $\\IndCons$ is invariant under isomorphisms. Thus $\\Dic$ is closed under isomorphisms.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "First sentence: zero; isomorphism closure made explicit"
+   }
+  },
+  {
+   "text": "For every $r,n\\in\\mathbf Z$, [lem-sp-derived-cohomology-shift] gives $H^n(K[r])\\simeq H^{n+r}(K)$. Hence, when $K\\in\\Dic(X,\\Lambda)$, every cohomology object of $K[r]$ is ind-constructible. This proves closure under all integer shifts, in particular both $[1]$ and $[-1]$.",
+   "uses": [
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "First sentence: shifts permute cohomology"
+   }
+  },
+  {
+   "text": "Let $K\\to L\\to M\\to K[1]$ be a distinguished triangle with $K,L\\in\\Dic(X,\\Lambda)$. Apply [lem-sf-derived-homology-long-exact] to the abelian category $\\Mod_{\\Lambda_X}$ underlying the ordinary ambient derived category. For each $n$ it gives an exact segment\n$$H^n(K)\\xrightarrow{\\alpha_n}H^n(L)\\xrightarrow{u_n}H^n(M)\\xrightarrow{v_n}H^{n+1}(K)\\xrightarrow{\\beta_n}H^{n+1}(L).$$",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "pur713-def-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "Displayed long exact cohomology segment"
+   }
+  },
+  {
+   "text": "In this exact segment, $\\ker u_n=\\operatorname{im}\\alpha_n$, so the universal properties of cokernels identify $\\operatorname{coker}\\alpha_n$ with $\\operatorname{coker}(\\ker u_n\\hookrightarrow H^n(L))$, the coimage of $u_n$. By [lem-weil-pbc-coimage-mono], the induced map $\\operatorname{coker}\\alpha_n\\to H^n(M)$ is monic, with image $\\operatorname{im}u_n=\\ker v_n$. The opposite of the ambient abelian category is abelian: the axioms in [def-sp-abelian] exchange kernels with cokernels and monomorphisms with epimorphisms. Apply [lem-weil-pbc-coimage-mono] there to $v_n^{\\mathrm{op}}$. Taking opposites gives an epimorphism $H^n(M)\\twoheadrightarrow\\ker(\\operatorname{coker}v_n)$, which is $\\operatorname{im}v_n=\\ker\\beta_n$ by exactness. Its kernel is $\\ker v_n$, since the inclusion $\\ker\\beta_n\\hookrightarrow H^{n+1}(K)$ is monic. Thus the preceding monomorphism is its kernel and there is a short exact sequence in the ambient abelian category:\n$$0\\longrightarrow\\operatorname{coker}\\alpha_n\\longrightarrow H^n(M)\\longrightarrow\\ker\\beta_n\\longrightarrow0.$$\nAll kernels, images and cokernels here are ambient categorical ones.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-sp-abelian",
+    "lem-weil-pbc-coimage-mono"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "Displayed short exact sequence: image and quotient argument made explicit"
+   }
+  },
+  {
+   "text": "All four objects $H^n(K),H^n(L),H^{n+1}(K),H^{n+1}(L)$ lie in $\\IndCons(X,\\Lambda)$. Since it is a full subcategory, $\\alpha_n$ and $\\beta_n$ are morphisms in it. By [det-ind-heart-kernels-cokernels], their ambient cokernel $\\operatorname{coker}\\alpha_n$ and kernel $\\ker\\beta_n$ lie in $\\IndCons(X,\\Lambda)$. Apply [det-ind-heart-extensions] to the short exact sequence of the preceding step. It yields $H^n(M)\\in\\IndCons(X,\\Lambda)$. Since $n$ was arbitrary, $M\\in\\Dic(X,\\Lambda)$.",
+   "uses": [
+    "det-ind-heart-kernels-cokernels",
+    "det-ind-heart-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "Last sentence: kernels, cokernels and extension closure from the ind-heart proposition"
+   }
+  },
+  {
+   "text": "Steps 3–5 established the following implication for every distinguished triangle $A\\to B\\to C\\to A[1]$: if $A,B\\in\\Dic$, then $C\\in\\Dic$. Write the original triangle as $K\\xrightarrow{a}L\\xrightarrow{b}M\\xrightarrow{c}K[1]$. TR2 in [def-weil-triangulated-category] makes\n$$L\\xrightarrow{b}M\\xrightarrow{c}K[1]\\xrightarrow{-a[1]}L[1]$$\ndistinguished. If $L,M\\in\\Dic$, instantiate the proved implication with $(A,B,C)=(L,M,K[1])$ to obtain $K[1]\\in\\Dic$. Step 2 gives $(K[1])[-1]\\in\\Dic$, and the shift isomorphism $(K[1])[-1]\\simeq K$ and step 1 give $K\\in\\Dic$. A second application of TR2 gives the distinguished triangle\n$$M\\xrightarrow{c}K[1]\\xrightarrow{-a[1]}L[1]\\xrightarrow{-b[1]}M[1].$$\nIf $K,M\\in\\Dic$, step 2 first gives $K[1]\\in\\Dic$. Instantiate the proved implication with $(A,B,C)=(M,K[1],L[1])$ to obtain $L[1]\\in\\Dic$; then step 2 gives $(L[1])[-1]\\in\\Dic$ and step 1 with $(L[1])[-1]\\simeq L$ gives $L\\in\\Dic$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "By rotation it suffices to treat the third vertex: both cases made explicit"
+   }
+  },
+  {
+   "text": "By its defining object condition $\\Dic$ is a full subcategory of the triangulated category $D(\\Mod_{\\Lambda_X})$ of [def-weil-abstract-derived-category]. The preceding steps give its zero object, stability under every integer shift, and the middle-vertex extension property for distinguished triangles. These are exactly the criterion of [def-weil-triangulated-subcategory]; hence the inherited shifts and distinguished triangles make $\\Dic(X,\\Lambda)$ a full triangulated subcategory.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+    "place": "Conclusion: full triangulated subcategory"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact",
+  "pur713-def-module-category",
+  "def-sp-abelian",
+  "lem-weil-pbc-coimage-mono",
+  "det-ind-heart-kernels-cokernels",
+  "det-ind-heart-extensions",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-triangulated.proof.md",
+  "place": "Entire proof, with the zero/isomorphism arguments, the short exact sequence, and both rotations expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre|IsTriangulated|indConstructible|IndConstructible",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean Search subdirectory: CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full subcategory of the derived category with cohomology in a Serre subcategory is triangulated",
+   "results": "CategoryTheory.Triangulated.Subcategory; DerivedCategory.instIsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.mk; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.FullSubcategory.noConfusion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero; CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift; CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂ Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:63-76: these classes require the triangle-closure properties and do not prove them for ind-constructible cohomology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory of a derived category defined by all cohomology objects belonging to an extension closed abelian subcategory is triangulated",
+   "results": "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.instIsTriangulated; DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; CategoryTheory.hasExt_of_hasDerivedCategory; DerivedCategory.instPretriangulated; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE Read Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:63-123: homologicalKernel concerns vanishing of all shifts of a homological functor; no identification with ind-constructibility is supplied.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|homologicalKernel|cohomology.*[Ss]ubcategory|[Ss]ubcategory.*cohomology",
+   "results": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean Read Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:63-123: homologicalKernel concerns vanishing of all shifts of a homological functor; no identification with ind-constructibility is supplied. Search subdirectory: CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category cohomology in a full abelian subcategory closed under kernels cokernels and extensions is closed under distinguished triangles",
+   "results": "DerivedCategory.instIsTriangulated; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.instPretriangulated; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; DerivedCategory.IsGE; HasDerivedCategory.standard Read Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:63-123: homologicalKernel concerns vanishing of all shifts of a homological functor; no identification with ind-constructibility is supplied.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "indConstructible|IndConstructible|[Ss]erre.*[Cc]ohomology|[Cc]ohomology.*[Ss]erre",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homological functor, the objects whose homology in every degree belongs to a subcategory closed under subquotients and extensions form a triangulated subcategory",
+   "results": "CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; CategoryTheory.Functor.homologicalKernel; CategoryTheory.Functor.mem_homologicalKernel_trW_iff; CategoryTheory.Functor.mem_homologicalKernel_W_iff; CategoryTheory.Functor.IsHomological.mk'; CategoryTheory.Functor.IsHomological; CategoryTheory.Triangulated.Subcategory; CategoryTheory.Functor.isHomological_of_localization Read Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:63-123: homologicalKernel is vanishing of a functor on all shifts; it does not state membership of cohomology in IndCons. The other hits supply generic homological functors or triangulated subcategory structures.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated.*[Ss]erre|[Ss]erre.*IsTriangulated|[Hh]omology.*[Ss]erre|[Ss]erre.*[Hh]omology",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -41,5 +204,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-ambient-ind-derived"
+ "unit": "sk-cor-ambient-ind-derived",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ambient-ind-derived-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded the imported cohomological proof into seven steps, reusing the existing kernel/cokernel and extension nodes and the existing Mathlib leaves for long exact cohomology and shifts. Defined the two ambient subcategories inline, keeping the condensed pulled-back coefficients and the ordinary unbounded derived category. No new nodes and no attachment. Second reading explicitly cites the existing coimage-monomorphism Mathlib leaf and its opposite-category application in step 4, and gives the signed rotations and both instantiations of the proved cone implication in step 6.",
+  "blueprint": "Steps 1-2 realize the opening zero/shift sentence; steps 3-4 realize the two displayed exact sequences; step 5 realizes the closing ind-heart argument; steps 6-7 supply both rotations and the stated triangulated conclusion. The unit sk-cor-ambient-ind-derived has exactly this cohomology-kernel-cokernel-extension route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-aa7abaa84",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-aa7abaa84 (reviewer sub-agent of L); spot-checked: Reviewed item, all seven steps, cited DAG statements, blueprint unit/chapter, coefficient category, coimage argument, rotations, literature sources, edge cases, duplicates, and dependency graph. No defects or new nodes; review.md records checks. No SGA source used."
+ }
 }
