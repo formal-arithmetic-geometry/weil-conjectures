@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-diagonal-tower-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $\\ell$-adic diagonal class over the completed coefficient sheaf",
@@ -23,42 +23,174 @@
   ]
  },
  "stmt_deps": [
-  "det-prop-diagonal-tower-system"
+  "det-prop-diagonal-tower-system",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sp-tate-twist",
+  "sk-def-pe-derived-completion",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit"
  ],
  "proof": [
   {
-   "text": "(1) The pro-étale site is replete and products of sheaves on it are exact\n([sk-prop-pe-replete], [sk-prop-pe-products]); hence for an inverse system\nwith surjective transition maps $R\\varprojlim$ is the ordinary limit. This\napplies to the systems $\\mathbf Z/\\ell^\\bullet$ and $\\mu_{\\ell^\\bullet}$: on a\nweakly contractible affine, taking sections is exact and the transition maps\nstay surjective, so the Milnor complex\n$\\prod_n K_n\\xrightarrow{1-\\mathrm{shift}}\\prod_nK_n$ computing\n$R\\varprojlim$ has no cohomology in degree one. Thus\n$R\\varprojlim\\mathbf Z/\\ell^n=\\Zl$ and $R\\varprojlim\\mu_{\\ell^n}=\\Zl(1)$. The\nfunctor $\\Delta_*$ is exact and preserves limits, which gives the first\nformula. In general, a derived direct image $Rg_*$ and $R\\varprojlim$ are\nboth right adjoints of exact functors (inverse image and the constant-system\nfunctor), so both preserve K-injective complexes, and their derived functors\ncommute (Stacks, Tag 099L). Evaluation of an inverse system at one level is\nright adjoint to an exact functor too, so it preserves injectives, and the\nderived direct image of a system is computed levelwise.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) $\\Zl(1)$ is free of rank one on the pro-étale cover given by the system\nof primitive $\\ell^n$-th roots of unity, and its reduction modulo $\\ell^n$ is\n$\\mu_{\\ell^n}$ with the transition maps of [det-prop-diagonal-tower-system](3).\nTensoring with a sheaf which is locally free of rank one is exact, and on the\ntrivializing cover it is the identity functor, so it commutes with products\nand with $R\\varprojlim$; these properties are local.",
-   "uses": [
-    "det-prop-diagonal-tower-system"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(3) By (1) and [det-prop-diagonal-tower-system](3), $R\\varprojlim c_\\bullet$\nhas source $\\Delta_*\\Zl$ and target $\\Zl(1)[2]$; by\n[det-prop-diagonal-tower-system](2) it equals the derived completion of\n$\\partial$, so in particular source and target are derived $\\ell$-complete.\nThe limit morphism is a priori linear over the constant sheaf\n$\\underline{\\mathbf Z_\\ell}$. The map from $\\underline{\\mathbf Z_\\ell}$ to the\ncompleted coefficient sheaf $\\Zl$ is flat and an isomorphism modulo every\n$\\ell^n$; hence restriction of scalars is an equivalence between derived\ncomplete objects over $\\Zl$ and derived complete objects over\n$\\underline{\\mathbf Z_\\ell}$ (Stacks, Tag 099I, as in\n[sk-lem-integral-models](1)). So the morphism comes from a unique\n$\\Zl$-linear morphism $\\delta_{\\Zl}$. Its reduction modulo $\\ell^n$ is the\n$n$-th level of $c_\\bullet$, because reduction commutes with $R\\varprojlim$ on\nthese systems (the level-$n$ term of a derived complete object is its\nreduction), and these levels are the torsion cycle classes by\n[det-prop-diagonal-tower-system](4).",
+   "text": "For the reduction towers $(\\mathbf Z/\\ell^n)_n$ and $(\\mu_{\\ell^n})_n$, the transition maps are epimorphisms: the first are quotient maps and the second are the power maps identified in [det-prop-diagonal-tower-system](3), which are surjective by [lem-pur-twist-sheaf-locally-free](1), applicable because $\\ell$ is invertible on $W$. The statement of [det-pe-milnor-epimorphic] says that an epimorphic tower has $R\\varprojlim$ equal to its ordinary limit, so these limits are respectively the completed coefficient sheaf $\\Zl$ and $\\Zl(1)$ by the inverse-limit definition of the twist and the completed coefficient identification in [det-prop-sfb-qlbar-colimit-x-integral-limit], with $E=\\mathbf Q_\\ell$. The diagonal is a closed Cartier divisor: on an affine chart with local equation $t$ as in [det-prop-diagonal-tower-system](1), its open complement is $D(t)$. Distinguished affine opens are quasi-compact, so the complementary open immersion is quasi-compact. Apply [lem-exc-proetale-closed-exact] over $\\mathbf Z/\\ell^{n+1}$ to each quotient transition (regarding its target as a module over that same ring): the direct-image tower again has epimorphic transitions. Therefore [det-pe-milnor-epimorphic] also identifies its derived limit with its ordinary limit. The latter is $\\Delta_*\\Zl$, since direct image is precomposition on sections and sheaf inverse limits are computed sectionwise. For an arbitrary morphism $g$ of the schemes considered, the induced morphism of pro-étale topoi, with the canonical identification of the inverse image of the constant sheaf $\\underline{\\mathbf Z_\\ell}$ (or the canonical map on completed coefficient sheaves), is a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. The inverse systems here are towers of $\\underline{\\mathbf Z_\\ell}$-modules, not of modules over the completed coefficient sheaf, so we use the tower comparison stated for an arbitrary morphism of ringed topoi: [lem-weil-ringed-tower-pushforward-limit-comparison] gives the evaluation identifications $\\operatorname{ev}_nRg_*^{\\operatorname{Tow}}M_\\bullet\\cong Rg_*M_n$ and the canonical isomorphism $Rg_*R\\lim M_\\bullet\\simeq R\\lim(Rg_*^{\\operatorname{Tow}}M_\\bullet)$, with the total derived limit whose Roos triangle is that of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; this is the asserted commutation and levelwise computation.",
    "uses": [
     "det-prop-diagonal-tower-system",
-    "sk-lem-integral-models"
+    "det-pe-milnor-epimorphic",
+    "lem-exc-proetale-closed-exact",
+    "lem-pur-twist-sheaf-locally-free",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-pbc-ringed-topos-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+    "place": "paragraph (1)"
+   }
+  },
+  {
+   "text": "The definition [sk-def-sp-tate-twist] makes $K(1)$ the derived tensor product with the locally free rank-one sheaf $\\Zl(1)$ and defines $(-1)$ using its dual. More specifically, [lem-pur-twist-sheaf-locally-free](2) proves that the inverse limit $\\Zl(1)$ is locally free of rank one over the completed coefficient sheaf, with the stated finite reductions. Apply the tensor clause of [det-formal-closed-support-ii-limits] with $X=Z=S=W$, both $i$ and $u$ the identity, and open complement empty, and $\\Lambda=\\mathbf Z_\\ell$. Tensoring with this rank-one sheaf is exact because after the stated trivializing cover it is the identity on module sheaves; the cited tensor clause says it preserves products and fibers, and the natural map from tensoring $R\\varprojlim$ to the $R\\varprojlim$ of the tensors is an isomorphism. On a pro-etale trivializing cover, the dual of $\\Zl(1)$ is identified with the dual of the free rank-one completed coefficient module, hence is again free of rank one; these local identifications descend to the dual sheaf. Apply the same tensor clause of [det-formal-closed-support-ii-limits] to this dual finite-locally-free module: its tensor functor preserves products and fibers and the natural map from tensoring $R\\varprojlim$ to the $R\\varprojlim$ of the tensors is an isomorphism. This gives exactness, product preservation, and $R\\varprojlim$-commutation for $(-1)$ and proves clause (2).",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "det-formal-closed-support-ii-limits",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+    "place": "paragraph (2)"
+   }
+  },
+  {
+   "text": "Apply $R\\varprojlim$ to $c_\\bullet$. By [det-prop-diagonal-tower-system](2), $R\\varprojlim\\circ T$ is derived $\\ell$-completion, while [det-prop-diagonal-tower-system](3) identifies the source and target systems; step (1) therefore identifies the resulting morphism with $\\Delta_*\\Zl\\to\\Zl(1)[2]$ and shows that both objects are derived $\\ell$-complete. The map is initially linear over the constant sheaf $\\underline{\\mathbf Z_\\ell}$. Specializing clause (1) of [sk-lem-integral-models] to $E=\\mathbf Q_\\ell$ identifies restriction of scalars from the completed coefficient sheaf with an equivalence on derived complete objects, so there is a unique $\\Zl$-linear morphism $\\delta_{\\Zl}$. For the final reduction use [lemma-weil-pbc-adic-completion-reduction] with the constant ring $\\Lambda=\\mathbf Z_\\ell$, $I=(\\ell)$, and $K$ equal to either $\\Delta_*\\mathbf Z\\otimes^{\\mathbf L}_{\\mathbf Z}\\underline{\\mathbf Z_\\ell}$ or $\\mathbf G_m[1]\\otimes^{\\mathbf L}_{\\mathbf Z}\\underline{\\mathbf Z_\\ell}$. Tensor associativity identifies their strict reduction towers with the two towers of [det-prop-diagonal-tower-system]; each finite quotient is perfect, represented over $\\mathbf Z_\\ell$ by the two-term free resolution for multiplication by $\\ell^n$. The cited reduction theorem identifies the finite reduction of the derived limit with its level-$n$ term; hence the reduction of $\\delta_{\\Zl}$ is $c_n$, which is the torsion diagonal class by clause (4) of [det-prop-diagonal-tower-system]. To identify these reductions with reductions over the completed coefficient sheaf, apply [lem-weil-pbc-constant-completion-equivalence] to $A=\\mathbf Z_\\ell$ and $I=(\\ell)$ on $W_{\\mathrm{proét}}$. Its canonical comparisons identify constant-coefficient finite reduction with completed-coefficient finite reduction, commute with the quotient transitions, and carry the completion unit to the constant-coefficient unit. Thus completeness of the displayed completed-coefficient endpoints follows from their constant-coefficient completeness, and the reduction calculation just made is the one in $D(W_{\\mathrm{proét}},\\Zl)$ required by clause (3).",
+   "uses": [
+    "det-prop-diagonal-tower-system",
+    "sk-lem-integral-models",
+    "lemma-weil-pbc-adic-completion-reduction",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+    "place": "paragraph (3)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "det-formal-closed-support-ii-limits",
+  "det-pe-milnor-epimorphic",
   "det-prop-diagonal-tower-system",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "sk-def-sp-tate-twist",
   "sk-lem-integral-models"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraphs (1)-(3), with explicit hypotheses and constant/completed finite-reduction comparisons"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of torsion sheaves and diagonal cycle class",
+   "results": "CategoryTheory.Sheaf.H; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; HomologicalComplex.i_cyclesMk; localCohomology.diagram; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are generic category-theory or tensor/direct-limit declarations and do not state the diagonal tower theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limit, DerivedCategory, TateTwist",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Limit'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; superseded by the successful DerivedCategory query"
+  },
+  {
+   "tool": "grep",
+   "query": "R\\\\\\\\varprojlim|TateTwist|diagonal.*cycle",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: grep returned no relevant declarations in the requested SixFunctors/ subtree"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limits commute with direct image and tensor by a locally free Tate twist",
+   "results": "TensorProduct.directLimitLeft_symm_of_tmul; TensorProduct.directLimitLeft_tmul_of; TensorProduct.directLimitRight_symm_of_tmul; TensorProduct.directLimitLeft_rTensor_of; Module.DirectLimit.congr_symm_apply_of; CategoryTheory.Limits.limit.isoLimitCone_inv_π; TensorProduct.fromDirectLimit_of_tmul; Submodule.FG.lTensor.directLimit_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are generic category-theory or tensor/direct-limit declarations and do not state the diagonal tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "l adic completion of compatible diagonal cycle classes commutes with derived inverse limits",
+   "results": "AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.transitionMap_comp_eval; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.component_sumInv; AdicCompletion.pi_apply_coe; IsAdicComplete.of_comp_lift; AdicCompletion.sumInv_apply; AdicCompletion.eval_comp_of",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module adic-completion coordinate identities or generic derived-category infrastructure do not state any diagonal class or pro-etale derived-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Limits.preservesLimit_of_preservesLimits",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Limits.preservesLimit_of_preservesLimits'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; superseded by the successful DerivedCategory query"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|cycleClass|derivedCompletion|derivedLimit",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module adic-completion coordinate identities or generic derived-category infrastructure do not state any diagonal class or pro-etale derived-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor; DerivedCategory.singleFunctors; DerivedCategory.instAdditiveSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module adic-completion coordinate identities or generic derived-category infrastructure do not state any diagonal class or pro-etale derived-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "transitionMap_comp_eval|eval_comp_of",
+   "results": "Mathlib/RingTheory/AdicCompletion/Functoriality.lean; Mathlib/RingTheory/AdicCompletion/Basic.lean; Mathlib/RingTheory/AdicCompletion/Basic.lean; Mathlib/RingTheory/AdicCompletion/Basic.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; subtree RingTheory/AdicCompletion/",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module adic-completion coordinate identities or generic derived-category infrastructure do not state any diagonal class or pro-etale derived-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|cycleClass|derivedCompletion|derivedLimit",
+   "results": "0 hits; top hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: unrestricted Mathlib source grep returned no occurrences of the searched names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit of torsion diagonal cycle classes is a morphism of derived complete sheaves",
+   "results": "8 hits; top hits: TensorProduct.directLimitRight_symm_of_tmul; HasDerivedCategory.standard; InverseSystem.invLimEquiv; SheafOfModules.hasLimitsOfShape; PresheafOfModules.limitPresheafOfModules; SheafOfModules.hasLimit; CategoryTheory.Limits.limit.isoLimitCone_inv_π; CategoryTheory.ShortComplex.isoCyclesOfIsLimit_inv_ι",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary limits of sheaves, the derived-category construction, direct-limit tensor identities, and short-complex cycles; none states the diagonal tower theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "12 hits; top hits: DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor; DerivedCategory.singleFunctors; DerivedCategory.instAdditiveSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations construct the derived category and its basic structure, without any pro-etale diagonal or Tate-twist assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of compatible torsion diagonal cycle classes gives an l adic cycle class over completed coefficient sheaves",
+   "results": "8 hits; top hits: BDeRham; BDeRhamPlus; IsAdicComplete.of_comp_lift; AdicCompletion.eval_lift_apply; HomologicalComplex.i_cyclesMk; AdicCompletion.eval_lift; AdicCompletion.lift; AdicCompletion",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary module adic completion, period rings, or cycles of a complex, not pro-etale diagonal cycle classes or derived completion of sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -76,5 +208,79 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-diagonal-tower"
+ "unit": "sk-prop-diagonal-tower",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-diagonal-tower-limit",
+  "worker": "stage1",
+  "summary": "Read the imported item and its current main-20261015 blueprint proof. No exact sorry-free declaration exists in WeilConjectures. The stale proof aliases sk-prop-pe-replete and sk-prop-pe-products were replaced by the current epimorphic-Milnor node; the generic direct-image limit, finite-locally-free tensor limit, integral-model comparison, and finite-reduction completion nodes were cited explicitly. No new nodes or Mathlib leaves were needed, and the item statement is unchanged. Closed direct-image exactness over each finite coefficient ring is cited explicitly to verify the pushed-forward tower is epimorphic. Refreshed the Tate-twist quote after a concurrent DAG update, checked quasi-compactness directly from the Cartier equation, specialized the tensor-limit tool with identity immersions, and cited the constant/completed coefficient comparison for the final reduction and completeness transport. Re-audited the inherited sandbox attempt against the current shared DAG on 2026-10-17, refreshed the epimorphic-Milnor conclusion quote, and reran all four Mathlib search kinds; the split still needs no new nodes. Maintainer reader fix (2026-10-17): the direct-image/Rlim clause now cites the ringed-topos tower comparison lem-weil-ringed-tower-pushforward-limit-comparison instead of prop-weil-pbc-direct-image-limits, whose towers are over the completed coefficient sheaf rather than the constant Z_l towers of this item.",
+  "blueprint": "The three steps realize paragraphs (1), (2), and (3) of sk-prop-diagonal-tower-limit.proof.md. Paragraph (1) is made precise with det-pe-milnor-epimorphic and lem-weil-ringed-tower-pushforward-limit-comparison; paragraph (2) with the Tate-twist definition and finite-locally-free tensor limit; paragraph (3) with the integral-model equivalence and finite-reduction completion comparison.",
+  "tool_uses": [
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "The item needs the generic fact that epimorphic coefficient towers have no R^1 inverse-limit term; the diagonal-tower unit does not provide this categorical limit theorem."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "The item needs levelwise derived direct image and its Rlim comparison for towers of constant Z_l-modules along arbitrary morphisms; this generic ringed-topos statement covers that coefficient category, which the completed-coefficient tower node of the proper base change unit does not."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Fixes the total derived inverse limit of strict towers (with its Roos triangle) used by the ringed-topos tower comparison; generic, no diagonal-unit node gives it."
+   },
+   {
+    "node": "sk-def-sp-tate-twist",
+    "why": "The item uses the general definition and local rank-one property of Tate twists to identify the tensor functor."
+   },
+   {
+    "node": "det-formal-closed-support-ii-limits",
+    "why": "The item needs the generic finite-locally-free tensor preservation of products, fibers and derived inverse limits."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "The item needs the constant/completed coefficient equivalence on derived complete objects to obtain unique completed-coefficient linearity."
+   },
+   {
+    "node": "lemma-weil-pbc-adic-completion-reduction",
+    "why": "The item needs finite reduction of a derived inverse-limit tower to its level term in order to identify reductions of the completed class."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic exactness of closed pro-etale direct image over a finite ring preserves each coefficient transition epimorphism; the diagonal unit does not supply this sheaf-theoretic fact."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic roots-of-unity transition surjectivity and local rank-one freeness over the completed coefficient sheaf, specialized to E=Q_l; this verifies the hypotheses of the Milnor and finite-locally-free tensor tools."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Its explicit finite-reduction and completion-unit comparisons identify reductions and completeness over constant and completed coefficients; the diagonal unit does not supply those generic scalar-restriction identities."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "The generic integral coefficient identification, specialized to E=Q_l, identifies the inverse limit of finite constant quotients with the pulled-back completed coefficient sheaf on W."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-milnor-epimorphic",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "sk-def-sp-tate-twist",
+  "det-formal-closed-support-ii-limits",
+  "sk-lem-integral-models",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-1c0f98530",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-1c0f98530 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements, the unit and the main-20261015 blueprint paragraphs (1)–(3) in full. The statement matches the blueprint verbatim. There are no new nodes and no SGA sources. Step 1: the transitions are epimorphic (lem-pur-twist-sheaf-locally-free (1); l is invertible because W is in the standing setting). det-pe-milnor-epimorphic with the constant Z_l ring turns Rlim into the ordinary limit, and the limit is the completed coefficient sheaf by det-prop-sfb-qlbar-colimit-x-integral-limit with E=Q_l. Delta is closed with quasi-compact complement (D(t), W Noetherian), so lem-exc-proetale-closed-exact over Z/l^(n+1) keeps the pushed-forward tower epimorphic. One fault (C4/E6): the general direct-image clause cited prop-weil-pbc-direct-image-limits, which is stated for towers over the completed sheaf A_T, and def-weil-pbc-adic-coefficient-datum explicitly asserts no identification with constant coefficients. The item's systems in D(W^N) are towers of constant-sheaf Z_l-modules. Repaired by citing lem-weil-ringed-tower-pushforward-limit-comparison, which holds for any morphism of ringed topoi, together with lem-weil-pbc-ringed-strict-tower-homotopy-limit and def-weil-pbc-ringed-topos-morphism. I checked that none of these reaches the item, so there is no cycle. proof_deps and tool_uses are updated; prop-weil-pbc-direct-image-limits is no longer cited. Step 2: det-formal-closed-support-ii-limits applies in the situation of sk-lem-formal-closed-support with X=Z=S=W, identity immersions, empty complement and admissible Lambda=Z_l. The twist is locally free of rank one by sk-def-sp-tate-twist and lem-pur-twist (2), and the dual is locally free of rank one. Step 3: completion comes from det-prop-diagonal-tower-system (2)-(4). The unique Z_l-linear lift comes from sk-lem-integral-models (1) with E=Q_l. Reductions come from lemma-weil-pbc-adic-completion-reduction with Lambda=Z_l and I=(l): F_l is torsion and Z/l^n is perfect. lem-weil-pbc-constant-completion-equivalence compares constant and completed reductions and transfers completeness. Edge cases checked: Y empty, n=1, l=2. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-prop-diagonal-tower-limit.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
