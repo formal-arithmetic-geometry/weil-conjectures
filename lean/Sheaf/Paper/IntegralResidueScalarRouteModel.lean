@@ -6,9 +6,8 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
-import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
-import Sheaf.Paper.IntegralResiduePullSquare
-import Sheaf.Paper.IntegralResidueTensorPresentation
+import Sheaf.Paper.IntegralResidueScalarGeometryBridge
+import Sheaf.Paper.IntegralResidueTensorRouteModel
 
 /-! Computation of the scalar-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
@@ -24,6 +23,31 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+
+private theorem existsKFlatPullModel
+    {C : Type*} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    {D : Type*} [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
+    [MonoidalCategory D] [MonoidalClosed D] [MonoidalPreadditive D] [BraidedCategory D]
+    (F : C ⥤ D) [F.Additive] [F.PreservesFlat] [PreservesColimitsOfShape ℤ F]
+    (M : DerivedCategory C) :
+    ∃ R, (HomotopyCategory.quasiIso C (.up ℤ)).kFlat R ∧ F.kFlatMap R ∧
+      Nonempty (DerivedCategory.Qh.obj R ≅ M) := by
+  let Λ := (inferInstance : Abelian.HasFunctorialFlatResolution C).some
+  let K := DerivedCategory.Q.objPreimage M
+  let R := (HomotopyCategory.quotient C (.up ℤ)).obj
+    (Λ.reduced.resolutionFunctor.obj K)
+  have hR : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat R :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K)
+  have hFR := F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ.reduced K
+  have : IsIso (DerivedCategory.Q.map (Λ.reduced.resolutionNatTrans.app K)) :=
+    inferInstance
+  exact ⟨R, hR, hFR, ⟨(DerivedCategory.quotientCompQhIso C).app
+    (Λ.reduced.resolutionFunctor.obj K) ≪≫
+      asIso (DerivedCategory.Q.map (Λ.reduced.resolutionNatTrans.app K)) ≪≫
+      DerivedCategory.Q.objObjPreimageIso M⟩⟩
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -58,6 +82,41 @@ theorem integralResidue_scalarRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
         (residueExchangeTensorPullIso ℓ E f).hom.app
           ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫
         residueExchangeTensorModelTarget ℓ E f P =
-      residueExchangeTensorModelMap ℓ E f P := by sorry
+      residueExchangeTensorModelMap ℓ E f P := by
+  set_option linter.style.haveILetI false in
+  classical
+  letI := residueExchangePullMonoidal ℓ E f
+    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
+  let M := DerivedCategory.Qh.obj P
+  let F := residueExchangeUpperStar (integralCoeff ℓ E) f
+  let RY := residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y
+  let B := F.obj (residueExchangeCoefficient ℓ E Y)
+  let α : RY ⋙ F ⟶ F ⋙ tensorRight B :=
+    Functor.whiskerRight (residueExchangeTensorIso ℓ E Y).hom F ≫
+      (Functor.Monoidal.commTensorRight F (residueExchangeCoefficient ℓ E Y)).inv
+  let β : RY ⋙ F ⟶ F ⋙ tensorRight B :=
+    Functor.whiskerLeft (residueExchangeReduction ℓ E Y)
+        (residueExchangeRestrictPullIso ℓ E f).hom ≫
+      Functor.whiskerRight ((residueExchangePullComparisons ℓ E).pull f).inv
+        (residueExchangeRestriction ℓ E X) ≫
+      Functor.whiskerLeft F (residueExchangeTensorPullIso ℓ E f).hom
+  have hgeom : α.app M = β.app M := by
+    obtain ⟨R, hR, hFR, ⟨e⟩⟩ :=
+      existsKFlatPullModel ((f)^*⟦integralCoeff ℓ E⟧) M
+    have h : α.app (DerivedCategory.Qh.obj R) = β.app (DerivedCategory.Qh.obj R) := by
+      simpa only [α, β, NatTrans.comp_app, Functor.whiskerRight_app,
+        Functor.whiskerLeft_app, Functor.Monoidal.commTensorRight_inv_app,
+        Functor.Monoidal.μIso_inv, Category.assoc] using
+          integralResidue_tensorGeometry_component ℓ E f hFlat R hR hFR
+    have hα := α.naturality e.hom
+    have hβ := β.naturality e.hom
+    rw [h, ← hβ] at hα
+    exact (cancel_epi ((RY ⋙ F).map e.hom)).mp hα
+  have hmodel := congrArg (fun k ↦ k ≫ residueExchangeTensorModelTarget ℓ E f P)
+    hgeom.symm
+  simp only [α, β, M, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.Monoidal.commTensorRight_inv_app,
+    Category.assoc] at hmodel
+  exact hmodel.trans (integralResidue_tensorRoute_model ℓ E f hFlat P)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
