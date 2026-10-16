@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-thm-sf-pf-adic-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral open direct image preserves constructibility",
- "statement": "Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion and\n$K\\in\\Dbc(U,\\mathcal O_E)$. Then $Rj_*K$ is derived complete,\n$(Rj_*K)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathbf F_{E,X}\\simeq Rj_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,U}}\\mathbf F_{E,U})$\nwith $\\mathbf F_E=\\mathcal O_E/\\pi_E$, and $Rj_*K\\in\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and the separated finite-type $k$-scheme setting of [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite, with ring of integers $\\mathcal O_E$, uniformizer $\\pi_E$, and residue field $\\mathbf F_E=\\mathcal O_E/\\pi_E$ [def-weil-l-adic-coefficient-extension]. Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion of schemes in this setting [def-weil-open-immersion, def-weil-finite-type-morphism]. On their small pro-étale sites use the completed coefficient sheaves $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\pi_E^n)_T$ and the constant finite sheaves $\\mathbf F_{E,T}$, for $T=U,X$ [sk-def-sfb-pulled-back-coefficients, det-prop-sfb-qlbar-colimit-x-integral-limit]. Use the derived module direct image [sk-def-sfb-module-derived-pushpull], derived tensor [sk-def-sfb-derived-tensor-hom], bounded constructible categories [sk-def-sfb-bounded-constructible, sk-def-sfb-constructible], and their finite Tor amplitude subcategories [det-def-sfb-constructible-tor-amplitude]. If $K\\in\\Dbc(U,\\mathcal O_E)$, then $Rj_*K$ is derived complete [sk-def-pe-derived-completion], the canonical finite-reduction comparison is an isomorphism\n$$\n(Rj_*K)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathbf F_{E,X}\\xrightarrow{\\sim}Rj_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,U}}\\mathbf F_{E,U}),\n$$\nand $Rj_*K\\in\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.md",
   "place": "node det-thm-sf-pf-adic-open, order None",
@@ -26,38 +26,221 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-pe-derived-completion"
+ ],
  "proof": [
   {
-   "text": "*Completeness.* $K=R\\varprojlim_n K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ and\n$Rj_*$ commutes with $R\\varprojlim$ (both are right adjoints of exact functors,\nStacks, Tag 099L), so $Rj_*K$ is the derived limit of the\n$Rj_*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$, and it is derived complete.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $A=\\mathcal O_E$, $t=\\pi_E$, and $P_n=A/t^nA$. Apply [sk-lem-integral-models] (2) on $U$: since $K\\in\\Dbc(U,A)$, $K$ is derived complete and $\\bar K=K\\otimes^{\\mathbf L}_{A_U}(P_1)_U$ is bounded constructible and pulled back from $U_{\\mathrm{ét}}$. The coefficient and scheme hypotheses are exactly its separated finite-type setting. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain, hence Noetherian (every ideal has one generator), and $P_1$ is a finite field. Its characteristic is $\\ell$: the extending absolute value gives $|\\ell|_E<1$, so $\\ell$ lies in the maximal ideal; the residue field is nonzero and $\\ell$ is prime. Thus $\\ell P_1=0$, and $\\ell$ is invertible in $k$.",
+   "uses": [
+    "sk-lem-integral-models",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility of the reduction, first sentence; integral criterion applied to the input"
+   }
   },
   {
-   "text": "*Reduction.* $K\\otimes^{\\mathbf L}\\mathbf F_{E,U}$ is the cone of\nmultiplication by $\\pi_E$ on $K$. $Rj_*$ is exact and $\\mathcal O_E$-linear, so\nit carries this cone to the cone of $\\pi_E$ on $Rj_*K$, which is\n$(Rj_*K)\\otimes^{\\mathbf L}\\mathbf F_{E,X}$.",
-   "uses": [],
-   "elementary": null
+   "text": "The coefficient resolution of [det-pe-derived-nakayama-resolution], applied on $U$ and $X$, identifies reduction modulo $t^n$ with the cone of multiplication by $t^n$. The unbounded right derived functor $Rj_*$ is triangulated by [lem-pc-right-derived-functor-triangulated]; its K-injective module construction [sk-def-sfb-module-derived-pushpull] is $A$-linear, since termwise direct image sends $t^n\\operatorname{id}$ to $t^n\\operatorname{id}$. It therefore sends the reduction cone of $K$ to the reduction cone of $Rj_*K$. To fix the canonical comparison, rather than an arbitrary isomorphism of cones, apply the finite-reduction clause of [prop-weil-pbc-direct-image-limits] with $(A,I)=(\\mathcal O_E,(t))$ and $f=j$. The tower datum [def-weil-pbc-adic-coefficient-datum] requires every $P_n$ to be finite and perfect over $A$; these exact hypotheses are supplied, for all $n\\ge1$, by [lem-weil-pbc-standard-quotients-perfect]. Its two-term finite free resolution is the ring-module counterpart of the sheaf resolution above. The residue is torsion by step 1, and $I$ has the single generator $t$. It identifies the projection-formula comparison\n$$(Rj_*K)\\otimes^{\\mathbf L}_{A_X}(P_n)_X\\xrightarrow{\\sim}Rj_*(K\\otimes^{\\mathbf L}_{A_U}(P_n)_U)$$\nand states that it commutes with $P_{n+1}\\to P_n$. The case $n=1$ is the comparison asserted in the item. All categories here use completed coefficient sheaves, as in that node's tower datum; no identification with discrete constant $A$-module categories is made.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-pc-right-derived-functor-triangulated",
+    "sk-def-sfb-module-derived-pushpull",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph; use all powers t^n and the canonical compatible comparisons"
+   }
   },
   {
-   "text": "*Constructibility of the reduction.* $K\\otimes^{\\mathbf L}\\mathbf F_{E,U}$ is\na bounded constructible complex of $\\mathbf F_E$-modules pulled back from the\nétale site, and its pro-étale direct image is the pullback of the étale direct\nimage (Stacks, Tag 09A6). The latter is bounded constructible by\n[sk-cor-geo-open-finiteness], applicable because $\\mathbf F_E$ is a finite\nfield of characteristic $\\ell$ (a finite free extension of $\\mathbf F_\\ell$).",
-   "uses": [],
-   "elementary": null
+   "text": "Let $K_\\bullet$ be the reduction tower of $K$. The canonical completion unit $K\\to R\\varprojlim K_\\bullet$ is an isomorphism by step 1 and [sk-def-pe-derived-completion]. Apply the derived-limit comparison of [prop-weil-pbc-direct-image-limits]: it gives\n$$Rj_*K\\simeq Rj_*R\\varprojlim K_\\bullet\\simeq R\\varprojlim Rj_*^{\\operatorname{Tow}}K_\\bullet.$$\nIts evaluation identifications identify the level $n$ of the last tower with $Rj_*K_n$. By the compatible canonical reduction isomorphisms of step 2, these are exactly the reductions of $Rj_*K$, including their transition maps. The completion-map clause of the cited node identifies this composite with the canonical completion unit of $Rj_*K$, not just an abstract isomorphism with some inverse limit. Hence $Rj_*K$ is derived complete.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph; include identification of the tower and its completion map"
+   }
   },
   {
-   "text": "*Conclusion.* $Rj_*K$ is derived complete with bounded constructible reduction\nmodulo $\\pi_E$, so the residue criterion (Stacks, Tag 09C1; compare\n[sk-prop-integral-criterion]) gives $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$.",
-   "uses": [],
-   "elementary": null
+   "text": "The constructible comparison [sk-thm-pe-constructible-comparison] applies to the finite discrete field $P_1$ and the qcqs scheme $U$. It supplies $L\\in D^b_c(U_{\\mathrm{ét}},P_1)$ with $\\nu_U^*L\\simeq\\bar K$. Apply [cor-fin-deligne-open-finite-coefficients] with $A=P_1$ and annihilating integer $\\ell$: $U,X$ are finite-type over $k$, $j$ is open, $P_1$ is finite, and $\\ell$ is invertible in $k$ by step 1. Consequently $Rj_{\\mathrm{ét},*}L\\in D^b_c(X_{\\mathrm{ét}},P_1)$. This is the finite-coefficient open-finiteness input of the blueprint; no properness of $j$ is required.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "cor-fin-deligne-open-finite-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility of the reduction; descend the complex and apply finite-coefficient open finiteness"
+   }
+  },
+  {
+   "text": "The map $j$ is quasi-compact by hypothesis and quasi-separated: an open immersion identifies $U\\times_XU$ with $U$, and its diagonal with the identity of $U$, which is quasi-compact by the definition (the preimage of an affine open is that affine open). Thus the hypotheses of [prop-weil-pbc-comparison-direct-image] hold for $j$ and the bounded-below complex $L$ of step 4. Its natural isomorphism gives\n$$Rj_{\\mathrm{proét},*}\\bar K\\simeq\\nu_X^*Rj_{\\mathrm{ét},*}L.$$\nThe right side is bounded constructible by the bounded constructible derived equivalence of [sk-thm-pe-constructible-comparison] on $X$. To relate this residue-coefficient direct image to the ambient $A$-coefficient direct image in step 2, put $B_T=(P_1)_T$ and let $r_T:(T_{\\mathrm{proét}},B_T)\\to(T_{\\mathrm{proét}},A_T)$ be the identity on the underlying topos with ring map $A_T\\to B_T$. Its module direct image is restriction of scalars [def-pc-sheaf-restrict-scalars]. This restriction is exact: kernels and cokernels have the same underlying abelian sheaves. By [lem-weil-pbc-exact-functor-derived-functor], $Rr_{T,*}=\\operatorname{Res}_T$. The two composites $r_X\\circ j_B$ and $j_A\\circ r_U$ are the same morphism of ringed topoi: both have underlying $j$ and ring map $j^{-1}A_X\\to A_U\\to B_U$, since reduction of coefficient sections commutes with pullback. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to both factorizations to obtain\n$$Rj_{A,*}\\operatorname{Res}_U\\bar K\\simeq\\operatorname{Res}_X Rj_{B,*}\\bar K.$$\nThus the canonical isomorphism of step 2 at $n=1$ identifies the underlying $A_X$-complex of the first reduction of $Rj_*K$ with the restriction of the bounded constructible étale-origin $B_X$-complex just obtained. Even if the reduction comparison is viewed in the ambient $A_X$-derived category, it induces $P_1$-linear isomorphisms on cohomology: both cohomology actions factor through $A_X\\twoheadrightarrow(P_1)_X$, so an $A_X$-linear map is automatically $(P_1)_X$-linear. Thus the constructibility conclusion is genuinely for the residue coefficient modules, not just for underlying abelian sheaves.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism",
+    "prop-weil-pbc-comparison-direct-image",
+    "sk-thm-pe-constructible-comparison",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility of the reduction; qcqs direct-image comparison and return to the pro-étale site"
+   }
+  },
+  {
+   "text": "Steps 3 and 5 establish the two conditions in [sk-lem-integral-models] (2) on $X$: derived completeness and bounded constructible étale-origin residue reduction. It follows that $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$. The same node explicitly asserts $\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$ in this setting, so the finite Tor amplitude conclusion also follows. This uses the existing residue criterion, which realizes the blueprint's reference to the integral constructibility criterion, and proves every clause of the item.",
+   "uses": [
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Conclusion paragraph, including the finite Tor amplitude equality"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-lem-integral-models",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "sk-def-sfb-module-derived-pushpull",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "sk-def-pe-derived-completion",
+  "sk-thm-pe-constructible-comparison",
+  "cor-fin-deligne-open-finite-coefficients",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "All four paragraphs, expanded in six steps; canonical tower input from the cited existing general nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived complete direct image open immersion reduction modulo uniformizer constructible",
+   "results": "8 hits: BDeRhamPlus, BDeRham, PreTilt.exists_smodEq_untiltAux, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.specTargetImage, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Scheme.Hom.toImage_app",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.derivedComplete, IsConstructible, Rj_*",
+   "results": "0 hits: . loogle: <input>:1:54: unexpected end of input",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: <input>:1:54: unexpected end of input"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|boundedConstructibleIntegral|rightDerivedLowerStar",
+   "results": "0 hits:  (subdirectory Mathlib)",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: redundant Mathlib subdirectory selected; superseded by the root grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open direct image preserves bounded constructible derived complete integral adic complexes",
+   "results": "8 hits: Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.image_mono, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Hom.image_le_image_of_le, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.Scheme.Hom.coe_image",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward of adic sheaves commutes with reduction modulo a uniformizer and preserves constructibility",
+   "results": "8 hits: localCohomology.diagram, localCohomology.ofDiagram, BDeRhamPlus, AdicCompletion.transitionMap_comp_reduceModIdeal, localCohomology.ringModIdeals, localCohomology.ofSelfLERadical, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, localCohomology",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|constructible.*sheaf|derived.*complet",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean (subdirectory CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, \"derived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|boundedConstructibleIntegral|rightDerivedLowerStar|constructible.*sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|derived",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: none states preservation of bounded constructible integral pro-etale complexes under open direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction",
+   "results": "5 hits in AlgebraicGeometry/Modules/Sheaf.lean: 425, 434, 437, 438, 439; the wrapper renders line numbers as file names for a single-file grep. Read the actual source at 425-439 and 264 respectively.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are structure-sheaf module adjunctions or images of topological constructible subsets, not integral pro-etale constructible direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible.image_of_isOpenEmbedding",
+   "results": "1 hits in Topology/Constructible.lean: 264; the wrapper renders line numbers as file names for a single-file grep. Read the actual source at 425-439 and 264 respectively.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are structure-sheaf module adjunctions or images of topological constructible subsets, not integral pro-etale constructible direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|ProEtale|Constructible.*[Ss]heaf",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed-module constructions and pro-etale coefficient-site definitions do not state the integral constructible open-direct-image theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image preserves constructible sheaves with p-adic integer coefficients on proetale sites",
+   "results": "8 hits: Condensed.profiniteSolid, LightCondMod.LocallyConstant.functorToPresheaves, Condensed.lanSheafProfinite, Condensed.profiniteFree, CondensedMod.LocallyConstant.functor, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed-module constructions and pro-etale coefficient-site definitions do not state the integral constructible open-direct-image theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -72,5 +255,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-pf-adic"
+ "unit": "sk-thm-sf-pf-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sf-pf-adic-open",
+  "worker": "stage1",
+  "summary": "Made the standing positive-characteristic separated finite-type scheme setting and coefficient category explicit; supplied canonical all-level reduction and completion-unit compatibility, then finite-coefficient open finiteness and qcqs etale/pro-etale comparison. Reused existing nodes only, including sk-lem-integral-models for the residue criterion and finite Tor equality; no new nodes or Lean attachments. Statement dispute and stale unit metadata are documented in report.md. Independent second reading adds the exact restriction-of-scalars/derived-composition argument connecting integral and residue direct images.",
+  "blueprint": "Reduction paragraph is step 2; Completeness is steps 1 and 3; Constructibility of the reduction is steps 1, 4 and 5; Conclusion is step 6. The current main-20261015 unit is Open direct image and projection formula, unlike the stale recorded unit text."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-3d9911b67",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-3d9911b67 (reviewer sub-agent of L); spot-checked: Read all six steps, every cited statement, and cited source passages. Canonical reduction, completion-unit compatibility, finite-coefficient comparison, and scalar restriction are valid; torsion, empty, and identity cases pass. No new nodes or dependency cycle. Accepted tools and inherited stale unit/source metadata are documented in review.md."
+ }
 }
