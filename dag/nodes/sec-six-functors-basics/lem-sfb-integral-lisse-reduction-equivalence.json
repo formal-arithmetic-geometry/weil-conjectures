@@ -302,5 +302,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lisse_reduction_equivalence",
+  "statement": "theorem integral_lisse_reduction_equivalence (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) : Nonempty (IntegralLisseReductionEquivalence l E X)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/IntegralLisseReductionEquivalence.lean",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLisseRing",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteRing",
+   "AlgebraicGeometry.ProEtale.integralLisseReduction",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteConstant",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteTransition",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteDiagram",
+   "AlgebraicGeometry.ProEtale.integralLisseFiniteRestriction",
+   "AlgebraicGeometry.ProEtale.integralLisseScalar",
+   "AlgebraicGeometry.ProEtale.IsIntegralLisseQuotient",
+   "AlgebraicGeometry.ProEtale.IntegralLisseModule",
+   "AlgebraicGeometry.ProEtale.IsIntegralReductionTower",
+   "AlgebraicGeometry.ProEtale.IntegralReductionTower",
+   "AlgebraicGeometry.ProEtale.integralLisseRingMap",
+   "AlgebraicGeometry.ProEtale.integralLisseFraction",
+   "AlgebraicGeometry.ProEtale.IntegralLisseReductionEquivalence",
+   "AlgebraicGeometry.ProEtale.integral_lisse_reduction_equivalence"
+  ],
+  "note": "Second reading: replaced the abstract carriers and tautological naturality fields by actual full categories of finite locally free module sheaves and normalized towers. The equivalence is characterized by the scalar-cokernel reduction universal properties, sheaf-limit completion, genuine naturality, and the canonical unit/counit projection identities at every positive level. Includes the canonical coefficient limit, quotient and localization identifications. Towers use restriction of scalars along the actual continuous-function quotient map; quotient normalization is the sheaf tensor quotient of the node, expressed by its cokernel universal property. All helper definitions belong to this node and have real data; only its theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-516d1a27b",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt-dep records and their declarations (LisseLatticeCoefficientsSized, CoefficientExtension, IsFiniteLocallyFree, RingedSiteModules, TensorProductOfUniverses, Mathlib constantSheaf), the BS Lemma 6.8.2 / Def 6.8.3 / Prop 6.8.4(1) source place, the module and the report. Every clause matches: any scheme X; the finite extension uses the recorded A, ϖ, A/ϖ^n; A_X, E_X are the recorded sized sheaves; constant finite rings are pinned on constant sections; the coefficient limit, quotient and localization are given by universal properties with fixed legs; Loc is the existing isFiniteLocallyFree (varying rank, rank 0); towers are restrictions of finite locally free A_n-modules with cokernel normalization; the equivalence, quasi-inverse, unit and counit are pinned by reduction/completion/projection equations at all levels. Accepted finding: tensor normalization is written as the cokernel of ϖ^{n+1}, which is equivalent because A_{n} = A_{n+1}/ϖ^n sectionwise; no private copy. E : Type (u+1) is the recorded dependency's own universe. Edge cases (empty X, zero module, varying rank, ℓ = residue char) covered. No hollow defs, only the theorem is sorry, docstrings and proof steps present, statement verbatim, only the lean field changed, lines ≤100. nt_compile.py --json on the snapshot file: exit 0, no messages, 7.7 s, reproduced twice."
  }
 }
