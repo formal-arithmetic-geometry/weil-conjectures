@@ -17,7 +17,6 @@
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralGluing` | 5 | 1 | proof |
@@ -34,6 +33,7 @@
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralConstructibleSheafHom` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixAnalyticCover` | 7 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 8 | 1 | proof |
