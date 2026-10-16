@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-prop-sf-existence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence of the exceptional inverse image",
- "statement": "Let $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring. For every separated finite-type morphism $f:X\\to Y$, the\ncoproduct-preserving functor\n$Rf_!:\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ has an exact right adjoint\n\n$$\nf^!:\\Loc(\\Dctf(Y,\\Lambda))\\longrightarrow\\Loc(\\Dctf(X,\\Lambda)),\\qquad\n\\Hom(Rf_!M,N)\\simeq\\Hom(M,f^!N),\n$$\n\nfor $M\\in\\Loc(\\Dctf(X,\\Lambda))$ and $N\\in\\Loc(\\Dctf(Y,\\Lambda))$. It is unique\nup to unique isomorphism compatible with the adjunction and preserves\narbitrary direct sums.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism ([sk-def-sfb-dc-setting]). Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell\\}$ be admissible: $A$ is a finite commutative ring killed by a power of $\\ell$, and $E/\\mathbf Q_\\ell$ is finite, with valuation ring $\\mathcal O_E$. Use the pro-étale coefficient categories and $\\Dctf$ of [sk-def-sfb-constructible], and the localizing closures of [sk-def-localizing-closure]. For a chosen compactification $f=p\\circ j$, with $j$ a quasi-compact open immersion and $p$ proper ([sk-def-nagata-sketch-data]), let $Rf_!$ be the restriction of $Rp_*D(j_!)$ to these closures, with the module-object coefficient convention of [sk-def-sfb-module-derived-lower-shriek]. Then the exact coproduct-preserving functor\n$$\nRf_!:\\Loc(\\Dctf(X,\\Lambda))\\longrightarrow\\Loc(\\Dctf(Y,\\Lambda))\n$$\nhas an exact right adjoint\n$$\nf^!:\\Loc(\\Dctf(Y,\\Lambda))\\longrightarrow\\Loc(\\Dctf(X,\\Lambda)),\\qquad\n\\Hom(Rf_!M,N)\\simeq\\Hom(M,f^!N),\n$$\nnaturally for every $M\\in\\Loc(\\Dctf(X,\\Lambda))$ and $N\\in\\Loc(\\Dctf(Y,\\Lambda))$. It is unique up to a unique isomorphism compatible with the adjunction, and it preserves arbitrary set-indexed direct sums.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
   "place": "node sk-prop-sf-existence, order 1541",
@@ -23,34 +23,243 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-localizing-closure"
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-module-derived-lower-shriek"
  ],
  "proof": [
   {
-   "text": "For $N\\in\\Loc(\\Dctf(Y,\\Lambda))$, the functor\n\n$$\n\\Loc(\\Dctf(X,\\Lambda))^{\\mathrm{op}}\\longrightarrow\\Ab,\\qquad\nM\\longmapsto\\Hom(Rf_!M,N)\n$$\n\nis cohomological and sends direct sums to products ($Rf_!$ is exact and\npreserves direct sums by [sk-prop-sf-comp-coherence]). By\n[sk-lem-brown-hypotheses], Brown representability (Stacks, Tag 0A8F) gives a\nrepresenting object $f^!N$. The Yoneda lemma makes these objects into a right\nadjoint, and a right adjoint of an exact functor of triangulated categories is\nexact (Stacks, Tag 0A8G).",
+   "text": "Put $\\mathcal C=\\Loc(\\Dctf(X,\\Lambda))$ and $\\mathcal D=\\Loc(\\Dctf(Y,\\Lambda))$. By [sk-lem-brown-hypotheses], both are locally small triangulated categories with arbitrary direct sums, and small skeletons of their $\\Dctf$ subcategories are compact generating sets. The standing finite-type separated schemes are qcqs: finite type includes quasi-compactness, and separatedness makes the diagonal a closed immersion, hence quasi-compact. Nagata [sk-thm-nagata-compactification] therefore supplies $f=p\\circ j$ with $j$ quasi-compact open and $p$ proper. For this compactification, [det-sf-comp-coherence-single] says exactly that $F=Rp_*D(j_!):\\mathcal C\\to\\mathcal D$ is exact, preserves direct sums and sends $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. This is the $Rf_!$ fixed in the statement.",
    "uses": [
-    "sk-lem-brown-hypotheses"
+    "sk-lem-brown-hypotheses",
+    "sk-thm-nagata-compactification",
+    "det-sf-comp-coherence-single"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/sk-prop-sf-existence.proof.md",
+    "place": "First paragraph: the Brown hypotheses and exact, coproduct-preserving lower shriek; compactification input is det-sf-comp-coherence-single."
+   }
   },
   {
-   "text": "For direct sums, test the canonical map\n$\\bigoplus_\\alpha f^!N_\\alpha\\to f^!(\\bigoplus_\\alpha N_\\alpha)$ in\n$\\Loc(\\Dctf(X,\\Lambda))$ on a compact generator $G\\in\\Dctf(X,\\Lambda)$ and its\nshifts. Both $G$ and $Rf_!G\\in\\Dctf(Y,\\Lambda)$ are compact, so adjunction\nidentifies the two Hom groups with $\\bigoplus_\\alpha\\Hom(Rf_!G[n],N_\\alpha)$. The\ngenerators detect isomorphisms, which proves the assertion.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-pc-brown-representability-right-adjoint] to $F:\\mathcal C\\to\\mathcal D$. Its hypotheses are precisely those established in step 1: set-indexed coproducts in both categories, compact generation of $\\mathcal C$, exactness of $F$, and preservation of coproducts by $F$. It gives a functor $G:\\mathcal D\\to\\mathcal C$ with $F\\dashv G$. Write $f^!=G$, let $\\varepsilon_N:FGN\\to N$ be the counit, and use the natural adjunction bijections $\\Hom_{\\mathcal D}(FM,N)\\cong\\Hom_{\\mathcal C}(M,GN)$. This is a single Brown application on $\\mathcal C$, not on the whole ambient pro-étale derived category.",
+   "uses": [
+    "lem-pc-brown-representability-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8G, proposition-brown: Brown representability gives a right adjoint."
+   }
+  },
+  {
+   "text": "The adjunction determines the shift structure on $G$. For every integer $n$, the natural chain\n$$\\Hom(M,GN[n])\\cong\\Hom(M[-n],GN)\\cong\\Hom(F(M[-n]),N)\\cong\\Hom(FM,N[n])\\cong\\Hom(M,G(N[n]))$$\nuses the shift structure of the exact functor $F$. The chain and its inverse are natural in $M$; [lem-galois-yoneda-fully-faithful] therefore gives mutually inverse maps $GN[n]\\cong G(N[n])$. The same naturality calculation for $n,m$ shows that the map for $n+m$ equals the composite of the maps for $n$ and $m$, so these are coherent shifts. Equivalently, the map $GN[1]\\to G(N[1])$ is the transpose of\n$$F(GN[1])\\cong F(GN)[1]\\xrightarrow{\\varepsilon_N[1]}N[1].$$\nBy the transpose formula, its counit square commutes. For the unit, transpose both composites from $M[1]$ to $G(FM)[1]$ and to $G(F(M[1]))$; the counit square and the two triangle identities reduce both transposes to the identity of $F(M)[1]$, so the unit square commutes. Thus the hypotheses, including adjunction-compatible coherent shifts, of [lem-sf-triangulated-right-adjoint] hold, and that lemma makes $G$ exact.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; canonical shift structure before applying exactness."
+   }
+  },
+  {
+   "text": "If $J$ is any other right adjoint of $F$, with counit $\\varepsilon^J$, apply [det-sp-unique-right-adjoint]. Its component $\\gamma_N:GN\\to JN$ is the $J$-transpose of $\\varepsilon_N$; its inverse is the $G$-transpose of $\\varepsilon^J_N$. The cited statement asserts that these components are natural, mutually inverse and the only counit-compatible family. Hence the adjoint is unique up to the unique adjunction-compatible natural isomorphism claimed.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
+    "place": "Part (3), uniqueness of right adjoints."
+   }
+  },
+  {
+   "text": "Let $(N_\\alpha)_{\\alpha\\in I}$ be any set-indexed family in $\\mathcal D$, let $\\iota_\\alpha:N_\\alpha\\to\\bigoplus_\\alpha N_\\alpha$ be its coprojections, and let $\\theta:\\bigoplus_\\alpha GN_\\alpha\\to G(\\bigoplus_\\alpha N_\\alpha)$ have restriction $G\\iota_\\alpha$ on each summand. Choose a small skeleton $S_X$ of $\\Dctf(X,\\Lambda)$. For $P\\in S_X$ and every $n\\in\\mathbf Z$, $P[n]$ lies in $\\Dctf$ because that category is thick, hence it is isomorphic to an object of $S_X$ and is compact by [sk-lem-brown-hypotheses]; compactness is invariant under isomorphism. By [det-sf-comp-coherence-single], $F(P[n])\\in\\Dctf(Y,\\Lambda)$, so it is likewise isomorphic to a skeleton object and compact in $\\mathcal D$. Using the defining bijections of compactness [def-pc-compact-object] and adjunction gives\n$$\\Hom(P[n],\\bigoplus_\\alpha GN_\\alpha)\\cong\\bigoplus_\\alpha\\Hom(P[n],GN_\\alpha)\\cong\\bigoplus_\\alpha\\Hom(F(P[n]),N_\\alpha)\\cong\\Hom(F(P[n]),\\bigoplus_\\alpha N_\\alpha)\\cong\\Hom(P[n],G(\\bigoplus_\\alpha N_\\alpha)).$$\nThis composite is exactly $\\Hom(P[n],\\theta)$: on an element $a:P[n]\\to GN_\\alpha$, naturality of the adjunction sends $G\\iota_\\alpha\\circ a$ to $\\iota_\\alpha\\circ\\varepsilon_{N_\\alpha}\\circ F(a)$. These are the maps defining the displayed compactness bijections. Therefore postcomposition by $\\theta$ is bijective on every shifted generator.",
+   "uses": [
+    "sk-lem-brown-hypotheses",
+    "det-sf-comp-coherence-single",
+    "def-pc-compact-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/sk-prop-sf-existence.proof.md",
+    "place": "Second paragraph: compact-generator Hom calculation, with the canonical map checked on each coprojection."
+   }
+  },
+  {
+   "text": "Complete $\\theta:A\\to B$ to a distinguished triangle $A\\xrightarrow{\\theta}B\\to C\\to A[1]$ in $\\mathcal C$. By [lem-weil-pbc-hom-into-triangle-exact] and its shifted/rotated instances, the sequence $\\Hom(P[n],A)\\to\\Hom(P[n],B)\\to\\Hom(P[n],C)\\to\\Hom(P[n],A[1])\\to\\Hom(P[n],B[1])$ is exact. The first and last arrows are bijective by step 5 (the last is the $n-1$ test). Thus $\\Hom(P[n],C)=0$ for every $P,n$. The explicit zero-detection assertion of [det-brown-hypotheses-generation] gives $C=0$. Finally [lem-kun-distinguished-cone-zero] makes $\\theta$ an isomorphism. The empty indexing set is included: all Hom groups in step 5 are zero and the same cone argument applies. Hence $G=f^!$ preserves every set-indexed direct sum.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "det-brown-hypotheses-generation",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/sk-prop-sf-existence.proof.md",
+    "place": "Second paragraph: generators detect the canonical comparison, spelled out using its cone."
+   }
   }
  ],
  "proof_deps": [
   "sk-lem-brown-hypotheses",
-  "sk-prop-sf-comparison"
+  "sk-thm-nagata-compactification",
+  "det-sf-comp-coherence-single",
+  "lem-pc-brown-representability-right-adjoint",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sf-triangulated-right-adjoint",
+  "det-sp-unique-right-adjoint",
+  "def-pc-compact-object",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "det-brown-hypotheses-generation",
+  "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/sk-prop-sf-existence.proof.md",
+  "place": "Both paragraphs; expanded using Stacks derived.tex Tags 0A8G and 0A8D and the existing categorical nodes."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Brown|isTriangulated_rightAdjoint|rightAdjoint.*[Cc]ompact",
+   "results": {
+    "hits": 7,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsLeftAdjoint",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image right adjoint to compact support direct image on localizing closures of constructible sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "TopCat.Sheaf.pullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
+     "CategoryTheory.Functor.sheafAdjunctionContinuous",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "TopCat.Sheaf.pullbackPushforwardAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "Topology.IsInducing.adjunction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact coproduct preserving functor between compactly generated triangulated categories has an exact right adjoint preserving coproducts if it preserves compact objects",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.comp",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|rightDerivedUpperShriek|CompactlyGenerated|[Bb]rown[Rr]epresent",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Algebra/Lie/Semisimple/Basic.lean",
+     "Mathlib/Algebra/Lie/Submodule.lean",
+     "Mathlib/LinearAlgebra/Span/Basic.lean",
+     "Mathlib/LinearAlgebra/Span/Basic.lean",
+     "Mathlib/Topology/Algebra/Polynomial.lean",
+     "Mathlib/Topology/MetricSpace/ProperSpace/Lemmas.lean",
+     "Mathlib/Topology/Category/CompactlyGenerated.lean",
+     "Mathlib/Topology/Category/CompactlyGenerated.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown representability gives a right adjoint of a coproduct preserving exact functor of compactly generated triangulated categories",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Functor.rightAdjointObjIsDefined_iff",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Functor.rightAdjointObjIsDefined",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Functor.rightAdjointObjIsDefined_limit",
+     "CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isTriangulated_rightAdjoint\"",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric localizing-closure theorem; exactness of an already supplied triangulated adjoint is only one formal ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown representability|compactly generated triangulated|rightDerivedLowerShriek|rightDerivedUpperShriek",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -81,5 +290,40 @@
   "sk-def-localizing-closure"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-prop-sf-existence",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Restored the standing finite-type separated k-scheme hypotheses made explicit in sk-thm-existence and sk-def-sfb-dc-setting. Replaced the missing coherence citation by its existing single-compactification component. Expanded the Brown application, canonical shift compatibility, uniqueness, compactness Hom calculation, and cone detection. Reused existing nodes throughout; no new lemma or definition was created.",
+  "blueprint": "The first paragraph of sk-prop-sf-existence.proof.md is realized by steps 1–4, and its second paragraph by steps 5–6. The main-20261015 localizing-closure formulation is followed, rather than the obsolete ambient/bounded-origin formulation in dag/units/sk-prop-sf-existence.json.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-brown-representability-right-adjoint",
+    "why": "The generic Brown theorem is exactly the representability tool invoked in the first paragraph; no local geometric existence theorem is substituted for it."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic uniqueness by transposing counits supplies only the formal uniqueness clause."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "General Yoneda supplies canonical shifts and their coherence, not any geometric six-functor assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-brown-representability-right-adjoint",
+  "det-sp-unique-right-adjoint",
+  "lem-galois-yoneda-hom-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-521f992c4",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-521f992c4 (reviewer sub-agent of L); spot-checked: Full review completed and written to review.md. All six steps, cited nodes, sources, hypotheses, edge cases, route constraints, coefficient category, compactification, canonical coproduct comparison, duplicates, and stale cycle flag were checked. No new nodes or repairs are needed."
+ }
 }
