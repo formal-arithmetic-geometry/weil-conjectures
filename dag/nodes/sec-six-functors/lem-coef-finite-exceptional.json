@@ -3,52 +3,281 @@
  "blueprint": {
   "is": "lem-coef-finite-exceptional",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite exceptional adjoints and coefficient change",
- "statement": "For a separated finite-type $f:X\\to Y$, on the finite-Tor\nconstructible categories one has canonically\n\n$$\nRf_n^!L\\cong D_{X,n}f^*D_{Y,n}L.\n$$\n\nFor $m\\geq n$, coefficient reduction gives a canonical isomorphism\n\n$$\n(Rf_m^!L)\\otimes^L_{A_m}A_n\n\\cong Rf_n^!(L\\otimes^L_{A_m}A_n).\n$$\n\nThese maps satisfy the quotient cocycle and identify the units and\ncounits under the compact-support coefficient comparison.",
+ "statement": "Fix the global finite-field and coefficient datum of [def-fix-six-functor-datum]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_r=A_{E,r}=\\mathcal O_E/\\varpi_E^r$ for integers $r\\ge1$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism. Work on the small pro-etale sites with the bounded constructible finite-Tor categories $\\mathcal C_{T,r}=D^b_{ctf}(T,A_r)$ of [def-weil-finite-torsion-constructibility], [def-weil-finite-tor-amplitude]. Use the constructible exceptional inverse image $G_r=Rf_r^!$ of [def-weil-exceptional-inverse-image] and the compact-support functor $F_r=Rf_{!,r}$ of [def-compact-support-direct-image-detailed]. Put $\\omega_{T,r}=Ra_T^!A_r$ and $D_{T,r}=R\\mathcal Hom_{A_r}(-,\\omega_{T,r})$ as in [def-fix-six-functor-datum], and write $f^*=Lf_r^*$ for the ordinary derived pullback of [def-weil-derived-pullback-tensor-hom]. Then there is a canonical natural isomorphism on $\\mathcal C_{Y,r}$\n$$Rf_r^!L\\cong D_{X,r}f^*D_{Y,r}L.$$\nFor $m\\ge n\\ge1$, $L\\in\\mathcal C_{Y,m}$, and $Q_T=(-)\\otimes^L_{A_m}A_n$, there is a canonical natural isomorphism\n$$b_{m,n,L}:Q_X(Rf_m^!L)\\xrightarrow{\\sim}Rf_n^!(Q_YL).$$\nThe maps satisfy the quotient cocycle: after tensor associativity, $b_{m,t}=b_{n,t}\\circ(Q_{n,t}b_{m,n})$ for $m\\ge n\\ge t\\ge1$, with the indicated components evaluated at the reduced objects, and $b_{r,r}=\\operatorname{id}$. They identify the units $\\eta_r:\\operatorname{id}\\to G_rF_r$ and counits $\\epsilon_r:F_rG_r\\to\\operatorname{id}$ under the canonical compact-support coefficient comparison $q_{m,n}:Q_YF_m\\xrightarrow{\\sim}F_nQ_X$. Equivalently,\n$$G_n(q_{m,n,K})\\circ b_{m,n,F_mK}\\circ Q_X(\\eta_{m,K})=\\eta_{n,Q_XK},$$\n$$\\epsilon_{n,Q_YL}\\circ F_n(b_{m,n,L})\\circ q_{m,n,G_mL}=Q_Y(\\epsilon_{m,L}).$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
   "place": "node lem-coef-finite-exceptional, order 2148"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
  "proof": [
   {
-   "text": "Finite exceptional preservation is [thm-sf-preservation-class].\nThe finite anti-equivalences of [thm-fix-general-biduality],\nordinary pullback–direct-image adjunction, and the formal exchange\n[fix-cor-verdier-exchange] give natural adjunction bijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(K,D_Xf^*D_YL)\n&\\cong\\operatorname{Hom}_X(f^*D_YL,D_XK)\\\\\n&\\cong\\operatorname{Hom}_Y(D_YL,Rf_*D_XK)\\\\\n&\\cong\\operatorname{Hom}_Y(D_YL,D_YRf_!K)\\\\\n&\\cong\\operatorname{Hom}_Y(Rf_!K,L).\n\\end{aligned}\n$$\n\nHere every object is in the finite-Tor constructible domain.\nUniqueness of the right adjoint identifies this functor with the\nalready constructed $Rf^!$, together with its unit and counit.\nThe internal-Hom adjunction [fix-lem-tensor-adjunction], followed\nby derived global sections, gives the corresponding canonical\nisomorphism of derived mapping complexes. This supplies the enriched\nadjunction independently of taking degree-zero Hom groups.",
+   "text": "All adjunctions below are restricted to the stated constructible categories. Choose a compactification $f=pj$ by [thm-nagata-compactification] and use $F_r=Rp_*j_!$ from [def-compact-support-direct-image-detailed]. [lem-trf-open-ctf] puts $j_!K$ in $D^b_{ctf}(\\overline X,A_r)$, and [cor-sf-direct-image-ctf-proetale], applied to the proper finite-type $p$ and an integer bounding $\\dim\\overline X$, which exists by [lem-kun-dimension-finite-type] since $\\overline X$ is finite type over $k$, puts $F_rK$ in $\\mathcal C_{Y,r}$. Every bounded constructible input is of etale origin by [lem-sf-proetale-constructible-origin]. Hence [thm-sf-ambient-adjoint-class] gives $F_r\\dashv G_r$ with its specified compactification comparisons, and clauses (1)--(2) of [thm-sf-preservation-class] give bounded constructibility and $G_r\\mathcal C_{Y,r}\\subseteq\\mathcal C_{X,r}$. More explicitly, take the finite affine chart family in that statement, with $D=0$ for an empty chart family, and $e=\\dim Y$ for nonempty $Y$ and $e=0$ otherwise. An input with cohomological interval $[a,b]$ has output interval $[a-2D,b+2e+1]$, and an input with Tor interval $[c,d]$ has output Tor interval $[c-2D,d+2e+1]$. These are assertions about the transported constructible adjoint, not the stronger ambient admissibility datum. The hypotheses are satisfied also for the structure morphisms of $X,Y$, whose targets are $\\operatorname{Spec}k$. No unrestricted pro-etale ambient adjoint is required.",
    "uses": [
+    "thm-nagata-compactification",
+    "def-compact-support-direct-image-detailed",
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-ambient-adjoint-class",
     "thm-sf-preservation-class",
-    "thm-fix-general-biduality",
-    "fix-cor-verdier-exchange",
-    "fix-lem-tensor-adjunction"
+    "lem-kun-dimension-finite-type"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 1: finite exceptional preservation and the already constructed adjoint (agent expansion checked against the archived master Proof)"
+   }
   },
   {
-   "text": "Apply the coherent duality comparisons\n[cor-coef-finite-verdier] to the two duals in this formula;\ncoefficient tensor commutes with ordinary pullback. This constructs\nthe stated coefficient isomorphism and its cocycle. To identify\nits adjunction maps, transpose under the displayed bijections.\nEvery arrow is either evaluation, a tensor associativity map, or\nan adjunction counit. The duality comparison preserves evaluation,\nand [lem-fix-compact-support-coefficient-change] preserves the\ncompact-support counit and projection construction. The transposes\nare consequently the same compact-support coefficient comparison.\nThus the maps identify the units and counits, before any tower is\nreconstructed.",
+   "text": "At each finite stage [thm-fix-general-biduality] gives the natural evaluation-defined biduality $\\delta_{T,M}:M\\xrightarrow{\\sim}D_{T,r}D_{T,r}M$ and the contravariant anti-equivalence $D_{T,r}$ on $\\mathcal C_{T,r}$, for $T=X,Y$. By [lem-sf-pullback-tor-amplitude], $f^*D_{Y,r}L$ is again in $\\mathcal C_{X,r}$, so $H_rL=D_{X,r}f^*D_{Y,r}L$ is a well-defined constructible finite-Tor object. Clause (1) of [fix-prop-adjunctions] supplies the ordinary pullback/direct-image adjunction. Only that unconditional clause is used; its exceptional-admissibility hypothesis in clause (2) is not invoked. The duals here are also exactly those in the current statement of [cor-coef-finite-verdier]: [lem-weil-finite-duality-site-comparison], applied to each $T=X,Y$ and each positive finite stage $r$, identifies $\\nu_T^*(a_T^{\\times}A_r)$ with $Ra_T^!A_r$, and identifies the internal-Hom duality, its evaluation pairing and its double-dual map under this identification. Thus the transported pro-etale dual in that corollary agrees canonically with the dual defined in this item; no change of coefficient category or choice of a second dualizing object is involved. Use the universe-small skeletons in the site definitions, so the smallness hypotheses of the two ringed-site results below hold. We also use the genuine tensor--internal-Hom bijection on these ringed sites. The internal identity $R\\mathcal Hom(U,R\\mathcal Hom(V,W))\\cong R\\mathcal Hom(U\\otimes^LV,W)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by $H^0$ and [lem-pur-rhom-global-sections], gives $\\operatorname{Hom}(U,R\\mathcal Hom(V,W))\\cong\\operatorname{Hom}(U\\otimes^LV,W)$. It sends a map to its evaluation composite, by the componentwise Hom-complex identity. Tensor products of finite-Tor constructible objects remain in that domain: use [lem-pur-finite-tensor-constructible-cohomology] for constructibility, and bounded flat models from [lem-sf-flat-model]; the total tensor of models in $[a,b]$ and $[c,d]$ is flat and supported in $[a+c,b+d]$. Thus all products to which the structure-map adjunction is applied below are allowed inputs.",
+   "uses": [
+    "thm-fix-general-biduality",
+    "lem-sf-pullback-tor-amplitude",
+    "fix-prop-adjunctions",
+    "cor-coef-finite-verdier",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-sf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 1: duality domains and tensor-Hom transposition (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Construct the fixed-coefficient exchange without an axiomatized six-functor datum. Write $s=\\operatorname{Spec}k$, $P_{T,r}=Ra_{T!,r}$, and $\\operatorname{tr}_{T,r}:P_{T,r}\\omega_{T,r}\\to A_r$ for the structure-map counit. The inputs are bounded below and have the etale-origin witnesses from step 1, so the current comparison-class version of [thm-sf-comp-composition] applies and gives $\\kappa_r:P_{Y,r}F_r\\xrightarrow{\\sim}P_{X,r}$. Define $\\tau_r:F_r\\omega_{X,r}\\to\\omega_{Y,r}$ to be the unique transpose under $P_{Y,r}\\dashv Ra_{Y,r}^!$ of $\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}$. Hence\n$$\\operatorname{tr}_{Y,r}\\circ P_{Y,r}(\\tau_r)=\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}.$$\nHere the adjunction exists by step 1. This also identifies $G_r\\omega_{Y,r}$ with $\\omega_{X,r}$: for every finite-Tor constructible $T$, the two adjunctions and $\\kappa_r$ give $\\operatorname{Hom}_X(T,G_r\\omega_{Y,r})\\cong\\operatorname{Hom}_s(P_{Y,r}F_rT,A_r)\\cong\\operatorname{Hom}_s(P_{X,r}T,A_r)\\cong\\operatorname{Hom}_X(T,\\omega_{X,r})$. Applying these natural bijections to the two identities gives inverse maps, and their counit is exactly $\\tau_r$. No reduction compatibility for $G_r$ has been used.\n\nFor finite-Tor constructible $M$, put $J_r=Rf_{*,r}D_{X,r}M$, finite-Tor constructible by [cor-sf-direct-image-ctf-proetale], using an integer bound for $\\dim X$ supplied by [lem-kun-dimension-finite-type]. Define $E_{r,M}:J_r\\to D_{Y,r}F_rM$ to be the tensor-Hom transpose of\n$$\\lambda_{r,M}:J_r\\otimes^LF_rM\\xrightarrow{\\mathrm{sym}}F_rM\\otimes^LJ_r\\xrightarrow{\\mathrm{PF}_{f,M,J_r}}F_r(M\\otimes^Lf^*J_r)\\xrightarrow{F_r(1\\otimes\\varepsilon^*_{r,D_XM})}F_r(M\\otimes^LD_XM)\\xrightarrow{F_r(\\mathrm{ev}_M\\circ\\mathrm{sym})}F_r\\omega_{X,r}\\xrightarrow{\\tau_r}\\omega_{Y,r}.$$\nThe projection map is the isomorphism of [fix-prop-projection-formula]; its finite hypotheses are verified in steps 1--2. Evaluation is [lem-weil-duality-pairing]. This explicitly specifies the relative exchange map.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "cor-sf-direct-image-ctf-proetale",
+    "fix-prop-projection-formula",
+    "lem-weil-duality-pairing",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 1: construct exchange from projection, ordinary counit, evaluation and absolute trace (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Prove this exchange is invertible on the actual categories. For every $W\\in\\mathcal C_{Y,r}$ the following are natural bijections:\n$$\\begin{aligned}\n\\operatorname{Hom}_Y(W,D_YF_rM)&\\cong\\operatorname{Hom}_Y(W\\otimes^LF_rM,\\omega_Y)\\\\\n&\\cong\\operatorname{Hom}_s(P_Y(W\\otimes^LF_rM),A_r)\\\\\n&\\cong\\operatorname{Hom}_s(P_X(f^*W\\otimes^LM),A_r)\\\\\n&\\cong\\operatorname{Hom}_X(f^*W\\otimes^LM,\\omega_X)\\\\\n&\\cong\\operatorname{Hom}_X(f^*W,D_XM)\\\\\n&\\cong\\operatorname{Hom}_Y(W,Rf_*D_XM).\n\\end{aligned}$$\nThe first and fifth are step 2's tensor-Hom bijection, the second and fourth are step 1's structure-map adjunctions, the third is projection [fix-prop-projection-formula] followed by composition [thm-sf-comp-composition], with the tensor symmetries inserted, and the last is [fix-prop-adjunctions](1). On starting with $v:W\\to Rf_*D_XM$ and reversing the chain, its ordinary transpose is $\\varepsilon^*_{D_XM}\\circ f^*v$. Uncurrying gives evaluation after that map; the absolute transpose, the projection map and the equation defining $\\tau$ in step 3 then give exactly $\\lambda_M\\circ(v\\otimes1)$. Thus the reverse bijection is postcomposition by $E_M$. The objects on both sides are in $\\mathcal C_Y$ by steps 1--3. Evaluate the bijection at their identities to obtain an inverse to $E_M$. This proves relative Verdier exchange, at a fixed coefficient ring, independently of def-sf-datum.\n\nNow use the original four Hom bijections with this constructed exchange:\n$$\\begin{aligned}\n\\operatorname{Hom}_X(K,H_rL)&\\cong\\operatorname{Hom}_X(f^*D_YL,D_XK)\\\\\n&\\cong\\operatorname{Hom}_Y(D_YL,Rf_*D_XK)\\\\\n&\\xrightarrow{E_K\\circ-}\\operatorname{Hom}_Y(D_YL,D_YF_rK)\\\\\n&\\cong\\operatorname{Hom}_Y(F_rK,L).\n\\end{aligned}$$\nThe outside arrows are biduality [thm-fix-general-biduality], the middle ordinary adjunction is [fix-prop-adjunctions](1). Explicitly the first sends $u:K\\to D_XT$ to $D_X(u)\\circ\\delta_T$. Denote the inverse composite by $\\Phi_r$. By [lem-weil-pbc-adjunction-of-natural-bijection] this gives $F_r\\dashv H_r$. The route remains the imported duality/ordinary-adjunction/exchange route, with the previously conditional exchange proved rather than assumed.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "thm-sf-comp-composition",
+    "fix-prop-adjunctions",
+    "thm-fix-general-biduality",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 1: prove exchange and the four Hom bijections (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Compare the two representing objects explicitly. If $\\Psi_r$ is the specified adjunction $F_r\\dashv G_r$ from step 1, define $\\alpha_{r,L}=\\Phi_r(\\epsilon_{r,L}):G_rL\\to H_rL$ and its reverse $\\gamma_{r,L}=\\Psi_r(\\epsilon^H_{r,L}):H_rL\\to G_rL$. Naturality of the Hom bijections gives $\\Phi_r(a)=\\alpha_{r,L}\\circ\\Psi_r(a)$ and $\\Psi_r(a)=\\gamma_{r,L}\\circ\\Phi_r(a)$. Surjectivity, evaluated on the identity of each representing object, gives $\\gamma_r\\alpha_r=1$ and $\\alpha_r\\gamma_r=1$. These same equations show that $\\alpha_r$ identifies the units and counits (each is the corresponding identity under the Hom bijection). Thus $\\alpha_r:G_r\\xrightarrow{\\sim}H_r$ is the canonical first isomorphism of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 1: uniqueness of the right adjoint, with units and counits (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Write $A=A_m$, $B=A_n$. Reduction $Q_T$ takes $\\mathcal C_{T,m}$ to $\\mathcal C_{T,n}$. Indeed, [lem-sf-flat-model] supplies a bounded flat representative $P$ for any such input, and [lem-sf-reduction-flat-model] identifies $Q_TK$ with $P\\otimes_AB$, flat over $B$ in the same finite interval. Its cohomology is constructible by [lem-pur-finite-tensor-constructible-cohomology], applied to $K$ and the constant finite $A$-module sheaf $B_T$: both are bounded constructible $A$-complexes. This proves bounded constructibility as well as finite Tor amplitude; it does not assert that the nonflat quotient $A\\to B$ is flat.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-sf-reduction-flat-model",
+    "lem-pur-finite-tensor-constructible-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: domains of the finite coefficient comparisons (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Let $d_{T,M}:Q_TD_{T,m}M\\xrightarrow{\\sim}D_{T,n}Q_TM$ be [cor-coef-finite-verdier], with its $(A,B)=(A_m,A_n)$ and its scheme equal to $T=X$ or $Y$. The required hypotheses are the finite-field datum, separated finite-type schemes and positive quotient indices of the statement; the inputs $L$ and $f^*D_{Y,m}L$ are finite-Tor constructible by step 2. Use its pro-etale assertion with the duals identified in step 2. Its quotient cocycle and evaluation/double-dual compatibility are explicitly assertions on this same site.  To fix the evaluation target map explicitly, take $u_T:Q_T\\omega_{T,m}\\xrightarrow{\\sim}\\omega_{T,n}$ from [lem-coef-finite-dualizing] and the evaluation-defined $v_{M,\\omega_{T,m}}$ of [thm-coef-finite-hom], and use\n$$d_{T,M}=R\\mathcal Hom_B(Q_TM,u_T)\\circ v_{M,\\omega_{T,m}}.$$\nThe second argument is in the finite-Tor constructible category: the constant unit has interval $[0,0]$, and its Verdier dual is $\\omega_{T,m}$ by the tensor-Hom unit formula and step 2's duality preservation. Thus the general finite-Hom comparison applies, without site-perfectness. Its evaluation identity and naturality in the target give the explicit equation\n$$\\mathrm{ev}_{Q_TM}\\circ(d_{T,M}\\otimes1)=u_T\\circ Q_T(\\mathrm{ev}_M).$$\nThis specifies the evaluation-preserving duality comparison used here; its cocycle follows from the cocycles of $v,u$ and naturality in the second variable, as in [cor-coef-finite-verdier]. Transposing this same evaluation identity, with tensor symmetry, gives $d_{T,D_{T,m}M}\\circ Q_T\\delta_M=D_{T,n}(d_{T,M})\\circ\\delta_{Q_TM}$: the two transposes are the reduction of $\\mathrm{ev}_M$ with its tensor order reversed. In particular the absolute $u_T$ in the relative trace square below is exactly the map in this evaluation identity. Let $p_M:Q_Xf^*M\\xrightarrow{\\sim}f^*Q_YM$ be the pullback comparison of [lem-fix-operation-reduction]. Put $V=f^*D_{Y,m}L$ and\n$$t_L=f^*(d_{Y,L})\\circ p_{D_{Y,m}L}:Q_XV\\xrightarrow{\\sim}f^*D_{Y,n}Q_YL.$$\nThe required comparison on the dual formula is\n$$h_L=D_{X,n}(t_L^{-1})\\circ d_{X,V}:Q_XH_mL\\xrightarrow{\\sim}H_nQ_YL.$$\nThe inverse on $t_L$ is essential because $D_X$ is contravariant. Define\n$$b_{m,n,L}=\\alpha_{n,Q_YL}^{-1}\\circ h_L\\circ Q_X(\\alpha_{m,L}).$$\nEach factor is an isomorphism and is natural. For $m\\ge n\\ge t\\ge1$, put $L_m=L$, $L_n=Q_Y^{m,n}L$, $L_t=Q_Y^{n,t}L_n$ and $V_i=f^*D_{Y,i}L_i$; superscripts on $Q,d,t,h$ below specify the coefficient quotient. Insert tensor reassociation throughout. Expanding $t=f^*(d_Y)p$ and using naturality of $p$ gives\n$$t^{n,t}_{L_n}\\circ Q_X^{n,t}(t^{m,n}_L)=f^*\\bigl(d_Y^{n,t}\\circ Q_Y^{n,t}(d_Y^{m,n})\\bigr)\\circ p^{m,t}=t^{m,t}_L,$$\nby the $d_Y$ cocycle of [cor-coef-finite-verdier] and the pullback comparison cocycle of [lem-fix-operation-reduction]. Naturality of $d_X^{n,t}$ for $(t^{m,n}_L)^{-1}:V_n\\to Q_X^{m,n}V_m$ then gives\n$$\\begin{aligned}\nh^{n,t}_{L_n}\\circ Q_X^{n,t}(h^{m,n}_L)\n&=D_{X,t}\\bigl(Q_X^{n,t}((t^{m,n}_L)^{-1})\\circ(t^{n,t}_{L_n})^{-1}\\bigr)\\circ d_{X,Q_X^{m,n}V_m}^{n,t}\\circ Q_X^{n,t}(d_{X,V_m}^{m,n})\\\\\n&=D_{X,t}((t^{m,t}_L)^{-1})\\circ d_{X,V_m}^{m,t}=h^{m,t}_L.\n\\end{aligned}$$\nThe first equality uses contravariant functoriality of $D_{X,t}$; the second uses the preceding $t$ identity and the $d_X$ cocycle. Expanding $b=\\alpha_n^{-1}hQ_X(\\alpha_m)$ twice now cancels the adjacent $Q_X^{n,t}(\\alpha_n)$ and $Q_X^{n,t}(\\alpha_n^{-1})$, leaving $\\alpha_t^{-1}h^{m,t}Q_X^{m,t}(\\alpha_m)=b_{m,t}$. This proves the displayed quotient cocycle for $b$. At an identity quotient all comparisons are identities, so $b_{r,r}=1$.",
    "uses": [
     "cor-coef-finite-verdier",
-    "lem-fix-compact-support-coefficient-change"
+    "lem-fix-operation-reduction",
+    "lem-coef-finite-dualizing",
+    "thm-coef-finite-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: applying the two coherent duality comparisons and their cocycle (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Use the compact-support comparison $q_K:Q_YF_mK\\xrightarrow{\\sim}F_nQ_XK$ of [lem-fix-compact-support-coefficient-change]. For ordinary direct image use $c_M:Q_YRf_{*,m}M\\xrightarrow{\\sim}Rf_{*,n}Q_XM$ of [lem-coef-finite-direct-image], with its coefficient ring $A=A_m$ and its finite commutative $A$-algebra $B=A_n$, applied to finite-Tor constructible $M=D_{X,m}K$. The quotient $A_m\\to A_n$ is finite as an $A_m$-module because $A_n$ is cyclic; no flatness of this quotient is needed. Use the theorem's finite constructible pro-etale realization on the etale-origin inputs of step 1. Its stated definition of $c$ as the scalar extension of the ordinary counit supplies exactly the following identity. Let $p_M:Q_Xf_m^*M\\xrightarrow{\\sim}f_n^*Q_YM$. The ordinary-counit identity is\n$$\\varepsilon^*_{n,Q_XM}\\circ f_n^*(c_M)\\circ p_{Rf_{*,m}M}=Q_X(\\varepsilon^*_{m,M}),$$\nwith pullback/tensor source identifications inserted. This is exactly the transpose defining the canonical projection map $c$ in [lem-coef-finite-direct-image]. Thus the ordinary Hom bijection respects finite reduction; no finite ordinary-direct-image assertion is taken from [lem-fix-operation-reduction]. The same operation-reduction statement and [lem-fix-compact-support-coefficient-change] preserve the projection construction and tensor constraints used in $\\lambda$; [fix-prop-projection-formula] identifies that construction with the finite projection isomorphism. Only ordinary units/counits are taken from the operation-reduction statement; its clause requiring admissible exceptional adjoints is not used.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-direct-image",
+    "lem-fix-operation-reduction",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: ordinary adjunction and projection under coefficient change (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Prove the relative trace square. Let $u_T:Q_T\\omega_{T,m}\\xrightarrow{\\sim}\\omega_{T,n}$ be [lem-coef-finite-dualizing] on the pro-etale realization, using the identification of step 2. Its explicitly stated absolute counit equation is\n$$\\operatorname{tr}_{T,n}\\circ P_{T,n}(u_T)\\circ q_{a_T,\\omega_{T,m}}=Q_s(\\operatorname{tr}_{T,m}).$$\nWe claim\n$$\\tau_n\\circ F_n(u_X)\\circ q_{f,\\omega_{X,m}}=u_Y\\circ Q_Y(\\tau_m).\\tag{*}$$\nBoth sides go from $Q_YF_m\\omega_{X,m}$ to $\\omega_{Y,n}$. Transpose them under $P_{Y,n}\\dashv Ra_{Y,n}^!$. Precompose both resulting maps with the isomorphism $q_{a_Y,F_m\\omega_{X,m}}:Q_sP_{Y,m}F_m\\omega_{X,m}\\to P_{Y,n}Q_YF_m\\omega_{X,m}$. The left side, using step 3's defining equation for $\\tau_n$ and naturality of composition, becomes\n$$\\operatorname{tr}_{X,n}\\circ P_{X,n}(u_X)\\circ\\kappa_n\\circ P_{Y,n}(q_{f,\\omega_{X,m}})\\circ q_{a_Y,F_m\\omega_{X,m}}.$$\nBy [lem-sf-compact-coefficient-composition] at $(g,f)=(a_Y,f)$ the last three factors equal $q_{a_X,\\omega_{X,m}}\\circ Q_s(\\kappa_m)$. The absolute counit identity for $X$ therefore makes the expression $Q_s(\\operatorname{tr}_{X,m}\\circ\\kappa_m)$. The right transpose, by naturality of $q_{a_Y}$ and the absolute counit identity for $Y$, is\n$$Q_s(\\operatorname{tr}_{Y,m}\\circ P_{Y,m}(\\tau_m))=Q_s(\\operatorname{tr}_{X,m}\\circ\\kappa_m).$$\nCancel the precomposition isomorphism and use injectivity of the adjunction bijection to get (*). This proves the required relative trace compatibility from absolute dualizing comparisons; it never assumes a coefficient comparison for $Rf^!$.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "lem-sf-compact-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: independent relative trace square (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Prove the independent relative exchange square by transposing its two sides, using step 3's explicit pairing. For $M\\in\\mathcal C_{X,m}$ put $J_m=Rf_{*,m}D_{X,m}M$ and\n$$j_M=Rf_{*,n}(d_{X,M})\\circ c_{D_{X,m}M}:Q_YJ_m\\xrightarrow{\\sim}Rf_{*,n}D_{X,n}Q_XM.$$\nThe asserted equality is\n$$d_{Y,F_mM}\\circ Q_Y(E_{m,M})=D_{Y,n}(q_M)\\circ E_{n,Q_XM}\\circ j_M.\\tag{**}$$\nBoth sides have source $Q_YJ_m$ and target $D_{Y,n}(Q_YF_mM)$. Tensor-Hom transposition is injective (step 2). By the explicit evaluation identity of step 7 and [cor-coef-finite-verdier], the left transpose is $u_Y\\circ Q_Y(\\lambda_{m,M})$. The right transpose is\n$$\\lambda_{n,Q_XM}\\circ(j_M\\otimes q_M):Q_YJ_m\\otimes_B^LQ_YF_mM\\to\\omega_{Y,n}.$$\nExpand this last expression in the order of step 3. Naturality of symmetry and the projection transformation, with its coefficient identity from step 8, move $j_M$ and $q_M$ past the first two factors. The ordinary-counit identity of step 8 replaces $f_n^*c$ followed by the new counit by the reduction of the old counit; naturality of the counit moves $d_{X,M}$ to the evaluation argument. Evaluation compatibility of [cor-coef-finite-verdier] then replaces evaluation after $d_{X,M}$ by $u_X\\circ Q_X(\\mathrm{ev}_M)$. Thus the whole transpose is\n$$\\tau_n\\circ F_n(u_X)\\circ q_{f,\\omega_{X,m}}\\circ Q_Y\\bigl(F_m(\\mathrm{ev}_M\\circ\\mathrm{sym})\\circ F_m(1\\otimes\\varepsilon^*_{m,D_XM})\\circ\\mathrm{PF}_m\\circ\\mathrm{sym}\\bigr).$$\nEquation (*) of step 9 turns this into $u_Y\\circ Q_Y(\\lambda_{m,M})$, exactly the left transpose. This proves (**). Every factor has now been compared using ordinary adjunctions, projection, evaluation, and absolute traces. Neither thm-sf-verdier-exchange nor any clause of def-sf-datum, including A5, is a premise of this proof.",
+   "uses": [
+    "cor-coef-finite-verdier",
+    "lem-fix-operation-reduction",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-direct-image",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: independent reduction square for relative Verdier exchange (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "The four Hom bijections in step 4 respect reduction of actual morphisms. For the anti-equivalence arrows, use the explicit formula $u\\mapsto D(u)\\circ\\delta$ and the double-dual equality supplied by [cor-coef-finite-verdier]:\n$$d_{T,D_{T,m}N}\\circ Q_T(\\delta_{T,m,N})=D_{T,n}(d_{T,N})\\circ\\delta_{T,n,Q_TN}.$$\nBoth maps have source $Q_TN$ and target $D_{T,n}(Q_TD_{T,m}N)$; naturality of $d$ and this equality compare the arrows. The ordinary-adjunction arrow is step 8, and the exchange arrow is the independently proved (**) of step 10. Consequently, for every $a:F_mK\\to L$,\n$$h_L\\circ Q_X(\\Phi_m(a))=\\Phi_n(Q_Y(a)\\circ q_K^{-1}).$$\nThis compares reduction of a given morphism, not a tensor of Hom groups. In step 5's comparison notation, take $K=G_mL$ and $a=\\epsilon_{m,L}$, so $\\Phi_m(a)=\\alpha_{m,L}$. By step 7's definition of $b$, cancelling $\\alpha_{n,Q_YL}$ shows\n$$b_L=G_n(Q_Y\\epsilon_{m,L})\\circ G_n(q_{G_mL}^{-1})\\circ\\eta_{n,Q_XG_mL}.$$\nThe right side is precisely the mate of $q^{-1}:F_nQ_X\\to Q_YF_m$ under the given exceptional adjunctions, by [def-weil-pbc-adjunction-mate]. Thus the isomorphism constructed with the two duals is the specified exceptional coefficient comparison.",
+   "uses": [
+    "cor-coef-finite-verdier",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: comparison of Hom bijections and identification of the mate (agent expansion checked against the archived master Proof)"
+   }
+  },
+  {
+   "text": "Finally apply the defining transpose and inverse-transpose formulas of [def-weil-pbc-adjunction-mate] to the equality just proved. The transpose of $b$ is $Q_Y\\epsilon_m\\circ q_{G_m}^{-1}$, which gives\n$$\\epsilon_{n,Q_YL}\\circ F_n(b_L)\\circ q_{G_mL}=Q_Y\\epsilon_{m,L}.$$\nThe inverse mate formula, or its evaluation on $K$ followed by the triangle identity, gives\n$$G_n(q_K)\\circ b_{F_mK}\\circ Q_X\\eta_{m,K}=\\eta_{n,Q_XK}.$$\nThese are precisely both identities in the statement. They hold before any inverse-limit reconstruction. Together with step 7 they prove all clauses.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof, paragraph 2: identifying the units and counits before reconstructing a tower (agent expansion checked against the archived master Proof)"
+   }
   }
  ],
  "proof_deps": [
-  "thm-sf-preservation-class",
-  "thm-fix-general-biduality",
-  "fix-cor-verdier-exchange",
-  "fix-lem-tensor-adjunction",
   "cor-coef-finite-verdier",
-  "lem-fix-compact-support-coefficient-change"
+  "cor-sf-direct-image-ctf-proetale",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-adjunction-mate",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-coef-finite-direct-image",
+  "lem-coef-finite-dualizing",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-pur-rhom-global-sections",
+  "lem-sf-compact-coefficient-composition",
+  "lem-sf-flat-model",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-reduction-flat-model",
+  "lem-trf-open-ctf",
+  "lem-weil-duality-pairing",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-coef-finite-hom",
+  "thm-fix-general-biduality",
+  "thm-nagata-compactification",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-comp-composition",
+  "thm-sf-preservation-class"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
-  "place": "## Proof"
+  "place": "Archived master Proof, paragraphs 1 and 2, read in full at /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md; agent expansion supplies the independent relative exchange and its coefficient square."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "verdier|exceptionalInverse|upperShriek|shriek",
+   "results": "25 hits; Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: no relevant constructible exceptional inverse-image declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "6 hits; CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic equivalence/adjunction lemmas do not state constructible exceptional inverse image or coefficient reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image of constructible complexes commutes with derived reduction of finite coefficient rings and equals Verdier dual pullback Verdier dual",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality identifies the exceptional inverse image with duality pullback duality and this identification commutes with reduction of finite coefficient rings",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaf pullback, condensed modules, or topological comparison, not constructible exceptional inverse image and finite coefficient change"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|constructibleFiniteTor|rightDerivedUpperShriek|exceptional.*(inverse|adjoint)",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: no relevant constructible exceptional inverse-image declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient change commutes with the right adjoint of compactly supported direct image of etale sheaves by evaluation compatible biduality",
+   "results": "8 hits; LightCondensed.ihomPoints_symm_comp, topCatToSheafCompHausLike_map_val_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, TopCat.toSheafCompHausLike_val_map, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaf pullback, condensed modules, or topological comparison, not constructible exceptional inverse image and finite coefficient change"
+  },
+  {
+   "tool": "grep",
+   "query": "def toAdjunction|def rightAdjointUniq|theorem.*rightAdjoint",
+   "results": "8 hits; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Comma.lean; directory Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: only generic adjoint uniqueness/adjunction declarations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +304,149 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-finite-exceptional",
+  "worker": "stage1",
+  "summary": "F1–F2 repair: read the exact archived master item, chapter and unit, every direct statement and definition dependency and its available source passage, and the Stacks ringed-site and compact-support constructions. Replaced stale unavailable-source claims by exact locations and a complete step-by-step review. Tightened step 8 to attribute the finite ordinary counit identity solely to the direct-image coefficient theorem. Rechecked all 46 citation pairs, 15 same-tag candidates and additional generalizations, recorded fresh actual Mathlib searches, and audited both dependency closures. The twelve-step proof and sole statement-only compact-support coherence node retain all conclusions and hypotheses; no compiler or delivery push was run. Independent second reading: disambiguated compact-support composition as kappa, expanded the two-stage t/h/b cocycle calculation, checked all twelve steps and the new square against current statements and the exact sources, and recorded fresh Mathlib searches. Added the existing finite-type dimension theorem at the two direct-image domain checks.",
+  "blueprint": "Imported paragraph 1: steps 1--5, with relative exchange constructed independently in steps 3--4. Paragraph 2: steps 6--12; steps 9--10 provide the previously missing relative trace and exchange squares.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of a compactification for checking the finite-Tor domain of the given compact-support functor."
+   },
+   {
+    "node": "def-compact-support-direct-image-detailed",
+    "why": "Generic comparison/domain tool for the imported Hom-bijection route; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Extension by zero preserves bounded constructibility and Tor amplitude; supplies a domain check absent from this unit."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Finite-Tor preservation of the proper direct image in a compactification, only for a domain check."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Makes the bounded constructible inputs eligible for the existing etale-origin adjunction."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The constructed constructible adjunction, which the imported proof presupposes."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "The imported proof explicitly uses this finite exceptional preservation theorem."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Checks that pullback of a finite-Tor dual stays in the finite-Tor domain."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only the unconditional ordinary pullback/direct-image adjunction of clause (1)."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic categorical construction of an adjunction from natural Hom bijections."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Bounded flat representatives for the domain check of coefficient reduction."
+   },
+   {
+    "node": "lem-sf-reduction-flat-model",
+    "why": "Reduction of a flat representative stays flat over the quotient in the same interval."
+   },
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "Constructibility of derived reduction cohomology, completing the coefficient-domain check."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Pullback/tensor coefficient comparisons and their constraints, not its optional exceptional comparison."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "The specified compact-support coefficient comparison and its projection-counit compatibility, as in the imported proof."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Definition and inverse formula for mates; used to display both adjunction-map equations."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "Identifies the transported pro-etale dualizing object, internal Hom duality, evaluation and double-dual maps in the revised Verdier coefficient corollary with the Ra^!A duals used by this item; this is a site-identification tool, not a replacement for the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General ringed-site tensor/internal-Hom identity used with H^0 to obtain the tensor-Hom adjunction; no exceptional adjunction or geometric duality is assumed."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Identifies H^0 of internal Hom with derived morphisms on the small coefficient sites."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Unconditional compact-support projection isomorphism and its ordinary tensor/coefficient coherence; no exceptionally admissible functor is assumed."
+   },
+   {
+    "node": "lem-weil-duality-pairing",
+    "why": "Evaluation and its transpose, used to construct the exchange pairing explicitly."
+   },
+   {
+    "node": "lem-coef-finite-dualizing",
+    "why": "Counit-compatible absolute dualizing coefficient comparison, the independent input for the relative trace square."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Compact-support composition, used before taking any relative exceptional coefficient comparison."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "General finite-Tor internal-Hom coefficient comparison, used with the explicitly counit-normalized absolute dualizing comparison to fix the precise evaluation target map; no relative exceptional comparison is assumed."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-type dimension theorem supplies the integer bounds required for the compactification and ordinary-direct-image domain checks; it does not replace the unit duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "lem-sf-pullback-tor-amplitude",
+  "fix-prop-adjunctions",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sf-flat-model",
+  "lem-sf-reduction-flat-model",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "fix-prop-projection-formula",
+  "lem-weil-duality-pairing",
+  "lem-coef-finite-dualizing",
+  "thm-sf-comp-composition",
+  "thm-coef-finite-hom",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-63b09e824",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-63b09e824 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, 12 proof steps, new compact-support coherence node, cited DAG statements, sources, route, coefficient categories, Mathlib searches, and edge cases. No false statement, weakened target, duplicate, cycle, or repairable fault found. review.md written."
+ }
 }
