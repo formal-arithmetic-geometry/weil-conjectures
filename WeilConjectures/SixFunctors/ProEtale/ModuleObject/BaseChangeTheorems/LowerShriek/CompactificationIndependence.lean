@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
@@ -103,24 +104,68 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 include ℓ k
 
+/-- The *triangle comparison* `Li₁^* ≅ Lh^* ⋙ Li^*` on bounded constructible complexes for
+morphisms `i : X ⟶ Z`, `h : Z ⟶ Z₁` and `i₁ : X ⟶ Z₁` with `i ≫ h = i₁`: the composition
+isomorphism `boundedConstructibleUpperStarComp` for `i₁ = i ≫ h`. It plays the role of the
+pullback comparison `boundedConstructiblePullbackSquareComparison` of the square with top `𝟙 X`,
+without the pullback along `𝟙 X`. -/
+noncomputable def boundedConstructibleUpperStarTriangleComparison (w : i ≫ h = i₁) :
+    boundedConstructibleUpperStar Λ ℓ i₁ ≅
+      boundedConstructibleUpperStar Λ ℓ h ⋙ boundedConstructibleUpperStar Λ ℓ i :=
+  eqToIso (by rw [w]) ≪≫ boundedConstructibleUpperStarComp Λ ℓ i h
+
+/-- The *unit insertion* step of the restriction comparison: the natural transformation
+`i_! ⟶ (i₁_! ⋙ Li₁^*) ⋙ i_!` obtained by inserting the unit of the adjunction
+`i₁_! ⊣ Li₁^*`. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementUnitStep :
+    boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⟶
+      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙
+        boundedConstructibleUpperStar Λ ℓ i₁) ⋙
+        boundedConstructibleOpenImmersionLowerShriek Λ ℓ i :=
+  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i)
+
+/-- The *triangle transport* step of the restriction comparison: `Functor.squareTransport`
+applied to the triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*`, under `i₁_!` on the left and `i_!`
+on the right. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep
+    (w : i ≫ h = i₁) :
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙
+        boundedConstructibleUpperStar Λ ℓ i₁) ⋙
+        boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ≅
+      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙
+        boundedConstructibleUpperStar Λ ℓ h) ⋙
+        (boundedConstructibleUpperStar Λ ℓ i ⋙
+          boundedConstructibleOpenImmersionLowerShriek Λ ℓ i) :=
+  Functor.squareTransport (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁)
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i)
+    (Functor.rightUnitor _ ≪≫ boundedConstructibleUpperStarTriangleComparison Λ ℓ w)
+
+/-- The *counit contraction* step of the restriction comparison: the natural transformation
+`(i₁_! ⋙ Lh^*) ⋙ (Li^* ⋙ i_!) ⟶ i₁_! ⋙ Lh^*` obtained by contracting the counit of the
+adjunction `i_! ⊣ Li^*`. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep :
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙
+        boundedConstructibleUpperStar Λ ℓ h) ⋙
+        (boundedConstructibleUpperStar Λ ℓ i ⋙
+          boundedConstructibleOpenImmersionLowerShriek Λ ℓ i) ⟶
+      boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleUpperStar Λ ℓ h :=
+  Functor.whiskerLeft _
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i).counit ≫
+    (Functor.rightUnitor _).hom
+
 /-- The *restriction comparison* `i_! ⟶ i₁_! ⋙ Lh^*` on bounded constructible complexes, for open
-immersions `i : X ⟶ Z` and `i₁ : X ⟶ Z₁` and a morphism `h : Z ⟶ Z₁` with `i ≫ h = i₁`: the
-transpose under `i_! ⊣ Li^*` of the unit `𝟭 ⟶ i₁_! ⋙ Li₁^*` followed by the composition
-isomorphism `Li₁^* = L(i ≫ h)^* ≅ Lh^* ⋙ Li^*`, that is
+immersions `i : X ⟶ Z` and `i₁ : X ⟶ Z₁` and a morphism `h : Z ⟶ Z₁` with `i ≫ h = i₁`,
+assembled as the composite of the unit insertion, the triangle transport along
+`Li₁^* ≅ Lh^* ⋙ Li^*`, and the counit contraction:
 `i_! ⟶ i₁_! ⋙ Li₁^* ⋙ i_! ≅ i₁_! ⋙ Lh^* ⋙ Li^* ⋙ i_! ⟶ i₁_! ⋙ Lh^*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinement (w : i ≫ h = i₁) :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleUpperStar Λ ℓ h :=
-  (Functor.leftUnitor _).inv ≫
-    Functor.whiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit
-      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i) ≫
-    (Functor.isoWhiskerRight (Functor.isoWhiskerLeft _
-      (eqToIso (by rw [w]) ≪≫ boundedConstructibleUpperStarComp Λ ℓ i h) ≪≫
-        (Functor.associator _ _ _).symm) _ ≪≫ Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft _
-      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i).counit ≫
-    (Functor.rightUnitor _).hom
+  boundedConstructibleOpenImmersionLowerShriekRefinementUnitStep Λ ℓ ≫
+    (boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ w).hom ≫
+    boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Λ ℓ
 
 /-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
 ```

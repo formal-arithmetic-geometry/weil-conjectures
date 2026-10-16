@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 
 /-!
 
@@ -103,6 +104,42 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 include ℓ k
 
+/-- The *unit insertion* step of the exchange morphism: the natural transformation
+`Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
+`Lp'^* ⊣ Rp'_*`. -/
+noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep :
+    boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
+      (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
+        (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') :=
+  (Functor.rightUnitor _).inv ≫
+    Functor.whiskerLeft _ (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p').unit
+
+/-- The *square transport* step of the exchange morphism: `Functor.squareTransport` applied to
+the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
+square, under `Rp_*` on the left and `Rp'_*` on the right. -/
+noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+    (sq : IsPullback p i' j p') :
+    (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
+        (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') ≅
+      (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ p) ⋙
+        (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
+          boundedConstructibleLowerStar Λ ℓ p') :=
+  Functor.squareTransport (boundedConstructibleLowerStar Λ ℓ p)
+    (boundedConstructibleLowerStar Λ ℓ p')
+    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq)
+
+/-- The *counit contraction* step of the exchange morphism: the natural transformation
+`(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
+adjunction `Lp^* ⊣ Rp_*`. -/
+noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep :
+    (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ p) ⋙
+        (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
+          boundedConstructibleLowerStar Λ ℓ p') ⟶
+      boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
+        boundedConstructibleLowerStar Λ ℓ p' :=
+  Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p).counit _ ≫
+    (Functor.leftUnitor _).hom
+
 /-- The *exchange morphism* `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` on bounded constructible complexes for
 a cartesian square
 ```
@@ -113,22 +150,17 @@ X  --j---> Z
 ```
 with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_*` and
 `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
-(`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), that is
+(`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
+unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
         boundedConstructibleLowerStar Λ ℓ p' :=
-  (Functor.rightUnitor _).inv ≫
-    Functor.whiskerLeft _ (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p').unit ≫
-    (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq)
-          _ ≪≫ Functor.associator _ _ _) ≪≫
-      (Functor.associator _ _ _).symm).hom ≫
-    Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p).counit _ ≫
-    (Functor.leftUnitor _).hom
+  boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep Λ ℓ ≫
+    (boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep Λ ℓ sq).hom ≫
+    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep Λ ℓ
 
 end Exchange
 
