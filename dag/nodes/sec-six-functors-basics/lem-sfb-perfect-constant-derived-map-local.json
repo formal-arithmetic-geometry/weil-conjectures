@@ -29,48 +29,122 @@
   "def-pc-perfect-ring-complex",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "locally.?constant.*(morphism|map).*perfect|perfect.*constant.*(morphism|map)",
-   "results": "0 hits: ",
-   "date": "2026-10-17",
-   "verdict": "no match: hits about underived constant sheaves, condensed modules, affine scheme limits, or abstract derived categories do not give local algebraicity of derived maps from perfect constant complexes"
+   "text": "Choose a bounded finite-projective complex $F^\\bullet$ and an isomorphism $QF^\\bullet\\simeq P$ by perfectness, and choose any complex $G^\\bullet$ with $QG^\\bullet\\simeq L$. Constant presheaves preserve exact sequences because their values and maps are the original sequence at every object. Module-valued sheafification is exact, so constant realization is exact. The module-sheafification interface identifies its underlying abelian sheaves and its $\\underline R$-action with the constant module sheaves in the statement. Exact-functor derived factorization therefore gives canonical representative isomorphisms $Q(\\underline F^\\bullet)\\simeq\\underline P$ and $Q(\\underline G^\\bullet)\\simeq\\underline L$. Replace $\\varphi$ using these isomorphisms. This requires no boundedness of $G^\\bullet$ and no Noetherian hypothesis on $R$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09BE, lemma-locally-constant-map, choice of representatives; exact constant realization as in the preceding paragraph, with Sites Tag 00WJ"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Maps from a perfect constant complex to a constant complex of sheaves locally come from module derived morphisms",
-   "results": "8 hits: CategoryTheory.constantSheaf, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CompHausLike.LocallyConstant.functor_map_val, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CondensedMod.LocallyConstant.instFullModuleCatFunctor",
+   "text": "Apply the local-chain-representative lemma to $F^\\bullet$ and the arbitrary sheaf complex $\\underline G^\\bullet$. It supplies a covering on which the replaced morphism is represented by a chain map $a:\\underline F^\\bullet\\to\\underline G^\\bullet$. Work on each such slice, whose final object is the covering object. The hypothesis on the source is precisely boundedness with finitely generated projective terms; the target need not be perfect or bounded.",
+   "uses": [
+    "lem-sfb-perfect-constant-local-chain-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09BE, first cited input Tag 09BD, lemma-map-out-of-locally-constant"
+   }
+  },
+  {
+   "text": "There are only finitely many possibly nonzero components $a^q$, since $F^\\bullet$ is bounded. By the constant-restriction lemma, the restrictions of $\\underline{F^q}$ and $\\underline{G^q}$ to the slice are the constant module sheaves of the slice site, compatibly with the constant-presheaf units and with restriction of constant linear maps. Apply the site constant-morphism-local lemma on the slice to each $a^q:\\underline{F^q}\\to\\underline{G^q}$: $F^q$ is finitely generated. In each covering sieve choose an actual covering family contained in it. Successively refine these covers, using the covering-pullback and transitivity axioms. This is a finite iteration, so gives a covering on which, for each nondegenerate covering object $V$ (one not covered by the empty sieve), all components have algebraic representatives $b_V^q:F^q\\to G^q$ simultaneously. On a degenerate object $V$, every further object over $V$ is also covered by the empty sieve, so every module sheaf restricts to zero by the unique-gluing axiom; take all $b_V^q=0$. Degrees with $F^q=0$ are also assigned zero. No arbitrary fibre products beyond covering pullbacks and no points of the topos are used; each covering sieve is realized by a covering family contained in it.",
+   "uses": [
+    "lem-weil-pbc-site-constant-morphism-local",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09BE, second cited input Modules on Sites Tag 093S(3), lemma-morphism-locally-constant; finite common refinement"
+   }
+  },
+  {
+   "text": "For a nondegenerate $V$ and any $R$-module $T$, the constant-section unit $T\\to\\underline T(V)$ is injective. Indeed the module-sheafification interface and the underlying-set sheafification lemma identify this unit with set sheafification of the constant presheaf. If $t$ and $t'$ have the same image, the sheafification-sections-local lemma supplies a covering of $V$ on which they agree as presheaf sections. That covering cannot be empty, because $V$ is nondegenerate; all restrictions of the constant presheaf are identities, hence $t=t'$. Apply this to $T=G^{q+1}$ and the values on every $x\\in F^q$ of $d_G^q b_V^q$ and $b_V^{q+1}d_F^q$. Their constant sections agree because $a$ is a chain map and its components are the constant realizations of the $b_V^q$. Injectivity proves $d_G^q b_V^q=b_V^{q+1}d_F^q$ algebraically in every degree, including the two boundary degrees of the support of $F$. On degenerate $V$ these equations hold because all $b_V^q=0$. Thus $b_V^\\bullet:F^\\bullet\\to G^\\bullet$ is a chain map. Define $\\alpha_V:P\\to L$ by $P\\simeq QF^\\bullet\\xrightarrow{Q(b_V)}QG^\\bullet\\simeq L$. The naturality of the exact-functor representative isomorphisms identifies its constant realization with $Q(a)$ on $V$, hence with $\\varphi|_V$. Transitivity of the two successive covering constructions gives the required covering of $X$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09BE, chain-equation and localization conclusion; Sites Tags 00WB/00WK, local equality after sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-sfb-perfect-constant-local-chain-representative",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-constant-morphism-local",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09BE, lemma-locally-constant-map: Tag 09BD followed by Modules on Sites Tag 093S(3). Expanded finite refinement and chain-equation detection using Sites Tags 00WB/00WK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every derived morphism from a perfect constant sheaf complex to a constant complex is locally induced by a morphism of complexes of modules",
+   "results": "8 hits: CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; SheafOfModules.instAbelian; CategoryTheory.Sheaf.isConstant_of_forget; CategoryTheory.Sheaf.isConstant_iff_forget; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; instAbelianLightCondMod",
    "date": "2026-10-17",
-   "verdict": "no match: hits about underived constant sheaves, condensed modules, affine scheme limits, or abstract derived categories do not give local algebraicity of derived maps from perfect constant complexes"
+   "verdict": "no match: the hits concern underived constant sheaves, special condensed sites or generic derived localization; none states local algebraicity of derived maps from perfect constant complexes on an arbitrary site."
   },
   {
    "tool": "loogle",
-   "query": "\"Sheaf\", \"Perfect\"",
-   "results": "0 hits: ",
+   "query": "\"constantSheaf\", \"DerivedCategory\"",
+   "results": "0 hits: none",
    "date": "2026-10-17",
-   "verdict": "no match: hits about underived constant sheaves, condensed modules, affine scheme limits, or abstract derived categories do not give local algebraicity of derived maps from perfect constant complexes"
+   "verdict": "no match: the hits concern underived constant sheaves, special condensed sites or generic derived localization; none states local algebraicity of derived maps from perfect constant complexes on an arbitrary site."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(DerivedCategory|[Pp]erfect)|([Pp]erfect|DerivedCategory).*constantSheaf",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived constant sheaves, special condensed sites or generic derived localization; none states local algebraicity of derived maps from perfect constant complexes on an arbitrary site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from a perfect constant complex locally come from the coefficient ring derived category",
+   "results": "8 hits: HasDerivedCategory.standard; HasDerivedCategory; DerivedCategory.instCategory; DerivedCategory; DerivedCategory.isIso_Q_map_iff_quasiIso; HomologicalComplexUpToQuasiIso; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.Q",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived constant sheaves, special condensed sites or generic derived localization; none states local algebraicity of derived maps from perfect constant complexes on an arbitrary site."
   },
   {
    "tool": "leanfinder",
-   "query": "A morphism between constant sheaf complexes with perfect source is locally induced by a morphism of complexes over the coefficient ring",
-   "results": "8 hits: CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, ModuleCat.Tilde.exists_const, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.H, LightCondMod.LocallyConstant.functor, PresheafOfModules.homEquivOfIsLocallyBijective",
+   "query": "For a small site the constant realization functor from the derived category of a ring is locally full on morphisms whose source is perfect",
+   "results": "8 hits: LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.instFullModuleCatFunctor; CondensedMod.LocallyConstant.instFullModuleCatFunctor; CondensedMod.LocallyConstant.fullyFaithfulFunctor; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf; DerivedCategory.instFullSingleFunctor; CategoryTheory.Functor.IsLocallyFull.of_full",
    "date": "2026-10-17",
-   "verdict": "no match: hits about underived constant sheaves, condensed modules, affine scheme limits, or abstract derived categories do not give local algebraicity of derived maps from perfect constant complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a site and a ring R any derived morphism from the constant realization of a bounded finite projective complex to a constant complex comes locally from D R",
-   "results": "8 hits: CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorToPresheaves, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
-   "date": "2026-10-17",
-   "verdict": "no match: hits about underived constant sheaves, condensed modules, affine scheme limits, or abstract derived categories do not give local algebraicity of derived maps from perfect constant complexes"
+   "verdict": "no match: the hits concern underived constant sheaves, special condensed sites or generic derived localization; none states local algebraicity of derived maps from perfect constant complexes on an arbitrary site."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-wcontractible-constant-reductions-ml",
@@ -78,5 +152,39 @@
   "group": "Q13"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-integral-models"
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-perfect-constant-derived-map-local",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 09BE through 09BD and 093S(3), reusing the general site constant-morphism node and sheafification interfaces. One new statement-only local-chain-representative node. Expanded the finite common refinement, arbitrary-ring exact realization, and algebraic detection of chain equations without points, treating empty-covered objects separately.",
+  "blueprint": "det-lem-integral-models-stacks proof first sentence via the integral criterion: 09C6 local perfect lifting uses 09C5, whose algebraic transition maps use 09BE. These four steps realize the local-algebraicity input, without changing the integral-model unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-constant-morphism-local",
+    "why": "Generic 093S(3) tool for morphisms of finitely generated constant module sheaves on arbitrary sites; the integral-model unit supplies no such degreewise algebraization."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local equality criterion for sheafification, used to detect the algebraic chain equations on a nondegenerate slice without points; the integral-model unit supplies no such site lemma."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization tool identifies termwise constant representatives naturally in chain maps; the integral-model unit supplies no such abstract localization statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-constant-morphism-local",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-4683f8fd0",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-4683f8fd0 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the sources. Item: matches Stacks 09BE (sites-cohomology.tex lemma-locally-constant-map, l.14341) hypothesis by hypothesis: small site with final object, commutative R, P perfect, L arbitrary, local equality after restriction to slices. The statement is unchanged and is used correctly by its parent lem-sfb-wcontractible-constant-reductions-ml (steps 2-3). New node lem-sfb-perfect-constant-local-chain-representative: matches 09BD (lemma-map-out-of-locally-constant, l.14321) and holds via 08FR(1), since constant finite-projective terms are strictly perfect. Tested on the one-point site, the zero complex, a one-term complex, an empty-covered final object and an unbounded target. It is statement-only, self-contained, cites definition nodes for every notion, uses single escapes, has a tag+label source and records 6 searches. Not a duplicate: lem-weil-pbc-finite-free-etale-local-actual covers only finite free terms on the étale site, and no general-site 08FR/09BD/09BE node exists (rg over the DAG). It does not restate the item, whose steps 3-4 do the algebraization. Steps 1, 2 and 4 are checked against the statements they cite: 00WJ exactness, the 03CY interface, 015F exact-functor factorization, and injectivity of the constant unit on nondegenerate V via the 00WB/00WK sections-local node, including boundary degrees and degenerate objects. One fault (C1/C4): step 3 applies lem-weil-pbc-site-constant-morphism-local (093S(3)) on the slice C/U_i to maps between restrictions of constant sheaves of C. That needs the slice comparison stated by the existing Mathlib-leaf node lem-weil-pbc-site-constant-restriction (00XR), which was not cited. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-perfect-constant-derived-map-local.json: one sentence added to step 3, plus the id in step 3 uses and proof_deps; nothing else changed. Accepted all 3 declared tool_uses: site-constant-morphism-local, site-sheafification-sections-local and exact-functor-derived-factorization (the last is a leaf, so harmless). No SGA. No unit record change needed. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

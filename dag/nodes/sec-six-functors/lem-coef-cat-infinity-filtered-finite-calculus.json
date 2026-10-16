@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-cat-infinity-filtered-finite-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; supporting argument of lem-coef-many-object-operad-accessibility, Proposition 4.1.7 via Section 3.3: finite-data calculations in the proof of Proposition 3.3.2 and Theorem 3.3.1.",
+   "via": [
+    "lem-coef-filtered-operadic-unstraightening",
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-data calculus for filtered colimits of infinity categories",
+ "statement": "Use quasicategories, coherent functors, cores, mapping spaces, and nested universes $\\mathcal U\\in\\mathcal U'$ as in [def-cbc-enhanced-diagrams-cones], filteredness and finite simplicial sets as in [def-coef-presentable-infinity-category], and the infinity category $\\operatorname{Cat}_\\infty$ of $\\mathcal U$-small infinity categories as modeled in [lem-coef-marked-point-cartesian-model]. Write $\\mathcal S=\\mathcal S_{\\mathcal U}$ for the infinity category of $\\mathcal U$-small spaces defined in [def-coef-infinity-category-of-spaces]. Filtered means $\\aleph_0$-filtered. Finite means having finitely many nondegenerate simplices. The infinity category $\\operatorname{Cat}_\\infty$ admits small filtered colimits and finite limits. For every small filtered infinity category $I$, finite simplicial set $K$, and coherent diagram $F:K\\times I\\to\\operatorname{Cat}_\\infty$, the canonical comparison\n$$\\operatorname{colim}_{i\\in I}\\lim_{k\\in K}F(k,i)\\longrightarrow\\lim_{k\\in K}\\operatorname{colim}_{i\\in I}F(k,i)$$\nis an equivalence, including $K=\\varnothing$. For every diagram $D_i\\to B$ to a fixed small infinity category and every functor $T\\to B$, base change also satisfies $\\operatorname{colim}_i(D_i\\times_B T)\\simeq(\\operatorname{colim}_iD_i)\\times_B T$, with the structural functor from the colimit induced by the given coherent maps to $B$. The core functor $(-)^{\\simeq}:\\operatorname{Cat}_\\infty\\to\\mathcal S$ and, for each finite simplicial set $L$, the functor $\\operatorname{Fun}(L,-):\\operatorname{Cat}_\\infty\\to\\operatorname{Cat}_\\infty$ preserve small filtered colimits.\n\nMore explicitly, let $D:I\\to\\operatorname{Cat}_\\infty$ be a small filtered coherent diagram, let $C=\\operatorname{colim}_I D$, and write $r_i:D_i\\to C$ for its cocone. Every finite collection of objects and arrows in $C$, together with finitely many specified simplices among them, is represented up to coherent equivalence at a common stage. Given $x,y\\in D_i$, the coherent coslice $I_{i/}$ of arrows out of $i$ is small and filtered, and the natural map\n$$\\operatorname{colim}_{(u:i\\to j)\\in I_{i/}}\\operatorname{Map}_{D_j}(D(u)x,D(u)y)\\longrightarrow\\operatorname{Map}_{C}(r_ix,r_iy)$$\nis an equivalence. These comparisons are natural in the objects, in precomposition and postcomposition, and under a coherent diagram of functors $D_i\\to B$ to a fixed small infinity category $B$. For such a diagram and an arrow $f:p_i(x)\\to p_i(y)$ in $B$, they also give the equivalence on homotopy fibers\n$$\\operatorname{colim}_{(u:i\\to j)\\in I_{i/}}\\operatorname{Map}_{D_j}^{f}(D(u)x,D(u)y)\\simeq\\operatorname{Map}_{C}^{f}(r_ix,r_iy),$$\nwhere the superscript $f$ denotes the homotopy fiber of the map to $\\operatorname{Map}_B(p_i(x),p_i(y))$. No transition functor is assumed fully faithful.",
+ "source": {
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Section 3.3: finite functor-category and mapping-space calculations in the proof of Proposition 3.3.2, and finite-limit/base-change calculation in the proof of Theorem 3.3.1, using Corollary 3.3.8. Read online; not archived in literature/. These are infinity-categorical facts, not ordinary filtered colimits of sets; no Stacks tag states them."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-marked-point-cartesian-model",
+  "def-coef-infinity-category-of-spaces"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of quasicategories commute with finite limits and finite simplicial functor categories",
+   "results": "{\"t\": \"2026-10-16T21:26:58Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimits of quasicategories commute with finite limits and finite simplicial functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"SSet.hasLimits\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"CategoryTheory.isFiltered_of_nonempty_limit_colimit_to_colimit_limit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.IsFiltered.isSifted\", \"SSet.hasColimits\"], \"digest\": \"45369dcc6b8f599d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:26:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|colimit|compact",
+   "results": "{\"t\": \"2026-10-16T21:26:58Z\", \"tool\": \"grep\", \"query\": \"filtered|colimit|compact\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits in the infinity category of infinity categories commute with finite limits",
+   "results": "{\"t\": \"2026-10-16T21:26:59Z\", \"tool\": \"leansearch\", \"query\": \"Filtered colimits in the infinity category of infinity categories commute with finite limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget\", \"CategoryTheory.Limits.HasFilteredColimits\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\"], \"digest\": \"19ad9cb48d874184\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in a filtered colimit of infinity categories are filtered colimits of mapping spaces at later stages",
+   "results": "{\"t\": \"2026-10-16T21:27:00Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in a filtered colimit of infinity categories are filtered colimits of mapping spaces at later stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor\", \"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.Limits.IndObjectPresentation.hI\"], \"digest\": \"6d36d4b897030287\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The core and finite simplex functor category preserve filtered colimits of infinity categories",
+   "results": "{\"t\": \"2026-10-16T21:28:54Z\", \"tool\": \"leanfinder\", \"query\": \"The core and finite simplex functor category preserve filtered colimits of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.finite_of_isColimit\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimits\"], \"digest\": \"af00d37dceace2b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal subgroupoid functor from quasicategories to spaces preserves directed colimits",
+   "results": "{\"t\": \"2026-10-16T21:52:08Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal subgroupoid functor from quasicategories to spaces preserves directed colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.hoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hasColimits\", \"SSet.Finite.instIsFinitelyPresentable\", \"DeltaGenerated.hasColimits\", \"SSet.QCat\", \"SSet.hasDimensionLT_of_isColimit\"], \"digest\": \"879be86911eeb59e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.QCat is the category of quasicategories with strict simplicial maps; finite presentability and filtered monomorphisms are ordinary simplicial-set results. No hit states filtered colimits in the coherent infinity category Cat infinity or preservation by its core. Read AlgebraicTopology/Quasicategory/Basic.lean:32-89 and SimplicialSet/Presentable.lean:31-62."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-16T21:52:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero results for quasicategory limit declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "core|filtered|limit",
+   "results": "{\"t\": \"2026-10-16T21:52:51Z\", \"tool\": \"grep\", \"query\": \"core|filtered|limit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"571305d34a5fbedf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the seven hits are terminal-object lifting formulations in Quasicategory/Basic.lean:70-89 and InnerFibration.lean:89-109; they do not state coherent colimit calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-filtered-operadic-unstraightening",
+  "date": "2026-10-17",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

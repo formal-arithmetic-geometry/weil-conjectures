@@ -29,9 +29,100 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=N(\\mathbb N)$ and $i:L\\hookrightarrow B$. A simplex of $B$ is a weakly increasing sequence of natural numbers. Collapsing repeated entries factors it uniquely as a degeneracy of the strictly increasing sequence of its distinct entries. Thus nondegenerate simplices are precisely nonempty finite subsets of $\\mathbb N$, with faces obtained by deleting entries. Write $\\Delta^{[0,n]}$ for the full simplex on $0,\\ldots,n$, and put $K_n=L\\cup\\Delta^{[0,n]}$. These are simplicial subsets, $K_0=K_1=L$, and $\\bigcup_nK_n=B$: every finite increasing sequence has a finite largest entry. All these objects are small in any containing universe of the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, printed p.297: explicit computation for the consecutive-edge inclusion; agent maximum-vertex filtration of its omitted computation."
+   }
+  },
+  {
+   "text": "Fix $n\\geq2$. The nondegenerate simplices of $K_n$ outside $K_{n-1}$ occur in pairs $(S,T)$, where $S\\subseteq\\{0,\\ldots,n\\}$ contains $n-1,n$ and at least one smaller entry, and $T=S\\setminus\\{n-1\\}$. Indeed, a new simplex contains $n$ and some entry at most $n-2$; it either contains $n-1$, giving $S$, or uniquely acquires it by insertion, giving $T$. Attach the finitely many $S$ in order of increasing dimension $r=|S|-1\\geq2$, with arbitrary order among equal dimensions. All codimension-one faces of $S$ except $T$ are already present: deleting $n$ gives an old face, and deleting any entry other than $n-1,n$ leaves either the old edge $\\{n-1,n\\}$ or a smaller-dimensional $S$. Every proper face of $T$ is also present: deleting $n$ gives an old face; any other face is either the old vertex $\\{n\\}$ or is the paired face of a previously attached smaller-dimensional $S$. Neither $S$ nor $T$ was previously present. Equal-dimensional attachments have different missing faces because the pairing is injective. The intersection with the current subset is therefore exactly $\\Lambda^r_{r-1}$ inside this $\\Delta^r$, and $0<r-1<r$. The attachment is its pushout: on each degree maps glue uniquely on the union, and the resulting maps commute with operators because both given maps do and agree on the intersection. Unique collapse of repeated entries gives the same assertion for degenerate simplices. After these attachments all of $K_n$ is present.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00J6",
+    "place": "Proof, normalized-simplex pairing and inner-horn pushout: agent variant using the final unit edge and the largest vertex, with all intersections proved here."
+   }
+  },
+  {
+   "text": "Call a map an inner fibration if it lifts against every inner horn, and call a map inner anodyne if it has the left lifting property against every inner fibration. Each horn used in step 2 has that left lifting property by definition. Apply the pushout and finite-composition clauses of [lem-coef-lifting-class-closure] with the class of all inner fibrations to obtain the same property for $K_{n-1}\\hookrightarrow K_n$. To pass to $B$, fix any square with $i:L\\hookrightarrow B$ on the left and an inner fibration $p:X\\to Y$ on the right. Start with its prescribed map on $K_1=L$. Given the lift on $K_{n-1}$, use the just-proved lifting property and the prescribed map $K_n\\to B\\to Y$ to choose a lift on $K_n$ agreeing exactly on $K_{n-1}$. Recursion and classical choice give compatible lifts for all $n$. Their union is a simplicial map $B\\to X$: each simplex and each of its operators lie in one $K_n$, where the required identities hold. It solves the original square. This proves directly that $i$ is inner anodyne; no theorem about commuting arbitrary limits or colimits, and no transfinite-closure assertion beyond the cited statement, is used.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, printed p.297, missing computation; explicit lifting argument following the horn attachments of step 2."
+   }
+  },
+  {
+   "text": "Put $\\mathcal D=\\operatorname{Fun}(B,\\mathcal E)$, $\\mathcal A=\\operatorname{Fun}(L,\\mathcal E)$ and $q=i^*:\\mathcal D\\to\\mathcal A$. By [lem-cbc-enhanced-functor-cone-calculus] these are quasicategories. We claim that $q$ has the right lifting property against every degreewise injective simplicial map $j:U\\to V$. By the defining formula for $\\operatorname{Fun}$, a square for $q$ and $j$ is exactly a map\n$$(B\\times U)\\amalg_{L\\times U}(L\\times V)\\longrightarrow\\mathcal E.$$\nThe square's commutativity is exactly the agreement on $L\\times U$. The map from this pushout to $B\\times V$ is inner anodyne by [lem-coef-inner-anodyne-pushout-product], with $i$ as its inner-anodyne factor and $j$ its injective factor. Since $\\mathcal E\\to\\Delta^0$ is an inner fibration by the quasicategory definition, the map extends to $B\\times V$. Currying is the required lift. This includes $U=\\varnothing$ and arbitrary $V$, not only positive-dimensional horn tests.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollaries 2.3.2.4 and 2.3.2.5, printed pp.100-101; the exponential lifting adjunction is written out using the existing pushout-product node."
+   }
+  },
+  {
+   "text": "The lifting property in step 4 constructs a coherent quasi-inverse. Apply it to $\\varnothing\\hookrightarrow\\mathcal A$ and the identity of $\\mathcal A$ to obtain $s:\\mathcal A\\to\\mathcal D$ with $qs=\\mathrm{id}_{\\mathcal A}$. Let $J$ be the nerve of the ordinary category with two objects $0,1$ and exactly one morphism for each ordered pair of objects. Its two opposite edges are inverse, with the inverse equations witnessed by its two composition triangles. Apply step 4 to the degreewise injective inclusion $\\{0,1\\}\\times\\mathcal D\\hookrightarrow J\\times\\mathcal D$. On its two components prescribe $\\mathrm{id}_{\\mathcal D}$ and $sq$; downstairs prescribe $q$ after projection $J\\times\\mathcal D\\to\\mathcal D$. The square commutes because $qsq=q$. A lift $H:J\\times\\mathcal D\\to\\mathcal D$ curries to $J\\to\\operatorname{Fun}(\\mathcal D,\\mathcal D)$. This target is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. The two opposite edges and their composition triangles map to inverse coherent transformations between $\\mathrm{id}_{\\mathcal D}$ and $sq$, hence give a coherent natural equivalence by the definition in [def-cbc-enhanced-diagrams-cones]. Together with $qs=\\mathrm{id}$ this proves that the specified restriction $q$ is a functor equivalence. The argument also works when $\\mathcal E$ is empty: then $\\mathcal A=\\mathcal D=\\varnothing$, and all displayed lifting problems still make sense.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 2.3.2.5, printed p.101, trivial-fibration conclusion; explicit section and inverse-triangle argument for the coherent-equivalence convention of this DAG."
+   }
+  },
+  {
+   "text": "A functor equivalence induces equivalences on every mapping space by [lem-cbc-enhanced-functor-cone-calculus]. Apply this to $q$ and the objects $x,\\Delta_Bt$. Restriction of a constant diagram is exactly constant: $q\\Delta_Bt=\\Delta_Lt$, since both simplicial maps factor through the same $t$ and the unique map to $\\Delta^0$. Thus the resulting map on mapping spaces is exactly the restriction map in the statement. Its naturality is that of the specified simplicial functor $q$, without choosing an inverse to a comparison map. More explicitly, a simplex $h:B\\times\\Delta^m\\to\\mathcal E$ restricts to $h\\circ(i\\times\\mathrm{id})$; this operation commutes with every simplex operator and restricts all coherent transformations and their composition witnesses as well. Consequently it commutes with precomposition in $x$ and postcomposition in the constant target, including their coherence simplices. For an enhanced functor $G:\\mathcal E\\to\\mathcal E'$, the equality $G\\circ h\\circ(i\\times\\mathrm{id})=(G\\circ h)\\circ(i\\times\\mathrm{id})$ holds degree by degree. Applying this also to the simplices of the pinched mapping-space definition proves the claimed compatibility with postcomposition by $G$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, printed p.297, cocone consequence of its categorical equivalence; mapping-space and naturality details supplied by the existing enhanced calculus."
+   }
+  },
+  {
+   "text": "Let $\\lambda:x\\to\\Delta_Bc$ be the specified cocone. The cocone criterion (the dual clause) of [lem-cbc-enhanced-functor-cone-calculus] says it is colimiting exactly when, for every $t\\in\\mathcal E$, the map\n$$\\operatorname{Map}_{\\mathcal E}(c,t)\\longrightarrow\\operatorname{Map}_{\\mathcal D}(x,\\Delta_Bt),\\qquad a\\longmapsto\\Delta_B(a)\\circ\\lambda$$\nis an equivalence. The same criterion for $q\\lambda$ has target $\\operatorname{Map}_{\\mathcal A}(x|_L,\\Delta_Lt)$. Its map is the previous one followed by the restriction equivalence from step 6, with the compatibility homotopy supplied by restriction of the composition witnesses; constants restrict exactly as shown there. Composing a map of spaces with an equivalence does not change whether it is an equivalence: on components it composes with a bijection, and on every based homotopy group with an isomorphism, so these cancel in either direction. Thus the two cocone criteria agree for each $t$, proving both implications for this particular cocone. This uses no existence of other colimits.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Propositions 4.4.2.6-4.4.2.7, printed p.297; explicit universal-mapping-space argument for the specified cocone, using the existing dual cocone criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, mapping-complex adjunction infrastructure through the inherited small-shape branch. Agent-written detailed proof of the infinite-spine computation omitted in HTT Proposition 4.4.2.6; checked online against that proposition, Corollary 2.3.2.5, and Kerodon 00J6. Online sources are not archived: WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +165,52 @@
    "results": "{\"t\": \"2026-10-16T20:53:45Z\", \"tool\": \"leanfinder\", \"query\": \"An inner anodyne inclusion of simplicial sets induces a trivial fibration on internal homs into a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"984383efb2b75e34\"}",
    "date": "2026-10-17",
    "verdict": "No match. Quasicategory.hornFilling only fills a single inner horn; the modelCategoryQuillen hits concern all horns and Kan fibrations. None states infinite-spine restriction or its coherent cocone comparison. Basic.lean:34-87 was read. Second reader searched the stronger inner-anodyne/internal-hom formulation."
+  },
+  {
+   "tool": "grep",
+   "query": "spine.*(anodyne|Anodyne)|[Aa]nodyne.*[Ss]pine|sequential.*[Qq]uasicategory",
+   "results": "{\"t\": \"2026-10-16T21:38:41Z\", \"tool\": \"grep\", \"query\": \"spine.*(anodyne|Anodyne)|[Aa]nodyne.*[Ss]pine|sequential.*[Qq]uasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Targeted spine/anodyne grep returned no hits; broader source hits were read in Quasicategory/StrictSegal.lean:30-90, Quasicategory/Nerve.lean:30-36, SimplicialSet/HomotopyCat.lean:94-118, Inner/Basic.lean:35-65 and Inner/PushoutProduct.lean:93-109. The latter is an existing tool leaf, not the sequential-spine theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinite spine inclusion into the nerve of the natural number poset is inner anodyne",
+   "results": "{\"t\": \"2026-10-16T21:38:41Z\", \"tool\": \"leansearch\", \"query\": \"The infinite spine inclusion into the nerve of the natural number poset is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.StrictSegal.spineInjective\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.StrictSegal.spineInjective\"], \"digest\": \"434f206cefdbbf64\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Nerve.quasicategory supplies horn fillers for an ordinary nerve; StrictSegal.spineEquiv assumes unique finite-spine reconstruction; the Quillen generating maps concern the Kan model structure. None proves infinite-spine coherent restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spine\", \"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-16T21:38:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"spine\\\", \\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the joint spine and Quasicategory query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from the nerve of the natural numbers to its consecutive edges is an equivalence of functor quasicategories",
+   "results": "{\"t\": \"2026-10-16T21:38:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from the nerve of the natural numbers to its consecutive edges is an equivalence of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.homEquiv\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"SSet.stdSimplex.isoNerve\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\"], \"digest\": \"4fa0e4b4ee74949c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Ordinary nerve and two-truncation equivalences only, not coherent diagrams in arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the free directed infinite path into its nerve induces an equivalence on spaces of coherent natural transformations",
+   "results": "{\"t\": \"2026-10-16T21:39:00Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of the free directed infinite path into its nerve induces an equivalence on spaces of coherent natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"CategoryTheory.nerve.homEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.ofNerve₂\"], \"digest\": \"d1d0fb0a20cdbc0d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Ordinary nerve and two-truncation equivalences only, not coherent diagrams in arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "spineEquiv|def spine|theorem quasicategory|nerveEquiv|innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-16T21:39:30Z\", \"tool\": \"grep\", \"query\": \"spineEquiv|def spine|theorem quasicategory|nerveEquiv|innerAnodyneExtensions\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\"], \"digest\": \"90b67e779795d0cb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Targeted spine/anodyne grep returned no hits; broader source hits were read in Quasicategory/StrictSegal.lean:30-90, Quasicategory/Nerve.lean:30-36, SimplicialSet/HomotopyCat.lean:94-118, Inner/Basic.lean:35-65 and Inner/PushoutProduct.lean:93-109. The latter is an existing tool leaf, not the sequential-spine theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-limits-products-pullbacks",
@@ -85,5 +218,29 @@
   "group": "Q98"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-sequential-spine",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and its hypotheses. Supplied a finite maximum-vertex inner-horn filtration followed by an explicit compatible countable lift, rather than citing a new node restating the infinite-spine clause. Existing Mathlib lifting-class and pushout-product leaves give arbitrary exponential lifts. A section and walking-isomorphism lift prove the coherent functor equivalence; the existing enhanced calculus then gives all mapping-space, naturality, and specified-cocone consequences. No new nodes; verified the horn intersections in 1013 finite attachments for n=2 through 10 and read every cited statement.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: foundational mapping-complex adjunction infrastructure through the existing finite-shape-generation ancestry. Steps 1-3 carry the sequential-spine computation used by the ancestor limits/products/pullbacks split; steps 4-7 carry coherent restriction, mapping spaces and the universal cocone comparison. This is below the unit level and replaces no unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure, full faithfulness of functor equivalences, and the dual cocone mapping-space criterion; these are foundational tools for arbitrary simplicial shapes and are not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-67f701a38",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-67f701a38 (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements, the parent's step 5 and the ancestor's blueprint proof paragraph 2 in full. The statement matches HTT Proposition 4.4.2.6 and its use in 4.4.2.7 (an infinite version of Kerodon 00J6) and is not weakened: E is an arbitrary quasicategory, possibly empty, and no other colimits are assumed. Step 1 (finite-subset nerve, K_0=K_1=L, union is all of B) is genuinely elementary. Step 2 is correct. The new simplices of K_n are exactly the pairs S containing n-1 and n with T = S minus {n-1}. T is the face r-1 of S, so the horn is inner for r>=2. The other faces and the faces of T are already present, the intersection is exactly that inner horn, and the pushout holds because B is the nerve of a poset. I checked this independently by script on all 247 attachments for n=2..8. Step 3 uses only the identity, binary-composition and pushout clauses of lem-coef-lifting-class-closure, and builds the countable lift by recursion relative to K_{n-1}. Step 4: the pushout-product leaf has the right orientation with i = L->B and j = U->V, the case U empty is covered, and the cone calculus gives that Fun(B,E) and Fun(L,E) are quasicategories. Step 5: in the lift along the two-object groupoid nerve J, the 2-simplices (0,1,0) and (1,0,1) are exactly the inverse witnesses required by the definition node. Steps 6-7: restricting a constant diagram gives exactly a constant diagram, restriction is strictly compatible with postcomposition, and the dual cocone criterion plus two-out-of-three gives both directions. There is no cycle, and review_split passes. I accept the tool_use of lem-cbc-enhanced-functor-cone-calculus: it is used only for closure of Fun, mapping spaces of a functor equivalence and the cocone criterion, which nothing in this unit supplies, and about 80 nodes in this chapter already declare it. Of the duplicate candidates, lem-cbc-spine-inner-anodyne and lem-coef-functor-spine-tower-mapping-descent cover only the finite spine, and lem-coef-infinity-anodyne-cocones gives only the mapping-space part, with no cocone criterion or postcomposition clause; none states the item. HTT and Kerodon are not in literature/ and the worker correctly listed them as WANTED. I checked the steps against my knowledge of those results and did not fetch them online. No changes; fixes/ is empty."
+ }
 }

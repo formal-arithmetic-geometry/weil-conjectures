@@ -29,9 +29,97 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $E_b$ is empty, its quotient is empty and is in bijection with the empty set in $\\mathcal U$. Henceforth suppose it is nonempty. Set $M=\\operatorname{Map}_C(x,y)$; it is a Kan complex by the enhanced functor calculus, and by hypothesis it is equivalent to a $\\mathcal U$-small Kan complex. Because $n\\geq1$, every vertex of $\\Delta^n$ belongs to its boundary; thus all the vertex tracks of every homotopy in the question are constant identity edges. In particular there is no additional invertibility restriction on these relative homotopies.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  },
+  {
+   "text": "Let $A=R\\mathfrak C[C]$ be the object-preserving locally Kan replacement supplied by coherent-nerve comparison, and put $C'=N_{\\mathrm{hc}}A$. All of this is formed in $\\mathcal U'$, without making a smallness assertion there relative to $\\mathcal U$. The adjunction unit followed by replacement gives $u:C\\to C'$. Every simplicial set is cofibrant in the Joyal structure; since the coherent-nerve adjunction is a Quillen equivalence, its derived unit at $C$ is an equivalence, and the derived-adjunction computation identifies that unit with the displayed map. Passing to homotopy categories gives an ordinary localization at the model weak equivalences: testing the coherent-localization universal property against nerves of ordinary categories gives exactly the ordinary universal property for inverting those maps. Thus the displayed unit becomes an isomorphism in that ordinary localization. Detection of weak equivalences in a model localization therefore says that $u$ is a categorical equivalence. In particular $C'$ is a quasicategory. Apply case (ii) of relative homotopy invariance with $(B,A)=(\\Delta^n,\\partial\\Delta^n)$ and boundary $b$: it gives a bijection from the quotient in the question to the relative extension classes for $ub$ in $C'$. The all-vertices hypothesis was checked in step 1.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-simplicial-relative-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  },
+  {
+   "text": "Put $m=n-1$ and $T=A(u(x),u(y))$, using the identification of the object sets of $\\mathfrak C[C]$ and its replacement; thus the objects here are the original vertices $x,y$. The cube comparison applied to the boundary $ub$ supplies a fixed map $a:\\partial Q_m\\to T$ and identifies its relative simplex-extension classes with $[Q_m,T]_a$. Explicitly the coordinates record the intermediate vertices of the long-arrow subset poset, the zero faces come from omission of an intermediate vertex, and the one faces come from splitting the long arrow and composing. Thus all the other mapping data of the boundary remain fixed, rather than being varied during the cube comparison. When $n=1$, this is the point $Q_0$ with empty boundary, so it gives precisely the component classes of arrows.",
+   "uses": [
+    "lem-coef-coherent-nerve-relative-cube-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  },
+  {
+   "text": "The endpoint mapping complex $T$ is equivalent to $M$ without any hypothesis on the other mapping spaces of $C$. Indeed write $V=\\mathfrak C[C](x,y)$ and use the natural zigzag\n$$T\\ \\xleftarrow{\\sim}\\ V\\ \\xleftarrow{\\theta}\\ |M|_Q\\ \\xrightarrow{p_M}\\ M.$$\nThe first map is the local weak equivalence of the replacement $\\mathfrak C[C]\\to A$; the other two weak equivalences are exactly the pinched-resolution comparison and its natural map $p$. Choose a $\\mathcal U$-small Kan complex $K$ equivalent to $M$, as the hypothesis permits. Consequently $T$ and $K$ are isomorphic in an ordinary localization of the Kan model category in $\\mathcal U'$. The Kan model-structure statement makes every simplicial set cofibrant, since its initial map is degreewise injective, and makes both $T$ and $K$ fibrant, since both are Kan complexes. The mapping-class lemma realizes an isomorphism $\\gamma T\\to\\gamma K$ by an actual map $v:T\\to K$, and the localization-detection lemma makes $v$ a weak homotopy equivalence. This step chooses a map representing an equivalence, not an actual small presentation of all the simplices of $T$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  },
+  {
+   "text": "Apply case (i) of relative homotopy invariance to $v:T\\to K$ and $\\partial Q_m\\subseteq Q_m$. It gives a bijection $[Q_m,T]_a\\cong[Q_m,K]_{va}$ by postcomposition. There is no demand that the old boundary lift through a map out of $K$: the new boundary is exactly $va$. Case (i) permits arbitrary simplicial subsets, so it also applies when $m=0$ and the boundary is empty.",
+   "uses": [
+    "lem-coef-simplicial-relative-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  },
+  {
+   "text": "The simplicial sets $Q_m$ and $K$ are $\\mathcal U$-small. A simplicial map between them is an element of the small product $\\prod_{d\\geq0}\\operatorname{Set}((Q_m)_d,K_d)$ satisfying the simplicial equations, so the set of all such maps belongs to $\\mathcal U$. Requiring the boundary to be $va$ defines a subset of this small set. Homotopies are likewise maps between small simplicial sets; alternatively the equivalence relation they generate is a subset of the square of the small extension set. Its quotient therefore belongs to $\\mathcal U$, by closure of a universe under products, subsets and quotients. Composing the bijections of steps 2, 3 and 5 identifies $E_b/{\\sim}$ with this small quotient. This uses only the small model $K$ of the single endpoint mapping space; it places no bound on actual simplices or other mapping spaces of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-relative-homotopy-invariance",
+  "lem-coef-coherent-nerve-relative-cube-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-localization-homotopy-classes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.4.1.1 and Proposition 5.4.1.2, proof of (1) implies (2), printed p.419; expanded via a small Kan model rather than a homotopy-group cardinal estimate. HTT is online rather than archived in literature/; the explicit small-Kan counting argument is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +169,45 @@
    "results": "{\"t\": \"2026-10-16T20:38:38Z\", \"tool\": \"leanfinder\", \"query\": \"Smallness of connected components of a fiber of the restriction map from simplex diagrams to boundary diagrams in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instEssentiallySmallLightDiagram\", \"SimplexCategory.smallCategory\", \"CategoryTheory.SmallObject.instSmallFunctorObjIndex\", \"SSet.stdSimplex.instFiniteObjOppositeSimplexCategory\", \"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\", \"SimplexCategory.instFiniteHom\", \"SSet.stdSimplex.instFiniteObjSimplexCategory\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\"], \"digest\": \"b0d73aedf80e67b5\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader query. Results concern finite or small simplex categories, ordinary light diagrams and finite presentability of the standard simplex; they do not bound relative homotopy classes of extensions into a large quasicategory from the size of one mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes of extensions of a simplex boundary in a quasicategory are small when the mapping space between its endpoint vertices is essentially small",
+   "results": "{\"t\": \"2026-10-16T21:24:48Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy classes of extensions of a simplex boundary in a quasicategory are small when the mapping space between its endpoint vertices is essentially small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.OneTruncation₂.Hom\", \"SSet.Truncated.Path₁\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopyCategory₂.homMk\"], \"digest\": \"ff107175de36c166\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are quasicategory horn filling, the definition SSet.RelativeMorphism.HomotopyClass, two-truncated homotopy categories, and ordinary categorical smallness. RelativeMorphism.lean:114-127 has a quotient in the ambient universe, without a bound from a smaller-universe endpoint mapping space. Read that definition and the neighboring homotopy definitions; no smallness theorem results."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.RelativeMorphism.HomotopyClass, Small",
+   "results": "{\"t\": \"2026-10-16T21:24:47Z\", \"tool\": \"loogle\", \"query\": \"SSet.RelativeMorphism.HomotopyClass, Small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are quasicategory horn filling, the definition SSet.RelativeMorphism.HomotopyClass, two-truncated homotopy categories, and ordinary categorical smallness. RelativeMorphism.lean:114-127 has a quotient in the ambient universe, without a bound from a smaller-universe endpoint mapping space. Read that definition and the neighboring homotopy definitions; no smallness theorem results."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*homotop|HomotopyClass|Quasicategory",
+   "results": "{\"t\": \"2026-10-16T21:24:47Z\", \"tool\": \"grep\", \"query\": \"relative.*homotop|HomotopyClass|Quasicategory\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\"], \"digest\": \"8f93cabece9707f0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are quasicategory horn filling, the definition SSet.RelativeMorphism.HomotopyClass, two-truncated homotopy categories, and ordinary categorical smallness. RelativeMorphism.lean:114-127 has a quotient in the ambient universe, without a bound from a smaller-universe endpoint mapping space. Read that definition and the neighboring homotopy definitions; no smallness theorem results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative homotopy classes of simplices with fixed boundary in a locally small infinity category form a small set",
+   "results": "{\"t\": \"2026-10-16T21:24:47Z\", \"tool\": \"leansearch\", \"query\": \"Relative homotopy classes of simplices with fixed boundary in a locally small infinity category form a small set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.HomotopyClass\", \"CategoryTheory.Localization.HasSmallLocalizedHom.small\", \"SSet.RelativeMorphism.Homotopy.eq\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.Homotopy\", \"SSet.RelativeMorphism.Homotopy.mk.injEq\", \"CategoryTheory.locallySmall_self\", \"SSet.RelativeMorphism.Homotopy.mk.inj\"], \"digest\": \"9c8cbf0bebe53a59\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are quasicategory horn filling, the definition SSet.RelativeMorphism.HomotopyClass, two-truncated homotopy categories, and ordinary categorical smallness. RelativeMorphism.lean:114-127 has a quotient in the ambient universe, without a bound from a smaller-universe endpoint mapping space. Read that definition and the neighboring homotopy definitions; no smallness theorem results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small mapping spaces bound homotopy classes of simplices relative to their boundary by endpoint mapping space homotopy groups",
+   "results": "{\"t\": \"2026-10-16T21:25:46Z\", \"tool\": \"leanfinder\", \"query\": \"Small mapping spaces bound homotopy classes of simplices relative to their boundary by endpoint mapping space homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyGroup\", \"homotopyGroupEquivFundamentalGroup\", \"HomotopyGroup.Pi\", \"instInhabitedHomotopyGroup\", \"HomotopyGroup.auxGroup\", \"ContinuousMap.Homotopy.evalAt_eq\", \"HomotopyGroup.transAt_indep\", \"HomotopyGroup.pi0EquivZerothHomotopy\"], \"digest\": \"af4a543388358a52\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are quasicategory horn filling, the definition SSet.RelativeMorphism.HomotopyClass, two-truncated homotopy categories, and ordinary categorical smallness. RelativeMorphism.lean:114-127 has a quotient in the ambient universe, without a bound from a smaller-universe endpoint mapping space. Read that definition and the neighboring homotopy definitions; no smallness theorem results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-small-full-subcategory",
@@ -92,5 +215,29 @@
   "group": "Q36"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-boundary-extension-small-classes",
+  "worker": "stage1",
+  "summary": "Checked the exact endpoint-only statement and HTT 5.4.1.1/5.4.1.2. Kept the statement unchanged. Split into a categorical replacement, relative-class invariance, the coherent-nerve cube comparison, construction of a weak equivalence to a small Kan model using existing localization nodes, and a universe-level counting argument. Added two statement-only homotopy-comparison inputs; no smallness conclusion is delegated to them. Checked empty extensions and n=1 separately.",
+  "blueprint": "Realizes the foundational relative-extension counting assertion used in the small-full-subcategory/reflected-generator branch under paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction before inverse limit). The source is HTT 5.4.1.1 and the fixed-boundary induction in 5.4.1.2; this is below the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its Kan property of right-pinched mapping spaces is used. This is a general quasicategory foundation in another unit; the biduality unit does not replace it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-5a8dde303",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-5a8dde303 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes. Source: I fetched HTT and read Lemma 5.4.1.1 and Prop 5.4.1.2 (1)=>(2) on printed p.419 / PDF p.436. The source's induction uses only the small endpoint mapping space for a fixed boundary f0, so the item's endpoint-only statement is true and not weakened. I tested n=1 (classes = pi_0 Map), empty E_b, and n>=2 (a pi_{n-1}-torsor or empty). The six steps check against the cited statements. Step 1 takes only the Kan property of mapping spaces from lem-cbc-enhanced-functor-cone-calculus; this off-unit tool use is declared and I accept it. Step 2: C is Joyal-cofibrant, so the derived unit is C->N_hc R C[C] (RN_hc = N_hc R); the Quillen equivalence and the detection lemma make it a categorical equivalence; invariance (ii) applies because n>=1 puts every vertex on the boundary. Step 3: the cube comparison applies with D = R C[C] (locally Kan), objects fixed. Step 4: the zigzag replacement / theta / p_M (I checked that Map^R equals def-cbc's right-pinched Map) gives an isomorphism in the Kan localization; T is cofibrant, T and K are Kan; the Mathlib leaf model-localization-homotopy-classes gives a strict v, and detection makes it a weak equivalence. Step 5: invariance (i) applies to v with arbitrary boundary, including the empty one when m=0. Step 6: the counting is genuinely elementary. No cycle (284 reachable nodes, none missing). Both new nodes are statement-only, self-contained, true, strictly smaller than the item and carry no smallness claim. Relative-homotopy invariance: Kan-fibration and isofibration fibre comparison; the all-vertices condition makes fibre edges invertible. I tested A=B, A empty, B empty and empty extension sets. Cube comparison: C[dDelta^n] differs from C[Delta^n] only at (0,n), where it is d(Delta^1)^{n-1}; the zero and one faces check, and the homotopy clause is exactly HTT 5.4.1.1 for locally Kan D; I tested n=1 and n=2. My DAG search found no duplicate (minimal-retract, kan-minimal-factorization, hammock invariance, hofib detection, terminal-boundary-extension, coherent-nerve-comparison and others). Blueprint ancestry, same_as, created and search records are in order. No SGA citations. Not a target node."
+ }
 }

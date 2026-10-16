@@ -29,9 +29,126 @@
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work in the slice $\\operatorname{Cat}_{\\infty/B}$. The cone-mapping formula of [lem-cbc-enhanced-functor-cone-calculus] with the one-point diagram of value $B$ identifies, for $p:E\\to B$ and $q:T\\to B$,\n$$\\operatorname{Map}_{/B}(p,q)\\simeq\\operatorname{hofib}_{p}\\bigl(\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(E,T)\\xrightarrow{q\\circ-}\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(E,B)\\bigr).$$\nHere the slice is the coherent cone category on that one-point diagram, so this is exactly the cited formula, including triangle homotopies. For a small filtered diagram $p_i:E_i\\to B$, form $E=\\operatorname{colim}_iE_i$, whose existence is [lem-coef-cat-infinity-filtered-finite-calculus]. The coherent structural maps to $B$ induce $p:E\\to B$ by the mapping-space colimit test of [lem-coef-infinity-yoneda-presheaf-limits]. Applying the displayed fiber formula and that test twice gives\n$$\\operatorname{Map}_{/B}(p,q)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\operatorname{Map}_{/B}(p_i,q).$$\nIndeed both ambient mapping spaces become limits and taking a fiber over the compatible structural maps commutes with that limit: both constructions specify the same families of points, paths and their coherences. Thus this is a colimit in the slice. Conversely, a colimit cocone in this slice is colimiting on total categories: test it on $T\\times B\\to B$ for arbitrary $T$. Finite products in $\\operatorname{Cat}_\\infty$ are the products of infinity categories by [lem-coef-cocartesian-straightening], so maps into this slice object are exactly maps to $T$; apply the same mapping-space test. This establishes the required equivalence of colimit cocones in the slice and on total categories.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 3.3.6, with the slice fiber calculation written out"
+   }
+  },
+  {
+   "text": "Keep such a filtered slice diagram, and select any collection $A$ of base arrows over which every $p_i$ has cocartesian lifts preserved by the transition functors. This includes $A$ all arrows of $B$, and later $A$ the inert arrows of $\\Delta^{\\mathrm{op}}$. We prove that every stage cocartesian lift over an arrow of $A$ remains cocartesian in $E$. Let $e:x\\to y$ in $E_i$ be such a lift. For a testing object $z\\in E$, the object-representation clause of [lem-coef-cat-infinity-filtered-finite-calculus] supplies $z_k\\in E_k$ and an equivalence $r_kz_k\\simeq z$. Filteredness supplies a stage $j$ and arrows $i\\to j$, $k\\to j$. Use the transition image of the original $e$ at $j$, which is cocartesian by hypothesis, and the transition image of $z_k$ as the testing object. This retains the specified lift; it does not select an arbitrary new representative of $e$. Equivalence of testing objects changes all mapping spaces by equivalences. At every later stage the square with top row $\\operatorname{Map}(y,z)\\to\\operatorname{Map}(x,z)$ and bottom row $\\operatorname{Map}_B(py,pz)\\to\\operatorname{Map}_B(px,pz)$ is a homotopy pullback, by the intrinsic cocartesian-arrow criterion in [lem-coef-cocartesian-straightening]. Equivalently, on the homotopy fiber over every $g:py\\to pz$, the map $\\operatorname{Map}^{g}(y,z)\\to\\operatorname{Map}^{g\\,p(e)}(x,z)$ is an equivalence. The relative mapping-space formula and its precomposition naturality in [lem-coef-cat-infinity-filtered-finite-calculus] identify the same map in $E$ with the filtered colimit of these equivalences, so it is an equivalence for every $g$. Hence the square in $E$ is a homotopy pullback and $r_i(e)$ is cocartesian. To obtain a lift out of an arbitrary object of $E_b$, use the finite-limit comparison in that same node to identify $E_b\\simeq\\operatorname{colim}_i(E_i)_b$. Its object-representation clause supplies an object at a stage together with an equivalence in this fiber. Lift the given base arrow there and precompose with the inverse fiber equivalence. The mapping-square criterion is invariant under that precomposition because it changes its rows by equivalences. Thus $p$ has all the required lifts.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cat-infinity-filtered-finite-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2 (i)-(ii), intrinsic mapping-square argument"
+   }
+  },
+  {
+   "text": "Every $p$-cocartesian arrow over $f\\in A$ differs, up to a commuting triangle, from one of the lifts just constructed by an equivalence over the target identity. Here is the uniqueness argument from the criterion of [lem-coef-cocartesian-straightening]. For two cocartesian arrows $e:x\\to y$, $e':x\\to y'$ over $f$, taking the fiber of the mapping-square equivalence over $1_{py}$ or $1_{py'}$ gives arrows $a:y\\to y'$ and $b:y'\\to y$ over identities with $ae\\simeq e'$ and $be'\\simeq e$. Injectivity up to homotopy of those same equivalences gives $ba\\simeq1_y$ and $ab\\simeq1_{y'}$, including the triangle compatibilities. Thus $a$ is an equivalence. Changing the source by the fiber equivalence from step 2 changes no conclusion. Consequently a functor $H:E\\to T$ over $B$ preserves cocartesian arrows over $A$ if and only if all $Hr_i$ do: the forward direction uses step 2, and for the reverse direction compare each arrow with a stage lift as above, then use that functors preserve equivalences and the mapping-square criterion is invariant under precomposition or postcomposition with an equivalence over an identity. The same assertion holds through every equivalence between such functors, so the subspace of preserving functors is a union of components of the slice mapping space. Restriction therefore identifies this subspace with the subspace of the limit in step 1 whose components at every stage preserve the selected lifts. This concerns entire mapping spaces: an $n$-simplex of a core consists of preserving vertex functors and equivalences between them, and restriction retains all its faces and higher compatibilities.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2 (iii); uniqueness of cocartesian lifts expanded"
+   }
+  },
+  {
+   "text": "Apply steps 1-3 with $A$ all arrows of $B$. The intrinsic-to-simplicial comparison in [lem-coef-cocartesian-straightening] represents $p:E\\to B$ by a cocartesian fibration with the same total infinity category. The cocartesian version of [lem-coef-marked-relative-cartesian-model] identifies its mapping Kan complex into another cocartesian fibration with the core of the full functor subcategory on cocartesian-preserving maps. Thus the restricted mapping-space equivalence from step 3 is\n$$\\operatorname{Map}_{\\operatorname{coCart}(B)}(E,T)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\operatorname{coCart}(B)}(E_i,T).$$\nThe colimit test of [lem-coef-infinity-yoneda-presheaf-limits] says this cocone is colimiting in $\\operatorname{coCart}(B)$. Any other colimiting cocone is equivalent to it by its universal property; the equivalence and its inverse are cocartesian-preserving functors, so their underlying total functors are inverse equivalences. The underlying cocone is therefore the colimit cocone of total categories constructed in step 1. This proves preservation for every small filtered coherent diagram.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary 3.3.3 and Lemma 3.3.6"
+   }
+  },
+  {
+   "text": "Now put $B=\\Delta^{\\mathrm{op}}$ and let $E_i$ be ordinary or generalized nonsymmetric infinity operads. Their maps preserve the cocartesian lifts over inert arrows by the operad conventions in [lem-coef-operadic-algebra-presentability]. Apply steps 1-3 with $A$ exactly those arrows. We may represent the resulting slice object $p:E\\to B$ by an inner fibration: factor $p$ as a categorical trivial cofibration followed by a Joyal fibration using [lem-coef-joyal-model-structure]. The latter is an inner fibration because every inner horn inclusion is a trivial cofibration, as the same node states. Since $B$ is a quasicategory, the replacement total object is a quasicategory. This replacement changes the total category by an equivalence over $B$, so it preserves the intrinsic mapping-square calculations and the slice mapping spaces. The intrinsic cocartesian criterion from [lem-coef-cocartesian-straightening] supplies precisely the inert lifts in this representative. It remains to check the Segal and relative mapping-space axioms; we do so at every arity, without passing a limit over all arities through the filtered colimit.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Theorem 3.3.1, construction of the inert-lift slice colimit"
+   }
+  },
+  {
+   "text": "For each $n$, the finite-limit clause of [lem-coef-cat-infinity-filtered-finite-calculus] gives $E_{[n]}\\simeq\\operatorname{colim}_i(E_i)_{[n]}$. In the ordinary case, the Segal comparisons at the stages and their inert-projection naturality give\n$$E_{[n]}\\simeq\\operatorname{colim}_i((E_i)_{[1]}^n)\\simeq(E_{[1]})^n.$$\nFor $n=0$ this uses the empty-limit clause, so $E_{[0]}$ is terminal. For generalized operads take instead the finite incidence diagram with one edge object for each consecutive pair in $[n]$, one vertex object for each vertex, and an arrow from an edge to each of its endpoints. Its limit is the iterated fiber product of the unary fibers over the zero-fiber. The stage Segal equivalences in [lem-coef-operadic-algebra-presentability], the finite-limit comparison, and the same naturality identify $E_{[n]}$ with this limit of $E_{[1]}$ and $E_{[0]}$. When $n=0$ the incidence diagram is the single vertex, and the comparison is the identity of $E_{[0]}$. If zero-fibers are required to be spaces, this requirement is retained: every arrow in their filtered colimit is represented at a stage by the finite-data clause, where it is invertible; its inverse and inverse homotopies remain an inverse in the colimit. Thus all arrows of the colimit zero-fiber are equivalences. It equals its core, which is Kan by [lem-cbc-enhanced-functor-cone-calculus], and hence is a space.",
+   "uses": [
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Theorem 3.3.1, Segal comparison, including arity zero"
+   }
+  },
+  {
+   "text": "Fix $x\\in E_{[m]}$, $y\\in E_{[n]}$, and a base arrow $\\phi:[m]\\to[n]$. By the fiber-colimit comparisons of step 6 and the object-representation clause of [lem-coef-cat-infinity-filtered-finite-calculus], represent $x$ and $y$ by objects in the stage fibers over $[m]$ and $[n]$, with equivalences in those fibers. Filteredness moves these representatives to one stage. Choose there the finite coherent diagram of inert lifts out of the representative of $y$; at later stages use its transition image. The fiber equivalences identify the relative mapping-space tests for these representatives with those for $x,y$, while leaving the base arrow $\\phi$ fixed. Their images are inert lifts in $E$ by step 2, and step 3 compares any other chosen inert lifts to these by equivalences. The ordinary operadic mapping axiom of [lem-coef-operadic-algebra-presentability] gives at every later stage\n$$\\operatorname{Map}^{\\phi}(x,y)\\simeq\\prod_{a=1}^n\\operatorname{Map}^{\\rho_a\\phi}(x,y_a).$$\nThe relative mapping-space and composition comparisons of [lem-coef-cat-infinity-filtered-finite-calculus] identify the map in $E$ with the colimit of these stage comparisons. By [lem-coef-spaces-kappa-limit-filtered-colimit] with $\\kappa=\\aleph_0$, that colimit of finite products is the product of the colimits, including the empty product when $n=0$. Hence it is the required equivalence in $E$. For generalized operads, replace the discrete collection of unary projections by the finite incidence category of inert maps $\\alpha:[n]\\to[1]$ and $[n]\\to[0]$ and their endpoint factorizations. The relative limit axiom is\n$$\\operatorname{Map}^{\\phi}(x,y)\\simeq\\lim_{\\alpha}\\operatorname{Map}^{\\alpha\\phi}(x,y_\\alpha).$$\nThe incidence category has no nonidentity composable pair, so its nerve has finitely many nondegenerate simplices. Apply exactly the same relative mapping-space comparison and the finite-limit assertion for spaces to this finite nerve. All maps are postcomposition with the chosen inert lifts, and the naturality clause in the finite-data node identifies them with the stage maps. This proves the generalized mapping axiom, including the single-vertex diagram for $n=0$. Together with steps 5-6, $E$ is an operad of the required kind.",
+   "uses": [
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Theorem 3.3.1, relative mapping-space decomposition and generalized finite incidence diagrams"
+   }
+  },
+  {
+   "text": "For an operad $P$ the mapping-space identification in [lem-coef-marked-operadic-model-structures] identifies $\\operatorname{Map}_{\\operatorname{Opd}}(E,P)$ with the core of the full category of inert-preserving functors over $\\Delta^{\\mathrm{op}}$. Steps 1 and 3 therefore restrict to the equivalence\n$$\\operatorname{Map}_{\\operatorname{Opd}}(E,P)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\operatorname{Opd}}(E_i,P).$$\nBy [lem-coef-infinity-yoneda-presheaf-limits] the cocone with vertex $E$ is an operadic colimit. This proves preservation by the forgetful functor, since its underlying cocone was constructed as a colimit. It also proves reflection: for any operadic cocone with vertex $Q$ whose total cocone is colimiting, the operadic colimit property just proved induces an inert-preserving comparison $E\\to Q$, and the underlying universal properties make it an equivalence of total categories. An inverse equivalence over the base preserves inert arrows, since an equivalence over the base identifies the mapping-space squares characterizing cocartesian arrows in [lem-coef-cocartesian-straightening]. Thus it is an equivalence of operads; the cocone with vertex $Q$ is colimiting as well. Conversely every operadic colimit cocone is equivalent to the constructed one, so is colimiting on total categories. The argument uses coherent diagrams and mapping-space universal properties throughout; it never assumes ordinary indexing categories or fully faithful transitions.",
+   "uses": [
+    "lem-coef-marked-operadic-model-structures",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 3.3.1, preservation and reflection from the full inert-preserving mapping subspaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cat-infinity-filtered-finite-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-marked-operadic-model-structures"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Section 3.3, Proposition 3.3.2, Corollary 3.3.3 and proof of Theorem 3.3.1; expanded slice and mapping-subspace arguments replace the localization shorthand. Source read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +191,45 @@
    "results": "{\"t\": \"2026-10-16T20:25:52Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimits of cocartesian fibrations are computed on their total infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.CostructuredArrow.createsColimit\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.CostructuredArrow.hasColimit\"], \"digest\": \"0e9198e7a2194301\"}",
    "date": "2026-10-17",
    "verdict": "no match: The Grothendieck and cocone results are ordinary categories, not coherent cocartesian fibrations or infinity operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of cocartesian fibrations and operadic forgetful functors detect colimits",
+   "results": "{\"t\": \"2026-10-16T21:24:13Z\", \"tool\": \"leanfinder\", \"query\": \"filtered colimits of cocartesian fibrations and operadic forgetful functors detect colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\"], \"digest\": \"4003fb8d5705384c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasFilteredColimits, CategoryTheory.FiberedCategory.IsCocartesian",
+   "results": "{\"t\": \"2026-10-16T21:24:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.HasFilteredColimits, CategoryTheory.FiberedCategory.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.FiberedCategory.IsCocartesian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: Loogle reported an unknown identifier. Repeated with the actual CategoryTheory.Functor.IsCocartesian namespace; those hits are ordinary categorical lifting statements, not this item."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad|[Uu]nstraighten|[Cc]ocartesian|filtered",
+   "results": "{\"t\": \"2026-10-16T21:24:13Z\", \"tool\": \"grep\", \"query\": \"[Oo]perad|[Uu]nstraighten|[Cc]ocartesian|filtered\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean\", \"Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean\"], \"digest\": \"58b4564b082c7086\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimits of infinity operads and cocartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T21:24:14Z\", \"tool\": \"leansearch\", \"query\": \"filtered colimits of infinity operads and cocartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasFilteredColimitsOfSize_of_hasColimitsOfSize\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Limits.has_filtered_colimits_of_has_cofiltered_limits_op\", \"CategoryTheory.HasCardinalFilteredColimits_iff_hasFilteredColimits\", \"CommMonCat.FilteredColimits.colimit\", \"CommMonCat.FilteredColimits.colimitCocone\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.isIndObject_colimit\"], \"digest\": \"8de4e60d899e90c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-16T21:28:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"24bd5b961fd4d086\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, set-valued filtered colimits, or finite presentability in the ordinary category of simplicial sets. None states coherent filtered colimits in Cat infinity or their finite-limit and mapping-space calculus. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:31-62, CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:20-60, and CategoryTheory/FiberedCategory/Cocartesian.lean:44-79."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -85,5 +237,29 @@
   "group": "Q46"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-operadic-unstraightening",
+  "worker": "stage1",
+  "summary": "Expanded the source Section 3.3 argument into eight steps. One new statement-only finite-data theorem for filtered colimits in Cat infinity; no clause-restating cocartesian or operadic node. Proved slice creation through mapping fibers; proved persistence, existence and uniqueness of cocartesian lifts; checked all ordinary and generalized Segal and mapping axioms, including nullary arity, and the preservation/reflection universal properties. Searched the entire DAG, blueprint and Lean source and ran logged Mathlib searches. Statement unchanged. Second reading specifies transition images of lifts and fiberwise representatives, and adds the explicit space-category definition to the new node.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; supporting argument of lem-coef-many-object-operad-accessibility, Proposition 4.1.7 via Section 3.3: finite-data calculations in the proof of Proposition 3.3.2 and Theorem 3.3.1.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent slice mapping-space formula, specialized to the one-point diagram of value B; the coefficient unit contains no replacement for this foundational cone calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NB-74b4000af",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-74b4000af (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node and the full statement of every cited node, plus the parent's use in step 2 of lem-coef-many-object-operad-accessibility. Source: Gepner–Haugseng arXiv:1312.3178v4 §3.3, read online because it is not archived (WANTED). The item agrees with Thm 3.3.1 (operadic forgetful functors detect filtered colimits) and with Cor 3.3.3 plus Lemma 3.3.6 (total categories). Step-by-step source match: steps 2–3 are Prop 3.3.2(i)–(iii). Step 1 is Lemma 3.3.6 via cone calculus with K=Δ^0 (the slice) and testing on T×B. Steps 6–7 are the Segal and mapping axioms, by commuting filtered colimits with finite limits in Cat_∞ and in S at κ=ℵ0. I checked that the incidence category I_n has no nonidentity composable pair, so its nerve is finite, and that n=0 works in both conventions. Step 6 also proves the DAG's extra Kan-zero-fiber condition. Step 8 handles reflection through the inverse equivalence over Δ^op. The new node lem-coef-cat-infinity-filtered-finite-calculus is true: Cat_∞ is compactly generated, which gives the finite-limit and base-change commutation, preservation by the core and by Fun(L,-) for finite L, finite data represented at a stage, and the coslice mapping-space formula. It is statement-only, has full definition citations, is no restatement of an item clause, and duplicates nothing found by rg over dag/nodes. Non-blocking: step 4's strict-fiber versus homotopy-fiber comparison is not needed, because step 3 already gives the coCart(B) mapping spaces. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic slice mapping-space formula. No SGA source, no changes made."
+ }
 }
