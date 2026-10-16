@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pur713-def-point-site",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The pro-étale site of a point",
@@ -13,14 +13,140 @@
   "place": "node pur713-def-point-site, order 2473"
  },
  "stmt_deps": [
-  "pur713-def-ring-object"
+  "pur713-def-ring-object",
+  "sk-def-sfb-condensed-ring",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Use the universe and skeleton convention of [def-weil-size-convention]. The point-site paragraph of [sk-def-sfb-condensed-ring] gives exactly the category and topology used here: objects are profinite sets (compact Hausdorff totally disconnected spaces), arrows are continuous maps, and a covering sieve contains a finite jointly surjective family. Thus the site in this definition is that existing site. Here we restrict the term condensed ring to commutative rings, as the item explicitly stipulates; the cited node also allows noncommutative rings. The tensor and unit meant below are those of [det-def-sfb-sheaf-tensor-structure], applied to this bounded profinite site with $\\mathcal A=\\Ab$: $F\\otimes G=a(U\\mapsto F(U)\\otimes_{\\mathbf Z}G(U))$ and $\\mathbf1=a(\\underline{\\mathbf Z})$, with $\\underline{\\mathbf Z}$ the constant presheaf.",
+   "uses": [
+    "def-weil-size-convention",
+    "sk-def-sfb-condensed-ring",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture IX, Definition 9.1 and Remark 9.2 (PDF pp. 84-85); tensor convention as in the item and det-def-sfb-sheaf-tensor-structure"
+   }
+  },
+  {
+   "text": "Let $\\mathcal R$ be a sheaf of commutative rings on this site. Apply [det-def-sfb-ring-object-sheaf] with $C=*_{\\Proet}$. It asserts that its underlying abelian presheaf is a sheaf and that its multiplication and unit extend uniquely to the sheafified tensor and sheafified integer presheaf. The same statement asserts commutativity when all section rings are commutative. Instantiate the abstract symmetric-monoidal-category definition of [pur713-def-ring-object] with $\\mathscr C=\\mathsf{Sh}(*_{\\Proet},\\mathsf{Ab})$ and the tensor and unit of step 1. This gives precisely the multiplication, unit, associativity, two unit identities and commutativity required there. The current definition explicitly permits another named symmetric monoidal category; the category named here is the point-site category of step 1, whose tensor is over $\\mathbf Z$ and whose unit is the sheafification of the constant integer presheaf. Thus its default notation $X_{\\Proet}$ imposes no scheme hypothesis here. In this named category the equations are $\\mu\\circ(\\mu\\otimes\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\otimes\\mu)\\circ\\alpha$, $\\mu\\circ(e\\otimes\\mathrm{id})=\\lambda$, $\\mu\\circ(\\mathrm{id}\\otimes e)=\\rho$, and $\\mu\\circ\\beta=\\mu$, with exactly the coherence maps specified in step 1. No topological-ring presentation of $\\mathcal R$ is assumed.",
+   "uses": [
+    "det-def-sfb-ring-object-sheaf",
+    "pur713-def-ring-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-point-site.md",
+    "place": "Second sentence, forward direction of the equivalence; specialized existing sheaves-of-rings construction"
+   }
+  },
+  {
+   "text": "Conversely instantiate [pur713-def-ring-object] in the named category $\\mathsf{Sh}(*_{\\Proet},\\mathsf{Ab})$ with the tensor and unit of step 1, and let $(R,\\mu,e)$ be a commutative ring object in it. Write $P=iR$ for its underlying abelian presheaf and $t_Q:Q\\to iaQ$ for the sheafification map. By [det-def-sfb-sheaf-tensor-structure], $R\\otimes R=a(P\\otimes_pP)$ and $\\mathbf1=a(\\underline{\\mathbf Z})$. Restrict the structure maps to presheaves: $m_p=i\\mu\\circ t_{P\\otimes_pP}$ and $e_p=ie\\circ t_{\\underline{\\mathbf Z}}$. At $S$ set $xy=(m_p)_S(x\\otimes y)$ and $1_S=(e_p)_S(1)$. The tensor universal property of [def-weil-pbc-module-tensor-product], for $\\mathbf Z$-modules, makes the product additive in each variable. Explicitly, $x(y+z)=xy+xz$ and $(x+y)z=xz+yz$, since $(m_p)_S$ is a homomorphism from the integer tensor product; the additive abelian group is the given $R(S)$. Likewise $(e_p)_S(n)=n\\cdot1_S$ because $(e_p)_S:\\mathbf Z\\to R(S)$ is additive. Thus the additive structure needed for a ring is already present before the monoid equations are evaluated. For associativity, put $b=t_{P\\otimes_pP}:P\\otimes_pP\\to i(R\\otimes R)$ and form $j_L=t_{i(R\\otimes R)\\otimes_pP}\\circ(b\\otimes_p\\mathrm{id}_P)$ and $j_R=t_{P\\otimes_pi(R\\otimes R)}\\circ(\\mathrm{id}_P\\otimes_pb)$. These have targets $i((R\\otimes R)\\otimes R)$ and $i(R\\otimes(R\\otimes R))$, respectively. The specified associator satisfies $i\\alpha\\circ j_L=j_R\\circ\\alpha_p$, where $\\alpha_p$ is the objectwise associator. Naturality of $t$ gives $i(\\mu\\otimes\\mathrm{id}_R)\\circ j_L=b\\circ(m_p\\otimes_p\\mathrm{id}_P)$ and $i(\\mathrm{id}_R\\otimes\\mu)\\circ j_R=b\\circ(\\mathrm{id}_P\\otimes_pm_p)$. Precomposing the associativity equation with $j_L$ therefore gives $m_p\\circ(m_p\\otimes_p\\mathrm{id}_P)=m_p\\circ(\\mathrm{id}_P\\otimes_pm_p)\\circ\\alpha_p$, hence $(xy)z=x(yz)$ on $(x\\otimes y)\\otimes z$. Precomposing commutativity with $b$ gives $m_p\\circ\\beta_p=m_p$, hence $xy=yx$. For the left unit precompose with $t_{i\\mathbf1\\otimes_pP}\\circ(t_{\\underline{\\mathbf Z}}\\otimes_p\\mathrm{id}_P)$; naturality of $t$ and the specified unitor give $m_p\\circ(e_p\\otimes_p\\mathrm{id}_P)=\\lambda_p$, hence $1_Sx=x$. For the right unit use $t_{P\\otimes_pi\\mathbf1}\\circ(\\mathrm{id}_P\\otimes_pt_{\\underline{\\mathbf Z}})$ to get $m_p\\circ(\\mathrm{id}_P\\otimes_pe_p)=\\rho_p$, hence $x1_S=x$. All coherence maps here are exactly those in [det-def-sfb-sheaf-tensor-structure]. Thus the existing abelian group $R(S)$, these products and these units form commutative rings. Naturality of $m_p,e_p$ says explicitly $R(u)(xy)=R(u)(x)R(u)(y)$ and $R(u)(1_S)=1_{S\\prime}$ for every $u:S\\prime\\to S$. This is a presheaf of commutative rings. A matching family has exactly the same unique glued element as in the underlying abelian sheaf $R$, so it is a sheaf of commutative rings.",
+   "uses": [
+    "pur713-def-ring-object",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-point-site.md",
+    "place": "Second sentence, reverse direction, written out from the definitions; Stacks 00WH and 00YR (sites-proposition-sheafification-adjoint and sites-section-sheaves-algebraic-structures) and 00CX (algebra-lemma-tensor-product) supply the cited universal properties"
+   }
+  },
+  {
+   "text": "These two constructions are inverse. Starting with a sheaf of rings, [det-def-sfb-ring-object-sheaf] says its extended product and unit restrict to its original sectionwise maps, so step 3 recovers its ring operations. Starting with $(R,\\mu,e)$, step 3 gives the restrictions $m_p,e_p$ of exactly those two maps. The sheaf-of-rings construction of [det-def-sfb-ring-object-sheaf] extends those restrictions, and [def-weil-pbc-sheafification] says each such extension into the sheaf $R$ is unique. Hence the recovered maps are exactly $\\mu,e$. This proves the asserted equivalence without identifying the sheafified tensor with an objectwise tensor of sheaves. On morphisms, a sheaf-of-rings morphism gives a ring-object morphism by [det-def-sfb-ring-object-sheaf]. Conversely, for a ring-object morphism $f:R\\to R\\prime$, [pur713-def-ring-object] gives $f\\circ\\mu=\\mu\\prime\\circ(f\\otimes f)$ and $f\\circ e=e\\prime$. Precompose with $t_{P\\otimes_pP}$ and $t_{\\underline{\\mathbf Z}}$: naturality gives $(if)\\circ m_p=m_p\\prime\\circ(if\\otimes_pif)$ and $(if)\\circ e_p=e_p\\prime$. Evaluating gives $f_S(xy)=f_S(x)f_S(y)$ and $f_S(1_S)=1_S\\prime$, and $f_S$ is additive because $f$ is a morphism of abelian sheaves. These are all the unital ring-homomorphism conditions, so $f$ is a morphism of the recovered sheaves of commutative rings. Both constructions keep the underlying morphisms, hence preserve identities and composition and are inverse on morphisms as well.",
+   "uses": [
+    "det-def-sfb-ring-object-sheaf",
+    "def-weil-pbc-sheafification",
+    "pur713-def-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-point-site.md",
+    "place": "Second sentence, verification that the two descriptions give the same objects; Stacks 00WH and 00YR, uniqueness in sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-def-sfb-ring-object-sheaf",
+  "pur713-def-ring-object",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-point-site.md",
+  "place": "The site definition is checked against Scholze, Lecture IX, Definition 9.1; the equivalence in the second sentence is expanded using existing sheafification, tensor and ring-object nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The category of profinite sets with finite jointly surjective covers is the pro etale site of a point and condensed commutative rings are sheaves of commutative rings on it",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, Condensed.lanSheafProfinite, profiniteToCondensed, Condensed.isSheafProfinite, CondensedSet.ofSheafProfinite, Condensed.lanCondensedSet, LightProfinite.toCondensed. These provide condensed objects and site comparison, not the full ring-object equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "def Condensed|ofSheafProfinite|coherentTopology|effectiveEpiFamily_iff_jointly_surjective",
+   "results": "25 displayed hits in Mathlib/Condensed, including ProfiniteCompHaus.equivalence (Equivalence.lean:95), Condensed.ofSheafProfinite (Explicit.lean:76) and coherent-topology sheaf types. Read Basic.lean:44-49 and Equivalence.lean:91-97: Condensed is defined on CompHaus and the equivalence transfers general sheaves on Profinite; no full tensor-ring-object equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, CommRingCat",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensed commutative rings are sheaves of commutative rings on profinite sets with finite jointly surjective covering families",
+   "results": "8 hits: Condensed, LightCondensed, instCategoryCondensed, smoothSheafCommRing, Condensed.ofSheafCompHaus, LightCondSet, Condensed.ofSheafProfinite, LightCondMod. These give component definitions, not the full equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon.*Sheaf|Sheaf.*CommMon|commRing.*[Ee]quiv|[Ee]quiv.*commRing|monObj.*[Ss]heaf|sheaf.*monObj",
+   "results": "25 displayed hits, primarily unrelated commutative-ring equivalences in number theory and algebraic geometry (Cyclotomic/PrimitiveRoots, Cyclotomic/Basic, RingedSpace and NumberField). None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equivCommRing\"",
+   "results": "4 hits: CommAlgCat.homEquivCommRingCat, its apply and symm_apply lemmas, and AlgebraicGeometry.AffineScheme.equivCommRingCat. These concern algebra morphisms and affine schemes, not ring objects of abelian sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative monoid object in abelian sheaves with sheafified tensor product is equivalent to a sheaf of commutative rings on a site",
+   "results": "8 hits: SheafOfModules, QuasicoherentData, Presentation, QuasicoherentData.X, isQuasicoherent, QuasicoherentData.I, CategoryTheory.Sheaf.tensorProd_isSheaf, SheafOfModules.unit. The tensorProd_isSheaf result concerns cartesian tensor; no full match for the additive sheaf tensor and ring-object equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "monObj.*[Ss]heaf|[Ss]heaf.*monObj|CommMon|Mon_.*Ab|Ab.*Mon_",
+   "results": "25 displayed hits in CategoryTheory, including Preadditive/CommGrp_.lean:41 and Monoidal/Ring.lean:116. Read the former at lines 25-49 and the latter at lines 33-119: their hypotheses require a cartesian monoidal category. CommRingObj there packages both additive and multiplicative structures in a cartesian category, not the item's commutative monoid objects under sheafified abelian tensor.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -32,5 +158,29 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-point-site",
+  "worker": "stage1",
+  "summary": "Revalidated the sole landing return against all seven current cited statements and the retained repair of returned head c64bd34a87. Kept the explicit point-site instantiation of the current abstract ring-object definition and its coherence equations. Made the inherited additive structure, both distributive laws, integer unit map and additivity of recovered morphisms explicit, and narrowed the step-3/4 ring-object quotations to the exact defining and morphism clauses they use. All twelve quotations remain verbatim. Statement unchanged; zero new nodes or Mathlib leaves. The no-push delivery tool rebuilds against current origin/newtargets-dag for a fresh second reader.",
+  "blueprint": "The first sentence of pur713-def-point-site is realized by step 1; the equivalently clause of the second sentence by steps 2-4. This is an auxiliary definition in sk-def-sp-coefficient-towers, not its key tower definition, and does not replace a unit proof step.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-sheaf",
+    "why": "Generic construction of the abelian-sheaf ring object, with explicit extensions of product and unit; this unit contains no such construction and the item is a coefficient definition, not a replacement of its tower route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N1-61e3afbc1",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-61e3afbc1 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement matches main-20261015 pur713-def-point-site.md word for word and is true. Scholze's Lecture IX Def 9.1 and Rem 9.2 (pp. 84-85) give the same site: ProFin with finite jointly surjective covers, plus a size cutoff; the size cutoff matches def-weil-size-convention. Step 1 is elementary: the topology comes from sk-def-sfb-condensed-ring, and the tensor a(F⊗_pG) and unit a(Z) are the Ab case of det-def-sfb-sheaf-tensor-structure, which explicitly lists the profinite site. Step 2 gets the forward direction from det-def-sfb-ring-object-sheaf, and det-def-sfb-ring-object-presheaf admits the profinite site. That node's ring object uses the same equations as pur713-def-ring-object in the named category Sh(*_Proet,Ab), so there is no change of coefficient category. Step 3 builds the converse, and I re-derived it: (a) i·alpha∘j_L = j_R∘alpha_p follows from the associator built from a(eta⊗id) and from naturality of t; (b) associativity, both unit laws and symmetry follow by precomposition; (c) bilinearity gives distributivity and e_p(n)=n·1; (d) the ring-sheaf gluing comes from the underlying abelian sheaf. Step 4 shows the two constructions are inverse, using the uniqueness clauses of det-def-sfb-ring-object-sheaf and def-weil-pbc-sheafification; the morphism compatibility is checked on sections. Edge cases pass: the empty profinite set gives the zero ring, a singleton gives an ordinary ring, noncommutative rings are excluded by the symmetry equation, and the unit on disconnected S is a(Z). No new nodes. Duplicate search over dag/nodes: no other node states the converse or the equivalence; sk-def-sfb-condensed-ring and sk-def-sfb-ring-object give only the forward direction, so same_as [] is defensible. My own Mathlib grep found no sheaf-level CommMon equivalence. Accepted tool use: det-def-sfb-ring-object-sheaf in steps 2 and 4, a generic construction that does not replace any step of the unit's route. No SGA cited. No fixes written."
+ }
 }

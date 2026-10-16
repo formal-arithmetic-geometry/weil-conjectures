@@ -29,9 +29,69 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take a small set $X$ of cardinality $\\kappa$, and let $E_X$ be the ordinary groupoid with object set $X$ and exactly one arrow between any two objects. Its nerve has $(N(E_X))_n=X^{n+1}$; simplex operators delete or repeat coordinates, so a simplex is determined by its vertex sequence. Thus all horns have fillers, and $K=I\\times N(E_X)$ is a small quasicategory: fill the two components of an inner horn separately. Choose $x_0\\in X$. Projection $p:K\\to I$ has the section $s(i)=(i,x_0)$, and $ps=\\mathrm{id}_I$. Define $\\eta:K\\times\\Delta^1\\to K$ on an $n$-simplex $((\\sigma,(y_0,\\ldots,y_n)),\\alpha)$, $\\alpha:[n]\\to[1]$, as $(\\sigma,(z_0,\\ldots,z_n))$ with $z_k=x_0$ if $\\alpha(k)=0$ and $z_k=y_k$ if $\\alpha(k)=1$. This commutes with every operator $\\theta:[m]\\to[n]$, since both sides have vertex sequence $z_{\\theta(j)}$; it restricts to $sp$ on $K\\times\\{0\\}$ and to $\\mathrm{id}_K$ on $K\\times\\{1\\}$, and $p\\circ\\eta=p\\circ\\mathrm{pr}_K$. Its component at $(i,y)$ is the edge $(s_0i,(x_0,y))$, an equivalence: $(s_0i,(y,x_0))$ is an inverse, and the $2$-simplices $(s_0s_0i,(x_0,y,x_0))$ and $(s_0s_0i,(y,x_0,y))$ witness the two inverse equations, their third faces being degenerate. For a quasicategory $\\mathcal C$, precomposition gives $p^*:\\operatorname{Fun}(I,\\mathcal C)\\to\\operatorname{Fun}(K,\\mathcal C)$ and $s^*$ in the other direction, with $s^*p^*=(ps)^*=\\mathrm{id}$ exactly. Precomposition with $\\eta$ is a coherent transformation from $(sp)^*=p^*s^*$ to the identity of $\\operatorname{Fun}(K,\\mathcal C)$; its component at $G$ is $G\\circ\\eta$, whose vertex components $G(s_0i,(x_0,y))$ are equivalences of $\\mathcal C$ because $G$ carries the two witnessing $2$-simplices to witnessing $2$-simplices. By the vertex-component criterion of [lem-cbc-enhanced-functor-cone-calculus], applied first in $\\operatorname{Fun}(K,\\mathcal C)$ and then in the functor quasicategory of its endofunctors, this transformation is an equivalence. Hence $p^*$ is a functor equivalence, and by the same lemma it induces equivalences $\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal C)}(F,\\Delta_Iy)\\to\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(Fp,\\Delta_Ky)$, using $p^*\\Delta_Iy=\\Delta_Ky$. Now let $\\lambda:F\\to\\Delta_IL$ be a colimiting cocone on $F:I\\to\\mathcal C$. For every object $y$, the map $a\\mapsto\\Delta_K(a)\\circ p^*\\lambda$ from $\\operatorname{Map}_{\\mathcal C}(L,y)$ agrees up to homotopy with the composite of $a\\mapsto\\Delta_I(a)\\circ\\lambda$ and the equivalence induced by $p^*$, because $p^*$ is a functor and $p^*\\Delta_I(a)=\\Delta_K(a)$. By the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], the first map is an equivalence, hence so is the second. By that criterion again, the restricted cocone $p^*\\lambda$ on $Fp$, which has the same vertex $L$, is colimiting.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.1.16, printed pp. 383-384; expanded agent construction, online text read but not archived"
+   }
+  },
+  {
+   "text": "Let $L\\subseteq K$ be a $\\kappa$-small simplicial subset, including $L=\\varnothing$. The projection $L\\to I$ has a coherent cocone by $\\kappa$-filteredness. Apply the opposite dual of the fixed-boundary join comparison [lem-coef-infinity-join-cone-calculus] to realize it as a simplicial extension $f:L^{\\triangleright}\\to I$ of this exact map $L\\to I$. Choose $x\\in X$ outside the second coordinates of the vertices of $L$; this is possible since there are fewer than $\\kappa$ vertices. There is a unique extension $g:L^{\\triangleright}\\to N(E_X)$ of the second projection which sends the cone point to $x$: a simplex in this nerve is determined by its vertex sequence. Put $h=(f,g)$. This extends the inclusion $L\\hookrightarrow K$ and is injective in every degree. To check injectivity, the positions having second coordinate $x$ in a coned simplex are precisely its final cone positions, since no vertex of the base has coordinate $x$. They determine the splitting into base and cone; restriction to the base recovers its simplex because $h|_L$ is the inclusion. Pure cone simplices are distinguished from base simplices in the same way. Thus its image $L'=h(L^{\\triangleright})$ is isomorphic to the right cone, with specified apex. Its nondegenerate simplices consist of those of $L$, one cone on each of them, and the apex, so their number is $2|L_{\\mathrm{nd}}|+1<\\kappa$. For $\\kappa=\\aleph_0$ this is a finite number.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-join-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.1.16, printed pp. 383-384; expanded agent construction, online text read but not archived"
+   }
+  },
+  {
+   "text": "Let $A$ be the set of all $\\kappa$-small simplicial subsets $K_a\\subseteq K$ which admit a right-cone presentation, ordered by inclusion; choose one presentation and apex $t_a$ for each. This is a small partially ordered set, since it is a subcollection of the power set of the small set of simplices of $K$. Given fewer than $\\kappa$ elements of $A$, their union $L$ is a simplicial subset with fewer than $\\kappa$ nondegenerate simplices. Each nondegenerate simplex of the union belongs to a constituent and is nondegenerate there; regularity of $\\kappa$ bounds the union of these fewer than $\\kappa$ sets of size less than $\\kappa$. Apply step 2 to $L$ to obtain a cone subset containing them all, an upper bound in $A$. The same argument with the empty union gives an element of $A$. Finally every simplex of $K$ lies in a finite simplicial subset generated by that simplex, whose nondegenerate simplices are among its finitely many faces. Step 2 places that subset in a member of $A$, proving $K=\\bigcup_a K_a$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.1.16, printed pp. 383-384; expanded agent construction, online text read but not archived"
+   }
+  },
+  {
+   "text": "The small nonempty poset $A$, the increasing cover $K=\\bigcup_a K_a$ and the chosen right-cone presentations satisfy [lem-coef-infinity-directed-cone-cover]; in particular finite subsets of $A$ have upper bounds by step 3. Obtain the coherent cofinal map $j:N(A)\\to K$ with vertices $t_a$. Define $u=pj:N(A)\\to I$. Given $F:I\\to\\mathcal C$ and a colimiting cocone, step 1 makes its restriction along $p$ colimiting, and the cone-cover lemma makes the further restriction along $j$ colimiting. This is exactly restriction along $u$, with the original vertex and legs. The unique colimit comparison is therefore an equivalence. Its naturality follows from the universal property: composing the restricted cocone with a transformation $F\\to F'$ gives the same cocone maps in either order. The upper-bound assertion for subsets of size less than $\\kappa$, including the empty subset, is step 3.",
+   "uses": [
+    "lem-coef-infinity-directed-cone-cover",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.1.16, printed pp. 383-384; expanded agent construction, online text read but not archived"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-directed-cone-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Expanded proof of HTT Proposition 5.3.1.16; source read online but no archive in literature/, as reported WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +134,80 @@
    "results": "{\"t\": \"2026-10-16T19:37:10Z\", \"tool\": \"grep\", \"query\": \"lemma exists_cardinal_directed\", \"sub\": \"CategoryTheory/Presentable/Directed.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"528\"], \"digest\": \"18b052513af0dbe4\"}",
    "date": "2026-10-17",
    "verdict": "No match for quasicategories: these verified declaration locations concern ordinary categories; types were read and rejected as explained in the preceding search records."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small kappa filtered quasicategory admits a cofinal functor from a small kappa directed poset",
+   "results": "{\"t\": \"2026-10-16T20:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Every small kappa filtered quasicategory admits a cofinal functor from a small kappa directed poset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered_aux\", \"CategoryTheory.isCardinalFiltered_iff_aux₁\"], \"digest\": \"42cc98ca13d67465\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalFiltered\", \"Final\"",
+   "results": "{\"t\": \"2026-10-16T20:28:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalFiltered\\\", \\\"Final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.of_final\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"Cardinal.SharplyLT.exists_isCardinalFiltered_set_of_exists_cofinal\"], \"digest\": \"362e3f7532dc5916\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|exists_cardinal_directed",
+   "results": "{\"t\": \"2026-10-16T20:28:54Z\", \"tool\": \"grep\", \"query\": \"cofinal|exists_cardinal_directed\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"afe9579412176956\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal directed poset replacement of a filtered infinity category",
+   "results": "{\"t\": \"2026-10-16T20:28:54Z\", \"tool\": \"leansearch\", \"query\": \"Cofinal directed poset replacement of a filtered infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.isFiltered_of_directed_le_nonempty\", \"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"CategoryTheory.Limits.has_cofiltered_limits_of_has_filtered_colimits_op\", \"CategoryTheory.isFilteredOrEmpty_of_directed_le\", \"CategoryTheory.isCofiltered_of_isFiltered_op\"], \"digest\": \"5e2d4c9a0ff0a8dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small kappa filtered quasicategory admits a cofinal functor from a small kappa directed poset",
+   "results": "{\"t\": \"2026-10-16T20:29:38Z\", \"tool\": \"leanfinder\", \"query\": \"Every small kappa filtered quasicategory admits a cofinal functor from a small kappa directed poset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered_aux\", \"CategoryTheory.isCardinalFiltered_iff_aux₁\"], \"digest\": \"42cc98ca13d67465\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalFiltered\", \"Final\"",
+   "results": "{\"t\": \"2026-10-16T20:29:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalFiltered\\\", \\\"Final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.of_final\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"Cardinal.SharplyLT.exists_isCardinalFiltered_set_of_exists_cofinal\"], \"digest\": \"362e3f7532dc5916\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|exists_cardinal_directed",
+   "results": "{\"t\": \"2026-10-16T20:29:39Z\", \"tool\": \"grep\", \"query\": \"cofinal|exists_cardinal_directed\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"afe9579412176956\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal directed poset replacement of a filtered infinity category",
+   "results": "{\"t\": \"2026-10-16T20:29:39Z\", \"tool\": \"leansearch\", \"query\": \"Cofinal directed poset replacement of a filtered infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.isFiltered_of_directed_le_nonempty\", \"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"CategoryTheory.Limits.has_cofiltered_limits_of_has_filtered_colimits_op\", \"CategoryTheory.isFilteredOrEmpty_of_directed_le\", \"CategoryTheory.isCofiltered_of_isFiltered_op\"], \"digest\": \"5e2d4c9a0ff0a8dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered simplicial set can be replaced cofinally by the nerve of a directed partial order",
+   "results": "{\"t\": \"2026-10-16T20:29:45Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered simplicial set can be replaced cofinally by the nerve of a directed partial order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve.representableBy\", \"SSet.stdSimplex.isoNerve\", \"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve\"], \"digest\": \"70e4bce828f1bee5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal replacement of a filtered infinity category by a directed poset",
+   "results": "{\"t\": \"2026-10-16T20:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinal replacement of a filtered infinity category by a directed poset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed\", \"CategoryTheory.Limits.IsFiltered.sequentialFunctor_obj\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\", \"CategoryTheory.IsCardinalFiltered.max\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₄\"], \"digest\": \"c78b29d76d34b358\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsCardinalFiltered.exists_cardinal_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:528-532) and IsFiltered.exists_directed (:544) require an ordinary SmallCategory. Nerve definitions do not replace arbitrary quasicategories with their higher mapping spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-spaces-kappa-limit-filtered-colimit",
@@ -85,5 +215,29 @@
   "group": "Q83"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cofinal-kappa-poset",
+  "worker": "stage1",
+  "summary": "Expanded the HTT fresh-vertex cone embedding and regular-cardinal directed-cover construction. Added only the general cofinal directed-cone-cover theorem, which has no filteredness or cardinal hypothesis and assumes a given cover. Read all cited statements, rejected ordinary-category attachments, checked empty diagrams and kappa=aleph0, and retained the statement unchanged.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2: the mapping-complex adjunction uses the space-colimit calculus along the recorded ancestry. This item supplies cofinal poset replacement to the spaces commuting-limits lemma; steps 1-4 realize HTT 5.3.1.16 at that node level.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic facts that coherent cocone categories are quasicategories and equivalences induce equivalences on mapping spaces justify colimit invariance under the explicit pair-groupoid projection equivalence. No statement in this unit supplies those general cone-category facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N5-24a2ed870",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-24a2ed870 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-directed-cone-cover and all four cited statements in full. HTT is not in literature/ and the network is blocked, so I read a local copy of the 2017 printing; there the result is Prop 5.3.1.18 on pp. 386-387 (5.3.1.16 in the 2012 text), and I also read 4.2.3.3-4.2.3.10 on pp. 249-253. The item statement matches the source hypothesis by hypothesis and is unchanged. Step 2 (fixed-boundary join comparison taken to the opposite, fresh-x injectivity, 2|L_nd|+1 < kappa, also at aleph_0), step 3 (regularity, empty union, finite subcomplex cover; elementary) and step 4 (all hypotheses of the new node checked; u = pj is strict restriction) are sound. I proved the new node true independently from HTT 4.2.3.4/4.2.3.8/4.2.3.9 and 4.1.1.8: the retraction is built from the initial lift over t_a (HTT's 'final' should read 'initial'), and r(K_B) ⊆ K_beta is not needed. I tested it with A a singleton, A = N and K empty (impossible). The new node is statement-only and self-contained, with correct blueprint and created fields and searches recorded; it duplicates no existing node (directed-cover-colimit-assembly needs a cocomplete target and has no H-independent j) and does not restate a clause of the item. FIX (E5): step 1 justified the inverse cocone equivalence only by 'identified with the identity'. I rewrote it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-cofinal-kappa-poset.json with an explicit simplicial homotopy eta: sp => id, p∘eta = p∘pr, inverse witnesses for its components, p^* a functor equivalence, and the dual cocone mapping-space criterion; the uses are unchanged and nothing else changed. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic cone calculus). No cycle, no SGA source, no target touched.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -26,9 +26,63 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the groupoid completion $\\eta:W\\to\\kappa W$ of [lem-coef-localization-kan-cartesian-fibration]. The identity of $\\kappa W$ is Cartesian: every mapping-space test square for an edge is a square with identity vertical maps, and that edge itself is the required lift. Apply that lemma with $\\mathcal F=\\kappa W$ and $\\pi=\\mathrm{id}$. Every edge of the Kan complex $\\kappa W$ is an equivalence: filling the two outer 2-horns supplies left and right homotopy inverses. Thus it follows that restriction $\\operatorname{Fun}(\\kappa W,\\mathcal T)\\to\\operatorname{Fun}(W,\\mathcal T)$ is fully faithful with essential image the functors inverting every arrow of $W$. The restriction of $q$ to $W$ therefore extends to $\\kappa W\\to\\mathcal D$, with a coherent agreement on $W$. Form $P=\\mathcal C\\amalg_W\\kappa W$ using [lem-coef-infinity-functor-pushout]. Its displayed functor-category pullback formula identifies $\\operatorname{Fun}(P,\\mathcal T)$ with the full subcategory of $\\operatorname{Fun}(\\mathcal C,\\mathcal T)$ inverting $W$. The assumed universal property of $q$ gives the same subcategory for $\\mathcal D$. Explicitly the maps $P\\to\\mathcal D$ and $\\mathcal D\\to P$ extending the two localization cocones are mutually inverse: full faithfulness of restriction makes each composite equivalent to the identity. Thus $W\\to\\kappa W$, $\\mathcal C\\to\\mathcal D$ is a pushout square. Here $q$ is its bottom arrow.",
+   "uses": [
+    "lem-coef-localization-kan-cartesian-fibration",
+    "lem-coef-infinity-functor-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 5.3.11, Remark 5.3.13 and Proposition 5.3.16 setup; canonical-square argument written out"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-localization-cartesian-pullback-pushout] with $A=W$, $B=\\kappa W$, $C=\\mathcal C$, $D=\\mathcal D$, and $E=\\mathcal E$. Write $A'=W\\times_{\\mathcal D}\\mathcal E$ and $B'=\\kappa W\\times_{\\mathcal D}\\mathcal E$. The resulting square $A'\\to B'$, $\\mathcal E'\\to\\mathcal E$ is a pushout. The coherent composite $\\kappa W\\to\\mathcal D$ is the one obtained in step 1; no assertion that an arbitrary pullback preserves pushouts is being made.",
+   "uses": [
+    "lem-coef-localization-cartesian-pullback-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 5.3.16 proof, first paragraph"
+   }
+  },
+  {
+   "text": "The projection $B'\\to\\kappa W$ is Cartesian. To verify this directly, pull a Cartesian lift in $\\mathcal E$ back together with its specified base arrow in $\\kappa W$; its mapping-space square is obtained by pulling back the Cartesian mapping-space square in $\\mathcal E$, hence is again a homotopy pullback. Inner-horn lifting also pulls back. With $W\\times_{\\kappa W}B'\\simeq A'$, apply [lem-coef-localization-kan-cartesian-fibration]. It says that $A'\\to B'$ is the localization at the class $S$ of arrows whose image in $B'$ is an equivalence. An arrow in $B'$ is an equivalence precisely when its two components are: componentwise inverses, together with the pulled-back compatibility homotopy, give its inverse in the pullback. Its $\\kappa W$ component is always an equivalence, so $S$ consists precisely of arrows of $A'$ whose $\\mathcal E$ component is an equivalence.",
+   "uses": [
+    "lem-coef-localization-kan-cartesian-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 5.3.16 proof, second paragraph using Lemma 5.3.15; base-change and equivalence checks written out"
+   }
+  },
+  {
+   "text": "For any target $\\mathcal T$, apply [lem-coef-infinity-functor-pushout] to the pushout of step 2:\n$$\\operatorname{Fun}(\\mathcal E,\\mathcal T)\\simeq\\operatorname{Fun}(\\mathcal E',\\mathcal T)\\times^h_{\\operatorname{Fun}(A',\\mathcal T)}\\operatorname{Fun}(B',\\mathcal T).$$\nBy step 3 the last restriction is fully faithful with essential image the $S$-inverting functors. Its pullback is therefore fully faithful with essential image those $F:\\mathcal E'\\to\\mathcal T$ whose restriction to $A'$ inverts $S$: for each such $F$, the space of an extension on $B'$ together with an identification on $A'$ is contractible. For two compatible pairs $(F,G,\\alpha)$ and $(F_1,G_1,\\alpha_1)$, their mapping space is\n$$\\operatorname{Map}(F,F_1)\\times^h_{\\operatorname{Map}(F|_{A'},F_1|_{A'})}\\operatorname{Map}(G,G_1),$$\nwhere the second map uses $\\alpha,\\alpha_1$ to identify the restrictions of $G,G_1$. Full faithfulness of restriction from $B'$ makes that second map an equivalence, so this homotopy pullback maps equivalently to $\\operatorname{Map}(F,F_1)$. This checks the full mapping spaces, including the noninvertible transformations. Finally $A'\\simeq W\\times_{\\mathcal C}\\mathcal E'$; because $W\\subseteq\\mathcal C$ is a subcategory, its arrows are exactly the arrows of $\\mathcal E'$ over $W$. Step 3 identifies the image of $S$ among them with the arrows whose $\\mathcal E$ component is an equivalence. This image is exactly $T$. Thus the displayed comparison is the required restriction functor and its essential image is precisely the $T$-inverting functors, with all mapping spaces retained.",
+   "uses": [
+    "lem-coef-infinity-functor-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 5.3.16 proof, final pasting argument expanded as a full functor-category computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-localization-kan-cartesian-fibration",
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-localization-cartesian-pullback-pushout"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Reconstruction of Proposition 5.3.16 from Lemma 5.3.15 and Remark 5.3.13, with the whole-functor-category pushout theorem cited explicitly; sources read online, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -127,10 +181,87 @@
    "results": "{\"t\": \"2026-10-16T16:07:53Z\", \"tool\": \"grep\", \"query\": \"Algd|AlgCat|CartesianFibration|cartesian.fibration|localization.*pullback|pullback.*localization\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"da5dc35185445cfa\"}",
    "date": "2026-10-16",
    "verdict": "no match: nine grep hits are comments or constructions involving ordinary algebra categories AlgCat in monoidal categories; no infinity categorical fibration or pullback-localization declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartesian.*fibration.*localization|localization.*Cartesian",
+   "results": "{\"t\": \"2026-10-16T20:02:19Z\", \"tool\": \"grep\", \"query\": \"Cartesian.*fibration.*localization|localization.*Cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh audit read Localization/Predicate.lean:43-59. The returned composition/localizer-morphism declarations concern ordinary Category instances, not localization of arbitrary infinity-categories under Cartesian base change. The targeted source grep has zero hits; Loogle has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"IsFibered\"",
+   "results": "{\"t\": \"2026-10-16T20:02:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"IsFibered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh audit read Localization/Predicate.lean:43-59. The returned composition/localizer-morphism declarations concern ordinary Category instances, not localization of arbitrary infinity-categories under Cartesian base change. The targeted source grep has zero hits; Loogle has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of infinity categories is stable under base change along Cartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T20:02:30Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of infinity categories is stable under base change along Cartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.of_comp\", \"CategoryTheory.Functor.IsLocalization.comp\", \"CategoryTheory.LocalizerMorphism.inverts\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"CategoryTheory.Localization.whiskeringLeftFunctor\"], \"digest\": \"cbb17d12e24991c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh audit read Localization/Predicate.lean:43-59. The returned composition/localizer-morphism declarations concern ordinary Category instances, not localization of arbitrary infinity-categories under Cartesian base change. The targeted source grep has zero hits; Loogle has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back an infinity category localization along a Cartesian fibration yields localization of the total category",
+   "results": "{\"t\": \"2026-10-16T20:28:55Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back an infinity category localization along a Cartesian fibration yields localization of the total category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.liftingLift\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.Localization.whiskeringLeftFunctor'_eq\", \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"CategoryTheory.Localization.fac\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\"], \"digest\": \"e5545c094fdbd88d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh reading of Localization/Predicate.lean:43-59 confirms ordinary Category instances. FiberedCategory hits likewise use ordinary categories; none states a homotopy-coherent localization base-change theorem. The targeted grep and Loogle each have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*localization|localization.*cartesian|CartesianFibration",
+   "results": "{\"t\": \"2026-10-16T20:29:20Z\", \"tool\": \"grep\", \"query\": \"cartesian.*localization|localization.*cartesian|CartesianFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh reading of Localization/Predicate.lean:43-59 confirms ordinary Category instances. FiberedCategory hits likewise use ordinary categories; none states a homotopy-coherent localization base-change theorem. The targeted grep and Loogle each have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of infinity category localization along a Cartesian fibration is a localization",
+   "results": "{\"t\": \"2026-10-16T20:29:20Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of infinity category localization along a Cartesian fibration is a localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.toOverPullbackIsoToOver\", \"HasFibers.pullbackMap\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HasFibers.mkPullback\"], \"digest\": \"d235c1e874f23ccb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh reading of Localization/Predicate.lean:43-59 confirms ordinary Category instances. FiberedCategory hits likewise use ordinary categories; none states a homotopy-coherent localization base-change theorem. The targeted grep and Loogle each have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"IsFibered\"",
+   "results": "{\"t\": \"2026-10-16T20:29:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"IsFibered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh reading of Localization/Predicate.lean:43-59 confirms ordinary Category instances. FiberedCategory hits likewise use ordinary categories; none states a homotopy-coherent localization base-change theorem. The targeted grep and Loogle each have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of localization of infinity categories along a Cartesian fibration is a localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Localization.liftingLift\", \"module\": \"Mathlib/CategoryTheory/Localization/Predicate\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {W : CategoryTheory.MorphismProperty C} →\\n          {E : Type u_3} →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} E] →\\n              (F \", \"doc\": \"Given a localization functor $ L : C \\to D $ with respect to a morphism property $ W $, and a $ W $-inverting functor $ F : C \\to E $, this instance constructs the canonical lifting of $ F $ to a functo\"}\n  {\"name\": \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"module\": \"Mathlib/CategoryTheory/Localization/Composition\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {C₃ : Type u₃} →\\n      {E : Type u₄} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v₃, u₃} C₃] →\\n              [inst_3 : CategoryTheory.Categor\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_3, \\\\mathcal{E}$, functors $L_1 : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$ and $L_2 : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_3$, and morphism properties $W_1$\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {D₂ : Type u₅} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₅, u₅} D₂]\\n  {W₁ : CategoryTheory.MorphismProperty C₁} {W₂ : CategoryTheory.MorphismProperty C₂}\\n  (Φ : CategoryTheory.Loca\", \"doc\": \"If $\\\\Phi$ is a morphism between localizers that becomes an equivalence after localization, then the composition of $\\\\Phi$'s underlying functor with the localization functor $L_2$ is itself a localizat\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"module\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {D₁ : Type u₄} →\\n      {D₂ : Type u₅} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v₄, u₄} D₁] →\\n              [inst_3 : CategoryTheory.Catego\", \"doc\": \"Given categories $ C_1, C_2, D_1, D_2 $, a localizer morphism $ Φ : C_1 → C_2 $ preserving morphism property $ W_1 $, and localization functors $ L_1 : C_1 → D_1 $, $ L_2 : C_2 → D_2 $, the localized \"}\n  {\"name\": \"CategoryTheory.Localization.fac\", \"module\": \"Mathlib/CategoryTheory/Localization/Predicate\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {W : CategoryTheory.MorphismProperty C} →\\n          {E : Type u_3} →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} E] →\\n              (F \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to a morphism property $W$, and a $W$-inverting functor $F : \\\\mathcal{C}\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"module\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {D₁ : Type u₄} {D₂ : Type u₅} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₄, u₄} D₁]\\n  [inst_3 : CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ \", \"doc\": \"If a localizer morphism $\\\\Phi$ fits into a commutative square with a functor $G$ that is an equivalence of categories, then $\\\\Phi$ becomes a localized equivalence after localization with respect to th\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"module\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism\", \"type\": \"{C₁ : Type u₁} →\\n  {C₂ : Type u₂} →\\n    {D₁ : Type u₄} →\\n      {D₂ : Type u₅} →\\n        [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v₄, u₄} D₁] →\\n              [inst_3 : CategoryTheory.Catego\", \"doc\": \"The functor constructed via the localization process, obtained by lifting the composition of Φ with L₂ through the localization equivalence, mapping objects and morphisms from the localized category D\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEquivalences C)],\\n  (HomotopicalAlgebra.Cofibrant\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits and Localization/Predicate.lean:43-78. They state ordinary Category localization and ring base-change properties, not localization of infinity-categories under Cartesian base change. Both the targeted grep and Loogle have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"IsFibered\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits and Localization/Predicate.lean:43-78. They state ordinary Category localization and ring base-change properties, not localization of infinity-categories under Cartesian base change. Both the targeted grep and Loogle have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "CartesianFibration|cartesian.*localization|localization.*cartesian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits and Localization/Predicate.lean:43-78. They state ordinary Category localization and ring base-change properties, not localization of infinity-categories under Cartesian base change. Both the targeted grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian base change of an infinity categorical localization preserves the localization universal property",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \": StrictUniversalPropertyFixedTarget W.Q W E\", \"doc\": \"The localization of a category $\\\\mathcal{C}$ at a morphism property $W$ satisfies the strict universal property: for any category $\\\\mathcal{E}$, every functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{E}$ that in\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.localizationPreserves\", \"module\": \"Mathlib.RingTheory.LocalProperties.Basic\", \"type\": \": LocalizationPreserves P\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change, then $ P $ is preserved under localization. Specifically, whenever a ring homomorphism $ f : R \\\\to S $ satisfies $ P $, the induc\"}\n  {\"name\": \"CategoryTheory.Localization.instInhabitedStrictUniversalPropertyFixedTargetLocalizationQ\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \": Inhabited (StrictUniversalPropertyFixedTarget W.Q W E)\", \"doc\": \"The localization of a category $\\\\mathcal{C}$ at a morphism property $W$ satisfies the strict universal property: for any category $\\\\mathcal{E}$, every functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{E}$ that in\"}\n  {\"name\": \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        CategoryTheory.Functor C D →\\n          CategoryTheory.MorphismProperty C →\\n            (E : Type u_3) →\\n              [CategoryTheory.Category.{v_3,\", \"doc\": \"Given categories $ C $ and $ D $, a functor $ F : C \\to D $, a morphism property $ P $ in $ C $, and a category $ E $, this inductive type represents the strict universal property of $ D $ as a localiz\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.universally_isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"(P : MorphismProperty C) : P.universally.IsStableUnderBaseChange\", \"doc\": \"For any morphism property $ P $ in a category $ \\\\mathcal{C} $, the universally modified property $ P^{\\\\text{universally}} $, which requires $ P $ to hold for all pullbacks of a morphism, is stable und\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.LeftFraction.Localization.strictUniversalPropertyFixedTarget\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions\", \"type\": \"(E : Type*) [Category* E] : Localization.StrictUniversalPropertyFixedTarget (Q W) W E\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a morphism property $W$ satisfying the left calculus of fractions conditions, and a fixed target category $\\\\mathcal{E}$, this definition establishes the strict univ\"}\n  {\"name\": \"HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget\", \"module\": \"Mathlib.CategoryTheory.Localization.Quotient\", \"type\": \"(L' : Quotient homRel ⥤ D) (univ : StrictUniversalPropertyFixedTarget L' W' E) :\\n  StrictUniversalPropertyFixedTarget (Quotient.functor homRel ⋙ L') W E\", \"doc\": \"Given a quotient category $\\\\mathcal{C}/R$ with hom-set relation $R$ and a functor $L' : \\\\mathcal{C}/R \\\\to \\\\mathcal{D}$ satisfying the strict universal property for a morphism property $W'$, this const\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderBaseChange\", \"doc\": \"In a category equipped with fibrations, every base change (pullback) of a fibration is again a fibration.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits and Localization/Predicate.lean:43-78. They state ordinary Category localization and ring base-change properties, not localization of infinity-categories under Cartesian base change. Both the targeted grep and Loogle have zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-completion-localization",
@@ -138,5 +269,21 @@
   "group": "NX"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localization-cartesian-pullback",
+  "worker": "stage1",
+  "summary": "Audited the inherited four-step split against Gepner–Haugseng 5.3.11–5.3.16 and HTT 3.3.1.3–3.3.1.4, reopened every cited statement, checked current DAG and blueprint duplicates and source attachments, reran twelve logged Mathlib searches, and retained the two statement-only supporting nodes. The canonical localization pushout and final full functor-category calculation are proved inside this item.",
+  "blueprint": "The four steps expand the supporting Proposition 5.3.16 named in the imported ancestry: its canonical square, Cartesian pullback, application of Lemma 5.3.15, and final pushout universal-property argument, serving the ancestor paragraph 2 coherent coefficient adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-63e6b424f",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-63e6b424f (reviewer sub-agent of L); spot-checked: Item unchanged and correct. T is the set of arrows over W whose image in E is an equivalence; by HTT 2.4.1.5 these are exactly the p'-Cartesian arrows over W. Tested cases: q=id; W=the equivalences; C=W=Δ¹ over a point, which keeps the noninvertible fiber arrows; empty C. Step 1 derives the pushout square W→κW, C→D from the groupoid child (π=id, every Kan edge invertible) and from lem-coef-infinity-functor-pushout, which supplies existence of the pushout and the full Fun pullback formula; the comparison P⇄D comes from Yoneda and full faithfulness. Step 2 applies the pushout child, whose hypotheses are met exactly. Step 3: B'→κW is Cartesian by pullback (HTT 2.4.1.3(2)); W×_κW B' ≃ A'; equivalences in a pullback are detected componentwise, so S is the set of arrows with invertible E-component. Step 4: base change of the fully faithful restriction, the mapping-space formula written out, and A'=W×_C E' gives exactly T. All cited nodes are in unit sk-prop-sf-biduality-general, so there are no tool uses. Groupoid child: true, re-derived from HTT 2.4.1.5, 2.4.1.3, Cor 3.3.4.3 (localization at Cartesian edges is the colimit) and Cor 4.1.2.6 (a weak equivalence into a Kan complex is cofinal). It is the source's lemma (the case C=W), not a restatement of the parent, and not lem-cbc-simplicial-groupoid-localization (fiber [1] keeps its noninvertible arrow). Pushout child: true. HTT 3.3.1.3 is for arbitrary simplicial sets; applied to the pulled-back fibration it gives preservation of categorical equivalences over D, and with monomorphisms and strict colimits preserved, a cofibrant span is carried to a homotopy pushout; 3.3.1.4 identifies the strict pullbacks with homotopy pullbacks. Read 2.4.4.5: the report's source-error note on GH's citation is correct. Tested: coproduct, p=id, empty E. Duplicate search by rg over the DAG: lem-coef-cocartesian-categorical-base-change is the dual of 3.3.1.3 (a future tool for this node, not a duplicate); two-object-localization-pullback, hammock-components-localization, grothendieck-aspherical-base-change, cocartesian-section-colimits and free-category-groupoid-nerve do not state either child. Checked B1–B4 and A4, created.item, ancestry/via against the prop-coef-integral-exceptional-adjoint paragraph 2, and that there is no SGA citation; no fixes. Caveat: Gepner–Haugseng 5.3.11–5.3.16 is not archived and network access was blocked here; one WebFetch before the block returned only the arXiv abstract. So the GH-sourced statements were verified independently through HTT, read from a local copy (/tmp/q122lit/HTT.pdf), not against GH itself."
+ }
 }
