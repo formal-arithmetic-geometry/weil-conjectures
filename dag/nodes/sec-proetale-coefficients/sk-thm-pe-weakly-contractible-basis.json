@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-pe-weakly-contractible-basis",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Enough affine weakly contractible objects",
@@ -19,34 +19,36 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-pe-site"
+  "sk-def-pe-site",
+  "det-pe-wlocal-strict-contractible",
+  "sk-def-pe-weak-contractible"
  ],
  "proof": [
   {
-   "text": "Apply [sk-thm-pe-wc-cover] to each affine chart ([det-pe-wcb-cover]). For the splitting\nassertion, a faithfully flat weakly étale $D$-algebra refines, by\n[sk-thm-pe-indetale-refinement], to a faithfully flat ind-étale $D$-algebra.\n[sk-prop-pe-wc-rings] splits this refinement and hence splits the original map\n([det-pe-wcb-split-cover]). Every cover of the affine $U$ refines to a finite affine cover;\nits disjoint union is a single faithfully flat weakly étale affine cover and therefore\nsplits. The inverse images of its finitely many components give a finite clopen partition\nof $U$ subordinate to the original cover ([det-pe-wcb-clopen-partition]).",
+   "text": "By [det-pe-wcb-cover], every object of $X_{\\mathrm{proét}}$ has a covering by affines $\\operatorname{Spec}(D_i)$ with each $D_i$ w-contractible. This proves the basis assertion.",
    "uses": [
-    "sk-thm-pe-wc-cover",
-    "det-pe-wcb-cover",
-    "sk-thm-pe-indetale-refinement",
-    "det-pe-wcb-split-cover",
-    "det-pe-wcb-clopen-partition"
+    "det-pe-wcb-cover"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/sk-thm-pe-weakly-contractible-basis.proof.md",
+    "place": "first paragraph, covering assertion"
+   }
   },
   {
-   "text": "Now an epimorphism $F\\to h_U$ has lifts of $\\mathrm{id}_U$ after a covering of $U$. Refine\nthat covering by the clopen partition just constructed and glue the lifts on its disjoint\npieces. This gives a global lift of $\\mathrm{id}_U$, hence a section. The same argument,\nafter pulling back an arbitrary epimorphism along a map from $h_U$, proves projectivity\n([det-pe-wcb-projective]). See Stacks, Tags 098F and 0990.",
+   "text": "For each affine object $U=\\operatorname{Spec}(D)$ of $X_{\\mathrm{proét}}$ with $D$ w-contractible, [det-pe-wcb-projective] gives both that every epimorphism of sheaves $F\\to h_U$ has a section and that $h_U$ is projective in $\\Sh(X_{\\mathrm{proét}})$.",
    "uses": [
     "det-pe-wcb-projective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/sk-thm-pe-weakly-contractible-basis.proof.md",
+    "place": "second paragraph, splitting and projectivity assertion"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-pe-wc-cover",
   "det-pe-wcb-cover",
-  "sk-thm-pe-indetale-refinement",
-  "det-pe-wcb-split-cover",
-  "det-pe-wcb-clopen-partition",
   "det-pe-wcb-projective"
  ],
  "proof_origin": {
@@ -54,9 +56,31 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "w.?contractible|weakly.?contractible|pro.?etale",
+   "results": "Ten hits in AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean, for pro-etale site definitions and coefficients; no w-contractible covering theorem. Read Proetale.lean in full.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every object of the pro-etale site has a covering by affine schemes with w-contractible coordinate rings, whose representable sheaves are projective",
+   "results": "Eight hits: Scheme.affineCover, affineBasisCover, AffineCover constructors and smallEtaleTopology; none states a w-contractible pro-etale affine covering or projectivity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\"",
+   "results": "Twelve hits in Mathlib.AlgebraicGeometry.Sites.Proetale: proetalePrecoverage, proetaleTopology, stability and subcanonicity. Read Sites/Proetale.lean in full; no covering by w-contractible affines or projectivity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +101,21 @@
   "sk-def-pe-site"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-thm-pe-weakly-contractible-basis",
+  "worker": "stage1",
+  "summary": "Audited the imported proof against the current blueprint and existing DAG. The two clauses are already supplied exactly by det-pe-wcb-cover and det-pe-wcb-projective, so I rewrote the proof as two direct cited steps and removed the uncited sk-prop-pe-wc-rings route and redundant intermediate citations. No new nodes were needed.",
+  "blueprint": "The first step realizes the covering assertion in the first paragraph; the second realizes the section and projectivity assertion in the second paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-b7b7bce19",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-b7b7bce19 (reviewer sub-agent of L); spot-checked: Both proof steps agree with the current blueprint and Stacks 098F, 098H and 0990; the sheaves-of-sets category and all hypotheses are preserved. Added missing definition dependencies and three actual Mathlib search records in corrected JSON. No new nodes, route departures or dependency cycles. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
