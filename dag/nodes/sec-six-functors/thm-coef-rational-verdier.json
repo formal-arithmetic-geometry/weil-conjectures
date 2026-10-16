@@ -3,57 +3,214 @@
  "blueprint": {
   "is": "thm-coef-rational-verdier",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Verdier biduality over a finite coefficient field",
- "statement": "For every finite extension $E/\\Ql$, integral duality induces\nan exact $E$-linear anti-equivalence\n\n$$\nD_{X,E}:D^b_c(X,E)^{\\mathrm{op}}\\xrightarrow{\\sim}D^b_c(X,E).\n$$\n\nIts evaluation and natural isomorphism\n$\\delta_K:K\\xrightarrow{\\sim}D_{X,E}D_{X,E}K$ are obtained\nby rationalizing integral evaluation and biduality. The dualizing\nobject is the image $\\omega_{X,E}$ of $\\omega_{X,\\mathcal O_E}$.\nFor $E\\subset L$, the canonical comparison\n\n$$\n(D_{X,E}K)\\otimes_E L\\xrightarrow{\\sim}\nD_{X,L}(K\\otimes_E L)\n$$\n\ncommutes with evaluation and $\\delta$, and satisfies the unit\nand associator equations for scalar extension.",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, and a separated finite-type $k$-scheme $X$ (separated means its diagonal is a closed immersion, and finite type means its structure morphism has finite type) [def-weil-proper-morphism, def-weil-finite-type-morphism]. Use the derived-complete integral constructible categories [def-weil-derived-complete-integral-detailed] and their raw rationalizations $D^b_c(X,E)$ [def-weil-rationalization-karoubi]. For each finite extension $E/\\mathbf Q_\\ell$, put $R=\\mathcal O_E$ and let $D_{X,R}=R\\mathcal Hom_R(-,\\omega_{X,R})$ be integral duality [thm-coef-integral-verdier], with the integral dualizing object of [prop-coef-integral-dualizing]. Then integral duality induces an exact $E$-linear anti-equivalence\n$$D_{X,E}:D^b_c(X,E)^{\\mathrm{op}}\\xrightarrow{\\sim}D^b_c(X,E).$$\nIts evaluation and natural isomorphism $\\delta_K:K\\xrightarrow{\\sim}D_{X,E}D_{X,E}K$ are obtained by rationalizing integral evaluation and biduality. The dualizing object is the image $\\omega_{X,E}$ of $\\omega_{X,R}$. Tensor products and evaluation at the rational stage use the coefficient-passage operations of [def-weil-derived-pullback-tensor-hom], with completed derived tensor at the integral stage. For finite coefficient-field extensions $E\\subset L$, the rationalization of the canonical integral comparison [lem-coef-integral-finite-extension] is a natural isomorphism\n$$(D_{X,E}K)\\otimes_E L\\xrightarrow{\\sim}D_{X,L}(K\\otimes_E L),$$\ncommuting with evaluation and $\\delta$, and satisfying the unit and associator equations for scalar extension.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
   "place": "node thm-coef-rational-verdier, order 2151"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "thm-coef-integral-verdier",
+  "prop-coef-integral-dualizing",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-integral-finite-extension"
+ ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=D^b_c(X,\\mathcal O_E)$. Its actual objects,\nnot merely a separately chosen finite-Tor subcategory, are in the\ndomain of integral duality by [lem-coef-integral-residue-tor].\nThe exact functor $D_{X,\\mathcal O_E}:\\mathcal C^{\\mathrm{op}} \\to\\mathcal C$ of [thm-coef-integral-verdier] is\n$\\mathcal O_E$-linear. Apply\n[prop-weil-pbc-rational-transport] to the opposite category\nas well as to $\\mathcal C$. More explicitly, it sends\n\n$$\nf/\\varpi_E^r:K\\longrightarrow M\n\\quad\\hbox{to}\\quad\nD(f)/\\varpi_E^r:D(M)\\longrightarrow D(K).\n$$",
+   "text": "Put $\\mathcal C_R=D^b_c(X,R)$ and $D_R=D_{X,R}$. By [lem-coef-integral-residue-tor], every object of this actual integral category belongs to its finite-Tor subcategory: $\\ell$ is invertible on the $k$-scheme $X$, so the lemma applies. The integral theorem [thm-coef-integral-verdier] gives an exact anti-equivalence $D_R:\\mathcal C_R^{\\mathrm{op}}\\to\\mathcal C_R$, and its actual double-dual map is invertible. The object $\\omega_{X,R}$ belongs to $\\mathcal C_R$ by [prop-coef-integral-dualizing]. The internal Hom construction in [def-weil-derived-pullback-tensor-hom] is $R$-linear on morphisms in its first, contravariant variable: precomposition satisfies $h\\circ(rf)=r(h\\circ f)$, so $D_R(rf)=rD_R(f)$, also on the derived internal Hom. Thus no involution on scalars occurs.",
    "uses": [
     "lem-coef-integral-residue-tor",
     "thm-coef-integral-verdier",
-    "prop-weil-pbc-rational-transport"
+    "prop-coef-integral-dualizing",
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 1: domain of integral duality and its scalar linearity; explicit expansion"
+   }
   },
   {
-   "text": "The equality relation on fractions and their compositions is\npreserved by linearity and contravariant functoriality. Thus this\nis a functor on exactly the raw scalar localization\n[def-weil-rationalization-karoubi]; there is no extra\nidempotent completion or assumption about the choice of a lattice.",
+   "text": "Let $Q_R:\\mathcal C_R\\to\\mathcal C_R[1/\\varpi_E]$ be [def-weil-linear-scalar-localization]; this is $D^b_c(X,E)$ by [def-weil-rationalization-karoubi]. Define $D_EK=D_RK$ on objects and $D_E(f\\otimes a)=D_R(f)\\otimes a$. The balancing relation is preserved since $D_R(rf)\\otimes a=D_R(f)\\otimes ra$. For $f:K\\to M$, $g:M\\to N$, the two formulas for a composite give\n$$D_E((g\\otimes b)(f\\otimes a))=D_R(f)D_R(g)\\otimes ab=(D_R(f)\\otimes a)(D_R(g)\\otimes b).$$\nIdentities go to identities; additivity extends these equations to sums of tensors. This defines an $E$-linear contravariant functor on the prescribed raw localization, including any torsion identifications imposed by the tensor product. It also identifies $(\\mathcal C_R^{\\mathrm{op}})[1/\\varpi_E]$ with $(\\mathcal C_R[1/\\varpi_E])^{\\mathrm{op}}$: both have Hom module $\\operatorname{Hom}_{\\mathcal C_R}(M,K)\\otimes_R E$ and the same reversed composition. No application of a transport theorem outside its stated category is needed.",
    "uses": [
+    "def-weil-linear-scalar-localization",
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraphs 1-2: explicit tensor balancing, reversed composition, and opposite identification"
+   }
   },
   {
-   "text": "The integral natural transformation $\\delta$ and its inverse\nlocalize. Its naturality for fractions follows by multiplying\nthe integral naturality equation by the same scalar denominator.\nConsequently $D_{X,E}^2\\cong\\operatorname{id}$, proving the\nanti-equivalence. Evaluation and its transpose localize as well.\nFinally localize all the comparisons and their equations in\n[lem-coef-integral-finite-extension]. The scalar-extension\nfunctor used there is exactly the one on integral representatives\nin [def-weil-rationalization-karoubi], so the resulting\ncomparison has the asserted domain and coherence.",
+   "text": "The exactness assertion follows on the specified triangulations. By [def-weil-rationalization-karoubi], every distinguished rational triangle is isomorphic to $Q_R(T)$ for an integral distinguished triangle $T$. Apply the integral exact contravariant functor of [thm-coef-integral-verdier] to $T$ and then $Q_R$; the resulting reversed triangle is distinguished, and is precisely the $D_E$-image with its localized integral shift comparison. That comparison is invertible because its integral inverse also localizes. Images of the triangle isomorphism remain isomorphisms, proving exactness for every rational triangle.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 1: exactness of the contravariant extension, expanded using localized triangles"
+   }
+  },
+  {
+   "text": "For $K,M\\in\\mathcal C_R$, integral anti-equivalence [thm-coef-integral-verdier] makes $f\\mapsto D_R(f)$ an $R$-linear bijection $\\operatorname{Hom}(K,M)\\to\\operatorname{Hom}(D_RM,D_RK)$. Its inverse is $R$-linear (apply the bijection to sums and scalar multiples); tensoring both maps with $E$ leaves their composites equal to the identities. By the Hom formula in [def-weil-rationalization-karoubi], these are the Hom maps of $D_E$ and their inverses. Thus $D_E$ is fully faithful. Every object $K$ is isomorphic to $D_E(D_EK)$ by $Q_R(\\delta_K)$, with inverse $Q_R(\\delta_K^{-1})$, so it is essentially surjective and hence an anti-equivalence. The natural integral transformation $\\delta:\\mathrm{id}\\to D_R^2$ extends by [prop-weil-pbc-rational-transport], applied only to the covariant exact endofunctors $\\mathrm{id},D_R^2$ of the integral category. Explicitly, $D_E^2(f\\otimes a)(\\delta_K\\otimes1)=(\\delta_M\\otimes1)(f\\otimes a)$ is integral naturality tensored with $a$. This proves naturality and invertibility of the claimed actual double-dual map, not just existence of some isomorphism.",
+   "uses": [
+    "thm-coef-integral-verdier",
+    "def-weil-rationalization-karoubi",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 3, first three sentences: Hom inverse, essential surjectivity, and canonical natural biduality"
+   }
+  },
+  {
+   "text": "The rational tensor is the localization of the completed integral tensor [def-weil-derived-pullback-tensor-hom]. Its integral source remains in $\\mathcal C_R$ by [lem-pur-integral-operations-preserve-constructible], applied with $f=\\mathrm{id}_X$. Therefore define $\\omega_{X,E}=Q_R\\omega_{X,R}$ and $\\mathrm{ev}_{E,K}=Q_R(\\mathrm{ev}_{R,K})$, using integral evaluation supplied by [thm-coef-integral-verdier]. The integral evaluation naturality equation for $f:K\\to M$ is\n$$\\mathrm{ev}_{R,K}(D_R(f)\\widehat\\otimes1_K)=\\mathrm{ev}_{R,M}(1_{D_RM}\\widehat\\otimes f).$$\nAfter applying $Q_R$, the equation for $f\\otimes a$ is this same equality multiplied by $a$, because tensor and duality act linearly in each variable. Sums give naturality for all rational morphisms. The double-dual map is $\\delta_{E,K}=Q_R\\delta_{R,K}$ from step 4: the integral transpose/evaluation defining equality is an equality of composites of evaluation, tensor, and identities, so its image is the same defining equality for the localized maps. This verifies the asserted rationalization of evaluation and its transpose.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-preserve-constructible",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 3, fourth sentence: completed tensor, evaluation, and transpose localization"
+   }
+  },
+  {
+   "text": "For $E\\subset L$ let $S=\\mathcal O_L$ and $T=T_{S/R}$. The exact functor $T$, the dualizing comparison $u:T\\omega_{X,R}\\xrightarrow{\\sim}\\omega_{X,S}$ and the natural duality comparison $\\beta_K:TD_RK\\xrightarrow{\\sim}D_STK$, with their inverses, are supplied by [lem-coef-integral-finite-extension]. Define the rational comparison to be $Q_S(\\beta_K)$. Its source and target are exactly those stated: [def-weil-rationalization-karoubi] defines $-\\otimes_E L$ by $K\\mapsto TK$ and $f\\otimes a\\mapsto T(f)\\otimes a$, with $a$ embedded in $L$, and step 2 defines $D_E,D_L$ on those same representatives. For $f:K\\to M$ integral naturality reads $D_S(Tf)\\beta_M=\\beta_KT(D_Rf)$; its image multiplied by $a\\in E\\subset L$ is the equation for $f\\otimes a$. Additivity proves rational naturality. The localized inverse remains inverse. Write $c_{A,B}:TA\\widehat\\otimes_S^LTB\\xrightarrow{\\sim}T(A\\widehat\\otimes_R^LB)$ for the scalar-extension tensor comparison in that lemma's evaluation compatibility. The two supplied integral compatibilities, with all arrows oriented, are\n$$\\mathrm{ev}_{S,TK}\\circ(\\beta_K\\widehat\\otimes1_{TK})=u\\circ T(\\mathrm{ev}_{R,K})\\circ c_{D_RK,K},$$\n$$\\beta_{D_RK}\\circ T(\\delta_{R,K})=D_S(\\beta_K)\\circ\\delta_{S,TK}.$$\nThe first has source $TD_RK\\widehat\\otimes_S^LTK$ and target $\\omega_{X,S}$; the second has source $TK$ and target $D_STD_RK$. For the rational scalar-extension functor $\\overline T$, denote the images of $u,c,\\beta$ by $\\overline u,\\overline c,\\overline\\beta$. Applying $Q_S$ gives, using the tensor and evaluation convention of [def-weil-derived-pullback-tensor-hom],\n$$\\mathrm{ev}_{L,\\overline TK}\\circ(\\overline\\beta_K\\otimes1_{\\overline TK})=\\overline u\\circ\\overline T(\\mathrm{ev}_{E,K})\\circ\\overline c_{D_EK,K},$$\n$$\\overline\\beta_{D_EK}\\circ\\overline T(\\delta_{E,K})=D_L(\\overline\\beta_K)\\circ\\delta_{L,\\overline TK}.$$\nThese are the required rational evaluation and canonical biduality compatibility equations: $Q_S$ preserves each composite, and $\\overline TQ_R=Q_ST$ on the integral arrows occurring here.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 3, final sentences: comparison, fractional naturality, and evaluation/biduality compatibility"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, write $a_K:T_{M/L}T_{L/E}K\\xrightarrow{\\sim}T_{M/E}K$ for the integral tensor associator. The composition assertion of [lem-coef-integral-finite-extension] is, with the contravariant direction displayed,\n$$\\beta_{M/L,T_{L/E}K}\\,T_{M/L}(\\beta_{L/E,K})=D_{X,\\mathcal O_M}(a_K)\\,\\beta_{M/E,K}\\,a_{D_{X,\\mathcal O_E}K}.$$\nEvery factor is integral. Apply $Q_{\\mathcal O_M}$: by [def-weil-rationalization-karoubi] the functors and factors become exactly the rational scalar-extension functors, comparisons and associators, so the displayed equality is their associator equation. For the identity extension, put $j_K:T_{E/E}K\\xrightarrow{\\sim}K$ for the integral tensor unit comparison. The supplied integral unit equation is\n$$\\beta_{E/E,K}=D_R(j_K)\\circ j_{D_RK}:T_{E/E}D_RK\\longrightarrow D_RT_{E/E}K.$$\nWriting $\\overline j_K=Q_R(j_K)$, its image is explicitly\n$$\\overline\\beta_{E/E,K}=D_E(\\overline j_K)\\circ\\overline j_{D_EK}.$$\nThus under the specified unit identifications the rational identity-extension comparison is the identity. Because $Q$ preserves identities and composition, these are equations of the specified canonical comparisons, rather than choices of unrelated isomorphisms. This completes all clauses.",
    "uses": [
     "lem-coef-integral-finite-extension",
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
+    "place": "Proof paragraph 3, final sentence: explicit composition and unit equations"
+   }
   }
  ],
  "proof_deps": [
   "lem-coef-integral-residue-tor",
   "thm-coef-integral-verdier",
-  "prop-weil-pbc-rational-transport",
+  "prop-coef-integral-dualizing",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-linear-scalar-localization",
   "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-integral-operations-preserve-constructible",
   "lem-coef-integral-finite-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-rational-verdier.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraphs 1-3, expanded explicitly; original blueprint document absent locally (WANTED in report)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Verdier|rationalization|anti-equivalence",
+   "results": "0 hits; searched subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope: duplicated Mathlib prefix; rerun with CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rationalizing an integral Verdier duality anti-equivalence and scalar extension compatibility",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, IsIso, contravariant functor",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-16",
+   "verdict": "no match: none states rational constructible Verdier duality with evaluation and finite-extension coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact contravariant anti-equivalence of rationalized constructible derived categories via integral Verdier duality",
+   "results": "CategoryTheory.Functor.map_distinguished_op_exact; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategory; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-16",
+   "verdict": "no match: none states rational constructible Verdier duality with evaluation and finite-extension coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|rationalization|anti-equivalence",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/SpectralObject.lean; searched subdirectory CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: none states rational constructible Verdier duality with evaluation and finite-extension coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Linear",
+   "results": "CategoryTheory.Equivalence.inverseLinear",
+   "date": "2026-10-16",
+   "verdict": "no match: none states rational constructible Verdier duality with evaluation and finite-extension coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear duality on a triangulated category extends to the scalar localization by tensoring Hom modules with a fraction field",
+   "results": "CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'; CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ; CategoryTheory.Shift.linear_of_localization; CategoryTheory.Localization.linear; CategoryTheory.Localization.instLinearLocalization'Q'; CategoryTheory.Localization.instLinearLocalization'; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Localization.instLinearLocalization",
+   "date": "2026-10-16",
+   "verdict": "no match: none states rational constructible Verdier duality with evaluation and finite-extension coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.*[Ll]ocaliz|[Ll]ocaliz.*equivalence|equivalence.*[Oo]p",
+   "results": "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Opposite.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric rational-duality theorem; categorical/module localization only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear equivalence to the opposite category induces an equivalence after localizing central scalar morphisms",
+   "results": "CategoryTheory.Localization.linear; IsLocalizedModule.mapEquiv; IsLocalizedModule.linearEquiv; IsLocalizedModule.mapEquiv_apply; IsLocalizedModule.linearEquiv_apply; CategoryTheory.LocalizerMorphism.instIsLocalizedEquivalenceOppositeOpOp; IsLocalizedModule.of_linearEquiv; LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric rational-duality theorem; categorical/module localization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Equivalence",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Localization.Equivalence'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; rerun with CategoryTheory.Functor.IsLocalization.op"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization.op",
+   "results": "CategoryTheory.Functor.IsLocalization.op; CategoryTheory.Localization.isoOfHom_unop; CategoryTheory.Localization.isoOfHom_op_inv",
+   "date": "2026-10-16",
+   "verdict": "no match for this geometric rational-duality theorem; categorical/module localization only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +236,34 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-coef-rational-verdier",
+  "worker": "stage1",
+  "summary": "Expanded the imported localization argument into seven steps: scalar balancing and reversed composition, exactness on image triangles, full faithfulness by tensoring inverse Hom maps, canonical biduality, evaluation, finite-extension naturality, and explicit associator coherence. Made inherited geometric/coefficient conventions explicit. Corrected an unsupported application of rational transport to an opposite category by writing that construction directly. Reused all five imported dependencies and the existing completed-tensor preservation/operation nodes; no new nodes. Original blueprint files are absent, so the proof remains agent-written and sources are WANTED. Independent second reading expanded finite-extension evaluation/biduality compatibility and the identity-extension equation with typed arrows; no new nodes.",
+  "blueprint": "Original proof paragraph 1 is realized in steps 1-4, paragraph 2 in step 2, and paragraph 3 in steps 4-7. The unit has no numbered proof steps and already lists this node among its realized statements; its record is unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic localization of natural transformations between covariant exact integral endofunctors id and D squared; does not replace geometric integral biduality."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic completed integral tensor preservation makes the evaluation source an object of the integral constructible category; used with the identity of X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-integral-operations-preserve-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-40992bbec",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-40992bbec (reviewer sub-agent of L); spot-checked: Read all required guidance, the item, unit/chapter route, every cited node statement, and the cited literature sources. The seven-step split is mathematically sound: scalar localization, opposite functoriality, exactness, full faithfulness, evaluation typing, finite-extension comparison, unit, and associator equations all check, including zero, empty, torsion, identity, nested, and ramified cases. No new nodes or duplicate issues. The delivery report incorrectly says the cited Markdown sources are absent; they are present and were read directly. Review written to review.md."
+ }
 }
