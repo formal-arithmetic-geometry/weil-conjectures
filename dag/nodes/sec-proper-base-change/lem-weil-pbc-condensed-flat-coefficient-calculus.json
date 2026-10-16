@@ -37,7 +37,7 @@
  ],
  "proof": [
   {
-   "text": "Choose the finite E-basis Module.finBasis E F, using restriction of scalars to prove finite dimensionality. Each basis coordinate is continuous by Mathlib LinearMap.continuous_of_finiteDimensional over Q_ell. Postcomposition on continuous functions defines actual module morphisms from C(-,F) to the finite direct sum of C(-,E), and basis vectors define the inverse. The basis reconstruction and coordinate identities prove the two inverse equations pointwise, including the ULift used in the presheaf of abelian groups.",
+   "text": "Choose Module.finBasis E F after proving finite dimensionality by restriction of scalars. Each basis coordinate is continuous by LinearMap.continuous_of_finiteDimensional over Q_ell. Apply the source library continuousBasisSheafIso: its actual coordinate and basis-vector maps on continuous functions, sheafified and transported along the coefficient-ring comparison, give the finite-free isomorphism on the point.",
    "uses": [
     "def-weil-l-adic-numbers",
     "def-weil-finite-subextension-directed-set"
@@ -49,14 +49,14 @@
    }
   },
   {
-   "text": "For an additive monoidal functor L, mapModComapIso identifies transport of the restricted regular module with restriction of its transported regular module. mapBiproduct and the regular-module comparison transport the explicitly constructed finite free isomorphism. First apply this to presheafToSheaf, correcting the coefficient rings by sheafifyRingPresheafIso, and then to the existing exact strong monoidal upperStarFromPoint. This proves finite freeness on the scheme without the separate profinite_point_pullback theorem.",
+   "text": "Apply the source library Mod.mapFreeRestrictedRegularIso to the exact additive strong monoidal upperStarFromPoint and the point finite-free isomorphism. Its module-transport, regular-module and biproduct comparisons give the specified finite-free isomorphism on the scheme. No duplicate presheaf or scalar-transport construction is required in this module.",
    "uses": [
     "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/MapMod.lean",
-    "place": "WeilConjectures/CategoryTheory/ModuleObjects/MapMod.lean; continuous coefficient ring presheaves and upperStarFromPoint"
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "private continuousBasisSheafIso and Mod.mapFreeRestrictedRegularIso; proof-only import all"
    }
   },
   {
@@ -71,7 +71,7 @@
    }
   },
   {
-   "text": "For each exact scalar extension f, use f.leftDerivedFunctorIsoMapDerivedCategory and f.mapDerivedCategoryFactors. Whiskering the former with DerivedCategory.Q and composing gives the displayed termwise-complex factorization. The shift structure transported along the same comparison gives the displayed shift isomorphisms; isTriangulated_of_iso transfers triangulatedness from f.mapDerivedCategory.",
+   "text": "For each exact scalar extension f, use f.leftDerivedFunctorIsoMapDerivedCategory and f.mapDerivedCategoryFactors. Whiskering the former with DerivedCategory.Q and composing gives the displayed termwise-complex factorization. The shift structure transported along the same comparison gives the displayed shift isomorphisms; isTriangulated_of_iso transfers triangulatedness from f.mapDerivedCategory. The private generic scalarCalculus lemma packages this same argument for any exact scalar extension, and the two concrete public calculus theorems apply it; the finite case additionally supplies its explicit finite-free isomorphism.",
    "uses": [
     "def-weil-pbc-condensed-coefficient-comparisons"
    ],
@@ -82,14 +82,14 @@
    }
   },
   {
-   "text": "The ambient derived adjunction is exactly Mod.derivedExtendMapDerivedCategoryAdjunction for the same coefficient map. Thus neither a new injective-resolution argument nor the generic ringed-topos adjunction statement is needed.",
+   "text": "Derive Mod.extendRestrictAdjunction using Adjunction.derivedAdjunction with the chosen derived categories. Transport its right adjoint along the exact restriction functor comparison rightDerivedFunctorIsoMapDerivedCategory. This gives the ambient unbounded derived adjunction without reconstructing a canonical derived-category instance.",
    "uses": [
     "def-weil-pbc-condensed-coefficient-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/DerivedExtendScalars.lean",
-    "place": "WeilConjectures/CategoryTheory/ModuleObjects/DerivedExtendScalars.lean, derivedExtendMapDerivedCategoryAdjunction"
+    "place": "Mod.extendRestrictAdjunction; Adjunction.derivedAdjunction; rightDerivedFunctorIsoMapDerivedCategory"
    }
   },
   {
@@ -104,7 +104,7 @@
    }
   },
   {
-   "text": "The mapDerivedCategory composition constraints satisfy associativity and both unit laws by localization, and are natural under whiskering isomorphisms. Combine these with the underived scalar identities. Express each specified left-derived composition comparison as the corresponding mapDerivedCategory comparison conjugated by leftDerivedFunctorIsoMapDerivedCategory. Naturality cancels the intervening conjugations and proves both associativity laws and all three unit laws. Compatibility of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso with shifts, together with CommShift.ofIso_compatibility, gives both composition shift clauses. Prove the identity comparison shift-compatible by descending the identity comparison from complexes through the homotopy category and then the derived localization; this gives the remaining unit shift clause. The generic comparison and shift lemmas are proved as private helpers in this delivery. Their specialization to the eight concrete coefficient clauses remains the original named theorem condensedCoefficientCoherence with sorry. A full candidate passed standalone checking, but its artifact-producing compile exceeds 60 seconds; the remaining task is to simplify the resolution and shift interface and complete this specialization without changing the comparisons.",
+   "text": "The mapDerivedCategory composition constraints satisfy associativity and both unit laws by localization, and are natural under whiskering isomorphisms. Combine these with the underived scalar identities. Express each specified left-derived composition comparison as the corresponding mapDerivedCategory comparison conjugated by leftDerivedFunctorIsoMapDerivedCategory. Naturality cancels the intervening conjugations and proves both associativity laws and all three unit laws. Compatibility of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso with shifts, together with CommShift.ofIso_compatibility, gives both composition shift clauses. Prove the identity comparison shift-compatible by descending the identity comparison from complexes through the homotopy category and then the derived localization; this proves the remaining unit shift clause. Package the resulting identities as proved private generic scalarDerivedComp associativity, unit and shift lemmas and specialize them to the coefficient inclusions. Cache the canonical module structures in private proved helpers, registering them locally only within the generic helper section with the chosen derived categories supplied explicitly to the generic helpers. This avoids repeated reconstruction without changing any public signature, comparison, or shift structure. The eight clauses of condensedCoefficientCoherence are combined by the conjunction constructor, with no remaining sorry.",
    "uses": [
     "def-weil-pbc-condensed-coefficient-comparisons"
    ],
@@ -135,7 +135,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
-  "place": "A4 stage-3 proof, 2026-10-16: explicit continuous-basis finite free construction; existing source exact scalar-change and derived adjunction APIs; proved generic comparison coherence tools by adjunction uniqueness, localization and isomorphism transport; concrete coherence specialization still open; direct preservation of the assumed colimit."
+  "place": "G2 stage-3 completion, 2026-10-16: complete all eight canonical coefficient coherence clauses by specializing proved scalar/derived transport lemmas. Private canonical module-structure caches have proof-only scope and the generic derived lemmas accept the chosen derived categories. The two exact coefficient calculus proofs share a proved scalarCalculus helper. Reuse the source continuousBasisSheafIso and Mod.mapFreeRestrictedRegularIso instead of duplicate local constructions; all public signatures and specified comparison maps are unchanged."
  },
  "mathlib_searches": [
   {
@@ -326,13 +326,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-593a5",
-  "group": "A4",
+  "reviewer": "X-7687c",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261015T185002-L-881934",
+  "landing": "20261016T054836-L-157364",
   "kind": "interface",
-  "note": "independent Codex review: All four signatures unchanged; proofs match node metadata; delivered module and sole direct importer CondensedQbarExchangeEquality compile cleanly (56.0s/27.2s); all 38 axiom checks acceptable, with sorryAx only through existing upstream obligations."
+  "note": "independent Codex review: Delivered module and DAG node matched against packet, baseline declarations, compilation, direct importer, and permitted axioms"
  }
 }

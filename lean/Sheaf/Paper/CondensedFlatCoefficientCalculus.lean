@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
-import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Exact condensed coefficient changes and their derived tensor calculus
 
@@ -34,7 +33,94 @@ open scoped CategoryTheory.Functor
 -- Keep canonical resolution comparisons opaque to implicit instance matching.
 attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory
   CategoryTheory.Functor.CommShift.ofIso CategoryTheory.Functor.leftDerivedFunctor
-  CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Mod.extendScalars
+
+section ModuleCacheScope
+
+-- Package the canonical module structures once, before substituting coefficient rings.
+namespace CategoryTheory
+section ModuleStructures
+variable {C : Type uC} [Category.{vC} C] [Abelian C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{vC} C] [Abelian.HasFunctorialFlatResolution C]
+
+@[instance_reducible]
+private noncomputable def scalarAbelian (R : C) [MonObj R] [IsCommMonObj R] :
+  Abelian (Mod C R) := inferInstance
+
+@[instance_reducible]
+private noncomputable def scalarMonoidal (R : C) [MonObj R] [IsCommMonObj R] :
+  MonoidalCategory (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+@[instance_reducible]
+private noncomputable def scalarHasDerived (R : C) [MonObj R] [IsCommMonObj R] :
+    HasDerivedCategory.{vC} (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarMonoidalAdditive (R : C) [MonObj R] [IsCommMonObj R] :
+  MonoidalPreadditive (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarGrothendieck (R : C) [MonObj R] [IsCommMonObj R] :
+  IsGrothendieckAbelian.{vC} (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarCountable (R : C) [MonObj R] [IsCommMonObj R] :
+  HasCountableCoproducts (Mod C R) := inferInstance
+
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarIntColimits (R : C) [MonObj R] [IsCommMonObj R] :
+  HasColimitsOfShape ℤ (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarExactIntColimits (R : C) [MonObj R] [IsCommMonObj R] :
+  HasExactColimitsOfShape ℤ (Mod C R) := inferInstance
+
+private theorem scalarFlatResolution (R : C) [MonObj R] [IsCommMonObj R] :
+  Abelian.HasFunctorialFlatResolution (Mod C R) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarTensor4 (R : C) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Mod C R)) :
+    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarTensor12 (R : C) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ : GradedObject ℤ (Mod C R)) :
+    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarTensor23 (R : C) [MonObj R] [IsCommMonObj R]
+    (X₁ X₂ X₃ : GradedObject ℤ (Mod C R)) :
+    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarTensorColimits (R : C) [MonObj R] [IsCommMonObj R]
+    (X : Mod C R) :
+    PreservesColimitsOfShape ℤ ((curriedTensor (Mod C R)).obj X) := inferInstance
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private theorem scalarFlipTensorColimits (R : C) [MonObj R] [IsCommMonObj R]
+    (X : Mod C R) :
+    PreservesColimitsOfShape ℤ ((curriedTensor (Mod C R)).flip.obj X) := inferInstance
+
+end ModuleStructures
+end CategoryTheory
+
+attribute [local instance 2000] CategoryTheory.scalarAbelian
+attribute [local instance 2000] CategoryTheory.scalarMonoidal
+attribute [local instance 2000] CategoryTheory.scalarMonoidalAdditive
+attribute [local instance 2000] CategoryTheory.scalarGrothendieck
+attribute [local instance 2000] CategoryTheory.scalarCountable
+attribute [local instance 2000] CategoryTheory.scalarIntColimits
+attribute [local instance 2000] CategoryTheory.scalarExactIntColimits
+attribute [local instance 2000] CategoryTheory.scalarFlatResolution
+attribute [local instance 2000] CategoryTheory.scalarTensor4
+attribute [local instance 2000] CategoryTheory.scalarTensor12
+attribute [local instance 2000] CategoryTheory.scalarTensor23
+attribute [local instance 2000] CategoryTheory.scalarTensorColimits
+attribute [local instance 2000] CategoryTheory.scalarFlipTensorColimits
 
 section CoherenceTools
 
@@ -571,7 +657,156 @@ private lemma leftUnit_shift (A : C ⥤ C) [A.Additive]
 end LeftShift
 end CategoryTheory.Functor
 
+namespace CategoryTheory
+section ScalarDerived
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+variable {C : Type uC} [Category.{vC} C] [Abelian C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{vC} C] [Abelian.HasFunctorialFlatResolution C]
+  {R S U V : C} [MonObj R] [MonObj S] [MonObj U] [MonObj V]
+  [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj U] [IsCommMonObj V]
+  [HasDerivedCategory.{vC} (Mod C R)] [HasDerivedCategory.{vC} (Mod C S)]
+  [HasDerivedCategory.{vC} (Mod C U)] [HasDerivedCategory.{vC} (Mod C V)]
+
+private theorem scalarCalculus (φ : R ⟶ S) [IsMonHom φ]
+    [PreservesFiniteLimits (Mod.extendScalars φ)] :
+    let := Functor.CommShift.ofIso
+      (Mod.extendScalars φ).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+    PreservesFiniteLimits (Mod.extendScalars φ) ∧
+    PreservesFiniteColimits (Mod.extendScalars φ) ∧
+    PreservesFiniteLimits
+      (Mod.comap φ :
+        Mod C S ⥤
+          Mod C R) ∧
+    PreservesFiniteColimits
+      (Mod.comap φ :
+        Mod C S ⥤
+          Mod C R) ∧
+    Nonempty ((Mod.extendScalars φ) ⊣ (Mod.comap
+      φ)) ∧
+    Nonempty (DerivedCategory.Q ⋙ (Mod.extendScalars φ).leftDerivedFunctor ≅
+      (Mod.extendScalars φ).mapHomologicalComplex
+        (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧
+    Nonempty ((Mod.extendScalars φ).leftDerivedFunctor ⊣
+      (Mod.comap φ).mapDerivedCategory) ∧
+    Nonempty ((Mod.extendScalars φ).leftDerivedFunctor ≅
+      (Mod.extendScalars φ).mapDerivedCategory) ∧
+    (Mod.extendScalars φ).leftDerivedFunctor.IsTriangulated ∧
+    (∀ n : ℤ, Nonempty (shiftFunctor (DerivedCategory (Mod C R)) n ⋙
+      (Mod.extendScalars φ).leftDerivedFunctor ≅
+        (Mod.extendScalars φ).leftDerivedFunctor ⋙
+        shiftFunctor (DerivedCategory (Mod C S)) n)) := by
+  let f := Mod.extendScalars φ
+  let := Functor.CommShift.ofIso f.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance,
+    ⟨Mod.extendRestrictAdjunction _⟩, ?_,
+    ⟨((Mod.extendRestrictAdjunction φ).derivedAdjunction).ofNatIsoRight
+      (Mod.comap φ).rightDerivedFunctorIsoMapDerivedCategory⟩,
+    ⟨f.leftDerivedFunctorIsoMapDerivedCategory⟩, ?_, ?_⟩
+  · exact ⟨Functor.isoWhiskerLeft DerivedCategory.Q
+      f.leftDerivedFunctorIsoMapDerivedCategory ≪≫ f.mapDerivedCategoryFactors⟩
+  · let e := f.leftDerivedFunctorIsoMapDerivedCategory.symm
+    have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofIso_compatibility e ℤ
+    exact Functor.isTriangulated_of_iso e
+  · intro n
+    exact ⟨f.leftDerivedFunctor.commShiftIso n⟩
+
+
+private noncomputable abbrev scalarDerivedComp
+    (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g]
+    (fg : R ⟶ U) [IsMonHom fg] (h : f ≫ g = fg)
+    [PreservesFiniteLimits (Mod.extendScalars f)]
+    [PreservesFiniteLimits (Mod.extendScalars g)]
+    [PreservesFiniteLimits (Mod.extendScalars fg)] :=
+  ((Mod.extendScalars f).leftDerivedFunctorCompIso (Mod.extendScalars g)).symm ≪≫
+    ((Mod.extendScalars f) ⋙ (Mod.extendScalars g)).leftDerivedFunctorNatIso
+      (scalarComp f g fg h)
+
+private noncomputable abbrev scalarDerivedUnit
+    (a : R ⟶ R) [IsMonHom a] (ha : a = 𝟙 R)
+    [PreservesFiniteLimits (Mod.extendScalars a)] :=
+  (Mod.extendScalars a).leftDerivedFunctorNatIso (scalarUnit a ha) ≪≫
+    (𝟭 (Mod C R)).leftDerivedFunctorIsoMapDerivedCategory ≪≫
+      Functor.mapDerivedCategoryIdIso (Mod C R)
+
+private lemma scalarDerivedComp_assoc
+    (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g] (j : U ⟶ V) [IsMonHom j]
+    (fg : R ⟶ U) [IsMonHom fg] (gj : S ⟶ V) [IsMonHom gj]
+    (fgj : R ⟶ V) [IsMonHom fgj]
+    (hfg : f ≫ g = fg) (hgj : g ≫ j = gj) (hfgj : f ≫ gj = fgj) (hfgj' : fg ≫ j = fgj)
+    [PreservesFiniteLimits (Mod.extendScalars f)]
+    [PreservesFiniteLimits (Mod.extendScalars g)]
+    [PreservesFiniteLimits (Mod.extendScalars j)]
+    [PreservesFiniteLimits (Mod.extendScalars fg)]
+    [PreservesFiniteLimits (Mod.extendScalars gj)]
+    [PreservesFiniteLimits (Mod.extendScalars fgj)] :
+    Functor.isoWhiskerRight (scalarDerivedComp f g fg hfg)
+        (Mod.extendScalars j).leftDerivedFunctor ≪≫ scalarDerivedComp fg j fgj hfgj' =
+      Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (Mod.extendScalars f).leftDerivedFunctor
+          (scalarDerivedComp g j gj hgj) ≪≫ scalarDerivedComp f gj fgj hfgj := by
+  unfold scalarDerivedComp
+  apply Functor.leftComp_assoc
+  exact scalarComp_assoc f g j fg gj fgj hfg hgj hfgj hfgj'
+
+private lemma scalarDerivedComp_id_comp
+    (a : R ⟶ R) [IsMonHom a] (ha : a = 𝟙 R)
+    (f : R ⟶ S) [IsMonHom f] (h : a ≫ f = f)
+    [PreservesFiniteLimits (Mod.extendScalars a)]
+    [PreservesFiniteLimits (Mod.extendScalars f)] :
+    scalarDerivedComp a f f h =
+      Functor.isoWhiskerRight (scalarDerivedUnit a ha) (Mod.extendScalars f).leftDerivedFunctor ≪≫
+        Functor.leftUnitor _ := by
+  simp only [scalarDerivedComp, Functor.leftComp_transport]
+  simp only [scalarDerivedUnit, Functor.leftDerivedFunctorNatIso,
+    Iso.trans_assoc, Iso.symm_self_id_assoc]
+  apply Functor.transportComp_id_comp
+  apply Functor.derivedComp_id_comp
+  exact scalarComp_id_comp a ha f h
+
+private lemma scalarDerivedComp_comp_id
+    (a : S ⟶ S) [IsMonHom a] (ha : a = 𝟙 S)
+    (f : R ⟶ S) [IsMonHom f] (h : f ≫ a = f)
+    [PreservesFiniteLimits (Mod.extendScalars a)]
+    [PreservesFiniteLimits (Mod.extendScalars f)] :
+    scalarDerivedComp f a f h =
+      Functor.isoWhiskerLeft (Mod.extendScalars f).leftDerivedFunctor (scalarDerivedUnit a ha) ≪≫
+        Functor.rightUnitor _ := by
+  simp only [scalarDerivedComp, Functor.leftComp_transport]
+  simp only [scalarDerivedUnit, Functor.leftDerivedFunctorNatIso,
+    Iso.trans_assoc, Iso.symm_self_id_assoc]
+  apply Functor.transportComp_comp_id
+  apply Functor.derivedComp_comp_id
+  exact scalarComp_comp_id a ha f h
+
+private lemma scalarDerivedComp_shift
+    (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g]
+    (fg : R ⟶ U) [IsMonHom fg] (h : f ≫ g = fg)
+    [PreservesFiniteLimits (Mod.extendScalars f)]
+    [PreservesFiniteLimits (Mod.extendScalars g)]
+    [PreservesFiniteLimits (Mod.extendScalars fg)] :
+    let := Functor.CommShift.ofIso
+      (Mod.extendScalars f).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+    let := Functor.CommShift.ofIso
+      (Mod.extendScalars g).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+    let := Functor.CommShift.ofIso
+      (Mod.extendScalars fg).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+    NatTrans.CommShift (scalarDerivedComp f g fg h).hom ℤ :=
+  Functor.leftComp_shift _ _ (scalarComp f g fg h)
+
+private lemma scalarDerivedUnit_shift
+    (a : R ⟶ R) [IsMonHom a] (ha : a = 𝟙 R)
+    [PreservesFiniteLimits (Mod.extendScalars a)] :
+    let := Functor.CommShift.ofIso
+      (Mod.extendScalars a).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
+    NatTrans.CommShift (scalarDerivedUnit a ha).hom ℤ :=
+  Functor.leftUnit_shift _ (scalarUnit a ha)
+end ScalarDerived
+end CategoryTheory
+
 end CoherenceTools
+
+end ModuleCacheScope
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -584,161 +819,6 @@ section FiniteFree
 set_option maxRecDepth 2048
 set_option backward.isDefEq.respectTransparency false
 
-private noncomputable abbrev fieldPresheaf (E : Type) [TopologicalSpace E] [Ring E]
-    [IsTopologicalRing E] : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1} :=
-  Profinite.continuousMapRingPresheaf E ⋙ forget₂ RingCat Ab
-
-private noncomputable def postcompLinear {E F G : Type} [Field E] [Field F] [Field G]
-    [TopologicalSpace E] [TopologicalSpace F] [TopologicalSpace G]
-    [IsTopologicalRing E] [IsTopologicalRing F] [IsTopologicalRing G]
-    [Algebra E F] [Algebra E G]
-    (f : F →L[E] G) : fieldPresheaf F ⟶ fieldPresheaf G where
-  app S := AddCommGrpCat.ofHom
-    { toFun x := ULift.up ((⟨f, f.continuous⟩ : ContinuousMap F G).comp x.down)
-      map_zero' := by apply ULift.ext; ext; exact f.map_zero
-      map_add' x y := by apply ULift.ext; ext; exact f.map_add _ _ }
-  naturality _ _ _ := rfl
-
-
-private noncomputable def presheafCoordinate {E F : Type} [Field E] [Field F]
-    [TopologicalSpace E] [TopologicalSpace F]
-    [IsTopologicalRing E] [IsTopologicalRing F] [Algebra E F]
-    (ha : Continuous (algebraMap E F)) (f : F →L[E] E) :
-    (Mod.comap (Functor.whiskerRight
-      (Profinite.continuousMapRingPresheafMap (algebraMap E F) ha)
-      (forget₂ RingCat Ab))).obj (Mod.regular (fieldPresheaf F)) ⟶
-      Mod.regular (fieldPresheaf E) :=
-  Mod.homMk (postcompLinear f) (by
-    ext S : 2
-    apply AddCommGrpCat.hom_ext_toIntLinearMap
-    apply TensorProduct.ext'
-    intro a b
-    apply ULift.ext
-    ext x
-    change f (algebraMap E F (a.down x) * b.down x) = a.down x * f (b.down x)
-    simpa [Algebra.smul_def] using f.map_smul (a.down x) (b.down x))
-
-private noncomputable def presheafVector {E F : Type} [Field E] [Field F]
-    [TopologicalSpace E] [TopologicalSpace F]
-    [IsTopologicalRing E] [IsTopologicalRing F] [Algebra E F]
-    (ha : Continuous (algebraMap E F)) (v : F) :
-    Mod.regular (fieldPresheaf E) ⟶
-      (Mod.comap (Functor.whiskerRight
-        (Profinite.continuousMapRingPresheafMap (algebraMap E F) ha)
-        (forget₂ RingCat Ab))).obj (Mod.regular (fieldPresheaf F)) :=
-  let f : E →L[E] F :=
-    ⟨(LinearMap.id : E →ₗ[E] E).smulRight v, by
-      change Continuous (fun x : E ↦ x • v)
-      simp only [Algebra.smul_def]
-      exact continuous_mul.comp (ha.prodMk continuous_const)⟩
-  Mod.homMk (postcompLinear f) (by
-    ext S : 2
-    apply AddCommGrpCat.hom_ext_toIntLinearMap
-    apply TensorProduct.ext'
-    intro a b
-    apply ULift.ext
-    ext x
-    change f (a.down x * b.down x) = algebraMap E F (a.down x) * f (b.down x)
-    simpa [Algebra.smul_def] using f.map_smul (a.down x) (b.down x))
-
-private theorem presheaf_basis_iso {E F : Type} [Field E] [Field F]
-    [TopologicalSpace E] [TopologicalSpace F]
-    [IsTopologicalRing E] [IsTopologicalRing F] [Algebra E F]
-    (ha : Continuous (algebraMap E F)) {n : ℕ} (b : Module.Basis (Fin n) E F)
-    (hb : ∀ i, Continuous (b.coord i)) :
-    Nonempty ((Mod.comap (Functor.whiskerRight
-      (Profinite.continuousMapRingPresheafMap (algebraMap E F) ha)
-      (forget₂ RingCat Ab))).obj (Mod.regular (fieldPresheaf F)) ≅
-      Mod.finiteFree (fieldPresheaf E) n) := by
-  classical
-  let c i := presheafCoordinate ha (⟨b.coord i, hb i⟩ : F →L[E] E)
-  let v i := presheafVector ha (b i)
-  refine ⟨⟨biproduct.lift c, biproduct.desc v, ?_, ?_⟩⟩
-  · rw [biproduct.lift_desc]
-    apply Mod.hom_ext
-    change (Mod.forget _).map (∑ i, c i ≫ v i) = 𝟙 _
-    rw [Functor.map_sum]
-    ext S x
-    apply ULift.ext
-    ext y
-    simp only [NatTrans.app_sum, NatTrans.id_app]
-    change (AddCommGrpCat.homAddEquiv (∑ i, (c i ≫ v i).hom.app S) x).down y = x.down y
-    rw [_root_.map_sum, AddMonoidHom.finsetSum_apply]
-    change (ULift.moduleEquiv (R := ℤ) (M := ContinuousMap S.unop F)
-      (∑ i, (((c i ≫ v i).hom.app S).hom x))) y = x.down y
-    rw [_root_.map_sum]
-    simp only [ContinuousMap.sum_apply]
-    change (∑ i, b.coord i (x.down y) • b i) = x.down y
-    simpa only [Module.Basis.coord_apply] using b.sum_repr (x.down y)
-  · apply biproduct.hom_ext'
-    intro i
-    apply biproduct.hom_ext
-    intro j
-    simp only [Category.assoc, biproduct.ι_desc_assoc, biproduct.lift_π,
-      Category.id_comp, biproduct.ι_π]
-    apply Mod.hom_ext
-    ext S x
-    apply ULift.ext
-    ext y
-    change b.coord j (x.down y • b i) = _
-    by_cases hij : i = j
-    · subst j
-      simp [_root_.map_smul, Module.Basis.coord_apply]
-    · simp [_root_.map_smul, Module.Basis.coord_apply, hij]
-
-private theorem map_preserves_free
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [MonoidalCategory C] [MonoidalCategory D]
-    [MonoidalPreadditive C] [MonoidalPreadditive D]
-    [∀ X : C, PreservesFiniteColimits (tensorLeft X)]
-    [∀ X : D, PreservesFiniteColimits (tensorLeft X)]
-    (L : C ⥤ D) [L.LaxMonoidal] [L.Additive]
-    {R S : C} [MonObj R] [MonObj S] (φ : R ⟶ S) [IsMonHom φ]
-    {n : ℕ} (e : (Mod.comap φ).obj (Mod.regular S) ≅ Mod.finiteFree R n) :
-    Nonempty ((Mod.comap (L.map φ)).obj (Mod.regular (L.obj S)) ≅
-      Mod.finiteFree (L.obj R) n) := by
-  have : (L.mapMod R).Additive := ⟨by
-    intro X Y f g
-    exact Mod.hom_ext _ _ (L.map_add (f := f.hom) (g := g.hom))⟩
-  let reg (A : C) [MonObj A] : (L.mapMod A).obj (Mod.regular A) ≅
-      Mod.regular (L.obj A) := Mod.isoMk (Iso.refl _) (by simp [Mod.act])
-  exact ⟨((L.mapModComapIso φ).app (Mod.regular S) ≪≫
-      (Mod.comap (L.map φ)).mapIso (reg S)).symm ≪≫
-    (L.mapMod R).mapIso e ≪≫ (L.mapMod R).mapBiproduct _ ≪≫
-      biproduct.mapIso (fun _ : Fin n ↦ reg R)⟩
-
-private def restrictedRegularIso
-    {C : Type*} [Category C] [MonoidalCategory C]
-    {A B B' : C} [MonObj A] [MonObj B] [MonObj B']
-    (φ : A ⟶ B) (φ' : A ⟶ B') [IsMonHom φ] [IsMonHom φ']
-    (e : B ≅ B') [IsMonHom e.hom] (w : φ ≫ e.hom = φ') :
-    (Mod.comap φ).obj (Mod.regular B) ≅ (Mod.comap φ').obj (Mod.regular B') :=
-  Mod.isoMk e (by
-    change (φ ▷ B ≫ μ[B]) ≫ e.hom = A ◁ e.hom ≫ φ' ▷ B' ≫ μ[B']
-    rw [Category.assoc, IsMonHom.mul_hom, MonoidalCategory.tensorHom_def, Category.assoc,
-      ← comp_whiskerRight_assoc, w, whisker_exchange_assoc])
-
-private theorem transport_free
-    {C : Type*} [Category C] [Abelian C] [MonoidalCategory C]
-    [MonoidalPreadditive C] [∀ X : C, PreservesFiniteColimits (tensorLeft X)]
-    {R R' S S' : C} [MonObj R] [MonObj R'] [MonObj S] [MonObj S']
-    (a : R ≅ R') (b : S ≅ S') [IsMonHom a.hom] [IsMonHom b.hom]
-    (φ : R ⟶ S) (φ' : R' ⟶ S') [IsMonHom φ] [IsMonHom φ']
-    (w : a.hom ≫ φ' = φ ≫ b.hom) {n : ℕ}
-    (e : (Mod.comap φ).obj (Mod.regular S) ≅ Mod.finiteFree R n) :
-    Nonempty ((Mod.comap φ').obj (Mod.regular S') ≅ Mod.finiteFree R' n) := by
-  let L : Mod C R ⥤ Mod C R' := Mod.comap a.inv
-  let t : L.obj ((Mod.comap φ).obj (Mod.regular S)) ≅
-      (Mod.comap φ').obj (Mod.regular S') :=
-    (Mod.comapComp a.inv φ).symm.app (Mod.regular S) ≪≫
-      restrictedRegularIso (a.inv ≫ φ) φ' b (by
-        rw [Category.assoc, ← w, Iso.inv_hom_id_assoc])
-  let r : L.obj (Mod.regular R) ≅ Mod.regular R' :=
-    restrictedRegularIso a.inv (𝟙 R') a (by simp) ≪≫
-      (Mod.comapId R').app (Mod.regular R')
-  exact ⟨t.symm ≪≫ L.mapIso e ≪≫ L.mapBiproduct _ ≪≫
-    biproduct.mapIso (fun _ : Fin n ↦ r)⟩
-
 private theorem point_finiteFree (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) :
     Nonempty ((Mod.comap (Profinite.padicSubfieldRingObjMap.{u} ℓ h)).obj
@@ -747,7 +827,6 @@ private theorem point_finiteFree (ℓ : ℕ) [Fact ℓ.Prime]
         (@Module.finrank E F inferInstance inferInstance
           (Module.compHom F (IntermediateField.inclusion h).toRingHom))) := by
   let := Sheaf.symmetricCategory (coherentTopology Profinite.{u}) Ab.{u + 1}
-  let := Functor.functorCategoryMonoidalClosed Profinite.{u}ᵒᵖ Ab.{u + 1}
   let := (IntermediateField.inclusion h).toRingHom.toAlgebra
   have : IsScalarTower ℚ_[ℓ] E F := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : FiniteDimensional E F := Module.Finite.of_restrictScalars_finite ℚ_[ℓ] E F
@@ -755,20 +834,7 @@ private theorem point_finiteFree (ℓ : ℕ) [Fact ℓ.Prime]
   have hb (i : Fin (Module.finrank E F)) : Continuous (b.coord i) :=
     ((b.coord i).restrictScalars ℚ_[ℓ]).continuous_of_finiteDimensional
   have ha : Continuous (algebraMap E F) := continuous_subtype_val.subtype_mk _
-  obtain ⟨e⟩ := presheaf_basis_iso.{u} ha b hb
-  obtain ⟨e'⟩ := map_preserves_free (presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    (Functor.whiskerRight
-      (Profinite.continuousMapRingPresheafMap (algebraMap E F) ha)
-      (forget₂ RingCat Ab)) e
-  exact transport_free
-    (Sheaf.sheafifyRingPresheafIso (coherentTopology Profinite.{u})
-      (Profinite.continuousMapRingSheaf E))
-    (Sheaf.sheafifyRingPresheafIso (coherentTopology Profinite.{u})
-      (Profinite.continuousMapRingSheaf F))
-    _ (Profinite.padicSubfieldRingObjMap ℓ h) (by
-      rw [Profinite.padicSubfieldRingObjMap, Sheaf.sheafCompose_map_eq]
-      simp only [Iso.hom_inv_id_assoc]
-      rfl) e'
+  exact ⟨Profinite.continuousBasisSheafIso ha _ b hb⟩
 
 private theorem scheme_finiteFree (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) :
@@ -783,7 +849,8 @@ private theorem scheme_finiteFree (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     rightExactFunctor_le_additiveFunctor _ _ _ (by
       rw [rightExactFunctor_iff]
       infer_instance)
-  exact map_preserves_free (upperStarFromPoint T) (Profinite.padicSubfieldRingObjMap ℓ h) e
+  exact ⟨Mod.mapFreeRestrictedRegularIso (upperStarFromPoint T)
+    (Profinite.padicSubfieldRingObjMap ℓ h) _ e⟩
 
 end FiniteFree
 
@@ -837,18 +904,10 @@ theorem condensedFiniteCoefficientCalculus
       (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ≅ (Mod.extendScalars
         (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ⋙ shiftFunctor (DerivedCategory (Mod
         (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ F))) n)) := by
-  let f := Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)
-  refine ⟨scheme_finiteFree T ℓ h, inferInstance, inferInstance,
-    inferInstance, inferInstance, ⟨Mod.extendRestrictAdjunction _⟩, ?_,
-    ⟨Mod.derivedExtendMapDerivedCategoryAdjunction _⟩,
-    ⟨f.leftDerivedFunctorIsoMapDerivedCategory⟩, ?_, ?_⟩
-  · exact ⟨Functor.isoWhiskerLeft DerivedCategory.Q
-      f.leftDerivedFunctorIsoMapDerivedCategory ≪≫ f.mapDerivedCategoryFactors⟩
-  · let e := f.leftDerivedFunctorIsoMapDerivedCategory.symm
-    have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofIso_compatibility e ℤ
-    exact Functor.isTriangulated_of_iso e
-  · intro n
-    exact ⟨f.leftDerivedFunctor.commShiftIso n⟩
+  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  exact ⟨scheme_finiteFree T ℓ h, scalarCalculus (padicSubfieldRingObjMap T ℓ h)⟩
 
 /-- Source: Compatibility.lean, A0.2 and Flat; ordinary module tensor adjunction;
 TwoColimit.lean, ExtendScalars
@@ -897,18 +956,10 @@ theorem condensedAlgClCoefficientCalculus
         (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).leftDerivedFunctor ⋙
         shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj
         T ℓ))) n)) := by
-  let f := Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)
-  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance,
-    ⟨Mod.extendRestrictAdjunction _⟩, ?_,
-    ⟨Mod.derivedExtendMapDerivedCategoryAdjunction _⟩,
-    ⟨f.leftDerivedFunctorIsoMapDerivedCategory⟩, ?_, ?_⟩
-  · exact ⟨Functor.isoWhiskerLeft DerivedCategory.Q
-      f.leftDerivedFunctorIsoMapDerivedCategory ≪≫ f.mapDerivedCategoryFactors⟩
-  · let e := f.leftDerivedFunctorIsoMapDerivedCategory.symm
-    have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofIso_compatibility e ℤ
-    exact Functor.isTriangulated_of_iso e
-  · intro n
-    exact ⟨f.leftDerivedFunctor.commShiftIso n⟩
+  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
 
 -- Keep the resolution constructions behind their proved comparison API.
 /-- Coherence of the canonical multiplication and unit comparisons.
@@ -969,7 +1020,52 @@ theorem condensedCoefficientCoherence
       NatTrans.CommShift (derivedExtendScalarsCompIso T ℓ h).hom ℤ) ∧
     (∀ E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ), NatTrans.CommShift
       (condensedCoefficientUnitIso T ℓ E).hom ℤ) := by
-  sorry
+  let := scalarAbelian (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarMonoidal (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro E F G H h k l
+    exact scalarDerivedComp_assoc
+      (padicSubfieldRingObjMap T ℓ h) (padicSubfieldRingObjMap T ℓ k)
+      (padicSubfieldRingObjMap T ℓ l) (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (padicSubfieldRingObjMap T ℓ (k.trans l))
+      (padicSubfieldRingObjMap T ℓ ((h.trans k).trans l))
+      (condensedCoefficientMap_comp T ℓ h k) (condensedCoefficientMap_comp T ℓ k l)
+      (condensedCoefficientMap_comp T ℓ h (k.trans l))
+      (condensedCoefficientMap_comp T ℓ (h.trans k) l)
+  · intro E F G h k
+    exact scalarDerivedComp_assoc
+      (padicSubfieldRingObjMap T ℓ h) (padicSubfieldRingObjMap T ℓ k)
+      (padicSubfieldRingObjToPadicAlgCl T ℓ G)
+      (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (padicSubfieldRingObjToPadicAlgCl T ℓ F) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (condensedCoefficientMap_comp T ℓ h k)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ k)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ h)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ (h.trans k))
+  · intro E F h
+    exact scalarDerivedComp_id_comp (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E) (padicSubfieldRingObjMap T ℓ h)
+      (condensedCoefficientMap_comp T ℓ (le_refl E) h)
+  · intro E F h
+    exact scalarDerivedComp_comp_id (padicSubfieldRingObjMap T ℓ (le_refl F))
+      (condensedCoefficientMap_id T ℓ F) (padicSubfieldRingObjMap T ℓ h)
+      (condensedCoefficientMap_comp T ℓ h (le_refl F))
+  · intro E
+    exact scalarDerivedComp_id_comp (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ (le_refl E))
+  · intro E F G h k
+    exact scalarDerivedComp_shift (padicSubfieldRingObjMap T ℓ h)
+      (padicSubfieldRingObjMap T ℓ k) (padicSubfieldRingObjMap T ℓ (h.trans k))
+      (condensedCoefficientMap_comp T ℓ h k)
+  · intro E F h
+    exact scalarDerivedComp_shift (padicSubfieldRingObjMap T ℓ h)
+      (padicSubfieldRingObjToPadicAlgCl T ℓ F) (padicSubfieldRingObjToPadicAlgCl T ℓ E)
+      (padicSubfieldRingObjMap_comp_toPadicAlgCl T ℓ h)
+  · intro E
+    exact scalarDerivedUnit_shift (padicSubfieldRingObjMap T ℓ (le_refl E))
+      (condensedCoefficientMap_id T ℓ E)
 
 /-- Tensor preserves the finite-coefficient colimit, in the category of modules over E.
 Source: Compatibility.lean, RingObj; Stacks Tags 03DB, 03EP, 03EU
