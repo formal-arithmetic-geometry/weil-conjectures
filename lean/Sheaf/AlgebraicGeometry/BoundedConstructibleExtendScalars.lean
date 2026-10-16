@@ -48,7 +48,7 @@ private noncomputable def pullbackExtendScalarsIso :
     (Functor.associator _ _ _).symm
   exact a.leftAdjointUniq (b.ofNatIsoRight e)
 
-private lemma fp_iff_of_iso {X : Scheme.{u}}
+lemma fp_iff_of_iso {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (e : M ≅ N) : Mod.IsFinitelyPresented R M ↔ Mod.IsFinitelyPresented R N := by
@@ -60,7 +60,7 @@ private lemma fp_iff_of_iso {X : Scheme.{u}}
     rcases h with ⟨n, m, f, ⟨i⟩⟩
     exact ⟨n, m, f, ⟨e ≪≫ i⟩⟩
 
-private lemma fp_map {X Y : Scheme.{u}}
+lemma fp_map {X Y : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (S : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [MonObj S]
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
@@ -99,7 +99,7 @@ private noncomputable def extendScalarsRegularIso :
 
 
 omit [IsCommMonObj S] in
-private lemma fp_extend
+lemma fp_extend
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (h : Mod.IsFinitelyPresented R M) :
     Mod.IsFinitelyPresented S ((Mod.extendScalars φ).obj M) :=

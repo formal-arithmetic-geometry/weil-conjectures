@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-condensed-local-model-gluing",
+ "kind": "statement",
+ "title": "Gluing given local coefficient models after a common finite enlargement",
+ "statement": "Let T and X be schemes, X quasi-separated, f:X→T any morphism, ℓ prime, E a finite intermediate coefficient field [def-weil-finite-subextension-directed-set], and U_i→X a finite affine pro-etale cover [def-weil-pbc-proetale-covering]. For an internal module M over f⁻¹Ω_T [def-weil-pbc-condensed-e-module-category], suppose finitely presented modules N_i over the restrictions of f⁻¹E_T are given, together with isomorphisms of their Ω-extensions to M restricted to U_i. Then some finite F containing E admits an internal f⁻¹F_T-module P whose restriction to U_i is isomorphic to F⊗_E N_i and whose Ω-extension is isomorphic to M. The local isomorphisms are part of the conclusion; local finite presentation of P is not assumed or asserted.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, (Obj) descent paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "On every pairwise and triple overlap of the finite affine pro-etale cover, quasi-separatedness makes the overlap qcqs. Use the existing CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence to identify internal modules in abelian sheaves with module sheaves over the reconstructed sectionwise ring; its forward functor keeps the underlying abelian sheaf and restriction maps. This equivalence respects regular modules, finite coproducts and cokernels and therefore finite presentations. Restrictions commute sectionwise; scalar extension commutes by uniqueness of left adjoints to the identified restriction-of-scalars functors. Transport the supplied data across this equivalence and the weakly-etale localization equivalence, using only the coefficient-independent site clause of localization.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen extended local isomorphisms to M give transition isomorphisms on pairwise overlaps. Use the Hom clause of the qcqs calculus and tensor adjunction to lift their maps and inverses to finite coefficient stages. Since there are finitely many pairs and triples, filteredness puts them at one common stage F containing E. Eventual equality in the same Hom colimit enforces all inverse, diagonal and cocycle equations at one further common stage.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ringed-site module-sheaf gluing to these transition isomorphisms and their cocycle. Transport the resulting sheaf back to an internal module P over f⁻¹F_T, retaining the specified local comparisons with the scalar extensions of N_i. No finite-presentation conclusion for P is included or needed here.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback-tensor comparison identifies the restrictions of the extension of P with the extended local models. Their maps to M agree on overlaps by the prescribed gluing equations. Glue these maps and their inverses by sheaf-Hom gluing. Its uniqueness shows that the two composites are identities. For an empty cover the base is empty and the unique zero module gives the same conclusion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-covering",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local finite coefficient models of finitely presented module sheaves glue after enlarging the coefficient field so that overlap maps and cocycle identities descend",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite coefficient models of finitely presented module sheaves glue after enlarging the coefficient field so that overlap maps and cocycle identities descend",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-16",
+   "verdict": "No exact match: finite presentation definitions and ordinary scheme gluing do not give finite coefficient descent for these internal module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(field|coefficient|matrix)|glue.*coefficient|matrix.*descen",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match: finite presentation definitions and ordinary scheme gluing do not give finite coefficient descent for these internal module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between modules internal to abelian sheaves and sheaves of modules over the associated sheaf of rings",
+   "results": "Eight ordinary sectionwise module APIs, no Mathlib equivalence. Independent repository grep finds the proved CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence; reuse this existing node in the gluing plan.",
+   "date": "2026-10-16",
+   "verdict": "Reuse existing project equivalence; no duplicate bridge is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLfpCoefficientModel",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocalModelGluing",
+  "file": "lean/Sheaf/Paper/CondensedLocalModelGluing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_gluing_of_local_models",
+  "statement": "theorem exists_finiteCoefficient_gluing_of_local_models\n    (T X : Scheme.{u}) [QuasiSeparatedSpace X]\n    (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)))\n    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (hfinite : Finite U.I₀) (haffine : ∀ i, IsAffine (U.X i))\n    (N : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} (U.f i)).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))))\n    (hN : ∀ i, Mod.IsFinitelyPresented\n      ((upperStar Ab.{u + 1} (U.f i)).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) (N i))\n    (e : ∀ i, Nonempty ((Mod.extendScalars\n      ((upperStar Ab.{u + 1} (U.f i)).map\n        ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E)))).obj\n          (N i) ≅\n      ((upperStar Ab.{u + 1} (U.f i)).mapMod\n        ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)) :\n    ∃ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F)\n      (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ F))),\n      (∀ i, Nonempty (\n        ((upperStar Ab.{u + 1} (U.f i)).mapMod\n          ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ F))).obj P ≅\n        (Mod.extendScalars ((upperStar Ab.{u + 1} (U.f i)).map\n          ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjMap T ℓ hEF)))).obj (N i))) ∧\n      Nonempty ((Mod.extendScalars\n        ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ F))).obj P ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-af7be",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-af7be",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079815",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and sole gluing hole matched all three DAG nodes; delivery modules, original shared module and direct importers compiled; axioms checked."
+ }
+}

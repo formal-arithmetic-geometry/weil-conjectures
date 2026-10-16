@@ -8,13 +8,9 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
-import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.Paper.ProfinitePointPullback
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import Sheaf.Paper.CondensedFinitePresentationMatrices
+import Sheaf.Paper.CondensedLocalModelGluing
 
 /-!
 # Finite coefficient models on one stratum
@@ -28,7 +24,7 @@ finite-presentation descent, steps 1--3 of the parent descent node.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
@@ -42,22 +38,17 @@ Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph;
 steps 1--3 of lem-weil-pbc-condensed-finite-presentation-descent.
 (blueprint: lem-weil-pbc-condensed-lfp-coefficient-model).
 
-Proof: the immersion identifies X with a subspace of the noetherian space T, so X is
-noetherian and qcqs. The point-pullback comparisons identify the displayed coefficient
-rings with the usual condensed rings on X and identify the displayed coefficient map
-with their inclusion. Refine a presentation cover to finitely many affine pro-etale
-objects. Their pairwise and triple overlaps are qcqs. The coefficient-colimit and qcqs
-section calculus lift the finitely many presentation-matrix entries to one finite field.
-Take their cokernels over that field. Scalar extension preserves these cokernels.
-The Hom clause of the same calculus and tensor adjunction descend the transition
-isomorphisms and their inverses on the overlaps. Eventual equality, at a common larger
-field, enforces both inverse identities, the diagonal identity, and the cocycle identity.
-Ringed-site module gluing now constructs a module on X. Weakly-etale localization and
-the pullback-tensor comparison identify its scalar extension locally with M. Sheaf-Hom
-gluing gives the global isomorphism. The descended presentation cover proves local finite
-presentation of the model. Empty X uses the empty cover and the zero model; zero ranks
-use empty matrices. Transport back along the coefficient comparisons gives exactly the
-rings, map, and isomorphism below. -/
+Proof: the immersion makes X a subspace of the noetherian space T, so X is
+noetherian and qcqs. The local-matrix theorem, applied to the displayed inverse-image
+coefficient rings, gives one finite field E, a finite affine cover, and presentation
+matrices over E whose extended cokernels identify with the restrictions of M. Each
+cokernel is finitely presented by its defining matrix. Apply the local-model gluing
+theorem to obtain a larger finite field F and a global model P with the prescribed
+local identifications and scalar-extension isomorphism. Extension of scalars preserves
+finite presentations: it preserves finite biproducts and cokernels and sends the
+regular module to the regular module. Transport these presentations through the local
+identifications of P. The same cover now witnesses local finite presentation of P.
+This argument includes the empty scheme, empty cover, and zero presentation ranks. -/
 theorem exists_lfp_finiteCoefficient_model_on_immersion
     (T X : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (f : X ⟶ T) [IsImmersion f] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -72,6 +63,17 @@ theorem exists_lfp_finiteCoefficient_model_on_immersion
         ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E)) M_E ∧
       Nonempty ((Mod.extendScalars
         ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))).obj M_E ≅ M) := by
-  sorry
+  let : TopologicalSpace.NoetherianSpace X := f.isEmbedding.isInducing.noetherianSpace
+  obtain ⟨E, U, hfinite, haffine, n, m, d, e⟩ :=
+    exists_common_finiteCoefficient_presentation_matrices T X f ℓ M hM
+  have hN : ∀ i, Mod.IsFinitelyPresented
+      ((upperStar Ab.{u + 1} (U.f i)).obj
+        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) (cokernel (d i)) :=
+    fun i ↦ ⟨n i, m i, d i, ⟨Iso.refl _⟩⟩
+  obtain ⟨F, hEF, P, eP, eM⟩ := exists_finiteCoefficient_gluing_of_local_models
+    T X f ℓ M E U hfinite haffine (fun i ↦ cokernel (d i)) hN e
+  refine ⟨F, P, ⟨U, fun i ↦ ?_⟩, eM⟩
+  obtain ⟨ePi⟩ := eP i
+  exact (fp_iff_of_iso ePi).mpr (fp_extend _ _ _ (hN i))
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-condensed-local-presentation-matrices",
+ "kind": "statement",
+ "title": "Simultaneous finite coefficient descent of local presentation matrices",
+ "statement": "Let T and X be schemes, X quasi-compact and quasi-separated, f:X→T any morphism, and ℓ prime. Let M be a locally finitely presented internal module over the inverse image f⁻¹Ω_T of the condensed coefficient ring [def-weil-pbc-condensed-e-module-category]. There exist a finite intermediate coefficient field E [def-weil-finite-subextension-directed-set], a finite affine pro-etale cover U_i→X [def-weil-pbc-proetale-covering], and finite matrices d_i over the pulled-back ring f⁻¹E_T on U_i, such that extending coker(d_i) to f⁻¹Ω_T gives the restriction of M to U_i. The cover and both presentation ranks may be empty or zero.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, (Obj) descent paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Refine the presentation cover to a finite affine pro-etale cover using Mathlib QuasiCompactCover.exists_hom. Inverse image is additive and preserves finite colimits and regular modules, hence finite free modules and finite presentations. The monoidal pullback-composition comparison transports the refined presentations. The finite-presentation transport uses the existing fp_iff_of_iso and fp_map helpers of BoundedConstructibleExtendScalars, now public; scalar extension uses its existing fp_extend helper. No duplicate helper proof is introduced. For transport along the coefficient-ring composition isomorphism, reuse the already-public CategoryTheory.Mod.regularIsoOfIsIso applied to the ring isomorphism hom, from WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod; its type is definitionally the required comparison. The specialized private duplicate is removed, and no visibility change or separate publication in F3 Compatibility is needed.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient cocone is a colimit by isColimitPadicAlgClRingObjCocone. Apply the inverse-image functors along f and each covering arrow; both preserve colimits. Morphisms from the tensor unit to an abelian sheaf identify with global sections, naturally in the sheaf. The section clause of the qcqs calculus therefore lifts every finite presentation matrix entry to a coefficient stage.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Index the finitely many entries by the disjoint union of all finite row-column index sets. Filteredness provides one field containing all their stages, including when this index set is empty. Transport the entries there by the transition maps.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing Mod.regularExtensionIso and Mod.regularExtensionIso_naturality to compare each regular-module matrix entry under scalar extension. Finite biproduct extensionality reconstructs the matrix from its entries. Extension preserves biproducts and cokernels, so each descended matrix has extended cokernel isomorphic to the original local module.",
+   "uses": [
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+  "lem-weil-pbc-regular-extension-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, first step: finite affine presentation cover and simultaneous lifting of its matrix entries; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation matrices over a filtered colimit of ring sheaves on a quasi compact quasi separated scheme descend to a finite stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation matrices for a module sheaf over a filtered union of rings descend simultaneously to one coefficient field",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "No exact match: finite presentation definitions and ordinary scheme gluing do not give finite coefficient descent for these internal module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(field|coefficient|matrix)|glue.*coefficient|matrix.*descen",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match: finite presentation definitions and ordinary scheme gluing do not give finite coefficient descent for these internal module sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLfpCoefficientModel",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, first step: finite affine presentation cover and simultaneous lifting of its matrix entries; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFinitePresentationMatrices",
+  "file": "lean/Sheaf/Paper/CondensedFinitePresentationMatrices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_common_finiteCoefficient_presentation_matrices",
+  "statement": "theorem exists_common_finiteCoefficient_presentation_matrices\n    (T X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)))\n    (hM : IsLocallyFinitelyPresented\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)) M) :\n    ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n      (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X),\n      Finite U.I₀ ∧ (∀ i, IsAffine (U.X i)) ∧\n      ∃ (n m : U.I₀ → ℕ)\n        (d : ∀ i, Mod.finiteFree\n          ((upperStar Ab.{u + 1} (U.f i)).obj\n            ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) (m i) ⟶\n          Mod.finiteFree\n          ((upperStar Ab.{u + 1} (U.f i)).obj\n            ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) (n i)),\n        ∀ i, Nonempty ((Mod.extendScalars\n          ((upperStar Ab.{u + 1} (U.f i)).map\n            ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E)))).obj\n              (cokernel (d i)) ≅\n          ((upperStar Ab.{u + 1} (U.f i)).mapMod\n            ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-af7be",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-af7be",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T073458-L-1079815",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and sole gluing hole matched all three DAG nodes; delivery modules, original shared module and direct importers compiled; axioms checked."
+ }
+}
