@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-module-upper-star-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composition isomorphism of pullbacks of module objects",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$, $g\\colon Y\\to Z$\nmorphisms of schemes. The natural isomorphism\n\n$$\n(g\\circ f)^*\\cong f^*\\circ g^*\\colon\\Mod_{\\Lambda_Z}\\to\\Mod_{\\Lambda_X}\n$$\n\nof pullbacks of module objects ([def-sfb-module-upper-star]) is the isomorphism of\nleft adjoints conjugate, under the adjunctions $(g\\circ f)^*\\dashv(g\\circ f)_*$ and\n$f^*\\circ g^*\\dashv g_*\\circ f_*$ of [def-sfb-module-upper-lower-adjunction], to the\ninverse of the composition isomorphism $g_*\\circ f_*\\cong(g\\circ f)_*$ of\n[def-sfb-module-lower-star-comp].",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, let $f\\colon X\\to Y$ and $g\\colon Y\\to Z$ be morphisms of schemes, and put $h=g\\circ f$. Use the pullbacks of module objects of [def-sfb-module-upper-star] and the adjunctions $a_f:f^*\\dashv f_*$, $a_g:g^*\\dashv g_*$ and $a_h:h^*\\dashv h_*$ of [def-sfb-module-upper-lower-adjunction]. Let $a_{g,f}:f^*\\circ g^*\\dashv g_*\\circ f_*$ be the composite adjunction [def-weil-pbc-composite-adjunction], and let $c:g_*\\circ f_*\\xrightarrow{\\sim}h_*$ be the composition isomorphism of [def-sfb-module-lower-star-comp]. The composition isomorphism of pullbacks of module objects is the unique natural isomorphism\n$$\nb:h^*\\xrightarrow{\\sim} f^*\\circ g^*\\colon\\Mod_{\\Lambda_Z}\\to\\Mod_{\\Lambda_X}\n$$\nwhose conjugate under $a_{g,f}$ and $a_h$ is $c$ [def-weil-pbc-adjunction-conjugate]. Equivalently, $b^{-1}:f^*\\circ g^*\\xrightarrow{\\sim}h^*$ is the conjugate of $c^{-1}:h_*\\xrightarrow{\\sim}g_*\\circ f_*$ under $a_h$ and $a_{g,f}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star-comp.md",
   "place": "node def-sfb-module-upper-star-comp, order 1691"
@@ -15,30 +15,85 @@
  "stmt_deps": [
   "def-sfb-module-upper-star",
   "def-sfb-module-upper-lower-adjunction",
-  "def-sfb-module-lower-star-comp"
+  "def-sfb-module-lower-star-comp",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "A composite of adjunctions is an adjunction, so $f^*\\circ g^*\\dashv g_*\\circ f_*$ by\n[def-sfb-module-upper-lower-adjunction] applied to $f$ and $g$; also\n$(g\\circ f)^*\\dashv(g\\circ f)_*$. Natural transformations between right adjoints\ncorrespond bijectively (by conjugation, i.e. taking mates) to natural transformations\nin the opposite direction between the left adjoints, compatibly with composition and\nidentities; hence the inverse of the isomorphism of\n[def-sfb-module-lower-star-comp] corresponds to an isomorphism\n$(g\\circ f)^*\\cong f^*\\circ g^*$. This is the uniqueness of left adjoints.",
-   "uses": [
-    "def-sfb-module-upper-lower-adjunction",
-    "def-sfb-module-lower-star-comp"
-   ],
-   "elementary": false
+   "tool": "grep",
+   "query": "upperStarComp|conjugateIsoEquiv",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Comma/Over/Pullback.lean; Mathlib/CategoryTheory/Comma/Over/Pullback.lean; Mathlib/CategoryTheory/Comma/Over/Pullback.lean; Mathlib/CategoryTheory/Comma/Over/Pullback.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; read Mathlib/CategoryTheory/Adjunction/Mates.lean:275 conjugateEquiv and :425 conjugateIsoEquiv, and CompositionIso.lean:72.",
+   "date": "2026-10-16",
+   "verdict": "match: the general adjunction construction specializes in one line as recorded in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "match: the general adjunction construction specializes in one line as recorded in mathlib_match.how"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism of inverse image functors on module objects over a commutative condensed ring, defined as the mate of the direct image composition isomorphism",
+   "results": "LightCondensed.ihomPoints_symm_comp; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CondensedMod.LocallyConstant.adjunction; CondensedMod.hom_naturality_apply; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents",
+   "date": "2026-10-16",
+   "verdict": "no match in these hits: condensed module adjunctions and section naturality do not state composition of scheme pullbacks; the second phrasing finds the general categorical result"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|^def comp :",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:72 leftAdjointCompIso, :76 leftAdjointCompIso_hom, :82 conjugateEquiv_leftAdjointCompIso_inv; Mathlib/CategoryTheory/Adjunction/Basic.lean:567 Adjunction.comp. Read all declarations in context.",
+   "date": "2026-10-16",
+   "verdict": "match: the general adjunction construction specializes in one line as recorded in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of pullbacks of module objects on proetale sites over a condensed coefficient ring",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; CategoryTheory.Over.pullbackComp; SheafOfModules.pullback; PresheafOfModules.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left; CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst",
+   "date": "2026-10-16",
+   "verdict": "related: SheafOfModules.pullbackComp uses another module-sheaf presentation; no identification with module objects is assumed. Its generic construction Adjunction.leftAdjointCompIso, found separately, applies directly to the given module-object adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between composite right adjoints and the right adjoint of a third functor induces the canonical isomorphism between the corresponding left adjoints",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointCompIso_assoc; CategoryTheory.Adjunction.rightAdjointUniq_trans",
+   "date": "2026-10-16",
+   "verdict": "match: the general adjunction construction specializes in one line as recorded in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompIso_inv_app; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: the general adjunction construction specializes in one line as recorded in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|conjugateIsoEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; independent second reading: inspected the pinned CompositionIso.lean:72-86 and Mates.lean:425-435.",
+   "date": "2026-10-16",
+   "verdict": "match: independent search confirms the inverse comparison and its mate equation; no additional hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse of the canonical comparison of left adjoint composites is conjugate to the right adjoint composition isomorphism",
+   "results": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompIso_inv_app; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateEquiv_symm_comm; CategoryTheory.conjugateIsoEquiv_symm_apply_inv; independent second reading: inspected the pinned CompositionIso.lean:72-86 and Mates.lean:425-435.",
+   "date": "2026-10-16",
+   "verdict": "match: independent search confirms the inverse comparison and its mate equation; no additional hypothesis"
   }
  ],
- "proof_deps": [
-  "def-sfb-module-upper-lower-adjunction",
-  "def-sfb-module-lower-star-comp"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star-comp.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjointCompIso",
+  "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+  "line": 72,
+  "how": "specializes in one line: (CategoryTheory.Adjunction.leftAdjointCompIso a_g a_f a_h c).symm. Take C₀ = Mod_{Λ_Z}, C₁ = Mod_{Λ_Y}, C₂ = Mod_{Λ_X}, F₀₁ = g^*, F₁₂ = f^*, F₀₂ = h^*, G₁₀ = g_*, G₂₁ = f_*, G₂₀ = h_*. Functor composition in Lean is diagrammatic, so c has precisely the required type G₂₁ ⋙ G₁₀ ≅ G₂₀. The definition at CompositionIso.lean:72-74 is (conjugateIsoEquiv a_h (a_g.comp a_f)).symm c.symm, of type f^* ∘ g^* ≅ h^*. Taking its inverse gives b. The mate equation for b is exactly CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv at CompositionIso.lean:82-86, with adjunction order (a_g.comp a_f), a_h. Uniqueness and the inverse equation follow from the bijections CategoryTheory.conjugateEquiv at Mathlib/CategoryTheory/Adjunction/Mates.lean:275 and conjugateIsoEquiv at :425-435. CategoryTheory.Adjunction.comp at Mathlib/CategoryTheory/Adjunction/Basic.lean:567 constructs a_{g,f}. All categories, functors and adjunctions are arbitrary parameters, with no added geometric or coefficient hypothesis."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +113,20 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-upper-star-comp",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported displayed h^* → f^* g^* cannot be conjugate to c^{-1}:h_* → g_* f_*; conjugation reverses the direction between adjoints. Corrected the type by specifying that b is conjugate to c and b^{-1} to c^{-1}. This is the current unit’s uniqueness-of-left-adjoints construction and agrees with the reference master definition’s final .symm. The complete corrected definition is a one-line specialization of Mathlib Adjunction.leftAdjointCompIso followed by inverse; recorded it as a Mathlib leaf, with no new nodes and no proof steps. Reused the existing generic composition and conjugation nodes and checked all five statement dependencies. No finished Lean attachment was found in slopmaster2.",
+  "blueprint": "Realizes the module-pushforward-pullback unit’s final bullet: deduce the pullback composition isomorphism from the pushforward composition isomorphism by uniqueness of left adjoints. The imported node’s direction of conjugation is corrected explicitly; the unit’s statement and route are unchanged. Whole-blueprint searches for conjugate, adjunction, composition of adjunctions, pullbacks and 0DV0 found no other node for this underived module-object comparison; finite-sheaf and derived comparisons concern different categories."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-1752859dd",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-1752859dd (reviewer sub-agent of L); spot-checked: Reviewed item, all five cited statements and their source locations, chapter/unit route, Mathlib match, edge cases, dependencies, searches, and duplicate risks. The corrected mate direction is valid: b : h* ≅ f*∘g* conjugates to c : g*∘f* ≅ h*, matching CompositionIso.lean and the reference construction. No repairs or dropped nodes needed; review.md written."
+ }
 }
