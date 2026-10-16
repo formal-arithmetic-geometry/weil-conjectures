@@ -15399,3 +15399,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:38 L: merged deliver/B3/Sheaf.Paper.IntegralConstructibleSheafHom (stage 3; reviewer PASS; after a return; landing 20261016T053830-L-51707 (interface); batch 20261016T053828; modules 9; new nodes 8)
 - 05:48 L: returned deliver/A4/Sheaf.Paper.CondensedLfpCoefficientModel (reviewer RETURN: (the landing tools, head 424d8b6eb) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 05:48 L: returned deliver/G1/Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing (reviewer RETURN: (the landing tools, head 0c542a739) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 05:48 L: returned deliver/K3/Sheaf.Paper.KFlatRingedToposPullback (reviewer RETURN: (the landing tools, head 5668c9fab) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
