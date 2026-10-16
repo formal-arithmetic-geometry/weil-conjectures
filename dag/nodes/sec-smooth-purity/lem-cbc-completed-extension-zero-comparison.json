@@ -625,5 +625,43 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-e33862669 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all 39 cited statements, source passages, and unit/chapter route. Verified all eight steps, strict quotient compatibility, coefficient categories, normalized derived-limit comparison, and edge cases. No new nodes, duplicates, cycles, or repairs. Detailed checks are in review.md; deferred Lean interfaces and target-category comparisons remain uncertified."
  },
- "lean": null
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenExchangeTransport",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenExchangeComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcDatumFiniteCoefficient_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumCoefficient_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumModulePull_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumTowerModulePull_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumModulePullComplex_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumTowerPullComplex_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport_exists",
+   "AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport",
+   "AlgebraicGeometry.Scheme.cbcDatumTowerTransport_exists",
+   "AlgebraicGeometry.Scheme.cbcDatumTowerTransport",
+   "AlgebraicGeometry.Scheme.cbcDatumCompletedTransport",
+   "AlgebraicGeometry.Scheme.cbcDatumActualStrictTransport",
+   "AlgebraicGeometry.Scheme.cbcDatumCompletedTransport_unit",
+   "AlgebraicGeometry.Scheme.cbcDatumActualStrictTransport_unit",
+   "AlgebraicGeometry.Scheme.cbcDatumOrdinaryExchange",
+   "AlgebraicGeometry.Scheme.cbcDatumCompletedExchange",
+   "AlgebraicGeometry.Scheme.cbcDatumCompletedExchange_unit",
+   "AlgebraicGeometry.Scheme.completedOpenExchangeComparison"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedOpenExchangeTransport.lean",
+  "statement": "theorem completedOpenExchangeComparison [QuasiCompact j] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : IsIso (cbcDatumCompletedExchange d sq r a ha) ∧ (∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory, cbcCompleteProperty d X r a ha ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧ cbcCompleteProperty d X' r a ha ((d.completedPull g).obj ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧ cbcCompleteProperty d X' r a ha ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj ((d.completedPull gU).obj K.obj)))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of the released stage-2 interface (Q23 maintenance, 2026-10-16). Retains the old CompletedExtensionZeroComparison API by import. Compares finite and completed coefficient maps and the whole strict tower functor; gives universal-counit normalized ordinary/tower transports, their Rlim transport to d.completedPull, and normalization for both the old and currently recorded strict completion units. The completed open exchange now composes directly with AdicCoefficientDatum.completedExchange, without an extra comparison hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-68a480071",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all statement dependencies, sources, canonical transports, docstrings, edge cases, universes, and verbatim signature. Per-file scompile.py compilation passed without diagnostics. No delivery defects found; branch head unchanged."
+ }
 }
