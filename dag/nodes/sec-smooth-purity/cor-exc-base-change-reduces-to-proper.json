@@ -175,5 +175,30 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-c24d8440e (reviewer sub-agent of L); spot-checked: Read the complete delivery, DAG/unit/chapter route, cited nodes, master sources, and report. Verified all four proof steps, typing, coefficient category, adjunction/mate directions, edge cases, duplicate removal, and the documented ambient-adjoint source error. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-08ac4541e",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Review completed in review.md. Complete fixes reuse published canonical operations and remove H4 duplicates. Mathematical statement, hypotheses, universes, edge cases, and mate maps checked. Both replacement modules compile cleanly through scompile.py; merge-tool record and text checks pass. Immutable delivery unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExceptionalBaseChangeReducesToProper",
+  "declaration": "AlgebraicGeometry.Scheme.exceptionalBaseChangeReducesToProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExceptionalBaseChangeReducesToProper.lean",
+  "statement": "theorem exceptionalBaseChangeReducesToProper (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) (c : Compactification f) (X' : Scheme.{u}) (g' : X' ⟶ X) (f' : X' ⟶ Y') (c' : Compactification f') (overlineG : c'.Z ⟶ c.Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (hsq : IsPullback g' f' f g) (hbar : IsPullback overlineG c'.g c.g g) (hopen : IsPullback g' c'.i c.i overlineG) (ambient : SfAmbientExceptionalRightAdjointDatum (exceptionalCoefficientRing l E n) f c) (ambient' : SfAmbientExceptionalRightAdjointDatum (exceptionalCoefficientRing l E n) f' c') (Q : proEtaleDerivedCategory Y (exceptionalCoefficientRing l E n) ⥤ proEtaleDerivedCategory c.Z (exceptionalCoefficientRing l E n)) (Q' : proEtaleDerivedCategory Y' (exceptionalCoefficientRing l E n) ⥤ proEtaleDerivedCategory c'.Z (exceptionalCoefficientRing l E n)) (adjP : proEtaleConstantDerivedDirectImage c.g (exceptionalCoefficientRing l E n) ⊣ Q) (adjP' : proEtaleConstantDerivedDirectImage c'.g (exceptionalCoefficientRing l E n) ⊣ Q') (deltaP : (sfIntrinsicDerivedPullback (exceptionalCoefficientRing l E n) overlineG) ⋙ proEtaleConstantDerivedDirectImage c'.g (exceptionalCoefficientRing l E n) ⟶ proEtaleConstantDerivedDirectImage c.g (exceptionalCoefficientRing l E n) ⋙ (sfIntrinsicDerivedPullback (exceptionalCoefficientRing l E n) g)) (betaP : Q ⋙ (sfIntrinsicDerivedPullback (exceptionalCoefficientRing l E n) overlineG) ⟶ (sfIntrinsicDerivedPullback (exceptionalCoefficientRing l E n) g) ⋙ Q') (hbetaP : betaP = (mateEquiv adjP adjP' (TwoSquare.mk _ _ _ _ deltaP)).natTrans) : IsIso betaP → IsIso ((mateEquiv (ambient.adjunction c) (ambient'.adjunction c') (TwoSquare.mk _ _ _ _ ((Functor.whiskerRight ((mateEquiv (exceptionalOpenAdjunction c.i (exceptionalCoefficientRing l E n)) (exceptionalOpenAdjunction c'.i (exceptionalCoefficientRing l E n))).symm (TwoSquare.mk _ _ _ _ (sfIntrinsicDerivedSquarePullback (exceptionalCoefficientRing l E n) g' c'.i c.i overlineG hopen.w).hom)).natTrans (proEtaleConstantDerivedDirectImage c'.g (exceptionalCoefficientRing l E n))) ≫ Functor.whiskerLeft (sfIntrinsicDerivedOpen (exceptionalCoefficientRing l E n) c.i) deltaP))).natTrans)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exceptionalCoefficientRing",
+   "AlgebraicGeometry.Scheme.exceptionalCoefficientRing_finite",
+   "AlgebraicGeometry.Scheme.exceptionalBaseChangeReducesToProper"
+  ],
+  "note": "Second reading: use canonical finite-constant inverse image transported through sfIntrinsicModuleEquivalence; construct its canonical composition comparison and open adjunction. All helper data are actual categorical constructions. The incomplete arbitrary-operation dependency interface was withdrawn. The positive level is n+1, with finiteness obtained from the recorded theorem. Mathlib mateEquiv fixes both comparison maps. Returned-head L repair: import the derived-composition API directly here instead of re-exporting it from the dependency module; explicitly retain only the FiniteCoefficient pro-etale operation paths. Maintainer landing repair: reuse the recorded ProEtaleIntrinsicFiniteOperations.sfIntrinsicPullback and sfIntrinsicDerivedPullback directly; remove the duplicate intrinsic pullback definitions and additive instance. The same canonical functors and composition comparisons are reused; the mathematical statement is unchanged. Also reuse the published ProEtaleOpenSquareExchange helpers sfIntrinsicOpenAdjunction, sfIntrinsicDerivedOpen, and sfIntrinsicDerivedSquarePullback, with their canonical normalization; no second open-extension or square-comparison construction remains.",
+  "fixed_by": "NT-stage2-Codex-08ac4541e"
  }
 }

@@ -98,21 +98,26 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-closed-unit",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek",
-  "declaration": "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction",
-  "statement": "noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction :\n    D((j)_!open[A]) ⊣ D((j)^*[A])",
-  "branch": "slopmaster2",
-  "by": "N6",
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.exceptionalOpenAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exceptionalOpenAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicDerivedOpenAdjunction.lean",
+  "statement": "def exceptionalOpenAdjunction {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] : sfIntrinsicDerivedOpen A j ⊣ sfIntrinsicDerivedPullback A j",
+  "branch": "newtargets-dag",
+  "by": "Q01",
   "date": "2026-10-16",
-  "existing": true,
-  "note": "Exact existing upstream adjunction, specialized to ModuleCat.{u + 1} (ULift.{u + 1, u} A) for the finite commutative coefficient ring A. Its domain and codomain are the entire unbounded derived categories. The coefficient-category structures and functorial flat resolution instance are inferred, not extra mathematical hypotheses. The recorded intrinsic extension by zero sfIntrinsicExtensionByZero is this same upstream functor transported by sfIntrinsicModuleEquivalence. Checked through scompile.py, including the finite-ring specialization and #print axioms: only propext, Classical.choice, Quot.sound. No replacement module or duplicate adjunction is introduced."
+  "existing": false,
+  "note": "§1(B): the recorded upstream derived open adjunction imports the old ProEtale.UpperLowerStar paths, which conflict with the FiniteCoefficient paths required by the landed intrinsic extension-by-zero framework. It also exposes resolution/monoidal requirements unnecessary for an exact adjunction. This module supplies exactly the finite-ring open adjunction on the full ordinary unbounded intrinsic constant-module categories, by the existing canonical realization equivalence, existing exact open site adjunction, and Mathlib localization of its termwise complex adjunction. There are no new assumptions or postponed theorems. Returned-head L repair: the open-adjunction module now directly selects FiniteCoefficient.LowerShriek.Open.Defs and imports only the general complex-adjunction API; the larger derived-composition API belongs to the consumer module. The legacy ProEtale.Derived.OpenImmersionLowerShriek and UpperLowerStar paths are not imported.",
+  "fixed_by": "NT-stage2-Codex-08ac4541e"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-70b9d6318",
-  "group": "N6",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable records, source, dependency declarations, coefficient transport, universes, edge cases, and verbatim signature. Reproduced both isolated compiler checks without errors or warnings; axioms are standard only. No delivery faults found; branch head unchanged."
+  "reviewer": "NT-stage2-Codex-08ac4541e",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Review completed in review.md. Complete fixes reuse published canonical operations and remove H4 duplicates. Mathematical statement, hypotheses, universes, edge cases, and mate maps checked. Both replacement modules compile cleanly through scompile.py; merge-tool record and text checks pass. Immutable delivery unchanged."
  }
 }
