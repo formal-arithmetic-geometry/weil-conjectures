@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-exc-punctured-curve-branches",
-   "place": "Proof paragraph 1, first sentence: \"Excellence implies the Nagata property\".",
+   "place": "Proof paragraph 1, first sentence ‘Excellence implies the Nagata property’; via the criterion, the Stacks Tag 0351 proof sentence ‘there exists a finite ring extension S ⊂ S' ⊂ L such that L is the fraction field of S'’.",
    "via": [
     "lem-exc-quasi-excellent-nagata"
    ]
@@ -23,9 +23,86 @@
   "def-weil-pbc-japanese-domain",
   "def-weil-pbc-nagata-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a finite type domain algebra $R\\to S$, its fraction field $K$, and a finite field extension $L/K$. The finite-extension clause in [def-weil-pbc-japanese-domain] means $\\dim_K L<\\infty$, so [def-weil-finitely-generated-module] supplies a finite $K$-generating family. In $S[X]$, let $r=(X)$, the polynomials with zero constant coefficient. This ideal is nonzero because $X\\ne0$, is prime because $(fg)(0)=f(0)g(0)$ and $S$ is a domain, and satisfies $r\\cap S=0$. The residue field $\\kappa(r)$ is canonically $K$: a localized fraction $f/g$, with $g\\notin r$, maps to $f(0)/g(0)$; its inverse sends $a/b\\in K$ to the residue of the fraction of constant polynomials $a/b$. These formulas respect the fraction equality criterion in [def-weil-pbc-localization-at-prime]. Since $f=f(0)+Xh$ for a polynomial $h$, the two formulas are inverse after quotienting by $rS[X]_r$. They preserve the given copy of $S$. Regard $L$ as a field extension of $\\kappa(r)$ through this isomorphism; the finite $K$-generating family still generates, with each coefficient replaced by its inverse image in $\\kappa(r)$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0351 (lemma-check-universally-japanese), proof, choice of S and L; elementary preparation for the existing finite-coefficient-model statement, using r=(X)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-polynomial-residue-finite-coefficient-model] with $A=S$ and the prime $r$ from step 1. It gives an $S$-subalgebra $S'\\subseteq L$ finite as an $S$-module, a prime $s\\subset S'[X]$, and an $S'$-algebra isomorphism $e:\\kappa(s)\\cong L$ with $\\kappa(s)$ a fraction field of $S'$. For $z\\in L$, write $e^{-1}(z)=b/c$ with $b,c\\in S'$ and $c\\ne0$ in $\\kappa(s)$. As $e$ fixes $S'$ and is injective, $c$ has nonzero image in $L$ and $z=b/c$ there. Thus $L$ is the fraction field of $S'$. Choose $a_1,\\ldots,a_m$ generating $S$ as an $R$-algebra and $b_1,\\ldots,b_n$ generating $S'$ as an $S$-module. Every $z\\in S'$ is $\\sum_j s_jb_j$ with $s_j\\in S$, and substituting a polynomial in the $a_i$ for each $s_j$ expresses $z$ as a polynomial in the images of the $a_i$ and the $b_j$ with coefficients in $R$. Thus $S'$ is a finite type $R$-algebra. It is a domain as a subring of the field $L$, so the hypothesis gives that $S'$ is N-1.",
+   "uses": [
+    "lem-weil-pbc-polynomial-residue-finite-coefficient-model",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0351 (lemma-check-universally-japanese), proof, existence of the finite extension S ⊂ S' ⊂ L with fraction field L and application of the hypothesis. The existing coefficient-model theorem is specialized at r=(X)."
+   }
+  },
+  {
+   "text": "Let $S''$ be the integral closure of $S'$ in $L$. Since $S'$ is N-1, $S''$ is a finitely generated $S'$-module by [def-weil-pbc-japanese-domain]. Because $S'$ is finite over $S$, [lem-weil-pbc-finite-module-over-finite-algebra] makes $S''$ a finitely generated $S$-module.",
+   "uses": [
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0351, proof, final sentence: ‘By assumption S' is N-1, and hence the integral closure S'' of S' in L is finite over S'.’"
+   }
+  },
+  {
+   "text": "The integral closure of $S$ in $L$ equals $S''$. One inclusion follows because a monic equation over $S$ is also one over $S'$. Conversely, $S'$ is finite over $S$, hence integral over $S$ by [lem-weil-pbc-finite-algebra-is-integral]. Every element of the ring $S''$ is integral over $S'$ by [def-weil-pbc-integral-closure], so $S'\\to S''$ is an integral ring map. Apply [lem-weil-pbc-integral-transitive] to the ring maps $S\\to S'\\to S''$ to conclude that every element of $S''$ is integral over $S$. Thus the integral closure of $S$ in $L$ is a finitely generated $S$-module by step 3. Since $L$ was arbitrary, $S$ is N-2; since $S$ was arbitrary, $R$ is universally Japanese.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-nagata-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0351, proof, final sentence: ‘Thus S'' is finite over S and S'' is the integral closure of S in L.’"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-polynomial-residue-finite-coefficient-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0351 (lemma-check-universally-japanese), proof; its finite-subalgebra assertion is obtained from the existing finite-coefficient-model theorem by the explicit r=(X) specialization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,12 +148,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-quasi-excellent-nagata",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-universally-japanese-n1-criterion",
+  "worker": "stage1",
+  "summary": "Four steps following Tag 0351: explicitly identify the residue field at (X) in S[X] with Frac(S), specialize the existing finite-coefficient-model theorem to obtain a finite S-subalgebra of L with fraction field L, and exhibit finite R-algebra generators to apply the N-1 hypothesis. Its integral closure is finite over S by finite-module transitivity, and integrality transitivity identifies it with the integral closure of S in L. All twelve cited statements and their verbatim quotes were reread against the current shared DAG and live mirror for the merge-lock return repair. No new nodes or statement changes.",
+  "blueprint": "The four steps realize the clause in the ancestor blueprint proof that excellence implies Nagata, through the item's via chain; the Stacks realization is Tag 0351, proof sentence introducing S' and the two final closure sentences.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-residue-finite-coefficient-model",
+    "why": "Used only for the finite S-subalgebra of L with fraction field L, the exact auxiliary assertion in Tag 0351. Setting r=(X) gives it by explicit residue-field formulas. No existing node of this unit supplies this general finite model; reuse avoids duplicating the existing stronger coefficient-model theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-residue-finite-coefficient-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-c297f3c7d",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-c297f3c7d (reviewer sub-agent of L); spot-checked: Read the full item, report, twelve cited statements, source passages, and unit/chapter route. All four steps are valid against Stacks 0351; the coefficient-model specialization satisfies every hypothesis and is accepted as a generic tool use. Checked edge cases, duplicates, and dependency circularity. No new nodes or fixes required. Detailed review written to review.md."
+ }
 }
