@@ -105,24 +105,25 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-0ec5d87a2",
-  "group": "Q24",
+  "reviewer": "NT-stage2-Codex-333795eb1",
+  "group": "NN",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
+  "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings, and report. All three modules compiled cleanly through scompile.py; delivery text checks passed. No defects found. review.md written; branch head unchanged."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.StageSystemCommonStageCones",
-  "declaration": "CategoryTheory.StageSystem.commonStageCone",
+  "module": "Sheaf.Paper.PbcCommonStageCones",
+  "declaration": "AlgebraicGeometry.Scheme.pbcCommonStageDistinguished",
   "declarations": [
-   "CategoryTheory.StageSystem.commonStageCone",
-   "CategoryTheory.StageSystem.CommonStageDistinguished"
+   "AlgebraicGeometry.Scheme.qbarStagePretriangulated_exists",
+   "AlgebraicGeometry.Scheme.qbarStagePretriangulated",
+   "AlgebraicGeometry.Scheme.pbcCommonStageDistinguished"
   ],
-  "file": "lean/Sheaf/CategoryTheory/StageSystemCommonStageCones.lean",
-  "statement": "def commonStageCone (X Y : S.PairCategory) (M : I) (hX : X.stage ≤ M) (hY : Y.stage ≤ M) (Z : C M) (f : X.toStage hX ⟶ Y.toStage hY) (g : Y.toStage hY ⟶ Z) (h : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧) : Triangle S.PairCategory",
+  "file": "lean/Sheaf/Paper/PbcCommonStageCones.lean",
+  "statement": "abbrev pbcCommonStageDistinguished (D : CategoryTheory.Pretriangulated.Triangle (PbcFiniteStagePairCategory l Qbar T hDim.out hInv.out)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "NN",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Previously unstated dependency: common-stage cones and the isomorphic finite-stage-image distinguished-triangle predicate for the supplied exact stage system. The generic construction specializes to the finite coefficient fields and raw rational categories in the node; no alternate coefficient formalism is substituted."
+  "note": "The recorded generic commonStageCone and CommonStageDistinguished require finite-stage pretriangulations and an induced pair shift but provide no concrete PBC specialization. Reuse those exact declarations, supply the integral-image-normalized rational triangulation for the published shifts, and specialize to the actual PbcFiniteStagePairCategory."
  }
 }

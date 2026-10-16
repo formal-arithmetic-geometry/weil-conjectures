@@ -310,23 +310,28 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-0ec5d87a2",
-  "group": "Q24",
+  "reviewer": "NT-stage2-Codex-333795eb1",
+  "group": "NN",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
+  "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings, and report. All three modules compiled cleanly through scompile.py; delivery text checks passed. No defects found. review.md written; branch head unchanged."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.StageSystemVerdier",
-  "declaration": "CategoryTheory.StageSystem.commonStage_verdier_existsUnique",
+  "module": "Sheaf.Paper.PbcVerdierAxioms",
+  "declaration": "AlgebraicGeometry.Scheme.pbcVerdierAxioms",
   "declarations": [
-   "CategoryTheory.StageSystem.commonStage_verdier_existsUnique"
+   "CategoryTheory.StageSystem.qbarStageInclusionAdditive",
+   "CategoryTheory.StageSystem.qbarTransIsoCommShift",
+   "CategoryTheory.StageSystem.qbarPairPretriangulated",
+   "AlgebraicGeometry.Scheme.qbarStageTriangulated",
+   "AlgebraicGeometry.Scheme.qbarScalarExtensionExact",
+   "AlgebraicGeometry.Scheme.pbcVerdierAxioms"
   ],
-  "file": "lean/Sheaf/CategoryTheory/StageSystemVerdier.lean",
-  "statement": "theorem commonStage_verdier_existsUnique : ∃! t : Pretriangulated S.PairCategory, (fun [triInst : Pretriangulated S.PairCategory] ↦ (∀ T : Triangle S.PairCategory, T ∈ distTriang S.PairCategory ↔ S.CommonStageDistinguished T) ∧ IsTriangulated S.PairCategory ∧ ∀ i : I, (S.ι i).IsTriangulated) (triInst := t)",
+  "file": "lean/Sheaf/Paper/PbcVerdierAxioms.lean",
+  "statement": "theorem pbcVerdierAxioms : CategoryTheory.IsTriangulated (PbcFiniteStagePairCategory l Qbar T hDim.out hInv.out) ∧ (∀ E : Padic.FiniteCoefficientFields l Qbar, ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).IsTriangulated) ∧ ∀ {E F : Padic.FiniteCoefficientFields l Qbar} (h : E ≤ F), NatTrans.CommShift ((pbcScalarSystem l Qbar T hDim.out hInv.out).transIso h).hom ℤ",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "NN",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Previously unstated dependency: the Verdier theorem for the supplied directed exact stages, their inherited additive Hom, and coherent induced shift. This reusable formulation proves the four axioms, exact stage inclusions and exact transition identifications; the item supplies the actual finite-field stages and all required compatibility instances."
+  "note": "The recorded generic commonStage_verdier_existsUnique assumes exact finite stages, additive stage inclusions and coherent transition identifications but provides no concrete PBC specialization or those missing interface instances. Reuse that exact theorem, supply its named proof obligations for the published coefficient data, and specialize it to the actual PbcFiniteStagePairCategory."
  }
 }
