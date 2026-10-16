@@ -30,9 +30,91 @@
   "lem-coef-associative-algebra-model-transfer",
   "lem-coef-model-colimit-localization-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal B=\\operatorname{Alg}(\\mathcal M)$ and $\\mathcal C=\\mathcal B^I$. By [lem-coef-associative-algebra-model-transfer], $\\mathcal B$ is combinatorial, hence locally presentable, complete and cocomplete. In particular it has pullbacks. Apply the presheaf clause of [lem-coef-presheaf-local-presentability] with indexing category $I^{\\mathrm{op}}$ and value category $\\mathcal B$. This gives local presentability of $\\mathcal C=\\operatorname{Fun}((I^{\\mathrm{op}})^{\\mathrm{op}},\\mathcal B)$, after the canonical identification of the double opposite with $I$. All sets of objects, arrows and attaching maps below are small in the fixed universe; a natural transformation is a compatible family in a small product of small Hom sets, so $\\mathcal C$ also has small Hom sets. The projective model structures on the two diagram categories exist by [lem-coef-model-colimit-localization-comparison].",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-presheaf-local-presentability",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  },
+  {
+   "text": "Let $\\mathcal S=\\{T^I i_!(a):i\\in\\operatorname{Ob}(I),\\ a\\in\\mathcal J\\}$. This is a small set. The two adjunctions in the statement give natural bijections $\\operatorname{Hom}_{\\mathcal C}(T^I i_!P,B)=\\operatorname{Hom}_{\\mathcal M}(P,UB(i))$. Explicitly, a map $P\\to UB(i)$ extends on the summand labelled by $h:i\\to j$ using $UB(h)$, and then extends uniquely to the free algebra; conversely evaluate on the identity-labelled summand and restrict to free generators. These operations are inverse and commute with both sides of a square, so diagonal fillers correspond as well. Thus a map $p:B\\to D$ has the right lifting property against $\\mathcal S$ exactly when every $Up(i)$ has it against $\\mathcal J$. Since $\\mathcal J$ generates the cofibrations of $\\mathcal M$, this means that each $Up(i)$ is a trivial fibration. The transferred model structure of [lem-coef-associative-algebra-model-transfer] identifies these with the trivial fibrations $p(i)$ of $\\mathcal B$. By the projective description in [lem-coef-model-colimit-localization-comparison], these are exactly the projective trivial fibrations of $\\mathcal C$.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-presentable-cellular-factorization] in the locally presentable category $\\mathcal C$, to the small set $\\mathcal S$ and the initial map $0_{\\mathcal C}\\to A$. Obtain $0_{\\mathcal C}\\xrightarrow{j}Z\\xrightarrow{p}A$ and a small ordinal $\\alpha$ with a chain $A_\\beta$ ($\\beta\\leq\\alpha$), $A_0=0_{\\mathcal C}$, $A_\\alpha=Z$, continuous at every nonzero limit. Each successor is a pushout of a small coproduct of maps $T^I i_!(a)$. The same cited statement says that $p$ has the right lifting property against $\\mathcal S$; step 2 therefore makes it a projective trivial fibration.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  },
+  {
+   "text": "The projective cofibrancy of $A$ says that $0_{\\mathcal C}\\to A$ lifts against every projective trivial fibration, by the model-category lifting characterization in [lem-coef-model-colimit-localization-comparison]. Apply this to $p:Z\\to A$ and the square whose top map is $j:0_{\\mathcal C}\\to Z$ and whose bottom map is $1_A$. The filler $s:A\\to Z$ satisfies $ps=1_A$. Hence $A$ is a retract of the chain endpoint $A_\\alpha=Z$ as an algebra diagram.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  },
+  {
+   "text": "The constant diagram at the initial algebra is initial: there is exactly one component map to each algebra, and these unique maps are natural. The adjunction $T\\dashv U$ of [lem-coef-associative-algebra-model-transfer] makes $T(0)$ initial, since $\\operatorname{Hom}(T(0),B)=\\operatorname{Hom}(0,UB)$ is a singleton. Its displayed free-algebra formula identifies $T(0)$ with $\\mathbf1$: biclosedness implies $0\\odot X$ and $X\\odot0$ are initial, since their Hom sets are Hom sets out of $0$ into the appropriate right adjoint. Thus only the zeroth summand survives. Similarly $T^I$ preserves small coproducts directly: maps from $T^I(\\coprod_t X_t)$ to $B$ correspond successively to maps from $\\coprod_t X_t$ to $U^I B$, families of maps $X_t\\to U^I B$, and families of algebra maps $T^I X_t\\to B$. These are precisely the coproduct universal properties of [def-weil-pbc-category-colimit]. Applying these bijections to the source, target and structural map gives $\\coprod_t T^I i_{t!}(a_t)\\cong T^I(\\coprod_t i_{t!}(a_t))$. Consequently each pushout from step 3 is a pushout of $T^I(f_\\beta)$ with $f_\\beta=\\coprod_t i_{t!}(a_t)$, as asserted.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  },
+  {
+   "text": "It remains to check the last assertion about $f_\\beta$. Evaluation sends projective trivial fibrations to trivial fibrations, by [lem-coef-model-colimit-localization-comparison]. Given any cofibration $a:P\\to Q$ of $\\mathcal M$, a square from $i_!(a)$ to a projective trivial fibration corresponds under $i_!\\dashv\\mathrm{ev}_i$ to a square from $a$ to its $i$th component, so it has a filler; its adjoint is the required diagram filler. Thus $i_!(a)$ is a projective cofibration. If $P$ is cofibrant, apply this to $0\\to P$ to see that $i_!P$ is projectively cofibrant, since $i_!0$ is initial by the same adjunction. A square from a small coproduct of these maps to a projective trivial fibration amounts to one square per summand. Choose their fillers and combine them by the coproduct universal property [def-weil-pbc-category-colimit]. This proves that $f_\\beta$ is a projective cofibration. Apply the identical summandwise filler argument to $0\\to\\coprod_t i_{t!}P_t$ and $0\\to\\coprod_t i_{t!}Q_t$: both endpoints are projectively cofibrant, since every domain and codomain of $\\mathcal J$ is cofibrant. Empty coproducts give the initial diagram and its identity map. All arguments use only the stated ordinary model structures and adjunctions.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 500-501, (B′) and (a)-(d); elementary adjunction and lifting details supplied here. Transferred algebra generators: Haugseng Corollary 3.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-associative-algebra-model-transfer",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-presentable-cellular-factorization",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Expansion of the ordinary cellular argument of Higher Algebra Lemma 4.1.8.13 (B′), (a)-(d), using existing DAG cellular factorization. Online source read; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +150,73 @@
    "results": "{\"t\": \"2026-10-16T19:36:46Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from monoid objects has a filtration of free monoid pushouts by word length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.FilteredColimits.forget_preservesFilteredColimits\", \"CommMonCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"MonCat.FilteredColimits.M\", \"GrpCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"CommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"AddMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"SemiRingCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits\"], \"digest\": \"775a1b2fafdb6d8a\"}",
    "date": "2026-10-16",
    "verdict": "No match: MonCat/FilteredColimits.lean:273-277 gives preservation of ordinary filtered colimits of set-based monoids, not projective algebra cell presentations or their word filtration in a general monoidal model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every cofibrant diagram of associative algebras is a retract of a transfinite composition of pushouts of free generating cofibrations",
+   "results": "{\"t\": \"2026-10-16T20:04:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every cofibrant diagram of associative algebras is a retract of a transfinite composition of pushouts of free generating cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfFactorizationDataOfIsStableUnderCompositionCofibrations\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.instCofibrationInrOfIsCofibrant\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instNonemptyOfIsCofibrant\", \"HomotopicalAlgebra.CofibrantObject\"], \"digest\": \"fd079230a150df2b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: cofibrant-object definitions, replacement, Brown factorization and retract stability do not give the specified free-algebra diagram cell attachments."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SmallObject, RelativeCellComplex",
+   "results": "{\"t\": \"2026-10-16T20:04:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SmallObject, RelativeCellComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.SmallObject'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: query rejected by Loogle with loogle: unknown identifier 'CategoryTheory.SmallObject'; retried with the valid quoted RelativeCellComplex query."
+  },
+  {
+   "tool": "grep",
+   "query": "cofibrant.*retract|retract.*cell|projective.*[Gg]enerat|[Gg]enerat.*projective",
+   "results": "{\"t\": \"2026-10-16T20:04:04Z\", \"tool\": \"grep\", \"query\": \"cofibrant.*retract|retract.*cell|projective.*[Gg]enerat|[Gg]enerat.*projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/Algebra/Azumaya/Defs.lean\", \"Mathlib/Algebra/Azumaya/Defs.lean\", \"Mathlib/Combinatorics/Configuration.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/CategoryTheory/Abelian/FreydMitchell.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/Opposite.lean\"], \"digest\": \"561b0b8a2725dd71\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: cofibrant-object definitions, replacement, Brown factorization and retract stability do not give the specified free-algebra diagram cell attachments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a cofibrantly generated model category every cofibrant object is a retract of a cellular object",
+   "results": "{\"t\": \"2026-10-16T20:04:04Z\", \"tool\": \"leansearch\", \"query\": \"In a cofibrantly generated model category every cofibrant object is a retract of a cellular object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm3c\", \"HomotopicalAlgebra.isCofibrant_of_cofibration\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.ModelCategory.cm3b\", \"HomotopicalAlgebra.bifibrantObjects_le_cofibrantObject\", \"HomotopicalAlgebra.cofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\"], \"digest\": \"9f7ed137dc39311f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: cofibrant-object definitions, replacement, Brown factorization and retract stability do not give the specified free-algebra diagram cell attachments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generating cofibrations of the projective model structure on functor diagrams are left adjoints of evaluation applied to generators",
+   "results": "{\"t\": \"2026-10-16T20:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"Generating cofibrations of the projective model structure on functor diagrams are left adjoints of evaluation applied to generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationIsRightAdjoint\", \"CategoryTheory.Adjunction.projective_of_map_projective\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Adjunction.map_projective\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"1160a89a005f4c6d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: evaluationAdjunctionRight gives the evaluation adjunction, used explicitly here; projective generation and the algebra cellular conclusion are not its statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RelativeCellComplex\"",
+   "results": "{\"t\": \"2026-10-16T20:04:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"RelativeCellComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.j\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\"], \"digest\": \"891c981f45c91f34\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: RelativeCellComplex definitions and projection lemmas describe cellular maps but do not give this algebra-diagram cellular presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "llp_rlp_of_hasSmallObjectArgument|relativeCellComplex|IsLocallyPresentable",
+   "results": "{\"t\": \"2026-10-16T20:04:32Z\", \"tool\": \"grep\", \"query\": \"llp_rlp_of_hasSmallObjectArgument|relativeCellComplex|IsLocallyPresentable\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\"], \"digest\": \"570db80e1711261a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: SmallObject cellular factorization declarations require smallness and an identified generating set; they do not state the algebra-diagram assertion. Reused existing nodes for their general infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(model|cofibr)|generating.*cofibr|retract.*[Cc]ell",
+   "results": "{\"t\": \"2026-10-16T20:18:51Z\", \"tool\": \"grep\", \"query\": \"projective.*(model|cofibr)|generating.*cofibr|retract.*[Cc]ell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\"], \"digest\": \"7e2b1ed6bdec3a24\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the two hits in SimplicialSet/CategoryWithFibrations.lean define the simplicial-set generating cofibrations and trivial cofibrations, not a projective associative-algebra diagram cellular presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cofibrantly generated model category every cofibrant object is a retract of a transfinite composition of pushouts of coproducts of generating cofibrations",
+   "results": "{\"t\": \"2026-10-16T20:19:02Z\", \"tool\": \"leanfinder\", \"query\": \"In a cofibrantly generated model category every cofibrant object is a retract of a transfinite composition of pushouts of coproducts of generating cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isCofibrant_of_cofibration\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations_1\", \"HomotopicalAlgebra.CofibrantBrownFactorization.mk'\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"HomotopicalAlgebra.ModelCategory.cm3c\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.CofibrantBrownFactorization.mk'_i\"], \"digest\": \"6efa7a30c1f32258\"}",
+   "date": "2026-10-16",
+   "verdict": "No item-level match: the hits are general cofibrancy, coproduct stability, retract stability and Brown factorization declarations; none supplies the free associative algebra diagram generators or their cellular presentation. Read ModelCategory/IsCofibrant.lean:47 and SmallObject/Construction.lean:15-45. These smaller facts already have explicit elementary proofs in steps 4 and 6."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-associative-algebra-sifted-localization",
@@ -79,5 +224,20 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-associative-algebra-diagram-cell-filtration",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing ordinary presheaf local-presentability leaf and general presentable cellular factorization; identified the free evaluation generators by explicit adjunction, produced the retraction by lifting, regrouped free coproducts by their universal properties, and verified cofibrancy of attaching maps and endpoints by summandwise lifting. No new nodes and no Lean attachment. Checked empty index and attaching sets, limit stages, nonsymmetry, and all citation hypotheses.",
+  "blueprint": "Supports the second paragraph of prop-coef-integral-exceptional-adjoint.proof.md in literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/: the middle finite-level exceptional-adjunction isomorphism inside the derived-limit mapping-complex calculation, via the inherited enhancement ancestry. The six steps expand the ordinary cellular presentation (B′), (a)-(d) of Higher Algebra Lemma 4.1.8.13 used by lem-coef-associative-algebra-sifted-localization; they do not use the later word-filtration or homotopy-colimit argument. The separate current blueprint proof file exists; the first reading had inspected only its statement file."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-c9eb1948d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-c9eb1948d (reviewer sub-agent of L); spot-checked: I read the item, its six steps and every cited statement in full: model-transfer, presheaf-local-presentability (I also checked the Mathlib instance at Presentable/Presheaf.lean:90-96), model-colimit-localization-comparison, presentable-cellular-factorization, category-colimit and complete-algebroid. Step 1: Alg(M) is combinatorial, so it is locally presentable with pullbacks and small Homs; the presheaf leaf with C=I^op gives Fun(I,B); projective structures exist. Step 2: the adjunction bijection Hom(T^I i_! P,B)=Hom(P,UB(i)) is natural in both variables, so RLP(S) is exactly the maps p with each Up(i) in RLP(J). These are the objectwise trivial fibrations, i.e. the projective trivial fibrations. Step 3: the cellular factorization's hypotheses hold, and its statement gives the continuous small chain from 0_C and p in RLP(S). Step 4: a lift gives the retraction ps=1. Step 5: T(0)=1 by biclosedness, and T^I preserves coproducts as a left adjoint. Step 6: adjoint and summandwise fillers give projective (not merely objectwise) cofibrations, and the endpoints are cofibrant because J is between cofibrant objects. Edge cases checked: I empty, I terminal, endomorphisms, empty attaching sets, and T(0) over a field. The citer sifted-localization uses exactly these clauses. Every cited statement is in the unit's route, with no tool_uses and no SGA. There are no new nodes; a search of sec-six-functors for cell, small-object, cofibrant, projective and retract found no duplicate. Three kinds of Mathlib search are recorded, with no match. The second reader's correction about the blueprint proof file is confirmed. HA 4.1.8.13 and Haugseng are not archived and network access is blocked, so I could not reopen the cited source pages. The proof is checked against DAG statements, the statement is unchanged, and the node is marked by=agent. The report mentions a citations.json that is not among the delivered files; the DAG is unaffected. No changes."
+ }
 }

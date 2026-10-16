@@ -29,9 +29,68 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I=I_\\kappa(K)$. It is a set of subsets of the small set $\\coprod_nK_n$, hence small, and inclusion is a partial order. A simplex of a simplicial subset $L\\subseteq K$ is degenerate in $L$ exactly when it is degenerate in $K$: if $x=s_iy$ with $x\\in L$, then $y=d_ix\\in L$. Hence the nondegenerate simplices of a union of simplicial subsets are among the nondegenerate simplices of its members, and a union of fewer than $\\kappa$ members of $I$ lies in $I$, because $\\kappa$ is regular. For $\\kappa$-filteredness, let $D$ be a $\\kappa$-small simplicial set and $f:D\\to N(I)$ a simplicial map. A simplicial map into the nerve of a poset is the same as a map on vertices that is monotone along every edge. Let $M$ be the union of the subsets $f(d)$, $d\\in D_0$; there are fewer than $\\kappa$ vertices, so $M\\in I$, and $M=\\varnothing$ when $D=\\varnothing$. Send $(d,0)\\mapsto f(d)$ and $(d,1)\\mapsto M$ on the vertices of $D\\times\\Delta^1$. Every edge of $D\\times\\Delta^1$ goes to an inclusion: edges over $0$ to those given by $f$, edges over $1$ to $M\\subseteq M$, and mixed edges to $f(d)\\subseteq M$. This defines $D\\times\\Delta^1\\to N(I)$, a coherent transformation $f\\to\\Delta_DM$, that is, a cocone. Inner horns in a poset nerve fill uniquely, so $N(I)$ is a quasicategory, and it is $\\kappa$-filtered in the sense of [def-coef-presentable-infinity-category].",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Corollary 4.2.3.11: the poset of kappa-small simplicial subsets is small and kappa-filtered."
+   }
+  },
+  {
+   "text": "The poset $I$ is nonempty, since $\\varnothing\\in I$, and every finite subset of $I$ has an upper bound in $I$: its union, which has finitely many members and so lies in $I$ by Step 1 ($\\kappa$ is infinite); the empty subset has the upper bound $\\varnothing$. Every simplex $a\\in K_n$ lies in a member of $I$: the image of $a:\\Delta^n\\to K$ is a simplicial subset whose simplices are the $a\\circ u$, and by the Eilenberg--Zilber decomposition each nondegenerate one is $a\\circ\\delta$ for an injective monotone map $\\delta$ into $\\{0,\\ldots,n\\}$. There are at most $2^{n+1}-1$ such $\\delta$, a finite number, so the image lies in $I$. Hence $K=\\bigcup_{L\\in I}L$, and $L\\subseteq M$ in $I$ is an inclusion of simplicial subsets of $K$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Corollary 4.2.3.11: K is the directed union of its kappa-small simplicial subsets."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-directed-cover-colimit-assembly] to the small simplicial set $K$, the poset $I$ of Step 2, the family $K_L=L$ for $L\\in I$ (increasing, with union $K$), the quasicategory $\\mathcal E=\\mathcal C$, which admits all small colimits, the diagram $p$, and the chosen colimiting cocones $p|_L\\to q_L$. It gives a coherent diagram $Q:N(I)\\to\\mathcal C$ with $Q(L)=q_L$, whose transition maps are induced by restriction of the chosen cocones. That statement fixes no particular colimit of $p$. Take as $\\operatorname{colim}_Kp$ the apex $c$ of the given colimiting cocone $p\\to c$. It then gives a cocone $Q\\to c$, compatible with $p\\to c$, which is colimiting, and its clause $\\operatorname{colim}_{L\\in I}q_L\\simeq\\operatorname{colim}_Kp$ is the asserted equivalence of the comparison map. The cited statement requires only that $I$ be small, nonempty and directed, so no bound of $\\kappa$ on the size of $I$ is used.",
+   "uses": [
+    "lem-coef-directed-cover-colimit-assembly",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4, Remark 4.2.3.9 and Corollary 4.2.3.10, as stated by the cited directed-cover node; their use in the proof of Corollary 4.2.3.11."
+   }
+  },
+  {
+   "text": "Edge cases. If $K=\\varnothing$, then $I=\\{\\varnothing\\}$ and the cited directed-cover statement includes $K=\\varnothing$: $Q$ is the one-vertex diagram at $q_\\varnothing$, and $Q\\to c$ compares two initial apices. If $K$ itself is $\\kappa$-small, then $K$ is the largest element of $I$ and $Q(K)=q_K$. The empty subset belongs to $I$ in every case, and only universe-smallness of $I$ was used.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Corollary 4.2.3.11."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-directed-cover-colimit-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proof of Corollary 4.2.3.11 (March 10, 2012 online text): the poset of kappa-small simplicial subsets is directed and covers K; Proposition 4.2.3.4, Remark 4.2.3.9 and Corollary 4.2.3.10 enter through lem-coef-directed-cover-colimit-assembly. Not archived in literature/; see WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-presheaf-presentability",
@@ -85,5 +144,21 @@
   "group": "N0"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-colimit-subdiagram-approximation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Maintainer review (2026-10-17) replaced the delivered direct nine-step construction by a specialization of the existing general node lem-coef-directed-cover-colimit-assembly (an arbitrary small directed cover by simplicial subsets), of which this item is the case of the kappa-small simplicial subsets. Steps 1-2 prove smallness, kappa-filteredness, directedness and the covering; Step 3 applies the general node with the given colimiting cocone as the colimit of p; Step 4 checks the empty and bounded cases. The two delivery-only foundation nodes (join undercategories; joins with a weakly contractible simplicial set) are dropped as unneeded here; the delivered construction (HTT 4.2.3.1-4.2.3.10) is recorded in the review for the later split of the general node.",
+  "blueprint": "Realizes the bounded coherent-colimit subdiagram construction used in the presentability argument attached to paragraph 2 of prop-coef-integral-exceptional-adjoint, before the finite-coefficient mapping-complex adjunction; the assembly itself is carried by lem-coef-directed-cover-colimit-assembly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-e6c5b6db2",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-e6c5b6db2 (reviewer sub-agent of L); spot-checked: I read the full contract (A-F), the item, both new nodes and every cited statement. HTT is not archived, so I checked the arguments against HTT 4.2.3.1-4.2.3.11, 1.2.9.3 and 4.2.1.5-7 from knowledge; the WANTED line stands. The delivered mathematics is correct. Steps 1-9 hold, including the K_F pushouts, the boundary unions with n=0 and m=0, the non-injective cells in Step 7, the right-anodyne restriction in Step 8, and the cases K empty and K kappa-small. Both new nodes are true and tested on small cases (A empty or a point; the identity, B into its left cone, and the Lambda^2_2 inclusion). C5 finding: lem-coef-directed-cover-colimit-assembly is already on the base, unsplit, in the same unit, with no cycle. It states colimit assembly over any small directed cover by simplicial subsets. The item is its case I = I_kappa(K), so Steps 3-8 and both new nodes duplicate it rather than cite it. Fix: the item proof now has four steps. Steps 1, 2 and 4 are elementary: smallness, kappa-filteredness, directedness, the cover, and the edge cases. Step 3 cites the general node, taking the given cocone p -> c as colim_K p. tool_uses is now []. Both new nodes are dropped. Secondary note for the later split of the general node: 'the opposite of lem-cbc-terminal-boundary-extension' in Steps 4-5 needs the pinch comparison. Cite lem-coef-infinity-relative-initial-boundary with Y = Delta^0 instead. Statement unchanged. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
 }

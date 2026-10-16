@@ -27,9 +27,97 @@
   "lem-coef-fixed-object-dg-free-model",
   "lem-coef-model-infinity-derived-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-fixed-object-dg-free-model], $\\mathbf C_S$ and the graph category $\\mathbf G_S=\\mathbf V^{S^2}$ have the stated model structures. A model category is complete and cocomplete by the explicit convention of [lem-coef-model-infinity-derived-adjunction]. To check the claimed limit formula, let $(A_i)$ be any small diagram and put $L(s,t)=\\lim_i A_i(s,t)$ in complexes. For each $i$, projection followed by composition gives $L(t,u)\\otimes L(s,t)\\to A_i(s,u)$, compatibly with the diagram; hence these maps uniquely define composition into $L(s,u)$. The compatible units likewise give $\\mathbf Z[0]\\to L(s,s)$. Projection to each $A_i$ verifies the unit and associativity equations. Any cone of dg functors induces unique component chain maps into $L$, and their compatibility with composition and units follows after each projection, so $L$ is the limit in $\\mathbf C_S$. For the empty diagram the complexes are zero and the same verification gives the terminal dg category.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20 for the fixed-object model; mappingwise limits verified here from the universal property, supplying the fibrewise input implicit in Remark 5.5."
+   }
+  },
+  {
+   "text": "For $f:S\\to T$, use the composition and unit of $B$ at the indices $f(s),f(t),f(u)$ to define those of $f^*B$. Restricting components of a dg functor gives $f^*$ on maps. Repeated substitution gives $(gf)^*=f^*g^*$ and $1_S^*=1$ on objects, compositions and morphisms, without requiring injectivity. The limit formula in Step 1 implies $f^*(\\lim_i B_i)(s,t)=\\lim_i B_i(f(s),f(t))$, so restriction preserves all small limits. A weak equivalence is a quasi-isomorphism at every pair by [lem-coef-fixed-object-dg-free-model]; its restricted components are therefore again quasi-isomorphisms.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 4.23 and Remark 5.5: direct verification for the object-restriction diagram."
+   }
+  },
+  {
+   "text": "Graph restriction $r_f:\\mathbf G_T\\to\\mathbf G_S$ has a left adjoint $\\ell_f$ given by $(\\ell_fP)(t,t')=\\bigoplus_{f(s)=t,\\,f(s')=t'}P(s,s')$. Indeed a chain map from each such direct sum to $Q(t,t')$ is exactly a family of chain maps $P(s,s')\\to Q(f(s),f(s'))$, giving the natural graph-adjunction bijection. The graph categories are cocomplete by Step 1. Write $F_S\\dashv U_S$ and $F_T\\dashv U_T$ for the free/forgetful adjunctions in [lem-coef-fixed-object-dg-free-model], with the free functor on the left. Put $H_A=F_T\\ell_fU_SA$. The two adjunction units give a graph map $j_A:U_SA\\to r_fU_TH_A=U_Sf^*H_A$, which extends uniquely to a dg functor $v_A:F_SU_SA\\to f^*H_A$.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20 and the free path formula of Proposition 5.2(f); the graph coproduct adjunction and the displayed maps are constructed here, rather than attributed to Proposition 4.25."
+   }
+  },
+  {
+   "text": "Let $\\varepsilon_A:F_SU_SA\\to A$ be the free/forgetful counit, whose path components compose in $A$. Set $K_A=F_T\\ell_fU_SF_SU_SA$. Define $d_0:K_A\\to H_A$ to be $F_T\\ell_fU_S\\varepsilon_A$. Define $d_1:K_A\\to H_A$ to be the map corresponding under $F_T\\dashv U_T$ and $\\ell_f\\dashv r_f$ to the graph map $U_Sv_A:U_SF_SU_SA\\to r_fU_TH_A$. Both maps are now specified, including their length-zero path components. Form the coequalizer $q_A:H_A\\to f_!A$ of $d_0,d_1$ in $\\mathbf C_T$, which exists by Step 1. All these constructions are natural in $A$: a dg functor $A\\to A'$ induces maps on $H$ and $K$ commuting with $d_0,d_1$, so the coequalizer universal property defines $f_!$ on morphisms and proves its identity and composition laws.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent expansion of the object-change adjoint implicit in Definition 4.23 and Remark 5.5: explicit free-category generators and relations. No monadicity or bar-coequalizer theorem is invoked."
+   }
+  },
+  {
+   "text": "The two adjunctions identify a dg functor $h:H_A\\to B$ with a graph map $a:U_SA\\to U_Sf^*B$. The condition $hd_0=hd_1$ is, under the same adjunction bijections, exactly $a\\,U_S\\varepsilon_A=U_S\\bar a$, where $\\bar a:F_SU_SA\\to f^*B$ is the free extension of $a$. In the path formula of [lem-coef-fixed-object-dg-free-model], length zero says $a$ preserves units, and length two says $a$ preserves binary composition; these equations imply the equality on every longer path by induction on its length. Length one imposes no extra condition. Thus equalizing maps $H_A\\to B$ correspond precisely to dg functors $A\\to f^*B$. The coequalizer property gives the natural bijection $\\operatorname{Hom}_{\\mathbf C_T}(f_!A,B)\\cong\\operatorname{Hom}_{\\mathbf C_S}(A,f^*B)$, proving $f_!\\dashv f^*$. Empty fibres simply contribute zero to $\\ell_f$. New paths created by identifying distinct objects are allowed in $H_A$; the imposed relations concern precisely the paths composable in $A$, so no injectivity assumption has entered.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20 and Proposition 5.2(f), free path formula; adjunction verified directly from the coequalizer, including empty and non-injective object maps."
+   }
+  },
+  {
+   "text": "By [lem-coef-fixed-object-dg-free-model], a fibration is a degreewise surjection at each mapping complex, and a trivial fibration has in addition a quasi-isomorphism at each mapping complex. Restriction selects precisely the components indexed by $(f(s),f(t))$, so it preserves both classes. Together with Step 5 this is the right Quillen condition stated in the item. In particular it holds for empty $S$, when all these conditions are vacuous.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 4.23 and Remark 5.5, right Quillen condition checked componentwise from Lemma 3.20."
+   }
+  },
+  {
+   "text": "For a cofibration $i$ in $\\mathbf C_S$ and a trivial fibration $p$ in $\\mathbf C_T$, the adjunction identifies squares from $f_!i$ to $p$, including their diagonal fillers, with squares from $i$ to $f^*p$. Step 6 and the weak factorization systems in [lem-coef-model-infinity-derived-adjunction] provide such a filler; hence $f_!i$ is a cofibration. Taking $i$ a trivial cofibration and $p$ a fibration proves in the same way that $f_!i$ is a trivial cofibration. This uses the two mutually characterized lifting classes, not a converse assertion absent from the cited derived-adjunction theorem.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 4.23: elementary adjunction-of-lifting-squares proof of the left Quillen condition, using the explicit model axioms of the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-fixed-object-dg-free-model",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient adjunction before derived inverse limit. Haugseng Definition 4.23 and Remark 5.5 identify the required fibrewise Quillen input; the free-category coequalizer and its universal property are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +181,73 @@
    "results": "{\"t\": \"2026-10-16T16:40:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCat\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "Independent second reading: no match: zero Loogle hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a function of object sets between fixed-object strict dg-category model structures has a left adjoint and is right Quillen, preserving limits and weak equivalences",
+   "results": "{\"t\": \"2026-10-16T19:16:55Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a function of object sets between fixed-object strict dg-category model structures has a left adjoint and is right Quillen, preserving limits and weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\"], \"digest\": \"6322fc22ffb18ca6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the search returned no declaration of the fixed-object enriched model restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "EnrichedCat ModelCategory restriction object sets",
+   "results": "{\"t\": \"2026-10-16T19:16:56Z\", \"tool\": \"loogle\", \"query\": \"EnrichedCat ModelCategory restriction object sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `EnrichedCat`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero Loogle hits (the service reported Unknown identifier for EnrichedCat)."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.{0,80}model|model.{0,80}enriched|right.?Quillen",
+   "results": "{\"t\": \"2026-10-16T19:16:56Z\", \"tool\": \"grep\", \"query\": \"enriched.{0,80}model|model.{0,80}enriched|right.?Quillen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no enriched model or right-Quillen restriction declarations in the Mathlib source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a function of object sets between fixed-object strict dg-category model structures has a left adjoint and is right Quillen, preserving limits and weak equivalences",
+   "results": "{\"t\": \"2026-10-16T19:16:57Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a function of object sets between fixed-object strict dg-category model structures has a left adjoint and is right Quillen, preserving limits and weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint\", \"CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint\", \"CategoryTheory.Adjunction.rightAdjoint_preservesLimits\", \"CategoryTheory.Adjunction.lim_preservesLimits\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.leftExactFunctor\", \"CategoryTheory.Adjunction.isEquivalencePreservesLimits\"], \"digest\": \"d074710649f31b45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the search returned no declaration of the fixed-object enriched model restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.?categor|differential.{0,20}graded.{0,20}categor|enriched.{0,60}(model|Quillen)",
+   "results": "{\"t\": \"2026-10-16T20:02:04Z\", \"tool\": \"grep\", \"query\": \"dg.?categor|differential.{0,20}graded.{0,20}categor|enriched.{0,60}(model|Quillen)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-16T20:02:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a function of objects in enriched categories is right Quillen and has a left adjoint given by a free category with composition relations",
+   "results": "{\"t\": \"2026-10-16T20:02:05Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a function of objects in enriched categories is right Quillen and has a left adjoint given by a free category with composition relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.eHomWhiskerRight\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"CategoryTheory.Quiv.adj\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.Cat.free\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\"], \"digest\": \"f66d3bb1aa5d93df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: enriched whiskering/functor categories, restriction of representations, free ordinary categories on quivers and restriction of fully faithful adjunctions do not state this fixed-object dg model theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of differential graded categories along a map of object sets has a left adjoint and preserves mappingwise fibrations and quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-16T20:02:16Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of differential graded categories along a map of object sets has a left adjoint and preserves mappingwise fibrations and quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"HomologicalComplexUpToQuasiIso.Q\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"DerivedCategory.Qh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor\", \"HomologicalComplexUpToQuasiIso.Qh\"], \"digest\": \"846ef718d2ce82e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the eight hits concern localization of homological complexes and functors preserving homology, not categories enriched in complexes or changes of their objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of colors for categories enriched in chain complexes is a Quillen adjunction for fixed-object model structures",
+   "results": "{\"t\": \"2026-10-16T20:02:16Z\", \"tool\": \"leanfinder\", \"query\": \"Change of colors for categories enriched in chain complexes is a Quillen adjunction for fixed-object model structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"93830ac0bac967e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve, homotopy category, skeleton/coskeleton and Cech adjunctions, and Cat-enrichment of quasicategories; none gives the fixed-object dg model restriction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-fibre-assembly",
@@ -104,5 +255,20 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-fixed-set-model",
+  "worker": "stage1",
+  "summary": "Repaired the earlier attempt: corrected F ⊣ U; replaced the unspecified monad/bar construction by two explicit maps of free dg categories and a direct coequalizer universal-property calculation. Seven steps prove mappingwise limits, strict restriction, the graph adjunction, construction and verification of f_!, and both Quillen conditions. The statement is unchanged; no new nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2: the coherent finite-coefficient adjunction input before the derived inverse limit, via the recorded dg-enrichment/fibre-assembly ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-847701a7c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-847701a7c (reviewer sub-agent of L); spot-checked: Read the item's statement and all seven steps in full, the full statements of lem-coef-fixed-object-dg-free-model and lem-coef-model-infinity-derived-adjunction, the citer lem-coef-enriched-fibre-assembly (steps 0 and 4-6, which use only clauses the item states), the unit, and ancestor proof paragraph 2 (main-20261015). Haugseng arXiv:1312.3881v4 was read online: Lemma 3.20 gives the fixed-object model structure, Definition 4.23 defines a right Quillen presheaf, Proposition 4.25 and Remark 5.5 use X -> Cat_X(V) as one, and Example 5.11 covers unbounded Ch(R). Haugseng never proves that f^* is right Quillen; the source field says 'as used in' and proof_origin.by=agent, which is accurate, and the proof given is self-contained. Step checks: (1) limits are computed mappingwise, including the empty diagram (zero complexes form the terminal object); cocompleteness comes from the combinatorial structure and the item's model-category convention. (2) Restriction is strictly functorial, preserves limits and preserves weak equivalences with no injectivity assumption. (3) The graph adjunction l_f -| r_f holds by the coproduct universal property, and j_A, v_A are correctly typed. (4) The maps d_0 = F_T l_f U_S eps_A and d_1 (the double adjunct of U_S v_A) are correctly typed and natural. (5) I recomputed that h d_0 = h d_1 is equivalent to a U_S eps_A = U_S abar, which means a preserves units (paths of length 0) and composition (length 2), with induction for longer paths; this gives f_! -| f^*. (6) Fibrations and trivial fibrations are componentwise, so restriction preserves them. (7) Lifting squares and fillers transpose under the adjunction, and the mutually characterized lifting classes then show f_! is left Quillen. Small cases tested: S empty gives the initial object F_T(0); a constant map {a,b} -> {*} on a discrete A gives Z; with one arrow x of degree 0 from a to b it gives the polynomial algebra Z[x], because x.x becomes composable after identifying a and b, and the adjunction bijection checks; bijective f gives relabelling. A ripgrep search found no duplicate node (locally-cofibrant restriction, the Tabuada dg-category model, the simplicial fixed-object node and the parent node are all distinct). There are no new nodes, the statement is unchanged, no SGA source is used, the route stays in the same unit, and no tool_uses are needed. No fixes."
+ }
 }

@@ -36,9 +36,102 @@
   "lem-coef-reedy-model-structure",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V_A(K)=A^\\bullet\\otimes_\\Delta K$. In the cocomplete category of the statement this is the coequalizer $\\coprod_{\\theta:[r]\\to[s]}A^r\\cdot K_s\\rightrightarrows\\coprod_r A^r\\cdot K_r$, with arrows induced by $A(\\theta)$ and $K(\\theta)$. Maps from it to $Z$ are exactly families $K_r\\to\\operatorname{Hom}(A^r,Z)$ compatible with simplex operators; hence $V_A$ is left adjoint to $Z\\mapsto\\operatorname{Hom}(A^\\bullet,Z)$ and preserves small colimits. For $K=\\Delta^m$, the summand indexed by $\\alpha:[r]\\to[m]$ maps to $A^m$ by $A(\\alpha)$; the coend relations identify this with the identity summand in degree $m$, giving $V_A(\\Delta^m)\\cong A^m$. For $\\partial\\Delta^m$, every simplex $\\alpha:[r]\\to[m]$ has proper image and factors uniquely as a surjection onto that image followed by a proper injective face. The coend relation for this surjection reduces its summand to that face, and relations between faces are precisely their face inclusions. Thus its coend is the colimit over proper injective faces, namely $L_mA$; for $m=0$ both indexing diagrams are empty. These identifications are natural. Maps of $A$ and $K$ induce maps of the displayed coequalizers; composition and identities hold on every summand. Thus $B^m=V_A(K\\times\\Delta^m)$ defines a cosimplicial functor, functorial in both variables, and $A\\otimes\\Delta^0\\cong A$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Appendix A.1, printed p.197; explicit coequalizer universal properties and representable/boundary evaluation (Hovey Proposition 3.1.5)."
+   }
+  },
+  {
+   "text": "Assume $A$ is a cosimplicial resolution. By its Reedy cofibrancy the maps $V_A(\\partial\\Delta^m)\\to V_A(\\Delta^m)$ of step 1 are cofibrations, including the initial map in degree zero. The collapses $V_A(\\Delta^m)\\to V_A(\\Delta^0)$ are precisely $A([m]\\to[0])$, weak equivalences by the hypothesis on structure maps. The boundary-and-collapse criterion [lem-coef-simplicial-boundary-collapse-test] therefore applies to this colimit-preserving $V_A$: it sends monomorphisms to cofibrations and weak homotopy equivalences to weak equivalences, with no enrichment assumption on $\\mathcal M$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Propositions 5.4.1 and 5.4.3, Corollary 5.4.4, printed pp.129-131."
+   }
+  },
+  {
+   "text": "Take $K=\\Delta^1$ and write $B=A\\otimes\\Delta^1$. The latching colimit in degree $m$ is $L_mB\\cong V_A(\\Delta^1\\times\\partial\\Delta^m)$. Indeed $V_A$ preserves colimits, and product with a fixed set preserves colimits of sets: in the disjoint-union-and-relations description the first coordinate is unchanged by every relation. Apply this in every simplicial degree to the proper-face presentation of the boundary from step 1. The latching map is consequently $V_A(\\Delta^1\\times\\partial\\Delta^m)\\to V_A(\\Delta^1\\times\\Delta^m)$. Its input map is degreewise injective, so step 2 makes it a cofibration. For $m=0$ the boundary and the latching object are initial, and the same argument applies. Thus $B$ is Reedy cofibrant by [lem-coef-reedy-model-structure].",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Theorem 5.5.3, printed p.134: the frame A tensor (K times Delta[-]); latching calculation written out."
+   }
+  },
+  {
+   "text": "Each endpoint inclusion $\\Delta^0\\hookrightarrow\\Delta^1$ is a one-dimensional horn inclusion and hence has the left lifting property against every Kan fibration, by the definitions in [lem-coef-kan-quillen-right-proper]. Apply [lem-coef-sset-anodyne-pushout-product] with $i:\\varnothing\\to\\Delta^m$ and $j$ equal to either endpoint. Its pushout-product is $\\Delta^m\\times\\Delta^0\\to\\Delta^m\\times\\Delta^1$. It is anodyne, therefore a trivial cofibration in the Kan model structure: the left class against all fibrations is precisely the trivial cofibrations. In particular it is a weak homotopy equivalence. Applying $V_A$ and the weak-equivalence conclusion of [lem-coef-simplicial-boundary-collapse-test] gives both $e_i^m:A^m\\to B^m$ as weak equivalences. The two maps are natural in $m$ and $A$ because all their components are induced by the same fixed endpoint maps in the functorial coequalizer of step 1.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.4.4, printed p.131; the simplicial-set pushout-product argument gives both endpoint maps, as required in Dugger Lemma 6.4."
+   }
+  },
+  {
+   "text": "For any $\\theta:[m]\\to[n]$, naturality gives $B(\\theta)e_0^m=e_0^n A(\\theta)$. Both $e_0$ components and $A(\\theta)$ are weak equivalences, so two-out-of-three makes $B(\\theta)$ a weak equivalence. Combined with step 3 this says that $B$ is a cosimplicial resolution. Its augmentation is the functorial map induced by $[m]\\to[0]$; the same composition identity proves naturality of this augmentation, and its components are weak equivalences. The argument has used ordinary coends and model-category axioms only.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proof of Lemma 6.4, printed p.191: the interval-tensor endofunctor on cosimplicial resolutions and its endpoint natural transformations."
+   }
+  },
+  {
+   "text": "Fix $m$. A simplex of $\\Delta^1\\times\\Delta^m$ is an order-preserving sequence in the finite product poset $P=[1]\\times[m]$. It is nondegenerate precisely when consecutive pairs are distinct, that is, when the sequence is a strict chain in $P$. Delete consecutive repetitions to obtain its unique strict chain and the unique order-preserving surjection onto that chain. Let $J_m$ be the finite poset of nonempty strict chains in $P$, ordered by face inclusion, and let $D_m$ send a chain of $r+1$ vertices to $A^r$, and a face inclusion to the corresponding injective simplex operator. Then $V_A(\\Delta^1\\times\\Delta^m)\\cong\\operatorname{colim}_{J_m}D_m$. To check the isomorphism, maps from the right side to $Z$ are a compatible map $A^r\\to Z$ for every strict chain. For a repeated sequence with surjection $\\sigma:[s]\\twoheadrightarrow[r]$, extend that map by precomposing with $A(\\sigma):A^s\\to A^r$. Explicitly write a repeated sequence as $x=c\\sigma$, with $c:[r]\\to P$ a strict chain and $\\sigma:[s]\\twoheadrightarrow[r]$. For $\\theta:[t]\\to[s]$, factor $\\sigma\\theta=\\iota\\tau$ with $\\tau:[t]\\twoheadrightarrow[q]$ surjective and $\\iota:[q]\\hookrightarrow[r]$ injective. The strict chain of $x\\theta$ is $c\\iota$, a face of $c$. If $u_c:A^r\\to Z$ denotes the compatible chain map, face compatibility says $u_{c\\iota}=u_c A(\\iota)$, whence the extended map for $x\\theta$ is $u_{c\\iota}A(\\tau)=u_c A(\\sigma)A(\\theta)$. This is exactly the coend relation for $\\theta$. Restriction to strict chains and this extension are inverse, proving the asserted universal property. Since $P$ is finite, $J_m$ has finitely many objects and arrows; only finitely many terms of $A$ occur. This is a finite presentation of the term, despite the infinite indexing in the original coend.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Appendix A.1, coend formula, printed p.197; explicit finite strict-chain presentation for the product of two standard simplices (agent argument)."
+   }
+  },
+  {
+   "text": "Let $\\lambda$ be infinite regular as in the statement, $I$ a small $\\lambda$-filtered category, and $X:I\\to\\mathcal M$ a diagram. Such an $I$ is filtered since finite diagrams have fewer than $\\lambda$ morphisms. Put $Q=\\operatorname{colim}_{J_m}D_m=B^m$. Its colimit universal property and the assumed $\\lambda$-presentability of each $D_m(j)=A^r$, followed by [lem-weil-pbc-filtered-colimits-commute-finite-limits], give\n$$\\operatorname{Hom}(Q,\\operatorname{colim}_iX_i)\\cong\\lim_{j\\in J_m^{\\mathrm{op}}}\\operatorname{Hom}(D_m(j),\\operatorname{colim}_iX_i)\\cong\\lim_j\\operatorname{colim}_i\\operatorname{Hom}(D_m(j),X_i)\\cong\\operatorname{colim}_i\\lim_j\\operatorname{Hom}(D_m(j),X_i)\\cong\\operatorname{colim}_i\\operatorname{Hom}(Q,X_i).$$\nThe limit category $J_m^{\\mathrm{op}}$ is finite, so the cited theorem applies to sets, in the fixed Hom universe. The inverse of the displayed composite is the canonical preservation map: a class represented by $f:Q\\to X_i$ is sent to its composite with $X_i\\to\\operatorname{colim}_iX_i$, since restricting this composite along each $D_m(j)\\to Q$ gives the corresponding Hom comparison. Thus that canonical map is a bijection. Hence $B^m$ is $\\lambda$-presentable for every $m$. The same proof covers $\\lambda=\\aleph_0$; no enlargement of the given regular cardinal is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002W (lemma-directed-commutes), applied to the finite chain category; finite-colimit presentability deduced explicitly from Hom universal properties."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Appendix A.1 and Lemma 6.4, supplemented by Hovey 5.4.1-5.4.4 and the explicit strict-chain / Stacks 002W argument. External documents read online; archives WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +174,66 @@
    "results": "{\"t\": \"2026-10-16T18:38:16Z\", \"tool\": \"grep\", \"query\": \"Reedy|cosimplicial.*[Ff]ram|cosimplicial.*[Rr]esol|combinatorial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\"], \"digest\": \"6c63684f4c390d54\"}",
    "date": "2026-10-17",
    "verdict": "no match: AlgebraicTopology/Reedy/Basic.lean:14-24 explicitly leaves construction of Reedy model structures as a TODO; lines 38-55 only define a Reedy structure on an indexing category. Other hits use combinatorial to describe simplicial homotopies, not combinatorial model categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T20:05:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"CosimplicialObject\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*[Ff]ram|cosimplicial.*[Rr]esol|Reedy",
+   "results": "{\"t\": \"2026-10-16T20:05:03Z\", \"tool\": \"grep\", \"query\": \"cosimplicial.*[Ff]ram|cosimplicial.*[Rr]esol|Reedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reedy/Basic.lean:14-24 defines index-category Reedy structures and lists the diagram model structure as TODO; no interval tensor or frame theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coend realization of a Reedy cofibrant homotopically constant cosimplicial object is a left Quillen functor",
+   "results": "{\"t\": \"2026-10-16T20:05:04Z\", \"tool\": \"leansearch\", \"query\": \"The coend realization of a Reedy cofibrant homotopically constant cosimplicial object is a left Quillen functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coendFunctor\", \"CategoryTheory.Limits.coendFunctor_obj\", \"CategoryTheory.CosimplicialObject.Augmented.const_map_left\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteCosimplicialObject\", \"HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι\"], \"digest\": \"a1e463a8048be54c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coendFunctor and its object formula are ordinary categorical constructions; the other hits give const maps, the simplicial homotopy category, or cofibrant objects, not the arbitrary-model-category frame theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a cosimplicial resolution with the simplicial interval preserves Reedy cofibrancy and endpoint weak equivalences",
+   "results": "{\"t\": \"2026-10-16T20:05:07Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a cosimplicial resolution with the simplicial interval preserves Reedy cofibrancy and endpoint weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"AugmentedSimplexCategory.tensorObjOf\", \"SSet.Truncated.hoFunctor.monoidal\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"AugmentedSimplexCategory.tensorObj\"], \"digest\": \"fcd3af2d0af5739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern cofibrant replacements, their localizer, augmented ordinal tensor and truncated simplicial homotopy category, not cosimplicial interval tensors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cosimplicial frame induces a left Quillen realization functor from simplicial sets in any model category",
+   "results": "{\"t\": \"2026-10-16T20:05:15Z\", \"tool\": \"leanfinder\", \"query\": \"A cosimplicial frame induces a left Quillen realization functor from simplicial sets in any model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.cosk\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"SSet.stdSimplex\", \"SSet.toTop\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.cosk\", \"CategoryTheory.SimplicialObject.sk\"], \"digest\": \"bcd9f04a90fd0d07\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are skeleton/coskeleton, the standard simplex and geometric realization into TopCat, not a cosimplicial-frame theorem for an arbitrary model category."
+  },
+  {
+   "tool": "grep",
+   "query": "def coendFunctor|coendFunctor_obj",
+   "results": "{\"t\": \"2026-10-16T20:05:41Z\", \"tool\": \"grep\", \"query\": \"def coendFunctor|coendFunctor_obj\", \"sub\": \"CategoryTheory/Limits/Shapes/End.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"347\"], \"digest\": \"66bcaa3813d2b2c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: End.lean:344-351 defines the general ordinary coend functor only; it supplies no Reedy/cofibrancy or interval weak-equivalence conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*frame|cosimplicial.*resolution|homotopically.constant|Reedy",
+   "results": "{\"t\": \"2026-10-16T20:19:25Z\", \"tool\": \"grep\", \"query\": \"cosimplicial.*frame|cosimplicial.*resolution|homotopically.constant|Reedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all five hits are in AlgebraicTopology/Reedy/Basic.lean; lines 21-24 list the diagram model structure as TODO, and lines 38-55 only define a Reedy structure on an index category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The realization functor associated with a cofibrant homotopically constant diagram on the simplex category preserves cofibrations and weak equivalences of simplicial sets",
+   "results": "{\"t\": \"2026-10-16T20:19:34Z\", \"tool\": \"leanfinder\", \"query\": \"The realization functor associated with a cofibrant homotopically constant diagram on the simplex category preserves cofibrations and weak equivalences of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\"], \"digest\": \"a8118b6ad18d4acf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: eight hits concern the simplicial-set cofibration/fibration structures, ordinary cofibrant replacements, and a path object; none states the cosimplicial realization or interval theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dugger-homotopically-surjective-map",
@@ -92,5 +241,29 @@
   "group": "Q01"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-resolution-interval-tensor",
+  "worker": "stage1",
+  "summary": "Checked the complete statement against Dugger Appendix A.1 and Lemma 6.4 and Hovey frame calculus. Reused existing boundary-collapse, Reedy, Kan and pushout-product nodes. Wrote the endpoint and latching arguments and an explicit finite strict-chain coend presentation; presentability follows from the existing Stacks 002W Mathlib leaf. No new nodes or statement changes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction calculation: retains the existing small-model-presentation route through Dugger Lemma 6.4; steps 1-5 supply its interval endofunctor and endpoint maps and steps 6-7 keep the prescribed presentability bound.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Generic set-valued finite-limit/filtered-colimit interchange (Stacks 002W) used for the Hom calculation of presentability; no model-category statement of this unit supplies this ordinary set-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-10dffc4b9",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-10dffc4b9 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, with the full statements of every cited node: Reedy model structure, boundary-collapse test, Kan-Quillen, the anodyne pushout-product leaf, the Stacks 002W leaf (checked against categories.tex lines 2182-2195), and the simplicial-set and complete-algebroid definitions. I also read the citer lem-coef-dugger-homotopically-surjective-map step 5. It uses the resolution, lambda-presentable, endpoint and co-Yoneda clauses, and the unchanged statement supplies all of them. Step checks: step 1 gives the coend as a coequalizer, the right adjoint, V_A(Delta^m)=A^m and V_A(boundary)=L_mA. Step 2 meets the boundary-collapse hypotheses through Reedy cofibrancy (including the initial map in degree 0) and collapses A([m]->[0]). Step 3 gives L_mB=V_A(Delta^1 x boundary), so B is Reedy cofibrant. Step 4: both endpoints are 1-dimensional horns; the pushout-product with the empty map into Delta^m is anodyne, hence in C∩W of the Kan model structure, hence a weak equivalence after V_A. Step 5 applies two-out-of-three to B(theta)e0=e0A(theta) for every theta. Step 6: I verified the coend relation u_{x theta}=u_x A(theta) through sigma theta=iota tau. Step 7: lambda-filtered implies filtered, the chain poset is finite, and the interchange gives presentability with no change to lambda. Small cases: m=0 gives 3 chains and A^1; m=1 gives 11 chains, the prism; pointed and terminal M are fine. No cycle, no new nodes, no SGA, no changes. I accept the tool_use lem-weil-pbc-filtered-colimits-commute-finite-limits; it is a Mathlib leaf, so it is a tool, not route. Dugger and Hovey are not archived and network access is blocked here, so I could not open them. The proof is agent-marked with WANTED lines and is self-contained over the DAG nodes; I checked it against those nodes, not the books."
+ }
 }

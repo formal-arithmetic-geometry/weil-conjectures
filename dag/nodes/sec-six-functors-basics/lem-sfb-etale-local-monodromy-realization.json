@@ -29,9 +29,141 @@
   "cor-galois-lisse-representations",
   "def-weil-pbc-site-comparison-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Integral monodromy, before rationalization. Apply [lem-sfb-integral-lisse-reduction-equivalence] and [det-pe-finite-local-systems-twist] to identify integral lisse $A_T$-modules with compatible towers of finite locally constant etale $A/\\varpi^n$-modules, whose reductions are normalized. The finite-ring equivalence [cor-galois-lisse-representations](1), including its compatibility with scalar extension, identifies these with compatible towers of finite discrete continuous $\\Pi_T$-modules $B_n$, free over $A/\\varpi^n$ of a single rank $r$. Connectedness ensures a single rank. By [lem-pod-adic-limit-finite-modules](1),(2), $B=\\varprojlim B_n$ is finite over $A$, has precisely these reductions, and its inverse-limit topology is adic. In fact it is free: choose a basis at level one and recursively lift it to a basis at level $n+1$; a lifted matrix is invertible because its determinant is a unit modulo $\\varpi$. The resulting compatible bases identify $B$ with $\\varprojlim(A/\\varpi^n)^r=A^r$. The coordinate actions make $\\Pi_T\\times B\\to B$ jointly continuous, because their composites with every finite discrete projection are continuous. Conversely a continuous action on finite free $B$ gives those discrete actions. The Hom bijection in the adic-limit lemma, restricted to equivariant maps at every level, proves full faithfulness. Thus there is an equivalence $K_T$ from continuous finite free $A$-representations to integral lisse modules, with $K_T(B)=\\varprojlim_n\\nu^*\\mathcal L(B/\\varpi^nB)$, naturally in maps. No use is made of part (2) of the Galois node, whose extra hypotheses are absent here.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "det-pe-finite-local-systems-twist",
+    "cor-galois-lisse-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), with Corollary 5.1.5 as recalled after Definition 6.8.3; integral-monodromy sentence of Corollary 6.8.5"
+   }
+  },
+  {
+   "text": "Hom after inverting $\\ell$. For integral lisse $M,N$ put $H=\\mathcal Hom_{A_T}(M,N)$ [def-pur-sheaf-hom]. On a common trivializing covering this is the sheaf of finite matrices, so $H$ is integral lisse, and the entrywise map gives $H[1/\\ell]\\cong\\mathcal Hom_{E_T}(M[1/\\ell],N[1/\\ell])$. These local identifications are canonical (a matrix represents the same linear map under change of basis), so glue. Here $A_T[1/\\ell]=E_T$ by the integral reduction lemma; for a finite free model, tensoring with this ring equals the colimit of repeated multiplication by $\\ell$, and hence this equality holds for all these locally finite free modules. Apply [det-pe-bounded-continuity-sections] with the small filtered index $\\mathbf N$, $U=T$, $q=0$, and the complexes $H[0]$ joined by multiplication by $\\ell$: the common lower bound is zero and $T$ is qcqs. It gives $H[1/\\ell](T)=H(T)[1/\\ell]$. Therefore the actual ambient sheaf Hom is $\\operatorname{Hom}_{A_T}(M,N)[1/\\ell]$. This proves rational full faithfulness of integral lisse modules directly; finite-level full faithfulness alone would not suffice.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "def-pur-sheaf-hom",
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(4) and its internal-Hom proof; Lemma 6.8.2"
+   }
+  },
+  {
+   "text": "Construction of $J_T$ and its canonical normalization. By [lem-pod-profinite-stable-lattice], every finite dimensional continuous $E$-representation has an invariant finite free $A$-lattice $B$. For two such representations with lattices $B,C$, any $E$-linear map is a finite matrix in lattice bases. Multiplication by $\\ell^m$ for a sufficiently large $m\\geq0$ puts every entry in $A$. Thus every equivariant $E$-map is $\\ell^{-m}g$ for an equivariant $A$-map $g:B\\to C$, and two presentations agree exactly when they agree after multiplying by a common power of $\\ell$. This identifies representation Hom with $\\operatorname{Hom}_{A,\\Pi_T}(B,C)[1/\\ell]$. Combine step 1 with step 2 to define $J_T(V)=K_T(B)[1/\\ell]$ and $J_T(\\ell^{-m}g)=\\ell^{-m}K_T(g)[1/\\ell]$. Independence of a fraction, addition, scalar multiplication and composition follow after a common multiplication by $\\ell$, where they hold for $K_T$. For two lattices in the same $V$, their finite bases show $\\ell^mB\\subset C$ and $\\ell^mC\\subset B$ for some $m$. The identity on $V$ therefore gives a canonical isomorphism of the two realizations by this Hom correspondence; the reverse identity is its inverse. For three choices the comparisons satisfy the cocycle equation because all represent the identity of $V$. They also commute with every equivariant map. Hence a choice of lattices defines an $E$-linear fully faithful functor independent up to these specified natural isomorphisms. Its values are lisse since $K_T(B)$ is locally $A_T^r$ and rationalization is locally $E_T^r$. Step 1 gives exactly the required inverse-limit normalization, including rank zero.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), proof of Corollary 6.8.5; stable lattices: Stanford lecture 19, Proposition 1.1.9"
+   }
+  },
+  {
+   "text": "Compatible lattices for an exact sequence. Given $0\\to V'\\to V\\to V''\\to0$, choose an invariant finite free lattice $B\\subset V$ by [lem-pod-profinite-stable-lattice]. Put $B'=B\\cap V'$ and $B''=\\operatorname{im}(B\\to V'')$. The ring $A$ is a DVR, hence every ideal is principal and it is Noetherian [lem-weil-l-adic-extension-integers-dvr, def-sc-discrete-valuation-ring]. In the family of finitely generated submodules of $B'$ a maximal member exists by [lem-weil-pbc-noetherian-finite-module-acc]; adjoining any element of $B'$ shows that member is all of $B'$. Thus $B'$ is finite, and $B''$ is finite as a quotient of $B$. Both are torsion free as submodules of vector spaces, hence finite free by [lem-sc-dvr-fg-torsionfree-free]. Each spans the required vector space: multiply any vector of $V'$ by a sufficiently high power of $\\ell$ to enter $B$, and lift any vector of $V''$ to $V$ and do the same. Both actions are continuous: choose an $A$-basis of each lattice and extend its $E$-basis to a basis of its containing vector space; the adic lattice topology is the subspace topology, and the restricted action is continuous. Lift a basis of $B''$ to $B$ to split $0\\to B'\\to B\\to B''\\to0$ as $A$-modules; the splitting need not be equivariant. Therefore reduction modulo every $\\varpi^n$ is a short exact sequence of finite continuous representations, with surjective transition maps on its kernel tower. Arbitrarily chosen lattices would not give this reduction exactness.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-noetherian-finite-module-acc",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Integral exactness implicit in proof of Corollary 6.8.5; ordinary module inputs: Stacks Tags 00IK and 0AUW"
+   }
+  },
+  {
+   "text": "Exact inverse limits in the sheaf category. Apply the exact finite-coefficient equivalence [cor-galois-lisse-representations](1) to the reduced sequences from step 4, then apply the module inverse image $\\nu^*$ of [sk-thm-pe-classical-sheaves]. It is exact into the ambient category $\\operatorname{Mod}(T_{\\mathrm{proét}},A_{n,T})$, not only into the classical subcategory: by [def-weil-pbc-site-comparison-morphism] it is, on sheaves of modules over the finite discrete ring $A/\\varpi^n$, the left adjoint of $\\nu_*$ (so it preserves cokernels) and it preserves finite limits (so it preserves kernels). This gives compatible short exact sequences $0\\to F'_n\\to F_n\\to F''_n\\to0$ of pro-etale $A_T$-modules, with epimorphic transitions on $F'_n$. Products of these sequences are exact by [det-pe-products-exact]. By [det-pe-milnor-epimorphic] applied to $(F'_n)$, $1-T$ on $\\prod F'_n$ is epic. Limits are sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Given a section $c$ of $\\varprojlim F''_n$, the product epimorphism locally lifts its tuple of coordinates to $b\\in\\prod F_n$; the defect $(1-T)b$ is a section of $\\prod F'_n$. After a further covering it has the form $(1-T)a$ for $a\\in\\prod F'_n$. Then $b-a$ is compatible and lifts $c$. Both local lifting assertions, and the conclusion that the limit map is epic, use [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] and the exact forgetful functor of the module-colimits node. Sectionwise kernels prove left exactness. Hence the inverse-limit sequence is short exact. Finally localization is the filtered colimit of repeated multiplication by $\\ell$; [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] and the same exact colimit-preserving forgetful functor show it preserves this short exact sequence. The normalization and naturality of steps 1–3 identify it with the image under $J_T$ of the original exact representation sequence.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "sk-thm-pe-classical-sheaves",
+    "def-weil-pbc-site-comparison-morphism",
+    "det-pe-products-exact",
+    "det-pe-milnor-epimorphic",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Corollary 6.8.5, with exact products and repleteness expanded; filtered colimits: Stacks Tag 03CO, module limits and forgetful: 03DA,03DB"
+   }
+  },
+  {
+   "text": "Obtaining connected qcqs topologically Noetherian charts. For each of the finitely many given objects use [lem-weil-pbc-lisse-lattice-etale-local] to obtain an etale covering with integral lisse lattices. Iterating these coverings for the finitely many objects gives a common covering in the small etale site [def-weil-pbc-etale-site]; existing lattices restrict to later stages. On an etale slice the continuous-function coefficient rings are literally the coefficient rings of that slice, by [def-weil-pbc-lisse-lattice-coefficients], so restricting preserves the finite free local models and the rationalization isomorphisms. Refine each member by affine neighbourhoods mapping into affine opens $\\operatorname{Spec}R$ of $S$. Since an etale map is locally of finite presentation [def-weil-etale-morphism, def-sbc-locally-finite-presentation], these can be chosen $\\operatorname{Spec}B$ with $B$ a finitely presented, in particular finitely generated, $R$-algebra. The open $\\operatorname{Spec}R$ has Noetherian underlying space, so [lem-sfb-finite-type-noetherian-spectrum] gives the same property for $\\operatorname{Spec}B$. By [lem-sc-noetherian-finite-irreducible-components] it has finitely many irreducible components. Form the finite graph joining two components when they meet. The union in each graph component is connected (a chain of intersecting connected irreducible sets), closed (a finite union of closed sets), and open (its complementary graph components also have closed union). These unions partition the chart and are precisely its connected components. Each is a connected open subscheme with Noetherian underlying space, hence qcqs: every open subset is quasi-compact. Indeed, finite unions from any open covering have a maximal member by the ascending chain condition; adjoining any remaining covering open shows this member covers the subset. This applies to the whole scheme and every intersection of two affine opens. They still form an etale covering of $S$. Discard empty members. Choose a point in each nonempty member and an algebraic closure of its residue field by [def-weil-algebraic-closure]; this gives the required geometric point [def-weil-geometric-point]. This step uses no ring-theoretic Noetherianity or separation of $S$.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "Realizing the whole finite diagram. On a member $T_i$ of step 6 let $M_{a,i}$ be the integral lattice of each pulled-back object. The equivalence of step 1 writes it as $K_{T_i}(B_{a,i})$. Tensoring $B_{a,i}$ with $E$ gives $V_{a,i}$ with continuous action: its action matrix has continuous entries on the invariant lattice, hence on the same finite dimensional vector space. The normalization of step 3 identifies $J_{T_i}(V_{a,i})$ with $M_{a,i}[1/\\ell]$ and with $u_i^{-1}L_a$. Write $\\iota_{a,i}:J_{T_i}(V_{a,i})\\xrightarrow{\\sim}u_i^{-1}L_a$ for these isomorphisms. For an arrow $b:a\\to c$, full faithfulness in step 3 gives a unique equivariant $E$-linear map $h_{b,i}$ satisfying $J_{T_i}(h_{b,i})=\\iota_{c,i}^{-1}\\circ u_i^{-1}f_b\\circ\\iota_{a,i}$. For two composable arrows the middle factors $\\iota_{c,i}\\circ\\iota_{c,i}^{-1}$ cancel, so applying $J_{T_i}$ to their composite gives precisely the conjugate of the composite sheaf arrow. The identity arrow gives the identity map by the same formula. Faithfulness then reflects every stipulated equality of paths in the diagram. It is unnecessary to arrange integral preservation of all of the chosen lattices by all arrows: the Hom localization has already proved the assertion for rational maps. If there are no objects choose the same connected refinement of $S$ without invoking lattice covers; if $S$ is empty choose the empty covering. Thus the construction covers empty diagrams, rank zero, and the empty base.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4),(6) and Corollary 6.8.5, assembling the preceding constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "det-pe-finite-local-systems-twist",
+  "cor-galois-lisse-representations",
+  "lem-pod-adic-limit-finite-modules",
+  "def-pur-sheaf-hom",
+  "det-pe-bounded-continuity-sections",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "sk-thm-pe-classical-sheaves",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-products-exact",
+  "det-pe-milnor-epimorphic",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Proposition 6.8.4(1),(4),(6), and proof of Corollary 6.8.5, pp. 59–60. The omitted integral equivalence is isolated; Hom localization, lattice exactness, sheaf-limit lifting, and chart refinement are expanded here. Ohm–Pendleton finite-type spectrum theorem is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -109,10 +241,52 @@
    "results": "0 hits: ; directory AlgebraicGeometry",
    "date": "2026-10-16",
    "verdict": "no match for exact locally-constant, monodromy or invariant-lattice terminology in AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a topologically noetherian scheme, a lisse p-adic sheaf is etale locally the rationalization of an integral lisse lattice and finite diagrams come from continuous fundamental-group representations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, Condensed.lanSheafProfinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Condensed.profiniteSolid, Condensed.finFree, LightProfinite.hasSheafify_type, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected scheme etale-site and discrete condensed fully-faithful declarations; none gives continuous finite-dimensional representation realization with the integral tower normalization and exactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, Representation, fundamental group, l-adic",
+   "results": "0 hits: ; loogle: Unknown identifier `fundamental`",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: loogle: Unknown identifier `fundamental`"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|lisse|fundamentalGroup|LocallyConstant",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; directory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected scheme etale-site and discrete condensed fully-faithful declarations; none gives continuous finite-dimensional representation realization with the integral tower normalization and exactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of continuous representations of a profinite etale fundamental group gives a fully faithful exact functor to finite rank lisse pro-etale local systems",
+   "results": "8 hits: lightToProfiniteFullyFaithful, FintypeCat.toLightProfiniteFullyFaithful, FintypeCat.toProfiniteFullyFaithful, lightProfiniteToLightCondSetFullyFaithful, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedSet.LocallyConstant.functorFullyFaithful, instFullLightProfiniteLightCondSetLightProfiniteToLightCondSet",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected scheme etale-site and discrete condensed fully-faithful declarations; none gives continuous finite-dimensional representation realization with the integral tower normalization and exactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected scheme etale-site and discrete condensed fully-faithful declarations; none gives continuous finite-dimensional representation realization with the integral tower normalization and exactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous finite dimensional p-adic representation of the profinite etale fundamental group has a lattice-independent fully faithful exact realization as a lisse pro-etale sheaf",
+   "results": "8 hits: CondensedSet.LocallyConstant.functorFullyFaithful, FintypeCat.toProfiniteFullyFaithful, LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete, ProfiniteGrp.isIso_toLimit, CompHausLike.LocallyConstant.functorIso, Condensed.lanCondensedSet, Condensed.lanSheafProfinite, CondensedSet.LocallyConstant.iso",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected discrete condensed fully-faithful functors; profinite groups being limits of their finite quotients does not realize continuous field-valued representations as pro-etale module sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-coefficient-heart-closure",
@@ -120,5 +294,144 @@
   "group": "Q17"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-coefficient-heart"
+ "unit": "sk-lem-coefficient-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-etale-local-monodromy-realization",
+  "worker": "stage1",
+  "summary": "Seven proof steps separate integral reduction effectivity, Hom localization on a qcqs chart, lattice-independent functorial realization, compatible lattices in exact sequences, exact inverse limits in the pro-etale sheaf category, connected topologically Noetherian etale refinements, and simultaneous realization of every arrow. Two strictly smaller statement-only inputs are created; the assigned statement is unchanged. No attachment was found, no Lean was written or compiled, and no SGA route is used.",
+  "blueprint": "det-lem-coefficient-heart-closure proof paragraph (2), the integral-monodromy comparison preceding representation kernels and cokernels, following the finite coefficient portion of sk-lem-coefficient-heart.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-local-systems-twist",
+    "why": "Generic input in step(s) 1: Etale models of finitely presented local systems. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic input in step(s) 1, 5: Lisse sheaves and continuous representations. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Generic input in step(s) 1: Adic systems of finite modules over a complete discrete valuation ring. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic input in step(s) 2: Sheaf Hom of sheaves of modules on a site. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "det-pe-bounded-continuity-sections",
+    "why": "Generic input in step(s) 2: Cohomology on a qcqs object commutes with bounded-below filtered colimits. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Generic input in step(s) 3, 4: A continuous representation of a profinite group stabilizes a lattice. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic input in step(s) 4: The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "Generic input in step(s) 4: Discrete valuation rings and uniformizers. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-module-acc",
+    "why": "Generic input in step(s) 4: Ascending chain and maximal condition for submodules of a finite module over a Noetherian ring. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Generic input in step(s) 4: Finite torsion-free modules over a DVR are free. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Generic input in step(s) 5: Recognizing the classical part. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "det-pe-products-exact",
+    "why": "Generic input in step(s) 5: Products of pro-étale module sheaves are exact. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "Generic input in step(s) 5: Towers with epimorphic transitions have no derived limit terms. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic input in step(s) 5: Colimits of sheaves of modules and the forgetful functor to abelian sheaves. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic input in step(s) 5: An epimorphism of abelian sheaves on a site is locally surjective (and conversely). This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Generic input in step(s) 5: Filtered colimits of abelian sheaves on a site are exact. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-lattice-etale-local",
+    "why": "Generic input in step(s) 6: Lisse integral structures exist etale locally. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-weil-pbc-etale-site",
+    "why": "Generic input in step(s) 6: Small etale site. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-weil-pbc-lisse-lattice-coefficients",
+    "why": "Generic input in step(s) 6: Continuous coefficient rings and etale slice restrictions. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic input in step(s) 6: Etale morphism of schemes. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic input in step(s) 6: Morphisms locally of finite presentation. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Generic input in step(s) 6: Noetherian spaces have finitely many irreducible components. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-weil-algebraic-closure",
+    "why": "Generic input in step(s) 6: Algebraic closure of a field. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
+    "node": "def-weil-geometric-point",
+    "why": "Generic input in step(s) 6: Geometric point of a scheme. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-local-systems-twist",
+  "cor-galois-lisse-representations",
+  "lem-pod-adic-limit-finite-modules",
+  "def-pur-sheaf-hom",
+  "det-pe-bounded-continuity-sections",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "sk-thm-pe-classical-sheaves",
+  "det-pe-products-exact",
+  "det-pe-milnor-epimorphic",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-cade84960",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-cade84960 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all 26 proof dependencies and 11 statement dependencies, the parent det-lem-coefficient-heart-closure and the unit sk-lem-coefficient-heart, and Bhatt–Scholze 6.8.1, 6.8.2, 6.8.3, 6.8.4(1)-(6) and 6.8.5 with their proofs (local PDF, pp. 58-60). Item statement: unchanged and matches BS 6.8.4(1),(4),(6) plus the monodromy step in the proof of 6.8.5. It adds no ell-invertibility, ring-Noetherian or separation hypothesis, and it gives the parent exactly what its step 2 uses. Step 1: Galois clause (1) only, finite local systems are classical, adic limits, and basis lifting for freeness. Step 2: checked the hypotheses of det-pe-bounded-continuity-sections (qcqs T, filtered N, degree 0, q=0); this is the BS 6.8.4(4) argument. Step 3: stable lattice for compact Pi; clearing denominators and lattice independence are written out. Step 4: B∩V' is finitely generated by ACC before freeness is applied; the A-linear splitting gives exact reductions (tested on a split two-dimensional case and on V'=V). Step 5: the product-exactness, Milnor and lift-defect-correction argument is correct, and localization is an exact filtered colimit. Step 6: the finite-presentation chart over affine Spec R, the Noetherian-spectrum lemma, finitely many irreducible components, clopen connected pieces and qcqs are all checked. Step 7: correctly elementary. New node lem-sfb-integral-lisse-reduction-equivalence: this is BS 6.8.4(1) ('left to the reader') with the 6.8.2 identities. It is true and strictly smaller than the item. I read every DAG node citing 6.8.4 and none is a duplicate. New node lem-sfb-finite-type-noetherian-spectrum: the Ohm–Pendleton theorem; it is true and weaker in hypothesis than Mathlib's Noetherian-ring instance. Stacks (algebra.tex, example-noetherian-topology-on-spec) explicitly does not prove it, so the WANTED source is legitimate. No duplicate turned up in a regex sweep of every node statement or a grep for Ohm/Pendleton. Searches cover all three kinds, there is no cycle, and no SGA source is used. I accept the declared tool_uses: they are generic black boxes and replace no unit step. FIX (one citation): step 5 took exactness of nu^* into the ambient module category from sk-thm-pe-classical-sheaves, whose statement gives exactness only onto the classical subcategory. I added def-weil-pbc-site-comparison-morphism (nu^* is a finite-limit-preserving left adjoint on modules over a finite discrete ring) to step 5's text, its uses and proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-local-monodromy-realization.json.; 1 file(s) fixed by the reviewer"
+ }
 }

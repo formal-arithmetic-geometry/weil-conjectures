@@ -29,9 +29,54 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any vertex $z\\in\\mathcal A$, and put $t=p(z)$. Consider the map $\\theta_z:\\operatorname{Map}_{\\mathcal A}(x,z)\\to\\operatorname{Map}_{\\mathcal D}(Rx,Rz)$ over $B_z=\\operatorname{Map}_S(s,t)$. For each vertex $f:s\\to t$ of $B_z$, choose a $p$-cartesian lift $e:y\\to z$ of $f$ with $p(y)=s$, using the target-lifting clause of the cartesian-fibration definition. Its image $R(e):Ry\\to Rz$ is $q$-cartesian by hypothesis. Apply the cartesian-edge mapping-fiber formula to $(p,e,x)$ and $(q,R(e),Rx)$. It identifies the homotopy fibers of the two maps to $B_z$ over $f$ with $\\operatorname{Map}_{\\mathcal A_s}(x,y)$ and $\\operatorname{Map}_{\\mathcal D_s}(R_sx,R_sy)$, respectively. The formula also supplies that all three total and base mapping spaces are Kan complexes.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cartesian-mapping-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WU",
+    "place": "Proof of Proposition 7.1.5.19(2), choice of cartesian lift; mapping-fiber identification from Proposition 5.1.3.11."
+   }
+  },
+  {
+   "text": "Apply the naturality clause of the mapping-fiber formula to $R$, which is a functor over $S$ preserving the chosen cartesian edge. Under the two displayed identifications the induced map on homotopy fibers is exactly the map induced by $R_s$ on maps from $x$ to $y$, up to the specified homotopy. It is therefore a weak homotopy equivalence by the hypothesis on $x$. Now apply homotopy-fiber detection to the square with top map $\\theta_z$ and bottom map $1_{B_z}$ (the square commutes because $qR=p$). Every homotopy-fiber map is an equivalence and $1_{B_z}$ is an equivalence, so $\\theta_z$ is an equivalence. This holds for every $z$; no claim about transporting initial objects was used.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WU",
+    "place": "Proof of Proposition 7.1.5.19(2), fiberwise test for the outgoing total mapping-space map."
+   }
+  },
+  {
+   "text": "Apply the relative-initial boundary characterization with $p=R$, $\\mathcal X=\\mathcal A$, $\\mathcal Y=\\mathcal D$ and the vertex $x=a(0)$. The stated inner-fibration hypothesis on $R$ is exactly its lifting hypothesis; step 2 proves its outgoing mapping-space condition for every vertex $z\\in\\mathcal A$. Its positive-dimensional boundary-lifting clause now applies to the specified $n\\geq1$, $a$ and $b$, since $Ra=b|_{\\partial\\Delta^n}$ and $a(0)=x$. It supplies $\\widetilde a$ with both exact equations $R\\widetilde a=b$ and $\\widetilde a|_{\\partial\\Delta^n}=a$. This includes $n=1$; no dimension-zero lifting is needed.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17(1) => (3), using the existing relative-initial boundary-characterization node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-relative-initial-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent tower realization foundation; detailed proof reconstructed from online Kerodon 02WU and 02WS, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +126,38 @@
    "results": "{\"t\": \"2026-10-16T19:14:45Z\", \"tool\": \"grep\", \"query\": \"relativeInitial|relativeExponential|IsInitial.*InnerFibration|InnerFibration.*IsInitial|cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"051a9cc3ad30f2c3\"}",
    "date": "2026-10-16",
    "verdict": "No match. CategoryWithFibrations.lean:77-105 identifies Quillen fibrations with all-horn lifting, not inner fibrations satisfying this objectwise mapping-space test. General ModelCategory JoyalTrick declarations assume a model structure and give no relative-initial boundary criterion. The grep hit PushoutProduct.lean:139 is internal-Hom preservation of inner fibrations; the remaining hits are ordinary-category cocartesian terminology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fiberwise relative initiality for a cartesian preserving inner fibration implies lifting every simplex boundary with the specified initial vertex",
+   "results": "{\"t\": \"2026-10-16T19:44:43Z\", \"tool\": \"leanfinder\", \"query\": \"Fiberwise relative initiality for a cartesian preserving inner fibration implies lifting every simplex boundary with the specified initial vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal_app_1\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.Truncated.liftOfStrictSegal_app_0\"], \"digest\": \"80e0c5a017689e6d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-50, InnerFibration.lean:64-74 and SimplicialSet/CategoryWithFibrations.lean:37-100: inner-horn and all-horn filling do not supply cartesian-fiber relative initiality or whole-boundary lifting. Ordinary CoGrothendieck cartesianLift and Hom-lift lemmas require ordinary categories, and StrictSegal nerve-adjunction hits require a strict Segal condition. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsInitial\"",
+   "results": "{\"t\": \"2026-10-16T19:44:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsInitial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-50, InnerFibration.lean:64-74 and SimplicialSet/CategoryWithFibrations.lean:37-100: inner-horn and all-horn filling do not supply cartesian-fiber relative initiality or whole-boundary lifting. Ordinary CoGrothendieck cartesianLift and Hom-lift lemmas require ordinary categories, and StrictSegal nerve-adjunction hits require a strict Segal condition. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?initial|cartesianFibration|initial.*boundary",
+   "results": "{\"t\": \"2026-10-16T19:44:36Z\", \"tool\": \"grep\", \"query\": \"relative.?initial|cartesianFibration|initial.*boundary\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-50, InnerFibration.lean:64-74 and SimplicialSet/CategoryWithFibrations.lean:37-100: inner-horn and all-horn filling do not supply cartesian-fiber relative initiality or whole-boundary lifting. Ordinary CoGrothendieck cartesianLift and Hom-lift lemmas require ordinary categories, and StrictSegal nerve-adjunction hits require a strict Segal condition. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a boundary in a cartesian family using equivalences of outgoing mapping spaces in its initial vertex fiber",
+   "results": "{\"t\": \"2026-10-16T19:44:37Z\", \"tool\": \"leansearch\", \"query\": \"Lift a boundary in a cartesian family using equivalences of outgoing mapping spaces in its initial vertex fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"CategoryTheory.CommSq.lift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.BasedFunctor.isHomLift_iff\", \"IsCoveringMap.liftHomotopy\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCartesian.map.congr_simp\"], \"digest\": \"df5bb3b0c967ff43\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-50, InnerFibration.lean:64-74 and SimplicialSet/CategoryWithFibrations.lean:37-100: inner-horn and all-horn filling do not supply cartesian-fiber relative initiality or whole-boundary lifting. Ordinary CoGrothendieck cartesianLift and Hom-lift lemmas require ordinary categories, and StrictSegal nerve-adjunction hits require a strict Segal condition. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-fiber-cocone-simplex-extension",
@@ -92,5 +165,20 @@
   "group": "NA"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cartesian-initial-boundary-lift",
+  "worker": "stage1",
+  "summary": "Retained the statement. Promoted fiberwise outgoing mapping equivalences to total outgoing mapping equivalences by cartesian lifts, their natural mapping-fiber formula, and existing homotopy-fiber detection. Applied the existing relative-initial boundary characterization to obtain the exact prescribed boundary lift. One new mapping-fiber prerequisite remains; the unnecessary undercategory node was removed during second reading.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction and coherent tower realization, through the pointed-model stability foundation and the finite pushout grid in lem-coef-suspension-square-comparison: the underlying fiber-cone assembly used to construct a finite-poset extension, before proving its unit or its Kan universal property. Local relative extension over one positive-dimensional simplex, with the boundary already fixed, in the skeletal assembly proof. Prerequisite: Fiberwise relative initiality fills a boundary in a cartesian family. Steps 1-2 supply the fiberwise comparison and step 3 the exact boundary filler needed below the existing simplex-extension lemma. Historical unit binding and ancestry are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-b3db364c3",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-b3db364c3 (reviewer sub-agent of L); spot-checked: I read the item, all three of its steps and the new node lem-coef-infinity-cartesian-mapping-fiber in full. I also read every cited statement (def-coef-infinity-fibrations, def-cbc-enhanced-diagrams-cones, lem-coef-spaces-homotopy-fiber-detection, lem-coef-infinity-relative-initial-boundary) and the parent's step 5, which uses the item. The Kerodon sources 02WU (7.1.5.19(2)), 02WS (7.1.5.17 (1)=>(3)) and 01U8 (Prop. 5.1.3.11, the dual of HTT 2.4.4.3) are not archived, so I checked them against the standard statements; proof_origin=agent is right for that reason. Item: its hypotheses match the source and both exact equalities are there. n>=1 is correctly required. Cases checked: S=pt, R=id, n=1, and empty Map_S(s,t). Step 1: the cartesian lift with fixed target comes from the definition; R(e) is cartesian, and Rx lies in D_s. Step 2: the naturality clause applies with T=R and gives a fiber map equal to R_s. Homotopy-fiber detection applies with v=id and a constant homotopy, since qR=p. Step 3: the existing relative-initial boundary node applies with p=R, and step 2 is exactly its definition of R-initial. Every cited node is in the item's unit, so there is no off-route use and no tool_uses. No SGA source is used. New node: the statement is true (cartesian square criterion, Kan fibration Map_E->Map_B, strict fiber over the degenerate id_s, naturality through T of the composition fillers). I tested it on p=id, B=pt, nerves of ordinary Grothendieck fibrations and empty mapping spaces. It is statement-only, has the right blueprint from/via, and its searches are recorded. It does not restate an item clause. Not a duplicate of cocartesian-mapping-criterion, pointwise-cocartesian-transport (K=pt), inner-mapping-fiber, right-fibration-morphism-space or grothendieck-limits-colimits. FIX (B3): the statement says 'coherent postcomposition with e', but no cited node defines postcomposition. I added a citation of [lem-coef-infinity-mapping-composition] (same unit, split, no cycle) to the statement and stmt_deps in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-cartesian-mapping-fiber.json. The removed undercategory node is absent and cited nowhere, so no drop_nodes.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -30,9 +30,96 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-segal-dk-diagonal-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For operators $\\alpha:[p']\\to[p]$ and $\\beta:[q']\\to[q]$, send $u$ to $u\\circ(\\Delta(\\alpha)\\times\\Delta(\\beta))$. At a vertex $i'$ the vertical restriction is the restriction of $u$ at $\\alpha(i')$, precomposed with $\\Delta(\\beta)$, so its edges still go to equivalences. Identity and composition of these operators follow from identity and composition of precomposition; the two variables commute. A simplicial map $f:Q\\to Q'$ preserves equivalence edges because it sends their inverse edges and both inverse-triangle $2$-simplices to the same witnesses in $Q'$. Thus $u\\mapsto fu$ preserves the condition and commutes with both operators, giving the asserted natural bisimplicial set.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Definition preceding Proposition 4.9, printed p.301; explicit operator and naturality verification supplied here."
+   }
+  },
+  {
+   "text": "For an arbitrary small simplicial set $K$, denote by $Y(K)$ the simplicial set of maps $K\\times\\Delta^q\\to Q$ which take every edge in each $\\{v\\}\\times\\Delta^q$, $v\\in K_0$, to an equivalence. Use the minimal marking $K^\\flat$ and the equivalence marking $Q^\\natural$ of [lem-coef-marked-anodyne-lifting-calculus]. A marked edge of $K^\\flat\\times(\\Delta^q)^\\sharp$ has constant $K$ coordinate at a vertex, and all such edges are marked. Consequently, degree by degree and with the same operators,\n$$Y(K)=\\operatorname{Map}^\\sharp(K^\\flat,Q^\\natural).$$\nLikewise $\\operatorname{Map}^\\flat(K^\\flat,Q^\\natural)=\\operatorname{Fun}(K,Q)$: only edges degenerate in both coordinates are marked, and their images are automatically degenerate. The core assertion in that cited statement therefore gives $Y(K)=\\operatorname{Fun}(K,Q)^\\simeq$ and says it is Kan. Taking $K=\\Delta^p$ yields $C(Q)_{p,\\bullet}=\\operatorname{Fun}(\\Delta^p,Q)^\\simeq$; for $K=\\Delta^0$, evaluation is the natural equality with $Q^\\simeq$. The same cited statement says restriction $Y(B)\\to Y(A)$ is a Kan fibration for every simplicial subset $A\\subseteq B$, since $A^\\flat\\to B^\\flat$ is degreewise injective. In particular $Y(\\Delta^1)\\to Y(\\{0,1\\})=Q^\\simeq\\times Q^\\simeq$, and the restrictions to either endpoint, are Kan fibrations. All equalities commute with restriction in $K$ and postcomposition in $Q$ because they retain exactly the same maps of simplicial sets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Propositions 1.16 and 4.9, and the first paragraph of the proof of Proposition 4.10, printed pp.283,301. Agent expansion via HTT Remark 3.1.3.1 and the existing marked lifting calculus."
+   }
+  },
+  {
+   "text": "For $n\\geq2$ put $S=\\operatorname{Sp}[n]\\subseteq\\Delta^n$, the union of consecutive edges as in [lem-cbc-spine-inner-anodyne]. Gluing maps on these edges identifies\n$$Y(S)=P_n:=C(Q)_{1,\\bullet}\\times_{Q^\\simeq}\\cdots\\times_{Q^\\simeq}C(Q)_{1,\\bullet}$$\nwith $n$ factors and strict equality at the matched endpoints. This is degreewise gluing: distinct consecutive edges meet only in their common vertex, and product with $\\Delta^m$ preserves this union and its intersections degree by degree. In particular no homotopy pullback has yet been substituted. The endpoint maps are Kan fibrations by step 2, so their iterated strict pullbacks $P_n$ are Kan (horn fillers lift through a pullback); $Y(\\Delta^n)$ is Kan by step 2 as well. Prove directly that restriction $r_n:Y(\\Delta^n)\\to Y(S)$ lifts every boundary $\\partial\\Delta^m\\hookrightarrow\\Delta^m$, including $m=0$. Such a lifting problem specifies a map to $Q$ on\n$$(S\\times\\Delta^m)\\cup(\\Delta^n\\times\\partial\\Delta^m).$$\nThe spine inclusion is inner anodyne by [lem-cbc-spine-inner-anodyne], and the boundary inclusion is degreewise injective. Their pushout product is inner anodyne by [lem-coef-inner-anodyne-pushout-product]. Since $Q$ is a quasicategory, its map to a point is an inner fibration, so the defining lifting property provides an extension to $\\Delta^n\\times\\Delta^m$. Every vertex of $\\Delta^n$ belongs to $S$. Therefore every vertical edge at a fixed vertex already belongs to $S\\times\\Delta^m$ and has its prescribed equivalence image; the extension lies in $Y(\\Delta^n)$. This proves the boundary lifting assertion without any extra marking theorem for the spine. By the trivial-fibration characterization of [lem-coef-kan-quillen-right-proper], $r_n$ is a trivial Kan fibration, hence a weak homotopy equivalence.",
+   "uses": [
+    "lem-cbc-spine-inner-anodyne",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Proof of Proposition 4.10, printed p.301, Segal paragraph, using Lemma 1.21; the boundary-parameter lifting problem is written out using the existing pushout-product theorem."
+   }
+  },
+  {
+   "text": "Write $B=Q^\\simeq$ and $E=C(Q)_{1,\\bullet}$, with source $s$ and target $t$. Let $P_1=E$ and $P_k=P_{k-1}\\times_{B}E$, using the target of the last edge of $P_{k-1}$ and $s:E\\to B$. Define $H_1=E$ and $H_k=H_{k-1}\\times^h_B E$ with the same endpoint convention and the path model of [lem-coef-kan-pullback-path-comparison]; its endpoint to $B$ is $t$ of its last $E$ coordinate. We verify by induction that $P_k,H_k$ are Kan and that the constant-path map $c_k:P_k\\to H_k$ is a weak homotopy equivalence commuting strictly with that endpoint. For $k=1$ this is the identity on the Kan complex $E$ of step 2. Given the assertion for $k-1$, the projection $P_k\\to P_{k-1}$ is a pullback of the Kan fibration $s$ of step 2. Horn lifting is preserved by pullback (project the horn to $E$, lift against $s$ with the prescribed base, and pair the lift with the fixed $P_{k-1}$ simplex); filling a horn in the Kan base $P_{k-1}$ first proves that $P_k$ is Kan. The path-comparison node makes $H_k$ Kan. Its comparison\n$$P_k\\longrightarrow P_{k-1}\\times^h_B E$$\nis a weak equivalence because $s$ is a Kan fibration. Apply [lem-coef-kan-homotopy-pullback-invariance] to $c_{k-1}$, the identity of $E$ and the identity of $B$: its squares commute strictly, since all previous comparisons retain the last edge. It gives a weak equivalence $P_{k-1}\\times^h_B E\\to H_{k-1}\\times^h_B E=H_k$. The composite is exactly $c_k$, which inserts the constant path at every matched vertex and retains the last edge. The composite of weak homotopy equivalences is a weak homotopy equivalence directly from the definition: geometric realization preserves composition, and composites of bijections on components and isomorphisms on all based homotopy groups have those same properties. This completes the induction. Composing $r_n$ of step 3 with $c_n$ proves the homotopy Segal condition, with precisely the constant-path consecutive-edge map required by [lem-coef-segal-dk-diagonal-equivalence]; the levelwise Kan condition was established in step 2.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-segal-dk-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Proof of Proposition 4.10, printed p.301; agent expansion from strict Segal pullbacks to the specified homotopy-pullback convention by explicit induction."
+   }
+  },
+  {
+   "text": "For vertices $x,y$ of $Q$, a degree-$m$ simplex in the strict fiber of the endpoint map of step 2 is exactly a map $u:\\Delta^1\\times\\Delta^m\\to Q$ whose two endpoint restrictions are the constant simplices at $x,y$. These restrictions have only degenerate edges, hence meet the vertical-equivalence condition automatically. Conversely a simplex of the displayed $U_Q(x,y)$ has precisely these constant endpoint restrictions, and therefore belongs to $C(Q)_{1,m}$. This gives the asserted equality of strict fibers, with simplicial operators inherited from the parameter. Both the endpoint source and its base $B\\times B$ are Kan by step 2 (fill product horns coordinatewise). Apply [lem-coef-kan-pullback-path-comparison] to the endpoint Kan fibration and the point $(x,y)\\to B\\times B$. The resulting constant-path map identifies this strict fiber up to weak equivalence with the path-space homotopy fiber specified in [def-cbc-enhanced-diagrams-cones]. In particular it represents the homotopy fiber, with the actual constant-path comparison and with no change from strict constant endpoints to merely chosen endpoint vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Section 1, printed p.281 (ordinary morphism space as endpoint fiber), together with Propositions 1.16 and 4.9; the equality with the core endpoint fiber and the path comparison are explicit here."
+   }
+  },
+  {
+   "text": "For an $n$-simplex $u$ of the diagonal put $e_Q(u)=u\\delta_n$, where $\\delta_n:\\Delta^n\\to\\Delta^n\\times\\Delta^n$ is the diagonal. For every $\\alpha:[m]\\to[n]$ one has $(\\Delta(\\alpha)\\times\\Delta(\\alpha))\\delta_m=\\delta_n\\Delta(\\alpha)$. Hence evaluation commutes with every face and degeneracy, and defines a simplicial map. For $f:Q\\to Q'$, $f(u\\delta_n)=(fu)\\delta_n$ gives its naturality. This clause constructs the specified map only; no weak equivalence assertion for it is used in this proof.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Definition preceding Proposition 4.9, printed p.301; agent-supplied diagonal restriction construction and its explicit naturality identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-spine-inner-anodyne",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-segal-dk-diagonal-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+  "place": "Propositions 1.16, 4.9 and the Segal part of Proposition 4.10, read online; proof expanded using existing marked lifting, spine, pushout-product and Kan path-comparison nodes. This source is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,10 +183,53 @@
    "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"line\": \"428\", \"text\": \"  Functor.CoreMonoidal.toMonoidal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"line\": \"120\", \"text\": \"  Functor.CoreMonoidal.toMonoidal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"526\", \"text\": \"  StrictSegal.ofCore (fun n ↦\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"line\": \"600\", \"text\": \"/-- A weak rank function for `pairingCore k n`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"line\": \"602\", \"text\": \"    (pairingCore.{u} k n).WeakRankFunction ℕ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"line\": \"117\", \"text\": \"/-- A rank function for `h : A.PairingCore` is a function from the index type `h.ι`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"line\": \"124\", \"text\": \"/-- A weak rank function `h : A.PairingCore` is a function from the index type `h.ι`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"line\": \"133\", \"text\": \"/-- Rank functions for `h : A.PairingCore` correspond to\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"line\": \"153\", \"text\": \"/-- Weak rank functions for `h : A.PairingCore` correspond to\"}\n",
    "date": "2026-10-17",
    "verdict": "No match: read the returned declarations and source excerpts. StrictSegal/StrictSegalCore require a bijective spine for a single simplicial set; ordinary nerve adjunctions and the Kan-to-quasicategory instance do not state this bisimplicial homotopy theorem. Other grep hits concern monoidal functor cores, horn pairing cores or unrelated classification problems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory Q the cores of Fun Delta n Q form a Segal space with Kan endpoint fibration and strict arrow mapping fibers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → ((n : ℕ) → X.StrictSegalCore n) → X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rezk classification diagram of an infinity category has Kan columns and trivial fibration Segal restriction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"KanComplex\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) [S.KanComplex] : S.Quasicategory\", \"doc\": \"Every Kan complex is a quasicategory. \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "classificationDiagram|RezkNerve|completeSegal|SegalSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ore|[Ss]egal",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"13\", \"text\": \"In `AlgebraicTopology.Quasicategory.StrictSegal`, we show that any\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"14\", \"text\": \"strict Segal simplicial set is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"15\", \"text\": \"In `AlgebraicTopology.SimplicialSet.StrictSegal`, we show that the nerve of a\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"16\", \"text\": \"category satisfies the strict Segal condition.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"12\", \"text\": \"# Strict Segal simplicial sets are quasicategories\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"14\", \"text\": \"In `AlgebraicTopology.SimplicialSet.StrictSegal`, we define the strict Segal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"15\", \"text\": \"condition on a simplicial set `X`. We say that `X` is strict Segal if its\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"18\", \"text\": \"In this file, we prove that any simplicial set satisfying the strict Segal\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits.",
+   "subdirectory": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal Kan complexes of functor quasicategories indexed by simplices satisfy the homotopy Segal condition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"(S : SSet) [KanComplex S] : Quasicategory S\", \"doc\": \"Every Kan complex is a quasicategory. This follows because a Kan complex, which has fillers for all horn inclusions, automatically satisfies the condition of having fillers for inner horns (0 < k < n)\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": StrictSegal (nerve C)\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.KanComplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.KanComplex\", \"type\": \"(S : SSet.{u}) : Prop\", \"doc\": \"A simplicial set $ S $ is a Kan complex if it is fibrant in the Quillen model structure on simplicial sets, meaning the unique morphism from $ S $ to the terminal object is a fibration (i.e., satisfie\"}\n  {\"name\": \"SSet.StrictSegalCore.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {n : ℕ} →\\n    (concat :\\n        (x : X.obj (Opposite.op (SimplexCategory.mk 1))) →\\n          (s : X.obj (Opposite.op (SimplexCategory.mk n))) →\\n            CategoryTheory.SimplicialObject.δ X 0 x =\\n                X.map ((SimplexCategory.mk 0).const (SimplexCategory.mk n) 0).op s →\\n  \", \"doc\": \"For a simplicial set $X$ and natural number $n$, this constructor defines the strict Segal condition at level $n$ by specifying a concatenation operation that maps pairs of 1-simplices and $n$-simplic\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.IsStrictSegal.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet}, (∀ (n : ℕ), Function.Bijective (X.spine n)) → X.IsStrictSegal\", \"doc\": \"For a simplicial set $ X $, if for every natural number $ n $, the function $ \\\\text{spine}_n(X) $ is bijective, then $ X $ satisfies the strict Segal condition.\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"{X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern strict Segal conditions for one simplicial set, ordinary category nerves, or the definition of quasicategory and Kan-to-quasicategory instance. Read StrictSegal.lean:40-62 and Quasicategory/Basic.lean:35-61. None constructs the bisimplicial classification diagram, its endpoint fibration and strict mapping fibers. The grep for classificationDiagram/RezkNerve/completeSegal/SegalSpace has no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -107,5 +237,29 @@
   "group": "N8"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quasicategory-classification-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied six proof steps using only existing DAG nodes. Identified the columns with marked mapping cores, proved Segal restriction boundary lifting by the spine pushout product, compared strict and path-model iterated pullbacks by induction, checked the exact strict endpoint fiber and diagonal naturality. No new nodes or attachments. Re-ran Mathlib searches in two phrasings and read the candidates.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 derived-coefficient mapping-space foundation through the recorded diagonal/coherent-nerve ancestry: supplies the classification-space input of parent steps 2 and 3 and the evaluation map used in parent step 4. Main-20261015 ancestor proof read; no unit route or statement is replaced. Whole-blueprint classification and Segal searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-spine-inner-anodyne",
+    "why": "Generic combinatorial spine inclusion theorem supplies the inner-anodyne hypothesis for the explicit boundary lifting problem; no node in this unit states it. This is a tool for the existing classification-space route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-spine-inner-anodyne"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-108dca502",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-108dca502 (reviewer sub-agent of L); spot-checked: I read the whole item, and the statements of all 8 proof dependencies, the parent lem-coef-diagonal-coherent-nerve-comparison (the 3 steps that cite this item) and the ancestor prop-coef-integral-exceptional-adjoint (main-20261015, proof paragraph 2). The statement is unchanged and not weakened. It is not a target node, so the base-change and coefficient-category check does not apply. The sources (Joyal–Tierney Prop. 1.16/4.9/4.10, HTT 3.1.3.1) are not under literature/; the report lists them as WANTED and proof_origin is agent. Step 1 (the bisimplicial operators) is elementary and correct. Step 2: the marked edges of K^flat x (Delta^q)^sharp are exactly the edges of {v} x Delta^q, so Y(K)=Map^sharp(K^flat,Q^natural) exactly, and Map^flat equals Fun(K,Q). The cited marked-anodyne node states word for word that Map^sharp is the core and is Kan, and that restriction along an injective map is a Kan fibration. Step 3: Y(Sp[n]) is the strict iterated pullback. The domain of the boundary lifting problem is the union in the pushout-product node, with the spine inner anodyne and Q->* an inner fibration. Every vertex lies in the spine, so the vertical-equivalence condition is already met. The case m=0 is covered, and the Kan-model node's trivial-fibration characterization includes n=0. Step 4: the induction is set up explicitly. The path-comparison hypotheses hold (Kan inputs, s a Kan fibration), and the invariance squares commute strictly because the last E coordinate is kept. The resulting map is exactly the constant-path Segal map that lem-coef-segal-dk-diagonal-equivalence defines. Step 5: a simplex of the fiber has constant endpoint faces, so the strict fiber equals U_Q(x,y). Path comparison with V=Delta^0 gives the homotopy fiber of def-cbc. Step 6 (the diagonal map and its naturality) is elementary. Small cases checked: empty Q, the point, N([1]) (U(0,1) is a point, U(1,0) is empty), BG, and a discrete category. Duplicates: complete-segal-quasicategory-comparison (an infinity-categorical equivalence) and complete-segal-dk-levelwise (assumes Reedy fibrancy) state different things. The only spine node in the unit is the labelled-presheaf version. I accept the tool use of lem-cbc-spine-inner-anodyne (unit sk-prop-sf-cbc, already reviewed): it is a generic combinatorial lemma used as a black box and replaces no step of the unit's route. No proof dependency leads back to the item, so there is no cycle. proof_deps equals the union of the step uses. No SGA source is cited. The six Mathlib searches are recorded (match: none). No fixes; review.md written."
+ }
 }
