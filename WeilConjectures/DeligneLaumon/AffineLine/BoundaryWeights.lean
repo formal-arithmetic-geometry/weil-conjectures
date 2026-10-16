@@ -304,7 +304,7 @@ private lemma traceFunction_fourierTransform_eq_neg_finsum (ψ : AddChar k₀ (P
   simp only [WeilComplex.affineLineTraceFunction, Equiv.symm_apply_apply] at h
   rw [h, FiniteField.fourierTransform, ← finsum_eq_sum_of_fintype,
     ← finsum_comp_equiv (AffineSpace.fieldPointsEquiv k₀ _)]
-  simp only [Equiv.symm_apply_apply]
+  simp only [WeilComplex.affineLineTraceFunction, Equiv.symm_apply_apply]
 
 /-- **The transform of the boundary sheaf has weights at most `w`** (Step 4 of
 `prop-fd-zero-extension-comparison`): if `FT_ψ(B) ≅ B'[1]` and `M` has weights at most `w`, then

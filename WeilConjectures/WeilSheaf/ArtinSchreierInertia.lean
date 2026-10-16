@@ -51,7 +51,7 @@ lemma artinSchreierTranslationSheafHom_hom_comp (c d : k₀) :
 variable (l) in
 /-- The evaluation `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` along the section `x ↦ (x, σ̄_c x)`, on underlying
 sheaves: the pullback of `σ_c` followed by the counit of `ĀS^* ⊣ ĀS_*`. -/
-lemma affineLine.artinSchreierEvalHom_hom (c : k₀) :
+lemma affineLine.artinSchreierEvalHom_hom_eq_counit (c : k₀) :
     (affineLine.artinSchreierEvalHom l c).hom =
       (ĀS)^*[WeilCoefficients.{u} l].map (artinSchreierTranslationSheafHom l c).hom ≫
         (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) ĀS).counit.app
@@ -103,9 +103,9 @@ lemma affineLine.artinSchreierEvalHom_hom_add (c d : k₀) :
       (Y := (ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l Ā))
       (artinSchreierTranslationSheafHom l d).hom
   simp only [Functor.comp_map] at n
-  rw [affineLine.artinSchreierEvalHom_hom, ← artinSchreierTranslationSheafHom_hom_comp,
+  rw [affineLine.artinSchreierEvalHom_hom_eq_counit, ← artinSchreierTranslationSheafHom_hom_comp,
     Functor.map_comp, Category.assoc, hc]
-  rw [reassoc_of% n, affineLine.artinSchreierEvalHom_hom, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% n, affineLine.artinSchreierEvalHom_hom_eq_counit, Functor.map_comp, Category.assoc]
   rfl
 
 end Translation
