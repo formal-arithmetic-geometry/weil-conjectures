@@ -15,29 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Unfold the common coefficient equivalence into the sectionwise additive encoding and the constant-ring equivalence. The equality hG identifies all sectionwise restriction maps, while naturality of the coefficient-ring map pulled back from the profinite point identifies scalar actions after direct image.",
+   "text": "Reuse the proved encodingPushforwardNatIso construction in Sheaf.Paper.FiniteDiscreteRestrictionEncoding. It expands the common encoding and checks the sectionwise actions using coefficient-unit compatibility. Its type is internalLowerStar h composed with E_T.inverse isomorphic to E_S.inverse composed with moduleLowerStar h. Cancel the two equivalences with Iso.inverseCompIso and Iso.isoCompInverse to get moduleLowerStar h composed with E_T.functor isomorphic to E_S.functor composed with internalLowerStar h.",
    "uses": [
-    "def-weil-pbc-common-finite-discrete-encoding"
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "lem-weil-pbc-finite-discrete-coefficient-sections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The resulting underived natural isomorphism is transported through the exact coefficient equivalences and the right-derived-functor construction. Restricting to bounded-below objects and including them into the full derived category gives the displayed objectwise isomorphism.",
+   "text": "Apply the proved source-library rightDerivedFunctorCompMapDerivedCategoryIso to the exact target equivalence, rightDerivedFunctorNatIso to the underived comparison, and rightDerivedFunctorCompIso to the source equivalence, which preserves K-injectives. Replace the right derived source equivalence with its exact levelwise functor using rightDerivedFunctorIsoMapDerivedCategory. This constructs the natural isomorphism R(H) composed with D(E_T) isomorphic to D(E_S) composed with R(I), where H and I are the module-valued and internal direct images. The latter right derived functor is coefficientDerivedLowerStar by definition.",
    "uses": [
     "def-weil-pbc-coefficient-derived-functor-api"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "At X in the bounded-below derived category, apply D(E_T) to H.rightDerivedFunctorPlusCompatibility.app X, then compose with the preceding natural isomorphism at the included object. This is exactly the stated objectwise isomorphism, with the unchanged coefficient equivalences and direct-image functor.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-common-finite-discrete-encoding",
-  "def-weil-pbc-coefficient-derived-functor-api"
+  "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "def-weil-pbc-coefficient-derived-functor-api",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemmas 5.4.1 and 5.4.3",
-  "note": "Strict lower-level coefficient-conjugation interface needed to transport the ordinary finite-coefficient direct-image comparison."
+  "note": "A4: reuse the existing proved sectionwise pushforward comparison and the proved generic total-derived composition and bounded-below compatibility APIs. No new statements or sorry obligations."
  },
  "mathlib_searches": [
   {
@@ -102,10 +112,10 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T153007-L-348712",
-  "kind": "interface",
+  "landing": "20261016T161556-L-1021334",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
