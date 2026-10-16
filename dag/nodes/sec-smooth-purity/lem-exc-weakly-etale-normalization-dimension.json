@@ -29,9 +29,57 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak p$ be the unique maximal ideal of $C$. By [def-weil-pbc-integral-closure], $C\\subset C'$ is a subring inclusion inside $K=\\operatorname{Frac}(C)$ and every element of $C'$ satisfies a monic polynomial over $C$. The inclusions $C\\subset C'\\subset K$ identify $\\operatorname{Frac}(C')=K$: fractions from $C$ already generate $K$, while fractions of elements of $C'$ lie in $K$. By [def-weil-pbc-finite-type-algebra], a finite module generating set for $C'$ also generates it as an algebra, since its $C$-linear span already equals $C'$. Because $\\mathfrak m$ is maximal and contracts to $\\mathfrak p$, the residue extension is $C/\\mathfrak p\\subset C'/\\mathfrak m$. Reducing the monic integral equation of any $x\\in C'$ modulo $\\mathfrak m$ gives a monic equation for its residue over $C/\\mathfrak p$. Thus every residue is algebraic. For the transcendence-degree definition [def-kun-transcendence-degree], every $x=a/b\\in K$, with $a,b\\in C$ and $b\\ne0$, satisfies the nonzero polynomial $bT-a$, and every residue satisfies its nonzero monic equation. Hence no nonempty algebraically independent set exists in either extension, so both $\\operatorname{trdeg}_C C'$ and $\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak m)$ are zero.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-kun-transcendence-degree",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ specialization: finite integral birational extension has zero fraction-field and residue-field transcendence degrees."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-dimension-formula-universally-catenary-finite-type-domain] to $R=C$, $S=C′$, $\\mathfrak p$ the maximal ideal of $C$, and the given maximal ideal $\\mathfrak m$ of $C′$. Its hypotheses hold by the assumptions and Step 1, and Step 1 makes both transcendence-degree terms zero. Hence $\\operatorname{ht}(\\mathfrak m)=\\operatorname{ht}(\\mathfrak p)$.",
+   "uses": [
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (lemma-dimension-formula), equality clause for a universally catenary base; specialize to the finite normalization."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(C'_{\\mathfrak m})$ is the supremum of the lengths of strict prime chains of $C'$ whose last member is contained in $\\mathfrak m$. Appending $\\mathfrak m$ to such a chain when its last member is strictly smaller than $\\mathfrak m$ gives a chain ending at $\\mathfrak m$ of greater length, and a chain ending at $\\mathfrak m$ is such a chain; so this supremum is $\\operatorname{ht}(\\mathfrak m)$ as defined in the formula applied in Step 2 (the supremum over chains ending at $\\mathfrak m$). Every prime ideal of $C$ is contained in a maximal ideal by [lem-weil-pbc-proper-ideal-contained-in-maximal], and this must be $\\mathfrak p$ because $C$ is local. Thus every strict prime chain of $C$ ends at an ideal contained in $\\mathfrak p$. If its last ideal is strictly smaller than $\\mathfrak p$, append $\\mathfrak p$ to obtain a chain ending at $\\mathfrak p$ of greater length; if it already ends at $\\mathfrak p$, retain it. Conversely, every chain ending at $\\mathfrak p$ is a chain of $C$. The two suprema are therefore equal, so $\\dim C=\\operatorname{ht}(\\mathfrak p)$. Step 2 gives $\\dim(C'_{\\mathfrak m})=\\dim C$. This includes $\\dim C=0$ without change.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KF (definition-height) and Tag 00E3 (lemma-spec-localization), identifying localization dimension with prime height."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-integral-closure",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Tag 02IJ specialized to the finite birational normalization, with Tag 00KF/00E3 for localization dimension."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,23 +89,9 @@
    "verdict": "no exact match: height bounds, a maximal ideal attaining dimension, and DimensionLEOne statements do not assert equal dimension at every maximal ideal of a universally catenary finite normalization."
   },
   {
-   "tool": "loogle",
-   "query": "\"ringKrullDim\", \"IsIntegral\"",
-   "results": "{\"t\": \"2026-10-16T05:22:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no exact match: height bounds, a maximal ideal attaining dimension, and DimensionLEOne statements do not assert equal dimension at every maximal ideal of a universally catenary finite normalization."
-  },
-  {
    "tool": "grep",
    "query": "catenary|catenarian|height.*integral|integral.*height",
    "results": "{\"t\": \"2026-10-16T05:22:58Z\", \"tool\": \"grep\", \"query\": \"catenary|catenarian|height.*integral|integral.*height\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\"], \"digest\": \"1ebb31098853d9e8\"}",
-   "date": "2026-10-16",
-   "verdict": "no exact match: height bounds, a maximal ideal attaining dimension, and DimensionLEOne statements do not assert equal dimension at every maximal ideal of a universally catenary finite normalization."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Universally catenary local domain finite normalization has maximal ideals of equal height",
-   "results": "{\"t\": \"2026-10-16T05:24:26Z\", \"tool\": \"leansearch\", \"query\": \"Universally catenary local domain finite normalization has maximal ideals of equal height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isMaximal_height\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"Ideal.isMaximal_of_primeHeight_eq_ringKrullDim\", \"IsPrincipalIdealRing.height_eq_one_of_isMaximal\", \"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim\"], \"digest\": \"69801ff956c709a6\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: height bounds, a maximal ideal attaining dimension, and DimensionLEOne statements do not assert equal dimension at every maximal ideal of a universally catenary finite normalization."
   },
@@ -81,15 +115,73 @@
    "results": "{\"t\": \"2026-10-16T17:00:30Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure.*(bijective|equiv)|[Cc]atenar|[Nn]ormalization.*[Ww]eak\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"0b71712871005144\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: the hits identify heights in a local ring, provide finite dimension or an attaining maximal ideal, and bound localization dimension; they do not compare maximal heights in a finite normalization over a universally catenary base."
+  },
+  {
+   "tool": "grep",
+   "query": "catenar|equidimensional|integral.*dimension",
+   "results": "{\"t\": \"2026-10-16T18:31:08Z\", \"tool\": \"grep\", \"query\": \"catenar|equidimensional|integral.*dimension\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Trace/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/DedekindDomain/Dvr.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\"], \"digest\": \"d85aeb4f08d8cd3d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only dimension-at-most-one normalization results, generic heights, polynomial dimensions and localization bounds; no universally catenary normalization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type dimension formula height universally catenary",
+   "results": "{\"t\": \"2026-10-16T18:31:09Z\", \"tool\": \"leansearch\", \"query\": \"finite type dimension formula height universally catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.sup_primeHeight_eq_ringKrullDim\", \"Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim\", \"ringKrullDim_le_iff_height_le\", \"ringKrullDim_le_iff_isMaximal_height_le\", \"Order.height_le_krullDim\", \"Ideal.exists_isMaximal_height\", \"Order.krullDim_eq_iSup_height\", \"Ideal.height_le_ringKrullDim_quotient_add_encard\"], \"digest\": \"fc56bd4e2566cb6d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only dimension-at-most-one normalization results, generic heights, polynomial dimensions and localization bounds; no universally catenary normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a universally catenary local domain has the same dimension at every maximal ideal",
+   "results": "{\"t\": \"2026-10-16T19:16:54Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalization of a universally catenary local domain has the same dimension at every maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindDomainInv.dimensionLEOne\", \"IsDedekindRing.toDimensionLEOne\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"instFiniteMaximalSpectrumOfIsFractionRing\", \"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\"], \"digest\": \"4b77ddb2be686715\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite dimension of a Noetherian local ring, local maximal-ideal heights, and Dedekind dimension-one facts do not compare the normalization with its base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally catenary local domain finite normalization has maximal ideals of equal height",
+   "results": "{\"t\": \"2026-10-16T19:16:44Z\", \"tool\": \"leansearch\", \"query\": \"Universally catenary local domain finite normalization has maximal ideals of equal height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isMaximal_height\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"Ideal.isMaximal_of_primeHeight_eq_ringKrullDim\", \"IsPrincipalIdealRing.height_eq_one_of_isMaximal\", \"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim\"], \"digest\": \"69801ff956c709a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the local maximal-ideal height identities and existence of some maximal ideal attaining dimension do not establish the assertion for each normalization maximal ideal."
+  },
+  {
+   "tool": "grep",
+   "query": "height_eq_height_add_of_liesOver_of_hasGoingDown|DimensionLEOne.isIntegralClosure|ringKrullDim_eq_height",
+   "results": "{\"t\": \"2026-10-16T19:16:43Z\", \"tool\": \"grep\", \"query\": \"height_eq_height_add_of_liesOver_of_hasGoingDown|DimensionLEOne.isIntegralClosure|ringKrullDim_eq_height\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"40b79b4f78369af3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: Ideal/Height.lean:418 is the already cited localization leaf; Ideal/KrullsHeightTheorem.lean:462 needs going down, which is not an assumption of the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"IsIntegral\"",
+   "results": "{\"t\": \"2026-10-16T19:17:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-local-component-dimension",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-weakly-etale-normalization-dimension",
+  "worker": "stage1",
+  "summary": "Split the normalization dimension lemma into the general universally catenary finite-type dimension formula (Stacks Tag 02IJ) and an explicit specialization to the finite integral closure. The proof checks the zero transcendence-degree terms, applies the formula to every maximal ideal over the local maximal ideal, and converts heights to localization dimensions using the existing prime-chain node. No Lean declaration attaches to the item.",
+  "blueprint": "The steps realize the second-paragraph universally catenary local-algebra dimension input of thm-exc-curve-open-dimension-general; the new formula node records the Tag 02IJ theorem and the item specializes it to the normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-760edd4d5",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-760edd4d5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited node statement in full. Source checked: Stacks algebra.tex Tag 02IJ (algebra-lemma-dimension-formula, lines 27520-27541; tags/tags line 3302). The new node matches 02IJ hypothesis by hypothesis: R⊂S, both domains, R Noetherian, S of finite type, and the equality when R is universally catenary, with the residue trdeg moved to the left. It is true under def-kun-transcendence-degree read for algebras, because for domains R⊂S that value equals the fraction-field trdeg. I tested it on R=S, k⊂k[t] at (0) and (t), Z⊂Z[t] at (2,t), k[x]⊂k[x,y] at (xy-1), and k[x]⊂k[x,1/x]; all hold. It is statement-only and self-contained, and its four definition nodes each define what they are cited for. The searches are recorded; the only near match, KrullsHeightTheorem.lean:462, needs going down. The rg over snapshot/dag/nodes for 02IJ, 'dimension formula' and 'universally catenary' found only field-base nodes (lem-kun-dimension-formula 02FX and the lem-sc-* dimension nodes), so it is not a duplicate. It is not a restatement of the item: it allows non-integral extensions, positive trdeg and arbitrary primes. The item statement is unchanged and not weakened, and it agrees with how the parent lem-exc-weakly-etale-local-component-dimension cites it. Step 1 is genuinely elementary from the three cited definitions: finite module gives finite type, the residue extension is algebraic, and every element satisfies bT-a, so both trdegs are 0. Step 2 checks every hypothesis of the new node with R=C, S=C', q=m. Step 3 cites Mathlib leaves, so the off-unit use is fine and no tool_uses are needed. Edge cases checked: a field, a DVR, and the nodal curve, where C' is semilocal. Universal catenarity is genuinely required (Nagata's examples). The blueprint place checked is the main-20261015 thm-exc-curve-open-dimension-general proof, paragraph 2. No SGA source is cited, and no coefficient category or base change is involved. FIX: Step 3 compared the localization node's height (chains whose last member lies inside m) with Step 2's height (chains ending at m) without writing the comparison for m. I added the append-m argument; only proof[2].text changed, and the uses are unchanged. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-exc-weakly-etale-normalization-dimension.json.; 1 file(s) fixed by the reviewer"
+ }
 }

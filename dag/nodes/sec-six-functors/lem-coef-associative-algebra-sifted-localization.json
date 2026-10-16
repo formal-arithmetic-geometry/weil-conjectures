@@ -38,9 +38,94 @@
   "def-coef-complete-algebroid",
   "lem-coef-associative-algebra-model-transfer"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a small $I$ with sifted nerve. By [lem-coef-sifted-nerve-index-calculus] its finite diagonals are ordinary final. Biclosedness makes tensor preserve colimits in each variable, so for an algebra diagram $B$, the ordinary colimit $L=\\operatorname{colim}_I UB$ has multiplication through $L\\odot L\\cong\\operatorname{colim}_I(UB_i\\odot UB_i)$ and unit through $\\mathbf1\\cong\\operatorname{colim}_I\\mathbf1$. The algebra identities follow from the identities of $B_i$ using the comparison for three factors for associativity and for one and zero factors for the unit laws. A map from $L$ respects these operations exactly when every component from $UB_i$ does. Thus these operations exhibit $L$ as $U\\operatorname{colim}_I B$, with the original colimit cocone.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "5.5.8.6; explicit ordinary associative algebra colimit construction"
+   }
+  },
+  {
+   "text": "The transferred algebra model structure is combinatorial by [lem-coef-associative-algebra-model-transfer]. Apply [lem-coef-small-diagram-model-rectification] to that model category: every coherent $N(I)$-diagram of localized algebras is equivalent to a strict algebra diagram. Replace it projectively by $A$. By [lem-coef-model-colimit-localization-comparison], the localized cocone to $\\operatorname{colim}_I A$ is its coherent colimit. As $U$ preserves all weak equivalences by the definition of the transferred structure, $U^IA$ still represents the underlying coherent diagram. It suffices to show that $U^IA$ is good in the precise sense of [lem-coef-sifted-good-diagram-calculus]: its ordinary colimit is also its homotopy colimit. No assertion that $U^I$ preserves projective cofibrant objects is made or needed.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-sifted-good-diagram-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.13, first three paragraphs of proof, printed p. 499; compare Propositions 1.3.4.24-25"
+   }
+  },
+  {
+   "text": "Use [lem-coef-associative-algebra-diagram-cell-filtration] to express $A$ as a retract of $A_\\alpha$ built from the constant initial algebra by free cells $T^I(f_\\beta)$ with $f_\\beta$ projective cofibrations between projectively cofibrant diagrams. We prove by transfinite induction that $U^IA_\\beta$ is good and every map $U^IA_\\gamma\\to U^IA_\\beta$ for $\\gamma\\leq\\beta$ is good. At $\\beta=0$, the underlying diagram is the constant tensor unit, which is cofibrant by hypothesis and good by [lem-coef-sifted-good-diagram-calculus]; its identity is a good map. At a successor stage put $Y=U^IA_\\beta$ and $j:0\\to Y$. The initial diagram and its colimit are initial and hence cofibrant, and its homotopy-colimit comparison is an identity after choosing the initial projectively cofibrant replacement. Thus it is good, and $j$ is good by the inductive goodness of $Y$. The free-cell map $f_\\beta$ is good by the projective-cofibration clause of the same calculus.",
+   "uses": [
+    "lem-coef-associative-algebra-diagram-cell-filtration",
+    "lem-coef-sifted-good-diagram-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, cellular presentation (a)-(d) and base of induction, printed pp. 500-501"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-associative-word-filtration] to $\\mathcal C=\\mathcal M^I$ with the pointwise tensor and unit. It is cocomplete with small Hom sets, and pointwise tensoring with $X$ on either side has a right adjoint, $Z\\mapsto\\bigl(j\\mapsto\\int_{i\\in I}\\prod_{\\operatorname{Hom}_I(j,i)}[X(i),Z(i)]\\bigr)$ with $[X(i),-]$ the corresponding right adjoint in $\\mathcal M$, by the Yoneda lemma for ends; strict algebras in $\\mathcal M^I$ are exactly $\\operatorname{Alg}(\\mathcal M)^I$, with $U^I$ the forgetful functor. For the successor cell $A_{\\beta+1}=A_\\beta\\amalg_{T^IP}T^IQ$ with $f_\\beta:P\\to Q$ and $j:0\\to U^IA_\\beta$, that node expresses $U^IA_\\beta\\to U^IA_{\\beta+1}$ as the sequential composite of pushouts of $j\\square f_\\beta\\square j\\square\\cdots\\square f_\\beta\\square j$, with $n$ factors $f_\\beta$ at word length $n\\geq1$. Every such map is good by repeated pushout-product closure in [lem-coef-sifted-good-diagram-calculus]. Its pushout from the preceding good filtration stage is good by that calculus, and its sequential colimit is good by continuous-chain closure. Thus $U^IA_\\beta\\to U^IA_{\\beta+1}$ is good. Composing with earlier good maps uses the finite-chain case of the same closure. At a nonzero limit ordinal $\\lambda$, the chain $(A_\\beta)_{\\beta<\\lambda}$ is filtered and $U$ creates filtered colimits by [lem-coef-associative-word-filtration], so $U^IA_\\lambda=\\operatorname{colim}_{\\beta<\\lambda}U^IA_\\beta$; continuous-chain closure again proves goodness and goodness of all stage maps. This completes the induction, including $\\alpha$. Finally $U^IA$ is a retract of $U^IA_\\alpha$ by [lem-coef-associative-algebra-diagram-cell-filtration], so retract closure proves it good.",
+   "uses": [
+    "lem-coef-associative-algebra-diagram-cell-filtration",
+    "lem-coef-associative-word-filtration",
+    "lem-coef-sifted-good-diagram-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, transfinite induction and final word filtration, printed p. 501; nonsymmetric filtration also Haugseng Theorem 3.10"
+   }
+  },
+  {
+   "text": "Let $Q(U^IA)\\to U^IA$ be a projectively cofibrant replacement in $\\mathcal M^I$. Goodness proved above says that $\\operatorname{colim}_I Q(U^IA)\\to\\operatorname{colim}_I U^IA$ is a weak equivalence. The former vertex with its cocone is the underlying coherent colimit by [lem-coef-model-colimit-localization-comparison]. Step 1 identifies the latter vertex with $U\\operatorname{colim}_I A$, and identifies the comparison of cocones with the cocone obtained by applying $U_\\infty$ to the algebra colimit of Step 2. Hence that cocone has the same coherent universal property. The diagram equivalences from Step 2 show this for the original coherent diagram, proving preservation of every asserted $N(I)$-indexed colimit.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, derived comparison map at the beginning, printed p. 499"
+   }
+  },
+  {
+   "text": "By [lem-coef-sifted-nerve-index-calculus], $N(\\Delta^{\\mathrm{op}})$ is sifted. Substitute $I=\\Delta^{\\mathrm{op}}$ in the result just proved. Its coherent colimits are precisely geometric realizations by definition, proving the final clause.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.8.4, printed p. 506"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-associative-algebra-diagram-cell-filtration",
+  "lem-coef-associative-algebra-model-transfer",
+  "lem-coef-associative-word-filtration",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-sifted-good-diagram-calculus",
+  "lem-coef-sifted-nerve-index-calculus",
+  "lem-coef-small-diagram-model-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Ancestor proof paragraph 2, finite-level mapping-complex adjunction; direct proof reconstructed from Haugseng Lemma 3.19 and Higher Algebra Lemma 4.1.8.13 (the old Lemma 4.1.4.13), printed pp. 499-501. External literature read online but not archived; WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +147,17 @@
    "results": "{\"t\": \"2026-10-16T17:00:56Z\", \"tool\": \"grep\", \"query\": \"sifted|geometricRealization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: No matching source declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived forgetful functor from monoids in a monoidal model category preserves homotopy colimits for small indexing categories with homotopy sifted nerve",
+   "results": "{\"t\": \"2026-10-16T19:19:36Z\", \"tool\": \"leanfinder\", \"query\": \"The right derived forgetful functor from monoids in a monoidal model category preserves homotopy colimits for small indexing categories with homotopy sifted nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.hoFunctor.monoidal\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"CategoryTheory.Tor_obj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\"], \"digest\": \"31d5ae8b54d4437f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary model homotopy categories, derivability structures, finite products of homotopy categories and Tor, not coherent sifted homotopy colimits of strict associative algebras."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-dg-free-model",
@@ -73,5 +165,20 @@
   "group": "NN"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-associative-algebra-sifted-localization",
+  "worker": "stage1",
+  "summary": "Replaced an unvalidated earlier rectification-based draft with the source direct good-diagram/cell-filtration proof; rectification uses this lemma in its source and is not used here. New statement-only inputs are the good-diagram closure calculus, the cellular presentation of projectively cofibrant algebra diagrams (the word filtration and creation of filtered colimits are cited from the existing lem-coef-associative-word-filtration applied to the pointwise monoidal category of diagrams), and homotopy-sifted index calculus. Reused the existing general model-colimit and strict-diagram rectification statements with every hypothesis checked. Statement and maintainer-owned fields unchanged.",
+  "blueprint": "Realizes main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2: foundation for fixed-object enriched mapping-complex comparison before Rlim, via the existing created.item ancestry. The generic associative-algebra sifted-colimit input is Haugseng Lemma 3.19, used in Lemma 3.20, and is now proved by its direct source argument."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N7-3d831322f",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-3d831322f (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement in full. Checked them against Higher Algebra Lemma 4.1.8.13 and its full proof (pp. 498-501: good objects, observations (1)-(7), (B'), cellular presentation (a)-(d), the word filtration in (*)) and against HTT 5.5.8.1, 5.5.8.2, 5.5.8.4, 5.5.8.6, 5.5.8.7 and 5.5.8.11. Haugseng 1312.3881 is not on this machine, so I did not check it directly. The item's hypotheses match HA 4.1.8.13 (B) in nonsymmetric form, and the statement is unchanged and not weakened. Steps 1-6 match HA's proof. The good-diagram calculus and the sifted-index calculus are correct; I tested n=0 and n=1, terminal I, empty and discrete I, and the Delta^op case, and neither duplicates an existing node. The route stays inside unit sk-prop-sf-biduality-general, with no tool_uses, no SGA and no cycle. Fault (C5/D1): the word-filtration paragraph of new node lem-coef-associative-algebra-diagram-cell-filtration, and its 'U^I creates filtered colimits' sentence, restate the existing node lem-coef-associative-word-filtration applied to M^I. The report's duplicate section does not mention that node. Fixed in fixes/: the cell node now states only the cellular presentation. Item step 4 now cites lem-coef-associative-word-filtration for C=M^I (pointwise biclosedness written out) for the successor filtration and for filtered-colimit creation at limit ordinals. proof_deps and the split_report summary are updated. No nodes dropped.; 2 file(s) fixed by the reviewer"
+ }
 }
