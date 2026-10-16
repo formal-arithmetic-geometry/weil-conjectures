@@ -26,9 +26,76 @@
   "def-weil-size-convention",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], the category of left $\\mathcal R$-modules on the chosen small pro-etale site of $X$ is Grothendieck abelian; this statement allows noncommutative rings. Apply [lem-sfb-grothendieck-k-injective] to choose a quasi-isomorphism $s:K\\to I$ with $I$ K-injective. By [def-sfb-right-derived-functor], $Rf_*K$ is canonically represented by $f_*I$. The same definition applied to each additive evaluation functor $\\Gamma(U,-):M\\mapsto M(U)$ gives $R\\Gamma(U,K)\\cong I(U)$, hence $H^q(U,K)=H^q(I(U))$. All these evaluations use the single resolution $I$, and restriction maps are obtained by evaluating its terms.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D) and 079P (theorem-K-injective-embedding-grothendieck); computation as in sites-cohomology.tex, proof of lemma-sheafification-cohomology"
+   }
+  },
+  {
+   "text": "Put $u(V)=X\\times_YV$. By [det-pe-topos-functoriality-inverse-image], precomposition with $u$ sends sheaves to sheaves and $(f_*I)^n(V)=I^n(u(V))$, with restrictions induced by $u$. Equip this sheaf with its $f_*\\mathcal R$-action term by term: $r\\in\\mathcal R(u(V))$ acts on $I^n(u(V))$ by the given module action. The module axioms and compatibility with restrictions and differentials are precisely those of $I$. Let $B$ be the underlying abelian sheaf complex of $f_*I$, and $A$ its underlying presheaf complex. Then $A^n(V)=I^n(u(V))$ and the cohomology presheaf $H^q(A)$ is $P_K^q$, since both are the sectionwise quotient $\\ker(d^q_V)/\\operatorname{im}(d^{q-1}_V)$ with the same restriction maps.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+    "place": "First paragraph, equations $Rf_*K=f_*J$ and $(f_*J)(V)=J(X\\times_YV)$"
+   }
+  },
+  {
+   "text": "Abelian presheaf sheafification is exact by [lem-weil-pbc-sheafification-exact]. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this exact functor and the presheaf complex $A$: $(H^q(A))^\\#\\cong H^q(A^\\#)$, naturally in chain maps. Since the terms of $B$ are sheaves, their sheafifications are canonically themselves by the universal property [def-weil-pbc-sheafification], explicitly, the identity of each sheaf $B^n$ extends uniquely to $e_n:(A^n)^\\#\\to B^n$. If $a_n:B^n\\to(A^n)^\\#$ is the sheafification unit, then $e_na_n=1$, and $a_ne_n=1$ since both endomorphisms of $(A^n)^\\#$ have the same composite with $a_n$. This extension is natural: the two composites for any map $B^n\\to B^m$ agree after the unit and hence agree by uniqueness. In particular the $e_n$ commute with differentials, giving $A^\\#\\cong B$ as complexes. Moreover [lem-weil-pbc-module-sheaves-colimits-forgetful](1), applied on $Y$ with ring $f_*\\mathcal R$, says that forgetting the module action is exact. The same exact-functor cohomology comparison identifies $H^q(B)$ with the underlying abelian sheaf of $\\mathcal H^q(f_*I)$. Thus $(P_K^q)^\\#\\cong\\mathcal H^q(Rf_*K)$ as abelian sheaves. On a sectionwise cycle this is the map induced by the sheafification unit and projection to sheaf cohomology.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Proof of lemma-sheafification-cohomology, kernel/image quotient; sites-modules.tex Tags 03DA and 03CO"
+   }
+  },
+  {
+   "text": "For a morphism of complexes $t:K\\to L$, choose K-injective resolutions $s:K\\to I$ and $r:L\\to J$ as in Step 1. By [lem-weil-pbc-kinjective-hom-derived], the derived morphism $Q(r)Q(t)Q(s)^{-1}:QI\\to QJ$ is represented by a chain map $h:I\\to J$, uniquely up to chain homotopy. Every additive functor preserves chain homotopies, by applying it to the equation $h-h'=dH+Hd$. Consequently the induced cohomology maps after evaluation and after direct image depend only on $t$. For each arrow $V\\prime\\to V$ of the target site, the square between $h^n(u(V))$, $h^n(u(V\\prime))$ and the restriction maps commutes because $h^n$ is a sheaf morphism. Thus the evaluated cohomology maps form a morphism of presheaves, rather than only unrelated maps on objects. The unit naturality in [def-sfb-right-derived-functor] identifies these maps with the maps of $R\\Gamma(U,-)$ and $Rf_*$. The natural comparison of [lem-weil-pbc-exact-functor-complex-cohomology] commutes with $h$, as does the sheafification unit [def-weil-pbc-sheafification]. Hence the isomorphisms of Step 3 commute with $t$. Applying this to the identity of $K$ with two resolutions also proves independence of resolution, in that case $Q(h)=Q(r)Q(s)^{-1}$, so applying cohomology gives $H^q(h)=H^q(r)H^q(s)^{-1}$ for every $q$. Hence $h$ is a quasi-isomorphism, and therefore a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. The same uniqueness up to homotopy also makes comparison through three resolutions compose correctly. This proves canonicity and the asserted naturality.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; derived comparison and unit naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+  "place": "First paragraph, expanded via K-injective computation and exact sheafification; agrees with the conclusion of Stacks Tag 0D6I without using Leray as a black box."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -71,10 +138,66 @@
    "results": "OK 8 hits. Returned names/files: SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, SheafOfModules.pushforwardNatIso, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_obj_val. Read the relevant sources: ordinary sheaf cohomology and underived module pushforward/sheafification do not state the bounded-complex derived direct-image presheaf identification.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded below complex of module sheaves, cohomology of derived direct image is sheafification of sectionwise inverse image hypercohomology",
+   "results": "8 hits; SheafOfModules.sheafificationCompPullback, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Sheaf.H, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.Sheaf.cohomologyPresheafFunctor. Read SheafCohomology/Basic.lean: cohomologyPresheaf is for a single abelian sheaf and natural-number degree. PushforwardContinuous.lean defines underived module pushforward; these do not state the complex comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|rightDerived",
+   "results": "10 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean. Search directory: CategoryTheory/Sites/SheafCohomology. Read SheafCohomology/Basic.lean: cohomologyPresheaf is for a single abelian sheaf and natural-number degree. PushforwardContinuous.lean defines underived module pushforward; these do not state the complex comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "2 hits; CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor. Read SheafCohomology/Basic.lean: cohomologyPresheaf is for a single abelian sheaf and natural-number degree. PushforwardContinuous.lean defines underived module pushforward; these do not state the complex comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived pushforward of a bounded below complex is sheafification of hypercohomology on inverse images",
+   "results": "8 hits; CategoryTheory.Functor.sheafPushforwardContinuous, TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, SheafOfModules.pushforward, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPushforwardCocontinuous. Read SheafCohomology/Basic.lean: cohomologyPresheaf is for a single abelian sheaf and natural-number degree. PushforwardContinuous.lean defines underived module pushforward; these do not state the complex comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex on a ringed site, sheafifying degree q homology of sections of an injective representative computes the cohomology sheaf of its pushforward",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, PresheafOfModules.instIsLocallyInjectiveToSheafify, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b.I_X, CochainComplex.cm5b.I. Read SheafCohomology/Basic.lean: cohomologyPresheaf is for a single abelian sheaf and natural-number degree. PushforwardContinuous.lean defines underived module pushforward; these do not state the complex comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*homology|homology.*sheafification|cohomologyPresheaf",
+   "results": "Independent second reading: 10 hits. Returned names/files: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean. Read Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean:35-65 and CategoryTheory/Sites/SheafCohomology/Basic.lean:56-83. The former induces a functor from an already exact functor and the latter treats single abelian sheaves in natural-number degrees; neither states the derived pushforward comparison for complexes of arbitrary ring-sheaf modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact sheafification carries homology of a presheaf complex to homology of its associated sheaf complex; apply to derived pushforward evaluated on site objects",
+   "results": "Independent second reading: 8 hits. Returned names/files: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, DerivedCategory.homologyFunctorFactors, DerivedCategory.homologyFunctorFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors. Read Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean:35-65 and CategoryTheory/Sites/SheafCohomology/Basic.lean:56-83. The former induces a functor from an already exact functor and the latter treats single abelian sheaves in natural-number degrees; neither states the derived pushforward comparison for complexes of arbitrary ring-sheaf modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"homology\"",
+   "results": "Independent second reading: 0 hits. Returned names/files: . Read Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean:35-65 and CategoryTheory/Sites/SheafCohomology/Basic.lean:56-83. The former induces a functor from an already exact functor and the latter treats single abelian sheaves in natural-number degrees; neither states the derived pushforward comparison for complexes of arbitrary ring-sheaf modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-pe-bounded-continuity-direct-image",
@@ -82,5 +205,54 @@
   "group": "Q41"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-bounded-complex-direct-image-presheaf",
+  "worker": "stage1",
+  "summary": "Retained the statement. Repaired the earlier proof by citing existence of K-injectives for the Grothendieck category of modules over an arbitrary ring sheaf, spelling out the presheaf kernel/image calculation and exact forgetful comparison over f_*R, and proving resolution independence and naturality through homotopy-category representatives. Reused existing nodes only. Second reading made the sheafification-unit inverse, restriction compatibility, and quasi-isomorphic resolution comparisons explicit, and fixed a tab in the blueprint source formula.",
+  "blueprint": "All four steps expand the first paragraph of det-pe-bounded-continuity-direct-image: choose a K-injective representative, compute direct image on inverse-image objects, sheafify sectionwise cohomology, and check the canonical natural map. The unit continuity route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Establishes Grothendieck abelianness for arbitrary ring sheaves on the chosen small site, including noncommutative rings; the continuity unit supplies no such foundational theorem."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Provides existence of the resolution needed to compute derived functors; a generic derived-category tool, not an alternative continuity argument."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Supplies the base-change site functor and underived direct-image evaluation formula explicitly used by the blueprint first paragraph."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Exactness of abelian sheafification is the generic site tool needed to pass from sectionwise cohomology to a cohomology sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact functors commute naturally with complex cohomology; the continuity unit does not prove this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its exact-forgetful clause identifies module cohomology with underlying abelian-sheaf cohomology, for the target ring f_*R."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-aa528f498",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-aa528f498 (reviewer sub-agent of L); spot-checked: I read the whole item and all 4 steps, the full statement of every cited node, Stacks sites-cohomology.tex 0D6I (lemma-unbounded-describe-higher-direct-images, l.4434-4450, proved through Leray and lemma-sheafification-cohomology), and the first proof paragraph of blueprint main-20261015 det-pe-bounded-continuity-direct-image. The item is that 0D6I specialization: u(V)=X×_YV, an arbitrary ring sheaf R, target ring f_*R, bounded below, which is weaker than Stacks' unbounded case. Its statement is unchanged and it matches what the parent's step 1 uses. Step 1: Mod(R) is Grothendieck abelian; this applies with universe 𝒱 because X_proét is formed inside 𝒱 with a 𝒱-small skeleton. The K-injective existence lemma supplies the hypothesis of def-sfb-right-derived-functor (the two definitions of K-injective agree), so RΓ(U,K)=I(U) and Rf_*K=f_*I. The restriction maps follow from the unit's universal property in a few lines. Step 2: clause 2 of det-pe-topos-functoriality-inverse-image gives (f_*I)(V)=I(u(V)); the f_*R-module structure is checked directly, and presheaf cohomology is sectionwise, giving P_K^q. Step 3: exact sheafification together with the exact-functor/cohomology node, A^#≅B by the universal property (checked: e a=1 and a e=1 by uniqueness), and forgetful exactness over f_*R on Y. Step 4: chain-map representative h from the K-injective Hom bijection; h s≃r t because J is K-injective; naturality of η; the quasi-isomorphism between resolutions is a homotopy equivalence. All four steps are correct. There are no new nodes. Duplicate search (rg for 0D6I, its label, lemma-sheafification-cohomology): lem-weil-pbc-site-higher-direct-image-sheafified-presheaf covers a single abelian sheaf in degrees q≥0, and lem-pc-ringed-space-sheafification-cohomology and def-pc-derived-section-presheaf are Zariski/ringed-space results, so none is a duplicate. Edge cases checked: K=0, f=id, the zero ring, X empty, a one-term shifted complex, negative q. All six declared tool_uses are accepted (Grothendieck, K-injective existence, topos functoriality, sheafification exact, exact-functor cohomology, forgetful exact); all are generic black-box tools and the unit's continuity route is kept. No SGA is cited. No fixes."
+ }
 }

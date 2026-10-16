@@ -1,0 +1,89 @@
+{
+ "id": "lem-cbc-sieve-slice-sheafification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Current main-20261015 proof opening 'Choose a compactification c=(j,p)': the arbitrary-site abelian sheaf and slice foundations used in lem-cbc-bounded-below-hypersheaf-model steps 1 and 7, supporting the affine-local compactification repair.",
+   "via": [
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sheafification commutes with slice restriction on sieve sites",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ given by covering sieves: a sieve is a set of arrows with common target closed under precomposition, the maximal sieve covers, and covering sieves are stable under pullback of sieves and satisfy transitivity. No fibre products in $\\mathcal C$ or subcanonicity are assumed. Use the universes of [def-weil-size-convention]. Let $T$ be an object. On $\\mathcal C/T$ a sieve on $(S\\to T)$ covers if its underlying sieve of arrows to $S$ covers in $J$. Let $\\mathcal V$ be sets, abelian groups, rings, or modules over a fixed commutative ring, in universes where the small limits and sheafification [def-weil-pbc-sheafification] exist. For every $\\mathcal V$-valued presheaf $P$ on $\\mathcal C$ there is a canonical natural isomorphism $$ (P|_{\\mathcal C/T})^\\#\\ \\cong\\ (P^\\#)|_{\\mathcal C/T}. $$ Here restriction evaluates $P$ on $(S\\to T)$ as $P(S)$. The composite of the slice sheafification unit with this isomorphism is the restriction of the original sheafification unit. The isomorphism is natural in all maps of presheaves.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+  "place": "Functor.pushforwardContinuousSheafificationCompatibility:382-386 and toSheafify_pullbackSheafificationCompatibility:391-411; Over.forget continuous/cocontinuous instances Sites/Over.lean:279-286."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along the forgetful functor from an over category commutes with sheafification of presheaves for any Grothendieck topology, compatibly with the unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.toSheafify_sheafifyLift_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D]\\n  [inst_2 :\\n    ∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)]\\n  [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a category $\\\\mathcal{D}$, and contravariant functors $P, Q: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$ with $Q$ a sheaf, the composition \"}\n  {\"name\": \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"The composition of the sheafification functor, followed by the forgetful functor from sheaves to presheaves, and then the to-presheaf functor is naturally isomorphic to the composition of the to-presh\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatibleSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type w₁} →\\n        [inst_1 : CategoryTheory.Category.{max v u, w₁} D] →\\n          {E : Type w₂} →\\n            [inst_2 : CategoryTheory.Category.{max v u, w₂} E] →\\n              (\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a limit-preserving functor $ F: \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and the sheafification functor $ J.\\\\text{sheafification} $, this establi\"}\n  {\"name\": \"CategoryTheory.toPresheafToSheafCompComposeAndSheafify\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {A : Type u_1} →\\n        {B : Type u_2} →\\n          [inst_1 : CategoryTheory.Category.{v_1, u_1} A] →\\n            [inst_2 : CategoryTheory.Category.{v_2, u_2} B] →\\n              (F : \", \"doc\": \"A natural transformation between the functors obtained by first whiskering a presheaf functor with sheafification and then composing with another sheafification, versus first mapping sheaves to preshe\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatibleSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type w₁} →\\n        [inst_1 : CategoryTheory.Category.{max v u, w₁} D] →\\n          {E : Type w₂} →\\n            [inst_2 : CategoryTheory.Category.{max v u, w₂} E] →\\n              [\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a contravariant functor $P: \\\\mathcal{C}^\\\\text{op} \\\\to \\\\mathcal{D}$, and functors $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ that preserve colimit\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafifyCompIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatibleSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type w₁} →\\n        [inst_1 : CategoryTheory.Category.{max v u, w₁} D] →\\n          {E : Type w₂} →\\n            [inst_2 : CategoryTheory.Category.{max v u, w₂} E] →\\n              (\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ preserving limits \"}\n  {\"name\": \"CategoryTheory.toSheafify_plusPlusIsoSheafify_hom_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/LeftExact\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w)\\n  [inst_1 : CategoryTheory.Category.{t, w} D]\\n  [inst_2 :\\n    ∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)]\\n  [inst_3\", \"doc\": \"For any presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{D} $, the composition of the unit morphism $ \\\\eta_P : P \\\\to P^{++} $, the isomorphism $ \\\\phi: P^{++} \\\\to \\\\text{sheafify}_J\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_hom_app\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatibleSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w₁}\\n  [inst_1 : CategoryTheory.Category.{max v u, w₁} D] {E : Type w₂} [inst_2 : CategoryTheory.Category.{max v u, w₂} E]\\n  [inst_3 :\\n    ∀ (J : CategoryTheory.Limits.MulticospanShape),\\n   \", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ that preserves col\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the generic continuous/cocontinuous sheafification comparison specializes to Over.forget T, which has both instances without pullback hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardContinuousSheafificationCompatibility\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w) [CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) [G.IsCocontinuous J K\", \"doc\": \"The natural isomorphism exhibiting compatibility between pushforward and sheafification. \"}\n  {\"name\": \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_hom\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w) [CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) [G.IsCocontinuous J K\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the generic continuous/cocontinuous sheafification comparison specializes to Over.forget T, which has both instances without pullback hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardContinuousSheafificationCompatibility|toSheafify_pullbackSheafificationCompatibility",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"382\", \"text\": \"def pushforwardContinuousSheafificationCompatibility :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"391\", \"text\": \"lemma toSheafify_pullbackSheafificationCompatibility (F : Dᵒᵖ ⥤ A) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"393\", \"text\": \"    ((G.pushforwardContinuousSheafificationCompatibility A J K).hom.app F).hom =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"414\", \"text\": \"lemma pushforwardContinuousSheafificationCompatibility_hom_app_hom (F : Dᵒᵖ ⥤ A) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"415\", \"text\": \"    ((G.pushforwardContinuousSheafificationCompatibility A J K).hom.app F).hom =\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the generic continuous/cocontinuous sheafification comparison specializes to Over.forget T, which has both instances without pullback hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocontinuous continuous functor restriction commutes with sheafification unit on over site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.toSheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \": 𝟭 _ ⟶ sheafification J D\", \"doc\": \"The unit of the adjunction between the sheafification functor and the inclusion functor from sheaves to presheaves, which provides a universal natural transformation from the identity functor on presh\"}\n  {\"name\": \"CategoryTheory.toSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"(P : Cᵒᵖ ⥤ D) : P ⟶ sheafify J P\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{D} $, this is the natural transformation component $ \\\\eta_P : P \\\\to \\\\text{sheafify}_J P $ at $ P $, given by the unit of the\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_hom_fac\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \": toSheafify J (P ⋙ F) ≫ (sheafifyComposeIso J F P).hom = whiskerRight (toSheafify J P) F\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, there exists a natural isomorphism between the sheafification of the\"}\n  {\"name\": \"CategoryTheory.Functor.IsContinuous.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D},\\n  (∀ (G : CategoryTheory.Sheaf K (Type t)), CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is continuous if for every sheaf $G$ on $\\\\mathcal{D}$ with respec\"}\n  {\"name\": \"CategoryTheory.sheafifyComposeIso\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \": sheafify J (P ⋙ F) ≅ sheafify J P ⋙ F\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, there is a natural isomorphism between the sheafification of the com\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafifyCompIso\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatibleSheafification\", \"type\": \": J.sheafify P ⋙ F ≅ J.sheafify (P ⋙ F)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ preserving limits \"}\n  {\"name\": \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \"(F : Dᵒᵖ ⥤ A) :\\n  ((G.pushforwardContinuousSheafificationCompatibility A J K).hom.app F).val =\\n    sheafifyLift J (whiskerLeft G.op <| toSheafify K F)\\n      ((presheafToSheaf K A ⋙ G.sheafPushforwardContinuous A J K).obj F).cond\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom component of the natural isomorphism between $ \\\\text{sheafify}_J \\\\cir\"}\n  {\"name\": \"CategoryTheory.Sheaf.sheafifyCocone_ι_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (k : K) :\\n  ((Sheaf.sheafifyCocone E).ι.app k).val = E.ι.app k ≫ CategoryTheory.toSheafify J E.pt\", \"doc\": \"For a cocone $ E $ in the category of presheaves, the component of the natural transformation $ \\\\iota $ of the sheafified cocone at an object $ k $ is given by composing the component $ E.\\\\iota_{k} $ \"}",
+   "date": "2026-10-17",
+   "verdict": "match: the generic continuous/cocontinuous sheafification comparison specializes to Over.forget T, which has both instances without pullback hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+   "results": "[loogle] OK 3 hit(s)\nCategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\nCategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\nCategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_hom",
+   "date": "2026-10-16",
+   "verdict": "confirmed Mathlib match (independent second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardContinuousSheafificationCompatibility",
+   "results": "[grep] OK 5 hit(s)\nMathlib/CategoryTheory/Sites/CoverLifting.lean\nMathlib/CategoryTheory/Sites/CoverLifting.lean\nMathlib/CategoryTheory/Sites/CoverLifting.lean\nMathlib/CategoryTheory/Sites/CoverLifting.lean\nMathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-16",
+   "verdict": "confirmed Mathlib match (independent second reading)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility",
+  "file": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+  "how": "Specializes in one line: G := Over.forget T, J := the slice topology, K := the original topology, A := the chosen value category. Natural isomorphism:382-386 and unit equation:391-411; the continuous and cocontinuous instances are Sites/Over.lean:282-286 and :279-280; restriction is overPullback:289-291. The listed categories have the needed small right Kan extensions and sheafification. No fibre products in C are needed.",
+  "line": 382
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-bounded-below-hypersheaf-model",
+  "date": "2026-10-17",
+  "group": "Q44"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

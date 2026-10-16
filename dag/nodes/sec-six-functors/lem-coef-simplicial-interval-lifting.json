@@ -29,9 +29,114 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Present strict simplicial categories by the following finite-limit sketch. There is a sort $O$ of objects and, for every $n\\geq0$, a sort $M_n$ of arrows in degree $n$, source and target maps $M_n\\rightrightarrows O$, identities $O\\to M_n$, all simplicial operators $M_n\\to M_m$, and composition on the specified pullback of pairs with matching middle object. Impose the category laws in each degree, the simplicial identities, and preservation of source, target, identities and composition by each simplicial operator; the operators on $O$ are the identity. These are exactly the data and laws of the stated simplicial categories, and maps of models are exactly enriched functors with arbitrary object functions. The sketch is small and every specified cone is finite. Apply [lem-coef-finite-limit-model-presentability]: its models are complete, cocomplete and locally finitely presentable, in particular locally presentable as required. It also gives filtered colimits on these displayed sorts, used in step 4.",
+   "uses": [
+    "lem-coef-finite-limit-model-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/article/CTGDC_1982__23_1_3_0.pdf",
+    "place": "Sections 4 and 9, especially (9.3), (9.7), (9.8); explicit sketch supplied here"
+   }
+  },
+  {
+   "text": "For a fixed small set $O$, use the algebraic theory with sorts $(a,b)\\in O^2$, binary operations $M(b,c)\\times M(a,b)\\to M(a,c)$ and identity constants in $M(a,a)$, subject to associativity and the unit equations. These operations are total on each specified pair of sorts; empty off-diagonal sorts are permitted. Its strict simplicial algebras are precisely $\\mathrm{sCat}_O$. The free functor for the sort $(a,b)$ freely adjoins arrows from $a$ to $b$ labelled by a simplicial set, including free words when $a=b$. [lem-coef-sorted-simplicial-algebra-model] therefore gives the objectwise Kan model structure and generating boundary/horn cells, including cells at equal endpoints.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Example 3.5, Definition 3.6 and Theorem 4.7"
+   }
+  },
+  {
+   "text": "Describe these boundary cells explicitly to obtain the claimed free-map characterization. A pushout of a free boundary inclusion adjoins an $n$-simplex generator with its faces already prescribed, together with its degeneracies and all composable words. In degree $k$ the new free generators are exactly the degeneracies in degree $k$ of the attached simplex not already in the boundary. The only reductions of words compose adjacent old arrows or remove identities; reduced words alternating old arrows and new generators give the free-product normal form. Iterating the attachments preserves this normal form and makes degeneracies carry free generators to free generators. Conversely, for a degreewise free extension with degeneracy-stable chosen generators, attach its generators not obtained by degeneracy in increasing degree. Their faces have lower degree, so are already attached; this realizes the extension by free boundary cells. Cofibrations are retracts of these cell maps by [lem-coef-sorted-simplicial-algebra-model], and the converse follows because each free extension is such a cell map and cofibrations are retract closed. Thus cofibrations are precisely retracts of the stated free extensions.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 2, Definitions 2.1–2.2 and the following free-map characterization; normal-form explanation supplied here"
+   }
+  },
+  {
+   "text": "Both generating families are sets. In particular a countable two-object interval can be relabelled so that every degree of every mapping set is a subset of $\\mathbb N$; all simplicial operators and composition functions then belong to a set of coded structures. Choosing representatives preserves the labelled objects and the distinguished inclusion of object 0. All the domains in $I$ and $J$ are $\\varnothing$, $\\{0\\}$, or $U(K)$ for a boundary or a horn with finitely many nondegenerate simplices. A functor from $U(K)$ is just two object choices and a simplicial map from $K$ into their mapping set. It is specified by finitely many object/arrow elements and finitely many face equalities. Since filtered colimits on the sketch sorts are computed in sets by [lem-coef-finite-limit-model-presentability], all these elements and equalities occur at a common stage; equality of two such functors also occurs at a common stage. The same argument with no arrows handles $\\{0\\}$, and the empty domain is immediate. Thus Hom from every generating domain preserves filtered colimits, hence the continuous countable chains in [lem-coef-small-object-cell-factorization]. Apply that node with $\\kappa=\\aleph_0$ separately to $I$ and $J$, using cocompleteness from step 1. It gives the required functorial cell/injective factorizations and exactly the stated retract characterization of $K$-cof.",
+   "uses": [
+    "lem-coef-finite-limit-model-presentability",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 1, (A2), and proof of Theorem 1.1 at the end of Section 3; smallness checked explicitly via the sketch"
+   }
+  },
+  {
+   "text": "A square against $U(K)\\to U(L)$, whose object map is the identity on the two labels, is exactly a square $K\\to A(a,a')$, $L\\to B(pa,pa')$ with fixed endpoints, even if $a=a'$. The free meaning of $U$ follows directly since it has no composable nonidentity arrows. The empty-to-singleton generator tests surjectivity on objects. The boundary characterization in [lem-coef-kan-quillen-right-proper] therefore says that $I$-inj consists exactly of the object-surjective functors with mappingwise trivial Kan fibrations. Given such a functor and any $J$-generator, lift its second target object by object-surjectivity if it is an interval generator, and retain the two already specified objects if it is a horn generator. For these labelled choices form $A_O(i,j)=A(a_i,a_j)$ and $B_O(i,j)=B(pa_i,pa_j)$, using two labels whether or not their images coincide. The induced functor in $\\mathrm{sCat}_{\\{0,1\\}}$ is a trivial fibration by [lem-coef-sorted-simplicial-algebra-model]. For an interval the discrete-two-object map into $H$ is a cofibration by its defining condition; for a horn use its generating trivial cofibration in the same sorted model structure. The corresponding fixed-object lift gives the original lift. Thus every $J$-generator has the left lifting property against every member of $I$-inj, which is exactly $J\\subset I$-cof.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 1, generating sets; Section 2 fixed-object lifting; Section 3, Proposition 3.2"
+   }
+  },
+  {
+   "text": "By the same explicit square correspondence, the horn part of $J$ tests exactly the local Kan fibration condition, using [lem-coef-kan-quillen-right-proper]. Suppose now that $p$ lies in $J$-inj, and fix an object $a$ and an equivalence vertex $e:pa\\to b$ in $B$. Make a two-labelled category $D$ with $D(i,j)=B(b_i,b_j)$ for $b_0=pa$, $b_1=b$, and composition from $B$. It has two distinct labels even if $pa=b$. Apply [lem-coef-countable-equivalence-witness] to the prescribed arrow $e$ to get $F\\to H\\to D$. After replacing $H$ by its chosen labelled representative, its object-0 inclusion is a generator of $J$. Its lifting square has top object $a$ and bottom $H\\to D\\to B$, so it admits a functor $H\\to A$ over $B$. The image of the specified vertex from $F$ is a vertex $d$ satisfying $p(d)=e$ exactly and with target mapping exactly to $b$. Each mapping set of $H$ is nonempty and connected, so $\\pi_0H$ has exactly one arrow between every two objects. Hence that specified vertex is invertible and its image $d$ is invertible in $\\pi_0A$. This proves the required strict vertex-lifting condition, including repeated endpoints.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-countable-equivalence-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 2.3, using Lemma 2.4; duplicate-labelled endpoint construction on printed p. 6"
+   }
+  },
+  {
+   "text": "Conversely assume the local Kan condition and the strict equivalence-vertex lifting condition. Horn squares lift by [lem-coef-kan-quillen-right-proper]. For an interval square with top object $a_0$ and bottom $v:H\\to B$, choose a vertex $g\\in H(0,1)_0$. Its component is invertible since all four mapping sets are weakly contractible. The vertex $v(g)$ lifts, by the assumed equivalence-vertex condition, to an invertible $d:a_0\\to a_1$ with $pa_1=v(1)$ and $p(d)=v(g)$. Define two-labelled categories $A_O(i,j)=A(a_i,a_j)$ and $B_O(i,j)=B(v(i),v(j))$. The induced $p_O:A_O\\to B_O$ is a local Kan fibration; the construction permits $a_0=a_1$ and permits $v(0)=v(1)$. Form the strict fixed-object pullback $E=A_O\\times_{B_O}H$. Its projection $t:E\\to H$ is mappingwise a Kan fibration: a horn square projects to one for $p_O$ and its filler, paired with the given simplex in $H$, is the required pullback filler. The compatible vertex $(d,g)$ has both projections invertible, so [lem-coef-simplicial-pullback-equivalence] makes it invertible in $\\pi_0E$. Apply [lem-coef-countable-equivalence-witness] to it. This gives an interval $H'$ and an object-preserving functor $z:H'\\to E$. The composite $w=tz:H'\\to H$ is a mappingwise weak equivalence, since each of its source and target mapping sets is weakly contractible. Notice that it need not preserve a chosen arrow as a cofibration; only the discrete two-object inclusion into $H$ will be used next.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-pullback-equivalence",
+    "lem-coef-countable-equivalence-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 2.5, pullback construction on printed pp. 7–8; explicit compatibility check and labelled categories supplied here"
+   }
+  },
+  {
+   "text": "Work in the fixed-object model structure of [lem-coef-sorted-simplicial-algebra-model]. Factor the weak equivalence $w:H'\\to H$ as a trivial cofibration $j:H'\\to T$ followed by a fibration $r:T\\to H$. Two-out-of-three makes $r$ a trivial fibration. Since $t:E\\to H$ is a fibration, the square with top $z:H'\\to E$, bottom $r:T\\to H$ and left $j$ has a filler $h:T\\to E$ with $th=r$. Since $O\\to H$ is a cofibration and $r$ a trivial fibration, the square $O\\to T$, $H\\xrightarrow{1}H$ has a filler $s:H\\to T$ with $rs=1_H$. Thus $hs:H\\to E$ is a section of $t$. Composing with $E\\to A_O\\to A$ gives a functor over the original $v:H\\to B$, sending object 0 to the originally prescribed $a_0$. A map out of the singleton category contains only this object and its identities, so this is exactly a filler of the original interval square. All interval and horn generators therefore lift, proving $p\\in J$-inj. Together with step 6 this proves the equivalence.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 2.5 and Lemma 2.6; use the cofibration O→H instead of an unassumed cofibration F→H"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-countable-equivalence-witness",
+  "lem-coef-finite-limit-model-presentability",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-pullback-equivalence",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-sorted-simplicial-algebra-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0406507",
+  "place": "Propositions 2.3 and 2.5 adapted with explicit pullback compatibility, fixed-object theory, and finite-limit sketch. The online sources are not archived under literature/; see WANTED lines in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +165,38 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"30\", \"text\": \"homotopy classes of homotopies between them, defined using the simplicial interval `Δ[1]`.\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: the hits concern horn lifting for simplicial sets or Whitehead theorems in an assumed model category; none constructs or tests two-object enriched intervals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable cofibrant contractible two object simplicial intervals detect equivalence lifting by simplicial functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V : SSet.Truncated 2} →\\n  {D : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} D] →\\n      (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D) →\\n        (map :\\n            {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, proper\", \"doc\": \"Given a 2-truncated simplicial set $ V $ and a category $ D $, if a functor from the free reflexive quiver of $ V $'s 0-simplices to $ D $ preserves identities and compositions, this constructs a func\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2} {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D)\\n  (map :\\n    {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._pro\", \"doc\": \"For a 2-truncated simplicial set $ V $, if $ F $ is a functor from its homotopy category to another category $ D $, then applying $ F $ to the equivalence class $[x]$ of a 0-simplex $ x $ in $ V $'s h\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift_unique'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ (V : SSet.Truncated 2) {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  (F₁ F₂ : CategoryTheory.Functor V.HomotopyCategory D),\\n  (SSet.Truncated.HomotopyCategory.quotientFunctor V).comp F₁ =\\n      (SSet.Truncated.HomotopyCategory.quotientFunctor V).comp F₂ →\\n    F₁ = F₂\", \"doc\": \"For a 2-truncated simplicial set $V$ and any category $\\\\mathcal{D}$, if two functors $F_1, F_2: \\\\mathrm{Ho}(V) \\\\to \\\\mathcal{D}$ satisfy $F_1 \\\\circ Q = F_2 \\\\circ Q$ where $Q: \\\\mathrm{FreeRefl}(\\\\mathrm{\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functor_ext\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2} {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  {F G : CategoryTheory.Functor V.HomotopyCategory D}\\n  (h₁ :\\n    ∀ (x : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 })),\\n      F.obj (SSet.Truncated.HomotopyCategory.\", \"doc\": \"For a 2-truncated simplicial set $ V $ and any category $ \\\\mathcal{D} $, if two functors $ F, G : V.\\\\text{HomotopyCategory} \\\\to \\\\mathcal{D} $ satisfy (1) $ F(x) \\\\cong G(x) $ for all 0-simplices $ x \\\\i\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {X Y : HomotopicalAlgebra.CofibrantObject C} [HomotopicalAlgebra.IsFibrant Y.obj],\\n  Equivalence fun x1 x2 => HomotopicalAlgebra.CofibrantObject.homRel C x1 x2\", \"doc\": \"For cofibrant objects $X$ and $Y$ in a model category $\\\\mathcal{C}$, if $Y$ is fibrant, then the right homotopy relation on morphisms $X \\\\to Y$ forms an equivalence relation. This means the binary rel\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary homotopy categories of truncated simplicial sets and formal lemmas in an assumed model category do not give the Bergner interval test."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bergner generating trivial cofibrations characterize fibrations of enriched simplicial categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": MorphismProperty C\", \"doc\": \"The morphism property in category $\\\\mathcal{C}$ defined as the intersection of the cofibration property and the weak equivalence property, i.e., morphisms that are both cofibrations and weak equivalen\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \": MorphismProperty.IsWeakFactorizationSystem (trivialCofibrations C) (fibrations C)\", \"doc\": \"In any model category $ \\\\mathcal{C} $, the classes of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and fibrations form a weak factorization system. This means ever\"}\n  {\"name\": \"HomotopicalAlgebra.mem_trivialCofibrations_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialCofibrations C f ↔ Cofibration f ∧ WeakEquivalence f\", \"doc\": \"A morphism $ f $ in a category $ \\\\mathcal{C} $ with cofibrations and weak equivalences is a trivial cofibration if and only if it is both a cofibration and a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations_rlp\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (trivialCofibrations C).rlp = fibrations C\", \"doc\": \"In a category equipped with cofibrations and weak equivalences, the class of fibrations coincides with the class of morphisms having the right lifting property with respect to trivial cofibrations (mo\"}\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations_sub_cofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialCofibrations C ≤ cofibrations C\", \"doc\": \"Every trivial cofibration in the category $ \\\\mathcal{C} $ is a cofibration, i.e., the property of being a trivial cofibration implies the property of being a cofibration in $ \\\\mathcal{C} $.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialFibrations C ≤ fibrations C\", \"doc\": \"In a category equipped with fibrations and weak equivalences, the collection of trivial fibrations is a subset of the collection of fibrations.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialCofibrations C ≤ weakEquivalences C\", \"doc\": \"The trivial cofibrations in category $\\\\mathcal{C}$, defined as morphisms that are both cofibrations and weak equivalences, form a subset of the weak equivalences in $\\\\mathcal{C}$.\"}\n  {\"name\": \"HomotopicalAlgebra.mem_trivialCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"[Cofibration f] [WeakEquivalence f] : trivialCofibrations C f\", \"doc\": \"If a morphism $ f $ in a category $ \\\\mathcal{C} $ with cofibrations and weak equivalences is both a cofibration and a weak equivalence, then $ f $ is a trivial cofibration in $ \\\\mathcal{C} $.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary homotopy categories of truncated simplicial sets and formal lemmas in an assumed model category do not give the Bergner interval test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"HasLiftingProperty\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary homotopy categories of truncated simplicial sets and formal lemmas in an assumed model category do not give the Bergner interval test."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|simplicial.*interval|SimplicialCategory.*[Ff]ibration",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"30\", \"text\": \"homotopy classes of homotopies between them, defined using the simplicial interval `Δ[1]`.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary homotopy categories of truncated simplicial sets and formal lemmas in an assumed model category do not give the Bergner interval test."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -71,5 +204,20 @@
   "group": "Q62"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-interval-lifting",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved presentability via a finite-limit sketch, obtained fixed-object transfer from the general sorted-algebra theorem, reused the existing cellular small-object leaf after checking finite generating domains, and wrote both interval lifting implications with repeated endpoints allowed. Exposed the prescribed countable witness and strict-pullback invertibility inputs; corrected the converse to use O→H rather than an unassumed cofibration F→H. No global Bergner model structure is invoked.",
+  "blueprint": "Realizes the technical interval-lifting input to prop-coef-integral-exceptional-adjoint, paragraph 2 (derived coefficient-adjunction, naturality and triangle identities), through the recorded coherent-nerve-comparison ancestry. Does not change the unit route or unit realization."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-6e8dc8cee",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-6e8dc8cee (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and the cited nodes (lem-coef-kan-quillen-right-proper, the leaf lem-coef-small-object-cell-factorization, the definition nodes), plus the parent step in lem-coef-coherent-nerve-comparison. Sources read online: Bergner math/0406507 §1 (C1),(C2),(A1),(A2),(F1),(F2), Prop 2.3, Lemma 2.4 with §4 (Lemmas 4.1–4.3), Prop 2.5, Lemma 2.6; and Bergner math/0508152 Def 3.1, Example 3.5, Def 3.6, Thm 4.7 with proof (printed pp. 1937–1944). The item statement is unchanged and agrees with (C1)-(A2)/(F1)-(F2), with repeated endpoints allowed. Steps: (1) the finite-limit sketch models exactly simplicial categories with arbitrary object maps, so locally finitely presentable with sortwise filtered colimits. (2) The O^2-sorted theory is Example 3.5, with free words when a=b. (3) Free-extension characterization: the normal-form argument is written out and correct; marked elementary, which is generous but accepted. (4) Finite generating domains are omega-small, so the small-object leaf applies at aleph_0; J is a set by coding countable H in N. (5) I-inj is object-surjective plus mappingwise trivial fibration, including n=0; J is contained in I-cof via the two-labelled fixed-object lift. (6) F1 from horns; F2 via the witness and the two-labelled D (pi_0 inverse lies in D(1,0)). (7)-(8) Pullback E, invertibility of (d,g) from the pullback node, witness H'->E, factor w=rj, fillers h and s, section hs over H; this uses O->H instead of Bergner's unassumed cofibration F->H, a correct repair. New nodes: finite-limit-model is Gabriel-Ulmer, true. Sorted-model is Bergner Thm 4.7, true (Quillen/Rezk/DK 7.2); Bergner's own proof is shaky, noted for the later splitter. Countable-witness is exactly Bergner Lemma 2.4 + §4; it needs no Kan condition on D because cells are filled in G, not D, and freeness of H gives the cofibration. Pullback-equivalence I proved: precomposition weak equivalences plus right properness of sSet give pi_0 bijections, hence two-sided inverses. All new nodes are statement-only, unsplit, with created.item, blueprint.from/via and four kinds of search recorded. No duplicates found by rg over the DAG; no cycle; proof_deps equals the union of uses. Everything is in unit sk-prop-sf-biduality-general, so no tool_uses. No SGA. No fixes."
+ }
 }

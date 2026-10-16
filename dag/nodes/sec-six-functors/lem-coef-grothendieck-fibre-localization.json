@@ -1,0 +1,101 @@
+{
+ "id": "lem-coef-grothendieck-fibre-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: coherent finite-coefficient adjunction before derived inverse limit; the fibrewise homotopy coherent localization needed when object sets of dg categories vary.",
+   "via": [
+    "lem-coef-enriched-fibre-assembly",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fibre localization of a Cartesian Grothendieck total category",
+ "statement": "Use the model-category and homotopy coherent localization conventions of [lem-coef-model-infinity-derived-adjunction] and the infinity-category conventions of [def-coef-complete-algebroid]. Fix an ordinary category $B$ and a strict contravariant diagram $F:B^{\\mathrm{op}}\\to\\operatorname{Cat}$, where each $F(b)$ has a model structure with weak equivalences $W_b$. Assume that for every $f:b\\to c$ the functor $f^*:F(c)\\to F(b)$ preserves all weak equivalences. Choose larger universes in which $B$, the fibres and their total category are small. Define the ordinary Cartesian Grothendieck total category $E$ to have objects $(b,X)$ with $X\\in F(b)$, arrows $(b,X)\\to(c,Y)$ pairs $(f,u)$ with $f:b\\to c$ and $u:X\\to f^*Y$, and composition $(g,v)(f,u)=(gf,f^*v\\circ u)$. Let $W_E$ consist of those $(f,u)$ for which $f$ is an isomorphism and $u\\in W_b$. Let $F_\\infty:NB^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ be the diagram obtained by localizing every fibre and transition functor. Then there is a natural equivalence over $NB$\n$$E[W_E^{-1}]_\\infty\\simeq\\int_B F_\\infty.$$\nHere $N$ is the ordinary nerve and the right side is the Cartesian infinity-category of the diagram $F_\\infty$: its fibre at $b$ is $F(b)[W_b^{-1}]_\\infty$, its transport along $f$ is localized $f^*$, and its mapping space from $(b,X)$ to $(c,Y)$ is\n$$\\coprod_{f\\in\\operatorname{Hom}_B(b,c)}\\operatorname{Map}_{F(b)[W_b^{-1}]_\\infty}(X,f^*Y),$$\nwith composition and higher coherences induced by the localized diagram. The comparison restricts to fibre localization and takes $(f,u)$ to the composite of the localized $u$ and the Cartesian arrow $(b,f^*Y)\\to(c,Y)$. For a coherent natural transformation $F_\\infty\\to G$, where $G:NB^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$, the induced map on Cartesian total infinity-categories exists and is an equivalence whenever every fibre component is an equivalence.",
+ "source": {
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Haugseng, Rectification of enriched infinity-categories, Corollary 4.22 and Theorem 4.21, applied to opposite fibres and the opposite base; Theorem 4.6 and Remark 4.7 identify the relative nerve with unstraightening. Model categories are particular partial model categories as in Section 4.2. Read online, not archived. No Stacks tag states this infinity-categorical localization theorem."
+ },
+ "stmt_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "def-coef-complete-algebroid"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the total Grothendieck fibration of a contravariant diagram of model categories at fiber weak equivalences yields the Cartesian unstraightening of the localized fibers",
+   "results": "{\"t\": \"2026-10-16T16:08:15Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the total Grothendieck fibration of a contravariant diagram of model categories at fiber weak equivalences yields the Cartesian unstraightening of the localized fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.ι_map_fiber\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"af35f654c1e8ab6d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck fibres/Cartesian lifts, ordinary localizer morphisms, sheafification, and nerve constructions do not give the infinity-categorical fibre-localization equivalence. Read FiberedCategory/Grothendieck.lean:50-81 and Localization/Equivalence.lean:45-63 to check the distinction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative nerve of a diagram of partial model categories computes the infinity categorical localization of its Grothendieck total category",
+   "results": "{\"t\": \"2026-10-16T16:08:16Z\", \"tool\": \"leanfinder\", \"query\": \"The relative nerve of a diagram of partial model categories computes the infinity categorical localization of its Grothendieck total category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\"], \"digest\": \"e8c8c496b9003d27\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck fibres/Cartesian lifts, ordinary localizer morphisms, sheafification, and nerve constructions do not give the infinity-categorical fibre-localization equivalence. Read FiberedCategory/Grothendieck.lean:50-81 and Localization/Equivalence.lean:45-63 to check the distinction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T16:08:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck fibres/Cartesian lifts, ordinary localizer morphisms, sheafification, and nerve constructions do not give the infinity-categorical fibre-localization equivalence. Read FiberedCategory/Grothendieck.lean:50-81 and Localization/Equivalence.lean:45-63 to check the distinction."
+  },
+  {
+   "tool": "grep",
+   "query": "fibrewise.?localization|fiberwise.?localization|unstraighten|relative.?nerve",
+   "results": "{\"t\": \"2026-10-16T16:08:06Z\", \"tool\": \"grep\", \"query\": \"fibrewise.?localization|fiberwise.?localization|unstraighten|relative.?nerve\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: search returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fiberwise localization of a Grothendieck construction is equivalent to the Cartesian fibration of the localized categories",
+   "results": "{\"t\": \"2026-10-16T16:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Fiberwise localization of a Grothendieck construction is equivalent to the Cartesian fibration of the localized categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"CategoryTheory.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instHasFibersForget\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_obj_fiber\"], \"digest\": \"dba81b17062e8d3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck fibres/Cartesian lifts, ordinary localizer morphisms, sheafification, and nerve constructions do not give the infinity-categorical fibre-localization equivalence. Read FiberedCategory/Grothendieck.lean:50-81 and Localization/Equivalence.lean:45-63 to check the distinction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a diagram of relative categories commutes with Cartesian unstraightening",
+   "results": "{\"t\": \"2026-10-16T16:39:23Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a diagram of relative categories commutes with Cartesian unstraightening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.Localization.lift₂_iso_hom_app_app₁\", \"CategoryTheory.Localization.lift₂_iso_hom_app_app₂\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Localization.Lifting.compRight\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac₂\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"CategoryTheory.Localization.liftingLift\"], \"digest\": \"b66aeef9070a6d7c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match: returned ordinary localization composition, bifunctor and lifting lemmas do not assert localization of Cartesian total infinity-categories."
+  },
+  {
+   "tool": "grep",
+   "query": "(Grothendieck|unstraighten|Cartesian).*(localiz|weakEquiv)|(localiz|weakEquiv).*(Grothendieck|unstraighten)",
+   "results": "{\"t\": \"2026-10-16T16:40:06Z\", \"tool\": \"grep\", \"query\": \"(Grothendieck|unstraighten|Cartesian).*(localiz|weakEquiv)|(localiz|weakEquiv).*(Grothendieck|unstraighten)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/GroupTheory/MonoidLocalization/DivPairs.lean\", \"Mathlib/GroupTheory/MonoidLocalization/DivPairs.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Finite.lean\"], \"digest\": \"ba9675f0a14b4b8e\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match: nine source hits concern Grothendieck group completion and monoid localization, not categorical unstraightening."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-16T16:40:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match: the single hit is sheafification for a Grothendieck topology, not a Grothendieck total category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-fibre-assembly",
+  "date": "2026-10-16",
+  "group": "N2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

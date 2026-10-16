@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-finite-upper-star-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$g^*$ is exact",
@@ -18,34 +18,132 @@
  ],
  "proof": [
   {
-   "text": "$g^*$ is the composite of three functors: the inclusion of sheaves into presheaves, which\npreserves limits; $\\operatorname{Lan}_{b^{\\mathrm{op}}}$; and sheafification, which is\nleft exact for a Grothendieck abelian $\\mathcal A$. It remains to see that\n$\\operatorname{Lan}_{b^{\\mathrm{op}}}$ is left exact. Its value at\n$W\\in Z_{\\mathrm{proét}}$ is a colimit over the opposite of the category of pairs\n$(V,\\;W\\to V\\times_YZ)$. This category is cofiltered: it is nonempty ($V=Y$), and base\nchange preserves the finite limits of $Y_{\\mathrm{proét}}$. So the colimit is filtered, and\nfiltered colimits are exact in the Grothendieck abelian category $\\mathcal A$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For $g$ weakly étale there is a shorter argument. Base change is then right adjoint to the\nlocalization functor $(W\\to Z)\\mapsto(W\\to Z\\to Y)$, so $\\operatorname{Lan}_{b^{\\mathrm{op}}}$\nis precomposition with the opposite of the localization functor, which preserves all\nlimits.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Right exactness holds because $g^*$ is a left adjoint\n([def-sfb-finite-upper-lower-star-adjunction]).",
+   "text": "Let $\\mathcal A$ be the Grothendieck abelian category implicit in [def-sfb-finite-upper-star], and write $C=Y_{\\mathrm{proét}}$, $D=Z_{\\mathrm{proét}}$, $b(V)=V\\times_Y Z$. Work in the small skeleton and coefficient universe fixed by [def-weil-pbc-proetale-site]. The category $C$ has terminal object $Y$. If $V_1\\to V_0\\leftarrow V_2$ is a diagram in $C$, each arrow is weakly étale by [sk-lem-pe-weakly-etale-stability], so $V_1\\times_{V_0}V_2\\to Y$ is weakly étale by base change and composition. Thus this scheme fibre product is an object and has its usual universal property in the full subcategory $C$. Apply [lem-weil-pbc-finite-limits-from-terminal-pullbacks](1) to obtain all finite limits. For $b$, base change preserves weakly étale objects by [sk-lem-pe-weakly-etale-stability], so it is a functor $C\\to D$. It sends the terminal object $Y$ to $Z$. It preserves fibre products: a morphism $T\\to(V_1\\times_{V_0}V_2)\\times_Y Z$ over $Z$ is exactly a pair of maps $T\\to V_1$, $T\\to V_2$ agreeing over $V_0$ and compatible with the fixed map $T\\to Z\\to Y$; these are exactly a pair of maps $T\\to V_1\\times_Y Z$, $T\\to V_2\\times_Y Z$ agreeing over $V_0\\times_Y Z$. This identification respects the projections, and is the fibre-product universal property in $D$. Now [lem-weil-pbc-finite-limits-from-terminal-pullbacks](2) proves that $b$ preserves finite limits. No weakly étale hypothesis on $g$ is used.",
    "uses": [
-    "def-sfb-finite-upper-lower-star-adjunction"
+    "def-sfb-finite-upper-star",
+    "def-weil-pbc-proetale-site",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098M, lemma-fibre-products-proetale; blueprint first paragraph, finite limits of the small pro-étale site"
+   }
+  },
+  {
+   "text": "For $W\\in D$, form $I_W$ with objects $(V,\\phi:W\\to b(V))$ and morphisms $a:V\\to V'$ with $b(a)\\phi=\\phi'$. It is cofiltered. It contains $(Y,W\\to Z)$, since $Z=b(Y)$ is terminal. Two objects $(V,\\phi),(V',\\phi')$ receive arrows from $(V\\times_Y V', (\\phi,\\phi'))$, using the product isomorphism preserved by $b$. For parallel arrows $a,a':(V,\\phi)\\rightrightarrows(V',\\phi')$, take their equalizer $e:E\\to V$ in $C$. Because $b$ preserves it and $b(a)\\phi=b(a')\\phi$, the universal property gives a unique $\\psi:W\\to b(E)$ with $b(e)\\psi=\\phi$; then $e:(E,\\psi)\\to(V,\\phi)$ equalizes the arrows. Hence $I_W^{\\mathrm{op}}$ is a nonempty filtered small category in the chosen universe [def-weil-pbc-category-colimit]. This supplies all three filteredness conditions, rather than assuming that nonemptiness alone suffices.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X3, lemma-directed, and preceding lemma-almost-directed: explicit products and equalizers"
+   }
+  },
+  {
+   "text": "By [lem-sfb-grothendieck-filtered-finite-limits], $\\mathcal A$ has the small colimits required by [lem-sfb-pointwise-kan-colimit]. Apply the latter to $b:C\\to D$. At $W$ it identifies $\\operatorname{Lan}_{b^{\\mathrm{op}}}$, naturally in the presheaf, with $F\\mapsto\\operatorname{colim}_{I_W^{\\mathrm{op}}}F(V)$. In particular an arrow opposite to $a:V\\to V'$ acts as $F(a):F(V')\\to F(V)$, so the colimit has the variance stated in the blueprint. Smallness is checked in the same universe as cocompleteness, not in the scheme universe alone.",
+   "uses": [
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "lem-sfb-pointwise-kan-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+    "place": "First proof paragraph"
+   }
+  },
+  {
+   "text": "Let $K$ be a finite diagram of $\\mathcal A$-valued presheaves on $C$. Limits of presheaves are objectwise by [lem-weil-pbc-presheaf-finite-limits-objectwise](1), so restricting $K$ to $I_W^{\\mathrm{op}}$ commutes with its limit. Step 2 makes this index filtered; [lem-sfb-grothendieck-filtered-finite-limits] therefore makes the canonical comparison $\\operatorname{colim}_{I_W^{\\mathrm{op}}}\\lim_j K_j(V)\\to\\lim_j\\operatorname{colim}_{I_W^{\\mathrm{op}}}K_j(V)$ invertible. Under the natural isomorphism of [lem-sfb-pointwise-kan-colimit], this is exactly the finite-limit comparison for evaluation at $W$ after $\\operatorname{Lan}_{b^{\\mathrm{op}}}$. As this holds for every $W$, the detection assertion of [lem-weil-pbc-presheaf-finite-limits-objectwise](1) proves that the Kan-extension functor preserves finite limits. The argument includes the empty finite diagram, since the index is nonempty and AB5 is finite-limit preservation, including the terminal object.",
+   "uses": [
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "lem-sfb-pointwise-kan-colimit",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+    "place": "First proof paragraph"
+   }
+  },
+  {
+   "text": "The inclusion of sheaves on $C$ into presheaves preserves finite limits by [lem-weil-pbc-presheaf-finite-limits-objectwise](2). Sheafification on $D$ preserves finite limits by [lem-sfb-grothendieck-sheafification], applied in the chosen small-site universe; this statement covers arbitrary Grothendieck abelian coefficients. Combining these two facts with step 4 and the defining formula of [def-sfb-finite-upper-star], the canonical comparison for $g^*=a_D\\operatorname{Lan}_{b^{\\mathrm{op}}}\\iota_C$ is the composite of three invertible comparison maps. Thus $g^*$ preserves finite limits.",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-sfb-grothendieck-sheafification",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+    "place": "First proof paragraph"
+   }
+  },
+  {
+   "text": "The adjunction of [def-sfb-finite-upper-lower-star-adjunction] and [lem-weil-pbc-left-adjoint-preserves-colimits] show that $g^*$ preserves finite colimits as well. The source and target sheaf categories are abelian by [lem-sfb-grothendieck-sheafification]. The functor is additive: finite products and coproducts preserve the binary biproduct diagrams, and the formula $u+v=\\nabla\\circ(u\\oplus v)\\circ\\Delta$ for addition of morphisms is consequently preserved. For a short exact sequence $0\\to F'\\xrightarrow{i}F\\xrightarrow{p}F''\\to0$, $i$ is a kernel of $p$ and $p$ is a cokernel of $i$. Finite-limit preservation sends the kernel universal property to the kernel universal property, and finite-colimit preservation sends the cokernel universal property to the cokernel universal property; both also preserve the zero object and hence zero maps. The image is therefore short exact. This proves the asserted exactness.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-grothendieck-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+    "place": "Last proof paragraph: right exactness from the adjunction, combined with left exactness"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-finite-upper-lower-star-adjunction"
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-sfb-pointwise-kan-colimit",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "sk-lem-pe-weakly-etale-stability"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+  "place": "First and last paragraphs, with the filtered-index and coefficient-category arguments expanded; the optional weakly étale shortcut is unnecessary for the universal assertion."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left Kan extension opposite finite limit preserving functor Grothendieck abelian coefficients exact filtered colimits",
+   "results": "8 hits: CategoryTheory.lan_preservesFiniteLimits_of_flat, CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits, CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesFiniteLimits, CategoryTheory.lan_flat_of_flat, CategoryTheory.preservesFiniteLimits_iff_lan_preservesFiniteLimits, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension",
+   "date": "2026-10-16",
+   "verdict": "no direct match for the geometric item; generic concrete Kan-extension candidates require additional hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits",
+   "results": "1 hits: CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits",
+   "date": "2026-10-16",
+   "verdict": "candidate only: source requires concrete coefficients; arbitrary Grothendieck abelian A is not this specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "lan_preservesFiniteLimits|preservesFiniteLimits_presheafToSheaf",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "candidate only: Flat.lean:330–349 was read, and the concrete coefficient hypotheses prevent a direct Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left Kan extension of presheaves valued in an arbitrary Grothendieck abelian category commutes with finite limits when the base functor preserves finite limits",
+   "results": "8 hits: CategoryTheory.Functor.leftKanExtension, CategoryTheory.Functor.LeftExtension, CategoryTheory.lan_preservesFiniteLimits_of_preservesFiniteLimits, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension, CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.preservesFiniteLimits_iff_lan_preservesFiniteLimits, CategoryTheory.lan_preservesFiniteLimits_of_flat, CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit",
+   "date": "2026-10-16",
+   "verdict": "no direct Mathlib match; pointwise colimit machinery reused in the split"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -66,5 +164,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-finite-upper-star-exact",
+  "worker": "stage1",
+  "summary": "Replaced the refused attachment with six complete steps. Proved the base-change fibre-product identities directly; reused the existing weakly étale stability, terminal/pullback criterion, arbitrary-coefficient objectwise finite-limit lemma, and adjunction/colimit theorem. Created two generic categorical Mathlib leaves and one statement-only general-coefficient sheafification lemma. Kept the full statement and all imported metadata. Explicitly checked smallness, opposite variance, cofilteredness including parallel arrows, the empty finite limit, arbitrary g and nonconcrete coefficients. Second reading: recorded the sorry-free slopmaster2 sheafification theorem as an attachment candidate, with the conditional Mathlib abelianness instance for its last clause; no new proof obligation is hidden in that package.",
+  "blueprint": "First paragraph: steps 1–2 establish the cofiltered indexing categories, step 3 gives their Kan formula, step 4 uses AB5, and step 5 composes inclusion, Lan and sheafification. Last paragraph: step 6 uses the adjunction. The middle paragraph is an optional shortcut only for weakly étale g and is not needed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-c32879954",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-c32879954 (reviewer sub-agent of L); spot-checked: Item statement is word for word the main-20261015 statement (arbitrary g; arbitrary Grothendieck abelian A from def-sfb-finite-lower-star; g^* = a_D∘Lan_{b^op}∘ι_C with b(V)=V×_Y Z, as in def-sfb-finite-upper-star). Nothing is weakened. Step 1: checked against Stacks 098M, the between-objects, base-change and composition clauses of sk-lem-pe-weakly-etale-stability (a unit-cited node), and both clauses of the terminal/pullback Mathlib leaf; the fibre-product bijection for b is correct. Step 2: matches Stacks 00X3 (lemma-directed); nonempty, product refinement and equalizer lift are all written, so elementary is justified. Steps 3-4: Stacks 00VC/00VE colimit formula; Mathlib lanEvaluationIsoColim (Flat.lean:293-322) is a NatIso; CostructuredArrow b.op (op W) is I_W^op with F(a):F(V')→F(V); smallness checked. AB5 is GrothendieckAxioms/Basic.lean:71/:300 and GrothendieckCategory/Basic.lean:73,99,102; evaluation detection and objectwise finite limits close the argument, including the empty diagram. Step 5: composite of three functors that preserve finite limits. Step 6: left adjoint preserves colimits, then additivity and preservation of kernels and cokernels. New nodes: two Mathlib leaves verified line by line. lem-sfb-grothendieck-sheafification is a true unsplit general-coefficient input, realized by slopmaster2 hasSheafify_of_isGrothendieckAbelian plus Mathlib sheafIsAbelian; its Stacks 00WJ source is explicitly a set-valued prototype; it is not a restatement of a clause of the item. Duplicate search over dag/nodes and the blueprint found only narrower-coefficient nodes; det-pe-topos-functoriality-inverse-image is correctly avoided (cycle). Route stays in the unit; tool_uses is empty. Edge cases checked: empty C, b=id, empty Y or Z, empty J, zero A. No changes made."
+ }
 }

@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-adic-stratified-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: the stratified-perfect intermediate characterization in Bhatt–Scholze Proposition 6.6.11 used to prove Proposition 6.8.11(3).",
+   "via": [
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Adic constructible complexes and stratified perfect local models",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], [def-weil-pbc-noetherian-ring], meaning that it admits a finite affine open cover by spectra of Noetherian rings. Let $A$ be a commutative Noetherian ring with a unique maximal ideal $I$ and residue field $A/I$, and assume $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/I^n$ [def-weil-pbc-adically-complete-ring]. On the small pro-étale site [def-weil-pbc-proetale-site] put $\\widehat A_X=\\varprojlim_{n\\geq1}(A/I^n)_X$, where the terms are constant ring sheaves [def-weil-pbc-constant-sheaf]. Let $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-etale-site]. Use categories of module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category], and derived extension of scalars [lem-pur-derived-change-of-rings]. For $K\\in D(\\operatorname{Mod}(\\widehat A_X))$, the following conditions are equivalent.\n\n(a) $K$ is locally derived $I\\widehat A_X$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete], and $K\\otimes^L_{\\widehat A_X}(A/I)_X\\simeq\\nu_X^*C$ for some bounded étale $A/I$-complex $C$ with constructible cohomology and finite Tor amplitude. Here constructible means that each cohomology sheaf is locally constant with finitely presented $A/I$-module values [def-sc-finitely-presented-module] on a finite constructible locally closed stratification; finite Tor amplitude means that some integers $a\\leq b$ satisfy $H^q(C\\otimes^L_{(A/I)_X}N)=0$ for every étale $(A/I)_X$-module sheaf $N$ in degree zero and $q\\notin[a,b]$.\n\n(b) There is a finite stratification [def-constructible-stratification] $X=\\coprod_\\alpha S_\\alpha$ by constructible locally closed subschemes such that, on a pro-étale cover of each $S_\\alpha$, $K|_{S_\\alpha}$ is isomorphic to $\\widehat A_{S_\\alpha}\\otimes_A P^\\bullet$ for a perfect $A$-complex $P$ [def-pc-perfect-ring-complex], represented by a bounded complex $P^\\bullet$ of finite projective $A$-modules. The coefficient restriction is identified with $\\widehat A_{S_\\alpha}=\\varprojlim_n(A/I^n)_{S_\\alpha}$; the tensor expression means termwise extension of the constant complex $P^\\bullet$.\n\nEvery complex satisfying these equivalent conditions is bounded in cohomology. These complexes form a full triangulated subcategory: it contains zero, is invariant under isomorphisms and integer shifts, and whenever two vertices of a distinguished triangle satisfy (a), so does the third. No finite dimension hypothesis on $X$ and no invertibility of residue characteristics on $X$ is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1 and its following triangulatedness observation; Lemma 6.5.3 (boundedness); Proposition 6.6.11 (stratified perfect characterization), using Definition 6.3.1 and Remark 6.3.2 for the residue-field constructibility condition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bhatt Scholze constructible adic derived category is bounded triangulated and consists of complexes with perfect local models on finitely many strata",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsTriangulated; HasDerivedCategory.standard; Condensed; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; instHasLimitsOfShapeCondensed; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.IsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern Noetherian schemes, abstract derived categories, or condensed modules; none supplies the adic criterion or its stratified perfect characterization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a noetherian scheme and a complete noetherian coefficient ring, derived complete complexes with constructible finite Tor residue reduction are exactly complexes locally perfect on a finite stratification",
+   "results": "AlgebraicGeometry.IsNoetherian; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.isNoetherian_iff; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern Noetherian schemes, abstract derived categories, or condensed modules; none supplies the adic criterion or its stratified perfect characterization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern Noetherian schemes, abstract derived categories, or condensed modules; none supplies the adic criterion or its stratified perfect characterization"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*perfect|perfect.*stratif|constructib.*adic|adic.*constructib",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern Noetherian schemes, abstract derived categories, or condensed modules; none supplies the adic criterion or its stratified perfect characterization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex over the completed ring sheaf is constructible adic if and only if it becomes a constant perfect complex on a pro etale covering of each stratum",
+   "results": "BDeRham; BDeRhamPlus; CondensedMod.IsSolid; Condensed.profiniteSolid; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern Noetherian schemes, abstract derived categories, or condensed modules; none supplies the adic criterion or its stratified perfect characterization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant complex of sheaves with perfect stalks over an adically complete local ring lifts uniquely from its residue complex",
+   "results": "BDeRham; BDeRhamPlus; IsAdicComplete.mk_lift; IsAdicComplete.of_lift; IsAdicComplete.of_comp_lift; IsAdicComplete.StrictMono.lift; AdicCompletion.eval_lift; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete",
+   "date": "2026-10-16",
+   "verdict": "no match: signatures give classical module completion, de Rham period rings, or formal smoothness, not derived constructible sheaves on a stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant.*[Pp]erfect|[Pp]erfect.*IsLocallyConstant|[Dd]erived[Cc]omplete|[Aa]dic[Cc]onstructible",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"Complex\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-cohomological-adic-criterion",
+  "date": "2026-10-16",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models"
+}

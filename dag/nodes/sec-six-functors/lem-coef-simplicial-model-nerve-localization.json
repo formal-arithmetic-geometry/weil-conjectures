@@ -28,42 +28,153 @@
   "def-coef-complete-algebroid",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in larger fixed universes as permitted in the statement. Functorial factorization gives a trivial fibration $QX\\to X$ with $QX$ cofibrant and a trivial cofibration $X\\to RX$ with $RX$ fibrant. Naturality and two-out-of-three imply that $Q$ and $R$ preserve weak equivalences. Apply [lem-coef-hammock-infinity-localization] to the ordinary categories in question. Its hypothesis holds: an isomorphism has the left lifting property against every map, so it lies in the lifting-characterized class $C\\cap W\\subseteq W$; in particular every identity is in $W$, and two-out-of-three makes $W$ closed under composition. The same holds for $W$ restricted to the full subcategories of cofibrant, fibrant or bifibrant objects, so each is a wide subcategory containing every identity. Inclusion of cofibrant objects has relative inverse $Q$, using the weak natural map $Q\\to\\mathrm{id}$; inclusion of fibrant objects has relative inverse $R$, using $\\mathrm{id}\\to R$. For bifibrant objects use $T=RQ$ and the weak natural zigzag $\\mathrm{id}\\leftarrow Q\\to RQ$ in $\\mathcal M$. On bifibrant inputs $QX$ is also fibrant, since $QX\\to X\\to *$ is a composite of fibrations; $RQX$ is also cofibrant, since $0\\to QX\\to RQX$ is a composite of cofibrations. Thus the restricted zigzag lies inside the bifibrant subcategory. Weak natural transformations become equivalences of functors by the full functor-category universal property and the componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus]. Each inclusion therefore induces an equivalence of infinity localizations. This proves the three inclusion clauses using actual relative inverse functors, without assuming that the ordinary localization models the infinity localization.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16, printed p. 116; functorial replacement zigzags and full localization universal property."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the full simplicial category of cofibrant objects. It has interval tensors $I X=X\\otimes\\Delta^1$. Indeed, SM7 for $0\\to X$ says that $\\underline{\\operatorname{Map}}(X,-)$ preserves fibrations and trivial fibrations; by the tensor adjunction and diagonal lifting, $X\\otimes-$ preserves cofibrations and trivial cofibrations. By [lem-coef-kan-quillen-right-proper], $\\varnothing\\to\\Delta^1$ is a cofibration and either endpoint $\\Delta^0\\to\\Delta^1$ is a trivial cofibration: it is a monomorphism, and its realization is an inclusion of a point into a contractible interval. Consequently $I X$ is cofibrant and $X\\to I X$ is a trivial cofibration. Its retraction $p_X:I X\\to X$ belongs to $W$ by two-out-of-three. The class $W$ of weak equivalences between cofibrant objects contains all isomorphisms, by the lifting argument of Step 1, and satisfies two-out-of-three, since all three objects involved are cofibrant. The enriched tensor adjunction supplies exactly the simplicial isomorphism and constant-identity projection required in [lem-coef-simplicial-interval-localization]. Thus that lemma gives the coherent comparison\n$$N(\\mathcal M^c)[W^{-1}]_\\infty\\simeq\\mathcal D[V^{-1}]_\\infty,\\qquad \\mathcal D=N_{\\mathrm{hc}}(R_{\\mathrm{loc}}\\mathcal C),$$\nwhere $V$ consists of the images of the weak equivalences between cofibrant objects. Here $R_{\\mathrm{loc}}$ is the mappingwise locally Kan replacement, distinct from model-category fibrant replacement $R$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-interval-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 1.3.4.7 hypotheses (3)-(4), applied in the proof of Theorem 1.3.4.20, printed p. 120."
+   }
+  },
+  {
+   "text": "SM7 with $0\\to X$ and $Y\\to *$ makes $\\underline{\\operatorname{Map}}(X,Y)$ Kan whenever $X$ is cofibrant and $Y$ fibrant. Therefore $\\mathcal B=N_{\\mathrm{hc}}(\\mathcal M^{cf})$ is a quasicategory by [lem-coef-coherent-nerve-comparison]. The enriched inclusion followed by locally Kan replacement gives a coherent functor $j:\\mathcal B\\to\\mathcal D$. The same node identifies its mapping maps with the weak equivalences\n$$\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)\\longrightarrow(R_{\\mathrm{loc}}\\mathcal C)(X,Y)\\quad(X,Y\\in\\mathcal M^{cf}).$$\nThus $j$ is fully faithful. For any cofibrant $X$, choose a trivial cofibration $u_X:X\\to RX$ with $RX$ fibrant, hence bifibrant. For every bifibrant $Z$, SM7 says that precomposition\n$$\\underline{\\operatorname{Map}}(RX,Z)\\longrightarrow\\underline{\\operatorname{Map}}(X,Z)$$\nis a trivial Kan fibration. Natural mapping-space comparison for the coherent nerve consequently identifies $j(-)\\circ u_X:\\operatorname{Map}_{\\mathcal B}(RX,Z)\\to\\operatorname{Map}_{\\mathcal D}(X,jZ)$ as an equivalence. All hypotheses of [lem-coef-infinity-local-adjoint-criterion] now hold for $j$, giving a coherent adjoint $L\\dashv j$ with unit and counit. In particular this constructs the coherent functor; objectwise replacement alone was not taken to be an enriched functor. Its unit at $X$ can be identified with $u_X$ followed by $j$ of an equivalence $RX\\simeq LX$: both are universal arrows, so the mapping-space equivalences give mutually inverse maps between their representing objects, compatible with the arrows from $X$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 1.3.4.20, printed p. 120, construction of the left adjoint to the bifibrant inclusion; Kerodon 02FV (not a Stacks tag)."
+   }
+  },
+  {
+   "text": "We check that $L$ inverts $V$. For $w:X\\to Y$ a weak equivalence between cofibrant objects, use [lem-coef-brown-split-factorizations] to write $w=pi$ with $i:X\\to T$ a cofibration, $p:T\\to Y$ a trivial fibration, and a cofibration section $s:Y\\to T$ satisfying $ps=1_Y$. Two-out-of-three makes both $i$ and $s$ trivial cofibrations. For every bifibrant $Z$, SM7 makes $\\underline{\\operatorname{Map}}(i,Z)$ and $\\underline{\\operatorname{Map}}(s,Z)$ trivial Kan fibrations. Since $\\underline{\\operatorname{Map}}(s,Z)\\,\\underline{\\operatorname{Map}}(p,Z)=1$, two-out-of-three in simplicial sets [lem-coef-kan-quillen-right-proper] makes $\\underline{\\operatorname{Map}}(p,Z)$ a weak equivalence as well. Thus precomposition with $w$ is a weak equivalence of Kan complexes. By [lem-coef-coherent-nerve-comparison] and the natural adjunction equivalences of [lem-coef-infinity-local-adjoint-criterion], precomposition with $Lw$ is an equivalence $\\operatorname{Map}_{\\mathcal B}(LY,Z)\\to\\operatorname{Map}_{\\mathcal B}(LX,Z)$ for every $Z$. This implies that $Lw$ is invertible: on components use $Z=LX$ to obtain $g$ with $gLw=1$; injectivity for $Z=LY$ applied to $(Lw)g$ and $1$ gives $(Lw)g=1$. These equations in the homotopy category give an equivalence by the definition of an equivalence. Hence $L(V)$ consists of equivalences.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 1.3.4.20, printed p. 120: the reflector carries weak equivalences to equivalences; Brown split argument expands this check."
+   }
+  },
+  {
+   "text": "We prove the required full universal property of $L$. Since $j$ is fully faithful, the adjunction counit $\\epsilon:Lj\\to\\mathrm{id}_{\\mathcal B}$ is an equivalence: its induced maps on mapping spaces are the adjunction equivalences followed by the fully faithful comparison. For a component $\\epsilon_b:Ljb\\to b$, precomposition therefore gives bijections $\\pi_0\\operatorname{Map}_{\\mathcal B}(b,z)\\to\\pi_0\\operatorname{Map}_{\\mathcal B}(Ljb,z)$ for every $z$. With $z=Ljb$, choose $g:b\\to Ljb$ such that $g\\epsilon_b\\simeq1_{Ljb}$. With $z=b$, injectivity and $(\\epsilon_b g)\\epsilon_b\\simeq\\epsilon_b=1_b\\epsilon_b$ imply $\\epsilon_b g\\simeq1_b$. Thus $\\epsilon_b$ is an equivalence by the stated definition. Let $\\mathcal E$ be any infinity category. Precomposition with $L$ maps $\\operatorname{Fun}(\\mathcal B,\\mathcal E)$ into $\\operatorname{Fun}_V(\\mathcal D,\\mathcal E)$ by Step 4; precomposition with $j$ is a functor in the opposite direction. Their first composite is equivalent to the identity by $\\epsilon$. For $G$ inverting $V$, the transformation $G\\eta:G\\to GjL$ is componentwise an equivalence: by Step 3 each $\\eta_X$ is the composite of the image of $u_X\\in W$ and an equivalence, and $G$ inverts both. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] turns this into an equivalence in the full functor category. Whiskering the coherent unit and counit supplied by [lem-coef-infinity-local-adjoint-criterion] makes these comparisons natural also in transformations between functors. Therefore $L$ is universal for inverting $V$ on entire functor infinity categories, and $\\mathcal D[V^{-1}]_\\infty\\simeq\\mathcal B$. A comparison of cores alone is not used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 1.3.4.20, printed p. 120; expanded reflective-localization argument on full functor categories."
+   }
+  },
+  {
+   "text": "Combine Steps 1, 2 and 5. The composite\n$$N(\\mathcal M^c)\\longrightarrow\\mathcal D\\xrightarrow{L}\\mathcal B$$\nis the infinity localization at $W$, and the cofibrant inclusion identifies it with $N(\\mathcal M)[W^{-1}]_\\infty$. On the ordinary bifibrant subcategory the first functor is $j$ composed with its ordinary-to-coherent nerve map; the counit $Lj\\simeq\\mathrm{id}_{\\mathcal B}$ from Step 5 identifies the composite there with that map. The equivalence on localizations of the bifibrant inclusion from Step 1 consequently says exactly that the inverse equivalence $\\mathcal B\\to N(\\mathcal M)[W^{-1}]_\\infty$ restricts to the stated inclusion followed by localization. Both agreement and extension are coherent by the full functor-category universal property in [lem-coef-hammock-infinity-localization]. The universal property required in the statement is the resulting equivalence of full functor infinity categories.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Remark 1.3.4.16, printed pp. 116-117 and proof p. 120."
+   }
+  },
+  {
+   "text": "For a cofibrant $X$ and fibrant $Y$, choose the trivial fibration $QY\\to Y$. Its source is bifibrant, since a fibration to a fibrant object has fibrant source. SM7 makes\n$$\\underline{\\operatorname{Map}}(X,QY)\\longrightarrow\\underline{\\operatorname{Map}}(X,Y)$$\na trivial Kan fibration. The mapping-space weak equivalence into the locally Kan replacement, together with [lem-coef-coherent-nerve-comparison], identifies the left side with $\\operatorname{Map}_{\\mathcal D}(X,jQY)$; by the natural adjunction mapping equivalence of [lem-coef-infinity-local-adjoint-criterion], this is $\\operatorname{Map}_{\\mathcal B}(LX,QY)$. Steps 1 and 6 identify it with $\\operatorname{Map}(qX,qY)$. These comparisons are natural: the enriched mapping bifunctor, functorial $Q$, natural coherent-nerve comparison, adjunction and localization equivalence all supply their maps before inversion of these weak equivalences. Thus they extend to the localized variables; no choice of unrelated equivalences of spaces is made.\n\nFor composition, first consider a cofibrant $X$, bifibrant $Y$ and fibrant $Z$, the restrictions making both factors of the asserted mapping comparison apply. Choose a bifibrant $QZ\\to Z$ and a trivial cofibration $X\\to RX$ to a bifibrant object. The enriched composition diagrams with sources $\\underline{\\operatorname{Map}}(RX,Y)\\times\\underline{\\operatorname{Map}}(Y,QZ)$ and targets $\\underline{\\operatorname{Map}}(RX,QZ)$ commute strictly with precomposition $X\\to RX$ and postcomposition $QZ\\to Z$. SM7 makes each needed pre- and postcomposition comparison map a trivial Kan fibration. On the three bifibrant objects the coherent-nerve comparison explicitly preserves composition and its homotopies. The commuting diagrams and equivalences therefore give the requested composition compatibility for $X,Y,Z$ as well, and the natural comparisons carry its higher homotopies. For arbitrary objects replace the first variable by $QX$ and the second by $RY$; the weak replacement maps become equivalences after localization, giving the displayed derived-mapping formula.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20, mapping-space consequence of its enriched comparison; SM7 and the natural adjunction construction in its proof."
+   }
+  },
+  {
+   "text": "Apply the result to simplicial sets with the functorial Kan model structure of [lem-coef-kan-quillen-right-proper] and Cartesian tensor, cotensor and function complex. To verify the simplicial axiom, transpose a lifting problem for the induced function-complex map against a horn or boundary inclusion. It is exactly the lifting problem for a fibration against the Cartesian pushout product of the given cofibration with that horn or boundary. A pushout product of monomorphisms is a monomorphism, since its source is the union of two simplicial subsets of the product. Against a horn inclusion $j$, this $j$ is a trivial cofibration by the horn-generation description in [lem-coef-kan-quillen-right-proper], hence anodyne by the weak factorization system. Since the given cofibration $i$ is monic, [lem-coef-sset-anodyne-pushout-product] makes $i\\mathbin{\\square}j$ anodyne. If $i$ is trivial and $j$ is a boundary inclusion, the same cited statement applies to $j\\mathbin{\\square}i$; swapping product factors induces an isomorphism of this arrow with $i\\mathbin{\\square}j$, so it too has the left lifting property against every Kan fibration. These horn and boundary lifting tests prove that the function-complex map is a fibration, and a trivial fibration when $i$ is trivial. When the given fibration is trivial, its right lifting property against every monomorphism instead applies to $i\\mathbin{\\square}j$ for every boundary inclusion $j$, including $\\partial\\Delta^0=\\varnothing\\to\\Delta^0$. This proves the other triviality case of SM7. Products give the tensor, and the function-complex formula $\\underline{\\operatorname{Map}}(K,L)_n=\\operatorname{Hom}(K\\times\\Delta^n,L)$ gives its adjunction and cotensor degree by degree. All simplicial sets are cofibrant and precisely the Kan complexes are fibrant. Hence its bifibrant enriched subcategory is the simplicial category of small Kan complexes. The already proved localization equivalence identifies its coherent nerve with the infinity category $\\mathcal S$ of small spaces under the space convention in the statement.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Kan-model instance of Theorem 1.3.4.20; Cartesian SM7 checked using the existing anodyne pushout-product leaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-interval-localization",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundation for proof paragraph 2. Agent-expanded proof following Higher Algebra Proposition 1.3.4.7, Remark 1.3.4.16 and proof of Theorem 1.3.4.20; online sources not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "The homotopy coherent nerve of the fibrant cofibrant objects of a simplicial model category is its infinity localization",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) → [inst : CategoryTheory.Category.{v_1, u_1} C] → [HomotopicalAlgebra.ModelCategory C] → Type u_1\", \"doc\": \"The quotient category of the full subcategory of cofibrant objects in a model category, where morphisms are identified up to right homotopy. This category is constructed by taking the homotopy relatio\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.Functor C (HomotopicalAlgebra.CofibrantObject.HoCat C)\", \"doc\": \"The canonical functor from a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects, which sends each object $X$ to its cofibrant replacement $X'$ and each morphism to its equivale\"}\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      {D : Type u_2} →\\n        [inst_2 : CategoryTheory.Category.{v_2, u_2} D] →\\n          (L : CategoryTheory.Functor C D) →\\n            [L.IsLocalization (HomotopicalAlgebra.weakE\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\\n        (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects induces a morphism of localizers between the weak e\"}\n",
+   "results": "{\"t\": \"2026-10-16T16:19:15Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of the fibrant cofibrant objects of a simplicial model category is its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"b6b223c7590eaff9\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.SimplicialNerve is a definition, not the model-localization theorem; SimplicialNerve.lean:14-34 explicitly lists the Kan-mapping-space/quasicategory result as future work. CofibrantObject.HoCat.toLocalization and its instances in CofibrantObjectHomotopy.lean:60-123 concern ordinary categories."
   },
   {
    "tool": "loogle",
    "query": "\"ModelCategory\", \"Nerve\"",
-   "results": "[loogle] OK 0 hit(s)\n",
+   "results": "{\"t\": \"2026-10-16T16:19:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.SimplicialNerve is a definition, not the model-localization theorem; SimplicialNerve.lean:14-34 explicitly lists the Kan-mapping-space/quasicategory result as future work. CofibrantObject.HoCat.toLocalization and its instances in CofibrantObjectHomotopy.lean:60-123 concern ordinary categories."
   },
   {
    "tool": "grep",
    "query": "coherent.*nerve|simplicial.*localization|nerve.*localization",
-   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"14\", \"text\": \"This file defines the simplicial nerve (sometimes called homotopy coherent nerve) of a simplicial\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"21\", \"text\": \"The simplicial set `SSet.coherentIso` is defined as the nerve of `WalkingIso`, with\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"143\", \"text\": \"abbrev coherentIso : SSet := nerve WalkingIso.{u}\"}\n",
+   "results": "{\"t\": \"2026-10-16T15:35:50Z\", \"tool\": \"grep\", \"query\": \"coherent.*nerve|simplicial.*localization|nerve.*localization\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.SimplicialNerve is a definition, not the model-localization theorem; SimplicialNerve.lean:14-34 explicitly lists the Kan-mapping-space/quasicategory result as future work. CofibrantObject.HoCat.toLocalization and its instances in CofibrantObjectHomotopy.lean:60-123 concern ordinary categories."
   },
   {
    "tool": "leansearch",
    "query": "Mapping spaces in a simplicial model category compute the infinity categorical localization",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (homRel C).FactorsThroughLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).functor = HomotopicalAlgebra.CofibrantObject.ι\", \"doc\": \"The morphism of localizers between the weak equivalences in the full subcategory of cofibrant objects and the weak equivalences in the ambient model category, induced by the inclusion functor, has its\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : C ⥤ D) [L.IsLocalization (weakEquivalences C)] :\\n  (ι ⋙ L).IsLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithCofibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat.resolution ⋙ HoCat.toLocalization L ⟶ L\", \"doc\": \"The natural transformation asserting that composing the resolution functor (sending objects to their cofibrant replacements) with the localization functor (inverting weak equivalences) is equivalent t\"}\n",
+   "results": "{\"t\": \"2026-10-16T16:19:22Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in a simplicial model category compute the infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\"], \"digest\": \"2848e5cccbac29be\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.SimplicialNerve is a definition, not the model-localization theorem; SimplicialNerve.lean:14-34 explicitly lists the Kan-mapping-space/quasicategory result as future work. CofibrantObject.HoCat.toLocalization and its instances in CofibrantObjectHomotopy.lean:60-123 concern ordinary categories."
   },
   {
    "tool": "leanfinder",
    "query": "Dwyer Kan theorem underlying infinity category of a simplicial model category is the simplicial nerve of bifibrant objects",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"CategoryTheory.nerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → SSet\", \"doc\": \"The nerve functor sends a category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corresponds to a composable sequence of $n$ morphisms in $\\\\mathcal{C}$. For a simplicial operator\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X : SSet.Truncated 2} {C : Type u} [inst : CategoryTheory.SmallCategory C]\\n  (F : CategoryTheory.Functor X.HomotopyCategory C)\\n  (x : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ })),\\n  (SSet.Truncated.HomotopyCategory.homToNerveMk F).app\\n      (Opposite.op { obj := Si\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, the component of the nerve-homotopy adjunction at 0-simplices states that applying the adjunction morphism $\\\\text{homToNerveMk}(F)$ t\"}\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n  {\"name\": \"CategoryTheory.Nerve.nerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat (SSet.Truncated 2)\", \"doc\": \"The functor from the category of small categories to 2-truncated simplicial sets, obtained by composing the nerve functor (which maps a category to its simplicial nerve) with the truncation functor th\"}\n",
+   "results": "{\"t\": \"2026-10-16T16:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan theorem underlying infinity category of a simplicial model category is the simplicial nerve of bifibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.nerveFunctor₂\"], \"digest\": \"620ad6954b3a10f5\"}",
    "date": "2026-10-16",
    "verdict": "no match: CategoryTheory.SimplicialNerve is a definition, not the model-localization theorem; SimplicialNerve.lean:14-34 explicitly lists the Kan-mapping-space/quasicategory result as future work. CofibrantObject.HoCat.toLocalization and its instances in CofibrantObjectHomotopy.lean:60-123 concern ordinary categories."
   },
@@ -73,15 +184,88 @@
    "results": "{\"t\": \"2026-10-16T14:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Infinity categorical localization of a model category via simplicial enriched fibrant cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"6c0a6ec60223ec0b\"}",
    "date": "2026-10-16",
    "verdict": "no match: second reader inspected the returned types. HoCat/localizer morphisms are ordinary localizations; QCat, strict Segal and nerve declarations give no diagram rectification; ModelCategory constructors assume the required axioms; fibrant-object predicates do not construct a localized model structure."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*nerve|simplicial.*localization|nerve.*localization",
+   "results": "{\"t\": \"2026-10-16T15:35:50Z\", \"tool\": \"grep\", \"query\": \"coherent.*nerve|simplicial.*localization|nerve.*localization\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces in a simplicial model category compute the infinity categorical localization",
+   "results": "{\"t\": \"2026-10-16T16:19:22Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in a simplicial model category compute the infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\"], \"digest\": \"2848e5cccbac29be\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Nerve\"",
+   "results": "{\"t\": \"2026-10-16T16:19:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve of the fibrant cofibrant objects of a simplicial model category is its infinity localization",
+   "results": "{\"t\": \"2026-10-16T16:19:15Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of the fibrant cofibrant objects of a simplicial model category is its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"b6b223c7590eaff9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy coherent nerve|model category|bifibrant",
+   "results": "{\"t\": \"2026-10-16T15:36:17Z\", \"tool\": \"grep\", \"query\": \"homotopy coherent nerve|model category|bifibrant\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwyer Kan theorem underlying infinity category of a simplicial model category is the simplicial nerve of bifibrant objects",
+   "results": "{\"t\": \"2026-10-16T16:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan theorem underlying infinity category of a simplicial model category is the simplicial nerve of bifibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.nerveFunctor₂\"], \"digest\": \"620ad6954b3a10f5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|IsLocalizedEquivalence.*WeakEquivalences|class ModelCategory",
+   "results": "{\"t\": \"2026-10-16T16:19:22Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|IsLocalizedEquivalence.*WeakEquivalences|class ModelCategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"ecd4e32cca344781\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned declarations. SimplicialNerve.lean:193 defines the nerve but does not prove a localization comparison (its introduction lists quasicategory results as future work). SimplicialCategory/Basic.lean:19-30 lists simplicial tensors as future work. The HoCat, homotopy-relation and MorphismProperty localization hits concern ordinary categories; the standard-simplex and truncated-nerve hits have no enriched localization conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-presheaf-localization-comparison",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-model-nerve-localization",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all model hypotheses. Proved the ordinary replacement comparisons, verified interval tensors, used one new general interval-localization lemma, and constructed a coherent reflector via the existing local adjoint criterion. Proved its full functor-category universal property, natural enriched mapping and composition formulas, and the Kan-model instance. No Lean attachment or new Mathlib leaf; reused the existing anodyne pushout-product leaf.",
+  "blueprint": "The current main-20261015 ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient adjunction before the R Hom/R lim calculation. Foundational enriched-localization calculus for that route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1 and 5 use only the general componentwise-equivalence criterion for coherent transformations; this foundational functor-category fact is independent of the proper-base-change unit and no node of this unit restates it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-8474bef65",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-8474bef65 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, all 10 cited statements, the unit sk-prop-sf-biduality-general, the chapter sec-six-functors, the main-20261015 ancestor prop-coef-integral-exceptional-adjoint (proof paragraph 2) and the item's citers. HA 1.3.4.7, 1.3.4.16 and 1.3.4.20 and Kerodon 02FV are online and not archived; I checked them from knowledge and against the cited DAG statements. The item statement is exactly the unsplit record in the weil-newtargets DAG. Steps 1-8 are correct. Step 1 builds Q, R and RQ zigzags that stay bifibrant. Step 2 gets the interval tensors from SM7 and lifting transposition. Step 3 builds the coherent reflector from the objectwise universal arrows of 02FV. Step 4 applies Ken Brown's split factorization under SM7. Step 5 proves the universal property on full functor categories, not only on cores. Step 6 gets the agreement with the inclusion from the counit. Step 7 reduces composition to three bifibrant objects. Step 8 proves SM7 for sSet through the existing pushout-product leaf, in the correct input order. proof_deps equals the union of the uses, and a 33-node dependency closure has no path back to the item. The new lem-coef-simplicial-interval-localization is statement-only and self-contained, and it is strictly smaller than the item. It is the locally-Kan-replacement form of HA 1.3.4.7, which is what the parent needs. I tested it on the empty, discrete, [1] and terminal categories. rg found no duplicate in the DAG, and its Mathlib searches are logged with real results. I accept the tool_use of lem-cbc-enhanced-functor-cone-calculus for the componentwise criterion only. FIX: Steps 1 and 2 never checked that W contains isomorphisms and identities and is closed under composition. The hammock node and the interval lemma both require this. I added the one-line lifting/two-out-of-three check in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-model-nerve-localization.json; no other field changed.; 1 file(s) fixed by the reviewer"
+ }
 }

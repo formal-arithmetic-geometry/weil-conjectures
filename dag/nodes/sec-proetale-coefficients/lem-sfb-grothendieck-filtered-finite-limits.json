@@ -1,0 +1,93 @@
+{
+ "id": "lem-sfb-grothendieck-filtered-finite-limits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-upper-star-exact",
+   "place": "First proof paragraph, final sentence invoking exact filtered colimits in A.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Limits, colimits, and left exact filtered colimits in Grothendieck abelian categories",
+ "statement": "Fix a universe $\\mathcal V$ and a Grothendieck abelian category $\\mathcal A$ [def-sp-grothendieck-abelian] relative to $\\mathcal V$, with $\\mathcal V$-small morphism sets. Then $\\mathcal A$ has all $\\mathcal V$-small limits and colimits. For every $\\mathcal V$-small filtered category $I$ [def-weil-pbc-category-colimit], the colimit functor\n$$\n\\operatorname{colim}_I:\\operatorname{Fun}(I,\\mathcal A)\\to\\mathcal A\n$$\npreserves finite limits [def-galois-finite-limits-colimits]. In particular, for a finite category $J$ and $M:I\\times J\\to\\mathcal A$, the canonical comparison $\\operatorname{colim}_i\\operatorname{lim}_j M(i,j)\\to\\operatorname{lim}_j\\operatorname{colim}_i M(i,j)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079B, definition-grothendieck-conditions and following discussion (AB5 and colimits); completeness and the finite-limit formulation are the Mathlib declarations specified in mathlib_match."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits commute with finite limits in a Grothendieck abelian category by AB5",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.ab5OfSize, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.AB4.of_AB5, CategoryTheory.Limits.instAB5IndOfHasFiniteLimits, instPreservesFiniteLimitsFunctorAddCommGrpCatColim, CategoryTheory.Limits.filtered_colim_preservesFiniteLimits, CategoryTheory.AB5, CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize",
+   "date": "2026-10-16",
+   "verdict": "match: IsGrothendieckAbelian.ab5OfSize; concrete filtered_colim hits are not used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasExactColimitsOfShape.preservesFiniteLimits",
+   "results": "1 hits: CategoryTheory.HasExactColimitsOfShape.preservesFiniteLimits",
+   "date": "2026-10-16",
+   "verdict": "match: exact colimits formulated as finite-limit preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "class HasExactColimitsOfShape|preservesFiniteLimits :|class AB5OfSize|ofShape .*IsFiltered|ab5OfSize",
+   "results": "13 hits: Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "match: GrothendieckCategory/Basic.lean:73 and GrothendieckAxioms/Basic.lean:71"
+  },
+  {
+   "tool": "grep",
+   "query": "ofShape.*IsFiltered|ab5OfSize",
+   "results": "11 hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "match: AB5OfSize.ofShape at GrothendieckAxioms/Basic.lean:300"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian categories filtered colimit functor preserves finite limits",
+   "results": "8 hits: CategoryTheory.Limits.filtered_colim_preservesFiniteLimits, CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget, CategoryTheory.AB5, CategoryTheory.instPreservesLimitsOfShapeFunctorIndLimOfFinCategoryOfHasLimitsOfShape, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Limits.preservesLimitsOfShape_colim_grothendieck",
+   "date": "2026-10-16",
+   "verdict": "match via AB5, not the separate concrete-category filtered_colim theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "instance IsGrothendieckAbelian.hasLimits|instance IsGrothendieckAbelian.hasColimits",
+   "results": "2 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean; Mathlib/CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "match: GrothendieckCategory/Basic.lean:99,102, one declaration for each completeness clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AB5 categories exact colimit functor preserves finite limits and Grothendieck categories have all limits",
+   "results": "8 hits; first recorded hits: CategoryTheory.HasExactColimitsOfShape.preservesFiniteLimits, CategoryTheory.Limits.instAB5IndOfHasFiniteLimits, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, CategoryTheory.AB5, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeFunctorPreservesFiniteLimitsOfHasExactColimitsOfShape, CategoryTheory.HasExactColimitsOfShape.domain_of_functor, CategoryTheory.AB4.of_AB5, CategoryTheory.IsGrothendieckAbelian.ab4OfSize",
+   "date": "2026-10-16",
+   "verdict": "match: HasExactColimitsOfShape.preservesFiniteLimits and IsGrothendieckAbelian.ab5OfSize; completeness separately read at GrothendieckCategory/Basic.lean:102"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.hasLimits; CategoryTheory.IsGrothendieckAbelian.hasColimits; CategoryTheory.HasExactColimitsOfShape.preservesFiniteLimits",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+  "line": 71,
+  "how": "One declaration per clause: IsGrothendieckAbelian.hasLimits and .hasColimits, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean:102 and :99 (read :70–105); for a V-small filtered I, .ab5OfSize at :73 supplies AB5OfSize, whose .ofShape at Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean:300 supplies HasExactColimitsOfShape I A. Its .preservesFiniteLimits at :71 is exactly the second assertion. The final displayed comparison is precisely the canonical map asserted invertible by PreservesFiniteLimits. No concrete-category forgetful functor is assumed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-upper-star-exact",
+  "date": "2026-10-16",
+  "group": "Q35"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback"
+}

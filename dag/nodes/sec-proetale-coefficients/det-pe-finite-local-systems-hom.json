@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-finite-local-systems-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Hom sheaves out of a finitely presented constant sheaf",
@@ -12,43 +12,215 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.md",
   "place": "node det-pe-finite-local-systems-hom, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-finitely-presented-module",
+  "def-pur-sheaf-hom",
+  "sk-def-pe-classical-definition"
+ ],
  "proof": [
   {
-   "text": "The constant étale sheaf functor $M\\mapsto M_{X,\\Et}$ is exact and preserves\nfinite limits (it is the inverse image of the morphism from $X_{\\Et}$ to the\npoint), and $\\nu_X^*$ is exact and preserves finite limits\n([sk-prop-pe-comparison-morphism]). Hence $M\\mapsto\\underline M$ is exact,\npreserves finite limits, and $\\underline{\\Lambda^n}=\\Lambda_X^n$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(1).* Exactness gives the presentation\n$\\Lambda_X^m\\xrightarrow{a}\\Lambda_X^n\\to\\underline M\\to0$. For an object $V$ of\n$X_{\\Proet}$, applying $\\Hom_{\\Lambda_V}(-,N|_V)$ and using\n$\\Hom_{\\Lambda_V}(\\Lambda_V^n,N|_V)=N(V)^n$ gives\n$\\Hom(\\underline M|_V,N|_V)=\\ker(N(V)^n\\to N(V)^m)$, naturally in $V$, which is\nthe claimed isomorphism of sheaves.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(2).* By (1) with $N=\\underline{M'}$ and exactness of the constant sheaf\nfunctor, $\\mathcal Hom(\\underline M,\\underline{M'})\\cong\n\\ker(\\underline{M'}^n\\to\\underline{M'}^m)\\cong\n\\underline{\\ker(M'^n\\to M'^m)}=\\underline{\\Hom_\\Lambda(M,M')}$. On sections over\nthe constant presentation this sends a module map $M\\to M'$ to the induced map of\nconstant sheaves; composition is compatible because it is so on these sections\nand both sides are sheaves generated locally by them.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(3).* The automorphism sheaf is the finite limit\n$\\{(f,g)\\in\\mathcal End(\\underline M)^2:fg=1,\\ gf=1\\}$, mapped isomorphically\nto its first factor. By (2) and preservation of finite limits by\n$M\\mapsto\\underline M$, it is\n$\\underline{\\{(f,g)\\in\\operatorname{End}(M)^2:fg=1=gf\\}}=\n\\nu_X^*\\operatorname{Aut}_\\Lambda(M)_{X,\\Et}$, with the group law induced by\ncomposition. Such a sheaf is classical by [sk-thm-pe-classical-sheaves].",
+   "text": "Write $C_\\Et(E)=E_{X,\\Et}$ and $C(E)=\\nu_X^*C_\\Et(E)$, for sets as well as modules, and put $\\Lambda_X=C(\\Lambda)$. By [def-weil-pbc-constant-sheaf], $C_\\Et$ is sheafification of the constant presheaf. Constant presheaves preserve finite limits and exact sequences because these are computed at each object. By [lem-pc-sites-module-sheafification-interface], sheafifying a constant $\\Lambda$-module presheaf gives a module over the sheafified constant ring, with underlying abelian sheaf its abelian sheafification. Thus [lem-weil-pbc-sheafification-exact] and [lem-weil-pbc-module-sheaves-colimits-forgetful] give exactness and finite-limit preservation of $C_\\Et$ on modules. The module functor $\\nu_X^*$ is exact for every discrete commutative $\\Lambda$ by [det-pe-classical-sheaves-modules], not only for finite rings. Consequently $C$ is exact, preserves finite products and kernels on modules, and $C(\\Lambda^r)=\\Lambda_X^r$ for every finite $r$. For sets, [lem-weil-pbc-sheafification-sets-exact] and the finite-limit-preserving comparison inverse image of [def-weil-pbc-site-comparison-morphism] show that $C$ preserves finite limits. These set and module constructions agree on underlying sets: this is [lem-pc-sites-sheafification-underlying-sets] for $C_\\Et$, followed by applying the comparison inverse image to the addition and action maps. All diagrams and the chosen site skeletons are small in the larger universe fixed for these sites.",
    "uses": [
-    "sk-thm-pe-classical-sheaves"
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pc-sites-sheafification-underlying-sets"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "opening paragraph; exactness supplied by Stacks 03CY, 00WJ, 03DA and 03DB"
+   }
+  },
+  {
+   "text": "Let $b:\\Lambda^n\\to M$ be the presentation quotient. Step 1 gives the exact presentation $\\Lambda_X^m\\xrightarrow{C(a)}\\Lambda_X^n\\xrightarrow{C(b)}C(M)\\to0$. Fix any object $V$ of $X_{\\Proet}$ and use the localized site and sectionwise restriction of [def-pur-localized-ringed-site]. The abelian restriction functor is exact by [lem-weil-pbc-site-restriction-exact]; apply this to the two short exact sequences through the image of $C(a)$ to preserve the displayed presentation. The forgetful descriptions in [lem-weil-pbc-module-sheaves-colimits-forgetful] give the same assertion for $\\Lambda_X|_V$-modules. Write $\\Lambda_V=\\Lambda_X|_V$. For every finite $r$, a map $\\Lambda_V^r\\to N|_V$ is determined by its values $x_i\\in N(V)$ on the basis sections at the terminal object $V/V$. Conversely $(x_i)$ gives, at each $W\\to V$, the linear map $(t_i)\\mapsto\\sum_i t_i(x_i|_W)$. These formulas are inverse and commute with restriction and with maps of $N$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (1): the restricted presentation and the free-module Hom calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-abelian-exact-epi-cokernel], the quotient $C(b)|_V$ of step 2 is a cokernel of $C(a)|_V$. Hence maps $C(M)|_V\\to N|_V$ correspond bijectively to maps $\\Lambda_V^n\\to N|_V$ annihilating $C(a)|_V$. If $a(e_k)=\\sum_i a_{ik}e_i$, the tuple $(x_i)$ of step 2 annihilates this map precisely when $\\sum_i a_{ik}x_i=0$ for every $k$, namely $a^{\\mathsf T}(x)=0$. The bijection sends $\\varphi$ to $(\\varphi(C(b)(e_i)))_i$; its inverse is the unique cokernel factorization of the basis-value map. Uniqueness shows that both bijections commute with $V'\\to V$ and with every coefficient map $N\\to N'$. The defining sections of [def-pur-sheaf-hom] and the sectionwise kernels of [lem-weil-pbc-module-sheaves-colimits-forgetful] therefore identify these bijections with the natural isomorphism in (1). This uses the sheaf cokernel universal property, and does not assume that $N(V)$ is an exact functor of $N$.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (1): explicit cokernel factorization and transpose coefficients"
+   }
+  },
+  {
+   "text": "For modules $P,Q$ put $H_{P,Q}=\\operatorname{Hom}_\\Lambda(P,Q)$. Apply the set functor $C$ of step 1 to evaluation $H_{P,Q}\\times P\\to Q$ and use its finite-product comparison. This gives $e_{P,Q}:C(H_{P,Q})\\times C(P)\\to C(Q)$. The module identities $f(x+y)=f(x)+f(y)$ and $f(\\lambda x)=\\lambda f(x)$ are equalities of maps on finite products of the sets $H_{P,Q},P,\\Lambda$; applying $C$ proves that evaluation at a local section of $C(H_{P,Q})$ is a $\\Lambda_X$-linear map on the corresponding slice site. The identities $(f+g)(x)=f(x)+g(x)$ and $(\\lambda f)(x)=\\lambda f(x)$ likewise show linearity in the parameter. By the sectionwise definition of [def-pur-sheaf-hom] we obtain a canonical linear map $c_{P,Q}:C(H_{P,Q})\\to\\mathcal Hom_{\\Lambda_X}(C(P),C(Q))$. Restriction commutes with these maps since $e_{P,Q}$ is a sheaf map. A constant parameter $f$ gives exactly $C(f)$: apply $C$ to the equality $\\operatorname{ev}(f,-)=f$.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (2): the canonical comparison is defined by evaluation, with its linearity equations"
+   }
+  },
+  {
+   "text": "Take $P=M,Q=M'$. For any $\\Lambda$-module $Q$, the ordinary presentation gives $H_{M,Q}=\\ker(Q^n\\to Q^m)$: a tuple $(y_i)$ defines the map $\\Lambda^n\\to Q$, $(t_i)\\mapsto\\sum_i t_i y_i$, and it descends uniquely to $M$ if and only if all $\\sum_i a_{ik}y_i$ vanish. Step 1 and the sectionwise module kernels of [lem-weil-pbc-module-sheaves-colimits-forgetful] therefore give $C(H_{M,M'})\\cong\\ker(C(M')^n\\to C(M')^m)$. Under the basis-value identification in (1), the map $c_{M,M'}$ of step 4 is this comparison: its $i$th coordinate is $C(f\\mapsto f(b(e_i)))$, by evaluation. Both maps to $C(M')^n$ thus agree coordinate by coordinate. It follows that $c_{M,M'}$ is an isomorphism; its inverse is the isomorphism in (2). Only finite presentation of the source $M$ is used in this calculation; the stated finite presentation of $M'$ is certainly sufficient.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (2): finite kernel comparison, with the actual comparison map identified"
+   }
+  },
+  {
+   "text": "For modules $P,Q,R$, the equality $\\operatorname{ev}_{P,R}(g\\circ f,x)=\\operatorname{ev}_{Q,R}(g,\\operatorname{ev}_{P,Q}(f,x))$ is an equality of maps $H_{Q,R}\\times H_{P,Q}\\times P\\to R$. Applying the product-preserving set functor $C$ proves that the maps $c_{P,Q}$ of step 4 intertwine composition of module homomorphisms and composition of sheaf homomorphisms. Indeed, at every $V$, the two resulting linear maps on $C(P)|_V$ have equal evaluations on every further object $W\\to V$, hence are identical by [def-pur-sheaf-hom]. Applying $C$ to $\\operatorname{ev}_{P,P}(1,x)=x$ proves preservation of identity as well. Restricting to finitely presented modules, the isomorphisms of step 5 and their inverses consequently respect composition and identity. No assertion that all global sections of a constant sheaf are constant is needed.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (2), final sentence: explicit composition and identity equations"
+   }
+  },
+  {
+   "text": "Put $E=\\operatorname{End}_\\Lambda(M)$ as a set with composition. Define $I\\subset E\\times E$ by $I=\\{(f,g):f\\circ g=1,\\ g\\circ f=1\\}$. It is the equalizer of $(f,g)\\mapsto(f\\circ g,g\\circ f)$ and the constant map $(f,g)\\mapsto(1,1)$ into $E\\times E$. By the sectionwise limit description of [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], the identical equalizer for $\\mathcal End(C(M))$ has sections pairs of mutually inverse sheaf endomorphisms on each slice. Projection to the first factor identifies it with $\\mathcal Aut(C(M))$: its inverse sends an automorphism $u$ to $(u,u^{-1})$, and uniqueness of inverse makes this commute with restriction. Steps 1, 5 and 6 identify this equalizer with $C(I)$. The elementary bijection $I\\to\\operatorname{Aut}_\\Lambda(M)$, $(f,g)\\mapsto f$, has inverse $f\\mapsto(f,f^{-1})$. The group operation on pairs is $(f,g)(h,k)=(f\\circ h,k\\circ g)$, so the composition compatibility of step 6 identifies the resulting isomorphism $\\mathcal Aut(C(M))\\cong C(\\operatorname{Aut}_\\Lambda(M))$ with an isomorphism of sheaves of groups. We use finite limits of SETS here: composition and the invertibility locus are not linear maps or submodules.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (3): inverse pairs as a finite limit of sets, including the group operation"
+   }
+  },
+  {
+   "text": "By definition of $C$ on sets, the last sheaf of step 7 is $\\nu_X^*(\\operatorname{Aut}_\\Lambda(M)_{X,\\Et})$. Apply [det-pe-classical-sheaves-image] to its underlying sheaf of sets: condition (1) holds with the constant étale sheaf $\\operatorname{Aut}_\\Lambda(M)_{X,\\Et}$, so condition (2) gives classicality. This is precisely classicality of the underlying sheaf of the group in (3); the group structure has already been identified in step 7.",
+   "uses": [
+    "det-pe-classical-sheaves-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+    "place": "paragraph (3), last sentence: essential-image criterion on sets"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-pe-classical-sheaves",
-  "det-pe-classical-sheaves-modules"
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "det-pe-classical-sheaves-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-hom.proof.md",
+  "place": "Opening paragraph and clauses (1)-(3); generic Stacks sheafification and localization results cited explicitly, and evaluation/composition/group-law calculations expanded."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a finitely presented constant module sheaf is the kernel of the transpose presentation, and automorphisms are a constant sheaf",
+   "results": "{\"t\": \"2026-10-16T15:02:32Z\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mapRelations\", \"FGModuleCat.ihom_obj\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.presentationOfIsCokernelFree_relations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"hom\"",
+   "results": "{\"t\": \"2026-10-16T15:02:34Z\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.Hom\", \"SheafOfModules.instAddCommGroupHom\", \"SheafOfModules.unitHomEquiv\", \"SheafOfModules.Hom.mk\", \"SheafOfModules.Hom.val\", \"SheafOfModules.Hom.ext\", \"SheafOfModules.Hom.ext_iff\", \"SheafOfModules.hom_ext\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Hh]om|[Hh]om.*constant|[Hh]om.*[Pp]resentation",
+   "results": "{\"t\": \"2026-10-16T15:02:34Z\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of finitely presented constant sheaves of modules is constant",
+   "results": "{\"t\": \"2026-10-16T15:02:35Z\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_congr\", \"CategoryTheory.Sheaf.isConstant_of_iso\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"CategoryTheory.sheafHom\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.isConstant_of_isIso_counit_app\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism the constant sheaf functor preserves internal Hom from finitely presented modules and the automorphism group",
+   "results": "{\"t\": \"2026-10-16T15:03:56Z\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"SheafOfModules.PullbackConstruction.adjunction\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"hom\"",
+   "results": "{\"t\": \"2026-10-16T15:03:57Z\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|internalHom|[Hh]om|[Aa]ut",
+   "results": "{\"t\": \"2026-10-16T15:03:57Z\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"4\", \"49\", \"190\", \"191\", \"194\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(Hom|hom|[Aa]ut)|[Hh]om.*constantSheaf|[Aa]ut.*constantSheaf",
+   "results": "{\"t\": \"2026-10-16T16:41:12Z\", \"tool\": \"grep\", \"query\": \"constantSheaf.*(Hom|hom|[Aa]ut)|[Hh]om.*constantSheaf|[Aa]ut.*constantSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\"], \"digest\": \"5a66540a02aeb134\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-16T16:41:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantSheaf\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact constant sheaf functor commutes with internal Hom for finitely presented modules",
+   "results": "{\"t\": \"2026-10-16T16:41:14Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact constant sheaf functor commutes with internal Hom for finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihom_map_val_app\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.ihomPoints\"], \"digest\": \"cec93182a10a9a04\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -66,5 +238,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-finite-local-systems"
+ "unit": "sk-prop-pe-finite-local-systems",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-finite-local-systems-hom",
+  "worker": "stage1",
+  "summary": "Kept all three clauses and all hypotheses. Replaced the missing comparison id by the existing comparison definition and arbitrary-coefficient module theorem; supplied exactness, slice restriction, the cokernel and basis-value calculation, a canonical evaluation comparison and explicit composition equations, and the inverse-pair argument in sets. Reused existing generic tools; no new nodes.",
+  "blueprint": "Opening paragraph is step 1; clause (1) is steps 2-3; clause (2) is steps 4-6; clause (3) is steps 7-8. These realize the automorphism-sheaf input of the single proof step of unit sk-prop-pe-finite-local-systems.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic kernels, cokernels and limits for module sheaves, used on the etale site, proetale site and their slices. The unit route still proves the Hom and automorphism comparison by the given finite presentation."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic exactness of restriction to an object of a site, needed before applying a cokernel universal property on a slice. The unit route still proves the Hom and automorphism comparison by the given finite presentation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-6e18341ce",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6e18341ce (reviewer sub-agent of L); spot-checked: I read all of it in full: the item, its blueprint statement and proof, the unit and chapter records, every cited node's statement (and the proof of det-pe-classical-sheaves-modules, to check how its module inverse image is defined), and Stacks 0H7J/00WJ/00W2/03CY/03DA/03DB/03EM/04IX/00XZ/03DJ. The statement is the blueprint's word for word, for any ring and any scheme, and nothing is weakened. This is not a target node. Step 1: C is exact through module sheafification, # is exact, the forgetful functor keeps kernels and cokernels, and module nu^* is exact for any ring by det-pe-classical-sheaves-modules, which is on the unit's route. On sets C preserves finite limits, and the set and module structures agree through the comparison definition's module clause. Step 2: the presentation stays exact on each slice, and Lambda_V^r(W) is generated by the restricted basis. Step 3: the coefficient condition is the transpose (sum_i a_ik x_i = 0). Steps 4-6: the evaluation comparison is linear, its coordinates are C(ev_{b(e_i)}) and match the kernel inclusion, and composition and identity are checked on every slice. Step 7: inverse pairs form an equalizer of sets, and the product (f,g)(h,k)=(fh,kg) matches the group law. No Aut-sheaf definition node exists; the step defines its sections inline as the units of the End sheaf, which I accept. Step 8: condition (1)=>(2) of det-pe-classical-sheaves-image gives classicality. Edge cases hold: X empty, M=0, n=0, m=0, the zero ring, a non-Noetherian ring, disconnected X. Lambda_X = nu^*Lambda_{X,Et} is the same identification the route node det-pe-classical-sheaves-modules makes. I accept both declared tool_uses (lem-weil-pbc-module-sheaves-colimits-forgetful, lem-weil-pbc-site-restriction-exact) as generic black boxes. The source of the existing node lem-weil-pbc-site-restriction-exact cites 03DJ, which is j_! exactness, not restriction; that bibliographic error is outside this delivery and was not edited. There are no new nodes. proof_deps equals the union of the steps' uses, 10 Mathlib searches are recorded, and no SGA source is used. No fixes."
+ }
 }

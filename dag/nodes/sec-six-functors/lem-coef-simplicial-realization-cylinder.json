@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-simplicial-realization-cylinder",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Proposition 3.7(i)-(ii), pp. 13-15, including the two Grothendieck constructions; Dwyer-Kan Section 7.2(i),(iii) and Propositions 6.11-6.12; Definition 1.5 and Theorem 1.6, pp. 5–6; last assertion is the immediate naturality and Lemma 1.3 consequence; below the Thomason comparison: realization of the fiber contraction and the prism homotopy in its comma-category proof.",
+   "via": [
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-special-resolution-zigzag-nerve",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric realization of a simplicial cylinder",
+ "statement": "Let $K$ be any small simplicial set [def-weil-pbc-simplicial-set]. Write $|K|$ for its geometric realization: the quotient of $\\coprod_{n\\geq0}K_n\\times\\Delta^n_{\\mathrm{top}}$ by $(K(\\alpha)x,t)\\sim(x,\\alpha_*t)$, where $\\alpha:[m]\\to[n]$ is order preserving, $\\Delta^n_{\\mathrm{top}}=\\{(t_0,\\ldots,t_n)\\in\\mathbf R^{n+1}:t_i\\geq0,\\ \\sum_i t_i=1\\}$, and $(\\alpha_*t)_j=\\sum_{\\alpha(i)=j}t_i$. Give this realization its quotient topology, with each $K_n$ discrete. Let $\\Delta^1=\\operatorname{Hom}_\\Delta(-,[1])$, and form $K\\times\\Delta^1$ degree by degree. The map\n$$\\rho_K:|K\\times\\Delta^1|\\longrightarrow |K|\\times[0,1],\\qquad [((x,\\theta),t)]\\longmapsto\\left([x,t],\\sum_{\\theta(i)=1}t_i\\right)$$\nis a homeomorphism, natural in $K$. Under this homeomorphism the realizations of the two endpoint inclusions $K\\to K\\times\\Delta^1$ are $u\\mapsto(u,0)$ and $u\\mapsto(u,1)$, respectively.",
+ "source": {
+  "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+  "place": "Mark Hovey, Model Categories, Lemma 3.1.8 and its proof, printed pp. 77–78, specialized to the finite simplex Delta[1]. Products with the compact interval have their ordinary product topology. No Stacks tag states this topological realization theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Homotopy\", \"toTop\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization sends a simplicial homotopy to a homotopy of continuous maps",
+   "results": "[leansearch] OK 8 hit(s); top: ContinuousMap.Homotopy.toContinuousMap, SSet.toTop, ContinuousMap.Homotopy, instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex, sSetTopAdj, ContinuousMap.Homotopy.Simps.apply, ContinuousMap.HomotopyLike.mk, ContinuousMap.Homotopy.cast",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial homotopy X times the standard one simplex to Y induces a continuous homotopy of geometric realizations",
+   "results": "[leanfinder] OK 8 hit(s); top: SSet.RelativeMorphism.Homotopy.h, SSet.RelativeMorphism.Homotopy.refl_h, SimplexCategory.toTop₀_map, SSet.RelativeMorphism.Homotopy.ofEq_h, SSet.RelativeMorphism.Homotopy.rel, SSet.RelativeMorphism.Homotopy.mk.inj, ContinuousMap.Homotopy.Simps.apply, TopCat.toSSetObjEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotop|prodComparison|Preserves.*Prod|preserves.*prod",
+   "results": "[grep] OK 0 hit(s); Mathlib subdirectory/file: AlgebraicTopology/SimplicialSet/TopAdj.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotop|prodComparison|Preserves.*Prod|preserves.*prod",
+   "results": "[grep] OK 0 hit(s); Mathlib subdirectory/file: AlgebraicTopology/SingularSet.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toTop\", \"prodComparison\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric realization functor preserves product with the standard 1 simplex, giving a homeomorphism with the unit interval cylinder",
+   "results": "[leanfinder] OK 8 hit(s); top: SimplexCategory.toTopObjOneHomeo, CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex, stdSimplexHomeomorphUnitInterval, SSet.prodStdSimplex.objEquiv, stdSimplexHomeomorphUnitInterval_apply_coe, SSet.prodStdSimplex.objEquiv_map_apply, Cube.splitAt, SSet.prodStdSimplex.objEquiv_apply_fst",
+   "date": "2026-10-16",
+   "verdict": "no match: relative simplicial homotopy and continuous homotopy are defined separately; realization of the standard one-simplex alone does not identify the realization of an arbitrary cylinder. TopAdj.lean and SingularSet.lean contain no realization product comparison; the hoFunctor product comparison concerns the categorical homotopy category, not geometric realization."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop|realization|realisation",
+   "results": "[grep] OK 0 hit(s); Mathlib file: AlgebraicTopology/SimplicialSet/Homotopy.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Homotopy.lean has the simplicial homotopy API but no topological realization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The realization of a product of simplicial sets with one finite factor is naturally homeomorphic to the product of their realizations",
+   "results": "{\"t\": \"2026-10-16T16:27:04Z\", \"tool\": \"leanfinder\", \"query\": \"The realization of a product of simplicial sets with one finite factor is naturally homeomorphic to the product of their realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.instFiniteTensorObj\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.prodStdSimplex.objEquiv\"], \"digest\": \"39e004d12d7495c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hoFunctor preserves categorical homotopy categories, not topological realization; the standard-simplex product bijections do not supply the cylinder homeomorphism. Read TopAdj.lean, including its standard-one-simplex homeomorphism, and Op.lean TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toTop\", \"PreservesLimit\"",
+   "results": "{\"t\": \"2026-10-16T16:28:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"toTop\\\", \\\"PreservesLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop_1\", \"CompHausLike.instPreservesLimitTopCatWalkingCospanCospanCompHausLikeToTop\", \"LightProfinite.instPreservesLimitsOfShapeOppositeNatForgetContinuousMapCarrierToTopAndTotallyDisconnectedSpaceSecondCountableTopology\", \"Condensed.instPreservesLimitsOfShapeOppositeProfiniteDiscreteCarrierToTopTotallyDisconnectedSpaceOfFinite\", \"ProfiniteAddGrp.instPreservesLimitsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap\", \"ProfiniteGrp.instPreservesLimitsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap\"], \"digest\": \"0bddffd62fc783a5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hoFunctor preserves categorical homotopy categories, not topological realization; the standard-simplex product bijections do not supply the cylinder homeomorphism. Read TopAdj.lean, including its standard-one-simplex homeomorphism, and Op.lean TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "prodComparison|preserves.*[Pp]roduct|[Hh]omotop",
+   "results": "{\"t\": \"2026-10-16T16:28:28Z\", \"tool\": \"grep\", \"query\": \"prodComparison|preserves.*[Pp]roduct|[Hh]omotop\", \"sub\": \"AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hoFunctor preserves categorical homotopy categories, not topological realization; the standard-simplex product bijections do not supply the cylinder homeomorphism. Read TopAdj.lean, including its standard-one-simplex homeomorphism, and Op.lean TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-thomason-grothendieck-comparison",
+  "date": "2026-10-16",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

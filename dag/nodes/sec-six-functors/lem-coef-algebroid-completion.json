@@ -26,9 +26,141 @@
   "def-coef-complete-algebroid",
   "lem-coef-algebroid-external-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal C=\\operatorname{Algd}(\\mathcal V)$, which is presentable by [lem-coef-algebroid-presentability]. The current definition [def-coef-complete-algebroid] defines completeness by $I_0(A)\\to I(A)$ being an equivalence, where $I_n(A)=\\operatorname{Map}(E^n,A)$ and $I(A)=|I_\\bullet(A)|$. By [lem-coef-algebroid-equivalence-nerve], $I_\\bullet(A)$ is a groupoid object. The effectiveness statement in [lem-coef-space-geometric-descent] identifies $I_1(A)$ with $I_0(A)\\times_{I(A)}I_0(A)$ and makes $I_0(A)\\to I(A)$ surjective on $\\pi_0$. Under this identification the degeneracy $I_0(A)\\to I_1(A)$ is the diagonal. An equivalence $I_0(A)\\to I(A)$ has an equivalence as diagonal. Conversely, if the diagonal is an equivalence, then each homotopy fiber of $I_0(A)\\to I(A)$ is nonempty and its diagonal is an equivalence. For any two points in such a fiber, the space of paths between them is a fiber of that diagonal and therefore contractible. The fiber is thus contractible. Hence $I_0(A)\\to I(A)$ is an equivalence. This proves that complete algebroids are exactly the objects local for $s:E^1\\to E^0$.\n\nApply [lem-coef-presentable-infinity-adjoints] to the singleton $\\{s\\}$ to obtain a reflector $L$ onto the full subcategory of complete algebroids. By [lem-coef-infinity-small-localization-saturation], its inverted class $W$ is the strongly saturated closure of $s$, detected by mapping into complete algebroids, and every unit lies in $W$.",
+   "uses": [
+    "lem-coef-algebroid-presentability",
+    "def-coef-complete-algebroid",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Propositions 5.4.2 and 5.4.4"
+   }
+  },
+  {
+   "text": "Use [lem-coef-algebroid-categorical-homotopy] to form the coherent simplicial algebroid $D_n=A^{E^n_{\\mathcal S}}$. All its structure maps and the augmentation maps $A=A^{E^0}\\to D_n$ are categorical equivalences: they are cotensors of maps between the nonempty finite indiscrete space-enriched algebroids. Hence they are fully faithful, essentially surjective, and induce equivalences on maps into every complete object. The detector in [lem-coef-infinity-small-localization-saturation] puts these maps in $W$. Let $\\widehat A=|D_\\bullet|$, which exists by presentability. The augmentation gives $j_A:A\\to\\widehat A$ in $W$: it is the colimit of the arrows $A\\to D_n$. The colimit of the constant $A$-diagram over $\\Delta^{\\mathrm{op}}$ is $A$, because $[0]$ is initial in $\\Delta^{\\mathrm{op}}$, so its nerve is contractible; equivalently mapping out gives the limit of a constant mapping space over a contractible index. This identifies the source of the colimit arrow, and $W$ is closed under small arrow-colimits. The construction and $j_A$ are functorial in $A$.",
+   "uses": [
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-coef-algebroid-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 5.6.1 and Theorem 5.6.2, first proof paragraph"
+   }
+  },
+  {
+   "text": "All structure maps of $D_\\bullet$ are fully faithful, so [lem-coef-algebroid-ff-simplicial-realization] makes $j_A:D_0\\to\\widehat A$ fully faithful and identifies $U(\\widehat A)$ with $|U(D_\\bullet)|$. By [lem-coef-space-geometric-descent], $U(D_0)\\to|U(D_\\bullet)|$ is surjective on $\\pi_0$. In particular every object of $\\widehat A$ is joined by a path in its object space to an image object, and hence is equivalent to one; thus $j_A$ is essentially surjective by the objectwise criterion in [lem-coef-algebroid-equivalence-nerve]. The cotensor identity identifies $U(D_n)$ with $I_n(A)=\\operatorname{Map}(E^n,A)$, so $U(\\widehat A)\\simeq I(A)$.",
+   "uses": [
+    "lem-coef-algebroid-ff-simplicial-realization",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 5.6.2, proof, essential surjectivity and the Segal-presheaf argument"
+   }
+  },
+  {
+   "text": "We prove completeness of $\\widehat A$ rather than assume that realization commutes with $\\operatorname{Map}(E^1,-)$. Use the notation $I_n,I$ of [lem-coef-algebroid-equivalence-nerve]. There is a commutative square with top row $|I_0(D_\\bullet)|\\to I_0(\\widehat A)$ and bottom row $|I_1(D_\\bullet)|\\to I_1(\\widehat A)$; vertical maps insert identity equivalences. The top row is an equivalence by [lem-coef-algebroid-ff-simplicial-realization]. The left vertical map is also an equivalence: cotensor adjunction and symmetry of products of space-enriched algebroids identify $I_1(A^{E^n})\\simeq I_n(A^{E^1})$, naturally in $n$. Under these identifications the left vertical map is $I(A)\\to I(A^{E^1})$ induced by $A\\to A^{E^1}$. This map is a categorical equivalence by [lem-coef-algebroid-categorical-homotopy], hence fully faithful essentially surjective, and its $I$-map is an equivalence by [lem-coef-algebroid-equivalence-nerve].\n\nTo verify the bottom row, each map $D_m\\to D_n$ induces an equivalence $I(D_m)\\to I(D_n)$. Effectiveness of their equivalence nerves identifies $I_1(D_k)$ with $U(D_k)\\times_{I(D_k)}U(D_k)$. Therefore the naturality squares of $I_1(D_\\bullet)\\to U(D_\\bullet)^2$ are pullbacks. Cartesian geometric descent and preservation of finite products from [lem-coef-space-geometric-descent] give a pullback square $I_1(A)\\to|I_1(D_\\bullet)|$ over $U(A)^2\\to U(\\widehat A)^2$. On fibers over $(x,y)\\in U(A)^2$, its top map is an equivalence; so is $I_1(A)_{x,y}\\to I_1(\\widehat A)_{j_Ax,j_Ay}$, since $j_A$ is fully faithful by step 3 and the nerve lemma preserves these fibers. Two-out-of-three makes the comparison $|I_1(D_\\bullet)|\\to I_1(\\widehat A)$ an equivalence on those fibers. The map $U(A)^2\\to U(\\widehat A)^2$ is surjective on $\\pi_0$ by step 3, so the fiberwise detection clause of geometric descent proves the comparison an equivalence everywhere. Three sides of the first square are now equivalences, so $I_0(\\widehat A)\\to I_1(\\widehat A)$ is an equivalence. By the equivalence proved in step 1, this is completeness in the current equivalence-nerve-realization definition.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-algebroid-ff-simplicial-realization",
+    "lem-coef-algebroid-categorical-homotopy",
+    "lem-coef-space-geometric-descent",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 5.6.2, proof, completeness square and cartesian descent"
+   }
+  },
+  {
+   "text": "Since $j_A\\in W$ and $\\widehat A$ is complete, it exhibits $\\widehat A$ as $LA$: for complete $Z$, restriction along $j_A$ is an equivalence of mapping spaces, by the detector of [lem-coef-infinity-small-localization-saturation]. This is the reflector's mapping-space universal property. The resulting natural comparison $LA\\simeq\\widehat A$ identifies the unit with $j_A$. Consequently each unit is fully faithful and essentially surjective by step 3.",
+   "uses": [
+    "lem-coef-infinity-small-localization-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 5.6.2 and Corollary 5.6.4"
+   }
+  },
+  {
+   "text": "First check two-out-of-three for fully faithful essentially surjective maps, using [lem-coef-algebroid-equivalence-nerve]. For $A\\xrightarrow{F}B\\xrightarrow{G}C$, if $F,G$ have the property, their composite is fully faithful and its $I$-map is a composite of equivalences, hence it is essentially surjective. If $G,GF$ have the property, full faithfulness of $F$ follows by cancellation on mapping objects, and $I(F)$ is an equivalence by cancellation; therefore $F$ is essentially surjective. If $F,GF$ have the property, cancellation gives $I(G)$ an equivalence, hence essential surjectivity of $G$. For $b,b'\\in B$ choose equivalences $Fa\\simeq b$ and $Fa'\\simeq b'$ using essential surjectivity of $F$. Conjugating by them identifies the mapping-object map for $G$ at $(b,b')$ with its map at $(Fa,Fa')$. The latter is an equivalence by cancellation between the mapping-object maps for $F$ and $GF$. Composition with the chosen object equivalences induces equivalences of mapping objects by the nerve lemma. Thus $G$ is fully faithful as well.\n\nFor $f:A\\to B$, consider its natural square with units $A\\to LA$, $B\\to LB$. Its vertical maps have the property by step 5 and belong to $W$ by step 1. Two-out-of-three in each class reduces both questions about $f$ to the corresponding questions about $Lf:LA\\to LB$. Between complete objects, a fully faithful essentially surjective map has an equivalence on $I$ and thus on $U$, so is an algebroid equivalence by [lem-coef-algebroid-equivalence-nerve]. Conversely an equivalence has both properties by their definitions. A map between local objects lies in $W$ precisely when it is an equivalence, by [lem-coef-infinity-small-localization-saturation] and the fact that the reflector is identity there. Thus $f\\in W$ if and only if it is fully faithful and essentially surjective.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-infinity-small-localization-saturation",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 5.3.9, Corollary 5.3.8 and Corollary 5.6.3"
+   }
+  },
+  {
+   "text": "Now suppose $\\mathcal V$ is symmetric monoidal. By [lem-coef-algebroid-external-product], the object space of $A\\otimes B$ is $U(A)\\times U(B)$ and its mapping objects are $A(a,a')\\otimes B(b,b')$. For fully faithful $f:A\\to A'$ and any $B$, the mapping-object maps of $f\\otimes1_B$ are $f_{a,a'}\\otimes1$, hence equivalences since tensor is a functor. If $f$ is essentially surjective and $(a',b)$ is a target object, choose $a$ and an equivalence $fa\\simeq a'$. Tensor its unit-valued forward and inverse morphisms with $1_b$; their compositions are the identity by the tensor's compatibility with composition and units. They give an equivalence $(fa,b)\\simeq(a',b)$. Thus $f\\otimes1_B$ is also essentially surjective. For $1_B\\otimes f$, its mapping-object maps are $1\\otimes f_{a,a\\prime}$ and are equivalences. For a target object $(b,a\\prime)$ choose $a$ and inverse equivalences $\\alpha:fa\\to a\\prime$, $\\beta:a\\prime\\to fa$. The morphisms $1_b\\otimes\\alpha$ and $1_b\\otimes\\beta$ connect $(b,fa)$ and $(b,a\\prime)$, and their composites are identities by compatibility of tensor with composition and units. This proves essential surjectivity in the other factor as well. These are arguments from the stated tensor and the definition of equivalence; no theorem about an underlying functor preserving arbitrary limits is used. Here the passage between essential surjectivity and the existence of image objects up to equivalence, and the interpretation of these unit-valued inverse morphisms as equivalences, are exactly the objectwise and invertible-component clauses of [lem-coef-algebroid-equivalence-nerve].",
+   "uses": [
+    "lem-coef-algebroid-external-product",
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 5.7.14, explicit mapping objects and object equivalences"
+   }
+  },
+  {
+   "text": "Since $W$ is the strongly saturated class generated by $s:E^1\\to E^0$, one has $s\\in W$. Step 6 shows that $s$ is fully faithful and essentially surjective. Step 7 then gives the same properties for $1_A\\otimes s$ for every $A$, and step 6 again puts this map in $W$. Thus $A\\otimes s$ is a local equivalence, without presuming that completion commutes with tensor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 5.5.9 in the symmetric-monoidal case; alternatively Proposition 5.7.14 after Corollary 5.6.3"
+   }
+  },
+  {
+   "text": "The coherent symmetric tensor on all algebroids is supplied by [lem-coef-algebroid-external-product]. By steps 6 and 7 its inverted class $W$ is stable under tensoring on either side. It contains equivalences and is closed under composition by step 1, so apply [lem-coef-relative-symmetric-monoidal-localization] to $(\\operatorname{Algd}(\\mathcal V),W)$. It gives a coherent symmetric monoidal localization with $L(A)\\otimes L(B)\\simeq L(A\\otimes B)$. The reflector $L$ of step 1 also has the functor-category localization property: writing $i$ for the full inclusion of complete objects, any functor $F$ inverting $W$ has a natural equivalence $F\\xrightarrow{F\\eta}FiL$, since every unit $\\eta$ belongs to $W$. Conversely $L$ inverts $W$, and $Li\\simeq1$. Restriction along $L$ and precomposition with $i$ are therefore inverse on the corresponding full functor infinity categories; their natural units give these identifications also on transformations and higher coherences. Consequently the underlying localization identifies with the full subcategory of complete objects. Transfer this tensor along that equivalence. For already complete $A,B$, its value is $L(A\\otimes B)$, with the coherent associativity, symmetry and unit constraints of the cited localization theorem. This is the required compatible completion tensor.",
+   "uses": [
+    "lem-coef-algebroid-external-product",
+    "lem-coef-relative-symmetric-monoidal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 5.7.14 and Corollary 5.7.15"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-categorical-homotopy",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-algebroid-external-product",
+  "lem-coef-algebroid-ff-simplicial-realization",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-infinity-small-localization-saturation",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-relative-symmetric-monoidal-localization",
+  "lem-coef-space-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Sections 5.4-5.7, especially the explicit proof of Theorem 5.6.2 and Corollary 5.6.3; read online but unavailable in the archived literature directory. The tensor steps expand Proposition 5.7.14 directly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,15 +203,66 @@
    "results": "{\"t\": \"2026-10-16T12:28:47Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan equivalences of weak enriched categories are localization at walking isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Localization.isEquivalence\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"8b9c2d27e85b4e30\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rezk completion of enriched infinity algebroids localizes exactly fully faithful essentially surjective maps and respects tensor products",
+   "results": "{\"t\": \"2026-10-16T16:09:27Z\", \"tool\": \"leanfinder\", \"query\": \"Rezk completion of enriched infinity algebroids localizes exactly fully faithful essentially surjective maps and respects tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.ForgetEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\"], \"digest\": \"837a81b8c0744d32\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory is ordinary enrichment (Enriched/Basic.lean lines 47-72); LocalizedMonoidal and its symmetric instances localize ordinary categories (Localization/Monoidal/Basic.lean lines 35-59). Neither states operadic algebroid completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal localization of many object associative algebras at the walking equivalence",
+   "results": "{\"t\": \"2026-10-16T16:09:29Z\", \"tool\": \"leanfinder\", \"query\": \"Monoidal localization of many object associative algebras at the walking equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.μ\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.associator\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\"], \"digest\": \"3f2febe097e6b2a6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory is ordinary enrichment (Enriched/Basic.lean lines 47-72); LocalizedMonoidal and its symmetric instances localize ordinary categories (Localization/Monoidal/Basic.lean lines 35-59). Neither states operadic algebroid completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-16T16:09:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory is ordinary enrichment (Enriched/Basic.lean lines 47-72); LocalizedMonoidal and its symmetric instances localize ordinary categories (Localization/Monoidal/Basic.lean lines 35-59). Neither states operadic algebroid completion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebroid|Rezk|[Ee]nrich.*[Cc]omplet",
+   "results": "{\"t\": \"2026-10-16T16:09:20Z\", \"tool\": \"grep\", \"query\": \"[Aa]lgebroid|Rezk|[Ee]nrich.*[Cc]omplet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"9d54b212cc02b121\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory is ordinary enrichment (Enriched/Basic.lean lines 47-72); LocalizedMonoidal and its symmetric instances localize ordinary categories (Localization/Monoidal/Basic.lean lines 35-59). Neither states operadic algebroid completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of enriched infinity algebroids is localization at a single walking equivalence and is symmetric monoidal",
+   "results": "{\"t\": \"2026-10-16T16:09:21Z\", \"tool\": \"leansearch\", \"query\": \"Completion of enriched infinity algebroids is localization at a single walking equivalence and is symmetric monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\"], \"digest\": \"0e797e73dc9071af\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory is ordinary enrichment (Enriched/Basic.lean lines 47-72); LocalizedMonoidal and its symmetric instances localize ordinary categories (Localization/Monoidal/Basic.lean lines 35-59). Neither states operadic algebroid completion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-completion",
+  "worker": "stage1",
+  "summary": "NK read Gepner-Haugseng sections 5.1-5.7 online, searched the entire DAG/blueprint and project Lean, and supplied the explicit simplicial cotensor completion proof. Five new statement-only nodes isolate saturation, the equivalence nerve, categorical homotopy, fully faithful simplicial descent, and geometric descent of spaces. Existing algebroid presentability and symmetric localization tools are reused. No target or item statement changes, no Lean work, no new Stacks-based claims. The source empty-set auxiliary error is avoided by stating the nonempty finite-set case only. The fetched delivery base has the updated equivalence-nerve-realization definition of completeness; step 1 derives its equivalence with s-locality by effectiveness, and all quotations use that current definition.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 invokes coherent finite coefficient mapping-complex adjunction. Along its existing enriched tensor/localization support chain, steps 1-6 realize completion/local equivalences of algebroids and steps 7-9 the monoidal localization needed there. The unit and chapter routes are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NK-c4b3429f5",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-c4b3429f5 (reviewer sub-agent of L); spot-checked: Read in full against Gepner–Haugseng arXiv:1312.3178v4 (a PDF obtained through WebFetch, then read as text) and the local HTT copy. GH places read: 5.1.11–5.1.17, 5.2.3–5.2.10, 5.3.1–5.3.9, 5.4.2–5.4.8, 5.5.1–5.5.13, Theorem 5.6.2 with its whole proof, 5.6.3–5.6.6, 5.7.14 and 5.7.15. HTT places read: 5.5.4.15, 6.1.2.6(4) and 6.1.3.9(4). The item statement is unchanged and matches GH 5.4.2, 5.6.3, 5.6.4 and 5.7.14–5.7.15; symmetric monoidal V is stronger than GH's E2 assumption. Steps 1–9 follow the Theorem 5.6.2 proof and Corollary 5.6.3, and each cited statement says what the step takes from it. Step 4's completeness square, the cartesian descent and the fibrewise check are explicit and correct. The new nodes are true general preliminaries, statement-only, and neither duplicates nor restatements of the item. Saturation is HTT 5.5.4.15(1),(4). The equivalence nerve is GH 5.1.15/5.1.17/5.2.5/5.3.4–5.3.6/A.5.5. The fully faithful realization lemma was checked independently for space-enriched algebroids (Segal spaces). Geometric descent is HTT 6.1.3.9 with effective groupoids. The categorical-homotopy node's source-error claim is confirmed: the injective case of the GH 5.5.6 proof needs a retraction, which fails for the empty set, so the nonempty restriction is correct and is all the item uses. Every citation is in unit sk-prop-sf-biduality-general, so no tool uses are needed. There is no cycle (40 nodes reachable from the item), no SGA source, and no blueprint duplicate (grep of literature/blueprint). For whoever splits the categorical-homotopy node later: its GH 5.5.13 clause needs complete-iff-s-local, which must come from the nerve and descent lemmas, never from this item. No fixes made."
+ }
 }

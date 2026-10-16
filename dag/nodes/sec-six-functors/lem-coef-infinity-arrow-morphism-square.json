@@ -27,9 +27,113 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U(x,y)=\\{x\\}\\times_{\\mathcal D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\operatorname{ev}_1,\\mathcal D}\\{y\\}$ and put $A=U(d_0,e_0)$, $B=U(d_1,e_1)$, $C=U(d_0,e_1)$. These are Kan complexes by [lem-coef-infinity-pinch-comparison]. The category $\\mathcal Q=\\operatorname{Fun}(\\Delta^1,\\mathcal D)$ is a quasicategory by [lem-cbc-internal-hom-quasicategory]. Apply [lem-coef-infinity-pinch-comparison] also to $\\mathcal Q$: its right-pinched mapping space from $u$ to $v$ is naturally equivalent to $U_{\\mathcal Q}(u,v)$. By the internal-functor formula in [def-cbc-enhanced-diagrams-cones], an $n$-simplex of this last space is a map $\\Delta^1_s\\times\\Delta^1_t\\times\\Delta^n\\to\\mathcal D$ whose $t=0$ and $t=1$ restrictions are the constant families $u$ and $v$, respectively. Its $s=0$ and $s=1$ restrictions lie in $A$ and $B$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-internal-hom-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10; internal functor definition, and Lecture II basic fact (1) for Q"
+   }
+  },
+  {
+   "text": "Use $H(x,y,z)$ for the space of maps $\\Delta^2\\times\\Delta^n\\to\\mathcal D$ constant at $x,y,z$ on the three vertex families. Let $P_v\\subseteq H(d_0,e_0,e_1)$ impose edge $12=v$, and let $Q_u\\subseteq H(d_0,d_1,e_1)$ impose edge $01=u$, in each degree. Restriction to the other consecutive edge gives $r:P_v\\to A$ and $s:Q_u\\to B$. They are pullbacks of the $n=2$ spine restriction of [lem-cbc-simplicial-composition-spine], so they lift every boundary inclusion: compose a lifting problem with the spine restriction, fill it, and keep the fixed edge. Thus they are trivial Kan fibrations and are homotopy equivalences by [lem-weil-pbc-trivial-kan-homotopy-equivalence]. Since $A,B$ are Kan, the model-structure characterization in [lem-coef-kan-quillen-right-proper] also makes $P_v,Q_u$ Kan. Write $p:P_v\\to C$ and $q:Q_u\\to C$ for restriction to edge $02$. The composition convention of [lem-cbc-simplicial-composition-spine] represents postcomposition by $v$ by the span $A\\xleftarrow{r}P_v\\xrightarrow{p}C$, and precomposition by $u$ by $B\\xleftarrow{s}Q_u\\xrightarrow{q}C$.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Corollary 4.6.8.5 and Construction 4.6.8.9: fixed-leg pullbacks of the triangle spine map"
+   }
+  },
+  {
+   "text": "Both long-edge maps $p$ and $q$ are Kan fibrations. Here are the horn lifts, so that no fibration property is inferred from the spine map. For $p$ take $L=\\Delta^{\\{0,2\\}}\\cup\\Delta^{\\{1,2\\}}\\subseteq\\Delta^2$, prescribing the long edge and $v$; for $q$ take $L=\\Delta^{\\{0,1\\}}\\cup\\Delta^{\\{0,2\\}}$, prescribing $u$ and the long edge. In either case a horn lift is extension of a map on $(L\\times\\Delta^m)\\cup(\\Delta^2\\times\\Lambda_i^m)$, with all vertex families constant. For $0<i<m$, this inclusion is inner anodyne by [lem-coef-inner-anodyne-pushout-product], applied to $L\\hookrightarrow\\Delta^2$ and the inner horn, and $\\mathcal D\\to\\Delta^0$ is an inner fibration by its defining horn condition. For $i=0$, $m\\geq2$, apply [lem-cbc-invertible-prism-extension]: every vertex-direction edge is an identity, hence an equivalence. For $i=m$, reverse the orders in both simplex coordinates and apply that same cited statement to $\\mathcal D^{\\mathrm{op}}$ and $L^{\\mathrm{op}}\\subseteq(\\Delta^2)^{\\mathrm{op}}$; order reversal interchanges the outer horns, preserves inner horns and preserves the inverse-triangle definition of equivalence. For $m=1$, the prescribed edge in $\\operatorname{Fun}(L,\\mathcal D)$ is an equivalence by the componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus], since every vertex component is an identity. The isofibration $\\operatorname{Fun}(\\Delta^2,\\mathcal D)\\to\\operatorname{Fun}(L,\\mathcal D)$ of [lem-coef-infinity-isofibration-exponentiation] lifts it from a specified source. To lift from a specified target, apply this isofibration statement to the opposite simplicial sets. Because $L$ contains all vertices and the prescribed fixed edge, these lifts stay in $P_v$ or $Q_u$ as required.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-cbc-invertible-prism-extension",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8 for the outer prisms; agent-expanded long-edge horn lifting, using the cited exponential and inner pushout-product statements"
+   }
+  },
+  {
+   "text": "The simplicial square $\\Delta^1_s\\times\\Delta^1_t$ is the union of the two triangles with vertex sequences $((0,0),(0,1),(1,1))$ and $((0,0),(1,0),(1,1))$, along their common edge $((0,0),(1,1))$. A map from this union is exactly two maps agreeing on that edge, in every degree and after every simplicial restriction. The boundary conditions $t=0:u$ and $t=1:v$ impose precisely the fixed edges defining $Q_u$ and $P_v$. Consequently the internal-functor definition of [def-cbc-enhanced-diagrams-cones] gives a strict isomorphism $U_{\\mathcal Q}(u,v)=P_v\\times_C Q_u$. Under it the joint endpoint map is $(r,s):P_v\\times_C Q_u\\to A\\times B$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Agent-expanded interval case: degreewise triangulation of the interval square; source theorem checks the resulting Hom square"
+   }
+  },
+  {
+   "text": "Since $p,q$ are Kan fibrations between Kan complexes, [lem-coef-kan-quillen-right-proper] identifies $P_v\\times_C Q_u$ with the homotopy pullback $P_v\\times_C^h Q_u$. In the category of spaces the spans $A\\xleftarrow{r}P_v\\xrightarrow{p}C$ and $B\\xleftarrow{s}Q_u\\xrightarrow{q}C$ are exactly the maps $v\\circ(-)$ and $(-)\\circ u$ from step 2. Replacing their domains by $A,B$ through the equivalences $r,s$ therefore identifies this homotopy pullback with $A\\times_C^h B$, and its projection with the endpoint map $(r,s)$. This is the independence of a fibration replacement asserted by [lem-coef-kan-quillen-right-proper], applied to these two representatives of the same cospan of spaces; it does not assert that the original composition maps themselves are fibrations.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9, combined with the cited Kan homotopy-pullback replacement theorem; agent-expanded triangulation proof"
+   }
+  },
+  {
+   "text": "Model $A\\times_C^h B$ by $A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}B$. The homotopy-fiber convention in [def-cbc-enhanced-diagrams-cones] makes its simplices triples $(a,b,\\gamma)$ with a path $\\gamma:va\\simeq bu$ and all higher simplices. The natural pinch maps of [lem-coef-infinity-pinch-comparison], for $\\mathcal Q$ and for the three pairs of endpoints in $\\mathcal D$, replace every $U$ by the specified right-pinched mapping space. Their compatibility with evaluation is explicit: restricting the simplicial map defining a pinch to $s=0$ or $s=1$ is the pinch of that endpoint restriction. Thus the resulting equivalence has exactly the joint endpoint projection in the statement. The two maps into the cross term use the coherent composition spans from step 2; no strict choice of composition is part of the assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10; path model as defined in the statement and enhanced-diagram definition"
+   }
+  },
+  {
+   "text": "All maps before inversion are restrictions or postcomposition of simplicial maps; these commute with simplicial operators and any simplicial functor $\\mathcal D\\to\\mathcal D'$. The spine statement [lem-cbc-simplicial-composition-spine] supplies coherent composition in both $\\mathcal D$ and $\\mathcal Q$. Explicitly, if squares $u\\to v$ and $v\\to w$ have data $(a,b,\\gamma:va\\simeq bu)$ and $(a',b',\\delta:wa'\\simeq b'v)$, pasting them gives endpoint maps $a'a,b'b$ and the path obtained by concatenating $wa'a\\xRightarrow{\\delta\\,a}b'va\\xRightarrow{b'\\gamma}b'bu$, with the composition associativity homotopies supplied by that cited spine statement. This is the square obtained by restricting a composable pair in $\\mathcal Q$ to the two endpoints, since those restrictions are simplicial functors. The degenerate square gives the two identity endpoints and constant compatibility path. For any longer string, use the cited spine maps in $\\mathcal Q$ and $\\mathcal D$: their face restrictions give every parenthesization and their degeneracies give the identities, and the face/degeneracy identities give their higher compatibility. Inverting these trivial Kan equivalences preserves those diagrams of spaces. This verifies compatibility with composition and hence naturality under precomposition in the first arrow and postcomposition in the second, including all higher simplices. Together with the strict commutation with simplicial functors and the natural pinch maps from [lem-coef-infinity-pinch-comparison], it proves the claimed naturality.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Corollary 4.6.8.5, Remark 4.6.8.7 and the unitality/associativity constructions; explicit pasting for the interval Hom square of 06BZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-cbc-invertible-prism-extension",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01PF",
+  "place": "Agent-written triangulation proof of the interval case of Kerodon 06BZ, using the existing spine, pinch, exponential and Kan-pullback statements. Read Kerodon 06BZ, 01PF, 01DP and 01L5 online; no use of 06BZ as an uncited elementary lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,15 +176,70 @@
    "results": "{\"t\": \"2026-10-16T14:26:14Z\", \"tool\": \"grep\", \"query\": \"def homMk|structure CommaMorphism\", \"sub\": \"CategoryTheory/Comma\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Arrow.lean\"], \"digest\": \"c285fe680407713e\"}",
    "date": "2026-10-16",
    "verdict": "no match: read CategoryTheory/Comma/Arrow.lean:31-46,165-189 and Comma/Basic.lean:96-105. Arrow.homMk and homMk' build a pair satisfying an equality in an ordinary category, not a Kan space with compatibility paths and higher homotopies. Square functors and ComposableArrows constructors have the same ordinary categorical setting. StrictSegal and InnerFibration grep hits concern spines and ordinary Arrow isomorphisms; nerve.homEquiv concerns edges of an ordinary nerve. None computes coherent interval-functor mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from coherent composable morphisms to their composite is a Kan fibration; morphism spaces of natural transformations",
+   "results": "{\"t\": \"2026-10-16T17:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from coherent composable morphisms to their composite is a Kan fibration; morphism spaces of natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instFibrationCompOfIsStableUnderCompositionFibrations\", \"HomotopicalAlgebra.PathObject.instIsGoodTrans\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"CategoryTheory.nerve\"], \"digest\": \"a8a9b294b3e1156d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are ordinary nerves or abstract model-category path objects; Loogle gives internal-hom quasicategory instances, only a prerequisite; grep gives no hits. Read the pinned Arrow.homMk, CommaMorphism, and inner pushout-product source. None states the coherent arrow mapping-space square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"hom\"",
+   "results": "{\"t\": \"2026-10-16T17:03:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryObjIhom\", \"SSet.instQuasicategoryObjIhomTerminal\"], \"digest\": \"4bf963e126f428d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are ordinary nerves or abstract model-category path objects; Loogle gives internal-hom quasicategory instances, only a prerequisite; grep gives no hits. Read the pinned Arrow.homMk, CommaMorphism, and inner pushout-product source. None states the coherent arrow mapping-space square."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|morphismSpace|mappingSpace|spine.*fibration|fibration.*spine",
+   "results": "{\"t\": \"2026-10-16T17:03:29Z\", \"tool\": \"grep\", \"query\": \"pinch|morphismSpace|mappingSpace|spine.*fibration|fibration.*spine\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are ordinary nerves or abstract model-category path objects; Loogle gives internal-hom quasicategory instances, only a prerequisite; grep gives no hits. Read the pinned Arrow.homMk, CommaMorphism, and inner pushout-product source. None states the coherent arrow mapping-space square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-join-cone-calculus",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-arrow-morphism-square",
+  "worker": "stage1",
+  "summary": "Seven-step triangulation proof: unpinched square, fixed-leg triangle composition spans, explicit long-edge Kan horn lifting, strict square gluing, Kan homotopy pullback, natural pinches and endpoint projection, and explicit coherent square pasting. No new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived R Hom / R lim calculation: the interval-arrow calculation used inside the joint-endpoint pullback at the source-attachment join/cone comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Steps 2, 5, 7 take the generic trivial-Kan-fibration spine restriction H(x0,x1,x2)->H(x0,x1)xH(x1,x2) and its face/degeneracy coherence for an arbitrary quasicategory; sk-prop-sf-biduality-general has no node stating quasicategorical composition."
+   },
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Step 3 takes the generic outer-horn prism extension (A x Delta^n) u (B x Lambda^n_0) -> B x Delta^n with identity vertex edges, for the left/right outer horn lifts of the long-edge maps; no node of this unit gives it."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 3 takes only the componentwise criterion for equivalences in Fun(L,D); no node of this unit states it (already accepted as a tool for lem-coef-kan-quillen-right-proper and other siblings)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-invertible-prism-extension",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-fc43a9ce1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-fc43a9ce1 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 10 cited statements, the unit route and the citer (lem-coef-infinity-join-cone-calculus step 7, whose path orientation va->bu matches the item). Kerodon 06BZ/01PF/01DP/01L5 are not archived (WANTED recorded, proof_origin=agent). The statement is the standard Hom-in-Arr homotopy-pullback formula and is unchanged and not weakened. It checks on small cases: in an ordinary nerve it gives exactly va=bu; Delta^0 gives contractible spaces; empty D is vacuous. No coefficient category or base-change morphism is involved. Step checks: step 1 unwinds the Fun definition correctly and applies the pinch to Q. In step 2, P_v and Q_u are pullbacks of the n=2 spine trivial fibration, so r and s are trivial fibrations and P_v, Q_u are Kan. In step 3 every horn case holds. Inner horns use the pushout-product with the inner horn as the anodyne factor; L is an outer horn and serves as the mono. The case i=0, m>=2 uses the prism lemma with degenerate vertex edges. The case i=m follows by opposites. The case m=1 uses the componentwise equivalence criterion plus Fun(Delta^2,D)->Fun(L,D) being an isofibration, with opposites for a given target. Step 4: the two-triangle decomposition gives the strict iso U_Q(u,v)=P_v x_C Q_u with endpoint map (r,s); it is genuinely elementary. Step 5: the strict pullback along the Kan fibration p is the homotopy pullback, and passing to A,B through sections of r,s is valid by right properness and independence of replacement; terse but correct. Step 6: pinch naturality under ev_0/ev_1 gives the endpoint compatibility. Step 7: the explicit pasting gives naturality. There are no new nodes. No duplicate after rg over 06BZ, oriented fiber, Arr and times^h and reading the six nearest lem-coef-infinity-* nodes. Acyclic; no SGA. Fix: lem-cbc-simplicial-composition-spine, lem-cbc-invertible-prism-extension and lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) are outside the unit's transitive route and were not declared. I accepted all three as generic tool uses and added split_report.tool_uses to the item in fixes/; nothing else changed. lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2) is inside the route.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,81 @@
+{
+ "id": "lem-exc-field-roots-cyclic-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph: 'Its image is a finite cyclic group of order prime to p'; cyclicity and root-count bound for the residue-field roots of unity containing the character image.",
+   "via": [
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "rootsOfUnity.isCyclic, card_rootsOfUnity",
+  "file": "Mathlib/RingTheory/RootsOfUnity/Basic.lean",
+  "line": 249,
+  "how": "one declaration per clause: for the field E and positive r (hence NeZero r), the Finite instance at lines 245-247 gives finiteness, rootsOfUnity.isCyclic at lines 249-250 gives cyclicity, and card_rootsOfUnity at lines 252-260 gives Nat.card (rootsOfUnity r E) <= r. The hypotheses CommRing E and IsDomain E are field instances. Section and all three declarations were read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-finite-dvr-tame-inertia",
+  "date": "2026-10-17",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "title": "Roots of unity in a field are finite cyclic with the degree bound",
+ "statement": "Let $E$ be a field [def-weil-field] and let $r\\geq1$ be an integer. The subgroup $\\mu_r(E)=\\{z\\in E^\\times:z^r=1\\}$ of the multiplicative group of units of $E$ is finite and cyclic, and $|\\mu_r(E)|\\leq r$.",
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09HW (section-roots-of-1), opening discussion: polynomial root bound and cyclicity, with Tag 09HX (lemma-cyclic)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The roots of unity in a field form a finite cyclic group of cardinality at most their exponent",
+   "results": "Search returned 8 hits: card_rootsOfUnity, rootsOfUnity.isCyclic, IsCyclic.card_pow_eq_one_le, FiniteField.forall_pow_eq_one_iff, HasEnoughRootsOfUnity.rootsOfUnity_isCyclic, isCyclic_of_card_pow_eq_one_le, rootsOfUnity.fintype, HasEnoughRootsOfUnity.of_card_le. ",
+   "date": "2026-10-17",
+   "verdict": "match: rootsOfUnity.isCyclic and card_rootsOfUnity, with the Finite instance in the same section; read Basic.lean:210-260, including the NeZero r hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group of nth roots of unity in a field is cyclic and has cardinality at most n for positive n",
+   "results": "Search returned 8 hits: HasEnoughRootsOfUnity.rootsOfUnity_isCyclic, HasEnoughRootsOfUnity.cyc, rootsOfUnity.isCyclic, Complex.card_rootsOfUnity, card_rootsOfUnity, IsPrimitiveRoot.card_rootsOfUnity, IsPrimitiveRoot.card_rootsOfUnity', isCyclic_of_card_pow_eq_one_le. ",
+   "date": "2026-10-17",
+   "verdict": "match: rootsOfUnity.isCyclic and card_rootsOfUnity, with the Finite instance in the same section; read Basic.lean:210-260, including the NeZero r hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity, IsCyclic",
+   "results": "Search returned 6 hits: rootsOfUnity.isCyclic, IsCyclic.monoidHom_mulEquiv_rootsOfUnity, HasEnoughRootsOfUnity.cyc, HasEnoughRootsOfUnity.rootsOfUnity_isCyclic, HasEnoughRootsOfUnity.mk, MulChar.equiv_rootsOfUnity. ",
+   "date": "2026-10-17",
+   "verdict": "match: rootsOfUnity.isCyclic and card_rootsOfUnity, with the Finite instance in the same section; read Basic.lean:210-260, including the NeZero r hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "isCyclic|card_rootsOfUnity|card_le",
+   "results": "Search returned 21 hits: Mathlib/RingTheory/RootsOfUnity/Minpoly.lean, Mathlib/RingTheory/RootsOfUnity/Minpoly.lean, Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean. ",
+   "date": "2026-10-17",
+   "verdict": "match: rootsOfUnity.isCyclic and card_rootsOfUnity, with the Finite instance in the same section; read Basic.lean:210-260, including the NeZero r hypothesis.",
+   "subdirectory": "RingTheory/RootsOfUnity"
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity, Nat.card",
+   "results": "Search returned 12 hits: card_rootsOfUnity, IsCyclic.monoidHom_mulEquiv_rootsOfUnity, IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator, IsPrimitiveRoot.card_rootsOfUnity, card_rootsOfUnity_eq_iff_exists_isPrimitiveRoot, IsPrimitiveRoot.card_rootsOfUnity', Complex.card_rootsOfUnity, HasEnoughRootsOfUnity.natCard_rootsOfUnity.",
+   "date": "2026-10-17",
+   "verdict": "match: card_rootsOfUnity gives the bound; the pinned source Basic.lean:245-260 also provides the Finite instance and rootsOfUnity.isCyclic, with the NeZero exponent hypothesis."
+  }
+ ]
+}

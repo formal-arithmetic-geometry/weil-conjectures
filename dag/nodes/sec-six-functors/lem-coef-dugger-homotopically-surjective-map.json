@@ -1,0 +1,116 @@
+{
+ "id": "lem-coef-dugger-homotopically-surjective-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite-coefficient mapping-complex adjunction before R lim; the small model-category presentation input.",
+   "via": [
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopically surjective simplicial-presheaf model map",
+ "statement": "Use the universe conventions of [def-coef-complete-algebroid]; the model-category conventions used below are stated explicitly in this node. Categories are complete and cocomplete, weak equivalences satisfy two-out-of-three and retract closure, and (cofibrations, trivial fibrations) and (trivial cofibrations, fibrations) are weak factorization systems with functorial factorizations. A weak factorization system consists of mutually characterized left and right diagonal-lifting classes and factorizations of all arrows; trivial means also a weak equivalence. Cofibrant and fibrant mean that the initial and terminal maps, respectively, are cofibrations and fibrations. A cofibrant replacement is a trivial fibration $QX\\to X$ with $QX$ cofibrant; a fibrant replacement is a trivial cofibration $X\\to TX$ with $TX$ fibrant. Combinatorial means locally presentable with small generating sets $I,J$ whose right lifting classes are the trivial fibrations and fibrations, respectively. Locally presentable means cocomplete and generated, for some regular $\\kappa$, under $\\kappa$-filtered colimits by a small set of objects whose ordinary Hom functors preserve these colimits. A Quillen adjunction is an ordinary adjunction whose left adjoint preserves cofibrations and trivial cofibrations. It is a Quillen equivalence when, for each cofibrant source object $A$ and fibrant target object $Y$, a map $LA\\to Y$ is a weak equivalence if and only if its adjoint $A\\to RY$ is a weak equivalence. Write $\\mathsf{sSet}$ for the simplicial sets of [def-weil-pbc-simplicial-set] with the Kan model structure: cofibrations are monomorphisms; fibrations have the right lifting property against all horns $\\Lambda_i^n\\hookrightarrow\\Delta^n$ ($n\\geq1$, $0\\leq i\\leq n$), where $\\Delta^n$ is the representable simplex and $\\Lambda_i^n$ is the union of its faces other than the $i$th; weak equivalences induce a bijection on path components and isomorphisms on all homotopy groups of geometric realizations. Let $\\mathcal M$ be combinatorial. There exist a small ordinary category $D$ and a Quillen adjunction $L_0:\\mathsf U(D)\\rightleftarrows\\mathcal M:R_0$, where $\\mathsf U(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathsf{sSet})$ has the projective model structure (objectwise weak equivalences and fibrations, and cofibrations defined by the left lifting property against trivial fibrations), such that for every fibrant $X$ in $\\mathcal M$ and every cofibrant replacement $q:QR_0X\\to R_0X$, the counit composite $L_0QR_0X\\xrightarrow{L_0q}L_0R_0X\\xrightarrow{\\varepsilon_X}X$ is a weak equivalence. A Quillen adjunction with this counit property is called homotopically surjective.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Definition 3.1 and Proposition 3.3, printed pp. 181-182."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A combinatorial model category admits a homotopically surjective Quillen functor from a simplicial presheaf model category",
+   "results": "Hits: HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective; SSet model-category declarations; none states Dugger homotopical surjectivity or a presheaf presentation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopically surjective\" \"ModelCategory\"",
+   "results": "0 hits; service reports the first quoted term is not a function. No matching declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopically[[:space:]]*surjective|surjective.*model (Mathlib/AlgebraicTopology)",
+   "results": "0 hits in Mathlib/AlgebraicTopology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived counit of an adjunction between model categories is a weak equivalence and the right derived functor is fully faithful",
+   "results": "{\"t\": \"2026-10-16T15:52:05Z\", \"tool\": \"leanfinder\", \"query\": \"The derived counit of an adjunction between model categories is a weak equivalence and the right derived functor is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Adjunction.derived_unit\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"a58855228783e0c9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read ModelCategory/Basic.lean:45-100, SimplicialSet/CategoryWithFibrations.lean:35-95, and Localization/Bousfield.lean:13-63. These give supplied model-category axioms, base simplicial-set classes, and ordinary Hom-set localization; none constructs this model structure or proves the stated homotopical existence theorem. The derived-adjunction and presentability hits likewise assume the required functors or concern ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "modelCategory|ModelCategory|simplicial|Cofibration",
+   "results": "{\"t\": \"2026-10-16T15:52:38Z\", \"tool\": \"grep\", \"query\": \"modelCategory|ModelCategory|simplicial|Cofibration\", \"sub\": \"CategoryTheory/Functor\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read ModelCategory/Basic.lean:45-100, SimplicialSet/CategoryWithFibrations.lean:35-95, and Localization/Bousfield.lean:13-63. These give supplied model-category axioms, base simplicial-set classes, and ordinary Hom-set localization; none constructs this model structure or proves the stated homotopical existence theorem. The derived-adjunction and presentability hits likewise assume the required functors or concern ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "projective|Bousfield|combinatorial|surjective",
+   "results": "{\"t\": \"2026-10-16T15:52:38Z\", \"tool\": \"grep\", \"query\": \"projective|Bousfield|combinatorial|surjective\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"d984035f9b72b829\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read ModelCategory/Basic.lean:45-100, SimplicialSet/CategoryWithFibrations.lean:35-95, and Localization/Bousfield.lean:13-63. These give supplied model-category axioms, base simplicial-set classes, and ordinary Hom-set localization; none constructs this model structure or proves the stated homotopical existence theorem. The derived-adjunction and presentability hits likewise assume the required functors or concern ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quillen\"",
+   "results": "{\"t\": \"2026-10-16T15:52:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read ModelCategory/Basic.lean:45-100, SimplicialSet/CategoryWithFibrations.lean:35-95, and Localization/Bousfield.lean:13-63. These give supplied model-category axioms, base simplicial-set classes, and ordinary Hom-set localization; none constructs this model structure or proves the stated homotopical existence theorem. The derived-adjunction and presentability hits likewise assume the required functors or concern ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|IsLocalization|isLocal",
+   "results": "{\"t\": \"2026-10-16T15:54:37Z\", \"tool\": \"grep\", \"query\": \"Bousfield|IsLocalization|isLocal\", \"sub\": \"CategoryTheory/Localization/Bousfield.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"16\", \"20\", \"24\", \"32\"], \"digest\": \"685c568c5ebe3781\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read ModelCategory/Basic.lean:45-100, SimplicialSet/CategoryWithFibrations.lean:35-95, and Localization/Bousfield.lean:13-63. These give supplied model-category axioms, base simplicial-set classes, and ordinary Hom-set localization; none constructs this model structure or proves the stated homotopical existence theorem. The derived-adjunction and presentability hits likewise assume the required functors or concern ordinary categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Quillen left adjoint from a small diagram category of simplicial sets whose derived counit is invertible",
+   "results": "{\"t\": \"2026-10-16T16:57:28Z\", \"tool\": \"leanfinder\", \"query\": \"A Quillen left adjoint from a small diagram category of simplicial sets whose derived counit is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.cosk_reflective\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"SSet.Truncated.coskAdj.reflective\", \"SSet.Truncated.sk_coreflective\", \"SSet.skAdj\"], \"digest\": \"f2e56d3df98058f3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern the ordinary nerve/homotopy-category adjunction, truncation/coskeleton adjunctions, or localizations and derived functors already given as input. None constructs a homotopically surjective small presheaf source or a set presenting a given homotopically surjective Quillen adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen|counit|homotopically",
+   "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"grep\", \"query\": \"Quillen|counit|homotopically\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"04b4cd280af4664c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern the ordinary nerve/homotopy-category adjunction, truncation/coskeleton adjunctions, or localizations and derived functors already given as input. None constructs a homotopically surjective small presheaf source or a set presenting a given homotopically surjective Quillen adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-combinatorial-presheaf-presentation",
+  "date": "2026-10-16",
+  "group": "Q13"
+ },
+ "status": "unsplit"
+}

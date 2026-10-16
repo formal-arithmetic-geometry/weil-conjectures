@@ -3,51 +3,234 @@
  "blueprint": {
   "is": "det-sp-scalar-extension-functor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived extension-of-coefficients functor and its associativity",
- "statement": "Let $A\\to B\\to C$ be maps of finite commutative rings killed by a power of\n$\\ell$, and $T$ a scheme; write $A_T,B_T,C_T$ for the constant coefficient\nsheaves on $T_{\\mathrm{proét}}$.\n\n1. *Functor.* The derived tensor product\n   $(-)_B=-\\otimes^{\\mathbf L}_{A_T}B_T:D(T_{\\mathrm{proét}},A)\\to D(T_{\\mathrm{proét}},B)$,\n   computed on a K-flat representative and regarded as a complex of\n   $B_T$-modules through the right factor, sends a morphism $u$ to\n   $u_B=u\\otimes^{\\mathbf L}\\mathrm{id}_{B_T}$. It is an exact functor of\n   triangulated categories.\n2. *Preservation of $\\Dctf$.* If $K\\in\\Dctf(T_{\\mathrm{proét}},A)$ has Tor\n   amplitude in $[a,b]$, then $K_B\\in\\Dctf(T_{\\mathrm{proét}},B)$ with Tor\n   amplitude in $[a,b]$.\n3. *Free rank-one sheaves.* If $L$ is a locally free $A_T$-module of rank one\n   (for instance a Tate sheaf $A_T(r)$), then $L_B=L\\otimes_{A_T}B_T$ is the\n   ordinary tensor product, locally free of rank one over $B_T$, and\n   $(A_T(r))_B\\simeq B_T(r)$.\n4. *Associativity.* There is an isomorphism\n   $\\alpha_K:(K_B)_C\\xrightarrow{\\sim}K_C$ in $D(T_{\\mathrm{proét}},C)$, natural in\n   $K$ (so $\\alpha_L\\circ(u_B)_C=u_C\\circ\\alpha_K$ for $u:K\\to L$), with\n   $\\alpha$ the identity when $B=C$, and satisfying the evident pentagon for a\n   chain $A\\to B\\to C\\to D$.",
+ "statement": "Let $\\ell$ be a prime and $A\\xrightarrow{f}B\\xrightarrow{g}C$ unital maps of finite commutative rings killed by powers of $\\ell$. Let $T$ be any scheme. Use the small pro-étale site and ordinary derived categories of constant-ring module sheaves of [def-weil-pbc-proetale-site], with constant rings $A_T,B_T,C_T$ [def-weil-pbc-constant-sheaf]. Constructible means the intrinsic finite-stratification condition of [def-weil-proetale-constructible-sheaf], for these arbitrary finite rings. Write $\\Dctf(T_{\\mathrm{proét}},A)$ for the full subcategory of complexes with finitely many nonzero constructible cohomology sheaves and finite Tor amplitude as in [def-weil-proetale-tor-amplitude]. K-flatness and the underlying derived tensor use [def-weil-derived-tensor]; extension with its target-ring action is [def-weil-pbc-constant-coefficient-scalar-extension].\n\n1. The functor $(-)_B=-\\otimes^{\\mathbf L}_{A_T}B_T:D(T_{\\mathrm{proét}},A)\\to D(T_{\\mathrm{proét}},B)$ is computed by a K-flat representative, with $B_T$ acting through the right factor. It sends $u$ to $u_B=u\\otimes^{\\mathbf L}\\mathrm{id}_{B_T}$ and is exact as a functor of triangulated categories.\n2. If $K\\in\\Dctf(T_{\\mathrm{proét}},A)$ has Tor amplitude in $[a,b]$ for integers $a\\leq b$, then $K_B\\in\\Dctf(T_{\\mathrm{proét}},B)$ has Tor amplitude in the same $[a,b]$. No flatness or finite projective dimension of $B$ over $A$ is assumed.\n3. If $L$ is a locally free $A_T$-module of rank one (locally isomorphic to $A_T$), then $L_B$ is the ordinary tensor $L\\otimes_{A_T}B_T$, locally free of rank one over $B_T$. For the Tate example assume additionally that $\\ell$ is invertible on $T$. For a common $m\\geq1$ with $\\ell^mA=\\ell^mB=0$, use the roots-of-unity sheaf [def-pur-roots-of-unity-sheaf] to put $A_T(1)=\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}A_T$ and similarly for $B$. Define integer twists by positive tensor powers [def-pur-sheaf-tensor-product], the unit in degree zero, and duals $M^\\vee=\\mathcal{H}om_{A_T}(M,A_T)$ [def-pur-sheaf-hom] of positive powers for negative integers. These are independent of sufficiently large $m$ and invertible by [det-def-sp-tate-twist-locally-free], and $(A_T(r))_B\\simeq B_T(r)$ canonically for every $r\\in\\mathbf Z$.\n4. For the specified maps $f,g$, there is a canonical natural isomorphism $\\alpha_K:(K_B)_C\\xrightarrow{\\sim}K_C$, where direct extension uses $g\\circ f$. For $u:K\\to L$ it satisfies $\\alpha_L\\circ(u_B)_C=u_C\\circ\\alpha_K$. If $g=\\mathrm{id}_B$, $\\alpha$ is the canonical tensor unitor, hence the identity after identifying extension along the identity with the identity functor. These comparisons satisfy the associativity coherence diagram for every chain $A\\to B\\to C\\to D$ (equivalently the rebracketing pentagon, with the usual unit identifications).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.md",
   "place": "node det-sp-scalar-extension-functor, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-pur-roots-of-unity-sheaf",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
  "proof": [
   {
-   "text": "(1) $D(T_{\\mathrm{proét}},A)$ has K-flat resolutions, so the derived tensor\nproduct is defined and exact in each variable; the $B_T$-module structure\ncomes from the right factor, so $(-)_B$ lands in $D(T_{\\mathrm{proét}},B)$ and\nis functorial.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) By [lem-sf-flat-model], $K$ is represented by a bounded complex $P$ in\ndegrees $[a,b]$ of flat constructible $A_T$-modules. Then $K_B$ is represented\nby the termwise tensor product $P\\otimes_{A_T}B_T$, a bounded complex in\ndegrees $[a,b]$ of flat $B_T$-modules (flatness is preserved by base change),\nwhose terms are constructible: on each stratum where a term of $P$ is locally\nconstant with finite stalks, so is its tensor with the finite constant sheaf\n$B_T$. Its cohomology sheaves are therefore constructible, and its Tor\namplitude over $B_T$ lies in $[a,b]$ since for every $B_T$-module $N$,\n$K_B\\otimes^{\\mathbf L}_{B_T}N\\simeq P\\otimes_{A_T}N$ is computed by the\ncomplex $P\\otimes_{A_T}N$ in degrees $[a,b]$.",
+   "text": "For clause (1), apply [lem-pur-derived-change-of-rings] on the chosen small site to $A_T\\to B_T$. Its clause (2) is precisely the everywhere-defined exact functor with target $D(B_T)$ and computation by K-flat complexes. Choose, using [lem-pc-kflat-resolution], a quasi-isomorphism $P\\to K$ with $P$ K-flat and all $P^q$ flat. Its extension is represented by $P\\otimes_{A_T}B_T$, with the action on the second factor. At the complex level a chain map $v$ induces $v\\otimes1$; the cited derived-functor statement inverts quasi-isomorphisms between K-flat representatives. Thus this formula also defines the action on localized morphisms and gives $u_B$ as claimed.",
    "uses": [
-    "lem-sf-flat-model"
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), identity underlying topos"
+   }
   },
   {
-   "text": "(3) A locally free module is flat, so the derived tensor product is the\nordinary one, which is locally $A_T\\otimes_{A_T}B_T=B_T$. The Tate sheaf\n$A_T(r)$ is $(\\mathbf Z/\\ell^m)_T(r)\\otimes A_T$ for $\\ell^mA=0$, and\nassociativity of the ordinary tensor product gives $(A_T(r))_B\\simeq B_T(r)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix the representative $P$ of step 1. By [lem-pur-kflat-change-of-rings], $P_B=P\\otimes_{A_T}B_T$ is K-flat over $B_T$ with flat terms. For any complex $N$ of $B_T$-modules, the sheafified balanced tensor products of [def-pur-sheaf-tensor-product] have mutually inverse maps\n$$ (P\\otimes_{A_T}B_T)\\otimes_{B_T}N\\longrightarrow P\\otimes_{A_T}\\operatorname{Res}N,\\quad (p\\otimes b)\\otimes n\\longmapsto p\\otimes bn,\\qquad p\\otimes n\\longmapsto(p\\otimes1)\\otimes n. $$\nHere $\\operatorname{Res}$ is [def-pc-sheaf-restrict-scalars]. Balancing verifies the formulas on sections before sheafification; restriction maps preserve them. On total complexes they commute with the differential $d(p\\otimes n)=dp\\otimes n+(-1)^{\\deg p}p\\otimes dn$, since $b$ has degree zero. They therefore give a natural chain isomorphism. Both derived products are computed by the displayed K-flat first factors, so, on underlying $A_T$-complexes, $(K_B)\\otimes^{\\mathbf L}_{B_T}N\\simeq K\\otimes^{\\mathbf L}_{A_T}\\operatorname{Res}N$.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat) specialized to change of rings; balanced tensor identity as in sites-modules.tex Tag 05V4 (lemma-flat-change-of-rings)"
+   }
   },
   {
-   "text": "(4) For a K-flat representative $P$ of $K$, $P\\otimes_{A_T}B_T$ is K-flat over\n$B_T$ (since $(P\\otimes_{A_T}B_T)\\otimes_{B_T}N=P\\otimes_{A_T}N$), so\n$(K_B)_C$ is represented by $(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T$, and the\nassociativity isomorphism of tensor products of sheaves of modules\n$(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\cong P\\otimes_{A_T}C_T$ defines\n$\\alpha_K$. It is natural because the associativity isomorphism of modules is,\nit is the identity for $B=C$ by the unit isomorphism, and the pentagon for\n$A\\to B\\to C\\to D$ is the pentagon of the associativity isomorphisms of the\ntensor product of modules.",
-   "uses": [],
-   "elementary": null
+   "text": "For any $B_T$-module sheaf $N$ placed in degree zero, $\\operatorname{Res}N$ is an $A_T$-module sheaf in degree zero. Thus the equality of step 2 and the hypothesis give $\\mathcal H^i(K_B\\otimes^{\\mathbf L}_{B_T}N)=0$ for $i\\notin[a,b]$, exactly [def-weil-proetale-tor-amplitude] for $B$. Restricting scalars detects zero cohomology: kernels and cokernels have the same underlying abelian sheaves. Taking $N=B_T$, whose tensor unitor is $(p\\otimes b)\\otimes b'\\mapsto p\\otimes bb'$, also shows $\\mathcal H^i(K_B)=0$ outside $[a,b]$. This proves boundedness and the Tor assertion of clause (2).",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ (definition-tor-amplitude); explicit change-of-rings tensor computation of step 2"
+   }
+  },
+  {
+   "text": "To prove the remaining constructibility assertion, choose a common finite stratification $T=\\coprod S_\\nu$ for the finitely many nonzero $\\mathcal H^q(K)$ in [def-weil-proetale-constructible-sheaf]: take all intersections of one stratum from each partition and discard empty intersections when $T$ is nonempty. If there are no nonzero cohomology sheaves, use the single stratum $T$; if $T$ is empty, retain the single empty stratum, on which all assertions are vacuous. The intersections are represented by fibre products of the stratum immersions, so carry subscheme structures and remain locally closed and constructible. The local constant presentations have finite module values: on any nonempty trivializing member, [lem-weil-proetale-constant-sheaf-stalk] identifies the value module with its geometric stalk, which is finite by constructibility. Here preservation of constant modules is checked separately from exactness. For a stratum inclusion $i:S\\to T$, the base-change site functor of [def-weil-proetale-inverse-image] preserves finite limits and covers; [lem-weil-pbc-left-exact-site-inverse-image-tensor] therefore says its set inverse image preserves terminal objects and all colimits. By [def-weil-pbc-constant-sheaf] and the universal property of [def-weil-pbc-sheafification], the constant set sheaf of $M$ is the coproduct of $M$ copies of the terminal sheaf: maps from either object to a sheaf $F$ are families of global sections indexed by $M$. Its inverse image is consequently the same coproduct on $S$, hence the constant set sheaf of $M$. Under the product comparisons, inverse image sends the maps on constant sets induced by $(m,n)\\mapsto m+n$, $m\\mapsto-m$, $0$, and $(a,m)\\mapsto am$ to those induced by exactly the same functions on $S$. Their composites and identities are preserved by functoriality. Thus the constant-set comparison respects addition and the $A_S$-action and is a constant-module isomorphism. Pulling back the trivializing covers now shows that the finite locally constant models remain so on each refined stratum. The canonical coefficient identification of [prop-weil-pbc-proetale-constant-ring-map] identifies the finite coefficient sheaves there with the constant rings used here; [prop-weil-pbc-proetale-constant-exact] then makes $i^*$ exact, hence $\\mathcal H^q(i^*K)=i^*\\mathcal H^q(K)$. By [lem-weil-pbc-ringed-topos-kflat-pullback], $i^*P$ is K-flat with flat terms. The underived natural tensor isomorphism [lem-weil-pbc-ringed-topoi-module-pullback-tensor], applied termwise to $P^q,B_T$, gives $i^*(P\\otimes_{A_T}B_T)\\simeq i^*P\\otimes_{A_S}B_S$. Consequently the underlying $A_S$-complex of $i^*K_B$ is $i^*K\\otimes^{\\mathbf L}_{A_S}B_S$. Apply [lem-weil-pbc-locally-constant-tensor] on $S_{\\mathrm{proét}}$ to these two factors. Its Noetherian hypothesis holds since the finite ring $A$ has only finitely many ideals; both factors are bounded above, $i^*K$ has finite locally constant cohomology by construction, and $B$ is a finite $A$-module. Every cohomology sheaf of $i^*K_B$ is therefore locally constant of finite type as an $A_S$-module. Its local constant module values are finite sets because $A$ is finite.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094H (lemma-locally-constant-tensor-product); Tag 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); blueprint proof paragraph (2); sites.tex Tag 00X6 (proposition-get-morphism) for preservation of finite limits and colimits; constant module preservation proved explicitly from the cited definitions"
+   }
+  },
+  {
+   "text": "The local constancy just obtained is also local constancy as a $B$-module, using [def-weil-proetale-locally-constant-sheaf] and [def-weil-pbc-constant-sheaf] and the local representation and local equality assertions of [lem-weil-pbc-site-sheafification-sections-local]. On a cover trivializing the underlying $A$-module as a finite module $M$, each of the finitely many sections $b\\cdot m$ ($b\\in B$, $m\\in M$) of the constant sheaf $M$ is locally represented by an element of $M$. Refine the cover for all these finitely many pairs. On each resulting member the action is one fixed table $B\\times M\\to M$; the module identities hold for that table: they hold as equalities of sections, and the cited local equality assertion shows that two distinct constant values can have equal images only on an object covered by the empty sieve, since restriction in the constant presheaf does not change either value. Thus on every other member the table satisfies all module identities. Hence the trivialization is $B$-linear for the resulting finite $B$-module. (Members covered by the empty family impose no condition.) Thus the same finite stratification makes every cohomology sheaf finite locally constant over $B$. By [def-weil-proetale-constructible-sheaf] these sheaves are constructible. Together with step 3 this proves $K_B\\in\\Dctf(T_{\\mathrm{proét}},B)$.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK (lemma-sections-sheafification), local representation and local equality; finite-table expansion of sites-modules.tex Tag 093S and blueprint proof paragraph (2)"
+   }
+  },
+  {
+   "text": "For clause (3), on a cover where $L\\simeq A_T$, tensoring with $L$ is the identity on module sheaves. For any short exact sequence, its tensor with $L$ restricts on this cover to the original exact sequence. A kernel section is zero if it is zero on a cover, and a cokernel section vanishes locally exactly when its image is locally lifted; hence exactness descends from this cover. Thus $L$ is flat in the sense of [def-pc-flat-sheaf-modules]. The one-term complex $L[0]$ is K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]. Hence [def-weil-derived-tensor] computes $L_B$ by the ordinary sheaf tensor product [def-pur-sheaf-tensor-product]. On the same cover, $L\\otimes_{A_T}B_T\\simeq A_T\\otimes_{A_T}B_T\\simeq B_T$, by $a\\otimes b\\mapsto f(a)b$ and $b\\mapsto1\\otimes b$. This proves local freeness of rank one.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-weil-derived-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); blueprint proof paragraph (3), rank-one computation"
+   }
+  },
+  {
+   "text": "Now suppose $\\ell$ is invertible on $T$. For the auxiliary coefficient-field parameters in [det-def-sp-tate-twist-locally-free], take $E=\\mathbf Q_\\ell$ and an algebraic closure; only its finite-$A$ clauses are used. By that node, a common root system trivializes the finite Tate modules for every finite coefficient ring here, and changing the killing exponent gives canonical isomorphisms. At the common exponent $m$, the definition in the statement and ordinary tensor [def-pur-sheaf-tensor-product] give the canonical isomorphism\n$$ (\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}A_T)\\otimes_{A_T}B_T\\longrightarrow\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}B_T,\\quad (z\\otimes a)\\otimes b\\longmapsto z\\otimes f(a)b, $$\nwith inverse $z\\otimes b\\mapsto(z\\otimes1)\\otimes b$. For $r>0$, let $U=\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}A_T$ and let $\\beta:U\\otimes_{A_T}B_T\\to B_T(1)$ be this isomorphism. The comparison $U^{\\otimes r}\\otimes_{A_T}B_T\\to (U\\otimes_{A_T}B_T)^{\\otimes_{B_T}r}$ sends $(u_1\\otimes\\cdots\\otimes u_r)\\otimes b$ to $(u_1\\otimes1)\\otimes\\cdots\\otimes(u_{r-1}\\otimes1)\\otimes(u_r\\otimes b)$. Its inverse sends $(u_1\\otimes b_1)\\otimes\\cdots\\otimes(u_r\\otimes b_r)$ to $(u_1\\otimes\\cdots\\otimes u_r)\\otimes\\prod_j b_j$; balancing makes these inverse sheaf maps. Composing with $\\beta^{\\otimes r}$ proves the positive-twist assertion. At $r=0$, the maps $A_T\\otimes_{A_T}B_T\\to B_T$, $a\\otimes b\\mapsto f(a)b$, and $b\\mapsto1\\otimes b$ give the comparison. For a positive power $M$, use the sheaf dual of [def-pur-sheaf-hom]. The canonical evaluation map $M^\\vee\\otimes_A B\\to(M\\otimes_A B)^\\vee$ sends $\\phi\\otimes b$ to $(m\\otimes b'\\mapsto f(\\phi(m))bb')$. Where $M$ has generator $e$, this sends $e^\\vee\\otimes1$ to the dual of $e\\otimes1$, so is an isomorphism. It gives the assertion for negative twists too. Step 6 applies to these invertible modules, so all these ordinary coefficient changes are also the derived coefficient changes. The common-exponent maps commute with these formulas, proving independence of the exponent.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
+    "place": "Clauses (1)--(3), finite coefficients; scalar-extension blueprint proof paragraph (3)"
+   }
+  },
+  {
+   "text": "For clause (4), [lem-pur-kflat-change-of-rings] makes $P_B$ a valid K-flat, flat-term representative over $B_T$, and [lem-pur-derived-change-of-rings] computes iterated and direct extension by $(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T$ and $P\\otimes_{A_T}C_T$. The balanced sheaf tensor construction [def-pur-sheaf-tensor-product] gives the chain isomorphism\n$$ \\alpha_P: (P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\longrightarrow P\\otimes_{A_T}C_T,\\qquad(p\\otimes b)\\otimes c\\longmapsto p\\otimes g(b)c, $$\nwith inverse $p\\otimes c\\mapsto(p\\otimes1)\\otimes c$. It commutes with every chain map on $P$; its two sides take quasi-isomorphisms between K-flat representatives to quasi-isomorphisms by the cited derived-change-of-rings theorem. The equivalence $W_{A_T}^{-1}\\mathcal P_{A_T}\\simeq D(A_T)$ in [lem-weil-pbc-site-derived-tensor-descent] therefore descends this natural chain isomorphism to a natural isomorphism $\\alpha$ on $D(A_T)$. In particular its naturality holds also for morphisms represented by roofs, because it holds for both arrows of a roof and therefore for the inverse of its quasi-isomorphism. This proves the displayed naturality equation, without choosing a direct comparison between arbitrary resolutions.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 06YY; equivalence of K-flat localization in Tags 06YS, 0G7D and 06YT; blueprint proof paragraph (4)"
+   }
+  },
+  {
+   "text": "If $g=\\mathrm{id}_B$, the map in step 8 is $(p\\otimes b)\\otimes c\\mapsto p\\otimes bc$, precisely the tensor unitor under the usual identity-extension identification. For a further map $h:C\\to D$, both ways to collapse $((P\\otimes_A B)\\otimes_B C)\\otimes_C D$ send $((p\\otimes b)\\otimes c)\\otimes d$ to $p\\otimes h(g(b))h(c)d$: one multiplies $g(b)c$ in $C$ first, the other multiplies their images in $D$ first. These are equal since $h$ is a ring map. All maps in the rebracketing pentagon are built from these balanced maps; applying the same formula to their locally generating pure tensors proves the whole diagram commutes. Equality holds after sheafification and at each complex degree. The localization equivalence of [lem-weil-pbc-site-derived-tensor-descent] sends these equal maps to equal maps, so unit and pentagon coherence hold in $D(T_{\\mathrm{proét}},D)$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Explicit balanced-tensor coherence on the K-flat localization; blueprint proof paragraph (4)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-flat-model"
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-proetale-constructible-sheaf",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-locally-constant-tensor",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs (1)--(4), expanded with Stacks 06YS, 06YY, 0G7E, 094H, 03EL and 06YQ; paragraph (2) uses stratified local-constant tensor rather than an unjustified global constructible flat model"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a homomorphism of finite constant ring sheaves derived extension of scalars is exact preserves constructible finite Tor amplitude and is associative",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Condensed.instAB4CondensedMod, LightCondensed.instMonoidalCategoryLightCondMod, CategoryTheory.Functor.mapExactFunctor_smul, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derived.*[Tt]ensor|[Tt]ensor.*derived|[Tt]orAmplitude",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings on sheaves of modules preserves bounded constructible complexes of finite Tor dimension",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforward, SheafOfModules.instAdditiveRestrictScalars, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, RingHom.IsStableUnderBaseChange, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat resolutions sheaves derived tensor change of coefficient rings composition natural associativity",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.Presentation.mapRelations_mapGenerators_assoc, CategoryTheory.compatiblePreservingOfFlat, IsTensorProduct.map_injective_of_flat_right_left, Module.Flat.rTensor_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.ker_lTensor_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedScalar|derivedChange|constructible|KFlat",
+   "results": "0 hits: ; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived module functors, abstract coefficient categories, or objectwise Tor; none states this cross-ring derived functor with its constructibility, interval and coherence clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -60,5 +243,102 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-scalar-extension"
+ "unit": "sk-def-sp-scalar-extension",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-scalar-extension-functor",
+  "worker": "stage1",
+  "summary": "Replaced the retained attempt by a nine-step zero-new-node split. Applied existing ringed-site K-flat change of rings directly, proved Tor bounds by testing restricted module sheaves, and proved constructibility on the original finite stratification using the existing generic local-constant tensor theorem. Removed the unsupported global flat-constructible-model child and the abstract-coefficient monoidal substitutions. Made the arbitrary-finite-ring intrinsic subcategory explicit and corrected the missing invertibility condition for the Tate example and the ill-typed identity normalization. A continuation makes preservation of constant module sheaves explicit via coproducts and cites the canonical comparison between the finite coefficient-sheaf conventions. Retained the current shared chapter and unit binding. Following the returned-delivery scope correction, the delivery contains only the item node and report; unit realization metadata is left unchanged.",
+  "blueprint": "Current main-20261015 proof (1): step 1; proof (2): steps 2--5; proof (3): steps 6--7; proof (4): steps 8--9. The statement of unit sk-def-sp-scalar-extension is realized by this item (clauses 1, 2 and 4). The unit has no proof steps. The unit record is not delivered or edited; the chapter, unit statement, uses, realization fields and route remain unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site derived change of rings supplies exactness and computations; no abstract coefficient-category identification is asserted."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat representatives for the same constant-ring module category."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic K-flat preservation under a ring-sheaf map, needed for iterated coefficient change and Tor tests."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact constant-coefficient restriction to each input stratum."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "K-flat flat-term representatives remain so after restriction to a stratum."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "The termwise tensor comparison under stratum inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-tensor",
+    "why": "Generic Stacks 094H ensures finite locally constant cohomology on the same strata."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "A flat line sheaf in degree zero computes its derived extension ordinarily."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The K-flat localization equivalence descends the explicit natural comparison and coherence diagrams."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Identifies each local constant module value with its finite geometric stalk, verifying the finite-type hypothesis of Stacks 094H."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representation of constant-sheaf sections and detection of equality support the finite coefficient-action table argument; the constant-sheaf definition alone states only the construction."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Preservation of finite limits and colimits on sets proves preservation of constant module sheaves by their explicit coproduct description."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the finite discrete coefficient rings in the exactness theorem with the ordinary constant ring sheaves, preserving their structure maps."
+   },
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Step 7 takes only the finite-coefficient clauses (root-of-unity cover, exponent independence, invertibility of A_X(1) and its powers/duals) for ell invertible on T; no node of this unit or its cited units states the Tate-twist invertibility."
+   }
+  ],
+  "unit_route_error": {
+   "source": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md, paragraph (2), and the unit uses",
+   "failed_inference": "The blueprint takes a bounded flat constructible model for arbitrary finite A and arbitrary T from lem-sf-flat-model. The current cited statement requires A=A_{E,n} and ell invertible on T; its constructible variant additionally requires a Noetherian scheme on the etale site. These hypotheses are absent here. For example A=F_ell[x,y]/(x,y)^2 has a two-dimensional cotangent space at its maximal ideal and cannot be a quotient of a discrete valuation ring by a uniformizer power; T=Spec(F_ell) also violates invertibility. The other unit sk-prop-scalar-six supplies no stated bridge from its condensed coefficients and standing schemes to these arbitrary constant-ring module categories.",
+   "repair_in_proof": "Steps 1--3 use generic ringed-site K-flat resolutions and the restricted-module Tor test; steps 4--5 prove intrinsic constructibility on the given finite stratification using Stacks 094H. This retains the unit statement for arbitrary finite rings and arbitrary schemes.",
+   "remaining_maintenance": "Earlier attempts that delivered a unit realization failed the checker's two imported unit reaches. The current scope repair omits that unit file, as required by the maintainer return. Any authoritative unit realization or route reconciliation remains maintainer-owned; this split does not assert an inapplicable citation merely for reachability.",
+   "current_flat_model_complement": "The current sk-lem-sf-flat-model also contains a complement for arbitrary finite coefficient rings on a Noetherian scheme, on either small site. This is broader than lem-sf-flat-model but still does not cover the item: T=Spec(F_ell[t_1,t_2,...]) is allowed here and is not Noetherian, since the chain (t_1) subset (t_1,t_2) subset ... is strictly increasing. Its characteristic also violates the invertibility hypothesis of lem-sf-flat-model. Thus neither the original finite-type-over-the-standing-field clause nor the Noetherian complement proves the arbitrary-scheme assertion.",
+   "delivery_scope_repair": "Following the maintainer return, dag/units/sk-def-sp-scalar-extension.json was removed from the sandbox. Only this item node and report are delivered; no unit fields or other existing nodes are edited."
+  }
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-locally-constant-tensor",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "det-def-sp-tate-twist-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-75ff8c601",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-75ff8c601 (reviewer sub-agent of L); spot-checked: I read all nine steps in full, with every cited statement (25 nodes) and Stacks 06YS, 06YQ, 0G7E, 06YY and 094H at their labels. The delivery has no new nodes and contains only the item and its report. proof_deps equals the union of the step uses, and the 2,180-node dependency closure has no cycle (only the inherited missing def-weil-pbc-etale-morphism). Two statement corrections were made and both are justified: (a) the Tate example needs ell invertible, since on Spec F_ell mu_ell=0 so A_T(1)=0, and the cited Tate node already assumes ell invertible; the other clauses keep arbitrary T and arbitrary finite ell-primary rings; (b) 'identity when B=C' becomes 'unitor when g=id', since Frobenius on F_4 breaks the original wording. All six citers use the clauses in ways consistent with these corrections. Step by step: steps 1-3 use the K-flat change of rings and the restricted-module Tor test; no flatness of B/A is needed (checked with Z/ell^2 -> F_ell, K=A[0]). In step 4 the common stratification, preservation of constant modules, exact i^*, K-flat and tensor pullback, and the 094H hypotheses all hold (A finite hence Noetherian, both factors in D^-). Step 5's finite action-table argument via 00WK is correct, including members covered by the empty sieve. Step 6 proves the line clause via 06YQ, and step 7 gives explicit twist comparisons for r=0, r>0 and r<0. Steps 8-9 give a natural alpha descended by the localization equivalence, the unitor, and the pentagon via h(g(b))h(c). The route departure from lem-sf-flat-model and sk-lem-sf-flat-model is justified: those need A=A_{E,n} with ell invertible, or a Noetherian or finite-type base; counterexamples are F_ell[x,y]/(x,y)^2 and Spec F_ell[t_1,t_2,...]. The unit binding and reaches stay maintainer work. Fix: step 7 uses det-def-sp-tate-twist-locally-free (unit sk-prop-an, not on the route) without declaring it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-smooth-purity/det-sp-scalar-extension-functor.json, and I accept the 13 declared tool uses. No other change.; 1 file(s) fixed by the reviewer"
+ }
 }

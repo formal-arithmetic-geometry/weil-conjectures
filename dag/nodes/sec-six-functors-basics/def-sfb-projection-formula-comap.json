@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-projection-formula-comap",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars and linearized functors",
@@ -14,24 +14,191 @@
  },
  "stmt_deps": [
   "sk-def-sfb-transport",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-projection-formula",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-restriction",
+  "det-def-sfb-ring-object-transport",
+  "sk-def-sfb-module-objects"
  ],
  "proof": [
   {
-   "text": "Both functors send $M$ to $PM$. The $B$-action on the left is\n$B\\otimes PM\\xrightarrow{\\varphi\\otimes1}B'\\otimes PM\\cong P(SB'\\otimes M)\\to PM$; the one on the\nright is $B\\otimes PM\\cong P(SB\\otimes M)\\xrightarrow{P(S\\varphi\\otimes1)}P(SB'\\otimes M)\\to PM$.\nThey agree by the naturality of the projection formula in $L$, so the identity of $PM$ is a\nmorphism of $B$-modules, natural in $M$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $F=\\operatorname{Res}_\\varphi\\circ P_{B'}$ and $G=P_B\\circ\\operatorname{Res}_{S\\varphi}$. By clause 1 of [det-def-sfb-ring-object-transport], the strong monoidal functor $S$ transports $B,B'$ to monoids $SB,SB'$ and transports $\\varphi$ to a monoid morphism $S\\varphi$. Thus both restrictions are defined. For an $SB'$-module $M$ with action $\\gamma_M\\colon SB'\\otimes M\\to M$, [def-sfb-modobj-linearization] and [def-sfb-modobj-restriction] give the common underlying object $PM$ and the respective $B$-actions\n$$a_F=P\\gamma_M\\circ\\pi^{-1}_{B',M}\\circ(\\varphi\\otimes\\mathrm{id}_{PM}),\\qquad a_G=P\\bigl(\\gamma_M\\circ(S\\varphi\\otimes\\mathrm{id}_M)\\bigr)\\circ\\pi^{-1}_{B,M}.$$\nHere $\\pi$ is the projection formula of the statement. The functors on both sides exist by the cited linearization and restriction constructions; no colimits, closedness, braiding or commutativity of the monoids are required.",
+   "uses": [
+    "det-def-sfb-ring-object-transport",
+    "def-sfb-modobj-linearization",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.proof.md",
+    "place": "first two sentences: compute the two actions"
+   }
+  },
+  {
+   "text": "Naturality in $L$ in [def-sfb-projection-formula], applied to $\\varphi\\colon B\\to B'$ at the underlying object $M$, is\n$$\\pi_{B',M}\\circ P(S\\varphi\\otimes\\mathrm{id}_M)=(\\varphi\\otimes\\mathrm{id}_{PM})\\circ\\pi_{B,M}.$$\nCompose on the left with $\\pi^{-1}_{B',M}$ and on the right with $\\pi^{-1}_{B,M}$. Cancellation of each isomorphism gives\n$$\\pi^{-1}_{B',M}\\circ(\\varphi\\otimes\\mathrm{id}_{PM})=P(S\\varphi\\otimes\\mathrm{id}_M)\\circ\\pi^{-1}_{B,M}.$$\nPostcompose with $P\\gamma_M$ and use $P\\gamma_M\\circ P(S\\varphi\\otimes\\mathrm{id}_M)=P\\bigl(\\gamma_M\\circ(S\\varphi\\otimes\\mathrm{id}_M)\\bigr)$ by functoriality. Substitution in step 1 proves $a_F=a_G$.",
+   "uses": [
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.proof.md",
+    "place": "last sentence: equality of actions by naturality in L"
+   }
+  },
+  {
+   "text": "The morphism condition of [sk-def-sfb-module-objects] says that $h\\colon(PM,a_F)\\to(PM,a_G)$ is $B$-linear exactly when $h\\circ a_F=a_G\\circ(\\mathrm{id}_B\\otimes h)$. For $h=\\mathrm{id}_{PM}$ this is precisely the equality $a_F=a_G$ proved in step 2. Define $\\eta_M\\colon F(M)\\to G(M)$ by this identity map. The reverse identity is also $B$-linear, since $a_G=a_F$, and is inverse to $\\eta_M$: both composites have underlying identity, and module morphisms have the underlying composition by the same definition. Hence $\\eta_M$ is an isomorphism, with identity underlying map in both directions.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.proof.md",
+    "place": "last sentence: identity of PM is a module morphism; explicit inverse"
+   }
+  },
+  {
+   "text": "For an $SB'$-linear morphism $f\\colon M\\to N$, restriction leaves the underlying morphism fixed by [def-sfb-modobj-restriction], and linearization sends it to $Pf$ by [def-sfb-modobj-linearization]. Therefore $F(f)$ and $G(f)$ both have underlying morphism $Pf$. The two sides of $G(f)\\circ\\eta_M=\\eta_N\\circ F(f)$ have underlying morphisms $Pf\\circ\\mathrm{id}_{PM}$ and $\\mathrm{id}_{PN}\\circ Pf$, respectively, both equal to $Pf$. Module morphisms in [sk-def-sfb-module-objects] are underlying morphisms satisfying an equation, so this equality proves naturality. Write $\\theta_M=\\eta_M^{-1}$ for the reverse identity module map constructed in step 3. The underlying maps of $F(f)\\circ\\theta_M$ and $\\theta_N\\circ G(f)$ are respectively $Pf\\circ\\mathrm{id}_{PM}$ and $\\mathrm{id}_{PN}\\circ Pf$, both equal to $Pf$; equality of underlying module arrows gives $F(f)\\circ\\theta_M=\\theta_N\\circ G(f)$, proving naturality of the inverse. Together with step 3 they define the required natural isomorphism $F\\cong G$, the identity on underlying objects.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-linearization",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.proof.md",
+    "place": "last sentence: natural in M, including naturality of the inverse"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-def-sfb-ring-object-transport",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-restriction",
+  "def-sfb-projection-formula",
+  "sk-def-sfb-module-objects"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-projection-formula-comap.proof.md",
+  "place": "entire proof, expanded with inverse-naturality cancellation, identity inverse and naturality square"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The linearization of a functor satisfying a projection formula commutes with restriction of scalars along a morphism of monoid objects",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.comap, Action.res_linear, Rep.linearization_map_hom, CategoryTheory.Mod_.comap_obj_mod, Rep.instMonoidalActionTypeLinearization",
+   "date": "2026-10-16",
+   "verdict": "no match: scalarRestriction/comap and ordinary ModuleCat restriction describe only one input; group representation linearization is a different construction. None states the required compatibility for arbitrary P and S."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|mapModLeftComapIso|mapModLeft",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with linearization of a functor between monoidal categories satisfying a projection formula",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalars, LinearMap.restrictScalarsₗ_apply, LinearEquiv.restrictScalars, LinearMap.restrictScalars, ModuleCat.Algebra.instLinearRestrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.RestrictScalars.obj'",
+   "date": "2026-10-16",
+   "verdict": "no match: scalarRestriction/comap and ordinary ModuleCat restriction describe only one input; group representation linearization is a different construction. None states the required compatibility for arbitrary P and S."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction|def comap|mapMod",
+   "results": "6 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Mod.lean:363–413 defines scalar restriction and comap only; Mon.lean:856 is a TODO for mapMod, not projection-formula compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod_\", \"comap\"",
+   "results": "1 hits: CategoryTheory.Mod_.comap",
+   "date": "2026-10-16",
+   "verdict": "no match: Mod_.comap aliases scalar restriction within one ambient category, not a compatibility isomorphism for linearization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible natural tensor constraint P(S L tensor M) isomorphic to L tensor P M identifies restriction of the transported internal module action with transport of the restricted action",
+   "results": "8 hits: Module.Invertible.rTensorInv, Module.Invertible.rTensorEquiv, IsBaseChange.tensorEquiv, Module.Invertible.rTensorEquiv_apply_apply, TensorProduct.AlgebraTensorModule.congr, TensorProduct.AlgebraTensorModule.congr_symm_tmul, TensorProduct.AlgebraTensorModule.restrictScalars_rTensor, TensorProduct.AlgebraTensorModule.congr_tmul",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are tensor identities and invertible ordinary modules over a commutative ring, not functors between arbitrary monoidal categories with a projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*[Ff]unctor|[Ff]unctor.*comap|scalarRestriction.*[Ii]so|[Mm]apMod|[Ll]inear.*[Mm]od",
+   "results": "{\"t\": \"2026-10-16T15:13:19Z\", \"tool\": \"grep\", \"query\": \"comap.*[Ff]unctor|[Ff]unctor.*comap|scalarRestriction.*[Ii]so|[Mm]apMod|[Ll]inear.*[Mm]od\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\"], \"digest\": \"4a960459c12a1dbf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mod.lean:354–413 (scalarRestriction, scalarRestriction_hom, comap) and Mon.lean:856 (mapMod TODO). The Internal/Module.lean hits concern concrete module structures, not this two-functor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"scalarRestriction\", \"NatIso\"",
+   "results": "{\"t\": \"2026-10-16T15:13:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"scalarRestriction\\\", \\\"NatIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant functor for monoidal actions induces functors on internal modules compatible with scalar restriction along monoid homomorphisms",
+   "results": "{\"t\": \"2026-10-16T15:13:20Z\", \"tool\": \"leanfinder\", \"query\": \"An equivariant functor for monoidal actions induces functors on internal modules compatible with scalar restriction along monoid homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction\", \"CategoryTheory.Mod_.comap\", \"CategoryTheory.Mod_.comap_obj_mod\", \"Action.res_linear\", \"CategoryTheory.Mod_.scalarRestriction_hom\", \"CategoryTheory.Mod_.scalarRestriction_smul\", \"Action.res_obj_ρ\", \"CategoryTheory.Mod_.comap_map_hom\"], \"digest\": \"d6e63d35b05ef0fe\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: scalarRestriction/comap and their component formulas restrict internal module actions; Action.res concerns ordinary monoid actions. No hit gives compatibility of an arbitrary projection-formula linearization with scalar restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The linearization of a functor satisfying a projection formula commutes with restriction of scalars along a morphism of monoid objects",
+   "results": "{\"t\": \"2026-10-16T16:04:41Z\", \"tool\": \"leanfinder\", \"query\": \"The linearization of a functor satisfying a projection formula commutes with restriction of scalars along a morphism of monoid objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction_hom\", \"CategoryTheory.Mod_.scalarRestriction\", \"CategoryTheory.Mod_.scalarRestriction_smul\", \"CategoryTheory.Mod_.comap\", \"Action.res_linear\", \"Rep.linearization_map_hom\", \"CategoryTheory.Mod_.comap_obj_mod\", \"Rep.instMonoidalActionTypeLinearization\"], \"digest\": \"dee57454184d3b56\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: internal-module scalarRestriction/comap for a fixed monoidal action are relevant inputs, but do not give comparison with arbitrary projection-formula functors S and P. Representation linearization and Action.res_linear concern different constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod_\", \"comap\"",
+   "results": "{\"t\": \"2026-10-16T16:06:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mod_\\\", \\\"comap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.comap\"], \"digest\": \"d069a207393f3f92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the sole hit is the alias CategoryTheory.Mod_.comap of CategoryTheory.Mod.comap, constructing restriction for a fixed monoidal action. Read Mod.lean:354–413; it does not state this compatibility isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|mapModLeftComapIso|mapModLeft|scalarRestriction|def comap",
+   "results": "{\"t\": \"2026-10-16T16:06:59Z\", \"tool\": \"grep\", \"query\": \"ProjectionFormula|mapModLeftComapIso|mapModLeft|scalarRestriction|def comap\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\"], \"digest\": \"bd297b0f6d3cc421\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits are Mod.lean:363,387,389,390,392 for scalarRestriction and its morphism lemma. Read Mod.lean:354–413, including comap at 403; these provide restriction alone. Prior narrower searches also found no ProjectionFormula or mapModLeft declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module functor between monoidal categories has a natural isomorphism with scalar restriction because its tensorator is natural in the acting monoid",
+   "results": "{\"t\": \"2026-10-16T16:30:04Z\", \"tool\": \"leanfinder\", \"query\": \"A module functor between monoidal categories has a natural isomorphism with scalar restriction because its tensorator is natural in the acting monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction_hom\", \"CategoryTheory.Mod_.scalarRestriction_smul\", \"CategoryTheory.Mod_.comap_obj_mod\", \"CategoryTheory.Mod_.scalarRestriction\", \"CategoryTheory.Mod_.comap_map_hom\", \"CategoryTheory.Mod_.comap\", \"ModuleCat.restrictScalarsId'App_hom_naturality\", \"ModuleCat.restrictScalarsId'App_hom_naturality_assoc\"], \"digest\": \"58d40627ef855940\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the six internal-module scalarRestriction/comap hits construct restriction within one monoidal action. The two ModuleCat identity-restriction naturality hits concern ordinary modules and the identity scalar map, not an arbitrary projection-formula functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"Iso\"",
+   "results": "{\"t\": \"2026-10-16T16:31:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"comap\\\", \\\"Iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Submodule.orderIsoMapComap\", \"Submodule.orderIsoMapComapOfBijective\", \"Submodule.orderIsoMapComap_apply'\", \"Submodule.orderIsoMapComap_symm_apply\", \"Submodule.orderIsoMapComapOfBijective_apply\", \"Submodule.orderIsoMapComap_symm_apply'\", \"Submodule.orderIsoMapComap_apply\", \"Submodule.orderIsoMapComapOfBijective_symm_apply\"], \"digest\": \"88ad844019e739b0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the twelve returned hits concern submodule order isomorphisms, non-zero-divisor submonoids or quotient-group correspondence, not functors on internal module objects."
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*[Ii]so|[Ii]so.*comap|scalarRestriction|[Ee]quivariant|[Tt]ensorator",
+   "results": "{\"t\": \"2026-10-16T16:31:59Z\", \"tool\": \"grep\", \"query\": \"comap.*[Ii]so|[Ii]so.*comap|scalarRestriction|[Ee]quivariant|[Tt]ensorator\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\"], \"digest\": \"a50acc0840000d4a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: eighteen returned hits concern lax monoidal tensorators, scalarRestriction at Mod.lean:363–392 and equivariant hom functions. Read Mod.lean:354–413 and Mon.lean:846–860; none supplies the two-functor comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -55,5 +222,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-projection-formula-comap",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged. Reused existing monoid transport, projection formula, linearization, scalar restriction and module-object definitions to give four sourced construction steps. Expanded inverse naturality, module linearity, inverse identities and the naturality square. Searched project Lean, the whole DAG/blueprint and Mathlib; no exact attachment, no Mathlib leaf for the full construction, and no new nodes needed.",
+  "blueprint": "The proof paragraph of def-sfb-projection-formula-comap is realized by step 1 (two actions), step 2 (their equality by naturality in L), and steps 3–4 (identity module isomorphisms and naturality). This is the projection-formula restriction input in sk-def-sfb-coefficient-comparisons, proof step 1."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-aa0ebc390",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-aa0ebc390 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited node statements, the unit sk-def-sfb-coefficient-comparisons and the main-20261015 statement and proof.md for def-sfb-projection-formula-comap. The item statement is the source statement word for word and is not weakened. There are no new nodes. Step 1: clause 1 of det-def-sfb-ring-object-transport makes Sφ a monoid morphism (a strong monoidal functor is in particular lax monoidal). The two actions follow exactly from the restriction node (γ_N∘(φ⊗N)) and the linearization node (Pγ_M∘π^{-1}). Step 2: naturality of π in L at φ, with both sides typed as maps P(SB⊗M)→B'⊗PM, is the right identity. Conjugating it by π^{-1} and applying functoriality of P gives a_F=a_G, so marking the step elementary is fair. Steps 3 and 4: identity module isomorphisms and naturality on underlying morphisms, using the module-morphism definition and the facts that restriction is the identity on morphisms and linearization sends f to Pf. proof_deps is the union of the steps' uses. Edge case checked: φ=id gives the identity isomorphism. No hypothesis beyond the source is used. Route: unit step 1 names this node. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. Duplicate search (rg for projection formula, linearization, P_B): the nearest node, def-sfb-comap-mapmod-square, is a different construction (mapMod with a square of monoids, no projection formula). No SGA. No fixes."
+ }
 }

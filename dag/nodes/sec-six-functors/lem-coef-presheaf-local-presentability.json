@@ -1,0 +1,91 @@
+{
+ "id": "lem-coef-presheaf-local-presentability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: coherent derived coefficient adjunction before the displayed R Hom / R lim calculation; Projective simplicial-presheaf model structure and its generators.",
+   "via": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local presentability of presheaf categories",
+ "statement": "Fix a universe $\\mathcal U$. The category $\\mathsf{Set}_{\\mathcal U}$ of $\\mathcal U$-small sets is locally presentable. Moreover, if $C$ is a $\\mathcal U$-small ordinary category and $\\mathcal A$ is a locally presentable category with $\\mathcal U$-small Hom sets and pullbacks, then $\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal A)$ is locally presentable, relative to $\\mathcal U$. Here locally presentable means cocomplete and, for some infinite regular cardinal $\\kappa\\in\\mathcal U$, generated under $\\mathcal U$-small $\\kappa$-filtered colimits by a $\\mathcal U$-small family of objects whose Hom functors preserve those colimits. A category is $\\kappa$-filtered if every diagram with fewer than $\\kappa$ morphisms has a cocone; $\\kappa$ is regular if a union of fewer than $\\kappa$ sets of size less than $\\kappa$ has size less than $\\kappa$. Pullbacks and colimits use [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Presentable/Presheaf.lean",
+  "place": "CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks, lines 90-96; CategoryTheory.Types.instIsLocallyPresentableType, Presentable/Type.lean lines 166-167. Definition IsCardinalLocallyPresentable, Presentable/LocallyPresentable.lean lines 38-43 and IsLocallyPresentable lines 78-82. No Stacks tag is needed for this exact Mathlib result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Set valued presheaf categories on any small index category are locally presentable",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib/CategoryTheory/Presentable/Presheaf\", \"type\": \"∀ {A : Type u'} [inst : CategoryTheory.Category.{v', u'} A] [CategoryTheory.IsLocallyPresentable.{w, v', u'} A]\\n  [CategoryTheory.Limits.HasPullbacks A] (C : Type w) [inst_3 : CategoryTheory.SmallCategory C],\\n  CategoryTheory.IsLocallyPresentable.{w, max v' w, max (max (max u' w) v') w} (CategoryThe\", \"doc\": \"If $\\\\mathcal{A}$ is a locally presentable category with pullbacks and $\\\\mathcal{C}$ is a small category, then the category of functors $\\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathcal{A}$ is also locally present\"}\n  {\"name\": \"CategoryTheory.Types.instIsPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Type\", \"type\": \"∀ (X : Type u), CategoryTheory.IsPresentable.{u, u, u + 1} X\", \"doc\": \"Every type $ X $ in the category of types is presentable, meaning that the hom-functor $ \\\\text{Hom}(-, X) $ preserves sufficiently filtered colimits.\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib/CategoryTheory/Presentable/Presheaf\", \"type\": \"∀ {A : Type u'} [inst : CategoryTheory.Category.{v', u'} A] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable A κ] [CategoryTheory.Limits.HasPullbacks A] (C : Type w)\\n  [inst_4 : CategoryTheory.SmallCategory C],\\n  CategoryTheory.IsCardinalLocallyPresentabl\", \"doc\": \"If $\\\\mathcal{A}$ is a locally presentable category with respect to a regular cardinal $\\\\kappa$ and admits pullbacks, then the category of presheaves $[\\\\mathcal{C}^{\\\\text{op}}, \\\\mathcal{A}]$ (functors \"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"module\": \"Mathlib/CategoryTheory/Presentable/Presheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.SmallCategory C]\\n  [CategoryTheory.Limits.HasColimitsOfSize.{w, w, max u u', max (u + 1) (u' + 1)} (Type (max u u'))] (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C),\\n  CategoryTheory.IsCardinalPresentable (CategoryTheory.uliftYoneda.{u', u, u}.obj X) κ\", \"doc\": \"For a small category $ \\\\mathcal{C} $, if the category of types has all colimits of shape $ \\\\mathcal{C} $, and $ \\\\kappa $ is a regular cardinal, then the universe-lifted Yoneda embedding of any object \"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.IsPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → Prop\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is presentable if the hom-functor $ \\\\text{Hom}(-, X) : \\\\mathcal{C} \\\\to \\\\text{Type} $ is accessible, meaning it preserves sufficiently filtered colimits. T\"}\n  {\"name\": \"CategoryTheory.Limits.IndObjectPresentation\", \"module\": \"Mathlib/CategoryTheory/Limits/Indization/IndObject\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.Functor Cᵒᵖ (Type v) → Type (max u (v + 1))\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a functor $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\,v$, this constructs a type in universe $\\\\max(u, v+1)$ representing the ind-object presentation determined by\"}\n",
+   "date": "2026-10-17",
+   "verdict": "match: read Presheaf.lean:90-96 and Type.lean:166-167. These are exactly the two clauses, with the same smallness, pullback and local-presentability assumptions; no assertion of finite presentability is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyPresentable, CategoryTheory.Functor",
+   "sub": "",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib.CategoryTheory.Presentable.Presheaf\", \"type\": \" {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.IsLocallyPresentable.{w, v', u'} A] [CategoryTheory.Limits.HasPullbacks A] (C : Type w) [CategoryTheory.SmallCategory C] : CategoryTheory.IsLocallyPresentable.{w, max v' w, max (max (max u' w) v') w} (CategoryTheory.Functor Cᵒᵖ A)\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "match: read Presheaf.lean:90-96 and Type.lean:166-167. These are exactly the two clauses, with the same smallness, pullback and local-presentability assumptions; no assertion of finite presentability is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyPresentable, Type",
+   "sub": "",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" (C : Type u) [hC : CategoryTheory.Category.{v, u} C] : Prop\", \"doc\": \"A category `C` is locally presentable if it is `κ`-locally presentable\\nfor some regular cardinal `κ`. \"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C] : CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable.exists_cardinal\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [self : CategoryTheory.IsLocallyPresentable.{w, v, u} C] : ∃ κ, ∃ (x : Fact κ.IsRegular), CategoryTheory.IsCardinalLocallyPresentable C κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" {C : Type u} [hC : CategoryTheory.Category.{v, u} C] (exists_cardinal : ∃ κ, ∃ (x : Fact κ.IsRegular), CategoryTheory.IsCardinalLocallyPresentable C κ) : CategoryTheory.IsLocallyPresentable.{w, v, u} C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib.CategoryTheory.Presentable.Presheaf\", \"type\": \" {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.IsLocallyPresentable.{w, v', u'} A] [CategoryTheory.Limits.HasPullbacks A] (C : Type w) [CategoryTheory.SmallCategory C] : CategoryTheory.IsLocallyPresentable.{w, max v' w, max (max (max u' w) v') w} (CategoryTheory.Functor Cᵒᵖ A)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Adjunction\", \"type\": \" {C : Type u} {D : Type u'} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Category.{v', u'} D] (e : C ≌ D) [CategoryTheory.IsLocallyPresentable.{w, v, u} C] : CategoryTheory.IsLocallyPresentable.{w, v', u'} D\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsDiscrete.instIsLocallyPresentableOfSubsingletonOfNonempty\", \"module\": \"Mathlib.CategoryTheory.Presentable.IsDiscrete\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.IsDiscrete C] [Subsingleton C] [Nonempty C] : CategoryTheory.IsLocallyPresentable.{w, v_1, u_1} C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Types.instIsLocallyPresentableType\", \"module\": \"Mathlib.CategoryTheory.Presentable.Type\", \"type\": \" : CategoryTheory.IsLocallyPresentable.{u, u, u + 1} (Type u)\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "match: read Presheaf.lean:90-96 and Type.lean:166-167. These are exactly the two clauses, with the same smallness, pullback and local-presentability assumptions; no assertion of finite presentability is required."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsLocallyPresentable|instIsLocallyPresentable|IsLocallyPresentable.*Type|IsLocallyPresentable.*Functor",
+   "sub": "CategoryTheory/Presentable",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"line\": \"166\", \"text\": \"instance : IsLocallyPresentable.{u} (Type u) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"line\": \"90\", \"text\": \"instance {A : Type u'} [Category.{v'} A] [IsLocallyPresentable.{w} A] [HasPullbacks A]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"80\", \"text\": \"class IsLocallyPresentable (C : Type u) [hC : Category.{v} C] : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"93\", \"text\": \"instance [IsLocallyPresentable.{w} C] : IsAccessibleCategory.{w} C where\"}\n",
+   "date": "2026-10-17",
+   "verdict": "match: read Presheaf.lean:90-96 and Type.lean:166-167. These are exactly the two clauses, with the same smallness, pullback and local-presentability assumptions; no assertion of finite presentability is required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor category from a small category to types is locally finitely presentable",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.instLocallySmallFunctor\", \"module\": \"Mathlib.CategoryTheory.EssentiallySmall\", \"type\": \"{A : Type u'} [Category.{v'} A] [LocallySmall.{w} A] (C : Type w) [SmallCategory C] : LocallySmall.{w} (C ⥤ A)\", \"doc\": \"For any small category $ \\\\mathcal{C} $ and locally small category $ \\\\mathcal{A} $, the category of functors from $ \\\\mathcal{C} $ to $ \\\\mathcal{A} $ is locally small. This means that the natural transf\"}\n  {\"name\": \"CategoryTheory.FunctorToTypes.Small\", \"module\": \"Mathlib.CategoryTheory.ShrinkYoneda\", \"type\": \"(F : C ⥤ Type w')\", \"doc\": \"A condition asserting that for a functor $ F : \\\\mathcal{C} \\\\to \\\\mathrm{Type}\\\\, w' $, the image of every object $ X $ in $ \\\\mathcal{C} $ under $ F $ is a small type in $ \\\\mathrm{Type}\\\\, w $.\"}\n  {\"name\": \"CategoryTheory.FunctorToTypes.instHasImagesFunctorType\", \"module\": \"Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Images\", \"type\": \": HasImages (C ⥤ Type*)\", \"doc\": \"The category of functors from $ \\\\mathcal{C} $ to $ \\\\mathbf{Type}^* $ has images, meaning every natural transformation factors through a universal monomorphism in this category.\"}\n  {\"name\": \"CategoryTheory.instSmallFunctorOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.EssentiallySmall\", \"type\": \"[Small.{w} C] [LocallySmall.{w} C] {D : Type u'} [Category.{v'} D] [Small.{w} D] [LocallySmall.{w} D] :\\n  Small.{w} (C ⥤ D)\", \"doc\": \"If $\\\\mathcal{C}$ and $\\\\mathcal{D}$ are essentially small categories (i.e., both small and locally small), then the category of functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ is also essentially small. This fo\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"module\": \"Mathlib.CategoryTheory.Presentable.Presheaf\", \"type\": \"{A : Type u'} [Category.{v'} A] [IsLocallyPresentable.{w} A] [HasPullbacks A] (C : Type w) [SmallCategory C] :\\n  IsLocallyPresentable.{w} (Cᵒᵖ ⥤ A)\", \"doc\": \"If $\\\\mathcal{A}$ is a locally presentable category with pullbacks and $\\\\mathcal{C}$ is a small category, then the category of functors $\\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathcal{A}$ is also locally present\"}\n  {\"name\": \"CategoryTheory.Limits.instHasFiniteColimitsFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.FunctorCategory.Finite\", \"type\": \"[HasFiniteColimits C] : HasFiniteColimits (K ⥤ C)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has finite colimits, then the functor category from any category $ \\\\mathcal{K} $ to $ \\\\mathcal{C} $ also has finite colimits.\"}\n  {\"name\": \"CategoryTheory.Limits.functorCategoryHasLimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Limits.FunctorCategory.Basic\", \"type\": \"[HasLimitsOfSize.{v₁, u₁} C] : HasLimitsOfSize.{v₁, u₁} (K ⥤ C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits of a specified size, then the functor category $\\\\mathcal{K} \\\\to \\\\mathcal{C}$ also has all limits of that size for any category $\\\\mathcal{K}$. These limits ar\"}\n",
+   "date": "2026-10-17",
+   "verdict": "match: read Presheaf.lean:90-96 and Type.lean:166-167. These are exactly the two clauses, with the same smallness, pullback and local-presentability assumptions; no assertion of finite presentability is required."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks",
+  "file": "Mathlib/CategoryTheory/Presentable/Presheaf.lean",
+  "line": 90,
+  "how": "exact: general presheaf clause at lines 90-96. The set-category clause is CategoryTheory.Types.instIsLocallyPresentableType, Mathlib/CategoryTheory/Presentable/Type.lean:166-167. Both source declarations read; the pullback assumption is explicit, and the cardinal-filtered generator definition is the same as the statement."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-presheaf-projective-model",
+  "date": "2026-10-17",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

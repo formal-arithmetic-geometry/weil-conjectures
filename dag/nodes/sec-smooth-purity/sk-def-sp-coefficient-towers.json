@@ -3,24 +3,97 @@
  "blueprint": {
   "is": "sk-def-sp-coefficient-towers",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coefficient towers",
- "statement": "Fix a finite extension $E/\\Ql$ and a scheme $T$. The ideals $(\\ell^n)$ and\n$(\\pi_E^n)$ of $\\mathcal O_E$ are cofinal, so we use powers of $\\ell$; by\n[sk-prop-sfb-qlbar-colimit-x], $\\mathcal O_{E,T}=\\varprojlim_n(\\mathcal O_E/\\ell^n)_T$,\nand we write $\\mathcal O_{E,T}/\\ell^n$ for $(\\mathcal O_E/\\ell^n)_T$.\n\nThe category $\\operatorname{Tow}(T,\\mathcal O_E)$ has as objects the systems\n$C_\\bullet=(C_n,t_n)_{n\\geq1}$, where $C_n$ is a sheaf of\n$\\mathcal O_{E,T}/\\ell^n$-modules on $T_{\\mathrm{proét}}$ and\n$t_n:C_{n+1}\\to C_n$ is linear over\n$\\mathcal O_{E,T}/\\ell^{n+1}\\to\\mathcal O_{E,T}/\\ell^n$. Morphisms are families\nof module maps commuting with the $t_n$. We write\n$\\mathcal O_{E,T}/\\ell^\\bullet=(\\mathcal O_{E,T}/\\ell^n)_n$ for the tower of\ncoefficient rings.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ and chosen uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension], and a scheme $T$. Work on its small pro-etale site $T_{\\mathrm{proét}}$ [sk-def-pe-site]. Powers of ideals and quotient rings have the meanings of [def-weil-pbc-algebra-hom-quotient]. The ideals $(\\ell^n)$ and $(\\pi_E^n)$ of $\\mathcal O_E$ are cofinal, so we use powers of $\\ell$.\n\nFor $n\\geq1$ put $R_n=(\\mathcal O_E/\\ell^n)_T$, the constant sheaf of rings [def-weil-pbc-constant-sheaf], and write $q_n:R_{n+1}\\to R_n$ for the morphism induced by reduction $a\\bmod\\ell^{n+1}\\mapsto a\\bmod\\ell^n$. The completed coefficient sheaf $\\mathcal O_{E,T}$ is the pullback of the condensed ring of integers as in [det-prop-sfb-qlbar-colimit-x-integral-limit]. Clause (3) of [det-prop-sfb-qlbar-colimit-x-integral-limit] identifies it with the uniformizer-power inverse limit for every finite $E/\\mathbf Q_\\ell$. For finite subextensions of the fixed algebraic closure this is also the first comparison of [sk-prop-sfb-qlbar-colimit-x]. Using the cofinal powers of $\\ell$ gives\n$$\\mathcal O_{E,T}\\cong\\varprojlim_{n\\geq1}R_n.$$\nThe inverse limit is a limit of sheaves of rings, computed sectionwise [def-pur-sheaf-inverse-limit]. In this definition the notation $\\mathcal O_{E,T}/\\ell^n$ means $R_n$.\n\nDefine $\\operatorname{Tow}(T,\\mathcal O_E)$ as follows. An object is a system $C_\\bullet=(C_n,t_n)_{n\\geq1}$, where $C_n$ is a sheaf of $R_n$-modules [def-weil-sheaf-of-modules-category] and $t_n:C_{n+1}\\to C_n$ is a morphism of sheaves of abelian groups satisfying, on every site object $U$,\n$$t_{n,U}(a x)=q_{n,U}(a)t_{n,U}(x)\\quad(a\\in R_{n+1}(U),\\ x\\in C_{n+1}(U)).$$\nEquivalently, $t_n$ is an $R_{n+1}$-linear map $C_{n+1}\\to(q_n)_*C_n$, where $(q_n)_*$ denotes restriction of scalars [def-pc-sheaf-restrict-scalars]. The underlying sheaves and transitions form an inverse system [def-weil-inverse-system]. A morphism $\\varphi:C_\\bullet\\to D_\\bullet=(D_n,s_n)$ is a family of $R_n$-linear sheaf maps $\\varphi_n:C_n\\to D_n$ with\n$$s_n\\circ\\varphi_{n+1}=\\varphi_n\\circ t_n\\quad(n\\geq1).$$\nIdentities and composition are componentwise. We write $\\mathcal O_{E,T}/\\ell^\\bullet=(R_n,q_n)_{n\\geq1}$ for the tower of coefficient rings.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/_section.md",
   "place": "node sk-def-sp-coefficient-towers, order 1821"
  },
  "stmt_deps": [
-  "sk-prop-sfb-qlbar-colimit-x"
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-site",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-constant-sheaf",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-inverse-system"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structure SheafOfModules|def SheafOfModules|def restrictScalars|PresheafOfModules",
+   "results": "Hits: Mathlib/Algebra/Category/Ring/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Read Sheaf.lean:33-52, Presheaf.lean:43-56, and Sheaf/ChangeOfRings.lean:36-42. These provide individual module sheaves and scalar restriction, not this varying-coefficient tower definition together with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Category of towers of sheaves of modules over quotient rings O modulo powers of ell",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.instCategory, SheafOfModules.noConfusionType, SheafOfModules, AlgebraicGeometry.Scheme.Modules, SheafOfModules.mk, SheafOfModules.Finite.hasFiniteLimits, AlgebraicGeometry.LocallyRingedSpace.𝒪. The returned declarations provide individual sheaves/presheaves of modules or condensed modules; none states this coefficient tower definition with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\"",
+   "results": "Hits: PresheafOfModules, PresheafOfModules.unit, PresheafOfModules.instCategory, PresheafOfModules.sections, PresheafOfModules.Hom, PresheafOfModules.instPreadditive, PresheafOfModules.presheaf, PresheafOfModules.toPresheaf. The returned declarations provide individual sheaves/presheaves of modules or condensed modules; none states this coefficient tower definition with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of inverse sequences of sheaves of modules over a varying inverse sequence of rings, with semilinear transition maps",
+   "results": "Hits: CondensedMod, SheafOfModules.instCategory, instAbelianCondensedMod, SheafOfModules.createsLimit, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.hasLimitsOfShape. The returned declarations provide individual sheaves/presheaves of modules or condensed modules; none states this coefficient tower definition with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules over a presheaf of rings on a product category with natural number indexed inverse systems and the sheaf condition in the site variable",
+   "results": "Hits: CondensedMod, LightCondMod.ofSheafLightProfinite, AlgebraicGeometry.Scheme.PresheafOfModules, SheafOfModules, CondensedMod.ofSheafProfinite, SheafOfModules.over, CondensedMod.ofSheafCompHaus, SheafOfModules.Presentation. The returned declarations provide individual sheaves/presheaves of modules or condensed modules; none states this coefficient tower definition with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules\"",
+   "results": "Hits: PresheafOfModules, PresheafOfModules.unit, PresheafOfModules.instCategory, PresheafOfModules.sections, PresheafOfModules.Hom, PresheafOfModules.instPreadditive, PresheafOfModules.presheaf, PresheafOfModules.toPresheaf. The returned declarations provide individual sheaves/presheaves of modules or condensed modules; none states this coefficient tower definition with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tower|inverse.system|semilinear",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean. Read Sheaf.lean:33-52, Presheaf.lean:43-56, and Sheaf/ChangeOfRings.lean:36-42. These provide individual module sheaves and scalar restriction, not this varying-coefficient tower definition together with its coefficient datum.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over a diagram of rings indexed by the opposite of natural numbers, with linear natural transformations",
+   "results": "Actual search returned 8 hits; top results: LightCondMod.LocallyConstant.functorToPresheaves, CondensedMod.ofSheafProfinite, CondensedMod, LightCondMod.ofSheafLightProfinite, PresheafOfModules.instCategory, localCohomology.diagram, PresheafOfModules, SheafOfModules.instCategory. PresheafOfModules models semilinear diagrams of ordinary modules; SheafOfModules models one ring sheaf on one site. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:36-56 and Sheaf.lean:31-52. Neither is an exact declaration of this finite-extension coefficient-tower convention; using a product site requires a new coefficient diagram and identification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules|PresheafOfModules|InverseSystem",
+   "results": "Actual search returned 25 hits; top results: Mathlib/ModelTheory/DirectLimit.lean, Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. The returned scheme-module declarations use the structure sheaf, and the other returned module sheaves are constituent notions. No returned declaration states this entire varying-coefficient tower definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -35,5 +108,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sp-coefficient-towers",
+  "worker": "stage1",
+  "summary": "Definition split by exposing its existing coefficient-field, site, quotient, constant-sheaf, completed-coefficient, inverse-limit, module-sheaf, scalar-restriction and inverse-system dependencies. Expanded the source semilinearity and commuting-square conventions without changing the objects or hypotheses. All nine Mathlib searches ran; no exact whole-item declaration found; zero new nodes.",
+  "blueprint": "main-20261015 sk-def-sp-coefficient-towers/_section.md, first paragraph (coefficient convention), second paragraph (objects and transitions), final sentences (morphisms and coefficient-ring tower); a definition has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-e07d0cde0",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-e07d0cde0 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item is faithful to main-20261015 sk-def-sp-coefficient-towers/_section.md (order 1821): finite E and any scheme T, levels n>=1, ell-power quotients, semilinear t_n, morphisms that commute with the t_n, and the coefficient-ring tower. No hypothesis is added and none is dropped. I checked all ten statement dependencies at their statements. Cofinality: def-weil-l-adic-coefficient-extension clause 3 gives ell=u*pi^e, and e>=1 because |ell|<1, so (ell^n)=(pi^{en}); this is elementary. The isomorphism O_{E,T}=lim R_n comes from clause (3) of det-prop-sfb-qlbar-colimit-x-integral-limit, which covers any finite E, plus reindexing along n->en with the sectionwise limit of def-pur-sheaf-inverse-limit (ring sheaves included). sk-prop-sfb-qlbar-colimit-x is cited only under its subextension hypothesis, and the unit's single use is kept. Scalar restriction points the right way: def-pc-sheaf-restrict-scalars along q_n:R_{n+1}->R_n makes (q_n)_*C_n an R_{n+1}-module. Composition squares were checked. Edge cases tested: E=Q_ell, ramified E (e=2), T empty, the zero tower, and the tower C_1=R_1, C_n=0, which has a non-surjective t_1. This definition agrees with the topos description in the downstream det-sp-coefficient-towers-abelian. No duplicates: def-weil-pbc-adic-coefficient-datum (one fixed coefficient sheaf), def-coef-normalized-dvr-tower and lem-weil-tower-category-levelwise-abelian all define something different. There are no new nodes and no proof steps. The unit realization fields are correct, 9 Mathlib searches were recorded with no match, the item cites no SGA source, and none of the 320 reachable nodes is missing or merged; there is no cycle. This is not a target, and it introduces no base-change morphism. No fixes were made; review.md records the checks."
+ }
 }

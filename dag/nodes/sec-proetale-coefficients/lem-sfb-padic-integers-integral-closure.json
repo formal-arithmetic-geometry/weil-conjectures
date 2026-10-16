@@ -20,9 +20,91 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=\\mathbf Q_\\ell$ and $A=\\mathbf Z_\\ell$. By [def-weil-l-adic-numbers], $K$ is complete and $|\\ell|_\\ell=\\ell^{-1}<1$, so its norm is nontrivial. The compatible absolute values and valuation subrings are those of [def-weil-l-adic-coefficient-extension]; [lem-weil-l-adic-extension-absolute-value], applied to $F/K$, gives the ultrametric inequality on $F$. Choose a finite $K$-basis $b_1,\\ldots,b_d$ of $F$, possible since $F/K$ is finite, with $d\\geq1$ since a field is nonzero. Write $c_i(y)$ for the coordinates, so $y=\\sum_i c_i(y)b_i$. Apply [lem-weil-pbc-finite-dimensional-linear-homeomorphism] to the $K$-linear equivalence $F\\to K^d$, $y\\mapsto(c_i(y))_i$. Its hypotheses hold: $F$ and $K^d$ have Hausdorff norm/product topologies and continuous vector-space operations, because the absolute value on $F$ extends that on $K$ (scalar multiplication is field multiplication restricted to $K\\times F$). Thus the coordinate map is continuous.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "First sentence: supply the finite-dimensional coordinate topology for the arithmetic input; expanded agent argument"
+   }
+  },
+  {
+   "text": "The inverse image under this coordinate map of $\\{(a_i):|a_i|_\\ell<1\\ \\text{for every }i\\}$ is an open neighborhood of zero. Hence there is $\\varepsilon>0$ such that $|y|_F<\\varepsilon$ implies $|c_i(y)|_\\ell<1$ for all $i$. Choose $N\\geq0$ with $\\ell^{-N}<\\varepsilon$; this is possible since the geometric sequence $\\ell^{-N}$ tends to zero. Fix $x\\in\\mathcal O_F$. For every $n\\geq0$, including $n=0$, compatibility and multiplicativity give $|\\ell^N x^n|_F=\\ell^{-N}|x|_F^n\\leq\\ell^{-N}<\\varepsilon$. Therefore $\\ell^N c_i(x^n)=c_i(\\ell^N x^n)$ belongs to $A$, using the unit-ball description in [def-weil-l-adic-numbers]. It follows explicitly that\n$$x^n=\\sum_i(\\ell^N c_i(x^n))(\\ell^{-N}b_i)\\in L:=\\sum_i A(\\ell^{-N}b_i).$$\nHere the coordinate continuity is precisely that supplied by [lem-weil-pbc-finite-dimensional-linear-homeomorphism] in step 1. Thus all powers of $x$ lie in the single finitely generated $A$-module $L$; no uniform choice in $x$ is needed for the argument.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "First sentence: explicit bounded-powers lattice argument, using the topology established in step 1"
+   }
+  },
+  {
+   "text": "The ring $A$ is a discrete valuation ring by [def-weil-l-adic-numbers]. In the definition [def-sc-discrete-valuation-ring], this is in particular an integral domain with every ideal principal. Thus [lem-weil-pbc-pid-noetherian-normal] gives that $A$ is Noetherian. Let $B=A[x]\\subseteq F$, concretely the set of all finite sums $\\sum_{n=0}^m a_nx^n$ with $a_n\\in A$. These sums contain $1$ and $x$ and are closed under addition, negation and multiplication by distributing finite sums, so $B$ is a commutative $A$-algebra and an $A$-submodule of $F$. Step 2 places every summand in $L$, hence $B\\subseteq L$. Apply [lem-weil-pbc-noetherian-submodule-finite] to the finitely generated $A$-module $L$ and its $A$-submodule $B$. This proves that $B$ is a finitely generated $A$-module.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr) and 00IK (lemma-Noetherian-basic), submodule finiteness; PID Noetherianity is the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-algebra-is-integral] to $A\\to B$. Since $x\\in B$, it satisfies a monic polynomial $P\\in A[T]$, and the same equation holds in $F$ under the inclusion $B\\hookrightarrow F$. For every $a\\in A$, compatibility of the absolute value on $E$ with that on $K$ gives $|a|_E=|a|_\\ell\\leq1$, so $A\\subseteq\\mathcal O_E$, by [def-weil-l-adic-numbers] and [def-weil-l-adic-coefficient-extension]. Regard the coefficients of $P$ as elements of $\\mathcal O_E$. Its leading coefficient remains $1$, and evaluation in $F$ is unchanged, because $A\\to E\\to F$ is the given inclusion. Consequently $x$ is integral over $\\mathcal O_E$ in the sense of [def-weil-pbc-integral-closure]. This proves $x\\in\\mathcal O_F\\Rightarrow x\\text{ integral over }\\mathcal O_E$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-l-adic-numbers",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral) and 00GI (definition-integral-ring-map); coefficient inclusion is the explicit elementary calculation"
+   }
+  },
+  {
+   "text": "Conversely, suppose $x\\in F$ is integral over $\\mathcal O_E$. By [def-weil-pbc-integral-closure] there are $r\\geq1$ and $a_0,\\ldots,a_{r-1}\\in\\mathcal O_E$ with $x^r=-\\sum_{j=0}^{r-1}a_jx^j$. Compatibility of absolute values and [def-weil-l-adic-coefficient-extension] give $|a_j|_F=|a_j|_E\\leq1$. If $t=|x|_F>1$, repeated application of the ultrametric inequality of [lem-weil-l-adic-extension-absolute-value] gives\n$$t^r=\\left|\\sum_{j=0}^{r-1}a_jx^j\\right|_F\\leq\\max_{0\\leq j<r}(|a_j|_F t^j)\\leq t^{r-1}<t^r,$$\na contradiction. Thus $|x|_F\\leq1$, i.e. $x\\in\\mathcal O_F$. The two implications give the required equivalence for every $x$, and the definition of integral closure in [def-weil-pbc-integral-closure] turns this pointwise equivalence into equality of the subrings.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI (definition-integral-ring-map) and 00GP (definition-integral-closure); explicit leading-term ultrametric estimate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "First sentence, arithmetic input. Agent-written bounded-powers proof; the Serre textbook cited in the original node is not obtained. Submodule finiteness and finite-implies-integral follow Stacks 00IK and 00GK."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -100,15 +182,86 @@
    "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Norm.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean (25 actual hits)",
    "date": "2026-10-16",
    "verdict": "no match: valuation integrality candidates assume prior integral-closure membership or the same-ambient integers hypothesis; number-field results and field-norm identities do not identify the unit ball of a finite local-field extension with the integral closure of the smaller unit ball"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The valuation ring in a finite extension of a complete nonarchimedean field is the integral closure of the base valuation ring",
+   "results": "{\"t\": \"2026-10-16T16:27:35Z\", \"tool\": \"leanfinder\", \"query\": \"The valuation ring in a finite extension of a complete nonarchimedean field is the integral closure of the base valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.algebra\", \"Valuation.Integers.isIntegrallyClosed\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"Valuation.Integers.integrallyClosed\", \"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"Valuation.Integers.integralClosure\", \"Valuation.HasExtension.instAlgebra_valuationSubring\"], \"digest\": \"76dddf7960aa55bc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned valuation integers and integralClosure constructions assume the required membership, or concern continuous coordinates/global integers rather than the whole local-field extension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation.Integers.isIntegral_iff_v_le_one",
+   "results": "{\"t\": \"2026-10-16T16:27:36Z\", \"tool\": \"loogle\", \"query\": \"Valuation.Integers.isIntegral_iff_v_le_one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Valuation.Integers.isIntegral_iff_v_le_one\"], \"digest\": \"52acd2e4a2381fd8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Integers v O assumes O maps onto the entire unit ball of v; with R=F that is precisely what is not known for O_E."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_iff_v_le_one|isIntegral_of_mem_ringOfIntegers|integralClosure",
+   "results": "{\"t\": \"2026-10-16T16:27:36Z\", \"tool\": \"grep\", \"query\": \"isIntegral_iff_v_le_one|isIntegral_of_mem_ringOfIntegers|integralClosure\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\"], \"digest\": \"9cb2f0290df0ccce\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the valuation hits assume the same-ambient unit-ball identification or prior integral-closure membership; remaining hits concern global fields or field integrality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power bounded element in a finite dimensional extension of a complete nonarchimedean field is integral over its ring of integers",
+   "results": "{\"t\": \"2026-10-16T16:27:37Z\", \"tool\": \"leansearch\", \"query\": \"A power bounded element in a finite dimensional extension of a complete nonarchimedean field is integral over its ring of integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegral.pow\", \"IsIntegral\", \"IsIntegral.pow_iff\", \"IsIntegral.of_pow\", \"NumberField.RingOfIntegers.instIsIntegralInt\", \"Valuation.Integers.isIntegral_iff_v_le_one\", \"IsIntegral.of_finite\", \"NumberField.RingOfIntegers.instIsIntegralClosure\"], \"digest\": \"07119877dcdc6a3f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: of_finite is a reusable ingredient, not the unit-ball identification; number-field results concern global integers, and valuation integers already assume the unit-ball hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite dimensional normed space over a complete nonarchimedean field each coordinate with respect to a basis is bounded by a constant times the norm of the vector",
+   "results": "{\"t\": \"2026-10-16T16:28:55Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite dimensional normed space over a complete nonarchimedean field each coordinate with respect to a basis is bounded by a constant times the norm of the vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.norm_mul_le_const_mul_norm\", \"Module.Basis.norm_repr_le_norm\", \"Module.Basis.norm_isNonarchimedean\", \"Module.Basis.norm\", \"Module.Basis.opNNNorm_le\", \"Module.Basis.exists_opNNNorm_le\", \"Module.Basis.opNorm_le\", \"Module.Basis.exists_opNorm_le\"], \"digest\": \"a5350c471c42742c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned valuation integers and integralClosure constructions assume the required membership, or concern continuous coordinates/global integers rather than the whole local-field extension statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of the p adic numbers the unit ball consists of the elements satisfying a monic polynomial over the p adic integers",
+   "results": "{\"t\": \"2026-10-16T16:31:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite extension of the p adic numbers the unit ball consists of the elements satisfying a monic polynomial over the p adic integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicComplexInt\", \"PadicInt.subring\", \"PadicInt.mem_subring_iff\", \"PadicInt.mkUnits\", \"PadicAlgCl\", \"PadicComplexInt.integers\", \"PadicInt\", \"PadicAlgCl.isAlgebraic\"], \"digest\": \"cb6eec084eb8a721\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned valuation integers and integralClosure constructions assume the required membership, or concern continuous coordinates/global integers rather than the whole local-field extension statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.*integer|isIntegral.*norm|norm.*isIntegral|integralClosure.*[Pp]adic",
+   "results": "{\"t\": \"2026-10-16T16:31:40Z\", \"tool\": \"grep\", \"query\": \"IsIntegralClosure.*integer|isIntegral.*norm|norm.*isIntegral|integralClosure.*[Pp]adic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean\", \"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean\", \"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"37a771781db34099\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the valuation hits assume the same-ambient unit-ball identification or prior integral-closure membership; remaining hits concern global fields or field integrality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a finite extension of a complete discretely valued field is integral over the valuation subring exactly when its absolute value is at most one",
+   "results": "{\"t\": \"2026-10-16T16:52:20Z\", \"tool\": \"leanfinder\", \"query\": \"An element of a finite extension of a complete discretely valued field is integral over the valuation subring exactly when its absolute value is at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.Integers.isIntegral_iff_v_le_one\", \"Valued.integer.mem_iff\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"Valuation.mem_integer_iff\", \"Valuation.Integers.mem_of_integral\", \"IsDedekindDomain.HeightOneSpectrum.mem_adicCompletionIntegers\", \"Valued.toNormedField.setOf_mem_integer_eq_closedBall\"], \"digest\": \"179d2bacb73b6b86\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independently read Valuation/Integers.lean:53-61 and Valuation/Integral.lean:34-56; v.Integers O requires O to map onto the whole unit ball in the same ambient ring, so it cannot identify the smaller O_E with the unit ball in F. The remaining hits define unit-ball membership or assume integralClosure membership."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-sfb-cartesian-coefficients-finite-free",
   "date": "2026-10-16"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-cartesian-coefficients"
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-padic-integers-integral-closure",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the valuation/integral-closure bridge in five steps by a finite Q_l-basis, coordinate continuity, one lattice containing all powers, Noetherian submodule finiteness, and finite-implies-integral. The reverse implication is the explicit leading-term estimate. All dependencies are existing nodes; no new nodes or attachments. The item exists in the read-only live DAG mirror but is absent from the older shared checkout, so its current mirror record was copied to the sandbox.",
+  "blueprint": "Realizes the arithmetic valuation/integrality identification implicit in the first sentence of det-prop-sfb-cartesian-coefficients-finite-free.proof.md, before that parent invokes finiteness of integral closure. It does not use the parent finite-freeness assertion or its proof."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-7d9f08ded",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-7d9f08ded (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged, and it is exactly what step 1 of the parent det-prop-sfb-cartesian-coefficients-finite-free uses: O_F is the integral closure of O_E, taken before the finite-closure theorem (032L). The delivery creates no new nodes, so no drop is needed. Steps checked against the cited statements: (1) Q_l is complete and its norm is nontrivial (|l|=1/l<1). With base Q_l, V=F and W=Q_l^d, every hypothesis of lem-weil-pbc-finite-dimensional-linear-homeomorphism holds, so the coordinate maps are continuous. (2) The ε-box argument shows that every power x^n, including n=0, lies in L=sum Z_l l^{-N} b_i. (3) A DVR is a PID, hence Noetherian (lem-weil-pbc-pid-noetherian-normal). Z_l[x] is a submodule of L, so it is finite by lem-weil-pbc-noetherian-submodule-finite; the step does not claim L is a ring. (4) finite-algebra-is-integral applies to Z_l[x]. Since Z_l is contained in O_E, the same monic equation makes x integral over O_E. (5) The ultrametric estimate t^r<=t^{r-1}<t^r for t=|x|>1 is a genuinely elementary step. proof_deps equals the union of the step uses. Small cases pass: x=0, units, E=F=Q_l, l=2, r=1, and the totally ramified Q_l(l^{1/e}). There is no cycle: the closure of the 9 dependencies (28 nodes) does not reach the item, and its only citer is the parent. Off-unit citations are only Mathlib leaves and a definition, so no tool_uses is needed; removing the self-written request was correct (C8). Duplicate check over dag/nodes and the main-20261015 blueprint: the DVR, localization and Gauss-lemma nodes and the normalization nodes are not duplicates, so same_as=[] is right. Mathlib: Valuation.Integers.isIntegral_iff_v_le_one (Integral.lean:35) assumes O is the whole unit ball in the same ring, so it is not a leaf; the searches cover all three required kinds. Serre is honestly recorded as WANTED, with proof_origin=agent. No SGA is used and this is not a target node. No fixes were written."
+ }
 }

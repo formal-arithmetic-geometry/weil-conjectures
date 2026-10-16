@@ -3,57 +3,320 @@
  "blueprint": {
   "is": "det-prop-int-compactness-compact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral constructible complexes are compact",
- "statement": "1. $\\IndCons(X,\\mathcal O_E)=\\operatorname{Ind}(\\Cons(X,\\mathcal O_E))$ admits an\n   exact fully faithful realization in $\\Mod(X_{\\mathrm{proét}},\\mathcal O_E)$,\n   closed under extensions and under kernels and cokernels of its own\n   morphisms, and for $C\\in\\Cons(X,\\mathcal O_E)$ one has $\\Ext^q(C,B)=0$ in\n   $\\Mod(X_{\\mathrm{proét}},\\mathcal O_E)$ for $q>d_C$ (the integer of\n   [sk-lem-int-ext](2)) and all $B\\in\\IndCons(X,\\mathcal O_E)$.\n2. Let $\\Dic(X,\\mathcal O_E)$ be the full subcategory of complexes with\n   cohomology in $\\IndCons(X,\\mathcal O_E)$. It is closed under direct sums and\n   truncations and contains $\\Loc(\\Dbc(X,\\mathcal O_E))$. For\n   $C\\in\\Cons(X,\\mathcal O_E)$ and $K\\in\\Dic(X,\\mathcal O_E)$, $\\Hom(C,K[m])$\n   depends only on $\\tau_{[m-d_C,m]}K$.\n3. Every $C\\in\\Dbc(X,\\mathcal O_E)$ is compact in $\\Loc(\\Dbc(X,\\mathcal O_E))$:\n   $\\Hom(C,-)$ commutes with direct sums.",
+ "statement": "Work in the standing setting of [sk-def-sfb-dc-setting]: $\\ell$ is a prime, $k$ is a field of characteristic $p>0$ with $p\\ne\\ell$, and $X$ is a separated finite-type $k$-scheme. Fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a finite subextension $E/\\mathbf Q_\\ell$, with ring of integers $\\mathcal O_E$. Regard $\\underline{\\mathcal O_E}$ as the condensed ring of [def-sfb-padic-integers-condensed-ring] and put $R_X=p_X^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients]. All module sheaves are module objects over this ring [sk-def-sfb-module-objects], and all derived categories, Hom and Ext groups are in the ordinary unbounded category $D(\\Mod_{R_X})$ [def-weil-abstract-derived-category; def-pc-ext], without imposing derived completeness on arbitrary objects or completing their direct sums. Write $\\Cons=\\Cons(X,\\mathcal O_E)$ and $\\Dbc=\\Dbc(X,\\mathcal O_E)$ as in [sk-def-sfb-constructible]. Use canonical truncations with $H^q(K[s])=H^{q+s}(K)$ [def-kun-truncations]. All diagrams and families are small in the fixed universe [def-weil-size-convention; def-weil-pbc-category-colimit].\n\nUse $\\operatorname{Ind}(\\Cons)$ for formal small filtered diagrams $(C_i)$ of constructible sheaves, with morphisms $\\varprojlim_i\\varinjlim_j\\Hom(C_i,D_j)$ (equivalently the filtered-colimit-of-representables category described in [lem-sfb-ind-filtered-colimits]). Choose $d_C\\ge0$ for each $C\\in\\Cons$ satisfying the bound of [sk-lem-int-ext](2), enlarging a bound to zero when necessary. Then:\n\n1. The realization $\\Phi:\\operatorname{Ind}(\\Cons)\\to\\Mod_{R_X}$, $(C_i)\\mapsto\\varinjlim_i C_i$, is exact and fully faithful. Its essential image $\\IndCons$ is the full subcategory of sheaves isomorphic to small filtered colimits of constructible sheaves. This image is closed under extensions and under kernels and cokernels of its own morphisms. For $C\\in\\Cons$ and $B\\in\\IndCons$, $\\Ext^q(C,B)=0$ whenever $q>d_C$.\n2. The full subcategory $\\Dic=\\{K\\in D(\\Mod_{R_X}):H^n(K)\\in\\IndCons\\text{ for every }n\\in\\mathbf Z\\}$ is closed under direct sums and canonical truncations and contains $\\Loc(\\Dbc)$, the smallest full triangulated subcategory containing $\\Dbc$ and closed under isomorphisms and small direct sums [det-def-localizing-closure-existence]. For every $C\\in\\Cons$, $K\\in\\Dic$ and $m\\in\\mathbf Z$, the canonical truncation zigzag induces a natural isomorphism\n$$\\Hom(C,K[m])\\simeq\\Hom(C,(\\tau_{\\ge m-d_C}\\tau_{\\le m}K)[m]).$$\n3. Every $C\\in\\Dbc$ is compact in $\\Loc(\\Dbc)$ [def-pc-compact-object]: for every small family $(K_\\alpha)$ in this localizing subcategory the canonical map\n$$\\bigoplus_\\alpha\\Hom(C,K_\\alpha)\\longrightarrow\\Hom(C,\\bigoplus_\\alpha K_\\alpha)$$\nis an isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.md",
   "place": "node det-prop-int-compactness-compact, order None"
  },
  "stmt_deps": [
-  "sk-lem-int-ext"
+  "sk-def-sfb-dc-setting",
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext",
+  "sk-def-sfb-constructible",
+  "def-kun-truncations",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-ind-filtered-colimits",
+  "sk-lem-int-ext",
+  "det-def-localizing-closure-existence",
+  "def-pc-compact-object"
  ],
  "proof": [
   {
-   "text": "(1) The proofs of [sk-prop-ind-heart] and [sk-cor-ind-heart-ii] use only that\nthe heart is an essentially small abelian subcategory closed under\nextensions, that Hom and $\\Ext^1$ out of its objects commute with filtered\ncolimits, and the uniform Ext bound. For $\\mathcal O_E$ these are\n[sk-lem-int-integral-heart](1) and [sk-lem-int-ext](1),(2). So those proofs\ngive the realization and the vanishing $\\Ext^q(C,B)=0$ for $q>d_C$, first for\n$B$ constructible and then for filtered colimits $B$ by continuity.",
+   "text": "Put $\\mathcal A=\\Mod_{R_X}$ and $\\mathcal H=\\Cons$. The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies these internal modules with ordinary sheaves of modules over the section-ring sheaf of the same $R_X$; it preserves underlying abelian sheaves and section groups. Thus [lem-weil-pbc-ring-sheaves-grothendieck] gives all small colimits and exact filtered colimits in $\\mathcal A$. By [sk-lem-int-integral-heart](1), $\\mathcal H$ is essentially small, abelian with its ambient kernels and cokernels, and closed under extensions; its sheaves lie in $\\Dbc$. Choose a small skeleton when forming Ind. By [sk-lem-int-ext](1), for each $C\\in\\mathcal H$ and every integer $q$, $\\Ext^q(C,-)$ commutes with small filtered colimits of sheaves: the representing complexes are all concentrated in degree zero, so have common lower bound zero. In particular Hom and $\\Ext^1$ have this continuity; in degree zero, $\\Hom_{D(\\mathcal A)}(C[0],B[0])=\\Hom_{\\mathcal A}(C,B)$ for sheaves $C,B$ by [lem-weil-pbc-derived-single-fully-faithful], so this is continuity of $\\Hom_{\\mathcal A}(C,-)$ itself. These are the integral hypotheses required below.",
    "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
     "sk-lem-int-integral-heart",
-    "sk-lem-int-ext"
+    "sk-lem-int-ext",
+    "lem-weil-pbc-derived-single-fully-faithful"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), the three integral inputs; Stacks Tag 079Q (injectives-remark-existence-D) for the ambient category"
+   }
   },
   {
-   "text": "(2) Direct sums and truncations of complexes with cohomology in\n$\\IndCons$ have cohomology in $\\IndCons$ (cohomology commutes with direct\nsums, and $\\IndCons$ is closed under direct sums). $\\Dbc(X,\\mathcal O_E)$ lies\nin $\\Dic$ by [sk-lem-int-integral-heart](1); since $\\IndCons$ is closed under\nextensions, kernels and cokernels, $\\Dic$ is triangulated, so it contains the\nlocalizing category generated by $\\Dbc$. For the window: products of sheaves\non the pro-étale site are exact and $D(X_{\\mathrm{proét}},\\mathcal O_E)$ is left\ncomplete ([sk-prop-pe-products], [sk-prop-pe-left-complete]), so\n$K=R\\varprojlim_n\\tau_{\\ge-n}K$ and there is a Milnor sequence\n$0\\to\\varprojlim^1_n\\Hom(C,\\tau_{\\ge-n}K[m-1])\\to\\Hom(C,K[m])\\to\\varprojlim_n\\Hom(C,\\tau_{\\ge-n}K[m])\\to0$.\nThe uniform vanishing $\\Ext^q(C,B)=0$ for $q>d_C$, applied to the cohomology\nobjects of $K$ via the triangles $H^{-n-1}[n+1]\\to\\tau_{\\ge-n-1}K\\to\\tau_{\\ge-n}K$,\nshows that the towers of Hom groups are eventually constant, so\n$\\varprojlim^1$ vanishes and $\\Hom(C,K[m])=\\Hom(C,\\tau_{\\ge m-d_C}K[m])$. On\nthe other side, $\\Hom(C,\\tau_{>m}K[m])=0$ since $C$ is in degree $0$. This is\nthe argument of [sk-lem-finite-window].",
+   "text": "For filtered diagrams $(C_i),(D_j)$ in $\\mathcal H$, the colimit universal property and step 1 give\n$$\\Hom_{\\mathcal A}(\\varinjlim_i C_i,\\varinjlim_jD_j)=\\varprojlim_i\\Hom_{\\mathcal A}(C_i,\\varinjlim_jD_j)=\\varprojlim_i\\varinjlim_j\\Hom_{\\mathcal H}(C_i,D_j).$$\nThese identifications send a represented morphism to its realization and respect identities and composition. By the defining Ind Hom formula in the statement, $\\Phi$ is fully faithful, with exactly the stated essential image. We also need its colimit behavior. For arbitrary $M\\in\\mathcal A$, let $F_M(C)=\\Hom_{\\mathcal A}(C,M)$. If an ind-object $P$ is represented by $(C_i)$, then\n$$\\Hom_{\\mathcal A}(\\Phi P,M)=\\varprojlim_i F_M(C_i)=\\operatorname{Nat}(P,F_M).$$\nThe last equality is the presheaf colimit universal property: a natural map $h_C\\to F_M$ is determined by its value at $1_C$, and its value at $t:T\\to C$ is that element composed with $t$; these are inverse assignments. For a filtered diagram $(P_j)$, [lem-sfb-ind-filtered-colimits] computes its Ind colimit in presheaves. The displayed equality then identifies maps $\\Phi(\\varinjlim_j P_j)\\to M$ with compatible families of maps $\\Phi P_j\\to M$. Thus $\\Phi$ preserves filtered colimits by the colimit universal property, and $\\IndCons$ is closed under filtered colimits in $\\mathcal A$.",
    "uses": [
-    "sk-lem-int-integral-heart",
-    "sk-lem-finite-window"
+    "lem-sfb-ind-filtered-colimits",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), full faithfulness and realization; Stacks Tag 05PW (categories-remark-ind-category) Hom formula"
+   }
   },
   {
-   "text": "(3) For $C\\in\\Cons(X,\\mathcal O_E)$ and a family $(K_\\alpha)$ in\n$\\Loc(\\Dbc(X,\\mathcal O_E))$, by (2) both $\\Hom(C,\\bigoplus K_\\alpha[m])$ and\n$\\bigoplus\\Hom(C,K_\\alpha[m])$ only involve the truncations to the window\n$[m-d_C,m]$, which commute with direct sums. On complexes with cohomology in a\nfinite range, $\\Hom(C,-)$ commutes with direct sums by induction on the length\nof the range, using the five lemma and continuity of Ext for sheaves\n([sk-lem-int-ext](1)) in each degree. So $\\Hom(C,-)$ commutes with direct\nsums. For general $C\\in\\Dbc(X,\\mathcal O_E)$, $C$ is a finite extension of\nshifts of constructible sheaves ([sk-lem-int-integral-heart](1)), and\ncompactness is stable under shifts and extensions by the five lemma.",
+   "text": "The image is also closed under arbitrary small sums. For a finite family of filtered presentations, take their product index category and the pointwise finite direct sum of the presented constructible sheaves. This index is filtered: choose common targets in each of the finitely many coordinates, and equalize parallel arrows coordinatewise. A cocone from these finite sums to $M$ is exactly one compatible cocone from each component diagram to $M$; hence its colimit is the finite direct sum of their realizations. The empty sum is the zero constructible sheaf. For an arbitrary family $(B_s)$ in the image, its direct sum is the filtered colimit over finite subsets $T$ of the finite sums $\\bigoplus_{s\\in T}B_s$: a cocone on these finite sums is precisely a family of maps $B_s\\to M$. Apply step 2's filtered-colimit closure.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), closure of IndCons under direct sums"
+   }
+  },
+  {
+   "text": "Let $u:B\\to B'$ be a morphism between objects of $\\IndCons$. Lift it by the full faithfulness in step 2 and apply [lem-sfb-ind-arrow-presentation]. After isomorphisms of source and target, $u=\\varinjlim_i u_i$ for one small filtered diagram of morphisms $u_i:C_i\\to D_i$ in $\\mathcal H$; step 2 identifies the realized source, target and arrow with these ambient colimits. Since filtered colimits in $\\mathcal A$ are exact, taking the filtered colimits of the pointwise kernel-image-cokernel exact sequences gives\n$$\\ker u\\simeq\\varinjlim_i\\ker u_i,\\qquad\\operatorname{coker}u\\simeq\\varinjlim_i\\operatorname{coker}u_i.$$\nAll the terms on the right are constructible by step 1. Thus the full image is closed under ambient kernels and cokernels. It is additive by step 3 and is abelian: its kernels and cokernels are the ambient ones, and the ambient coimage-to-image isomorphism remains an isomorphism in the full image. Its inclusion is exact. Transport this structure through the fully faithful essentially surjective $\\Phi$ to conclude that the realization of $\\operatorname{Ind}(\\mathcal H)$ is exact.",
+   "uses": [
+    "lem-sfb-ind-arrow-presentation",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), kernels, cokernels, and exactness of realization"
+   }
+  },
+  {
+   "text": "Consider $0\\to N\\to M\\to B\\to0$ in $\\mathcal A$ with $N,B\\in\\IndCons$, and choose filtered presentations $N=\\varinjlim_iD_i$, $B=\\varinjlim_a C_a$ in $\\mathcal H$. For each $a$, let $M_a=M\\times_B C_a$; it fits into $0\\to N\\to M_a\\to C_a\\to0$. This is the dual of [lem-weil-pbc-pushout-short-exact-sequence], applied in $\\mathcal A^{\\mathrm{op}}$; the axioms in [def-sp-abelian] are self-dual. Its class in $\\Ext^1(C_a,N)$, interpreted by [lem-coef-yoneda-derived-ext-comparison], comes by step 1 from a class in $\\Ext^1(C_a,D_i)$ for some $i$. An element of a filtered colimit of abelian groups is represented at a single stage, since it is a finite sum of stage elements and filteredness moves a finite sum to one common stage. Represent that class by $0\\to D_i\\to T\\to C_a\\to0$. Then $T\\in\\mathcal H$ by its extension closure. The pushout $N\\amalg_{D_i}T$ is an extension of $C_a$ by $N$, by the pushout node, and its class is the class of $M_a$ by naturality of the Yoneda comparison. Consequently it is isomorphic to $M_a$ as an extension: a zigzag identifying Yoneda classes consists in degree one of maps with identity endpoints, whose middle maps are isomorphisms by [lem-weil-pbc-short-five-lemma].",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-sp-abelian",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), extension closure, expanded finite-stage extension lift; Stacks Tags 010I (homology-section-extensions), 06XU (derived-lemma-yoneda-extension), 06XV (derived-lemma-ext-1)"
+   }
+  },
+  {
+   "text": "For the index $i$ chosen for a fixed $a$ in step 5, use the undercategory $i/I$ of arrows $i\\to j$. It is small and filtered: to find a common target, first find a common target of $j,j'$ in $I$ and then equalize the two resulting arrows from $i$; parallel arrows are equalized in $I$. The diagram $i\\to j\\mapsto D_j$ has colimit $N$: a cocone extends uniquely to $I$ by sending any $D_k$ through a common target of $k$ and $i$, with independence obtained by taking a further common target and equalizing the two maps from $k$ and from $i$. Put $P_{i\\to j}=D_j\\amalg_{D_i}T$. By [lem-weil-pbc-pushout-short-exact-sequence], $0\\to D_j\\to P_{i\\to j}\\to C_a\\to0$ is exact, so $P_{i\\to j}$ is constructible by step 1. Its colimit is $N\\amalg_{D_i}T$: a compatible family $P_{i\\to j}\\to W$ amounts to a map $N\\to W$ and a single map $T\\to W$ agreeing on $D_i$ (the undercategory has initial object $1_i$, and the transition on $T$ is the identity). The pushout universal property identifies precisely such pairs. Hence $M_a\\in\\IndCons$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), extension closure, pushout presentation over i/I; Stacks Tag 010I (homology-section-extensions)"
+   }
+  },
+  {
+   "text": "The maps $M_a\\to M$ form a compatible cocone by uniqueness in the pullback universal property. Take the filtered colimit over $a$ of $0\\to N\\to M_a\\to C_a\\to0$. Exactness from step 1 gives $0\\to N\\to\\varinjlim_a M_a\\to B\\to0$; the colimit of the constant identity $N$ diagram is $N$, since the index is nonempty and connected. The canonical map to the original sequence has identity endpoint maps. By [lem-weil-pbc-short-five-lemma], $\\varinjlim_a M_a\\simeq M$. Step 2 and step 6 show that $M\\in\\IndCons$. This proves the remaining extension-closure assertion in (1).",
+   "uses": [
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (1), extension closure, final filtered colimit"
+   }
+  },
+  {
+   "text": "For $C\\in\\mathcal H$ and $B=\\varinjlim_iD_i$ with $D_i\\in\\mathcal H$, step 1's continuity identifies $\\Ext^q(C,B)$ with $\\varinjlim_i\\Ext^q(C,D_i)$. By [sk-lem-int-ext](2), each term is zero when $q>d_C$, proving the uniform vanishing in (1). We will also use continuity for direct sums of arbitrary sheaves: express a sum as the filtered colimit of its finite partial sums as in step 3 and apply [sk-lem-int-ext](1), with all complexes in degree zero. Since finite sums are biproducts, $\\Ext^q(C,\\bigoplus_s B_s)=\\bigoplus_s\\Ext^q(C,B_s)$ for every integer $q$. Negative Ext vanishes by standard t-structure orthogonality [def-sbc-standard-tstructure-derived-category; def-weil-t-structure].",
    "uses": [
     "sk-lem-int-ext",
-    "sk-lem-int-integral-heart"
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraphs (1) and (3), uniform Ext bound and direct-sum continuity"
+   }
+  },
+  {
+   "text": "A long exact cohomology sequence [lem-sf-derived-homology-long-exact] of a triangle $K\\to L\\to M\\to K[1]$ with $K,L\\in\\Dic$ gives a short exact sequence $0\\to\\operatorname{coker}(H^nK\\to H^nL)\\to H^n(M)\\to\\ker(H^{n+1}K\\to H^{n+1}L)\\to0$. Steps 4 and 7 put both endpoints and their extension in $\\IndCons$. Cohomology of a shift is merely reindexed, so rotations give the other two-out-of-three cases; zero and isomorphisms cause no change. Thus $\\Dic$ is triangulated. It is closed under truncations because the formulas [def-kun-truncations] retain or kill each cohomology sheaf. Direct sums are termwise coproducts by [lem-kun-grothendieck-derived-coproducts], applied to the Grothendieck category of step 1. A direct sum is a filtered colimit of finite biproducts, so exact filtered colimits make it exact; consequently kernels, images, and their quotients in each degree commute with sums, and $H^n(\\bigoplus_sK_s)=\\bigoplus_sH^n(K_s)$. Step 3 puts this in $\\IndCons$. By [sk-lem-int-integral-heart](1), every cohomology sheaf of an object of $\\Dbc$ is constructible, hence is in $\\IndCons$ through its constant filtered presentation. The minimality in [det-def-localizing-closure-existence] now gives $\\Loc(\\Dbc)\\subseteq\\Dic$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-kun-truncations",
+    "lem-kun-grothendieck-derived-coproducts",
+    "sk-lem-int-integral-heart",
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), direct sums, truncations, and localizing inclusion; Stacks Tags 07D9 (injectives-lemma-derived-products), 0118 (homology-section-truncations)"
+   }
+  },
+  {
+   "text": "Fix $C\\in\\mathcal H$ and $d=d_C$. First prove the lower-tail assertion $\\Hom(C,L)=0$ for bounded $L\\in\\Dic$ with $H^qL=0$ for $q>-d-1$. Induct on the finite number of possibly nonzero cohomology degrees. The zero object gives the base case. Removing the highest remaining degree $q$ by the canonical truncation triangle [lem-sf-derived-truncation-triangle; def-kun-truncations] gives a layer $H^q(L)[-q]$. Its Hom from $C$ is $\\Ext^{-q}(C,H^qL)=0$ by step 8 since $-q>d$. The exact Hom sequence [lem-weil-pbc-hom-into-triangle-exact] and the inductive hypothesis give $\\Hom(C,L)=0$. This uses only the ambient Ext bound for ind-constructible sheaves, not compactness.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), bounded lower tail; finite-window proof paragraph 2; Stacks Tags 08J5 (derived-remark-truncation-distinguished-triangle), 0149 (derived-lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Now let $L\\in\\Dic$ satisfy the same upper bound, without a lower bound. Put $L_n=\\tau_{\\ge-n}L$. Each $L_n$ is bounded, so $G_n=\\Hom(C,L_n)=0$ by step 10. By [det-pe-left-complete-iso] and [det-pe-products-derived], valid for the sheaf of rings $R_X$ through step 1's module equivalence, $L\\simeq\\operatorname{Cone}(1-T:\\prod_nL_n\\to\\prod_nL_n)[-1]$. Apply exact Hom to this triangle and its shifts [lem-weil-pbc-hom-into-triangle-exact]. A map into a product is exactly its family of components, so this gives\n$$\\operatorname{coker}(1-T:\\prod_n A_n\\to\\prod_n A_n)\\longrightarrow\\Hom(C,L)\\longrightarrow\\ker(1-T:\\prod_n G_n\\to\\prod_n G_n),\\quad A_n=\\Hom(C,L_n[-1]),$$\nwith exactness and the left map injective. The right group is zero. The successive-truncation triangle has first term $H^{-n-1}(L)[n+1]$, middle $L_{n+1}$ and third $L_n$. After shifting by $-1$, exact Hom puts $A_{n+1}\\to A_n$ between $\\Ext^n(C,H^{-n-1}L)$ and $\\Ext^{n+1}(C,H^{-n-1}L)$. Thus this transition is an isomorphism for $n>d$ by step 8. The cokernel on the left is zero: choose $N>d$. To solve $x_n-t_nx_{n+1}=a_n$ for an arbitrary $(a_n)$, set $x_N=0$, recursively set $x_{n+1}=t_n^{-1}(x_n-a_n)$ for $n\\ge N$, and then set $x_n=a_n+t_nx_{n+1}$ for $n<N$ downwards. Hence $1-T$ is surjective and $\\Hom(C,L)=0$. This is the missing unbounded-tail argument; no continuity assumption for unbounded systems is made.",
+   "uses": [
+    "det-pe-left-complete-iso",
+    "det-pe-products-derived",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), left completeness and Milnor argument; finite-window proof paragraphs 3-4; Stacks Tag 0149 for Hom exactness"
+   }
+  },
+  {
+   "text": "For arbitrary $K\\in\\Dic$ and $m\\in\\mathbf Z$, put $A=\\tau_{\\le m}K$, $U=\\tau_{\\ge m+1}K$, $V=\\tau_{\\le m-d-1}A$, $W=\\tau_{\\ge m-d}A$. The two truncation triangles [lem-sf-derived-truncation-triangle] are $A\\to K\\to U\\to A[1]$ and $V\\to A\\to W\\to V[1]$. Standard orthogonality [def-sbc-standard-tstructure-derived-category; def-weil-t-structure] gives $\\Hom(C,U[m-1])=\\Hom(C,U[m])=0$, since these objects lie in degrees at least $2$ and $1$. Step 9 puts $V[m],V[m+1]$ in $\\Dic$; their upper degrees are $-d-1$ and $-d-2$, so step 11 gives zero Hom from $C$. Exact Hom [lem-weil-pbc-hom-into-triangle-exact] therefore makes both canonical arrows\n$$\\Hom(C,K[m])\\ \\longleftarrow\\ \\Hom(C,A[m])\\ \\longrightarrow\\ \\Hom(C,W[m])$$\nisomorphisms. The resulting isomorphism is natural: for a morphism $K\\to K'$ the truncation maps give commutative squares for both arrows, and composing the right square with the inverse of the left square preserves commutativity. This proves (2), with the stated degrees $[m-d_C,m]$.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (2), finite-window isomorphism, explicit upper and lower truncation maps; Stacks Tags 08J5, 0149"
+   }
+  },
+  {
+   "text": "For $C\\in\\mathcal H$ and a family $(M_s)$ with cohomology in one finite interval $[a,b]$, choose representing complexes and apply $\\tau_{\\ge a}\\tau_{\\le b}$; these are quasi-isomorphic representatives supported in that common interval by [def-kun-truncations]. The filtered diagram of finite partial sums has common lower bound $a$, and its termwise colimit is the termwise direct sum. The latter represents the derived direct sum by [lem-kun-grothendieck-derived-coproducts]. Apply [sk-lem-int-ext](1) to this diagram, with the source $C\\in\\Dbc$ from step 1. It gives\n$$\\Hom(C,(\\bigoplus_sM_s)[m])=\\varinjlim_{T\\subset S,\\ T\\text{ finite}}\\Hom(C,(\\bigoplus_{s\\in T}M_s)[m])=\\bigoplus_s\\Hom(C,M_s[m]).$$\nThe last equality is the finite-biproduct identity followed by the finite-partial-sum universal property. All comparison maps are induced by the actual coprojections. This supplies the finite-range continuity used in paragraph (3) directly; it does not require the family to be bounded below outside this finite-range step.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-grothendieck-derived-coproducts",
+    "sk-lem-int-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (3), continuity on a common finite cohomological interval"
+   }
+  },
+  {
+   "text": "Let $(K_s)$ be any small family in $\\Loc(\\Dbc)$, hence in $\\Dic$ by step 9. For fixed $C\\in\\mathcal H$ and $m$, set $W_s=\\tau_{\\ge m-d_C}\\tau_{\\le m}K_s$. Exactness of sums in step 9 and the explicit kernel/cokernel formulas [def-kun-truncations] identify $\\tau_{\\ge m-d_C}\\tau_{\\le m}(\\bigoplus_sK_s)$ canonically with $\\bigoplus_sW_s$; both truncation maps commute with the coprojections. Apply the natural window isomorphisms of step 12 to each $K_s$ and to their sum, and step 13 to the family $(W_s)$ in its common interval $[m-d_C,m]$. The resulting commutative comparison square has isomorphisms on its vertical sides and on its finite-window horizontal side. Its other horizontal side is the canonical direct-sum comparison for $C$. It is therefore an isomorphism. Taking $m=0$ proves compactness of each constructible sheaf in the localizing category. This includes arbitrary shifts and families with no common lower bound.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (3), pass from the finite window to arbitrary families"
+   }
+  },
+  {
+   "text": "Finally, [sk-lem-int-integral-heart](1) says that every $C\\in\\Dbc$ is bounded and its standard truncations remain in $\\Dbc$ with constructible cohomology. Successive truncation triangles [lem-sf-derived-truncation-triangle; def-kun-truncations] therefore build $C$ by finitely many extensions of the shifts $H^q(C)[-q]$ of constructible sheaves, starting from zero. Work inside $\\Loc(\\Dbc)$, which is a full triangulated category with the same coproducts by [det-def-localizing-closure-existence]. Compact objects there are stable under shifts and distinguished triangles by [lem-sc-compact-objects-thick] (Stacks Tag 09QH). Step 14 and finite induction through these triangles show that $C$ is compact. This proves (3).",
+   "uses": [
+    "sk-lem-int-integral-heart",
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations",
+    "det-def-localizing-closure-existence",
+    "lem-sc-compact-objects-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+    "place": "Paragraph (3), bounded-source truncation and stability of compact objects; Stacks Tag 09QH (derived-lemma-compact-objects-subcategory)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
   "sk-lem-int-integral-heart",
   "sk-lem-int-ext",
-  "sk-lem-finite-window"
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sfb-ind-filtered-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-ind-arrow-presentation",
+  "def-sp-abelian",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-short-five-lemma",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure",
+  "lem-sf-derived-homology-long-exact",
+  "def-kun-truncations",
+  "lem-kun-grothendieck-derived-coproducts",
+  "det-def-localizing-closure-existence",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "det-pe-left-complete-iso",
+  "det-pe-products-derived",
+  "lem-sc-compact-objects-thick"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraphs (1)-(3), expanded integral Ind-realization, extension lifting, unbounded lower-tail and finite-window arguments; Stacks Tags 05PW, 079Q, 010I, 06XU, 06XV, 08J5, 0149, 07D9, 09QH for the categorical tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral constructible sheaves on a pro etale site are compact in the localizing derived category they generate",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.isRetrocompact_basicOpen; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; DerivedCategory.IsGE; other scheme compact-open results",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed Grothendieckness and compact topological opens do not assert this integral derived compactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind, CategoryTheory.IsCompactObject",
+   "results": "0 hits; unknown identifier 'CategoryTheory.IsCompactObject'",
+   "date": "2026-10-17",
+   "verdict": "invalid identifier; inconclusive, followed by valid Ind query"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|Indization|IndObject|[Ii]nd.*[Cc]ompletion|[Cc]ompact.*[Cc]onstructible",
+   "results": "25 hits in CategoryTheory; Indization category, arrow presentations, and Abelian.Indization; no integral constructible theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for item; general ind-category candidates read and used as two Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes with integral adic coefficients are compact in their localizing derived category",
+   "results": "DerivedCategory; Condensed; AdicCompletion; PadicInt.compactSpace; derived-category localization and condensed finite-colimit instances",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible derived compactness declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem|lemma|instance|def ",
+   "results": "CategoryTheory/Limits/Indization/Category.lean:71 Ind; :74 category; :81 Ind.equivalence; read lines 1-105",
+   "date": "2026-10-17",
+   "verdict": "no match for item; describes generic Ind category"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem|lemma|instance|def ",
+   "results": "CategoryTheory/Abelian/Indization.lean:32 coimage-image comparison; :41 Abelian (Ind C); read the entire file",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract Ind abelian does not establish exact realization or compactness in the ambient category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind",
+   "results": "CategoryTheory.Ind; CategoryTheory.Ind.yoneda; CategoryTheory.instHasFilteredColimitsInd; CategoryTheory.instHasColimitsIndOfHasFiniteColimits; finite limit and coproduct instances",
+   "date": "2026-10-17",
+   "verdict": "no match for item; generic Ind declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftExact|LeftExact|PreservesFinite|fullyFaithful|FullyFaithful|IsFinitelyPresent|isFinitelyPresent|mapInd|indExtension|extension",
+   "results": "10 hits in CategoryTheory/Limits/Indization, including isIndObject_iff_preservesFiniteLimits at IndObject.lean:209 and Ind.inclusion.fullyFaithful at Category.lean:97",
+   "date": "2026-10-17",
+   "verdict": "no match for geometric item or ambient extension closure; generic Ind candidates inspected"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -74,5 +337,89 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-int-compactness"
+ "unit": "sk-prop-int-compactness",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-int-compactness-compact",
+  "worker": "stage1",
+  "summary": "Expanded the integral proof instead of applying rational-only nodes or nonexisting umbrella ids. Made inherited scheme/coefficient conventions explicit. Added two generic Mathlib leaves for ind filtered colimits and arrow presentations; all geometric and homological argument remains in the item. Proved extension closure via finite-stage Yoneda extensions and pushouts, checked both truncation tails with the Hom Milnor cokernel solved explicitly, and proved direct-sum comparison through the natural finite window. No target weakening or new geometric hypothesis.",
+  "blueprint": "Steps 1-8 realize paragraph (1); step 9 realizes paragraph (2) closure assertions; steps 10-12 expand its bounded and unbounded lower-tail and upper-truncation argument; steps 13-15 realize paragraph (3). Unit steps 1-2 are retained, with the general categorical lemmas made explicit.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Identifies internal module objects with modules over the same section-ring sheaf so ringed-site tools apply without changing coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Ambient small colimits and exact filtered colimits, a categorical input not supplied by the integral unit."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic abelian pushout and its dual pullback preserve short exact sequences, needed for the integral extension construction."
+   },
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Classifies degree-one derived Ext by actual short exact sequences, needed to lift an extension along integral Ext continuity."
+   },
+   {
+    "node": "lem-weil-pbc-short-five-lemma",
+    "why": "Identifies the middle objects of short exact sequences with isomorphic endpoints."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology long exact sequence proves the ambient ind-cohomology category is triangulated."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Computes ordinary unbounded derived coproducts termwise for any Grothendieck abelian category."
+   },
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Generic localizing-closure definition and minimality, valid explicitly for every condensed coefficient ring."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic canonical truncation triangles, needed to expand the unit finite-window and bounded-source arguments."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic exact Hom sequences, needed for both tail vanishings and window isomorphisms."
+   },
+   {
+    "node": "det-pe-left-complete-iso",
+    "why": "Left completeness is stated for every ring sheaf, including the integral R_X; supplies the precise truncation-limit map."
+   },
+   {
+    "node": "det-pe-products-derived",
+    "why": "Termwise products in the ambient derived category for any ring sheaf, needed for the Hom Milnor calculation."
+   },
+   {
+    "node": "lem-sc-compact-objects-thick",
+    "why": "Generic shift and triangle stability of compact objects completes finite source devissage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-short-five-lemma",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-grothendieck-derived-coproducts",
+  "det-def-localizing-closure-existence",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "det-pe-left-complete-iso",
+  "det-pe-products-derived",
+  "lem-sc-compact-objects-thick"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-975b81a9c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-975b81a9c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item (3 clauses, 15 steps), both new nodes, the full statement of every cited node, blueprint main-20261015 sk-prop-int-compactness (unit, compact.md and proof paragraphs 1-3), and the Mathlib file Indization/Category.lean lines 60-134 and 285-300. The statement matches blueprint clauses 1-3. Clause 2's window is made precise as a natural isomorphism through the canonical zigzag, which is a sharpening. The coefficient ring R_X=p_X^*O_E is the same O_{E,X} as in sk-lem-integral-models and sk-lem-int-ext. Nothing is weakened and no hypothesis is added; this is not a target node. All steps are correct: the Ind realization and its full faithfulness use Hom continuity from sk-lem-int-ext(1) with lower bound 0; arrow presentation gives ker/coker; extension closure goes through the pullback M_a, a finite-stage Ext^1 lift, a pushout over the filtered cofinal i/I and the short five lemma; Dic is triangulated and contains Loc(Dbc); the bounded and unbounded lower tails are handled, the Milnor cokernel is solved explicitly, and the transition map is an iso between Ext^n and Ext^{n+1} for n>d; the window degrees are 1,2 and -d-1,-d-2; finite-window sums and the comparison square follow; devissage uses the 09QH node. Small cases checked: X empty, C=0, empty family, d_C=0, B constructible, m negative. The new mathlib leaves exactly match Ind.exists_nonempty_arrow_mk_iso_ind_lim and the CreatesColimitsOfShape/HasFilteredColimits instances at lines 127-134. Neither duplicates the rational det-ind-heart-* nodes or restates an item clause. The 13 declared generic tool_uses are accepted. No cycle and no SGA. Fixes in fixes/dag/nodes/sec-six-functors-basics/det-prop-int-compactness-compact.json: (1) step 1 now cites the Mathlib leaf lem-weil-pbc-derived-single-fully-faithful for Hom_D(C[0],B[0])=Hom_A(C,B), which steps 1-2 used without a citation (C1); proof_deps updated. (2) Step 9's 'extension of coker by ker' read as reversed; it is now the explicit short exact sequence 0->coker->H^nM->ker->0.; 1 file(s) fixed by the reviewer"
+ }
 }

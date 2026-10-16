@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-pointwise-kan-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-upper-star-exact",
+   "place": "First proof paragraph, sentence computing Lan at W by a colimit over pairs.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointwise left Kan extension as a colimit, natural in the presheaf",
+ "statement": "Fix a universe $\\mathcal V$. Let $\\mathcal C,\\mathcal D$ be $\\mathcal V$-small categories, $b:\\mathcal C\\to\\mathcal D$ a functor, and $\\mathcal A$ a category with $\\mathcal V$-small morphism sets and all $\\mathcal V$-small colimits [def-weil-pbc-category-colimit]. A presheaf means a functor $\\mathcal C^{\\mathrm{op}}\\to\\mathcal A$, with natural transformations as morphisms. For $W\\in\\mathcal D$, let $\\mathcal I_W$ have objects $(V,\\phi:W\\to b(V))$ and arrows $(V,\\phi)\\to(V',\\phi')$ given by $a:V\\to V'$ satisfying $b(a)\\phi=\\phi'$. Left Kan extension $\\operatorname{Lan}_{b^{\\mathrm{op}}}$ means a left adjoint to restriction $G\\mapsto G\\circ b^{\\mathrm{op}}$ from $\\operatorname{Fun}(\\mathcal D^{\\mathrm{op}},\\mathcal A)$ to $\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathcal A)$. It exists and there is an isomorphism of functors in the presheaf $F$,\n$$\n(\\operatorname{Lan}_{b^{\\mathrm{op}}}F)(W)\\cong\\operatorname{colim}_{\\mathcal I_W^{\\mathrm{op}}} F(V).\n$$\nHere the diagram on the right sends an arrow opposite to $a:V\\to V'$ to $F(a):F(V')\\to F(V)$; a natural transformation $F\\to F'$ induces the colimit morphism of its components.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00VC, section-functoriality-PSh, definition of I_V and u_p; Tag 00VE, lemma-adjoints-u. The same colimit universal property for general coefficients is Mathlib/CategoryTheory/Functor/Flat.lean:302–322."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pointwise left Kan extension of presheaves valued in a cocomplete category is a colimit over the comma category",
+   "results": "8 hits: CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit, CategoryTheory.Functor.pointwiseLeftKanExtension_map, CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.Functor.pointwiseLeftKanExtensionUnit_app, CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension, CategoryTheory.Functor.pointwiseLeftKanExtension, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt",
+   "date": "2026-10-16",
+   "verdict": "match: the pointwise construction and evaluation formula; see checked Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.lanEvaluationIsoColim",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.lanEvaluationIsoColim'",
+   "date": "2026-10-16",
+   "verdict": "name was unknown to Loogle; corrected to CategoryTheory.lanEvaluationIsoColim"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.lanEvaluationIsoColim",
+   "results": "1 hits: CategoryTheory.lanEvaluationIsoColim",
+   "date": "2026-10-16",
+   "verdict": "match: corrected Loogle name, source checked"
+  },
+  {
+   "tool": "grep",
+   "query": "lanEvaluationIsoColim|leftKanExtensionObjIsoColimit|instance HasLeftKanExtension",
+   "results": "8 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor",
+   "date": "2026-10-16",
+   "verdict": "match: Flat.lean:302 gives the natural isomorphism, Adjunction.lean:78 gives its object form"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pointwise left Kan extension evaluation is naturally the colimit of the diagram over costructured arrows",
+   "results": "8 hits: CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.pointwiseLeftKanExtension, CategoryTheory.lanEvaluationIsoColim, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension, CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension, CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension.congr_simp, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.ι_isoColimit_hom",
+   "date": "2026-10-16",
+   "verdict": "match: evaluation is a natural colimit functor"
+  },
+  {
+   "tool": "grep",
+   "query": "lanEvaluationIsoColim",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean; Mathlib/CategoryTheory/Functor",
+   "date": "2026-10-16",
+   "verdict": "match: Flat.lean:302, read lines 293–322"
+  },
+  {
+   "tool": "grep",
+   "query": "def structuredArrowOpEquivalence",
+   "results": "1 hits: Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean; Mathlib/CategoryTheory/Comma",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean:1086, the comma/opposite equivalence used in the specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "HasPointwiseLeftKanExtension.*:|abbrev HasPointwiseLeftKanExtension",
+   "results": "14 hits: Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension",
+   "date": "2026-10-16",
+   "verdict": "match: Pointwise.lean:46–52, the family of colimit existence hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation functor composed with left Kan extension is naturally isomorphic to comma category colimit functor",
+   "results": "8 hits; first recorded hits: CategoryTheory.lanEvaluationIsoColim, CategoryTheory.Functor.lanCompColimIso, CategoryTheory.Functor.lanCompColimIso_hom_app, CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv, CategoryTheory.Functor.lanCompColimIso_inv_app, CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_hom, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom, CategoryTheory.Functor.leftKanExtensionObjIsoColimit",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.lanEvaluationIsoColim at Flat.lean:302; natural in the varying coefficient diagram, with no concrete-category hypothesis"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.lanEvaluationIsoColim",
+  "file": "Mathlib/CategoryTheory/Functor/Flat.lean",
+  "line": 302,
+  "how": "specializes in one line: take E = A, F = b.op, X = op W in lines 293–322. The small comma categories have colimits by the assumed V-small cocompleteness; HasPointwiseLeftKanExtension is the family of these colimits (KanExtension/Pointwise.lean:46–52), and its constructed left Kan extension exists by instHasLeftKanExtension at Pointwise.lean:659. CostructuredArrow b.op (op W) is I_W.op by structuredArrowOpEquivalence (Comma/StructuredArrow/Basic.lean); the displayed result is an isomorphism of functors in F, not merely an objectwise assertion. The local source puts the name in CategoryTheory, as the corrected Loogle result does."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-upper-star-exact",
+  "date": "2026-10-16",
+  "group": "Q35"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback"
+}

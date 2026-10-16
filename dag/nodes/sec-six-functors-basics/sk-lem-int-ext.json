@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-int-ext",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuity and boundedness of Ext",
@@ -26,66 +26,96 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sfb-constructible"
+ ],
  "proof": [
   {
-   "text": "Both statements reduce, by the long exact Ext sequences of a finite\nfiltration of $C$, to $C=a_!L$, where $a=i\\circ u:S\\hookrightarrow X$ is the\ninclusion of a stratum, with $u:S\\hookrightarrow Z$ open and\n$i:Z\\hookrightarrow X$ closed, and $L$ is locally the completion of a finitely\ngenerated $\\mathcal O_E$-module. Let $j$ be the open immersion complementary to\n$i$. [sk-lem-formal-closed-support] holds for $\\mathcal O_{E,X}$-modules with\nthe same proof. Tensor–Hom adjunction and the adjunction between $i_*$ and\n$R\\underline\\Gamma_Z$ give\n\n$$\nR\\operatorname{Hom}_X(a_!L,K)\n=R\\Gamma\\bigl(S,\\cHom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})\n\\otimes^{\\mathbf L}_{\\mathcal O_{E,S}}u^*R\\underline\\Gamma_ZK\\bigr).\n$$",
+   "text": "Fix $C\\in\\Dbc(X,\\mathcal O_E)$ and an integer $q$. Apply [det-lem-int-ext-continuity] to this $C$ and $q$: for every filtered diagram $(K_i)$ with a common lower bound, its statement gives the canonical isomorphism $\\operatorname{colim}_i\\Hom(C,K_i[q])\\simeq\\Hom(C,(\\operatorname{colim}_iK_i)[q])$. This is assertion (1).",
    "uses": [
-    "sk-lem-formal-closed-support"
+    "det-lem-int-ext-continuity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/_section.md",
+    "place": "Assertion (1); sk-lem-int-ext.proof.md, continuity paragraph, as stated in existing det-lem-int-ext-continuity"
+   }
   },
   {
-   "text": "By [sk-lem-int-integral-heart](3), tensoring with the dual\n$\\cHom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})$ has Tor amplitude $[0,1]$ and\ncommutes with filtered colimits.",
+   "text": "Fix $C\\in\\Cons(X,\\mathcal O_E)$. The final sentence of [det-lem-int-ext-bound] supplies an integer $d_C$ such that $\\Ext^q(C,N)=0$ for every $q>d_C$ and every $N\\in\\Cons(X,\\mathcal O_E)$. Choose that integer. It depends on $C$ and is independent of $N$, exactly as required in assertion (2).",
    "uses": [
-    "sk-lem-int-integral-heart"
+    "det-lem-int-ext-bound"
    ],
-   "elementary": false
-  },
-  {
-   "text": "(1) The proof of [sk-cor-pe-bounded-continuity] works for any sheaf of rings.\nApply it to the two terms of the fibre sequence defining\n$R\\underline\\Gamma_Z$ (as in the proof of\n[sk-lem-constructible-ext-continuity]) and use that tensoring with the dual\nhas finite Tor amplitude. This gives continuity for $C=a_!L$, and in\nparticular for $\\Hom$ and $\\Ext^1$ between constructible sheaves.",
-   "uses": [
-    "sk-lem-constructible-ext-continuity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(2) Let $N\\in\\Cons(X,\\mathcal O_E)$. Its reductions\n$N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n$ are constructible torsion\ncomplexes in degrees $[-1,0]$, by the length one resolution, and\n$N\\simeq R\\varprojlim_n(N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n)$ by\nderived completeness (Stacks, Tag 099Q). The cohomological dimensions\n$\\operatorname{cd}_\\ell(j)$ and $\\operatorname{cd}_\\ell(S)$ of [sk-def-cd] are\nfinite and depend only on $j$ and $S$. We bound the degrees of the formula\nabove, applied to each reduction of $N$:",
-   "uses": [
-    "sk-def-cd"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "- $R\\underline\\Gamma_Z$ of a torsion complex in degrees $[-1,0]$ has\n  cohomology in degrees $\\le\\operatorname{cd}_\\ell(j)+1$, by its fibre\n  description;\n- tensoring with the dual of $L$ raises the upper bound by at most one;\n- $R\\Gamma(S,-)$ raises it by at most $\\operatorname{cd}_\\ell(S)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Each reduction therefore contributes only in degrees\n$\\le\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. All the functors\ninvolved ($R\\underline\\Gamma_Z$, open restriction, derived sections, closed\ninverse image by Stacks, Tag 09AA, and tensoring with the dualizable dual of\n$L$) commute with derived inverse limits. The derived inverse limit of a\ncountable tower raises the upper bound by at most one (Milnor sequence,\nStacks, Tag 08TB); this applies because the complexes and transition maps can\nbe taken in the abelian category of inverse systems before deriving. Hence\n\n$$\n\\Ext^q_X(a_!L,N)=0\\qquad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The bound depends only on $a$. For general $C$, take the maximum over the\nfinitely many pieces $a_!L$ of a filtration of $C$.",
-   "uses": [],
-   "elementary": null
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/_section.md",
+    "place": "Assertion (2); sk-lem-int-ext.proof.md, final sentence; existing det-lem-int-ext-bound, final conclusion"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-formal-closed-support",
-  "sk-lem-int-integral-heart",
-  "sk-lem-constructible-ext-continuity",
-  "sk-def-cd"
+  "det-lem-int-ext-continuity",
+  "det-lem-int-ext-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "continuity and boundedness of Ext for integral constructible pro-etale complexes",
+   "results": "Condensed.profiniteSolid; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; Condensed.profiniteSolidification; CondensedMod.IsSolid; Condensed.profiniteSolidCounit; Condensed.lanSheafProfinite; LightCondSet.continuous_coinducingCoprod; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed constructions, not the stated Ext theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, Hom, FilteredColimits, DerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Hom'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier Hom; not evidence of absence; replaced by a valid qualified Ext query in second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*filtered|filtered.*Ext|constructible.*Ext (Mathlib/)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from bounded constructible complex commutes with filtered colimits and Ext vanishes above a uniform bound",
+   "results": "HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Limits.colimitLimitIso; HomologicalComplex.isGrothendieckAbelian; HomologicalComplex.ab5OfSize; ModuleCat.FilteredColimits.M; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; AddGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-17",
+   "verdict": "no match: generic filtered-colimit and Ext infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits.*[Ee]xt|[Ee]xt.*PreservesFilteredColimits|[Cc]onstructible.*[Ee]xt|[Ee]xt.*[Cc]onstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext, derived-category truncations or filtered colimits of complexes; none states pro-etale constructible Ext continuity and uniform vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a perfect sheaf complex preserves filtered colimits uniformly bounded below",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; DerivedCategory.IsGE; DerivedCategory.IsLE; HomologicalComplex.ab5OfSize; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext, derived-category truncations or filtered colimits of complexes; none states pro-etale constructible Ext continuity and uniform vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "12 hits: CategoryTheory.Abelian.Ext; CategoryTheory.Abelian.Ext.instAddCommGroup; CategoryTheory.hasExt_iff_small_ext; CategoryTheory.Abelian.Ext.mk₀; CategoryTheory.Abelian.Ext.chgUniv; CategoryTheory.Abelian.Ext.homEquiv₀; CategoryTheory.Abelian.extFunctorObj_obj_coe; CategoryTheory.Abelian.Ext.mk₀_bijective",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext, derived-category truncations or filtered colimits of complexes; none states pro-etale constructible Ext continuity and uniform vanishing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -105,5 +135,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-ext"
+ "unit": "sk-lem-int-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-int-ext",
+  "worker": "stage1",
+  "summary": "Reused the two existing same-unit detail statements for the two assertions, with no new nodes or statement change. Second reading removed the redundant reduction/formula step, applied the full general-C conclusions rather than attributing their proofs to their statements, added the existing coefficient and constructibility definition dependencies, corrected the rejected Loogle verdict, and renewed independent Mathlib searches.",
+  "blueprint": "The opening reduction/formula remains realized by the existing det-lem-int-ext-formula through both cited detail nodes and the unit realization. Step 1 applies det-lem-int-ext-continuity to realize assertion (1). Step 2 applies the general-C conclusion of det-lem-int-ext-bound to realize assertion (2), including the finite-devissage conclusion. No new copy of a blueprint clause is created."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-bc3aeed1c",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-bc3aeed1c (reviewer sub-agent of L); spot-checked: I read the item, unit, chapter, the main-20261015 _section.md and proof, all three det-lem-int-ext-* detail files with their proofs, and the two definition nodes. The statement is word for word the blueprint's and is unchanged: same coefficient category D(X_proet,O_E), common lower bound kept, d_C depends only on C. Step 1 cites det-lem-int-ext-continuity, whose statement is clause (1) exactly, for every q. Step 2 cites det-lem-int-ext-bound, whose final 'Consequently' sentence is clause (2) exactly. Both are existing same-unit blueprint detail nodes, which is how the blueprint itself splits this proof, so this is not D1/D2 relabelling and no new nodes were created. stmt_deps sk-def-sf-setting and sk-def-sfb-constructible define O_E, Cons and Dbc. Transitive closure from both cited nodes and both definitions never reaches the item, so no cycle; the two citers (det-prop-int-compactness-*) use clauses (1) and (2) as stated. Unit realized maps formula/continuity/bound/bound to the 4 proof paragraphs, and only realized and realized_by changed. Duplicate check: lem-weil-pbc-integral-constructible-bounded-below-compactness covers direct sums only; sk-lem-constructible-ext-continuity and sk-lem-uniform-constructible-ext are the rational or restricted versions; none duplicates the item. No slopmaster2 Lean for this item. Small cases: point with C=O_E (w-contractible, Gamma exact) and C=O_E/pi, N=O_E (Ext^1 nonzero, d_C=1); C=0; shifts. Mathlib searches cover all three kinds and the rejected Loogle query is labelled as rejected. No SGA, no tool_uses. A problem that predates this delivery: det-lem-int-ext-continuity's proof_deps leave out sk-cor-pe-bounded-continuity, which its text and the blueprint use; whoever splits that node should fix it. No fixes written."
+ }
 }

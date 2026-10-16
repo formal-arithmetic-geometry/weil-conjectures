@@ -3,22 +3,183 @@
  "blueprint": {
   "is": "pur713-def-ring-object",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Commutative ring object",
- "statement": "Let $(\\mathscr C,\\otimes,\\mathbb 1,\\beta)$ be a symmetric monoidal category. A commutative ring object of $\\mathscr C$ is an object $\\mathcal R$ with a multiplication $\\mu:\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$ and a unit $e:\\mathbb 1\\to\\mathcal R$, satisfying associativity, the two unit identities and commutativity $\\mu\\circ\\beta_{\\mathcal R,\\mathcal R}=\\mu$; these equations use the associativity and unit isomorphisms of $\\mathscr C$. A morphism of ring objects is a morphism of $\\mathscr C$ compatible with multiplications and units. In this section $\\mathscr C$ is $\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$ with the tensor product $\\otimes_{\\mathbf Z}$ of Definition “Tensor product of abelian sheaves” (`pur713-def-abelian-tensor`) and unit $\\mathbf Z_X$, unless another symmetric monoidal category is named.",
+ "statement": "Let $(\\mathscr C,\\otimes,\\mathbb 1,\\beta)$ be a symmetric monoidal category. A commutative ring object of $\\mathscr C$ is an object $\\mathcal R$ with a multiplication $\\mu:\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$ and a unit $e:\\mathbb 1\\to\\mathcal R$, satisfying associativity, the two unit identities and commutativity $\\mu\\circ\\beta_{\\mathcal R,\\mathcal R}=\\mu$; these equations use the associativity and unit isomorphisms of $\\mathscr C$. A morphism of ring objects is a morphism of $\\mathscr C$ compatible with multiplications and units. In this section $\\mathscr C$ is $\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$ with tensor product given by the sheafification of the objectwise tensor product over $\\mathbf Z$ and unit the constant sheaf $\\mathbf Z_X$, unless another symmetric monoidal category is named.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-ring-object.md",
   "place": "node pur713-def-ring-object, order 2472"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-def-sfb-ring-object-monoid",
+  "sk-def-sfb-sheaf-tensor"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "commutative ring object in a symmetric monoidal category multiplication unit commutativity",
+   "results": "OK 8 hits: CategoryTheory.IsCommMonObj.mul_comm, mul_comm', mul_comm_assoc, mul_comm'_assoc; CategoryTheory.IsCommMon, CategoryTheory.IsCommMonObj, CategoryTheory.Mon_Class.mul_mul_mul_comm', CategoryTheory.IsCommMonObj.instTensorUnit. Service reports Mathlib/CategoryTheory/Monoidal/Mon_; pinned source is Mon.lean.",
+   "date": "2026-10-17",
+   "verdict": "match for the commutativity equation; source inspected for remaining clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, CommMonoid, monoid object",
+   "results": "OK 0 hits | loogle: Unknown identifier `monoid`",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid pattern, corrected below"
+  },
+  {
+   "tool": "grep",
+   "query": "CommRingCat|CommMonoid|RingObject",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: supplied redundant Mathlib directory prefix; corrected below",
+   "subdirectory": "Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative monoid object in braided monoidal category multiplication unit morphisms",
+   "results": "OK 8 hits: CategoryTheory.IsCommMonObj.mul_comm, mul_comm', IsCommMon, mul_comm'_assoc, instTensorUnit, IsCommMonObj, CategoryTheory.CommMon_, CategoryTheory.CommMon.",
+   "date": "2026-10-17",
+   "verdict": "match: CommMon gives the complete bundled definition; read its pinned source"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCommMonObj, CategoryTheory.MonObj, MonoidalCategory",
+   "results": "OK 0 hits | loogle: unknown identifier 'MonoidalCategory'",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid unqualified identifier; corrected below"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCommMonObj|MonObj|commutative monoid object",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: redundant Mathlib prefix; corrected below",
+   "subdirectory": "Mathlib/CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative ring object consists of an object with multiplication and unit satisfying associativity, unit and commutativity in a symmetric monoidal category",
+   "results": "OK 8 hits: CommRing, CategoryTheory.CommMon.ctorIdx, CommRing.mk, CategoryTheory.CommMon_, CategoryTheory.CommMon, CommRing.mk.noConfusion, CategoryTheory.Mon.instMonObjOfIsCommMonObjX, CategoryTheory.Mon.instIsCommMonObj.",
+   "date": "2026-10-17",
+   "verdict": "match: CategoryTheory.CommMon is the intended tensor monoid definition; CommRing on types is not used"
+  },
+  {
+   "tool": "grep",
+   "query": "structure CommMon|def CommMon|CommMonHom",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: redundant Mathlib prefix; corrected below",
+   "subdirectory": "Mathlib/CategoryTheory/Monoidal/CommMon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon|IsCommMonObj|MonObj",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: redundant Mathlib prefix; corrected below",
+   "subdirectory": "Mathlib/CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommMon, CategoryTheory.IsCommMonObj",
+   "results": "OK 5 hits: CategoryTheory.CommMon.mk, CategoryTheory.CommMon.comm, CategoryTheory.CommMon.mkIso', CategoryTheory.CommMon.mkIso'_hom_hom_hom, CategoryTheory.CommMon.mkIso'_inv_hom_hom.",
+   "date": "2026-10-17",
+   "verdict": "match: constructor packages MonObj and IsCommMonObj, as read at CommMon_.lean:27–31"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative monoid object internal to a braided monoidal category",
+   "results": "OK 8 hits: CategoryTheory.IsCommMonObj, IsCommMon, CommMon_, CommMon, IsCommMonObj.mul_comm, CommMon.X, Mon.instIsCommMonObj, IsCommMonObj.mul_comm_assoc.",
+   "date": "2026-10-17",
+   "verdict": "match: independently locates the bundled definition, with braided hypotheses weaker than symmetric"
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: redundant Mathlib prefix; corrected below",
+   "subdirectory": "Mathlib/CategoryTheory/Monoidal/CommMon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCommMonObj",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: redundant Mathlib prefix; corrected below",
+   "subdirectory": "Mathlib/CategoryTheory/Monoidal/Mon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon",
+   "results": "OK 5 hits (single-file grep output parses line numbers as file): line 27 structure CommMon where; line 31 [comm : IsCommMonObj X]; line 33 attribute [instance] CommMon.mon CommMon.comm; line 35 namespace CommMon; line 39 def toMon. Read CommMon_.lean:23–71.",
+   "date": "2026-10-17",
+   "verdict": "match: exact bundled object and morphisms",
+   "subdirectory": "CategoryTheory/Monoidal/CommMon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCommMonObj",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: Mon_.lean is a deprecated forwarding module; definitions are in Mon.lean",
+   "subdirectory": "CategoryTheory/Monoidal/Mon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsCommMonObj|def IsCommMonObj|IsCommMonObj",
+   "results": "OK 25 hits, including Mathlib/CategoryTheory/Monoidal/Mon.lean:1222 class IsCommMonObj; Mon.lean:1233 mul_comm'; CommMon_.lean:31 comm field; Ring.lean:116 CommRingObj. Read Mon.lean:1213–1239.",
+   "date": "2026-10-17",
+   "verdict": "match: braided commutativity equation exactly; cartesian CommRingObj is distinct and not used",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "structure MonObj",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: actual declaration is a class, located below",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "CommRingObj",
+   "results": "OK 5 hits in Ring.lean at lines 17,21,116,119,121. Read Ring.lean:1–130.",
+   "date": "2026-10-17",
+   "verdict": "no match: requires CartesianMonoidalCategory and adds additive-group/distributivity data; tensor ring objects here are CommMon",
+   "subdirectory": "CategoryTheory/Monoidal/Ring.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommRingObj, CategoryTheory.RingObj",
+   "results": "OK 2 hits: CategoryTheory.CommRingObj.toRingObj, CategoryTheory.CommRingObj.mk, both require CartesianMonoidalCategory.",
+   "date": "2026-10-17",
+   "verdict": "no match: cartesian ring-object notion differs from the tensor monoid notion of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "^structure CommMon|^class MonObj|^class IsMonHom|^class IsCommMonObj",
+   "results": "OK 4 hits: Mathlib/CategoryTheory/Monoidal/CommMon_.lean:27 structure CommMon; Mathlib/CategoryTheory/Monoidal/Mon.lean:73 class MonObj, :213 class IsMonHom, :1222 class IsCommMonObj. Independently read all four definitions.",
+   "date": "2026-10-17",
+   "verdict": "match: complete data, laws and morphism compatibility",
+   "subdirectory": "CategoryTheory/Monoidal"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.CommMon, CategoryTheory.MonObj, CategoryTheory.IsCommMonObj, CategoryTheory.IsMonHom",
+  "file": "Mathlib/CategoryTheory/Monoidal/CommMon_.lean",
+  "line": 27,
+  "how": "specializes in one line: CommMon C at CommMon_.lean:27–31 packages an object X with MonObj X and IsCommMonObj X; a symmetric monoidal category supplies the required braided category. MonObj at Mathlib/CategoryTheory/Monoidal/Mon.lean:73–85 consists of one : 1 ⟶ X and mul : X tensor X ⟶ X, with both unit laws and associativity including the unitors and associator. IsCommMonObj at Mon.lean:1222–1223 is braiding.hom ≫ mul = mul. Morphisms in CommMon are induced from Mon (CommMon_.lean:52–53,70–71); Mon.Hom at Mon.lean:521–524 packages an underlying map and IsMonHom, whose two compatibility equations are at Mon.lean:213–215. Composition f ≫ g is g circ f, so these are exactly the equations of the item. For the contextual specialization to abelian sheaves, take C with the symmetric tensor and unit Z_X supplied by sk-def-sfb-sheaf-tensor (not the cartesian tensor). This names the ambient monoidal structure; no theorem identifying two different ring notions is required. All cited source lines read."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -28,5 +189,21 @@
  "blueprint_uses": [],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-ring-object",
+  "worker": "stage1",
+  "summary": "Checked the current source definition and found no project attachment. The whole abstract definition is the Mathlib CommMon construction with its MonObj, IsCommMonObj and IsMonHom fields; the sheaf context uses the existing tensor-definition node. Repaired only the dangling pur713-def-abelian-tensor reference to sk-def-sfb-sheaf-tensor and added the existing generic monoid-object and tensor statement dependencies. Recorded every search actually run, including unsuccessful path/pattern attempts, and inspected the pinned source definitions and morphisms. No mathematical clause or hypothesis changed; no new nodes or proof steps.",
+  "blueprint": "Realizes the full definition paragraph of pur713-def-ring-object within sk-def-sp-coefficient-towers. There is no proof paragraph and the item is not the unit key node. The general monoid/morphism/commutativity data are exactly det-def-sfb-ring-object-monoid and Mathlib CommMon; the final context is the specialization of sk-def-sfb-sheaf-tensor to Ab and the pro-étale site. Whole-blueprint searches found broader related nodes but none with exactly this standalone statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-f3a293c5f",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-f3a293c5f (reviewer sub-agent of L); spot-checked: Read the current blueprint pur713-def-ring-object.md (main-20261015, order 2472) and the full delivered item. The delivery has no new nodes. The statement keeps every clause of the source: in a symmetric monoidal category, mu: R⊗R→R and e: 1→R satisfy associativity and both unit laws using the associator and unitors, plus mu∘beta = mu; morphisms are compatible with mu and e. The only change replaces the dangling reference pur713-def-abelian-tensor with its meaning. A grep of master, main-20261015 and the DAG shows that id is only ever referenced, never defined. Its meaning, the sheafified objectwise ⊗_Z on Sh(X_proet,Ab) with unit Z_X, is the final paragraph and clause 1 of the existing split node sk-def-sfb-sheaf-tensor, which names X_proet as an admissible site. The other dependency, det-def-sfb-ring-object-monoid (a Mathlib leaf), gives exactly the equations of clauses 1–3; there is no cycle. I checked the Mathlib leaf against pinned source: CommMon_.lean:27-31 (CommMon over a BraidedCategory, and a symmetric category is braided), :52-53 (induced category), Mon.lean:73-85 (MonObj; read diagrammatically, the laws are mu∘(mu⊗id) = mu∘(id⊗mu)∘alpha, mu∘(e⊗id) = lambda, mu∘(id⊗e) = rho), :213-215 (IsMonHom), :521-524 (Mon.Hom) and :1222-1223 (IsCommMonObj). All line numbers are correct. Cartesian CommRingObj is correctly rejected. Edge cases: Z, Z/n and the zero ring in Ab all qualify, and in cartesian Set the definition gives commutative monoids; no hidden hypothesis. Duplicates: det-def-sfb-ring-object-monoid and sk-def-sfb-ring-object are broader and are reused as dependencies; same_as=[] is defensible. There are no proof steps, no route issue, no SGA, no target base-change involvement, no fixes and no tool_uses."
+ }
 }

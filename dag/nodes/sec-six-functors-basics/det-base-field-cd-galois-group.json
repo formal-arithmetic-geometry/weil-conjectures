@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-base-field-cd-galois-group",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The absolute Galois group of a finite field",
@@ -12,28 +12,154 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.md",
   "place": "node det-base-field-cd-galois-group, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-pd-separable-closure",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-root"
+ ],
  "proof": [
   {
-   "text": "A finite extension $L/K$ of degree $n$ has $q^n$ elements, and its multiplicative\ngroup has order $q^n-1$, so every element of $L$ is a root of $T^{q^n}-T$. This\npolynomial is separable (its derivative is $-1$) and has at most $q^n$ roots, so\n$L$ is exactly its set of roots in $K^{\\rm sep}$. Hence the degree-$n$\nsubextension is unique, and it is the splitting field of a separable polynomial,\nhence Galois of order $n$. The Frobenius $\\phi$ fixes $K$ and is an automorphism\nof $L$. If $\\phi$ had order $d<n$ on $L$, all $q^n$ elements of $L$ would be roots\nof $T^{q^d}-T$, which has at most $q^d<q^n$ roots; so $\\phi$ has order $n$ and\ngenerates the cyclic group $\\operatorname{Gal}(L/K)\\cong\\mathbf Z/n$, with $\\phi$\ncorresponding to $1$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [def-weil-finite-field-q-elements], write $q=p^a$ with $p$ prime and $a\\geq1$; in particular $q\\geq2$. By [lem-sfb-finite-field-separable-closure-algebraic], the given $K^{\\rm sep}$ is an algebraic closure of $K$. Apply [lem-weil-unique-subfield-of-closure] with $k_0=K$, $k=K^{\\rm sep}$ and the given embedding. For each $n\\geq1$ this constructs the subfield $K_n=\\{x:x^{q^n}=x\\}$ containing $K$, proves $|K_n|=q^n$, and proves uniqueness among subfields with that cardinality. This establishes existence, which the imported argument starting with an already given degree-$n$ extension did not establish.",
+   "uses": [
+    "def-weil-finite-field-q-elements",
+    "lem-sfb-finite-field-separable-closure-algebraic",
+    "lem-weil-unique-subfield-of-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 1, first four sentences; supply the missing existence argument using the existing unique-subfield lemma."
+   }
   },
   {
-   "text": "The finite subextensions $K_n$ are directed by divisibility, $K_d\\subseteq K_n$\nfor $d\\mid n$, and the restriction maps send $\\phi$ to $\\phi$, i.e. they are the\nreductions $\\mathbf Z/n\\to\\mathbf Z/d$. Since $K^{\\rm sep}=\\bigcup_nK_n$, Galois\ntheory gives\n$\\operatorname{Gal}(K^{\\rm sep}/K)=\\varprojlim_n\\operatorname{Gal}(K_n/K)\n\\cong\\varprojlim_n\\mathbf Z/n=\\widehat{\\mathbf Z}$ as profinite groups.",
+   "text": "For any finite-dimensional $K$-vector space $V$ of dimension $s$, choose a basis $b_1,\\ldots,b_s$ [def-weil-vector-space-dimension]. The map $K^s\\to V$, $(c_i)\\mapsto\\sum_i c_i b_i$, is bijective: spanning gives existence and linear independence gives uniqueness of coefficients. Thus $|V|=q^s$. The finite set $K_n$ spans itself over $K$, so it is finite-dimensional [def-weil-finite-dimensional-subspace]. To obtain a basis, successively delete a vector expressible in terms of the remaining vectors; this terminates, keeps the same span, and leaves a linearly independent set, since a nonzero coefficient in a linear relation would express one remaining vector in terms of the others. Writing $s=[K_n:K]$, the formula gives $q^s=q^n$, hence $s=n$ since $q\\geq2$. Conversely any degree-$n$ intermediate field $E$ has $q^n$ elements by the same coordinate bijection; uniqueness from step 1 gives $E=K_n$.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 1, first sentence and uniqueness: the elementary basis-coordinate count relating degree to cardinality."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-field-galois-frobenius] to $K\\subseteq K_n$, both finite fields, using $[K_n:K]=n$ from step 2. It gives that $K_n/K$ is Galois, that $\\phi_n:x\\mapsto x^q$ has order $n$, and that its first $n$ powers are exactly its automorphisms. Therefore $\\operatorname{Gal}(K_n/K)$ is cyclic of order $n$. The map $\\theta_n:\\mathbf Z/n\\to\\operatorname{Gal}(K_n/K)$, $[j]\\mapsto\\phi_n^j$, is well defined since $\\phi_n^n=1$, multiplicative since powers add, and bijective by the stated power bijection. In particular $\\theta_n(1)=\\phi_n$.",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 1, Galois and cyclic-generator conclusions. The cited Mathlib leaf proves the same smaller-order root-count argument (Finite/Basic.lean:374-394)."
+   }
+  },
+  {
+   "text": "The arithmetic Frobenius $\\phi$ on $K^{\\rm sep}$ is the automorphism $x\\mapsto x^q$ [def-weil-frobenius-substitution], applicable because step 1 identified this closure as an algebraic closure. It preserves $K_n$: if $x^{q^n}=x$, then $(x^q)^{q^n}=(x^{q^n})^q=x^q$; its restriction is the automorphism $\\phi_n$ of step 3. If $d\\mid n$, writing $n=dm$, iteration of $x^{q^d}=x$ gives $x^{q^n}=x$, so $K_d\\subseteq K_n$. Conversely, if $K_d\\subseteq K_n$, the restriction of $\\phi^n$ to $K_d$ is the identity, since every $x\\in K_n$ satisfies $x^{q^n}=x$. Divide $n=ad+r$ with $0\\leq r<d$: then $\\phi_d^r=1$, and order $d$ from step 3 forces $r=0$. Thus inclusion is exactly divisibility. In particular $K_{dn}$ contains $K_d$ and $K_n$. Every finite subextension $E/K$ has positive degree, since its vector space contains $1\\neq0$; it is therefore one of the $K_n$ by step 2, hence Galois by step 3. Every element of $K^{\\rm sep}$ lies in a finite separable subextension by [def-pd-separable-closure], so $K^{\\rm sep}=\\bigcup_{n\\geq1}K_n$.",
+   "uses": [
+    "def-weil-frobenius-substitution",
+    "def-pd-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 2, directedness by divisibility and the union of the finite subextensions; explicit reverse inclusion test and restriction formula."
+   }
+  },
+  {
+   "text": "The extension $K^{\\rm sep}/K$ is Galois by [lem-weil-pbc-separable-closure-exists-galois], part (2) with $k'=K$. Apply [lem-exc-galois-krull-finite-limit] to this extension. Its index set is all finite Galois intermediate fields. Step 4 identifies this set, with its inclusion ordering, with the positive integers ordered by divisibility, via $n\\mapsto K_n$. Consequently restriction gives an isomorphism of profinite groups\n$$\\operatorname{Gal}(K^{\\rm sep}/K)\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}\\operatorname{Gal}(K_n/K).$$\nNo smallness or cofinality theorem is being assumed: the intermediate fields are a set of subfields of the fixed field, and step 4 identifies every object and every inclusion in that set.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-galois-krull-finite-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BU2, label lemma-infinite-galois-limit, assertion (3) and its proof. This supplies the theorem invoked as “Galois theory gives” in blueprint proof paragraph 2."
+   }
+  },
+  {
+   "text": "For $d\\mid n$ and $x\\in K_d$, the restriction of $\\phi_n$ satisfies $\\phi_n(x)=x^q=\\phi_d(x)$. Thus restriction sends $\\theta_n([j])$ to $\\theta_d([j]\\bmod d)$. The isomorphisms $\\theta_n$ of step 3 therefore identify compatible automorphism tuples with compatible residue tuples, in both directions. These coordinate maps and their inverses are continuous because their source and target finite groups are discrete; the induced maps between the subspaces of the products are continuous by the definition of the product topology. Combining this coordinatewise homeomorphism with step 5 gives\n$$\\operatorname{Gal}(K^{\\rm sep}/K)\\cong\\varprojlim_{n\\geq1}\\mathbf Z/n=\\widehat{\\mathbf Z},$$\nwhere $\\widehat{\\mathbf Z}$ denotes the compatible residues, with their product-subspace topology and coordinatewise addition. The image of $\\phi$ is $(1\\bmod n)_n$ by step 4 and $\\theta_n(1)=\\phi_n$. This is the element $1$ of $\\widehat{\\mathbf Z}$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 2, restriction maps are reductions; coordinatewise limit identification and Frobenius corresponds to 1."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-finite-field-q-elements",
+  "lem-sfb-finite-field-separable-closure-algebraic",
+  "lem-weil-unique-subfield-of-closure",
+  "def-weil-vector-space-dimension",
+  "def-weil-finite-dimensional-subspace",
+  "lem-sfb-finite-field-galois-frobenius",
+  "def-weil-frobenius-substitution",
+  "def-pd-separable-closure",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-galois-krull-finite-limit"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+  "place": "Paragraphs 1-2, with the existence gap supplied by lem-weil-unique-subfield-of-closure and the profinite step by Stacks Tag 0BU2."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "absolute Galois group of a finite field is inverse limit of cyclic groups Z/n generated by Frobenius; unique degree n subfield roots of T^(q^n)-T",
+   "results": "8 hits: Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteField.Extension.frob, GaloisField, FiniteField.frobeniusAlgEquivOfAlgebraic, IsGaloisGroup.intermediateField, instFieldGaloisField",
+   "date": "2026-10-16",
+   "verdict": "no match: individual finite-field and infinite-Galois ingredients, not the complete statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "absolute Galois group of a finite field is inverse limit of cyclic groups Z/n generated by Frobenius; unique degree n subfield roots of T^(q^n)-T",
+   "results": "8 hits: Field.absoluteGaloisGroup, FiniteField.Extension.frob, FiniteField.Extension.exists_frob_pow_eq, Field.instGroupAbsoluteGaloisGroup, Field.absoluteGaloisGroupAbelianization, FiniteField.natCard_algEquiv_extension, FiniteField.card_algEquiv_extension, FiniteField.frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "no match: individual finite-field and infinite-Galois ingredients, not the complete statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"profinite\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: individual finite-field and infinite-Galois ingredients, not the complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "ZHat|ZMod|frobenius|FiniteField",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: individual finite-field and infinite-Galois ingredients, not the complete statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The automorphism group of the algebraic closure of a finite field is topologically isomorphic to the profinite completion of the integers, with cardinality Frobenius sent to one",
+   "results": "8 hits: FiniteField.frobeniusAlgEquivOfAlgebraic, InfiniteGalois.profiniteGalGrp, InfiniteGalois.algEquivToLimit, InfiniteGalois.continuousMulEquivToLimit, Field.absoluteGaloisGroup, Field.instTopologicalSpaceAbsoluteGaloisGroup, instIsTopologicalGroupAlgEquiv, InfiniteGalois.mulEquivToLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: definitions of absolute Galois groups, finite-field Frobenius, and the generic restriction limit; none states the finite-field identification with the profinite integers or the full unique-subextension assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"absoluteGaloisGroup\"",
+   "results": "12 hits: Field.absoluteGaloisGroup, Field.absoluteGaloisGroupAbelianization, Field.instGroupAbsoluteGaloisGroup, Field.instTopologicalSpaceAbsoluteGaloisGroup, Field.instIsTopologicalGroupAbsoluteGaloisGroup, Field.absoluteGaloisGroup.commutator_closure_isNormal, Field.absoluteGaloisGroup.map, Field.absoluteGaloisGroup.mapOfAlgebra",
+   "date": "2026-10-16",
+   "verdict": "no match: definitions of absolute Galois groups, finite-field Frobenius, and the generic restriction limit; none states the finite-field identification with the profinite integers or the full unique-subextension assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "absolute Galois group finite field profinite completion of integers Frobenius generator",
+   "results": "8 hits: FiniteField.Extension.frob, Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteField.frobeniusAlgEquivOfAlgebraic, InfiniteGalois.profiniteGalGrp, FiniteField.Extension.exists_frob_pow_eq, FiniteField.frobeniusAlgEquivOfAlgebraic_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: definitions of absolute Galois groups, finite-field Frobenius, and the generic restriction limit; none states the finite-field identification with the profinite integers or the full unique-subextension assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -42,5 +168,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-base-field-cd"
+ "unit": "sk-lem-base-field-cd",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-base-field-cd-galois-group",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the unique-subfield construction after the separable-closure Mathlib specialization; wrote basis counting, divisibility, finite-subextension coverage, transition maps, topology and the generator explicitly. Two new Mathlib leaves for the closure and finite Frobenius facts. Second reading removed the duplicate general limit leaf in favor of the existing Mathlib node lem-exc-galois-krull-finite-limit, independently checked sources and alternative Mathlib searches, and updated the citation quotation.",
+  "blueprint": "Proof paragraph 1 is realized by steps 1-3 (existence, degree and uniqueness, finite Galois and Frobenius). Proof paragraph 2 is realized by steps 4-6 (inclusion poset and union, profinite restriction limit, compatible cyclic identifications).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-unique-subfield-of-closure",
+    "why": "The existing general finite-subfield construction gives roots, cardinality and uniqueness in an algebraic closure; no separate node of this newly imported unit gives that construction, and the original paragraph omitted existence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-7b52369d4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-7b52369d4 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node in full, and found nothing to fix. The item's statement is the blueprint statement unchanged, and the six steps carry both proof paragraphs. Step 1: the new closure leaf makes the given K^sep an algebraic closure, so lem-weil-unique-subfield-of-closure clauses 1-3 apply with k_0=K and give existence, which the blueprint omitted. Step 2: the coordinate bijection gives |V|=q^dim, and q>=2 turns cardinality into degree. Step 3: the Frobenius leaf gives Galois, order n and the power bijection, so Z/n is isomorphic to Gal(K_n/K). Step 4: inclusion is equivalent to divisibility (division with remainder plus order d), and K^sep is the union of the K_n by the compositum clause of def-pd-separable-closure. Step 5: separable-closure-exists-galois (2) at k'=K, then lem-exc-galois-krull-finite-limit, with its index poset identified with (Z>=1, divisibility). Step 6: transition maps are reductions, the map is a homeomorphism coordinatewise, and phi goes to (1 mod n), including n=1. New leaf lem-sfb-finite-field-separable-closure-algebraic: IsSepClosure.isAlgClosure_of_perfectField (IsSepClosed.lean:244) with PerfectField.ofFinite (Perfect.lean:308); Stacks 030Z = algebra-lemma-perfect checked. New leaf lem-sfb-finite-field-galois-frobenius: Finite/Basic.lean:362,366,392-394,403-406 and GaloisField.lean:196-204, read; Stacks 09HY and 09I1 checked; true on F2/F2 and F4/F2. Neither leaf restates a clause of the item. An rg search of the whole DAG by Mathlib names, finite-field/Galois/Frobenius wording and Z-hat found no duplicates. Removing the earlier limit leaf in favour of the existing lem-exc-galois-krull-finite-limit was correct. I accept the declared tool use of lem-weil-unique-subfield-of-closure; the other off-unit citations are Mathlib leaves. This is not a target node and has no base-change or coefficient issue; no SGA source is used. review.md is written and fixes/ is empty."
+ }
 }

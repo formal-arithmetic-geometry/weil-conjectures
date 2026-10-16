@@ -13,71 +13,192 @@
  },
  "kind": "statement",
  "title": "Finite discrete-valuation normalization and tame inertia character",
- "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$ and residue characteristic $p>0$. Let $L/K$ be a finite Galois field extension (finite, normal and separable), and let $B$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. Then $B$ is a finite $A$-module, and for every maximal ideal $\\mathfrak n$ of $B$, the localization $B_{\\mathfrak n}$ is a discrete valuation ring with fraction field $L$ and residue field $\\kappa(\\mathfrak n)$ finite over the residue field of $A$. Put $D=\\{\\sigma\\in\\operatorname{Gal}(L/K):\\sigma(\\mathfrak n)=\\mathfrak n\\}$ and $I=\\{\\sigma\\in D:\\sigma\\text{ acts trivially on }\\kappa(\\mathfrak n)\\}$. If $t$ is a uniformizer of $B_{\\mathfrak n}$ and $e=v_{B_{\\mathfrak n}}(\\pi_A)$ is the ramification index for a uniformizer $\\pi_A$ of $A$, the formula $\\chi(\\sigma)=\\overline{\\sigma(t)/t}$ defines a homomorphism $\\chi:I\\to\\mu_e(\\kappa(\\mathfrak n))$, independent of $t$, where $\\mu_e(E)=\\{z\\in E^\\times:z^e=1\\}$. Its kernel $P$ is normal in $D$ and is a finite $p$-group. If $n$ is the largest divisor of $e$ prime to $p$, then $\\mu_e(\\kappa(\\mathfrak n))=\\mu_n(\\kappa(\\mathfrak n))$ is cyclic of order $n$, and $\\chi$ induces an isomorphism $I/P\\cong\\mu_n(\\kappa(\\mathfrak n))$.",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$ and residue characteristic $p>0$. Let $L/K$ be a finite Galois field extension (finite, normal and separable) [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], and let $B$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. Then $B$ is a finite $A$-module [def-weil-finitely-generated-module], and for every maximal ideal $\\mathfrak n$ of $B$, the localization $B_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime] is a discrete valuation ring with fraction field $L$ and residue field $\\kappa(\\mathfrak n)$ finite over the residue field of $A$. Put $D=\\{\\sigma\\in\\operatorname{Gal}(L/K):\\sigma(\\mathfrak n)=\\mathfrak n\\}$ and $I=\\{\\sigma\\in D:\\sigma\\text{ acts trivially on }\\kappa(\\mathfrak n)\\}$. If $t$ is a uniformizer of $B_{\\mathfrak n}$ and $e=v_{B_{\\mathfrak n}}(\\pi_A)$ is the ramification index for a uniformizer $\\pi_A$ of $A$, the formula $\\chi(\\sigma)=\\overline{\\sigma(t)/t}$ defines a homomorphism $\\chi:I\\to\\mu_e(\\kappa(\\mathfrak n))$, independent of $t$, where $\\mu_e(E)=\\{z\\in E^\\times:z^e=1\\}$. Its kernel $P$ is normal in $D$ and is a finite $p$-group (a finite group whose order is a power of $p$). If $n$ is the largest divisor of $e$ prime to $p$, then $\\mu_e(\\kappa(\\mathfrak n))=\\mu_n(\\kappa(\\mathfrak n))$ is cyclic of order $n$, and $\\chi$ induces an isomorphism $I/P\\cong\\mu_n(\\kappa(\\mathfrak n))$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tags 09E8 (remark-finite-separable-extension: finite normalization and DVR localizations) and 09EE (lemma-galois-inertia and equation-inertia-character: p-group kernel and cyclic tame quotient)"
  },
  "stmt_deps": [
   "def-sc-discrete-valuation-ring",
-  "def-weil-pbc-integral-closure"
+  "def-weil-pbc-integral-closure",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sc-discrete-valuation-ring], $A$ is a principal ideal domain. Apply [lem-weil-pbc-pid-noetherian-normal] to obtain that $A$ is Noetherian and integrally closed, and [lem-sc-dvr-dimension-one] to obtain $\\dim A=1$. Since the finite Galois extension $L/K$ is separable, [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] gives that its integral closure $B$ is a finite $A$-module.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8 (remark-finite-separable-extension), finite normalization sentence; finiteness uses finite separability, not excellence"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-integral-closure-dedekind-surjective-fibres] to the Noetherian dimension-one domain $A$ and the finite extension $L/K$. It gives that $B$ is Dedekind and all its residue extensions over $A$ are finite. For the chosen maximal ideal $\\mathfrak n$, [lem-sc-dedekind-localization-dvr] gives that $C=B_{\\mathfrak n}$ is a DVR. By [lem-weil-pbc-integral-closure-finite-extension-normal], $\\operatorname{Frac}(B)=L$. As $B\\subseteq C\\subseteq L$, taking fractions shows also $\\operatorname{Frac}(C)=L$: every fraction of elements of $C$ is in $L$, and every fraction of elements of $B$ is a fraction of elements of $C$. The residue field of $C$ identifies with $B/\\mathfrak n$, since every denominator outside $\\mathfrak n$ has nonzero, hence invertible, image in this field; this is $\\kappa(\\mathfrak n)$ in [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-sc-dedekind-localization-dvr",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8 (remark-finite-separable-extension), Dedekind domain and local DVR sentences"
+   }
+  },
+  {
+   "text": "The contraction $\\mathfrak q=\\mathfrak n\\cap A$ is the maximal ideal $\\mathfrak m_A$. Indeed $B/\\mathfrak n$ is a field integral over $A/\\mathfrak q$ by the monic-equation definition in [def-weil-pbc-integral-closure]. A subring $R$ of a field $E$ over which $E$ is integral is a field: for $0\\neq a\\in R$, a monic equation for $a^{-1}$, multiplied by $a^{d-1}$, expresses $a^{-1}$ as an element of $R$. Thus $\\mathfrak q$ is maximal and must be $\\mathfrak m_A$. The formula for the maximal ideal of $C$ in [def-weil-pbc-localization-at-prime] makes $A\\to C$ local. In particular $\\pi_A\\neq0$ belongs to $\\mathfrak m_C$, so $e=v_C(\\pi_A)>0$ and $\\pi_A=ut^e$ for a unit $u$. Every $K$-automorphism of $L$ preserves $B$ by applying it to monic equations. If it belongs to $D$, it extends to $C$ by $b/s\\mapsto\\sigma(b)/\\sigma(s)$, preserves $\\mathfrak m_C$, and induces an automorphism of $k'=\\kappa(\\mathfrak n)$. Hence $I$ is the kernel of the residue-action homomorphism of $D$ and is normal in $D$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-localization-at-prime",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8 and Tag 09EE (lemma-galois-inertia), passage to C and its group action; the contraction argument is written out"
+   }
+  },
+  {
+   "text": "Let $n$ be the largest divisor of $e$ prime to $p$. The hypotheses of [lem-exc-dvr-inertia-order-prime-part] now hold for $A,L,B,\\mathfrak n,C$: $C$ is a DVR by Step 2 and $A\\to C$ is local by Step 3. Consequently $|I|=np^b$ for some $b\\geq0$. This retains the possible purely inseparable part of the residue extension; no assertion $|I|=e$ is used.",
+   "uses": [
+    "lem-exc-dvr-inertia-order-prime-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), first proof paragraph, the prime-to-p order calculation"
+   }
+  },
+  {
+   "text": "For $\\sigma\\in I$, write $\\sigma(t)=a_\\sigma t$ with $a_\\sigma\\in C^\\times$, since it is another uniformizer. Applying $\\sigma$ to $\\pi_A=ut^e$ and cancelling $t^e$ gives $u=\\sigma(u)a_\\sigma^e$. Since $\\sigma$ fixes $k'$, reduction gives $\\bar a_\\sigma^e=1$. Define $\\chi(\\sigma)=\\bar a_\\sigma\\in\\mu_e(k')$. For $\\sigma,\\tau\\in I$, $a_{\\sigma\\tau}=\\sigma(a_\\tau)a_\\sigma$; reducing gives $\\chi(\\sigma\\tau)=\\chi(\\sigma)\\chi(\\tau)$. If $t'=wt$ with $w\\in C^\\times$, then $\\sigma(t')/t'=(\\sigma(w)/w)a_\\sigma$, whose reduction is unchanged. This proves both the homomorphism assertion and independence of $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), second proof paragraph and equation-inertia-character"
+   }
+  },
+  {
+   "text": "Let $P=\\ker\\chi$. For $\\delta\\in D$ and $\\sigma\\in P$, normality of $I$ gives $\\delta\\sigma\\delta^{-1}\\in I$. The element $t'=\\delta^{-1}(t)$ is a uniformizer of $C$. The residue of $(\\delta\\sigma\\delta^{-1})(t)/t$ is $\\bar\\delta(\\overline{\\sigma(t')/t'})=\\bar\\delta(\\chi(\\sigma))=1$, using the uniformizer independence from Step 5. Thus $\\delta\\sigma\\delta^{-1}\\in P$, so $P$ is normal in $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), proof of normality; explicit conjugation computation in place of the associated-graded description"
+   }
+  },
+  {
+   "text": "For $\\sigma\\in P$ and every $i\\geq0$, $(\\sigma-1)(t^iC)\\subseteq t^{i+1}C$. To check this on $t^i a$, use $\\sigma(a)\\equiv a\\pmod t$ and $\\sigma(t)/t\\equiv1\\pmod t$ to obtain $\\sigma(t^ia)-t^ia=t^i((\\sigma(t)/t)^i\\sigma(a)-a)\\in t^{i+1}C$. Now let $\\sigma\\neq1$ have order $m$, finite because $I$ is finite by Step 4. There is $c\\in C$ not fixed by $\\sigma$, since otherwise it fixes $\\operatorname{Frac}(C)=L$. For $d=\\sigma(c)-c\\neq0$, the discrete valuation gives $d\\in t^iC\\setminus t^{i+1}C$ for a finite integer $i\\geq1$. The preceding congruence implies $\\sigma^j(d)\\equiv d\\pmod{t^{i+1}}$ for all $j\\geq0$. Telescoping gives $0=\\sigma^m(c)-c=\\sum_{j=0}^{m-1}\\sigma^j(d)\\equiv m d\\pmod{t^{i+1}}$. Write $d=t^i a$ with $a$ a unit. Dividing the last containment by $t^i$ and reducing modulo $t$ gives $m\\bar a=0$ in the characteristic-$p$ field $k'$, hence $p\\mid m$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), telescoping proof of the p-group assertion, with the valuation and congruences explicit"
+   }
+  },
+  {
+   "text": "The group $P$ is finite as a subgroup of the finite group $I$ from Step 4. If a prime $q$ divides $|P|$, [lem-exc-finite-group-cauchy] supplies $\\sigma\\in P$ of order exactly $q$. It is nonidentity because $q>1$, so Step 7 gives $p\\mid q$, whence $q=p$. Thus every prime divisor of the positive integer $|P|$ is $p$. Integer prime factorization gives $|P|=p^a$ for some $a\\geq0$, including $a=0$ if $P=1$. This proves the finite p-group assertion.",
+   "uses": [
+    "lem-exc-finite-group-cauchy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), final sentence of the p-group argument, making its Cauchy-theorem input explicit"
+   }
+  },
+  {
+   "text": "Write $e=np^s$. Since $p$ is prime, the intermediate binomial coefficients $\\binom{p}{j}$ vanish in characteristic $p$, so $(X^n-1)^p=X^{np}-1$. Iterating $s$ times gives $X^e-1=(X^n-1)^{p^s}$, which shows that $\\mu_e(k')=\\mu_n(k')$: a power of an element of a field is zero only if that element is zero. By [lem-exc-field-roots-cyclic-bound], $\\mu_n(k')$ is finite cyclic with at most $n$ elements. If $z$ is a generator and its order is $r$, the equality $z^n=1$ and division of $n$ by $r$ show $r\\mid n$. The cosets of a subgroup partition a finite group into sets of equal subgroup size, so its order divides the group order. Consequently the orders of $\\mu_n(k')$ and of every subgroup, including $\\operatorname{im}\\chi$, divide $n$ and are prime to $p$.",
+   "uses": [
+    "lem-exc-field-roots-cyclic-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW (section-roots-of-1), opening root bound, cyclicity and final characteristic-p observation; the application is the roots-of-unity paragraph of more-algebra.tex Tag 09EE (lemma-galois-inertia)"
+   }
+  },
+  {
+   "text": "Put $h=|\\operatorname{im}\\chi|$. Each fibre of $\\chi:I\\to\\operatorname{im}\\chi$ is a coset of $P$, so $|I|=|P|h$. By Steps 4 and 8, $np^b=p^a h$, and $h$ is prime to $p$ by Step 9. Taking prime-to-$p$ parts gives $h=n$. But $\\operatorname{im}\\chi\\subseteq\\mu_n(k')$ and $|\\mu_n(k')|\\leq n$, so equality of the finite sets follows, and $|\\mu_n(k')|=n$. Finally the map on cosets $I/P\\to\\mu_n(k')$, $\\sigma P\\mapsto\\chi(\\sigma)$, is well-defined and multiplicative. It is surjective by the equality of the image just proved; if two values coincide, their quotient belongs to $\\ker\\chi=P$, so the cosets coincide. This is the asserted isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), conclusion of parts (4) and (5) after the p-group assertion; the cardinality comparison is written in the correct direction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-integral-closure",
+  "lem-exc-dvr-inertia-order-prime-part",
+  "lem-exc-finite-group-cauchy",
+  "lem-exc-field-roots-cyclic-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09E8 (remark-finite-separable-extension) and 09EE (lemma-galois-inertia), proof through parts (1)-(5); normality is checked directly by conjugating the uniformizer character."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a finite Galois extension of a discrete valuation field, the integral closure is finite with DVR localizations and the uniformizer inertia character has p-group kernel and cyclic prime-to-p image",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDeg_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. If $ p \\neq 0 $ and there are no zero divisors in the scalar multiplication fro\"}\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Ideal.inertiaDegIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] {p : Ideal A} [p.IsMaximal]\\n  [IsDomain A] [Module.IsTorsionFree A B] [Module.Finite A B] [Nontrivial\", \"doc\": \"Let $ A $ be an integral domain, $ B $ a non-trivial finitely generated torsion-free $ A $-module, and $ p $ a maximal ideal of $ A $. Then the inertia degree $ \\\\text{inertiaDegIn}(p, B) $ is non-zero\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [p.IsMaximal], p.inertiaDegIn B =\", \"doc\": \"If $ \\\\mathfrak{p} $ is a maximal ideal in a ring $ R $, then the inertia degree of $ \\\\mathfrak{p} $ in a ring extension $ B $ equals the inertia degree of $ \\\\mathfrak{p} $ in an ideal $ \\\\mathfrak{P} $\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"Ideal.relNorm_eq_pow_of_isPrime_isGalois\", \"module\": \"Mathlib/RingTheory/Ideal/Norm/RelNorm\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] {S : Type u_3} [inst_2 : CommRing S] [inst_3 : IsDomain S]\\n  [inst_4 : IsIntegrallyClosed R] [inst_5 : IsIntegrallyClosed S] [inst_6 : Algebra R S] [inst_7 : Module.Finite R S]\\n  [inst_8 : Module.IsTorsionFree R S] [inst_9 : IsDedekindDomain\", \"doc\": \"Let $ R $ and $ S $ be Dedekind domains with $ R \\\\subseteq S $, and let $ p \\\\subseteq R $ be a maximal ideal. If $ P \\\\subseteq S $ is a prime ideal lying over $ p $ (i.e., $ P \\\\cap R = p $) and the fi\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}",
-   "date": "2026-10-16",
-   "verdict": "No match: the hits define inertia or compute its order/ramification index, but none supplies a uniformizer character with p-group kernel and cyclic tame quotient."
+   "query": "Finite Galois extensions of discrete valuation fields have a uniformizer inertia character with p group kernel and cyclic tame quotient",
+   "results": "Search returned 8 hits: Ideal.inertiaDegIn_ne_zero, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDeg_eq_of_isGalois, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDegIn_eq_inertiaDeg, ValuationSubring.inertiaSubgroup. ",
+   "date": "2026-10-17",
+   "verdict": "no match: RamificationGroup.lean defines decompositionSubgroup and inertiaSubgroup, but has no tame character or p-group-kernel theorem; the RamificationInertia hits compute orders only under additional residue hypotheses. No single exact project declaration was found either."
   },
   {
    "tool": "leansearch",
-   "query": "The wild inertia subgroup of a finite Galois extension of a discrete valuation field is a p-group and the tame inertia quotient is cyclic",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib.RingTheory.Valuation.RamificationGroup\", \"type\": \"(A : ValuationSubring L) : Subgroup (A.decompositionSubgroup K)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain R] [IsDedekindDomain S] [Module.Finite R S] [IsTorsionFree R S] (p : Ideal R) (hp : p ≠ ⊥)\\n  (P : Ideal S) [P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparable (R ⧸ p) (S ⧸ P)] :\\n  Nat.card (P.toAddSubgroup.inertia G) = Ideal.ramificationIdxIn p S\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \": (primesOver p B).ncard * (ramificationIdxIn p B * inertiaDegIn p B) = Nat.card G\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a Dedekind domain $A$ with finite Galois extension $A \\\\to B$ having Galois group $G$, the cardinality of $G$ equals the product of: (1) the number of distinct prime\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"(p : Ideal R) [p.IsMaximal] (P : Ideal S) [P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparable (R ⧸ p) (S ⧸ P)] :\\n  (p.primesOver S).ncard * Nat.card (P.toAddSubgroup.inertia G) * Module.finrank (R ⧸ p) (S ⧸ P) = Nat.card G\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[p.IsMaximal] [P.IsMaximal] : p.inertiaDegIn B * P.inertiaDegIn C = p.inertiaDegIn C\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[p.IsMaximal] : inertiaDeg p P = inertiaDeg p Q\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}\n  {\"name\": \"IsArithFrobAt.mul_inv_mem_inertia\", \"module\": \"Mathlib.RingTheory.Frobenius\", \"type\": \"(H : IsArithFrobAt R σ Q) (H' : IsArithFrobAt R σ' Q) : σ * σ'⁻¹ ∈ Q.toAddSubgroup.inertia G\", \"doc\": \"If $\\\\sigma$ and $\\\\sigma'$ satisfy the arithmetic Frobenius condition at an ideal $Q \\\\subseteq S$, then the product $\\\\sigma \\\\cdot (\\\\sigma')^{-1}$ lies in the inertia subgroup of the additive subgroup $\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[Finite G] [hGKL : IsGaloisGroup G K L] : IsGaloisGroup (fixingSubgroup G (F : Set L)) F L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: the hits define inertia or compute its order/ramification index, but none supplies a uniformizer character with p-group kernel and cyclic tame quotient."
+   "query": "Finite inertia tame character wild inertia p group",
+   "results": "Search returned 8 hits: AddSubgroup.mem_inertia, AddSubgroup.inertia, AddSubgroup.subgroupOf_inertia, Ideal.inertiaDeg_eq_of_isGaloisGroup, ValuationSubring.inertiaSubgroup, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_mul_inertiaDegIn. ",
+   "date": "2026-10-17",
+   "verdict": "no match: RamificationGroup.lean defines decompositionSubgroup and inertiaSubgroup, but has no tame character or p-group-kernel theorem; the RamificationInertia hits compute orders only under additional residue hypotheses. No single exact project declaration was found either."
   },
   {
    "tool": "loogle",
-   "query": "\"inertiaSubgroup\"",
-   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib.RingTheory.Valuation.RamificationGroup\", \"type\": \" (K : Type u_1) {L : Type u_2} [Field K] [Field L] [Algebra K L] (A : ValuationSubring L) : Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup defined as the kernel of the group homomorphism from\\nthe decomposition subgroup to the group of automorphisms of the residue field of `A`. \"}",
-   "date": "2026-10-16",
-   "verdict": "No match: the hits define inertia or compute its order/ramification index, but none supplies a uniformizer character with p-group kernel and cyclic tame quotient."
-  },
-  {
-   "tool": "grep",
-   "query": "wild.*inertia|tame.*inertia|inertiaSubgroup|ramificationIdx_mul_inertiaDeg",
-   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Valuation/RamificationGroup.lean\", \"line\": \"50\", \"text\": \"noncomputable def inertiaSubgroup (A : ValuationSubring L) : Subgroup (A.decompositionSubgroup K) :=\"}\nSearched Mathlib/RingTheory",
-   "date": "2026-10-16",
-   "verdict": "No match: the hits define inertia or compute its order/ramification index, but none supplies a uniformizer character with p-group kernel and cyclic tame quotient."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A finite discrete valuation ring Galois extension acts on the cotangent line of the maximal ideal with cyclic prime-to-residue-characteristic image and p-group kernel",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Ideal.inertiaDegIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] {p : Ideal A} [p.IsMaximal]\\n  [IsDomain A] [Module.IsTorsionFree A B] [Module.Finite A B] [Nontrivial\", \"doc\": \"Let $ A $ be an integral domain, $ B $ a non-trivial finitely generated torsion-free $ A $-module, and $ p $ a maximal ideal of $ A $. Then the inertia degree $ \\\\text{inertiaDegIn}(p, B) $ is non-zero\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib/RingTheory/Valuation/RamificationGroup\", \"type\": \"(K : Type u_1) →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] → (A : ValuationSubring L) → Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [p.IsMaximal], p.inertiaDegIn B =\", \"doc\": \"If $ \\\\mathfrak{p} $ is a maximal ideal in a ring $ R $, then the inertia degree of $ \\\\mathfrak{p} $ in a ring extension $ B $ equals the inertia degree of $ \\\\mathfrak{p} $ in an ideal $ \\\\mathfrak{P} $\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] [IsDedekindDomain R]\\n  [IsDedekindDomain S] [Module.Finite R S] [Module.IsTorsionFree R S] (p : Ideal\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}",
-   "date": "2026-10-16",
-   "verdict": "No match: the hits define inertia or compute its order/ramification index, but none supplies a uniformizer character with p-group kernel and cyclic tame quotient."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Ramification groups of a discrete valuation: the first ramification group is a p group and the inertia quotient embeds in residue field units",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib/RingTheory/Valuation/RamificationGroup\", \"type\": \"(K : Type u_1) →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] → (A : ValuationSubring L) → Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Ideal.sum_ramification_inertia\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R]\\n  [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a commutative ring $R$, with $B$ a Dedekind domain over $R$, and $\\\\mathfrak{P}_1, \\\\ldots, \\\\mathfrak{P}_n$ the prime ideals in $B$ lying over $\\\\mathfrak{p}$, the s\"}\n  {\"name\": \"ValuationSubring.decompositionSubgroup\", \"module\": \"Mathlib/RingTheory/Valuation/RamificationGroup\", \"type\": \"(K : Type u_1) →\\n  {L : Type u_2} →\\n    [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → ValuationSubring L → Subgroup (L ≃ₐ[K] L)\", \"doc\": \"The subgroup of $K$-algebra automorphisms of $L$ that stabilize the valuation subring $A$, consisting of all automorphisms $\\\\sigma \\\\in \\\\text{Aut}_K(L)$ satisfying $\\\\sigma(A) = A$. This is the stabiliz\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] [IsDedekindDomain R]\\n  [IsDedekindDomain S] [Module.Finite R S] [Module.IsTorsionFree R S] (p : Ideal\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Ideal.ramificationIdxIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [IsDedekindDomain B]\\n  {p : Ideal A} [p.IsPrime], p ≠ ⊥ → ∀ [IsDomain A] [Module.IsTorsionFree A B], \", \"doc\": \"Let $ A $ be an integral domain and $ B $ a Dedekind domain that is torsion-free as an $ A $-module. For any non-zero prime ideal $ \\\\mathfrak{p} $ of $ A $, the ramification index of $ \\\\mathfrak{p} $ \"}",
-   "date": "2026-10-16",
-   "verdict": "No match: inertiaSubgroup is a definition and the ramification-index formulas do not give the wild p-group kernel or tame character."
-  },
-  {
-   "tool": "grep",
-   "query": "ramification.*(inertia|index)|inertia.*(order|card)|wild",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Valuation.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.RamificationInertia.Ramification\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Valuation.lean\", \"line\": \"25\", \"text\": \"adic valuation on `L` associated to `w`, in terms of the ramification index.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.RamificationInertia.Galois\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"25\", \"text\": \"Let `e` and `f` the ramification index and inertia degree of `P` over `p` and let `g`\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"178\", \"text\": \"ramification index and the inertia degree of `p` in `B`.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"181\", \"text\": \"    Module.finrank D L = p.ramificationIdxIn B * p.inertiaDegIn B := by\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"198\", \"text\": \"    ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn p B Gal(L/K),\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"13\", \"text\": \"# Ramification index\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"17\", \"text\": \"the **ramification index** `Ideal.ramificationIdx' p P` is the multiplicity of `P` in `map f p`.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"32\", \"text\": \"In this file, `e` stands for the ramification index of `P` over `p`, leaving `p` and `P` implicit.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"57\", \"text\": \"/-- The ramification index of `P` over `p` is the largest exponent `n` such that\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"60\", \"text\": \"In particular, if `p` is not contained in `P^n`, then the ramification index is 0.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"12\", \"text\": \"# Ramification index and inertia degree\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.RamificationInertia.Basic\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"13\", \"text\": \"# Unramified and ramification index\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"148\", \"text\": \"/-- For a prime `𝔓` of `S` lying over an unramified prime `𝔭` of `R`, the ramification index\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"158\", \"text\": \"over it has ramification index `1`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.RamificationInertia.Basic\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"32\", \"text\": \"* `Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn`: Let `p` be a prime of `A`,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"33\", \"text\": \"  `r` be the number of prime ideals lying over `p`, `e` be the ramification index of `p` in `B`,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"35\", \"text\": \"  `Ideal.sum_ramification_inertia` in the case of Galois extension.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"38\", \"text\": \"  The cardinality of the inertia group is equal to the ramification index.\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.RamificationInertia.Inertia\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.NumberTheory.RamificationInertia.Ramification\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"line\": \"14\", \"text\": \"# Ramification index and inertia degree\"}\n",
+   "query": "ValuationSubring.inertiaSubgroup",
+   "results": "Search returned 1 hits: ValuationSubring.inertiaSubgroup. ",
    "date": "2026-10-17",
-   "verdict": "No exact match: ramification indices and inertia cardinalities do not assert the uniformizer character or its wild p-group kernel."
+   "verdict": "no match: RamificationGroup.lean defines decompositionSubgroup and inertiaSubgroup, but has no tame character or p-group-kernel theorem; the RamificationInertia hits compute orders only under additional residue hypotheses. No single exact project declaration was found either."
+  },
+  {
+   "tool": "grep",
+   "query": "tame|wild|inertiaSubgroup",
+   "results": "Search returned 1 hits: Mathlib/RingTheory/Valuation/RamificationGroup.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: RamificationGroup.lean defines decompositionSubgroup and inertiaSubgroup, but has no tame character or p-group-kernel theorem; the RamificationInertia hits compute orders only under additional residue hypotheses. No single exact project declaration was found either.",
+   "subdirectory": "RingTheory/Valuation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete valuation ring inertia tame quotient roots of unity ramification character",
+   "results": "Search returned 8 hits: IsCyclotomicExtension.Rat.inertiaDeg_eq, IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime_pow, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, IsCyclotomicExtension.Rat.inertiaDeg_eq_of_prime_pow, Ideal.inertiaDegIn_ne_zero, Ideal.sum_ramification_inertia, Ideal.ramificationIdx_le_finrank. ",
+   "date": "2026-10-17",
+   "verdict": "no match: RamificationGroup.lean defines decompositionSubgroup and inertiaSubgroup, but has no tame character or p-group-kernel theorem; the RamificationInertia hits compute orders only under additional residue hypotheses. No single exact project declaration was found either."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-henselian-dvr-tame-sequence",
@@ -85,5 +206,20 @@
   "group": "Q05"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-finite-dvr-tame-inertia",
+  "worker": "stage1",
+  "summary": "Expanded finite normalization using existing PID, normalization and Dedekind-localization nodes. Proved the tame character, its uniformizer independence, kernel normality, the valuation telescoping estimate, the Cauchy p-group implication and surjectivity by explicit finite-order comparison. Added one strictly auxiliary statement-only numerical inertia-order lemma allowing imperfect residue fields and two exact Mathlib leaves (Cauchy and cyclic roots with cardinality bound). No mathematical statement was changed; existing notion references and the meaning of finite p-group were made explicit. Second reading removed the worker-authored tool-use decision for maintainer review, corrected the roots-of-unity source file and expanded the Frobenius identity by binomial coefficients.",
+  "blueprint": "Realizes lem-exc-dvr-galois.proof.md, first paragraph, in main-20261015: finite DVR normalization, the uniformizer character, its cyclic prime-to-p image and p-group kernel, with the degree/ramification calculation exposed. The item is a non-key descendant in the inherited sk-prop-a1-kummer unit; no unit or chapter record is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-919a6d11f",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-919a6d11f (reviewer sub-agent of L); spot-checked: I read the full item and all three new nodes against Stacks more-algebra 09E8 and 09EE (both proofs read; 09EA, 09EB and 09ED also read) and fields 09HS, 09HW and 09HX. The item's assertion is unchanged from the base copy; only definition references were added. Its hypotheses match the source exactly: an arbitrary DVR and finite Galois L/K, with no henselian, excellent or perfect-residue assumption. Steps 1-10 hold. Step 3 shows that n meets A in the maximal ideal and that I is normal in D. Steps 5 and 6 prove that χ is a homomorphism independent of t and that ker χ is normal by conjugating the uniformizer. Steps 7 and 8 carry out the valuation telescoping and the Cauchy argument, so |P| is a power of p. Steps 9 and 10 show μ_e = μ_n, then compare prime-to-p parts to get |im χ| = n and the isomorphism. lem-exc-dvr-inertia-order-prime-part is true (|D| = ef, the surjection onto Aut of the normal residue extension, and |Aut| = f_s give |I| = e·p^c). It is strictly smaller than the item and not a duplicate; its unsplit status is justified because Mathlib's inertia order theorems require a perfect residue field. The Cauchy leaf (exists_prime_orderOf_dvd_card', Perm/Cycle/Type.lean:544) and the roots leaf (Finite at 245, rootsOfUnity.isCyclic at 249, card_rootsOfUnity at 252 of RootsOfUnity/Basic.lean, with NeZero k at 208) match the pinned Mathlib. A rg search of the DAG and blueprint_refs searches found no duplicates. Blueprint from/via/same_as are correct and no SGA source is used. Edge cases checked: L = K; tame Kummer; Artin–Schreier; and the imperfect-residue example after 09EE, where e = 1 and |I| = 2. One off-unit dependency: step 2 uses lem-sc-integral-closure-dedekind-surjective-fibres (unit sk-thm-curveestimate). I accept it as tool_uses: it is a generic result that the integral closure is Dedekind, as 09E8 itself uses, and no node of sk-prop-a1-kummer gives it. No fixes."
+ }
 }

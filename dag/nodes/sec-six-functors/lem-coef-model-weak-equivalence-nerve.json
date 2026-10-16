@@ -26,9 +26,95 @@
   "lem-coef-cosimplicial-frame-mapping",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=w\\mathcal S$ and $B=NC$, interpreted as a space by Kan replacement when necessary. Use [lem-coef-locally-constant-presheaf-slice]. For $x\\in C$, the image of $h_x$ under its left Quillen functor is $N(C/x)\\to B$. The terminal object $(x,1_x)$ contracts $N(C/x)$: the arrow from $(z,u:z\\to x)$ to $(x,1_x)$ is $u$. On nerves the contraction sends a chain to the chain with this final arrow appended. Its projection to $B$ is the corresponding homotopy to the vertex $x$. Thus $N(C/x)\\to B$ is weakly equivalent, in the slice, to the vertex $x\\to B$, via the inclusion of that terminal object. Consequently the derived slice mapping space from $N(C/y)$ to $N(C/x)$ is the path space $\\operatorname{Path}_B(y,x)$. Here is a fibrant model even when the raw nerve $B$ is not Kan. Choose $r:B\\to B^{\\mathrm{Kan}}$. Write $K_0=B^{\\mathrm{Kan}}$. The simplicial model structure on the slice in [lem-coef-locally-constant-presheaf-slice] gives the Kan fibration $K_0^{\\Delta^1}\\to K_0^{\\partial\\Delta^1}=K_0\\times K_0$: the simplicial lifting axiom applies to the cofibration $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and the fibration $K_0\\to *$. Restricting its final endpoint to $rx$ gives the path fibration $P_x\\to B^{\\mathrm{Kan}}$ of paths ending at $rx$, with projection the initial endpoint. Its total space contracts by precomposition with the nerve of $\\max:[1]\\times[1]\\to[1]$: at the first parameter endpoint this is the identity path, at the second it is the constant path at $rx$, and the final endpoint stays $rx$. Pull it back to $B$. By [lem-coef-kan-quillen-right-proper] the pullback has contractible total space, since its map to $P_x$ is a pullback of $r$ along that Kan fibration. Its map to $B$ is a fibration, and the constant path gives a weak equivalence from the vertex $x$. Its fiber at $y$ is $\\operatorname{Path}_{B^{\\mathrm{Kan}}}(ry,rx)$, which is precisely the derived slice mapping space from the vertex $y$ to the vertex $x$.",
+   "uses": [
+    "lem-coef-locally-constant-presheaf-slice",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proposition A.0.3, proof, first paragraph on printed p. 208: N(C/x) represents the vertex x in the slice"
+   }
+  },
+  {
+   "text": "For $x\\in\\mathcal S$, [lem-coef-weak-equivalence-representable-local-model] supplies the actual local weak equivalence $h_x\\to E_x$, with $E_x(y)\\simeq\\operatorname{Map}^{\\mathrm{eq}}_{\\mathcal M_\\infty}(qy,qx)$. The enriched evaluation and derived Quillen comparison of [lem-coef-locally-constant-presheaf-slice] therefore give\n$$\\operatorname{Map}^{\\mathrm{eq}}_{\\mathcal M_\\infty}(qy,qx)\\simeq E_x(y)\\simeq\\operatorname{Map}^{h}_{P_{\\mathrm{lc}}(C)}(h_y,h_x)\\simeq\\operatorname{Path}_B(y,x).$$\nAll four terms refer to the same $x,y$ and the same $C$. The local-model unit sends an actual weak equivalence to its image under $q$, and the slice comparison sends its Yoneda morphism to the corresponding path in $NC$. Hence the inverse displayed equivalence is the map on paths induced by localization, including composition and its homotopies, rather than an unrelated equivalence of the two spaces.",
+   "uses": [
+    "lem-coef-locally-constant-presheaf-slice",
+    "lem-coef-weak-equivalence-representable-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Paragraph between Proposition A.0.3 and Corollary A.0.4, printed p. 208: the four-term mapping-space comparison"
+   }
+  },
+  {
+   "text": "Let $K=((\\mathcal M_\\infty)_{\\mathcal S})^\\simeq$. It is Kan by [lem-cbc-enhanced-functor-cone-calculus]. The actual localization map $NC\\to K$ sends every arrow to an equivalence. Choose a Kan replacement $NC\\to B^{\\mathrm{Kan}}$. The universal groupoid-localization property [lem-cbc-simplicial-groupoid-localization] extends it to a map $a:B^{\\mathrm{Kan}}\\to K$ with its specified comparison on $NC$. The mapping spaces of $K$ are precisely the equivalence components of the ambient mapping spaces: its simplices retain exactly the equivalence edges and their higher simplices. Step 2 therefore says that $a$ induces an equivalence on every path space with endpoints represented by $\\mathcal S$. Every component on each side contains such a vertex. Surjectivity on components follows; if two vertices have the same component in $K$, their path space there is nonempty, hence so is the path space in $B^{\\mathrm{Kan}}$, proving injectivity. At a vertex $x$, taking $y=x$ in Step 2 identifies based loop spaces. Since $\\pi_n(B,x)=\\pi_{n-1}\\operatorname{Path}_B(x,x)$ for $n\\geq1$ (with the loop-group interpretation for $n=1$), it identifies every homotopy group. This is exactly weak homotopy equivalence. It also proves the claimed path-space formula. Components of the core are isomorphism classes in the homotopy category, so it proves the $\\pi_0$ formula as well.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Corollary A.0.4 and preceding path comparison, pp. 208-209; core reformulation and homotopy-group check written out"
+   }
+  },
+  {
+   "text": "Choose a functorial cofibrant replacement $e:Q\\to1$ by factoring the initial-object maps as cofibrations followed by trivial fibrations. Naturality gives $e_YQw=we_X$, so two-out-of-three makes $Qw$ a weak equivalence whenever $w$ is. Closure of $\\mathcal S$ under weak equivalences makes $Q:w\\mathcal S\\to w\\mathcal S_c$ well-defined. For the inclusion $i_c$, the restrictions of $e$ give $i_cQ\\Rightarrow1$ and $Qi_c\\Rightarrow1$, with components in the respective weak-equivalence categories. To see directly that their nerves are homotopies, for $\\alpha:F\\Rightarrow G$ the $j$th prism on $x_0\\to\\cdots\\to x_n$ is\n$$Fx_0\\to\\cdots\\to Fx_j\\xrightarrow{\\alpha_{x_j}}Gx_j\\to\\cdots\\to Gx_n\\quad(0\\leq j\\leq n).$$\nNaturality identifies the switching faces; deletion, composition and identity insertion give all other face and degeneracy equations. Thus $Ni_c$ and $NQ$ are homotopy inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proposition A.0.6, proof of the left arrow, printed p. 209; explicit cofibrant, fibrant and bifibrant replacement/prism argument"
+   }
+  },
+  {
+   "text": "Factor terminal-object maps functorially as trivial cofibrations $t_X:X\\to TX$ followed by fibrations. Then $TX$ is fibrant, closure keeps it in $\\mathcal S$, and $Tw\\,t_X=t_Yw$ proves by two-out-of-three that $T$ preserves weak equivalences. For $i_f:w\\mathcal S_f\\to w\\mathcal S$, restriction gives $1\\Rightarrow i_fT$ and $1\\Rightarrow Ti_f$. Apply the prism construction of Step 4 to these specified transformations: the switching arrow is $t_{x_j}:x_j\\to Tx_j$, with the arrows before it unchanged and those after it mapped by $T$. This gives $1\\simeq Ni_fNT$ and $1\\simeq NTNi_f$, so $Ni_f$ is a homotopy equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proposition A.0.6, proof of the left arrow, printed p. 209; explicit cofibrant, fibrant and bifibrant replacement/prism argument"
+   }
+  },
+  {
+   "text": "For a cofibrant $X$, the composite $0\\to X\\xrightarrow{t_X}TX$ is a cofibration. Indeed a lift against a trivial fibration is obtained first against $0\\to X$ and then against $t_X$. Thus the fibrant replacement of Step 5 restricts to $T_c:w\\mathcal S_c\\to w\\mathcal S_{cf}$. For the inclusion $j:w\\mathcal S_{cf}\\to w\\mathcal S_c$, its replacement arrows give $1\\Rightarrow jT_c$ and $1\\Rightarrow T_cj$. All endpoints are cofibrant, all replacement targets are fibrant, and all components are weak equivalences. The prisms with switching arrows $t_{x_j}$ therefore lie in these specified categories and give inverse homotopies for $Nj$ and $NT_c$. Since the inclusion into $w\\mathcal S$ is $i_cj$, Step 4 proves its nerve is also a homotopy equivalence. No model structure on a full cofibrant or fibrant subcategory is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proposition A.0.6, proof of the left arrow, printed p. 209; explicit cofibrant, fibrant and bifibrant replacement/prism argument"
+   }
+  },
+  {
+   "text": "For $L\\dashv R$, [lem-coef-model-infinity-derived-adjunction] supplies the coherent derived adjunction, computed on objects by $qLQ$ and $qRT$, and its actual derived unit and counit. By the Quillen-equivalence hypothesis these functors are inverse equivalences. If the hypothesis is read on ordinary homotopy categories, the derived adjunction's unit and counit are isomorphisms there, so their components are equivalences in the infinity categories (an edge is an equivalence exactly when its class is invertible); the same coherent transformations still give inverse infinity functors. The hypothesis on represented object classes restricts these inverse functors and their unit and counit to the full infinity subcategories represented by $\\mathcal S$ and $\\mathcal T$. Taking cores restricts the same inverse transformations, so these cores are equivalent. Apply Steps 1-3 to the two model categories to get $N(w\\mathcal S)\\simeq N(w\\mathcal T)$.\n\nTo identify the actual functor on nerves, $L$ preserves weak equivalences between cofibrant objects by the cited node. Hence, whenever $L$ carries the chosen cofibrant class into $\\mathcal T$, it defines $w\\mathcal S_c\\to w\\mathcal T$. Its square with the localization maps commutes, since the derived functor restricted to cofibrant objects is precisely localized $L$. The comparisons in Step 2 are induced by those maps, so this is the equivalence on nerves already constructed, using the cofibrant inclusion equivalence of Step 4 on the source. On arbitrary objects use $LQ$; its values lie in $\\mathcal T$ because its derived values belong to the represented class: applying Steps 1–3 in the full target model category turns an equivalence to a represented object of $\\mathcal T$ into a path in its weak-equivalence nerve, hence a finite zigzag of weak equivalences, all of whose vertices belong to $\\mathcal T$ by closure. The natural comparison $Q\\to1$ gives the replacement comparison. The actual derived unit and counit descend with their composition homotopies by the cited node; their restrictions and cores therefore give the asserted naturality. No arbitrary weak equivalence is passed through $L$ without first making its endpoints cofibrant.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, functorial discussion following Proposition A.0.6, pp. 209-210; arbitrary Quillen adjunctions handled by the existing coherent derived-adjunction theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-locally-constant-presheaf-slice",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-weak-equivalence-representable-local-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+  "place": "Appendix A, Proposition A.0.3 and the paragraph before Corollary A.0.4, pp. 207-208; replacement comparison and derived-Quillen naturality expanded. Source read online; local archival copy WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,15 +185,72 @@
    "results": "{\"t\": \"2026-10-16T14:14:35Z\", \"tool\": \"leansearch\", \"query\": \"The classifying space of a model category is invariant under Quillen equivalence and its weak equivalence stable subcategories have the corresponding homotopy automorphism spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.cm3a\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.instHasQuotientWeakEquivalencesHomRel\"], \"digest\": \"c1cc843b0209c584\"}",
    "date": "2026-10-16",
    "verdict": "No match. The returned signatures define model-category axioms, retract stability, and ordinary homotopy/localization properties; none compares a weak-equivalence nerve to the localization core."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relative category, the nerve of the weak-equivalence subcategory is weakly equivalent to the core of its hammock localization",
+   "results": "{\"t\": \"2026-10-16T14:52:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category, the nerve of the weak-equivalence subcategory is weakly equivalent to the core of its hammock localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"e97ac7d7f5d04bd5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary nerve/homotopy-category/localization declarations only; read the NerveAdjunction and CofibrantObjectHomotopy sources recorded in report.md. None proves the weak-equivalence-nerve/core theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\", \"core\", \"localization\"",
+   "results": "{\"t\": \"2026-10-16T14:52:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"core\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary nerve/homotopy-category/localization declarations only; read the NerveAdjunction and CofibrantObjectHomotopy sources recorded in report.md. None proves the weak-equivalence-nerve/core theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|weakEquivalence.*nerve|core.*localization",
+   "results": "{\"t\": \"2026-10-16T14:52:13Z\", \"tool\": \"grep\", \"query\": \"hammock|weakEquivalence.*nerve|core.*localization\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary nerve/homotopy-category/localization declarations only; read the NerveAdjunction and CofibrantObjectHomotopy sources recorded in report.md. None proves the weak-equivalence-nerve/core theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The classifying space of weak equivalences in a relative category equals the core of its infinity localization",
+   "results": "{\"t\": \"2026-10-16T14:52:14Z\", \"tool\": \"leansearch\", \"query\": \"The classifying space of weak equivalences in a relative category equals the core of its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences_over_def\", \"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.Localization.Construction.objEquiv\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"CategoryTheory.Functor.IsLocalization.mk\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\"], \"digest\": \"65a2e0fde7ed677b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary nerve/homotopy-category/localization declarations only; read the NerveAdjunction and CofibrantObjectHomotopy sources recorded in report.md. None proves the weak-equivalence-nerve/core theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-bimodule-mapping-space",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-model-weak-equivalence-nerve",
+  "worker": "stage1",
+  "summary": "Split by the source's presheaf route: locally constant presheaves versus a nerve slice; local replacement of weak-equivalence representables; explicit path-space, component and homotopy-group comparison; three separate elementary replacement/prism arguments; and restriction of the coherent derived equivalence. Two non-elementary presheaf inputs are stated only, searched, and strictly different from the item. Removed an overgeneral relative-category claim during self-review. Statement unchanged.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, proof paragraph 2, derived coefficient adjunction before R lim: supplies the weak-equivalence moduli spaces and higher equivalences used by the intervening dg-module comparison. Ancestor and historical unit retained.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic Kan property of quasicategory cores; no model-category theorem replaces it."
+   },
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic extension of an all-edges-inverting map along Kan replacement; used only to interpret the weak-equivalence nerve as a space."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-f97e01730",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-f97e01730 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all 7 cited statements, the unit/chapter and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint (paragraph 2) in full. The statement is unchanged and true; no target is touched and no SGA source is used. Source access: HAG II is not archived and the review service blocks network access, so I did not open the PDF myself. A local copy of Toën's dg-categories paper (/tmp/q28toen) quotes HAG II Cor. A.0.4 (π1 = Aut, πi = π_{i-1} Map) and Prop. A.0.6 (bifibrant nerve), which match the item. I did not check the wording of Prop. A.0.3 or the paragraph after it against the PDF; I verified both new statements as mathematics instead (Grothendieck-construction Quillen equivalence; Dwyer–Kan local model). Step 1: N_C(h_x) = N(C/x), contracted by its terminal object; the path fibration with its max-contraction, pulled back to B, has contractible total space by the cited right-properness, so the raw nerve is not assumed Kan. The SM7 endpoint fibration comes from node 1's simplicial slice structure (acceptable). Step 2: the four-term chain over the same C = wS; identification with q comes from node 2's stated naturality. Step 3: Kan cores, extension along the Kan replacement (hypotheses checked), mapping spaces of the core equal the equivalence components, π0 and πn argued. Steps 4–6 are elementary and correct (functorial replacements, 2-of-3, closure, prism); citing the same-unit lem-coef-nerve-natural-homotopy-equivalence would be optional. Step 7: derived-adjunction formulas, cofibrant replacement before L, LQX in T via a zigzag and closure. proof_deps equals the union of uses; there is no cycle. New nodes: B1–B7 pass, searches recorded. Small cases: empty, terminal, [1], discrete, BG; Set with isomorphisms; sSet at a point and at S^1. Node 2 is strictly smaller than the item and follows the source's own division; neither node duplicates presheaf-localization-comparison, the hammock nodes, the right-fibration node or the straightening nodes. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-groupoid-localization. Cosmetic only, not changed: a missing period in both new source.place strings, and the PDF page offsets differ between the item and the new nodes. No fixes."
+ }
 }

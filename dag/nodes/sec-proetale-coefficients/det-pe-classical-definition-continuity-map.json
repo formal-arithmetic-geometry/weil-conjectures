@@ -3,45 +3,231 @@
  "blueprint": {
   "is": "det-pe-classical-definition-continuity-map",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-pe-classical-definition"
+  ]
  },
  "kind": "definition",
  "title": "The continuity map and classical sheaves, in detail",
- "statement": "Let $X$ be a scheme and $F$ a sheaf of sets on $X_{\\Proet}$\n([def-weil-pbc-proetale-site]).\n\n1. **Presentations.** A *pro-étale affine presentation* is an affine object\n   $U$ of $X_{\\Proet}$ together with a cofiltered system $(U_i)_{i\\in I}$ of\n   affine schemes étale over $X$, with transition morphisms\n   $u_{ji}\\colon U_j\\to U_i$ ($j\\geq i$) over $X$, and an isomorphism\n   $U\\cong\\varprojlim_iU_i$ of $X$-schemes; write $u_i\\colon U\\to U_i$ for the\n   projections. Each $U_i$ is an object of $X_{\\Proet}$ (an étale morphism is\n   weakly étale), and the $u_i$, $u_{ji}$ are morphisms of $X_{\\Proet}$.\n2. **The continuity map.** The restriction maps $F(u_{ji})\\colon F(U_i)\\to\n   F(U_j)$ make $(F(U_i))_i$ a filtered system of sets, and the maps\n   $F(u_i)\\colon F(U_i)\\to F(U)$ are compatible with it because\n   $u_{ji}\\circ u_j=u_i$. Hence they induce a unique map\n   $$\n   c_{F,U}\\colon\\varinjlim_iF(U_i)\\longrightarrow F(U),\n   $$\n   natural in $F$.\n3. **Classical sheaves.** $F$ is *classical* if $c_{F,U}$ is bijective for every\n   pro-étale affine presentation. If $F$ is a sheaf of $\\Lambda_X$-modules,\n   the filtered colimit is taken in $\\Lambda$-modules; $c_{F,U}$ is then\n   $\\Lambda$-linear, and $F$ is classical if every $c_{F,U}$ is an isomorphism\n   of $\\Lambda$-modules.\n4. **Complexes.** A complex $K$ of $\\Lambda_X$-module sheaves, or an object of\n   $D(X_{\\Proet},\\Lambda)$, is *classical* if every cohomology sheaf\n   $H^q(K)$ is classical. This depends only on the isomorphism class of $K$ in\n   the derived category.\n\nThe objects $U$ admitting such a presentation are the affine ind-étale objects\nof [def-weil-pbc-ind-etale-basis].",
+ "statement": "Let $X$ be a scheme and $F$ a sheaf of sets on $X_{\\Proet}$ [def-weil-pbc-proetale-site]. Use the universes of [def-weil-size-convention]; all index categories below are small in the universe in which the colimits are formed [def-weil-pbc-category-colimit]. For module coefficients, fix a discrete commutative ring $\\Lambda$ and its constant sheaf $\\Lambda_X$, as in [def-weil-pbc-proetale-site]; module sheaves have the meaning of [def-weil-sheaf-of-modules-category].\n\n1. **Presentations.** A *pro-étale affine presentation* is an affine object $U$ of $X_{\\Proet}$, a small cofiltered category $I$, a diagram $i\\mapsto U_i$ of affine schemes étale over $X$, and a specified isomorphism $U\\cong\\varprojlim_{i\\in I}U_i$ of $X$-schemes, as in [sk-def-pe-morphisms]. For an arrow $a:j\\to i$ write $u_a:U_j\\to U_i$, and write $u_i:U\\to U_i$ for the projections. The $U_i$ are objects of $X_{\\Proet}$ because étale morphisms are weakly étale [det-pe-morphisms-etale-comparison]; the $u_a$ and $u_i$ are morphisms of that site.\n2. **The continuity map.** The restriction maps $F(u_a):F(U_i)\\to F(U_j)$ form a filtered diagram indexed by $I^{\\mathrm{op}}$. The compatible maps $F(u_i)$ induce the unique map\n$$c_{F,(U_i)}:\\varinjlim_{i\\in I^{\\mathrm{op}}}F(U_i)\\longrightarrow F(U),\\qquad [i,s]\\longmapsto F(u_i)(s).$$\nIt is natural in $F$. The notation retains the presentation, since the source of the map depends on that presentation.\n3. **Classical sheaves.** $F$ is *classical* if $c_{F,(U_i)}$ is bijective for every such presentation. For a sheaf of $\\Lambda_X$-modules, take the colimit in $\\Lambda$-modules, with the $\\Lambda$-actions on sections induced by the canonical maps $\\Lambda\\to\\Lambda_X(V)$. The resulting map is $\\Lambda$-linear. Such a module sheaf is *classical* if every resulting continuity map is an isomorphism of $\\Lambda$-modules; equivalently its underlying sheaf of sets is classical.\n4. **Complexes.** A cochain complex of $\\Lambda_X$-module sheaves, or an object $K$ of $D(X_{\\Proet},\\Lambda)$ [def-weil-abstract-derived-category], is *classical* if every cohomology sheaf $H^q(K)$ is classical. This depends only on the isomorphism class in the derived category.\n\nWhen $X$ is affine, the objects $U$ admitting these presentations are exactly the affine ind-étale objects of [def-weil-pbc-ind-etale-basis], with ind-étale understood as in [def-weil-pbc-ind-etale-algebra]. For general $X$ the inverse-limit formulation of [sk-def-pe-morphisms] is the definition used here.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
   "place": "node det-pe-classical-definition-continuity-map, order None"
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-ind-etale-basis"
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "sk-def-pe-morphisms",
+  "det-pe-morphisms-etale-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-ind-etale-algebra"
  ],
  "proof": [
   {
-   "text": "The only points to check are well-definedness. In item 2, a filtered colimit\nof sets is the quotient of $\\coprod_iF(U_i)$ by the relation identifying\n$s\\in F(U_i)$ with $F(u_{ji})(s)\\in F(U_j)$; the maps $F(u_i)$ respect this\nrelation since $F(u_j)F(u_{ji})=F(u_{ji}\\circ u_j)=F(u_i)$, so $c_{F,U}$ exists\nand is unique. Naturality in $F$ holds because a morphism of sheaves commutes\nwith all restriction maps.",
-   "uses": [],
-   "elementary": null
+   "text": "The presentations are taken in the fixed universe [def-weil-size-convention]. By [det-pe-morphisms-etale-comparison], each étale $U_i\\to X$ is weakly étale, hence an object of the site [def-weil-pbc-proetale-site]. The presentation clause of [sk-def-pe-morphisms] supplies the affine stages and the $X$-morphism transitions. Its arrows are all $X$-morphisms, so all projections and transitions are site arrows. Contravariant functoriality gives $F(u_j)\\circ F(u_a)=F(u_i)$ from $u_a\\circ u_j=u_i$. The functor laws for the transition maps and these identities give a diagram on the filtered category $I^{\\mathrm{op}}$ and a cocone.",
+   "uses": [
+    "det-pe-morphisms-etale-comparison",
+    "sk-def-pe-morphisms",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.proof.md",
+    "place": "first paragraph: functoriality and site arrows"
+   }
   },
   {
-   "text": "In item 3, for a module sheaf the forgetful functor from $\\Lambda$-modules to\nsets commutes with filtered colimits, so the module colimit has the set colimit\nas underlying set and $c_{F,U}$ is the same map of sets. Each $F(u_i)$ is\n$\\Lambda$-linear, hence so is $c_{F,U}$. A $\\Lambda$-linear bijection is an\nisomorphism of modules, so a module sheaf is classical as a module sheaf if and\nonly if its underlying sheaf of sets is classical.",
-   "uses": [],
-   "elementary": null
+   "text": "Construct the set colimit as the disjoint union of the $F(U_i)$ modulo the equivalence relation generated by $(i,s)\\sim(j,F(u_a)(s))$. For any cocone of maps $\\mu_i:F(U_i)\\to T$, the rule $[i,s]\\mapsto\\mu_i(s)$ respects the generating pairs by cocone compatibility. It therefore descends to the quotient, and it is the unique map with these composites on the summands, since every class has a representative. This verifies the colimit universal property [def-weil-pbc-category-colimit]. Apply it to the cocone from step 1 to obtain $c([i,s])=F(u_i)(s)$. For a sheaf morphism $\\alpha:F\\to G$, the two composites applied to $[i,s]$ are $\\alpha_U(F(u_i)(s))$ and $G(u_i)(\\alpha_{U_i}(s))$, equal by naturality of $\\alpha$. This proves naturality of $c$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002U, section-limit-sets: quotient construction and its universal property; blueprint continuity-map proof, first paragraph"
+   }
   },
   {
-   "text": "In item 4, a quasi-isomorphism, and more generally an isomorphism in the\nderived category, induces isomorphisms on all cohomology sheaves. Classicality\nof a sheaf is invariant under isomorphism of sheaves by naturality of\n$c_{F,U}$, so the condition depends only on the isomorphism class.",
+   "text": "For any small filtered diagram of $\\Lambda$-modules, apply [lem-weil-pbc-ring-modules-grothendieck-abelian] with $R=\\Lambda$ to obtain its module colimit $M$. Construct its set colimit $L$ by the quotient in step 2. There is a comparison map from $L$ to the underlying set of $M$, sending $[i,s]$ to $\\iota_i(s)$. By clause (1) of [lem-weil-pbc-filtered-colimit-modules-elementwise], this map is surjective. By clause (2), equal images of $[i,s]$ and $[j,t]$ become equal after arrows to a common stage, so they are already equal in the quotient $L$. The comparison is therefore a bijection compatible with the structure maps. This proves the particular forgetful-colimit comparison used here without assuming that evaluation of arbitrary sheaf colimits is sectionwise.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit); blueprint proof, second paragraph"
+   }
+  },
+  {
+   "text": "Restriction of scalars along $\\Lambda\\to\\Lambda_X(V)$ gives each section module its $\\Lambda$-action. The semilinearity in [def-weil-sheaf-of-modules-category] and compatibility of the constant sections with restriction give $F(u)(\\lambda s)=\\lambda F(u)(s)$. Hence the transition maps form a filtered diagram of $\\Lambda$-modules and all $F(u_i)$ are $\\Lambda$-linear and form a module cocone. Apply step 3 to this diagram. Its induced map from the module colimit [def-weil-pbc-category-colimit] agrees, under step 3's bijection, with the set map of step 2, because their values on every $[i,s]$ agree. A bijective linear map has linear inverse: apply the map to the desired additivity and scalar identities of the inverse and use injectivity. Thus classicality of the module sheaf is equivalent to classicality of its underlying sheaf of sets.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.proof.md",
+    "place": "second paragraph: linearity and equivalence of the two conditions"
+   }
+  },
+  {
+   "text": "If $\\alpha:F\\xrightarrow{\\sim}G$ is an isomorphism of sheaves, its components $\\alpha_{U_i}$ and $\\alpha_U$ are bijections, and $[i,s]\\mapsto[i,\\alpha_{U_i}(s)]$ has inverse induced by $\\alpha^{-1}$. The naturality identity of step 2 therefore identifies the two continuity maps by bijections on their sources and targets. One is bijective if and only if the other is. For module sheaves, the components and their inverses are linear, hence their maps on the module colimits are inverse linear maps; the naturality square then identifies the module continuity maps by module isomorphisms.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.proof.md",
+    "place": "third paragraph: invariance of sheaf classicality under isomorphism"
+   }
+  },
+  {
+   "text": "Use [def-weil-abstract-derived-category] with the abelian category of $\\Lambda_X$-module sheaves [def-weil-sheaf-of-modules-category]. It supplies $H^q:D(\\mathcal A)\\to\\mathcal A$ factoring the cochain cohomology functors. For an isomorphism $f:K\\to L$ with inverse $g$, functoriality gives $H^q(g)H^q(f)=1$ and $H^q(f)H^q(g)=1$. Thus the cohomology sheaves are isomorphic, and step 5 makes the predicate 'all $H^q$ are classical' invariant. A quasi-isomorphism already induces these isomorphisms by its definition, so the cochain and derived formulations agree.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic, and Tag 05RU, definition-unbounded-derived-category; blueprint proof, third paragraph"
+   }
+  },
+  {
+   "text": "For affine $X=\\operatorname{Spec}R$, an affine ind-étale object has a presentation $B=\\varinjlim B_i$ by finitely presented étale $R$-algebras. The inverse-limit assertion of [def-weil-pbc-ind-etale-algebra] and the presentation clause of [sk-def-pe-morphisms] give a pro-étale affine presentation of $\\operatorname{Spec}B$. Conversely, write each affine stage as $U_i=\\operatorname{Spec}B_i$. The morphism correspondence and functoriality in [def-weil-affine-spectrum] give structural maps $\\sigma_i:R\\to B_i$ and a diagram of $R$-algebras indexed by $I^{\\mathrm{op}}$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], each $B_i$ is a finitely presented étale $R$-algebra.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "sk-def-pe-morphisms",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+    "place": "Last sentence, with affine-base scope made explicit; Stacks Morphisms Tag 02GJ (lemma-etale-characterize), Algebra Tag 00U1 (definition-etale), and Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); ring/algebra colimit comparison and limit-over-X check by the displayed universal properties"
+   }
+  },
+  {
+   "text": "Take the colimit $B$ of the underlying ring diagram, indexed by $J=I^{\\mathrm{op}}$, using the $R=\\mathbf Z$ clause of [lem-weil-pbc-commutative-algebras-colimits-exist], and write $\\kappa_i:B_i\\to B$. The composites $\\kappa_i\\sigma_i$ all agree: for $i,j$, choose arrows $i\\to k$, $j\\to k$ in the filtered category $J$ and use compatibility of the structural maps and the colimit cocone. Nonemptiness supplies an index, so their common value defines $\\sigma:R\\to B$. For any $R$-algebra cocone $h_i:B_i\\to C$, its unique ring-colimit map $h:B\\to C$ satisfies $h\\sigma=h\\kappa_i\\sigma_i=h_i\\sigma_i=\\sigma_C$; thus $B$ with this structure is also the colimit in $R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+    "place": "Last sentence, with affine-base scope made explicit; Stacks Morphisms Tag 02GJ (lemma-etale-characterize), Algebra Tag 00U1 (definition-etale), and Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); ring/algebra colimit comparison and limit-over-X check by the displayed universal properties"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-small-colimit-limit], $\\operatorname{Spec}B$ with these projections is a limit of the $U_i$ as schemes. The scheme maps associated to $\\sigma=\\kappa_i\\sigma_i$ compose as prescribed by [def-weil-affine-spectrum]. It is also a limit over $X$: for any compatible $X$-cone the unique scheme factorization $t:T\\to\\operatorname{Spec}B$ is over $X$, since $\\sigma=\\kappa_i\\sigma_i$ and composition with any projection gives the prescribed structural map $T\\to X$. Uniqueness of the limit over $X$ gives $U\\cong\\operatorname{Spec}B$ over $X$. Its displayed filtered $R$-algebra colimit makes $B$ ind-étale. These are exactly the objects of [def-weil-pbc-ind-etale-basis]. This identification is asserted only for affine $X$; for general $X$ the presentation itself is the definition.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-ind-etale-basis",
+    "sk-def-pe-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
+    "place": "Last sentence, with affine-base scope made explicit; Stacks Morphisms Tag 02GJ (lemma-etale-characterize), Algebra Tag 00U1 (definition-etale), and Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); ring/algebra colimit comparison and limit-over-X check by the displayed universal properties"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-pe-morphisms-etale-comparison",
+  "sk-def-pe-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-weil-pbc-ind-etale-basis"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-classical-definition/sk-def-pe-classical-definition-continuity-map.proof.md",
+  "place": "three well-definedness paragraphs, expanded using Stacks Tags 002U, 00D6, 00D7 and 05RT"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "classicalSheaf|IsClassical|continuityMap|pro.etale.*classical",
+   "results": "Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A classical pro etale sheaf has sections equal to filtered colimits over affine etale presentations",
+   "results": "SheafOfModules.Presentation.isColimit, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Sheaf.hasExactColimitsOfShape, AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite, TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.desc",
+   "results": "CategoryTheory.Limits.colimit.desc, CategoryTheory.Limits.colimit.desc_cocone, CategoryTheory.Limits.colimit.isColimit_desc, CategoryTheory.Limits.colimit.coconeMorphism_hom, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.ι_desc, CategoryTheory.Limits.colimit.pre_desc, CategoryTheory.Limits.colimit.map_desc",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A classical sheaf on the pro etale site sends inverse limits of affine etale schemes to filtered colimits of sections; classical complexes have classical cohomology sheaves",
+   "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, Condensed.lanSheafProfinite, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, LightProfinite.hasSheafify, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|WeaklyEtale|Proetale",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pro etale classical sheaf continuity natural map colimit sections inverse limit affine etale schemes",
+   "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-16",
+   "verdict": "no match: generic colimits, affine structure-sheaf sections, or discrete condensed sets do not define classical pro-étale sheaves and complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the proetale site is in the essential image of etale pullback exactly when it preserves affine inverse limits as filtered colimits",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, Condensed.lanSheafProfinite, LightProfinite.hasSheafify, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, instEssSurjLightDiagram'LightDiagramToLightFunctor, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, Condensed.ofSheafForgetProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: Etale.forgetFullyFaithful concerns morphisms of schemes, and the condensed-set characterization concerns profinite test spaces, not pro-etale sheaves on an arbitrary scheme or module/derived classicality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf evaluated at an inverse limit has a canonical natural map from the colimit of its evaluations; classical sheaves require this map to be bijective",
+   "results": "8 hit(s): CategoryTheory.Presheaf.IsSheaf', CategoryTheory.Presheaf.isSheafForIsSheafFor', PresheafOfModules.isSheaf_of_isLimit, CategoryTheory.Presheaf.isSheaf_iff_isLimit, AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp, TopCat.Presheaf.isSheaf_iff_isSheafEqualizerProducts, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj, CategoryTheory.Presheaf.isLimit_iff_isSheafFor_presieve",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the hits concern the sheaf condition as a limit over a sieve, plus constructions, or general presheaf colimit constructions, rather than this pro-etale classicality definition"
+  },
+  {
+   "tool": "grep",
+   "query": "classical.*[Ss]heaf|[Ss]heaf.*[Cc]lassical|continuityMap|continuity_map",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: the Mathlib source grep returned zero hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -53,5 +239,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-classical-definition"
+ "unit": "sk-def-pe-classical-definition",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-definition-continuity-map",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and exact Lean search. Reused existing site, colimit, module-colimit and derived-category nodes; constructed the continuity map on quotient representatives and verified naturality, module linearity, underlying-set comparison and derived invariance. Made the size convention and discrete coefficient ring explicit, generalized index notation to arrows, and scoped the affine ind-étale-basis identification to affine X. No new nodes.",
+  "blueprint": "Clause 1 is step 1; the three paragraphs of the blueprint proof are respectively step 2, steps 3–4, and steps 5–6; the last affine ind-etale identification is steps 7–9, including its ring/algebra colimit and relative-limit checks. sk-def-pe-classical-definition gives the same definition with fewer construction details.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-a1a7292c7",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-a1a7292c7 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the full statements of all 15 cited nodes, and compared them with the main-20261015 detail node, its proof and the unit sk-def-pe-classical-definition. The delivery is one commit containing only the report and the item. It creates no new nodes, so there are no duplicates and no split that just restates a clause.\n\nStatement: clauses 1-4 say what the source says. Indexing by the arrows of a small cofiltered category covers posets and also categories with parallel arrows. The changes from the source are justified repairs: Λ (a discrete commutative ring) is now bound as the unit fixes it, the universe convention is stated because the colimit node assumes a small index, and the last identification is limited to affine X. That limit is right because def-weil-pbc-ind-etale-basis is defined only for affine X. It is not a weakening, and the definition still applies to every scheme. The coefficient category is unchanged: Λ_X-module sheaves and D(X_Proet,Λ), as in def-weil-pbc-proetale-site.\n\nSteps:\n- Step 1: clause 1 of det-pe-morphisms-etale-comparison gives étale ⇒ weakly étale, and the transition and projection maps are X-morphisms as in sk-def-pe-morphisms. The contravariant order F(u_j)∘F(u_a)=F(u_i) is correct.\n- Step 2: the quotient colimit of sets (Stacks 002U) with its universal property and naturality; correct.\n- Step 3: the two Mathlib-leaf module-colimit nodes give a bijection between the set colimit and the underlying set of the module colimit; correct.\n- Step 4: semilinearity gives the Λ-action and Λ-linearity, and a bijective linear map has a linear inverse; correct.\n- Steps 5-6: classicality is invariant under sheaf isomorphism, and H^r on D(A) factors through Q, so it depends only on the derived isomorphism class; correct.\n- Steps 7-9: the affine identification. The étale ring-map criterion is used in both directions, the ring colimit gets its R-algebra structure (this uses filteredness and nonemptiness), and Spec of the colimit is shown to be the limit over X; correct.\n\nproof_deps equals the union of the step uses, and stmt_deps equals the statement's citations. Small cases checked: a one-object presentation, the empty scheme, the zero ring and zero modules, parallel arrows, and zero or isomorphic complexes. No hypothesis is missing.\n\nRoute: det-pe-morphisms-etale-comparison belongs to sk-def-pe-morphisms, which is in the unit's route. Every other cited statement is a Mathlib leaf. tool_uses is empty and none is needed, and no SGA source is used. All nine recorded searches (grep, leansearch, loogle, leanfinder) found no match, and the Stacks tags in proof_origin exist. No fixes were written."
+ }
 }

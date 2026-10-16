@@ -3,95 +3,303 @@
  "blueprint": {
   "is": "lem-weil-finite-compact-projection-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-coefficient compact-support projection formula",
- "statement": "Fix the finite-field datum\nand finite coefficient ring $A=A_{E,n}$.\nLet $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes.\nOn the small etale sites, let\n$K\\in D^b_c(X_{\\mathrm{et}},A)$ and\n$L\\in D^b_c(Y_{\\mathrm{et}},A)$, in the\nderived categories of\nbounded complexes with constructible cohomology.\nAssume $L$ has\nfinite Tor amplitude,\nusing the same tensor-vanishing definition on the etale site.\nThe projection transformation,\nformed with the\nderived tensor and pullback\nand the compact-support\ndirect image, is an isomorphism:\n\n$$\nRf_!K\\otimes_A^L L\n\\xrightarrow{\\ \\sim\\ } Rf_!(K\\otimes_A^L Lf^*L).\n$$\n\nIt is natural in $K,L$.\nThe same assertion holds for their pro-etale realizations equipped\nwith etale-origin witnesses,\nwhere the representatives satisfy the displayed hypotheses.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber]\nand finite coefficient ring $A=A_{E,n}$ [def-weil-l-adic-coefficient-extension].\nLet $f:X\\to Y$ be a\nseparated finite-type\nmorphism of finite-type $k$-schemes [def-weil-finite-type-morphism], [def-weil-proper-morphism].\nOn the small etale sites, let\n$K\\in D^b_c(X_{\\mathrm{et}},A)$ and\n$L\\in D^b_c(Y_{\\mathrm{et}},A)$, in the\nderived categories of\nbounded complexes with constructible cohomology [def-weil-pbc-derived-categories], [def-weil-pbc-constructible-complexes].\nAssume $L$ has\nfinite Tor amplitude,\nusing the tensor-vanishing definition on the etale site [def-kun-tor-amplitude].\nThe projection transformation,\nformed with the\nordinary etale derived tensor [def-kun-derived-tensor] and exact pullback [prop-weil-pbc-inverse-image-modules-exact]\nand the compact-support\ndirect image [def-amb-etale-compact-support], is an isomorphism:\n\n$$\nRf_!K\\otimes_A^L L\n\\xrightarrow{\\ \\sim\\ } Rf_!(K\\otimes_A^L Lf^*L).\n$$\n\nIt is natural in $K,L$.\nThe same assertion holds for their pro-etale realizations equipped\nwith etale-origin witnesses [def-weil-pbc-etale-origin-witness],\nwhere the representatives satisfy the displayed hypotheses.\n\nThe etale transformation is the compactification composite of the proper counit-defined map [def-kun-projection-formula-map] and the canonical open tensor comparison, with the compact-support identifications of [lem-amb-etale-compact-comparisons]. The pro-etale transformation is the finite constant-coefficient composite of [def-exchange-projection]; realizations use [def-sf-comparison-derived-pullback].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.md",
   "place": "node lem-weil-finite-compact-projection-formula, order 1878"
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
-  "def-weil-finite-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "def-kun-projection-formula-map",
+  "def-exchange-projection",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sf-comparison-derived-pullback"
  ],
  "proof": [
   {
-   "text": "First work on the etale site. Choose a compactification\n$f=p\\circ j$. By [def-compact-support-direct-image-detailed],\n$Rf_!=Rp_*j_!$. The map of [def-exchange-projection]\nis the composite of the direct-image projection map for $p$\nand\n\n$$\nj_!K\\otimes_A^L p^*L\n\\cong j_!(K\\otimes_A^L f^*L).\n$$",
+   "text": "Work first with ordinary constant-$A$ modules on the small etale sites. The coefficient ring is finite and commutative by [def-weil-l-adic-coefficient-extension]. A field is Noetherian (its only ideals are zero and the unit ideal). The locally-finite-type assertion in [pqf-def-locnoeth], applied to the structure maps, makes $X,Y$ locally Noetherian. Their finite-type structure maps are quasi-compact by [def-weil-finite-type-morphism], so a finite subcover of an affine Noetherian cover makes them Noetherian. Choose an arbitrary compactification $c=(j,p)$ by [sk-thm-nagata-sketch-noetherian]. Its proper $p$ is of finite type and quasi-compact by [def-weil-proper-morphism] and [def-weil-finite-type-morphism]; the same argument over a finite Noetherian affine cover of $Y$ makes $\\overline X$ Noetherian. Its open $j$ is quasi-compact: $\\overline X$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], and $X$ and each affine open $V\\subset\\overline X$ are quasi-compact opens, so their intersection is quasi-compact by [pqf-lem-qs-intersection-qc]. This intersection is the inverse image $j^{-1}V$. On $D^+$ the coherent comparisons [lem-amb-etale-compact-comparisons] allow us to compute $Rf_!$ as the candidate $Rp_*j_!$ of [def-amb-etale-compact-support]. Define the etale compact projection map using this computation as $Rp_*(\\gamma)\\circ\\pi_{p;j_!K,L}$, where $\\pi$ is precisely the counit-tensor-identity mate of [def-kun-projection-formula-map] and $\\gamma:j_!K\\otimes^Lp^{-1}L\\to j_!(K\\otimes^Lf^{-1}L)$ is the open tensor comparison constructed in step 3. We prove invertibility for every choice $c$; thus computing the compact-support transformation using any chosen compactification, or transporting its source and target along the coherent functor comparisons, gives the asserted invertibility. No equality of transformations for different compactifications is being assumed from mere independence of the functors.",
    "uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-exchange-projection"
+    "def-weil-l-adic-coefficient-extension",
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "sk-thm-nagata-sketch-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-qs-intersection-qc",
+    "lem-amb-etale-compact-comparisons",
+    "def-amb-etale-compact-support",
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+    "place": "paragraph 1: choose a compactification and form the projection composite; Stacks 01T6, 0B56"
+   }
   },
   {
-   "text": "The latter isomorphism can be checked on etale stalks: on the open\nsubset both maps are the identity, and off it both terms are zero.\nThe same calculation works with K-flat representatives for the\n[def-weil-derived-pullback-tensor-hom] derived tensor product.",
+   "text": "Check all bounded-below domains before base change. Choose integers $u\\leq v$ outside which the cohomology of $K$ vanishes, and a representative $C$. First form $C_{\\leq v}$ by replacing $C^v$ by $\\ker(d_C^v)$ and deleting degrees $>v$; its inclusion into $C$ is a quasi-isomorphism. Then form $E$ by quotienting its degree $u$ by the incoming boundaries and deleting degrees $<u$. The quotient map $C_{\\leq v}\\to E$ is a quasi-isomorphism, since it leaves cohomology in degrees $\\geq u$ unchanged and the deleted cohomology vanishes. Thus $C\\leftarrow C_{\\leq v}\\to E$ is an explicit quasi-isomorphism zigzag and $E$ is supported in $[u,v]$. When $u=v$, the sole term is $E^u=\\ker(d_C^u)/\\operatorname{im}(d_C^{u-1})$; the zero object may be represented by the zero complex. By the explicitly etale clause of [lem-sf-flat-model], choose a bounded flat representative $H$ of $L$, supported in some $[a,b]$. The hypothesis $\\ell\\ne p$ makes $\\ell$ invertible on these $k$-schemes, as required there. By [lem-kun-kflat-criteria](1), $H$ is K-flat. Constant-coefficient inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]; moreover [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] says pullback of this K-flat flat-term model is again K-flat with flat terms. Thus $K\\otimes^Lf^{-1}L$ is represented by the total tensor $E\\otimes f^{-1}H$, supported in $[u+a,v+b]$. There are only finitely many summands in each total degree. Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], so $j_!E$ is still bounded. The module-coefficient derived direct image of [def-weil-pbc-direct-image] carries $D^+$ to $D^+$; hence $Rf_!K$, $Rf_!(K\\otimes^Lf^{-1}L)$, and also $Rf_!K\\otimes^LL$ are bounded below. For the last assertion tensor a bounded-below representative of $Rf_!K$ with the same bounded flat $H$. No Tor-amplitude assumption on $K$ is used.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-sf-flat-model",
+    "lem-kun-kflat-criteria",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+    "place": "paragraph beginning Both base-change applications are legitimate; Stacks 07A4, 0G7E"
+   }
   },
   {
-   "text": "Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point,\nlet $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\Omega$, and write\n$K_{\\bar y}^{\\mathrm{fib}}$ for the pullback of $K$ to this fiber\nand $P=L_{\\bar y}\\in D(A)$.\nCompact-support base change [thm-cbc-finite-torsion]\nand exactness of geometric stalks identify the stalk of the\ndisplayed projection map with\n\n$$\nR\\Gamma_c(X_{\\bar y},K_{\\bar y}^{\\mathrm{fib}})\\otimes_A^L P\n\\longrightarrow\nR\\Gamma_c(X_{\\bar y},\nK_{\\bar y}^{\\mathrm{fib}}\\otimes_A^L\\underline P).\n$$",
+   "text": "Here is the open comparison, including its normalization. For etale module sheaves $F$ on $X$ and $B$ on $\\overline X$, use [lem-weil-pbc-extension-by-zero-adjunction] to form $\\kappa:j_!(F\\otimes j^{-1}B)\\to(j_!F)\\otimes B$, the transpose of the unit $F\\to j^{-1}j_!F$ tensored with $j^{-1}B$. On germs inside $X$ it sends $s\\otimes t$ to $s\\otimes t$; outside $X$ both sides are zero by [lem-weil-pbc-extension-by-zero-stalks] and the ordinary stalk-tensor isomorphism [lem-pod-etale-stalk-tensor-scalar](1). Thus [lemma-weil-pbc-geometric-stalk-conservative] shows $\\kappa$ is an isomorphism of sheaves (the inverse of a bijective linear map is linear). Apply this in each bidegree to $E$ and $p^{-1}H$. All maps are natural, hence commute with both differentials and their total-complex signs. Exactness of $j_!$ [lem-weil-pbc-extension-by-zero-exact] and the K-flat pullback assertion of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify this total-complex isomorphism with the corresponding derived one. Its inverse is $\\gamma$. This proves the required etale open projection isomorphism, rather than importing the pro-etale-only version. The construction also works on every base-changed compactification, with the pulled-back bounded flat model.",
    "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03S5 (extension by zero stalks and exactness); blueprint proof paragraphs 1-2, with the inverse adjunction map written out"
+   }
+  },
+  {
+   "text": "Fix any geometric point $g:\\operatorname{Spec}\\Omega\\to Y$; write $f_g:X_g\\to\\operatorname{Spec}\\Omega$ and $c_g=(j_g,p_g)$ for the base-changed morphism and compactification. Set $E_g=g'^{-1}K$ and $P=g^{-1}L$. The stalk-as-pullback identification [lem-kun-stalk-as-pullback] and the first assertion of [lem-kun-0ezp] let us regard $P$ as an object of $D(A)$: an etale object over $\\Omega$ is a disjoint union of points, so the sheaf axiom determines a module sheaf by its value on that point, with products on disjoint unions. This equivalence and its inverse preserve the tensor unit, tensor products and complexes. By [lem-kun-inverse-image-monoidal] and [thm-cbc-finite-torsion], applied to both $K$ and $K\\otimes^Lf^{-1}L$ (step 2), the source and target of the pulled-back compact projection map identify respectively with\n$$R\\Gamma_c(X_g,E_g)\\otimes_A^LP,\\qquad R\\Gamma_c(X_g,E_g\\otimes_A^L\\underline P),$$\nwhere $\\underline P=f_g^{-1}P$. The base-change theorem permits arbitrary $g$: neither finite type of $g$ nor constructibility on the fiber is an extra hypothesis. The source complexes lie in $D^+$, $A$ is finite, $j$ is quasi-compact and $p$ is proper, exactly as that theorem requires.",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
+    "lem-kun-0ezp",
+    "lem-kun-inverse-image-monoidal",
     "thm-cbc-finite-torsion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+    "place": "paragraph beginning Let a geometric point; Stacks 07A4 and 0EZP"
+   }
   },
   {
-   "text": "Here $\\underline P$ is the pullback of the complex of $A$-modules\n$P$ from $\\operatorname{Spec}\\Omega$.\nBoth base-change applications are legitimate: finite Tor amplitude\nof $L$ makes $K\\otimes_A^L f^*L$ bounded below.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "This identification concerns the actual projection map.\nIndeed the exchange map in [def-cbc-exchange-map] is obtained\nfrom proper base change and the open-immersion base-change map.\nFor the proper part, transposing either order of exchange and\nprojection gives the same composite: pull back\n$Rp_*j_!K\\otimes L$, apply the counit\n$p^*Rp_*j_!K\\to j_!K$ to the first factor, and retain the\npullback of $L$ in the second factor.\nFor the open part, both composites are the identity on the open\nstalks and zero on the complementary stalks. Thus the exchange\nidentifications carry the chosen projection map to the fiber map.",
+   "text": "The identifications in step 4 carry the actual map to the compact projection map for $f_g$, not just its objects. Indeed [def-cbc-exchange-map] factors the compact exchange as the proper mate followed by the open base-change comparison. For the proper square, [lem-weil-pbc-ringed-exchange-tensor-coherence], with $E=j_!K$ and $Q=L$, asserts exactly the equality between exchanging after projection and projecting after exchange, with the specified tensor comparisons. For the open square, the comparison of [lem-cbc-extension-zero-base-change] is the inverse of the mate of the open-adjunction unit. Its compatibility with $\\kappa$ from step 3 can be checked by transposing to $j_g^{-1}$: both composites are the pulled-back unit tensored with the pulled-back second factor; on a local elementary tensor $s\\otimes t$ each sends it to the pair of pulled-back sections. Bilinearity gives equality on tensors, sheafification gives equality of sheaf maps, and naturality gives equality in every total-complex degree. The derived open base-change is precisely this termwise map by [cor-cbc-derived-extension-zero-base-change]. Inverting the two $\\kappa$ maps gives the equality for $\\gamma$. Combining the proper equality and this open equality proves that the stalk map is exactly\n$$\\alpha_P:R\\Gamma_c(X_g,E_g)\\otimes_A^LP\\longrightarrow R\\Gamma_c(X_g,E_g\\otimes_A^L\\underline P).$$",
    "uses": [
-    "def-cbc-exchange-map"
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-cbc-extension-zero-base-change",
+    "cor-cbc-derived-extension-zero-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0E48 (exchange/projection square); blueprint actual-map paragraph, with the open unit-mate calculation expanded"
+   }
   },
   {
-   "text": "The stalk-perfectness lemma [fix-lem-finite-tor-perfect]\ngives a bounded finite-free representative of $P$.\nFor fixed $K_{\\bar y}^{\\mathrm{fib}}$, the two sides of the fiber\nmap are exact functors of $P$ on bounded complexes of finite\nprojective $A$-modules, and the displayed map is a natural\ntransformation of these functors.\nFor $P=A$ it is the unit identification, hence an isomorphism.\nIt remains an isomorphism after finite direct sums, shifts,\nmapping cones, and direct summands: for cones use the long exact\ncohomology sequences, and for summands restrict the inverse along\nthe splitting maps.\nSuccessive truncation by terms builds every bounded finite-free\ncomplex from finite sums of shifts of $A$.\nIt follows that the fiber map is an isomorphism for this $P$.\nEvery geometric stalk of the cone of the original projection map\ntherefore vanishes. Conservativity on the etale site,\n[lemma-weil-pbc-geometric-stalk-conservative], proves that its\ncone is zero. Naturality follows from the construction.",
+   "text": "By the explicitly etale assertion of [fix-lem-finite-tor-perfect], $P=L_{\\bar y}$ is represented by a bounded finite-free complex $F^\\bullet$ over $A$. It suffices to prove the proper projection map for $p_g$ with fixed first input $j_{g!}E_g$ and variable second input $P$ on $\\operatorname{Spec}\\Omega$. The open projection is already an isomorphism by step 3. By [lem-weil-pbc-ringed-projection-mate-exact], both proper-map functors are exact, the transformation is natural and commutes with shifts and the connecting arrows of triangles, and at $P=A$ it is the identity. Naturality with the inclusions and projections of finite direct sums therefore identifies its component at $A^r$ with the direct sum of $r$ identity components. Shift compatibility gives the assertion for $A^r[-i]$. To build $F^\\bullet$, remove its lowest nonzero degree $i$: the subcomplex of degrees $>i$ and the quotient $F^i[-i]$ form a degreewise split short exact sequence. The associated triangle is distinguished by [lem-weil-pbc-degreewise-split-derived-triangle]. Induct on the number of nonzero terms, starting with the zero complex and the one-term case; [lem-sf-triangle-morphism-iso] applied to the morphism of triangles makes the remaining vertical map an isomorphism. Naturality transports this conclusion across the quasi-isomorphism $F^\\bullet\\simeq P$. Thus the proper component and hence $\\alpha_P$ are isomorphisms. This uses the pointwise finite-free representative, not a claim that $L$ is locally perfect as a sheaf complex. Retracts, although also stable under naturality and splitting, are not needed because the stalk model is finite free.",
    "uses": [
     "fix-lem-finite-tor-perfect",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944 (perfect projection formula devissage); blueprint bounded finite-free stalk argument, written out for the proper factor"
+   }
   },
   {
-   "text": "For the pro-etale assertion, use the specified representatives in\n[def-weil-pbc-etale-origin-witness].\nThe exact comparison inverse image of\n[thm-weil-pbc-site-comparison] commutes with tensor and\npullback, while the compact-support comparison used in\n[thm-cbc-finite-level-proetale] identifies the transported\n$Rp_*j_!$ and its exchange maps.\nThe same counit computation above identifies the transported\nprojection map with the pro-etale one. Transporting the etale\nisomorphism proves the assertion for these realizations.",
+   "text": "Steps 4-6 show that every geometric pullback of the etale compact projection map is an isomorphism. Apply [lem-kun-stalk-faithful-derived] to its underlying abelian-sheaf complex map: forgetting $A$-module structure preserves the kernels, images and cokernels that compute cohomology, and a vanishing underlying cohomology sheaf is a vanishing module sheaf. Hence its cone is acyclic as a module complex and the etale map is an isomorphism. Its naturality in $K,L$ follows from the natural counit and tensor maps of [def-kun-projection-formula-map] and the natural open-adjunction construction in step 3. This proves the etale assertion for the arbitrary compactification selected in step 1.",
    "uses": [
-    "def-weil-pbc-etale-origin-witness",
-    "thm-weil-pbc-site-comparison",
-    "thm-cbc-finite-level-proetale"
+    "lem-kun-stalk-faithful-derived",
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+    "place": "last sentences of the etale argument: conservativity and naturality"
+   }
+  },
+  {
+   "text": "For the pro-etale assertion put $C_T=\\nu_T^*$. This is the exact termwise derived comparison of [lem-sf-comparison-pullback-exact] and [def-sf-comparison-derived-pullback]. The ring identification in the former and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give its canonical derived tensor comparison. Pullback comparison is [lem-weil-pbc-comparison-pullback]. Let $c_j:C_{\\overline X}j_!^{et}\\simeq j_!^{pro}C_X$ be [lem-cbc-proetale-extension-zero-comparison], extended termwise; exactness on the pro-etale localized site is [lem-pur-site-restriction-module-adjunction-exact], using the open-site identification of [lem-weil-proetale-weakly-etale-localization]. For proper $p$, quasi-compactness follows from its finite-type definition and quasi-separatedness from [lem-pc-separated-quasi-separated]. Thus [lem-weil-pbc-comparison-direct-image-canonical-mate] supplies the named isomorphism $b_p:C_YRp_*^{et}\\simeq Rp_*^{pro}C_{\\overline X}$, with its stated counit normalization, for every bounded-below input. Compose it with $Rp_*^{pro}(c_j)$ to obtain\n$$B_H:C_YRf_!^{et}H\\xrightarrow{\\sim}Rf_!^{pro}C_XH.$$\nThis is the compact-support comparison on etale-origin inputs; its invertibility and naturality are also stated in [lem-sf-class-compact-support-comparison]. We need it for $H=K$ and $H=K\\otimes^Lf^{-1}L$, which are bounded below by step 2. Exactness of $C$ keeps their realizations bounded below. All rings here are ordinary constant finite rings, with no completed or rational tensor products.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "def-sf-comparison-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+    "place": "final paragraph: construct the compact-support comparison on the specified representatives; Stacks 09AF"
+   }
+  },
+  {
+   "text": "Check compatibility with projection before transporting invertibility. For the proper factor use [lem-weil-pbc-ringed-exchange-tensor-coherence] on the commutative ringed-topos square formed by $p_{et},p_{pro},\\nu_{\\overline X},\\nu_Y$. That lemma explicitly does not require a cartesian square. Its exchange map is exactly $b_p$ of [lem-weil-pbc-comparison-direct-image-canonical-mate], since both are adjunct to $C_{\\overline X}(\\varepsilon^{et})$ after the inverse of the specified pullback comparison; its equality therefore compares the actual counit-defined proper projection maps. For the open factor one can check the canonical $c_j$ of [lem-cbc-proetale-extension-zero-comparison] on adjunctions, rather than invoking pro-etale stalk conservativity. By [def-weil-pbc-site-comparison-morphism], $\\nu_*$ is restriction on etale test objects. Hence $j_{et}^{-1}\\nu_{\\overline X,*}=\\nu_{X,*}j_{pro}^{-1}$: both evaluate a sheaf on the very same etale test scheme with the same restrictions and scalar actions. The extension adjunctions [lem-weil-pbc-extension-by-zero-adjunction], [lem-weil-extension-by-zero-adjunction], and the comparison adjunction in that definition give natural bijections\n$$\\operatorname{Hom}(C_{\\overline X}j_!^{et}F,M)\\simeq\\operatorname{Hom}(F,j_{et}^{-1}\\nu_*M)=\\operatorname{Hom}(F,\\nu_*j_{pro}^{-1}M)\\simeq\\operatorname{Hom}(j_!^{pro}C_XF,M).$$\nThe canonical $c_j$ is the isomorphism represented by these bijections (construct its two arrows by the images of the two identity maps; naturality makes their composites identities). In particular it identifies the open units. Transpose the proposed compatibility of $C(\\kappa)$ and $\\kappa^{pro}$ under $j_!^{pro}\\dashv j_{pro}^{-1}$; after the pullback and tensor comparisons both transposes are that same unit tensored with the identity. The Hom bijection is injective, so the maps agree. This calculation is on sheaves and is natural in both arguments; apply it to the bounded flat model from step 2. The comparison pullback carries this model to a K-flat flat-term model by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; the exact derived comparisons therefore give the same equality for derived tensors. Inverting $\\kappa$ identifies the transported $\\gamma$ with the canonical pro-etale open projection isomorphism [lem-cbc-extension-zero-projection-formula]. Combining proper and open equalities identifies $C_Y(\\mathrm{PF}^{et})$ with precisely the pro-etale composite specified in [def-exchange-projection], under $B_K,B_{K\\otimes^Lf^{-1}L}$ and the tensor/pullback comparisons. Thus $\\mathrm{PF}^{pro}$ for $(C_XK,C_YL)$ is an isomorphism by step 7. Finally for arbitrary realizations with the witnesses of [def-weil-pbc-etale-origin-witness], conjugate this equality by the supplied two witness isomorphisms. Naturality of the same projection construction gives the stated map on those realizations and its naturality in $K,L$.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-cbc-extension-zero-projection-formula",
+    "def-exchange-projection",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "09AF (extension comparison by adjunction); Stacks sites-cohomology 0E48; blueprint final paragraph, map compatibility expanded"
+   }
   }
  ],
  "proof_deps": [
-  "def-compact-support-direct-image-detailed",
-  "def-exchange-projection",
-  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "sk-thm-nagata-sketch-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-qs-intersection-qc",
+  "lem-amb-etale-compact-comparisons",
+  "def-amb-etale-compact-support",
+  "def-kun-projection-formula-map",
+  "lem-sf-flat-model",
+  "lem-kun-kflat-criteria",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-stalk-as-pullback",
+  "lem-kun-0ezp",
+  "lem-kun-inverse-image-monoidal",
   "thm-cbc-finite-torsion",
   "def-cbc-exchange-map",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-base-change",
+  "cor-cbc-derived-extension-zero-base-change",
   "fix-lem-finite-tor-perfect",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-pbc-etale-origin-witness",
-  "thm-weil-pbc-site-comparison",
-  "thm-cbc-finite-level-proetale"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-kun-stalk-faithful-derived",
+  "lem-sf-comparison-pullback-exact",
+  "def-sf-comparison-derived-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-class-compact-support-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-cbc-extension-zero-projection-formula",
+  "def-exchange-projection",
+  "def-weil-pbc-etale-origin-witness"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-finite/lem-weil-finite-compact-projection-formula.proof.md",
+  "place": "entire proof, retaining compactification, open stalk calculation, compact base change, finite-free stalk devissage, and etale-origin transport"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient compact support projection formula derived tensor finite Tor amplitude",
+   "results": "scope=all; 8 hits; HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, TensorProduct.exists_finsupp_right, TensorProduct.exists_finsupp_left, TensorProduct.exists_finite_submodule_of_finite, LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: tensor infrastructure, module tensor elements, LightCondensed projectivity and Tor do not state compact-support sheaf projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "projection formula, Rf_!, derivedTensor, IsIso",
+   "results": "scope=all; 0 hits; none; loogle: Unknown identifier `projection`",
+   "date": "2026-10-16",
+   "verdict": "no usable result: Loogle reports unknown identifier projection; the second Loogle query below uses actual category names"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|projection formula",
+   "results": "scope=Mathlib/; 0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match in the recorded Mathlib/ scope; followed by a separate AlgebraicGeometry source grep below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support projection formula finite torsion etale sheaves",
+   "results": "scope=all; 8 hits; hasCompactSupport_iff_eventuallyEq, HasCompactSupport, hasCompactSupport_def, HasCompactSupport.comp_isClosedEmbedding, hasCompactSupport_comp_left, HasCompactSupport.isCompact, TestFunction.hasCompactSupport', TestFunction.coe_ofSupportedIn",
+   "date": "2026-10-16",
+   "verdict": "no match: these HasCompactSupport declarations concern topological support of functions, not derived sheaf pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward with compact supports commutes with tensoring a constructible complex of finite Tor dimension on small etale sites",
+   "results": "scope=all; 8 hits; SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward, SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-16",
+   "verdict": "no match: these are underived module-sheaf pushforward definitions, adjunction and composition isomorphisms, not derived compact-support tensor formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "scope=all; 12 hits; CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.mapAddMon, CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-16",
+   "verdict": "no match: monoidal adjunction units, counits and algebra-object maps give no projection isomorphism for Rf_!"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|Projection",
+   "results": "scope=AlgebraicGeometry; 14 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Scheme.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned scheme and projective-spectrum projections do not concern compactly supported derived module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|projectionFormula|projection_formula",
+   "results": "scope=all; 0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search; no declarations matching these projection-formula spellings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact monoidal inverse image of sheaves, the derived direct image projection morphism is invertible when the second factor is perfect",
+   "results": "scope=all; 8 hits; SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso, CategoryTheory.Sheaf.monoidalCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search; the hits concern underived sheaf pullback/pushforward and monoidal structure, not the derived compact-support projection isomorphism"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -134,5 +342,199 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-sf-pf-finite"
+ "unit": "sk-thm-sf-pf-finite",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-finite-compact-projection-formula",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused existing etale open-stalk, K-flat, compact-base-change, ringed mate-coherence, finite-free-stalk and triangle tools. Replaced misapplied pro-etale definitions by precise etale definitions, proved the etale open tensor comparison in steps, checked both bounded-below base-change domains, and expanded canonical-map compatibility in the pro-etale witness transport. No mathematical hypothesis or conclusion was changed; statement edits add site-appropriate references and spell out the transformation.",
+  "blueprint": "Current main-20261015 item proof: paragraphs 1-2 are steps 1-3; geometric-point and boundedness paragraphs are steps 2,4; actual-map paragraph is step 5; finite-free and conservativity paragraph is steps 6-7; final etale-origin paragraph is steps 8-9. The unit sk-thm-sf-pf-finite route is retained. The current blueprint has the same mathematical statement as the imported snapshot.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-nagata-sketch-noetherian",
+    "why": "Supplies the compactification that the first sentence of the unit route chooses."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic a locally noetherian scheme is quasi-separated (stacks 01oy) statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic intersections of quasi-compact opens statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic the etale compact-support comparisons statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic bounded flat model of finite tor amplitude statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Generic k-flat criteria statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic inverse image of etale sheaves of modules over a constant ring is exact statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for arbitrary ringed topoi statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic extension by zero is exact (étale site) statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic extension by zero is left adjoint to restriction (étale site) statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic geometric stalks of extension by zero along an open immersion statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic geometric stalks commute with tensor products and scalar extension on the etale site statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic a stalk is inverse image to a geometric point statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-kun-0ezp",
+    "why": "Identifies etale sheaves over the geometric point with modules by its disjoint-union-of-points assertion; no projection theorem used."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic monoidality of the derived inverse image statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic compact-support base change at finite coefficients statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Compares the actual counit-defined projection and exchange maps in both the geometric fiber and site-comparison squares; it asserts no projection invertibility."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Generic extension by zero commutes with arbitrary base change statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Generic derived extension-by-zero base change statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "fix-lem-finite-tor-perfect",
+    "why": "Provides exactly the bounded finite-free geometric stalk required by the unit devissage, rather than a sheaf-perfect replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Supplies the exact-functor, shift, triangle and tensor-unit properties needed to carry out the unit finite-free devissage."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-derived-triangle",
+    "why": "Supplies distinguished triangles for brutal truncations in the displayed finite-free induction."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic a morphism of distinguished triangles with two isomorphic components is an isomorphism statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-kun-stalk-faithful-derived",
+    "why": "Generic stalk faithfulness for derived objects statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic the comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison inverse image commutes with scheme pullback statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic comparison of extension by zero with the site morphism statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic restriction and extension by zero for modules on a localized site statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic the small pro-etale site of a weakly etale x-scheme is the localization of x_proet statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Checks the quasi-separated hypothesis of the proper direct-image comparison; does not change the proof route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Supplies invertibility of the named etale/pro-etale proper direct-image comparison and its counit normalization on D+."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic on the coefficient class the compact-support functor is computed on the étale site statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic adjunction for extension by zero statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic projection formula for extension by zero statement used exactly in the cited step to implement the unit compactification/stalk/devissage/comparison route; the unit has no separate node supplying this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-nagata-sketch-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-qs-intersection-qc",
+  "lem-amb-etale-compact-comparisons",
+  "lem-sf-flat-model",
+  "lem-kun-kflat-criteria",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-stalk-as-pullback",
+  "lem-kun-0ezp",
+  "lem-kun-inverse-image-monoidal",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-base-change",
+  "cor-cbc-derived-extension-zero-base-change",
+  "fix-lem-finite-tor-perfect",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-kun-stalk-faithful-derived",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NK-5b9735058",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-5b9735058 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 47 cited statements, the unit sk-thm-sf-pf-finite (route: itself plus sk-def-sf-exchanges), the chapter, and the main-20261015 statement and proof. The master statement (order 1878) is byte-identical to main (order 2222). The statement keeps every blueprint hypothesis: f separated finite type between finite-type k-schemes (X, Y need not be separated), K and L in D^b_c on the étale site, L of finite Tor amplitude. The pro-étale witness clause uses the ordinary constant-A_{E,n} pro-étale category of def-exchange-projection with S=Spec k. Nothing is weakened. Step checks: (1) X, Y and the compactification are Noetherian; Nagata needs a Noetherian base; j is quasi-compact by 01OY plus the qc-intersection lemma; invertibility is proved for an arbitrary compactification. (2) The truncation zigzag is correct, including u=v. The étale clause of lem-sf-flat-model applies since ell is invertible. Bounded flat implies K-flat, and pullback keeps it K-flat. D+ domains are verified. (3) The open map is the transpose of the unit, iso by stalks and conservativity. (4) thm-cbc-finite-torsion applies with arbitrary g, D+ inputs, quasi-compact j and proper p. (5) The proper part is the exact equality in lem-weil-pbc-ringed-exchange-tensor-coherence; the open part is the unit-mate normalization, proved by transposition. (6) The finite-free stalk model, the shift, triangle and unit structure of the projection map, stupid truncation and two-out-of-three match Stacks 0944. (7) lem-kun-stalk-faithful-derived is applied after forgetting module structure. (8)-(9) b_p is named and invertible since p is qcqs; c_j is fixed through the Hom-bijection chain; the coherence lemma allows the non-cartesian comparison square; the witness clause follows by conjugation. Edge cases checked: X empty, K or L zero, L=A or its shifts, a two-term finite-free stalk, non-flat K over Z/ell^2, f=id, n=1. No new nodes. No duplicates: thm-sf-pf-finite, lem-etale-proper-projection-formula-finite, lemma-weil-pbc-projection-formula-compactified (needs site-perfect input) and the others differ. No cycle; no missing or merged cites; no SGA. proof_deps equals the union of step uses. All 24 off-route statements are declared generic tools, and I accept them as used by the blueprint proof itself; 4 extra declarations name Mathlib leaves and are harmless. Not blocking: the second reader says source was updated to main-20261015 order 2222, but the file still has the master path, order 1878. Since the two statements are identical, I made no change. No fixes."
+ }
 }

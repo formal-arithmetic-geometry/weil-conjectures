@@ -26,67 +26,98 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the path-space replacement to f. The resulting projection p:E_f→Q is a Kan fibration, its constant-path inclusion i:P→E_f is a weak homotopy equivalence over Q, and the strict fiber of p at each q is exactly the homotopy fiber appearing in the statement.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6 (tag 0328), factorization of f through the path fibration of Example 3.1.8.10 (tag 0101)"
+   }
+  },
+  {
+   "text": "Assume f is a weak homotopy equivalence. Since f=p∘i and i is a weak homotopy equivalence, cancellation for the bijection on components and the isomorphisms on all based homotopy groups gives that p is a weak homotopy equivalence. The Kan-fibration fiber criterion then says every strict fiber of p is weakly contractible, and the path-space identification in Step 1 transfers this to every homotopy fiber of f.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-space-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6 (tag 0328), using Proposition 3.3.7.6 (tag 00ZP)"
+   }
+  },
+  {
+   "text": "Conversely, assume every homotopy fiber of f is contractible. By Step 1 the strict fibers of p are weakly contractible, so the Kan-fibration fiber criterion makes p a weak homotopy equivalence. Together with the weak equivalence i and f=p∘i, cancellation for the same component bijection and homotopy-group isomorphisms gives that f is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-space-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6 (tag 0328), using Proposition 3.3.7.6 (tag 00ZP)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-space-kan-fibration-fiber-criterion",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, contractible homotopy fibers detect equivalences of spaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A map of Kan complexes is a homotopy equivalence if and only if every homotopy fiber is contractible",
-   "results": "{\"t\": \"2026-10-16T13:40:36Z\", \"tool\": \"leanfinder\", \"query\": \"A map of Kan complexes is a homotopy equivalence if and only if every homotopy fiber is contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\"], \"digest\": \"a1ce19085e5ce442\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; Bifibrant.lean:128 compares weak equivalences in a full subcategory with underlying weak equivalences, and ModelCategory/Homotopy.lean:216 starts with a weak equivalence. Neither detects weak equivalences by homotopy fibers. ExtraDegeneracy.homotopyEquiv concerns alternating-face complexes. Topological contractibility results do not assert the Kan-complex fiber criterion."
+   "query": "A map of Kan complexes is a weak homotopy equivalence exactly when every homotopy fiber is contractible",
+   "results": "{\"t\": \"2026-10-16T16:19:52Z\", \"tool\": \"leanfinder\", \"query\": \"A map of Kan complexes is a weak homotopy equivalence exactly when every homotopy fiber is contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"4edca6c4501b64ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned declarations; no exact theorem with the project’s Kan-space homotopy-fiber statement."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"WeakEquivalence\"",
-   "results": "{\"t\": \"2026-10-16T13:40:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; Bifibrant.lean:128 compares weak equivalences in a full subcategory with underlying weak equivalences, and ModelCategory/Homotopy.lean:216 starts with a weak equivalence. Neither detects weak equivalences by homotopy fibers. ExtraDegeneracy.homotopyEquiv concerns alternating-face complexes. Topological contractibility results do not assert the Kan-complex fiber criterion."
+   "query": "SSet WeakEquivalence homotopy fiber",
+   "results": "{\"t\": \"2026-10-16T16:19:54Z\", \"tool\": \"loogle\", \"query\": \"SSet WeakEquivalence homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  WeakEquivalence\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: query parser returned no usable declaration matching the stated criterion."
   },
   {
    "tool": "grep",
-   "query": "homotopyFiber|homotopy[Ff]ib|[Cc]ontractible",
-   "results": "{\"t\": \"2026-10-16T13:40:30Z\", \"tool\": \"grep\", \"query\": \"homotopyFiber|homotopy[Ff]ib|[Cc]ontractible\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\"], \"digest\": \"bf16d5944d50e31e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; Bifibrant.lean:128 compares weak equivalences in a full subcategory with underlying weak equivalences, and ModelCategory/Homotopy.lean:216 starts with a weak equivalence. Neither detects weak equivalences by homotopy fibers. ExtraDegeneracy.homotopyEquiv concerns alternating-face complexes. Topological contractibility results do not assert the Kan-complex fiber criterion."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Equivalence of spaces detected by contractible homotopy fibers",
-   "results": "{\"t\": \"2026-10-16T13:40:31Z\", \"tool\": \"leansearch\", \"query\": \"Equivalence of spaces detected by contractible homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContractibleSpace.hequiv_unit'\", \"ContractibleSpace.hequiv\", \"ContinuousMap.HomotopyEquiv.contractibleSpace\", \"ContinuousMap.HomotopyEquiv.contractibleSpace_iff\", \"ContractibleSpace.hequiv_unit\", \"ContinuousMap.HomotopyEquiv.mk\", \"ContinuousMap.HomotopyEquiv\", \"ContinuousMap.term_≃ₕ_\"], \"digest\": \"71bd56d85c71fccd\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; Bifibrant.lean:128 compares weak equivalences in a full subcategory with underlying weak equivalences, and ModelCategory/Homotopy.lean:216 starts with a weak equivalence. Neither detects weak equivalences by homotopy fibers. ExtraDegeneracy.homotopyEquiv concerns alternating-face complexes. Topological contractibility results do not assert the Kan-complex fiber criterion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A simplicial map between Kan complexes with contractible derived fibers is a weak homotopy equivalence",
-   "results": "{\"t\": \"2026-10-16T13:40:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map between Kan complexes with contractible derived fibers is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\"], \"digest\": \"ceaa76d346f05849\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; Bifibrant.lean:128 compares weak equivalences in a full subcategory with underlying weak equivalences, and ModelCategory/Homotopy.lean:216 starts with a weak equivalence. Neither detects weak equivalences by homotopy fibers. ExtraDegeneracy.homotopyEquiv concerns alternating-face complexes. Topological contractibility results do not assert the Kan-complex fiber criterion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Trivial Kan fibrations and weak equivalences characterized by weakly contractible homotopy fibers",
-   "results": "{\"t\": \"2026-10-16T15:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"Trivial Kan fibrations and weak equivalences characterized by weakly contractible homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\"], \"digest\": \"34684d3610b36166\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: mem_trivialFibrations_iff defines trivial fibrations as fibration plus weak equivalence; Bifibrant compares underlying weak equivalences. Neither tests homotopy fibers. SimplicialSet grep hits only document anodyne extensions."
-  },
-  {
-   "tool": "grep",
-   "query": "homotopy.?[Ff]ib|[Cc]ontractible|[Ww]eak.*[Ee]quivalence",
-   "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"homotopy.?[Ff]ib|[Cc]ontractible|[Ww]eak.*[Ee]quivalence\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"544725769a26c01b\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: mem_trivialFibrations_iff defines trivial fibrations as fibration plus weak equivalence; Bifibrant compares underlying weak equivalences. Neither tests homotopy fibers. SimplicialSet grep hits only document anodyne extensions."
+   "query": "homotopyFiber|homotopy[Ff]ib|contractible",
+   "results": "{\"t\": \"2026-10-16T16:19:54Z\", \"tool\": \"grep\", \"query\": \"homotopyFiber|homotopy[Ff]ib|contractible\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\"], \"digest\": \"bf16d5944d50e31e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned declarations; no exact theorem with the project’s Kan-space homotopy-fiber statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-infinity-adjoints",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-contractible-fiber-equivalence",
+  "worker": "stage1",
+  "summary": "Split the Kerodon homotopy-fiber criterion through an explicit path-space Kan-fibration replacement and the Kan-fibration fiber criterion. The two-out-of-three cancellation is written directly in the item proof as the elementary cancellation of component bijections and homotopy-group isomorphisms. No Lean declaration or Mathlib match exists.",
+  "blueprint": "Realizes the exceptional-adjoint proof paragraph 2 clause that contractible homotopy fibers detect equivalences in the finite-coefficient mapping-space argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-95c26d602",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-95c26d602 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, def-cbc-enhanced-diagrams-cones, the unit and the ancestor proof in full, and checked the Kerodon sources online. Remark 3.4.0.6 (tag 0328) factors f as the path fibration (Example 3.1.8.10, tag 0101) after a homotopy equivalence and applies Proposition 3.3.7.6 (tag 00ZP); steps 1–3 follow it exactly. Kerodon's 'contractible' agrees with the def node's weak sense for Kan complexes, so the item is not weakened. Step 2's two-out-of-three cancellation (change of basepoint) is a few lines and is correctly written into the step; the separate node was rightly dropped. Edge cases check out: ∅→∅, ∅→Δ⁰, id_Q, Δ⁰→BG, a map missing some components, and a degree-2 cover. Both new statements are true, contain only statements (no proofs), are strictly smaller than the item and do not restate it. Duplicate checks: lem-coef-spaces-homotopy-fiber-detection is a broader comparison theorem, not a one-line specialization. lem-coef-right-fibration-contractible-fibers covers only the reverse direction of the fiber criterion. Neither is a duplicate. No base-change morphism or coefficient category is involved, no SGA is used and no tool_uses are needed. One fault, B3: 'Kan fibration' is defined neither in def-cbc-enhanced-diagrams-cones nor in any definition node. I fixed it with an inline definition (lifting against all horns, n≥1, 0≤i≤n) in both new nodes. I also made 'over Q' explicit as p∘i=f, and corrected the item's step source places (step 1 now cites Example 3.1.8.10 / tag 0101). The item statement is unchanged. Details are in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }

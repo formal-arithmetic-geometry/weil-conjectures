@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-rationalization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Rationalization of a linear triangulated category",
@@ -12,10 +12,15 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/_section.md",
   "place": "node sk-def-sfb-rationalization, order 865"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sfb-torsion-objects",
+  "def-sfb-rationalization-morphisms",
+  "def-sfb-rationalization-quotient",
+  "def-sfb-rationalization-linear"
+ ],
  "proof": [
   {
-   "text": "The $M$-torsion objects form a triangulated subcategory [def-sfb-torsion-objects],\n[lem-sfb-torsion-triangulated]. So the morphisms with $M$-torsion cone\n[def-sfb-rationalization-morphisms] form the class inverted by the Verdier quotient, which\nis triangulated with a triangulated localization functor\n[def-sfb-rationalization-quotient]. Multiplication by $m\\in M$ has $M$-torsion cone\n[lem-sfb-smul-id-in-w], hence becomes invertible, and this gives the linear structure over\nthe localizations of $R$ at $M$ [def-sfb-rationalization-linear].",
+   "text": "The $M$-torsion objects form a triangulated subcategory [def-sfb-torsion-objects], [lem-sfb-torsion-triangulated]. Thus the morphisms with $M$-torsion cone [def-sfb-rationalization-morphisms] are exactly the class inverted by the Verdier quotient [def-sfb-rationalization-quotient], which is triangulated and whose localization functor is triangulated. For each $m\\in M$, multiplication by $m$ has $M$-torsion cone [lem-sfb-smul-id-in-w], so its image is invertible; the resulting action extends to every localization of $R$ at $M$ [def-sfb-rationalization-linear].",
    "uses": [
     "def-sfb-torsion-objects",
     "lem-sfb-torsion-triangulated",
@@ -24,7 +29,11 @@
     "lem-sfb-smul-id-in-w",
     "def-sfb-rationalization-linear"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/sk-def-sfb-rationalization.proof.md",
+    "place": "complete proof paragraph"
+   }
   }
  ],
  "proof_deps": [
@@ -37,12 +46,48 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-rationalization/sk-def-sfb-rationalization.proof.md",
+  "place": "complete proof paragraph, with explicit dependency citations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "rationalization of an R-linear triangulated category Verdier quotient by torsion objects",
+   "results": "CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; CategoryTheory.Triangulated.Localization.isTriangulated; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated_functor (Mathlib/CategoryTheory/Localization/Triangulated and Mathlib/Algebra/Homology/DerivedCategory/Basic)",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic triangulated localization results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Localization, Submonoid, IsIso",
+   "results": "0 hits; loogle reported unknown identifier 'CategoryTheory.Triangulated.Localization'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid query, not evidence of no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rationalization|Verdier quotient|torsion.*triangulated",
+   "results": "Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean:19, a Verdier-quotient reference only",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rationalization Verdier quotient of a linear triangulated category",
+   "results": "CategoryTheory.Triangulated.Localization.pretriangulated; DerivedCategory.instIsTriangulated; HasDerivedCategory.standard; CategoryTheory.Triangulated.Localization.isTriangulated; ComplexShape.quotient_isLocalization; DerivedCategory.instPretriangulated; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; HomologicalComplexUpToQuasiIso (Mathlib.CategoryTheory.Localization.Triangulated and Mathlib.Algebra.Homology.DerivedCategory)",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic triangulated localization results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Triangulated.Localization IsTriangulated Submonoid",
+   "results": "0 hits; loogle reported unknown identifier 'Triangulated.Localization'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid query, not evidence of no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -78,5 +123,22 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-rationalization"
+ "unit": "sk-def-sfb-rationalization",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-rationalization",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the current main-20261015 blueprint unit and proof file, the read-only slopmaster2 source WeilConjectures/CategoryTheory/DerivedCategory/Complete/Rationalization.lean, and all six cited DAG nodes. The eight blueprint Lean names are declared there (sorry-free, Mathlib imports only), but no single declaration states this aggregate definition, so the item is split rather than attached; attaching those declarations to the six component nodes is left to the maintainer. Mathlib has only generic triangulated-localization results. The existing definitions and lemmas already supply every notion and argument, so I corrected stmt_deps, made the single proof step cite all six statements with its blueprint source, and added no nodes. Second reading corrected the source to the separate proof file and classified the invalid Loogle queries as inconclusive.",
+  "blueprint": "The sole proof paragraph of sk-def-sfb-rationalization.proof.md is realized by the single step: triangulated torsion subcategory, cone-torsion Verdier localization, and scalar invertibility with extended linear structure.",
+  "tool_uses": [],
+  "new_nodes": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-eaefd6f85",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-eaefd6f85 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with no new nodes. The item statement matches the main-20261015 _section.md of sk-def-sfb-rationalization word for word, and it agrees clause by clause with slopmaster2 Rationalization.lean lines 69-215: torsion, W = trW, Localization, the triangulated Q, isIso_smul_id, Linear A for any IsLocalization M A, and algebraMap_smul. The hypotheses (triangulated, R-linear, R-linear shifts, submonoid M) are unchanged. Step 1 follows the single proof paragraph of the blueprint. It cites the statements of six existing nodes of its own unit, and each one says what the step takes from it. I re-derived lem-sfb-torsion-triangulated (the m1*m3 extension argument) and lem-sfb-smul-id-in-w (the cone of m*id is killed by m^2). proof_deps equals the union of uses, there is no cycle, the route stays in the unit, and no tool uses are needed. I checked the cases M={1} (T[M^-1] is T), 0 in M (zero quotient, linear over the zero ring A=0), and R=Z with M={l^n} on D^b(Z). The rg search for duplicates found none; the other chapters only use the notion. The searches cover three kinds (LeanFinder, LeanSearch, grep), and the two invalid Loogle queries are recorded as inconclusive. The eight Lean names are sorry-free in slopmaster2, but no single declaration states this aggregate definition, so the split is acceptable and attaching them to the component nodes is left to the maintainer. The unit's realized fields are consistent. One fix: split_report.summary called the item an attachment candidate and said the second reading had identified an attachment, which contradicts the report and B10. I rewrote the summary to agree with the report in fixes/dag/nodes/sec-proetale-coefficients/sk-def-sfb-rationalization.json. No other field changed.; 1 file(s) fixed by the reviewer"
+ }
 }

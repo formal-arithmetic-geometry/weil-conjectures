@@ -3,64 +3,257 @@
  "blueprint": {
   "is": "sk-prop-sfb-cartesian-coefficients",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image of the coefficient sheaves",
- "statement": "Because all coefficient sheaves are pulled back from the point, they are compatible with\ninverse image. The same holds for their Tate twists ([sk-def-sp-tate-twist]), and a finite\nextension of coefficient fields gives a finite free extension of coefficient sheaves.\n\nLet $f\\colon X\\to Y$ be a morphism of schemes.\n\n1. For every admissible $\\Lambda$, the canonical map\n   $$\n   f^{-1}\\Lambda_Y\\longrightarrow\\Lambda_X\n   $$\n   is an isomorphism of sheaves of rings on $X_{\\mathrm{proét}}$ (this is the map $\\alpha_f$\n   of [sk-def-sfb-coefficient-morphisms]). The same holds for its Tate twists, including the\n   twists of a finite ring $A$.\n2. If $E\\subset F$ is a finite extension, then $\\cO_{F,X}$ is a finite free\n   $\\cO_{E,X}$-module and $F_X$ is a finite free $E_X$-module.\n\nBy (1), the pullback $f^*\\colon\\Mod(Y_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$\nof modules over these sheaves is the exact functor $f^{-1}$.",
+ "statement": "Because all coefficient sheaves are pulled back from the point, they are compatible with\ninverse image. The same holds for their Tate twists ([sk-def-sp-tate-twist]), and a finite\nextension of coefficient fields gives a finite free extension of coefficient sheaves.\n\nFix a prime $\\ell$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$.\nLet $f\\colon X\\to Y$ be a morphism of schemes. Coefficient sheaves are the\npullbacks of condensed rings [sk-def-sfb-pulled-back-coefficients]. The admissible\ncoefficients are the finite commutative coefficient rings $A$ and\n$\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb$. Give $A$ its discrete topology. The rings\n$A,\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E$ are condensed as in [sk-def-sfb-condensed-ring]; the $\\Qlb$ coefficient is specifically\nthe condensed ring of continuous maps taking values in some finite subextension,\nas defined in [sk-def-sfb-qlbar-condensed];\n$E$ and $F$ below are finite subextensions of $\\Qlb/\\mathbf Q_\\ell$.\nThe assertions about Tate twists are made on the domain of [sk-def-sp-tate-twist]:\n$\\ell$ is invertible on $X$ and $Y$, and a finite coefficient ring $A$ being twisted\nis annihilated by a power of $\\ell$. No such invertibility assumption is imposed\non the untwisted assertions.\n\n1. For every admissible $\\Lambda$, the canonical map\n   $$\n   f^{-1}\\Lambda_Y\\longrightarrow\\Lambda_X\n   $$\n   is an isomorphism of sheaves of rings on $X_{\\mathrm{proét}}$ (this is the map $\\alpha_f$\n   of [sk-def-sfb-coefficient-morphisms]). For every integer $d$, its Tate twists have the corresponding canonical\n   isomorphism of coefficient module sheaves\n   $f^{-1}(\\Lambda_Y(d))\\cong\\Lambda_X(d)$ along $\\alpha_f$, including the twists\n   of a finite ring $A$.\n2. If $E\\subset F$ is a finite extension, then $\\cO_{F,X}$ is a finite free\n   $\\cO_{E,X}$-module and $F_X$ is a finite free $E_X$-module.\n\nBy (1), the pullback $f^*\\colon\\Mod(Y_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$\nof modules over these sheaves is exact. More precisely, it is canonically naturally\nisomorphic to the lift of $f^{-1}$ whose underlying sheaf functor is $f^{-1}$\nand whose $\\Lambda_X$-action is obtained using $\\alpha_f^{-1}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
   "place": "node sk-prop-sfb-cartesian-coefficients, order 747"
  },
  "stmt_deps": [
   "sk-def-sp-tate-twist",
-  "sk-def-sfb-coefficient-morphisms"
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-module-objects",
+  "def-sfb-module-upper-star"
  ],
  "proof": [
   {
-   "text": "(1) For every condensed ring $\\Lambda$, the identity $p_Y\\circ f=p_X$ gives\n$$\nf^{-1}\\Lambda_Y=f^{-1}p_Y^*\\Lambda\\simeq p_X^*\\Lambda=\\Lambda_X,\n$$\nwhich gives the assertion uniformly, including finite $A$. This is [lem-sfb-alpha-iso]:\n$\\alpha_f$ is a component of the natural isomorphism of [sk-def-sfb-pullback-from-point-comp].\nIts compatibility with identities and composition, in the adjoint form $\\eta_f$, is\n[lem-sfb-eta-id] and [lem-sfb-eta-comp].",
+   "text": "For a condensed coefficient ring $\\Lambda$, use the monoidal natural isomorphism $f^{-1}p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp]. Its component is precisely $\\alpha_f$ by [sk-def-sfb-coefficient-morphisms], and [lem-sfb-alpha-iso] states that this component is invertible. The coefficient-morphism statement also identifies it as an isomorphism of ring objects, so this proves the displayed comparison as a map of sheaves of rings, uniformly for all admissible coefficients, including finite rings.",
    "uses": [
-    "lem-sfb-alpha-iso",
     "sk-def-sfb-pullback-from-point-comp",
-    "lem-sfb-eta-id",
-    "lem-sfb-eta-comp"
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-alpha-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "paragraph 1: coefficient comparison (1)"
+   }
   },
   {
-   "text": "The torsion twists $\\mu_{\\ell^n}$ are represented by finite étale group schemes, which commute\nwith base change. Their inverse limit is represented by the inverse limit of these schemes,\nso its inverse image is represented by the base change (\\stacks{09A5}). This gives the\nassertion for $\\cO_E(1)$. For a finite $A$ killed by $\\ell^n$, its twist is obtained by\nextending scalars from $\\mathbf Z/\\ell^n\\mathbf Z$ in the finite-level twist, so inverse image\ncommutes with it as well. Inverting $\\ell$, extending scalars, and taking tensor powers and\nduals gives the other twists. Details: [det-prop-sfb-cartesian-coefficients-twists].",
+   "text": "For the twist assertion, $\\ell$ is invertible on both schemes and the coefficient belongs to the list in [det-prop-sfb-cartesian-coefficients-twists]. Apply its comparison $f^{-1}(\\Lambda_Y(d))\\cong\\Lambda_X(d)$ for every integer $d$. This is compatible with the same $\\alpha_f$ and the module structures, as required to interpret it as the twisted coefficient comparison. Its list includes the finite $\\ell$-power-torsion rings $A$. Thus it proves exactly the Tate-twist portion of (1) on the domain where those twists were defined.",
    "uses": [
     "det-prop-sfb-cartesian-coefficients-twists"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "paragraph 2: existing detailed Tate-twist comparison"
+   }
   },
   {
-   "text": "(2) An $\\cO_E$-basis of $\\cO_F$ is an isomorphism of topological $\\cO_E$-modules\n$\\cO_F\\cong\\cO_E^{[F:E]}$, hence of condensed modules\n$\\underline{\\cO_F}\\cong\\underline{\\cO_E}^{[F:E]}$. Pull it back along $p_X$, and invert $\\ell$\nfor the fields. Details: [det-prop-sfb-cartesian-coefficients-finite-free] and, for the\nfields, [lem-sfb-subfield-flat].",
+   "text": "For $E\\subset F$ finite over $\\mathbf Q_\\ell$ and $d=[F:E]$, choose an $\\cO_E$-basis $b_1,\\ldots,b_d$ of $\\cO_F$ using [lem-sfb-local-field-integral-basis]. With that basis, [det-prop-sfb-cartesian-coefficients-finite-free] supplies the basis-induced isomorphisms $\\cO_{E,X}^{\\,d}\\cong\\cO_{F,X}$ and $E_X^{\\,d}\\cong F_X$. These are isomorphisms of modules over the respective coefficient sheaves, for arbitrary $X$. A module is finite free of rank $d$ precisely when it is isomorphic to the direct sum of $d$ copies of its ring; hence these two displayed isomorphisms prove (2). No flatness converse or claim that inverse image commutes with arbitrary inverse limits is used.",
    "uses": [
-    "det-prop-sfb-cartesian-coefficients-finite-free",
-    "lem-sfb-subfield-flat"
+    "lem-sfb-local-field-integral-basis",
+    "det-prop-sfb-cartesian-coefficients-finite-free"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "paragraph 3: finite-free coefficient extension (2)"
+   }
+  },
+  {
+   "text": "We check the category hypotheses needed for the final exactness assertion. Work with the small skeletons of $X_{\\mathrm{proét}}$ and $Y_{\\mathrm{proét}}$ fixed in [def-weil-pbc-proetale-site]. Apply [lem-pur-ringed-site-grothendieck-abelian] with the constant sheaf of rings $\\mathbf Z$: a sheaf of abelian groups has the unique $\\mathbf Z$-action $n\\cdot m$ by repeated addition (for a section of the constant integer sheaf, define this locally where that section is constant and glue), so this identifies its module category with $\\Sh(-,\\Ab)$ and makes the latter abelian with equalizers and coequalizers. The tensor product of [sk-def-sfb-sheaf-tensor] is closed symmetric monoidal, and [det-def-sfb-sheaf-tensor-closed] says that tensoring in either variable is additive and preserves all colimits. In particular tensoring with either coefficient ring preserves finite colimits. The pulled-back coefficient rings are commutative monoid objects by [sk-def-sfb-pulled-back-coefficients]. Consequently [lem-sfb-modobj-abelian] makes both categories of coefficient module objects abelian. These checks also give all the closedness, braiding and colimit hypotheses for extension along an invertible coefficient map in the next step.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "sk-def-sfb-sheaf-tensor",
+    "det-def-sfb-sheaf-tensor-closed",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-modobj-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "final sentence of the statement: category hypotheses for exact module inverse image"
+   }
+  },
+  {
+   "text": "By [def-sfb-module-upper-star], module pullback is $\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^{-1})$. Step 1 makes $\\alpha_f$ invertible. The source ring $f^{-1}\\Lambda_Y$ is commutative since it is isomorphic as a ring object to the commutative $\\Lambda_X$. Thus step 4 and this observation supply the hypotheses of [def-sfb-modobj-extension-along-iso], so it is naturally isomorphic to $G=\\operatorname{Res}_{\\alpha_f^{-1}}\\circ\\operatorname{mapMod}(f^{-1})$. Explicitly, if the transported action on $f^{-1}M$ is $\\widetilde\\gamma:f^{-1}\\Lambda_Y\\otimes f^{-1}M\\to f^{-1}M$, its $\\Lambda_X$-action under $G$ is $\\widetilde\\gamma\\circ(\\alpha_f^{-1}\\otimes1)$. By [def-sfb-modobj-restriction], restriction changes only this action, leaving all underlying objects and arrows unchanged. Hence, for the two forgetful functors, $U_XG=f^{-1}U_Y$ literally; this states precisely in what sense module pullback is the sheaf inverse-image functor.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "def-sfb-modobj-extension-along-iso",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "final sentence of the statement; scalar extension in def-sfb-module-upper-star and def-sfb-modobj-extension-along-iso"
+   }
+  },
+  {
+   "text": "The abelian sheaf inverse image $f^{-1}$ is exact by clause 4 of [det-pe-topos-functoriality-inverse-image]. By clause 3 it preserves finite limits of underlying sheaves of sets. Since clause 4 computes abelian inverse image on those underlying sheaves, it preserves the zero abelian sheaf (whose underlying sheaf is terminal) and binary products with their projections. The canonical injections into a binary biproduct are the product maps with components identity and zero; zero maps factor through the zero object. Hence it also preserves these injections. It preserves the diagonal by the product universal property and the codiagonal by the coproduct universal property of the same finite biproduct. For $h,k:M\\to N$, applying it to $h+k=\\nabla_N\\circ(h\\oplus k)\\circ\\Delta_M$ therefore gives $f^{-1}(h+k)=f^{-1}h+f^{-1}k$, proving additivity. Apply [det-prop-sfb-module-pullback-exact-lifted] to $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $\\mathcal R=\\Lambda_Y$, $\\mathcal S=\\Lambda_X$, $F=f^{-1}$ and the functor $G$ of step 5. Step 4 verifies the abelian, additive monoidal and right-exact tensor hypotheses, and step 5 verifies the required equality of underlying functors. Thus $G$ is additive and exact. The natural isomorphism $f^*\\cong G$ of step 5 identifies their kernel and cokernel diagrams by its invertible components, so $f^*$ is exact too. This proves the final assertion for every untwisted admissible coefficient without any invertibility condition on $\\ell$ in the schemes.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "final sentence of the statement: exactness of module inverse image"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-alpha-iso",
   "sk-def-sfb-pullback-from-point-comp",
-  "lem-sfb-eta-id",
-  "lem-sfb-eta-comp",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-alpha-iso",
   "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sfb-local-field-integral-basis",
   "det-prop-sfb-cartesian-coefficients-finite-free",
-  "lem-sfb-subfield-flat",
-  "sk-prop-sfb-qlbar-colimit-x"
+  "def-weil-pbc-proetale-site",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-sheaf-tensor-closed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-modobj-abelian",
+  "def-sfb-module-upper-star",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-modobj-restriction",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+  "place": "paragraphs 1–3; final exactness sentence expanded using existing sheaf tensor and module-object lemmas"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedPullbackHom|TateTwist|padic.*[Cc]oeff|[Cc]oeff.*padic",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.IsIso",
+   "results": "no hits; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no absence conclusion; repeated with quoted hom_app_isIso"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of rings pulled back from a point on the pro-etale site, inverse image is an isomorphism and the induced module pullback is exact",
+   "results": "SheafOfModules.pullback; TopCat.Presheaf.stalkPullbackIso; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_comp_id",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of condensed coefficient ring sheaves on the pro-etale site of a scheme commutes with Tate twists and finite extensions of p-adic fields give finite free coefficient sheaves",
+   "results": "CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; Condensed.profiniteFree; Condensed.profiniteSolid; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hom_app_isIso\"",
+   "results": "CategoryTheory.NatIso.hom_app_isIso",
+   "date": "2026-10-16",
+   "verdict": "partial match only: components of natural isomorphisms; not the coefficient, twist and finite-free clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|Tate|adic",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back locally constant p-adic ring coefficient sheaves from a terminal topos is cartesian and finite extensions of local fields yield finite free sheaves of modules",
+   "results": "LocallyConstant.freeOfProfinite; Condensed.finFree; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.functorToPresheaves; CondensedMod.LocallyConstant.functorToPresheaves; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_app_isIso|isIso_app_of_isIso",
+   "results": "100; 165; 201; searched Mathlib/CategoryTheory/NatIso.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match only: components of natural isomorphisms; not the coefficient, twist and finite-free clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|pullbackObjFreeIso|instIsIsoPullbackObjUnitToUnitOfFinal",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_app_isIso|isIso_app_of_isIso",
+   "results": "Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/NatIso.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "partial match only: components of natural isomorphisms; not the coefficient, twist and finite-free clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "def finFree|def profiniteFree|def ofSheafProfinite",
+   "results": "Mathlib/Condensed/Explicit.lean; searched Mathlib/Condensed",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the hits supply only general sheaf/module or condensed constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism of coefficient rings is restriction of scalars along its inverse, and an exact inverse image of sheaves lifts to an exact functor on module objects",
+   "results": "SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pushforwardCongr; SheafOfModules.restrictScalars; CommRingCat.moduleCatExtendScalarsPseudofunctor; ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear; ModuleCat.homEquiv_extendScalarsId; ModuleCat.restrictScalarsEquivalenceOfRingEquiv",
+   "date": "2026-10-16",
+   "verdict": "partial algebraic or general sheaf matches only; none proves this pro-etale coefficient conjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "RingOfIntegers.*(free|finite)|[Ff]ree.*[Rr]ingOfIntegers|[Ff]inite.*[Rr]ingOfIntegers|[Ff]inite.*[Ii]ntegral[Cc]losure",
+   "results": "Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/RamificationInertia/Galois.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean; Mathlib/NumberTheory/NumberField/Norm.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "partial algebraic or general sheaf matches only; none proves this pro-etale coefficient conjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalarsIsoComapInv\"",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsIsoComapInv|comapEquivalenceOfIsIso|isIso_condensedPullbackHom|cartesianCoefficients",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure.finite\"",
+   "results": "IsIntegralClosure.finite",
+   "date": "2026-10-16",
+   "verdict": "partial algebraic or general sheaf matches only; none proves this pro-etale coefficient conjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite extensions E and F of the p-adic numbers, the ring of integers of F has a finite basis over the ring of integers of E of cardinality the field extension degree",
+   "results": "PadicInt.algebra; NumberField.RingOfIntegers.rank; NumberField.RingOfIntegers.basis; NumberField.RingOfIntegers.instFreeInt; PadicComplexInt.integers; NumberField.RingOfIntegers.extension_isNoetherian; NumberField.RingOfIntegers.instIsTorsionFree_1; NumberField.integralBasis",
+   "date": "2026-10-16",
+   "verdict": "partial algebraic or general sheaf matches only; none proves this pro-etale coefficient conjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.finite|Module.Free.of_finite_type_torsion_free|Module.free_of_finite_type_torsion_free|isPrincipalIdealRing.*free",
+   "results": "Mathlib/RingTheory/Trace/Quotient.lean; Mathlib/RingTheory/NormalClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+   "date": "2026-10-16",
+   "verdict": "partial algebraic or general sheaf matches only; none proves this pro-etale coefficient conjunction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -94,5 +287,44 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-cartesian-coefficients"
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-prop-sfb-cartesian-coefficients",
+  "worker": "stage1",
+  "summary": "Audited the earlier sandbox split against the current blueprint and every cited statement. Made the domain of the referenced Tate-twist definition and the finite p-adic coefficient-field convention explicit. Retained the uniform untwisted ring comparison and finite-free clauses. Added the missing ring-object citation, all category hypotheses for exactness, and the precise comparison of scalar extension with restriction along alpha inverse, before applying the exact-lift theorem. Reused the existing sheaf comparisons and exactness inputs; removed unused eta and qbar-colimit proof dependencies. Second reading supplied the missing existence of an integral basis as a strictly smaller algebraic input, clarified natural isomorphism of module pullback with the inverse-image lift, and made commutativity and additivity checks explicit. Repair of landing L: inherited the now-installed authoritative chapter/unit binding, restored the helper placement, and filled the three unit realization entries without altering its route. Current repair re-read the expanded Tate-twist definition and the corrected pullback references; reconstructed the sandbox item from current baseline metadata and refreshed every citation. The existing chapter/unit records now validate the helper placement. Independent second reading tightened step 6: finite-limit preservation on underlying sheaves gives zero objects and finite biproducts, so the explicit additivity calculation needs no inference about abelian colimits from set-sheaf colimits. Fresh integral-closure and local-field Mathlib searches confirm only partial candidates.",
+  "blueprint": "Steps 1, 2, 3 realize respectively proof paragraphs 1, 2, 3. Steps 4–6 prove the final sentence of the item statement, whose proof was implicit in the sketch. The twists and finite-free nodes are exactly the existing detailed nodes named there.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Used only with the constant sheaf Z to obtain the abelian sheaf categories and their colimits on the chosen small pro-etale sites; this generic ringed-site fact does not replace any geometric step of the coefficient unit."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Step 2 takes the Tate-twist comparison f^{-1}(Lambda_Y(d)) = Lambda_X(d) from this detailed node, which the unit's own proof paragraph 2 names as its details; it is bound to unit sk-prop-an only by placement of its blueprint file, so citing it follows this unit's route rather than replacing it."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Step 4 uses only the generic statement that module objects over a monoid with right-exact tensor in an additive abelian monoidal category form an abelian category; no node of this unit states it."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Step 6 uses only the generic statement that a functor of module categories lifting an additive exact functor is exact; it expands the unit's final sentence 'is the exact functor f^{-1}', for which this unit has no node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sfb-modobj-abelian",
+  "det-prop-sfb-module-pullback-exact-lifted"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-ND-8ff833ca5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8ff833ca5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps, the new node and the statements of all 24 cited nodes. I also read the blueprint main-20261015 item section and its three proof paragraphs, the finite-free and twist detail sources and the module-pullback-exact (-lifted/-main) proofs, plus the unit and chapter records. Statement correction: the twist part is now restricted to the domain of sk-def-sp-tate-twist (ℓ invertible, finite A killed by a power of ℓ). This is genuine, not a weakening: the twists exist only there, and the Spec F_ℓ counterexample (μ_ℓ=0) is correct. The untwisted clauses still hold for arbitrary f. Coefficients (Q̄_ℓ is the finite-subextension condensed ring; admissible list as in sk-def-localizing-closure) and α_f: f^*Λ_Y→Λ_X match the blueprint in direction and category. Step checks: (1) the component of the monoidal iso is a ring isomorphism; (2) det-twists has exactly these hypotheses; (3) the new basis existence plus the basis-conditional det-finite-free gives O_{E,X}^d≅O_{F,X} and E_X^d≅F_X; (4) all hypotheses of lem-sfb-modobj-abelian hold; (5) the hypotheses of the restriction equivalence hold, Ext_α≅Res_{α^{-1}}, and U_X G=f^{-1}U_Y; (6) additivity follows from biproducts, and the exact-lift lemma applies. Acyclic. qlbar-colimit-x is reached through the detail nodes. The new node lem-sfb-local-field-integral-basis is true (tested on E=F, unramified, and Q_ℓ(√ℓ)), self-contained and correctly sourced. It is not elementary and not a restatement of the parent, and I found no duplicate in a whole-DAG search. Mathlib's IsIntegralClosure.finite/module_free/rank (lines 175/183/192) need the unit ball identified with the integral closure, so they do not make it a leaf; unsplit is correct. FIX: I added split_report.tool_uses entries for the three undeclared off-unit statements: det-prop-sfb-cartesian-coefficients-twists (the unit step's own detail node, filed under sk-prop-an), lem-sfb-modobj-abelian and det-prop-sfb-module-pullback-exact-lifted (both generic module-object tools). I also accept the declared lem-pur-ringed-site-grothendieck-abelian. Nothing else in the whole-file fix differs from the delivery.; 1 file(s) fixed by the reviewer"
+ }
 }

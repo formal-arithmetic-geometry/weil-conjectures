@@ -34,81 +34,362 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $W=X\\setminus g(Z)$ and write $q:W\\hookrightarrow X$ for its open inclusion. A finite affine cover $X=\\bigcup_r\\operatorname{Spec}B_r$ with each $B_r$ a finite-type $k$-algebra pulls back along the closed immersion to the finite affine cover $Z=\\bigcup_r\\operatorname{Spec}(B_r/I_r)$. The images of finite algebra generators of $B_r$ generate $B_r/I_r$, so $Z$ is finite type over $k$. Finite type over the Noetherian scheme $\\operatorname{Spec}k$ makes $X$ and $Z$ Noetherian. Hence their open subschemes $V,W$ are Noetherian and all four schemes are quasi-separated. The morphism-permanence lemma makes the open inclusions $j,q$ quasi-compact. They are therefore finite type by the quasi-compact-open lemma, so $V,W$ are finite type over $k$ as well: for a composite of finite-type affine algebra maps, the generators of the first algebra together with the generators of the second generate the composite. The same permanence lemma makes the structure map $a:V\\to\\operatorname{Spec}k$ qcqs and makes $q$ quasi-separated. No separatedness is used.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.4 hypothesis and Example 6.4.1, printed p. 48; elementary affine quotient calculation"
+   }
+  },
+  {
+   "text": "For every scheme in the argument its category of ordinary $C$-module sheaves is Grothendieck abelian. Thus arbitrary coproducts in the unbounded derived categories are represented by termwise coproducts. They are exact: direct sums of sheaves are exact, so cohomology of a termwise sum is the sum of cohomologies; also the cone formula $\\operatorname{Cone}(f)^n=B^n\\oplus A^{n+1}$ shows that sums of cone triangles are cone triangles. Exact inverse image is a left adjoint on module sheaves. Consequently it preserves termwise sums and quasi-isomorphisms, hence derived coproducts. These observations apply in particular to $g^*,j^*,q^*$ and every etale slice restriction used below.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9 (lemma-derived-products), (1)-(2); termwise cone calculation"
+   }
+  },
+  {
+   "text": "The additive group of $C$ is torsion and $k$ is separably closed. Apply the finite-type separably-closed derived-dimension theorem separately to $q:W\\to X$ and $a:V\\to\\operatorname{Spec}k$. With the qcqs checks of step 1, the unbounded coproduct theorem therefore gives that $Rq_*$ and $Ra_*$ preserve arbitrary coproducts. Over the algebraically closed field $k$, the natural constant-sheaf isomorphism identifies sections with the identity geometric stalk; apply it to the underlying sets and their module operations. Thus sections on $(\\operatorname{Spec}k)_{\\mathrm{et}}$ are exact and preserve sums, the latter also following because constant sheaf and sections are inverse equivalences. Termwise sections therefore identify $R\\Gamma(V,-)$ with sections of $Ra_*$, so $R\\Gamma(V,-)$ preserves arbitrary coproducts. Only separate finite bounds for these two maps are required; no unproved uniform bound over all etale objects is asserted.",
+   "uses": [
+    "lem-etale-finite-type-sep-closed-derived-dimension",
+    "lem-etale-qcqs-finite-dimension-derived-coproducts",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.4.5 proof, printed p. 48: finite cohomological dimension gives preservation for unbounded complexes"
+   }
+  },
+  {
+   "text": "Let $Rg^!$ be the right adjoint of closed direct image. The closed direct image is exact by [lem-cbc-open-closed-recollement], so its termwise functor on unbounded complexes is $Rg_*=g_*$. Thus the closed counit from [prop-weil-open-closed-recollement-adjunctions] gives $g^*g_*\\cong\\mathrm{id}$ in these categories. Its natural closed-support triangle is $g_*Rg^!K\\to K\\to Rq_*q^*K\\to(g_*Rg^!K)[1]$. Compare the direct sum of these triangles for $K_i$ with the triangle for $\\bigoplus_iK_i$. Steps 2 and 3 make the middle and third comparison maps isomorphisms, so the first is an isomorphism too. Applying $g^*$ to the first comparison and using $g^*g_*\\cong\\mathrm{id}$ now proves that $Rg^!$ commutes with coproducts. In particular $B=j^*Rg^!$ commutes with coproducts. The use of the triangle and closed counit is on the ordinary unbounded etale categories, not on a constructible or pro-etale category.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-exc-closed-support-triangle",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle), unbounded module form supplied by lem-exc-closed-support-triangle; Tag 04CA for supported sheaves"
+   }
+  },
+  {
+   "text": "On any nonempty member of an etale trivializing cover of $V$, $L$ has constant value a finite $C$-module $P$. Its value is a geometric stalk, hence flat. Take a surjection $C^n\\to P$ using the finite set of elements of $P$ as generators. Its kernel is a finite set, since $C^n$ is finite, so its elements form a finite set of relations. Thus $P$ is finitely presented. The finitely-presented-flat theorem makes $P$ projective. The projective lifting property applied to $C^n\\to P$ and $\\mathrm{id}_P$ gives a section, so $P$ is a retract of $C^n$. The associated constant sheaf is likewise a retract of $C_V^n$ on that cover member (constant sheafification preserves finite products and the splitting identities). For the empty cover member the assertion is vacuous.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), (1) implies (2) implies (3); finite-set presentation written explicitly"
+   }
+  },
+  {
+   "text": "Write $H_L(N)=R\\mathcal Hom_C(L,N)$ on $V_{\\mathrm{et}}$. The canonical comparison $\\bigoplus_i H_L(N_i)\\to H_L(\\bigoplus_iN_i)$ can be tested after the trivializing restrictions of step 5: derived internal Hom commutes with slice restriction, and restriction commutes with sums by step 2. On such a slice $L$ is a retract of the finite free constant sheaf $C^n$. From the defining Hom complex into a K-injective resolution, $R\\mathcal Hom_C(C,N)\\cong N$ (a module map out of the unit is determined by the image of $1$), so $R\\mathcal Hom_C(C^n,N)\\cong N^n$. The comparison for $N^n$ is an isomorphism because finite products are finite sums. To spell out the retract, let $u:L\\to C^n$ and $v:C^n\\to L$ satisfy $vu=\\mathrm{id}_L$, and put $S_L=\\bigoplus_i H_L(N_i)$ and $T_L=H_L(\\bigoplus_iN_i)$. Contravariance gives maps $S(v):S_L\\to S_{C^n}$ and $S(u):S_{C^n}\\to S_L$ whose composite is the identity, and maps $T(v),T(u)$ with the same property. If $\\alpha_L:S_L\\to T_L$ is the canonical comparison, naturality shows that $S(u)\\alpha_{C^n}^{-1}T(v)$ is a two-sided inverse to $\\alpha_L$. Exact geometric stalks commute with cohomology; every geometric point lies under a trivializing etale neighbourhood, so the conservative stalk criterion applied to every cohomology sheaf proves the original comparison is an isomorphism. This is a statement about internal Hom; it does not assume that compactness itself descends just from conservative restriction.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 08J7, Hom-complex construction; finite retract calculation as in Bhatt-Scholze Lemma 6.4.6"
+   }
+  },
+  {
+   "text": "Apply the open adjunction to $j:V\\hookrightarrow Z$ with its reduced closed complement in $Z$. The two derived adjunctions $g_*\\dashv Rg^!$ and $j_!\\dashv j^*$, followed by the global derived-internal-Hom formula, give naturally in every unbounded $K$:\n$$\\operatorname{Hom}_X(g_*j_!L,K)\\cong\\operatorname{Hom}_V(L,j^*Rg^!K)\\cong H^0 R\\Gamma(V,H_L(BK)).$$\nThe functors $B$, $H_L$ and $R\\Gamma(V,-)$ preserve coproducts by steps 4, 6 and 3. Finally $H^0$ commutes with direct sums of complexes of $C$-modules: cycles and boundaries of a finitely supported tuple are the tuples of cycles and boundaries, so the quotient is the sum of the cohomology modules. Hence this natural identification carries the canonical comparison in the statement to an isomorphism. The definition of compact object proves the conclusion, including an empty family. This calculation uses the factorization $V\\xrightarrow{j}Z\\xrightarrow{g}X$ exactly as given; no unsupported change of factorization is needed.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-pur-rhom-global-sections",
+    "def-pc-compact-object",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA (lemma-section-RHom-over-U); Bhatt-Scholze Lemmas 6.4.4-6.4.6 and Proposition 6.4.8, adjoint form of their compactness argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-pc-compact-object",
+  "def-pur-derived-internal-hom",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-cbc-open-closed-recollement",
+  "lem-etale-finite-type-sep-closed-derived-dimension",
+  "lem-etale-qcqs-finite-dimension-derived-coproducts",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.4 pp. 48-49, adjoint version of the open/closed compactness argument; auxiliary Stacks sources specified in the steps."
+ },
  "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"Sheaf\"",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
+  },
   {
    "tool": "grep",
    "query": "IsCompactObject|[Cc]ompact.*[Ll]isse|[Cc]ompact.*[Cc]onstructible",
-   "results": "[]; directory Mathlib/AlgebraicGeometry",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"Mathlib/AlgebraicGeometry\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse finite flat torsion sheaf extended by zero from a locally closed stratum is compact in the etale derived category",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.isCompact_basicOpen\"], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
   },
   {
    "tool": "leansearch",
    "query": "Extension by zero of a finite locally constant flat module along a locally closed immersion is compact in the derived category of etale sheaves",
-   "results": "[\"LocallyConstant.instZero\", \"HasCompactSupport.extend_zero\", \"HasCompactSupport.continuous_extend_zero\", \"DerivedCategory.instHasZeroObject\", \"CategoryTheory.Abelian.Ext.comp_zero\", \"ContinuousLinearMap.extend_zero\", \"CategoryTheory.Abelian.Ext.zero_comp\", \"CategoryTheory.Abelian.Ext.zero_hom\"]",
+   "results": "{\"hits\": 8, \"top\": [\"LocallyConstant.instZero\", \"HasCompactSupport.extend_zero\", \"HasCompactSupport.continuous_extend_zero\", \"DerivedCategory.instHasZeroObject\", \"CategoryTheory.Abelian.Ext.comp_zero\", \"ContinuousLinearMap.extend_zero\", \"CategoryTheory.Abelian.Ext.zero_comp\", \"CategoryTheory.Abelian.Ext.zero_hom\"], \"directory\": \"\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant flat torsion sheaf extended by zero from a locally closed subscheme is compact in the unbounded etale derived category",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.IsAffineOpen.isCompact\", \"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.compact_open_induction_on\", \"AlgebraicGeometry.isCompact_iff_exists\"], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible perfect value sheaves are compact objects of the unbounded derived category of an etale site of finite cohomological dimension",
+   "results": "{\"hits\": 8, \"top\": [\"CondensedMod.ofSheafCompHaus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"Condensed.instAB5CondensedMod\", \"CondensedMod.ofSheafProfinite\", \"HasDerivedCategory\", \"DerivedCategory.IsGE\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\"], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
   },
   {
    "tool": "loogle",
    "query": "\"IsCompactObject\", \"Sheaf\"",
-   "results": "[]",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A lisse finite flat torsion sheaf extended by zero from a locally closed stratum of a finite type scheme over an algebraically closed field is compact in the etale derived category",
-   "results": "[\"AlgebraicGeometry.IsArtinianScheme.toCompactSpace\", \"AlgebraicGeometry.IsAffineOpen.isCompact\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.compact_open_induction_on\", \"AlgebraicGeometry.isCompact_iff_exists\"]",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The etale derived category of a finite dimensional scheme has compact objects given by constant finite projective modules extended by zero from strata",
-   "results": "[\"Condensed.finFree\", \"DerivedCategory.TStructure.t\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.IsLE\"]",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
   },
   {
    "tool": "grep",
-   "query": "IsCompactObject|compact.*(sheaf|strat)|constructible.*compact",
-   "results": "[]; directory Mathlib/Algebra/Homology",
+   "query": "IsCompactObject|compact.*(sheaf|stratum)|constructible.*compact",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"AlgebraicGeometry\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits concern topological compactness, ordinary free sheaves or derived boundedness, and do not assert compactness of an object of the unbounded etale derived category."
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a finite locally constant projective sheaf is compact in the unbounded derived category of etale sheaves",
+   "results": "{\"hits\": 8, \"top\": [\"LightCondensed.lanLightCondSet\", \"HasCompactSupport.extend_zero\", \"CategoryTheory.Projective.zero_projective\", \"HasCompactSupport.continuous_extend_zero\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.Abelian.Ext.zero_comp\", \"CategoryTheory.hasExt_of_enoughProjectives\"], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern topological compactness, support of functions, or general derived/sheaf constructions, not this unbounded etale compactness statement."
   },
   {
    "tool": "leanfinder",
-   "query": "A constructible sheaf with perfect stalks on a coherent site is a compact object of its unbounded derived category",
-   "results": "8 hit(s); recorded top hits: [\"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"CondensedMod.ofSheafCompHaus\", \"DerivedCategory.TStructure.t\", \"CondensedMod.IsSolid\", \"Condensed.instAB5CondensedMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"]",
+   "query": "In a derived category of sheaves, an object locally a direct summand of finite free modules is compact when derived global sections preserve coproducts",
+   "results": "{\"hits\": 8, \"top\": [\"SheafOfModules.isFinitePresentation\", \"DerivedCategory.IsGE\", \"SheafOfModules.IsFinitePresentation\", \"DerivedCategory.IsLE\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"directory\": \"\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independently inspected signatures concern sheafification, the Grothendieck abelian property, derived t-structures or compactness of topological constructible sets; none states compactness in an unbounded etale derived category."
+   "verdict": "no match: semantic hits define finite presentation or derived truncation, or show Grothendieck abelianness; none states compactness of these etale objects."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|[Cc]ompact.*[Pp]erfect|[Pp]erfect.*[Cc]ompact",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"\", \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: search returned zero hits."
   },
   {
    "tool": "loogle",
-   "query": "\"IsCompactObject\", \"SheafOfModules\"",
-   "results": "0 hit(s); recorded top hits: []",
+   "query": "\"IsCompactObject\"",
+   "results": "{\"hits\": 0, \"top\": [], \"directory\": \"\", \"note\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independently inspected signatures concern sheafification, the Grothendieck abelian property, derived t-structures or compactness of topological constructible sets; none states compactness in an unbounded etale derived category."
-  },
-  {
-   "tool": "grep",
-   "query": "IsCompactObject|compact.*[Pp]erfect|compact.*[Cc]onstructible",
-   "results": "13 hit(s); recorded top hits: [\"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\"]",
-   "date": "2026-10-16",
-   "verdict": "no match: independently inspected signatures concern sheafification, the Grothendieck abelian property, derived t-structures or compactness of topological constructible sets; none states compactness in an unbounded etale derived category."
+   "verdict": "no match: search returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-finite-ring-compact-generators",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-lisse-stratum-compact",
+  "worker": "stage1",
+  "summary": "Replaced the earlier unsupported local compactness/factorization argument by a seven-step derived-adjoint calculation. Closed-support localization gives coproduct preservation of Rg!, finite local projective retracts give internal-Hom coproduct preservation, and global sections and adjunction give the precise compactness comparison. Retained the statement unchanged; no new nodes.",
+  "blueprint": "Adic-stage paragraph: \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\"; finite-level compact generators used to control coproducts of coefficient-system adjoints. Auxiliary input: Lisse flat sheaves extended from a locally closed stratum are compact.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-etale-finite-type-sep-closed-derived-dimension",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-etale-qcqs-finite-dimension-derived-coproducts",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise derived coproduct construction used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "why": "Generic finite-presentation flatness criterion used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic unbounded internal-Hom restriction calculus used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic sheaf, scheme, algebra or derived-category input used exactly at the cited step; the unit defines the six operations and does not supply this generic interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-open-closed-recollement",
+  "lem-etale-finite-type-sep-closed-derived-dimension",
+  "lem-etale-qcqs-finite-dimension-derived-coproducts",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-ef4388f46",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-ef4388f46 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the statements of all 28 proof_deps, plus Bhatt–Scholze arXiv 1309.1198 §6.4 (printed pp. 47–49: standing assumption, Ex. 6.4.1, Lemmas 6.4.4–6.4.6, Rem. 6.4.7, the end of Prop. 6.4.8). The statement is a faithful specialization: finite ℓ-torsion C, L finite locally constant flat in degree 0, g_*j_! in place of BS's g_!f_*, with the same sheaf. Finite type over k gives Noetherian schemes, so the strata are constructible as Rem. 6.4.7 requires; no separatedness is needed. Small cases: Spec k with L = C works. C = Z/ℓ² with L = Z/ℓ shows the flatness hypothesis is necessary. Empty strata give 0. Steps: (1) finite type, Noetherian, qcqs of j, q and a, from the closed-immersion definition and the cited permanence lemmas, with no affine-intersection assumption. (2) Termwise sums are exact derived coproducts and inverse image preserves them. (3) The finite-type separably-closed dimension node is applied separately to q and a. The qcqs coproduct node then gives that Rq_* and Ra_* preserve sums, and Γ(Spec k) is an equivalence. (4) In the unbounded closed-support triangle, naturality gives a morphism of triangles, and then g^* with the counit g^*g_* ≅ id gives that Rg^! preserves sums. (5) P is finite, hence finitely presented, flat and so projective, hence a retract of C^n; sheafifying the constant presheaves keeps the splitting. (6) Slice restriction of RHom, RHom(C^n, N) = N^n, the explicit retract inverse, and the stalk-conservativity check. (7) The adjunctions plus lem-pur-rhom-global-sections and H^0 of sums in D(C). There is no cycle and there are no new nodes. det-ctf-finite-compact-etale (imported, other unit) is a generalization and was correctly not used as a shortcut; same_as [] is right. No SGA source is cited. tool_uses accepted: the 12 genuinely off-unit generic tools, each used as a black box at its step (the unit has uses []). The declarations for the same-unit lem-pur-rhom-global-sections and the Mathlib-status nodes are redundant but harmless. No fixes."
+ }
 }

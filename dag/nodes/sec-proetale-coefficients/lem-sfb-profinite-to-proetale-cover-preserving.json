@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-profinite-to-proetale-cover-preserving",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$S\\mapsto\\Spec LC(S,\\Z)$ preserves coverings",
@@ -18,25 +18,61 @@
  ],
  "proof": [
   {
-   "text": "The morphisms are weakly étale, because a morphism between weakly étale\n$\\Spec\\Z$-schemes is weakly étale. They are also morphisms of affine schemes.",
-   "uses": [],
-   "elementary": null
+   "text": "For each map $S_i\\to S$, the induced morphism $\\Spec LC(S_i,\\Z)\\to\\Spec LC(S,\\Z)$ is a morphism over $\\Spec\\Z$ by the functorial construction of [def-sfb-profinite-to-proetale]. Both structure morphisms to $\\Spec\\Z$ are weakly étale by [lem-sfb-lc-weakly-etale], and every morphism over a common base between weakly étale schemes is weakly étale by [sk-lem-pe-weakly-etale-stability]. The source and target are affine schemes because they are spectra of rings, by [def-weil-affine-spectrum].",
+   "uses": [
+    "def-sfb-profinite-to-proetale",
+    "lem-sfb-lc-weakly-etale",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-cover-preserving.proof.md",
+    "place": "Proof, paragraph 1: weakly étale affine morphisms"
+   }
   },
   {
-   "text": "Write $LC(S,\\Z)=\\colim_j\\Z^{S_j}$ over the finite quotients $S_j$ of $S$.\nThen\n$$\n\\Spec LC(S,\\Z)=\\lim_j\\coprod_{S_j}\\Spec\\Z ,\n$$\nand its underlying set is $S\\times|\\Spec\\Z|$. A map $g\\colon S'\\to S$ induces\n$g\\times\\mathrm{id}$ on underlying sets, so joint surjectivity of the $S_i\\to S$\ngives joint surjectivity of the induced family of spectra. A finite jointly\nsurjective family of weakly étale morphisms between affine schemes is a\npro-étale covering.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $X=\\Spec LC(S,\\Z)$ and $X_i=\\Spec LC(S_i,\\Z)$, and denote the given maps by $g_i:S_i\\to S$ and their induced spectrum maps by $f_i:X_i\\to X$. Apply [lem-weil-pbc-locally-constant-prime-spectrum] with $R=\\Z$: these spaces have points $(s,\\mathfrak p)$, with prime ideal $P_{s,\\mathfrak p}=\\{h:h(s)\\in\\mathfrak p\\}$. By [def-sfb-profinite-to-proetale], the ring map is $g_i^*:h\\mapsto h\\circ g_i$. Its inverse image of $P_{s_i,\\mathfrak p}$ is $\\{h:h(g_i(s_i))\\in\\mathfrak p\\}=P_{g_i(s_i),\\mathfrak p}$. Thus $f_i$ sends $(s_i,\\mathfrak p)$ to $(g_i(s_i),\\mathfrak p)$. Given $(s,\\mathfrak p)$, joint surjectivity supplies $i,s_i$ with $g_i(s_i)=s$, proving that the $f_i$ are jointly surjective. Now let $V\\subset X$ be any affine open. By [lem-weil-pbc-morphism-affine-schemes-affine], each $f_i$ is affine and $V_i=f_i^{-1}(V)$ is an affine open in $X_i$. The finite family $V_i$ has images with union exactly $V$: every image lies in $V$, and a preimage of any point of $V$ under some $f_i$ belongs to $V_i$. Together with weak étaleness from step 1, this is exactly the covering condition of [def-weil-pbc-proetale-site]. This also covers $I=\\varnothing$, when joint surjectivity forces $S=X=\\varnothing$. Every covering sieve on the profinite site contains a finite jointly surjective family by [sk-def-sfb-condensed-ring]. Its image sieve contains the pro-étale covering family just proved, so it is covering; hence $u$ is cover preserving.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "def-sfb-profinite-to-proetale",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-cover-preserving.proof.md",
+    "place": "Proof, paragraph 2: spectrum underlying-set computation and covering criterion"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-profinite-to-proetale",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-lc-weakly-etale",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "sk-def-sfb-condensed-ring",
+  "sk-lem-pe-weakly-etale-stability"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-cover-preserving.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-cover-preserving.proof.md",
+  "place": "## Proof, paragraphs 1-2"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'profiniteToProEt|profiniteToScheme|CoverPreserving.*[Pp]roetale|[Pp]roetale.*CoverPreserving|LocallyConstant.*PrimeSpectrum|PrimeSpectrum.*LocallyConstant' Mathlib/; and grep -rln CoverPreserving Mathlib/ with Mathlib/AlgebraicGeometry/Sites/Proetale.lean read",
+   "results": "first pattern: 0 hits. CoverPreserving occurs only in general site files (CategoryTheory/Sites/CoverPreserving.lean, CoverLifting.lean, DenseSubsite, Coherent/SheafComparison.lean, Over.lean, Equivalence.lean, InducedTopology.lean, Point/Comap.lean, MorphismProperty/CommaSites.lean, Topology/Sheaves/SheafCondition/Sites.lean, AlgebraicGeometry/OpenImmersion.lean). AlgebraicGeometry/Sites/Proetale.lean defines only the big pro-etale precoverage/topology on Scheme (proetalePrecoverage, line 52; proetaleTopology, line 66); no small site of Spec Z, no functor from Profinite, no LocallyConstant spectrum.",
+   "date": "2026-10-17",
+   "verdict": "no match (grep only; LeanSearch/LeanFinder not reachable from the maintainer reader's machine and not run)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -56,5 +92,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-profinite-to-proetale-cover-preserving",
+  "worker": "stage1",
+  "summary": "Split the covering-preservation lemma into two source-backed steps. The first checks weakly étale affine morphisms using the existing locally-constant weakly étale lemma and stability statement. The second uses the existing closed prime-spectrum homeomorphism to prove joint surjectivity on spectra, then applies the pro-étale covering definition and the coherent topology definition. No new nodes or Mathlib leaves were needed. Second reading: wrote the inverse-image prime calculation and checked the covering condition for every affine open using the existing affine-morphism Mathlib leaf; removed worker-owned tool_uses.",
+  "blueprint": "Step 1 realizes the blueprint proof paragraph on weakly étale affine morphisms. Step 2 realizes its paragraph on the underlying-set formula and the covering criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-e33bc1a6c",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-e33bc1a6c (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement. The statement is the main-20261015 blueprint text, unchanged, and is not a target. The route is fine: sk-lem-pe-weakly-etale-stability is reachable through the unit's uses, so no tool use is needed. lem-weil-pbc-locally-constant-prime-spectrum is closed in slopmaster2: LocallyConstant.lean 274-287 has no sorry, and its hypotheses are compact, T2 and totally disconnected with any CommRing. The affine-morphism node is a Mathlib leaf. Step 1 is checked against Stacks 0951 (more-morphisms lemma-weakly-etale-permanence). In step 2 I checked by hand that the inverse image of P_{s_i,p} under h->h∘g_i is P_{g_i(s_i),p}, so the induced map is g×id on points. The V_i=f_i^{-1}(V) argument meets Stacks 0989 proetale definition-fpqc-covering for every affine open, and 01SH gives that V_i is affine. Cover preservation matches the definition in lem-sfb-cover-compatible-continuous. Edge cases checked: I empty, S empty, S a point, non-injective g_i. No new nodes, no duplicate (the Spec K and Omega variants are different statements), no cycle. FIX: the item's mathlib_searches was empty, unlike its sibling items. I added one grep record that I actually ran (0 hits; Mathlib has only the big pro-étale topology on Scheme, Sites/Proetale.lean 52 and 66). Its verdict states that LeanSearch and LeanFinder were not run. No other field changed.; 1 file(s) fixed by the reviewer"
+ }
 }

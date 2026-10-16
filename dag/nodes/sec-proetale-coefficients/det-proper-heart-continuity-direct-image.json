@@ -3,45 +3,144 @@
  "blueprint": {
   "is": "det-proper-heart-continuity-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Higher direct images commute with filtered colimits",
- "statement": "Let $p\\colon X\\to Y$ be quasi-compact and quasi-separated and $A$ a sheaf of rings on $X_{\\mathrm{proét}}$.\nFor every $q$, $R^qp_*$ on sheaves of $A$-modules commutes with filtered colimits and direct sums.",
+ "statement": "Let $p\\colon X\\to Y$ be quasi-compact and quasi-separated and $A$ a sheaf of rings on $X_{\\mathrm{proét}}$.\nFor every $q$, $R^qp_*$ on sheaves of $A$-modules commutes with filtered colimits and direct sums.\n\nHere $X$ and $Y$ are schemes [def-pc-scheme], and quasi-compactness and quasi-separatedness are as in [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. The sites are the small pro-étale sites [sk-def-pe-site], in the universes of [def-weil-size-convention]. Module sheaves are those of [def-weil-sheaf-of-modules-category]. The direct image [det-pe-topos-functoriality-inverse-image] takes an $A$-module sheaf $M$ to the $p_*A$-module sheaf with sections $(p_*M)(V)=M(X\\times_Y V)$. For $q\\in\\mathbf Z$, $R^qp_*(M)$ means $H^q(Rp_*(M[0]))$, where $M[0]$ is concentrated in degree zero, with right derivation and cohomology as in [def-sfb-right-derived-functor, def-weil-abstract-derived-category]. Colimits and direct sums are taken in these module-sheaf categories [def-weil-pbc-category-colimit].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-direct-image.md",
   "place": "node det-proper-heart-continuity-direct-image, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "sk-def-pe-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-topos-functoriality-inverse-image",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "Let $V\\to Y$ be an affine weakly contractible object and $X_V=X\\times_YV$, which is qcqs because $V$ is\naffine and $p$ is qcqs. $R^qp_*M$ is the sheaf associated to $V'\\mapsto H^q(X_{V'},M)$. Since $\\Gamma(V,-)$\nis exact ([det-proper-heart-continuity-sections]), applying it to a K-injective resolution gives\n\n$$\n(R^qp_*M)(V)=H^q\\bigl(\\Gamma(V,Rp_*M)\\bigr)=H^q(R\\Gamma(X_V,M|_{X_V}))=H^q((X_V)_{\\mathrm{proét}},M|_{X_V}).\n$$",
+   "text": "For a small filtered diagram (M_i) of A-module sheaves put K_i=M_i[0]. Every K_i vanishes below the common degree a=0. Colimits of module sheaves exist and agree with colimits of the underlying abelian sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful]; their termwise colimit is (colim_i M_i)[0], since every other degree is the zero diagram. Apply [det-pe-bounded-continuity-direct-image] with f=p and its arbitrary ring sheaf mathcal R=A. Its hypotheses are exactly the given quasi-compactness and quasi-separatedness and the common bound 0. By the degree-zero-complex meaning of R^q in the statement, it gives colim_i R^q p_*M_i ≅ R^q p_*(colim_i M_i). The comparison is the canonical one: its i-th leg is R^q p_* applied to M_i→colim_j M_j. This proves filtered continuity. The map is p_*A-linear; an isomorphism of underlying abelian sheaves has a p_*A-linear inverse, since applying the map to both sides of a·f^(-1)(n)=f^(-1)(a·n) gives the same section.",
    "uses": [
-    "det-proper-heart-continuity-sections"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-bounded-continuity-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
+    "place": "Proof step 1 and Complement; degree-zero specialization of det-pe-bounded-continuity-direct-image"
+   }
   },
   {
-   "text": "Restriction to $X_V$ commutes with colimits (it has a right adjoint). Hence, for a filtered diagram\n$(M_i)$, the comparison $\\varinjlim R^qp_*M_i\\to R^qp_*\\varinjlim M_i$ evaluated on $V$ is (using that\n$\\Gamma(V,-)$ preserves colimits, [det-proper-heart-continuity-sections])\n\n$$\n\\varinjlim_iH^q(X_V,M_i|_{X_V})\\to H^q(X_V,\\varinjlim_iM_i|_{X_V}),\n$$\n\nan isomorphism by [det-proper-heart-continuity-cohomology] for $Z=X_V$. Affine weakly contractible\nobjects form a basis of the site, and evaluation on them detects isomorphisms of sheaves\n([sk-cor-pe-sections]). The case of direct sums is identical.",
+   "text": "Fix a small family (M_j) indexed by J, and choose once, for each j∈J, bounded-below, termwise injective, K-injective resolutions M_j[0]→I_j using [lem-sc-bounded-below-injective-resolution] on the small ringed site (X_proét,A). For each finite subset F⊆J their finite direct sum I_F is K-injective: for an acyclic complex C a chain map C→I_F has finitely many component maps C→I_j, each null-homotopic; the finite tuple of their homotopies is a null-homotopy of the original map. The map (⊕_{j∈F} M_j)[0]→I_F is a quasi-isomorphism: kernels and images of the block-diagonal differential are respectively the finite direct sums of the component kernels and images, so H^r(I_F)=⊕_{j∈F}H^r(I_j). This is also valid for F empty, when I_F=0. By [det-pe-topos-functoriality-inverse-image], p_* is sectionwise restriction; it preserves finite biproducts because those are finite products of abelian sheaves, computed sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). Consequently p_*I_F=⊕_{j∈F}p_*I_j. Compute Rp_* on these K-injective resolutions by [def-sfb-right-derived-functor] and compute cohomology by the kernel/image formula of [def-weil-abstract-derived-category]. This gives the isomorphism ⊕_{j∈F}R^q p_*M_j→R^q p_*(⊕_{j∈F}M_j). It is the canonical map, since the inclusion of I_j into I_F lifts the inclusion of M_j, and naturality of the derived-functor unit identifies its derived image with that inclusion on cohomology. For F⊆G the inclusions of resolutions induce the inclusions of finite subsums on both sides, so these isomorphisms commute with the transition maps.",
    "uses": [
-    "det-proper-heart-continuity-sections",
-    "det-proper-heart-continuity-cohomology"
+    "lem-sc-bounded-below-injective-resolution",
+    "det-pe-topos-functoriality-inverse-image",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015A (higher derived functors), 05TH (bounded-below injectives compute the derived functor), 013P (comparison by lifts); explicit finite-biproduct calculation"
+   }
+  },
+  {
+   "text": "Let (M_j) now be indexed by any small set J, and let P be the poset of finite subsets F⊆J, including ∅. It is small, nonempty, and filtered: F∪G is a common upper bound, and there are no distinct parallel arrows in a poset. Put M_F=⊕_{j∈F}M_j with the canonical inclusion maps for F⊆G. Then colim_{F∈P}M_F=⊕_{j∈J}M_j. Indeed, a cocone M_F→N is precisely a family M_j→N: restriction to singleton subsets extracts the family, and the finite coproduct universal property reconstructs each cocone leg, including the unique leg on M_∅=0. The two operations are inverse and respect all inclusions. This proves the asserted colimit by [def-weil-pbc-category-colimit]. The same argument applies to the family R^q p_*M_j. Both categories have the required colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
+    "place": "Statement: direct sums are filtered colimits of finite subsums; explicit universal-property argument"
+   }
+  },
+  {
+   "text": "Apply Step 1 to the filtered diagram F↦M_F of Step 3. Step 2 supplies isomorphisms ⊕_{j∈F}R^q p_*M_j ≅ R^q p_*M_F compatible with every F⊆G. Therefore, using Step 3 in the source and target module categories, ⊕_{j∈J}R^q p_*M_j ≅ colim_F R^q p_*M_F ≅ R^q p_*(colim_F M_F) ≅ R^q p_*(⊕_{j∈J}M_j). The composite on the j-th coproduct summand is R^q p_* of the original j-th inclusion, by Step 1 and the finite-sum compatibility in Step 2. The coproduct universal property therefore identifies this composite with the canonical direct-sum comparison. This proves the direct-sum clause, including the empty family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
+    "place": "Statement, direct-sum clause; Proof step 3, final sentence"
+   }
   }
  ],
  "proof_deps": [
-  "det-proper-heart-continuity-sections",
-  "det-proper-heart-continuity-cohomology"
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit",
+  "det-pe-bounded-continuity-direct-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-direct-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/_section.md",
+  "place": "Same-unit bounded continuity specialized to degree zero, then the explicitly stated filtered-finite-subsum reduction; finite-biproduct resolution calculation as in Stacks Tags 015A, 05TH and 013P"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|pro[Ee]tale",
+   "results": "OK 0 hits. No hits. Search subdirectory: CategoryTheory. Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale higher direct image along a qcqs scheme morphism preserves filtered colimits of module sheaves",
+   "results": "OK 8 hits. Returned names/files: CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.hasColimit, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.evaluation_preservesColimit, AlgebraicGeometry.preservesColimit_Γ Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "OK 0 hits. No hits. Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of sheaves of modules on the pro-etale site of a quasi-compact quasi-separated morphism commute with filtered colimits and arbitrary direct sums",
+   "results": "OK 8 hits. Returned names/files: LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.Presentation.map, SheafOfModules.mapFree, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor preserves filtered colimits and coproducts of module sheaves on a quasi compact quasi separated proetale site",
+   "results": "OK 8 hits. Returned names/files: Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, Condensed.instAB4CondensedMod, instHasColimitsCondensedMod, CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|higherDirectImage|[Cc]olimit",
+   "results": "OK 0 hits. No hits. Search subdirectory: AlgebraicGeometry/Sites/Proetale.lean. Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"colimit\"",
+   "results": "OK 2 hits. Returned names/files: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit' Read the returned signatures: generic colimit, underived sheaf pushforward and condensed-module infrastructure do not state qcqs pro-etale higher-direct-image continuity. The two Loogle pointwise-derived hits give colimits computing the derived functor, not preservation of coefficient colimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -56,5 +155,39 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-proper-heart-continuity-direct-image",
+  "worker": "stage1",
+  "summary": "Reused the reviewed same-unit bounded-complex continuity theorem at common lower bound zero. Proved finite-biproduct preservation explicitly with resolutions and derived-unit naturality, and reduced arbitrary sums to the filtered diagram of finite subsums by its universal property. No new nodes. Preserved the original two clauses and arbitrary ring-sheaf coefficients; made the target coefficient ring p_*A and standard derived-functor conventions explicit. No project attachment and no Mathlib match were found.",
+  "blueprint": "The original weakly-contractible evaluation proof and unit step 3 are realized through the existing stronger same-unit direct-image theorem (unit step 1, same affine-cohomology/sheafification route). The finite-subsum reduction is explicitly prescribed by the unit statement. This changes only the free node-level proof, not any unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site colimit and forgetting-scalars tool; needed for arbitrary ring sheaves and for all coproducts, not supplied by this continuity unit."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic ringed-site resolution existence; used only in the explicit finite-sum calculation, not as a replacement for geometric continuity."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic sectionwise formula for direct image; the continuity unit does not construct it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-bounded-below-injective-resolution",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-d95e9754c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-d95e9754c (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is the blueprint text verbatim, with only conventions made explicit: arbitrary ring sheaf A, Mod(A) to Mod(p_*A), R^q=H^q(Rp_*(M[0])), q in Z. No hypothesis was added and the coefficient category is the same as the reviewed same-unit det-pe-bounded-continuity-direct-image (arbitrary R). Step 1 applies that theorem with K_i=M_i[0], a=0. Its R^q f_* is H^q(Rf_*K), through lem-pe-bounded-complex-direct-image-presheaf, which is consistent. Colimits exist and their underlying abelian sheaves agree by lem-weil-pbc-module-sheaves-colimits-forgetful (2)/(3), and the linearity argument is fine. Step 2 is correct: K-injective resolutions from lem-sc-bounded-below-injective-resolution, finite sums of K-injectives are K-injective, block-diagonal cohomology, p_*=G∘u preserves finite biproducts, and the map is canonical by naturality of the def-sfb-right-derived-functor unit. Steps 3-4 (direct sum as the filtered colimit over finite subsets including the empty set, then canonical assembly) are elementary and correct. No cycle: a transitive walk over the cited nodes' dependencies does not reach the item. No duplicate: the étale analogues and det-proper-heart-continuity-cohomology differ in site or assertion, so same_as=[] stands. The route keeps to unit sk-cor-pe-bounded-continuity, whose statement prescribes the finite-subsum reduction. Stacks 015A/05TH/013P (derived.tex) and 03DA/03DB (sites-modules.tex) were checked at their labels. Small cases checked: p=id, empty family, zero ring, q<0. I accept the tool uses lem-weil-pbc-module-sheaves-colimits-forgetful, det-pe-topos-functoriality-inverse-image (both already accepted on the same-unit bounded node) and lem-sc-bounded-below-injective-resolution (generic black box). No fixes."
+ }
 }

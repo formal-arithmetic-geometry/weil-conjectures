@@ -1,0 +1,85 @@
+{
+ "id": "lem-sfb-ind-filtered-colimits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-compact",
+   "place": "Paragraph (1), Ind realization; paragraph (2), IndCons closed under direct sums, using closure under filtered colimits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered colimits in an ind-category are created in presheaves",
+ "statement": "Let $\\mathcal H$ be a small category in a fixed universe [def-weil-size-convention]. Use the category $\\operatorname{Ind}(\\mathcal H)$ of small filtered diagrams in $\\mathcal H$, with\n$$\\operatorname{Hom}_{\\operatorname{Ind}(\\mathcal H)}((C_i),(D_j))=\\varprojlim_i\\varinjlim_j\\operatorname{Hom}_{\\mathcal H}(C_i,D_j).$$\nEquivalently its objects are presheaves $\\mathcal H^{\\mathrm{op}}\\to\\mathrm{Set}$ that are small filtered colimits of representables $h_C(T)=\\operatorname{Hom}_{\\mathcal H}(T,C)$; maps are natural transformations. Filtered diagrams and colimits have the convention of [def-weil-pbc-category-colimit]. The category $\\operatorname{Ind}(\\mathcal H)$ has all small filtered colimits. Its full inclusion into the presheaf category creates these colimits: for a small filtered category $J$ and a diagram $A:J\\to\\operatorname{Ind}(\\mathcal H)$, the presheaf colimit $\\varinjlim_j A_j$ is again an ind-object, and the presheaf colimit cocone is the colimit cocone in $\\operatorname{Ind}(\\mathcal H)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (1), Ind realization; paragraph (2), IndCons closed under direct sums, using closure under filtered colimits; categorical tool: Mathlib/CategoryTheory/Limits/Indization/Category.lean:127; Ind convention: Stacks Tag 05PW (categories-remark-ind-category)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the ind category into presheaves creates small filtered colimits",
+   "results": "CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered; CategoryTheory.instHasFilteredColimitsInd; CategoryTheory.instIsClosedUnderColimitsOfShapeFunctorOppositeTypeIsIndObjectOfIsFiltered",
+   "date": "2026-10-17",
+   "verdict": "match: exact creates-colimits instance, read lines 119-134"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind.inclusion, CategoryTheory.Limits.CreatesColimitsOfShape",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Limits.CreatesColimitsOfShape'",
+   "date": "2026-10-17",
+   "verdict": "invalid identifier; inconclusive, corrected by the following valid-name query"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind.inclusion",
+   "results": "CategoryTheory.Ind.inclusion; CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered; CategoryTheory.Ind.inclusion.fullyFaithful",
+   "date": "2026-10-17",
+   "verdict": "match: creates-colimits instance returned"
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesColimitsOfShape|HasFilteredColimits",
+   "results": "CategoryTheory/Limits/Indization/Category.lean:128 CreatesColimitsOfShape J (Ind.inclusion C); :130 its construction; :132 HasFilteredColimits (Ind C); :134 construction; read lines 119-134",
+   "date": "2026-10-17",
+   "verdict": "match: creates instance at 127-130; existence at 132-134"
+  },
+  {
+   "tool": "grep",
+   "query": "instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered|CreatesColimitsOfShape J \\(Ind.inclusion C\\)",
+   "results": "Mathlib/CategoryTheory/Limits/Indization/Category.lean:128 CreatesColimitsOfShape J (Ind.inclusion C)",
+   "date": "2026-10-17",
+   "verdict": "match: instance header at 127, conclusion at 128"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of ind objects are ind objects and the inclusion into presheaves creates filtered colimits",
+   "results": "CategoryTheory.Limits.isIndObject_colimit; CategoryTheory.instIsClosedUnderColimitsOfShapeFunctorOppositeTypeIsIndObjectOfIsFiltered; CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered; CategoryTheory.instHasFilteredColimitsInd",
+   "date": "2026-10-17",
+   "verdict": "match: creates-colimits and existence declarations"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered, CategoryTheory.instHasFilteredColimitsInd",
+  "file": "Mathlib/CategoryTheory/Limits/Indization/Category.lean",
+  "how": "exact; CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered at Mathlib/CategoryTheory/Limits/Indization/Category.lean:127-130 creates the presheaf colimit, and CategoryTheory.instHasFilteredColimitsInd at Mathlib/CategoryTheory/Limits/Indization/Category.lean:132-134 supplies existence. Both are read in source.",
+  "line": 127
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-int-compactness-compact",
+  "date": "2026-10-17",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness"
+}

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-sf-determination",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Checking isomorphisms on constructible complexes",
@@ -13,28 +13,100 @@
   "place": "node sk-lem-sf-determination, order 1532"
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "sk-def-localizing-closure",
+  "def-weil-triangulated-category"
  ],
  "proof": [
   {
-   "text": "The objects $K$ for which $\\eta_K$ is an isomorphism are closed under shifts\nand cones by the five lemma, and under direct sums because $F_1$ and $F_2$\npreserve them. They contain $\\Dctf(X,\\Lambda)$, so by the definition of the\nlocalizing closure [sk-def-localizing-closure] they contain all of\n$\\Loc(\\Dctf(X,\\Lambda))$.",
+   "text": "Put $\\mathcal T=D(X_{\\mathrm{pro\\acute et}},\\Lambda)$, $\\mathcal S=\\Dctf(X,\\Lambda)$, $\\mathcal D=\\Loc(\\mathcal S)$ and $\\mathcal T\\prime=\\Loc(\\Dctf(Y,\\Lambda))$. By [det-def-localizing-closure-existence], clauses 1 and 2 applied separately to $X$ and $Y$, $\\mathcal T$ is triangulated with arbitrary small direct sums, and $\\mathcal D$ and $\\mathcal T\\prime$ are full replete triangulated subcategories closed under their ambient small direct sums. For a small family $(K_i)$ in either subcategory, its ambient coproduct belongs to that subcategory by closure. For every test object $L$ of the subcategory, fullness identifies the maps from that coproduct to $L$, and from each $K_i$ to $L$, with the ambient maps; the ambient coproduct universal property therefore remains the coproduct universal property in the subcategory. Thus both subcategories have the required small direct sums. By [def-weil-triangulated-subcategory], each of these full triangulated subcategories, with the shift and the distinguished triangles of $\\mathcal T$ (resp. of $D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$) whose vertices lie in it, is itself a triangulated category, and its inclusion is exact; so $\\mathcal D$ and $\\mathcal T\\prime$ are triangulated categories with arbitrary small direct sums. These are exactly the module-object ambient categories and the defining localizing intersections of [sk-def-localizing-closure], in its fixed indexing universe. In particular $\\mathcal D$ is the smallest such subcategory of $\\mathcal T$ containing $\\mathcal S$, and the functors in the statement have domain $\\mathcal D$ and codomain $\\mathcal T\\prime$.",
    "uses": [
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
+    "place": "Statement and proof: the source and target localizing categories; ambient structures supplied by sk-def-localizing-closure-existence.md, clauses 1 and 2."
+   }
+  },
+  {
+   "text": "Apply [det-sf-determination-localizing] with ambient domain $\\mathcal T$, generator class $\\mathcal S$, target $\\mathcal T\\prime$, and its explicitly allowed restricted functor domain $\\Loc(\\mathcal S)=\\mathcal D$. Step 1 checks its triangulated-category, coproduct and localizing-closure premises. The functors $F_1,F_2$ are exact and preserve these sums by hypothesis. The phrase transformation of exact functors has precisely the shift-compatible meaning spelled out in that node: if $c_{a,K}:F_a(K[1])\\xrightarrow{\\sim}F_a(K)[1]$ are the given shift isomorphisms, then $c_{2,K}\\eta_{K[1]}=\\eta_K[1]c_{1,K}$. Thus the cited lemma makes $\\mathcal C_\\eta=\\{K\\in\\mathcal D:\\eta_K\\text{ is invertible}\\}$ a triangulated coproduct-closed subcategory. The hypothesis of this item says $\\mathcal S\\subset\\mathcal C_\\eta$. Moreover $\\mathcal C_\\eta$ is closed under isomorphisms, since for an isomorphism $u:K\\to K'$ in $\\mathcal D$ naturality gives $\\eta_{K'}=F_2(u)\\eta_KF_1(u)^{-1}$; it is closed under sums taken in $\\mathcal T$, because by Step 1 these are the sums in $\\mathcal D$; and for a distinguished triangle of $\\mathcal T$ with two vertices in $\\mathcal C_\\eta$ the third lies in the replete triangulated $\\mathcal D$, hence is a triangle of $\\mathcal D$, hence lies in $\\mathcal C_\\eta$. So $\\mathcal C_\\eta$ is one of the full replete triangulated subcategories of $\\mathcal T$ intersected in [sk-def-localizing-closure], whatever repleteness convention is read into the minimality clause of the cited lemma. The final implication of the cited statement, equivalently this minimality, therefore gives $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$, which is the required invertibility at every $K\\in\\Loc(\\Dctf(X,\\Lambda))$. No extension of either functor to the ambient $\\mathcal T$ is asserted or needed.",
+   "uses": [
+    "det-sf-determination-localizing",
     "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
+    "place": "Statement, restricted-domain alternative and final consequence; its proof realizes the unit proof through shifts, cones (Stacks Tag 014A), direct sums, and minimality."
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure"
+  "det-def-localizing-closure-existence",
+  "sk-def-localizing-closure",
+  "def-weil-triangulated-subcategory",
+  "det-sf-determination-localizing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/sk-lem-sf-determination.proof.md",
+  "place": "Entire proof paragraph, using its existing generic detail det-sf-determination-localizing after checking the ambient categories."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoLocus|localizing|isIso.*[Gg]enerat|isIso.*[Cc]oproduct|isIso.*[Cc]olimit",
+   "results": "25 displayed hits in CategoryTheory, including Generator/StrongGenerator.lean:116,124, Triangulated/LocalizingSubcategory.lean and generic colimit lemmas. Searched subdirectory CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no complete match: strong generators detect morphisms by Hom and Verdier localizing predicates concern factorization, not closure under coproducts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation of exact functors preserving coproducts invertible on generators is invertible on localizing closure",
+   "results": "Eight hits: Localization.liftingConstructionLift, Construction.natTransExtension, Functor.IsLocalization.inverts, Localization.liftNatIso_inv, lift, instIsEquivalenceLocalizationLift, Construction.WhiskeringLeftEquivalence.inverse, fac.",
+   "date": "2026-10-16",
+   "verdict": "no match: localization at morphisms, not triangulated localizing closure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between exact triangulated functors preserving arbitrary coproducts that is an isomorphism on a class is an isomorphism on its localizing closure",
+   "results": "Eight hits in Localization/Triangulated and Triangulated/HomologicalFunctor: complete_distinguished_essImageDistTriang_morphism, Localization.isTriangulated, Localization.isTriangulated_functor, Localization.pretriangulated, essImageDistTriang_mem_of_iso, isHomological_of_localization, Localization.complete_distinguished_triangle_morphism, Localization.instIsTriangulatedLocalization′.",
+   "date": "2026-10-16",
+   "verdict": "no match: localization and exactness infrastructure, not the coproduct-closed isomorphism locus"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLocus|isIso_app_of|localizingClosure|IsClosedUnder.*Coproduct|coproduct",
+   "results": "1 hit: Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:575, HasFiniteCoproducts instance. Searched subdirectory CategoryTheory/Triangulated.",
+   "date": "2026-10-16",
+   "verdict": "no match: finite coproduct existence does not prove the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The objects where a shift compatible natural transformation between triangulated functors is an isomorphism form a triangulated subcategory closed under coproducts when both functors preserve coproducts",
+   "results": "Eight hits: Functor.distTriang_iff, isTriangulated_iff_of_iso, isTriangulated_of_iso, mem_mapTriangle_essImage_of_distinguished, Localization.isTriangulated_functor, Functor.essImageDistTriang_mem_of_iso, Localization.isTriangulated, Subcategory.W.shift.",
+   "date": "2026-10-16",
+   "verdict": "no complete match: exactness transport assumes a pre-existing natural isomorphism; the remaining hits concern localization and triangles"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.triangEnvelope",
+   "results": "12 hits for ObjectProperty.triangEnvelope and its universal property, shift/retract/triangulated instances, monotonicity and classical generators. Read Mathlib/CategoryTheory/Triangulated/Generators.lean:128-199.",
+   "date": "2026-10-16",
+   "verdict": "no match: triangEnvelope is generated by finite operations and retracts, without arbitrary coproduct closure"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -61,5 +133,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-sf-determination"
+ "unit": "sk-lem-sf-determination",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-sf-determination",
+  "worker": "stage1",
+  "summary": "Preserved the main-20261015 statement and its shift-compatible meaning. Rechecked the earlier sandbox against the current shared DAG, whose generic localizing-locus detail is now split and reviewed with its backward dependency removed. The two-step proof checks ambient localizing structures and specializes that existing same-unit result, including its restricted-domain option. No new nodes or Mathlib leaves; retained the seven genuinely logged searches. The associated unit record still describes the older thick-generation statement and is reported for maintainer metadata repair.",
+  "blueprint": "Main-20261015 sk-lem-sf-determination.proof.md: the shifts, cones and direct-sums sentence and the final minimality sentence are supplied by the statement of the existing same-unit detail det-sf-determination-localizing in Step 2; Step 1 checks the localizing ambient structures needed for that application. The old unit record describes a different snapshot and is not overwritten.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Generic ambient derived-category coproduct and localizing-subcategory existence, applied to X and Y; it supplies the structure assumed by the present unit rather than replacing any proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-a0945d1e0",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a0945d1e0 (reviewer sub-agent of L); spot-checked: Read the item, the report, the main-20261015 blueprint unit, its proof and its detail files, the sk-def-localizing-closure blueprint, and the full statements of all cited nodes. The statement matches the blueprint word for word. 'Admissible' and the coefficient category D(Mod_{Lambda_X}) (unbounded, no derived completeness) come from sk-def-localizing-closure. Dropping sk-def-sf-operations from stmt_deps is correct. Step 1: clauses 1 and 2 of det-def-localizing-closure-existence, applied to X and to Y, give the ambient sums and the replete localizing intersection; the argument that the subcategories inherit coproducts is elementary and correct. Step 2: det-sf-determination-localizing is a strict generalization in the same unit, and its restricted-domain option, shift convention and minimality conclusion fit; only its statement is used. Fixed two small gaps: (1) Step 1 now cites def-weil-triangulated-subcategory for the fact that Loc(X) and Loc(Y) are triangulated categories; (2) Step 2 now shows that C_eta is iso-closed, sum-closed and triangle-closed in T, so the minimality in sk-def-localizing-closure gives Loc ⊆ C_eta whatever repleteness convention the lemma's 'smallest' carries. Step 2 cites sk-def-localizing-closure; proof_deps updated. No cycle (565-node closure excludes the item). No new nodes and no duplicates; the thick-envelope Lean and Mathlib candidates are insufficient for infinite sums. Edge cases checked: empty X, A=0, empty and infinite families. Accepted the declared tool use det-def-localizing-closure-existence, which is on the current blueprint route; the unit record is stale (master thick-generation statement) and was correctly reported for maintainer repair.; 1 file(s) fixed by the reviewer"
+ }
 }

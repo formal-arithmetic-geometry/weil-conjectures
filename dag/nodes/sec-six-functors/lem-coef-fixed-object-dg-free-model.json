@@ -28,69 +28,181 @@
   "lem-coef-projective-chains-monoidal-model",
   "lem-coef-combinatorial-localization-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct $F(P)$ by the displayed path sum, with the direct-sum tensor differential of [lem-coef-projective-chains-monoidal-model]. Concatenating the second path to the first places its tensor factors on the left; thus no interchange of factors is needed in the reverse-order convention. Associativity and the two identity equations reduce on each summand to the tensor associator and unit equations. Given $u:P\\to UA$, define $F(P)\\to A$ on a path by the tensor of its $u$-components followed by the iterated composition of $A$, and on an empty path by $\\mathbf Z[0]\\to A(s,s)$. Associativity makes this a dg functor, and every dg functor extending $u$ must have these components. This proves the natural adjunction and the length-one unit, including $n=0$ and $n=1$.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20 (matrix monoids) and Proposition 5.2(f); direct verification of the strict universal property"
+   }
+  },
+  {
+   "text": "The model axioms on $\\mathbf G_S$ hold coordinatewise: take both functorial factorizations coordinatewise, and solve every lifting problem coordinatewise. A generating set consists of the generating maps in [lem-coef-projective-cochain-monoidal-model] placed in one coordinate and zero elsewhere. These single-coordinate embeddings are left adjoint to evaluation, so the lifting characterizations follow by adjunction. Apply [lem-coef-ordinary-presheaf-local-presentability] with $A=\\mathbf V$ and $C$ the discrete category on $S^2$. Its hypotheses hold since $\\mathbf V$ is locally presentable and complete by [lem-coef-projective-cochain-monoidal-model]. An ordinary functor from this discrete category is just its family of values, and a natural transformation is just its family of components; thus this is exactly the graph category and gives its local presentability. Left properness and tractability are coordinatewise by [lem-coef-projective-chains-monoidal-model]. Define\n$$(P\\star Q)(s,t)=\\bigoplus_{u\\in S}P(u,t)\\otimes Q(s,u),\\qquad E(s,t)=\\begin{cases}\\mathbf Z[0]&s=t,\\\\0&s\\ne t.\\end{cases}$$\nReindexing the two sums and applying the tensor associator gives the matrix associator; the diagonal summands give the unit constraints. Both partial tensor functors are left adjoints. Explicitly their right adjoints have entries\n$$R_P(H)(s,u)=\\prod_t\\underline{\\operatorname{Hom}}(P(u,t),H(s,t)),\\qquad L_Q(H)(u,t)=\\prod_s\\underline{\\operatorname{Hom}}(Q(s,u),H(s,t)).$$\nTensor-Hom adjunction, applied to each summand, verifies these formulas; in $L_Q$ use the symmetry of complexes. The component of the matrix pushout product $i\\square_\\star j$ is $\\bigoplus_u i(u,t)\\square_\\otimes j(s,u)$. The projective pushout-product axiom makes each summand a cofibration, trivial if either matrix map is trivial. Coproducts preserve these lifting classes because fillers are chosen independently on summands. The diagonal unit $E$ is cofibrant. These checks establish the biclosed monoidal model hypotheses; $\\star$ need not be symmetric.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-ordinary-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20 proof; Muro Section 10, Remark 10.2, with the matrix adjoints and pushout products written explicitly"
+   }
+  },
+  {
+   "text": "Verify the nonsymmetric monoid axiom for $\\star$ with arbitrary auxiliary graphs, as in [lem-coef-associative-algebra-model-transfer]. Distributing an iterated matrix pushout product over its path summands gives finite tensor pushout products of component trivial cofibrations and maps $0\\to C_i$, with at least one trivial cofibration. The symmetry of complexes moves the maps $0\\to C_i$ to one side, identifying each such summand with $k\\otimes C$, where $k$ is the iterated pushout product of the trivial cofibrations and $C$ is the tensor product of the auxiliary complexes (or the unit if none). The pushout-product axiom makes $k$ a trivial cofibration. The monoid axiom in [lem-coef-projective-chains-monoidal-model] therefore makes every component of a pushout or transfinite composite of these sums a quasi-isomorphism: a coproduct attachment is a transfinite sequence of the individual attachments, and graph colimits are coordinatewise. Retracts preserve weak equivalences by the model axioms. This checks the required nonsymmetric axiom without imposing cofibrancy on $C_i$.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro Definition 9.1 and Proposition 10.3, pp. 1591, 1596-1597; repairs the cofibrancy restriction printed in Haugseng Definition 3.11"
+   }
+  },
+  {
+   "text": "An algebra $A\\star A\\to A$, $E\\to A$ is exactly a family of compositions $A(u,t)\\otimes A(s,u)\\to A(s,t)$ and identity maps, with the dg associativity and unit equations; its algebra maps are exactly dg functors fixing $S$. Under this identification the free algebra is the $F$ of Step 1. Apply [lem-coef-associative-algebra-model-transfer] to the matrix category verified in Steps 2-3. It gives the combinatorial transferred structure, the Quillen adjunction and cofibrancy of the underlying graph of a cofibrant dg category. Weak equivalences and fibrations are the asserted coordinate classes. The terminal dg category has zero mapping complexes; every $A\\to0$ is mappingwise surjective, so every object is fibrant. Factor the map from the initial dg category $E\\to A$ functorially as a cofibration followed by a trivial fibration $Q_SA\\to A$. Every object and morphism here lies in the fixed-$S$ category, so this replacement fixes $S$.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollaries 3.14-3.15 and Lemma 3.20, plus the explicit model-factorization argument"
+   }
+  },
+  {
+   "text": "For any small discrete set $J$, the comparison $\\mathbf V^J[W_J^{-1}]_\\infty\\to\\mathcal D^J$ induced by evaluations is an equivalence. Indeed choose cofibrant representatives $X_j$ and fibrant representatives $Y_j$ and a cosimplicial frame $X_j^\\bullet$ in each coordinate, using [lem-coef-cosimplicial-frame-mapping]. The objectwise frame is a frame in the product model structure because its latching colimits and weak equivalences are coordinatewise. Its mapping simplicial set is exactly $\\prod_j\\operatorname{Hom}(X_j^\\bullet,Y_j)$, hence represents the product of the component mapping spaces (products of Kan complexes have fillers coordinatewise). This proves full faithfulness of the evaluation comparison; choosing representatives coordinatewise proves essential surjectivity. Apply this with $J=S^2$, including $J=\\varnothing$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Objectwise localization assertion in Proposition 5.2; product mapping spaces verified by the existing frame theorem"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-model-infinity-derived-adjunction] to the Quillen adjunction of Step 4. Since $U$ preserves all weak equivalences, its right derived functor agrees with direct localization, and the left derived functor is $qF(P^c)$ for an objectwise cofibrant replacement $p:P^c\\to P$. Step 5 identifies the graph localization with $\\mathcal D^{S^2}$. The cited theorem gives the mapping-space adjunction and its coherent unit and counit, not merely a homotopy-category adjunction. In particular the unit at $qP$ is the composite of $(qp)^{-1}:qP\\simeq qP^c$ with the image of the strict length-one insertion $P^c\\to UF(P^c)$. The localization is presentable by [lem-coef-combinatorial-localization-presentability], applied to the combinatorial structure in Step 4.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-combinatorial-localization-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 5.2(a),(c); derived adjunction and unit use the cited generic mapping-space theorem"
+   }
+  },
+  {
+   "text": "Every tensor factor in $UF(P^c)$ is cofibrant. By [lem-coef-projective-chains-monoidal-model], localizing its finite tensor products therefore computes the derived tensor products. For any discrete indexing set $J$, the ordinary coproduct $\\mathbf V^J\\to\\mathbf V$ is left Quillen: its right adjoint is the diagonal, which preserves fibrations and trivial fibrations coordinatewise. Applying [lem-coef-model-infinity-derived-adjunction] and Step 5 to this adjunction shows that a coproduct of cofibrant complexes computes their infinity-categorical coproduct. The path-sum formula of Step 1 thus gives exactly the stated underlying graph of $F_\\infty$, with derived tensors and coproducts. These comparisons are natural in the graph, and the derived unit is the length-one inclusion by Step 6. The source's forward-order formula is identified with ours on homogeneous factors by reversing them with sign $(-1)^{\\sum_{i<j}|a_i||a_j|}$; this is the Koszul symmetry, whose associativity and unit constraints are part of the monoidal structure. No rectification comparison is used to infer these formulas.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 5.2(f); chain-model tensor computation and derived coproduct adjunction written explicitly"
+   }
+  },
+  {
+   "text": "To prove conservativity, let $a:qA\\to qB$ have equivalent image under $U_\\infty$. Replace $A$ by $Q_SA$, and note that $B$ is fibrant by Step 4. The mapping-space representation clause of [lem-coef-cosimplicial-frame-mapping] represents the resulting component by a strict map $f:Q_SA\\to B$. The image of $f(s,t)$ in $\\mathcal D$ is an equivalence for every pair because the image of $a$ is, and the replacement is a weak equivalence. The saturation assertion of [lem-coef-projective-chains-monoidal-model] makes each $f(s,t)$ a quasi-isomorphism. Thus $f\\in\\mathrm{FF}_S$, so $qf$, and hence $a$, is an equivalence. Being an equivalence is invariant under the homotopy relating $a$ to this representative.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 5.2(e); representative and saturation arguments made explicit"
+   }
+  },
+  {
+   "text": "The matrix model category is left proper and tractable by Step 2 and satisfies the nonsymmetric monoid axiom by Step 3. Apply [lem-coef-associative-algebra-sifted-localization] to it and identify its strict associative algebras with $\\mathbf C_S$ by Step 4. It gives preservation by $U_\\infty$ of every $N(I)$-indexed colimit with $N(I)$ sifted; the comparison of Step 5 identifies its target with $\\mathcal D^{S^2}$. The cited statement includes $I=\\Delta^{\\mathrm{op}}$, so it also gives geometric-realization preservation. This proves the remaining colimit clauses directly on the strict-model localization, without using the downstream fixed-object enriched rectification theorem.",
+   "uses": [
+    "lem-coef-associative-algebra-sifted-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.19 applied as in Lemma 3.20; Proposition 5.2(e), before the monadic comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-associative-algebra-model-transfer",
+  "lem-coef-associative-algebra-sifted-localization",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-ordinary-presheaf-local-presentability",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-projective-cochain-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Detailed matrix-category specialization of Corollaries 3.14-3.15 and Lemma 3.19 following the proof of Lemma 3.20 and Proposition 5.2(a),(c),(e),(f); Muro Definition 9.1 used for the monoid axiom. Sources read online; permanent archives requested in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Fixed object differential graded categories have a projective model structure and their derived forgetful functor to graphs preserves sifted colimits",
-   "results": "{\"t\": \"2026-10-16T14:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed object differential graded categories have a projective model structure and their derived forgetful functor to graphs preserves sifted colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.projectiveResolutions\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.projective\"], \"digest\": \"5d497f07ab551d01\"}",
+   "query": "Associative monoids in a monoidal model category admit transferred model structures and their derived forgetful functor preserves homotopy sifted colimits",
+   "results": "{\"t\": \"2026-10-16T17:00:04Z\", \"tool\": \"leanfinder\", \"query\": \"Associative monoids in a monoidal model category admit transferred model structures and their derived forgetful functor preserves homotopy sifted colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.Truncated.hoFunctor.monoidal\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\"], \"digest\": \"43e2bc212c794e77\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"EnrichedCategory\", \"ModelCategory\"",
-   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
-  },
-  {
-   "tool": "grep",
-   "query": "dg[Cc]at|rectif|sifted.*[Cc]olimit|[Cc]olimit.*sifted",
-   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|rectif|sifted.*[Cc]olimit|[Cc]olimit.*sifted\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"a7e485e9204639d6\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+   "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
   },
   {
    "tool": "leansearch",
-   "query": "Projective model category of fixed object dg categories and free path algebra on a graph",
-   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"leansearch\", \"query\": \"Projective model category of fixed object dg categories and free path algebra on a graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Projective.mk\", \"CategoryTheory.isProjective\", \"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"CategoryTheory.Projective\", \"CategoryTheory.ProjectivePresentation\", \"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PrepathObject\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_p₀\"], \"digest\": \"317d2f8200a9fbc2\"}",
+   "query": "In a monoidal model category satisfying the monoid axiom associative algebras have a transferred model structure and cofibrant algebras have cofibrant underlying objects",
+   "results": "{\"t\": \"2026-10-16T17:00:47Z\", \"tool\": \"leansearch\", \"query\": \"In a monoidal model category satisfying the monoid axiom associative algebras have a transferred model structure and cofibrant algebras have cofibrant underlying objects\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+   "verdict": "unavailable: service unavailable: "
   },
   {
-   "tool": "leanfinder",
-   "query": "The category of monoids in the matrix convolution tensor product of complexes has a transferred model structure with cofibrant underlying graphs",
-   "results": "{\"t\": \"2026-10-16T14:56:18Z\", \"tool\": \"leanfinder\", \"query\": \"The category of monoids in the matrix convolution tensor product of complexes has a transferred model structure with cofibrant underlying graphs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorXTensorUnit_1\"], \"digest\": \"ef776c52ab3715bd\"}",
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Mon\"",
+   "results": "{\"t\": \"2026-10-16T17:01:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Mon\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.instMonoOfCofibration\", \"CochainComplex.Plus.modelCategoryQuillen.instHasLiftingPropertyOfMonoOfFibrationOfWeakEquivalence\", \"CochainComplex.Plus.modelCategoryQuillen.instHasLiftingPropertyOfMonoOfWeakEquivalenceOfFibration\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\"], \"digest\": \"03c29c23a31d02a1\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
-  },
-  {
-   "tool": "grep",
-   "query": "dg[Cc]at|rectification|derived.*free.*category|free.*category.*derived",
-   "results": "{\"t\": \"2026-10-16T14:56:14Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|rectification|derived.*free.*category|free.*category.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Transferred model structure on associative differential graded algebras with many colors admits cofibrant replacement and derived free forgetful adjunction",
-   "results": "{\"t\": \"2026-10-16T15:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Transferred model structure on associative differential graded algebras with many colors admits cofibrant replacement and derived free forgetful adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\"], \"digest\": \"725d912f6afd6867\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:29-75 presupposes a model category and constructs its ordinary homotopy category; it does not transfer a model structure to dg categories or construct a derived graph adjunction. The focused global grep has no hits."
+   "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
   },
   {
    "tool": "grep",
-   "query": "dgCategory|dg_category|DGCat|colored.*model|coloured.*model",
-   "results": "{\"t\": \"2026-10-16T15:26:04Z\", \"tool\": \"grep\", \"query\": \"dgCategory|dg_category|DGCat|colored.*model|coloured.*model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "monoid.?axiom|admissib.*monad|sifted.*homotop|homotop.*sifted",
+   "results": "{\"t\": \"2026-10-16T17:00:21Z\", \"tool\": \"grep\", \"query\": \"monoid.?axiom|admissib.*monad|sifted.*homotop|homotop.*sifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"215087b9f5273403\"}",
    "date": "2026-10-16",
-   "verdict": "No match: AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:29-75 presupposes a model category and constructs its ordinary homotopy category; it does not transfer a model structure to dg categories or construct a derived graph adjunction. The focused global grep has no hits."
+   "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived forgetful functor from strict associative algebra objects preserves geometric realizations of simplicial diagrams",
+   "results": "{\"t\": \"2026-10-16T17:01:05Z\", \"tool\": \"leanfinder\", \"query\": \"The derived forgetful functor from strict associative algebra objects preserves geometric realizations of simplicial diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"SimplicialObject.Split.forget\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgebraicTopology.DoldKan.Γ₀\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"SSet.toTop\"], \"digest\": \"cf256196e403caff\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a left proper tractable monoidal model category the localization of the forgetful functor from monoids preserves colimits indexed by sifted nerves",
+   "results": "{\"t\": \"2026-10-16T17:00:57Z\", \"tool\": \"leansearch\", \"query\": \"For a left proper tractable monoidal model category the localization of the forgetful functor from monoids preserves colimits indexed by sifted nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.forget_preservesLimitsOfShape\", \"GrpCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"CategoryTheory.LocalizedMonoidal\", \"AddMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"CategoryTheory.Mon.forgetMapConeLimitConeIso\", \"MonCat.forget_preservesLimits\", \"MonCat.FilteredColimits.forget_preservesFilteredColimits\", \"CategoryTheory.Mon.forget_preservesLimitsOfShape\"], \"digest\": \"303aa1278a6c4ee0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "sifted|geometricRealization",
+   "results": "{\"t\": \"2026-10-16T17:00:56Z\", \"tool\": \"grep\", \"query\": \"sifted|geometricRealization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No matching source declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-enriched-rectification",
@@ -98,5 +210,20 @@
   "group": "Q43"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-dg-free-model",
+  "worker": "stage1",
+  "summary": "Second reading repaired the uncited transfer and the unsupported strict-to-coherent use of categorical-algebra colimits. Nine explicit proof steps construct the path adjunction, verify the matrix model and strong monoid axiom, apply two generic associative-algebra inputs, and prove product localization, coherent derived units, the derived path formula and conservativity with existing model-category nodes. Two new statement-only inputs and one exact Mathlib leaf for ordinary presheaf local presentability; no statement change.",
+  "blueprint": "Realizes the fixed-object strict dg free/forgetful structural input used before passage to coherent coefficient diagrams in the ancestor proof paragraph 2."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NN-811dcfcdd",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-811dcfcdd (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the three new nodes and every cited statement in full. I checked the item's statement against Haugseng arXiv:1312.3881v4 Lemma 3.20 (with Cor. 3.14/3.15, Def. 3.18 and Lemma 3.19), read online in the HTML version. The source error is confirmed: printed Def. 3.11 takes only cofibrant X_i, while the proof of Cor. 3.14 needs arbitrary objects. The new nodes use Muro's arbitrary-object axiom, a stronger and correct hypothesis, and Step 3 verifies it for the matrix product from the chain node's monoid axiom (arbitrary C). Step checks: I recomputed both matrix right adjoints R_P and L_Q, and the pushout-product component ⊕_u i(u,t)□j(s,u). The reverse-order path concatenation needs no signs. Algebras for the matrix product are exactly dg categories with object set S and the unit E is initial. In Step 5 the evaluations are left Quillen (right adjoint puts X at one coordinate, 0 elsewhere), so the frame node identifies the comparison maps. Coproduct ⊣ diagonal computes derived coproducts. Conservativity goes through a strict representative Q_S A→B and saturation. Every hypothesis of the sifted lemma is checked in Steps 2-4. Small cases: S empty, a single object (tensor algebra), the zero graph (F(0)=E), the zero dg category as terminal object, and Z/2 as a non-cofibrant complex. The Mathlib leaf is verified at Presheaf.lean:90-95. All cited nodes are in unit sk-prop-sf-biduality-general, there are no tool_uses, no cycle and no SGA. The DAG and blueprint searches found no duplicate. FIX: in lem-coef-associative-algebra-model-transfer the term 'Quillen adjunction' was undefined (B3); I added 'meaning that T preserves cofibrations and trivial cofibrations'. The item statement is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

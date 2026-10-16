@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-homotopy-equivalence-weak",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived Hom / derived limit calculation: localization mapping-space foundation, via the special-hammock homotopy-calculus criterion. Dwyer–Kan Proposition 8.2, following Proofs paragraph (ii), printed p. 29: natural transformations induce homotopies of nerves. Final conversion of the resulting topological homotopy equivalence into a weak homotopy equivalence.",
+   "via": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-homotopy-fractions-square-criterion",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A topological homotopy equivalence induces all homotopy-group isomorphisms",
+ "statement": "Use the continuous cubical homotopy-group and path-component conventions of [def-cbc-enhanced-diagrams-cones], spelled out below for arbitrary topological spaces. Let $X,Y$ be topological spaces and let $f:X\\to Y$, $g:Y\\to X$ be continuous maps. Suppose there are continuous maps $H:X\\times[0,1]\\to X$ and $K:Y\\times[0,1]\\to Y$ with $H(x,0)=g(f(x))$, $H(x,1)=x$, $K(y,0)=f(g(y))$, and $K(y,1)=y$, using ordinary product topologies. Then $f$ induces a bijection between the sets of path components of $X$ and $Y$. For every $x\\in X$ and every integer $n\\geq1$, postcomposition induces a group isomorphism $f_*:\\pi_n(X,x)\\xrightarrow{\\sim}\\pi_n(Y,f(x))$. Here $\\pi_n(X,x)$ consists of homotopy classes relative to the boundary of continuous maps $([0,1]^n,\\partial[0,1]^n)\\to(X,x)$, with multiplication by concatenation in the first coordinate, and $f_*[u]=[f\\circ u]$. The homotopies $H,K$ need not fix any basepoint. Neither connectedness nor nonemptiness is assumed.",
+ "source": {
+  "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+  "place": "Algebraic Topology, section 4.1, printed pp. 341–342 (PDF pp. 5–6), change-of-basepoint maps and the paragraph immediately before Proposition 4.1: homotopy equivalences induce homotopy-group isomorphisms even for nonstationary basepoints. Read online; archival copy WANTED. This is a topological theorem, not a Stacks-tag claim."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map with a homotopy inverse is a weak homotopy equivalence inducing isomorphisms on all homotopy groups",
+   "results": "{\"t\": \"2026-10-16T17:04:39Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map with a homotopy inverse is a weak homotopy equivalence inducing isomorphisms on all homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv\", \"ContinuousMap.HomotopyEquiv.toFun\", \"ContinuousMap.HomotopyEquiv.Simps.apply\", \"ContinuousMap.HomotopyEquiv.mk.inj\", \"Homeomorph.toHomotopyEquiv\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\"], \"digest\": \"6afac05fc782a424\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbased homotopy equivalences induce bijections on path components and group isomorphisms on higher homotopy groups, accounting for change of basepoint",
+   "results": "{\"t\": \"2026-10-16T17:05:40Z\", \"tool\": \"leanfinder\", \"query\": \"Unbased homotopy equivalences induce bijections on path components and group isomorphisms on higher homotopy groups, accounting for change of basepoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FundamentalGroup.fundamentalGroupMulEquivOfPath\", \"FundamentalGroup.fundamentalGroupMulEquivOfPathConnected\", \"homotopyGroupEquivFundamentalGroup\", \"FundamentalGroup.mapOfEq\", \"ContinuousMap.Homotopy.hcast\", \"FundamentalGroup.mapOfEq_apply\", \"HomotopyGroup.pi0EquivZerothHomotopy\", \"FundamentalGroup.map_apply\"], \"digest\": \"45abb35490fa1e3d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy equivalences of topological spaces induce isomorphisms on homotopy groups at every basepoint",
+   "results": "{\"t\": \"2026-10-16T17:04:39Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy equivalences of topological spaces induce isomorphisms on homotopy groups at every basepoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyGroup\", \"ContinuousMap.HomotopyEquiv\", \"ContinuousMap.term_≃ₕ_\", \"ContinuousMap.HomotopyEquiv.mk\", \"HomotopyGroup.Pi\", \"FundamentalGroup.map\", \"ContinuousMap.HomotopyEquiv.Simps.apply\", \"ContinuousMap.HomotopyEquiv.mk.inj\"], \"digest\": \"971301fac7d41e07\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.HomotopyEquiv, HomotopyGroup",
+   "results": "{\"t\": \"2026-10-16T17:05:05Z\", \"tool\": \"loogle\", \"query\": \"ContinuousMap.HomotopyEquiv, HomotopyGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: valid fully qualified Loogle query returned zero declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "isWeakHomotopyEquiv|IsWeakHomotopyEquiv",
+   "results": "{\"t\": \"2026-10-16T17:04:29Z\", \"tool\": \"grep\", \"query\": \"isWeakHomotopyEquiv|IsWeakHomotopyEquiv\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations under Mathlib/Topology."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ww]eakHomotopy|[Hh]omotopyEquiv.*[Bb]ijective|[Hh]omotopyEquiv.*[Ee]quiv",
+   "results": "{\"t\": \"2026-10-16T17:04:38Z\", \"tool\": \"grep\", \"query\": \"[Ww]eakHomotopy|[Hh]omotopyEquiv.*[Bb]ijective|[Hh]omotopyEquiv.*[Ee]quiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\"], \"digest\": \"67ec3c4f743a0c4a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyEquiv|homotopyEquiv|bijective|[Ee]quiv",
+   "results": "{\"t\": \"2026-10-16T17:05:05Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|homotopyEquiv|bijective|[Ee]quiv\", \"sub\": \"Topology/Homotopy/HomotopyGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"18\", \"22\", \"23\", \"199\"], \"digest\": \"41e8ac57e903b200\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-nerve-natural-homotopy-equivalence",
+  "date": "2026-10-17",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

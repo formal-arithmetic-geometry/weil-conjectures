@@ -3,54 +3,127 @@
  "blueprint": {
   "is": "det-pe-topos-functoriality-site",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The pro-étale site is subcanonical and its sheaves form a topos",
- "statement": "Let $X$ be a scheme and $X_{\\mathrm{proét}}$ its small pro-étale site\n[def-weil-pbc-small-proetale-site].\n\n1. The pro-étale coverings [def-weil-pbc-proetale-covering] of objects of\n   $X_{\\mathrm{proét}}$ satisfy the axioms of a site: isomorphisms are coverings; if\n   $\\{U_i\\to U\\}$ is a covering and $\\{U_{ij}\\to U_i\\}$ are coverings, then\n   $\\{U_{ij}\\to U\\}$ is a covering; if $\\{U_i\\to U\\}$ is a covering and $V\\to U$ is a\n   morphism of $X_{\\mathrm{proét}}$, then the fibre products $U_i\\times_UV$ exist in\n   $X_{\\mathrm{proét}}$ and $\\{U_i\\times_UV\\to V\\}$ is a covering.\n2. For every object $T$ of $X_{\\mathrm{proét}}$ the representable presheaf\n   $h_T=\\Hom_X(-,T)$ is a sheaf; that is, the topology is subcanonical.\n3. $X_{\\mathrm{proét}}$ is essentially small, and $\\Sh(X_{\\mathrm{proét}})$ is a\n   Grothendieck topos.",
+ "statement": "Let $X$ be a scheme and $X_{\\mathrm{proét}}$ its small pro-étale site\n[def-weil-pbc-small-proetale-site].\n\n1. The pro-étale coverings [def-weil-pbc-proetale-covering] of objects of\n   $X_{\\mathrm{proét}}$ satisfy the axioms of a site [def-weil-pbc-sites-and-cohomology]: isomorphisms are coverings; if\n   $\\{U_i\\to U\\}$ is a covering and $\\{U_{ij}\\to U_i\\}$ are coverings, then\n   $\\{U_{ij}\\to U\\}$ is a covering; if $\\{U_i\\to U\\}$ is a covering and $V\\to U$ is a\n   morphism of $X_{\\mathrm{proét}}$, then the fibre products $U_i\\times_UV$ [def-pc-fibre-product] exist in\n   $X_{\\mathrm{proét}}$ and $\\{U_i\\times_UV\\to V\\}$ is a covering.\n2. For every object $T$ of $X_{\\mathrm{proét}}$ the representable presheaf\n   $h_T=\\Hom_X(-,T)$ is a sheaf; that is, the topology is subcanonical.\n3. $X_{\\mathrm{proét}}$ is essentially small in the larger universe $\\mathcal V$ fixed by\n   [def-weil-size-convention], and its category $\\Sh(X_{\\mathrm{proét}};\\operatorname{Sets}_{\\mathcal V})$ of sheaves of\n   $\\mathcal V$-sets for its Grothendieck topology admits a $\\mathcal V$-small-site\n   presentation; equivalently, it is a $\\mathcal V$-Grothendieck topos [def-weil-pbc-topos].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.md",
   "place": "node det-pe-topos-functoriality-site, order None"
  },
  "stmt_deps": [
   "def-weil-pbc-small-proetale-site",
-  "def-weil-pbc-proetale-covering"
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-fibre-product",
+  "def-weil-pbc-topos",
+  "def-weil-size-convention"
  ],
  "proof": [
   {
-   "text": "*1.* A pro-étale covering is an fpqc covering of schemes whose members are weakly étale.\nFpqc coverings of schemes satisfy the three axioms: isomorphisms are fpqc coverings,\ncomposites of fpqc coverings and base changes of fpqc coverings along arbitrary morphisms\nare fpqc coverings (Stacks Project, Topologies, fpqc coverings). It remains to see that the members stay weakly\nétale and that the fibre products stay in the site. If $U_i\\to U$ and $V\\to U$ are\nmorphisms of weakly étale $X$-schemes, then $U_i\\to U$ is weakly étale\n([lem-trf-weakly-etale-between-objects]); its base change $U_i\\times_UV\\to V$ is weakly\nétale, and the composite $U_i\\times_UV\\to V\\to X$ is weakly étale by stability under\ncomposition ([lem-weil-pbc-ind-etale-stability]). So the scheme fibre product is an\nobject of $X_{\\mathrm{proét}}$ and is the fibre product there. Composites of weakly étale\nmorphisms are weakly étale, which treats the composite coverings.",
+   "text": "For the covering axioms use the full category of weakly etale $X$-schemes of the fixed size [def-weil-pbc-small-proetale-site]. A pro-etale covering has weakly etale members and is fpqc [def-weil-pbc-proetale-covering]. The fpqc components of all three axioms are [lem-weil-pbc-fpqc-covering-axioms]. For a singleton isomorphism between objects, the map is weakly etale because every $X$-morphism between weakly etale $X$-schemes is weakly etale [sk-lem-pe-weakly-etale-stability]. For a composite family, its members are weakly etale by composition stability in the same statement [sk-lem-pe-weakly-etale-stability]. For a covering $\\{U_i\\to U\\}$ and $V\\to U$, form the scheme fibre products $W_i=U_i\\times_U V$ [def-pc-fibre-product], within the fixed scheme universe. The maps $W_i\\to V$ are weakly etale by base-change stability, and $W_i\\to X$ is weakly etale by composition stability, both from [sk-lem-pe-weakly-etale-stability], since $V\\to X$ is an object of the site. Thus $W_i\\to X$ is again an object. Fullness over $X$ makes the scheme universal property the universal property in this category: the induced map to $W_i$ is over $X$ because either projection gives its prescribed structure map to $X$. The fpqc pullback family from the covering-axioms node therefore is a pro-etale covering. This proves all three axioms.",
    "uses": [
-    "lem-trf-weakly-etale-between-objects",
-    "lem-weil-pbc-ind-etale-stability"
+    "def-weil-pbc-small-proetale-site",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
+    "place": "Proof paragraph *1* and unit sk-def-sfb-finite-pushforward-pullback proof ('by [sk-lem-pe-weakly-etale-stability] and the fpqc covering axioms'); fpqc operations: Stacks Topologies Tag 022D, lemma-fpqc"
+   }
   },
   {
-   "text": "*2.* Let $\\{U_i\\to U\\}$ be a covering. A compatible family of $X$-morphisms\n$a_i\\colon U_i\\to T$ (agreeing on $U_i\\times_UU_j$) descends to a unique morphism of schemes\n$a\\colon U\\to T$, because representable functors are sheaves for the fpqc topology on\nschemes (fpqc descent for morphisms, Stacks Project, Descent). The descended morphism is an\n$X$-morphism, since its composite with $T\\to X$ and the structure map $U\\to X$ agree after\ncomposition with each $U_i\\to U$, and uniqueness of descent applies to $h_X$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $\\{U_i\\to U\\}$ cover and let $a_i:U_i\\to T$ be $X$-morphisms agreeing on $U_i\\times_U U_j$. The cover is fpqc by [def-weil-pbc-proetale-covering]. The compatible-family statement [lem-weil-pbc-fpqc-representable-descent] supplies a unique scheme morphism $a:U\\to T$ restricting to the $a_i$. Its composite with $T\\to X$ and the structure map $U\\to X$ restrict to the same map on every $U_i$, since the $a_i$ are over $X$. The uniqueness clause of the same descent statement, now with target $X$, equates these two maps, proving that $a$ is over $X$. Its uniqueness follows from uniqueness as a scheme morphism. This is exactly the equalizer sheaf condition of [def-weil-pbc-sites-and-cohomology] for $\\operatorname{Hom}_X(-,T)$, including the empty covering case.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
+    "place": "Proof paragraph *2*; Stacks Descent Tag 023Q, lemma-fpqc-universal-effective-epimorphisms"
+   }
   },
   {
-   "text": "*3.* The objects are weakly étale morphisms from $\\mathcal U$-small schemes, as in the size\nconvention of [def-weil-pbc-small-proetale-site], so the isomorphism classes form a set.\nSheaves of sets on an essentially small site form a Grothendieck topos (Giraud's theorem,\nor directly: $\\Sh$ is a left exact reflective subcategory of a presheaf topos, with the\nsheafification as reflector).",
+   "text": "The size convention [def-weil-size-convention], explicitly used by [def-weil-pbc-small-proetale-site], fixes $\\mathcal U\\in\\mathcal V$ and a $\\mathcal V$-small skeleton within the chosen bound. Thus essential smallness here is relative to $\\mathcal V$, not a claim of $\\mathcal U$-essential smallness. Write $e:\\mathcal D\\to X_{\\mathrm{proet}}$ for the equivalence from that skeleton and $J$ for the topology established in step 1. The induced-topology statement [lem-weil-pbc-site-equivalence-sheaf-transport] gives a Grothendieck topology $K$ on $\\mathcal D$ and an equivalence $e^*:\\operatorname{Sh}(X_{\\mathrm{proet}},J;\\operatorname{Sets}_{\\mathcal V})\\simeq\\operatorname{Sh}(\\mathcal D,K;\\operatorname{Sets}_{\\mathcal V})$. Its hypotheses hold: $e$ is an equivalence, and $K$ is defined to be its induced topology. This is the small-site presentation, rather than an identification of the two sheaf categories by equality.",
    "uses": [
-    "def-weil-pbc-small-proetale-site"
+    "def-weil-size-convention",
+    "def-weil-pbc-small-proetale-site",
+    "lem-weil-pbc-site-equivalence-sheaf-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
+    "place": "Proof paragraph *3*, first sentence; Stacks Sites Tag 03A0, lemma-equivalence, for sheaf transport"
+   }
+  },
+  {
+   "text": "By step 3, $\\mathcal D$ is a skeleton chosen within the bound of [def-weil-size-convention], so its objects and morphisms form sets in $\\mathcal V$; $K$ is a Grothendieck topology on $\\mathcal D$; and $e^*:\\Sh(X_{\\mathrm{proet}},J;\\operatorname{Sets}_{\\mathcal V})\\simeq\\Sh(\\mathcal D,K;\\operatorname{Sets}_{\\mathcal V})$ is an equivalence of categories. These are exactly the data of a $\\mathcal V$-small-site presentation in [def-weil-pbc-topos], so $\\Sh(X_{\\mathrm{proet}};\\operatorname{Sets}_{\\mathcal V})$ is a $\\mathcal V$-Grothendieck topos. With this definition (Stacks 00XA: a topos is the category of sheaves on a site, up to equivalence) the blueprint's alternative description by Giraud's theorem or as a left exact reflective subcategory of presheaves is not needed.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
+    "place": "Proof paragraph *3*, second sentence ('Sheaves of sets on an essentially small site form a Grothendieck topos'); Stacks Sites Tag 00XA, definition-topos"
+   }
   }
  ],
  "proof_deps": [
-  "lem-trf-weakly-etale-between-objects",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-small-proetale-site"
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-site-equivalence-sheaf-transport",
+  "sk-lem-pe-weakly-etale-stability"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
+  "place": "Proof paragraphs *1*-*3*, with small-site transport explicitly supplied"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pro-etale site coverings satisfy site axioms representables are sheaves essentially small Grothendieck topos",
+   "results": "8 hits; AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.jointlySurjectiveTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.grothendieckTopology, AlgebraicGeometry.Scheme.smallGrothendieckTopology, AlgebraicGeometry.Scheme.mem_toGrothendieck_smallPretopology",
+   "date": "2026-10-16",
+   "verdict": "partial matches only: no single project declaration or Mathlib specialization gives the conjunction including the Grothendieck-topos presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pro-etale site coverings satisfy composition and base change axioms, representables are sheaves, and sheaves form a Grothendieck topos",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable, CategoryTheory.Pretopology.mk, AlgebraicGeometry.Scheme.etaleTopology, Opens.grothendieckTopology, CategoryTheory.Sheaf.isSheaf_of_isRepresentable, CategoryTheory.GrothendieckTopology.Subcanonical, CategoryTheory.Precoverage.toPretopology, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-16",
+   "verdict": "partial matches only: no single project declaration or Mathlib specialization gives the conjunction including the Grothendieck-topos presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Subcanonical, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "partial matches only: no single project declaration or Mathlib specialization gives the conjunction including the Grothendieck-topos presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage|instSubcanonicalTopology|EssentiallySmall|isGrothendieckAbelian",
+   "results": "15 hits; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/ subdirectory: AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "partial matches only: no single project declaration or Mathlib specialization gives the conjunction including the Grothendieck-topos presentation"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -66,5 +139,21 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-topos-functoriality-site",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: define only small-site sheaf-presentation terminology, construct the skeleton sheaf equivalence, and cite actual set-valued sheafification existence and finite-limit preservation for the blueprint reflector route. The fpqc covering axioms are a verified Mathlib leaf. Chapter/unit metadata and complete new-node creation records are present. All step quotations and actual logged Mathlib searches are retained and reproduced in the report. Rechecked the retained repair against the returned snapshot and current base on 2026-10-17; made the Grothendieck-topos notion an explicit presentation predicate and wrote out naturality of the sheafification Hom bijection. Maintainer review 2026-10-17: step 1 now cites the unit-route node sk-lem-pe-weakly-etale-stability instead of two off-unit tools; step 4 reduced to the instance of the presentation definition (no sheafification tool needed); clause 3 names the V-set sheaf category explicitly.",
+  "blueprint": "Step 1 realizes paragraph *1*; step 2 realizes paragraph *2*; steps 3-4 realize paragraph *3* (size bound, then the Grothendieck-topos conclusion as an instance of the 00XA presentation definition).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-b8769c415",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-b8769c415 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and it is correct. I repaired three small faults in fixes/dag/nodes/sec-proetale-coefficients (the item and def-weil-pbc-topos); no node is dropped. (1) C7/C8: step 1 used lem-trf-weakly-etale-between-objects and lem-weil-pbc-ind-etale-stability as off-unit tools, with a 'why' saying the unit has no such statement. That is false: the unit cites sk-lem-pe-weakly-etale-stability, which states both facts, and the unit proof names it for this step. Step 1 now cites it and both tool uses are withdrawn. (2) B4: step 4 had an unescaped \\to that JSON read as a TAB. The step also rebuilt the sheafification reflector through an off-unit tool (lem-weil-pbc-sheafification-plus-theorem, stated for covering-family sites while (D,K) is a sieve site), which the delivered 00XA-style definition does not need. Step 4 is now the elementary instance of def-weil-pbc-topos from step 3, and that tool use is withdrawn too. (3) B3/C4: def-weil-pbc-topos cited def-weil-pbc-sites-and-cohomology (00VH covering-family sites) for 'Grothendieck topology', which that node does not define, and no DAG node does. The statement now defines sieves, Grothendieck topology (Stacks 00Z4) and V-set sheaves (00Z8) inline. I also made clause 3 name Sh(X_proet; Sets_V) explicitly; the V-essential-smallness reading is the only true one, because U-small weakly etale X-schemes do not have a U-small set of isomorphism classes. Sources checked: Stacks 022D at topologies.tex 3104-3147, 023Q at descent.tex 4130ff, 00XA at sites.tex 2942, 00Z4 at sites.tex 10993; Mathlib Fpqc.lean 60-63 (the three fpqcPrecoverage instances) and the Subcanonical instance at 87. Step 2's double use of descent (target T, then target X) and the empty cover are correct, and the step 3 transport hypotheses hold. The new leaf lem-weil-pbc-fpqc-covering-axioms is accepted; lem-galois-fpqc-covering-base-change states only its clause (3). No duplicates, no cycle in the overlaid DAG (131 dependencies), no SGA source. No tool_uses are accepted and none is needed.; 2 file(s) fixed by the reviewer"
+ }
 }

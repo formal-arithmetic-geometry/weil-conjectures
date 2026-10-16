@@ -1,0 +1,62 @@
+{
+ "id": "lem-coef-signed-word-boundary-pushout",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; signed-word finite-diagram induction underlying its mapping-space foundation, Dwyer–Kan Section 4.1 Proposition 4.3 attachment square.",
+   "via": [
+    "lem-coef-proper-word-colimit-invariance"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper signed-word colimits attach alternating words along their boundaries",
+ "statement": "Let $\\mathcal I$ be the category [def-nagata-category] of finite words in $+,-$, including the empty word $\\epsilon$, with morphisms the weakly order-preserving maps of letter positions preserving signs. Composition is composition of maps of positions. For $n\\geq0$ let $\\mathcal I_{\\leq n}$ be its full subcategory of words of length at most $n$. Let $E:\\mathcal I\\to\\mathrm{sSet}$ be a functor to simplicial sets [def-weil-pbc-simplicial-set]. Assume $E$ is proper: every injective morphism $u$ induces a degreewise injective $E(u)$, and, for any two injections into the same word, the intersection of their image simplicial subsets is exactly the image of the injection of their common positions. Put $C_n(E)=\\varinjlim_{\\mathcal I_{\\leq n}}E$, with colimits as in [def-weil-pbc-category-colimit]. For $n\\geq1$ let $a_n^+$ and $a_n^-$ be the length-$n$ alternating words starting with $+$ and $-$, respectively. For $e\\in\\{+,-\\}$ let $B_n^e(E)\\subseteq E(a_n^e)$ be the union of the images of $E(u)$ for all injections $u:w\\hookrightarrow a_n^e$ with $|w|<n$, including $w=\\epsilon$. The prescriptions sending $E(u)(x)$ to the image of $x\\in E(w)$ in $C_{n-1}(E)$ define well-defined simplicial maps $B_n^e(E)\\to C_{n-1}(E)$. For each $n\\geq1$ the canonical square\n$$\\begin{matrix}\nB_n^+(E)\\amalg B_n^-(E)&\\longrightarrow&C_{n-1}(E)\\\\\n\\big\\downarrow&&\\big\\downarrow\\\\\nE(a_n^+)\\amalg E(a_n^-)&\\longrightarrow&C_n(E)\n\\end{matrix}$$\nis a pushout, meaning that maps from its lower-right corner to any simplicial set are uniquely determined by maps from its upper-right and lower-left corners agreeing on its upper-left corner. The left map is the coproduct of the two boundary inclusions; the right and bottom maps are induced by the colimit cocones. The construction is natural for natural transformations between proper functors. At degree zero, $C_0(E)=E(\\epsilon)$.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Section 4.1, Definition 4.1 (indexing words), Proposition 4.3 (displayed attachment square), and Definition 4.4 (properness), printed pp. 22-23 (PDF pp. 6-7). Proper-functor version, with n >= 1 and degree zero treated separately; coproducts replace the displayed disjoint-union symbols."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Colimit over finite words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along the union of proper subwords",
+   "results": "{\"t\": \"2026-10-16T17:28:37Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit over finite words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along the union of proper subwords\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.rcons\", \"Monoid.CoprodI.NeWord.toWord\", \"Monoid.CoprodI.Word.Pair.tail\", \"Monoid.CoprodI.NeWord.prod\", \"Monoid.CoprodI.Word.prod\", \"Monoid.CoprodI.NeWord\", \"Monoid.CoprodI.Word.Pair\", \"Monoid.CoprodI.Word.cons\"], \"digest\": \"43a056c09330b8d6\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: returned Monoid.CoprodI Word/NeWord declarations construct words in free products of monoids; none concerns the category of signed words or its diagram colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T17:28:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPushout\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.of_isColimit\", \"CategoryTheory.IsPushout.of_isColimit'\", \"CategoryTheory.IsPushout.isColimit'\", \"CategoryTheory.IsPushout.of_isColimit_cocone\", \"CategoryTheory.IsPushout.of_isColimit_binaryCofan_of_isInitial\", \"CategoryTheory.isPushout_iff_isColimit_binaryCofan_of_isThin\", \"CategoryTheory.IsPushout.preservesColimit_span_iff\"], \"digest\": \"4464da75a3979ece\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: returned IsPushout.isColimit and its variants express the universal property of an already given pushout, and isColimitOfIsColimitOfIsPushout concerns colimits of already given pushout squares. None proves the signed-word attachment square."
+  },
+  {
+   "tool": "grep",
+   "query": "signed.?word|alternating.?word|boundary.?pushout|proper.?functor",
+   "results": "{\"t\": \"2026-10-16T17:28:30Z\", \"tool\": \"grep\", \"query\": \"signed.?word|alternating.?word|boundary.?pushout|proper.?functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\"], \"digest\": \"a71e6fde01aec962\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the only hits concern CoxeterSystem.alternatingWord and its group product/length; there is no signed-word diagram attachment theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-proper-word-colimit-invariance",
+  "date": "2026-10-17",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-ind-heart-filtered-colimits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Ind-constructible sheaves are closed under filtered colimits and sums",
@@ -12,44 +12,107 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
   "place": "node det-ind-heart-filtered-colimits, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-objects"
+ ],
  "proof": [
   {
-   "text": "Let $\\mathcal K$ be the category of pairs $(\\lambda,c\\colon C\\to B_\\lambda)$ with $C$ constructible; a\nmorphism $(\\lambda,c)\\to(\\mu,c')$ is an arrow $\\lambda\\to\\mu$ in $I$ and a map $C\\to C'$ with\n$c'\\circ(C\\to C')=(B_\\lambda\\to B_\\mu)\\circ c$.",
-   "uses": [],
-   "elementary": null
+   "text": "Recall the unit's definition: $\\IndCons(X,\\Lambda)$ consists of the small filtered colimits, in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$, of objects of $\\Cons(X,\\Lambda)$. Let $\\mathcal K$ be the category of pairs $(\\lambda,c\\colon C\\to B_\\lambda)$ with $C$ constructible; a morphism $(\\lambda,c)\\to(\\mu,c')$ is a pair $(u,f)$ with $u\\colon\\lambda\\to\\mu$ in $I$ and $f\\colon C\\to C'$ satisfying $c'f=B(u)c$. Identities and composition are componentwise, and $(\\lambda,c)\\mapsto C$, $(u,f)\\mapsto f$ defines a diagram. By [det-ind-heart-canonical-presentation], each $J(B_\\lambda)$ is essentially small. Since $I$ is small, the union over $\\lambda$ of sets of representatives of these objects is a set of representatives for $\\mathcal K$; its morphisms are sets of pairs $(u,f)$. Thus $\\mathcal K$ is essentially small, and a small skeleton may be used for its colimit.",
+   "uses": [
+    "det-ind-heart-canonical-presentation"
+   ],
+   "elementary": true
   },
   {
-   "text": "*$\\mathcal K$ is filtered.* Given finitely many objects and arrows, first move all indices to a common\nupper bound $\\mu\\in I$ (possible since $I$ is filtered), composing the maps $c$ with the transition maps\ninto $B_\\mu$; then the finitely many objects lie in $J(B_\\mu)$, which is filtered\n([det-ind-heart-canonical-presentation]), so they admit a cocone there (direct sums and cokernels in\n$\\Cons(X,\\Lambda)$). If two parallel arrows in $\\mathcal K$ differ in the $I$-component, equalize those\nfirst in $I$.",
+   "text": "*$\\mathcal K$ is filtered.* Every $J(B_\\lambda)$ is nonempty and filtered by [det-ind-heart-canonical-presentation]. Choose $\\lambda\\in I$ and an object of $J(B_\\lambda)$ to obtain an object of $\\mathcal K$. For $(\\lambda,c\\colon C\\to B_\\lambda)$ and $(\\nu,d\\colon D\\to B_\\nu)$, choose $u\\colon\\lambda\\to\\mu$ and $v\\colon\\nu\\to\\mu$ in $I$. A common successor of $(C,B(u)c)$ and $(D,B(v)d)$ in $J(B_\\mu)$ gives a common successor in $\\mathcal K$. For parallel arrows $(u,f),(v,g)\\colon(\\lambda,c)\\rightrightarrows(\\mu,d)$, choose $w\\colon\\mu\\to\\rho$ with $wu=wv$. The maps $f,g$ are now parallel morphisms from $(C,B(wu)c)$ to $(D,B(w)d)$ in $J(B_\\rho)$. Choose $h\\colon(D,B(w)d)\\to(A,a)$ there with $hf=hg$. Then $(w,h)\\colon(\\mu,d)\\to(\\rho,a)$ equalizes the original two arrows, since its composites have components $(wu,hf)=(wv,hg)$. These are the three filteredness conditions.",
    "uses": [
     "det-ind-heart-canonical-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "*Colimit.* Computing the colimit of $(\\lambda,c)\\mapsto C$ first over $c$ for fixed $\\lambda$ and then\nover $\\lambda$ gives\n\n$$\n\\varinjlim_{\\mathcal K}C=\\varinjlim_\\lambda\\varinjlim_{J(B_\\lambda)}C=\\varinjlim_\\lambda B_\\lambda=B,\n$$\n\nusing [det-ind-heart-canonical-presentation]. So $B$ is a filtered colimit of constructible sheaves.",
+   "text": "*Colimit.* For any $\\Lambda_X$-module sheaf $M$, restrict a cocone on $\\mathcal K$ to each fibre $J(B_\\lambda)$. The canonical presentation in [det-ind-heart-canonical-presentation] gives unique maps $h_\\lambda\\colon B_\\lambda\\to M$. For $u\\colon\\lambda\\to\\mu$, the arrow $(u,\\mathrm{id}_C)\\colon(\\lambda,c)\\to(\\mu,B(u)c)$ implies $h_\\lambda c=h_\\mu B(u)c$ for every $c$; the colimit property of $J(B_\\lambda)$ gives $h_\\lambda=h_\\mu B(u)$. Conversely, such a compatible family gives the cocone $h_\\lambda c$, because for $(u,f)$ one has $h_\\mu c'f=h_\\mu B(u)c=h_\\lambda c$. The two constructions are inverse. Thus cocones on $\\mathcal K$ are exactly cocones from $(B_\\lambda)$ to $M$, naturally in $M$, so $B$ with its maps $C\\to B_\\lambda\\to B$ is the colimit over $\\mathcal K$. Steps 1 and 2 show that this is a small filtered colimit of constructible sheaves, proving the first assertion.",
    "uses": [
     "det-ind-heart-canonical-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "*Direct sums.* $\\bigoplus_{s\\in S}B_s$ is the filtered colimit over finite subsets $T\\subset S$ of\n$\\bigoplus_{s\\in T}B_s$. A finite direct sum of filtered colimits $\\varinjlim_{\\alpha}C^{(s)}_{\\alpha}$ is\nthe filtered colimit over the product of the index categories of the finite direct sums\n$\\bigoplus_{s\\in T}C^{(s)}_{\\alpha_s}$, which are constructible. So finite sums lie in\n$\\IndCons(X,\\Lambda)$, and arbitrary ones by the first part.",
-   "uses": [],
-   "elementary": null
+   "text": "*Direct sums.* For a finite subset $T\\subset S$, choose presentations $B_s=\\varinjlim_{\\alpha_s\\in A_s}C^{(s)}_{\\alpha_s}$ from the definition of $\\IndCons$. The finite product $A=\\prod_{s\\in T}A_s$ is filtered: it is nonempty, and common successors and equalizers of parallel arrows are chosen coordinatewise. The zero sheaf is constructible, and finite sums of constructibles are constructible by [sk-lem-coefficient-heart]: use $0\\to C\\to C\\oplus D\\to D\\to0$ and closure under extensions. A cocone from $\\bigoplus_{s\\in T}C^{(s)}_{\\alpha_s}$ to $M$ is exactly a compatible family of maps $C^{(s)}_{\\alpha_s}\\to M$ for each $s$. Indeed, restrict to each summand; its map is independent of the other coordinates because any two choices of those coordinates have a common successor. The presentation of $B_s$ then gives a unique map $B_s\\to M$, and the coproduct property gives a unique map $\\bigoplus_{s\\in T}B_s\\to M$. Conversely these maps define the cocone by composition. Hence the colimit over $A$ is $\\bigoplus_{s\\in T}B_s$, so finite sums lie in $\\IndCons$. For $T=\\varnothing$, the product category is the one-object category and its diagram is the zero constructible sheaf. Finally the poset of finite subsets of $S$ is nonempty and directed by union. A compatible family of maps from the finite subsums to $M$ is uniquely determined by its singleton maps $B_s\\to M$, and conversely those maps extend to every finite subsum. Its colimit is therefore $\\bigoplus_{s\\in S}B_s$. The first assertion applied to this filtered diagram proves the result, also for $S=\\varnothing$.",
+   "uses": [
+    "sk-lem-coefficient-heart"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-ind-heart-canonical-presentation"
+  "det-ind-heart-canonical-presentation",
+  "sk-lem-coefficient-heart"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ind-constructible sheaves closed under filtered colimits and arbitrary direct sums",
+   "results": "Generic condensed and sheaf filtered-colimit instances; no IndCons declaration",
+   "date": "2026-10-16",
+   "verdict": "no match: project-specific IndCons notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FilteredColimit, CategoryTheory.PreservesFilteredColimits",
+   "results": "0 hits; unknown identifier CategoryTheory.FilteredColimit",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; superseded by the successful isIndObject_colimit name search"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered colimit|direct sum|IndCons [Mathlib/CategoryTheory]",
+   "results": "Tool printed 0 hits, but its Mathlib/CategoryTheory subdirectory was invalid (the tool already prefixes Mathlib/). Superseded by the second reader grep with sub=CategoryTheory, which returned four hits.",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind-constructible sheaves are closed under filtered colimits and direct sums",
+   "results": "Generic Ind-object and sheaf filtered-colimit results; no exact IndCons declaration",
+   "date": "2026-10-16",
+   "verdict": "no match: project-specific IndCons notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of filtered colimits of finitely presentable objects is closed under filtered colimits",
+   "results": "CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, CategoryTheory.IsLocallyFinitelyPresentable, CategoryTheory.IsFinitelyAccessibleCategory, CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι, CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι, CategoryTheory.IsLocallyPresentable, CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic presheaf Ind-object/presentability result, not the pro-etale coefficient-module subcategory.",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIndObject_colimit\"",
+   "results": "CategoryTheory.Limits.isIndObject_colimit",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic presheaf Ind-object/presentability result, not the pro-etale coefficient-module subcategory.",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "isIndObject_colimit|instIsFilteredTotalOfIsFinitelyPresentableObjDiag|IndCons",
+   "results": "Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean, Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean, Mathlib/CategoryTheory/Limits/Indization/Category.lean, Mathlib/CategoryTheory/Limits/Indization/Products.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic presheaf Ind-object/presentability result, not the pro-etale coefficient-module subcategory.",
+   "sub": "CategoryTheory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -62,5 +125,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ind-heart"
+ "unit": "sk-prop-ind-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-ind-heart-filtered-colimits",
+  "worker": "stage1",
+  "summary": "Second reader retained the blueprint four-step route and no new nodes. Added definition dependencies, smallness of the pair category, all three filteredness tests with explicit parallel-arrow equalization, the forward and inverse cocone correspondence, and the finite-product and finite-subsum cocone arguments. Corrected the canonical-presentation citation to quote the colimit assertion actually used. Fresh broader Mathlib searches find generic presheaf Ind closure, not the coefficient-module statement.",
+  "blueprint": "Realizes the blueprint proof's four paragraphs: construction of the pair category, filteredness, the iterated-colimit identification, and closure under arbitrary direct sums."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-91bb0ed6a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-91bb0ed6a (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is verbatim the main-20261015 statement of sk-prop-ind-heart-filtered-colimits.md: both coefficient cases, colimits taken in Mod(X_proet,Lambda_X), nothing weakened, no blueprint_update. There are no new nodes. All four steps check against the source proof and the cited node statements. Step 1: K is a category and is essentially small, from the essential-smallness clause of det-ind-heart-canonical-presentation and I small. Step 2: nonempty, common successors via a common index mu, and parallel arrows equalized by (w,h), where I verified that the morphism equations hold. This uses the filteredness of J(B_rho). Step 3: the cocone correspondence (fibre restriction gives h_lambda, the arrows (u,id) force h_lambda = h_mu B(u), and the converse map is inverse to it) uses the clause B = colim J(B). Step 4: finite sums of constructible sheaves are constructible as extensions, by sk-lem-coefficient-heart (1). The product of filtered categories is filtered coordinatewise. Independence of the other coordinates holds via a common successor that is the identity on coordinate s. The finite-subset colimit then gives the arbitrary sum. The edge cases T=∅ and S=∅ are handled. Route: both proof_deps are inside the unit's route. There is no cycle and no tool_uses. Duplicate search with rg over dag/nodes for IndCons and 'filtered colimit' found no other node stating this, so same_as=[] is right. The Mathlib candidates are presheaf Ind-object results, so the match is null. FIX: I added the missing stmt_deps sk-def-sfb-condensed-ring and sk-def-sfb-qlbar-condensed for Lambda=E or Qlb. Everything else in the item file is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

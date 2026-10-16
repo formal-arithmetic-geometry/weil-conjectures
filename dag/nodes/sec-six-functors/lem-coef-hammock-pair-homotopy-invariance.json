@@ -28,9 +28,74 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x,y\\in O$. For a finite colored word $h=(S_0,T_0)$ and either $(C,W)=(A,U)$ or $(C,W)=(B,V)$, define $D_C(h)_{p,q}=G_{C_p,W_p}(h)(x,y)_q$. By [lem-coef-hammock-graph-colimit-presentation] the word operators compose columns in each fiber and insert identity columns for empty fibers. Applying a simplicial operator of $C,W$ to every arrow commutes with these operations because it preserves identities and composition; it also commutes with row deletion/repetition. Thus $h\\mapsto D_C(h)$ is a diagram of bisimplicial sets for each of the two pairs. Applying $S$ to every arrow gives a natural transformation from the $A$ diagram to the $B$ diagram, since $S$ fixes $x,y$, preserves composition and identities, and sends $U$ into $V$. Set $F_A(h)=\\operatorname{diag}D_A(h)$ and $F_B(h)=\\operatorname{diag}D_B(h)$.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definitions 5.1 and 5.3, printed p.24; explicit commutation of the two simplicial directions with the word operators"
+   }
+  },
+  {
+   "text": "For each $h$, its $+$ positions are $S_0$ and its $-$ positions are $T_0$, so $D_A(h),D_B(h)$ are exactly the fixed-word bisimplicial sets in [lem-coef-fixed-hammock-graph-homotopy-invariance]. All hypotheses of that node hold: the common object set is the given small $O$, the functor is identity on it, the distinguished subcategories are wide, it sends $U$ into $V$, and the two families of mapping-space maps are weak homotopy equivalences by assumption. Consequently $F_A(h)\\to F_B(h)$ is a weak homotopy equivalence for every $h$. This applies the fixed-word lemma to its diagonal; it does not assert that $S_p:A_p\\to B_p$ is an equivalence in each degree.",
+   "uses": [
+    "lem-coef-fixed-hammock-graph-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Lemma 5.7, printed p.24; Example 10.3 and Propositions 10.4–10.5 supply the strictly smaller fixed-word input"
+   }
+  },
+  {
+   "text": "Take either $(C,W)=(A,U)$ or $(C,W)=(B,V)$, and put $F_C(h)=\\operatorname{diag}D_C(h)$. For every $p$, [lem-coef-hammock-graph-colimit-presentation] makes $h\\mapsto G_{C_p,W_p}(h)(x,y)$ proper in the signed-word sense of [lem-coef-proper-word-colimit-invariance]. For an injection $f:h_1\\to h$, its degree-$n$ map $F_C(f)_n=G_{C_n,W_n}(f)(x,y)_n$ is therefore injective. If $g:h_2\\to h$ is another injection and $h_{12}$ is their image intersection, the same ordinary properness in bidegree $(n,n)$ says\n$$\\operatorname{im}F_C(h_{12}\\to h)_n=\\operatorname{im}F_C(f)_n\\cap\\operatorname{im}F_C(g)_n.$$\nThese are exactly the two defining conditions for $F_C$ to be proper. Since $(C,W)$ was either of the two given pairs, this proves properness of both $F_A$ and $F_B$.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation",
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 5.4 and Definition 4.4; explicit degreewise check of properness of the diagonal diagrams in the Section 5.6 argument"
+   }
+  },
+  {
+   "text": "The category $\\mathbb H$ is small: its objects are finite binary words and its morphisms are functions between finite ordinals. Step 3 supplies properness of $F_A,F_B$, and Step 2 supplies the objectwise weak homotopy equivalences of their natural transformation. Therefore [lem-coef-proper-word-colimit-invariance] gives a weak homotopy equivalence\n$$c:\\operatorname{colim}_{h\\in\\mathbb H}F_A(h)\\longrightarrow\\operatorname{colim}_{h\\in\\mathbb H}F_B(h).$$",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 4.5, printed p.23; applied to the diagonal fixed-word diagrams as in Section 5.6"
+   }
+  },
+  {
+   "text": "For either $(C,W)=(A,U)$ or $(C,W)=(B,V)$, use [lem-coef-hammock-graph-colimit-presentation] to identify, in degree $n$,\n$$\\left(\\operatorname{colim}_{h\\in\\mathbb H}F_C(h)\\right)_n=\\operatorname{colim}_hG_{C_n,W_n}(h)(x,y)_n\\cong H(C_n,W_n)(x,y)_n=(\\operatorname{diag}H(C,W)(x,y))_n.$$\nHere colimits of simplicial sets can be constructed degreewise: form the set colimits, let their universal properties induce the operators, and check the simplicial identities on each cocone leg. Naturality of the cited reduction isomorphism for row operations and the operators of $C,W$ makes the displayed degreewise bijections simplicial. Thus the displayed formula identifies the source and target of $c$ with the two hammock diagonals. On a representative fixed-word diagram, $c$ applies $S_n$ to every arrow before reduction; this is precisely the map $\\operatorname{diag}H(S)(x,y)$ which applies $S$ to every arrow and reduces. Every reduced diagram has a fixed-word representative, so the two maps agree in every degree. Step 4 consequently proves the claimed weak homotopy equivalence. Concatenation and reduction commute with applying $S$ because it preserves composition and identities; this also identifies the enriched functor. No freeness, cofibrancy, saturation or two-out-of-three assumption has entered.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 5.5 and Section 5.6, printed p.24; degreewise colimit/diagonal identification and comparison of the actual maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hammock-graph-colimit-presentation",
+  "lem-coef-fixed-hammock-graph-homotopy-invariance",
+  "lem-coef-proper-word-colimit-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Written-out proof of the diagonal and proper-colimit reduction in Section 5.6 of Dwyer–Kan, using Lemma 5.7, Proposition 4.5 and Propositions 5.4–5.5; source read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +152,38 @@
    "results": "{\"t\": \"2026-10-16T15:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocalizerMorphism\\\", \\\"IsLocalizedEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.id\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedFullyFaithfulOfIsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_isInduced\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedEquivalenceOppositeOpOp\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.comp\"], \"digest\": \"aff41fb774d49abf\"}",
    "date": "2026-10-16",
    "verdict": "no match: second-reader search. The semantic hits and LocalizerMorphism declarations concern equivalences of ordinary localized categories, not weak equivalences of reduced-hammock mapping simplicial sets. FreeGroupoid.instIsLocalizationOfTopMorphismProperty is ordinary inversion of every arrow, without the relative free-factor homotopy claim. Read FreeGroupoidOfCategory.lean:30–105, CofibrantObjectHomotopy.lean:55–105, and the returned signatures. The independent source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial functor between pairs A U and B V inducing weak homotopy equivalences on all mapping spaces induces a weak equivalence of diagonal reduced hammock spaces",
+   "results": "{\"t\": \"2026-10-16T16:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial functor between pairs A U and B V inducing weak homotopy equivalences on all mapping spaces induces a weak equivalence of diagonal reduced hammock spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"HomotopicalAlgebra.RightHomotopyClass\", \"HomotopicalAlgebra.LeftHomotopyClass\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\"], \"digest\": \"85aead49e3fd2d2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization and model-category homotopy quotient comparisons do not state mappingwise invariance of diagonal reduced hammocks of simplicial pairs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "results": "{\"t\": \"2026-10-16T16:50:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization and model-category homotopy quotient comparisons do not state mappingwise invariance of diagonal reduced hammocks of simplicial pairs."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Dwyer|simplicial.*localiz",
+   "results": "{\"t\": \"2026-10-16T16:50:02Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer|simplicial.*localiz\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization and model-category homotopy quotient comparisons do not state mappingwise invariance of diagonal reduced hammocks of simplicial pairs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hammock localization of a simplicial relative category is invariant under mapping space weak equivalences",
+   "results": "{\"t\": \"2026-10-16T16:50:03Z\", \"tool\": \"leansearch\", \"query\": \"Hammock localization of a simplicial relative category is invariant under mapping space weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.Localization.Construction.objEquiv\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"CategoryTheory.LocalizerMorphism.homMap.congr_simp\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"398ac83224bd15fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization and model-category homotopy quotient comparisons do not state mappingwise invariance of diagonal reduced hammocks of simplicial pairs."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dk-cofibrant-localization-comparison",
@@ -98,5 +191,21 @@
   "group": "NF"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hammock-pair-homotopy-invariance",
+  "worker": "stage1",
+  "summary": "Kept the item statement and wrote out the Section 5.6 argument: take diagonal fixed-word hammock graphs, prove their colored-word diagrams proper degreewise, apply proper-colimit invariance, and identify the colimit map with diag H(S) on representatives. Two strictly smaller new statement-only helpers supply fixed-word invariance (Lemma 5.7) and proper graph colimit presentation (Propositions 5.4–5.5); the existing lem-coef-proper-word-colimit-invariance supplies Proposition 4.5. Second reading removed the duplicate proper-colimit node and wrote the diagonal and colimit identifications uniformly for both pairs. No project attachment or Mathlib match. Fixed-word graphs allow identity columns and like-directed neighbors; no degreewise equivalence of ordinary categories is assumed.",
+  "blueprint": "Realizes the integral exceptional-adjoint proof paragraph 2 input described in the item blueprint: the comparison from reduced hammocks to simplicial localization before the infinity-localization step, using Dwyer–Kan Lemma 2.4, Lemma 5.7, and Sections 4–5 and 9–10.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-78ecc48e6",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-78ecc48e6 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Caveat: the Dwyer–Kan PDF is not in literature/ and network access is blocked here, so I checked Lemma 2.4, Def 2.1, Prop 4.5, Def 5.1, Props 5.4–5.5 and Lemma 5.7 from my own knowledge of the paper; page numbers are unconfirmed, and I verified every step mathematically on its own. The item statement is unchanged against the side DAG and is DK Lemma 2.4 with all hypotheses; this is not a target node, so there is no base-change or coefficient check. Step 1: functors preserve composites and identities, so the word operators commute with both simplicial directions (elementary). Step 2: D_C(h) is exactly D^w of lem-coef-fixed-hammock-graph-homotopy-invariance, and all its hypotheses are present. Step 3: properness of the diagonal follows from ordinary properness of G_{C_n,W_n} in degree (n,n), which matches the two clauses of lem-coef-proper-word-colimit-invariance. Step 4: that node applies directly. Step 5: colimits are degreewise, the presentation isomorphism and its naturality make the identification simplicial, and on representatives the colimit map is 'apply S, then reduce'. Fixed-word node (DK 5.7): self-contained statement only; I tested the empty word, (+) giving A(x,y), (−) giving U(y,x), and (+,+) as a bar construction; strictly smaller than the item. Presentation node (DK 5.4–5.5): properness checked (insertions are injective, the intersection of insertion images is an insertion image); reduction is well defined (terminating, critical pairs close, each move is an 𝓘-morphism), so the colimit is the set of reduced hammocks; discrete and composite-identity cases checked. No duplicates after reading every hammock/DK node in sec-six-functors; dropping the earlier proper-colimit duplicate was correct. The dependency graph is acyclic, all cited nodes are in the same unit, there are no tool_uses, no SGA, and both new nodes record LeanSearch, LeanFinder/Loogle and grep searches."
+ }
 }

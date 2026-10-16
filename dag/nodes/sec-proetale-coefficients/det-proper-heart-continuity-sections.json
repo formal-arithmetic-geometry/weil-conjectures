@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-proper-heart-continuity-sections",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections over a weakly contractible affine preserve colimits",
@@ -18,28 +18,132 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "sk-def-pe-weak-contractible",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "Exactness is [sk-cor-pe-wc-sections]. $W$ is quasi-compact, so $\\Gamma(W,-)$ commutes with direct sums of\nsheaves (Stacks, Tag 0935).",
-   "uses": [],
-   "elementary": null
+   "text": "Put $R=A(W)$. Apply [det-pe-sections-limits-colimits] with the given ring sheaf $A$ and affine weakly contractible $W$. It gives preservation of all limits and all colimits for the module-valued evaluation $E:M\\mapsto M(W)$. By [def-weil-sheaf-of-modules-category], morphisms evaluate to $R$-linear maps and evaluation is additive: $(f+g)_W=f_W+g_W$. The hypotheses use weak contractibility of the site object, without assuming that its coordinate ring is w-contractible, and impose no commutativity on $A$.",
+   "uses": [
+    "det-pe-sections-limits-colimits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
+    "place": "First paragraph, exact sections; the existing stronger sections theorem also supplies the direct-sum and colimit conclusions."
+   }
   },
   {
-   "text": "Let $F\\colon I\\to\\Mod_A$ be any small diagram. Its colimit is the cokernel of the map\n\n$$\n\\bigoplus_{(i\\to j)}F(i)\\xrightarrow{\\ \\ }\\bigoplus_{i}F(i),\n$$\n\nindexed by arrows of $I$ and objects of $I$, sending the summand of $u\\colon i\\to j$ by $x\\mapsto\n\\iota_jF(u)x-\\iota_ix$. An additive functor that preserves direct sums and cokernels (here: exact)\ncarries this presentation to the corresponding presentation of the colimit of $\\Gamma(W,F(-))$. Hence\n$\\Gamma(W,-)$ preserves all colimits. (This is also part of [sk-cor-pe-sections].)",
-   "uses": [],
-   "elementary": null
+   "text": "Let $0\\to M\\xrightarrow{f}N\\xrightarrow{g}P\\to0$ be short exact in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. Its first map is a kernel of $g$ and its second is a cokernel of $f$. The limit and colimit preservation of Step 1 give the same kernel and cokernel diagrams in $R$-modules. A kernel of an $R$-linear map is its subgroup of elements sent to zero, with the restricted action; a cokernel is the quotient by its image, with the quotient action. Their underlying additive groups are therefore the abelian-group kernel and cokernel as well. Hence $0\\to M(W)\\to N(W)\\to P(W)\\to0$ is short exact in abelian groups. This proves the stated exactness.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
+    "place": "First paragraph, exactness, with the passage from module values to underlying abelian groups written explicitly."
+   }
+  },
+  {
+   "text": "For any small diagram $D:I\\to R\\text{-}\\mathrm{Mod}$, form $B=\\bigoplus_{i\\in\\mathrm{Ob}I}D(i)$ and $C=\\bigoplus_{u:i\\to j}D(i)$ on underlying additive groups, and define $d:C\\to B$ on the $u$-summand by $x\\mapsto\\iota_jD(u)(x)-\\iota_i(x)$. Direct sums carry coordinatewise $R$-action; $d$ is linear, so $L=B/\\operatorname{im}d$ carries the quotient action. By [def-weil-pbc-category-colimit], $L$ is the colimit both in modules and in abelian groups: a homomorphism $B\\to H$ is a family $h_i$, and it kills $d$ exactly when $h_jD(u)=h_i$ for each arrow; if $H$ is a module and the $h_i$ are linear, the induced quotient map is linear. Thus the forgetful functor to abelian groups preserves these colimit cocones. Apply this to $D=E\\circ F$ for any small diagram $F$ of $A$-module sheaves: Step 1 identifies $E(\\operatorname{colim}F)$ with this module colimit, with the evaluated cocone maps. After forgetting, it is still the colimit cocone, so its comparison into abelian groups is exactly the canonical isomorphism. This includes the empty diagram, for which $B=C=L=0$, every discrete diagram (direct sums), and every filtered diagram.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
+    "place": "Second paragraph, explicit cokernel presentation; same presentation proves preservation when forgetting the section-ring action."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-pe-sections-limits-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-sections.proof.md",
+  "place": "The two blueprint proof paragraphs, reusing the stronger result det-pe-sections-limits-colimits of the explicitly cited sk-cor-pe-sections unit, and writing out the underlying additive-group passage."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact colimit preserving evaluation sections weakly contractible affine pro-etale module sheaves",
+   "results": "{\"t\": \"2026-10-16T16:49:05Z\", \"tool\": \"leanfinder\", \"query\": \"exact colimit preserving evaluation sections weakly contractible affine pro-etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.preservesColimit_Γ\", \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"LightCondMod.ofSheafLightProfinite\", \"SheafOfModules.Presentation.isColimit\", \"CondensedMod.ofSheafProfinite\", \"Condensed.hasExactColimitsOfShape\", \"Condensed.profiniteSolid\", \"Profinite.NobelingProof.succ_exact\"], \"digest\": \"2e64a7287a0e28b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no exact weakly-contractible pro-etale sheaf evaluation theorem; presheaf evaluation, sheaf limits and condensed constructions have different hypotheses or conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "evaluation PreservesColimits SheafOfModules",
+   "results": "{\"t\": \"2026-10-16T16:49:05Z\", \"tool\": \"loogle\", \"query\": \"evaluation PreservesColimits SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `evaluation`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown identifier `evaluation`"
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|wContractible|sections.*colimit",
+   "results": "{\"t\": \"2026-10-16T16:49:05Z\", \"tool\": \"grep\", \"query\": \"weaklyContractible|wContractible|sections.*colimit\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid search scope: the wrapper already prefixes Mathlib/; zero hits in this redundant subdirectory are not evidence of absence. Corrected grep in Algebra/Category/ModuleCat was run and is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|wContractible|sections.*colimit",
+   "results": "{\"t\": \"2026-10-16T16:50:10Z\", \"tool\": \"grep\", \"query\": \"weaklyContractible|wContractible|sections.*colimit\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid search scope: the wrapper already prefixes Mathlib/; zero hits in this redundant subdirectory are not evidence of absence. Corrected grep in Algebra/Category/ModuleCat was run and is recorded separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.forget₂ PreservesColimitsOfSize",
+   "results": "{\"t\": \"2026-10-16T16:52:58Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.forget₂ PreservesColimitsOfSize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown constant `ModuleCat.forget₂`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown constant `ModuleCat.forget₂`"
+  },
+  {
+   "tool": "grep",
+   "query": "forget₂PreservesColimitsOfSize",
+   "results": "{\"t\": \"2026-10-16T16:52:58Z\", \"tool\": \"grep\", \"query\": \"forget₂PreservesColimitsOfSize\", \"sub\": \"Mathlib/Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid search scope: the wrapper already prefixes Mathlib/; zero hits in this redundant subdirectory are not evidence of absence. Corrected grep in Algebra/Category/ModuleCat was run and is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|wContractible|evaluationPreserves",
+   "results": "{\"t\": \"2026-10-16T16:59:11Z\", \"tool\": \"grep\", \"query\": \"weaklyContractible|wContractible|evaluationPreserves\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"digest\": \"19987b046ceee409\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no exact weakly-contractible pro-etale sheaf evaluation theorem; presheaf evaluation, sheaf limits and condensed constructions have different hypotheses or conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of module sheaves at a weakly contractible affine preserves colimits",
+   "results": "{\"t\": \"2026-10-16T16:59:23Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of module sheaves at a weakly contractible affine preserves colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.evaluation_preservesColimit\", \"PresheafOfModules.evaluation_preservesColimitsOfShape\", \"PresheafOfModules.hasColimit\", \"PresheafOfModules.evaluation_preservesColimitsOfSize\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\"], \"digest\": \"65c4a4595bd96b65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no exact weakly-contractible pro-etale sheaf evaluation theorem; presheaf evaluation, sheaf limits and condensed constructions have different hypotheses or conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, CategoryTheory.Limits.PreservesColimits",
+   "results": "{\"t\": \"2026-10-16T16:59:23Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.evaluation, CategoryTheory.Limits.PreservesColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no exact weakly-contractible pro-etale sheaf evaluation theorem; presheaf evaluation, sheaf limits and condensed constructions have different hypotheses or conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of sheaves of modules at a compact projective site object commute with arbitrary coproducts and cokernels",
+   "results": "{\"t\": \"2026-10-16T16:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of sheaves of modules at a compact projective site object commute with arbitrary coproducts and cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instAbelianCondensedMod\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"CondensedMod.ofSheafCompHaus\", \"SheafOfModules.Presentation.isColimit\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"6fc2fd33c1a36d8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no exact weakly-contractible pro-etale sheaf evaluation theorem; presheaf evaluation, sheaf limits and condensed constructions have different hypotheses or conclusions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -54,5 +158,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-proper-heart-continuity-sections",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the stronger existing det-pe-sections-limits-colimits with exactly the arbitrary ring-sheaf and weakly-contractible-object hypotheses. Wrote out the additive-group exactness and the coproduct/cokernel presentation proving the underlying-group colimit assertion. Added missing statement notions; no new nodes or attachment.",
+  "blueprint": "Step 1 invokes the stronger result implementing the unit-cited sk-cor-pe-sections route; Step 2 realizes the opening exactness clause; Step 3 realizes the second paragraph cokernel presentation of arbitrary colimits, including canonical cocone maps into abelian groups.",
+  "tool_uses": [
+   {
+    "node": "det-pe-sections-limits-colimits",
+    "why": "The unit sk-cor-pe-bounded-continuity explicitly uses sk-cor-pe-sections. This existing result of that cited unit provides the exact evaluation and arbitrary direct-sum/colimit statements used in the unit proof, for the same arbitrary ring sheaf; it is the prescribed route, with the underlying abelian-group passage written out."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-sections-limits-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-f167ee7bd",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-f167ee7bd (reviewer sub-agent of L); spot-checked: I read the item, all three steps and every cited statement in full, including all 8 steps of the proof of det-pe-sections-limits-colimits; review.md records each check. The statement is word for word the main-20261015 blueprint text and is consistent with Stacks Tag 0935 (sites-modules.tex:5120, lemma-sections-over-quasi-compact). Nothing was weakened. Step 1 cites the reviewed node det-pe-sections-limits-colimits, which has exactly the same hypotheses: any sheaf of rings, an affine weakly contractible object, and the same site. Both sk-def-pe-site and def-weil-pbc-small-proetale-site match Scheme.ProEt. Its weak-contractibility clause (3) is equivalent to the definition in sk-def-pe-weak-contractible by det-pe-weak-contractible-equivalences. Step 2 (kernel and cokernel pass from modules to abelian groups) and Step 3 (explicit presentation of the colimit as a quotient of a direct sum, so forgetting the module structure preserves the colimit cocone) are both elementary. I checked them on the empty, discrete, single-arrow and filtered diagrams, on W empty, on a disconnected W, and on a noncommutative A. The route is correct: the cited node belongs to sk-cor-pe-sections, which the item's unit cites, and the blueprint proof names it. sk-cor-pe-wc-sections covers only the affines from the w-contractible basis theorem. The tool_uses entry is on the route; it is accepted but not needed. There are no new nodes and no cycle (closure of the cited nodes checked). The near-duplicate lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits needs commutative rings, so leaving it unused is correct. No SGA source is cited. No fixes were written."
+ }
 }

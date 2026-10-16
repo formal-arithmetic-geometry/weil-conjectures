@@ -27,9 +27,87 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $H\\simeq\\operatorname{Map}_{\\mathcal C}(-,c)$, the contravariant-representable clause of [lem-coef-infinity-yoneda-presheaf-limits] gives, for every small $q:J\\to\\mathcal C$ and its colimit $a$, the natural equivalence $H(a)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}H(q(j))$ induced by the cocone. This includes $J=\\varnothing$, where the limit is the terminal space. Thus representability implies exactly the condition in the statement.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, implication (1) to (2), and Proposition 5.1.3.2"
+   }
+  },
+  {
+   "text": "First establish the converse for a presheaf category. Fix a small infinity category $D$, put $\\mathcal P=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, and let $K:\\mathcal P^{\\mathrm{op}}\\to\\mathcal S$ carry all small colimits to limits. By [lem-coef-infinity-presheaf-free-cocompletion], $\\mathcal P$ has small mapping spaces and all small colimits. Define the actual presheaf $f=K\\circ j^{\\mathrm{op}}$ on $D$, and put $R_f=\\operatorname{Map}_{\\mathcal P}(-,f)$. The natural evaluation equivalence of [lem-coef-infinity-yoneda-evaluation] gives $R_f\\circ j^{\\mathrm{op}}\\simeq f=K\\circ j^{\\mathrm{op}}$ as coherent functors on $D^{\\mathrm{op}}$. This uses Yoneda evaluation for arbitrary presheaves, rather than only full faithfulness between representables.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, first paragraph of the converse; Lemma 5.1.5.2 replaces the misoriented printed Lemma 5.5.2.1"
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-yoneda-presheaf-limits], $\\mathcal S$ has all small limits, so $\\mathcal S^{\\mathrm{op}}$ has all small colimits. The same node shows that $R_f$ takes small colimits to limits. Thus $K^{\\mathrm{op}}$ and $R_f^{\\mathrm{op}}$ are both objects of $\\operatorname{Fun}_{\\mathrm{colim}}(\\mathcal P,\\mathcal S^{\\mathrm{op}})$. Apply [lem-coef-infinity-presheaf-free-cocompletion] with target $\\mathcal V=\\mathcal S^{\\mathrm{op}}$. The equivalence of the restrictions obtained in step 2 lifts through its restriction equivalence, giving $K^{\\mathrm{op}}\\simeq R_f^{\\mathrm{op}}$, hence $K\\simeq R_f$. In detail, apply a quasi-inverse to the equivalence of restrictions and compose with the two inverse-functor equivalences. This is an equivalence of coherent functors, not merely objectwise agreement. No limit over the large category $\\mathcal P$ is taken.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, presheaf case, application of Theorem 5.1.5.6 with the opposite target"
+   }
+  },
+  {
+   "text": "Now suppose $H:\\mathcal C^{\\mathrm{op}}\\to\\mathcal S$ has the required colimit-to-limit property. Use [lem-coef-infinity-presentable-presheaf-presentation] to obtain a small $D$ and $L:\\mathcal P(D)\\rightleftarrows\\mathcal C:i$, with fully faithful $i$, unit $\\eta$ and counit equivalence $\\epsilon$. Since $L$ preserves small colimits, $G=H\\circ L^{\\mathrm{op}}$ takes each small colimit in $\\mathcal P(D)$ to a limit. Apply the presheaf case proved in steps 2-3 to this $G$: there is an actual $f\\in\\mathcal P(D)$ and a natural equivalence $\\alpha_X:\\operatorname{Map}_{\\mathcal P(D)}(X,f)\\simeq H(LX)$. The construction of $f$ in step 2 is a restriction of $G$, so its values are small. This uses the earlier presheaf presentation theorem, independently of the general adjoint functor theorem.",
+   "uses": [
+    "lem-coef-infinity-presentable-presheaf-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, second paragraph, using Theorem 5.5.1.1(5)"
+   }
+  },
+  {
+   "text": "We prove explicitly that the representing presheaf belongs to the reflective image. The presentation theorem [lem-coef-infinity-presentable-presheaf-presentation] says that $L(\\eta_f)$ is an equivalence. Naturality of $\\alpha$ identifies precomposition with $\\eta_f$,\n$$\\operatorname{Map}(iLf,f)\\longrightarrow\\operatorname{Map}(f,f),$$\nwith $H(L\\eta_f):H(LiLf)\\to H(Lf)$; it is therefore an equivalence. Choose an inverse image $t:iLf\\to f$ of $\\operatorname{id}_f$, giving $t\\eta_f\\simeq\\operatorname{id}_f$. The same presentation theorem, with $X=f$ and $c=Lf$, makes\n$$\\operatorname{Map}(iLf,iLf)\\xrightarrow{\\eta_f^*}\\operatorname{Map}(f,iLf)$$\nan equivalence. The two points $\\eta_ft$ and $\\operatorname{id}_{iLf}$ have homotopic images, because $(\\eta_ft)\\eta_f\\simeq\\eta_f(t\\eta_f)\\simeq\\eta_f$. Applying an inverse of this equivalence gives $\\eta_ft\\simeq\\operatorname{id}_{iLf}$. Thus $\\eta_f$ has a two-sided inverse, so $f\\simeq iLf$. This supplies the local-object argument hidden in the source without introducing a separate node for this few-line unit calculation.",
+   "uses": [
+    "lem-coef-infinity-presentable-presheaf-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, sentence asserting that the representing presheaf is local; explicit proof from the reflective adjunction"
+   }
+  },
+  {
+   "text": "Set $c=Lf\\in\\mathcal C$. Full faithfulness and the counit equivalence supplied by [lem-coef-infinity-presentable-presheaf-presentation], the equivalence $f\\simeq iLf$ of step 5, and $\\alpha$ of step 4 give, naturally in $x\\in\\mathcal C$,\n$$\\operatorname{Map}_{\\mathcal C}(x,c)\\simeq\\operatorname{Map}_{\\mathcal P(D)}(ix,iLf)\\simeq\\operatorname{Map}_{\\mathcal P(D)}(ix,f)\\simeq H(Lix)\\simeq H(x).$$\nThe second equivalence is induced by the fixed inverse $t$, and the last by $H$ applied to the counit (with its contravariant orientation). Each factor is a natural equivalence, so their composition is the claimed coherent natural equivalence. Smallness is inherited from the presheaf mapping spaces; all uses of free cocompletion involved only small diagrams, including the empty one. Combining this construction with step 1 proves both implications of the original statement.",
+   "uses": [
+    "lem-coef-infinity-presentable-presheaf-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.2.2, final sentence: restriction to the reflective subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-presentable-presheaf-presentation",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 5.5.2.2, printed p. 463. Source read online; not archived in literature/. Agent-written expansion of its presheaf and reflective-descent argument, with corrected Yoneda variance and an explicit two-sided inverse for the unit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +157,66 @@
    "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"[Rr]epresentab|[Cc]ontinuous\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: IsIndObject and canonical sheaf results have Type-valued ordinary presheaves; the Quasicategory grep found no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A space valued presheaf on a presentable infinity category is representable if and only if it sends small colimits to limits",
+   "results": "{\"t\": \"2026-10-16T16:10:24Z\", \"tool\": \"leanfinder\", \"query\": \"A space valued presheaf on a presentable infinity category is representable if and only if it sends small colimits to limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.representable_preservesLimit\", \"CategoryTheory.Functor.representable_preservesLimits\", \"CategoryTheory.Functor.representable_preservesLimitsOfShape\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.Limits.isFiltered_costructuredArrow_yoneda_iff_nonempty_preservesFiniteLimits\", \"CategoryTheory.Limits.isIndObject_iff\", \"CategoryTheory.Limits.IsIndObject.mk\"], \"digest\": \"6820844646cb83c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:514-529, CategoryTheory/Limits/Yoneda.lean:80-95 and CategoryTheory/Limits/Presheaf.lean:376-395. These concern Type-valued ordinary presheaves and ordinary limits/adjunctions. The quasicategory grep finds no continuous space-valued representability theorem. No sorry-free project declaration matches the statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRepresentable\"",
+   "results": "{\"t\": \"2026-10-16T16:12:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRepresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRepresentable\", \"CategoryTheory.Functor.RepresentableBy.isRepresentable\", \"CategoryTheory.Functor.IsRepresentable.has_representation\", \"CategoryTheory.Functor.IsRepresentable.mk\", \"CategoryTheory.Functor.instIsRepresentableCompOppositeUliftFunctor\", \"CategoryTheory.Functor.instIsRepresentableObjOppositeTypeUliftYoneda\", \"CategoryTheory.Functor.instIsRepresentableObjOppositeTypeYoneda\", \"CategoryTheory.Functor.isRepresentable_comp_uliftFunctor_iff\"], \"digest\": \"cf44406cc4bfe8db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:514-529, CategoryTheory/Limits/Yoneda.lean:80-95 and CategoryTheory/Limits/Presheaf.lean:376-395. These concern Type-valued ordinary presheaves and ordinary limits/adjunctions. The quasicategory grep finds no continuous space-valued representability theorem. No sorry-free project declaration matches the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "representab|presentab|continuous",
+   "results": "{\"t\": \"2026-10-16T16:12:11Z\", \"tool\": \"grep\", \"query\": \"representab|presentab|continuous\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:514-529, CategoryTheory/Limits/Yoneda.lean:80-95 and CategoryTheory/Limits/Presheaf.lean:376-395. These concern Type-valued ordinary presheaves and ordinary limits/adjunctions. The quasicategory grep finds no continuous space-valued representability theorem. No sorry-free project declaration matches the statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A space valued continuous contravariant functor on a presentable quasicategory is representable",
+   "results": "{\"t\": \"2026-10-16T16:12:12Z\", \"tool\": \"leansearch\", \"query\": \"A space valued continuous contravariant functor on a presentable quasicategory is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRepresentedBy.mk\", \"CategoryTheory.Functor.IsRepresentable.iff_exists_isRepresentedBy\", \"CategoryTheory.Functor.IsRepresentable.mk'\", \"CategoryTheory.Functor.RepresentableBy.isRepresentedBy\", \"CategoryTheory.Functor.IsRepresentable\", \"CategoryTheory.Functor.RepresentableBy.mk\", \"CategoryTheory.Functor.RepresentableBy\", \"CategoryTheory.Functor.IsRepresentable.mk\"], \"digest\": \"346c0e0cfe9541ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:514-529, CategoryTheory/Limits/Yoneda.lean:80-95 and CategoryTheory/Limits/Presheaf.lean:376-395. These concern Type-valued ordinary presheaves and ordinary limits/adjunctions. The quasicategory grep finds no continuous space-valued representability theorem. No sorry-free project declaration matches the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability for presheaves of infinity groupoids preserving all colimits as limits",
+   "results": "{\"t\": \"2026-10-16T16:12:17Z\", \"tool\": \"leanfinder\", \"query\": \"Brown representability for presheaves of infinity groupoids preserving all colimits as limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.Functor.representable_preservesLimits\", \"CategoryTheory.Functor.representable_preservesLimitsOfShape\", \"CategoryTheory.Functor.representable_preservesLimit\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.IsIndObject\", \"CategoryTheory.Limits.IndObjectPresentation\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\"], \"digest\": \"3ad113aff4a0adc5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Yoneda.lean:514-529, CategoryTheory/Limits/Yoneda.lean:80-95 and CategoryTheory/Limits/Presheaf.lean:376-395. These concern Type-valued ordinary presheaves and ordinary limits/adjunctions. The quasicategory grep finds no continuous space-valued representability theorem. No sorry-free project declaration matches the statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-infinity-adjoints",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-continuous-presheaf-representability",
+  "worker": "stage1",
+  "summary": "Proved the criterion in six steps: necessity, construction in a presheaf category by Yoneda evaluation and free cocompletion, then reflective presheaf presentation and an explicit two-sided inverse for the representing object’s unit. Three statement-only foundation nodes; no Mathlib match, no mathematical change to the statement. Normalized doubled TeX escapes. Read the HTT source online and corrected the variance error of its auxiliary Lemma 5.5.2.1 using Lemma 5.1.5.2.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 and displayed finite-coefficient mapping-complex adjunction before the derived inverse limit; unchanged in main-20261015, now located in sk-thm-sf-package. Realizes the foundational representability input introduced by lem-coef-presentable-infinity-adjoints; its adjoint theorem is deliberately not used in this proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-6643f5025",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-6643f5025 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, plus every cited statement (yoneda-presheaf-limits, def-coef-complete-algebroid, def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category). Source check: HTT is not archived under literature/ and I had no access to the PDF, so I checked each node against what HTT Prop 5.5.2.2, Lemma 5.1.5.2, Cor 5.1.2.4, Thm 5.1.5.6, Thm 5.5.1.1(1)=>(5) and Def 5.2.7.2/Prop 5.2.7.4 state, as I know them. proof_origin=agent and the WANTED line are correct. The item restricts HTT 5.5.2.2 to small-space-valued H; this is true because presentable categories are locally small, and the empty-colimit clause is kept. Steps: 1 uses the contravariant-representable clause, correct. 2 uses Yoneda evaluation for an arbitrary F to get R_f∘j^op ≃ K∘j^op. 3 lifts this through the free-cocompletion equivalence with target S^op; both K^op and R_f^op preserve colimits. 4 uses that L preserves colimits, so G=H∘L^op is continuous; there is no use of presentable-infinity-adjoints, so no cycle. 5 builds a two-sided inverse for η_f: η_f^* is an equivalence via α and L(η_f); then the second η_f^* equivalence gives η_f t≃id. I checked the variance. 6 composes full faithfulness, t, α and H(ε_x), all natural in x. Small cases: Yoneda-evaluation with D=pt and D=∅; free cocompletion with D=∅ (initial object) and D=pt; presentation with C=S and C=*. Duplicate search with rg over the snapshot DAG; I read and rejected 13 candidates (lem-pc-yoneda, space-presheaf-presentability, reflector-accessibility, combinatorial/simplicial presheaf presentation and localization, system-localization, accessible-pullback, among others). The new nodes are statement-only and smaller than the item, not restated clauses. Each has searches of all three kinds and blueprint.from=prop-coef-integral-exceptional-adjoint. All nodes are in one unit, with only a definition from another unit, so tool_uses is empty. No SGA is cited. Not a target node. No fixes."
+ }
 }

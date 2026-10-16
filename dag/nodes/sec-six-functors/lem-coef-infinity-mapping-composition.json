@@ -30,9 +30,89 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-pinch-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the degreewise definition of the right-pinched mapping space and of the internal functor simplicial set, the simplicial set $V(a,b,d)$ is exactly the multiarrow fiber $H_{\\mathcal D}(a,b,d)$ of [lem-cbc-simplicial-composition-spine]. Its consecutive-edge fibers are the arrow mapping spaces $U(b,d)$ and $U(a,b)$ (in the displayed order), and restriction to those edges is precisely $\\theta$. The right-pinched and arrow models are related by the natural maps $j_{x,y}$ of [lem-coef-infinity-pinch-comparison].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9 and Corollary 4.6.8.5, identifying fixed-vertex multiarrow fibers and their consecutive-edge restriction"
+   }
+  },
+  {
+   "text": "By [lem-cbc-simplicial-composition-spine], $p=\\theta$ has the right lifting property against every boundary inclusion. By the relative boundary-cell filtration of [lem-coef-infinity-monomorphism-boundary-cells], this implies lifting against every simplicial monomorphism: extend over each attached simplex using boundary lifting, and take the compatible union of the lifts. The target $Y=U(b,d)\\times U(a,b)$ is Kan by [lem-coef-infinity-pinch-comparison], since a product horn is filled coordinatewise. For a horn in $V$, first fill its image in $Y$ and then lift along the horn inclusion; hence $V$ is Kan. Lift $\\varnothing\\hookrightarrow Y$ against $p$ to obtain a section $s:Y\\to V$. On $V\\times\\partial\\Delta^1$ prescribe $sp$ and $1_V$, and use $p\\operatorname{pr}_V$ as the map $V\\times\\Delta^1\\to Y$; lifting the endpoint inclusion gives $sp\\simeq1_V$, while $ps=1_Y$. Thus $p$ is a simplicial homotopy equivalence. This argument also covers an empty target. Horns, boundaries and products have the meanings in [def-cbc-enhanced-diagrams-cones] and the spine statement.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Corollary 4.6.8.5, the trivial Kan fibration on the spine, with the Kan mapping-space models of Construction 4.6.5.1 and Proposition 4.6.5.5"
+   }
+  },
+  {
+   "text": "Put $C_{a,b,d}=[\\ell][\\theta]^{-1}$, the arrow-space composition class of [lem-cbc-simplicial-composition-spine]. Write $J_{x,y}=[j_{x,y}]$ and $K_{x,y}=J_{x,y}^{-1}$, using [lem-coef-infinity-pinch-comparison]. Then set\n$$c_{a,b,d}=K_{a,d}C_{a,b,d}(J_{b,d}\\times J_{a,b}).$$\nMultiplication on the left by $J_{a,d}$ proves the displayed characterization. Any other class with that characterization is equal to this one after multiplication by $K_{a,d}$, so no choice of inverse changes it. All these are classes of actual simplicial maps. For the homotopy-class calculus used here and below, [lem-cbc-kan-mapping-homotopy-invariance] applied to $u=1_A$ gives that $\\operatorname{Fun}(A,Z)$ is Kan whenever $Z$ is Kan. Reversing an edge there by filling an outer $2$-horn with a degenerate identity, and concatenating two edges by filling an inner $2$-horn, show that simplicial homotopy is an equivalence relation. Composing maps or taking products of homotopies preserves it, by composing their defining cylinders or pairing them.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-kan-mapping-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9 (composition by the long edge), together with Proposition 4.6.5.10 (right-pinch equivalence)"
+   }
+  },
+  {
+   "text": "Apply the face/degeneracy coherence clause of [lem-cbc-simplicial-composition-spine] to the arrow spaces. With $C,J,K$ as in step 3, its associativity and $JK=1$ give the explicit equalities of homotopy classes\n$$\\begin{aligned}\nJ_{a,e}c_{a,d,e}(1\\times c_{a,b,d})\n &=C_{a,d,e}(1\\times C_{a,b,d})(J_{d,e}\\times J_{b,d}\\times J_{a,b}),\\\\\nJ_{a,e}c_{a,b,e}(c_{b,d,e}\\times1)\n &=C_{a,b,e}(C_{b,d,e}\\times1)(J_{d,e}\\times J_{b,d}\\times J_{a,b}).\n\\end{aligned}$$\nThe right sides agree by that clause, so multiplication by $K_{a,e}$ gives the asserted associativity. The explicit degree-zero pinch map of [lem-coef-infinity-pinch-comparison] is the identity on edges, hence sends each degenerate identity vertex $i_x$ to that same identity vertex. The two arrow-space unit equations therefore give\n$$J_{a,b}c_{a,a,b}(1\\times i_a)=J_{a,b},\\qquad J_{a,b}c_{a,b,b}(i_b\\times1)=J_{a,b}.$$\nCancel $J_{a,b}$ for both unit conclusions. These equalities of classes give actual simplicial homotopies by the Kan functor-space observation in step 3, using [lem-cbc-kan-mapping-homotopy-invariance]. Precomposition and postcomposition are restrictions of $c$ to the selected input vertex. Vertices in the same component of a Kan mapping space can be joined by one oriented edge: reverse edges by outer $2$-horn fillers with a degenerate identity, and combine a finite edge chain by inner $2$-horn fillers. The identification of realization components with edge-chain components is [lem-coef-kan-realization-serre]. If $q:\\Delta^1\\to M(a,b)$ joins $u$ to $u'$, evaluating a representative of $c$ on $(z,q(t))$ gives a cylinder homotopy from precomposition by $u$ to precomposition by $u'$; evaluating on $(q(t),z)$ proves the postcomposition assertion. No inverse-edge hypothesis is needed for this component dependence.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Propositions 4.6.8.11 and 4.6.8.12, and Notation 4.6.8.15 (units, associativity, and pre/postcomposition)"
+   }
+  },
+  {
+   "text": "By the degreewise mapping-space definition in [def-cbc-enhanced-diagrams-cones], vertices of $M(a,b)$ are exactly edges $a\\to b$. By [lem-coef-kan-realization-serre], every component is an edge-chain component and therefore has such a vertex. For a $2$-simplex $\\sigma$ with edges $(u,v,w)$, its vertex in $V$ satisfies $\\theta(\\sigma)=(v,u)$ and $\\ell(\\sigma)=w$. Applying $\\pi_0$ to $[\\ell]=C[\\theta]$ and using that the pinch maps fix edges proves $[v][u]=[w]$ for the composition of step 3, using [lem-cbc-simplicial-composition-spine] and [lem-coef-infinity-pinch-comparison]. The associativity and unit homotopies of step 4 now give the ordinary category on these component sets.\n\nIt remains to prove the inverse-triangle implication, rather than merely equality of composite components. Suppose $[u]$ is invertible and choose an edge $v:b\\to a$ representing its inverse. For either ordered pair $(f,g)=(u,v)$ or $(f,g)=(v,u)$, put $x=\\operatorname{source}(f)$ and $y=\\operatorname{target}(f)$. Fill the inner $2$-horn $(f,g)$ in $\\mathcal D$ to obtain a triangle $(f,g,w)$ on $(x,y,x)$. The established composition rule gives $[w]=[\\mathrm{id}_x]$. By the component and Kan observations of step 4, choose an oriented edge in $M(x,x)$ from $\\mathrm{id}_x$ to $w$. The right-pinched degree-one definition identifies it with a triangle $(\\mathrm{id}_x,w,\\mathrm{id}_x)$ on $(x,x,x)$: its $02$ edge is its initial endpoint and its $12$ edge is its final endpoint. On vertices $(x,x,y,x)$ take face $123$ to be $(f,g,w)$, face $013$ to be this homotopy triangle, and face $012$ to be the degenerate triangle $(\\mathrm{id}_x,f,f)$. Their shared edges agree, so they define an inner horn $\\Lambda^3_1\\to\\mathcal D$. A filler, provided by the quasicategory definition in [def-cbc-enhanced-diagrams-cones], has face $023$ with edges $(f,g,\\mathrm{id}_x)$. Applying this one construction to both ordered pairs gives the two required inverse triangles with the same edge $v$. Conversely, two such triangles give both inverse equations by the established component composition rule. This proves the claimed equivalence with the definition of equivalence edge.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remark 4.6.8.10 and Remark 4.6.8.14 (components and homotopy category); Kerodon 004Q, Definition 1.4.6.1 and Remarks 1.4.6.6 and 1.4.6.8 (inverse triangles), with the explicit inner 3-horn argument written here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-realization-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01PF",
+  "place": "Subsection Composition of Morphisms, Corollary 4.6.8.5, Construction 4.6.8.9, Propositions 4.6.8.11–4.6.8.12 and Remark 4.6.8.14; the right-pinch comparison is Kerodon 01L5. Sources read online and listed as WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -103,10 +183,59 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.homMk_homMk_assoc\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] {X Y Z : C} [inst_3 : HomotopicalAlgebra.IsFibrant X]\\n  [inst_4 : HomotopicalAlgebra.IsFibrant Y] [inst_5 : HomotopicalAlgebra.IsFibrant Z]\", \"doc\": \"For fibrant objects $X, Y, Z$ in a category with cofibrations and a terminal object, and morphisms $f : X \\to Y$, $g : Y \\to Z$, the composition of $\\\\text{homMk}(f)$ and $\\\\text{homMk}(g)$ in the fibrant\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.homMk_homMk_assoc\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] {X Y Z : C} [inst_5 : HomotopicalA\", \"doc\": \"Given bifibrant objects $X, Y, Z$ in a category $\\\\mathcal{C}$ with cofibrations and fibrations, and a morphism $Z \\\\to Z_1$ in the bifibrant subcategory, the composition of morphisms constructed via $\\\\\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomComp\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \"(K L M : C) : sHom K L ⊗ sHom L M ⟶ sHom K M\", \"doc\": \"The composition morphism in a simplicial category, defined as the enriched composition map $\\\\mathbf{SSet}(K, L) \\\\otimes \\\\mathbf{SSet}(L, M) \\\\to \\\\mathbf{SSet}(K, M)$ using the Cartesian monoidal struct\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homMk_homMk_assoc\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] {X Y Z : C} [inst_3 : HomotopicalAlgebra.IsCofibrant X]\\n  [inst_4 : HomotopicalAlgebra.IsCofibrant Y] [inst_5 : HomotopicalAlgebra.IsCofib\", \"doc\": \"In a category with cofibrations, for cofibrant objects $X$, $Y$, $Z$ and morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$ in the ambient category, and a morphism $h: Z \\\\to Z_1$ in the cofibrant objects subcategor\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.Homotopy.wr_assoc\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {S : C} {E : CategoryTheory.PreOneHypercover S}\\n  {F : CategoryTheory.PreOneHypercover S} {f g : E.Hom F} (self : CategoryTheory.PreOneHypercover.Homotopy f g)\\n  (i : E.I₀) {Z : C} (h : F.X (g.s₀ i) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (\", \"doc\": \"For any category $\\\\mathcal{C}$, object $S$, pre-hypercovers $E$ and $F$ of $S$, morphisms $f,g:E\\\\to F$, a homotopy $\\\\phi$ between $f$ and $g$, element $i\\\\in I_0(E)$, and morphism $h:F.X(g_0(i))\\\\to Z$,\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.Homotopy.wl_assoc\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {S : C} {E : CategoryTheory.PreOneHypercover S}\\n  {F : CategoryTheory.PreOneHypercover S} {f g : E.Hom F} (self : CategoryTheory.PreOneHypercover.Homotopy f g)\\n  (i : E.I₀) {Z : C} (h : F.X (f.s₀ i) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (\", \"doc\": \"In a category $\\\\mathcal{C}$ with an object $S$ and pre-hypercovers $E,F$ of $S$, for morphisms $f,g:E\\\\to F$ and a homotopy $\\\\eta$ between them, the composition of $\\\\eta_i:E.X(i)\\\\to F.Y(H(i))$ with $F.\"}\n  {\"name\": \"CategoryTheory.Category.assoc'\", \"module\": \"Mathlib.CategoryTheory.Category.Basic\", \"type\": \"{W X Y Z : C} (f : X ⟶ W) (g : Y ⟶ X) (h : Z ⟶ Y) : h ≫ g ≫ f = (h ≫ g) ≫ f\", \"doc\": \"For any four objects $W, X, Y, Z$ in a category $\\\\mathcal{C}$ and morphisms $f: X \\\\to W$, $g: Y \\\\to X$, $h: Z \\\\to Y$, the composition of morphisms is associative, i.e., $(h \\\\circ g) \\\\circ f = h \\\\circ \"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.SimplicialCategory.assoc\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialNerve\", \"type\": \"(i j k l : SimplicialThickening J) :\\n  (α_ (Hom i j) (Hom j k) (Hom k l)).inv ≫ comp i j k ▷ Hom k l ≫ comp i k l = Hom i j ◁ comp j k l ≫ comp i j l\", \"doc\": \"In the simplicial thickening category associated with a linearly ordered set $ J $, the composition of morphisms satisfies the associativity condition: for objects $ i, j, k, l $, the inverse of the a\"}\n",
    "date": "2026-10-17",
    "verdict": "No exact or one-line match. Read Quasicategory/StrictBicategory.lean:16-32,53-61 (category of quasicategories enriched in Cat, not vertex mapping Kan spaces); Quasicategory/TwoTruncated.lean:208-226 (only component morphisms); SimplicialCategory/Basic.lean:43-61 (assumes an enrichment); ModelCategory/Bifibrant.lean:35-150 (full ordinary subcategories); ModelCategory/RightHomotopy.lean:297-318 (homotopy classes of already supplied maps). None constructs the canonical full mapping-space composition of an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping space composition in a quasicategory is associative and unital up to homotopy, with homotopy category components and equivalence edge criterion",
+   "results": "SSet.Truncated.HomotopyCategory₂.instCategoryStruct; SSet.QCat.bicategory; SSet.Truncated.Edge.CompStruct.* (TwoTruncated.lean); no full Kan mapping-space composition.",
+   "date": "2026-10-17",
+   "verdict": "no match: only 2-truncated homotopy-category composition and bicategory of quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"comp\"",
+   "results": "SSet.instQuasicategoryOfKanComplex (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean); no composition theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*composition|composition.*homotopy|spine|Quasicategory [AlgebraicTopology/Quasicategory]",
+   "results": "StrictBicategory.lean, Nerve.lean, InnerFibration.lean, TwoTruncated.lean; no generic Kan mapping-space composition.",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition on the Kan mapping spaces of an infinity category is associative and unital up to homotopy",
+   "results": "HomotopicalAlgebra.BifibrantObject.homMk_homMk_assoc; CategoryTheory.SimplicialCategory.sHomComp; unrelated to quasicategory vertex mapping spaces.",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Kan simplicial set vertices in the same connected component are joined by an edge; homotopic composites in a quasicategory are witnessed by triangles",
+   "results": "{\"t\": \"2026-10-16T17:42:01Z\", \"tool\": \"leanfinder\", \"query\": \"In a Kan simplicial set vertices in the same connected component are joined by an edge; homotopic composites in a quasicategory are witnessed by triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"SSet.Quasicategory\", \"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Truncated.HomotopicL.refl\", \"SSet.Truncated.HomotopicR.refl\"], \"digest\": \"a044e9a4bcbf95f5\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match: TwoTruncated.lean:76-91 defines the two triangle homotopy relations and 274-297 identifies composition witnesses with equalities in its edge quotient; these do not construct composition maps on the specified Kan mapping complexes or their comparison through j. No new leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "CompStruct|homotopyCategory₂_fac|ofHomotopyCategory₂Fac",
+   "results": "{\"t\": \"2026-10-16T17:42:01Z\", \"tool\": \"grep\", \"query\": \"CompStruct|homotopyCategory₂_fac|ofHomotopyCategory₂Fac\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"80395965c6bdc0e2\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match: TwoTruncated.lean:76-91 defines the two triangle homotopy relations and 274-297 identifies composition witnesses with equalities in its edge quotient; these do not construct composition maps on the specified Kan mapping complexes or their comparison through j. No new leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicL\"",
+   "results": "{\"t\": \"2026-10-16T17:42:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopicL\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicL.refl\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicL.symm\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicL.trans\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\"], \"digest\": \"fc913df1e5d86b7e\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match: TwoTruncated.lean:76-91 defines the two triangle homotopy relations and 274-297 identifies composition witnesses with equalities in its edge quotient; these do not construct composition maps on the specified Kan mapping complexes or their comparison through j. No new leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-slice-equivalence-final",
@@ -114,5 +243,34 @@
   "group": "Q68"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-mapping-composition",
+  "worker": "stage1",
+  "summary": "Expanded the item into a five-step proof. The existing generic multiarrow/spine lemma identifies the fixed-vertex triangle fiber and gives its trivial Kan fibration to consecutive edges, face/degeneracy coherence, associativity, units and inverse-edge homotopies; the existing right-pinch comparison transports this structure to the specified mapping spaces. The final step constructs the homotopy category on components and matches invertibility with the definition of equivalence edge. No new nodes were needed. Second reading: expanded boundary lifting to an explicit section and cylinder contraction, replaced transport prose by conjugation equations, proved component dependence by a cylinder, and supplied the inner 3-horn giving both inverse triangles. Reused existing Kan functor-space and realization-component results; no new nodes.",
+  "blueprint": "The steps realize the blueprint ancestor prop-coef-integral-exceptional-adjoint, Proof paragraph 2: the coherent-diagram foundations beneath the final-index colimit argument and composition on mapping spaces needed to identify equivalence arrows as final slice objects.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "This generic multiarrow composition theorem supplies the Segal restriction and face/degeneracy coherence; no node in the biduality unit provides this foundational infinity-categorical tool."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Only its generic Kan property of internal functor spaces is used, so equality of simplicial homotopy classes yields a single cylinder homotopy. This is a foundational simplicial-set tool, not a replacement of the biduality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NO-83f894eb8",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-83f894eb8 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, plus the full statements of all six cited nodes, the unit route and the parent that uses the item. There are no new nodes, no cycle, every cited id exists and is unmerged, and proof_deps equals the union of the step uses. I wrote no fixes. Step 1: V(a,b,d) is exactly the spine node's fiber H_D(a,b,d) under def-cbc's Fun, and U is H_D(x,y). Step 2: lifting against boundaries plus the monomorphism cell filtration gives lifting against all monomorphisms. That gives V Kan, a section s with ps=1, and a cylinder sp~1; I checked that the square commutes, and the argument covers an empty target. Step 3: c=K C (J x J) satisfies the stated characterization and is unique. Homotopy is an equivalence relation because Fun(A,Z) is Kan (kan-mapping-homotopy-invariance with u=id). Step 4: I expanded both bracketings of associativity by conjugation and both unit equations; they reduce to the spine clauses, using that the degree-0 pinch map is the identity on edges. Component dependence follows from the cylinder c(z,q(t)), and the identification of components is the stated clause of realization-serre. Step 5: [v][u]=[w] holds on components. I rechecked the right-pinched degree-1 face convention: an edge id_x to w in M(x,x) is a triangle (id,w,id). The inner horn Lambda^3_1 on (x,x,y,x) with faces 123=(f,g,w), 013=(id,w,id), 012=s0 f has matching shared edges, and its filler's face 023 is (f,g,id_x). This gives both inverse triangles with the same v. Small cases (empty, the point, ordinary-category nerves, N([1]), groupoid nerves) are all consistent with the statement. I accept the declared tool_uses lem-cbc-simplicial-composition-spine and lem-cbc-kan-mapping-homotopy-invariance: they are generic foundations from sk-prop-sf-cbc, which is off the biduality route, and the unit has no replacement. The rg duplicate search found no existing node with this statement, and the spine node is more general and in the arrow model. The Kerodon sources are not archived; WANTED is recorded and proof_origin is agent. I verified the mathematics directly. No SGA is cited and no target is weakened."
+ }
 }

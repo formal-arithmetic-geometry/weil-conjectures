@@ -1,0 +1,104 @@
+{
+ "id": "lem-cbc-presheaf-sheafification-epi-local-lifts",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Opening sentence 'Choose a compactification c=(j,p)': the total etale-chart site foundation, specifically the mixed-cover matching argument in lem-cbc-grothendieck-hypersheaf-sections, proof step 3. Local lifting of matching sections after sheafification.",
+   "via": [
+    "lem-cbc-grothendieck-hyperdescent-local-refinement",
+    "lem-cbc-grothendieck-hypersheaf-sections",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local lifting criterion for epic set-presheaf sheafification on a Grothendieck topology",
+ "statement": "Let $\\mathcal C$ be a small category and $J$ a Grothendieck topology: for each object $U$, $J(U)$ is a collection of sieves on $U$ containing the maximal sieve and satisfying pullback stability and transitivity. A sieve is a collection of arrows into $U$ closed under precomposition. Use set-valued presheaves in a universe containing the objects and arrows of $\\mathcal C$ [def-weil-size-convention]. Let $f:P\\to Q$ be a morphism of such presheaves and let $f^\\#:P^\\#\\to Q^\\#$ be its sheafification [def-weil-pbc-sheafification]. Then $f^\\#$ is an epimorphism of sheaves (right cancellation holds against every pair of sheaf morphisms) if and only if, for every $U$ and $q\\in Q(U)$, the sieve\n$$\\{u:V\\to U\\mid \\text{there exists }p\\in P(V)\\text{ with }f_V(p)=Q(u)(q)\\}$$\nbelongs to $J(U)$. Equivalently every section of $Q$ lifts through $f$ after restriction along a covering family, where a family covers when its generated sieve belongs to $J(U)$. No fibre products in $\\mathcal C$ and no subcanonical hypothesis are required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WK, lemma-sections-sheafification; Tag 00WM, definition-sheaves-injective-surjective; Tag 00WN, lemma-mono-epi-sheaves. These are the pretopological prototypes. The arbitrary-Grothendieck-topology statement is Mathlib CategoryTheory/Sites/LocallyBijective.lean:160,179-184 and CategoryTheory/Sites/LocallySurjective.lean:94-100,378-388."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a map of presheaves of sets on a Grothendieck topology, sheafification is an epimorphism if and only if each target section locally lifts",
+   "results": "8 hits: CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.PresheafIsGeneratedBy.of_epi",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presheaf local surjectivity is equivalent to an epimorphism after sheafification for a Grothendieck topology",
+   "results": "8 hits: CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff, CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top', CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.regularTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective",
+   "results": "12 hits: CategoryTheory.Presheaf.IsLocallySurjective, CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify, CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.Presheaf.isLocallySurjective_of_iso, CategoryTheory.Presheaf.isLocallySurjective_of_le, CategoryTheory.Presheaf.IsLocallySurjective.imageSieve_mem, CategoryTheory.Presheaf.IsLocallySurjective.mk, CategoryTheory.Presheaf.instIsLocallySurjectiveFunWhiskerRightOppositeForget",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_presheafToSheaf_map_iff|isLocallySurjective_iff_epi|class IsLocallySurjective",
+   "results": "10 hits: Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any small category with a Grothendieck topology, a set presheaf map has epic associated sheaf exactly when its image sieve for every section is covering",
+   "results": "8 hits: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.locallySurjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Presheaf.IsLocallySurjective",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "grep",
+   "query": "WEqualsLocallyBijective \\(Type|lemma isLocallySurjective_presheafToSheaf_map_iff|lemma isLocallySurjective_iff_epi|class IsLocallySurjective",
+   "results": "11 hits: Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+   "date": "2026-10-16",
+   "verdict": "match: two Mathlib iff lemmas specialize in one line to set-valued presheaves; source and instance lines read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of presheaves of types is locally surjective exactly when its associated sheaf morphism is an epimorphism",
+   "results": "8 hits: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, CategoryTheory.Sheaf.isLocallySurjective_sheafToPresheaf_map_iff, CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.regularTopology.isLocallySurjective_iff, Condensed.epi_iff_locallySurjective_on_compHaus",
+   "date": "2026-10-16",
+   "verdict": "match: independently read both iff statements and image-sieve definition at the recorded Mathlib source lines; no extra site-limit hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_presheafToSheaf_map_iff|imageSieve_mem|isLocallySurjective_iff_epi",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Epi.lean, Mathlib/Condensed/Epi.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "date": "2026-10-16",
+   "verdict": "match: independently read both iff statements and image-sieve definition at the recorded Mathlib source lines; no extra site-limit hypothesis"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Presheaf.isLocallySurjective_presheafToSheaf_map_iff, CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+  "file": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "line": 179,
+  "how": "specializes in one line: compose isLocallySurjective_presheafToSheaf_map_iff (LocallyBijective.lean:179-184) with Sheaf.isLocallySurjective_iff_epi (Mathlib/CategoryTheory/Sites/LocallySurjective.lean:378-388). Specialize A = Type (max u v); the required WEqualsLocallyBijective instance is LocallyBijective.lean:160 and HasSheafify is Mathlib/CategoryTheory/Sites/LeftExact.lean:313. The definition IsLocallySurjective is the covering image-sieve condition at LocallySurjective.lean:94-100. All categories have arbitrary Grothendieck topology and no pullback instances."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-grothendieck-hyperdescent-local-refinement",
+  "date": "2026-10-16",
+  "group": "NS"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

@@ -3,22 +3,94 @@
  "blueprint": {
   "is": "sk-def-conv",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Scheme and morphism conventions",
- "statement": "A morphism $f:X\\to Y$ is *proper* if it is separated, locally of finite\ntype and universally closed; *finite* if it is affine and\n$f_*\\mathcal O_X$ is a finite $\\mathcal O_Y$-algebra; an\n*immersion* if it factors as a closed immersion followed by an open\nimmersion; *surjective* if surjective on underlying spaces; étale if\nlocally of finite presentation, flat and unramified; and a scheme is\n*affine* if it is $\\Spec$ of a commutative ring.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. It is *proper* if it is separated, locally of finite type [def-weil-finite-type-morphism] and universally closed, with separated and universally closed as in [def-weil-proper-morphism]; since a universally closed morphism is quasi-compact [lem-weil-pbc-universally-closed-quasi-compact], this is the notion *proper* (separated, of finite type, universally closed) of [def-weil-proper-morphism]; *finite* if it is affine [pqf-def-affine-morphism] and $f_*\\mathcal O_X$ is a finite $\\mathcal O_Y$-algebra [def-weil-finite-integral-morphism]; an *immersion* if it factors as a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion]; *surjective* if surjective on underlying spaces [def-weil-surjective-morphism]; and *étale* [def-weil-etale-morphism] if locally of finite presentation [def-sbc-locally-finite-presentation], flat [def-weil-flat-morphism] and unramified [def-weil-unramified-morphism]. A scheme is *affine* [def-pc-scheme] if it is isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$, with $\\operatorname{Spec}$ as in [def-weil-affine-spectrum].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-conv/_section.md",
   "place": "node sk-def-conv, order 119"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-universally-closed-quasi-compact",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-affine-spectrum"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Definitions of proper finite immersion surjective etale morphisms of schemes and affine schemes",
+   "results": "IsFinite.iff_isProper_and_isAffineHom; IsPreimmersion; IsFinite; isProper_eq; Scheme.Etale; isFinite_iff; IsPreimmersion.mk_SpecMap; isProper_iff (all AlgebraicGeometry; modules Morphisms/Proper, Preimmersion, Finite, Etale). The separate component definitions already have DAG nodes.",
+   "date": "2026-10-17",
+   "verdict": "component matches; reuse existing definition nodes; no new leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Etale",
+   "results": "OK, 0 hits. The conjunctive pattern does not find a declaration containing all four names.",
+   "date": "2026-10-17",
+   "verdict": "no bundled match from this pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "class (IsProper|IsFinite|IsImmersion|Surjective|Etale|IsAffine|UniversallyClosed)",
+   "results": "9 hits: AffineScheme.lean:59 IsAffine; Morphisms/Finite.lean:39 IsFinite; Proper.lean:42 IsProper; UniversallyClosed.lean:43 UniversallyClosed; SurjectiveOnStalks.lean:37 SurjectiveOnStalks; Etale.lean:41 Etale; Affine.lean:47 IsAffineHom; Immersion.lean:45 IsImmersion; UnderlyingMap.lean:59 Surjective, all under Mathlib/AlgebraicGeometry. Read the relevant declarations and Immersion.lean:155 isImmersion_iff_exists, Etale.lean:140 iff_flat_and_formallyUnramified.",
+   "date": "2026-10-17",
+   "verdict": "component matches; reuse existing nodes; finite sheaf phrasing is supplied by the existing finite-definition node, not claimed to be a new exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definitions of proper finite immersion surjective etale morphisms of schemes and affine schemes",
+   "results": "Scheme.Etale; IsProper; IsEtale; IsFinite.recOn; IsFinite; IsImmersion; IsProper.mk; isProper_iff (AlgebraicGeometry, Mathlib.AlgebraicGeometry.Morphisms.Etale/Proper/Finite/Immersion). Read pinned local source: Etale is the class name here; remote IsEtale is not used as an attachment.",
+   "date": "2026-10-17",
+   "verdict": "component matches only; existing nodes cover the meanings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism of schemes is separated universally closed and locally of finite type; an immersion factors as a closed immersion followed by an open immersion",
+   "results": "AlgebraicGeometry.IsProper; isProper_iff; isProper_eq; IsProper.toLocallyOfFiniteType; Scheme.Hom.isProperMap; IsProper.toUniversallyClosed; IsProper.toIsSeparated; instHasOfPostcompPropertySchemeIsProperIsSeparated; modules Morphisms/Proper and UniversallyClosed.",
+   "date": "2026-10-17",
+   "verdict": "match for proper clause; confirms locally finite type wording, not a single match for the bundle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper finite immersion surjective etale affine scheme definitions",
+   "results": "OK, 8 hits: AlgebraicGeometry.Scheme.Etale; IsFinite.iff_isProper_and_isAffineHom; IsEtale; instIsProperOfIsFinite; IsFinite; IsProper.instOfIsFinite; IsProper; IsPreimmersion. The remote index uses IsEtale; pinned local source uses Etale.",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search: component matches, no declaration collecting all six conventions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isProper_iff",
+   "results": "OK, 1 hit: AlgebraicGeometry.isProper_iff in Mathlib.AlgebraicGeometry.Morphisms.Proper: IsProper f iff IsSeparated f and UniversallyClosed f and LocallyOfFiniteType f.",
+   "date": "2026-10-17",
+   "verdict": "Confirms the proper clause; the existing proper-definition node remains the component leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsProper|class IsFinite|isImmersion_iff_exists|iff_flat_and_formallyUnramified|class Surjective|class IsAffine",
+   "results": "OK, 25 hits (including unrelated homonyms). Relevant pinned-source hits: Morphisms/Proper.lean:42 IsProper; Finite.lean:39 IsFinite; Immersion.lean:155 isImmersion_iff_exists and :267 quasi-compact variant; Etale.lean:140 iff_flat_and_formallyUnramified; UnderlyingMap.lean:59 Surjective; Affine.lean:47 IsAffineHom; AffineScheme.lean:59 IsAffine. Read the declaration bodies locally.",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search confirms the existing component declarations, not a single bundled attachment."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -44,5 +116,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
- "unit": "sk-def-conv"
+ "unit": "sk-def-conv",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-conv",
+  "worker": "stage1",
+  "summary": "Split the six convention clauses entirely into existing definition nodes, without adding any node or claiming a new Mathlib leaf. Checked the current main-20261015 text, the unit, the broader existing convention bundle, all direct dependency statements, the Stacks definitions and equivalences, and the pinned Mathlib definitions. The locally-finite-type formulation of proper agrees with the existing finite-type formulation by universal closedness implying quasi-compactness (Stacks 04XU; Mathlib UniversallyClosed.lean:167). No mathematical correction or route change is needed. Definitions have no proof steps. Maintainer reader (2026-10-17): the agreement of the locally-finite-type wording with the finite-type proper node is Stacks 04XU, not a definitional identity; the statement now cites the existing Mathlib leaf lem-weil-pbc-universally-closed-quasi-compact for it.",
+  "blueprint": "The single definition paragraph of main-20261015 sec-nagata-compactification/sk-def-conv/_section.md, all six clauses: proper, finite, immersion, surjective, etale, affine scheme. Each clause names existing definition nodes; there are no unit proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NB-a0baf7394",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-a0baf7394 (reviewer sub-agent of L); spot-checked: I read the whole item (a definition with no proof steps, unit steps [], no new nodes) against main-20261015 sk-def-conv/_section.md and the master copy, and read all 13 cited definition nodes, all Mathlib leaves and none merged. Stacks checks: schemes 01IO(5): an immersion is a closed immersion followed by an open one. morphisms 01W1, 04XU, 01WH(2): finite is affine plus finite on affine opens, and the sheaf form is in def-weil-finite-integral-morphism via 01PB. 02GV: étale; the unramified node is LFT plus open diagonal. 01RZ and 01HW: surjective, affine. Small cases: Spec 0, empty to Spec k (fails only surjectivity), Spec k[t] to Spec k (affine but not finite), a countable disjoint union of Spec k over Spec k (étale, not quasi-compact). Overlapping bundles (def-weil-pbc-scheme-conventions, def-pc-morphism-conventions, def-weil-scheme-morphism-properties) are broader, so same_as [] stands. The unit's realized.statement went from the bundle plus components to [sk-def-conv]; correct for the unit's own node, route unchanged. One fault, C1 (an uncited claim inside a definition): the proper clause says locally of finite type and called this proper as in def-weil-proper-morphism, which says of finite type. The two agree only by Stacks 04XU (universally closed implies quasi-compact), which was not cited. Fixed: the clause now cites the existing Mathlib leaf lem-weil-pbc-universally-closed-quasi-compact; it is added to stmt_deps (no cycle: its deps do not reach sk-def-conv); split_report.summary notes the change. No target weakened, no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

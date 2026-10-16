@@ -25,9 +25,89 @@
   "def-weil-pbc-integral-closure",
   "def-pd-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m\\geq1$ prime to $p$. Its image in $k$ is nonzero, so $m$ is outside the maximal ideal of the local ring $R$ and hence a unit. Since $k$ is algebraically closed it is separably closed, and $R$ is strictly henselian by [def-weil-pbc-henselian-terminology]. Apply [lem-sbc-strict-local-roots-of-unity]: $\\mu_m(R)$ is cyclic of cardinality $m$. Choose a generator $\\zeta$; its image in $F$ still has order $m$, since $R\\hookrightarrow F$ is injective. The $m$ distinct elements of $\\mu_m(R)$ remain distinct in $F^{\\mathrm{sep}}$. A degree-$m$ polynomial over a field has at most $m$ roots: dividing by $X-c$ for each distinct root lowers its degree by one. Thus these already exhaust the roots of $X^m-1$ in $F^{\\mathrm{sep}}$, proving the first clause.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-sbc-strict-local-roots-of-unity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GF and 04GG, simple-root lifting; realized by the existing strict-local roots-of-unity lemma."
+   }
+  },
+  {
+   "text": "Put $f=X^m-\\pi$ and $A=R[T]/(f)$, with $t$ the class of $T$. A uniformizer is irreducible in a DVR: if $\\pi=ab$ with both factors nonunits, write $a=\\pi a_1$, $b=\\pi b_1$ and cancel $\\pi\\ne0$ to get $1=\\pi a_1b_1$, a contradiction. By [lem-sbc-dvr-uniformizer-root-algebra], $A$ is a DVR domain with maximal ideal $(t)$. By [lem-weil-pbc-monic-quotient-free], its $R$-basis is $1,t,\\ldots,t^{m-1}$. Evaluation $t\\mapsto\\alpha$ defines an $R$-algebra map $j:A\\to F^{\\mathrm{sep}}$. It is injective: in the discrete-valuation description of a DVR in [def-sc-discrete-valuation-ring], every nonzero $x\\in A$ is $ut^r$ for a unit $u$ and $r\\geq0$; $j(u)$ is a unit and $j(t)=\\alpha\\ne0$ because $\\alpha^m=\\pi\\ne0$. Hence $j(x)\\ne0$. Identify $A$ with its image $R[\\alpha]$.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EV (lemma-pull-root-uniformizer), proof for the standard root algebra; includes m=1 via the cited existing node."
+   }
+  },
+  {
+   "text": "There is no nonzero $g\\in F[T]$ of degree less than $m$ with $g(\\alpha)=0$. Indeed write $g=\\sum_{i<m}(a_i/b_i)T^i$ with $a_i,b_i\\in R$ and $b_i\\ne0$, taking $a_i=0,b_i=1$ for absent coefficients. Put $d=\\prod_{i<m}b_i\\ne0$. Then $dg=\\sum_{i<m}a_i\\prod_{j\\ne i}b_j\\,T^i$ is a polynomial over $R$; if its evaluation is zero, injectivity in Step 2 and the basis there force every coefficient $a_i\\prod_{j\\ne i}b_j=0$, hence every $a_i=0$, so $g=0$. If the monic degree-$m$ polynomial $f$ factored over $F$ into two positive-degree polynomials, both would have degree less than $m$, while their values at $\\alpha$ multiply to zero in a field. One would vanish, contradicting what was just proved. Thus $f$ is irreducible over $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EV, degree-n assertion in the proof; explicit coefficient argument using the basis and injectivity established in Step 2."
+   }
+  },
+  {
+   "text": "Take the splitting field $L\\subset F^{\\mathrm{sep}}$ of $f$; it contains $\\alpha$ because it contains all the roots of $f$ in this fixed closure. Apply [lem-exc-kummer-binomial-splitting-field] with $K=F$, $n=m$, $a=\\pi$, the primitive root $\\zeta$ from Step 1 and irreducibility from Step 3. Its clauses give $L=F(\\alpha)$, $L/F$ Galois, a cyclic Galois group, and $[L:F]=m$.",
+   "uses": [
+    "lem-exc-kummer-binomial-splitting-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; exact field-theoretic conclusions supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The fraction field of the embedded $A=R[\\alpha]$ is $F(\\alpha)=L$: both are the smallest subfield of $F^{\\mathrm{sep}}$ containing $R$ and $\\alpha$, since a field containing $R$ contains all ratios from $F$. By [lem-weil-pbc-pid-noetherian-normal] applied to the DVR $A$, it is integrally closed in $L$. Let $B$ be the integral closure of $R$ in $L$. The element $\\alpha$ is integral over $R$ by $\\alpha^m-\\pi=0$; the integral elements form a subring containing $R$ by [def-weil-pbc-integral-closure], so $A=R[\\alpha]\\subseteq B$. Conversely, every $x\\in B$ satisfies a monic polynomial with coefficients in $R\\subseteq A$, hence is integral over $A$, and integral closedness gives $x\\in A$. Thus $B=A$. In particular it has the unique maximal ideal $(\\alpha)$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EV, proof identifying the normal standard root algebra with the integral closure."
+   }
+  },
+  {
+   "text": "With $B=A$ as in Step 5, its uniformizer is $\\alpha$ by Step 2, while the base uniformizer satisfies $\\pi=\\alpha^m$. Thus $\\mathfrak m_RB=(\\pi)=(\\alpha^m)=\\mathfrak m_B^m$. Equivalently the normalized valuation of $B$ has $v_B(\\alpha)=1$ and $v_B(\\pi)=m$. By the definition of the ramification index this is $e(B/R)=m$. For $m=1$, $A=R$, $\\alpha=\\pi$, $L=F$, and this computation gives index and degree one and the trivial cyclic Galois group, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E4 (definition-extension-discrete-valuation-rings), definition of ramification index; Tag 09EV (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-sc-discrete-valuation-ring",
+  "lem-exc-kummer-binomial-splitting-field",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EV standard root-algebra proof, with henselian root lifting (algebra.tex 04GG) and Kummer field theory (fields.tex 09I6); the coefficient/injectivity argument explicitly fills the degree computation. This realizes the uniformizer paragraph of pione.tex Tag 0BUB."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +157,87 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isCyclic_tfae\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    [IsGalois K L ∧ IsCyclic Gal(L/K),\\n        ∃ a,\\n          Irreducible (Polynomial.X ^ Module.finrank K L - Polynomial.C a) ∧\\n  \", \"doc\": \"Let $L/K$ be a finite field extension of degree $n = [L:K]$. Suppose that the base field $K$ contains a primitive $n$-th root of unity. Then the following statements are equivalent:\\\\n1. The extension \"}\n  {\"name\": \"exists_root_adjoin_eq_top_of_isCyclic\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ (K : Type u) [inst : Field K] (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  (primitiveRoots (Module.finrank K L) K).Nonempty →\\n    ∀ [IsGalois K L] [IsCyclic Gal(L/K)], ∃ α, α ^ Module.finrank K L ∈ Set.range ⇑(algebraMap K L) ∧ K⟮α⟯ = ⊤\", \"doc\": \"In a Galois field extension $ L/K $ with cyclic Galois group $ \\\\text{Gal}(L/K) $, there exists an element $ \\\\alpha \\\\in L $ such that $ \\\\alpha^{[L:K]} $ lies in the image of the canonical embedding $ K\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDeg_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (n : ℕ) {m p k : ℕ} [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver (Ideal.span {↑p})]\\n  [IsCyclotomicExtension {n} ℚ K], n = p ^ (k + 1) * m → ¬p ∣ m → (Ideal.span {↑p}).inertiaDeg \", \"doc\": \"For a cyclotomic extension $\\\\mathbb{Q}(\\\\zeta_n)/\\\\mathbb{Q}$, if $n = p^{k+1}m$ with $p \\\\nmid m$, then the inertia degree of a prime ideal $\\\\mathfrak{p}$ lying over $p$ satisfies $\\\\text{inertiaDeg}(\\\\ma\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDegIn_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (n : ℕ) {m p k : ℕ} [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [IsCyclotomicExtension {n} ℚ K],\\n  n = p ^ (k + 1) * m → ¬p ∣ m → (Ideal.span {↑p}).inertiaDegIn (NumberField.RingOfIntegers K) = orderOf ↑p\", \"doc\": \"Let $ n = p^{k+1}m $ where $ p $ does not divide $ m $. The inertia degree of the prime $ p $ in the ring of integers $ \\\\mathcal{O}_K $ of the number field $ K $ is equal to the multiplicative order o\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime_pow\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K], (Ideal.span {↑p}).inertiaDegIn (NumberField.RingOfIntegers K) = 1\", \"doc\": \"In a cyclotomic extension of the rational numbers, the inertia degree of a prime ideal lying above a prime power is equal to one in the ring of integers of the number field.\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDeg_span_zeta_sub_one\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K] {ζ : K} (hζ : IsPrimitiveRoot ζ (p ^ (k + 1))),\\n  (Ideal.span {↑p}).inertiaDeg (Ideal.span {hζ.toInteger - 1}) = 1\", \"doc\": \"The inertia degree of the ideal generated by $\\\\zeta - 1$ (where $\\\\zeta$ is a primitive root of unity) in the ring of integers of a cyclotomic extension of $\\\\mathbb{Q}$ is equal to 1.\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p} ℚ K], (Ideal.span {↑p}).inertiaDegIn (NumberField.RingOfIntegers K) = 1\", \"doc\": \"For a cyclotomic extension $ K $ of the rational numbers $ \\\\mathbb{Q} $ generated by roots of unity with orders in a set $ S $, and for any prime number $ p $ not dividing any element of $ S $, the in\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.inertiaDeg_eq_of_prime_pow\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K] (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime]\\n  [hP₂ : P.LiesOver (Ideal.span {↑p})], (Ideal.span {↑p}).inertiaDeg P = 1\", \"doc\": \"For a prime ideal $ P $ in the ring of integers $ \\\\mathcal{O}_K $ of a cyclotomic extension $ K $ of $ \\\\mathbb{Q} $, if $ P $ lies over a prime ideal $ \\\\mathfrak{p} $, then the inertia degree $ [\\\\math\"}\n",
    "date": "2026-10-17",
    "verdict": "No exact match: the Kummer equivalence requires primitive roots and irreducibility, and supplies no henselian lifting or ramification-index calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "eisenstein|[Ii]rreducible.*X_pow_sub_C|[Ii]rreducible.*map",
+   "results": "[grep] OK 25 hit(s). Mathlib/RingTheory/Polynomial/GaussLemma.lean; Mathlib/RingTheory/Polynomial/GaussLemma.lean; Mathlib/RingTheory/Polynomial/GaussLemma.lean; Mathlib/RingTheory/Polynomial/GaussLemma.lean; Mathlib/RingTheory/Polynomial/GaussLemma.lean; Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean; Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean; Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean Searched Mathlib/RingTheory/Polynomial",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: Kummer field theory requires primitive roots and irreducibility and does not give henselian lifting or the integral-closure ramification calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsGalois",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: Kummer field theory requires primitive roots and irreducibility and does not give henselian lifting or the integral-closure ramification calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining an nth root of a uniformizer to a strictly henselian discrete valuation field gives a totally ramified cyclic Galois extension of degree n",
+   "results": "[leansearch] OK 8 hit(s). IsPrimitiveRoot.adjoin_isCyclotomicExtension; isCyclic_tfae; isSplittingField_AdjoinRoot_X_pow_sub_C; root_X_pow_sub_C_pow; adjoinRootXPowSubCEquiv_root; IntermediateField.adjoin_root_eq_top_of_isSplittingField; AdjoinRoot.instField; autAdjoinRootXPowSubC_root",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: Kummer field theory requires primitive roots and irreducibility and does not give henselian lifting or the integral-closure ramification calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian discrete valuation ring with algebraically closed residue field, adjoining a prime to residue characteristic root of a uniformizer is cyclic Galois of degree and ramification index the exponent",
+   "results": "[leanfinder] OK 8 hit(s). Ideal.ramificationIdxIn_mul_ramificationIdxIn; Ideal.inertiaDegIn_mul_inertiaDegIn; Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing; IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime_pow; IsCyclotomicExtension.Rat.inertiaDeg_eq_of_prime_pow; isCyclic_tfae; Ideal.ramificationIdx_eq_of_isGalois; IsCyclotomicExtension.Rat.inertiaDegIn_eq_of_prime",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: Kummer field theory requires primitive roots and irreducibility and does not give henselian lifting or the integral-closure ramification calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "isCyclic_of_isSplittingField_X_pow_sub_C|isGalois_of_isSplittingField_X_pow_sub_C|finrank_of_isSplittingField_X_pow_sub_C|adjoin_root_eq_top_of_isSplittingField",
+   "results": "[grep] OK 5 hit(s). 353; 363; 366; 442; 448 Searched Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If X^n-a is irreducible and the base field contains a primitive nth root of unity, its splitting field has degree n and cyclic Galois group",
+   "results": "[leansearch] OK 8 hit(s). isCyclic_tfae; isCyclic_of_isSplittingField_X_pow_sub_C; isGalois_of_isSplittingField_X_pow_sub_C; finrank_of_isSplittingField_X_pow_sub_C; autEquivZmod.congr_simp; autEquivZmod; X_pow_sub_C_splits_of_isPrimitiveRoot; isSplittingField_AdjoinRoot_X_pow_sub_C",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isSplittingField\", \"X_pow_sub_C\"",
+   "results": "[loogle] OK 5 hit(s). isGalois_of_isSplittingField_X_pow_sub_C; finrank_of_isSplittingField_X_pow_sub_C; isSplittingField_X_pow_sub_C_of_root_adjoin_eq_top; isCyclic_of_isSplittingField_X_pow_sub_C; isSplittingField_AdjoinRoot_X_pow_sub_C",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field containing a primitive nth root of unity the splitting field of an irreducible binomial X^n-a is generated by any root and is cyclic Galois of degree n",
+   "results": "[leanfinder] OK 8 hit(s). isSplittingField_AdjoinRoot_X_pow_sub_C; isCyclic_of_isSplittingField_X_pow_sub_C; isCyclic_tfae; autEquivRootsOfUnity_apply_rootOfSplit; isSplittingField_X_pow_sub_C_of_root_adjoin_eq_top; autAdjoinRootXPowSubCEquiv; autEquivRootsOfUnity_smul; Algebra.adjoin_root_eq_top_of_isSplittingField",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_of_isSplittingField_X_pow_sub_C|isGalois_of_isSplittingField_X_pow_sub_C|isCyclic_of_isSplittingField_X_pow_sub_C|adjoin_root_eq_top_of_isSplittingField",
+   "results": "[grep] OK 5 hit(s). Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean Searched Mathlib/FieldTheory",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_of_isSplittingField_X_pow_sub_C",
+   "results": "[grep] OK 1 hit(s). Mathlib/FieldTheory/KummerExtension.lean Searched Mathlib/FieldTheory",
+   "date": "2026-10-16",
+   "verdict": "Match for the generic field-theoretic ingredient, recorded as lem-exc-kummer-binomial-splitting-field; not a match for the entire henselian DVR assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Eisenstein binomial over a henselian discrete valuation ring with algebraically closed residue field defines a cyclic totally ramified Kummer field extension",
+   "results": "[leanfinder] OK 8 hit(s). isCyclic_tfae; IsCyclotomicExtension.Rat.ramificationIdxIn_eq; IsCyclotomicExtension.Rat.inertiaDegIn_eq; isCyclic_of_isSplittingField_X_pow_sub_C; IsCyclotomicExtension.Rat.ramificationIdx_eq; IsCyclotomicExtension.Rat.inertiaDeg_span_zeta_sub_one; IsCyclotomicExtension.Rat.inertiaDeg_span_zeta_sub_one'; IsCyclotomicExtension.Rat.inertiaDeg_eq",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: Kummer field theory requires primitive roots and irreducibility and does not give henselian lifting or the integral-closure ramification calculation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-henselian-dvr-tame-sequence",
@@ -88,5 +245,34 @@
   "group": "Q05"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-tame-root-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing strict-local roots-of-unity, standard uniformizer-root DVR, monic quotient basis, and PID normality nodes. Wrote out evaluation injectivity, denominators and irreducibility, normalization equality and the exact ramification-index computation. Created one generic Mathlib Kummer splitting-field leaf; no new unsplit nodes and no Lean attachment.",
+  "blueprint": "lem-exc-dvr-galois.proof.md, second paragraph, the entire sentence on lifting roots of unity and adjoining a uniformizer root of every prime-to-p order. The main-20261015 proof and historical master sentence agree; no unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Generic roots-of-unity cardinality and cyclicity in a strictly henselian local ring; used after checking m is a unit and the residue field is separably closed. No node of this unit supplies that lifting fact."
+   },
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic standard root quotient is a DVR with specified uniformizer for any positive exponent; no node of this unit supplies this ring-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sbc-dvr-uniformizer-root-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-e3aa45789",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-e3aa45789 (reviewer sub-agent of L); spot-checked: I read the full item, the new node, all 11 cited node statements, unit sk-prop-a1-kummer, the blueprint lem-exc-dvr-galois (main-20261015) at its second paragraph, Stacks pione 0BUB (full proof), more-algebra 09EV and 09E4, and Mathlib KummerExtension.lean lines 155-175, 295-370 and 380-460. The item statement is unchanged from base and matches 0BUB/09EV. It needs no excellence hypothesis and was not weakened. Step 1: m is a unit because (m,p)=1, an algebraically closed residue field makes R strictly henselian, and lem-sbc-strict-local-roots-of-unity gives a cyclic mu_m of order m, which accounts for all the roots by the root bound. Step 2: the irreducibility of pi is written out, the root-algebra node gives a DVR with maximal ideal (t), monic-quotient-free gives the basis, and evaluation is injective because every nonzero element is u*t^r. Step 3: clearing denominators and using the basis, I checked it is elementary; the m=1 case holds. Step 4: the new leaf is applied with zeta as a primitive root, irreducibility comes from Step 3, and L sits inside F^sep. Step 5: a DVR is a PID and so is normal, both inclusions B=A are shown, and Frac(A)=F(alpha)=L. Step 6: m_R B=(alpha^m)=m_B^m, so e=m by the 09E4 definition. The new node lem-exc-kummer-binomial-splitting-field checks against Mathlib one declaration per clause: adjoin_root_eq_top_of_isSplittingField (363), isCyclic (442; NeZero comes from n>=1), isGalois (448) and finrank (452). Their section hypotheses (primitiveRoots nonempty, Irreducible (X^n - C a), IsSplittingField) match the node. Small cases: n=1, a=0, and p dividing n in characteristic p are all correctly excluded or covered. It is self-contained, records all three search kinds, and does not restate a clause of the item. rg over dag/nodes found no duplicate (09I6/09EV/0BUB, Kummer, cyclic, binomial, splitting-field). Accepted tool_uses: lem-sbc-strict-local-roots-of-unity and lem-sbc-dvr-uniformizer-root-algebra, both generic black boxes from sk-prop-input-spreading that replace no step of the unit route. No cycle and no SGA source. The base-change and coefficient-category check does not apply because this is not a target node. Observation only, not caused by this delivery: the item's existing statement uses 'ramification index' and 'Galois' without a definition node, and none exists in the DAG. No fixes were written."
+ }
 }

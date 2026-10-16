@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-local-field-integral-basis",
+ "kind": "statement",
+ "title": "Existence of an integral basis for a finite extension of local coefficient fields",
+ "statement": "Let $\\ell$ be a prime and let $E\\subseteq F$ be finite extensions of $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], with the compatible absolute values extending the $\\ell$-adic absolute value. Put $\\mathcal O_E=\\{x\\in E:|x|\\leq1\\}$ and $\\mathcal O_F=\\{x\\in F:|x|\\leq1\\}$, the rings of integers, with the inclusion induced by $E\\subseteq F$. Let $d=[F:E]=\\dim_E F$. There exist elements $b_1,\\ldots,b_d\\in\\mathcal O_F$ such that every $x\\in\\mathcal O_F$ has a unique expression $x=\\sum_{i=1}^d a_i b_i$ with $a_i\\in\\mathcal O_E$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "opening sentence: O_F is a finite torsion-free, hence free, module over the discrete valuation ring O_E, of rank d; the existence part required before applying the basis-induced sheaf comparison"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-prop-sfb-cartesian-coefficients",
+  "date": "2026-10-16",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sfb-cartesian-coefficients",
+   "place": "proof paragraph 3, first sentence: choose an O_E-basis of O_F before condensing and pulling back; algebraic existence is expanded in the opening sentence of sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure.finite\"",
+   "results": "IsIntegralClosure.finite",
+   "date": "2026-10-16",
+   "verdict": "Partial match: generic integral-closure finiteness/freeness/rank requires the nontrivial identification of O_F with integral closure of O_E; number-field basis declarations concern finite extensions of Q, not p-adic local fields. No exact leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite extensions E and F of the p-adic numbers, the ring of integers of F has a finite basis over the ring of integers of E of cardinality the field extension degree",
+   "results": "PadicInt.algebra; NumberField.RingOfIntegers.rank; NumberField.RingOfIntegers.basis; NumberField.RingOfIntegers.instFreeInt; PadicComplexInt.integers; NumberField.RingOfIntegers.extension_isNoetherian; NumberField.RingOfIntegers.instIsTorsionFree_1; NumberField.integralBasis",
+   "date": "2026-10-16",
+   "verdict": "Partial match: generic integral-closure finiteness/freeness/rank requires the nontrivial identification of O_F with integral closure of O_E; number-field basis declarations concern finite extensions of Q, not p-adic local fields. No exact leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.finite|Module.Free.of_finite_type_torsion_free|Module.free_of_finite_type_torsion_free|isPrincipalIdealRing.*free",
+   "results": "Mathlib/RingTheory/Trace/Quotient.lean; Mathlib/RingTheory/NormalClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+   "date": "2026-10-16",
+   "verdict": "Partial match: generic integral-closure finiteness/freeness/rank requires the nontrivial identification of O_F with integral closure of O_E; number-field basis declarations concern finite extensions of Q, not p-adic local fields. No exact leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The valuation rings of a finite extension of p-adic local fields are finite free modules of rank equal to the field extension degree",
+   "results": "IsDiscreteValuationRing.isRankOneDiscrete; Valuation.HasExtension.instIsTorsionFreeInteger; PadicComplexInt; Valuation.HasExtension.ofComapInteger; ArchimedeanClass.FiniteElement.instValuationRing; PadicInt.instIsDiscreteValuationRing; PadicInt.isFractionRing; IsNonarchimedeanLocalField.instIsRankLeOne",
+   "date": "2026-10-16",
+   "verdict": "No exact match: the valuation-ring results give individual DVR, fraction-field or torsion-free properties, not existence of the relative O_E-basis of O_F."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral basis exists for the ring of integers of a finite extension of nonarchimedean local fields",
+   "results": "FiniteDimensional.exists_is_basis_integral; NumberField.integralBasis; NumberField.RingOfIntegers.basis; NumberField.RingOfIntegers.instFreeInt; NumberField.integralBasis_apply; NumberField.RingOfIntegers.extension_isNoetherian; NumberField.RingOfIntegers.instIsIntegrallyClosed; NumberField.mem_span_integralBasis",
+   "date": "2026-10-16",
+   "verdict": "No exact match: FiniteDimensional.exists_is_basis_integral is a field-vector-space basis of integral elements, not an O_E-module basis of O_F; the NumberField declarations concern finite extensions of Q, not Q_ell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of the valuation ring of a p-adic field in a finite extension admits a module basis indexed by the field extension degree",
+   "results": "Module.Basis.ofIsCoprimeDifferentIdeal; FiniteDimensional.exists_is_basis_integral; Module.Basis.ofIsCoprimeDifferentIdeal_apply; NumberField.RingOfIntegers.basis; NumberField.integralBasis; Module.Basis.ofZLatticeBasis; NumberField.integralBasis_apply; IsPrimitiveRoot.integralPowerBasisOfPrimePow",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial candidates only. Field bases of integral elements and abstract integral-closure free/rank theorems do not identify the absolute-value ring O_F with the relative integral closure; no exact Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure.module_free\"",
+   "results": "IsIntegralClosure.module_free",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial candidates only. Field bases of integral elements and abstract integral-closure free/rank theorems do not identify the absolute-value ring O_F with the relative integral closure; no exact Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure.module_free|IsIntegralClosure.rank|IsIntegralClosure.finite",
+   "results": "175; 183; 192; 194",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial candidates only. Field bases of integral elements and abstract integral-closure free/rank theorems do not identify the absolute-value ring O_F with the relative integral closure; no exact Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Valuation.integer\"",
+   "results": "Valuation.integer; Valuation.Integers; Valuation.Integers.nontrivial_iff; Valuation.integers_nontrivial; Valuation.integer.integers; Valuation.Integers.hom_inj; Valuation.Integers.not_denselyOrdered_of_isPrincipalIdealRing; Valuation.Integers.one_of_isUnit",
+   "date": "2026-10-17",
+   "verdict": "Second-reader independent search: valuation-ring definitions, torsion-freeness, and generic integral-closure freeness are partial inputs only; no exact relative unit-ball basis theorem or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit ball in a finite dimensional extension of a nonarchimedean local field is a free module of full rank over the unit ball of the base field",
+   "results": "IsUltrametricDist.isNonarchimedean_invariantExtension; IsNonarchimedeanLocalField.instIsRankLeOne; exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional; spectralNorm.completeSpace; WithAbs.instFiniteDimensional; IsIntegralClosure.module_free; ZLattice.module_free; NumberField.RingOfIntegers.instFreeInt",
+   "date": "2026-10-17",
+   "verdict": "Second-reader independent search: valuation-ring definitions, torsion-freeness, and generic integral-closure freeness are partial inputs only; no exact relative unit-ball basis theorem or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integer.*(free|finite)|IsIntegralClosure.*integer|Integers.*(free|finite)",
+   "results": "Mathlib/RingTheory/Valuation/Extension.lean",
+   "date": "2026-10-17",
+   "verdict": "Second-reader independent search: valuation-ring definitions, torsion-freeness, and generic integral-closure freeness are partial inputs only; no exact relative unit-ball basis theorem or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure|Module.Free|Module.Finite|finrank",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial inputs only. IsIntegralClosure.rank is the generic integral-closure rank theorem; ValuationSubring.algebra equips algebraic integral closures with scalar maps, not the identification with absolute-value unit balls. LocalField/Basic.lean supplies local-field DVR, compactness and completeness instances. No declaration states this relative unit-ball basis theorem or gives it by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure.rank\"",
+   "results": "IsIntegralClosure.rank",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial inputs only. IsIntegralClosure.rank is the generic integral-closure rank theorem; ValuationSubring.algebra equips algebraic integral closures with scalar maps, not the identification with absolute-value unit balls. LocalField/Basic.lean supplies local-field DVR, compactness and completeness instances. No declaration states this relative unit-ball basis theorem or gives it by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of complete discretely valued fields has an integral closure which is a finite free module over the base valuation ring",
+   "results": "ValuationSubring.algebra; IsIntegralClosure.finite; integralClosure.isIntegrallyClosedOfFiniteExtension; Valuation.HasExtension.instAlgebraInteger; integralClosure.isFractionRing_of_finite_extension; IsIntegralClosure.isFractionRing_of_finite_extension; Valuation.HasExtension.instIsTorsionFreeInteger; NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial inputs only. IsIntegralClosure.rank is the generic integral-closure rank theorem; ValuationSubring.algebra equips algebraic integral closures with scalar maps, not the identification with absolute-value unit balls. LocalField/Basic.lean supplies local-field DVR, compactness and completeness instances. No declaration states this relative unit-ball basis theorem or gives it by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralClosure|integer|integralClosure",
+   "results": "8; 19; 23; 42; 43",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial inputs only. IsIntegralClosure.rank is the generic integral-closure rank theorem; ValuationSubring.algebra equips algebraic integral closures with scalar maps, not the identification with absolute-value unit balls. LocalField/Basic.lean supplies local-field DVR, compactness and completeness instances. No declaration states this relative unit-ball basis theorem or gives it by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "module_free|rank|IsIntegralClosure|Integers|IsNonarchimedeanLocalField",
+   "results": "35; 45; 55; 59; 136",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: partial inputs only. IsIntegralClosure.rank is the generic integral-closure rank theorem; ValuationSubring.algebra equips algebraic integral closures with scalar maps, not the identification with absolute-value unit balls. LocalField/Basic.lean supplies local-field DVR, compactness and completeness instances. No declaration states this relative unit-ball basis theorem or gives it by a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "IsIntegralClosure.finite; IsIntegralClosure.module_free; IsIntegralClosure.rank",
+  "file": "Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+  "how": "Lines 175, 183, 192 give generic finite/free/rank results for integral closures. Applying them requires a theorem identifying the absolute-value ring of integers O_F with the integral closure of O_E in F, and the DVR/fraction-field/separability hypotheses. This bridge is not a one-line specialization, so this is not a Mathlib leaf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients"
+}

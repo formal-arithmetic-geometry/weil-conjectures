@@ -26,102 +26,193 @@
   "lem-coef-fixed-object-enriched-rectification",
   "lem-coef-projective-chains-monoidal-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-projective-chains-monoidal-model], $\\mathbf V=\\operatorname{Ch}(\\mathbf Z)$ is left proper, tractable and closed symmetric monoidal and satisfies the monoid axiom. These are the hypotheses of Haugseng's Lemma 3.20, whose specialization [lem-coef-fixed-object-dg-free-model] supplies, for every small $S$, the combinatorial model category $M_S=\\operatorname{Cat}_S(\\mathbf V)$ with mappingwise weak equivalences (quasi-isomorphisms) and mappingwise fibrations (degreewise surjections). For $f:S\\to T$ restriction takes $B$ to the category with homs $B(fx,fy)$; by [lem-coef-enriched-fixed-set-model] the restrictions form a strict contravariant diagram of complete and cocomplete categories, preserve all small limits and all weak equivalences, and have Quillen left adjoints $f_!$. The ordinary Cartesian total category of this diagram is exactly $\\operatorname{Cat}(\\mathbf V)$: a functor over $f$ is its family of maps $A(x,y)\\to B(fx,fy)$ preserving units and composition, that is, a fixed-object functor $A\\to f^*B$.",
+   "uses": [
+    "lem-coef-enriched-fixed-set-model",
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Lemma 3.20, Remark 5.5 and Example 5.11; identification of the Cartesian total category."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-grothendieck-fibre-localization] to $S\\mapsto M_S$. Fix the universe of small sets and complexes first and then enlarge the ambient universes to contain its category of sets, every fibre and the total category; the smallness hypothesis of the cited theorem therefore holds. An arrow over $f:S\\to T$ is in its total weak-equivalence class precisely when $f$ is bijective and the fixed-object map $A\\to f^*B$ is a mappingwise quasi-isomorphism. This is precisely $\\mathrm{FFB}$. Consequently $\\operatorname{Cat}(\\mathbf V)[\\mathrm{FFB}^{-1}]_\\infty$ is the Cartesian total infinity-category of $S\\mapsto M_S[\\mathrm{FF}_S^{-1}]_\\infty$, and its fibre and transition functors are the indicated localizations.",
+   "uses": [
+    "lem-coef-grothendieck-fibre-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 4.22, in its Cartesian opposite form, and Definition 5.3."
+   }
+  },
+  {
+   "text": "The maps $\\eta_S$ of [lem-coef-fixed-object-enriched-rectification] form a coherent natural equivalence under all restrictions $f^*$. Apply the natural-transformation assertion of [lem-coef-grothendieck-fibre-localization] to this diagram and the diagram $S\\mapsto\\operatorname{Alg}_{\\Delta_S^{\\mathrm{op}}}(\\mathcal D)$. Its second total category is exactly the categorical algebras with sets of objects in the statement, because arrows over $f$ are algebra maps into $f^*B$. The resulting total functor $\\eta$ is an equivalence over the nerve of sets, and its fibre at $S$ is $\\eta_S$. This applies to coherent natural transformations of infinity-categories and therefore proves an equivalence of infinity-categories, including all higher coherence, rather than only of their homotopy categories.",
+   "uses": [
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-grothendieck-fibre-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 5.4, using coherent fixed-object Proposition 5.2 and Corollary 4.22."
+   }
+  },
+  {
+   "text": "For a dg functor $F:A\\to B$ over $f$, use the factorization $A\\to f^*B\\to B$ in the ordinary total category. The Cartesian-localization comparison [lem-coef-grothendieck-fibre-localization] preserves this factorization and its base function. The fixed-object comparison [lem-coef-fixed-object-enriched-rectification] identifies the first factor on each mapping object with the localized chain map $A(x,y)\\to B(fx,fy)$, using the natural equivalences from fixed-object cofibrant replacements. The second factor merely records $f$. This gives the claimed description on $F$; coherence of its identifications is the coherent restriction-naturality already included in that fixed-object comparison and the total comparison.",
+   "uses": [
+    "lem-coef-grothendieck-fibre-localization",
+    "lem-coef-fixed-object-enriched-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.1, Theorem 5.4 and the Cartesian-arrow description in Corollary 4.22."
+   }
+  },
+  {
+   "text": "Construct the total model structure explicitly from the fibre model structures of [lem-coef-fixed-object-dg-free-model] and the restriction adjunctions of [lem-coef-enriched-fixed-set-model]. For $F:A_S\\to B_T$ over $f:S\\to T$, denote its adjoint descriptions by $u:f_!A\\to B$ and $v:A\\to f^*B$. Declare $F$ a weak equivalence when $f$ is bijective and $v$ a fibre weak equivalence; a fibration when $v$ is a fibre fibration; and a cofibration when $u$ is a fibre cofibration. The total category has all small limits: take the limit $L$ of a diagram's object sets, restrict all its entries to $L$, and take their limit in $M_L$. Indeed a cone with object function into $L$ is exactly a fibre cone after restriction, and restriction preserves limits as a right adjoint. Dually, for a colimit object set $C$, extend each entry along its map to $C$ by the corresponding left adjoint and take their colimit in $M_C$. Adjunction identifies its maps into a target with compatible maps from the original diagram. These descriptions prove the total universal properties. Weak equivalences satisfy two-out-of-three: if two maps among $F,G,GF$ are weak equivalences, their base functions force all three base functions to be bijective, after which reindexing identifies the check with two-out-of-three in one fibre. They are retract closed, since bijections and mappingwise weak equivalences are retract closed.",
+   "uses": [
+    "lem-coef-enriched-fixed-set-model",
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 4.25, proof: limits, colimits, and two-out-of-three, specialized to sets."
+   }
+  },
+  {
+   "text": "For a first factorization of $F$ over $f$, factor $u:f_!A\\to B$ in the model category $M_T$ of [lem-coef-fixed-object-dg-free-model] as a cofibration followed by a trivial fibration. Regard the first arrow as a total arrow over $f$ and the second as a total arrow over $1_T$. This factors $F$ as a total cofibration followed by a total trivial fibration. For the second factorization, factor $v:A\\to f^*B$ in $M_S$ as a trivial cofibration followed by a fibration, regarding the first arrow as over $1_S$ and the second as over $f$. This factors $F$ as a total trivial cofibration followed by a total fibration. Over a bijection, $f^*$ and $f_!$ are inverse reindexings, so the uses of the word trivial in these factorizations agree with the declared total weak equivalences.",
+   "uses": [
+    "lem-coef-enriched-fixed-set-model",
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 4.25, proof: the two factorizations; the second is written out rather than omitted by duality."
+   }
+  },
+  {
+   "text": "Check both lifting assertions, still using the fibre lifting axioms of [lem-coef-fixed-object-dg-free-model] and the Quillen adjunctions of [lem-coef-enriched-fixed-set-model]. In a total lifting square let the left base function be $f:S\\to T$, the right one $g:U\\to V$, the top one $a:S\\to U$ and the bottom one $b:T\\to V$, with $ga=bf$. If the right arrow is a trivial fibration, $g$ is bijective and the unique diagonal base function is $h=g^{-1}b$. Write the original top and bottom arrows as $\\alpha:A\\to a^*X$ and $\\beta:B\\to b^*Y$. In both lifting cases $hf=a$ and $gh=b$. The remaining square in $M_U$ has top arrow $(hf)_!A\\cong a_!A\\xrightarrow{\\widetilde\\alpha}X$, left arrow $h_!u$, right arrow $X\\to g^*Y$, and bottom arrow $h_!B\\to g^*Y$ adjoint to $\\beta:B\\to b^*Y=h^*g^*Y$. Its commutativity is the adjoint of the original commuting square; the displayed comparison of left adjoints is the one determined by their common right adjoint. The left arrow is a cofibration because $h_!$ is left Quillen, and the right arrow is a trivial fibration. A fibre lift supplies the total lift. If the left arrow is a trivial cofibration, $f$ is bijective and the unique diagonal base function is $h=af^{-1}$. For this choice of $h$, use the square in $M_U$ with top $a_!A\\xrightarrow{\\widetilde\\alpha}X$, left $h_!u:a_!A\\cong h_!f_!A\\to h_!B$, right $X\\to g^*Y$, and bottom the adjunct $h_!B\\to g^*Y$ of $\\beta:B\\to b^*Y=h^*g^*Y$. The original square commutes, so its adjunct square commutes. Since $f$ is bijective, $u$ is a fibre trivial cofibration; the left Quillen functor $h_!$ preserves this property. The right arrow is a fibre fibration by the declared total fibration condition. A lift $h_!B\\to X$ in $M_U$ is adjoint to $B\\to h^*X$ and hence is the required total diagonal over $h$. The declared fibrations are retract closed by their mappingwise description. The declared cofibrations are exactly the maps left orthogonal to total trivial fibrations: one containment was proved, and for the reverse containment the first factorization makes such a map a retract of its cofibration factor. In this retract argument the right factor is over an identity of sets, so the retract is over the same base function and its adjoint fibre arrow is a retract of a fibre cofibration. For the second system, a map left orthogonal to all fibrations is a retract of its trivial-cofibration factor. The base of the resulting lift is a two-sided inverse of the original base function, so this function is bijective; reindexing then makes its adjoint fibre map a retract of a fibre trivial cofibration. Thus trivial cofibrations are precisely the maps left orthogonal to fibrations; For the first right lifting class, let $r$ lift against all total cofibrations and factor it as $r=pi$ by the first factorization. The square with top $1$, left $i$, right $r$ and bottom $p$ has a diagonal $s$ with $si=1$ and $rs=p$. Thus $r$ is a retract of the total trivial fibration $p$ in the arrow category, so $r$ is a total trivial fibration by retract closure of fibrations and weak equivalences. Conversely each total trivial fibration lifts against cofibrations by the first lifting assertion. For the other right lifting class, if $r$ lifts against all total trivial cofibrations, use its second factorization $r=pi$. The square with top $1$, left the trivial cofibration $i$, right $r$ and bottom the fibration $p$ gives $s$ with $si=1$ and $rs=p$. It exhibits $r$ as a retract of the total fibration $p$, so $r$ is a fibration. Conversely every total fibration lifts against trivial cofibrations by the second lifting assertion. Thus these are two weak factorization systems, establishing the model axioms. Its weak equivalences are $\\mathrm{FFB}$ and its fibrations are mappingwise projective fibrations, as asserted.",
+   "uses": [
+    "lem-coef-enriched-fixed-set-model",
+    "lem-coef-fixed-object-dg-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 4.25, proof: both lifting systems, with the omitted dual argument supplied; Remark 5.5."
+   }
+  },
+  {
+   "text": "The terminal total dg category has one object and zero mapping complex, with its unique unit and composition maps. Every complex maps surjectively to zero in each degree; by [lem-coef-projective-chains-monoidal-model] these maps are projective fibrations. The just-constructed mappingwise description therefore makes every dg category fibrant. Factor the initial map to $A$ by the first model factorization to choose a cofibrant replacement $q:QA\\to A$ which is a trivial fibration. Its object function is a bijection by the description of $\\mathrm{FFB}$.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Remark 5.5 and Example 5.11; model factorization of the initial map."
+   }
+  },
+  {
+   "text": "Let $q_\\infty:N\\operatorname{Cat}(\\mathbf V)\\to\\mathcal L$ be the infinity localization at $\\mathrm{FFB}$ already identified, and let $L:\\operatorname{Cat}(\\mathbf V)\\to h\\mathcal L$ be its homotopy-category functor. This is an ordinary localization at $\\mathrm{FFB}$: maps from an infinity-category to the nerve of an ordinary category factor uniquely through its homotopy category, since an ordinary target identifies homotopic arrows and has unique higher simplices over composable arrows. Applying the universal property of $q_\\infty$ to such nerves gives precisely the ordinary localization universal property, with natural transformations. For $\\alpha:LA\\to LB$ and the chosen cofibrant replacement $q:QA\\to A$, compose to obtain $\\alpha L(q):L(QA)\\to LB$. The source $QA$ is cofibrant and $B$ is fibrant by step 8. Apply [lem-coef-model-localization-map-surjective] to obtain an actual dg functor $t:QA\\to B$ with $L(t)=\\alpha L(q)$. Since $q$ is a weak equivalence, $\\alpha=L(t)L(q)^{-1}$, which is the roof $A\\xleftarrow{q}QA\\xrightarrow{t}B$. This holds for the fixed chosen replacement of $A$. Finally the morphisms in $h\\mathcal L$ are, by definition, the connected components of its mapping spaces, so every such component has the asserted roof representative.",
+   "uses": [
+    "lem-coef-model-localization-map-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+    "place": "map_surjective_of_isLocalization, lines 116-120, applied to the homotopy category of the FFB infinity localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-fixed-set-model",
+  "lem-coef-fixed-object-dg-free-model",
+  "lem-coef-fixed-object-enriched-rectification",
+  "lem-coef-grothendieck-fibre-localization",
+  "lem-coef-model-localization-map-surjective",
+  "lem-coef-projective-chains-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph: coherent finite adjunction before derived inverse limit. The detailed model and assembly argument follows Haugseng online Sections 4-5, not archived locally; the roof clause is proved from the Mathlib fundamental lemma and the localization universal property."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A natural family of equivalences on fixed object enriched categories induces an equivalence of total categories after localizing weakly fully faithful bijective on objects functors",
-   "results": "{\"t\": \"2026-10-16T11:07:13Z\", \"tool\": \"leanfinder\", \"query\": \"A natural family of equivalences on fixed object enriched categories induces an equivalence of total categories after localizing weakly fully faithful bijective on objects functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"CategoryTheory.LocalizerMorphism.isEquivalence_imp\", \"CategoryTheory.LocalizerMorphism.isEquivalence\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence\"], \"digest\": \"e89932ecfa9c3444\"}",
+   "query": "Localization of categories enriched in chain complexes at bijective weakly fully faithful functors assembles fixed object rectification equivalences",
+   "results": "{\"t\": \"2026-10-16T16:11:14Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of categories enriched in chain complexes at bijective weakly fully faithful functors assembles fixed object rectification equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"CategoryTheory.Localization.homEquiv\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"CategoryTheory.LocalizerMorphism.isEquivalence\", \"CategoryTheory.LocalizerMorphism.isEquivalence_imp\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions\"], \"digest\": \"4c8f82c8b607fed2\"}",
    "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Grothendieck\", \"Localization\"",
-   "results": "{\"t\": \"2026-10-16T11:07:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
-  },
-  {
-   "tool": "grep",
-   "query": "fib[er]+wise.*localiz|localiz.*fib[er]+wise|partial.model",
-   "results": "{\"t\": \"2026-10-16T11:07:02Z\", \"tool\": \"grep\", \"query\": \"fib[er]+wise.*localiz|localiz.*fib[er]+wise|partial.model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Localization of the Grothendieck construction of a diagram of model categories computes the total infinity category of the localized fibres",
-   "results": "{\"t\": \"2026-10-16T11:07:03Z\", \"tool\": \"leansearch\", \"query\": \"Localization of the Grothendieck construction of a diagram of model categories computes the total infinity category of the localized fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.category\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.fiber\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct\", \"CategoryTheory.Pseudofunctor.Grothendieck.fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck\", \"CategoryTheory.MorphismProperty.Localization'\"], \"digest\": \"bd1f55d774aeeb14\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
+   "verdict": "no match: ordinary localizer equivalences, derived categories of complexes, and definitions of enriched categories do not assemble fixed-object comparisons into the stated infinity-category of enriched categories. Read Enriched/EnrichedCat.lean:37 and Localization/Equivalence.lean:45-63."
   },
   {
    "tool": "leanfinder",
-   "query": "Fiberwise localization of a Grothendieck fibration agrees with unstraightening the localized diagram",
-   "results": "{\"t\": \"2026-10-16T11:07:14Z\", \"tool\": \"leanfinder\", \"query\": \"Fiberwise localization of a Grothendieck fibration agrees with unstraightening the localized diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Pseudofunctor.Grothendieck.map_obj_fiber\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber\", \"CategoryTheory.Grothendieck.map_obj_fiber\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber\", \"CategoryTheory.Grothendieck.ιNatTrans_app_fiber\", \"CategoryTheory.Grothendieck.ιCompMap_hom_app_fiber\", \"CategoryTheory.Grothendieck.ιCompMap_inv_app_fiber\"], \"digest\": \"69983d75c5483f47\"}",
+   "query": "The homotopy coherent rectification comparison on fixed object enriched categories is natural over all sets",
+   "results": "{\"t\": \"2026-10-16T16:11:20Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent rectification comparison on fixed object enriched categories is natural over all sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedComp_π\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π_assoc\", \"CategoryTheory.EnrichedCat.whiskerRight\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.functorEnriched_comp_id_assoc\", \"CategoryTheory.Enriched.FunctorCategory.enrichedId_π_assoc\"], \"digest\": \"ee8b8acdd3eff7ff\"}",
    "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
-  },
-  {
-   "tool": "grep",
-   "query": "Grothendieck.*[Ll]ocaliz|[Ll]ocaliz.*Grothendieck|co[Cc]artesian.*localiz",
-   "results": "{\"t\": \"2026-10-16T11:07:04Z\", \"tool\": \"grep\", \"query\": \"Grothendieck.*[Ll]ocaliz|[Ll]ocaliz.*Grothendieck|co[Cc]artesian.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/GroupTheory/MonoidLocalization/DivPairs.lean\", \"Mathlib/GroupTheory/MonoidLocalization/DivPairs.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Finite.lean\"], \"digest\": \"ba9675f0a14b4b8e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: No match. Grothendieck and pseudofunctor Grothendieck hits describe ordinary categories and fibres, not localization/unstraightening of homotopy theories. Sites/Over.lean:544 concerns sheafification. LocalizerMorphism localized equivalences concern ordinary localization, not the stated infinity-categorical assembly."
-  },
-  {
-   "tool": "grep",
-   "query": "projective.?model|monoid.?axiom|rectif|many.object|categorical.?algebra|enrich.*complet|complet.*enrich|fibrewise|fiberwise",
-   "results": "{\"t\": \"2026-10-16T13:07:52Z\", \"tool\": \"grep\", \"query\": \"projective.?model|monoid.?axiom|rectif|many.object|categorical.?algebra|enrich.*complet|complet.*enrich|fibrewise|fiberwise\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/WithTerminal/FinCategory.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\"], \"digest\": \"1282f675b292b0ba\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: fresh source check. The broad scoped grep also hits ordinary fibrewise Kan colimits and bibliography references; the refined grep returns only ordinary monoid laws in Monoidal/Mon.lean:320 and Monoidal/Skeleton.lean:58,77. Read these places: none is a model-category monoid axiom, enriched rectification, or enriched completion theorem."
-  },
-  {
-   "tool": "grep",
-   "query": "rectification|quasi.?equivalence|projective.?model.?structure|monoid.?axiom|categorical.?algebras|enriched.?completion|fibrewise.?localization|fiberwise.?localization",
-   "results": "{\"t\": \"2026-10-16T13:08:06Z\", \"tool\": \"grep\", \"query\": \"rectification|quasi.?equivalence|projective.?model.?structure|monoid.?axiom|categorical.?algebras|enriched.?completion|fibrewise.?localization|fiberwise.?localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\"], \"digest\": \"76c434bb4424cc76\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: fresh source check. The broad scoped grep also hits ordinary fibrewise Kan colimits and bibliography references; the refined grep returns only ordinary monoid laws in Monoidal/Mon.lean:320 and Monoidal/Skeleton.lean:58,77. Read these places: none is a model-category monoid axiom, enriched rectification, or enriched completion theorem."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Localizations of Grothendieck fibrations assemble equivalences between fibers into an equivalence",
-   "results": "{\"t\": \"2026-10-16T13:26:56Z\", \"tool\": \"leanfinder\", \"query\": \"Localizations of Grothendieck fibrations assemble equivalences between fibers into an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.isoMk\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_fiber\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber\", \"CategoryTheory.Grothendieck.preEquivalence\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\"], \"digest\": \"6f5b7919f1c600c5\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Grothendieck.isoMk (CategoryTheory/Grothendieck.lean:203-212) and Localization.isEquivalence (CategoryTheory/Localization/Equivalence.lean:61-63) concern ordinary categories. They do not assert fibrewise homotopy coherent localization or the total FFB model."
+   "verdict": "no match: ordinary localizer equivalences, derived categories of complexes, and definitions of enriched categories do not assemble fixed-object comparisons into the stated infinity-category of enriched categories. Read Enriched/EnrichedCat.lean:37 and Localization/Equivalence.lean:45-63."
   },
   {
    "tool": "loogle",
    "query": "\"EnrichedCategory\", \"Localization\"",
-   "results": "{\"t\": \"2026-10-16T13:26:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T16:11:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search; Loogle and the broad Dwyer/Segal/enriched-localization source grep both returned zero hits."
+   "verdict": "no match: search returned no hits."
   },
   {
    "tool": "grep",
-   "query": "Dwyer|Segal.*complet|complet.*Segal|enriched.*localization|localization.*enriched|monoidal.*model.*complex",
-   "results": "{\"t\": \"2026-10-16T13:26:52Z\", \"tool\": \"grep\", \"query\": \"Dwyer|Segal.*complet|complet.*Segal|enriched.*localization|localization.*enriched|monoidal.*model.*complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "fibrewise.?localization|fiberwise.?localization|enriched.*rectification|FFB",
+   "results": "{\"t\": \"2026-10-16T16:11:17Z\", \"tool\": \"grep\", \"query\": \"fibrewise.?localization|fiberwise.?localization|enriched.*rectification|FFB\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Analysis/PSeries.lean\", \"Mathlib/Analysis/PSeries.lean\", \"Mathlib/Analysis/PSeries.lean\", \"Mathlib/Analysis/PSeries.lean\"], \"digest\": \"4ec8dc96ddf09f8b\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search; Loogle and the broad Dwyer/Segal/enriched-localization source grep both returned zero hits."
+   "verdict": "no match: inspected the returned text; these are incidental substring matches (ordinary monoid laws, analyticAt, cat_smul, or FFB inside diffBound/bump names), not enriched model structures or rectification. The separately recorded restricted grep has no hits."
   },
   {
-   "tool": "leanfinder",
-   "query": "Localizing the Grothendieck construction of categories enriched in chain complexes by bijective fully faithful weak equivalences",
-   "results": "{\"t\": \"2026-10-16T14:00:22Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the Grothendieck construction of categories enriched in chain complexes by bijective fully faithful weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"ComplexShape.quotient_isLocalization\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\"], \"digest\": \"bbed53ab198a2389\"}",
+   "tool": "grep",
+   "query": "fibrewise.?localization|fiberwise.?localization|enriched.*rectification|\\bFFB\\b",
+   "results": "{\"t\": \"2026-10-16T16:12:36Z\", \"tool\": \"grep\", \"query\": \"fibrewise.?localization|fiberwise.?localization|enriched.*rectification|\\\\bFFB\\\\b\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: No match: SSet.QCat.catEnrichedOrdinaryCategory at AlgebraicTopology/Quasicategory/StrictBicategory.lean:55 is strict enrichment over ordinary categories, not the variable-object comparison over chain complexes. Ordinary model-category localizations do not assert the enriched assembly equivalence."
+   "verdict": "no match: search returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict enriched categories with variable object sets localize to categorical algebras in the derived infinity category",
+   "results": "{\"t\": \"2026-10-16T16:11:12Z\", \"tool\": \"leansearch\", \"query\": \"Strict enriched categories with variable object sets localize to categorical algebras in the derived infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"CategoryTheory.CatEnriched\", \"CategoryTheory.EnrichedCategory\", \"DerivedCategory.instCategory\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\", \"CategoryTheory.EnrichedCat\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\"], \"digest\": \"2a7581cd19e9da69\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary localizer equivalences, derived categories of complexes, and definitions of enriched categories do not assemble fixed-object comparisons into the stated infinity-category of enriched categories. Read Enriched/EnrichedCat.lean:37 and Localization/Equivalence.lean:45-63."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-enrichment-rectification",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-fibre-assembly",
+  "worker": "stage1",
+  "summary": "Preserved the statement, checked Haugseng Theorem 5.4 and Remark 5.5, and exposed the fixed-set transferred model and Cartesian fibre-localization inputs. Constructed both total factorizations and lifting systems in the proof, without claiming functorial factorizations of the total category. A Mathlib fundamental-lemma leaf supplies the fixed-cofibrant-source roof argument. Fresh continuation reread the sources and cited statements, refreshed all four search kinds for each node, and wrote the actual adjunction square used in both total lifting arguments.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, second proof paragraph: realizes coherence of finite enriched adjunctions before taking R lim. Current main-20261015 places this ancestor under sk-thm-sf-package; historical ancestry and maintainer-owned unit are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-c21778561",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-c21778561 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, Haugseng arXiv:1312.3881v4 (Lemma 3.20, Theorem 4.21, Corollary 4.22, Definition 4.23, Proposition 4.25, Definition 5.3, Theorem 5.4, Remark 5.5) and Mathlib FundamentalLemma.lean:31-33, 67 and 116-120. The item statement matches Theorem 5.4 and Remark 5.5 specialized to Ch(Z); the roof clause is proved in the item. I checked by hand the total limits and colimits, two-out-of-three in all three cases, both factorizations, both lifting cases (diagonal base h=g^-1 b, resp. h=a f^-1), the retract arguments, the terminal object and cofibrant replacement, and the roof argument via the Mathlib leaf; all hold. lem-coef-grothendieck-fibre-localization is the Cartesian/opposite form of Corollary 4.22; it is true and not a duplicate. lem-coef-model-localization-map-surjective is an exact Mathlib leaf. One fault, C5 duplication: the model-structure clause of lem-coef-enriched-fixed-set-model generalizes the existing node lem-coef-fixed-object-dg-free-model, which already states the fixed-object model with mappingwise weak equivalences and fibrations for Ch(Z), the only case used. The report does not mention it. Fix written under fixes/: the new node is narrowed to the restriction functors f^* (they preserve limits and all weak equivalences, have a left adjoint f_!, and are right Quillen, so f_! is left Quillen) and cites the existing node for the model structure; item steps 1, 5, 6 and 7 cite lem-coef-fixed-object-dg-free-model for the fibre model axioms, and proof_deps is updated. Same unit, no cycle, item statement unchanged, no tool_uses.; 2 file(s) fixed by the reviewer"
+ }
 }

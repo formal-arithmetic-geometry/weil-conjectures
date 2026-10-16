@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-homotopy-groups-basepoint-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Proposition 3.7(i)-(ii), pp. 13-15, including the two Grothendieck constructions; Dwyer-Kan Section 7.2(i),(iii) and Propositions 6.11-6.12; Definition 1.5 and Theorem 1.6, pp. 5–6; last assertion is the immediate naturality and Lemma 1.3 consequence; auxiliary input to the comma-category contractions and comparison prism: homotopy invariance with moving basepoints.",
+   "via": [
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-special-resolution-zigzag-nerve",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Basepoint change and homotopy invariance of homotopy groups",
+ "statement": "Let $I=[0,1]$ with its usual topology. For a topological space $T$ let $\\pi_0(T)$ be its set of path components and, for $n\\geq1$ and $t\\in T$, let $\\pi_n(T,t)$ be the group of continuous maps $(I^n,\\partial I^n)\\to(T,t)$ modulo homotopy fixed on the boundary, with concatenation in the first coordinate. A continuous map induces maps on these sets and groups by postcomposition. For a path $\\gamma:I\\to T$ from $t_0$ to $t_1$, define $\\beta_\\gamma:\\pi_n(T,t_1)\\to\\pi_n(T,t_0)$ as follows: for a representative $a$, put $r(u)=2\\max_i|u_i-\\tfrac12|$ and represent $\\beta_\\gamma[a]$ by $a(2u-\\tfrac12)$ on $r(u)\\leq\\tfrac12$ and by $\\gamma(2-2r(u))$ on $r(u)\\geq\\tfrac12$. This defines a group isomorphism, with inverse induced by $\\overline\\gamma(s)=\\gamma(1-s)$.\n\nLet $X,Y$ be topological spaces and $H:I\\times X\\to Y$ a continuous homotopy from $f_0$ to $f_1$, where $f_i(x)=H(i,x)$. The two induced functions $\\pi_0(X)\\to\\pi_0(Y)$ coincide. For every $x\\in X$ and $n\\geq1$, writing $\\gamma_x(s)=H(s,x)$, one has\n$$\\beta_{\\gamma_x}\\circ(f_1)_*=(f_0)_*:\\pi_n(X,x)\\longrightarrow\\pi_n(Y,f_0(x)).$$\nConsequently $f_0$ induces a bijection on path components and isomorphisms on every homotopy group at every source basepoint if and only if $f_1$ does. Every homotopy equivalence $f:X\\to Y$, meaning a continuous map admitting a continuous inverse up to continuous homotopies with the identities, induces such a bijection and such isomorphisms. No connectedness or stationary-basepoint condition on the homotopies is imposed. In particular, if two maps of simplicial sets have continuously homotopic geometric realizations, then one is a weak homotopy equivalence in the sense of [lem-coef-kan-quillen-right-proper] if and only if the other is.",
+ "source": {
+  "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+  "place": "Allen Hatcher, Algebraic Topology, Section 4.1, Definitions and Basic Constructions, printed pp. 340–342 (cube model, change-of-basepoint isomorphisms, functoriality and unbased homotopy equivalences); Exercise 4.1.2, printed p. 358. The displayed shell is the explicit concentric-cube construction on p. 341; the homotopy identity uses the same moving-boundary construction. No Stacks tag states this topological result."
+ },
+ "stmt_deps": [
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic continuous maps are simultaneously weak homotopy equivalences; every homotopy equivalence induces bijections on path components and all homotopy groups",
+   "results": "[leanfinder] OK 8 hit(s); scope: all; top: ContinuousMap.HomotopyEquiv, HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff, HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff, ContinuousMap.HomotopyEquiv.mk.inj, HomotopicalAlgebra.LeftHomotopyRel, HomotopicalAlgebra.LeftHomotopyClass, ContinuousMap.HomotopyEquiv.ext, ContinuousMap.HomotopyEquiv.ext_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakHomotopyEquiv\", \"homotop\"",
+   "results": "[loogle] OK 0 hit(s); scope: all; top: ",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopic maps are weak homotopy equivalences if and only if each other is a weak homotopy equivalence",
+   "results": "[leansearch] OK 8 hit(s); scope: all; top: HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff, HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff, ContinuousMap.Homotopic, HomotopicalAlgebra.weakEquivalence_iff, HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff, ContinuousMap.Homotopic.symm, ContinuousMap.HomotopyEquiv, HomotopicalAlgebra.weakEquivalences",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic continuous maps induce the same homotopy group maps after transport along the basepoint path",
+   "results": "[leanfinder] OK 8 hit(s); scope: all; top: ContinuousMap.Homotopy.heq_path_of_eq_image, ContinuousMap.Homotopy.apply_one_path, ContinuousMap.Homotopy.apply_zero_path, FundamentalGroup.mapOfEq_apply, Path.Homotopic.map_lift, Path.Homotopic.Quotient.mk_map, ContinuousMap.Homotopy.evalAt_eq, FundamentalGroup.map_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A path between basepoints gives isomorphisms on all higher homotopy groups and homotopic unbased maps induce the same maps up to these isomorphisms",
+   "results": "[leansearch] OK 8 hit(s); scope: all; top: FundamentalGroup.fundamentalGroupMulEquivOfPath, FundamentalGroup.fundamentalGroupMulEquivOfPathConnected, HomotopyGroup, FundamentalGroupoid.fromPath_eq_iff_homotopic, Path.Homotopic.Quotient.map, FundamentalGroupoidFunctor.homotopicMapsNatIso, Path.Homotopic.Quotient.mapFn, Path.Homotopic.map_lift",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyGroup\", \"Equiv\"",
+   "results": "[loogle] OK 8 hit(s); scope: all; top: homotopyGroupEquivZerothHomotopyOfIsEmpty, homotopyGroupEquivFundamentalGroupOfUnique, HomotopyGroup.pi0EquivZerothHomotopy, HomotopyGroup.pi1EquivFundamentalGroup, HomotopyGroup.homotopyGroupOfUniqueMulEquivFundamentalGroup, HomotopyGroup.pi1MulEquivFundamentalGroup, homotopyGroupEquivFundamentalGroup, HomotopyGroup.genLoopEquivOfUnique_transAt",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "basepoint|changeBase|map_homotop|homotopyGroup.*[Ee]quiv|[Ee]quiv.*homotopyGroup",
+   "results": "[grep] OK 7 hit(s); scope: Topology/Homotopy; top: Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence_iff",
+   "results": "[grep] OK 25 hit(s); scope: AlgebraicTopology/ModelCategory; top: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/Over.lean, Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: fundamental-group basepoint change and the fundamental-groupoid homotopy natural transformation cover degree one only. HomotopyGroup equivalences concern loop-space or low-degree identifications, not basepoint change for all degrees. Abstract model-category weakEquivalence_iff requires a cylinder already known to have a weak-equivalence projection and does not identify it with topological homotopy-group equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy equivalence of topological spaces induces isomorphisms of higher homotopy groups and a bijection of connected components",
+   "results": "{\"t\": \"2026-10-16T16:27:06Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy equivalence of topological spaces induces isomorphisms of higher homotopy groups and a bijection of connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace\", \"ContinuousMap.HomotopyEquiv.contractibleSpace_iff\", \"FundamentalGroupoidFunctor.instIsIsoFunctorFundamentalGroupoidHomotopicMapsNatIso\", \"ContinuousMap.HomotopyEquiv.mk.inj\", \"ContinuousMap.HomotopyEquiv.contractibleSpace\", \"FundamentalGroupoidFunctor.homotopicMapsNatIso\"], \"digest\": \"cb00887b039882ad\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyEquiv defines inverse homotopies; the simply-connected and fundamental-groupoid results cover only lower degrees. Read HomotopyGroup.lean: its loop-space and low-degree equivalences do not assert the all-degree moving-basepoint identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyGroup\", \"HomotopyEquiv\"",
+   "results": "{\"t\": \"2026-10-16T16:28:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyGroup\\\", \\\"HomotopyEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyEquiv defines inverse homotopies; the simply-connected and fundamental-groupoid results cover only lower degrees. Read HomotopyGroup.lean: its loop-space and low-degree equivalences do not assert the all-degree moving-basepoint identity."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*homotopyGroup|homotopyGroup.*map|changeBase|basepoint",
+   "results": "{\"t\": \"2026-10-16T16:30:54Z\", \"tool\": \"grep\", \"query\": \"map.*homotopyGroup|homotopyGroup.*map|changeBase|basepoint\", \"sub\": \"Topology/Homotopy\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Lifting.lean\", \"Mathlib/Topology/Homotopy/Lifting.lean\"], \"digest\": \"c1f31b60b5725594\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyEquiv defines inverse homotopies; the simply-connected and fundamental-groupoid results cover only lower degrees. Read HomotopyGroup.lean: its loop-space and low-degree equivalences do not assert the all-degree moving-basepoint identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-thomason-grothendieck-comparison",
+  "date": "2026-10-17",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

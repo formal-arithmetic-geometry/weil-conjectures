@@ -19,13 +19,14 @@
  },
  "kind": "definition",
  "title": "Relative coherent limit and colimit diagrams",
- "statement": "Use simplicial sets, quasicategories, functor simplicial sets and right-pinched mapping spaces from [def-cbc-enhanced-diagrams-cones]. For a simplicial set $K$, let $K^{\\triangleright}=K\\star\\Delta^0$ and $K^{\\triangleleft}=\\Delta^0\\star K$ be the join cones: a simplex is a simplex of either factor or an ordered concatenation of simplices of the two factors. Fix a functor $p:\\mathcal D\\to\\mathcal B$ of quasicategories. For a diagram $q:K^{\\triangleright}\\to\\mathcal D$, call $q$ a $p$-colimit diagram when, for every diagram $t:K^{\\triangleright}\\to\\mathcal D$, the square\n$$\\begin{array}{ccc}\n\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleright},\\mathcal D)}(q,t)&\\longrightarrow&\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal D)}(q|_K,t|_K)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleright},\\mathcal B)}(pq,pt)&\\longrightarrow&\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal B)}(pq|_K,pt|_K)\n\\end{array}$$\nis a homotopy pullback, the horizontal maps being restriction and the vertical maps postcomposition by $p$. A square of spaces is a homotopy pullback when its comparison to the path model of the pullback is an equivalence; that model consists of a pair of points and a path between their images, retaining all higher simplices. For $q:K^{\\triangleleft}\\to\\mathcal D$, the term $p$-limit diagram is defined by the same square with $(t,q)$ in place of $(q,t)$ and $K^{\\triangleleft}$ in place of $K^{\\triangleright}$. No existence of such diagrams is part of this definition.",
+ "statement": "Work in the fixed sufficiently large universes, with simplicial sets, quasicategories, functor simplicial sets, right-pinched mapping spaces, and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. The functor simplicial sets with quasicategory target are quasicategories, and their mapping simplicial sets are Kan complexes, by [lem-cbc-enhanced-functor-cone-calculus].\n\nFor simplicial sets $A,B$, give each its formal degree $-1$ set $A_{-1}=B_{-1}=\\{*\\}$, with the unique augmentation. Define the join degreewise by\n$$(A\\star B)_n=\\coprod_{\\substack{i,j\\geq-1\\\\ i+j+1=n}}A_i\\times B_j\\qquad(n\\geq0).$$\nA summand has an initial block of $i+1$ vertices from $A$ and a final block of $j+1$ vertices from $B$. A monotone map $\\alpha:[m]\\to[n]$ acts by taking the inverse images of these two blocks and applying the simplicial operators to the resulting initial and final blocks; an empty block uses the unique degree $-1$ element. This specifies faces and degeneracies, including the pure-factor simplices. For a small simplicial set $K$, put $K^{\\triangleright}=K\\star\\Delta^0$ and $K^{\\triangleleft}=\\Delta^0\\star K$, with their pure-factor inclusions of $K$.\n\nFor clarity, for any strictly commutative square of Kan complexes\n$$\\begin{array}{ccc}A&\\xrightarrow{f}&B\\\\ g\\downarrow&&\\downarrow h\\\\ C&\\xrightarrow{k}&D,\\end{array}$$\nits path pullback model is\n$$P=B\\times_{D,h,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D,k}C.$$\nAn $n$-simplex of $P$ is $(b,c,\\gamma)$ with $b\\in B_n$, $c\\in C_n$ and $\\gamma:\\Delta^n\\times\\Delta^1\\to D$ whose endpoints are $h(b)$ and $k(c)$; all simplicial operators restrict these data. Call the square a homotopy pullback if the simplicial map $A\\to P$ sending $a$ to $(f(a),g(a),\\text{the constant interval at }hf(a)=kg(a))$ is a weak homotopy equivalence.\n\nFix a functor $p:\\mathcal D\\to\\mathcal B$ of quasicategories. For a diagram $q:K^{\\triangleright}\\to\\mathcal D$, call $q$ a $p$-colimit diagram when, for every diagram $t:K^{\\triangleright}\\to\\mathcal D$, the square\n$$\\begin{array}{ccc}\n\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleright},\\mathcal D)}(q,t)&\\longrightarrow&\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal D)}(q|_K,t|_K)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleright},\\mathcal B)}(pq,pt)&\\longrightarrow&\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal B)}(pq|_K,pt|_K)\n\\end{array}$$\nis a homotopy pullback, the horizontal maps being restriction and the vertical maps postcomposition by $p$. For $q:K^{\\triangleleft}\\to\\mathcal D$, the term $p$-limit diagram is defined by the same square with $(t,q)$ in place of $(q,t)$ and $K^{\\triangleleft}$ in place of $K^{\\triangleright}$. No existence of such diagrams is part of this definition.",
  "source": {
   "document": "https://kerodon.net/tag/02X1",
   "place": "Kerodon Proposition 7.1.6.19, condition (2), and its colimit dual, taken as the mapping-space definition of relative universality. Read with Definition 7.1.6.1 and Remark 7.1.6.2. Kerodon identifiers are not Stacks tags; online source, not archived in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [],
  "proof_deps": [],
@@ -86,10 +87,80 @@
    "results": "{\"t\": \"2026-10-16T15:54:14Z\", \"tool\": \"grep\", \"query\": \"relative[ _-]*(colimit|limit)|homotopy.?cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the actual source grep returned zero hits for this query in the recorded source directory."
+  },
+  {
+   "tool": "grep",
+   "query": "relative[ _-]*(colimit|limit)|homotopy.?pullback|homotopy.?cartesian",
+   "results": "{\"t\": \"2026-10-16T16:42:02Z\", \"tool\": \"grep\", \"query\": \"relative[ _-]*(colimit|limit)|homotopy.?pullback|homotopy.?cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the AlgebraicTopology search has zero hits. The broader source search returns the primitive Quasicategory class, ordinary categorical constructions and relative cell complexes; none defines the relative mapping-space square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of relative limits and colimits for a functor of infinity categories",
+   "results": "{\"t\": \"2026-10-16T16:42:02Z\", \"tool\": \"leansearch\", \"query\": \"Definition of relative limits and colimits for a functor of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit\", \"CategoryTheory.Limits.colim\", \"CategoryTheory.Limits.lim\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.HasLimit\", \"CategoryTheory.Functor.ColimitTypeRel\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.isColimitOfReflects\"], \"digest\": \"36e4651b1014e55a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned colimit/lim/colim, HasLimit, ColimitCocone and reflection results are for ordinary categories (Mathlib/CategoryTheory/Limits/HasLimits.lean:73-98); they do not provide the relative quasicategorical definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Colimit\"",
+   "results": "{\"t\": \"2026-10-16T16:42:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the joint Quasicategory/Colimit query has zero hits; the broader query returns the horn-filling class SSet.Quasicategory and its consequences (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-60), not relative cone universality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative colimit cone in a quasicategory is universal over a functor when its mapping space restriction square is a homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T16:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"A relative colimit cone in a quasicategory is universal over a functor when its mapping space restriction square is a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit.nonempty_isColimit_of_isPullback_left\", \"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.IsUniversalColimit.nonempty_isColimit_of_isPullback_right\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_left\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_right\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.IsVanKampenColimit.isUniversal\", \"CategoryTheory.IsUniversalColimit.nonempty_isColimit_of_pullbackCone_left\"], \"digest\": \"a402d062002edc04\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read both result lists. IsUniversalColimit (Mathlib/CategoryTheory/Limits/VanKampen.lean:45) means pullback stability of an ordinary cocone. LiftableCocone (Limits/Creates.lean:59) gives an ordinary cocone lift. costructuredArrowMapCocone (Functor/KanExtension/Pointwise.lean:665) is an ordinary Kan-extension cocone. None defines relative universality by homotopy pullbacks of mapping spaces in arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-16T16:43:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"1f27f0f0176f40b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the joint Quasicategory/Colimit query has zero hits; the broader query returns the horn-filling class SSet.Quasicategory and its consequences (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-60), not relative cone universality."
+  },
+  {
+   "tool": "grep",
+   "query": "def (IsUniversalColimit|colimit|HasLimit)|class Quasicategory|Relative.*[Cc]olimit|[Cc]olimit.*[Rr]elative",
+   "results": "{\"t\": \"2026-10-16T16:43:12Z\", \"tool\": \"grep\", \"query\": \"def (IsUniversalColimit|colimit|HasLimit)|class Quasicategory|Relative.*[Cc]olimit|[Cc]olimit.*[Rr]elative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\"], \"digest\": \"ef29a3d65e280794\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the AlgebraicTopology search has zero hits. The broader source search returns the primitive Quasicategory class, ordinary categorical constructions and relative cell complexes; none defines the relative mapping-space square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative initial cocones for infinity category functors using mapping spaces and homotopy Cartesian squares",
+   "results": "{\"t\": \"2026-10-16T16:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"Relative initial cocones for infinity category functors using mapping spaces and homotopy Cartesian squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.costructuredArrowMapCocone\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.CostructuredArrow.initial_pre\", \"HomotopicalAlgebra.AttachCells.cofan₂\", \"HomotopicalAlgebra.AttachCells.cofan₁\", \"CategoryTheory.Limits.coconeOfDiagramInitial\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCocone\", \"CategoryTheory.Limits.IsColimit.ofPreservesCoconeInitial\"], \"digest\": \"1735b8e31142796d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read both result lists. IsUniversalColimit (Mathlib/CategoryTheory/Limits/VanKampen.lean:45) means pullback stability of an ordinary cocone. LiftableCocone (Limits/Creates.lean:59) gives an ordinary cocone lift. costructuredArrowMapCocone (Functor/KanExtension/Pointwise.lean:665) is an ordinary Kan-extension cocone. None defines relative universality by homotopy pullbacks of mapping spaces in arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cartesian squares of mapping complexes characterize universal cones over a quasicategory functor",
+   "results": "{\"t\": \"2026-10-16T16:56:11Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cartesian squares of mapping complexes characterize universal cones over a quasicategory functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.preservesTerminal\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"125b0954cb92d441\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: independently read HomotopyCat.lean:560-573 (hoFunctor preserves the ordinary terminal simplicial set), NerveAdjunction.lean:280-295 (functors out of a 2-truncated homotopy category), SimplicialSet/Coskeletal.lean:50-78 (StrictSegal lifts a cone of sets), and SimplicialObject/Coskeletal.lean:65-76 (ordinary right Kan extension). None defines relative universality of cones for an arbitrary quasicategory functor by a square of Kan mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "([Rr]elative|[Uu]niversal).*(cone|Cone|[Ii]nitial|[Ff]inal)|[Hh]omotopy.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-16T16:56:24Z\", \"tool\": \"grep\", \"query\": \"([Rr]elative|[Uu]niversal).*(cone|Cone|[Ii]nitial|[Ff]inal)|[Hh]omotopy.*[Pp]ullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Product.lean\", \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/Algebra/Category/Grp/Colimits.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\"], \"digest\": \"dc68ba95bcc33868\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the actual results. StructuredArrow.IsUniversal (Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean:468-469) is ordinary initiality; VanKampen and ordinary IsLimit concern ordinary cocones/cones, while CWComplex and RightHomotopy results concern different notions. None defines the relative quasicategorical predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-16T16:56:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the joint SSet/IsLimit query returned zero hits; no declaration to attach."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-kan-mapping-restriction",
@@ -97,5 +168,29 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-coef-infinity-relative-cone",
+  "worker": "stage1",
+  "summary": "Definition split without new nodes: retained the relative mapping-space universal predicates for arbitrary functors, expanded the join simplicial operators and the path-pullback comparison, and cited the existing general functor-category/Kan-mapping-space theorem for well-definedness. Searched project Lean, the whole DAG and blueprint, and Mathlib with two semantic phrasings. No attachment or full Mathlib match.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient adjunction and coherent realization, through lem-coef-infinity-kan-mapping-restriction. This definition supplies the local relative-cone vocabulary; it proves no part of the integral adjunction. The current main-20261015 ancestor proof has the same coefficient-adjunction role; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its general functor-category closure and Kan-mapping-space clauses ensure that the defining square consists of spaces. It is a foundational well-definedness tool, not a replacement for any coefficient-adjunction step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-7753cf44d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7753cf44d (reviewer sub-agent of L); spot-checked: I read the definition in full. I checked it against Kerodon 02X1 (Proposition 7.1.6.19, condition (2)) and 02KG (Definition 7.1.6.1), both online. The source takes an arbitrary functor U and quantifies over every comparison diagram g. For limits the square uses Hom(g,f), and the item's p-colimit and p-limit squares match this variance with no added isofibration or existence hypothesis. Using (2) as the definition is legitimate because the source proves it equivalent to the slice definition. The join formula with degree -1 augmentation gives A_0⊔B_0 in degree 0 and correct operators, and K^▷ and K^◁ are oriented correctly; it agrees with the inline joins in the other lem-coef-infinity nodes, and no join definition node exists. The path-pullback model is correct because ev0×ev1 is a Kan fibration for Kan D, and the constant-path comparison is simplicial. Edge cases hold: K empty gives the p-initial/p-final condition, p=id is trivial, and p to Δ^0 gives the ordinary colimit condition. Both stmt_deps are reviewed and say what is used: def-cbc supplies the primitives, and lem-cbc-enhanced-functor-cone-calculus supplies the quasicategory and Kan-mapping-space clauses. Neither reaches the item, so there is no cycle. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a well-definedness black box. The three citers use the predicate consistently. There are no new nodes, no duplicate, no SGA citation, and the unit and ancestry are unchanged. This is not a target node, so the base-change and coefficient-category checks do not apply. No fixes were made."
+ }
 }

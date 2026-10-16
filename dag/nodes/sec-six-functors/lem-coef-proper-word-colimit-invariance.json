@@ -30,9 +30,120 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the Kan model structure of [lem-coef-kan-quillen-right-proper]; every simplicial set is cofibrant since its initial map is degreewise injective. Apply [lem-coef-reedy-model-structure] to each of three indexing categories: a discrete pair; the sequence $0\\to1\\to\\cdots$ with degree its index and only direct arrows; and the span $X\\leftarrow A\\to B$ with degrees $0,1,2$ respectively, the arrow $A\\to X$ inverse and $A\\to B$ direct. For a base (trivial) fibration $p:U\\to V$, its constant diagram is a Reedy (trivial) fibration: the relative matching maps are $p$ at every object in the discrete and sequence cases; in the span case they are $p$ at $X,B$ and the identity $U\\to V\\times_V U$ at $A$. The colimit/constant-diagram adjunction, obtained from the colimit universal property, identifies lifting squares and their fillers. Hence the colimit functor on each of these diagram model categories preserves cofibrations and trivial cofibrations, by their lifting characterizations.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Supporting model-category argument for Proposition 4.5: Hovey Theorem 5.2.5, Corollary 5.1.6 and proof of Lemma 5.2.6."
+   }
+  },
+  {
+   "text": "Here is the weak-equivalence consequence, without appealing to a further colimit-comparison theorem. Let $u:D\\to D'$ be an objectwise weak equivalence between cofibrant diagrams in any of the three model categories of Step 1. The cofibrant clause of [lem-coef-brown-split-factorizations] gives $u=pi$, $ps=1$, with $i,s$ cofibrations and $p$ a trivial fibration. Two-out-of-three makes $i,s$ trivial cofibrations. Step 1 makes $\\operatorname{colim}i$ and $\\operatorname{colim}s$ weak equivalences; the equation $(\\operatorname{colim}p)(\\operatorname{colim}s)=1$ makes $\\operatorname{colim}p$ a weak equivalence by two-out-of-three, and so makes $\\operatorname{colim}u$ a weak equivalence. For a discrete pair every diagram is cofibrant. For the span, cofibrancy means that $X,A$ are cofibrant and $A\\to B$ is a cofibration. For a sequence it means that the initial object is cofibrant and every successor map is a cofibration, because the latching object at $n>0$ is its predecessor. Thus we have proved the coproduct, one-cofibration pushout, and monomorphic-sequence comparisons needed below.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Supporting argument for Proposition 4.5: Brown split-factorization argument; Hovey Lemma 5.2.6 and Corollary 5.1.6."
+   }
+  },
+  {
+   "text": "Put $C_n(E)=\\varinjlim_{\\mathcal I_{\\leq n}}E$, where $\\mathcal I_{\\leq n}$ contains words of length at most $n$. A compatible family of cocones on these full subcategories is exactly a cocone on $\\mathcal I$: every object occurs in a truncation, and an arrow occurs as soon as both its endpoints do. The colimit universal property therefore gives $\\varinjlim_n C_n(E)\\cong\\varinjlim_{\\mathcal I}E$. The construction applied to $E'$ gives its corresponding isomorphism, and the universal property identifies the map under these isomorphisms with $\\varinjlim_n C_n(\\eta)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4.1 Proposition 4.2, printed p. 22."
+   }
+  },
+  {
+   "text": "The sole object of $\\mathcal I_{\\leq0}$ is the empty word, so $C_0(\\eta)=\\eta_\\epsilon$ is a weak equivalence. For $n\\geq1$ use [lem-coef-signed-word-boundary-pushout] for both proper functors. Its squares attach $E(a_n^+)\\amalg E(a_n^-)$ along $B_n^+(E)\\amalg B_n^-(E)$ to $C_{n-1}(E)$, and give a map of squares under $\\eta$. Each left attaching map is degreewise injective. In a degreewise set pushout along an injection, distinct elements of the other summand cannot be identified: each element of the injected domain has only one preimage. Thus every $C_{n-1}(E)\\to C_n(E)$ is degreewise injective. This argument also gives degreewise injectivity for every transition of $C_n(E')$.",
+   "uses": [
+    "lem-coef-signed-word-boundary-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4.1 Proposition 4.3 and Definition 4.4, printed pp. 22-23."
+   }
+  },
+  {
+   "text": "For a word $v$ and a subset $T$ of its positions, let $v|T$ be the subword with the induced signs, and let $X_T(E)$ be the image of $E(v|T)\\to E(v)$. Properness identifies $X_T(E)$ with $E(v|T)$ and gives $X_S(E)\\cap X_T(E)=X_{S\\cap T}(E)$. In each simplicial degree, intersection distributes over a finite union. Consequently the intersection of $X_T(E)$ with a union of subword images $X_{S_j}(E)$ is the union of the images $X_{S_j\\cap T}(E)$, also viewed inside $E(v|T)$. These identifications commute with faces, degeneracies and $\\eta$, since the subword injections compose as inclusions of subsets.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 4.4(ii), printed p. 23; degreewise set identities."
+   }
+  },
+  {
+   "text": "We prove that $\\eta$ induces a weak equivalence on every finite union $\\bigcup_{T\\in\\mathcal A}X_T(E)$ by induction first on the maximum cardinality $r$ of the subsets and then on the number $k$ of inclusion-maximal subsets. The empty family gives the identity of the empty simplicial set. A nonempty family with $r=0$ has union $X_\\varnothing(E)\\cong E(\\epsilon)$, so the assertion is $\\eta_\\epsilon$. Remove contained subsets without changing the union. Choose a maximal subset $T$ of cardinality $r$, and let $U$ be the union of the other maximal images. The comparison on $U$ follows from the induction on $k$ (or the outer induction if its maximum cardinality drops); the comparison on $X_T$ is $\\eta_{v|T}$. By Step 5, $U\\cap X_T$ is the union for the family $S\\cap T$ over the other maximal $S$. Every such intersection has cardinality less than $r$, so the outer induction gives its comparison. The square with corners $U\\cap X_T,U,X_T,U\\cup X_T$ is a pushout degreewise: two maps agreeing on the intersection give exactly one map on the union. Both intersection inclusions are monomorphisms. Apply the one-cofibration pushout comparison proved in Steps 1-2 (using [lem-coef-reedy-model-structure] and [lem-coef-brown-split-factorizations]) to conclude for the full union. This proves the claim, in particular for each $B_n^e(E)\\to B_n^e(E')$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 4.4 and the finite-union induction implicit in Proposition 4.5, printed p. 23; induction written explicitly by the second reader."
+   }
+  },
+  {
+   "text": "Induct on $n$ to prove $C_n(\\eta)$ a weak equivalence. The base case is Step 4. At $n\\geq1$, Step 6 gives the weak equivalences on both boundary unions and the hypotheses give $\\eta_{a_n^+},\\eta_{a_n^-}$. The discrete-pair comparison of Steps 1-2 gives weak equivalences on the coproducts of the two boundaries and on the coproducts of the two word-values. The third corner $C_{n-1}(\\eta)$ is a weak equivalence by induction. In the two natural pushout squares of [lem-coef-signed-word-boundary-pushout], the boundary-to-word-value map is monomorphic. The span comparison proved in Steps 1-2 therefore gives the weak equivalence on their fourth corners $C_n(E)\\to C_n(E')$.",
+   "uses": [
+    "lem-coef-signed-word-boundary-pushout",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 4.5 deduced from Proposition 4.3, printed p. 23."
+   }
+  },
+  {
+   "text": "The two sequences $C_n(E)$ and $C_n(E')$ have cofibrant initial objects and monomorphic successor maps by Step 4. They are cofibrant diagrams in the direct sequence Reedy model structure: the latching object is initial at zero and is $C_{n-1}$ at $n>0$. Their comparison is objectwise a weak equivalence by Step 7. Apply the sequence comparison proved in Steps 1-2 from [lem-coef-reedy-model-structure] and [lem-coef-brown-split-factorizations] to obtain a weak equivalence on their sequential colimits. Step 3 identifies this map with the asserted map of full signed-word colimits.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Propositions 4.2 and 4.5, printed pp. 22-23; sequential comparison justified by the direct Reedy model structure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-signed-word-boundary-pushout",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Section 4.1, Definitions 4.1 and 4.4 and Propositions 4.2, 4.3 and 4.5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -141,7 +252,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-homotopy-fractions-hammock-comparison",
@@ -149,5 +260,20 @@
   "group": "Q68"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-proper-word-colimit-invariance",
+  "worker": "stage1",
+  "summary": "Repaired the false boundary square; explicitly proved the needed coproduct, pushout and sequence comparisons using acyclic existing Reedy and Brown nodes, and wrote the finite-union double induction. The item statement is unchanged; one proper signed-word attachment node remains.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient adjunction in the displayed R Hom / R lim calculation: the signed-word mapping-space foundation follows Dwyer–Kan 4.1, 4.2, 4.3, 4.4 and 4.5. The elementary double induction and the Reedy/Brown comparison argument supply the details suppressed in 4.5."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NW-b31d4406e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b31d4406e (reviewer sub-agent of L); spot-checked: I read the item statement, all 8 steps, the new node lem-coef-signed-word-boundary-pushout and the full statements of every cited node (Kan-Quillen, Reedy, Brown split factorizations, the colimit, simplicial-set and category definitions). The item statement is unchanged and not weakened; it is not a target node. Source limit: the Dwyer-Kan and Hovey PDFs are cited by URL, are not in literature/, and network is blocked here, so I did not open them. I checked every step and the new statement on my own instead. Steps 1-2: I recomputed the Reedy structures on a discrete pair, a sequence and the span X<-A->B (degrees 0,1,2) and the relative matching maps of a constant fibration (p everywhere, identity at A). Colim therefore preserves (trivial) cofibrations, and the Brown argument (u=pi, ps=1, two-out-of-three) gives the coproduct, pushout and sequence comparisons with the correct latching objects. The existing lem-coef-model-cofibrant-colimit-comparison cannot be cited: my reachability check shows it reaches the item, so citing it would close a cycle. Proving the comparisons inline is therefore justified. Steps 3-5 are correct and elementary: colim over I equals colim of C_n, C_0=E(empty word), pushouts along injections are injective, and subword images intersect as X_S cap X_T = X_(S cap T) by properness. Step 6 is a lexicographic (r,k) induction with both bases; every S cap T has cardinality below r, and the union is a degreewise pushout with monomorphic legs. Steps 7-8 are correct. New node: I verified the attachment pushout with my own proof. Alternating length-n words have no nonidentity outgoing arrows, nonalternating length-n words retract to shorter words, nonidentity arrows factor as a surjection then an injection, and the boundary map is well defined by properness. Tested at n=1, on a constant point, on the discrete-positions functor and on the word ++. It is a statement-only node, self-contained, single-escaped TeX, with three recorded searches and correct created/blueprint fields. lean_audit is absent, which many recent nodes share; not a fault. It is strictly smaller than the item and not a restatement. No duplicate found by rg over dag/nodes. The graph is acyclic, every proof use is in unit sk-prop-sf-biduality-general or is a definition or Mathlib leaf, there are no tool_uses and no SGA. Minor and unchanged: the report's 'five proof steps' line is stale. No fixes."
+ }
 }

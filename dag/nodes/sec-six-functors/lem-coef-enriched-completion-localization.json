@@ -25,9 +25,104 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=\\operatorname{Algd}(\\mathcal V)$ and let $p:E\\to\\mathcal S$ be its object-space projection. By [lem-coef-algebroid-object-space-fibration] this is a Cartesian fibration for the arbitrary monoidal $\\mathcal V$ in the item. Apply the first comparison of [lem-coef-simplicial-presheaf-localization-comparison] to the terminal ordinary category $D=\\{*\\}$ and the empty set of localization arrows. Evaluation at $*$ identifies its simplicial presheaves with $\\mathrm{sSet}$, its objectwise weak equivalences with weak homotopy equivalences, and $\\operatorname{Fun}(N(D)^{\\mathrm{op}},\\mathcal S)$ with $\\mathcal S$. Thus objectwise passage to spaces gives a localization $j:N(\\mathrm{sSet})\\to\\mathcal S$, with the full functor-category universal property. Form $E_\\Delta=N(\\mathrm{sSet})\\times_{\\mathcal S}E$, with projection $j':E_\\Delta\\to E$. An object is a simplicial model $K$ together with an algebroid whose object space is identified with $jK$. Pulling back further along constant simplicial sets $c:\\mathrm{Set}\\to\\mathrm{sSet}$ gives $E_{\\mathrm{Set}}$, the subcategory in the item: the realization of $cI$ is the disjoint union of one point per element of $I$, naturally in $I$, so $j(cI)$ is the discrete space $I$. On $E_\\Delta$ define $W_\\Delta=(j')^{-1}(\\mathrm{FFES})$; on $E_{\\mathrm{Set}}$ this is the stated class $\\mathrm{FFES}$. These are the enriched functors of [def-coef-complete-algebroid]. The equivalence-class description of essential surjectivity used here agrees with the surjectivity of $\\pi_0\\iota$ in the current [def-coef-complete-algebroid], by the object-equivalence criterion of [lem-coef-algebroid-object-space-fibration]. All categories are small after the permitted universe enlargement.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.3.17 proof, first two pullback squares"
+   }
+  },
+  {
+   "text": "Construct the right adjoint $s$ to $i':E_{\\mathrm{Set}}\\to E_\\Delta$. The constant-simplicial-set functor has right adjoint $K\\mapsto K_0$: a simplicial map $cI\\to K$ is exactly a function $I\\to K_0$, since every higher simplex of $cI$ is the unique degeneracy of a vertex. For $(K,A)$ define $s(K,A)=u_K^*A$, where $u_K:j(cK_0)\\to jK$ is induced by the vertex map $cK_0\\to K$. By the Cartesian mapping-space formula of [lem-coef-algebroid-object-space-fibration], maps from $i'B$, for $B$ with object set $I$, to $(K,A)$ are the disjoint union over simplicial maps $cI\\to K$ of the fibrewise spaces of algebra maps $B\\to f^*A$. The corresponding disjoint union for maps $B\\to s(K,A)$ is identical under $\\operatorname{Hom}(cI,K)=\\operatorname{Hom}(I,K_0)$. This natural identification of mapping spaces, induced by composition with the restriction map $\\epsilon_{K,A}$ below, shows that $B\\mapsto\\operatorname{Map}_{E_\\Delta}(i'B,(K,A))$ is represented by $s(K,A)$ for every $(K,A)$; by [lem-coef-infinity-pointwise-adjoint-criterion] the representing objects assemble to a right adjoint, so this constructs $i'\\dashv s$, with identity unit $si'\\simeq\\mathrm{id}$ and counit $\\epsilon_{K,A}:i's(K,A)\\to(K,A)$ the restriction map over $cK_0\\to K$.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.3.17 proof, construction of the right adjoint s"
+   }
+  },
+  {
+   "text": "The counit is fully faithful by the restriction formula of [lem-coef-algebroid-object-space-fibration]. Every component of $jK$ contains a vertex of $K$: a point of the geometric realization lies in the image of some simplex, and the straight segment inside that simplex joins it to the image of a vertex. Since $j$ is passage to the homotopy type, the same component assertion holds in $jK$. Paths in the object space give equivalences in $A$ by the fibration statement, so every object of $A$ is equivalent to an image of a vertex; the counit is essentially surjective. The functor $i'$ preserves FFES, since its underlying enriched functor is unchanged. So does $s$: full faithfulness is the same mapping-object equivalence restricted to vertices. For essential surjectivity, start with a target vertex, choose an equivalent image object under the original functor, and replace its source object by a vertex in its component. This gives an equivalence between the required target and a source vertex image. It is an equivalence already in the restricted algebra: its arrow, inverse and inverse identities use exactly the same mapping spaces and composition as in the original algebra. Hence $s(W_\\Delta)\\subseteq\\mathrm{FFES}$.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.3.17 proof, FFES counit and preservation under s; direct verification in place of invoking Proposition 5.3.9"
+   }
+  },
+  {
+   "text": "After localizing, $i'$ and $s$ induce functors in opposite directions because of step 3. Their unit and counit induce natural transformations by the functor-category universal property of localization: compose the original transformations with the localization functors and use the fully faithful restriction equivalences on functor categories. The unit is already an equivalence and every counit component lies in $W_\\Delta$, so both localized transformations are equivalences. The localized functors are therefore inverse equivalences\n$$E_{\\mathrm{Set}}[\\mathrm{FFES}^{-1}]_\\infty\\simeq E_\\Delta[W_\\Delta^{-1}]_\\infty.$$\nThis is the elementary unit/counit argument of Lemma 5.3.14, written here rather than made into a new node.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.14 and first equivalence in the proof of Theorem 5.3.17"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-localization-cartesian-pullback] to the localization $j$ constructed in step 1 from [lem-coef-simplicial-presheaf-localization-comparison], and to the Cartesian fibration $p$ of [lem-coef-algebroid-object-space-fibration]. The weak homotopy equivalences contain all equivalences of $N(\\mathrm{sSet})$, namely simplicial isomorphisms; $j$ has the full functor-category universal property; and $p$ is Cartesian. Therefore $j':E_\\Delta\\to E$ is localization at arrows $T$ whose base is a weak homotopy equivalence and whose image in $E$ is an equivalence. In particular $T\\subseteq W_\\Delta$: an equivalence of algebroids has an inverse enriched functor and hence is fully faithful and essentially surjective. Restriction along $j'$ identifies functors out of $E$ with the full subcategory of functors out of $E_\\Delta$ inverting $T$.",
+   "uses": [
+    "lem-coef-localization-cartesian-pullback",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 5.3.16 and second comparison in the proof of Theorem 5.3.17"
+   }
+  },
+  {
+   "text": "Under the restriction equivalence in step 5, the full subcategories inverting FFES and $W_\\Delta$ correspond. One direction follows from $W_\\Delta=(j')^{-1}(\\mathrm{FFES})$. Conversely let $H:E\\to\\mathcal T$ have $Hj'$ invert $W_\\Delta$, and let $F:A\\to B$ be FFES in $E$. Use [lem-coef-cosimplicial-frame-mapping] for the model structure of [lem-coef-kan-quillen-right-proper]. Every simplicial set is cofibrant (its initial map is a monomorphism); fibrant objects are Kan complexes. The object-representation clause gives Kan complexes $K,L$ with $jK\\simeq pA$, $jL\\simeq pB$, because step 1 identifies the model localization with $\\mathcal S$. Restrict $A,B$ along these equivalences using [lem-coef-algebroid-object-space-fibration]; restriction along an inverse space equivalence supplies the inverse algebra map, and the two identities follow from coherent restriction. Thus this replaces them and $F$ by equivalent objects and an equivalent arrow. For these $K,L$, the actual-map clause of [lem-coef-cosimplicial-frame-mapping] represents the component of the resulting object-space map by an actual simplicial map $f:K\\to L$. Write $F':A'\\to B'$ for the replaced arrow and choose the resulting path $h:pF'\\simeq jf$ in $\\operatorname{Map}_{\\mathcal S}(jK,jL)$. The pullback defining $E_\\Delta$ gives\n$$\\operatorname{Map}_{E_\\Delta}((K,A'),(L,B'))\\simeq\\operatorname{Hom}_{\\mathrm{sSet}}(K,L)\\times^h_{\\operatorname{Map}_{\\mathcal S}(jK,jL)}\\operatorname{Map}_E(A',B').$$\nThus the triple $(f,F',h)$ is a point of this mapping space and defines the required arrow $\\widetilde F$ over $f$ whose image is $F'$. Equivalently, the homotopy-fibre formula of [lem-coef-algebroid-object-space-fibration] identifies this triple with a fibrewise algebra map $A'\\to(jf)^*B'$. Its image is equivalent to $F$, so is FFES (inverse enriched functors induce equivalences on mapping objects and on underlying objects, and composition preserves both conditions). Thus $\\widetilde F\\in W_\\Delta$ and $H(F)$ is an equivalence. This proves the correspondence for every $\\mathcal T$; the subcategories are full and inherit their mapping spaces. The universal property yields\n$$E_\\Delta[W_\\Delta^{-1}]_\\infty\\simeq E[\\mathrm{FFES}^{-1}]_\\infty.$$\nComposing with step 4 gives the equivalence induced by the original inclusion.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.3.17 proof, last localization and composition; actual-map representatives supplied by the existing model-localization mapping-space theorem"
+   }
+  },
+  {
+   "text": "For a monoidal functor $\\mathcal V\\to\\mathcal W$, postcomposition on algebras commutes with restriction in the object-space fibration and preserves FFES by [lem-coef-algebroid-object-space-fibration]. It therefore gives a commutative square of the original inclusions and, by localization's functor-category universal property, of their localized functors. The horizontal functors are the equivalences just proved; their coherent naturality is inherited from postcomposition and the fully faithful restriction on functor categories. All localizations and equivalences used are those of infinity-categories. Consequently mapping spaces and coherent compositions, not just homotopy-category Hom sets, are retained.",
+   "uses": [
+    "lem-coef-algebroid-object-space-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 3.6.1 and 4.3.1, Definition 3.6.12; Theorem 5.3.17 and functoriality of its inclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-algebroid-object-space-fibration",
+  "lem-coef-simplicial-presheaf-localization-comparison",
+  "def-coef-complete-algebroid",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-localization-cartesian-pullback",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Theorem 5.3.17 proof, expanded via its two pullback categories, vertex right adjoint and Proposition 5.3.16. Source read online, not locally archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -112,15 +207,108 @@
    "results": "{\"t\": \"2026-10-16T14:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical algebras with a set of objects or a space of objects have equivalent localizations at fully faithful essentially surjective maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isLocalization_isLocal\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.LocalizerMorphism.isEquivalence\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.Localization.uniq\", \"CategoryTheory.Localization.essSurj\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\"], \"digest\": \"c3f4bdf19fcd38eb\"}",
    "date": "2026-10-16",
    "verdict": "no match: No match: CategoryTheory.Localization.isEquivalence at CategoryTheory/Localization/Equivalence.lean:62-63 assumes ordinary functors and inverse comparisons; it does not compare enriched categorical algebras with discrete and arbitrary object spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete-object reduction for localization of enriched categorical algebras at fully faithful essentially surjective functors",
+   "results": "{\"t\": \"2026-10-16T14:40:28Z\", \"tool\": \"leanfinder\", \"query\": \"Discrete-object reduction for localization of enriched categorical algebras at fully faithful essentially surjective functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatEnrichedOrdinary.toBase\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\"], \"digest\": \"5fb69ca6017df77a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization, EnrichedCategory, FullyFaithful",
+   "results": "{\"t\": \"2026-10-16T14:40:29Z\", \"tool\": \"loogle\", \"query\": \"Localization, EnrichedCategory, FullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'EnrichedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*completion|categorical.?algebra|fully.?faithful.*essentially.?surjective",
+   "results": "{\"t\": \"2026-10-16T14:40:30Z\", \"tool\": \"grep\", \"query\": \"enriched.*completion|categorical.?algebra|fully.?faithful.*essentially.?surjective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Preadditive/Basic.lean\", \"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\"], \"digest\": \"3ae2f5ef553bea23\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "grep",
+   "query": "FFES|fully.?faithful.*essentially.?surjective|Alg.*cat",
+   "results": "{\"t\": \"2026-10-16T14:43:10Z\", \"tool\": \"grep\", \"query\": \"FFES|fully.?faithful.*essentially.?surjective|Alg.*cat\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/GuitartExact/Quotient.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\"], \"digest\": \"41fb90d1ced726eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algcat, FFES, localization",
+   "results": "{\"t\": \"2026-10-16T14:43:10Z\", \"tool\": \"loogle\", \"query\": \"Algcat, FFES, localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algcat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical algebras with set-valued object spaces have the same localization at fully faithful essentially surjective functors as those with space-valued object spaces",
+   "results": "{\"t\": \"2026-10-16T14:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical algebras with set-valued object spaces have the same localization at fully faithful essentially surjective functors as those with space-valued object spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall'_def\", \"CategoryTheory.ObjectProperty.isLocalization_isLocal\", \"CategoryTheory.Localization.essSurj\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\"], \"digest\": \"45763ca75fd967be\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical algebras with discrete sets of objects and arbitrary spaces of objects have equivalent infinity localizations at fully faithful essentially surjective functors",
+   "results": "{\"t\": \"2026-10-16T14:45:24Z\", \"tool\": \"leansearch\", \"query\": \"Categorical algebras with discrete sets of objects and arbitrary spaces of objects have equivalent infinity localizations at fully faithful essentially surjective functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.Localization.Construction.objEquiv\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.LocallyDiscrete.instInhabited\", \"CategoryTheory.LocallyDiscrete\", \"CategoryTheory.piEquivalenceFunctorDiscrete\", \"CategoryTheory.Localization.isEquivalence\", \"Condensed.discrete\"], \"digest\": \"1def4ce83ef1f8b6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual hits concern ordinary enriched categories, ordinary localization, or unrelated categorical algebra; no operadic discrete-object localization theorem. Loogle reports unknown identifiers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Set object enriched infinity categories and space object enriched infinity categories have equivalent localizations at fully faithful essentially surjective functors",
+   "results": "{\"t\": \"2026-10-16T15:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"Set object enriched infinity categories and space object enriched infinity categories have equivalent localizations at fully faithful essentially surjective functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Localization.instIsEquivalenceFunctorFunctorsInvertingWhiskeringLeftFunctor\", \"CategoryTheory.Localization.qCompEquivalenceFromModelFunctorIso\"], \"digest\": \"0dbe9f090f7459b2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary category localization, cofibrant-object homotopy categories, condensed discreteness, or the Cat-enriched bicategory of quasicategories. None compares operadic enriched algebras with sets versus spaces of objects. The targeted grep finds only a Lie-algebroid comment; Loogle returns zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T15:49:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary category localization, cofibrant-object homotopy categories, condensed discreteness, or the Cat-enriched bicategory of quasicategories. None compares operadic enriched algebras with sets versus spaces of objects. The targeted grep finds only a Lie-algebroid comment; Loogle returns zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*localization|localization.*enriched|algebroid|FFES",
+   "results": "{\"t\": \"2026-10-16T15:49:27Z\", \"tool\": \"grep\", \"query\": \"enriched.*localization|localization.*enriched|algebroid|FFES\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\"], \"digest\": \"40e397c2a6144fb4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary category localization, cofibrant-object homotopy categories, condensed discreteness, or the Cat-enriched bicategory of quasicategories. None compares operadic enriched algebras with sets versus spaces of objects. The targeted grep finds only a Lie-algebroid comment; Loogle returns zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Discrete object reduction for homotopy coherent localization of enriched categorical algebras",
+   "results": "{\"t\": \"2026-10-16T15:49:28Z\", \"tool\": \"leansearch\", \"query\": \"Discrete object reduction for homotopy coherent localization of enriched categorical algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.IsDiscrete\", \"Condensed.discrete.congr_simp\", \"CategoryTheory.Functor.IsLocalization.instDiscreteObjWhiskeringRightFunctorCategoryOfFiniteOfContainsIdentities\", \"CategoryTheory.locallyDiscreteBicategory\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.LocallyDiscrete.instInhabited\", \"CategoryTheory.LocalizedMonoidal\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"9bfdddeacf910025\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary category localization, cofibrant-object homotopy categories, condensed discreteness, or the Cat-enriched bicategory of quasicategories. None compares operadic enriched algebras with sets versus spaces of objects. The targeted grep finds only a Lie-algebroid comment; Loogle returns zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-enrichment-rectification",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-enriched-completion-localization",
+  "worker": "stage1",
+  "summary": "Expanded Gepner–Haugseng Theorem 5.3.17 into seven steps with two statement-only supporting nodes. Second reading removed the simplicial-set localization duplicate, specializing the existing simplicial-presheaf comparison at a point and using existing Kan–Quillen and cosimplicial-frame statements for actual map representatives. Arbitrary monoidal enrichment, both comparisons and naturality retained.",
+  "blueprint": "Proof paragraph 2, coherent finite coefficient adjunction before R lim: interpretation of relative dg categories in the derived enrichment. Sublemma: replace variable object spaces by discrete object sets before localizing at fully faithful essentially surjective functors (Gepner–Haugseng Theorem 5.3.17).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-5bdaf12ea",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5bdaf12ea (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the statement of every cited node. Gepner–Haugseng arXiv:1312.3178v4 has no local copy and this service blocks network access, so I checked each step mathematically rather than at the cited GH places; the precedent in the same unit is GH online-only sources, and the WANTED request for an archive stands. The item keeps GH Thm 5.3.17's hypothesis (arbitrary monoidal V, no presentability). The item statement is true on the small cases I tried: V terminal gives [1] on both sides; V = spaces is the Segal-space case; an empty object space works throughout. Steps 1 and 3–7 check out. Step 1 applies the presheaf comparison at D = {*} with S = ∅. Step 3: the counit is FF because Cartesian = FF, and ES because every component of |K| contains a vertex; s preserves FFES; tested with K = ∅ and a circle. Step 4 is a few lines from the localization universal property, so marking it elementary is accepted. Step 5: every hypothesis of the Cartesian-pullback node holds, and T ⊆ W_Δ. Step 6 uses the Kan–Quillen and frame nodes for fibrant objects and actual-map representatives. Step 7: naturality from the fibration node's postcomposition clause, true for strong and for lax monoidal functors. New node lem-coef-algebroid-object-space-fibration is true for arbitrary monoidal V: Cartesian iff FF, the fibre formula, ι_0A ≃ X_A, the π0ι/object-equivalence comparison, and change of enrichment. New node lem-coef-localization-cartesian-pullback is true (GH Prop 5.3.16 / Hinich base change), tested on p = id, a terminal base with C = [1], W = equivalences, and an empty E. Neither new node restates a clause of the item; neither duplicates an existing node (checked against the cartesian-fibration and 1312.3178 hits and the presentable algebroid nodes); neither is a Mathlib leaf. Every citation is in unit sk-prop-sf-biduality-general, with no tool_uses, no SGA and no target involvement. One fault, C1/C2: step 2 builds i' ⊣ s from pointwise representability, which is exactly the existing same-unit node lem-coef-infinity-pointwise-adjoint-criterion, but the step was marked elementary and did not cite it. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-enriched-completion-localization.json: step 2 now cites the node, is marked non-elementary, and proof_deps is updated; no statement changed.; 1 file(s) fixed by the reviewer"
+ }
 }

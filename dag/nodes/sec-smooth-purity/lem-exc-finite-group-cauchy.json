@@ -1,0 +1,88 @@
+{
+ "id": "lem-exc-finite-group-cauchy",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph: 'Its kernel is a p-group'; the finite-group input converting divisibility of nonidentity element orders into a p-power group order.",
+   "via": [
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "exists_prime_orderOf_dvd_card'",
+  "file": "Mathlib/GroupTheory/Perm/Cycle/Type.lean",
+  "line": 544,
+  "how": "specializes in one line: exists_prime_orderOf_dvd_card' (G := H) q at lines 544-548, taking H to be the given finite subgroup of (L ≃ₐ[K] L). Its Group instance is the subgroup group structure, and Finite H is an explicit hypothesis. No property of the field extension is required by Cauchy's general statement. The Fintype version is at line 499. Both declarations were read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-finite-dvr-tame-inertia",
+  "date": "2026-10-17",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "title": "Cauchy's theorem for a finite field-automorphism group",
+ "statement": "Let $L/K$ be a field extension [def-pc-field-extension]. Let $H$ be a finite subgroup of the group of $K$-algebra automorphisms of $L$, with composition as multiplication. If $q$ is a prime natural number dividing $|H|$, then there exists $h\\in H$ whose order is exactly $q$; the order of $h$ means the least positive integer $m$ with $h^m=1$.",
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EE (lemma-galois-inertia), proof of the p-group assertion, the finite-group implication in the sentence 'Thus every element of the kernel ... has order divisible by p, i.e., ... is a p-group'. Cauchy is the standard input to that implication; its explicit statement is Mathlib/GroupTheory/Perm/Cycle/Type.lean:544-548."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy theorem for a finite group every prime divisor of its order is the order of an element",
+   "results": "Search returned 8 hits: exists_prime_orderOf_dvd_card, exists_prime_orderOf_dvd_card', exists_prime_addOrderOf_dvd_card', exists_prime_addOrderOf_dvd_card, isCyclic_of_card_le_orderOf, mem_zpowers_of_prime_card, mem_powers_of_prime_card, Sylow.exists_subgroup_card_pow_prime. ",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' states exactly this; current source read at lines 544-548."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group whose cardinality is divisible by a prime has an element of that order",
+   "results": "Search returned 8 hits: exists_prime_addOrderOf_dvd_card, exists_prime_orderOf_dvd_card', exists_prime_orderOf_dvd_card, exists_prime_addOrderOf_dvd_card', IsPGroup.of_card, Nat.Prime.exists_orderOf_eq_pow_factorization_exponent, IsPGroup.exists_card_eq, isCyclic_of_card_dvd_prime. ",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' states exactly this; current source read at lines 544-548."
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_prime_orderOf_dvd_card",
+   "results": "Search returned 1 hits: exists_prime_orderOf_dvd_card. ",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' states exactly this; current source read at lines 544-548."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_prime_orderOf_dvd_card|exists_orderOf_eq_prime",
+   "results": "Search returned 14 hits: Mathlib/GroupTheory/PGroup.lean, Mathlib/GroupTheory/OrderOfElement.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Torsion.lean, Mathlib/GroupTheory/Torsion.lean, Mathlib/GroupTheory/Torsion.lean, Mathlib/GroupTheory/Torsion.lean. ",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' states exactly this; current source read at lines 544-548.",
+   "subdirectory": "GroupTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy theorem for a finite subgroup of automorphisms of a field extension: a prime divisor of its order is the order of an element",
+   "results": "Search returned 8 hits: exists_prime_orderOf_dvd_card, exists_prime_orderOf_dvd_card', FiniteField.Extension.exists_frob_pow_eq, fixedByFinite, IsGaloisGroup.finite, FiniteField.instIsCyclicAlgEquivOfFinite, AlgEquiv.card_le, IsGaloisGroup.fixedPoints",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' specializes directly to the subgroup H; the query for the contextual statement returned the same general Cauchy theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.Prime, orderOf",
+   "results": "Search returned 12 hits: orderOf_eq_prime, orderOf_eq_prime_iff, Commute.orderOf_mul_eq_left_of_forall_prime_mul_dvd, Commute.orderOf_mul_eq_right_of_forall_prime_mul_dvd, exists_orderOf_eq_prime_pow_iff, orderOf_eq_of_pow_and_pow_div_prime, orderOf_eq_prime_pow, Equiv.Perm.IsCycle.isCycle_pow_pos_of_lt_prime_order.",
+   "date": "2026-10-17",
+   "verdict": "match: exists_prime_orderOf_dvd_card' appears among the returned hits and specializes to the given finite subgroup; pinned Type.lean:544-548 read."
+  }
+ ]
+}

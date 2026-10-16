@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-ctf-finite-compact-etale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-Tor constructible complexes are compact in the étale derived category",
- "statement": "Let $A$ be a finite $\\ell$-primary ring and $X$ a scheme of the standing setting (finite type over the base\nfield, so all $\\operatorname{cd}_\\ell$ are finite). Every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ is compact in\n$\\D(X_{\\mathrm{ét}},A)$: for every family $(K_s)$ in $\\D(X_{\\mathrm{ét}},A)$,\n$\\bigoplus_s\\Hom(C,K_s)\\to\\Hom(C,\\bigoplus_sK_s)$ is an isomorphism.",
+ "statement": "Let $A$ be a finite $\\ell$-primary ring and $X$ a scheme of the standing setting (finite type over the base\nfield, so all $\\operatorname{cd}_\\ell$ are finite). Every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ is compact in\n$\\D(X_{\\mathrm{ét}},A)$: for every family $(K_s)$ in $\\D(X_{\\mathrm{ét}},A)$,\n$\\bigoplus_s\\Hom(C,K_s)\\to\\Hom(C,\\bigoplus_sK_s)$ is an isomorphism.\n\nHere the standing field is $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne\\operatorname{char}k$ as in [def-weil-finite-field-fiber]; $A$ is commutative and $\\ell^rA=0$ for some $r\\geq0$, as in the parent proposition. The category $\\D(X_{\\mathrm{ét}},A)$ is the ordinary unbounded derived category of constant-$A$ module sheaves [def-weil-pbc-derived-categories]. Its full subcategory $\\Dctf$ consists of objects with bounded constructible cohomology [def-weil-pbc-etale-constructible-sheaf] and Tor amplitude in some finite interval [def-kun-tor-amplitude]. Compactness and the indexing universe are those of [def-pc-compact-object; def-weil-size-convention].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
   "place": "node det-ctf-finite-compact-etale, order None",
@@ -22,40 +22,151 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-tor-amplitude",
+  "def-pc-compact-object",
+  "def-weil-size-convention"
+ ],
  "proof": [
   {
-   "text": "*Generators.* By [sk-lem-sf-flat-model] (étale form), $\\Dctf(X_{\\mathrm{ét}},A)$ is generated under shifts,\nfinite extensions and direct summands by sheaves $a_!L$, with $a\\colon S\\hookrightarrow X$ locally closed and\n$L$ locally constant with finite projective local models. The compact objects of a triangulated category\nwith sums form a thick subcategory (five lemma for cones; a summand of a compact object is compact since\nthe comparison map for it is a retract of an isomorphism). So it suffices to treat $C=a_!L$.",
+   "text": "Apply the first clause of [lem-pur-etale-finite-ring-compact-generators] with $T=X$ and $C=A$. Its hypotheses hold: the standing field $k=\\overline{\\mathbf F}_q$ of [def-weil-finite-field-fiber] is algebraically closed; $\\ell\\ne p=\\operatorname{char}k$, so $\\ell$ is invertible in $k$; $X$ is a finite-type $k$-scheme, and no separatedness is required there; $A$ is a finite commutative ring with $\\ell^rA=0$. Its category is the same ordinary unbounded derived category $D(X_{\\mathrm{et}},A)$ of constant-$A$ module sheaves on the small étale site [def-weil-pbc-derived-categories]. Its bounded constructible condition is the item's: only finitely many nonzero $H^i$, each constructible in the sense of [def-weil-pbc-etale-constructible-sheaf]. Its finite Tor amplitude condition, $H^i(E\\otimes^{\\mathbf L}_AN)=0$ for every degree-zero module sheaf $N$ and $i\\notin[r,s]$, is the condition of [def-kun-tor-amplitude] for some finite interval. Compactness is that of [def-pc-compact-object] for set-indexed families in the universe of [def-weil-size-convention]. Hence every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ is compact in $\\D(X_{\\mathrm{ét}},A)$. Edge cases are included in that statement: the empty scheme and the zero ring give the zero category, in which every map is an isomorphism, and the empty family gives the comparison $0\\to\\operatorname{Hom}(C,0)=0$.",
    "uses": [
-    "sk-lem-sf-flat-model"
+    "lem-pur-etale-finite-ring-compact-generators"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Formula.* Write $a=i\\circ u$ ($i\\colon Z\\hookrightarrow X$ closed, $u\\colon S\\hookrightarrow Z$ open) and let\n$j\\colon X\\setminus Z\\hookrightarrow X$ be the complement. $L$ is dualizable with dual\n$L^\\vee=\\underline{\\operatorname{Hom}}_A(L,A_S)$, so $L\\otimes-$ has right adjoint $L^\\vee\\otimes-$. Using\n$a_!=i_*u_!$, $u_!\\dashv u^*$, $i_*\\dashv R\\underline\\Gamma_Z$ (étale form of part (1) of\n[sk-lem-formal-closed-support]) and $\\Hom(L\\otimes A_S,M)=\\Hom(A_S,L^\\vee\\otimes M)$:\n\n$$\nR\\operatorname{Hom}_X(a_!L,K)=R\\operatorname{Hom}_S(L,u^*R\\underline\\Gamma_ZK)=R\\Gamma\\bigl(S,L^\\vee\\otimes_Au^*R\\underline\\Gamma_ZK\\bigr),\n\\qquad R\\underline\\Gamma_ZK=i^*\\fib(K\\to Rj_*j^*K).\n$$",
-   "uses": [
-    "sk-lem-formal-closed-support"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Sums.* Each functor in $K\\mapsto R\\Gamma(S,L^\\vee\\otimes u^*i^*\\fib(K\\to Rj_*j^*K))$ preserves arbitrary\ndirect sums of unbounded complexes: $j^*$, $i^*$, $u^*$ are left adjoints; $L^\\vee\\otimes-$ is a left adjoint;\nfibers commute with sums; and $Rj_*$, $R\\Gamma(S,-)$ have finite cohomological dimension on $\\ell$-primary\ntorsion sheaves in our setting, so they commute with direct sums of unbounded complexes (Stacks, Tag\n0F11), for $A$-modules because derived direct image and global sections commute with forgetting the\ncoefficient ring (Stacks, Tag 0D6J). Hence\n$R\\operatorname{Hom}(a_!L,\\bigoplus K_s)=\\bigoplus R\\operatorname{Hom}(a_!L,K_s)$, and taking $H^0$ gives\n$\\Hom(a_!L,\\bigoplus K_s)=\\bigoplus\\Hom(a_!L,K_s)$ (cohomology of complexes of abelian groups commutes with\nsums).",
-   "uses": [],
-   "elementary": null
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.proof.md",
+    "place": "Generators, Formula and Sums (whole proof; carried by the existing generalization)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-sf-flat-model",
-  "sk-lem-formal-closed-support"
+  "lem-pur-etale-finite-ring-compact-generators"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.proof.md",
+  "place": "Generators, Formula and Sums; specialization of the existing DAG node lem-pur-etale-finite-ring-compact-generators"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite-Tor constructible complex on an etale site is compact in the unbounded derived category",
+   "results": "DerivedCategory.TStructure.t; HasDerivedCategory.standard; DerivedCategory.IsGE; DerivedCategory.IsLE; no compactness theorem for constructible etale complexes",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "compact object triangulated category coproducts",
+   "results": "0 hits; unknown identifier compact",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; no absence claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor constructible complexes are compact in the etale derived category",
+   "results": "CategoryTheory.HasExt; Finite.compactSpace; DerivedCategory.TStructure.t; no exact result",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness of bounded constructible finite Tor complexes in the unbounded derived category of etale sheaves",
+   "results": "DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.instEssSurjCochainComplexIntQ; no compactness theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject",
+   "results": "0 hits; unknown identifier IsCompactObject",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; no absence claim"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*constructible|finite.*cohomological.*dimension|preserves.*coproduct",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*Tor.*compact|derived.*coproduct.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|preservesCoproducts_rightDerivedLowerStar",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCompactObject",
+   "results": "; loogle: unknown identifier 'CategoryTheory.IsCompactObject'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; no absence claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant finite projective sheaves are dualizable and compact in the derived category of etale module sheaves",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functor; CondensedMod.isDiscrete_tfae; Condensed.finFree; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CompactObject|compact.*constructible|constructible.*compact|finite.*Tor.*compact",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible complex with finite Tor amplitude is compact in the derived category of etale module sheaves",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.TStructure.t; HomologicalComplex.isGrothendieckAbelian; CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁; SheafOfModules.IsFiniteType; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor constructible etale sheaf complexes are compact objects of the unbounded derived category",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; HasDerivedCategory.standard; DerivedCategory.IsLE; HasDerivedCategory; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instEssSurjCochainComplexIntQ; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf with finite projective stalks is a compact object in the unbounded derived category on an etale site of finite cohomological dimension",
+   "results": "Condensed.finFree; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; LightCondensed; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.ofSheafProfinite; Condensed.lanSheafProfinite; CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-16",
+   "verdict": "no exact match: condensed-sheaf constructions and Grothendieck-category instances do not assert derived etale compactness"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompact|compactObject|CompactObject|PreservesCoproduct",
+   "results": "Mathlib/CategoryTheory/Preadditive/LeftExact.lean; Mathlib/CategoryTheory/Preadditive/LeftExact.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: generic coproduct-comparison and biproduct lemmas do not assert constructible etale compactness"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -70,5 +181,29 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ctf-finite-compact"
+ "unit": "sk-prop-ctf-finite-compact",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-ctf-finite-compact-etale",
+  "worker": "stage1",
+  "summary": "Resumed sandbox audit: checked every citation against its statement and the current blueprint route; repaired the termwise closed-pushforward justification, expanded affine finite-type checks, corrected agent proof provenance, and reconciled Mathlib records with actual search logs. Six steps, no new nodes or Mathlib leaves. Independent second reading checked all six steps and 21 full citation quotes, expanded the affine-preimage test for the open immersion to be qcqs, and ran two fresh Mathlib searches. Maintainer reader (2026-10-17): the item is the special case $k=\\overline{\\mathbf F}_q$, $T=X$, $C=A$ of the first clause of the existing reviewed node lem-pur-etale-finite-ring-compact-generators (any algebraically closed field, finite commutative $\\ell$-primary ring); the delivered six-step proof duplicated that node's route (its steps 2-3 and the unsplit lem-pur-etale-lisse-stratum-compact). The proof is replaced by one step citing the generalization, as the sibling det-ctf-finite-comparison-whole already does.",
+  "blueprint": "The single step realizes the whole blueprint proof (Generators, Formula, Sums) through the existing generalization lem-pur-etale-finite-ring-compact-generators, whose proof follows the same generator reduction via sk-lem-sf-flat-model and generator compactness via lem-pur-etale-lisse-stratum-compact.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-finite-ring-compact-generators",
+    "why": "Existing reviewed statement (unit sk-def-sf-operations) whose first clause is this item for any algebraically closed field; citing it avoids a second proof of the same theorem. No node of this compactness unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-finite-ring-compact-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-6d2808b44",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-6d2808b44 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the report, the 6 stmt_deps and 18 proof_deps statements, the blueprint main-20261015 Generators/Formula/Sums paragraphs and the unit record, and Stacks 0F11, 0D6J, 04CA, 09QH, 08JA and 07D9. The statement and its étale coefficient category (ordinary unbounded D(X_et,A), finite commutative ℓ-primary A, k = F̄_q) are correct, and nothing is weakened. The delivered six-step proof is also mathematically sound. Step 1 correctly uses the Noetherian complement of sk-lem-sf-flat-model, since its main clause is pro-étale only. Step 2 correctly replaces the pro-étale sk-lem-formal-closed-support with étale tool lemmas. Step 4 checks the qcqs and finite-cohomological-dimension hypotheses, and does not stretch 0F11 (stated for Z/n only) to general A. Step 5 treats 'fib' as a functor, which is loose but fixable with a five-lemma argument. Finding (C5, duplicate): the existing reviewed node lem-pur-etale-finite-ring-compact-generators (sec-smooth-purity, reviewed pass on 2026-10-16) already states this item as its first clause, for any algebraically closed field, with the same definitions of bounded constructible, finite Tor amplitude and compactness. The item is the case k = F̄_q, T = X, C = A. The sibling det-ctf-finite-comparison-whole already applies that node with T = X, C = A. Delivered steps 2–5 repeat the unsplit lem-pur-etale-lisse-stratum-compact. Its dependency closure (2904 nodes) does not contain the item, so citing it makes no cycle. Fix: fixes/dag/nodes/sec-six-functors-basics/det-ctf-finite-compact-etale.json replaces the proof with one step citing that node, checking each hypothesis and edge case. proof_deps is now that single node, split_report.tool_uses is that single node, and the summary and blueprint entries are updated. Statement and all other fields are unchanged. No new nodes. Details, and a note that steps 2–5 can be reused to prove lem-pur-etale-lisse-stratum-compact, are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -29,9 +29,144 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C$ for the old cofibrations, $W_0$ for the old weak equivalences, $\\mathcal Z$ for the old fibrant $T$-local objects, and $W$ for the stated $T$-equivalences. By [lem-coef-simplicial-model-nerve-localization], $\\operatorname{Map}^h$ is a mapping space in the old localization, so it sends $W_0$ to equivalences in either variable. Hence $W_0\\subseteq W$, $\\mathcal Z$ is closed under old weak equivalences between fibrant objects, and $W$ is closed under arrow retracts and has two-out-of-three: apply each functor $\\operatorname{Map}^h(-,Z)$ and these properties of equivalences of spaces. The enriched and derived tests agree for the cofibrant endpoints of $T$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; identify local tests and elementary closure properties of W Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "For a cofibration $i$, [lem-coef-cofibration-local-mapping-test] identifies $i\\in W$ with trivial fibrancy of every $\\underline{\\operatorname{Map}}(i,Z)$, $Z\\in\\mathcal Z$, even when the source of $i$ is not cofibrant. By [lem-coef-kan-quillen-right-proper] this is equivalent, by tensor/cotensor adjunction, to $i$ having the left lifting property against every $Z^{\\Delta^n}\\to Z^{\\partial\\Delta^n}$. Since $C$ itself is a left lifting class, $C\\cap W$ is the intersection of two left lifting classes. Retract and pushout closure follow from [lem-coef-lifting-class-closure]. For a transfinite composite, construct a lift successively at each successor stage; at a limit stage its compatible earlier lifts give the required map by the colimit universal property. Thus this intersection is weakly saturated, including coproducts (attach the summands in a well-order).",
+   "uses": [
+    "lem-coef-cofibration-local-mapping-test",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; verify weak saturation of the new trivial cofibrations Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "Choose a small old generating set $J$ of trivial cofibrations. For $t:A\\to B$ in $T$ and $n\\geq0$ put $t\\mathbin\\square\\partial_n:(A\\otimes\\Delta^n)\\amalg_{A\\otimes\\partial\\Delta^n}(B\\otimes\\partial\\Delta^n)\\to B\\otimes\\Delta^n$ and set $S=J\\cup\\{t\\mathbin\\square\\partial_n\\}$. This is small, and all its members are old cofibrations by the old simplicial axiom. Each $t\\mathbin\\square\\partial_n$ lies in $W$: for $Z\\in\\mathcal Z$, $\\underline{\\operatorname{Map}}(t,Z)$ is a trivial Kan fibration, and its Leibniz mapping map against $\\partial_n$ is again a trivial Kan fibration. Indeed lifting a boundary against that map is lifting against the Cartesian pushout-product of two boundary inclusions; this is degreewise injective, so the lift exists by the Kan model weak factorization system. Apply the local cofibration test to conclude. Also $J\\subseteq W_0\\subseteq W$. Finally $Z\\to1$ lifts against $S$ exactly when it lifts against $J$ and all $t\\mathbin\\square\\partial_n$: the first means old fibrant, and the second means $\\underline{\\operatorname{Map}}(t,Z)$ has all boundary lifts, or equivalently $T$-local. Thus $S$-injective objects are exactly $\\mathcal Z$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-cofibration-local-mapping-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; choose a small set imposing the local fibrant extension conditions Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-small-object-factorization] to $S$ and $X\\to1$. It gives a functor $R$ and a natural $\\eta_X:X\\to RX$ with $RX\\in\\mathcal Z$ and $\\eta_X$ in the weak saturation of $S$. Step 2 and $S\\subseteq C\\cap W$ give $\\eta_X\\in C\\cap W$. The functor $R$ preserves sufficiently filtered colimits: the factorization middle-object functor does, and $X\\mapsto(X\\to1)$ preserves such colimits because every nonempty filtered index is connected, so the colimit of its constant terminal diagram is terminal. Consequently, by naturality of $\\eta$ and two-out-of-three, $f\\in W$ if and only if $Rf\\in W$.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; accessible local fibrant replacement, properties (i)-(iii) in HTT Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "For $u:U\\to V$ between objects of $\\mathcal Z$, $u\\in W$ implies that precomposition by $u$ is bijective on $\\pi_0\\operatorname{Map}^h(-,U)$ and on $\\pi_0\\operatorname{Map}^h(-,V)$. Surjectivity for $U$ gives $g:V\\to U$ in the old homotopy category with $gu=1_U$. Injectivity for $V$, applied to $(ug)u=u=1_Vu$, gives $ug=1_V$. Thus $u$ is invertible in the old homotopy category and is in $W_0$ by [lem-coef-model-localization-detects-weak-equivalences]. The converse follows from $W_0\\subseteq W$. Step 4 therefore proves $f\\in W\\Longleftrightarrow Rf\\in W_0$. By [lem-coef-model-weak-equivalences-accessible] the old weak-equivalence arrows form a replete accessible subcategory. Apply [lem-coef-accessible-arrow-inverse-image] to $R:\\mathcal M\\to\\mathcal M$ to conclude that $W$ is a replete accessible subcategory of the arrow category.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-model-weak-equivalences-accessible",
+    "lem-coef-accessible-arrow-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; identify W as an accessible inverse image without presuming localization existence Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "Let $I$ be the original small generating cofibrations. Apply [lem-coef-accessible-small-object-factorization] to factor any $c:X\\to Y$ in $C$ as $p a$, with $a:X\\to E$ in the weak saturation of $I$ and $p\\in I^{\\square}$, an old trivial fibration. Lifting $c$ against $p$ in the square with top $a$ and bottom $1_Y$ gives $h:Y\\to E$ with $hc=a$ and $ph=1_Y$. The arrow maps $(1_X,h):c\\to a$ and $(1_X,p):a\\to c$ exhibit $c$ as a retract of $a$. Conversely the weak saturation of $I$ lies in $C$ because $C$ is a left lifting class, whose transfinite closure was checked in step 2. Thus $I$ generates $C$ weakly. The hypotheses of [lem-coef-smith-model-recognition] now hold: the underlying category is complete and locally presentable by assumption, $C$ is small-generated, step 2 gives saturation of $C\\cap W$, step 5 gives accessibility, and step 1 gives two-out-of-three. An arrow in $C^{\\square}$ is an old trivial fibration, hence in $W_0\\subseteq W$, verifying the last hypothesis. The recognition theorem supplies a combinatorial model structure with precisely $C,W$, fibrations $(C\\cap W)^{\\square}$, and functorial factorizations. Denote it $L_T\\mathcal M$.",
+   "uses": [
+    "lem-coef-smith-model-recognition",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; check every hypothesis of Smith recognition Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "The old simplicial enrichment, tensors and cotensors satisfy the new pushout-product axiom. If $i\\in C$ and $j$ is a simplicial-set monomorphism, $i\\mathbin\\square j$ is in $C$ by the old simplicial axiom. If $j$ is also a weak equivalence, the OLD simplicial axiom makes $i\\mathbin\\square j$ an old trivial cofibration, hence a member of $W$. If instead $i\\in C\\cap W$, the local cofibration test gives $\\underline{\\operatorname{Map}}(i,Z)$ trivial Kan for every $Z\\in\\mathcal Z$. Under adjunction, $\\underline{\\operatorname{Map}}(i\\mathbin\\square j,Z)$ is its Leibniz mapping map against $j$. It has the right lifting property against every boundary, since $j\\mathbin\\square\\partial_n$ is degreewise injective (a union of subsets inside the Cartesian product), and a trivial Kan fibration lifts against all monomorphisms. The local test implies $i\\mathbin\\square j\\in C\\cap W$. These two triviality assertions and the lifting adjunction give exactly the new mapping-space fibration axiom. The tensor unit is the same $\\Delta^0$, so its identity constraint is unchanged. Thus the new model is simplicial.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-cofibration-local-mapping-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; verify the same simplicial structure, with both triviality cases Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "A new fibrant $Z$ has the right lifting property against $C\\cap W$, hence against $S$, and so lies in $\\mathcal Z$ by step 3. Conversely, for $Z\\in\\mathcal Z$ the local cofibration test makes $\\underline{\\operatorname{Map}}(i,Z)$ a trivial Kan fibration for every $i\\in C\\cap W$. Its boundary lift for $n=0$ gives every ordinary extension $A\\to Z$ along $i:A\\to B$. Hence $Z\\to1$ is a new fibration. This proves precisely the fibrant-object assertion, including the case $T=\\varnothing$.",
+   "uses": [
+    "lem-coef-cofibration-local-mapping-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; derive both directions of the fibrant-object characterization Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "To check left properness, push out $f:X\\to Y$ in $W$ along a cofibration $c:X\\to X\\prime$. Factor $f=p i$ using the OLD model, with $i:X\\to E$ a cofibration and $p:E\\to Y$ an old trivial fibration. Since $p\\in W_0\\subseteq W$, two-out-of-three gives $i\\in C\\cap W$. Put $E\\prime=E\\amalg_X X\\prime$. Its map from $X\\prime$ is in $C\\cap W$ by step 2. Moreover $E\\to E\\prime$ is the pushout of $c$ and is an old cofibration. Old left properness applied to $p$ along THIS cofibration gives $E\\prime\\to Y\\amalg_E E\\prime$ in $W_0$. The pushout universal property identifies $Y\\amalg_E E\\prime$ with $Y\\amalg_X X\\prime$ and identifies the composite with the required pushout of $f$. Both factors lie in $W$, proving new left properness.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; write the two successive pushout squares, rather than assuming properness Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  },
+  {
+   "text": "The identity is its own right adjoint, preserves $C$, and sends every old trivial cofibration into $C\\cap W$ because $W_0\\subseteq W$. It is therefore left Quillen from $\\mathcal M$ to $L_T\\mathcal M$. Steps 6-9 give every claimed property; no infinity-categorical comparison for the new model was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, supporting left Bousfield model construction; identity Quillen adjunction Agent expansion, checked against HTT Proposition A.3.7.3 online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-cofibration-local-mapping-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-weak-equivalences-accessible",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-smith-model-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, supporting coherent derived coefficient adjunction: detailed model-theoretic expansion, checked against HTT A.3.7.3 and its cited lemmas online (not archived)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,15 +209,58 @@
    "results": "{\"t\": \"2026-10-16T14:45:30Z\", \"tool\": \"leanfinder\", \"query\": \"Constructing a model structure whose fibrant objects are local objects for morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.bifibrantObjects\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.CategoryWithFibrations\"], \"digest\": \"5fc1c9bd57aba7fc\"}",
    "date": "2026-10-16",
    "verdict": "no match: second reader inspected the returned types. HoCat/localizer morphisms are ordinary localizations; QCat, strict Segal and nerve declarations give no diagram rectification; ModelCategory constructors assume the required axioms; fibrant-object predicates do not construct a localized model structure."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|local.*fibrant|combinatorial.*model",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"line\": \"98\", \"text\": \"  let E := Localization.uniq BifibrantObject.toHoCat (BifibrantObject.ι ⋙ L) (weakEquivalences _)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"line\": \"100\", \"text\": \"    Localization.compUniqFunctor BifibrantObject.toHoCat (BifibrantObject.ι ⋙ L)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"95\", \"text\": \"    LocalizerMorphism (weakEquivalences (CofibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"105\", \"text\": \"    (homRel C).FactorsThroughLocalization (weakEquivalences (CofibrantObject C)) := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"284\", \"text\": \"def localizerMorphism : LocalizerMorphism (weakEquivalences (CofibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"308\", \"text\": \"  have : Localization.Lifting Lcof (weakEquivalences (CofibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"line\": \"329\", \"text\": \"    (ι ⋙ L).IsLocalization (weakEquivalences (CofibrantObject C)) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"133\", \"text\": \"instance : toHoCat.IsLocalization (weakEquivalences (BifibrantObject C)) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"494\", \"text\": \"    LocalizerMorphism (weakEquivalences (BifibrantObject C)) (weakEquivalences C) where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"502\", \"text\": \"    LocalizerMorphism (weakEquivalences (BifibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"511\", \"text\": \"    LocalizerMorphism (weakEquivalences (BifibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"525\", \"text\": \"    (ιCofibrantObjectLocalizerMorphism C) BifibrantObject.toHoCat\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"97\", \"text\": \"    LocalizerMorphism (weakEquivalences (FibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"107\", \"text\": \"    (homRel C).FactorsThroughLocalization (weakEquivalences (FibrantObject C)) := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"282\", \"text\": \"def localizerMorphism : LocalizerMorphism (weakEquivalences (FibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"306\", \"text\": \"  have : Localization.Lifting Lfib (weakEquivalences (FibrantObject C))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"326\", \"text\": \"    (ι ⋙ L).IsLocalization (weakEquivalences (FibrantObject C)) :=\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: Bousfield/orthogonal reflection hits concern ordinary Hom-set localization; ModelCategory.mk' assumes both weak factorization systems and does not construct a Bousfield structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left proper combinatorial simplicial model category admits a left Bousfield localization at a small set of cofibrations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (Z : C)\\n  [inst_1 : CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_2 : CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₂]\\n  [inst_3 :\", \"doc\": \"In a category $\\\\mathcal{C}$ with sufficient colimits, for a morphism property $W$ and an object $Z$, the successor object $\\\\text{succ}(W,Z)$ constructed in the orthogonal reflection process is local w\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).arrow.HasLeftResolutions\", \"doc\": \"For a model category $\\\\mathcal{C}$, the arrow category of its full subcategory of cofibrant objects admits left resolutions with respect to the arrow weak equivalences. This means that for every morph\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] →\\n        [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] →\\n          [CategoryTheory.Limits.HasFinite\", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  (L : CategoryTheory.Functor (HomotopicalAlgebra.CofibrantObject.HoCat C) D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEqui\", \"doc\": \"In a model category $\\\\mathcal{C}$, if $L$ is a functor from the homotopy category of cofibrant objects $\\\\mathrm{HoCat}(\\\\mathcal{C})$ to another category $D$ that localizes with respect to weak equival\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: Bousfield/orthogonal reflection hits concern ordinary Hom-set localization; ModelCategory.mk' assumes both weak factorization systems and does not construct a Bousfield structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a simplicial model structure whose cofibrations are unchanged and weak equivalences are maps detected by derived mapping spaces into local fibrant objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": cofibrations SSet.{u} = monomorphisms _\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"[CategoryWithFibrations C] [CategoryWithCofibrations C] [CategoryWithWeakEquivalences C] [HasFiniteLimits C]\\n  [HasFiniteColimits C] [(weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)]\\n  [IsWeakFactorizationSystem (trivialCofibrations \", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Cofibration f ↔ Mono f\", \"doc\": \"In the category of simplicial sets, a morphism $ f $ is a cofibration if and only if it is a monomorphism.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithCofibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"(X : C) : ∃ (X' : C) (_ : IsCofibrant X') (p : X' ⟶ X), Fibration p ∧ WeakEquivalence p\", \"doc\": \"For any object $X$ in a model category $\\\\mathcal{C}$, there exists a cofibrant object $X'$ and a morphism $p : X' \\\\to X$ such that $p$ is both a fibration and a weak equivalence. A cofibrant object is\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[Mono f] : Cofibration f\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, every monomorphism $ f $ is a cofibration. This establishes that the class of cofibrations coincides with the class of mon\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: Bousfield/orthogonal reflection hits concern ordinary Hom-set localization; ModelCategory.mk' assumes both weak factorization systems and does not construct a Bousfield structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bousfield\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No match: Bousfield/orthogonal reflection hits concern ordinary Hom-set localization; ModelCategory.mk' assumes both weak factorization systems and does not construct a Bousfield structure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-presheaf-localization-comparison",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-bousfield-model-structure",
+  "worker": "stage1",
+  "summary": "Shared snapshot now contains item and prerequisite. Statement unchanged; expanded Bousfield existence into mapping-space detection, weak saturation, explicit small local tests, accessible replacement and weak-equivalence detection, Smith recognition, simplicial compatibility, fibrant objects, two-pushout properness and identity Quillen. Five genuinely smaller generic input statements remain unsplit, searched in Mathlib.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, coherent derived coefficient adjunction preceding the displayed derived inverse-limit computation; follows the existing simplicial-presheaf-localization-comparison branch rather than changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N8-cc7c4811a",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-cc7c4811a (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the 5 new nodes and every cited statement: nerve-localization, kan-quillen-right-proper, lifting-class-closure (it has no transfinite clause; step 2 writes that argument itself), detects-weak-equivalences and the colimit definition. The item statement is the cofibrant-endpoint case of HTT A.3.7.3; the target is not weakened and no SGA source is used. Every step checks out. Step 2: by the local test and cotensor adjunction, C∩W is an intersection of two left lifting classes, and the transfinite case is written out. Step 3: t□∂_n lies in W through the pullback-power and the fact that a pushout-product of monomorphisms is a monomorphism; S-injective objects are exactly the fibrant local objects, with n=0 included. Step 4: R preserves κ-filtered colimits because the constant terminal diagram over a connected index has colimit 1. Step 5: the inverse argument gu=1, ug=1 holds; I accept π_0 Map^h = Ho-Hom as a short deduction from the nerve-localization universal property; then W=R^{-1}(W_0) is accessible. Step 6: the retract maps (1,h),(1,p) are right and all five Smith hypotheses hold, with C^□ = old trivial fibrations ⊆ W. Step 7: both SM7 cases are proved, including conversion to the fibration form. Step 8: fibrant objects come from the n=0 lift. Step 9: the two-pushout left-properness argument has the right domains. Step 10 is elementary. The new nodes are statement-only, generic, strictly smaller than the item, and have correct blueprint fields and created.item. Each is a true theorem: the cofibration local test (A.3.7.1; closure of the test class under weak equivalences is genuinely needed for the converse), the accessible small-object factorization (A.1.2.5), weak equivalences accessible (A.2.6.8), the accessible inverse image (A.2.6.7 / Adámek–Rosický 2.50) and Smith recognition (A.2.6.10 / Barwick). An rg search for Smith, Bousfield, the HTT numbers, accessibility, left proper and trivial Kan fibration found no duplicates; the existing small-object factorization, cellular factorization and cotorsion-recognition nodes are weaker or different. HTT is not under literature/ and is reported as WANTED, as for the 464 existing node files that mention HTT. Small cases: T empty recovers M; T = {∅→pt} in sSet gives contractible Kan complexes; I = ∅; the terminal category. No fixes and no tool_uses."
+ }
 }

@@ -28,9 +28,117 @@
   "lem-coef-bousfield-kan-comparison-calculus",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=\\operatorname{Th}_CF$ and let $\\pi:E\\to C$ send $(c,z)$ to $c$. Write a simplex of $\\mathrm{BK}_C(NF)$ as a base chain $c_0\\xrightarrow{a_1}\\cdots\\xrightarrow{a_r}c_r$ and a fiber chain $z_0\\xrightarrow{b_1}\\cdots\\xrightarrow{b_r}z_r$ in $F(c_0)$. If $a_{ij}:c_i\\to c_j$ is the composite, define $\\tau_F$ to be the chain in $E$ with vertices $(c_i,F(a_{0i})z_i)$ and $i$th arrow $(a_i,F(a_{0i})b_i)$. This has the required source because $F(a_i)F(a_{0,i-1})=F(a_{0i})$. Internal faces compose both arrows and the equality $F(a_{0,i+1})(b_{i+1}b_i)=F(a_{0,i+1})b_{i+1}\\,F(a_{0,i+1})b_i$ gives the corresponding composite in $E$; the first face transports the remaining fiber chain by $F(a_1)$, exactly the first-face formula for $\\mathrm{BK}$, and the last face simply deletes the last vertex. Inserting identities gives the degeneracy identities. Thus this formula defines the required simplicial comparison map, before asserting it is a weak equivalence.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "For each $c\\in C$ form the category $D(c)=(\\pi\\downarrow c)$. Its objects are $(e=(d,z),u:d\\to c)$, and a morphism $(e,u)\\to(e',u')$ is $v:e\\to e'$ with $u'\\pi(v)=u$. Postcomposition in $u$ defines a strict functor $D:C\\to\\mathrm{Cat}$. Define $R_c:D(c)\\to F(c)$ by $R_c(e,u)=F(u)z$. On $v=(f,b)$ it is $F(u')b$, using $u'f=u$. These $R_c$ are strictly natural in $c$. The inclusion $J_c:F(c)\\to D(c)$ sends $z$ to $((c,z),1_c)$; then $R_cJ_c=1$ and the arrows $(u,1):(e,u)\\to J_cR_c(e,u)$ give a natural transformation $1\\to J_cR_c$. Thus $P=R_c$ and $Q=J_c$ satisfy $PQ=\\mathrm{id}_{F(c)}$ (a zigzag of length zero) and there is a natural transformation $\\mathrm{id}_{D(c)}\\Rightarrow QP$; no component need be invertible. By [lem-coef-nerve-natural-homotopy-equivalence], $|NR_c|$ and $|NJ_c|$ are inverse up to continuous homotopy and $NR_c$ is a weak homotopy equivalence. Its weak homotopy equivalences (bijection on path components and isomorphisms of all homotopy groups at all basepoints of the realization) are literally those of [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "Define a bisimplicial set $B_{p,q}=\\coprod_{c_0\\to\\cdots\\to c_p}ND(c_0)_q$. Horizontal first faces use postcomposition $D(c_0)\\to D(c_1)$, other horizontal faces compose/delete base arrows, and degeneracies insert identities; vertical operators are those of the nerve. They commute because postcomposition is a functor. Thus $\\operatorname{diag}B=\\mathrm{BK}_C(ND)$. The natural transformation $NR:ND\\to NF$ of Step 2 induces $r=\\mathrm{BK}_C(NR):\\operatorname{diag}B\\to\\mathrm{BK}_C(NF)$. By the objectwise invariance assertion of [lem-coef-bousfield-kan-comparison-calculus], $r$ is a weak homotopy equivalence. All categories and coproducts here are small because $C$ and all $F(c)$ are small.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "Forget the arrows to $c_0$ in a vertical comma-category chain to obtain an augmentation $v:B\\to\\operatorname{const}_{\\mathrm{horizontal}}NE$. It is compatible with horizontal operators because postcomposition changes only those arrows. For fixed $q$, a vertical comma chain is determined by a chain $e_0\\to\\cdots\\to e_q$ in $E$ and the arrow $u_q:\\pi(e_q)\\to c_0$: the other arrows are $u_i=u_q\\pi(e_i\\to e_q)$. Consequently the horizontal simplicial set $B_{\\bullet,q}$ is the disjoint union, over $NE_q$, of the nerves $N(\\pi(e_q)\\downarrow C)$. Each undercategory has initial object $1_{\\pi(e_q)}$. Let $P$ be the functor from the undercategory to the terminal category $[0]$ and $Q$ the functor picking the initial object. Then $PQ=\\mathrm{id}_{[0]}$, and the unique arrows from the initial object form a natural transformation $QP\\Rightarrow\\mathrm{id}$. By [lem-coef-nerve-natural-homotopy-equivalence] the map of its nerve to $\\Delta^0=N[0]$ is a weak homotopy equivalence, in the sense of [lem-coef-kan-quillen-right-proper]. Realization of a disjoint union is the disjoint union of realizations: in the quotient defining realization all relations retain the summand index. Components and based homotopy groups of a disjoint union are computed in the summand containing the basepoint. It follows that $B_{\\bullet,q}\\to NE_q$, with the target constant in the horizontal direction, is a weak homotopy equivalence, also when $NE_q$ is empty. The exchanged-directions assertion of [lem-coef-bisimplicial-diagonal-equivalence] now implies that $v:\\operatorname{diag}B\\to NE$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "The maps $v$ and $\\tau_Fr$ are simplicially homotopic; the homotopy must be checked, rather than identifying these two maps. In a diagonal $r$-simplex of $B$, write its vertical chain as $e_i=(d_i,z_i)$ with comma arrows $u_i:d_i\\to c_0$. The vertices of $v$ are $e_i$, whereas those of $\\tau_Fr$ are $w_i=(c_i,F(a_{0i}u_i)z_i)$. There are arrows $\\eta_i=(a_{0i}u_i,1):e_i\\to w_i$. The comma equation $u_i=u_{i+1}\\pi(e_i\\to e_{i+1})$ makes the square with the $i$th arrows of the two chains commute: both composites have base map $a_{0,i+1}u_i$ and fiber map obtained by applying $F(a_{0,i+1}u_{i+1})$ to the fiber map of $e_i\\to e_{i+1}$. For each order-preserving $t:[r]\\to[1]$, select $e_i$ when $t(i)=0$ and $w_i$ when $t(i)=1$, using their own chain arrows within a block and the commuting square for the possible mixed arrow. These chains define $H:\\operatorname{diag}B\\times\\Delta^1\\to NE$. Restriction to any subsequence commutes with the construction: if the first retained base index is $j$, postcomposition replaces $u_i$ by $a_{0j}u_i$, and $a_{ji}a_{0j}u_i=a_{0i}u_i$ leaves $w_i$ and $\\eta_i$ unchanged. Repeated vertices likewise insert identity arrows. This verifies all simplicial operators and gives endpoints $v$ and $\\tau_Fr$. Writing $A=\\operatorname{diag}B$, the cylinder theorem gives the continuous homotopy $h:[0,1]\\times|A|\\to|NE|$ defined by $h(t,x)=|H|(\\rho_A^{-1}(x,t))$. By [lem-coef-homotopy-groups-basepoint-change], the realized homotopy gives the same component function and identifies the homotopy-group maps by the basepoint-change isomorphism along $t\\mapsto h(t,x)$ for each source point $x$. Thus $\\tau_Fr$ is a weak homotopy equivalence because $v$ is. Since $r$ is a weak homotopy equivalence, two-of-three (or cancellation of the resulting bijections and group isomorphisms) proves that $\\tau_F$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-homotopy-groups-basepoint-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "For a simplicial set $X$ write $X^{\\mathrm{op}}_n=X_n$ with the order of faces and degeneracies reversed: $d_i^{\\mathrm{op}}=d_{n-i}$ and $s_i^{\\mathrm{op}}=s_{n-i}$. Reversing coordinates defines a natural homeomorphism $|X^{\\mathrm{op}}|\\to|X|$, $[x,(t_0,\\ldots,t_n)]\\mapsto[x,(t_n,\\ldots,t_0)]$: a face inserts a zero and a degeneracy adds adjacent coordinates, so their reversed versions respect exactly the quotient relations; the same formula is a continuous inverse. It follows directly from the definition of weak homotopy equivalence that taking opposite preserves and reflects it. Reversing nerve chains gives $N(A^{\\mathrm{op}})\\cong(NA)^{\\mathrm{op}}$. Put $F^{\\mathrm{op}}(c)=F(c)^{\\mathrm{op}}$. From the displayed morphism definitions, $\\operatorname{Gr}_CF\\cong(\\operatorname{Th}_C F^{\\mathrm{op}})^{\\mathrm{op}}$: a reversed Thomason arrow is precisely $a:c'\\to c$, $b:z\\to F(a)z'$. Reversing the base chain and the fiber chain in the degreewise formula of [lem-coef-bousfield-kan-comparison-calculus] gives $\\mathrm{KB}_C(NF)\\cong(\\mathrm{BK}_C(NF^{\\mathrm{op}}))^{\\mathrm{op}}$; endpoint faces are interchanged and the interior compositions and identity insertions agree. Conjugating $(\\tau_{F^{\\mathrm{op}}})^{\\mathrm{op}}$ by these isomorphisms produces the desired weak homotopy equivalence $\\mathrm{KB}_C(NF)\\to N\\operatorname{Gr}_CF$. This is a direct dualization of the already proved comparison, with no assumption that the two Grothendieck categories are equivalent.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "A natural transformation $\\phi:F\\to G$ sends $(c,z)$ to $(c,\\phi_cz)$ and sends the two kinds of fiber arrows by $\\phi$. In the formula for $\\tau$, its naturality equation $\\phi_{c_i}F(a_{0i})=G(a_{0i})\\phi_{c_0}$ gives equality of every vertex and arrow in the two composite chains. A reindexing functor $h:C'\\to C$ sends the base chain to its image under $h$ and each composite $a_{ij}$ to $h(a_{ij})$, giving the same equality for $Fh$. The degreewise functoriality of $\\mathrm{BK},\\mathrm{KB}$ in [lem-coef-bousfield-kan-comparison-calculus] identifies these with the stated comparison squares. Chain reversal and coordinate reversal commute with these maps, so the oplax comparison has the same naturality. In degree zero $a_{00}=1$, and hence both comparisons send the summand element $(c,z)$ to the identical object $(c,z)$.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  },
+  {
+   "text": "Finally, let $\\phi:F\\to G$ be objectwise a weak homotopy equivalence on nerves. Objectwise invariance of [lem-coef-bousfield-kan-comparison-calculus] makes the corresponding $\\mathrm{BK}$ and $\\mathrm{KB}$ maps weak homotopy equivalences. In each naturality square of Step 7 the horizontal comparison maps are weak homotopy equivalences by Steps 5 and 6. Therefore the map on Grothendieck nerves is a weak homotopy equivalence by two-of-three, using exactly the definition/model weak equivalences of [lem-coef-kan-quillen-right-proper]. This proves the final clause without assuming that $\\phi_c$ is an equivalence of categories.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 1.5 and Theorem 1.6, pp. 5–6: agent-supplied comma-resolution proof of the stated theorem; the source states the theorem without a proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1409.8062",
+  "place": "Definition 1.5 and Theorem 1.6, pp. 5–6, statement checked; explicit comma-category/diagonal/prism proof supplied by NK because Low only cites the theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,15 +181,72 @@
    "results": "[grep] OK 0 hit(s); top: ",
    "date": "2026-10-16",
    "verdict": "no match: fiberwiseColim and colimitIsoColimitGrothendieck compare ordinary colimits, not the weak homotopy type of a nerve."
+  },
+  {
+   "tool": "grep",
+   "query": "Thomason|Grothendieck.*nerve|nerve.*Grothendieck",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nerve of a Grothendieck construction computes the homotopy colimit of nerves",
+   "results": "[leansearch] OK 8 hit(s); top: CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc, CategoryTheory.Functor.colimitIsoColimitGrothendieck, CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit_hom_app, CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj, CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit, SSet.Truncated.nerve₂Adj, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv, CategoryTheory.Nerve.quasicategory",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thomason homotopy colimit comparison from Bousfield Kan replacement of nerves to the nerve of the Grothendieck construction",
+   "results": "[leanfinder] OK 8 hit(s); top: CategoryTheory.nerveFunctorCompHoFunctorIso, CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf, CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve, SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero, SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc, SSet.Truncated.HomotopyCategory.homToNerveMk_comp, SSet.Truncated.HomotopyCategory.functorEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Thomason|Grothendieck",
+   "results": "[grep] OK 0 hit(s); Mathlib subdirectory/file: AlgebraicTopology",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax colimits of small categories have nerves weakly equivalent to their derived colimits as simplicial sets",
+   "results": "[leanfinder] OK 8 hit(s); top: SSet.OneTruncation₂.nerveEquiv, SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj, SSet.stdSimplex.isoNerve, CategoryTheory.Nerve.cosk₂Iso, CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map, SSet.OneTruncation₂.nerveHomEquiv, SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Grothendieck colimit/Kan-extension formulas and the truncated nerve adjunction do not state the weak homotopy-colimit comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-special-resolution-zigzag-nerve",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-thomason-grothendieck-comparison",
+  "worker": "stage1",
+  "summary": "Preserved every clause of the statement. Constructed the lax comparison, resolved the projection by comma categories, proved the resolution augmentation by the existing bisimplicial diagonal theorem, and gave the full prism homotopy needed for two-of-three. Obtained the oplax map by explicit reversal, checked strict naturality and degree zero, and deduced objectwise invariance. Two smaller statement-only inputs are new: cylinder realization and basepoint-change/homotopy invariance for all homotopy groups. The latter repairs the earlier attempt's uncited topological inference in Steps 2, 4, and 5. All searches for the new nodes ran through msearch. No Lean work. Second reading made the realized prism coordinates explicit and corrected the elementary flag on the opposite comparison. Maintainer reader: Steps 2 and 4 now cite the existing lem-coef-nerve-natural-homotopy-equivalence for the nerve homotopy inverse and the contraction of an undercategory with initial object, instead of re-deriving it; the two new topological nodes remain needed for the prism in Step 5.",
+  "blueprint": "Realizes the technical mapping-space foundation below paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint, through the existing frame/special-resolution ancestry. The node-level Thomason comparison is Low Theorem 1.6; no unit statement or route was replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a5c405047",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a5c405047 (reviewer sub-agent of L); spot-checked: I read all of the item, both new nodes and every cited node statement. Low (arXiv 1409.8062) is not in literature/, so I fetched it and read Def. 1.1, Rem. 1.2, Lem. 1.3, Def. 1.5 and Thm. 1.6 on pp. 3-6. The item's Th and Gr arrow directions and its BK/KB conventions match Low exactly, and the statement is unchanged. I recomputed all 8 steps and they are correct: the simplicial structure of tau_F, the comma resolution with R_c strictly natural and a natural unit (u,1), the decomposition B_{.,q} = coproduct over NE_q of N(pi(e_q) under C), the commuting eta squares in the prism and its simplicial compatibility via a_{ji}a_{0j}=a_{0i}, and the identities Gr_C F = (Th_C F^op)^op and KB_C X = (BK_C X^op)^op for the same C. Small cases checked: C empty, empty fibres, C terminal, constant terminal fibres. Both new nodes are true, statement-only and not duplicates. The cylinder node is |K x Delta^1| = |K| x I (one compact factor, Hovey 3.1.8), with correct endpoints. The basepoint node's concentric-cube beta_gamma has the right direction (Hatcher Lemma 1.19 and section 4.1). Both are needed for the Step 5 prism, because diag B is not a nerve. Hovey and Hatcher are online-only, so I checked those two mathematically rather than against page text. One fault, C5: Steps 2 and 4 re-derive the existing unsplit node lem-coef-nerve-natural-homotopy-equivalence (same unit) instead of citing it. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-thomason-grothendieck-comparison.json: Steps 2 and 4 now cite that node, proof_deps is recomputed and there is no cycle. No node dropped and no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

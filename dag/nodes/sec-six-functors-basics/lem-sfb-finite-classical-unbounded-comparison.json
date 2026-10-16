@@ -24,9 +24,103 @@
   "sk-def-pe-classical-definition",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=\\nu_X^*$ and $R=R\\nu_{X,*}$. The inverse image is exact termwise, so [lem-weil-pbc-exact-functor-bounded-below] gives that for every $M\\in D(X_{\\mathrm{et}},A)$ one has $H^q(FM)\\cong F(H^qM)$ for every $q$. The module part of the classical-sheaf comparison says that $F(H^qM)$ is a classical $A$-module sheaf. Hence $F$ maps the whole unbounded étale derived category into the full subcategory of complexes with classical cohomology.",
+   "uses": [
+    "sk-thm-pe-classical-sheaves",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 5.3.1 and Proposition 5.3.2, p. 38"
+   }
+  },
+  {
+   "text": "If $X$ is empty, the empty-cover sheaf condition forces every module sheaf on either site to be zero, so all the conclusions hold. Assume henceforth that $X$ is nonempty, and put $e=2\\dim(X)+1\\geq0$. Every $A$-module sheaf is annihilated by $\\ell^r$, hence is torsion. Applying [det-pe-unbounded-classical-bounds] with $g=\\mathrm{id}_X$ gives $H^q(U_{\\mathrm{proet}},(F G)|_U)=0$ for $q>e$ whenever $G$ is an étale $A$-module sheaf and $U$ has a pro-étale affine presentation over $X$. In particular this holds for every affine étale $W\\to X$, using its constant presentation. By the module-sheaf essential-image statement of [sk-thm-pe-classical-sheaves], every classical $A$-module sheaf is isomorphic to $F G$, so the same bound holds for every classical coefficient sheaf, with the same $e$ independent of $W$.",
+   "uses": [
+    "det-pe-unbounded-classical-bounds",
+    "sk-thm-pe-classical-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
+    "place": "statement, parts (1) and the sentence that the same statements hold with X replaced by Y"
+   }
+  },
+  {
+   "text": "If $K\\in D^+_{\\mathrm{class}}(X_{\\mathrm{proet}},A)$, the bounded-below unit supplied by [sk-prop-sf-comparison] satisfies the hypothesis of [det-pe-classical-derived-equivalence]. Its part (2) therefore gives that the counit $F R K\\to K$ is an isomorphism. Thus the desired counit is already known on all bounded-below classical complexes. The unbounded right derived functor used here restricts to the bounded-below one: by [lem-sc-bounded-below-injective-resolution] a bounded-below representative has a bounded-below injective resolution which is also K-injective, and this same resolution computes both right derived functors and their adjunction counits.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.2.6 (3), p. 37"
+   }
+  },
+  {
+   "text": "For $K\\in D_{\\mathrm{class}}(X_{\\mathrm{proet}},A)$ and $m\\in\\mathbf Z$, let $P_m(K)$ be the presheaf on $X_{\\mathrm{et}}$ given by $W\\mapsto H^mR\\Gamma(W,K)$, where $R\\Gamma(W,-)$ is total derived evaluation on the pro-étale site. There is a natural identification $H^m(RK)=P_m(K)^\\#$. Indeed, the pro-étale site is taken in its small skeleton and $A_{X,\\mathrm{proet}}$ is a sheaf of commutative rings, so [prop-pur-kinjective-resolutions-exist] gives every complex of $A$-module sheaves on $X_{\\mathrm{proet}}$ a K-injective resolution; this is the existence hypothesis of [lem-weil-pbc-kinjective-total-derived] and of the stipulated computation of $R$. Choose a K-injective representative $I$ of $K$. By the stipulated computation of $R$ and the restriction formula in [def-weil-pbc-site-comparison-morphism], $RK$ is represented by the étale sheaf complex $W\\mapsto I(W)$. [lem-weil-pbc-kinjective-total-derived] also makes $I$ compute total derived evaluation at every $W$. Its underlying presheaf cohomology is $W\\mapsto H^m(I(W))=P_m(K)(W)$. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] identifies the sheafification of this cohomology presheaf with the cohomology sheaf of that complex. For a derived morphism choose a chain-map representative between K-injective resolutions, using [lem-weil-pbc-kinjective-hom-derived]; chain-homotopic representatives induce the same section cohomology maps. Thus the identification is natural, including for every truncation map used next.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 5.2.8, reduction to bounded-below complexes, made explicit using the blueprint fixed-degree truncation estimate; Proposition 5.3.2 for the classical subcategory"
+   }
+  },
+  {
+   "text": "Fix $m$ and choose an integer $N<m-e-1$. Put $T=\\tau_{\\geq N}K$ and let $t:K\\to T$ be the canonical map. Its cohomology is zero below $N$ and agrees with that of $K$ in degrees at least $N$, so $T$ is bounded below and classical, and $H^m(t)$ is an isomorphism. For every affine étale $W\\to X$, step 2 verifies precisely the classical-sheaf hypothesis of [det-pe-unbounded-classical-truncation]; part (2) makes $P_m(t)(W)$ an isomorphism. The kernel and cokernel presheaves of $P_m(t)$ are therefore zero on every affine étale object. If $Q$ is either of these presheaves and $S$ any étale sheaf, every map $Q\\to S$ is zero: its value on a section restricts to zero on an affine open cover of its domain, hence is zero by the sheaf condition. The universal property of sheafification gives $\\operatorname{Hom}(Q^\\#,S)=0$ for every $S$, so $Q^\\#=0$. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] now makes both the kernel and cokernel of $P_m(t)^\\#$ zero, so this map is an isomorphism. Step 4 gives that $H^m(Rt)$ is an isomorphism, and [lem-weil-pbc-exact-functor-bounded-below] then makes $H^m(FRt)$ an isomorphism. Counit naturality gives\n$$H^m(t)\\circ H^m(\\varepsilon_K)=H^m(\\varepsilon_T)\\circ H^m(FRt).$$\nThe right side is an isomorphism by step 3, and $H^m(t)$ is an isomorphism, so $H^m(\\varepsilon_K)$ is an isomorphism. The integer $m$ was arbitrary; [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that the actual counit $\\varepsilon_K:FRK\\to K$ is an isomorphism.",
+   "uses": [
+    "det-pe-unbounded-classical-truncation",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 5.2.8, reduction to bounded-below complexes, made explicit using the blueprint fixed-degree truncation estimate; Proposition 5.3.2 for the classical subcategory"
+   }
+  },
+  {
+   "text": "The counit is therefore an isomorphism in the derived category. Since $R K$ is an object of $D(X_{\\mathrm{et}},A)$, every $K$ in the classical pro-étale subcategory is isomorphic to $F(RK)$, proving the final essential-surjectivity clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.3.2, p. 38"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-unbounded-classical-bounds",
+  "det-pe-unbounded-classical-truncation",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-classical-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.2.6 (3), Remark 5.2.8, Definition 5.3.1 and Proposition 5.3.2 (pp. 37-38)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -104,10 +198,66 @@
    "results": "{\"t\": \"2026-10-16T16:35:33Z\", \"tool\": \"grep\", \"query\": \"shriek|extensionByZero|classical.*[Cc]ohomology|[Cc]ohomology.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"a09c846f47a02974\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected the returned declaration types; site definitions, dense-subsite sheaf equivalences, and structure-module pushforward composition do not state this derived etale/pro-etale or proper-support comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived etale finite torsion complexes with classical pro-etale cohomology are all in the essential image of inverse image",
+   "results": "{\"t\": \"2026-10-16T17:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived etale finite torsion complexes with classical pro-etale cohomology are all in the essential image of inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh\", \"DerivedCategory.instEssSurjHomotopyCategoryIntUpQh\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"15dbadcea0b95970\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, proetale, classical, counit isomorphism",
+   "results": "{\"t\": \"2026-10-16T17:11:10Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, proetale, classical, counit isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'proetale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; superseded by the valid quoted proetale Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "classical.*pro.?etale|pro.?etale.*classical|counit.*isomorphism",
+   "results": "{\"t\": \"2026-10-16T17:11:10Z\", \"tool\": \"grep\", \"query\": \"classical.*pro.?etale|pro.?etale.*classical|counit.*isomorphism\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded complex with classical cohomology on the pro-etale site is pulled back from the etale derived category",
+   "results": "{\"t\": \"2026-10-16T17:11:11Z\", \"tool\": \"leansearch\", \"query\": \"Every unbounded complex with classical cohomology on the pro-etale site is pulled back from the etale derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"DerivedCategory\", \"CategoryTheory.hasExt_of_enoughProjectives\", \"HomologicalComplex.isGrothendieckAbelian\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.Q\"], \"digest\": \"9916a3382ab72d67\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on sheaves induces a t exact derived functor and cohomology commutes with this functor",
+   "results": "{\"t\": \"2026-10-16T17:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor on sheaves induces a t exact derived functor and cohomology commutes with this functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\"], \"digest\": \"844f44fe00412b12\"}",
+   "date": "2026-10-16",
+   "verdict": "component results: exact-functor localization and Ext maps; reuse lem-weil-pbc-exact-functor-bounded-below, not a match for the comparison item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "{\"t\": \"2026-10-16T17:27:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"proetale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.proetalePrecoverage\", \"AlgebraicGeometry.Scheme.proetaleTopology\", \"AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology\", \"AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology\", \"AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology\"], \"digest\": \"da7fcb552e665398\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
+  },
+  {
+   "tool": "grep",
+   "query": "leftComplete|classical.*cohomology|cohomology.*classical",
+   "results": "{\"t\": \"2026-10-16T17:27:34Z\", \"tool\": \"grep\", \"query\": \"leftComplete|classical.*cohomology|cohomology.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"a09c846f47a02974\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme with finite torsion cohomological dimension the unbounded derived inverse image identifies etale modules with proetale complexes having classical cohomology",
+   "results": "{\"t\": \"2026-10-16T17:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme with finite torsion cohomological dimension the unbounded derived inverse image identifies etale modules with proetale complexes having classical cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"416d5bc073bdc4f9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: site definitions, scheme etaleness, and generic derived localization do not state the classical unbounded counit"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-geo-affine-local",
@@ -115,5 +265,64 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-geo-affine-local"
+ "unit": "sk-lem-geo-affine-local",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-classical-unbounded-comparison",
+  "worker": "stage1",
+  "summary": "Second reading repaired the unsupported appeal to a left-completion equivalence. The proof now computes cohomology sheaves of R nu_* by exact sheafification, applies the existing uniform classical truncation estimate on affine etale objects, and uses the actual counit naturality square to reduce each degree to the bounded-below counit. The exact classical image and uniform torsion bounds are retained. No new nodes, Mathlib leaves, or statement change.",
+  "blueprint": "Realizes the opening classical-comparison sentence of sk-lem-geo-affine-local: the exact classical image (step 1), finite torsion bounds of sk-prop-pe-unbounded-classical (step 2), bounded-below counit (step 3), and fixed-degree truncation reduction of Bhatt–Scholze Remark 5.2.8 (steps 4–5), with the essential-surjectivity consequence (step 6). Full faithfulness and unbounded direct-image comparison remain separate existing nodes.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "steps 1-2: the module essential image of nu^* is exactly the classical module sheaves; the classical comparison named by step 1 of sk-lem-geo-affine-local, whose unit lists no proetale-coefficients unit"
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "step 3: the bounded-below derived unit, the hypothesis of det-pe-classical-derived-equivalence; same classical comparison route"
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "step 3: bounded-below counit isomorphism on classical complexes (Bhatt-Scholze 5.2.6(3)); same classical comparison route"
+   },
+   {
+    "node": "det-pe-unbounded-classical-bounds",
+    "why": "step 2: uniform cohomological bound e=2dim X+1 on affine etale objects; sk-prop-pe-unbounded-classical step 1, named by the unit's step 1"
+   },
+   {
+    "node": "det-pe-unbounded-classical-truncation",
+    "why": "step 5: fixed-degree truncation isomorphism H^m RGamma(W,K) = H^m RGamma(W,tau_{>=N}K); sk-prop-pe-unbounded-classical step 2"
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "step 3: generic homological algebra, bounded-below injective complexes are K-injective, so bounded-below and unbounded R and counits agree"
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "step 4: generic homological algebra, K-injective complexes compute total derived evaluation"
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "step 4: generic existence of K-injective resolutions of module sheaves on a small site"
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-pe-classical-sheaves",
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-unbounded-classical-bounds",
+  "det-pe-unbounded-classical-truncation",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-5ef481d38",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-5ef481d38 (reviewer sub-agent of L); spot-checked: Read the whole item (6 steps), the statements of all cited nodes, both units (sk-lem-geo-affine-local; sk-prop-pe-unbounded-classical, which the unit's step 1 names), the parent's use of the item, and Bhatt–Scholze Lemma 5.1.2, Prop 5.2.6(1)-(3), Remark 5.2.8, Def 5.3.1 and Prop 5.3.2 (pp. 34, 37-38). The statement is a correct specialization of D(X_et) ≅ D_cc under finite cohomological dimension, and it is not weakened. The coefficients are A-module sheaves over the constant ring and nu_X is the site comparison, as in sk-prop-sf-comparison and det-pe-classical-derived-equivalence. Steps check out: (1) classical image via the exact-functor cohomology formula plus the sk-thm-pe-classical-sheaves essential image; (2) uniform e=2dimX+1 from bounds(1) with g=id, using the constant presentation of affine etale W and torsion from l^r A=0, with the empty X handled; (3) D^+ counit, where bounded-below injective complexes are K-injective so the two R agree; (4) H^m(RK)=P_m(K)^# by nu_*I(W)=I(W) and exact sheafification, natural through K-injective Hom; (5) N<m-e-1 gives truncation (2) on affine W, the kernel/cokernel presheaves sheafify to 0 because of affine covers, and the counit naturality square plus the cohomology criterion finish; (6) elementary. Edge cases tested: X empty, A=0, K=0, K bounded below, K in one degree, K unbounded below, X a point. No new nodes, no duplicate in the DAG or in blueprint main-20261015, no SGA. FIX (C1): step 4 used K-injective resolutions on X_proet, including the existence hypothesis of lem-weil-pbc-kinjective-total-derived, without citing a node; I added prop-pur-kinjective-resolutions-exist (no cycle). I also declared split_report.tool_uses, because none of the proof_deps lies in the 4-unit route. Accepted tool uses: sk-thm-pe-classical-sheaves, sk-prop-sf-comparison, det-pe-classical-derived-equivalence, det-pe-unbounded-classical-bounds, det-pe-unbounded-classical-truncation (the classical comparison named by the unit's step 1), and lem-sc-bounded-below-injective-resolution, lem-weil-pbc-kinjective-total-derived, prop-pur-kinjective-resolutions-exist (generic). For the maintainer: the unit record sk-lem-geo-affine-local.uses omits sk-prop-pe-unbounded-classical although its step 1 cites it.; 1 file(s) fixed by the reviewer"
+ }
 }

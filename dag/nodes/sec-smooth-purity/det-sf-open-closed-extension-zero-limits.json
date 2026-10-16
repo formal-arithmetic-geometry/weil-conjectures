@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-sf-open-closed-extension-zero-limits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero preserves products and derived limits",
- "statement": "In the situation of [sk-prop-sf-open-closed-triangle], let $j:U\\hookrightarrow X$\nbe a quasi-compact open immersion with closed complement $i:Z\\hookrightarrow X$\nand $B$ a sheaf of rings on $X_{\\mathrm{proét}}$. Then:\n\n1. for every $K\\in D(U_{\\mathrm{proét}},j^*B)$ there is a distinguished\ntriangle, functorial in $K$,\n$$\nj_!K\\longrightarrow Rj_*K\\longrightarrow i_*i^*Rj_*K\\longrightarrow j_!K[1];\n$$\n2. $j_!:D(U_{\\mathrm{proét}},j^*B)\\to D(X_{\\mathrm{proét}},B)$ preserves\nproducts and derived inverse limits $R\\varprojlim$ of sequences;\n3. on module sheaves, $j_!$ preserves products.",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme and let $j:U\\hookrightarrow X$\nbe a quasi-compact open immersion with closed complement $i:Z\\hookrightarrow X$\nand $B$ a sheaf of rings on $X_{\\mathrm{proét}}$. Then:\n\n1. for every $K\\in D(U_{\\mathrm{proét}},j^*B)$ there is a distinguished\ntriangle, functorial in $K$,\n$$\nj_!K\\longrightarrow Rj_*K\\longrightarrow i_*i^*Rj_*K\\longrightarrow j_!K[1];\n$$\n2. $j_!:D(U_{\\mathrm{proét}},j^*B)\\to D(X_{\\mathrm{proét}},B)$ preserves\nproducts and derived inverse limits $R\\varprojlim$ of sequences;\n3. on module sheaves, $j_!$ preserves products.\n\nThe coefficients on $U$ and $Z$ are the inverse images $j^*B$ and $i^*B$. The exact sheaf functors $j_!,i^*,i_*$ also denote their termwise induced functors on unbounded derived categories [lem-sf-exact-functor-derived-triangulated]; $Rj_*$ is total right derived direct image [def-sfb-right-derived-functor]. Products are small products [def-weil-category-product], and a sequential derived limit means an object with a distinguished Roos triangle as in [def-weil-derived-limit].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.md",
   "place": "node det-sf-open-closed-extension-zero-limits, order None",
@@ -22,41 +22,218 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-sfb-right-derived-functor",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
  "proof": [
   {
-   "text": "*(1) The triangle.* Represent $K$ by a K-injective complex $J$ of\n$j^*B$-modules, so that $Rj_*K$ is represented by $j_*J$. Apply the short\nexact sequence of [det-sf-open-closed-sequence-ring-sheaf] termwise to\n$M=j_*J^q$. Since $j^*j_*=\\mathrm{id}$ for an open immersion, its first term\nis $j_!J^q$, so we obtain a termwise exact sequence of complexes\n\n$$\n0\\to j_!J\\to j_*J\\to i_*i^*j_*J\\to0 .\n$$\n\nAs $j_!$, $i^*$ and $i_*$ are exact\n([det-sf-open-closed-sequence-ring-sheaf], [det-sf-open-closed-pullback-limits]),\nthese complexes represent $j_!K$, $Rj_*K$ and $i_*i^*Rj_*K$, and a short exact\nsequence of complexes gives a distinguished triangle, functorial in $K$.",
+   "text": "Use the universe and small-site convention [def-weil-size-convention]. For each of $X,U,Z$ the module category for the indicated ring sheaf is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]; no commutativity or constancy of $B$ is required. Hence [lem-sfb-grothendieck-k-injective] supplies K-injective representatives. Choose one $J$ for $K$ on $U$. The computation clause of [def-sfb-right-derived-functor] identifies $Rj_*K$ with $j_*J$. The sheaf functors $j_!,j^*,i_*$ are exact by [det-sf-open-closed-sequence-ring-sheaf], and $i^*$ is exact by [det-sf-open-closed-pullback-limits]. Applying [lem-sf-exact-functor-derived-triangulated] to these exact functors permits termwise computation on every representative and makes their induced derived functors triangulated.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "det-sf-open-closed-pullback-limits",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck); derived.tex Tag 015F (lemma-right-derived-exact-functor); blueprint proof (1)"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [det-sf-open-closed-sequence-ring-sheaf] in every degree to $M=j_*J^q$. For an object $V\\to U$, restriction and direct image give $(j^*j_*N)(V)=N(V\\times_XU)=N(V)$; the maps and the coefficient actions are the identity under $V\\times_XU=V$. Thus $j^*j_*J=J$ naturally, and the sequences assemble into $0\\to j_!J\\to j_*J\\to i_*i^*j_*J\\to0$. By [lem-weil-pbc-complex-ses-triangle] this produces a distinguished triangle natural in $J$. Step 1 identifies its objects with the three displayed terms of clause (1). Naturality passes from complexes to the derived category: compute morphisms on K-injective representatives, where the localization is fully faithful by [lem-weil-pbc-kinjective-hom-derived]; chain homotopies stay chain homotopies under the additive functors. The connecting map is the natural short-exact-sequence boundary, so this proves clause (1), including functoriality.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), Tag 070I (lemma-K-injective); proetale.tex Tag 09BN (lemma-open-immersion); blueprint proof (1)"
+   }
+  },
+  {
+   "text": "For a $j^*B$-module sheaf $N$, apply the sheaf sequence of [det-sf-open-closed-sequence-ring-sheaf] to $j_*N$ and the identity $j^*j_*N=N$ just verified. It identifies $j_!N$ with $\\ker(j_*N\\to i_*i^*j_*N)$. Products of module sheaves are computed sectionwise: coordinatewise restrictions and module actions make $V\\mapsto\\prod_\\alpha N_\\alpha(V)$ a sheaf, since a compatible family glues uniquely in each coordinate; maps into it are exactly families of maps into its factors. Consequently $j_*$ preserves products directly from $(j_*N)(W)=N(W\\times_XU)$. Also $i_*$ preserves products: the adjunction $i^*\\dashv i_*$ named in [det-sf-open-closed-sequence-ring-sheaf] gives $\\operatorname{Hom}(M,i_*\\prod G_\\alpha)=\\operatorname{Hom}(i^*M,\\prod G_\\alpha)=\\prod\\operatorname{Hom}(M,i_*G_\\alpha)$. By [det-sf-open-closed-pullback-limits], $i^*$ preserves products. The unit map $j_*N\\to i_*i^*j_*N$ commutes with projections by naturality, so the two product identifications carry it to the product of the individual unit maps. Finally the kernel of a product map is the product of the kernels, section by section. This proves that the canonical comparison $j_!(\\prod N_\\alpha)\\to\\prod j_!N_\\alpha$ is an isomorphism, including the empty product, and proves clause (3).",
    "uses": [
     "det-sf-open-closed-sequence-ring-sheaf",
     "det-sf-open-closed-pullback-limits"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+    "place": "(2) Products and derived limits; sheaf-level kernel calculation making (3) explicit"
+   }
   },
   {
-   "text": "*(2) Products and derived limits.* The pro-étale topos is replete, so\nproducts of sheaves are exact (Bhatt–Scholze, Proposition 3.1.10); hence the\nproduct in $D(-_{\\mathrm{proét}})$ of a family of complexes is represented by the\ntermwise product. The functor $Rj_*$ is a right adjoint, so it preserves\nproducts. The functor $i_*$ is an exact right adjoint, so it preserves\ntermwise products of complexes, hence derived products. The functor $i^*$ is\nexact and preserves products of sheaves\n([det-sf-open-closed-pullback-limits]), so it preserves termwise products of\ncomplexes, hence derived products. Thus the second and third terms of the\ntriangle in (1) are product-preserving exact functors of $K$. Given a family\n$(K_\\alpha)$, the product of the triangles of (1) is distinguished (a product\nof distinguished triangles is distinguished when products are exact), and\nthe canonical maps from the triangle of $\\prod_\\alpha K_\\alpha$ to it form a\nmorphism of triangles which is an isomorphism on the second and third\nterms; by the five lemma for triangulated categories\n$j_!\\prod_\\alpha K_\\alpha\\to\\prod_\\alpha j_!K_\\alpha$ is an isomorphism. For a\nsequence $(K_n)$ the derived limit is the fibre\n$R\\varprojlim_nK_n=\\operatorname{fib}\\bigl(\\prod_nK_n\\xrightarrow{1-\\mathrm{sh}}\\prod_nK_n\\bigr)$;\nan exact functor preserving products and the shift-difference map preserves\nthis fibre, so $j_!R\\varprojlim_nK_n\\simeq R\\varprojlim_nj_!K_n$.",
+   "text": "For a small family $(K_\\alpha)$ on $U$, choose complex representatives $(C_\\alpha)$. Apply [det-pe-products-derived] on $U$ with the ring sheaf $j^*B$, and on $X$ with $B$. The products in both derived categories are represented by the termwise products of these complexes. Exactness and termwise computation of $j_!$ were established in Step 1. The sheaf comparison of Step 3, in each degree, is a chain isomorphism $j_!(\\prod C_\\alpha)\\cong\\prod j_!C_\\alpha$, since its construction is natural in the differentials. Its image in the localization is the canonical derived product comparison, as can be checked by composing with every projection. Hence $j_!$ preserves all small derived products.",
    "uses": [
-    "det-sf-open-closed-pullback-limits"
+    "det-pe-products-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+    "place": "(2) Products and derived limits, termwise-products argument"
+   }
   },
   {
-   "text": "*(3) Module sheaves.* Products of module sheaves are exact, so for module\nsheaves $M_\\alpha$ on $U$ placed in degree $0$ the derived product is the\nsheaf product. Since $j_!$ is exact, (2) applied to these complexes and\n$\\mathcal H^0$ give $j_!\\prod_\\alpha M_\\alpha\\simeq\\prod_\\alpha j_!M_\\alpha$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $(K_n,t_n:K_{n+1}\\to K_n)$ be any inverse sequence in $D(U_{\\mathrm{proét}},j^*B)$, and put $P=\\prod_nK_n$, with $s$ characterized by $\\mathrm{pr}_ns=t_n\\mathrm{pr}_{n+1}$. Products exist by Step 4 and [det-pe-products-derived], and [lem-weil-derived-limit-existence] therefore supplies a derived limit. Take any of its Roos triangles $L\\to P\\xrightarrow{1-s}P\\to L[1]$ as in [def-weil-derived-limit]. Write $F=j_!$ and let $\\phi:F(P)\\xrightarrow{\\sim}P'=\\prod_nF(K_n)$ be the canonical isomorphism from Step 4. If $s'$ is the shift on $P'$ with transitions $F(t_n)$, then for each $n$,\n$$\\mathrm{pr}'_n\\phi F(s)=F(\\mathrm{pr}_ns)=F(t_n)F(\\mathrm{pr}_{n+1})=\\mathrm{pr}'_ns'\\phi.$$\nThe universal property of the product implies $\\phi F(s)=s'\\phi$, and additivity implies $\\phi F(1-s)=(1-s')\\phi$. Since $F$ is triangulated by Step 1 and [lem-sf-exact-functor-derived-triangulated], applying it to the chosen triangle and using $\\phi$ on the middle two terms yields the distinguished triangle $F(L)\\to P'\\xrightarrow{1-s'}P'\\to F(L)[1]$. This is exactly the defining property [def-weil-derived-limit] of a derived limit of the image sequence. Thus $j_!$ preserves sequential derived limits, completing clause (2). If a separate Roos limit of the image sequence has been chosen, clause (1) of [lem-weil-derived-limit-existence] identifies it with $F(L)$ up to isomorphism; no canonical choice of a cone in a bare triangulated category is being assumed.",
+   "uses": [
+    "det-pe-products-derived",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit) and the following paragraph; blueprint proof (2), explicit compatibility with 1-shift"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
   "det-sf-open-closed-sequence-ring-sheaf",
-  "det-sf-open-closed-pullback-limits"
+  "det-sf-open-closed-pullback-limits",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "det-pe-products-derived",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+  "place": "Proof (1)-(3), refined with the generic Stacks constructions cited in the steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along a quasi-compact open immersion preserves products and derived inverse limits in the pro-etale derived category",
+   "results": "Condensed.lanSheafProfinite; LightCondensed.lanLightCondSet; Condensed.profiniteSolid; Condensed.ofSheafForgetProfinite; Condensed.lanCondensedSet; Condensed.isSheafProfinite; LightCondMod.ofSheafLightProfinite; Condensed.profiniteSolidification",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor PreservesLimitsOfShape products derived category",
+   "results": "No hits; loogle: Unknown identifier `PreservesLimitsOfShape`",
+   "date": "2026-10-16",
+   "verdict": "Invalid identifier in query; no conclusion from this search"
+  },
+  {
+   "tool": "grep",
+   "query": "derived inverse limit|openClosed|preserves.*product",
+   "results": "Mathlib/CategoryTheory/Extensive.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves products and derived inverse limits",
+   "results": "Function.extend_zero; CategoryTheory.Functor.preservesLimitsOfShape_of_isZero; CategoryTheory.Limits.hasBinaryProduct_zero_left; CategoryTheory.Limits.prodZeroIso; CategoryTheory.Limits.hasBinaryProduct_zero_right; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero; CategoryTheory.Limits.preservesKernel_zero; AddMonoidHom.completion_zero",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|homotopyLimit|homotopy_limit",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules, \"extension\"",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.SheafOfModules'",
+   "date": "2026-10-16",
+   "verdict": "Invalid identifier in query; no conclusion from this search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves for a quasi compact open immersion commutes with products and derived limits",
+   "results": "SheafOfModules.hasLimit; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.RingedSpace.res_zero; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.hasLimitsOfShape; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of modules on the pro-etale site preserves products and sequential homotopy limits",
+   "results": "CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; Condensed.profiniteSolid; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; CondensedMod.ofSheafCompHaus; LightCondAb.ofSheafLightProfinite; Condensed.instPreservesFiniteProductsOppositeProfiniteVal; LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Pp]roduct|[Pp]reserves.*[Ll]imit|extension",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"preserves\"",
+   "results": "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.forgetPreservesLimitsOfSize; SheafOfModules.Finite.forgetPreservesFiniteLimits; SheafOfModules.forgetPreservesLimitsOfShape; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; SheafOfModules.evaluationPreservesLimitsOfSize; SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state all three clauses for pro-etale modules over an arbitrary ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor preserves products derived limits extension by zero",
+   "results": "No hits; loogle: <input>:1:52: expected end of input",
+   "date": "2026-10-16",
+   "verdict": "Invalid query syntax; inconclusive, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero open immersion products derived limits",
+   "results": "AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne; AlgebraicGeometry.PresheafedSpace.GlueData.ιIsOpenImmersion; AlgebraicGeometry.SheafedSpace.GlueData.ιIsOpenImmersion; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit; AlgebraicGeometry.Scheme.IsLocallyDirected.tAux; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_to_base_isOpenImmersion; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sigma_ι_isOpenImmersion; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_pullback_to_base_isOpenImmersion",
+   "date": "2026-10-16",
+   "verdict": "no exact match: inspected hits concern scheme open immersions or generic sheaf limits, not extension by zero on arbitrary pro-etale ring-sheaf derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "Preserves.*Products|preserves.*products|openImmersion.*(product|limit)|extensionByZero",
+   "results": "Mathlib/Combinatorics/Additive/FreimanHom.lean; Mathlib/Combinatorics/Additive/FreimanHom.lean; Mathlib/Combinatorics/Additive/FreimanHom.lean; Mathlib/Combinatorics/Additive/FreimanHom.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: inspected hits concern scheme open immersions or generic sheaf limits, not extension by zero on arbitrary pro-etale ring-sheaf derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfShape\", \"SheafOfModules\"",
+   "results": "PresheafOfModules.instPreservesLimitsOfShapeFunctorOppositeAbToPresheaf; PresheafOfModules.instPreservesLimitsOfShapeModuleCatCarrierObjOppositeRingCatEvaluation; SheafOfModules.forgetPreservesLimitsOfShape; SheafOfModules.evaluationPreservesLimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no exact match: inspected hits concern scheme open immersions or generic sheaf limits, not extension by zero on arbitrary pro-etale ring-sheaf derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|extension_by_zero|IsHomotopyLimit",
+   "results": "No hits; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no exact match: inspected hits concern scheme open immersions or generic sheaf limits, not extension by zero on arbitrary pro-etale ring-sheaf derived categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -73,5 +250,54 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sf-open-closed-extension-zero-limits",
+  "worker": "stage1",
+  "summary": "Rebuilt the earlier attempt after checking all cited statements. Expanded the original referenced setting to state X qcqs explicitly; retained arbitrary, possibly noncommutative ring-sheaf coefficients. Added existing general Grothendieck/K-injective, natural complex-SES triangle and exact-derived-functor tools. Proved sheaf products by a kernel calculation, derived products termwise, and derived-limit preservation by an explicit projection calculation on the Roos triangle. Removed the inapplicable adic-coefficient exact-functor/Rlim citation and placeholder quotes. No new nodes. Second reader: cited the existing universe convention explicitly and independently repeated semantic, type-pattern and source searches; retained all five mathematical steps.",
+  "blueprint": "Step 1 supplies the foundations used in proof (1); Step 2 realizes its triangle and naturality. Step 3 proves proof (3) directly using the exact sheaf sequence, Step 4 realizes the product part of (2), and Step 5 realizes the Roos-fibre part of (2). The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck property for modules over arbitrary ring sheaves; the closed-unit unit supplies no such foundation."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic K-injective existence needed to compute unbounded Rj_*; not an alternative to any closed-unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic full faithfulness of K-injective representatives, needed for derived naturality."
+   },
+   {
+    "node": "det-sf-open-closed-pullback-limits",
+    "why": "The blueprint explicitly requires product preservation of closed inverse image for arbitrary ring-sheaf coefficients."
+   },
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic termwise representation of derived products over an arbitrary pro-etale ring sheaf; this is the exact product input in the blueprint."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic existence and uniqueness up to isomorphism of a Roos limit once the product exists; no adic hypotheses or tower-category coefficient identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "det-sf-open-closed-pullback-limits",
+  "det-pe-products-derived",
+  "lem-weil-derived-limit-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-873edfe61",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-873edfe61 (reviewer sub-agent of L); spot-checked: I read the whole item (statement, 5 steps, deps, searches, split_report), the blueprint statement and proof, the closed-unit and open-closed-triangle units, the chapter record, and the full statement of every cited node. Statement: it writes out the qcqs setting of sk-prop-sf-open-closed-triangle exactly and keeps B an arbitrary ring sheaf; no hypothesis is added and no conclusion weakened. Step 1: the size convention, the noncommutative Grothendieck property, K-injective resolutions and def-sfb-right-derived-functor give Rj_*K=j_*J. Exactness comes from sequence-node clauses 1-2 and pullback-limits clause 2, whose qcqs and quasi-compact-complement hypotheses hold. Step 2: j^*j_*=id is checked on sections, matching Stacks 09BN (proetale lemma-open-immersion). The degreewise SES gives the triangle with natural delta by the complex-SES node. Functoriality on D comes from homotopy classes of maps between K-injectives (kinjective-hom-derived). Step 3: the kernel description plus product preservation by j_*, i_* (adjunction) and i^* (pullback-limits clause 2) is genuinely elementary. Step 4: det-pe-products-derived applies on U with j^*B and on X with B; the termwise chain isomorphism is the canonical comparison. Step 5: I verified the identity pr'_n phi F(s)=pr'_n s' phi; it gives a Roos triangle as in Stacks 08TC (derived definition-derived-limit). The removal of the adic-only exact-functor/Rlim citation was correct. The blueprint proves (2) through products of triangles and the five lemma; the delivery proves (3) first and gets (2) termwise from the same inputs. I accept this as a refinement on the same route. No SGA source is used. Edge cases checked: U empty, U=X, K=0, empty and singleton families, zero tower, identity tower, noncommutative B. proof_deps equals the union of step uses; there is no cycle and no duplicate (rg found only specializations or different statements: det-lem-int-tensor-shriek, det-formal-closed-support-ii-limits, lem-cbc-completed-extension-zero-comparison). There are no new nodes. I accept the 6 declared generic tool uses. No fixes made."
+ }
 }

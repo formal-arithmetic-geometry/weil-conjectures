@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-grothendieck-sheafification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-upper-star-exact",
+   "place": "First proof paragraph, sentence asserting left exact sheafification for Grothendieck abelian A.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Left exact sheafification for Grothendieck abelian coefficients",
+ "statement": "Fix a universe $\\mathcal V$. Let $(\\mathcal C,J)$ be a $\\mathcal V$-small site [def-weil-pbc-sites-and-cohomology] and let $\\mathcal A$ be a Grothendieck abelian category relative to $\\mathcal V$, with $\\mathcal V$-small morphism sets [def-sp-grothendieck-abelian]. Let $\\operatorname{PSh}(\\mathcal C;\\mathcal A)=\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathcal A)$ and let $\\operatorname{Sh}(\\mathcal C,J;\\mathcal A)$ be its full subcategory of sheaves: for each $T\\in\\mathcal A$, the presheaf of sets $U\\mapsto\\operatorname{Hom}_{\\mathcal A}(T,F(U))$ is a sheaf. The inclusion $\\iota$ admits a left adjoint $a$ (sheafification [def-weil-pbc-sheafification]), and $a$ preserves finite limits [def-galois-finite-limits-colimits]. The category $\\operatorname{Sh}(\\mathcal C,J;\\mathcal A)$ is abelian.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WJ, lemma-sheafification-exact (the set-valued exactness prototype; the statement here records the Grothendieck-abelian coefficient generalization explicitly).",
+  "also": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-exact.proof.md",
+    "place": "First proof paragraph: sheafification is left exact for a Grothendieck abelian A. General-coefficient existence is realized in WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean:54–65 by the transfinite plus construction; the abelian-category assertion is Mathlib/CategoryTheory/Sites/Abelian.lean:40."
+   },
+   {
+    "document": "WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean (slopmaster2, read-only source checkout)",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 54-65, exact existence and left-exactness clauses; Mathlib/CategoryTheory/Sites/Abelian.lean:40, sheafIsAbelian, gives the abelianness clause. Attachment evidence is in lean_candidates and the second-reading report."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-sheafification",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left exact sheafification exists for arbitrary Grothendieck abelian coefficients on a small site",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.HasSheafify.mk', CategoryTheory.HasSheafify.isLeftExact, LightProfinite.hasSheafify, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.GrothendieckTopology.instPreservesSheafification_1, CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover, CategoryTheory.sheafIsAbelian",
+   "date": "2026-10-16",
+   "verdict": "no unconditional Mathlib match: HasSheafify.isLeftExact and Sheaf.instIsGrothendieckAbelian require HasSheafify"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasSheafify\", \"IsGrothendieckAbelian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match; 0 hits"
+  },
+  {
+   "tool": "grep",
+   "query": "hasSheafify.*Grothendieck|sheafIsAbelian|HasSheafify|isLeftExact",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "conditional matches only; Sites/Abelian.lean:40 requires HasSheafify"
+  },
+  {
+   "tool": "grep",
+   "query": "hasSheafify.*Grothendieck|isLeftExact|sheafIsAbelian",
+   "results": "8 hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "conditional left-exactness and abelianness; no general Grothendieck-coefficient existence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every small site the category of sheaves valued in a Grothendieck abelian category is abelian and has left exact sheafification",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.instCategorySheaf, CategoryTheory.hasSheafifyEssentiallySmallSite, CategoryTheory.presheafToSheaf, CategoryTheory.sheafification",
+   "date": "2026-10-16",
+   "verdict": "no unconditional match: inspected HasSheafify.isLeftExact, sheafIsAbelian and Sheaf.isGrothendieckAbelian_of_essentiallySmall"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence of an exact reflector from presheaves to sheaves with nonconcrete Grothendieck abelian values using a generator and transfinite plus construction",
+   "results": "8 hits: CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.HasSheafify.mk', CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.instReflectiveFunctorOppositeSheafSheafToPresheafOfHasWeakSheafify, CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms",
+   "date": "2026-10-16",
+   "verdict": "no unconditional Mathlib match; second phrasing checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reflective subcategory of sheaves abelian category existence sheafification for locally presentable coefficient category",
+   "results": "8 hits; first recorded hits: CategoryTheory.HasSheafify, CategoryTheory.Sheaf.instIsGrothendieckAbelian, LightProfinite.hasSheafify, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.instReflectiveFunctorOppositeSheafSheafToPresheafOfHasWeakSheafify, CategoryTheory.HasWeakSheafify",
+   "date": "2026-10-16",
+   "verdict": "conditional Mathlib matches only: sheafIsAbelian and Sheaf.instIsGrothendieckAbelian require HasSheafify; the unconditional project theorem is recorded in lean_candidates"
+  },
+  {
+   "tool": "grep",
+   "query": "hasSheafify.*(presentable|Grothendieck)|hasSheafify_of|HasSheafify.isLeftExact|sheafIsAbelian",
+   "results": "8 hits; first recorded hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "conditional Mathlib interfaces only; read Sites/Sheafification.lean:45-55 and Sites/Abelian.lean:30-42"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafIsAbelian",
+   "results": "12 hits; first recorded hits: CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.H', CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.functorH",
+   "date": "2026-10-16",
+   "verdict": "exact match for the abelianness clause after supplying HasSheafify with the attached project theorem; this is not an unconditional Mathlib existence theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-upper-star-exact",
+  "date": "2026-10-16",
+  "group": "Q35"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "lean_candidates": [
+  {
+   "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian",
+   "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+   "lines": [
+    54,
+    65
+   ],
+   "kind": "theorem",
+   "sorry": false,
+   "note": "SmallCategory C, Category.{v} A, Abelian A and IsGrothendieckAbelian.{v} A match the node exactly at v = V. Presheaf.IsSheaf is exactly the displayed Hom(T,-) definition (Mathlib/CategoryTheory/Sites/Sheaf.lean:74-79). The conclusion HasSheafify J A includes both existence of a left adjoint and finite-limit preservation, by Mathlib/CategoryTheory/Sites/Sheafification.lean:45-55. Mathlib CategoryTheory.sheafIsAbelian at Sites/Abelian.lean:40 then infers the final abelianness clause with no additional hypothesis. The archived local/sorry_map_slopmaster2_7d675a26.jsonl.gz records this theorem at lines 54-65; a read-only traversal of all 76 reachable project owners found no sorry. The full map agrees. Attach the project theorem for the sheafification clauses and use the named Mathlib instance for the last clause; the maintainer determines the closed audit."
+  }
+ ]
+}

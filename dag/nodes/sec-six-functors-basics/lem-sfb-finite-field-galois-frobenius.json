@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-finite-field-galois-frobenius",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-base-field-cd-galois-group",
+   "place": "Proof paragraph 1, sentences from “it is the splitting field of a separable polynomial” through “generates the cyclic group”.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Galois and Frobenius facts for an arbitrary finite field extension",
+ "statement": "Let $K\\hookrightarrow L$ be an extension of finite fields [def-weil-finite-field-q-elements, def-pc-field-extension], put $q=|K|$ and $r=[L:K]=\\dim_K L$ [def-weil-vector-space-dimension]. The extension $L/K$ is Galois: it is separable algebraic [def-weil-pbc-separable-algebraic-extension] and the minimal polynomial over $K$ of every element of $L$ splits into linear factors over $L$. Write $\\operatorname{Gal}(L/K)$ for the group of field automorphisms of $L$ fixing $K$. The map $F:L\\to L$, $F(x)=x^q$, is in this group, has order $r$, and the map\n$$\\{0,\\ldots,r-1\\}\\longrightarrow\\operatorname{Gal}(L/K),\\qquad j\\longmapsto F^j$$\nis bijective.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+  "place": "Proof paragraph 1, finite-extension Frobenius argument; Stacks Fields Tag 09HY (section-finite), finite-field input, and Tag 09I1 (lemma-finite-Galois), Galois characterization. Exact Mathlib clauses: Finite/GaloisField.lean:196; Finite/Basic.lean:362,366,392,403.",
+  "external": [
+   {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HY, label section-finite"
+   },
+   {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I1, label lemma-finite-Galois"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite field K and a finite algebraic extension L, the Frobenius x ↦ x to the cardinality of K is a generator of Gal(L/K), with order equal to the extension degree",
+   "results": "8 hits: FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.Extension.frob_apply, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgHom_apply, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "order of Frobenius automorphism of a finite field extension equals its degree and Galois group is cyclic",
+   "results": "8 hits: FiniteField.orderOf_frobeniusAlgHom, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteField.Extension.exists_frob_pow_eq, FiniteField.frobenius_pow, GaloisField.instIsGaloisOfFinite, FiniteField.Extension.frob_apply, FiniteField.Extension.frob",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "results": "1 hits: FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "orderOf_frobeniusAlgEquivOfAlgebraic|bijective_frobeniusAlgEquivOfAlgebraic_pow|instIsCyclicAlgEquivOfFinite",
+   "results": "7 hits: Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Extension.lean",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^instance.*priority.*100.*K.*Type|^theorem (orderOf_frobeniusAlgEquivOfAlgebraic|bijective_frobeniusAlgEquivOfAlgebraic_pow)|^theorem coe_frobeniusAlgEquivOfAlgebraic",
+   "results": "4 hits: Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.of_finite|Finite.ofFinite|Finite.*\\[Finite|finiteDimensional_of_finite",
+   "results": "13 hits including Mathlib/RingTheory/Finiteness/Basic.lean:241, Module.Finite.of_finite; source lines 228-243 read.",
+   "date": "2026-10-16",
+   "verdict": "match: inferred finite-dimensionality instance for the finite-field leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of finite fields: every algebra automorphism is a power of the cardinality Frobenius",
+   "results": "8 hits: FiniteField.Extension.exists_frob_pow_eq, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirmed the recorded Mathlib clause(s) by alternative search and direct source reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bijective_frobeniusAlgEquiv\"",
+   "results": "1 hits: FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirmed the recorded Mathlib clause(s) by alternative search and direct source reading"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_frobeniusAlgEquivOfAlgebraic_pow|orderOf_frobeniusAlgEquivOfAlgebraic|instIsGaloisOfFinite",
+   "results": "7 hits: Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirmed the recorded Mathlib clause(s) by alternative search and direct source reading"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow",
+  "file": "Mathlib/FieldTheory/Finite/Basic.lean",
+  "line": 403,
+  "how": "one declaration per clause, specialized to the given finite fields: GaloisField.instIsGaloisOfFinite (Mathlib/FieldTheory/Finite/GaloisField.lean:196-204) is IsGalois K L; FiniteField.frobeniusAlgEquivOfAlgebraic (Finite/Basic.lean:362) and FiniteField.coe_frobeniusAlgEquivOfAlgebraic (:366) give the automorphism and its power formula; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic (:392-394) gives its order; FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow (:403-406) gives precisely the displayed bijection from Fin r. Finite-dimensionality and algebraicity are inferred for a finite field L. No assertion about a chosen subfield or an inverse limit is included. The finite-dimensionality instance is Module.Finite.of_finite (Mathlib/RingTheory/Finiteness/Basic.lean:241-243), which spans L by its finite underlying set; FiniteDimensional is the abbreviation for Module.Finite (Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean:75-76)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "det-base-field-cd-galois-group",
+  "date": "2026-10-16",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd"
+}

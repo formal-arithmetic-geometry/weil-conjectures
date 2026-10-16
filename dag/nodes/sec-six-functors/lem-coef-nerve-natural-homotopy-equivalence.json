@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan, Calculating simplicial localizations, Propositions 6.2(i) and 8.2 for the special-hammock reduction; Proposition 8.2, printed p. 29 (PDF p. 13), with U = W_1 and V = W_2; nerve-homotopy input in the Proofs paragraph immediately after Proposition 8.2, applied to the two explicitly constructed zigzags of endofunctors",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived Hom / derived limit calculation: localization mapping-space foundation, via the special-hammock homotopy-calculus criterion. Dwyer–Kan Proposition 8.2, following Proofs paragraph (ii), printed p. 29: natural transformations induce homotopies of nerves.",
    "via": [
     "lem-coef-homotopy-fractions-square-criterion",
     "lem-coef-special-hammock-reduction",
@@ -28,88 +28,128 @@
  "stmt_deps": [
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct $T:\\mathcal A\\times[1]\\to\\mathcal B$, where $[1]$ has objects $0,1$ and one nonidentity arrow $0\\to1$. On objects set $T(a,0)=F(a)$, $T(a,1)=G(a)$; on arrows $t:a\\to a'$ at constant level use $F(t)$ or $G(t)$, and on a mixed arrow use $G(t)\\eta_a=\\eta_{a'}F(t)$. Naturality is precisely the equality between these two expressions. Identities follow from those of $F,G$. In a composable pair there can be at most one mixed arrow: the cases $0,0,1$ and $0,1,1$ reduce respectively to this naturality equation and functoriality of $G$; constant-level pairs use functoriality of $F$ or $G$. Thus $T$ is a functor. In degree $n$ a functor $[n]\\to\\mathcal A\\times[1]$ is exactly a pair of functors into the two factors, and $N[1]_n=\\operatorname{Hom}_{\\Delta}([n],[1])$. The ordinary nerve definition in [def-cbc-enhanced-diagrams-cones] therefore gives a simplicial map $NT:N\\mathcal A\\times\\Delta^1\\to N\\mathcal B$ with endpoint restrictions $NF,NG$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2, Proofs paragraph (ii), printed p. 29; agent expansion of the interval-category construction"
+   }
+  },
+  {
+   "text": "Write a simplex of $N\\mathcal A$ as $\\sigma=(a_0\\to\\cdots\\to a_n)$, with barycentric coordinates $\\lambda_j\\geq0$, $\\sum_j\\lambda_j=1$. Put $S_i=\\sum_{j=i}^n\\lambda_j$, $S_{n+1}=0$. The closed sets $R_i=\\{(\\lambda,t):S_{i+1}\\leq t\\leq S_i\\}$, $0\\leq i\\leq n$, cover $|\\Delta^n|\\times[0,1]$. On $R_i$ use the simplex\n$$F(a_0)\\to\\cdots\\to F(a_i)\\xrightarrow{\\eta_{a_i}}G(a_i)\\to\\cdots\\to G(a_n)$$\nwith weights\n$$(\\lambda_0,\\ldots,\\lambda_{i-1},S_i-t,t-S_{i+1},\\lambda_{i+1},\\ldots,\\lambda_n).$$\nThe weights are nonnegative and sum to one. This gives a continuous map on each $R_i$ into the quotient realization of [def-cbc-enhanced-diagrams-cones]. At the common boundary $t=S_i$, the two neighboring formulas delete respectively $F(a_i)$ and $G(a_{i-1})$; their remaining mixed arrow is the same because $\\eta_{a_i}F(a_{i-1}\\to a_i)=G(a_{i-1}\\to a_i)\\eta_{a_{i-1}}$. Nonneighboring overlaps only insert additional zero weights, so the same successive deletions give equality there. The maps glue continuously on the whole prism: for a closed subset of the target its preimage is a finite union of sets closed in the closed $R_i$, hence closed in the prism. This verifies the finite closed pasting argument directly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2, Proofs paragraph (ii), printed p. 29; agent barycentric prism construction"
+   }
+  },
+  {
+   "text": "These prism maps descend through the realization identifications in [def-cbc-enhanced-diagrams-cones]. A face sets one $\\lambda_j$ to zero: removing that vertex composes the adjacent arrows, and if it meets the mixed arrow the two composites agree by the naturality equation of step 1. In the formula of step 2 the corresponding cumulative sums are repeated, so the zero-width region is deleted and every remaining weight is the lower-dimensional weight. A degeneracy repeats one vertex: its arrow is an identity, its two adjacent weights add, and the cumulative-sum formula then gives the formula for the original simplex. If the cut lies between the repeats, the two identical vertices at one level merge and the sole remaining mixed arrow is the same $\\eta_a$. Thus faces and degeneracies, which generate all realization relations, are respected. Let $q:\\coprod_{n,\\sigma\\in N\\mathcal A_n}|\\Delta^n|\\to|N\\mathcal A|$ be the defining quotient map. Apply [lem-cbc-quotient-cylinder-continuity] with this $q$ and the usual interval $[0,1]$, whose neighborhoods contain compact closed subinterval neighborhoods. The pullback of the descended map along $q\\times1$ is continuous on every summand by step 2, so the descended $H_\\eta:|N\\mathcal A|\\times[0,1]\\to|N\\mathcal B|$ is continuous. At $t=0$ all $G$ weights vanish and at $t=1$ all $F$ weights vanish. Hence its endpoints are exactly $|NF|,|NG|$. No inverse to any $\\eta_a$ has been used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2, Proofs paragraph (ii), printed p. 29; agent verification of descent and joint continuity"
+   }
+  },
+  {
+   "text": "For each link of the finite zigzag from $QP$ to $\\mathrm{id}_{\\mathcal A}$ take the homotopy of step 3; for a reversed link replace its time parameter by $1-t$. If there are $r>0$ links, on $[j/r,(j+1)/r]$ use the $j$th homotopy at time $rt-j$. The formulas agree at subdivision endpoints, so the same finite closed pasting argument used in step 2 proves continuity. For $r=0$ use the constant homotopy. Repeat for the zigzag from $PQ$ to $\\mathrm{id}_{\\mathcal B}$. Applying functors to composable chains and the same barycentric coordinates shows directly from [def-cbc-enhanced-diagrams-cones] that $|N(QP)|=|NQ|\\circ|NP|$, $|N(PQ)|=|NP|\\circ|NQ|$, and the realized identity functors are identity maps. Consequently the two concatenations are homotopies $|NQ|\\circ|NP|\\simeq1$ and $|NP|\\circ|NQ|\\simeq1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2, following Proofs paragraph (ii), printed p. 29; finite zigzag consequence"
+   }
+  },
+  {
+   "text": "Set $X=|N\\mathcal A|$, $Y=|N\\mathcal B|$, $f=|NP|$, and $g=|NQ|$. Step 4 supplies the two continuous homotopies required by [lem-coef-homotopy-equivalence-weak]. That statement gives a bijection on path components and an isomorphism $\\pi_n(X,x)\\to\\pi_n(Y,f(x))$ for every $n\\geq1$ and every $x\\in X$, without assuming the homotopies fix basepoints. These are exactly the weak-homotopy-equivalence conditions of [def-coef-zigzag-homotopy-calculus]. Therefore $NP$ is a weak homotopy equivalence, and step 4 already gives the asserted continuous homotopy inverses.",
+   "uses": [
+    "lem-coef-homotopy-equivalence-weak",
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2, following Proofs paragraph (ii), printed p. 29; weak-homotopy consequence, with Hatcher section 4.1, printed p. 342"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-quotient-cylinder-continuity",
+  "lem-coef-homotopy-equivalence-weak",
+  "def-coef-zigzag-homotopy-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Proposition 8.2, Proofs paragraph (ii), printed p. 29, checked online; explicit barycentric and quotient-topology proof written here because no archival copy is available."
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "Natural transformations of functors induce homotopies on geometric realizations of nerves",
-   "results": "{\"t\": \"2026-10-16T14:23:04Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations of functors induce homotopies on geometric realizations of nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.onPresheaf\", \"CategoryTheory.NatTrans\", \"CategoryTheory.NatTrans.mk\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.NatTrans.mapHomotopyCategory_comp\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.NatTrans.mapHomotopyCategory\", \"CategoryTheory.NatTrans.mapHomotopyCategory_id\"], \"digest\": \"1224e0157cb6f986\"}",
+   "tool": "leanfinder",
+   "query": "Finite zigzags of natural transformations between functors inverse up to zigzags give homotopy equivalent geometric realizations of ordinary nerves",
+   "results": "{\"t\": \"2026-10-16T17:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"Finite zigzags of natural transformations between functors inverse up to zigzags give homotopy equivalent geometric realizations of ordinary nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"0551762c4a413d04\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
+   "verdict": "no match: Nerve.lean:50-80 constructs induced nerve maps and their functor; NerveAdjunction.lean:232-250 concerns the 2-truncated nerve/homotopy-category adjunction. HomotopyCat constructions concern that ordinary homotopy category. None gives the continuous realization homotopy or the finite-zigzag criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation induces homotopic continuous maps on geometric realizations of nerves and finite zigzags give inverse maps",
+   "results": "{\"t\": \"2026-10-16T17:05:40Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation induces homotopic continuous maps on geometric realizations of nerves and finite zigzags give inverse maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.onPresheaf\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"AlgebraicTopology.DoldKan.natTransP\", \"CategoryTheory.nerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"CategoryTheory.NatTrans.mapHomotopyCategory\"], \"digest\": \"ec5531880145e168\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Nerve.lean:50-80 constructs induced nerve maps and their functor; NerveAdjunction.lean:232-250 concerns the 2-truncated nerve/homotopy-category adjunction. HomotopyCat constructions concern that ordinary homotopy category. None gives the continuous realization homotopy or the finite-zigzag criterion."
   },
   {
    "tool": "loogle",
    "query": "\"nerve\", \"homotopy\"",
-   "results": "{\"t\": \"2026-10-16T14:23:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\"], \"digest\": \"f11945cfa7f6a332\"}",
+   "results": "{\"t\": \"2026-10-16T17:05:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\"], \"digest\": \"f11945cfa7f6a332\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"NatTrans\", \"Homotopy\"",
-   "results": "{\"t\": \"2026-10-16T14:23:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"NatTrans\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.mapHomotopyCategory\", \"CategoryTheory.NatTrans.mapHomotopyCategory_id\", \"CategoryTheory.NatTrans.mapHomotopyCategory_comp\", \"CategoryTheory.NatTrans.mapHomotopyCategory_app\", \"CategoryTheory.NatTrans.mapHomotopyCategoryPlus\", \"CategoryTheory.NatTrans.mapHomotopyCategoryPlus_id\", \"CategoryTheory.NatTrans.mapHomotopyCategoryPlus_comp\", \"CategoryTheory.NatTrans.mapHomotopyCategoryPlus_comp_assoc\"], \"digest\": \"a52ec87b550ebe41\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Natural transformations give homotopic maps of classifying spaces, hence homotopy inverse functors on nerves yield weak homotopy equivalences",
-   "results": "{\"t\": \"2026-10-16T14:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations give homotopic maps of classifying spaces, hence homotopy inverse functors on nerves yield weak homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\"], \"digest\": \"bcbf48ad4757446f\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A functor with inverse up to finite zigzags of natural transformations induces a homotopy equivalence of the geometric realizations of category nerves",
-   "results": "{\"t\": \"2026-10-16T14:23:33Z\", \"tool\": \"leanfinder\", \"query\": \"A functor with inverse up to finite zigzags of natural transformations induces a homotopy equivalence of the geometric realizations of category nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"5262105a78c809f0\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
+   "verdict": "no match: Nerve.lean:50-80 constructs induced nerve maps and their functor; NerveAdjunction.lean:232-250 concerns the 2-truncated nerve/homotopy-category adjunction. HomotopyCat constructions concern that ordinary homotopy category. None gives the continuous realization homotopy or the finite-zigzag criterion."
   },
   {
    "tool": "grep",
-   "query": "natTrans|NatTrans|homotop|Homotop",
-   "results": "{\"t\": \"2026-10-16T14:23:49Z\", \"tool\": \"grep\", \"query\": \"natTrans|NatTrans|homotop|Homotop\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\"], \"digest\": \"5cf47e6ebc4faa50\"}",
+   "query": "nerve.*[Hh]omotop|[Hh]omotop.*nerve|[Nn]atTrans.*realiz|realiz.*[Nn]atTrans",
+   "results": "{\"t\": \"2026-10-16T17:05:18Z\", \"tool\": \"grep\", \"query\": \"nerve.*[Hh]omotop|[Hh]omotop.*nerve|[Nn]atTrans.*realiz|realiz.*[Nn]atTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"0bf6cded6b222f14\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
-  },
-  {
-   "tool": "grep",
-   "query": "nerve.*[Nn]at|[Nn]at.*nerve|nerve.*[Hh]omotopy|[Hh]omotopy.*nerve|classifying",
-   "results": "{\"t\": \"2026-10-16T14:24:03Z\", \"tool\": \"grep\", \"query\": \"nerve.*[Nn]at|[Nn]at.*nerve|nerve.*[Hh]omotopy|[Hh]omotopy.*nerve|classifying\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\"], \"digest\": \"60b36f0cd93054f5\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Nerve.lean:35-74, NerveAdjunction.lean:232-250, HomotopyCat.lean:19-38, and Homotopy.lean:13-24,47-50. The hits define ordinary nerves, homotopy categories and simplicial homotopies, or induce transformations on homotopy categories. None states realization homotopies induced by natural transformations, nor a nerve equivalence from zigzags of transformations. The nerve/hoFunctor natural isomorphism does not supply this topological assertion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A natural transformation gives a homotopy between the maps on classifying spaces of small categories",
-   "results": "{\"t\": \"2026-10-16T14:57:38Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation gives a homotopy between the maps on classifying spaces of small categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"classifyingSpaceUniversalCover_map\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.mapHomotopyCategory_obj\", \"FundamentalGroupoidFunctor.homotopicMapsNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.NatTrans.mapHomotopyCategory\"], \"digest\": \"ce810f8d6760018c\"}",
-   "date": "2026-10-16",
-   "verdict": "Second reader: no match. NerveAdjunction.lean:232-250 constructs a simplicial map from a homotopy-category functor; HomotopyCat.mkNatTrans constructs a transformation from components; FundamentalGroupoidFunctor.homotopicMapsNatIso goes from a given topological homotopy to a transformation. None asserts a realization homotopy from a transformation. The Loogle query has no hits."
-  },
-  {
-   "tool": "grep",
-   "query": "nerve.*[Hh]omotopy|[Hh]omotopy.*nerve|[Nn]atTrans.*realiz|realiz.*[Nn]atTrans",
-   "results": "{\"t\": \"2026-10-16T14:58:40Z\", \"tool\": \"grep\", \"query\": \"nerve.*[Hh]omotopy|[Hh]omotopy.*nerve|[Nn]atTrans.*realiz|realiz.*[Nn]atTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"70afc660b88a2678\"}",
-   "date": "2026-10-16",
-   "verdict": "Second reader: no match. NerveAdjunction.lean:232-250 constructs a simplicial map from a homotopy-category functor; HomotopyCat.mkNatTrans constructs a transformation from components; FundamentalGroupoidFunctor.homotopicMapsNatIso goes from a given topological homotopy to a transformation. None asserts a realization homotopy from a transformation. The Loogle query has no hits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"nerve\", \"HomotopyEquiv\"",
-   "results": "{\"t\": \"2026-10-16T14:59:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"HomotopyEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "Second reader: no match. NerveAdjunction.lean:232-250 constructs a simplicial map from a homotopy-category functor; HomotopyCat.mkNatTrans constructs a transformation from components; FundamentalGroupoidFunctor.homotopicMapsNatIso goes from a given topological homotopy to a transformation. None asserts a realization homotopy from a transformation. The Loogle query has no hits."
+   "verdict": "no match: Nerve.lean:50-80 constructs induced nerve maps and their functor; NerveAdjunction.lean:232-250 concerns the 2-truncated nerve/homotopy-category adjunction. HomotopyCat constructions concern that ordinary homotopy category. None gives the continuous realization homotopy or the finite-zigzag criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-homotopy-fractions-square-criterion",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-nerve-natural-homotopy-equivalence",
+  "worker": "stage1",
+  "summary": "Replaced the earlier clause-restating child with an explicit natural-transformation prism, checked all barycentric gluing/descent relations and ordinary quotient-cylinder continuity, and wrote the finite reverse/concatenate argument. Reused the existing quotient-cylinder Mathlib leaf and added only the independent topological homotopy-invariance theorem for the final weak-equivalence inference, without assuming stationary basepoints. No item statement change or Lean attachment.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived Hom / derived limit calculation: localization mapping-space foundation, via the special-hammock homotopy-calculus criterion. Dwyer–Kan Proposition 8.2, following Proofs paragraph (ii), printed p. 29: natural transformations induce homotopies of nerves. Steps 1–3 expand the nerve-homotopy input, step 4 realizes the inverse-functor zigzags, and step 5 supplies the weak-equivalence conclusion. This is a technical descendant of the displayed coefficient adjunction, not a new unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-9f3117fff",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-9f3117fff (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-homotopy-equivalence-weak, the cited nodes def-cbc-enhanced-diagrams-cones, lem-cbc-quotient-cylinder-continuity and def-coef-zigzag-homotopy-calculus, the parent's citing step and the unit record. Compared with the side-tree base, the item's statement, stmt_deps, source, created and unit are unchanged. Sources checked: the scanned Dwyer–Kan p.29 says, after Prop 8.2, 'Proofs ... (ii) any natural transformation between functors induces a homotopy between their nerves'. Hatcher §4.1 p.342 says homotopy equivalences induce isomorphisms on all π_n 'even if basepoints are not required to be stationary'. Step 1: I checked the A×[1] functor's composition cases against naturality. Step 2: I recomputed the prism. The weights are nonnegative and sum to one, the R_i cover, and at the overlap t=S_i both sides give the same simplex by naturality. Step 3: I recomputed the face case (zero-width slab) and the degeneracy case (merged weights give S_j−t and t−S_{j+1}). The endpoints are |NF| at t=0 and |NG| at t=1. The Mathlib leaf IsQuotientMap.continuous_lift_prod_left (CompactOpen.lean:584-598) only needs a quotient map and a locally compact interval. Steps 4-5 are correct and match the def-coef weak-equivalence definition exactly. The new node is statement-only, self-contained, true, and not a restated clause; I tested it on the empty, point and disconnected cases. I searched the DAG with rg and read eight candidates; none is a duplicate. Mathlib has no induced map on π_n, so the node is correctly unsplit. The route is fine: def-cbc is a definition and the quotient-cylinder node a Mathlib leaf, so no tool_uses are needed and no SGA is cited. One minor point, not changed: the item's old statement takes geometric realization from def-coef, which does not define it; def-cbc, which the proof cites, does. No fixes."
+ }
 }

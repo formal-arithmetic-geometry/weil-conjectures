@@ -21,9 +21,54 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The pullback P is the equalizer of the two continuous maps S_1×S_2⇉S induced by f_1 and f_2. Since S is Hausdorff, this equalizer is closed in the compact Hausdorff product S_1×S_2, hence P is compact and Hausdorff. A connected subset of P is connected in S_1×S_2 and its two coordinate projections have connected images in the totally disconnected spaces S_1 and S_2; both projections are therefore constant, so the subset has at most one point. Thus P is totally disconnected. This is the standard closed-subspace/product argument underlying Stacks Tag 08ZY.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite: compact Hausdorff totally disconnected pullback subspace"
+   }
+  },
+  {
+   "text": "The set I is nonempty: use the one-block partition on each nonempty space and the empty partition on an empty space; these are compatible (a nonempty $S_r$ has nonempty image, so $S$ is then nonempty). Given two compatible triples, intersect the blocks in each of the three coordinates and discard empty intersections. The resulting finite clopen partitions refine both triples. If a source intersection block $a\\cap a'$ is nonempty, with $a\\subseteq f_r^{-1}(c)$ and $a'\\subseteq f_r^{-1}(c')$, then $a\\cap a'\\subseteq f_r^{-1}(c\\cap c')$ and $c\\cap c'$ is nonempty, so compatibility is preserved. Hence I is directed, and all A_{r,i}, C_i and B_i are finite discrete spaces. For $i\\le j$ each block at $j$ lies in a unique block at $i$, giving maps $A_{r,j}\\to A_{r,i}$ and $C_j\\to C_i$. They commute with the $g$: if $a'\\subseteq a$ with $a'\\in A_{r,j}$, $a\\in A_{r,i}$, then the nonempty set $f_r(a')$ lies in both $g_{r,j}(a')$ and $g_{r,i}(a)$, so the block of $\\gamma_i$ containing $g_{r,j}(a')$ is $g_{r,i}(a)$. Hence the product map sends $B_j$ into $B_i$; this is $b_{ji}$, and $b_{ki}=b_{ji}\\circ b_{kj}$ for $i\\le j\\le k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY (lemma-profinite), proof: the directed set of finite disjoint clopen decompositions and its refinement maps"
+   }
+  },
+  {
+   "text": "Separation: if $x\\ne x'$ in one of the compact Hausdorff totally disconnected spaces $S_1,S,S_2$, Hausdorffness gives an open $U\\ni x$ with $x'\\notin U$, and [lem-weil-pbc-profinite-clopen-basis] gives a clopen $V$ with $x\\in V\\subseteq U$; the blocks of $\\{V, \\text{complement of } V\\}$ that are nonempty form a finite clopen partition putting $x,x'$ in different blocks. Every finite clopen partition $\\alpha$ of $S_1$ occurs in the compatible triple $t(\\alpha)=(\\alpha,\\text{one-block},\\text{one-block})$ (empty partitions on empty spaces), and similarly for $S_2$; every partition $\\gamma$ of $S$ occurs in the compatible triple $(f_1^{-1}\\gamma,\\gamma,f_2^{-1}\\gamma)$ of nonempty inverse-image blocks. Injectivity: if $(s_1,s_2)\\ne(s_1',s_2')$ in $P$, say $s_1\\ne s_1'$, a separating partition $\\alpha$ of $S_1$ gives $p_{t(\\alpha)}$ different first components; likewise for $S_2$. Surjectivity: let $(x_i)$ be coherent. For a partition $\\alpha$ of $S_1$ let $Z_\\alpha$ be the first component of $x_{t(\\alpha)}$, a nonempty clopen block. For every $i$ we have $i\\ge t(\\alpha_{1,i})$, so coherence gives that the first component of $x_i$ is $Z_{\\alpha_{1,i}}$; and if $\\beta$ refines $\\alpha$ then $t(\\beta)\\ge t(\\alpha)$ and $Z_\\beta\\subseteq Z_\\alpha$. Given finitely many $\\alpha$'s, a common refinement $\\beta$ (step 2) has $Z_\\beta$ inside all their $Z_\\alpha$, so the closed sets $Z_\\alpha$ have the finite intersection property; by compactness of $S_1$ (Tag 005D) they have a common point $s_1$, unique by separation. Do the same for $S_2$ to obtain $s_2$. Then $p_i(s_1,s_2)$ has the components of $x_i$ for every $i$, once $(s_1,s_2)\\in P$. For a partition $\\gamma$ of $S$ and $i=(f_1^{-1}\\gamma,\\gamma,f_2^{-1}\\gamma)$, $x_i=(a_1,a_2)\\in B_i$ with $s_r\\in a_r$, so $f_r(s_r)\\in g_{r,i}(a_r)$ and $g_{1,i}(a_1)=g_{2,i}(a_2)$: $f_1(s_1)$ and $f_2(s_2)$ lie in the same block of every partition of $S$. By separation in $S$, $f_1(s_1)=f_2(s_2)$. Thus $(s_1,s_2)\\in P$ and it maps to $(x_i)$. If $P$ is empty, no coherent family exists by this argument, so the empty case needs no choice.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY (lemma-profinite), proof: injectivity by clopen separation and surjectivity by Tag 005D (lemma-intersection-closed-in-quasi-compact), applied to the two source spaces and the base"
+   }
+  },
+  {
+   "text": "Each coordinate p_i is continuous because the inverse image of a block is the corresponding clopen subset of P. Therefore the canonical map into the product of the finite discrete B_i, and hence into its compatibility subspace, is continuous. The source P is compact by step 1 and the target compatibility subspace is Hausdorff as a subspace of a product of finite discrete Hausdorff spaces. A continuous bijection from compact to Hausdorff is a homeomorphism. This proves the asserted homeomorphism with the displayed subspace topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A2P (lemma-describe-limits), proof: the limit is the compatibility subspace of the product; Tag 08YE (lemma-bijective-map): a continuous bijection from a quasi-compact space to a Hausdorff space is a homeomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-clopen-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY, 08ZZ and 0A2P; compatible-partition span construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -107,10 +152,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-to-proetale-finite-limits",
   "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-quotient-fiber-product",
+  "worker": "stage1",
+  "summary": "Split the compatible finite-partition approximation into four direct topological construction steps: compact Hausdorff totally disconnected pullback, directed compatible refinements, bijection with the inverse-limit compatibility subspace, and the compact-to-Hausdorff homeomorphism. No auxiliary nodes were needed; the steps use only the definitions and the cited Stacks topology arguments. Maintainer reader fix (2026-10-17): step 3's separation of points by clopen partitions now cites the Mathlib leaf lem-weil-pbc-profinite-clopen-basis instead of the proof of Tag 08ZY; step 3 writes out the finite-intersection argument (Tag 005D) and the compatible triples used; step 2 checks that refinement maps commute with the g-maps; step 4 cites Tag 08YE for the compact-to-Hausdorff criterion.",
+  "blueprint": "Realizes the Fibre products paragraph of lem-sfb-profinite-to-proetale-finite-limits by constructing its compatible finite quotient span and inverse-limit homeomorphism."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-56d06b42e",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-56d06b42e (reviewer sub-agent of L); spot-checked: I read the whole delivery and the statement is true. It needed one missing citation (C1/C2/C3) and two thin spots filled in. Statement: a self-contained profinite span-limit lemma (compatible-partition triples I, finite pullbacks B_i, P homeomorphic to lim B_i). I checked it against Stacks 08ZY's statement and proof (topology.tex lemma-profinite), 0A2P, 005D and 08YE, and against the blueprint main-20261015 'Fibre products' paragraph of lem-sfb-profinite-to-proetale-finite-limits. I tested empty spaces, an empty source, a one-point base, finite discrete spans, disjoint images, and S_1=S_2=S Cantor with f=id, where finite stages are not surjective. It is not a duplicate: I searched the DAG with rg for 08ZY, 0A2P and clopen-partition phrasing and opened the clopen-basis, function-factorization, w-contractible clopen-partition and spectral-limit nodes. It is not a clause of its parent. The three kinds of Mathlib search are recorded and asLimit is not a one-line specialization. Steps 1 (closed equalizer, profinite) and 4 (compact-to-Hausdorff bijection) are correct. The fixes: step 3 was marked elementary but used 'finite clopen partitions separate points', which is 08ZY's proof via 08ZN, and attributed surjectivity to 0A2P. Step 3 now cites the existing Mathlib leaf lem-weil-pbc-profinite-clopen-basis (isTopologicalBasis_isClopen, Topology/Separation/Profinite.lean:66), writes out the t(alpha) and (f^-1 gamma, gamma, f^-1 gamma) triples and the finite-intersection argument (005D), and is set elementary=false; proof_deps is updated. Step 2 now checks that refinement maps commute with the g maps, so b_ji lands in B_i. Step 4's source place now names 08YE. The statement is unchanged and no target is involved. The only citation is a Mathlib leaf, so the route is unaffected and no tool_uses are needed; no SGA. The report is mostly a stale copy of the parent's report, which is a weak F review. The corrected file is fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-finite-quotient-fiber-product.json.; 1 file(s) fixed by the reviewer"
  }
 }

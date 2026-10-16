@@ -1,0 +1,78 @@
+{
+ "id": "lem-sfb-ind-arrow-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-compact",
+   "place": "Paragraph (1), realization closed under kernels and cokernels: represent an arbitrary ind-morphism by one filtered diagram of constructible morphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Common filtered presentation of a morphism of ind-objects",
+ "statement": "Let $\\mathcal H$ be a small category in a fixed universe [def-weil-size-convention]. Use the category $\\operatorname{Ind}(\\mathcal H)$ of small filtered diagrams in $\\mathcal H$, with\n$$\\operatorname{Hom}_{\\operatorname{Ind}(\\mathcal H)}((C_i),(D_j))=\\varprojlim_i\\varinjlim_j\\operatorname{Hom}_{\\mathcal H}(C_i,D_j).$$\nEquivalently its objects are presheaves $\\mathcal H^{\\mathrm{op}}\\to\\mathrm{Set}$ that are small filtered colimits of representables $h_C(T)=\\operatorname{Hom}_{\\mathcal H}(T,C)$; maps are natural transformations. Filtered diagrams and colimits have the convention of [def-weil-pbc-category-colimit]. For every morphism $u:A\\to B$ in $\\operatorname{Ind}(\\mathcal H)$ there exist a small filtered category $I$, diagrams $F,G:I\\to\\mathcal H$, and a natural transformation $v:F\\to G$, together with isomorphisms\n$$A\\simeq\\varinjlim_{i\\in I}h_{F(i)},\\qquad B\\simeq\\varinjlim_{i\\in I}h_{G(i)}$$\nunder which $u$ is the map induced by the maps $v_i:F(i)\\to G(i)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md",
+  "place": "Paragraph (1), realization closed under kernels and cokernels: represent an arbitrary ind-morphism by one filtered diagram of constructible morphisms; categorical tool: Mathlib/CategoryTheory/Limits/Indization/Category.lean:291; Ind convention: Stacks Tag 05PW (categories-remark-ind-category)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between ind objects can be represented as a filtered colimit of morphisms in the original category",
+   "results": "CategoryTheory.nonempty_indParallelPairPresentation; CategoryTheory.Ind.presentation; CategoryTheory.Limits.IndObjectPresentation; CategoryTheory.Limits.IsIndObject.isFiltered; CategoryTheory.Ind",
+   "date": "2026-10-17",
+   "verdict": "partial match: parallel-pair presentation gives this; exact arrow theorem located by subsequent searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every arrow in the category of ind objects is isomorphic to the colimit of a natural transformation over one small filtered index category",
+   "results": "CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim; CategoryTheory.instHasFilteredColimitsInd; CategoryTheory.Ind.presentation; CategoryTheory.Limits.isIndObject_colimit; CategoryTheory.Ind.lim",
+   "date": "2026-10-17",
+   "verdict": "match: exact arrow-presentation declaration, read at lines 291-300"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim",
+   "results": "CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim, Mathlib.CategoryTheory.Limits.Indization.Category",
+   "date": "2026-10-17",
+   "verdict": "match: same hypotheses and conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_nonempty_arrow_mk_iso_ind_lim|def Ind.lim|PreservesFiniteLimits.*Ind.lim|PreservesFiniteColimits.*Ind.lim",
+   "results": "CategoryTheory/Limits/Indization/Category.lean:211 Ind.lim; :216 Ind.limCompInclusion; :291 Ind.exists_nonempty_arrow_mk_iso_ind_lim; read lines 180-300",
+   "date": "2026-10-17",
+   "verdict": "match: arrow theorem at line 291, with Ind.lim defined at 211"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism in an ind category is isomorphic to a filtered colimit of morphisms from the original category",
+   "results": "CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim; CategoryTheory.Limits.IndObjectPresentation.mk; CategoryTheory.Limits.isIndObject_colimit; CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered",
+   "date": "2026-10-17",
+   "verdict": "match: first hit is the exact theorem"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim",
+  "file": "Mathlib/CategoryTheory/Limits/Indization/Category.lean",
+  "how": "exact; Mathlib/CategoryTheory/Limits/Indization/Category.lean:291; the small category and indexing universe are fixed as in the statement",
+  "line": 291
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-int-compactness-compact",
+  "date": "2026-10-17",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness"
+}

@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-brown-hypotheses-ambient",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The localizing category is locally small with split idempotents",
- "statement": "Let $\\Lambda$ be admissible. $\\Loc(\\Dctf(X,\\Lambda))$ is a locally small triangulated category with arbitrary\ndirect sums, and every idempotent in it splits.",
+ "statement": "Let $X$ be a scheme and let $\\Lambda$ be one of the condensed coefficient rings listed, with its coefficient data and topology, in [sk-def-localizing-closure]. Work with small sites and sums in the fixed universe of [def-weil-size-convention]. The full subcategory $\\Loc(\\Dctf(X,\\Lambda))$ of $D(\\Mod_{\\Lambda_X})$ defined in [sk-def-localizing-closure] is locally small and triangulated [def-weil-triangulated-category], has arbitrary small direct sums, and has split idempotents: for every $e:K\\to K$ with $e\\circ e=e$, there are an object $J$ of this subcategory and maps $i:J\\to K$, $p:K\\to J$ in it with $i\\circ p=e$ and $p\\circ i=\\mathrm{id}_J$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-ambient.md",
   "place": "node det-brown-hypotheses-ambient, order None",
@@ -18,37 +18,171 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-weil-size-convention",
+  "def-weil-triangulated-category"
+ ],
  "proof": [
   {
-   "text": "*Locally small.* $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ is a Grothendieck abelian category, so its unbounded derived\ncategory $\\D(X_{\\mathrm{proét}},\\Lambda)$ exists with small Hom sets (Hom sets are computed via K-injective\nresolutions, which exist in a Grothendieck category). A full subcategory has the same Hom sets.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $R=\\Lambda_X$, $\\mathcal A=\\Mod_R(\\Sh(X_{\\mathrm{proét}},\\Ab))$ and $\\mathcal T=D(\\mathcal A)$ as in [sk-def-localizing-closure], on the small site skeleton of [def-weil-pbc-proetale-site], with coefficient values in the common larger universe of [def-weil-size-convention]. The coefficient rings listed there are commutative; [sk-def-sfb-pulled-back-coefficients] makes $R$ a commutative ring object of abelian sheaves. The tensor and strong monoidal abelian sheafification are those of [sk-def-sfb-sheaf-tensor]. In particular sheafification carries tensor products of local equivalences to isomorphisms, because its tensor comparison identifies their images with tensor products of isomorphisms. Thus the size, sheafification and monoidality hypotheses of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] hold. Apply its equivalence to $R$. It identifies $\\mathcal A$ with sheaves of modules over the reconstructed section ring sheaf, whose multiplication is $(r,s)\\mapsto\\mu(r\\otimes s)$ and whose unit is $\\eta(1)$, preserving underlying abelian sheaves, sections and restriction maps identically. Denote this ring sheaf again by $R$. The coefficient ring object has stayed the actual pulled-back condensed ring throughout.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sheafified tensor and bilinear universal property; existing internal-abelian-sheaf-module equivalence and pulled-back coefficient definitions"
+   }
   },
   {
-   "text": "*Triangulated with sums.* $\\Loc(\\Dctf(X,\\Lambda))$ is by definition ([sk-def-localizing-closure]) a full\ntriangulated subcategory closed under the direct sums of $\\D(X_{\\mathrm{proét}},\\Lambda)$, which exist (termwise\nsums of complexes); so it has arbitrary direct sums, computed in the ambient category.",
+   "text": "Use the small skeleton of $X_{\\mathrm{proét}}$ in [def-weil-pbc-proetale-site], with coefficient values and indexing sets in the same larger universe fixed by [def-weil-size-convention]. The theorem [lem-weil-pbc-ring-sheaves-grothendieck] applies to this small site and its sheaf of rings $R$, so its category $\\mathcal B$ of sectionwise left $R$-module sheaves is Grothendieck abelian. Write $F:\\mathcal A\\simeq\\mathcal B$ for step 1's equivalence. Its unchanged underlying abelian sheaves make it additive. For any diagram in $\\mathcal A$, the Hom bijections of $F$ identify its cocones with the cocones of its image; applying a quasi-inverse to the colimit in $\\mathcal B$ consequently gives its colimit in $\\mathcal A$. For a morphism $f$, a quasi-inverse image of $\\ker(Ff)$ is a kernel of $f$: the Hom bijections identify arrows annihilated by $f$ with arrows annihilated by $Ff$, and identify their unique factorizations through these objects. A quasi-inverse image of $\\operatorname{coker}(Ff)$ is a cokernel of $f$, since the Hom bijections also identify arrows annihilating $f$ and their unique factorizations. The canonical coimage-to-image map becomes an isomorphism in the abelian category $\\mathcal B$; since an equivalence reflects isomorphisms, $\\mathcal A$ is abelian. Thus exact sequences are detected by $F$, and the exactness of filtered colimits in $\\mathcal B$ proves exactness in $\\mathcal A$. If $G$ is a generator of $\\mathcal B$, then for unequal maps $f,g$ in $\\mathcal A$ choose a map $G\\to F(\\operatorname{dom} f)$ distinguishing $Ff,Fg$ and use the Hom bijection to get a distinguishing map from a quasi-inverse image of $G$. Hence $\\mathcal A$ is Grothendieck abelian in that universe. By [lem-sfb-grothendieck-k-injective], every unbounded complex in $\\mathcal A$ has a monomorphic quasi-isomorphism into a K-injective complex; no constructibility, boundedness or completeness assumption is used.",
    "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q (remark-existence-D), final sentence; Tag 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "For $K,L\\in\\mathcal T$, choose representing complexes $N,M$ using the localization description [def-weil-abstract-derived-category], and a K-injective resolution $M\\to I$ supplied by step 2. Since $QM\\cong QI$, the bijection of [lem-weil-pbc-kinjective-hom-derived] gives\n$$\\Hom_{\\mathcal T}(K,L)\\cong\\Hom_{K(\\mathcal A)}(N,I).$$\nThe right side is a set in the fixed universe: chain maps form a subset of $\\prod_{n\\in\\mathbf Z}\\Hom_{\\mathcal A}(N^n,I^n)$, and chain-homotopy classes form a quotient of that set. Here each sheaf-module Hom is itself a subset of the product of sectionwise maps over the small site; the module values, the site skeleton and $\\mathbf Z$ have the common size fixed in step 2. If the localization was initially formed in a larger universe, this bijection provides its small Hom sets. Thus $\\mathcal T$ is locally small. The subcategory $\\Loc(\\Dctf(X,\\Lambda))$ is full by [sk-def-localizing-closure], so its Hom sets are precisely these ambient Hom sets.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
     "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q (remark-existence-D), displayed Hom equality; derived.tex Tag 070I (lemma-K-injective), assertion (3)"
+   }
   },
   {
-   "text": "*Idempotents.* A triangulated category with countable direct sums is idempotent complete (Stacks, Tag\n05QW): for $e\\colon K\\to K$ idempotent, the homotopy colimit of $K\\xrightarrow{e}K\\xrightarrow{e}\\cdots$, the cone\nof $1-\\mathrm{shift}$ on $\\bigoplus_{\\mathbf N}K$, is an image of $e$. This homotopy colimit is built from sums\nand a cone, hence lies in $\\Loc(\\Dctf(X,\\Lambda))$.",
-   "uses": [],
-   "elementary": null
+   "text": "The ambient $\\mathcal T$ is an additive triangulated category with integer shifts and the cone triangles described in [def-weil-abstract-derived-category]. Since $\\mathcal A$ is Grothendieck abelian by step 2, apply [lem-kun-grothendieck-derived-coproducts]: for any small family of representing complexes $(N_a)$, the termwise sum complex $\\bigoplus_aN_a$ represents a coproduct of $(QN_a)$ in $\\mathcal T$. Every derived object has a representing complex, so $\\mathcal T$ has all such coproducts, including the empty and countable sums.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9 (lemma-derived-products), assertions (1)-(2); triangulated structure as in derived.tex Tag 05RR"
+   }
+  },
+  {
+   "text": "Write $\\mathcal L=\\Loc(\\Dctf(X,\\Lambda))$. Its defining object predicate in [sk-def-localizing-closure] is membership in every full replete triangulated subcategory containing $\\Dctf(X,\\Lambda)$ and closed under small ambient sums. The ambient $\\mathcal T$ itself is one such subcategory by step 4. The zero object, shifts, cones and isomorphic replacements of objects of $\\mathcal L$ lie in every subcategory in this definition, and hence in $\\mathcal L$. By [def-weil-triangulated-subcategory], the full subcategory on this predicate has the induced triangulated structure. For any small family $(L_a)$ in $\\mathcal L$, its ambient sum from step 4 belongs to every defining subcategory, hence to $\\mathcal L$. For each $B\\in\\mathcal L$, fullness identifies\n$$\\Hom_{\\mathcal L}(\\bigoplus_aL_a,B)=\\Hom_{\\mathcal T}(\\bigoplus_aL_a,B)\\cong\\prod_a\\Hom_{\\mathcal T}(L_a,B)=\\prod_a\\Hom_{\\mathcal L}(L_a,B).$$\nThe bijection is given by the ambient coprojections, which are morphisms of $\\mathcal L$ by fullness. Thus these ambient sums are sums in $\\mathcal L$, including the zero object for the empty family.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-ambient.proof.md",
+    "place": "Triangulated with sums paragraph; intersection definition in sk-def-localizing-closure/_section.md; derived.tex Tag 05QM"
+   }
+  },
+  {
+   "text": "By step 5, $\\mathcal L$ is in particular pretriangulated, has a zero object, the additive integer shifts inherited from the ambient derived category, and countable coproducts. Apply [lem-countable-coproducts-idempotent-complete] to $\\mathcal L$ itself. It says that this category is idempotent complete. Consequently, for every $e:K\\to K$ in $\\mathcal L$ with $e^2=e$, its splitting object $J$ and splitting maps $i:J\\to K$, $p:K\\to J$ lie in $\\mathcal L$ and satisfy $ip=e$, $pi=\\mathrm{id}_J$, as required. Applying the theorem inside $\\mathcal L$ ensures that the splitting is internal to the localizing closure.",
+   "uses": [
+    "lem-countable-coproducts-idempotent-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QW (lemma-projectors-have-images-triangulated), countable-coproduct assertion"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure"
+  "sk-def-localizing-closure",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-triangulated-subcategory",
+  "lem-countable-coproducts-idempotent-complete"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-ambient.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-ambient.proof.md",
+  "place": "All three paragraphs expanded using Stacks Tags 03EK, 079P, 079Q, 070I, 07D9, 05QM and 05QW and the existing generic DAG statements."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localizing|IsIdempotentComplete|LocallySmall",
+   "results": "Five textual hits in Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean:12,16,17,40,43. Reading the file shows Verdier-relative localizing predicates, not closure under arbitrary coproducts.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Triangulated, IsIdempotentComplete",
+   "results": "Loogle returned unknown identifier 'Triangulated'; this first query was ill-formed and was corrected in the later qualified query.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localizing subcategory of the derived category of a Grothendieck abelian category has small Hom sets, arbitrary direct sums, a triangulated structure and split idempotents.",
+   "results": "DerivedCategory.instIsTriangulated, HasDerivedCategory, HasDerivedCategory.standard, Triangulated.Localization.isTriangulated, its localization instance, hasExt_of_hasDerivedCategory, DerivedCategory.instCategory, and MorphismProperty.locallySmall_of_hasLocalization. Reading DerivedCategory/Basic.lean shows the small-Hom localization is an assumption; none proves the full localizing-closure assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localizing subcategory generated by constructible complexes in the unbounded derived category of sheaves of modules is locally small, triangulated, has arbitrary coproducts and split idempotents.",
+   "results": "HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory, DerivedCategory.instCategory, DerivedCategory.Q, the two derived-localization instances, and Functor.isHomological_of_localization; infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete, CategoryTheory.Pretriangulated",
+   "results": "Zero hits for the qualified joint pattern.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|IsIdempotentComplete|LocallySmall|HasCoproducts",
+   "results": "DerivedCategory/Plus.lean:11,86 uses Verdier right-localizing subcategories; DerivedCategory/Ext/EnoughProjectives.lean:126 and Ext/EnoughInjectives.lean:127 concern Ext. No theorem giving all clauses of this item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full triangulated subcategory closed under all small coproducts has split idempotents and is locally small if its ambient category is locally small.",
+   "results": "Eight ObjectProperty/Triangulated.Subcategory infrastructure hits: IsTriangulatedClosed₃, Triangulated.Subcategory, IsTriangulatedClosed₂, instIsTriangulatedClosed₃OfIsTriangulated, IsTriangulatedClosed₁, IsTriangulated.toIsTriangulatedClosed₂, Triangulated.Subcategory.ext₂, Triangulated.Subcategory.ext₂′. Reading Subcategory.lean confirms only the subcategory infrastructure.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct closed triangulated hull in a derived category of modules over a ringed site is locally small and Karoubian",
+   "results": "Eight hits: HasDerivedCategory.standard, DerivedCategory.instIsTriangulated, HasDerivedCategory, DerivedCategory.TStructure.t, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.instPretriangulated, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsLE. Read DerivedCategory/Basic.lean:35-48,72-90: these supply localization and triangulation infrastructure; the small-Hom choice remains an assumption and the generated hull, coproducts and idempotents are not given.",
+   "date": "2026-10-17",
+   "verdict": "no complete match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -62,5 +196,49 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-brown-hypotheses"
+ "unit": "sk-lem-brown-hypotheses",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-brown-hypotheses-ambient",
+  "worker": "stage1",
+  "summary": "Expanded the imported three-paragraph argument into six steps. Identified internal modules over the actual pulled-back condensed ring with modules over its ring sheaf before applying the existing Grothendieck theorem; computed small Hom sets via the existing K-injective resolution and Hom-comparison nodes; proved inheritance of the ambient triangulation and coproduct universal property by the intersection definition; applied the existing countable-coproduct idempotent-completeness node inside the localizing category. Clarified the implicit scheme and indexing universe in the statement, without changing the coefficients or conclusion. No new nodes or Mathlib leaves. Second reading uses the existing internal-abelian-sheaf-module equivalence, verifies its monoidal-sheafification and commutative-ring hypotheses, and writes out preservation of the Grothendieck axioms through that equivalence.",
+  "blueprint": "Realizes the locally-small paragraph by steps 1-3, the triangulated-with-sums paragraph by steps 4-5, and the idempotents paragraph by step 6 of main-20261015 sk-lem-brown-hypotheses-ambient.proof.md; these are the ambient part of step 1 of unit sk-lem-brown-hypotheses.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "The generic small-ringed-site Grothendieck theorem supplies exactly the ambient abelian-category premise used in the unit; it applies to the nonconstant pulled-back ring sheaf."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "The generic resolution theorem supplies the resolutions explicitly required by the locally-small paragraph; already Lean-closed in the shared DAG."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The generic Hom bijection computes ambient derived Hom as homotopy classes, as the unit requests; no node of this unit states the Hom computation."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "The generic Grothendieck-derived coproduct theorem supplies the ambient termwise sums used by the unit; no Brown-unit node supplies their existence."
+   },
+   {
+    "node": "lem-countable-coproducts-idempotent-complete",
+    "why": "This existing generic Stacks 05QW theorem is exactly the idempotent-splitting tool named in the unit, applied inside the localizing subcategory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-countable-coproducts-idempotent-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-642d631d2",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-642d631d2 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 ambient .md and .proof.md, the unit sk-lem-brown-hypotheses, and the statements of all 14 cited nodes. Stacks sources checked at the cited places: 05QW (derived.tex 805-813: a pre-triangulated category with countable coproducts is Karoubian), 07D9 (injectives.tex 2009-2044: termwise sums are direct sums in D(A) for Grothendieck A) and 079Q (1986-2006: Hom computed by K-injective resolutions). Statement: 'admissible' is spelled out as the coefficient list of sk-def-localizing-closure, which matches sk-thm-existence. X is an arbitrary scheme, a harmless generality. The ambient category stays D(Mod_{Λ_X}) of internal modules over the actual pulled-back condensed ring. Nothing is weakened. Steps: (1) the internal-module equivalence's hypotheses hold: commutativity, the V-small skeleton, and monoidal sheafification from sk-def-sfb-sheaf-tensor. (2) The Grothendieck theorem for ring sheaves applies, and colimits, kernels, cokernels, AB5 and the generator are carried across the equivalence explicitly; K-injective resolutions follow from the closed node. (3) The K-injective Hom bijection gives V-small Hom sets, and fullness passes them to Loc. (4) Termwise coproducts, including the empty family, match 07D9. (5) Inheritance by intersection plus the coproduct universal property is correctly elementary. (6) The 05QW-type lemma is applied to Loc itself. Edge cases checked: empty X, empty family, e=0 and e=id, zero ring. No cycle: the item is absent from the transitive closure of its dependencies (362 nodes). No new nodes and no SGA. Mathlib searches cover all three kinds and the invalid Loogle query is not counted as an absence. Accepted tool_uses: lem-weil-pbc-ring-sheaves-grothendieck, lem-sfb-grothendieck-k-injective, lem-weil-pbc-kinjective-hom-derived, lem-kun-grothendieck-derived-coproducts, lem-countable-coproducts-idempotent-complete. No fixes."
+ }
 }

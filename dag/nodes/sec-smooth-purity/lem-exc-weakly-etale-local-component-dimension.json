@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-exc-curve-open-dimension-general",
-   "place": "Proof, second paragraph: \"localization and strict henselization preserve excellence\"; Greco Theorem 5.3(iv) reduces this ascent assertion to Theorem 5.3(iii). In the present refinement: Dimension of local components under weakly etale maps from a universally catenary domain.",
+   "place": "Proof, second paragraph: “localization and strict henselization preserve excellence”; Greco Theorem 5.3(iv) reduces this ascent assertion to Theorem 5.3(iii). The present refinement is the component-dimension Lemma 5.5 used in the saturated-chain argument.",
    "via": [
     "lem-exc-weakly-etale-locally-nagata-catenary",
     "lem-exc-weakly-etale-excellent",
@@ -29,9 +29,120 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a minimal prime $P$ of $D$ and put $C'=\\overline C^{\\,K}$. Apply [lem-exc-weakly-etale-normalization-tensor]; its Noetherian, local, domain, universal-catenarity, finite-normalization and weak-etaleness hypotheses are exactly the hypotheses here. Thus $D$ is reduced and $D'=C'\\otimes_C D\\cong E\\times F$ as $D$-algebras, with $E$ the integral closure of $A=D/P$ in its fraction field. The quotient $A$ is a Noetherian local domain: ideals lift to finitely generated ideals of $D$, primes lift to primes containing $P$, and its maximal ideal is $\\mathfrak m_D/P$. If $c_1,\\ldots,c_r$ generate $C'$ over $C$, then $c_i\\otimes1$ generate $D'$ over $D$, since $c\\otimes d=\\sum_i(c_i\\otimes1)f(a_i)d$ for $c=\\sum_i a_ic_i$. Their images generate $E$ over $A$, because $P$ acts by zero in the specified projection. In particular $E$ is finite over $A$.",
+   "uses": [
+    "lem-exc-weakly-etale-normalization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "The inclusion $A\\hookrightarrow E$ is integral by the definition of integral closure. Hence [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim E=\\dim A=d$, and [lem-weil-pbc-noetherian-local-finite-krull-dimension] makes $d$ a finite nonnegative integer. By the definition of dimension a chain of length $d$ in $E$ exists. Using [lem-weil-pbc-proper-ideal-contained-in-maximal], choose a maximal ideal $\\mathfrak n$ containing its last prime. By [lem-weil-pbc-localization-dimension-chains-below-prime], that chain gives $\\dim E_{\\mathfrak n}\\ge d$, and every chain below $\\mathfrak n$ is a chain of $E$, giving the reverse bound. Thus $\\dim E_{\\mathfrak n}=\\dim A$. This uses no catenarity assertion about $A$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "Base change of $C\\to D$ gives the weakly etale map $C'\\to C'\\otimes_C D=D'$ by [lem-exc-weakly-etale-ring-base-change-composition]. In the product $E\\times F$, the projection to $E$ is localization at the idempotent $e=(1,0)$: after $e$ is inverted it becomes $1$, so every $(0,b)=(1-e)(0,b)$ becomes zero, and $(a,0)\\mapsto a$ supplies the inverse isomorphism. Thus the projection is weakly etale by [lem-weil-pbc-localization-ring-weakly-etale]. Composition and localization at $\\mathfrak n$ give a weakly etale map $h:C'\\to E_{\\mathfrak n}$. Let $\\mathfrak m$ be the inverse image of $\\mathfrak n$ in $C'$. The map $h$ inverts $C'\\setminus\\mathfrak m$. Its base change to $C'_{\\mathfrak m}$ identifies with $g:C'_{\\mathfrak m}\\to E_{\\mathfrak n}$: the isomorphism sends $(a/s)\\otimes b$ to $h(a)h(s)^{-1}b$, with inverse $b\\mapsto1\\otimes b$. Consequently $g$ is weakly etale and local; a fraction $a/s$ maps into the maximal ideal precisely when $a\\in\\mathfrak m$. No locality of $C'\\to E$ is asserted.",
+   "uses": [
+    "lem-exc-weakly-etale-ring-base-change-composition",
+    "lem-weil-pbc-localization-ring-weakly-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "Since $E$ is finite over the local ring $A$ by step 1, [lem-weil-pbc-finite-algebra-local-radical] gives $\\mathfrak n\\cap A=\\mathfrak m_A$. Therefore $\\mathfrak m\\cap C=\\mathfrak m_C$, using $\\mathfrak n\\cap D=\\mathfrak m_D$ and the locality of $C\\to D$. The finite map $C\\to C'$ is integral by [lem-weil-pbc-finite-algebra-is-integral]. Any prime properly containing $\\mathfrak m$ would still contract to the maximal ideal $\\mathfrak m_C$, contradicting [lem-weil-pbc-integral-incomparability]; [lem-weil-pbc-proper-ideal-contained-in-maximal] supplies a maximal ideal containing $\\mathfrak m$, so $\\mathfrak m$ is maximal. The finite-normalization dimension theorem [lem-exc-weakly-etale-normalization-dimension] now applies to $C$ and this $\\mathfrak m$, and gives $\\dim C'_{\\mathfrak m}=\\dim C$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-exc-weakly-etale-normalization-dimension",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "Write $R=C'_{\\mathfrak m}$ and $S=E_{\\mathfrak n}$. By the definition of weak etaleness, the local map $g:R\\to S$ is flat. Therefore [lem-pc-local-flat-faithful-flat-reflects-surjective] makes it faithfully flat, and [lem-sc-faithfully-flat-local-dimension] gives $\\dim R\\le\\dim S$.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-sc-faithfully-flat-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak p$ of $R$, the fibre $H=S\\otimes_R\\kappa(\\mathfrak p)$ is weakly etale over the field $\\kappa(\\mathfrak p)$ by [lem-exc-weakly-etale-ring-base-change-composition]. Every singly generated subalgebra of $H$ is finite by [lem-weil-pbc-weak-etale-field], so the finite-algebra integrality lemma [lem-weil-pbc-finite-algebra-is-integral] makes every element integral over $\\kappa(\\mathfrak p)$. All primes of $H$ contract to $(0)$ in that field; hence [lem-weil-pbc-integral-incomparability] makes them incomparable. The inclusion-preserving fibre-prime bijection [lem-weil-pbc-fibre-ring-primes-bijection] consequently forbids two comparable distinct primes of $S$ with the same contraction to $R$. Contracting a strict chain in $S$ therefore gives a strict chain of the same length in $R$, so $\\dim S\\le\\dim R$.",
+   "uses": [
+    "lem-exc-weakly-etale-ring-base-change-composition",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  },
+  {
+   "text": "Steps 2, 4, 5 and 6 give $\\dim(D/P)=\\dim E_{\\mathfrak n}=\\dim C'_{\\mathfrak m}=\\dim C$. This proves the claim for the arbitrary minimal prime $P$. For $\\dim C=0$ every equality is still valid. A ring with no minimal prime contributes no instance of the universally quantified conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings (1976), Lemma 5.5 proof",
+    "place": "Printed p. 147 (PDF p. 9), normalization, choice of n, local AF dimension equality, and universally catenary normalization dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-weakly-etale-normalization-dimension",
+  "lem-exc-weakly-etale-normalization-tensor",
+  "lem-exc-weakly-etale-ring-base-change-composition",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-sc-faithfully-flat-local-dimension",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-weak-etale-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Greco (1976), Lemma 5.5; literature/stacks-project/algebra.tex and more-algebra.tex",
+  "place": "Printed p. 147 (PDF p. 9), expanded into seven steps. The local AF dimension assertion is proved using existing flatness, fibre and incomparability nodes; the final normalization dimension input is the specialization of Tag 02IJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,12 +188,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-locally-nagata-catenary",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-weakly-etale-local-component-dimension",
+  "worker": "stage1",
+  "summary": "Second reader repaired the missing catenarity hypothesis in the choice of n, derived weak etaleness of the component projection and localized map, proved m maximal, and expanded the local AF dimension equality using existing nodes. Two new normalization statements remain; the redundant AF local-dimension helper was removed. The item statement is unchanged.",
+  "blueprint": "The steps realize the parent excellence-ascent route at the sentence “localization and strict henselization preserve excellence,” specifically the component-dimension refinement from Greco Lemma 5.5 used by Theorem 5.3(iii).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-faithfully-flat-local-dimension",
+    "why": "Generic faithful-flat local dimension inequality used in Step 5; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic dimension invariance under integral injective extensions used in Step 2; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic weak-etale-over-field finite-subalgebra property used in Step 6; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-faithfully-flat-local-dimension",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-weak-etale-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-839f8ffe5",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-839f8ffe5 (reviewer sub-agent of L); spot-checked: Item statement is unchanged; it is byte-identical to the base and was set by the reviewed parent lem-exc-weakly-etale-locally-nagata-catenary from Greco Lemma 5.5. Greco is not in literature/ and network access is blocked, so I could not reopen it. Instead I checked the item's truth through the full 7-step proof. Step 1: the tensor node's hypotheses are exactly the item's, and E is finite over D/P because the generators descend. Step 2: dim E_n = dim A, using integral-injective dimension, finite local dimension, maximal ideal existence and chains-below-prime; no catenarity of A is used. Step 3: the idempotent projection is a localization, so C'_m->E_n is a weakly étale base change and local; locality is claimed only after localizing. Step 4: n∩A = m_A, so m∩C = m_C, and m is maximal by incomparability. Step 5: flat local map, so faithfully flat, so dim R <= dim S. Step 6: the fibre over a field is weakly étale with integral elements (092Q), so fibre primes are incomparable and the inclusion-preserving fibre bijection gives dim S <= dim R. Step 7 is elementary. New node normalization-tensor is true: I checked it via Stacks 092W lemma-normality-goes-up (more-algebra.tex:30728, read) plus Q(D) = K⊗D reduced and zero-dimensional, then the product splitting over minimal primes. It is not derivable in 2–3 lines and is not a duplicate. New node normalization-dimension: Stacks 02IJ (algebra.tex:27520, read) with transcendence degree 0 and a finite residue extension. Universal catenarity is genuinely needed (Nagata example). Small cases checked: a DVR with its strict henselization, the nodal local ring with its henselization (semilocal C'), and a field. Route: off-unit citations are Mathlib leaves, Lean-closed nodes, a definition, or declared tools. Accepted tool_uses: lem-weil-pbc-weak-etale-field, lem-weil-pbc-integral-injective-dimension-equal, lem-sc-faithfully-flat-local-dimension (on route anyway). The removed af-local-dimension node has no file and no citation; the report's first section listing it is stale. The new nodes lack created.group (not a fault). Commutative algebra only: no base-change morphism or coefficient category, no SGA, no target touched. No changes."
+ }
 }

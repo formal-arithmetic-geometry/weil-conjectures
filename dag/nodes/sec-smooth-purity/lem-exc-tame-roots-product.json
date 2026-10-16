@@ -22,9 +22,110 @@
   "def-weil-algebraic-closure",
   "def-weil-l-adic-numbers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove that every primitive root of order $n$ lifts to a primitive root of order $N$ under the power map whenever $n\\mid N$ and both are prime to $p$. By [lem-sc-primitive-root], choose a primitive $N$-th root $\\eta$. The element $\\eta^{N/n}$ has order $n$: its $d$-th power is $1$ exactly when $N\\mid (N/n)d$, or $n\\mid d$. It generates $\\mu_n(k)$, so the prescribed primitive root is $(\\eta^{N/n})^b$ with $b$ prime to $n$. Use [lem-pc-crt-ideal-quotient-product] over $\\mathbf Z$ to choose a nonnegative integer $a$ with $a\\equiv b\\pmod n$ and $a\\equiv1\\pmod q$ for every prime $q\\mid N$ not dividing $n$. These ideals are pairwise coprime by Bezout's identity. Every prime dividing $N$ either divides $n$, and hence cannot divide $a$, or occurs among these $q$, and again cannot divide $a$. Thus $a$ is prime to $N$. The root $\\eta^a$ has order $N$ (if $N\\mid ad$, Bezout gives $N\\mid d$), and $(\\eta^a)^{N/n}$ is the prescribed root. For $n=1$ the congruence modulo $1$ imposes no condition; for $N=1$ take $\\eta=1$.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW (section-roots-of-1), finite cyclic groups; algebra.tex Tag 00DT (lemma-chinese-remainder), applied to the displayed integer ideals"
+   }
+  },
+  {
+   "text": "Put $N_0=1$ and $N_j=\\prod_{1\\leq i\\leq j,\\ (i,p)=1}i$. Each $N_j$ is positive and prime to $p$, $N_j\\mid N_{j+1}$, and every positive $m$ prime to $p$ divides $N_j$ for all $j\\geq m$. Starting with $\\eta_0=1$, use Step 1 recursively to choose a primitive $N_{j+1}$-th root $\\eta_{j+1}$ such that $\\eta_{j+1}^{N_{j+1}/N_j}=\\eta_j$. Composing these equations gives $\\eta_b^{N_b/N_a}=\\eta_a$ for $a\\leq b$. Repeated values of $N_j$ force equal roots because the exponent is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW (section-roots-of-1); explicit recursive choice using Step 1"
+   }
+  },
+  {
+   "text": "For $m$ prime to $p$, choose any $j\\geq m$ and set $\\zeta_m=\\eta_j^{N_j/m}$. If $j'$ is another choice, compare both with an index $b\\geq j,j'$ and use $\\eta_b^{N_b/N_j}=\\eta_j$; both expressions equal $\\eta_b^{N_b/m}$. This proves independence. Since $\\eta_j$ has order $N_j$, the equation $(\\eta_j^{N_j/m})^d=1$ is equivalent to $m\\mid d$, so $\\zeta_m$ has order $m$. For $m\\mid n$ take a single $j\\geq n$ and compute $\\zeta_n^{n/m}=\\eta_j^{(N_j/n)(n/m)}=\\zeta_m$; in particular $\\zeta_1=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW (section-roots-of-1); explicit all-orders compatibility constructed from the cofinal sequence"
+   }
+  },
+  {
+   "text": "Now let $(\\zeta_m)_m$ be any family satisfying the statement, including one just constructed. By [lem-sc-primitive-root], $\\mu_m(k)$ has $m$ elements. The map $\\theta_m:\\mathbf Z/m\\mathbf Z\\to\\mu_m(k)$, $[a]\\mapsto\\zeta_m^a$, is a homomorphism and is injective by the order-$m$ condition, hence bijective. For $m\\mid n$ its transition satisfies $(\\zeta_n^a)^{n/m}=\\zeta_m^a$, exactly reduction of $[a]$ modulo $m$. Consequently $(a_m)_m\\mapsto(\\theta_m(a_m))_m$ gives an isomorphism from $C=\\varprojlim_{(m,p)=1}\\mathbf Z/m\\mathbf Z$ to the root limit; its inverse applies $\\theta_m^{-1}$ in each coordinate. All levels are discrete, and the preimage of a coordinate cylinder is a coordinate cylinder, in both directions. Thus this is an isomorphism of topological groups.",
+   "uses": [
+    "lem-sc-primitive-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW (section-roots-of-1); compatibility of the finite cyclic identifications and the inverse-limit topology"
+   }
+  },
+  {
+   "text": "For $m=\\prod_{r\\mid m}r^{v_r(m)}$, apply [lem-pc-crt-ideal-quotient-product] to the finitely many ideals $r^{v_r(m)}\\mathbf Z$ in $\\mathbf Z$. Distinct prime powers are coprime by Bezout. Their intersection is $m\\mathbf Z$, since an integer is divisible by all these prime powers exactly when it is divisible by their product. This gives the ring isomorphism $\\gamma_m:\\mathbf Z/m\\mathbf Z\\to\\prod_{r\\mid m}\\mathbf Z/r^{v_r(m)}\\mathbf Z$ by ordinary reductions. If $m=1$, the index set is empty and both sides are the one-element ring. If $m\\mid n$, reducing a residue modulo $n$ first modulo $m$ and then modulo $r^{v_r(m)}$ is the same as reducing it directly to that prime power; this follows by taking an integer representative.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (lemma-chinese-remainder), finite prime-power ideals in the integers"
+   }
+  },
+  {
+   "text": "For a prime $r\\ne p$, let $R_r$ be the ring of compatible sequences $b_{r,a}\\in\\mathbf Z/r^a\\mathbf Z$, $a\\geq1$, with its subspace topology in the product of the discrete quotient rings. Restriction defines $C\\to\\prod_{r\\ne p}R_r$ by $(a_m)_m\\mapsto((a_{r^a})_{a\\geq1})_r$. Conversely, given $(b_{r,a})$, let $a_m$ be the unique residue whose reductions are $b_{r,v_r(m)}$ for $r\\mid m$, using $\\gamma_m$ of Step 5. For $m\\mid n$, compatibility of each $b_{r,a}$ shows that $a_n\\bmod m$ and $a_m$ have identical reductions at every prime power dividing $m$, so injectivity of $\\gamma_m$ makes them equal. Taking $m=r^a$ recovers $b_{r,a}$; applying $\\gamma_m$ recovers every original $a_m$. These are inverse ring maps. Restriction is continuous since its coordinates are input projections. Each output $a_m$ of the inverse depends on the finitely many discrete coordinates $b_{r,v_r(m)}$, so its fibres are open cylinders. This proves continuity of the inverse and hence the asserted topological product decomposition of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (lemma-chinese-remainder); the explicit restriction and reconstruction of compatible residue coordinates"
+   }
+  },
+  {
+   "text": "Fix $r\\ne p$. Append the unique coordinate modulo $r^0=1$ to $R_r$. Coordinatewise addition and multiplication preserve compatibility, so this is a commutative unital ring and each projection $f_a:R_r\\to\\mathbf Z/r^a\\mathbf Z$ is a unital ring homomorphism. Apply [lem-exc-padic-residue-universal-property] with this source ring and these compatible projections to obtain $\\psi_r:R_r\\to\\mathbf Z_r$ with $\\rho_a\\psi_r=f_a$. The same node says that the residues $\\rho_a$ are compatible, so they define $\\phi_r:\\mathbf Z_r\\to R_r$. The equality $\\phi_r\\psi_r=1$ follows at every coordinate from $\\rho_a\\psi_r=f_a$. For $x\\in\\mathbf Z_r$, $\\psi_r\\phi_r(x)$ and $x$ have equal residues at every level; point separation in that node proves $\\psi_r\\phi_r(x)=x$. Thus these are inverse ring isomorphisms. Appending or deleting the unique zero-th coordinate changes neither the ring nor its topology.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible sequences; exact specialization of the Mathlib residue universal property recorded in the cited leaf"
+   }
+  },
+  {
+   "text": "The same residue lemma gives $\\ker\\rho_a=r^a\\mathbf Z_r$ and $r^a\\mathbf Z_r=\\{x:|x|_r\\leq r^{-a}\\}$. The open norm ball $\\{y\\in\\mathbf Z_r:|y-x|_r<r^{-a}\\}$ about $x$ is contained in the fibre of $\\rho_a(x)$, since $|y-x|_r<r^{-a}$ implies $y-x\\in r^a\\mathbf Z_r$ by the displayed equality. This open neighbourhood at each $x$ proves that every residue map to its discrete quotient is locally constant. It follows by inverse images of coordinate cylinders that $\\phi_r$ is continuous. Conversely, given $b\\in R_r$ and $\\epsilon>0$, choose $a\\geq1$ with $r^{-a}<\\epsilon$ (since $r>1$). If $b'$ agrees with $b$ at coordinate $a$, then $\\rho_a(\\psi_r(b')-\\psi_r(b))=0$ and the displayed kernel/norm equality gives $|\\psi_r(b')-\\psi_r(b)|_r\\leq r^{-a}<\\epsilon$. The coordinate-$a$ cylinder is an open neighbourhood of $b$, which proves continuity of $\\psi_r$. Thus $R_r\\cong\\mathbf Z_r$ topologically. This argument uses the norm and topology of the valuation-ring definition, rather than assuming that definition already is an inverse limit.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), residue topology; norm and kernel clauses of the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Take the product of the mutually inverse continuous maps $\\phi_r,\\psi_r$; continuity follows coordinatewise in the product topology. Compose the inverse of the root/residue isomorphism in Step 4 with the isomorphism of Step 6 and these product isomorphisms. This gives exactly $\\varprojlim_{(m,p)=1}\\mu_m(k)\\cong\\prod_{r\\ne p}(\\mathbf Z_r,+)$. The finite maps used in Step 4 are precisely $[a]\\mapsto\\zeta_m^a$, so the resulting isomorphism is the one induced by the chosen family as required. Only that choice is noncanonical; Steps 5--8 use the canonical residue maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, second paragraph, displayed tame quotient product; compatible-root and Chinese-remainder identification made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-primitive-root",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-exc-padic-residue-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "Proof, second paragraph, tame quotient product, expanded using Stacks Tags 09HW, 00DT, 00M9 and the exact Mathlib p-adic residue API. The generator recursion and two-sided coordinate/topology arguments are supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +175,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "No exact match: no product equivalence was found in the adic-integer source directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of roots of unity of order prime to p over an algebraically closed field is noncanonically the product of the r adic integers for primes different from p",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"cyclotomicCharacter.toFun_apply\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] (g : L ≃+* L)\\n  [inst_3 : ∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)],\\n  cyclotomicCharacter.toFun p g = PadicInt.ofIntSeq (fun x => modularCyclotomicCharacter.aux g (p ^ x)) ⋯\", \"doc\": \"For a prime number $ p $ and a ring automorphism $ g : L \\to L $, the cyclotomic character evaluated at $ g $ is the $ p $-adic integer obtained as the limit of the sequence $ (m_i) $, where each $ m_i\"}\n  {\"name\": \"cyclotomicCharacter.toZModPow_toFun\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] (g : L ≃+* L)\\n  [inst_3 : ∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (n : ℕ),\\n  (PadicInt.toZModPow n) (cyclotomicCharacter.toFun p g) = ↑((modularCyclotomicCharacter L ⋯) g)\", \"doc\": \"For a prime $ p $, natural number $ n $, and automorphism $ g $ of a field $ L $ containing all $ p^n $-th roots of unity, the cyclotomic character $ \\\\chi_p(g) $ evaluated at $ n $ equals the modular \"}\n  {\"name\": \"cyclotomicCharacter.spec\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] {n : ℕ}\\n  [∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (g : L ≃+* L) (t : L),\\n  t ^ p ^ n = 1 → g t = t ^ ((PadicInt.toZModPow n) ↑((cyclotomicCharacter L p) g)).val\", \"doc\": \"For a prime $ p $, natural number $ n $, and an integral domain $ L $ containing $ p^n $-th roots of unity, the cyclotomic character $ \\\\chi_p $ maps each ring automorphism $ g : L \\\\to L $ to a unit in\"}\n  {\"name\": \"cyclotomicCharacter.toZModPow\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] {n : ℕ}\\n  [inst_3 : ∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (g : L ≃+* L),\\n  (PadicInt.toZModPow n) ↑((cyclotomicCharacter L p) g) = ↑((modularCyclotomicCharacter L ⋯) g)\", \"doc\": \"For a prime $ p $, natural number $ n $, and a commutative ring $ L $ with enough $ p^i $-th roots of unity for all $ i $, the cyclotomic character $ \\\\chi_p $ evaluated at an automorphism $ g : L \\\\to \"}\n  {\"name\": \"cyclotomicCharacter\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"(L : Type u) → [inst : CommRing L] → [IsDomain L] → (p : ℕ) → [inst_2 : Fact (Nat.Prime p)] → (L ≃+* L) →* ℤ_[p]ˣ\", \"doc\": \"For a prime number $ p $ and a commutative ring $ L $ that is an integral domain, the cyclotomic character is a group homomorphism from the automorphism group of $ L $ to the multiplicative group of $\"}\n  {\"name\": \"cyclotomicCharacter.toFun_spec\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)]\\n  [∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (g : L ≃+* L) {n : ℕ} (t : ↥(rootsOfUnity (p ^ n) L)),\\n  g ↑↑t = ↑↑t ^ ((PadicInt.toZModPow n) (cyclotomicCharacter.toFun p g)).val\", \"doc\": \"For any ring automorphism $ g $ of $ L $, prime $ p $, natural number $ n $, and $ p^n $-th root of unity $ t $ in $ L $, the automorphism $ g $ acts on $ t $ by raising it to the power of the image o\"}\n  {\"name\": \"cyclotomicCharacter.toFun\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"{L : Type u} → [inst : CommRing L] → [IsDomain L] → (p : ℕ) → [inst_2 : Fact (Nat.Prime p)] → L ≃+* L → ℤ_[p]\", \"doc\": \"Let `p` be a prime number, `L` be a commutative domain, and `g` be a ring automorphism of `L`. The `p`-adic cyclotomic character of `g` is an element of the ring of `p`-adic integers `\\\\mathbb{Z}_p`. I\"}\n  {\"name\": \"cyclotomicCharacter.continuous\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (K : Type u_1) (L : Type u_2) [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L], Continuous ⇑((cyclotomicCharacter L p).comp (MulSemiringAction.toRingAut Gal(L/K) L))\", \"doc\": \"The cyclotomic character homomorphism from the Galois group $\\\\mathrm{Gal}(L/K)$ to the multiplicative group of $p$-adic integers $\\\\mathbb{Z}_p^\\times$ is continuous with respect to the Krull topology o\"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match: the hits are cyclotomic characters, not compatible primitive roots at all prime-to-p levels or a product isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The profinite completion of the integers away from one prime decomposes into the product of the other prime adic integer rings by Chinese remainders",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PadicInt.adicCompletionIntegersEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"(R : Type u_2) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      [inst_2 : Algebra R ℚ] →\\n        [inst_3 : IsFractionRing R ℚ] →\\n          [inst_4 : IsIntegralClosure R ℤ ℚ] →\\n            (p : Nat.Primes) →\\n              ℤ_[↑p] ≃A[ℤ]\\n                ↥(IsDedekindDomain.HeightOneSpe\", \"doc\": \"For any prime number $ p $, there is a continuous algebra equivalence between the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $ and the adic completion integers at the height one prime ideal correspond\"}\n  {\"name\": \"PadicInt.withValIntegersRingEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/WithVal\", \"type\": \"{p : ℕ} → [inst : Fact (Nat.Prime p)] → ↥(Valued.integer (Rat.padicValuation p).Completion) ≃+* ℤ_[p]\", \"doc\": \"For a prime number $ p $, this establishes a ring equivalence between the ring of integers in the completion of $ \\\\mathbb{Q} $ with respect to the $ p $-adic valuation and the ring of $ p $-adic integ\"}\n  {\"name\": \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"∀ (R : Type u_2) [inst : CommRing R] [inst_1 : IsDedekindDomain R] [inst_2 : Algebra R ℚ] [inst_3 : IsFractionRing R ℚ]\\n  [inst_4 : IsIntegralClosure R ℤ ℚ] (p : Nat.Primes) (x : ℤ_[↑p]),\\n  ↑((PadicInt.adicCompletionIntegersEquiv R p) x) = (Padic.adicCompletionEquiv R p) ↑x\", \"doc\": \"For any prime $ p $ and any element $ x $ in the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $, the canonical equivalence between the $ p $-adic completion of the integers and the adic completion of $ \"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"{R : Type u_2} →\\n  [inst : CommRing R] →\\n    [inst_1 : Algebra R ℚ] →\\n      [inst_2 : IsIntegralClosure R ℤ ℚ] →\\n        [inst_3 : IsDedekindDomain R] →\\n          [inst_4 : IsFractionRing R ℚ] →\\n            (v : IsDedekindDomain.HeightOneSpectrum R) →\\n              ↥(IsDedekindDomain.HeightOneSpectr\", \"doc\": \"For a height one prime ideal $ v $ in the integral closure of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $, the valuation subring of the adic completion of $ \\\\mathbb{Q} $ with respect to $ v $ (consisting of elem\"}\n  {\"name\": \"PadicInt.coe_adicCompletionIntegersEquiv_symm_apply\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"∀ (R : Type u_2) [inst : CommRing R] [inst_1 : IsDedekindDomain R] [inst_2 : Algebra R ℚ] [inst_3 : IsFractionRing R ℚ]\\n  [inst_4 : IsIntegralClosure R ℤ ℚ] (p : Nat.Primes)\\n  (x : ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers ℚ (Rat.HeightOneSpectrum.primesEquiv.symm p))),\\n  ↑((PadicI\", \"doc\": \"For any prime $ p $, the $ p $-adic norm on the rational numbers $ \\\\mathbb{Q} $ satisfies the properties of an absolute value, including non-negativity, multiplicativity, and the triangle inequality.\"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] [inst_1 : Algebra R ℚ] [inst_2 : IsIntegralClosure R ℤ ℚ]\\n  [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R ℚ] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (x : ℤ_[↑(Rat.HeightOneSpectrum.primesEquiv v)]),\\n  ↑((Rat.HeightOneSpectrum.adicCompletionInteger\", \"doc\": \"For any height one prime ideal $\\\\mathfrak{p}$ in a Dedekind domain $R$ and any element $x$ in the $\\\\mathfrak{p}$-adic integers $\\\\mathbb{Z}_{\\\\mathfrak{p}}$, the inverse of the adic completion integers \"}\n  {\"name\": \"PadicInt.zmodRepr_natCast_zmodRepr\", \"module\": \"Mathlib/NumberTheory/Padics/RingHoms\", \"type\": \"∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (x : ℤ_[p]), (↑x.zmodRepr).zmodRepr = x.zmodRepr\", \"doc\": \"The mod-$ p $ representation function for p-adic integers is idempotent, meaning that applying it twice to any element $ x \\\\in \\\\mathbb{Z}_p $ yields the same result as applying it once: $ (x.\\\\text{zmo\"}\n  {\"name\": \"Padic.adicCompletionEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"(R : Type u_2) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      [inst_2 : Algebra R ℚ] →\\n        [inst_3 : IsFractionRing R ℚ] →\\n          [inst_4 : IsIntegralClosure R ℤ ℚ] →\\n            (p : Nat.Primes) →\\n              ℚ_[↑p] ≃A[ℚ]\\n                IsDedekindDomain.HeightOneSpect\", \"doc\": \"For a prime number $ p $, there is a continuous algebra equivalence between the field of $ p $-adic numbers $ \\\\mathbb{Q}_p $ and the adic completion of $ \\\\mathbb{Q} $ with respect to the height one pr\"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match under the second phrasing: adicCompletionIntegersEquiv and withValIntegersRingEquiv compare completions at one prime, not the prime-to-p product or the compatible-root family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible primitive roots of unity and the prime to p completion of the integers as a product of adic integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PadicInt\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": Type\", \"doc\": \"The set of p-adic numbers with p-adic norm less than or equal to 1.\"}\n  {\"name\": \"PadicInt.adicCompletionIntegersEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℤ_[p] ≃A[ℤ] ((primesEquiv (R := R)).symm p).adicCompletionIntegers ℚ\", \"doc\": \"For any prime number $ p $, there is a continuous algebra equivalence between the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $ and the adic completion integers at the height one prime ideal correspond\"}\n  {\"name\": \"Padic\", \"module\": \"Mathlib.NumberTheory.Padics.PadicNumbers\", \"type\": \"(p : ℕ) [Fact p.Prime]\", \"doc\": \"For a prime number $ p $, the $ p $-adic numbers are defined as the Cauchy completion of the rational numbers $ \\\\mathbb{Q} $ with respect to the $ p $-adic norm. This completion is constructed as the \"}\n  {\"name\": \"IsPrimitiveRoot.adjoinEquivRingOfIntegers.congr_simp\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Basic\", \"type\": \"∀ {n n_1 : ℕ} (e_n : n = n_1) {K : Type u} [inst : Field K] {ζ : K} [inst_1 : NeZero n] [inst_2 : CharZero K]\\n  [inst_3 : IsCyclotomicExtension {n} ℚ K] (hζ : IsPrimitiveRoot ζ n),\\n  hζ.adjoinEquivRingOfIntegers = ⋯.adjoinEquivRingOfIntegers\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a primitive $ n $-th root of unity $ \\\\zeta $. The $ \\\\mathbb{Z} $-subalgebra of $ K $ generated by $ \\\\zeta $ is isomorphic to the ring\"}\n  {\"name\": \"IsPrimitiveRoot.adjoinEquivRingOfIntegers_apply\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Basic\", \"type\": \"∀ {n : ℕ} {K : Type u} [inst : Field K] {ζ : K} [inst_1 : NeZero n] [inst_2 : CharZero K]\\n  [inst_3 : IsCyclotomicExtension {n} ℚ K] (hζ : IsPrimitiveRoot ζ n) (a : ↥(Algebra.adjoin ℤ {ζ})),\\n  hζ.adjoinEquivRingOfIntegers a = (IsIntegralClosure.lift ℤ (NumberField.RingOfIntegers K) K) a\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a primitive $ n $-th root of unity $ \\\\zeta $. The $ \\\\mathbb{Z} $-subalgebra of $ K $ generated by $ \\\\zeta $ is isomorphic to the ring\"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(v : HeightOneSpectrum R) : v.adicCompletionIntegers ℚ ≃A[ℤ] ℤ_[primesEquiv v]\", \"doc\": \"For a height one prime ideal $ v $ in the integral closure of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $, the valuation subring of the adic completion of $ \\\\mathbb{Q} $ with respect to $ v $ (consisting of elem\"}\n  {\"name\": \"IsPrimitiveRoot.adjoinEquivRingOfIntegers\", \"module\": \"Mathlib.NumberTheory.NumberField.Cyclotomic.Basic\", \"type\": \"[IsCyclotomicExtension { n } ℚ K] (hζ : IsPrimitiveRoot ζ n) : adjoin ℤ ({ ζ } : Set K) ≃ₐ[ℤ] 𝓞 K\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a primitive $ n $-th root of unity $ \\\\zeta $. The $ \\\\mathbb{Z} $-subalgebra of $ K $ generated by $ \\\\zeta $ is algebraically equivale\"}\n  {\"name\": \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) (x : ℤ_[p]) : (adicCompletionIntegersEquiv R p x) = adicCompletionEquiv R p x\", \"doc\": \"For any prime $ p $ and any element $ x $ in the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $, the canonical equivalence between the $ p $-adic completion of the integers and the adic completion of $ \"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match: the results define or compare individual p-adic rings and cyclotomic integer rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", \"rootsOfUnity\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "primeTo|rootsOfUnity|[Ii]nverse[Ll]imit|profinite.*completion",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match in Mathlib/NumberTheory/Padics: zero hits for this pattern. The individual-prime residue API is separately recorded as a new Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-henselian-dvr-tame-sequence",
@@ -85,5 +221,20 @@
   "group": "Q05"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-tame-roots-product",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Wrote the primitive-generator lifting and cofinal recursion, the arbitrary-family root/residue isomorphism, finite CRT and explicit limit/product coordinates, and the valuation-ring topology comparison. Reused the closed primitive-root node and existing Mathlib CRT leaf; added one Mathlib leaf for the p-adic residue universal property, kernels, separation and norm ideals. No Lean or compilation.",
+  "blueprint": "All steps realize the displayed product in the second paragraph of lem-exc-dvr-galois.proof.md; this is the root-coordinate identification used in Step 6 of lem-exc-henselian-dvr-tame-sequence. The inherited sec-smooth-purity/sk-prop-a1-kummer binding is preserved. No unit key-node realization fields are due for this auxiliary item."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-dbabc856f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-dbabc856f (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited node statement, the parent's Step 6, the blueprint paragraph (main-20261015, lem-exc-dvr-galois proof, second paragraph) and Stacks 09HW, 00DT, 00M9 and 0BUB at their labels. The item's statement is true, not weakened, and has the right topologies and divisibility transitions. Steps 1-9 are each correct. Step 1: a is prime to N, and lifting a prescribed primitive root passed my own check over all n|N<=60 and all units b. Steps 2-3: the recursion has an explicit base and step, and the choice of zeta_m is independent of j with exact order m. Step 4: bijection from injectivity plus the cardinality in lem-sc-primitive-root. Steps 5-6: CRT over Z, and the inverse is continuous because each coordinate depends on finitely many inputs. Step 7: lift_spec and point separation give the two inverse laws. Step 8: the kernel and norm clauses give continuity in both directions. The new node lem-exc-padic-residue-universal-property is a genuine Mathlib leaf, one declaration per clause; I checked RingHoms.lean lines 447, 459, 478, 658, 684 and 693 (lift hypotheses at 529 and 548), 713, and PadicIntegers.lean line 470 in the pinned Mathlib. It is correct at n=0 and for the zero ring, satisfies B1-B7, and does not restate the item. The duplicate search found nothing; same_as=[] is correct. The route stays in the unit: lem-sc-primitive-root is Lean-closed and the CRT and new nodes are Mathlib leaves, so no tool_uses are needed. No SGA is used. Minor, non-blocking: the leaf has no lean_audit field, which lean_status fills. No fixes."
+ }
 }
