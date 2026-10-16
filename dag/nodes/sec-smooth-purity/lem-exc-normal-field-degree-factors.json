@@ -1,0 +1,124 @@
+{
+ "id": "lem-exc-normal-field-degree-factors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the finite-extension degree and residue-action inputs exposed in Stacks Tag 09EE, first proof paragraph.",
+   "via": [
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Automorphism count and inseparable factor of finite normal field degree",
+ "statement": "Let $E/k$ be a finite field extension [def-pc-field-extension] of characteristic $p>0$ [def-pc-field-characteristic], and assume it is normal: the minimal polynomial of each element over $k$ [def-weil-pbc-separable-algebraic-extension] splits into linear factors over $E$. Fix an algebraic closure $\\overline E$ [def-weil-algebraic-closure], with the composite $k$-algebra structure. Let $S\\subseteq E$ be the subfield of elements separable algebraic over $k$ [def-weil-pbc-relative-separable-closure]. Put $s=|\\operatorname{Hom}_{k\\text{-alg}}(E,\\overline E)|$ and $d=[E:S]$, where degrees are vector-space dimensions [def-weil-vector-space-dimension]. Then $|\\operatorname{Aut}_k(E)|=s$, $[E:k]=s d$, and $d=p^c$ for some integer $c\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09HS (lemma-normal-and-automorphisms), normal automorphism count; Tag 0BR4 (lemma-normal-embeddings-differ-by-aut), embedding/automorphism bijection; Tag 030L (definition-insep-degree) and its following degree product; Tag 09HJ (lemma-separable-degree), embeddings count separable degree; Tag 09HI (lemma-finite-purely-inseparable), characteristic-power degree."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pc-field-characteristic",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cardinality of the automorphism group of a finite normal field extension times its inseparable degree equals the field degree, and inseparable degree is a power of the characteristic",
+   "results": "[leanfinder] OK 8 hit(s); IsGalois.IntermediateField.AdjoinSimple.card_aut_eq_finrank, IsGaloisGroup.card_eq_finrank, IsGalois.card_aut_eq_finrank, AlgEquiv.card_le, finInsepDegree_eq_pow, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.card_algEquiv_extension, FiniteField.natCard_algEquiv_extension",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite field extension E over F in characteristic p, if s is the number of F embeddings of E into an algebraic closure and d is its inseparable degree then s times d is the degree and d is a power of p",
+   "results": "[leanfinder] OK 8 hit(s); finInsepDegree_eq_pow, IsPurelyInseparable.finrank_eq_pow, Field.lift_rank_mul_lift_insepDegree_of_isPurelyInseparable, IsPurelyInseparable.finInsepDegree_eq, Field.rank_mul_insepDegree_of_isPurelyInseparable, IsPurelyInseparable.insepDegree_eq, Field.finInsepDegree_def', IsPurelyInseparable.finSepDegree_eq_one",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a finite normal field extension the number of automorphisms is the separable degree and the inseparable degree is a power of the characteristic",
+   "results": "[leansearch] OK 8 hit(s); finInsepDegree_eq_pow, Field.insepDegree, Field.finInsepDegree, Field.finSepDegree, Field.sepDegree, FiniteField.Extension.frob, IsPurelyInseparable.hasExponent_of_finiteDimensional, IntermediateField.finSepDegree_bot",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a normal algebraic field extension E over F the embeddings into an algebraic closure correspond bijectively to F automorphisms of E",
+   "results": "[leansearch] OK 8 hit(s); Field.embEquivOfIsAlgClosed, Field.Emb, Field.instInhabitedEmb, AlgHom.normal_bijective, Field.embProdEmbOfIsAlgebraic, Normal.algHomEquivAut, Field.infinite_emb_of_transcendental, Normal.algHomEquivAut_apply",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal.algHomEquivAut",
+   "results": "[loogle] OK 3 hit(s); Normal.algHomEquivAut, Normal.algHomEquivAut_apply, Normal.algHomEquivAut_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.finSepDegree_mul_finInsepDegree",
+   "results": "[loogle] OK 1 hit(s); Field.finSepDegree_mul_finInsepDegree",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "finInsepDegree_eq_pow",
+   "results": "[loogle] OK 1 hit(s); finInsepDegree_eq_pow",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "def Normal.algHomEquivAut|lemma finInsepDegree_eq_pow|theorem finSepDegree_mul_finInsepDegree",
+   "results": "[grep] OK 3 hit(s); Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/Normal/Defs.lean",
+   "date": "2026-10-17",
+   "verdict": "match per clause in the pinned source: Normal.algHomEquivAut (Normal/Defs.lean:207) identifies embeddings into AlgebraicClosure E with automorphisms; Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588) is the degree product; finInsepDegree_eq_pow (same file:497) is the characteristic-power clause. Read their statements and surrounding hypotheses.",
+   "subdirectory": "FieldTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem finSepDegree_eq_of_isAlgClosed",
+   "subdirectory": "FieldTheory",
+   "results": "[grep] OK 1 hit(s); Mathlib/FieldTheory/SeparableDegree.lean:237, theorem finSepDegree_eq_of_isAlgClosed [Algebra.IsAlgebraic F E] [IsAlgClosed K] : finSepDegree F E = Nat.card (E →ₐ[F] K).",
+   "date": "2026-10-17",
+   "verdict": "match: identifies the embedding count into any chosen algebraic closure with finSepDegree; combined with the exact degree product this covers the arbitrary chosen closure in the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "card.*[Aa]ut|finSepDegree.*finInsepDegree|finInsepDegree_eq_pow|algHomEquivAut",
+   "results": "[grep] OK 18 hit(s); Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/Finite/Extension.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean",
+   "date": "2026-10-17",
+   "verdict": "match confirmed: read Normal/Defs.lean:207-219, SeparableDegree.lean:237-240, SeparableClosure.lean:281, PurelyInseparable/Basic.lean:497-499 and 588-596. Normal.algHomEquivAut gives the automorphism count; rewriting by finSepDegree_eq_of_isAlgClosed gives the degree product; finInsepDegree_eq_pow gives the power clause.",
+   "subdirectory": "FieldTheory"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Normal.algHomEquivAut, Field.finSepDegree_eq_of_isAlgClosed, Field.finSepDegree_mul_finInsepDegree, finInsepDegree_eq_pow",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "how": "One declaration per clause, read in the pinned source: Normal.algHomEquivAut (Mathlib/FieldTheory/Normal/Defs.lean:207-219), with F=k and K₁ the chosen algebraic closure of E, gives the first equality by cardinality of its equivalence. Field.finSepDegree_eq_of_isAlgClosed (Mathlib/FieldTheory/SeparableDegree.lean:237-240) identifies the embedding count s into this chosen algebraically closed field with Field.finSepDegree k E; the finite extension supplies Algebra.IsAlgebraic. The degree d is Field.finInsepDegree k E, definitionally the finrank over separableClosure k E (Mathlib/FieldTheory/SeparableClosure.lean:281). Rewriting Field.finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588-596) by this identification gives the second clause. finInsepDegree_eq_pow (same file:497-499) at q=p gives the third; the positive field characteristic supplies ExpChar k p. No perfection or separability of E/k is assumed.",
+  "line": 588
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-inertia-order-prime-part",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

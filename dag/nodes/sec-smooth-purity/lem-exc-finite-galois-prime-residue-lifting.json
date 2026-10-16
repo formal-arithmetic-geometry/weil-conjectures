@@ -1,0 +1,167 @@
+{
+ "id": "lem-exc-finite-galois-prime-residue-lifting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, second paragraph: 'Taking inverse limits of finite Galois extensions therefore gives' the exact tame sequence; prime conjugacy and residue-automorphism lifting supply the finite restriction-surjectivity argument.",
+   "via": [
+    "lem-exc-finite-tame-character-tower",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Prime conjugacy and residue-automorphism lifting in finite Galois normalization",
+ "statement": "Let $A$ be a normal domain [def-weil-pbc-normal-ring] with fraction field $F$, let $E/F$ be a finite Galois extension (finite-dimensional, normal and separable) [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], where normal means that the minimal polynomial over $F$ of each element of $E$ splits into linear factors in $E[T]$, and let $B$ be the integral closure of $A$ in $E$ [def-weil-pbc-integral-closure]. The group $G=\\operatorname{Gal}(E/F)$ of $F$-automorphisms of $E$ acts on $B$ by restriction. For any prime ideals $\\mathfrak q,\\mathfrak q'$ of $B$ with $\\mathfrak q\\cap A=\\mathfrak q'\\cap A$, there exists $g\\in G$ with $g(\\mathfrak q)=\\mathfrak q'$. For every prime $\\mathfrak q\\subset B$, put $\\mathfrak p=\\mathfrak q\\cap A$ and define $\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$ and $\\kappa(\\mathfrak p)=\\operatorname{Frac}(A/\\mathfrak p)$. Every $\\kappa(\\mathfrak p)$-automorphism of $\\kappa(\\mathfrak q)$ is induced by an element of $\\{g\\in G:g(\\mathfrak q)=\\mathfrak q\\}$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRK (lemma-one-orbit-geometric-galois), finite Galois case of (1) and the surjectivity assertion of (2); invoked by Tag 0BSX to prove the restriction comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-integral-closure",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Galois extension of fraction field of a normal domain acts transitively on primes in the integral closure and stabilizer surjects onto residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:16:24Z\", \"tool\": \"leanfinder\", \"query\": \"Galois extension of fraction field of a normal domain acts transitively on primes in the integral closure and stabilizer surjects onto residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isInvariant_of_isGalois\", \"IsFractionRing.stabilizerHom_surjective\", \"IsGaloisGroup.iff_isFractionRing\", \"IsGaloisGroup.of_isFractionRing\", \"Ideal.exists_comap_galRestrict_eq\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.isPretransitive_of_isGalois\", \"Algebra.isInvariant_of_isGalois'\"], \"digest\": \"06ff83919a1e86cd\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizerHom_surjective\"",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizerHom_surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"079b718dd7a65554\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smul_of_under_eq|stabilizerHom_surjective|isInvariant_integralClosure",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"grep\", \"query\": \"exists_smul_of_under_eq|stabilizerHom_surjective|isInvariant_integralClosure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\"], \"digest\": \"90a941fd5eb7c5e8\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the integral closure of a normal domain in a possibly infinite Galois field extension primes over a fixed prime are conjugate and their residue automorphisms lift to the prime stabilizer",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"leansearch\", \"query\": \"In the integral closure of a normal domain in a possibly infinite Galois field extension primes over a fixed prime are conjugate and their residue automorphisms lift to the prime stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.of_isFractionRing\", \"galRestrict.congr_simp\", \"Ideal.instMulActionAlgEquivElemPrimesOver\", \"Ring.instIsGaloisFractionRingNormalClosure\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"Algebra.isInvariant_of_isGalois\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"IsFractionRing.stabilizerHom\"], \"digest\": \"c876b4f2003497bd\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal integral domain integral closure Galois group prime ideal orbit residue field extension algebraic normal lift automorphism",
+   "results": "{\"t\": \"2026-10-16T17:16:36Z\", \"tool\": \"leanfinder\", \"query\": \"normal integral domain integral closure Galois group prime ideal orbit residue field extension algebraic normal lift automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.exists_comap_galRestrict_eq\", \"galLift\", \"prod_galRestrict_eq_norm\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"galLiftEquiv\", \"galRestrict'_galLift\", \"galLiftEquiv_apply\"], \"digest\": \"fa3197aa65af673a\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Galois extension integral closure normal domain prime ideals conjugate over base prime stabilizer surjects residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"leanfinder\", \"query\": \"finite Galois extension integral closure normal domain prime ideals conjugate over base prime stabilizer surjects residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.exists_comap_galRestrict_eq\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.exists_map_eq_of_isGalois\", \"Ideal.ncard_primesOver_mul_ncard_primesOver\"], \"digest\": \"0ed919b380b0aae5\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isInvariant_of_isGalois\"",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"isInvariant_of_isGalois\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.isInvariant_of_isGalois'\", \"Algebra.isInvariant_of_isGalois\"], \"digest\": \"0acd726ce62cc93b\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Algebra.isInvariant_of_isGalois|theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|lemma normal",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"grep\", \"query\": \"theorem Algebra.isInvariant_of_isGalois|theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|lemma normal\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\"], \"digest\": \"7e3baa95afd9d503\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite group of Galois automorphisms on integral closure acts transitively on primes over the same prime and lifts residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:17:36Z\", \"tool\": \"leansearch\", \"query\": \"finite group of Galois automorphisms on integral closure acts transitively on primes over the same prime and lifts residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.instMulActionAlgEquivElemPrimesOver\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"IsGaloisGroup.iff_isFractionRing\", \"algebraMap_galRestrict_apply\", \"galRestrict_apply\", \"coe_galRestrict_apply\", \"instIsGaloisGroupRingOfIntegersOfNumberField\"], \"digest\": \"d3959781113a9410\"}",
+   "date": "2026-10-17",
+   "verdict": "Match for the finite Galois case stated here: Algebra.isInvariant_of_isGalois supplies the common invariant-ring setup, Algebra.IsInvariant.exists_smul_of_under_eq supplies prime conjugacy, and IsFractionRing.stabilizerHom_surjective supplies residue-automorphism lifting; pinned source read at the lines in mathlib_match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group action with invariant subring has transitive fibers on prime ideals and surjective stabilizer action on quotient fraction fields",
+   "results": "{\"t\": \"2026-10-16T17:28:00Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group action with invariant subring has transitive fibers on prime ideals and surjective stabilizer action on quotient fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_surjective\", \"IsFractionRing.stabilizerHom_surjective\", \"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"Algebra.IsInvariant.orbit_eq_primesOver\", \"IsArithFrobAt.exists_primesOver_isConj\", \"Algebra.IsInvariant.exists_smul_of_under_eq\", \"arithFrobAt\"], \"digest\": \"1a062b2f15b0082a\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: confirms the two existing leaf declarations in Invariant/Basic.lean, lines 147 and 353; their hypotheses are supplied by the finite Galois invariant-ring setup in Invariant/Galois.lean:45 and the explicit fraction-field setup in Localization/Integral.lean:428. No additional normalization or residue-perfectness assumption is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_smul_of_under_eq\"",
+   "results": "{\"t\": \"2026-10-16T17:27:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"exists_smul_of_under_eq\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.exists_smul_of_under_eq\", \"Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite\"], \"digest\": \"c8859002c056e313\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: confirms the two existing leaf declarations in Invariant/Basic.lean, lines 147 and 353; their hypotheses are supplied by the finite Galois invariant-ring setup in Invariant/Galois.lean:45 and the explicit fraction-field setup in Localization/Integral.lean:428. No additional normalization or residue-perfectness assumption is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizerHom_surjective|exists_smul_of_under_eq",
+   "results": "{\"t\": \"2026-10-16T17:27:57Z\", \"tool\": \"grep\", \"query\": \"stabilizerHom_surjective|exists_smul_of_under_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\"], \"digest\": \"4ac3aec9f16e5e06\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: confirms the two existing leaf declarations in Invariant/Basic.lean, lines 147 and 353; their hypotheses are supplied by the finite Galois invariant-ring setup in Invariant/Galois.lean:45 and the explicit fraction-field setup in Localization/Integral.lean:428. No additional normalization or residue-perfectness assumption is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite automorphism group integral ring extension invariant subring action transitive prime spectrum residue automorphism stabilizer",
+   "results": "{\"t\": \"2026-10-16T18:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"finite automorphism group integral ring extension invariant subring action transitive prime spectrum residue automorphism stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"arithFrobAt\", \"IsArithFrobAt.arithFrobAt\", \"Algebra.IsInvariant.orbit_eq_primesOver\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"IsArithFrobAt.exists_primesOver_isConj\", \"Ideal.isPretransitive_of_isGalois\", \"isConj_arithFrobAt\"], \"digest\": \"2fb4a6f06637f8b0\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search. Loogle confirms prime conjugacy; the broader semantic query finds invariant-ring prime orbits; source grep confirms the recorded APIs. The exact two-clause match is checked in the pinned Invariant/Basic.lean and Invariant/Galois.lean sources."
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizerHom_surjective|exists_smul_of_under_eq|isFractionRing_of_finite_extension",
+   "results": "{\"t\": \"2026-10-16T18:55:26Z\", \"tool\": \"grep\", \"query\": \"stabilizerHom_surjective|exists_smul_of_under_eq|isFractionRing_of_finite_extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/ExistsRamified.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/ClassNumber/Finite.lean\", \"Mathlib/NumberTheory/FunctionField.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\"], \"digest\": \"12e0c4ea217fcba1\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader search. Loogle confirms prime conjugacy; the broader semantic query finds invariant-ring prime orbits; source grep confirms the recorded APIs. The exact two-clause match is checked in the pinned Invariant/Basic.lean and Invariant/Galois.lean sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizerHom\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-16T19:30:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizerHom\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\"], \"digest\": \"2f0f3e03f3530820\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: the more general invariant-ring formulation and declaration-pattern search confirm the two clauses. Source grep verifies Basic.lean:147,353 and Galois.lean:45; all hypotheses checked directly in the pinned sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite action on an integral ring whose invariant subring is the base, prime ideals over one base prime form a single orbit and stabilizers lift automorphisms of quotient fraction fields",
+   "results": "{\"t\": \"2026-10-16T19:30:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite action on an integral ring whose invariant subring is the base, prime ideals over one base prime form a single orbit and stabilizers lift automorphisms of quotient fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.orbit_eq_primesOver\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.isPretransitive_of_isGalois\", \"IsFractionRing.stabilizerHom_surjective\", \"IsArithFrobAt.exists_primesOver_isConj\", \"IsArithFrobAt.arithFrobAt\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.exists_smul_eq_of_isGaloisGroup\"], \"digest\": \"3daa386585bf8f18\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: the more general invariant-ring formulation and declaration-pattern search confirm the two clauses. Source grep verifies Basic.lean:147,353 and Galois.lean:45; all hypotheses checked directly in the pinned sources."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|theorem Algebra.isInvariant_of_isGalois",
+   "results": "{\"t\": \"2026-10-16T19:31:09Z\", \"tool\": \"grep\", \"query\": \"theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|theorem Algebra.isInvariant_of_isGalois\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\"], \"digest\": \"92a4e6d3d735ef0d\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second reading: the more general invariant-ring formulation and declaration-pattern search confirm the two clauses. Source grep verifies Basic.lean:147,353 and Galois.lean:45; all hypotheses checked directly in the pinned sources."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.isInvariant_of_isGalois, Algebra.IsInvariant.exists_smul_of_under_eq, IsFractionRing.stabilizerHom_surjective",
+  "file": "Mathlib/RingTheory/Invariant/Galois.lean",
+  "line": 45,
+  "how": "One declaration per clause after the common finite Galois normalization setup. Read pinned Mathlib/RingTheory/Invariant/Galois.lean:26-61: IsIntegralClosure.MulSemiringAction (line 34) is restriction of Gal(E/F) to B, and Algebra.isInvariant_of_isGalois (line 45) supplies Algebra.IsInvariant A B Gal(E/F). For the fraction-field setup, install the explicit theorem integralClosure.isFractionRing_of_finite_extension A F E (Mathlib/RingTheory/Localization/Integral.lean:428-430); this theorem is not an instance. The canonical integral closure has integrality and integral-closure instances. The restriction action fixes A: g(a b)=g(a)g(b)=a g(b), which supplies SMulCommClass. With this invariant instance, the first clause is Algebra.IsInvariant.exists_smul_of_under_eq (Mathlib/RingTheory/Invariant/Basic.lean:147), evaluated at the two prime ideals (its Q = g • P is exactly image-prime conjugacy). The second clause is IsFractionRing.stabilizerHom_surjective (same Basic.lean:353) with P=p, Q=q, K=Frac(A/p), L=Frac(B/q); no maximality or separability assumption on the residue extension is imposed. The finite Galois hypothesis gives Finite Gal(E/F)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-finite-tame-character-tower",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

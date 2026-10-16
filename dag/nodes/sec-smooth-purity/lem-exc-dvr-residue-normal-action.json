@@ -1,0 +1,104 @@
+{
+ "id": "lem-exc-dvr-residue-normal-action",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the finite-extension degree and residue-action inputs exposed in Stacks Tag 09EE, first proof paragraph.",
+   "via": [
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normal residue extension and surjective decomposition action",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$, maximal ideal $\\mathfrak m_A$, and residue field $k=A/\\mathfrak m_A$ [def-weil-pbc-localization-at-prime]. Let $L/K$ be a finite normal separable field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], where normal means that the minimal polynomial of every element over $K$ splits into linear factors over $L$. Let $B$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure], let $\\mathfrak n$ be a maximal ideal of $B$, and put $E=B/\\mathfrak n$ with its induced $k$-algebra structure. Define $D=\\{\\sigma\\in\\operatorname{Aut}_K(L):\\sigma(\\mathfrak n)=\\mathfrak n\\}$. Then $E/k$ is normal: for every $x\\in E$, its minimal polynomial over $k$ splits into linear factors over $E$. The residue-action homomorphism $\\rho:D\\to\\operatorname{Aut}_k(E)$, defined by $\\rho(\\sigma)(\\bar b)=\\overline{\\sigma(b)}$, is surjective. No separability of $E/k$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ED (lemma-galois-galois), assertions (1)-(2); their proof uses A=B^G and lemma-one-orbit-geometric."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite normal separable fraction field extension of a discrete valuation ring the residue extension at a maximal ideal of the integral closure is finite normal and its automorphisms lift to the decomposition group",
+   "results": "[leanfinder] OK 8 hit(s); ValuationSubring.inertiaSubgroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, IsGaloisGroup.to_isFractionRing, Ideal.Quotient.normal, arithFrobAt, Ideal.exists_comap_galRestrict_eq, IsGaloisGroup.iff_isFractionRing, instIsSeparableResidueFieldOfQuotientIdeal",
+   "date": "2026-10-17",
+   "verdict": "no match: read Invariant/Galois.lean:45-68,85-144 and Invariant/Basic.lean:353-366. Quotient normality and stabilizer surjectivity apply to an invariant ring extension. The present integral-closure formulation requires identifying invariants and checking the fraction-field and quotient structures; the project has a closed surjectivity theorem, but no project declaration proves both clauses of this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The decomposition group acts surjectively on automorphisms of the normal residue extension and has size the product of the ramification index and residue degree",
+   "results": "[leanfinder] OK 8 hit(s); IsFractionRing.stabilizerHom_surjective, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, ValuationSubring.inertiaSubgroup, arithFrobAt, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.Quotient.stabilizerHom_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: read Invariant/Galois.lean:45-68,85-144 and Invariant/Basic.lean:353-366. Quotient normality and stabilizer surjectivity apply to an invariant ring extension. The present integral-closure formulation requires identifying invariants and checking the fraction-field and quotient structures; the project has a closed surjectivity theorem, but no project declaration proves both clauses of this node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The residue field extension of a finite Galois extension of discrete valuation fields is normal and the decomposition group surjects onto its automorphism group",
+   "results": "[leansearch] OK 8 hit(s); IsGalois.to_normal, IsGaloisGroup.intermediateField, IntermediateField.normal_iff_forall_map_le', IntermediateField.normal_iff_forall_map_eq', ValuationSubring.decompositionSubgroup, IsGaloisGroup.of_isGalois, Polynomial.Gal.restrict_surjective, ValuationSubring.inertiaSubgroup",
+   "date": "2026-10-17",
+   "verdict": "no match: read Invariant/Galois.lean:45-68,85-144 and Invariant/Basic.lean:353-366. Quotient normality and stabilizer surjectivity apply to an invariant ring extension. The present integral-closure formulation requires identifying invariants and checking the fraction-field and quotient structures; the project has a closed surjectivity theorem, but no project declaration proves both clauses of this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.stabilizerHom_surjective",
+   "results": "[loogle] OK 1 hit(s); Ideal.Quotient.stabilizerHom_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: read Invariant/Galois.lean:45-68,85-144 and Invariant/Basic.lean:353-366. Quotient normality and stabilizer surjectivity apply to an invariant ring extension. The present integral-closure formulation requires identifying invariants and checking the fraction-field and quotient structures; the project has a closed surjectivity theorem, but no project declaration proves both clauses of this node."
+  },
+  {
+   "tool": "grep",
+   "query": "normal|stabilizerHom_surjective|finite_of_isInvariant",
+   "results": "[grep] OK 15 hit(s); Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: read Invariant/Galois.lean:45-68,85-144 and Invariant/Basic.lean:353-366. Quotient normality and stabilizer surjectivity apply to an invariant ring extension. The present integral-closure formulation requires identifying invariants and checking the fraction-field and quotient structures; the project has a closed surjectivity theorem, but no project declaration proves both clauses of this node.",
+   "subdirectory": "RingTheory/Invariant"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Ii]nvariant|[Ii]nvariant.*integralClosure|instance.*normal|stabilizerHom_surjective",
+   "subdirectory": "RingTheory/Invariant",
+   "results": "[grep] OK 9 hit(s); logged leading files: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: opened Invariant/Galois.lean:25-68,75-144 and Invariant/Basic.lean:353-366. Quotient normality and surjectivity assume the invariant extension structure. Algebra.isInvariant_of_isGalois is a theorem, not an inferred instance; its AKLB hypotheses and the natural action must be installed for the integral closure before applying the quotient statements. No single declaration or one-line specialization states both clauses in the DVR integral-closure formulation."
+  },
+  {
+   "tool": "grep",
+   "query": "isInvariant_of_isGalois|lemma Ideal.Quotient.normal|theorem Ideal.Quotient.stabilizerHom_surjective",
+   "subdirectory": "RingTheory/Invariant",
+   "results": "[grep] OK 7 hit(s); logged leading files: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: opened Invariant/Galois.lean:25-68,75-144 and Invariant/Basic.lean:353-366. Quotient normality and surjectivity assume the invariant extension structure. Algebra.isInvariant_of_isGalois is a theorem, not an inferred instance; its AKLB hypotheses and the natural action must be installed for the integral closure before applying the quotient statements. No single declaration or one-line specialization states both clauses in the DVR integral-closure formulation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invariant extension of commutative rings by a finite group the quotient residue field extension is normal and every automorphism of the residue field lifts to the stabilizer of the prime ideal",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.Quotient.normal, IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, arithFrobAt, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, IsFractionRing.stabilizerHom_surjective, Ideal.Quotient.stabilizerHom_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: Ideal.Quotient.normal and Ideal.Quotient.stabilizerHom_surjective state the two clauses for an invariant extension. Read Invariant/Galois.lean:25-68,75-144 and Invariant/Basic.lean:353-366; installing Algebra.isInvariant_of_isGalois and the integral-closure fraction-field setup requires additional theorem applications, not an inferred instance. The project integral-closure surjectivity declaration gives only the second clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-inertia-order-prime-part",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

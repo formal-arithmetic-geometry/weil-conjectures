@@ -1,0 +1,89 @@
+{
+ "id": "lem-exc-dvr-galois-degree-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the finite-extension degree and residue-action inputs exposed in Stacks Tag 09EE, first proof paragraph.",
+   "via": [
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Global degree data for a finite Galois extension of a DVR",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $K$ and residue field $k$. Let $L/K$ be a finite normal separable field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], where normal means that every element's minimal polynomial over $K$ splits into linear factors over $L$. Put $G=\\operatorname{Aut}_K(L)$ and let $B$ be the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. The set $X$ of maximal ideals of $B$ is finite and nonempty, and $G$ acts transitively on $X$. For each $\\mathfrak q\\in X$, the localization $B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is a discrete valuation ring and $A\\to B_{\\mathfrak q}$ is local. For uniformizers $\\pi_A$ and $t_{\\mathfrak q}$, write $\\pi_A=u_{\\mathfrak q}t_{\\mathfrak q}^{e_{\\mathfrak q}}$ with $u_{\\mathfrak q}$ a unit, and put $f_{\\mathfrak q}=[B/\\mathfrak q:k]$, the vector-space degree [def-weil-vector-space-dimension]. Then $e_{\\mathfrak q}$ and $f_{\\mathfrak q}$ are finite positive integers independent of $\\mathfrak q$. Writing their common values as $e,f$ and $g=|X|$, one has $[L:K]=g e f$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09E8 (remark-finite-separable-extension), the DVR localizations and sum of e_i f_i; Tag 09EA (lemma-galois), transitivity; Tag 09EB (lemma-galois-conclusion), common e,f and [L:K]=nef."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois extension of a discrete valuation field the integral closure has finitely many maximal ideals on which the Galois group acts transitively, with common ramification index e and residue degree f and field degree g e f",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ramificationIdx_eq_of_isGaloisGroup, Ideal.ramificationIdx_eq_of_isGalois, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.card_inertia_eq_ramificationIdxIn",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:132,140,153,222 provides transitivity, equality of ideal indices/degrees and the fundamental identity after a finite flat invariant ring extension is supplied. The DVR integral-closure formulation additionally requires finite normalization, DVR localizations, and comparison of the uniformizer exponent with the ideal index; it is not a one-line specialization. These hypotheses must be established in the later split of this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The decomposition group acts surjectively on automorphisms of the normal residue extension and has size the product of the ramification index and residue degree",
+   "results": "[leanfinder] OK 8 hit(s); IsFractionRing.stabilizerHom_surjective, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, ValuationSubring.inertiaSubgroup, arithFrobAt, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.Quotient.stabilizerHom_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:132,140,153,222 provides transitivity, equality of ideal indices/degrees and the fundamental identity after a finite flat invariant ring extension is supplied. The DVR integral-closure formulation additionally requires finite normalization, DVR localizations, and comparison of the uniformizer exponent with the ideal index; it is not a one-line specialization. These hypotheses must be established in the later split of this node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For the integral closure of a discrete valuation ring in a finite Galois field extension, the field degree is the number of maximal ideals times the common ramification index times the common residue degree",
+   "results": "[leansearch] OK 8 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.sum_ramification_inertia, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.inertiaDeg_eq_of_isGaloisGroup, ValuationSubring.isIntegral_of_mem_ringOfIntegers, integralClosure.isIntegrallyClosedOfFiniteExtension, Valuation.Integers.integrallyClosed, IsDedekindDomainDvr.isIntegrallyClosed",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:132,140,153,222 provides transitivity, equality of ideal indices/degrees and the fundamental identity after a finite flat invariant ring extension is supplied. The DVR integral-closure formulation additionally requires finite normalization, DVR localizations, and comparison of the uniformizer exponent with the ideal index; it is not a one-line specialization. These hypotheses must be established in the later split of this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "results": "[loogle] OK 1 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:132,140,153,222 provides transitivity, equality of ideal indices/degrees and the fundamental identity after a finite flat invariant ring extension is supplied. The DVR integral-closure formulation additionally requires finite normalization, DVR localizations, and comparison of the uniformizer exponent with the ideal index; it is not a one-line specialization. These hypotheses must be established in the later split of this node."
+  },
+  {
+   "tool": "grep",
+   "query": "ncard_primesOver_mul_ramificationIdxIn|isPretransitive|ramificationIdx_eq_of_isGaloisGroup",
+   "results": "[grep] OK 8 hit(s); Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:132,140,153,222 provides transitivity, equality of ideal indices/degrees and the fundamental identity after a finite flat invariant ring extension is supplied. The DVR integral-closure formulation additionally requires finite normalization, DVR localizations, and comparison of the uniformizer exponent with the ideal index; it is not a one-line specialization. These hypotheses must be established in the later split of this node.",
+   "subdirectory": "NumberTheory/RamificationInertia"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Dedekind domain and its integral closure in a finite Galois extension of the fraction field, primes above a given prime are a transitive Galois set and the sum of ramification indices times residue degrees is the extension degree",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ncard_primesOver_mul_ncard_primesOver, IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq, Ideal.sum_ramification_inertia, IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq, Ideal.exists_comap_galRestrict_eq, Ideal.ramificationIdx_le_finrank, Ideal.card_primesOverFinset_le_finrank",
+   "date": "2026-10-17",
+   "verdict": "no match: the pinned Galois.lean:222 identity assumes a finite flat invariant extension and ideal-theoretic indices; this node additionally supplies finite normalization, DVR localizations, the uniformizer-index identification and transitivity. Read Galois.lean:75-100,210-236 and the Stacks normalization discussion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-inertia-order-prime-part",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

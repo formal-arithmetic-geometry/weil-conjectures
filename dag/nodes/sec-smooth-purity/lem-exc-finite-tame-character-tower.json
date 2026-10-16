@@ -23,9 +23,131 @@
   "def-weil-pbc-integral-closure",
   "lem-exc-finite-dvr-tame-inertia"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $\\mathfrak n_L$ is maximal. Every element of $B_M$ is integral over $A\\subseteq B_L$ by [def-weil-pbc-integral-closure], hence $S=B_M/\\mathfrak n_M$ is integral over the embedded domain $R=B_L/\\mathfrak n_L$. For $0\\ne b\\in R$, the element $b^{-1}$ of the field $S$ satisfies a monic equation over $R$; multiplying that equation by $b^{d-1}$, where $d$ is its degree, expresses $b^{-1}$ as an element of $R$. Thus $R$ is a field. This also explains the natural injection of residue fields used below.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU7, contracted maximal ideal setup; elementary monic-equation argument"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-finite-dvr-tame-inertia] to $L/K$ and $M/K$ at these maximal ideals. Put $R_X=(B_X)_{\\mathfrak n_X}$ and $k_X=\\kappa(\\mathfrak n_X)$. These are DVRs with fraction fields $X$. The lemma gives the uniformizer characters $\\chi_X$, normal finite $p$-group kernels $P_X$, and surjections $\\chi_X:I_X\\twoheadrightarrow\\mu_{n_X}(k_X)$, where $\\mu_{n_X}(k_X)$ is cyclic of order $n_X$.",
+   "uses": [
+    "lem-exc-finite-dvr-tame-inertia"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09E8 (remark-finite-separable-extension) and 09EE (lemma-galois-inertia), the input to Tag 0BU7"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-closure-algebraic-extension-normal], $B_L$ and $B_M$ are normal domains with fraction fields $L$ and $M$. Moreover $B_M$ is the integral closure of $B_L$ in $M$: an element of $B_M$ is integral over $A\\subseteq B_L$ by [def-weil-pbc-integral-closure]; conversely an $x\\in M$ integral over $B_L\\subseteq B_M$ satisfies that same monic equation over $B_M$, and hence belongs to $B_M$ by its integral closedness. The extension $M/L$ is finite Galois: minimal polynomials over $L$ divide the corresponding separable split minimal polynomials over $K$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX (lemma-one-orbit-geometric-galois-compare), setup for applying Tag 0BRK over B_L"
+   }
+  },
+  {
+   "text": "For $\\gamma\\in D_L$, [lem-weil-pbc-normal-subextension-automorphism-extends] lifts $\\gamma$ to $\\tau\\in\\operatorname{Gal}(M/K)$. The primes $\\tau(\\mathfrak n_M)$ and $\\mathfrak n_M$ of $B_M$ both contract to $\\mathfrak n_L$, since $\\gamma$ stabilizes $\\mathfrak n_L$. Apply the prime-conjugacy clause of [lem-exc-finite-galois-prime-residue-lifting] with normal base $B_L$, fraction field $L$, finite Galois extension $M/L$, and normalization $B_M$ as established in Step 3. It gives $\\rho\\in\\operatorname{Gal}(M/L)$ with $\\rho\\tau(\\mathfrak n_M)=\\mathfrak n_M$. Thus $\\sigma_0=\\rho\\tau\\in D_M$ restricts to $\\gamma$, proving decomposition surjectivity.",
+   "uses": [
+    "lem-weil-pbc-normal-subextension-automorphism-extends",
+    "lem-exc-finite-galois-prime-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, first half of its proof; Tag 0BU7, decomposition surjectivity input"
+   }
+  },
+  {
+   "text": "If $\\gamma\\in I_L$, construct $\\sigma_0\\in D_M$ as in Step 4. Its residue automorphism $\\overline{\\sigma_0}$ of $k_M$ fixes the embedded $k_L$, since its restriction is $\\gamma$. The residue-lifting clause of [lem-exc-finite-galois-prime-residue-lifting], again for $B_L\\subset B_M$ and $M/L$, gives $\\eta\\in\\operatorname{Gal}(M/L)$ stabilizing $\\mathfrak n_M$ and inducing $\\overline{\\sigma_0}$. Then $\\eta^{-1}\\sigma_0$ acts identically on $k_M$ and restricts to $\\gamma$, so it belongs to $I_M$. Restriction preserves stabilizers by contraction and preserves trivial residue action by the injection $k_L\\hookrightarrow k_M$. Thus both restriction maps are well-defined surjective homomorphisms, with the required $I_M\\twoheadrightarrow I_L$.",
+   "uses": [
+    "lem-exc-finite-galois-prime-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, inertia case made explicit using the residue-automorphism lifting of Tag 0BRK; Tag 0BU7"
+   }
+  },
+  {
+   "text": "The inclusion $R_L\\hookrightarrow R_M$ is local: an element of $B_L\\setminus\\mathfrak n_L$ stays outside $\\mathfrak n_M$, while an element of $\\mathfrak n_L$ maps into the maximal ideal of $R_M$. Choose uniformizers $t_L,t_M$. Using the discrete valuations in [def-sc-discrete-valuation-ring], write $t_L=u t_M^r$ with $u\\in R_M^\\times$ and $r>0$. Writing $\\pi_A=v t_L^{e_L}$ with $v\\in R_L^\\times$, whose image remains a unit, and taking $R_M$-valuations gives $e_M=r e_L$. Consequently $e_L\\mid e_M$ and, on taking the prime-to-$p$ factors, $n_L\\mid n_M$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU7, uniformizer comparison; Tags 09E4 and 0BRL, definition and elementary multiplicativity of ramification indices"
+   }
+  },
+  {
+   "text": "For $\\sigma\\in I_M$, put $c=\\sigma(t_M)/t_M\\in R_M^\\times$ and $b=(\\sigma|_L)(t_L)/t_L\\in R_L^\\times$. Applying $\\sigma$ to $t_L=u t_M^r$ yields $b=(\\sigma(u)/u)c^r$. Since inertia acts trivially on $k_M$, the reduction of $\\sigma(u)/u$ is $1$. Reduce this identity in $k_M$ and use the uniformizer formula of [lem-exc-finite-dvr-tame-inertia] to obtain $\\chi_L(\\sigma|_L)=\\chi_M(\\sigma)^r$, where $r=e_M/e_L$. In particular restriction sends $P_M$ into $P_L$.",
+   "uses": [
+    "lem-exc-finite-dvr-tame-inertia"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU7, final paragraph and explicit b,c,unit calculation"
+   }
+  },
+  {
+   "text": "We spell out the wild-inertia lifting (the p-Sylow assertion of Tag 0BU7) without invoking a separate Sylow theorem. For $\\gamma\\in P_L$, choose $\\tau\\in I_M$ restricting to $\\gamma$ using Step 5. By [lem-exc-finite-dvr-tame-inertia], $\\chi_M(\\tau)^{n_M}=1$, so $\\tau^{n_M}\\in P_M$. Since $P_L$ has $p$-power order, the order of $\\gamma$ divides some $p^a$ (partition $P_L$ into cosets of the cyclic subgroup generated by $\\gamma$). Choose a nonnegative integer $h$ with $hn_M\\equiv1\\pmod {p^a}$, possible because $n_M$ is prime to $p$. Then $\\tau^{hn_M}\\in P_M$ restricts to $\\gamma^{hn_M}=\\gamma$. Combined with Step 7 this proves $P_M\\twoheadrightarrow P_L$.",
+   "uses": [
+    "lem-exc-finite-dvr-tame-inertia"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU7, wild-inertia surjectivity paragraph; explicit elementary coprime-power lifting"
+   }
+  },
+  {
+   "text": "Raise the raw identity of Step 7 to the $q_L$-th power. As $e_M=r e_L$, $e_X=q_Xn_X$ and $n_L\\mid n_M$, one has $r q_L=q_M(n_M/n_L)$. Hence $\\chi_{L,\\mathrm{can}}(\\sigma|_L)=\\chi_M(\\sigma)^{r q_L}=\\chi_{M,\\mathrm{can}}(\\sigma)^{n_M/n_L}$ in $k_M$. The equality with the left side shows that this power lies in the image of $\\mu_{n_L}(k_L)$ under the residue-field embedding.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU8 (remark-canonical-inertia-character), scaled transition diagram and exponent identity"
+   }
+  },
+  {
+   "text": "Finally [lem-exc-finite-dvr-tame-inertia] says that $\\chi_X$ is onto $\\mu_{n_X}(k_X)$ with kernel $P_X$. Since $\\gcd(q_X,n_X)=1$, choose $a,b\\in\\mathbf Z$ with $a q_X+b n_X=1$. For any $z\\in\\mu_{n_X}(k_X)$, $(z^{q_X})^a=z$, so raising to $q_X$ is an automorphism with inverse raising to $a$. Thus $\\chi_{X,\\mathrm{can}}=\\chi_X^{q_X}$ has the same image and kernel. Identifying each tame quotient by this surjective character, Step 9 is exactly the induced power transition on those quotients. More explicitly, for $z\\in\\mu_{n_M}(k_M)$ choose $\\sigma\\in I_M$ with $\\chi_{M,\\mathrm{can}}(\\sigma)=z$; Step 9 shows that $z^{n_M/n_L}$ lies in the embedded $\\mu_{n_L}(k_L)$. Surjectivity of $I_M\\to I_L$ and of $\\chi_{L,\\mathrm{can}}$ also shows that this power transition is onto.",
+   "uses": [
+    "lem-exc-finite-dvr-tame-inertia"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BU8, canonical-character isomorphism on the tame quotient; explicit Bezout inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-exc-finite-dvr-tame-inertia",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-exc-finite-galois-prime-residue-lifting",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BU7 and 0BU8, with the restriction proof of Tag 0BSX written out using the finite prime-conjugacy and residue-lifting clauses of Tag 0BRK, and an explicit elementary coprime-power wild lift."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +175,7 @@
    "query": "inertia.*(map|surjective)|restrict.*inertia|tame.*character|wild.*inertia",
    "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"151\", \"text\": \"theorem IsInertiaField.algebraMap_ringEquiv_apply [IsInertiaField K L P E]\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"153\", \"text\": \"    algebraMap E' L (IsInertiaField.ringEquiv K L P E E' x) = algebraMap E L x := by\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"157\", \"text\": \"theorem IsInertiaField.algebraMap_ringEquiv_symm_apply [IsInertiaField K L P E]\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"line\": \"159\", \"text\": \"    algebraMap E L ((IsInertiaField.ringEquiv K L P E E').symm x) = algebraMap E' L x := by\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"64\", \"text\": \"See `inertiaDeg'_algebraMap` for the common case where `f = algebraMap R S`\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"87\", \"text\": \"theorem inertiaDeg'_algebraMap [P.LiesOver p] :\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"91\", \"text\": \"@[deprecated (since := \\\"2026-07-03\\\")] alias inertiaDeg_algebraMap := inertiaDeg'_algebraMap\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"95\", \"text\": \"  finrank_pos.trans_eq (inertiaDeg'_algebraMap p P).symm\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"100\", \"text\": \"  Module.finrank_pos.trans_eq (inertiaDeg'_algebraMap p P).symm\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"line\": \"549\", \"text\": \"  rw [finrank_prime_pow_ramificationIdx, inertiaDeg'_algebraMap]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"216\", \"text\": \"  -- This is needed for `inertiaDeg_algebraMap` below to work\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"1186\", \"text\": \"lemma inertia_map_subtype (H : Subgroup G) : (I.inertia H).map H.subtype = I.inertia G ⊓ H := by\"}\n  {\"file\": \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"line\": \"1187\", \"text\": \"  rw [← AddSubgroup.subgroupOf_inertia, Subgroup.subgroupOf_map_subtype]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"line\": \"121\", \"text\": \"  rw [inertiaDeg'_algebraMap, inertiaDeg_eq_of_isMaximal p q]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"line\": \"185\", \"text\": \"  rw [← inertiaDeg'_eq_inertiaDeg p q, inertiaDeg'_algebraMap p q]\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"line\": \"149\", \"text\": \"of `Localization.AtPrime.inertiaDeg_map_eq_inertiaDeg`.\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"line\": \"169\", \"text\": \"theorem inertiaDeg_map_eq_inertiaDeg [p.IsMaximal] [P.IsMaximal]\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"line\": \"171\", \"text\": \"    (maximalIdeal Rₚ).inertiaDeg' (P.map (algebraMap S Sₚ)) = p.inertiaDeg' P := by\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"line\": \"172\", \"text\": \"  rw [inertiaDeg'_algebraMap, inertiaDeg'_algebraMap]\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"line\": \"248\", \"text\": \"  exact inertiaDeg_map_eq_inertiaDeg p _ _ _\"}",
    "date": "2026-10-16",
-   "verdict": "No match: restriction and inertia-map APIs do not give wild inertia surjectivity together with the scaled uniformizer character and the n_M/n_L power formula."
+   "verdict": "Invalid directory prefix: msearch already searches under Mathlib, so this redundant Mathlib/ prefix searched no source. The later valid RingTheory grep supersedes this result; no absence claim relies on it."
   },
   {
    "tool": "leanfinder",
@@ -75,10 +197,143 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a group acting on $F$. For any finite family of Galois objects $\\\\{X_i\\\\}_{i \\\\in I\"}\n  {\"name\": \"IsFractionRing.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] (K : Type u_4) (L : Type u\", \"doc\": \"The stabilizer homomorphism from the stabilizer subgroup of the ideal $ Q $ in $ G $ to the Galois group $ \\\\text{Gal}(L/K) $ is surjective, meaning every element of the Galois group is the image of so\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [p.IsMaximal], p.inertiaDegIn B =\", \"doc\": \"If $ \\\\mathfrak{p} $ is a maximal ideal in a ring $ R $, then the inertia degree of $ \\\\mathfrak{p} $ in a ring extension $ B $ equals the inertia degree of $ \\\\mathfrak{p} $ in an ideal $ \\\\mathfrak{P} $\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] [IsDedekindDomain R]\\n  [IsDedekindDomain S] [Module.Finite R S] [Module.IsTorsionFree R S] (p : Ideal\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n",
    "date": "2026-10-17",
    "verdict": "No exact match: residue-degree multiplication and stabilizer surjectivity do not assert restriction on wild inertia or scaled tame characters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Galois tower of discretely valued fields wild inertia restriction surjective tame character scaling",
+   "results": "{\"t\": \"2026-10-16T17:05:58Z\", \"tool\": \"leanfinder\", \"query\": \"finite Galois tower of discretely valued fields wild inertia restriction surjective tame character scaling\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrictHom\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Polynomial.Gal.restrictComp_surjective\", \"finGaloisGroupMap\", \"InfiniteGalois.proj\", \"IsFractionRing.stabilizerHom_surjective\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"ValuationSubring.inertiaSubgroup\"], \"digest\": \"6713b9a16d9f262d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "inertia wild tame character restriction Galois",
+   "results": "{\"t\": \"2026-10-16T17:05:58Z\", \"tool\": \"loogle\", \"query\": \"inertia wild tame character restriction Galois\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `inertia`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Invalid query: Loogle rejected the unquoted identifiers, so this is not evidence of absence. The valid subsequent semantic, declaration-pattern and source searches supply the actual search evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "inertia|ramification|wild|tame",
+   "results": "{\"t\": \"2026-10-16T17:05:58Z\", \"tool\": \"grep\", \"query\": \"inertia|ramification|wild|tame\", \"sub\": \"Mathlib/NumberTheory/RamificationInertia\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Invalid directory prefix: msearch already searches under Mathlib, so this redundant Mathlib/ prefix searched no source. The later valid RingTheory grep supersedes this result; no absence claim relies on it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction in a tower of finite Galois extensions maps wild inertia onto wild inertia and scales tame inertia characters",
+   "results": "{\"t\": \"2026-10-16T17:05:59Z\", \"tool\": \"leansearch\", \"query\": \"restriction in a tower of finite Galois extensions maps wild inertia onto wild inertia and scales tame inertia characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finGaloisGroupMap\", \"AlgEquiv.restrictNormalHom\", \"IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply\", \"IsScalarTower.AlgEquiv.restrictNormalHom_comp\", \"IntermediateField.restrictNormalHom_ker\", \"AlgEquiv.restrictNormal_trans\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.inertiaDeg_algebra_tower\"], \"digest\": \"5b919e68ab87e2cd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal domain and a possibly infinite Galois tower restriction induces surjections on decomposition groups and inertia groups at prime ideals of integral closures",
+   "results": "{\"t\": \"2026-10-16T17:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal domain and a possibly infinite Galois tower restriction induces surjections on decomposition groups and inertia groups at prime ideals of integral closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_comap_galRestrict_eq\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"IsFractionRing.stabilizerHom_surjective\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"Ideal.inertiaDeg_eq_of_isGalois\"], \"digest\": \"2f518fab92903a49\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "grep",
+   "query": "map_inertia|map_stabilizer|stabilizerHom_surjective|inertiaSubgroup",
+   "results": "{\"t\": \"2026-10-16T17:12:34Z\", \"tool\": \"grep\", \"query\": \"map_inertia|map_stabilizer|stabilizerHom_surjective|inertiaSubgroup\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\"], \"digest\": \"59a4fe0acca27e56\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a normal domain and a Galois tower restriction maps decomposition and inertia groups surjectively",
+   "results": "{\"t\": \"2026-10-16T17:12:34Z\", \"tool\": \"leansearch\", \"query\": \"For a normal domain and a Galois tower restriction maps decomposition and inertia groups surjectively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.restrictRestrictAlgEquivMapHom_surjective\", \"AlgEquiv.restrictNormalHom_surjective\", \"Polynomial.Gal.restrict_surjective\", \"IsScalarTower.AlgEquiv.restrictNormalHom_comp\", \"IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply\", \"AlgEquiv.restrictNormal\", \"Polynomial.Gal.restrictComp_surjective\", \"AlgHom.restrictNormal'\"], \"digest\": \"282c07e48ca87b05\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Galois extension of a normal domain stabilizers of primes and kernels of residue field actions restrict surjectively to a Galois subextension",
+   "results": "{\"t\": \"2026-10-16T17:12:39Z\", \"tool\": \"leanfinder\", \"query\": \"In a Galois extension of a normal domain stabilizers of primes and kernels of residue field actions restrict surjectively to a Galois subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.exists_comap_galRestrict_eq\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"IntermediateField.restrictRestrictAlgEquivMapHom_surjective\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.Quotient.stabilizerHom_surjective\"], \"digest\": \"0220f529f652ac01\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "grep",
+   "query": "wild.*inertia|tame.*character|inertiaSubgroup|ramificationIdx_tower",
+   "results": "{\"t\": \"2026-10-16T17:13:22Z\", \"tool\": \"grep\", \"query\": \"wild.*inertia|tame.*character|inertiaSubgroup|ramificationIdx_tower\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/RamificationGroup.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\"], \"digest\": \"728492f4183745b4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tame inertia character in a tower exponent prime to p part of ramification index ratio",
+   "results": "{\"t\": \"2026-10-16T17:13:24Z\", \"tool\": \"leanfinder\", \"query\": \"canonical tame inertia character in a tower exponent prime to p part of ramification index ratio\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.inertiaDeg_le_finrank\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.sum_ramification_inertia\", \"NumberField.Ideal.inertiaDeg_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"Ideal.card_inertia_eq_ramificationIdxIn\"], \"digest\": \"7456718fb38605f9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: the results supply Galois restriction, stabilizers or ramification indices, not wild-inertia surjectivity together with the scaled tame-character formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois extension of fraction field of a normal domain acts transitively on primes in the integral closure and stabilizer surjects onto residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:16:24Z\", \"tool\": \"leanfinder\", \"query\": \"Galois extension of fraction field of a normal domain acts transitively on primes in the integral closure and stabilizer surjects onto residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isInvariant_of_isGalois\", \"IsFractionRing.stabilizerHom_surjective\", \"IsGaloisGroup.iff_isFractionRing\", \"IsGaloisGroup.of_isFractionRing\", \"Ideal.exists_comap_galRestrict_eq\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.isPretransitive_of_isGalois\", \"Algebra.isInvariant_of_isGalois'\"], \"digest\": \"06ff83919a1e86cd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizerHom_surjective\"",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizerHom_surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"079b718dd7a65554\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smul_of_under_eq|stabilizerHom_surjective|isInvariant_integralClosure",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"grep\", \"query\": \"exists_smul_of_under_eq|stabilizerHom_surjective|isInvariant_integralClosure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\"], \"digest\": \"90a941fd5eb7c5e8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the integral closure of a normal domain in a possibly infinite Galois field extension primes over a fixed prime are conjugate and their residue automorphisms lift to the prime stabilizer",
+   "results": "{\"t\": \"2026-10-16T17:16:25Z\", \"tool\": \"leansearch\", \"query\": \"In the integral closure of a normal domain in a possibly infinite Galois field extension primes over a fixed prime are conjugate and their residue automorphisms lift to the prime stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.of_isFractionRing\", \"galRestrict.congr_simp\", \"Ideal.instMulActionAlgEquivElemPrimesOver\", \"Ring.instIsGaloisFractionRingNormalClosure\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"Algebra.isInvariant_of_isGalois\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"IsFractionRing.stabilizerHom\"], \"digest\": \"c876b4f2003497bd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal integral domain integral closure Galois group prime ideal orbit residue field extension algebraic normal lift automorphism",
+   "results": "{\"t\": \"2026-10-16T17:16:36Z\", \"tool\": \"leanfinder\", \"query\": \"normal integral domain integral closure Galois group prime ideal orbit residue field extension algebraic normal lift automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.exists_comap_galRestrict_eq\", \"galLift\", \"prod_galRestrict_eq_norm\", \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"galLiftEquiv\", \"galRestrict'_galLift\", \"galLiftEquiv_apply\"], \"digest\": \"fa3197aa65af673a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Galois extension integral closure normal domain prime ideals conjugate over base prime stabilizer surjects residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"leanfinder\", \"query\": \"finite Galois extension integral closure normal domain prime ideals conjugate over base prime stabilizer surjects residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.exists_comap_galRestrict_eq\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.exists_map_eq_of_isGalois\", \"Ideal.ncard_primesOver_mul_ncard_primesOver\"], \"digest\": \"0ed919b380b0aae5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isInvariant_of_isGalois\"",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"isInvariant_of_isGalois\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.isInvariant_of_isGalois'\", \"Algebra.isInvariant_of_isGalois\"], \"digest\": \"0acd726ce62cc93b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Algebra.isInvariant_of_isGalois|theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|lemma normal",
+   "results": "{\"t\": \"2026-10-16T17:17:35Z\", \"tool\": \"grep\", \"query\": \"theorem Algebra.isInvariant_of_isGalois|theorem exists_smul_of_under_eq|theorem IsFractionRing.stabilizerHom_surjective|lemma normal\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\"], \"digest\": \"7e3baa95afd9d503\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite group of Galois automorphisms on integral closure acts transitively on primes over the same prime and lifts residue field automorphisms",
+   "results": "{\"t\": \"2026-10-16T17:17:36Z\", \"tool\": \"leansearch\", \"query\": \"finite group of Galois automorphisms on integral closure acts transitively on primes over the same prime and lifts residue field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.instMulActionAlgEquivElemPrimesOver\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"IsGaloisGroup.iff_isFractionRing\", \"algebraMap_galRestrict_apply\", \"galRestrict_apply\", \"coe_galRestrict_apply\", \"instIsGaloisGroupRingOfIntegersOfNumberField\"], \"digest\": \"d3959781113a9410\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole target. These hits identify its finite prime-conjugacy and residue-lifting input in Mathlib, recorded separately as lem-exc-finite-galois-prime-residue-lifting."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-henselian-dvr-tame-sequence",
@@ -86,5 +341,20 @@
   "group": "Q05"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-finite-tame-character-tower",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and wrote ten steps, including maximal contraction, normalization over B_L, explicit decomposition and inertia lifting, uniformizer comparison, wild lifting, and canonical-character scaling. Reused existing normalization and automorphism-extension Mathlib leaves. The sole new node is the finite prime-conjugacy and residue-automorphism theorem of Tag 0BRK, identified with the pinned Mathlib invariant-ring APIs; no new node repeats a conclusion of the item. Return repair revalidated the current lem-exc-finite-dvr-tame-inertia statement clause by clause for Steps 2, 7, 8 and 10; citation quotes now isolate the current uniformizer, p-group and quotient clauses. The mathematical statement and proof route are unchanged.",
+  "blueprint": "Realizes the finite compatibility needed before 'Taking inverse limits of finite Galois extensions therefore gives' in lem-exc-dvr-galois, second paragraph, through lem-exc-henselian-dvr-tame-sequence; historical blueprint ancestry and unit binding retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N7-060d63ff1",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-060d63ff1 (reviewer sub-agent of L); spot-checked: I read the item, the one new node, the statements of all cited nodes, the step in the parent lem-exc-henselian-dvr-tame-sequence that uses the item, and the main-20261015 lem-exc-dvr-galois proof. In Stacks more-algebra.tex I read 0BU7, 0BU8, 0BSX and 0BRK, and checked their labels in tags/tags. The item matches 0BU7 and 0BU8 with positive residue characteristic, hypothesis by hypothesis, and nothing in it is weakened. Steps 1-10 are correct. Step 1 shows n_L is maximal by inverting through a monic equation. Step 2 uses exactly the stated clauses of lem-exc-finite-dvr-tame-inertia. Step 3 proves that B_M is the integral closure of B_L in M and that M/L is Galois. Steps 4 and 5 follow 0BSX: the automorphism lift, then the new node's prime-conjugacy and residue-lifting clauses applied over B_L. Step 6 gives e_M=r e_L. Step 7 is 0BU7's unit-ratio calculation. Step 8 replaces Stacks' Sylow remark with a correct coprime-power lift. Step 9 uses r q_L=q_M n_M/n_L. Step 10 uses the Bezout inverse of the q-power map. The new node lem-exc-finite-galois-prime-residue-lifting states the finite case of 0BRK(1) and the surjectivity in 0BRK(2). It is true and is a valid Mathlib leaf: I read Algebra.isInvariant_of_isGalois (Invariant/Galois.lean:45), Algebra.IsInvariant.exists_smul_of_under_eq (Invariant/Basic.lean:147), IsFractionRing.stabilizerHom_surjective (Invariant/Basic.lean:353) and integralClosure.isFractionRing_of_finite_extension (Localization/Integral.lean:428). It does not restate any clause of the item. Duplicate search with rg over dag/nodes (0BRK, 0BSX, the declaration names, residue-automorphism wording) found only the tensor and scheme fibre-transitivity nodes, the inertia-order node and the affine-torsor nodes; none is the same statement. Small cases checked: M=L, L=K, unramified, purely wild, Z_(p) with Q(zeta_p) inside Q(zeta_{p^2}), and p=2 with Q(i); for the new node, E=F and A a field. Route: the only cited nodes outside the unit are definitions and Mathlib leaves, so no tool_uses are needed. No SGA is cited. No fixes. Minor point: the new node has no lean_audit field, as many recent nodes don't, and the preflight passed."
+ }
 }

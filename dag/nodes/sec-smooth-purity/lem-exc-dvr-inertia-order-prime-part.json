@@ -13,11 +13,73 @@
   "same_as": []
  },
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Aut}_K(L)$. Apply [lem-weil-pbc-finite-galois-fixed-field] to the finite normal separable extension $L/K$: $G$ is finite and $|G|=[L:K]$. In particular its subgroups $D$ and $I$ are finite. Apply [lem-exc-dvr-galois-degree-data] to $A,L,B$. Let $X$ be its finite set of maximal ideals, $g=|X|>0$, and $f=[B/\\mathfrak n:k]>0$. Its common ramification index at $\\mathfrak n$ is precisely the $e$ in the item: both are the exponent of $t$ in $\\pi_A=u t^e$. Therefore $|G|=g e f$, and $G$ acts transitively on $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-exc-dvr-galois-degree-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), first proof paragraph, recalling Tags 09E8, 09EA and 09EB."
+   }
+  },
+  {
+   "text": "The map $G\\to X$, $\\sigma\\mapsto\\sigma(\\mathfrak n)$, is onto by Step 1. Two elements $\\sigma,\\tau$ have the same image exactly when $\\tau^{-1}\\sigma\\in D$, so each fibre is a coset $\\tau D$, in bijection with $D$ by left multiplication. Counting these disjoint fibres gives $|G|=g|D|$. Comparing with $g e f$ and cancelling the positive integer $g$ gives $|D|=ef$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), first paragraph, stabilizer order calculation; coset counting written out."
+   }
+  },
+  {
+   "text": "Put $E=B/\\mathfrak n$. By [lem-exc-dvr-residue-normal-action], $E/k$ is normal and the residue-action homomorphism $\\rho:D\\to\\operatorname{Aut}_k(E)$ is surjective. Its kernel consists exactly of the elements acting trivially on $E$, namely the subgroup $I$ defined in the item. The extension $E/k$ is finite of degree $f$ by Step 1. Its characteristic is $p$, since its field embedding from $k$ is injective: a multiple of $1$ vanishes in $E$ exactly when the same multiple vanishes in $k$.",
+   "uses": [
+    "lem-exc-dvr-residue-normal-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), first paragraph, applying Tag 09ED (lemma-galois-galois) without a separable-residue assumption."
+   }
+  },
+  {
+   "text": "The automorphism group of $E/k$ is finite, as it is the surjective image of the finite group $D$ from Step 3; denote its order by $h\\geq1$. Apply [lem-exc-normal-field-degree-factors] to the finite normal extension $E/k$ in characteristic $p$. With its notation, $h=s$, $f=s d$ and $d=p^c$ for some $c\\geq0$. Substitution gives $f=h p^c$. This is exactly where a possible inseparable residue degree is retained.",
+   "uses": [
+    "lem-exc-normal-field-degree-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), first paragraph, invoking fields.tex Tag 09HS and the discussion after Tag 030L."
+   }
+  },
+  {
+   "text": "Every fibre of the onto homomorphism $\\rho$ in Step 3 is a coset of $I$: if $\\rho(\\sigma)=\\rho(\\tau)$ then $\\tau^{-1}\\sigma\\in I$, and the converse follows by applying $\\rho$. Left multiplication identifies each fibre with $I$, so $|D|=|I|h$. Using Steps 2 and 4 gives $|I|h=ef=e h p^c$. Cancel the positive integer $h$ to obtain $|I|=e p^c$. The characteristic satisfies $p>1$, since $1\\ne0$ in $k$, and it is prime: if $p=ab$ with $1<a,b<p$, then $(a\\cdot1)(b\\cdot1)=0$ in $k$ although neither factor vanishes, contrary to $k$ being a field. To express the result using $n$, write the prime factorization of the positive integer $e$ as $e=p^a m$ with $a\\geq0$ and $p\\nmid m$. Every divisor of $e$ prime to $p$ divides $m$, and $m$ is itself such a divisor; hence the largest such divisor is $n=m$. Thus $|I|=n p^{a+c}$, proving the claim with $b=a+c\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EE (lemma-galois-inertia), end of first proof paragraph, kernel-fibre counting and prime-to-p factor comparison written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-exc-dvr-residue-normal-action",
+  "lem-exc-normal-field-degree-factors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EE (lemma-galois-inertia), first proof paragraph, with its cited Tags 09EA, 09EB and 09ED and the fields.tex normal/separable/inseparable degree calculations; fibre counting and cancellations made explicit."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-finite-dvr-tame-inertia",
@@ -42,54 +104,55 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "In a finite Galois extension of a discretely valued field the decomposition group order is ramification index times residue degree and its action on the residue field is surjective",
-   "results": "Search returned 8 hits: Ideal.ramificationIdxIn_mul_ramificationIdxIn, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDegIn_ne_zero, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.ncard_primesOver_mul_ncard_primesOver, Ideal.ramificationIdx_eq_of_isGaloisGroup, ValuationSubring.inertiaSubgroup. ",
+   "query": "For a finite normal extension of discretely valued fields with arbitrary residue field of characteristic p, the prime to p part of the inertia subgroup order equals the prime to p part of the ramification index",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDeg_le_finrank, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.ramificationIdxIn_mul_ramificationIdxIn, Ideal.ramificationIdx_le_finrank, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.sum_ramification_inertia",
    "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields."
+   "verdict": "no match: pinned Galois.lean:285-335 assumes PerfectField of the base residue field for its inertia-order equalities. The present imperfect-residue calculation needs several inputs and cancellations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The decomposition group acts surjectively on automorphisms of the normal residue extension and has size the product of the ramification index and residue degree",
+   "results": "[leanfinder] OK 8 hit(s); IsFractionRing.stabilizerHom_surjective, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, ValuationSubring.inertiaSubgroup, arithFrobAt, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.Quotient.stabilizerHom_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: relevant separate inputs, not the complete prime-part statement."
   },
   {
    "tool": "leansearch",
-   "query": "For a finite Galois extension of discrete valuation fields inertia order equals ramification index times inseparable residue degree",
-   "results": "Search returned 8 hits: Ideal.card_inertia_eq_ramificationIdxIn, Ideal.sum_ramification_inertia, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.inertiaDeg_algebra_tower. ",
+   "query": "Inertia order equals ramification index times inseparable residue degree for finite Galois extensions of discrete valuation fields",
+   "results": "[leansearch] OK 8 hit(s); Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDegIn, Ideal.sum_ramification_inertia, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.ramificationIdx_eq_of_isGaloisGroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_algebra_tower",
    "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields."
+   "verdict": "no match: the indexed inertia-order theorems require separable or perfect residues; checked the pinned statements."
   },
   {
    "tool": "loogle",
    "query": "Ideal.ncard_primesOver_mul_card_inertia_mul_finrank",
-   "results": "Search returned 1 hits: Ideal.ncard_primesOver_mul_card_inertia_mul_finrank. ",
+   "results": "[loogle] OK 1 hit(s); Ideal.ncard_primesOver_mul_card_inertia_mul_finrank",
    "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields."
+   "verdict": "no match: pinned theorem assumes PerfectField; not applicable here."
   },
   {
    "tool": "grep",
-   "query": "decomposition.*(card|order)|card.*decomposition|inertia.*(insepar|separ)|residueField.*[Ss]urjective",
-   "results": "Search returned 1 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean. ",
+   "query": "card_inertia|card_stabilizer|ncard_primesOver_mul",
+   "results": "[grep] OK 10 hit(s); Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean",
    "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields.",
+   "verdict": "no match: read Galois.lean:285-335; no arbitrary-residue prime-part formula.",
    "subdirectory": "NumberTheory/RamificationInertia"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The stabilizer of a prime in a Galois extension surjects onto the automorphisms of its normal residue field and has order e f",
-   "results": "Search returned 8 hits: IsFractionRing.stabilizerHom_surjective, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.Quotient.stabilizerHom_surjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, IsFractionRing.stabilizerHom, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.isPretransitive_of_isGalois, Ideal.inertiaDeg_eq_of_isGaloisGroup. ",
-   "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields."
-  },
-  {
-   "tool": "grep",
-   "query": "normal|stabilizerHom_surjective|finite_of_isInvariant",
-   "results": "Search returned 15 hits: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean. ",
-   "date": "2026-10-17",
-   "verdict": "no match: read the current Galois.lean:298-335; card_inertia_eq_ramificationIdxIn and card_stabilizer_eq require PerfectField of the base residue field. Residue normality and stabilizer surjectivity are in RingTheory/Invariant, but combining them with the ramification-degree formula and the p-power inseparable-degree calculation is a proof with several steps, not a one-line specialization. The present node permits imperfect residue fields.",
-   "subdirectory": "RingTheory/Invariant"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For an arbitrary residue field of characteristic p, the prime to p factor of the cardinality of inertia is the prime to p factor of the ramification index",
-   "results": "Search returned 8 hits: Ideal.card_inertia_eq_ramificationIdxIn, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.inertiaDeg_le_finrank, Ideal.inertiaDegIn_eq_inertiaDeg, NumberField.Ideal.inertiaDeg_primesOverSpanEquivMonicFactorsMod_symm_apply, IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq, Ideal.inertiaDegIn, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank.",
-   "date": "2026-10-17",
-   "verdict": "no match: related ramification and inertia-degree results were returned; in the pinned source Galois.lean:285-335 the cardinality equalities require PerfectField. The general imperfect-residue prime-part assertion is not a one-line specialization."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-dvr-inertia-order-prime-part",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09EE first paragraph. Separated the transitive normalization degree data, the normal residue action, and a three-clause Mathlib leaf for field degree factors. The item carries the orbit/stabilizer fibre count, the residue-kernel fibre count, positive-factor cancellations, and prime factorization. The statement is unchanged and imperfect residue fields are explicitly allowed throughout.",
+  "blueprint": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the finite-extension degree and residue-action inputs exposed in Stacks Tag 09EE, first proof paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-5214576aa",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-5214576aa (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, the parent's use of the item, the unit record and the sources in full. Item: the statement is unchanged and matches Stacks 09EE, first proof paragraph (more-algebra.tex 33251ff): arbitrary DVR, finite Galois L/K, |I|=n p^b, no residue separability assumed. Steps: Step 1 uses the Mathlib leaf lem-weil-pbc-finite-galois-fixed-field (|G|=[L:K]) and degree-data (transitive action, common e and f, [L:K]=gef), and the e is literally the same exponent. Step 2 counts G-orbits against D, giving |D|=ef. Step 3 takes normality of E/k and surjectivity of rho from residue-normal-action, and ker rho = I. Step 4 uses all three clauses of the field leaf, giving f=h p^c. Step 5 counts kernel cosets, giving |I|=e p^c, then shows p is prime and e=p^a n. Each step is correct, and proof_deps equals the union of uses. There is no cycle: the new nodes have no proof deps and the parent depends on the item. New nodes: degree-data is exactly 09E8+09EA+09EB (33006-33204) and is true. residue-normal-action is exactly 09ED(1)-(2) and does not assume separability. normal-field-degree-factors matches fields.tex 09HS (1994) and the degree product after 030L (1727). For that leaf I opened every named Mathlib declaration: Normal.algHomEquivAut (Normal/Defs.lean:207), finSepDegree_eq_of_isAlgClosed (SeparableDegree.lean:237), finInsepDegree (SeparableClosure.lean:281), finInsepDegree_eq_pow (PurelyInseparable/Basic.lean:497) and finSepDegree_mul_finInsepDegree (PurelyInseparable/Basic.lean:588). It is a valid leaf with one declaration per clause. Small cases checked: L=K; Q(i)/Q over Z_(5) (g=2); Z_2[t]_(2) with sqrt t adjoined (e=1, f=2, |I|=2), which keeps the inseparable factor; and F_p(t)/F_p(t^p). Duplicate search by tags 09E8/09EA/09EB/09ED/09HS/030L and by keyword found no equivalent node. ramification-dvd, the parent and the sbc root models differ, and the project's stabilizerHom result covers only surjectivity. None of the new nodes restates a clause of the item. No SGA is used and the route/unit binding is unchanged. One remark, not a fault of this delivery: the imported item lacks def-pc-field-characteristic in stmt_deps, but in stage 1 adding it needs a statement_change, so I left it. No fixes, no dropped nodes, no tool_uses."
+ }
 }
