@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-extend-scalars-bounded-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived extension of scalars preserves bounded constructible complexes",
@@ -19,37 +19,158 @@
  ],
  "proof": [
   {
-   "text": "*$E_X$ is $\\cO_{E,X}$ with $\\ell$ inverted.* Let $S$ be a profinite set. A continuous map\n$S\\to E$ has compact, hence bounded, image, so\n$C(S,E)=\\bigcup_n\\ell^{-n}C(S,\\cO_E)$. Hence $\\underline E$ is the colimit of\n$\\underline{\\cO}_E\\xrightarrow{\\ell}\\underline{\\cO}_E\\xrightarrow{\\ell}\\cdots$ as a\n$\\underline{\\cO}_E$-module [sk-def-sfb-condensed-ring]. This colimit may be computed\nsectionwise: profinite sets are quasi-compact and quasi-separated for the coherent\ntopology, so the sheaf condition involves only finite limits, which commute with filtered\ncolimits. Since $p_X^*$ is a left adjoint, it follows that\n$E_X=\\colim(\\cO_{E,X}\\xrightarrow{\\ell}\\cO_{E,X}\\xrightarrow{\\ell}\\cdots)$ as\n$\\cO_{E,X}$-modules.",
+   "text": "Put $R_T=\\mathcal O_{E,T}$, $S_T=E_T$ and $F_T=S_T\\otimes_{R_T}-$ for every scheme $T$. The inclusion $a:\\underline{\\mathcal O}_E\\to\\underline E$ pulls back to $\\varphi_T:R_T\\to S_T$ by [def-sfb-integers-to-subfield]. By [det-prop-sfb-qlbar-colimit-x-invert-ell], this is the localization at $\\ell$ and $S_T$ is flat over $R_T$. Thus tensoring with $S_T$ is exact; in particular each $F_T$ preserves finite limits. The finite-colimit preservation required of extension of scalars is also stated in [lem-sfb-modobj-extension-right-exact]. This verifies the hypothesis for every scheme, not merely for the fixed $X$, in the homology-preservation lemma used next.",
    "uses": [
-    "sk-def-sfb-condensed-ring"
+    "def-sfb-integers-to-subfield",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-sfb-modobj-extension-right-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraphs 1–2: localization and flatness"
+   }
   },
   {
-   "text": "*Flatness.* $E_X$ is therefore a filtered colimit of free $\\cO_{E,X}$-modules of rank one.\nSince $\\otimes_{\\cO_{E,X}}$ commutes with colimits and filtered colimits are exact in the\nGrothendieck abelian category of modules [sk-prop-sfb-module-category],\n$E_X\\otimes_{\\cO_{E,X}}-$ is exact. So $L(\\operatorname{Ext}_\\varphi)=D(\\operatorname{Ext}_\\varphi)$,\nand $H^n(E\\otimes^{\\mathrm L}_{\\cO_E}K)=E_X\\otimes_{\\cO_{E,X}}H^n(K)$. In particular\nboundedness is preserved.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-sfb-extend-scalars-preserves-homology] to $a$ and the finite-limit preservation established in step 1. The functor in the conclusion is $LF_X$ by [sk-def-sfb-derived-extension-of-scalars]. Since $F_X$ is exact, [def-sfb-left-derived-exact] gives the canonical isomorphism $LF_X\\cong D(F_X)$, where $D(F_X)$ applies $F_X$ termwise. Represent $K$ by a complex $C$. For every $n$ we therefore have\n$$H^n(LF_X(K))\\cong H^n(F_X(C))\\cong F_X(H^n(C))\\cong F_X(H^n(K)).$$\nThe first isomorphism uses the exact-functor comparison, the middle one is the cited homology-preservation statement, and the last identifies the cohomology of a representing complex with that of its derived object. This argument applies to unbounded complexes as well.",
+   "uses": [
+    "lem-sfb-extend-scalars-preserves-homology",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "def-sfb-left-derived-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraph 2: cohomology of derived extension"
+   }
   },
   {
-   "text": "*Constructibility.* Let $M$ be a constructible $\\cO_{E,X}$-module\n[sk-def-sfb-constructible]. Extension of scalars commutes with restriction along a\nmorphism $g$, since $g^*$ is strong monoidal. It is right exact and sends free modules to\nfree modules of the same rank. So it sends a presentation\n$(\\cO_{E,X}|_U)^m\\to(\\cO_{E,X}|_U)^n\\to M|_U\\to0$ on a stratum and a member of a cover to\na presentation of $(E_X\\otimes M)|_U$ over $E_X|_U$. Hence $E_X\\otimes_{\\cO_{E,X}}M$ is\nconstructible, with the same stratification and covers.",
+   "text": "For any scheme morphism $g:T\\to X$ and $R_X$-module $M$, the scalar extension commutes with restriction:\n$$g^*(S_X\\otimes_{R_X}M)\\cong S_T\\otimes_{R_T}g^*M.$$\nHere is the comparison explicitly. The underlying abelian-sheaf inverse image is strong monoidal and has a right adjoint by [sk-def-sfb-module-pushforward-pullback]. By [lem-weil-pbc-left-adjoint-preserves-colimits] it preserves the coequalizer defining the relative tensor in [def-sfb-modobj-extension] (the parallel-pair indexing category is finite, hence small). Its image is the coequalizer\n$$\\operatorname{coeq}\\bigl(g^{-1}S_X\\otimes g^{-1}R_X\\otimes g^{-1}M\\rightrightarrows g^{-1}S_X\\otimes g^{-1}M\\bigr).$$\nUse the ring isomorphisms $g^{-1}R_X\\cong R_T$ and $g^{-1}S_X\\cong S_T$ from [sk-prop-sfb-cartesian-coefficients]. The compatibility square of [sk-def-sfb-coefficient-change] identifies its first arrow with the right $R_T$-action on $S_T$ induced by $\\varphi_T$, and its second arrow with the action on $g^*M$. It is consequently the defining coequalizer of the right-hand side; the left $S_T$-action on the first factor agrees too. The module pullback here is the ringed-topos pullback, identified with inverse image by the same cartesian-coefficients statement.",
    "uses": [
-    "sk-def-sfb-constructible"
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-extension",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraph 3: extension of scalars commutes with restriction"
+   }
+  },
+  {
+   "text": "For a scheme $U$, the defining balanced tensor of [def-sfb-modobj-extension] gives $F_U(R_U)\\cong S_U$: multiplication $s\\otimes r\\mapsto s\\varphi_U(r)$ has inverse $s\\mapsto s\\otimes1$, and the two composites are identities by the balancing relation and the unit identity. Since $F_U$ preserves finite colimits by [lem-sfb-modobj-extension-right-exact], $F_U(R_U^r)\\cong S_U^r$ for every finite rank $r$, including $r=0$. Under these identifications a finite matrix $(a_{ij})$ with scalar entries in $\\mathcal O_E$ becomes $(\\varphi(a_{ij}))$ with scalar entries in $E$: on the $j$th standard summand the image is $\\sum_i\\varphi(a_{ij})e_i$. This proves both the ranks and the entries of the resulting presentation, rather than just its finite presentation.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraph 3: regular modules and finite free presentations"
+   }
+  },
+  {
+   "text": "Let $M$ be constructible over $R_X$. Work on any affine open $V\\subseteq X$. By [sk-def-sfb-constructible] there is a finite stratification of $V$ into constructible locally closed subschemes $V_a$, each equipped with a pro-étale cover $\\{U_{ai}\\to V_a\\}$ on which $M$ has a finite constant local model. By [det-def-sfb-constructible-local-model], on $U=U_{ai}$ choose a finite matrix $A$ over the scalar ring $\\mathcal O_E$ with\n$$M|_U\\cong\\operatorname{coker}(R_U^m\\xrightarrow{A}R_U^n).$$\nSteps 3–4 and finite-colimit preservation [lem-sfb-modobj-extension-right-exact] give\n$$(F_XM)|_U\\cong\\operatorname{coker}(S_U^m\\xrightarrow{\\varphi(A)}S_U^n).$$\nIts entries lie in the scalar ring $E$, so the reverse implication of [det-def-sfb-constructible-local-model] gives a finite constant local model over $E$, not just an arbitrary local presentation. Thus the same strata and the same covers witness constructibility on $V$. Since this holds on every affine open, the arbitrary-scheme clause of [sk-def-sfb-constructible] proves $F_XM$ constructible on $X$.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraph 3: constructibility; retain scalar entries and work affine locally"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-bounded-constructible], choose integers $a\\le b$ with $H^n(K)=0$ outside $[a,b]$, and each $H^n(K)$ constructible. Step 2 identifies $H^n(L F_X(K))$ with $F_X(H^n(K))$. For $n$ outside $[a,b]$ this is zero, since finite-colimit preservation [lem-sfb-modobj-extension-right-exact] includes the empty colimit $F_X(0)=0$. In every degree it is constructible by step 5. The same definition of bounded constructibility now gives the assertion. No Noetherian hypothesis or derived completeness condition is used.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-modobj-extension-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+    "place": "paragraphs 2–3: combine boundedness and constructibility"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-constructible"
+  "def-sfb-integers-to-subfield",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-sfb-modobj-extension-right-exact",
+  "lem-sfb-extend-scalars-preserves-homology",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-sfb-left-derived-exact",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-modobj-extension",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/lem-sfb-extend-scalars-bounded-constructible.proof.md",
+  "place": "Paragraphs 1–3, expanded using the existing localization, homology and scalar-change interfaces"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*extendScalars|extendScalars.*constructible|boundedConstructible",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat coefficient extension preserves bounded complexes with constructible cohomology sheaves",
+   "results": "Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CategoryTheory.flat_iff_lan_flat, Module.Flat.of_isLocalizedModule",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"extendScalars\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars from the ring of integers of a finite extension of the l-adic numbers to its fraction field preserves bounded constructible complexes of pro-etale sheaves",
+   "results": "BDeRham, BDeRhamPlus, Condensed.lanSheafProfinite, Condensed.profiniteSolid, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, CondensedMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree; returned condensed-module and period-ring constructions, not a constructible derived scalar-extension theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact change of coefficients sends a locally finitely presented sheaf on each stratum to a locally finitely presented sheaf and preserves bounded constructible derived categories",
+   "results": "SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.map and finite-presentation declarations concern ordinary ring-sheaf presentations, not the whole condensed-coefficient derived claim.",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|preservesFiniteLimits_extendScalars_of_flat|lTensor_shortComplex_exact",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean, Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: no theorem covering bounded constructible derived extension for these coefficient ring objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible coefficient-extension theorem found by the independent second-reading query"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -72,5 +193,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-sfb-rationalization-comparison"
+ "unit": "sk-thm-sfb-rationalization-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-extend-scalars-bounded-constructible",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing localization/flatness statement and the existing homology lemma, checked for all schemes. Expanded pullback compatibility through the defining coequalizer and the natural coefficient square, then tracked scalar matrix entries to preserve finite constant local models on the same strata and covers. Handled arbitrary schemes affine locally. No new nodes or Mathlib leaves; no finished slopmaster2 declaration found. Second reading cites the existing exact-functor derived comparison directly and moves proposed tool-use explanations into the report for maintainer assessment.",
+  "blueprint": "Realizes paragraph 1 and flatness in paragraph 2 by step 1 through the existing det-prop-sfb-qlbar-colimit-x-invert-ell; paragraph 2 homology by step 2 and boundedness by step 6; paragraph 3 by steps 3–5. This is the bounded-constructible clause of unit step 2, on its integral-to-rational route. Whole-DAG and blueprint searches found no other node stating the whole item."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-e0062a7be",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-e0062a7be (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All six steps are sound for the current blueprint predicate; no new nodes or repairs. Accepted generic homology and cartesian-coefficient tools. Explicitly distinguished the master’s local-finite-presentation predicate; no category comparison or target weakening is accepted."
+ }
 }
