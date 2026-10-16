@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-kan-pullback-fibration-invariance",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, after replacing the path-space endpoint maps by their Kan-fibration presentation: the induced strict pullback map is a weak homotopy equivalence.",
+   "via": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-infinity-colimit-gluing",
+    "lem-coef-infinity-finite-shape-generation",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Weak-equivalence invariance of strict pullbacks along Kan fibrations",
+ "statement": "Use simplicial sets and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. A Kan fibration means a simplicial map with the right lifting property against every horn inclusion $\\Lambda_k^n\\hookrightarrow\\Delta^n$, for $n\\geq1$ and $0\\leq k\\leq n$. Let $X_0\\xrightarrow{f}X\\xleftarrow{g}X_1$ and $Y_0\\xrightarrow{f\\prime}Y\\xleftarrow{g\\prime}Y_1$ be cospans of small simplicial sets, and let $\\alpha:X_0\\to Y_0$, $\\beta:X\\to Y$, and $\\gamma:X_1\\to Y_1$ all be weak homotopy equivalences satisfying $\\beta f=f\\prime\\alpha$ and $\\beta g=g\\prime\\gamma$. Suppose $f$ and $f\\prime$ are Kan fibrations. Then the induced map on strict pullbacks $X_0\\times_X X_1\\to Y_0\\times_Y Y_1$, given degreewise by $(x_0,x_1)\\mapsto(\\alpha(x_0),\\gamma(x_1))$, is a weak homotopy equivalence. No Kan-complex hypothesis on the six objects is imposed.",
+ "source": {
+  "document": "https://kerodon.net/tag/0109",
+  "place": "Kerodon Proposition 3.4.0.2 (0109), weak-equivalence invariance of strict pullbacks along Kan fibrations; read online 2026-10-17, not archived in literature/. Kerodon tags, not Stacks tags."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of Kan fibrations with vertical weak equivalences induces a weak equivalence on strict pullbacks",
+   "results": "HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration; instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration; instIsStableUnderBaseChangeFibrations, but these cover trivial fibrations or fibration stability, not arbitrary weak-equivalence squares of pullbacks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"WeakEquivalence\", \"Fibration\"",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*weakEquivalence|weakEquivalence.*pullback",
+   "results": "PathObject.lean:280,285; JoyalTrick.lean:85,89; Instances.lean:237,243; all concern path-object or trivial-fibration base change, not the stated pullback comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict pullback weak equivalence Kan fibration",
+   "results": "{\"t\": \"2026-10-16T18:32:54Z\", \"tool\": \"leanfinder\", \"query\": \"strict pullback weak equivalence Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"8b1c6db1ba751250\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Instances.lean:235-246 requires the pulled-back map itself to be a trivial fibration; 281-289 requires every product factor to be a fibration. Neither asserts comparison of two arbitrary objectwise weakly equivalent fibration cospans. Loogle gave no hits; the returned path-object maps only compare path-object projections."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*[Mm]ap|[Mm]ap.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T18:35:48Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*[Mm]ap|[Mm]ap.*weakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean\"], \"digest\": \"72dd11dac46c7d06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Instances.lean:235-246 requires the pulled-back map itself to be a trivial fibration; 281-289 requires every product factor to be a fibration. Neither asserts comparison of two arbitrary objectwise weakly equivalent fibration cospans. Loogle gave no hits; the returned path-object maps only compare path-object projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\", \"WeakEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T18:35:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback.map\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Instances.lean:235-246 requires the pulled-back map itself to be a trivial fibration; 281-289 requires every product factor to be a fibration. Neither asserts comparison of two arbitrary objectwise weakly equivalent fibration cospans. Loogle gave no hits; the returned path-object maps only compare path-object projections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-kan-homotopy-pullback-invariance",
+  "date": "2026-10-17",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Curves and genus",
@@ -12,13 +12,100 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-curve/_section.md",
   "place": "node sk-def-curve, order 528"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-genus"
+ ],
+ "proof": [
+  {
+   "text": "For an extension $k\\subseteq k'$ of algebraically closed fields and a smooth proper connected curve $C/k$, apply [lem-sc-genus-invariant] to this curve and extension. Its displayed equality is $g(C_{k'})=g(C)$. These are the genera of [def-sc-genus], whose statement explicitly identifies genus with $\\dim H^0(\\Omega^1)$. Extracting this equality, and discarding the additional Jacobian compatibility, proves the extension-invariance parenthetical.",
+   "uses": [
+    "lem-sc-genus-invariant",
+    "def-sc-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-curve/_section.md",
+    "place": "Final parenthetical: invariant under algebraically closed extension of k; implemented by the existing lem-sc-genus-invariant equality clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-genus-invariant",
+  "def-sc-genus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-curve/_section.md",
+  "place": "Genus-invariance parenthetical: direct extraction from the existing stronger lemma lem-sc-genus-invariant."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsCurve, AlgebraicGeometry.IsConnectedCurve, Scheme.Hom.genus",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.IsCurve'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "genus of a smooth proper connected curve is dimension of global sections of relative differentials",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smoothness, dimensions, or specific Weierstrass models, not the arbitrary curve/genus package and extension invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "curve separated finite type dimension at most one connected curve genus dimension global differentials",
+   "results": "WeierstrassCurve.IsElliptic, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, FunctionField.classNumber, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, WeierstrassCurve.Affine.FunctionField, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smoothness, dimensions, or specific Weierstrass models, not the arbitrary curve/genus package and extension invariance"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCurve|IsConnectedCurve|Scheme.Hom.genus|arithmeticGenus|relativeDifferentials",
+   "results": "No hits; searched AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|geometricGenus",
+   "results": "No hits; searched AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim|IsSmoothOfRelativeDimension|class Smooth",
+   "results": "Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; searched AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smoothness, dimensions, or specific Weierstrass models, not the arbitrary curve/genus package and extension invariance"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|IsConnectedCurve|IsCurve",
+   "results": "No hits; searched AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invariance of dimension of global differential forms of a smooth proper curve under extension of algebraically closed fields",
+   "results": "RatFunc.rank_ratFunc_ratFunc, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, RatFunc.finrank_ratFunc_ratFunc, Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-16",
+   "verdict": "no match: rational-function-field dimension and affine differential ranks do not state genus invariance for arbitrary scheme curves"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -40,5 +127,29 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-curve"
+ "unit": "sk-def-curve",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-curve",
+  "worker": "stage1 Q29",
+  "summary": "Reused def-sc-curves and def-sc-genus for the defining notions, following their main-20261015 updates. Kept the statement unchanged. The non-elementary proof step extracts the genus equality from the existing stronger lem-sc-genus-invariant; a definition alone does not establish that equality. No new nodes. Recorded the unit realization and actual Mathlib searches.",
+  "blueprint": "The curve clauses of sk-def-curve are def-sc-curves, the differential-form genus clause is def-sc-genus (current blueprint update), and proof step 1 realizes the final extension-invariance parenthetical by the existing lem-sc-genus-invariant. The definition unit has no numbered proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-genus-invariant",
+    "why": "Extract its displayed genus equality for the extension-invariance parenthetical. It is the existing stronger result for exactly these curves and fields; this definition unit has no proof route or other node giving base-change invariance."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-genus-invariant"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-56033643f",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-56033643f (reviewer sub-agent of L); spot-checked: I read the item, the unit record and the three cited nodes in full; review.md has the details. The item statement is word for word the text of main-20261015 sec-abelian-varieties/sk-def-curve/_section.md, and nothing is weakened compared with master. The statement dependencies are def-sc-curves and def-sc-genus, and their blueprint_update texts match def-sc-curves.md and def-sc-genus.md in main-20261015 clause by clause. That covers a field k, separated finite type of dimension at most 1, smooth and proper, connected meaning nonempty, connected and of dimension 1, and genus as dim H^0(Omega^1) together with its equivalence to dim H^1(O). Step 1, which is correctly marked non-elementary, takes the equality g(C_k')=g(C) from the statement of lem-sc-genus-invariant (split, reviewed). I checked that statement against sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md in main-20261015: same hypotheses (proper smooth connected curve, k inside k' with both algebraically closed), and the Jacobian clause is set aside by conjunction elimination. That lemma measures genus as dim H^1(O). The statement of def-sc-genus itself equates this with dim H^0(Omega^1), by Stacks 0BS2 parts (5) and (6), so C3 and C4 are fine. The step's restriction to algebraically closed k is the right one, not a weakening: if k is not algebraically closed, H^0(O)=L can differ from k (for example P^1_L over k), and then the base change to k' is disconnected. The off-unit use of lem-sc-genus-invariant is declared in tool_uses and I accept it: it is the claim stated inside the definition, and no node of this unit (which cites no other units and has no proof steps) states it. Following both kinds of dependency from the cited nodes reaches 5,402 nodes and none of them is sk-def-curve, so there is no cycle. There are no new nodes, no duplicate or restated clause, and no SGA citation. This is not a target node, so the base-change and coefficient-category check does not apply. The unit's realized statement is [sk-def-curve] with steps []. Small cases: P^1, an elliptic curve, Spec k, the empty scheme, P^1 disjoint union P^1, and k=k'. I could not re-check the search log here. The report mentions a citations.json that is not in the delivery, which does no harm. I made no fixes."
+ }
 }

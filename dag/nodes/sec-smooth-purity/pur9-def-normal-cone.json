@@ -3,22 +3,119 @@
  "blueprint": {
   "is": "pur9-def-normal-cone",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Normal cone",
- "statement": "For a closed immersion $i:Z\\hookrightarrow X$ with ideal sheaf $\\mathcal I$, the normal cone is\n\n$$\nN_{Z/X}:=\\operatorname{Spec}_Z\\Bigl(\\bigoplus_{r\\geq0}\\mathcal I^r/\\mathcal I^{r+1}\\Bigr),\n$$\n\nwith projection to $Z$ and zero section given by the projection of the graded algebra onto its degree-zero part $\\mathcal O_Z$.",
+ "statement": "For a closed immersion $i:Z\\hookrightarrow X$ with ideal sheaf $\\mathcal I$, the normal cone is\n\n$$\nN_{Z/X}:=\\operatorname{Spec}_Z\\Bigl(\\bigoplus_{r\\geq0}\\mathcal I^r/\\mathcal I^{r+1}\\Bigr),\n$$\n\nwith projection to $Z$ and zero section given by the projection of the graded algebra onto its degree-zero part $\\mathcal O_Z$.\n\nHere $X,Z$ are schemes [def-pc-scheme], closed immersion means [def-weil-closed-immersion], $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ is [def-sbc-closed-immersion-ideal-sheaf], and its powers are [def-sbc-ideal-sheaf-powers]. The displayed graded algebra on $Z$ is the conormal algebra $\\mathcal G$ of [lem-pur-conormal-graded-algebra]: its degree-$r$ piece is characterized by $i_*\\mathcal G_r=\\mathcal I^r/\\mathcal I^{r+1}$ and $\\mathcal G_0=\\mathcal O_Z$. Thus the quotients on $X$ are interpreted as the corresponding modules on $Z$, with multiplication induced by multiplication of ideal sections. The relative spectrum, its projection, and its contravariance on algebra maps are those of [lem-weil-pbc-affine-morphism-relative-spec]. The zero section is the morphism $z:Z\\to N_{Z/X}$ induced by the augmentation $\\epsilon:\\mathcal G\\to\\mathcal G_0=\\mathcal O_Z$, which is the identity in degree zero and zero in positive degrees.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/pur9-def-normal-cone.md",
   "place": "node pur9-def-normal-cone, order 2342"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof": [
+  {
+   "text": "For the closed immersion $i$, take its ideal sheaf $\\mathcal I$ from [def-sbc-closed-immersion-ideal-sheaf] and the powers $\\mathcal I^r$ from [def-sbc-ideal-sheaf-powers]. Apply [lem-pur-conormal-graded-algebra] to obtain the canonical quasi-coherent graded $\\mathcal O_Z$-algebra $\\mathcal G$. Its statement gives $i_*\\mathcal G_r\\cong\\mathcal I^r/\\mathcal I^{r+1}$, $\\mathcal G_0=\\mathcal O_Z$, and the multiplication $[a]_m[b]_n=[ab]_{m+n}$. This identifies precisely the algebra in the defining formula, including its base scheme $Z$; no regularity or finiteness assumption is needed.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630 (definition-conormal-sheaf), 0631 (equation-conormal-in-degree-n), 0633 (lemma-affine-conormal-sheaf)"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-affine-morphism-relative-spec] to $\\mathcal G$ on $Z$. Define $N_{Z/X}=\\underline{\\operatorname{Spec}}_Z(\\mathcal G)$ with the resulting projection $p:N_{Z/X}\\to Z$. On an affine open $U=\\operatorname{Spec}R\\subseteq X$ with defining ideal $J$, Step 1 identifies the algebra on $W=i^{-1}U=\\operatorname{Spec}(R/J)$ with $\\bigoplus_{r\\geq0}J^r/J^{r+1}$; clause (2) identifies $p^{-1}W$ with the spectrum of this algebra. Hence this construction has exactly the relative-Spec meaning in the item.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0636 (definition-normal-cone); Constructions Tags 01LW (definition-relative-spec), 01LX (lemma-spec-properties)"
+   }
+  },
+  {
+   "text": "Define $\\epsilon:\\mathcal G\\to\\mathcal O_Z$ to be identity in degree zero and zero on all positive-degree summands. By the nonnegative grading, the degree-zero component of a product $ab$ is $a_0b_0$; thus $\\epsilon$ preserves multiplication, the unit, addition and scalars. If $\\eta:\\mathcal O_Z\\to\\mathcal G$ is the structural inclusion, then $\\epsilon\\eta=\\mathrm{id}_{\\mathcal O_Z}$. Under the anti-equivalence in clause (3) of [lem-weil-pbc-affine-morphism-relative-spec], the affine $Z$-scheme $\\mathrm{id}_Z$ corresponds to $\\mathcal O_Z$. The algebra map $\\epsilon$ therefore gives $z:Z\\to N_{Z/X}$ over $Z$, and the identity $\\epsilon\\eta=\\mathrm{id}$ gives $p\\circ z=\\mathrm{id}_Z$. Clause (3) also identifies its restriction on every affine chart with $\\operatorname{Spec}(\\epsilon_W)$, so it is exactly the zero section specified in the definition.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras), applied to the degree-zero augmentation of Divisors Tag 0630 (definition-conormal-sheaf)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630, 0631, 0633, 0636, with relative spectrum and its functoriality from Constructions 01LW/01LX and Morphisms 01SA; the augmentation identity is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normal cone of a closed immersion is the relative Spec of the associated graded algebra of its ideal sheaf, with its projection and zero section.",
+   "results": "8 hits: AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  },
+  {
+   "tool": "grep",
+   "query": "normalCone|normal_cone|NormalCone|associatedGraded|relativeSpec",
+   "results": "0 hits: none; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normal cone of a closed subscheme is the relative spectrum of the graded algebra of powers of its defining ideal.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.AffineScheme, ProjectiveSpectrum, AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an ideal sheaf I of a closed immersion Z into X, construct Spec over Z of the direct sum of I^n modulo I^(n+1), with the section induced by the augmentation to O_Z.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  },
+  {
+   "tool": "grep",
+   "query": "def subscheme|def Proj|def normalization",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned subscheme constructions concern quotients, Proj concerns projective spectra, and normalization concerns integral closure; none constructs the relative Spec of the conormal graded algebra with its augmentation section."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -28,5 +125,34 @@
  "blueprint_uses": [],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-dnc"
+ "unit": "sk-thm-dnc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-def-normal-cone",
+  "worker": "stage1",
+  "summary": "Expanded the previously missing statement dependencies using existing nodes only, clarified that the graded quotients are sheaves on Z, constructed the relative spectrum, and wrote the elementary augmentation argument for the zero section. The unpinned NormalConeData structure in slopmaster2 is not an attachment. No new nodes and no extra hypotheses.",
+  "blueprint": "Realizes the whole definition of pur9-def-normal-cone in sk-thm-dnc: the graded algebra in Step 1, the displayed relative-Spec formula and projection in Step 2, and the final zero-section sentence in Step 3. The item is not the key node of sk-thm-dnc, so its realized fields are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Its general closed-immersion conormal-algebra construction supplies the algebra on Z; this is a construction tool, not a replacement for any DNC-invariance step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Its relative-spectrum construction and anti-equivalence turn the conormal algebra and augmentation into a scheme and section; no unit step replaces this generic geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-47928923e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-47928923e (reviewer sub-agent of L); spot-checked: Read in full: the item, unit sk-thm-dnc, the blueprint main-20261015 text of pur9-def-normal-cone, and the full statements of all six cited nodes. Stacks checked at divisors.tex definition-conormal-sheaf (0630), 0631, 0633 and definition-normal-cone (0636), and morphisms.tex lemma-affine-equivalence-algebras (01SA). The statement keeps the blueprint text verbatim and only adds how the quotients are read as O_Z-modules G_r; no hypothesis is added or dropped. Step 1 uses only the closed-immersion clauses of lem-pur-conormal-graded-algebra (its Noetherian coherence clause is not used). Step 2: clause (2) of lem-weil-pbc-affine-morphism-relative-spec gives p^{-1}W ≅ Spec gr_J(R). Step 3 is truly elementary: ε is an algebra map because (ab)_0 = a_0 b_0, and clause (3) applied to O_Z = (id_Z)_*O_Z gives the Z-morphism z, so p∘z = id. Edge cases tested: I=0, I=O_X, (t) in k[t] (cone A^1), (e) in k[e]/e^2 (non-reduced cone, no vector-bundle claim), and infinitely generated I. Duplicates: def-pur-normal-bundle overlaps but adds the purity conventions and regular-immersion clauses, so same_as [] is right; there are no new nodes and no cycle. Mathlib grep finds nothing. Accepted tool_uses: lem-pur-conormal-graded-algebra (unit sk-def-purity-conv, on route) and lem-weil-pbc-affine-morphism-relative-spec (generic relative-Spec tool). No SGA source. No fixes. Maintainer note: the item's 'unreachable' import flag is stale because sk-def-purity-conv now cites it."
+ }
 }

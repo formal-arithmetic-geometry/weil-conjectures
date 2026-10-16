@@ -28,9 +28,128 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The general derived-colimit formula in [lem-coef-simplicial-model-coherent-diagrams], specialized to the Kan model as explained in step 2, supplies all small colimits of spaces. Apply [lem-coef-infinity-cofinal-kappa-poset] to $I$ and $\\kappa$, obtaining a small nonempty poset $A$ with upper bounds for all subsets of size less than $\\kappa$ and $u:N(A)\\to I$. The pointwise-limit assertion of [lem-coef-infinity-yoneda-presheaf-limits] implies that restriction $u^*:\\operatorname{Fun}(I,\\mathcal S)\\to\\operatorname{Fun}(N(A),\\mathcal S)$ preserves small limits: evaluating its image cone at $a$ is evaluating the original cone at $u(a)$. Cofinality identifies the colimit functor over $I$ with the composite of restriction and colimit over $N(A)$, with its actual cocone legs. It remains to show that the latter colimit functor preserves $\\kappa$-small limits.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-simplicial-model-coherent-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, first paragraph of (1) implies (2); Proposition 5.1.2.2, pointwise limits"
+   }
+  },
+  {
+   "text": "Use [lem-coef-simplicial-presheaf-projective-model] for the combinatorial simplicial Kan model category $\\mathsf{sSet}$. Its cofibrations are monomorphisms, so every object is cofibrant. By [lem-coef-simplicial-model-nerve-localization] its localized infinity category is $\\mathcal S$. The diagram theorem [lem-coef-simplicial-model-coherent-diagrams] gives strict presentations of coherent diagrams on $N(A)$, on $N(A)\\times N(B)$ for a discrete small set $B$, and on $N(A)\\times N(\\mathsf{Cospan})$. Here $\\mathsf{Cospan}$ has arrows $x\\to z\\leftarrow y$. Indeed the counit $\\mathfrak C[N(T)]\\to T$ is a Dwyer--Kan equivalence for each ordinary category $T$ regarded as a locally Kan simplicial category, by the explicit counit clause of [lem-coef-enriched-diagram-rectification], using the ordinary-nerve identification of [lem-coef-coherent-nerve-comparison]; take $T=A$, $A\\times B$, or $A\\times\\mathsf{Cospan}$. Choose objectwise Kan presentations using projective fibrant replacement. The same diagram theorem identifies colimits with projectively derived strict colimits and limits with injectively derived strict limits, including their cones and cocones. In particular the strict product of any small family of Kan complexes computes its product in $\\mathcal S$: over a discrete category an objectwise fibrant diagram is injectively fibrant, since its lifting problems are independent in each coordinate.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-enriched-diagram-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, model-category paragraph; Propositions 4.2.4.4 and A.3.3.2, and Theorem 4.2.4.1"
+   }
+  },
+  {
+   "text": "For a strict $A$-diagram $Y$ of Kan complexes let $C(Y)$ be its degreewise ordinary colimit. It is Kan. A map from a horn is a finite list of simplices subject to finitely many face equations; representatives can be moved to one stage of $A$, and each equation holds at a later stage. A common upper bound of these finitely many stages gives an actual horn at that stage, where a filler exists. The same argument with a simplex in a target diagram shows that the degreewise colimit of an objectwise Kan fibration is a Kan fibration: move the finite lifting square and all its equations to one stage and fill there. For a projectively cofibrant replacement $QY\\to Y$, [lem-coef-filtered-colimit-weak-equivalences] makes $C(QY)\\to C(Y)$ a weak homotopy equivalence. Thus the derived-colimit formula in [lem-coef-simplicial-model-coherent-diagrams] is represented by $C(Y)$ and its ordinary cocone, naturally in $Y$. This also proves existence of all small $A$-indexed colimits of spaces. Only ordinary filteredness of $A$ is used here.",
+   "uses": [
+    "lem-coef-filtered-colimit-weak-equivalences",
+    "lem-coef-simplicial-model-coherent-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, classical Kan-complex calculation, expanded; finite horns and defining degreewise colimit quotient"
+   }
+  },
+  {
+   "text": "Record the degreewise set calculation explicitly. For a directed poset $A$, the colimit of sets $Y_a$ is the quotient of $\\coprod_aY_a$ by $(a,s)\\sim(b,t)$ when their images agree at some $c\\geq a,b$. This is an equivalence relation (use a common upper bound to compose witnesses), and compatible maps out of the quotient are exactly cocones, proving its colimit property. For fewer than $\\kappa$ diagrams $Y^b$ of sets, a tuple of classes has representatives at stages $a_b$; one upper bound for the $a_b$ represents the tuple at a single stage. If two tuples at stages $a,a'$ give the same tuple of classes, choose an equality witness $c_b\\geq a,a'$ for each coordinate; an upper bound for these witnesses and $a,a'$ makes the tuples equal. For the empty tuple, nonemptiness and directedness show that the colimit of singleton sets is a singleton. These arguments prove that $\\operatorname{colim}_a\\prod_bY^b_a\\to\\prod_b\\operatorname{colim}_aY^b_a$ is a bijection. For a pullback $U_a\\times_{Z_a}V_a$, choose representatives of its two target classes at one stage; equality of their images in $\\operatorname{colim}Z$ holds at a later stage, which gives a preimage in the pullback. Equality of two pullback representatives is witnessed by the two coordinate equalities at a common stage. Hence filtered colimits preserve set pullbacks as well. Apply these bijections in each simplicial degree; they commute with every simplicial operator because they are induced by the same projections and cocone maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Elementary quotient-and-representatives argument supplied by Q83 for the classical calculation of Proposition 5.3.3.3"
+   }
+  },
+  {
+   "text": "Now take a family $(Y^b)_{b\\in B}$ of $A$-diagrams of Kan complexes with $|B|<\\kappa$, presenting an arbitrary such family of coherent space diagrams as in step 2. Products of Kan complexes are Kan, since horns fill separately in every coordinate; for $B=\\varnothing$ the product is the terminal Kan complex. By [lem-coef-simplicial-model-coherent-diagrams], as applied in step 2, these strict products compute the homotopy products. By the pointwise-limit statement of [lem-coef-infinity-yoneda-presheaf-limits] they also compute the product diagram in $\\operatorname{Fun}(N(A),\\mathcal S)$. Step 3 computes all the colimits by $C$. The degreewise bijection from step 4 is therefore an isomorphism of Kan complexes representing the product comparison for $\\operatorname{colim}_{N(A)}$. Its composite with the $b$th projection is induced by $Y^b_a\\to C(Y^b)$, so it is the canonical comparison. This proves preservation of all the required products, including the terminal object.",
+   "uses": [
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, last sentence of the forward implication, with the product calculation supplied here"
+   }
+  },
+  {
+   "text": "For a coherent cospan of $A$-diagrams use the simultaneous strict Kan presentation $U\\to Z\\leftarrow V$ of step 2. In the projective diagram model structure furnished by [lem-coef-simplicial-presheaf-projective-model] (take its ordinary category $D=A^{\\mathrm{op}}$), factor $U\\to Z$ as an objectwise weak equivalence $U\\to E$ followed by an objectwise Kan fibration $E\\to Z$. Each $E_a$ is Kan since $Z_a$ is. By [lem-coef-kan-quillen-right-proper], $P_a=E_a\\times_{Z_a}V_a$ is a model of the homotopy pullback of the Kan cospan $U_a\\to Z_a\\leftarrow V_a$, naturally in $a$ and independent of the replacement up to natural equivalence. The cospan clause of [lem-coef-simplicial-model-coherent-diagrams] (every simplicial set is cofibrant, and $U_a,Z_a,V_a$ are Kan) says that the path-object pullback $U_a\\times_{Z_a}Z_a^{\\Delta^1}\\times_{Z_a}V_a$, which is the strict pullback after the particular replacement $U_a\\to U_a\\times_{Z_a}Z_a^{\\Delta^1}\\to Z_a$ of one leg, represents with its cone the pullback of this cospan in $\\mathcal S$; hence so does $P_a$, with its cone. The pointwise-limit statement of [lem-coef-infinity-yoneda-presheaf-limits] makes $P$ the pullback diagram. Step 3 makes $C(E)\\to C(Z)$ a Kan fibration, and [lem-coef-filtered-colimit-weak-equivalences] makes $C(U)\\to C(E)$ a weak equivalence. Consequently the same two clauses of [lem-coef-kan-quillen-right-proper] and [lem-coef-simplicial-model-coherent-diagrams] identify $C(E)\\times_{C(Z)}C(V)$ with the pullback of the colimit cospan $C(U)\\to C(Z)\\leftarrow C(V)$. The degreewise pullback bijection of step 4 identifies it with $C(P)$, which represents $\\operatorname{colim}_aP_a$ by step 3. Both projections of this isomorphism are induced by $P_a\\to E_a,V_a$, and its maps to $C(Z)$ agree by the defining pullback equation. Thus its cone is exactly the image of the original pullback cone. This proves preservation of homotopy pullbacks.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, printed p. 392, homotopy-Cartesian-square calculation, expanded with functorial diagram factorization"
+   }
+  },
+  {
+   "text": "The category $\\mathcal S$ and $\\operatorname{Fun}(N(A),\\mathcal S)$ have all small limits by [lem-coef-infinity-yoneda-presheaf-limits]. The colimit functor between them is a coherent functor presented by the strict construction $C$: by [lem-coef-simplicial-model-coherent-diagrams] with the Dwyer--Kan equivalence $\\mathfrak C[N(A)]\\to A$ of step 2, $\\operatorname{Fun}(N(A),\\mathcal S)\\simeq N_{\\mathrm{hc}}((\\mathsf{sSet}^A)^{\\mathrm{cf}})$ for the projective structure of [lem-coef-simplicial-presheaf-projective-model] (with $D=A^{\\mathrm{op}}$). On projectively cofibrant objectwise Kan diagrams, $C$ takes Kan values by step 3 and is a simplicial functor, since tensors are objectwise and $C(Y\\times\\Delta^n)=C(Y)\\times\\Delta^n$; by [lem-coef-coherent-nerve-comparison] applying $N_{\\mathrm{hc}}$ gives a coherent functor $\\operatorname{Fun}(N(A),\\mathcal S)\\to\\mathcal S$, and by the derived-colimit clause of [lem-coef-simplicial-model-coherent-diagrams] (with $QY=Y$) and step 3 its value at each diagram, with the cocone of colimit legs, is colimiting. Steps 5 and 6 computed its effect on products and pullbacks through these same representatives. Apply [lem-coef-infinity-limits-products-pullbacks] to this colimit functor: steps 5 and 6 verify its product and pullback hypotheses. It follows that $\\operatorname{colim}_{N(A)}$ carries every limiting $K$-cone, for $K$ having fewer than $\\kappa$ nondegenerate simplices, to a limiting cone. This applies for $\\kappa=\\aleph_0$ as well, without introducing a countable product hypothesis.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-limits-products-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, reduction to products and fiber products; dual of Proposition 4.4.2.7"
+   }
+  },
+  {
+   "text": "Return to $X:K\\times I\\to\\mathcal S$. By [lem-coef-infinity-yoneda-presheaf-limits], its $K$-limit in $\\operatorname{Fun}(I,\\mathcal S)$ is $i\\mapsto\\lim_kX(k,i)$, and restriction along $u$ preserves this cone as in step 1. Steps 1 and 7 and the cocone-preserving cofinal comparisons of [lem-coef-infinity-cofinal-kappa-poset] now show that applying $\\operatorname{colim}_I$ gives a limiting cone over $k\\mapsto\\operatorname{colim}_IX(k,-)$. For every $k,i$ its leg is induced by the original projection $\\lim_kX(k,i)\\to X(k,i)$ followed by $X(k,i)\\to\\operatorname{colim}_IX(k,-)$; cofinal restriction preserves these very maps. Thus the associated map to $\\lim_k\\operatorname{colim}_IX(k,-)$ is the comparison in the statement, and it is an equivalence because this cone is limiting. For $K=\\varnothing$ this is the terminal-object case proved in step 5 and transferred by cofinality.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-cofinal-kappa-poset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.3.3, conclusion of (1) implies (2); canonical cone identification written here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-limits-products-pullbacks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proposition 5.3.3.3 (1) implies (2), printed pp. 391-392; source read online, WANTED in literature/. Agent-written expansion of the classical Kan-complex argument and explicit canonical cone check."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +171,45 @@
    "results": "{\"t\": \"2026-10-16T18:30:11Z\", \"tool\": \"grep\", \"query\": \"colimitLimitToLimitColimit_isIso|colimitLimitIso\", \"sub\": \"CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"324\", \"385\", \"391\", \"392\", \"394\"], \"digest\": \"1c93ed9092d7ce8a\"}",
    "date": "2026-10-17",
    "verdict": "No match. The returned interchange declarations use ordinary categories, finite categorical shapes and Type-valued functors; they do not state κ-small simplicial limits of spaces commute with κ-filtered infinity-colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kappa small homotopy limits of spaces commute with kappa filtered infinity categorical colimits",
+   "results": "{\"t\": \"2026-10-16T19:30:44Z\", \"tool\": \"leanfinder\", \"query\": \"Kappa small homotopy limits of spaces commute with kappa filtered infinity categorical colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitToLimitColimitCone_iso\", \"CategoryTheory.Limits.colimitLimitToLimitColimit_isIso\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.colimitLimitToLimitColimit_surjective\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.Limits.ι_colimitLimitToLimitColimit_π_apply\", \"CategoryTheory.Limits.preservesLimitsOfShape_colim_grothendieck\"], \"digest\": \"dd0601d1028559fc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the infinity-categorical statement: the returned colimitLimitToLimitColimit declarations and hoFunctor product results are ordinary categorical assertions. Read FilteredColimitCommutesFiniteLimit.lean:324-326 and the project Presentable/Limits.lean:46-53; neither covers spaces or coherent simplicial limits."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitLimitToLimitColimit_isIso|preserves.*[Ll]imits",
+   "results": "{\"t\": \"2026-10-16T19:31:06Z\", \"tool\": \"grep\", \"query\": \"colimitLimitToLimitColimit_isIso|preserves.*[Ll]imits\", \"sub\": \"CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"324\", \"338\", \"339\", \"340\", \"354\"], \"digest\": \"67776c4720bed218\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the infinity-categorical statement: the returned colimitLimitToLimitColimit declarations and hoFunctor product results are ordinary categorical assertions. Read FilteredColimitCommutesFiniteLimit.lean:324-326 and the project Presentable/Limits.lean:46-53; neither covers spaces or coherent simplicial limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered infinity colimits of spaces commute with small simplicial homotopy limits",
+   "results": "{\"t\": \"2026-10-16T19:31:07Z\", \"tool\": \"leansearch\", \"query\": \"Filtered infinity colimits of spaces commute with small simplicial homotopy limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.Limits.IsIPC.isIso\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.isFiltered_of_nonempty_limit_colimit_to_colimit_limit\"], \"digest\": \"b2d8887fd2981e4a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the infinity-categorical statement: the returned colimitLimitToLimitColimit declarations and hoFunctor product results are ordinary categorical assertions. Read FilteredColimitCommutesFiniteLimit.lean:324-326 and the project Presentable/Limits.lean:46-53; neither covers spaces or coherent simplicial limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimitLimitToLimitColimit\"",
+   "results": "{\"t\": \"2026-10-16T19:31:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimitLimitToLimitColimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitToLimitColimitCone\", \"CategoryTheory.Limits.colimitLimitToLimitColimit\", \"CategoryTheory.Limits.ι_colimitLimitToLimitColimit_π\", \"CategoryTheory.Limits.ι_colimitLimitToLimitColimit_π_assoc\", \"CategoryTheory.Limits.colimitLimitToLimitColimitCone_hom\", \"CategoryTheory.Limits.ι_colimitLimitToLimitColimit_π_apply\", \"CategoryTheory.Limits.colimitLimitToLimitColimitCone_iso\", \"CategoryTheory.Limits.colimitLimitToLimitColimit_isIso\"], \"digest\": \"8fce3e3463eddda1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the infinity-categorical statement: the returned colimitLimitToLimitColimit declarations and hoFunctor product results are ordinary categorical assertions. Read FilteredColimitCommutesFiniteLimit.lean:324-326 and the project Presentable/Limits.lean:46-53; neither covers spaces or coherent simplicial limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of Kan complexes preserve homotopy pullbacks and small products",
+   "results": "{\"t\": \"2026-10-16T19:31:08Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimits of Kan complexes preserve homotopy pullbacks and small products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.hasLimits\", \"SSet.hasColimits\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.Finite.instIsFinitelyPresentable\"], \"digest\": \"4f0f7eb13f72eab8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the infinity-categorical statement: the returned colimitLimitToLimitColimit declarations and hoFunctor product results are ordinary categorical assertions. Read FilteredColimitCommutesFiniteLimit.lean:324-326 and the project Presentable/Limits.lean:46-53; neither covers spaces or coherent simplicial limits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-small-colimits",
@@ -63,5 +217,21 @@
   "group": "Q35"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Checked the infinity-categorical statement against HTT 5.3.3.3, ruled out ordinary-category attachments, and split the proof through cofinal directed posets, strict Kan diagram presentations, an explicit degreewise representative calculation, and products/pullbacks. Added only the cofinal-poset theorem and the general small-limit preservation criterion; reused the existing coherent model calculus and weak-equivalence stability nodes. Statement unchanged.",
+  "blueprint": "The ancestral prop-coef-integral-exceptional-adjoint proof paragraph 2 uses coherent finite-coefficient mapping adjunctions before inverse limit; this foundational descendant supplies the mapping-space limit/filtered-colimit interchange required by lem-coef-compact-small-colimits and lem-coef-space-presheaf-presentability. Steps 1-8 expand HTT 5.3.3.3 rather than change that coefficient route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-ee30db8fe",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-ee30db8fe (reviewer sub-agent of L); spot-checked: I read the item, the 8 steps, both new nodes, all 10 cited statements, the unit sk-prop-sf-biduality-general and the ancestor prop-coef-integral-exceptional-adjoint paragraph 2. HTT is not in literature/ (checked; delivery marks it WANTED, agent proof). From my knowledge of the text I checked the item against HTT 5.3.3.3 (1)=>(2), the poset node against 5.3.1.16+4.1.1.8, and the criterion against the dual of 4.4.2.7/Cor 4.4.2.5; exact printed pages are unverified. Hypotheses match: kappa infinite regular in U, K kappa-small (fewer than kappa nondegenerate simplices), I small kappa-filtered and nonempty, K empty included; statement unchanged. Step 4 (directed-colimit quotient bijections for fewer than kappa products and for pullbacks, empty product) is correct and really elementary. Steps 2 and 3 apply the coherent-diagrams node with the DK counit for discrete A (enriched-rectification + coherent-nerve). Over a discrete index the injective and projective structures coincide. Filtered colimits of Kan complexes and of Kan fibrations are again Kan, and C(QY)->C(Y) is a weak equivalence with no injectivity hypothesis. Small cases checked for both new nodes: singleton or empty I, directed I without a maximum, kappa=aleph0, empty product, discrete shapes, cospan. Neither node is true-duplicated or a restated clause of the item; candidates checked: lem-coef-infinity-filtered-cofinal-pullback, lem-coef-colimit-subdiagram-approximation, lem-weil-pbc-filtered-category-directed-cofinal, lem-coef-infinity-yoneda-presheaf-limits. Route: all proof dependencies are in the unit, no tool_uses, no cycle (233-node traversal), no SGA. Two repairs in fixes/dag/nodes/sec-six-functors/lem-coef-spaces-kappa-limit-filtered-colimit.json. (1) C1/C4, step 6: the identification of E_a x_{Z_a} V_a with the infinity-pullback in S cited only the Kan-Quillen node, which says nothing about limits in S. I added the cospan clause of lem-coef-simplicial-model-coherent-diagrams and the independence-of-replacement link. (2) C1/E5, step 7: the coherent colimit functor fed into the products/pullbacks criterion had no stated origin. I added its presentation as N_hc of the strict simplicial functor C on projective cofibrant-fibrant A-diagrams, citing the coherent-diagrams, projective-model and coherent-nerve nodes. proof_deps is unchanged and equals the union of uses.; 1 file(s) fixed by the reviewer"
+ }
 }

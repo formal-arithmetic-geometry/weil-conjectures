@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-replete-on-contractible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sequential limits along epimorphisms on a weakly contractible object",
@@ -12,15 +12,51 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.md",
   "place": "node det-pe-replete-on-contractible, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "det-pe-weak-contractible-equivalences",
+  "det-pe-replete-definition"
+ ],
  "proof": [
   {
-   "text": "Surjectivity of $t_n(W)$ is part 3 of [det-pe-weak-contractible-equivalences]. Let\n$x_m\\in F_m(W)$. Define $x_n$ for $n<m$ by $x_n=t_n(x_{n+1})$, descending from $m$, and for\n$n>m$ choose recursively (countable dependent choice) $x_{n}\\in F_{n}(W)$ with\n$t_{n-1}(x_{n})=x_{n-1}$, using surjectivity of $t_{n-1}(W)$. The sequence $(x_n)$ is\ncompatible, so it is an element of $(\\varprojlim_nF_n)(W)$ by the sectionwise description\nof the limit in [det-pe-replete-definition], and it projects to $x_m$.",
+   "text": "For every $n\\geq0$, apply condition 3 of [det-pe-weak-contractible-equivalences] to the epimorphism $t_n:F_{n+1}\\to F_n$ and the given weakly contractible object $W$. It gives that $t_n(W):F_{n+1}(W)\\to F_n(W)$ is surjective, proving the first assertion.",
    "uses": [
-    "det-pe-weak-contractible-equivalences",
+    "det-pe-weak-contractible-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
+    "place": "First sentence: surjectivity of t_n(W) is part 3 of the weak-contractibility equivalences"
+   }
+  },
+  {
+   "text": "Fix $m\\geq0$ and a prescribed $a\\in F_m(W)$. For each $n$ and $z\\in F_n(W)$, use classical choice on the nonempty fibre of $t_n(W)$ over $z$ to choose $s_n(z)\\in F_{n+1}(W)$ with $t_n(W)(s_n(z))=z$. Define $b_0=a$ and $b_{r+1}=s_{m+r}(b_r)$ by recursion on $r\\in\\mathbf N$. Inductively $b_r\\in F_{m+r}(W)$, and the displayed choice equation gives $t_{m+r}(W)(b_{r+1})=b_r$ for every $r$. Thus all stages from $m$ upwards have compatible chosen values. This is only set-theoretic choice and natural-number recursion; no sheaf morphisms $s_n$ or choices compatible with restrictions are asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
+    "place": "Middle sentence: successive lifts above m, with the dependent-choice construction expanded as chosen preimages and recursion"
+   }
+  },
+  {
+   "text": "Set $x_{m+r}=b_r$ for $r\\geq0$, and define the finitely many earlier values by $x_n=t_n(W)(x_{n+1})$ in descending order for $n=m-1,\\ldots,0$. For $n<m$ the identity $t_n(W)(x_{n+1})=x_n$ holds by this definition; for $n=m+r\\geq m$ it is the identity proved in step 2. Hence $(x_n)$ is compatible at every adjacent pair and $x_m=b_0=a$. If $m=0$, there are no earlier values to define.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
+    "place": "Middle sentence: earlier stages determined by descending transition maps; verify compatibility in both index ranges"
+   }
+  },
+  {
+   "text": "The formula in [det-pe-replete-definition] identifies $(\\varprojlim_n F_n)(W)$ with the tuples $(x_n)\\in\\prod_n F_n(W)$ satisfying $t_n(W)(x_{n+1})=x_n$ for all $n$, and identifies its $m$-th projection with $(x_n)\\mapsto x_m$. The tuple constructed in steps 2 and 3 therefore defines an element of this section set whose $m$-th projection is the prescribed $a$. Since $a$ and $m$ were arbitrary, every displayed projection is surjective.",
+   "uses": [
     "det-pe-replete-definition"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
+    "place": "Final sentence: sectionwise inverse-limit description and its coordinate projection"
+   }
   }
  ],
  "proof_deps": [
@@ -29,12 +65,111 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
+  "place": "Entire proof, expanded into transition surjectivity, explicit recursive lifts, finite backward extension, and the sectionwise limit formula"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity of projections from inverse limits of sets along surjective maps countable sequence",
+   "results": "{\"t\": \"2026-10-16T19:37:14Z\", \"tool\": \"leanfinder\", \"query\": \"surjectivity of projections from inverse limits of sets along surjective maps countable sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux\", \"LightProfinite.proj_surjective\", \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\", \"cantorToHilbert_surjective\", \"LightProfinite.surjective_transitionMap\", \"Profinite.NobelingProof.surjective_projRestricts\", \"LightProfinite.surjective_transitionMapLE\", \"CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map\"], \"digest\": \"9e055afdf9157663\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredient: CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (Mathlib/CategoryTheory/Limits/Types/Images.lean:111) gives the zeroth projection of a set-valued tower. It does not state the full item, which also needs evaluation on a weakly contractible pro-etale object and arbitrary m. The few-line choice/recursion argument is written in the item itself."
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.range, Function.Surjective, Pi",
+   "results": "{\"t\": \"2026-10-16T19:37:15Z\", \"tool\": \"loogle\", \"query\": \"Set.range, Function.Surjective, Pi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Pi'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Invalid query: loogle: unknown identifier 'Pi'; no absence conclusion is drawn from this result."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*limit|limit.*surjective|dependentChoice|DependentChoice",
+   "results": "{\"t\": \"2026-10-16T19:37:15Z\", \"tool\": \"grep\", \"query\": \"surjective.*limit|limit.*surjective|dependentChoice|DependentChoice\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Galois/Topology.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"693d1f5888f39414\"}",
+   "date": "2026-10-16",
+   "verdict": "Related ingredients only. Read Mathlib/CategoryTheory/Limits/Types/Images.lean:80-121 and ConcreteCategory/Basic.lean:93-104: these give only the zeroth projection for a set-valued or concrete-category sequence, not the full pro-etale statement. The elementary recursive argument is written out in steps 2-3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective projection from a countable inverse limit of sets with surjective transition maps",
+   "results": "{\"t\": \"2026-10-16T19:37:57Z\", \"tool\": \"leansearch\", \"query\": \"surjective projection from a countable inverse limit of sets with surjective transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\", \"LightProfinite.proj_surjective\", \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux\", \"InverseSystem.piLTProj\", \"Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone\", \"LightProfinite.instEpiAppOppositeNatπAsLimitCone\", \"CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\"], \"digest\": \"8363ccc1bf11fbe9\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredient: CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (Mathlib/CategoryTheory/Limits/Types/Images.lean:111) gives the zeroth projection of a set-valued tower. It does not state the full item, which also needs evaluation on a weakly contractible pro-etale object and arbitrary m. The few-line choice/recursion argument is written in the item itself."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective projection from a countable inverse limit of sets with surjective transition maps",
+   "results": "{\"t\": \"2026-10-16T19:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"surjective projection from a countable inverse limit of sets with surjective transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux\", \"LightProfinite.proj_surjective\", \"cantorToHilbert_surjective\", \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\", \"Profinite.presentation.epi_π\", \"Profinite.NobelingProof.surjective_projRestricts\", \"Profinite.IndexFunctor.surjective_π_app\", \"LightProfinite.surjective_transitionMap\"], \"digest\": \"9714346252c7ffa1\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredient: CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (Mathlib/CategoryTheory/Limits/Types/Images.lean:111) gives the zeroth projection of a set-valued tower. It does not state the full item, which also needs evaluation on a weakly contractible pro-etale object and arbitrary m. The few-line choice/recursion argument is written in the item itself."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map",
+   "results": "{\"t\": \"2026-10-16T19:38:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\"], \"digest\": \"6d92ff7bdf665ce4\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredient: CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map (Mathlib/CategoryTheory/Limits/Types/Images.lean:111) gives the zeroth projection of a set-valued tower. It does not state the full item, which also needs evaluation on a weakly contractible pro-etale object and arbitrary m. The few-line choice/recursion argument is written in the item itself."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_π_app_zero_of_surjective_map",
+   "results": "{\"t\": \"2026-10-16T19:38:09Z\", \"tool\": \"grep\", \"query\": \"surjective_π_app_zero_of_surjective_map\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\"], \"digest\": \"8c1f7694c8c4117e\"}",
+   "date": "2026-10-16",
+   "verdict": "Related ingredients only. Read Mathlib/CategoryTheory/Limits/Types/Images.lean:80-121 and ConcreteCategory/Basic.lean:93-104: these give only the zeroth projection for a set-valued or concrete-category sequence, not the full pro-etale statement. The elementary recursive argument is written out in steps 2-3."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_π_app_zero_of_surjective_map|[Ww]eakly[Cc]ontractible|[Ww][Cc]ontractible|ProEt",
+   "results": "{\"t\": \"2026-10-16T19:43:45Z\", \"tool\": \"grep\", \"query\": \"surjective_π_app_zero_of_surjective_map|[Ww]eakly[Cc]ontractible|[Ww][Cc]ontractible|ProEt\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\"], \"digest\": \"8c1f7694c8c4117e\"}",
+   "date": "2026-10-16",
+   "verdict": "Related ingredients only. Read Mathlib/CategoryTheory/Limits/Types/Images.lean:80-121 and ConcreteCategory/Basic.lean:93-104: these give only the zeroth projection for a set-valued or concrete-category sequence, not the full pro-etale statement. The elementary recursive argument is written out in steps 2-3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of sets on the pro etale site, evaluation on a weakly contractible object makes a countable tower of epimorphisms a surjective inverse system and all its limit projections surjective",
+   "results": "{\"t\": \"2026-10-16T19:43:46Z\", \"tool\": \"leansearch\", \"query\": \"For sheaves of sets on the pro etale site, evaluation on a weakly contractible object makes a countable tower of epimorphisms a surjective inverse system and all its limit projections surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify\", \"LightProfinite.instEpiAppOppositeNatπAsLimitCone\", \"SheafOfModules.evaluationPreservesLimit\"], \"digest\": \"b77443a0ec0ecf04\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Local-surjectivity criteria and coherent-topology or module/LightProfinite results do not give both conclusions on the stated arbitrary weakly contractible pro-etale object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"preservesEpimorphisms\"",
+   "results": "{\"t\": \"2026-10-16T19:43:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"preservesEpimorphisms\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_coyoneda_obj\", \"CategoryTheory.Functor.preservesProjectiveObjects_of_adjunction_of_preservesEpimorphisms\", \"CategoryTheory.Functor.preservesEpimorphisms_of_adjunction_of_preservesProjectiveObjects\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyoneda_obj\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyonedaObj\"], \"digest\": \"ec6de99bedf190c8\"}",
+   "date": "2026-10-16",
+   "verdict": "General projectivity, coherent-topology and condensed variants, not the entire statement for sheaves on the pro-etale site. The relevant evaluation property is already the statement of det-pe-weak-contractible-equivalences; no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on a projective representable sheaf sends epimorphisms to surjections and countable inverse limits of epimorphic towers have surjective projections on this object",
+   "results": "{\"t\": \"2026-10-16T19:43:57Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on a projective representable sheaf sends epimorphisms to surjections and countable inverse limits of epimorphic towers have surjective projections on this object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"Condensed.epi_iff_surjective_on_stonean\", \"CategoryTheory.Projective.π_epi\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_coyoneda_obj\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyoneda_obj\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyonedaObj\", \"LightCondensed.epi_π_app_zero_of_epi\"], \"digest\": \"88ca125183b84c71\"}",
+   "date": "2026-10-16",
+   "verdict": "General projectivity, coherent-topology and condensed variants, not the entire statement for sheaves on the pro-etale site. The relevant evaluation property is already the statement of det-pe-weak-contractible-equivalences; no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_π_app|WeaklyContractible|[Rr]eplete",
+   "results": "{\"t\": \"2026-10-16T20:04:04Z\", \"tool\": \"grep\", \"query\": \"surjective_π_app|WeaklyContractible|[Rr]eplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Topology/Category/Profinite/Product.lean\", \"Mathlib/Topology/Category/Profinite/Product.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/CategoryTheory/Limits/Types/Images.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\"], \"digest\": \"c5f1c79c2009ff52\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader Mathlib grep: related set/concrete zeroth-projection, LightCondensed, Profinite and coherent-topology declarations only. Read the Types, Concrete and coherent-topology declarations at the lines specified in the second-reader Loogle record. The unrestricted preimage recursion remains an elementary step, with no extra node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective_π_app\"",
+   "results": "{\"t\": \"2026-10-16T20:04:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"surjective_π_app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map\", \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux\", \"CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"Profinite.IndexFunctor.surjective_π_app\"], \"digest\": \"0599c893439cffd6\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader Loogle search: the Types and Concrete theorems give the zeroth projection of a tower already surjective on underlying sets; coherentTopology gives local surjectivity under additional site hypotheses, not surjectivity of sections at an arbitrary weakly contractible object. Read Types/Images.lean:80-121, ConcreteCategory/Basic.lean:93-104, and Sites/Coherent/SequentialLimit.lean:70-120. None states the complete item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections on a projective object of a sheaf topos of sets lift compatible elements in every surjective countable tower",
+   "results": "{\"t\": \"2026-10-16T20:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"Sections on a projective object of a sheaf topos of sets lift compatible elements in every surjective countable tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"Profinite.instEnoughProjectives\", \"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply\", \"CategoryTheory.Projective.inst\", \"Profinite.projectivePresentation\"], \"digest\": \"44db2feec925a3b0\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader semantic search: returned cover-gluing, coherent-site sheaf criteria and projectivity declarations, not both conclusions of this item. No new node is needed."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +183,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-replete"
+ "unit": "sk-prop-pe-replete",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-replete-on-contractible",
+  "worker": "stage1",
+  "summary": "Kept the statement and route. Added the actual statement dependencies, split the imported paragraph into four sourced steps, and made classical preimage choices, primitive recursion, finite backward extension, and all compatibility equations explicit. The only non-elementary input is clause 3 of the existing weak-contractibility equivalences; the sectionwise inverse-limit formula is supplied explicitly by the existing definition node. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the entire proof of det-pe-replete-on-contractible and step 1 of unit sk-prop-pe-replete: surjectivity on W, successive lifting above m, determination below m, and the sectionwise limit projection. This item is not the statement node of the unit, so no unit realization fields were edited."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-618a95f57",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-618a95f57 (reviewer sub-agent of L); spot-checked: Read the whole item and checked it against the current blueprint main-20261015 det-pe-replete-on-contractible.md and .proof.md, and against unit sk-prop-pe-replete step 1. The statement matches the blueprint character for character and keeps every hypothesis: set-valued sheaves on X_proet, an N-indexed tower with epimorphic transitions, and an arbitrary weakly contractible W. Step 1 uses only the statement of condition 3 of det-pe-weak-contractible-equivalences (every sheaf epimorphism gives a surjection on sections at W), applied to each t_n. Steps 2-3 are elementary: choice of set-level sections plus recursion upward from m, and a finite downward definition below m. I checked compatibility above m, below m and at the junction, and the cases m=0, m=1 and an empty F_m(W). Step 4 uses the statement of det-pe-replete-definition, which defines the limit sectionwise as compatible tuples with p_m given by (x_n) -> x_m. proof_deps equals the union of the steps' uses. Route: the two dependencies belong to sk-def-pe-weak-contractible and sk-def-pe-replete, both units that sk-prop-pe-replete cites, so no tool use arises. The dependency closure (260 nodes) does not contain the item, so there is no cycle. Duplicate search over dag/nodes (lem-galois-inverse-limit-surjective: finite nonempty sets only; lem-weil-pbc-mittag-leffler: abelian groups; det-pe-replete-epimorphism: the downstream citer) found no node stating the item. No new nodes, so B and D1-D5 add no obligations. No SGA citation; the mathematics agrees with Bhatt-Scholze Def. 3.1.1 and Ex. 3.1.4. No fixes were needed."
+ }
 }
