@@ -305,6 +305,209 @@ theorem rootsOfUnityCohomologyMap_baseChangeField (f : C ⟶ Spec (.of k)) [IsCo
       Scheme.gmCohomologyMap_toCohomologicalPicardGroup, hd', hd,
       Scheme.Hom.picDegree_map_baseChangeField]
 
+/-- The canonical identification `Pic = H¹(-, 𝔾ₘ)` is compatible with powers. -/
+lemma _root_.AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroup_pow (X : Scheme.{u})
+    (L : X.Pic) (n : ℕ) :
+    Scheme.Pic.toCohomologicalPicardGroup X (L ^ n) =
+      n • Scheme.Pic.toCohomologicalPicardGroup X L :=
+  map_nsmul (Scheme.Pic.toCohomologicalPicardGroupAddEquiv X) n (Additive.ofMul L)
+
+open MonoidalCategory MonObj in
+/-- Blueprint `sk-thm-curveestimate`, the identification `H¹(C, μₙ) = J[n](k)`.
+
+Let `C` be a smooth proper connected curve of genus `g` over an algebraically closed field `k`
+and `n ≥ 1` prime to `char k`. The Jacobian `J` of `C` is an abelian variety of dimension `g`
+whose group of `k`-points is `Pic⁰(C)` (`AlgebraicGeometry.Scheme.exists_jacobian_addEquiv_prod`).
+The injection `H¹(C, μₙ) ⟶ H¹(C, 𝔾ₘ) = Pic(C)` of the Kummer sequence has image `Pic(C)[n]`
+(`AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`), which lies in
+`Pic⁰(C)` since `ℤ` is torsion-free; hence `H¹(C, μₙ) ≅ J[n](k)`, compatibly with the maps to
+`Pic(C)`. -/
+theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
+    letI : C.Over (Spec (.of k)) := ⟨f⟩
+    letI : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+      IsConnectedCurve.smoothOfRelativeDimension_one f
+    haveI : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+    ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J) (_ : IsAbelianVariety J)
+      (ψ : picardZero k C ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)),
+      IsAbelianVariety.dim J = f.genus ∧
+      ∃ E : Sheaf.H (C.rootsOfUnitySheaf n) 1 ≃+
+          AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) n,
+        ∀ x, Sheaf.H.map (C.rootsOfUnitySheafι n) 1 x =
+          Scheme.Pic.toCohomologicalPicardGroup C
+            (ψ.symm (Additive.toMul (E x : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)))) := by
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have := IsConnectedCurve.connectedSpace' f
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one f
+  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+  have hn0 : n ≠ 0 := by rintro rfl; exact hn Nat.cast_zero
+  obtain ⟨J, _, -, _, -, hdim, ⟨ψ⟩, -⟩ := Scheme.exists_jacobian_addEquiv_prod k C
+  obtain ⟨-, ⟨hinj, hrange, -⟩, -⟩ := sheafH_rootsOfUnitySheaf_of_isProper f n hn
+  let e := Scheme.Pic.toCohomologicalPicardGroup C
+  let incl := Sheaf.H.map (C.rootsOfUnitySheafι n) 1
+  -- the class in `Pic(C)` of the image of `x`
+  let P (x : Sheaf.H (C.rootsOfUnitySheaf n) 1) : C.Pic := e.symm (incl x)
+  have hP (x) : e (P x) = incl x := e.apply_symm_apply _
+  have hPadd (x y) : P (x + y) = P x * P y := by
+    apply e.injective
+    rw [Scheme.Pic.toCohomologicalPicardGroup_mul, hP, hP, hP, map_add]
+  have htors {L : C.Pic} : e L ∈ AddSubgroup.torsionBy C.CohomologicalPicardGroup n ↔
+      L ^ n = 1 := by
+    rw [AddSubgroup.torsionBy.nsmul_iff, ← Scheme.Pic.toCohomologicalPicardGroup_pow,
+      ← (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).map_zero]
+    exact e.injective.eq_iff.trans ⟨fun h ↦ h, fun h ↦ h⟩
+  have hPn (x) : P x ^ n = 1 := htors.1 (hP x ▸ hrange ▸ ⟨x, rfl⟩)
+  have hdeg {L : C.Pic} (hL : L ^ n = 1) : L ∈ picardZero k C := by
+    rw [MonoidHom.mem_ker]
+    have h := congrArg (Scheme.picDegreeHom k C) hL
+    rw [map_pow, map_one] at h
+    apply Multiplicative.toAdd.injective
+    have h' := congrArg Multiplicative.toAdd h
+    rw [toAdd_pow, toAdd_one, smul_eq_zero] at h'
+    exact h'.resolve_left hn0
+  -- the map `H¹(C, μₙ) ⟶ J[n](k)`
+  let h : Sheaf.H (C.rootsOfUnitySheaf n) 1 →+
+      AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) n :=
+    { toFun x := ⟨Additive.ofMul (ψ ⟨P x, hdeg (hPn x)⟩), by
+        rw [AddSubgroup.torsionBy.nsmul_iff, ← ofMul_pow, ← map_pow]
+        have : (⟨P x, hdeg (hPn x)⟩ : picardZero k C) ^ n = 1 :=
+          Subtype.ext (hPn x)
+        rw [this, map_one, ofMul_one]⟩
+      map_zero' := by
+        apply Subtype.ext
+        change Additive.ofMul (ψ ⟨P 0, _⟩) = 0
+        have : (⟨P 0, hdeg (hPn 0)⟩ : picardZero k C) = 1 := by
+          apply Subtype.ext
+          apply e.injective
+          rw [hP, map_zero]
+          exact ((Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).map_zero).symm
+        rw [this, map_one, ofMul_one]
+      map_add' x y := by
+        apply Subtype.ext
+        change Additive.ofMul (ψ ⟨P (x + y), _⟩) =
+          Additive.ofMul (ψ ⟨P x, _⟩) + Additive.ofMul (ψ ⟨P y, _⟩)
+        have : (⟨P (x + y), hdeg (hPn (x + y))⟩ : picardZero k C) =
+            ⟨P x, hdeg (hPn x)⟩ * ⟨P y, hdeg (hPn y)⟩ :=
+          Subtype.ext (hPadd x y)
+        rw [this, map_mul, ofMul_mul] }
+  have hbij : Function.Bijective h := by
+    refine ⟨fun x y hxy ↦ hinj ?_, fun t ↦ ?_⟩
+    · have h1 := congrArg
+        (fun z : AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) n ↦
+          Additive.toMul (z : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J))) hxy
+      have h2 := congrArg Subtype.val (ψ.injective h1)
+      rw [← hP x, ← hP y]
+      exact congrArg e h2
+    · let L := ψ.symm (Additive.toMul (t : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)))
+      have hLn : (L : C.Pic) ^ n = 1 := by
+        have ht := AddSubgroup.torsionBy.nsmul t
+        have := congrArg
+          (fun z : AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) n ↦
+            ψ.symm (Additive.toMul (z : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)))) ht
+        simp only [AddSubgroup.coe_nsmul, toMul_nsmul, map_pow, ZeroMemClass.coe_zero,
+          toMul_zero, map_one] at this
+        exact congrArg Subtype.val this
+      obtain ⟨x, hx⟩ : e (L : C.Pic) ∈ incl.range := hrange ▸ htors.2 hLn
+      refine ⟨x, Subtype.ext ?_⟩
+      have hPx : P x = L := e.injective ((hP x).trans hx)
+      change Additive.ofMul (ψ ⟨P x, _⟩) = _
+      have : (⟨P x, hdeg (hPn x)⟩ : picardZero k C) = L := Subtype.ext hPx
+      rw [this, MulEquiv.apply_symm_apply]
+      rfl
+  refine ⟨J, inferInstance, inferInstance, ψ, hdim, AddEquiv.ofBijective h hbij, fun x ↦ ?_⟩
+  change incl x = e (ψ.symm (ψ ⟨P x, hdeg (hPn x)⟩))
+  rw [MulEquiv.symm_apply_apply]
+  exact (hP x).symm
+
+
+open MonoidalCategory MonObj in
+/-- Blueprint `sk-thm-curveestimate`: smooth proper curves with invertible torsion.
+
+Let `C` be a smooth, proper and connected curve of genus `g` over an algebraically closed field
+`k`, let `n ≥ 1` be invertible in `k` and let `J` be the Jacobian of `C`. There are canonical
+identifications
+
+`H⁰(C, μₙ) = μₙ(k)`, `H¹(C, μₙ) = J[n](k)`, `H²(C, μₙ) = ℤ/n`, `Hᵠ(C, μₙ) = 0` for `q > 2`.
+
+The degree-two isomorphism sends the Kummer boundary of a line bundle `L` to `deg L mod n`, and
+these identifications commute with extension of algebraically closed fields. Precisely:
+
+1. parts 1–4 of blueprint `det-curveestimate-canonical-mu`
+   (`AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`): the maps
+   `H⁰(C, μₙ) → 𝒪(C)ˣ` and `H¹(C, μₙ) → Pic(C)` of the Kummer sequence are injective, the
+   first with image `μₙ(k)` and the second with image `Pic(C)[n]`, of order `n^{2g}`; the
+   Kummer boundary `δ²` is surjective and there is a unique `degₙ : H²(C, μₙ) ≃ ℤ/n` with
+   `degₙ (δ² [L]) = deg L mod n`; and `Hᵠ(C, μₙ) = 0` for `q > 2`;
+2. `H¹(C, μₙ) ≅ J[n](k)` compatibly with `Pic⁰(C) = J(k)`
+   (`AlgebraicGeometry.IsConnectedCurve.exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian`);
+3. part 5 of blueprint `det-curveestimate-canonical-mu`
+   (`AlgebraicGeometry.IsConnectedCurve.rootsOfUnityCohomologyMap_baseChangeField`): for every
+   extension `k ⊆ k'` of algebraically closed fields the pullback maps are bijective and are the
+   inclusion `μₙ(k) ⟶ μₙ(k')`, the base change of line bundles and the identity of `ℤ/n`.
+
+These are statements about the small étale site; the comparison with the pro-étale site
+(blueprint `sk-prop-sf-comparison`) identifies them with the pro-étale cohomology of `ν^* μₙ`.
+(In the split chapter of the sketch blueprint this statement is labelled
+`sk-thm-curveestimate`, blueprint `sk-the-final-theorem-the-curve-estimate--remark-2`.) -/
+theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
+    ((Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧
+        Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 0 ≃+ Additive (rootsOfUnity n k))) ∧
+      (Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 1) ∧
+        (Sheaf.H.map (C.rootsOfUnitySheafι n) 1).range =
+          AddSubgroup.torsionBy C.CohomologicalPicardGroup n ∧
+        Nat.card (Sheaf.H (C.rootsOfUnitySheaf n) 1) = n ^ (2 * f.genus)) ∧
+      (Function.Surjective (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)) ∧
+        ∃! d : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ ZMod n, ∀ L : C.Pic,
+          d (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)
+            (Scheme.Pic.toCohomologicalPicardGroup C L)) = (f.picDegree L : ZMod n)) ∧
+      ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H (C.rootsOfUnitySheaf n) q)) ∧
+    (letI : C.Over (Spec (.of k)) := ⟨f⟩
+     letI : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+       IsConnectedCurve.smoothOfRelativeDimension_one f
+     haveI : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+     ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J) (_ : IsAbelianVariety J)
+       (ψ : picardZero k C ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)),
+       IsAbelianVariety.dim J = f.genus ∧
+       ∃ E : Sheaf.H (C.rootsOfUnitySheaf n) 1 ≃+
+           AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) n,
+         ∀ x, Sheaf.H.map (C.rootsOfUnitySheafι n) 1 x =
+           Scheme.Pic.toCohomologicalPicardGroup C
+             (ψ.symm (Additive.toMul (E x : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J))))) ∧
+    ∀ (k' : Type u) [Field k'] [Algebra k k'] [IsAlgClosed k'],
+      (∀ q, Function.Bijective (Scheme.rootsOfUnityCohomologyMap
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n q)) ∧
+      (∀ (x : Sheaf.H (C.rootsOfUnitySheaf n) 0) (a : Γ(C, ⊤)ˣ),
+        Sheaf.H.equiv₀ _ terminalIsTerminal (Sheaf.H.map (C.rootsOfUnitySheafι n) 0 x) =
+          Scheme.gmSection a →
+        Sheaf.H.equiv₀ _ terminalIsTerminal
+            (Sheaf.H.map (Scheme.rootsOfUnitySheafι _ n) 0 (Scheme.rootsOfUnityCohomologyMap
+              (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 0 x)) =
+          Scheme.gmSection (Units.map (pullback.fst f
+            (Spec.map (CommRingCat.ofHom (algebraMap k k')))).appTop.hom.toMonoidHom a)) ∧
+      (∀ (x : Sheaf.H (C.rootsOfUnitySheaf n) 1) (L : C.Pic),
+        Sheaf.H.map (C.rootsOfUnitySheafι n) 1 x = Scheme.Pic.toCohomologicalPicardGroup C L →
+        Sheaf.H.map (Scheme.rootsOfUnitySheafι _ n) 1 (Scheme.rootsOfUnityCohomologyMap
+            (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 1 x) =
+          Scheme.Pic.toCohomologicalPicardGroup _ (Scheme.Pic.map
+            (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L)) ∧
+      ∀ (hC : IsUnit (n : Γ(C, ⊤)))
+        (hC' : IsUnit (n : Γ(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))), ⊤)))
+        (d : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ ZMod n)
+        (d' : Sheaf.H
+          ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).rootsOfUnitySheaf n) 2 ≃+
+            ZMod n),
+        (∀ L : C.Pic, d (C.kummerδ₁ n hC (Scheme.Pic.toCohomologicalPicardGroup C L)) =
+          (f.picDegree L : ZMod n)) →
+        (∀ L, d' (Scheme.kummerδ₁ _ n hC' (Scheme.Pic.toCohomologicalPicardGroup _ L)) =
+          ((f.baseChangeField k').picDegree L : ZMod n)) →
+        ∀ y, d' (Scheme.rootsOfUnityCohomologyMap
+          (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 2 y) = d y :=
+  ⟨sheafH_rootsOfUnitySheaf_of_isProper f n hn,
+    exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian f n hn,
+    fun k' _ _ _ ↦ rootsOfUnityCohomologyMap_baseChangeField f k' n hn⟩
+
 end IsConnectedCurve
 
 end AlgebraicGeometry

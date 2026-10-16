@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.GmHigherVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTransport
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
@@ -20,7 +21,8 @@ Let `C` be a smooth separated curve of finite type over an algebraically closed 
 
 both on the small étale site and, for the classical multiplicative sheaf `ν^* 𝔾ₘ`, on the small
 pro-étale site. In particular the Brauer group of `C` vanishes. The identification in degree
-one is natural under restriction to open subschemes.
+one is natural under pullback, for instance under restriction to open subschemes and under
+extension of the algebraically closed ground field.
 
 ## Main statements
 
@@ -44,21 +46,28 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 Let `C` be a smooth separated curve of finite type over an algebraically closed field `k`. Then
 the canonical map `Pic(C) → H¹(C_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_C, L)]`
 (`AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`), is an isomorphism of
-groups, natural under restriction to open subschemes `U ⊆ C`, and `Hᵠ(C_ét, 𝔾ₘ) = 0` for
-`q ≥ 2`; in particular `Br(C) = 0`.
+groups, and `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`; in particular `Br(C) = 0`. The identification in
+degree one is natural under restriction to open subschemes `U ⊆ C`, and more generally under
+pullback along any morphism `h : X ⟶ C`, for instance the projection `C_{k'} ⟶ C` for an
+extension `k ⊆ k'` of algebraically closed fields (in degrees `q ≥ 2` both sides vanish).
 
 The vanishing is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_smooth` (blueprint
 `det-thm-br-higher-vanishing`), the identification in degree one is Hilbert 90 (blueprint
 `lem-sc-h1-gm-pic`) and its naturality is
-`AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup`. -/
+`AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup` and
+`AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup`. -/
 theorem sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] :
     (∀ L : C.Pic, Scheme.Pic.toCohomologicalPicardGroupAddEquiv C (.ofMul L) =
         Scheme.Pic.toCohomologicalPicardGroup C L) ∧
       (∀ (U : C.Opens) (L : C.Pic),
         Scheme.etaleRestrictionH U.ι C.gmSheaf 1 (Scheme.Pic.toCohomologicalPicardGroup C L) =
           Scheme.Pic.toCohomologicalPicardGroup U (Scheme.Pic.map U.ι L)) ∧
+      (∀ {X : Scheme.{u}} (h : X ⟶ C) (L : C.Pic),
+        Scheme.gmCohomologyMap h 1 (Scheme.Pic.toCohomologicalPicardGroup C L) =
+          Scheme.Pic.toCohomologicalPicardGroup X (Scheme.Pic.map h L)) ∧
       ∀ q : ℕ, 2 ≤ q → Subsingleton (Sheaf.H C.gmSheaf q) :=
   ⟨fun _ ↦ rfl, fun U L ↦ Scheme.etaleRestrictionH_toCohomologicalPicardGroup U.ι L,
+    fun h L ↦ Scheme.gmCohomologyMap_toCohomologicalPicardGroup h L,
     subsingleton_sheafH_gmSheaf_of_smooth f⟩
 
 /-- The `q`-th right derived functor of the global sections of the small étale site of a scheme
