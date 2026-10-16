@@ -35,23 +35,23 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}}
-
 variable (X) in
-/-- The `d`-th power map `μ_{m d} ⟶ μ_m`, `z ↦ z ^ d`, of étale sheaves of roots of unity: the
-restriction of the `d`-th power map `d • 𝟙` of `𝔾ₘ`. For a prime `l` the maps
-`μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}` (`AlgebraicGeometry.Scheme.rootsOfUnityPowMap (l ^ n) l`) are the transition
-maps of the system `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)` (blueprint: `sk-d-real-jacobian`). -/
-noncomputable def rootsOfUnityPowMap (m d : ℕ) :
-    X.rootsOfUnitySheaf (m * d) ⟶ X.rootsOfUnitySheaf m :=
-  kernel.lift _ (kernel.ι ((m * d) • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf)) (by
-    have h : (d • 𝟙 X.gmSheaf) ≫ (m • 𝟙 X.gmSheaf) = (m * d) • 𝟙 X.gmSheaf := by
-      rw [Preadditive.nsmul_comp, Category.id_comp, smul_smul, mul_comm]
-    rw [Category.assoc, h, kernel.condition])
+/-- The `d`-th power map `μ_{m'} ⟶ μ_m`, `z ↦ z ^ d`, of étale sheaves of roots of unity, for
+`m' = m d`: the restriction of the `d`-th power map `d • 𝟙` of `𝔾ₘ`. For a prime `l` the maps
+`μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}` (`AlgebraicGeometry.Scheme.rootsOfUnityPowMap l (pow_succ l n).symm`) are the
+transition maps of the system `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)`
+(blueprint: `sk-d-real-jacobian`). -/
+noncomputable def rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m') :
+    X.rootsOfUnitySheaf m' ⟶ X.rootsOfUnitySheaf m :=
+  kernel.lift _ (kernel.ι (m' • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf)) (by
+    have h' : (d • 𝟙 X.gmSheaf) ≫ (m • 𝟙 X.gmSheaf) = m' • 𝟙 X.gmSheaf := by
+      rw [Preadditive.nsmul_comp, Category.id_comp, smul_smul, mul_comm, h]
+    rw [Category.assoc, h', kernel.condition])
 
 @[reassoc (attr := simp)]
-lemma rootsOfUnityPowMap_ι (m d : ℕ) :
-    X.rootsOfUnityPowMap m d ≫ kernel.ι (m • 𝟙 X.gmSheaf) =
-      kernel.ι ((m * d) • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf) :=
+lemma rootsOfUnityPowMap_ι {m m' : ℕ} (d : ℕ) (h : m * d = m') :
+    X.rootsOfUnityPowMap d h ≫ kernel.ι (m • 𝟙 X.gmSheaf) =
+      kernel.ι (m' • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf) :=
   kernel.lift_ι _ _ _
 
 variable {k : Type u} [Field k] [IsAlgClosed k] [X.Over (Spec (.of k))]
@@ -60,11 +60,11 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [X.Over (Spec (.of k))]
 /-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module` (transition maps): the Kummer
 identifications `H¹(X, μ_m) ≅ Pic(X)[m]` carry the map induced by the `d`-th power map
 `μ_{m d} ⟶ μ_m` to multiplication by `d` on line bundles. -/
-lemma coe_kummerTorsionEquiv_map_rootsOfUnityPowMap (m d : ℕ) (hm : (m : k) ≠ 0)
-    (hmd : ((m * d : ℕ) : k) ≠ 0) (x : Sheaf.H (X.rootsOfUnitySheaf (m * d)) 1) :
-    (kummerTorsionEquiv m hm (Sheaf.H.map (X.rootsOfUnityPowMap m d) 1 x) : Additive X.Pic) =
-      d • (kummerTorsionEquiv (m * d) hmd x : Additive X.Pic) := by
-  have e := congrArg (fun f ↦ Sheaf.H.map f 1 x) (rootsOfUnityPowMap_ι (X := X) m d)
+lemma coe_kummerTorsionEquiv_map_rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m')
+    (hm : (m : k) ≠ 0) (hm' : (m' : k) ≠ 0) (x : Sheaf.H (X.rootsOfUnitySheaf m') 1) :
+    (kummerTorsionEquiv m hm (Sheaf.H.map (X.rootsOfUnityPowMap d h) 1 x) : Additive X.Pic) =
+      d • (kummerTorsionEquiv m' hm' x : Additive X.Pic) := by
+  have e := congrArg (fun f ↦ Sheaf.H.map f 1 x) (rootsOfUnityPowMap_ι (X := X) d h)
   simp only [Sheaf.H.map_comp_apply] at e
   rw [Sheaf.H.map_nsmul_apply] at e
   rw [Sheaf.H.map_id_apply] at e
