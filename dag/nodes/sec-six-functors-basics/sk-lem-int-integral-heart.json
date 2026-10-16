@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-int-integral-heart",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Structure of integral constructible complexes",
- "statement": "1. $\\Dbc(X,\\mathcal O_E)$ is a triangulated subcategory of\n   $D(X_{\\mathrm{proét}},\\mathcal O_E)$, its objects are bounded, and it is\n   stable under the standard truncations. The category $\\Cons(X,\\mathcal O_E)$\n   of constructible $\\mathcal O_{E,X}$-modules ([sk-def-sfb-constructible])\n   consists of the objects of $\\Dbc(X,\\mathcal O_E)$ concentrated in degree\n   $0$, and is an essentially small abelian subcategory of\n   $\\Mod(X_{\\mathrm{proét}},\\mathcal O_E)$ closed under extensions.\n2. For $C\\in\\Cons(X,\\mathcal O_E)$ there is a finite stratification of $X$\n   such that on each stratum $C$ is pro-étale locally the completion of a\n   finitely generated $\\mathcal O_E$-module, possibly with torsion.\n3. On each such stratum, $C$ is dualizable in the derived category, of Tor\n   amplitude in $[-1,0]$, and its dual has Tor amplitude in $[0,1]$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, a separated finite-type $k$-scheme $X$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$. Thus $X$ is Noetherian, and we work with the coefficient sheaf $\\mathcal O_{E,X}$ and the categories $\\Dbc(X,\\mathcal O_E)$ and $\\Cons(X,\\mathcal O_E)$ in the integral-model setting of [sk-lem-integral-models] and with constructibility as in [sk-def-sfb-constructible].\n\n1. $\\Dbc(X,\\mathcal O_E)$ is a triangulated subcategory of\n   $D(X_{\\mathrm{proét}},\\mathcal O_E)$, its objects are bounded, and it is\n   stable under the standard truncations. The category $\\Cons(X,\\mathcal O_E)$\n   of constructible $\\mathcal O_{E,X}$-modules consists of the objects of\n   $\\Dbc(X,\\mathcal O_E)$ concentrated in degree $0$, and is an essentially\n   small abelian subcategory of $\\Mod(X_{\\mathrm{proét}},\\mathcal O_E)$\n   closed under extensions.\n2. For $C\\in\\Cons(X,\\mathcal O_E)$ there is a finite stratification of $X$\n   such that on each stratum $C$ is pro-étale locally the completion of a\n   finitely generated $\\mathcal O_E$-module, possibly with torsion.\n3. On each such stratum, $C$ is dualizable in the derived category (it admits a dual with evaluation and coevaluation satisfying the two triangle\n   identities), of Tor amplitude in $[-1,0]$, and its dual has Tor amplitude in $[0,1]$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/_section.md",
   "place": "node sk-lem-int-integral-heart, order 1567",
@@ -43,50 +43,185 @@
   ]
  },
  "stmt_deps": [
+  "sk-lem-integral-models",
   "sk-def-sfb-constructible"
  ],
  "proof": [
   {
-   "text": "By [sk-lem-integral-models](1),(2), restriction of scalars to the constant\nsheaf $\\underline{\\mathcal O_E}$, which is flat, identifies\n$\\Dbc(X,\\mathcal O_E)$ with the category $\\Dc(X,\\mathcal O_E)$ of the Stacks\nProject (Stacks, Tags 099I, 099L). The two conditions of the definition of\nconstructibility ([sk-def-sfb-constructible]), derived completeness and\nconstructibility of the reduction modulo $\\pi_E$, are stable under cones and\nshifts, so $\\Dbc(X,\\mathcal O_E)$ is triangulated, and its objects are bounded\nbecause our schemes are quasi-compact (Stacks, Tag 09C2).",
+   "text": "The opening hypotheses are the finite-type integral-model setting: [sk-lem-integral-models] supplies the separated finite-type $k$-scheme $X$, its Noetherianity, and the finite extension $E/\\mathbf Q_\\ell$ with coefficient ring $\\mathcal O_E$. Apply [det-lem-int-integral-heart-triangulated](1) to this integral coefficient category. Its statement gives all three assertions about $\\Dbc$: it is a triangulated subcategory of the indicated ambient derived category, every object is bounded, and both standard truncations preserve it. These are the first assertions of (1).",
    "uses": [
     "sk-lem-integral-models",
-    "sk-def-sfb-constructible"
+    "det-lem-int-integral-heart-triangulated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
+    "place": "paragraph 1; detailed triangulated statement (1)"
+   }
   },
   {
-   "text": "The local structure is the key point, and it is Stacks, Tag 09C7, whose\nNoetherian hypothesis holds for our schemes (since $\\mathcal O_E$ is already\ncomplete, the completed coefficient ring of Stacks, Tag 09C4 is\n$\\mathcal O_E$ itself). The statement is: *for $K\\in\\Dbc(X,\\mathcal O_E)$ there\nis a finite stratification of $X$ such that on each stratum $K$ is pro-étale\nlocally the completion of a bounded complex $M^\\bullet$ of finite free\n$\\mathcal O_E$-modules, with differentials given by matrices over\n$\\mathcal O_E$.* The idea of the proof is that the reduction $K/\\pi_E$ is a\nclassical constructible complex, hence on a stratum is locally a perfect\ncomplex of $\\mathcal O_E/\\pi_E$-modules; on a weakly contractible cover, where\ncohomology vanishes in positive degrees, such a perfect complex and its\nsuccessive deformations to $\\mathcal O_E/\\pi_E^n$ can be lifted compatibly,\nand the derived limit of the lifts is $K$ by completeness. As\n$\\underline{\\mathcal O_E}\\to\\mathcal O_{E,X}$ is flat, $H^q(K)$ is then locally\nthe completion of the finitely generated $\\mathcal O_E$-module\n$H^q(M^\\bullet)$; this is (2) once we know that $H^q(K)$ lies in\n$\\Cons(X,\\mathcal O_E)$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [sk-def-sfb-constructible], $\\Dbc$ is defined by bounded constructible cohomology and $\\Cons$ is the full subcategory of constructible modules. For a module $C$ placed in degree $0$, its only possibly nonzero cohomology is $H^0=C$. Thus it belongs to $\\Dbc$ exactly when $C\\in\\Cons$. Apply [det-lem-int-integral-heart-triangulated](2) to this very full subcategory: kernels and cokernels computed in the ambient module category belong to it, it is closed under extensions, and it is essentially small. This proves the remaining assertions of (1), including the ambient, rather than merely abstract, abelian-subcategory assertion.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-lem-int-integral-heart-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
+    "place": "paragraph 4, heart and essential smallness; detailed triangulated statement (2)"
+   }
   },
   {
-   "text": "First, $H^q(K)$ is derived complete: the pro-étale site has enough weakly\ncontractible affines (Stacks, Tag 0990), and Stacks, Tag 099Q(5) then shows\nthat cohomology sheaves of derived complete complexes are derived complete.\nSecond, a finitely generated $\\mathcal O_E$-module has a free resolution of\nlength one, in degrees $-1,0$. The reduction of $H^q(K)$ modulo $\\pi_E$\ntherefore has cohomology only in degrees $-1$ and $0$, and on the chosen\nstrata these cohomology sheaves are locally constant with finite stalks,\nhence come from constructible sheaves on the étale site (Stacks, Tags 099Y,\n09AK). Thus $H^q(K)\\in\\Dbc(X,\\mathcal O_E)$. Every truncation of $K$ is a\nfinite extension of shifts of the $H^q(K)$, so it also lies in\n$\\Dbc(X,\\mathcal O_E)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $C\\in\\Cons$. Regard $C$ as a degree-zero object of $\\Dbc$, as established in step 2. Apply [det-lem-int-integral-heart-local-model](1),(2) to $K=C$ and take $q=0$. The finite stratification supplied in (1) is the same stratification on which (2) identifies $H^0(K)=C$ locally with the completion of the finitely generated module $H^0(M^\\bullet)$. No torsion-freeness is asserted or needed. This is (2).",
+   "uses": [
+    "det-lem-int-integral-heart-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
+    "place": "paragraphs 2 and 3, local models and cohomology"
+   }
   },
   {
-   "text": "Stability under truncation gives (1) for the heart: the kernel and cokernel\nof a map of constructible sheaves are cohomology sheaves of its cone, and an\nextension of two constructible sheaves is the middle term of a triangle with\nconstructible ends. Essential smallness holds because the data describing a\nconstructible sheaf (a finite stratification, finite presentations of\n$\\mathcal O_E$-modules, sheaves on a fixed small site, and gluing morphisms)\nform a set. For (3), the length one free resolution of the local model gives\nthe derived dual and the evaluation and coevaluation maps locally, and the\nTor amplitudes can be read off from it.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For the local model $\\mathcal O_E/\\pi_E$ the amplitudes in (3) can be seen\ndirectly. The resolution\n$0\\to\\mathcal O_E\\xrightarrow{\\pi_E}\\mathcal O_E\\to\\mathcal O_E/\\pi_E\\to0$\nshows that $M\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E$ is the cone of $\\pi_E$ on\n$M$, which lives in degrees $[-1,0]$ for a module $M$. Applying\n$R\\operatorname{Hom}(-,\\mathcal O_E)$ to the same resolution gives the dual\n$\\mathcal O_E/\\pi_E[-1]$, whose Tor amplitude is $[0,1]$.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix any stratum $S$ of the stratification in step 3. The sheaf $C$ is constructible and on $S$ has exactly the finite-module local model required by [det-lem-int-integral-heart-dualizable]. Its statement therefore supplies the derived dual $R\\mathcal{H}om(C|_S,\\mathcal O_{E,S})$, dualizability on all of $S$, Tor amplitude $[-1,0]$ for $C|_S$, and Tor amplitude $[0,1]$ for that dual. This proves (3), without replacing the derived dual by the underived module dual. In particular the cited statement explicitly includes the torsion example $\\mathcal O_E/\\pi_E$ with dual $\\mathcal O_E/\\pi_E[-1]$.",
+   "uses": [
+    "det-lem-int-integral-heart-dualizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
+    "place": "paragraphs 4 and 5, local dual and torsion example"
+   }
   }
  ],
  "proof_deps": [
   "sk-lem-integral-models",
-  "sk-def-sfb-constructible"
+  "det-lem-int-integral-heart-triangulated",
+  "sk-def-sfb-constructible",
+  "det-lem-int-integral-heart-local-model",
+  "det-lem-int-integral-heart-dualizable"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
+  "place": "paragraphs 1–5, assembled using the three existing detail-node statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|pro.etale",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible integral adic sheaves on the pro-etale site have an abelian heart and are locally perfect on a finite stratification",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.instAbelian, instAbelianCondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, LightCondensed",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, \"constructible\"",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'Sheaf'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral constructible complexes of completed discrete valuation ring sheaves on a noetherian pro-etale site form a bounded triangulated category stable under truncations with an essentially small abelian heart",
+   "results": "8 hits: DerivedCategory.instIsTriangulated, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat, CategoryTheory.Triangulated.TStructure.exists_triangle, DerivedCategory.TStructure.t, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*constructible|constructible.*(sheaf|complex)|pro[Ee]tale",
+   "results": "14 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of bounded complexes of constructible adic sheaves is triangulated and its heart is essentially small; integral constructible sheaves are locally finite modules on strata",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.IsGE, DerivedCategory.TStructure.t, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/derived category results do not assert the integral constructible subcategory, its finite local models and Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|adic",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the displayed types concern ambient derived categories or morphisms of schemes, or define the coefficient sheaf and its cohomology; none states the integral constructible category theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the displayed types concern ambient derived categories or morphisms of schemes, or define the coefficient sheaf and its cohomology; none states the integral constructible category theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lisse finite presentation module sheaves over a complete discrete valuation ring on a scheme have perfect restrictions along a constructible stratification and Tor dimension at most one",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the displayed types concern ambient derived categories or morphisms of schemes, or define the coefficient sheaf and its cohomology; none states the integral constructible category theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible.*(Sheaf|Module)|IsConstructible.*(Module|Complex)|IsLocallyFinitelyPresented",
+   "results": "{\"t\": \"2026-10-16T15:34:28Z\", \"tool\": \"grep\", \"query\": \"Constructible.*(Sheaf|Module)|IsConstructible.*(Module|Complex)|IsLocallyFinitelyPresented\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight semantic hits concern the whole category of condensed modules and its exactness properties; neither those statements nor the zero-hit source and Loogle searches assert the constructible subcategory, local models, or Tor bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules over a complete valuation ring form an essentially small Serre subcategory and their bounded complexes are stable under the standard t structure",
+   "results": "{\"t\": \"2026-10-16T15:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible sheaves of modules over a complete valuation ring form an essentially small Serre subcategory and their bounded complexes are stable under the standard t structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"CondensedMod\", \"CondensedMod.ofSheafCompHaus\", \"instAbelianCondensedMod\", \"CondensedMod.ofSheafStonean\", \"Condensed.instAB5CondensedMod\"], \"digest\": \"5f11904bfc728b12\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight semantic hits concern the whole category of condensed modules and its exactness properties; neither those statements nor the zero-hit source and Loogle searches assert the constructible subcategory, local models, or Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"Serre\"",
+   "results": "{\"t\": \"2026-10-16T15:35:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, \\\"Serre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight semantic hits concern the whole category of condensed modules and its exactness properties; neither those statements nor the zero-hit source and Loogle searches assert the constructible subcategory, local models, or Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "adicLisse|AdicConstructible|constructible.*[Tt]runc|[Cc]onstructible.*[Aa]belian",
+   "results": "{\"t\": \"2026-10-16T16:40:38Z\", \"tool\": \"grep\", \"query\": \"adicLisse|AdicConstructible|constructible.*[Tt]runc|[Cc]onstructible.*[Aa]belian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results state ambient derived t-structures or condensed-module abelianness; no result states closure of the constructible integral subcategory or its stratified perfect models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"tStructure\"",
+   "results": "{\"t\": \"2026-10-16T16:40:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"tStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results state ambient derived t-structures or condensed-module abelianness; no result states closure of the constructible integral subcategory or its stratified perfect models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For l-adic coefficient modules on a Noetherian scheme, bounded constructible complexes have a t-structure with constructible heart and constructible sheaves become perfect on a finite stratification",
+   "results": "{\"t\": \"2026-10-16T16:40:44Z\", \"tool\": \"leanfinder\", \"query\": \"For l-adic coefficient modules on a Noetherian scheme, bounded constructible complexes have a t-structure with constructible heart and constructible sheaves become perfect on a finite stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"CategoryTheory.Triangulated.TStructure.IsGE\", \"CategoryTheory.Triangulated.TStructure.ge\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE\", \"CategoryTheory.Triangulated.TStructure.ge_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.IsGE\"], \"digest\": \"d5a752a8e5d0375c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results state ambient derived t-structures or condensed-module abelianness; no result states closure of the constructible integral subcategory or its stratified perfect models"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -105,5 +240,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-integral-heart"
+ "unit": "sk-lem-int-integral-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-int-integral-heart",
+  "worker": "stage1",
+  "summary": "Repaired the returned item after the unrestricted assertion was shown false. The report marks STATEMENT-DISPUTED and records the profinite convergent-sequence counterexample. The statement is corrected to the finite-type integral-model setting already used by the blueprint proof and [sk-lem-integral-models]: X is a separated finite-type k-scheme (hence Noetherian) and E/Q_l is finite. The four-step assembly then applies the existing detail statements under that explicit scope; no target conclusion is weakened, and no new nodes are introduced. Second reading independently checked all four applications and recorded broader Mathlib searches; the report distinguishes scheme quasi-compactness in Stacks 09C2 from scheme Noetherianity in 09C7 and gives the exact TeX source labels. Landing-return repair: compared immutable head e8e51f67b9dd with the current DAG; all five direct cited nodes are unchanged. Included the key unit realization as an actual delivery file, changing only realized and realized_by, so the reader no longer needs to fix an undelivered pre-existing file. Rechecked all six citation quotes and all four scoped applications against the current statements. Current independent second reading rechecked all four steps and six quotes against the current source, corrected the internal-Hom TeX spelling in step 4, and recorded three fresh searches with ambient t-structure vocabulary.",
+  "blueprint": "The corrected scope realizes the implicit opening setting used in the item proof and [sk-lem-integral-models]. Proof paragraph 1 is step 1; the heart and smallness part of paragraph 4 is step 2; paragraphs 2–3 give step 3; the dual and Tor calculations of paragraphs 4–5 give step 4."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-853bddeb0",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-853bddeb0 (reviewer sub-agent of L); spot-checked: I read the item, the delivered unit, the blueprint unit (statement and five proof paragraphs), and the full statements of sk-lem-integral-models, sk-def-sfb-constructible, sk-def-sfb-dc-setting and the three det-lem-int-integral-heart-* nodes. I checked the Stacks TeX: 09C2 (lemma-describe-constructible-complexes) needs X quasi-compact; 09C7 (proposition-Noetherian-adic-constructible) needs X and Λ Noetherian; 09C4 (definition-adic-constructible) has finite projective Λ^-modules, which are free over O_E; 099I is the algebraization label. The added opening scope is exactly the chapter setting of sk-def-sfb-dc-setting and sk-lem-integral-models: k of characteristic p≠ℓ, X separated of finite type (hence Noetherian), E/Q_ℓ finite. The blueprint proof already relies on it ('our schemes'). All three conclusions are verbatim and no target is weakened. The non-Noetherian counterexample is excluded, and all nine citers are imported nodes of the same chapter. The coefficient sheaf is O_{E,X}=p_X^*O_E throughout and is not identified with constant coefficients; the item is not a target node. Step 1 uses triangulated(1). Step 2 is the definitional degree-0 identification plus triangulated(2), which gives ambient kernels/cokernels, extensions and smallness. Step 3 applies local-model(1),(2) with K=C, q=0, whose hypothesis comes from step 2. Step 4 applies dualizable, whose hypotheses come from step 3, and gives the derived dual and the Tor intervals. proof_deps equals the union of uses. There is no cycle, and all cited nodes are on the unit's route, so no tool_uses are needed. Small cases checked: 0, free modules ([0,0]), O_E/π^r (resolution in degrees [-1,0]; dual O_E/π^r[-1] in [1,1]⊂[0,1]). The unit differs from its base only in realized/realized_by, and every proof paragraph is covered. That coverage is slightly smaller than the previous reader's fix but correct. There are no new nodes, no SGA, and no fixes. For maintenance: the imported det-* statements leave X/E/O_E implicit (B2) and need the scope sentence when they are split."
+ }
 }
