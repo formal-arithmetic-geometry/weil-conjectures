@@ -1,0 +1,89 @@
+{
+ "id": "def-cbc-enhanced-diagrams-cones",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Proof opening sentence: \"Choose a compactification c=(j,p)\"; makes precise the enhanced coherent diagrams and cones used to make this choice independent, through the local compact-support-extension split.",
+   "via": [
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Enhanced diagrams, spaces and homotopy coherent cones",
+ "statement": "Fix the universes of [def-weil-size-convention] and use simplicial sets as in [def-weil-pbc-simplicial-set]. The standard simplex $\\Delta^n$ has $m$-simplices the weakly increasing maps $[m]\\to[n]$; its horn $\\Lambda_i^n$ is the union of the faces other than the $i$th face. An enhanced category means a quasicategory: a simplicial set $\\mathscr C$ in which every map $\\Lambda_i^n\\to\\mathscr C$, $0<i<n$, extends to $\\Delta^n$. An edge is an equivalence when it has an inverse with both inverse equations witnessed by $2$-simplices. A space is a Kan complex: every map $\\Lambda_i^n\\to S$, with $n\\geq1$ and $0\\leq i\\leq n$, extends to $\\Delta^n$. Thus outer horns are included, but no nonemptiness condition from dimension zero is imposed. Spaces and their maps are considered up to weak homotopy equivalence. A weak homotopy equivalence of simplicial sets means a map inducing a bijection on components and isomorphisms on every based homotopy group after geometric realization. Geometric realization is the quotient of $\\coprod_{n\\geq0}K_n\\times|\\Delta^n|$ by the face and degeneracy identifications, where $|\\Delta^n|=\\{(t_0,\\ldots,t_n)\\in\\mathbb R^{n+1}:t_i\\geq0,\\ \\sum_i t_i=1\\}$. Weakly contractible means that the map to the one-point simplicial set $\\Delta^0$ is a weak homotopy equivalence.\n\nFor a small ordinary category $I$, its nerve $N(I)$ has $n$-simplices the functors $[n]\\to I$, with restriction as simplicial operators. For a small simplicial set $K$ define $\\operatorname{Fun}(K,\\mathscr C)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(K\\times\\Delta^n,\\mathscr C)$. Objects of this simplicial set are coherent diagrams, edges are coherent transformations, and its higher simplices retain their compatibilities. The full subcategory on specified objects contains exactly the simplices whose vertices are specified objects. Write $\\operatorname{Fun}_{\\mathrm{eq}}(K,\\mathscr C)$ for the full subcategory on diagrams carrying every edge of $K$ to an equivalence. The constant-diagram map $\\Delta_K$ is induced by $K\\to\\Delta^0$; evaluation at a vertex is restriction to that vertex.\n\nFor a map of Kan complexes $f:A\\to B$ and a vertex $b\\in B$, its homotopy fiber over $b$ means the space modeled by $A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B}\\{b\\}$; its objects are a point $a$ and a path from $f(a)$ to $b$, with the higher simplices of these data. For objects $x,y$ of a quasicategory, use the mapping space with $n$-simplices the maps $\\Delta^{n+1}\\to\\mathscr C$ whose restriction to the entire initial face $\\Delta^{\\{0,\\ldots,n\\}}$ is the constant simplex at $x$, and whose last vertex is $y$. Simplicial operators are induced by extending each weakly increasing map $[m]\\to[n]$ to $[m+1]\\to[n+1]$ by sending the new last vertex to the new last vertex. This is the right-pinched mapping space $\\operatorname{Map}_{\\mathscr C}(x,y)$. A functor is fully faithful if it induces equivalences on these mapping spaces. A functor equivalence has a quasi-inverse and coherent natural equivalences of the two composites with the identity. The core is the simplicial subset consisting of simplices all of whose edges are equivalences.\n\nFor $F:K\\to\\mathscr C$, a cone with apex $x$ is a coherent transformation $\\lambda:\\Delta_Kx\\to F$; put $D=\\operatorname{Fun}(K,\\mathscr C)$ and define the coherent comma cone category by the simplicial pullback $\\mathscr C\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\{F\\}$, where $\\mathscr C\\to D$ is $\\Delta_K$. Explicitly an $n$-simplex is a pair $a:\\Delta^n\\to\\mathscr C$, $b:\\Delta^n\\times\\Delta^1\\to D$ with $b|_{\\Delta^n\\times\\{0\\}}=\\Delta_Ka$ and $b|_{\\Delta^n\\times\\{1\\}}$ constant at $F$, with simplicial operators given by restriction. Thus morphisms retain their compatibility homotopies. Denote this category by $(\\Delta_K\\downarrow F)$. A cone is limiting if it is terminal in this category. Here terminal means that the mapping space into it from every object is contractible. The space of limiting cones means the core of the full subcategory of limiting cones, allowing the apex to vary. Dually cocones are transformations $F\\to\\Delta_Kx$, the cocone category is $\\{F\\}\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\mathscr C$, and colimiting cocones are its initial objects. The notations $\\operatorname{holim}F$ and $\\operatorname{hocolim}F$ mean the apices of such cones and cocones when they exist, without choosing any data from an unproved mere existence theorem.",
+ "source": {
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Lecture II, Definitions 2.1 and 2.2 and basic facts (1)-(7), printed pp. 13-15, for quasicategories, internal functor simplicial sets, equivalences, cores and spaces. Cone/comma and limit terminology is agent-specified; WANTED: an archived infinity-categorical cone/limit reference. The right-pinched convention is checked against online Kerodon, Construction 4.6.5.1 (Tag 01KX) and Remark 4.6.5.2 in Subsection 4.6.5 (Tag 01KW); the whole initial face is constant. The displayed comma category is specified explicitly by a simplicial pullback."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Infinity categories as quasicategories, homotopy coherent functor categories, mapping spaces and universal mapping space definition of a limiting cone",
+   "results": "8 hits: SSet.QCat, CategoryTheory.Nerve.quasicategory, LightDiagram.isLimit, CategoryTheory.nerveFunctor, SSet.hasLimits, LightProfinite.asLimitConeAux, SSet.QCat.bicategory, SSet.hoFunctor.preservesTerminal; digest 39ffc1f16fa46643",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.Quasicategory is exactly the primitive horn definition (Quasicategory/Basic.lean:39), but this node also defines mapping spaces, coherent comma cones and their universal property. Read StrictBicategory.lean:14-32,49-70; its ordinary bicategory does not supply the cone definitions. The semi-representable Hom(S,K)_0 node is about etale schemes, not this internal mapping simplicial set."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\"",
+   "results": "12 hits: SSet.Quasicategory, SSet.instQuasicategoryOfKanComplex, SSet.quasicategory_of_hasLiftingProperty, SSet.Quasicategory.hasLiftingProperty, SSet.quasicategory_iff_hasLiftingProperty, SSet.Quasicategory.hornFilling, SSet.Quasicategory.hornFilling', SSet.Quasicategory.mk; digest 1f27f0f0176f40b2",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.Quasicategory is exactly the primitive horn definition (Quasicategory/Basic.lean:39), but this node also defines mapping spaces, coherent comma cones and their universal property. Read StrictBicategory.lean:14-32,49-70; its ordinary bicategory does not supply the cone definitions. The semi-representable Hom(S,K)_0 node is about etale schemes, not this internal mapping simplicial set."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor|infinity.category|homotopy.coherent|limiting.cone",
+   "results": "25 hits: Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean, Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean, Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean; digest 9d1214acb3d515f9",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.Quasicategory is exactly the primitive horn definition (Quasicategory/Basic.lean:39), but this node also defines mapping spaces, coherent comma cones and their universal property. Read StrictBicategory.lean:14-32,49-70; its ordinary bicategory does not supply the cone definitions. The semi-representable Hom(S,K)_0 node is about etale schemes, not this internal mapping simplicial set."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of infinity categories coherent diagrams and mapping spaces of limiting cones",
+   "results": "8 hits: CategoryTheory.Cat.HasLimits.limitCone, Profinite.limitCone, CategoryTheory.Limits.LimitCone, CategoryTheory.Limits.Cocone.category, CategoryTheory.Limits.coneOfConeUncurryIsLimit, CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetLimitCone, CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone, CategoryTheory.Limits.diagramOfConesInhabited; digest b29dd7b886ae1923",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.Quasicategory is exactly the primitive horn definition (Quasicategory/Basic.lean:39), but this node also defines mapping spaces, coherent comma cones and their universal property. Read StrictBicategory.lean:14-32,49-70; its ordinary bicategory does not supply the cone definitions. The semi-representable Hom(S,K)_0 node is about etale schemes, not this internal mapping simplicial set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent natural transformations form a functor infinity category and a homotopy limit represents its space of cones",
+   "results": "8 hits: SSet.Truncated.HomotopyCategory.mkNatTrans, SSet.hoFunctor, CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor, SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk, SSet.hoFunctor.preservesTerminal, SSet.Truncated.hoFunctor₂, CategoryTheory.nerveFunctor, CategoryTheory.SimplicialNerve; digest 760103a4406c3a19",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.Quasicategory is exactly the primitive horn definition (Quasicategory/Basic.lean:39), but this node also defines mapping spaces, coherent comma cones and their universal property. Read StrictBicategory.lean:14-32,49-70; its ordinary bicategory does not supply the cone definitions. The semi-representable Hom(S,K)_0 node is about etale schemes, not this internal mapping simplicial set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right mapping simplicial set has simplices whose initial face is degenerate and whose final vertex is fixed; infinity categorical comma categories and terminal objects",
+   "results": "{\"t\": \"2026-10-16T08:20:06Z\", \"tool\": \"leanfinder\", \"query\": \"A right mapping simplicial set has simplices whose initial face is degenerate and whose final vertex is fixed; infinity categorical comma categories and terminal objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented.stdSimplex_map_right\", \"SSet.degenerate\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.PtSimplex\", \"SSet.Augmented\", \"SSet.stdSimplex.isTerminalObj₀\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.PtSimplex.RelStruct.map\"], \"digest\": \"e1deacf6b8fa54e9\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: returned standard/pointed simplices, simplicial enrichment and model-category right homotopies do not define the right-pinched space or the coherent comma category. Primitive quasicategories remain an exact partial match at Quasicategory/Basic.lean:39."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|rightHom|mappingSpace|homotopyFiber|terminal.*contractib|contractib.*terminal",
+   "results": "{\"t\": \"2026-10-16T08:21:10Z\", \"tool\": \"grep\", \"query\": \"pinched|rightHom|mappingSpace|homotopyFiber|terminal.*contractib|contractib.*terminal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"b414692f0c4fc18a\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: returned standard/pointed simplices, simplicial enrichment and model-category right homotopies do not define the right-pinched space or the coherent comma category. Primitive quasicategories remain an exact partial match at Quasicategory/Basic.lean:39."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}
