@@ -322,5 +322,24 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-012727714 (reviewer sub-agent of L); spot-checked: Full mathematical review completed; item statement and all seven proof steps match Stacks 0F1C and cited DAG/source statements, including coefficient category, base-change morphisms, perfect-closure compatibility, and edge cases. No new nodes or repairs are needed. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f29182f6",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all seven dependencies, Stacks 0F1C, exact declarations, docstrings, universes, edge cases, and verbatim signature. Snapshot compilation passed both sandbox and library-path checks. No errors or fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionExchange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_fieldExtension",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_fieldExtension (K L : Type u) [Field K] [Field L] [Algebra K L] (T S : Over (Spec (.of K))) (g : T ⟶ S) [QuasiCompact g.left] [QuasiSeparated g.left] (E : _root_.DerivedCategory.Plus (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1})) (hE : HasTorsionCohomologyOfInvertibleOrder K T E.obj) : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (⟨by simp [Over.pullback_map_left]⟩ : CommSq (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K L)))).map g).left) g.left (pullback.fst S.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))))).app E)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the current published def-kun-torsion-invertible interface Etale.HasTorsionCohomologyOfInvertibleOrder in Sheaf.AlgebraicGeometry.InvertibleTorsionOrders. Repair of return L: replaces the unpublished Scheme.HasFieldInvertibleTorsionEtaleCohomology predicate with the recorded dependency declaration, retaining elementwise invertible annihilators in all integer cohomology degrees and the canonical derived exchange conclusion.",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionExchange.lean"
  }
 }
