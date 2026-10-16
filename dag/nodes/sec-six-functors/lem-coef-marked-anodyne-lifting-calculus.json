@@ -300,5 +300,43 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c4d26a595 (reviewer sub-agent of L); spot-checked: Pass with no changes and no dropped nodes. I read the item, both new nodes and every cited statement in full, and checked them against a local text copy of HTT, which is not in literature/: Def 3.1.1.1, Rem 3.1.1.3–4, Prop 3.1.1.5 with its proof, Prop 3.1.1.6 with its proof, Cor 3.1.1.7, Prop 3.1.2.3 cases A1–D2, Rem 3.1.3.1 and 3.1.3.4, Lemma 3.1.3.6, and the detector A in the proof of 3.1.3.7(1). The item statement is the point case of these with no hypothesis added or dropped; it is a technical simplicial node, so no base-change morphism or coefficient category is involved. Step checks: Step 1 uses both directions of the outer-horn node, the core-Kan clause and the composition/inverse clause, and the (iv) square forces every equivalence to be marked. Step 2 builds a countable Kan subcomplex and reaches K^sharp by a well-ordered chain of pushouts; empty K gives the identity. Step 3 meets the small-object node's hypotheses with aleph_1 and countable domains. Step 5 writes out the marked two-variable saturation and uses the boundary-cell leaf. In Step 6 I recomputed all eight cases: the n=0 prism square marks the diagonal with (iii) and then the lower edge with cancellation, the (iii)x a diagonal comes from triangle (0,0),(1,0),(2,1), and the (iv)x a diagonal comes from (s_1h,(0,0,1)). Step 7 handles sharp diagonals through product triangles. In Step 8, fully marked horns with n>=3 contain every edge, n=2 k=2 uses cancellation, and right fibration plus Kan target gives a Kan fibration by lem-cbc-right-fibration-space-fiber. In Step 10 the faces give vertices (e0,e1,e0,e1) and the witnesses g e = id and e g = id, so restriction is an isomorphism. New nodes: endpoint-prism-generation is exactly HTT 3.1.1.5 (classes 2' and 2'' generate the same class, which contains 2, and the class of 1 and 2 contains 2' and 2''), including m=0; triangle-cancellation is exactly Cor 3.1.1.7. Both are self-contained, statement-only real lemmas, not clauses of the item, and rg found no duplicates in the DAG. There is no cycle, all cited ids exist and none is merged. Accepted tool uses: four cbc-unit generic simplicial nodes (outer-horn filling, functor-cone calculus, composition spine, and right fibration over a Kan base); the biduality unit does not cite the cbc unit. Note for whoever splits the cancellation node: HTT proves it through the relative Prop 3.1.1.6, so that split must avoid lem-coef-marked-point-cartesian-model or it will create a cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedAnodyneLiftingCalculus",
+  "declaration": "SSet.Marked.marked_anodyne_lifting_calculus",
+  "declarations": [
+   "SSet.Marked.flatToMarked",
+   "SSet.Marked.inducedMarking",
+   "SSet.Marked.inducedMarkingMap",
+   "SSet.Marked.finalMarkedSimplex",
+   "SSet.Marked.finalMarkedHorn",
+   "SSet.Marked.triangleMarkingSource",
+   "SSet.Marked.triangleMarkingMap",
+   "SSet.Marked.anodyneGenerators",
+   "SSet.Marked.markedSaturation",
+   "SSet.Marked.markedAnodyne",
+   "SSet.Marked.mapSharpToFlat",
+   "SSet.Marked.detectorFaceRelations",
+   "SSet.Marked.detectorDegeneracyRelations",
+   "SSet.Marked.equivalenceDetector",
+   "SSet.Marked.equivalenceDetectorEdge",
+   "SSet.Marked.markedEquivalenceDetector",
+   "SSet.Marked.marked_anodyne_lifting_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedAnodyneLiftingCalculus.lean",
+  "statement": "theorem marked_anodyne_lifting_calculus : markedSaturation (anodyneGenerators true) = markedAnodyne.{u} ∧ (∃ J : MorphismProperty Marked.{u}, J.IsSmall.{u} ∧ J ≤ anodyneGenerators true ∧ markedSaturation J = markedAnodyne) ∧ (∃ (R : Marked.{u} ⥤ Marked.{u}) (η : 𝟭 Marked.{u} ⟶ R), ∀ X : Marked.{u}, markedAnodyne (η.app X) ∧ IsNaturallyFibrant (R.obj X)) ∧ (∀ X : Marked.{u}, markedAnodyne.rlp (toPoint X) ↔ IsNaturallyFibrant X) ∧ (∀ {X X' Y Y' : Marked.{u}} (i : X ⟶ X') (j : Y ⟶ Y'), markedAnodyne i → cof j → (∃ (P : Marked.{u}) (p : P ⟶ product X' Y'), IsPushoutProduct i j p) ∧ (∀ (P : Marked.{u}) (p : P ⟶ product X' Y'), IsPushoutProduct i j p → markedAnodyne p)) ∧ (∀ (X : Marked.{u}) (C : SSet.{u}), Quasicategory C → Quasicategory (mapFlat X (natural C)) ∧ KanComplex (mapSharp X (natural C)) ∧ ∀ n : SimplexCategoryᵒᵖ, Function.Injective ((mapSharpToFlat X (natural C)).app n) ∧ ∀ t : (mapFlat X (natural C)).obj n, t ∈ (Enhanced.core (mapFlat X (natural C))).obj n ↔ ∃ s : (mapSharp X (natural C)).obj n, (mapSharpToFlat X (natural C)).app n s = t) ∧ (∀ {X Y : Marked.{u}} (j : X ⟶ Y) (C : SSet.{u}), Quasicategory C → (cof j → SSet.modelCategoryQuillen.J.rlp (mapSharpPre j (natural C))) ∧ (markedAnodyne j → SSet.modelCategoryQuillen.I.rlp (mapSharpPre j (natural C)))) ∧ (∀ (C : SSet.{u}), Quasicategory C → SSet.modelCategoryQuillen.I.rlp (mapSharpPre (flatToMarked markedEquivalenceDetector.{u}) (natural C)) ∧ IsIso (mapSharpPre (flatToMarked markedEquivalenceDetector.{u}) (natural C)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing SSet.Marked primitives without restating them. The four generating families, their least pushout/transfinite/retract closure, the canonical sharp-to-flat map, and the explicit finite-detector coequalizer are defined in this module. The sole postponed theorem states every assertion of the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-211f6b0df",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read the node, both stmt deps, HTT places, delivered module, report (Worker report and Second reading by Q39 present) and the reused MarkedPointCartesianModel/EnhancedDiagramsCones primitives and Mathlib I/J. All 8 conjuncts match the node exactly: generators (i) 0<i<n flat inner horns, (ii) Λ[n+1,n+1] with induced final-edge marking incl. dim 1, (iii) Δ[2] with horn-2-1 edges marked to sharp, (iv) all Kan K flat-to-sharp; sInf closure under pushouts/transfiniteCompositions.{u}/retracts; countable generation plus a small J; functorial R,η; rlp(toPoint) iff IsNaturallyFibrant; pushout product existence and every representative; mapFlat quasicategory, mapSharp Kan and equal to core via the canonical injective mapSharpToFlat; cof gives J.rlp, markedAnodyne gives I.rlp; detector coequalizer relations recomputed (e=[0,1], inverse triangles [0,1,2],[1,2,3]) with I.rlp and IsIso. Edge cases and universe u fine; no hollow defs; sorry only on the item theorem; docstrings carry source and blueprint id; lean.statement verbatim; node unchanged except lean; reverse import omitted per stages/2 §3(7). nt_compile.py --json clean (1.4 s, exit 0), and the tool was confirmed to report injected errors. No findings requiring repair."
  }
 }
