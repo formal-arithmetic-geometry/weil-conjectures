@@ -1,0 +1,102 @@
+{
+ "id": "lem-coef-fixed-object-dg-free-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 .proof.md: the coherent finite-level mapping-complex adjunction in the middle R lim comparison. Fixed-object strict dg free/forgetful graph adjunction used before passage to coherent coefficient diagrams.",
+   "via": [
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fixed-object dg model structure and derived free graph adjunction",
+ "statement": "Use the universe and infinity-category conventions of [def-coef-complete-algebroid] and the projective model of unbounded cochain complexes $\\mathbf V=\\operatorname{Ch}(\\mathbf Z)$ of [lem-coef-projective-chains-monoidal-model]. Let $W$ be the quasi-isomorphisms of complexes and fix a small set $S$. An $S$-graph is a family $P(s,t)$ of complexes; its category $\\mathbf G_S=\\prod_{(s,t)\\in S^2}\\mathbf V$ has the objectwise projective model structure. Let $\\mathbf C_S$ be strict dg categories with object set $S$, associative unital chain-map composition $A(t,u)\\otimes A(s,t)\\to A(s,u)$, and functors equal to the identity on $S$. Put $\\mathrm{FF}_S=\\{f\\mid f(s,t)\\text{ is a quasi-isomorphism for every }s,t\\}$. The forgetful functor $U:\\mathbf C_S\\to\\mathbf G_S$ has a left adjoint $F$, the free dg category. Its mapping complex is\n$$UF(P)(s,t)=\\bigoplus_{n\\geq0}\\ \\bigoplus_{s=x_0,\\ldots,x_n=t}P(x_{n-1},x_n)\\otimes\\cdots\\otimes P(x_0,x_1).$$\nFor $n=0$ the summand is $\\mathbf Z[0]$ if $s=t$ and is absent otherwise. Composition concatenates paths; the unit of $F\\dashv U$ inserts length-one paths.\n\nThere is a combinatorial model structure on $\\mathbf C_S$ with weak equivalences $\\mathrm{FF}_S$ and fibrations the mappingwise degreewise surjections. Here a model structure has retract-closed weak equivalences satisfying two-out-of-three and two weak factorization systems (cofibrations, trivial fibrations) and (trivial cofibrations, fibrations), with functorial factorizations; trivial means also a weak equivalence, and cofibrant means that the map from the initial object is a cofibration. All objects are fibrant, $F\\dashv U$ is Quillen (the left adjoint preserves cofibrations and trivial cofibrations), and a cofibrant object has cofibrant mapping complexes. There is a functorial cofibrant replacement $Q_SA\\to A$ that is a trivial fibration and fixes $S$.\n\nWriting $\\mathcal D=\\mathbf V[W^{-1}]_\\infty$, objectwise localization identifies $\\mathbf G_S[W_S^{-1}]_\\infty$ with $\\mathcal D^{S^2}$, where $W_S$ denotes the objectwise quasi-isomorphisms. With homotopy-coherent localization as defined in [lem-coef-combinatorial-localization-presentability], on these localizations the forgetful functor $U_\\infty:\\mathbf C_S[\\mathrm{FF}_S^{-1}]_\\infty\\to\\mathcal D^{S^2}$ is conservative (reflects equivalences), has a left adjoint $F_\\infty$, and preserves geometric realizations and, more generally, colimits indexed by $N(I)$ for every small ordinary category $I$ whose nerve is sifted. A geometric realization is a colimit indexed by $\\Delta^{\\mathrm{op}}$; sifted means that colimits of spaces indexed by that shape commute with finite products. The left adjoint is computed by $F$ applied to an objectwise cofibrant graph. Its unit is insertion of length-one paths, and its underlying graph is the displayed direct sum with derived tensors and coproducts. These adjunction identifications are coherent, including the specified unit.",
+ "source": {
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Haugseng Corollaries 3.14-3.15, Lemmas 3.19-3.20 and proof of Proposition 5.2(a),(c),(e),(f); structural inputs for the fixed-object comparison in ancestor proof paragraph 2. Online source read; not archived in literature/. No Stacks tag states this homotopy-coherent theorem. The strict dg composition uses reverse tensor order; the source uses forward order, identified here by the Koszul symmetry of complexes. The sifted-colimit assertion is restricted to nerve-indexed shapes exactly as in Lemma 3.20; it includes geometric realizations."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-combinatorial-localization-presentability"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fixed object differential graded categories have a projective model structure and their derived forgetful functor to graphs preserves sifted colimits",
+   "results": "{\"t\": \"2026-10-16T14:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed object differential graded categories have a projective model structure and their derived forgetful functor to graphs preserves sifted colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.projectiveResolutions\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.projective\"], \"digest\": \"5d497f07ab551d01\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|rectif|sifted.*[Cc]olimit|[Cc]olimit.*sifted",
+   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|rectif|sifted.*[Cc]olimit|[Cc]olimit.*sifted\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"a7e485e9204639d6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective model category of fixed object dg categories and free path algebra on a graph",
+   "results": "{\"t\": \"2026-10-16T14:55:35Z\", \"tool\": \"leansearch\", \"query\": \"Projective model category of fixed object dg categories and free path algebra on a graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Projective.mk\", \"CategoryTheory.isProjective\", \"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"CategoryTheory.Projective\", \"CategoryTheory.ProjectivePresentation\", \"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PrepathObject\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_p₀\"], \"digest\": \"317d2f8200a9fbc2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of monoids in the matrix convolution tensor product of complexes has a transferred model structure with cofibrant underlying graphs",
+   "results": "{\"t\": \"2026-10-16T14:56:18Z\", \"tool\": \"leanfinder\", \"query\": \"The category of monoids in the matrix convolution tensor product of complexes has a transferred model structure with cofibrant underlying graphs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorXTensorUnit_1\"], \"digest\": \"ef776c52ab3715bd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|rectification|derived.*free.*category|free.*category.*derived",
+   "results": "{\"t\": \"2026-10-16T14:56:14Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|rectification|derived.*free.*category|free.*category.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Enriched/Basic.lean:58-70, Enriched/EnrichedCat.lean:37-48, and Homology/Monoidal.lean (monoidalCategory). These define strict enrichment and tensor on complexes; they do not construct a fixed-object dg model structure, its derived graph adjunction, or sifted-colimit preservation. Refined global source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transferred model structure on associative differential graded algebras with many colors admits cofibrant replacement and derived free forgetful adjunction",
+   "results": "{\"t\": \"2026-10-16T15:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Transferred model structure on associative differential graded algebras with many colors admits cofibrant replacement and derived free forgetful adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\"], \"digest\": \"725d912f6afd6867\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:29-75 presupposes a model category and constructs its ordinary homotopy category; it does not transfer a model structure to dg categories or construct a derived graph adjunction. The focused global grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dgCategory|dg_category|DGCat|colored.*model|coloured.*model",
+   "results": "{\"t\": \"2026-10-16T15:26:04Z\", \"tool\": \"grep\", \"query\": \"dgCategory|dg_category|DGCat|colored.*model|coloured.*model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:29-75 presupposes a model category and constructs its ordinary homotopy category; it does not transfer a model structure to dg categories or construct a derived graph adjunction. The focused global grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-fixed-object-enriched-rectification",
+  "date": "2026-10-16",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
