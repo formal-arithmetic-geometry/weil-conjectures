@@ -7,8 +7,6 @@ module
 
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
-public import Mathlib.Algebra.Homology.ShortComplex.Basic
-public import Mathlib.CategoryTheory.Subobject.Limits
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact
