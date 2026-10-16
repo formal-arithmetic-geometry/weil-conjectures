@@ -30,9 +30,191 @@
   "def-weil-open-immersion",
   "def-weil-ambient-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathsf M_T=\\operatorname{Mod}(A_T)$. By [lem-pur-ringed-site-grothendieck-abelian] these are Grothendieck abelian categories, using the small-site universe fixed in [def-weil-pbc-proetale-site]. By [lem-weil-proetale-module-direct-image-left-exact], $p_*$ is additive and left exact. The first clause of [def-weil-full-cohomological-dimension] says $R^qp_*F=0$ for every sheaf $F$ and $q>c$; classical derived functors agree here with cohomology of the total derived image on a sheaf, by [lem-sp-kinjective-computes](2), applied to the finite-level construction [def-weil-derived-direct-image]. This uses sheaves on the entire source, not just those of etale origin. Properness makes $p$ qcqs. For every compactification $d=(j_d,p_d)$ the open $j_d$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target], applied with base $Y$, source $X$ of finite type over $Y$, and separated target $\\overline X_d\\to Y$. The scheme $\\overline X$ is finite type over $S$: $p$ is finite type by properness, and finite affine covers with finite lists of algebra generators compose with those for $Y\\to S$. Thus the stated FullCD definition applies to this proper part.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "def-weil-full-cohomological-dimension",
+    "lem-sp-kinjective-computes",
+    "def-weil-derived-direct-image",
+    "lemma-nagata-open-immersion-qc-over-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "Use the existing [lem-weil-pbc-condensed-qcqs-pushforward-continuity] with the constant condensed ring $\\underline A$ on profinite sets and complexes in degree zero. Its coefficient sheaf is exactly $A_T$: the functors $p_T^*$ in [lem-weil-pbc-profinite-point-pullback] are geometric inverse images, so preserve copowers of the terminal sheaf, hence constant sheaves and their ring operations as defined in [def-weil-pbc-constant-sheaf]. Their composition comparisons identify $p^{-1}A_Y$ with $A_{\\overline X}$. For a family $(M_i)_{i\\in I}$, index by the filtered poset of finite subsets $J\\subset I$, and set $K_J=(\\bigoplus_{i\\in J}M_i)[0]$. These complexes have common lower bound zero, and their termwise filtered colimit is $(\\bigoplus_{i\\in I}M_i)[0]$, by the coproduct universal property. The cited continuity theorem gives $\\varinjlim_J R^qp_*(\\bigoplus_{i\\in J}M_i)\\cong R^qp_*(\\bigoplus_iM_i)$, using the classical/total identification from step 1. The classical functors are additive: a finite sum of injective resolutions is an injective resolution of the finite sum, since finite biproducts of injectives are injective and finite sums are exact; applying the additive $p_*$ and taking cohomology preserves that finite biproduct. Thus the left side is $\\bigoplus_i R^qp_*M_i$, with its canonical coprojections. This proves preservation of sums for every $q\\geq0$, including $p_*=R^0p_*$. For injective sheaves $J_i$, [lem-weil-pbc-derived-functor-injective-vanishing] now gives $R^qp_*(\\bigoplus_iJ_i)=\\bigoplus_i R^qp_*J_i=0$ for $q>0$: sums of injectives are $p_*$-acyclic. The empty family uses the same argument, since the finite-subset poset then has the single object $\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "Given arbitrary unbounded complexes $(K_i)$, choose K-injective resolutions $K_i\\to I_i$ with each term of $I_i$ injective, by [lem-pur-kinjective-degreewise-existence]. Their termwise sum represents the derived coproduct, by [lem-kun-grothendieck-derived-coproducts]. Filtered-colimit exactness in the Grothendieck category makes direct sums exact (write a sum as the filtered union of finite sums); hence $\\bigoplus_iK_i\\to\\bigoplus_iI_i$ is a quasi-isomorphism. Every term of $\\bigoplus_iI_i$ is $p_*$-acyclic by step 2. Apply [lem-kun-finite-cd-acyclic-complex] with bound $c$ from step 1, both to each $I_i$ and to their sum. It identifies $Rp_*I_i$ with $p_*I_i$ and $Rp_*(\\bigoplus_i I_i)$ with $p_*(\\bigoplus_iI_i)$. The latter is termwise $\\bigoplus_i p_*I_i$ by step 2. Naturality of the acyclic-complex comparison identifies these isomorphisms on every coprojection, so the map proved invertible is exactly $\\bigoplus_i Rp_*K_i\\to Rp_*(\\bigoplus_iK_i)$. The same calculation covers the empty family.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-finite-cd-acyclic-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "By [prop-exc-open-adjoint], the derived $j_!$ is a left adjoint on all the ordinary derived categories. It preserves every coproduct: for any $L$, adjunction identifies $\\operatorname{Hom}(j_!(\\bigoplus_iK_i),L)$ with $\\operatorname{Hom}(\\bigoplus_iK_i,j^*L)=\\prod_i\\operatorname{Hom}(K_i,j^*L)=\\prod_i\\operatorname{Hom}(j_!K_i,L)$, with the indicated coprojections. Consequently $F_c=Rp_*j_!$ preserves all set-indexed coproducts by step 3. It is exact: the termwise $j_!$ is triangulated by [lem-weil-extension-by-zero-exact, lem-sf-exact-functor-derived-triangulated], and the unbounded $Rp_*$ is triangulated by [lem-pc-right-derived-functor-triangulated]. Composing these shift and triangle identifications gives those for $F_c$.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "Apply [lem-grothendieck-derived-brown-right-adjoint] to the Grothendieck category $\\mathsf M_X$ and to the exact coproduct-preserving functor $F_c:D(\\mathsf M_X)\\to D(\\mathsf M_Y)$ of step 4. It supplies a right adjoint $G_c$ and natural bijections $\\Phi^c_{K,L}:\\operatorname{Hom}(F_cK,L)\\cong\\operatorname{Hom}(K,G_cL)$. Denote $G_c$ by $Rf_n^\\times$. Brown is applied to the full unbounded source in a common indexing universe, without any compact-generation or constructibility premise.",
+   "uses": [
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "For a refinement $u:d\\to e$, put $V=\\overline X_d\\times_{\\overline X_e}X$, with open $b:V\\to\\overline X_d$, projection $q:V\\to X$, and the section $s:X\\to V$ induced by $j_d$. By [lem-weil-pbc-proper-open-section], $s$ identifies $X$ with an open-and-closed component of $V$ and $qs=1$. There is a canonical open-restriction isomorphism $j_e^*Ru_*N\\cong Rq_*b^*N$ on unbounded inputs. Here is its construction, not an invocation of an etale comparison: choose a K-injective resolution $N\\to I$ using [lem-pur-kinjective-degreewise-existence]; restriction to an open preserves K-injectivity, since for any acyclic $C$ its Hom into $b^*I$ is the Hom of $b_!C$ into $I$, which is zero by exactness of $b_!$ and [def-pur-kinjective-complex]. The sheaf adjunction [lem-weil-extension-by-zero-adjunction] extends termwise to chain maps and homotopies, and [lem-weil-extension-by-zero-exact] makes its left adjoint preserve acyclic complexes. Open restriction is exact by [def-weil-pbc-proetale-operations]; its interpretation as restriction of the localized site is [lem-weil-proetale-weakly-etale-localization]. The section formula [def-weil-proetale-module-direct-image] identifies $j_e^*u_*I$ with $q_*b^*I$ termwise. The computation on K-injectives [lem-weil-pbc-kinjective-total-derived] gives the asserted comparison. Applied to $N=j_{d!}K$, the Cartesian open square with sides $j_d,b,s,1_X$ gives $b^*j_{d!}K=s_!K$ by [lem-cbc-proetale-extension-zero-base-change]. Here the component calculation is explicit: for every site object $W\\to V$, its two inverse-image opens over $sX$ and $V\\setminus sX$ cover $W$ with empty overlap. The sheaf axiom identifies its sections with the product of the sections on those two opens. Restriction and gluing therefore identify module sheaves, complexes and chain homotopies on $V$ with pairs on those components; exactness is componentwise, and $s_!K$ is $(K,0)$ by its defining extension presheaf. For an acyclic pair $(C_1,C_2)$, maps into $(I,0)$ are exactly maps $C_1\\to I$ and hence null-homotopic when $I$ is K-injective on $X$. Thus $(I,0)$ is K-injective on $V$. The direct-image section formula gives $(q_*s_!I)(W)=I(W)$ for $W\\to X$, since $qs=1$ and the complementary component contributes zero. We obtain a natural isomorphism $\\lambda_u:j_e^*Ru_*j_{d!}K\\cong K$, normalized by restriction to this component.",
+   "uses": [
+    "lem-weil-pbc-proper-open-section",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-kinjective-complex",
+    "def-weil-proetale-module-direct-image",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "By [lem-sp-proper-open-derived-support], the counit $j_{e!}j_e^*M\\to M$, $M=Ru_*j_{d!}K$, is invertible; the quasi-compactness assumptions were checked in step 1. Define $\\alpha_u:j_{e!}K\\to Ru_*j_{d!}K$ as this counit after $j_{e!}(\\lambda_u^{-1})$. It is a natural isomorphism. This is precisely where ambient proper support is needed: neither the etale-only comparison nor the bounded-below etale-origin comparison supplies this counit on arbitrary $K$. Also the presheaf defining $j_{e!}M$ in [def-weil-extension-by-zero], restricted to the localized site of [lem-weil-proetale-weakly-etale-localization], is exactly $M$; it is already a sheaf there. Thus the open-adjunction unit $M\\to j_e^*j_{e!}M$ is the identity identification, termwise and hence on derived categories. In combination with [prop-exc-open-adjoint] it gives $\\operatorname{Hom}(j_{e!}K,j_{e!}L)=\\operatorname{Hom}(K,L)$, so extension is fully faithful. Maps between these supported objects are therefore determined by restriction to $X$.",
+   "uses": [
+    "lem-sp-proper-open-derived-support",
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization",
+    "prop-exc-open-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "For the identity refinement, $\\alpha_1$ is the identity under the identity direct-image comparison, since its restriction is $1_K$. For composable refinements $u:d\\to e$, $v:e\\to h$, compare $\\alpha_{vu}$ with $Rv_*(\\alpha_u)\\circ\\alpha_v$, using the canonical $R(vu)_*\\cong Rv_*Ru_*$ of [lem-weil-derived-direct-image-composition]. They are equal: both source and target are supported on $j_hX$ by step 7 (the target identifies with $R(vu)_*j_{d!}K$), and restricting to $X$ gives the identity under $\\lambda_{vu}$. To check that normalization, take a K-injective resolution on $\\overline X_d$. Direct image preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to its exact inverse-image left adjoint in [def-weil-pbc-proetale-operations], and open restriction preserves them by step 6. Thus the successive direct images and restrictions are computed on this common model: every open restriction is literal restriction of sections, the component $X$ is the same component in the iterated fibre product, and both composites there are $1_K$; the associativity normalization of the cited composition isomorphism identifies the two models. Thus, writing the composition comparison implicitly, $\\lambda_{vu}\\circ j_h^*(Rv_*\\alpha_u\\circ\\alpha_v)=1_K=\\lambda_{vu}\\circ j_h^*\\alpha_{vu}$; here naturality of restriction on sections gives the first equality. Full faithfulness from step 7 gives equality before restriction. Thus the proper/open comparisons satisfy identity and composition equations, as actual maps rather than merely unspecified isomorphisms.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "For $u:d\\to e$, proper composition and step 7 give $F_d=R(p_d)_*j_{d!}\\cong R(p_e)_*Ru_*j_{d!}\\xrightarrow{R(p_e)_*\\alpha_u^{-1}}R(p_e)_*j_{e!}=F_e$; call the composite $\\theta_u$. By [lem-weil-derived-direct-image-composition] and step 8, $\\theta_1=1$ and $\\theta_{vu}=\\theta_v\\theta_u$. The category of compactifications is cofiltered by [lem-cbc-compactifiable-cofiltered], applicable because $f$ is separated finite type, has the given compactification, and its open is quasi-compact by step 1. Hence for any $d,e$ choose a common refinement $r$ with arrows $a:r\\to d$, $b:r\\to e$ and set $\\theta_{d,e}=\\theta_b\\theta_a^{-1}$. For two such choices, choose a further common refinement and then equalize the two resulting parallel arrows to $d$ and to $e$; functoriality of the $\\theta_u$ makes the two expressions equal after cancelling the invertible maps from that further refinement. Thus the comparison is independent of the choice. For three objects, compute through one common refinement and cancel the map to the middle object: $\\theta_{e,h}\\theta_{d,e}=\\theta_{d,h}$. These comparisons agree with those of individual refinements.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "Fix the chosen compactification, denoted $c$ in the following comparison formulas (distinct from the integer bound), and abbreviate $t_d=\\theta_{d,c}:F_d\\cong F_c$, so $t_c=1$ and $t_d=t_e\\theta_u$ for $u:d\\to e$. Define $G_d=G_c$ for every $d$, and $\\Phi^d(h)=\\Phi^c(h\\circ t_{d,K}^{-1})$. These are natural bijections, hence give adjunctions by [lem-weil-pbc-adjunction-of-natural-bijection]. Their units and counits are explicitly $\\eta^d_K=G_c(t_{d,K}^{-1})\\eta^c_K$ and $\\varepsilon^d_L=\\varepsilon^c_L\\,t_{d,G_cL}$. Set every right-adjoint comparison $\\rho_u:G_e\\to G_d$ equal to $1_{G_c}$. From $t_d=t_e\\theta_u$ we get $t_e^{-1}=\\theta_u t_d^{-1}$, hence $\\eta^e_K=G_c(\\theta_{u,K})\\eta^d_K$ and $\\varepsilon^d_L=\\varepsilon^e_L\\theta_{u,G_cL}$. These are exactly the two compatibility equations in [def-weil-ambient-exceptional-adjoint], with $\\rho_u=1$. Identity and composite comparisons for the right adjoints are identities, while those for the left adjoints were checked in step 9. Together with the given integer $c$ and its FullCD condition, this constructs every component of the stated ambient datum.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-ambient-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "def-weil-full-cohomological-dimension",
+  "lem-sp-kinjective-computes",
+  "def-weil-derived-direct-image",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-finite-cd-acyclic-complex",
+  "prop-exc-open-adjoint",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-weil-pbc-proper-open-section",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-kinjective-complex",
+  "def-weil-proetale-module-direct-image",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-extension-by-zero",
+  "lem-sp-proper-open-derived-support",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-ambient-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+  "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -124,15 +306,186 @@
    "results": "OK 0 hits: ",
    "date": "2026-10-16",
    "verdict": "no match: underived adjunctions and generic sheaf constructions do not state conditional pro-etale FullCD-to-coproducts/coherence; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*[Cc]oproduct|proEtale.*[Cc]olimit|[Bb]rown|cohomologicalDimension",
+   "results": "OK 25 hits: Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean, Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/Algebra/Ring/Centralizer.lean, Mathlib/Algebra/Ring/Centralizer.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Dynamics/FixedPoints/Support.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Ee]xtension[Bb]y[Zz]ero|[Pp]ro[Ee]tale|[Bb]rown.*[Rr]epresent",
+   "results": "OK 10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward commutes with extension by zero for an open immersion on the pro etale site with finite coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite cohomological dimension proper direct image on pro etale unbounded derived categories preserves coproducts and has a right adjoint",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism of schemes the higher direct image functors on pro etale sheaves of modules over a finite ring commute with arbitrary direct sums",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.GeneratingSections.opEpi_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimits\", \"rightDerived\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"extensionByZero\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism which identifies open subschemes has a canonical isomorphism between derived pushforward of extension by zero and extension by zero on unbounded pro etale sheaf complexes",
+   "results": "OK 8 hits: CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso, TopCat.Sheaf.pushforwardForgetIso, CategoryTheory.Functor.sheafPushforwardContinuousIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|[Bb]rown[Rr]epresent|[Pp]ro[Ee]tale.*(coproduct|colimit)|[Rr]ight[Dd]erived.*[Cc]oproduct",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper map of schemes sends any unbounded pro etale complex extended by zero from a common open subscheme to a complex supported on that open",
+   "results": "OK 8 hits: HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.IsSupportedOutside, HomologicalComplex.IsStrictlySupportedOutside, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, HomologicalComplex.isSupported_iff, HomologicalComplex.IsStrictlySupported, HomologicalComplex.IsSupported",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived functors of a quasi compact quasi separated morphism of pro etale sites with torsion module coefficients preserve direct sums of sheaves",
+   "results": "OK 8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianLightCondMod, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, instAbelianCondensedMod, SheafOfModules.instAbelian, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state this pro-etale geometric/derived assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "cor-exc-base-change-open-immersion-general",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sp-fullcd-ambient-adjoint",
+  "worker": "stage1",
+  "summary": "Split FullCD-to-unbounded-coproducts through the existing bounded-below condensed continuity theorem specialized to finite partial sums of sheaves, acyclic terms and Brown; constructed normalized refinement comparisons from a smaller proper-support obligation and transported the adjunction explicitly. Second reading removed a redundant new higher-image node. One genuine statement-only obligation remains.",
+  "blueprint": "Ancestor cor-exc-base-change-open-immersion-general, proof first and second sentences, missing ambient adjunction for the chosen proper part; unit sk-prop-sf-existence clause (b). Steps 1–5 prove its coproduct/adjoint claim; 6–10 provide the extra ambient refinement coherence required by the updated datum.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Step 1: all constant-ring module categories are Grothendieck; a generic ringed-site tool, with no replacement in the existence unit."
+   },
+   {
+    "node": "lem-weil-proetale-module-direct-image-left-exact",
+    "why": "Step 1: additivity and left exactness of the ordinary module direct image; a functor-construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Step 2: bounded-below filtered continuity for a qcqs morphism, specialized to the constant condensed finite ring and degree-zero finite partial sums; this supplies continuity, not an exceptional adjoint or comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Step 2: geometric coefficient pullback identifies the constant condensed finite ring with the constant ring sheaf, coherently under scheme maps."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Step 3: termwise sums represent coproducts in the unbounded derived category of a Grothendieck category; generic homological algebra."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Step 3: finite cohomological dimension makes an arbitrary complex of acyclic terms compute the total derived image; generic homological algebra using the stated FullCD bound."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Steps 4 and 6: exactness of the open extension functor; a sheaf operation tool."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Step 5: Brown for an exact coproduct-preserving functor from a Grothendieck derived category; precisely the existence route, not a substituted geometric theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-section",
+    "why": "Step 6: the section in the proper/open fibre product is clopen; an elementary geometric tool independent of cohomological comparison."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Step 6: sheaf-level open adjunction supplies the Hom-complex calculation preserving K-injectivity under restriction."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Steps 6 and 7: identifies open restriction with localization of the pro-etale site and fixes its section calculation."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Step 6: computation of a total derived functor on K-injective resolutions; generic homological algebra."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Step 6: Cartesian open-extension comparison for arbitrary complexes, applied to the square with top identity and lower map b; no proper base-change theorem is used."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Steps 8 and 9: ordinary finite-level unbounded direct-image composition, including identity and associativity, for constructing coherent refinement comparisons."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Step 9: cofilteredness for already supplied compactifications over an arbitrary base, used only to remove the choice of common refinement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-weil-extension-by-zero-exact",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-weil-pbc-proper-open-section",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-derived-direct-image-composition",
+  "lem-cbc-compactifiable-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-eebdf8020",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-eebdf8020 (reviewer sub-agent of L); spot-checked: Read all ten steps, the new support lemma, cited statements, unit route, and source passages. Mathematical split accepted; coefficient categories and canonical maps remain distinct and unchanged. Recorded 15 accepted tool uses in the corrected parent JSON. Full checks and source locations are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
