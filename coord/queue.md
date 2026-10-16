@@ -16,14 +16,14 @@
 | `Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 1 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedLocalModelGluing` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteConstructibleEncoding` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedFiniteLocalSubmodules` | 8 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarScalarPullback` | 8 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteDerivedCoefficientData` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf` | 8 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarFieldEvaluationLinearity` | 9 | 1 | proof |
 | `Sheaf.Paper.ContinuousModuleEncodingLattices` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorGeometry` | 10 | 1 | proof |
-| `Sheaf.Paper.RingedTopoiTensorComparisonConstruction` | 10 | 1 | proof |
 | `Sheaf.Paper.ContinuousLatticeIntersectionSplitData` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullSquare` | 11 | 1 | proof |
 | `Sheaf.Paper.LatticeClassDescent` | 12 | 1 | proof |
