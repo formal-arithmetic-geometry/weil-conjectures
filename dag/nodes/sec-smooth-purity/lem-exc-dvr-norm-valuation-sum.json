@@ -257,5 +257,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-5932cf706 (reviewer sub-agent of L); spot-checked: The item statement is unchanged against the side DAG base, and the live copy is still unsplit. It is the DVR case of Stacks 02MJ (algebra.tex lemma-finite-extension-dim-1, l.30038), and it adds no separability, normality or henselian hypothesis. The six steps are correct. Step 1: the K-span of B is a finite-dimensional domain inside L, so it is a field equal to L. Step 2: the lattice node is applied with M=B and g=multiplication by y; the sign agrees with 02MI/02MG, where d(M,gM)=l(M/H)-l(gM/H). Step 3: finite A-length gives finite B-length, the 02M0 node is applied to both quotients, and they are subtracted in Z. Step 4: localization embeds in L, H_q=R∩yR by the common denominator st, the localized quotient maps are surjective, and Frac(B_q)=L. Step 5: the ideals over (t^n) give length n, and the cases r≥0 and r<0 are both written out. Step 6: substitution. New node lem-exc-dvr-lattice-distance-determinant is the DVR case of 02MI plus 02MF(2,3) and 02MG, true and statement-only. I tested it on V=0, rank one with g=t^r, and diag(t,t^-1). New node lem-exc-semilocal-restriction-length is exactly 02M0 (l.12603). I tested it on M=0, B=k×k, and a residue extension of degree f. Mathlib's IsLocalRing.length_restrictScalars needs B local and Ideal.sum_ramification_inertia_eq_finrank_fiber states something different, so neither node has a Mathlib match. Grep of the side and live DAGs for tags 02M0, 02MF, 02MG, 02MI and 02MJ and for lattice/norm keywords found no duplicate. Every cited node is a Mathlib leaf or definition, so there is no route issue and no tool_uses. The blueprint from.place is verified in main-20261015 lem-exc-dvr-galois.proof.md, first paragraph. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrNormValuationSum",
+  "declaration": "IsDiscreteValuationRing.norm_valuation_sum",
+  "file": "lean/Sheaf/RingTheory/DvrNormValuationSum.lean",
+  "statement": "theorem norm_valuation_sum (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (B : Type w) [CommRing B] [IsDomain B] [Algebra A B] [Module.Finite A B] (L : Type z) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra K L] [FiniteDimensional K L] [Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L] [Fintype (MaximalSpectrum B)] (hcontract : ∀ q : MaximalSpectrum B, q.asIdeal.under A = IsLocalRing.maximalIdeal A) [∀ q : MaximalSpectrum B, IsDiscreteValuationRing (Localization.AtPrime q.asIdeal)] [∀ q : MaximalSpectrum B, Module.Finite (A ⧸ q.asIdeal.under A) (B ⧸ q.asIdeal)] (y : Lˣ) : WithZero.log (Ring.ordFrac A (Algebra.norm K (y : L))) = ∑ q : MaximalSpectrum B, (Module.finrank (A ⧸ q.asIdeal.under A) (B ⧸ q.asIdeal) : ℤ) * WithZero.log (Ring.ordFrac (Localization.AtPrime q.asIdeal) (IsLocalization.algEquiv (nonZeroDivisors B) L (FractionRing B) (y : L)))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df7e9e296",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read the node, the six stmt-dep records, Stacks 02MJ (algebra.tex 30036-30084), the module and report (both Worker report and Second reading by Q116 present). The 12 clauses match exactly with the canonical Mathlib declarations: IsDiscreteValuationRing; IsFractionRing plus two scalar towers (which make A->B injective and determine K->L); Fintype MaximalSpectrum; hcontract via Ideal.under; DVR localizations; Module.Finite/finrank over A/q.under with the canonical algebraOfLiesOver; WithZero.log of Ring.ordFrac, normalized by ordFrac_irreducible/ordFrac_of_isUnit; Algebra.norm = LinearMap.det; y : Lˣ; IsLocalization.algEquiv to FractionRing B with the scalar-tower-forced B_q-algebra. No extra hypotheses, independent universes, lean.statement verbatim, one sorry, no definitions, docstrings with source and blueprint and the six proof steps, no name collision. nt_compile --json on the snapshot file: clean, 1.4 s."
  }
 }
