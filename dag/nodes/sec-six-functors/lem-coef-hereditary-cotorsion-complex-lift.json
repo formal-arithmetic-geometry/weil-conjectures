@@ -349,5 +349,29 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-e85ed2d43 (reviewer sub-agent of L); spot-checked: review.md records checks of all thirteen steps and six new nodes, cited statements, Stacks and Mathlib sources, online comparisons, duplicate searches, and nonsemisimple edge cases. No mathematical repairs required. Unavailable WANTED originals are explicitly distinguished from sources read; their assertions were independently checked."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.HereditaryCotorsionComplexLift",
+  "declaration": "CategoryTheory.Cotorsion.hereditary_cotorsion_complex_lift",
+  "declarations": [
+   "CategoryTheory.Cotorsion.acyclicCycles",
+   "CategoryTheory.Cotorsion.dgLeft",
+   "CategoryTheory.Cotorsion.dgRight",
+   "CategoryTheory.Cotorsion.hereditary_cotorsion_complex_lift"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/HereditaryCotorsionComplexLift.lean",
+  "statement": "theorem hereditary_cotorsion_complex_lift {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] (F T : ObjectProperty A) (hpair : IsCotorsionPair F T) (hhereditary : ∀ (n : ℕ), 1 ≤ n → ∀ U V : A, F U → T V → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) U V n)) (G : A) (hG : F G) (hgen : ∀ X : A, ∃ (I : Type v) (p : (∐ fun _ : I ↦ G) ⟶ X), Epi p) {ι : Type v} (S : ι → A) (hS : ∀ s : ι, F (S s)) (hT : ∀ V : A, T V ↔ ∀ s : ι, ExtOneOrthogonal (S s) V) : IsCotorsionPair (dgLeft F T) (acyclicCycles T) ∧ IsCotorsionPair (acyclicCycles F) (dgRight F T) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ P U : CochainComplex A ℤ, dgLeft F T P → acyclicCycles T U → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) P U n)) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ P U : CochainComplex A ℤ, acyclicCycles F P → dgRight F T U → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) P U n)) ∧ (∀ (P Q : CochainComplex A ℤ) (p : P ⟶ Q), Epi p → dgLeft F T P → dgLeft F T Q → dgLeft F T (kernel p)) ∧ (∀ (P Q : CochainComplex A ℤ) (p : P ⟶ Q), Epi p → acyclicCycles F P → acyclicCycles F Q → acyclicCycles F (kernel p)) ∧ (∀ (U V : CochainComplex A ℤ) (i : U ⟶ V), Mono i → acyclicCycles T U → acyclicCycles T V → acyclicCycles T (cokernel i)) ∧ (∀ (U V : CochainComplex A ℤ) (i : U ⟶ V), Mono i → dgRight F T U → dgRight F T V → dgRight F T (cokernel i)) ∧ (∀ P : CochainComplex A ℤ, (dgLeft F T P ∧ P.Acyclic) ↔ acyclicCycles F P) ∧ (∀ U : CochainComplex A ℤ, (dgRight F T U ∧ U.Acyclic) ↔ acyclicCycles T U) ∧ (∀ U : CochainComplex A ℤ, acyclicCycles T U ↔ ∀ n : ℤ, ExtOneOrthogonal ((CochainComplex.singleFunctor A n).obj G) U ∧ ∀ s : ι, ExtOneOrthogonal ((CochainComplex.singleFunctor A n).obj (S s)) U)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1702b5d03",
+  "group": "N8",
+  "result": "pass",
+  "note": "Full node, dependency, source, Lean, report, edge-case, docstring, and compiler audit completed; delivery is correct."
  }
 }
