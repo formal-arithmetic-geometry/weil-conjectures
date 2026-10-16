@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1300**, closure **19**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1298**, closure **17**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -45,20 +45,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1104 | 17 |
+| Sheaf | 1102 | 15 |
 | WeilConjectures | 196 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2284 | 758 | 1526 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2238 | 756 | 1482 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 19 | 1962 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2284 | 756 | 1528 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2238 | 754 | 1484 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 17 | 1964 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3626 |
+| proved | 3628 |
 | decomposed | 52 |
 | moved | 4015 |
 | pruned | 131 |
@@ -71,13 +71,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
 | A3 | 124 | 120 | 80 | 40 | 55/124 (44.4%) |
-| A4 | 72 | 76 | 47 | 29 | 37/72 (51.4%) |
+| A4 | 73 | 77 | 47 | 30 | 37/73 (50.7%) |
 | B2 | 127 | 133 | 85 | 48 | 53/127 (41.7%) |
 | B3 | 145 | 152 | 89 | 63 | 62/145 (42.8%) |
 | B4 | 67 | 70 | 47 | 23 | 32/67 (47.8%) |
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
 | C2 | 124 | 119 | 84 | 35 | 57/124 (46.0%) |
-| C3 | 116 | 121 | 80 | 41 | 56/116 (48.3%) |
+| C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
 | C4 | 54 | 55 | 33 | 22 | 21/54 (38.9%) |
 | D2 | 138 | 138 | 89 | 49 | 61/138 (44.2%) |
 | D3 | 108 | 119 | 68 | 51 | 49/108 (45.4%) |
@@ -185,10 +185,8 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.LatticeClassDescent | 11 | 1 | B4 |
-| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux | 13 | 1 | C3 |
 | Sheaf.Paper.LatticePairMatrixAtBasis | 13 | 1 | C2 |
 | Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 15 | 1 | C4 |
-| Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit | 16 | 1 | A4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent | 40 | 1 | D2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | C1 |
 
@@ -301,6 +299,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne`
 - `Sheaf.AlgebraicGeometry.ExtEvaluation`
+- `Sheaf.AlgebraicGeometry.FibreProductLimit`
 - `Sheaf.AlgebraicGeometry.FieldDiscreteModules`
 - `Sheaf.AlgebraicGeometry.FindGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
@@ -428,6 +427,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
+- `Sheaf.CategoryTheory.ArrowsFunctor`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
@@ -455,6 +455,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.EssentiallyConstantSplitting`
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
 - `Sheaf.CategoryTheory.ExactCoupleMorphism`
+- `Sheaf.CategoryTheory.ExistsDirectedReindexing`
 - `Sheaf.CategoryTheory.FilteredColimitCategories`
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
 - `Sheaf.CategoryTheory.FilteredPageTwoModel`
