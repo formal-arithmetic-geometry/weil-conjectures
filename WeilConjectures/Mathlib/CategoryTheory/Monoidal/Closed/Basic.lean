@@ -304,3 +304,17 @@ lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoid
   exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.MonoidalClosed
+
+/-- The internal hom out of isomorphic objects: `[X, Y] ≅ [X', Y]` for `X ≅ X'`, given by
+precomposition (`MonoidalClosed.pre`). -/
+@[simps]
+noncomputable def ihomIsoOfIsoLeft {D : Type*} [Category D] [MonoidalCategory D]
+    [MonoidalClosed D] {X X' : D} (e : X ≅ X') (Y : D) : (ihom X).obj Y ≅ (ihom X').obj Y where
+  hom := (pre e.inv).app Y
+  inv := (pre e.hom).app Y
+  hom_inv_id := by rw [← NatTrans.comp_app, ← pre_map, e.hom_inv_id, pre_id]; rfl
+  inv_hom_id := by rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id]; rfl
+
+end CategoryTheory.MonoidalClosed

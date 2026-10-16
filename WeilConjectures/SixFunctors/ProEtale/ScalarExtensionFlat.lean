@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.FlatExtendScalars
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-!
 # Extension of scalars of pro-étale sheaves preserves flatness

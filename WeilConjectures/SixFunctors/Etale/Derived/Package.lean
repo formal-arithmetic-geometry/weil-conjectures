@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
 
@@ -199,13 +200,15 @@ structure SixOperationsPackage : Prop where
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
-exponent is invertible on `k`. Every clause is one of the propositions of this directory, and
-the proof is the assembly. Smooth base change on the unbounded derived categories and the
-orientation, which is smooth purity, are not available in this directory and are left open
-here. The Tate twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the
-orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
-theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
-    [IsSeparated f] :
+exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
+biduality is proved over algebraically closed fields). Every clause is one of the propositions of
+this directory, and the proof is the assembly. Smooth base change on the unbounded derived
+categories and the orientation, which is smooth purity, are not available in this directory and
+are left open here. The Tate twist datum is assumed normalized: for the untwisted datum
+`Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for
+`𝔸¹_ℚ ⟶ Spec ℚ`. -/
+theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩

@@ -52,14 +52,16 @@ which every smooth projective curve satisfies; for a general `f`, cohomology and
 (Stacks 08IB) would need at least `f` quasi-compact and quasi-separated.
 
 Every statement here assumes injective resolutions in the fibres, `∀ T,
-HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; see
-`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
+HasInjectiveResolutions (X ×[k] T).Modules`. This hypothesis always holds, since the category of
+`𝒪`-modules on a scheme is Grothendieck abelian
+(`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`); it is discharged in this way in
+`WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.IsInvertibleDirectImage`: the condition cutting out `F`.
 - `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: the subfunctor `F ⊆ Pic_{X/k,σ}`
-  (blueprint `sk-def-picard-f`).
+  (blueprint `sk-def-picard-f`, `def-pc-f-subfunctor`).
 
 ## Main statements
 
@@ -168,21 +170,22 @@ theorem IsInvertibleDirectImage.map_of_isProper (f : X ⟶ Spec (.of k)) [Flat f
   refine (hU' V i).2 (subset_trans (fun t _ ↦ ?_) hU)
   exact ⟨t, rfl⟩
 
-/-- **The subfunctor `F`.** Let `k` be a separably closed field, let `f : X ⟶ Spec k` be a
-smooth projective curve of genus `g` with a `k`-rational point `σ`, and let `G = Pic_{X/k,σ}`
-be the `σ`-normalized Picard functor.  The subfunctor `F ⊆ G` is
+/-- **The subfunctor `F`.** Let `k` be a field, let `f : X ⟶ Spec k` be flat, proper and locally
+of finite presentation, with a `k`-rational point `σ`, and let `G = Pic_{X/k,σ}` be the
+`σ`-normalized Picard functor. The subfunctor `F ⊆ G` is
 `F(T) = {ℒ ∈ G(T) | Rf_{T,*} ℒ is an invertible 𝒪_T-module placed in degree 0}`,
-where `f_T : X_T ⟶ T` is the base change of `f`.
+where `f_T : X_T ⟶ T` is the base change of `f`; concretely (`IsInvertibleDirectImage`),
+`R⁰f_{T,*} ℒ` is an invertible `𝒪_T`-module and `R^q f_{T,*} ℒ = 0` for all `q > 0`.
 
-The definition assumes `f` flat, proper and locally of finite presentation, as a smooth
-projective curve is: this is what makes the condition stable under base change
-(`AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`).
+The hypotheses on `f`, which a smooth projective curve satisfies, are what make the condition
+stable under base change (`AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`), i.e.
+make `F` a subfunctor.
 
 Being a `CategoryTheory.Subfunctor`, `F` comes with the inclusion natural transformation
 `(picardFunctorInvertibleDirectImage f σ hσ).ι` into
 `(picardFunctorNormalized f σ hσ).toFunctor`.
 
-(blueprint: `sk-def-picard-f`) -/
+(blueprint: `sk-def-picard-f`, `def-pc-f-subfunctor`) -/
 noncomputable def picardFunctorInvertibleDirectImage (f : X ⟶ Spec (.of k)) [Flat f]
     [IsProper f] [LocallyOfFinitePresentation f]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))

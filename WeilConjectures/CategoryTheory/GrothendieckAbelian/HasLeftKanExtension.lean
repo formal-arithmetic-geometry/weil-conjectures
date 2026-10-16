@@ -39,8 +39,10 @@ a zero object. The cancellation `P (α ≫ f) → P f → P α` it uses is
 
 For an arbitrary `f` the indexing comma category at `W` is the disjoint union, over the
 lifts `α` of `W` through `f`, of categories with terminal object: the inclusion of the
-discrete category of lifts is final. The presheaf-level left Kan extension is then
-pointwise the direct sum `⨁_α F(α)`, hence left exact when direct sums in `A` are exact
+discrete category of lifts is final
+(`SmallSite.exists_final_discrete_costructuredArrow_overMap`). The presheaf-level left Kan
+extension is then pointwise the direct sum `⨁_α F(α)`, hence left exact when direct sums in
+`A` are exact
 (`SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`). This is the
 left exactness of extension by zero along an étale morphism.
 
@@ -73,7 +75,7 @@ along its opposite nor their left exactness comes from the combinatorics above:
 
 For an étale `g` both are also proved in
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, and for a weakly étale `g` in
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs`, via the adjunction
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`, via the adjunction
 `MorphismProperty.Over.mapPullbackAdj`.
 
 -/
@@ -267,6 +269,22 @@ end LiftIndex
 
 end LiftIndex
 
+section Final
+
+variable {P : MorphismProperty Scheme.{u}} {V U : Scheme.{u}}
+  [P.IsMultiplicative] [P.HasOfPostcompProperty P] {f : V ⟶ U}
+
+/-- The comma category indexing the pointwise left Kan extension along the opposite of the
+localization functor of `h : P f` at `W` receives a final functor from a discrete category,
+namely the lifts of `W` through `f`, whose comma objects have invertible structure maps. -/
+theorem exists_final_discrete_costructuredArrow_overMap (h : P f) (W : P.Over ⊤ U) :
+    ∃ (ι : Type u) (s : Discrete ι ⥤ CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)),
+      s.Final ∧ ∀ i, IsIso (s.obj i).hom :=
+  ⟨_, LiftIndex.discreteFunctor h, LiftIndex.final_discreteFunctor h, fun i ↦
+    inferInstanceAs (IsIso (i.as.isoComp h).hom.op)⟩
+
+end Final
+
 section OverMap
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -338,6 +356,12 @@ end AlgebraicGeometry.SmallSite
 
 namespace AlgebraicGeometry.Etale
 
+instance (priority := 10) hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (F : Y.Etaleᵒᵖ ⥤ A) :
+    (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F :=
+  inferInstance
+
 /-- Along the localization functor of `h : Etale f` with `f` a monomorphism, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
@@ -396,6 +420,12 @@ end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
 
+instance (priority := 10) hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (F : Y.ProEtᵒᵖ ⥤ A) :
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.HasLeftKanExtension F :=
+  inferInstance
+
 /-- Along the localization functor of `h : WeaklyEtale f` with `f` a monomorphism, all
 pointwise left Kan extensions with values in a category with an initial object exist: the
 indexing comma categories are either empty or admit a terminal object. -/
@@ -440,8 +470,8 @@ indexing comma categories of the pointwise left Kan extensions are filtered and 
 extension is computed by filtered colimits, which are exact in `A` by AB5. This is the case
 `P = @WeaklyEtale` of `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`. For a
 weakly étale `g` it is also proved in
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` via the adjunction with the
-localization functor. -/
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via the adjunction with
+the localization functor. -/
 instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :

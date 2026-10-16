@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FactorGerm
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FactorGerm
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.StalkFunctor
 

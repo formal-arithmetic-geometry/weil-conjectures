@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-!
 # Closed immersions and `ℓ`-adic sheaves

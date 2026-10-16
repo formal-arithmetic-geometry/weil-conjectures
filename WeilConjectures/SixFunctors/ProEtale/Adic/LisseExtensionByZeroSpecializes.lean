@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseDenseOpen
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 
 /-!
 # Global sections of the extension by zero of a direct image of a lisse sheaf

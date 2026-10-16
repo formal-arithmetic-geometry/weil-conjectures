@@ -29,6 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
@@ -76,9 +77,10 @@ locally free, which is a genuine narrowing; it will have to be undone once coher
 torsion and determinant of a coherent sheaf exist.
 
 The Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar` is a `finsum`, so it is
-junk unless the cohomology vanishes in large degrees. On a curve that is Grothendieck vanishing,
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`, which is what makes
-every statement of this file about `χ`, `deg` and the genus meaningful.
+junk unless the cohomology vanishes in large degrees. On a curve, quasi-coherent cohomology
+vanishes in degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`, proved
+through a finite morphism to `ℙ¹_k`), which is what makes the statements of this file about `χ`,
+`deg` and the genus meaningful.
 
 Ampleness is `AlgebraicGeometry.IsAmple` of
 `WeilConjectures/AlgebraicGeometry/Modules/Ample.lean`, shared with the abelian-variety block.
@@ -93,7 +95,9 @@ locally free modules. The isomorphism is the one induced by the trace pairing
 `H^q(ℱ) ⊗ H^p(ℱᵛ ⊗ ω_X) → H¹(ω_X) → k`, whose last map is the trace `t_X = ∑_x res_x`, the sum
 over closed points of Tate's `k`-linear residues (Tate, *Residues of differentials on curves*).
 At a point `x` with `κ(x)/k` separable, `res_x` is `Tr_{κ(x)/k}` of the classical residue.
-Tate's residues are not available, so the isomorphism is not given explicitly.
+This trace is `AlgebraicGeometry.Scheme.residueTrace`, and Serre duality for it is
+`AlgebraicGeometry.Scheme.serreDuality_residueTrace`
+(`WeilConjectures/AlgebraicGeometry/Curve/ResidueTrace.lean`).
 
 ## Main statements
 
@@ -181,6 +185,20 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
     IsIso.inv_eq_of_hom_inv_id]
   rw [← Category.assoc, Hom.toImage_imageι, hx]
 
+/-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
+invertible, the evaluation `ev : M ⊗ Mᵛ ⟶ 𝒪_X`, `x ⊗ φ ↦ φ(x)`, is an isomorphism, and the
+canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism.
+
+(blueprint: `lem-sc-invertible-dual`) -/
+theorem Modules.isInvertible_dual_and_isIso_dualEvaluation_and_isIso_bidual {X : Scheme.{u}}
+    (M : X.Modules) [M.IsInvertible] :
+    Mᵛ.IsInvertible ∧ IsIso (Modules.dualEvaluation M) ∧
+      IsIso (SheafOfModules.bidual (R := X.sheaf) M) := by
+  have := Modules.IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} M :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+  exact ⟨inferInstance, inferInstance, SheafOfModules.isIso_bidual (R := X.sheaf) M⟩
+
 end Sections
 
 
@@ -231,31 +249,50 @@ section Curve
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
 
-/-- **`χ = h⁰ - h¹` on a curve.** On a smooth proper curve `X` over `k`, the Euler
-characteristic of every `𝒪_X`-module `M` is `χ(M) = h⁰(M) - h¹(M)`, since `H^q(X, M) = 0` for
-`q ≥ 2` by Grothendieck vanishing. -/
-theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules) :
-    M.eulerChar k = M.finrankH k 0 - M.finrankH k 1 := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  rw [Modules.eulerChar_eq_sum_range k M
-    (topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1)]
-  simp [Finset.sum_range_succ]
-  ring
-
 variable (k) in
 include k in
 /-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
-`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
-dimension at most one, so this is Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
+`H^q(X, ℱ) = 0` for every quasi-coherent `𝒪_X`-module `ℱ` and every `q ≥ 2`.
+
+Choose a finite morphism `π : X ⟶ ℙ¹_k` (`exists_isFinite_flat_hom_projectiveLine`). As `π` is
+affine, `H^q(X, ℱ) ≅ H^q(ℙ¹_k, π_* ℱ)` with `π_* ℱ` quasi-coherent
+(`nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`), and the cohomology of a
+quasi-coherent module on `ℙ¹_k`, which is computed by the Čech complex of the two standard affine
+opens, vanishes in degrees `q ≥ 2` (`ProjectiveLine.subsingleton_H_of_two_le`). The blueprint
+uses instead a cover of `X` by two affine opens.
 
 (blueprint: `lem-pc-vanishing-above-dim`) -/
-theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
+theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
-    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
-  exact_mod_cast hq
+  obtain ⟨π, hπ, hfin, -, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨e⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k π q
+  have := Modules.isQuasicoherent_pushforward_of_isAffineHom π ℱ
+  have h := ProjectiveLine.subsingleton_H_of_two_le (k := k) ((Modules.pushforward π).obj ℱ) hq
+  have h' : Subsingleton ((Modules.cohomologyFunctor k q).obj ((Modules.pushforward π).obj ℱ)) := h
+  exact @Equiv.subsingleton _ _ (e.app ⟨ℱ, ‹_›⟩).toLinearEquiv.toEquiv h'
+
+/-- **`χ = h⁰ - h¹` on a curve.** On a smooth proper curve `X` over `k`, the Euler
+characteristic of every quasi-coherent `𝒪_X`-module `M` is `χ(M) = h⁰(M) - h¹(M)`, since
+`H^q(X, M) = 0` for `q ≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`). -/
+theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] :
+    M.eulerChar k = M.finrankH k 0 - M.finrankH k 1 := by
+  rw [Modules.eulerChar_eq_sum_range_of_subsingleton k M (D := 1) fun q hq ↦
+    Modules.subsingleton_H_of_two_le k M hq]
+  simp [Finset.sum_range_succ]
+  ring
+
+/-- For an ideal sheaf `J` and an invertible module `M`, the cokernel `M|_D` of
+`J ⊗ M ⟶ 𝒪_X ⊗ M` is quasi-coherent. -/
+lemma IdealSheafData.isQuasicoherent_cokernel_whiskerRight (J : X.IdealSheafData)
+    (M : X.Modules) [M.IsInvertible] :
+    SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (cokernel (J.toModulesι ▷ M)) := by
+  have := Modules.isQuasicoherent_toModules J
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := Modules.isQuasicoherent_tensorObj J.toModules M
+  have := Modules.isQuasicoherent_tensorObj (𝟙_ X.Modules) M
+  exact Modules.isQuasicoherent_cokernel _
 
 /-- **Effective divisors on curves are finite.** Let `D` be an effective Cartier divisor on a
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
@@ -323,6 +360,7 @@ theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.Ideal
     exact Modules.finrankH_zero_eq_finrankΓ_of_isFinite _
   have h₁ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 1 = 0 :=
     Module.finrank_zero_of_subsingleton
+  have := J.isQuasicoherent_cokernel_whiskerRight M
   rw [Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h₀, h₁]
   simp
 
@@ -350,6 +388,12 @@ theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.Id
   have e₂ : S.X₂ ≅ M := λ_ M
   have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
   have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) M
+  have := J.isQuasicoherent_cokernel_whiskerRight M
+  have := Modules.isQuasicoherent_toModules J
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) S.X₁ :=
+    Modules.isQuasicoherent_tensorObj J.toModules M
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) S.X₂ :=
+    Modules.IsInvertible.isQuasicoherent _
   have h := Modules.eulerChar_eq_add_of_shortExact k hS 1
     (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
     (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
@@ -407,7 +451,7 @@ theorem IdealSheafData.IsInvertible.finrankΓ_subschemeι_pow_comp {J : X.IdealS
     have := hJ.isFinite_subschemeι_comp (k := k)
     have := (hJ.pow n).isFinite_subschemeι_comp (k := k)
     have : IsFinite ((J ^ n * J).subschemeι ≫ X ↘ Spec (.of k)) :=
-      ((hJ.pow n).mul hJ).isFinite_subschemeι_comp
+      ((hJ.pow n).mul_effectiveCartier hJ).isFinite_subschemeι_comp
     rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, ih, Nat.succ_mul]
 
 /-- **Twisting by a large multiple of a divisor produces sections.** Let `D` be a non-empty
@@ -427,6 +471,8 @@ theorem Modules.exists_finrankH_zero_pos_tensorObj_dual_pow (ℒ : X.Modules) [�
   have hd := Hom.finrankΓ_pos_of_isFinite (J.subschemeι ≫ X ↘ Spec (.of k))
   refine ⟨(1 - ℒ.eulerChar k).toNat, fun n hn ↦ ?_⟩
   have h₁ := (hJ.pow n).eulerChar_tensorObj_dual_toModules (k := k) ℒ
+  have := (hJ.pow n).isInvertible_dual_toModules
+  have := Modules.IsInvertible.isQuasicoherent (ℒ ⊗ (J ^ n).toModulesᵛ)
   have h₂ := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k)
     (ℒ ⊗ (J ^ n).toModulesᵛ)
   have h₃ := (hJ.finrankΓ_subschemeι_pow_comp (k := k) n).ge.trans'
@@ -495,7 +541,7 @@ theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [
   let J : X.IdealSheafData := ∏ i, IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩
   have hJ : J.IsInvertible := Finset.prod_induction _
     (fun I : X.IdealSheafData ↦ I.IsInvertible)
-    (fun _ _ ha hb ↦ ha.mul hb) IdealSheafData.isInvertible_top fun i _ ↦
+    (fun _ _ ha hb ↦ ha.mul_effectiveCartier hb) IdealSheafData.isInvertible_top fun i _ ↦
       isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) (hxcl i)
   have hJx (i : Fin m) : x i ∈ J.support := by
     have hle : J ≤ IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩ := by
@@ -674,6 +720,7 @@ Without the hypothesis `H⁰(X, 𝒪_X) = k` the statement fails, as for `ℙ¹_
 theorem eulerChar_unit_eq :
     Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) =
       1 - (arithmeticGenus k X : ℤ) := by
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   refine (Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one
     (SheafOfModules.unit X.ringCatSheaf)).trans ?_
   rw [Modules.finrankH_unit_zero]
@@ -693,6 +740,8 @@ theorem eulerChar_free_eq (r : ℕ) :
     Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
       r * (1 - (arithmeticGenus k X : ℤ)) := by
   let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (ULift.{u} (Fin r))
   have hb := biconeIsBilimitOfColimitCoconeOfIsColimit
     (colimit.isColimit (Discrete.functor fun _ : ULift.{u} (Fin r) ↦ O))
   have (q : ℕ) : FiniteDimensional k (O.H q) :=
@@ -882,6 +931,75 @@ theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     f.unop.hom x
   rw [Modules.H.zeroLinearEquiv_map]
   exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
+
+/-- **Serre duality in dimension `0`, with the trace formula.** Let `X` be smooth and proper of
+relative dimension `0` over `k`, so `X = Spec A` with `A = Γ(X, ⊤)` finite étale over `k`. There
+is an isomorphism `e : (ℱ ↦ H^0(X, ℱ)^∨) ≅ (ℱ ↦ H^0(X, ℱᵛ))` of contravariant functors on finite
+locally free `ℱ` whose inverse is the trace pairing: a global section `x` of `ℱᵛ`, i.e. a
+morphism `ℱ ⟶ 𝒪_X`, is sent to the functional `m ↦ Tr_{A/k}(x(m))` on `H^0(X, ℱ)`. That is,
+the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`.
+
+(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
+    [IsProper (X ↘ Spec (.of k))] :
+    letI := (globalSectionsRingHom k (X := X)).toAlgebra
+    ∃ e : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
+      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
+        Modules.cohomologyFunctor k 0,
+      ∀ (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ)
+        (x : Modules.H (ℱ.unop.obj : X.Modules)ᵛ 0)
+        (m : Modules.H (ℱ.unop.obj : X.Modules) 0),
+        DFunLike.coe (F := Module.Dual k (Modules.H (ℱ.unop.obj : X.Modules) 0))
+          ((e.inv.app ℱ).hom x) m =
+        Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ.unop.obj
+          (SheafOfModules.unit _) x).app ⊤ (Modules.H.zeroLinearEquiv ℱ.unop.obj m)) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have hX : (globalSectionsRingHom k (X := X)).Etale := by
+    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
+      (f := X ↘ Spec (.of k))).mp inferInstance
+    rw [globalSectionsRingHom, CommRingCat.hom_comp]
+    exact RingHom.Etale.stableUnderComposition _ _
+      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
+  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
+    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
+    have : ℱ.obj.IsQuasicoherent := inferInstance
+    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
+  choose e he using he
+  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm,
+    fun ℱ x m ↦ ?_⟩
+  · ext x
+    refine LinearMap.ext fun m ↦ ?_
+    change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
+      e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
+    let := (globalSectionsRingHom k (X := X)).toAlgebra
+    refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
+      (he ℱ.unop x _).symm)
+    have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
+      f.unop.hom x
+    rw [Modules.H.zeroLinearEquiv_map]
+    exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
+  · exact he ℱ.unop x m
+
+/-- **Serre duality in dimension `0`, positive degrees.** Let `X` be smooth and proper of
+relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then for every finite
+locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
+`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
+
+(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
+    [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
+    Subsingleton (ℱ.H q) ∧ Subsingleton (ℱᵛ.H q) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have : ℱᵛ.IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual ℱ
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq.ne'
+  exact ⟨Modules.subsingleton_H_succ_of_isAffine ℱ q,
+    Modules.subsingleton_H_succ_of_isAffine ℱᵛ q⟩
 
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/
@@ -1076,6 +1194,7 @@ lemma Modules.exists_app_cokernel_π_ne_zero (N : X.Modules) [N.IsInvertible]
     have h := hJ.eulerChar_cokernel_whiskerRight (k := k) N
     have h1 : Modules.finrankH k (cokernel (x.1.ker.toModulesι ▷ N)) 1 = 0 :=
       Module.finrank_zero_of_subsingleton
+    have := x.1.ker.isQuasicoherent_cokernel_whiskerRight N
     rw [Hom.finrankΓ_subschemeι_ker_fieldPoints,
       Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
     simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
@@ -1276,6 +1395,11 @@ theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
   have h1 : Modules.finrankH k (X ↘ Spec (.of k)).relativeDifferentials 1 = 1 := by
     rw [← Modules.finrankH_congr k (whiskerRightIso d _ ≪≫ λ_ _) 1, ← h]
     exact Modules.finrankH_unit_zero
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf)
+      (X ↘ Spec (.of k)).relativeDifferentials :=
+    Modules.IsInvertible.isQuasicoherent _
   rw [Modules.degree, Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one,
     finrankH_relativeDifferentials_zero_eq_arithmeticGenus, h1, eulerChar_unit_eq]
   push_cast
@@ -1600,6 +1724,39 @@ theorem isReduced_baseChange [GeometricallyReduced (X ↘ Spec (.of k))] :
   GeometricallyReduced.geometrically_isReduced (f := X ↘ Spec (.of k)) _ _ _
     (IsPullback.of_hasPullback _ _)
 
+/-- **Smooth morphisms with geometrically connected fibres are geometrically integral**: their
+base changes to fields are smooth over a field, hence regular, so they are reduced and, being
+connected, irreducible.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected
+    {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [GeometricallyConnected f] :
+    GeometricallyIntegral f :=
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected f
+  have := GeometricallyReduced.of_smooth f
+  .of_geometricallyReduced_of_geometricallyIrreducible f
+
+/-- **Geometric integrality.** A smooth connected scheme `X` over a separably closed field `k`,
+e.g. a smooth projective curve, is geometrically integral over `k`: it is geometrically
+connected (`AlgebraicGeometry.GeometricallyConnected.of_isSepClosed`) and smooth.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed [IsSepClosed k]
+    [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] : GeometricallyIntegral (X ↘ Spec (.of k)) :=
+  have := GeometricallyConnected.of_isSepClosed (k := k) X
+  .of_smooth_of_geometricallyConnected _
+
+/-- **Base change of a smooth curve is integral.** For a smooth connected scheme `X` over a
+separably closed field `k`, e.g. a smooth projective curve, and a field extension `K/k`, the base
+change `X_K = X ×_{Spec k} Spec K` is integral.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem isIntegral_baseChange [IsSepClosed k] [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] :
+    IsIntegral (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
+  (GeometricallyIntegral.of_isSepClosed (k := k) (X := X)).geometrically_isIntegral _ _ _
+    (IsPullback.of_hasPullback _ _)
+
 end FieldExtension
 
 section BaseChange
@@ -1619,7 +1776,7 @@ Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, thr
 `χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
 `𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
 
-(blueprint: `sk-cor-picard-degree-g`) -/
+(blueprint: `sk-cor-picard-degree-g`, `cor-picard-degree-g`) -/
 theorem degree_eq_genus [GlobalSectionsBijective k X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
@@ -1777,6 +1934,7 @@ theorem finrankH_zero_tensorObj_pullback_toModules_ker_add_one
     have h := hJ.eulerChar_cokernel_whiskerRight (k := K) L
     have h1 : Modules.finrankH K (cokernel ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 1 = 0 :=
       Module.finrank_zero_of_subsingleton
+    have := (x.1.ker.comap 𝔭).isQuasicoherent_cokernel_whiskerRight L
     rw [finrankΓ_subschemeι_comap_ker_fieldPoints,
       Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
     simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
