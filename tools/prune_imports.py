@@ -150,7 +150,7 @@ def loop():
                         if y not in seen: seen.add(y); stack.append(y)
                 return len(seen)
             batch = [m for m in recent + backlog[:60] if path(m).is_file()]
-            light = [m for m in batch if dependents(m) <= 30]
+            light = [m for m in batch if dependents(m) == 0]   # 2026-10-16: only modules nothing imports (pruning a module others import broke instances and transitive names downstream, 6749321d3f)
             st.setdefault("heavy", []); st["heavy"] = sorted(set(st["heavy"]) | (set(batch) - set(light)))
             backlog = backlog[60:]
             done = run(light, False)
