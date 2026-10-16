@@ -26,7 +26,8 @@
   "def-sp-filtered-complex-subquotients",
   "def-pc-module-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-derived-tensor-second-factor-functor"
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sp-finite-filtration-induction"
  ],
  "proof": [
   {
@@ -338,5 +339,37 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-2ab07ff33 (reviewer sub-agent of L); spot-checked: Read the complete item, all seven proof steps, unit/chapter route, cited DAG statements, and Stacks sources (section-kunneth-spectral-sequence, Tags 0H7Y, 00HL, 0117, 06Y6). Verified filtration bounds, quotient flatness induction, diagonal kernel and canonical graded isomorphism, K-flatness, derived base-change category D(R), naturality, and filtered quasi-isomorphism preservation. Tested zero, one-layer, gaps, negative indices, zero ring, and unbounded complexes. No duplicates, circularity, missing citations, false claims, or repairs found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredTensorGradedComparison",
+  "declaration": "CochainComplex.filteredTensor_graded_comparison",
+  "declarations": [
+   "CochainComplex.HasKunnethFiltration",
+   "CochainComplex.KunnethFilteredComplex",
+   "CochainComplex.kunnethTensorSteps",
+   "CochainComplex.kunnethTensorGraded",
+   "CochainComplex.kunnethConvolutionArrow",
+   "CochainComplex.kunnethConvolution_decreasing",
+   "CochainComplex.kunnethConvolution",
+   "CochainComplex.kunnethConvolutionObject",
+   "CochainComplex.kunnethGradedProjection",
+   "CochainComplex.kunnethDerivedGraded",
+   "CochainComplex.filteredTensor_graded_comparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTensorGradedComparison.lean",
+  "statement": "theorem filteredTensor_graded_comparison : ∃ (m : ∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'), kunnethConvolutionObject P.obj Q.obj ⟶ kunnethConvolutionObject P'.obj Q'.obj) (l : ∀ (P Q : KunnethFilteredComplex R) (a i : ℤ), kunnethTensorSteps P.obj Q.obj a i ⟶ ((kunnethConvolution P.obj Q.obj).step a : CochainComplex (ModuleCat.{u} R) ℤ)) (e : ∀ (P Q : KunnethFilteredComplex R) (a : ℤ), (∐ kunnethTensorGraded P.obj Q.obj a) ≅ (kunnethConvolution P.obj Q.obj).gradedPiece a) (c : ∀ P Q : KunnethFilteredComplex R, DerivedCategory.Q.obj P.obj.obj ⊗ DerivedCategory.Q.obj Q.obj.obj ≅ DerivedCategory.Q.obj (P.obj.obj ⊗ Q.obj.obj)) (cgr : ∀ (P Q : KunnethFilteredComplex R) (a i : ℤ), kunnethDerivedGraded P.obj Q.obj a i ≅ DerivedCategory.Q.obj (kunnethTensorGraded P.obj Q.obj a i)), (∀ P Q : KunnethFilteredComplex R, HasKunnethFiltration (kunnethConvolutionObject P.obj Q.obj)) ∧ (∀ (P Q : KunnethFilteredComplex R) (a i : ℤ), l P Q a i ≫ ((kunnethConvolution P.obj Q.obj).step a).arrow = (P.obj.filtration.step i).arrow ⊗ₘ (Q.obj.filtration.step (a - i)).arrow) ∧ (∀ (P Q : KunnethFilteredComplex R) (a i : ℤ), (kunnethGradedProjection P.obj i ⊗ₘ kunnethGradedProjection Q.obj (a - i)) ≫ Sigma.ι (kunnethTensorGraded P.obj Q.obj a) i ≫ (e P Q a).hom = l P Q a i ≫ kunnethGradedProjection (kunnethConvolutionObject P.obj Q.obj) a) ∧ (∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'), (m P P' Q Q' f g).hom = f.hom.hom ⊗ₘ g.hom.hom) ∧ (∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q') (a : ℤ), CategoryTheory.Limits.Sigma.map (f := kunnethTensorGraded P.obj Q.obj a) (g := kunnethTensorGraded P'.obj Q'.obj a) (fun i ↦ FilteredObject.gradedMapSteps f.hom i ⊗ₘ FilteredObject.gradedMapSteps g.hom (a - i)) ≫ (e P' Q' a).hom = (e P Q a).hom ≫ FilteredObject.gradedMapSteps (m P P' Q Q' f g) a) ∧ (∀ P Q : KunnethFilteredComplex R, m P P Q Q (𝟙 P) (𝟙 Q) = 𝟙 _) ∧ (∀ (P P' P'' Q Q' Q'' : KunnethFilteredComplex R) (f : P ⟶ P') (f' : P' ⟶ P'') (g : Q ⟶ Q') (g' : Q' ⟶ Q''), m P P'' Q Q'' (f ≫ f') (g ≫ g') = m P P' Q Q' f g ≫ m P' P'' Q' Q'' f' g') ∧ (∀ P Q : KunnethFilteredComplex R, (c P Q).hom = Functor.LaxMonoidal.μ DerivedCategory.Q P.obj.obj Q.obj.obj) ∧ (∀ (P Q : KunnethFilteredComplex R) (a i : ℤ), (cgr P Q a i).hom = Functor.LaxMonoidal.μ DerivedCategory.Q (P.obj.filtration.gradedPiece i) (Q.obj.filtration.gradedPiece (a - i))) ∧ (∀ (P Q : KunnethFilteredComplex R) (a : ℤ), Nonempty (IsColimit (Cofan.mk (DerivedCategory.Q.obj (∐ kunnethTensorGraded P.obj Q.obj a)) (fun i ↦ (cgr P Q a i).hom ≫ DerivedCategory.Q.map (Sigma.ι (kunnethTensorGraded P.obj Q.obj a) i))))) ∧ (∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q') (a : ℤ), DerivedCategory.Q.map (FilteredObject.gradedMapSteps (m P P' Q Q' f g) a) ≫ (DerivedCategory.Q.mapIso (e P' Q' a)).inv = (DerivedCategory.Q.mapIso (e P Q a)).inv ≫ DerivedCategory.Q.map (CategoryTheory.Limits.Sigma.map (f := kunnethTensorGraded P.obj Q.obj a) (g := kunnethTensorGraded P'.obj Q'.obj a) (fun i ↦ FilteredObject.gradedMapSteps f.hom i ⊗ₘ FilteredObject.gradedMapSteps g.hom (a - i)))) ∧ (∀ (P P' Q Q' : KunnethFilteredComplex R) (f : P ⟶ P') (g : Q ⟶ Q'), (∀ i : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom i)) → (∀ j : ℤ, QuasiIso (FilteredObject.gradedMapSteps g.hom j)) → ∀ a : ℤ, QuasiIso (FilteredObject.gradedMapSteps (m P P' Q Q' f g) a))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The convolution is constructed as the image of the coproduct of tensor inclusions. The generic finite-filtration node is added for its existing canonical restriction/graded-map API. The derived direct sum is expressed by its universal property on the localization of the complex direct sum, with canonical coprojections. Helper declarations package this node's hypotheses and formulas; the named monotonicity theorem is the decreasing-filtration clause of proof step 2."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-22cf607ae",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. Snapshot module compiles cleanly through scompile.py. No delivery faults found; accidental worker dry-run invocation documented."
  }
 }
