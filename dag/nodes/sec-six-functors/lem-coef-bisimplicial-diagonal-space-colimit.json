@@ -29,9 +29,103 @@
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D(Z)=\\int^{[n]}Z_n\\times\\Delta^n$. Compute this coend degree by degree using exactly the relation in the statement. Define $\\phi_r([z,t])=(Z(t))_r(z)\\in (Z_r)_r$ for $t:[r]\\to[n]$. Functoriality makes $\\phi_r$ respect the relation: both representatives of a generating relation map to $(Z(t))_r(Z(\\alpha))_r z=(Z(\\alpha t))_r z$. Its inverse sends $x\\in (Z_r)_r$ to $[x,1_{[r]}]$; the relation with $\\alpha=t$ identifies $[z,t]$ with $[(Z(t))_r z,1_{[r]}]$. These bijections respect every inner operator because the two directions of $Z$ commute, and applying an outer operator simultaneously gives exactly the diagonal operator. They are natural in $Z$. Thus $D=\\operatorname{diag}$ canonically. Define $U(K)_n=K^{\\Delta^n}$, where $(K^A)_r=\\operatorname{Hom}_{\\mathsf{sSet}}(A\\times\\Delta^r,K)$, and the outer operators are precomposition by maps of standard simplices. A map $D(Z)\\to K$ is a compatible family $Z_n\\times\\Delta^n\\to K$ by the quotient universal property; currying gives exactly a map $Z\\to U(K)$ of simplicial diagrams. This proves the ordinary adjunction $D\\dashv U$ and specifies its unit.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.29, coend construction; explicit degreewise co-Yoneda calculation supplied here"
+   }
+  },
+  {
+   "text": "Use [lem-coef-reedy-model-structure] for $\\Delta^{\\mathrm{op}}$ and the Kan model category. The category $\\Delta$ has countably many objects and finite Hom sets, so this is a small indexing category. The matching object of $U(K)$ at $n$ is $K^{\\partial\\Delta^n}$: its data are maps from each proper face, agreeing on intersections, and these glue uniquely to the union of the proper faces, degree by degree. For $n=0$ this is $K^\\varnothing=*$. For a Kan fibration $p:K\\to L$, the relative matching map is therefore\n$$K^{\\Delta^n}\\longrightarrow L^{\\Delta^n}\\times_{L^{\\partial\\Delta^n}}K^{\\partial\\Delta^n}.$$\nThe Kan model structure is simplicial for Cartesian enrichment by [lem-coef-simplicial-presheaf-projective-model]. Its simplicial model axiom, in the mapping-space formulation stated in [lem-coef-simplicial-model-nerve-localization], applied to the monomorphism $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ of [lem-coef-kan-quillen-right-proper] and $p$, makes this a fibration, trivial when $p$ is trivial. The relative matching characterization proves that $U$ preserves fibrations and trivial fibrations. By the adjunction in step 1, lifting squares for $D(i)$ against $p$ are precisely lifting squares for $i$ against $U(p)$; the two weak factorization systems therefore show that $D$ preserves cofibrations and trivial cofibrations. Thus $D\\dashv U$ is a Quillen adjunction.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.29: realization is left Quillen; matching-object verification supplied here"
+   }
+  },
+  {
+   "text": "For every Kan complex $K$, the collapses $\\Delta^n\\to\\Delta^0$ induce a natural map of simplicial diagrams $c_K:\\operatorname{const}K\\to U(K)$. Each component is a weak equivalence. Indeed, choose the zeroth vertex $v:\\Delta^0\\hookrightarrow\\Delta^n$. This is a monomorphism and a weak equivalence: the realization of the representable simplex identifies with the affine simplex by $[\\alpha,t]\\mapsto\\alpha_*t$, with inverse $t\\mapsto[1_{[n]},t]$; the defining realization relations give both inverse equations. The affine homotopy $(t,s)\\mapsto(1-s)t+s e_0$ contracts it onto $v$. Thus $v$ is a trivial cofibration in [lem-coef-kan-quillen-right-proper]. Apply the simplicial model axiom to $v$ and the fibration $K\\to *$. It makes evaluation $K^{\\Delta^n}\\to K$ a trivial fibration. Its composite with $c_{K,n}$ is the identity, so two-out-of-three makes $c_{K,n}$ a weak equivalence. This calculation includes $n=0$ and $K=\\varnothing$; evaluation is then the identity of the empty set. It proves an objectwise weak equivalence $c_K$ natural in Kan $K$, without a choice of vertex natural in $n$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.29: the cosimplicial standard simplex is objectwise weakly equivalent to the point; dual cotensor calculation supplied here"
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ denote the Reedy model category of bisimplicial sets. By [lem-coef-small-diagram-model-rectification], evaluation identifies $\\mathcal B[W_{\\mathrm{row}}^{-1}]_\\infty$ with $\\operatorname{Fun}(N(\\Delta^{\\mathrm{op}}),\\mathcal S)$, since its weak equivalences are exactly the rowwise ones; the statement applies to the underlying Kan model category without assuming any projective structure or cofibrancy of $Z$. Its comparison carries the ordinary constant-diagram functor to the coherent one. Here [lem-coef-simplicial-model-nerve-localization] identifies the localization of simplicial sets with $\\mathcal S$. By [lem-coef-model-infinity-derived-adjunction], step 2 induces $\\mathbf LD\\dashv\\mathbf RU$. By [lem-coef-bisimplicial-diagonal-equivalence], $D$ preserves every rowwise weak equivalence, so the derived left functor agrees with the directly localized diagonal on every $Z$, without imposing Reedy cofibrancy. The right functor on a space represented by a Kan $K$ is represented by $U(K)$. The natural weak equivalence of step 3 identifies it with $\\operatorname{const}K$. Hence this adjunction becomes $q\\operatorname{diag}\\dashv\\operatorname{const}$ under rectification, with all mapping spaces and coherent units retained.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.31 and Theorem 4.2.4.1 / Proposition 4.2.4.4: passage to coherent diagram categories, using the existing general localization nodes"
+   }
+  },
+  {
+   "text": "Spell out the unit so the cocone is fixed. Write $T=D(Z)$ and choose a functorial fibrant replacement $j:T\\to RT$ in the Kan model structure. The ordinary adjunction unit followed by $U(j)$ is the map $Z\\to U(RT)$ whose $n$th component is adjoint to\n$$Z_n\\times\\Delta^n\\longrightarrow D(Z)\\xrightarrow{j}RT.$$\nAfter localization, compose this map with the inverse of the diagram equivalence $c_{RT}:\\operatorname{const}RT\\to U(RT)$ of step 3, and identify $qRT$ with $qT$ using $qj$. This is the coend coherent cocone of the statement; it is generally not a strict cocone $Z_n\\to T$. The unit description in [lem-coef-model-infinity-derived-adjunction] proves it is exactly the unit of the adjunction in step 4. For each space $Y$ that adjunction gives\n$$\\operatorname{Map}_{\\mathcal S}(qT,Y)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(\\Delta^{\\mathrm{op}}),\\mathcal S)}(qZ,\\operatorname{const}Y),$$\nby composition with this cocone. The dual cone criterion in [lem-cbc-enhanced-functor-cone-calculus] therefore makes the cocone colimiting. This proves the required equivalence together with its cocone, rather than only an isomorphism in the homotopy category.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.2.4.1 / Proposition 4.2.4.4; coherent unit and universal cocone check supplied here"
+   }
+  },
+  {
+   "text": "For a map $Z\\to Z'$ all coend structure maps and the bijections of step 1 commute strictly. Choose the same functorial fibrant replacement construction in step 5; $c$ is natural, and its inverse is taken in the localized functor category, so all the resulting transformations and homotopies are natural in $Z$. This proves naturality including cocones. At $n=0$ one has $U(RT)_0=(RT)^{\\Delta^0}=RT$ and $c_{RT,0}=1$. Thus evaluation of the cocone at $[0]$ is $q(Z_0\\times\\Delta^0\\to T)$, after cancelling the replacement equivalence $qj$, exactly as required. If all rows are empty, the coend and diagonal are empty and the same adjunction proves the empty apex is the colimit; no nonemptiness or Kan assumption on rows entered any step.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.31: naturality and the specified degree-zero cocone; explicit verification supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-small-diagram-model-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, enhancement of the derived coefficient-adjunction calculation. Explicit cotensor-adjunction proof supplied here; HTT A.2.9.29-A.2.9.31 read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +175,59 @@
    "results": "{\"t\": \"2026-10-16T19:02:05Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|[Hh]omotopy.?[Cc]olimit|[Rr]eedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
    "date": "2026-10-16",
    "verdict": "no match: Reedy/Basic.lean:14-24 defines Reedy structures and explicitly lists the Reedy model structure as TODO; no bisimplicial diagonal-colimit theorem appears."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|homotopy.?colimit|Reedy",
+   "results": "{\"t\": \"2026-10-16T19:48:54Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|homotopy.?colimit|Reedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet.toTop and sSetTopAdj concern ordinary topological realization; SimplicialObject.diagonal is the edge map to degree one; nerveAdjunction concerns categories. Reedy/Basic.lean:22-24 lists the Reedy model structure as TODO. None gives this coherent colimit or its cocone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization of a simplicial object in simplicial sets is its diagonal and is the homotopy colimit",
+   "results": "{\"t\": \"2026-10-16T19:48:54Z\", \"tool\": \"leansearch\", \"query\": \"Geometric realization of a simplicial object in simplicial sets is its diagonal and is the homotopy colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"CategoryTheory.SimplicialObject.diagonal\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"sSetTopAdj\", \"SSet\", \"SimplexCategory.toTop₀\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SimplexCategory.toTopMap\"], \"digest\": \"06a125fb0e4ae263\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet.toTop and sSetTopAdj concern ordinary topological realization; SimplicialObject.diagonal is the edge map to degree one; nerveAdjunction concerns categories. Reedy/Basic.lean:22-24 lists the Reedy model structure as TODO. None gives this coherent colimit or its cocone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T19:48:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet.toTop and sSetTopAdj concern ordinary topological realization; SimplicialObject.diagonal is the edge map to degree one; nerveAdjunction concerns categories. Reedy/Basic.lean:22-24 lists the Reedy model structure as TODO. None gives this coherent colimit or its cocone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a bisimplicial set computes the colimit of its rows in the infinity category of spaces",
+   "results": "{\"t\": \"2026-10-16T19:49:04Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of a bisimplicial set computes the colimit of its rows in the infinity category of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.horn.isColimit\", \"SSet.Truncated.hasColimits\", \"SSet.hasLimits\", \"CategoryTheory.SimplicialNerve\", \"SSet.instIsRegularEpiCategory\", \"SSet.cosk\"], \"digest\": \"646f205ae8b13f2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet.toTop and sSetTopAdj concern ordinary topological realization; SimplicialObject.diagonal is the edge map to degree one; nerveAdjunction concerns categories. Reedy/Basic.lean:22-24 lists the Reedy model structure as TODO. None gives this coherent colimit or its cocone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal functor from bisimplicial sets is left adjoint to the simplicial diagram of powers by standard simplices and computes geometric realization",
+   "results": "{\"t\": \"2026-10-16T19:49:52Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal functor from bisimplicial sets is left adjoint to the simplicial diagram of powers by standard simplices and computes geometric realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"sSetTopAdj\", \"SSet.toTop\", \"CategoryTheory.nerveAdjunction\", \"TopCat.toSSet\"], \"digest\": \"fa63412c8692ccb7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet.toTop and sSetTopAdj concern ordinary topological realization; SimplicialObject.diagonal is the edge map to degree one; nerveAdjunction concerns categories. Reedy/Basic.lean:22-24 lists the Reedy model structure as TODO. None gives this coherent colimit or its cocone."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|homotopy_colimit|bisimplicial|diagonalFunctor",
+   "results": "{\"t\": \"2026-10-16T20:02:24Z\", \"tool\": \"grep\", \"query\": \"homotopyColimit|homotopy_colimit|bisimplicial|diagonalFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader checked SingularSet.lean:65-100. The hits construct ordinary topological realization and its singular adjunction, rather than a coherent colimit of simplicial diagrams of spaces. The grep returned no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial diagram of spaces has geometric realization computed by the bisimplicial set diagonal, left adjoint to constant diagrams",
+   "results": "{\"t\": \"2026-10-16T20:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial diagram of spaces has geometric realization computed by the bisimplicial set diagonal, left adjoint to constant diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"sSetTopAdj\", \"SimplexCategory.toTop\", \"SimplexCategory.toTopObj\", \"SimplexCategory.toTop₀\", \"SimplexCategory.toTopMap\", \"TopCat.toSSet\"], \"digest\": \"d05f665370222e1b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader checked SingularSet.lean:65-100. The hits construct ordinary topological realization and its singular adjunction, rather than a coherent colimit of simplicial diagrams of spaces. The grep returned no declaration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-locally-constant-presheaf-slice",
@@ -92,5 +235,29 @@
   "group": "Q11"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bisimplicial-diagonal-space-colimit",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Proved the degreewise coend formula and ordinary cotensor adjunction, verified its Reedy Quillen condition, identified its derived right adjoint with constants, and verified the coherent unit and degree-zero cocone. Reused existing localization and diagonal-invariance nodes; no new nodes. No project declaration attaches and no Mathlib match was found.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent enhancement of the derived coefficient adjunction; this technical child computes the spaces realization with its cocone, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic model/localization or coherent-cone tool used through its stated universal property; it supplies no geometric biduality step and no statement of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-656b891a6",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-656b891a6 (reviewer sub-agent of L); spot-checked: I read the item in full, all nine cited node statements, the citer lem-coef-locally-constant-presheaf-slice step 5, and the ancestor prop-coef-integral-exceptional-adjoint in both blueprint snapshots (in main-20261015 it has moved to sk-thm-sf-package, not disappeared). The statement is unchanged from the base and true. I tested it on a constant non-Kan X (gives qX), discrete rows S_n (gives |S|), all-empty rows and degree 0. Step checks: (1) the coend-to-diagonal bijection and the cotensor adjunction D⊣U, including the variance of Z(t) and the commuting inner/outer operators. (2) Reedy matching objects on Δ^op come from face injections, so M_nU(K)=K^{∂Δ^n} and M_0=*; the relative matching map is SM7 (Kan structure simplicial by the presheaf-projective node), so D⊣U is Quillen. (3) Δ^0→Δ^n is a trivial cofibration, SM7 makes evaluation a trivial fibration, then 2-of-3; K=∅ is fine. (4) Rectification on sSet over Δ^op, the derived adjunction, and diagonal invariance give LD as the direct localization; c_{T(-)} identifies RU with constants. (5) The unit agrees with the replacement description by naturality, and the dual cone criterion makes the cocone colimiting. (6) Naturality and the degree-zero component (c_{RT,0}=1). There are no new nodes. The dependency closure has 212 nodes and no cycle. Duplicate rg search (bousfield-kan-comparison, model-colimit-localization-comparison, sifted-nerve, space-geometric-descent and others) found none. The tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, off-route) is accepted as a generic cone criterion. HTT is not archived, so proof_origin=agent is correct. FIX (C1/C3): step 4 relied on the Reedy model structure and on componentwise detection of equivalences in functor categories without citing them, so I added lem-coef-reedy-model-structure and lem-cbc-enhanced-functor-cone-calculus to step 4 uses. proof_deps is unchanged. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-bisimplicial-diagonal-space-colimit.json.; 1 file(s) fixed by the reviewer"
+ }
 }

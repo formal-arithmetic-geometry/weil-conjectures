@@ -24,11 +24,88 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\Delta^1$. An $n$-simplex of $E_f$ is a pair $(x,\\gamma)$ with $x:\\Delta^n\\to P$ and $\\gamma:I\\times\\Delta^n\\to Q$ satisfying $\\gamma(0,z)=f(x(z))$. Define $r(x,\\gamma)=x$, $p(x,\\gamma)(z)=\\gamma(1,z)$, and $i(x)=(x,\\gamma_x)$ where $\\gamma_x(s,z)=f(x(z))$. These formulas commute with all simplicial operators, and give $ri=\\mathrm{id}_P$ and $pi=f$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10: the path object and the factorization; formulas expanded degreewise."
+   }
+  },
+  {
+   "text": "Let $\\partial I\\subseteq I$ be the simplicial subset of constant maps $[m]\\to[1]$, i.e. the two vertices $\\{0\\}\\amalg\\{1\\}$; the inclusion is degreewise injective. Since $Q$ is Kan, $Q\\to\\Delta^0$ lifts every horn inclusion. Apply [lem-cbc-internal-hom-fibration-corner-map] to $\\partial I\\hookrightarrow I$ and $Q\\to\\Delta^0$. Both functor simplicial sets into $\\Delta^0$ are $\\Delta^0$, so the corner target is $\\operatorname{Fun}(\\partial I,Q)$; as $\\partial I\\times\\Delta^n$ is two disjoint copies of $\\Delta^n$, $\\operatorname{Fun}(\\partial I,Q)_n=Q_n\\times Q_n$ compatibly with all operators, and the restriction map becomes the endpoint map $e=(\\operatorname{ev}_0,\\operatorname{ev}_1):\\operatorname{Fun}(I,Q)\\to Q\\times Q$. Hence $e$ is a Kan fibration. Concretely, a horn $\\Lambda_k^n\\to\\operatorname{Fun}(I,Q)$ together with a simplex $\\Delta^n\\to Q\\times Q$ agreeing with its endpoints on $\\Lambda_k^n$ extends to $\\Delta^n\\to\\operatorname{Fun}(I,Q)$ with exactly those endpoints. Applying it with endpoint pair $(fx,b)$ gives the required path extension in Step 3.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Corollary 3.1.3.3 specialized to the monomorphism ∂Δ^1↪Δ^1, as used in Example 3.1.8.10 (0101), second bullet."
+   }
+  },
+  {
+   "text": "To lift a horn against $p$, write the given horn in $E_f$ as $(x_\\Lambda,\\gamma_\\Lambda)$ and the given simplex in $Q$ as $b:\\Delta^n\\to Q$, with $\\gamma_\\Lambda(1,-)=b|_{\\Lambda_k^n}$. Since $P$ is Kan, extend $x_\\Lambda$ to $x:\\Delta^n\\to P$. Step 2 applied to the horn $\\gamma_\\Lambda$ in $\\operatorname{Fun}(I,Q)$ and the endpoint pair $(fx,b)$ extends it to $\\gamma$ with endpoints exactly $(fx,b)$. Then $(x,\\gamma)$ is the required lift against $p$. Thus $p$ is a Kan fibration. In particular $E_f$ is Kan: fill the projection of any horn into $Q$ first and then lift that filler against $p$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10, second bullet; base change and composition of fibrations written as the two successive horn lifts."
+   }
+  },
+  {
+   "text": "There is an explicit simplicial homotopy $H:E_f\\times I\\to E_f$ from $ir$ to $\\mathrm{id}_{E_f}$. On an $n$-simplex $((x,\\gamma),t)$, where $t:\\Delta^n\\to I$, set $H((x,\\gamma),t)=(x,\\gamma_t)$ with $\\gamma_t(s,z)=\\gamma(\\min(s,t(z)),z)$. Here $\\min:I\\times I\\to I$ is the simplicial map induced by the order-preserving map $\\{0,1\\}\\times\\{0,1\\}\\to\\{0,1\\}$ taking the minimum; explicitly on simplices it is pointwise minimum of two monotone maps. Thus it commutes with precomposition by every simplex operator. Because $\\min(0,t)=0$, the initial endpoint remains $fx$, so $H$ takes values in $E_f$. At $t=0$ it is $ir$, and at $t=1$ it is the identity.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10, first bullet: elementary explicit contraction replacing the trivial-fibration argument; agent expansion."
+   }
+  },
+  {
+   "text": "For every small Kan complex $W$, precomposition with $i$ and $r$ gives maps $i^*:\\operatorname{Fun}(E_f,W)\\to\\operatorname{Fun}(P,W)$ and $r^*$ in the opposite direction. They induce inverse maps on edge components: $i^*r^*=\\mathrm{id}$ follows from $ri=\\mathrm{id}$, and for each vertex $a:E_f\\to W$, the map $aH:E_f\\times I\\to W$ is an edge from $a\\circ i\\circ r$ to $a$ in $\\operatorname{Fun}(E_f,W)$ (interchange the two product factors in the definition of $\\operatorname{Fun}$). Hence $r^*i^*$ induces the identity on these components. The cited Kan-target testing criterion, applied to $v=i$, now proves that $|i|$ induces the required bijection on path components and isomorphisms on all based homotopy groups. This is precisely the weak homotopy equivalence convention of the item.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Corollary 3.6.4.3 and Definition 3.1.7.12 (00UA); application of the existing realization/Kan-target criterion to the explicit homotopy."
+   }
+  },
+  {
+   "text": "Finally fix a vertex $q$ of $Q$. Degreewise, the strict fiber of $p$ consists of the pairs $(x,\\gamma)$ of Step 1 with $\\gamma(1,z)=q$ for every $z$. Its simplicial operators restrict those pairs. It is therefore exactly $P\\times_{Q,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,Q)\\times_{\\operatorname{ev}_1,Q}\\{q\\}$, the specified definition of the homotopy fiber. It is Kan: for a horn in this fiber, lift against $p$ using the constant simplex at $q$ as its prescribed projection. This proves the fiber clause without any comparison between ordinary fibers and homotopy fibers beyond the displayed equality.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6, strict fibers of the path fibration; equality with the homotopy-fiber formula of the definition node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, mapping-space foundations of the coherent finite coefficient adjunction. Online Kerodon 0101 supplies the path-fibration route; explicit contraction and horn arguments are agent expansions because the online source is not archived."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-contractible-fiber-equivalence",
@@ -51,7 +128,7 @@
    "query": "SSet PathObject fibration homotopy fiber",
    "results": "{\"t\": \"2026-10-16T16:35:20Z\", \"tool\": \"loogle\", \"query\": \"SSet PathObject fibration homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  PathObject\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations do not state the project-level theorem with its Kan-space or geometric homotopy-fiber hypotheses."
+   "verdict": "invalid query: Loogle reported Function expected at SSet; this parser error gives no evidence of absence. Subsequent valid searches and source inspection supply the search evidence."
   },
   {
    "tool": "grep",
@@ -59,8 +136,67 @@
    "results": "{\"t\": \"2026-10-16T16:35:20Z\", \"tool\": \"grep\", \"query\": \"path.?object|PathObject|homotopy.?fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"3cf8937ea0a4c987\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned Mathlib declarations do not state the project-level theorem with its Kan-space or geometric homotopy-fiber hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map of Kan complexes the mapping path space gives a Kan fibration replacement with a weak homotopy equivalence constant path inclusion",
+   "results": "{\"t\": \"2026-10-16T18:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a map of Kan complexes the mapping path space gives a Kan fibration replacement with a weak homotopy equivalence constant path inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.toPrepathObject\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.RightHomotopy.exists_good_pathObject\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\"], \"digest\": \"82cb5e65d7d5529d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the abstract PathObject declarations assume the path object weak-equivalence or fibration data, and do not construct this internal-exponential replacement or identify its geometric-realization weak equivalence. Source inspected in ModelCategory/PathObject.lean and SimplicialSet/Path.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "PathObject|path.?fibration|homotopyFiber|homotopy.fiber",
+   "results": "{\"t\": \"2026-10-16T18:30:58Z\", \"tool\": \"grep\", \"query\": \"PathObject|path.?fibration|homotopyFiber|homotopy.fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"44a6ff46aa738d28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the abstract PathObject declarations assume the path object weak-equivalence or fibration data, and do not construct this internal-exponential replacement or identify its geometric-realization weak equivalence. Source inspected in ModelCategory/PathObject.lean and SimplicialSet/Path.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping path space factorization of a map of Kan complexes into a weak equivalence followed by a fibration",
+   "results": "{\"t\": \"2026-10-16T18:30:59Z\", \"tool\": \"leansearch\", \"query\": \"Mapping path space factorization of a map of Kan complexes into a weak equivalence followed by a fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"HomotopicalAlgebra.CofibrantBrownFactorization\", \"HomotopicalAlgebra.PathObject.noConfusionType\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_p₀\", \"HomotopicalAlgebra.PathObject.toPrepathObject\", \"HomotopicalAlgebra.FibrantBrownFactorization\", \"HomotopicalAlgebra.FibrantBrownFactorization.toMapFactorizationData\"], \"digest\": \"d5ef5d0eb5e120bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the abstract PathObject declarations assume the path object weak-equivalence or fibration data, and do not construct this internal-exponential replacement or identify its geometric-realization weak equivalence. Source inspected in ModelCategory/PathObject.lean and SimplicialSet/Path.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Path",
+   "results": "{\"t\": \"2026-10-16T18:30:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.Path\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Path\", \"SSet.spine\", \"SSet.stdSimplex.spineId\", \"SSet.Path.arrow\", \"SSet.Path.interval\", \"SSet.Path.map\", \"SSet.Path.vertex\", \"SSet.Path.congr_arrow\"], \"digest\": \"6b6e0f3a480b0d6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.Path is a finite string of edges, not the internal exponential path object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the simplicial path object along a map gives a fibration replacement and constant paths are a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T18:31:09Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of the simplicial path object along a map gives a fibration replacement and constant paths are a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"3f351254d82bb9b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the abstract PathObject declarations assume the path object weak-equivalence or fibration data, and do not construct this internal-exponential replacement or identify its geometric-realization weak equivalence. Source inspected in ModelCategory/PathObject.lean and SimplicialSet/Path.lean."
   }
  ],
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-path-fibration-replacement",
+  "worker": "stage1",
+  "summary": "Proved the factorization by degreewise formulas, endpoint lifting through the existing Mathlib leaf lem-cbc-internal-hom-fibration-corner-map specialized to the two-endpoint inclusion, two successive horn lifts, and explicit minimum contraction. Used the existing geometric-realization testing criterion to obtain the specified weak equivalence. The fiber clause is exactly the existing homotopy-fiber definition. No new node (the proposed endpoint-evaluation leaf was a special case of the existing corner-map leaf and was dropped at maintainer review); no item statement change or Lean attachment.",
+  "blueprint": "Realizes the path-fibration foundation under paragraph 2 of prop-coef-integral-exceptional-adjoint, through lem-coef-space-contractible-fiber-equivalence and the recorded enhancement ancestry; it expands a foundational tool below the fixed unit route. Whole-blueprint searches for path, Kan and 00TM found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic realization-versus-Kan-target testing criterion, used only to recognize the explicit simplicial contraction as a weak equivalence in the definition fixed by the item. The biduality unit supplies no simplicial realization comparison; its coefficient or geometric route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-2cf41cd7b",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-2cf41cd7b (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit and chapter, the main-20261015 ancestor proof paragraph 2, Kerodon 0101 and 00TM online, and the Mathlib source PushoutProduct.lean 70-93 and 144-147. The item is true as stated. Its orientations agree with 0101: ev0 attaches P and ev1 gives p. Kan fibrations include outer horns. I tested the empty, point, identity, missed-component and n=1 outer-horn cases. All six steps check: Step 1 by degreewise formulas giving ri=id and pi=f; Step 3 by two successive lifts whose compatibility on the horn I verified; Step 4 by the min-contraction formula with both endpoints checked; Step 5 because i*r*=id and the edge aH make r*i* the identity on edge components, so the cited realization criterion applies; Step 6 because the strict fiber is literally the definition node's homotopy fiber. I accept the declared tool use of lem-cbc-realization-weak-equivalence. Fault (C5): the new node is a special case of the existing Mathlib leaf lem-cbc-internal-hom-fibration-corner-map (SSet.fibration_pullbackObjObjπ), taken with the inclusion of the boundary of Delta^1 into Delta^1 and the map Q to Delta^0. Step 6 of lem-cbc-kan-fibration-fiber-criterion already makes this specialization. Fix: I dropped the node and rewrote Step 2 to cite that leaf with the explicit identification Fun(boundary of Delta^1, Q)_n = Q_n x Q_n; proof_deps and the summary are updated and there is no cycle. Maintainer note: the existing lem-cbc-kan-fibration-fiber-criterion already states the item's fibration and constant-path weak-equivalence clauses, and its step 9 gives the fiber equality. This is a duplicate candidate for a merge, or for the parent to cite it. I kept the item's correct, lighter proof.; 1 file(s) fixed by the reviewer"
+ }
 }
