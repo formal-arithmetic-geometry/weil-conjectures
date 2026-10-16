@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-exc-proetale-sections-with-support",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The pro-etale sheaf exceptional-image construction",
- "statement": "Let $i:Z\\hookrightarrow T$ be a\nclosed immersion\nwith complementary open immersion $j$, and let $A$ be a\nfinite commutative ring. For a\npro-etale module sheaf\n$N$ on $T$, set\n\n$$\ni^!_0N=i^*\\ker\\bigl(N\\longrightarrow j_*j^*N\\bigr).\n$$\n\nThe map in this formula is the unit of the open\ninverse-image and\ndirect-image adjunction. A morphism of sheaves induces a\nmap of these kernels and then its closed inverse image;\nthis specifies the functor on morphisms. No adjunction or\nconstructibility property is part of this construction.",
+ "statement": "Let $i:Z\\hookrightarrow T$ be a closed immersion with complementary open immersion $j:U\\hookrightarrow T$ (so $j(U)=T\\setminus i(Z)$), in the scheme conventions of [def-weil-pbc-scheme-conventions], and let $A$ be a finite commutative ring with the discrete topology. For $S=T,U,Z$, write $A_S=A_{S,\\mathrm{Proet}}$ for the coefficient ring sheaf and $\\operatorname{Mod}(S_{\\mathrm{Proet}},A)=\\operatorname{Mod}(A_S)$ for the category of module sheaves defined in [def-weil-pbc-proetale-modules]. In particular these are modules over the coefficient ring sheaf, not a separately chosen category of fixed-category-valued sheaves.\n\nUse the canonical coefficient isomorphisms $c_u:u^{-1}A_T\\xrightarrow{\\sim}A_S$ of [prop-weil-pbc-proetale-constant-ring-map], for $u=j,i$ and $S=U,Z$ respectively. Let $j^*,j_*,i^*$ be the underived module inverse and direct images of [def-weil-pbc-proetale-operations] with these coefficient identifications. Write $\\eta:\\operatorname{id}\\to j_*j^*$ for the unit of its module adjunction $j^*\\dashv j_*$.\n\nFor $N\\in\\operatorname{Mod}(T_{\\mathrm{Proet}},A)$ set\n$$\nK_N=\\ker_{\\operatorname{Mod}(A_T)}(\\eta_N:N\\longrightarrow j_*j^*N),\\qquad i^!_0N=i^*K_N.\n$$\nThe kernel is the sectionwise module kernel of [def-weil-sheaf-of-modules-category]: on each object $W\\to T$ its sections are the sections $s\\in N(W)$ with $\\eta_N(W)(s)=0$, with the inherited $A_T(W)$-action and restrictions.\n\nFor an $A_T$-linear sheaf morphism $f:N\\to N'$, let $K(f):K_N\\to K_{N'}$ be the restriction of $f$ to these kernels, equivalently the unique kernel map satisfying $\\kappa_{N'}\\circ K(f)=f\\circ\\kappa_N$, where $\\kappa_N:K_N\\to N$ is the kernel inclusion. The defining commutative square is\n$$\n\\eta_{N'}\\circ f=(j_*j^*f)\\circ\\eta_N.\n$$\nDefine $i^!_0(f)=i^*(K(f))$. This specifies the functor\n$$\ni^!_0:\\operatorname{Mod}(T_{\\mathrm{Proet}},A)\\longrightarrow\\operatorname{Mod}(Z_{\\mathrm{Proet}},A).\n$$\nNo exceptional adjunction or constructibility property is part of this construction.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/def-exc-proetale-sections-with-support.md",
   "place": "node def-exc-proetale-sections-with-support, order 1858"
@@ -15,14 +15,115 @@
  "stmt_deps": [
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functor on pro-etale module sheaves defined by closed inverse image of kernel of N to j_* j^* N",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, Scheme.Modules.pushforward, Scheme.Modules.restrict, PresheafOfModules differentials constructions, and SheafOfModules.Presentation.map.",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme structure-sheaf modules and module presentations do not define this pro-etale coefficient-ring kernel composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, kernel, inverse image, sheaf",
+   "results": "0 hits; loogle: unknown identifier 'kernel'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|kernel.*j_\\*",
+   "results": "[grep] OK 0 hit(s); subdirectory argument Mathlib/",
+   "date": "2026-10-17",
+   "verdict": "no match in returned results; repeated with the default Mathlib root below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image for pro-etale sheaves of modules using kernel of unit to open direct image",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; Scheme.Modules.pushforwardId_inv_app_app; Scheme.Modules.restrictStalkNatIso; Scheme.Modules.restrictAdjunction_unit_app_app; SheafOfModules.pushforwardCongr_inv_app_val_app; SheafOfModules.unitHomEquiv_apply_coe.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module adjunction formulas, not the pro-etale kernel construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections with support kernel unit open immersion direct image closed inverse image sheaf modules",
+   "results": "8 hits: Scheme.Modules.restrictAdjunction_unit_app_app, Scheme.Hom.toImage_app, IsOpenImmersion.ΓIsoTop, Scheme.Modules.restrict_map, Scheme.Modules.restrict_obj, IsOpenImmersion.ΓIso, IsOpenImmersion.map_ΓIso_inv_apply, Scheme.image_zeroLocus.",
+   "date": "2026-10-17",
+   "verdict": "no match: structure-sheaf module restriction and scheme-image formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, SheafOfModules, pullback",
+   "results": "0 hits; loogle: unknown identifier 'pullback'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|sectionsWithSupport|closedUpperShriek",
+   "results": "[grep] OK 0 hit(s); arguments Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match in returned results; repeated with a correctly relative subdirectory below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of the adjunction unit N to direct image of inverse image along open immersion, then pull back along closed immersion",
+   "results": "8 hits: Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; Scheme.Modules.restrictAdjunction_unit_app_app; Scheme.Modules.restrictAdjunction_counit_app_app; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk; AlgebraicGeometry.pullbackRestrictIsoRestrict; Scheme.Modules.restrictAdjunction; SheafOfModules.pullbackObjUnitToUnit; IsOpenMap.adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match: ideal-sheaf pullback and topological or structure-sheaf adjunctions differ from this construction"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|pullbackPushforwardAdjunction|restrictAdjunction",
+   "results": "10 hits under Algebra/Category/ModuleCat/Sheaf: SheafOfModules.pullbackPushforwardAdjunction in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60 and its uses, and PullbackFree.lean adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: the generic module adjunction supplies an ingredient, not the pro-etale coefficient identifications and kernel composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction; conjugateEquiv_pullbackId_hom; conjugateEquiv_pullbackComp_inv; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read PullbackContinuous.lean:31-64.",
+   "date": "2026-10-17",
+   "verdict": "no match for whole definition: generic ringed-site adjunction is only an ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek",
+   "results": "[grep] OK 0 hit(s); default Mathlib root",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel functor of a natural transformation between additive functors on sheaves of modules",
+   "results": "{\"t\": \"2026-10-16T23:03:22Z\", \"tool\": \"leanfinder\", \"query\": \"kernel functor of a natural transformation between additive functors on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instPreadditive\", \"SheafOfModules.instAbelian\", \"SheafOfModules.instAddCommGroupHom\", \"PresheafOfModules.instAbelian\", \"AlgebraicGeometry.Scheme.kerFunctor\", \"CategoryTheory.presheafToSheaf_additive\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"PresheafOfModules.instIsNormalMonoCategory\"], \"digest\": \"d3d60d5cbc0fee97\"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-definition match: the hits give preadditive/abelian module categories, sheafification, and the ideal sheaf kernel functor; none defines the pro-etale coefficient-ring support composite."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelFunctor|kernelNatTrans|sectionsWithSupport|closedUpperShriek",
+   "results": "{\"t\": \"2026-10-16T23:03:42Z\", \"tool\": \"grep\", \"query\": \"kernelFunctor|kernelNatTrans|sectionsWithSupport|closedUpperShriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No hits for these support/kernel-functor names under CategoryTheory; this query alone does not exclude constructions under other names."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel.map",
+   "results": "{\"t\": \"2026-10-16T23:03:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.kernel.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.kernel.map\", \"CategoryTheory.Limits.kernel.map_id\", \"CategoryTheory.Limits.instIsIsoMapOfMono\", \"CategoryTheory.Limits.kernel.mapIso_hom\", \"CategoryTheory.Limits.kernel.mapIso_inv\", \"CategoryTheory.Limits.kernel.map_zero\", \"CategoryTheory.Limits.kernel.lift_map\", \"CategoryTheory.Limits.kernelComparison_comp_kernel_map\"], \"digest\": \"97a35d655bc17d2a\"}",
+   "date": "2026-10-17",
+   "verdict": "Generic ingredient only: kernel.map (Kernels.lean:323-326) induces the required map from the naturality square, and kernel.map_id (328-330) verifies identities. These do not specialize in one line to the entire ring-sheaf pro-etale functor."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -85,5 +186,21 @@
   "statement": "Let $i:Z\\hookrightarrow T$ be a\nclosed immersion\nwith complementary open immersion $j$, and let $A$ be a\nfinite commutative ring. For a\npro-etale module sheaf\n$N$ on $T$, set\n\n$$\ni^!_0N=i^*\\ker\\bigl(N\\longrightarrow j_*j^*N\\bigr).\n$$\n\nThe map in this formula is the unit of the open\ninverse-image and\ndirect-image adjunction. A morphism of sheaves induces a\nmap of these kernels and then its closed inverse image;\nthis specifies the functor on morphisms.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-exc-proetale-sections-with-support",
+  "worker": "stage1",
+  "summary": "Definition-only split, with zero new nodes. Read the current main-20261015 blueprint and all five immediate dependency statements. Made the coefficient ring sheaves and intrinsic module categories explicit; specialized the existing canonical coefficient-ring isomorphism to i and j, then used the already-defined module adjunction and sectionwise kernel. Wrote the morphism map and its naturality square explicitly. Identity and composition follow by restriction and the functor laws of i^*. Preserved every source clause, including arbitrary schemes and finite commutative A; no quasi-compactness, constructibility, or exceptional-adjunction assertion was added. The legacy fixed-category-valued Lean construction does not state this item. Two semantic Mathlib phrasings and successful namespace Loogle/grep searches found ingredients only, not the whole definition; unsuccessful identifier queries are recorded accurately.",
+  "blueprint": "Realizes the entire current blueprint definition: the displayed i^!_0 N=i^*ker(N→j_*j^*N), the unit specifying that map, and the induced-kernel morphism clause. It is an imported blueprint node, so from remains null; whole-blueprint searches for exceptional-image, sections with support, and kernel found no other node stating this same intrinsic finite-coefficient functor. No proof steps or unit realization changes are needed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-941abc142",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-941abc142 (reviewer sub-agent of L); spot-checked: I read the item in full against the blueprint node in both snapshots: main-20261015 order 2202 and master order 1858. They are identical except that main drops the final 'no adjunction' remark. The definition i^!_0N = i^* ker(N -> j_*j^*N) keeps the arbitrary closed immersion with its open complement, a finite commutative A, and the open module-adjunction unit, and makes a morphism act by the induced kernel map followed by i^*. No hypothesis was added or dropped. I read all five stmt_deps in full. def-weil-pbc-proetale-modules gives the ring sheaf A_S = (U -> Cont(pi0|U|, A))^# and Mod(A_S), which is the coefficient category the blueprint's 'uses' names, so no different category is silently swapped in. prop-weil-pbc-proetale-constant-ring-map gives the isomorphism c_u for any morphism u, including an empty source, and applies to both i and j. def-weil-pbc-proetale-operations needs a commutative ring sheaf R_V plus an identification c, which holds because A_T is commutative; it defines j^*, j_*, i^* and states the underived adjunction whose unit is eta. def-weil-sheaf-of-modules-category gives the sectionwise kernel, and Stacks 03DA (sites-modules.tex:1337-1345) confirms it. The morphism clause is elementary: naturality of eta, the kernel inclusion being mono, then the functor laws of i^*. Edge cases checked: U empty gives K_N = N and i^!_0N = i^*N, also for the nonreduced Spec k -> Spec k[e]/e^2; Z empty gives eta invertible, K_N = 0 and the zero target category; N = 0 and A = 0 are fine. The transitive closure of the dependencies (239 nodes) has no cycle and no missing or merged ids. Duplicate search with rg found def-pur-flasque-support, which cites this item and adds flasqueness, so it is not a rival definition; det-lem-formal-closed-support-* and lem-exc-proetale-closed-support are statements; def-pur-support-cohomology is a global-section functor. same_as=[] is correct. Mathlib searches cover all three kinds and record the rejected Loogle queries honestly; only generic ingredients came up, so mathlib_match null is right. There are no new nodes, no proof steps and no tool_uses. Two inaccuracies in the report, neither needing a fix: (1) it says the source metadata now names main-20261015, but 'source' still names master order 1858; 'source' is a maintainer-owned field and the main text is carried by blueprint_update. (2) It mentions a citations.json that was not delivered; with no steps there is nothing to cite. No fixes were written. Details are in review.md."
  }
 }
