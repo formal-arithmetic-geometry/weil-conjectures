@@ -25,7 +25,10 @@
   "place": "Higher Topos Theory, Proposition 3.1.2.1, opposite-category dual (cocartesian exponentiation); Proposition 2.4.4.2 and Proposition 2.4.4.3, duals (mapping fibers and mapping-space criterion); Proposition 2.4.1.7, dual (composition). Read online, not archived in literature/. No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -302,5 +305,44 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-b785da76f (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the five new nodes in full, plus the statements of every cited node and of the parent citers lem-coef-infinity-grothendieck-limits-colimits (Steps 1-3) and lem-coef-free-operadic-active-slice-formula. HTT is not archived under literature/, so proof_origin=agent and the WANTED line are correct; I checked the citations against HTT Def 3.1.1.1, Prop 3.1.1.6/Rem 3.1.1.10, Props 3.1.2.1 and 3.1.2.3, Lemma 2.4.4.1, Props 2.4.1.5/2.4.1.7 and 2.4.4.2-3, all as duals. The statement is the faithful dual of 3.1.2.1 with the fiber formula; the x-quantifier repair is correct and nothing is weakened. No target, coefficient category or base-change morphism is involved. Small cases checked: K empty, K a point, G constant, identity and product fibrations, B a point. The five new nodes are each true, strictly smaller lemmas, not restatements of the item, and not duplicates: I opened lem-coef-infinity-isofibration-exponentiation (which uses the arrow-space U model), lem-coef-marked-relative-cartesian-model, lem-cbc-spine-inner-anodyne, lem-coef-marked-anodyne-lifting-calculus and others. The new nodes have their records, blueprint references and searches in place. Steps 1-3 and 5-6: the reversal of the four generators, the transposition, the first-edge cancellation hypothesis and the common L(A, long edge) all check out. FIX, in fixes/ for the item only: (1) C1, Steps 4 and 8: the step from homotopy pullback to homotopy fibers now cites the same-unit lem-coef-spaces-homotopy-fiber-detection, with the argument written out. (2) C7, Steps 4 and 8: lem-cbc-right-fibration-space-fiber is replaced by the same-unit lem-coef-kan-pullback-path-comparison. (3) C7, Step 7: lem-cbc-kan-fibration-fiber-criterion is replaced by the same-unit lem-coef-right-fibration-contractible-fibers. proof_deps and tool_uses are updated, and no cycle is introduced. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointwiseCocartesianTransport",
+  "declaration": "SSet.Enhanced.pointwise_cocartesian_transport",
+  "declarations": [
+   "SSet.Enhanced.transportPinch",
+   "SSet.Enhanced.transportFreeArrows",
+   "SSet.Enhanced.transportOverArrows",
+   "SSet.Enhanced.transportResolution",
+   "SSet.Enhanced.transportResolutionBase",
+   "SSet.Enhanced.TransportRelativeEquivalence",
+   "SSet.Enhanced.TransportResolutionSpan",
+   "SSet.Enhanced.transportStrictArrows",
+   "SSet.Enhanced.transportMappingResolution",
+   "SSet.Enhanced.transportMappingTriangles",
+   "SSet.Enhanced.TransportMappingFormula",
+   "SSet.Enhanced.transportUnderlyingArrow",
+   "SSet.Enhanced.transportLiftCategory",
+   "SSet.Enhanced.transportLiftSpace",
+   "SSet.Enhanced.TransportLiftCoherence",
+   "SSet.Enhanced.PointwiseCocartesianTransportStatement",
+   "SSet.Enhanced.pointwise_cocartesian_transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointwiseCocartesianTransport.lean",
+  "statement": "theorem pointwise_cocartesian_transport {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (hp : cocartesianFibration p) : PointwiseCocartesianTransportStatement p",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the equivalent horn-cocartesian convention of HTT 2.4.4.3. The right-pinched mapping equivalence is a canonical weak-equivalence zigzag through composition triangles, prism inclusions and the constant-path inclusion. Universal parameterized composition resolutions and the contractible fixed-source/base lift space retain naturality and all composition comparisons. All helpers belong to this node and have real data; only its main theorem is postponed.",
+  "fixed_by": "NT-stage2-cc-06c190ae5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06c190ae5",
+  "group": "NY",
+  "result": "fix",
+  "note": "Read the node, all 9 proof steps, the report (it has a real Worker report and Second reading by NY), the 17-declaration module and every stmt_dep declaration (mappingSpace, homotopyFiber, calculusFiber, IsCocartesianEdge, cocartesianFibration, fiber, right_pinch_comparison). Statement faithful: p_K cocartesian fibration with quasicategory structures as conclusions; vertexwise cocartesian iff; lift over the exact eta; degreewise fiber; mapping formula as a pinned zigzag of weak equivalences (pinch, triangle edges 12/02, prism, constant path); each leg checked true. Relative span equivalences give naturality and compatibility with successive transport (final-edge and long-edge restrictions are trivial fibrations). Composition with the first-edge hypothesis; contractible Kan space of lifts; Fun(K,E_b) iso pinned by its inclusion. Horn-convention cocartesian edges accepted: equivalent by HTT 2.4.4.3 / lem-coef-infinity-cocartesian-mapping-criterion, recorded in lean.note, and avoids a duplicate notion (H4). Edge cases K empty, K=Delta0, T empty, n=0, degenerate eta; one universe u. Gates OK: single sorry, docstrings, verbatim statement, stmt_deps only gains landed nodes. Finding fixed (import plan, brief-stage2 l.104): proof dep lem-coef-infinity-inner-mapping-fiber has module Sheaf.CategoryTheory.InnerMappingFiber on the base (landed 06:16, before the 06:22 delivery) but is not imported. fixes/PointwiseCocartesianTransport.lean adds only that import; fixes/<item>.report.md adds a note. nt_compile.py --json: delivered 3.8 s and fixed 2.9 s, rc 0, clean. merge_delivery.py not run."
  }
 }

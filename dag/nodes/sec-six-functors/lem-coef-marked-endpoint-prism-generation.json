@@ -250,5 +250,37 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-4df3f29c7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It has one commit containing the report and the item; it creates no nodes, and the statement is unchanged. The statement matches HTT Prop 3.1.1.5 as I know it: classes (1), (2), (2'), (2'') with endpoint {1} and sharp/flat markings. HTT is not in literature/ and I could not open it here, so this check is from memory; the delivery records a WANTED line and proof_origin=agent. The parent's Step 4 needs exactly I=(i), F=(ii), the equality of the three classes and the final clause, and the item supplies all of them. Step 2 cites lem-coef-infinity-monomorphism-boundary-cells, a Mathlib leaf (SSet.relativeCellComplexOfMono); the T_m pushouts are correct, and the only new marked edges are the vertical edges at m=0, which P(empty->Delta^0) supplies. Step 3 cites lem-coef-infinity-right-prism-boundary; I checked its filtration at m=0 and m=1. On sigma_q the only marked nondegenerate edge is [q,q+1]. For m>=1 every vertical edge already lies in X_0, so the pushouts of the inner horns (q<m) and of the F generator (q=m) carry exactly the induced markings. Step 4: for n=1 the F generator is {1}^sharp->(Delta^1)^sharp = P(empty->Delta^0). Step 5: for n>=2 the final edge omits vertex 0 and so lies in the horn (checked n=2), so g is a marked pushout of P(H->B). The report's n=1 source-error remark is correct. Steps 6-7: r is monotone (checked the cases at (1,n-1)), rj=1, every marked edge goes to a marked edge, and r sends U into the horn in every degree; the retract squares commute. Edge cases checked: m=0, n=1, n=2, and empty or identity monomorphisms. Both non-elementary inputs belong to the item's unit sk-prop-sf-biduality-general, so no tool_uses are needed; no SGA source is used. An rg search of the DAG for 3.1.1.5, marked final horns and endpoint prisms found no duplicate: right-anodyne-product, marked-triangle-cancellation, marked-initial-vertex and marked-cone-generator-calculations state different things. Minor, not this delivery's fault: the node lacks a lean_audit field, like its same-run neighbours. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4d5f2101",
+  "group": "Q87",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and HTT Prop 3.1.1.5 classes (1),(2),(2'),(2''): exact. Checked I/F index sets, n=1 and n=2 final horns, {1}# endpoint, the explicit marked pushout and its canonical pushout.desc, boundary 0 = bottom, all small monos, the closure with isomorphisms, IsStableUnderTransfiniteComposition.{u} and RetractArrow retracts, conjunct order, universes bound. No hollow definitions, only the theorem is sorry, 8-step proof docstring, real worker report and second reading. Delivered module compiles clean (nt_compile 2.0 s). Finding H4/H9: the delivered SSet.Marked.restrictMarking, finalMarkedSimplex and finalMarkedHorn duplicate full names already landed in MarkedTriangleCancellation and MarkedAnodyneLiftingCalculus; importing the delivered module with MarkedTriangleCancellation fails ('environment already contains SSet.Marked.restrictMarking._proof_1'), which would also block the stage-3 anodyne import. FIX: module imports MarkedTriangleCancellation (no cycle), drops the 4 helpers, finalMarkedHorns := ofHoms finalMarkedHornInclusion (same marking); markedWeakSaturation kept because the anodyne module is downstream (cycle). Signature unchanged; lean-record drops the 4 declarations and adds a note; report gets a maintainer-fix section. Fixed module compiles clean (1.5 s) and co-imports with both landed marked modules cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedEndpointPrismGeneration",
+  "declaration": "SSet.Marked.marked_endpoint_prism_generation",
+  "declarations": [
+   "SSet.Marked.innerMarkedHorns",
+   "SSet.Marked.finalMarkedHorns",
+   "SSet.Marked.markedPushout",
+   "SSet.Marked.markedPushoutDesc",
+   "SSet.Marked.sharpTerminalEndpoint",
+   "SSet.Marked.endpointPrism",
+   "SSet.Marked.boundaryEndpointPrisms",
+   "SSet.Marked.monoEndpointPrisms",
+   "SSet.Marked.markedWeakSaturation",
+   "SSet.Marked.marked_endpoint_prism_generation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedEndpointPrismGeneration.lean",
+  "statement": "theorem marked_endpoint_prism_generation : markedWeakSaturation.{u} (innerMarkedHorns ⊔ finalMarkedHorns) = markedWeakSaturation.{u} (innerMarkedHorns ⊔ boundaryEndpointPrisms) ∧ markedWeakSaturation.{u} (innerMarkedHorns ⊔ boundaryEndpointPrisms) = markedWeakSaturation.{u} (innerMarkedHorns ⊔ monoEndpointPrisms) ∧ ∀ {A B : SSet.{u}} (h : A ⟶ B), Mono h → markedWeakSaturation.{u} (innerMarkedHorns ⊔ finalMarkedHorns) (endpointPrism h)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The final marked horns reuse the landed SSet.Marked.restrictMarking, finalEdgeMarkedSimplex and finalMarkedHornInclusion of Sheaf.AlgebraicTopology.MarkedTriangleCancellation (same marking: degeneracies and the final edge, restricted along the horn inclusion); the delivered private copies collided by full name with landed SSet.Marked.restrictMarking (MarkedTriangleCancellation) and SSet.Marked.finalMarkedSimplex/finalMarkedHorn (MarkedAnodyneLiftingCalculus). markedWeakSaturation stays local: SSet.Marked.markedSaturation lives in the module of lem-coef-marked-anodyne-lifting-calculus, which cites this node as a proof dependency, so it cannot be imported here.",
+  "fixed_by": "NT-stage2-cc-b4d5f2101"
  }
 }

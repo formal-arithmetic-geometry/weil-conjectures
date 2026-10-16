@@ -448,5 +448,28 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-d59425836 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 11 steps, every cited node's statement (34 proof deps, 12 stmt deps), the main-20261015 statement and proof of the item and of det-base-field-cd-finite-field, unit sk-prop-pe-unbounded-classical, and Stacks 07QP, 03Q8 and 099W. The other cited tags (04JQ/04JM/03QU/02IZ/01T6/01SD/01I4/01JQ) were checked against their labels in tags/tags. The statement correction sets d_empty=0 so e_empty=1. It leaves the bound unchanged on nonempty schemes, the empty case is trivial, and all three citers treat the empty X separately. The new 'affine transitions' clause adds nothing, since the U_i are affine, and the Y sentence generalizes the source's g=id_Y. Nothing is weakened. Steps 1-3 prove cd_tor(k)<=1 for all torsion, including p-torsion, from det-base-field-cd-galois-group/cochains (parts 2-3)/inflation (final clause with r=e) and lem-sf-separably-closed-torsion-cd. No existing DAG node states this all-torsion bound; sk-lem-base-field-cd is single-prime only. Steps 4-6: finite dimension, Noetherian qcqs stages (T_i is of finite type over k via its etale projection to X, without assuming g is k-linear), dim W<=dim X through 07QP and generalization chains (valid without separatedness), then thm-sc-finite-type-torsion-cd with c=1. Steps 7-9: lem-sc-cd-affine-limit hypotheses hold; comparison-pullback; the inverse image equals slice restriction because (W,graph) is initial in I_W; sk-prop-sf-comparison for Z and G[0] in D^+. Steps 10-11: 03Q8 presheaf, object-localization identifications, a locally zero presheaf sheafifies to zero by the universal property, and the empty site. Mechanical checks: proof_deps equals the union of uses, no cycle, no SGA, Mathlib searches of all kinds recorded. All off-route statements are declared in tool_uses and I accept them all as generic black-box tools. route_note: the claim 'X,Y separated' in unit step 1 is unjustified (doubled-origin line); this should go to HUMAN.md. Maintainer observation, not a fault: the blueprint label det-base-field-cd-finite-field has no DAG node. No new nodes, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e707f0ded",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: k finite or algebraically closed; X, Y and g of finite type with no k-compatibility assumed; torsion sheaves valued in AddCommGrpCat.{u+1} via the recorded Sheaf.IsTorsion; dimension unbotD 0 toNat with bound 2d+1; clause 1 via proAffineEtale (small cofiltered nonempty index category, affine etale stages); clause 2 via pullback g V.hom with the coefficient pulled back along pullback.fst; clause 3 as R^q g_* G via Etale.lowerStar rightDerivedFunctorPlus; the Y/Z repetition includes the identity. ProEtale.upperStar is the same term as the recorded proEtaleSheafInverseImage, so no second definition. Universes arbitrary, edge cases (empty X, empty index category, q<=0) covered, docstrings with source and blueprint and the 11 proof steps, only sorry, statement field verbatim. Server compile (nt_compile --json) of the delivered file FAILS: the side framework declares AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction twice (ProEtale.LowerShriek.OpenImmersion.Defs:198 and ProEtale.FiniteCoefficient.LowerShriek.Open.Defs:193); a file importing only WeilConjectures.SixFunctors.ProEtale.Derived.Comparison fails the same way. FIX: fixes/ProEtaleClassicalBounds.lean removes the unused public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport and the proof-dependency import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison (sk-prop-sf-comparison, which pulls in the broken Derived.Comparison; stage 3 should restore it once the duplicate is resolved). The fixed file compiles cleanly (rc=0). The report fix keeps both required sections and appends a note. No mathematical change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalBounds",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalUniformBounds",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.HasClassicalUniformBounds",
+   "AlgebraicGeometry.ProEtale.classicalUniformBounds"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalBounds.lean",
+  "statement": "theorem classicalUniformBounds {k : Type u} [Field k] (hk : Finite k ∨ IsAlgClosed k) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (g : X ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) : HasClassicalUniformBounds hk aX aY g G hG ∧ ∀ {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] (h : Y ⟶ Z) [LocallyOfFiniteType h] [QuasiCompact h] (H : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H.IsTorsion), HasClassicalUniformBounds hk aY aZ h H hH",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e707f0ded"
  }
 }
