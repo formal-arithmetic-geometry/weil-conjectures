@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-proetale-closed-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exactness of closed direct image",
@@ -19,39 +19,221 @@
   ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-scheme-conventions"
+  "def-galois-exact-functor"
  ],
  "proof": [
   {
-   "text": "As a right adjoint in the pro-etale operations, $i_*$ preserves kernels. We\nprove that it preserves epimorphisms by local lifting of sections. Work on\nan affine open of $X$ and a basis object $W$, using\n[lem-weil-pbc-ind-etale-basis], [lem-exc-closed-localization]. Let $G\\to H$\nbe an epimorphism on $Z$ and let $s\\in(i_*H)(W)=H(Z_W)$. This section lifts\nto $G$ on a covering of $Z_W$; choose a finite affine ind-etale refinement\nby [lem-weil-pbc-ind-etale-basis].",
+   "text": "Fix the finite constant coefficient ring $A$. The direct-image formula gives $(i_*G)(W)=G(Z\\times_XW)$, with the same addition on sections. Since kernels of module sheaves are computed sectionwise, for every module morphism $\\varphi:G\\to H$ and every site object $W$,\n$$(i_*\\ker\\varphi)(W)=\\ker\\bigl(G(Z\\times_XW)\\to H(Z\\times_XW)\\bigr)=(\\ker(i_*\\varphi))(W).$$\nThese identifications commute with restrictions and coefficient actions. The same formula gives $i_*(G\\oplus H)(W)=G(Z\\times_XW)\\oplus H(Z\\times_XW)$, with the biproduct injections and projections unchanged. Thus $i_*$ is additive and preserves zero objects, finite biproducts and kernels, hence finite products and equalizers and therefore finite limits. This verifies the first sentence of the blueprint directly, without an additional theorem about right adjoints.",
    "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-exc-closed-localization"
+    "def-weil-pbc-proetale-operations",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 1, first sentence; sectionwise kernel construction in Stacks sites-modules.tex, Tag 03DA, lemma-abelian and its preceding paragraphs"
+   }
   },
   {
-   "text": "The complement of $Z_W$ is quasi-compact, because the open immersion is the\nbase change of the quasi-compact complement in the statement. By\n[lem-exc-closed-cover-extension], extend the chosen covering to $W$. On each\nlifted member, its reduction is the member of the original closed covering,\nso the chosen section of $G$ is a lift in $i_*G$. On the remaining open\nmembers the reduction is empty and the section is zero, which also lifts.\nThus $i_*G\\to i_*H$ is locally surjective on every basis object and hence an\nepimorphism. This proves exactness. The needed finiteness condition is on\nthe open complement, as in [Stacks Project, Section\n61.25](https://stacks.math.columbia.edu/tag/09A9); no condition on the\nvalues of a right adjoint was used.",
+   "text": "We will test epimorphisms by local lifts of sections. The forgetful functor from module sheaves to abelian sheaves preserves cokernels and is faithful and exact. It also reflects zero objects: an underlying zero abelian sheaf has only the zero section and hence is the zero module sheaf. Consequently a module map has zero cokernel if and only if its underlying abelian sheaf map has zero cokernel. Apply the general-site epimorphism criterion: a module map $G\\to H$ is an epimorphism precisely when every section of $H$ lifts to $G$ on a covering of its site object. This applies on the small pro-etale sites in the larger universe specified in the site definition; no finiteness of the modules is required.",
    "uses": [
-    "lem-exc-closed-cover-extension"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 1, local lifting assertion; Stacks sites-modules.tex, Tags 03DA (lemma-abelian) and 03CN(5) (lemma-abelian-abelian); sites.tex, Tag 00WM"
+   }
+  },
+  {
+   "text": "Here $\\mathcal B_T$ is the full subcategory of affine ind-etale schemes over an affine $T$, with the induced coverings. It suffices to lift sections locally on affine ind-etale basis objects over each affine open $X_0\\subseteq X$. Indeed, first restrict any site object and its section to the inverse images of an affine open cover of $X$, and then take the basis coverings supplied by the ind-etale basis theorem. Covering transitivity combines lifts on those objects into local lifts on the original object. Closed localization identifies the restriction of $i_*G$ with the direct image for $Z_0=Z\\times_XX_0\\hookrightarrow X_0$, so its section formula is still $G(Z\\times_XW)$. For an affine basis object $W\\to X_0$, put $Z_W=Z\\times_XW$. The closed-immersion base-change theorem makes $Z_W\\to W$ closed, and the affine characterization of a closed immersion makes $Z_W$ affine. An open immersion is weakly etale: its local-ring maps are isomorphisms, so are flat, and its diagonal is an isomorphism onto its self fibre product, hence flat. This uses only the open-subscheme description and the definition of weak etaleness (tensor along a ring isomorphism is the identity). The map $Z_W\\to Z$ is weakly etale: it is a base change of $W\\to X$, which is a composite of an ind-etale map and an open localization. Thus it is a legitimate object at which to evaluate $G$ and $H$. The site construction and the stated weak-etale stability ensure these restrictions and composites are defined. The localization theorem for a weakly etale map identifies its source site with the corresponding slice site, so coverings and restricted module sheaves in this argument are the same on either description.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-exc-closed-localization",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-open-immersion",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 1, affine localization and basis reduction; Stacks proetale.tex, Tags 09BK (lemma-closed-immersion-affines) and 09BM (lemma-closed-immersion-complement-retrocompact-exact)"
+   }
+  },
+  {
+   "text": "Write $j:U\\hookrightarrow X$ for the complementary open immersion. Its pullback $j_W:U\\times_XW\\to W$ is the inclusion of the open complement $W\\setminus Z_W$: an open subscheme pulls back to the open subscheme with inverse-image underlying open set, by restricting the structure sheaf and the fibre-product universal property. Quasi-compactness is stable under arbitrary base change, so $j_W$ is quasi-compact. Since $W$ is affine, the definition of a quasi-compact morphism, applied to the affine open $W$ itself, says exactly that $U\\times_XW=W\\setminus Z_W$ is quasi-compact. This checks the complement hypothesis needed for covering extension; it does not assume that $X$ or $U$ is globally quasi-compact.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 2, first sentence; Stacks proetale.tex, Tag 09BM, retrocompact-complement hypothesis"
+   }
+  },
+  {
+   "text": "Let $\\varphi:G\\twoheadrightarrow H$ be an epimorphism on $Z$ and let $s\\in(i_*H)(W)=H(Z_W)$. By Step 2, choose a covering of $Z_W$ with sections lifting the restrictions of $s$. By the weakly-etale slice identification, regard this covering over the affine scheme $Z_W$. The identity object $Z_W\\to Z_W$ belongs to its ind-etale basis, so the finite-refinement clause of the basis theorem refines that covering to a finite affine ind-etale covering $\\{V_a\\to Z_W\\}$. Restrict the chosen lifts along the refinement arrows to get $g_a\\in G(V_a)$ with $\\varphi(g_a)=s|_{V_a}$. Here $V_a\\to Z$ is the composite with $Z_W\\to Z$, hence weakly etale by stability; the restrictions really are sections of the original sheaves on $Z$. This is refinement of a covering, not the assertion that arbitrary epimorphisms are surjective on sections of $Z_W$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 1, last two sentences; Stacks proetale.tex, affine ind-etale basis and finite-covering refinement"
+   }
+  },
+  {
+   "text": "Apply the closed-cover extension theorem to the affine $W$, its closed subscheme $Z_W$, the quasi-compact complement from Step 4, and the finite affine ind-etale covering from Step 5. It gives a finite pro-etale covering of $W$ with lifted members $L_a=v_W(V_a)$ and complementary affine open members $O_b$. The specified closed reductions are $L_a\\times_WZ_W\\cong V_a$ and $O_b\\times_WZ_W=\\varnothing$. The direct-image formula therefore identifies $(i_*G)(L_a)$ with $G(V_a)$ and $(i_*H)(L_a)$ with $H(V_a)$, compatibly with $\\varphi$ and restriction of $s$. More explicitly, let $T_a=Z\\times_XL_a$ and let $r_a:T_a\\xrightarrow{\\sim}V_a$ be the specified isomorphism over $Z_W$. Set $t_a=r_a^*g_a\\in G(T_a)=(i_*G)(L_a)$. Naturality gives $\\varphi(t_a)=r_a^*\\varphi(g_a)=r_a^*(s|_{V_a})=s|_{T_a}$, since $r_a$ is over $Z_W$. Thus $t_a$ lifts $s|_{L_a}$. On $O_b$, the restriction of $s$ is the unique section of $H(\\varnothing)=0$ and lifts by the zero section of $G(\\varnothing)=0$; these equalities follow from the sheaf axiom for the empty covering. Every member is an object of $X_{\\mathrm{proet}}$, by composing its weakly etale map to $W$ with $W\\to X$. Hence this is an actual local lift of $s$ on a covering in the required site.",
+   "uses": [
+    "lem-exc-closed-cover-extension",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 2, covering extension, specified reductions and local lifts; Stacks proetale.tex, Tag 09BK, lemma-closed-immersion-affines; exactness statement Tag 09BM"
+   }
+  },
+  {
+   "text": "Steps 3 and 6 give local lifts on every site object. By Step 2, $i_*\\varphi$ is therefore an epimorphism. For a short exact sequence $0\\to G'\\to G\\xrightarrow{\\varphi}H\\to0$, Step 1 identifies $i_*G'\\to i_*G$ with the kernel of $i_*\\varphi$, and the latter is epi by what we have proved. Thus its direct image is short exact. To check cokernels explicitly, factor any $f:A\\to B$ as $A\\xrightarrow{e}I\\xrightarrow{m}B$, with $e$ epi and $m$ the image inclusion, and put $q:B\\to C=\\operatorname{coker}f$. Write $F=i_*$. Applying the preserved short exact sequence $0\\to I\\xrightarrow{m}B\\xrightarrow{q}C\\to0$ makes $Fm=\\ker(Fq)$ and $Fq$ epi. In an abelian category an epi is the cokernel of its kernel, so $Fq=\\operatorname{coker}(Fm)$. For any $t:FB\\to T$, the equality $tFf=0$ is equivalent to $tFm=0$ because $Fe$ is epi; hence $Fq$ also has precisely the cokernel universal property for $Ff$. Finite biproducts are preserved by Step 1. More explicitly, for a finite diagram $D$, its limit is the kernel of the difference map $\\bigoplus_{v}D(v)\\to\\bigoplus_{a:v\\to w}D(w)$, whose $a$-coordinate is $D(a)x_v-x_w$; its colimit is the cokernel of the dual difference map $\\bigoplus_{a:v\\to w}D(v)\\to\\bigoplus_vD(v)$. These formulas follow by writing the compatible-cone and compatible-cocone equations. Thus the preserved biproducts, kernels and cokernels give the finite limits and colimits in the definition of an exact functor. This proves the asserted exactness on all the indicated module sheaves.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-galois-exact-functor",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+    "place": "Paragraph 2, final exactness conclusion; elementary abelian-category kernel/cokernel argument"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-proetale-site",
   "lem-weil-pbc-ind-etale-basis",
   "lem-exc-closed-localization",
-  "lem-exc-closed-cover-extension"
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-open-immersion",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-weil-pbc-ind-etale-basis",
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-exc-closed-cover-extension",
+  "def-weil-pbc-exact-sequence",
+  "def-galois-exact-functor",
+  "def-sp-abelian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-exact.proof.md",
+  "place": "Both proof paragraphs, expanded; Stacks proetale.tex, Tag 09BM is the exact statement and Tag 09BK supplies the closed-lift geometry. The blueprint covering-lift proof is retained rather than replaced by the different proof of 09BM."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|[Cc]losed[Ii]mmersion.*(exact|[Ee]pi)|preservesFiniteColimits_lowerStar",
+   "results": "10 hits. Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image along a closed immersion with quasi compact complement is exact on pro etale module sheaves",
+   "results": "8 hits. AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion with quasi compact open complement, direct image of pro etale sheaves of modules is exact",
+   "results": "8 hits. AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.etaleLocus_eq_compl_support; Profinite.NobelingProof.succ_exact; Algebra.Generators.H1Cotangent.exact_δ_map; Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of sheaves on the proetale site of a scheme preserves epimorphisms when the morphism is a closed immersion with retrocompact complement",
+   "results": "8 hits. LightCondMod.epi_iff_locallySurjective_on_lightProfinite; LightCondMod.instPreservesEpimorphismsLightCondSetForget; LightCondSet.epi_iff_locallySurjective_on_lightProfinite; Condensed.epi_iff_locallySurjective_on_compHaus; CondensedMod.epi_iff_locallySurjective_on_compHaus; AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono; LightCondMod.instReflectsEpimorphismsLightCondSetForget; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar|closed.*(epi|exact)|pushforward.*[Ee]xact|[Ee]xact.*pushforward",
+   "results": "16 hits. Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean; Mathlib/CategoryTheory/Sites/CoverPreserving.lean; Mathlib/CategoryTheory/Sites/Sieves.lean; Mathlib/CategoryTheory/Sites/Sieves.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"exact\"",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state closed pro-etale pushforward exactness; general local-surjectivity tools alone do not supply the covering extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct image functor between categories of sheaves of modules preserves finite colimits if it preserves epimorphisms and kernels",
+   "results": "8 hits. SheafOfModules.Finite.evaluationPreservesFiniteLimits; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; CategoryTheory.Sheaf.ab5ofSize; CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits; CategoryTheory.Sheaf.instHasFiniteColimits; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; SheafOfModules.Finite.forgetPreservesFiniteLimits",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: general finite-colimit and exact-functor facts do not supply closed-fibre covering extension. The grep hits Functor.preservesFiniteColimits_of_preservesHomology (Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean:80) and Functor.preservesHomology_of_preservesEpis_and_kernels (Mathlib/CategoryTheory/Abelian/Exact.lean:313) were read; the elementary argument in Step 7 explicitly proves the required specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_of_preservesHomology|preservesHomology_of_preservesEpis_and_kernels|isIso.*[Cc]ounit",
+   "results": "25 hits. Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean; Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean; Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean; Mathlib/CategoryTheory/Presentable/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: general finite-colimit and exact-functor facts do not supply closed-fibre covering extension. The grep hits Functor.preservesFiniteColimits_of_preservesHomology (Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean:80) and Functor.preservesHomology_of_preservesEpis_and_kernels (Mathlib/CategoryTheory/Abelian/Exact.lean:313) were read; the elementary argument in Step 7 explicitly proves the required specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteColimits\"",
+   "results": "12 hits. CategoryTheory.Limits.PreservesFiniteColimits; CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits; CategoryTheory.Limits.PreservesColimits.preservesFiniteColimits; CategoryTheory.Limits.PreservesColimitsOfSize.preservesFiniteColimits; CategoryTheory.Limits.PreservesColimitsOfSize0.preservesFiniteColimits; CategoryTheory.Limits.preservesColimitsOfShapeOfPreservesFiniteColimits; CategoryTheory.Limits.preservesFiniteColimits_of_preservesFiniteColimitsOfSize; CategoryTheory.Limits.PreservesFiniteColimits.preservesFiniteColimits",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: general finite-colimit and exact-functor facts do not supply closed-fibre covering extension. The grep hits Functor.preservesFiniteColimits_of_preservesHomology (Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean:80) and Functor.preservesHomology_of_preservesEpis_and_kernels (Mathlib/CategoryTheory/Abelian/Exact.lean:313) were read; the elementary argument in Step 7 explicitly proves the required specialization."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -83,5 +265,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-proetale-closed-exact",
+  "worker": "stage1",
+  "summary": "Expanded the covering-lift proof into seven steps, reusing existing nodes only. Made module-to-abelian epimorphism reduction, sectionwise kernels, affine and basis locality, quasi-compactness under arbitrary base change, finite refinement, specified closed-reduction compatibility, empty-fibre lifts and final exactness explicit. Statement unchanged. Upstream matching finite-colimit theorem reaches the represented counit sorry, so it is not claimed as a closed attachment. No new nodes. Second reading added explicit basis definitions, biproducts, reduction-isomorphism section maps and the cokernel universal-property calculation; corrected the external source to exact Tag 09BM.",
+  "blueprint": "Main-20261015 proof paragraph 1: first sentence is Step 1; local epimorphism criterion is Step 2; affine/basis localization is Step 3; its final finite-refinement sentences are Step 5. Paragraph 2: complement hypothesis is Step 4; extension and lifts are Step 6; concluding exactness is Step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact and faithful forgetful functor identifies module epimorphisms with abelian epimorphisms; no node of this unit supplies that coefficient-category comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Generic affine pro-etale basis and finite-refinement theorem is the explicit tool prescribed by this blueprint proof; it does not replace the closed-unit route."
+   },
+   {
+    "node": "lem-exc-closed-localization",
+    "why": "Generic weakly-etale localization exchange supplies the affine reduction prescribed by the blueprint; the closed-unit unit does not reconstruct this site localization."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic stability and ind-etale implies weakly-etale ensure all chosen covering members remain objects of the required small site; this is a tool for the prescribed covering-lift route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Only the generic slice-site identification is used, to interpret restrictions and covering refinements over the affine closed fibre; no injective or derived assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-exc-closed-localization",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-proetale-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-d47304f1c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-d47304f1c (reviewer sub-agent of L); spot-checked: The proof and seven steps are mathematically sound, with hypotheses, coefficient category, base changes, edge cases, and cited DAG statements checked. The item still cites broad Stacks Tag 09A9 despite the exact source being Tag 09BM, with affine geometry at Tag 09BK. Corrected JSON is in fixes/dag/nodes/sec-smooth-purity/lem-exc-proetale-closed-exact.json.; 1 file(s) fixed by the reviewer"
+ }
 }
