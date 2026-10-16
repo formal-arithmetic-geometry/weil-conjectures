@@ -3,45 +3,230 @@
  "blueprint": {
   "is": "lem-exc-constant-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant coefficient tensor comparison",
- "statement": "Let $A$ be a finite ring, and let $j$ be an open immersion. Suppose that\n$Rj_*$ on the ordinary\nderived categories of\netale $A$-module sheaves preserves countable coproducts.\nFor $K\\in D(U_{\\mathrm{et}},A)$ and a finite $A$-module $N$,\nthe canonical tensor comparison is\nan isomorphism\n\n$$\n(Rj_*K)\\otimes_A^L N_T\n\\longrightarrow Rj_*(K\\otimes_A^L N_U).\n$$\n\nThe symbols $N_T,N_U$ denote constant module sheaves.",
+ "statement": "Let $A$ be a finite commutative ring, let $T,U$ be schemes [def-pc-scheme], and let $j:U\\hookrightarrow T$ be an open immersion [def-weil-open-immersion]. Work on small representatives of their small etale sites in the universes of [def-weil-size-convention], in the ordinary unbounded derived categories $D(S_{\\Et},A)$ [def-weil-pbc-derived-categories]. Write $Rj_*$ for the unbounded K-injective derived direct image and $j^{-1}\\dashv Rj_*$ for the derived adjunction of [def-kun-projection-formula-map]. Suppose that $Rj_*$ preserves countable coproducts. For every $K\\in D(U_{\\Et},A)$ and every finite $A$-module $N$ (finite as a set, equivalently finitely generated since $A$ is finite), the canonical tensor comparison is an isomorphism:\n$$\n (Rj_*K)\\otimes_A^{\\mathbf L}N_T\n \\longrightarrow Rj_*(K\\otimes_A^{\\mathbf L}N_U).\n$$\nHere $N_T,N_U$ are the constant module sheaves, placed in degree zero [def-kun-constant-sheaf], the tensors are ordinary uncompleted etale derived tensors [def-kun-derived-tensor], and the displayed morphism is $\\mathrm{PF}_j(K,N_T)$ of [def-kun-projection-formula-map] under the canonical identification $j^{-1}N_T\\simeq N_U$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-constant-tensor.md",
   "place": "node lem-exc-constant-tensor, order 1912"
  },
  "stmt_deps": [
-  "def-weil-pbc-direct-image"
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map",
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "Since $A$ is Noetherian and $N$ is finite, successive finite free\ncovers of kernels give a resolution $P$ of $N$ by finite free\nmodules in degrees at most zero.\nFor every finite brutal truncation $P_{\\geq-m}$, the comparison is\nan isomorphism: it holds for $A$, for finite sums and shifts, and\nthen for finite complexes by the triangle for adjoining one term.\nThe natural inclusions $P_{\\geq-m}\\to P_{\\geq-m-1}$ have homotopy\ncolimit $P$. In the ordinary derived categories of\n[def-weil-pbc-derived-categories], this homotopy colimit is the\ncone of $1-\\mathrm{shift}$ on the countable direct sum, with its\nusual quasi-isomorphism to the degreewise filtered colimit.\nDerived tensor of [def-weil-derived-tensor] and the assumed\ncoproduct-preserving $Rj_*$ preserve this triangle. Passing to the\nhomotopy colimit proves the comparison.",
-   "uses": [
-    "def-weil-pbc-derived-categories",
-    "def-weil-derived-tensor"
-   ],
-   "elementary": false
+   "text": "Construct the finite-free resolution explicitly, without a finite-projective-dimension assumption. Set $M_0=N$. Given the finite module $M_r$, put $P^{-r}=A^{M_r}$, map its basis vector $e_x$ to $x\\in M_r$, and let $M_{r+1}$ be this map's kernel. Since both $A$ and $M_r$ are finite, $P^{-r}$ and $M_{r+1}$ are finite sets. For $r\\geq1$ define $d^{-r}:P^{-r}\\to P^{-r+1}$ by the surjection onto $M_r$ followed by the kernel inclusion $M_r\\hookrightarrow P^{-r+1}$; set $P^i=0$ for $i>0$. Thus $d^2=0$; for $r\\geq2$ one has $\\operatorname{im}d^{-r}=M_r=\\ker d^{-r+1}$, while $\\operatorname{im}d^{-1}=M_1$ is the kernel of the augmentation $P^0\\to N$. The augmentation is surjective, so $P\\to N[0]$ is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-constant-tensor.md",
+    "place": "Proof, first sentence: successive finite free covers of kernels; explicit finite-set construction"
+   }
   },
   {
-   "text": "This argument uses finite free terms and a countable sequence of\ntruncations. It does not require that $N$ have finite projective\ndimension.",
-   "uses": [],
-   "elementary": null
+   "text": "For $S=T,U$, apply the constant-sheaf construction [def-kun-constant-sheaf] termwise to $P\\to N[0]$. The constant presheaf construction is exact sectionwise, and sheafification is exact and commutes with colimits by [lem-weil-pbc-site-r-module-presheaf-sheafification-exact]. Consequently the augmentation $P_S\\to N_S[0]$ is a quasi-isomorphism and $(P_S)^{-r}\\simeq A_S^{M_r}$. Apply [lem-kun-pullback-constant], whose statement covers modules and complexes of modules, to obtain the canonical isomorphisms $\\gamma_N:j^{-1}N_T\\xrightarrow{\\sim}N_U$ and $\\gamma_P:j^{-1}P_T\\xrightarrow{\\sim}P_U$. Their compatibility with augmentation can be checked explicitly: for any module homomorphism $h:M\\to M'$, the adjuncts of $\\gamma_{M'}j^{-1}(h_T)$ and $h_U\\gamma_M$ under the module adjunction [prop-weil-pbc-inverse-image-modules-exact] are maps $M_T\\to j_*M'_U$ sending every constant section $x$ on an etale $W\\to T$ to the constant section $h(x)$ on $W\\times_TU$. They are equal by the universal property of sheafification [def-weil-pbc-sheafification]. Apply this equality to every differential of $P$ and to $P^0\\to N$; thus the comparisons form a chain isomorphism and commute with the augmentation.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-kun-pullback-constant",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EI (lemma-sheafification-exact), 093I (section-constant), 093R (lemma-pullback-locally-constant), 04JC (lemma-flat-pullback-exact); canonical module/complex comparison of lem-kun-pullback-constant; sheafification universal property"
+   }
+  },
+  {
+   "text": "For the fixed $K$, put $F(L)=(Rj_*K)\\otimes_A^{\\mathbf L}L$ and $G(L)=Rj_*(K\\otimes_A^{\\mathbf L}j^{-1}L)$ on $D(T_{\\Et},A)$, and let $\\alpha_L=\\mathrm{PF}_j(K,L)$ [def-kun-projection-formula-map]. Apply [lem-weil-pbc-ringed-projection-mate-exact] to the ringed topoi with constant rings $A_T,A_U$. The coefficient pullback is the exact module inverse image by [prop-weil-pbc-inverse-image-modules-exact], so its derived functor is $j^{-1}$. The cited mate theorem states that $F,G$ are exact, $\\alpha$ is natural and shift-compatible, and $\\alpha_{A_T}$ is the identity under tensor-unit identifications. Hence $\\alpha$ is invertible on shifts and finite sums of $A_T$: exact functors are additive, and naturality with the finitely many injections and projections identifies the component on a finite biproduct with the biproduct of the components.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); unit and shift structures of the cited mate theorem"
+   }
+  },
+  {
+   "text": "For $m\\geq0$ let $E_m$ be the brutal truncation of $P_T$ keeping degrees $-m,\\ldots,0$. The inclusions $E_m\\to E_{m+1}$ are chain maps. Prove by induction that $\\alpha_{E_m}$ is invertible. The base $E_0=(P_T)^0[0]$ is a finite sum of $A_T$. For $m\\geq1$ there is a degreewise split short exact sequence of complexes $0\\to E_{m-1}\\to E_m\\to(P_T)^{-m}[m]\\to0$, where the last term has its sole nonzero sheaf in degree $-m$. Its triangle is distinguished by [lem-weil-pbc-complex-ses-triangle]. The mate theorem [lem-weil-pbc-ringed-projection-mate-exact] makes $\\alpha$ a morphism between its $F$- and $G$-images, including the connecting square. Its first and third components are invertible by induction and the preceding step, so [lem-sf-triangle-morphism-iso] gives invertibility of the middle component $\\alpha_{E_m}$. This proves the induction for all $m$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 014A (lemma-third-isomorphism-triangle); finite stupid-truncation argument also sites-cohomology.tex Tag 0944 (lemma-projection-formula), proof"
+   }
+  },
+  {
+   "text": "For the sequence $E_0\\to E_1\\to\\cdots$, the degreewise colimit is exactly $P_T$: in degree $i\\leq0$ the sequence is constantly $(P_T)^i$ with identity transition maps once $m\\geq-i$, and all positive degrees are zero. Apply [lem-kun-complex-colimit-hocolim] in sheaves of $A_T$-modules on the small etale site. With $B=\\bigoplus_{m\\geq0}E_m$ in the derived category and $s\\iota_m=\\iota_{m+1}(E_m\\to E_{m+1})$, it gives the distinguished telescope triangle $B\\xrightarrow{1-s}B\\to P_T\\to B[1]$. In particular it identifies the telescope with this specific complex, by the quasi-isomorphism from the cone to the degreewise colimit; no claim of unique functorial cones is needed.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0949 (lemma-colim-hocolim), 0A5L (lemma-direct-sums), 090Z (definition-derived-colimit)"
+   }
+  },
+  {
+   "text": "Both $F$ and $G$ preserve the countable coproduct in the preceding step. For $F$ this is [lem-kun-derived-tensor-direct-sums]. For $G$, first $j^{-1}$ preserves coproducts by [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the derived adjunction $j^{-1}\\dashv Rj_*$ specified in [def-kun-projection-formula-map]; then tensoring with $K$ preserves them by [lem-kun-derived-tensor-direct-sums]; finally $Rj_*$ preserves them by the hypothesis of the item. These are coproducts over the small discrete category $\\mathbf N$, in the chosen universe; there is no appeal to an arbitrary large index category.",
+   "uses": [
+    "lem-kun-derived-tensor-direct-sums",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1); derived tensor coproduct theorem applied over the countable set N"
+   }
+  },
+  {
+   "text": "Under the coproduct identifications from the preceding step, naturality gives $\\alpha_B F(\\iota_m)=G(\\iota_m)\\alpha_{E_m}$ for every $m$. Therefore $\\alpha_B$ is the coproduct of the isomorphisms $\\alpha_{E_m}$; its inverse is induced by their inverses, as is checked on each coprojection. Apply the exact functors $F,G$ to the telescope triangle of step 5. By [lem-weil-pbc-ringed-projection-mate-exact], the components $(\\alpha_B,\\alpha_B,\\alpha_{P_T})$ give a morphism of distinguished triangles. In particular, if $q:P_T\\to B[1]$ is the connecting map, its final square is $s_GG(q)\\alpha_{P_T}=\\alpha_B[1]s_FF(q)$, where $s_F,s_G$ identify the images of $B[1]$ with $F(B)[1],G(B)[1]$. This follows from naturality at $q$ and the cited shift compatibility; it is the actual canonical component at $P_T$, not an arbitrarily chosen telescope comparison. Its first two components are isomorphisms, so [lem-sf-triangle-morphism-iso] proves that $\\alpha_{P_T}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle), applied to the telescope triangle of Tag 090Z (definition-derived-colimit); shift-compatible mate as in step 3"
+   }
+  },
+  {
+   "text": "Let $a:P_T\\xrightarrow{\\sim}N_T$ be the augmentation isomorphism of step 2. Naturality of the canonical mate [lem-weil-pbc-ringed-projection-mate-exact] gives $\\alpha_{N_T}=G(a)\\alpha_{P_T}F(a)^{-1}$, hence this component is invertible. Under $j^{-1}N_T\\simeq N_U$ from step 2 it is exactly the comparison asserted in the statement. The resolution may have infinitely many negative terms; the argument used only its finite brutal truncations and their countable telescope, so it does not impose finite projective dimension on $N$ or any boundedness on $K$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-constant-tensor.md",
+    "place": "Proof, passing to the homotopy colimit; final paragraph excluding a finite-projective-dimension hypothesis"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-derived-tensor"
+  "def-kun-constant-sheaf",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-kun-pullback-constant",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-sheafification",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-constant-tensor.md",
-  "place": "## Proof"
+  "place": "Proof: explicit finite-free construction, finite brutal truncations, and countable telescope; details justified by the cited Stacks results"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|PreservesColimits.*[Tt]ensor",
+   "results": "24 hits: Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived projection formula tensor constant finitely presented module direct image preserves coproducts",
+   "results": "8 hits: CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits, CategoryTheory.Limits.PreservesFiniteCoproducts, TensorProduct.finsuppLeft, TensorProduct.directSumLeft, CategoryTheory.Limits.LimitPresentation.map_π, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes whose unbounded derived direct image preserves countable coproducts, projection formula for tensoring by a finite constant module over a finite commutative ring",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|formula.*projection|constant.*[Tt]ensor|[Tt]ensor.*constant",
+   "results": "0 hits: none; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the unbounded derived category of sheaves, a coproduct preserving right adjoint satisfies the projection formula with a constant finitely generated module",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_rightAdjointProjectionMap|rightAdjointProjectionMap",
+   "results": "0 hits: none; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"Projection\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module, closed-monoidal, condensed-module, or metaprogramming declarations do not state the unbounded etale finite-constant projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint between derived categories that commutes with countable direct sums satisfies the tensor projection formula for a module admitting a resolution by finite free modules",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, LightCondensed.internallyProjective_iff_tensor_condition, CategoryTheory.Tor', LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Tor functors, an ordinary tensor left adjoint, light condensed internal projectivity, or categorical product projections; none states the unbounded etale projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ii]so|[Ii]so.*projection|projection.*[Tt]ensor|[Tt]ensor.*projection",
+   "results": "10 hits: Mathlib/CategoryTheory/Products/Basic.lean, Mathlib/CategoryTheory/Products/Basic.lean, Mathlib/CategoryTheory/Sums/Products.lean, Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean, Mathlib/CategoryTheory/Limits/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Tor functors, an ordinary tensor left adjoint, light condensed internal projectivity, or categorical product projections; none states the unbounded etale projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"IsIso\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Tor functors, an ordinary tensor left adjoint, light condensed internal projectivity, or categorical product projections; none states the unbounded etale projection formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +253,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-constant-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof into eight checked steps, reusing existing DAG nodes throughout (no new nodes). Made the implicit commutative coefficient convention explicit, replaced pro-etale tensor and bounded-below direct-image references by the ordinary unbounded etale interfaces, wrote the finite-set free resolution and truncation induction, and verified the canonical mate on the telescope including the connecting square. Repeated actual Mathlib searches in two phrasings and checked the project source for an attachment. Second reading replaces the set-only constant pullback citation with the existing module/complex theorem and writes the augmentation naturality calculation from sheafification and adjunction.",
+  "blueprint": "Steps 1-2 realize the first sentence about successive finite free covers; steps 3-4 realize the comparison for finite brutal truncations; steps 5-7 realize the telescope and preservation argument; step 8 realizes passage to N and the final finite-projective-dimension clarification. The item is not the key statement of sk-prop-a1-kummer, so no unit realization fields change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-topos mate theorem supplies exactness, unit normalization, naturality and the connecting-square compatibility. This unit has no replacement for these structural facts."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "Generic ordinary etale derived tensor coproduct theorem, applied only to countable sums; it supplies a structural tool rather than a Kunneth or geometric theorem."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic module-sheaf telescope comparison, applied to the explicit degreewise eventually constant sequence of brutal truncations; it supplies the homotopy-colimit mechanism already in the item proof."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic ordinary etale inverse image of constant modules and complexes, with no boundedness or geometric assumptions; supplies the coefficient and complex identifications already used by the blueprint."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact module inverse image for constant coefficients identifies derived pullback with termwise inverse image; no cohomological base-change theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-pullback-constant",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-c0f1c73bd",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c0f1c73bd (reviewer sub-agent of L); spot-checked: Reviewed item, all eight proof steps, every cited node and source route, coefficient category, base-change morphism, edge cases, duplicate/generalization risks, and recorded searches. The unbounded telescope argument is sound; the explicit commutative-ring correction resolves the source's ill-typed finite-ring wording. Review written to review.md."
+ }
 }
