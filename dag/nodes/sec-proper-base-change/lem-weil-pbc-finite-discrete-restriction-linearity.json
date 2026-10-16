@@ -15,30 +15,38 @@
  ],
  "proof": [
   {
-   "text": "The sectionwise G and hG identify the original scalar action before and after restriction.",
+   "text": "Reuse encodingPushforwardIso and push_action, the proved sectionwise direct-image construction in Sheaf.Paper.FiniteDiscreteRestrictionEncoding. Its action calculation uses the existing coefficient-unit compatibility theorem; no new compatibility assumption is introduced.",
    "uses": [
-    "def-weil-pbc-common-finite-discrete-encoding"
+    "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "lem-weil-pbc-finite-discrete-coefficient-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The scheme-ring identifications come from one eR. Naturality of constant-sheaf pullback and its composition comparison identifies the restricted scalar map with condensedPushforwardHom. Substitute in the action equation.",
+   "text": "Define inverseForgetIso from sheafEncodingForgetIso. Naturality of the fixed equality hG shows that encodingPushforwardIso followed by this forgetful comparison on the source is the comparison on the target. The counit of scalar restriction along the ring isomorphism has identity underlying additive map. Naturality therefore identifies inverseForgetIso composed with the inverse encoding unit with finiteDiscreteCoefficientEquivalenceForgetIso.",
    "uses": [
-    "def-weil-pbc-common-finite-discrete-encoding",
-    "def-weil-pbc-coefficient-derived-functor-api"
+    "def-weil-pbc-common-finite-discrete-encoding"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For M=h_*E_S(N) and P=E_T(h_*N), compose the inverse-encoding direct-image isomorphism with the source inverse unit and target unit, then lift the resulting map through the fully faithful target inverse encoding. Apply naturality of inverseForgetIso and cancel its invertible component. The two unit identities and the preceding direct-image compatibility identify the lifted underlying map with the specified normalized additive restriction comparison. Apply Mod.act_hom to the lifted module morphism.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-common-finite-discrete-encoding",
-  "def-weil-pbc-coefficient-derived-functor-api"
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "def-weil-pbc-common-finite-discrete-encoding"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
-  "note": "A4: explicit coefficient transport; remaining proof obligations are separate named statements."
+  "note": "D2: reuse the existing proved inverse-encoding direct-image construction, and prove its compatibility with the particular additive normalization by naturality of hG and equivalence unit laws. No new holes or changes to existing signatures."
  },
  "mathlib_searches": [
   {
@@ -110,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-62b33",
-  "group": "A4",
+  "reviewer": "X-f4344",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261016T155153-L-839662",
+  "landing": "20261016T171805-L-1680750",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean constructions, remaining obligations, signatures and proof dependencies match their DAG nodes; compilation, importer and axiom checks pass."
+  "note": "independent Codex review: Delivered Lean matches the unchanged node statement; proof and DAG dependencies agree. Delivered module, direct importers PullbackIso and RestrictionCoherence, and SquareCoherence compile; all new declarations pass axiom checks with only the recorded existing sorryAx dependency."
  }
 }
