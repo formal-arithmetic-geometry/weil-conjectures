@@ -1,0 +1,153 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; geometric evaluation construction"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: finite-stage descent of constructible coefficients; the local-freeness bridge, geometric evaluation in the common-fibre corank argument.",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-field-presentation-corank",
+    "lem-weil-pbc-condensed-field-presentation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-condensed-field-regular-module-scalars",
+ "title": "Transport of normalized regular-module evaluation along one geometric map",
+ "statement": "Let E be a totally disconnected normed field, p:V to X a scheme morphism and a:Spec Omega to V a geometric map with Omega algebraically closed. Let H be any functor on modules over the condensed E coefficient ring of Spec Omega having the regular-module normalization CondensedFieldPointScalarProperty at z. Define F by restriction along the inverse canonical coefficient isomorphism for p, module pullback along a, then H. There is an E-linear coordinate b on F of the regular pulled-back coefficient module. For every endomorphism f, its scalar in these coordinates equals the value at a(z) of its continuous coefficient under condensedFieldPullbackRealization E p.",
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-field-evaluation-functors",
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical regular-module isomorphism of the geometric module pullback using coefficient change and the regular-module extension-of-scalars comparison. This is implemented by condensedFieldGeometricRegularIso. Apply H and compose with its normalized coordinates. The generic coordinate-conjugation calculation is proved in condensedField_coordinates_of_conjugacy.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-evaluation-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar of the conjugated endomorphism is computed by the continuous realization on Spec Omega. Transpose the two coefficient comparison maps using the adjoint-test characterization of the canonical continuous realization. The relative test projections commute with a, so evaluating at z is the original coefficient evaluated at a(z). Combine this identity with the proved coordinate-conjugation calculation.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-evaluation-functors",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1",
+  "note": "B2: regular-module transport along one geometric map; the regular comparison and generic coordinate-conjugation calculation are proved, while continuous coefficient naturality remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor maps internal modules to internal modules, and evaluation of sheaves at a point is lax monoidal",
+   "digest": "7e1d4a5a109e10e9",
+   "date": "2026-10-16",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; PresheafOfModules.monoidalCategory; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; PresheafOfModules.monoidalCategoryStruct; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "verdict": "The results provide ordinary module-presheaf evaluation and monoidal constructions, but no normalized internal coefficient evaluation or its geometric scalar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxMonoidal\", \"evaluation\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "The results provide ordinary module-presheaf evaluation and monoidal constructions, but no normalized internal coefficient evaluation or its geometric scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|sheafSections",
+   "digest": "f59c8549ec5bf656",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Sites/LocalSite.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "verdict": "The results provide ordinary module-presheaf evaluation and monoidal constructions, but no normalized internal coefficient evaluation or its geometric scalar comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of internal modules in abelian sheaves at an algebraically closed geometric point preserves finite colimits",
+   "digest": "38eda0744142450a",
+   "date": "2026-10-16",
+   "results": "PresheafOfModules.evaluation_preservesColimit; PresheafOfModules.evaluation_preservesColimitsOfSize; SheafOfModules.evaluationPreservesLimitsOfSize; PresheafOfModules.evaluation_preservesColimitsOfShape; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; SheafOfModules.evaluationPreservesLimit; SheafOfModules.evaluation; PresheafOfModules.evaluation_preservesFiniteLimits",
+   "verdict": "The results provide ordinary module-presheaf evaluation and monoidal constructions, but no normalized internal coefficient evaluation or its geometric scalar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of evaluating coefficients of regular module endomorphisms under pullback of sheaves",
+   "digest": "dba4041cd7f47d80",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; PresheafOfModules.Hom.naturality; CondensedMod.hom_naturality_apply; PresheafOfModules.Hom.naturality_assoc; AlgebraicGeometry.Scheme.Modules.map_smul; PresheafOfModules.naturality_apply; LightCondMod.hom_naturality_apply",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"mapMod\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*regular|regular.*mapMod|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldRegularModuleScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedField_geometric_evaluation_scalars",
+  "statement": "theorem condensedField_geometric_evaluation_scalars\n    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]\n    (X V : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (p : V ⟶ X) (a : Spec (.of Ω) ⟶ V) (z : Spec (.of Ω))\n    (H : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) AddCommGrpCat.{u + 1})\n      (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))) ⥤\n      ModuleCat.{u + 1} E)\n    (hH : CondensedFieldPointScalarProperty E Ω z H) :\n    let R := condensedRingObj (Profinite.continuousCoefficientRingObj E) X\n    let Ri := (upperStar AddCommGrpCat.{u + 1} p).obj R\n    let F :=\n      condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a ⋙ H\n    ∃ b : F.obj (Mod.regular Ri) ≃ₗ[E] E,\n      ∀ f : Mod.regular Ri ⟶ Mod.regular Ri,\n        b (F.map f (b.symm 1)) =\n          (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫\n          condensedFieldPullbackRealization E p).hom.app\n            (Opposite.op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T065200-L-672801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T065200-L-672801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

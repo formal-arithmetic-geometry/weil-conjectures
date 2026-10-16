@@ -7,10 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
-import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars
 
 /-!
 # Compatible evaluation functors for two lifts of a scheme point
@@ -85,6 +82,28 @@ theorem exists_condensedField_compatible_evaluations
           c (G.map f (c.symm 1)) =
             (((inv (condensedFieldPullbackRealization E g) ≫ f.hom ≫
               condensedFieldPullbackRealization E g).hom.app
-                (Opposite.op (Scheme.ProEt.mk (𝟙 W)))) (ULift.up 1)).down (d z)) := by sorry
+                (Opposite.op (Scheme.ProEt.mk (𝟙 W)))) (ULift.up 1)).down (d z)) := by
+  let Λ := Profinite.continuousCoefficientRingObj E
+  let R := condensedRingObj Λ X
+  obtain ⟨H, hHa, hHc, hHs⟩ := exists_condensedField_point_evaluation E Ω z
+  let := hHa
+  let := hHc
+  let P := condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a
+  let Q := condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) g d
+  let F := P ⋙ H
+  let G := Q ⋙ H
+  let e : (upperStar AddCommGrpCat.{u + 1} p).mapMod R ⋙ F ≅
+      (upperStar AddCommGrpCat.{u + 1} g).mapMod R ⋙ G :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (condensedFieldGeometricModulePullbackComp Λ p a) H ≪≫
+      Functor.isoWhiskerRight (eqToIso (congrArg (CondensedRing.upperStar Λ) had)) H ≪≫
+      (Functor.isoWhiskerRight (condensedFieldGeometricModulePullbackComp Λ g d) H).symm ≪≫
+      Functor.associator _ _ _
+  obtain ⟨b, hb⟩ := condensedField_geometric_evaluation_scalars E X V Ω p a z H hHs
+  obtain ⟨c, hc⟩ := condensedField_geometric_evaluation_scalars E X W Ω g d z H hHs
+  refine ⟨F, G, inferInstance, inferInstance, inferInstance, inferInstance,
+    ⟨e⟩, b, c, ?_, ?_⟩
+  · exact hb
+  · exact hc
 
 end AlgebraicGeometry.ProEtale
