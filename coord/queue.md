@@ -1,6 +1,6 @@
 # Work queue
 
-59 items; claim with `tools/claim.py next <group> [--stage N]`.
+60 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (59)
+## Stage 3: modules to prove (60)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -48,6 +48,7 @@
 | `Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison` | 13 | 2 | proof |
 | `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent` | 15 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization` | 15 | 1 | proof |
