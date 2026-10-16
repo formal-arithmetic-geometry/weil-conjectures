@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Condensed coefficient rings $\\underline T$",
@@ -13,24 +13,80 @@
   "place": "node sk-def-sfb-condensed-ring, order 851"
  },
  "stmt_deps": [
-  "sk-def-sfb-ring-object"
+  "sk-def-sfb-ring-object",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-padic-int-condensed-ring",
+  "def-sfb-padic-condensed-ring",
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-padic-integers-condensed-ring"
  ],
  "proof": [
   {
-   "text": "The sheaf property of $\\underline T$, and the ring object structure on it, are\n[def-sfb-continuous-map-condensed-ring]. The sheaf condition reduces to descent of\ncontinuous maps along a surjection of profinite sets, which is a quotient map. Only the\ntopology of $T$ enters. In particular, no completeness, Noetherianity or limit\npresentation of $T$ is used: $\\underline{\\mathbf Q}_\\ell$ is defined by its sections and\nnot as $\\underline{\\mathbf Z}_\\ell[1/\\ell]$, and $\\underline{\\mathbf Z}_\\ell$ is not\ndefined as $\\lim_n\\underline{\\mathbf Z/\\ell^n}$. The morphisms $\\varphi_*$ and their\nfunctoriality are [def-sfb-continuous-map-condensed-ring-map]. The four $\\ell$-adic\ninstances, with their inclusions, are [def-sfb-padic-int-condensed-ring],\n[def-sfb-padic-condensed-ring], [def-sfb-padic-subfield-condensed-ring] and\n[def-sfb-padic-integers-condensed-ring]. All these rings are commutative, so the ring\nobjects are commutative.",
+   "text": "The displayed finite jointly surjective covering families specify the site used throughout this definition; a condensed ring means a sheaf of rings on this site. For an arbitrary topological ring $T$, [def-sfb-continuous-map-condensed-ring] gives precisely the presheaf $S\\mapsto C(S,T)$ with precomposition restrictions and pointwise operations, together with its sheaf property. Its underlying abelian sheaf has a ring object structure, commutative if $T$ is commutative, by the same cited statement. For a general sheaf of rings on this site, clause 3 of [sk-def-sfb-ring-object] supplies the asserted ring object of abelian sheaves. This uses no completeness or finiteness hypothesis on $T$.",
    "uses": [
     "def-sfb-continuous-map-condensed-ring",
-    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+    "place": "First two sentences: sheaf property and ring object structure"
+   }
+  },
+  {
+   "text": "For a continuous ring homomorphism $\\varphi:T\\to T\\prime$, [def-sfb-continuous-map-condensed-ring-map] supplies the sheaf morphism with section map $a\\mapsto\\varphi\\circ a$, its morphism of underlying ring objects, and both functoriality identities. Its section formula commutes with restriction because $\\varphi\\circ(a\\circ u)=(\\varphi\\circ a)\\circ u$. The identity and composition formulas are evaluated on each section as $\\mathrm{id}\\circ a=a$ and $(\\psi\\circ\\varphi)\\circ a=\\psi\\circ(\\varphi\\circ a)$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+    "place": "Sentence on morphisms and functoriality"
+   }
+  },
+  {
+   "text": "For the fixed prime $\\ell$, [def-sfb-padic-int-condensed-ring] and [def-sfb-padic-condensed-ring] specify $\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell)$ and $\\underline{\\mathbf Q}_\\ell(S)=C(S,\\mathbf Q_\\ell)$ for the $\\ell$-adic topologies. Both cited statements assert commutativity of their underlying ring objects. The latter also supplies $\\underline{\\mathbf Z}_\\ell\\to\\underline{\\mathbf Q}_\\ell$ by the sectionwise inclusion.",
+   "uses": [
     "def-sfb-padic-int-condensed-ring",
-    "def-sfb-padic-condensed-ring",
+    "def-sfb-padic-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+    "place": "Sentence on the four instances: the two standard padic rings"
+   }
+  },
+  {
+   "text": "For an arbitrary field embedding $E\\hookrightarrow\\Qlb$, [def-sfb-padic-subfield-condensed-ring] specifies the restricted topology and $\\underline E(S)=C(S,E)$. With that topology, [def-sfb-padic-integers-condensed-ring] specifies the valuation subring $\\cO_E=\\{x:|x|_E\\le1\\}$, its subspace topology, and $\\underline{\\cO}_E(S)=C(S,\\cO_E)$. Both cited statements assert commutativity of the underlying ring objects. The latter supplies the map $\\underline{\\cO}_E\\to\\underline E$ without assuming that $E$ contains $\\mathbf Q_\\ell$.",
+   "uses": [
     "def-sfb-padic-subfield-condensed-ring",
     "def-sfb-padic-integers-condensed-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+    "place": "Sentence on the four instances: the embedded subfield and its integers"
+   }
+  },
+  {
+   "text": "Assume now, exactly as in the final clause, that $E$ contains $\\mathbf Q_\\ell$ and the embedding in $\\Qlb$ is compatible with it. The conditional clause of [def-sfb-padic-subfield-condensed-ring] supplies $\\underline{\\mathbf Q}_\\ell\\to\\underline E$, and that of [def-sfb-padic-integers-condensed-ring] supplies $\\underline{\\mathbf Z}_\\ell\\to\\underline{\\cO}_E$. Combine these with $\\underline{\\mathbf Z}_\\ell\\to\\underline{\\mathbf Q}_\\ell$ from [def-sfb-padic-condensed-ring] and $\\underline{\\cO}_E\\to\\underline E$ from [def-sfb-padic-integers-condensed-ring] to obtain the two displayed chains. Every arrow is the postcomposition map for its underlying inclusion. Thus on a section $a:S\\to\\mathbf Z_\\ell$ each composite sends $s$ to the image of $a(s)$ in $E$; the two composites agree. The functoriality identity of [def-sfb-continuous-map-condensed-ring-map] expresses this equality as equality of condensed ring morphisms.",
+   "uses": [
+    "def-sfb-padic-subfield-condensed-ring",
+    "def-sfb-padic-integers-condensed-ring",
+    "def-sfb-padic-condensed-ring",
+    "def-sfb-continuous-map-condensed-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+    "place": "Final sentence: inclusions and commutativity"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-ring-object",
   "def-sfb-continuous-map-condensed-ring-map",
   "def-sfb-padic-int-condensed-ring",
   "def-sfb-padic-condensed-ring",
@@ -39,12 +95,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/sk-def-sfb-condensed-ring.proof.md",
+  "place": "Entire proof; expanded into five steps using the existing six supporting nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "topCatToCondensed|continuousMap.*Sheaf|CondensedRing|condensed.*[Rr]ing",
+   "results": "22 hits: topCatToCondensedSet (Mathlib/Condensed/TopComparison.lean:146), scheme continuous-map presheaves, and condensed module files. Source read: set-valued sheaves do not supply the full ring-object and coefficient package.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A topological ring gives a condensed ring by continuous maps from profinite sets",
+   "results": "8 hits, including ContinuousMap.instCommRingOfIsTopologicalRing, RingTopology, profiniteToCondensed, TopCat.continuousFunctions. These cover component notions only.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, RingCat",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The condensed ring associated to a topological ring is the sheaf of continuous maps from profinite sets, functorial in continuous ring homomorphisms",
+   "results": "8 hits, including TopCat.commRingYoneda and CondensedMod.LocallyConstant.functorToPresheaves. Read TopCat.commRingYoneda in Mathlib/Topology/Sheaves/CommRingCat.lean:237: a commutative-ring presheaf functor on TopCat, without the condensed sheaf or ring-object structure and padic instances.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\"",
+   "results": "12 hits: Cauchy-condensation lemmas, CondensedSet, Condensed, Condensed.id_hom. Condensed uses coherent sheaves on CompHaus, not this full coefficient construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "Condensed|continuousFunctions|commRingYoneda",
+   "results": "5 displayed hits in Mathlib/Topology/Sheaves/CommRingCat.lean:19,161,208,211,215; read the surrounding continuousFunctions, map and commRingYoneda declarations. These are component presheaf constructions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps into a topological ring form a sheaf of rings on the coherent site of profinite spaces and hence a ring object in condensed abelian groups",
+   "results": "8 hits: Condensed.profiniteFree, CondensedMod, CondensedMod.ofSheafProfinite, CondensedAb, and light-condensed module structures. None states this ring-object and padic coefficient package.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "def commRingYoneda|def map \\(X : TopCat|def TopCat.toSheafCompHausLike|def topCatToSheafCompHausLike",
+   "results": "4 hits: TopCat.toSheafCompHausLike (Mathlib/Condensed/TopComparison.lean:110), topCatToSheafCompHausLike (same:128), TopCat.continuousFunctions.map (Mathlib/Topology/Sheaves/CommRingCat.lean:224), TopCat.commRingYoneda (same:237). Read sources: set-valued sheaf construction and commutative-ring presheaf functor separately; no full exact match.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +190,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-condensed-ring",
+  "worker": "stage1",
+  "summary": "Kept the current blueprint statement verbatim. Named all six existing construction nodes as statement dependencies in addition to the ring-object interface; expanded the imported omnibus proof into five sourced steps. Verified every used clause in the cited statements, including the conditional compatibility hypotheses for coefficient inclusions. No new nodes and no exact Mathlib or project-Lean attachment.",
+  "blueprint": "The current sk-def-sfb-condensed-ring proof: sheaf and ring-object construction (step 1); continuous-map functoriality (step 2); four coefficient instances (steps 3 and 4); inclusions (step 5). The point-site convention remains the inline definition of the unit statement."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-b4b76a42e",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-b4b76a42e (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, current main-20261015 unit sources, item, every cited node statement, route, and recorded Mathlib searches. Verified all five proof steps, hypotheses, coefficient morphisms, ring-object category, edge cases, acyclicity, and absence of duplicates or SGA citations. Wrote review.md. Inherited snapshot metadata lacks explicit chapter/unit records, but the blueprint route is unambiguous and no mathematical defect was found."
+ }
 }
