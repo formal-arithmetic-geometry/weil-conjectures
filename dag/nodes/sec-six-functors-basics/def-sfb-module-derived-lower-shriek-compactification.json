@@ -3,27 +3,101 @@
  "blueprint": {
   "is": "def-sfb-module-derived-lower-shriek-compactification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived lower shriek of module objects for a compactification",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and\n$c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ a compactification of a morphism\n$f\\colon X\\to Y$ ([sk-def-nagata-sketch-data]). The *derived lower shriek attached to\n$c$* is\n\n$$\nRf^c_!:=Rg_*\\circ D(i_!)\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y}),\n$$\n\nthe functor induced on derived categories by the exact extension by zero $i_!$\n([def-sfb-module-open-lower-shriek]) applied levelwise ([sk-def-sfb-derived-categories]), followed by the total right\nderived pushforward $Rg_*$ ([sk-def-sfb-module-derived-pushpull]). It is not the\ntotal right derived functor of $g_*\\circ i_!$.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring ([sk-def-sfb-condensed-ring]), let\n$f\\colon X\\to Y$ be a morphism of schemes, and let\n$c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ be a compactification of $f$\n([sk-def-nagata-sketch-data]). For $T=X,\\bar X,Y$, let $\\Lambda_T=p_T^*\\Lambda$\nbe the pulled-back coefficient ring ([sk-def-sfb-pulled-back-coefficients]) and\n$\\Mod_{\\Lambda_T}$ its category of module objects in abelian sheaves on\n$T_{\\mathrm{proét}}$ ([sk-def-sfb-module-objects]). Write $D(\\Mod_{\\Lambda_T})$\nfor the unbounded derived category ([sk-def-sfb-derived-categories]).\n\nThe *derived lower shriek attached to $c$* is the composite\n$$\nRf^c_!:=Rg_*\\circ D(i_!)\\colon\nD(\\Mod_{\\Lambda_X})\\xrightarrow{D(i_!)}D(\\Mod_{\\Lambda_{\\bar X}})\n\\xrightarrow{Rg_*}D(\\Mod_{\\Lambda_Y}).\n$$\nHere $i_!\\colon\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_{\\bar X}}$ is the exact additive\nextension by zero of [def-sfb-module-open-lower-shriek]; $D(i_!)$ is its induced\nfunctor on derived categories, obtained by applying $i_!$ levelwise\n([sk-def-sfb-derived-categories]); and $Rg_*$ is the total right derived\npushforward of module objects ([sk-def-sfb-module-derived-pushpull]). Thus the\nconstruction first applies $D(i_!)$ and then $Rg_*$; it does not define $Rf^c_!$\nby applying the right-derived-functor construction to the underived composite\n$g_*\\circ i_!$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/def-sfb-module-derived-lower-shriek-compactification.md",
   "place": "node def-sfb-module-derived-lower-shriek-compactification, order 1713"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
   "sk-def-nagata-sketch-data",
-  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories",
+  "def-sfb-module-open-lower-shriek",
   "sk-def-sfb-module-derived-pushpull"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|CondensedRing.*lowerShriek|lowerShriekOfCompactification",
+   "results": "Zero hits in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived lower shriek of sheaves of modules associated with a compactification is extension by zero followed by derived proper direct image",
+   "results": "Eight hits: Scheme.Modules.restrictAdjunction, pullbackPushforwardAdjunction, restrictFunctorAdjCounitIso, restrictFunctor; SheafOfModules.PullbackConstruction.adjunction, pullback, instIsRightAdjointPushforward, sheafificationCompPullback. They are underived functors/adjunctions, often for structure sheaves, and do not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "Zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compactly supported pushforward for module objects over a condensed coefficient ring on pro-etale sites, defined as exact extension by zero then derived proper pushforward",
+   "results": "Eight hits: Condensed.profiniteSolid, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforward, and CompHausLike.LocallyConstantModule.functor. These concern condensed modules or underived sheaf constructions, not this derived pro-etale compactification construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek|mapDerivedCategory|rightDerivedFunctor",
+   "results": "Twenty-five displayed hits in CategoryTheory, including generic IsRightDerivedFunctor, rightDerivedFunctorComparison, HasPointwiseRightDerivedFunctor and derived adjunction machinery. No condensed-ring module-object compactification lower shriek.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Twelve hits for CategoryTheory.Functor.mapDerivedCategory and its compatibility/triangulated/linear instances, mapDerivedCategoryIdIso, mapDerivedCategoryCompIso, mapDerivedCategorySingleFunctor, and NatTrans.mapDerivedCategory. Read Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-44: this supplies only the generic exact-functor factor D(i_!), not the condensed-ring pro-etale i_! and Rg_* of the item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose an exact functor on unbounded derived categories with the right derived direct image for sheaves of modules on the proetale site to define compactly supported direct image",
+   "results": "Eight hits concerning SheafOfModules pushforward and right adjoints, sheafPushforwardCocontinuous, Condensed.profiniteSolid, and light condensed modules. None constructs compactification-dependent derived lower shriek for the varying coefficient ring objects Lambda_T.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|rightDerivedFunctor",
+   "results": "Nineteen hits in Algebra/Homology/DerivedCategory: Functor.mapDerivedCategory at ExactFunctor.lean:36, its factorization at :41, and rightDerivedFunctorPlus at RightDerivedFunctorPlus.lean:36. The exact-functor construction is only one ingredient; bounded-below right-derived machinery does not give the whole unbounded pro-etale module-object construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition on derived categories of exact extension by zero and derived pushforward for sheaves of modules with compact support",
+   "results": "Eight hits: SheafOfModules.pushforwardComp, PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, the hom/inv application lemmas for SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, SheafOfModules.pushforward_id_comp, and SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. They concern underived pushforward composition or adjunctions, not the unbounded derived compactification composite of module objects over pulled-back condensed coefficient rings.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional direct image of sheaves of modules defined using a compactification, extension by zero, and unbounded right derived direct image",
+   "results": "Eight hits: AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforward, pushforwardPushforwardAdj, pushforwardSections, pushforward_obj_val; CompHausLike.LocallyConstantModule.functor; CondensedMod.ofSheafCompHaus; localCohomology.diagram. The pushforward hits are underived and the condensed/local-cohomology constructions do not define the compactification-dependent unbounded module-object composite. No whole-item match.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -43,5 +117,21 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-derived-lower-shriek-compactification",
+  "worker": "stage1",
+  "summary": "Audited the layer-B definition against the current blueprint and upstream module-object source. Made the three coefficient/module notions and the intermediate derived category explicit, retaining the original four construction dependencies. No new nodes are necessary: the cited extension-by-zero statement already supplies exactness, the derived-category statement supplies its levelwise induced functor, and derived pushpull supplies Rg_*. Clarified the final warning as a choice of construction, not a universal non-isomorphism assertion (identity compactification is a counterexample to that literal reading). Mathlib searches found only generic ingredients; no eligible slopmaster2 module-object declaration exists.",
+  "blueprint": "The display and following paragraph of def-sfb-module-derived-lower-shriek-compactification.md, equivalently the unbounded first composite in the unit sk-def-sfb-module-derived-lower-shriek/_section.md. Its final warning is kept as a construction convention. The unit also contains bounded-below, chosen-compactification and compatibility clauses, which this item does not claim to realize.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-b6ead4f91",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-b6ead4f91 (reviewer sub-agent of L); spot-checked: Read the complete definition, seven cited statements and their current blueprint sources, unit/chapter route, report and master references. The unbounded module categories and functor order agree; identity and empty-source cases check out. The warning clarification is justified. No new nodes, unsupported comparison theorem or repairs. Detailed checks are in review.md."
+ }
 }
