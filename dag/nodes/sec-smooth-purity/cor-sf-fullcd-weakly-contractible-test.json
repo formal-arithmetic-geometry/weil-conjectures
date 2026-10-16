@@ -192,5 +192,23 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-0057ce91c (reviewer sub-agent of L); spot-checked: Read the full item, report, eight cited statements, blueprint route, and Stacks sources 090L, 0990, 0946, 0947, and 0991. All three steps preserve coefficients and FullCD quantifiers; no comparison theorem is assumed. No new nodes or repairs. Detailed checks written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f6c686a1",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and compiler evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfFullCdWeaklyContractibleTest",
+  "declaration": "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension_iff_weaklyContractible_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfFullCdWeaklyContractibleTest.lean",
+  "statement": "theorem sfFullCohomologicalDimension_iff_weaklyContractible_test (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (S : Scheme.{u}) (_hl : IsUnit (l : Γ(S, ⊤))) {X Y : Scheme.{u}} (aX : X ⟶ S) (aY : Y ⟶ S) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (p : X ⟶ Y) [IsProper p] (_hp : p ≫ aY = aX) (c : ℕ) : sfFullCohomologicalDimension p (Padic.coefficientExtensionRing l E n) c ↔ (∀ (F : proEtaleRingModules X (proEtaleConstantRing X (Padic.coefficientExtensionRing l E n))) (W : Y.ProEt), IsAffine W.left → (ProEt.topology Y).IsWeaklyContractible.{u + 1} W → ∀ r : ℤ, (c : ℤ) < r → Subsingleton (((DerivedCategory.homologyFunctor _ r).obj ((proEtaleConstantDerivedDirectImage p (Padic.coefficientExtensionRing l E n)).obj ((DerivedCategory.singleFunctor _ 0).obj F))).val.obj (op W))) ∧ ∀ (V : Y.ProEt) (F : proEtaleRingModules X (proEtaleConstantRing X (Padic.coefficientExtensionRing l E n))) (W : V.left.ProEt), IsAffine W.left → (ProEt.topology V.left).IsWeaklyContractible.{u + 1} W → ∀ r : ℤ, (c : ℤ) < r → Subsingleton (((DerivedCategory.homologyFunctor _ r).obj ((proEtaleConstantDerivedDirectImage (pullback.snd p V.hom) (Padic.coefficientExtensionRing l E n)).obj ((DerivedCategory.singleFunctor _ 0).obj (proEtaleConstantModulePullback (pullback.fst p V.hom) (Padic.coefficientExtensionRing l E n) F)))).val.obj (op W))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

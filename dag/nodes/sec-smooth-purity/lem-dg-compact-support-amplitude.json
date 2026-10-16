@@ -362,5 +362,28 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-138a54310 (reviewer sub-agent of L); spot-checked: The nine-step proof and all 33 cited node statements/source locations check out, including coefficient category, fibre base change, support dimension, torsion cohomological dimension, and edge cases. `stmt_deps` omitted the explicitly used `def-weil-pbc-derived-categories` and `def-weil-pbc-scheme-conventions` (also flagged by `uses_not_cited`). Corrected JSON is in `fixes/dag/nodes/sec-smooth-purity/lem-dg-compact-support-amplitude.json`; review details are in `review.md`.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e238c0968",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, all four statement dependencies, exact declarations, hypotheses, edge cases, universes, docstrings, and verbatim signature. Reproduced both per-file compilations cleanly. No defects or fixes required; project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportAmplitudeCompactification",
+   "AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportAmplitude.lean",
+  "statement": "theorem isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasInvertibleExponent Λ Y] (d : ℕ) (hd : ∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : 2 * (d : ℤ) < q) : IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) (compactSupportAmplitudeCompactification k Y f)).obj ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The real-data helper specializes the existing Nagata compactification to the finite-type field base by supplying derived locally Noetherian and compact-space instances. The theorem uses the recorded ordinary unbounded candidate for this compactification on F[0]; the existing compactification comparisons identify it with Rf_! on this bounded-below input. There is no extra compactification, boundedness, constructibility, or finite-stalk hypothesis."
  }
 }

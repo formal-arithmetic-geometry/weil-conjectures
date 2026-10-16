@@ -252,5 +252,24 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-1c072b3f5 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full; the integral formula and auxiliary lemma check out. Corrected exchange-map citations, a missing tool-use declaration, and new-node metadata. Complete fixes and review.md are written. The review separately records an inherited downstream DAG cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-90da15ebe",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof route, universes, edge cases, docstrings, report sections, and exact canonical map checked; immutable snapshot compiled cleanly with scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralProperProjectionFormula",
+  "declaration": "AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_integral_of_isProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralProperProjectionFormula.lean",
+  "statement": "theorem isIso_rightDerivedLowerStarProjectionMap_integral_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (E : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (K : _root_.DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (hE : DerivedCategory.torsionCohomology (ULift.{u + 1} ℤ) X E.obj) : _root_.DerivedCategory.TStructure.t.plus (((derivedTensorRightDerivedLowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f).obj E.obj).obj K.obj) ∧ _root_.DerivedCategory.TStructure.t.plus (((rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f).obj E.obj).obj K.obj) ∧ IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f).app E.obj).app K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Integral coefficients are encoded by modules over ULift.{u + 1} ℤ, the universe lift of the initial commutative ring; their canonical scalar action identifies them with abelian groups. E and K belong to DerivedCategory.Plus. The conclusion records membership of both canonical tensor/direct-image outputs in the bounded-below full subcategory and IsIso of the recorded projection-map component. Full faithfulness makes this exactly invertibility in D⁺, without choosing any new map."
  }
 }

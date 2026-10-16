@@ -280,5 +280,28 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-0376a710c (reviewer sub-agent of L); spot-checked: Independently read the item, all cited DAG statements, unit/chapter route, delivery instructions, and Stacks sources Tags 00YV, 0H7J, 099R, 0GLZ, 03D2, 03D7, 03DA, 04JC, 03EK, and 010N. Verified all six steps, hypotheses, coefficient categories, comparison morphism, exactness, cohomology naturality, edge cases, searches, route, and absence of duplicates or cycles. Wrote review.md. No new nodes or repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5a5603918",
+  "group": "NA",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced successfully. No repository or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComparisonPullbackExact",
+  "declaration": "AlgebraicGeometry.comparisonPullbackExact",
+  "file": "lean/Sheaf/Paper/ComparisonPullbackExact.lean",
+  "statement": "theorem comparisonPullbackExact (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] : (∃ c : ((Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt T) CommRingCat.{u + 1} T.smallEtaleTopology (Scheme.ProEt.topology T)).obj ((constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of Λ)) ≅ (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ)), c.hom = comparisonConstantRingMap T Λ ∧ ∀ M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt T) CommRingCat.{u + 1} T.smallEtaleTopology (Scheme.ProEt.topology T)).obj ((constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of Λ)))), ∃ e : (SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ)))).obj (SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} (C := T.ProEt) (J := Scheme.ProEt.topology T) c.hom M) ≅ (SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt T) CommRingCat.{u + 1} T.smallEtaleTopology (Scheme.ProEt.topology T)).obj ((constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of Λ))))).obj M, ∀ (W : T.ProEtᵒᵖ) (b : ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ)).obj.obj W) (m : M.val.obj W), e.hom.hom.app W (((PresheafOfModules.sheafificationAdjunction.{u + 1} (R := (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ))) (𝟙 (((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj (CommRingCat.of Λ)).obj ⋙ forget₂ CommRingCat RingCat))).unit.app (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} (C := T.ProEt) (J := Scheme.ProEt.topology T) c.hom M)).app W (b ⊗ₜ[_, (c.hom.hom.app W).hom] m)) = c.inv.hom.app W b • m) ∧ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T).Additive ∧ PreservesFiniteLimits (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T) ∧ PreservesFiniteColimits (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T) ∧ (∀ (i : ℤ), Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ HomologicalComplex.homologyFunctor (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ) i ≅ HomologicalComplex.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ) i ⋙ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T)) ∧ (∀ {K L : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ} (f : K ⟶ L), HomologicalComplex.quasiIso _ (ComplexShape.up ℤ) f → HomologicalComplex.quasiIso _ (ComplexShape.up ℤ) (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧ (∀ (a : ℤ) (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ), (∀ i : ℤ, i < a → IsZero (K.homology i)) → ∀ i : ℤ, i < a → IsZero ((((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).homology i))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.comparisonConstantRingMap",
+   "AlgebraicGeometry.comparisonPullbackExact"
+  ],
+  "note": "Second reading restores clause 1: canonical constant-ring map from the two existing adjunctions, and the scalar-extension identification on all inverse-ring module sheaves, characterized on local pure tensors. This identifies the induced action and expresses flatness without identifying the distinct site object and morphism universes. No mathematical node statement change."
  }
 }
