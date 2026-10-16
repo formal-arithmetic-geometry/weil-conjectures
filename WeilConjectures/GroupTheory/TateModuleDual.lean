@@ -167,10 +167,11 @@ lemma toZModPow_eq_of_coordTorsion_eq (f : tateModule ℓ M →ₗ[ℤ_[ℓ]] �
 
 variable (hdiv : ∀ (n : ℕ) (y : M), (ℓ : ℤ) ^ n • y = 0 → ∃ z : M, (ℓ : ℤ) • z = y)
 
-include hdiv in
 /-- The character of `M[ℓⁿ]` attached to a `ℤ_ℓ`-linear map `f : T_ℓ M → ℤ_ℓ`:
 `y ↦ f t mod ℓⁿ` for any `t ∈ T_ℓ M` with `t n = y`. -/
-noncomputable def ofDualAux (f : tateModule ℓ M →ₗ[ℤ_[ℓ]] ℤ_[ℓ]) (n : ℕ) :
+noncomputable def ofDualAux
+    (hdiv : ∀ (n : ℕ) (y : M), (ℓ : ℤ) ^ n • y = 0 → ∃ z : M, (ℓ : ℤ) • z = y)
+    (f : tateModule ℓ M →ₗ[ℤ_[ℓ]] ℤ_[ℓ]) (n : ℕ) :
     AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n) →+ ZMod (ℓ ^ n) where
   toFun y := PadicInt.toZModPow n (f (exists_coordTorsion_eq hdiv n y).choose)
   map_zero' := by

@@ -179,7 +179,9 @@ theorem sheafHEquivContinuousMonoidHom_add
   let ψ : G →ₜ* Multiplicative (M × M) :=
     { toFun g := Multiplicative.ofAdd ((e x g).toAdd, (e y g).toAdd)
       map_one' := by simp
-      map_mul' a b := by simp; rfl
+      map_mul' a b := by
+        simp
+        rfl
       continuous_toFun := continuous_of_discreteTopology.comp
         ((continuous_toAdd.comp (e x).continuous).prodMk (continuous_toAdd.comp (e y).continuous)) }
   let z := (sheafHEquivContinuousMonoidHom (M × M) s G).symm ψ

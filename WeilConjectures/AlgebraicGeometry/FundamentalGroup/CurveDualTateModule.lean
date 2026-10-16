@@ -55,8 +55,8 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} [X.Over (Spec (
   {l : ℕ} [Fact l.Prime] (hl : (l : k) ≠ 0)
 
 omit [IsAlgClosed k] [Fact l.Prime] in
-include hl in
-lemma natCast_pow_ne_zero_of_natCast_ne_zero (n : ℕ) : ((l ^ n : ℕ) : k) ≠ 0 := by
+lemma natCast_pow_ne_zero_of_natCast_ne_zero (hl : (l : k) ≠ 0) (n : ℕ) :
+    ((l ^ n : ℕ) : k) ≠ 0 := by
   rw [Nat.cast_pow]
   exact pow_ne_zero _ hl
 
@@ -131,9 +131,8 @@ lemma sheafHPicTorsionDualAddEquiv_map_reduction (n : ℕ)
     ((picTorsionByPowEquiv X l n).symm ⟨_, AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩).2
 
 omit [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X] in
-include hl in
 /-- `Pic(X)[ℓⁿ]` has `ℓ ^ (2 g n)` elements, as `H¹(X, μ_{ℓⁿ}) ≅ (ℤ/ℓⁿ)^{2g}`. -/
-lemma natCard_picTorsionBy [Nonempty X] (n : ℕ) :
+lemma natCard_picTorsionBy (hl : (l : k) ≠ 0) [Nonempty X] (n : ℕ) :
     Nat.card (AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n)) =
       l ^ (2 * (X ↘ Spec (.of k)).genus * n) := by
   obtain ⟨e⟩ := nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (k := k) (X := X) (l ^ n)
@@ -143,9 +142,9 @@ lemma natCard_picTorsionBy [Nonempty X] (n : ℕ) :
     Nat.card_congr e.toEquiv, Nat.card_fun, Nat.card_zmod, Nat.card_fin, ← pow_mul, mul_comm n]
 
 omit [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X] in
-include hl in
 /-- The `ℓ`-power torsion of `Pic(X)` is `ℓ`-divisible. -/
-lemma exists_zsmul_eq_of_pow_zsmul_eq_zero [Nonempty X] (n : ℕ) (y : Additive X.Pic)
+lemma exists_zsmul_eq_of_pow_zsmul_eq_zero (hl : (l : k) ≠ 0) [Nonempty X] (n : ℕ)
+    (y : Additive X.Pic)
     (hy : (l : ℤ) ^ n • y = 0) : ∃ z, (l : ℤ) • z = y :=
   AddCommGroup.exists_zsmul_eq_of_natCard_torsionBy
     (Fact.out : l.Prime).ne_zero (natCard_picTorsionBy hl) n y hy
@@ -212,13 +211,13 @@ lemma toZModPow_sheafHOneLimitAddEquivDualTateModule_apply (x : sheafHOneLimit X
 section Transport
 
 variable (f : X ⟶ X) [IsIso f] (σ : Spec (.of k) ⟶ Spec (.of k)) [IsIso σ]
-  (hf : f ≫ (X ↘ Spec (.of k)) = (X ↘ Spec (.of k)) ≫ σ)
 
-include hf in
 /-- **Equivariance at finite level.** For an automorphism `f` of `X` over an automorphism of
 `Spec k`, the transport of classes along `f` corresponds to precomposition with the pullback
 `f^*` of line bundles. -/
-lemma sheafHPicTorsionDualAddEquiv_mapIsoH1 (n : ℕ) (x : Sheaf.H (constantZModPow X l n) 1)
+lemma sheafHPicTorsionDualAddEquiv_mapIsoH1
+    (hf : f ≫ (X ↘ Spec (.of k)) = (X ↘ Spec (.of k)) ≫ σ) (n : ℕ)
+    (x : Sheaf.H (constantZModPow X l n) 1)
     (y : AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n)) :
     sheafHPicTorsionDualAddEquiv s G hl n (mapIsoH1 X _ (asIso f) x) y =
       sheafHPicTorsionDualAddEquiv s G hl n x
@@ -227,16 +226,18 @@ lemma sheafHPicTorsionDualAddEquiv_mapIsoH1 (n : ℕ) (x : Sheaf.H (constantZMod
   induction T using Quotient.inductionOn with | h t => ?_
   rw [mapIsoH1_classH1, sheafHPicTorsionDualAddEquiv_classH1, sheafHPicTorsionDualAddEquiv_classH1,
     picPairing_transport f σ hf _ t (t.mapIso (asIso f)) (𝟙 _) (Category.id_comp _).symm
-      (by rw [Category.comp_id, Category.id_comp]; rfl)]
+      (by
+        rw [Category.comp_id, Category.id_comp]
+        rfl)]
   rfl
 
-include hf in
 /-- **Equivariance.** For an automorphism `f` of `X` over an automorphism of `Spec k` (e.g. the
 action of an element of `Gal(k̄₀ / k₀)` on the geometric fibre of a curve over `k₀`), the
 isomorphism `lim_n H¹(X, ℤ/ℓⁿ) ≃+ Hom_{ℤ_ℓ}(T_ℓ Pic(X), ℤ_ℓ)` carries the transport of
 compatible families of classes along `f` to precomposition with the map `T_ℓ(f^*)` induced by
 the pullback of line bundles. -/
-theorem sheafHOneLimitAddEquivDualTateModule_mapIsoH1 (x y : sheafHOneLimit X l)
+theorem sheafHOneLimitAddEquivDualTateModule_mapIsoH1
+    (hf : f ≫ (X ↘ Spec (.of k)) = (X ↘ Spec (.of k)) ≫ σ) (x y : sheafHOneLimit X l)
     (hxy : ∀ n, y.1 n = mapIsoH1 X _ (asIso f) (x.1 n)) :
     sheafHOneLimitAddEquivDualTateModule s G hl y =
       (sheafHOneLimitAddEquivDualTateModule s G hl x).comp
