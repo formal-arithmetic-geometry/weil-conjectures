@@ -15,7 +15,6 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 1 | disputed |
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
-| `Sheaf.Paper.ContinuousConstructibleIntegralImage` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
@@ -35,6 +34,7 @@
 | `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceCostalkModel` | 7 | 1 | proof |
+| `Sheaf.Paper.IntegralConstructibleSheafHom` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
@@ -47,9 +47,3 @@
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent` | 40 | 1 | proof |
-
-Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
-
-| module | distance to a target | sorry |
-|---|---|---|
-| `Sheaf.Paper.ContinuousConstructibleIntegralImage` | 4 | 1 |
