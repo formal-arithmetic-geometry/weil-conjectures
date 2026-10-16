@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-nagata-density-normalization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Passing to the schematic closure",
@@ -18,25 +18,97 @@
  ],
  "proof": [
   {
-   "text": "The open and closed immersion operations on the pro-étale site are exact by\n[sk-prop-sf-open-closed-triangle]. Its quasi-compact-open hypothesis applies\nto the complement of $Z$ here because $\\overline X$ is Noetherian, and\ntherefore ensures exactness of $i_*$. Extension by zero along $j$ is\nsupported on $X$, which lies in $Z$. Its inverse image on $Z$ is extension by\nzero along $j_Z$. Equivalently, the natural map\n\n$$\nj_!K\\longrightarrow i_*i^*j_!K=i_*j_{Z,!}K\n$$\n\nis the identity on the open $X$ and both sides restrict to zero on its closed\ncomplement. The open–closed localization sequence therefore makes it an\nisomorphism. Since the immersion operations are exact, the argument applies\ndegreewise to unbounded complexes.",
-   "uses": [],
-   "elementary": null
+   "text": "By [det-nagata-density-normalization-setup], the given compactification and its schematic closure satisfy the comparison setup: $j=i\\circ j_Z$, $j_Z$ is a quasi-compact open immersion, and $V=\\overline X\\setminus Z$ is a quasi-compact open with closed complement $Z$. The same setup says that $\\overline X$ is quasi-compact and quasi-separated. Thus clause (2) of [det-sf-open-closed-pullback-limits], with $B=\\Lambda_{\\overline X}$, makes the closed restriction $i^*$ exact for these coefficients. In particular it sends an acyclic complex to an acyclic complex: exactness preserves kernels and images, so $H^n(i^*C)=i^*H^n(C)=0$. Hence the closed restriction occurring in the sheaf comparison is computed degreewise on the unbounded derived category, as used in the source's first paragraph. Apply the unbounded-complex clause of [det-nagata-density-normalization-sheaves] to the pulled-back coefficient sheaves and any complex representing the given $K$. It supplies the canonical identification in $D(\\overline X_{\\mathrm{pro\\acute{e}t}},\\Lambda_{\\overline X})$:\n\n$$j_!K\\simeq i_*j_{Z,!}K.$$\n\nThe cited clause explicitly induces this identification in the derived category.",
+   "uses": [
+    "det-nagata-density-normalization-setup",
+    "det-sf-open-closed-pullback-limits",
+    "det-nagata-density-normalization-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
+    "place": "first proof paragraph"
+   }
   },
   {
-   "text": "Since $i_*$ is exact, $Ri_*=i_*$. The derived direct-image composition\nisomorphism $Rp_*Ri_*\\simeq R(p\\circ i)_*$ proves the second\nidentification, as a composite of derived right adjoints.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [det-nagata-density-normalization-pushforward] to these compactification, closure, and coefficient data. It gives the canonical identification in $D(S_{\\mathrm{pro\\acute{e}t}},\\Lambda_S)$:\n\n$$Rp_*j_!K\\simeq R(p\\circ i)_*j_{Z,!}K.$$\n\nParts (1) and (4) of [det-nagata-density-normalization-setup] say that $j_Z$ is a quasi-compact open immersion and $p\\circ i$ is proper. Also $(p\\circ i)\\circ j_Z=p\\circ j=f$. Hence $X\\xrightarrow{j_Z}Z\\xrightarrow{p\\circ i}S$ is a compactification by [sk-def-nagata-sketch-data]. Its compact-support expression is $R(p\\circ i)_*j_{Z,!}$, whereas the original expression is $Rp_*j_!$. The displayed natural identification equates these expressions, proving the final assertion, in particular for finite-type $k$-schemes.",
+   "uses": [
+    "det-nagata-density-normalization-pushforward",
+    "det-nagata-density-normalization-setup",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
+    "place": "second proof paragraph"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-nagata-density-normalization-pushforward",
+  "det-nagata-density-normalization-setup",
+  "det-nagata-density-normalization-sheaves",
+  "det-sf-open-closed-pullback-limits",
+  "sk-def-nagata-sketch-data"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
+  "place": "first and second proof paragraphs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical identification extension by zero through a schematic closure and proper direct image composition on pro-etale derived categories",
+   "results": "AlgebraicGeometry.liftCoborder_app (Mathlib/AlgebraicGeometry/Morphisms/Immersion); AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover_map_subschemeι (Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme); AlgebraicGeometry.IsClosedImmersion.lift (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion); AlgebraicGeometry.Scheme.Hom.normalizationDiagram (Mathlib/AlgebraicGeometry/Normalization); no declaration of the pro-etale derived identification",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.RightDerivedFunctor, CategoryTheory.Functor.comp, openImmersionLowerShriek",
+   "results": "Query rejected: unknown identifier 'CategoryTheory.RightDerivedFunctor'; this is not evidence of absence. Replaced by the independent valid query recorded below.",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*direct.*image|open.*closed.*exact|extension.*zero [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "schematic closure extension by zero proper direct image composition",
+   "results": "AlgebraicGeometry.IsProper.instCompScheme; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.IsProper.stableUnderComposition; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits; AlgebraicGeometry.universallyClosedTypeComp; no exact pro-etale statement",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module pushforward for a closed embedding is exact and extension by zero factors through a closed subscheme containing the open subset",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.instIsClosedImmersionInclusion; no exact pro-etale condensed-coefficient derived comparison found",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|openImmersionLowerShriek|extensionByZero [AlgebraicGeometry]",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; no exact pro-etale condensed-coefficient derived comparison found",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits; no declarations returned; no exact pro-etale condensed-coefficient derived comparison found",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -54,5 +126,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-nagata-density-normalization"
+ "unit": "sk-lem-nagata-density-normalization",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-nagata-density-normalization",
+  "worker": "stage1",
+  "summary": "Reused the existing same-unit comparison lemmas. Second reading makes their setup explicit, removes an unsupported attribution of exactness to the sheaf-comparison statement, verifies that the closure is again a compactification, corrects an invalid Loogle-search verdict, and fills the unit realization. No new node or statement change. Dry-run repair cites the existing arbitrary-ring-sheaf closed-pullback exactness statement to realize the source open-closed route.",
+  "blueprint": "First source paragraph: proof step 1, via the setup, closed-pullback exactness, and sheaf comparison. Second source paragraph: proof step 2, via the pushforward comparison; its final lines verify the replacement compactification and the defining compact-support expression.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NW-25e04ed27",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-25e04ed27 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, item statement identical byte for byte to the main-20261015 _section.md, so no target is weakened. Step 1 cites the det setup node (clauses 1-2: j=i∘j_Z, j_Z a qc open immersion, Xbar and Z qcqs, V qc with complement Z), then det-sf-open-closed-pullback-limits (2), whose hypotheses hold (qcqs, closed immersion with qc open complement, any ring sheaf B=Λ_Xbar). That citation is not strictly needed but it is true and from the correct unit; the triangle sketch has no node and the other open-closed nodes are limited to finite Dctf coefficients. The step's derived conclusion is exactly the unbounded clause of det-nagata-density-normalization-sheaves. Step 2 takes exactly the statement of det-nagata-density-normalization-pushforward. Setup (1) and (4) together with sk-def-nagata-sketch-data (which agrees with def-nagata-compactification) show the closure is again a dense compactification. The coefficient category and the morphisms (unit with base change, Rp_*Ri_*≃R(p∘i)_*) match the blueprint det proofs; no seeded comparison is used as a theorem. Dependency closure (407 nodes) has no cycle and every id exists; proof_deps equals the union of uses; no SGA cited; unit realization is permitted. Tested K=0, X empty, X dense, a disjoint extra component, and non-reduced Xbar. No changes and no tool_uses."
+ }
 }
