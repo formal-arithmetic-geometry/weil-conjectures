@@ -87,10 +87,10 @@
    }
   },
   {
-   "text": "For the actual finite-field and finite-subfield-valued Omega coefficients, obtain kernel, cokernel and extension closure from [lem-weil-pbc-condensed-constructible-serre]. The parent proves isomorphism closure directly from presentations and covers, and proves zero constructible using the rank-zero presentation and trivial stratification. Turn these assertions into the weak-Serre ObjectProperty instances. The fully proved library theorem DerivedCategory.homologyProperty_isTriangulated (whose proof is the long exact homology sequence [lem-sf-derived-homology-long-exact]) makes the property of constructible homology triangulated. Intersect it with t.bounded. These specific triangulated instances are used locally in the object-descent proof. In particular the argument does not use the original overgeneral generic isTriangulated_boundedConstructible instance. That upstream instance has since been corrected to require coefficient closure explicitly; the present direct construction from those closure properties remains valid.",
+   "text": "For finite-field and algebraic-closure coefficients, obtain kernel, cokernel and extension closure from lem-weil-pbc-condensed-constructible-serre. The extracted bounded_tri_of_serre helper packages isomorphism, kernel, cokernel and extension closure as ObjectProperty instances and applies the corrected conditional isTriangulated_boundedConstructible instance. Reuse the extracted finiteBoundedTriangulated theorem for the finite field; algClBoundedTriangulated applies the same shared private helper to the algebraic-closure Serre theorem. These are local instances in object descent; no unconditional constructibility-closure assertion is used.",
    "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-condensed-constructible-serre"
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-condensed-finite-model-proof-api"
    ],
    "elementary": false,
    "source": {
@@ -131,6 +131,13 @@
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
     "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
    }
+  },
+  {
+   "text": "Reuse the extracted private factorization and single-complex bounded-constructibility helpers through nonpublic import all Sheaf.Paper.CondensedFiniteModelProofAPI. The generic factorization proofs, single-complex proof, and finite-field triangulated-closure proof have one home. Public statements and comparison maps are unchanged.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-model-proof-api"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -143,8 +150,8 @@
   "lem-weil-pbc-condensed-sheaf-ext-continuity",
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-triangulated-category",
-  "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-condensed-finite-model-proof-api",
   "lem-weil-pbc-directed-triangulated-image",
   "lem-weil-pbc-condensed-finite-presentation-descent"
  ],
@@ -418,13 +425,13 @@
   "note": "attached by the lead's tool attach.py --stage2; source and statement checked by L; rests_on_sorry by sorry-map.jsonl.gz: Checked ell prime and topologically noetherian T, padicAlgClRingObj with finite-subextension-valued continuous functions, bounded constructible module categories without completeness, derived scalar extensions, preservation and tensor-transitivity comparisons of constructibleCocone. CategoryCocone.IsFilteredTwoColimit is exactly object descent and eventual Hom surjectivity/injectivity as stated. The three upstream descent proofs remain sorry; the assembly theorem rests on them."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-c6b94",
-  "group": "B2",
+  "reviewer": "X-788cf",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261015T194211-L-1174513",
+  "landing": "20261016T072032-L-914019",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean statements and proofs with DAG nodes and sources; verified unchanged tensor data by rfl, allowed axioms, and clean compilation of all three delivered modules, all three direct importers, and CondensedFlatCoefficientCalculus."
+  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
  }
 }

@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-model-extensions",
+ "kind": "statement",
+ "title": "Finite constructible coefficient models are closed under distinguished extensions",
+ "statement": "Let X be a Noetherian scheme in universe u and ℓ a prime. Let D be a distinguished triangle in the unbounded derived category of internal modules over the specified condensed algebraic-closure coefficient ring Ω_X. Suppose each of D.obj₁ and D.obj₃ is isomorphic to the degree-zero complex of the scalar extension of a constructible module over some finite coefficient field [def-weil-finite-subextension-directed-set, def-weil-pbc-condensed-e-module-category]; the two fields can differ. Then there exist a finite coefficient field H and a constructible module P over H_X whose scalar extension to Ω_X is isomorphic to H⁰(D.obj₂). There is no further hypothesis on the middle object or on the boundary morphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "TwoColimit Hom and object-descent arguments: descend only the single-complex boundary, complete a distinguished triangle, and take H⁰."
+ },
+ "proof": [
+  {
+   "text": "The single complexes of the two finite models are bounded constructible by the extracted single_bounded_constructible helper. Use the exact scalar-extension/single comparison to identify their extensions with the two outer objects. Conjugate the triangle boundary by these identifications and the shift comparison, obtaining a map from the third single model into the extension of the shifted first single model. The isomorphism closure of bounded constructibility uses constructible_of_iso from ProEtaleModuleConstructiblePullback.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-condensed-finite-model-proof-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the small filtered category AsSmall(Under(max E F)) of common upper fields. The coefficient-complex presentation gives a uniformly bounded-below diagram representing restriction of scalar extension. Constructible Hom continuity, evaluated in degree zero (and transferred through the shift adjunction), makes every map out of the source single complex factor through one cocone leg. Transpose this factorization by the fixed coefficient adjunctions; the presentation compatibility equation gives the exact tensor-comparison formula for its extension to Ω.",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "def-weil-pbc-finite-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the finite-stage boundary with the finite extension shift comparison. Complete it by Mathlib Pretriangulated.distinguished_cocone_triangle₂. Exact finite scalar extension preserves bounded constructibility. The shared finiteBoundedTriangulated theorem supplies triangulated closure over the finite field, so the middle finite-stage object is bounded constructible. Its Serre-to-triangulated argument now lives in the shared proof API.",
+   "uses": [
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-weil-pbc-condensed-finite-model-proof-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the canonical left-derived tensor comparison through exact derived functors. Exact derived composition and natural-isomorphism comparisons commute with shifts; therefore the tensor comparison does also. The descended boundary equation identifies the extended boundary with that of D. Apply Mathlib isoTriangleOfIso₁₃ and its second-object projection. Take zeroth cohomology; its commutation with exact scalar extension gives the required module isomorphism, and bounded constructibility supplies constructibility of that zeroth cohomology.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison",
+    "lem-weil-pbc-condensed-finite-model-proof-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-derived-tensor-comparison",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-condensed-finite-model-proof-api",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedFiniteModelExtensions.lean",
+  "place": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_model_of_triangle",
+  "group": "G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible finite coefficient models are closed under extensions of sheaves of modules",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a distinguished triangle of derived sheaves of modules, constructible finite field models of the outer terms give a finite field model of the middle cohomology",
+   "results": "8 hits in derived-category t-structure and fractions, including DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no finite coefficient model theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂",
+   "results": "One exact match for the component completing a boundary morphism to a distinguished triangle in Mathlib.CategoryTheory.Triangulated.Pretriangulated; used in the proof, but not the whole statement.",
+   "date": "2026-10-16",
+   "verdict": "component match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(extension|finite.*model)|finite.*coefficient.*triangle",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing",
+  "date": "2026-10-16",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "TwoColimit Hom and object-descent arguments: descend only the single-complex boundary, complete a distinguished triangle, and take H⁰.",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-gluing",
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+    "lem-weil-pbc-condensed-stratum-model-induction-step",
+    "lem-weil-pbc-condensed-stratum-model-assembly",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteModelExtensions",
+  "file": "lean/Sheaf/Paper/CondensedFiniteModelExtensions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_model_of_triangle",
+  "statement": "theorem exists_finiteCoefficient_model_of_triangle\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (D : Pretriangulated.Triangle (DerivedCategory\n      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))))\n    (hD : D ∈ distTriang _)\n    (h₁ : ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n      (P : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)),\n      IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E) P ∧\n      Nonempty ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj P) ≅ D.obj₁))\n    (h₃ : ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n      (P : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)),\n      IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E) P ∧\n      Nonempty ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj P) ≅ D.obj₃)) :\n    ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n      (P : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)),\n      IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E) P ∧\n      Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj P ≅\n        (DerivedCategory.homologyFunctor _ 0).obj D.obj₂)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
+ }
+}

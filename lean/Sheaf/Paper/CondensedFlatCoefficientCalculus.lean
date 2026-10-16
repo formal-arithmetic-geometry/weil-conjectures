@@ -6,6 +6,7 @@ Authors: SHEAF group NV
 module
 public import Sheaf.Paper.CondensedCoefficientComparisons
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import all Sheaf.Paper.CondensedFiniteModelProofAPI
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -277,10 +278,6 @@ variable {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
   [GH.Additive] [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
   [FGH.Additive] [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
 
-private noncomputable abbrev derivedComp (e : F ⋙ G ≅ FG) :
-    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ FG.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F G).symm ≪≫ mapDerivedCategoryNatIso e
-
 private lemma derivedComp_assoc (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
     (c : G ⋙ H ≅ GH) (d : F ⋙ GH ≅ FGH)
     (h : isoWhiskerRight a H ≪≫ b = isoWhiskerLeft F c ≪≫ d) :
@@ -322,10 +319,6 @@ private lemma associator_trans_eq (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ V)
     {K : C ⥤ V} (e : F ⋙ G ⋙ H ≅ K) : associator F G H ≪≫ e = e := by
   ext X
   simp
-
-private noncomputable abbrev transportComp (a : F ≅ F') (b : G ≅ G') (c : FG ≅ FG')
-    (e : F' ⋙ G' ≅ FG') : F ⋙ G ≅ FG :=
-  isoWhiskerLeft F b ≪≫ isoWhiskerRight a G' ≪≫ e ≪≫ c.symm
 
 private lemma transportComp_assoc (aF : F ≅ F') (aG : G ≅ G') (aH : H ≅ H')
     (aFG : FG ≅ FG') (aGH : GH ≅ GH') (aFGH : FGH ≅ FGH')
@@ -479,17 +472,6 @@ variable [MonoidalCategory D] [MonoidalPreadditive D]
   [Abelian.HasFunctorialFlatResolution D]
 
 
-private lemma leftComp_transport (G : D ⥤ E) [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-    (e : F ⋙ G ≅ FG) :
-    (F.leftDerivedFunctorCompIso G).symm ≪≫ (F ⋙ G).leftDerivedFunctorNatIso e =
-      transportComp F.leftDerivedFunctorIsoMapDerivedCategory
-        G.leftDerivedFunctorIsoMapDerivedCategory FG.leftDerivedFunctorIsoMapDerivedCategory
-        (derivedComp e) := by
-  simp [leftDerivedFunctorCompIso, leftDerivedFunctorNatIso, transportComp, derivedComp,
-    Iso.trans_assoc, ← isoWhiskerLeft_symm, ← isoWhiskerRight_symm]
-
 variable [MonoidalCategory E] [MonoidalPreadditive E]
   [HasCountableCoproducts E]
   [HasColimitsOfShape ℤ E] [HasExactColimitsOfShape ℤ E]
@@ -612,33 +594,6 @@ variable [MonoidalCategory D] [MonoidalPreadditive D]
   [Abelian.HasFunctorialFlatResolution D]
 
 
-
-private lemma leftComp_shift (G : D ⥤ E) [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-    (e : F ⋙ G ≅ FG) :
-    let := CommShift.ofIso F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    let := CommShift.ofIso G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    let := CommShift.ofIso FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    NatTrans.CommShift ((F.leftDerivedFunctorCompIso G).symm ≪≫
-      (F ⋙ G).leftDerivedFunctorNatIso e).hom ℤ := by
-  let := CommShift.ofIso F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  let := CommShift.ofIso G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  let := CommShift.ofIso FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift F.leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
-    CommShift.ofIso_compatibility F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift F.leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
-    NatTrans.CommShift.of_iso_inv F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift G.leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
-    CommShift.ofIso_compatibility G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift G.leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
-    NatTrans.CommShift.of_iso_inv G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift FG.leftDerivedFunctorIsoMapDerivedCategory.inv ℤ :=
-    CommShift.ofIso_compatibility FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  rw [leftComp_transport]
-  dsimp only [transportComp, derivedComp, Iso.trans_hom, Iso.symm_hom,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom]
-  infer_instance
 
 private lemma leftUnit_shift (A : C ⥤ C) [A.Additive]
     [PreservesFiniteLimits A] [PreservesFiniteColimits A] (e : A ≅ 𝟭 C) :

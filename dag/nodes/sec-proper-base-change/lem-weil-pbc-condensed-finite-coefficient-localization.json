@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-coefficient-localization",
+ "kind": "statement",
+ "title": "Finite coefficient models for the outer terms of open/closed localization",
+ "statement": "Let X be a Noetherian scheme in universe u and ℓ a prime. Let N be an internal Ω_X-module and let j:U→X and k:Z→X be complementary open and closed immersions. Let PU and PZ be arbitrary internal modules over finite coefficient fields EU and EZ on U and Z, respectively, with specified scalar-extension isomorphisms to j* N and k* N. Then there is a distinguished triangle D in D(Mod Ω_X), an isomorphism single(Ext_EU^Ω(j!PU)) ≅ D.obj₁, an isomorphism single(Ext_EZ^Ω(k_*PZ)) ≅ D.obj₃, and an isomorphism H⁰(D.obj₂) ≅ N. The two outer models are exactly the prescribed images, not arbitrary finite models. No constructibility or finite-presentation hypothesis is imposed on PU or PZ, and no finite model of the middle object is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Support induction: geometric localization and finite models of its two outer terms; scalar comparisons from archived ModuleObject/ChangeOfCoefficients.lean and ModuleObject/Colimit/Compatibility.lean."
+ },
+ "proof": [
+  {
+   "text": "The open U is Noetherian as a subspace of X, hence j is quasi-compact. Apply condensed open/closed recollement at Ω to the degree-zero bounded-below complex of N. Include its first localization triangle from D⁺ into D. Exactness of all four functors identifies its outer objects with the single complexes of j! j* N and k_* k* N; the middle object is the single complex of N. The generic exactOuterSingleIso identifies these outer terms without unfolding the concrete coefficient functors.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the prescribed module objects j!PU over EU and k_*PZ over EZ; their scalar extensions are the required fixed outer models.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use CondensedRing.openImmersionShriekIso for the scalar extension of j!PU. For k_*PZ, scalar extension commutes with normalized restriction by pullIso. The existing openRestrictionPushforwardZero lemma from condensed recollement makes the restriction to the open complement zero before scalar extension. Abelian closed support, transported through the normalized module-forgetful pullback comparison, using its existing moduleUnitOfAbelian helper makes the closed adjunction unit invertible on this scalar extension. Restrict to the closed piece using pullIso and the closed counit isomorphism, and push the resulting isomorphism back. This is an underived coefficient comparison and requires no proper-pushforward comparison. Compose with the supplied restriction models and with the exact outer-object single comparisons. Prove these comparisons for arbitrary condensed coefficient rings first and then specialize the resulting localizationModelTriangle to the two finite fields and the algebraic closure.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use DerivedCategory.singleFunctorCompHomologyFunctorIso at zero to identify the middle zeroth cohomology with N.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedFiniteCoefficientLocalization.lean",
+  "place": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_localization_triangle",
+  "group": "G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization triangle of a sheaf of modules has finite coefficient models on both outer terms",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open closed localization triangle has outer terms given by extension by zero and closed direct image of the restrictions of a module sheaf",
+   "results": "8 hits, including ModuleCat.Tilde.openToLocalization and CategoryTheory.Triangulated.TStructure.triangleLTGE; no open/closed finite model theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapTriangle",
+   "results": "12 hits for functorial maps of triangles in Mathlib.CategoryTheory.Triangulated.Functor; the inclusion functor component is used, but these do not supply localization or finite models.",
+   "date": "2026-10-16",
+   "verdict": "component match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocalization.*[Tt]riangle|[Rr]ecollement|[Cc]hangeOfCoefficients",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing",
+  "date": "2026-10-16",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Support induction: geometric localization and finite models of its two outer terms; scalar comparisons from archived ModuleObject/ChangeOfCoefficients.lean and ModuleObject/Colimit/Compatibility.lean.",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-gluing",
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+    "lem-weil-pbc-condensed-stratum-model-induction-step",
+    "lem-weil-pbc-condensed-stratum-model-assembly",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteCoefficientLocalization",
+  "file": "lean/Sheaf/Paper/CondensedFiniteCoefficientLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_localization_triangle",
+  "statement": "theorem exists_finiteCoefficient_localization_triangle\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))\n    {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    {Z : Scheme.{u}} (k : Z ⟶ X) [IsClosedImmersion k]\n    (hjk : Set.range j = (Set.range k)ᶜ)\n    (EU : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (PU : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (padicSubfieldRingObj U ℓ EU))\n    (EZ : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (PZ : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n      (padicSubfieldRingObj Z ℓ EZ))\n    (eU : Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl U ℓ EU)).obj PU ≅\n      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) j).obj N))\n    (eZ : Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Z ℓ EZ)).obj PZ ≅\n      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) k).obj N)) :\n    ∃ D : Pretriangulated.Triangle (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))),\n      D ∈ distTriang _ ∧\n      Nonempty ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ EU)).obj\n          ((CondensedRing.openImmersionLowerShriek\n            (Profinite.continuousMapRingObj.{u} EU) j).obj PU)) ≅ D.obj₁) ∧\n      Nonempty ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ EZ)).obj\n          ((CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} EZ) k).obj PZ)) ≅\n          D.obj₃) ∧\n      Nonempty ((DerivedCategory.homologyFunctor _ 0).obj D.obj₂ ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-model-proof-api",
+ "kind": "statement",
+ "title": "Cycle-free shared proof API for finite coefficient descent",
+ "statement": "Let X be a topologically Noetherian scheme and ℓ a prime. For each finite coefficient field E in the specified algebraic closure of Q_ℓ, the object property boundedConstructible (padicSubfieldRingObj X ℓ E) is triangulated. The module also extracts the existing private cocone-factorization and exact-left-derived-composition-shift helpers, allowing their original consumers and the support-induction proof to share one proof without an import cycle.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "private finiteBoundedTriangulated, bounded_tri_of_serre, single_bounded_constructible and HomFactorization helpers; exact left-derived shift compatibility extracted from lean/Sheaf/Paper/CondensedFlatCoefficientCalculus.lean"
+ },
+ "proof": [
+  {
+   "text": "Apply the finite-coefficient constructible Serre theorem, package its kernel, cokernel and extension closure clauses as object-property instances, and use isTriangulated_boundedConstructible. The other extracted private helpers are the existing categorical transport proofs; none uses finite-presentation object descent or the support-induction item.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-module-bounded-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-constructible-serre",
+  "prop-weil-pbc-module-bounded-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedFiniteModelProofAPI.lean",
+  "place": "Extraction of existing proved private helpers for reuse without a cycle",
+  "group": "G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes over a finite p-adic coefficient field are a triangulated subcategory, using constructible Serre closure",
+   "results": "8 hits including ObjectProperty.IsTriangulated, IsTriangulatedClosed₂.mk' and IsSerreClass.toIsClosedUnderSubobjects. These generic components underlie the existing library theorem; no replacement for finite condensed-coefficient Serre closure.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport factorization of maps through a filtered colimit along an isomorphism of source objects",
+   "results": "8 hits for eventually constant functors, filtered Type colimits and ColimitPresentation.ofIso; none replaces the extracted proof API.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso",
+   "results": "4 hits including ofIso_compatibility; these are used by the existing composition-shift proof.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorCompIso|homologyProperty_isTriangulated",
+   "results": "msearch returned 0 hits; direct source inspection locates the existing exact derived comparison and bounded-constructible instance used here.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing",
+  "date": "2026-10-16",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Extract shared proof helpers required by support gluing, whose original parent modules reach that support-gluing item.",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-gluing",
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+    "lem-weil-pbc-condensed-stratum-model-induction-step",
+    "lem-weil-pbc-condensed-stratum-model-assembly",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteModelProofAPI",
+  "file": "lean/Sheaf/Paper/CondensedFiniteModelProofAPI.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteBoundedTriangulated",
+  "statement": "lemma finiteBoundedTriangulated (E : FiniteIntermediateField ℓ) :\n    (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
+ }
+}

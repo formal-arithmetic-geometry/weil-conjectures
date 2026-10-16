@@ -7,16 +7,9 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.Paper.CondensedSheafExtContinuity
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.CondensedFiniteModelExtensions
+import Sheaf.Paper.CondensedFiniteCoefficientLocalization
+import Sheaf.Paper.CondensedConstructibleOpenClosedImages
 
 /-! Intermediate support-induction branch. -/
 
@@ -31,9 +24,50 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option linter.style.haveILetI false
 
-/- The two interfaces below isolate the geometric localization and algebraic
-  extension-class descent parts of the support induction argument. -/
+set_option backward.isDefEq.respectTransparency true in
+private theorem modelOfLocalizedTriangle
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))
+    (E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
+    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F))
+    (hP : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E) P)
+    (hQ : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ F) Q)
+    (h : ∃ D : Pretriangulated.Triangle (DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))),
+      D ∈ @Pretriangulated.distinguishedTriangles _ _ _ _ _ _ _ ∧
+      Nonempty ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj P) ≅ D.obj₁) ∧
+      Nonempty ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).obj Q) ≅ D.obj₃) ∧
+      Nonempty ((DerivedCategory.homologyFunctor _ 0).obj D.obj₂ ≅ N)) :
+    ∃ (H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+      (R : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (padicSubfieldRingObj X ℓ H)),
+      IsConstructibleModuleObject (padicSubfieldRingObj X ℓ H) R ∧
+      Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ H)).obj R ≅ N) := by
+  obtain ⟨D, hD, h₁, h₃, ⟨eN⟩⟩ := h
+  obtain ⟨H, R, hR, ⟨eR⟩⟩ := exists_finiteCoefficient_model_of_triangle X ℓ D hD
+    ⟨E, P, hP, h₁⟩ ⟨F, Q, hQ, h₃⟩
+  exact ⟨H, R, hR, ⟨eR ≪≫ eN⟩⟩
 
+set_option backward.isDefEq.respectTransparency true in
+private theorem pullbackModelComp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+    (h : Nonempty (P ≅ (CondensedRing.upperStar Λ (f ≫ g)).obj M)) :
+    Nonempty (P ≅ (CondensedRing.upperStar Λ f).obj
+      ((CondensedRing.upperStar Λ g).obj M)) := by
+  obtain ⟨e⟩ := h
+  exact ⟨e ≪≫ (CondensedRing.upperStarComp Λ f g).app M⟩
+
+/- The imported interfaces separate constructibility, geometric localization, and
+  extension-class descent in the support induction argument. -/
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Glue compatible open/closed models by finite-stage extension classification.
 
 Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split; tensor
@@ -82,7 +116,35 @@ theorem glue_nonempty_support_open_closed_models
       IsConstructibleModuleObject (padicSubfieldRingObj Y ℓ E) P ∧
       Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj P ≅
         (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M) := by
-  sorry
-
+  haveI : TopologicalSpace.NoetherianSpace Y :=
+    i.isClosedEmbedding.isEmbedding.isInducing.noetherianSpace
+  have hjk : Set.range j = (Set.range k)ᶜ := by
+    ext y
+    constructor
+    · intro hy hz
+      exact Set.disjoint_left.mp hdisj hy hz
+    · intro hy
+      have hy' : y ∈ Set.range j ∪ Set.range k := hcover.symm ▸ Set.mem_univ y
+      exact hy'.resolve_right hy
+  have eU' := pullbackModelComp (Profinite.padicAlgClRingObj ℓ) j i _ M eU
+  have eZ' := pullbackModelComp (Profinite.padicAlgClRingObj ℓ) k i _ M eZ
+  -- Keep the pullback object abstract during the coefficient-model argument.
+  generalize hN : (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M = N
+    at eU' eZ' ⊢
+  have : TopologicalSpace.NoetherianSpace U :=
+    j.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact j := ⟨fun V _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have hU := (CondensedRing.constructible_open_closed_images
+    (Profinite.continuousMapRingObj.{u} EU) j k hjk).1 PU hPU
+  have hZ := (CondensedRing.constructible_open_closed_images
+    (Profinite.continuousMapRingObj.{u} EZ) j k hjk).2 PZ hPZ
+  have h := exists_finiteCoefficient_localization_triangle Y ℓ N j k hjk EU PU EZ PZ
+    eU' eZ'
+  apply modelOfLocalizedTriangle Y ℓ N EU EZ
+    ((CondensedRing.openImmersionLowerShriek
+      (Profinite.continuousMapRingObj.{u} EU) j).obj PU)
+    ((CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} EZ) k).obj PZ)
+    hU hZ
+  exact h
 
 end AlgebraicGeometry.ProEtale

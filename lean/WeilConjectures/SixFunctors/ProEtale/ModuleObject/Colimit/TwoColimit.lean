@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
+import all Sheaf.Paper.CondensedFiniteModelProofAPI
 import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
@@ -130,16 +131,6 @@ variable {D : Type w} [Category.{v} D] [HasZeroObject D] [HasShift D ℤ]
   [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
   {I : Type uI} [Category.{vI} I] [IsFiltered I] {N : I ⥤ D} (c : Cocone N)
 
-private def factors (K : D) : Prop :=
-  ∀ f : K ⟶ c.pt, ∃ (i : I) (g : K ⟶ N.obj i), f = g ≫ c.ι.app i
-
-private lemma factors_iso {K L : D} (e : K ≅ L) (h : factors c K) : factors c L := by
-  intro f
-  obtain ⟨i, g, hg⟩ := h (e.hom ≫ f)
-  refine ⟨i, e.inv ≫ g, ?_⟩
-  rw [Category.assoc, ← hg]
-  simp
-
 private lemma factors_middle [∀ i, Mono (c.ι.app i)]
     (T : Triangle D) (hT : T ∈ distTriang D)
     (h₁ : factors c T.obj₁) (h₃ : factors c T.obj₃) : factors c T.obj₂ := by
@@ -166,9 +157,6 @@ private lemma factors_middle [∀ i, Mono (c.ι.app i)]
     Category.assoc, Category.assoc, c.w q, ← he]
   exact (sub_eq_iff_eq_add.mp hd).trans (add_comm _ _)
 
-private def shiftFactors : ObjectProperty D :=
-  fun K ↦ ∀ n : ℤ, factors c (K⟦n⟧)
-
 private lemma shiftFactors_iso : (shiftFactors c).IsClosedUnderIsomorphisms where
   of_iso e h n := factors_iso c ((shiftFunctor D n).mapIso e) (h n)
 
@@ -188,34 +176,6 @@ private lemma shiftFactors_tri [∀ i, Mono (c.ι.app i)] :
     factors_middle c (T⟦n⟧)
       (Triangle.shift_distinguished T hT n) (h₁ n) (h₃ n))
 
-private lemma shiftFactors_of_hom_colimit
-    {A : Type*} [Category A] {J : Type v} [SmallCategory J] [IsFiltered J]
-    (N : J ⥤ A) [HasColimit N] (Q : A ⥤ D) (S : D)
-    (h : ∀ n : ℤ, IsIso (colimit.desc _
-      ((Q ⋙ shiftFunctor D n ⋙ preadditiveCoyoneda.obj (Opposite.op S)).mapCocone
-        (colimit.cocone N)))) :
-    shiftFactors (Q.mapCocone (colimit.cocone N)) S := by
-  intro n f
-  let F := Q ⋙ shiftFunctor D (-n) ⋙ preadditiveCoyoneda.obj (Opposite.op S)
-  let t := F.mapCocone (colimit.cocone N)
-  let p := colimit.desc (N ⋙ F) t
-  have : IsIso p := h (-n)
-  let adj := (shiftEquiv D n).toAdjunction
-  let ff := adj.homEquiv S _ f
-  let z := (inv p) ff
-  obtain ⟨i, g, hg⟩ := Concrete.colimit_exists_rep (N ⋙ F) z
-  have hfg : p ((colimit.ι (N ⋙ F) i) g) = ff := by
-    rw [hg]
-    exact ConcreteCategory.congr_hom (IsIso.inv_hom_id p) ff
-  have he : g ≫ (Q.map (colimit.ι N i))⟦-n⟧' = ff := by
-    change (colimit.ι (N ⋙ F) i ≫ p) g = ff at hfg
-    rw [colimit.ι_desc] at hfg
-    exact hfg
-  refine ⟨i, (adj.homEquiv S _).symm g, ?_⟩
-  apply (adj.homEquiv S _).injective
-  rw [adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
-  exact he.symm
-
 private lemma mono_map_colimit_leg
     {A : Type*} [Category A] {J : Type*} [Category J]
     (N : J ⥤ A) [HasColimit N] (Q : A ⥤ D) (c : Cocone N) (hc : IsColimit c)
@@ -230,21 +190,6 @@ private lemma mono_map_colimit_leg
     infer_instance
   exact mono_of_mono _ (Q.map e.hom)
 
-private lemma factors_of_colimit_cocone
-    {A : Type*} [Category A] {J : Type*} [Category J] [IsFiltered J]
-    (N : J ⥤ A) [HasColimit N] (Q : A ⥤ D) (c : Cocone N) (hc : IsColimit c) (K : D)
-    (h : factors (Q.mapCocone (colimit.cocone N)) K) : factors (Q.mapCocone c) K := by
-  let e := (colimit.isColimit N).coconePointUniqueUpToIso hc
-  have he (i : J) : colimit.ι N i ≫ e.hom = c.ι.app i :=
-    (colimit.isColimit N).comp_coconePointUniqueUpToIso_hom hc i
-  intro f
-  obtain ⟨i, g, hg⟩ := h (f ≫ Q.map e.inv)
-  change f ≫ Q.map e.inv = g ≫ Q.map (colimit.ι N i) at hg
-  refine ⟨i, g, ?_⟩
-  calc
-    f = (f ≫ Q.map e.inv) ≫ Q.map e.hom := by simp
-    _ = (g ≫ Q.map (colimit.ι N i)) ≫ Q.map e.hom := by rw [hg]
-    _ = g ≫ Q.map (c.ι.app i) := by rw [Category.assoc, ← Q.map_comp, he]
 
 
 end CategoryTheory
@@ -626,40 +571,6 @@ private lemma constructible_zero {X : Scheme.{u}}
   refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩
   exact fp_zero _ (((upperStar Ab.{u + 1} (𝟙 X)).mapMod (F.obj R)).map_isZero
     ((F.mapMod R).map_isZero hM))
-private lemma bounded_tri_of_serre {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (hker : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : M ⟶ N),
-      IsConstructibleModuleObject R M → IsConstructibleModuleObject R N →
-      IsConstructibleModuleObject R (kernel f) ∧ IsConstructibleModuleObject R (cokernel f))
-    (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
-      S.ShortExact → IsConstructibleModuleObject R S.X₁ →
-      IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
-    (boundedConstructible R).IsTriangulated := by
-  let P : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
-    IsConstructibleModuleObject R
-  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ constructible_of_iso_model h e⟩
-  have : P.ContainsZero := ⟨0, isZero_zero _, constructible_zero R (isZero_zero _)⟩
-  have : P.IsClosedUnderKernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).1⟩
-  have : P.IsClosedUnderCokernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).2⟩
-  have : P.IsClosedUnderExtensions := ⟨fun h h₁ h₃ ↦ hext _ h h₁ h₃⟩
-  have := DerivedCategory.homologyProperty_isTriangulated P
-  change (DerivedCategory.TStructure.t.bounded ⊓ DerivedCategory.homologyProperty P).IsTriangulated
-  infer_instance
-
-
--- Build the specific condensed-field triangulated structures from their Serre closure
--- statements; no arbitrary-coefficient closure assertion is used.
-private lemma finiteBoundedTriangulated (E : FiniteIntermediateField ℓ) :
-    (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated := by
-  obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E
-  exact bounded_tri_of_serre _ hk he
-
 attribute [local instance 2000] finiteBoundedTriangulated
 
 private lemma algClBoundedTriangulated :
@@ -694,25 +605,6 @@ private lemma ambientHomSurj : (ambientCocone X ℓ).HomSurj := by
     (ObjectProperty.homMk f)
   refine ⟨k, hi, hj, g, ?_⟩
   simpa [ambientCocone, constructibleCocone] using congrArg (·.hom) hg
-
-omit [TopologicalSpace.NoetherianSpace X] in
-private lemma single_bounded_constructible
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (hM : IsConstructibleModuleObject R M) :
-    boundedConstructible R ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  let K := (DerivedCategory.singleFunctor _ 0).obj M
-  have hzero (n : ℤ) (hn : n ≠ 0) :
-      IsZero ((DerivedCategory.homologyFunctor _ n).obj K) := by
-    rcases lt_or_gt_of_ne hn with hn | hn
-    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
-    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
-  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
-  by_cases hn : n = 0
-  · subst n
-    exact constructible_of_iso_model hM
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm
-  · exact constructible_zero R (hzero n hn)
 
 private lemma single_model (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (padicAlgClRingObj X ℓ)) (hM : IsConstructibleModuleObject (padicAlgClRingObj X ℓ) M) :

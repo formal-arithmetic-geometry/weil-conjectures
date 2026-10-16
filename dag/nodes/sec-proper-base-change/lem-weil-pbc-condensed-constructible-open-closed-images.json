@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-condensed-constructible-open-closed-images",
+ "kind": "statement",
+ "title": "Constructibility of condensed open extension and closed direct image",
+ "statement": "Let Λ be a commutative ring object in condensed abelian groups in universe u+1. Let X,U,Z be schemes in universe u, let j:U→X be a quasi-compact open immersion and k:Z→X a closed immersion with range(j)=range(k)ᶜ. For every constructible internal module PU over Λ_U, j!PU is constructible over Λ_X; independently, for every constructible internal module PZ over Λ_Z, k_*PZ is constructible over Λ_X. Constructibility is the finite stratification and local finite presentation notion [def-constructible-stratification, def-weil-pbc-condensed-e-module-category]. No Noetherian, nonemptiness, or field hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-constructible-stratification",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Constructible section: concatenate the open/closed stratifications; see also archived ConstructibleSheaf/OpenClosed.lean, Stratification.openClosed."
+ },
+ "proof": [
+  {
+   "text": "Use the existing constructible_of_restrictions helper from ProEtaleModuleConstructibleExtensionByZero, through nonpublic import all. Its proof concatenates the given open and closed stratifications and transports the presentations along pullback composition; do not reprove that criterion here.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-extension-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing isConstructibleModuleObject_openImmersionLowerShriek theorem for the open-extension half. For the closed-image half, the openRestrictionPushforwardZero lemma from condensed recollement makes the normalized open restriction zero; the invertible closed counit identifies the normalized closed restriction with the given constructible module.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-module-constructible-extension-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert each normalized restriction back to the raw module pullback required by constructible_of_restrictions. Use the coefficient isomorphism condensedPullbackHom, extendScalarsIsoComapInv, constructible_comap, and the comap composition/identity isomorphisms. Apply the existing restriction criterion. This works for arbitrary commutative condensed rings, zero modules, and empty pieces.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-module-constructible-extension-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-constructible-extension-zero",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-module-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedConstructibleOpenClosedImages.lean",
+  "place": "AlgebraicGeometry.ProEtale.CondensedRing.constructible_open_closed_images",
+  "group": "G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion and closed direct image preserve constructibility of sheaves of modules",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of a sheaf of modules is detected on a complementary open and closed pair by concatenating stratifications",
+   "results": "8 hits, including Topology.IsLocallyConstructible.iff_of_isOpenCover and Topology.IsConstructible.empty_union_induction; these concern constructible subsets, not internal module sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible",
+   "results": "12 hits for constructible subsets in Mathlib.Topology.Constructible; no module-sheaf preservation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*(open|closed)|[Ss]tratification.*openClosed",
+   "results": "16 hits, all concerning constructible subsets of spectra or spaces; no internal module sheaf theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing",
+  "date": "2026-10-16",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Constructible section: concatenate the open/closed stratifications; see also archived ConstructibleSheaf/OpenClosed.lean, Stratification.openClosed.",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-gluing",
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+    "lem-weil-pbc-condensed-stratum-model-induction-step",
+    "lem-weil-pbc-condensed-stratum-model-assembly",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedConstructibleOpenClosedImages",
+  "file": "lean/Sheaf/Paper/CondensedConstructibleOpenClosedImages.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructible_open_closed_images",
+  "statement": "theorem constructible_open_closed_images\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}\n    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    (k : Z ⟶ X) [IsClosedImmersion k]\n    (hjk : Set.range j = (Set.range k)ᶜ)\n    :\n    (∀ PU : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U),\n      IsConstructibleModuleObject (condensedRingObj Λ U) PU →\n      IsConstructibleModuleObject (condensedRingObj Λ X)\n        ((openImmersionLowerShriek Λ j).obj PU)) ∧\n    (∀ PZ : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z),\n      IsConstructibleModuleObject (condensedRingObj Λ Z) PZ →\n      IsConstructibleModuleObject (condensedRingObj Λ X) ((lowerStar Λ k).obj PZ))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-788cf",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T072032-L-914019",
+  "kind": "interface",
+  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
+ }
+}
