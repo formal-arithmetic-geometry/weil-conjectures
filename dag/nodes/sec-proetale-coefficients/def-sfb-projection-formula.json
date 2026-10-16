@@ -3,22 +3,130 @@
  "blueprint": {
   "is": "def-sfb-projection-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Projection formula",
- "statement": "Let $S\\colon\\mathcal D\\to\\mathcal C$ be a strong monoidal functor between monoidal\ncategories, with inverse structure maps $\\delta_{L,L'}\\colon S(L\\otimes L')\\to SL\\otimes SL'$\nand $\\epsilon\\colon S\\mathbf 1\\to\\mathbf 1$. Let $P\\colon\\mathcal C\\to\\mathcal D$ be a\nfunctor. A *projection formula* for $P$ relative to $S$ is a family of isomorphisms\n$$\n\\pi_{L,M}\\colon P(SL\\otimes M)\\xrightarrow{\\ \\sim\\ }L\\otimes PM\n\\qquad(L\\in\\mathcal D,\\ M\\in\\mathcal C),\n$$\nnatural in $L$ and in $M$, and compatible with the unit and the associativity\nconstraints:\n$$\n\\lambda_{PM}\\circ\\pi_{\\mathbf 1,M}=P\\bigl(\\lambda_M\\circ(\\epsilon\\otimes M)\\bigr),\n$$\n$$\n\\alpha_{L,L',PM}\\circ\\pi_{L\\otimes L',M}\n=(L\\otimes\\pi_{L',M})\\circ\\pi_{L,SL'\\otimes M}\\circ\nP\\bigl(\\alpha_{SL,SL',M}\\circ(\\delta_{L,L'}\\otimes M)\\bigr).\n$$",
+ "statement": "Let $S\\colon\\mathcal D\\to\\mathcal C$ be a strong monoidal functor between monoidal\ncategories [def-sfb-strong-monoidal-functor], with inverse structure maps $\\delta_{L,L'}\\colon S(L\\otimes L')\\to SL\\otimes SL'$\nand $\\epsilon\\colon S\\mathbf 1\\to\\mathbf 1$. Let $P\\colon\\mathcal C\\to\\mathcal D$ be a\nfunctor. A *projection formula* for $P$ relative to $S$ is a family of isomorphisms\n$$\n\\pi_{L,M}\\colon P(SL\\otimes M)\\xrightarrow{\\ \\sim\\ }L\\otimes PM\n\\qquad(L\\in\\mathcal D,\\ M\\in\\mathcal C),\n$$\nnatural in $L$ and in $M$, and compatible with the unit and the associativity\nconstraints:\n$$\n\\lambda_{PM}\\circ\\pi_{\\mathbf 1,M}=P\\bigl(\\lambda_M\\circ(\\epsilon\\otimes M)\\bigr),\n$$\n$$\n\\alpha_{L,L',PM}\\circ\\pi_{L\\otimes L',M}\n=(L\\otimes\\pi_{L',M})\\circ\\pi_{L,SL'\\otimes M}\\circ\nP\\bigl(\\alpha_{SL,SL',M}\\circ(\\delta_{L,L'}\\otimes M)\\bigr).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-projection-formula.md",
   "place": "node def-sfb-projection-formula, order 1600"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sfb-strong-monoidal-functor"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|projection_formula|projection formula",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism P(S L tensor M) to L tensor P M with unit and associativity coherence for a monoidal functor",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.Monoidal.μIso\", \"CategoryTheory.Functor.CoreMonoidal.mk\", \"CategoryTheory.Functor.CoreMonoidal.ofBifunctor\", \"CategoryTheory.MonoidalCategory.tensorRightTensor\", \"CategoryTheory.Functor.Monoidal.μNatIso\", \"CategoryTheory.MonoidalCategory.leftUnitorNatIso\", \"CategoryTheory.Functor.Monoidal.μNatIso_hom_app\", \"CategoryTheory.obj_η_app_assoc\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern monoidal functors, actions or modules, not a coherent projection formula for arbitrary P and S"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula for a functor relative to a strong monoidal functor is a natural isomorphism P(S L tensor M) isomorphic to L tensor P M compatible with unit and associativity",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.unitOfTensorIsoUnit\", \"CategoryTheory.unitOfTensorIsoUnit_hom_app\", \"CategoryTheory.ε_app_obj\", \"CategoryTheory.obj_zero_map_μ_app\", \"CategoryTheory.obj_ε_app\", \"CategoryTheory.obj_μ_zero_app\", \"CategoryTheory.obj_η_app\", \"CategoryTheory.Functor.Monoidal.instIsIsoε\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern monoidal functors, actions or modules, not a coherent projection formula for arbitrary P and S"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between module categories over a monoidal category with a natural tensor comparison isomorphism satisfying unitality and associativity, a strong module functor",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Mod_.Hom.mk'\", \"CategoryTheory.Mod_\", \"CategoryTheory.Mod_.Hom.mk''\", \"CategoryTheory.Mod_.Hom.mk''_hom\", \"CategoryTheory.ModObj\", \"CategoryTheory.Mod_Class\", \"CategoryTheory.Mod_.Hom\", \"CategoryTheory.Mod_.Hom.isMod_Hom\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern monoidal functors, actions or modules, not a coherent projection formula for arbitrary P and S"
+  },
+  {
+   "tool": "grep",
+   "query": "module functor|linear functor|strong monoidal functor|class Monoidal|structure CoreMonoidal",
+   "results": "{\"n_hits\": 12, \"top\": [\"Mathlib/CategoryTheory/Monoidal/Preadditive.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Linear.lean\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern monoidal functors, actions or modules, not a coherent projection formula for arbitrary P and S"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxLeftLinear|LeftLinear|ProjectionFormula|projection.formula",
+   "results": "{\"n_hits\": 5, \"top\": [\"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\"], \"note\": \"\", \"subdirectory\": \"CategoryTheory\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: LeftLinear at Monoidal/Action/LinearFunctor.lean:156 assumes specified actions; interpreting the item requires constructing the S-induced action and identifying its constraints. Other hits are monoidal functor or scalar-restriction constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor with natural isomorphisms P(S L tensor M) to L tensor P(M), coherent with unit and associativity",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.CoreMonoidal.mk\", \"CategoryTheory.Monoidal.functorCategoryMonoidalStruct\", \"CategoryTheory.Functor.CoreMonoidal.ofBifunctor\", \"CategoryTheory.Functor.Monoidal.ofLaxMonoidal\", \"CategoryTheory.endofunctorMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.μIso\", \"CategoryTheory.Functor.Monoidal.instIsIsoμ\", \"CategoryTheory.Monoidal.functorCategoryMonoidal\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: LeftLinear at Monoidal/Action/LinearFunctor.lean:156 assumes specified actions; interpreting the item requires constructing the S-induced action and identifying its constraints. Other hits are monoidal functor or scalar-restriction constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "def.*[Cc]omp|def.*[Rr]estrict|def.*[Tt]ensor|[Cc]oreMonoidal|[Mm]onoidal.*[Ff]unctor|[Cc]ompos",
+   "results": "{\"n_hits\": 13, \"top\": [\"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/End.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/End.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/End.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/End.lean\"], \"note\": \"\", \"subdirectory\": \"CategoryTheory/Monoidal/Action\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: LeftLinear at Monoidal/Action/LinearFunctor.lean:156 assumes specified actions; interpreting the item requires constructing the S-induced action and identifying its constraints. Other hits are monoidal functor or scalar-restriction constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftLinear",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Functor.LeftLinear\", \"CategoryTheory.Functor.LeftLinear.toLaxLeftLinear\", \"CategoryTheory.Functor.LeftLinear.toOplaxLeftLinear\", \"CategoryTheory.Functor.LeftLinear.μₗIso\", \"CategoryTheory.Functor.LeftLinear.instIsIsoδₗ\", \"CategoryTheory.Functor.LeftLinear.instIsIsoμₗ\", \"CategoryTheory.Functor.LeftLinear.inv_δₗ\", \"CategoryTheory.Functor.LeftLinear.inv_μₗ\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: LeftLinear at Monoidal/Action/LinearFunctor.lean:156 assumes specified actions; interpreting the item requires constructing the S-induced action and identifying its constraints. Other hits are monoidal functor or scalar-restriction constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a monoidal action along a strong monoidal functor and define a linear functor by a coherent projection formula isomorphism",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.LeftLinear\", \"CategoryTheory.Mod_.scalarRestriction\", \"CategoryTheory.Mod_.comap\", \"Action.res_linear\", \"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.Functor.mapAction_linear\", \"CategoryTheory.MonoidalLinear.ofFaithful\", \"Rep.instMonoidalActionTypeLinearization\"], \"note\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: LeftLinear at Monoidal/Action/LinearFunctor.lean:156 assumes specified actions; interpreting the item requires constructing the S-induced action and identifying its constraints. Other hits are monoidal functor or scalar-restriction constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant functor between tensor actions with invertible lineator respecting associators and unitors",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.LeftLinear\", \"CategoryTheory.Functor.LeftLinear.μₗIso\", \"CategoryTheory.Functor.RightLinear\", \"CategoryTheory.Functor.RightLinear.μᵣIso\", \"CategoryTheory.Functor.LaxLeftLinear\", \"Action.FunctorCategoryEquivalence.functorMonoidal\", \"Action.FunctorCategoryEquivalence.inverseMonoidal\", \"CategoryTheory.Functor.OplaxLeftLinear\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: LeftLinear at Action/LinearFunctor.lean:156-163 assumes two specified monoidal actions; the S-induced action and its constraint comparison are additional constructions, so this is not an exact declaration or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong equivariant functor for monoidal left actions has an invertible comparison P(c acting on x) to c acting on P(x), satisfying the module pentagon and triangle laws",
+   "results": "{\"t\": \"2026-10-16T13:56:58Z\", \"tool\": \"leanfinder\", \"query\": \"A strong equivariant functor for monoidal left actions has an invertible comparison P(c acting on x) to c acting on P(x), satisfying the module pentagon and triangle laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LeftLinear\", \"CategoryTheory.Functor.LeftLinear.μₗIso\", \"CategoryTheory.Functor.LaxLeftLinear\", \"CategoryTheory.Functor.OplaxLeftLinear\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ\", \"CategoryTheory.Functor.LeftLinear.instIsIsoδₗ\", \"CategoryTheory.Functor.LeftLinear.toLaxLeftLinear\", \"CategoryTheory.Functor.LeftLinear.instIsIsoμₗ\"], \"digest\": \"384c8bfa3a686444\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: LeftLinear at Action/LinearFunctor.lean:156-163 needs specified domain and codomain actions. The action through S is additional structure to construct and compare, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalLeftAction.*[Cc]omp|[Rr]estrict.*[Aa]ction|[Aa]ction.*[Rr]estrict|ProjectionFormula|[Ll]inear.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-16T13:57:20Z\", \"tool\": \"grep\", \"query\": \"MonoidalLeftAction.*[Cc]omp|[Rr]estrict.*[Aa]ction|[Aa]ction.*[Rr]estrict|ProjectionFormula|[Ll]inear.*[Mm]onoidal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Linear.lean\", \"Mathlib/CategoryTheory/Monoidal/Linear.lean\", \"Mathlib/CategoryTheory/Monoidal/Linear.lean\", \"Mathlib/CategoryTheory/Monoidal/Linear.lean\", \"Mathlib/CategoryTheory/Monoidal/Linear.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\"], \"digest\": \"9f3de73942ff896c\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned scalar-linear monoidal categories, the action composition axiom and internal module calculations; none constructs the S-induced action or states this projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxLeftLinear.δₗ_associativity",
+   "results": "{\"t\": \"2026-10-16T13:57:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.OplaxLeftLinear.δₗ_associativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.OplaxLeftLinear.δₗ_associativity\"], \"digest\": \"1b3a7181a0af8aba\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: checked the returned coherence field at Action/LinearFunctor.lean:112-115. It agrees after supplying the S-induced action, whose construction is not part of this declaration."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -34,5 +142,26 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-transport"
+ "unit": "sk-def-sfb-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-projection-formula",
+  "worker": "stage1",
+  "summary": "Checked the complete definition against main-20261015 and read-only master; no slopmaster2 attachment exists. Preserved the natural isomorphisms and coherence equations, adding existing def-sfb-strong-monoidal-functor as statement dependency. Its existing monoidal-category dependency supplies the ambient notion. Preflight identified both proposed prerequisite files as now-existing nodes on the current base; read their live-mirror statements and removed the proposed copies. No new nodes are delivered. This definition asserts no existence theorem and has no proof steps.",
+  "blueprint": "Realizes def-sfb-projection-formula in full (opening monoidal-functor data, natural family, unit equation and associativity equation); this is the definition cited in part 3 of sk-def-sfb-transport and the second paragraph of its proof."
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Functor.LeftLinear",
+  "file": "Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean",
+  "line": 156,
+  "how": "Lines 48-62,101-118,156-163 give coherent mutually inverse lineators for already specified actions. The desired domain action is L acting on M by S(L) tensor M, with associator alpha composed with delta tensor id and unitor lambda composed with epsilon tensor id; the codomain action is ordinary left tensor. Constructing this domain action from S and comparing these constraints is additional work, so LeftLinear is a candidate formulation rather than an exact or one-line Mathlib match."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-fd7438b98",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-fd7438b98 (reviewer sub-agent of L); spot-checked: Full source, DAG, dependency, Mathlib-search, typing, hypothesis, edge-case, duplicate, and route checks passed. Review written to review.md."
+ }
 }

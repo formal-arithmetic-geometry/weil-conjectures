@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wc-sections-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections over a w-contractible affine are exact",
@@ -12,27 +12,159 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.md",
   "place": "node det-pe-wc-sections-exact, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
  "proof": [
   {
-   "text": "Kernels of sheaves of modules are computed sectionwise, so $\\Gamma(U,-)$ is left exact. Let\n$F\\to G$ be an epimorphism of abelian sheaves (or of $\\mathcal R$-modules). It is an\nepimorphism of the underlying sheaves of sets (cokernels of sheaves of modules are\nsheafified presheaf cokernels, so surjectivity in either sense means local surjectivity on\nsections). By [det-pe-wcb-projective], $F(U)\\to G(U)$ is surjective. A left exact functor\npreserving epimorphisms is exact.",
+   "text": "Put $\\mathcal C=X_{\\mathrm{proét}}$ and evaluate at the given object $U$. By [lem-weil-pbc-sheafification-exact], clause 1, a kernel of abelian sheaves is the sectionwise kernel. By [lem-weil-pbc-module-sheaves-limits-sectionwise], the same holds for kernels of $\\mathcal R$-modules, as kernels are finite limits. Consequently, in either category, if $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$ is short exact, then $i_U$ identifies $A(U)$ with $\\ker(p_U)$. Evaluation is additive: for morphisms $f,g$, $(f+g)_U=f_U+g_U$ by sectionwise addition. For modules these maps are $\\mathcal R(U)$-linear, by the definition of morphism in [def-weil-sheaf-of-modules-category]. Thus evaluation is left exact in both cases.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CO, lemma-limits-colimits-abelian-sheaves (2); Tag 03DB, lemma-limits-colimits (limits); Tag 03DA, lemma-abelian; blueprint proof opening sentence"
+   }
+  },
+  {
+   "text": "Let $p:F\\to G$ be an epimorphism in either of the stated categories. In the module case apply [lem-weil-pbc-module-sheaves-colimits-forgetful], clause 1: forgetting the $\\mathcal R$-action preserves cokernels, so $\\operatorname{coker}(p)=0$ implies that the underlying abelian-sheaf map has zero cokernel and is an epimorphism. Its sheafification hypothesis is satisfied on the small site: the abelian sheafification functor is that of [lem-weil-pbc-sheafification-exact]. The abelian case needs no forgetting. No assertion about objectwise surjectivity has yet been used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, exactness of the forgetful functor; Tag 03CN, lemma-abelian-abelian (4), cokernels"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] to the abelian-sheaf epimorphism of step 2. For every object $V$ and $y\\in G(V)$ it gives a covering $\\{V_j\\to V\\}$ and lifts $x_j\\in F(V_j)$ of $y|_{V_j}$. Forgetting the additions and scalar actions leaves exactly these sections, restrictions and equalities. Hence the underlying map of sheaves of sets is locally surjective. The reverse implication in [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] makes it an epimorphism of sheaves of sets.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CN, lemma-abelian-abelian (5), with sites.tex Tags 00WM, definition-sheaves-injective-surjective (2), and 00WN, lemma-mono-epi-sheaves"
+   }
+  },
+  {
+   "text": "Apply clause 2 of [det-pe-wcb-projective] to the epimorphism of sheaves of sets obtained in step 3. Its hypotheses are exactly the given $U=\\operatorname{Spec}D\\in X_{\\mathrm{proét}}$ and w-contractibility of $D$. It yields surjectivity of $F(U)\\to G(U)$ on underlying sets, hence surjectivity of the corresponding abelian-group or $\\mathcal R(U)$-linear map. Thus evaluation carries every epimorphism in either source category to a surjective homomorphism.",
    "uses": [
     "det-pe-wcb-projective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
+    "place": "sentence beginning By [det-pe-wcb-projective]; det-pe-wcb-projective, statement clause 2"
+   }
+  },
+  {
+   "text": "Apply steps 1 and 4 to an arbitrary short exact sequence $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$. Step 1 gives injectivity of $i_U$ and $\\operatorname{im}(i_U)=\\ker(p_U)$, while step 4 gives surjectivity of $p_U$. Thus $0\\to A(U)\\to B(U)\\to C(U)\\to0$ is short exact. This is exactness of the additive evaluation functor, with values in abelian groups or $\\mathcal R(U)$-modules respectively.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
+    "place": "last sentence: a left exact functor preserving epimorphisms is exact, written out on an arbitrary short exact sequence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "det-pe-wcb-projective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
+  "place": "entire proof, expanded using Stacks Tags 03CO, 03DB, 03DA, 03CN, 00WM and 00WN"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WContractible|WeaklyContractible|exact.*evaluation|evaluation.*exact",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; general sheaf, category and evaluation results do not prove the geometric epimorphism assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of abelian sheaves over a projective object of a site form an exact functor",
+   "results": "8 hits: CategoryTheory.sheafSections, SheafOfModules.sectionsFunctor, SheafOfModules.sections, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.Γ, SheafOfModules.sectionsFunctor_obj, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; general sheaf, category and evaluation results do not prove the geometric epimorphism assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "12 hits: CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.HasSheafify.mk, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf, CategoryTheory.HasSheafify.mk', CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "match for the existing sectionwise-limits tool; not exactness on w-contractible affines"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of abelian sheaves or sheaves of modules at a weakly contractible affine of the pro etale site is exact",
+   "results": "8 hits: instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian, instAbelianLightCondMod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Condensed.hasExactColimitsOfShape, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Profinite.NobelingProof.succ_exact",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; general sheaf, category and evaluation results do not prove the geometric epimorphism assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_iff|isLocallySurjective_iff_epi|isLocallySurjective_of_epi|evaluationPreservesFiniteLimits",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "match for the already existing epi/local-surjectivity tools; no match for the full geometric exactness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation functor of sheaves at a projective representable preserves epimorphisms and finite limits",
+   "results": "8 hits: SheafOfModules.Finite.evaluationPreservesFiniteLimits, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts",
+   "date": "2026-10-16",
+   "verdict": "match for the existing sectionwise-limits tool; not exactness on w-contractible affines"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationPreservesFiniteLimits|evaluationPreservesLimitsOfSize",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "match for the existing sectionwise-limits tool; not exactness on w-contractible affines"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+   "date": "2026-10-16",
+   "verdict": "match for the already existing epi/local-surjectivity tools; no match for the full geometric exactness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sections functor on sheaves of modules at an object whose representable sheaf is projective preserves short exact sequences",
+   "results": "8 hits: CategoryTheory.preservesHomology_preadditiveCoyonedaObj_of_projective, Condensed.instAB4CondensedMod, SheafOfModules.instAbelian, Condensed.instAB4StarCondensedMod, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-16",
+   "verdict": "No exact match: the projective preadditive coyoneda result assumes projectivity in an abelian category; it does not establish evaluation exactness from w-contractibility of a pro-etale affine."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesEpimorphisms|PreservesHomology|IsWContractible",
+   "results": "25 hits: Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/RepresentationTheory/Coinduced.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match in the returned hits: generic preservation-of-homology and preservation-of-epimorphisms declarations do not supply the geometric hypothesis of this item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -45,5 +177,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-wc-sections"
+ "unit": "sk-cor-pe-wc-sections",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wc-sections-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the blueprint paragraph into five steps: sectionwise kernels, exact module-to-abelian forgetting, the two general-site epi/local-surjectivity criteria, projectivity at U, and the explicit short-exact-sequence conclusion. Reused existing DAG nodes throughout; no new nodes. Checked Stacks sources and small/empty cases. No exact sorry-free project declaration was found.",
+  "blueprint": "The opening sentence is step 1; the epimorphism/underlying-sets sentence is steps 2–3; By [det-pe-wcb-projective] is step 4; the final exactness inference is step 5. The sk-cor-pe-wc-sections unit route through sk-thm-pe-weakly-contractible-basis is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Only its general ringed-site exact forgetful functor is used to pass an epimorphism of modules to one of abelian sheaves; the projectivity route of this unit does not supply this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-4cd6ee79a",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-4cd6ee79a (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, cited nodes, Stacks sources, Mathlib searches, hypotheses, edge cases, and duplication candidates. The five-step proof is correct, follows the prescribed projectivity route, uses only the accepted generic forgetting tool, has no new nodes or SGA citations, and needs no repair. Wrote review.md."
+ }
 }
