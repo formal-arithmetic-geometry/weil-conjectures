@@ -1,6 +1,6 @@
 # Work queue
 
-22 items; claim with `tools/claim.py next <group> [--stage N]`.
+21 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (22)
+## Stage 3: modules to prove (21)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,7 +23,6 @@
 | `Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueProjectionNormalization` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedFieldEvaluationFunctors` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralLfpLocallyFreeResolution` | 9 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPointwiseRank` | 9 | 1 | proof |
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 10 | 1 | proof |
