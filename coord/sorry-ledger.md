@@ -60,7 +60,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3626 |
 | decomposed | 52 |
-| moved | 4014 |
+| moved | 4015 |
 | pruned | 131 |
 | other | 608 |
 
@@ -70,7 +70,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
-| A3 | 123 | 119 | 79 | 40 | 54/123 (43.9%) |
+| A3 | 124 | 120 | 80 | 40 | 55/124 (44.4%) |
 | A4 | 72 | 76 | 47 | 29 | 37/72 (51.4%) |
 | B2 | 127 | 133 | 85 | 48 | 53/127 (41.7%) |
 | B3 | 145 | 152 | 89 | 63 | 62/145 (42.8%) |
@@ -173,21 +173,21 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | module | distance | holes | group |
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | A2 |
-| Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | A3 |
+| Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | XR0d56945a24047e2a |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | 5 | 1 | F3 |
 | Sheaf.Paper.FiniteDiscreteCoefficientExchange | 6 | 1 | H2 |
 | Sheaf.Paper.CondensedLocalModelGluing | 7 | 1 | A3 |
 | Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | B3 |
 | Sheaf.Paper.ContinuousEtaleLocalLattices | 7 | 1 | B2 |
 | Sheaf.Paper.IntegralResidueProjectionNormalization | 8 | 1 | D3 |
-| Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | — |
+| Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | A4 |
 | Sheaf.Paper.IntegralMatrixPointwiseRank | 9 | 1 | E4 |
 | Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.LatticeClassDescent | 11 | 1 | B4 |
-| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux | 13 | 1 | — |
+| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux | 13 | 1 | C3 |
 | Sheaf.Paper.LatticePairMatrixAtBasis | 13 | 1 | C2 |
-| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 15 | 1 | — |
+| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 15 | 1 | C4 |
 | Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit | 16 | 1 | A4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent | 40 | 1 | D2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | C1 |
