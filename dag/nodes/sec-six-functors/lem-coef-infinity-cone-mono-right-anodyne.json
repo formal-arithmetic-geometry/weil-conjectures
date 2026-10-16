@@ -25,7 +25,8 @@
   "place": "Kerodon Lemma 4.3.7.8 (0196), first assertion. The convention for right anodyne is Variant 4.2.4.2. This is a Kerodon tag, not a Stacks tag. Online text read; archival copy WANTED in report.md."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne"
  ],
  "proof": [
   {
@@ -166,5 +167,30 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-1bd4940b3 (reviewer sub-agent of L); spot-checked: Read the item, both cited statements, report, unit/chapter route and cited Kerodon sources in full. All four proof steps check; 780 horn-membership and 106389 simplicial-operator comparisons passed. No new nodes, duplicates, missing dependencies or repairs. Concrete findings are in review.md; no tool_uses accepted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b3ecf649",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Complete immutable audit and per-file scompile passed; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConeMonoRightAnodyne",
+  "declaration": "SSet.rightAnodyneExtensions_rightCone_map",
+  "declarations": [
+   "SSet.joinAugmentationFunctor",
+   "SSet.joinFunctor",
+   "SSet.rightConeFunctor",
+   "SSet.rightAnodyneExtensions_rightCone_map"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConeMonoRightAnodyne.lean",
+  "statement": "theorem rightAnodyneExtensions_rightCone_map {A B : SSet.{u}} (f : A ⟶ B) (hf : ∀ (n : SimplexCategoryᵒᵖ), Function.Injective (f.app n)) : rightAnodyneExtensions (rightConeFunctor.map f)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The join and right-cone helpers construct the notions explicitly introduced in this node, using ordinal-concatenation Kan extensions. The right-anodyne predicate is reused from the landed definition node, added to stmt_deps."
  }
 }
