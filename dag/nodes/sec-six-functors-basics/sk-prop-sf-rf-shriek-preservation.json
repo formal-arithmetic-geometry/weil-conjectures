@@ -3,65 +3,449 @@
  "blueprint": {
   "is": "sk-prop-sf-rf-shriek-preservation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$f^!$ with finite coefficients",
- "statement": "Let $A$ be a finite commutative $\\ell$-primary ring. For every separated\nfinite-type morphism $f:X\\to Y$, the right adjoint\n$f^!\\colon\\Loc(\\Dctf(Y,A))\\to\\Loc(\\Dctf(X,A))$ of [sk-prop-sf-existence]\nsatisfies\n\n$$\nf^!\\bigl(\\Dctf(Y,A)\\bigr)\\subseteq\\Dctf(X,A).\n$$\n\nConsequently its adjunction restricts to\n\n$$\nRf_!:\\Dctf(X,A)\\ \\rightleftarrows\\ \\Dctf(Y,A):f^!.\n$$\n\nFor smooth $f$ of pure relative dimension $d$, the functor\n$f^!\\colon\\Dctf(Y,A)\\to\\Dctf(X,A)$ is locally on $X$ isomorphic to\n$f^*(-)(d)[2d]$. (The canonical global isomorphism for smooth $f$ is\nconstructed in the smooth-purity chapter.)",
+ "statement": "Fix a prime $\\ell$ and an arbitrary field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism [sk-def-sfb-dc-setting; def-weil-finite-type-morphism; def-weil-proper-morphism]. Let $A$ be any finite commutative ring annihilated by a power of $\\ell$, given the discrete topology, and write $\\underline A$ for its condensed ring [sk-def-sfb-condensed-ring]. For each such scheme $T$, identify the pulled-back ring object $p_T^*\\underline A$ of [sk-def-sfb-pulled-back-coefficients] with the constant ring sheaf $A_T$. Use the section-action equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to identify internal $p_T^*\\underline A$-module objects with ordinary $A_T$-module sheaves, and its termwise derived equivalence to identify their derived categories. Under this exact, tensor-compatible equivalence, write $\\Dctf(T,A)$ for the bounded constructible finite-Tor subcategory: the module-object definition is [sk-def-sfb-constructible], and its ordinary-module form is [def-weil-proetale-constructible-sheaf; def-weil-proetale-tor-amplitude]. Let $\\Loc(\\Dctf(T,A))$ be the full triangulated closure under arbitrary small sums of [sk-def-localizing-closure], identified by that same equivalence. Let\n$$f^!: \\Loc(\\Dctf(Y,A))\\longrightarrow\\Loc(\\Dctf(X,A))$$\nbe the right adjoint to $Rf_!$ of [sk-prop-sf-existence], with both functors viewed in these identified categories. Then\n$$f^!\\bigl(\\Dctf(Y,A)\\bigr)\\subseteq\\Dctf(X,A).$$\nConsequently this adjunction restricts to\n$$Rf_!: \\Dctf(X,A)\\ \\rightleftarrows\\ \\Dctf(Y,A):f^!.$$\nFor smooth $f$ of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], its restriction is étale locally on $X$ naturally isomorphic to $f^*(-)(d)[2d]$. Here choose $N=\\ell^r\\geq1$ annihilating $A$ and define the pro-étale twist $A_T(d)$ to be $\\nu_T^*$ of the ordinary étale twist of [def-asd-finite-etale-tate-twist], using the exact site-comparison pullback of [def-weil-pbc-proetale-modules]; $(-)(d)$ means derived tensor with this line. The canonical global isomorphism is constructed separately in the smooth-purity chapter.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
   "place": "node sk-prop-sf-rf-shriek-preservation, order 1556"
  },
  "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "sk-def-localizing-closure",
   "sk-prop-sf-existence",
-  "sk-def-sf-operations",
-  "sk-def-sf-setting"
+  "def-sbc-smooth-morphisms",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-proetale-modules",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-constructible"
  ],
  "proof": [
   {
-   "text": "Locally on $X$ and $Y$, $f$ is a closed immersion followed by the projection\nfrom an affine space, so we treat these two cases and then glue.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Let $i:Z\\hookrightarrow X$ be a closed immersion with open complement\n$j:U\\hookrightarrow X$, and let $R\\underline\\Gamma_Z$ be as in\n[sk-lem-formal-closed-support], so that for $K\\in\\Dctf(X,A)$ there is a\ntriangle in $D(X_{\\mathrm{proét}},A)$\n\n$$\ni_*R\\underline\\Gamma_ZK\\longrightarrow K\\longrightarrow Rj_*j^*K\n      \\longrightarrow i_*R\\underline\\Gamma_ZK[1].\n$$",
+   "text": "We first work on the ordinary small étale sites. Write $f^{\\times}$ for the right adjoint to the ordinary étale $Rf_!$. Finite-type $k$-schemes are Noetherian, and are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. An open subscheme is again Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. In particular its intersection with any affine open of the target is quasi-compact, so every open immersion used here is quasi-compact and hence finite type by [lem-weil-pbc-qc-open-immersion-finite-type], and is étale by [lem-weil-pbc-open-immersion-etale]. For an open subscheme $U\\subseteq T$ [def-weil-open-immersion], the fiber product $U\\times_TU$ identifies with $U$ with both projections the identity; its diagonal is therefore an isomorphism, hence a closed immersion, so the open immersion is separated by [def-weil-proper-morphism]. Nagata gives a compactification for every separated finite-type morphism in question, including the closed immersions, affine-space projections, and open restrictions used below. Thus the ordinary étale adjoints exist on the entire ordinary derived categories, independently of any preservation assertion. Fix $N=\\ell^r\\geq1$ annihilating $A$; $N$ is invertible on all these schemes. For later use, Tor intervals on an étale site can be tested on geometric stalks: by exactness of stalks and the derived tensor/pullback comparison, $(K\\otimes_A^L M)_{\\bar x}\\simeq K_{\\bar x}\\otimes_A^L M_{\\bar x}$. Testing first with constant sheaves of arbitrary $A$-modules proves the necessary stalkwise bounds, and conservativity of the geometric stalks proves sufficiency for arbitrary module sheaves. Consequently exact inverse image along any scheme morphism preserves a Tor interval: at a source point the tensor is the tensor of the target stalk with the given source module stalk. These arguments include the zero ring and zero complex.",
    "uses": [
-    "sk-lem-formal-closed-support"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Opening reduction to closed immersions and smooth projections; ordinary étale adjoint and stalkwise tensor preliminaries. Stacks Tags 01T6, 07A4; Zheng Proposition 3.16(2)."
+   }
   },
   {
-   "text": "By [sk-cor-sf-direct-image-ctf] the two right-hand terms lie in $\\Dctf$, hence\nso does $R\\underline\\Gamma_ZK$; explicitly, a Tor interval $[a,b]$ for $K$\ngives the interval $[a,b+\\operatorname{cd}_\\ell(j)+1]$ for\n$R\\underline\\Gamma_ZK$. Since\n$R\\underline\\Gamma_Z\\colon D(X_{\\mathrm{proét}},A)\\to D(Z_{\\mathrm{proét}},A)$\nis right adjoint to $i_*$ ([sk-lem-formal-closed-support] (1)) and\n$\\Loc(\\Dctf(-,A))$ is a full subcategory of $D((-)_{\\mathrm{proét}},A)$,\nuniqueness of right adjoints identifies $R\\underline\\Gamma_ZK$ with $i^!K$ in\n$\\Loc(\\Dctf(Z,A))$.",
+   "text": "Consider a closed immersion $i:Z\\hookrightarrow T$ between schemes of the stated setting and its complementary open immersion $j:V\\hookrightarrow T$. The complement is Noetherian and $j$ is quasi-compact, separated and finite type by step 1; $V,T$ are finite-type $k$-schemes. Choose a nonnegative integer $e\\geq\\operatorname{cd}(j)$ using clause (1) of [lem-kun-0f10] and [def-kun-cd]. This is relative cohomological dimension over an arbitrary field; it does not require finite cohomological dimension of $k$. Every $A$-module sheaf has torsion underlying abelian sheaf, since $\\ell^r A=0$. The higher-direct-image forgetful comparison [lem-sbc-higher-direct-image-forget-comparison] therefore gives $R^qj_*M=0$ for every $A$-module sheaf $M$ and every $q>e$. For a constructible $A$-sheaf $F$, apply [thm-dg-finite-type-constructibility] to $F[0]$ and $j$: $Rj_*F$ is bounded constructible, so each $R^qj_*F$ is constructible. Its coefficient hypothesis holds because $A$ is finite and annihilated by $\\ell^r$, invertible in $k$. These are exactly the two hypotheses of [lem-exc-closed-amplitude], with $c=e$. It follows that the ordinary closed right adjoint sends a constructible cohomological interval $[r,s]$ to $[r,s+e+1]$. It agrees with $i^{\\times}$: use the compactification $Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{i}T$, for which compact supports are $Ri_*=i_*$, and compare the natural adjunction bijections. The closed immersion is finite and proper by the cited statements. Its exact direct image on abelian sheaves is exact on module sheaves as well, because exactness is detected after forgetting the action. Thus the support triangle in the next step uses this same $i^{\\times}$. If $T$ or $V$ is empty the same argument applies, with zero direct image for empty $V$ and, if needed, $e=0$.",
    "uses": [
-    "sk-lem-formal-closed-support"
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "thm-dg-finite-type-constructibility",
+    "lem-exc-closed-amplitude",
+    "lem-exc-closed-support-triangle",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-proper"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-immersion support-triangle paragraph, using general-field ordinary direct-image finiteness (thm-dg-finite-type-constructibility) and Stacks Tag 0F10, lemma-finite-cd (1), in place of a separably-closed-field bound."
+   }
   },
   {
-   "text": "For the projection $a:\\mathbf A^d_Y\\to Y$, the projective-line adjunction\n$Rq_*\\dashv q^*(1)[2]$ of [sk-prop-geo-p1-adjunction] and\n[sk-lem-geo-affine-local] give $a^!=a^*(d)[2d]$ as functors\n$\\Loc(\\Dctf(Y,A))\\to\\Loc(\\Dctf(\\mathbf A^d_Y,A))$. This functor preserves\n$\\Dctf$, because pullback preserves a bounded constructible flat model and the\nTate twist is locally free of rank one. More generally, [sk-prop-cohsm] proves\nthe same for smooth morphisms, whose dualizing complexes are locally an\ninvertible sheaf shifted by $2d$.",
+   "text": "For the Tor assertion in the same closed case, suppose $K$ has Tor amplitude $[a,b]$. Put $L=j^*K$ and $Q=Rj_*L$. Step 1 gives $L$ Tor amplitude $[a,b]$, and step 2 supplies a finite bound $e$ on all module higher direct images. We now prove the needed open Tor bound over this arbitrary field rather than apply a separably-closed-field theorem. The finite ring $A$ is Noetherian: an ascending chain of ideals stabilizes since its underlying set is finite. Every finite $A$-module $M$ is finitely presented: a finite generating set gives $A^n\\twoheadrightarrow M$, whose kernel is a finite set and hence finitely generated. Since $L$ is bounded constructible, it lies in $D^-$. Thus [lem-sf-projection-finite-constant], with $f=j$ and bound $e$, gives\n$$(Rj_*L)\\otimes_A^L M_T\\simeq Rj_*(L\\otimes_A^L M_V)$$\nfor every finite $A$-module $M$, without a separable-closedness hypothesis. The right side has cohomology only in $[a,b+e]$. For the upper bound apply [lem-sf-finite-cd-derived-upper-bound] to the additive left-exact module direct image [lem-weil-pbc-module-direct-image-left-exact], with enough injectives [lem-weil-pbc-module-sheaves-enough-injectives] and the bound from step 2. For the lower bound apply [lem-weil-pbc-derived-functor-negative-vanishing] to the same bounded-below input, with the Grothendieck abelian module-sheaf categories supplied by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. It gives vanishing below $a$. Hence $Q\\otimes_A^L M_T$ has the asserted interval for every finite constant $M$.\n\nHere is the passage to all module sheaves. Choose a bounded-above representative of $Q$, which has cohomology only in $[a,b+e]$ by the preceding test with $M=A$, and the bounded-above flat replacement of [lem-kun-bounded-flat-replacement]; it is K-flat by [lem-kun-kflat-criteria]. Its stalk at a geometric point is a bounded-above flat complex $P$, by the tensor/stalk identity and exactness in step 1, so it computes tensor over $A$. Every $A$-module $W$ is the directed union of its finitely generated submodules $W_i$, each finite because $A$ is finite. Degreewise tensor gives $P\\otimes_AW=\\varinjlim_i(P\\otimes_AW_i)$. Filtered colimits of module complexes commute with cohomology: a cycle is represented at one stage and its differential vanishes at a later stage; a cycle becoming a boundary is represented by its primitive at a common later stage. These two element chases give surjectivity and injectivity of the cohomology comparison. Since each $P\\otimes_AW_i$ has cohomology in $[a,b+e]$ by the finite constant tests, so does $P\\otimes_AW$. For any module sheaf $N$, take $W=N_{\\bar t}$ and use the tensor/stalk identity and conservative geometric stalks of step 1. This proves $Q$ Tor amplitude $[a,b+e]$ against every sheaf $N$; no commutation of $Rj_*$ with filtered colimits has been assumed.\n\nIn the support triangle $C=i_*i^{\\times}K\\to K\\to Q\\to C[1]$, tensor with any degree-zero $A_T$-module sheaf $N$. Derived tensor preserves triangles. The cohomology long exact sequence gives zero for $\\mathcal H^q(C\\otimes_A^LN)$ when $q<a$ or $q>b+e+1$, since the adjacent groups are $\\mathcal H^{q-1}(Q\\otimes_A^LN)$ and $\\mathcal H^q(K\\otimes_A^LN)$. Thus $C$ has Tor amplitude $[a,b+e+1]$. Step 1 applied to $i^*$ gives the same bound for $i^*C$. The closed-immersion counit $i^*i_*\\simeq\\mathrm{id}$, applied termwise since both functors are exact, identifies $i^*C$ with $i^{\\times}K$. Combined with step 2 this proves finite-Tor constructible preservation for closed immersions over the original arbitrary field.",
    "uses": [
-    "sk-lem-geo-affine-local"
+    "lem-sf-projection-finite-constant",
+    "lem-sf-finite-cd-derived-upper-bound",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-kun-bounded-flat-replacement",
+    "lem-kun-kflat-criteria",
+    "lem-exc-closed-support-triangle",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-immersion paragraph: support triangle contributes +1. General scalar projection input: lem-sf-projection-finite-constant; Stacks Tags 0944 (lemma-projection-formula, finite-free case), 07K7 (lemma-unbounded-right-derived, upper bound), 06YQ (bounded flat K-flat). Finite-constant-to-all-module passage is the explicit stalk and filtered-union argument here."
+   }
   },
   {
-   "text": "Finally, after restricting to affine opens in $X$ and $Y$, a finite-type\nmorphism factors as a closed immersion into an affine space over $Y$ followed\nby its projection. Composition and open locality of the adjunction identify the\nrestriction of $f^!K$ with the composite of the two functors just considered,\nso $f^!K$ is bounded constructible of finite Tor amplitude locally on $X$. A\nfinite affine cover of the quasi-compact scheme $X$ gives one cohomological\ninterval and one Tor interval valid everywhere. Since $Rf_!$ preserves $\\Dctf$\nby [sk-prop-ctf-finite-proper], both sides of the adjunction lie in $\\Dctf$, and\nits Hom bijections restrict.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $p:P\\to V$ be a separated smooth morphism of pure relative dimension $m$ between finite-type $k$-schemes. This includes the affine-space projections, whose separatedness is checked in step 7; compactifiability follows from step 1. The ordinary étale smooth tensor theorem provides a locally constant free rank-one sheaf $L$ and natural isomorphisms $p^{\\times}K\\simeq p^*K\\otimes_A^L L[2m]$. Pullback is exact and preserves constructible sheaves. Tensor with $L$ is locally tensor with $A$, hence exact; on each constructible stratum it preserves the finite locally constant models, so the resulting sheaves are constructible. Therefore a cohomological interval $[r,s]$ changes to $[r-2m,s-2m]$. Step 1 gives Tor interval $[a,b]$ for $p^*K$. At every geometric stalk tensor with $L$ is tensor with a free rank-one module, so it preserves this interval; the shift then gives $[a-2m,b-2m]$. This proves the smooth case of preservation without using a theorem that already assumes preservation, and it proves the affine-space case needed for the chart argument.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Affine-space/smooth paragraph: the unoriented local line and tensor formula, rather than an assumed preservation datum. Zheng Proposition 3.16(2), smooth case."
+   }
+  },
+  {
+   "text": "Here is the chart identification, made before restricting exceptional functors. Let $v:V\\hookrightarrow Y$ and $s:U\\hookrightarrow X$ be open immersions with $f(U)\\subseteq V$, and let $fs=vpi$, with $i:U\\hookrightarrow P=\\mathbf A^m_V$ closed and $p:P\\to V$ the projection. For every $H\\in D^+(U_{\\mathrm{et}},A)$, the exact open-extension adjunction, compact-support composition for $fs=vpi$, and the ordinary étale adjunctions give natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}(H,s^*f^{\\times}K)&\\cong\\operatorname{Hom}(s_!H,f^{\\times}K)\\\\\n&\\cong\\operatorname{Hom}(Rf_!s_!H,K)\\\\\n&\\cong\\operatorname{Hom}(v_!Rp_!i_*H,K)\\\\\n&\\cong\\operatorname{Hom}(Rp_!i_*H,v^*K)\\\\\n&\\cong\\operatorname{Hom}(H,i^{\\times}p^{\\times}v^*K).\n\\end{aligned}$$\nEvery input to the compact-support composition comparison is bounded below: $s_!$, $v_!$, and $i_*$ are exact, and the compact-support candidates $Rr_*j_!$ send $D^+$ to $D^+$. This last assertion follows by choosing a bounded-below injective resolution after the exact extension by zero. The comparison theorem is therefore used only in its stated range. Steps 2–4 put $B=i^{\\times}p^{\\times}v^*K$ in $D^+$ for bounded constructible finite-Tor $K$. Evaluate the inverse of the displayed bijection at $H=B$ and $\\mathrm{id}_B$ to obtain $\\alpha:B\\to s^*f^{\\times}K$. Naturality in bounded-below $H$ says that $\\operatorname{Hom}(H,\\alpha)$ is bijective, including for every shift of $H$. Step 6 shows this suffices even if $s^*f^{\\times}K$ is not yet known bounded below. Consequently $s^*f^{\\times}K\\simeq i^{\\times}p^{\\times}v^*K$.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-etale-compact-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-amb-etale-compact-support",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Final paragraph, composition and open locality: Hom calculations spelling out the restriction to each chart."
+   }
+  },
+  {
+   "text": "The bounded-below test used in step 5 has a direct proof. If $\\alpha:B\\to G$ induces bijections $\\operatorname{Hom}(H[n],B)\\to\\operatorname{Hom}(H[n],G)$ for all bounded-below $H$ and integers $n$, its cone $C$ has $\\operatorname{Hom}(H[n],C)=0$. Represent $C$ by a cochain complex $E^\\bullet$. Its brutal lower tails $E_{\\geq -r}^\\bullet$, with zero terms below $-r$ and the original terms and differentials from $-r$ upward, are bounded-below complexes, form an increasing sequence of subcomplexes, and have termwise colimit $E^\\bullet$. By the complex-colimit/homotopy-colimit theorem there is a telescope triangle\n$$\\bigoplus_r E_{\\geq-r}\\xrightarrow{1-\\mathrm{shift}}\\bigoplus_r E_{\\geq-r}\\longrightarrow C\\longrightarrow\\left(\\bigoplus_r E_{\\geq-r}\\right)[1].$$\nApplying $\\operatorname{Hom}(-,C)$ and using $\\operatorname{Hom}(\\bigoplus_rE_{\\geq-r}[n],C)=\\prod_r\\operatorname{Hom}(E_{\\geq-r}[n],C)=0$ shows $\\operatorname{Hom}(C,C)=0$. Hence $C=0$ and $\\alpha$ is an isomorphism. This supplies exactly the needed test for representing objects, without asserting unbounded compact-support composition, a bounded-below exceptional-adjoint theorem, or a convergence claim for smart truncations. The exactness of Hom used here follows from the triangulated axioms [def-weil-triangulated-category]: for a triangle $A\\xrightarrow{u}B\\xrightarrow{v}D\\to A[1]$ and $h:T\\to B$ with $vh=0$, apply TR3 from $T\\to0\\to T[1]\\xrightarrow{1}T[1]$ to the rotated triangle $B\\to D\\to A[1]\\xrightarrow{-u[1]}B[1]$; the resulting $c:T[1]\\to A[1]$ satisfies $h=-u c[-1]$. For contravariant Hom, if $h:B\\to T$ satisfies $hu=0$, apply TR3 from the original triangle to the distinguished triangle $0\\to T\\xrightarrow{1}T\\to0$, with first two components $0$ and $h$. Its third component $c:D\\to T$ satisfies $cv=h$. Rotating the triangles gives the factorization at every position in both Hom sequences. Thus these Hom tests are elementary consequences of the cited axioms.",
+   "uses": [
+    "lem-kun-complex-colimit-hocolim",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 093W (lemma-compute-colimit), 0949 (lemma-colim-hocolim): telescope of the brutal lower tails; elementary Hom test after applying the cited theorem."
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover of $Y$ and finite affine open covers of its inverse images in $X$. Such finite covers exist because the structure morphisms and $f$ are of finite type. For affine charts $U\\subseteq f^{-1}(V)$, the induced algebra $B=\\mathcal O_X(U)$ is finitely generated over $R=\\mathcal O_Y(V)$. Choose generators $b_1,\\dots,b_m$. The surjection $R[t_1,\\dots,t_m]\\to B$, $t_i\\mapsto b_i$, gives a closed immersion $i:U\\hookrightarrow\\mathbf A^m_V$; followed by the smooth projection $p$ it is exactly $U\\to V$. The scheme-theoretic factorization, not just containment of images, is provided by this surjection. The projection $p$ is of finite type because the polynomial algebra is finitely generated over $R$. Its diagonal corresponds to the surjection $R[t_1,\\ldots,t_m,u_1,\\ldots,u_m]\\to R[t_1,\\ldots,t_m]$ sending both $t_h$ and $u_h$ to $t_h$, hence is a closed immersion by [def-weil-closed-immersion]. Thus $p$ is separated by [def-weil-proper-morphism], including when $m=0$. The schemes $U,V,P$ also satisfy the ground-field setting needed in steps 2–4: $U,V$ are Noetherian open subschemes of finite-type $k$-schemes, hence finite type by step 1, and $P$ is finite type over $V$. Each is affine over $k$. For any of their coordinate $k$-algebras $C$, the diagonal is induced by the surjective multiplication map $C\\otimes_k C\\to C$ (every $c$ is the image of $c\\otimes1$), so each is separated over $k$ by the same affine closed-immersion criterion. Thus all the hypotheses of steps 2–4 hold. Step 5 now identifies the restriction of $f^{\\times}K$ to $U$ with $i^{\\times}p^{\\times}(K|_V)$. Steps 2–4 show that it is bounded constructible and has a finite Tor interval. There are only finitely many charts: take the minimum of their lower endpoints and maximum of their upper endpoints, separately for the cohomological and Tor intervals. To glue constructibility, order the finite cover $(U_i)$ and cut its finite local stratifications by $U_i\\setminus\\bigcup_{h<i}U_h$; these give a finite partition by constructible locally closed strata with the same finite locally constant descriptions. For cohomology and for a tensor with any arbitrary module sheaf, vanishing is local on this open cover; tensor commutes with restriction. Thus the intervals hold globally. Empty charts are discarded; if $X$ is empty all outputs are zero and no maximum over an empty family is taken.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Opening and final paragraphs: affine closed/projection factorization and finite-cover gluing."
+   }
+  },
+  {
+   "text": "First identify the finite-coefficient conventions, rather than identifying two ambient categories silently. The condensed discrete ring $\\underline A$ is the constant ring sheaf on the profinite site: each continuous function to finite discrete $A$ is constant on a finite clopen partition, which is a covering there. Its additive sheaf has a presentation by finite sums of the unit $\\mathbf Z$, obtained from a presentation of the finite abelian group $A$. The strong monoidal left adjoint $p_T^*$ preserves the unit, sums and cokernels, so $p_T^*\\underline A$ is the constant ring sheaf $A_T$; the identification respects multiplication because both multiplications act on constant sections by multiplication in $A$. Apply the exact section-action equivalence named in the statement, [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its site-size hypothesis is the small-site convention already fixed; abelian sheafification and its strong monoidal structure are supplied by [sk-def-sfb-sheaf-tensor]. If $u$ becomes invertible after sheafification, then the strong monoidal comparison identifies $a(u\\otimes P)$ with $a(u)\\otimes a(P)$, which is invertible, verifying the required monoidal-local-equivalence hypothesis. Concretely an internal action $A_T\\otimes_{\\mathbf Z}M\\to M$ is a compatible family of bilinear actions on sections by that sheafified tensor definition. The unitality and associativity axioms are exactly the ordinary module axioms. Thus internal module objects and ordinary $A_T$-module sheaves have the same objects, maps, kernels and sheafified cokernels, and hence equivalent exact and derived categories. Relative tensor is identified by its balanced-bilinear universal property, so the identification preserves Tor intervals. In the constructibility definition, a finitely presented $A$-module is finite; conversely a finite module has a finite generating set and its relation kernel in a finite free $A$-module is finite, hence finitely generated. Thus the finite constant local models of [sk-def-sfb-constructible] are exactly the finite-module models used here. The module-object pushforward and pullback definitions have the usual underlying sheaf and action, so under this identification they are the ordinary module functors. The same holds for open extension by zero by its displayed underlying sheaf and adjunction. Apply this exact identification termwise: quasi-isomorphisms and injective resolutions are preserved, and the module-object composite $Rp_*D(j_!)$ of [sk-def-sfb-module-derived-lower-shriek] becomes precisely the ordinary pro-etale compact-support composite for that same compactification. This identifies the left functor in the given adjunction before any right-adjoint comparison. The derived equivalence preserves coproducts by their Hom universal property, and preserves shifts and cone triangles termwise. It therefore identifies the localizing closures of the identified finite-Tor constructible subcategories, as specified in the statement.\n\nWe pass from ordinary étale finite-Tor complexes to the pro-étale categories in the statement. For arbitrary finite commutative $A$, the finite-ring constructible derived comparison gives an equivalence on bounded constructible complexes; the Tor-interval comparison preserves and reflects every Tor interval. Hence for $K\\in\\Dctf(Y,A)$ choose $K_{\\mathrm{et}}\\in D^b_{ctf}(Y_{\\mathrm{et}},A)$ with $K\\simeq\\nu_Y^*K_{\\mathrm{et}}$. By step 7, $f^{\\times}K_{\\mathrm{et}}$ is bounded constructible of finite Tor amplitude, so $H_K=\\nu_X^*f^{\\times}K_{\\mathrm{et}}$ belongs to $\\Dctf(X,A)$. The construction and isomorphisms are natural in $K$, since the bounded-below comparison is fully faithful. Use the chosen compactification $c(f)=(j,p)$ defining the given pro-étale left adjoint: by [def-sfb-finite-derived-lower-shriek] and [def-sfb-finite-derived-lower-shriek-compactification] it is $Rp_{\\mathrm{proet},*}Dj_!$. Choose this same compactification for the ordinary étale candidate. For any bounded-below étale input, compact-support comparison is the composite\n$$\\nu_Y^*Rp_{\\mathrm{et},*}j^{\\mathrm{et}}_!\\simeq Rp_{\\mathrm{proet},*}\\nu_{\\bar X}^*j^{\\mathrm{et}}_!\\simeq Rp_{\\mathrm{proet},*}j^{\\mathrm{proet}}_!\\nu_X^*.$$\nThe first isomorphism is the qcqs direct-image comparison and the second is the termwise exact open-extension comparison. These are applied on bounded-below complexes only. The compact-support preservation theorem, through a compactification, also gives $Rf_!\\Dctf(X,A)\\subseteq\\Dctf(Y,A)$.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-comparison-tor-interval",
+    "thm-weil-pbc-site-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "det-ctf-finite-proper-localizing",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-sfb-finite-derived-lower-shriek",
+    "def-sfb-finite-derived-lower-shriek-compactification",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-sheaf-of-modules-category",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-adjoint uniqueness and final restriction paragraphs: bounded finite-ring comparison, including finite Tor and compact supports. Stacks Tags 09AL, 09AK."
+   }
+  },
+  {
+   "text": "It remains to identify $H_K$ with the given right adjoint on the localizing categories; an adjunction only on the small subcategories would not by itself suffice. Use the right adjoint and natural adjunction bijections supplied as data in the statement. The ordinary étale counit and the compact-support comparison of step 8 give $t_K:Rf_!H_K\\to K$. Transpose $t_K$ under the adjunction in the statement to obtain $\\alpha_K:H_K\\to f^!K$. For every $M\\in\\Dctf(X,A)$ choose its bounded étale origin $M_{\\mathrm{et}}$ as in step 8. The map $\\operatorname{Hom}(M,\\alpha_K)$, followed by the given adjunction, sends $h:M\\to H_K$ to $t_K\\circ Rf_!h$. Under the fully faithful bounded comparisons this is exactly the ordinary étale adjunction map $h_{\\mathrm{et}}\\mapsto\\epsilon_{K_{\\mathrm{et}}}\\circ Rf_{!,\\mathrm{et}}h_{\\mathrm{et}}$, which is bijective. This holds for every shift $M[n]$ as well. Let $C$ be a cone of $\\alpha_K$ in $\\Loc(\\Dctf(X,A))$. The Hom long exact sequences give $\\operatorname{Hom}(M[n],C)=0$ for all generators and all integers $n$. The objects $T$ satisfying $\\operatorname{Hom}(T[n],C)=0$ for all $n$ form a full triangulated subcategory closed under arbitrary sums (Hom from a sum to $C$ is the product of the Hom groups). It therefore contains the localizing closure of the generators, in particular $C$. Thus $\\operatorname{id}_C=0$, $C=0$, and $\\alpha_K$ is an isomorphism. This proves $f^!K\\in\\Dctf(X,A)$ and identifies the functors naturally, without assuming any unbounded étale/pro-étale comparison or compactness of the generators. The Hom exactness and closure under triangles are the same elementary triangle-factorization consequence of TR3 spelled out in step 6.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-adjoint uniqueness paragraph and final paragraph: explicit representing-object comparison on the localizing category."
+   }
+  },
+  {
+   "text": "Both functors of the given adjunction now take the indicated small full subcategories into each other: $Rf_!$ by step 8 and $f^!$ by step 9. For $M\\in\\Dctf(X,A)$ and $K\\in\\Dctf(Y,A)$ their small-category Hom sets are exactly their Hom sets in the localizing categories. Restrict the given natural bijections $\\operatorname{Hom}(Rf_!M,K)\\simeq\\operatorname{Hom}(M,f^!K)$; the same units, counits, and triangle identities give the claimed restricted adjunction.",
+   "uses": [
+    "det-ctf-finite-proper-localizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Final sentence: restriction of the Hom bijections to the full finite-Tor subcategories."
+   }
+  },
+  {
+   "text": "Finally let $f$ be smooth of pure relative dimension $d$. By the smooth tensor theorem, $f^{\\times}K_{\\mathrm{et}}\\simeq f^*K_{\\mathrm{et}}\\otimes_A^L L[2d]$ for one fixed étale locally free rank-one $A$-sheaf $L$, naturally for all $K_{\\mathrm{et}}$. The finite-coefficient Tate twist $A_X(d)$ is also étale locally free of rank one: take the same $N=\\ell^r$ annihilating $A$ in its roots-of-unity construction. On a common refinement of covers trivializing $L$ and $A_X(d)$ choose an isomorphism $L\\simeq A_X(d)$. It induces a natural local isomorphism $f^{\\times}(-)\\simeq f^*(-)(d)[2d]$. Pull back along $\\nu_X$ and use step 9, the derived tensor/pullback comparison, and composition of inverse images $\\nu_X^*f^*=f^*\\nu_Y^*$. This gives the asserted étale-local isomorphism of functors on $\\Dctf(Y,A)$. The choices of trivializations give no canonical global orientation, so this argument does not construct the later canonical global smooth-purity map.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-asd-finite-etale-twist-line",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Affine-space/smooth paragraph and last clause of the statement: local formula, with no chosen global orientation."
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-formal-closed-support",
-  "sk-lem-geo-affine-local"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-dg-finite-type-constructibility",
+  "lem-exc-closed-amplitude",
+  "lem-exc-closed-support-triangle",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-sf-projection-finite-constant",
+  "lem-sf-finite-cd-derived-upper-bound",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-kun-bounded-flat-replacement",
+  "lem-kun-kflat-criteria",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "thm-asd-smooth-tensor",
+  "prop-constructible-pullback",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-kun-complex-colimit-hocolim",
+  "def-weil-triangulated-category",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-comparison-tor-interval",
+  "thm-weil-pbc-site-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "det-ctf-finite-proper-localizing",
+  "lem-weil-extension-by-zero-exact",
+  "def-sfb-finite-derived-lower-shriek",
+  "def-sfb-finite-derived-lower-shriek-compactification",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-localizing-closure",
+  "lem-asd-finite-etale-twist-line"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "closed-support, smooth tensor, and affine-chart proof; bounded comparison and localizing-generator argument supplied explicitly; Zheng Propositions 2.29 and 3.16 corroborate the ordinary étale route"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional inverse image for a separated morphism of finite type preserves bounded constructible complexes of finite Tor dimension with finite torsion coefficients",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.IsSeparated.instMap, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.IsProper.of_comp, ChevalleyThm.chevalley_polynomialC",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Shriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*inverse|constructible.*torAmplitude",
+   "results": "0 hits: ; source subdirectory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional pullback preserves constructible sheaves of finite Tor dimension",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullback, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to compact support pushforward sends constructible perfect torsion complexes to constructible perfect complexes",
+   "results": "8 hits: LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint, CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(perfect|Tor)|six.functor|upper.shriek",
+   "results": "0 hits: ; source subdirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image with finite torsion coefficients preserves bounded constructible finite Tor amplitude complexes",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomologyOfExact, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, TensorProduct.directLimitLeft_symm_of_tmul, CategoryTheory.MorphismProperty.instIsStableUnderRetractsInverseImage, CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image of sheaves with finite coefficients has bounded constructible cohomology and finite flat dimension",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, LightCondAb.ofSheafLightProfinite, SheafOfModules.IsFiniteType, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, LightCondensed.ofSheafForgetLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extraordinary-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|extraordinary|constructible.*flat|upperShriek",
+   "results": "0 hits: ; source subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extraordinary-pullback preservation of bounded constructible finite-Tor complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint of pushforward with compact supports preserves constructible complexes with bounded flat dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: these results concern ordinary pullback/pushforward adjunctions and do not state exceptional inverse-image preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|constructibleFiniteTor|extraordinary.*pullback",
+   "results": "0 hits: ; source subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: these results concern ordinary pullback/pushforward adjunctions and do not state exceptional inverse-image preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinaryInverseImage|rightDerivedUpperShriek|constructibleTorAmplitudeIn_rightDerivedUpperShriek",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration with these exceptional-inverse-image names was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of an etale sheaf preserves finite flat dimension and constructibility",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern etale schemes and their site, not exceptional inverse image or preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional pullback for a finite type scheme morphism over a field preserves bounded constructible complexes with finite Tor amplitude",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Pullback.instHasPullback; AlgebraicGeometry.Scheme.Pullback.instHasPullbacks; CategoryTheory.MorphismProperty.Over.hasPullbacks; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module adjunctions and scheme properties do not state exceptional finite-Tor constructible preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "CategoryTheory.plusPlusAdjunction; CategoryTheory.sheafificationAdjunction; CategoryTheory.HasSheafify.mk'; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction; CategoryTheory.GrothendieckTopology.W_adj_unit_app; CategoryTheory.sheafComposeNatIso; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module adjunctions and scheme properties do not state exceptional finite-Tor constructible preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image preserves bounded constructible complexes of finite Tor amplitude for separated finite type schemes over any field with invertible finite coefficients",
+   "results": "AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme; ChevalleyThm.chevalley_polynomialC; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module adjunctions and scheme properties do not state exceptional finite-Tor constructible preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|constructibleTorAmplitude|exceptional.*inverse|upperShriek",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module adjunctions and scheme properties do not state exceptional finite-Tor constructible preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to compactly supported pushforward preserves the bounded constructible finite Tor subcategory and locally equals smooth pullback with a shift and twist",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module adjunctions and scheme properties do not state exceptional finite-Tor constructible preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes, extraordinary inverse image preserves constructible complexes of finite Tor dimension over a finite coefficient ring",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme; AlgebraicGeometry.IsFinite.of_comp; ChevalleyThm.chevalley_polynomialC",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned scheme-property declarations do not state exceptional inverse-image preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*constructible|upperShriek.*[Tt]or|[Tt]or.*upperShriek",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: no exceptional-preservation declaration found"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -105,5 +489,99 @@
   "sk-def-sf-admissible"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-prop-sf-rf-shriek-preservation",
+  "worker": "stage1",
+  "summary": "Repaired the returned narrowing: arbitrary field of characteristic p different from ell, with separated X and Y. Named the section-action module equivalence and its derived transport in the statement. Replaced restricted open-complement inputs by existing arbitrary-field direct-image finiteness, finite relative cohomological dimension, and finite-constant scalar projection. Wrote the stalk/filtered-union argument establishing the arbitrary-module Tor bound before the support triangle. The eleven-step support/smooth/chart and localizing-generator route remains; no new nodes or Mathlib leaves.",
+  "blueprint": "Proof opening and final paragraphs: steps 1,5–7 (ordinary adjoints, chart factorization, locality, finite gluing); closed-support paragraphs: steps 2–3; affine-space/smooth paragraph: steps 4,11; right-adjoint uniqueness and restricted adjunction: steps 8–10. Current main-20261015 proof followed.",
+  "tool_uses": [
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Steps 1 and 5 use ordinary-etale existence before proving preservation; this supplies the ambient adjoint used to implement the current route and does not assert preservation. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-exc-closed-amplitude",
+    "why": "Step 2 uses the general triangle amplitude criterion under the separately verified open-complement hypothesis; it is narrower than the current theorem and supplies no localizing comparison. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Step 3 uses a finite full torsion cohomological-dimension bound; the unit gives no replacement bound for its open-direct-image Tor input. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Steps 4 and 11 use the ordinary-etale unoriented rank-one tensor formula implementing the current source smooth paragraph; the item proves preservation and compares with its given localizing adjoint. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Step 5 uses ordinary-etale exact open-extension adjunction to implement the prescribed chart locality, without assuming constructible preservation. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Step 5 uses bounded-below compact-support composition for the prescribed chart factorization; no unbounded comparison is inferred. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Step 6 uses the general complex telescope theorem to prove the bounded-below representing-object test explicitly; the unit supplies no categorical test theorem. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Step 8 uses finite-ring Tor-interval preservation and reflection under site comparison, a coefficient comparison tool needed for this pro-etale statement. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Step 8 uses the exact open-extension comparison for the same chosen compactification; this identifies the left functor without changing the route. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "det-ctf-finite-proper-localizing",
+    "why": "Steps 8 and 10 use forward proper/compact-support preservation, exactly the forward-preservation input in the current source final paragraph; it does not prove exceptional preservation. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Step 11 uses local rank-one freeness of the finite Tate line to compare two local lines; no orientation or global purity is inferred. No statement within this unit supplies this independent input."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Step 2 uses ordinary forward direct-image constructibility over an arbitrary field, the precise finiteness input to the unit support-triangle argument; it is independent of exceptional preservation and no same-unit node supplies it."
+   },
+   {
+    "node": "lem-sf-finite-cd-derived-upper-bound",
+    "why": "Step 3 uses the general finite-cohomological-dimension bound on derived direct image to control the scalar projection target; the unit gives no abstract derived bound."
+   },
+   {
+    "node": "lem-kun-bounded-flat-replacement",
+    "why": "Step 3 uses a bounded-above flat representative to make the scalar filtered-union test explicit at stalks; the unit gives no resolution construction."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Step 3 uses bounded-above flat complexes being K-flat so the displayed ordinary tensors compute derived tensors; the unit gives no K-flatness criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-exc-closed-amplitude",
+  "lem-kun-0f10",
+  "thm-asd-smooth-tensor",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-exc-comparison-tor-interval",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "det-ctf-finite-proper-localizing",
+  "lem-asd-finite-etale-twist-line",
+  "thm-dg-finite-type-constructibility",
+  "lem-sf-finite-cd-derived-upper-bound",
+  "lem-kun-bounded-flat-replacement",
+  "lem-kun-kflat-criteria"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NA-b38877536",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-b38877536 (reviewer sub-agent of L); spot-checked: I read all 11 steps in full against the main-20261015 source statement and proof, the unit and chapter records, the statements of all 14 stmt_deps and of the substantive proof_deps. Statement: it matches the source over an arbitrary field k of characteristic p≠ℓ with X, Y separated, the same setting as the reviewed sk-prop-sf-existence (same coefficient categories, same localizing closure, same Rp_*D(j_!) for the chosen compactification). Removing the earlier F_q-bar restriction is correct and nothing is weakened. The coefficient identification p_T^*A≅A_T is explicit, through the section-action equivalence, and finite constant local models agree with finite-stalk locally constant sheaves. Route: the closed-support, smooth, chart and gluing, and restriction paragraphs are each realized. The cited units' DAG nodes need F_q-bar, a separably closed field, or a finite or algebraically closed field, so the delivery uses general-field nodes. thm-asd-smooth-tensor realizes sk-prop-cohsm, det-ctf-finite-proper-localizing realizes sk-prop-ctf-finite-proper, and lem-exc-comparison-tor-interval belongs to sk-cor-sf-direct-image-ctf. Hypotheses checked: lem-kun-0f10(1) is relative cd over any field (Stacks 0F10(1)); thm-dg-finite-type-constructibility plus lem-exc-closed-amplitude give [r,s+e+1]; lem-sf-projection-finite-constant applies (A Noetherian, finite modules finitely presented, D^- input, uniform bound e); the stalk and filtered-union passage to all modules is correct; the support-triangle long exact sequence gives [a,b+e+1]; the step-5 Hom chain uses composition only on D^+; the step-6 telescope uses brutal truncations, which are subcomplexes; the step-9 orthogonality argument on Loc is valid; the step-11 local line comparison claims no orientation. Edge cases: closed point in A^1 (bound [0,2] contains A(-1)[-2]), A^1→pt (degree -2), A=0, empty schemes, i=id, d=0, nonprojective modules over Z/ℓ^2, fields with cd(k)=∞. No new nodes; proof_deps equals the union of uses; no cycle; no SGA source; declared tool_uses accepted. No fixes."
+ }
 }
