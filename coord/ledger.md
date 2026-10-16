@@ -15602,7 +15602,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient (stage 3; reviewer PASS; first push; landing 20261016T221558-L-1611743 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:15 L: merged deliver/C3/Sheaf.Paper.SectionModuleAlgebraicInverseImage (stage 3; reviewer PASS; first push; landing 20261016T221559-L-1611841 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/C3/Sheaf.Paper.StrictHenselizationPointedMap (stage 3; reviewer PASS; first push; landing 20261016T221600-L-1611985 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/C4/Sheaf.Paper.IntegralResiduePullFlatModel (stage 3; reviewer PASS; first push; landing 20261016T221601-L-1612212 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261016T221602-L-1612596 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility (stage 3; reviewer PASS; first push; landing 20261016T221603-L-1612718 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/condensed-qbar-sync-retirement.md)
 - 22:16 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (stage 3; reviewer PASS; first push; landing 20261016T221607-L-1613839 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15680,3 +15679,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
 
 - 07:25 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
+
+- 07:27 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
