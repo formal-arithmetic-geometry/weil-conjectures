@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-tw-conventions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Base conventions for weight theory",
- "statement": "Let $q=p^r$ be a prime power, let $k=\\mathbf F_q$, and let\n$\\overline k$ be an algebraic closure. Let $X$ be a\nseparated scheme of finite type\nover $k$. The $\\overline{\\mathbf Q}_\\ell$-coefficient derived categories\non $X_{\\overline k}$ are those of\n[def-weil-pbc-qbar-category], with\n$H^i_c(X_{\\overline k},\\overline{\\mathbf Q}_\\ell)$ the compactly supported\ncohomology of 02.",
+ "statement": "Let $p$ be prime, let $r\\geq1$ be an integer, put $q=p^r$ and $k=\\mathbf F_q$, and choose an algebraic closure $\\overline k$ of $k$. These are the finite-field data of [def-weil-finite-field-fiber], with the letters $(a,k_0,k)$ there renamed $(r,k,\\overline k)$ here. Fix a prime $\\ell\\neq p$, write $\\mathbf Q_\\ell$ for the field of $\\ell$-adic numbers, and choose its algebraic closure $\\overline{\\mathbf Q}_\\ell$ as in [def-weil-pbc-qbar-category].\n\nLet $X$ be a separated scheme of finite type over $k$, with these scheme and morphism conventions supplied by [def-weil-pbc-scheme-conventions], and put\n$$\nX_{\\overline k}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\overline k\n$$\nfor its geometric base change [def-weil-finite-field-fiber]. The $\\overline{\\mathbf Q}_\\ell$-coefficient derived categories on $X_{\\overline k}$ are those of [def-weil-pbc-qbar-category]. In the compact-support notation of [def-weil-ordinary-compact-cohomology],\n$$\nH_c^i(X_{\\overline k},\\overline{\\mathbf Q}_\\ell)\n:=H_c^i\\bigl(X_{\\overline k},(\\overline{\\mathbf Q}_\\ell)_{X_{\\overline k}}\\bigr)\n$$\ndenotes the $i$-th compactly supported cohomology group of the constant coefficient object, for every $i\\in\\mathbf Z$.\n\nHere the coefficient object $(\\overline{\\mathbf Q}_\\ell)_{X_{\\overline k}}$ is the scalar extension of the completed integral coefficient object specified in [def-weil-ordinary-compact-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-tw-conventions.md",
   "place": "node def-tw-conventions, order 2104",
@@ -17,14 +17,101 @@
  },
  "stmt_deps": [
   "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-finite-field-fiber"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base conventions for weights over a finite field, algebraic closure, and compactly supported etale cohomology",
+   "results": "8 hits: WittVector.isocrystal_classification, WittVector.StandardOneDimIsocrystal, groupCohomology.Hilbert90.aux, Profinite.NobelingProof.Nobeling_aux, groupCohomology.Hilbert90.aux_ne_zero, Algebra.etaleLocus_eq_compl_support, BDeRham, WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not supply the full finite-field Qbar-l compact-support convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.EllAdicCohomology, WeilSheaf.compactlySupportedCohomology, PadicAlgCl",
+   "results": "0 hits: ; loogle: unknown identifier 'Scheme.EllAdicCohomology'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; retried with quoted name search"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|EllAdicCohomology|algebraic closure",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not supply the full finite-field Qbar-l compact-support convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "EllAdicCohomology, IsAlgebraicClosure",
+   "results": "0 hits: ; loogle: unknown identifier 'EllAdicCohomology'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; retried with quoted name search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported cohomology of a separated finite type scheme over a finite field with Qbar l coefficients",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, Condensed.finFree, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, CompHausLike.LocallyConstantModule.functor_obj_val, Rep.FiniteCyclicGroup.moduleCatCochainComplex",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not supply the full finite-field Qbar-l compact-support convention"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported Qbar l cohomology of a finite type scheme over a finite field",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EllAdicCohomology\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not supply the full finite-field Qbar-l compact-support convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactlySupported\"",
+   "results": "12 hits: CompactlySupported.«termC_c(_,_)», CompactlySupported.«term_→C_c_», CompactlySupportedContinuousMap, CompactlySupportedContinuousMap.instInhabited, CompactlySupportedContinuousMap.instZero, CompactlySupportedContinuousMapClass, CompactlySupportedContinuousMap.instFunLike, CompactlySupportedContinuousMap.partialOrder",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not supply the full finite-field Qbar-l compact-support convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections with proper support of the constant l-adic rational sheaf on a variety over an algebraic closure of a finite field",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, ModuleCat.Tilde.exists_const",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; no finite-field geometric Qbar-l compact-support convention"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|cohomologyWithCompact|EllAdicCohomology",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; no finite-field geometric Qbar-l compact-support convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "12 hits: CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.instAddCommGroupCohomologyClass, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.CohomologyClass.instSMul, CochainComplex.HomComplex.CohomologyClass.mk_surjective, CochainComplex.HomComplex.CohomologyClass.rec, CochainComplex.HomComplex.CohomologyClass.instModule, CochainComplex.HomComplex.CohomologyClass.mkLinearMap",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; no finite-field geometric Qbar-l compact-support convention"
+  },
+  {
+   "tool": "grep",
+   "query": "EllAdicCohomology|compactlySupportedCohomology",
+   "results": "4 hits in Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:28,75,78,83 (search subdirectory AlgebraicGeometry). Read lines 59–85: integral ordinary cohomology in natural degrees.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary integral cohomology does not give this geometric Qbar-l compact-support convention"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -56,5 +143,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-rem-sf-pf-done"
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-tw-conventions",
+  "worker": "stage1",
+  "summary": "Definition-only split, with no new nodes. Read the archived master blueprint at its recorded source path under /home/ubuntu/weil-launcher-nt/literature and the full statements of the four existing dependencies. Repaired the unresolved phrase cohomology of 02 by naming the existing compact-support notation; made explicit the inherited prime coefficient condition ℓ ≠ p and geometric base change. STATEMENT-DISPUTED: without that condition the cited coefficient category is undefined for ℓ=p, e.g. X=Spec F_p. The finite-field convention supplies the intended inherited condition. Searched project Lean sources, the DAG and whole blueprint, and Mathlib; no full attachment or Mathlib match was found. No definition data or proof is postponed. Repair reread: the supplied return is an unrelated PASS with no numbered objections. Clarified explicitly that the named coefficient object is obtained from the completed integral coefficient object by scalar extension, as the existing cohomology definition prescribes; no coefficient-category comparison is introduced. Rechecked the current four dependency statements and original archived sources.",
+  "blueprint": "Realizes the complete definition paragraph of blueprint node def-tw-conventions (order 2104): finite-field and algebraic-closure data, separated finite-type X, the Qbar_l coefficient category on the geometric base change, and the compactly supported cohomology notation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-ca7857455",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-ca7857455 (reviewer sub-agent of L); spot-checked: Read the full item, report, stage instructions, chapter/unit route, archived source, and all four dependency statements. The repaired finite-field convention, explicit base change, ell != p domain, Qbar_l pair category, and compact-support coefficient object agree with their sources; edge cases r=1, empty scheme, Spec k, all integer degrees, and ell=p failure were checked. No new nodes or proof steps require review, and Mathlib searches show no exact match."
+ }
 }
