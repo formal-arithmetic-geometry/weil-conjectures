@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-pe-site",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The small pro-étale site",
- "statement": "The objects of $X_{\\mathrm{proét}}$ are weakly étale $X$-schemes [sk-def-pe-morphisms],\nwith all $X$-morphisms as arrows (these are weakly étale by\n[sk-lem-pe-weakly-etale-stability]). A family $\\{U_i\\to U\\}_{i\\in I}$ is a covering if it\nis an fpqc covering. Explicitly, for every affine open $W\\subset U$ there must be finitely\nmany indices $i_1,\\ldots,i_m$ and affine opens $V_j\\subset U_{i_j}\\times_UW$ with\n\n$$\nW=\\bigcup_{j=1}^m\\operatorname{image}(V_j\\to W).\n$$\n\nThe indices may depend on $W$; no finiteness of $I$ is required. Equivalently one may use\nfinitely many quasi-compact opens above each $W$. See Stacks, Tags 0989 and 098A.\n\nThe finite refinement condition is part of the topology; a jointly surjective family\nwithout it is not a covering. For an affine target every cover refines to a finite affine\ncover, whose disjoint union is affine and faithfully flat over the target. Ordinary étale\nand Zariski covers are pro-étale covers: flat maps locally of finite presentation are open,\nso quasi-compactness gives the required finite refinements (Stacks, Tag 098B).",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. The objects of $X_{\\mathrm{proét}}$ are weakly étale $X$-schemes [sk-def-pe-morphisms],\nwith all $X$-morphisms as arrows (these are weakly étale by\n[sk-lem-pe-weakly-etale-stability]). A family $\\{U_i\\to U\\}_{i\\in I}$ is a covering if it\nis an fpqc covering. Explicitly, for every affine open $W\\subset U$ there must be finitely\nmany indices $i_1,\\ldots,i_m$ and affine opens $V_j\\subset U_{i_j}\\times_UW$ with\n\n$$\nW=\\bigcup_{j=1}^m\\operatorname{image}(V_j\\to W).\n$$\n\nThe indices may depend on $W$; no finiteness of $I$ is required. Equivalently one may use\nfinitely many quasi-compact opens above each $W$. The fpqc covering condition is [def-weil-pbc-fpqc-covering].\n\nThe finite refinement condition is part of the topology; a jointly surjective family\nwithout it is not a covering. For an affine target every cover refines to a finite affine\ncover, whose disjoint union is affine and faithfully flat over the target. Ordinary étale\nand Zariski covers are pro-étale covers: flat maps locally of finite presentation are open,\nso quasi-compactness gives the required finite refinements (Stacks, Tag 098B).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-site/_section.md",
   "place": "node sk-def-pe-site, order 703",
@@ -23,15 +23,170 @@
   ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "sk-def-pe-morphisms",
-  "sk-lem-pe-weakly-etale-stability"
+  "sk-lem-pe-weakly-etale-stability",
+  "def-weil-pbc-fpqc-covering"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Small pro-etale site, weakly etale schemes with all maps over the base, fpqc covering families and finite affine refinements",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.instSmallPrecoverage; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.smallGrothendieckTopology",
+   "date": "2026-10-16",
+   "verdict": "no direct match in semantic index: ordinary etale and generic site declarations only; precise ProEt match found by Loogle and grep"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage|def ProEt|def precoverage|abbrev topology|etalePrecoverage_le_proetalePrecoverage",
+   "results": "5 hits. 52; 57; 58; 61; 67",
+   "date": "2026-10-16",
+   "verdict": "related hits; single-file grep output omits the filename and is parsed into the file field by msearch.py; read the named source file directly and reran the targeted search on its containing directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt.topology",
+   "results": "10 hits. AlgebraicGeometry.Scheme.ProEt.topology; AlgebraicGeometry.Scheme.ProEt.instSubcanonicalTopology; AlgebraicGeometry.Scheme.ProEt.instIsContinuousOverForgetTopologyOverProetaleTopology; AlgebraicGeometry.Scheme.ProEt.topology_eq_inducedTopology; AlgebraicGeometry.Scheme.ProEt.instIsContinuousCompOverForgetForgetTopologyProetaleTopology; AlgebraicGeometry.Scheme.ProEt.topology_eq_top_of_isEmpty; AlgebraicGeometry.Scheme.ProEt.bot_mem_topology; AlgebraicGeometry.Scheme.ellAdicSheaf",
+   "date": "2026-10-16",
+   "verdict": "match: ProEt.topology, read in Mathlib/AlgebraicGeometry/Sites/Proetale.lean:156 together with ProEt:100 and precoverage:151"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small pro-etale site of a scheme and fpqc finite refinement coverings",
+   "results": "8 hits. AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.overPretopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.smallPretopology; AlgebraicGeometry.Scheme.mem_smallGrothendieckTopology; AlgebraicGeometry.Scheme.smallGrothendieckTopology; AlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE.congr_simp; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-16",
+   "verdict": "no direct match in semantic index: ordinary etale and generic site declarations only; precise ProEt match found by Loogle and grep"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isAffineOpen_of_isCompact|exists_hom|QuasiCompactCover",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage|def ProEt|abbrev topology|zariskiPrecoverage_le_propQCPrecoverage",
+   "results": "7 hits. Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "protected def ProEt|def precoverage|abbrev topology|etalePrecoverage_le_proetalePrecoverage",
+   "results": "6 hits. Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffine.*[Ss]igma|[Ss]igma.*IsAffine|isAffine.*coprod|Flat.*[Ss]igma|[Ss]igma.*Flat",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "class FaithfullyFlat|def FaithfullyFlat|faithfullyFlat_iff|zariskiPrecoverage_le_etalePrecoverage",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "no match for this spelling; scheme faithful flatness is expressed by Flat and Surjective, and the Zariski comparison is the general zariskiPrecoverage_le_propQCPrecoverage"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isAffineOpen_of_isCompact|lemma exists_hom",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "zariskiPrecoverage_le_etale|lemma of_comp|etale_le_weaklyEtale|instance.*IsOpenMap",
+   "results": "11 hits. Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "Surjective.*Sigma.desc|surjective_sigmaDesc|surjective_sigma_desc|Flat.*Sigma.desc|IsAffine.*∐|LocallyOfFinitePresentation.*IsOpenMap|Flat.*UniversallyOpen",
+   "results": "10 hits. Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFinitePresentation|Flat",
+   "results": "5 hits. 9; 110; 131; 133; 134",
+   "date": "2026-10-16",
+   "verdict": "related hits; single-file grep output omits the filename and is parsed into the file field by msearch.py; read the named source file directly and reran the targeted search on its containing directory"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_sigmaDesc|surjective_sigma_desc|lemma.*sigma|Surjective \\(Limits.Sigma.desc|Surjective \\(Sigma.desc",
+   "results": "4 hits. Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenMap_of_generalizingMap|Flat.generalizingMap|LocallyOfFinitePresentation f.*Flat f|Flat f.*LocallyOfFinitePresentation f",
+   "results": "8 hits. Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-16",
+   "verdict": "matching constituents read in the returned files; see mathlib_match.how for clause-by-clause specialization and verified lines"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage_le_fpqcPrecoverage|exists_isAffineOpen_of_isCompact|zariskiPrecoverage_le_propQCPrecoverage|UniversallyOpen.of_flat",
+   "results": "10 hits. Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompactCover.exists_hom",
+   "results": "1 hits. AlgebraicGeometry.QuasiCompactCover.exists_hom",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "QuasiCompactCover finite affine open refinement of scheme covers",
+   "results": "8 hits. AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover.inst; AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact; AlgebraicGeometry.Scheme.quasiCompactCover_iff; AlgebraicGeometry.QuasiCompactCover.of_finite; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.quasiCompactCover_iff; AlgebraicGeometry.Scheme.affineBasisCover",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\[IsAffine S\\]|of_finite|compactSpace_of_isAffine|RespectsLeft.*IsOpenImmersion|lemma Scheme.Hom.isOpenMap",
+   "results": "25 hits. Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Group/Abelian.lean; Mathlib/AlgebraicGeometry/Group/Abelian.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\[IsAffine S\\]|instance of_finite|exists_hom",
+   "results": "3 hits. Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "RespectsLeft.*IsOpenImmersion|lemma Scheme.Hom.isOpenMap",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: related exact constituents; declarations and hypotheses read in pinned source, with the resulting matches recorded in mathlib_match.how."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.ProEt",
+  "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+  "line": 100,
+  "how": "Exact definition, with the explanatory clauses supplied by the following Mathlib declarations (all line numbers read in the pinned source). Objects and all X-morphisms: Scheme.ProEt (Sites/Proetale.lean:100), defined as MorphismProperty.Over @WeaklyEtale top X; arrows are weakly etale by AlgebraicGeometry.WeaklyEtale.of_comp (Morphisms/WeaklyEtale.lean:117), using the equation of an over-morphism and the two object instances. Coverings and topology: Scheme.proetalePrecoverage (Sites/Proetale.lean:52), Scheme.ProEt.precoverage (:151), and Scheme.ProEt.topology (:156); the first is propQCPrecoverage @WeaklyEtale, hence the jointly surjective weakly etale families satisfying QuasiCompactCover. QuasiCompactCover (Cover/QuasiCompact.lean:38) defines the finite quasi-compact-open condition; QuasiCompactCover.exists_isAffineOpen_of_isCompact (:60), specialized to an affine open W using its isCompact instance, supplies exactly the finite affine refinement. Conversely affine opens are quasi-compact; when an index repeats, replace its finitely many selected opens by their finite union, which is again quasi-compact and open. Equality of the union of images with W puts each selected open inside the inverse-image open of W, identified with the open base change. QuasiCompactCover.exists_hom (:183), with P = WeaklyEtale and the affine target, supplies a finite affine covering refinement; its required compact-target instance is Scheme.compactSpace_of_isAffine (AffineScheme.lean:561), and its open-immersion stability instance is IsZariskiLocalAtSource.respectsLeft_isOpenImmersion (Morphisms/Basic.lean:261), using the WeaklyEtale source-locality instance (Morphisms/WeaklyEtale.lean:80). The instance for a finite AffineCover of an affine scheme (Cover/QuasiCompact.lean:148, using QuasiCompactCover.of_finite at :140) supplies QuasiCompactCover for this refinement, so it is a pro-etale cover, not merely a jointly surjective weakly etale family. The finite coproduct is affine by the IsAffine (Sigma g) instance (Limits.lean:651); its map is flat by the Flat (Sigma.desc f) instance (Morphisms/Flat.lean:110), with component flatness inferred from weak etaleness, and surjective by AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ (Morphisms/UnderlyingMap.lean:116), applied to the covering image equality. These are the affine faithfully flat and finite-union clauses; Fin n is Small and Finite, including n = 0. Etale covers: Scheme.etalePrecoverage_le_proetalePrecoverage (Sites/Proetale.lean:72). Zariski covers: Scheme.zariskiPrecoverage_le_propQCPrecoverage (Sites/QuasiCompact.lean:125), specialized to P = WeaklyEtale; ContainsIdentities and IsZariskiLocalAtSource are the existing WeaklyEtale instances (Morphisms/WeaklyEtale.lean:66 and :80). The stated openness explanation is the instance AlgebraicGeometry.UniversallyOpen.of_flat (Morphisms/UniversallyOpen.lean:147), followed by Scheme.Hom.isOpenMap (:48). No additional quasi-separatedness, quasi-compactness of X, or finite indexing hypothesis is introduced."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +198,20 @@
  "blueprint_tags": [
   "sketch"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-pe-site",
+  "worker": "stage1",
+  "summary": "Classified the item as a Mathlib leaf after reading Scheme.ProEt, its precoverage/topology, finite affine refinement, finite coproduct affineness/flatness/surjectivity, and the etale/Zariski precoverage comparisons. The project extension is not needed. Retained the blueprint statement and original weak-etale dependencies, and added the existing fpqc-covering definition for the fpqc notion. Replaced inaccurate inherited search records with the exact searches run in this review. No new nodes or proof steps are needed. The first dry run found that the inherited bare Tag 098A reference was absent from the maintainer-owned source metadata; replaced that reference sentence by a citation to the existing fpqc-covering node, without changing any mathematical clause. Second reading added the explicit scheme binder and its existing definition dependency, completed the finite-refinement instance references, and corrected the isOpenMap declaration line from 49 to 48. No mathematical clause was changed.",
+  "blueprint": "The entire definition in sk-def-pe-site/_section.md (order 703), including the quasi-compact-open equivalence, the affine-target refinement and its faithfully flat coproduct, and both ordinary-cover inclusions, is matched clause by clause by the pinned Mathlib declarations in mathlib_match.how. The current blueprint has no separate proof section; same_as was searched across all imported blueprint nodes and is empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-eb459c911",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-eb459c911 (reviewer sub-agent of L); spot-checked: Read the full instructions, packet/report, item, cited DAG nodes, blueprint route, Stacks Tags 0989/098A/098B/098D/098K, and pinned Mathlib declarations. Verified every clause, hypotheses, finite refinement and coproduct claims, ordinary-cover inclusions, edge cases, duplicates, searches, and target coefficient/base-change bindings. No new nodes or repairs are needed; review.md records the checks."
+ }
 }
