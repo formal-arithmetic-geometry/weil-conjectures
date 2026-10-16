@@ -14,6 +14,14 @@ public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Sheaf.AlgebraicGeometry.HypercoverFreeAbelianZero
+import Sheaf.AlgebraicGeometry.HypercoverFreeAbelianPositive
+import Sheaf.AlgebraicGeometry.HypercoverFreeModuleZero
+import Sheaf.AlgebraicGeometry.HypercoverFreeModulePositive
+import Sheaf.AlgebraicGeometry.HypercoverInjectiveAbelianZero
+import Sheaf.AlgebraicGeometry.HypercoverInjectiveAbelianPositive
+import Sheaf.AlgebraicGeometry.HypercoverInjectiveModuleZero
+import Sheaf.AlgebraicGeometry.HypercoverInjectiveModulePositive
 
 /-!
 # Blueprint statements
@@ -40,7 +48,11 @@ theorem freeAbelian_augmentation_quasiIso
             AddCommGrpCat.free ⋙
           presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{w + 1})).obj
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
-  sorry
+  rw [quasiIso_iff]
+  intro i
+  cases i with
+  | zero => exact hypercover_freeAbelian_quasiIsoAt_zero U
+  | succ n => exact hypercover_freeAbelian_quasiIsoAt_pos U (n + 1) (Nat.succ_pos n)
 
 /-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
 theorem injective_abelian_section_cohomology
@@ -58,7 +70,9 @@ theorem injective_abelian_section_cohomology
       ∀ p : ℕ, 0 < p → IsZero
         (((AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{w + 1}).obj
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
-  sorry
+  exact ⟨(hypercover_injective_abelian_zero U I).1,
+    (hypercover_injective_abelian_zero U I).2,
+    hypercover_injective_abelian_positive U I⟩
 
 /-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
 theorem freeModule_augmentation_quasiIso
@@ -71,7 +85,11 @@ theorem freeModule_augmentation_quasiIso
             (ModuleCat.free R) ⋙
           presheafToSheaf X.smallEtaleTopology (ModuleCat.{w + 1} R))).obj
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
-  sorry
+  rw [quasiIso_iff]
+  intro i
+  cases i with
+  | zero => exact hypercover_freeModule_quasiIsoAt_zero U R
+  | succ n => exact hypercover_freeModule_quasiIsoAt_pos U R (n + 1) (Nat.succ_pos n)
 
 /-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
 theorem injective_module_section_cohomology
@@ -89,6 +107,8 @@ theorem injective_module_section_cohomology
       ∀ p : ℕ, 0 < p → IsZero
         (((AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{w + 1} R)).obj
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
-  sorry
+  exact ⟨(hypercover_injective_module_zero U R I).1,
+    (hypercover_injective_module_zero U R I).2,
+    hypercover_injective_module_positive U R I⟩
 
 end AlgebraicGeometry.SplitEtaleHypercover

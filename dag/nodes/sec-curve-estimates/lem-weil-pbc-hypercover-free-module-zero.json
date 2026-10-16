@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-hypercover-free-module-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "stage-3 decomposition of the corresponding degree component"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degree-zero quasi-isomorphism of the free module hypercover augmentation",
+ "statement": "let e be the displayed free R-module augmented alternating-face morphism; QuasiIsoAt e 0",
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Tags 01GC, 01GD, 01GE and 01GW"
+ },
+ "proof": [
+  {
+   "text": "The degree-zero Cech nerve contraction is defined with free modules over the constant commutative ring R. The Cech free-module homology argument and the sheafification unit give QuasiIsoAt e 0.",
+   "uses": [
+    "lem-weil-pbc-cech-nerve-free-homology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cech-nerve-free-homology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "stage-3 decomposition",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GC, 01GD, 01GE and 01GW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "hypercover alternating face component Degree-zero quasi-isomorphism of the free module hypercover augmentation",
+   "results": "No exact existing theorem; this is a component of the hypercover result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree-zero quasi-isomorphism of the free module hypercover augmentation",
+   "results": "No exact existing theorem; this is a component of the hypercover result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIsoAt hypercover alternating face complex",
+   "results": "No exact existing theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover free resolution component",
+   "results": "No exact existing theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 948,
+ "blueprint_uses": [
+  "lem-weil-pbc-hypercover-free-resolution"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HypercoverFreeModuleZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercoverFreeModuleZero.lean",
+  "declaration": "AlgebraicGeometry.SplitEtaleHypercover.hypercover_freeModule_quasiIsoAt_zero",
+  "statement": "theorem hypercover_freeModule_quasiIsoAt_zero\n    {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R] :\n    let e := (AlgebraicTopology.AlternatingFaceMapComplex.ε.app\n      ((SimplicialObject.Augmented.whiskeringObj X.Etale _\n        (uliftYoneda.{w + 1} ⋙\n          (Functor.whiskeringRight X.Etaleᵒᵖ (Type (w + 1)) (ModuleCat.{w + 1} R)).obj\n            (ModuleCat.free R) ⋙\n          presheafToSheaf X.smallEtaleTopology (ModuleCat.{w + 1} R))).obj\n        (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale)))));\n    QuasiIsoAt e 0",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T003158-L-3926706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T003158-L-3926706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
