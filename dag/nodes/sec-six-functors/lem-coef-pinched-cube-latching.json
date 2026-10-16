@@ -1,0 +1,90 @@
+{
+ "id": "lem-coef-pinched-cube-latching",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Pinched simplices give a weakly equivalent mapping resolution. Smaller input: Cubical quotient and latching maps of pinched simplices.",
+   "via": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cubical quotient and latching maps of pinched simplices",
+ "statement": "Use simplicial sets and ordinary nerves of [def-cbc-enhanced-diagrams-cones] and simplicial categories of [lem-coef-simplicial-interval-lifting], in fixed universes enlarged when needed. Define $\\mathfrak C[\\Delta^m]$ to have objects $0,\\ldots,m$, mapping simplicial set from $i$ to $j$ the nerve of the inclusion poset of subsets of $\\{i,\\ldots,j\\}$ containing both endpoints if $i\\leq j$, and the empty simplicial set otherwise. Composition is union. Monotone maps act by images of subsets, and $\\mathfrak C[S]=\\operatorname{colim}_{\\Delta^m\\to S}\\mathfrak C[\\Delta^m]$ in simplicial categories. Let $J^n=(\\Delta^n\\star\\{y\\})\\amalg_{\\Delta^n}\\{x\\}$, where $\\Delta^n\\star\\{y\\}=\\Delta^{n+1}$ and the initial face is collapsed to $x$, and let $Q^n=\\mathfrak C[J^n](x,y)$. Let $P_n$ be the inclusion poset of nonempty subsets of $[n]$, and $K_n=N(P_n)$. Embed $K_n$ in $(\\Delta^1)^{n+1}$ by characteristic functions. For $0\\leq i\\leq n$, its subcube on which coordinate $i$ is constantly $1$ is $(\\Delta^1)^{\\{0,\\ldots,i-1\\}}\\times\\{1\\}\\times(\\Delta^1)^{\\{i+1,\\ldots,n\\}}$. The simplicial set $Q^n$ is canonically the quotient of $K_n$ by identifying, on each of these subcubes, points having the same coordinates strictly greater than $i$. This description is compatible with monotone maps acting by direct image on nonempty subsets. The nerve map induced by $I\\mapsto\\max I$ descends to a map $Q^n\\to\\Delta^n$.\n\nDefine $L_nQ$ as the colimit of $Q^k$ over all proper injective monotone maps $[k]\\hookrightarrow[n]$, including all commuting triangles among them; $L_0Q=\\varnothing$. The induced map $L_nQ\\to Q^n$ is degreewise injective. The ordinary geometric realization of $Q^n$ is homeomorphic to the topological $n$-simplex, with these homeomorphisms compatible with injective monotone maps. In particular every $Q^n$ is weakly contractible and $Q^0=\\Delta^0$.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.2, explicit description of Q preceding Remark 2.2.2.6, Remark 2.2.2.6, and the cofibration assertion in Proposition 2.2.2.9; printed pp. 76-77. No Stacks tag states this cubical rigidification calculation."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coherent realization of a pinched simplex has a cubical quotient mapping space with injective latching maps and contractible realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.toSSetObjEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"(X : TopCat) →\\n  (n : SimplexCategoryᵒᵖ) → (TopCat.toSSet.obj X).obj n ≃ C(↑(stdSimplex ℝ (Fin ((Opposite.unop n).len + 1))), ↑X)\", \"doc\": \"For a topological space $X$ and an object $n$ in the opposite simplex category, the $n$-simplices of the singular simplicial set of $X$ are equivalent to the set of continuous maps from the standard $\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SimplexCategory.toTopMap\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces that assigns to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ with non-negative coordinates summing\"}\n  {\"name\": \"SimplexCategory.toTopObj\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces, defined by assigning to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ consisting of points with no\"}\n  {\"name\": \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ), SSet.modelCategoryQuillen.I (SSet.boundary n).ι\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the standard $n$-simplex is an element of the ge\"}\n  {\"name\": \"SimplexCategory.toTop₀\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces constructed by assigning to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ consisting of points with\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.KanComplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $ S $ is a Kan complex if it is fibrant in the Quillen model structure on simplicial sets, meaning the unique morphism from $ S $ to the terminal object is a fibration (i.e., satisfie\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: standard simplices, topological simplices, nondegenerate decompositions and Kan classes do not describe the pinched cube quotient or its latching inclusions. Read StdSimplex.lean:33-38 and the returned types."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"latching\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: standard simplices, topological simplices, nondegenerate decompositions and Kan classes do not describe the pinched cube quotient or its latching inclusions. Read StdSimplex.lean:33-38 and the returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|rigidification|cosimplicial.*cube|cube.*quotient",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: standard simplices, topological simplices, nondegenerate decompositions and Kan classes do not describe the pinched cube quotient or its latching inclusions. Read StdSimplex.lean:33-38 and the returned types."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping simplicial set from the collapsed initial face to the last vertex is a quotient of the nerve of nonempty subsets",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.S.toN\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NonDegenerateSimplices\", \"type\": \"(x : X.S) : X.N\", \"doc\": \"For a simplicial set $X$, this function maps each element $x$ of the standard simplex $X.S$ to the unique non-degenerate simplex $x_1$ in $X.N$ such that the subcomplex generated by $x_1$ equals the s\"}\n  {\"name\": \"SSet.degenerate_zero\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Degenerate\", \"type\": \": X.degenerate 0 = ∅\", \"doc\": \"The set of degenerate $ n $-simplices in a simplicial set $ X $ consists of those elements that can be expressed as the image of an $ m $-simplex (with $ m < n $) under a degeneracy map from the ordin\"}\n  {\"name\": \"SimplexCategory.instEpiσ\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Basic\", \"type\": \"{n : ℕ} {i : Fin (n + 1)} : Epi (σ i)\", \"doc\": \"In the simplex category $\\\\Delta$, each degeneracy map $\\\\sigma_i : [n+1] \\\\to [n]$ is an epimorphism. This map is constructed by collapsing the element $i$ in the ordinal $[n+1] = \\\\{0, 1, \\\\dots, n\\\\}$ wi\"}\n  {\"name\": \"SSet.image_degenerate_le\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Degenerate\", \"type\": \"(f : X ⟶ Y) (n : ℕ) : (f.app _) '' (X.degenerate n) ⊆ Y.degenerate n\", \"doc\": \"For any simplicial map $ f : X \\to Y $ and natural number $ n $, the image of the set of degenerate $ n $-simplices in $ X $ under $ f $ is contained in the set of degenerate $ n $-simplices in $ Y $.\"}\n  {\"name\": \"SSet.degenerate\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Degenerate\", \"type\": \"(n : ℕ) : Set (X _⦋n⦌)\", \"doc\": \"The set of degenerate $ n $-simplices in a simplicial set $ X $, which are those elements that can be expressed as the image of some $ m $-simplex (with $ m < n $) under the simplicial map induced by \"}\n  {\"name\": \"SSet.N.toS\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NonDegenerateSimplices\", \"type\": \"{X : SSet} → X.N → X.S\", \"doc\": \"For any simplicial set $ X $, the function maps each non-degenerate simplex of $ X $ to the corresponding standard simplex $ \\\\Delta^n $, where $ n $ is the dimension of the simplex.\"}\n  {\"name\": \"PartialOrder.mem_nerve_nonDegenerate_iff_injective\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveNondegenerate\", \"type\": \"(s : (nerve X) _⦋n⦌) : s ∈ (nerve X).nonDegenerate n ↔ Function.Injective s.obj\", \"doc\": \"A simplex $ s $ in the nerve of a category is non-degenerate if and only if the function $ s.\\\\text{obj} $ corresponding to its object mapping is injective.\"}\n  {\"name\": \"SSet.nonDegenerate\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Degenerate\", \"type\": \"(n : ℕ) : Set (X _⦋n⦌)\", \"doc\": \"The set of non-degenerate $ n $-simplices in a simplicial set $ X $, defined as the complement of the set of degenerate $ n $-simplices. These are elements that cannot be expressed as the image of any\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: standard simplices, topological simplices, nondegenerate decompositions and Kan classes do not describe the pinched cube quotient or its latching inclusions. Read StdSimplex.lean:33-38 and the returned types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosimplicial pinched cubes are Reedy cofibrant and their geometric realizations are simplices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"CategoryTheory.CosimplicialObject SSet\", \"doc\": \"The standard simplex object in the category of simplicial sets, defined as the cosimplicial object obtained by composing the Yoneda embedding with the universe-lifting functor. This construction maps \"}\n  {\"name\": \"SimplexCategory.toTop₀\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces constructed by assigning to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ consisting of points with\"}\n  {\"name\": \"SimplexCategory.toTopObj\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces, defined by assigning to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ consisting of points with no\"}\n  {\"name\": \"SimplexCategory.toTopMap\", \"module\": \"Mathlib/AlgebraicTopology/TopologicalSimplex\", \"type\": \"CategoryTheory.CosimplicialObject TopCat\", \"doc\": \"The cosimplicial object in the category of topological spaces that assigns to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ with non-negative coordinates summing\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.Augmented.stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"CategoryTheory.Functor SimplexCategory SSet.Augmented\", \"doc\": \"The functor from the simplex category to augmented simplicial sets that sends each finite ordinal $[n]$ to the augmented simplicial set consisting of the standard $n$-simplex and the terminal simplici\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.KanComplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $ S $ is a Kan complex if it is fibrant in the Quillen model structure on simplicial sets, meaning the unique morphism from $ S $ to the terminal object is a fibration (i.e., satisfie\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: standard simplices, topological simplices, nondegenerate decompositions and Kan classes do not describe the pinched cube quotient or its latching inclusions. Read StdSimplex.lean:33-38 and the returned types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial coherent realization of a simplex with its initial face collapsed has contractible hom objects and monomorphic latching inclusions",
+   "results": "{\"t\": \"2026-10-16T17:29:15Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial coherent realization of a simplex with its initial face collapsed has contractible hom objects and monomorphic latching inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.skeletonOfMono_obj_eq_top\", \"SSet.degenerate\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.S.IsUniquelyCodimOneFace\"], \"digest\": \"10231ab5ff77ad2b\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: returned horn/boundary generator and skeleton monomorphism statements contain no pinched quotient, coherent realization or contractibility conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-pinched-rigidification-resolution",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

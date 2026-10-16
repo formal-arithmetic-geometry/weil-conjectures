@@ -29,9 +29,119 @@
   "lem-coef-simplicial-interval-lifting",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The subset-poset formulas give simplicial enriched categories: union is associative and has singleton endpoint identities, and direct image commutes with union. Simplicial categories have the required colimits by [lem-coef-simplicial-interval-lifting]. Extending the formulas over simplex colimits therefore defines $\\mathfrak C$, and applying it to the maps of pinched simplices defines the cosimplicial $Q$. A map $|K|_Q\\to T$ is exactly a family $K_n\\to\\operatorname{Hom}(Q^n,T)$ compatible with every monotone map; the quotient identifications are exactly the equations for a simplicial map $K\\to\\operatorname{Sing}_QT$. This gives the natural adjunction, with counit evaluation on each copy of $Q^n$. The same description shows that $V(K)=|K|_Q$ preserves all small colimits: compatible maps from either iterated colimit into an arbitrary $T$ are the same families.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.1.5 and 2.2.2, constructions and Remark 2.2.2.1"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-pinched-cube-latching]. In its quotient model the maximum map on nonempty subsets is unchanged by erasing the coordinates below a coordinate constantly equal to $1$, so it descends to $p^n:Q^n\\to\\Delta^n$. Direct image along a monotone map $f$ satisfies $\\max f(I)=f(\\max I)$; hence the $p^n$ form a cosimplicial map. The same node gives weak contractibility of $Q^n$, the equality $Q^0=\\Delta^0$, and injectivity of every latching map. By the coend relations, $V(\\Delta^n)=Q^n$ and $V(\\partial\\Delta^n)=L_nQ$: a map from either side is precisely a compatible family on all proper faces. Thus every image boundary inclusion is a monomorphism.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical description, Remark 2.2.2.6 and map preceding Proposition 2.2.2.7"
+   }
+  },
+  {
+   "text": "Every collapse $Q^n\\to Q^0$ is a weak equivalence because its source and target are weakly contractible. Apply [lem-coef-simplicial-boundary-collapse-test] to the colimit-preserving $V$ and the Kan model structure [lem-coef-kan-quillen-right-proper], using the boundary and collapse facts just established. It follows that $V$ sends monomorphisms to cofibrations, preserves all weak homotopy equivalences, and $V\\dashv\\operatorname{Sing}_Q$ is a Quillen adjunction.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.9, Quillen assertion; Hovey Proposition 3.6.8"
+   }
+  },
+  {
+   "text": "The cosimplicial map induces a natural map $p_K:V(K)\\to K$, identifying $|K|_{\\Delta^\\bullet}$ with $K$ by $[\\sigma,\\alpha]\\mapsto\\sigma\\alpha$. Prove it is a weak equivalence first for finite simplicial sets, by induction on dimension and then on the number of top-dimensional nondegenerate simplices. Here finite means finitely many nondegenerate simplices. The empty case is the identity on the empty simplicial set. In dimension zero, $K$ is a finite coproduct of points and $V(K)$ is the same coproduct since $Q^0=\\Delta^0$, so $p_K$ is an isomorphism. For dimension $n>0$, removing a top-dimensional simplex lowers its number, and its boundary has dimension at most $n-1$, so the two induction parameters strictly decrease where used. For a simplex, $p_{\\Delta^n}:Q^n\\to\\Delta^n$ is a weak equivalence since both spaces are contractible. Remove one top-dimensional nondegenerate simplex to write $K=K'\\amalg_{\\partial\\Delta^n}\\Delta^n$. The two spans for this pushout and its image under $V$ have boundary-to-simplex monomorphisms, and the three comparison maps are weak equivalences by the induction and simplex case. The gluing assertion of [lem-coef-sset-gluing-filtered-equivalences] proves the induction step. Every simplicial set is the filtered union of its finite simplicial subsets: a simplex generates a finite subset because its finitely many nondegenerate faces generate it, and finite unions stay finite; uniqueness of the nondegenerate representative is [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. Since $V$ preserves colimits, the filtered-colimit assertion of [lem-coef-sset-gluing-filtered-equivalences] proves the claim for arbitrary $K$.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, full skeletal and filtered-colimit induction"
+   }
+  },
+  {
+   "text": "All simplicial sets are cofibrant in [lem-coef-kan-quillen-right-proper]. Thus $V$ itself computes its left derived functor on the ordinary homotopy category. The natural weak equivalence $p_K$ makes this derived functor naturally isomorphic to the identity, hence an equivalence. For a Kan complex $T$, the object $T$ is fibrant and $\\operatorname{Sing}_QT$ is cofibrant. Apply [lem-coef-quillen-derived-counit-criterion] to the Quillen adjunction of step 3: its ordinary counit $e_T$ is a weak equivalence. By the adjunction bijection of step 1 this is the specified evaluation map, rather than an unspecified weak equivalence between the two objects.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.9 and Corollary 2.2.2.10; Hovey Lemma 1.3.10 and Proposition 1.3.13"
+   }
+  },
+  {
+   "text": "Let $E=S_{/y}$, whose $n$-simplices are maps $\\Delta^n\\star\\{y\\}\\to S$ restricting to $y$ at the cone vertex. Its projection $a:E\\to S$ is a right fibration, and $E_x=\\operatorname{Map}^R_S(x,y)$, by [lem-coef-infinity-slice-right-fibration]. Use the cone definition of $\\operatorname{St}$ in [lem-coef-right-straightening-fiber-comparison]. Over a point this is $V$: both preserve colimits, and on $\\Delta^n$ the cone pushout is exactly $J^n$ and its mapping set $Q^n$. For every monotone $\\alpha:[m]\\to[n]$, the map between these pushouts restricts to $\\Delta(\\alpha)$ on the initial face and fixes the new cone vertex; it therefore induces exactly $Q(\\alpha)$. The identifications on simplices consequently respect every coend relation, giving the natural identification on all simplicial sets. Consequently the fiber-comparison assertion supplies a weak equivalence $f':V(E_x)\\to\\operatorname{St}_S(E)(x)$. There is a simplicial evaluation map $E\\star\\Delta^0\\to S$ sending the new cone vertex to $y$: on a simplex of $E$ append its already specified terminal vertex $y$. It agrees with $a$ on $E$. Applying $\\mathfrak C$ and the pushout defining $\\operatorname{St}$ gives $f'':\\operatorname{St}_S(E)(x)\\to\\mathfrak C[S](x,y)$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-right-straightening-fiber-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.15 and Proposition 2.2.4.1, factorization through the straightening of S/y"
+   }
+  },
+  {
+   "text": "Write $e=\\operatorname{id}_y\\in E$. There is an explicit contraction $H:E\\times\\Delta^1\\to E$ from the identity to the constant $e$, fixing $e$. For an $n$-simplex $\\sigma:\\Delta^{n+1}\\to S$ of $E$ and a monotone $t:[n]\\to[1]$, send index $j\\leq n$ to $j$ if $t(j)=0$ and to $n+1$ if $t(j)=1$, and send the extra terminal index to $n+1$; precompose $\\sigma$ with this monotone map. To check operators, write $h_{n,t}$ for this index map. For $\\alpha:[m]\\to[n]$ and its terminal-vertex extension $\\alpha^+$, one has $\\alpha^+h_{m,t\\alpha}=h_{n,t}\\alpha^+$: at $j\\leq m$ both sides equal $\\alpha(j)$ when $t(\\alpha(j))=0$ and equal $n+1$ otherwise, and both take the extra index to $n+1$. Thus the formula defines a simplicial map; at $t=0$ it is the identity, at $t=1$ it is the constant simplex $e$, and it fixes $e$. Put $A=(E\\times\\{1\\})\\cup(\\{e\\}\\times\\Delta^1)$. The inclusion $A\\hookrightarrow E\\times\\Delta^1$ is right anodyne by [lem-coef-infinity-right-anodyne-product], applied to $\\{1\\}=\\Lambda^1_1\\hookrightarrow\\Delta^1$ and $\\{e\\}\\hookrightarrow E$. The arrow $\\{e\\}\\hookrightarrow E$ is its retract: its section has domain $e\\mapsto(e,0)$ and codomain $z\\mapsto(z,0)$; its retraction is constant to $e$ on $A$ and $H$ on $E\\times\\Delta^1$. The two composites are identities and $H|_A=e$. Thus $\\{e\\}\\hookrightarrow E$ is right anodyne by the retract closure in [def-coef-infinity-right-anodyne]. This statement is about underlying simplicial sets; to view the retraction over $S$ give the cylinder the map $aH$ to $S$. In particular the actual inclusion over $S$, $e$ mapping to $y$, satisfies the hypothesis of the straightening theorem.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.4.1, retract of the right-anodyne cylinder inclusion; Corollary 2.1.2.7"
+   }
+  },
+  {
+   "text": "By [lem-coef-right-straightening-fiber-comparison], the map $g:\\operatorname{St}_S(\\{e\\})(x)\\to\\operatorname{St}_S(E)(x)$ is a weak equivalence, and adjoining the single arrow $y\\to v$ identifies its source canonically with $\\mathfrak C[S](x,y)$. Under this identification the composite $f''g$ is the identity: the evaluation map takes the adjoined arrow to $\\operatorname{id}_y$, so every arrow into $y$ is unchanged. Two-out-of-three makes $f''$, and then $f''f'$, weak equivalences. For an $n$-simplex $\\tau:J^n\\to S$ of $E_x$, the cone pushout defining the restriction of $f''f'$ is the pushout collapsing the initial $\\Delta^n$ to $x$. Thus on its copy of $Q^n$ this composite is exactly $\\mathfrak C[\\tau](x,y)$, proving that it is the specified $\\theta$. Coend identifications give compatibility with every simplicial operator; functoriality of simplex colimits, cone evaluation and pushouts gives compatibility with every map of $(S,x,y)$. Finally $J^0=\\Delta^1$ and $Q^0=\\Delta^0$; a vertex represented by an edge $x\\to y$ is sent to that same edge in $\\mathfrak C[S](x,y)$. The maps $p$ and evaluation in degree zero likewise send their displayed vertex to its value. This covers $x=y$, identity edges, and empty mapping spaces without choosing a filler or a path.",
+   "uses": [
+    "lem-coef-right-straightening-fiber-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.4.1, commuting triangle and identification of the canonical comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-right-straightening-fiber-comparison",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-sset-gluing-filtered-equivalences",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expansion of Section 2.2.2 and Proposition 2.2.4.1, read online; the sources are not archived locally. WANTED entries are in report.md. Generic homotopical inputs separated as statement-only nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +170,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-16",
    "verdict": "no match: ordinary nerves, strict Segal spines and formal cosimplicial opposite equivalences do not give the pinched Q resolution or its weak-equivalence comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pinched simplices resolve right mapping spaces of quasicategories and compare with hom simplicial sets of rigidification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄,\\n  0 < i →\\n    i < Fin.last n →\\n      ∀ (σ₀ : (SSet.horn n i).toSSet ⟶ S), ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"For 2-truncated simplicial sets satisfying the Strict Segal conditions, the naturality property of the lifting maps is equal to the top element in the complete Boolean algebra of morphism properties. \"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"For any element $x$ in the 1-simplices of the 2-truncated simplicial set $X$, applying the lifting map $f_2$ after the opposite of the degeneracy map $\\\\sigma_2$ at level 0 is equivalent to applying th\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    (n : ℕ) →\\n      (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ (S : SSet),\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i →\\n        i < Fin.last (n + 2) →\\n          ∃ σ,\\n            ∀ (j : Fin (n + 3)) (h : j ≠ i),\\n              CategoryTheory.SimplicialObject.δ S j σ =\\n                σ₀.app (Opposite.op (SimplexCategory.\", \"doc\": \"A simplicial set $ S $ is a quasicategory if for every inner horn $ \\\\Lambda^k[n] \\\\to S $ with $ 0 < k < n $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it.\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal_app_1\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"The component of the natural transformation between 2-truncated simplicial sets $ X $ and $ Y $, constructed via strict Segal conditions, evaluates to the map $ f_1 $ on 1-simplices. Specifically, whe\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn fillers, ordinary nerve adjunctions and simplicial-opposite equivalence counits do not state the Q realization, evaluation or rigidification mapping comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"rigidification\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn fillers, ordinary nerve adjunctions and simplicial-opposite equivalence counits do not state the Q realization, evaluation or rigidification mapping comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|rigidification|SingQ|coherent.*mapping",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Control/EquivFunctor.lean\", \"line\": \"15\", \"text\": \"coherently mapping equivalences to equivalences.\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"17\", \"text\": \"category of sheaves for the coherent topology on `CompHausLike P`, given by mapping a set to the\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn fillers, ordinary nerve adjunctions and simplicial-opposite equivalence counits do not state the Q realization, evaluation or rigidification mapping comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cosimplicial pinched Q realization is naturally weakly equivalent to the identity and its singular evaluation counit is a weak equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv_counitIso_inv_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategory Cᵒᵖ)\\n  (X_1 : SimplexCategory),\\n  ((CategoryTheory.simplicialCosimplicialEquiv C).counitIso.inv.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$ and any functor $X: \\\\Delta \\\\to \\\\mathcal{C}^{\\\\text{op}}$, the component of the inverse counit isomorphism of the simplicial-cosimplicial equivalence at $X$ satisfies $(\\\\e\"}\n  {\"name\": \"SSet.opEquivalence_counitIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Op\", \"type\": \"SSet.opEquivalence.counitIso = SSet.opFunctorCompOpFunctorIso\", \"doc\": \"The counit isomorphism of the self-equivalence of the category of simplicial sets induced by the opposite functor is naturally isomorphic to the identity functor, as applying the opposite functor twic\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv_counitIso_hom_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategoryᵒᵖ Cᵒᵖ)\\n  (X_1 : SimplexCategoryᵒᵖ),\\n  ((CategoryTheory.cosimplicialSimplicialEquiv C).counitIso.hom.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$, the counit isomorphism of the equivalence between the opposite category of cosimplicial objects in $\\\\mathcal{C}$ and the category of simplicial objects in $\\\\mathcal{C}^\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv_counitIso_hom_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategory Cᵒᵖ)\\n  (X_1 : SimplexCategory),\\n  ((CategoryTheory.simplicialCosimplicialEquiv C).counitIso.hom.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$ and functor $X: \\\\Delta \\\\to \\\\mathcal{C}^{\\\\text{op}}$, the counit isomorphism of the simplicial-cosimplicial equivalence satisfies $(\\\\alpha_{\\\\text{counit}})_X(X_1) = \\\\text\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.CosimplicialObject C) {n : ℕ}\\n  {i : Fin (n + 1)} {Z : C} (h : X.obj (SimplexCategory.mk n) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (X.δ i.castSucc) (CategoryTheory.CategoryStruct.comp (X.σ i) h) = h\", \"doc\": \"For a cosimplicial object $X$ in a category $\\\\mathcal{C}$, the composition of the face map $\\\\delta^{i+1}: X^n \\\\to X^{n+1}$ and the degeneracy map $\\\\sigma^i: X^{n+1} \\\\to X^n$ satisfies $\\\\delta^{i+1} \\\\c\"}\n  {\"name\": \"SimplicialObject.opEquivalence_counitIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Op\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C],\\n  SimplicialObject.opEquivalence.counitIso = SimplicialObject.opFunctorCompOpFunctorIso\", \"doc\": \"The counit isomorphism of the auto-equivalence of the category of simplicial objects in $\\\\mathcal{C}$, induced by the opposite functor, is equal to the natural isomorphism between the composition of t\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv_counitIso_inv_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategoryᵒᵖ Cᵒᵖ)\\n  (X_1 : SimplexCategoryᵒᵖ),\\n  ((CategoryTheory.cosimplicialSimplicialEquiv C).counitIso.inv.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$ and simplicial object $X$ in $\\\\mathcal{C}^{\\\\text{op}}$, the inverse of the counit isomorphism of the equivalence between the opposite category of cosimplicial objects in\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.homotopyPToId\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.HomotopyEquivalence\", \"type\": \": ∀ q : ℕ, Homotopy (P q : K[X] ⟶ _) (𝟙 _)\", \"doc\": \"For each natural number $ q $, this defines a homotopy between the recursively constructed chain map $ P(q) $ and the identity map on the alternating face map complex $ K[X] $. The base case $ q = 0 $\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn fillers, ordinary nerve adjunctions and simplicial-opposite equivalence counits do not state the Q realization, evaluation or rigidification mapping comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted realization of a right mapping space compares to the coherent categorification mapping space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.closedIhom_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\\n  (F Y : CategoryTheory.Functor D C) (X : D), (F.closedIhom.obj Y).obj X = (CategoryTheory.ihom (\", \"doc\": \"For a groupoid $\\\\mathcal{D}$ and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ in a monoidal closed category $\\\\mathcal{C}$, the object mapping of the closed internal hom-functor satisfies $(F.\\\\text{close\"}\n  {\"name\": \"classifyingSpaceUniversalCover_map\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (G : Type u) [inst : Monoid G] {X Y : SimplexCategoryᵒᵖ} (f : X ⟶ Y),\\n  (classifyingSpaceUniversalCover G).map f = { hom := fun x => x ∘ ⇑(SimplexCategory.Hom.toOrderHom f.unop), comm := ⋯ }\", \"doc\": \"For a monoid $G$ and a morphism $f$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the induced map on the universal cover of the classifying space of $G$ is given by post-composition with the un\"}\n  {\"name\": \"CategoryTheory.Cat.ihom_map\", \"module\": \"Mathlib/CategoryTheory/Category/Cat/CartesianClosed\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{u, u} C] {D E : Type u} [inst_1 : CategoryTheory.Category.{u, u} D]\\n  [inst_2 : CategoryTheory.Category.{u, u} E] (F : CategoryTheory.Functor D E),\\n  (CategoryTheory.ihom (CategoryTheory.Cat.of C)).map F.toCatHom =\\n    ((CategoryTheory.Functor.whiskeri\", \"doc\": \"For small categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and a functor $F : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, the action of the internal hom functor $[\\\\mathcal{C}, -]$ on $F$ corresponds to the whiske\"}\n  {\"name\": \"CategoryTheory.Functor.partialRightAdjointMap\", \"module\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {X Y : F.PartialRightAdjointSource} → (X ⟶ Y) → (F.partialRightAdjointObj X ⟶ F.partialRightAdjointObj Y)\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a morphism $ f : X \\\\to Y $ in the partial right adjoint source subcategory of $ \\\\mathcal{D} $, this function constructs the induced morphism $ G(X)\"}\n  {\"name\": \"CategoryTheory.Functor.closedIhom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"{D : Type u} →\\n  {C : Type u_1} →\\n    [inst : CategoryTheory.Groupoid D] →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_2 : CategoryTheory.MonoidalCategory C] →\\n          [CategoryTheory.MonoidalClosed C] →\\n            CategoryTheory.Functor D C →\\n              CategoryTheor\", \"doc\": \"Given a groupoid $\\\\mathcal{D}$ and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{C}$, this constructs a functor from the category of functors $\\\\mathcal{D} \\\\to \\\\mathcal{C}$ to itself by: (1) applying the inte\"}\n  {\"name\": \"CategoryTheory.Functor.closedIhom_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\\n  (F Y : CategoryTheory.Functor D C) {X Y_1 : D} (f : X ⟶ Y_1),\\n  (F.closedIhom.obj Y).map f =\\n  \", \"doc\": \"For a groupoid $\\\\mathcal{D}$ and a monoidal closed category $\\\\mathcal{C}$, the action of the closed internal hom-functor $[\\\\mathord{-}, \\\\mathord{-}]$ on a morphism $f: X \\\\to Y$ in $\\\\mathcal{D}$ is giv\"}\n  {\"name\": \"CategoryTheory.Functor.ihom_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\\n  (F : CategoryTheory.Functor D C) {G H : CategoryTheory.Functor D C} (f : G ⟶ H),\\n  (CategoryThe\", \"doc\": \"For any groupoid $\\\\mathcal{D}$, monoidal closed category $\\\\mathcal{C}$, functor $F : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and natural transformation $f : G \\\\to H$ between functors $G, H : \\\\mathcal{D} \\\\to \\\\ma\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn fillers, ordinary nerve adjunctions and simplicial-opposite equivalence counits do not state the Q realization, evaluation or rigidification mapping comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -71,5 +216,29 @@
   "group": "Q62"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pinched-rigidification-resolution",
+  "worker": "stage1",
+  "summary": "Eight steps construct the coend adjunction and maximum map, prove p by skeletal induction and filtered colimits, identify the evaluation counit through the ordinary derived adjunction, and factor theta through straightening the right slice. The right-anodyne retract and the identification of the actual canonical composite are written explicitly. Four smaller statement-only inputs remain; the coherent-nerve theorem is not cited because it depends on this item. Statement unchanged. Second reading defines the join cone inline, makes the finite induction and simplex-operator checks explicit, and limits the auxiliary filtered-colimit statement to the source's filtered-poset scope.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and subsequent naturality/triangle identities: technical mapping-space foundation through the recorded chain of ancestors. This realizes the pinched resolution subargument of lem-coef-coherent-nerve-comparison without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "why": "Generic simplicial slice, horn, or nondegenerate-simplex tool used to implement the HTT mapping-resolution proof; it does not replace a geometric or coefficient step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full, plus the unit sk-prop-sf-biduality-general and the chapter sec-six-functors. HTT and Hovey are not in literature/ and network access is blocked here, so I could not open them at the cited pages. Instead I checked each step against HTT 2.2.2.7, 2.2.2.9, 2.2.3.15 and 2.2.4.1 and Hovey 1.3.13 and 5.2.6 from my own knowledge, and recomputed the small cases by hand. Steps 1–8 hold. In step 2, max is constant on the identified classes and V(boundary)=L_nQ. In step 3, the hypotheses of boundary-collapse-test are met. In step 4, the induction has its base cases, the EZ (Eilenberg–Zilber) pushout holds and the finite subcomplexes form a nonempty filtered poset. In step 5, every object is cofibrant, T is fibrant and LV is isomorphic to the identity. In step 6, the slice fiber is Map^R and the cone pushout over a point is C[J^n]. In step 7, I checked h-monotonicity, the operator identity and all four retract equations against the pushout-product with Lambda^1_1. In step 8, f''g=id and the generator check gives theta. The four new nodes are true and strictly smaller than the item. The cube node holds for n=0..3 against the direct pushout computation, and |Q^n| is the cone on |Q^{n-1}|. One duplicate candidate is missing from the report: lem-coef-model-cofibrant-colimit-comparison(b) gives the gluing clause, but it reaches the item through its stmt_dep lem-coef-model-infinity-derived-adjunction, so citing it would make a cycle. The new gluing node is therefore justified. lem-coef-model-infinity-derived-adjunction and lem-coef-dg-derived-quillen-calculus also reach the item. Graph reachability finds no cycle among the cited nodes. proof_deps equals the union of the step uses. Each new node's via is the item followed by the item's via, and same_as is []. Each records three kinds of Mathlib search, and all ids are unique. I accept the tool use for lem-weil-pbc-simplicial-set-nondegenerate-decomposition. No fixes were made. The source page citations are unverified, and the WANTED entries should be fulfilled."
+ }
 }
