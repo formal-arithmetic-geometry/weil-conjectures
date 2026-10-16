@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-local-free-tensor-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary An integral basis gives a rational continuous matrix; finite free scalar extension already computes sections on a free neighborhood",
+   "via": [
+    "lem-weil-pbc-lattice-pair-matrix-at-basis",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The tensor sheafification unit on a finite free neighborhood",
+ "statement": "Let X be a scheme with its pro-etale site, alpha:R -> S a morphism of sheaves of commutative rings, V a site object, and M a sheaf of R|V-modules [def-weil-sheaf-of-modules-category]. Let q be finite local generators for M which are bases. Fix i in q.I and a:W -> V with a factorization t:(W,a) -> q.X(i) in the slice [def-pur-localized-ringed-site]. The sheafification unit for the sectionwise scalar-extension presheaf S|V tensor_(R|V) M [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification], evaluated at (W,a), is an isomorphism. No nonemptiness or positive-rank assumption is needed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "On the chosen finite free neighborhood, use the inverse of the generator isomorphism and freeSectionsLinearEquiv to identify integral sections with the finite product of the coefficient ring. Tensor this equivalence, use TensorProduct.piRight and AlgebraTensorModule.rid, and transport back to the free target module sections. This constructs a sectionwise isomorphism with coordinate formula s tensor m maps to (s times alpha(m_j))_j.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+   }
+  },
+  {
+   "text": "Naturality of the integral coordinates, of alpha, and of the target free projections proves compatibility with restriction on pure tensors. Tensor induction extends it to every section. Thus the restricted additive tensor presheaf is isomorphic to the underlying presheaf of the finite free target sheaf, and is a sheaf.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+   }
+  },
+  {
+   "text": "The sheafification unit is locally injective and locally surjective. These properties survive restriction along Over.forget. Both its source and target restricted presheaves are now sheaves, hence the restricted unit is an isomorphism. Evaluate at the given factorization t and reflect the resulting additive-group isomorphism to the module category. All constructions allow empty bases, zero rings and empty objects.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix",
+  "note": "Finite free tensor coordinates and local bijectivity of sheafification; proved completely in Lean, with no new sorry. Stacks Project Tag 03EK supplies the sheafified sectionwise tensor convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.toSheafify",
+   "results": "12 hits: CategoryTheory.isIso_toSheafify, CategoryTheory.toSheafify, CategoryTheory.isoSheafify_hom, CategoryTheory.toSheafify_sheafifyLift, CategoryTheory.sheafifyLift_id_toSheafify, CategoryTheory.toSheafify_naturality, CategoryTheory.toSheafification_app, CategoryTheory.sheafifyLift_id_toSheafify_assoc",
+   "date": "2026-10-16",
+   "verdict": "General sheafification API only; no exact sectionwise tensor comparison on a free neighborhood. Used the general API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafify.*over|over.*toSheafify|changeOfRings.*free",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "General sheafification API only; no exact sectionwise tensor comparison on a free neighborhood. Used the general API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification unit is an isomorphism on sections over an object where the presheaf is already a sheaf after restriction to the over category",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.isoSheafify, CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify, CategoryTheory.toSheafify_plusPlusIsoSheafify_hom, CategoryTheory.GrothendieckTopology.isIso_toSheafify, CategoryTheory.isIso_toSheafify, CategoryTheory.plusPlusIsoSheafify, CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf, CategoryTheory.GrothendieckTopology.isoToPlus",
+   "date": "2026-10-16",
+   "verdict": "General sheafification API only; no exact sectionwise tensor comparison on a free neighborhood. Used the general API in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafification unit is an isomorphism on sections over an object where a locally free sheaf has a finite basis and scalar extension is computed by tensor products of sections",
+   "results": "8 hits: CategoryTheory.sheafificationIso, CategoryTheory.isoSheafify, CategoryTheory.toSheafify, CategoryTheory.toSheafification, CategoryTheory.sheafificationNatIso_hom_app_val, CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.instIsIsoFunctorOppositeValAppSheafCounitSheafificationAdjunction, PresheafOfModules.sheafifyMap",
+   "date": "2026-10-16",
+   "verdict": "General sheafification units and their isomorphisms only; no exact finite free neighborhood tensor-unit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticePairMatrixAtBasis",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFreeTensorUnit",
+  "file": "lean/Sheaf/Paper/LocalFreeTensorUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.localFreeTensorUnit_isIso",
+  "statement": "theorem localFreeTensorUnit_isIso {X : Scheme.{u}}\n    {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (α : R ⟶ S)\n    (V : X.ProEt)\n    (M : SheafOfModules.{u + 1} ((sheafCompose _\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over V)))\n    (q : M.LocalGeneratorsData) [q.IsLocallyFreeData] [q.IsFiniteType]\n    (i : q.I) (W : X.ProEt) (a : W ⟶ V) (t : Over.mk a ⟶ q.X i) :\n    IsIso (((PresheafOfModules.sheafificationAdjunction\n      (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        (S.over V)).obj)).unit.app\n      (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}\n        (latticeScalarMap α V) M)).app (op (Over.mk a)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2ba97",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T102627-L-2294632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2ba97",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T102627-L-2294632",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean, DAG statements, interfaces, permitted axioms, and direct importer compilation all matched the review brief."
+ }
+}

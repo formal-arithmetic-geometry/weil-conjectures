@@ -28,11 +28,11 @@
  ],
  "proof": [
   {
-   "text": "Restrict the specified integral basis to W. Tensor the finite free integral module with K, identifying the sheafified tensor product with the free rational module by the basis formula. Compose with P.rationalization and e to get mutually inverse coordinate maps.",
+   "text": "Restrict the given integral basis to W and construct its section basis. The tensor sheafification unit at W is an isomorphism by the finite free neighborhood lemma. Compose its linear equivalence with the rationalization, the frame e, and free section coordinates to obtain a basis C of the rational coordinate module.",
    "uses": [
-    "lem-weil-pbc-lattice-free-scalar-extension",
+    "lem-weil-pbc-local-free-tensor-unit",
     "def-pur-localized-ringed-site",
-    "def-pur-sheaf-tensor-product"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "If W is nonempty, evaluate at a point; invariant basis number over K gives the equality of the two finite ranks. Reindex the integral basis by Fin n. Its rational coordinates and the coordinates of the inverse form G and G⁻¹. Every integral section is an integral linear combination of these columns, and naturality gives the same formula on all T → W. If W is empty all coefficient and free section modules on its slice are singletons, and both nonempty images are the whole singleton. Rank zero is the same finite free computation.",
+   "text": "If W is nonempty, evaluation at any point proves that its continuous K-valued section ring is nontrivial. Apply Module.Basis.indexEquiv over this commutative ring to reindex C by Fin n. The inverse coordinate equivalence of this basis supplies an invertible matrix G. Naturality of the integral basis, rationalization unit, and rational frame identifies every restricted column with the rational image of the corresponding integral basis section. Expand each integral section in that finite basis and distribute the finite sums to obtain both inclusions in the asserted integral matrix span. If W is empty, every T over W is empty, all target coefficients and free sections are subsingletons, and both images are the unique nonempty subset. Empty bases and n=0 are covered by the same finite sums.",
    "uses": [
     "lem-weil-pbc-lattice-section-matrix",
     "def-weil-sheaf-of-modules-category"
@@ -54,19 +54,18 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lattice-free-scalar-extension",
+  "lem-weil-pbc-local-free-tensor-unit",
   "def-pur-localized-ringed-site",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-lattice-section-matrix",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-section-matrix"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "B3",
+  "group": "C2",
   "date": "2026-10-16",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4(6), pp. 59–60",
-  "note": "Stage-3 explicit continuous-matrix route. This is one of two remaining strictly smaller steps; proof in words is also in its Lean docstring."
+  "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix",
+  "note": "Complete Lean proof from the proved local tensor-unit lemma, free section coordinates, basis reindexing over the nontrivial continuous-section ring, and the natural column expansion. No new sorry."
  },
  "mathlib_searches": [
   {
@@ -127,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-395a1",
-  "group": "B3",
+  "reviewer": "X-2ba97",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261016T085349-L-1757920",
+  "landing": "20261016T102627-L-2294632",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+  "note": "independent Codex review: Delivered Lean, DAG statements, interfaces, permitted axioms, and direct importer compilation all matched the review brief."
  }
 }
