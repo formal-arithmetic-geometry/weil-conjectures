@@ -261,5 +261,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-b5655a5ba (reviewer sub-agent of L); spot-checked: The six-step mathematics and statement are sound. Step 6 omitted citations for the source E-module structure supplied by def-weil-pbc-rational-category and def-weil-linear-scalar-localization; corrected whole DAG JSON is in fixes/dag/nodes/sec-smooth-purity/thm-weil-pbc-idempotent-complete-triangulation.json. All cited node statements, blueprint/unit route, Stacks Tags 0145, 014V, 05R6, 05QW, hypotheses, scalar transport, exactness, edge cases, and delivery checks were reviewed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-11b509a41",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Reviewed the immutable node, module, dependencies, source context, docstrings, edge cases, and recorded scompile/dry-run evidence. The theorem statement matches the node and no substantive or mechanical defect requires repair."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcIdempotentCompleteTriangulation",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIdempotentCompleteTriangulation",
+  "file": "lean/Sheaf/Paper/PbcIdempotentCompleteTriangulation.lean",
+  "statement": "theorem pbcIdempotentCompleteTriangulation (l : ℕ) [Fact l.Prime] (Qbar : Type w) [Field Qbar] [Algebra ℚ_[l] Qbar] [IsAlgClosure ℚ_[l] Qbar] (T : Scheme.{u}) [IsNoetherian T] [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))] [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] : (∀ (α : Qbar) {X Y : pbcQbarCategory l Qbar T} (r s : PairCategory.Rep X Y), PairCategory.Rep.Rel r s → PairCategory.Rep.Rel (qbarScalarRep l Qbar (pbcScalarSystem l Qbar T hDim.out hInv.out) α r) (qbarScalarRep l Qbar (pbcScalarSystem l Qbar T hDim.out hInv.out) α s)) ∧ (∀ (α : Qbar) {X Y : pbcQbarCategory l Qbar T} (M : Padic.FiniteCoefficientFields l Qbar) (hX : X.stage ≤ M) (hY : Y.stage ≤ M) (f : X.toStage hX ⟶ Y.toStage hY) (N : Padic.FiniteCoefficientFields l Qbar) (hMN : M ≤ N) (hα : α ∈ N.val), α • (PairCategory.mkHom M hX hY f : X ⟶ Y) = PairCategory.mkHom N (hX.trans hMN) (hY.trans hMN) ((⟨α, hα⟩ : N.val) • (pbcScalarSystem l Qbar T hDim.out hInv.out).tr hMN f)) ∧ Nonempty (Linear Qbar (pbcQbarCategory l Qbar T)) ∧ CategoryTheory.IsTriangulated (pbcQbarCategory l Qbar T) ∧ IsIdempotentComplete (pbcQbarCategory l Qbar T) ∧ (toKaroubi (pbcQbarCategory l Qbar T)).IsEquivalence ∧ (toKaroubi (pbcQbarCategory l Qbar T)).IsTriangulated ∧ (∀ E : Padic.FiniteCoefficientFields l Qbar, ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).IsTriangulated ∧ ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).Additive ∧ ∀ {K L : pbcStageCategory l Qbar T E} (f : K ⟶ L) (a : E.val), ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map (a • f) = (a : Qbar) • ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).map f)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
