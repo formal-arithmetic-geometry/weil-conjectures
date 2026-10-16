@@ -226,5 +226,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-2239cabd3 (reviewer sub-agent of L); spot-checked: Reviewed the item, report, mandated documents, five cited nodes, blueprint proofs, and cited Stacks locations. All five steps are mathematically supported with complete dependencies; edge cases, coefficient category, tensor orientation, and no-SGA route checked. No new nodes or repairs required."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-sheaf-tensor"
+ "unit": "sk-def-sfb-sheaf-tensor",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafTensor",
+  "declaration": "CategoryTheory.sfbSheafTensor_properties",
+  "declarations": [
+   "CategoryTheory.sfbSheafTensor_monoidalPreadditive",
+   "CategoryTheory.sfbSheafTensor_hasWeakSheafify",
+   "CategoryTheory.sfbSheafTensor_comparison",
+   "CategoryTheory.sfbSheafTensor_properties"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafTensor.lean",
+  "statement": "theorem sfbSheafTensor_properties {C : Type uC} [Category.{vC} C] [EssentiallySmall.{vA} C] (J : GrothendieckTopology C) {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] : (sfbSheafTensorStructure (A := A) J).monoidal.tensorUnit = (constantSheaf J A).obj (𝟙_ A) ∧ Nonempty (@MonoidalClosed (Sheaf J A) _ (sfbSheafTensorStructure (A := A) J).monoidal) ∧ (∀ (F : Sheaf J A), PreservesColimitsOfSize.{vI, uI} (@tensorLeft (Sheaf J A) _ (sfbSheafTensorStructure (A := A) J).monoidal F) ∧ PreservesColimitsOfSize.{vI, uI} (@tensorRight (Sheaf J A) _ (sfbSheafTensorStructure (A := A) J).monoidal F) ∧ PreservesFiniteColimits (@tensorLeft (Sheaf J A) _ (sfbSheafTensorStructure (A := A) J).monoidal F) ∧ PreservesFiniteColimits (@tensorRight (Sheaf J A) _ (sfbSheafTensorStructure (A := A) J).monoidal F))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Mixed binding: the tensor, unit, symmetric structure and strong symmetric monoidal sheafification are the existing sfbSheafTensorStructure from the recorded structure dependency, not redefined here. The new canonical comparison is the tensor of inverse sheafification counits followed by the strong monoidal tensorator; it realizes the defining objectwise formula naturally in both sheaves. The new theorem records the unit formula, closedness and colimit preservation at every diagram size. Two named Prop-valued theorems discharge additivity and sheafification existence from the node hypotheses, so neither is added as a hypothesis. Site object and morphism universes remain independent of the coefficient Hom universe; essentially-smallness is relative to that Hom universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d96d16f8",
+  "group": "NC",
+  "result": "pass",
+  "note": "Every node clause is matched in the Lean: Grothendieck abelian A with closed symmetric tensor and no MonoidalPreadditive hypothesis; essentially small site in A's Hom universe with site universes free; tensor = sheafification of the objectwise tensor through the canonical comparison (counit inverses then muIso, explicit data); unit equals constantSheaf of the unit (checked true by rfl); symmetric monoidal structure and strong braided sheafification from the recorded sfbSheafTensorStructure; closedness for the same tensor; colimit preservation at all sizes plus finite colimits for both tensorLeft and tensorRight. The helpers MonoidalPreadditive and HasWeakSheafify are true (HasSheafify compiled sorry-free in /tmp from upstream hasSheafify_of_isGrothendieckAbelian and Mathlib hasSheafifyEssentiallySmallSite) and duplicate no existing declaration. The node diff only adds the lean field; lean.statement is verbatim in the file; docstrings carry source and blueprint tag; only sorry proofs; no name collisions; the report has both required sections. nt_compile.py per-file compile is clean. Stage-3 note: the two sorry instance theorems may be picked first by downstream instance search until they are proved."
+ }
 }
