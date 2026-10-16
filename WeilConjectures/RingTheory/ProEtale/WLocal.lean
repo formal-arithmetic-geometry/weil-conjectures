@@ -25,7 +25,10 @@ a w-local topological space.
 
 @[expose] public section
 
-/-- A ring is w-local if it has a w-local prime spectrum. -/
+/-- A ring is w-local if it has a w-local prime spectrum: the closed points form a closed subset and
+every point specializes to a unique closed point (equivalently, every connected component has
+exactly one closed point, see `WLocalSpace.closedPointsHomeomorph`).
+Blueprint `def-weil-pbc-w-local`. -/
 @[mk_iff]
 class IsWLocalRing (R : Type*) [CommSemiring R] : Prop where
   wLocalSpace_primeSepectrum : WLocalSpace (PrimeSpectrum R)

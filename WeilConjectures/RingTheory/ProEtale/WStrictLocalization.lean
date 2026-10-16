@@ -50,7 +50,8 @@ end WStrictLocalization
 
 /-- The w-strict localization of a ring `R`: a faithfully flat, ind-étale, w-strictly-local
 `R`-algebra. It is obtained as the w-localization, along the closed points of `Spec R_w`,
-of the ind-étale contraction of the w-localization `R_w` of `R`. -/
+of the ind-étale contraction of the w-localization `R_w` of `R`.
+Blueprint `def-weil-pbc-strict-w-cover` (the algebra `C_A`). -/
 noncomputable def WStrictLocalization (R : Type u) [CommRing R] : Type u :=
   (WStrictLocalization.contractionIdeal R).WLocalization
 

@@ -110,7 +110,9 @@ theorem zeroLocus_map_algebraMap_subset_closedPoints [Algebra A B]
 
 variable (I) in
 /--
-The w-localization with respect to an ideal `I`.
+The w-localization with respect to an ideal `I`: the localization of `A^w` retaining the
+components of `Spec A^w` lying over the closed subset `V(I)` of `Spec A`.
+Blueprint `def-weil-pbc-retained-localization` (with `T = V(I)`).
 -/
 protected def Ideal.WLocalization : Type u :=
   Generalization 1 (I.map (algebraMap A (WLocalization A)))

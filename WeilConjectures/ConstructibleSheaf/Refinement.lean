@@ -178,6 +178,31 @@ lemma Stratification.inter_refines_left : (S.inter T).Refines S :=
 lemma Stratification.inter_refines_right : (S.inter T).Refines T :=
   fun k ↦ ⟨(finProdFinEquiv.symm k).2, Set.inter_subset_right⟩
 
+/-- The stratum of the common refinement indexed by the pair `(k, l)` is the intersection of
+the `k`-th stratum of `S` with the `l`-th stratum of `T`. -/
+lemma Stratification.inter_stratum_finProdFinEquiv (k : Fin S.n) (l : Fin T.n) :
+    (S.inter T).stratum (finProdFinEquiv (k, l)) = S.stratum k ∩ T.stratum l := by
+  simp
+
+/-- Blueprint `lem-weil-pbc-constructible-stratification-intersection`: Common refinement of two
+stratifications with constructible strata.
+
+For two stratifications `S = (ι_k : Z_k ⟶ X)_k` and `T = (κ_l : W_l ⟶ X)_l` of `X` (whose strata
+are constructible by definition), the common refinement `S.inter T` is the stratification
+indexed by the pairs `(k, l)` (through `finProdFinEquiv`) with schemes `Z_k ×_X W_l` and
+immersions `ι_k ∘ pr₁` (`Stratification.inter_domain`, `Stratification.inter_immersion`). Its
+stratum at `(k, l)` is the image `ι_k(pr₁(Z_k ×_X W_l)) = T_k ∩ T'_l`, a constructible subset of
+`X`, and `S.inter T` refines both `S` and `T`. -/
+theorem Stratification.inter_spec :
+    (∀ (k : Fin S.n) (l : Fin T.n),
+      Set.range ((S.inter T).immersion (finProdFinEquiv (k, l))) =
+        S.stratum k ∩ T.stratum l) ∧
+    (∀ (k : Fin S.n) (l : Fin T.n), IsConstructible (S.stratum k ∩ T.stratum l)) ∧
+    (S.inter T).Refines S ∧ (S.inter T).Refines T :=
+  ⟨fun k l ↦ by rw [(S.inter T).range_immersion, inter_stratum_finProdFinEquiv],
+    fun k l ↦ (S.isConstructible_stratum k).inter (T.isConstructible_stratum l),
+    S.inter_refines_left T, S.inter_refines_right T⟩
+
 /-- **Two stratifications have a common refinement.**
 (blueprint: `lemma:constructible-common-refinement`) -/
 lemma Stratification.exists_refines : ∃ R : Stratification X, R.Refines S ∧ R.Refines T :=

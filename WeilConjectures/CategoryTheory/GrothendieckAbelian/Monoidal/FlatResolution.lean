@@ -178,7 +178,8 @@ lemma flat_presheafToSheaf_obj (P : Cᵒᵖ ⥤ A) (hP : ∀ U, ObjectProperty.f
 omit [MonoidalPreadditive A] in
 /-- A flat separator of the coefficient category `A` induces a flat separator of the
 category of `A`-valued sheaves on an essentially small site: the coproduct of the free sheaves
-`Sheaf.freeYoneda J U G`; see the module docstring. -/
+`Sheaf.freeYoneda J U G`; see the module docstring.
+This is blueprint `lem-weil-pbc-sheaf-flat-separator`. -/
 theorem exists_flat_separator_sheaf_of_essentiallySmall
     (hA : ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G) :
     ∃ G : Sheaf J A, IsSeparator G ∧ ObjectProperty.flat G := by

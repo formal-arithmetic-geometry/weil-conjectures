@@ -393,7 +393,7 @@ lemma CommAlgCat.isLocalIso_le_isFinitelyPresentable :
     (RingHom.finitePresentation_algebraMap.mpr ‹_›)
 
 /-- An algebra is ind-Zariski if it can be written as the filtered colimit of locally isomorphic
-algebras. -/
+algebras. Blueprint `def-weil-pbc-ind-etale-algebra` (ind-Zariski part). -/
 @[stacks 096N, mk_iff]
 class Algebra.IndZariski (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] : Prop where
   exists_colimitPresentation : ∃ (ι : Type u) (_ : SmallCategory ι) (_ : IsFiltered ι)

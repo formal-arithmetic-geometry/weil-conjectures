@@ -32,8 +32,11 @@ instance (R : CommRingCat.{u}ᵒᵖ) :
       ((CommRingCat.etale.op ⊓ CommRingCat.faithfullyFlat.op).Over ⊤ R)))ᵒᵖ (Over R) :=
   inferInstance
 
-/-- The étale ind-contraction of a ring. This is defined
-to be the contraction wrt. to the morphism property of étale ring homomorphisms. -/
+/-- The étale ind-contraction `R^e` of a ring. This is defined
+to be the contraction wrt. to the morphism property of étale ring homomorphisms: the colimit of
+the sequence `R = R_0 → R_1 → ⋯`, where `R_{n+1}` is the (filtered colimit of finite) tensor
+products of representatives of all faithfully flat étale `R_n`-algebras.
+Blueprint `def-weil-pbc-etale-contraction`. -/
 def IndEtaleContraction (R : Type u) [CommRing R] : Type u :=
   (MorphismProperty.contraction.{u}
     CommRingCat.etale.op
