@@ -195,22 +195,42 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-fbed1231d",
-  "group": "Q11",
+  "reviewer": "NT-stage2-Codex-0ec5d87a2",
+  "group": "Q24",
   "result": "pass",
-  "note": "Full source, node, dependency, Lean, edge-case, docstring, hollow-definition, and report audit completed; recorded five-file scompile/server evidence is clean. Fresh rerun was blocked only by the live library lacking a sibling .olean, with no substantive delivery defect found."
+  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
  },
  "lean": {
   "module": "Sheaf.Paper.ScalarExtensionComposition",
-  "declaration": "WeilConjectures.exists_rationalScalarExtension_composition",
+  "declaration": "WeilConjectures.rationalConstructibleScalarComp",
   "declarations": [
-   "WeilConjectures.exists_rationalScalarExtension_composition"
+   "WeilConjectures.exists_rationalScalarExtension_composition",
+   "WeilConjectures.integralOrdinaryTensorSection",
+   "WeilConjectures.integralOrdinaryScalarComp_existsUnique",
+   "WeilConjectures.integralOrdinaryScalarComp",
+   "WeilConjectures.integralOrdinaryScalarUnit_existsUnique",
+   "WeilConjectures.integralOrdinaryScalarUnit",
+   "WeilConjectures.integralOrdinaryDerivedScalarComp",
+   "WeilConjectures.integralOrdinaryDerivedScalarUnit",
+   "WeilConjectures.integralConstructibleScalarComp_existsUnique",
+   "WeilConjectures.integralConstructibleScalarComp",
+   "WeilConjectures.integralConstructibleScalarUnit_existsUnique",
+   "WeilConjectures.integralConstructibleScalarUnit",
+   "WeilConjectures.rationalOrdinaryScalarComp_existsUnique",
+   "WeilConjectures.rationalOrdinaryScalarComp",
+   "WeilConjectures.rationalOrdinaryScalarUnit_existsUnique",
+   "WeilConjectures.rationalOrdinaryScalarUnit",
+   "WeilConjectures.rationalOrdinaryScalar_coherence",
+   "WeilConjectures.rationalConstructibleScalarComp",
+   "WeilConjectures.rationalConstructibleScalarUnit",
+   "WeilConjectures.rationalConstructibleScalar_coherence"
   ],
   "file": "lean/Sheaf/Paper/ScalarExtensionComposition.lean",
-  "statement": "theorem exists_rationalScalarExtension_composition (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y : AlgebraicGeometry.Scheme.{u}) : ∃ unit : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], rationalScalarExtension D l hl E Y E (AlgHom.id (Padic l) E) ≅ 𝟭 (rationalConstructibleCategory D l hl E Y), ∃ comp : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M] (ι : E →ₐ[Padic l] L) (κ : L →ₐ[Padic l] M), rationalScalarExtension D l hl E Y L ι ⋙ rationalScalarExtension D l hl L Y M κ ≅ rationalScalarExtension D l hl E Y M (κ.comp ι), (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L), comp E E L (AlgHom.id (Padic l) E) ι = Functor.isoWhiskerRight (unit E) (rationalScalarExtension D l hl E Y L ι) ≪≫ Functor.leftUnitor (rationalScalarExtension D l hl E Y L ι)) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L), comp E L L ι (AlgHom.id (Padic l) L) = Functor.isoWhiskerLeft (rationalScalarExtension D l hl E Y L ι) (unit L) ≪≫ Functor.rightUnitor (rationalScalarExtension D l hl E Y L ι))",
+  "statement": "def rationalConstructibleScalarComp : rationalScalarExtension D l hl E Y L ι ⋙ rationalScalarExtension D l hl L Y M j ≅ rationalScalarExtension D l hl E Y M (j.comp ι)",
   "branch": "newtargets-dag",
-  "by": "Q11",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): preserve exists_rationalScalarExtension_composition. Its existential unit/composition family does not expose a selected tensor-normalized associator or a pentagon. Add the ordinary balanced tensor comparisons and conjugate by the specified quotient-completion comparisons to the published rationalScalarExtension, with both unit laws and pentagon."
  }
 }

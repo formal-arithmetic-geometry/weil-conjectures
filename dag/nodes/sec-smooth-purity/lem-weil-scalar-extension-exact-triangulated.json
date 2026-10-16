@@ -249,24 +249,33 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-4c615dbbe",
-  "group": "NY",
+  "reviewer": "NT-stage2-Codex-0ec5d87a2",
+  "group": "Q24",
   "result": "pass",
-  "note": "Wrote review.md. Verified statements, dependencies, source correction and all citers, canonical constructions, universes, edge cases, and records. All four immutable Lean modules compiled cleanly through scompile.py. No fixes required.; reverted the delivery's change of existing node(s) def-weil-integral-scalar-extension, def-weil-rationalization-karoubi, lem-weil-integral-scalar-extension-constructible (--revert-nodes; kept as on newtargets-dag)",
-  "statement_corrected": true
+  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
  },
  "lean": {
-  "module": "Sheaf.Paper.ScalarExtensionExactTriangulated",
-  "declaration": "WeilConjectures.scalarExtension_exact_triangulated",
-  "file": "lean/Sheaf/Paper/ScalarExtensionExactTriangulated.lean",
-  "statement": "theorem scalarExtension_exact_triangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{u}) : ∃ h : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ, (fun [commShift : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦ (rationalScalarExtension D l hl E Y L ι).IsTriangulated) (commShift := h)",
+  "module": "Sheaf.Paper.ScalarExtensionExact",
+  "declaration": "WeilConjectures.rationalConstructibleScalar_exact",
+  "declarations": [
+   "WeilConjectures.integralConstructibleScalarCommShift_existsUnique",
+   "WeilConjectures.integralConstructibleScalarCommShift",
+   "WeilConjectures.rationalOrdinaryScalarCommShift_existsUnique",
+   "WeilConjectures.rationalOrdinaryScalarCommShift",
+   "WeilConjectures.rationalOrdinaryScalar_exact",
+   "WeilConjectures.rationalOrdinaryScalar_additive",
+   "WeilConjectures.rationalConstructibleScalarCommShift_existsUnique",
+   "WeilConjectures.rationalConstructibleScalarCommShift",
+   "WeilConjectures.rationalConstructibleScalar_exact",
+   "WeilConjectures.rationalConstructibleScalar_additive"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarExtensionExact.lean",
+  "statement": "theorem rationalConstructibleScalar_exact : (rationalScalarExtension D l hl E Y L ι).IsTriangulated",
   "branch": "newtargets-dag",
-  "by": "NY",
+  "by": "Q24",
   "date": "2026-10-16",
   "existing": false,
-  "declarations": [
-   "WeilConjectures.scalarExtension_exact_triangulated"
-  ]
+  "note": "§1(B): state exactness of the published rationalScalarExtension, with its shift comparison uniquely normalized by the ordinary derived tensor model and the canonical quotient-completion comparison. No replacement finite-stage category is used. Import the integral model, constructible restriction and rationalization interfaces directly, without relying on composition-module re-exports."
  },
  "statement_change": {
   "date": "2026-10-16",
