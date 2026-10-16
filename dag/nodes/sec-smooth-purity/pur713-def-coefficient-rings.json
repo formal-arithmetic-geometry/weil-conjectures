@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pur713-def-coefficient-rings",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Pro-étale coefficient rings",
- "statement": "For a scheme $X$ and $T\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, the coefficient ring on $X_{\\Proet}$ is the commutative ring object\n\n$$\n\\mathcal R_{X,T}:=p_X^*\\underline T\n$$\n\nof $\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$, with $\\underline T$ of Definition [pur713-def-continuous-rings] or [pur713-def-qbar-ring] and $p_X^*$ of Input “Pullback from the point” (`pur713-input-point-pullback`, in [sk-def-sf-setting]). In the notation of the governing reference this is $\\Lambda_X$ for $\\Lambda=\\underline T$. Its value on a pro-étale $U$ is not asserted to be $C(|U|,T)$; that description is listed as open in the governing reference, §12, and is not used.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ with its extending valuation topology, and a finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\overline{\\mathbf Q}_\\ell$. Put $\\mathcal O_E=\\{x\\in E:|x|\\leq1\\}$, with the subspace topology. Let $X$ be any scheme and $T\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$.\n\nUse the coefficient presheaves $\\underline T$ of [pur713-def-continuous-rings] and [pur713-def-qbar-ring]. They are sheaves of commutative rings, hence commutative ring objects of $\\mathsf{Sh}(*_{\\mathrm{pro\\acute et}},\\mathsf{Ab})$, by [sk-def-sfb-condensed-ring] for $T=\\mathcal O_E,E$ and [sk-def-sfb-qlbar-condensed] for $T=\\overline{\\mathbf Q}_\\ell$. In the last case the sections on a profinite set $S$ are continuous maps whose image is contained in some finite subextension of $\\overline{\\mathbf Q}_\\ell/\\mathbf Q_\\ell$, with the finite subextension allowed to depend on the section.\n\nThe coefficient ring on the small pro-étale site $X_{\\mathrm{pro\\acute et}}$ is\n$$\n\\mathcal R_{X,T}:=p_X^*\\underline T,\n$$\nwhere $p_X^*$ is the inverse-image functor of [sk-def-sfb-pullback-from-point]. Its commutative ring-object structure is the transported structure of [sk-def-sfb-pulled-back-coefficients]: writing $\\mu_T$ and $\\eta_T$ for the multiplication and unit of $\\underline T$, its multiplication and unit are\n$$\np_X^*\\underline T\\otimes p_X^*\\underline T\\xrightarrow{\\sim}p_X^*(\\underline T\\otimes\\underline T)\\xrightarrow{p_X^*\\mu_T}p_X^*\\underline T,\n\\qquad\n\\mathbf Z\\xrightarrow{\\sim}p_X^*\\mathbf Z\\xrightarrow{p_X^*\\eta_T}p_X^*\\underline T.\n$$\nIn the notation $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients], this is $\\Lambda_X$ for $\\Lambda=\\underline T$. No identification of its value on a pro-étale $U$ with $C(|U|,T)$ is part of this definition or used here.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-coefficient-rings.md",
   "place": "node pur713-def-coefficient-rings, order 2476"
@@ -15,14 +15,112 @@
  "stmt_deps": [
   "pur713-def-continuous-rings",
   "pur713-def-qbar-ring",
-  "sk-def-sf-setting"
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For $T=\\mathcal O_E$ or $E$, [pur713-def-continuous-rings] specifies exactly the continuous-map presheaf with pointwise operations and precomposition restrictions. These are the two corresponding coefficient rings of [sk-def-sfb-condensed-ring], whose statement supplies their sheaf property and commutative ring-object structure. For $T=\\overline{\\mathbf Q}_\\ell$, [pur713-def-qbar-ring] instead restricts to continuous maps with image in a finite subextension. Its section condition, restrictions and pointwise operations agree exactly with [sk-def-sfb-qlbar-condensed], whose statement supplies the sheaf property without sheafification and the commutative ring-object structure. Thus in all three cases the specified $\\underline T$ is an object in the domain of $p_X^*$; the algebraic-closure case has not been replaced by all continuous maps.",
+   "uses": [
+    "pur713-def-continuous-rings",
+    "sk-def-sfb-condensed-ring",
+    "pur713-def-qbar-ring",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-coefficient-rings.md",
+    "place": "the coefficient inputs in the sentence after the displayed definition; compared with the two cited coefficient definitions"
+   }
+  },
+  {
+   "text": "Part 4 of [sk-def-sfb-pullback-from-point] defines $p_X^*=\\pi_X^*\\circ p^*$ for every scheme $X$, with codomain abelian sheaves on its small pro-étale site, and asserts that it is strong monoidal and braided. Define the underlying object $\\mathcal R_{X,T}$ to be $p_X^*\\underline T$. Specialize [sk-def-sfb-pulled-back-coefficients] to the commutative ring object $\\Lambda=\\underline T$ obtained in step 1. Its displayed unit and multiplication are exactly the two composites specified here, and its final clause gives commutativity of this transported ring object. This is precisely its notation $\\Lambda_X$ at $\\Lambda=\\underline T$. The construction uses the inverse image as a functor on sheaves, so it neither requires nor supplies a formula $\\mathcal R_{X,T}(U)=C(|U|,T)$.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-coefficient-rings.md",
+    "place": "displayed definition and the sentences on pullback, commutativity, notation and the unused value formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pur713-def-continuous-rings",
+  "sk-def-sfb-condensed-ring",
+  "pur713-def-qbar-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-coefficient-rings.md",
+  "place": "Definition, with the missing input reference resolved by the existing general coefficient construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperStarFromPoint|condensedRingObj|coefficientRing|ProEtale.*Condensed|Condensed.*ProEtale",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient ring on the pro-etale site of a scheme is the inverse image of a commutative condensed ring from the profinite point",
+   "results": "8 hits, including LightCondensed, profiniteToCondensed, Condensed.ofSheafProfinite (Mathlib.Condensed.Explicit), CondensedMod.ofSheafProfinite and Scheme.ΓSpecIso. Read Condensed.ofSheafProfinite at Mathlib/Condensed/Explicit.lean:76: this packages a sheaf on the profinite point, not inverse image to a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, Scheme",
+   "results": "0 hits; Loogle query error: unknown identifier 'Scheme'. This is not evidence of absence; retried with a fully qualified name.",
+   "date": "2026-10-16",
+   "verdict": "query error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X pullback from the profinite point sends a commutative condensed ring to a commutative ring object of abelian sheaves on the pro-etale site of X",
+   "results": "8 hits, including Condensed.profiniteSolid, Condensed.profiniteFree, Condensed.ofSheafForgetProfinite (Mathlib/Condensed/Explicit), Condensed.lanSheafProfinite and CondensedMod.ofSheafProfinite. Read the sheaf packaging declarations at Explicit.lean:76 and :90; no inverse image to the pro-etale site of X.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCommMon|isCommMonObj_obj|proetale|pro.etale",
+   "results": "16 hits: CategoryTheory.Functor.isCommMonObj_obj at Mathlib/CategoryTheory/Monoidal/CommMon_.lean:157, mapCommMon at :169; ElladicCohomology.lean:63 defines ellAdicSheaf using continuous maps on the scheme, not this pullback construction. Read all three declarations.",
+   "date": "2026-10-16",
+   "verdict": "component matches only; no construction of the required p_X^* or these coefficient objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a sheaf of commutative rings from condensed abelian groups to abelian sheaves on the small pro-etale site of a scheme",
+   "results": "8 hits, including LightCondensed.forget (Mathlib/Condensed/Light/Module), CondensedMod.ofSheafProfinite and CondensedMod.ofSheafCompHaus (Mathlib/Condensed/Explicit), LightCondMod.ofSheafLightProfinite, Condensed.forget. None constructs scheme coefficients.",
+   "date": "2026-10-16",
+   "verdict": "no match under second phrasing"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapCommMon",
+   "results": "0 hits; Loogle query error: unknown identifier 'Functor.mapCommMon'. Retried with CategoryTheory namespace.",
+   "date": "2026-10-16",
+   "verdict": "query error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapCommMon",
+   "results": "12 hits, including CategoryTheory.Functor.mapCommMon and its identity, composition and natural-isomorphism variants. Read Mathlib/CategoryTheory/Monoidal/CommMon_.lean:157–176; this transports commutative monoid objects given a lax braided functor, but does not provide the required scheme-to-point inverse image.",
+   "date": "2026-10-16",
+   "verdict": "component match only; not a Mathlib leaf for this coefficient definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -36,5 +134,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "pur713-def-coefficient-rings",
+  "worker": "stage1",
+  "summary": "Made the coefficient parameters explicit, repaired the nonexistent point-pullback input reference, and exposed sheaf-valued coefficient inputs and transported multiplication/unit through existing general definition nodes. Checked the finite-subextension algebraic-closure convention and all cited statements. No new nodes, no project-Lean attachment and no full Mathlib match.",
+  "blueprint": "Realizes the entire definition pur713-def-coefficient-rings: its coefficient inputs (step 1) and its displayed pullback, commutative ring structure, Lambda_X notation and absence of a section formula (step 2). The unit key node is sk-def-sp-coefficient-towers, not this item."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-206de684e",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-206de684e (reviewer sub-agent of L); spot-checked: Read the item, the main-20261015 blueprint source pur713-def-coefficient-rings.md and its unit sk-def-sp-coefficient-towers, the full statements of all six cited nodes plus pur713-def-point-site and sk-def-sf-setting, and the master Proper.lean module doc. The statement keeps the blueprint definition R_{X,T}=p_X^* underline T and only makes ell, Qlbar and the finite E explicit; nothing is weakened. I confirmed that sk-def-sf-setting has no point-pullback input, so repointing to sk-def-sfb-pullback-from-point (part 4) is correct. The Qlbar case uses the finite-subextension subsheaf, which matches sk-def-sfb-qlbar-condensed and the master padicAlgClRingObj; the E and O_E cases use the topology induced from Qlbar, which matches sk-def-sfb-condensed-ring. pur713-def-point-site and the sfb point site are the same site. Step 1 gets the sheaf and commutative-ring-object properties from condensed-ring and qlbar-condensed. Step 2's unit, multiplication and commutativity are exactly those stated in sk-def-sfb-pulled-back-coefficients. There are no new nodes, the dependency closure has no cycle (262 nodes), and proof_deps equals the union of the uses lists. All citations are definitions, so no tool_uses are needed. Edge cases checked: empty and finite S, the sequence ell^{n+1/n} (continuous but in no finite subextension, so excluded), E=Q_ell, and the empty scheme. def-sfb-subfield-coefficient-ring and def-sfb-qlbar-coefficient-ring each restate one clause of the item and already list it in their same_as; the item's same_as=[] is defensible. Maintainer follow-up: pur713-def-qbar-ring is the same definition as sk-def-sfb-qlbar-condensed. No changes made."
+ }
 }
