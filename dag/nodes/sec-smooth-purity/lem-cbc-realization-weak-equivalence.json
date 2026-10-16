@@ -24,48 +24,132 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (i) and put $f=|v|$. The nondegenerate-simplex description [lem-cbc-realization-cw-subcomplex] gives the CW structures on $|P|$ and $|Q|$: use one open $n$-cell per nondegenerate $n$-simplex, attach its closed simplex along the faces, and replace a degenerate face by its nondegenerate representative. Each boundary meets only the finitely many faces and their iterated faces. The characteristic-map closed-set criterion is precisely the weak topology of these cell attachments. The standard closed simplex is a disk with boundary sphere by [lem-coef-realization-finite-limits]. Thus the hypotheses of [lem-cbc-whitehead-cw-homotopy-inverse] hold for $f$; choose a continuous $h:|Q|\\to|P|$ with $hf\\simeq1$ and $fh\\simeq1$.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex",
+    "lem-coef-realization-finite-limits",
+    "lem-cbc-whitehead-cw-homotopy-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Corollary 3.6.4.3, implication (2) to (3); Remark 1.2.3.12 for the cells"
+   }
+  },
+  {
+   "text": "For every Kan $W$, use [lem-cbc-kan-realization-mapping-classes] with $K=P,Q$. It identifies the precomposition map in (ii) with $f^*:[|Q|,|W|]_{\\mathrm{top}}\\to[|P|,|W|]_{\\mathrm{top}}$. Precomposition with $h$ is inverse: the equations $hf\\simeq1$ and $fh\\simeq1$ remain homotopies after composition with any continuous map to $|W|$. Hence $f^*$, and therefore the required map, is bijective. This proves (i) implies (ii).",
+   "uses": [
+    "lem-cbc-kan-realization-mapping-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0149",
+    "place": "Proposition 3.6.5.2, naturality of the comparison on components"
+   }
+  },
+  {
+   "text": "For the converse use the following explicit test objects. For a k-space $T$ in the category of [lem-coef-realization-finite-limits] let $\\operatorname{Sing}(T)_n=\\operatorname{Cont}(|\\Delta^n|,T)$, with simplicial operators given by precomposition. The realization--singular adjunction of [lem-coef-realization-finite-limits] shows that a horn into $\\operatorname{Sing}(T)$ is a continuous map $|\\Lambda_i^n|\\to T$. The same node identifies the realized horn pair with $(D^{n-1}\\times[0,1],D^{n-1}\\times\\{0\\})$. Projection onto the second member is a retraction; precomposing the horn map with this retraction extends it over $|\\Delta^n|$. Thus $\\operatorname{Sing}(T)$ is Kan, for every such $T$, including the empty space.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Singular-complex test expanded using realized horn retractions"
+   }
+  },
+  {
+   "text": "For every simplicial $K$ the same adjunction identifies maps $a:K\\to\\operatorname{Sing}(T)$ with continuous maps $\\bar a:|K|\\to T$. This descends, naturally in $K,T$, to a bijection $\\pi_0^{\\mathrm e}\\operatorname{Fun}(K,\\operatorname{Sing}(T))\\cong[|K|,T]_{\\mathrm{top}}$. Here are the homotopy details. An edge on the left is a map $K\\times\\Delta^1\\to\\operatorname{Sing}(T)$, whose adjoint is a continuous map $|K\\times\\Delta^1|\\to T$. Finite-product preservation of realization [lem-coef-realization-finite-limits] and compact-open currying [lem-coef-compact-open-currying] identify this with a continuous homotopy on $|K|\\times[0,1]$. To check the ordinary-product topology explicitly, a homotopy on each characteristic simplex transposes to a map $|\\Delta^m|\\to\\operatorname{Cont}([0,1],T)$; compatible transposes descend continuously to $|K|$ by its quotient topology, and evaluation is continuous because $[0,1]$ is compact and locally compact. Conversely, a continuous homotopy $G:|K|\\times[0,1]\\to T$ supplies the singular simplex associated to $(k,\\alpha)\\in(K\\times\\Delta^1)_m$ by $t\\mapsto G(q_k(t),|\\alpha|(t))$. These formulas commute with simplicial operators and have the prescribed endpoints. Finally finite edge zigzags yield homotopies by reversing and concatenating intervals, and an ordinary homotopy gives a single edge by the displayed formula. This proves injectivity as well as surjectivity of the asserted class bijection.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0149",
+    "place": "Proof, Example 3.6.2.5; adjunction on homotopies written out"
+   }
+  },
+  {
+   "text": "Assume (ii) and put $f=|v|$. By steps 3--4, for every k-space $T$ in the universe the Kan test $W=\\operatorname{Sing}(T)$ gives a bijection $f^*:[|Q|,T]_{\\mathrm{top}}\\to[|P|,T]_{\\mathrm{top}}$. The realizations $|P|$ and $|Q|$ are k-spaces by [lem-coef-realization-finite-limits]. Take $T=|P|$: surjectivity gives a continuous $h:|Q|\\to|P|$ with $[hf]=[1_{|P|}]$. Take $T=|Q|$: the classes of $fh$ and $1_{|Q|}$ have equal precompositions with $f$, since $[fhf]=[f]$. Injectivity now gives $[fh]=[1_{|Q|}]$. These are actual continuous homotopies by the definition of the displayed class sets. Both tests fit in the fixed universe: realization is a quotient of a small coproduct of standard simplices and the singular complex consists of sets of maps between small sets. No choice of an inverse $Q\\to P$ of simplicial sets has been asserted.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Converse, expanded two-target argument through the singular adjunction"
+   }
+  },
+  {
+   "text": "The maps $f,h$ of step 5 satisfy both hypotheses of [lem-coef-homotopy-equivalence-weak]. It follows that $f$ induces a bijection on path components and an isomorphism on every homotopy group at every source basepoint, even though its inverse homotopies need not fix basepoints. This is (i). If $P$ is empty and $Q$ is not, (ii) already fails for the empty Kan target; if $Q$ is empty a map $P\\to Q$ forces $P$ empty. Thus the argument also covers all empty cases without adding hypotheses.",
+   "uses": [
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Corollary 3.6.4.3, implication (3) to (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-whitehead-cw-homotopy-inverse",
+  "lem-cbc-kan-realization-mapping-classes",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03X7",
+  "place": "Realization comparison proof using Proposition 3.6.5.2 and topological Whitehead; converse expanded by singular-complex tests and the two-target inverse argument. External sources read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A simplicial map whose geometric realization is a weak homotopy equivalence induces bijections on homotopy classes of maps into every Kan complex",
-   "results": "{\"t\": \"2026-10-16T16:52:10Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map whose geometric realization is a weak homotopy equivalence induces bijections on homotopy classes of maps into every Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"HomotopicalAlgebra.LeftHomotopyClass.mk_surjective\", \"HomotopicalAlgebra.RightHomotopyClass.mk_surjective\", \"SSet.Truncated.HomotopyCategory₂\"], \"digest\": \"bb52126f6b4d059f\"}",
+   "query": "A simplicial map is a geometric realization weak equivalence if and only if precomposition gives bijections of homotopy classes into every Kan complex",
+   "results": "{\"t\": \"2026-10-16T19:48:57Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map is a geometric realization weak equivalence if and only if precomposition gives bijections of homotopy classes into every Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\", \"SSet.RelativeMorphism.HomotopyClass\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.hoFunctor\"], \"digest\": \"85306044247aa1e6\"}",
    "date": "2026-10-17",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence (Homotopy.lean:200-213, read) starts with an abstract model WeakEquivalence and gives abstract right-homotopy classes. It does not identify geometric-realization weak equivalences or the edge components of the specified internal Fun. SSet.toTop and sSetTopAdj only construct realization and its adjunction. Bridging these notions is not a one-line specialization; the realization-testing criterion remains unsplit."
+   "verdict": "no match: RightHomotopyClass.precomp_bijective_of_weakEquivalence (ModelCategory/Homotopy.lean:200-213, read) gives only abstract model-category homotopy classes and only the forward implication. SingularSet.lean:14-100 (read) supplies realization and its ordinary adjunction, not the Kan-target/realization comparison. Both semantic phrasings were read; no exact theorem or one-line specialization gives this item."
   },
   {
    "tool": "loogle",
    "query": "HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence",
-   "results": "{\"t\": \"2026-10-16T16:52:11Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"8ba94d6ec8606a0c\"}",
+   "results": "{\"t\": \"2026-10-16T19:49:07Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"8ba94d6ec8606a0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence (Homotopy.lean:200-213, read) starts with an abstract model WeakEquivalence and gives abstract right-homotopy classes. It does not identify geometric-realization weak equivalences or the edge components of the specified internal Fun. SSet.toTop and sSetTopAdj only construct realization and its adjunction. Bridging these notions is not a one-line specialization; the realization-testing criterion remains unsplit."
+   "verdict": "no match: RightHomotopyClass.precomp_bijective_of_weakEquivalence (ModelCategory/Homotopy.lean:200-213, read) gives only abstract model-category homotopy classes and only the forward implication. SingularSet.lean:14-100 (read) supplies realization and its ordinary adjunction, not the Kan-target/realization comparison. Both semantic phrasings were read; no exact theorem or one-line specialization gives this item."
   },
   {
    "tool": "grep",
    "query": "weakEquivalence.*(toTop|realiz)|((toTop|realiz).*[Ww]eak)|precomp_bijective_of_weakEquivalence",
-   "results": "{\"t\": \"2026-10-16T16:52:11Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*(toTop|realiz)|((toTop|realiz).*[Ww]eak)|precomp_bijective_of_weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"8513eff07657ff9f\"}",
+   "results": "{\"t\": \"2026-10-16T19:49:34Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*(toTop|realiz)|((toTop|realiz).*[Ww]eak)|precomp_bijective_of_weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"8513eff07657ff9f\"}",
    "date": "2026-10-17",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence (Homotopy.lean:200-213, read) starts with an abstract model WeakEquivalence and gives abstract right-homotopy classes. It does not identify geometric-realization weak equivalences or the edge components of the specified internal Fun. SSet.toTop and sSetTopAdj only construct realization and its adjunction. Bridging these notions is not a one-line specialization; the realization-testing criterion remains unsplit."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Geometric realization detects weak equivalences of simplicial sets by bijectivity of pi zero of mapping spaces into all fibrant Kan targets",
-   "results": "{\"t\": \"2026-10-16T16:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization detects weak equivalences of simplicial sets by bijectivity of pi zero of mapping spaces into all fibrant Kan targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.instBalanced\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"SSet.KanComplex\"], \"digest\": \"af0f55c3945e5654\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence (Homotopy.lean:200-213, read) starts with an abstract model WeakEquivalence and gives abstract right-homotopy classes. It does not identify geometric-realization weak equivalences or the edge components of the specified internal Fun. SSet.toTop and sSetTopAdj only construct realization and its adjunction. Bridging these notions is not a one-line specialization; the realization-testing criterion remains unsplit."
+   "verdict": "no match: RightHomotopyClass.precomp_bijective_of_weakEquivalence (ModelCategory/Homotopy.lean:200-213, read) gives only abstract model-category homotopy classes and only the forward implication. SingularSet.lean:14-100 (read) supplies realization and its ordinary adjunction, not the Kan-target/realization comparison. Both semantic phrasings were read; no exact theorem or one-line specialization gives this item."
   },
   {
    "tool": "leansearch",
    "query": "A map of simplicial sets realizes to a weak homotopy equivalence if and only if maps into every Kan complex give bijections of homotopy classes",
-   "results": "{\"t\": \"2026-10-16T16:52:37Z\", \"tool\": \"leansearch\", \"query\": \"A map of simplicial sets realizes to a weak homotopy equivalence if and only if maps into every Kan complex give bijections of homotopy classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"SSet.toTop\", \"sSetTopAdj\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\"], \"digest\": \"e5b65cca5b23c19d\"}",
+   "results": "{\"t\": \"2026-10-16T19:50:08Z\", \"tool\": \"leansearch\", \"query\": \"A map of simplicial sets realizes to a weak homotopy equivalence if and only if maps into every Kan complex give bijections of homotopy classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"SSet.toTop\", \"sSetTopAdj\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\"], \"digest\": \"e5b65cca5b23c19d\"}",
    "date": "2026-10-17",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence (Homotopy.lean:200-213, read) starts with an abstract model WeakEquivalence and gives abstract right-homotopy classes. It does not identify geometric-realization weak equivalences or the edge components of the specified internal Fun. SSet.toTop and sSetTopAdj only construct realization and its adjunction. Bridging these notions is not a one-line specialization; the realization-testing criterion remains unsplit."
+   "verdict": "no match: RightHomotopyClass.precomp_bijective_of_weakEquivalence (ModelCategory/Homotopy.lean:200-213, read) gives only abstract model-category homotopy classes and only the forward implication. SingularSet.lean:14-100 (read) supplies realization and its ordinary adjunction, not the Kan-target/realization comparison. Both semantic phrasings were read; no exact theorem or one-line specialization gives this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric realization detects weak equivalences of simplicial sets by bijectivity of pi zero of mapping spaces into all fibrant Kan targets",
+   "results": "{\"t\": \"2026-10-16T19:50:09Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization detects weak equivalences of simplicial sets by bijectivity of pi zero of mapping spaces into all fibrant Kan targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.instBalanced\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"SSet.KanComplex\"], \"digest\": \"af0f55c3945e5654\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RightHomotopyClass.precomp_bijective_of_weakEquivalence (ModelCategory/Homotopy.lean:200-213, read) gives only abstract model-category homotopy classes and only the forward implication. SingularSet.lean:14-100 (read) supplies realization and its ordinary adjunction, not the Kan-target/realization comparison. Both semantic phrasings were read; no exact theorem or one-line specialization gives this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-mapping-homotopy-invariance",
@@ -79,5 +163,39 @@
   "file": "Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean",
   "lines": "200-213",
   "reason": "Only abstract model-category right-homotopy classes under an abstract weak-equivalence hypothesis; no realization/edge-component comparison."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-realization-weak-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Replaced the earlier false fibrant-replacement retraction with a realization--singular argument, avoiding the cycle through the existing Kan--Quillen node. Two genuine input lemmas are stated: topological Whitehead and realization comparison of mapping classes into Kan targets. The proof writes the singular horn fillers, homotopy adjunction, and two-test-target converse explicitly. New nodes are statement-only, with actual logged searches and no Mathlib match.",
+  "blueprint": "Opening proof sentence of thm-cbc-finite-level-proetale: \"Choose a compactification\"; through the recorded refinement/groupoid-localization ancestry, testing realization equivalences against Kan targets to prove coherent independence of that choice.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Realization adjunction, finite products, and realized horn/disk pairs are general topological tools; no node of this compact-support unit supplies them."
+   },
+   {
+    "node": "lem-coef-compact-open-currying",
+    "why": "Compact-open currying checks continuity of ordinary interval homotopies on the realization quotient; no node of this unit states that topological continuity theorem."
+   },
+   {
+    "node": "lem-coef-homotopy-equivalence-weak",
+    "why": "A continuous homotopy inverse gives component and based-group isomorphisms, including moving basepoints; this topological theorem is not stated in the compact-support unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NM-136c0f27e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-136c0f27e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, unit sk-prop-sf-cbc and Kerodon 03X7, 0149 and 013X (read online; not archived, and the report's WANTED line is correct). The item statement is unchanged and agrees with 03X7 (1)⇔(2). Step 1: the cw-subcomplex and realized-disk nodes make |P| and |Q| CW in the sense of the Whitehead node (as 03X7 does via Remark 1.2.3.12). Step 2: the mapping-classes node and its precomposition naturality identify the map in (ii) with f^*, and h^* is its inverse. Step 3: Sing(T) is Kan through the horn retraction (x,s)↦(x,0); n=1 and T empty checked. Step 4: the edge/homotopy bijection is checked through finite products, compact-open currying and the explicit formula G(q_k(t),|α|(t)). The existing lem-coef-simplicial-realization-cylinder could also have been cited, but the step is complete as written. Step 5: the two-target argument (T=|P| for surjectivity, T=|Q| for injectivity) gives hf≃1 and fh≃1. Step 6: lem-coef-homotopy-equivalence-weak's hypotheses match exactly, including unbased homotopies and empty spaces. Both new nodes are true and match 0149 (π0 consequence) and 013X. They are statement-only and self-contained, have three kinds of logged searches, are not restated clauses of the item, and have no duplicate in the DAG or blueprint (checked against the Serre model, homotopy-equivalence-weak, simplicial-homotopy-equivalence-weak, cylinder and model-localization nodes). The blueprint from/via fields are correct, there is no cycle, proof_deps equals the union of uses, and no SGA is cited. The declared tool_uses (realization-finite-limits, compact-open-currying, homotopy-equivalence-weak) are generic topology and accepted. No changes."
  }
 }
