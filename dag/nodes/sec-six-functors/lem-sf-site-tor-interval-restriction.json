@@ -26,7 +26,8 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-ringed-site-derived-restriction",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-wf-tensor-product"
  ],
  "proof": [
   {
@@ -402,5 +403,23 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q46-2763b4b45 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and chapter/unit route. All seven steps preserve the exact Tor interval for arbitrary slice sheaves; categorical and K-flat comparison hypotheses hold. No new nodes, missing dependencies, cycles, or target weakening. Accepted eleven generic tool uses. Detailed checks recorded in review.md; no corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteTorIntervalRestriction",
+  "declaration": "CategoryTheory.siteTorIntervalRestriction",
+  "file": "lean/Sheaf/CategoryTheory/SiteTorIntervalRestriction.lean",
+  "statement": "theorem siteTorIntervalRestriction {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{u}) (U : C) [hD : HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))] [hDU : HasDerivedCategory.{w'} (SheafOfModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (O.over U)))] (a b : ℤ) (_hab : a ≤ b) (E : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))) (_hE : ∀ (F : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) (r : ℤ), r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj ((SheafOfModules.wfSiteDerivedTensor.{u, u, w} J O).obj (E, (DerivedCategory.singleFunctor _ 0).obj F)))) : ∀ (G : ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (O.over U))) (r : ℤ), r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj ((SheafOfModules.wfSiteDerivedTensor.{u, u, w'} (J.over U) (O.over U)).obj (@ringedSiteDerivedRestrictionOfUniverses.{u, u, u, u, w, w'} C _ J ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O) U _ _ _ _ hD hDU E, (DerivedCategory.singleFunctor _ 0).obj G)))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-466a809c2",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Immutable theorem signature matches the node verbatim; dependencies, source alignment, universes, edge cases, report sections, and canonical declarations checked. scompile.py sandbox and library checks passed."
  }
 }
