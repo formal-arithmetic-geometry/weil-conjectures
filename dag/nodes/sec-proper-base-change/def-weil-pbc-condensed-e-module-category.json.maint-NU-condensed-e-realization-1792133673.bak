@@ -1,0 +1,536 @@
+{
+ "id": "def-weil-pbc-condensed-e-module-category",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph: choose an integral lattice and rationalize; comparison needed to realize the resulting category and functors as the archived condensed-coefficient category",
+   "via": [
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Condensed E module categories and the specified restricted exchange",
+ "statement": "Use the universe and small-site convention [def-weil-size-convention]. Fix a prime $\\ell$, a normed finite field extension $E/\\mathbf Q_\\ell$, and a scheme $T$. Let $\\mathbf{Prof}$ be the category of profinite sets (compact Hausdorff totally disconnected spaces) with its coherent topology, whose covers are finite jointly surjective families, and let $\\operatorname{Sh}_{\\mathrm{Ab}}(\\mathbf{Prof})$ be its abelian sheaf category. Let $\\underline E\\in\\operatorname{Sh}_{\\mathrm{Ab}}(\\mathbf{Prof})$ have sections $\\underline E(S)=C(S,E)$, continuous functions with pointwise addition and multiplication. Let $a:\\mathbf{Prof}\\to(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proet}}$ be the site functor $S\\mapsto\\operatorname{Spec}\\operatorname{LC}(S,\\mathbf Z)$, where $\\operatorname{LC}$ denotes locally constant functions. Write $a^*:\\operatorname{Sh}_{\\mathrm{Ab}}(\\mathbf{Prof})\\to\\operatorname{Sh}_{\\mathrm{Ab}}((\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proet}})$ for the left Kan extension along $a^{op}$ followed by sheafification. For the structure morphism $\\pi_T:T\\to\\operatorname{Spec}\\mathbf Z$, its inverse image is $\\pi_T^{-1}:\\operatorname{Sh}_{\\mathrm{Ab}}((\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proet}})\\to\\operatorname{Sh}_{\\mathrm{Ab}}(T_{\\mathrm{proet}})$. Use the geometric inverse image and its monoidal composition comparisons of [lem-weil-pbc-profinite-point-pullback]. Set $p_T^*=\\pi_T^{-1}\\circ a^*$ and $E_T^c=p_T^*(\\underline E)$, with the induced ring-object structure.\n\nLet $\\mathcal M_T^c(E)$ be the category of internal $E_T^c$-modules in abelian sheaves on $T_{\\mathrm{proet}}$: an object is an abelian sheaf $M$ with a unital associative action $E_T^c\\otimes M\\to M$, and arrows commute with the action. Tensor denotes the sheaf tensor product; the abelian sheaf tensor product and the internal action give exactly the usual sectionwise module laws. Form $D(\\mathcal M_T^c(E))$ by localizing cochain complexes at maps inducing isomorphisms on every cohomology sheaf. Define $\\mathcal C_T^c(E)$ as its full subcategory of complexes with cohomology zero outside a finite interval, and such that each cohomology sheaf admits a finite stratification of $T$ by locally closed subschemes [def-constructible-stratification] on which it is pro-etale locally the cokernel of a map $(E_T^c)^m\\to(E_T^c)^n$ with $m,n$ finite nonnegative integers; restrictions use the inverse image of the ring and its module action. This is the archived category $\\mathrm{ProEtale.BoundedConstructible}(\\mathrm{condensedRingObj}(C(-,E),T))$, with local finite presentation exactly as in its definition, and no completeness condition imposed.\n\nFor a scheme morphism $h:T\\to U$, the canonical coefficient isomorphism $\\alpha_h:h^{-1}E_U^c\\xrightarrow{\\sim} E_T^c$ is the component of the composition comparison $h^{-1}p_U^*\\cong p_T^*$. Its adjoint is $\\eta_h:E_U^c\\to h_*E_T^c$. Define $h_c^*M=E_T^c\\otimes_{h^{-1}E_U^c}h^{-1}M$ and $h_{c,*}N=h_*N$ with coefficient action through $\\eta_h$. Write $Lh_c^*$ and $Rh_{c,*}$ for the unbounded derived functors of [def-weil-pbc-proetale-operations], applied with the coefficient identification $\\alpha_h$. Whenever these preserve the displayed full subcategories, restrict them and their adjunction there. For a commutative square with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$ and $f\\circ g'=g\\circ f'$, define the restricted base-change transformation as the composite\n$$\n Lg_c^*Rf_{c,*}\\xrightarrow{\\eta_{f'}}Rf'_{c,*}Lf_c'^*Lg_c^*Rf_{c,*}\\xrightarrow{Rf'_{c,*}\\theta}Rf'_{c,*}Lg_c'^*Lf_c^*Rf_{c,*}\\xrightarrow{Rf'_{c,*}Lg_c'^*\\epsilon_f}Rf'_{c,*}Lg_c'^*.\n$$\nHere $\\theta:Lf_c'^*Lg_c^*\\cong Lg_c'^*Lf_c^*$ is the comparison from pullback composition and square commutativity, $\\eta_{f'}$ is the adjunction unit and $\\epsilon_f$ is the counit of $Lf_c^*\\dashv Rf_{c,*}$. This is the precise unit-insertion, square-transport, counit-contraction definition of the archived boundedConstructibleBaseChange.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+  "place": "Module docstring: coefficient ring and bounded constructible module-object categories; referenced definitions read at /home/ubuntu/weil-newtargets-master/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean (pointUpperStar, upperStarFromPoint, condensedRingObj), ConstructibleSheaf/ProEtaleModule/Def.lean and DerivedCategory.lean, and ModuleObject/BaseChangeTheorems/MorphismDefs.lean"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-constructible-stratification",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Verification of the derived-pullback computation in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar: the coefficient map condensedPullbackHom is an isomorphism (isIso_condensedPullbackHom). Extension along it is naturally isomorphic to restriction along its inverse (Mod.extendScalarsIsoComapInv), so is exact. The functor mapMod(f^*) is also exact. The composition isomorphism for left derived exact functors (Functor.leftDerivedFunctorCompIso), followed by Functor.leftDerivedFunctorIsoMapDerivedCategory on the first factor and whiskering by the derived second factor, gives L(f^*) ≅ D(mapMod(f^*)) ⋙ L(Ext). The full pullback preserves all quasi-isomorphisms by preservesHomology_upperStar, which directly supplies PreservesKFlatQuasiIso. Thus this construction needs no theorem that mapMod(f^*) preserves arbitrary K-flat complexes; that unused auxiliary instance is retired. All categories, functors, adjunction statements and restricted exchange definitions remain as specified.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "E4: present boundedConstructibleBaseChange as squareExchange of the same bounded adjunctions and the same pullback-square comparison. The proved theorem boundedConstructibleBaseChange_eq_unit_square_counit identifies this presentation with the formerly defining unit-insertion, square-transport and counit-contraction composite as a natural transformation. Thus its components, categories, functors and the meaning of every target are unchanged.",
+   "uses": [
+    "def-weil-pbc-adjunction-square-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-square-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/UpperLowerStar/Defs.lean",
+  "place": "Exact section (preservesFiniteLimits_upperStar and preservesHomology_upperStar), together with ModuleObjects/MapMod.lean change of scalars along an isomorphism and DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean exact-functor comparison and composition.",
+  "note": "Preserves the previous exact derived-pullback verification. E4 adds the proved equality between the adjunct presentation and the specified restricted exchange; no mathematical definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A condensed ring pulled back to the proetale site of a scheme with its bounded constructible derived category and base change transformation",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafCompHaus, Condensed.profiniteSolid, Condensed.profiniteFree, LightCondMod, LightCondensed.forget, CondensedMod",
+   "date": "2026-10-14",
+   "verdict": "no match: generic condensed or scheme infrastructure does not construct this pro-etale point inverse image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\", \"Condensed\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: generic condensed or scheme infrastructure does not construct this pro-etale point inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedRingObj|boundedConstructible|pointUpperStar",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: generic condensed or scheme infrastructure does not construct this pro-etale point inverse image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible derived category of modules over condensed field coefficients on a scheme proetale site",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded derived constructible sheaves over a topological p-adic field as internal modules over a sheaf of continuous functions with unit counit base change",
+   "results": "8 hits: LightCondMod, CondensedMod.IsSolid, CondensedMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafCompHaus, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed modules and light condensed monoidal categories, not the specified pro-etale coefficient category and exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "nt-target-proetale-e",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-condensed-e-module-category",
+  "worker": "stage1",
+  "summary": "Checked the actual master coefficient, constructibility and exchange definitions. Kept local finite presentation and uncompleted derived operations. Exposed the geometric well-definedness input for the point pullback as one general statement-only node; remaining module and derived notions reuse the existing DAG. Clarified sizes and the counit notation. No exact slopmaster2 attachment or Mathlib match.",
+  "blueprint": "The finite-extension ancestor rationalizes an integral lattice. This definition specifies the condensed receiving category and its exact unit-square-counit transformation; it does not prove or assume the realization equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-478ada57f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-478ada57f (reviewer sub-agent of L); spot-checked: Full mathematical review passed against the exact master sources, all cited DAG statements, route, hypotheses, base-change typing, duplicates, and edge cases. Repaired the new lemma’s missing created.by/date, merged_into, and lean_audit metadata in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-profinite-point-pullback.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChange",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+     "kind": "def",
+     "lines": [
+      142,
+      155
+     ]
+    },
+    {
+     "name": "Profinite.continuousMapRingObj",
+     "sorry": false,
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap",
+     "kind": "def",
+     "lines": [
+      136,
+      141
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.profiniteToProEt",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      185,
+      190
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.pointUpperStar",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      236,
+      242
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      299,
+      303
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedRingObj",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      378,
+      382
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.coefficientPullbackIso",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      356,
+      362
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPullbackHom",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      393,
+      398
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "kind": "def",
+     "lines": [
+      415,
+      420
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented",
+     "sorry": false,
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def",
+     "kind": "def",
+     "lines": [
+      66,
+      72
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsConstructibleModuleObject",
+     "sorry": false,
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def",
+     "kind": "def",
+     "lines": [
+      80,
+      90
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.boundedConstructible",
+     "sorry": false,
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+     "kind": "def",
+     "lines": [
+      59,
+      65
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.BoundedConstructible",
+     "sorry": false,
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+     "kind": "def",
+     "lines": [
+      86,
+      88
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "kind": "def",
+     "lines": [
+      133,
+      139
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "kind": "def",
+     "lines": [
+      85,
+      91
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "kind": "def",
+     "lines": [
+      372,
+      378
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+     "kind": "def",
+     "lines": [
+      152,
+      156
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+     "kind": "def",
+     "lines": [
+      190,
+      194
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+     "kind": "def",
+     "lines": [
+      202,
+      210
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+     "kind": "def",
+     "lines": [
+      90,
+      98
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeUnitStep",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+     "kind": "def",
+     "lines": [
+      107,
+      116
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeSquareStep",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+     "kind": "def",
+     "lines": [
+      119,
+      128
+     ]
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeCounitStep",
+     "sorry": false,
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+     "kind": "def",
+     "lines": [
+      130,
+      139
+     ]
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AddCommGrpCat.hasFunctorialFlatResolution",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      142,
+      146
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+     "lines": [
+      143,
+      150
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+     "lines": [
+      181,
+      188
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      309,
+      312
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      203,
+      207
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      214,
+      218
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      262,
+      265
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      258,
+      260
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      134,
+      138
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      350,
+      354
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      196,
+      198
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      180,
+      183
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+     "lines": [
+      67,
+      71
+     ],
+     "kind": "theorem"
+    },
+    {
+     "name": "CategoryTheory.Mod.monoidalClosed",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+     "lines": [
+      56,
+      59
+     ],
+     "kind": "instance"
+    },
+    {
+     "name": "CategoryTheory.Mod.preservesKFlatQuasiIso",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+     "lines": [
+      107,
+      110
+     ],
+     "kind": "theorem"
+    }
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse",
+  "declaration": "Profinite.continuousCoefficientRingObj",
+  "declarations": [
+   "Profinite.continuousCoefficientRingPresheaf",
+   "Profinite.isSheaf_continuousCoefficientRingPresheaf",
+   "Profinite.continuousCoefficientRingSheaf",
+   "Profinite.continuousCoefficientRingObj",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientRingPresheaf",
+   "AlgebraicGeometry.ProEtale.isSheaf_continuousCoefficientRingPresheaf",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientRingSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientUniverse.lean",
+  "statement": "abbrev continuousCoefficientRingObj : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B) universe-interface repair: the recorded Profinite.continuousMapRingObj and scheme continuousMapRingSheaf require T : Type 0, excluding coefficients in the common universe bound. This module supplies the same explicit ULift C(S,T) and ULift C(V,T), pointwise operations and precomposition for T : Type u. The condensed ring is fed to the existing condensedRingObj, internal module, finite-presentation, constructibility, derived-operation, adjunction and base-change definitions, reused without replacement by downstream modules. The stage-3 second reader removed the unused MorphismDefs re-export; the sole direct user imports that framework explicitly. No site universes are equated and no smallness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2301cad4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1b63d",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T040743-L-2515722",
+  "kind": "interface",
+  "note": "independent Codex review: Lean theorem and existing signatures matched the DAG and baseline; exchange equality preserves the original definition; delivered modules and all 13 direct importers compile; axioms checked."
+ }
+}
