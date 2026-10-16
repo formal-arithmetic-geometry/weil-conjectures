@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NV
+Authors: SHEAF groups NV, D2
 -/
 module
 
@@ -263,8 +263,123 @@ private lemma isIso_of_affine_weaklyContractible (X : Scheme.{u})
       have := h (V i) (ha i) (hw i)
       exact (ConcreteCategory.bijective_of_isIso (f.hom.app _)).surjective
         (G.obj.map (g i).op y)
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
+private noncomputable def spectrumProjection {B : Type u} [CommRing B]
+    (S : Profinite.{u}) (φ : LocallyConstant S ℤ →+* B) : C(PrimeSpectrum B, S) :=
+  ⟨fun p ↦ ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+      (PrimeSpectrum.comap φ p)).1,
+    continuous_fst.comp
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm.continuous.comp
+        (PrimeSpectrum.continuous_comap φ))⟩
+
+private lemma localization_eq {B : Type u} [CommRing B]
+    (S : Profinite.{u}) (φ : LocallyConstant S ℤ →+* B)
+    (p : PrimeSpectrum B) (g : LocallyConstant S ℤ) :
+    algebraMap B (Localization.AtPrime p.asIdeal) (φ g) =
+      algebraMap B (Localization.AtPrime p.asIdeal)
+        (g (spectrumProjection S φ p) : B) := by
+  classical
+  let s := spectrumProjection S φ p
+  let q := ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+    (PrimeSpectrum.comap φ p)).2
+  have hp : PrimeSpectrum.comap φ p = LocallyConstant.toPrimeSpectrum (s, q) :=
+    ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).apply_symm_apply _).symm
+  let χ := LocallyConstant.charFn ℤ (g.isLocallyConstant.isClopen_fiber (g s))
+  have hχ : φ χ ∉ p.asIdeal := by
+    change χ ∉ (PrimeSpectrum.comap φ p).asIdeal
+    rw [hp, LocallyConstant.mem_toPrimeSpectrum_asIdeal]
+    simpa [χ, LocallyConstant.charFn_apply_of_mem] using q.isPrime.one_notMem
+  have hid : IsIdempotentElem χ := by
+    change χ * χ = χ
+    ext x
+    by_cases hx : g x = g s
+    · simp [χ, LocallyConstant.charFn_apply_of_mem, hx]
+    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
+  have hχloc : algebraMap B (Localization.AtPrime p.asIdeal) (φ χ) = 1 :=
+    (hid.map φ).algebraMap_localization_atPrime_of_notMem hχ
+  have hmul : χ * g = χ * algebraMap ℤ (LocallyConstant S ℤ) (g s) := by
+    ext x
+    change χ x * g x = χ x * g s
+    by_cases hx : g x = g s
+    · simp [hx]
+    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
+  have h := congrArg (fun v ↦ algebraMap B (Localization.AtPrime p.asIdeal) (φ v)) hmul
+  simp only [map_mul, hχloc, one_mul] at h
+  change algebraMap B (Localization.AtPrime p.asIdeal) (φ g) =
+    algebraMap B (Localization.AtPrime p.asIdeal) (φ ((g s : ℤ) : LocallyConstant S ℤ)) at h
+  simpa only [map_intCast] using h
+
+private noncomputable def locallyConstantIntHomEquiv (B : CommRingCat.{u})
+    (S : Profinite.{u}) :
+    (CommRingCat.of (LocallyConstant S ℤ) ⟶ B) ≃ C(PrimeSpectrum B, S) where
+  toFun φ := spectrumProjection S φ.hom
+  invFun f := CommRingCat.ofHom (LocallyConstant.liftPrimeSpectrum (Int.castRingHom B) f)
+  left_inv φ := by
+    apply CommRingCat.hom_ext
+    ext g
+    apply PrimeSpectrum.eq_of_forall_algebraMap_localization_eq
+    intro p
+    change algebraMap B (Localization.AtPrime p.asIdeal)
+      (LocallyConstant.liftPrimeSpectrum (Int.castRingHom B) (spectrumProjection S φ.hom) g) = _
+    rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum]
+    exact (localization_eq S φ.hom p g).symm
+  right_inv f := by
+    ext p
+    change ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+      (PrimeSpectrum.comap (LocallyConstant.liftPrimeSpectrum (Int.castRingHom B) f) p)).1 = _
+    rw [LocallyConstant.comap_liftPrimeSpectrum]
+    exact congrArg Prod.fst
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm_apply_apply _)
+
+private noncomputable def specMapEquiv (R : CommRingCat.{u}) (S : Profinite.{u}) :
+    (Spec R ⟶ profiniteToScheme.obj S) ≃ C(Spec R, S) :=
+  Spec.homEquiv.trans (locallyConstantIntHomEquiv R S)
+
+private lemma specMapEquiv_apply (R : CommRingCat.{u}) (S : Profinite.{u})
+    (f : Spec R ⟶ profiniteToScheme.obj S) (x : Spec R) :
+    specMapEquiv R S f x =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective f
+  dsimp only [specMapEquiv, Equiv.trans_apply]
+  erw [Spec.homEquiv_apply, Spec.preimage_map]
+  rfl
+
+private noncomputable def affineMapEquiv (A : Scheme.{u}) [IsAffine A]
+    (S : Profinite.{u}) : (A ⟶ profiniteToScheme.obj S) ≃ C(A, S) :=
+  (Iso.homCongr A.isoSpec (Iso.refl _)).trans
+    ((specMapEquiv _ S).trans
+      ((Scheme.homeoOfIso A.isoSpec.symm).continuousMapCongr (Homeomorph.refl S)))
+
+private lemma affineMapEquiv_apply (A : Scheme.{u}) [IsAffine A] (S : Profinite.{u})
+    (f : A ⟶ profiniteToScheme.obj S) (x : A) :
+    affineMapEquiv A S f x =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
+  change specMapEquiv _ S (A.isoSpec.inv ≫ f) (A.isoSpec.hom x) = _
+  rw [specMapEquiv_apply]
+  simp only [← Scheme.Hom.comp_apply, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+
+private noncomputable def pointComponentsEquiv (X : Scheme.{u}) (U : X.ProEt)
+    [IsAffine U.left] (S : Profinite.{u}) :
+    (U ⟶ (profiniteToProEtOf X).obj S) ≃ C(ConnectedComponents U.left, S) :=
+  (relativeMapEquiv X U S).trans
+    ((affineMapEquiv U.left S).trans (componentMapEquiv U.left S))
+
+private lemma pointComponentsEquiv_apply (X : Scheme.{u}) (U : X.ProEt)
+    [IsAffine U.left] (S : Profinite.{u})
+    (f : U ⟶ (profiniteToProEtOf X).obj S) (x : U.left) :
+    pointComponentsEquiv X U S f (ConnectedComponents.mk x) =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+        ((f.left ≫ Limits.pullback.fst _ _) x)).1 := by
+  change (affineMapEquiv U.left S (relativeMapEquiv X U S f)) x = _
+  exact affineMapEquiv_apply _ _ _ _
+
+private lemma profiniteProjection_natural (S T : Profinite.{u}) (b : S ⟶ T)
+    (x : profiniteToScheme.obj S) :
+    ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
+      (profiniteToScheme.map b x)).1 =
+    b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm x).1) := by
+  exact congrArg (fun g : C(profiniteToScheme.obj S, T) ↦ g x)
+    (absoluteProjection_natural b)
+
 private lemma pointComponentsEquiv_target (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] (S T : Profinite.{u}) (b : S ⟶ T)
     (f : U ⟶ (profiniteToProEtOf X).obj S) :
@@ -279,24 +394,36 @@ private lemma pointComponentsEquiv_target (X : Scheme.{u}) (U : X.ProEt)
       (relativeMapEquiv X U T (f ≫ (profiniteToProEtOf X).map b) x)).1 = _
   rw [relativeMapEquiv_target]
   exact profiniteProjection_natural S T b _
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private noncomputable def canonicalComponentArrow (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] :
     U ⟶ (profiniteToProEtOf X).obj (Profinite.of (ConnectedComponents U.left)) :=
   (pointComponentsEquiv X U _).symm (ContinuousMap.id _)
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private noncomputable def canonicalComponentArrow_terminal (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] :
     IsTerminal (CostructuredArrow.mk (S := (profiniteToProEtOf X).op)
       (canonicalComponentArrow X U).op) := by
-  sorry
--/
+  let T := Profinite.of (ConnectedComponents U.left)
+  refine IsTerminal.ofUniqueHom
+    (fun A ↦ CostructuredArrow.homMk
+      (ConcreteCategory.ofHom (pointComponentsEquiv X U A.left.unop A.hom.unop)).op ?_) ?_
+  · apply Quiver.Hom.unop_inj
+    change canonicalComponentArrow X U ≫ (profiniteToProEtOf X).map _ = A.hom.unop
+    apply (pointComponentsEquiv X U A.left.unop).injective
+    rw [pointComponentsEquiv_target]
+    simp only [canonicalComponentArrow, Equiv.apply_symm_apply]
+    rfl
+  · intro A f
+    apply CostructuredArrow.hom_ext
+    apply Quiver.Hom.unop_inj
+    have h := congrArg Quiver.Hom.unop (CostructuredArrow.w f)
+    change canonicalComponentArrow X U ≫ (profiniteToProEtOf X).map f.left.unop =
+      A.hom.unop at h
+    have h' := congrArg (pointComponentsEquiv X U A.left.unop) h
+    rw [pointComponentsEquiv_target] at h'
+    simp only [canonicalComponentArrow, Equiv.apply_symm_apply] at h'
+    exact ConcreteCategory.hom_ext _ _ (congrFun (congrArg DFunLike.coe h') ·)
 
 private noncomputable def kanComparison (X : Scheme.{u}) (E : Type u) [NormedField E] :
     (profiniteToProEtOf X).op.lan.obj (Profinite.continuousCoefficientRingObj E).obj ⟶
@@ -329,7 +456,51 @@ private lemma kanComparison_isIso (X : Scheme.{u}) (E : Type u) [NormedField E]
     (hp : (Functor.LeftExtension.mk P η).IsPointwiseLeftKanExtension)
     (hσ : η ≫ Functor.whiskerLeft (profiniteToProEtOf X).op σ =
       (comparisonAdjoint X E).hom) : IsIso (σ.app (Opposite.op U)) := by
-  sorry
+  let T := Profinite.of (ConnectedComponents U.left)
+  let q := canonicalComponentArrow X U
+  let a := η.app (Opposite.op T) ≫ P.map q.op
+  have hi' := (hp (Opposite.op U)).isIso_ι_app_of_isTerminal
+    (CostructuredArrow.mk (S := (profiniteToProEtOf X).op) q.op)
+    (canonicalComponentArrow_terminal X U)
+  have hi : IsIso a := hi'
+  let Q := ((sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+      (continuousCoefficientRingSheaf X E)).obj
+  have h : a ≫ σ.app (Opposite.op U) =
+      (comparisonAdjoint X E).hom.app (Opposite.op T) ≫ Q.map q.op := by
+    dsimp only [a]
+    rw [Category.assoc, σ.naturality]
+    exact congrArg (fun f ↦ f ≫ Q.map q.op)
+      (congr_app hσ (Opposite.op T))
+  have hq (x : U.left) : profiniteTestProjection X T (q.left x) = ConnectedComponents.mk x := by
+    have h := congrFun (congrArg DFunLike.coe
+      ((pointComponentsEquiv X U T).apply_symm_apply (ContinuousMap.id _)))
+      (ConnectedComponents.mk x)
+    rw [pointComponentsEquiv_apply] at h
+    exact h
+  have hbij : Function.Bijective
+      ((comparisonAdjoint X E).hom.app (Opposite.op T) ≫ Q.map q.op) := by
+    constructor
+    · intro f g he
+      apply ULift.ext
+      ext t
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe t
+      have h := congrArg (fun f ↦ f.down x) he
+      change f.down (profiniteTestProjection X T (q.left x)) =
+        g.down (profiniteTestProjection X T (q.left x)) at h
+      simpa only [hq] using h
+    · intro f
+      refine ⟨ULift.up ⟨f.down.continuous.connectedComponentsLift,
+        f.down.continuous.connectedComponentsLift_continuous⟩, ?_⟩
+      apply ULift.ext
+      ext x
+      change f.down.continuous.connectedComponentsLift
+        (profiniteTestProjection X T (q.left x)) = f.down x
+      rw [hq, Continuous.connectedComponentsLift_apply_coe]
+  have : IsIso (a ≫ σ.app (Opposite.op U)) := by
+    rw [h]
+    exact (ConcreteCategory.isIso_iff_bijective _).mpr hbij
+  exact IsIso.of_isIso_comp_left a _
 
 private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type u) [NormedField E]
     [TotallyDisconnectedSpace E] (U : X.ProEt) [IsAffine U.left]
@@ -482,23 +653,6 @@ theorem existsUnique_condensedFieldContinuousMapIso
   have : TotallyDisconnectedSpace E :=
     e₀.isEmbedding.isTotallyDisconnected_range.mp
       (isTotallyDisconnected_of_totallyDisconnectedSpace _)
-  have := comparison_isMonHom X E
-  have := isIso_of_affine_weaklyContractible X (comparison X E) (fun U hU wU ↦ by
-    let _ := hU
-    exact comparison_basis_isIso X E U wU)
-  let e := Mon.mkIso' (asIso (comparison X E))
-  refine ⟨e, fun S f ↦ comparison_eq X E S f, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply Mon.Hom.ext
-  apply ((pointUpperStarLowerStarAdjunction.comp
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))).homEquiv _ _).injective
-  ext1
-  apply NatTrans.ext
-  funext S
-  apply ConcreteCategory.hom_ext
-  intro f
-  cases f with
-  | up f => exact (he' S.unop f).trans (comparison_eq X E S.unop f).symm
+  exact existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected E X
 
 end AlgebraicGeometry.ProEtale
