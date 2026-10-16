@@ -22,7 +22,8 @@
  },
  "stmt_deps": [
   "def-galois-finite-limits-colimits",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-finite-reedy-localization"
  ],
  "proof": [
   {
@@ -237,5 +238,39 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-81dcf8d77 (reviewer sub-agent of L); spot-checked: Read all mathematics and checked every step against Hovey, Cisinski, HTT, and HA; no mathematical gap, duplicate, cycle, or target weakening found. Corrected missing creation author/date in all three new nodes. Whole corrected JSON files are under fixes/dag/nodes/sec-six-functors/; concrete source, hypothesis, route, and edge-case checks are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-545f1953f",
+  "group": "NK",
+  "result": "pass",
+  "note": "Audited node, dependencies, source, Lean declarations, docstrings, edge cases, report sections, and universes. scompile.py reproduced clean sandbox and library compilation with no errors or warnings; review.md records all checks."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointedModelStability",
+  "declaration": "HomotopicalAlgebra.PointedModel.pointed_model_category_stability",
+  "declarations": [
+   "HomotopicalAlgebra.PointedModel.spanInSquare",
+   "HomotopicalAlgebra.PointedModel.cospanInSquare",
+   "HomotopicalAlgebra.PointedModel.squareCocone",
+   "HomotopicalAlgebra.PointedModel.squareCone",
+   "HomotopicalAlgebra.PointedModel.squareShape",
+   "HomotopicalAlgebra.PointedModel.squareEvaluation",
+   "HomotopicalAlgebra.PointedModel.IsPushoutSquare",
+   "HomotopicalAlgebra.PointedModel.IsPullbackSquare",
+   "HomotopicalAlgebra.PointedModel.IsAdjunction",
+   "HomotopicalAlgebra.PointedModel.HasSuspensionLoop",
+   "HomotopicalAlgebra.PointedModel.HasOrdinaryLocalizationComparison",
+   "HomotopicalAlgebra.PointedModel.ComputesCofibrantPushouts",
+   "HomotopicalAlgebra.PointedModel.pointed_model_category_stability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointedModelStability.lean",
+  "statement": "theorem pointed_model_category_stability (M : Type u) [Category.{v} M] [HasLimits M] [HasColimits M] [HasZeroObject M] [ModelCategory M] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] (C : SSet.{max u v t}) (q : largeNerve.{u, v, t} M ⟶ C) (hq : FiniteReedy.IsLocalization (weakEquivalences M) q) : SSet.Enhanced.IsInitial C (object q (0 : M)) ∧ SSet.Enhanced.IsTerminal C (object q (0 : M)) ∧ (∀ (K : SSet.{max u v t}) (_ : K.Finite) (F : K ⟶ C), ∃ s : (SSet.Enhanced.coneCategory F) _⦋0⦌, SSet.Enhanced.IsLimiting F s) ∧ (∀ (K : SSet.{max u v t}) (_ : K.Finite) (F : K ⟶ C), ∃ s : (SSet.Enhanced.coconeCategory F) _⦋0⦌, SSet.Enhanced.IsColimiting F s) ∧ HasOrdinaryLocalizationComparison M q ∧ ComputesCofibrantPushouts M q ∧ ∃ suspension loop : C ⟶ C, HasSuspensionLoop (object q (0 : M)) suspension loop ∧ ((SSet.hoFunctor.map suspension).toFunctor.IsEquivalence → ∀ s : squareShape ⟶ C, IsPushoutSquare s ↔ IsPullbackSquare s)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the published full coherent localization universal property from lem-coef-finite-reedy-localization, added as a grounded statement dependency. The localization is supplied as in the node, rather than asserted to exist. All helper definitions belong to this item: exact ordered-square restrictions, comma universal adjunction, natural suspension/loop squares, canonical ordinary comparison and cofibrant pushout computation. No other DAG node is stated."
  }
 }
