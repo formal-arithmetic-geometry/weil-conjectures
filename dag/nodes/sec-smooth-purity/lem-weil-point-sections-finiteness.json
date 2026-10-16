@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, the three finite/integral/rational evaluation equivalences: their landing in the stated finite-cohomology target categories",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections over the point of constructible complexes have finite cohomology",
@@ -26,20 +26,190 @@
   "def-weil-point-fg-complete-complexes",
   "def-weil-point-fd-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $A_{E,n}$ is finite: by the coefficient DVR statement, $\\mathcal O_E/(\\varpi_E)$ is finite; choose a finite set $R\\subset\\mathcal O_E$ of residue representatives. Repeatedly write $x=r_0+\\varpi_E x_1$, $x_1=r_1+\\varpi_E x_2$, and so on, with $r_j\\in R$. Modulo $\\varpi_E^n$, every $x$ is therefore represented by $\\sum_{j=0}^{n-1}r_j\\varpi_E^j$, so at most $|R|^n$ classes occur. For clause (1), take $F=\\mathcal H^i(K)$. By finite-torsion constructibility, only finitely many such sheaves are nonzero and each is intrinsically constructible. The finite-ring constructible-sheaf origin theorem supplies a constructible etale $A_{E,n}$-module sheaf $G$ with $F\\simeq\\nu_s^*G$. On $s=\\operatorname{Spec}k$ any nonempty locally closed subscheme is $s$ itself: an open subset containing its sole point is all of $s$, and a nonzero quotient of its field $k$ is $k$. Thus the etale constructibility definition and the finite-locally-constant module-values theorem show that $G_{\\mathrm{id}_s}$ is finite. The algebraically closed etale-point theorem identifies this stalk with $G(s)$. The comparison unit, evaluated at the final etale object, gives $G(s)\\simeq(\\nu_{s,*}\\nu_s^*G)(s)=(\\nu_s^*G)(s)=F(s)$, where the equality is the definition of comparison direct image. Exactness of pro-etale sections gives $H^i(\\Gamma(s,K))=F(s)$. These are finite and vanish outside the finite cohomological support of $K$, proving (1).",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-point-finite-cohomology-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "finite constructible etale origin; algebraically closed point; this argument realizes clause (1) of the blueprint evaluation assertion"
+   }
+  },
+  {
+   "text": "For the integral clauses put $A=\\mathcal O_E$, $\\pi=\\varpi_E$ and $I=(\\pi)$. The coefficient lemmas give that $A$ is a discrete valuation ring with finite residue field, that $E$ is complete for its nonarchimedean absolute value, and that $0<|\\pi|_E<1$. In particular $A$ is Noetherian, since each ideal is principal. We also have $A\\simeq\\varprojlim_n A/\\pi^n$: choose lifts $x_n\\in A$ of compatible residues. For $m\\geq n$, $x_m-x_n\\in\\pi^nA$, hence $|x_m-x_n|_E\\leq|\\pi|_E^n\\to0$. Completeness gives a limit $x\\in E$; the ultrametric inequality gives $|x|_E\\leq1$ and $|x-x_n|_E\\leq|\\pi|_E^n$, so $x\\in A$ has all the prescribed residues. Here $\\pi^nA=\\{y\\in E:|y|_E\\leq|\\pi|_E^n\\}$ follows by dividing by $\\pi^n$. Injectivity follows because $|x|_E\\leq|\\pi|_E^n$ for all $n$ forces $x=0$. This verifies the ring-completeness hypothesis needed below.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-complete",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+    "place": "coefficient datum; elementary completeness argument from the three cited coefficient statements"
+   }
+  },
+  {
+   "text": "Let $K\\in D^b_c(s,A)$ and let $K_n$ denote its derived reductions, regarded as completed-coefficient module complexes by restriction of scalars. Put $M=\\Gamma(s,K)$ and $M_n=\\Gamma(s,K_n)$, viewed as $A$-complexes through the canonical coefficient maps. Choose the interval $[r,t]$ containing the cohomological supports of every $K_n$, as required by the integral constructibility definition. Clause (1) and exact sections show that all $M_n$ have finite cohomology in that same interval. The sheaf-derived completeness definition supplies the Roos triangle $K\\to\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\to K[1]$. Countable products of completed-coefficient sheaves are exact and sectionwise, so the derived product theorem represents these products by termwise products. Exact sections preserve this triangle, its products and the transition map, giving $M\\to\\prod_nM_n\\xrightarrow{1-s}\\prod_nM_n\\to M[1]$ in $D(A)$. In the module category, countable products are exact: kernels and images are coordinatewise, and a product of surjections is surjective by choosing preimages coordinatewise. Thus the same derived product theorem gives $H^i(\\prod_nM_n)=\\prod_nH^i(M_n)$. The long exact sequence of the displayed triangle shows $H^i(M)=0$ for $i<r$ or $i>t+1$. Moreover, for any $f\\in I$ and any $n$, $f^n$ kills $M_n$, since the latter is an $A/\\pi^n$-complex. The nilpotent-torsion derived-limit theorem therefore makes $M$ derived $I$-complete as an $A$-complex. Neither transition-surjectivity on cohomology nor a normalized tower over the quotient rings is used here.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-nilpotent-torsion-derived-limit-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091W, lemma-naive-derived-completion; Roos triangle and elementary cohomological bounds from products"
+   }
+  },
+  {
+   "text": "Write $B=\\widehat{\\mathcal O}_{E,s}$. The two-term free $A$-complex $[A\\xrightarrow{\\pi}A]$, in degrees $[-1,0]$, resolves $A/\\pi$, because $A$ is a domain and $\\pi\\ne0$. The completed-constant-sheaf reduction theorem, applied to this finite free resolution, says that $Q=[B\\xrightarrow{\\pi}B]\\to(A/\\pi)_s$ is a quasi-isomorphism. Take a K-flat resolution $P\\to K$ as allowed in the derived-reduction definition. Tensoring this quasi-isomorphism with $P$ stays a quasi-isomorphism by the K-flat definition (its cone is the tensor of $P$ with an acyclic cone). But $P\\otimes_BQ$ is the cone of $\\pi:P\\to P$. Thus after restriction of scalars there is a distinguished triangle $K\\xrightarrow{\\pi}K\\to K_1\\to K[1]$. Applying exact sections gives the triangle $M\\xrightarrow{\\pi}M\\to M_1\\to M[1]$ in $D(A)$. Its long exact sequence induces an injection $H^i(M)/\\pi H^i(M)\\hookrightarrow H^i(M_1)$ for every $i$, so this quotient is a finite set by step 1, and hence is finitely generated over $A/\\pi$ (its finitely many elements form a generating set). This argument only needs the underlying $A$-linear cone triangle; it makes no assertion about derived reduction over $A/\\pi^{n+1}$.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-integral-derived-reduction",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093M, lemma-completion-flat, finite free resolution clause; K-flat computation of the principal reduction"
+   }
+  },
+  {
+   "text": "Each cohomology module $N=H^i(M)$ is derived $I$-complete. Indeed, for $f\\in I$, completeness of $M$ says that the fibre of $1-s_f:\\prod_{j\\geq1}M\\to\\prod_{j\\geq1}M$ is zero, where $s_f$ is the shift with transitions multiplication by $f$. Hence $1-s_f$ is an isomorphism; on cohomology it is the bijection $1-s_f:\\prod_jH^i(M)\\to\\prod_jH^i(M)$, by the exact-products formula used in step 3. The Roos triangle for the degree-zero module $N$ then has zero cohomology in every degree (its only possible cohomology is the kernel and cokernel of this bijection). Its derived limit is zero, which is precisely derived completeness of $N$. Apply the new general module-finiteness lemma with $A$, $I=(\\pi)$ and $N$: step 2 supplies the complete Noetherian ring, this argument supplies derived completeness, and step 4 supplies the finite residue. It follows that every $H^i(M)$ is finitely generated over $A$. Combined with boundedness and derived completeness from step 3 this is exactly $M\\in D^b_{\\mathrm{fg}}(A)$, proving (2).",
+   "uses": [
+    "def-weil-point-derived-complete-module-complex",
+    "def-weil-derived-limit",
+    "lem-weil-derived-limit-existence",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-derived-complete-module-finite",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P, lemma-hom-from-Af, equivalence (3)-(4) written directly via Roos products; Tag 09BA, lemma-derived-complete-finite"
+   }
+  },
+  {
+   "text": "Finally $E=A[1/\\pi]$: the discrete-valuation coefficient lemma writes every nonzero $x\\in E$ as $u\\pi^m$ with $u\\in A^\\times$ and $m\\in\\mathbf Z$, and the inclusion $A\\subset E$ is injective. Thus the localization-flatness theorem makes $E$ flat over $A$. By the flat-tensor exactness theorem, termwise tensoring any representing complex of $M$ with $E$ preserves kernels, images and their quotient sequences. Consequently $H^i(M\\otimes_AE)\\simeq H^i(M)\\otimes_AE$ for every $i$. The finitely many generators of $H^i(M)$ span its scalar extension over $E$; the cohomology still vanishes outside the finite interval from step 3. This is the defining condition for $D^b_{\\mathrm{fd}}(E)$ and proves (3).",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-point-fd-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, localization flatness; Tag 00HD, lemma-flat; cohomology calculation written from exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-derived-reduction",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-point-finite-cohomology-complexes",
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-complete-module-finite",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "landing assertions in the three evaluation equivalences; supplied proof uses Stacks 091W, 093M, 091P, 09BA and 00HD as indicated in the steps"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "On the pro-etale site of an algebraically closed field, sections of a bounded constructible complex have finite cohomology; integral derived complete constructible complexes have finitely generated cohomology",
+   "results": "Hits include Condensed.finFree, SheafOfModules.IsFiniteType and unrelated finite-presentation algebra; no statement of all three clauses.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, Module.Finite",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rln 'proetale\\|ProEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "only AlgebraicGeometry/Sites/Proetale.lean and Sites/ElladicCohomology.lean; no constructible sheaves, no statement about sections over a point",
-   "date": "2026-10-09",
+   "query": "constructible|derivedComplete",
+   "results": "0 hits in Mathlib/AlgebraicGeometry/Sites.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a constructible complex on an algebraically closed point have finite cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the terminal object of the proetale site of an algebraically closed field sends a finite locally constant module sheaf to a finite module",
+   "results": "Condensed discrete-module functors and explicit constructions, not this geometric statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt|ellAdicSheaf",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean define the site and Z_l-valued sheaf, with no constructible-cohomology finiteness theorem.",
+   "date": "2026-10-16",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +229,99 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-point-sections-finiteness",
+  "worker": "stage1",
+  "summary": "Proved finite torsion cohomology using etale origin and exact sections; transferred the integral Roos triangle to A-module sections, obtained bounded derived completeness, used the principal-reduction cone and the general 09BA finiteness criterion on cohomology, and proved rational finiteness by flat scalar extension. One genuinely general algebra node was added; no statement was changed.",
+  "blueprint": "Realizes the landing assertions of all three finite/integral/rational evaluation equivalences in the statement of def-weil-finite-coefficient-point; the unit has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Choose a K-flat representative to compute the principal reduction cone."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Read bounds and residue cohomology from the displayed distinguished triangles."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Compute countable derived products by termwise products in exact-product module categories."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Use the nonarchimedean absolute value to verify completeness of the valuation ring."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Use analytic completeness of the finite extension to construct the inverse-limit element."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Use the coefficient DVR and fraction-field facts, not a geometric proof route."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Realize the principal coefficient reduction by its two-term free resolution."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Convert finite local module models into finite geometric stalks."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Transfer a constructible finite-ring module sheaf to the etale site; the unit has no comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Compute cohomology after scalar extension by exactness."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Use flatness of the fraction-field localization."
+   },
+   {
+    "node": "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+    "why": "Pass from the torsion-valued reduction tower to derived completeness in D(A)."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Identify etale sections over Spec k with the identity stalk."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic homological algebra tool used with its stated hypotheses; the unit provides no corresponding theorem."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Identify sections of a finite-ring etale module sheaf with sections of its pro-etale pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-39dcf3079",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-39dcf3079 (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, unit/chapter route and source passages. All six mathematical steps and the 09BA specialization are valid; no duplicate, circularity or target weakening found. Repaired incomplete new-node creation/audit metadata in fixes/. Detailed source, coefficient-category, edge-case and accepted tool-use checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
