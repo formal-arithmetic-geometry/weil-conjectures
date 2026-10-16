@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1288**, closure **24**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1280**, closure **16**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -44,23 +44,23 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1094 | 21 |
-| WeilConjectures | 194 | 3 |
+| Sheaf | 1088 | 15 |
+| WeilConjectures | 192 | 1 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2285 | 747 | 1538 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2239 | 745 | 1494 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 22 | 1959 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2288 | 742 | 1546 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2242 | 740 | 1502 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1982 | 16 | 1966 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3639 |
+| proved | 3649 |
 | decomposed | 52 |
-| moved | 4022 |
-| pruned | 132 |
+| moved | 4027 |
+| pruned | 133 |
 | other | 609 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
@@ -70,30 +70,30 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 121 | 119 | 86 | 33 | 61/121 (50.4%) |
 | A3 | 125 | 121 | 81 | 40 | 56/125 (44.8%) |
-| A4 | 74 | 78 | 47 | 31 | 37/74 (50.0%) |
-| B2 | 128 | 134 | 86 | 48 | 54/128 (42.2%) |
+| A4 | 75 | 79 | 50 | 29 | 38/75 (50.7%) |
+| B2 | 129 | 135 | 86 | 49 | 54/129 (41.9%) |
 | B3 | 146 | 153 | 91 | 62 | 63/146 (43.2%) |
-| B4 | 67 | 70 | 47 | 23 | 32/67 (47.8%) |
+| B4 | 68 | 71 | 47 | 24 | 32/68 (47.1%) |
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
-| C2 | 125 | 120 | 84 | 36 | 57/125 (45.6%) |
+| C2 | 126 | 121 | 84 | 37 | 57/126 (45.2%) |
 | C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
 | C4 | 56 | 57 | 34 | 23 | 22/56 (39.3%) |
 | D2 | 139 | 139 | 89 | 50 | 61/139 (43.9%) |
-| D3 | 109 | 120 | 70 | 50 | 50/109 (45.9%) |
-| D4 | 68 | 65 | 47 | 18 | 28/68 (41.2%) |
-| E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
-| E2 | 124 | 119 | 85 | 34 | 60/124 (48.4%) |
+| D3 | 110 | 121 | 71 | 50 | 51/110 (46.4%) |
+| D4 | 69 | 66 | 47 | 19 | 28/69 (40.6%) |
+| E1 | 161 | 190 | 106 | 84 | 81/161 (50.3%) |
+| E2 | 125 | 120 | 85 | 35 | 60/125 (48.0%) |
 | E3 | 114 | 117 | 95 | 22 | 59/114 (51.8%) |
-| E4 | 50 | 57 | 27 | 30 | 19/50 (38.0%) |
+| E4 | 51 | 58 | 27 | 31 | 19/51 (37.3%) |
 | F1 | 145 | 151 | 107 | 44 | 71/145 (49.0%) |
-| F2 | 148 | 157 | 98 | 59 | 61/148 (41.2%) |
-| F3 | 99 | 100 | 63 | 37 | 43/99 (43.4%) |
-| F4 | 62 | 57 | 42 | 15 | 28/62 (45.2%) |
-| G1 | 141 | 141 | 112 | 29 | 75/141 (53.2%) |
-| G2 | 139 | 137 | 91 | 46 | 63/139 (45.3%) |
-| G3 | 102 | 105 | 66 | 39 | 45/102 (44.1%) |
+| F2 | 149 | 158 | 99 | 59 | 62/149 (41.6%) |
+| F3 | 100 | 101 | 63 | 38 | 43/100 (43.0%) |
+| F4 | 63 | 59 | 42 | 17 | 28/63 (44.4%) |
+| G1 | 142 | 142 | 114 | 28 | 76/142 (53.5%) |
+| G2 | 140 | 138 | 91 | 47 | 63/140 (45.0%) |
+| G3 | 103 | 106 | 66 | 40 | 45/103 (43.7%) |
 | G4 | 58 | 50 | 31 | 19 | 20/58 (34.5%) |
-| H1 | 135 | 132 | 106 | 26 | 74/135 (54.8%) |
+| H1 | 136 | 133 | 106 | 27 | 74/136 (54.4%) |
 | H2 | 114 | 111 | 92 | 19 | 66/114 (57.9%) |
 | H3 | 121 | 136 | 97 | 39 | 67/121 (55.4%) |
 | H4 | 59 | 56 | 42 | 14 | 31/59 (52.5%) |
@@ -177,21 +177,17 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | C3 |
 | Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | D2 |
 | Sheaf.Paper.CondensedFiniteLocalSubmodules | 8 | 1 | C1 |
-| Sheaf.Paper.CondensedQbarScalarPullback | 8 | 1 | C2 |
-| Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | E1 |
+| Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks | 9 | 1 | A4 |
+| Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin | 9 | 1 | D2 |
 | Sheaf.Paper.CondensedQbarFieldCoefficientSquare | 10 | 1 | C4 |
-| Sheaf.Paper.IntegralResidueTensorGeometry | 10 | 1 | A4 |
-| Sheaf.Paper.ProEtaleLisseOrigin | 10 | 1 | D3 |
-| Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum | 11 | 1 | D4 |
-| Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk | 11 | 1 | E2 |
-| Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf | 11 | 1 | E4 |
-| Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.IntegralResiduePullSquare | 11 | 1 | B2 |
-| Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk | 12 | 1 | F3 |
-| Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
-| Sheaf.Paper.ProEtaleLocallyConstantSheaf | 12 | 2 | F4 |
-| WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange | 12 | 1 | G1 |
-| WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint | 12 | 1 | G2 |
+| Sheaf.Paper.IntegralResidueScalarRouteModel | 11 | 1 | A2 |
+| Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | B4 |
+| Sheaf.Paper.InverseImageModuleFlat | 12 | 1 | C2 |
+| Sheaf.Paper.ProEtaleUniformModelEtaleCover | 13 | 1 | D3 |
+| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit | 13 | 1 | — |
+| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare | 13 | 1 | — |
+| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | B3 |
 
 Modules pruned since the imports baseline:
 
