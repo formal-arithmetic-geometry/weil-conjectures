@@ -3,53 +3,275 @@
  "blueprint": {
   "is": "det-nagata-density-normalization-setup",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The schematic closure inside a Noetherian compactification",
- "statement": "Let $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$ be a compactification with\n$\\overline X$ Noetherian, let $i:Z\\hookrightarrow\\overline X$ be the\nscheme-theoretic image of $j$, and put $V=\\overline X\\setminus Z$ with open\nimmersion $j_V:V\\hookrightarrow\\overline X$. Then:\n\n1. $j$ factors as $j=i\\circ j_Z$ with $j_Z:X\\hookrightarrow Z$ a\n   quasi-compact open immersion, and $j_Z$ is scheme-theoretically dense;\n1. $\\overline X$ and $Z$ are quasi-compact and quasi-separated, and $V$ is a\n   quasi-compact open of $\\overline X$ whose closed complement is $Z$;\n1. $j(X)\\cap V=\\varnothing$, so $X\\times_{\\overline X}V=\\varnothing$ and\n   $X\\times_{\\overline X}Z=X$ (via $j_Z$);\n1. $p\\circ i:Z\\to S$ is proper.",
+ "statement": "Let $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$ be a compactification [def-nagata-compactification] with\n$\\overline X$ Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact), let $i:Z\\hookrightarrow\\overline X$ be the\nscheme-theoretic image of $j$ [def-nagata-scheme-theoretic-image], and put $V=\\overline X\\setminus Z$ with open\nimmersion $j_V:V\\hookrightarrow\\overline X$. Then:\n\n1. $j$ factors as $j=i\\circ j_Z$ with $j_Z:X\\hookrightarrow Z$ a\n   quasi-compact open immersion, and $j_Z$ is scheme-theoretically dense;\n1. $\\overline X$ and $Z$ are quasi-compact and quasi-separated, and $V$ is a\n   quasi-compact open of $\\overline X$ whose closed complement is $Z$;\n1. $j(X)\\cap V=\\varnothing$, so $X\\times_{\\overline X}V=\\varnothing$ and\n   $X\\times_{\\overline X}Z=X$ (via $j_Z$);\n1. $p\\circ i:Z\\to S$ is proper.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.md",
   "place": "node det-nagata-density-normalization-setup, order None"
  },
  "stmt_deps": [
-  "def-nagata-compactification"
+  "def-nagata-compactification",
+  "pqf-def-locnoeth",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
  ],
  "proof": [
   {
-   "text": "A Noetherian scheme has a Noetherian underlying space, so every open subset\nof $\\overline X$ is quasi-compact; in particular $\\overline X$ is\nquasi-separated (intersections of affine opens are quasi-compact), $j$ is\nquasi-compact, and $V$ is quasi-compact. Closed subschemes of Noetherian\nschemes are Noetherian, so the same holds for $Z$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Since $j$ is a quasi-compact immersion into the quasi-separated scheme\n$\\overline X$, [lemma-nagata-immersion-open-in-scheme-image] shows that $j$\nfactors through its scheme-theoretic image $Z$ as an open immersion\n$j_Z:X\\to Z$ which is scheme-theoretically dense; it is quasi-compact\nbecause $Z$ is Noetherian. This proves (1) and (2).",
+   "text": "By [def-nagata-compactification], $j$ is an open immersion and $p$ is proper. Use only these clauses of the compactification definition, as in the current blueprint. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open $W$ of the Noetherian scheme $\\overline X$ is quasi-compact. In particular $\\overline X$ itself is quasi-compact. The intersection of any two affine opens is open, hence quasi-compact, so [lem-weil-pbc-quasi-separated-affine-cover-criterion](2), applied to the affine open cover, makes $\\overline X$ quasi-separated. For an affine open $A\\subseteq\\overline X$, $j^{-1}(A)$ is, via the open-subscheme identification of [def-weil-open-immersion], the open $j(X)\\cap A$ of $\\overline X$, and is therefore quasi-compact. For $j_V$, its inverse image $j_V^{-1}(A)$ identifies with $V\\cap A$, which is open in $\\overline X$ and hence quasi-compact by the same cited Noetherian-open statement. Thus $j$ and $j_V$ are quasi-compact morphisms by [def-weil-finite-type-morphism]; taking $W=V$ also proves that $V$ is quasi-compact as a space.",
    "uses": [
-    "lemma-nagata-immersion-open-in-scheme-image"
+    "def-nagata-compactification",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OV (definition-noetherian), 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); blueprint proof, first paragraph; affine-intersection criterion: Schemes Tag 01KO (lemma-characterize-quasi-separated)"
+   }
   },
   {
-   "text": "For (3), $j$ factors through the closed subscheme $Z$, so the underlying\nset $j(X)$ lies in $Z$ and misses $V$. Hence $X\\times_{\\overline X}V$ is\nempty. The base change of the closed immersion $i$ along $j=i\\circ j_Z$ is\nthe closed immersion $X\\times_{\\overline X}Z\\to X$; since $j$ factors through\n$i$ and $i$ is a monomorphism, this base change is an isomorphism, i.e.\n$X\\times_{\\overline X}Z=X$ with projection to $Z$ equal to $j_Z$.",
-   "uses": [],
-   "elementary": null
+   "text": "An open immersion is an immersion in [def-weil-closed-immersion]: take the identity closed immersion of $X$ (the affine quotient by the zero ideal), followed by $j$. Step 1 supplies the quasi-compactness required by [lemma-nagata-immersion-open-in-scheme-image]. Applying that statement to $j$ gives a quasi-compact open immersion $j_Z:X\\to Z$ with scheme-theoretically dense image. The canonical image factorization equality of [def-nagata-scheme-image-factor] gives $i\\circ j_Z=j$. This proves (1). No reducedness hypothesis is used.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-nagata-scheme-image-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG (lemma-quasi-compact-immersion), quasi-compact case; blueprint proof, second paragraph"
+   }
   },
   {
-   "text": "For (4), $i$ is a closed immersion, hence proper, and $p$ is proper, so\n$p\\circ i$ is proper.",
-   "uses": [],
-   "elementary": null
+   "text": "By [def-weil-closed-immersion], $i$ identifies the underlying space of $Z$ with a closed subset $F$ of $\\overline X$. Every open $W$ of $Z$ has the form $F\\cap O$ for an open $O$ of $\\overline X$. The open $O$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and $F\\cap O$ is closed in $O$. To see its quasi-compactness directly, extend a relative open cover of $F\\cap O$ to open subsets of $O$ and add $O\\setminus F$; a finite subcover of $O$ restricts to a finite subcover of $F\\cap O$. Taking $W=Z$ proves quasi-compactness of $Z$. Taking $W$ to be the intersection of any two affine opens of $Z$ and applying [lem-weil-pbc-quasi-separated-affine-cover-criterion](2) proves that $Z$ is quasi-separated. Finally $V=\\overline X\\setminus F$ is open and its complement is precisely the underlying closed subset of the given closed subscheme $Z$. Together with step 1 this proves (2); the argument retains the given scheme structure on $Z$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.proof.md",
+    "place": "First paragraph (qcqs assertions), with the elementary closed-subspace finite-cover argument expanded instead of asserting that closed subschemes are Noetherian"
+   }
+  },
+  {
+   "text": "By the equality $j=i\\circ j_Z$ from step 2, $j(X)$ is contained in $F=i(Z)$ and is disjoint from $V=\\overline X\\setminus F$. If the scheme $P=X\\times_{\\overline X}V$ of [def-pc-fibre-product] had a point, its two projections would send that point to points of $X$ and $V$ with the same image in $\\overline X$, contradicting this disjointness. Hence $P$ has no points and is the empty scheme (the sheaf on the empty space is unique).",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.proof.md",
+    "place": "Third paragraph, first two sentences: disjointness and the empty fibre product"
+   }
+  },
+  {
+   "text": "A closed immersion $i$ is a monomorphism by the affine quotient description in [def-weil-closed-immersion]. Indeed, let $u,v:T\\to Z$ satisfy $i\\circ u=i\\circ v$. For each affine open $U=\\operatorname{Spec}A$ of $\\overline X$, the common inverse image of $U$ in $T$ is open; cover it by affine opens $\\operatorname{Spec}B$. Both restricted maps land in $i^{-1}(U)=\\operatorname{Spec}(A/I)$, and the induced ring maps $A/I\\to B$ agree because their composites with the surjection $A\\to A/I$ agree. Thus $u$ and $v$ agree on an open cover of $T$, so $u=v$. Put $Q=X\\times_{\\overline X}Z$ with projections $a:Q\\to X$ and $b:Q\\to Z$. By [def-pc-fibre-product] the pair $(\\mathrm{id}_X,j_Z)$ defines $s:X\\to Q$, and $a\\circ s=\\mathrm{id}_X$. The pullback equality and step 2 give $i\\circ b=j\\circ a=i\\circ j_Z\\circ a$, so monicity gives $b=j_Z\\circ a$. The two projections of $s\\circ a$ are now $a$ and $b$, so pullback uniqueness gives $s\\circ a=\\mathrm{id}_Q$. Thus $a$ is an isomorphism with inverse $s$, and its projection to $Z$ is $j_Z$. This is the canonical identification $X\\times_{\\overline X}Z\\simeq X$ in (3).",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.proof.md",
+    "place": "Third paragraph, last two sentences: explicit inverse to the base-change projection"
+   }
+  },
+  {
+   "text": "The compactification hypothesis gives properness of $p$ by [def-nagata-compactification], and $i$ is the given closed immersion. Apply clause (b) of [lem-weil-pbc-closed-immersion-proper] with $f=p$ to conclude that $p\\circ i:Z\\to S$ is proper, proving (4).",
+   "uses": [
+    "def-nagata-compactification",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5 (lemma-closed-immersion-proper) and 01W3 (lemma-composition-proper); blueprint proof, fourth paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-immersion-open-in-scheme-image"
+  "def-nagata-compactification",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-nagata-scheme-image-factor",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-proper"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-setup.proof.md",
+  "place": "Four paragraphs of the current blueprint proof, with hypotheses checked against Stacks Tags 01OV, 01OW, 01OZ, 01KO, 01RG, 01W5 and 01W3"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toImage|scheme.?theoretic.?image|IsDominantToImage",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "subdirectory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.toImage, IsOpenImmersion, IsQuasiCompact, IsDominant",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Scheme.Hom.toImage'",
+    "top": [],
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle did not recognize Scheme.Hom.toImage; this is not negative evidence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian scheme open subsets are quasi-compact and closed subschemes are Noetherian",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsNoetherian.noetherianSpace",
+     "AlgebraicGeometry.IsNoetherian.toCompactSpace",
+     "TopologicalSpace.noetherianSpace_iff_opens",
+     "AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian",
+     "AlgebraicGeometry.isNoetherian_iff",
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion",
+     "AlgebraicGeometry.IsLocallyNoetherian.mk"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; hits cover individual facts already represented by existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme theoretic image of a quasi-compact immersion into a Noetherian scheme factors as a quasi-compact open immersion with dense image",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsImmersion.instToImage",
+     "AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder",
+     "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; hits cover individual facts already represented by existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "scheme.theoretic.image|toImage|IsDominant",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+     "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+     "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean"
+    ],
+    "subdirectory": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; hits cover individual facts already represented by existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsClosedImmersion",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instIsClosedImmersionIrreducibleComponentι"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; hits cover individual facts already represented by existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "schematic closure of an open immersion in a Noetherian compactification is a quasi-compact quasi-separated proper scheme and has the same open subscheme",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsAffineOpen.isCompact",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; hits cover individual facts already represented by existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion j into a Noetherian scheme Y, the canonical morphism to its scheme theoretic image is an open immersion, its image is scheme theoretically dominant, and the image is proper over the base when Y is proper",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion",
+     "AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.IsImmersion.instToImage",
+     "AlgebraicGeometry.Scheme.Hom.opensRange",
+     "AlgebraicGeometry.instIsDominantιCoborderRange"
+    ]
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; the returned open-immersion and Noetherian instances are individual inputs already represented by existing nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -66,5 +288,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-nagata-density-normalization"
+ "unit": "sk-lem-nagata-density-normalization",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-nagata-density-normalization-setup",
+  "worker": "stage1",
+  "summary": "Kept all four clauses and added definition references. No new nodes: reused the existing Noetherian-open, affine-intersection criterion, image-factorization, quasi-compact-immersion and closed-immersion/properness nodes. Explicitly derived quasi-compactness of j from Noetherianity, so the current weaker compactification convention suffices. Expanded qcqs of Z by a closed-subspace cover argument and the fibre-product isomorphism by its inverse. Checked all cited statements and wrote verbatim citations. No matching project declaration covers the whole item. Second reading expanded the complement inverse-image and closed-immersion monomorphism arguments, corrected the invalid-query verdict, and recorded an independent LeanFinder search.",
+  "blueprint": "Steps 1 and 3 realize the first paragraph; step 2 realizes the second; steps 4 and 5 realize the third; step 6 realizes the fourth paragraph of det-nagata-density-normalization-setup.proof.md. Same-as searches for schematic closure, Noetherian compactification, and scheme-theoretic image found no other node stating all four clauses.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, the report, the unit sk-lem-nagata-density-normalization, the current blueprint statement and proof (main-20261015), and the statement plus any blueprint_update of all 14 cited nodes. The statement matches the blueprint word for word in all four clauses. It only adds references and the gloss 'Noetherian = locally Noetherian + quasi-compact' (Stacks 01OV). Nothing is weakened and nothing is assumed about S. The current compactification definition no longer requires j to be quasi-compact; step 1 proves that from Noetherianity (lem-weil-pbc-noetherian-open-subscheme-noetherian plus the affine-cover criterion (2), Stacks 01KO). Step 2: lemma-nagata-immersion-open-in-scheme-image needs only a quasi-compact immersion (checked against Stacks 01RG, morphisms.tex 1139); it is on route through sk-lem-nagata-sketch-closure, and the factor update gives i∘j_Z=j. Step 3: the closed-in-quasi-compact cover argument and the criterion (2) make Z qcqs. Step 4 (empty product by points) and step 5 (monicity of a closed immersion from the affine-quotient description, then the inverse s=(id,j_Z) with both composites checked) are genuinely elementary. Step 6: closed-immersion-proper (b) is a Mathlib leaf, so it is a tool and no tool_uses entry is needed. There are no new nodes; I checked the nearby DAG nodes for duplicates and none states this lemma. proof_deps equals the union of the step uses. Edge cases X=∅, j=id and a nonreduced Spec k[t,ε]/(ε³,tε²) all behave correctly. No SGA is used. No fixes were needed."
+ }
 }
