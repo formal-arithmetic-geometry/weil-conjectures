@@ -3,49 +3,236 @@
  "blueprint": {
   "is": "det-sf-mate-open-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open immersions and open restriction for $f^!$",
- "statement": "Let $\\Lambda$ be admissible.\n\n1. For an open immersion $j:U\\to X$ (quasi-compact, $X$ qcqs), the functor\n$j_!:\\Loc(\\Dctf(U,\\Lambda))\\to\\Loc(\\Dctf(X,\\Lambda))$ is left adjoint to\n$j^*:\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(U,\\Lambda))$, and $j^!\\simeq j^*$\ncanonically, compatibly with the adjunctions.\n2. For $f:X\\to Y$ separated of finite type, an open immersion $v:V\\to Y$,\n$X_V=f^{-1}(V)$, $u:X_V\\to X$ and $f_V:X_V\\to V$, there is a canonical\nisomorphism $u^*f^!\\simeq f_V^!v^*$, and for an open $j:U\\to X$ a canonical\nisomorphism $j^*f^!\\simeq(fj)^!$.\n3. Consequently, a morphism in $\\Loc(\\Dctf(X,\\Lambda))$ is an isomorphism as\nsoon as its restrictions to the members of an open covering $X=\\bigcup_aU_a$\nare, and $f^!$ is computed locally on $X$ and on $Y$: $j_a^*f^!\\simeq(fj_a)^!$\nand, over an open covering $Y=\\bigcup_bV_b$, $u_b^*f^!\\simeq f_{V_b}^!v_b^*$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes and morphisms below are in the standing setting of [sk-def-sfb-dc-setting]: schemes are separated and of finite type over $k$, and morphisms are $k$-morphisms. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell\\}$ be admissible, with the condensed coefficient convention and localizing closures of [sk-def-localizing-closure]. Put $\\mathcal T_T=\\Loc(\\Dctf(T,\\Lambda))\\subset D(\\Mod_{\\Lambda_T})$, where $\\Lambda_T=p_T^*\\Lambda$ and $\\Dctf$ means bounded constructible of finite Tor amplitude [sk-def-sfb-constructible]. Write $f^!$ for the compactification-independent Brown right adjoint on these categories [det-sf-existence-brown], and $j_!=D(j_!)$ for levelwise extension by zero [sk-def-sfb-module-lower-shriek; sk-def-sfb-module-derived-lower-shriek].\n\n1. For a quasi-compact open immersion $j:U\\to X$ with $X$ qcqs [def-weil-open-immersion; def-weil-pbc-scheme-conventions], the functor $j_!:\\mathcal T_U\\to\\mathcal T_X$ is left adjoint to $j^*:\\mathcal T_X\\to\\mathcal T_U$, and $j^!\\simeq j^*$ canonically, compatibly with the adjunctions.\n2. For $f:X\\to Y$ separated of finite type, an open immersion $v:V\\to Y$, $X_V=f^{-1}(V)$, $u:X_V\\to X$ and $f_V:X_V\\to V$, there is a canonical isomorphism $u^*f^!\\simeq f_V^!v^*$ of functors $\\mathcal T_Y\\to\\mathcal T_{X_V}$; for an open $j:U\\to X$ there is a canonical isomorphism $j^*f^!\\simeq(fj)^!$ of functors $\\mathcal T_Y\\to\\mathcal T_U$.\n3. A morphism in $\\mathcal T_X$ is an isomorphism as soon as its restrictions to the members of an open covering $X=\\bigcup_aU_a$ are. The preceding canonical comparisons compute the restrictions of $f^!$ on $X$ and $Y$: $j_a^*f^!\\simeq(fj_a)^!$, and for $Y=\\bigcup_bV_b$, $u_b^*f^!\\simeq f_{V_b}^!v_b^*$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.md",
   "place": "node det-sf-mate-open-restriction, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "det-sf-existence-brown",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-conventions"
+ ],
  "proof": [
   {
-   "text": "*(1)* On sheaves $j_!\\dashv j^*$ with both functors exact, so the adjunction\npasses to unbounded derived categories termwise. Both functors preserve the\nlocalizing subcategories: $j^*$ and $j_!$ are exact, preserve direct sums and\ncarry $\\Dctf$ into $\\Dctf$ (restriction of a constructible complex of finite\nTor amplitude is again one; for $j_!$ see [sk-prop-proper-image-localizing]),\nand the usual closure argument extends this to $\\Loc(\\Dctf)$. Using the\ncompactification $j=\\mathrm{id}_X\\circ j$, $Rj_!=R\\mathrm{id}_*\\circ j_!=j_!$; so $j^*$\nis a right adjoint of $Rj_!$ on the localizing categories, and by the\nuniqueness clause of [det-sf-existence-brown] there is a unique isomorphism\n$j^!\\simeq j^*$ compatible with the two adjunctions.",
+   "text": "On module sheaves over the same pulled-back ring $\\Lambda$, [sk-def-sfb-module-lower-shriek] supplies the exact functor $j_!$ and the adjunction $j_!\\dashv j^*$. By [sk-prop-sfb-cartesian-coefficients], module pullback $j^*$ is exact and canonically naturally isomorphic to the lift of $j^{-1}$ whose $\\Lambda_U$-action is transported along $\\alpha_j^{-1}:\\Lambda_U\\to j^{-1}\\Lambda_X$. This is an identification of module functors, not a literal equality of their ring actions. For either additive exact functor $H=j_!,j^*$, [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^n(HK)\\cong H(H^nK)$ naturally, hence $H$ sends every quasi-isomorphism to a quasi-isomorphism. Termwise application therefore gives $D(H)$ on the localization [def-weil-abstract-derived-category]. Additivity also preserves chain homotopies: applying $H$ to $a-b=dh+hd$ gives $H(a)-H(b)=H(d)H(h)+H(h)H(d)$. Thus the same functor is defined on the homotopy categories used to index the following systems. We check directly the derived-existence hypotheses in [lem-pc-derived-adjoint-functors]. For its right-derived ind-system at $K$, write an index as $s:K\\to K'$. The map $D(H)(s)$ is invertible; set $p_s=D(H)(s)^{-1}:HK'\\to HK$, take the identity index $s_0=\\mathrm{id}_K$ and the splitting $HK\\to HK$ to be the identity. Naturality follows from $ts=s'$. For the condition in [def-pc-essentially-constant-ind-diagram] take the common target index $s$ itself, using the arrows $s_0\\to s$ and $\\mathrm{id}_s$: the prescribed composite is $D(H)(s)D(H)(s)^{-1}=\\mathrm{id}_{HK'}$. Dually, at a left-derived pro-index $s:M'\\to M$, put $u_s=D(H)(s)^{-1}:HM\\to HM'$, choose the identity index and identity retraction, and take the common source index $s$ itself. The composite in [def-pc-essentially-constant-pro-diagram] is $D(H)(s)^{-1}D(H)(s)=\\mathrm{id}_{HM'}$. Thus the right and left total derived functors are everywhere defined with value $D(H)$, by the very definitions used in the derived-adjunction theorem. Apply [lem-pc-derived-adjoint-functors] with $G=j_!$, $F=j^*$: it gives $D(j_!)\\dashv D(j^*)$ on the unbounded module-object derived categories. Its canonical adjunction is induced by the specified sheaf adjunction. Write $j^*=D(j^*)$ for this termwise module restriction. No resolution-existence assertion from the changed exact-functor clause is used.",
    "uses": [
-    "det-sf-existence-brown"
+    "sk-def-sfb-module-lower-shriek",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "def-pc-essentially-constant-ind-diagram",
+    "def-pc-essentially-constant-pro-diagram",
+    "lem-pc-derived-adjoint-functors"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; blueprint item proof (1), first sentence. Derived existence verified directly by the identity quasi-isomorphism in the defining systems (Categories Tag 05PU), using exact cohomology (Tag 010N)."
+   }
   },
   {
-   "text": "*(2)* By the composition isomorphism for exceptional inverse images\n([lem-sf-mate], i.e. (1) of [sk-lem-sf-mate]) and (1):\n$u^*f^!\\simeq u^!f^!\\simeq(fu)^!=(vf_V)^!\\simeq f_V^!v^!\\simeq f_V^!v^*$, using\n$fu=vf_V$. Likewise $j^*f^!\\simeq j^!f^!\\simeq(fj)^!$.",
+   "text": "By [det-proper-image-localizing-open], $D(j_!)$ preserves $\\Dctf$, sums and the localizing hulls; [det-proper-base-change-unbounded-pullback] gives the same hull preservation for $j^*$. Both restricted functors therefore exist. The subcategories $\\mathcal T_U,\\mathcal T_X$ are full by [sk-def-localizing-closure]. For $M\\in\\mathcal T_U$, $N\\in\\mathcal T_X$, their Hom sets are the ambient Hom sets, so the step 1 bijection $\\Hom(j_!M,N)\\cong\\Hom(M,j^*N)$ restricts, with the same naturality and triangle identities. This proves the adjunction on precisely the localizing categories in clause (1).",
    "uses": [
-    "lem-sf-mate"
+    "det-proper-image-localizing-open",
+    "det-proper-base-change-unbounded-pullback",
+    "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (1), preservation of the localizing subcategories and restriction of the adjunction."
+   }
   },
   {
-   "text": "*(3)* The restrictions $j_a^*$ along an open covering are jointly\nconservative on $D(X_{\\mathrm{proét}},\\Lambda)$: if a cone $C$ of a morphism $\\phi$ has\n$j_a^*C=0$ for all $a$, its cohomology sheaves vanish on each $U_a$, hence\nvanish, so $C=0$. By (2), $j_a^*f^!\\simeq(fj_a)^!$ and similarly over opens of\n$Y$, so $f^!$ and maps between its values can be computed locally on $X$ and\non $Y$.",
+   "text": "The compact-generation hypotheses for the Brown adjunction are supplied by [sk-lem-brown-hypotheses] for every standing source scheme. Compute the lower shriek for $j$ using $U\\xrightarrow jX\\xrightarrow{\\mathrm{id}_X}X$, which is a compactification in the sense of [sk-def-nagata-sketch-data]: $j$ is quasi-compact open and the identity is proper. By [sk-def-sfb-module-derived-lower-shriek] its functor is $R(\\mathrm{id}_X)_*D(j_!)=D(j_!)$; the equality uses the termwise identity functor. The identity-index argument for an exact functor in step 1, applied to the identity pushforward, identifies its total right derived functor canonically with the identity, so no additional resolution hypothesis is needed here. Step 2 exhibits $j^*$ as a right adjoint of this functor. Clause (3) of [det-sf-existence-brown] now gives the unique adjunction-compatible isomorphism $j^!\\simeq j^*$, including transport from the chosen compactification. Thus the comparison is canonical with respect to both unit and counit, not an arbitrary isomorphism of functors.",
+   "uses": [
+    "sk-def-sfb-module-derived-lower-shriek",
+    "det-sf-existence-brown",
+    "sk-lem-brown-hypotheses",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (1), trivial compactification and uniqueness; compactification is as in sk-def-nagata-sketch-data."
+   }
+  },
+  {
+   "text": "The compact-generation hypotheses for the Brown adjunction are supplied by [sk-lem-brown-hypotheses] for every standing source scheme. We spell out the composition input instead of applying the conditional finite-Tor lemma lem-sf-mate. For composable standing morphisms $T\\xrightarrow aS\\xrightarrow bR$, the natural lower-shriek comparison $Rb_!Ra_!\\cong R(ba)_!$ on $\\mathcal T_T$ is [lem-sfb-nonrational-localizing-lower-shriek-composition] when $\\Lambda=A,\\mathbf Z_\\ell,\\mathcal O_E$, and [lem-sfb-localizing-lower-shriek-composition] when $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$; $\\mathbf Q_\\ell$ is its case $E=\\mathbf Q_\\ell$. By [det-sf-existence-brown], all three right adjunctions exist on these same categories. For $M\\in\\mathcal T_T$ and $N\\in\\mathcal T_R$, compose their Hom bijections and the lower-shriek comparison to get\n$$\\Hom(M,a^!b^!N)\\cong\\Hom(Ra_!M,b^!N)\\cong\\Hom(Rb_!Ra_!M,N)\\cong\\Hom(R(ba)_!M,N)\\cong\\Hom(M,(ba)^!N).$$\nThis is natural in $M,N$. By [lem-galois-yoneda-fully-faithful] it gives a unique isomorphism $a^!b^!\\cong(ba)^!$: the inverse natural Hom transformation gives the inverse map, since their composites are identity transformations of representables. Naturality in $N$ follows from faithfulness of the same Yoneda functor. The two successive adjunction bijections are the composite adjunction of [def-weil-pbc-composite-adjunction], so this is the comparison compatible with the pasted units and counits. No ambient exceptional adjunction or six-functor-datum hypothesis is introduced.",
+   "uses": [
+    "lem-sfb-nonrational-localizing-lower-shriek-composition",
+    "lem-sfb-localizing-lower-shriek-composition",
+    "det-sf-existence-brown",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-pbc-composite-adjunction",
+    "sk-lem-brown-hypotheses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/sk-lem-sf-mate.proof.md",
+    "place": "Proof (1), Hom calculation used by the detail item proof (2)."
+   }
+  },
+  {
+   "text": "In the Cartesian open-restriction square, $u$ is the inclusion of $f^{-1}(V)$, and $fu=vf_V$ as morphisms. Here are the geometric hypothesis checks. By [lem-weil-pbc-finite-type-over-noetherian] the standing schemes are Noetherian, since a field is Noetherian; by [def-weil-constructible-subset] every open and every intersection with an affine open is quasi-compact. The base-change assertion [lem-pod-separated-finite-type-base-change] applies directly to $f_V$. An open immersion is separated because its diagonal is an isomorphism, hence a closed immersion, using the diagonal definition of [def-weil-proper-morphism]. Its finite-type property, and the finite-type property of a restriction $fj$, can also be checked from [def-weil-finite-type-morphism]: over an affine in the target choose finitely many affine finite-type charts $\\operatorname{Spec}B$ for $f$, and cover the intersection of each chart with $U$ by finitely many principal opens $D(s)$. Their coordinate algebras $B_s$ are finitely generated over the target algebra, by adjoining the generators of $B$ and $s^{-1}$ with relation $ss^{-1}=1$. This proves finite type without an unstated composition theorem. The diagonal of $fj$ is the restriction of the closed diagonal of $f$ to $U\\times_YU$, so is closed. The same argument applied to the structure map of $X$ proves that all its opens remain separated finite-type $k$-schemes; apply it to $Y$ as well. Thus every scheme and morphism used here satisfies the standing domain and compactification hypotheses. Thus steps 3 and 4 apply to $(u,f)$ and $(f_V,v)$. Their natural isomorphisms give\n$$u^*f^!\\cong u^!f^!\\cong(fu)^!=(vf_V)^!\\cong f_V^!v^!\\cong f_V^!v^*.$$\nThe equality in the middle is transport along the actual equality $fu=vf_V$, using the same compactification functor and its canonical adjoint. For the source restriction, apply step 3 to $j$ and step 4 to the composable pair $(j,f)$; this gives $j^*f^!\\cong j^!f^!\\cong(fj)^!$. This proves both comparisons in clause (2), with the domains and codomains displayed in the statement.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-constructible-subset",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (2), the equality fu=v f_V and the two chains; standing geometric hypotheses made explicit."
+   }
+  },
+  {
+   "text": "Replace a covering index family by its set of distinct opens in the fixed universe, so it is small. Let $\\phi:K\\to L$ lie in $\\mathcal T_X$ and choose a distinguished triangle $K\\xrightarrow\\phi L\\to C\\to K[1]$ in the ambient derived category. The termwise restriction $j_a^*$ is exact on the derived category by [det-proper-base-change-unbounded-pullback], so it gives distinguished triangles after restriction. If all $j_a^*\\phi$ are isomorphisms, [lem-kun-distinguished-cone-zero] implies $j_a^*C=0$. By [sk-prop-sfb-cartesian-coefficients] module restriction is exact and its underlying sheaf functor is naturally identified with inverse image, with the module action transported along the coefficient isomorphism, and [lem-weil-pbc-exact-functor-complex-cohomology] gives $j_a^*\\mathcal H^n(C)\\cong\\mathcal H^n(j_a^*C)=0$ for every integer $n$. The forgetful functor from ring-object modules to abelian sheaves creates kernels and cokernels: the kernel has the restricted action and the quotient has the induced action, and their universal properties are unchanged. Thus it is exact. The underlying abelian sheaves of these cohomology modules therefore vanish after restriction to every $U_a$. The underlying abelian-sheaf functor of $j_a^*$ is the pullback of [def-sfb-finite-upper-star] with $\\mathcal A=\\Ab$, and by [def-sfb-finite-extension-by-zero-adjunction] this pullback along the open immersion $j_a$ is computed by restriction: $(j_a^*G)(T\\to U_a)\\cong G(T\\to U_a\\to X)$ for every abelian sheaf $G$ on $X_{\\mathrm{pro\\acute et}}$. The localization identification [lem-weil-proetale-weakly-etale-localization] (1) identifies $(U_a)_{\\mathrm{pro\\acute et}}$ with the slice site $X_{\\mathrm{pro\\acute et}}/U_a$, so these restrictions are exactly the slice restrictions $r_a$ of the underlying abelian sheaves. They satisfy the covering-sieve hypothesis: for every site object $T\\to X$ the open subschemes $T_a=T\\times_XU_a$ cover $T$ and map to $U_a$. Every affine open $W=\\operatorname{Spec}B\\subset T$ has a finite cover by principal opens $D(s_i)\\subset W$, each contained in some $T_{a_i}$, because principal opens form an affine basis and $W$ is quasi-compact. These are affine opens of $T_{a_i}$ and their images cover exactly $W$. Each $T_a\\to T$ is flat: its map on the local rings at any point is an isomorphism. Hence $\\{T_a\\to T\\}$ is an fpqc covering by the affine criterion of [def-weil-pbc-fpqc-covering], including the empty affine with the empty subfamily. The $T_a$ are site objects by [lem-weil-proetale-weakly-etale-localization] (1) for the open $T_a\\to T$. The sieve of arrows with domain admitting a map to some $U_a$ therefore contains a covering family, so is covering by [def-weil-pbc-small-proetale-site]. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the map $0\\to\\mathcal H^n(C)$ of underlying abelian sheaves. Its slice restrictions are isomorphisms, so $\\mathcal H^n(C)=0$. A representative complex of $C$ is consequently acyclic; $0\\to C^\\bullet$ is a quasi-isomorphism and is inverted in [def-weil-abstract-derived-category], whence $C=0$. A final application of [lem-kun-distinguished-cone-zero] makes $\\phi$ an isomorphism. Since $\\mathcal T_X$ is full, the ambient inverse is also its inverse in $\\mathcal T_X$. This argument has no boundedness assumption on $C$.",
+   "uses": [
+    "det-proper-base-change-unbounded-pullback",
+    "lem-kun-distinguished-cone-zero",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-small-proetale-site",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-fpqc-covering",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (3), cone and cohomology argument; covering-site isomorphism criterion: Stacks Tag 04TQ, sites.tex lemma-glue-maps; exact cohomology: Tag 010N; localization at quasi-isomorphisms: Tag 05RU."
+   }
+  },
+  {
+   "text": "Apply clause (2), proved in step 5, to each $j_a:U_a\\hookrightarrow X$ and to each $v_b:V_b\\hookrightarrow Y$. This gives $j_a^*f^!\\cong(fj_a)^!$ and $u_b^*f^!\\cong f_{V_b}^!v_b^*$ for the whole localizing categories. Step 6 detects isomorphisms after these restrictions. These are exactly the locality and isomorphism-detection assertions of clause (3). For an empty scheme the same argument says all cohomology sheaves are zero; for the identity cover the comparisons reduce to the same adjunction bijections.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+    "place": "Proof (3), final two sentences, read as the explicit comparisons in the statement."
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-module-lower-shriek",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pc-derived-adjoint-functors",
+  "det-proper-image-localizing-open",
+  "det-proper-base-change-unbounded-pullback",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-lower-shriek",
   "det-sf-existence-brown",
-  "lem-sf-mate"
+  "sk-lem-brown-hypotheses",
+  "sk-def-nagata-sketch-data",
+  "lem-sfb-nonrational-localizing-lower-shriek-composition",
+  "lem-sfb-localizing-lower-shriek-composition",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-constructible-subset",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-kun-distinguished-cone-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-small-proetale-site",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "def-sfb-finite-upper-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/det-sf-mate-open-restriction.proof.md",
+  "place": "Proof (1)-(3), with the source unit Hom calculation expanded and Stacks 09T5, 010N, 04TQ and 05RU supplying generic derived/sheaf facts."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion exceptional inverse image equals restriction on the localizing category generated by bounded constructible complexes of finite Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIso_inv\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).inv =\\n    AlgebraicGeometry.Scheme.Hom.appLE f (AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ U)\\n      ((TopologicalSpace.Opens.map f.base).obj U) ⋯\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ Y $, the inverse of the ΓIso isomorphism $ (\\\\Gamma\\\\text{Iso } f U)^{-1} $ is equal to the composition of $ f $'s sheaf mo\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens)\\n  (x : CategoryTheory.ToType (Y.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appLE f (AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ \", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any open subset $ U $ of $ Y $, the inverse of the isomorphism induced by $ f $ on sections over $ U $ composed with the corresponding sheaf morphis\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict f).inv f =\\n    Y.ofRestrict ⋯\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict f).inv f =\\n    Y.ofRestrict ⋯\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ between locally ringed spaces, the composition of the inverse of the isomorphism $ X \\\\cong Y|_U $ (where $ U $ is the open subset defined by $ f $) with $ f $ itse\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) {Y : TopCat}\\n  {f : Y ⟶ { carrier := ↑↑X.toPresheafedSpace, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (U : TopologicalSpace.Opens ↑↑(X.restrict h).toPresheafedSpace)\\n  (x : C\", \"doc\": \"For each open subset $U$ of $X$, the composition of the inverse of the presheaf isomorphism at $f(U)$ with the equality induced by the injectivity of the base map's image on open sets acts as the iden\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isoImage_inv_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.isoImage f U).inv\\n      (CategoryTheory.CategoryStruct.comp U.ι f) =\\n    ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U)\", \"doc\": \"For schemes $X$ and $Y$, an open immersion $f: X \\to Y$, and an open subset $U$ of $X$, the composition of the inverse of the isomorphism from $U$ to its image $f(U)$, followed by the inclusion morphis\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_eq_invApp_app_of_comp_eq_aux\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y U : AlgebraicGeometry.Scheme} (f : Y ⟶ U) (g : U ⟶ X) (fg : Y ⟶ X),\\n  fg = CategoryTheory.CategoryStruct.comp f g →\\n    ∀ [h : AlgebraicGeometry.IsOpenImmersion g] (V : U.Opens),\\n      (TopologicalSpace.Opens.map f.base).obj V =\\n        (TopologicalSpace.Opens.map fg.base).obj ((AlgebraicGeom\", \"doc\": \"Given schemes $X, Y, U$ and morphisms $f: Y \\\\to U$, $g: U \\\\to X$ forming a composition $fg: Y \\\\to X$, if $g$ is an open immersion, then for any open subset $V \\\\subseteq U$, the inverse image of $V$ un\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (U : Y.Opens) →\\n        X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U)) ≅\\n          Y.presheaf.obj (Opposite.op (AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ U))\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes and let $U$ be an open subset of $Y$. This definition provides a canonical isomorphism of rings between the ring of sections of $X$ over the preimage $\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary structure-sheaf restriction/pushforward, condensed module infrastructure, scheme composition, or topological compact support; none states this compactification-defined result on pro-etale localizing categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary structure-sheaf restriction/pushforward, condensed module infrastructure, scheme composition, or topological compact support; none states this compactification-defined result on pro-etale localizing categories."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|upperShriek|exceptionalInverseImage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary structure-sheaf restriction/pushforward, condensed module infrastructure, scheme composition, or topological compact support; none states this compactification-defined result on pro-etale localizing categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image for proetale condensed modules commutes with restriction to open subschemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U\", \"doc\": \"Let $X$ and $Y$ be schemes, $f: X \\\\to Y$ be a morphism between them, and $U$ be an open subset of $Y$. Let $\\\\iota : U \\\\to Y$ be the canonical inclusion morphism of the corresponding open subscheme. Th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.resLE\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(f : Hom X Y) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) : V.toScheme ⟶ U.toScheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$, an open subset $U$ of $Y$, and an open subset $V$ of $X$ such that $V$ is a subset of the preimage $f^{-1}(U)$, this function defines the restriction of $f$ t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsIso φ] : (inv φ).app U = inv (φ.app U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the inverse of $\\\\phi$ evaluated at $U$ coincides with the inverse of the section map $\\\\phi_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (restrictFunctorId.inv.app M).app U = M.presheaf.map (eqToHom (show 𝟙 X ''ᵁ U = U by simp)).op\", \"doc\": \"For a scheme $X$, sheaf of modules $\\\\mathcal{M}$ over $X$, and open subset $U \\\\subseteq X$, applying the inverse of the restriction functor induced by the identity open immersion $\\\\text{id}_X$ to $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_map\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] {U V} (i : U ⟶ V) :\\n  (M.restrict f).presheaf.map i.op = M.presheaf.map (f.opensFunctor.map i).op\", \"doc\": \"For a sheaf of modules $\\\\mathcal{M}$ on a scheme $Y$ and an open immersion $f: X \\\\to Y$, the restriction of $\\\\mathcal{M}$ to $X$ satisfies that for any inclusion $U \\\\subseteq V$ of open subsets in $X$\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary structure-sheaf restriction/pushforward, condensed module infrastructure, scheme composition, or topological compact support; none states this compactification-defined result on pro-etale localizing categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint to compact support direct image commutes with open localization in source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A]\\n  [CategoryTheory.Limits.H\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a topological space $X$, the sheaves on $X$ with values in $\\\\mathcal{C}$ form a category. In this category: (1) objects are sheaves on $X$ valued in $\\\\mathcal{C}$; (\"}\n  {\"name\": \"TopologicalSpace.Opens.adjunction_counit_map_functor\", \"module\": \"Mathlib/Topology/Category/TopCat/Opens\", \"type\": \"∀ {X : TopCat} {U : TopologicalSpace.Opens ↑X} (V : TopologicalSpace.Opens ↥U),\\n  ⋯.adjunction.counit.app (⋯.functor.obj V) = CategoryTheory.eqToHom ⋯\", \"doc\": \"For a topological space $X$ and its open subset $U$, the counit of the adjunction between the open map functor and the open subsets functor, when applied to any open subset $V$ of $U$, reduces to the \"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V),\\n  Ca\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $C$ that has colimits. Let $f^{-1}$ denote the pullback functor an\"}\n  {\"name\": \"IsOpenMap.adjunctionNhds\", \"module\": \"Mathlib/Topology/Category/TopCat/OpenNhds\", \"type\": \"{X Y : TopCat} →\\n  {f : X ⟶ Y} →\\n    (h : IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n      (x : ↑X) → h.functorNhds x ⊣ TopologicalSpace.OpenNhds.map f x\", \"doc\": \"For an open continuous map $ f : X \\to Y $ between topological spaces, there is an adjunction between the functor assigning neighborhoods of $ x $ in $ X $ and the functor mapping neighborhoods of $ f(\"}\n  {\"name\": \"Topology.IsInducing.adjunctionNhds\", \"module\": \"Mathlib/Topology/Category/TopCat/OpenNhds\", \"type\": \"{X Y : TopCat} →\\n  {f : X ⟶ Y} →\\n    (h : Topology.IsInducing ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n      (x : ↑X) → TopologicalSpace.OpenNhds.map f x ⊣ h.functorNhds x\", \"doc\": \"Given an inducing continuous map $ f : X → Y $ and a point $ x ∈ X $, there is an adjunction between the functor mapping open neighborhoods of $ x $ in $ X $ to open neighborhoods of $ f(x) $ in $ Y $\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V),\\n  CategoryTheory.CategoryS\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$ that has all colimits. For any open set $V \\\\subseteq\"}\n  {\"name\": \"CondensedSet.compactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.condensedSetToCompactlyGenerated ⊣ CondensedSet.compactlyGeneratedToCondensedSet\", \"doc\": \"The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary structure-sheaf restriction/pushforward, condensed module infrastructure, scheme composition, or topological compact support; none states this compactification-defined result on pro-etale localizing categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration for the pro-etale module-object compact-support functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on schemes, derived direct image with compact support preserves composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τr =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pushforwardComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ of schemes, the counit component of the pseudofunctor's composition map $\\\\tau_{g \\\\circ f}$ is naturally isomorphic to the composition of counits $\\\\tau_g \\\\ci\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).inv.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      (((AlgebraicGeometry.Scheme.Modules.pushforward (Ca\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the inverse of the natural isomorphism between the pushforward functor along $g \\\\circ f$ and the composition of pushforward functors a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_comp\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) (g : Y ⟶ Z),\\n  I.map (CategoryTheory.CategoryStruct.comp f g) = (I.map f).map g\", \"doc\": \"For any ideal sheaf data $\\\\mathcal{I}$ on a scheme $X$ and morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$, the ideal sheaf obtained by pushing forward $\\\\mathcal{I}$ along the composition $f \\\\circ g$ is equal\"}\n  {\"name\": \"SheafOfModules.pushforward_id_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The composition of the pushforward functor induced by the identity functor and a ring sheaf morphism $\\\\phi$ is naturally isomorphic to the original pushforward functor via the left unitor and right wh\"}\n  {\"name\": \"SheafOfModules.pushforward_comp_id\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The composition of the pushforward functor with the identity functor on a category of sheaves of modules is naturally isomorphic to the original pushforward functor, with the natural isomorphism given\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|upperShriek|UpperShriek",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of sheaves as the right adjoint of compact support commutes with restriction to open subsets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A]\\n  [CategoryTheory.Limits.H\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a topological space $X$, the sheaves on $X$ with values in $\\\\mathcal{C}$ form a category. In this category: (1) objects are sheaves on $X$ valued in $\\\\mathcal{C}$; (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}\n  {\"name\": \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [inst_3 : CategoryTheory.Limits.HasColimits A]\\n  [inst_4 : Categ\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ is a left adjoint to the sheaf pushforward functor $ f_* $, establishing an adjunction relationship be\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"{X Y : TopCat} →\\n  (A : Type u_1) →\\n    [inst : CategoryTheory.Category.{w, u_1} A] →\\n      {FA : A → A → Type u_2} →\\n        {CA : A → Type w} →\\n          [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] →\\n            [inst_2 : CategoryTheory.ConcreteCategory A FA] →\\n              [inst_3 : Ca\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (X.ofRestrict h) V = X.presheaf.map (⋯.adjunction.counit.\", \"doc\": \"For a scheme $X$, an open subset $U$ with open immersion $h: U \\to X$, and an open set $V$ in $X$, the component of the morphism $X|_U \\to X$ at $V$ is equal to the presheaf map of $X$ applied to the co\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -61,5 +248,129 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-sf-mate"
+ "unit": "sk-lem-sf-mate",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sf-mate-open-restriction",
+  "worker": "stage1",
+  "summary": "Made the inherited standing scheme and coefficient conventions explicit; expanded the exact open adjunction and its restriction to the localizing categories, the unique Brown comparison, the composition Hom calculation, both open-restriction identities and unbounded conservativity. Reused the rational lower-shriek composition input; created only the missing finite/integral lower-shriek composition statement. The conditional finite-Tor lem-sf-mate is not misapplied to Brown adjoints. All coefficients remain module objects over the pulled-back condensed ring. Repair of the returned landing: revalidated current dependency statements; replaced the resolution-conditional exact-functor citation by a direct identity-index verification of derived existence, and used the corrected natural module-coefficient comparison in steps 1 and 6. The retry also writes out preservation of chain homotopies before using the ind/pro systems on the homotopy category.",
+  "blueprint": "Steps 1-3 realize detail proof (1) and main-20261015 unit sk-lem-sf-mate step (2); step 4 spells out unit step (1) used in detail proof (2); step 5 realizes detail proof (2) and unit step (3); steps 6-7 realize detail proof (3). No change to unit records: the imported unit record sk-lem-sf-mate is the distinct older smooth-purity unit; this item is not its key node. Whole-blueprint searches found no exact same statement elsewhere.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies the coefficient ring under restriction and supplies exact module pullback; it is the chapter-wide coefficient convention."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "General derived-adjunction theorem (09T5) for the exact sheaf adjunction in unit step (2)."
+   },
+   {
+    "node": "det-proper-image-localizing-open",
+    "why": "Supplies preservation of the same localizing hulls for j_!, expressly used in the item source proof (1)."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-pullback",
+    "why": "Supplies exactness and localizing-hull preservation of restriction, needed before restricting the open adjunction."
+   },
+   {
+    "node": "lem-sfb-localizing-lower-shriek-composition",
+    "why": "Supplies only the rational lower-shriek composition law for the unit Hom calculation; the finite/integral gap is separately stated in this delivery."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "General Hom-representable full faithfulness turns the explicit natural Hom bijections into inverse natural isomorphisms."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Defines the pasted unit/counit and Hom bijection of the adjunction used in the unit composition step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometry verifies that all open restrictions stay in the finite-type range."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Uses its explicit Noetherian-space retrocompactness convention to check quasi-compactness of opens."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "General triangulated criterion needed twice in the cone-based conservativity argument."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology comparison for termwise open restriction."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the actual open site with its slice, used on underlying abelian sheaves."
+   },
+   {
+    "node": "def-weil-pbc-small-proetale-site",
+    "why": "Specifies the covering sieves used in the sheaf-local detection argument."
+   },
+   {
+    "node": "lem-sfb-sheaf-cover-local-isomorphism",
+    "why": "General arbitrary-category sheaf isomorphism criterion; applied to cohomology sheaves only."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Uses its localization at quasi-isomorphisms to identify an acyclic complex with zero."
+   },
+   {
+    "node": "sk-lem-brown-hypotheses",
+    "why": "Supplies every compact-generation hypothesis explicitly assumed by the Brown right-adjoint statement."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "General geometric base-change stability checks the actual hypotheses on f_V; no unit step proves this geometric tool."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Only its diagonal definition checks separatedness of open immersions and source restrictions."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Its affine finite-generator characterization checks source restrictions by finitely many principal opens."
+   },
+   {
+    "node": "def-pc-essentially-constant-ind-diagram",
+    "why": "Definition used to verify right derived existence explicitly at the identity quasi-isomorphism; a general categorical tool for the open adjunction."
+   },
+   {
+    "node": "def-pc-essentially-constant-pro-diagram",
+    "why": "Dual definition used to verify left derived existence explicitly at the identity quasi-isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pc-derived-adjoint-functors",
+  "det-proper-image-localizing-open",
+  "det-proper-base-change-unbounded-pullback",
+  "lem-sfb-localizing-lower-shriek-composition",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-constructible-subset",
+  "lem-kun-distinguished-cone-zero",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-small-proetale-site",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "def-weil-abstract-derived-category",
+  "sk-lem-brown-hypotheses",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8ac4072fc",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8ac4072fc (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item, the new node and all 36 cited node statements in full, against the main-20261015 det-sf-mate-open-restriction statement and proof (1)-(3), the unit proof sk-lem-sf-mate (1)-(4), and sk-thm-sf-comp-composition clause (1) with its proof. The coefficient category matches the source in every node: the ordinary unbounded Loc(Dctf) in D(Mod_{p_T^*Lambda}), with no completeness assumption. The standing-setting sentence restores the domain of det-sf-existence-brown (Spec Z lies outside it); no hypothesis is added inside that domain and the six coefficients and three clauses are kept. The route is the unit's own Hom calculation through sk-thm-sf-comp-composition, so it is not a departure, and the conditional lem-sf-mate is rightly not used. Steps 1-5 and 7 pass. I checked the identity-index ind/pro verification for 09T5 by hand, Brown clause (3) with compactification transport, and the six-coefficient union of the new node with lem-sfb-localizing-lower-shriek-composition. One fault, C4, in step 6: lem-weil-proetale-weakly-etale-localization (1) identifies the open's site with the slice site, but does not say that the pullback j^* (sheafified Kan extension, def-sfb-finite-upper-star) equals slice restriction. The existing def-sfb-finite-extension-by-zero-adjunction states (j^*G)(T->U)=G(T->U->X), as in Stacks sites.tex section-localize. Repaired in fixes/dag/nodes/sec-six-functors-basics/det-sf-mate-open-restriction.json: step 6 cites that node and def-sfb-finite-upper-star, the text is rewritten and proof_deps updated; no cycle. The new node lem-sfb-nonrational-localizing-lower-shriek-composition passes B1-B7. It is statement-only and true (identity and zero-ring cases checked). It is not a restated clause and not a duplicate: the rational node is disjoint, det-prop-int-brown-construction covers only O_E on Loc(Dbc), and the etale and A_{E,n} nodes are other categories. The 21 declared tool_uses are accepted. Edge cases (empty and identity opens and covers, zero ring, unbounded complexes, E=Q_l) hold. No nodes dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

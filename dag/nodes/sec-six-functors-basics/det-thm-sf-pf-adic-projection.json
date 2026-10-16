@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-thm-sf-pf-adic-projection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The integral proper projection formula",
- "statement": "Let $p:X\\to Y$ be proper.\n\n1. For $K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$ the\n   projection formula map\n   $Rp_*K\\otimes^{\\mathbf L}L\\to Rp_*(K\\otimes^{\\mathbf L}p^*L)$ (underived\n   completion, tensor over $\\mathcal O_{E,Y}$) is an isomorphism in\n   $D(Y_{\\mathrm{proét}},\\mathcal O_E)$.\n2. The categories $\\Loc(\\Dbc(-,\\mathcal O_E))$ are closed under\n   $\\otimes^{\\mathbf L}$, and the projection formula map is an isomorphism for\n   $K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$ and $L\\in\\Loc(\\Dbc(Y,\\mathcal O_E))$.",
+ "statement": "Work in the standing setting of [sk-def-sfb-dc-setting]: fix a prime $\\ell$, a field $k$ of characteristic $p>0$ different from $\\ell$, and separated finite-type $k$-schemes and their $k$-morphisms. Fix a finite extension $E/\\mathbf Q_\\ell$ inside an algebraic closure, with ring of integers $\\mathcal O_E$. Use its condensed coefficient ring and its pullbacks $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients], the ordinary unbounded module-object derived categories [sk-def-sfb-module-derived-pushpull], bounded constructible complexes $\\Dbc$ [sk-def-sfb-constructible], and localizing closures with ambient small direct sums [sk-def-localizing-closure]. Let $p:X\\to Y$ be proper [def-weil-proper-morphism]. All tensor products are the relative derived tensors of [sk-def-sfb-derived-tensor-hom], without completion. The projection formula map is the canonical adjoint transpose of the pullback tensor comparison followed by the tensor of the counit $p^*Rp_*K\\to K$ with $p^*L$ [lem-weil-pbc-ringed-projection-mate-exact].\n\n1. For $K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$ the projection formula map\n$$Rp_*K\\otimes^{\\mathbf L}_{\\mathcal O_{E,Y}}L\\longrightarrow Rp_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}p^*L)$$\nis an isomorphism in $D(Y_{\\mathrm{proét}},\\mathcal O_E)$.\n2. For every standing scheme $T$, $\\Loc(\\Dbc(T,\\mathcal O_E))$ is closed under $\\otimes^{\\mathbf L}$. The same projection formula map is an isomorphism for $K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$ and $L\\in\\Loc(\\Dbc(Y,\\mathcal O_E))$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.md",
   "place": "node det-thm-sf-pf-adic-projection, order None",
@@ -22,36 +22,211 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
  "proof": [
   {
-   "text": "(1) By [sk-lem-int-tensor], $K\\otimes^{\\mathbf L}p^*L$ and\n$Rp_*K\\otimes^{\\mathbf L}L$ are in $\\Dbc$ (pullback and tensor product preserve\nintegral constructibility, and $Rp_*K\\in\\Dbc(Y,\\mathcal O_E)$ by proper\nfiniteness, [sk-prop-int-compactness]); in particular both sides are derived\ncomplete. Reduction modulo $\\pi_E$ is exact, monoidal and commutes with $p^*$\nand $Rp_*$, so it carries the map to the torsion projection formula map for\n$K/\\pi_E$ and $L/\\pi_E$ in $D(Y_{\\mathrm{proét}},\\mathbf F_E)$, an isomorphism by\nStacks, Tag 0F0G. The cone $C$ of the map is derived complete with\n$C\\otimes^{\\mathbf L}\\mathbf F_E=0$, so $\\pi_E$ acts invertibly on $C$.\nDerived completeness says\n$R\\varprojlim(\\cdots\\xrightarrow{\\pi_E}C\\xrightarrow{\\pi_E}C)=0$, while for\ninvertible $\\pi_E$ this limit is $C$; hence $C=0$ (derived Nakayama, Stacks,\nTag 099I).",
+   "text": "For every standing scheme $T$, [lem-weil-pbc-qcqs-over-affine] applies to its separated finite-type structure map $T\\to\\operatorname{Spec}k$, and makes $T$ qcqs. The integral case of [det-def-localizing-closure-ctf-equals-bc](2) then gives $\\Dctf(T,\\mathcal O_E)=\\Dbc(T,\\mathcal O_E)$ and equality of their localizing closures. Put $\\mathcal L_T=\\Loc(\\Dbc(T,\\mathcal O_E))$. By [det-def-localizing-closure-existence](1),(2), the ambient module-object derived category has small direct sums, and $\\mathcal L_T$ is the smallest full replete triangulated subcategory containing $\\Dbc$ and closed under those sums. Its sums are the ambient sums: fullness restricts the ambient coproduct universal property to test objects in $\\mathcal L_T$.",
    "uses": [
-    "sk-lem-int-tensor"
+    "lem-weil-pbc-qcqs-over-affine",
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-def-localizing-closure-existence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), ambient localizing categories and the integral equality Dctf=Dbc made explicit"
+   }
   },
   {
-   "text": "(2) *Tensor closure.* Fix $B\\in\\Dbc(X,\\mathcal O_E)$; the objects $A$ of\n$\\Loc(\\Dbc(X,\\mathcal O_E))$ with $A\\otimes^{\\mathbf L}B\\in\\Loc(\\Dbc(X,\\mathcal O_E))$\nform a localizing subcategory ($-\\otimes^{\\mathbf L}B$ is exact and preserves\ndirect sums) which contains $\\Dbc$ by [sk-lem-int-tensor],\nhence everything; then fix $A$ and argue in $B$. *Extension.* $Rp_*$\npreserves the localizing categories and direct sums there\n([sk-prop-int-compactness]). Fix $L\\in\\Dbc(Y,\\mathcal O_E)$: both sides are\nexact, direct-sum preserving functors of $K$, isomorphic on $\\Dbc$ by (1),\nhence isomorphic on $\\Loc(\\Dbc(X,\\mathcal O_E))$ ([sk-lem-sf-determination]).\nThen fix $K$ and argue in the same way in $L$.",
+   "text": "Clause (3) of [det-thm-sfb-proper-base-change-integral] asserts that the proper projection formula map is an isomorphism for exactly $K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$. Its hypotheses are met: $E/\\mathbf Q_\\ell$ is finite, $p$ is proper, and $X,Y$ are standing schemes. This proves (1) by reuse of the existing bounded integral theorem. It is the same uncompleted tensor and the same canonical map; no discrete constant $\\mathcal O_E$-coefficient category or étale-origin witness is substituted. The finite-reduction/derived-Nakayama argument of paragraph (1) is already the content of that existing node, rather than a new restatement created here.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (1), bounded integral formula; reuse the existing integral proper theorem, clause (3)"
+   }
+  },
+  {
+   "text": "Tensoring in the ambient unbounded category is exact and preserves small direct sums in either variable. Here are the elementary calculations. Fix a K-flat representative $P$ in [sk-def-sfb-derived-tensor-hom]. For a complex map $a$, the differential in [def-pc-tensor-complex-sheaves] gives $\\operatorname{Tot}(\\operatorname{Cone}(a)\\otimes P)\\cong\\operatorname{Cone}(\\operatorname{Tot}(a\\otimes P))$ by distributing over the two cone summands; it gives the signed shift identification as well. K-flatness [def-pc-kflat-complex] makes this preserve quasi-isomorphisms, and the cone description of distinguished triangles [def-weil-abstract-derived-category] proves exactness after localization. For sums, the internal-Hom adjunction in [sk-def-sfb-derived-tensor-hom] gives, naturally in $Z$,\n$$\\operatorname{Hom}(C\\otimes^{\\mathbf L}\\bigoplus_i A_i,Z)\\cong\\operatorname{Hom}(\\bigoplus_iA_i,\\operatorname{RHom}(C,Z))\\cong\\prod_i\\operatorname{Hom}(C\\otimes^{\\mathbf L}A_i,Z).$$\nThis is precisely the universal property of the coproduct with its canonical inclusions, so tensor preserves sums. Symmetry gives the other variable. The sums exist by step 1. These arguments apply to the relative module-object tensor specified in the statement.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), exactness and sum preservation of tensor, expanded by its K-flat definition and right adjoint"
+   }
+  },
+  {
+   "text": "Fix $B\\in\\Dbc(T,\\mathcal O_E)$ and let $\\mathcal C_B$ be the full subcategory of the ambient derived category of objects $A$ such that $A\\otimes^{\\mathbf L}B\\in\\mathcal L_T$. Step 3 and the closure properties in step 1 show that $\\mathcal C_B$ is replete, triangulated and closed under small sums. The tensor clause of [sk-lem-int-tensor] says that it contains $\\Dbc(T,\\mathcal O_E)$. Minimality in [det-def-localizing-closure-existence](2) gives $\\mathcal L_T\\subseteq\\mathcal C_B$. Thus $A\\otimes^{\\mathbf L}B\\in\\mathcal L_T$ for $A\\in\\mathcal L_T$ and bounded constructible $B$.",
    "uses": [
     "sk-lem-int-tensor",
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), tensor closure: first localizing variable"
+   }
+  },
+  {
+   "text": "Now fix $A\\in\\mathcal L_T$ and take the full ambient subcategory $\\mathcal E_A$ on objects $B$ with $A\\otimes^{\\mathbf L}B\\in\\mathcal L_T$. Steps 1 and 3 again give repleteness, shifts, triangles and small-sum closure. Step 4 puts $\\Dbc$ in $\\mathcal E_A$. The same minimality [det-def-localizing-closure-existence](2) gives $\\mathcal L_T\\subseteq\\mathcal E_A$. This proves the tensor-closure assertion of (2) for every standing $T$, with ordinary ambient sums and uncompleted tensor.",
+   "uses": [
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), tensor closure: second localizing variable"
+   }
+  },
+  {
+   "text": "Apply [det-proper-base-change-unbounded-pullback] with $g=p$, $\\Lambda=\\mathcal O_E$, and [det-proper-image-localizing-proper] to $p$. The latter explicitly states that both its required hypotheses hold for integral coefficients in the standing setting; it is not being applied merely conditionally. Step 1 identifies its $\\Dctf$ closures with our $\\mathcal L_T$. Hence $p^*:\\mathcal L_Y\\to\\mathcal L_X$ and $Rp_*:\\mathcal L_X\\to\\mathcal L_Y$ are exact and preserve small sums. For $K\\in\\mathcal L_X$, $L\\in\\mathcal L_Y$, steps 4–5 give $K\\otimes^{\\mathbf L}p^*L\\in\\mathcal L_X$ and $Rp_*K\\otimes^{\\mathbf L}L\\in\\mathcal L_Y$, so both sides of the projection map lie in $\\mathcal L_Y$. Together with step 3, both sides are exact sum-preserving functors with either input fixed.",
+   "uses": [
+    "det-proper-base-change-unbounded-pullback",
+    "det-proper-image-localizing-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), extension: preservation and direct sums of proper direct image and inverse image"
+   }
+  },
+  {
+   "text": "We verify that the map in the statement is a transformation of exact functors in both variables. The small pro-étale sites and the coefficient universe satisfy the hypotheses of [lem-weil-pbc-sheaf-tensor-closed]; its exact sheafification and monoidal local equivalences allow [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. This identifies internal module objects with module sheaves over the section-ring sheaf of the very same coefficient object, preserving underlying sheaves and sections. The tensor is identified by its balanced bilinear universal property; no change to a discrete coefficient ring occurs. The formula in [def-sfb-module-upper-star] and the final paragraph of [sk-prop-sfb-cartesian-coefficients] identify the module pullback with ringed-topos inverse image and give its exactness. The derived adjunction is [sk-def-sfb-module-derived-pushpull]. Write $U=p^*$, $R=Rp_*$ and $\\varepsilon:UR\\to1$. By [lem-weil-pbc-ringed-projection-mate-exact] the canonical map $\\pi_{K,L}$ is the adjoint of\n$$U(RK\\otimes^{\\mathbf L}L)\\xrightarrow{\\mu}URK\\otimes^{\\mathbf L}UL\\xrightarrow{\\varepsilon_K\\otimes1}K\\otimes^{\\mathbf L}UL,$$\nnaturally in both inputs. Give $U$ its usual shift structure and $R$ the unique adjunction-compatible shift structure of [lem-weil-pbc-adjunction-shift-compatibility-unique](iii). With these shifts, $R$ is exact by [lem-sf-triangulated-right-adjoint]. In particular\n$$\\varepsilon_{K[1]}=\\varepsilon_K[1]\\circ e_{U,RK}\\circ U(e_{R,K}).$$\nSubstitute this equality in the displayed transpose at $(K[1],L)$ and use the shift compatibility of $\\mu$ in the ringed projection-mate node: after the tensor shift identifications it is exactly the shift of the transpose at $(K,L)$. At $(K,L[1])$ the counit is unchanged and the same shift compatibility of $\\mu$ gives the corresponding equality. The adjunction bijection commutes with shifts because its unit and counit do, so in each variable the canonical map satisfies $s_G\\pi_{-[1]}=\\pi_{-}[1]s_F$. Naturality then supplies all squares of the morphism of distinguished triangles, including the connecting square. These structures restrict to the full triangulated localizing categories of step 6.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-module-upper-star",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), extension: the canonical projection transformation is shift compatible in both variables; Stacks Tag 0943 (section-projection-formula), Tag 0A8D (lemma-adjoint-is-exact)"
+   }
+  },
+  {
+   "text": "Fix $L\\in\\Dbc(Y,\\mathcal O_E)$. The functors $K\\mapsto Rp_*K\\otimes^{\\mathbf L}L$ and $K\\mapsto Rp_*(K\\otimes^{\\mathbf L}p^*L)$ from $\\mathcal L_X$ to $\\mathcal L_Y$ are exact and preserve sums by step 6, and their canonical transformation is a transformation of exact functors by step 7. It is invertible on $\\Dbc(X,\\mathcal O_E)$ by step 2. Apply [sk-lem-sf-determination] with $\\Lambda=\\mathcal O_E$ and the $\\Dctf=\\Dbc$ identifications of step 1. It follows that $\\pi_{K,L}$ is invertible for every $K\\in\\mathcal L_X$ and this bounded constructible $L$.",
+   "uses": [
     "sk-lem-sf-determination"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), extension: first application of determination, in K"
+   }
+  },
+  {
+   "text": "Fix any $K\\in\\mathcal L_X$. Both functors of $L$ from $\\mathcal L_Y$ to $\\mathcal L_Y$ are exact and sum preserving by step 6, with a shift-compatible natural transformation by step 7. Step 8 proves its invertibility for every $L\\in\\Dbc(Y,\\mathcal O_E)$. Apply [sk-lem-sf-determination] with source and target scheme both $Y$, again using step 1. The map is invertible for all $L\\in\\mathcal L_Y$. This proves the rest of (2), and even locates the isomorphism in the full target subcategory $\\mathcal L_Y$.",
+   "uses": [
+    "sk-lem-sf-determination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+    "place": "Paragraph (2), extension: second application of determination, in L"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
+  "det-thm-sfb-proper-base-change-integral",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
   "sk-lem-int-tensor",
+  "det-proper-base-change-unbounded-pullback",
+  "det-proper-image-localizing-proper",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-module-upper-star",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
   "sk-lem-sf-determination"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.proof.md",
+  "place": "Paragraphs (1) and (2); bounded clause reuses the existing integral proper theorem, with the two-variable localizing argument and shift compatibility expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper projection formula for bounded constructible integral adic complexes on a pro etale site and their localizing closure",
+   "results": "8 hits: BDeRham, BDeRhamPlus, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', localCohomology, localCohomology.diagram, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, localCohomology.ofDiagram",
+   "date": "2026-10-17",
+   "verdict": "no match: perfectoid rings, local cohomology and affine limits do not state the integral proper formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"projection\"",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|ProjectionFormula|derivedComplete|boundedConstructible",
+   "results": "OK 0 hits, Mathlib root",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward satisfies the projection formula for constructible p adic coefficient sheaves and arbitrary objects of their localizing derived category",
+   "results": "8 hits: TopCat.Sheaf.pushforward_sheaf_of_sheaf, TopCat.Sheaf.pushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforward_obj_val, CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf pushforward definitions do not prove the integral derived formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection morphism for derived direct image and tensor product is invertible for proper maps and integral constructible coefficients",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso and its inv_snd_assoc, inv_fst_assoc, hom_awayι, inv_snd, inv_fst, hom_awayι_assoc, hom_SpecMap_awayMap_right_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match on second phrasing: projective-spectrum basic-open pullback isomorphisms concern a different projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"tensor\"",
+   "results": "OK 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|constructible",
+   "results": "OK 0 hits; subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -67,5 +242,84 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-pf-adic"
+ "unit": "sk-thm-sf-pf-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sf-pf-adic-projection",
+  "worker": "stage1",
+  "summary": "Reused existing bounded integral proper formula and all generic inputs; no new nodes. Made the standing setting and coefficient categories explicit, corrected the ambiguous phrase underived completion to without completion, and expanded tensor closure, operation restrictions, canonical mate shift compatibility and both determination applications. Reported stale unit metadata, absent umbrella node sk-prop-int-compactness and the incorrect Tag 099I label.",
+  "blueprint": "Step 2 realizes paragraph (1) through the existing integral proper theorem. Steps 1,3–5 realize paragraph (2) tensor closure; step 6 realizes its operation/sum hypotheses; step 7 checks the canonical map; steps 8–9 realize its two determination applications. Follows the current main-20261015 source; the older master unit record is not overwritten.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic qcqs consequence of the standing separated finite-type geometry, needed for the integral finite-Tor comparison."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Existing coefficient-category comparison identifies the Dctf tools with the Dbc categories in this item."
+   },
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Generic existence and minimality of localizing closures and their ambient small sums."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-integral",
+    "why": "Existing bounded integral proper formula supplies paragraph (1), using precisely the blueprint finite-reduction/Nakayama argument; no new lemma restates that clause."
+   },
+   {
+    "node": "sk-lem-int-tensor",
+    "why": "Integral tensor closure of the generators, explicitly used in the current blueprint paragraph (2)."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-pullback",
+    "why": "Generic inverse-image restriction and sum preservation on localizing categories."
+   },
+   {
+    "node": "det-proper-image-localizing-proper",
+    "why": "Existing proper-image restriction with its explicit integral coefficient assertion, replacing the missing umbrella node sk-prop-int-compactness."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheafification/monoidal hypotheses for identifying internal modules with module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic exact tensor and canonical projection mate with shift-compatible pullback tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic unique shift structure on the right adjoint, to check both variables of the actual canonical map."
+   },
+   {
+    "node": "lem-sf-triangulated-right-adjoint",
+    "why": "Generic exactness of the right adjoint for the chosen adjunction-compatible shift structure."
+   },
+   {
+    "node": "sk-lem-sf-determination",
+    "why": "Generic extension of invertibility from generators, explicitly used twice in the current blueprint paragraph (2)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
+  "det-thm-sfb-proper-base-change-integral",
+  "sk-lem-int-tensor",
+  "det-proper-base-change-unbounded-pullback",
+  "det-proper-image-localizing-proper",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "sk-lem-sf-determination"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NW-7a445fff4",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-7a445fff4 (reviewer sub-agent of L); spot-checked: I read the statement, all nine steps and the full statements of every cited node against main-20261015 sk-thm-sf-pf-adic-projection (.md and .proof.md). The delivery has no new nodes. Statement: same two clauses. It writes out the standing setting and coefficient categories. 'Underived completion' becomes 'without completion', which matches sk-lem-int-tensor; this does not weaken the statement, because Dbc tensors are already complete. Step 2 reuses det-thm-sfb-proper-base-change-integral(3), which is reviewed and on the current unit route (sk-thm-sf-pf-adic -> sk-prop-proper-base-change-unbounded -> sk-prop-proper-image-localizing -> sk-thm-sfb-proper-base-change). It is the same map: both are the adjunct of (eps x 1) after the comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The coefficient is the same: A_T = O_{E,T} by that node's step 1. The tensor is uncompleted in both. There is no cycle (transitive closure walked). Steps 4-5: localizing-preimage arguments, minimality checked, quantifier order right. Step 6: the O_E clause of det-proper-image-localizing-proper rests on det-prop-int-compactness-direct-sums(3), which realizes the blueprint's sk-prop-int-compactness. Step 7: shift compatibility in K is written out via adjunction-shift-compatibility (iii); in L it is given by the mate node. Steps 8-9: every hypothesis of sk-lem-sf-determination is checked. Stacks tags checked: 099I is not Nakayama (the report's source error is correct); 0F0G and 0B56 are correct. No SGA citation. All 12 declared tool_uses accepted. The unit record dag/units/sk-thm-sf-pf-adic.json is stale (master snapshot); this is for the maintainer and is not a delivery fault. No fixes made."
+ }
 }

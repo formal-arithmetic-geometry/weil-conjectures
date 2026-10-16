@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints. Agent-formulated general coslice pushout formula from HTT Proposition 4.4.2.2, the coslice mapping-space fiber identification of Lemma 5.5.5.12, and the coherent mapping-space universal properties; weakly contractible constant diagrams: Proposition 4.3.1.12 over a point. Filtered weak contractibility checked in Kerodon Proposition 9.1.1.17, Tag 02PH (https://kerodon.net/tag/02PH); this is a Kerodon tag, not a Stacks tag. Read online; no archived source or matching Stacks theorem.",
+   "place": "Historical master proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent mapping-complex adjunction infrastructure through lem-coef-presentable-infinity-adjoints and lem-coef-small-saturated-coslice-presentability; the general common-source coslice colimit formula and filtered constant-diagram clause.",
    "via": [
     "lem-coef-small-saturated-coslice-presentability",
     "lem-coef-presentable-infinity-adjoints",
@@ -28,9 +28,127 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal D=\\operatorname{Fun}(K,\\mathcal C)$ and $c=\\Delta_KX$. The pointwise colimit theorem applied to the arrow diagram $\\alpha$ gives $b:A\\to B$, together with the compatible colimit cocones. Thus $b$ is induced by $\\alpha$, rather than an unrelated arrow between its endpoint colimits. The identity cocone on $c$ gives $a:A\\to X$. Choose the pushout $P=X\\amalg_A B$, with structure maps $u:X\\to P$ and $v:B\\to P$ and its specified homotopy $ua\\simeq vb$. The cocone $Y\\to\\Delta_KB\\to\\Delta_KP$ and this homotopy give a coherent cocone $\\tau:q\\to\\Delta_Ku$ in the coslice: its common-source compatibility is the composite of the colimit compatibility for $\\alpha$ with the pushout homotopy. All three colimits exist by the hypothesis on $\\mathcal C$. For the mapping-space tests below one may work in a larger universe containing the mapping spaces of $\\mathcal C$; no extra local-smallness hypothesis or additional colimits of $\\mathcal C$ are used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.2.2 (objectwise colimits); Proposition 4.4.2.2 and Remark 4.4.2.3 (induced maps and pushouts); agent construction of the coslice cocone"
+   }
+  },
+  {
+   "text": "Fix $z:X\\to Z$. In simplicial degree $n$, both $\\operatorname{Fun}(K,\\mathcal C_{X/})$ and $\\mathcal D_{c/}$ consist of maps $K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ whose source restriction is constant at $X$. Reordering product factors identifies these simplicial sets, including every operator; the constant diagram with value $z$ corresponds to $\\Delta_Kz:c\\to\\Delta_KZ$. The coslice of an object $c$ in any quasicategory is precisely its cocone category for the one-point diagram with value $c$. Consequently the dual cone mapping-space formula, applied in $\\mathcal D$ to that one-point diagram, gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C_{X/})}(q,\\Delta_Kz)\\simeq\\operatorname{hofib}_{\\Delta_Kz}\\bigl(\\operatorname{Map}_{\\mathcal D}(Y,\\Delta_KZ)\\xrightarrow{\\alpha^*}\\operatorname{Map}_{\\mathcal D}(c,\\Delta_KZ)\\bigr).$$\nThe same formula in $\\mathcal C$ identifies $\\operatorname{Map}_{\\mathcal C_{X/}}(u,z)$ with the fiber over $z$ of $u^*:\\operatorname{Map}_{\\mathcal C}(P,Z)\\to\\operatorname{Map}_{\\mathcal C}(X,Z)$. The cone-calculus theorem also ensures that the coslices and the functor categories used here are quasicategories and all these mapping spaces are Kan complexes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.12; agent application to the one-point cocone category, both in C and in Fun(K,C)"
+   }
+  },
+  {
+   "text": "The colimit cone criterion applied to $Y\\to\\Delta_KB$ and $c\\to\\Delta_KA$ gives natural equivalences\n$$\\operatorname{Map}_{\\mathcal D}(Y,\\Delta_KZ)\\simeq\\operatorname{Map}_{\\mathcal C}(B,Z),\\qquad \\operatorname{Map}_{\\mathcal D}(c,\\Delta_KZ)\\simeq\\operatorname{Map}_{\\mathcal C}(A,Z).$$\nTheir naturality in $\\alpha$ identifies $\\alpha^*$ with $b^*$ and sends $\\Delta_Kz$ to $za$: this follows by restricting to the colimit cocone components, since the identity cocone induces $a$. Homotopy-pullback invariance therefore identifies the first fiber in step 2 with $\\operatorname{hofib}_{za}(b^*)$. Contravariant representables take the pushout defining $P$ to the homotopy pullback\n$$\\operatorname{Map}_{\\mathcal C}(P,Z)\\simeq\\operatorname{Map}_{\\mathcal C}(X,Z)\\times^h_{\\operatorname{Map}_{\\mathcal C}(A,Z)}\\operatorname{Map}_{\\mathcal C}(B,Z).$$\nIts fiber over $z$ is $\\operatorname{hofib}_{za}(b^*)$: on either side the data are $h:B\\to Z$ and a path $hb\\simeq za$, with all higher simplices. This is just iterated homotopy pullback, with the fixed point $z$ substituted in the first coordinate. These identifications are induced by $\\tau$: a morphism $r:P\\to Z$ with $ru\\simeq z$ is sent to $rv$ with the path $rvb\\simeq rua\\simeq za$. Hence the actual comparison\n$$\\operatorname{Map}_{\\mathcal C_{X/}}(u,z)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C_{X/})}(q,\\Delta_Kz)$$\nis an equivalence, naturally in $z$. The dual cone criterion now proves that $\\tau$ is colimiting. For $K=\\varnothing$, $A$ and $B$ are initial, so the same pushout is equivalent to $X$ and $u$ to its identity; the argument never assumes that $K$ has a vertex.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 5.5.5.12-5.5.5.13; Proposition 4.4.2.2; explicit comparison of the homotopy fibers, using the coherent cocone criterion"
+   }
+  },
+  {
+   "text": "Suppose $K\\to\\Delta^0$ is a weak homotopy equivalence. The groupoid-localization theorem identifies $\\mathcal C=\\operatorname{Fun}(\\Delta^0,\\mathcal C)$ with the full subcategory $\\operatorname{Fun}_{\\mathrm{eq}}(K,\\mathcal C)$. In particular for any $X,Z$, fullness and equivalence on mapping spaces show that the specific constant-transformation map\n$$\\operatorname{Map}_{\\mathcal C}(X,Z)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(\\Delta_KX,\\Delta_KZ)$$\nis an equivalence. The dual cone criterion says exactly that the identity constant cocone with apex $X$ is colimiting. This argument proves existence of this particular colimit in any quasicategory, without assuming other colimits. Comparing it with the cocone defining $A$, the induced map is precisely $a:A\\to X$. Both cocones are initial in the cocone category; their comparison maps are inverse up to homotopy since the relevant mapping spaces are contractible. Evaluation at the apex makes $a$ an equivalence.",
+   "uses": [
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.12 over a point; explicit full-mapping-space argument using the localization of K at all edges"
+   }
+  },
+  {
+   "text": "For use with the compact-support theorem, the finite cube $[0,1]^n$ is compact Hausdorff. Here is a reduction to the cited compact-simplex statement, avoiding an uncited compactness theorem. For $n\\geq1$ the continuous map from the simplex on the $2^n$ vertices $\\epsilon\\in\\{0,1\\}^n$ to $[0,1]^n$ sends weights $(t_\\epsilon)$ to $\\sum_\\epsilon t_\\epsilon\\epsilon$. It is surjective: for $x\\in[0,1]^n$ use the nonnegative weights $t_\\epsilon=\\prod_{\\epsilon_i=1}x_i\\prod_{\\epsilon_i=0}(1-x_i)$, whose sum is $1$ and whose weighted coordinate sums are $x_i$. The image is compact by pulling an open cover back to the compact simplex, taking a finite subcover and using surjectivity. It is Hausdorff since two unequal points have an unequal coordinate and disjoint coordinate intervals. For $n=0$ it is a point. Finite discrete spaces are likewise compact Hausdorff by choosing one cover member per point.",
+   "uses": [
+    "lem-coef-standard-simplex-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent finite convex-combination argument from the compactness of standard simplices (existing Mathlib leaf)"
+   }
+  },
+  {
+   "text": "Let $I$ be a small $\\kappa$-filtered quasicategory, with $\\kappa$ infinite regular. Applying filteredness to the empty diagram gives a vertex. Any finite simplicial subset $F\\subseteq I$ is $\\kappa$-small, so its inclusion admits a coherent cocone $H_F:F\\times\\Delta^1\\to I$ from that inclusion to a constant diagram at a vertex $i_F$. By the realization-cylinder theorem, $|H_F|\\rho_F^{-1}$ is a continuous homotopy from the realized inclusion $e_F:|F|\\to|I|$ to the constant map at $i_F$. For any two points of $|I|$, apply compact finite support to the map from a two-point discrete space. Both points factor through a single finite $F$; the two tracks of this homotopy give paths to $i_F$. Thus $|I|$ is nonempty and path connected. This uses actual coherent cocones, not just cones in the ordinary homotopy category.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-compact-finite-support",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02PH",
+    "place": "Proposition 9.1.1.17 and Remark 9.1.1.14; agent realization version using compact finite support instead of Kan replacement"
+   }
+  },
+  {
+   "text": "For $n\\geq1$ let $f:([0,1]^n,\\partial[0,1]^n)\\to(|I|,x)$ represent any homotopy-group element. By step 5 and compact finite support, $f=e_Ff_F$ for a continuous $f_F:[0,1]^n\\to|F|$ and finite $F\\subseteq I$. The realization inclusion is a homeomorphism onto its image by the simplicial-subcomplex theorem, hence is injective. Since $f$ is constant at $x$ on the boundary, $f_F$ is constant on the boundary at a point $x_F$ with $e_F(x_F)=x$. Apply the homotopy of step 6 to $e_F$. The basepoint-change theorem gives $(e_F)_*=\\beta_\\gamma\\circ(\\operatorname{const}_{i_F})_*$ on $\\pi_n(|F|,x_F)$, where $\\gamma$ is the track of $x_F$. The latter induced map is zero, since every composite is constant. Thus $[f]=(e_F)_*[f_F]=0$. This treats moving basepoints correctly, without asserting that the cocone homotopy fixes $x$. Together with the path-component calculation in step 6, all the groups and components in the definition of weak contractibility show that $I\\to\\Delta^0$ is a weak homotopy equivalence. Only finite diagrams were needed, so the argument applies to every infinite regular $\\kappa$, including $\\aleph_0$.",
+   "uses": [
+    "lem-cbc-realization-compact-finite-support",
+    "lem-cbc-realization-cw-subcomplex",
+    "lem-coef-homotopy-groups-basepoint-change",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02PH",
+    "place": "Proposition 9.1.1.17; agent compact-support and basepoint-change expansion of its nullhomotopy argument"
+   }
+  },
+  {
+   "text": "The terminal quasicategory $*$ has one simplex in each degree. Every $I$-diagram in it and its cocone category are terminal simplicial sets, so its unique cocone is colimiting. Its image under the functor selecting $X$ is the identity constant cocone. For $I$ small $\\kappa$-filtered, steps 6-7 make $I$ weakly contractible and step 4 makes that image cocone colimiting. This proves preservation for each infinite regular $\\kappa$. Finally $*$ is locally small and admits these colimits. Its sole object $e$ is $\\kappa$-compact: $\\operatorname{Map}_*(e,e)=\\Delta^0$, and for every such $I$, step 4 applied to the quasicategory of spaces says that the colimit of the constant point diagram is the point, so its comparison with $\\operatorname{Map}_*(e,\\operatorname{colim}_I e)$ is an equivalence. The one-object full subcategory is small and generates $e$ by the singleton diagram. Its indexing category $\\Delta^0$ is $\\kappa$-filtered, since every diagram into it has a unique coherent cocone. These are all the clauses of $\\kappa$-accessibility in the cited definition, so $*$ is accessible.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.0.1 and accessibility/compactness conventions; agent verification using the preceding constant-diagram and filtered-contractibility steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-realization-compact-finite-support",
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-standard-simplex-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, foundational coherent adjunction infrastructure reached through the recorded blueprint ancestry; explicit mapping-space proof inspired by HTT Lemmas 5.5.5.12-13, Proposition 4.4.2.2 and Proposition 4.3.1.12. The filtered clause follows the finite-support nullhomotopy idea of Kerodon 02PH, with existing realization and basepoint-change tools. These online references are not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +205,45 @@
    "results": "{\"t\": \"2026-10-16T17:14:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Semantic hits have ordinary Category instances and Hom-set universal properties. Quasicategory grep hits are copyright text, underlying-category descriptions, and the inner-fibration definition (InnerFibration.lean:61-67); none states this coherent theorem. Loogle returned zero hits for the paired quasicategory/colimit query."
+  },
+  {
+   "tool": "grep",
+   "query": "Under.isColimit|hasColimit_of_hasColimit_liftFromUnder",
+   "results": "{\"t\": \"2026-10-16T19:27:35Z\", \"tool\": \"grep\", \"query\": \"Under.isColimit|hasColimit_of_hasColimit_liftFromUnder\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/WithTerminal/Cone.lean\", \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"2b704dd8e2d78860\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read WithTerminal/Cone.lean:249-269, Limits/Connected.lean:68-88 and Limits/Shapes/Pullback/Connected.lean:59-81. They use ordinary categories, Hom sets and connected ordinary shapes. Quasicategory/Basic.lean defines inner-horn filling but supplies no coherent coslice colimit theorem. The returned simplicial horn pushouts are ordinary colimits of simplicial sets, not colimits internal to an arbitrary quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy colimit of a constant diagram over a weakly contractible simplicial set is its value",
+   "results": "{\"t\": \"2026-10-16T19:27:35Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy colimit of a constant diagram over a weakly contractible simplicial set is its value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitConstCocone.congr_simp\", \"CategoryTheory.Limits.Types.colimitConstPUnitIsoPUnit\", \"CategoryTheory.Limits.Types.isColimitPUnitCocone\", \"CategoryTheory.Limits.colimitConstInitial\", \"CategoryTheory.Limits.hasColimit_const_of_isConnected\", \"CategoryTheory.Limits.isColimitConstCocone\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.Limits.preservesColimits_const\"], \"digest\": \"26dda047ce29daea\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read WithTerminal/Cone.lean:249-269, Limits/Connected.lean:68-88 and Limits/Shapes/Pullback/Connected.lean:59-81. They use ordinary categories, Hom sets and connected ordinary shapes. Quasicategory/Basic.lean defines inner-horn filling but supplies no coherent coslice colimit theorem. The returned simplicial horn pushouts are ordinary colimits of simplicial sets, not colimits internal to an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimits of coherent diagrams in an infinity undercategory are pushouts of the colimit of targets along the colimit of the constant source",
+   "results": "{\"t\": \"2026-10-16T19:27:35Z\", \"tool\": \"leanfinder\", \"query\": \"Colimits of coherent diagrams in an infinity undercategory are pushouts of the colimit of targets along the colimit of the constant source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Under.hasColimit_of_hasColimit_liftFromUnder\", \"CategoryTheory.SmallObject.functorObj_isPushout\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.Limits.IsColimit.pushoutCoconeEquivBinaryCofanInverse\", \"CategoryTheory.Limits.IsColimit.pushoutCoconeEquivBinaryCofanFunctor_desc_right\", \"CategoryTheory.Under.pushout_obj\", \"CategoryTheory.Limits.isColimitMapCoconePushoutCoconeEquiv\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₂\"], \"digest\": \"70f66996161700a3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read WithTerminal/Cone.lean:249-269, Limits/Connected.lean:68-88 and Limits/Shapes/Pullback/Connected.lean:59-81. They use ordinary categories, Hom sets and connected ordinary shapes. Quasicategory/Basic.lean defines inner-horn filling but supplies no coherent coslice colimit theorem. The returned simplicial horn pushouts are ordinary colimits of simplicial sets, not colimits internal to an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|filtered|[Cc]ontract|[Uu]nder",
+   "results": "{\"t\": \"2026-10-16T19:27:50Z\", \"tool\": \"grep\", \"query\": \"colimit|filtered|[Cc]ontract|[Uu]nder\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"6027ae388d07b865\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read WithTerminal/Cone.lean:249-269, Limits/Connected.lean:68-88 and Limits/Shapes/Pullback/Connected.lean:59-81. They use ordinary categories, Hom sets and connected ordinary shapes. Quasicategory/Basic.lean defines inner-horn filling but supplies no coherent coslice colimit theorem. The returned simplicial horn pushouts are ordinary colimits of simplicial sets, not colimits internal to an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pushout formula for a colimit in a quasicategorical coslice and weak contractibility of filtered quasicategories",
+   "results": "{\"t\": \"2026-10-16T19:27:51Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy pushout formula for a colimit in a quasicategorical coslice and weak contractibility of filtered quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₂₀.isPushout\", \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"CategoryTheory.Arrow.cechConerve_obj\", \"HomotopicalAlgebra.AttachCells.isColimit₂\", \"SSet.horn.isColimit\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\"], \"digest\": \"54f4f57537ae591b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read WithTerminal/Cone.lean:249-269, Limits/Connected.lean:68-88 and Limits/Shapes/Pullback/Connected.lean:59-81. They use ordinary categories, Hom sets and connected ordinary shapes. Quasicategory/Basic.lean defines inner-horn filling but supplies no coherent coslice colimit theorem. The returned simplicial horn pushouts are ordinary colimits of simplicial sets, not colimits internal to an arbitrary quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-coslice-presentability",
@@ -98,5 +251,44 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-coslice-colimit-formula",
+  "worker": "stage1",
+  "summary": "Replaced the earlier incomplete split by an explicit comparison of coslice cocone mapping spaces and pushout mapping fibers. Proved filtered weak contractibility directly using existing compact finite support, cylinder, subcomplex and basepoint-change nodes, dropping the earlier uncommitted node which repeated a clause. Verified terminal-object compactness before asserting accessibility. No statement change and no new node.",
+  "blueprint": "The historical master ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, requires coherent adjunction and limit infrastructure through the recorded chain of created items. This foundational child proves its common-source coslice pushout formula and constant/filtered-diagram consequences; it does not change the coefficient-level adjunction route. The main-20261015 snapshot contains only the ancestor statement; the historical master proof is retained as the source of this ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone criterion and homotopy-fiber formula, applied to one-point cocone categories in C and Fun(K,C); this foundational interface is not supplied by the item unit."
+   },
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic restriction equivalence at a weakly contractible simplicial shape, including full mapping spaces; no statement in the item unit replaces this shape-localization theorem."
+   },
+   {
+    "node": "lem-cbc-realization-compact-finite-support",
+    "why": "Topological compact-domain finite-support theorem, used on finite sets and compact cubes; a generic realization tool absent from the item unit."
+   },
+   {
+    "node": "lem-cbc-realization-cw-subcomplex",
+    "why": "Closed-embedding statement for realization of a simplicial subset, needed to preserve the constant boundary of a cube after finite-support factorization; not a coefficient or duality route change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-realization-compact-finite-support",
+  "lem-cbc-realization-cw-subcomplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-a47e5ae26",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-a47e5ae26 (reviewer sub-agent of L); spot-checked: I read the item in full and the statements of all 11 cited nodes, with the unit and the parent. The delivery has no new nodes. The statement is true and keeps every hypothesis and conclusion, nothing weakened. I tested it on four cases: an empty index gives id_X; one point gives the arrow itself; two points give Y1 ⊔_X Y2; a circle shows the augmentation term is genuinely needed. It also matches exactly what the parent lem-coef-small-saturated-coslice-presentability uses in its steps 2-3. Step by step: Step 1's arrow colimits are stated in the Yoneda node. Step 2: the coslice is literally the one-point cocone category of def-cbc, and the dual homotopy-fiber formula of the cone-calculus node applies directly. Step 3: representables take the pushout to a homotopy pullback, its fiber is hofib_{za}(b^*), and the comparison is checked to be the map induced by τ. One remark, not a fault: the homotopy-pullback invariance lemma is stated for strictly commuting squares but is applied to squares that commute only up to homotopy, which is the usual level of detail here. Step 4: groupoid localization at K→Δ⁰ gives the full mapping-space equivalence, so the identity cocone is colimiting and a is an equivalence; this works in any quasicategory. Step 5: the cube surjection weights are correct. Steps 6-7: compact finite support, the realization cylinder, injectivity of subcomplex realization and the moving-basepoint formula together give that κ-filtered quasicategories are weakly contractible, including κ=ℵ0. Step 8: every κ-accessibility clause of def-coef-presentable holds for the terminal quasicategory. No cycle (the 95-node dependency closure does not reach the item). Duplicate search: the only hit, lem-cbc-filtered-nerve-weak-contractibility, covers ordinary categories only, so it is not a duplicate. I accept the four declared off-unit tool uses: lem-cbc cone-calculus, groupoid-localization, compact-finite-support and cw-subcomplex. Minor, not needing a fix: the report wrongly says main-20261015 has only the ancestor's statement (a .proof.md with the same text exists), and step 5's source field names Hovey, which is irrelevant to that step. No SGA source is used. No fixes were written."
+ }
 }

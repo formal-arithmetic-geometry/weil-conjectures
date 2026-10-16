@@ -1,69 +1,214 @@
 {
-  "id": "def-pur-affine-line-purity-comparison",
-  "blueprint": {
-    "is": "def-pur-affine-line-purity-comparison",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-affine-line-purity-comparison",
+ "blueprint": {
+  "is": "def-pur-affine-line-purity-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Affine-line purity comparison",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions]: $k$ is the fixed algebraic closure of a finite field of characteristic $p_0$, $\\ell\\ne p_0$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Put $X=\\mathbf A^1_Y$, with projection $p:X\\to Y$ [def-sbc-affine-space], and $P=\\mathbf P(\\{0,1\\};Y)=\\mathbf P^1_Y$, with projection $q:P\\to Y$ [def-nagata-projective-space-base-change]. The standard open immersion $j:X\\hookrightarrow P$ is the chart $D_+(T_1)$ with coordinate $t=T_0/T_1$, using [lem-weil-pbc-projective-space-standard-charts]; thus $qj=p$. The projection $q$ is proper [lemma-nagata-projective-space-base-change-proper], so $(j,q)$ is the chosen compactification of $p$. These schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: $Y$ is finite type over the field $k$, and the affine charts of $X$ and $P$ are polynomial algebras in one variable over affine charts of $Y$. In particular $X$ and $P$ are also finite type over $k$; $p$ is separated finite type (on affine base charts its diagonal is cut out by the difference of the two coordinates). By [lem-kun-dimension-finite-type], choose $d\\geq0$ with $\\dim P\\leq d$ for the relative-adjunction theorem below.\n\nWrite $C_T=\\nu_T^*$ for the exact derived comparison pullback [def-sf-comparison-derived-pullback] from the small etale site to the small pro-etale site of $T$, with $\\nu_T$ as in [def-weil-pbc-site-comparison-morphism]. The pro-etale twists $A_T(1)$ are exactly those of [def-coefficient-twists-detailed], not a new coefficient convention. Choose $r\\geq1$ with $\\ell^r A=0$ and put $B_T=\\mu^{\\mathrm{et}}_{\\ell^r,T}\\otimes_{\\mathbf Z/\\ell^r}A_T$, where $\\mu^{\\mathrm{et}}_{\\ell^r,T}$ is the sheaf of units whose $\\ell^r$-th power is $1$. Use the ordinary etale Tate line and its inverse-image identifications of [lem-asd-etale-finite-twist-pullback], and the canonical identifications $\\tau_T:C_TB_T\\xrightarrow{\\sim}A_T(1)$, independent of $r$, supplied by [lem-pur-vector-integration-site-comparison]. That node applies here to the trivial rank-one vector bundle $X\\to Y$. Its projective-line comparison identifies the ordinary etale trace $t_q^e$ of [def-amb-p1-trace] with the pro-etale trace $t_q^p$: if $\\beta_q:C_YRq_{e,*}B_P[2]\\xrightarrow{\\sim}Rq_{p,*}A_P(1)[2]$ is its canonical comparison, define\n$$\n t_q^p=C_Y(t_q^e)\\circ\\beta_q^{-1}:Rq_{p,*}A_P(1)[2]\\longrightarrow A_Y.\n$$\nHere and below coefficient-unit comparisons are understood. Equivalently, this is $\\operatorname{pr}_2(b_q^p)^{-1}$ in the compared projective-line decomposition of that node. All subsequent unsuperscripted operations are pro-etale operations.\n\nLet $L=A_P(1)[2]$. Let $\\varepsilon^j_L:j_!j^*L\\to L$ be the counit of exact extension by zero and restriction [lem-cbc-proetale-extension-zero]. Identify $j^*L=A_X(1)[2]$ by the Tate-line inverse-image comparison above. Using the chosen-compactification functor [def-compact-support-direct-image-detailed], define integration by the explicit composite\n$$\n \\int_p:Rp_!A_X(1)[2]=Rq_*j_!A_X(1)[2]\n \\xrightarrow{Rq_*(\\varepsilon^j_L)}Rq_*A_P(1)[2]\n \\xrightarrow{t_q^p}A_Y.\n$$\nThe comparison in [lem-pur-vector-integration-site-comparison] identifies this with the pullback of the restriction of $t_q^e$; in particular the initial arrow is the extension-by-zero counit, not a choice of a morphism having its source and target.\n\nUse derived pullback and tensor as in [def-weil-derived-pullback-tensor-hom]. For $K\\in D^b_{ctf}(Y,A)$ choose an ordinary etale representative $K^e\\in D^b_{ctf}(Y_{\\mathrm{et}},A)$ and $C_YK^e\\cong K$ using [det-pe-finite-tor-comparison-noetherian]. Its hypotheses hold because $Y$ is Noetherian and hence quasi-compact and quasi-separated and the finite ring $A$ is Noetherian. Use the tensor-pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for $C_T$ and the inverse-image comparison [lem-weil-pbc-comparison-pullback]. They identify\n$$\n M_K:=Lp^*K\\otimes_A^LA_X(1)[2]=Lp^*K(1)[2]\n \\cong C_X\\bigl(p_e^*K^e\\otimes_A^LB_X[2]\\bigr).\n$$\nThe representative on the right is bounded: $p_e^*$ is exact and $B_X$ is locally free of rank one. The canonical projection transformation of [def-exchange-projection], evaluated at $(f,F,N)=(p,A_X(1)[2],K)$, is invertible by [lem-weil-finite-compact-projection-formula], including its pro-etale clause. Define $\\Pi_K$ to be its inverse, with tensor factors interchanged by the symmetry of derived tensor:\n$$\n \\Pi_K:Rp_!M_K\\xrightarrow{\\sim}K\\otimes_A^LRp_!A_X(1)[2].\n$$\nExplicitly, put $F=A_X(1)[2]$ and let $s_{U,V}:U\\otimes_A^LV\\xrightarrow{\\sim}V\\otimes_A^LU$ denote tensor symmetry. With $\\operatorname{PF}_{p,F,K}:Rp_!F\\otimes_A^LK\\to Rp_!(F\\otimes_A^LLp^*K)$ the specified canonical projection transformation at $(j,q)$, the composite is\n$$\n \\Pi_K=s_{Rp_!F,K}\\circ(\\operatorname{PF}_{p,F,K})^{-1}\\circ Rp_!(s_{Lp^*K,F}).\n$$\nThus the first symmetry acts inside $Rp_!$, the inverse projection transformation acts next, and the second symmetry puts $K$ first on $Y$. Define\n$$\n a_K:Rp_!M_K\\xrightarrow{\\Pi_K}K\\otimes_A^LRp_!A_X(1)[2]\n \\xrightarrow{1_K\\otimes\\int_p}K\\otimes_A^LA_Y\n \\xrightarrow{\\sim}K.\n$$\n\nUse the exceptional functor $Rp^!$ of [def-weil-exceptional-inverse-image] and the natural bijection of [thm-sf-ambient-adjoint-class](2), at the chosen compactification $(j,q)$:\n$$\n \\Phi_{p;M_K,K}:\\operatorname{Hom}_Y(Rp_!M_K,K)\n \\xrightarrow{\\sim}\\operatorname{Hom}_X(M_K,Rp^!K).\n$$\nIts source input $M_K$ has the bounded-below etale-origin witness just displayed, and its target input $K$ is bounded below. Define the affine-line purity comparison to be\n$$\n \\gamma_{p,K}:=\\Phi_{p;M_K,K}(a_K):Lp^*K(1)[2]\\longrightarrow Rp^!K.\n$$\nThis is a morphism in the ordinary pro-etale derived category, defined using the adjunction on the specified etale-origin class; no adjunction on arbitrary ambient pro-etale complexes is invoked. The witness is used to justify applicability, and does not enter the formulas for $\\int_p$, $\\Pi_K$, $a_K$, or $\\gamma_{p,K}$. Isomorphy of $\\gamma_{p,K}$ is a separate purity assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-pur-affine-line-purity-comparison.md",
+  "place": "node def-pur-affine-line-purity-comparison, order 1974"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-coefficient-twists-detailed",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-vector-integration-site-comparison",
+  "def-amb-p1-trace",
+  "lem-cbc-proetale-extension-zero",
+  "def-compact-support-direct-image-detailed",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "def-exchange-projection",
+  "lem-weil-finite-compact-projection-formula",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine line purity comparison defined as adjoint of compact support integration from the projective line trace",
+   "results": "8 hits: rieszContentAux, rieszContent, CompactlySupportedContinuousMap.toRealLinear, NNRealRMK.rieszMeasure, RealRMK.rieszMeasure, CompactlySupportedContinuousMap.integralPositiveLinearMap, NNRealRMK.rieszMeasure_integralLinearMap, NNRealRMK.integralLinearMap_rieszMeasure. All concern measures and continuous functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Affine-line purity comparison",
-  "statement": "In the finite-coefficient purity conventions,\nlet $p:\\mathbf A^1_Y\\to Y$ be the projection and\n$j:\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$, $q:\\mathbf P^1_Y\\to Y$\nits standard compactification, as in\nthe affine-line datum.\nDefine integration by restriction of the already constructed\nprojective-line trace:\n\n$$\n\\int_p:Rp_!\\Lambda(1)[2]=Rq_*j_!\\Lambda(1)[2]\n\\longrightarrow Rq_*\\Lambda(1)[2]\n\\xrightarrow{t_q}\\Lambda_Y.\n$$\n\nFor $K\\in D^b_{ctf}(Y,\\Lambda)$, define $\\gamma_{p,K}$ to be the\nexceptional adjoint of\n\n$$\nRp_!Lp^*K(1)[2]\n\\xrightarrow{\\sim}K\\otimes^L Rp_!\\Lambda(1)[2]\n\\xrightarrow{1_K\\otimes\\int_p}K,\n$$\n\nusing the compact-support projection map\nand Tate twists.\nThus $\\gamma_{p,K}:Lp^*K(1)[2]\\to Rp^!K$ is defined in the ambient\ncategory; its isomorphy and bounded constructibility are conclusions.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-pur-affine-line-purity-comparison.md",
-    "place": "node def-pur-affine-line-purity-comparison, order 1974"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Basic, including CategoryTheory.Adjunction.homEquiv and its unit/counit formulas. Read Basic.lean:160-170; this is the abstract Hom equivalence only, with none of the etale trace or exceptional functors.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-amb-p1-trace",
-    "def-coefficient-twists-detailed",
-    "def-exchange-projection",
-    "def-pur-affine-line-datum",
-    "def-pur-conventions",
-    "def-weil-exceptional-inverse-image"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1974,
-  "blueprint_uses": [
-    "def-amb-p1-trace",
-    "def-coefficient-twists-detailed",
-    "def-exchange-projection",
-    "def-pur-affine-line-datum",
-    "def-pur-conventions",
-    "def-weil-exceptional-inverse-image"
-  ],
-  "uses_not_cited": [
-    "def-amb-p1-trace",
-    "def-coefficient-twists-detailed",
-    "def-exchange-projection",
-    "def-pur-affine-line-datum",
-    "def-pur-conventions",
-    "def-weil-exceptional-inverse-image"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "affineLinePurity|affineLineIntegration|projectiveLineTrace|compactSupport.*[Pp]urity",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-an",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the finite-coefficient purity conventions,\nlet $p:\\mathbf A^1_Y\\to Y$ be the projection and\n$j:\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$, $q:\\mathbf P^1_Y\\to Y$\nits standard compactification, as in\nthe affine-line datum.\nDefine integration by restriction of the already constructed\nprojective-line trace:\n\n$$\n\\int_p:Rp_!\\Lambda(1)[2]=Rq_*j_!\\Lambda(1)[2]\n\\longrightarrow Rq_*\\Lambda(1)[2]\n\\xrightarrow{t_q}\\Lambda_Y.\n$$\n\nFor $K\\in D^b_{ctf}(Y,\\Lambda)$, define $\\gamma_{p,K}$ to be the\nexceptional adjoint of\n\n$$\nRp_!Lp^*K(1)[2]\n\\xrightarrow{\\sim}K\\otimes^L Rp_!\\Lambda(1)[2]\n\\xrightarrow{1_K\\otimes\\int_p}K,\n$$\n\nusing the compact-support projection map\nand Tate twists.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "affine line purity comparison integration projective line trace",
+   "results": "8 hits: Algebra.intTrace_eq_trace, Algebra.intTrace, AffineMap.lineMap_vsub_lineMap, WeierstrassCurve.Projective.Point.toAffine_of_equiv, Algebra.intTrace.congr_simp, Algebra.algebraMap_intTrace, WeierstrassCurve.Projective.Point.toAffineAddEquiv_symm_apply, AffineEquiv.apply_lineMap. None concerns etale sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extraordinary pullback of etale sheaves comparison map from Tate twisted inverse image using trace and adjunction",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. Ordinary module-sheaf pullback constructions, no exceptional inverse image or trace comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|upperShriek|LowerShriek|extraordinary",
+   "results": "0 hits in CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.Adjunction",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extraordinary inverse image of etale sheaves Tate twist trace adjunction",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, CompHausLike.LocallyConstant.adjunction, CategoryTheory.constantSheafΓAdj. All are ordinary sheaf adjunctions, with no compact-support trace comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def homEquiv|theorem homEquiv_apply",
+   "results": "2 hits in CategoryTheory/Adjunction/Basic.lean:160 (homEquiv), 306 (homEquiv_apply_eq). Read lines 150-170: the generic adjunction equivalence, not the geometric construction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct morphism from Tate twisted pullback to exceptional inverse image by transposing a compactly supported trace",
+   "results": "{\"t\": \"2026-10-16T19:49:40Z\", \"tool\": \"leanfinder\", \"query\": \"Construct morphism from Tate twisted pullback to exceptional inverse image by transposing a compactly supported trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackComp\"], \"digest\": \"15198927d47b9a22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary module-sheaf pullback declarations; no compact-support trace or exceptional transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|exceptionalInverseImage|compactSupportTrace|purityComparison",
+   "results": "{\"t\": \"2026-10-16T19:49:29Z\", \"tool\": \"grep\", \"query\": \"TateTwist|exceptionalInverseImage|compactSupportTrace|purityComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1974,
+ "blueprint_uses": [
+  "def-amb-p1-trace",
+  "def-coefficient-twists-detailed",
+  "def-exchange-projection",
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "uses_not_cited": [
+  "def-amb-p1-trace",
+  "def-coefficient-twists-detailed",
+  "def-exchange-projection",
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the finite-coefficient purity conventions,\nlet $p:\\mathbf A^1_Y\\to Y$ be the projection and\n$j:\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$, $q:\\mathbf P^1_Y\\to Y$\nits standard compactification, as in\nthe affine-line datum.\nDefine integration by restriction of the already constructed\nprojective-line trace:\n\n$$\n\\int_p:Rp_!\\Lambda(1)[2]=Rq_*j_!\\Lambda(1)[2]\n\\longrightarrow Rq_*\\Lambda(1)[2]\n\\xrightarrow{t_q}\\Lambda_Y.\n$$\n\nFor $K\\in D^b_{ctf}(Y,\\Lambda)$, define $\\gamma_{p,K}$ to be the\nexceptional adjoint of\n\n$$\nRp_!Lp^*K(1)[2]\n\\xrightarrow{\\sim}K\\otimes^L Rp_!\\Lambda(1)[2]\n\\xrightarrow{1_K\\otimes\\int_p}K,\n$$\n\nusing the compact-support projection map\nand Tate twists.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-affine-line-purity-comparison",
+  "worker": "stage1",
+  "summary": "Made the finite-level coefficient and base hypotheses explicit; replaced the unavailable ambient pro-etale adjunction with the established bounded-below etale-origin Hom bijection. Specified the actual trace via the existing etale/pro-etale integration comparison, the extension-by-zero counit, the inverse canonical projection map with its invertibility theorem, and the adjoint transpose. Removed the unrelated Kummer affine-line datum, which now imposes a ramification-divisibility restriction and does not define the compactification. Reused existing nodes only; no Lean work.",
+  "blueprint": "Current main-20261015 definition def-pur-affine-line-purity-comparison, its integration and transpose displays; current sk-prop-an opening paragraph Integration on affine space. In the imported dag/units/sk-prop-an record these are Step 5(b) and the defining first sentence of 5(c). No purity/isomorphy or normalization theorem is folded into the definition.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Only its finite Tate-line, projective-line trace and open-counit comparisons are used to give the already constructed etale trace its specified pro-etale realization; no vector-bundle purity conclusion is used."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "The equivalence supplies an etale finite-Tor representative of K, needed to apply the existing projection formula on exactly its stated domains."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Its bounded-below etale-origin Hom bijection defines the transpose; an unrestricted ambient pro-etale right adjoint is not available."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "The standard-chart interface identifies the open chart of the base-change projective line with A1 and fixes the compactification map."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The generic ringed-topos tensor comparison supplies the explicit etale-origin witness for the twisted pullback source."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "The coherent inverse-image comparison types the same witness without silently identifying the sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-vector-integration-site-comparison",
+  "det-pe-finite-tor-comparison-noetherian",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-4ab78e734",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-4ab78e734 (reviewer sub-agent of L); spot-checked: I read the whole definition. Every clause checks against the current main-20261015 blueprint (order 2318), the sk-prop-an opening paragraph on integration, and the user thm-pur-affine-line-purity, whose proof Steps 3 and 5 use the same ingredients. Trace: t_q^p = C_Y(t_q^e)∘β_q^{-1}, with τ, β_q and t_q^p β_q = C(t_q^e) taken from the statement of lem-pur-vector-integration-site-comparison; B_T equals the A_T(1) of def-amb-p1-trace with N = ℓ^r. Integration: ∫_p = t_q^p∘Rq_*(the j_!⊣j^{-1} counit of lem-cbc-proetale-extension-zero), with Rp_! = Rq_*j_! from def-compact-support-direct-image-detailed. Projection map: I typed Π_K = s∘PF^{-1}∘Rp_!(s) against def-exchange-projection's PF_{f,K,L}: Rf_!K⊗L → Rf_!(K⊗Lf^*L) and it is correct; it is invertible by lem-weil-finite-compact-projection-formula, with first input F = A_X(1)[2] (witness B_X[2]) and finite-Tor second input K^e from det-pe-finite-tor-comparison-noetherian (Y qcqs, A Noetherian). Transpose: γ = Φ(a_K) under thm-sf-ambient-adjoint-class(2); all its hypotheses hold (finite type over F̄_q, separated, compactification (j,q), dim P ≤ d by lem-kun-dimension-finite-type, bounded-below étale-origin source, D^+ target), and its R_c is exactly the finite-level Rp^! of def-weil-exceptional-inverse-image. Edge cases tested: Y empty, Y = Spec k with K = A, K = 0 or a shift, and e = 2 with n = 1. No dependency cycle (all 23 dependencies traversed). Dropping def-pur-affine-line-datum is right: it now constructs G_m and the Kummer torsor and assumes e | n. Not duplicates: pur9-def-purity-comparison is a rank-c generalization and pur9-def-affine-line-trace defines only the trace. The slopmaster2 AffineSpace.lean:269-305 states existence only and is sorry, so nothing is attached. I accept all six declared tool_uses: they are statement dependencies of a definition, each used only through its stated clauses. No SGA. Repairs: (1) source still named the master copy, order 1974, although the report says it was updated; set to main-20261015, order 2318. (2) The derived C_T = ν_T^* cited only the sheaf-level def-weil-pbc-site-comparison-morphism (B3); added [def-sf-comparison-derived-pullback] inline and to stmt_deps. No mathematical change and no target weakened. Corrected item: fixes/dag/nodes/sec-smooth-purity/def-pur-affine-line-purity-comparison.json.; 1 file(s) fixed by the reviewer"
+ }
 }

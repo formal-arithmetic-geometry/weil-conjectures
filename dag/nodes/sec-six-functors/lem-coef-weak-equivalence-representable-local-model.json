@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: passage from module resolutions to spaces of finite enhanced adjunction data; classifying spaces of weak equivalences, not only their component sets. Technical presheaf input: Appendix A, paragraph immediately after Proposition A.0.3 and before Corollary A.0.4, printed p. 208 (PDF p. 215), using the local model for a representable from HAG I Lemma 4.2.2",
+   "place": "Current main-20261015 proof paragraphs 2-3: derived coefficient Hom adjunction and compatibility of finite units and counits with transitions. This generic mapping-space tool supports the intervening dg-module comparison through the recorded ancestry; it is not a sentence explicitly stated by that blueprint proof. Technical source: HAG II Appendix A, between Proposition A.0.3 and Corollary A.0.4, printed p. 208 (PDF p. 215).",
    "via": [
     "lem-coef-model-weak-equivalence-nerve",
     "lem-coef-dgcat-bimodule-mapping-space",
@@ -27,9 +27,124 @@
   "lem-coef-cosimplicial-frame-mapping",
   "lem-coef-locally-constant-presheaf-slice"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $W$ for the weak equivalences of $\\mathcal M$, and $C=w\\mathcal U$. Apply [lem-coef-homotopy-fractions-square-criterion] both to $(\\mathcal M,W)$ and to $(C,C)$. Here its two auxiliary subcategories are the trivial cofibrations and the trivial fibrations, restricted to the objects of $C$ in the second application. The span completion is the pushout $Y'=X'\\amalg_XY$ of a trivial cofibration $X\\to X'$; its map $Y\\to Y'$ is a trivial cofibration by [lem-coef-lifting-class-closure]. The dual cospan completion is the pullback of a trivial fibration; the right lifting property is preserved because a lifting square for the pullback projects to one for the original map, whose filler pairs with the given map to the base. Thus the pulled-back map is a trivial fibration. In the pushout square $gu=vf$, if $f$ is weak then so is $g$, since $u,v$ are weak; the dual argument gives the required condition in the pullback square. Factor any $w$ functorially as a cofibration followed by a trivial fibration. Two-out-of-three makes the cofibration trivial. Pushouts and pullbacks can be chosen functorially by their universal properties, and the factorization is functorial by hypothesis. In the application to $C$, the new pushout object is weakly equivalent to $Y$, the new pullback object to $X$, and the factorization object to its endpoints. Closure of $\\mathcal U$ therefore keeps all new objects in $\\mathcal U$, and every newly constructed arrow is weak. Consequently both pairs have the stated two-sided homotopy calculus. No pushout of an arbitrary weak equivalence is being used.",
+   "uses": [
+    "lem-coef-homotopy-fractions-square-criterion",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2 and its model-category application in 8.3-8.4, printed pp. 29-30; verification for the weak-equivalence-only subcategory written out."
+   }
+  },
+  {
+   "text": "For $y,x\\in\\mathcal U$, let $Z(y,x)=Z_{-+-}^{\\mathcal M,W}(y,x)$ and $Z_C(y,x)=Z_{-+-}^{C,C}(y,x)$, with the diagram-category meaning of [def-coef-zigzag-homotopy-calculus]. An object of $Z(y,x)$ is $y\\xleftarrow{a}u\\xrightarrow{f}v\\xleftarrow{b}x$, with $a,b\\in W$. Here $\\operatorname{Ho}(\\mathcal M)$ may be taken to be the homotopy category of $\\mathcal M_\\infty$: applying the universal localization property of [lem-coef-hammock-infinity-localization] to nerves of ordinary target categories gives exactly the ordinary localization universal property after taking homotopy classes. Its morphism in $\\operatorname{Ho}(\\mathcal M)$ is $[b]^{-1}[f][a]^{-1}$. By [lem-coef-model-localization-detects-weak-equivalences] this is invertible exactly when $f\\in W$. Indeed $[a]$ and $[b]$ are already invertible, so invertibility of the displayed composite is equivalent to invertibility of $[f]$. Both $u$ and $v$ belong to $\\mathcal U$ by closure, whether or not $f$ is weak. Hence $Z_C(y,x)$ is exactly the full subcategory selected by $f\\in W$. For any morphism of such zigzags the middle square is $d f=f' c$, with $c,d\\in W$; two-out-of-three says that $f\\in W$ if and only if $f'\\in W$. There are therefore no arrows in either direction between the selected objects and the others. The nerve $NZ_C(y,x)$ is precisely the union of those components of $NZ(y,x)$ whose represented morphisms are invertible.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Sections 5.1, 6.2 and 6.3-6.4, printed pp. 24-26; explicit two-endpoint version of the equivalence-component argument."
+   }
+  },
+  {
+   "text": "Use [lem-coef-homotopy-fractions-hammock-comparison] for each of the two pairs from Step 1, and [lem-coef-hammock-infinity-localization] to identify their hammock mapping objects with their universal-localization mapping spaces. Write $j:NC\\to C_\\infty=C[C^{-1}]_\\infty$. For the inclusion $C\\to\\mathcal M$ the square of reduction maps commutes: in either order it includes each row of the same three-arrow diagram and reduces the same hammock. The top reduction is thus $NZ_C(y,x)\\to L^H(C,C)(y,x)$, and the bottom is $NZ(y,x)\\to L^H(\\mathcal M,W)(y,x)$, both weak homotopy equivalences. Step 2 selects exactly the preimage of the equivalence components under the bottom map: reduction represents $q(b)^{-1}q(f)q(a)^{-1}$, and an edge in an infinity category is an equivalence exactly when its homotopy-category class is invertible. Restricting a weak homotopy equivalence to a union of components and its inverse-image components remains a weak homotopy equivalence, since its bijection on components and all based homotopy-group isomorphisms restrict. It follows by two-out-of-three that the actual inclusion-induced map gives\n$$\\operatorname{Map}_{C_\\infty}(jy,jx)\\simeq\\operatorname{Map}^{\\mathrm{eq}}_{\\mathcal M_\\infty}(qy,qx).$$\nIn particular this is the comparison induced by $q$, rather than an unpointed equivalence of spaces. The hammock node identifies actual arrows and gives compatibility with composition and its homotopies.",
+   "uses": [
+    "lem-coef-homotopy-fractions-hammock-comparison",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 6.2(i), Sections 3.1 and 3.4, and Corollary 6.4, printed pp. 20-21 and 26. The existing hammock-localization node supplies the coherent-localization interpretation."
+   }
+  },
+  {
+   "text": "Put $B=NC$ and choose a Kan replacement $r:B\\to K$ using [lem-coef-kan-quillen-right-proper]. By [lem-cbc-simplicial-groupoid-localization], $r$ is the universal homotopy coherent localization inverting every edge of $NC$. The hammock localization $j$ of Step 3 has exactly the same universal property by [lem-coef-hammock-infinity-localization]. To compare them, extend $r$ along $j$ and $j$ along $r$; full faithfulness of restriction in the two universal properties identifies both composites with the respective identities, with their coherent comparison transformations. Thus $K\\simeq C_\\infty$ under $NC$, and Step 3 becomes\n$$\\operatorname{Path}_{K}(ry,rx)\\simeq\\operatorname{Map}^{\\mathrm{eq}}_{\\mathcal M_\\infty}(qy,qx).$$\nThis equivalence is induced by the extension of $q|_C$ and respects composition and all higher simplices. This does not use the node lem-coef-model-weak-equivalence-nerve, whose proof depends on the present item.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, mapping-space comparison before Corollary A.0.4, printed p. 208; localization proof of that comparison via Steps 1-3, with Kerodon 01MY and 01MS for groupoid localization."
+   }
+  },
+  {
+   "text": "Apply the adjunction $\\mathcal N_C\\dashv\\mathcal S_C$ of [lem-coef-locally-constant-presheaf-slice]. Its formula gives $\\mathcal N_C(h_x)=N(C/x)\\to B$. The representable $h_x$ is projectively cofibrant: it is the codomain of the generating cofibration $h_x\\times\\partial\\Delta^0\\to h_x\\times\\Delta^0$ in [lem-coef-simplicial-presheaf-projective-model]. It remains cofibrant in $P_{\\mathrm{lc}}(C)$, whose localization does not change cofibrations. Factor $N(C/x)\\to B$ functorially in the Kan model structure of [lem-coef-kan-quillen-right-proper] as a trivial cofibration $N(C/x)\\to T_x$ followed by a Kan fibration $T_x\\to B$. Set $E_x=\\mathcal S_C(T_x)$. The right Quillen functor makes $E_x$ fibrant. The adjoint map $h_x\\to E_x$ is the derived unit of this Quillen equivalence, computed on a cofibrant source with a fibrant replacement of its left image; it is therefore a local weak equivalence. This supplies an actual map of simplicial presheaves and the required fibrant object. By the definition of the localized weak equivalences in the cited slice node, its local weak equivalence has exactly the mapping-into-local-Kan-objects meaning stated in the item.",
+   "uses": [
+    "lem-coef-locally-constant-presheaf-slice",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proposition A.0.3 and the paragraph immediately following it, printed pp. 207-208; construction of the local model via the derived unit instead of the cosimplicial-frame formula."
+   }
+  },
+  {
+   "text": "Here is the slice calculation including a model over the non-Kan base $B$. The terminal object $(x,1_x)$ contracts $N(C/x)$: on a chain, append its unique arrow to this object. This supplies the homotopy from the identity to the constant vertex, and projection to $B$ gives its specified homotopy to $x$. Thus $\\{x\\}\\to N(C/x)$ is a weak equivalence over $B$. In the Cartesian simplicial Kan model structure supplied by [lem-coef-simplicial-presheaf-projective-model], the slice enrichment has $n$-simplices maps $A\\times\\Delta^n\\to T$ over $B$; its simplicial lifting axiom is inherited from simplicial sets because a lift respecting the target $T$ automatically respects its map to $B$. The simplicial model axiom applied to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ gives the Kan fibration $K^{\\Delta^1}\\to K\\times K$. Restrict its final endpoint to $rx$ to obtain $P_x\\to K$, with initial endpoint as projection. The total space $P_x$ contracts to the constant path at $rx$: precomposition with $\\max:[1]\\times[1]\\to[1]$ gives a homotopy from the identity path to that constant path while keeping its final endpoint fixed. Pull back along $r$ to get $\\widetilde P_x=B\\times_KP_x\\to B$. By [lem-coef-kan-quillen-right-proper] the map $\\widetilde P_x\\to P_x$ is a weak equivalence, so $\\widetilde P_x$ is contractible. The constant path at $rx$ gives a weak equivalence $\\{x\\}\\to\\widetilde P_x$ over $B$, and $\\widetilde P_x\\to B$ is a Kan fibration. Thus this is a fibrant replacement in the slice of the vertex $x$. Since every simplicial set is cofibrant, the derived slice mapping space from the vertex $y$ to the vertex $x$ is the strict fiber of this replacement at $y$, namely $\\operatorname{Path}_K(ry,rx)$. Replacing the two vertices by the equivalent $N(C/y)$ and $N(C/x)$ gives\n$$\\operatorname{Map}^h_{\\mathsf{sSet}/B}(N(C/y),N(C/x))\\simeq\\operatorname{Path}_K(ry,rx).$$",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Proof of Proposition A.0.3 and the following four-term comparison, printed p. 208; terminal-object contraction and fibrant path model written out."
+   }
+  },
+  {
+   "text": "The evaluation and derived mapping-space comparison of [lem-coef-locally-constant-presheaf-slice], applied to the unit of Step 5 and then Step 6, now give\n$$E_x(y)\\simeq\\operatorname{Map}^h_{P_{\\mathrm{lc}}(C)}(h_y,E_x)\\simeq\\operatorname{Map}^h_{P_{\\mathrm{lc}}(C)}(h_y,h_x)\\simeq\\operatorname{Map}^h_{\\mathsf{sSet}/B}(N(C/y),N(C/x))\\simeq\\operatorname{Path}_K(ry,rx).$$\nCompose with Step 4. This proves precisely the displayed value formula of the item. In particular, for an actual weak equivalence $f:y\\to x$, its Yoneda map $h_y\\to h_x$ goes under $\\mathcal N_C$ to the functor $C/y\\to C/x$ given by postcomposition with $f$. The terminal vertex $(y,1_y)$ goes to $(y,f)$, whose terminal arrow to $(x,1_x)$ is $f$ itself. Hence the slice path comparison carries this morphism to the edge $f$ of $NC$, and Steps 3-4 carry it to $q(f)$. This verifies the comparison on actual weak equivalences.",
+   "uses": [
+    "lem-coef-locally-constant-presheaf-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Paragraph immediately following Proposition A.0.3 and preceding Corollary A.0.4, printed p. 208; identify the actual-map comparison by the terminal arrows."
+   }
+  },
+  {
+   "text": "The factorization in Step 5 is functorial in maps over $B$, hence $x\\mapsto E_x$ and $h_x\\to E_x$ are natural for all arrows of $C$. Evaluation is contravariantly natural in $y$. The slice node [lem-coef-locally-constant-presheaf-slice] states that its derived comparisons preserve representable morphisms, identities, composition and their homotopies. Steps 3-4 identify their other side using the universal localized functor of [lem-coef-hammock-infinity-localization] and the full functor-category universal property of [lem-cbc-simplicial-groupoid-localization]. Consequently these are equivalences between the mapping-space bifunctors on the localization of $C$: extending along that localization is fully faithful on coherent functor categories, so it retains the comparisons, their transformations and every higher simplex. The contractions in Step 6 express the vertex comparison for the same functors $C/x\\to C/x'$; they specify the path comparison under $NC$, not a separately chosen equivalence at each pair of endpoints. Composition of the morphisms between localized representables is therefore carried to composition under the extension of $q|_C$, and Step 7 identifies its actual-arrow restriction with $q$. This proves all the stated naturality and higher-compatibility clauses. All model hypotheses on $\\mathcal M$ used in Steps 1-3 were its functorial factorizations, lifting axioms and two-out-of-three; no enrichment, properness or combinatoriality was added.",
+   "uses": [
+    "lem-coef-locally-constant-presheaf-slice",
+    "lem-coef-hammock-infinity-localization",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, mapping comparison on printed p. 208 and functoriality discussion on p. 209; coherent compatibility follows from the cited universal localization statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-homotopy-fractions-hammock-comparison",
+  "lem-coef-homotopy-fractions-square-criterion",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-locally-constant-presheaf-slice",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Current proof paragraphs 2-3, derived coefficient adjunction and its unit/counit compatibility, supported through the recorded dg-module ancestry. This generic model-category tool is not stated explicitly in the blueprint. HAG II Appendix A and Dwyer-Kan Sections 6 and 8 read online, absent locally; requests in report.md. Fraction restriction avoids circular use of the parent nerve theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -107,10 +222,52 @@
    "results": "{\"t\": \"2026-10-16T16:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a model category, derived Yoneda on the subcategory of weak equivalences is a local fibrant replacement of the ordinary representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"0deba91b8284c1b1\"}",
    "date": "2026-10-16",
    "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:45-100 and ModelCategory/CofibrantObjectHomotopy.lean:25-120. These construct ordinary nerves and localizer morphisms/homotopy-category equivalences, not a simplicial-presheaf slice Quillen equivalence or a fibrant local replacement of weak-equivalence representables."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibrant replacement of the weak-equivalence representable presheaf has values equal to equivalence components of derived mapping spaces",
+   "results": "{\"t\": \"2026-10-16T19:17:10Z\", \"tool\": \"leanfinder\", \"query\": \"A fibrant replacement of the weak-equivalence representable presheaf has values equal to equivalence components of derived mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"fe336b56777d5b76\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"representable\", \"Map\"",
+   "results": "{\"t\": \"2026-10-16T19:17:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"representable\\\", \\\"Map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "fibrant.*representable|equivalence.*mapping.*space",
+   "results": "{\"t\": \"2026-10-16T19:17:01Z\", \"tool\": \"grep\", \"query\": \"fibrant.*representable|equivalence.*mapping.*space\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrant locally constant simplicial presheaf replacing a weak equivalence representable evaluates to derived equivalence mapping spaces",
+   "results": "{\"t\": \"2026-10-16T19:17:02Z\", \"tool\": \"leansearch\", \"query\": \"Fibrant locally constant simplicial presheaf replacing a weak equivalence representable evaluates to derived equivalence mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"CompHausLike.LocallyConstant.functor_map_val\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"CompHausLike.LocallyConstant.functorIso\"], \"digest\": \"fb3f1ef3f710a545\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing Yoneda presheaves on the subcategory of weak equivalences in a model category represents the space of derived equivalences",
+   "results": "{\"t\": \"2026-10-16T19:18:01Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing Yoneda presheaves on the subcategory of weak equivalences in a model category represents the space of derived equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"e9696aac750047f1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "homRel_equivalence_of_isFibrant_tgt|weakEquivalence_homMk_iff|instFibrationPResolutionObj",
+   "results": "{\"t\": \"2026-10-16T19:18:17Z\", \"tool\": \"grep\", \"query\": \"homRel_equivalence_of_isFibrant_tgt|weakEquivalence_homMk_iff|instFibrationPResolutionObj\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean\"], \"digest\": \"19a89e4daa4db906\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:33-125 and CofibrantObjectHomotopy.lean:30-130. FibrantObject and homMk merely form ordinary full subcategories; homRel and HoCat form the ordinary homotopy quotient. None constructs a locally constant simplicial-presheaf replacement or identifies its values with derived equivalence mapping spaces. The second semantic phrasing returns the same ordinary localizer constructions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-weak-equivalence-nerve",
@@ -118,5 +275,29 @@
   "group": "NG"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-weak-equivalence-representable-local-model",
+  "worker": "stage1",
+  "summary": "Statement preserved. Eight steps construct the local model via the slice adjunction, prove the equivalence-component comparison by the existing two-sided fraction calculus and saturation, and track actual weak equivalences, composition and higher naturality. No new nodes or Mathlib leaves. Avoided the circular use of the parent weak-equivalence nerve theorem. Renewed all required Mathlib searches with a second semantic phrasing; no project attachment or Mathlib match. Recheck made the passage to ordinary localization and the simplicial slice lifting axiom explicit, and corrected the inherited blueprint-place description against the current text.",
+  "blueprint": "Supports the derived coefficient Hom adjunction and finite unit/counit compatibility in current main-20261015 prop-coef-integral-exceptional-adjoint, proof paragraphs 2-3, through the unchanged recorded ancestry. Corrected inherited wording about finite enhanced adjunction data, which does not occur in the current proof. The local-model theorem itself is from the cited HAG II passage.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic groupoid-localization universal property used to identify the Kan replacement of NC with its localization and retain coherent transformations; the unit has no replacement for this shape-localization tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-groupoid-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-d63b3a8f1",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-d63b3a8f1 (reviewer sub-agent of L); spot-checked: Read all eight steps in full, the full statements of all cited nodes, and the model-category and Bousfield-localization definitions they depend on. Statement unchanged and consistent with its stmt_deps. Small cases checked: W=isos gives discrete Iso(y,x); non-equivalent endpoints give empty on both sides; U empty is vacuous. Step 1: the square criterion holds for (M,W) and for (C,C) with trivial cofibrations and trivial fibrations; the induced maps between chosen pushouts, pullbacks and factorizations are weak by 2-out-of-3, so the choices are functorial in C. Step 2: [b]^-1[f][a]^-1 is invertible iff f is weak (saturation); Z_C is a union of components because df=f'c. Step 3: hammock comparison plus restriction of a weak equivalence to components gives Map_{C_inf} ≃ Map^eq. Step 4: Kan replacement of NC identified with C_inf by the two universal properties. Step 5: h_x is cofibrant (n=0 generator; Bousfield localization keeps cofibrations), and the derived unit of the Quillen equivalence is a local weak equivalence. Step 6: path fibration plus right properness pulled back along r gives a fibrant model over the non-Kan base. Steps 7-8: the four-term chain, the actual-arrow check via the terminal arrow f, and naturality all come from stated clauses of cited nodes. proof_deps equals the union of uses; a DFS over 207 dependency nodes never reaches the item (acyclic, no use of the parent nerve node). No duplicates in the DAG; no new nodes; no SGA. Accepted tool_use: lem-cbc-simplicial-groupoid-localization, a generic shape-localization theorem used as a black box. Blueprint place matches paragraphs 2-3 of the main-20261015 proof. Sources not archived locally; proof_origin=agent with WANTED lines filed. No fixes."
+ }
 }
