@@ -221,5 +221,28 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-1576949a6 (reviewer sub-agent of L); spot-checked: Read the item, unit route, all cited DAG statements, blueprint, and Stacks sources. The corrected general-site formulation is valid; all five proof steps are complete, hypotheses and edge cases check, and no duplicates or repairs are needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GloballyGeneratedSheafColimit",
+  "declaration": "CategoryTheory.Sheaf.epi_globalSectionsEvaluation_colimit",
+  "file": "lean/Sheaf/CategoryTheory/GloballyGeneratedSheafColimit.lean",
+  "statement": "theorem epi_globalSectionsEvaluation_colimit {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {I : Type (max u v)} [SmallCategory I] [IsFiltered I] (F : I ⥤ Sheaf J AddCommGrpCat.{max u v}) (hF : ∀ i : I, Epi (abelianGlobalSectionsEvaluation J (F.obj i))) : Epi (abelianGlobalSectionsEvaluation J (colimit F))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The evaluation helper belongs to the map explicitly introduced in this node, and extends the existing etale free-abelian-group model to arbitrary sites using Mathlib Sheaf.Γ and constantSheafΓAdj. Its source, the constant sheaf of the free abelian group on all global sections, is canonically the displayed coproduct of constant integer sheaves because constantSheaf is a left adjoint. Its adjoint linear-combination map sends each generator to the indexed section. No final object, stalks, arbitrary substitute map, extra existence hypotheses, or new global-generation predicate are used. Site object and morphism universes are independent; coefficients and the small diagram use their common maximum.",
+  "declarations": [
+   "CategoryTheory.Sheaf.abelianGlobalSectionsEvaluation",
+   "CategoryTheory.Sheaf.epi_globalSectionsEvaluation_colimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9a48f47e0",
+  "group": "N1",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical evaluation construction, universes, edge cases, docstrings, report sections, and compiler evidence all checked; no substantive or mechanical faults found."
  }
 }

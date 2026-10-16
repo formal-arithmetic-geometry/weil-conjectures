@@ -276,5 +276,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-7527e6a23 (reviewer sub-agent of L); spot-checked: Wrote review.md with checks for all five steps, every cited statement, source locations, edge cases, duplicate candidates, dependency cycles, target coefficient boundaries, and eight accepted tool uses. The affine-test comparison correctly descends nonvanishing to the function field without assuming X' is qcqs. No delivery repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KunnethBaseChangeFailure",
+  "declaration": "AlgebraicGeometry.Etale.exists_kunnethBaseChangeFailure_functionField",
+  "file": "lean/Sheaf/AlgebraicGeometry/KunnethBaseChangeFailure.lean",
+  "statement": "theorem exists_kunnethBaseChangeFailure_functionField {X S : Scheme.{u}} (f : X ⟶ S) (n : ℕ) (hn : 0 < n) (hinv : IsUnit (n : Γ(S, ⊤))) (q : ℕ) (hq : 1 ≤ q) (hprev : UnboundedCumulativeUniversalBaseChangeProperty f n hn (q - 1)) (hfail : ¬ UnboundedCumulativeUniversalBaseChangeProperty f n hn q) : ∃ (S' X' : Scheme.{u}) (a : S' ⟶ S) (b : X' ⟶ X) (f' : X' ⟶ S') (_ : ChosenCartesianSquare b f' f a) (_ : IsAffine S') (_ : IsIntegral S') (_ : ∀ x : S', IsIntegrallyClosed (S'.presheaf.stalk x)) (_ : IsAlgClosed S'.functionField) (Y : Scheme.{u}) (e : Y ⟶ Spec S'.functionField) (h : Y ⟶ X') (_ : ChosenCartesianSquare h e f' (S'.fromSpecStalk (genericPoint S'))) (d : ℕ), d ∣ n ∧ ¬ IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod d)))))))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-96c2a1a8e",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, six dependencies, source places, edge cases, universes, docstrings, and verbatim signatures checked. Both immutable Lean modules compile cleanly through scompile.py. No substantive or landing faults found; no project or branch changes made.; reverted the delivery's change of existing node(s) def-kun-bc-property (--revert-nodes; kept as on newtargets-dag)"
  }
 }

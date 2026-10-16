@@ -298,5 +298,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-105d4d009 (reviewer sub-agent of L); spot-checked: Read both nodes, every cited statement, Stacks 0EZT/0EYM and supporting sources. All five proof steps and canonical-map equations check; no duplicate or new cycle found. Fixed only missing new-node metadata. Full checks, accepted tool_uses, and inherited-cycle diagnostic are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImagesLimits",
+  "declaration": "AlgebraicGeometry.higherDirectImage_baseChange_of_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImagesLimits.lean",
+  "statement": "theorem higherDirectImage_baseChange_of_limit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (DX DY DS DT : Iᵒᵖ ⥤ Scheme.{u}) (cX : Cone DX) (hcX : IsLimit cX) (cY : Cone DY) (hcY : IsLimit cY) (cS : Cone DS) (hcS : IsLimit cS) (cT : Cone DT) (hcT : IsLimit cT) (ηf : DX ⟶ DS) (ηe : DY ⟶ DT) (ηg : DT ⟶ DS) (ηh : DY ⟶ DX) (f : cX.pt ⟶ cS.pt) (e : cY.pt ⟶ cT.pt) (g : cT.pt ⟶ cS.pt) (h : cY.pt ⟶ cX.pt) (hf : ∀ i : Iᵒᵖ, cX.π.app i ≫ ηf.app i = f ≫ cS.π.app i) (he : ∀ i : Iᵒᵖ, cY.π.app i ≫ ηe.app i = e ≫ cT.π.app i) (hg : ∀ i : Iᵒᵖ, cT.π.app i ≫ ηg.app i = g ≫ cS.π.app i) (hh : ∀ i : Iᵒᵖ, cY.π.app i ≫ ηh.app i = h ≫ cX.π.app i) (sq : ChosenCartesianSquare e h g f) (sqi : ∀ i : Iᵒᵖ, ChosenCartesianSquare (ηe.app i) (ηh.app i) (ηg.app i) (ηf.app i)) [∀ i : Iᵒᵖ, QuasiCompact (ηg.app i)] [∀ i : Iᵒᵖ, QuasiSeparated (ηg.app i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DX.map a)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DY.map a)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DS.map a)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DT.map a)] (Fi : ∀ i : Iᵒᵖ, Sheaf (DT.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (torsionFi : ∀ i : Iᵒᵖ, CategoryTheory.Sheaf.IsTorsion (Fi i)) (φ : ∀ {i j : I} (a : i ⟶ j), (Etale.upperStar AddCommGrpCat.{u + 1} (DT.map a.op)).obj (Fi (op i)) ⟶ Fi (op j)) (hφid : ∀ i : I, φ (𝟙 i) = eqToHom (congrArg (fun a : DT.obj (op i) ⟶ DT.obj (op i) ↦ (Etale.upperStar AddCommGrpCat.{u + 1} a).obj (Fi (op i))) (DT.map_id (op i))) ≫ (Etale.upperStarId AddCommGrpCat.{u + 1} (DT.obj (op i))).hom.app (Fi (op i))) (hφcomp : ∀ {i j k : I} (a : i ⟶ j) (b : j ⟶ k), φ (a ≫ b) = (Etale.upperStarComp AddCommGrpCat.{u + 1} (DT.map b.op) (DT.map a.op) (DT.map (a ≫ b).op) (DT.map_comp b.op a.op)).hom.app (Fi (op i)) ≫ (Etale.upperStar AddCommGrpCat.{u + 1} (DT.map b.op)).map (φ a) ≫ φ b) (D : I ⥤ Sheaf cT.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (ιF : ∀ i : I, D.obj i ≅ (Etale.upperStar AddCommGrpCat.{u + 1} (cT.π.app (op i))).obj (Fi (op i))) (hD : ∀ {i j : I} (a : i ⟶ j), D.map a ≫ (ιF j).hom = (ιF i).hom ≫ (Etale.upperStarComp AddCommGrpCat.{u + 1} (cT.π.app (op j)) (DT.map a.op) (cT.π.app (op i)) (cT.w a.op).symm).hom.app (Fi (op i)) ≫ (Etale.upperStar AddCommGrpCat.{u + 1} (cT.π.app (op j))).map (φ a)) (cF : Cocone D) (hcF : IsColimit cF) (q : ℕ) (hbase : ∀ i : Iᵒᵖ, IsIso ((DerivedCategory.Plus.homologyFunctor (Sheaf (DX.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).map ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sqi i).toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf (DT.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (Fi i))))) : IsIso ((DerivedCategory.Plus.homologyFunctor (Sheaf cX.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).map ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf cT.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj cF.pt)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-11351831f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Checked immutable statement, all eight dependencies, source, canonical maps, universes, edge cases, docstrings, and verbatim signature. Per-file scompile reproduced cleanly in both contexts. No delivery faults found; branch head unchanged."
  }
 }
