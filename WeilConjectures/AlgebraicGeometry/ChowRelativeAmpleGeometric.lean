@@ -6,8 +6,10 @@ Authors: Bin Wu
 
 module
 
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+
+
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 
 @[expose] public section
 universe u

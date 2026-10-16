@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+
+
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
@@ -95,35 +99,11 @@ section Projective
 
 variable {X S : Scheme.{u}}
 
-/-- A morphism `f : X ⟶ S` is *H-projective* (or *relatively projective*) if it factors as a
-closed immersion `i : X ⟶ ℙ(n; S)` into a projective space over `S`, for some finite type of
-homogeneous coordinates `n`, followed by the structure morphism of `ℙ(n; S)`.
 
-(blueprint: `def-pc-projective-morphism`) -/
-class IsHProjective (f : X ⟶ S) : Prop where
-  exists_isClosedImmersion :
-    ∃ (n : Type u) (_ : Finite n) (i : X ⟶ ℙ(n; S)), IsClosedImmersion i ∧ i ≫ ℙ(n; S) ↘ S = f
 
-/-- A morphism `f : X ⟶ S` is *projective* if it is H-projective and quasi-compact. A scheme over
-a field `k` is projective over `k` if its structure morphism is projective.
 
-(blueprint: `def-pc-projective-morphism`) -/
-class IsProjective (f : X ⟶ S) : Prop extends IsHProjective f, QuasiCompact f
 
-/-- **H-projective morphisms are proper**, being the composite of a closed immersion and the
-proper structure morphism of a projective space.
 
-(blueprint: `lem-pc-projective-proper`) -/
-instance (priority := 100) IsHProjective.isProper (f : X ⟶ S) [IsHProjective f] :
-    IsProper f := by
-  obtain ⟨n, _, i, _, rfl⟩ := IsHProjective.exists_isClosedImmersion (f := f)
-  infer_instance
-
-/-- An H-projective morphism is projective, being proper and hence quasi-compact.
-
-This is not an instance, since together with the parent projection
-`AlgebraicGeometry.IsProjective.toIsHProjective` it would form an instance cycle. -/
-theorem IsHProjective.isProjective (f : X ⟶ S) [IsHProjective f] : IsProjective f where
 
 end Projective
 
@@ -205,6 +185,10 @@ projective curve `C` over `k`, its genus `g(C) = dim_k H¹(C, 𝒪_C)`
 theorem IsSmoothProjectiveCurve.finiteDimensional_H_one :
     FiniteDimensional k (Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1) :=
   have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  have : (SheafOfModules.unit C.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit C.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   Scheme.Modules.finiteDimensional_H_of_isProper _ 1
