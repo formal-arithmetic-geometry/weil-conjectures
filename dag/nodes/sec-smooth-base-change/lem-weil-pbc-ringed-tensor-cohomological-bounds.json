@@ -23,9 +23,109 @@
   "def-sbc-standard-tstructure-derived-category",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove (a). By [def-sbc-standard-tstructure-derived-category], choose a representative $G$ of $M$ with $G^i=0$ for $i>a$ (equivalently take the good upper truncation of any representative). Apply [lem-pc-kflat-bounded-flat-replacement] with $\\mathcal O=R$ and $N=a$ to obtain a quasi-isomorphism $P\\to G$ with flat terms and $P^i=0$ for $i>a$. The site version [lem-pc-bounded-above-flat-kflat-site] makes $P$ K-flat. By [lem-pur-derived-change-of-rings], $F(M)$ is represented by the termwise tensor complex $P\\otimes_RS$. Its terms above $a$ are zero, hence so are its cohomology sheaves above $a$. This proves (a) with no lower bound.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YU (definition-derived-tor); bounded-above replacement used in Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero)."
+   }
+  },
+  {
+   "text": "Record the degree-zero case needed for (b). If $N$ is an $R$-module sheaf with $\\operatorname{Tor}_p^R(N,S)=0$ for $p>0$, the definition of Tor in the item gives $\\mathcal H^i(F(N[0]))=0$ for $i<0$ by putting $p=-i$. Step 1 applied with upper bound zero gives vanishing for $i>0$. Since [lem-pur-derived-change-of-rings] is an exact functor of triangulated categories, it commutes with shifts; thus $F(N[-q])\\simeq F(N[0])[-q]$ has cohomology only in degree $q$. The sign convention $(X[-q])^i=X^{i-q}$ is that of [def-weil-abstract-derived-category]. No identification of the remaining degree-zero sheaf is needed.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), the subsequent definition-tor and cohomological shift convention."
+   }
+  },
+  {
+   "text": "First prove the lower bound for finite upper truncations, with a finite induction explicitly starting below $a$. Let $M$ satisfy (b), and put $M_{\\le b}=\\tau_{\\le b}M$. If $b<a$, this object is zero: its cohomology vanishes in every degree, so the map from the zero complex to a representing complex is a quasi-isomorphism and becomes invertible in the derived category [def-weil-abstract-derived-category]. For $b\\ge a$, induct from $b=a-1$ using the successive-truncation triangle of [lem-weil-pbc-truncation-triangle],\n$$M_{\\le b-1}\\longrightarrow M_{\\le b}\\longrightarrow\\mathcal H^b(M)[-b]\\longrightarrow M_{\\le b-1}[1].$$\nApply the exact functor of [lem-pur-derived-change-of-rings]. The left term after applying $F$ has no cohomology below $a$ by the induction hypothesis, and the right term has cohomology only in degree $b\\ge a$ by Step 2 and the Tor hypothesis. For $i<a$ the exact segment $\\mathcal H^i(F(M_{\\le b-1}))\\to\\mathcal H^i(F(M_{\\le b}))\\to\\mathcal H^i(F(\\mathcal H^b(M)[-b]))$ from [lem-sf-derived-homology-long-exact] has zero outer objects, so its middle object is zero. This proves $F(M_{\\le b})\\in D^{\\ge a}$ for every finite integer $b$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive triangles; Tags 05RS (lemma-cohomology-homological) and 0147 (definition-homological)."
+   }
+  },
+  {
+   "text": "Choose any cochain representative $G$ of $M$. Apply [lem-pc-flat-truncation-tower] to get bounded-above termwise flat complexes $E_n$, transitions $t_n$, and quasi-isomorphisms $q_n:E_n\\to\\tau_{\\le n}G$ for $n\\in\\mathbf N$. Set $e_n=\\iota_n\\circ q_n:E_n\\to G$. The compatibility in that node, written as the map equality $\\iota_{n+1}\\circ q_{n+1}\\circ t_n=\\iota_n\\circ q_n$, says exactly $e_{n+1}\\circ t_n=e_n$. Hence these maps induce $e:P=\\varinjlim_nE_n\\to G$ on the degreewise sheaf colimit. By [lem-pc-module-filtered-colimits-tensor], filtered colimits of $R$-module sheaves are exact. Consequently they commute with cohomology: exactness preserves kernels of the differentials and images of the previous differentials, and preserves the quotient of those two objects in the formula of [def-weil-abstract-derived-category]. For each fixed $i$, $H^i(e_n)$ is an isomorphism for every $n\\ge\\max(0,i)$, because $q_n$ is a quasi-isomorphism and the good truncation inclusion retains cohomology through degree $n$. The compatibility of the $e_n$ identifies all transitions on this tail with the identity of $H^i(G)$. Thus $H^i(e):\\varinjlim_nH^i(E_n)\\to H^i(G)$ is an isomorphism. Therefore $e$ is a quasi-isomorphism. This uses a degreewise colimit of complexes, without assuming a colimit calculation in a derived category.",
+   "uses": [
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero), compatible resolutions and their colimit; Tag 03DB (lemma-limits-colimits), exact filtered colimits."
+   }
+  },
+  {
+   "text": "The complex $P$ of Step 4 is K-flat. Each $E_n$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For any acyclic $R$-module complex $A$, [lem-pc-module-filtered-colimits-tensor] identifies $P\\otimes_RA$ with $\\varinjlim_n(E_n\\otimes_RA)$. The signed symmetry $x\\otimes y\\mapsto(-1)^{rs}y\\otimes x$, for $x$ of degree $r$ and $y$ of degree $s$, identifies the order here with that in [def-pc-kflat-complex]; substituting into the differential $d(x\\otimes y)=dx\\otimes y+(-1)^r x\\otimes dy$ of [def-pc-tensor-complex-sheaves] verifies the chain-map identity, and applying the symmetry twice gives the identity. Hence each $E_n\\otimes_RA$ is acyclic. Exact filtered colimits commute with cohomology by the kernel-image-quotient calculation of Step 4, so $P\\otimes_RA$ is acyclic, and symmetry gives the same for $A\\otimes_RP$. This is precisely K-flatness. Together with $e:P\\to G$, it supplies a K-flat resolution of $M$.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YR (lemma-colimit-K-flat), with the tensor-colimit calculation of Tag 03EP (lemma-tensor-commute-colimits)."
+   }
+  },
+  {
+   "text": "Compute $F(M)$ by this K-flat resolution using [lem-pur-derived-change-of-rings]. Its representing complex is $P\\otimes_RS$, whose underlying $R$-module complex is $\\varinjlim_n(E_n\\otimes_RS)$ by [lem-pc-module-filtered-colimits-tensor] with fixed second factor $S[0]$. Each $E_n$ is K-flat and represents $\\tau_{\\le n}M$, so the same change-of-rings node identifies $E_n\\otimes_RS$ with $F(\\tau_{\\le n}M)$. Step 3 therefore gives $H^i(E_n\\otimes_RS)=0$ for every $n$ and every $i<a$, including $n<a$. Applying the exact-colimit cohomology calculation from Step 4 gives\n$$H^i(P\\otimes_RS)=\\varinjlim_nH^i(E_n\\otimes_RS)=0\\qquad(i<a).$$\nThese calculations may be made after restricting the $S$-module structure to $R$: kernels consist of the same sections killed by the differential and cokernels are the same sheafified quotient groups, with the inherited scalar action [def-weil-sheaf-of-modules-category]. Thus vanishing as an $R$-module sheaf is vanishing as an $S$-module sheaf. This proves (b), with no upper bound on $M$ and without using points of the site.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 03DB (lemma-limits-colimits), 03EP (lemma-tensor-commute-colimits); agent consequence of Steps 3--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-module-filtered-colimits-tensor",
+  "def-kun-truncations",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent cohomological-bounds consequence of Tags 06YQ, 06YR, 06YU and 077J; finite truncation induction uses derived.tex Tags 08J5 and 05RS, and exact filtered colimits use sites-modules.tex Tags 03DB and 03EP. No claim that one source tag states the entire item."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,15 +196,139 @@
    "results": "1 hits: CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ",
    "date": "2026-10-16",
    "verdict": "no match: second-reader search; projective-object vanishing and cohomological-bound characterizations do not state a lower-bound theorem for unbounded ring-sheaf complexes with Tor-acyclic cohomology; grep hits are imports of ordinary tensor right-exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsLE|IsGE|[Cc]ohomolog|[Tt]Exact).*([Tt]ensor|[Tt]or)|([Tt]ensor|[Tt]or).*(IsLE|IsGE|[Tt]Exact)",
+   "results": "25 hits; top hits: Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a ring sheaf sends a bounded below complex with Tor acyclic cohomology to a bounded below complex",
+   "results": "8 hits; top hits: Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Derivation.tensorProductTo_tmul, PresheafOfModules.Derivation', HasDerivedCategory.standard",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of rings preserves upper cohomological bounds and preserves a lower bound when every cohomology sheaf has vanishing higher Tor",
+   "results": "8 hits; top hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Sheaf.H, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits; top hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Aa]cyclic|[Aa]cyclic.*Tor|[Ii]sGE.*tensor|tensor.*[Ii]sGE|[Ii]sLE.*tensor|tensor.*[Ii]sLE",
+   "results": "11 hits; top hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/CochainComplexOpposite.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex whose homology objects are acyclic for a right exact tensor functor has a bounded below total left derived tensor image",
+   "results": "8 hits; top hits: CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"isZero\"",
+   "results": "12 hits; top hits: CategoryTheory.Functor.isZero, CategoryTheory.Functor.isZero_iff, CategoryTheory.Functor.preservesColimitsOfSize_of_isZero, CategoryTheory.Functor.preservesLimitsOfSize_of_isZero, CategoryTheory.Functor.map_isZero, CategoryTheory.Functor.preservesColimitsOfShape_of_isZero, CategoryTheory.Functor.preservesLimitsOfShape_of_isZero, CategoryTheory.Functor.Additive.of_isZero",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean:12-70, Algebra/Homology/DerivedCategory/TStructure.lean:170-200, and CategoryTheory/Abelian/LeftDerived.lean:28-80. These give ordinary projective Tor, t-structure representatives or tensor associativity, not the ring-sheaf scalar-extension bounds with Tor-acyclic cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(IsLE|IsGE|tExact)|tensor.*[Aa]cyclic.*homology|Tor.*[Cc]onnective",
+   "results": "4 hits; top hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; flat ordinary-module tensor exactness, condensed-module AB5, and generic left-derived-functor uniqueness do not state either ringed-site cohomological-bound assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor obtained by deriving extension of scalars is right t exact on sheaf modules; it preserves connectivity on complexes with tensor acyclic homology objects",
+   "results": "8 hits; top hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, ModuleCat.localizedModule_functor_map_exact, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; flat ordinary-module tensor exactness, condensed-module AB5, and generic left-derived-functor uniqueness do not state either ringed-site cohomological-bound assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightTExact\"",
+   "results": "0 hits; top hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; flat ordinary-module tensor exactness, condensed-module AB5, and generic left-derived-functor uniqueness do not state either ringed-site cohomological-bound assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-weil-pbc-levelwise-truncations",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the upper bound with a same-bound bounded-above flat replacement. Proved the lower bound by finite successive-truncation induction and then by the degreewise filtered colimit of compatible flat resolutions. Explicitly checked cohomology of that colimit, its K-flatness, and the tensor-colimit calculation, so no unbounded hyper-Tor convergence is assumed. Reused all supporting DAG nodes; no new nodes or Mathlib leaves. Searched the whole DAG, blueprint and read-only project source; refreshed Mathlib searches and read the relevant source hits.",
+  "blueprint": "Realizes prop-weil-pbc-levelwise-truncations, Proof Step 1, the two tensor end-term cohomological bounds, with the explicit higher-Tor hypothesis of its corrected DAG statement. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic ringed-site bounded-above flat replacement retaining the same degree bound, used to prove upper t-exactness; the item unit supplies no such replacement theorem."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flatness criterion for bounded-above flat complexes, for both the upper-bound model and the truncation resolutions."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation and triangulated exactness of sheaf scalar extension, which is exactly the functor in the item."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive canonical truncation triangle in an arbitrary abelian derived category, used for a finite induction on the Tor-acyclic layers."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished derived triangle; it supplies the exact zero-outer-terms segment of the induction."
+   },
+   {
+    "node": "lem-pc-flat-truncation-tower",
+    "why": "Generic small-ringed-site compatible flat resolutions of upper truncations, needed to form one honest complex resolving the unbounded-above object."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic exactness and tensor commutation of filtered sheaf-module colimits; it justifies passage from finite truncations to the unbounded-above object."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-flat-truncation-tower",
+  "lem-pc-module-filtered-colimits-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-f20f5b062",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-f20f5b062 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All six steps check, including unbounded colimit passage, K-flatness, shift signs, and S-module vanishing. No duplicate or dependency cycle found; seven tool uses accepted. Archived master coefficient categories remain distinguished. Detailed checks recorded in review.md; no repairs needed."
+ }
 }
