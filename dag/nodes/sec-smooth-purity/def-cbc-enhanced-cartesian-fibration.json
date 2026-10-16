@@ -145,5 +145,45 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-734335356 (reviewer sub-agent of L); spot-checked: Definition-only split with zero new nodes, read in full; no fixes. Statement deps: def-cbc-enhanced-diagrams-cones supplies Fun, cores, full subcategories, functor equivalence and N(I). def-coef-infinity-fibrations supplies cocartesian edges, cocartesian fibrations and fibres. lem-coef-coherent-nerve-comparison defines N_hc and says it is the ordinary nerve on discrete categories, which justifies D:N(C)->Cat_inf. Source: six-functor notes Lecture II basic fact (7), p.15, has Cat_inf with mapping anima Fun(C,D)^≃, matching the item. G_C(D) is the cocartesian dual of the HTT 3.2.2 mapping simplex: the simplex lies in D(sigma(0)) and is pushed forward, and degenerate edges are marked. I checked the simplicial identities by hand using strict functoriality. The fibre over c is D(c). Marked edges run from x to D(f)(x). The caveat 'need not be an inner fibration' is true: C=[1], D(0)=Δ^0, D(1)=Δ^1 gives an unfillable Λ^2_1 over 0->1->1. The strict-presentation conditions (marked edges to cocartesian edges, fibrewise equivalences) are exactly what lem-cbc-cocartesian-sections-limit and step 4 of lem-cbc-grothendieck-presheaf-coherent-straightening use, with the same first-vertex variance. Edge cases checked: S empty gives Γ=Δ^0, and S a point gives Γ=X. No duplicate in the DAG; the HTT relative nerve in lem-coef-kan-relative-nerve-left-fibration is a different construction. No hits in either blueprint snapshot, so same_as [] is right. The Mathlib no-match verdicts are correct. No SGA source, no target, base-change morphism or coefficient category touched, and no tool_uses. Open point: the archived Kerodon/HTT copies are listed as WANTED, and I could not check the Kerodon tag numbers offline."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b028c02d",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the node, all 3 statement deps (EnhancedDiagramsCones core/fullSubcomplex/IsFunctorEquivalence, InfinityFibrations IsCocartesianEdge/cocartesianFibration/fiber, CoherentNerveComparison: SimplicialNerve convention; its catInfinity is only a field of a Nonempty statement, so the delivery's concrete core-restricted SimplicialNerve CatInfinity is the node's Cat∞ and not a duplicate) and the full 290-line module. Matches every clause: section pullback over the identity vertex, cocartesian/cartesian full subcomplexes with arbitrary transformations, G_C(D) pairs and operator (σθ, D(σ0→σθ0)θ*τ), marking by degenerate edges, and StrictPresentation (φ over the base, marked edges to cocartesian edges, unique fibre restriction ψ with IsFunctorEquivalence). Independent universe w, no hidden restriction; lean.statement verbatim; no sorry/theorem/hollow def; docstrings carry source and blueprint tag; report has Worker report and Second reading by ND. nt_compile.py on the snapshot module: clean (no errors or warnings). Commit touches only report, node lean field and module. Minor: StrictQuasicategoryFunctor is a structure rather than C ⥤ SSet; HTT/Kerodon numbering not checkable offline (sources WANTED)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnhancedCartesianFibration",
+  "declaration": "SSet.Enhanced.sectionSSet",
+  "declarations": [
+   "SSet.Enhanced.oppositeSSet",
+   "SSet.Enhanced.sectionSSet",
+   "SSet.Enhanced.sectionMap",
+   "SSet.Enhanced.cocartesianSections",
+   "SSet.Enhanced.cartesianSections",
+   "SSet.Enhanced.catInfinityHom",
+   "SSet.Enhanced.catInfinitySubcomplex",
+   "SSet.Enhanced.CatInfinity",
+   "SSet.Enhanced.StrictQuasicategoryFunctor",
+   "SSet.Enhanced.strictPathMap",
+   "SSet.Enhanced.strictCoherentSimplex",
+   "SSet.Enhanced.strictCoherentDiagram",
+   "SSet.Enhanced.grothendieckSimplex",
+   "SSet.Enhanced.grothendieckOperator",
+   "SSet.Enhanced.grothendieck",
+   "SSet.Enhanced.grothendieckProjection",
+   "SSet.Enhanced.grothendieckMarked",
+   "SSet.Enhanced.grothendieckFiberInclusion",
+   "SSet.Enhanced.StrictPresentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnhancedCartesianFibration.lean",
+  "statement": "def sectionSSet {S X : SSet.{u}} (p : X ⟶ S) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Real degreewise marked Grothendieck construction, core-restricted coherent nerve CatInfinity, induced strict coherent diagram, and presentations with the induced fibre equivalence; no postponed theorem or data choice. Second reading: independent containing universe w for fibres, with the canonical degreewise lift of the base nerve; the fibration hypothesis retains the base quasicategory proof."
  }
 }

@@ -322,5 +322,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-b2ecf55d7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its nine steps, the new node, every cited node's statement and status, Stacks algebra.tex Tag 02IJ (lines 27515-27607) and Mathlib TranscendenceBasis.lean lines 535-550. Item statement: it is unchanged and is exactly the equality clause of 02IJ. Stacks takes trdeg_R S through fraction fields and the item uses the algebra trdeg; these agree for an inclusion of domains. Small cases agree: R=Z, S=Z[x] with q=(2,x) or q=(2); S=Z[1/2] with q=(3); q=0. Steps 1-9 follow 02IJ: Case I uses the polynomial-field PID leaf, the flat height formula with both rings checked Noetherian and P/pP identified with (R/p)[T], and the localization prime bijection and residue-field isomorphism with conditions (a)-(c) checked. Case II gets ht(n)=1 by localizing to F[T], and step 7's catenary saturated-chain argument relies on the finite-bound clause of def-exc-excellent-ring and covers the edge case n=q'. Cancellation in steps 8 and 9 happens only after finiteness is established. In step 9 the intermediate ring A is checked to be a domain, Noetherian and universally catenary, and both tower identities are applied correctly. New node lem-exc-domain-transcendence-degree-tower is an exact one-line specialization of Mathlib trdeg_add_eq/lift_trdeg_add_eq (lines 537 and 546): inclusions of domains supply Nontrivial, NoZeroDivisors, FaithfulSMul and IsScalarTower. It is not a duplicate, because the existing lem-kun and lem-sbc tower nodes are field-only and step 9 needs a domain middle ring. It does not restate a clause of the item, and its blueprint fields are correct. I accept the tool use of lem-weil-pbc-localization-prime-residue-field-iso, a generic localization tool from another unit, for steps 4 and 6. Every other off-unit citation is a definition or a Mathlib leaf. No SGA is cited. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f098156e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, ExcellentRing.lean (IsUniversallyCatenary), Stacks algebra.tex 27518-27545 (Tag 02IJ), module, node copy, report (real Worker report + Second reading by Q31). Every clause matches: domains with independent universes u v, injective algebraMap, IsNoetherianRing (harmless duplicate of a conjunct), IsUniversallyCatenary (not IsExcellent), Algebra.FiniteType, primes with hpq contraction, canonical Ideal.ResidueField.map algebra, Ideal.height, Algebra.trdeg via toENat (all values finite, no loss). Edge cases q=0, R=S, field base, Z[T], Z[1/2] fine. lean.statement verbatim; docstrings carry 02IJ + blueprint tag + 9 proof steps; one sorry theorem, no defs, no statement_change, no duplicates found. nt_compile.py --json on the snapshot text: rc=0, 1.9 s, clean. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversallyCatenaryDimensionFormula",
+  "declaration": "IsUniversallyCatenary.height_add_trdeg_residueField_eq",
+  "file": "lean/Sheaf/RingTheory/UniversallyCatenaryDimensionFormula.lean",
+  "statement": "theorem height_add_trdeg_residueField_eq {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [IsNoetherianRing R] [Algebra.FiniteType R S] (hR : IsUniversallyCatenary R) (hinj : Function.Injective (algebraMap R S)) (p : Ideal R) (q : Ideal S) [p.IsPrime] [q.IsPrime] (hpq : p = q.comap (algebraMap R S)) : q.height + Cardinal.toENat (@Algebra.trdeg p.ResidueField q.ResidueField _ _ (Ideal.ResidueField.map p q (algebraMap R S) hpq).toAlgebra) = p.height + Cardinal.toENat (Algebra.trdeg R S)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
