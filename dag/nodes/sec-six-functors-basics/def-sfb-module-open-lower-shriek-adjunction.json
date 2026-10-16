@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-open-lower-shriek-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The adjunction $j_!\\dashv j^*$ on module objects",
@@ -20,26 +20,106 @@
  ],
  "proof": [
   {
-   "text": "The composite of $\\operatorname{Res}_{\\alpha_j}\\dashv\\operatorname{Coext}_{\\alpha_j}$\nand $j^{\\mathrm{lin}}_!\\dashv\\operatorname{mapMod}(j^*_{\\Ab})$ is an adjunction\n$j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}\\dashv\n\\operatorname{Coext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})$. The coefficient\nmorphism $\\alpha_j$ is an isomorphism ([sk-prop-sfb-cartesian-coefficients]), and for\nan invertible morphism of ring objects extension, restriction and coextension of\nscalars agree ([sk-def-sfb-change-of-scalars]); in particular\n$\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Ext}_{\\alpha_j}$, so the right\nadjoint is isomorphic to $j^*$.",
+   "text": "Work in $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$, with $\\mathcal R=j^*_{\\Ab}\\Lambda_X$ and $\\mathcal S=\\Lambda_U$. The tensor structure and the applicability to $\\Ab$ and the essentially small pro-étale site are those of [sk-def-sfb-sheaf-tensor]. By [lem-weil-pbc-sheaf-tensor-closed], this category is abelian, symmetric monoidal closed, and tensoring on either side preserves colimits. In particular it has equalizers and coequalizers: in an abelian category these are the kernel and cokernel of the difference of two parallel maps. The coefficient rings here are commutative. Thus parts 3 and 5 of [sk-def-sfb-change-of-scalars] apply. By [lem-sfb-alpha-iso], applied to $f=j$ and the given condensed ring, $\\alpha_j:\\mathcal R\\to\\mathcal S$ is invertible. Fix the natural isomorphism $\\tau:\\operatorname{Coext}_{\\alpha_j}\\xrightarrow{\\sim}\\operatorname{Ext}_{\\alpha_j}$ supplied by part 5 of change of scalars, in the direction inverse to its displayed isomorphism.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-change-of-scalars"
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-alpha-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.md",
+    "place": "statement, final identification of coextension with extension; hypotheses supplied by the cited ambient-category nodes"
+   }
+  },
+  {
+   "text": "Write $L=j^{\\mathrm{lin}}_!$, $T=\\operatorname{mapMod}(j^*_{\\Ab})$, $A=\\operatorname{Res}_{\\alpha_j}$ and $B=\\operatorname{Coext}_{\\alpha_j}$. We have $L\\dashv T$ by [def-sfb-module-linear-open-lower-shriek] and $A\\dashv B$ by part 3 of [sk-def-sfb-change-of-scalars]. The composite adjunction of [def-weil-pbc-composite-adjunction] consequently has left adjoint $L\\circ A=j_!$, the equality being the definition in [def-sfb-module-open-lower-shriek], and right adjoint $B\\circ T$. Explicitly, for $M\\in\\Mod_{\\Lambda_U}$ and $N\\in\\Mod_{\\Lambda_X}$, its Hom bijection is\n$$\n\\Hom_{\\Lambda_X}(j_!M,N)=\\Hom_{\\Lambda_X}(L(AM),N)\\xrightarrow{\\sim}\\Hom_{\\mathcal R}(AM,TN)\\xrightarrow{\\sim}\\Hom_{\\Lambda_U}(M,B(TN)).\n$$\nBoth bijections are natural in $M,N$, being the Hom bijections of the stated adjunctions. The domains match because $AM$ and $TN$ are both $\\mathcal R$-modules on $U$.",
+   "uses": [
+    "def-sfb-module-linear-open-lower-shriek",
+    "sk-def-sfb-change-of-scalars",
+    "def-weil-pbc-composite-adjunction",
+    "def-sfb-module-open-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits, applied to the two adjunctions specified in the item"
+   }
+  },
+  {
+   "text": "Postcompose the last Hom set in step 2 with $\\tau_{TN}$ from step 1. This gives the bijection\n$$\n\\Hom_{\\Lambda_X}(j_!M,N)\\xrightarrow{\\sim}\\Hom_{\\Lambda_U}(M,\\operatorname{Ext}_{\\alpha_j}(TN))=\\Hom_{\\Lambda_U}(M,j^*N),\n$$\nwhere the final equality is exactly [def-sfb-module-upper-star] for $f=j$. On that last Hom set the added map is $h\\mapsto\\tau_{TN}\\circ h$, with inverse $h\\mapsto\\tau_{TN}^{-1}\\circ h$. It commutes with precomposition in $M$ by associativity; for a map $v:N\\to N'$, naturality in $N$ is the equation $\\tau_{TN'}\\circ B(Tv)=\\operatorname{Ext}_{\\alpha_j}(Tv)\\circ\\tau_{TN}$, the naturality equation for $\\tau$. Hence the resulting bijection is natural in both variables and defines $j_!\\dashv j^*$. This defines precisely the composite adjunction with its right adjoint identified by the specified scalar-change isomorphism.",
+   "uses": [
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.md",
+    "place": "statement, composing the two adjunctions and identifying the right adjoint; explicit Hom-set transport written out"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-alpha-iso",
+  "def-sfb-module-linear-open-lower-shriek",
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.md",
-  "place": "## Proof"
+  "place": "Construction specified in the statement; Hom-set composition as in Stacks Tag 0DV0, lemma-compose-counits"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero of module objects on pro etale sheaves left adjoint to inverse image",
+   "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_unit_app_assoc; CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-16",
+   "verdict": "general composition tool only; does not construct or identify the module-object functors"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|coextendScalars|extendScalarsIsoCoextendScalars",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for this module-object open-extension adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module objects over a commutative condensed ring on the pro etale site, extension by zero along an open immersion is left adjoint to pullback",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; LightCondensed.freeForgetAdjunction; Condensed.freeForgetAdjunction; PresheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for this module-object open-extension adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|coextendScalars|extension by zero",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for this module-object open-extension adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction for extension by zero on modules over a sheaf of rings obtained by composing linear extension by zero with restriction of scalars along an invertible coefficient homomorphism",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.sheafificationAdjunction; ModuleCat.restrictCoextendScalarsAdj; CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; ModuleCat.ExtendRestrictScalarsAdj.unit_app; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-16",
+   "verdict": "no match for this module-object open-extension adjunction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -61,5 +141,34 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionLowerShriekUpperStarAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-open-lower-shriek-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its four statement dependencies. Checked the current blueprint unit and archived master construction against the actual module-object categories. Replaced the incomplete imported paragraph by the ambient hypotheses, the explicit composite Hom bijection, and transport along the correctly oriented coextension-to-extension isomorphism. Reused the narrower all-condensed-rings alpha-isomorphism node and the existing Mathlib composite-adjunction leaf; created no nodes. No attachment exists in slopmaster2.",
+  "blueprint": "Realizes the entire construction in def-sfb-module-open-lower-shriek-adjunction: restriction/coextension adjunction followed by the linear adjunction, then Coext ≅ Ext; the extension-by-zero/adjunction clause of sk-def-sfb-module-lower-shriek.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic ambient sheaf-category theorem supplies abelianness (hence equalizers and coequalizers) and closed tensor structure on the small pro-etale site; no geometric step of the module-lower-shriek unit is replaced."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "The unit route cites sk-prop-sfb-cartesian-coefficients only for admissible coefficients, while this target quantifies over every commutative condensed ring; this existing all-condensed-rings alpha-isomorphism is the exact stronger statement needed for the open immersion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-alpha-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-9491b85a2",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-9491b85a2 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Repair adds lem-sfb-alpha-iso to split_report.tool_uses because the target allows every condensed ring while the unit route only states admissible coefficients. Corrected DAG JSON: fixes/dag/nodes/sec-six-functors-basics/def-sfb-module-open-lower-shriek-adjunction.json.; 1 file(s) fixed by the reviewer"
+ }
 }
