@@ -1,6 +1,6 @@
 # Work queue
 
-54 items; claim with `tools/claim.py next <group> [--stage N]`.
+55 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (54)
+## Stage 3: modules to prove (55)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -60,6 +60,7 @@
 | `Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree` | 23 | 1 | proof |
@@ -67,10 +68,11 @@
 | `Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
-Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 |
 | `Sheaf.RingTheory.PopescuLiftChartFlat` | 12 | 1 |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 |
+| `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 |
