@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$Rp_*$ on $D_{\\mathrm{cons}}(-,E)$ is a left adjoint for proper $p$",
@@ -32,24 +32,147 @@
  },
  "stmt_deps": [
   "sk-def-sfb-condensed-ring",
-  "def-sfb-dc-lower-star"
+  "def-sfb-dc-lower-star",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
-   "text": "This is the existence of the exceptional inverse image for $\\ell$-adic sheaves\n(Bhatt–Scholze, §6.8). On each torsion level $\\cO_E/\\varpi^n$, in which $p$ is invertible, the\nétale $Rp_*=Rp_!$ has a right adjoint $Rp^!$ (SGA 4, XVIII). It preserves bounded\nconstructible complexes by Deligne's finiteness theorem (SGA 4½, *Th. finitude*), and it is\ncompatible with reduction modulo $\\varpi^n$. Passing to the derived limit over $n$ gives a right\nadjoint of $Rp_*$ on $D_{\\mathrm{cons}}(-,\\underline{\\cO}_E)$. Inverting $\\ell$ gives one on\n$D_{\\mathrm{cons}}(-,\\underline E)$.",
-   "uses": [],
-   "elementary": null
+   "text": "The finite extension $E/\\mathbf Q_\\ell$ is an admissible rational coefficient in the list of [sk-def-localizing-closure]. The schemes $Z,Y$ and the proper $k$-morphism $p$ satisfy the standing hypotheses of [sk-def-sfb-dc-setting]: separated and of finite type over $k$, with $\\ell\\ne\\operatorname{char}k$. Apply [det-cor-existence-ii-restriction] (2) to this coefficient and morphism, renaming its $X$ as $Z$. It supplies a functor $p^!\\colon\\Dctf(Y,E)\\to\\Dctf(Z,E)$ and a natural adjunction bijection $\\operatorname{Hom}(Rp_*K,L)\\cong\\operatorname{Hom}(K,p^!L)$ for $K\\in\\Dctf(Z,E)$ and $L\\in\\Dctf(Y,E)$.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "sk-def-sfb-dc-setting",
+    "det-cor-existence-ii-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "clause (2)"
+   }
+  },
+  {
+   "text": "The coefficient $E$ in step 1 denotes the condensed ring $\\underline E$, defined by $S\\mapsto C(S,E)$ with the $\\ell$-adic topology in [sk-def-sfb-condensed-ring]. This is the condensed-module convention of [sk-def-sfb-constructible], whose $\\Dbc(-,E)$ is the full subcategory with bounded constructible cohomology over the pulled-back ring. For this rational coefficient [sk-def-localizing-closure] states $\\Dctf(-,E)=\\Dbc(-,E)$, while [sk-def-sfb-dc-setting] defines $D_{\\mathrm{cons}}(-,\\underline E)$ as that same bounded constructible category of modules over the pulled-back condensed ring. Finally [def-sfb-dc-lower-star] defines the target's $Rp_*$ as the restriction of the ambient derived pushforward. Consequently the categories and left functor in step 1 are precisely those in the statement. Define $Rp^!$ to be its $p^!$. The displayed Hom bijection of step 1, with the same objects and morphisms, is natural in both variables and proves $Rp_*\\dashv Rp^!$. No comparison with a discrete constant $E$-sheaf or with a rationalized étale category is being used.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure",
+    "sk-def-sfb-dc-setting",
+    "def-sfb-dc-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "clauses (1)–(2), specialization to $E$"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-dc-setting",
+  "det-cor-existence-ii-restriction",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-constructible",
+  "def-sfb-dc-lower-star"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-e.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "clauses (1)–(2), specialized to $E$"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of derived pushforward for proper morphism on bounded constructible derived category",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pullbackPushforwardAdjunction; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned statements concern underived sheaf pullback/pushforward or locally constant condensed modules, not exceptional inverse image on derived constructible E-modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLeftAdjoint, rightDerivedLowerStar, proper",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.IsLeftAdjoint'",
+   "date": "2026-10-16",
+   "verdict": "query error; not evidence of absence; superseded by the valid Functor.IsLeftAdjoint query"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*LowerStar|IsLeftAdjoint.*proper|right adjoint",
+   "results": "0 hits (searched Mathlib/Mathlib/)",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: Mathlib/ was supplied relative to Mathlib/; zero hits are not evidence of absence; superseded by searches in AlgebraicGeometry and CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper derived pushforward has a right adjoint on bounded constructible sheaves",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned statements concern underived sheaf pullback/pushforward or locally constant condensed modules, not exceptional inverse image on derived constructible E-modules"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|constructible|IsLeftAdjoint|rightDerived",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean (searched Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: underived structure-sheaf adjunctions and constructible subsets, not bounded constructible pro-etale E-module complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image on derived categories of constructible sheaves has exceptional inverse image as right adjoint",
+   "results": "TopCat.Sheaf.pullback; TopCat.Sheaf.instIsLeftAdjointPullback; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; TopCat.Sheaf.pullbackPushforwardAdjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned statements concern underived sheaf pullback/pushforward or locally constant condensed modules, not exceptional inverse image on derived constructible E-modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint, CategoryTheory.Functor.IsRightAdjoint",
+   "results": "CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint; CategoryTheory.Adjunction.instIsRightAdjointRightAdjoint; CategoryTheory.Functor.IsLeftAdjoint.op; CategoryTheory.Functor.IsRightAdjoint.op; CategoryTheory.Functor.IsLeftAdjoint.leftOp; CategoryTheory.Functor.IsLeftAdjoint.rightOp; CategoryTheory.Functor.IsRightAdjoint.leftOp; CategoryTheory.Functor.IsRightAdjoint.rightOp",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjoint/opposite-category declarations and underived sheaf pullback only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional inverse image right adjoint proper direct image bounded constructible l-adic sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; LightCondMod.LocallyConstant.adjunction; TopCat.Sheaf.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned statements concern underived sheaf pullback/pushforward or locally constant condensed modules, not exceptional inverse image on derived constructible E-modules"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|exceptional|shriek|Brown.*represent",
+   "results": "0 hits (searched Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*restrict|restrict.*Adjunction|constructible.*(adjoint|derived)",
+   "results": "21 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean; Mathlib/CategoryTheory/Sites/Adjunction.lean; Mathlib/CategoryTheory/Sites/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "component match only: Mathlib/CategoryTheory/Adjunction/Restrict.lean:42 constructs a restriction of a supplied adjunction; no exceptional inverse image existence or constructibility theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.FullSubcategory",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.FullSubcategory'",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier CategoryTheory.FullSubcategory; not evidence of absence; superseded by the valid restrictFullyFaithful query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between full subcategories is a left adjoint when its ambient adjunction preserves the subcategories",
+   "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Subobject.lowerAdjunction; CategoryTheory.Functor.partialLeftAdjoint; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "component match only: restrictFullyFaithful assumes an ambient adjunction and both preservation identifications; it does not establish the geometric existence or constructibility preservation required by this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "6 hits: CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "component match only: the six results concern restriction of a supplied adjunction; none supplies proper derived pushforward adjunction or geometric preservation"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -62,5 +185,21 @@
   "sk-def-sfb-condensed-ring"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+  "worker": "stage1",
+  "summary": "Specialized the existing proper-adjunction restriction theorem along the current unit route, checking the standing scheme hypotheses and identifying Dctf = Dbc with the bounded constructible category over the pulled-back condensed E ring. Corrected the earlier attempt's invalid Loogle/grep evidence and its claim about slopmaster2. No new node or statement change.",
+  "blueprint": "The current sk-cor-existence-ii unit proof invokes det-cor-existence-ii-restriction for the proper case and identifies the three coefficient-specific nodes as the same conclusion. Steps 1–2 realize its E specialization, replacing the node-level torsion proof under the human route lock; the chapter and unit routes are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-228569347",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-228569347 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, blueprint route, cited node statements, source texts, and Mathlib search evidence. The two proof steps correctly specialize the proper restriction theorem to finite E/Q_l and identify Dctf=Dbc with the pulled-back condensed-ring D_cons category. Hypotheses, adjunction, coefficient category, route lock, edge cases, duplicate checks, and absence of finished Lean attachment all pass. Wrote review.md."
+ }
 }
