@@ -25,7 +25,8 @@
   "def-weil-pbc-direct-image",
   "lem-asd-etale-finite-twist-pullback",
   "def-asd-finite-etale-tate-sheaf",
-  "def-asd-ordinary-finite-p1-kummer-class"
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows"
  ],
  "proof": [
   {
@@ -235,5 +236,39 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-7a6e80ad5 (reviewer sub-agent of L); spot-checked: I read every check in full; the details are in review.md. Statement: compared with master sk-prop-sf-cbc/thm-amb-p1-decomposition.md (order 1570, which fixes ordinary derived categories) and main-20261015 sk-lem-geo-p1-cohomology. The delivery restores the ordinary-étale statement for every finite commutative A with NA=0, N invertible on S and S Noetherian. The master finite stage A_{E,n} is an instance of it, so nothing is weakened. The base-change morphism is the def-kun-unbounded-exchange mate and S' is arbitrary. The O(1) convention e_0=t^{-1}e_1 agrees with def-pc-projective-space-twist and with the adjunction and Kummer-class nodes. The citers thm-amb-p1-adjunction, det-sp-p1-trace and det-prop-diagonal-tower-trace use exactly this étale form. Step 1: lem-asd-ordinary-finite-p1-adjunction (same unit, same hypotheses, no cycle back to the item) gives b_q. P is Noetherian via nagata properness and 01T6. lem-amb-proper-coproducts-projection's hypotheses hold. I redid both component calculations (triangle identity and counit naturality) and they give exactly (1,h). Step 2: lem-kun-proper-base-change-torsion-ring holds for a torsion ring with g arbitrary (Stacks 0F0C, etale-cohomology.tex l.18887). The infinity divisor (s) in B[s] is Cartier for every B and O(D)=O(1). lem-asd-ordinary-supported-kummer plus the closed-immersion identity Ex_i∘g'^{-1}u_D=u_{D'} give c_1'=g'^{-1}c_1, and the mate computation gives Ex∘g^{-1}(1,h)=(1,h'). No Noetherian hypothesis on S' is needed. Edge cases checked: A=0, N=1, empty S, Z/4 over an algebraically closed field, non-flat A=Z/2 with N=4, A=Z/6 over Z[1/6], nonreduced or non-Noetherian S'. No new nodes, no restatement, no SGA. Tool uses accepted: lemma-nagata-projective-space-base-change-proper, lem-kun-proper-base-change-torsion-ring, and pqf-lem-locnoeth-lft (a Mathlib leaf). Mathlib searches: LeanSearch, LeanFinder, Loogle (unavailable) and grep found no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1Decomposition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.P1DecompositionTwistTransport",
+   "AlgebraicGeometry.Etale.p1DecompositionTwistTransport",
+   "AlgebraicGeometry.Etale.p1DecompositionSheafPullback",
+   "AlgebraicGeometry.Etale.p1DecompositionSheafProduct",
+   "AlgebraicGeometry.Etale.p1DecompositionTwist",
+   "AlgebraicGeometry.Etale.p1DecompositionTwistPullback",
+   "AlgebraicGeometry.Etale.p1DecompositionEvaluation",
+   "AlgebraicGeometry.Etale.p1DecompositionUnit",
+   "AlgebraicGeometry.Etale.p1DecompositionChernAdjoint",
+   "AlgebraicGeometry.Etale.p1DecompositionMap",
+   "AlgebraicGeometry.Etale.p1DecompositionSourceMap",
+   "AlgebraicGeometry.Etale.p1DecompositionDegreeZeroTensor",
+   "AlgebraicGeometry.Etale.p1DecompositionDegreeZeroEvaluation",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1Decomposition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Decomposition.lean",
+  "statement": "theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶ (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧, ordinaryFiniteP1ChernSpec A N hA S ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸ hS.map (ProjectiveLine S ↘ S).appTop.hom) c ∧ IsIso (p1DecompositionMap A N hN hA S hS c) ∧ ∀ (S' : Scheme.{u}) (g : S' ⟶ S), ∃ c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶ (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧, ordinaryFiniteP1ChernSpec A N hA S' ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸ (((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom).map (ProjectiveLine S' ↘ S').appTop.hom)) c' ∧ IsIso (p1DecompositionMap A N hN hA S' ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c') ∧ (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫ ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫ (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom = p1DecompositionSourceMap A N hN hA g hS ≫ p1DecompositionMap A N hN hA S' ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c'",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fb8344c9",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q118), module and the exact dependency declarations: OrdinaryFiniteP1Kummer (ChernSpec, class realization), OrdinaryFiniteP1Arrows (pullback, pushforward, tensor, unit pullback, P1 exchange), FiniteEtaleTateSheaf, and EtaleFiniteTwistPullback (all conjuncts). Every clause matches: N>0; finite CommRing A in u+1 with N=0; IsNoetherian S; IsUnit N on global sections; ProjectiveLine; ordinary small-etale unbounded D(A); A(1)/A(-1) as line/ihom; K = A(-1)[-2]; h is the homEquiv adjoint of right-unit, then (x c), then the normalized twist pullback, then evaluation (even shifts, no sign); the unit is the adjunct of the constant pullback; IsIso of biprod.desc; for all S' and g with no hypothesis, c' satisfies the same spec and the base-change square has the correct direction. ChernSpec determines c, so the existential is not weaker. The Classical.choice transport record is a subsingleton (roots via mono kernel inclusion, line via pure tensors/zero/power/negative-evaluation, product hom = ev), so the selection is canonical; not a duplicate of the positive-only OrdinaryFiniteTwistTransport. stmt_deps add only the landed def-asd-ordinary-finite-p1-arrows (no cycle); lean.statement is verbatim; no statement_change. Edge cases checked: A=0, N=1, empty S/S', non-flat Z/2 with N=4, non-Noetherian S'; universes bound, no added equality. nt_compile.py local overlay: 35.5 s and 38.2 s, clean. Only sorry; docstrings carry source and blueprint tags. Minor non-blocking: the docstring cites the main-20261015 source path while the node's source.document is the master path. No fixes."
  }
 }
