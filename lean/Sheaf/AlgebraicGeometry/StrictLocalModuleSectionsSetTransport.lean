@@ -23,15 +23,17 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical equivalence of strict-local terminal sections after forgetting module
+/ -- The canonical equivalence of strict-local terminal sections after forgetting module
 coefficients and interchanging the two pullback factors.
 Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.
 (blueprint: def-weil-pbc-strict-local-module-sections-set-equiv).
 The coefficient comparison, composition of inverse images, restriction along the
 pullback symmetry, and terminal/global section comparisons are all actual isomorphisms.
 The composition comparison is determined by its unit identity and fixed-sheaf uniqueness.
-No existence theorem about sections or stalks is used to choose the equivalence. -/
+No existence theorem about sections or stalks is used to choose the equivalence. - /
 noncomputable def strictLocalModuleSectionsSetEquiv
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -86,6 +88,7 @@ noncomputable def strictLocalModuleSectionsSetEquiv
   let e0 := (forget (ModuleCat.{u + 1} Λ)).mapIso eΓ
   let e1 := e0 ≪≫ eq.symm ≪≫ ec.symm ≪≫ er ≪≫ ed.symm
   exact e1.toEquiv
+-/
 
 private noncomputable abbrev setPullback {R S : Scheme.{u}} (f : S ⟶ R) :=
   Scheme.etaleSetPullback f
@@ -274,6 +277,8 @@ The composite restriction map is strictHenselizationSectionMap f s j: compare bo
 projections using pullback.lift_fst, pullback.lift_snd, the pullbackComp projection
 identities, and pullbackSymmetry_hom_comp_snd. Functoriality gives the displayed equation.
 No step uses qcqs, nonempty schemes, or nonzero coefficients. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 theorem strictLocalModuleSections_set_transport
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -417,5 +422,6 @@ theorem strictLocalModuleSections_set_transport
   have hf := ConcreteCategory.congr_hom hall z
   simp only [types_comp_apply] at hf
   exact hf
+-/
 
 end AlgebraicGeometry.Etale

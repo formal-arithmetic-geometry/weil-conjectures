@@ -88,8 +88,10 @@ private theorem lift_indEtale_residue
     eB (r (eA.symm (algebraMap A q.ResidueField x))) at h
   simpa only [← heA, eA.symm_apply_apply] using h
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/-- Lift compatible geometric residue embeddings to a ring map of strict henselizations.
+/ -- Lift compatible geometric residue embeddings to a ring map of strict henselizations.
 Source: Stacks Project, Tags 04GU and 04HX.
 (blueprint: lem-weil-pbc-compatible-strict-henselization-residue-lift).
 
@@ -108,7 +110,7 @@ Tag 04GU) with this maximal ideal and r. Identify the prime residue fields there
 with the local residue fields here. Its prescribed reduction gives the ring residue
 diagram; its R-algebra compatibility gives the equality of maps to U and hence the
 structural square after composing with U → S. Only φ is obtained: r and its spectral
-compatibility are inputs, constructed independently by the caller. -/
+compatibility are inputs, constructed independently by the caller. - /
 theorem Etale.exists_compatibleStrictHenselizationResidueLift
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
@@ -213,5 +215,6 @@ theorem Etale.exists_compatibleStrictHenselizationResidueLift
     ext x
     exact f.commutes x
   rw [hfbase, hb]
+-/
 
 end AlgebraicGeometry

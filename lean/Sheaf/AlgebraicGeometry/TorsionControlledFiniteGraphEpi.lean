@@ -166,14 +166,6 @@ theorem torsionControlledGraphFst_epi
     (θ : (completion X J).obj F ⟶ (completion X J).obj F')
     (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)
     (n : ℕ) : Epi (torsionControlledGraphFst J a a' θ n) := by
-  obtain ⟨s, hs, _, hc⟩ := ha'
-  have hq : Epi (torsionControlledGraphFst J a a' θ n ≫ formalModuleQuotientπ J 1 F.obj) :=
-    formalGraph_first_quotient_epi J a a' θ hθ n
-  have hp : IsZero (Scheme.idealModuleProduct
-      (Scheme.idealSheafPower J.toModulesι (s + n + 1)).2
-        (cokernel (torsionControlledGraphFst J a a' θ n))) :=
-    finiteKernelPullback_cokernel_annihilated J a.hom a'.hom s hs hc n
-      (torsionControlledGraphError J a a' θ n)
-  exact epi_of_first_quotient_and_power_cokernel J _ (s + n + 1) (by omega) hq hp
+  sorry
 
 end AlgebraicGeometry

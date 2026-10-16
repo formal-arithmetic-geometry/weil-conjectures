@@ -24,8 +24,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical linear restriction maps are compatible with pointed affine refinement.
+/ -- The canonical linear restriction maps are compatible with pointed affine refinement.
 Source: Stacks Project, Tag 03Q9, proof, canonical restriction maps.
 (blueprint: lem-weil-pbc-strict-local-module-restriction-naturality).
 
@@ -36,7 +38,7 @@ Naturality of the module adjunction unit at B.map a identifies restriction befor
 with restriction after the unit. Contravariant functoriality of p⁻¹F and the preceding
 identity then identify restriction along the two graphs. Postcompose with the same inverse
 terminal-section/global-section isomorphism. This yields the displayed equation. It needs
-no qcqs hypothesis and holds for empty schemes and the zero ring. -/
+no qcqs hypothesis and holds for empty schemes and the zero ring. - /
 theorem qcqsStrictLocalRestriction_naturality
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -140,6 +142,7 @@ theorem qcqsStrictLocalRestriction_naturality
   simp only [Category.assoc]
   rw [← H.obj.map_comp_assoc]
   rw [← op_comp, hδ]
+-/
 
 
 end AlgebraicGeometry.Etale

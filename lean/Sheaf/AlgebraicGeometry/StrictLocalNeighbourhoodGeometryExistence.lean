@@ -23,9 +23,11 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- The pullback of the strict henselization is the limit of the small affine
+/ -- The pullback of the strict henselization is the limit of the small affine
 neighbourhood pullbacks, with qcqs stages and affine transition morphisms.
 This supplies only geometry, with no derived sheaves, cocones or mates.
 Source: Stacks, Tag 03Q9, first proof paragraph
@@ -42,7 +44,7 @@ quasi-separated. Its stage projection is a base change of f, so Mathlib's
 `quasiSeparatedSpace_of_quasiSeparated` prove the two stage properties. Each
 transition is the base change of a map between affine neighbourhoods, so
 `MorphismProperty.pullbackLift_fst_snd` proves that it is affine. No global qcqs
-assumption on X or S is used. -/
+assumption on X or S is used. - /
 theorem nonempty_strictLocalNeighbourhoodGeometry {X S : Scheme.{v}}
     (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
@@ -94,5 +96,6 @@ theorem nonempty_strictLocalNeighbourhoodGeometry {X S : Scheme.{v}}
     change e.hom ≫ π.app i ≫ pullback.snd (A.obj i).hom f = _
     simpa [e, A, strictLocalNeighbourhoods, Scheme.strictHenselizationEtaleDiagram] using
       congrArg (fun g ↦ e.hom ≫ g) (hp i)
+-/
 
 end AlgebraicGeometry.Etale

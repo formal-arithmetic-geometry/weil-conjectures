@@ -11,13 +11,15 @@ import Sheaf.AlgebraicGeometry.CompletionThickeningCokernelReflection
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/-- One half of the quantitative torsion reflection for a fixed compatible
+/ -- One half of the quantitative torsion reflection for a fixed compatible
 algebraization. Source: Stacks Project, Tags 088A and 0888.
 Proof: use the scalar reverse maps from Remark 0888 on affine sections,
 transport them through the comparison square, and pass to inverse limits;
 then use the closed-immersion equivalence and completion reflection.
-(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion-cokernel) -/
+(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion-cokernel) - /
 theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)
@@ -89,5 +91,6 @@ theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
   have heq : 2 * (2 * t) = 4 * t := by omega
   rw [heq] at h
   exact h
+-/
 
 end AlgebraicGeometry
