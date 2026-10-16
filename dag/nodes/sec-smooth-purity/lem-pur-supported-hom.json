@@ -3,44 +3,219 @@
  "blueprint": {
   "is": "lem-pur-supported-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Supported cohomology as morphisms",
- "statement": "Let $i:Z\\hookrightarrow X$ be a\nclosed immersion and\nlet $F$ be a bounded below complex of coefficient sheaves on $X$.\nThe supported cohomology group\nhas a natural identification\n\n$$\nH^a_Z(X,F)=\\operatorname{Hom}_{D(X,\\Lambda)}(i_*\\Lambda_Z,F[a]).\n$$",
+ "statement": "Fix the finite coefficient ring $A=A_{E,n}$ of [def-pur-conventions].\nLet $X$ be a scheme [def-pc-scheme], let $i:Z\\hookrightarrow X$ be a\nclosed immersion [def-weil-closed-immersion], with complementary\nopen immersion $j:U\\hookrightarrow X$ [def-weil-open-immersion].\nWork on the small pro-etale\nsites with constant coefficient sheaves $A_T$ and ambient derived categories\n$D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], and let $i_*$ be\nthe underived module direct image [def-weil-proetale-module-direct-image].\nFor any bounded-below complex $F$ of $A_X$-module sheaves and every integer\n$a$, there is an isomorphism, natural in $F$,\n$$\nH^a_Z(X,F)\\;\\cong\\;\n\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(i_*A_Z,F[a]),\n$$\nwhere the left side is the cohomology of derived supported sections\n[def-pur-support-cohomology] and $i_*A_Z$ is placed in degree zero.\nThe shift uses the cochain convention $(F[a])^r=F^{r+a}$\n[def-weil-abstract-derived-category]. No constructibility or finite-Tor\ncondition is imposed on $F$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
   "place": "node lem-pur-supported-hom, order 1940"
  },
  "stmt_deps": [
-  "def-weil-scheme-morphism-properties"
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-module-direct-image",
+  "def-pur-support-cohomology",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "For an injective resolution $F\\to I$, the identity\n$\\Gamma_Z(X,I)=\\Gamma(Z,i^!I)$ follows from\n[def-pur-flasque-support]. Its derived version identifies\n$H_Z^a(X,F)$ of [def-pur-support-cohomology] with\n$\\operatorname{Hom}_{D(Z)}(\\Lambda_Z,Ri^!F[a])$: global sections\nare Hom from the coefficient unit, by\n[def-weil-derived-pullback-tensor-hom].\nThe adjunction $i_*\\dashv Ri^!$ of\n[def-weil-exceptional-inverse-image] gives the displayed group.",
+   "text": "First identify the sections of the coefficient sheaf on every scheme $T$. Degree-zero comparison [lem-cbc-abelian-etale-proetale-cohomology-comparison], with the constant-ring identification [lem-sf-comparison-pullback-exact], identifies $A_T(T)$ on the pro-etale site with the sections of the constant etale coefficient sheaf. The underlying set of a constant ring sheaf is the constant set sheaf [lem-weil-pbc-ring-sheafification-underlying-sets]; the same sheafification of the constant additive group identifies its additive structure. Thus [lem-weil-pbc-constant-sheaf-sections-locally-constant] gives $A_T(T)=\\operatorname{LC}(|T|,A)$. Addition and multiplication are pointwise: on the open fibres both sections are constant and their operations are the operations of $A$. Pullback along a scheme morphism sends a function to its composite with the underlying continuous map: restrict to the open fibres, where the section is the indicated constant and the comparison maps preserve that constant, then glue. For a weakly etale $W\\to X$, [lem-weil-proetale-weakly-etale-localization] identifies $A_X(W)$ with $A_W(W)$, and also identifies $A_Z(W\\times_XZ)$ with $A_{W\\times_XZ}(W\\times_XZ)$. These identifications therefore describe restrictions as restrictions of locally constant functions.",
    "uses": [
-    "def-pur-flasque-support",
-    "def-pur-support-cohomology",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-exceptional-inverse-image"
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: coefficient unit; its sections described explicitly before the supported-Hom calculation"
+   }
+  },
+  {
+   "text": "Put $P=i_*A_Z$ and let $\\rho:A_X\\to P$ be the constant-coefficient structure map. By [def-weil-proetale-module-direct-image] and step 1, its component at $W\\to X$ restricts locally constant functions from $|W|$ to the closed subspace $|W_Z|$, where $W_Z=W\\times_XZ$. The projection $W_Z\\to W$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], so its underlying space is indeed the closed subspace used here. It is locally surjective. Indeed, given $s:|W_Z|\\to A$ locally constant and $z\\in|W_Z|$, choose an open neighbourhood $V_z\\subset W$ whose intersection with $W_Z$ lies in the fibre of $s(z)$; the constant section $s(z)$ on $V_z$ lifts $s$ there. On $W\\setminus W_Z$ the target section is zero and lifts to zero. These opens cover $W$. This Zariski cover is a pro-etale cover by [def-weil-pbc-proetale-site]. For each affine open $B\\subset W$, choose affine open neighbourhoods of its points contained in intersections of $B$ with members of the displayed cover; these exist since schemes are locally affine. Quasi-compactness of $B$ [lem-weil-pbc-affine-scheme-qcqs] selects finitely many of these affine neighbourhoods covering $B$, exactly as required in the covering definition. The local-surjectivity criterion [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] makes the underlying abelian map epic; it is also epic among module sheaves since equality of module maps is equality of their underlying maps. This proves that $\\rho$ is epic without imposing quasi-compactness on $j$.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: supported sections and the coefficient unit; local lifting for the closed coefficient sheaf written out"
+   }
+  },
+  {
+   "text": "By [lem-pur-site-restriction-module-adjunction-exact], $j_!A_U$ is the sheafification of the extension presheaf [def-weil-extension-by-zero-presheaf]. Construct $\\epsilon:j_!A_U\\to A_X$ as follows. By clause (4) of [lem-weil-proetale-weakly-etale-localization], an object $W$ has at most one map to $U$. When it has one, send its extension-presheaf section to the same section of $A_X(W)$ under the coefficient identification of clause (2); otherwise use the zero map from the zero presheaf value. These maps are module-linear and commute with restrictions by the presheaf restriction formula, including the case of an arrow from an object mapping to $U$ to an object not mapping to $U$, where the source restriction starts at zero. The universal property of [def-weil-presheaf-modules-sheafification] gives $\\epsilon$. The composite $\\rho\\epsilon$ is zero: on every nonzero presheaf summand $W\\to U$ one has $W_Z=\\varnothing$ and $P(W)=0$, so the composite is zero before sheafification and hence after it by [def-weil-presheaf-modules-sheafification]. Conversely, for $f\\in\\ker(\\rho_W)$, step 1 makes $f$ a locally constant function vanishing on $W_Z$. Its nonzero locus $O\\subset W$ is open and closed and lies in $W\\times_XU$. On $O$ the section $f|_O$ supplies a section of the extension presheaf and thus of $j_!A_U$; on $W\\setminus O$ take zero. They agree on the empty overlap and glue to a section of $j_!A_U(W)$ mapping to $f$. Thus $\\operatorname{im}(\\epsilon)=\\ker(\\rho)$. Together with the epimorphism of step 2 this proves that $P$ is the cokernel of $\\epsilon$ in the abelian category of module sheaves.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: supported sections and the coefficient unit; the constant-sheaf cokernel calculation replaces the unrestricted support-comparison assertion"
+   }
+  },
+  {
+   "text": "The cokernel universal property from step 3 gives $\\operatorname{Hom}(P,M)=\\ker(\\operatorname{Hom}(A_X,M)\\to\\operatorname{Hom}(j_!A_U,M))$. For any module sheaf $N$ over a constant coefficient ring, evaluation on $1$ identifies $\\operatorname{Hom}(A_T,N)$ with $N(T)$: the inverse sends $s\\in N(T)$ to the map $a\\mapsto a\\,s|_V$ on each site object $V$. These are inverse module maps and commute with restrictions by [def-weil-sheaf-of-modules-category]. Compute the other Hom group explicitly. By [def-weil-presheaf-modules-sheafification], a map $\\beta:j_!A_U\\to M$ is uniquely a module-presheaf map from the extension presheaf of [def-weil-extension-by-zero-presheaf] to $M$. The site and coefficient identifications of [lem-weil-proetale-weakly-etale-localization] give $\\beta\\mapsto\\beta_U(1)\\in M(U)$, where $1$ is taken in the unique $U\\to U$ summand before sheafification. Conversely, for $s\\in M(U)$, on an object $V$ mapping to $U$ send $a\\in A_U(V)=A_X(V)$ to $a\\,s|_V$; on an object not mapping to $U$ use the zero map from the zero presheaf value. These maps commute with restrictions: when $V$ maps to $U$, semilinearity gives $(a\\,s|_V)|_{V'}=a|_{V'}\\,s|_{V'}$; otherwise the source value is zero, including when $V'$ maps to $U$. Sheafification gives the required map $\\beta$. Evaluation returns $s$, and conversely naturality along $V\\to U$ gives $\\beta_V(1)=\\beta_U(1)|_V$, so linearity recovers $\\beta_V(a)=a\\,\\beta_U(1)|_V$ on every summand. Thus these constructions are inverse additive identifications $\\operatorname{Hom}(j_!A_U,M)\\cong M(U)$. Under them precomposition with the explicitly constructed $\\epsilon$ is restriction $M(X)\\to M(U)$, since its $U$-summand sends $1$ to $1$. Hence the displayed kernel is $\\ker(M(X)\\to M(U))=\\Gamma_Z(X,M)$ by [def-pur-support-cohomology]. We obtain an additive natural isomorphism $v(M):=\\operatorname{Hom}(P,M)\\cong\\Gamma_Z(X,M)$. Naturality holds because a module map $M\\to N$ applies its section map to the same supported section on both sides.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: global sections are Hom from the coefficient unit; restriction and naturality written out"
+   }
+  },
+  {
+   "text": "Use the chosen small skeleton of $X_{\\mathrm{proet}}$ and the module universe specified by [def-weil-pbc-proetale-site]. Thus the small-site hypothesis of [prop-pur-kinjective-resolutions-exist] holds, and the category $\\mathcal A$ of all $A_X$-module sheaves is Grothendieck. It has enough injectives: apply the termwise monic resolution of [lem-pur-kinjective-degreewise-existence] to $M[0]$; its degree-zero component embeds each $M$ into an injective object. Put $w=\\Gamma_Z(X,-)$ and let $\\theta:v\\xrightarrow{\\sim}w$ be the additive natural isomorphism of step 4. Applying $\\theta$ termwise gives an isomorphism of functors on bounded-below homotopy categories: its compatibility with each differential and with homotopies is the naturality of $\\theta$ and its additivity. The universal property in [lem-weil-pbc-right-derived-plus-injective] derives this isomorphism without an additional geometric hypothesis. Explicitly, let $\\alpha_v:QK(v)\\to RvQ$ and $\\alpha_w:QK(w)\\to RwQ$ be the derived units. Apply clause (1) to $\\alpha_w\\circ QK(\\theta)$ to obtain $\\gamma:Rv\\to Rw$, and to $\\alpha_v\\circ QK(\\theta^{-1})$ to obtain $\\delta:Rw\\to Rv$. Their composites satisfy $(\\delta\\gamma)Q\\circ\\alpha_v=\\alpha_v$ and $(\\gamma\\delta)Q\\circ\\alpha_w=\\alpha_w$, since $\\theta^{-1}\\theta$ and $\\theta\\theta^{-1}$ are identities. The uniqueness in clause (1) forces both composites to be identities. By [def-pur-support-cohomology], $Rw=R\\Gamma_Z(X,-)$, so degree-$a$ cohomology gives $H_Z^a(X,F)\\cong H^a(Rv(F))$, naturally in $F$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: derive the natural supported-sections/Hom identity in the ambient module-sheaf category"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-rhom-hom-derived-roof] to the abelian category $\\mathcal A$ from step 5, the object $M=P=i_*A_Z$, the bounded-below object $F$, and $n=a$. Its statement gives $H^a(Rv(F))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(P[0],F[a])$, natural in $F$, with no condition on $P$ being projective or locally free. Concretely a cocycle $f:P\\to I^a$ becomes the complex map $P[0]\\to I[a]$ and then is composed with the inverse of the shifted resolution isomorphism $F[a]\\to I[a]$. A boundary $d_I^{a-1}h$ gives the homotopy with sole component $(-1)^a h:P\\to I^{a-1}$ for the shifted differential, so the formula respects cohomology classes. Compose with step 5. This is the displayed identification with the underived $i_*A_Z$ in degree zero, and proves naturality for every integer $a$.",
+   "uses": [
+    "lem-sc-p1-rhom-hom-derived-roof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
+    "place": "Proof: final derived morphism formula via the injective-resolution computation of derived Hom"
+   }
   }
  ],
  "proof_deps": [
-  "def-pur-flasque-support",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
   "def-pur-support-cohomology",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-exceptional-inverse-image"
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "lem-weil-pbc-closed-immersion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
-  "place": "## Proof"
+  "place": "Blueprint supported-sections/injective-resolution proof, with the underived support/Hom identity proved directly for the constant coefficient sheaf. The original unrestricted pro-etale support comparison is not used; no geometric hypothesis is added."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported cohomology with supports as derived Hom from closed immersion constant sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.restrictFunctor, and related sheaf cohomology/restriction declarations; none states derived Hom from a closed-immersion constant sheaf.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom closed immersion support cohomology",
+   "results": "0 hits; unknown identifier RHom.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedSections|sectionsWithSupport|cohomologyWithSupport|closedSupportHom (Mathlib/)",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology with supports is derived Hom from the pushforward of the coefficient unit along a closed immersion",
+   "results": "8 hits: ordinary sheaf pushforward/restriction adjunctions and sheaf cohomology; none states the claimed pro-etale supported-cohomology identification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "homologyFunctor, DerivedCategory, closed immersion",
+   "results": "0 hits; unknown identifier 'homologyFunctor'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RΓ_Z|Γ_Z|supported.*Hom|RHom.*Ri (Mathlib/Algebra/Homology)",
+   "results": "0 hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "supported cohomology right derived sections closed immersion Hom pro-etale",
+   "results": "8 hits; returned etale-locus, sheaf cohomology, and representability declarations, with no derived supported-cohomology/Hom statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.Hom",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Sheaf.Hom'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RΓ_Z|cohomology with support|derived Hom closed immersion",
+   "results": "3 hits in Mathlib/Algebra/Homology/LocalCohomology.lean (lines 91, 140, 148), concerning algebraic local cohomology for ideals; no etale/pro-etale supported sections or closed-immersion derived Hom.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supported cohomology with support pro-etale closed immersion",
+   "results": "0 hits in Mathlib/.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits: ordinary abelian-sheaf cohomology and nonabelian H1 relations. Read SheafCohomology/Basic.lean:18-37,61-64,80-97; these do not give supported pro-etale module cohomology as derived Hom. This successful quoted-name query supplements the recorded unknown-identifier searches.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +244,79 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-supported-hom",
+  "worker": "stage1",
+  "summary": "Second reading: checked the blueprint statement, all six proof steps, all current cited statements and Stacks sources. Expanded step 4 into the two explicit inverse Hom/section maps using the extension presheaf and its sheafification; step 3 no longer identifies its map with an unspecified adjunction counit. The coefficient cokernel, full geometric scope, small-site hypothesis and derived comparison are retained. No new nodes or Mathlib leaves. Regenerated verbatim citations for the revised uses; no Lean or compilation.",
+  "blueprint": "Steps 1–4 expand the underived supported-sections/coefficient-unit identity used by the blueprint; steps 5–6 are its injective-resolution and derived-morphism computation. The constant-sheaf calculation repairs the unrestricted support comparison used in the original paragraph, while preserving its conclusion and full geometric scope.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "why": "Only degree-zero comparison for constant coefficients, on arbitrary schemes, is used to calculate coefficient sections."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Identifies the comparison pullback of the finite constant ring with the pro-etale constant ring."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "why": "Identifies the underlying constant coefficient set so the locally constant function computation applies."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic constant-etale-sheaf section formula supplies the geometric input to the direct support/Hom calculation."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies coefficient sections and the open restriction with the actual localized ringed-site operations."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Converts the explicit local constant lifts into a sheaf epimorphism."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Identifies the open extension-by-zero module sheaf with the sheafification of its explicitly defined extension presheaf; the Hom/section correspondence is now proved directly."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck property of the ambient module-sheaf category."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Termwise monic resolution supplies enough injectives in the actual module-sheaf category."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic uniqueness and injective computation derive the explicit natural isomorphism."
+   },
+   {
+    "node": "lem-sc-p1-rhom-hom-derived-roof",
+    "why": "Generic derived-category Hom formula for any abelian category with enough injectives; not a geometric replacement of the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-rhom-hom-derived-roof"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-96145d9d0",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-96145d9d0 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources, and unit/chapter route. All six steps are valid without quasi-compact-complement assumptions. Repaired one C1 missing citation in step 2 to the existing closed-immersion base-change Mathlib leaf. Whole corrected JSON is under fixes/dag/nodes; concrete checks and accepted tool_uses are recorded in review.md. No target or statement changed.; 1 file(s) fixed by the reviewer"
+ }
 }
