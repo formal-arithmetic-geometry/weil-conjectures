@@ -1093,6 +1093,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantExtensi
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurvePairing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpenNormal
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Extension
@@ -1476,6 +1477,7 @@ public import WeilConjectures.AlgebraicGeometry.NonvanishingCommonDegree
 public import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 public import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 public import WeilConjectures.AlgebraicGeometry.NonvanishingTransitionFunctions
+public import WeilConjectures.AlgebraicGeometry.NormalEtale
 public import WeilConjectures.AlgebraicGeometry.NormalizedGenericDataLifts
 public import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 public import WeilConjectures.AlgebraicGeometry.ObjectCohomologyResolutionCocycleEquivalence
@@ -2515,6 +2517,7 @@ public import WeilConjectures.ConstructibleSheaf.ConstantModuleDual
 public import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
+public import WeilConjectures.ConstructibleSheaf.DenseOpenUnitNormal
 public import WeilConjectures.ConstructibleSheaf.Devissage
 public import WeilConjectures.ConstructibleSheaf.DualLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.DualStalk
@@ -3624,6 +3627,7 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
+public import WeilConjectures.RingTheory.Etale.IntegrallyClosedLocalization
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftReduction
