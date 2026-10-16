@@ -4,6 +4,9 @@ Authors: SHEAF group A4 -/
 module
 
 public import Sheaf.Paper.FiniteDiscreteCoefficientPullbackIso
+import Sheaf.Paper.CoefficientDerivedFunctorAPI
+import Sheaf.Paper.DerivedSquarePasting
+import Sheaf.Paper.FiniteDiscreteCoefficientRestrictionCoherence
 
 /-! # Square coherence for the finite discrete coefficient realization -/
 

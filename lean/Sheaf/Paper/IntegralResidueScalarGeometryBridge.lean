@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResiduePullSquare
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! The residue tensor square on K-flat representatives with K-flat pullback.
 
