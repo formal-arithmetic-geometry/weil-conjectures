@@ -226,6 +226,18 @@ private theorem coefficientCast_app
   subst h
   simp
 
+section FieldRestriction
+
+attribute [local instance] Sheaf.monoidalCategory
+
+/-- The canonical source-ring structure, fixed before elaborating the field module types.
+Source: the continuous ring sheaf construction and Sheaf.monObj_sheafCompose_obj.
+(blueprint: lem-weil-pbc-continuous-module-encoding-restriction) -/
+noncomputable local instance continuousFieldSourceMonObj (E : Type) [NormedField E] :
+    MonObj (Profinite.continuousMapRingObj.{u} E) :=
+  Sheaf.monObj_sheafCompose_obj (coherentTopology Profinite.{u})
+    (Profinite.continuousMapRingSheaf E)
+
 /-- The rational encoding commutes with the etale restriction used in a lattice.
 Source: Bhatt--Scholze, Proposition 6.8.4(6).
 (blueprint: lem-weil-pbc-continuous-module-encoding-restriction)
@@ -243,6 +255,49 @@ theorem continuousField_module_restriction
         ((upperStar (Profinite.continuousMapRingObj E) f).obj P)).val ≅
       (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj
         ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val) := by
-  sorry
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  let : TotallySeparatedSpace E :=
+    totallySeparatedSpace_iff_exists_isClopen.mpr fun x y h ↦ by
+      obtain ⟨r, hr, hr'⟩ := exists_between (dist_pos.mpr h)
+      refine ⟨_, IsUltrametricDist.isClopen_ball x r, ?_, ?_⟩
+      · simp only [Metric.mem_ball, dist_self, hr]
+      · simp only [Set.mem_compl, Metric.mem_ball, dist_comm, not_lt, hr'.le]
+  let : MonObj (condensedRingObj (Profinite.continuousMapRingObj E) X) := inferInstanceAs
+    (MonObj (condensedRingObj (Profinite.continuousMapRingObj E) X))
+  let : MonObj (condensedRingObj (Profinite.continuousMapRingObj E) Y) := inferInstanceAs
+    (MonObj (condensedRingObj (Profinite.continuousMapRingObj E) Y))
+  obtain ⟨e⟩ := continuousRing_module_restriction X Y f E P
+  let eY := (sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (eqToIso (lisseFieldSheaf_eq ℓ E Y))
+  let eX := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (eqToIso (lisseFieldSheaf_eq ℓ E X))
+  refine ⟨PresheafOfModules.isoMk (fun Z ↦ ?_) ?_⟩
+  · let eZ := (PresheafOfModules.evaluation _ Z).mapIso e
+    refine ModuleCat.isoMk ((forget₂ (ModuleCat ((continuousMapRingSheaf Y E).obj.obj Z))
+      Ab.{u + 1}).mapIso eZ) ?_
+    intro r
+    ext m
+    let Z' := (lisseEtaleSiteInclusion f).op.obj Z
+    have hh : eX.hom.hom.app Z' = eY.hom.hom.app Z := by
+      change ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (eqToHom (lisseFieldSheaf_eq ℓ E X))).hom.app Z' =
+        ((sheafCompose (Scheme.ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+            (eqToHom (lisseFieldSheaf_eq ℓ E Y))).hom.app Z
+      rw [coefficientCast_app, coefficientCast_app]
+    change (eX.hom.hom.app Z' r) • (e.hom.app Z m) =
+      e.hom.app Z ((eY.hom.hom.app Z r) •
+        (show ((continuousRingModuleEquivalence Y E).functor.obj
+          ((upperStar (Profinite.continuousMapRingObj E) f).obj P)).val.obj Z from m))
+    rw [hh]
+    exact ((e.hom.app Z).hom.map_smul _ _).symm
+  · intro Z W a
+    ext m
+    exact PresheafOfModules.naturality_apply e.hom a m
+
+end FieldRestriction
 
 end AlgebraicGeometry.ProEtale.CondensedRing
