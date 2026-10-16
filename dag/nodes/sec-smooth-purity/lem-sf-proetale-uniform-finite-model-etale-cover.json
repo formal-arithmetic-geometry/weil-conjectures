@@ -15,40 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Finite M over finite Λ is finitely presented: present M by generators indexed by its finite underlying set; the kernel of the map from that finite free module is finite, so finitely generated.",
+   "text": "Form I(U) = Isom(F.over U, (constant M).over U), with restrictions given by overMapPullback. Glue the hom and inverse in the sheafHom sheaves. Separatedness makes the glued composites identities, so I is a sheaf. Iterated-slice equivalences identify I.over U with the corresponding isomorphism sheaf on the slice, naturally in restriction. These constructions and identities are proved directly in the private localIsom helpers.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Form the fixed-coefficient Isom sheaf from constant M to F, using isomorphisms on the slice over each object and pullback for restriction. Glue the local linear maps and their inverses sectionwise. Over each trivializing W_i it is the constant set sheaf Aut(M). For this last assertion apply Tag 093T(2), transporting its ringed-module construction to fixed coefficients; the finite-presentation proof expresses Hom by kernels of finite powers and inverse pairs by finite limits. The required fixed-coefficient and universe transport is part of this step, not an already supplied Lean equivalence.",
+   "text": "For finite modules M,N prove that constant linear maps map locally bijectively to the internal Hom of constant module sheaves. For injectivity intersect the finitely many equalizer sieves obtained by evaluation on every element of M. For surjectivity intersect the image sieves of those finitely many elements. Ignore objects covered by the empty sieve; on every other object the constant sheafification unit of N is injective. Its linear inverse on its image recovers the required linear map. Equality on constant sections implies equality everywhere by local surjectivity of sheafification and separatedness. Lift an isomorphism and its inverse this way; refine by the two equalizer sieves enforcing inverse identities. Sheafifying gives the constant set sheaf Isom(M,N). The fixedConstantHom and fixedConstantIsom helpers prove every part, without a finite-presentation hypothesis or ringed-module transport.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "View each given weakly etale scheme-cover map as a small pro-etale object U. The slice equivalence and the canonical comparison between upperStar and localizationRestriction transport the given model to F.over U isomorphic to constant M on the slice. Restriction of the global constant module sheaf is constant. Conjugate the local isomorphism sheaf by these two identifications and use the preceding constant-isomorphism calculation with M=N. Transport across the slice equivalence to see that proEtaleSetRestriction I is the constant set sheaf Aut(M).",
    "uses": [
-    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-site-constant-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "The Isom sheaf is locally constant, hence locally classical. The given trivializations supply pro-etale local sections. Apply the locally-classical etale-section theorem to obtain etale local sections, each giving the desired module-sheaf isomorphism.",
+   "text": "The scheme cover gives a CoversTop family on the small pro-etale site, and the fixed models provide sections of I on its members. Thus I is locally constant, hence locally classical. Apply proEtale_locallyClassical_etaleCover to obtain an etale CoversTop family with sections of I. Each section is an isomorphism on the corresponding slice; compose with constant restriction and transport back through the slice equivalence and localizationRestriction to get precisely the required upperStar constant model.",
    "uses": [
-    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-constant-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Choose, for every point of X, an etale cover member and a point above it. The resulting universe-small family still covers and carries the same model. Empty X uses the empty family; zero modules and the zero ring require no modification.",
+   "text": "Convert the etale CoversTop family into a jointly surjective family of etale scheme morphisms by evaluating the covering sieve at the terminal etale object. Form its scheme cover and apply Cover.ulift, which chooses a member above every point of X. The resulting universe-u cover inherits the same fixed model. For empty X this family is empty; zero modules and the zero ring are included by the same constructions.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-site-constant-module-isom-sheaf",
   "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-site-constant-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099Y, proof; realized using the existing fixed-coefficient comparison adjunction, slice equivalences and geometric fibers"
+  "place": "Tag 099Y, proof; the finite-model case of Modules on Sites Tag 093T(2) is proved directly for ModuleCat-valued sheaves by simultaneous lifting of finitely many sections, followed by the existing locally-classical etale-section theorem and weakly etale slice equivalence"
  },
  "mathlib_searches": [
   {
@@ -117,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-b853f",
   "group": "D3",
   "result": "pass",
-  "landing": "20261016T134406-L-3314877",
+  "landing": "20261016T145216-L-3935102",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean, DAG node, change record, report, and direct importer matched against packet and repository; all compiled successfully, with allowed axioms only."
  }
 }
