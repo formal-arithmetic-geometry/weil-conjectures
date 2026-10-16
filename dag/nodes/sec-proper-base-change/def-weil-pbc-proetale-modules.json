@@ -139,37 +139,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-76cc4a337 (reviewer sub-agent of L); spot-checked: Read the full item, report, required instructions, chapter/unit route, all cited DAG nodes, blueprint source, Stacks locations, and archived master target declarations. The definition’s hypotheses and clauses are correct; edge cases and noncommutative coefficients were checked. No new nodes, attachments, tool uses, duplicate, cycle, or repair are present. The condensed coefficient categories and boundedConstructibleBaseChange morphisms in the exact master targets are distinct, and this delivery makes no false identification. Review written to review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7a108191d",
-  "group": "Q36",
+  "reviewer": "NT-stage2-Codex-390f3e863",
+  "group": "Q24",
   "result": "pass",
-  "note": "Item and dependencies match the node/source; edge cases, declarations, docstrings, reuse, and intrinsic comparison repair checked. All three files compiled successfully together via scompile.py with status 0; no fixes required."
+  "note": "Immutable delivery matches the node and dependencies; edge cases, universes, docstrings, source, and canonical constructions checked. All four files passed dependency-aware scompile.py compilation with server confirmation."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicDerivedComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteModuleIntrinsicComparison.lean",
-  "statement": "def finiteCoefficientIntrinsicDerivedComparison : FiniteCoefficientEtaleDerivedCategory T (ULift.{u + 1, u} B) ⥤ Scheme.proEtaleDerivedCategory T B",
+  "module": "Sheaf.Paper.RefinementCoefficientRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientRealization_full_faithful_essSurj",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientRealization_full_faithful_essSurj",
+   "AlgebraicGeometry.ProEtale.refinementRealizationIsEquivalence"
+  ],
+  "file": "lean/Sheaf/Paper/RefinementCoefficientRealization.lean",
+  "statement": "theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] : (finiteCoefficientRealization T Λ).Full ∧ (finiteCoefficientRealization T Λ).Faithful ∧ (finiteCoefficientRealization T Λ).EssSurj",
   "branch": "newtargets-dag",
-  "by": "Q36",
+  "by": "Q24",
   "date": "2026-10-15",
   "existing": false,
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicScalarMap",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicScalarMap_isLocallyInjective",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicScalarMap_isLocallySurjective",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization_exact",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization_additive",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization_preservesFiniteLimits",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization_preservesFiniteColimits",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicComparison",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicComparison_additive",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicComparison_preservesFiniteLimits",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicComparison_preservesFiniteColimits",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicDerivedComparison"
-  ],
-  "note": "The original Sheaf.AlgebraicGeometry.ProEtaleFiniteModules is re-exported without redefining any of its declarations. Its comparison lands in modules over sheafified continuous functions, whereas the recorded intrinsic constructibility predicate uses the constant commutative ring sheaf with ULift coefficients. The added interface realizes the same comparisonUpperStar by canonical associated-module sheafification along the constant-scalar unit into that constant ring sheaf, and applies the resulting exact functor termwise to derived categories. This is a coefficient-presentation repair under brief-stage2 §1(B); no arbitrary equivalence or coefficient identification is chosen. Maintainer reading: the scalar-unit local bijectivity is reused directly from Scheme.proEtaleConstantRingUnit_locallyBijective in Sheaf.Paper.ProEtaleLocallyConstantSheaf; the duplicate postponed theorem is removed."
+  "note": "Section 1(B): the intrinsic-comparison module imports the finite-coefficient copy of the six-functor declarations, which conflicts with the recorded compact-support candidate and its upstream comparison modules. Reexport the original finite-module definitions and expose the full-faithful-essentially-surjective interface of their canonical associated-module-sheaf realization. This is the same constant-scalar sheafification, with the inverse determined up to its canonical equivalence isomorphism; no coefficient object or arbitrary equivalence is substituted."
  }
 }

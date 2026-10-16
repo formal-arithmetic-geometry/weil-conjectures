@@ -305,5 +305,29 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-f332f240a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, and cited Stacks sources. Verified hypotheses, coefficient/base-change data, six proof steps, derived adjunction and counit computations, edge cases, searches, and delivery-error checks. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenClosedRecollementAdjunctions",
+  "declaration": "WeilConjectures.openClosedRecollement_adjunctions",
+  "declarations": [
+   "WeilConjectures.openClosedCoefficient_finite",
+   "WeilConjectures.openClosedCoefficientMap_isIso",
+   "WeilConjectures.openClosedDerivedPullback",
+   "WeilConjectures.openClosedRecollement_adjunctions"
+  ],
+  "file": "lean/Sheaf/Paper/OpenClosedRecollementAdjunctions.lean",
+  "statement": "theorem openClosedRecollement_adjunctions (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) {X U Z : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)] [∀ x : U, Invertible (l : U.residueField x)] [∀ x : Z, Invertible (l : Z.residueField x)] (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (_hU : Set.range j = (Set.range i)ᶜ) : ∃ (aj : (sfIntrinsicExtensionByZero j (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory ⊣ openClosedDerivedPullback l E n j) (ai : openClosedDerivedPullback l E n i ⊣ proEtaleConstantDerivedDirectImage i (Padic.coefficientExtensionRing l E (n + 1))), IsIso aj.unit ∧ IsIso ai.counit",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f7af7f9a2",
+  "group": "N8",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable source, all statement dependencies, exact constructions, hypotheses, conclusions, universes, edge cases, docstrings, and report sections. Statement field matches verbatim. scompile.py passed sandbox and library-path checks cleanly. No findings; branch unchanged."
  }
 }

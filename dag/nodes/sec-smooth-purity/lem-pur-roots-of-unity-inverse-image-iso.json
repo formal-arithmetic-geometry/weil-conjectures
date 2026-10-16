@@ -263,5 +263,30 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-7dbd01568 (reviewer sub-agent of L); spot-checked: Reviewed the complete stage-1 split, all six proof steps, nine cited node statements, blueprint/unit route, Deligne and Stacks sources, searches, edge cases, coefficient category, base-change map, and direct citer. No mathematical or DAG fault found; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RootsOfUnityInverseImageIso",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageRing",
+   "AlgebraicGeometry.Scheme.IsProEtaleRootsOfUnityInverseImageAction",
+   "AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnityInverseImageAction",
+   "AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageAction",
+   "AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RootsOfUnityInverseImageIso.lean",
+  "statement": "theorem proEtaleRootsOfUnityInverseImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ (N N' : ℕ) (hN : 0 < N) (hN' : 0 < N') (h : N ∣ N'), (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (proEtaleRootsOfUnityTransition Y N N' hN hN' h) ≫ proEtaleRootsOfUnityInverseImageMap f N = proEtaleRootsOfUnityInverseImageMap f N' ≫ proEtaleRootsOfUnityTransition X N N' hN hN' h) ∧ (∀ (ℓ : ℕ) (hℓ : ℓ.Prime), ∃ c : proEtaleRootsOfUnityTower Y ℓ hℓ ⋙ proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} ⟶ proEtaleRootsOfUnityTower X ℓ hℓ, ∀ r : ℕ, c.app (op r) = proEtaleRootsOfUnityInverseImageMap f (ℓ ^ (r + 1))) ∧ (∀ (N : ℕ) (hN : 0 < N) (U : X.ProEtᵒᵖ) (a : (proEtaleRootsOfUnityInverseImageRing f N).obj.obj U) (x : ((proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj (proEtaleRootsOfUnitySheaf Y N)).obj.obj U), (proEtaleRootsOfUnityInverseImageMap f N).hom.app U (@SMul.smul _ _ (proEtaleRootsOfUnityInverseImageAction f N hN U).toSMul a x) = @SMul.smul _ _ (torsionSheafModuleStructure.{u + 1} (ProEt.topology X) N hN (proEtaleRootsOfUnitySheaf X N) (proEtaleRootsOfUnity_nsmul X N) U).toSMul ((proEtaleConstantInverseImageMap f RingCat.{u + 1} (RingCat.of (ULift.{u + 1} (ZMod N)))).hom.app U a) ((proEtaleRootsOfUnityInverseImageMap f N).hom.app U x)) ∧ (∀ (_hf : IsIso f) (N : ℕ) (_hN : 0 < N), IsIso (proEtaleRootsOfUnityInverseImageMap f N) ∧ ∀ (U : X.ProEtᵒᵖ) (x : ((proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj (proEtaleRootsOfUnitySheaf Y N)).obj.obj U), proEtaleRootsOfUnitySections X N U ((proEtaleRootsOfUnityInverseImageMap f N).hom.app U x) = proEtaleRootsOfUnitySections Y N ((proEtaleIsoPostcompose f).op.obj U) (((proEtaleIsoInverseImageIdentification f AddCommGrpCat.{u + 1}).hom.app (proEtaleRootsOfUnitySheaf Y N)).app U x))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-49def78b2",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, source alignment, and all three per-file scompile checks passed; no fixes required."
  }
 }
