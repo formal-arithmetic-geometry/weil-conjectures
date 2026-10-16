@@ -1,6 +1,6 @@
 # Work queue
 
-76 items; claim with `tools/claim.py next <group> [--stage N]`.
+77 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (76)
+## Stage 3: modules to prove (77)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -41,6 +41,7 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 7 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk` | 8 | 2 | proof |
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.GeometricFieldProfiniteDenseSubsite` | 9 | 6 | proof |
 | `Sheaf.Paper.ContinuousModuleEncodingRestriction` | 10 | 1 | proof |
