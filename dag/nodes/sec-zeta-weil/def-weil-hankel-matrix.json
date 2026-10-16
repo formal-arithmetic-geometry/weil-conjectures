@@ -84,5 +84,28 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-def-roots"
+ "unit": "sk-def-roots",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df39a4dff",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Only change in the delivery: new module Sheaf/RingTheory/PowerSeriesHankelRank.lean plus the node's lean record and report (real Worker report and Second reading by Q05 sections). Matches the source (master and main-20261015 identical except order number) and the node clause by clause: reuses upstream PowerSeries.hankel (Matrix.of fun r s => coeff (r+s)); hankelRank is a real ENat iSup over Σ k, (Fin k ↪o ℕ)×(Fin k ↪o ℕ) of submatrix ranks, the increasing-indices convention of def-weil-submatrix; hankelRank_lt_top_iff has one uniform bound, proof only sorry with the proof in its docstring. No extra assumptions, universe u bound, lean.statement verbatim, stmt_deps complete, no duplicate. Edge cases checked: k=0, C=0, constant series, unbounded ranks give top, any characteristic, any universe. nt_compile --json against the live library with side overlay: clean, 1.3 s; hankelRank axioms propext/Classical.choice/Quot.sound, no sorryAx. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesHankelRank",
+  "declaration": "PowerSeries.hankelRank",
+  "declarations": [
+   "PowerSeries.hankelRank",
+   "PowerSeries.hankelRank_lt_top_iff"
+  ],
+  "file": "lean/Sheaf/RingTheory/PowerSeriesHankelRank.lean",
+  "statement": "def hankelRank {K : Type u} [Field K] (C : PowerSeries K) : ℕ∞",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses upstream PowerSeries.hankel from WeilConjectures.ZetaLinearAlgebra.RationalityCriterion for the matrix clause; defines only the missing ENat-valued supremum of finite square submatrix ranks, and states the node’s finite-if-and-only-if-bounded clause. No duplicate Hankel matrix definition."
+ }
 }
