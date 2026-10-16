@@ -21,9 +21,129 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-exc-excellent-ring], $R$ is Noetherian, a G-ring, J-2, and universally catenary. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to $R\\to A$ to obtain Noetherianity of $A$. Apply [lem-weil-pbc-finite-type-over-g-ring] to the same finite type map to obtain that $A$ is a G-ring. Both applications use exactly the given finite type hypothesis; neither requires that $R\\to A$ be injective.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, finite type case; Tag 07PV, proposition-finite-type-over-G-ring; algebra.tex Tag 00FN, lemma-Noetherian-permanence"
+   }
+  },
+  {
+   "text": "For any finite type $A$-algebra $T$, choose finite algebra generators $a_1,\\ldots,a_n$ of $A$ over $R$ and $t_1,\\ldots,t_m$ of $T$ over $A$. Substitution of polynomial expressions shows that the images of the $a_i$, together with the $t_j$, generate $T$ over $R$, by [def-weil-pbc-finite-type-algebra]. Since $R$ is J-2 and universally catenary, [def-exc-excellent-ring] therefore says that the regular locus of $T$ is open and that $T$ is catenary. As $T$ was arbitrary, $A$ is J-2 and universally catenary. Together with step 1 this makes $A$ excellent.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, first proof sentence; Tag 07P7, definition-J; algebra.tex Tag 00NL, definition-universally-catenary"
+   }
+  },
+  {
+   "text": "Put $B=S^{-1}A$ and let $\\lambda:A\\to B$ send $a$ to $a/1$. The fraction construction of [def-weil-pbc-module-localization] in the case of the module $A$ supplies a commutative ring, sends every $s\\in S$ to a unit, represents every element as $\\lambda(a)\\lambda(s)^{-1}$, and says that $\\lambda(a)=0$ implies $sa=0$ for some $s\\in S$. Thus all localization hypotheses of [lem-weil-pbc-localization-noetherian] hold; with the Noetherianity from step 1 it makes $B$ Noetherian.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, localization assertion; Section 00CM, section-localization, fraction formulas"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak q$ of $B$, let $\\mathfrak p=\\lambda^{-1}(\\mathfrak q)$. By parts (2) and (3) of [lem-weil-pbc-localization-prime-residue-field-iso], the map $e:A_{\\mathfrak p}\\xrightarrow{\\sim}B_{\\mathfrak q}$, $a/t\\mapsto\\lambda(a)/\\lambda(t)$, is an isomorphism carrying the maximal ideal onto the maximal ideal. Apply [lem-weil-pbc-adic-completion-ring-equiv] at these maximal ideals to obtain an isomorphism $E:(A_{\\mathfrak p})^\\wedge\\xrightarrow{\\sim}(B_{\\mathfrak q})^\\wedge$ commuting with the canonical completion maps. The map $A_{\\mathfrak p}\\to(A_{\\mathfrak p})^\\wedge$ is regular because $A$ is a G-ring, by [def-weil-pbc-g-ring]. The commuting square with vertical isomorphisms $e,E$ satisfies exactly the hypothesis of [lem-weil-pbc-regular-ring-map-ring-equiv], so $B_{\\mathfrak q}\\to(B_{\\mathfrak q})^\\wedge$ is regular. Since $\\mathfrak q$ was arbitrary and $B$ is Noetherian by step 3, [def-weil-pbc-g-ring] makes $B$ a G-ring.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-adic-completion-ring-equiv",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-map-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PV, proposition-finite-type-over-G-ring, opening proof sentence on localization; Tag 07GH, definition-G-ring; algebra.tex Tag 00C9, item-localization-localization"
+   }
+  },
+  {
+   "text": "Fix any finite type $B$-algebra $C$, with generators $c_1,\\ldots,c_m$ as in [def-weil-pbc-finite-type-algebra]. Inside $C$ let $D$ be the subring of polynomial expressions in the $c_i$ with coefficients in the image of $A$. It is a finite type $A$-algebra, with those same generators. Let $S_D$ be the image of $S$ in $D$; its elements are units in $C$, since the structure map factors through $B$. The formula $d/s\\mapsto d\\,s^{-1}$ defines a homomorphism $S_D^{-1}D\\to C$ by [def-weil-pbc-module-localization]: the relation $u(td-se)=0$ implies equality of the two fractions after multiplying by the unit $ust$. This map is injective because $d\\,s^{-1}=0$ implies $d=0$ in the subring $D$. It is surjective: express an element of $C$ as a polynomial in the $c_i$ with finitely many coefficients $a_\\alpha/s_\\alpha\\in B$, and put $s=\\prod_\\alpha s_\\alpha\\in S$. That polynomial equals $d/\\lambda_C(s)$, where $d=\\sum_\\alpha \\lambda_C(a_\\alpha)\\prod_{\\beta\\ne\\alpha}\\lambda_C(s_\\beta)c^\\alpha\\in D$ and $\\lambda_C:A\\to C$ is the structure map. Thus $C\\cong S_D^{-1}D$ by this explicit map. No finite-presentation or injectivity hypothesis on $A\\to C$ was used.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NJ, lemma-localization-catenary, finite type localization model in its proof; explicit image-subalgebra and common-denominator argument"
+   }
+  },
+  {
+   "text": "For the arbitrary $C$ and $D$ of step 5, both rings are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]: apply it to the finite type maps $A\\to D$ and $B\\to C$, using the Noetherianity of $A$ and $B$ from steps 1 and 3. Now $D$ has open regular locus because $A$ is J-2, by [def-exc-excellent-ring]. The canonical map $h:\\operatorname{Spec}C\\to\\operatorname{Spec}D$ is continuous by [lem-weil-pbc-localization-spectrum-embedding], applied to the localization isomorphism of step 5. Part (2) of [lem-weil-pbc-localization-prime-residue-field-iso] identifies $C_{\\mathfrak q}$ with $D_{h(\\mathfrak q)}$ for each prime $\\mathfrak q$. Regular locality is invariant under this ring isomorphism directly from [def-weil-regular-scheme]: it bijects ideals and their finite generating families, carries the unique maximal ideal to the unique maximal ideal, and bijects prime chains, preserving their lengths and hence Krull dimension. Consequently $\\operatorname{Reg}(C)=h^{-1}(\\operatorname{Reg}(D))$ is open. Since this holds for every finite type $B$-algebra $C$, $B$ is J-2. The argument only uses continuity; it does not assert that the image of an arbitrary localization is open.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, omitted localization assertion for J-2, supplied here from Tag 07P7, definition-J; algebra.tex Tags 00E3, lemma-spec-localization, and 00KU, definition-regular-local"
+   }
+  },
+  {
+   "text": "The finite type $A$-algebra $D$ in step 5 is catenary because $A$ is universally catenary, by [def-exc-excellent-ring]. By part (1) of [lem-weil-pbc-localization-prime-residue-field-iso], contraction identifies primes of $C$ with primes of $D$ disjoint from $S_D$, and extension is its inverse. Both preserve inclusion, since contraction and the formation of the ideal generated by an image preserve inclusion. If $\\mathfrak p\\subseteq\\mathfrak q$ are the contractions of two primes of $C$, every prime of $D$ between them avoids $S_D$ because it is contained in $\\mathfrak q$, which avoids $S_D$. Hence the entire interval of primes is preserved, not only its endpoints. Every finite chain corresponds to a chain of the same length; a chain is saturated on one side exactly when it is saturated on the other, since any insertable prime lies in this interval. The bound on finite chain lengths and the common length of saturated chains for $D$ therefore give the same two conditions for $C$. Thus $C$ is catenary. As $C$ was arbitrary and $B$ is Noetherian, $B$ is universally catenary.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NJ, lemma-localization-catenary, proof; Tags 00NI, definition-catenary, and 00NL, definition-universally-catenary"
+   }
+  },
+  {
+   "text": "Steps 3, 4, 6 and 7 respectively give Noetherianity, the G-ring property, J-2 and universal catenarity for $B=S^{-1}A$. These are exactly the conditions for excellence in [def-exc-excellent-ring], proving the principal assertion. Step 2 already proves the final assertion that $A$ is excellent. Equivalently, for $S=\\{1\\}$ the mutually inverse maps $a/1\\mapsto a$ and $a\\mapsto a/1$ of [def-weil-pbc-module-localization] identify $S^{-1}A$ with $A$. No condition that $S$ avoid zero is needed: if $0\\in S$, then $B=0$ by the fraction relation, there are no primes, and every $B$-algebra is zero, so the primewise and open-locus conditions used above are vacuous.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, assembled from the defining conditions of Tag 07QT, definition-excellent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QU, lemma-finite-type-over-excellent: follows its finite type argument and fills its omitted localization proof using the explicit finite type localization model and the prime-interval argument of algebra.tex Tag 00NJ, lemma-localization-catenary; G-ring localization follows the opening paragraph of 07PV."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,15 +186,110 @@
    "results": "{\"t\": \"2026-10-15T20:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"An algebra essentially of finite type over an excellent commutative ring is excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFinite\", \"Algebra.EssFiniteType\", \"RingHom.EssFiniteType.holdsForLocalization\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"Polynomial.not_quasiFiniteAt\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"32f0e490f175608a\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search; candidates do not state the excellent-ring notion or the reduced-ring parameter existence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any localization of a finite type algebra over an excellent ring is excellent",
+   "results": "{\"t\": \"2026-10-16T07:25:38Z\", \"tool\": \"leanfinder\", \"query\": \"Any localization of a finite type algebra over an excellent ring is excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEssFiniteTypeLocalization\", \"RingHom.finiteType_holdsForLocalizationAway\", \"RingHom.finiteType_localizationPreserves\", \"Algebra.EssFiniteType.isLocalization\", \"RingHom.EssFiniteType.holdsForLocalization\", \"Algebra.EssFiniteType.of_isLocalization\", \"RingHom.finiteType_ofLocalizationSpan\", \"RingHom.finiteType_ofLocalizationSpanTarget\"], \"digest\": \"a1438f1c4dbdee6a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual returned types concern finite type, quasi-finiteness, unramified maps or localization infrastructure; none states excellence or its preservation. The valid RingTheory grep and the quoted-name Loogle search have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Excellent commutative rings are stable under essentially finite type ring extensions",
+   "results": "{\"t\": \"2026-10-16T07:27:37Z\", \"tool\": \"leanfinder\", \"query\": \"Excellent commutative rings are stable under essentially finite type ring extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.EssFiniteType.stableUnderComposition\", \"Algebra.EssFiniteType.of_comp\", \"RingHom.EssFiniteType.holdsForLocalization\", \"RingHom.FiniteType.essFiniteType\", \"Algebra.EssFiniteType.comp\", \"RingHom.EssFiniteType.comp\", \"RingHom.EssFiniteType.of_comp\"], \"digest\": \"970d36d2c9e436d8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual returned types concern finite type, quasi-finiteness, unramified maps or localization infrastructure; none states excellence or its preservation. The valid RingTheory grep and the quoted-name Loogle search have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "{\"t\": \"2026-10-16T07:27:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Excellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual returned types concern finite type, quasi-finiteness, unramified maps or localization infrastructure; none states excellence or its preservation. The valid RingTheory grep and the quoted-name Loogle search have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|quasiExcellent|universally.?catenary",
+   "results": "{\"t\": \"2026-10-16T07:27:37Z\", \"tool\": \"grep\", \"query\": \"excellent|quasiExcellent|universally.?catenary\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual returned types concern finite type, quasi-finiteness, unramified maps or localization infrastructure; none states excellence or its preservation. The valid RingTheory grep and the quoted-name Loogle search have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a finitely generated algebra over an excellent ring is excellent",
+   "results": "{\"t\": \"2026-10-16T07:27:38Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a finitely generated algebra over an excellent ring is excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_isLocalizedModule\", \"Algebra.FormallyUnramified.of_isLocalization\", \"Algebra.QuasiFinite.of_isLocalization\", \"Module.Finite.instLocalizationLocalizedModule\", \"Algebra.EssFiniteType.of_isLocalization\", \"IsLocalization.finiteType_of_monoid_fg\", \"RingHom.finiteType_localizationPreserves\", \"Algebra.Extension.localization\"], \"digest\": \"25d41c621d5d8df6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: actual returned types concern finite type, quasi-finiteness, unramified maps or localization infrastructure; none states excellence or its preservation. The valid RingTheory grep and the quoted-name Loogle search have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi excellent ring remains quasi excellent after adjoining finitely many generators and inverting any multiplicative set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.OfLocalizationFiniteSpan\", \"module\": \"Mathlib/RingTheory/LocalProperties/Basic\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) → Prop\", \"doc\": \"A property $ P $ of ring homomorphisms $ f : R → S $ between commutative rings holds for $ f $ if there exists a finite set $ s ⊆ R $ generating the unit ideal (i.e., $ \\\\langle s \\\\rangle = R $) such t\"}\n  {\"name\": \"RingHom.OfLocalizationFiniteSpanTarget\", \"module\": \"Mathlib/RingTheory/LocalProperties/Basic\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) → Prop\", \"doc\": \"This defines the notion of a property $P$ of ring homomorphisms being local on the target. A property $P$ is local on the target if for any homomorphism $f: R \\\\to S$ between commutative rings, $P(f)$ \"}\n  {\"name\": \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to its localization at an element $ r $ is quasi-finite, i.e., the localization is finitely generated as an $ R $-module.\"}\n  {\"name\": \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ localizes to span $ S $ as an $ R $-module, then $ f $ is quasi-finite. Specifically, when the localization of $ R $ generates $ S $ as an $ R $-module, the indu\"}\n  {\"name\": \"Algebra.QuasiFinite.instLocalization\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Submonoid S)\\n  [Algebra.QuasiFinite R S], Algebra.QuasiFinite R (Localization M)\", \"doc\": \"If $ S $ is a quasi-finite $ R $-algebra (i.e., finitely generated as an $ R $-module), then the localization of $ S $ at any submonoid $ M $ is also a quasi-finite $ R $-algebra.\"}\n  {\"name\": \"RingHom.EssFiniteType.holdsForLocalization\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"RingHom.HoldsForLocalization fun {R S} [CommRing R] [CommRing S] => RingHom.EssFiniteType\", \"doc\": \"For any commutative ring $ R $ and its localization $ S $ at a submonoid $ M $, the canonical ring homomorphism $ R \\\\to S $ is of essential finite type. This means $ S $ is finitely generated as an $ \"}\n  {\"name\": \"Algebra.QuasiFinite.of_isLocalization\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (M : Submonoid S)\\n  [IsLocalization M T] [Algebra.QuasiFinite R S], Algebra.QuasiFinite R T\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ T $ is a localization of $ S $ with respect to a submonoid $ M $, then $ T $ is also a quasi-finite algebra over $ R $. This mean\"}\n  {\"name\": \"Algebra.QuasiFinite.instOfIsFractionRing\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsFractionRing R S],\\n  Algebra.QuasiFinite R S\", \"doc\": \"If $ S $ is the fraction ring of a commutative semiring $ R $, then $ S $ is a quasi-finite $ R $-algebra. This means $ S $, as an $ R $-module, is finitely generated.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration states excellence or quasi-excellence permanence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration states excellence or quasi-excellence permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|quasi.?excellent|\\bG.?Ring\\b|universally.?catenary",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration states excellence or quasi-excellence permanence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-punctured-curve-branches",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-finite-type-localization-excellent",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Wrote eight steps following 07QU: finite type ascent of the four excellence conditions, then localization via explicit prime-local completion comparison and the image-subalgebra model for each finite type algebra over the localization. The omitted J-2 and catenarity arguments are written out. All non-elementary inputs are existing cited nodes; no new nodes or Mathlib leaves. S containing zero, zero algebras, and noninjective structure maps are allowed. Second reading explicitly verifies Noetherianity of the finite type rings used for regular loci.",
+  "blueprint": "Realizes the final sentence of proof paragraph 1 of lem-exc-punctured-curve-branches, \"Quotients and finite algebras of excellent rings are excellent\", including its general finite type/localization support. The chapter and sk-prop-a1-kummer unit route and realization records are unchanged. Whole-blueprint searches for excellent and finite type found no equivalent statement; same_as is [].",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic finite type G-ring ascent (07PV), explicitly invoked in 07QU; no theorem of this unit supplies that algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic prime correspondence and local-ring isomorphism for a localization; needed for G-ring completion comparison, regular loci, and prime-chain intervals, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-ring-equiv",
+    "why": "Generic isomorphism transport of adic completions, with the commuting square needed for the G-ring localization argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Generic regular-map invariance under a commuting square of ring isomorphisms, needed to transport the completion map at a prime of the localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-3e9334415",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-3e9334415 (reviewer sub-agent of L); spot-checked: Read all eight steps, all twelve cited statements, chapter/unit route, ancestor proof, and cited Stacks sources. The omitted localization argument is supplied correctly; edge cases include zero localization and noninjective maps. Accept all four declared generic tool uses. No new nodes or repairs. Inherited missing reference documented in review.md."
+ }
 }
