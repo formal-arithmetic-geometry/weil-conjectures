@@ -273,5 +273,27 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-15a1bffd2 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited DAG statements, unit/chapter route, Stacks sources 07QT, 07P7, 00NI, 00NL, 07QV, 07QU, 0C3R, 0C3S, 09N2, 04GH, and 00PD. Verified every proof step, hypothesis, tool use, base-change map, coefficient object, duplicate search, and small cases k[[t]], k[[x,y]]/(xy), and k[[t²,t³]]. No mathematical or structural fault found; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PuncturedCurveBranches",
+  "declaration": "punctured_curve_has_dvr_branches",
+  "declarations": [
+   "punctured_curve_has_dvr_branches"
+  ],
+  "file": "lean/Sheaf/RingTheory/PuncturedCurveBranches.lean",
+  "statement": "theorem punctured_curve_has_dvr_branches (R : Type u) [CommRing R] [IsReduced R] (hExcellent : IsExcellent R) [IsStrictlyHenselianLocalRing R] (hDim : ringKrullDim R = (1 : WithBot ℕ∞)) (p : ℕ) (hp : Nat.Prime p) (hChar : ringChar (IsLocalRing.ResidueField R) = p) (hAlgClosed : IsAlgClosed (IsLocalRing.ResidueField R)) : Finite (excLocalCurveBranchIndex R) ∧ ∃ hLocal : ∀ a : excLocalCurveBranchIndex R, IsLocalRing (excLocalCurveBranchIntegralClosure R a), (∀ a : excLocalCurveBranchIndex R, IsDiscreteValuationRing (excLocalCurveBranchIntegralClosure R a)) ∧ (∀ a : excLocalCurveBranchIndex R, IsStrictlyHenselianLocalRing (excLocalCurveBranchIntegralClosure R a)) ∧ (∀ a : excLocalCurveBranchIndex R, IsExcellent (excLocalCurveBranchIntegralClosure R a)) ∧ (∀ a : excLocalCurveBranchIndex R, ∃ e : @IsLocalRing.ResidueField (excLocalCurveBranchIntegralClosure R a) _ (hLocal a) ≃+* IsLocalRing.ResidueField R, ∀ r : R, e (@IsLocalRing.residue (excLocalCurveBranchIntegralClosure R a) _ (hLocal a) (excLocalCurveBranchAlgebraMap R a r)) = IsLocalRing.residue R r) ∧ (∀ a : excLocalCurveBranchIndex R, IsFractionRing (excLocalCurveBranchIntegralClosure R a) (excLocalCurveBranchFractionRing R a)) ∧ ∃ U : (Spec (.of R)).Opens, (∀ x : Spec (.of R), x ∈ U ↔ x ≠ IsLocalRing.closedPoint R) ∧ ∃ e : U.toScheme ≅ ∐ (fun a : excLocalCurveBranchIndex R ↦ Spec (.of (excLocalCurveBranchFractionRing R a))), e.hom ≫ Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (algebraMap R (excLocalCurveBranchFractionRing R a)))) = U.ι",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical normalization factors indexed by all minimal primes; scheme coproduct over Spec R, compatible residue-field isomorphisms, excellence and fraction-field identifications. Positive characteristic is imposed on the residue field, allowing mixed characteristic."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69fa35a53",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, reports, and compiler evidence all checked; delivery is correct."
  }
 }
