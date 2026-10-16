@@ -19,7 +19,8 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-constructible-complexes",
   "lem-sf-flat-model",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-sf-evaluation-hom-site-comparison"
  ],
  "proof": [
   {
@@ -328,5 +329,28 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-b311ecb51 (reviewer sub-agent of L); spot-checked: Reviewed the target against blueprint order 2198, the unit/chapter route, all seven proof steps, all 22 cited DAG statements, and the cited Stacks sources. Hypotheses, coefficient category, canonical comparison map, localization, edge cases, searches, and duplicate/cycle checks pass; no new nodes or repairs are required. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleHomComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_comparisonDerivedHom_of_constructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleHomComparison_coefficientFinite",
+   "AlgebraicGeometry.ProEtale.isIso_comparisonDerivedHom_of_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleHomComparison.lean",
+  "statement": "theorem isIso_comparisonDerivedHom_of_constructible (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (K M : Etale.DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X) (_hK : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : ULift.{u + 1} (Padic.coefficientExtensionRing l E n) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n n.property)) X K) (_hTor : ∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X a b K) (_hM : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : ULift.{u + 1} (Padic.coefficientExtensionRing l E n) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n n.property)) X M) : IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) X K M)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed evaluation-defined siteComparisonEvaluationHom directly; positive natural level and canonical ULift retain exactly the coefficient convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f6c0013e",
+  "group": "Q69",
+  "result": "pass",
+  "note": "No delivery faults found. Verbatim signature and canonical evaluation comparison verified; complete snapshot module compiled through scompile.py in 2.9 s and 3.6 s. No repository or branch changes."
  }
 }
