@@ -82,15 +82,51 @@
    "results": "Twenty hits in Mathlib/AlgebraicGeometry: ProjectiveSpectrum, StructureSheaf, ValuativeCriterion, AffineTransitionLimit, EllipticCurve, Normalization. The AffineTransitionLimit.lean:396 hit restricts a supplied cofiltered diagram; no compatible coefficient refinement construction or extension assertion.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Index finite type subrings of a finite family of commutative rings by componentwise inclusion, compatible with ring homomorphisms into localizations",
+   "results": "Eight hits: PrimeSpectrum.finite_of_toPiLocalization_pi_surjective, MaximalSpectrum.finite_of_toPiLocalization_pi_surjective, PrimeSpectrum.finite_of_toPiLocalization_surjective, IsLocalization.iff_map_piEvalRingHom, PrimeSpectrum.PiLocalization, IsLocalization.fintype', MaximalSpectrum.finite_of_toPiLocalization_surjective, RingHom.OfLocalizationFiniteSpanTarget. These concern finite spectra, product localizations, finiteness of a localized ring, or local properties of ring maps; none defines the compatible tuple preorder and its raw affine pieces.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.map",
+   "results": "Twelve hits for localization maps and their formulas, including IsLocalization.map, map_mk', map_comp_map, and map_injective_of_injective. Read Mathlib/RingTheory/Localization/Defs.lean:595-650: map is defined at line 604, its fraction formula at 621 and composition at 631. These supply individual component maps, not the raw coefficient tuple/refinement system.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole definition; component API found"
+  },
+  {
+   "tool": "grep",
+   "query": "Subring.*(diagram|[Ff]inite[Tt]ype)|([Ff]inite[Tt]ype|diagram).*Subring",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry. Independent second-reader search run with msearch.py.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-nagata-affine-gluing-valid-stage",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-nagata-affine-raw-refinement-system",
+  "worker": "stage1",
+  "summary": "Checked the imported raw coefficient-refinement definition against its blueprint source and all cited dependency statements. The definition already introduces the refinement preorder, chart and localization transition maps, actual composite domains, and the spectrum comparison maps; these are the complete content of the item. No smaller lemma is needed for a one-level definition split, and no new node or Mathlib leaf was created.",
+  "blueprint": "Realizes order 336's final-sentence phrase 'the pullback of the raw datum to this stage' by making the raw refinement category and its comparison maps explicit before any valid equation-witness stage is chosen. The source's surrounding witness-selection argument belongs to def-nagata-affine-gluing-valid-stage and is not part of this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-010ba8c97",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-010ba8c97 (reviewer sub-agent of L); spot-checked: Read the complete item, report, five cited dependency statements, master blueprint and Stacks sources. Verified localized-map injectivity and naturality, spectrum directions, the principal-open pullback square, composite domains, and edge cases. Whole-DAG and independent Mathlib searches found no duplicate. No new nodes, repairs, target changes or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
