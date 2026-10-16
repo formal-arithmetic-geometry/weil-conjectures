@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wcb-projective",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Representables of w-contractible affines are projective",
@@ -12,40 +12,200 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.md",
   "place": "node det-pe-wcb-projective, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-sites-and-cohomology",
+  "det-pe-topos-functoriality-site"
+ ],
  "proof": [
   {
-   "text": "Here $h_U$ is a sheaf by [det-pe-topos-functoriality-site].",
+   "text": "By [det-pe-topos-functoriality-site], $h_U=\\operatorname{Hom}_X(-,U)$ is a sheaf. Let $\\varphi:F\\to h_U$ be an epimorphism. Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to $\\mathrm{id}_U\\in h_U(U)$. It gives a covering $\\{u_i:U_i\\to U\\}_{i\\in I}$ and $a_i\\in F(U_i)$ such that $\\varphi_{U_i}(a_i)=u_i$ for each $i$. This is local surjectivity in sheaves of sets, with no assumption that $\\varphi_U$ is already surjective.",
    "uses": [
-    "det-pe-topos-functoriality-site"
+    "det-pe-topos-functoriality-site",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "opening sentence and part 1, local lifts of the identity; Stacks sites.tex Tag 00WN, lemma-mono-epi-sheaves"
+   }
   },
   {
-   "text": "*1.* An epimorphism of sheaves $\\varphi\\colon F\\to h_U$ is locally surjective: for the\nelement $\\mathrm{id}_U\\in h_U(U)$ there are a covering $\\{U_i\\to U\\}$ and elements\n$a_i\\in F(U_i)$ with $\\varphi(a_i)=(U_i\\to U)\\in h_U(U_i)$. By\n[det-pe-wcb-clopen-partition] there are a clopen partition $U=\\bigsqcup_kU'_k$ and\n$U$-morphisms $g_k\\colon U'_k\\to U_{i_k}$. Put $b_k=g_k^*a_{i_k}\\in F(U'_k)$; then\n$\\varphi(b_k)$ is the inclusion $U'_k\\to U$. The family $\\{U'_k\\to U\\}$ is a (Zariski)\ncovering. Since the $U'_k$ are disjoint open subschemes, $U'_k\\times_UU'_l=\\emptyset$ for\n$k\\neq l$, and $U'_k\\times_UU'_k=U'_k$; so the $b_k$ are trivially compatible and glue to\n$b\\in F(U)$ with $\\varphi(b)|_{U'_k}=(U'_k\\to U)$ for all $k$, hence $\\varphi(b)=\n\\mathrm{id}_U$ by the sheaf property of $h_U$. By the Yoneda lemma, $b$ is a map\n$h_U\\to F$ with $\\varphi\\circ b=\\mathrm{id}$.",
+   "text": "Apply [det-pe-wcb-clopen-partition] to this covering of the affine $U=\\operatorname{Spec}D$, using precisely the assumed w-contractibility of $D$. Obtain a finite clopen partition $U=\\bigsqcup_{k=1}^m U_k^\\prime$ and $U$-morphisms $g_k:U_k^\\prime\\to U_{i_k}$. Write $j_k:U_k^\\prime\\hookrightarrow U$ for the inclusions and put $b_k=F(g_k)(a_{i_k})$. Naturality gives $\\varphi_{U_k^\\prime}(b_k)=u_{i_k}\\circ g_k=j_k$. No lift into a single member of the original covering is asserted.",
    "uses": [
     "det-pe-wcb-clopen-partition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "part 1, clopen refinement and restrictions of the lifts; Stacks proetale.tex Tag 098F, lemma-w-contractible-proetale-cover"
+   }
   },
   {
-   "text": "*2.* Let $F\\to G$ be an epimorphism and $y\\in G(U)=\\Hom(h_U,G)$. In a topos, pullbacks of\nepimorphisms are epimorphisms, so $F\\times_Gh_U\\to h_U$ is an epimorphism; by 1 it has a\nsection, and composing with the projection to $F$ gives $x\\in F(U)$ mapping to $y$.",
-   "uses": [],
-   "elementary": null
+   "text": "The inclusions $j_k$ form a Zariski covering, hence a pro-étale covering by the explicit Zariski-cover clause of [sk-def-pe-site]. In particular the pieces and their intersections are objects of this site. For any sheaf of sets $H$, the empty covering of the empty scheme is a covering by the finite-refinement covering definition, so the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] makes $H(\\varnothing)$ a singleton. Thus for $k\\ne l$ the restrictions of $b_k$ and $b_l$ to $U_k^\\prime\\times_U U_l^\\prime=\\varnothing$ agree; for $k=l$ the fibre product is $U_k^\\prime$ and the two restrictions are identical. The same sheaf equalizer condition glues these sections uniquely to $b\\in F(U)$. The sections $\\varphi_U(b)$ and $\\mathrm{id}_U$ restrict to $j_k$ on every piece, so separatedness of $h_U$ gives $\\varphi_U(b)=\\mathrm{id}_U$. For $U=\\varnothing$ the same reasoning uses the empty partition and the unique empty matching family.",
+   "uses": [
+    "sk-def-pe-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "part 1, disjointness, gluing and equality with the identity; Stacks proetale.tex Tag 098B, lemma-etale-proetale, and sites.tex sheaf equalizer definition"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-yoneda-hom-bijection] to the category $X_{\\mathrm{proét}}$ and the underlying presheaf of $F$. The section $b$ corresponds to a natural transformation $s:h_U\\to F$, explicitly $s_V(t)=F(t)(b)$ for $t:V\\to U$. Since sheaves form a full subcategory of presheaves, it is a sheaf morphism. Naturality of $\\varphi$ and $\\varphi_U(b)=\\mathrm{id}_U$ give $\\varphi_V(s_V(t))=h_U(t)(\\mathrm{id}_U)=t$ for every $V,t$. Hence $\\varphi\\circ s=\\mathrm{id}_{h_U}$, proving clause 1.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "end of part 1, Yoneda and the section; Stacks categories.tex Tag 001P, lemma-yoneda"
+   }
+  },
+  {
+   "text": "For clause 2 let $\\alpha:F\\to G$ be any epimorphism and let $y\\in G(U)$. By [lem-galois-yoneda-hom-bijection] it determines a sheaf map $\\eta:h_U\\to G$ with $\\eta_V(t)=G(t)(y)$. Define the pullback sheaf explicitly by $P(V)=\\{(x,t)\\in F(V)\\times h_U(V):\\alpha_V(x)=G(t)(y)\\}$, with coordinatewise restrictions. It is a sheaf: glue the two coordinates by the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology]; the displayed equality holds on the glued coordinates because it holds after restriction to each member of the cover and $G$ is separated. The projection $p:P\\to h_U$ is locally surjective: for $t\\in h_U(V)$, local surjectivity of $\\alpha$ from [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], applied to $G(t)(y)$, gives locally sections $x_i$ with $\\alpha(x_i)=G(t|_{V_i})(y)$, so $(x_i,t|_{V_i})$ lifts $t|_{V_i}$. The converse direction of that same node makes $p$ an epimorphism. This proves the particular stability of epimorphisms under pullback used here directly from its local-lifting criterion.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "part 2, pull back the epimorphism along the map represented by y; explicit verification of the topos assertion"
+   }
+  },
+  {
+   "text": "Apply clause 1, already proved in steps 1–4, to the epimorphism $p:P\\to h_U$. Its section $r$ yields $r_U(\\mathrm{id}_U)=(x,\\mathrm{id}_U)$ for some $x\\in F(U)$. The defining equality for $P(U)$ says $\\alpha_U(x)=G(\\mathrm{id}_U)(y)=y$. Thus $F(U)\\to G(U)$ is surjective for every epimorphism. Under the natural Yoneda bijections of [lem-galois-yoneda-hom-bijection], this is exactly the lifting property of $h_U$ against epimorphisms, hence its projectivity, proving clause 2.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+    "place": "end of part 2, section of the pullback and projection to F"
+   }
   }
  ],
  "proof_deps": [
   "det-pe-topos-functoriality-site",
-  "det-pe-wcb-clopen-partition"
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "det-pe-wcb-clopen-partition",
+  "sk-def-pe-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
+  "place": "parts 1 and 2, with local-surjectivity, Yoneda and the pullback argument made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Epimorphisms of sheaves of sets are locally surjective",
+   "results": "8 hits; CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.IsLocallySurjective, LightCondSet.epi_iff_locallySurjective_on_lightProfinite, CondensedSet.epi_iff_locallySurjective_on_compHaus, CategoryTheory.Sheaf.locallySurjective",
+   "date": "2026-10-16",
+   "verdict": "match: existing leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective, not the projectivity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|WeaklyContractible|projective.*(sheaf|yoneda)",
+   "results": "23 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective, CategoryTheory.Sheaf",
+   "results": "9 hits; CategoryTheory.Presheaf.coherentExtensiveEquivalence, CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_obj, CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_obj, CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_hom, CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_hom, CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso_hom_app_hom_app, CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso_inv_app_hom_app, CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso_hom_app_hom_app",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable sheaf of a weakly contractible affine scheme is projective in the pro etale topos",
+   "results": "8 hits; Rep.standardComplex.x_projective, Profinite.projectivePresentation, Profinite.instEnoughProjectives, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|WeaklyContractible|weakly.contractible",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Epi",
+   "results": "4 hits; CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.isLocallySurjective_iff_epi'",
+   "date": "2026-10-16",
+   "verdict": "match: existing leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective, not the projectivity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi|def imageSieve|class IsLocallySurjective",
+   "results": "8 hits; Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf epimorphisms have local preimages for sections in a Grothendieck topology",
+   "results": "8 hits; CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.PresheafIsGeneratedBy.of_epi, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves of sets on a small site is an epimorphism if and only if every section locally lifts over a covering sieve",
+   "results": "8 hits; CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.PresheafIsGeneratedBy.of_epi",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every covering of an object refines to a disjoint union partition then evaluation of set valued sheaves at this object preserves epimorphisms",
+   "results": "8 hits; CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.isRegularEpiCategory_sheaf, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify",
+   "date": "2026-10-16",
+   "verdict": "no match for projectivity of a w-contractible affine representable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable sheaves of w-contractible affine schemes on the pro etale site are projective and split epimorphisms onto them",
+   "results": "8 hits; CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Projective.π, CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable, CategoryTheory.Sheaf.isSheaf_of_isRepresentable, CategoryTheory.regularTopology.isSheafFor_regular_of_projective, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective, AlgebraicGeometry.AffineScheme.Spec_essSurj",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic subcanonical representability, projective category and sheaf factorization facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(representable|sheaf|proet)|((representable|sheaf|proet).*projective)|contractible",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib/AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective, \"yoneda\"",
+   "results": "8 hits; CategoryTheory.Projective.projective_iff_preservesEpimorphisms_coyoneda_obj, CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyoneda_obj, CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyonedaObj, CategoryTheory.preservesFiniteColimits_preadditiveCoyonedaObj_of_projective, CategoryTheory.projective_of_preservesFiniteColimits_preadditiveCoyonedaObj, CategoryTheory.preservesHomology_preadditiveCoyonedaObj_of_projective, CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj, CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match: the general coyoneda criterion identifies projectivity with preservation of epimorphisms, but does not establish this preservation for w-contractible affine representables; other hits are preadditive/abelian specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf represented by an object whose covering families admit disjoint open refinements is projective",
+   "results": "8 hits; CategoryTheory.regularTopology.isSheafFor_regular_of_projective, CategoryTheory.regularTopology.isSheaf_of_projective, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, CategoryTheory.Presheaf.isSheaf_iff_extensiveSheaf_of_projective, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.regularTopology.isSheaf_yoneda_obj, CategoryTheory.Sheaf.hasSeparator",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern regular/coherent topologies with projectivity assumed, or existence of sheaf separators; none proves the w-contractible affine representable assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +215,29 @@
   "det-pe-topos-functoriality-site"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wcb-projective",
+  "worker": "stage1",
+  "summary": "Preserved both clauses and the current blueprint route through local lifts, the finite clopen refinement, disjoint gluing, Yoneda, and pullback. Reused the existing general set-sheaf epi and general Yoneda Mathlib leaves; made the empty-scheme case and the locally-surjective pullback check explicit. No new nodes or Lean changes.",
+  "blueprint": "Steps 1–4 realize the opening and part 1 of det-pe-wcb-projective.proof.md; steps 5–6 realize part 2. This carries the final paragraph of the unit proof: glue identity lifts after the clopen partition, then pull back an arbitrary epimorphism.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Only its subcanonicality clause is used to regard h_U as a sheaf; this generic site input does not replace the unit’s clopen-partition route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-c4f4e1f3b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-c4f4e1f3b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, current blueprint route, and cited source locations. All six steps preserve set-valued coefficients and justify local lifting, clopen gluing, and pullback epimorphy. Empty and disconnected cases pass; no cycles or new duplicate nodes. Accepted subcanonicality tool use. No repairs needed; detailed checks recorded in review.md."
+ }
 }
