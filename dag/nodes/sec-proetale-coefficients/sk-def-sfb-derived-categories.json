@@ -3,78 +3,298 @@
  "blueprint": {
   "is": "sk-def-sfb-derived-categories",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived categories and derived functors",
- "statement": "All derived categories are unbounded. For an abelian category $\\mathcal C$, $D(\\mathcal C)$\nis the localization of the category of cochain complexes in $\\mathcal C$ at the\nquasi-isomorphisms [def-weil-abstract-derived-category]. Its bounded below part\n$D^+(\\mathcal C)\\subseteq D(\\mathcal C)$ is the full subcategory of complexes whose\ncohomology vanishes in all sufficiently negative degrees. Derived functors are total\nderived functors on the unbounded categories, computed on resolutions:\n\n- **Right derived functors.** Let $\\mathcal C$ have K-injective resolutions, i.e. every\n  complex admits a quasi-isomorphism to a K-injective complex. Then every additive\n  functor $F\\colon\\mathcal C\\to\\mathcal D$ to an abelian category has a total right\n  derived functor $RF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$\n  termwise to a K-injective resolution. Every Grothendieck abelian category has\n  K-injective resolutions.\n- **Left derived functors.** Let $\\mathcal C$ be a monoidal abelian category with the\n  following properties: its tensor product is additive in each variable; it has\n  countable coproducts and exact $\\mathbf Z$-indexed colimits, which tensoring with a\n  fixed object on either side preserves; and it has functorial flat resolutions. Let\n  $F\\colon\\mathcal C\\to\\mathcal D$ be additive and send quasi-isomorphisms between\n  K-flat complexes to quasi-isomorphisms. Then $F$ has a total left derived functor\n  $LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$ termwise to a\n  K-flat resolution. Pullback, tensor product and extension of scalars are derived\n  this way.\n- **Exact functors.** If $F$ is exact, then $RF\\cong D(F)$ and $LF\\cong D(F)$, where\n  $D(F)$ applies $F$ termwise.\n- **Derived adjunctions.** Let $f\\colon\\mathcal C\\rightleftarrows\\mathcal D\\colon g$ be\n  an adjunction $f\\dashv g$ of additive functors, with $f$ as in the second item and\n  $\\mathcal D$ with K-injective resolutions. Then $Lf\\dashv Rg$.\n\nThe derived categories of this section are the following.\n\n| Category | Definition |\n|---|---|\n| $D(X_{\\mathrm{proét}},\\mathcal A)$ | $D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$, finite coefficients (layer A). Here $\\mathcal A$ is a closed symmetric monoidal Grothendieck abelian category and $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ carries the tensor product of [sk-def-sfb-sheaf-tensor]. |\n| $D(\\Mod_{\\Lambda_X})$ | $D(\\Mod(\\Sh(X_{\\mathrm{proét}},\\Ab),\\Lambda_X))$, non-finite coefficients (layer B), for the ring object $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] and its module objects [sk-def-sfb-module-objects]. For $\\Lambda=\\underline{\\cO}_E$ resp. $\\underline E$ this is $D(X_{\\mathrm{proét}},\\cO_E)$ resp. $D(X_{\\mathrm{proét}},E)$. |\n| $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ | the bounded complexes with constructible cohomology in $D(\\Mod_{\\mathcal R})$, see [sk-def-sfb-bounded-constructible]. |",
+ "statement": "All derived categories are unbounded. For an abelian category $\\mathcal C$, $D(\\mathcal C)$\nis the localization of the category of cochain complexes in $\\mathcal C$ at the\nquasi-isomorphisms [def-weil-abstract-derived-category]. Its bounded below part\n$D^+(\\mathcal C)\\subseteq D(\\mathcal C)$ is the full subcategory of complexes whose\ncohomology vanishes in all sufficiently negative degrees. We work in the universes of [def-weil-abstract-derived-category]. A K-injective complex $I$ means that every map from an acyclic complex to $I$ is null-homotopic; K-flat means [def-sfb-preserves-kflat-quasi-iso]. Grothendieck abelian means [def-sp-grothendieck-abelian]. Derived functors are total\nderived functors on the unbounded categories, computed on resolutions:\n\n- **Right derived functors.** Let $\\mathcal C$ have K-injective resolutions, i.e. every\n  complex admits a quasi-isomorphism to a K-injective complex. Then every additive\n  functor $F\\colon\\mathcal C\\to\\mathcal D$ to an abelian category has a total right\n  derived functor $RF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$\n  termwise to a K-injective resolution. Every Grothendieck abelian category has\n  K-injective resolutions.\n- **Left derived functors.** Let $\\mathcal C$ be a monoidal abelian category with the\n  following properties: its tensor product is additive in each variable; it has\n  countable coproducts and exact $\\mathbf Z$-indexed colimits, and tensoring with a\n  fixed object on either side preserves both these coproducts and these colimits; and it has functorial flat resolutions: a functor $P:\\mathcal C\\to\\mathcal C$ with a natural epimorphism $P(M)\\to M$ and flat values, where flat means that tensoring on either side preserves short exact sequences. Let\n  $F\\colon\\mathcal C\\to\\mathcal D$ be additive and send quasi-isomorphisms between\n  K-flat complexes to quasi-isomorphisms. Then $F$ has a total left derived functor\n  $LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$ termwise to a\n  K-flat resolution. Pullback, tensor product and extension of scalars are derived\n  this way.\n- **Exact functors.** Under the respective existence hypotheses above, if $F$ is exact, then $RF\\cong D(F)$ and $LF\\cong D(F)$, where\n  $D(F)$ applies $F$ termwise.\n- **Derived adjunctions.** Let $f\\colon\\mathcal C\\rightleftarrows\\mathcal D\\colon g$ be\n  an adjunction $f\\dashv g$ of additive functors, with $f$ as in the second item and\n  $\\mathcal D$ with K-injective resolutions. Then $Lf\\dashv Rg$.\n\nLet $X$ be a scheme with the small pro-étale site [def-weil-pbc-proetale-site]. The derived categories of this section are the following. In the last row, $\\mathcal R$ is a ring object in $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$, for $\\mathcal A$ as in the first row. Constructibility means exactly [def-sfb-constructible-module]: there is a finite stratification of $X$ by locally closed subschemes such that on each stratum the restricted module is locally finitely presented over the restricted ring object [def-sfb-locally-finitely-presented]. Local finite presentation allows arbitrary morphisms between finite free modules over that ring object; it does not require the presentation matrices to come from constant scalars. This is the predicate used in the master target. The reference to [sk-def-sfb-bounded-constructible] is a forward reference, not input to the ambient derived category.\n\n| Category | Definition |\n|---|---|\n| $D(X_{\\mathrm{proét}},\\mathcal A)$ | $D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$, finite coefficients (layer A). Here $\\mathcal A$ is a closed symmetric monoidal Grothendieck abelian category and $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ carries the tensor product of [sk-def-sfb-sheaf-tensor]. |\n| $D(\\Mod_{\\Lambda_X})$ | $D(\\Mod(\\Sh(X_{\\mathrm{proét}},\\Ab),\\Lambda_X))$, non-finite coefficients (layer B), for the ring object $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] and its module objects [sk-def-sfb-module-objects]. For $\\Lambda=\\underline{\\cO}_E$ resp. $\\underline E$ this is $D(X_{\\mathrm{proét}},\\cO_E)$ resp. $D(X_{\\mathrm{proét}},E)$. |\n| $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ | For a coefficient ring object $\\mathcal R$ with the constructibility condition just fixed, the full subcategory of $D(\\Mod_{\\mathcal R})$ consisting of $K$ such that $H^i(K)=0$ outside a finite interval and every $H^i(K)$ is constructible in that sense. Morphisms are the ambient derived morphisms. |",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
   "place": "node sk-def-sfb-derived-categories, order 862"
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-weil-pbc-proetale-site",
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented"
  ],
  "proof": [
   {
-   "text": "*Right derived functors.* $RF$ is [def-sfb-right-derived-functor]. A Grothendieck abelian\ncategory has K-injective resolutions by [lem-sfb-grothendieck-k-injective].",
+   "text": "Use the localization and cohomology functors of [def-weil-abstract-derived-category]. Define $D^+(\\mathcal C)$ as the full subcategory on objects $K$ for which there is $a\\in\\mathbf Z$ with $H^i(K)=0$ for every $i<a$. This is a condition on the derived object: replacing a complex by a quasi-isomorphic one does not change its cohomology. No boundedness condition is imposed on $D(\\mathcal C)$ itself.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "opening derived-category convention"
+   }
+  },
+  {
+   "text": "For an additive $F:\\mathcal C\\to\\mathcal D$, the source hypothesis of [def-sfb-right-derived-functor] is exactly the assumed existence of K-injective resolutions. Its unit is invertible on K-injectives, so a resolution $K\\to I$ computes $RF(K)$ as $F(I)$. If $\\mathcal C$ is Grothendieck abelian, [lem-sfb-grothendieck-k-injective] supplies such a resolution for every unbounded complex; no bounded-below restriction is used.",
    "uses": [
     "def-sfb-right-derived-functor",
     "lem-sfb-grothendieck-k-injective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Right derived functors"
+   }
   },
   {
-   "text": "*Left derived functors.* The hypothesis on $F$ is [def-sfb-preserves-kflat-quasi-iso], and\n$LF$ is [def-sfb-left-derived-functor].",
+   "text": "Under the stated monoidal and resolution hypotheses, [lem-sfb-unbounded-kflat-resolution-existence] supplies a quasi-isomorphism $P\\to K$ with $P$ K-flat for every complex $K$. The functor-specific assumption is exactly [def-sfb-preserves-kflat-quasi-iso]. Apply [def-sfb-left-derived-functor]: its counit is invertible on K-flat complexes, and therefore $LF(K)$ is represented by the termwise complex $F(P)$. This explains the resolution convention; it does not assert that an arbitrary additive functor preserves all quasi-isomorphisms.",
    "uses": [
+    "lem-sfb-unbounded-kflat-resolution-existence",
     "def-sfb-preserves-kflat-quasi-iso",
     "def-sfb-left-derived-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Left derived functors"
+   }
   },
   {
-   "text": "*Exact functors.* By [def-sfb-right-derived-exact] and [def-sfb-left-derived-exact].",
+   "text": "In the respective source categories above, an exact $F$ has the canonical comparisons $RF\\cong D(F)$ and $LF\\cong D(F)$ by [def-sfb-right-derived-exact] and [def-sfb-left-derived-exact]. Both statements include the resolution hypotheses needed to define the indicated derived functor. Hence the exact-functor clause is read under those hypotheses.",
    "uses": [
     "def-sfb-right-derived-exact",
     "def-sfb-left-derived-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Exact functors"
+   }
   },
   {
-   "text": "*Derived adjunctions.* Let $K\\in D(\\mathcal C)$ and $L\\in D(\\mathcal D)$. Choose a K-flat\nresolution $P\\to K$ and a K-injective resolution $L\\to I$, so that $Lf(K)=f(P)$ and\n$Rg(L)=g(I)$. Since $I$ is K-injective, morphisms into $I$ in the derived category are\nhomotopy classes of maps. The adjunction $f\\dashv g$ extends termwise to complexes and is\ncompatible with homotopies. Hence\n$$\n\\Hom_{D(\\mathcal D)}(Lf(K),L)=\\Hom_{K(\\mathcal D)}(f(P),I)=\\Hom_{K(\\mathcal C)}(P,g(I)).\n$$\nOn the other side, by the calculus of fractions\n$\\Hom_{D(\\mathcal C)}(K,Rg(L))=\\colim_{s}\\Hom_{K(\\mathcal C)}(P',g(I))$. The colimit runs over\nthe quasi-isomorphisms $s\\colon P'\\to P$, and the K-flat $P'$ are cofinal among them,\nsince every complex has a K-flat resolution. For such $s$, the map\n$\\Hom_{K(\\mathcal C)}(P,g(I))\\to\\Hom_{K(\\mathcal C)}(P',g(I))$ is identified by the\nadjunction with $\\Hom_{K(\\mathcal D)}(f(P),I)\\to\\Hom_{K(\\mathcal D)}(f(P'),I)$. That map is\nbijective, because $f(s)$ is a quasi-isomorphism by the hypothesis on $f$ and $I$ is\nK-injective. So the colimit is $\\Hom_{K(\\mathcal C)}(P,g(I))$. The resulting bijection\n$\\Hom(Lf(K),L)\\cong\\Hom(K,Rg(L))$ is natural in $K$ and $L$, so $Lf\\dashv Rg$.",
-   "uses": [],
-   "elementary": null
+   "text": "For the adjunction clause, denote its unit by $\\eta$ and counit by $\\varepsilon$. For a chain map $a:f(P)\\to I$, put $b^n=g(a^n)\\eta_{P^n}$; then $g(d_I^n)b^n=g(d_I^na^n)\\eta_{P^n}=g(a^{n+1})gf(d_P^n)\\eta_{P^n}=b^{n+1}d_P^n$. Conversely, for a chain map $b:P\\to g(I)$, put $a^n=\\varepsilon_{I^n}f(b^n)$. Naturality gives $d_I^na^n=\\varepsilon_{I^{n+1}}fg(d_I^n)f(b^n)=\\varepsilon_{I^{n+1}}f(b^{n+1}d_P^n)=a^{n+1}f(d_P^n)$. The two triangle identities give $\\varepsilon_{I^n}f(g(a^n)\\eta_{P^n})=a^n$ and $g(\\varepsilon_{I^n}f(b^n))\\eta_{P^n}=b^n$. For a chain homotopy $a-a'=d_Ih+hd_{f(P)}$, additivity and naturality give $b^n-b'^n=g(d_I^{n-1})g(h^n)\\eta_{P^n}+g(h^{n+1})\\eta_{P^{n+1}}d_P^n$. Conversely a homotopy $b-b'=d_{g(I)}k+kd_P$ gives $a^n-a'^n=d_I^{n-1}\\varepsilon_{I^{n-1}}f(k^n)+\\varepsilon_{I^n}f(k^{n+1})f(d_P^n)$. Thus the mutually inverse operations descend to the homotopy categories of [def-weil-abstract-derived-category]. Naturality of $\\eta$ and $\\varepsilon$ also gives $(a f(v))^\\sharp=a^\\sharp v$ and $(wa)^\\sharp=g(w)a^\\sharp$ for chain maps $v$ and $w$. Therefore $\\operatorname{Hom}_{K(\\mathcal D)}(f(P),I)\\cong\\operatorname{Hom}_{K(\\mathcal C)}(P,g(I))$ bifunctorially.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Derived adjunctions"
+   }
   },
   {
-   "text": "*The categories of the table.* $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is a Grothendieck\nabelian category, because the small pro-étale site [def-weil-pbc-proetale-site] is\nessentially small. With the tensor product of [sk-def-sfb-sheaf-tensor] it is closed\nsymmetric monoidal. It has functorial flat resolutions when $\\mathcal A$ does: the\nsheafified free objects on representables, tensored with a flat separator of\n$\\mathcal A$, form a flat separator. Likewise $\\Mod_{\\Lambda_X}$ is a closed symmetric\nmonoidal Grothendieck abelian category with functorial flat resolutions\n[sk-prop-sfb-module-category]. So in both cases right derived functors exist for every\nadditive functor, and left derived functors exist for every additive functor that\npreserves K-flat quasi-isomorphisms.",
+   "text": "Fix a K-flat $P$ and a K-injective $I$. By [lem-weil-pbc-kinjective-hom-derived], the left-hand side of the preceding bijection identifies with $\\operatorname{Hom}_{D(\\mathcal D)}(Qf(P),QI)$. We next show that the localization map $\\theta:\\operatorname{Hom}_{K(\\mathcal C)}(P,g(I))\\to\\operatorname{Hom}_{D(\\mathcal C)}(QP,Qg(I))$ is bijective. No claim that $g(I)$ is K-injective is made or needed.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Derived adjunctions"
+   }
+  },
+  {
+   "text": "For surjectivity of $\\theta$, [lem-pc-quasi-isomorphisms-multiplicative-system] gives the right calculus of fractions for $K(\\mathcal C)$. By [lem-pc-right-fraction-representation], any map $QP\\to Qg(I)$ has a roof $P\\xleftarrow{s}Z\\xrightarrow{a}g(I)$ with $s$ a quasi-isomorphism. Choose a K-flat resolution $r:T\\to Z$ using [lem-sfb-unbounded-kflat-resolution-existence]. Put $t=sr$ and $a'=ar$. Both $T$ and $P$ are K-flat and $t$ is a quasi-isomorphism, so $f(t)$ is a quasi-isomorphism by [def-sfb-preserves-kflat-quasi-iso]. Its precomposition map into $I$ is bijective by [lem-sp-kinjective-comparison-principle]. Consequently the transpose of $a'$ has the unique form $v\\circ f(t)$ for $v:f(P)\\to I$. If $b:P\\to g(I)$ is the transpose of $v$, naturality of transposition gives $bt=a'$. Localizing yields $Q(b)=Q(a')Q(t)^{-1}=Q(a)Q(s)^{-1}$, as required.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-sfb-unbounded-kflat-resolution-existence",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Derived adjunctions"
+   }
+  },
+  {
+   "text": "For injectivity, suppose $b,c:P\\to g(I)$ have equal images in $D(\\mathcal C)$. Apply [lem-pc-right-fraction-common-refinement] to their roofs with identity denominators; it applies by [lem-pc-quasi-isomorphisms-multiplicative-system]. There is a quasi-isomorphism $u:Z\\to P$ with $bu=cu$ in $K(\\mathcal C)$. Resolve $Z$ by a K-flat $r:T\\to Z$ using [lem-sfb-unbounded-kflat-resolution-existence]. Then $ur:T\\to P$ is a quasi-isomorphism between K-flat complexes. By [def-sfb-preserves-kflat-quasi-iso] its image under $f$ is a quasi-isomorphism. Transpose $bur=cur$ and use injectivity of precomposition with $f(ur)$ into $I$, given by [lem-sp-kinjective-comparison-principle]. The transposes of $b$ and $c$ are equal, hence $b=c$. This proves bijectivity of $\\theta$.",
+   "uses": [
+    "lem-pc-right-fraction-common-refinement",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-sfb-unbounded-kflat-resolution-existence",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Derived adjunctions"
+   }
+  },
+  {
+   "text": "For arbitrary derived objects $K,L$, choose $P\\to K$ K-flat and $L\\to I$ K-injective. Existence on the source is [lem-sfb-unbounded-kflat-resolution-existence], and existence on the target is the hypothesis of the adjunction clause. The comparisons in [def-sfb-left-derived-functor] and [def-sfb-right-derived-functor], together with the bijections just proved, give\n$$\\operatorname{Hom}_{D(\\mathcal D)}(Lf(K),L)\\cong\\operatorname{Hom}_{K(\\mathcal D)}(f(P),I)\\cong\\operatorname{Hom}_{K(\\mathcal C)}(P,g(I))\\cong\\operatorname{Hom}_{D(\\mathcal C)}(K,Rg(L)).$$\nThe first comparison uses [lem-weil-pbc-kinjective-hom-derived]. To verify naturality on all derived morphisms, represent a map between K-flat representatives by a roof using [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation], and replace its middle object by a K-flat resolution. Transposition commutes with each resulting map of complexes, and therefore with the inverse of a quasi-isomorphism between them. Naturality of the left-derived counit identifies these inverse images with the maps of $Lf$. A map between K-injective target representatives is represented by a homotopy class by [lem-weil-pbc-kinjective-hom-derived]; transposition commutes with that map, and naturality of the right-derived unit identifies its image with the map of $Rg$. Thus every square of the displayed Hom bijection commutes. A bifunctorial Hom bijection is precisely an adjunction, proving $Lf\\dashv Rg$.",
+   "uses": [
+    "lem-sfb-unbounded-kflat-resolution-existence",
+    "def-sfb-left-derived-functor",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "Derived adjunctions"
+   }
+  },
+  {
+   "text": "For the table, the small representative of the pro-étale site is supplied by [def-weil-pbc-proetale-site]. Each tensor functor of $\\mathcal A$ is a left adjoint by closedness and symmetry, so it preserves zero and finite coproducts. In an abelian category these are finite biproducts; their projections are determined by the injections and zero maps, so preservation also preserves the diagonal and codiagonal formulas for addition. Thus tensor is additive in each variable, as required to apply [lem-weil-pbc-sheaf-tensor-closed] to this essentially small site and the given closed symmetric monoidal Grothendieck category $\\mathcal A$. This supplies an abelian sheaf category and hence its localization [def-weil-abstract-derived-category]. For layer B, [sk-def-sfb-pulled-back-coefficients] supplies the actual ring object $\\Lambda_X$, and [sk-def-sfb-module-objects] supplies its module category. Closedness of the sheaf tensor [sk-def-sfb-sheaf-tensor] makes $\\Lambda_X\\otimes-$ preserve finite colimits, so [lem-sfb-modobj-abelian] makes the module category abelian, even when $\\Lambda$ is noncommutative. For the last row, $\\mathcal R$ is a ring object in the same closed monoidal abelian sheaf category. Its tensor functor $\\mathcal R\\otimes-$ is a left adjoint and preserves finite colimits; [lem-sfb-modobj-abelian] therefore makes $\\Mod_{\\mathcal R}$ abelian. Localizing each of these abelian module categories at quasi-isomorphisms gives its unbounded derived category. The symbols with $\\mathcal O_E$ and $E$ abbreviate the pulled-back condensed coefficient rings; no constant or completed coefficient sheaf is substituted.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-abelian",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "The categories of the table, with the commutativity qualification explained in split_report.source_errors."
+   }
+  },
+  {
+   "text": "The unit's fifth proof paragraph requires more than typing the table. By [lem-weil-pbc-sheaf-tensor-closed], $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is Grothendieck abelian, and its tensor preserves all colimits. Thus right derived functors exist by step 2. If $\\mathcal A$ has a functorial flat resolution, [lem-sfb-sheaf-functorial-flat-resolution] transfers it to this sheaf category. Small colimits and exact filtered colimits are part of [def-sp-grothendieck-abelian]; in particular the required countable coproducts and exact ordered-$\\mathbf Z$ colimits exist. The tensor-colimit conclusion of the sheaf theorem gives their preservation on both sides. All hypotheses of step 3 are therefore met: every additive functor from this sheaf category that preserves quasi-isomorphisms between K-flat complexes has the stated total left derived functor. The hypothesis that $\\mathcal A$ has a functorial flat resolution is retained.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "The categories of the table, with the commutativity qualification explained in split_report.source_errors."
+   }
+  },
+  {
+   "text": "For layer B with commutative $\\Lambda$, first construct the base flat resolution in $\\Ab$. Put $P(M)=\\bigoplus_{m\\in |M|}\\mathbf Z$ and send the generator $[m]$ to $m$. A homomorphism $u:M\\to N$ sends $[m]$ to $[u(m)]$, so $P$ is a functor and the augmentation is natural. It is surjective, since $m$ is the image of $[m]$; a surjective group map is epic since two homomorphisms equal on all its images are equal. The standard closed symmetric monoidal Grothendieck structure on $\\Ab$ is the example specified in [sk-def-sfb-sheaf-tensor]. The unit $\\mathbf Z$ is flat because its tensor functors are isomorphic to the identity by the unitors. By [lem-weil-pbc-flat-coproduct] every $P(M)$ preserves finite limits under tensoring (symmetry gives both tensor sides). Closedness makes these tensor functors left adjoints, hence they also preserve finite colimits; therefore they are exact and $P(M)$ is flat in the short-exact-sequence sense used here. Applying [lem-sfb-sheaf-functorial-flat-resolution] with $\\mathcal A=\\Ab$ gives functorial flat resolutions in $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$. By [lem-weil-pbc-sheaf-tensor-closed] applied to $\\mathcal A=\\Ab$ and the essentially small site of [def-weil-pbc-proetale-site], $\\mathcal C$ is a Grothendieck abelian category whose sheafified tensor product is symmetric monoidal, closed and additive in each variable; these are the hypotheses on $\\mathcal C$ of the module statements used next. The pulled-back ring $\\Lambda_X$ is commutative by [sk-def-sfb-pulled-back-coefficients], so [lem-sfb-modobj-flat-resolutions] now applies to $\\mathcal C$ and $\\Lambda_X$. Moreover [lem-sfb-modobj-grothendieck] gives Grothendieck abelianness, [def-sfb-modobj-symmetric-tensor] gives the symmetric relative tensor, and [def-sfb-modobj-internal-hom] gives its right adjoints. A tensor functor therefore preserves colimits: $\\operatorname{Hom}(M\\otimes_{\\Lambda_X}\\operatorname{colim}_iN_i,T)\\cong\\operatorname{Hom}(\\operatorname{colim}_iN_i,\\operatorname{Hom}_{\\Lambda_X}(M,T))\\cong\\lim_i\\operatorname{Hom}(N_i,\\operatorname{Hom}_{\\Lambda_X}(M,T))\\cong\\lim_i\\operatorname{Hom}(M\\otimes_{\\Lambda_X}N_i,T)$. Symmetry identifies the other tensor functor $N\\mapsto N\\otimes_{\\Lambda_X}M$ naturally with $N\\mapsto M\\otimes_{\\Lambda_X}N$; therefore it preserves the same colimits. Each relative tensor functor preserves zero and finite coproducts. These are biproducts in the abelian module category, with projections determined by injections and zero morphisms, so the diagonal-codiagonal formula for addition is preserved. Hence the relative tensor is additive in both variables. The Grothendieck colimits and the flat resolutions just constructed meet all hypotheses of steps 2 and 3, proving right-derived existence for every additive functor and left-derived existence for every additive functor preserving K-flat quasi-isomorphisms in this commutative layer-B case. The source's symmetric-monoidal assertion cannot be applied to general noncommutative rings: the usual relative tensor of two left modules is not defined without converting one to a right module. For example a general pair of left $M_2(\\mathbf Z)$-modules has no specified such conversion. For an arbitrary ring object the table asserts only the ambient abelian derived category, not this symmetric-monoidal flat-resolution conclusion.",
+   "uses": [
+    "lem-weil-pbc-flat-coproduct",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom",
+    "def-sp-grothendieck-abelian",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "The categories of the table, with the commutativity qualification explained in split_report.source_errors."
+   }
+  },
+  {
+   "text": "Use the constructibility predicate of [def-sfb-constructible-module], with its stated finite stratification and transported restriction to each stratum. The local condition is precisely [def-sfb-locally-finitely-presented]. Its finite presentations are the arbitrary module morphisms and cokernels of [def-sfb-finitely-presented-module], not presentations restricted to scalar constant matrices. This is exactly the master source's $\\operatorname{IsConstructible}$ and $\\operatorname{IsLocallyFinitelyPresented}$ definitions. No comparison with finite constant local models is required. The cohomology functors of [def-weil-abstract-derived-category] assign $H^i(K)$ to every derived object. Require $H^i(K)=0$ outside a finite interval and require each $H^i(K)$ to satisfy that predicate. The full subcategory on these objects retains all ambient derived morphisms. This gives the last table row without using the later bounded-constructible node as an input, and without altering the master target's constructibility predicate.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-finitely-presented-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/def-sfb-constructible-module.md",
+    "place": "Generic IsConstructible predicate, with def-sfb-locally-finitely-presented.md and def-sfb-finitely-presented-module.md; checked against /home/ubuntu/weil-newtargets-master/WeilConjectures/ConstructibleSheaf/ProEtaleModule/Def.lean:66–92 (reference definitions only)."
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-right-derived-functor",
-  "lem-sfb-grothendieck-k-injective",
-  "def-sfb-preserves-kflat-quasi-iso",
-  "def-sfb-left-derived-functor",
-  "def-sfb-right-derived-exact",
+  "def-sfb-constructible-module",
+  "def-sfb-finitely-presented-module",
   "def-sfb-left-derived-exact",
+  "def-sfb-left-derived-functor",
+  "def-sfb-locally-finitely-presented",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-right-derived-exact",
+  "def-sfb-right-derived-functor",
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-proetale-site",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-pc-right-fraction-representation",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-unbounded-kflat-resolution-existence",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-sheaf-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+  "place": "all five paragraphs; the adjunction roof/refinement proof makes the cofinality and naturality arguments explicit, using Stacks 070I, 05RT, 04VI and 04VJ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived categories, K-injective right derived functors, K-flat left derived functors and derived adjunctions",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory (8 hits; directory all Mathlib)",
+   "date": "2026-10-16",
+   "verdict": "partial matches: DerivedCategory and exact-functor descent, plus abstract derived adjunction; none covers all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit (3 hits; directory all Mathlib)",
+   "date": "2026-10-16",
+   "verdict": "partial match only: abstract derived adjunction requires absolute-derived hypotheses; does not state this compound definition and its K-flat/K-injective existence hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|KInjective|def derived|theorem derived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean (4 hits; directory CategoryTheory/Functor/Derived)",
+   "date": "2026-10-16",
+   "verdict": "partial match: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean lines 52 and 144 give abstract derived adjunction, not K-flat existence or coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive adjunction induces an adjunction between total left and right derived functors",
+   "results": "CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derivedη.congr_simp; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Functor.leftDerived; CategoryTheory.Functor.totalLeftDerived; CategoryTheory.Adjunction.left_adjoint_additive (8 hits; directory all Mathlib)",
+   "date": "2026-10-16",
+   "verdict": "partial match: Adjunction.derived and derived' are abstract localization theorems with additional absolute-derived hypotheses, not the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor between abelian categories preserves quasi-isomorphisms on K-flat complexes and admits a total left derived functor computed using flat resolutions",
+   "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.leftDerived (8 hits; directory all Mathlib)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state general monoidal K-flat resolution existence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesKFlatQuasiIso",
+   "results": " (0 hits; directory all Mathlib); loogle: unknown identifier 'CategoryTheory.Functor.PreservesKFlatQuasiIso'",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state general monoidal K-flat resolution existence"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|KInjective|HasKInjectiveResolutions",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean (25 hits; directory Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "partial match: K-injective Hom comparison exists; K-flat replacement and the coefficient categories are not stated by these declarations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -114,5 +334,91 @@
   "sk-def-sfb-bounded-constructible"
  ],
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-categories"
+ "unit": "sk-def-sfb-derived-categories",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-derived-categories",
+  "worker": "stage1",
+  "summary": "Repaired both returned points. Realized the full table proof paragraph: sheaf flat-resolution transfer, explicit free-abelian-group flat covers, commutative module flat-resolution transfer, and the resulting right/left derived existence under the exact stated hypotheses. Filled the existing unit realization fields. Corrected the constructibility predicate to the master target's arbitrary local finite-presentation definition, using the current generic nodes rather than finite constant scalar models. Retained the accepted abstract adjunction steps and the general K-flat existence node.",
+  "blueprint": "Steps 1–4 realize the convention and Right, Left, Exact paragraphs. Steps 5–9 realize Derived adjunctions by explicit roofs and common refinement. Steps 10–12 realize all assertions of The categories of the table, with the necessary commutativity qualification for module symmetric tensor. Step 13 defines the last row with the master target constructibility predicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom computation into K-injective complexes; no source-unit node states it."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic precomposition bijection for a quasi-isomorphism into a K-injective target, needed after applying f."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic fraction calculus for an abelian homotopy category, not a geometric route replacement."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "Generic representation of a derived morphism by a right roof."
+   },
+   {
+    "node": "lem-pc-right-fraction-common-refinement",
+    "why": "Generic equality criterion for roofs, used for injectivity."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic abelian-category and sheafification theorem for an essentially small site; required for the table to be typed."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Generic sheaf functorial flat-resolution transfer; the derived-categories unit needs it to realize its conditional table assertion."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Module flat resolutions under a commutative monoid and a base functorial flat resolution; this is the exact conditional statement used for layer B."
+   },
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "Flat coproducts of tensor-flat objects, used on direct sums of Z in the explicit Ab flat-cover functor."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Grothendieck structure for commutative module objects, needed to realize the unit table paragraph's right-derived existence claim."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness of left module objects when R tensor - preserves finite colimits; used in step 10 for arbitrary ring objects, where the commutative module theorem does not apply."
+   }
+  ],
+  "source_errors": [
+   {
+    "place": "Unit proof paragraph 5, final unqualified symmetric-monoidal and left-derived existence claims.",
+    "error": "Functorial flat resolutions for A-valued sheaves require them in A, as the preceding source sentence states. A symmetric relative tensor on left module objects requires a commutative ring; the table itself permits general ring objects. Without a right-module conversion two left M_2(Z)-modules have no specified relative tensor.",
+    "repair": "Keep the sheaf flat-resolution hypothesis; construct Ab flat covers explicitly and prove the full module flat/derived-existence assertions for commutative Lambda. Keep the ambient derived category for arbitrary rings."
+   },
+   {
+    "place": "Retained delivery, last table row and constructibility paragraph.",
+    "error": "Finite constant scalar local models were substituted for the master predicate. det-def-sfb-constructible-local-model only gives one implication and explicitly says the converse fails. Affine-local finite stratifications on arbitrary X are also not the global finite stratification in the master definition.",
+    "repair": "Use def-sfb-constructible-module, def-sfb-locally-finitely-presented, and def-sfb-finitely-presented-module verbatim, including the finite stratification on X and arbitrary finite-presentation morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read all 13 steps, both new nodes and every cited statement in full. Sources checked: the main-20261015 unit and proof (all five paragraphs), the first paragraph of def-sfb-left-derived-functor.proof.md, and sk-prop-sfb-module-category. Master reference definitions: I could not find the cited /home/ubuntu/weil-newtargets-master path on this machine, so I read the pure-upstream 19b471a7 copy; Def.lean:66-92 (IsLocallyFinitelyPresented, IsConstructibleModuleObject) and DerivedCategory.lean boundedConstructible agree with the step-13 row. I also read the archived target in Proper.lean, and slopmaster2 FlatResolution.lean:80-207, where the attached hasFunctorialFlatResolution_sheaf_of_essentiallySmall is sorry-free with matching hypotheses. Adjunction: I recomputed the chain-map and homotopy transposition formulas. Surjectivity holds: Q(b)=Q(ar)Q(r)^-1Q(s)^-1=Q(a)Q(s)^-1. Injectivity holds: common refinement with identity denominators, then K-flat replacement and K-injective cancellation. New node lem-sfb-unbounded-kflat-resolution-existence is true by stupid truncations plus exact Z-colimits plus the functorial reduced resolution. It is strictly more general than the existing closed lem-sfb-abstract-kflat-resolution, which the general monoidal clause cannot use, so it is not a duplicate and not a restated clause. New node lem-sfb-sheaf-functorial-flat-resolution I proved independently (free sheaves a(h_U⊗P(F(U))), left-exact and right-exact tensor). It differs from lem-weil-pbc-sheaf-flat-separator, which transfers flat separators instead. The constructibility predicate correction to the master's arbitrary local finite presentation is right, since det-def-sfb-constructible-local-model itself says the converse of local models fails. The commutativity qualification for layer B is right, and no target coefficient category or hypothesis changes. I accept the declared tool_uses: generic tools and Mathlib leaves, plus the sk-prop-sfb-module-category lemmas that the source paragraph itself cites. No cycle, no SGA source. Fix (C1/C4): step 12 applied the module nodes to Sh(X_proet,Ab) without citing its Grothendieck, closed, symmetric, additive structure. I added lem-weil-pbc-sheaf-tensor-closed and def-weil-pbc-proetale-site to that step's text and uses; proof_deps is unchanged and still the exact union of uses. The corrected item is in fixes/dag/nodes/sec-proetale-coefficients/sk-def-sfb-derived-categories.json; review.md has the per-step checks.; 1 file(s) fixed by the reviewer"
+ }
 }
