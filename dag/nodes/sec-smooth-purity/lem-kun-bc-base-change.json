@@ -209,5 +209,37 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-3b5c4ffc7 (reviewer sub-agent of L); spot-checked: Wrote review.md. Checked all four proof steps, five cited statements, master blueprint and Stacks 07A7/0E47/0D6D sources, coefficients, edge cases, reuse candidates, and dependency cycles. The source correction is justified; both generic tool_uses are accepted. No new nodes or repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KunBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.kun_bc_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Etale.kunBaseChangeRightMap",
+   "AlgebraicGeometry.Etale.kunBaseChangeTopMap",
+   "AlgebraicGeometry.Etale.kunBaseChangeComparisonSquare",
+   "AlgebraicGeometry.Etale.kunBaseChangedSquare",
+   "AlgebraicGeometry.Etale.kunBaseChangeSourceIso",
+   "AlgebraicGeometry.Etale.kunBaseChangeTargetIso",
+   "AlgebraicGeometry.Etale.kunBaseChangeLeft",
+   "AlgebraicGeometry.Etale.kunBaseChangeRight",
+   "AlgebraicGeometry.Etale.kun_bc_base_change",
+   "AlgebraicGeometry.Etale.kun_bc_base_change_cube",
+   "AlgebraicGeometry.Etale.kun_bc_base_change_identification"
+  ],
+  "file": "lean/Sheaf/Paper/KunBaseChange.lean",
+  "statement": "theorem kun_bc_base_change {X' X Y' Y Y'' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (u₀ : Y'' ⟶ Y') (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) : (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} ((IsPullback.of_hasPullback f' u₀).paste_horiz (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)).toCommSq).app K = (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} u₀ g).hom.app ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj K) ≫ (u₀)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) ≫ (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (IsPullback.of_hasPullback f' u₀).toCommSq).app ((g')^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.obj K) ≫ (pullback.snd f' u₀)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} (pullback.fst f' u₀) g').inv.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The three theorems state successive base change, the four-corner commutative diagram, and its conditional identification. The other declarations construct precisely the induced scheme arrows and the s, t, left and right comparison arrows of clause (2), using Mathlib pullbacks and the recorded derived inverse-image composition isomorphisms. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-589fb020b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source Remark 0E47, complete Lean module, report sections, edge cases, helper constructions, and duplicate searches. scompile.py local and server confirmation both passed; review.md records all checks. No fixes required."
  }
 }

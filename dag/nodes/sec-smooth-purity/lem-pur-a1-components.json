@@ -254,5 +254,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-d377be861 (reviewer sub-agent of L); spot-checked: Read the item, unit, all cited nodes, and cited sources in full. Verified all ten proof steps, hypotheses, relative-spectrum correction, component and fibre arguments, edge cases, duplicate searches, and DAG dependencies. No new nodes or repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PurityAffineLineComponents",
+  "declaration": "AlgebraicGeometry.affineLine_connectedComponents",
+  "statement": "theorem affineLine_connectedComponents (P : WeilConjectures.PurityFiniteSetting.{u}) {B : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) [Nonempty B] [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] {G : Scheme.{u}} (j : G ⟶ AffineSpace (ULift.{u} (Fin 1)) B) [IsOpenImmersion j] (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B).base)ᶜ) (i₁ : B ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) B) : (∀ x : AffineSpace (ULift.{u} (Fin 1)) B, connectedComponent x = (AffineSpace (ULift.{u} (Fin 1)) B ↘ B).base ⁻¹' connectedComponent ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B).base x)) ∧ (∀ x : G, connectedComponent x = (j ≫ (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).base ⁻¹' connectedComponent ((j ≫ (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).base x)) ∧ (∀ x : AffineSpace (ULift.{u} (Fin 1)) B, (connectedComponent x ∩ Set.range j.base).Nonempty) ∧ (∀ x : AffineSpace (ULift.{u} (Fin 1)) B, (connectedComponent x ∩ Set.range (AffineSpace.oneSection (ULift.{u} (Fin 1)) B).base).Nonempty) ∧ (∀ x : G, (connectedComponent x ∩ Set.range i₁.base).Nonempty)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/PurityAffineLineComponents.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-83ac13386",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Full statement and dependency review passed; per-file sandbox and library compilation succeeded with only the intentional sorry."
  }
 }
