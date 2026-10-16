@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-grothendieck-lefschetz-qbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Grothendieck–Lefschetz formula over $\\Qlb$",
@@ -27,14 +27,39 @@
  ],
  "proof": [
   {
-   "text": "Apply [thm-trf-trace-formula-e] to\n$K_E\\in D^b_{c,\\mathrm W}(X,E)$ with its Weil map $\\varphi_E$; that\ntheorem needs no integral Weil presentation and only the finite-level\nhypotheses assumed here. It gives finite-dimensional $E$-cohomology in\nfinitely many degrees, and the identity holds in $E$ for the\ncategorical traces and, by the supertrace law\n[prop-trf-trace-formal-laws], for the alternating sums of the\ntraces on compact-support and stalk cohomology. The object $K$ is\nrepresented by $K_E$, so the global cohomology and each local stalk\nare the scalar extensions along $E\\hookrightarrow\\Qlb$ of the\n$E$-level ones, and the traces are the images of the $E$-traces, by\nthe scalar-extension law of [prop-trf-trace-formal-laws] applied\nto the summand traces of [def-trf-karoubi-trace] (at the identity\nidempotent the summand trace is the ordinary categorical trace); hence\napplying the summand trace to both sides of the $E$-identity gives\nthe displayed identity after scalar extension $E\\hookrightarrow\\Qlb$.\nIndependence is [prop-trf-karoubi-independence].",
+   "text": "Apply [thm-trf-trace-formula-e] to the represented finite-stage pair $(E,K_E)$ and its morphism $\\varphi_E$. That theorem gives finite-dimensional $E$-cohomology in only finitely many degrees and the trace identity in $E$ for the $E$-stage Frobenius operators. By the supertrace-over-a-field clause of [prop-trf-trace-formal-laws], each categorical trace in that identity is the alternating sum of the ordinary traces on the corresponding cohomology groups.",
    "uses": [
     "thm-trf-trace-formula-e",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-grothendieck-lefschetz-qbar.proof.md",
+    "place": "first sentence through the supertrace-law sentence"
+   }
+  },
+  {
+   "text": "The displayed scalar-extension identifications in the statement apply to $P=R\\Gamma_c(X,K_E)$ with $v=F_{c,K_E}^{\\,m}$ and to $P=K_{E,\\bar y}$ with $v=F_{y,m}$. Put $\\rho:E\\hookrightarrow\\Qlb$. Since every short exact sequence of $E$-vector spaces splits, tensoring with $\\Qlb$ preserves kernels, images and their quotients; hence $H^r(P\\otimes_E\\Qlb)=H^r(P)\\otimes_E\\Qlb$, with induced operator $H^r(v)\\otimes_E1$. An $E$-basis of $H^r(P)$ becomes a $\\Qlb$-basis after extension, and the matrix of the induced operator is obtained by applying $\\rho$ entrywise. Thus the dimension and the vanishing degrees are preserved, and its ordinary trace is $\\sum_b\\rho(M_{bb})=\\rho(\\sum_b M_{bb})$, the image of the individual $E$-trace. This proves the finiteness and individual-trace assertions. For the categorical interpretation, [def-trf-karoubi-trace] with $e=1$ gives $\\operatorname{tr}_E(v\\circ1\\mid P)=\\operatorname{tr}_E(v\\mid P)$; its scalar extension is the categorical trace over $\\Qlb$ by [prop-trf-trace-formal-laws], and the supertrace clause of that proposition identifies it with the alternating cohomological trace over $\\Qlb$. Applying the additive map $\\rho$ to the finite sums in the $E$-identity of Step 1 therefore gives exactly the boxed identity.",
+   "uses": [
     "prop-trf-trace-formal-laws",
-    "def-trf-karoubi-trace",
+    "def-trf-karoubi-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-grothendieck-lefschetz-qbar.proof.md",
+    "place": "The object K is represented by K_E ... hence applying the summand trace ..."
+   }
+  },
+  {
+   "text": "Let $(F,L_F,\\varphi_F)$ be another finite-stage representative of the same Weil complex $(K,\\varphi)$ over $\\Qlb$, so that the compared Frobenius endomorphisms are compatible. By [prop-trf-karoubi-independence], after passage to a common finite coefficient overfield the two transported objects are isomorphic and the compatible Frobenius endomorphisms and their iterates have equal summand traces; its comparisons are transitive. Applying this assertion to the global and stalk operators in the trace identity proves independence of the finite coefficient field of definition and of the representative. Transitivity compares the two choices of common overfield after passing to a further common finite overfield, so the resulting $\\Qlb$-valued identity is independent of that choice as well.",
+   "uses": [
     "prop-trf-karoubi-independence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-grothendieck-lefschetz-qbar.proof.md",
+    "place": "Independence is [prop-trf-karoubi-independence]."
+   }
   }
  ],
  "proof_deps": [
@@ -44,13 +69,49 @@
   "prop-trf-karoubi-independence"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-grothendieck-lefschetz-qbar.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-grothendieck-lefschetz-qbar.proof.md",
+  "place": "proof paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz trace formula over algebraic closure Q_lbar scalar extension",
+   "results": "generic trace declarations such as LinearMap.trace_baseChange (Mathlib/LinearAlgebra/Trace.lean)",
+   "date": "2026-10-17",
+   "verdict": "no match: generic finite-free trace lemmas only; none states the Qlb compact-support Grothendieck-Lefschetz identity for Weil complexes (run by the worker; transcribed from the delivery report and the search-service log)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, Module.End, PowerSeries",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match (run by the worker; transcribed from the delivery report and the search-service log)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "trace formula after scalar extension to an algebraic closure",
+   "results": "generic trace results only",
+   "date": "2026-10-17",
+   "verdict": "no match: generic finite-free trace lemmas only; none states the Qlb compact-support Grothendieck-Lefschetz identity for Weil complexes (run by the worker; transcribed from the delivery report and the search-service log)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_baseChange",
+   "results": "1 hit: LinearMap.trace_baseChange, Mathlib/LinearAlgebra/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the ordinary finite-free trace under base change, which only corroborates the elementary calculation of Step 2 (run by the second reader; transcribed from the delivery report)"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.?Lefschetz|trace_globalOperator|Lefschetz.*trace in /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "0 hits; trace_baseChange found at Mathlib/LinearAlgebra/Trace.lean:378-384",
+   "date": "2026-10-17",
+   "verdict": "no match (run by the maintainer reader)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -95,5 +156,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport"
+ "unit": "sk-thm-trace-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-grothendieck-lefschetz-qbar",
+  "worker": "stage1",
+  "summary": "Checked the Qbar trace-formula item against the current blueprint and the finite-extension trace theorem. Expanded its imported proof into three steps: finite-stage identity and supertrace conversion, scalar extension and Karoubi trace interpretation, and representative independence. No new nodes were needed because every non-elementary ingredient is already stated by the four cited DAG nodes. Second reading made cohomology base change and individual-trace preservation explicit, corrected the categorical/ordinary trace distinction, and specified compatible Weil representatives and transitivity in the independence step.",
+  "blueprint": "The steps realize the current blueprint proof paragraph: applying thm-trf-trace-formula-e and prop-trf-trace-formal-laws; scalar extension of cohomology/stalk traces using prop-trf-trace-formal-laws and def-trf-karoubi-trace; and the final independence assertion from prop-trf-karoubi-independence."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-2dc550690",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-2dc550690 (reviewer sub-agent of L); spot-checked: I read the full item, which has no new nodes. The statement matches the main-20261015 (order 2743) and master (order 2399) blueprint text verbatim, and nothing is weakened. Coefficient categories are consistent and not silently identified: the raw rationalized D^b_c(X,E) is used in the item, thm-trf-trace-formula-e and prop-trf-rational-frobenius-integral-model; D^b_c(X,Qlb) is the common-stage C_X without Karoubi completion; RGamma_c and the stalks are scalar extensions, as def-weil-integral-rational-qbar-compact-support defines them. Step 1: thm-trf-trace-formula-e's hypotheses (arbitrary phi_E, a lattice, the finite-level etale-origin and admissibility hypotheses) are exactly the item's, and it gives finiteness and the E-identity of ordinary alternating traces. Step 2: the flat base change, extended basis and entrywise-rho argument proves the individual-trace descent; applying the additive rho over the finite point set gives the boxed identity. The categorical clause-(3) sentence follows the blueprint and does not carry the conclusion. Step 3: prop-trf-karoubi-independence states common-overfield isomorphism, equal traces of Frobenius iterates, transitivity and representative independence. Route: unit Step 4; sk-p-trace is on the transitive route; no tool_uses are declared or needed; no SGA source. No cycle; thm-weil-grothendieck-lefschetz-trace is a stronger citer, not a duplicate. Edge cases (empty X_0, K=0, diag(1,l) giving 1+l^m, the E[-d] sign) all check. Fix: the item's mathlib_searches was empty although its Lean state is none. I recorded the worker's and second reader's reported searches and my own Mathlib grep (0 hits; LinearMap.trace_baseChange at Trace.lean:378-384 only corroborates Step 2). Every other field is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,156 @@
+{
+ "id": "lem-coef-cocartesian-relative-cylinder-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; HTT Proposition 5.4.4.3, used in the pushout and two-out-of-three parts of Lemma 5.5.4.14 to express diagrams in an accessible functor category as filtered colimits of small compact diagrams. General tool: Filtered coherent sections and cofinal evaluation. Specific input: HTT 5.4.4.2, final paragraph: extend f′ from K′ to T(K′) after proving every K′ ×_X X_{/x} is small and filtered; use 4.3.2.13 and 4.3.1.11.",
+   "via": [
+    "lem-coef-filtered-cocartesian-section-cofinality",
+    "lem-coef-accessible-diagram-presentations",
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointwise colimits extend a lift across its relative mapping cylinder",
+ "statement": "Use coherent functors, quasicategories, simplicial pullbacks and colimits of [def-cbc-enhanced-diagrams-cones], cocartesian fibrations of [def-coef-infinity-fibrations], and relative joins of [def-coef-infinity-relative-join]. All the following objects fit in one fixed sufficiently large universe. Let $K,X,Y$ be quasicategories, let $a:K\\to X$ be a functor and $q:Y\\to X$ a cocartesian fibration. For an edge $e:z\\to z'$, a transport functor means a functor $e_!:Y_z\\to Y_{z'}$ equipped with a simplicial map $H:Y_z\\times\\Delta^1\\to Y$ over $e\\circ\\operatorname{pr}_{\\Delta^1}$ whose initial endpoint is the fiber inclusion, whose final endpoint is the fiber inclusion composed with $e_!$, and whose edge on each $\\{v\\}\\times\\Delta^1$ is $q$-cocartesian. Put $T_a=K\\star_X X$, where the second map to $X$ is its identity, and let $\\pi:T_a\\to X$ be its structural map. Thus a map $U\\to T_a$ consists of a map $\\epsilon:U\\to\\Delta^1$, a map $\\xi:U\\times_{\\Delta^1}\\{0\\}\\to K$, and a map $\\chi:U\\to X$ satisfying $\\chi|_{U\\times_{\\Delta^1}\\{0\\}}=a\\xi$; in particular $T_a$ contains its canonical copies of $K$ and $X$.\n\nFor $x\\in X$, let $X_{/x}$ be the slice of [lem-coef-infinity-slice-right-fibration]: its $n$-simplices are maps $\\Delta^{n+1}\\to X$ ending at $x$, with source projection the entire initial face. Put $L_x=K\\times_X X_{/x}$. Suppose that, for every pair of vertices $x,z\\in X$, the fiber $Y_z$ admits colimits of every diagram indexed by $L_x$, and that every edge transport $Y_z\\to Y_{z'}$ preserves these $L_x$-indexed colimits. Then every functor $f:K\\to Y$ with $qf=a$ has a simplicial extension $F:T_a\\to Y$ satisfying $F|_K=f$ and $qF=\\pi$ exactly. There is no filteredness hypothesis on $Y_z$ and no size bound on the fibers beyond the containing universe. Empty shapes $L_x$ require initial objects and their preservation.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 4.3.2.13 (existence along a full inclusion) and Corollary 4.3.1.11 (relative colimits from fiber colimits and preservation); the construction T(K) and its slice K ×_X X_{/x} in the proof of Lemma 5.4.4.2, printed pp. 432-433. Read online; not archived in literature/. No Stacks tag states this quasicategorical theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-coef-infinity-slice-right-fibration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative left Kan extensions into a cocartesian fibration exist if fibers admit the comma indexed colimits and transport preserves them",
+   "results": "{\"t\": \"2026-10-16T21:25:57Z\", \"tool\": \"leanfinder\", \"query\": \"Relative left Kan extensions into a cocartesian fibration exist if fibers admit the comma indexed colimits and transport preserves them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLeftKanExtension.nonempty_isUniversal\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.Functor.HasLeftKanExtension\", \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionOfCompTwoSquare\", \"CategoryTheory.Functor.instIsLeftKanExtensionObjLanAppLanUnit\"], \"digest\": \"599c05447874c202\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftKanExtension\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:25:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftKanExtension\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_hom\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_hom_assoc\", \"CategoryTheory.Functor.ι_colimitIsoOfIsLeftKanExtension_inv_assoc\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension_desc\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit\"], \"digest\": \"d0e8d847a67deed5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "KanExtension|[Cc]ocartesian|[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T21:25:55Z\", \"tool\": \"grep\", \"query\": \"KanExtension|[Cc]ocartesian|[Cc]olimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a lifted functor to its categorical mapping cylinder using pointwise colimits in cocartesian fibers",
+   "results": "{\"t\": \"2026-10-16T21:25:55Z\", \"tool\": \"leansearch\", \"query\": \"Extend a lifted functor to its categorical mapping cylinder using pointwise colimits in cocartesian fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.liftedColimitIsColimit\", \"CategoryTheory.liftColimit\", \"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.LiftsToColimit.makesColimit\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.LiftsToColimit.mk\"], \"digest\": \"b1618086850858bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from a quasicategory into a cocartesian family extends across the relative join with its base if comma shape colimits exist in all fibers",
+   "results": "{\"t\": \"2026-10-16T21:26:40Z\", \"tool\": \"leanfinder\", \"query\": \"A functor from a quasicategory into a cocartesian family extends across the relative join with its base if comma shape colimits exist in all fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\"], \"digest\": \"462fa3db8a5f2629\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasPointwiseLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T21:26:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasPointwiseLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtensionAt_iff_of_iso\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.hasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.hasPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtension.of_iso\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtension_iff_of_iso\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtensionAt.of_natIso\"], \"digest\": \"b4fcbe496e5a3246\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "HasPointwiseLeftKanExtension|leftKanExtensionIsoFiberwiseColimit",
+   "results": "{\"t\": \"2026-10-16T21:26:41Z\", \"tool\": \"grep\", \"query\": \"HasPointwiseLeftKanExtension|leftKanExtensionIsoFiberwiseColimit\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\"], \"digest\": \"1b4eea737a140b7e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and the pinned source. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 and Functor/KanExtension/Pointwise.lean:40-51 assume ordinary categories with Hom sets. Quasicategory/Basic.lean:33-57 only supplies inner-horn filling and Quasicategory/StrictBicategory.lean:47-72 supplies a bicategory. Neither the ordinary results nor horn filling alone states this coherent, relative assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:54:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. Loogle and quasicategory grep return no colimit theorem; LeanFinder returns ordinary CategoryTheory Kan extensions/cocartesian arrows, simplicial Quillen horn fibrations, or strict Segal coskeletal extensions. Their displayed signatures do not cover filtered quasicategorical fibers, or relative colimit existence for arbitrary coherent diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial inner fibration filtered fibers relative cocone extension",
+   "results": "{\"t\": \"2026-10-16T21:54:50Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial inner fibration filtered fibers relative cocone extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\"], \"digest\": \"7217c9039150188b\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. Loogle and quasicategory grep return no colimit theorem; LeanFinder returns ordinary CategoryTheory Kan extensions/cocartesian arrows, simplicial Quillen horn fibrations, or strict Segal coskeletal extensions. Their displayed signatures do not cover filtered quasicategorical fibers, or relative colimit existence for arbitrary coherent diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian fibration filtered quasicategory fiber extension of diagrams to right cones",
+   "results": "{\"t\": \"2026-10-16T21:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian fibration filtered quasicategory fiber extension of diagrams to right cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.RightExtension.coneAt\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"SSet.StrictSegal.isPointwiseRightKanExtension\"], \"digest\": \"386b86fcf9e390fe\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. Loogle and quasicategory grep return no colimit theorem; LeanFinder returns ordinary CategoryTheory Kan extensions/cocartesian arrows, simplicial Quillen horn fibrations, or strict Segal coskeletal extensions. Their displayed signatures do not cover filtered quasicategorical fibers, or relative colimit existence for arbitrary coherent diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory pointwise left Kan extension existence along a full simplicial subset",
+   "results": "{\"t\": \"2026-10-16T21:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory pointwise left Kan extension existence along a full simplicial subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.hasPointwiseLeftKanExtensionAt_iff\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.TwoSquare.hasPointwiseLeftKanExtension\", \"CategoryTheory.TwoSquare.hasPointwiseLeftKanExtension_iff\", \"SSet.Quasicategory.hornFilling\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\"], \"digest\": \"fa9a0bc60399d843\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. Loogle and quasicategory grep return no colimit theorem; LeanFinder returns ordinary CategoryTheory Kan extensions/cocartesian arrows, simplicial Quillen horn fibrations, or strict Segal coskeletal extensions. Their displayed signatures do not cover filtered quasicategorical fibers, or relative colimit existence for arbitrary coherent diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|final|KanExtension|cocartesian",
+   "results": "{\"t\": \"2026-10-16T23:03:42Z\", \"tool\": \"grep\", \"query\": \"filtered|final|KanExtension|cocartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"KanExtension\"",
+   "results": "{\"t\": \"2026-10-16T23:03:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"KanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of a simplicial diagram to a cone through an inner fibration whose fibers are filtered infinity categories",
+   "results": "{\"t\": \"2026-10-16T23:03:45Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of a simplicial diagram to a cone through an inner fibration whose fibers are filtered infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"3dfdf3b21115cedc\"}",
+   "date": "2026-10-16",
+   "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise colimits in fibers preserved by pushforward construct a relative left Kan extension into a cocartesian infinity category",
+   "results": "{\"t\": \"2026-10-16T23:03:45Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise colimits in fibers preserved by pushforward construct a relative left Kan extension into a cocartesian infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\"], \"digest\": \"e539b6e5939e19cb\"}",
+   "date": "2026-10-16",
+   "verdict": "Fresh independent second reading: no match. The quasicategory grep and Loogle return no hits. LeanFinder returns ordinary CategoryTheory pointwise Kan extensions, whose Category instances require Hom sets, and strict-Segal coskeletal extension of a simplicial set from its 2-truncation. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:40-51, FiberedCategory/Cocartesian.lean:43-78 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:35-89. None states a cone lift through arbitrary cocartesian quasicategorical fibers or the prescribed-base relative-cylinder extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-filtered-cocartesian-section-cofinality",
+  "date": "2026-10-17",
+  "group": "N1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

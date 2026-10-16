@@ -1,83 +1,266 @@
 {
-  "id": "lem-kun-0eys",
-  "blueprint": {
-    "is": "lem-kun-0eys",
-    "from": null,
-    "same_as": null
+ "id": "lem-kun-0eys",
+ "blueprint": {
+  "is": "lem-kun-0eys",
+  "from": null,
+  "same_as": [
+   "sbc-lem-degree-zero-flat-base-change"
+  ]
+ },
+ "kind": "statement",
+ "title": "Base change under flat finitely presented morphisms with geometrically reduced fibres",
+ "statement": "Consider a Cartesian square of schemes [def-weil-pbc-cartesian-square]\n\\[\n\\begin{array}{ccc}\nX&\\xleftarrow{h}&Y\\\\\nf\\downarrow&&\\downarrow e\\\\\nS&\\xleftarrow{g}&T\n\\end{array}\n\\qquad Y\\cong X\\times_S T.\n\\]\nAssume that $f$ is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and each scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre] is geometrically reduced over $\\kappa(s)$ [def-pc-geometrically-irreducible]. For every abelian sheaf $F$ on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], the canonical base-change morphism\n\\[\n\\beta_F:f^{-1}g_*F\\longrightarrow h_*e^{-1}F\n\\]\nis an isomorphism. Here inverse and direct images are those of [def-weil-pbc-inverse-image] and [def-weil-pbc-direct-image]. The morphism is the underived exchange [def-weil-pbc-underived-exchange] on the square with the horizontal and vertical sides exchanged: it is the adjoint under $h^{-1}\\dashv h_*$ of $h^{-1}f^{-1}g_*F\\cong e^{-1}g^{-1}g_*F\\xrightarrow{e^{-1}\\varepsilon_g}e^{-1}F$. There is no restriction on $g$ and no torsion hypothesis on $F$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0eys.md",
+  "place": "node lem-kun-0eys, order 1760",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EYS"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EZX"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A3H"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EY5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Let $U_Z$ denote passage from abelian sheaves on $Z_{\\Et}$ to sheaves of sets. By clauses (2)--(3) of [lem-weil-pbc-etale-inverse-image-algebraic-structures], for each edge $u$ the identifications $Uu^{-1}\\cong u^{-1}U$ and $Uu_*=u_*U$ preserve the adjunction bijections and units. They also preserve counits: a counit is the adjoint of the identity, and the adjunction bijections agree. The abelian inverse-image composition comparison $c_{u,v}$ is the unique isomorphism carrying the unit of the composite adjunction to the unit of the composite, transported along the fibre-product identification of direct images, by clause (2) of [lem-weil-pbc-inverse-image-composition]; the set-valued one is the unique morphism with the same property on sections, by clause (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Since forgetting preserves the units and the direct-image identifications, the forgotten abelian $c_{u,v}$ has the set-valued property, so it is the set-valued comparison by that uniqueness. The specified square isomorphism of the Cartesian square is $\\theta=c_{g,e}^{-1}\\circ c_{f,h}$ after $f\\circ h=g\\circ e$, by the description of $\\theta_\\square$ in [lem-weil-pbc-square-iso-pasting] (with its $f,g,f',g'$ equal to the present $g,f,h,e$); hence the canonical square comparison is preserved too. Therefore the underlying set morphism of $\\beta_F$ is the set-valued canonical base-change morphism for $U_TF$. Indeed, under $h^{-1}\\dashv h_*$ its transpose is exactly $h^{-1}f^{-1}g_*U_TF\\cong e^{-1}g^{-1}g_*U_TF\\xrightarrow{e^{-1}\\varepsilon_g}e^{-1}U_TF$, the defining transpose of [def-weil-pbc-underived-exchange]. Uniqueness of adjoint transposes gives equality of these arrows. This checks the canonical map as well as its source and target.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-square-iso-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian groups; Tag 03CB, lemma-composition-morphisms-sites; adjoint-transpose identification written out here"
+   }
   },
-  "kind": "statement",
-  "title": "Base change under flat finitely presented morphisms with geometrically reduced fibres",
-  "statement": "Consider a\ncartesian square of schemes\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nwhere $f$ is flat and locally of finite presentation with\ngeometrically reduced fibres. Then the canonical base-change\nmorphism $f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism for every\nabelian sheaf $F$ on $T_{\\Et}$, and the statement of the Stacks tag,\nwhich is for sheaves of sets, is used here only in this case.\nThis is the Stacks tag\n[0EYS](https://stacks.math.columbia.edu/tag/0EYS) (Etale\nCohomology, Lemma 59.87.2). In the Stacks Project the proof combines Lemma 59.87.1,\n[Tag `0EZX`](https://stacks.math.columbia.edu/tag/0EZX)\n(base change for a flat morphism which etale-locally factors through a\nmorphism with geometrically connected fibres, by the description of\nsections over such a cover, Lemma 59.39.3,\n[Tag `0A3H`](https://stacks.math.columbia.edu/tag/0A3H)) with\nMore on Morphisms, Lemma 37.46.3,\n[Tag `0EY5`](https://stacks.math.columbia.edu/tag/0EY5) (the\nlocal factorization for flat finitely presented morphisms with\ngeometrically reduced fibres).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0eys.md",
-    "place": "node lem-kun-0eys, order 1760",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0EYS"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0EZX"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A3H"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0EY5"
-      }
-    ]
+  {
+   "text": "To compare the two adjunction descriptions explicitly, put $G=U_TF$, $L_u=u^{-1}$ and $R_u=u_*$ for set sheaves, and identify $R_fR_h=R_gR_e$ by the canonical fibre-product identifications. Put $A=R_gG$, $B=L_eG$ and $\\alpha:L_hL_f\\cong L_eL_g$ as in Step 1. Let $m:L_fA\\to R_hB$ be the underlying arrow of $\\beta_F$; thus $m=R_h(L_e\\varepsilon_{g,G}\\circ\\alpha_A)\\circ\\eta_{h,L_fA}$. The composite-unit characterization in [lem-weil-pbc-sets-etale-inverse-image-composition-units] gives\n\\[\nR_fR_h(\\alpha_A)\\circ R_f(\\eta_{h,L_fA})\\circ\\eta_{f,A}\n=R_g(\\eta_{e,L_gA})\\circ\\eta_{g,A}.\n\\]\nIndeed both sides are the unit for $f\\circ h=g\\circ e$ after the indicated composition comparisons; clause (1) specifies their values on every section of $A$. Therefore the $L_f\\dashv R_f$ transpose of $m$ is\n\\[\n\\begin{aligned}\nR_f(m)\\circ\\eta_{f,A}\n&=R_gR_e(L_e\\varepsilon_{g,G})\\circ R_g(\\eta_{e,L_gA})\\circ\\eta_{g,A}\\\\\n&=R_g(\\eta_{e,G})\\circ R_g(\\varepsilon_{g,G})\\circ\\eta_{g,R_gG}\\\\\n&=R_g(\\eta_{e,G}).\n\\end{aligned}\n\\]\nThe second equality is naturality of $\\eta_e$ applied to $\\varepsilon_{g,G}$; the third is the $L_g\\dashv R_g$ triangle identity. This is precisely the transpose defining the canonical arrow in [sbc-lem-degree-zero-flat-base-change], so uniqueness of adjoint transposes identifies its arrow with $m$. Apply [sbc-lem-degree-zero-flat-base-change] to the underlying sheaf of sets $U_TF$ and the given Cartesian square. Its hypotheses are exactly flatness and local finite presentation of $f$ and geometric reducedness of every fibre; no condition on $g$ is required. Its conclusion says that the canonical set-valued arrow $f^{-1}g_*U_TF\\to h_*e^{-1}U_TF$ is an isomorphism. The preceding calculation identifies this with the underlying arrow of $\\beta_F$, so its map on sections over every object of $X_{\\Et}$ is bijective.",
+   "uses": [
+    "sbc-lem-degree-zero-flat-base-change",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star; its 0EZX/0EY5 proof is already realized by sbc-lem-degree-zero-flat-base-change"
+   }
   },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1760,
-  "blueprint_uses": [
-    "def-weil-pbc-cartesian-square"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-cartesian-square"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Lemma 59.87.2 ([Tag 0EYS](https://stacks.math.columbia.edu/tag/0EYS)): base change holds for a flat morphism which is locally of finite presentation with geometrically reduced fibres, in the sheaf-of-sets statement of that tag, used here only in the abelian case. In the Stacks Project the proof combines Lemma 59.87.1 ([Tag 0EZX](https://stacks.math.columbia.edu/tag/0EZX)) with More on Morphisms, Lemma 37.46.3 ([Tag 0EY5](https://stacks.math.columbia.edu/tag/0EY5)). No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Lemma 59.87.2 ([Tag 0EYS](https://stacks.math.columbia.edu/tag/0EYS)): base change holds for a flat morphism which is locally of finite presentation with geometrically reduced fibres, in the sheaf-of-sets statement of that tag, used here only in the abelian case. In the Stacks Project the proof combines Lemma 59.87.1 ([Tag 0EZX](https://stacks.math.columbia.edu/tag/0EZX)) with More on Morphisms, Lemma 37.46.3 ([Tag 0EY5](https://stacks.math.columbia.edu/tag/0EY5)). No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Consider a\ncartesian square of schemes\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nwhere $f$ is flat and locally of finite presentation with\ngeometrically reduced fibres. Then the canonical base-change\nmorphism $f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism for every\nabelian sheaf $F$ on $T_{\\Et}$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For each etale object $V\\to X$ let $a_V$ be the inverse of the bijective group homomorphism $\\beta_F(V)$. It is additive: if $x,y$ have preimages $x',y'$, then $\\beta_F(V)(x'+y')=x+y$, so uniqueness of preimages gives $a_V(x+y)=a_V(x)+a_V(y)$; and $\\beta_F(V)(0)=0$ forces $a_V(0)=0$. For an etale-site arrow $W\\to V$, let $r_P,r_Q$ be the restriction maps of the source and target sheaves. Naturality of $\\beta_F$ gives $\\beta_F(W)r_Pa_V=r_Q\\beta_F(V)a_V=r_Q=\\beta_F(W)a_Wr_Q$. Injectivity of $\\beta_F(W)$ gives $r_Pa_V=a_Wr_Q$, the required naturality. Thus the $a_V$ form a morphism of abelian sheaves, since these are natural transformations of the underlying abelian presheaves [def-weil-pbc-abelian-etale-sheaves]. Objectwise the two composites with $\\beta_F$ are identities. Consequently $\\beta_F$ is an isomorphism of abelian sheaves.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, abelian-group structures; elementary reflection of isomorphisms expanded from the definition of abelian sheaves"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-square-iso-pasting",
+  "sbc-lem-degree-zero-flat-base-change",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYS, lemma-fppf-reduced-fibres-base-change-f-star, reused through its existing stronger set-valued node; transfer to abelian sheaves from sites.tex Tag 00YV, with canonical-arrow compatibility written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change for flat locally finitely presented morphism geometrically reduced fibers etale sheaves",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "baseChangeMap, GeometricallyReduced, Flat, LocallyOfFinitePresentation",
+   "results": "0 hits: none; loogle: unknown identifier 'baseChangeMap'",
+   "date": "2026-10-16",
+   "verdict": "query error; no absence inference; superseded by valid quoted-name search"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically reduced fibres|isIso_baseChangeMap_app_of_flat",
+   "results": "0 hits: none; wrong subdirectory supplied (the wrapper appends it below Mathlib/); not used as absence evidence; superseded by the AlgebraicGeometry/Sites search",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; no absence inference"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaf base change isomorphism for a flat locally finitely presented morphism with geometrically reduced fibres",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, Algebra.Etale.baseChange, RingHom.Flat.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, RingHom.Etale.isStableUnderBaseChange, Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism f inverse image g star F to h star e inverse image F for flat locally finite presentation geometrically reduced fibres",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (baseChangeMap _ _).app",
+   "results": "0 hits: none; loogle: Unknown identifier `IsIso`",
+   "date": "2026-10-16",
+   "verdict": "query error; no absence inference; superseded by valid quoted-name search"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMap.*GeometricallyReduced|isIso_baseChangeMap_app_of_flat",
+   "results": "0 hits: none; wrong subdirectory supplied (the wrapper appends it below Mathlib/); not used as absence evidence; superseded by the AlgebraicGeometry/Sites search",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; no absence inference"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "12 hits: Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|GeometricallyReduced",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|beckChevalley|BeckChevalley",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean",
+   "date": "2026-10-16",
+   "verdict": "coverage stability and site infrastructure only; no match to the geometric exchange theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley base change morphism sheaves inverse image pushforward natural isomorphism",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "generic sheaf pullback and composition ingredients only; no flat geometrically reduced etale base-change theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1760,
+ "blueprint_uses": [
+  "def-weil-pbc-cartesian-square"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-cartesian-square"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Lemma 59.87.2 ([Tag 0EYS](https://stacks.math.columbia.edu/tag/0EYS)): base change holds for a flat morphism which is locally of finite presentation with geometrically reduced fibres, in the sheaf-of-sets statement of that tag, used here only in the abelian case. In the Stacks Project the proof combines Lemma 59.87.1 ([Tag 0EZX](https://stacks.math.columbia.edu/tag/0EZX)) with More on Morphisms, Lemma 37.46.3 ([Tag 0EY5](https://stacks.math.columbia.edu/tag/0EY5)). No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Lemma 59.87.2 ([Tag 0EYS](https://stacks.math.columbia.edu/tag/0EYS)): base change holds for a flat morphism which is locally of finite presentation with geometrically reduced fibres, in the sheaf-of-sets statement of that tag, used here only in the abelian case. In the Stacks Project the proof combines Lemma 59.87.1 ([Tag 0EZX](https://stacks.math.columbia.edu/tag/0EZX)) with More on Morphisms, Lemma 37.46.3 ([Tag 0EY5](https://stacks.math.columbia.edu/tag/0EY5)). No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Consider a\ncartesian square of schemes\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nwhere $f$ is flat and locally of finite presentation with\ngeometrically reduced fibres. Then the canonical base-change\nmorphism $f^{-1}g_*F\\to h_*e^{-1}F$ is an isomorphism for every\nabelian sheaf $F$ on $T_{\\Et}$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-0eys",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger set-valued degree-zero base-change theorem, supplied the adjunction-compatible comparison to the actual abelian exchange arrow, and wrote out elementary reflection of isomorphisms. Added missing notion dependencies and reciprocal blueprint same_as. No new nodes; no change to mathematical hypotheses or conclusion. The project Lean theorem uses a sorry helper and is not an attachment. Second reading expands the comparison of the two adjunction descriptions and the naturality of the sectionwise inverse. Maintainer reader: step 1 now cites the abelian composition characterization and the explicit description of the square isomorphism it uses.",
+  "blueprint": "Realizes the sole proof paragraph of lem-kun-0eys.proof.md in main-20261015: the 0EYS set-valued input and its 0EZX/0EY5 route are reused from the existing sbc node; the restriction to abelian sheaves is justified explicitly.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-degree-zero-flat-base-change",
+    "why": "Existing arbitrary-set 0EYS theorem, exactly the generic classical input named by this blueprint proof; same f hypotheses and canonical map, reused rather than duplicated. Its existing proof realizes the prescribed 0EZX and 0EY5 route. No same-unit node other than this item supplies that input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic comparison of set and abelian inverse/direct images and their adjunctions, needed to specialize the prescribed set-valued input without changing the canonical arrow; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic unit characterization of inverse-image composition identifies the square comparisons under forgetting; no same-unit node states this coherence fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic unit characterization of the abelian inverse-image composition isomorphism, needed to compare it with the set-valued one under forgetting; no same-unit node states it (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-weil-pbc-square-iso-pasting",
+    "why": "Explicit description theta = c^{-1} c of the specified square isomorphism used in the underived exchange; no same-unit node states it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-degree-zero-flat-base-change",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-square-iso-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-6fff0cb8b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-6fff0cb8b (reviewer sub-agent of L); spot-checked: I read the item, its main-20261015 statement and proof, the unit and chapter records, Stacks 0EYS (etale-cohomology.tex l.16664, lemma-fppf-reduced-fibres-base-change-f-star), 0EZX (l.16610) and 0EY5 (more-morphisms.tex l.13258), and the full statements of every cited node. The statement matches the blueprint_update and Stacks: the square has the same orientation; f is flat, locally of finite presentation, with geometrically reduced fibres; there is no condition on g; F is any sheaf in Ab(T_et). I substituted the present square into def-weil-pbc-underived-exchange (its f,g,f',g' are the present g,f,h,e) and it gives exactly f^{-1}g_*F -> h_*e^{-1}F. Step 2 is correct: I recomputed it (composite-unit identity, naturality of eta_e, triangle identity), and the result R_g(eta_e) is the transpose that defines the map in sbc-lem-degree-zero-flat-base-change, whose hypotheses match one for one. Step 3 is genuinely elementary. There are no new nodes and no duplicates (sbc is the stronger set-valued result and is cited, not restated), and no cycle. Small cases checked: f=id, g=id, F=0, X empty, disconnected separable fibres. Repair, C4/C1 in step 1: it used without citation that the abelian composition isomorphisms are characterized by units, and that theta_square = c_{g,e}^{-1} c_{f,h}. I added citations of lem-weil-pbc-inverse-image-composition clause (2) and lem-weil-pbc-square-iso-pasting, wrote out the uniqueness argument comparing the two, updated proof_deps, and added both nodes to split_report.tool_uses. I accept all five tool uses: sbc is the 0EYS input the blueprint itself prescribes, and the others are generic coherence lemmas. No SGA source is used. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-kun-0eys.json; review.md has the full checks.; 1 file(s) fixed by the reviewer"
+ }
 }
