@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-dc-proper-pushforward-left-adjoint-qlbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$Rp_*$ on $D_{\\mathrm{cons}}(-,\\Qlb)$ is a left adjoint for proper $p$",
@@ -14,30 +14,177 @@
  },
  "stmt_deps": [
   "sk-def-sfb-qlbar-condensed",
-  "def-sfb-dc-lower-star"
+  "def-sfb-dc-lower-star",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
-   "text": "Every bounded constructible $\\Qlb$-complex, and every morphism between two such complexes, is\ndefined over some finite extension $E\\subseteq\\Qlb$ of $\\mathbf Q_\\ell$\n([sk-thm-sfb-qlbar-two-colimit]). The right adjoints\n$Rp^!_E$ of [lem-sfb-dc-proper-pushforward-left-adjoint-e] are compatible with the extensions of\nscalars $\\underline F\\otimes^{\\mathrm L}_{\\underline E}-$ for $E\\subseteq F$ (both are computed\nfrom the same torsion levels). So they define a right adjoint of $Rp_*$ on\n$D_{\\mathrm{cons}}(-,\\underline{\\Qlb})$.",
+   "text": "Write $C_T(E)=D_{\\mathrm{cons}}(T,\\underline E)$, $C_T(\\Qlb)=D_{\\mathrm{cons}}(T,\\underline{\\Qlb})$, and $P_E=Rp_*$, $P=Rp_*$. For each finite subextension $E\\subset\\Qlb$, [lem-sfb-dc-proper-pushforward-left-adjoint-e] gives $P_E\\dashv G_E$ with counit $\\epsilon_E:P_EG_E\\to\\mathrm{Id}$. These are adjunctions on the full bounded constructible categories, not adjunctions on all unbounded pro-étale complexes. By [sk-thm-sfb-qlbar-two-colimit] (4), the rational categories here are also $\\Dctf=\\Dbc$, their objects descend to finite subextensions, and their Hom sets are the stated filtered colimits. The standing setting in both applications is the one fixed in [sk-def-sfb-dc-setting].",
+   "uses": [
+    "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+    "sk-thm-sfb-qlbar-two-colimit",
+    "sk-def-sfb-dc-setting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, first sentence: descent to a finite extension; finite-field adjoints in the second sentence"
+   }
+  },
+  {
+   "text": "For $E\\subset F\\subset\\Qlb$ finite, write $T^T_{EF}$ for scalar extension on $T$, and $T^T_{E\\infty}$ for extension to $\\Qlb$. The direct-image comparisons of [det-prop-scalar-six-direct-image] give natural isomorphisms\n$$q_{EF}:T^Y_{EF}P_E\\xrightarrow{\\sim}P_FT^Z_{EF},\\qquad q_{E\\infty}:T^Y_{E\\infty}P_E\\xrightarrow{\\sim}PT^Z_{E\\infty}.$$\nUse exactly the unit-pullback-counit maps displayed in that theorem. Write $c_{EF}:p_F^*T^Y_{EF}\\xrightarrow{\\sim}T^Z_{EF}p_E^*$ for the inverse of the pullback identification of [det-prop-scalar-six-pullback] (1), and $d_E:p_E^*P_E\\to\\mathrm{Id}$ for the ordinary pullback-pushforward counit. The defining transpose equation is\n$$d_{F,T^Z_{EF}M}\\circ p_F^*(q_{EF,M})=T^Z_{EF}(d_{E,M})\\circ c_{EF,P_EM}.$$\nTensor associativity, [def-sfb-derived-extend-comp-iso], and clause (3) of the pullback theorem give $c_{EU}=T^Z_{FU}(c_{EF})\\circ c_{FU,T^Y_{EF}(-)}$ for $E\\subset F\\subset U$, where $U$ is finite or $\\Qlb$. To transpose $q_{FU,T^Z_{EF}M}\\circ T^Y_{FU}(q_{EF,M})$ under $p_U^*\\dashv P_U$, first use the displayed equation for $F\\to U$. Naturality of $c_{FU}$ then moves $p_U^*T^Y_{FU}(q_{EF,M})$ past $c_{FU}$, and the equation for $E\\to F$ gives\n$$T^Z_{FU}\\bigl(T^Z_{EF}(d_{E,M})\\circ c_{EF,P_EM}\\bigr)\\circ c_{FU,T^Y_{EF}P_EM}=T^Z_{EU}(d_{E,M})\\circ c_{EU,P_EM}.$$\nThis is the transpose of $q_{EU,M}$, so injectivity of adjunction transposition proves\n$$q_{EU,M}=q_{FU,T^Z_{EF}M}\\circ T^Y_{FU}(q_{EF,M}).$$\nThus coefficient transitivity is proved for the actual direct-image maps we use, including finite-to-finite transitions.",
+   "uses": [
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback",
+    "def-sfb-derived-extend-comp-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, second sentence: coefficient compatibility of the direct images needed to descend the adjunction"
+   }
+  },
+  {
+   "text": "For finite $E\\subset F$, the counit-transpose comparison\n$$\\beta_{EF,L}:T^Z_{EF}G_E L\\longrightarrow G_FT^Y_{EF}L$$\nis an isomorphism. Here one uses the existing exceptional coefficient-comparison theorem [det-prop-scalar-six-exceptional] only for $E\\to F$, never for $E\\to\\Qlb$. Its functors are the exceptional right adjoints of $Rp_!$. For proper $p$, clauses (1) and (2) of [det-cor-existence-ii-restriction], applied only at the finite fields $E,F$, identify $Rp_!$ with $P_E,P_F$ and restrict those adjunctions to $\\Dctf=C(-)$. The compact-support scalar comparison agrees with $q_{EF}$ under this proper identification: by [det-prop-scalar-six-compact-support] it is independent of the compactification, so compute it with $Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{p}Y$, where its displayed formula is exactly the direct-image comparison (extension by zero along the identity is the identity). The comparison transfers to our chosen $G_E,G_F$ by [det-sp-unique-adjoint-coefficients]: its formula conjugates the exceptional comparison by the counit-compatible isomorphisms of right adjoints. In particular the comparison used here satisfies exactly\n$$\\epsilon_{F,T^Y_{EF}L}\\circ P_F(\\beta_{EF,L})=T^Y_{EF}(\\epsilon_{E,L})\\circ q_{EF,G_E L}^{-1}.$$\nThis identity is its defining transpose, so it includes the counit compatibility needed below. No compatibility with unspecified torsion-level constructions is assumed.",
+   "uses": [
+    "det-prop-scalar-six-exceptional",
+    "det-cor-existence-ii-restriction",
+    "det-prop-scalar-six-compact-support",
+    "det-sp-unique-adjoint-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, second sentence: the missing finite-extension compatibility of the chosen right adjoints"
+   }
+  },
+  {
+   "text": "Fix $L\\in C_Y(\\Qlb)$. By object descent in [sk-thm-sfb-qlbar-two-colimit], choose a finite $E$ and $L_E\\in C_Y(E)$ with $a:T^Y_{E\\infty}L_E\\xrightarrow{\\sim}L$. Put\n$$R_L=T^Z_{E\\infty}(G_E L_E),\\qquad e_L=a\\circ T^Y_{E\\infty}(\\epsilon_{E,L_E})\\circ q_{E\\infty,G_E L_E}^{-1}:P R_L\\to L.$$\nThe scalar-extension cocone in that theorem takes bounded constructible objects to bounded constructible objects, so $R_L\\in C_Z(\\Qlb)$. The direct-image comparison from [det-prop-scalar-six-direct-image] makes $e_L$ a morphism with precisely the displayed source and target. We will prove that this particular pair is universal, so no independence-of-model assertion is being presumed.",
    "uses": [
     "sk-thm-sfb-qlbar-two-colimit",
-    "lem-sfb-dc-proper-pushforward-left-adjoint-e"
+    "det-prop-scalar-six-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, last sentence: construct the candidate right-adjoint object and counit"
+   }
+  },
+  {
+   "text": "For $K\\in C_Z(\\Qlb)$ choose a finite field of definition $H$ and a model $K_H$, and identify $K=(K_H)_{\\Qlb}$ through a chosen isomorphism. Choose a finite subextension $B$ containing $E$ and $H$ (the finite subextensions are directed by [sk-def-sfb-qlbar-condensed]). Keep $E,L_E$ fixed, put $A=G_E L_E$, and for $F\\supset B$ write $K_F=T^Z_{HF}K_H$, $A_F=T^Z_{EF}A$, and $L_F=T^Y_{EF}L_E$. For each such finite $F$, consider\n$$b_F:\\Hom_{C_Z(F)}(K_F,(G_E L_E)_F)\\longrightarrow\\Hom_{C_Y(F)}(P_FK_F,(L_E)_F),$$\n$$b_F(g)=(\\epsilon_{E,L_E})_F\\circ q_{EF,G_E L_E}^{-1}\\circ P_F(g).$$\nBy the counit identity in step 3 this is\n$$g\\longmapsto\\epsilon_{F,(L_E)_F}\\circ P_F(\\beta_{EF,L_E}\\circ g).$$\nPostcomposition with the isomorphism $\\beta_{EF,L_E}$ is bijective, and $P_F\\dashv G_F$ gives a bijection from the resulting Hom set to the target. Hence $b_F$ is bijective. Here $K_F$ is arbitrary: no assumption that every $F$-object descends to the fixed field $E$ is made. The adjunction and the comparison isomorphism used in this calculation are precisely [lem-sfb-dc-proper-pushforward-left-adjoint-e] and [det-prop-scalar-six-exceptional], with the transfer justified in step 3.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "sk-def-sfb-qlbar-condensed",
+    "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+    "det-prop-scalar-six-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, last sentence: finite-stage Hom adjunctions after passing to a common coefficient field"
+   }
+  },
+  {
+   "text": "We now specify the Hom transition maps and the identifications used with [sk-thm-sfb-qlbar-two-colimit]. Put\n$$S_F=\\Hom_{C_Z(F)}(K_F,A_F),\\qquad V_F=\\Hom_{C_Y(F)}(P_FK_F,L_F).$$\nFor $B\\subset F\\subset F'$ the transition on $S_F$ is $g\\mapsto T^Z_{FF'}g$, whereas on $V_F$ it is\n$$h\\longmapsto T^Y_{FF'}h\\circ q_{FF',K_F}^{-1}.$$\nThese are directed systems by step 2. In fact $h\\mapsto h\\circ q_{BF,K_B}$ identifies $V_F$ with the standard Hom set between the scalar extensions of $P_BK_B$ and $L_B$: compatibility of these identifications with transitions is exactly $q_{BF'}=q_{FF'}\\circ T^Y_{FF'}q_{BF}$. The two-colimit theorem therefore gives\n$$\\varinjlim_{F\\supset B}S_F\\cong\\Hom(K,R_L),\\qquad\\varinjlim_{F\\supset B}V_F\\cong\\Hom(PK,L).$$\nOn the right, a representative $h\\in V_F$ goes to $a\\circ T^Y_{F\\infty}h\\circ q_{F\\infty,K_F}^{-1}$. On the left, $g\\in S_F$ goes to $T^Z_{F\\infty}g$, using tensor associativity. The subsystem is cofinal because the compositum of $B$ and any finite subextension is finite.\nFor $g\\in S_F$, transitivity of $q$ gives the first equality below, and naturality of $q_{FF'}$ gives the second:\n$$\\begin{aligned}\nb_{F'}(T^Z_{FF'}g)&=T^Y_{FF'}\\bigl((\\epsilon_{E,L_E})_F\\circ q_{EF,A}^{-1}\\bigr)\\circ q_{FF',A_F}^{-1}\\circ P_{F'}(T^Z_{FF'}g)\\\\\n&=T^Y_{FF'}\\bigl((\\epsilon_{E,L_E})_F\\circ q_{EF,A}^{-1}\\circ P_F(g)\\bigr)\\circ q_{FF',K_F}^{-1}\\\\\n&=T^Y_{FF'}(b_F(g))\\circ q_{FF',K_F}^{-1}.\n\\end{aligned}$$\nThis proves compatibility of the $b_F$ with the specified transition maps. The same two substitutions with $F'=\\Qlb$, and postcomposition by $a$, give the fully typed identity\n$$e_L\\circ P(T^Z_{F\\infty}g)=a\\circ T^Y_{F\\infty}(b_F(g))\\circ q_{F\\infty,K_F}^{-1}.$$\nThus their colimit is precisely\n$$\\Psi_{K,L}:\\Hom(K,R_L)\\longrightarrow\\Hom(PK,L),\\qquad g\\longmapsto e_L\\circ P(g).$$\nSince each $b_F$ is bijective by step 5, this colimit map is bijective: lift a representative with $b_F^{-1}$; for injectivity move two representatives to a common later stage where their images agree and use injectivity there. Naturality in $K$ follows directly by precomposition and functoriality of $P$. All scalar identifications above are those of [det-prop-scalar-six-direct-image] and [def-sfb-derived-extend-comp-iso], with the coherence proved in step 2.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "det-prop-scalar-six-direct-image",
+    "def-sfb-derived-extend-comp-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, last sentence: prove the descended universal property using the Hom-colimit formula"
+   }
+  },
+  {
+   "text": "Choose the pair $(R_L,e_L)$ of step 4 for each $L$. For a morphism $u:L\\to L'$ define $R(u):R_L\\to R_{L'}$ to be the unique morphism with $e_{L'}\\circ P(R(u))=u\\circ e_L$, using the bijection in step 6 with $K=R_L$ and target $L'$. Identity and composition obey this equation, so uniqueness gives $R(\\mathrm{id})=\\mathrm{id}$ and $R(vu)=R(v)R(u)$. The same equation gives\n$$\\Psi_{K,L'}(R(u)g)=u\\Psi_{K,L}(g),$$\nwhile functoriality of $P$ gives $\\Psi_{K',L}(gh)=\\Psi_{K,L}(g)P(h)$. Thus the bijections are natural in both variables and define $P\\dashv R$. Taking $Rp^!=R$ proves the assertion. Two different choices of a finite model give unique isomorphisms commuting with their universal counits: compose the two universal-factorization morphisms, and uniqueness makes each composite the identity. Hence no coherence of separately chosen finite right adjoints was needed beyond the finite counit comparison already used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
+    "place": "Proof, last sentence: actual functor, natural adjunction, and independence of choices"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-dc-proper-pushforward-left-adjoint-e",
   "sk-thm-sfb-qlbar-two-colimit",
-  "lem-sfb-dc-proper-pushforward-left-adjoint-e"
+  "sk-def-sfb-dc-setting",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "def-sfb-derived-extend-comp-iso",
+  "det-prop-scalar-six-exceptional",
+  "det-cor-existence-ii-restriction",
+  "det-prop-scalar-six-compact-support",
+  "det-sp-unique-adjoint-coefficients",
+  "sk-def-sfb-qlbar-condensed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md",
-  "place": "## Proof"
+  "place": "Companion .proof.md, first sentence (descent), second sentence (finite coefficient compatibility), last sentence (adjunction); expanded via existing coefficient-comparison statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*[Aa]djoint|[Aa]djoint.*constructible|[Pp]roper.*[Ss]hriek",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct image functor on bounded constructible l-adic complexes for a proper morphism has a right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, PresheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Over.pullbackIsRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\", \"pushforward\"",
+   "results": "3 hits: SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes the derived pushforward on bounded constructible Qlbar pro-etale complexes admits a right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "grep",
+   "query": "isLeftAdjoint_pushforward_of_isIso|instIsRightAdjointPushforward",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image for proper maps on constructible derived categories of algebraic closure of l-adic coefficient fields",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Condensed.profiniteSolid, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, Topology.IsConstructible.preimage_of_isClosedEmbedding, AlgebraicGeometry.exists_preimage_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern underived sheaf pushforward/pullback adjunctions, constructible subsets, or affine limits; none gives the exceptional adjoint on bounded constructible condensed Qlbar complexes. The left-adjoint pushforward hit requires an adjoint site functor and isomorphic ring map, not properness."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Aa]dj|[Aa]dj.*colimit|IsLeftAdjoint.*[Pp]ushforward",
+   "results": "25 hits: Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned occurrences concern preservation or construction of ordinary colimits, adjoint functor theorems, and lifting adjunctions. They do not state the proper constructible Qlbar pushforward adjunction or its coefficient-category descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of right adjoints descends along a filtered colimit of categories with scalar extension",
+   "results": "8 hits: CategoryTheory.Functor.leftAdjointObjIsDefined_colimit, CategoryTheory.IsFiltered.of_right_adjoint, ModuleCat.instIsRightAdjointCoextendScalars, CategoryTheory.IsFiltered.of_isRightAdjoint, CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit, CategoryTheory.IsFilteredOrEmpty.of_right_adjoint, CategoryTheory.OrthogonalReflection.isRightAdjoint_ι, CategoryTheory.IsFilteredOrEmpty.of_isRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "No match. PartialAdjoint.lean:181-192 concerns forming a partial left adjoint at a colimit object in a fixed category; its colimit-existence hypotheses do not identify a filtered colimit of coefficient categories. The other hits concern filteredness, ordinary scalar restriction, or orthogonal reflections."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -50,5 +197,54 @@
   "sk-def-sfb-qlbar-condensed"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-proper-pushforward-left-adjoint-qlbar",
+  "worker": "stage1",
+  "summary": "Kept the statement, made the standing setting explicit as a statement dependency, and expanded descent into a seven-step universal-counit argument. Reused the existing finite exceptional and direct-image coefficient comparisons rather than creating duplicate nodes. Only finite E-to-F exceptional comparisons are used; the Qlbar right adjoint is constructed from its universal Hom property. No new nodes or attachment. Second reading made coefficient transitivity and the Hom transition systems explicit, including the necessary inverse input comparisons.",
+  "blueprint": "First sentence realized by steps 1, 4-6; second sentence made precise by steps 2-3 and 5; final sentence proved by steps 4-7. The claim about the same torsion levels is replaced by the existing counit-transpose coefficient comparison, with all morphism and choice issues resolved in the proof.",
+  "tool_uses": [
+   {
+    "node": "det-prop-scalar-six-direct-image",
+    "why": "Generic scalar-extension comparison, applied to proper p for E-to-F and E-to-Qlbar; needed to descend the actual direct-image functor, not merely objects."
+   },
+   {
+    "node": "det-prop-scalar-six-exceptional",
+    "why": "Generic coefficient-comparison theorem, used only for finite E-to-F to fill the blueprint's unstated compatibility of exceptional adjoints."
+   },
+   {
+    "node": "det-cor-existence-ii-restriction",
+    "why": "Only the proper-coincidence and finite-field adjunction identification are used to type the exceptional comparison; the Qlbar conclusion of this theorem is not used."
+   },
+   {
+    "node": "det-prop-scalar-six-compact-support",
+    "why": "Its compactification-independent comparison, evaluated at the identity compactification of proper p, identifies the compact-support scalar map with the direct-image scalar map."
+   },
+   {
+    "node": "det-sp-unique-adjoint-coefficients",
+    "why": "Generic invariance of counit-transpose coefficient maps under a choice of right adjoint; identifies the finite comparison with the chosen finite adjoints."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Clauses (1) and (3) give coefficient coherence of pullback; transposing this proves finite and Qlbar transitivity for the actual direct-image comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-exceptional",
+  "det-cor-existence-ii-restriction",
+  "det-prop-scalar-six-compact-support",
+  "det-sp-unique-adjoint-coefficients",
+  "det-prop-scalar-six-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-dbd857b0c",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-dbd857b0c (reviewer sub-agent of L); spot-checked: Read all seven steps, cited statements, current blueprint sources, and master coefficient/category definitions. Counit comparisons, scalar transitivity, Hom-colimit descent, and functoriality check out. No new nodes, circularity, or repairs. Six declared tool uses accepted; detailed checks written to review.md."
+ }
 }
