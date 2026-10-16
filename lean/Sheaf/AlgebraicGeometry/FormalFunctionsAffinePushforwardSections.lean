@@ -67,6 +67,49 @@ theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoethe
       ∃ e : ModuleCat.of R (AdicCompletion I M) ≅ E.obj (limit T),
         ∀ n : ℕ, e.hom ≫ E.map (limit.π T (op n)) =
           ModuleCat.ofHom ((θ n).comp (AdicCompletion.eval I M (n + 1))) := by
-  sorry
+  let R := Γ(Y, U)
+  let I := J.ideal ⟨U, hU⟩
+  let V := f ⁻¹ᵁ U
+  let Z := V.toScheme
+  let g := (f ∣_ U) ≫ hU.isoSpec.hom
+  let K := (J.comap f).comap V.ι
+  let P := (Scheme.Modules.restrictFunctor V.ι).obj F.obj
+  let G := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+    ModuleCat.restrictScalars ((Scheme.ΓSpecIso R).inv ≫ g.appTop).hom
+  let H := (Scheme.Modules.pushforward f).obj F.obj
+  let T := formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f
+  let E := SheafOfModules.evaluation Y.ringCatSheaf (op U)
+  have : IsNoetherianRing R := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+  obtain ⟨hg, hP, hK, a, b, hb⟩ :=
+    formalFunctions_affine_restriction_dictionary J f F U hU
+  let : IsProper g := hg
+  obtain ⟨θ₀, hθ₀, _, e₀, he₀⟩ := globalSections_formal_functions I g K hK P hP
+  let α := a.toLinearEquiv
+  let θ : ∀ n : ℕ, (Γ(H, U) ⧸ (I ^ (n + 1) • (⊤ : Submodule R Γ(H, U)))) →ₗ[R]
+      E.obj (T.obj (op n)) := fun n ↦ (b.hom.app (op n)).hom.comp
+        ((θ₀ n).comp ((α.toLinearMap.reduceModIdeal (I ^ (n + 1))).restrictScalars R))
+  have hθ (n : ℕ) : ModuleCat.ofHom
+      ((θ n).comp (Submodule.mkQ (I ^ (n + 1) • (⊤ : Submodule R Γ(H, U))))) =
+      E.map ((Scheme.Modules.pushforward f).map
+        (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) := by
+    ext x
+    change (b.hom.app (op n)).hom
+      (θ₀ n ((I ^ (n + 1) • (⊤ : Submodule R (G.obj P))).mkQ (α x))) = _
+    have hh := LinearMap.congr_fun (hθ₀ n) (α x)
+    change θ₀ n ((I ^ (n + 1) • (⊤ : Submodule R (G.obj P))).mkQ (α x)) =
+      (G.map (formalModuleQuotientπ K (n + 1) P)).hom (α x) at hh
+    rw [hh]
+    exact ConcreteCategory.congr_hom (hb n) x
+  let c := ((AdicCompletion.congr I α).restrictScalars R).toModuleIso
+  let d := preservesLimitIso E T
+  let e := c ≪≫ e₀ ≪≫ HasLimit.isoOfNatIso b ≪≫ d.symm
+  refine ⟨θ, hθ, e, ?_⟩
+  intro n
+  dsimp only [e, Iso.trans_hom, Iso.symm_hom]
+  rw [Category.assoc, Category.assoc, Category.assoc, preservesLimitIso_inv_π,
+    HasLimit.isoOfNatIso_hom_π, ← Category.assoc e₀.hom, he₀]
+  apply ModuleCat.hom_ext
+  ext x
+  rfl
 
 end AlgebraicGeometry
