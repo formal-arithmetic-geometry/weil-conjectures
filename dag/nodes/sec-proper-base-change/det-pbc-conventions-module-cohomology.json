@@ -269,5 +269,30 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-c661d1336 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all six steps, the statements of all nine cited nodes, the blueprint detail and its companion proof, and Stacks 03FD (sites-cohomology l.1862), 0D6J(3) (l.4453), 072W, 03F3 and 015B(3). There are no new nodes. The statement matches the 2026-10-15 blueprint word for word, and its clauses match 03FD (clauses 1-2) and 0D6J(3) restricted to D+ (clause 3). Coefficient category and base-change morphism: the derived-direct-image comparison is stated for sheaves valued in ModuleCat Λ. lem-weil-pbc-etale-constant-ring-module-equivalence carries it over to Λ_T-module sheaves: its inverse restricts scalars and keeps the underlying abelian presheaf. I re-derived the scalar check through ρ:Λ_T→u_*Λ_S, so the fixed unit-compatible transformation gives For Ru_*K≅Ru_*For K in D+(T_et,Z). Clause 1: the evaluation comparison (hypotheses supplied by step 1) plus injective-vanishing applied to P↦P(U), then the slice-site and T_et/U≃U_et identifications, which match the final objects. Clause 2: same injective resolution, exact forgetting on Mod(Λ). Clause 3 for R^q: take cohomology of the D+ comparison; marking that step elementary is correct. I accept all seven declared tool_uses: they are generic black-box statements of the 03FD/0D6J route that the unit text itself cites. No cycle: the dependency closure (212 nodes) contains neither the item nor its citer det-properbasechange-modules, and every cited id exists and is unmerged. Duplicate candidates lem-weil-pbc-etale-module-cohomology-forget and lem-weil-pbc-etale-module-injective-forget-acyclic are global-section special cases in another encoding, not duplicates. Edge cases checked: Λ=0, empty scheme, q=0, and a point with Λ=F_p, where an injective module is not Z-injective, so the warning is needed. No hypothesis was added, no SGA is used, and I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyConventions",
+  "declaration": "AlgebraicGeometry.Etale.module_cohomology_conventions",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleEvaluationForgetIso",
+   "AlgebraicGeometry.Etale.moduleEvaluationForgetComparison",
+   "AlgebraicGeometry.Etale.module_cohomology_conventions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyConventions.lean",
+  "statement": "theorem module_cohomology_conventions (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) : (∀ (I : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] (U : T.Etale) (q : ℕ), 0 < q → IsZero (((sheafToPresheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (evaluation _ _).obj (op U)).rightDerived q).obj ((moduleAbelianForget Λ T).obj I))) ∧ (∀ (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : T.Etale) (q : ℕ), IsIso ((moduleEvaluationForgetComparison Λ T U q).app F)) ∧ (∀ (S : Scheme.{u}) (f : S ⟶ T) (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), IsIso ((Functor.rightDerivedBaseChange.{u + 1, u + 2, u + 1, u + 2, u + 1, u + 2, u + 1, u + 2, u + 1, u + 1, u + 1, u + 1} (B := Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (B' := Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (C' := Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (G := lowerStar (ModuleCat.{u + 1} Λ) f) (G' := lowerStar AddCommGrpCat.{u + 1} f) (β := moduleAbelianForget Λ S) (γ := moduleAbelianForget Λ T) (moduleAbelianLowerStarIso Λ f).hom q).app F)) ∧ (∀ (S : Scheme.{u}) (f : S ⟶ T) (K : _root_.DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))), IsIso ((moduleAbelianDerivedLowerStarComparison Λ f).app K))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three numbered clauses, with the derived clause as a fourth conjunct. Uses the recorded ModuleCat coefficient encoding and the existing unit-compatible derived direct-image comparison. The two evaluation helpers are concrete canonical constructions, not new notions; their only role is to name the identity on sections and its right-derived comparison. No injectivity of the forgotten sheaf is assumed.",
+  "fixed_by": "NT-stage2-cc-4c7400d4f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c7400d4f",
+  "group": "Q22",
+  "result": "fix",
+  "note": "The statement matches the node, the blueprint and Stacks 03FD/0D6J(3) clause by clause: injective only in the module category, q>0 vanishing, canonical comparisons in all degrees (via rightDerivedBaseChange of Iso.refl), and the existing D+ comparison. There is no stronger hypothesis, the u/u+1 universes are as recorded, helpers have no sorry inside them (checked with #print axioms), docstrings and lean.statement are verbatim, and the report has both required sections. The delivered module compiles cleanly (2.1 s). Mechanical finding: any plain non-module importer fails because the WeilConjectures and Sheaf copies of EtaleConstantRingModuleEquivalence both declare etaleConstantModuleCounitIso; the live olean of the Sheaf copy is stale. The fix changes that one proof import to Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence (fixes/lean/Sheaf/AlgebraicGeometry/ModuleCohomologyConventions.lean); the fixed module and a plain importer both compile. The report fix appends a note."
  }
 }

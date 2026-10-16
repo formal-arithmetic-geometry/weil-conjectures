@@ -59,11 +59,15 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekProjectionMap_app_app",
+  "statement": "instance isIso_openImmersionLowerShriekProjectionMap_app_app\n    (K : Sheaf (Scheme.ProEt.topology U) A) (M : Sheaf (Scheme.ProEt.topology X) A) :\n    IsIso (((openImmersionLowerShriekProjectionMap A j).app K).app M)",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekProjectionMap_app_app"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:07 UTC for group Q41, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: Specializing to ℤ-modules (abelian groups) and applying tensor symmetry gives precisely the node’s canonical unit-adjoint projection map and prove"
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing source declaration, proved upstream with the standard axioms only. Its map is Adjunction.projectionMap for openImmersionLowerShriekUpperStarAdjunction (j_! ⊣ j^*, j_! the sheafified localization Kan extension recorded by sk-def-sfb-finite-lower-shriek) and the strong monoidal structure μNatTrans of upperStar, i.e. the unit-adjoint canonical map of the node. The coefficient category A is generic (Category.{u+1}, abelian Grothendieck, closed symmetric monoidal); the node's abelian sheaves are A = Ab.{u+1} with the ⊗_ℤ structure AddCommGrpCat.monoidalCategory (WeilConjectures.CategoryTheory.RingObjects.Ab), for which the instance applies, and the sheaf tensor instance is rfl-equal to (sfbSheafTensorStructure J).monoidal of sk-def-sfb-sheaf-tensor. Variable correspondence: the declaration's K is the node's M and its M is the node's L; the source writes j_!(M ⊗ j^*L) → j_!M ⊗ L, the node's j_!(j^*L ⊗ M) → L ⊗ j_!M, the same canonical map conjugated by the symmetry of the sheaf tensor. Module path: the upstream sync bcf29a2028 moved LowerShriek.OpenImmersion.* to FiniteCoefficient.LowerShriek.Open.*; the old path survives only as a stale side copy whose import clashes with the live FiniteCoefficient modules recorded by sk-def-sfb-finite-lower-shriek (reviewer fix).",
+  "fixed_by": "NT-stage2-cc-cbdced5e8"
  },
  "lean_audit": {
   "slopmaster2": {
@@ -85,5 +89,13 @@
   }
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-module-lower-shriek"
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbdced5e8",
+  "group": "Q21",
+  "result": "fix",
+  "note": "Mathematics correct: the existing proved upstream instance isIso_openImmersionLowerShriekProjectionMap_app_app states the node, with no stronger hypotheses. Its map is Adjunction.projectionMap of openImmersionLowerShriekUpperStarAdjunction (the same declarations sk-def-sfb-finite-lower-shriek records) with μNatTrans of upperStar. It specializes to Ab.{u+1} with the ⊗_ℤ structure (compiled, instance found); the sheaf tensor is rfl-equal to sfbSheafTensorStructure.monoidal of sk-def-sfb-sheaf-tensor (compiled). The tensor-order swap is symmetry conjugation only. Edge cases and universes are fine; the statement is verbatim (check_existing clean); axioms are standard; the report sections are present. F1 (H4/(d), mechanical): lean.module LowerShriek.OpenImmersion.Projection is stale after upstream sync bcf29a2028. The old side copy clashes on import with the live FiniteCoefficient modules recorded by the lower-shriek dependency (nt_compile: environment already contains fullyFaithfulOpenImmersionLowerShriek). Fix: fixes/lem-sfb-open-projection-formula.lean-record.json sets module to WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection with an updated note; declaration, statement, branch and existing are unchanged. The probe with the fixed imports compiles clean."
+ }
 }

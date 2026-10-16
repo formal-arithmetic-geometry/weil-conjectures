@@ -266,5 +266,30 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a939b196b (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full and checked them against Kerodon 00XC (Prop. 3.2.8.1, read online). The statement is correct and unweakened: arbitrary vertical maps, a specified homotopy qu=>vr, and empty spaces and fibers are all handled. I checked the empty base, empty fibers, discrete spaces, a point base, and nontrivial pi_1 with a disconnected fiber. Step 1: the path replacement is right, and the strict square comes from filling an inner horn Lambda^2_1 over E. That uses the inner pushout-product Mathlib leaf (one map inner anodyne, the other degreewise injective, T to a point an inner fibration), and the same leaf gives the homotopy relative to endpoints. Realization gives Serre fibrations, and the fibers are identified through finite limits. The Serre node is applied correctly, and the empty-fiber orbit case is proved by path lifting. Steps 2-5: I verified the orbit/stabilizer bijection and all four nonabelian diagram chases, including the n=1 pointed-set case. Step 6 is a genuinely elementary basepoint change. There are no new nodes, no cycle and no duplicate; no coefficient category or base change is involved. FIX (C7): step 1 cited lem-cbc-kan-fibration-fiber-criterion from unit sk-prop-sf-cbc, which is off this unit's route and had no declared tool use. The item's own unit has lem-coef-space-path-fibration-replacement, which states exactly what step 1 uses. I repointed step 1 and proof_deps to it in fixes/. No tool_uses are needed or accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacesHomotopyFiberDetection",
+  "declaration": "SSet.Enhanced.isWeakHomotopyEquivalence_iff_homotopyFiber_maps",
+  "file": "lean/Sheaf/CategoryTheory/SpacesHomotopyFiberDetection.lean",
+  "statement": "theorem isWeakHomotopyEquivalence_iff_homotopyFiber_maps {X Y S T : SSet.{u}} [KanComplex X] [KanComplex Y] [KanComplex S] [KanComplex T] (r : X ⟶ S) (q : Y ⟶ T) (u : X ⟶ Y) (v : S ⟶ T) (H : SSet.Homotopy (u ≫ q) (r ≫ v)) (hv : IsWeakHomotopyEquivalence v) : IsWeakHomotopyEquivalence u ↔ ∀ (s : S _⦋0⦌) (φ : homotopyFiber r s ⟶ homotopyFiber q (v.app _ s)), IsInducedFiberMap H s φ → IsWeakHomotopyEquivalence φ",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.homotopyFiberProjection",
+   "SSet.Enhanced.homotopyFiberPath",
+   "SSet.Enhanced.IsInducedFiberMap",
+   "SSet.Enhanced.isWeakHomotopyEquivalence_iff_homotopyFiber_maps"
+  ],
+  "note": "Repair of returned head 204f7e967883 (H3/H11): the conclusion now requires every H-induced fiber map to be a weak homotopy equivalence. IsInducedFiberMap enforces the first coordinate and a coherent Delta[2] witness with edges H, v(path), and the output path. The two coordinate maps are actual projections of the recorded homotopy fiber; no data is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78eacc8ed",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Every clause of SSet.Enhanced.isWeakHomotopyEquivalence_iff_homotopyFiber_maps matches the unchanged node: four Kan complexes, H oriented u≫q to r≫v, hv a weak homotopy equivalence, the dependency's outgoing homotopyFiber, and IsInducedFiberMap with first coordinate u and a coherent Δ[2] witness whose edges δ2/δ0/δ1 are curried H, v on the path, and the output path. Checked that the ∀φ quantifier is not vacuous: Λ²₁ horn filling into a Kan T gives an induced map, and any two are homotopic rel endpoints. Edge cases checked: empty S, empty fibers, point base, single universe u. Helpers are real projections and a real Prop; docstrings carry source and blueprint; only sorry; lean.statement verbatim; node differs from the side clone only in lean; report sections present; no duplicate declaration found. nt_compile.py: clean, rc 0, and an injected error was reported as a control. No findings."
  }
 }
