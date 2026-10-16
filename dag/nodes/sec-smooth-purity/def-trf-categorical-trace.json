@@ -191,5 +191,40 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-e3e0fa159 (reviewer sub-agent of L); spot-checked: Read the full definition, all thirteen cited statements, source passages, and unit/chapter route. Verified dual-frame formulas, signs, representative-map directions, scalar identification, and edge cases. No new nodes or delivery faults. Inherited citation and forward-lemma issues are documented in review.md; no target or coefficient-category comparison was weakened or assumed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace",
+  "declaration": "WeilConjectures.finiteCoefficientCategoricalTrace",
+  "declarations": [
+   "DerivedCategory.perfectTraceCanonicalBraiding",
+   "DerivedCategory.perfectTraceCategory",
+   "DerivedCategory.perfectTraceModelDual",
+   "DerivedCategory.perfectTraceFrameVector",
+   "DerivedCategory.perfectTraceFrameFunctional",
+   "DerivedCategory.perfectTraceDual",
+   "DerivedCategory.perfectTraceDualMap",
+   "DerivedCategory.perfectTraceEvaluation",
+   "DerivedCategory.perfectTraceCoevaluation",
+   "DerivedCategory.perfectTraceHasRightDual",
+   "DerivedCategory.perfectTraceScalar",
+   "DerivedCategory.perfectTraceScalarInverse",
+   "DerivedCategory.perfectCategoricalTrace",
+   "WeilConjectures.finiteCoefficientCategoricalTrace"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectCategoricalTrace.lean",
+  "statement": "def finiteCoefficientCategoricalTrace (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : IntermediateField (Padic c.l) c.Qbar) [FiniteDimensional (Padic c.l) E] (n : ℕ) (_hn : 1 ≤ n) (P : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionRing c.l E n))) (hP : DerivedCategory.IsPerfectRingComplex P) (v : P ⟶ P) : Padic.coefficientExtensionRing c.l E n",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the recorded perfect-ring predicate and upstream derived monoidal/closed structures. Constructs the actual internal-Hom dual and its canonical inverse-comparison coevaluation, descends the Koszul braiding, reuses MonoidalCategory.trace, and extracts the scalar via the fully faithful single functor. Includes the exact finite-coefficient specialization, model total Hom and frame maps; no arbitrary duality datum, new axiom or postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6f8f4c514",
+  "group": "NF",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, thirteen dependencies, source, signs, canonical maps, universes, edge cases, report sections, and pilot gates. Immutable module reproduced cleanly through scompile.py. No delivery errors or fixes needed; no branch changed by this reviewer."
  }
 }

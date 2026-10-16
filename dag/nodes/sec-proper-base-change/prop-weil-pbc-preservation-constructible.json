@@ -43,7 +43,10 @@
   "def-weil-pbc-bounded-constructible-tower",
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-completed-pullback"
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-direct-image-limits"
  ],
  "proof": [
   {
@@ -267,5 +270,28 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-a03053fce (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. Verified all five steps, canonical normalization and witness cocycles, quotient-linearity on cohomology, hypotheses, edge cases, and absence of cycles. The P1 calculation confirms the corrected amplitude bound. Integral completed coefficients remain distinct from the exact upstream condensed targets. No new nodes or fixes; detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PreservationConstructible",
+  "declaration": "WeilConjectures.pbc_preservation_constructible",
+  "declarations": [
+   "WeilConjectures.pbcReductionsCohomologyIn",
+   "WeilConjectures.pbc_preservation_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/PreservationConstructible.lean",
+  "statement": "theorem pbc_preservation_constructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) (_square : ChosenCartesianSquare g' f' f g) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_hDimX : ∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (_hDimY : ∃ d : ℕ, topologicalKrullDim Y ≤ (d : WithBot ℕ∞)) (_hDimX' : ∃ d : ℕ, topologicalKrullDim X' ≤ (d : WithBot ℕ∞)) (_hDimY' : ∃ d : ℕ, topologicalKrullDim Y' ≤ (d : WithBot ℕ∞)) [IsProper f] [IsProper f'] (N : ℕ) (_hN : 0 < N) (_hAnn : (N : Padic.coefficientExtensionRing l E 1) = 0) (_hInvertX : IsUnit (N : Γ(X, ⊤))) (_hInvertY : IsUnit (N : Γ(Y, ⊤))) (_hInvertX' : IsUnit (N : Γ(X', ⊤))) (_hInvertY' : IsUnit (N : Γ(Y', ⊤))) (e : ℕ) (_hFib : ∀ y : Y, topologicalKrullDim ((CategoryTheory.Limits.pullback f (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)) : Scheme.{u}) ≤ (e : WithBot ℕ∞)) (a b : ℤ) (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (_hK : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) K) (_hInterval : pbcReductionsCohomologyIn X (pbcIntegralDatum l E) a b K) : PbcIsBoundedConstructibleComplete Y (pbcIntegralDatum l E) ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K) ∧ PbcIsBoundedConstructibleComplete Y' (pbcIntegralDatum l E) (completedPullbackObject g (pbcIntegralDatum l E) ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K)) ∧ PbcIsBoundedConstructibleComplete X' (pbcIntegralDatum l E) (completedPullbackObject g' (pbcIntegralDatum l E) K) ∧ PbcIsBoundedConstructibleComplete Y' (pbcIntegralDatum l E) ((completedDerivedDirectImage f' (pbcIntegralDatum l E)).obj (completedPullbackObject g' (pbcIntegralDatum l E) K)) ∧ pbcReductionsCohomologyIn X' (pbcIntegralDatum l E) a b (completedPullbackObject g' (pbcIntegralDatum l E) K) ∧ pbcReductionsCohomologyIn Y (pbcIntegralDatum l E) a (b + 2 * (e : ℤ)) ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K) ∧ pbcReductionsCohomologyIn Y' (pbcIntegralDatum l E) a (b + 2 * (e : ℤ)) (completedPullbackObject g (pbcIntegralDatum l E) ((completedDerivedDirectImage f (pbcIntegralDatum l E)).obj K)) ∧ pbcReductionsCohomologyIn Y' (pbcIntegralDatum l E) a (b + 2 * (e : ℤ)) ((completedDerivedDirectImage f' (pbcIntegralDatum l E)).obj (completedPullbackObject g' (pbcIntegralDatum l E) K))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading reuses the now-landed BoundedConstructibleComplete, CompletedTowerPullback and CompletedTowerDirectImage interfaces on the original small site with pbcIntegralDatum. All superseded dependency modules and helper copies are removed. The only helper is the common canonical-reduction cohomological-support predicate; the theorem retains all four memberships and four interval bounds."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d14ca23bb",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all hypotheses, eight conclusions, dependency constructions, sources, universes, edge cases, docstrings, report sections, and verbatim statement record. Immutable Lean module compiled cleanly through scompile.py in sandbox and library modes. No findings or fixes; repository and branch head unchanged."
  }
 }
