@@ -4,13 +4,13 @@
   "is": null,
   "from": {
    "node": "def-weil-ordinary-compact-cohomology",
-   "place": "its statement (a notion the statement uses)",
+   "place": "def-weil-ordinary-compact-cohomology, statement: the stagewise D^b_fd(Qbar_l) coefficient target from def-weil-finite-coefficient-point; coherence of the scalar-extension transition functors of its displayed 2-colimit, through coefficient cohomology modules and finite-dimensional complex scalar extension",
    "via": [
     "def-weil-finite-dimensional-complex-scalar-extension",
     "def-weil-coefficient-cohomology-modules"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived scalar extensions along a tower of fields compose",
@@ -25,20 +25,182 @@
   "lem-weil-field-scalar-extension-exact",
   "def-weil-vector-space-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal C_K=\\mathrm{CoCh}(\\operatorname{Mod}_K)$, $Q_K:\\mathcal C_K\\to D(K)$, and $E_{L/K}:\\mathcal C_K\\to\\mathcal C_L$ for termwise scalar extension. By [lem-weil-field-scalar-extension-exact] the vector-space functor is additive and exact. Hence [lem-sf-exact-functor-derived-triangulated] supplies its termwise induced triangulated functor $T_{L/K}$, with the canonical factorization $\\alpha_{L/K}:T_{L/K}Q_K\\xrightarrow{\\sim}Q_LE_{L/K}$ specified in the statement. The meaning of termwise induced is precisely this factorization. If $f:C\\to C^{\\prime}$ is a quasi-isomorphism, $Q_K(f)$ is invertible by [def-weil-abstract-derived-category]; naturality gives $Q_L(E_{L/K}f)=\\alpha_{L/K,C^{\\prime}}\\circ T_{L/K}(Q_Kf)\\circ\\alpha_{L/K,C}^{-1}$, so this is invertible as well. Thus $Q_LE_{L/K}$ inverts the localization class, without requiring a separate tensor-cohomology theorem. Iterating this factorization shows that $Q$ after any composite of the $E$ functors also inverts quasi-isomorphisms. All categories use the universes fixed in the abstract-derived-category node.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 05RU, definition-unbounded-derived-category. The natural factorization is the meaning of the functor induced from termwise scalar extension."
+   }
+  },
+  {
+   "text": "Construct $u_C:E_{K/K}C\\to C$ degreewise by $v\\otimes a\\mapsto av$, with inverse $v\\mapsto v\\otimes1$. The balancing relation gives $(av)\\otimes1=v\\otimes a$, so both composites are identities. A differential or a linear map commutes with multiplication by $a$; hence $u_C$ is an isomorphism of complexes natural in $C$. This uses the tensor product and its map-on-pure-tensors definition in [def-weil-vector-space-scalar-extension], rather than an extra lemma about a derived identity functor.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product: balancing and the universal property of the tensor product; elementary identity specialization."
+   }
+  },
+  {
+   "text": "For $K\\subset L\\subset M$, apply the natural tower isomorphism of [def-weil-vector-space-scalar-extension] in each degree. It gives $a_C:E_{M/L}E_{L/K}C\\xrightarrow{\\sim}E_{M/K}C$, $((v\\otimes\\lambda)\\otimes\\mu)\\mapsto v\\otimes(\\lambda\\mu)$. It commutes with the differential because both orders send this generator to $d_Cv\\otimes\\lambda\\mu$, and it commutes with a chain map $f$ because both orders give $f(v)\\otimes\\lambda\\mu$. Its inverse is $v\\otimes\\mu\\mapsto(v\\otimes1)\\otimes\\mu$, as follows from the $L$-balancing relation. Thus $a$ is a natural isomorphism on complex categories.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product; Tag 00D0, lemma-transitive, underlying tensor associativity. The tower isomorphism is already stated by the cited node."
+   }
+  },
+  {
+   "text": "Apply part (2) of [lem-weil-pbc-localization-universal-property] to $Q_K$, with target $D(K)$, to the natural isomorphism $Q_Ku:Q_KE_{K/K}\\xrightarrow{\\sim}Q_K$ and the lifted functors $T_{K/K}$ and $\\operatorname{id}$. Their factorization isomorphisms are $\\alpha_{K/K}$ and the identity. This produces a natural isomorphism $\\iota_K$ with $\\iota_{K,Q_KC}=Q_K(u_C)\\circ\\alpha_{K/K,C}$. In particular $\\iota_{K,Q_KC}\\circ\\alpha_{K/K,C}^{-1}=Q_K(u_C)$, exactly the required normalization. Part (2), or part (3) applied to two candidate hom transformations, proves uniqueness with that normalization.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, localization setting; the cited node explicitly supplies descent of natural transformations, inverse transformations, and uniqueness (Mathlib Localization.liftNatIso and natTrans_ext)."
+   }
+  },
+  {
+   "text": "For a tower form the natural isomorphism $\\beta_C=\\alpha_{M/L,E_{L/K}C}\\circ T_{M/L}(\\alpha_{L/K,C}):T_{M/L}T_{L/K}Q_KC\\xrightarrow{\\sim}Q_ME_{M/L}E_{L/K}C$. Both complex-level functors $Q_ME_{M/L}E_{L/K}$ and $Q_ME_{M/K}$ invert quasi-isomorphisms, by step 1. Apply part (2) of [lem-weil-pbc-localization-universal-property] with $Q_K$, target $D(M)$, their lifts $T_{M/L}T_{L/K},T_{M/K}$ and factorizations $\\beta,\\alpha_{M/K}$, to the natural isomorphism $Q_Ma$. The result is $c_{M/L/K}$, uniquely characterized by $c_{M/L/K,Q_KC}=\\alpha_{M/K,C}^{-1}\\circ Q_M(a_C)\\circ\\beta_C$. Descent of the inverse of $a$ proves invertibility. This displayed equation supplies the requested conjugation formula with every factor specified.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, localization setting; part (2) of the cited universal-property node, using the natural tower map constructed in step 3."
+   }
+  },
+  {
+   "text": "The two unit equations already hold on complexes. For $K\\subset L$, $a_{L/L/K,C}=u_{E_{L/K}C}$ since both send $(v\\otimes\\lambda)\\otimes\\mu$ to $v\\otimes\\lambda\\mu$. Also $a_{L/K/K,C}=E_{L/K}(u_C)$ since $(av)\\otimes\\mu=v\\otimes a\\mu$ for $a\\in K$. These equalities follow directly from the tensor maps of [def-weil-vector-space-scalar-extension]. Substitute the formulas of steps 4 and 5. In the first equation naturality of $\\iota_L$ for $\\alpha_{L/K,C}$ identifies the resulting component with $\\iota_{L,T_{L/K}Q_KC}$; in the second, naturality of $\\alpha_{L/K}$ for $u_C$ identifies it with $T_{L/K}(\\iota_{K,Q_KC})$. In both cases adjacent $\\alpha\\alpha^{-1}$ cancel. Part (3) of [lem-weil-pbc-localization-universal-property] then gives $c_{L/L/K}=\\iota_L T_{L/K}$ and $c_{L/K/K}=T_{L/K}\\iota_K$ as natural transformations on $D(K)$, with the ordinary functor unit identifications.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, and part (3) of the cited universal-property node; the complex-level calculation is the elementary tensor calculation of Algebra Tag 00CV."
+   }
+  },
+  {
+   "text": "For $K\\subset L\\subset M\\subset N$ the two complex-level maps $E_{N/M}E_{M/L}E_{L/K}C\\to E_{N/K}C$ are $a_{N/M/K,C}\\circ E_{N/M}(a_{M/L/K,C})$ and $a_{N/L/K,C}\\circ a_{N/M/L,E_{L/K}C}$. On a generator $((v\\otimes\\lambda)\\otimes\\mu)\\otimes\\nu$ they give respectively $v\\otimes(\\lambda\\mu)\\nu$ and $v\\otimes\\lambda(\\mu\\nu)$; associativity in $N$ makes them equal, and iterated tensor balancing and additivity extend the equality to every element in every degree [def-weil-vector-space-scalar-extension]. To pass to derived categories, precompose the proposed two composites of $c$ with $Q_K$. Use the formula of step 5 twice and naturality of each $\\alpha$ with respect to the chain map $a$. Both composites then have the same source identification $\\alpha_{N/M,E_{M/L}E_{L/K}C}\\circ T_{N/M}(\\alpha_{M/L,E_{L/K}C})\\circ T_{N/M}T_{M/L}(\\alpha_{L/K,C})$ and target identification $\\alpha_{N/K,C}$; between them they are $Q_N$ of the two equal chain maps just calculated. Their components therefore agree at $Q_KC$. Part (3) of [lem-weil-pbc-localization-universal-property] proves equality everywhere, including the canonical functor reassociations.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, and part (3) of the cited universal-property node; tensor associativity is calculated explicitly using Algebra Tags 00CV and 00D0."
+   }
+  },
+  {
+   "text": "Finally check shifts, rather than inferring compatibility from the fact that the functors are triangulated. For every $n\\in\\mathbf Z$, termwise extension and shift have the canonical comparison $s_{L/K,n,C}:E_{L/K}(C[n])\\xrightarrow{\\sim}(E_{L/K}C)[n]$, whose degree-$r$ map is the identity on $C^{r+n}\\otimes_KL$. Both differentials are $(-1)^n(d_C\\otimes1)$, so this is a chain isomorphism. Reindexing the explicit formulas gives $u_{C[n]}=u_C[n]\\circ s_{K/K,n,C}$ and $s_{M/K,n,C}\\circ a_{C[n]}=a_C[n]\\circ s_{M/L,n,E_{L/K}C}\\circ E_{M/L}(s_{L/K,n,C})$. In the second equation both sides have source $E_{M/L}E_{L/K}(C[n])$ and target $(E_{M/K}C)[n]$; the comparison for the identity functor in the first equation is the identity. This is an equality on pure tensors in each degree [def-weil-vector-space-scalar-extension]. By [def-weil-abstract-derived-category], $Q$ commutes with shifts. The canonical shift comparison of the induced functor of [lem-sf-exact-functor-derived-triangulated] is obtained by descending $s$ and these comparisons for $Q$; hence its defining equation makes $\\alpha$ shift-compatible. Explicitly, if $q_{K,n,C}:Q_K(C[n])\\to(Q_KC)[n]$ and $\\gamma_{L/K,n,X}:T_{L/K}(X[n])\\to(T_{L/K}X)[n]$, that equation is $\\alpha_{L/K,C}[n]\\circ\\gamma_{L/K,n,Q_KC}\\circ T_{L/K}(q_{K,n,C})=q_{L,n,E_{L/K}C}\\circ Q_L(s_{L/K,n,C})\\circ\\alpha_{L/K,C[n]}$. Existence and uniqueness of this descended comparison follow from part (2) of [lem-weil-pbc-localization-universal-property]; this spells out the canonical construction, not an additional assumption on $\\alpha$. For $\\theta=\\iota_K$ or $c_{M/L/K}$, substitute the formulas of steps 4 and 5 into the desired equation $\\gamma_{G,n,X}\\circ\\theta_{X[n]}=\\theta_X[n]\\circ\\gamma_{F,n,X}$, where $F,G$ are its source and target functors and composite functors have their composite shift comparisons. At $X=Q_KC$, use the displayed defining equation and naturality of $\\theta$ along $q_{K,n,C}$ to cancel the $\\alpha$ and $q$ factors. What remains is $Q$ of the already verified equality for $u$ or $a$. Part (3) of the same localization node then proves the equation for every $X\\in D(K)$. Thus both isomorphisms commute with every integer shift.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RU (definition-unbounded-derived-category) and 015F (lemma-right-derived-exact-functor); canonical shift construction for termwise exact functors, spelled out by localization descent. Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean:80-102 confirms the shift-compatible canonical factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-vector-space-scalar-extension",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Explicit proof of the coherence of the scalar-extension transition functors implicit in def-weil-finite-coefficient-point, using tensor formulas and the existing localization universal-property node; Stacks Tags 00CV, 00D0, 04VG, 05RU, 015F are the background sources, not a claim that the blueprint already contains this proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn 'mapDerivedCategoryComp\\|mapDerivedCategoryId\\|mapHomologicalComplexUpToQuasiIsoComp\\|mapHomologicalComplexUpToQuasiIsoId' Mathlib/; grep -n 'mapHomologicalComplexIdIso\\|mapHomologicalComplexCompIso\\|NatIso.mapHomologicalComplex' Mathlib/Algebra/Homology/Additive.lean; grep -n 'extendScalarsId\\|extendScalarsComp\\|extendScalars_assoc' Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; grep -n 'liftNatIso' Mathlib/CategoryTheory/Localization/Predicate.lean",
-   "results": "no composition or identity isomorphism for `Functor.mapDerivedCategory` or `mapHomologicalComplexUpToQuasiIso`; ingredients exist: Mathlib/Algebra/Homology/Additive.lean:130 `Functor.mapHomologicalComplexIdIso`, :198 `NatIso.mapHomologicalComplex`, :212 `Functor.mapHomologicalComplexCompIso` (termwise level); Mathlib/Algebra/Homology/HomotopyCategory.lean:290 `Functor.mapHomotopyCategoryCompIso` (homotopy level); Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:954 `ModuleCat.extendScalarsId`, :984 `ModuleCat.extendScalarsComp`, :1015 `ModuleCat.extendScalars_assoc` (the module-level coherence); Mathlib/CategoryTheory/Localization/Predicate.lean:357 `Localization.liftNatIso` (to lift the termwise isomorphisms to derived categories via the `Localization.Lifting` instance of Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:53)",
-   "date": "2026-10-09",
-   "verdict": "no match: the derived-level composition isomorphisms and their coherence are not in Mathlib; they follow from the listed ingredients by `Localization.liftNatIso` and uniqueness of lifts, but not in one line"
+   "query": "mapDerivedCategoryComp|mapDerivedCategoryId|liftNatIso|extendScalars_assoc",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a tower of fields has coherent composition and identity natural isomorphisms compatible with shifts",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.NatTrans.leftDerived_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "CategoryTheory.Localization.liftNatIso; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension composition natural isomorphism tower of fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory(Comp|Id|Nat)|extendScalars_(assoc|left|right)",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition isomorphisms for exact functors induced on derived categories and natural transformations between them",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|extendScalarsComp|extendScalars_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId; online results include mapDerivedCategoryIdIso, NatTrans.mapDerivedCategory, mapDerivedCategoryCompIso and CommShift instances. Read pinned ExactFunctor.lean: these newer APIs are absent there (the pinned file has no such declarations). Project WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor has some related constructions, not the full field-tower statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item in pinned Mathlib: related exact-functor, module scalar-extension, or general localization ingredients only; coherence and normalized field-tower comparisons still require the displayed proof"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryComp|mapDerivedCategoryId|mapDerivedCategoryNat",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory, using msearch.py subdirectory Algebra/Homology/DerivedCategory. The generic similarly named project declarations are outside Mathlib and do not state the full item.",
+   "date": "2026-10-16",
+   "verdict": "no match in pinned Mathlib for derived composition/identity/natural-transformation APIs"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +220,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-derived-field-scalar-extension-tower",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Constructed termwise unit and tower chain isomorphisms, descended both with explicit alpha conjugation formulas using the existing localization universal-property Mathlib leaf, and proved uniqueness, both unit laws, associativity on a four-field tower, and shift compatibility. No new nodes. Checked pinned Mathlib and project source; online Loogle also advertises newer derived-functor APIs absent from pinned Mathlib.",
+  "blueprint": "Realizes the coherent scalar-extension transition system implicit in the stagewise coefficient category used by def-weil-ordinary-compact-cohomology and explicitly displayed in def-weil-finite-coefficient-point; the unit sk-def-sf-admissible has no proof steps to replace. Identity/tower maps and their equations are proved below the unit, with the original ancestry preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-699890910",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-699890910 (reviewer sub-agent of L); spot-checked: Read the complete item, report, five cited statements and source locations. Verified all eight steps, localization descent and uniqueness, unit and four-field coherence, and shift compatibility. Checked edge cases, coefficient-category distinctions, duplicate candidates and dependency acyclicity. No new nodes or repairs; concrete checks are recorded in review.md."
+ }
 }
