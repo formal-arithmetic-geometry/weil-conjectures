@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjugacy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
@@ -333,6 +334,95 @@ theorem Restriction.nonempty [Smooth p] :
   exact ⟨_, _, ⟨restrictionOfPath j hj τ GU GC⟩⟩
 
 end Restriction
+
+section RestrictionRegular
+
+/-! ### Restriction of Weil groups along a dense open, in general
+
+The restriction `W(U₀) → W(C₀)` of `AlgebraicGeometry.WeilGroup.restrictionHom` is defined for
+any open immersion `j : U₀ ⟶ C₀` of connected, geometrically connected schemes over a finite
+field, not only for curves. It preserves the degrees, it is the map of fundamental groups
+`AlgebraicGeometry.WeilGroup.restrictionMap` on the underlying elements, hence on the geometric
+subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular
+(blueprint `lem-wf-dense-open-pi1-surjective`, part (2)).
+
+The blueprint states part (2) for `V₀` separated of finite type over `k₀` with `V = V₀ ⊗ k`
+connected and normal. Here normality is replaced by regularity of `V₀` (e.g. `V₀` smooth over
+`k₀`): the surjectivity of `π₁(V'₀) → π₁(V₀)` is
+`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular`, and its
+normal version needs the decomposition of finite étale covers of a normal scheme into normal
+integral pieces (`lem-fin-etale-normal-components`), which is not available. The Weil groups
+are those of `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, built from the arithmetic
+fundamental groups `π₁(V₀, s)`; the structure `AlgebraicGeometry.WeilGroup` itself is only set
+up for curves. -/
+
+variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)}
+  [GeometricallyConnected p] [ConnectedSpace C] {pU : U ⟶ Spec (.of K)}
+  [GeometricallyConnected pU] [ConnectedSpace U] (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U]
+  (hj : j ≫ p = pU) {sU : Spec (.of (AlgebraicClosure K)) ⟶ U}
+  {sC : Spec (.of (AlgebraicClosure K)) ⟶ C} (τ : fiber (sU ≫ j) ≅ fiber sC)
+  (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
+  [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
+  (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
+  [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
+
+omit [IsOpenImmersion j] [Nonempty U] in
+/-- The restriction of Weil groups commutes with the degree maps (blueprint
+`lem-wf-dense-open-pi1-surjective`, part (2)). -/
+lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
+    weilGroupDeg p sC GC (restrictionHom j hj τ GU GC w) = weilGroupDeg pU sU GU w :=
+  rfl
+
+omit [IsOpenImmersion j] [Nonempty U] in
+/-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
+`W(C₀)` if it is surjective (e.g. `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`),
+since it preserves degrees; on the underlying
+elements of `π₁(U₀)` it is that map (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`). -/
+lemma map_ker_weilGroupDeg_restrictionHom
+    (hsurj : Function.Surjective (restrictionHom j hj τ GU GC)) :
+    (weilGroupDeg pU sU GU).ker.map (restrictionHom j hj τ GU GC) =
+      (weilGroupDeg p sC GC).ker := by
+  have h : weilGroupDeg pU sU GU = (weilGroupDeg p sC GC).comp (restrictionHom j hj τ GU GC) :=
+    rfl
+  rw [h, ← MonoidHom.comap_ker, Subgroup.map_comap_eq_self_of_surjective hsurj]
+
+omit [IsOpenImmersion j] [Nonempty U] in
+/-- **The restriction of Weil groups is surjective** if the map of fundamental groups is: an
+element of degree `n` of `W(C₀)` differs from the image of an element of degree `n` of `W(U₀)`
+by an element of the geometric subgroup, which lifts (blueprint
+`lem-wf-dense-open-pi1-surjective`, part (2)). -/
+lemma restrictionHom_surjective_of_surjective
+    (hsurj : Function.Surjective (restrictionMap j τ GU GC)) :
+    Function.Surjective (restrictionHom j hj τ GU GC) := by
+  rintro ⟨⟨h, n⟩, hw⟩
+  obtain ⟨γ, hγ⟩ := exists_mem_weilGroup_snd_eq_one pU sU GU
+  let g₀ : weilGroup pU sU GU := ⟨(γ, Multiplicative.ofAdd 1), hγ⟩ ^ n.toAdd
+  have hg₀ : (g₀ : GU × Multiplicative ℤ).2 = n := by
+    rw [Subgroup.coe_zpow, Prod.pow_snd, ← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd]
+  have hρg₀ := (restrictionHom j hj τ GU GC g₀).2
+  rw [restrictionHom_apply, hg₀] at hρg₀
+  have h' : (((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h, 1) : GC × Multiplicative ℤ) ∈
+      weilGroup p sC GC := by
+    convert (weilGroup p sC GC).mul_mem ((weilGroup p sC GC).inv_mem hρg₀) hw using 1
+    simp
+  obtain ⟨g₁, hg₁⟩ := hsurj ((restrictionMap j τ GU GC g₀.1.1)⁻¹ * h)
+  have hg₁W : (g₁, (1 : Multiplicative ℤ)) ∈ weilGroup pU sU GU :=
+    (mem_weilGroup_fundamentalGroupMap_iff j hj sU τ GU GC _ _).2 (hg₁ ▸ h')
+  refine ⟨g₀ * ⟨_, hg₁W⟩, Subtype.ext ?_⟩
+  rw [restrictionHom_apply]
+  simp only [Subgroup.coe_mul, Prod.fst_mul, Prod.snd_mul, map_mul, hg₁, hg₀, mul_one,
+    mul_inv_cancel_left]
+
+/-- **The restriction of Weil groups along a dense open of a regular scheme is surjective**
+(blueprint `lem-wf-dense-open-pi1-surjective`, part (2), for `C₀` regular, e.g. smooth over
+`K`): the map of fundamental groups is surjective
+(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular`). -/
+lemma restrictionHom_surjective_of_isRegular [IsRegular C] [IsLocallyNoetherian C] :
+    Function.Surjective (restrictionHom j hj τ GU GC) :=
+  restrictionHom_surjective_of_surjective j hj τ GU GC
+    (fundamentalGroupMap_surjective_of_isRegular j _ GU GC)
+
+end RestrictionRegular
 
 section Standard
 
