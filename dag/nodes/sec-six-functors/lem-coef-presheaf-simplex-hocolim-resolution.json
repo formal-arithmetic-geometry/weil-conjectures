@@ -32,34 +32,137 @@
   "lem-coef-simplicial-presheaf-projective-model",
   "lem-coef-hocolim-reindexing-zigzags"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $E_F$ is small: its objects form the small sum of the sets $F(d)_n$ over $d\\in D$ and $n\\in\\mathbf N$, and each arrow set is a subset of $\\operatorname{Hom}_D(d,e)\\times\\operatorname{Hom}_\\Delta([n],[m])$. Composition is $(a',\\alpha')(a,\\alpha)=(a'a,\\alpha'\\alpha)$; functoriality and naturality of $F$ preserve the defining equation. The evaluation formula is\n$$\\varepsilon_{d,n,\\sigma}(x)_q(b,t)=F(b)_q\\bigl(F(d)(t)\\sigma\\bigr),\\qquad b:x\\to d,\\quad t:[q]\\to[n].$$\nFor an arrow $(a,\\alpha)$ the equation $F(a)F(e)(\\alpha)\\tau=\\sigma$ makes these maps a cocone. Each $h_d\\times\\Delta^n$ is projectively cofibrant: by evaluation at $d$ (at the identity $1_d$ under Yoneda), a lifting problem against an objectwise trivial fibration is exactly a lifting problem from $\\Delta^n$ against its value at $d$. This lifts since every simplicial set is cofibrant in the Kan model structure. The projective model structure and its lifting characterization are those in [lem-coef-simplicial-presheaf-projective-model]; monomorphism cofibrations are supplied by [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Proposition 2.9 and Section 9.1, printed pp.152,170: small index, explicit evaluation and cofibrant values, expanded from the definitions."
+   }
+  },
+  {
+   "text": "Set $I=E_F$, $\\mathcal M=\\mathsf U(D)$ and $V=B_F$. By [lem-coef-simplicial-presheaf-projective-model] this is a combinatorial simplicial model category; Step 1 gives a small index and cofibrant values. Apply [lem-coef-simplicial-bar-projective-resolution] to obtain a projectively cofibrant $QB_F\\to B_F$ which is an objectwise weak equivalence, and put $R=\\operatorname{colim}_{E_F}QB_F$. Its displayed coend formula and its compatibility with cocones identify its map $R\\to F$ with the evaluation augmentation. The projective diagram model structure exists by [lem-coef-model-colimit-localization-comparison]. The adjunction $\\operatorname{colim}_{E_F}\\dashv\\operatorname{const}$ is left Quillen: its right adjoint preserves fibrations and trivial fibrations because both are objectwise. Explicitly a lifting problem for $\\operatorname{colim}C\\to\\operatorname{colim}C'$ against a (trivial) fibration is adjoint to the lifting problem for $C\\to C'$ against its constant diagram. Hence colimit sends projective cofibrations and trivial cofibrations to those classes in $\\mathsf U(D)$. In particular $R$ and the specified $H_F=\\operatorname{colim}PB_F$ are projectively cofibrant.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-bar-projective-resolution",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Section 2.6 and Section 9.1, printed pp.151-152,170; the projective replacement model is made explicit by the general bar-resolution node (Primer 9.11 and 9.12)."
+   }
+  },
+  {
+   "text": "Fix $x\\in D$. Evaluation, tensors and colimits of simplicial presheaves are computed objectwise. Form the bisimplicial set\n$$Z^x_{p,q}=\\coprod_{i_0\\to\\cdots\\to i_p\\text{ in }E_F}\\operatorname{Hom}_D(x,d_0)\\times\\operatorname{Hom}_\\Delta([q],[n_0]),\\qquad i_0=(d_0,[n_0],\\sigma_0).$$\nIn the $p$ direction use the bar faces (the first one sends $(b,t)$ to $(a_1b,\\alpha_1t)$); in the $q$ direction precompose $t$. These operators commute. The coend formula of Step 2 identifies $R(x)$ with $\\operatorname{diag}Z^x$: in degree $r$ send a representative $(z\\in Z^x_{p,r},\\theta:[r]\\to[p])$ to $Z^x(\\theta,1)z\\in Z^x_{r,r}$. The inverse sends $z$ to $(z,1_{[r]})$, and the coend relations show the two composites are identities. The evaluation formula of Step 1 gives an augmentation $Z^x_{p,q}\\to F(x)_q$, independent of $p$, by $(i_0\\to\\cdots\\to i_p,b,t)\\mapsto F(b)_qF(d_0)(t)\\sigma_0$. The arrow equation in $E_F$ verifies the first face; the other faces and all degeneracies preserve this value. Its diagonal is exactly $R(x)\\to F(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Section 9.1, proof of Proposition 2.9, printed pp.170-171: agent-supplied direct bisimplicial expansion of the evaluated homotopy colimit."
+   }
+  },
+  {
+   "text": "For a fixed $q$, let $C_{x,q}$ have objects $(d,[n],\\sigma,b:x\\to d,t:[q]\\to[n])$ and arrows $(a,\\alpha)$ in $E_F$ with $b'=ab$ and $t'=\\alpha t$. A chain of $p$ arrows is determined by its chain in $E_F$ and its initial $(b,t)$, so its nerve in degree $p$ is exactly $Z^x_{p,q}$, with the same face and degeneracy operators. The label $\\xi=F(b)_qF(d)(t)\\sigma$ is constant on arrows. For every $\\xi\\in F(x)_q$, the object $c_\\xi=(x,[q],\\xi,1_x,1_{[q]})$ is initial among objects with that label: the unique arrow to $(d,[n],\\sigma,b,t)$ is $(b,t)$, and its required $E_F$ equation is precisely the label equation. Define $h_{-1}(\\xi)=c_\\xi$ and define $h_p$ on a chain by prepending $c_\\xi$ and this unique arrow. Deleting the inserted vertex gives $d_0h_p=1$; for a zero-chain deleting its old vertex gives $d_1h_0=h_{-1}\\varepsilon$. Deleting or duplicating any old vertex before or after insertion gives respectively $d_{i+1}h_{p+1}=h_pd_i$ and $s_{i+1}h_p=h_{p+1}s_i$; also $\\varepsilon h_{-1}=1$. Thus these are exactly extra-degeneracy data, including when the label set is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Section 9.1, printed pp.170-171: explicit category-of-representations contraction replacing the Grothendieck-construction/cofinality calculation. The initial object and all extra-degeneracy identities are written out here."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-extra-degeneracy-contraction] to Step 4. It supplies a simplicial section of $Z^x_{\\bullet,q}\\to\\operatorname{const}F(x)_q$ and a simplicial homotopy from section followed by augmentation to the identity. The other composite is the identity, with constant homotopy. Therefore [lem-cbc-simplicial-homotopy-equivalence-weak] makes this augmentation a weak homotopy equivalence. This is a statement about the whole augmented row, so no separate assertion about coproducts of contractible spaces is needed. Now apply [lem-coef-bisimplicial-diagonal-equivalence] with the $p$ direction as the weak-equivalence direction, to the bisimplicial augmentation $Z^x_{p,q}\\to F(x)_q$. The target is constant in $p$ and has diagonal $F(x)$. We obtain that $R(x)\\to F(x)$ is a weak homotopy equivalence. Since $x$ was arbitrary, $R\\to F$ is a weak equivalence in the projective presheaf model structure.",
+   "uses": [
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Section 9.1, printed pp.169-171: extra-degeneracy and bisimplicial diagonal arguments. The row contraction is supplied in Step 4 rather than hidden in a cofinality claim."
+   }
+  },
+  {
+   "text": "Write $Q=QB_F$ and $P=PB_F$, both projectively cofibrant diagrams over $B_F$, with objectwise weak-equivalence augmentations. In the projective diagram model category of [lem-coef-model-colimit-localization-comparison], factor their joint augmentation as\n$$Q\\amalg P\\xrightarrow{j}T\\xrightarrow{p}B_F,$$\nwith $j$ a cofibration and $p$ a trivial fibration. The coproduct $Q\\amalg P$ and then $T$ are cofibrant: a lift from a coproduct is a pair of lifts, and cofibrations compose by their lifting property. Let $u:Q\\to T$ and $v:P\\to T$ be the two inclusions followed by $j$. Both are weak equivalences by two-out-of-three, since $pu$ and $pv$ are the original augmentations. The left Quillen colimit functor of Step 2 preserves weak equivalences between cofibrant objects by [lem-coef-model-infinity-derived-adjunction]. Consequently $\\operatorname{colim}u:R\\to\\operatorname{colim}T$ and $\\operatorname{colim}v:H_F\\to\\operatorname{colim}T$ are weak equivalences. The map $\\operatorname{colim}T\\to F$ induced by $p$ and the evaluation cocone composes with the first to $R\\to F$ and with the second to the required $H_F\\to F$, by the colimit universal property. Step 5 and two-out-of-three first make $\\operatorname{colim}T\\to F$ and then $H_F\\to F$ weak equivalences. This argument only uses the specified replacement's weak equivalence and cofibrant source; it does not assume its augmentation is a trivial fibration. No fibrant replacement of $F$ was used. If $D$ is empty, both presheaves are the unique object; if $F$ is empty-valued, $E_F$ is empty and the same colimit argument applies.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Section 9.1, conclusion of Proposition 2.9, printed p.171. Agent-supplied common-factorization comparison proves independence of every projective cofibrant-replacement choice."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-bar-projective-resolution",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+  "place": "Proposition 2.9 and Section 9.1, printed pp.152,170-171; direct bisimplicial row contraction supplied by Q92 in place of the Grothendieck/cofinality calculation, using the same evaluated canonical homotopy colimit. Online source read, not archived in literature/."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every simplicial presheaf is the homotopy colimit of representable simplices, giving a projective cofibrant approximation",
-   "results": "{\"t\": \"2026-10-16T20:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every simplicial presheaf is the homotopy colimit of representable simplices, giving a projective cofibrant approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.hasColimits\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.sk\"], \"digest\": \"a3f63207d9883df6\"}",
+   "tool": "grep",
+   "query": "homotopy.?colimit|simplicial.?replacement|Bousfield.?Kan",
+   "results": "{\"t\": \"2026-10-16T20:58:50Z\", \"tool\": \"grep\", \"query\": \"homotopy.?colimit|simplicial.?replacement|Bousfield.?Kan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial presheaf has a projective cofibrant approximation by the homotopy colimit of representable standard simplices",
+   "results": "{\"t\": \"2026-10-16T20:58:50Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial presheaf has a projective cofibrant approximation by the homotopy colimit of representable standard simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.toTop\", \"SSet.stdSimplex\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"SSet.instInhabited\"], \"digest\": \"9b6602231346ac1f\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
   },
   {
    "tool": "loogle",
-   "query": "\"coend\", \"Presheaf\"",
-   "results": "{\"t\": \"2026-10-16T20:29:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"coend\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "SSet, \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T20:58:51Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Edge.HomotopyL\", \"SSet.Edge.HomotopyR\", \"SSet.Edge.HomotopyL.homotopyR\", \"SSet.Edge.HomotopyR.homotopyL\", \"SSet.HomotopyCategory\", \"SSet.HomotopyCategory.mk\", \"SSet.instUniqueHomotopyCategoryObjSimplexCategoryStdSimplexMkOfNatNat\", \"SSet.HomotopyCategory.objEquiv\"], \"digest\": \"53fbcd8008b6af2d\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every simplicial presheaf is weakly equivalent to the homotopy colimit of its representable simplices",
+   "results": "{\"t\": \"2026-10-16T20:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"Every simplicial presheaf is weakly equivalent to the homotopy colimit of its representable simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hoFunctor\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\"], \"digest\": \"f97ae4dfb4dc0d3e\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
   },
   {
    "tool": "grep",
-   "query": "homotopy.?colimit|[Cc]ofibrant.*[Pp]resheaf|[Pp]resheaf.*[Cc]ofibrant|[Yy]oneda.*[Hh]omotopy",
-   "results": "{\"t\": \"2026-10-16T20:29:51Z\", \"tool\": \"grep\", \"query\": \"homotopy.?colimit|[Cc]ofibrant.*[Pp]resheaf|[Pp]resheaf.*[Cc]ofibrant|[Yy]oneda.*[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "colimitOfRepresentable|pResolutionObj|IsLeftDerivedFunctor.mk|leftKanExtensionObjIsoColimit",
+   "results": "{\"t\": \"2026-10-16T20:59:31Z\", \"tool\": \"grep\", \"query\": \"colimitOfRepresentable|pResolutionObj|IsLeftDerivedFunctor.mk|leftKanExtensionObjIsoColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\"], \"digest\": \"800e7c4a3db78916\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every simplicial presheaf is a homotopy colimit of representables times standard simplices indexed by its category of elements",
+   "results": "{\"t\": \"2026-10-16T20:59:31Z\", \"tool\": \"leansearch\", \"query\": \"Every simplicial presheaf is a homotopy colimit of representables times standard simplices indexed by its category of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"SSet.instInhabited\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.stdSimplex\", \"SSet.toTop\", \"AlgebraicGeometry.PresheafedSpace.colimit_presheaf\"], \"digest\": \"6345b94ab13739a5\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Limits/Presheaf.lean:283-310: ordinary density of set-valued presheaves, not a weak-equivalence assertion for a derived colimit; SingularSet.lean:88-96: ordinary realization left Kan extension; CofibrantObjectHomotopy.lean:136-151: abstract cofibrant replacement. The homotopy-category and simplex hits do not assert the presheaf resolution."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cosimplicial-presheaf-counit",
@@ -67,5 +170,29 @@
   "group": "Q50"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presheaf-simplex-hocolim-resolution",
+  "worker": "stage1",
+  "summary": "Kept the full imported statement. Introduced one general explicit simplicial bar projective-resolution lemma, reused the existing extra-degeneracy and diagonal theorems, and wrote out the evaluated representation-category initial object and contraction. Compared an arbitrary replacement via a common trivial fibration so no unassumed trivial-fibration hypothesis is used. Searched the DAG, blueprint and both Lean sources; no exact project attachment or Mathlib match.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K, the middle finite-level derived mapping-complex adjunction: this supplies the canonical representable-simplex resolution in the existing model-presentation foundation. Steps 1-2 construct the model, Steps 3-5 prove the evaluation equivalence, and Step 6 treats arbitrary projective replacements. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic implication from an explicit simplicial homotopy equivalence to a weak homotopy equivalence, used for the contracted rows in Step 5. This unit has an extra-degeneracy homotopy but no statement of this implication; it is used as a general tool, not as a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-7cfa08ae9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-7cfa08ae9 (reviewer sub-agent of L); spot-checked: I read all six steps of the item, the new node lem-coef-simplicial-bar-projective-resolution in full, and the statement of every cited node. Item statement: unchanged, true, and it matches what the parent lem-coef-cosimplicial-presheaf-counit (Steps 3-4) uses. I checked the edge cases D empty, F empty-valued, D terminal, and D with automorphisms. Step 1: E_F is small, the evaluation cocone is well-typed, and h_d x Delta^n is cofibrant (by Yoneda the lift reduces to emptyset->Delta^n against a trivial Kan fibration). Step 2: the hypotheses of the bar lemma hold, since U(D) is a combinatorial simplicial model category and B_F has cofibrant values. colim is left Quillen by adjoint lifting. Step 3: the co-Yoneda identification of the coend with diag Z^x checks out, including the first bar face, the augmentation (by naturality of F(a_1)) and the diagonal. Step 4: the initial object c_xi is unique even when D has automorphisms, and every extra-degeneracy identity matches the cited node's list exactly. Step 5: extra-degeneracy gives a homotopy equivalence, hence a weak equivalence, and the bisimplicial diagonal lemma applies in the exchanged direction with the correct orientation. Step 6: the common cofibration/trivial-fibration factorization, the clause that left Quillen functors preserve weak equivalences between cofibrant objects, and two-out-of-three are correct; it does not assume P->B_F is a trivial fibration. New node: true (free diagrams, latching maps are summand inclusions, so the realization is Reedy-cofibrant; the extra degeneracy comes from appending id_j; colim by co-Yoneda), with edge cases I empty, discrete and terminal. It is self-contained, statement-only, carries searches of all three kinds, and is neither a duplicate nor a restated item clause. I compared it with lem-coef-bousfield-kan-comparison-calculus, lem-coef-hocolim-reindexing-zigzags, lem-coef-model-colimit-localization-comparison, lem-coef-simplicial-projective-model-calculus and lem-coef-combinatorial-cofibrant-density. No cycle. Accepted tool_use: lem-cbc-simplicial-homotopy-equivalence-weak (unit sk-prop-sf-cbc); no node in this unit states that implication. Caveat: the Dugger sources are online only and have no archived copy, so I could not reopen the cited pages here. I verified the mathematics directly instead, and proof_origin is correctly marked agent. No fixes."
+ }
 }
