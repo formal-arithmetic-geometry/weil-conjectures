@@ -1,6 +1,6 @@
 # Work queue
 
-37 items; claim with `tools/claim.py next <group> [--stage N]`.
+35 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (37)
+## Stage 3: modules to prove (35)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -37,12 +37,10 @@
 | `Sheaf.Paper.CondensedLocalPieceCostalkModel` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff` | 9 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
