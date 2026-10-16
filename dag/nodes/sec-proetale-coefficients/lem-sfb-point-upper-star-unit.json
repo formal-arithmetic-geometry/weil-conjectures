@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-point-upper-star-unit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$p^*$ preserves the unit",
@@ -18,34 +18,158 @@
  ],
  "proof": [
   {
-   "text": "$p_*$ is lax monoidal because restriction along $u$ commutes with the\nobjectwise tensor product and is compatible with sheafification.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For the unit, the constant sheaf $\\Z$ is the sheafification of the constant\npresheaf $\\Z$. Moreover, $\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}$\ninverts sheafification, since both sides are left adjoint to restriction of\nsheaves. So it suffices to compute $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ of\nthe constant presheaf.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "At $V$, this Kan extension is the colimit of the constant diagram $\\Z$ over\nthe opposite of the category of pairs $(S,\\ V\\to u(S))$. That category is\nnonempty: take the one-point set and $V\\to\\Spec\\Z$. It is cofiltered,\nbecause $u$ preserves finite limits\n([lem-sfb-profinite-to-proetale-finite-limits]), and hence connected. So the\ncolimit is $\\Z$. The comparison map is therefore the identity of the\nconstant presheaf, and it remains an isomorphism after sheafification.",
+   "text": "Write $C=*_{\\mathrm{proét}}$, $D=(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proét}}$, $a_C,a_D$ for sheafification, $i_C,i_D$ for inclusion of sheaves, and $r$ for presheaf restriction along $u^{\\mathrm{op}}$. Fix a universe in which the sites have sets of objects and arrows and the abelian value category admits colimits of those sizes, using the essentially small site convention of [sk-def-sfb-sheaf-tensor]. By [sk-def-sfb-sheaf-tensor], $a_C,a_D$ are strong monoidal for the objectwise presheaf tensor product and the stated sheaf tensors, and the units are $a_C\\underline{\\mathbf Z},a_D\\underline{\\mathbf Z}$. By [def-weil-pbc-sheafification] we have $a_D\\dashv i_D$. Apply [lem-sfb-monoidal-adjunction-mates] to its strong monoidal left adjoint: $i_D$ is lax monoidal. With the sheaf tensor unit defined as $a_D\\underline{\\mathbf Z}$, the canonical strong unit comparison of $a_D$ is the identity. Thus its right adjoint's lax unit $\\underline{\\mathbf Z}\\to i_Da_D\\underline{\\mathbf Z}$ is the sheafification unit: it is the mate of the inverse strong unit comparison of $a_D$.",
    "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "lem-sfb-monoidal-adjunction-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "First paragraph: monoidal sheafification and its right adjoint"
+   }
+  },
+  {
+   "text": "Restriction $r$ is strong monoidal: at $S$ both $r(P\\otimes Q)$ and $rP\\otimes rQ$ are $P(uS)\\otimes Q(uS)$, and its unit comparison is the identity on $\\mathbf Z$. Thus $a_C r i_D$ is lax monoidal by composing these structure maps: the tensor map first uses the tensor comparison for $a_Cr$, then applies $a_Cr$ to that of $i_D$; the unit map is the analogous composite. The coherence diagrams reduce to the respective diagrams for these three functors by functoriality. By [lem-sfb-profinite-to-proetale-continuous], $ri_DG$ is already a sheaf, so the sheafification counit identifies $a_Cri_D$ with the restriction functor $p_*$ of [def-sfb-point-lower-star]. It is an isomorphism since the sheafification universal property applied to a sheaf gives an inverse to its counit. Transport the structure along this identification. Explicitly its tensor map is the unique sheaf map from $a_C(ri_DF\\otimes ri_DG)$ induced by restricting the map $i_DF\\otimes i_DG\\to i_Da_D(i_DF\\otimes i_DG)$. Its unit $e:a_C\\underline{\\mathbf Z}\\to p_*a_D\\underline{\\mathbf Z}$ is uniquely determined by $i_C(e)\\circ k_{\\underline{\\mathbf Z}}=r(k'_{\\underline{\\mathbf Z}})$, where $k,k'$ are the sheafification units on $C,D$. These descriptions follow by the unit universal properties in [def-weil-pbc-sheafification].",
+   "uses": [
+    "lem-sfb-profinite-to-proetale-continuous",
+    "def-sfb-point-lower-star",
+    "def-weil-pbc-sheafification",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "First paragraph: the restriction lax structure and its actual unit map"
+   }
+  },
+  {
+   "text": "Use the canonical adjunction [def-sfb-point-adjunction]: by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], its Hom bijections are the composite of the Kan-extension and sheafification adjunctions, restricted to source sheaves. Its hypotheses hold because the sites have the size fixed in step 1 and restriction takes sheaves to sheaves by [lem-sfb-profinite-to-proetale-continuous]. Apply [lem-sfb-monoidal-adjunction-mates] to this lax structure on $p_*$. This gives the oplax structure on $p^*$, whose unit comparison $h:p^*a_C\\underline{\\mathbf Z}\\to a_D\\underline{\\mathbf Z}$ is precisely the adjoint of the map $e$ in step 2.",
+   "uses": [
+    "def-sfb-point-adjunction",
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-sfb-profinite-to-proetale-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Statement: the oplax structure is transferred under the given adjunction"
+   }
+  },
+  {
+   "text": "Put $T=a_D\\operatorname{Lan}_{u^{\\mathrm{op}}}$ on presheaves. The Kan-extension adjunction is [lem-weil-pbc-presheaf-pullback-left-exact], clause 1, applied to $b=u$; [def-sfb-point-upper-star] identifies $p^*$ with $T i_C$. For every presheaf $Q$ and sheaf $H$ on $D$, it and [def-weil-pbc-sheafification] give\n$$\\operatorname{Hom}(T i_Ca_CQ,H)\\simeq\\operatorname{Hom}(i_Ca_CQ,ri_DH)\\simeq\\operatorname{Hom}(Q,ri_DH)\\simeq\\operatorname{Hom}(TQ,H).$$\nThe middle bijection is precomposition with $k_Q:Q\\to i_Ca_CQ$; it applies because $ri_DH$ is a sheaf by [lem-sfb-profinite-to-proetale-continuous]. The composite is precomposition with $T(k_Q)$, so $T(k_Q)$ is an isomorphism. Indeed, for $f:A\\to B$ inducing these bijections, surjectivity for $H=A$ gives $g:B\\to A$ with $gf=1_A$, and injectivity for $H=B$ then gives $fg=1_B$. This proves the required compatibility with sheafification without assuming that restriction commutes with sheafification on arbitrary presheaves.",
+   "uses": [
+    "lem-weil-pbc-presheaf-pullback-left-exact",
+    "def-sfb-point-upper-star",
+    "def-weil-pbc-sheafification",
+    "lem-sfb-profinite-to-proetale-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Second paragraph: sheafified Kan extension inverts source sheafification units; Stacks 00VE, 00VF, 00WH"
+   }
+  },
+  {
+   "text": "To compute $\\operatorname{Lan}_{u^{\\mathrm{op}}}\\underline{\\mathbf Z}$, apply the formula in [lem-weil-pbc-presheaf-pullback-left-exact], clause 1. At $V\\in D$ the index is $I_V^{\\mathrm{op}}$, where $I_V$ has objects $(S,\\phi:V\\to uS)$ and arrows $f:S\\to S'$ with $u(f)\\phi=\\phi'$. Its diagram is constant $\\mathbf Z$ with identity transition maps. Use the essentially small site convention of [sk-def-sfb-sheaf-tensor]: choose the sites in a universe in which their objects and arrows are sets and their abelian groups admit colimits of that size, so the cited small-category formula applies. In particular the pairs and arrows above form sets. The one-point profinite set $*$ is terminal because every profinite set has exactly one map to it. By [lem-sfb-profinite-to-proetale-finite-limits], $u$ preserves this empty limit, so $u(*)$ is terminal in $D$. For every $V$, the object $t_V=(*,V\\to u(*))$ is terminal in $I_V$: from $(S,\\phi)$ the unique map is $S\\to *$, and its required equation holds because there is only one map $V\\to u(*)$. Thus $I_V^{\\mathrm{op}}$ is nonempty and connected: every object is linked to $t_V$ by the opposite of this arrow. No existence of other finite limits or general filtered-colimit theorem is needed for this connectedness argument.",
+   "uses": [
+    "lem-weil-pbc-presheaf-pullback-left-exact",
+    "sk-def-sfb-sheaf-tensor",
     "lem-sfb-profinite-to-proetale-finite-limits"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Third paragraph: pointwise Kan formula and connectedness (only the terminal-object part of finite-limit preservation is needed); Stacks 00VE, 00VF"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-colimit-constant-connected-diagram], the constant $\\mathbf Z$ diagram on the nonempty connected category $I_V^{\\mathrm{op}}$ of step 5 has colimit $\\mathbf Z$, with identity legs. Hence the map $c:\\operatorname{Lan}_{u^{\\mathrm{op}}}\\underline{\\mathbf Z}\\to\\underline{\\mathbf Z}$ induced by identity maps from every copy of $\\mathbf Z$ is an isomorphism at every $V$. It is natural: for $g:V'\\to V$ the index functor sends $(S,\\phi)$ to $(S,\\phi g)$, and the restriction map is the identity after these colimit identifications, as one checks on every colimit leg. Moreover $c$ is the Kan adjoint of the identity $\\underline{\\mathbf Z}\\to r\\underline{\\mathbf Z}$: the Kan adjunction sends this identity to the cocone whose leg at $(S,\\phi)$ is the identity. This also follows directly from the Kan universal property and the formula in [lem-weil-pbc-presheaf-pullback-left-exact].",
+   "uses": [
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-presheaf-pullback-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Third paragraph: connected constant colimit, naturality and the canonical comparison"
+   }
+  },
+  {
+   "text": "Set $Q=\\underline{\\mathbf Z}$ and $B=a_D\\underline{\\mathbf Z}$. The map $h\\circ T(k_Q):TQ\\to B$ corresponds under the composite Kan/sheafification adjunctions to $i_C(e)\\circ k_Q=r(k'_Q)$ by steps 2 and 3. The map $a_D(c):TQ\\to B$ corresponds to exactly the same presheaf map: $c$ is adjoint to the identity, and postcomposing its target with $k'_Q$ gives $r(k'_Q)$. Thus $h\\circ T(k_Q)=a_D(c)$ by injectivity of the composite Hom bijection specified by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] and the adjunction bijections in [def-sfb-point-adjunction], [def-weil-pbc-sheafification] and [lem-weil-pbc-presheaf-pullback-left-exact]. Step 4 makes $T(k_Q)$ invertible and step 6 makes $c$ invertible. Sheafification sends an inverse to an inverse, so $a_D(c)$ is invertible and consequently so is $h$. This proves the required unit comparison, with the tensor units identified as in [sk-def-sfb-sheaf-tensor].",
+   "uses": [
+    "def-sfb-point-adjunction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-presheaf-pullback-left-exact",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Final sentences: identification and invertibility of the actual oplax unit comparison"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-profinite-to-proetale-finite-limits"
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-profinite-to-proetale-continuous",
+  "def-sfb-point-lower-star",
+  "def-sfb-point-adjunction",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-presheaf-pullback-left-exact",
+  "def-sfb-point-upper-star",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-weil-pbc-colimit-constant-connected-diagram"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+  "place": "All three paragraphs; explicit monoidal mates and adjunction calculations supplied using the cited Mathlib/Stacks interfaces."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For abelian sheaves on sites a continuous functor restriction is lax monoidal and its left adjoint preserves the tensor unit",
+   "results": "CategoryTheory.Functor.sheafAdjunctionContinuous; CategoryTheory.sheafToPresheaf_μ (CartesianMonoidal); CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.sheafToPresheafMonoidal (CartesianMonoidal); SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: the generic sheaf adjunction is already cited; CartesianMonoidal uses a different tensor; the module-sheaf pullback unit requires comparison with a different category and functor, so is not a one-line specialization. Read PullbackFree.lean including its F.Final hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves along a continuous functor of sites preserves the tensor unit after taking its left adjoint",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item: general sheafification/adjunction and module pullback results require the specific restriction and comparison calculations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extension of a constant functor over a connected comma category is constant",
+   "results": "CategoryTheory.Functor.leftKanExtension, CategoryTheory.Functor.IsLeftKanExtension.mk, CategoryTheory.Functor.IsLeftKanExtension, CategoryTheory.Functor.LeftExtension, CategoryTheory.Limits.isLimitConstCone, CategoryTheory.Functor.HasLeftKanExtension, CategoryTheory.Bicategory.lanIsKan, CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item: general sheafification/adjunction and module pullback results require the specific restriction and comparison calculations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item: general sheafification/adjunction and module pullback results require the specific restriction and comparison calculations"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointOplaxMonoidal|sheafPushforward.*[Mm]onoidal|colimitConstIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item: general sheafification/adjunction and module pullback results require the specific restriction and comparison calculations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -66,5 +190,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-point-upper-star-unit",
+  "worker": "stage1",
+  "summary": "Expanded the lax pushforward construction, transferred the oplax structure by monoidal adjunction mates, proved sheafification-unit invariance through explicit Hom bijections, reused the general abelian presheaf Kan formula and connected-colimit leaf (connectedness is verified directly from the distinguished terminal object), and identified the actual mate unit map before concluding invertibility. One new generic Mathlib leaf; no statement change. The canonical composite Hom bijection is supplied explicitly by the existing continuous-functor sheaf adjunction leaf, avoiding any reliance on an unnamed choice of adjunction.",
+  "blueprint": "Steps 1–2 realize paragraph 1 of lem-sfb-point-upper-star-unit.proof.md; step 3 realizes the statement's adjunction sentence; step 4 realizes paragraph 2; steps 5–7 realize paragraph 3, including the identity comparison. This is part 3 of sk-def-sfb-pullback-from-point, whose route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-7bcf5eef4",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-7bcf5eef4 (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements, sources, and unit/chapter route. All seven steps are valid, including the canonical mate comparison; the new leaf matches Mathlib exactly. Empty-object checks and duplicate/cycle searches passed. No repairs or tool-use exceptions needed. Detailed checks are in review.md."
+ }
 }

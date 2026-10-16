@@ -1,0 +1,97 @@
+{
+ "id": "det-sp-normalized-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization paragraph: reduction/inverse-limit equivalence and the unit/counit isomorphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral constructible complexes are normalized constructible towers",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and a scheme $T$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-pc-scheme]. On the small pro-etale site of $T$ use the completed coefficient sheaf $R_T=\\widehat{\\mathcal O}_{E,T}=\\varprojlim_{n\\geq1}(\\mathcal O_E/\\ell^n)_T$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Write $D(T_{\\mathrm{proét}},\\mathcal O_E)=D(\\operatorname{Mod}(R_T))$ for its derived category [def-weil-abstract-derived-category]. Use the coefficient tower category $\\operatorname{Tow}(T,\\mathcal O_E)$ of [sk-def-sp-coefficient-towers], its derived category, and the full subcategory of normalized constructible towers with uniform cohomological and Tor bounds of [sk-def-sp-normalized-towers, def-weil-finite-tor-amplitude]. Let $\\Dbc(T,\\mathcal O_E)$ be the derived-complete integral constructible category of [def-weil-derived-complete-integral-detailed], with derived completeness as in [def-weil-derived-complete].\n\nThe derived reduction functor\n$$r_T=\\operatorname{red}_T:D(T_{\\mathrm{proét}},\\mathcal O_E)\\longrightarrow D(\\operatorname{Tow}(T,\\mathcal O_E)),\\qquad M\\longmapsto(M\\otimes^L_{R_T}(\\mathcal O_E/\\ell^n)_T)_{n\\geq1}$$\n[det-sp-reduction-tower-normalized] is left adjoint to total derived inverse limit $L_T=R\\varprojlim$ (forgetting finite-level scalars to $R_T$ before taking the limit, and using the exact total-derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; [def-weil-pbc-derived-inverse-limit] fixes the underlying Roos-triangle notation). The unit $M\\to L_Tr_TM$ is an isomorphism on derived-complete objects. The counit $r_TL_TC_\\bullet\\to C_\\bullet$ is an isomorphism on normalized towers. Consequently the adjunction restricts to mutually inverse equivalences\n$$\\operatorname{red}_T:\\Dbc(T,\\mathcal O_E)\\rightleftarrows\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)_{\\mathrm{norm}}:R\\varprojlim_n.$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.md",
+  "place": "Statement and proof, id det-sp-normalized-equivalence; surrounding unit sk-lem-sp-tower",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 3.5.2-3.5.3 and Lemma 3.5.7(1)-(5), pp. 24-25; regular principal ideal (ell) in O_E gives the unbounded equivalence"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "det-sp-reduction-tower-normalized",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adic completion equivalence compatible systems of modules modulo powers ideal",
+   "results": "8 hits, headed by AdicCompletion.ext_iff and IsAdicComplete.of_lift; ordinary module completion, not derived sheaf/tower adjunction or equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 hits, including Adjunction.mkOfHomEquiv and Equivalence.toAdjunction; these construct abstract adjunctions, not the derived coefficient-tower adjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion|DerivedCompletion|normalized.*tower|adic.*system",
+   "results": "25 displayed hits, all ordinary adic completion/number-field sources; no derived sheaf coefficient-tower equivalence. Additional CategoryTheory-only search returned 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived complete modules equivalent to compatible complexes over quotient rings",
+   "results": "8 hits: IsPrecomplete, AdicCompletion, IsAdicComplete, isPrecomplete_iff, Hausdorffification, isAdicComplete_iff, AdicCompletion.of_bijective_iff, IsPrecomplete.prec'. These concern ordinary module completion, not derived sheaves and normalized coefficient systems.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adic\"",
+   "results": "12 hits in contradiction tactics and monadic iterators; none asserts a derived coefficient-system equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Derived.*[Cc]omplet|[Cc]omplet.*Derived|[Nn]ormalized.*[Tt]ower|[Tt]ower.*[Ss]heaf",
+   "results": "8 hits: normalized field trace and scalar towers in scheme structure sheaves. None states a derived completion or normalized sheaf-tower theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-adjunction-bijection",
+  "date": "2026-10-16"
+ },
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction"
+}

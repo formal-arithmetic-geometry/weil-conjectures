@@ -1,0 +1,76 @@
+{
+ "id": "lem-sfb-monoidal-adjunction-mates",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-point-upper-star-unit",
+   "place": "Statement, 'By the adjunction ... p^* is therefore oplax monoidal', and proof first paragraph: the lax structure on restriction obtained from sheafification.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lax and oplax monoidal structures transferred by adjunction",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories (categories with a tensor bifunctor, tensor unit, associator and left and right unitors satisfying the pentagon and triangle identities), with tensor units $\\mathbf1_{\\mathcal C},\\mathbf1_{\\mathcal D}$, and let $L:\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal C$ have an adjunction $L\\dashv R$, with natural bijections $\\Phi_{X,Y}:\\operatorname{Hom}(LX,Y)\\simeq\\operatorname{Hom}(X,RY)$. Use the lax/strong monoidal conventions of [det-def-sfb-ring-object-transport]. A lax monoidal structure means maps $\\varepsilon_R:\\mathbf1_{\\mathcal C}\\to R\\mathbf1_{\\mathcal D}$ and $\\mu_{Y,Z}:RY\\otimes RZ\\to R(Y\\otimes Z)$ satisfying naturality and the associativity and unit coherence diagrams. An oplax monoidal structure has maps in the reverse directions and the corresponding coherence diagrams.\n\nThere is a bijection between lax monoidal structures on $R$ and oplax monoidal structures on $L$, obtained by adjunction mates. In the direction from $R$ to $L$, the oplax unit map is $\\eta_L=\\Phi_{\\mathbf1_{\\mathcal C},\\mathbf1_{\\mathcal D}}^{-1}(\\varepsilon_R)$. In the reverse direction the lax unit map is $\\varepsilon_R=\\Phi_{\\mathbf1_{\\mathcal C},\\mathbf1_{\\mathcal D}}(\\eta_L)$. In particular, a strong monoidal left adjoint has a canonically lax monoidal right adjoint.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+  "place": "First paragraph and the oplax assertion in the statement; generic mate theorem in Mathlib/CategoryTheory/Monoidal/Functor.lean:947 (rightAdjointLaxMonoidal), :1064 (leftAdjointOplaxMonoidal), :1127 (laxMonoidalEquivOplaxMonoidal)."
+ },
+ "stmt_deps": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint of a lax monoidal functor is oplax monoidal and a right adjoint of an oplax monoidal functor is lax monoidal with unit given by the adjunction mate",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: generic mate correspondence, with unit formulas read in the two definitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint of an oplax monoidal functor has a lax monoidal structure",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Functor.RightLinear.toLaxRightLinear, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.IsMonoidal.rec",
+   "date": "2026-10-16",
+   "verdict": "match: generic mate correspondence, with unit formulas read in the two definitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal",
+   "results": "CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "match: generic mate correspondence, with unit formulas read in the two definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "def laxMonoidalEquivOplaxMonoidal|def (rightAdjointLaxMonoidal|leftAdjointOplaxMonoidal)",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "match: generic mate correspondence, with unit formulas read in the two definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates give an equivalence between lax monoidal structures on the right adjoint and oplax monoidal structures on the left adjoint",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.map_η_comp_η",
+   "date": "2026-10-16",
+   "verdict": "match: generic correspondence; the exact equivalence and both unit fields were read in Monoidal/Functor.lean:947-948,1064-1065,1127-1138"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal",
+  "file": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "how": "exact: laxMonoidalEquivOplaxMonoidal at line 1127 is the equivalence R.LaxMonoidal ≃ L.OplaxMonoidal. Its forward and inverse constructions are leftAdjointOplaxMonoidal at line 1064 (unit = homEquiv.symm of the lax unit, line 1065) and rightAdjointLaxMonoidal at line 947 (unit = homEquiv of the oplax unit, line 948). A strong monoidal L has its inverse unit and tensor comparisons as an oplax structure, so the last sentence specializes rightAdjointLaxMonoidal in one line.",
+  "line": 1127
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-upper-star-unit",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-pullback-from-point"
+}

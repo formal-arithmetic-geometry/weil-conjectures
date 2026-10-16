@@ -3,57 +3,237 @@
  "blueprint": {
   "is": "lem-sfb-eta-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\eta$ is compatible with composition",
- "statement": "Let $\\Lambda$ be a condensed ring, and let $f\\colon X\\to Y$ and\n$g\\colon Y\\to Z$ be morphisms of schemes. Then\n$$\n\\eta_{g\\circ f}=c_{f,g}\\circ g_*(\\eta_f)\\circ\\eta_g\\colon\n\\Lambda_Z\\longrightarrow(g\\circ f)_*\\Lambda_X ,\n$$\nwhere the $\\eta$ are as in [def-sfb-eta] and\n$c_{f,g}\\colon g_*f_*\\cong(g\\circ f)_*$ is the composition isomorphism of\n[sk-def-sfb-finite-pushforward-pullback] at $\\Lambda_X$.",
+ "statement": "Let $\\Lambda$ be a condensed ring, and let $f\\colon X\\to Y$ and $g\\colon Y\\to Z$ be morphisms of schemes.\n\nFor every scheme $T$, write $\\pi_T\\colon T\\to\\operatorname{Spec}\\mathbf Z$ for its structure morphism. Let $p^*$ be the inverse-image functor from the point used in [def-sfb-upper-star-from-point], put $F=p^*\\Lambda$, and write $\\Lambda_T=\\pi_T^*F$ for the coefficient object of [sk-def-sfb-pulled-back-coefficients].\n\nUse the following explicit source construction of the pullback composition comparisons in [def-sfb-pullback-from-point-comp-iso], [def-sfb-alpha] and [def-sfb-eta]. For any composable scheme morphisms $a\\colon A\\to B$, $b\\colon B\\to C$, let $c_{a,b}\\colon b_*a_*\\xrightarrow{\\sim}(b\\circ a)_*$ be [def-sfb-finite-lower-star-comp]. Under the adjunctions of [def-sfb-finite-upper-lower-star-adjunction], including the composite adjunction of [def-weil-pbc-composite-adjunction], define\n$$\nm_{a,b}\\colon a^*b^*\\xrightarrow{\\sim}(b\\circ a)^*\n$$\nto be the unique comparison corresponding to $c_{a,b}^{-1}$ by [lem-weil-pbc-conjugate-iso-unit-equation]: use $L_1=a^*b^*$, $R_1=b_*a_*$, $L_2=(b\\circ a)^*$, $R_2=(b\\circ a)_*$ and $\\delta=c_{a,b}^{-1}$ there. The forward pullback composition comparison is $m_{a,b}^{-1}$. Equivalently, by the conjugation bijection of [def-weil-pbc-adjunction-conjugate], the conjugate of $m_{a,b}$ is $c_{a,b}^{-1}$. Thus for $h\\colon A\\to B$, $\\alpha_h$ is $(m_{h,\\pi_B})_{p^*\\Lambda}$ after the canonical equality $\\pi_B\\circ h=\\pi_A$, and $\\eta_h$ is its adjunct as in [def-sfb-eta]. This fixes the comparison by construction, rather than imposing an additional condition on $a,b$ or $\\Lambda$.\n\nThen\n$$\n\\eta_{g\\circ f}=(c_{f,g})_{\\Lambda_X}\\circ g_*(\\eta_f)\\circ\\eta_g\\colon\n\\Lambda_Z\\longrightarrow(g\\circ f)_*\\Lambda_X.\n$$\n",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.md",
   "place": "node lem-sfb-eta-comp, order 1567"
  },
  "stmt_deps": [
-  "def-sfb-eta"
+  "def-sfb-eta",
+  "def-sfb-finite-lower-star-comp",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-alpha",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-sfb-upper-star-from-point",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof": [
   {
-   "text": "Write $F=p^*\\Lambda$, a sheaf on $(\\Spec\\Z)_{\\mathrm{proét}}$, so that\n$\\Lambda_X=\\pi_X^*F$ for every scheme $X$. Let $f\\colon X\\to Y$. By\n[def-sfb-alpha] and [def-sfb-pullback-from-point-comp-iso],\n$\\alpha_f$ is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*F\\cong f^*\\pi_Y^*F$, followed by $\\pi_Y\\circ f=\\pi_X$. By\n[def-sfb-eta], $\\eta_f$ is the mate of $\\alpha_f$ under $f^*\\dashv f_*$.",
+   "text": "Work in sheaves of abelian groups, with ordinary (not derived) functors. Write $k_T=\\pi_T:T\\to\\operatorname{Spec}\\mathbf Z$ and $F=p^*\\Lambda$. By [sk-def-sfb-pulled-back-coefficients] and [def-sfb-upper-star-from-point], $\\Lambda_T=k_T^*F$. Write $u_h$ for the unit of $h^*\\dashv h_*$ from [def-sfb-finite-upper-lower-star-adjunction]. For $h:A\\to B$, the equality $k_B\\circ h=k_A$ and [def-sfb-pullback-from-point-comp-iso, def-sfb-alpha] identify $\\alpha_h:h^*k_B^*F\\to k_A^*F$ with the inverse pullback composition comparison evaluated at $F$. By [def-sfb-eta], $\\eta_h=h_*(\\alpha_h)\\circ u_{h,k_B^*F}$. Put $v_T=u_{k_T,F}:F\\to k_{T*}\\Lambda_T$.",
    "uses": [
-    "def-sfb-alpha",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-upper-star-from-point",
+    "def-sfb-finite-upper-lower-star-adjunction",
     "def-sfb-pullback-from-point-comp-iso",
+    "def-sfb-alpha",
     "def-sfb-eta"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 1: identify the coefficient maps and fix units"
+   }
   },
   {
-   "text": "The composition isomorphism of pullbacks is, by definition, conjugate to the\ncomposition isomorphism of pushforwards\n([sk-def-sfb-finite-pushforward-pullback]). So under the adjunction\n$\\pi_Y^*\\dashv\\pi_{Y*}$, the morphism $\\eta_f\\colon\\pi_Y^*F\\to f_*\\pi_X^*F$\ncorresponds to\n$$\nF\\longrightarrow\\pi_{X*}\\pi_X^*F\\cong\\pi_{Y*}f_*\\pi_X^*F,\n$$\nthe unit of $\\pi_X^*\\dashv\\pi_{X*}$ followed by the inverse of the\ncomposition isomorphism $\\pi_{Y*}f_*\\cong(\\pi_Y\\circ f)_*=\\pi_{X*}$.",
-   "uses": [],
-   "elementary": null
+   "text": "For $h\\colon A\\to B$, let $c_{h,k_B}\\colon k_{B*}h_*\\xrightarrow{\\sim}k_{A*}$ be [def-sfb-finite-lower-star-comp], using $k_B\\circ h=k_A$. Apply the actual comparison construction in the statement: $m_{h,k_B}$ is the unique natural isomorphism supplied by [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=h^*k_B^*$, $R_1=k_{B*}h_*$, $L_2=k_A^*$, $R_2=k_{A*}$ and $\\delta=c_{h,k_B}^{-1}$. By the bijection of [def-weil-pbc-adjunction-conjugate] this is precisely the inverse conjugate of $c_{h,k_B}^{-1}$; in particular it is the inverse of the forward pullback comparison, not that forward comparison. By [def-sfb-pullback-from-point-comp-iso, def-sfb-alpha] and the explicit source normalization in the statement, $(m_{h,k_B})_F=\\alpha_h$. By [def-weil-pbc-composite-adjunction] the unit for $L_1\\dashv R_1$ at $F$ is $k_{B*}(u_{h,k_B^*F})\\circ v_B$. The cited unit equation therefore reads\n$$\nk_{B*}h_*(\\alpha_h)\\circ k_{B*}(u_{h,k_B^*F})\\circ v_B\n=(c_{h,k_B}^{-1})_{\\Lambda_A}\\circ v_A.\n$$\nFunctoriality and the defining formula for $\\eta_h$ in step 1 give\n$$\nk_{B*}(\\eta_h)\\circ v_B=(c_{h,k_B}^{-1})_{\\Lambda_A}\\circ v_A.\\tag{1}\n$$\nThis applies to $h=f,g,g\\circ f$. It uses the explicit construction and the unit equation of the cited leaf; it takes no mate identity from the incorrectly oriented imported comparison definition.",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-sfb-pullback-from-point-comp-iso",
+    "def-sfb-alpha",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 2, with the source comparison construction explicitly corrected in the statement; Stacks Tags 0B65 and 0DV0"
+   }
   },
   {
-   "text": "Apply this description to $f$, $g$ and $g\\circ f$. Under\n$\\pi_Z^*\\dashv\\pi_{Z*}$, both sides of the claim correspond to morphisms\n$F\\to\\pi_{Z*}(g\\circ f)_*\\pi_X^*F$. Each is the unit of\n$\\pi_X^*\\dashv\\pi_{X*}$ followed by a composite of composition isomorphisms\nof pushforwards, together with naturality of the units. These composites\nagree by the associativity of the composition isomorphisms for the triple\n$f,g,\\pi_Z$.",
-   "uses": [],
-   "elementary": null
+   "text": "For every sheaf $H$ on $X_{\\mathrm{pro\\acute et}}$, the comparisons of [def-sfb-finite-lower-star-comp] satisfy\n$$ (c_{g\\circ f,k_Z})_H\\circ k_{Z*}((c_{f,g})_H)\n=(c_{f,k_Y})_H\\circ(c_{g,k_Z})_{f_*H}.\\tag{2}$$\nIndeed [def-sfb-finite-lower-star] computes each pushforward by restriction along base change. Evaluate on $V\\in(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{pro\\acute et}}$. Both composites in (2) restrict $H$ along the same canonical isomorphism between $((V\\times_{\\operatorname{Spec}\\mathbf Z}Z)\\times_ZY)\\times_YX$ and $V\\times_{\\operatorname{Spec}\\mathbf Z}X$. The two maps have the same projections to $V$ and $X$, so they agree by the defining universal property of the fibre product; their inverses agree as well. Restriction is functorial, hence the resulting maps on sections agree for every $V$, proving (2). At $H=\\Lambda_X$, compose (2) with the inverse comparisons to obtain\n$$ k_{Z*}((c_{f,g})_{\\Lambda_X})\\circ(c_{g,k_Z}^{-1})_{f_*\\Lambda_X}\\circ(c_{f,k_Y}^{-1})_{\\Lambda_X}\n=(c_{g\\circ f,k_Z}^{-1})_{\\Lambda_X}.\\tag{3}$$",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 4: associativity on sections, including its inverse form"
+   }
   },
   {
-   "text": "That associativity holds on sections. Both sides are the restriction along\nthe canonical isomorphism between the iterated fibre products\n$((V\\times_{\\Spec\\Z}Z)\\times_ZY)\\times_YX$ and $V\\times_{\\Spec\\Z}X$, and maps\ninto a fibre product are determined by their projections.",
-   "uses": [],
-   "elementary": null
+   "text": "Set $t=(c_{f,g})_{\\Lambda_X}\\circ g_*(\\eta_f)\\circ\\eta_g$. Its transpose under $k_Z^*\\dashv k_{Z*}$ is $k_{Z*}(t)\\circ v_Z$, by the Hom bijection of [def-sfb-finite-upper-lower-star-adjunction]. Expand functoriality, then apply (1) for $g$:\n$$k_{Z*}(t)\\circ v_Z=k_{Z*}((c_{f,g})_{\\Lambda_X})\\circ k_{Z*}g_*(\\eta_f)\\circ(c_{g,k_Z}^{-1})_{\\Lambda_Y}\\circ v_Y.$$\nNaturality of the isomorphism $c_{g,k_Z}^{-1}$ from [def-sfb-finite-lower-star-comp] at the morphism $\\eta_f:\\Lambda_Y\\to f_*\\Lambda_X$ gives\n$$k_{Z*}g_*(\\eta_f)\\circ(c_{g,k_Z}^{-1})_{\\Lambda_Y}=(c_{g,k_Z}^{-1})_{f_*\\Lambda_X}\\circ k_{Y*}(\\eta_f).$$\nSubstitute this, then (1) for $f$, then (3). The result is\n$$k_{Z*}(t)\\circ v_Z=(c_{g\\circ f,k_Z}^{-1})_{\\Lambda_X}\\circ v_X.$$\nBy (1) for $g\\circ f$, this is also $k_{Z*}(\\eta_{g\\circ f})\\circ v_Z$.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-lower-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 3: explicitly expand the two transposes and the naturality square"
+   }
+  },
+  {
+   "text": "The Hom correspondence for $k_Z^*\\dashv k_{Z*}$ in [def-sfb-finite-upper-lower-star-adjunction] is a bijection, so equality of the transposes in step 4 implies $t=\\eta_{g\\circ f}$. This is precisely the claimed identity with the composition comparison evaluated at $\\Lambda_X$.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 3, conclusion by injectivity of the adjunction bijection"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-alpha",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-lower-star-adjunction",
   "def-sfb-pullback-from-point-comp-iso",
-  "def-sfb-eta"
+  "def-sfb-alpha",
+  "def-sfb-eta",
+  "def-sfb-finite-lower-star-comp",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-finite-lower-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+  "place": "paragraphs 1-4, expanded unit and naturality calculations; generic tools from Stacks Tags 0B65 and 0DV0; inverse comparison construction corrected against upstream Defs.lean:294-298 and Coherence.lean:229-234"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(unit|comp)|unit.*conjugate|homEquiv.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction units and conjugate composition isomorphisms are compatible with composition",
+   "results": "8 hits: CategoryTheory.Adjunction.comp_unit, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Bicategory.Adjunction.compUnit, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Bicategory.Adjunction.comp_unit, CategoryTheory.unit_conjugateEquiv, CategoryTheory.Adjunction.CoreUnitCounit.unit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"comp\"",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.map_comp_bijective_iff, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.left_triangle_components_assoc",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of the pullback composition comparison satisfies the composition law for coefficient unit maps into pushforwards",
+   "results": "8 hits: PresheafOfModules.pullbackComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of adjoint coefficient morphisms for sheaves pulled back from a terminal base scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv|conjugateIsoEquiv_symm",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction transposes with composition of direct image functors for sheaves",
+   "results": "8 hits: CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.sheafComposeNatIso, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.sheafComposeNatTrans_app_uniq, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eta compatibility with composition for pushforward of pulled-back condensed coefficients",
+   "results": "8 hits: CondensedMod.hom_naturality_apply, LightCondensed.ihomPoints_symm_comp, PresheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Adjunction mate composition unit",
+   "results": "0 hits:  (loogle: Unknown identifier `CategoryTheory`)",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle rejected the unknown identifier CategoryTheory; this result is not evidence of absence from Mathlib. Other successful searches are recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*unit|IsIso.*comp",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|conjugateEquiv_pullbackComp_inv",
+   "results": "12 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "the inverse composition comparison for pullback functors is the mate of the inverse composition comparison for pushforward functors",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_fst_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, TopCat.Presheaf.pullbackHomIsoPushforwardInv, CategoryTheory.Limits.CategoricalPullback.mkNatIso_inv_app_fst, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso_inv_app_hom",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse composition isomorphism of pullbacks is conjugate under adjunctions to inverse composition isomorphism of pushforwards",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackId_hom, TopCat.Presheaf.pullbackInvIsoPushforwardHom, TopCat.Presheaf.pullbackHomIsoPushforwardInv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ExponentiableMorphism.homEquiv_symm_apply_eq",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale sheaves with values in a Grothendieck abelian category inverse pullback composition comparison has conjugate inverse direct image composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no exact match for coefficient eta composition; generic conjugation and composite adjunction facts are reused through existing Mathlib leaf nodes. Scheme.Modules and SheafOfModules hits use other coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|unit_conjugateEquiv_symm|pushforwardComp_hom_app_app",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search. No exact coefficient composition theorem: the semantic hits concern sheafification or modules over sheaves of rings; the grep hits concern generic adjunctions. Existing categorical leaves are retained, without a new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of units for inverse image direct image adjunctions on sheaves",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.sheafComposeNatTrans_fac, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.sheafComposeIso_inv_fac_assoc, CategoryTheory.sheafComposeNatIso, CategoryTheory.sheafComposeIso_inv_fac, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search. No exact coefficient composition theorem: the semantic hits concern sheafification or modules over sheaves of rings; the grep hits concern generic adjunctions. Existing categorical leaves are retained, without a new node."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -74,5 +254,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-cartesian-coefficients"
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-eta-comp",
+  "worker": "stage1",
+  "summary": "Repair of C4/E6/E3: stated the source construction of the inverse pullback comparison explicitly through the existing unique unit-compatible comparison leaf, its conjugation bijection and the composite adjunction. Equation (1) now follows from these precise statements, not a reversed reading of def-sfb-finite-upper-star-comp. This is a reported correction of the imported comparison convention, with no hypothesis added and no change to the composition conclusion. Retained and rechecked steps 1 and 3-5; regenerated all verbatim citations. No new nodes, Lean files or compiles.",
+  "blueprint": "lem-sfb-eta-comp.proof.md paragraph 1 -> step 1; paragraph 2 -> step 2; paragraph 4 -> step 3; paragraph 3 -> steps 4-5.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-aa69365af",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-aa69365af (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All five steps check against the current blueprint, Stacks categorical lemmas, Mathlib sources, and master comparison construction. Coefficient categories and target base-change directions remain distinct and unchanged. No new nodes, missing dependencies, cycles, duplicate statements, or repairs required."
+ }
 }

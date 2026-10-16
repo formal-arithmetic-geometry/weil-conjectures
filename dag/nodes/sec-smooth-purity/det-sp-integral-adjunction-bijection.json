@@ -3,48 +3,112 @@
  "blueprint": {
   "is": "det-sp-integral-adjunction-bijection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The derived limit of the tower adjunction is an integral adjunction",
- "statement": "For $K\\in\\Dbc(Y,\\mathcal O_E)$ the tower $f_\\bullet^!\\operatorname{red}_YK$ is normalized\nconstructible, so\n$H_{f,\\mathcal O_E}(K)=R\\varprojlim_nf^!_{\\mathcal O_E/\\ell^n}(K/\\ell^n)\\in\\Dbc(X,\\mathcal O_E)$\nand $\\operatorname{red}_XH_{f,\\mathcal O_E}(K)\\simeq f_\\bullet^!\\operatorname{red}_YK$. For\n$M\\in\\Dbc(X,\\mathcal O_E)$ there are bijections, natural in $M$ and $K$,\n\n$$\n\\operatorname{Hom}(Rf_{!,\\mathcal O_E}M,K)\\simeq\\operatorname{Hom}(Rf_{!,\\bullet}\\operatorname{red}_XM,\\operatorname{red}_YK)\n\\simeq\\operatorname{Hom}(\\operatorname{red}_XM,f_\\bullet^!\\operatorname{red}_YK)\\simeq\\operatorname{Hom}(M,H_{f,\\mathcal O_E}(K)),\n$$\n\nso $Rf_{!,\\mathcal O_E}\\dashv H_{f,\\mathcal O_E}$, with unit and counit the derived\nlimits of the tower unit and counit, whose reductions are the finite units and\ncounits. Moreover\n$\\gamma_{f,\\mathcal O_E}^H(K)=R\\varprojlim\\gamma_{f,\\bullet}(\\operatorname{red}_YK):\nf^*_{\\mathcal O_E}K(d)[2d]\\xrightarrow{\\sim}H_{f,\\mathcal O_E}(K)$ is an isomorphism.",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$ and its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Use the completed integral coefficient sheaves, the derived-complete categories $\\Dbc(-,\\mathcal O_E)$, coefficient towers and normalized constructible towers [def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed, sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Reductions are derived tensor products with $(\\mathcal O_E/\\ell^n)_T$ for $n\\geq1$; integral pullback and twists mean [def-pur-integral-derived-operations, def-coefficient-twists-detailed]. Use the compact-support direct image of [det-sp-integral-direct-image-tower] (with a compactification $f=\\bar f\\circ j$) and the tower adjunction of [det-sp-tower-gluing].\n\nFor $K\\in\\Dbc(Y,\\mathcal O_E)$ the tower $f_\\bullet^!\\operatorname{red}_YK$ is normalized\nconstructible, so\n$H_{f,\\mathcal O_E}(K)=R\\varprojlim_nf^!_{\\mathcal O_E/\\ell^n}(K/\\ell^n)\\in\\Dbc(X,\\mathcal O_E)$\nand $\\operatorname{red}_XH_{f,\\mathcal O_E}(K)\\simeq f_\\bullet^!\\operatorname{red}_YK$. For\n$M\\in\\Dbc(X,\\mathcal O_E)$ there are bijections, natural in $M$ and $K$,\n\n$$\n\\operatorname{Hom}(Rf_{!,\\mathcal O_E}M,K)\\simeq\\operatorname{Hom}(Rf_{!,\\bullet}\\operatorname{red}_XM,\\operatorname{red}_YK)\n\\simeq\\operatorname{Hom}(\\operatorname{red}_XM,f_\\bullet^!\\operatorname{red}_YK)\\simeq\\operatorname{Hom}(M,H_{f,\\mathcal O_E}(K)),\n$$\n\nso $Rf_{!,\\mathcal O_E}\\dashv H_{f,\\mathcal O_E}$, with unit and counit the derived\nlimits of the tower unit and counit, whose reductions are the finite units and\ncounits. Moreover\n$\\gamma_{f,\\mathcal O_E}^H(K)=R\\varprojlim\\gamma_{f,\\bullet}(\\operatorname{red}_YK):\nf^*_{\\mathcal O_E}K(d)[2d]\\xrightarrow{\\sim}H_{f,\\mathcal O_E}(K)$ is an isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.md",
   "place": "node det-sp-integral-adjunction-bijection, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-sp-integral-direct-image-tower",
+  "det-sp-normalized-equivalence",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed"
+ ],
  "proof": [
   {
    "text": "*Normalization.* $\\operatorname{red}_YK$ is normalized constructible, and $f^!_\\bullet$\npreserves normalized constructible towers ([det-sp-tower-gamma], (3)). By the\nequivalence of [det-sp-normalized-equivalence], $H_{f,\\mathcal O_E}(K)=R\\varprojlim\nf^!_\\bullet\\operatorname{red}_YK$ lies in $\\Dbc(X,\\mathcal O_E)$ and\n$\\operatorname{red}_XH_{f,\\mathcal O_E}(K)\\simeq f^!_\\bullet\\operatorname{red}_YK$ (counit isomorphism on\nnormalized towers). Functoriality of $H$ follows from that of $f^!_\\bullet$.",
-   "uses": [],
-   "elementary": null
+   "uses": [
+    "det-sp-reduction-tower-normalized",
+    "det-sp-tower-gamma",
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Proof, Normalization"
+   }
   },
   {
-   "text": "*Bijections.* The first bijection is full faithfulness of $\\operatorname{red}$ on\n$\\Dbc(-,\\mathcal O_E)$ ([det-sp-normalized-equivalence]) combined with\n$\\operatorname{red}_YRf_{!,\\mathcal O_E}M\\simeq Rf_{!,\\bullet}\\operatorname{red}_XM$\n([det-sp-integral-direct-image-tower]). The second is the tower adjunction of\n[det-sp-tower-gluing]. The third is full faithfulness of $\\operatorname{red}$ again,\nwith the identification of $\\operatorname{red}_XH(K)$ above. Each is natural in both\nvariables, so the composite defines an adjunction. Its counit, the image of\n$\\mathrm{id}_{H(K)}$, corresponds under $\\operatorname{red}$ to the tower counit, so it is\n$R\\varprojlim$ of the tower counit; similarly for the unit. By\n[det-sp-tower-gluing] their levels are the finite units and counits.",
+   "text": "Put $r_T=\\operatorname{red}_T$, $L_T=R\\varprojlim$, $F=Rf_{!,\\mathcal O_E}$, $F_\\bullet=Rf_{!,\\bullet}$ and $G_\\bullet=f^!_\\bullet$. Apply clause (2) of [det-sp-integral-direct-image-tower] to $M$ and the chosen compactification $f=\\bar f\\circ j$. It identifies $FM$ with $L_YF_\\bullet r_XM$ in $\\Dbc(Y,\\mathcal O_E)$ and supplies the canonical comparison $b_M:r_YFM\\xrightarrow{\\sim}F_\\bullet r_XM$. These reduction/reconstruction comparisons are functorial: for $a:M\\to M'$, $F_\\bullet r_X(a)\\,b_M=b_{M'}\\,r_YF(a)$, since both composites are induced by the same maps of reduced complexes. Step 1 gives a natural comparison $c_K:r_XH(K)\\xrightarrow{\\sim}G_\\bullet r_YK$. Full faithfulness of $r_Y$ and $r_X$ from [det-sp-normalized-equivalence], followed by the tower adjunction of [det-sp-tower-gluing], gives exactly the three displayed bijections. Full faithfulness acts on a morphism by reduction; the first comparison sends $a:FM\\to K$ to $r_Y(a)b_M^{-1}$, and the last sends $h:r_XM\\to G_\\bullet r_YK$ to the unique $\\widetilde h:M\\to H(K)$ with $r_X(\\widetilde h)=c_K^{-1}h$. These operations are natural in both variables, hence their composite is an adjunction bijection.\n\nWrite $\\eta^\\bullet$ and $\\varepsilon^\\bullet$ for the tower unit and counit. The unit $\\eta_M:M\\to H(FM)$ is the image of $1_{FM}$ under this bijection and the counit $\\varepsilon_K:FH(K)\\to K$ is the inverse image of $1_{H(K)}$. Substitution in the preceding formulas gives\n$$r_X(\\eta_M)=c_{FM}^{-1}\\,G_\\bullet(b_M^{-1})\\,\\eta^\\bullet_{r_XM},\\qquad\nr_Y(\\varepsilon_K)=\\varepsilon^\\bullet_{r_YK}\\,F_\\bullet(c_K)\\,b_{H(K)}.$$\nHere composition is read right to left. The two triangle identities can be checked explicitly. Naturality of $b$ at $\\eta_M$ and then naturality of the tower counit give\n$$r_Y(\\varepsilon_{FM}\\circ F\\eta_M)=\\varepsilon^\\bullet_{r_YFM}\\,F_\\bullet G_\\bullet(b_M^{-1})\\,F_\\bullet(\\eta^\\bullet_{r_XM})\\,b_M=b_M^{-1}\\,\\varepsilon^\\bullet_{F_\\bullet r_XM}\\,F_\\bullet(\\eta^\\bullet_{r_XM})\\,b_M=1.$$\nNaturality of $c$ at $\\varepsilon_K$ and then naturality of the tower unit give\n$$r_X(H\\varepsilon_K\\circ\\eta_{H(K)})=c_K^{-1}\\,G_\\bullet(\\varepsilon^\\bullet_{r_YK})\\,G_\\bullet F_\\bullet(c_K)\\,\\eta^\\bullet_{r_XH(K)}=c_K^{-1}\\,G_\\bullet(\\varepsilon^\\bullet_{r_YK})\\,\\eta^\\bullet_{G_\\bullet r_YK}\\,c_K=1.$$\nThe last equalities are the two tower triangle identities. Faithfulness of $r_X,r_Y$ gives the integral identities. If $u_A:A\\xrightarrow{\\sim}L_Tr_TA$ is the reconstruction unit, each displayed reduced map $v:r_TA\\to r_TB$ lifts as $u_B^{-1}L_T(v)u_A$, by naturality of $u$. Thus these unit and counit maps are precisely the derived limits of the tower maps under the displayed canonical identifications. Evaluating the formulas at level $n$ gives the finite units and counits, by clause (3) of [det-sp-tower-gluing].",
    "uses": [
+    "det-sp-normalized-equivalence",
     "det-sp-integral-direct-image-tower",
     "det-sp-tower-gluing"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Proof, Bijections"
+   }
   },
   {
-   "text": "*Purity.* $\\gamma_{f,\\bullet}(\\operatorname{red}_YK)$ is an isomorphism of towers\n([det-sp-tower-gamma]); its source is $\\operatorname{red}_X(f^*K(d)[2d])$ because\npullback, twist and shift commute with reduction. Applying $R\\varprojlim$ and\nthe unit isomorphism for derived complete objects gives the isomorphism\n$f^*_{\\mathcal O_E}K(d)[2d]\\simeq H_{f,\\mathcal O_E}(K)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $P=f^*_{\\mathcal O_E}K(d)[2d]$. By [lem-pur-integral-operations-preserve-constructible], integral pullback preserves $\\Dbc$ and its canonical reductions are $f^*_{\\mathcal O_E/\\ell^n}(K/\\ell^n)$. The powers $(\\ell^n)$ are a cofinal subsequence of the uniformizer powers: $(\\ell^n)=(\\varpi_E^{en})$, where $e$ is the ramification index. The cited reduction formulas therefore apply at these levels. By [prop-weil-twist-preserves], the integral twist is an invertible locally free rank-one sheaf, preserves $\\Dbc$, and has the finite twists as reductions. Locally trivializing this line identifies its tensor comparison with $N\\otimes^L_{R_X}R_X\\otimes^L_{R_X}B_n=N\\otimes^L_{R_X}B_n$, where $R_X=\\widehat{\\mathcal O}_{E,X}$ and $B_n=(\\mathcal O_E/\\ell^n)_X$; hence this comparison is an isomorphism. Shifts commute with reduction because shifting a complex commutes termwise with tensor and its differential. These canonical comparisons commute with quotient transitions (both composites multiply the coefficient factors), and give $r_XP\\simeq f^*_\\bullet r_YK(d)[2d]$. In particular $P\\in\\Dbc(X,\\mathcal O_E)$ is derived complete. Clause (2) of [det-sp-tower-gamma] now supplies a tower isomorphism $r_XP\\xrightarrow{\\sim}G_\\bullet r_YK$. Apply the functor $L_X=R\\varprojlim$ and precompose with the reconstruction unit $P\\xrightarrow{\\sim}L_Xr_XP$ of [det-sp-normalized-equivalence]. The composite is the stated $\\gamma^H_{f,\\mathcal O_E}(K):P\\xrightarrow{\\sim}H(K)$; a functor carries an isomorphism and its inverse to inverse maps.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "prop-weil-twist-preserves",
+    "det-sp-tower-gamma",
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Proof, Purity"
+   }
   }
  ],
  "proof_deps": [
   "det-sp-integral-direct-image-tower",
-  "det-sp-tower-gluing"
+  "det-sp-normalized-equivalence",
+  "det-sp-reduction-tower-normalized",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "lem-pur-integral-operations-preserve-constructible",
+  "prop-weil-twist-preserves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction between functors constructed from natural equivalence of hom sets",
+   "results": "8 hits including CategoryTheory.Adjunction.mkOfHomEquiv and adjunctionOfEquivRight; these provide only the elementary categorical packaging of the Hom bijection, not integral coefficient reconstruction or tower purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 hits for abstract adjunction constructors; no integral sheaf/tower adjunction statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|exceptional.*pullback|TateTwist",
+   "results": "0 hits across Mathlib; no integral smooth-purity construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -60,5 +124,41 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-integral-adjunction"
+ "unit": "sk-prop-sp-integral-adjunction",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-integral-adjunction-bijection",
+  "worker": "stage1",
+  "summary": "Second reading repaired the implicit geometric/coefficient domain, the direction of the counit transpose, both unit/counit formulas, and the cited integral pullback/twist reduction argument. The two missing blueprint dependencies remain statement-only; their notation, hypotheses, source places and genuine Mathlib searches are completed. Repair of landing refusal: compared returned head b184eb0aa7964c0cfcea6363f9cc4075076c7d04 with current main 377467c93891aae8d19a976f0692e706a0678080; reread every cited statement. Step 2 now identifies the exact direct-image clause (2), its compactification hypothesis, and the naturality equation used in transporting the adjunction; the citation quotes precisely that clause. Current independent second reading specifies the total derived inverse-limit functor rather than relying on Roos-triangle notation; expands both triangle identities; makes the tower-purity input explicit and adds six fresh Mathlib searches.",
+  "blueprint": "Step 1 realizes Normalization; step 2 realizes Bijections, expanding both transposes and the derived-limit identifications; step 3 realizes Purity, citing operation preservation/reduction and spelling out twist and shift comparisons. Same chapter and integral/tower unit route.",
+  "tool_uses": [],
+  "statement_correction": {
+   "label": "STATEMENT-DISPUTED",
+   "old_statement": "For $K\\in\\Dbc(Y,\\mathcal O_E)$ the tower $f_\\bullet^!\\operatorname{red}_YK$ is normalized\nconstructible, so\n$H_{f,\\mathcal O_E}(K)=R\\varprojlim_nf^!_{\\mathcal O_E/\\ell^n}(K/\\ell^n)\\in\\Dbc(X,\\mathcal O_E)$\nand $\\operatorname{red}_XH_{f,\\mathcal O_E}(K)\\simeq f_\\bullet^!\\operatorname{red}_YK$. For\n$M\\in\\Dbc(X,\\mathcal O_E)$ there are bijections, natural in $M$ and $K$,\n\n$$\n\\operatorname{Hom}(Rf_{!,\\mathcal O_E}M,K)\\simeq\\operatorname{Hom}(Rf_{!,\\bullet}\\operatorname{red}_XM,\\operatorname{red}_YK)\n\\simeq\\operatorname{Hom}(\\operatorname{red}_XM,f_\\bullet^!\\operatorname{red}_YK)\\simeq\\operatorname{Hom}(M,H_{f,\\mathcal O_E}(K)),\n$$\n\nso $Rf_{!,\\mathcal O_E}\\dashv H_{f,\\mathcal O_E}$, with unit and counit the derived\nlimits of the tower unit and counit, whose reductions are the finite units and\ncounits. Moreover\n$\\gamma_{f,\\mathcal O_E}^H(K)=R\\varprojlim\\gamma_{f,\\bullet}(\\operatorname{red}_YK):\nf^*_{\\mathcal O_E}K(d)[2d]\\xrightarrow{\\sim}H_{f,\\mathcal O_E}(K)$ is an isomorphism.",
+   "what": "The imported sentence has free f,d,E,ell,X and no geometric domain. For example, the map from a countable disjoint union of Spec k to Spec k is smooth separated of pure dimension zero but is not finite type, outside the named compact-support/exceptional interfaces. The correction spells out the separated finite-type geometric domain and the coefficient context already required by the chapter and the cited definitions; every displayed conclusion is retained.",
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.md",
+    "place": "Statement together with unit sk-prop-sp-integral-adjunction, chapter context, and def-weil-exceptional-inverse-image"
+   },
+   "authorization": "The current second-reader brief expressly authorizes repairing ill-typed imported statements faithfully to source intent; no target declaration or unit statement is changed."
+  },
+  "source_errors": [
+   "The Bijections paragraph calls the counit the image of identity on H(K); it is the inverse image under the displayed Hom bijection. Both transposes and both reduction formulas are written explicitly.",
+   "The source of det-sp-tower-gamma clause (2) says inverse orientation, although clause (1) orients twist[2d] to omega. The map with the displayed gamma source uses that orientation, not its inverse."
+  ],
+  "repair": {
+   "date": "2026-10-16",
+   "returned_head": "b184eb0aa7964c0cfcea6363f9cc4075076c7d04",
+   "revalidated_base": "377467c93891aae8d19a976f0692e706a0678080",
+   "reason": "Landing refused because the direct-image statement changed after review. Every direct proof dependency has the same statement in the retained returned branch and the current main; the current clause (2) was reread and remains sufficient. No older statement is assumed."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q64-fe2919eef",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-fe2919eef (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against the complete blueprint route, cited DAG statements, Bhatt–Scholze Lemma 3.5.7, coefficient categories, base-change maps, orientations, unit/counit formulas, and edge cases. No mathematical or structural fault found; review written to review.md."
+ }
 }
