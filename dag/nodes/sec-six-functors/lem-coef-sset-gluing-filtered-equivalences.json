@@ -300,5 +300,23 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1f34dde16 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the 6 cited statements in full. There are no new nodes and the statement is unchanged. Clause 1 is Hovey 5.2.6 for sSet. In Step 1 I recomputed the Reedy span J: degrees c=0, a=1, b=2; latching objects ∅, ∅, A; matching objects *, C, *. Reedy cofibrancy is then exactly u being a monomorphism. Step 2: the relative matching maps of const(q) are q, an isomorphism and q, so the colimit preserves trivial cofibrations. Step 3: Ken Brown's argument applies two-out-of-three to pi=f and ps=1, then to Pp·Ps=1 and Pf=Pp·Pi. Clause 2 is proved directly. Step 4 is the finite-support descent for Δ^r, ∂Δ^r and horns, including the empty ∂Δ^0 and noninjective transitions. Step 5 is an explicit ω-step horn attachment, giving a trivial cofibration by the Kan–Quillen horn-cell clause and a Kan fibration by descending each horn. Step 6 builds the comparison θ as colimits commuting with colimits. Step 7 shows colim p_{f_i} lifts against every ∂Δ^r, including r=0, so it is a trivial fibration, and finishes with two-out-of-three. proof_deps equals the union of the step uses. A transitive check shows no cited node reaches the item, so the returned cycle is fixed. Citing lem-coef-filtered-colimit-weak-equivalences or lem-coef-model-cofibrant-colimit-comparison(b) would reintroduce a cycle; I traced the path for the latter through pinched-rigidification-resolution. So re-proving both clauses here is required and is not duplication. All citations are in the unit or are Mathlib-leaf definitions, so no tool_uses are needed. No SGA is cited and no target or base-change morphism is touched. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SSetGluingFilteredEquivalences",
+  "declaration": "SSet.gluing_filtered_weak_equivalences",
+  "file": "lean/Sheaf/AlgebraicTopology/SSetGluingFilteredEquivalences.lean",
+  "statement": "theorem gluing_filtered_weak_equivalences : (∀ (A₀ B₀ C₀ A₁ B₁ C₁ : SSet.{u}) (u₀ : A₀ ⟶ B₀) (v₀ : A₀ ⟶ C₀) (u₁ : A₁ ⟶ B₁) (v₁ : A₁ ⟶ C₁) (a : A₀ ⟶ A₁) (b : B₀ ⟶ B₁) (c : C₀ ⟶ C₁) (hu : u₀ ≫ b = a ≫ u₁) (hv : v₀ ≫ c = a ≫ v₁) [Mono u₀] [Mono u₁] (ha : Enhanced.IsWeakHomotopyEquivalence a) (hb : Enhanced.IsWeakHomotopyEquivalence b) (hc : Enhanced.IsWeakHomotopyEquivalence c), Enhanced.IsWeakHomotopyEquivalence (pushout.map u₀ v₀ u₁ v₁ b c a hu hv)) ∧ (∀ (I : Type u) [PartialOrder I] [Nonempty I] (hupper : ∀ s : Finset I, ∃ j : I, ∀ i ∈ s, i ≤ j) (X Y : I ⥤ SSet.{u}) (f : X ⟶ Y), (∀ i : I, Enhanced.IsWeakHomotopyEquivalence (f.app i)) → Enhanced.IsWeakHomotopyEquivalence (colimMap f))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4df50579c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Both conjuncts match the node clause by clause. Gluing: Mono only on u0/u1, the two commuting squares, ha/hb/hc with the Kan-Quillen weak-equivalence predicate (realization pi0 and pi_r bijective), conclusion on Mathlib pushout.map (signature checked: the induced map B0+_{A0}C0 -> B1+_{A1}C1). Filtered: I : Type u, PartialOrder, Nonempty, every Finset has an upper bound, unconstrained transitions, conclusion on colimMap f. Edge cases (empty sSets, non-monic v_i, singleton I, non-injective transitions, universes) covered. No definitions, only sorry; module and theorem docstrings carry source, blueprint tag and all 7 proof steps; node copy differs from shared node only in lean; lean.statement verbatim in file; report has Worker report and Second reading by Q32; no pro-etale content. Filtered-colimit node lem-coef-filtered-colimit-weak-equivalences depends on this item, so not a duplicate. nt_compile.py on local side overlay: rc=0, no errors or warnings. No findings, no fixes."
  }
 }

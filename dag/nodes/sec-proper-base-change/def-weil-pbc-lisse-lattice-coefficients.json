@@ -69,22 +69,26 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LisseLatticeCoefficients",
-  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeCoefficients.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
-  "statement": "def lisseContinuousCommRingSheaf (X : Scheme.{u}) (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}",
-  "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-16",
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseFieldSheafSized",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
-   "AlgebraicGeometry.ProEtale.lisseFieldSheaf",
-   "AlgebraicGeometry.ProEtale.lisseIntegerSheaf",
-   "AlgebraicGeometry.ProEtale.lisseIntegerToField",
-   "AlgebraicGeometry.ProEtale.lisseEtaleSiteInclusion",
-   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentification"
-  ]
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingPresheafSized",
+   "AlgebraicGeometry.ProEtale.isSheaf_lisseContinuousCommRingPresheafSized",
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheafSized",
+   "AlgebraicGeometry.ProEtale.lisseFieldSheafSized",
+   "AlgebraicGeometry.ProEtale.lisseIntegerSheafSized",
+   "AlgebraicGeometry.ProEtale.lisseIntegerToFieldSized",
+   "AlgebraicGeometry.ProEtale.lisseIntegerConstantSized",
+   "AlgebraicGeometry.ProEtale.lisseFieldConstantSized",
+   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentificationSized"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeCoefficientsSized.lean",
+  "statement": "def lisseFieldSheafSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): the published continuous-function coefficient interface restricts its coefficient ring to Type 0, while the finite-monodromy and representation interfaces use the larger site universe u+1. This module supplies the identical pointwise continuous-function construction for coefficients in Type (u+1), on the unchanged site with objects in u+1 and morphisms in u. It imports and retains the small-coefficient API, uses the same spectral and subspace topologies, and constructs the inclusion and slice comparison by postcomposition and the identity. No universe equality is imposed."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -105,5 +109,13 @@
   "landing": "20261016T070240-L-770593",
   "kind": "interface",
   "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-420d385b9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read the item node, all 12 stmt_deps, the new node def-sfb-monodromy-realization-data, the §1(B) dependency def-weil-pbc-lisse-lattice-coefficients, the three modules and the report (real Worker report and Second reading by Q20). Diffed against base: the item changes only lean plus one new stmt_dep; the dependency changes only lean, with a note. Every clause matches: J_T is one existential family, fully faithful, additive, E-linear via constant sections, lisse values, exact on underlying-exact sequences in the ambient SheafOfModules. Normalization holds for every actual stable finite free spanning lattice, levels ϖ^(n+1), FLC fibres with the c.γ monodromy pinned by finiteEtaleAction, ν^* = comparisonUpperStar, an abelian limit whose constant-scalar condition determines the A_T action, rationalization = changeOfRings, naturality on lattice-preserving maps. S is only topologically Noetherian; the cover is by connected qcqs topologically Noetherian charts with points; the isomorphisms are to the étale slice restriction; the arrow equation is correctly oriented; empty S gives empty I. E : Type (u+1) is forced by galoisCoefficientRepresentations; the Sized coefficient module is a valid §1(B) repair (the published one is Type 0, ContinuousCoefficientUniverse is Type u and a different node). Only sorries: the item and the named postponed sheaf theorem of the dependency. No hollow definitions, all docstrings carry source and blueprint, lean.statement matches the files verbatim. nt_compile.py --json on all three files: rc=0, no warnings (2.3 s, 9.8 s, 2.1 s). No findings."
  }
 }
