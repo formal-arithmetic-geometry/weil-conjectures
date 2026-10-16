@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-sf-open-closed-pullback-limits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed inverse image preserves limits",
@@ -23,49 +23,165 @@
   ]
  },
  "stmt_deps": [
-  "def-exc-closed-site-lift"
+  "def-exc-closed-site-lift",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "*Reduction to abelian sheaves and to affine $X$.* The $i^*B$-module\nstructure of $i^*F$ is induced from the $B$-module structure of $F$, and\nlimits and colimits of module sheaves are computed on underlying abelian\nsheaves, so it suffices to treat abelian sheaves. Cover $X$ by finitely many\naffine opens $X_k$. Restriction to $X_k$ and to $Z_k=Z\\cap X_k$ commutes\nwith limits, colimits and with $i^*$ ([lem-exc-closed-localization]), and\nthe family of restrictions to the $Z_k$ is jointly conservative; so we may\nassume $X=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}A/I$.",
+   "text": "Write $L=i^{-1}$ and $R=i_*$ on set sheaves, with unit $\\eta$. By [det-pe-topos-functoriality-inverse-image], $L$ preserves finite limits, has right adjoint $R$, and is computed on underlying sets for abelian sheaves. For an arbitrary ring sheaf $B$, form $LB$ by applying $L$ to its addition, zero, negation, multiplication and one maps. For a left $B$-module $F$ apply $L$ also to its addition and to $\\mu_F:B\\times F\\to F$. The product comparisons give the $LB$-action on $LF$. Each ring or module identity is an equality of composites and products of these maps; applying $L$ proves that identity. This works without commutativity. Naturality makes $L$ of a module morphism linear. This is precisely $i^*F$ as an $i^*B=LB$-module, with no extension along a further ring map. The underlying set sheaf is $L$ of the underlying set sheaf. The description of module sheaves in [def-weil-sheaf-of-modules-category] identifies this construction with sectionwise module structures. In particular $i^*$ is additive: applying $L$ to the addition map and to the pair of two morphisms preserves their sum.",
    "uses": [
-    "lem-exc-closed-localization"
+    "det-pe-topos-functoriality-inverse-image",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), coefficient structures added by the explicit finite-product argument; proetale inverse image as in the blueprint reduction; sites-modules.tex Tag 03D2 (lemma-pullback-module)"
+   }
   },
   {
-   "text": "*(1) Evaluation on weakly contractible objects.* By\n[lem-exc-closed-inverse-image-formula], $i^*F$ is the sheafification of the\npresheaf $P_F(V)=F(v(V))$ on the basis $\\mathcal B_Z$. Let $V$ be weakly\ncontractible. Every pro-étale covering family of $V$ can be refined to a\nsingle weakly étale surjection $V'\\to V$ (take a finite subfamily and its\ndisjoint union, $V$ being quasi-compact), and such a map has a section\nbecause $V$ is weakly contractible. For a covering with a section the\naugmented Čech complex of any presheaf is contractible (the section provides\nan extra degeneracy), so $\\check H^0(\\{V'\\to V\\},P)=P(V)$ for every presheaf\n$P$. Hence $P^+(V)=P(V)$ and $P^{++}(V)=P^+(V)=P(V)$ for $P=P_F$, i.e.\n$(i^*F)(V)=F(v(V))$, the map being the canonical one into the\nsheafification.",
+   "text": "Work over an affine open $X_0=\\operatorname{Spec}A$ of $X$; by [lem-weil-pbc-closed-immersion-affine-cover-criterion], its closed inverse image is $Z_0=\\operatorname{Spec}(A/I)$. By [lem-exc-closed-localization], restricting $i^{-1}$ to this square agrees with inverse image of the restricted sheaf. For a weakly contractible $V$ in $\\mathcal B_{Z_0}$, apply [lem-weil-pbc-affine-closed-inverse-image-evaluation] to the underlying set sheaves of $F$ and $B$. It identifies the canonical maps into inverse image with bijections\n$$F(v(V))\\xrightarrow{\\sim}(LF)(V),\\qquad B(v(V))\\xrightarrow{\\sim}(LB)(V).$$\nThese bijections respect products: their composites with either projection are the evaluation maps for the corresponding factor by naturality, so the map for a product is the pair of the two maps. Naturality at addition, zero, negation and $\\mu_F$ therefore makes the first bijection additive and linear over the second ring identification. Thus it is the asserted module isomorphism in (1), for the original $F$ as well as its restriction. This uses the evaluation theorem for the particular presheaf $F\\circ v$, and does not assert that sheafification leaves every presheaf unchanged on $V$.",
    "uses": [
-    "lem-exc-closed-inverse-image-formula"
+    "lem-exc-closed-localization",
+    "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), clauses (1),(2); localization as in Tag 09AA (lemma-closed-immersion)"
+   }
   },
   {
-   "text": "*(2) Limits.* Let $(F_\\alpha)$ be a small diagram of sheaves on $X$ with limit\n$F=\\lim_\\alpha F_\\alpha$; limits of sheaves are computed sectionwise. For\nweakly contractible $V$ as in (1),\n\n$$\n(i^*F)(V)=F(v(V))=\\lim_\\alpha F_\\alpha(v(V))=\\lim_\\alpha(i^*F_\\alpha)(V)\n=\\bigl(\\lim_\\alpha i^*F_\\alpha\\bigr)(V),\n$$\n\nand the composite is the value at $V$ of the canonical comparison\n$i^*\\lim_\\alpha F_\\alpha\\to\\lim_\\alpha i^*F_\\alpha$ by naturality of (1). The\nweakly contractible affines form a basis of $Z_{\\mathrm{proét}}$\n(Bhatt–Scholze, Proposition 4.2.8), and a morphism of sheaves that is\nbijective on the objects of a basis is an isomorphism. So $i^*$ preserves\nlimits.",
-   "uses": [],
-   "elementary": null
+   "text": "Still with affine $X_0$, let $(H_a)$ be a diagram of set sheaves indexed by any small category. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] its limit $H$ is computed on sections. On every weakly contractible affine $V$ of $\\mathcal B_{Z_0}$ the evaluation theorem gives\n$$(LH)(V)=H(v(V))=\\lim_aH_a(v(V))=\\lim_a(LH_a)(V).$$\nNaturality in $H_a$ identifies this bijection with the component of the canonical limit comparison. By [lem-weil-pbc-ind-etale-basis-wcontractible-cover] every object $T$ of this basis has a cover by such $V$. A sheaf map bijective on these covering objects is bijective on $T$: injectivity follows by separatedness; for surjectivity lift a section on every covering object, check equality of the lifts on the overlaps after covering those overlaps by weakly contractible basis objects, and glue. Basis fibre products and refinements are supplied by [lem-weil-pbc-ind-etale-basis], which also says that an isomorphism on the basis is an isomorphism on the full site. Hence $L$ preserves every small limit on this affine square. The argument includes empty diagrams and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BL (lemma-closed-immersion-affines-apply), (2), 0990 (lemma-proetale-enough-w-contractible); sectionwise limit comparison in the blueprint paragraph (2)"
+   }
   },
   {
-   "text": "*(3) Colimits and exactness.* The functor $i^*$ is left adjoint to $i_*$\n([lem-exc-closed-site-adjunction] gives the adjunction on bases), so it\npreserves all small colimits. Preserving finite limits and finite colimits,\nit is exact.",
+   "text": "For every affine open of $X$, the restricted morphism is a closed immersion of affine schemes, so step 3 applies. [lem-weil-pbc-proetale-inverse-image-limits-zariski-local] therefore gives preservation of all small limits by $L$ on set sheaves globally. Now take a small diagram of $B$-module sheaves. By [lem-weil-pbc-module-sheaves-limits-sectionwise] its limit consists, on each site object, of compatible families of sections with coordinatewise addition and scalar action. Thus forgetting to sets carries it to the set-sheaf limit; the same holds for $LB$-modules. By step 1 the underlying set map of the module limit comparison is exactly the set limit comparison just proved invertible. A bijective linear map has a linear inverse (apply the map to addition and scalar multiplication and use injectivity), and the inverse maps commute with restrictions. Consequently the module comparison is an isomorphism. This proves all small limits in (2).",
    "uses": [
-    "lem-exc-closed-site-adjunction"
+    "lem-weil-pbc-proetale-inverse-image-limits-zariski-local",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), proof: limits are Zariski local on X; module limit construction as in the blueprint reduction"
+   }
+  },
+  {
+   "text": "The inverse/direct-image adjunction lifts to these variable-coefficient module categories as follows. Give $RN$, for an $LB$-module $N$, the $B$-action $R\\mu_N\\circ(\\eta_B\\times1)$. The set and abelian adjunctions with the same unit and counit are supplied by [def-weil-proetale-inverse-image]. If $\\alpha:LF\\to N$ is an abelian sheaf map, its adjunct is $\\beta=R\\alpha\\circ\\eta_F$. Apply the set-sheaf adjunction to the scalar-action equations: the action maps are maps of set sheaves, not generally homomorphisms of abelian sheaves. The adjuncts of the two maps $\\alpha\\circ L\\mu_F$ and $\\mu_N\\circ(1\\times\\alpha)$ from $L(B\\times F)$ to $N$ are respectively $\\beta\\circ\\mu_F$ and $R\\mu_N\\circ(\\eta_B\\times\\beta)$: for the first use naturality of $\\eta$ at $\\mu_F$, and for the second use its compatibility with projections, $\\eta_{B\\times F}=\\eta_B\\times\\eta_F$. Thus injectivity of this set-adjunction bijection says precisely that $\\alpha$ is $LB$-linear if and only if $\\beta$ is $B$-linear. The $B$-module identities on $RN$ follow from those on $N$ because $R$ preserves products sectionwise and $\\eta_B$ is a ring map. Therefore the bijections restrict naturally to module morphisms, giving $i^*\\dashv i_*$ for this arbitrary $B$. All products here are binary, and both distributive laws are retained; no commutativity or finiteness of $B$ was used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules), with the linearity equivalence expanded; Tag 03D2 (lemma-pullback-module) for the induced action"
+   }
+  },
+  {
+   "text": "Every small diagram of module sheaves has a colimit by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the module adjunction of step 5: $i^*$ preserves all of them. In particular it preserves cokernels, while step 4 gives preservation of kernels. In the abelian module categories [def-weil-sheaf-of-modules-category], the image of a morphism is the kernel of its cokernel; preservation of both therefore carries each image-kernel equality to the corresponding equality. Together with additivity from step 1 this proves exactness and finishes (2).",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits) for existence of module colimits and Tag 03DA (lemma-abelian) for the abelian module category; categories.tex Tag 0038 (lemma-adjoint-exact), clause (1), for preservation by a left adjoint. This realizes blueprint proof paragraph (3), Colimits and exactness."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-topos-functoriality-inverse-image",
   "lem-exc-closed-localization",
-  "lem-exc-closed-inverse-image-formula",
-  "lem-exc-closed-site-adjunction"
+  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-proetale-inverse-image-limits-zariski-local",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-sf-open-closed-pullback-limits.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BL (lemma-closed-immersion-affines-apply), (1),(2), and 09AA (lemma-closed-immersion), with explicit variable-ring module structures and adjunction; corrects the arbitrary-presheaf inference in the blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image along a closed immersion on the pro etale site preserves arbitrary products of sheaves and evaluates on henselian lifts",
+   "results": "8 hits: Condensed.instPreservesFiniteProductsOppositeProfiniteVal, Condensed.ofSheafForgetProfinite, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, CondensedSet.ofSheafProfinite, Condensed.ofSheafProfinite, LightCondensed.ofSheafLightProfinite. These concern condensed descriptions on profinite sites, not closed scheme inverse image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesLimits\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Ii]nverse|[Pp]reservesLimits.*[Pp]roetale|[Pp]roetale.*[Pp]reservesLimits",
+   "results": "25 printed hits, beginning with Subfield/Defs.lean:133,239, IntermediateField/Basic.lean:179,265 and LinearPMap.lean:177,178; other hits concern closed subsets under inverses or ObjectProperty.inverseImage. None is the pro-etale closed-inverse-image theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion of schemes pro etale inverse image commutes with all limits of module sheaves",
+   "results": "OK, 8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, .of_isPreimmersion, AlgebraicGeometry.Scheme.Modules.instHasLimits, .restrict_obj, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, .mk, AlgebraicGeometry.IsClosedImmersion, .casesOn. Scheme structure-sheaf module limits and ordinary closed immersion properties do not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|closed.*[Ii]nverse|[Pp]reservesLimits",
+   "results": "Searched AlgebraicGeometry/Sites: OK, 16 hits. AffineEtale.lean:101 is a generic assumption on forgetful limits; ElladicCohomology.lean:11,39,61,65,66 concerns coefficient sheaves; BigZariski.lean:106,108,109,151,152 concerns discrete-shape products for Zariski sheaves; Proetale.lean:34,50,52,57,58 defines the site and coverage. Read Proetale.lean:1-115. No closed inverse-image evaluation or all-limit-preservation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image for a closed subscheme commutes with arbitrary limits of sheaves on the proetale site, including sheaves of modules over a ring object",
+   "results": "OK, 8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instHasLimits and six Scheme.IdealSheafData.comapIso declarations. Their signatures concern the Zariski structure-sheaf module category or ideal-sheaf pullback identities, not pro-etale inverse-image limit preservation or henselian-lift evaluation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimits|closedImmersion|IsClosedImmersion",
+   "results": "OK, 6 hits in AlgebraicGeometry/Sites: AffineEtale.lean:101 assumes the coefficient forgetful functor preserves limits; BigZariski.lean:106,108,109,151,152 concern products carried by Zariski sheaves. Read AffineEtale.lean:90-110 and BigZariski.lean:90-115, plus Proetale.lean:1-130. No closed pro-etale inverse-image theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -83,5 +199,54 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sf-open-closed-pullback-limits",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempt by a zero-new-node split. The existing set-sheaf affine evaluation theorem supplies the coefficient-free input; explicit finite-product and adjunction calculations give arbitrary ring-sheaf modules, including noncommutative rings. Derived limits by sectionwise evaluation and weakly contractible covers, globalized by the existing localization tool, and derived colimits and exactness from the module adjunction. Removed the false arbitrary-presheaf sheafification node and the redundant general-coefficient formula node. Item statement unchanged.",
+  "blueprint": "Step 1 makes the reduction to modules precise; step 2 realizes (1) using the existing correct 09BL evaluation statement; steps 3-4 realize (2) Limits and affine localization; steps 5-6 realize (3) Colimits and exactness. The invalid arbitrary-presheaf sentence is replaced by the existing theorem for F composed with v.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic pro-etale inverse image preserves finite products and is computed on underlying sets; needed to carry the arbitrary ring and module operations."
+   },
+   {
+    "node": "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+    "why": "The coefficient-free affine closed-lift evaluation is the existing general input underlying the unit finite-coefficient formula; it follows the same henselian-lift route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "why": "Supplies covering test objects within the same affine ind-etale basis used in the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Supplies basis fibre products, restriction and detection for the same affine closed-lift calculation."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-inverse-image-limits-zariski-local",
+    "why": "Generic globalization of the affine comparison implements the blueprint affine reduction."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Supplies small module colimits and their existence for the final adjunction argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+  "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-proetale-inverse-image-limits-zariski-local",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-6c3073d27",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-6c3073d27 (reviewer sub-agent of L); spot-checked: Read and verified all six steps and cited statements against current blueprint and Stacks 09BK/09BL, 09AA, 03D2/03D3, and limit/colimit sources. Arbitrary-ring coefficients and canonical evaluation are preserved; edge cases and dependency cycles checked. No new nodes or repairs. review.md records the inherited stale unit metadata separately."
+ }
 }

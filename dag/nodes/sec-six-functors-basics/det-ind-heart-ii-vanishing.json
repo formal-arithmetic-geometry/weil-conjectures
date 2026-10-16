@@ -3,38 +3,134 @@
  "blueprint": {
   "is": "det-ind-heart-ii-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniform vanishing on ind-constructible targets",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$ and $B\\in\\IndCons(X,\\Lambda)$. For every $q$,\nwriting $B=\\varinjlim_\\alpha D_\\alpha$ with $D_\\alpha$ constructible, the natural map\n$\\varinjlim_\\alpha\\Ext^q(C,D_\\alpha)\\to\\Ext^q(C,B)$ is an isomorphism, and $\\Ext^q(C,B)=0$ for $q>d_C$.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, a finite intermediate extension $E/\\mathbf Q_\\ell$, and $\\Lambda=E$ or $\\Qlb$. Use $\\underline E$ of [sk-def-sfb-condensed-ring] and the finite-subextension-valued condensed ring $\\underline{\\Qlb}$ of [sk-def-sfb-qlbar-condensed]. Use the pulled-back condensed coefficient ring $\\Lambda_X=p_X^*\\underline\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and the module category $\\Mod_{\\Lambda_X}$ [sk-def-sfb-module-objects], with its ordinary derived category $D(\\Mod_{\\Lambda_X})$ [def-weil-abstract-derived-category]. Write $\\Cons(X,\\Lambda)$ for the module sheaves which, locally on affine opens, admit a finite stratification by constructible locally closed subschemes [def-constructible-stratification] on each of which they have a finite constant local model [det-def-sfb-constructible-local-model]. Write $\\IndCons(X,\\Lambda)$ for small filtered colimits of these sheaves, computed in $\\Mod_{\\Lambda_X}$. For sheaves $C,N$ and every $q\\in\\mathbf Z$, put $\\Ext^q(C,N)=\\Hom_{D(\\Mod_{\\Lambda_X})}(C[0],N[0][q])$, extending the nonnegative convention [def-pc-ext].\n\nLet $C\\in\\Cons(X,\\Lambda)$ and fix an integer $d_C\\geq0$ which is a uniform constructible Ext bound for $C$: $\\Ext^r(C,N)=0$ for every $r>d_C$ and every $N\\in\\Cons(X,\\Lambda)$ (the property intended by $d_C$ in [sk-lem-uniform-constructible-ext]). For every small filtered diagram $(D_\\alpha)$ of constructible sheaves, put $B=\\varinjlim_\\alpha D_\\alpha\\in\\IndCons(X,\\Lambda)$. For every $q\\in\\mathbf Z$, the natural map induced by the colimit cocone,\n$$\\varinjlim_\\alpha\\Ext^q(C,D_\\alpha)\\longrightarrow\\Ext^q(C,B),$$\nis an isomorphism. In particular, $\\Ext^q(C,B)=0$ for $q>d_C$, for every $B\\in\\IndCons(X,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.md",
   "place": "node det-ind-heart-ii-vanishing, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-constructible-stratification",
+  "det-def-sfb-constructible-local-model",
+  "def-pc-ext",
+  "sk-lem-uniform-constructible-ext"
+ ],
  "proof": [
   {
-   "text": "The diagram $(D_\\alpha)$ is a filtered diagram of complexes concentrated in degree $0$, so all vanish\nbelow degree $0$; its colimit in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$, viewed in degree $0$, is $B$ (filtered\ncolimits of sheaves are exact, so the termwise colimit represents the colimit in the derived category\nas well). Part (1) of [sk-lem-constructible-ext-continuity] applies to $C\\in\\Cons(X,\\Lambda)\\subset\\Dbc(X,\\Lambda)$\nand gives the isomorphism $\\varinjlim_\\alpha\\Hom(C,D_\\alpha[q])\\cong\\Hom(C,B[q])$. For $q>d_C$, every\n$\\Ext^q(C,D_\\alpha)$ vanishes by [sk-lem-uniform-constructible-ext], hence so does the colimit.",
+   "text": "Fix the small filtered diagram in the statement and any integer $q$. Regard every $D_\\alpha$ as a complex with its only nonzero term in degree zero. All these complexes vanish below $b=0$, and their termwise colimit has term $B$ in degree zero and zero elsewhere: a colimit of a diagram of zero objects is zero. The colimit cocone is exactly the cocone specified in the statement. This calculation uses only degree-zero complexes, and makes no assertion about categorical colimits in the derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.proof.md",
+    "place": "Opening sentence: degree-zero complexes and their common lower bound"
+   }
+  },
+  {
+   "text": "Apply [sk-lem-constructible-ext-continuity] to this diagram. Its scheme hypothesis holds because $X$ is Noetherian as explicitly assumed. Its field-coefficient clause includes both $\\underline E$ and $\\underline{\\Qlb}$ and every constructible sheaf $C$; our modules are over exactly its pulled-back ring $\\Lambda_X$. The index category is small and filtered and Step 1 supplies its common lower bound $b=0$. Its canonical Hom comparison therefore gives $\\varinjlim_\\alpha\\Hom(C[0],D_\\alpha[0][q])\\simeq\\Hom(C[0],B[0][q])$. By the Ext convention this is the required map. The cited lemma specifies the map as the one induced by the same cocone, so the identification proves the assertion for the natural map, for any chosen presentation.",
    "uses": [
-    "sk-lem-constructible-ext-continuity",
-    "sk-lem-uniform-constructible-ext"
+    "sk-lem-constructible-ext-continuity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.proof.md",
+    "place": "Continuity sentence: comparison for every q; current continuity node, field-coefficient and in-particular clauses"
+   }
+  },
+  {
+   "text": "If $q>d_C$, each $D_\\alpha$ is constructible, so the defining property of the fixed bound $d_C$ gives $\\Ext^q(C,D_\\alpha)=0$. The colimit of this zero diagram of abelian groups is zero: the zero group has the required unique map to every cocone vertex. Step 2 therefore gives $\\Ext^q(C,B)=0$. Every ind-constructible $B$ admits such a small filtered presentation by the definition stated above, so this proves vanishing for every $B$. The existence of a bound is not being deduced from continuity: it is the bound fixed in the statement, as intended by the parent unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.proof.md",
+    "place": "Final sentence: termwise vanishing and its filtered colimit"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-constructible-ext-continuity",
-  "sk-lem-uniform-constructible-ext"
+  "sk-lem-constructible-ext-continuity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-vanishing.proof.md",
+  "place": "Degree-zero diagram, continuity comparison, and uniform vanishing; hypotheses made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext continuity and uniform vanishing for constructible sheaves into ind-constructible sheaves",
+   "results": "8 hits; ; LightCondensed, Condensed.ofSheafForgetProfinite, Condensed.lanSheafProfinite, CondensedMod.ofSheafCompHaus, Condensed.ofSheafForgetCompHaus, LightCondensed.ofSheafLightProfinite, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FilteredColimit, Ext, Hom, DerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.FilteredColimit'; ",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid expected identifier; no theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered colimit.*Ext|Ext.*filtered colimit",
+   "results": "0 hits; ; ",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext out of a constructible sheaf commutes with filtered colimits and vanishes uniformly on ind-constructible targets",
+   "results": "8 hits; ; CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CommGrpCat.FilteredColimits.colimit, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext continuity and vanishing for ind-constructible sheaves",
+   "results": "8 hits; ; CategoryTheory.Sheaf.H, Condensed.lanSheafProfinite, CondensedMod.IsSolid, Condensed.hasExactColimitsOfShape, instAbelianCondensedMod, CategoryTheory.Sheaf.cohomologyPresheafFunctor, Condensed.instAB5CondensedMod, LightCondensed.lanLightCondSet",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, FilteredColimit, DerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'FilteredColimit'; ",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid expected identifier; no theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*filtered.*colimit|filtered.*colimit.*Ext",
+   "results": "0 hits; ; ",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Does Ext from a constructible sheaf commute with filtered colimits and vanish uniformly for ind-constructible targets?",
+   "results": "8 hits; ; CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Ind.lim, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, CommGrpCat.FilteredColimits.colimit",
+   "date": "2026-10-16",
+   "verdict": "no match: general sheaf, condensed-module or filtered-colimit infrastructure, not this constructible Ext continuity and bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"colimit\"",
+   "results": "12 hits: CategoryTheory.Limits.IsColimit.extendIso, CategoryTheory.Limits.IsColimit.ofExtendIso, CategoryTheory.Limits.IsColimit.extendIsoEquiv, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext_iff, CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext",
+   "date": "2026-10-16",
+   "verdict": "no match: valid string query returns extendIso and hom_ext substring matches, not derived Ext or its continuity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -49,5 +145,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-ind-heart-ii"
+ "unit": "sk-cor-ind-heart-ii",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ind-heart-ii-vanishing",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported item omits scheme hypotheses and leaves d_C unbound. Non-quasi-compact disjoint unions of points give a degree-zero continuity counterexample. Restore the Noetherian hypothesis of the current reviewed continuity lemma, specify the ambient condensed module category, explicitly fix the uniform bound intended by the parent unit, and quantify over arbitrary small filtered presentations. Follow the same continuity-then-vanishing route with no new nodes.",
+  "blueprint": "Step 1 realizes the degree-zero setup, Step 2 the continuity sentence, Step 3 the final vanishing sentence of det-ind-heart-ii-vanishing.proof.md and the vanishing half of parent sk-cor-ind-heart-ii.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-4aab33e2e",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-4aab33e2e (reviewer sub-agent of L); spot-checked: Read the full item, parent unit, chapter, blueprint source, cited DAG statements, and delivery report. The repaired Noetherian hypothesis is necessary (the omitted case has a direct-sum/product counterexample); all three proof steps are valid, coefficient categories and base-change cocone match the continuity lemma, searches and edge cases check out, no duplicates/cycles/new nodes or SGA violations found. Review written to review.md."
+ }
 }

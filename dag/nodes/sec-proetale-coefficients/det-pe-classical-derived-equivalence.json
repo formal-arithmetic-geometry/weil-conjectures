@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-classical-derived-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The bounded-below classical equivalence",
@@ -13,42 +13,182 @@
   "place": "node det-pe-classical-derived-equivalence, order None"
  },
  "stmt_deps": [
-  "sk-prop-sf-comparison"
+  "sk-prop-sf-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-pe-classical-definition",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "proof": [
   {
-   "text": "*(1).* Since $\\nu_X^*$ is exact, $H^q(\\nu_X^*L)\\cong\\nu_X^*H^q(L)$, which is\nclassical and vanishes for $q\\ll0$. The functor $R\\nu_{X,*}$ is the right\nderived functor of a left exact functor, so it carries complexes concentrated in\ndegrees $\\geq a$ to complexes concentrated in degrees $\\geq a$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $\\mathcal A=\\Mod(X_{\\Et},\\Lambda)$ and $\\mathcal B=\\Mod(X_{\\Proet},\\Lambda_X)$, where $\\Lambda_X=\\nu_X^*\\Lambda_{X,\\Et}$. Work in one enlarged universe in which the underlying site categories are small relative to the modules. By [lem-pur-ringed-site-grothendieck-abelian] these are Grothendieck abelian categories, and [lem-sfb-grothendieck-k-injective] provides K-injective resolutions. The right derived direct image can therefore be computed by these resolutions, as in [def-sfb-right-derived-functor]. Write $F=\\nu_X^*$ for both the underived inverse image and its termwise derived functor, and $R=R\\nu_{X,*}$. The adjunction $F\\dashv R$ and its unit $\\eta$ and counit $\\varepsilon$ are the bounded-below derived adjunction named in the hypothesis; we assume $\\eta_L$ is invertible for every $L\\in D^+(\\mathcal A)$ throughout. By [det-pe-classical-sheaves-modules], the underived $F$ is exact and its essential image is precisely the classical module sheaves. Its underived right adjoint $\\nu_{X,*}$ is additive and left exact: the adjunction identifies maps $T\\to\\nu_{X,*}(\\ker u)$ with maps $FT\\to\\operatorname{dom}u$ killed by $u$, hence with maps $T\\to\\ker(\\nu_{X,*}u)$; the same argument gives preservation of zero and finite products. Additivity also follows directly by applying direct image to the addition of module sections.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (1): coefficient categories and hypotheses for the derived functors; Stacks 07A5/03DA/03DB supply the ringed-site input"
+   }
   },
   {
-   "text": "*(2), one sheaf.* Let $K=G[-q]$ with $G$ a classical module sheaf, say\n$G=\\nu_X^*F$. The triangle identity says that the composite\n$\\nu_X^*F\\to\\nu_X^*R\\nu_{X,*}\\nu_X^*F\\to\\nu_X^*F$ of $\\nu_X^*$ applied to the\nunit and the counit is the identity. The unit $F\\to R\\nu_{X,*}\\nu_X^*F$ is an\nisomorphism by hypothesis, hence so is the counit. The case of a shift follows.",
-   "uses": [],
-   "elementary": null
+   "text": "By [lem-weil-pbc-exact-functor-bounded-below], $H^q(FL)\\cong F(H^qL)$ naturally in $L$, and $F$ preserves every lower cohomological bound. The module-sheaf essential image in step 1 shows that these cohomology sheaves are classical, including the zero sheaf $F(0)$; by [sk-def-pe-classical-definition], $FL\\in D^+_{\\mathrm{class}}(\\mathcal B)$. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to the additive left exact functor $\\nu_{X,*}:\\mathcal B\\to\\mathcal A$, with the Grothendieck categories and resolution computation of step 1: if $H^i(K)=0$ for $i<a$, then $H^i(RK)=0$ for $i<a$. Thus $R$ takes all of $D^+(\\mathcal B)$ to $D^+(\\mathcal A)$, and $FR$ preserves lower cohomological bounds as well.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-def-pe-classical-definition",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (1); Stacks 015F and 05TC(1)"
+   }
   },
   {
-   "text": "*(2), bounded complexes.* Induct on the number of nonzero cohomology sheaves.\nIf $K$ has nonzero cohomology in degrees $a<b$ only, the triangle\n$\\tau_{\\leq a}K\\to K\\to\\tau_{>a}K\\to$ has outer terms with fewer nonzero\ncohomology sheaves, all classical. The counit is a natural transformation of\ntriangulated functors, so the five lemma on the long exact cohomology\nsequences gives the claim for $K$.",
-   "uses": [],
-   "elementary": null
+   "text": "The termwise derived functor $F$ is triangulated and satisfies $F(M[-q])\\cong F(M)[-q]$ by [lem-sf-exact-functor-derived-triangulated]. Give its right adjoint $R$ the coherent shift isomorphisms supplied by [lem-weil-pbc-adjunction-shift-compatibility-unique](iii); with these isomorphisms both the unit and counit commute with shifts. Then [lem-sf-triangulated-right-adjoint] makes $R$ triangulated with precisely these shifts. Applying $R$ and then $F$ to a distinguished triangle gives a distinguished triangle for $FR$. By [lem-weil-pbc-commshift-nattrans-triangle-morphism], the three components of $\\varepsilon:FR\\to\\mathrm{id}$ give a morphism from this image triangle to the original triangle. This verifies the connecting-map compatibility needed below, rather than assuming that arbitrary natural transformations preserve connecting morphisms.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (3), sentence concerning the counit as a transformation of triangulated functors; Stacks 0A8D"
+   }
   },
   {
-   "text": "*(2), bounded below complexes.* Let $K$ be bounded below and fix $m$. For\n$N\\geq m$, the complex $\\tau_{\\leq N}K$ is bounded with classical cohomology, so\nits counit is an isomorphism. In the triangle\n$\\tau_{\\leq N}K\\to K\\to\\tau_{>N}K\\to$, the complex $\\tau_{>N}K$ lies in degrees\n$>N$, hence so do $R\\nu_{X,*}\\tau_{>N}K$ and $\\nu_X^*R\\nu_{X,*}\\tau_{>N}K$ by (1).\nTherefore $H^m$ of $\\nu_X^*R\\nu_{X,*}\\tau_{\\leq N}K\\to\\nu_X^*R\\nu_{X,*}K$ and of\n$\\tau_{\\leq N}K\\to K$ are isomorphisms for $m\\leq N$, and by naturality of the\ncounit $H^m$ of the counit of $K$ is an isomorphism. As $m$ is arbitrary, the\ncounit of $K$ is an isomorphism.\n\nFinally, (1), (2) and the unit isomorphism show that the two functors are\nmutually inverse equivalences.",
+   "text": "For a classical module sheaf $G$, [det-pe-classical-sheaves-modules] gives a module sheaf $M\\in\\mathcal A$ and an isomorphism $F(M)\\cong G$. For any integer $q$, [lem-sf-exact-functor-derived-triangulated] identifies $G[-q]$ with $F(M[-q])$. The triangle identity for $F\\dashv R$ reads $\\varepsilon_{F(M[-q])}\\circ F(\\eta_{M[-q]})=\\mathrm{id}$. Since $M[-q]\\in D^+(\\mathcal A)$, the assumed unit is invertible there, so $\\varepsilon_{F(M[-q])}=F(\\eta_{M[-q]})^{-1}$. Naturality transports this isomorphism across $F(M[-q])\\cong G[-q]$. Thus the counit is invertible on every shifted classical sheaf. In particular its component on zero is invertible, by taking $M=0$.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (2), one sheaf and its shifts"
+   }
+  },
+  {
+   "text": "Fix a bounded classical $K$ and integers $a\\leq b$ with $H^q(K)=0$ outside $[a,b]$. Put $K_q=\\tau_{\\leq q}K$. By [lem-weil-pbc-truncation-cohomology], $H^i(K_q)=H^i(K)$ for $i\\leq q$ and is zero for $i>q$. Thus every $K_q$ is bounded below and classical, and $K_{a-1}$ has zero cohomology in all degrees. The map $0\\to K_{a-1}$ is an isomorphism by [lem-weil-pbc-derived-plus-iso-on-cohomology]; naturality of the counit and step 4 imply that $\\varepsilon_{K_{a-1}}$ is invertible. We induct on the integer $q$ from $a$ to $b$ to show that $\\varepsilon_{K_q}$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (3), bounded induction: lower bound, induction claim and zero base"
+   }
+  },
+  {
+   "text": "For $a\\leq q\\leq b$, use the distinguished triangle $K_{q-1}\\to K_q\\to H^q(K)[-q]\\to K_{q-1}[1]$ of [lem-weil-pbc-truncation-triangle]. Step 3 makes its counit components a morphism of distinguished triangles, so [lem-weil-pbc-derived-cohomology-ladder] gives a commutative ladder of long exact cohomology sequences. The first and third vertical maps are isomorphisms: the first by induction and the third by step 4 since $H^q(K)$ is classical. In the five consecutive terms $H^{i-1}(H^q(K)[-q]),H^i(K_{q-1}),H^i(K_q),H^i(H^q(K)[-q]),H^{i+1}(K_{q-1})$, all four vertical maps other than the middle one are therefore isomorphisms. By [lem-weil-pbc-five-lemma], $H^i(\\varepsilon_{K_q})$ is invertible for every $i$. By [lem-weil-pbc-derived-plus-iso-on-cohomology], $\\varepsilon_{K_q}$ is invertible. This proves the induction. Finally $K_b\\to K$ is a cohomology isomorphism in every degree by [lem-weil-pbc-truncation-cohomology] and the upper bound on $K$, hence an isomorphism by the same detection lemma. Naturality gives invertibility of $\\varepsilon_K$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "lem-weil-pbc-truncation-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (3), bounded induction: distinguished triangle, explicit five-term ladder, and identification of the final truncation"
+   }
+  },
+  {
+   "text": "Now let $K\\in D^+_{\\mathrm{class}}(\\mathcal B)$, fix $m\\in\\mathbf Z$, and take an integer $N\\geq m$. Put $T=\\tau_{\\leq N}K$ and let $c:T\\to K$ be its inclusion. By [lem-weil-pbc-truncation-cohomology], $T$ is bounded with classical cohomology, $H^i(c)$ is an isomorphism for every $i\\leq N$, and $H^{N+1}(T)=0$. In particular $H^{N+1}(c):0\\to H^{N+1}(K)$ is a monomorphism. Apply [lem-weil-pbc-derived-functor-truncation-iso] to $v=\\nu_{X,*}$ and this $c$; its hypotheses are exactly the Grothendieck categories, left exactness and right-derived computation checked in steps 1 and 2. It gives that $H^m(Rc)$ is invertible. Under the natural cohomology isomorphisms of [lem-weil-pbc-exact-functor-bounded-below], $H^m(FRc)$ identifies with $F(H^m(Rc))$ and is therefore invertible. Also $H^m(c)$ is invertible. Step 6 gives invertibility of $\\varepsilon_T$. The naturality equation $H^m(\\varepsilon_K)\\circ H^m(FRc)=H^m(c)\\circ H^m(\\varepsilon_T)$ therefore makes $H^m(\\varepsilon_K)$ invertible. Since $m$ was arbitrary, [lem-weil-pbc-derived-plus-iso-on-cohomology] shows that $\\varepsilon_K$ is invertible. The truncation comparison cited here is exactly the lower-bound/upper-tail argument of Stacks 05TC(2); it needs no upper bound on $K$ and no finite cohomological dimension.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (4), bounded-below complexes: fix a degree and use upper truncation; Stacks 05TC(2) for the same tail-vanishing comparison"
+   }
+  },
+  {
+   "text": "Step 2 gives functors $F:D^+(\\mathcal A)\\to D^+_{\\mathrm{class}}(\\mathcal B)$ and $R:D^+_{\\mathrm{class}}(\\mathcal B)\\to D^+(\\mathcal A)$. Both subcategories are full. The assumed natural isomorphism $\\eta:\\mathrm{id}\\xrightarrow{\\sim}RF$ and the natural isomorphism $\\varepsilon:FR\\xrightarrow{\\sim}\\mathrm{id}$ established in step 7 restrict to these subcategories, with the same triangle identities. These are the required mutually inverse equivalences.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+    "place": "paragraph (4), final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
   "det-pe-classical-sheaves-modules",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "sk-def-pe-classical-definition",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-derived-functor-truncation-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-equivalence.proof.md",
+  "place": "Four proof paragraphs, with explicit derived-category tools from Stacks 015F, 05TC, 08J5, 0A8D, 05RS and 05QB; no change to the unit route."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale",
+   "results": "No match: read Mathlib/AlgebraicGeometry/Sites/Proetale.lean:45-110 and ElladicCohomology.lean:15-85. Site definitions and the definition of ell-adic cohomology supply no classical derived equivalence. Actual top hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived equivalence between etale sheaves and proetale complexes with classical cohomology",
+   "results": "No match: hits concern small etale sites, discrete condensed objects, dense-subsite equivalences, or bounded representatives, not the derived classical comparison. Actual top hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, AlgebraicGeometry.Scheme.smallEtaleTopology, Condensed.lanSheafProfinite, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Equivalence.sheafCongr, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "No match: declarations in AlgebraicGeometry.Sites.Proetale concern the site, coverings and topology comparisons, not this derived equivalence. Actual top hits: AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology, AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology, AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below derived equivalence between etale sheaves and proetale complexes with classical cohomology",
+   "results": "No match: hits concern small etale sites, discrete condensed objects, dense-subsite equivalences, or bounded representatives, not the derived classical comparison. Actual top hits: AlgebraicGeometry.Scheme.Etale.forget, Condensed.ofSheafForgetProfinite, LightCondAb.ofSheafLightProfinite, Condensed.lanSheafProfinite, AlgebraicGeometry.Scheme.smallEtaleTopology, LightCondMod.ofSheafLightProfinite, LightProfinite.hasSheafify, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an exact fully faithful inverse image functor identifies bounded below derived category with complexes whose cohomology lies in its essential image",
+   "results": "No match: hits are existence of bounded representatives and essential surjectivity of localization, not this equivalence. Actual top hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -67,5 +207,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-classical-derived"
+ "unit": "sk-cor-pe-classical-derived",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-derived-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the conditional arbitrary-discrete-ring statement. Filled every proof dependency by reusing existing nodes, checked the derived adjunction shift compatibility, wrote the zero base and finite truncation induction, and verified the general truncation-comparison hypotheses for the bounded-below passage. Removed the unused finite-ring comparison theorem. No new nodes.",
+  "blueprint": "Paragraph (1) is steps 1-2; paragraph (2) is step 4; paragraph (3) is steps 3,5,6; paragraph (4) is steps 7-8."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-c2860e570",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-c2860e570 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all 18 cited node statements, blueprint proofs, and Stacks sources. All eight steps are mathematically sound with hypotheses checked, including adjunction shifts, truncation induction, five-lemma ladder, bounded-below tail comparison, coefficient category, and base-change morphism. No new nodes, duplicates, circularity, weakened target, or prohibited SGA route. Edge cases tested; review.md written."
+ }
 }
