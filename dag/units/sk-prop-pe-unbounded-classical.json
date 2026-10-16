@@ -1,0 +1,41 @@
+{
+ "id": "sk-prop-pe-unbounded-classical",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "Unbounded comparison for finite coefficients",
+ "lean": [],
+ "uses": [
+  "sk-def-cd",
+  "sk-lem-base-field-cd",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "sk-prop-pe-left-complete",
+  "sk-prop-pe-milnor"
+ ],
+ "statement": "Let $X$ and $Y$ be of finite type over the standing field $k$, let $A$ be a\nfinite commutative $\\ell$-primary ring, and let $g\\colon X\\to Y$ be of finite\ntype. Then $\\nu_X^*\\colon D(X_{\\Et},A)\\to D(X_{\\Proet},A)$ is fully faithful and\npreserves arbitrary direct sums. The direct-image comparison map\n$\\nu_Y^*Rg_{\\Et,*}K\\to Rg_{\\Proet,*}\\nu_X^*K$ of\n[sk-thm-pe-direct-image-comparison], now a natural transformation of functors\n$D(X_{\\Et},A)\\to D(Y_{\\Proet},A)$, is an isomorphism for every\n$K\\in D(X_{\\Et},A)$.",
+ "steps": [
+  {
+   "text": "We first record the cohomological bounds. Every affine $U_i$ étale over $X$ is\naffine of finite type over $k$ with $\\dim(U_i)\\leq\\dim(X)$, so Stacks Project,\nTag 0F0V gives $\\operatorname{cd}_\\ell(U_i)\\leq\\dim(X)+\\operatorname{cd}_\\ell(k)$\nfor $A$-module sheaves; this bound is independent of $i$. A bound of the same\nkind holds for the fixed finite-type morphism $g$ and its étale base changes\n(Stacks Project, Tag 0F10). For the schemes $X\\times_YV_i$ used below, choose a\nfixed finite affine open cover of $X$. Since $X$ and $Y$ are separated over $k$,\nits intersections and their pullbacks to the affine $V_i$ are affine; each\npullback is étale over the corresponding intersection and has dimension at most\n$\\dim(X)$. The finite Čech complex of this cover therefore adds a bound\nindependent of $i$ to the affine bound. On a pro-étale affine limit the bound\nfor classical sheaves follows from cohomology comparison and continuity. All\nthese bounds hold for arbitrary $A$-module sheaves\n([det-pe-unbounded-classical-bounds] records one uniform bound obtained this\nway)."
+  },
+  {
+   "text": "Next, the pro-étale truncation argument. Let $U$ be an affine object of\n$X_{\\Proet}$, and let $L$ be a pro-étale complex with classical cohomology and\n$H^q(L)=0$ for $q>b$. Left completeness ([sk-prop-pe-left-complete]) gives\n\n$$\nL\\simeq R\\varprojlim_n\\tau_{\\geq-n}L.\n$$\n\nFor each bounded-below term, derived sections over $U$ have cohomology only up to\ndegree $b+\\dim(X)+\\operatorname{cd}_\\ell(k)$. Derived sections preserve the\ndisplayed inverse limit, so by the Milnor sequence ([sk-prop-pe-milnor])\n$R\\Gamma(U,L)$ has no cohomology above\n$b+\\dim(X)+\\operatorname{cd}_\\ell(k)+1$. Apply this to $L=\\tau_{<N}\\nu_X^*K$: for\nany prescribed degree $m$, choosing $N<m-\\dim(X)-\\operatorname{cd}_\\ell(k)-2$\nmakes\n\n$$\nH^mR\\Gamma(U,\\nu_X^*K)\\longrightarrow H^mR\\Gamma(U,\\tau_{\\geq N}\\nu_X^*K)\n$$\n\nan isomorphism. The choice of $N$ depends only on $m$ and the bound, so the\nargument applies to every $K\\in D(X_{\\Et},A)$, bounded below or not\n([det-pe-unbounded-classical-truncation])."
+  },
+  {
+   "text": "On the étale side, $\\Gamma(U,-)$ on $A$-module sheaves has enough injective\nacyclic objects and cohomological dimension at most\n$\\dim(X)+\\operatorname{cd}_\\ell(k)$, so the derived-functor lemma for bounded\ncohomological dimension (Stacks Project, Tag 07K7) gives the same truncation for\narbitrary complexes directly. Thus in each degree the unit\n$K\\to R\\nu_{X,*}\\nu_X^*K$ in $D(X_{\\Et},A)$ is computed on a bounded-below\ntruncation, where it is an isomorphism; hence the unbounded unit is an\nisomorphism ([det-pe-unbounded-classical-unit])."
+  },
+  {
+   "text": "For direct images, evaluate on $V=\\varprojlim_iV_i$ in the affine pro-étale basis\nof $Y$. For a classical sheaf, cohomology on $X\\times_YV$ is the filtered colimit\nof cohomology on the $X\\times_YV_i$, and the uniform bounds allow the same\nfixed-degree truncation on both sides. Explicitly, use the triangle\n$\\tau_{<N}K\\to K\\to\\tau_{\\geq N}K$. The relative bound for $g$ places\n$Rg_{\\Et,*}\\tau_{<N}K$ in degrees at most $N-1+\\operatorname{cd}_\\ell(g)$, and the\nabsolute bounds for the $V_i$ control its derived sections. On the pro-étale\nside, the absolute bounds on $X\\times_YV_i$ and continuity give the corresponding\nbound on $X\\times_YV$, up to the one extra Milnor degree found above. For $N$\nsufficiently small both lower-tail contributions vanish in the prescribed\ndegree, and bounded-below direct-image comparison gives the comparison for\nunbounded $K$ ([det-pe-unbounded-classical-direct-image]). Finally, $\\nu_X^*$\npreserves sums because it is an exact left adjoint."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

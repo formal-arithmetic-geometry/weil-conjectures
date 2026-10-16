@@ -1,0 +1,47 @@
+{
+ "id": "sk-thm-sfb-proper-base-change",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "Proper direct image of constructible complexes",
+ "lean": [
+  "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper",
+  "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl"
+ ],
+ "uses": [
+  "sk-def-sfb-base-change-morphism",
+  "sk-def-sfb-constructible",
+  "sk-lem-integral-models",
+  "sk-prop-ctf-finite-proper",
+  "sk-thm-properbasechange"
+ ],
+ "statement": "Let $p\\colon X\\to Y$ be proper and let $\\Lambda$ be admissible. Then\n$Rp_*\\colon D(X_{\\mathrm{proét}},\\Lambda)\\to D(Y_{\\mathrm{proét}},\\Lambda)$ maps $\\Dctf(X,\\Lambda)$\ninto $\\Dctf(Y,\\Lambda)$ ([sk-def-sfb-constructible]). On these categories the canonical proper\nbase change and projection formula maps are isomorphisms: for a cartesian square with\n$g\\colon Y'\\to Y$, $g'\\colon X'\\to X$ and $p'\\colon X'\\to Y'$, the base change map\n$g^*Rp_*\\to Rp'_*g'^*$ ([sk-def-sfb-base-change-morphism]) is an isomorphism of functors\n$\\Dctf(X,\\Lambda)\\to\\Dctf(Y',\\Lambda)$, and the projection formula map\n$Rp_*K\\otimes^{\\mathbf L}M\\to Rp_*(K\\otimes^{\\mathbf L}p^*M)$ is an isomorphism in\n$D(Y_{\\mathrm{proét}},\\Lambda)$ for $K\\in\\Dctf(X,\\Lambda)$ and $M\\in\\Dctf(Y,\\Lambda)$.\n\nFor $\\Lambda=\\cO_E,E,\\Qlb$ the category $\\Dctf$ is $\\Dbc$, and the proof works with $\\Dbc$. For\n$Y=\\Spec k$ with $k$ algebraically closed, the proposition says that the cohomology groups\n$H^q(X,\\Qlb)$ of a proper $X$ are finite-dimensional and vanish outside a bounded range of\ndegrees.",
+ "steps": [
+  {
+   "text": "*Finite coefficients.* For finite $A$, proper constructible finiteness and a uniform\ncohomological bound give bounded constructibility; the constant-module projection formula\ngives a finite Tor bound. The details are in [sk-prop-ctf-finite-proper]. Proper base change is\n[sk-thm-properbasechange] on the étale sites, transported to an isomorphism in\n$D(Y'_{\\mathrm{proét}},A)$ by its finite instance [sk-cor-pbc-proet-finite]; the projection\nformula is the classical torsion formula (\\stacks{0F0G}) in $D(Y_{\\mathrm{ét}},A)$, transported\nto $D(Y_{\\mathrm{proét}},A)$ under the same comparison. Details:\n[det-thm-sfb-proper-base-change-finite]."
+  },
+  {
+   "text": "*Integral coefficients.* Let $K\\in\\Dbc(X,\\cO_E)$. The complex $Rp_*K$ is derived complete by\n\\stacks{099L}. Reduction modulo $\\pi_E$ commutes with $Rp_*$:\n$$\n(Rp_*K)\\otimes^{\\mathbf L}\\cO_{E,Y}/\\pi_E\\simeq Rp_*(K\\otimes^{\\mathbf L}\\cO_{E,X}/\\pi_E)\n\\quad\\text{in }D(Y_{\\mathrm{proét}},\\cO_E).\n$$\nIndeed, $K\\otimes^{\\mathbf L}\\cO_{E,X}/\\pi_E$ is the cone of multiplication by $\\pi_E$ on $K$, and\nthe exact functor $Rp_*$ commutes with this cone. The right side is the direct image of a\ncomplex with torsion coefficients, which is pulled back from $X_{\\mathrm{ét}}$ (\\stacks{09B1});\nits direct image in $D(Y_{\\mathrm{proét}},\\cO_E/\\pi_E)$ is the pullback to $Y_{\\mathrm{proét}}$ of\nits direct image in $D(Y_{\\mathrm{ét}},\\cO_E/\\pi_E)$ (\\stacks{09A6}). The étale direct image is\nconstructible by the finiteness theorem for proper direct image with torsion coefficients\n(\\stacks{0GL0}), and bounded because $p$ has finite cohomological dimension (\\stacks{0F10}). By\n[sk-lem-integral-models] (2), $Rp_*K\\in\\Dbc(Y,\\cO_E)$."
+  },
+  {
+   "text": "For constructible integral inputs, the canonical projection formula map in\n$D(Y_{\\mathrm{proét}},\\cO_E)$ and the base change map in $D(Y'_{\\mathrm{proét}},\\cO_E)$, built from\nthe adjunctions and the usual maps between tensor products and inverse images, have derived\ncomplete source and target, by the preceding paragraph and [sk-lem-integral-models] (3).\nTheir reductions modulo $\\pi_E$ are the torsion projection formula and proper base change\nmaps. The first is an isomorphism by the projection formula for torsion coefficients\n(\\stacks{0F0G}). The second is an isomorphism by [sk-thm-properbasechange] and\n[sk-cor-pbc-proet-finite]: the finite reductions are bounded below classical complexes, so\ntheir canonical exchange maps are isomorphisms in $D(Y'_{\\mathrm{proét}},\\cO_E/\\pi_E)$.\n([sk-prop-pbc-complete] gives a completed integral version; here the inverse images of\nconstructible complexes are already complete.) Hence the cone of each integral map is derived\ncomplete and has zero reduction modulo $\\pi_E$. Such a complex is zero (derived Nakayama):\nusing the filtration of $\\cO_E/\\pi_E^n$ with subquotients $\\cO_E/\\pi_E$, its reductions modulo\nevery $\\pi_E^n$ vanish, and a derived complete complex is the derived inverse limit of these\nreductions. Hence the integral maps are isomorphisms. (Proper base change also follows\ndirectly from \\stacks{09C9}, since the inverse image of a constructible integral complex is\nalready derived complete.) Details: [det-thm-sfb-proper-base-change-integral]."
+  },
+  {
+   "text": "*Rational coefficients.* For $K\\in\\Dbc(X,\\cO_E)$, the complex $K[1/\\ell]$ is the colimit of\n$K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$, a system with a common lower bound, so\n[sk-cor-pe-bounded-continuity] gives\n$$\nRp_*(K[1/\\ell])\\simeq(Rp_*K)[1/\\ell]\\quad\\text{in }D(Y_{\\mathrm{proét}},E).\n$$\nIn the same way, $Rp_*$ commutes with extension of scalars to a finite $F/E$, as functors\n$D(X_{\\mathrm{proét}},E)\\to D(Y_{\\mathrm{proét}},F)$ (which is a finite direct sum, by\n[sk-prop-sfb-cartesian-coefficients] (2)) and, by [sk-cor-pe-bounded-continuity] again, with the\nfiltered colimit $\\QbarX\\otimes_{E_X}-=\\varinjlim_FF_X\\otimes_{E_X}-$. Thus $Rp_*$ commutes with\ninverting $\\ell$ and with extension of scalars to $\\Qlb$. By the integral case, $Rp_*$\ntherefore maps the generators of [sk-lem-integral-models] (4) into $\\Dbc(Y,E)$ and\n$\\Dbc(Y,\\Qlb)$, and since $\\Dbc(Y,E)$ and $\\Dbc(Y,\\Qlb)$ are triangulated\n([sk-cor-coefficient-heart-ii]), $Rp_*$ preserves $\\Dbc(-,E)$ and $\\Dbc(-,\\Qlb)$. For the\nprojection formula and proper base change, rationalize the integral isomorphisms and extend\nto all inputs by dévissage in each variable along the same generators. The maps involved are\nthe canonical ones, so the resulting isomorphisms satisfy the usual compatibilities with\ncomposition. Details: [det-thm-sfb-proper-base-change-rational]."
+  },
+  {
+   "text": "For the $\\ell$-adic fields, an earlier version of this argument reduces proper base change on\n$\\Dbc(-,E)$ to bounded constructible integral complexes $K_0$ with $K=E\\otimes K_0$\n([sk-thm-sfb-rationalization-comparison]), writes $K_0=\\operatorname{R\\lim}_nK_0/\\pi_E^n$ and\nchecks the exchange map on each torsion reduction, where it is the étale exchange morphism;\nfor $\\Qlb$ one descends to a finite $E$ ([sk-thm-sfb-qlbar-two-colimit])."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

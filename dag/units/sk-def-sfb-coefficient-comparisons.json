@@ -1,0 +1,63 @@
+{
+ "id": "sk-def-sfb-coefficient-comparisons",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "Comparison maps for a change of coefficients",
+ "lean": [
+  "CategoryTheory.Mod.comapMapModComapIso",
+  "CategoryTheory.Mod.comapMapModComapIso_hom_app_hom",
+  "CategoryTheory.Adjunction.pullIsoOfComapIso",
+  "CategoryTheory.Adjunction.pushHomOfComapIso",
+  "CategoryTheory.Mod.extendScalarsComapIsoOfIsIso",
+  "CategoryTheory.Functor.ProjectionFormula.mapModLeftComapIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.comapLowerStarIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.pullIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.pushHom",
+  "AlgebraicGeometry.ProEtale.CondensedRing.comapUpperStarIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedComapUpperStarIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.preservesHomology_extendScalars_coefficientMap",
+  "AlgebraicGeometry.ProEtale.CondensedRing.preservesKInjectiveComplexes_comap_coefficientMap",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedComapLowerStarIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedPullIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom",
+  "AlgebraicGeometry.ProEtale.CondensedRing.comapOpenImmersionLowerShriekIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionShriekIso",
+  "AlgebraicGeometry.ProEtale.CondensedRing.derivedLowerShriekHom",
+  "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedLowerShriekHom"
+ ],
+ "uses": [
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-derived-lower-shriek"
+ ],
+ "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings, with coefficient\nchanges $a_X\\colon\\Lambda_X\\to\\Lambda'_X$ and derived extensions of scalars\n$T^X=L(\\operatorname{Ext}_{a_X})$ ([sk-def-sfb-coefficient-change]). For a morphism of schemes\n$f\\colon X\\to Y$ write $f^*$, $f_*$ for the pullback and pushforward of module objects over\n$\\Lambda$ resp. $\\Lambda'$ ([sk-def-sfb-module-pushforward-pullback]), $Lf^*$, $Rf_*$ for their\nderived functors ([sk-def-sfb-module-derived-pushpull]), $j_!$ for the extension by zero along\nan open immersion $j\\colon U\\to X$ ([sk-def-sfb-module-lower-shriek]), and, when $f$ admits a\ncompactification, $Rf_!=R(g_*)\\circ D(i_!)$ for the chosen compactification $f=g\\circ i$\n($i$ an open immersion, $g$ proper; [sk-def-sfb-module-derived-lower-shriek]). Restriction and\nextension of scalars $\\operatorname{Res}$, $\\operatorname{Ext}$ are those of\n[sk-def-sfb-change-of-scalars].\n\nThe *comparison maps* between the change of coefficients and the six functors are the following\nnatural transformations; all of them are produced formally, as conjugates and mates, from the\nfact that restriction of scalars commutes with pushforward,\n$\\operatorname{Res}_{a_Y}\\circ f_*\\cong f_*\\circ\\operatorname{Res}_{a_X}$, and with pullback,\n$\\operatorname{Res}_{a_X}\\circ f^*\\cong f^*\\circ\\operatorname{Res}_{a_Y}$.\n\n- **Extension by zero.** For every open immersion $j\\colon U\\to X$, an isomorphism\n  $\\operatorname{Ext}_{a_X}\\circ j_!\\cong j_!\\circ\\operatorname{Ext}_{a_U}$ and an isomorphism\n  $T^X\\circ D(j_!)\\cong D(j_!)\\circ T^U$ of functors\n  $D(\\Mod_{\\Lambda_U})\\to D(\\Mod_{\\Lambda'_X})$ on the unbounded derived categories.\n\nAssume moreover that $a$ is *flat*: for every scheme $X$ the extension of scalars\n$\\operatorname{Ext}_{a_X}=\\Lambda'_X\\otimes_{\\Lambda_X}-$ is exact, i.e. $\\Lambda'_X$ is flat\nover $\\Lambda_X$. Then:\n\n- **(Pull)** an isomorphism $T^X\\circ Lf^*\\cong Lf^*\\circ T^Y$ of functors\n  $D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda'_X})$, on the unbounded derived categories;\n- **(Push)** a natural transformation $T^Y\\circ Rf_*\\to Rf_*\\circ T^X$ of functors\n  $D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda'_Y})$, not an isomorphism in general;\n- **(Shriek)** for $f$ admitting a compactification, a natural transformation\n  $T^Y\\circ Rf_!\\to Rf_!\\circ T^X$, namely (Push) for the proper part $g$ followed by the\n  extension-by-zero isomorphism for the open part $i$; it is an isomorphism whenever (Push) for\n  $g$ is an isomorphism.\n\nThe underived analogues $\\operatorname{Ext}_{a_X}\\circ f^*\\cong f^*\\circ\\operatorname{Ext}_{a_Y}$\nand $\\operatorname{Ext}_{a_Y}\\circ f_*\\to f_*\\circ\\operatorname{Ext}_{a_X}$ exist without the\nflatness assumption.",
+ "steps": [
+  {
+   "text": "*Formal input.* For a lax monoidal functor and a commutative square of ring objects,\nrestriction of scalars commutes with \"transport, then restrict along the vertical maps\"\n([def-sfb-comap-mapmod-square], identity on underlying objects by\n[lem-sfb-comap-mapmod-square-underlying]). In a square of adjunctions, an isomorphism between the\ncomposites of right adjoints has a conjugate isomorphism between the composites of left adjoints\n([def-sfb-conjugate-pull-iso]) and a mate ([def-sfb-mate-push-hom]). Restriction of scalars\ncommutes with extension of scalars along isomorphisms ([def-sfb-extend-comap-iso-of-iso]) and\nwith the linearization of a functor satisfying a projection formula\n([def-sfb-projection-formula-comap])."
+  },
+  {
+   "text": "*Pushforward and pullback.* The second square of [sk-def-sfb-coefficient-change] gives\n$\\operatorname{Res}_{a_Y}\\circ f_*\\cong f_*\\circ\\operatorname{Res}_{a_X}$\n([def-sfb-comap-lower-star-iso]); its conjugate and mate are the underived (Pull) and (Push)\n([def-sfb-pull-iso], [def-sfb-push-hom]). Since every $\\alpha_f$ is invertible\n([sk-prop-sfb-cartesian-coefficients]), restriction of scalars also commutes with $f^*$\n([def-sfb-comap-upper-star-iso]), levelwise also on derived categories\n([def-sfb-derived-comap-upper-star-iso])."
+  },
+  {
+   "text": "*Derived (Pull) and (Push).* Under the flatness assumption $\\operatorname{Ext}_{a_X}$ is exact\n([lem-sfb-extend-scalars-preserves-homology]) and $\\operatorname{Res}_{a_X}$ preserves\nK-injective complexes ([lem-sfb-comap-preserves-k-injectives]), so restriction of scalars\ncommutes with $Rf_*$ ([def-sfb-derived-comap-lower-star-iso]). Its conjugate along\n$Lf^*\\dashv Rf_*$ and $T\\dashv D(\\operatorname{Res})$ is (Pull) ([def-sfb-derived-pull-iso]), and\nits mate along $T\\dashv D(\\operatorname{Res})$ is (Push) ([def-sfb-derived-push-hom])."
+  },
+  {
+   "text": "*Extension by zero.* Restriction of scalars commutes with $j_!$\n([def-sfb-comap-open-immersion-shriek-iso]); the extension-by-zero isomorphisms are the\nconjugates of the commutation of restriction of scalars with $j^*$ along $j_!\\dashv j^*$, resp.\n$D(j_!)\\dashv D(j^*)$ ([def-sfb-open-immersion-shriek-iso],\n[def-sfb-derived-open-immersion-shriek-iso]); no flatness is needed."
+  },
+  {
+   "text": "*(Shriek).* [def-sfb-derived-lower-shriek-hom], and the isomorphism criterion is\n[lem-sfb-derived-lower-shriek-hom-iso]."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

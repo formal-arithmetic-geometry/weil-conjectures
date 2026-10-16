@@ -1,0 +1,30 @@
+{
+ "id": "sk-def-sfb-module-objects",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Module objects and the category $\\Mod_{\\Lambda_X}$",
+ "lean": [
+  "CategoryTheory.ModObj",
+  "CategoryTheory.Mod",
+  "CategoryTheory.Mod.forget",
+  "CategoryTheory.Mod.regular"
+ ],
+ "uses": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf 1)$ be a monoidal category with associator $\\alpha$ and\nleft unitor $\\lambda$. Let $\\mathcal R$ be a monoid object of $\\mathcal C$, with\nmultiplication $\\mu\\colon\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$ and unit\n$\\eta\\colon\\mathbf 1\\to\\mathcal R$. When $\\mathcal C$ is a category of abelian sheaves with\nits tensor product, these are the ring objects of [sk-def-sfb-ring-object].\n\n1. A *(left) $\\mathcal R$-module object* is an object $M$ of $\\mathcal C$ with an\n   *action* $\\gamma_M\\colon\\mathcal R\\otimes M\\to M$ that is unital and associative:\n   $$\n   \\gamma_M\\circ(\\eta\\otimes M)=\\lambda_M,\\qquad\n   \\gamma_M\\circ(\\mu\\otimes M)=\\gamma_M\\circ(\\mathcal R\\otimes\\gamma_M)\\circ\\alpha_{\\mathcal R,\\mathcal R,M}.\n   $$\n2. A *morphism of $\\mathcal R$-module objects* $f\\colon M\\to N$ is a morphism of\n   $\\mathcal C$ with $f\\circ\\gamma_M=\\gamma_N\\circ(\\mathcal R\\otimes f)$. With the\n   composition of $\\mathcal C$, the $\\mathcal R$-module objects form a category\n   $\\Mod_{\\mathcal R}(\\mathcal C)$. It has a forgetful functor\n   $\\Mod_{\\mathcal R}(\\mathcal C)\\to\\mathcal C$, $(M,\\gamma_M)\\mapsto M$. The *regular\n   module* is $\\mathcal R$ itself with action $\\mu$.\n3. Let $X$ be a scheme with small pro-étale site $X_{\\mathrm{proét}}$\n   ([def-weil-pbc-proetale-site]). Give $\\Sh(X_{\\mathrm{proét}},\\Ab)$ the tensor product of\n   [sk-def-sfb-sheaf-tensor]. Let $\\Lambda$ be a condensed ring and let\n   $\\Lambda_X=p_X^*\\Lambda$ be its pullback, a ring object of $\\Sh(X_{\\mathrm{proét}},\\Ab)$\n   ([sk-def-sfb-pulled-back-coefficients]). The category of *sheaves of\n   $\\Lambda_X$-modules* is\n   $$\n   \\Mod_{\\Lambda_X}:=\\Mod_{\\Lambda_X}\\bigl(\\Sh(X_{\\mathrm{proét}},\\Ab)\\bigr).\n   $$",
+ "steps": [
+  {
+   "text": "Identities are morphisms of module objects. If $f\\colon M\\to N$ and $g\\colon N\\to P$ are\nmorphisms of module objects, then so is $gf$:\n$$\ngf\\gamma_M=g\\gamma_N(\\mathcal R\\otimes f)=\\gamma_P(\\mathcal R\\otimes g)(\\mathcal R\\otimes f)\n=\\gamma_P(\\mathcal R\\otimes gf).\n$$\nSo $\\Mod_{\\mathcal R}(\\mathcal C)$ is a category, and the forgetful functor is a functor. For\nthe regular module, the two axioms are the left unit law\n$\\mu(\\eta\\otimes\\mathcal R)=\\lambda_{\\mathcal R}$ and the associativity law\n$\\mu(\\mu\\otimes\\mathcal R)=\\mu(\\mathcal R\\otimes\\mu)\\alpha_{\\mathcal R,\\mathcal R,\\mathcal R}$\nof $\\mathcal R$. In part 3, $\\Lambda_X$ is a monoid object of\n$\\Sh(X_{\\mathrm{proét}},\\Ab)$ because $p_X^*$ is strong monoidal\n([sk-def-sfb-pulled-back-coefficients]), so part 2 applies."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   []
+  ]
+ },
+ "realized_by": null
+}

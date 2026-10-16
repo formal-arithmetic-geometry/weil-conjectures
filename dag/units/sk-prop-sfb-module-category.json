@@ -1,0 +1,60 @@
+{
+ "id": "sk-prop-sfb-module-category",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Structure of $\\Mod_{\\mathcal R}(\\mathcal C)$",
+ "lean": [
+  "CategoryTheory.Mod.instFaithfulForget_weilConjectures",
+  "CategoryTheory.Mod.isLimitKernelFork",
+  "CategoryTheory.Mod.isColimitCokernelCofork",
+  "CategoryTheory.Mod.instAbelian_weilConjectures",
+  "CategoryTheory.Mod.instPreservesFiniteLimitsForget_weilConjectures",
+  "CategoryTheory.Mod.instPreservesFiniteColimitsForget_weilConjectures",
+  "CategoryTheory.Mod.fullyFaithfulToBimod",
+  "Bimod.IsSymmetric.iso",
+  "Bimod.IsSymmetric.tensorBimod",
+  "CategoryTheory.Mod.monoidalCategory",
+  "CategoryTheory.Mod.symmetricCategory",
+  "CategoryTheory.Mod.braidedCategory",
+  "CategoryTheory.Mod.monoidalClosed",
+  "CategoryTheory.Mod.isGrothendieckAbelian",
+  "CategoryTheory.Mod.hasFunctorialFlatResolution"
+ ],
+ "uses": [
+  "sk-def-sfb-module-objects"
+ ],
+ "statement": "Let $\\mathcal C$ be a monoidal category and $\\mathcal R$ a monoid object of $\\mathcal C$,\nwith module objects as in [sk-def-sfb-module-objects]. The forgetful functor\n$\\Mod_{\\mathcal R}(\\mathcal C)\\to\\mathcal C$ is faithful.\n\n1. **Abelian structure.** Let $\\mathcal C$ be abelian with $\\otimes$ additive in each\n   variable, and let $\\mathcal R\\otimes-$ be right exact. Then $\\Mod_{\\mathcal R}(\\mathcal C)$\n   is abelian, and kernels and cokernels are computed in $\\mathcal C$. More precisely, the\n   kernel (cokernel) in $\\mathcal C$ of a morphism of module objects carries a unique action\n   of $\\mathcal R$ that makes it the kernel (cokernel) in $\\Mod_{\\mathcal R}(\\mathcal C)$. The\n   forgetful functor is exact.\n2. **Relative tensor product.** Let $\\mathcal C$ be braided, with braiding $\\beta$, and\n   have coequalizers. Assume $X\\otimes-$ and $-\\otimes X$ preserve colimits for every $X$,\n   and let $\\mathcal R$ be commutative. Every $\\mathcal R$-module object $M$ is then also a\n   right module, via $\\gamma_M\\circ\\beta_{M,\\mathcal R}\\colon M\\otimes\\mathcal R\\to M$. This\n   identifies $\\Mod_{\\mathcal R}(\\mathcal C)$ with a full subcategory of the\n   $\\mathcal R$-$\\mathcal R$-bimodules, the *symmetric* bimodules. The *relative tensor\n   product* is the coequalizer\n   $$\n   M\\otimes_{\\mathcal R}N:=\\operatorname{coeq}\\Bigl(M\\otimes\\mathcal R\\otimes N\n   \\rightrightarrows M\\otimes N\\Bigr)\n   $$\n   of $(\\gamma_M\\beta_{M,\\mathcal R})\\otimes N$ and\n   $(M\\otimes\\gamma_N)\\circ\\alpha_{M,\\mathcal R,N}$, with $\\mathcal R$ acting through $M$.\n   It makes $\\Mod_{\\mathcal R}(\\mathcal C)$ a monoidal category with unit $\\mathcal R$. If\n   $\\mathcal C$ is symmetric, the braiding of $\\mathcal C$ descends to $\\otimes_{\\mathcal R}$\n   and makes $\\Mod_{\\mathcal R}(\\mathcal C)$ symmetric monoidal.\n3. **Closed Grothendieck structure.** Let $\\mathcal C$ be a closed symmetric monoidal\n   Grothendieck abelian category with $\\otimes$ additive in each variable, and let\n   $\\mathcal R$ be commutative. Then $\\Mod_{\\mathcal R}(\\mathcal C)$, with\n   $\\otimes_{\\mathcal R}$, is a closed symmetric monoidal Grothendieck abelian category.\n   Call an object $F$ *flat* if $F\\otimes-$ and $-\\otimes F$ are exact. A *functorial flat\n   resolution* is a functor $P$ to flat objects with a natural epimorphism $P(M)\\to M$. If\n   $\\mathcal C$ has one, so does $\\Mod_{\\mathcal R}(\\mathcal C)$, given by\n   $$\n   \\mathcal R\\otimes P(M)\\to\\mathcal R\\otimes M\\xrightarrow{\\gamma_M}M .\n   $$\n4. **Sheaves of modules.** In particular, let $\\Lambda$ be a commutative condensed ring\n   and $X$ a scheme. Then $\\Mod_{\\Lambda_X}$ is a closed symmetric monoidal Grothendieck\n   abelian category with unit $\\Lambda_X$ and functorial flat resolutions. Its forgetful\n   functor to $\\Sh(X_{\\mathrm{proét}},\\Ab)$ is exact and faithful.",
+ "steps": [
+  {
+   "text": "Faithfulness is [lem-sfb-modobj-forget-faithful]."
+  },
+  {
+   "text": "Part 1. Kernels and cokernels are computed in $\\mathcal C$ by\n[lem-sfb-modobj-kernels] and [lem-sfb-modobj-cokernels]. The category is abelian by\n[lem-sfb-modobj-abelian]. The forgetful functor is left exact by\n[lem-sfb-modobj-forget-left-exact] and right exact by\n[lem-sfb-modobj-forget-right-exact]."
+  },
+  {
+   "text": "Part 2. Module objects are the symmetric bimodules by\n[lem-sfb-modobj-symmetric-bimodules] and [def-sfb-symmetric-bimod-module-iso]. Symmetric bimodules are stable under the tensor\nproduct of bimodules by [lem-sfb-symmetric-bimod-tensor]. The monoidal structure is\n[def-sfb-modobj-relative-tensor], and the symmetric structure is\n[def-sfb-modobj-symmetric-tensor]."
+  },
+  {
+   "text": "Part 3. Since $\\mathcal C$ is closed, $X\\otimes-$ is a left adjoint. By the symmetry, so is\n$-\\otimes X$. Hence both preserve colimits, and in particular $\\mathcal R\\otimes-$ is right\nexact. An abelian category has coequalizers. So parts 1 and 2 apply. Closedness is\n[def-sfb-modobj-internal-hom]. The Grothendieck property is\n[lem-sfb-modobj-grothendieck], and the flat resolutions are\n[lem-sfb-modobj-flat-resolutions]."
+  },
+  {
+   "text": "Part 4. Take $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ with the tensor product of\n[sk-def-sfb-sheaf-tensor]. It is closed symmetric monoidal. Its tensor product preserves\ncolimits in each variable, so in particular it is additive. It is a Grothendieck abelian\ncategory:\n- filtered colimits are exact, because sheafification is exact and filtered colimits of\n  presheaves of abelian groups are exact;\n- the sheafified free abelian sheaves $\\mathbf Z_U$ on the objects $U$ form a generating\n  family, and $X_{\\mathrm{proét}}$ is essentially small."
+  },
+  {
+   "text": "It has functorial flat resolutions. $\\mathbf Z_U\\otimes F$ is the sheafification of\n$V\\mapsto\\bigoplus_{\\Hom(V,U)}F(V)$, which is exact in $F$. Hence $\\mathbf Z_U$ is flat,\nand so are direct sums of such sheaves. The canonical map\n$\\bigoplus_{U,\\ s\\in M(U)}\\mathbf Z_U\\to M$ is a functorial epimorphism. Finally,\n$\\Lambda_X=p_X^*\\Lambda$ is a commutative monoid object because $p_X^*$ is braided\n([sk-def-sfb-pulled-back-coefficients]). Now apply parts 3 and 1."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

@@ -1,0 +1,33 @@
+{
+ "id": "sk-lem-proper-unbounded-window",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "Proper direct image of unbounded complexes",
+ "lean": [],
+ "uses": [
+  "sk-lem-proper-heart-bound",
+  "sk-cor-ambient-ind-derived"
+ ],
+ "statement": "Let $\\Lambda=E$ or $\\Qlb$, and let $p\\colon X\\to Y$ and $d$ be as in [sk-lem-proper-heart-bound]. Write\n$\\Dic^{\\leq b}(X,\\Lambda)$ and $\\Dic^{\\geq a}(X,\\Lambda)$ for the objects of $\\Dic(X,\\Lambda)$\n([sk-cor-ambient-ind-derived]) with cohomology in degrees $\\leq b$, respectively $\\geq a$. Then\n$Rp_*\\colon\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(Y_{\\mathrm{proét}},\\Lambda)$ maps $\\Dic(X,\\Lambda)$ into $\\Dic(Y,\\Lambda)$, and\n\n$$\nRp_*\\bigl(\\Dic^{\\leq b}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\leq b+2d+1}(Y,\\Lambda),\n\\qquad\nRp_*\\bigl(\\Dic^{\\geq a}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\geq a}(Y,\\Lambda).\n$$\n\nMoreover, for $K\\in\\Dic(X,\\Lambda)$ and every integer $q$, the canonical truncation maps\n$K\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ induce an isomorphism in\n$\\IndCons(Y,\\Lambda)$\n\n$$\n\\mathcal H^q(Rp_*K)\\simeq\\mathcal H^q\\bigl(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\\bigr).\n$$",
+ "steps": [
+  {
+   "text": "*Bounded below $K$.* The hypercohomology spectral sequence\n\n$$\nE_2^{u,v}=R^up_*\\mathcal H^v(K)\\Longrightarrow\\mathcal H^{u+v}(Rp_*K)\n$$\n\nconverges. By [sk-lem-proper-heart-bound] its only nonzero columns are $0\\leq u\\leq2d+1$, and their terms\nlie in $\\IndCons(Y,\\Lambda)$. So each $\\mathcal H^n(Rp_*K)$ has a finite filtration whose graded pieces are\nsubquotients of objects of $\\IndCons(Y,\\Lambda)$; since this category is closed under kernels, cokernels\nand extensions ([sk-prop-ind-heart]), $\\mathcal H^n(Rp_*K)\\in\\IndCons(Y,\\Lambda)$. The two amplitude bounds\ncan be read off from the columns ([det-proper-unbounded-window-bounded-below])."
+  },
+  {
+   "text": "*Arbitrary $K$.* By [sk-prop-pe-left-complete], $K\\simeq R\\varprojlim_n\\tau_{\\geq-n}K$. Being a right\nadjoint, $Rp_*$ preserves products and hence derived inverse limits, so\n$Rp_*K\\simeq R\\varprojlim_nRp_*\\tau_{\\geq-n}K$. The fibre of $\\tau_{\\geq-n-1}K\\to\\tau_{\\geq-n}K$ is\n$\\mathcal H^{-n-1}(K)[n+1]$, whose direct image has cohomology only in degrees $[-n-1,2d-n]$. Hence, for\nfixed $q$, the towers $\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)$ and $\\mathcal H^{q-1}(Rp_*\\tau_{\\geq-n}K)$ have\nisomorphisms as transition maps for $n$ large. An eventually constant tower has vanishing\n$\\varprojlim^1$, so the Milnor sequence of [sk-prop-pe-milnor] gives\n\n$$\n\\mathcal H^q(Rp_*K)\\simeq\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)\\quad\\text{for all sufficiently large }n.\n$$\n\nThe right side is covered by the bounded-below case. This proves $\\mathcal H^q(Rp_*K)\\in\\IndCons(Y,\\Lambda)$,\nand if $K\\in\\Dic^{\\leq b}(X,\\Lambda)$ it gives the bound $b+2d+1$. The lower bound needs no argument for\nunbounded $K$, since an object of $\\Dic^{\\geq a}$ is bounded below ([det-proper-unbounded-window-arbitrary])."
+  },
+  {
+   "text": "*The window isomorphism.* Apply the bounds to the truncation triangles\n\n$$\n\\tau_{\\leq q}K\\to K\\to\\tau_{\\geq q+1}K,\\qquad\n\\tau_{\\leq q-2d-2}K\\to\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K.\n$$\n\nThe direct image of $\\tau_{\\geq q+1}K$ lives in degrees $\\geq q+1$, and that of $\\tau_{\\leq q-2d-2}K$ in\ndegrees $\\leq q-1$. The long exact cohomology sequences of the two triangles therefore give isomorphisms\n$\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\simeq\\mathcal H^q(Rp_*K)$ and\n$\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\simeq\\mathcal H^q(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K)$\n([det-proper-unbounded-window-iso])."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

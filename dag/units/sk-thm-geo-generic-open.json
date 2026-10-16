@@ -1,0 +1,74 @@
+{
+ "id": "sk-thm-geo-generic-open",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "Generic constructibility and base change for $Rj_*$",
+ "lean": [],
+ "uses": [],
+ "statement": "Let $S$ be integral of finite type over the standing field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, and let $j:X\\hookrightarrow Y$ be an open\nimmersion of $S$-schemes of finite type. For a constructible $\\Fell$-sheaf $F$\non $X_{\\mathrm{proét}}$, there is a nonempty open $S_0\\subset S$ such that\n\n$$\nRj_{S_0,*}(F|_{X_{S_0}})\\in\\Dbc(Y_{S_0},\\Fell),\n\\qquad\\text{(G21)}\n$$\n\nand such that for every finite-type $k$-scheme $T\\to S_0$, with base change\n$j_T:X_T\\hookrightarrow Y_T$, the canonical base-change map\n\n$$\n(Rj_{S_0,*}F)|_{Y_T}\\longrightarrow Rj_{T,*}(F|_{X_T})\n\\quad\\text{in }D^+((Y_T)_{\\mathrm{proét}},\\Fell)\n\\qquad\\text{(G22)}\n$$\n\nis an isomorphism.",
+ "steps": [
+  {
+   "text": "We prove the assertion for the étale antecedent of $F$ and then transport it\nby [sk-thm-pe-direct-image-comparison] and\n[sk-thm-pe-constructible-comparison]. These compare the canonical base-change\nmaps, so the induction below, carried out with the functors between the\ncategories $D^+(-_{\\mathrm{ét}},\\Fell)$, proves (G21) and (G22) on the\npro-étale site."
+  },
+  {
+   "text": "We prove (G21) and (G22) together by induction on $n=\\dim X_{k(S)}$, allowing\nat each stage all integral bases $S$ of finite type over $k$. In the inductive\nstep, coordinate projections give the assertions away from a part of $Y$\nfinite over $S$; when $X$ is smooth and $F$ locally constant,\n[sk-lem-geo-smooth-generic] controls the proper direct image to $S$, which by\n[sk-lem-geo-finite-boundary] fills in the finite part; and a general $F$\ndiffers from such a sheaf by something supported in smaller dimension."
+  },
+  {
+   "text": "*Preliminary reductions.* The assertions extend from open to locally closed\nimmersions with the same source: factor such an immersion as an open immersion\ninto its scheme-theoretic closure followed by a closed immersion, and note that\nclosed direct image is exact, preserves constructibility, and commutes with\narbitrary pullback (Stacks, Tag [0959](https://stacks.math.columbia.edu/tag/0959)).\nWe will use the induction hypothesis in this form. Replacing $Y$ by the\nscheme-theoretic closure of $X$, we may assume $X$ dense in $Y$. We may also\nshrink $S$ to be affine, and remove the closures of the images of the\nirreducible components of $Y$ that do not dominate $S$: there are finitely\nmany, and none contains the generic point of $S$."
+  },
+  {
+   "text": "The assertions are local on $Y$, and since we only use finite affine covers,\nthe finitely many resulting opens of $S$ can be intersected."
+  },
+  {
+   "text": "*Base case.* If the generic fibre $X_{k(S)}$ is empty, so is $Y_{k(S)}$, by\ndensity. Then $Y$ becomes empty after shrinking $S$: on a finite affine cover,\na coordinate algebra that vanishes over $k(S)$ has its unit killed by a nonzero\nelement of $\\mathcal O(S)$. If $n=0$, the dense open $X_{k(S)}$ of the\nzero-dimensional Noetherian space $Y_{k(S)}$ is all of it; the same argument\napplied to $Y\\setminus X$ shows that $j$ becomes an isomorphism after shrinking\n$S$."
+  },
+  {
+   "text": "Now let $n\\geq1$ and assume the theorem, including (G22), for generic fibres of\ndimension less than $n$."
+  },
+  {
+   "text": "*Step 1: for $Y$ projective over $S$, both assertions hold on an open\n$G\\subset Y$ whose complement is finite over $S$.* Choose charts and\ncoordinates as in [sk-lem-geo-coordinates]. Via $t_{\\alpha r}$, regard\n$X\\cap Y_\\alpha\\hookrightarrow Y_\\alpha$ as an open immersion of schemes over\nthe integral base $\\mathbf A^1_S$, which is of finite type over $k$. By part\n(1) of that lemma its generic fibre has dimension less than $n$, so the\ninduction hypothesis gives a dense open $V_{\\alpha r}\\subset\\mathbf A^1_S$ over\nwhich both assertions hold. They also hold after a base change in the standing\nrange $T\\to S$: apply the hypothesis to the inverse image of $V_{\\alpha r}$ in\n$\\mathbf A^1_T$. Hence on the finite union $G$ of the opens\n$t_{\\alpha r}^{-1}(V_{\\alpha r})$, the complex $Rj_*F$ is bounded constructible\n(there are finitely many pieces, so its cohomology lies in a common finite\nrange of degrees), and (G22) is an isomorphism. By part (2) of the lemma, after\nshrinking $S$ the reduced complement $Z=Y\\setminus G$ is finite over $S$."
+  },
+  {
+   "text": "*Step 2: the theorem holds in dimension $n$ when $X$ is smooth over $S$ and $F$\nis locally constant.* First reduce to $Y$ projective. Restrict to a member of a\nfinite affine cover of $Y$, embed it in affine space over the affine base, and\ntake its closure in projective space. This affine member, and hence $X$, is\nopen in that closure. Replacing the closure by the closure of $X$ makes $X$\ndense without changing its generic fibre, and a result there restricts to the\naffine member. So we may assume $b:Y\\to S$ projective."
+  },
+  {
+   "text": "Step 1 gives $(Rj_*F)|_G\\in\\Dbc$ with $Z\\to S$ finite; also\n$Rj_*F\\in D^+(Y_{\\mathrm{ét}},\\Fell)$. Since $bj:X\\to S$ is smooth and $F$ is\nlocally constant, [sk-lem-geo-smooth-generic], after a further shrinking of\n$S$, shows that $Rb_*Rj_*F=R(bj)_*F$ lies in $\\Dbc(S,\\Fell)$ and that its\nformation commutes with every base change in the standing range. Part (1) of\n[sk-lem-geo-finite-boundary] gives $Rj_*F\\in\\Dbc(Y,\\Fell)$."
+  },
+  {
+   "text": "For a finite-type $k$-scheme $T\\to S$, let $c$ be the map (G22). It is an\nisomorphism on $G_T$ by Step 1. By proper base change for $b$ and the\ncompatibility of base-change maps with composition (Stacks, Tag\n[0E46](https://stacks.math.columbia.edu/tag/0E46)), $Rb_{T,*}c$ is identified\nwith the base-change map for $R(bj)_*F$, which is an isomorphism. Part (2) of\n[sk-lem-geo-finite-boundary], over $T$, shows that $c$ is an isomorphism. (A\npriori the target of $c$ is only bounded below; the isomorphism shows it is\nbounded constructible.)"
+  },
+  {
+   "text": "*Step 3: the general case in dimension $n$.* We first make the smooth locus\nlarge. By Stacks, Tag [0550](https://stacks.math.columbia.edu/tag/0550), after\nshrinking $S$ there is a finite universal homeomorphism $S'\\to S$ with $S'$\nintegral, such that $(X_{S'})_{\\mathrm{red}}\\to S'$ is flat of finite\npresentation with geometrically reduced generic fibre. That generic fibre has a\ndense smooth open (Stacks, Tag [056V](https://stacks.math.columbia.edu/tag/056V)),\nso by the fibrewise criterion (Stacks, Tag\n[01V9](https://stacks.math.columbia.edu/tag/01V9)) its generic points lie in\nthe smooth locus of $(X_{S'})_{\\mathrm{red}}\\to S'$. After shrinking the base\nonce more to remove non-dominant components, this smooth locus contains a dense\nopen of $(X_{S'})_{\\mathrm{red}}$. Since $F$ is constructible, there is a\nsmaller dense open $V$ on which the pullback of $F$ is locally constant. Its\ncomplement contains no generic point of a component of the generic fibre, so\nits generic fibre has dimension less than $n$. Passing to reductions and along\nfinite universal homeomorphisms does not change étale topoi (Stacks, Tag\n[03SI](https://stacks.math.columbia.edu/tag/03SI)). We may therefore work over\n$S'$, with all schemes replaced by their reductions, and descend to $S$ at the\nend."
+  },
+  {
+   "text": "Let $v:V\\hookrightarrow X$ be the open immersion and\n$i:X\\setminus V\\hookrightarrow X$ its reduced closed complement. By Step 2,\nafter shrinking the base, both $v$ and $jv$ have bounded constructible direct\nimages of $v^*F$, and their base-change maps are isomorphisms after every base\nchange in the standing range. Complete the unit of $v^*\\dashv Rv_*$ to a\ntriangle in $D^+(X_{\\mathrm{ét}},\\Fell)$\n\n$$\nF\\longrightarrow Rv_*v^*F\\longrightarrow D\\longrightarrow F[1].\n\\qquad\\text{(G23)}\n$$\n\nThe first two terms are bounded constructible, hence so is $D$, by Stacks, Tag\n[09BH](https://stacks.math.columbia.edu/tag/09BH) and the long exact\ncohomology sequence. The unit is an isomorphism on $V$, so $v^*D=0$ and the\nlocalization triangle (G19) of [sk-lem-geo-finite-boundary] gives\n\n$$\nD=i_*i^*D.\\qquad\\text{(G24)}\n$$\n\nThe locally closed immersion $ji:X\\setminus V\\to Y$ has generic fibre of\ndimension less than $n$. Applying the induction hypothesis to each of the\nfinitely many constructible cohomology sheaves of $i^*D$, and using their\ntruncation triangles, we get\n\n$$\nR(ji)_*i^*D=Rj_*D\\in\\Dbc(Y,\\Fell),\n$$\n\nwith base-change maps that are isomorphisms. Now apply $Rj_*$ to (G23). The\nmiddle term is $R(jv)_*v^*F$, treated by Step 2, and the third term was just\ntreated. Hence $Rj_*F$ is bounded constructible."
+  },
+  {
+   "text": "For base change along $T$, the base-change map for $v$ identifies the pullback\nof the first arrow of (G23) with the unit for $v_T$. Since cones are not\nfunctorial, we fix the triangle for this unit to be the pullback of (G23),\ntransported through that identification. The base-change map is a natural\ntransformation $(Rj_*-)|_{Y_T}\\to Rj_{T,*}(-|_{X_T})$ of exact functors\n$D^+(X_{\\mathrm{ét}},\\Fell)\\to D^+((Y_T)_{\\mathrm{ét}},\\Fell)$, so it gives a\nmorphism from the pullback of $Rj_*$ of (G23) to $Rj_{T,*}$ of this triangle.\nIt is an isomorphism on the second and third terms, hence on the first, which\nis (G22)."
+  },
+  {
+   "text": "*Descent to $S$.* A finite universal homeomorphism is a homeomorphism of\nunderlying spaces. If the argument over $S'$ gives a nonempty open\n$U'\\subset S'$, remove from $S$ the closed image of $S'\\setminus U'$. The\nremaining open $U$ is nonempty and its inverse image lies in $U'$. Over $U$,\npullback along $S'_U\\to U$ is an equivalence of étale topoi (Stacks, Tag\n[03SI](https://stacks.math.columbia.edu/tag/03SI)); it preserves constructible\nsheaves in both directions and commutes with direct images and their derived\nfunctors. So it detects boundedness and constructibility, and (G21) holds over\n$U$. For a finite-type $k$-scheme $T\\to U$, the map $T\\times_US'_U\\to T$ is\nagain a universal homeomorphism, and compatibility of base-change maps with\ncomposition identifies the pullback of (G22) to $T\\times_US'_U$ with the\nbase-change map already shown to be an isomorphism over $S'$. Since the\nequivalence is conservative, (G22) is an isomorphism over $T$. This completes\nthe induction."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-geo-generic-open/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

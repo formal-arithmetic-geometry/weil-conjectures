@@ -1,0 +1,44 @@
+{
+ "id": "sk-cor-jacobian-torsion",
+ "kind": "unit",
+ "chapter": "sec-picard-framework",
+ "title": "Jacobian torsion and geometric extension",
+ "lean": [],
+ "uses": [
+  "sk-def-av",
+  "sk-def-av-mult-n",
+  "sk-prop-av-connected-order",
+  "sk-prop-av-divisible",
+  "sk-prop-av-divisible-structure",
+  "sk-prop-av-finite-etale-points",
+  "sk-prop-av-isogeny",
+  "sk-thm-picard-main",
+  "sk-cor-picard-degree"
+ ],
+ "statement": "Let $k$ be algebraically closed, let $C/k$ be a smooth proper connected\ncurve of genus $g$, and let $n>0$ be invertible in $k$. Then\n\n$$\nJ(C)[n](k)\\simeq(\\Z/n\\Z)^{2g}.\n$$\n\nThis isomorphism is not canonical. For every algebraically closed\nextension $K/k$, the natural map\n\n$$\nJ(C)[n](k)\\longrightarrow J(C_K)[n](K)\n$$\n\nis a canonical isomorphism. Multiplication by $n$ on $J(C)(k)$ is\nsurjective, and consequently\n\n$$\n\\operatorname{Pic}(C)[n]=J(C)[n](k),\n\\qquad\n\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\xrightarrow[\\ \\deg\\ ]{\\sim}\\Z/n\\Z.\n$$",
+ "steps": [
+  {
+   "text": "We prove the statement for an abelian variety $A$ of dimension $g$ over\n$k$ and $n$ invertible in $k$; the corollary is the case $A=J(C)$, which\nis an abelian variety of dimension $g$ whose formation commutes with\nextension of the ground field ([sk-thm-picard-main])."
+  },
+  {
+   "text": "*Étaleness and base extension.* By [sk-prop-av-isogeny], $A[n]$ is a\nfinite flat group scheme of order $n^{2g}$ over $k$; as $n$ is prime to\n$\\operatorname{char}k$, it is étale ([sk-prop-av-prime-p-etale]); so it\nis finite étale of rank $n^{2g}$ (this is the proposition on\nmultiplication on an abelian variety). A finite étale scheme of rank $r$\nover algebraically closed $k$ is a disjoint union of $r$ copies of\n$\\Spec k$. This description is stable under base extension, so the\nnatural map on $k$-points is a bijection\n([sk-prop-av-finite-etale-points]). For $A=J(C)$, apply it to the kernel,\nusing the base-change compatibility of the Jacobian\n($J(C)_K=J(C_K)$) and of $[n]$."
+  },
+  {
+   "text": "*Group structure.* $A(k)$ is commutative ([sk-cor-av-commutative]).\nFor a prime $q\\mid n$ and $q^a\\mid n$, the group $A[q^a](k)$ has order\n$q^{2ga}$, is killed by $q^a$, and its subgroup killed by $q$, namely\n$A[q](k)$, has order $q^{2g}$. The classification of finite abelian groups\ntherefore gives $2g$ cyclic factors, each of exponent at most $q^a$.\nTheir orders have product $q^{2ga}$, so every factor has order $q^a$\n(this is also [sk-prop-av-divisible-structure]). Combining the\nprime-power parts (Chinese remainder theorem: $A[n]=\\prod_qA[q^{a_q}]$\nfor $n=\\prod_q q^{a_q}$) gives\n$A[n](k)=A(k)[n]\\simeq(\\Z/n\\Z)^{2g}$. No basis is distinguished, so the\nisomorphism is not canonical."
+  },
+  {
+   "text": "*Divisibility and $\\operatorname{Pic}$.* Every fibre of the finite\nsurjective $[n]$ ([sk-prop-av-mult-surjective]) over a $k$-point is a\nnonempty finite $k$-scheme, which has a $k$-point as $k$ is algebraically\nclosed; this proves divisibility of $A(k)$ ([sk-prop-av-divisible]). In\nthe degree sequence\n$0\\to J(C)(k)\\to\\operatorname{Pic}(C)\\to\\Z\\to0$ of [sk-cor-picard-degree],\nthe group $\\Z$ has no $n$-torsion and $J(C)(k)/n=0$. The snake lemma for\nmultiplication by $n$ gives\n$0\\to J(C)(k)[n]\\to\\operatorname{Pic}(C)[n]\\to\\Z[n]=0$ and\n$0=J(C)(k)/n\\to\\operatorname{Pic}(C)/n\\to\\Z/n\\to0$, which proves the two\nassertions for $\\operatorname{Pic}(C)$."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

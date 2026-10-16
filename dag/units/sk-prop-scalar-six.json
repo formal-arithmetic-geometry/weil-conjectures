@@ -1,0 +1,60 @@
+{
+ "id": "sk-prop-scalar-six",
+ "kind": "unit",
+ "chapter": "sec-six-functors-basics",
+ "title": "The six operations and coefficient comparison",
+ "lean": [],
+ "uses": [
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-prop-ctf-finite-comparison",
+  "sk-cor-pe-bounded-continuity",
+  "sk-thm-existence"
+ ],
+ "statement": "A change of coefficients is derived extension of scalars along a map of condensed rings, pulled back to\n$X$. For a map $\\Lambda\\to\\Lambda'$ write\n\n$$\nK_{\\Lambda'}=\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}K.\n$$\n\nThis functor $\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(X_{\\mathrm{proét}},\\Lambda')$ is left adjoint to the exact restriction of\nscalars $\\D(X_{\\mathrm{proét}},\\Lambda')\\to\\D(X_{\\mathrm{proét}},\\Lambda)$. The coefficient maps used are:\n\n1. any homomorphism $A\\to B$ of finite admissible rings;\n2. the maps $\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$ for a finite extension $F/E$ inside $\\Qlb$;\n3. localization $\\mathcal O_E\\to E$, inclusions $E\\to\\Qlb$, and maps $\\mathcal O_E\\to A$ to finite admissible rings;\n4. composites of these maps.\n\nTaking $E=\\mathbf Q_\\ell$ gives $\\mathbf Z_\\ell\\to\\mathcal O_F$, $\\mathbf Q_\\ell\\to F$, $\\mathbf Z_\\ell\\to\\mathbf Q_\\ell$, $\\mathbf Z_\\ell\\to A$ and\n$\\mathbf Q_\\ell\\to\\Qlb$, so these maps connect all the admissible coefficient rings. A map from $\\mathcal O_E$ to a\nfinite ring is continuous, and its target is killed by a power of $\\pi_E$. The map $A\\to B$ in (1) need not\nbe flat.\n\n**Proposition.** For the listed coefficient maps, extension of scalars sends $\\Dctf(X,\\Lambda)$ into\n$\\Dctf(X,\\Lambda')$. For $f\\colon X\\to Y$, the canonical coefficient comparison maps for $f^*$, $Rf_*$, $Rf_!$,\n$f^!$, tensor product and internal Hom, such as $(Rf_*K)_{\\Lambda'}\\to Rf_*(K_{\\Lambda'})$ in\n$\\Dctf(Y,\\Lambda')$ for $K\\in\\Dctf(X,\\Lambda)$, are isomorphisms of functors from $\\Dctf(-,\\Lambda)$ to\n$\\Dctf(-,\\Lambda')$. They respect composition and the units, counits and evaluation maps defining the\ncomparisons.\n\nFinite Tor amplitude is what makes the statement uniform in the coefficients: on a geometric point $X$, the\nsheaf $\\mathbf F_\\ell$ belongs to $\\Dbc(X,\\mathbf Z/\\ell^2)$ but not to $\\Dctf(X,\\mathbf Z/\\ell^2)$, and its extension of scalars\n$\\mathbf F_\\ell\\otimes^{\\mathbf L}_{\\mathbf Z/\\ell^2}\\mathbf F_\\ell$ is unbounded.",
+ "steps": [
+  {
+   "text": "It suffices to treat the listed elementary maps. A perfect local model on a stratum remains perfect after\nderived extension of scalars. Extension of scalars also commutes with extension by zero and with finite\ncones. This proves preservation of $\\Dctf(-,\\Lambda)$ ([det-sfb-coefficient-comparisons-ctf])."
+  },
+  {
+   "text": "*Pullback and extension by zero.* Associativity of derived pullback for ringed topoi (Stacks, Tag 06YV)\ngives $(f^*K)_{\\Lambda'}\\simeq f^*(K_{\\Lambda'})$ in $\\D(X_{\\mathrm{proét}},\\Lambda')$ for $K\\in\\D(Y_{\\mathrm{proét}},\\Lambda)$. The\nsame assertion for $j_!$ follows from its stalkwise description or from the equality of the corresponding\nright adjoints. These identifications respect composition ([def-sfb-derived-pull-iso],\n[def-sfb-derived-open-immersion-shriek-iso])."
+  },
+  {
+   "text": "*Ordinary direct image.* The comparison\n\n$$\n(Rf_*K)_{\\Lambda'}\\longrightarrow Rf_*(K_{\\Lambda'})\\quad\\text{in }\\D(Y_{\\mathrm{proét}},\\Lambda')\n$$\n\nis formed from the unit, the pullback identification and the counit of $f^*\\dashv Rf_*$ on\n$\\D(-_{\\mathrm{proét}},\\Lambda')$. For finite $A\\to B$, calculate on the étale site using\n[sk-prop-ctf-finite-comparison]. On a quasi-compact étale test object $V\\to Y$, the scalar projection formula\n(Stacks, Tag 0F12) on both $V$ and $X_V=X\\times_YV$ gives\n\n$$\nR\\Gamma(V,(Rf_*K)_B)\\simeq R\\Gamma(X_V,K)\\otimes_A^{\\mathbf L}B\\simeq R\\Gamma(X_V,K_B).\n$$\n\nThus the comparison induces an isomorphism on derived sections over every such $V$. The scalar projection\nformula needs only cohomological bounds for $\\ell$-primary coefficients, which hold for the standing\nschemes, so it applies to every $B$, whatever its projective dimension over $A$. These isomorphisms commute\nwith restriction in $V$, so they identify the canonical morphism in $\\D(Y_{\\mathrm{ét}},B)$, and hence, by\n[sk-prop-ctf-finite-comparison], in $\\D(Y_{\\mathrm{proét}},B)$ ([lem-coef-finite-direct-image])."
+  },
+  {
+   "text": "For $\\mathcal O_E\\to A$ with $A$ finite, $A$ has a finite free $\\mathcal O_E$-resolution of length at most one. Its\ncondensed version is exact (a continuous map to a finite quotient lifts on a finite clopen partition), and\npullback gives a finite free resolution of $A_X$ over $\\mathcal O_{E,X}$. Tensoring with $A_X$ is consequently\ncomputed by finite sums and a cone, which commute with the exact derived functor $Rf_*$. For\n$\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$ the coefficient extension is finite free, so the assertion follows from finite\nsums. For $\\mathcal O_E\\to E$, use the system $K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$; for $E\\to\\Qlb$, use the\nfiltered system of finite field extensions. Since $K$ is bounded and these systems have a common lower bound,\n[sk-cor-pe-bounded-continuity] commutes their colimits with $Rf_*$. This proves the direct-image comparison in\nall cases ([det-sfb-coefficient-comparisons-direct-image])."
+  },
+  {
+   "text": "*Compactly supported direct image.* For $f=pj$, combine the preceding comparison for $Rp_*$ with the one for\n$j_!$. Both commute with the refinement maps of the compactification construction: they are formed from the\nsame pullback identifications and adjunction maps, and restrict to the identity on the open subscheme. Thus\n\n$$\n(Rf_!K)_{\\Lambda'}\\simeq Rf_!(K_{\\Lambda'})\\quad\\text{in }\\Dctf(Y,\\Lambda')\n$$\n\nis independent of the compactification and respects composition ([det-sfb-coefficient-comparisons-compact-support],\n[lem-fix-compact-support-coefficient-change])."
+  },
+  {
+   "text": "*Exceptional inverse image.* For $K\\in\\Dctf(Y,\\Lambda)$ define\n\n$$\n\\beta_{f,K}\\colon(f^!K)_{\\Lambda'}\\longrightarrow f^!(K_{\\Lambda'})\n$$\n\nin $\\Dctf(X,\\Lambda')$ as the transpose, under the adjunction $Rf_!\\dashv f^!$ on $\\Loc(\\Dctf(-,\\Lambda'))$, of\nthe morphism in $\\Dctf(Y,\\Lambda')$\n\n$$\nRf_!((f^!K)_{\\Lambda'})\\xrightarrow{\\sim}(Rf_!f^!K)_{\\Lambda'}\\xrightarrow{(\\epsilon_K)_{\\Lambda'}}K_{\\Lambda'}.\n$$\n\nThe first arrow is the comparison for $Rf_!$, which applies because $f^!K\\in\\Dctf(X,\\Lambda)$ by\n[sk-thm-existence]. The counit of a composite is the composite of its counits, so these maps\nrespect composition and open restriction."
+  },
+  {
+   "text": "For a closed immersion $i$ with open complement $j$, use the triangle in $\\Dctf(Y,\\Lambda)$\n\n$$\ni_*i^!K\\longrightarrow K\\longrightarrow Rj_*j^*K.\n$$\n\nExtension of scalars commutes with $i_*$, $j^*$ and, by the preceding argument, $Rj_*$. It therefore carries\nthis triangle to the triangle over $\\Lambda'$. The fibre comparison is $i_*\\beta_{i,K}$ because the first map is\nthe counit; hence $\\beta_{i,K}$ is an isomorphism. For $q\\colon\\mathbf P^1_Y\\to Y$, the diagonal class and trace\ndefining the adjunction $Rq_*\\dashv q^*(1)[2]$ between $\\Dctf(\\mathbf P^1_Y,\\Lambda)$ and $\\Dctf(Y,\\Lambda)$ commute with\nall the listed coefficient maps: the finite classes are constructed from Kummer and derived scalar extension,\nthe integral classes are their compatible limits, and the field classes are their scalar extensions\n([sk-prop-geo-p1-adjunction] and [sk-prop-diagonal-tower]). For $\\mathcal O_E\\to A$, the perfectness of $A_X$ proved\nabove makes its derived tensor commute with the inverse limits defining the integral classes; the resulting\nfinite-level classes are exactly the finite coefficient classes. Thus $\\beta_{q,K}$ is the usual\npullback-and-twist identification. Open restriction and composition give the affine-space case. A finite\naffine cover and local factorization as a closed immersion into affine space prove the assertion for every\n$f$ ([det-sfb-coefficient-comparisons-exceptional])."
+  },
+  {
+   "text": "*Tensor product and internal Hom.* Derived extension of scalars $\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(X_{\\mathrm{proét}},\\Lambda')$\nis symmetric monoidal, by associativity of tensor product. For internal Hom, reduce the first argument by\nperfect strata and finite cones to $a_!P$, as in the preceding proposition. The identity\n\n$$\nR\\mathcal Hom_X(a_!P,K)\\simeq Ra_*(P^\\vee\\otimes^{\\mathbf L}a^!K)\n$$\n\ncommutes with extension of scalars by the comparisons for $Ra_*$, $a^!$, and the dual of a perfect complex.\nThese are the canonical comparison maps, since all are defined by the same evaluation pairing. Finite cones\ngive the result for every first argument ([det-sfb-coefficient-comparisons-hom], [thm-coef-finite-hom])."
+  },
+  {
+   "text": "*Construction of the comparison maps on the ambient categories.* The comparison maps themselves are produced\nformally, as conjugates and mates, from the commutation of restriction of scalars with pushforward and\npullback: [def-sfb-comap-mapmod-square], [def-sfb-conjugate-pull-iso], [def-sfb-mate-push-hom],\n[def-sfb-comap-lower-star-iso], [def-sfb-pull-iso], [def-sfb-push-hom], [def-sfb-comap-upper-star-iso],\n[def-sfb-derived-comap-lower-star-iso], [def-sfb-derived-push-hom], [def-sfb-open-immersion-shriek-iso],\n[def-sfb-derived-lower-shriek-hom], [lem-sfb-derived-lower-shriek-hom-iso]."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

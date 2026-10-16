@@ -1,0 +1,48 @@
+{
+ "id": "sk-def-sfb-sheaf-tensor",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Tensor product of pro-étale sheaves",
+ "lean": [
+  "CategoryTheory.Sheaf.monoidalCategory",
+  "AlgebraicGeometry.ProEtale.sheafMonoidalCategory",
+  "AlgebraicGeometry.ProEtale.sheafSymmetricCategory",
+  "AlgebraicGeometry.ProEtale.sheafMonoidalClosed",
+  "AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf",
+  "AddCommGrpCat.monoidalCategory",
+  "AddCommGrpCat.monoidalClosed"
+ ],
+ "uses": [
+  "def-weil-pbc-proetale-site"
+ ],
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category with a closed symmetric monoidal\nstructure $(\\otimes,\\mathbf 1)$. Examples are $\\mathcal A=\\Mod_R$ for a commutative\nring $R$, and $\\mathcal A=\\Ab$ with the tensor product $M\\otimes N=M\\otimes_{\\mathbf Z}N$,\nunit $\\mathbf Z$ and internal hom the group $\\Hom(M,N)$. For $\\Ab$ this is the monoidal\nstructure used throughout, *not* the cartesian one.\n\nLet $C$ be a site whose underlying category is essentially small, relative to the size of\nthe morphism groups of $\\mathcal A$. Examples are the small pro-étale site\n$X_{\\mathrm{proét}}$ of a scheme $X$ ([def-weil-pbc-proetale-site]) and the category of\nprofinite sets with the coherent topology. Write $\\Sh(C,\\mathcal A)$ for the category of\n$\\mathcal A$-valued sheaves on $C$ and $a$ for sheafification.\n\nThe *tensor product* of $\\mathcal F,\\mathcal G\\in\\Sh(C,\\mathcal A)$ is the sheafification\nof the objectwise tensor product,\n\n$$\n\\mathcal F\\otimes\\mathcal G:=a\\bigl(U\\longmapsto\\mathcal F(U)\\otimes\\mathcal G(U)\\bigr),\n$$\n\nwith unit the sheafified constant presheaf $a(\\underline{\\mathbf 1})$. Then:\n\n1. this is a symmetric monoidal structure on $\\Sh(C,\\mathcal A)$, and sheafification from\n   $\\mathcal A$-valued presheaves with the objectwise tensor product is a strong symmetric\n   monoidal functor;\n2. the structure is closed: every functor $\\mathcal F\\otimes-$ has a right adjoint\n   $\\mathcal{H}om(\\mathcal F,-)$. Hence $\\mathcal F\\otimes-$ and $-\\otimes\\mathcal F$\n   preserve colimits, and in particular they are right exact.\n\nFor $\\mathcal A=\\Ab$, the tensor product of abelian sheaves is the sheafified objectwise\n$\\otimes_{\\mathbf Z}$, with unit the constant sheaf $\\underline{\\mathbf Z}$.",
+ "steps": [
+  {
+   "text": "**$\\Ab$.** The tensor product of abelian groups is the tensor product of\n$\\mathbf Z$-modules: it is associative, unital with unit $\\mathbf Z$, and symmetric, and\nit is additive in each variable. The tensor–hom adjunction\n$\\Hom(M\\otimes_{\\mathbf Z}N,P)\\cong\\Hom(N,\\Hom(M,P))$ makes it closed. $\\Ab$ is\nGrothendieck abelian."
+  },
+  {
+   "text": "**Presheaves.** The category of $\\mathcal A$-valued presheaves on $C$ is symmetric\nmonoidal for the objectwise tensor product. It is closed: the internal hom $[F,G]$ is\nthe end $[F,G](U)=\\int_{V\\to U}\\Hom_{\\mathcal A}(F(V),G(V))$, taken over the objects\n$V\\to U$ of $C/U$. This end is a limit indexed by a category of the size of $C$. It\nexists because $\\mathcal A$, being Grothendieck abelian, has all limits of that size,\nand here the smallness assumption on $C$ is used. If $G$ is a sheaf, then $[F,G]$ is a\nsheaf."
+  },
+  {
+   "text": "**Monoidal structure on sheaves.** Let $W$ be the class of morphisms of presheaves that\nsheafification inverts. Equivalently, $g\\in W$ when $\\Hom(g,H)$ is bijective for every\nsheaf $H$. The class $W$ is stable under $F\\otimes-$: for $g\\in W$ and a sheaf $H$,\n$\\Hom(F\\otimes g,H)\\cong\\Hom(g,[F,H])$, which is bijective because $[F,H]$ is a sheaf.\nThe braiding transports this to $-\\otimes F$. Hence the monoidal structure on presheaves\ndescends to the localization at $W$. Sheafification identifies this localization with\n$\\Sh(C,\\mathcal A)$. So $\\Sh(C,\\mathcal A)$ inherits a monoidal structure for which\nsheafification is strong monoidal. On sheaves it is given by\n$\\mathcal F\\otimes\\mathcal G=a(\\mathcal F\\otimes\\mathcal G)$, and its unit is\n$a(\\underline{\\mathbf 1})$. The braiding and the symmetry descend in the same way. This\nproves 1."
+  },
+  {
+   "text": "**Closedness.** The sheafification adjunction $a\\dashv\\iota$ exhibits $\\Sh(C,\\mathcal A)$\nas a reflective subcategory of a symmetric monoidal closed category, and the reflector\n$a$ is strong monoidal. By Day's reflection theorem, $\\Sh(C,\\mathcal A)$ is then\nmonoidal closed, with $\\mathcal{H}om(\\mathcal F,\\mathcal G)=[\\mathcal F,\\mathcal G]$ for\nsheaves $\\mathcal F,\\mathcal G$. So $\\mathcal F\\otimes-$ is a left adjoint and preserves\ncolimits. By the symmetry, so does $-\\otimes\\mathcal F$. This proves 2."
+  },
+  {
+   "text": "For $\\mathcal A=\\Ab$, apply this to the closed symmetric monoidal structure\n$\\otimes_{\\mathbf Z}$ of the first paragraph."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

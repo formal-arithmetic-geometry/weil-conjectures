@@ -1,0 +1,39 @@
+{
+ "id": "sk-def-sfb-ring-object",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Ring objects of abelian sheaves",
+ "lean": [
+  "CategoryTheory.MonObj",
+  "AddCommGrpCat.ringMonObj",
+  "CategoryTheory.Functor.monObjCompForget₂",
+  "CategoryTheory.Sheaf.sheafifyRingPresheaf",
+  "CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+  "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+ ],
+ "uses": [
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "statement": "A *ring object* of a monoidal category $(\\mathcal C,\\otimes,\\mathbf 1)$ is a monoid\nobject. It consists of an object $R$, a *multiplication* $\\mu\\colon R\\otimes R\\to R$ and\na *unit* $\\eta\\colon\\mathbf 1\\to R$, such that $\\mu$ is associative,\n$\\mu\\circ(\\mu\\otimes\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\otimes\\mu)\\circ\\alpha_{R,R,R}$, and\n$\\eta$ is a two-sided unit, $\\mu\\circ(\\eta\\otimes\\mathrm{id})=\\lambda_R$ and\n$\\mu\\circ(\\mathrm{id}\\otimes\\eta)=\\rho_R$. A *morphism of ring objects* is a morphism\ncompatible with the multiplications and the units. If $\\mathcal C$ is braided, the ring\nobject $R$ is *commutative* when $\\mu\\circ\\beta_{R,R}=\\mu$.\n\nThroughout, $\\Ab$ carries the tensor product $\\otimes_{\\mathbf Z}$ with unit $\\mathbf Z$.\nAbelian presheaves carry the objectwise tensor product. Abelian sheaves on a site $C$\ncarry its sheafification, the tensor product of [sk-def-sfb-sheaf-tensor] (with $C$ as\nthere, e.g. $X_{\\mathrm{proét}}$ or the site of profinite sets).\n\n1. Every ring $R$ is a ring object of $\\Ab$, with unit $\\mathbf Z\\to R$, $n\\mapsto n\\cdot1$,\n   and multiplication $R\\otimes_{\\mathbf Z}R\\to R$, $a\\otimes b\\mapsto ab$. A ring\n   homomorphism is a morphism of ring objects. If $R$ is commutative, so is the ring\n   object $R$.\n2. A presheaf of rings $P$ on $C$ is, objectwise as in 1, a ring object of abelian\n   presheaves, and a morphism of presheaves of rings is a morphism of ring objects. The\n   sheafification $aP$ of the underlying abelian presheaf is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $P(U)$ are.\n3. The abelian sheaf underlying a sheaf of rings $\\mathcal R$ on $C$ is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $\\mathcal R(U)$ are. A morphism of sheaves\n   of rings is a morphism of ring objects.",
+ "steps": [
+  {
+   "text": "**1.** Multiplication $R\\times R\\to R$ is $\\mathbf Z$-bilinear, so it induces\n$\\mu\\colon R\\otimes_{\\mathbf Z}R\\to R$. Under $\\mathbf Z\\otimes_{\\mathbf Z}R\\cong R$, the\ncomposite $\\mu\\circ(\\eta\\otimes\\mathrm{id})$ sends $n\\otimes b$ to $nb$, so it is the\nleft unitor. The right unitor is treated in the same way. Associativity of $\\mu$ is\nchecked on pure tensors $a\\otimes b\\otimes c$, where it is associativity of the ring\nmultiplication. A ring homomorphism $f$ satisfies $f(ab)=f(a)f(b)$ and $f(1)=1$, which\nsays that $f$ commutes with $\\mu$ and with $\\eta$. If $R$ is commutative, then\n$\\mu(b\\otimes a)=ba=ab$, so $\\mu\\circ\\beta_{R,R}=\\mu$."
+  },
+  {
+   "text": "**2.** The monoidal structure on abelian presheaves is objectwise. So a ring object of\nabelian presheaves is the same as a functor from $C^{\\mathrm{op}}$ to ring objects of\n$\\Ab$, with multiplication and unit given objectwise. By 1, $P$ is such a functor, and\na natural transformation of presheaves of rings is objectwise a morphism of ring\nobjects. Sheafification $a$ is strong monoidal and braided by\n[sk-def-sfb-sheaf-tensor]. A strong monoidal functor carries a ring object\n$(M,\\mu,\\eta)$ to the ring object $aM$, with multiplication\n$aM\\otimes aM\\cong a(M\\otimes M)\\xrightarrow{a\\mu}aM$ and unit\n$\\mathbf 1\\cong a\\mathbf 1\\xrightarrow{a\\eta}aM$. A braided one preserves commutativity.\nApplying this to $P$ gives the ring object $aP$."
+  },
+  {
+   "text": "**3.** Forgetting from rings to abelian groups preserves limits, so the abelian presheaf\nunderlying $\\mathcal R$ is a sheaf $\\mathcal R_{\\Ab}$. Since $\\mathcal R_{\\Ab}$ is a\nsheaf, the counit $a(\\mathcal R_{\\Ab})\\to\\mathcal R_{\\Ab}$ is an isomorphism. By 2,\n$a(\\mathcal R_{\\Ab})$ is a ring object. Transport its ring object structure, and\ncommutativity, along this isomorphism. For a morphism $f\\colon\\mathcal R\\to\\mathcal R'$\nof sheaves of rings, the underlying morphism of abelian sheaves is $a(f)$ conjugated by\nthe two counit isomorphisms, by naturality of the counit. Here $a(f)$ is a morphism of\nring objects by 2, and so are the two isomorphisms, by construction of the transported\nstructures. Hence $f$ is a morphism of ring objects."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

@@ -1,0 +1,37 @@
+{
+ "id": "sk-prop-curve-artin-schreier",
+ "kind": "unit",
+ "chapter": "sec-curve-estimates",
+ "title": "Characteristic torsion on a smooth proper curve",
+ "lean": [],
+ "uses": [
+  "sk-def-curve",
+  "sk-prop-sf-comparison"
+ ],
+ "statement": "Let $C$ be a smooth proper connected curve of genus $g$ over an algebraically\nclosed field of characteristic $p>0$. Then\n\n$$\nH^0(C,\\mathbf F_p)=\\mathbf F_p,\\qquad\nH^1(C,\\mathbf F_p)=\n\\ker\\bigl(F-1:H^1(C,\\cO_C)\\to H^1(C,\\cO_C)\\bigr),\n$$\n\nand $H^q(C,\\mathbf F_p)=0$ for $q>1$. The group $H^1(C,\\mathbf F_p)$ is\nfinite, of $\\mathbf F_p$-dimension at most $g$, and its pullback map is an\nisomorphism under algebraically closed extension.",
+ "steps": [
+  {
+   "text": "On $C_{\\mathrm{ét}}$ the Artin–Schreier sequence\n\n$$\n0\\longrightarrow\\mathbf F_p\\longrightarrow\\mathbf G_a\n\\xrightarrow{F-1}\\mathbf G_a\\longrightarrow0\n$$\n\nis exact; surjectivity is local because $T^p-T-a$ has derivative $-1$. The\nétale cohomology of $\\mathbf G_a$ is the coherent cohomology of $\\cO_C$, by\nfaithfully flat descent on affine opens and the coherent Čech resolution.\nCoherent cohomology vanishes above dimension one, and properness makes\n$H^1(C,\\cO_C)$ a finite-dimensional $k$-vector space."
+  },
+  {
+   "text": "The cohomology sequence is then controlled by a fact of linear algebra: if\n$F$ is a Frobenius-linear endomorphism of a finite-dimensional $k$-vector\nspace $V$, then $F-1$ is surjective ([sk-prop-av-lang-steinberg]) and its\nkernel is the set of $k$-points of a finite étale scheme of order $p^f$ with\n$f\\leq\\dim_kV$ ([sk-prop-av-fixed-points]). To see this, reduce along a\nfinite filtration to the part where $F$ is nilpotent and the part where $F$\nis bijective. On the nilpotent part $F-1$ is an additive polynomial\nautomorphism. On a bijective part of dimension $f$, choose a basis, invert\nthe matrix of $F$, and write the fibre equations as\n\n$$\nx_i^p-\\sum_jb_{ij}x_j=c_i\\qquad(1\\leq i\\leq f),\n$$\n\nwhere $(b_{ij})$ is invertible. The coordinate algebra is free of dimension\n$p^f$, with basis the monomials having each exponent less than $p$. Its\nJacobian matrix is invertible, so it is finite étale and has $p^f$ points over\nthe algebraically closed field (Stacks, Tag 0A3L)."
+  },
+  {
+   "text": "Apply this to $H^1(C,\\cO_C)$ and to $H^0(C,\\cO_C)=k$. The long exact\nArtin–Schreier sequence gives the asserted formulas and vanishing. Under\n$k'/k$, flat base change for coherent cohomology identifies the vector space\nand its Frobenius-linear map with their scalar extensions. The kernel is a\nfinite étale scheme, whose $k$-points and $k'$-points agree, so the pullback\nmap itself is an isomorphism ([sk-prop-av-fixed-base-change]; Stacks, Tags\n0HAN, 0A3P). [sk-prop-sf-comparison] returns the statement to\n$C_{\\mathrm{proét}}$."
+  },
+  {
+   "text": "For constant $\\mathbf F_p$ on smooth curves, this proposition and\n[sk-lem-curve-affine-artin-schreier] prove $(C_1)$, $(C_2)$, $(C_3)$,\n$(C_5)$ and $(C_7)$ in their respective scopes, and $(C_8)$ follows from\n$H^2=0$. The statements $(C_4)$ and $(C_6)$ concern torsion prime to the\ncharacteristic and say nothing in this case."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-prop-curve-artin-schreier/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

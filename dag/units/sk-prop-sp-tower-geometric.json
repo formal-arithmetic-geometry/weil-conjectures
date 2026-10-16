@@ -1,0 +1,51 @@
+{
+ "id": "sk-prop-sp-tower-geometric",
+ "kind": "unit",
+ "chapter": "sec-smooth-purity",
+ "title": "The tower model of the smooth adjunction",
+ "lean": [],
+ "uses": [
+  "sk-def-sp-normalized-towers",
+  "sk-lem-sp-tower-levels",
+  "sk-lem-sp-tower-bound",
+  "sk-lem-sp-reduction",
+  "sk-prop-geo-p1-adjunction",
+  "sk-lem-sp-finite-existence",
+  "sk-prop-an",
+  "sk-thm-dnc"
+ ],
+ "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$. There is an\nadjunction\n\n$$\nRf_{!,\\bullet}\\dashv f_\\bullet^!\n\\quad\\text{between }\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)\n\\text{ and }\\Dctf(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet).\n$$\n\nOn a coordinate chart $f|_U=p_d\\circ e$ the right adjoint is\n$e_\\bullet^*p_{d,\\bullet}^*(-)(d)[2d]$. At each level $n$ the unit and counit\nare those of the finite adjunction; in particular\n$(f_\\bullet^!C_\\bullet)_n\\simeq f_{\\mathcal O_E/\\ell^n}^!C_n$ in\n$\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^n)$, and the reduction maps of\n$f_\\bullet^!C_\\bullet$ are induced by those of $C_\\bullet$ and the coefficient\ncomparisons of [sk-lem-sp-reduction].",
+ "steps": [
+  {
+   "text": "We repeat the finite construction in the ringed topos of towers on\n$T_{\\mathrm{proét}}$, with coefficient ring $\\mathcal O_{E,T}/\\ell^\\bullet$, and\ncheck each identity level by level."
+  },
+  {
+   "text": "*Classes and integration.* In the abelian category of towers of abelian\nsheaves there is an exact Kummer sequence\n\n$$\n0\\longrightarrow(\\mu_{\\ell^n})_n\n\\longrightarrow(\\mathbb G_m,(\\cdot)^\\ell)\n\\xrightarrow{\\ ((\\cdot)^{\\ell^n})_n\\ }\n(\\mathbb G_m,\\mathrm{id})\\longrightarrow0,\n$$\n\nwith the $\\ell$-power map as transition on $\\mu_{\\ell^n}$. A line bundle $L$\ngives a class in $H^1$ of the last tower, and its boundary is a class in\n$H^2((\\mu_{\\ell^n})_n)$, that is, a morphism\n$(\\mathbf Z/\\ell^n)_n\\to(\\mu_{\\ell^n})_n[2]$ in the derived category of\n$(\\mathbf Z/\\ell^n)_n$-modules. Extending coefficients to\n$\\mathcal O_{E,T}/\\ell^\\bullet$ gives\n$c_1(L):\\mathcal O_{E,T}/\\ell^\\bullet\\to (\\mathcal O_{E,T}/\\ell^\\bullet)(1)[2]$. The\nKummer sequence is used only in the abelian category where it is exact, and\nlinearity over $\\mathcal O_{E,T}/\\ell^\\bullet$ is added afterwards. The version\nwith supports, applied to a Cartier divisor with its canonical section, gives\nthe diagonal class, a morphism in\n$D(\\operatorname{Tow}(\\mathbf P^1_S\\times_S\\mathbf P^1_S,\\mathcal O_E))$,\n$\\delta_\\bullet:\\Delta_*\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet\\to\n(\\mathcal O_{E,\\mathbf P^1_S\\times_S\\mathbf P^1_S}/\\ell^\\bullet)(1)[2]$."
+  },
+  {
+   "text": "The unit and $c_1(\\mathcal O(1))$ define a morphism in\n$D(\\operatorname{Tow}(S,\\mathcal O_E))$\n\n$$\n\\mathcal O_{E,S}/\\ell^\\bullet\\oplus (\\mathcal O_{E,S}/\\ell^\\bullet)(-1)[-2]\\longrightarrow\nRq_{*,\\bullet}\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet.\n$$\n\nIt is an isomorphism, since by [sk-lem-sp-tower-levels] it evaluates at each\nlevel to the projective-line splitting of [sk-prop-geo-p1-adjunction], and evaluations\njointly detect isomorphisms. Let $\\operatorname{Tr}_{q,\\bullet}$ be the projection\nonto the twisted second summand."
+  },
+  {
+   "text": "*Unit and counit on the projective line.* The counit is the projection formula\nfollowed by $\\mathrm{id}\\otimes\\operatorname{Tr}_{q,\\bullet}$, and the unit is given\nby the diagonal class:\n\n$$\n\\begin{aligned}\nRq_{*,\\bullet}(q_\\bullet^*K_\\bullet(1)[2])\n&\\simeq K_\\bullet\\otimes^{\\mathbf L}\nRq_{*,\\bullet}(\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet)(1)[2]\n\\longrightarrow K_\\bullet,\\\\\nM_\\bullet&\\simeq Rp_{2*,\\bullet}\\Delta_*M_\\bullet\n\\xrightarrow{\\ Rp_{2*,\\bullet}(\\delta_\\bullet\\otimes p_1^*M_\\bullet)\\ }\nRp_{2*,\\bullet}p_1^*M_\\bullet(1)[2]\n\\simeq q_\\bullet^*Rq_{*,\\bullet}M_\\bullet(1)[2].\n\\end{aligned}\n$$\n\nAs in [sk-prop-geo-p1-adjunction], proper base change and the projection formulas in this\ntopos reduce the triangle identities to\n\n$$\n\\operatorname{Tr}_{p_i,\\bullet}\\circ Rp_{i*,\\bullet}\\delta_\\bullet\n=\\mathrm{id}_{\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet}\\qquad(i=1,2).\n$$\n\nBoth sides are morphisms between tower sheaves in degree zero, and they agree\nat each level by the finite diagonal integrals; so they agree. This gives the\nprojective-line adjunction in $D(\\operatorname{Tow})$."
+  },
+  {
+   "text": "*Charts and gluing.* Restrict to $\\mathbf A^1_S$ by extension by zero, iterate\nto $\\mathbf A^d_S$, and compose with the étale adjunction\n$e_{!,\\bullet}\\dashv e_\\bullet^*$. The local counits are the iterated\nintegrations and fibre sums of the finite construction, now as maps of towers.\nFor each $K_\\bullet$, glue the local representing pairs by the open-cover cone\nand the Hom sequences of the open-cover argument, as after\n[sk-lem-sp-finite-existence]: compatible local counits lift by exactness of the\nHom sequence, and comparing Hom sequences shows that the glued pair represents\n$M_\\bullet\\mapsto\\operatorname{Hom}(Rf_{!,\\bullet}M_\\bullet,K_\\bullet)$. Its restrictions\nto charts have the stated form, so the cohomological and Tor bounds are\nuniform. Since a representing pair with its counit is unique up to unique\nisomorphism, this defines the functor and its action on maps without a\nfunctorial choice of cones."
+  },
+  {
+   "text": "Evaluation at level $n$ preserves these constructions and gives the finite\nlocal counits, so by the same argument the evaluated pair represents the finite\nfunctor. Uniqueness identifies it with $f_{\\mathcal O_E/\\ell^n}^!C_n$, compatibly\nwith counits and hence with units. The coefficient comparisons have the same\nlocal counits, so uniqueness also identifies the transition maps with those of\n[sk-lem-sp-reduction]."
+  }
+ ],
+ "source": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}
