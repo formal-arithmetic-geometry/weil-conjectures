@@ -254,5 +254,33 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-bc006f0be (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements and sources, and unit/chapter route. Corrected Step 2's snake-lemma diagram to yield the cokernel sequence directly; statements and citations are unchanged. Accepted the generic pushout tool use. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-485061b22",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement, dependencies, definitions, docstrings, edge cases, report sections, and universe bindings verified; immutable Lean module compiled successfully via scompile.py with exactly one theorem sorry."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallCotorsionModelRecognition",
+  "declaration": "CategoryTheory.Cotorsion.exists_combinatorial_abelian_model",
+  "declarations": [
+   "CategoryTheory.Cotorsion.ExtOneOrthogonal",
+   "CategoryTheory.Cotorsion.monomorphismsWithCokernel",
+   "CategoryTheory.Cotorsion.epimorphismsWithKernel",
+   "CategoryTheory.Cotorsion.IsThick",
+   "CategoryTheory.Cotorsion.IsCotorsionPair",
+   "CategoryTheory.Cotorsion.IsComplete",
+   "CategoryTheory.Cotorsion.IsSmall",
+   "CategoryTheory.Cotorsion.exists_combinatorial_abelian_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallCotorsionModelRecognition.lean",
+  "statement": "theorem exists_combinatorial_abelian_model {B : Type u} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] (Q W F : ObjectProperty B) (hW : IsThick W) (h₁ : IsCotorsionPair Q (F ⊓ W)) (hc₁ : IsComplete Q (F ⊓ W)) (hs₁ : IsSmall Q (F ⊓ W)) (h₂ : IsCotorsionPair (Q ⊓ W) F) (hc₂ : IsComplete (Q ⊓ W) F) (hs₂ : IsSmall (Q ⊓ W) F) : HasLimitsOfSize.{v, v} B ∧ HasColimitsOfSize.{v, v} B ∧ IsLocallyPresentable.{v} B ∧ ∃ M : HomotopicalAlgebra.ModelCategory B, M.categoryWithCofibrations.cofibrations = monomorphismsWithCokernel Q ∧ M.categoryWithFibrations.fibrations = epimorphismsWithKernel F ∧ M.categoryWithCofibrations.cofibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences = monomorphismsWithCokernel (Q ⊓ W) ∧ M.categoryWithFibrations.fibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences = epimorphismsWithKernel (F ⊓ W) ∧ M.categoryWithWeakEquivalences.weakEquivalences = (monomorphismsWithCokernel (Q ⊓ W)).comp (epimorphismsWithKernel (F ⊓ W)) ∧ MorphismProperty.HasFunctorialFactorization (monomorphismsWithCokernel Q) (epimorphismsWithKernel (F ⊓ W)) ∧ MorphismProperty.HasFunctorialFactorization (monomorphismsWithCokernel (Q ⊓ W)) (epimorphismsWithKernel F) ∧ (∃ (I : Type v) (A D : I → B) (i : ∀ s : I, A s ⟶ D s), (∀ s : I, monomorphismsWithCokernel Q (i s)) ∧ (MorphismProperty.ofHoms i).rlp = epimorphismsWithKernel (F ⊓ W)) ∧ (∃ (J : Type v) (A D : J → B) (j : ∀ s : J, A s ⟶ D s), (∀ s : J, monomorphismsWithCokernel (Q ⊓ W) (j s)) ∧ (MorphismProperty.ofHoms j).rlp = epimorphismsWithKernel F)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
