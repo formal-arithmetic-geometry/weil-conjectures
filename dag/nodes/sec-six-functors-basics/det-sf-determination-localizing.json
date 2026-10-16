@@ -186,5 +186,24 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-1e3abe8e2 (reviewer sub-agent of L); spot-checked: Read the item, report, current blueprint route, cited node statements, Stacks sources, and unit/chapter metadata in full. Verified all six proof steps, hypotheses, shift compatibility, coproduct and retract inverses, both functor domains, edge cases, searches, and duplicate/cycle checks. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.LocalizingIsoLocus",
+  "declaration": "CategoryTheory.NatTrans.isoLocus_localizing",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/LocalizingIsoLocus.lean",
+  "statement": "theorem isoLocus_localizing {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] [HasCoproducts.{w} C] [HasCoproducts.{w} D] (S : ObjectProperty C) (F₁ F₂ : C ⥤ D) [F₁.CommShift ℤ] [F₂.CommShift ℤ] [F₁.IsTriangulated] [F₂.IsTriangulated] [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F₁] [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F₂] (η : F₁ ⟶ F₂) [NatTrans.CommShift η ℤ] : η.isoLocus.IsTriangulated ∧ (∀ I : Type w, Nonempty (η.isoLocus.IsClosedUnderColimitsOfShape (Discrete I))) ∧ Nonempty η.isoLocus.IsStableUnderRetracts ∧ (S ≤ η.isoLocus → sInf {P : ObjectProperty C | S ≤ P ∧ P.IsTriangulated ∧ ∀ I : Type w, Nonempty (P.IsClosedUnderColimitsOfShape (Discrete I))} ≤ η.isoLocus)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing upstream NatTrans.isoLocus. The localizing closure of the arbitrary object class S is expanded as its defining sInf of triangulated, coproduct-closed object properties; no new closure definition or specialized derived-category prerequisite is introduced. IsClosedUnderColimitsOfShape includes arbitrary coproduct cocones, and hence isomorphism closure by singleton coproducts. The abstract source category also permits taking the source itself to be Loc(S)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dfa16cf16",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean module, docstrings, report, edge cases, and searches. scompile.py compiled sandbox and library successfully; no findings."
  }
 }
