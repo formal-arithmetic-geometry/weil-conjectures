@@ -10,20 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.AlgebraicGeometry.FibreProductLimit
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent
 import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.RingTheory.IndPrincipalZariski
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.CategoryTheory.SiteCechComplex
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite affine Čech exactness for comparison pullbacks of injectives
@@ -91,6 +79,29 @@ theorem exactAt_cechComplex_comparisonUpperStar_of_injective
       Scheme.ProEt.topology Y V) (q : ℕ) :
     ((Presheaf.cechComplex U).obj
       ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).ExactAt (q + 1) := by
-  sorry
+  classical
+  rw [Presheaf.exactAt_cechComplex_iff]
+  intro c hc
+  obtain ⟨W, T, f, hT, φ, c', hc', hφ⟩ :=
+    exists_etale_cech_cocycle_lift Y J V hV U hU hcover q c hc
+  have he := (HomologicalComplex.exactAt_iff_isZero_homology _ (q + 1)).2
+    (injective_sheaf_cech_acyclic Y J W _ T f hT (q + 1) (by omega))
+  rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp),
+    ShortComplex.ab_exact_iff] at he
+  change ∀ x : ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+      ((Over.forget W).op ⋙ J.obj)).X (q + 1),
+    ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+      ((Over.forget W).op ⋙ J.obj)).d (q + 1) (q + 2) x = 0 →
+    ∃ b : ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+        ((Over.forget W).op ⋙ J.obj)).X q,
+      ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+        ((Over.forget W).op ⋙ J.obj)).d q (q + 1) b = x at he
+  obtain ⟨b, hb⟩ := he c' hc'
+  refine ⟨φ.f q b, ?_⟩
+  calc
+    _ = φ.f (q + 1) (((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+        ((Over.forget W).op ⋙ J.obj)).d q (q + 1) b) :=
+      ConcreteCategory.congr_hom (φ.comm q (q + 1)) b
+    _ = c := by rw [hb, hφ]
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,177 @@
+{
+ "id": "lem-cbc-affine-comparison-cech-cocycle-descent",
+ "kind": "statement",
+ "title": "Finite affine comparison Cech cocycles descend to etale Cech complexes",
+ "statement": "Let Y be an affine scheme [def-pc-scheme], J any abelian sheaf on Y_et [def-weil-pbc-etale-site], and F its comparison inverse image [def-weil-pbc-site-comparison-morphism]. Let V be an affine ind-etale Y-object and U_i -> V a finite pro-etale covering indexed by Fin n whose nonempty repeated intersections are affine ind-etale Y-objects [def-weil-pbc-ind-etale-basis]. For every natural q and every degree q+1 cocycle c in the ordered Cech complex of F [def-weil-pbc-site-cech-complex], there exist an object W of Y_et, a covering family T_i -> W indexed by ULift(Fin n), a morphism phi from its categorical Cech complex with coefficients J to the original ordered complex, and a degree q+1 cocycle c_prime in the source such that phi(c_prime)=c. No injectivity, vanishing or coboundary is asserted. The empty family and empty schemes are included.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3), the two finite Cech limit reductions before applying injectivity; Tags 099T, 01ZM, 01ZN, 07RP; https://stacks.math.columbia.edu/tag/099U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the one-factor product isomorphisms to regard the family members as affine ind-etale Y-objects. Ind-etale cancellation makes each map U_i -> V ind-etale. Present it by affine etale V-schemes and replace the cofiltered indices by small nonempty directed sets. Their finite product gives a common index; each stage family covers V because the original jointly surjective family maps into it. Fibre-product limits identify all repeated nerve intersections with the limits of stage intersections.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-kun-fibre-product-limits",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison sections are etale inverse-image sections, additively and naturally for each face map. Apply degree-zero etale cohomology continuity to the affine intersection systems; their stages are qcqs. In degrees q+1 and q+2 there are finitely many tuples. Choose representatives for the cocycle components at one common stage, and then a later common stage where all components of its differential vanish. Filtered-colimit representatives and eventual equality, rather than a new positive-degree exactness theorem, give this finite cocycle descent.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present V by affine etale Y-schemes. The affine-etale-site colimit theorem descends the finite affine etale covering from the first reduction to a common stage. Its object and map descent, followed by eventual equality of the two inverse composites, replace any descended target by the selected base stage itself. On a cofinal tail base change gives the original family and its intersections; etale composition and base change put all these objects and faces in the original Y_et site.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same degree-zero continuity and finite representative/eventual-zero argument to obtain a cocycle at an etale Y-stage. Here the upstream isColimit_comparisonUpperStar_mapCocone_of_isAffine and the invertible comparison unit supply the canonical section colimit directly. For every degree, restrict along the refinement maps of nerve products after applying the comparison unit. Projection equations give commutation with every face, hence with the alternating differential. The product universal property compares the categorical-product and dependent-function cochains and their face maps. Reindex by ULift(Fin n) to match the coefficient universe. These maps define the complex morphism phi and its equation on c_prime. This step constructs no primitive and assumes no injectivity. If n=0 take the empty etale Y-object, its empty covering, zero phi and zero cocycle; all groups vanish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-kun-fibre-product-limits",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-cbc-comparison-pullback-sections",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D3",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3); finite cocycle representative form of its two Cech limit reductions, without the final injectivity step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cocycle of a finite Cech complex on affine ind etale schemes descends to a finite etale stage for any etale abelian sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Cech cocycles of an inverse image sheaf descend along affine inverse limits of schemes to an etale cover",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+   "date": "2026-10-16",
+   "verdict": "No finite comparison Cech cocycle descent theorem. The geometric hits concern sections of the structure sheaf or finite-type scheme maps; the ExactAt hits concern injective resolutions, not Cech approximations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactAt\", \"Injective\"",
+   "results": "2 hits: CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+   "date": "2026-10-16",
+   "verdict": "No finite comparison Cech cocycle descent theorem. The geometric hits concern sections of the structure sheaf or finite-type scheme maps; the ExactAt hits concern injective resolutions, not Cech approximations."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(descen|limit)|cocycle.*(etale|limit)|etale.*cocycle",
+   "results": "1 hits: Mathlib/AlgebraicTopology/CechNerve.lean",
+   "date": "2026-10-16",
+   "verdict": "No finite comparison Cech cocycle descent theorem. The geometric hits concern sections of the structure sheaf or finite-type scheme maps; the ExactAt hits concern injective resolutions, not Cech approximations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof step 4, affine comparison input: geometric part of Tag 099U condition (3)",
+   "via": [
+    "lem-cbc-abelian-affine-comparison-vanishing-aux",
+    "lem-cbc-abelian-affine-comparison-vanishing",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonCechCocycleDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_etale_cech_cocycle_lift",
+  "statement": "theorem exists_etale_cech_cocycle_lift\n    (Y : Scheme.{u}) [IsAffine Y]\n    (J : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (V : Y.ProEt) (hV : proAffineEtale V.hom)\n    {n : ℕ} (U : Fin n → Over V)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n),\n      proAffineEtale (Presheaf.cechNerveObj U y).left.hom)\n    (hcover : Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈\n      Scheme.ProEt.topology Y V) (q : ℕ)\n    (c : ((Presheaf.cechComplex U).obj\n      ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).X (q + 1))\n    (hc : ((Presheaf.cechComplex U).obj\n      ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).d (q + 1) (q + 2) c = 0) :\n    ∃ (W : Y.Etale) (T : ULift.{u + 1} (Fin n) → Y.Etale)\n      (f : ∀ i, T i ⟶ W),\n      Sieve.ofArrows T f ∈ Y.smallEtaleTopology W ∧\n      ∃ (φ : (cechComplexFunctor fun i ↦ Over.mk (f i)).obj\n          ((Over.forget W).op ⋙ J.obj) ⟶\n        (Presheaf.cechComplex U).obj\n          ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj)\n        (c' : ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj\n          ((Over.forget W).op ⋙ J.obj)).X (q + 1)),\n        ((cechComplexFunctor fun i ↦ Over.mk (f i)).obj\n          ((Over.forget W).op ⋙ J.obj)).d (q + 1) (q + 2) c' = 0 ∧\n          φ.f (q + 1) c' = c",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T011144-L-264795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T011144-L-264795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
