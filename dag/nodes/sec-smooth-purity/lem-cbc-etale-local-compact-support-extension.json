@@ -29,9 +29,192 @@
   "def-weil-pbc-inverse-image",
   "lem-weil-pbc-derived-open-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $h:T\\to B$. Use all affine open subschemes $U\\subseteq B$ as a basis, not a cover whose intersections are assumed affine. The basis property is [lem-weil-pbc-affine-opens-basis]. By [lem-pod-separated-finite-type-base-change], $h_U:T_U\\to U$ is separated and finite type. It is quasi-compact by the finite-type convention [def-weil-pbc-scheme-conventions] and quasi-separated by [lem-pc-separated-quasi-separated]. Apply [lem-weil-pbc-qcqs-over-affine] first to $h_U$ and then to the identity of the affine scheme $U$ (whose diagonal and inverse images are identities): both $T_U$ and $U$ are qcqs. The nonempty cofiltered category $\\operatorname{Comp}(h_U)$ of [prop-nagata-compactification-category] is therefore available. It includes all compactifications with quasi-compact open part, without imposing density; it is preserved by base change and has common and equalizing refinements. Form its small skeleton, and all subsequent parameter categories, in sufficiently large universes [def-weil-size-convention]. For the empty base the derived category is the zero category and the construction below is the unique zero functor.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-over-affine",
+    "prop-nagata-compactification-category",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, opening cofiltered-category argument, applied only over affine opens; agent affine-local setup"
+   }
+  },
+  {
+   "text": "Work before taking ordinary homotopy categories. Use [prop-weil-pbc-inverse-image-modules-exact] to identify the inverse image of the constant coefficient ring with the constant ring on the source. Apply [lem-coef-semilinear-derived-sections] to the constant inverse sequence $B_n=\\underline\\Lambda$ with identity transition maps on each small etale site, and take the constant cartesian section attached to a complex. Evaluation at the first level gives enhanced inverse image, its derived right adjoint, and open extension, together with the specified units, counits, pullback and direct-image compositors and their coherent mate constructions. These are the prescribed functors, not enhancements of arbitrary transformations of homotopy categories. The localization calculus [lem-coef-dg-derived-quillen-calculus] preserves strict enriched identity, composition and naturality diagrams and the mate formulas. In particular use the actual sheaf identifications of [lem-cbc-proper-support-sheaf-composition]: every proper/open interchange is the same underlying section in the same support subsheaf. Their composition and pullback diagrams are identities of sheaf maps; applying the specified enhanced derived/mate constructions retains all their coherence homotopies. The resulting proper/open transformation is the one of [lem-cbc-proper-open-interchange-coherence], since on an injective source and a resolution of its open extension its arrow is $i_!r_*J\\cong p_*k_!J\\to p_*I$. This also retains the vertical, horizontal and arbitrary-base-change equations stated there as coherent diagrams. We will use these specified coherences, rather than infer coherent diagrams from ordinary pointwise equalities.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F, proper/open construction and strict underlying section maps; enhanced realization supplied by the cited generic tools"
+   }
+  },
+  {
+   "text": "For $c=(j_c,p_c)$ over an affine $U$, put $F_{U,c}=Rp_{c,*}j_{c!}$. For a refinement $w:c_1\\to c_2$ use $Rp_{2,*}\\alpha_w:F_{U,c_2}\\to F_{U,c_1}$, with the derived direct-image compositor. The normalization of [lem-cbc-proper-open-interchange-coherence] identifies this with exactly $\\alpha_w$ from [def-weil-pbc-proper-open-comparison], not a freely chosen isomorphism. Its identity and vertical-composition assertions give the contravariant refinement diagram; step 2 supplies the higher coherences of that diagram. Every transition is an equivalence by its proper/open isomorphism assertion. Apply [lem-cbc-cofiltered-coherent-equivalence-diagrams] to $\\operatorname{Comp}(h_U)^{\\mathrm{op}}$ in the enhanced functor category. Take the homotopy colimit supplied by its filtered form and invert its equivalence structure maps. Obtain a functor $\\Phi_{h,U}$ and an equivalence cone $q_{U,c}:\\Phi_{h,U}\\simeq F_{U,c}$ with all compatibilities. In particular $q_{U,c_1}=(Rp_{2,*}\\alpha_w)q_{U,c_2}$. Cofilteredness and nonemptiness are from [prop-nagata-compactification-category]; the dual filtered form of the coherent-diagram lemma applies to the opposite category.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "def-weil-pbc-proper-open-comparison",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "prop-nagata-compactification-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, cofiltered compactification argument with its proper/open normalization; enhanced cone is an additional agent construction"
+   }
+  },
+  {
+   "text": "For affine opens $V\\subseteq U$, pull back a compactification $c$ over $U$ to $c|_V$ using [prop-nagata-compactification-category]. The canonical restriction map [lem-weil-pbc-derived-open-restriction] and the open-extension comparison [cor-cbc-derived-extension-zero-base-change] identify $F_{U,c}(L|_{T_U})|_V$ with $F_{V,c|_V}(L|_{T_V})$. The base-change equation of [lem-cbc-proper-open-interchange-coherence] makes these identifications compatible with every refinement $w$ and its pullback. For $W\\subseteq V\\subseteq U$, the two composites use the same iterated inverse image and the same mate for the pasted square, as supplied by the enhanced constructions in [lem-coef-semilinear-derived-sections]; the open-extension pasting assertion supplies its corresponding factor. Thus these maps give coherent transformations of the refinement diagrams. The cone equivalence of [lem-cbc-cofiltered-coherent-equivalence-diagrams], including its naturality for indexing functors, produces coherent restriction equivalences $\\Phi_{h,U}|_V\\simeq\\Phi_{h,V}$, with identity and iterated-restriction homotopies. This construction only uses affine inclusions. Any overlap of affine opens is handled by all affine opens contained in it, as guaranteed by [lem-weil-pbc-affine-opens-basis].",
+   "uses": [
+    "prop-nagata-compactification-category",
+    "lem-weil-pbc-derived-open-restriction",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, open-base-change specialization and restriction of compactifications; agent construction on the affine basis"
+   }
+  },
+  {
+   "text": "The local functors preserve each prescribed lower bound. Indeed $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact], so $\\mathcal H^i(j_!L)=j_!\\mathcal H^i(L)$ and the bound $a$ is unchanged. By [lem-weil-pbc-dplus-injective-representative], choose an injective representative of $j_!L$ with zero terms below that same $a$; enough injectives is provided by [lem-weil-pbc-module-sheaves-enough-injectives]. The computation of [def-weil-pbc-direct-image] represents $Rp_*j_!L$ by its termwise direct image, which again has zero terms below $a$. Hence $\\Phi_{h,U}(L|_{T_U})$ has zero cohomology below the one bound $a$ of $L$, for every affine $U$. Restricting $L$ has this same bound by exactness of inverse image [prop-weil-pbc-inverse-image-modules-exact]. In particular the bound is uniform over the basis even when it is infinite.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7H, bounded-below compactification functor; explicit resolution verification of the unchanged lower bound"
+   }
+  },
+  {
+   "text": "For every $L$, steps 3 and 4 form a coherent cartesian affine-basis system $U\\mapsto\\Phi_{h,U}(L|_{T_U})$. Step 5 proves the common lower bound required by [lem-cbc-zariski-enhanced-derived-descent]. Apply its equivalence in the enhanced functor category with parameter $L\\in\\mathbf D^+(T_{\\mathrm{et}},\\Lambda)$. Define $\\mathbf H_h$ by composing this system-valued functor with an inverse of that equivalence. This constructs its objects and arrows together. Pass to ordinary homotopy categories to obtain $H_h$ on $D^+$. Applying the same construction to $h_V$ for every open $V$ and using the open-restriction naturality of the descent equivalence gives $r^h_V:(H_hL)|_V\\simeq H_{h_V}(L|_{T_V})$. Normalize the unit comparison to the identity. The coherent restriction diagrams become the exact identity and iterated-restriction equations in the statement. The lower-bound subcategory assertion of the descent lemma proves that $H_h$ preserves every bound $a$. Only the sites, bases and parameter categories in the fixed size convention are used; no global compactification is selected.",
+   "uses": [
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Agent globalization using enhanced bounded-below descent; Stacks Tag 0DA2 is the ordinary total-site descent prototype"
+   }
+  },
+  {
+   "text": "Suppose now $c=(j,p)$ is any global compactification of $h$. Its restriction to every affine $U$ is an object of $\\operatorname{Comp}(h_U)$: properness of $p|_U$ is [lem-weil-pbc-proper-base-change], openness of $j|_U$ is [lem-weil-pbc-open-immersion-base-change], and quasi-compactness of $j|_U$ follows from the base-change clause of [lem-weil-pbc-qcqs-morphism-permanence]. The factorization identity pulls back. These arguments apply over arbitrary $B$; the qcqs-base compactification-category theorem is not applied to $B$. The restriction comparison of [lem-weil-pbc-derived-open-restriction] and [cor-cbc-derived-extension-zero-base-change] identifies $(Rp_*j_!L)|_U$ with $F_{U,c|_U}(L|_{T_U})$. Thus the cone maps $q_{U,c|_U}$ of step 3 form a coherent equivalence of basis systems from the system defining $H_hL$ to that defining $Rp_*j_!L$. Use the mapping-complex/functor-category equivalence of [lem-cbc-zariski-enhanced-derived-descent] to obtain $q^h_c:H_h\\simeq Rp_*j_!$. This is natural in $L$. Performing this for the entire diagram of global compactifications simultaneously descends its cone equations, so for every global refinement $w:c_1\\to c_2$ one gets $q^h_{c_1}=(Rp_{2,*}\\alpha_w)q^h_{c_2}$ with the canonical compositor. Restriction of this same coherent cone to any open $V$ gives $q^{h_V}_{c|_V}r^h_V$, which is exactly the required compatibility of $q$ with $r$. These equations follow from coherent descent, not from a claimed faithfulness of ordinary derived restriction.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-derived-open-restriction",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-zariski-enhanced-derived-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, comparison with a given compactification, extended by coherent Zariski descent"
+   }
+  },
+  {
+   "text": "For a square $(h,u)$ take every affine $U\\subseteq B$ and every affine $A\\subseteq B'$ with $u(A)\\subseteq U$. Such $A$ cover $B'$ by [lem-weil-pbc-affine-opens-basis], since the inverse images of the affine opens $U$ cover $B'$. Over $U$ choose any $c\\in\\operatorname{Comp}(h_U)$ and pull it back to $A$. These compactifications and all their refinements exist by [prop-nagata-compactification-category]; the base-changed morphism remains separated finite type by [lem-pod-separated-finite-type-base-change]. Use the formula of [def-cbc-exchange-map] for the map\n$$ (u|_A)^{-1}F_{U,c}(L|_{T_U})\\longrightarrow F_{A,c_A}(v^{-1}L|_{T'_A}):$$\nfirst the proper direct-image mate, then $Rp_{A,*}$ of the specified open-extension map. Step 2 makes this an enhanced transformation natural in $L$, via the actual mate and open-adjunction formulas, as [lem-coef-semilinear-derived-sections] asserts. It is a map between bounded-below objects because inverse image is exact [prop-weil-pbc-inverse-image-modules-exact] and step 5 supplies the common bound for the target. No quasi-compactness of $u^{-1}U$ is used: its affine subopens $A$ are the test bases.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "prop-nagata-compactification-category",
+    "lem-pod-separated-finite-type-base-change",
+    "def-cbc-exchange-map",
+    "lem-coef-semilinear-derived-sections",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, displayed proper-exchange/open-extension composite, applied over affine pairs only"
+   }
+  },
+  {
+   "text": "Check that these maps define one coherent transformation on the basis. Fix $w:c_1\\to c_2$ over an affine $U$, write $w':c'_1\\to c'_2$ for its pullback to $A$, and let $a_i:\\overline T'_{i}\\to\\overline T_i$ be the projections. Put $\\delta_w=Rp_{2,*}\\alpha_w:F_{U,c_2}\\to F_{U,c_1}$, and put $\\delta_{w'}=Rp'_{2,*}\\alpha_{w'}$. Let $E_i$ be the exchange composite of step 8 computed with $c_i$, and $\\beta_i:a_i^{-1}j_{i!}\\simeq j'_{i!}v^{-1}$ its open-extension factor. Apply the final equation of [lem-cbc-proper-open-interchange-coherence] to the square with top $j_1$, bottom $j_2$, left vertical identity, right vertical $w$, and base change $a_2$. Its normalization identifies $\\gamma$ with $\\alpha_w$. Since exchange for the identity is the identity by [lem-weil-pbc-mate-pasting], the resulting equation is\n$$ (Rw'_*\\beta_1)\\circ(\\operatorname{Ex}_w j_{1!})\\circ(a_2^{-1}\\alpha_w)=(\\alpha_{w'}v^{-1})\\circ\\beta_2. $$\nInsert the canonical direct-image compositors throughout. The composition-adjunction formula of [lem-weil-pbc-mate-pasting] gives\n$$\\operatorname{Ex}_{p_1}=(Rp'_{2,*}\\operatorname{Ex}_w)\\circ(\\operatorname{Ex}_{p_2}Rw_*),\\qquad p_1=p_2w.$$\nNaturality of $\\operatorname{Ex}_{p_2}$ for $\\alpha_w$ therefore rewrites $E_1\\circ(u^{-1}\\delta_w)$ as\n$$Rp'_{2,*}\\big((Rw'_*\\beta_1)\\circ(\\operatorname{Ex}_w j_{1!})\\circ(a_2^{-1}\\alpha_w)\\big)\\circ(\\operatorname{Ex}_{p_2}j_{2!}).$$\nSubstitution of the first displayed equation makes this\n$$Rp'_{2,*}\\big((\\alpha_{w'}v^{-1})\\circ\\beta_2\\big)\\circ(\\operatorname{Ex}_{p_2}j_{2!})=(\\delta_{w'}v^{-1})\\circ E_2.$$\nThis proves the exact refinement equation $E_1\\circ u^{-1}\\delta_w=(\\delta_{w'}v^{-1})\\circ E_2$, with every factor in the prescribed direction. These are the coherent diagrams of step 2, so [lem-cbc-cofiltered-coherent-equivalence-diagrams] descends them to the $\\Phi$ cones. For a smaller affine $A_0\\subseteq A$ and $U_0\\subseteq U$ through which its map factors, the enhanced proper mate pasting and the open-extension pasting comparison give the same formula after restriction [lem-coef-semilinear-derived-sections, cor-cbc-derived-extension-zero-base-change]. If two affine opens $U_1,U_2$ can be used, cover $A\\cap u^{-1}(U_1\\cap U_2)$ by affine $A_0$ mapping into affine $U_0\\subseteq U_1\\cap U_2$. The previous comparison handles both choices there, and the coherent basis-descent equivalence [lem-cbc-zariski-enhanced-derived-descent] identifies the two transformations with their specified overlap homotopies. Higher overlaps use the same diagram for strings of inclusions and refinements, already retained in step 2; thus the argument constructs coherent matching maps rather than merely matching ordinary derived components.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-coef-semilinear-derived-sections",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-cbc-zariski-enhanced-derived-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7F and 0F7L, compactification-independence and open restriction; mate pasting spells out the compatibility needed for descent"
+   }
+  },
+  {
+   "text": "Use [lem-cbc-zariski-enhanced-derived-descent] on $B'$ with the parameters $L$ and the coherent transformation just constructed. Under its functor-category equivalence the source basis system is the restriction of $u^{-1}H_hL$, using the restriction cones of step 6, and the target is that of $H_{h'}v^{-1}L$. The descended arrow is $e_{h,u,L}$. Its naturality in $L$ and its compatibility with restriction to $V'=u^{-1}V$ are the descended naturality and restriction diagrams from steps 8 and 9. If $h_V$ has a specified compactification $c_V$, repeat step 7 on $V$ and on its pullback $V'$ using those compactifications. The definition in step 8 is then, as a coherent diagram of functors on the affine bases, exactly the proper-exchange/open-extension formula of [def-cbc-exchange-map]; the descent equivalence identifies that coherent diagram with the global formula on $V'$. This proves equality with the required specified map, including when $V$ or $V'$ is not qcqs. It supplies all the asserted data simultaneously. The only compactification existence invoked was over affine opens, while all globalization used the stated arbitrary-basis descent theorem.",
+   "uses": [
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, exchange normalization; agent descent of the simultaneously constructed transformation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "def-cbc-exchange-map",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proper-open-comparison",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention",
+  "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-zariski-enhanced-derived-descent",
+  "lem-coef-dg-derived-quillen-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-separated-quasi-separated",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "prop-nagata-compactification-category",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I and 0F7L give the qcqs compactification formulas; the arbitrary-base globalization is an agent construction using explicit enhanced coherent descent tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -102,10 +285,157 @@
    "results": "2 hits; returned first names/files: Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Geometry/Manifold/Bordism.lean",
    "date": "2026-10-15",
    "verdict": "no match: site topology and t-structure facts do not construct compact-support functors or their exchange; grep hits concern bordism only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct compact support derived direct image of etale sheaves on arbitrary schemes by local compactifications, with normalized restrictions refinements and base change maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ower[Ss]hriek|[Cc]ompact[Ss]upport.*[Dd]erived|[Cc]ompactification.*[Ss]heaf",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived compact support functors and their base change transformations extend from affine open subsets of the target",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.affineLocally",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below etale compact support functor for separated finite type maps is assembled Zariski locally without a global compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct compact support derived direct image of etale sheaves on arbitrary schemes by local compactifications, with normalized restrictions refinements and base change maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ower[Ss]hriek|[Cc]ompact[Ss]upport.*[Dd]erived|[Cc]ompactification.*[Ss]heaf",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived compact support functors and their base change transformations extend from affine open subsets of the target",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.affineLocally",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below etale compact support functor for separated finite type maps is assembled Zariski locally without a global compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct compact support derived direct image of etale sheaves on arbitrary schemes by local compactifications, with normalized restrictions refinements and base change maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ower[Ss]hriek|[Cc]ompact[Ss]upport.*[Dd]erived|[Cc]ompactification.*[Ss]heaf",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived compact support functors and their base change transformations extend from affine open subsets of the target",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.affineLocally",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below etale compact support functor for separated finite type maps is assembled Zariski locally without a global compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ordinary scheme morphism properties, affine bases and affine limit factorizations; none constructs the derived compact-support functors or the simultaneous comparison and exchange data."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-cbc-finite-level-proetale",
   "by": "worker",
@@ -135,5 +465,104 @@
   "group": "Q24",
   "result": "pass",
   "note": "Wrote review.md. Statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings and records match. All three immutable Lean files compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-etale-local-compact-support-extension",
+  "worker": "stage1",
+  "summary": "Constructed affine-local coherent compactification cones, proved an unchanged common lower bound, and used enhanced open-basis descent for functors, comparison cones and the prescribed exchange maps. Reused the existing enhanced coefficient-system calculus with a constant coefficient tower; added only generic bounded-below basis descent and cofiltered coherent equivalence-diagram tools. No statement change, Lean edit or compilation. Independent second reading added the separated/quasi-separated and affine-qcqs citations and expanded the refinement/exchange compatibility into its explicit typed mate-pasting calculation.",
+  "blueprint": "Realizes the opening sentence 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale by Zariski-local compactification formulas; its subsequent transport argument and coefficient typing are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-derived-quillen-calculus",
+    "why": "Generic enhanced localization preserves enriched diagrams and mate constructions; it is needed before coherent gluing and is not another compact-support proof route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Its arbitrary-site enhanced geometric-operation clause, specialized to the constant ring tower, provides the specified coherent mate and open-extension models; this unit has no enhanced replacement calculus."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic direct-image exchange mate pasting, used to write the refinement/base-change compatibility equation; no unit-specific statement replaces this formal calculus."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "prop-nagata-compactification-category",
+    "why": "Local geometric compactification existence, cofilteredness and base-change stability over affine bases; no node in this unit supplies these generic geometric facts."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic affine-basis, scheme base-change, open restriction, exactness or injective-resolution tool used with exactly its stated hypotheses; the compact-support unit does not state this general input."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separated/quasi-separated or affine-qcqs scheme lemma, used only to check the hypotheses of the local compactification-category theorem in step 1."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic separated/quasi-separated or affine-qcqs scheme lemma, used only to check the hypotheses of the local compactification-category theorem in step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-derived-quillen-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "prop-nagata-compactification-category",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-902ee38fa",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-902ee38fa (reviewer sub-agent of L); spot-checked: Read all ten steps, both new nodes, cited statements, source passages and unit/chapter route. Mathematical split accepted without weakening targets; enhanced foundations remain explicitly unsplit. Corrected both new nodes’ incomplete provenance/default records under fixes/. Detailed source, coefficient, exchange-direction, duplicate and edge-case checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
