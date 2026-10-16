@@ -19,7 +19,8 @@
   "def-weil-affine-spectrum",
   "def-sc-picard-group",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-site",
+  "def-sc-gm-torsor"
  ],
  "proof": [
   {
@@ -216,5 +217,29 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-ce434e816 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass for all eight steps and both Mathlib leaves, including PID contraction, affine evaluation, Picard counits, cokernel representatives, hypotheses, duplicates, and edge cases. Both new node files lacked required created.by/date metadata and lean_audit records; complete corrected JSON files are in fixes/dag/nodes/sec-smooth-purity/. Review details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra",
+  "declaration": "AlgebraicGeometry.AffinePuncturedLine.affine_punctured_line_algebra",
+  "declarations": [
+   "AlgebraicGeometry.AffinePuncturedLine.specUnits",
+   "AlgebraicGeometry.AffinePuncturedLine.specUnitSection",
+   "AlgebraicGeometry.AffinePuncturedLine.laurentUnit",
+   "AlgebraicGeometry.AffinePuncturedLine.affine_punctured_line_algebra"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePuncturedLineAlgebra.lean",
+  "statement": "theorem affine_punctured_line_algebra (k : Type u) [Field k] : Function.Bijective (fun a : kˣ ↦ specUnitSection (Polynomial k) (Units.map Polynomial.C.toMonoidHom a)) ∧ Function.Bijective (fun p : kˣ × ℤ ↦ specUnitSection (LaurentPolynomial k) (laurentUnit k p.1 p.2)) ∧ Subsingleton (Spec (CommRingCat.of (Polynomial k))).Pic ∧ Subsingleton (Spec (CommRingCat.of (LaurentPolynomial k))).Pic ∧ (∀ (N : ℕ), 1 ≤ N → IsUnit (N : k) → (∃ e : (specUnits (LaurentPolynomial k) ⧸ (powMonoidHom N).range) ≃* ((kˣ ⧸ (powMonoidHom N).range) × Multiplicative (ZMod N)), ∀ (a : kˣ) (n : ℤ), e (QuotientGroup.mk (specUnitSection (LaurentPolynomial k) (laurentUnit k a n))) = (QuotientGroup.mk a, Multiplicative.ofAdd (n : ZMod N))) ∧ ((∀ a : kˣ, ∃ b : kˣ, b ^ N = a) → (∀ x : specUnits (LaurentPolynomial k) ⧸ (powMonoidHom N).range, ∃ n : ℤ, x = (QuotientGroup.mk (specUnitSection (LaurentPolynomial k) (laurentUnit k 1 1))) ^ n) ∧ Function.Surjective (fun a : kˣ ↦ a ^ N)) ∧ (IsAlgClosed k → ∀ a : kˣ, ∃ b : kˣ, b ^ N = a))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1ba47fd9a",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Statement, dependencies, definitions, source/docstrings, edge cases, report sections, and per-file compiler evidence all check out."
  }
 }

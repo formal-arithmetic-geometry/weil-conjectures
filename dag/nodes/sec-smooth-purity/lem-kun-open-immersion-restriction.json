@@ -188,5 +188,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-77640d4ae (reviewer sub-agent of L); spot-checked: Mathematics passes: the unbounded K-injective proof, counit, base-change fibre product, coefficient category Z, source declarations, edge cases, and all cited statements were checked. FIX adds eight missing generic cross-unit tool_uses declarations in fixes/dag/nodes/sec-smooth-purity/lem-kun-open-immersion-restriction.json; the delivery had left split_report.tool_uses empty.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenImmersionRestriction",
+  "declaration": "AlgebraicGeometry.Etale.openImmersion_restriction_leray",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionRestriction.lean",
+  "statement": "theorem openImmersion_restriction_leray {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : IsIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).counit ∧ (∀ F : DerivedCategory (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}), IsIso ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} j).hom.app F)) ∧ (∀ E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}), DerivedCategory.Plus.ι.map (rightDerivedGlobalSectionsLerayPlus j E).inv ≫ (Sheaf.Γ U.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlusCompatibility.hom.app E = (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlusCompatibility.hom.app ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlus.obj E) ≫ (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlusCompatibility.hom.app E) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} j).hom.app (DerivedCategory.Plus.ι.obj E))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae3d621c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all eight dependencies, source, canonical maps, bounded compatibility, universes, edge cases, docstrings, and report. Verbatim signature matches; scompile.py passed both local overlay checks. No delivery faults found."
  }
 }
