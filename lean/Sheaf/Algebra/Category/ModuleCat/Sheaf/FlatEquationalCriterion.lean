@@ -7,14 +7,10 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.LinearAlgebra.TensorProduct.Vanishing
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
