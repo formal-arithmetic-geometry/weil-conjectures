@@ -34,7 +34,9 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "def-pc-sheaf-restrict-scalars",
-  "lem-weil-restriction-of-scalars-exact"
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof": [
   {
@@ -417,5 +419,37 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-14abc1824 (reviewer sub-agent of L); spot-checked: Read the full delivery, all 33 cited statements, route, and local sources. All eight steps check, including completed coefficients, coherent derived towers, comparison normalization, transition composition, and unbounded scope. No new nodes or repairs; six generic tool uses accepted. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-adaa4a262",
+  "group": "NH",
+  "result": "pass",
+  "note": "Full immutable-delivery review recorded in review.md; canonical constructions and all clauses match, both required report sections are substantive, and sandbox/library compiles pass cleanly. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportReductionTower",
+  "declaration": "WeilConjectures.exists_compactSupportReductionTower",
+  "declarations": [
+   "WeilConjectures.compactSupportLevelFinite",
+   "WeilConjectures.compactSupportLevelQuotient",
+   "WeilConjectures.compactSupportLevelSheafQuotient",
+   "WeilConjectures.compactSupportProjection_comp",
+   "WeilConjectures.compactSupportRestrictionComp",
+   "WeilConjectures.compactSupportReductionMap",
+   "WeilConjectures.compactSupportRestrictedLevel",
+   "WeilConjectures.compactSupportRestrictedTransition",
+   "WeilConjectures.compactSupportConstantScalar",
+   "WeilConjectures.IsCompactSupportScalarAction",
+   "WeilConjectures.exists_compactSupportReductionTower"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportReductionTower.lean",
+  "statement": "theorem exists_compactSupportReductionTower (K₀ : Type u) [Field K₀] (X Y : Scheme.{u}) [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hl : IsUnit (l : K₀)) (c : Compactification f) : ∃ (sX : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E X)) (sY : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)), (fun [linearX : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E X)] [linearY : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)] ↦ IsCompactSupportScalarAction l E X ∧ IsCompactSupportScalarAction l E Y ∧ ∃ T : DerivedCategory (scalarReductionSource l E X) ⥤ DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y)), T.Linear (Padic.coefficientExtensionIntegers l E) ∧ ∃ (_shift : T.CommShift ℤ), T.IsTriangulated ∧ ∃ e : ∀ n : ℕ, T ⋙ pbcTowerEvaluation Y (completedIntegralCommRingSheafUnrestricted l E Y) n ≅ compactSupportRestrictedLevel l E c n, ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource l E X)), (pbcTowerTransition Y (completedIntegralCommRingSheafUnrestricted l E Y) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E c m n h K) (linearX := sX) (linearY := sY)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The exact functor takes values in the derived category of strict completed-module towers. Natural evaluation isomorphisms identify every comparable-pair transition with the actual quotient-induced reduction and the specified compact-support scalar comparison. Scalar structures are normalized on module sheaves by the canonical constant-to-completion map, then inherited on towers and derived categories."
  }
 }

@@ -213,31 +213,26 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars",
-  "declaration": "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
+  "module": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "declaration": "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.fixedScalarOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap_isIso",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpen",
-   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
-   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso_comp"
+   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
+   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction_comp"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportRestrictionOfScalars.lean",
-  "statement": "def compactSupportRestrictionIso {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ ⋙ Rf_!(c)[ModuleCat.{u + 1} A] ≅ Rf_!(c)[ModuleCat.{u + 1} B] ⋙ Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ",
+  "statement": "def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (φ : A →+* B) : (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙ sfAmbientCompactSupportCandidate A c ≅ sfAmbientCompactSupportCandidate B c ⋙ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory",
   "branch": "newtargets-dag",
-  "by": "Q35",
+  "by": "NH",
   "date": "2026-10-16",
-  "existing": false,
-  "note": "Section 1(B) interface repair: the newly recorded Sheaf.Paper.SfCompactSupportRestrictionOfScalars provides the intrinsic constant-ring module presentation and imports the incompatible FiniteCoefficient upper/lower-star framework. The compact-support functor recorded for this item instead uses fixed-scalar sheaves. This module supplies the same canonical proper/open restriction composite and its transitivity in that fixed-scalar presentation, using the actual inverse-image/open adjunction mate and the K-injective-normalized direct-image comparison. No unidentified natural isomorphism is chosen."
+  "existing": true,
+  "note": "Section 1(B), record-only repair using an already published declaration. The recorded fixed-scalar compactSupportRestrictionIso cannot be imported together with the recorded intrinsic sfIntrinsicCompactSupport: the generic and FiniteCoefficient UpperLowerStar.Defs modules both declare AlgebraicGeometry.ProEtale.lowerStarComp (confirmed by scompile.py locally and on the server). The already published sfCompactSupportRestriction gives exactly the canonical open-extension/derived-proper-image comparison in the intrinsic constant-ring module presentation used by the consumer; sfCompactSupportRestriction_comp gives its cocycle. sfAmbientCompactSupportCandidate and the recorded sfIntrinsicCompactSupport have the same defining composite, definitionally. The comparison is built from the section-normalized realization, open adjunction comparison and K-injective-normalized direct-image comparison; no arbitrary isomorphism is introduced. The replacement import probe compiled cleanly."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-29b37cee7",
-  "group": "Q35",
+  "reviewer": "NT-stage2-Codex-adaa4a262",
+  "group": "NH",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement dependencies, source clauses, canonical maps, universes, edge cases, signatures, docstrings, and sorry-only proofs. All three immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed."
+  "note": "Full immutable-delivery review recorded in review.md; canonical constructions and all clauses match, both required report sections are substantive, and sandbox/library compiles pass cleanly. Branch unchanged."
  },
  "split_report": {
   "date": "2026-10-16",
