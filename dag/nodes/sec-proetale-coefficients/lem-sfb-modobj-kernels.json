@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-kernels",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kernels of module objects are computed in $\\mathcal C$",
@@ -13,29 +13,144 @@
   "place": "node lem-sfb-modobj-kernels, order 1571"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
  ],
  "proof": [
   {
-   "text": "The tensor product is additive in each variable, so $\\mathcal R\\otimes0=0$. Hence\n$$\nf\\gamma_M(\\mathcal R\\otimes\\iota)=\\gamma_N(\\mathcal R\\otimes f\\iota)=\\gamma_N(\\mathcal R\\otimes0)=0 .\n$$\nSo $\\gamma_M(\\mathcal R\\otimes\\iota)$ factors uniquely through $\\iota$, which gives\n$\\gamma_K$. The unit and associativity axioms for $\\gamma_K$ hold after composition with the\nmonomorphism $\\iota$, because they hold for $\\gamma_M$. Hence they hold for $\\gamma_K$.",
+   "text": "Write $\\mu:\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$ and $\\eta:\\mathbf1\\to\\mathcal R$ for multiplication and unit, and compose from right to left. The assumed kernel property means $f\\iota=0$ and, for each $a:T\\to M$ with $fa=0$, there is a unique $b:T\\to K$ with $\\iota b=a$. In particular $\\iota$ is monic: if $\\iota b=\\iota c=a$, then $fa=f\\iota b=0$, so both $b,c$ are the unique lift of $a$. This cancellation requires no kernel of any other morphism.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+    "place": "Paragraph 1, the assumed kernel and the cancellations by its inclusion"
+   }
   },
   {
-   "text": "Let $g\\colon L\\to M$ be a morphism of module objects with $fg=0$, and let\n$h\\colon L\\to K$ be its factorization in $\\mathcal C$, so $\\iota h=g$. Then\n$$\n\\iota h\\gamma_L=g\\gamma_L=\\gamma_M(\\mathcal R\\otimes g)\n=\\gamma_M(\\mathcal R\\otimes\\iota)(\\mathcal R\\otimes h)=\\iota\\gamma_K(\\mathcal R\\otimes h).\n$$\nSince $\\iota$ is a monomorphism, $h$ is a morphism of module objects. It is unique because\n$\\iota$ is a monomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "By [def-weil-preadditive-category], composition with a zero morphism is zero (bilinearity gives $u0=u0+u0$, and cancellation gives $u0=0$, similarly on the other side). By [def-weil-pbc-additive-functor], $\\mathcal R\\otimes-$ sends the zero morphism to zero: its map on each Hom group is a homomorphism. Thus the underlying zero morphism between any two module objects is a module morphism, since both sides of its linearity equation in [sk-def-sfb-module-objects] are zero. Using the same defining linearity equation for $f$ and the kernel equation, put $a=\\gamma_M(\\mathcal R\\otimes\\iota)$ and compute\n$$fa=f\\gamma_M(\\mathcal R\\otimes\\iota)=\\gamma_N(\\mathcal R\\otimes(f\\iota))=\\gamma_N(\\mathcal R\\otimes0)=0.$$\nThe assumed kernel property, applied with $T=\\mathcal R\\otimes K$, therefore gives a unique $\\gamma_K:\\mathcal R\\otimes K\\to K$ with $\\iota\\gamma_K=\\gamma_M(\\mathcal R\\otimes\\iota)$.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "def-weil-pbc-additive-functor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+    "place": "Paragraph 1, first displayed equation and unique factorization"
+   }
+  },
+  {
+   "text": "For the unit law of [sk-def-sfb-module-objects], naturality of tensoring with $\\eta$ and of the left unitor gives\n$$\\iota\\gamma_K(\\eta\\otimes K)=\\gamma_M(\\mathcal R\\otimes\\iota)(\\eta\\otimes K)=\\gamma_M(\\eta\\otimes M)(\\mathbf1\\otimes\\iota)=\\lambda_M(\\mathbf1\\otimes\\iota)=\\iota\\lambda_K.$$\nCancel the monomorphism $\\iota$ by step 1 to obtain $\\gamma_K(\\eta\\otimes K)=\\lambda_K$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+    "place": "Paragraph 1, the unit axiom after composition with the inclusion"
+   }
+  },
+  {
+   "text": "For associativity, write $\\alpha_K=\\alpha_{\\mathcal R,\\mathcal R,K}$ and $\\alpha_M=\\alpha_{\\mathcal R,\\mathcal R,M}$. Naturality of tensoring with $\\mu$, the associativity axiom for $M$ in [sk-def-sfb-module-objects], and naturality of $\\alpha$ give\n$$\\begin{aligned}\n\\iota\\gamma_K(\\mu\\otimes K)\n&=\\gamma_M(\\mu\\otimes M)((\\mathcal R\\otimes\\mathcal R)\\otimes\\iota)\\\\\n&=\\gamma_M(\\mathcal R\\otimes\\gamma_M)\\alpha_M((\\mathcal R\\otimes\\mathcal R)\\otimes\\iota)\\\\\n&=\\gamma_M(\\mathcal R\\otimes\\gamma_M)(\\mathcal R\\otimes(\\mathcal R\\otimes\\iota))\\alpha_K\\\\\n&=\\gamma_M(\\mathcal R\\otimes(\\iota\\gamma_K))\\alpha_K\n=\\iota\\gamma_K(\\mathcal R\\otimes\\gamma_K)\\alpha_K.\n\\end{aligned}$$\nThe penultimate equality is step 2 and functoriality of $\\mathcal R\\otimes-$. Cancellation by $\\iota$ gives precisely the associativity axiom. With step 3 this makes $K$ a module object, and the equation defining $\\gamma_K$ is exactly the condition that $\\iota$ be a module morphism.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+    "place": "Paragraph 1, the associativity axiom after composition with the inclusion"
+   }
+  },
+  {
+   "text": "Let $L$ be any $\\mathcal R$-module object and $g:L\\to M$ a module morphism with $fg=0$. The assumed underlying kernel gives a unique $h:L\\to K$ with $\\iota h=g$. The defining module-map equations of [sk-def-sfb-module-objects] yield\n$$\\iota h\\gamma_L=g\\gamma_L=\\gamma_M(\\mathcal R\\otimes g)=\\gamma_M(\\mathcal R\\otimes\\iota)(\\mathcal R\\otimes h)=\\iota\\gamma_K(\\mathcal R\\otimes h).$$\nCancel $\\iota$ to see that $h$ is a module morphism. Equality and composition of module maps are those of their underlying maps, so $\\iota h=g$ holds in the module category; any competing module lift has the same underlying lift and hence equals $h$. Also $f\\iota=0$ holds in that category by step 2. These are exactly the kernel universal property there. The uniqueness of the action itself was already obtained in step 2.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+    "place": "Paragraph 2, linearity and uniqueness of the universal lift"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor",
+  "sk-def-sfb-module-objects"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-kernels.proof.md",
+  "place": "Paragraphs 1–2, expanded calculations for unit, associativity, zero morphisms and cancellation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isLimitKernelFork|namespace Mod|CreatesLimits.*forget",
+   "results": "14 hits; logged top results: Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean; source scope Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: Internal/Limits.lean creates limits of monoid objects Mon C, not modules over a fixed internal monoid; Mod.lean defines internal modules but has no kernel construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from module objects over a monoid object creates kernels",
+   "results": "8 hits; logged top results: CategoryTheory.Mod_.forget, ModuleCat.hasKernels_moduleCat, ModuleCat.kernelIsLimit, CategoryTheory.Grp.forget, ModuleCat.forget_preservesLimits, ModuleCat.forget_preservesMonomorphisms, CategoryTheory.Grp.forget₂Mon_, AddGrpCat.hasForgetToAddMonCat",
+   "date": "2026-10-16",
+   "verdict": "no match: Mod_.forget only defines a functor; ModuleCat and group-object limits do not supply this internal-module construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"kernel\"",
+   "results": "12 hits; logged top results: Lean.Kernel.Environment.const2ModIdx, ModuleCat.piIsoPi_inv_kernel_ι, ModuleCat.piIsoPi_inv_kernel_ι_apply, ModuleCat.hasCokernels_moduleCat, ModuleCat.hasKernels_moduleCat, ModuleCat.cokernelCocone, ModuleCat.kernelCone, ModuleCat.cokernelIsColimit",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern concrete ModuleCat R kernels, not internal modules in a general preadditive monoidal category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels of internal module objects over a monoid object in a preadditive monoidal category are created by the forgetful functor",
+   "results": "8 hits; logged top results: ModuleCat.hasKernels_moduleCat, FDRep.instHasKernels, ModuleCat.kernelIsLimit, ModuleCat.toKernelSubobject_arrow, ModuleCat.kernelIsoKer_hom_ker_subtype, ModuleCat.kernelIsoKer, ModuleCat.kernelIsoKer_inv_kernel_ι, ModuleCat.toKernelSubobject",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat and FDRep results require particular concrete categories and do not specialize to arbitrary internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "ModObj|isLimitKernelFork|CreatesLimit",
+   "results": "5 hits; logged top results: 25, 40, 59, 68, 71; source scope Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the single-file wrapper returned line-number tokens 25, 40, 59, 68, 71; reading all of Mathlib/CategoryTheory/Monoidal/Mod.lean shows definitions and restriction of scalars, no kernel theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.forget",
+   "results": "3 hits; logged top results: CategoryTheory.Mod.forget, CategoryTheory.Mod.forget_obj, CategoryTheory.Mod.forget_map",
+   "date": "2026-10-16",
+   "verdict": "no match: the forgetful functor and its projection identities define the notion but assert no kernel lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal monoid action descends uniquely to an equalizer and the category of actions creates limits without tensor preserving limits",
+   "results": "8 hits; logged top results: Action.instHasLimits, Action.hasLimitsOfShape, Action.instHasFiniteLimits, Action.instPreservesLimitForgetOfHasLimitComp, Action.preservesLimits_forget, Action.instPreservesLimitsOfShapeForgetOfHasLimitsOfShape, Action.ofMulActionLimitCone, Action.instReflectsLimitsForget",
+   "date": "2026-10-16",
+   "verdict": "no match: Action V G is for an external ordinary monoid acting by endomorphisms, not an internal monoid R with action R tensor M to M."
+  },
+  {
+   "tool": "grep",
+   "query": "Mod\\.forget|namespace Mod$|Mod\\.isLimit|Mod\\.creates",
+   "results": "2 hits; logged top results: Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean; source scope Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: two hits in Monoidal/Mod.lean at namespace Mod (255) and deprecated forget alias (441); no internal-module limit construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monoid object R in a monoidal category, every underlying kernel of an R-linear map carries a unique R-action and is a kernel in the category of internal R-modules",
+   "results": "8 hits; logged top results: ModuleCat.hasKernels_moduleCat, LinearMap.ker_toAddSubmonoid, ModuleCat.kernelIsLimit, ModuleCat.MonModuleEquivalenceAlgebra.inverseObj, ModuleCat.mono_iff_ker_eq_bot, TopModuleCat.instMonoKerι, ModuleCat.toKernelSubobject, ModuleCat.kernelIsoKer",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.kernelIsLimit concerns concrete ring modules; MonModuleEquivalenceAlgebra.inverseObj builds a monoid object from an algebra and does not lift kernels of internal modules."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -53,5 +168,20 @@
   "CategoryTheory.Mod.isLimitKernelFork"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-kernels",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint kernel proof into five elementary steps: underlying kernel cancellation, unique action factorization and zero module maps, unit, associativity with explicit naturality, and the module kernel universal property. Reused the existing preadditive/additive-functor definitions and module-object definition. All nine real Mathlib searches are recorded; no match, no attachment and no new nodes. Statement unchanged. New blueprint import lacks chapter/unit records; the source unit and chapter were read instead and no maintainer metadata was changed.",
+  "blueprint": "Realizes the kernel assertion of sk-prop-sfb-module-category Part 1, following lem-sfb-modobj-kernels.proof.md paragraphs 1–2. Steps 1–4 expand paragraph 1 and step 5 expands paragraph 2. No other blueprint node states the same result under exactly these hypotheses."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-3da3d3de9",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-3da3d3de9 (reviewer sub-agent of L); spot-checked: Reviewed the item, all five proof steps, cited DAG statements, exact blueprint/unit route, source text, Mathlib searches, edge cases, hypotheses, and delivery requirements. The statement and proof are correct, complete, non-circular, and require no repairs or tool-use exceptions. Wrote review.md."
+ }
 }
