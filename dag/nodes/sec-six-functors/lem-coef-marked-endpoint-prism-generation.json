@@ -29,11 +29,110 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use the following direct interpretation of marked pushouts and unions. Form the underlying simplicial pushout degreewise, and mark precisely the images of the marked edges from its two inputs. A map out of it preserves markings exactly when the two given maps do, so this is the marked pushout by [def-weil-pbc-category-colimit]. For an increasing chain, take the degreewise union and the union of its markings; a map on that union is simplicial and preserves markings exactly when all its restrictions do. These observations also apply to a coproduct, using disjoint unions. For a minimally marked simplicial set $Z$, the marked edges of $D\\times Z^\\flat$, where $D=(\\Delta^1)^\\sharp$, are precisely $(a,s_0z)$ with $z\\in Z_0$ and $a$ an edge of $\\Delta^1$. Thus all degreewise gluing assertions below can be checked together with their markings by these rules. Let $C_\\partial=\\langle I\\cup P_\\partial\\rangle$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; degreewise marked colimit conventions, expanded from Definition 3.1.0.1"
+   }
+  },
+  {
+   "text": "For a monomorphism $h:A\\hookrightarrow B$, identify $A$ with its image and apply [lem-coef-infinity-monomorphism-boundary-cells] to obtain $A=Z_0\\subseteq Z_1\\subseteq\\cdots$ with union $B$, adding the missing nondegenerate $m$-simplices at stage $m$. Inside $D\\times B^\\flat$ set $T_m=(D\\times Z_m^\\flat)\\cup(\\{1\\}^\\sharp\\times B^\\flat)$, with the product-induced markings. Then $T_0$ is the source of $P(h)$ and their union is the target. The map $T_m\\to T_{m+1}$ is a pushout of the coproduct of copies of $P(\\partial\\Delta^m\\hookrightarrow\\Delta^m)$ indexed by those missing simplices: on each attached simplex, its boundary lies in $Z_m$, and its terminal copy is already in $\\{1\\}\\times B$. To check the pushout, compatible maps on $T_m$ and the new prisms agree on each boundary prism and terminal copy; the boundary-cell pushout gives a unique map in each degree, and the rules in Step 1 check simplicial operators and marked edges. In particular when $m=0$, each newly introduced vertical marked edge is supplied by that copy of $P(\\varnothing\\hookrightarrow\\Delta^0)$. Well-order each small set of cells and attach its prisms one at a time; the successor square is the same pushout and limit stages are unions. Concatenate the dimension stages, obtaining a small ordinal-indexed composite. Hence $P(h)\\in\\langle P_\\partial\\rangle\\subseteq C_\\partial$. Since every boundary inclusion is a monomorphism, this proves $\\langle P_\\partial\\rangle=\\langle P_{\\mathrm{mono}}\\rangle$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; simplex-by-simplex reduction of arbitrary prisms to boundary prisms; relative cells supplied by the cited node"
+   }
+  },
+  {
+   "text": "For each $m\\geq0$ apply [lem-coef-infinity-right-prism-boundary], retaining its subsets $X_q$ and its maps $\\sigma_q$. Mark each $X_q$ by restriction from $D\\times(\\Delta^m)^\\flat$. The initial marking is exactly the source marking of $P(\\partial\\Delta^m\\hookrightarrow\\Delta^m)$, by Step 1. On $\\sigma_q$ the only nondegenerate marked edge is the edge between positions $q$ and $q+1$, since these and only these vertices have equal second coordinate. If $q<m$, the attaching horn has index $q+1$ strictly between $0$ and $m+1$. Its minimally marked inclusion belongs to $I$. Its pushout along its map into marked $X_q$ has the desired target marking: $m\\geq1$, and the vertical edge over vertex $q$ is already marked in $D\\times\\partial\\Delta^m\\subseteq X_0$. All other target marked edges likewise already belong to $X_0$. If $q=m$, use the generator of $F$ in dimension $m+1$, whose designated marked edge is exactly $[m,m+1]$. Its horn maps to marked $X_m$, and its pushout has exactly the induced marking on $X_{m+1}$. Indeed the only possible new nondegenerate marked edge is this designated edge. The underlying squares are precisely those asserted by the cited prism-filtration statement; Step 1 proves the marked pushout assertions. For $m=0$ there is just this last attachment, namely $\\{1\\}^\\sharp\\to D$. Thus every boundary prism is a finite composite of pushouts of maps of $I\\cup F$, and $P_\\partial\\subseteq\\langle I\\cup F\\rangle$.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; boundary prisms from horns, using the explicit right-prism filtration and checking all markings"
+   }
+  },
+  {
+   "text": "It remains to put every generator of $F$ in $C_\\partial$. In dimension $n=1$, the horn is $\\Lambda_1^1=\\{1\\}$ by the horn formula of [def-cbc-enhanced-diagrams-cones], and its target marking is full. This generator is precisely $P(\\varnothing\\hookrightarrow\\Delta^0)$, so it already belongs to $P_\\partial$. In the remaining steps assume $n\\geq2$. Write $H=\\Lambda_n^n$, $B=\\Delta^n$, and let $M=(B,E)$ have just the final edge marked in addition to degeneracies. Write $H_E$ for the induced marking on $H$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; dimension-one case separated before the marked retraction argument"
+   }
+  },
+  {
+   "text": "The final edge $[n-1,n]$ belongs to $H$ for $n\\geq2$: it omits vertex $0\\ne n$, so the horn definition of [def-cbc-enhanced-diagrams-cones] includes it. Put $U=(D\\times H_E)\\cup(\\{1\\}^\\sharp\\times M)$. The marked inclusion $g:U\\to D\\times M$ is a pushout of $P(H\\hookrightarrow B)$. Its underlying domain is unchanged. Every extra target marking, compared with $D\\times B^\\flat$, has second coordinate $[n-1,n]$ and hence already lies in $D\\times H_E\\subseteq U$; all the extra markings are therefore supplied by the map from the old domain into $U$. Step 1 and the colimit universal property [def-weil-pbc-category-colimit] identify this square as the marked pushout. Step 2 consequently puts $g$ in $C_\\partial$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; pushout which adds the final-edge markings, valid for n at least two"
+   }
+  },
+  {
+   "text": "Define $j:M\\to D\\times M$ by $j(a)=(0,a)$ on vertices. Define $r:D\\times M\\to M$ on vertices by $r(t,a)=n$ if $(t,a)=(1,n-1)$, and $r(t,a)=a$ otherwise. The vertex map $r$ is monotone: when a comparable pair involves $(1,n-1)$ as its first member its second member has $t=1$ and $a\\geq n-1$, so both images are $n$; when that point is the second member, the first image is at most $n$; all other pairs retain the order of their second coordinates. Thus $r$ and $j$ define simplicial maps by the weak-chain description of the simplices in [def-cbc-enhanced-diagrams-cones], and $rj=1$. They preserve markings. The map $j$ sends the final edge to its horizontal copy. A marked edge of $D\\times M$ has either constant second coordinate, whose $r$-image is degenerate except possibly the final edge over $a=n-1$, or second coordinate $[n-1,n]$, whose $r$-image is that final edge or a degeneracy. All these images are marked in $M$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; explicit section and monotone retraction, with marked-edge verification"
+   }
+  },
+  {
+   "text": "The map $j$ restricts to $H_E\\to U$. The map $r$ restricts to $U\\to H_E$: on $\\{1\\}\\times B$ its image omits $n-1$; on a simplex of $D\\times H$, the second-coordinate simplex omits some vertex $b<n$. If $b\\ne n-1$, the formula for $r$ still omits $b$; if $b=n-1$, the exceptional vertex is absent and $r$ still omits $n-1$. Hence the image lies in the horn in every degree by [def-cbc-enhanced-diagrams-cones], not just on vertices. Both restrictions preserve markings by Step 6 and the induced marking on $H_E$. Together with $rj=1$, the restrictions and target maps form commutative section and retraction squares exhibiting $H_E\\to M$ as an arrow-category retract of $g$. Closure under retracts proves $F\\subseteq C_\\partial$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; restriction to the marked horn and the arrow-category retract identities"
+   }
+  },
+  {
+   "text": "Step 3 gives $\\langle I\\cup P_\\partial\\rangle\\subseteq\\langle I\\cup F\\rangle$, and Steps 4-7 give the reverse inclusion. Step 2 and the containment $P_\\partial\\subseteq P_{\\mathrm{mono}}$ give $\\langle I\\cup P_\\partial\\rangle=\\langle I\\cup P_{\\mathrm{mono}}\\rangle$. Combining these proves the three asserted equalities. Finally $P(h)$ belongs to the third generating family for every small monomorphism $h$, so it belongs to the first saturated class as claimed. All cell sets and the countable concatenation of their small well-orderings remain small in the specified universe.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.5; combine the two generator containments and the arbitrary-monomorphism reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-right-prism-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.1.1.5 (read online, archival copy WANTED); expanded marked colimit, relative cell, filtration and retraction checks, using the two existing DAG combinatorial inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +189,45 @@
    "results": "{\"t\": \"2026-10-16T18:48:02Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|marked.*(anodyne|simplicial)|endpoint.*prism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reading searches found only unmarked horn/boundary generators, KanComplex, Quasicategory and strict Segal notions. CategoryWithFibrations.lean:38-55,73-105 and KanComplex.lean:37-51 were read; no marked category or endpoint-prism comparison occurs. Loogle and source grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|MarkedSimplicial|marked.{0,30}(horn|anodyne|prism)",
+   "results": "{\"t\": \"2026-10-16T20:08:10Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|marked.{0,30}(horn|anodyne|prism)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are unmarked horns, boundary generators, standard simplex terminality or cylinder objects; Loogle and marked source grep returned zero. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-60, Horn.lean:42-67 and Skeleton.lean:428-446. None gives marked simplicial maps or this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial sets terminal endpoint cylinder inclusions and final horn generators",
+   "results": "{\"t\": \"2026-10-16T20:08:11Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial sets terminal endpoint cylinder inclusions and final horn generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isTerminalObj₀\", \"SSet.horn\", \"SSet.horn.faceι\", \"SSet.horn.ι\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"SimplexCategory.isTerminalZero\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\"], \"digest\": \"5e536d64e5f95c9d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are unmarked horns, boundary generators, standard simplex terminality or cylinder objects; Loogle and marked source grep returned zero. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-60, Horn.lean:42-67 and Skeleton.lean:428-446. None gives marked simplicial maps or this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"marked\", \"horn\"",
+   "results": "{\"t\": \"2026-10-16T20:08:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"marked\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are unmarked horns, boundary generators, standard simplex terminality or cylinder objects; Loogle and marked source grep returned zero. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-60, Horn.lean:42-67 and Skeleton.lean:428-446. None gives marked simplicial maps or this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial final horns and inner horns generate the same weakly saturated class as marked endpoint boundary prisms",
+   "results": "{\"t\": \"2026-10-16T20:08:12Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial final horns and inner horns generate the same weakly saturated class as marked endpoint boundary prisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn_eq_iSup\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn₃₂.exists_desc\"], \"digest\": \"ed4ac425b1ef7473\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are unmarked horns, boundary generators, standard simplex terminality or cylinder objects; Loogle and marked source grep returned zero. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-60, Horn.lean:42-67 and Skeleton.lean:428-446. None gives marked simplicial maps or this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak saturation generated by marked terminal horn inclusions compared with cylinder boundary inclusions in marked simplicial sets",
+   "results": "{\"t\": \"2026-10-16T20:08:45Z\", \"tool\": \"leanfinder\", \"query\": \"Weak saturation generated by marked terminal horn inclusions compared with cylinder boundary inclusions in marked simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.horn.ι_ι\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₁.ι₃_desc\"], \"digest\": \"2e37e854639d502f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are unmarked horns, boundary generators, standard simplex terminality or cylinder objects; Loogle and marked source grep returned zero. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-60, Horn.lean:42-67 and Skeleton.lean:428-446. None gives marked simplicial maps or this comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-anodyne-lifting-calculus",
@@ -101,5 +235,20 @@
   "group": "Q48"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-endpoint-prism-generation",
+  "worker": "stage1",
+  "summary": "The statement is unchanged. Reused the relative boundary-cell Mathlib leaf and the explicit right-prism filtration, with all marked pushouts checked. The final-horn retraction is written as actual marked simplicial maps with restrictions in every degree; its n=1 case is separated. No new nodes or Lean changes. Existing source searches and new msearch queries find no marked generator comparison in Mathlib.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 uses finite coefficient adjunction and inverse limits; this technical branch supplies the endpoint-prism generator comparison within the marked-point Cartesian model supporting coherent finite-adjunction-diagram realization. Steps 1-3 realize the boundary and general prism reductions of auxiliary HTT Proposition 3.1.1.5; Steps 4-7 realize its final-horn marked retraction; Step 8 assembles the exact marked equality required by lem-coef-marked-anodyne-lifting-calculus."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-4df3f29c7",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-4df3f29c7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It has one commit containing the report and the item; it creates no nodes, and the statement is unchanged. The statement matches HTT Prop 3.1.1.5 as I know it: classes (1), (2), (2'), (2'') with endpoint {1} and sharp/flat markings. HTT is not in literature/ and I could not open it here, so this check is from memory; the delivery records a WANTED line and proof_origin=agent. The parent's Step 4 needs exactly I=(i), F=(ii), the equality of the three classes and the final clause, and the item supplies all of them. Step 2 cites lem-coef-infinity-monomorphism-boundary-cells, a Mathlib leaf (SSet.relativeCellComplexOfMono); the T_m pushouts are correct, and the only new marked edges are the vertical edges at m=0, which P(empty->Delta^0) supplies. Step 3 cites lem-coef-infinity-right-prism-boundary; I checked its filtration at m=0 and m=1. On sigma_q the only marked nondegenerate edge is [q,q+1]. For m>=1 every vertical edge already lies in X_0, so the pushouts of the inner horns (q<m) and of the F generator (q=m) carry exactly the induced markings. Step 4: for n=1 the F generator is {1}^sharp->(Delta^1)^sharp = P(empty->Delta^0). Step 5: for n>=2 the final edge omits vertex 0 and so lies in the horn (checked n=2), so g is a marked pushout of P(H->B). The report's n=1 source-error remark is correct. Steps 6-7: r is monotone (checked the cases at (1,n-1)), rj=1, every marked edge goes to a marked edge, and r sends U into the horn in every degree; the retract squares commute. Edge cases checked: m=0, n=1, n=2, and empty or identity monomorphisms. Both non-elementary inputs belong to the item's unit sk-prop-sf-biduality-general, so no tool_uses are needed; no SGA source is used. An rg search of the DAG for 3.1.1.5, marked final horns and endpoint prisms found no duplicate: right-anodyne-product, marked-triangle-cancellation, marked-initial-vertex and marked-cone-generator-calculations state different things. Minor, not this delivery's fault: the node lacks a lean_audit field, like its same-run neighbours. No fixes were written."
+ }
 }
