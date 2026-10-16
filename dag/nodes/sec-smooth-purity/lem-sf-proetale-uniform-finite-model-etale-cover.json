@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-proetale-uniform-finite-model-etale-cover",
+ "kind": "statement",
+ "title": "Etale trivializations for one fixed finite constant model",
+ "statement": "Let X be a scheme, Λ a finite commutative ring, M a fixed finite Λ-module, and F a pro-etale sheaf of Λ-modules. Suppose a scheme pro-etale covering W_i → X [def-weil-pbc-proetale-site] trivializes the inverse image of F with the same constant model M on every member [def-weil-proetale-inverse-image, def-weil-pbc-constant-sheaf]. Then there is an etale covering of X indexed in the universe of X, on each member of which F has constant module model M. The hypothesis imposes a single fixed model; it contains no geometric-stalk or comparison-origin assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant; Etale trivializations for one fixed finite constant model"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Finite M over finite Λ is finitely presented: present M by generators indexed by its finite underlying set; the kernel of the map from that finite free module is finite, so finitely generated.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form the fixed-coefficient Isom sheaf from constant M to F, using isomorphisms on the slice over each object and pullback for restriction. Glue the local linear maps and their inverses sectionwise. Over each trivializing W_i it is the constant set sheaf Aut(M). For this last assertion apply Tag 093T(2), transporting its ringed-module construction to fixed coefficients; the finite-presentation proof expresses Hom by kernels of finite powers and inverse pairs by finite limits. The required fixed-coefficient and universe transport is part of this step, not an already supplied Lean equivalence.",
+   "uses": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Isom sheaf is locally constant, hence locally classical. The given trivializations supply pro-etale local sections. Apply the locally-classical etale-section theorem to obtain etale local sections, each giving the desired module-sheaf isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose, for every point of X, an etale cover member and a point above it. The resulting universe-small family still covers and carries the same model. Empty X uses the empty family; zero modules and the zero ring require no modification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-site-constant-module-isom-sheaf",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof; realized using the existing fixed-coefficient comparison adjunction, slice equivalences and geometric fibers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proetale sheaves with a fixed finite constant module model have etale local trivializations",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, ModuleCat.tildeInModuleCat, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.IsConstant.casesOn, AlgebraicGeometry.Scheme.etalePretopology, CompHausLike.LocallyConstant.functor_obj_val, CategoryTheory.Sheaf.IsConstant.rec",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\", \"constantSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "Isom.*[Ss]heaf|[Ss]heaf.*Isom",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleLisseOrigin",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Its lisse input: Tag 099Y, proof of lemma-compare-locally-constant, as split in lem-sf-proetale-locally-constant-origin",
+   "via": [
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleUniformModelEtaleCover",
+  "file": "lean/Sheaf/Paper/ProEtaleUniformModelEtaleCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_cover_of_proetale_uniform_model",
+  "statement": "theorem etale_cover_of_proetale_uniform_model\n    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))\n    (M : ModuleCat.{u + 1} Λ) [Finite M]\n    (hF : ∃ (I : Type (u + 1)) (W : I → Scheme.{u}) (g : ∀ i, W i ⟶ X),\n      Presieve.ofArrows W g ∈ proetalePrecoverage X ∧\n        ∀ i, Nonempty ((AlgebraicGeometry.ProEtale.upperStar\n          (ModuleCat.{u + 1} Λ) (g i)).obj F ≅\n            (constantSheaf (ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,\n      Nonempty ((AlgebraicGeometry.ProEtale.upperStar\n        (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj F ≅\n          (constantSheaf (ProEt.topology (𝒰.X i)) (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

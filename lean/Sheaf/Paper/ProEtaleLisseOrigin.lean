@@ -10,17 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.Paper.ProEtaleLisseFiniteModels
+import Sheaf.Paper.ProEtaleLisseFiniteModelsFromLisse
+import Sheaf.Paper.ProEtaleOriginFromFiniteModels
+import Sheaf.Paper.ProEtaleFiniteModelStalks
+import Sheaf.Paper.ProEtaleFiniteModelLocalConstancy
 
 /-!
 # Lisse pro-etale module sheaves have etale origin
@@ -57,38 +52,31 @@ Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant; Bhatt--Scholze
 Corollary 5.1.5 (blueprint: lem-sf-proetale-locally-constant-origin).
 
 Proof:
-1. The comparison inverse image sends constant modules to constant modules, by the
-constant-presheaf unit and sheafification (def-weil-pbc-constant-sheaf,
-def-weil-pbc-sheafification, def-weil-pbc-site-comparison-morphism). This commutes with
-restriction (lem-weil-pbc-comparison-pullback).
-2. For an etale lisse sheaf choose a cover with finite constant module values
-(lem-weil-pbc-finite-locally-constant-module-values). This is also a pro-etale cover.
-Step 1 gives local constancy after inverse image. Lift each geometric point to a cover
-member. Localization and the constant stalk computation give finite stalks
-(lem-weil-proetale-weakly-etale-localization, lem-weil-proetale-constant-sheaf-stalk).
-3. Conversely, take a pro-etale trivializing cover. At a geometric point of every
-nonempty cover member its constant model is the finite stalk of the given sheaf.
-Discard empty members. Every model is thus finite and, over the finite ring, finitely
-presented (def-weil-proetale-geometric-stalk, lem-weil-proetale-constant-sheaf-stalk).
-4. Distinct module types have empty double overlaps, by comparing their stalks.
-The opens selecting one type agree on overlaps and descend by fpqc open descent
-(lem-weil-pbc-open-subscheme-fpqc-descent, def-weil-pbc-proetale-site).
-They give a disjoint open cover of X on each of which all models are one module M.
-5. On each such open the sheaf of module-sheaf isomorphisms from the constant M to F
-is a sheaf: compatible maps and their inverses glue sectionwise, with linearity and
-naturality checked locally. It is locally the constant Aut(M) sheaf by finite
-presentation (lem-sf-site-constant-module-isom-sheaf,
-lem-weil-pbc-site-constant-restriction). Thus it is locally constant as a set sheaf.
-6. Its sections on the pro-etale trivializing cover descend to sections on an etale
-cover (lem-weil-pbc-proetale-locally-classical-etale-cover). Each section is a module
-trivialization. Combining the disjoint opens gives an etale cover with finite models.
-7. Put G = comparisonLowerStar F. On the etale cover the evaluation formula, step 1,
-and the invertible comparison unit identify G with the constant finite models
-(prop-weil-pbc-site-comparison-finite-level). Hence G is lisse. The counit from its
-inverse image to F restricts to an isomorphism by the triangle identity and comparison
-with restriction (lem-weil-pbc-comparison-pullback). Local inverses glue, giving the
-required module-sheaf isomorphism. For the empty scheme take G = 0; the empty cover
-and all stalk conditions are vacuous. -/
+1. Choose finite etale constant models using finite_locally_constant_module_values_iff.
+The helper comparison_finite_models_of_etale_finite_values transports them through
+comparison, which commutes with restriction and sends constants to constants.
+2. The existing finiteModels_over helper gives fixed-coefficient local constancy.
+The existing finite_geometricStalk_of_finite_models gives finite geometric stalks.
+This proves the forward implication.
+3. Conversely, finite_models_of_fixed_lisse discards empty covering members and
+identifies each remaining model with a finite geometric stalk. Removing empty members
+preserves quasi-compactness by retaining a finite affine refinement over compact opens.
+4. The helper proEtale_model_type_opens descends model-type loci by fpqc open descent:
+models on a nonempty double overlap have the same geometric fiber and are isomorphic.
+On each type open the original covering therefore has one fixed finite model.
+5. The remaining theorem etale_cover_of_proetale_uniform_model uses the Isom sheaf
+from that model to F. Finite presentation identifies it locally with constant Aut(M).
+Locally-classical comparison descends its sections to an etale trivializing cover.
+The helper etale_cover_of_proetale_finite_models combines the type opens and these
+covers; choosing one type open through each point makes the resulting index small.
+6. The helper etale_origin_of_finite_models constructs G = comparisonLowerStar F.
+Over the etale cover, the comparison unit and the constant-sheaf comparison identify
+G with the finite constant models, so the finite-values characterization makes G lisse.
+7. The local counits are invertible because the models are in the comparison image.
+The mate calculation comparison_counit_restriction_isIso identifies their invertibility
+with that of the restricted global counit. Conservativity on the covering proves the
+global counit invertible, giving the required isomorphism. Empty schemes, empty covers,
+zero modules and zero coefficient rings are included throughout. -/
 theorem proEtale_lisse_origin (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] :
     (∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
@@ -100,6 +88,24 @@ theorem proEtale_lisse_origin (X : Scheme.{u}) (Λ : Type (u + 1))
         ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
           IsFiniteLocallyConstantSheaf G ∧
             Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj G ≅ F)) := by
-  sorry
+  constructor
+  · intro G hG
+    let : IsFiniteLocallyConstantSheaf G := hG
+    obtain ⟨d, hd⟩ := (finite_locally_constant_module_values_iff G).1.mpr hG
+    obtain ⟨I, W, g, hg, hmodels⟩ :=
+      comparison_finite_models_of_etale_finite_values X Λ G ⟨d, hd⟩
+    refine ⟨?_, ?_⟩
+    · obtain ⟨I, U, f, hf, h⟩ :=
+        AlgebraicGeometry.ProEtale.finiteModels_over Λ _
+          ⟨I, W, g, hg, hmodels⟩
+      exact ⟨I, U, f, hf, fun i ↦ by
+        obtain ⟨M, _, he⟩ := h i
+        exact ⟨M, he⟩⟩
+    · intro Ω hΩ hΩalg x
+      exact AlgebraicGeometry.ProEtale.finite_geometricStalk_of_finite_models
+        Λ _ ⟨I, W, g, hg, hmodels⟩ Ω x
+  · intro F hF
+    obtain ⟨I, W, g, hg, hmodels⟩ := finite_models_of_fixed_lisse X Λ F hF
+    exact etale_origin_of_finite_models X Λ F ⟨I, W, g, hg, hmodels⟩
 
 end AlgebraicGeometry.Scheme

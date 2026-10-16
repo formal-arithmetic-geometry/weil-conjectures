@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-proetale-lisse-finite-models",
+ "kind": "statement",
+ "title": "Finite geometric stalks make nonempty local models finite",
+ "statement": "Let X be a scheme and Λ a finite commutative ring. Let F be a fixed-coefficient pro-etale module sheaf which is locally constant [def-weil-proetale-locally-constant-sheaf] and whose fixed-module geometric stalk at every algebraically closed field-valued point of X is finite [def-weil-proetale-geometric-stalk]. Then there is a scheme pro-etale covering W_i → X [def-weil-pbc-proetale-site] on which the inverse image of F is the constant sheaf of a finite module M_i [def-weil-proetale-inverse-image, def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant; Finite geometric stalks make nonempty local models finite"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Convert the site covering to a scheme covering. Discard empty members. Quasi-compactness remains true: take a finite affine refinement over each compact open and discard its empty members.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each remaining member choose an algebraic closure of a residue field. Its geometric fiber identifies the local constant model with the global geometric stalk, using sheafFiberOverIso and sheafFiberConstantSheafIso. Thus the model is finite.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the slice constant-model isomorphism through the slice sheaf equivalence and upperStarIsoLocalizationRestriction to obtain the stated scheme inverse-image model.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof; realized using the existing fixed-coefficient comparison adjunction, slice equivalences and geometric fibers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant proetale module sheaf with finite geometric stalks admits a covering by finite constant models",
+   "results": "8 hits: Condensed.lanSheafProfinite, CondensedSet.LocallyConstant.functorFullyFaithful, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondensed.lanLightCondSet, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CondensedMod.isDiscrete_tfae, Profinite.NobelingProof.Nobeling_aux, CompHausLike.LocallyConstant.functor_obj_val",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberConstantSheafIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*constantSheaf|constantSheaf.*comparison|finite.*geometricStalk",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleLisseOrigin",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Its lisse input: Tag 099Y, proof of lemma-compare-locally-constant, as split in lem-sf-proetale-locally-constant-origin",
+   "via": [
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleLisseFiniteModelsFromLisse",
+  "file": "lean/Sheaf/Paper/ProEtaleLisseFiniteModelsFromLisse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_models_of_fixed_lisse",
+  "statement": "theorem finite_models_of_fixed_lisse\n    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))\n    (hF : IsLocallyConstantProEtaleFixedModuleSheaf X Λ F ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n        (x : Spec (.of Ω) ⟶ X),\n        Finite (proEtaleGeometricFixedModuleStalk x Λ F)) :\n    ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),\n      Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧\n        ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧\n          Nonempty (((AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} Λ) (g i)).obj F) ≅\n            (constantSheaf (Scheme.ProEt.topology (W i))\n              (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

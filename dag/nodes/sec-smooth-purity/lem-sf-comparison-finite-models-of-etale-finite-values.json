@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-comparison-finite-models-of-etale-finite-values",
+ "kind": "statement",
+ "title": "Comparison transports finite etale constant models",
+ "statement": "Let X be a scheme and Λ a finite commutative ring. Suppose an etale sheaf G of Λ-modules has an etale locally constant datum whose constant module models are finite [lem-weil-pbc-finite-locally-constant-module-values]. Then its comparison inverse image [def-weil-pbc-site-comparison-morphism] has a scheme pro-etale covering W_i → X [def-weil-pbc-proetale-site] such that the inverse image on each W_i [def-weil-proetale-inverse-image] is the constant sheaf of a finite Λ-module M_i [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof of lemma-compare-locally-constant; Comparison transports finite etale constant models"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given slice trivializations through Etale.overSheafEquiv; constant sheaves commute with this slice equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the cover index universe and regard the etale covering as a pro-etale covering.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already-proved source comparisonUpperStarCompUpperStarIso. Identify comparison of a constant with the constant via uniqueness of left adjoints to global sections. Compose these isomorphisms with the given trivializations.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, proof; realized using the existing fixed-coefficient comparison adjunction, slice equivalences and geometric fibers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of etale sheaves of modules sends finite constant local models to finite constant proetale local models",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, AlgebraicGeometry.Scheme.Modules.inv_app, CategoryTheory.Sheaf.mem_essImage_of_isConstant, SheafOfModules.pullbackObjFreeIso, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, Condensed.locallyConstantIsoFinYoneda",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_counit_app_of_iso\"",
+   "results": "1 hits: CategoryTheory.Adjunction.isIso_counit_app_of_iso",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*constantSheaf|constantSheaf.*comparison|finite.*geometricStalk",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; existing library declarations and the listed Mathlib transport lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleLisseOrigin",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Its lisse input: Tag 099Y, proof of lemma-compare-locally-constant, as split in lem-sf-proetale-locally-constant-origin",
+   "via": [
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleLisseFiniteModels",
+  "file": "lean/Sheaf/Paper/ProEtaleLisseFiniteModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.comparison_finite_models_of_etale_finite_values",
+  "statement": "theorem comparison_finite_models_of_etale_finite_values\n    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hG : ∃ d : LocallyConstantDatum G, ∀ i : d.cover.I₀,\n      ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧\n        Nonempty (G.over (d.cover.etalePrecoverageToEtale i) ≅\n          (constantSheaf (X.smallEtaleTopology.over\n            (d.cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).obj M)) :\n    ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),\n      Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧\n        ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧\n          Nonempty (((AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} Λ) (g i)).obj\n            ((AlgebraicGeometry.ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj G)) ≅\n            (constantSheaf (Scheme.ProEt.topology (W i))\n              (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
