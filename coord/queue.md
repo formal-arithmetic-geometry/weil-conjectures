@@ -16,7 +16,7 @@
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | proof |
 | `WeilConjectures.PoincareDuality.Verdier` | 1 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek` | 1 | 3 | proof |
-| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 1 | proof |
+| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition` | 2 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 | proof |
