@@ -138,5 +138,23 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7d87367bb (reviewer sub-agent of L); spot-checked: Read the complete definition, all cited node statements, source passages, and unit/chapter route. Formula agrees with Stacks 0F1E; unbounded ordinary étale coefficients and adjunction directions check out. Repaired one composition-module citation using the existing module-linearity lemma. Corrected whole JSON is under fixes/dag/nodes; concrete checks are in review.md. No new nodes, cycles, target weakening, or major gaps found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary",
+  "declaration": "AlgebraicGeometry.Etale.kunnethMap",
+  "branch": "slopmaster2",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing upstream declaration is the same canonical Künneth mate, generalized to a monoidal Grothendieck abelian coefficient category and taking the two commutativity equalities explicitly. Specializing A to ModuleCat.{u + 1} Λ and taking c := p ≫ f, hp := rfl, hq := sq.toCommSq.w.symm gives exactly the node's source, target, and map for every ChosenCartesianSquare. Its docstring explicitly cites blueprint def-kun-kunneth-map; no duplicate Sheaf definition is delivered. The composition monoidality identity leftDerivedUpperStarTensorComparison_comp shows that its expanded monoidal comparison through f and p is the node's comparison for c. The source and canonical formula were checked against Stacks Tag 0F1E.",
+  "statement": "def kunnethMap (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)\n    (hp : p ≫ f = c) (hq : q ≫ g = c)\n    (E : DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :\n    ((-⊗ᴸ-(S)[A]).obj (R((f)_*[A]).obj E)).obj (R((g)_*[A]).obj K) ⟶\n      R((c)_*[A]).obj (((-⊗ᴸ-(W)[A]).obj (L((p)^*[A]).obj E)).obj (L((q)^*[A]).obj K))"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b7ce36073",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the canonical map, all 18 dependencies, source, universes, edge cases, report sections, and verbatim signature. Specialization passed scompile.py server confirmation; no fixes needed."
  }
 }

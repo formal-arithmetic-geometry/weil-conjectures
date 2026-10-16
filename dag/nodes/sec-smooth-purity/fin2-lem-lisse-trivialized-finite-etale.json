@@ -217,5 +217,24 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a0cd0a5a9 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, source passages and unit/chapter route in full. All five steps are sound, including linear monodromy, pointed-cover pullback, module constancy and surjectivity. No new nodes, cycles, duplicate obligations or repairs. Target coefficient categories remain distinct. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseTrivializedFiniteEtale",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_surjective_trivializing_lisse",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseTrivializedFiniteEtale.lean",
+  "statement": "theorem exists_finite_etale_surjective_trivializing_lisse (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hL : Scheme.IsFiniteLocallyConstantSheaf L) : ∃ (P : Scheme.{u}) (p : P ⟶ X), IsFinite p ∧ Etale p ∧ Surjective p ∧ (∀ (x : P), ∃ U : P.Opens, (U : Set P) = connectedComponent x ∧ ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj L) ≅ (constantSheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ∧ (ConnectedSpace X → ∃ (M : ModuleCat.{u + 1} Λ), Finite M ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) p).obj L ≅ (constantSheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Lisse uses the recorded transitive dependency Scheme.IsFiniteLocallyConstantSheaf at ModuleCat Λ. Components are encoded by opens with underlying set connectedComponent x. The connected-base clause uses one constant module on all of P."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5ad1012a5",
+  "group": "N2",
+  "result": "pass",
+  "note": "Signature, dependencies, source proof steps, edge cases, docstrings, report sections, and scompile.py sandbox/library compiles all checked; no issues found."
  }
 }

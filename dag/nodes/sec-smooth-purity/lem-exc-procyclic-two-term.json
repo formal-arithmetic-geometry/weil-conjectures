@@ -320,5 +320,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-8173e15fa (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All nine steps check, including periodic wraparound, effacement, and the explicit comparison map’s connecting-map compatibility. Small cases and dependency-cycle checks passed; no duplicate or repair needed. Accepted generic tool uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
+  "declaration": "Rep.exists_procyclic_twoTerm_computation",
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicTwoTerm.lean",
+  "statement": "theorem exists_procyclic_twoTerm_computation (l : ℕ) [Fact l.Prime] (s : ℕ) (A : Type u) [Ring A] [Finite A] (hA : (l ^ s : ℕ) • (1 : A) = 0) : ∃ K : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]) ⥤ CochainComplex (ModuleCat.{w} A) ℕ, ∃ (e₀ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 0 ≃ₗ[A] M.obj.V) (e₁ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 1 ≃ₗ[A] M.obj.V), (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 0), e₀ N (((K.map f).f 0).hom x) = f.hom.hom (e₀ M x)) ∧ (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 1), e₁ N (((K.map f).f 1).hom x) = f.hom.hom (e₁ M x)) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (x : (K.obj M).X 0), e₁ M (((K.obj M).d 0 1).hom x) = M.obj.ρ (Multiplicative.ofAdd (1 : ℤ_[l])) (e₀ M x) - e₀ M x) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (n : ℕ), 2 ≤ n → IsZero ((K.obj M).X n)) ∧ ∀ q : ℕ, Nonempty (discreteContinuousCohomologyFunctor.{0, u, w} (Multiplicative ℤ_[l]) A q ≅ K ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{w} A) (ComplexShape.up ℕ) q)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a57fe3bf0",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, source/report sections, and universe details checked; scompile.py local/server compilation passed cleanly."
  }
 }

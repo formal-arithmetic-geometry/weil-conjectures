@@ -145,5 +145,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-50430eb9d (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass: Tags 095U and 0GL0, the comparison morphism orientation, finite-level exactness, hypotheses, coefficient category, edge cases, route, duplicates, and searches were checked. The new node’s `created` record is incomplete: it has only `item`, omitting required `by`, `date`, and `group`. A corrected full DAG JSON is in `fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-proper-direct-image-finiteness.json`. No node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperDirectImageFiniteness",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleDirectImageFiniteness_of_isProper",
+  "file": "lean/Sheaf/Paper/ProperDirectImageFiniteness.lean",
+  "statement": "theorem constructibleDirectImageFiniteness_of_isProper (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.FG) (htorsion : IsAddTorsion (A ⧸ I)) [hfinite : ∀ m : ℕ+, Finite (A ⧸ I ^ (m : ℕ))] (hperfect : ∀ m : ℕ+, @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) ((@DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _) 0).obj (ModuleCat.of A (A ⧸ I ^ (m : ℕ))))) (n : ℕ+) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (hXdim : ∃ k : ℕ, topologicalKrullDim X ≤ (k : WithBot ℕ∞)) (hYdim : ∃ k : ℕ, topologicalKrullDim Y ≤ (k : WithBot ℕ∞)) (hXorders : ∀ (a : A ⧸ I ^ (n : ℕ)) (x : X), IsUnit (addOrderOf a : X.presheaf.stalk x)) (hYorders : ∀ (a : A ⧸ I ^ (n : ℕ)) (y : Y), IsUnit (addOrderOf a : Y.presheaf.stalk y)) (f : X ⟶ Y) [IsProper f] (e : ℕ) (hfib : ∀ y : Y, topologicalKrullDim ↥(pullback f (Y.algClosurePoint y)) ≤ (e : WithBot ℕ∞)) : ConstructibleDirectImageFiniteness A I hI htorsion hperfect n hYdim hYorders f (2 * e)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-86c17eb9e",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source locations, universes, edge cases, docstrings, and exact lean.statement equality. The delivered module compiles successfully through scompile.py at both sandbox and library paths. No substantive faults found."
  }
 }

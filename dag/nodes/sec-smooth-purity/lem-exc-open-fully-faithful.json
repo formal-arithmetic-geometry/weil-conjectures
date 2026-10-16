@@ -176,5 +176,24 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-5e6d898a3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, exact master source, and every cited node statement. The corrected four-step proof has the adjunction orientation, exact inverse image, K-injective computation, natural counit, and disjoint open/closed vanishing correct; edge cases and coefficient/category conventions were checked. No new nodes or repairs are required. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenImmersionFullyFaithful",
+  "declaration": "AlgebraicGeometry.Etale.derivedOpenImmersionFullyFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenImmersionFullyFaithful.lean",
+  "statement": "theorem derivedOpenImmersionFullyFaithful {T V Z : Scheme.{u}} (g : V ⟶ T) [IsOpenImmersion g] (i : Z ⟶ T) [IsClosedImmersion i] (h : Set.range i.base = (Set.range g.base)ᶜ) : Nonempty ((lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctor ⋙ (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory ≅ 𝟭 (DerivedCategory (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}))) ∧ ∀ K : DerivedCategory (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}), IsZero (((lowerStar AddCommGrpCat.{u + 1} i).mapDerivedCategory ⋙ (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Coefficient-free D(T_et) is the recorded abelian-sheaf derived category. Exact inverse image is represented by mapDerivedCategory; the i_* in the second clause is the termwise closed-immersion direct image specified by the node proof, descended using its finite-morphism exactness instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d4737ef13",
+  "group": "NG",
+  "result": "pass",
+  "note": "Exact theorem and dependency audit passed; scompile.py compiled sandbox and library successfully; no substantive or mechanical findings."
  }
 }
