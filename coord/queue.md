@@ -1,6 +1,6 @@
 # Work queue
 
-49 items; claim with `tools/claim.py next <group> [--stage N]`.
+50 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (49)
+## Stage 3: modules to prove (50)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -38,6 +38,7 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
+| `Sheaf.Paper.FiniteDiscreteCoefficientTerminal` | 12 | 1 | proof |
 | `Sheaf.Paper.FiniteEtaleLocallyFreeModels` | 12 | 4 | proof |
 | `Sheaf.RingTheory.PopescuLiftChartFlat` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison` | 13 | 2 | proof |
