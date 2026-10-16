@@ -3,53 +3,210 @@
  "blueprint": {
   "is": "sk-thm-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$f^!$ with rational coefficients",
- "statement": "For $\\Lambda=E$ or $\\Qlb$ and every separated morphism of finite type\n$f:X\\to Y$, the right adjoint $f^!$ of [sk-prop-sf-existence] on\n$\\Loc(\\Dctf(-,\\Lambda))$ satisfies\n\n$$\nf^!\\bigl(\\Dctf(Y,\\Lambda)\\bigr)\\subset\\Dctf(X,\\Lambda).\n$$\n\nIts restriction is right adjoint to $Rf_!:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, with its condensed coefficient ring and pulled-back module-object interpretation of [sk-def-sfb-dc-setting, sk-def-sfb-constructible]. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism, in that standing setting [sk-def-sfb-dc-setting, def-weil-finite-type-morphism, def-weil-proper-morphism]. Write $\\Dctf(T,\\Lambda)$ for the full subcategory of bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and $\\Loc(\\Dctf(T,\\Lambda))$ for its full localizing closure [sk-def-localizing-closure]. The right adjoint $f^!$ of [sk-prop-sf-existence] on these localizing categories satisfies\n$$\nf^!\\bigl(\\Dctf(Y,\\Lambda)\\bigr)\\subseteq\\Dctf(X,\\Lambda).\n$$\nIts restriction is right adjoint to $Rf_!:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/_section.md",
   "place": "node sk-thm-restriction, order 1565"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "sk-def-localizing-closure",
   "sk-prop-sf-existence"
  ],
  "proof": [
   {
-   "text": "Let $K\\in\\Dbc(Y,\\Lambda)$. Cover $Y$ by finitely many affine opens\n$V_\\beta$, and each $f^{-1}(V_\\beta)$ by finitely many affine opens\n$U_{\\beta\\alpha}$. Since $f$ is of finite type, each $U_{\\beta\\alpha}$ admits a\nclosed immersion $i:U_{\\beta\\alpha}\\hookrightarrow\\mathbf A^d_{V_\\beta}$ over\n$V_\\beta$. With $p:\\mathbf A^d_{V_\\beta}\\to V_\\beta$ the projection and\n$u:U_{\\beta\\alpha}\\hookrightarrow X$, $v:V_\\beta\\hookrightarrow Y$ the\ninclusions, we have $f\\circ u=v\\circ p\\circ i$. By [sk-lem-sf-mate], as\nfunctors $\\Loc(\\Dbc(Y,\\Lambda))\\to\\Loc(\\Dbc(U_{\\beta\\alpha},\\Lambda))$,\n\n$$\nu^*f^!\\simeq(fu)^!=(vpi)^!\\simeq i^!p^!v^*.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Now $v^*K$ is bounded constructible, so $p^!v^*K$ is bounded constructible by\n[sk-cor-affine-space-rational], and $u^*f^!K\\simeq i^!p^!v^*K$ is bounded\nconstructible by [sk-prop-closed-adjoint-constructible].",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Both conditions defining $\\Dbc$ are local for a finite open cover. The\ncohomology of $f^!K$ vanishes outside the union of the finitely many bounded\nintervals found on the $U_{\\beta\\alpha}$. For constructibility, each locally\nclosed stratum of $U_{\\beta\\alpha}$ is locally closed in $X$, and a common\nrefinement of the finitely many resulting finite partitions of $X$ into\nlocally closed subsets is a stratification on whose strata all cohomology\nsheaves of $f^!K$ are lisse. Hence $f^!K\\in\\Dbc(X,\\Lambda)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Finally, $Rf_!$ maps $\\Dbc(X,\\Lambda)$ into $\\Dbc(Y,\\Lambda)$\n([sk-prop-sf-comp-coherence]), and $\\Dbc(-,\\Lambda)\\subset\\Loc(\\Dbc(-,\\Lambda))$\nis full. So for $A\\in\\Dbc(X,\\Lambda)$ the bijection of [sk-prop-sf-existence]\nreads\n\n$$\n\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K).\n$$",
+   "text": "First verify the finiteness needed by the affine-cover argument. The schemes are separated and of finite type over $k$. Since $\\operatorname{Spec}k$ is affine and quasi-compact, the finite-type definition gives finite affine covers of $X$ and $Y$. Their separatedness implies quasi-separatedness: the diagonal is a closed immersion, whose inverse image over an affine is the spectrum of a quotient ring and hence quasi-compact. Thus $X,Y$ are qcqs. By [det-def-localizing-closure-ctf-equals-bc], $\\Dctf(T,\\Lambda)=\\Dbc(T,\\Lambda)$ and the two localizing closures agree for $T=X,Y$ and for all affine charts and affine spaces used below. It suffices to take $K\\in\\Dbc(Y,\\Lambda)$ and prove $f^!K\\in\\Dbc(X,\\Lambda)$.",
    "uses": [
-    "sk-prop-sf-existence"
+    "sk-def-sfb-dc-setting",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-conventions",
+    "det-def-localizing-closure-ctf-equals-bc"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Statement (2); standing setting and the hypotheses of the affine-cover proof"
+   }
+  },
+  {
+   "text": "Choose a finite affine cover $Y=\\bigcup_\\beta V_\\beta$. By the finite-type definition, for each $V_\\beta=\\operatorname{Spec}R_\\beta$ choose a finite affine cover $f^{-1}(V_\\beta)=\\bigcup_\\alpha U_{\\beta\\alpha}$ with $U_{\\beta\\alpha}=\\operatorname{Spec}B_{\\beta\\alpha}$ and $B_{\\beta\\alpha}$ a finitely generated $R_\\beta$-algebra. Choose algebra generators $b_1,\\ldots,b_d$; evaluation gives a surjection $R_\\beta[t_1,\\ldots,t_d]\\twoheadrightarrow B_{\\beta\\alpha}$. The affine description of a closed immersion therefore gives $i:U_{\\beta\\alpha}\\hookrightarrow\\mathbf A^d_{V_\\beta}$. Writing $p:\\mathbf A^d_{V_\\beta}\\to V_\\beta$ and $u:U_{\\beta\\alpha}\\hookrightarrow X$, $v:V_\\beta\\hookrightarrow Y$, the equality of the structure ring maps gives $fu=vpi$. These are finitely many charts covering $X$. The integer $d$ may depend on the chart; no uniform choice is required.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-local.proof.md",
+    "place": "Existence of charts; Stacks Tag 01T2, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "For each chosen chart, use the functor isomorphism in [det-thm-restriction-local], with exactly the $V,U,i,p,u,v$ constructed in step 2:\n$$u^*f^!\\simeq i^!p^!v^*:\\Loc(\\Dbc(Y,\\Lambda))\\longrightarrow\\Loc(\\Dbc(U,\\Lambda)).$$\nAll maps have the domains required there and $fu=vpi$. This is the local factorization of the right adjoint; the lemma is used here for this functor isomorphism.",
+   "uses": [
+    "det-thm-restriction-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-local.md",
+    "place": "Displayed functor isomorphism, with a specified affine chart"
+   }
+  },
+  {
+   "text": "The restriction $v^*K$ is bounded constructible. Indeed restriction to an open is exact (kernels and cokernels of sheaves are local), so its cohomology is $\\mathcal H^q(K)|_V$ with the same finite degree bounds. Intersecting a constructible stratification with $V$ and restricting its pro-étale covers and finite presentations gives the finite constant local models in [sk-def-sfb-constructible]. Thus $v^*K\\in\\Dbc(V,\\Lambda)$. Apply [det-cor-affine-space-rational-induction] to this object: $L=p^!v^*K\\simeq p^*v^*K(d)[2d]$ lies in $\\Dbc(\\mathbf A^d_V,\\Lambda)$. This uses the preservation assertion of that node, as well as its isomorphism.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "det-cor-affine-space-rational-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "Second paragraph: restriction to V and rational affine-space purity"
+   }
+  },
+  {
+   "text": "For the closed immersion $i:U\\hookrightarrow\\mathbf A^d_V$ and the object $L$ of step 4, [det-prop-closed-adjoint-constructible-support] gives $R\\underline\\Gamma_U L\\in\\Dbc(U,\\Lambda)$. By [det-prop-closed-adjoint-constructible-yoneda], $i^!L\\simeq R\\underline\\Gamma_U L$. Combining this with step 3 gives $u^*f^!K\\in\\Dbc(U,\\Lambda)$ on every member of the finite affine cover of step 2. The supported-sections statement is applied over $\\mathbf A^d_V$, not over $Y$, and its coefficient hypothesis is exactly $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "det-prop-closed-adjoint-constructible-support",
+    "det-prop-closed-adjoint-constructible-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "Second paragraph: closed-immersion preservation, via supported sections and Yoneda"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [det-thm-restriction-glue] to $M=f^!K$ and the finite cover in step 2. Explicitly, choose bounds $[a_U,b_U]$ for each $M|_U$; exact restriction shows $\\mathcal H^q(M)=0$ outside $[\\min_U a_U,\\max_U b_U]$, because a sheaf zero on an open cover is zero. For each remaining degree choose the finite locally closed constructible partitions on the finitely many $U$ supplied by [sk-def-sfb-constructible]. Add $X\\setminus U$ to each partition and take all finite intersections. The resulting nonempty pieces are locally closed and form a finite partition of $X$. They are constructible: the affine opens $U$ are retrocompact in the quasi-separated $X$; if $W$ is retrocompact open in $U$, then $W$ is retrocompact in $X$, since $W\\cap T=W\\cap(U\\cap T)$ is quasi-compact for every quasi-compact open $T$ of $X$. Hence each Boolean expression defining a constructible subset of $U$ also defines a constructible subset of $X$ [def-weil-constructible-subset]. Every piece of the common refinement lies in at least one $U$, where the relevant cohomology sheaves have finite constant local models; restricting those models to the piece preserves their finite presentations. Thus all the cohomology sheaves of $M$ are constructible and $M\\in\\Dbc(X,\\Lambda)$. If $X$ is empty the conclusion holds for the zero category without taking minima over an empty set.",
+   "uses": [
+    "det-thm-restriction-glue",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Clause (1), boundedness and constructibility; Stacks Tag 09YD, lemma-quasi-compact-open-immersion-constructible-image"
+   }
+  },
+  {
+   "text": "By the equality of categories in step 1, step 6 proves $f^!\\Dctf(Y,\\Lambda)\\subseteq\\Dctf(X,\\Lambda)$. To restrict the other functor as well, take the compactification $f=rj$ supplied within the standing setting by [sk-def-sfb-dc-setting]. The standing setting gives $r$ proper and $j:X\\hookrightarrow Z$ open, with $Z$ separated and of finite type over $k$. Step 1 gives $X$ quasi-compact. Since $Z$ is separated, its diagonal is closed; over each affine open its inverse image is a quotient spectrum and is quasi-compact, so $Z$ is quasi-separated. Apply clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] to $j$: it is quasi-compact, as required below. Since $Y$ is qcqs, [det-sf-comp-coherence-single] applies and says that $Rf_!=Rr_*j_!$ carries $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Thus both functors admit restrictions to the indicated full subcategories.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "det-sf-comp-coherence-single",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "Last paragraph: preservation by compact support; compactification-single statement"
+   }
+  },
+  {
+   "text": "For $A\\in\\Dctf(X,\\Lambda)$ and $K\\in\\Dctf(Y,\\Lambda)$, the adjunction of [sk-prop-sf-existence] gives\n$$\\operatorname{Hom}_{\\Loc(\\Dctf(Y,\\Lambda))}(Rf_!A,K)\\simeq\\operatorname{Hom}_{\\Loc(\\Dctf(X,\\Lambda))}(A,f^!K).$$\nFor $T=X,Y$, the revised definition [sk-def-localizing-closure] takes the closure inside the unbounded module-object category $D(\\Mod_{\\Lambda_T})$, with no completeness condition. Every subcategory in its defining intersection contains $\\Dctf(T,\\Lambda)$, so their intersection contains it too. The closure is full in this same ambient category, and $\\Dctf(T,\\Lambda)$ is full there by [sk-def-sfb-constructible]. Consequently its inclusion into the closure is full. Since step 7 puts both images in the smaller categories, these are precisely $\\operatorname{Hom}_{\\Dctf(Y,\\Lambda)}(Rf_!A,K)$ and $\\operatorname{Hom}_{\\Dctf(X,\\Lambda)}(A,f^!K)$. The maps on these Hom sets are the original maps; hence their bijectivity and naturality in $A,K$ are unchanged. This is the required restricted adjunction.",
+   "uses": [
+    "sk-prop-sf-existence",
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "Last paragraph and displayed Hom bijection"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sf-existence"
+  "sk-def-sfb-dc-setting",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "def-sbc-affine-space",
+  "det-thm-restriction-local",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "det-cor-affine-space-rational-induction",
+  "det-prop-closed-adjoint-constructible-support",
+  "det-prop-closed-adjoint-constructible-yoneda",
+  "det-thm-restriction-glue",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "det-sf-comp-coherence-single",
+  "sk-prop-sf-existence",
+  "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+  "place": "Four proof paragraphs, expanded with existing detail nodes; standing-scheme correction from sk-def-sfb-dc-setting"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional inverse image right adjoint to compact support direct image preserves bounded constructible complexes with rational l-adic coefficients",
+   "results": "8 hits; LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CondensedSet.compactlyGeneratedAdjunction, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.adjunction, CondensedSet.LocallyConstant.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"restrict\"",
+   "results": "9 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: CategoryTheory.Adjunction.restrictFullyFaithful covers only the final formal restriction of an adjunction, not preservation of constructibility"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptionalInverse|constructible.*[Aa]djoint|[Aa]djoint.*constructible",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image preserves bounded constructible rational l-adic sheaves",
+   "results": "8 hits; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, CategoryTheory.Equivalence.sheafCongrPreregular_inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPreregular_inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_map, CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes the shriek inverse image of a bounded constructible complex of E-modules is bounded constructible",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_comap_image, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.BasicConstructibleSetData.map_n, Topology.IsConstructible.image_of_isOpenEmbedding",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|[Ss]hriek",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state exceptional inverse-image preservation for rational pro-étale coefficient module objects"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -69,5 +226,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-restriction"
+ "unit": "sk-thm-restriction",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-thm-restriction",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported unrestricted scheme quantifier lacks the standing finite-type-over-k hypotheses and its finite-cover argument fails on non-quasi-compact schemes. Restored the separated finite-type k-scheme setting explicitly used by sk-thm-existence and sk-def-sfb-dc-setting. Expanded the rational affine-chart, support, gluing and full-subcategory adjunction argument using existing nodes; replaced four nonexistent unit-heading citations with statement-bearing detail nodes. No new nodes. Repair of returned head bbe11971de: revalidated the changed localizing-closure and compactification-preservation statements against the current DAG; step 8 now explicitly derives inclusion and fullness from the intersection definition in the unbounded module-object category. Refreshed the existing unit realization. Second reading: spelled out the quasi-compactness of the chosen open part using the existing Mathlib permanence leaf, and removed the worker-authored tool-use annotation because that leaf is already a tool.",
+  "blueprint": "Steps 1-3 realize proof paragraph 1 (finite charts and local adjoint factorization); steps 4-5 realize paragraph 2 (affine-space and closed-immersion preservation); step 6 realizes paragraph 3 (finite-cover gluing); steps 7-8 realize paragraph 4 (compact-support preservation and restricted adjunction)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-0f6347bd2",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-0f6347bd2 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, blueprint proofs, Stacks locations, delivery errors, packet, and report. Verified all eight proof steps, hypotheses, coefficient categories, base-change factorization, edge cases, route compliance, and absence of duplicate/new-node faults. Wrote review.md. No SGA, Lean, builds, git, ssh, or live project access used."
+ }
 }
