@@ -3,47 +3,225 @@
  "blueprint": {
   "is": "cor-pur-dualizing-object-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth purity",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$\nand let $K\\in D^b_{ctf}(Y,\\Lambda)$. Substituting the identification\nof [thm-pur-diagonal-dualizing-object] into the tensor formula of\n[thm-pur-cohomological-smoothness] gives the canonical\nisomorphism\n\n$$\nLf^*K(d)[2d]\\;\\xrightarrow{\\ \\sim\\ }\\;Rf^!K.\n$$\n\nEvery map involved was normalized by the Kummer generator, so the Tate\ntwist, shift, and trace normalization are fixed canonically; the\nidentification is compatible with arbitrary base change and\ncomposition.",
+ "statement": "In the purity conventions of [def-pur-conventions], work at the finite\ncoefficient stage $\\Lambda=A=A_{E,n}$, $n\\geq1$. Let $X,Y$ be finite-type $k$-schemes, in the domain of\n[def-weil-exceptional-inverse-image], and let $f:X\\to Y$ be smooth\nseparated of pure relative dimension $d\\geq0$\n[def-sbc-smooth-morphisms]. Let $K\\in D^b_{ctf}(Y,\\Lambda)$, on the\nsmall pro-etale site [def-weil-pbc-proetale-site], with the derived\noperations of [def-weil-derived-pullback-tensor-hom] and the twists of\n[def-coefficient-twists-detailed]. Substituting the diagonal/DNC identification underlying\n[thm-pur-diagonal-dualizing-object] (constructed below on this full\nfinite-type domain) into the tensor formula of\n[thm-pur-cohomological-smoothness] gives the canonical isomorphism\n\n$$\n\\gamma_{f,K}:Lf^*K(d)[2d]\\;\\xrightarrow{\\ \\sim\\ }\\;Rf^!K\n$$\n\nspecified by [def-pur-smooth-purity-map]. Its Tate twist, shift, and\ntrace normalization are fixed by the prescribed Kummer normalization;\nthe trace is the counit composite of [def-pur-smooth-trace]. The\nidentification is compatible with arbitrary base change within this\nscheme domain, through the smooth pullback exchange of\n[def-pur-smooth-pullback-exchange], and with composition of smooth\nseparated morphisms. Separatedness and finite type have the meanings\ncollected in [def-weil-scheme-morphism-properties].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
   "place": "node cor-pur-dualizing-object-purity, order 2011"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "thm-pur-diagonal-dualizing-object",
-  "thm-pur-cohomological-smoothness",
+  "def-weil-exceptional-inverse-image",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-cohomological-smoothness",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "def-pur-smooth-pullback-exchange",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-section-invariant"
  ],
  "proof": [
   {
-   "text": "The composite is the twist reassociation of\n[def-coefficient-twists-detailed], the inverse of the identification of\n[thm-pur-diagonal-dualizing-object], and the tensor formula of\n[thm-pur-cohomological-smoothness]; each is an isomorphism.",
+   "text": "Put $M=Lf^*K$ and $T=\\Lambda_X(d)$. By [def-coefficient-twists-detailed],\n$M(d)[2d]=(M\\otimes^L T)[2d]$. Compute the tensor using a K-flat\nrepresentative $P\\to M$ as in [def-weil-derived-tensor]. The degree-$r$\nterms of both $(P\\otimes T)[2d]$ and $P\\otimes T[2d]$ are\n$P^{r+2d}\\otimes T$; their differential is $d_P\\otimes1$ on both sides,\nsince $T$ is in degree zero and $(-1)^{2d}=1$. These are the total-tensor\nand shift conventions of [def-pc-tensor-complex-sheaves] and\n[def-weil-abstract-derived-category]. The identity on these terms thus\ngives the canonical reassociation\n$a_M:M(d)[2d]\\xrightarrow{\\sim}M\\otimes^L T[2d]$.\nThe calculation is functorial in $P$ and $T$, so is the displayed\nidentification on derived objects, with no extra scalar or sign.",
    "uses": [
     "def-coefficient-twists-detailed",
-    "thm-pur-diagonal-dualizing-object",
-    "thm-pur-cohomological-smoothness"
+    "def-weil-derived-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex (the two total-complex differential formulas); Stacks sites-cohomology.tex Tags 06YL and 06YM; the imported item Proof, twist reassociation"
+   }
+  },
+  {
+   "text": "Set $W=X\\times_YX$, with projections $p_1,p_2$, and diagonal $\\Delta$. By [lem-pur-diagonal-base-change], $C(p_1,\\Delta)\\cong\\omega_f$. By [lem-pod-separated-finite-type-base-change] and [lem-sbc-smooth-relative-dimension-permanence], $p_1$ is separated finite type and smooth of relative dimension $d$. Thus $W$ is finite type over $k$: generators for a composite of finitely generated algebras are the union of the generators at its two stages. By [lem-pur-diagonal-regular-immersion], $\\Delta$ is closed with normal bundle $N=T_{X/Y}$. By [lem-sc-smooth-omega-finite-locally-free], $\\Omega^1_{X/Y}$ is locally free of rank $d$; its dual has the dual basis on every frame, so $N$ is a rank-$d$ vector bundle, including $d=0$.\n\nThe current [thm-pur-dnc-invariance] requires absolutely separated schemes, so apply it locally, not to $W\\to X$. A field is Noetherian because its only ideals are zero and the unit ideal; hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Choose a finite affine open cover $\\{U_i\\}$ of $X$. Every open in a Noetherian scheme is Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; in particular the inverse image of $U_i$ in every affine open of $X$ is quasi-compact. Thus $U_i\\hookrightarrow X$ is quasi-compact and finite type by [lem-weil-pbc-qc-open-immersion-finite-type], and $U_i$ is finite type over $k$. Its structure morphism is separated: on an affine its diagonal is induced by the surjection $R\\otimes_kR\\to R$. Put $W_i=p_1^{-1}U_i$ and $g_i:W_i\\to U_i$, with closed section $s_i=\\Delta|_{U_i}$. Relative separatedness and finite type follow by base change, and [lem-weil-pbc-proper-fp-permanence](e) makes $W_i$ separated over $k$, since $U_i$ is. Thus both schemes satisfy the actual DNC hypotheses. Restriction of the ideal/conormal description identifies its normal bundle with $N_i=N|_{U_i}$, with zero section $z_i$. Base change for the cohomologically smooth $p_1$ [thm-pur-cohomological-smoothness], followed by $Ls_i^*$, identifies $C(g_i,s_i)$ with $\\omega_f|_{U_i}$. The current DNC theorem gives\n$$\\delta_i:\\omega_f|_{U_i}\\cong C(g_i,s_i)\\xrightarrow{\\sim}C(\\pi_{N_i},z_i).$$\nThe overlap $U_{ij}=U_i\\cap U_j$ is a Noetherian open in the affine $U_i$, hence finite type and separated over $k$ by the same arguments. Its inverse image in $W_i$ is separated finite type as well. The arbitrary-base-change clause of the DNC theorem therefore applies to both inclusions $U_{ij}\\to U_i,U_j$ and identifies the restrictions of $\\delta_i,\\delta_j$ with the same normalized DNC map on $U_{ij}$. No absolute separatedness of $X$ or $Y$ has been assumed. Section invariants here are precisely those of [def-pur-section-invariant].",
+   "uses": [
+    "lem-pur-diagonal-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pur-diagonal-regular-immersion",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "thm-pur-cohomological-smoothness",
+    "thm-pur-dnc-invariance",
+    "def-pur-section-invariant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+    "place": "Original unit sk-thm-smooth-purity Steps 1–2; diagonal theorem original Proof Steps 1–2. Agent-written affine-cover localization to respect the current DNC theorem's absolute-separatedness hypotheses without narrowing the corollary."
+   }
+  },
+  {
+   "text": "On every $U_i$, apply [thm-amb-vector-bundle-purity] to $\\pi_i:N_i\\to U_i$ on the ordinary etale site. The Noetherian hypothesis was checked in Step 2. For $K=A_{U_i}$, its integration-adjoint map $\\eta_i^e:A_{N_i}(d)[2d]\\to\\pi_i^{\\times,e}A_{U_i}$ is an isomorphism. By [lem-pur-vector-integration-site-comparison], its comparison pullback is the actual normalized map $\\eta_i^p:A_{N_i}(d)[2d]\\to R\\pi_i^!A_{U_i}$, for every $n\\geq1$. A functor preserves inverse equations, so this map is invertible. Its inverse is the specified orientation of [cor-pur-vector-bundle-purity]. Pull back by $z_i$ and use the twist-pullback comparison of the new lemma to form\n$$\\theta_i:\\omega_f|_{U_i}\\xrightarrow{\\delta_i}C(\\pi_i,z_i)\\xrightarrow{Lz_i^*(\\eta_i^p)^{-1}}Lz_i^*A_{N_i}(d)[2d]\\cong A_{U_i}(d)[2d].$$\nThe restrictions of these maps agree on $U_{ij}$: Step 2 gives agreement of the DNC factor, and the base-change clause of [cor-pur-vector-bundle-purity] gives agreement of its specified inverse vector orientation; the twist-pullback maps commute with restriction by the new comparison lemma.\n\nHere is the gluing argument. Exact open restriction [def-weil-derived-pullback-tensor-hom] commutes with kernels, images and quotients, hence with the cohomology sheaves [def-weil-derived-cohomology-sheaves]. Each $\\theta_i$ shows that $\\mathcal H^r(\\omega_f)|_{U_i}=0$ for $r\\ne-2d$. The sheaf uniqueness axiom on this cover gives $\\mathcal H^r(\\omega_f)=0$ for those $r$. Set $F=\\mathcal H^{-2d}(\\omega_f)$. The good-truncation formulas [def-kun-truncations] give the functorial zigzag\n$$\\omega_f\\ \\longleftarrow\\ \\tau_{\\le-2d}\\omega_f\\ \\longrightarrow\\ F[2d],$$\nwhose two arrows induce isomorphisms on every cohomology sheaf and hence are inverted in the derived category. It commutes with the exact restrictions. Under this zigzag and after cancelling $[2d]$, [lem-weil-pbc-derived-single-fully-faithful] identifies each $\\theta_i$ with a unique sheaf isomorphism $F|_{U_i}\\to A_{U_i}(d)$; their overlap equality gives equality of these sheaf maps. By [lem-pur-sheaf-hom-cover-gluing] the sheaf maps and their inverses glue. Their composites are identities because they are so on every cover member. Composing the resulting sheaf isomorphism with the zigzag gives\n$$\\theta_f:\\omega_f\\xrightarrow{\\sim}A_X(d)[2d],$$\nwith restriction exactly $\\theta_i$. This is the diagonal/DNC orientation, and it equals the construction of the diagonal theorem on that theorem's restricted domain. This construction glues only morphisms of sheaves in one common degree; it makes no assertion of descent for arbitrary derived morphisms.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison",
+    "cor-pur-vector-bundle-purity",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-cohomology-sheaves",
+    "def-kun-truncations",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+    "place": "Original unit sk-thm-smooth-purity Step 3 and cor-pur-vector-bundle-purity Proof first paragraph; affine-cover gluing written using ordinary sheaf Hom descent after the explicit good-truncation zigzag."
+   }
+  },
+  {
+   "text": "Put $M=Lf^*K$. The canonical tensor map $\\phi_{f,K}:M\\otimes_A^L\\omega_f\\to Rf^!K$ is an isomorphism by [thm-pur-cohomological-smoothness], since $f$ is smooth separated of pure relative dimension $d$ and $K$ is bounded constructible of finite Tor amplitude. Form\n$$\\gamma_{f,K}=\\phi_{f,K}\\circ(1_M\\otimes\\theta_f^{-1})\\circ a_M.$$\nHere $a_M$ is Step 1 and $\\theta_f$ is Steps 2–3. Tensoring $\\theta_f$ and its inverse preserves their inverse equations; therefore all three arrows and their composite are invertible. This is the specified three-arrow smooth purity map of [def-pur-smooth-purity-map], with the diagonal/DNC orientation just constructed, not a choice from existence of an isomorphism.",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+    "place": "Original corollary Proof, the three-arrow composite"
+   }
+  },
+  {
+   "text": "The normalization of the normal-bundle endpoint in Step 3 is fixed at every $n$: choose any $r$ killing $A$, rather than the restricted affine-line datum. In the etale projective-line construction [def-amb-p1-trace] gives $h^e=b^e\\iota_2$ and $t^e=\\operatorname{pr}_2(b^e)^{-1}$. The map comparison [lem-pur-vector-integration-site-comparison] explicitly gives $\\beta_q C(b^e)=b^p$ and $t^p\\beta_q=C(t^e)$, identifies restriction by $j_!$, and identifies the projection formula and adjunction transposes defining vector-bundle integration. Consequently $t^ph^p=\\operatorname{pr}_2\\iota_2=1$ for the prescribed pro-etale Kummer class, and the map $\\eta^p$ used in Step 3 is the adjoint of this actual normalized integration. This also covers ramified coefficients without $e\\mid n$. Each local DNC arrow in Step 2 is the unique arrow with identity normalization on the standard section invariant, by [thm-pur-dnc-invariance]. Step 3 glues exactly these local orientations by uniqueness for sheaf maps; this introduces no scalar freedom. Thus the orientation $\\theta_f$ uses exactly the fixed Kummer-normalized endpoint, the twist $d$ and shift $2d$, and Step 1 introduces no extra sign. The tensor map in Step 4 is specified, not chosen. Finally [def-pur-smooth-trace] supplies the actual counit formula\n$$\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}=\\epsilon_{f,K}\\circ Rf_!(\\gamma_{f,K}).$$\nHence the fixed purity map fixes its trace. We do not infer a trace-map comparison from a comparison of a supported Cartier class; the needed trace, projection and transpose equalities are the separately stated comparison lemma. We do not use the affine-line definition or its model-agreement lemma outside their $e\\mid n$ datum.",
+   "uses": [
+    "lem-pur-vector-integration-site-comparison",
+    "def-amb-p1-trace",
+    "thm-pur-dnc-invariance",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+    "place": "Original corollary normalization sentence; unit Steps 2 and 3; specific finite-level site comparison of the normal-bundle integration"
+   }
+  },
+  {
+   "text": "For a Cartesian square with $f'$ the base change of $f$ and bottom\nmap $v:Y'\\to Y$, put $e=Lu^*\\gamma_{f,K}$,\n$e'=\\gamma_{f',Lv^*K}$, and let $b$ be the canonical pullback-and-twist\nidentification from the source of $e$ to the source of $e'$. By the\nexplicit statement of [def-pur-smooth-pullback-exchange],\n$\\operatorname{Ex}^{!,\\mathrm{sm}}=e'\\circ b\\circ e^{-1}$.\nConsequently\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}\\circ Lu^*\\gamma_{f,K}\n=e'\\circ b\\circ e^{-1}\\circ e=e'\\circ b,\n$$\nwhich is precisely the square of [thm-pur-smooth-base-change-coherence].\nThe latter statement applies to arbitrary $v$ between the finite-type\nschemes here, with no flatness, smoothness or etaleness condition on\n$v$. This is compatibility for the chapter's defined smooth exchange;\nit makes no identification with a different right-adjoint mate.",
+   "uses": [
+    "def-pur-smooth-pullback-exchange",
+    "thm-pur-smooth-base-change-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/def-pur-smooth-pullback-exchange.md",
+    "place": "Statement, typed inverse-purity composite; thm-pur-smooth-base-change-coherence statement, commuting square"
+   }
+  },
+  {
+   "text": "Let $g:Y\\to Z$ also be smooth separated of pure relative dimension\n$e$, with $Z$ in the same scheme domain, and let $K\\in D^b_{ctf}(Z,\\Lambda)$.\nThe maps constructed in Step 4 are the smooth purity maps to which\n[thm-pur-composition-coherence] applies. Its displayed identity is\n$$\n\\gamma_{gf,K}\n=c_{g,f}^{-1}\\circ\\gamma_{f,Rg^!K}\\circ\nLf^*(\\gamma_{g,K})(d)[2d],\n$$\nunder its canonical identification of the source with\n$L(gf)^*K(d+e)[2d+2e]$. This proves composition compatibility for the\nspecified maps, with the order of exceptional pullbacks fixed by\n$c_{g,f}:R(gf)^!\\cong Rf^!Rg^!$. In particular the twists add as $d+e$\nand the even shifts add as $2d+2e$; no inference from mere existence of\nisomorphisms, or from tensor invertibility alone, is used.",
+   "uses": [
+    "thm-pur-composition-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-composition-coherence.md",
+    "place": "Statement, typed equality of smooth purity maps; Proof Step 2 (the K-form)"
+   }
   }
  ],
  "proof_deps": [
   "def-coefficient-twists-detailed",
-  "thm-pur-diagonal-dualizing-object",
-  "thm-pur-cohomological-smoothness"
+  "def-weil-derived-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pur-diagonal-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-pur-cohomological-smoothness",
+  "thm-pur-dnc-invariance",
+  "def-pur-section-invariant",
+  "thm-amb-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "cor-pur-vector-bundle-purity",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-truncations",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "def-pur-smooth-purity-map",
+  "def-amb-p1-trace",
+  "def-pur-smooth-trace",
+  "def-pur-smooth-pullback-exchange",
+  "thm-pur-smooth-base-change-coherence",
+  "thm-pur-composition-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
-  "place": "## Proof"
+  "place": "Original corollary three-arrow composite and unit diagonal/DNC Steps 1–3, localized over affine opens to meet the current restricted DNC hypotheses; one-degree sheaf gluing, all-level integration-map comparison, and stated coherence identities."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|rightDerivedUpperShriek|smoothPurity|TateTwist",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity for exceptional inverse image of etale sheaves with Tate twist and cohomological shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity: the canonical exceptional inverse image of a bounded constructible finite Tor complex along a smooth separated morphism is its derived pullback with Tate twist d and cohomological shift 2d, compatibly with base change and composition",
+   "results": "Returned ordinary scheme-module pullback composition, conjugate equivalence and pseudofunctor coherence (AlgebraicGeometry.Scheme.Modules), and SheafOfModules pullback coherence/free-module lemmas. Read all eight returned signatures: no exceptional inverse image or Tate-twist purity statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|dualizing|Tate|purity",
+   "results": "AlgebraicGeometry search: 25 displayed text hits, mostly the substring tate in statements/rotate; the genuine Tate hit is a bibliography citation in EllipticCurve/Weierstrass.lean:58. None states smooth purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality for smooth maps: extraordinary pullback is ordinary inverse image tensored with the orientation sheaf shifted by twice the relative dimension",
+   "results": "Eight hits concerning manifold vector-field pullback, differential-form exterior derivatives and singular manifolds. Their signatures concern smooth manifolds, not etale/pro-etale exceptional inverse image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bdualizing\\w*|\\bshriek\\w*|\\bTate\\b|\\bpurity\\b",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +257,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-smooth-purity"
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-pur-dualizing-object-purity",
+  "worker": "stage1",
+  "summary": "Returned-delivery repair: removed unsupported absolute separatedness. Wrote the original diagonal/DNC argument from its component statements on arbitrary finite-type k-schemes, instead of applying the restricted diagonal theorem. Added one unsplit, map-level all-finite-level etale/pro-etale comparison lemma for projective-line trace, open restriction, vector integration, projection formula and adjoint transpose; removed the restricted affine-line/model-agreement normalization inference. Preserved the explicit tensor, exchange and composition arguments. Refreshed all statement quotations; no Lean or compiler. Second reading found that DNC invariance was subsequently restricted to absolutely separated schemes: Steps 2–3 now check its hypotheses on affine opens, compare on finite-type separated overlaps and glue the orientation as a sheaf morphism after an explicit single-degree truncation zigzag. The new comparison node now specifies the compact-support comparison as the proper-mate/open composite and cites the operation definitions.",
+  "blueprint": "Original item Proof three-arrow composite and normalization/base-change/composition sentences. Original unit sk-thm-smooth-purity Steps 1–3 are expanded to justify the diagonal orientation without the unsupported later absolute-separatedness restriction; the normal-bundle endpoint is still the prescribed Kummer-normalized vector-bundle integration. No replacement of the unit route. DNC is applied on affine base opens and descended only after reducing to degree -2d sheaves; this is a locality expansion of the same unit argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base-change preservation of the fixed smooth relative dimension, needed to apply DNC on its actual domain."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherian-open quasi-compactness for affine-cover and overlap admissibility; no replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic finite-type permanence for the affine-cover and overlap inclusions."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition of separated morphisms checks absolute separatedness on local DNC inputs."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic sheaf-morphism gluing after the explicit common-degree truncation reduction; no descent assertion for arbitrary derived morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-69d61fe5b",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-69d61fe5b (reviewer sub-agent of L); spot-checked: Read the complete item, new node, unit route, DAG dependencies, reports, blueprint source, and cited literature. Checked all seven proof steps, hypotheses, coefficient and base-change maps, DNC localization, normalization, edge cases, duplicate searches, and Mathlib searches. No false statement, circularity, missing hypothesis, or parent restatement found; no repair needed."
+ }
 }
