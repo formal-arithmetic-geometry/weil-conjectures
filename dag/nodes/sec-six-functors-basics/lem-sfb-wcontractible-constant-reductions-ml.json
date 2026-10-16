@@ -32,9 +32,130 @@
   "def-pc-perfect-ring-complex",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $W$ is empty, evaluation of every module sheaf at $W$ is zero (the empty covering gives a terminal section group), so the conclusion holds. Assume $W$ nonempty, and put $A_n=A/J^n$. Fix the given constant markings $H_n\\simeq\\underline{E_n}$. We will use the following elementary detection observation on every nonempty pro-étale object $U$: if a constant module sheaf $\\underline T|_U$ is zero, then $T=0$. Indeed, the module sheafification of the constant presheaf has as underlying abelian sheaf the abelian sheafification [lem-pc-sites-module-sheafification-interface], whose underlying sheaf of sets is the set sheafification [lem-pc-sites-sheafification-underlying-sets]. So if $t\\in T$ has image $0$ in $\\underline T(U)$, the sections $t$ and $0$ of the constant presheaf become equal after sheafification, hence agree on the members of some covering $\\{U_i\\to U\\}$ [lem-weil-pbc-site-sheafification-sections-local], i.e. $t=0$ in $T$ as soon as the covering has a member; pro-étale coverings are jointly surjective, so a covering of nonempty $U$ is a nonempty family. Constant realization is exact by the constant-module section lemma, so $H^i(\\underline C)=\\underline{H^i(C)}$. Applying the observation to the cohomology of a cone shows that constant realization on a nonempty $U$ reflects whether an algebraic derived morphism is an isomorphism. Constant realization also commutes with derived tensor: apply derived tensor pullback to the morphism from the sheaf topos to the one-point topos, with the constant coefficient ring. These identifications are natural in complexes and quotient maps. Here and below the canonical normalization of successive reductions is justified explicitly: choose a K-flat resolution with flat terms, using [lem-pc-kflat-resolution]. Its scalar extension remains K-flat with flat terms by [lem-pur-kflat-change-of-rings]. For ring maps $R\\to S\\to T$, the chain isomorphism $(K^\\bullet\\otimes_R S)\\otimes_S T\\to K^\\bullet\\otimes_R T$, $(x\\otimes s)\\otimes t\\mapsto x\\otimes st$, with inverse $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$, therefore computes derived successive extension. It commutes with every quotient unit $x\\mapsto x\\otimes1$. All rings used in the constant-exactness assertion, namely $A_n$ and later $B$, are Noetherian: for $A_n$ this follows because its ideals correspond to ideals of $A$ containing $J^n$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, preparatory constant-realization argument; sites-modules.tex Tags 093J–093K and sites-cohomology.tex Tag 07A4"
+   }
+  },
+  {
+   "text": "Every $E_n$ is perfect. To prove this without assuming compatible markings, put $F_n=E_n\\otimes_{A_n}^L A_1$. Tensor associativity gives an isomorphism $\\underline{F_n}\\simeq H_n\\otimes_{\\underline{A_n}}^L\\underline{A_1}\\simeq H_1\\simeq\\underline{E_1}$. Apply the local-algebraicity lemma to its inverse $\\underline{E_1}\\to\\underline{F_n}$ over $A_1$; its source is perfect by hypothesis. Choose a nonempty member of the resulting covering of $W$. There the inverse is the constant realization of a map $E_1\\to F_n$. Step 1 reflects its being an isomorphism, so $F_n$ is perfect. The ideal $J/J^n$ in $A_n$ is nilpotent. Choose a bounded finite-projective representative $Q^\\bullet$ of $F_n$, and apply nilpotent projective-complex lifting to $E_n$. It gives a bounded-above projective complex $P_n^\\bullet$ with $P_n^\\bullet/(J/J^n)P_n^\\bullet\\cong Q^\\bullet$. If $Q^i=0$, then $P_n^i=(J/J^n)P_n^i$, and iterating the nilpotent ideal makes $P_n^i=0$. In the other finitely many degrees lift finite generators of $Q^i$ to $P_n^i$. The cokernel of the resulting finite free map equals its product with $J/J^n$, so is zero by the same iteration. Thus every term is finitely generated projective and $P_n^\\bullet$ is bounded. This is exactly perfectness of $E_n$.",
+   "uses": [
+    "lem-sfb-perfect-constant-derived-map-local",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-nilpotent-projective-complex-lift",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, first paragraph; sites-cohomology.tex Tag 09BE; more-algebra.tex Tags 09AR and 07LU (explicit nilpotent Nakayama argument)"
+   }
+  },
+  {
+   "text": "Conjugate $H_{n+1}\\to H_n$ by the chosen markings, obtaining $\\underline{E_{n+1}}\\to\\underline{E_n}$ over $A_{n+1}$. Its source is perfect by step 2, so the local-algebraicity lemma supplies a covering on which it comes from an algebraic map $u_n:E_{n+1}\\to E_n$ in $D(A_{n+1})$. Choose a nonempty member and one such $u_n$. Derived reduction gives a map $E_{n+1}\\otimes_{A_{n+1}}^L A_n\\to E_n$. Its constant realization on that member is the canonical normalization $H_{n+1}\\otimes_{\\underline{A_{n+1}}}^L\\underline{A_n}\\simeq H_n$, conjugated by the reduced markings. It is an isomorphism by tensor associativity, so step 1 detects that the algebraic reduction of $u_n$ is an isomorphism. Choose one $u_n$ for each $n$. Their composites make an algebraic tower with normalized reductions. We assert no global agreement between $\\underline{u_n}$ and the original transitions.",
+   "uses": [
+    "lem-sfb-perfect-constant-derived-map-local",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, first paragraph: choosing maps by Tag 09BE and checking their derived reductions"
+   }
+  },
+  {
+   "text": "Put $B=\\widehat A=\\varprojlim_nA/J^n$ and $I=JB$. Since $A$ is Noetherian, $J$ and all its powers are finitely generated. The completion-mod-ideal lemma makes $B$ $I$-adically complete. For each $n$, apply that lemma also to $J^n$: its completion is canonically $B$, since taking the subsequence of levels divisible by $n$ has inverse given at level $r$ by projecting from any level divisible by $n$ and at least $r$. These mutually inverse sequence maps commute with the projections to $A/J^n$. Since $(JB)^n=J^nB$, this gives $B/I^n\\simeq A_n$ compatibly for every $n$. The completion-Noetherian lemma makes $B$ Noetherian. Apply perfect inverse-limit reconstruction over $B$ to the tower $(E_n,u_n)$ of step 3. Its residue $E_1$ is perfect and its normalized reductions are exactly those just constructed. Obtain a perfect $P\\in D(B)$ and compatible isomorphisms $P\\otimes_B^L B/I^n\\simeq E_n$. Choose a bounded finite-projective representative $P^\\bullet$. Its terms are flat (they are retracts of finite free modules), so its bounded tensor complex computes derived reduction; consequently we have individual isomorphisms $H_n\\simeq\\underline{P^\\bullet/I^nP^\\bullet}$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "def-pc-perfect-ring-complex",
+    "lem-pc-kflat-closure",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, algebraic reconstruction via more-algebra.tex Tag 09AW; algebra.tex Tags 05GG and 0316"
+   }
+  },
+  {
+   "text": "Fix an integer $q$ and write $Z^q=\\ker(d^q:P^q\\to P^{q+1})$ and $D^{q+1}=\\operatorname{im}d^q$. Apply Artin–Rees over the Noetherian ring $B$ to $D^{q+1}\\subseteq P^{q+1}$; the ambient module is finitely generated. Choose $c\\geq0$ such that $D^{q+1}\\cap I^tP^{q+1}\\subseteq I^{t-c}D^{q+1}$ for $t\\geq c$. For a fixed $n\\geq1$ and $t\\geq n+c$, a cycle modulo $I^t$ is represented by $z\\in P^q$ with $dz\\in I^tP^{q+1}$. Artin–Rees writes $dz$ as a finite sum $\\sum a_jd(v_j)$ with $a_j\\in I^{t-c}$; put $y=\\sum a_jv_j\\in I^{t-c}P^q\\subseteq I^nP^q$. Then $z-y\\in Z^q$ and has the same class as $z$ modulo $I^n$. Conversely any true cycle reduces to a cycle at every level. Thus, for every $t\\geq n+c$, the image of $H^q(P^\\bullet/I^tP^\\bullet)\\to H^q(P^\\bullet/I^nP^\\bullet)$ equals the fixed subgroup given by the image of $Z^q$ in the latter cohomology group. This proves algebraic image stabilization explicitly; no spectral-sequence or pro-category inference is needed.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IN, lemma-Artin-Rees; direct cycle calculation replacing the Tor spectral-sequence last paragraph of proetale.tex Tag 09C5"
+   }
+  },
+  {
+   "text": "Let $T_n=\\underline{P^\\bullet/I^nP^\\bullet}$ with their canonical quotient maps. Evaluation at the final object $W$ is exact by the weakly-contractible evaluation lemma. Therefore evaluation preserves quasi-isomorphisms, since exact functors preserve the kernels and images defining cohomology. Its termwise functor already factors through the derived localization and is its own right derived functor, so $H^q(R\\Gamma(W,C))=H^q(C(W))$. By exactness of constant realization and evaluation, $H^q(W,T_n)=\\underline{H^q(P^\\bullet/I^nP^\\bullet)}(W)$ naturally in $n$. The functor $V\\mapsto\\underline V(W)$ on $B$-modules is exact by the constant-module section lemma, so it preserves images (image is kernel of cokernel). Apply it to the two equal images in step 5. For $m=n+c$, and every $t\\geq m$, the images of $H^q(W,T_t)\\to H^q(W,T_n)$ and $H^q(W,T_m)\\to H^q(W,T_n)$ agree.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, exact-sections passage; sites-cohomology.tex Tag 0946 and sites-modules.tex Tag 093J"
+   }
+  },
+  {
+   "text": "Keep $q,n$ and $m=n+c$ from step 6. For each $t\\geq m$, choose any of the individual isomorphisms $T_t\\simeq H_t$ obtained in step 4, as an isomorphism over $A_t=B/I^t$. Reduce this single isomorphism successively to levels $m$ and $n$. Tensor associativity identifies the reductions of $T_t$ with $T_m,T_n$ and those of $H_t$ with $H_m,H_n$. Naturality of the quotient units gives an isomorphism of the two composable-arrow diagrams $T_t\\to T_m\\to T_n$ and $H_t\\to H_m\\to H_n$: on a K-flat representative the unit is $x\\mapsto x\\otimes1$, and successive reductions send $(x\\otimes a)\\otimes b$ to $x\\otimes ab$, so the direct and successive quotient arrows coincide. This includes repeated indices when $t=m$ or $m=n$. On hypercohomology the same isomorphism at level $n$ therefore identifies both transition images with those in step 6, proving their equality. The isomorphisms may vary with $t$; the equality of two subgroups is transported using a single level-$n$ isomorphism for each comparison, so a compatible infinite family was never required. This proves the stated Mittag–Leffler condition for every $q$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C5, middle paragraph: finite triples are identified by reducing an isomorphism at the largest index; all degrees by the same calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "lem-pc-kflat-closure",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-perfect-constant-derived-map-local",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C5, lemma-weakly-contractible-locally-constant-ML; local algebraicity Tag 09BE, perfect lifting Tags 09AR/09AW, and the final ML argument expanded directly using algebra.tex Tag 00IN."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +205,45 @@
    "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
    "date": "2026-10-16",
    "verdict": "no match: ordinary completion, module finiteness and generic derived-category declarations do not state this derived sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ittag.*[Ss]heaf|[Ss]heaf.*[Mm]ittag|weaklyContractible.*[Cc]omplet",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not assert Mittag–Leffler hypercohomology for constant derived ideal-power reductions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MittagLeffler\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not assert Mittag–Leffler hypercohomology for constant derived ideal-power reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mittag Leffler cohomology constant reductions derived complete pro etale complex",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, LightCondensed.IsDiscrete, Algebra.FormallyEtale.subsingleton_h1Cotangent, CondensedSet.LocallyConstant.functorFullyFaithful, Algebra.Etale.formallyEtale, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Condensed.lanCondensedSet, Algebra.formallyEtale_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not assert Mittag–Leffler hypercohomology for constant derived ideal-power reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventually stable images in hypercohomology of derived quotient complexes on an affine projective object of the pro etale topos",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not assert Mittag–Leffler hypercohomology for constant derived ideal-power reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of constant ideal power reductions on a weakly contractible affine pro etale scheme satisfies Mittag Leffler",
+   "results": "8 hits: localCohomology.hasColimitDiagram, localCohomology.idealPowersToSelfLERadical, localCohomology.ideal_powers_initial, localCohomology.idealPowersDiagram, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, is_ideal_adic_pow, localCohomology.diagram",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not assert Mittag–Leffler hypercohomology for constant derived ideal-power reductions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-residue-lisse-perfect-lift",
@@ -95,5 +251,84 @@
   "group": "Q93"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-integral-models"
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-wcontractible-constant-reductions-ml",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 09C5 for all degrees, without finite coefficient assumptions or compatible constant markings. Added the generic local-algebraicity input 09BE, proved perfectness of every algebraic constant value via 09AR and nilpotent Nakayama, reused 09AW and completion lemmas, and wrote the direct Artin–Rees cycle argument and finite-triple image comparison. One statement-only new node; no Mathlib leaves or Lean edits.",
+  "blueprint": "Realizes the local perfect-lifting input below det-lem-integral-models-stacks, Proof first sentence invoking sk-prop-integral-criterion, through the 09C5 ingredient of 09C6 / Bhatt–Scholze Lemma 6.6.8. The inherited ancestry and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Exactness of constant realization and of its evaluated module functor, for arbitrary Noetherian rings; no unit-local node supplies this generic site calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tensor comparison for constant realization, needed to identify derived reductions without finite coefficient assumptions."
+   },
+   {
+    "node": "lem-weil-pbc-nilpotent-projective-complex-lift",
+    "why": "Generic algebraic lifting across a nilpotent ideal; the finite-projective conclusion is deduced explicitly in step 2."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic completeness and quotient theorem for a finitely generated ideal, applied to J and J^n."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherianity of coefficient-ring completion, needed for Artin–Rees."
+   },
+   {
+    "node": "lem-weil-pbc-rlim-perfect-complete",
+    "why": "Generic algebraic perfect reconstruction of normalized reduction towers; it is the 09AW input explicitly used by 09C5."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "why": "Generic exact evaluation at a weakly contractible affine, used to compute hypercohomology by sections."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic bounded-flat-complex K-flatness, used for termwise derived reduction of the reconstructed perfect model."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of derived coefficient extension, used together with K-flat preservation and the explicit tensor reassociation formula."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a K-flat flat-term representative, needed to justify successive quotient reduction at chain level."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of K-flat complexes with flat terms under coefficient extension, needed for the two successive derived reductions."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local description of sheafification (Sites 00WB/00WK): two presheaf sections with equal images in the sheafification agree on a covering; used in step 1 to show that a constant sheaf on a nonempty pro-étale object detects zero. No node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-0127776d9",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-0127776d9 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, all cited statements, Stacks 09C5 (proetale.tex line 5988 ff.) and 09BE (sites-cohomology.tex, lemma-locally-constant-map), and the unit and chapter records. Item statement is unchanged; its coefficients are \\underline A-modules on W_proét, the same category as in 09C5. The parent's use in lem-sfb-adic-residue-lisse-perfect-lift matches the statement. The mathematics is correct. Step 1: empty W and constant-sheaf detection. Step 2: F_n ≅ E_1 locally via 09BE, detection, then 09AR (I^n=0) with nilpotent Nakayama gives bounded finite projectives. Step 3: algebraic transitions with normalized reductions. Step 4: 05GG applied to J and J^n, 0316, and 09AW with all hypotheses met. Step 5: Artin–Rees cycle correction y in I^{t-c}P^q ⊆ I^nP^q, so images are stable for t>=n+c. Step 6: exact evaluation, so RΓ(W,-)=Γ(W,-). Step 7: one isomorphism per t carries the two images onto each other. New node lem-sfb-perfect-constant-derived-map-local is exactly 09BE (perfect source, arbitrary target, any site with final object), statement-only, with a correct blueprint ancestor and searches recorded. It is not a duplicate: the existing finite-ring nodes for 09BE/094G need finite coefficients and bounded complexes. One C4/C1 fault, which I fixed. Step 1 claimed that 'equality after sheafification is witnessed locally', but def-weil-pbc-sheafification gives only the universal property. Step 1 now cites lem-pc-sites-module-sheafification-interface, lem-pc-sites-sheafification-underlying-sets (both Mathlib leaves) and lem-weil-pbc-site-sheafification-sections-local (00WB/00WK; off-unit, so I added it to split_report.tool_uses). proof_deps is now the union of the uses. I accept all declared tool_uses as generic black boxes. No SGA source is used. The report mentions a citations.json that is not in the commit; this affects only the report.; 1 file(s) fixed by the reviewer"
+ }
 }
