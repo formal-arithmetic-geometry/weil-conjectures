@@ -3,57 +3,207 @@
  "blueprint": {
   "is": "det-def-sfb-constructible-tor-amplitude",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tor amplitude and $D^b_{ctf}(X,\\Lambda)$",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $X$ a scheme.\n\n1. $\\Cons(X,\\Lambda)\\subset\\Mod(X_{\\mathrm{proét}},\\Lambda)$ is the full subcategory of\n   constructible $\\Lambda_X$-modules (strata on which the module has a finite constant local\n   model, [det-def-sfb-constructible-local-model]).\n2. $\\Dbc(X,\\Lambda)\\subset D(X_{\\mathrm{proét}},\\Lambda)$ is the full subcategory of complexes\n   $K$ with $H^q(K)=0$ for all but finitely many $q$ and every $H^q(K)$ in $\\Cons(X,\\Lambda)$.\n3. For integers $a\\le b$, $K\\in D(X_{\\mathrm{proét}},\\Lambda)$ has *Tor amplitude in $[a,b]$*\n   if $H^q(K\\otimes^{\\mathbf L}_{\\Lambda_X}N)=0$ for $q\\notin[a,b]$ and every\n   $\\Lambda_X$-module $N$; it has *finite Tor amplitude* if this holds for some $a\\le b$.\n4. $\\Dctf(X,\\Lambda)\\subset\\Dbc(X,\\Lambda)$ is the full subcategory of complexes of finite\n   Tor amplitude.\n\n**Well-definedness.** All four conditions are invariant under isomorphism in the respective\ncategories, so these are full replete subcategories. If $K$ has Tor amplitude in $[a,b]$ then\n$K[1]$ has Tor amplitude in $[a-1,b-1]$. If $K'\\to K\\to K''\\to K'[1]$ is a distinguished\ntriangle and $K',K''$ have Tor amplitude in $[a,b]$, so does $K$; and a direct summand of a\ncomplex with Tor amplitude in $[a,b]$ has Tor amplitude in $[a,b]$. Hence the complexes of\nfinite Tor amplitude form a thick subcategory of $D(X_{\\mathrm{proét}},\\Lambda)$, and\n$\\Dctf(X,\\Lambda)$ is the intersection of this thick subcategory with $\\Dbc(X,\\Lambda)$.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $X$ a scheme. Put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], write $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ for its internal module objects [det-def-sfb-module-objects-sheaves], identified with the category $\\Mod(\\Lambda_X)$ of sectionwise module sheaves [def-weil-sheaf-of-modules-category] by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and use its unbounded derived category and cohomology functors [def-weil-abstract-derived-category]. Derived tensor below is the relative derived tensor over $\\Lambda_X$ [sk-def-sfb-derived-tensor-hom]; a module $N$ in such an expression is placed in degree zero.\n\n1. $\\Cons(X,\\Lambda)\\subset\\Mod(X_{\\mathrm{proét}},\\Lambda)$ is the full subcategory of\n   constructible $\\Lambda_X$-modules (strata on which the module has a finite constant local\n   model, [det-def-sfb-constructible-local-model]). Here the constructibility convention is that of the source's parent definition: for qcqs $X$ use a finite stratification [def-constructible-stratification] by constructible [def-weil-constructible-subset] locally closed subschemes, and for arbitrary $X$ impose this condition locally on affine opens.\n2. $\\Dbc(X,\\Lambda)\\subset D(X_{\\mathrm{proét}},\\Lambda)$ is the full subcategory of complexes\n   $K$ with $H^q(K)=0$ for all but finitely many $q$ and every $H^q(K)$ in $\\Cons(X,\\Lambda)$.\n3. For integers $a\\le b$, $K\\in D(X_{\\mathrm{proét}},\\Lambda)$ has *Tor amplitude in $[a,b]$*\n   if $H^q(K\\otimes^{\\mathbf L}_{\\Lambda_X}N)=0$ for $q\\notin[a,b]$ and every\n   $\\Lambda_X$-module $N$; it has *finite Tor amplitude* if this holds for some $a\\le b$.\n4. $\\Dctf(X,\\Lambda)\\subset\\Dbc(X,\\Lambda)$ is the full subcategory of complexes of finite\n   Tor amplitude.\n\n**Well-definedness.** All four conditions are invariant under isomorphism in the respective\ncategories, so these are full replete subcategories. If $K$ has Tor amplitude in $[a,b]$ then\n$K[1]$ has Tor amplitude in $[a-1,b-1]$. If $K'\\to K\\to K''\\to K'[1]$ is a distinguished\ntriangle and $K',K''$ have Tor amplitude in $[a,b]$, so does $K$; and a direct summand of a\ncomplex with Tor amplitude in $[a,b]$ has Tor amplitude in $[a,b]$. Hence the complexes of\nfinite Tor amplitude form a thick subcategory (a full replete triangulated subcategory [def-weil-triangulated-category] closed under direct summands) of $D(X_{\\mathrm{proét}},\\Lambda)$, and\n$\\Dctf(X,\\Lambda)$ is the intersection of this thick subcategory with $\\Dbc(X,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.md",
   "place": "node det-def-sfb-constructible-tor-amplitude, order None"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-constructible-stratification",
   "det-def-sfb-constructible-local-model",
-  "def-sfb-constructible-module",
-  "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-derived-tensor-hom"
+  "sk-def-sfb-derived-tensor-hom",
+  "det-def-sfb-module-objects-sheaves",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-constructible-subset"
  ],
  "proof": [
   {
-   "text": "Invariance under isomorphism is clear, since isomorphic modules have isomorphic restrictions\nand isomorphic complexes have isomorphic cohomology and derived tensor products.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the four definitions in the statement. If $M\\simeq M'$, restrict this isomorphism to every stratum and every member of its pro-étale cover; composing with each local-model isomorphism supplies exactly the same finitely presented scalar modules and the same stratification for $M'$ [det-def-sfb-constructible-local-model]. Thus constructibility is invariant under isomorphism, including its affine-local convention. The cohomology functors [def-weil-abstract-derived-category] carry an isomorphism $K\\simeq L$ to isomorphisms $H^q(K)\\simeq H^q(L)$; both vanishing and constructibility of these objects are therefore unchanged. For each fixed module $N[0]$, the relative derived tensor bifunctor [sk-def-sfb-derived-tensor-hom] also carries $K\\simeq L$ to an isomorphism after tensoring, so each specified Tor interval, and hence the existence of one, is unchanged. Taking all morphisms between objects satisfying each condition gives the full subcategories asserted; the preceding invariance makes them replete.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "def-weil-abstract-derived-category",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.proof.md",
+    "place": "Well-definedness, invariance under isomorphism; proof paragraph 1"
+   }
   },
   {
-   "text": "Shift: $K[1]\\otimes^{\\mathbf L}N=(K\\otimes^{\\mathbf L}N)[1]$, so its cohomology in degree $q$\nis that of $K\\otimes^{\\mathbf L}N$ in degree $q+1$.",
-   "uses": [],
-   "elementary": null
+   "text": "First justify the coefficient-category identification used here. Sheafification on abelian presheaves is strong monoidal for the sheafified sectionwise tensor [det-def-sfb-sheaf-tensor-structure]; therefore a morphism inverted by sheafification remains inverted after tensoring (apply the strong monoidal comparison). The site-size convention below and this observation give the hypotheses of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its equivalence $E$ identifies internal $\\Lambda_X$-modules with sectionwise modules over the reconstructed commutative section-ring sheaf, preserving underlying abelian sheaves and morphisms. It is additive and exact: addition, kernels and cokernels are characterized by their universal properties and are preserved by an equivalence. Abelian sheaves have coequalizers (cokernels of the differences of the two maps), and tensor preserves colimits by [det-def-sfb-sheaf-tensor-closed], so the hypotheses of the relative-tensor definition hold. The relative coequalizer in [def-sfb-modobj-relative-tensor] represents maps from $M\\otimes N$ for which $\\phi(rm,n)=\\phi(m,rn)$; requiring the resulting map to be $\\Lambda_X$-linear makes these exactly sectionwise $\\Lambda_X$-bilinear maps. By [lem-pc-sites-sheaf-tensor-bilinear-universal], the ordinary sheaf tensor represents the same functor. Their unique representing isomorphism thus identifies the two relative tensor products, naturally, and the regular module identifies their units. Applying $E$ degreewise preserves cohomology and quasi-isomorphisms. It preserves shifts, and it sends the cone matrix $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$ to the cone matrix for $E(f)$, since it preserves finite biproducts and addition [def-weil-abstract-derived-category]. Thus it and its inverse induce exact equivalences of derived categories, by the stated characterization of distinguished triangles as images of cone triangles. Its preservation of direct sums and the tensor comparison identify total tensor complexes. In particular it preserves K-flatness: tensoring with an acyclic complex is acyclic on one side exactly when it is on the other. The current Layer B statement [sk-def-sfb-derived-tensor-hom] specifies precisely the relative tensor of [def-sfb-modobj-relative-tensor], the coequalizer just compared. Its two-variable K-flat derived functor is therefore identified with the ringed-site derived tensor: if $P\\to K$ is a K-flat resolution, then $E(P)\\to E(K)$ is a K-flat resolution and $E(P\\otimes_{\\Lambda_X}N)\\simeq E(P)\\otimes_{\\Lambda_X}E(N)$ computes the two corresponding derived tensors. The comparison uses the same degree-zero test modules, since $E$ is an equivalence. Apply the exactness clause of [lem-weil-pbc-ringed-projection-mate-exact] to the identity morphism of the ringed topos $(X_{\\mathrm{proét}},\\Lambda_X)$, with the identity ring map. Choose the site presentation small relative to the universe of module sheaves, as in [def-weil-sheaf-of-modules-category]; this is a universe convention, not a finiteness assumption on $X$ or $\\Lambda$. For every $N[0]$ it gives an exact functor $T_N(K)=K\\otimes^L_{\\Lambda_X}N$. By the meaning of exact functor [def-weil-triangulated-category], $T_N(K[1])\\simeq T_N(K)[1]$. The complex convention $(L[1])^q=L^{q+1}$ and differential $-d_L$ [def-weil-abstract-derived-category] gives $H^q(L[1])\\simeq H^{q+1}(L)$: the sign changes neither the kernel nor the image. Thus $q\\notin[a-1,b-1]$ implies $q+1\\notin[a,b]$, proving the stated shift bound for every $N$. Applying the same shift isomorphism to $K[-1]$ gives $T_N(K[-1])\\simeq T_N(K)[-1]$ and the bound $[a+1,b+1]$ for $K[-1]$.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "det-def-sfb-sheaf-tensor-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-modobj-relative-tensor",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YM (lemma-derived-tor-exact), 06YU (definition-derived-tor); sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi); sites-modules.tex Section 03EK, bilinear universal property after lemma-sheafification-tensor; blueprint proof paragraph 2, with the internal-module comparison written out"
+   }
   },
   {
-   "text": "Extensions: $-\\otimes^{\\mathbf L}N$ is exact, so it turns the triangle into a triangle\n$K'\\otimes^{\\mathbf L}N\\to K\\otimes^{\\mathbf L}N\\to K''\\otimes^{\\mathbf L}N\\to$, and the long\nexact cohomology sequence shows that $H^q(K\\otimes^{\\mathbf L}N)$ sits between\n$H^q(K'\\otimes^{\\mathbf L}N)$ and $H^q(K''\\otimes^{\\mathbf L}N)$, which vanish for\n$q\\notin[a,b]$.",
-   "uses": [],
-   "elementary": null
+   "text": "For a distinguished triangle $K'\\to K\\to K''\\to K'[1]$ and a module $N[0]$, [lem-weil-pbc-ringed-projection-mate-exact], with the same identity ringed-topos specialization as in step 2, makes its image under $T_N$ a distinguished triangle. Apply [lem-sf-derived-homology-long-exact] in the abelian category of $\\Lambda_X$-module sheaves. For $q\\notin[a,b]$ the resulting exact segment $H^q(T_NK')\\to H^q(T_NK)\\to H^q(T_NK'')$ has both outside objects zero. Exactness then forces the middle object zero (the kernel of its map to zero is the whole object and is the image of the map from zero). This proves the extension bound, uniformly for every module $N$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RS (lemma-cohomology-homological on K(A)), 05RT (lemma-acyclic), 05RU (definition-unbounded-derived-category) and 0147 (definition-homological, following long exact sequence); sites-cohomology.tex Tag 06YU; blueprint proof paragraph 3"
+   }
   },
   {
-   "text": "Summands: $H^q((K_1\\oplus K_2)\\otimes^{\\mathbf L}N)=H^q(K_1\\otimes^{\\mathbf L}N)\\oplus H^q(K_2\\otimes^{\\mathbf L}N)$.",
-   "uses": [],
-   "elementary": null
+   "text": "More generally take a retract $E\\xrightarrow{i}K\\xrightarrow{r}E$ with $r i=1_E$. The tensor bifunctor [sk-def-sfb-derived-tensor-hom] and cohomology functor [def-weil-abstract-derived-category] carry this identity to $H^q(T_Nr)H^q(T_Ni)=1_{H^q(T_NE)}$. If $K$ has amplitude in $[a,b]$ and $q$ lies outside that interval, this composite factors through $H^q(T_NK)=0$, so the identity of $H^q(T_NE)$ is zero and this object is zero. This holds for every $N$. A direct summand is such a retract via its inclusion and projection, proving the summand assertion without requiring that every idempotent split.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.proof.md",
+    "place": "Well-definedness, direct summands; proof paragraph 4, written as the elementary retract argument"
+   }
   },
   {
-   "text": "Taking unions over $[a,b]$ (and enlarging intervals for the two outer terms of a triangle),\nthe complexes of finite Tor amplitude form a thick subcategory.",
-   "uses": [],
-   "elementary": null
+   "text": "The zero object has amplitude $[0,0]$, since the exact tensor functors of [lem-weil-pbc-ringed-projection-mate-exact] are additive and preserve zero objects, by the definition of exact functor [def-weil-triangulated-category]. Enlarging a Tor interval preserves its defining vanishings. Thus for two finite intervals choose their minimum lower endpoint and maximum upper endpoint to obtain a common interval. Step 2 gives closure under both shifts; step 3 gives closure under extensions after this enlargement. For a distinguished triangle $A\\to B\\to C\\to A[1]$ with $A,B$ of finite Tor amplitude, rotate it to $B\\to C\\to A[1]\\to B[1]$ [def-weil-triangulated-category]; enlarge the intervals for $B,A[1]$ and apply step 3 to obtain finite Tor amplitude for $C$. The cone formula [def-weil-abstract-derived-category] also gives closure under finite biproducts: for representatives of $A[-1]$ and $B$, the cone of their zero map is $B\\oplus A$ with the direct-sum differential. Therefore the full replete subcategory is additive and closed under shifts and distinguished triangles; TR1 and TR2 restrict by cone and shift closure, TR3 restricts by fullness, and every extra object in an ambient TR4 diagram is a cone of a map between objects already in the subcategory, so TR4 also restricts. Step 4 gives closure under all existing direct summands, so it is thick. By clause 4, its intersection with $\\Dbc(X,\\Lambda)$ is exactly $\\Dctf(X,\\Lambda)$; this does not require a claim that $\\Dbc$ itself is triangulated for arbitrary $X$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.proof.md",
+    "place": "Well-definedness, thick subcategory and intersection; proof paragraph 5, with interval enlargement, rotation and zero-map cone written out"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-modobj-relative-tensor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "det-def-sfb-constructible-local-model",
+  "det-def-sfb-sheaf-tensor-closed",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.proof.md",
+  "place": "Well-definedness: the five proof paragraphs, expanded with Stacks Tags 06YM, 06YU, 05RS and 0147 and explicit retract/interval arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of constructible modules bounded derived category finite Tor amplitude over a condensed ring",
+   "results": "8 hits: CondensedMod, CondensedMod.IsSolid, LightCondMod, Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4CondensedMod, instAbelianLightCondMod, instAbelianCondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn finiteTorAmplitude",
+   "results": "0 hits: ; loogle: Unknown constant `DerivedCategory.torAmplitudeIn`",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|finiteTorAmplitude|constructibleFiniteTor",
+   "results": "0 hits: ; source directory Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible bounded complexes finite Tor amplitude derived category pro-etale",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplexUpToQuasiIso.Q, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of bounded complexes with stratified locally constant finite presentation cohomology and uniformly bounded derived tensor cohomology",
+   "results": "8 hits: DerivedCategory.IsGE, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.IsLE, DerivedCategory.TStructure.t, CochainComplex.IsKProjective, CochainComplex.IsKInjective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"amplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|tor.amplitude|Constructible",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this package of intrinsic condensed-coefficient constructibility definitions and all the Tor-amplitude stability assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The objects of the derived category whose tensor product with every module has cohomology in a bounded interval form a thick subcategory",
+   "results": "8 hits: DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.isGE_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: t-structure bounds do not state the universal relative-tensor test or the intrinsic condensed constructibility package"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTor|torAmplitude|IsThick|thick",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: t-structure bounds do not state the universal relative-tensor test or the intrinsic condensed constructibility package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: t-structure bounds do not state the universal relative-tensor test or the intrinsic condensed constructibility package"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteTorDimension|TorAmplitude|torAmplitude|IsConstructible",
+   "results": "23 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible subsets, finite presentation, and condensed module category instances do not state the intrinsic constructible derived categories and Tor-amplitude stability package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded cohomology and finitely presented locally constant sheaves over an internal ring with finite tensor dimension form replete derived subcategories",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod, SheafOfModules.isFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4CondensedMod, LightCondensed.free_internallyProjective_iff_tensor_condition, instAbelianCondensedMod, LightCondensed.free_internallyProjective_iff_tensor_condition', Condensed.finFree",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible subsets, finite presentation, and condensed module category instances do not state the intrinsic constructible derived categories and Tor-amplitude stability package"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -74,5 +224,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-constructible"
+ "unit": "sk-def-sfb-constructible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-constructible-tor-amplitude",
+  "worker": "stage1",
+  "summary": "Retained the intrinsic finite-constant-local-model definition and all stability assertions. Made the parent affine-local constructibility and degree-zero tensor-test conventions explicit; removed conflicting locally-finitely-presented/etale-origin definition dependencies. Filled the five arguments using existing exact-tensor and long-exact-cohomology nodes, with written retract, rotation, interval and biproduct arguments. No new nodes. Second reading supplies the exact monoidal comparison between internal modules and sectionwise modules before applying the ringed-site tensor theorem. Returned-delivery repair revalidated all cited statements against current upstream; explicitly tied the K-flat comparison to Layer B's current def-sfb-modobj-relative-tensor reference and refreshed stale quotations. Fresh second reading made preservation of shifts and cone matrices explicit, so the internal/sectionwise derived equivalence preserves distinguished triangles; checked all 20 current quotations and recorded two independently run searches.",
+  "blueprint": "The five well-definedness proof paragraphs: isomorphisms, shifts, extensions, summands, thick closure/intersection.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only the generic exactness of relative derived tensor on a commutative ringed site is used, specialized to the identity ringed pro-etale topos. The unit defines derived tensor but has no node asserting its triangulated exactness; this supplies precisely the black box used by proof paragraphs 2 and 3."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "The generic bilinear universal property identifies the internal relative coequalizer with the sectionwise sheaf tensor; it is used only for the coefficient-category comparison before applying the exact-tensor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-71852c33a",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-71852c33a (reviewer sub-agent of L); spot-checked: Reviewed and wrote review.md. The statement matches the main-20261015 blueprint; all five proof steps, coefficient-category identification, identity ringed-topos exactness specialization, citations, edge cases, searches, route/tool uses, and acyclicity check out. No new nodes or repairs are needed; no SGA source or target base-change comparison is used."
+ }
 }

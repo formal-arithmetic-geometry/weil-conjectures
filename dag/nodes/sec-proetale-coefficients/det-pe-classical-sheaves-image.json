@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-classical-sheaves-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The essential image of the comparison inverse image",
@@ -13,42 +13,145 @@
   "place": "node det-pe-classical-sheaves-image, order None"
  },
  "stmt_deps": [
-  "det-pe-classical-definition-continuity-map"
+  "det-pe-classical-definition-continuity-map",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof": [
   {
-   "text": "*(1)$\\Rightarrow$(2).* Classicality is invariant under isomorphism, so let\n$G=\\nu_X^*F$. Let $U=\\varprojlim_iU_i$ be a pro-étale affine presentation. By\nthe affine evaluation formula of [sk-prop-pe-comparison-morphism] (proved in\ndetail in [lem-weil-pbc-comparison-sections]) we have\n$(\\nu_X^*F)(U)=\\varinjlim_iF(U_i)$, and $(\\nu_X^*F)(U_i)=F(U_i)$ for the étale\nobjects $U_i$. The identification is induced by the restriction maps of\n$\\nu_X^*F$ along $U\\to U_i$, so it is precisely the continuity map\n$c_{G,U}$, which is therefore bijective.",
+   "text": "$(1)\\Rightarrow(2)$. Choose an isomorphism $\\alpha:G\\xrightarrow{\\sim}\\nu_X^*F$ and any pro-étale affine presentation $U=\\varprojlim_iU_i$ from [det-pe-classical-definition-continuity-map]. The scheme-general continuity theorem [lem-weil-pbc-proetale-classical-continuity-sets] applied to this diagram says that its canonical restriction cocone for $\\nu_X^*F$ is a colimit: $c_{\\nu_X^*F,U}:\\varinjlim_i(\\nu_X^*F)(U_i)\\to(\\nu_X^*F)(U)$ is bijective. Naturality of $\\alpha$ gives $\\alpha_U\\circ c_{G,U}=c_{\\nu_X^*F,U}\\circ(\\varinjlim_i\\alpha_{U_i})$. Both $\\alpha_U$ and the colimit map induced by the $\\alpha_{U_i}$ are bijective; the inverse of the latter is induced by $\\alpha^{-1}$. Thus $c_{G,U}$ is bijective. This holds for every presentation, so $G$ is classical.",
    "uses": [
-    "lem-weil-pbc-comparison-sections"
+    "det-pe-classical-definition-continuity-map",
+    "lem-weil-pbc-proetale-classical-continuity-sets"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.1 and the forward implication of Lemma 5.1.2 (p. 34); transport along an isomorphism written out"
+   }
   },
   {
-   "text": "*(2)$\\Rightarrow$(3).* Let $U=\\varprojlim_iU_i$ be a pro-étale affine\npresentation. By the section formula,\n$(\\nu_X^*\\nu_{X,*}G)(U)=\\varinjlim_i(\\nu_{X,*}G)(U_i)=\\varinjlim_iG(U_i)$. The\ncounit is adjoint to the identity of $\\nu_{X,*}G$; in the explicit adjunction of\n[lem-weil-pbc-comparison-sections] it sends the class of $s\\in G(U_i)$ to its\nrestriction $s|_U\\in G(U)$. Thus $\\varepsilon_G(U)=c_{G,U}$, a bijection by\nassumption. The affine ind-étale objects form a basis of $X_{\\Proet}$: every\nobject, and every fibre product of two of them over a third, has a covering by\naffine ind-étale objects ([lem-weil-pbc-ind-etale-basis]). A morphism of sheaves\nwhich is bijective on every object of such a basis is an isomorphism (injectivity\nand gluing are both tested on basis coverings), so $\\varepsilon_G$ is an\nisomorphism.",
+   "text": "$(2)\\Rightarrow(3)$. By [det-pe-classical-definition-continuity-map], classicality says that for every affine ind-étale presentation $U=\\varprojlim_iU_i$ by affine étale $X$-schemes, the cocone $G(U_i)\\to G(U)$ consisting of restriction maps exhibits $G(U)$ as the filtered colimit of the $G(U_i)$. This is precisely the hypothesis of [lem-weil-pbc-proetale-continuous-counit-sets], with its sheaf $F$ specialized to $G$. That theorem applies to an arbitrary scheme $X$ and a sheaf of sets, and concludes that the comparison adjunction counit $\\varepsilon_G:\\nu_X^*\\nu_{X,*}G\\to G$ is invertible. Hence (3) holds. Here the colimit cocone is the specified restriction cocone, rather than an unspecified isomorphism of its source and target; this verifies the map required by the cited criterion.",
    "uses": [
-    "lem-weil-pbc-comparison-sections",
-    "lem-weil-pbc-ind-etale-basis"
+    "det-pe-classical-definition-continuity-map",
+    "lem-weil-pbc-proetale-continuous-counit-sets"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2, reverse implication, and the observation following Definition 5.1.3 (p. 34)"
+   }
   },
   {
-   "text": "*(3)$\\Rightarrow$(1).* Take $F=\\nu_{X,*}G$.",
-   "uses": [],
-   "elementary": null
+   "text": "$(3)\\Rightarrow(1)$. The direct-image functor of [def-weil-pbc-site-comparison-morphism] sends $G$ to an étale sheaf of sets $F=\\nu_{X,*}G$. The inverse of the counit isomorphism in (3) is an isomorphism $G\\xrightarrow{\\sim}\\nu_X^*F$, which supplies the witness in (1).",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2, final sentence, and the observation following Definition 5.1.3 (p. 34)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-ind-etale-basis"
+  "det-pe-classical-definition-continuity-map",
+  "lem-weil-pbc-proetale-classical-continuity-sets",
+  "lem-weil-pbc-proetale-continuous-counit-sets",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-image.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2 and Definition 5.1.3, p. 34; existing scheme-general DAG continuity and counit criteria are used as tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pro.?[eé]tale|[Ii]sClassical",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical sheaves on the pro-etale site are precisely the essential image of etale sheaves",
+   "results": "Hits: CategoryTheory.Sheaf.IsConstant.mk, TopCat.Sheaf.forget, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, LightCondensed, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Condensed.lanSheafProfinite. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Sheaf",
+   "results": "Hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv, AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology, AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the pro-etale site of a scheme is in the essential image of inverse image from the etale site if and only if it commutes with filtered affine etale limits, equivalently its comparison counit is an isomorphism",
+   "results": "Hits: LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, LightCondSet.isDiscrete_tfae, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso, CategoryTheory.Equivalence.sheafCongr.counitIso. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme X the inverse image of an etale sheaf on an inverse limit of affine etale X schemes has sections equal to the filtered colimit of sections",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Cc]omparison|[Cc]omparison.*etale|[Cc]lassical",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?[eé]tale|[Ii]sClassical",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Sheaf",
+   "results": "Hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv, AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology, AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the pro-etale site of a scheme is in the essential image of inverse image from the etale site if and only if it commutes with filtered affine etale limits, equivalently its comparison counit is an isomorphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, instEssSurjLightDiagram'LightDiagramToLightFunctor, CategoryTheory.Functor.IsDenseSubsite.isIso_ranCounit_app_of_isDenseSubsite, CategoryTheory.Adjunction.mem_essImage_of_counit_isIso, CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage, LightCondMod.isDiscrete_tfae, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.counitIso. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Cc]omparison|[Cc]omparison.*etale|[Cc]lassical",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical sheaves on the pro-etale site are precisely the essential image of etale sheaves",
+   "results": "Hits: CategoryTheory.Sheaf.IsConstant.mk, TopCat.Sheaf.forget, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, LightCondensed, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Condensed.lanSheafProfinite. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme X the inverse image of an etale sheaf on an inverse limit of affine etale X schemes has sections equal to the filtered colimit of sections",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic-geometry, condensed-set, or generic site statements do not give all three conditions for arbitrary schemes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +165,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-classical-sheaves"
+ "unit": "sk-thm-pe-classical-sheaves",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-sheaves-image",
+  "worker": "stage1",
+  "summary": "Kept the exact three-condition statement. Replaced the affine-base citations in the imported proof by two existing scheme-general set-sheaf results: comparison-pullback continuity and the continuous-counit criterion. Wrote the isomorphism-transport square and the exact match of canonical restriction cocones. Added the comparison adjunction as a statement dependency. No new nodes or Mathlib leaves.",
+  "blueprint": "Steps 1, 2, 3 realize respectively the (1)⇒(2), (2)⇒(3), (3)⇒(1) paragraphs of sk-thm-pe-classical-sheaves-image.proof.md. The existing continuous-counit theorem packages the section-formula and affine-basis argument of the middle paragraph; it does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-classical-continuity-sets",
+    "why": "Its statement supplies continuity of inverse-image set sheaves for arbitrary X, including the affine étale presentations in this item. It is the general form of the blueprint affine section-formula step; the imported local comparison-sections node assumes affine X."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-continuous-counit-sets",
+    "why": "Its statement supplies exactly the canonical continuous-cocone counit criterion for arbitrary schemes and set sheaves. This existing tool packages the blueprint section-formula/basis-detection argument; creating it again would duplicate an existing node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-classical-continuity-sets",
+  "lem-weil-pbc-proetale-continuous-counit-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-4e15c6cf1",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-4e15c6cf1 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, blueprint unit/chapter route, Bhatt–Scholze p.34, and Stacks pro-étale sources. All hypotheses, object categories, counit direction, and three proof steps check; edge cases and duplicate/tool-use issues are clear. Wrote review.md; no repairs needed."
+ }
 }

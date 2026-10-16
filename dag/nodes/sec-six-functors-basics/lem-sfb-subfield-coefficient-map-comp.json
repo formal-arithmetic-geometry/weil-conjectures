@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-subfield-coefficient-map-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compatibility of the inclusions $E_X\\to F_X\\to\\overline{\\mathbf Q}_{\\ell,X}$",
@@ -18,24 +18,96 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sfb-coefficient-map-comp] the composite is the coefficient change of the composite\n$\\underline E\\to\\underline F\\to\\underline{\\Qlb}$, which is the inclusion\n$\\underline E\\to\\underline{\\Qlb}$: both send a continuous map $h\\colon S\\to E$ to $h$ regarded as\na map to $\\Qlb$ ([sk-prop-sfb-qlbar-colimit-point]).",
+   "text": "Let $\\iota_{E,F}\\colon\\underline E\\to\\underline F$ be the postcomposition inclusion of [def-sfb-qlbar-subextension-map], and let $j_H\\colon\\underline H\\to\\underline{\\Qlb}$ for $H=E,F$ be the inclusions of [def-sfb-qlbar-subextension-to-qlbar]. For each profinite test object $S$ and continuous $h\\colon S\\to E$, both $j_F\\circ\\iota_{E,F}$ and $j_E$ send $h$ to the same map $S\\to E\\subseteq\\Qlb$. This is precisely the equality $j_F\\circ\\iota_{E,F}=j_E$ stated in the latter node, in the underlying ring objects of condensed abelian sheaves.",
    "uses": [
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-qlbar-subextension-to-qlbar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-coefficient-map-comp.proof.md",
+    "place": "Unique proof paragraph"
+   }
+  },
+  {
+   "text": "By [def-sfb-subfield-coefficient-map], the map $E_X\\to F_X$ is $(\\iota_{E,F})_X$. By the current [def-sfb-subfield-to-qlbar-coefficient-map], which specifies the condensed inclusion of step 1, applied once to $F$ and once to $E$, the other two maps are $(j_F)_X\\colon F_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ and $(j_E)_X\\colon E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$, between the specified pulled-back coefficient rings $H_X=p_X^*\\underline H$ and $\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\Qlb}$. Apply [lem-sfb-coefficient-map-comp] to $a=\\iota_{E,F}$ and $b=j_F$. Its current statement specifies $c_X=p_X^*c$ for underlying condensed abelian morphisms, so the equation is in the same sheaf category as these maps. Consequently $(j_F)_X\\circ(\\iota_{E,F})_X=(j_F\\circ\\iota_{E,F})_X=(j_E)_X$, the last equality being substitution of step 1. This is the required equality of the three coefficient-ring maps.",
+   "uses": [
+    "def-sfb-subfield-coefficient-map",
+    "def-sfb-subfield-to-qlbar-coefficient-map",
     "lem-sfb-coefficient-map-comp"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-coefficient-map-comp.proof.md",
+    "place": "Unique proof paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "def-sfb-subfield-coefficient-map",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
   "lem-sfb-coefficient-map-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-coefficient-map-comp.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-coefficient-map-comp.proof.md",
+  "place": "Unique proof paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of coefficient changes E_X to F_X to Qbar_X for finite p-adic subfields",
+   "results": "WittVector.zmodEquivTrunc_compat; WittVector.factorPowSucc_comp_fontaineThetaModPPow; PerfectionMap.comp_equiv'; galRestrict'_comp; Perfection.coeff_map; WittVector.fontaineTheta; WittVector.fromPadicInt_comp_toPadicInt; WeierstrassCurve.VariableChange.map_map",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, coefficientMap_comp",
+   "results": "none; Loogle reported unknown identifier coefficientMap_comp",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientMap_comp|padicSubfieldRingObjMap_comp_toPadicAlgCl [WeilConjectures]",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functoriality of pullback coefficient map for composable condensed ring morphisms",
+   "results": "CondensedMod.hom_naturality_apply; LightCondMod.hom_naturality_apply; CondensedSet.hom_naturality_apply; LightCondSet.hom_naturality_apply; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; PresheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp",
+   "results": "none; Loogle reported unknown identifier Functor.map_comp",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp [Mathlib/CategoryTheory]",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of coefficient changes along inclusions of finite p-adic subfields",
+   "results": "Polynomial.coeff_ofSubring; PadicInt.Coe.ringHom; PadicInt.instCoePadic; Padic.comap_mulValuation_eq_int_padicValuation; PowerSeries.map_toSubring; Polynomial.coeffs_ofSubring; Subfield.inclusion; Polynomial.coeff_toSubring",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -56,5 +128,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-sfb-finite-extension-compatibility"
+ "unit": "sk-prop-sfb-finite-extension-compatibility",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-subfield-coefficient-map-comp",
+  "worker": "stage1",
+  "summary": "Revalidated the returned delivery against the reviewed snapshot at 7f0855ea25cd and the current delivery base. The changed coefficient-map definition now cites def-sfb-qlbar-subextension-to-qlbar instead of the missing imported colimit proposition; its objects and construction are unchanged. The composition lemma now specifies the underlying condensed-abelian notation and is a reviewed Mathlib leaf. Rewrote the argument in two steps, explicitly identifying all three maps on the pulled-back coefficient rings, and regenerated citation quotes from the actual current delivery base. No statement change or new node is needed.",
+  "blueprint": "Steps 1 and 2 realize respectively the pointwise condensed-inclusion equality and the coefficient-map composition in the unique blueprint proof paragraph. This is the opening compatibility clause of sk-prop-sfb-finite-extension-compatibility, within the fixed chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-8699b5c82",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-8699b5c82 (reviewer sub-agent of L); spot-checked: Fresh full reading completed. The item statement, both proof steps, all five cited DAG statements, blueprint route, coefficient category, base-change maps, edge cases, searches, duplicate checks, and dependency acyclicity pass. Review written to review.md; no repairs needed."
+ }
 }

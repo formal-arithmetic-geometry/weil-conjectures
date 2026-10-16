@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-dc-tensor-hom-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The adjunction $K\\otimes^{\\mathrm L}-\\dashv\\RHom(K,-)$ on $D_{\\mathrm{cons}}$",
@@ -14,32 +14,166 @@
  },
  "stmt_deps": [
   "def-sfb-dc-tensor",
-  "def-sfb-dc-hom"
+  "def-sfb-dc-hom",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof": [
   {
-   "text": "On $D(\\Mod_{\\Lambda_X})$, the functor $\\RHom_{\\Lambda_X}(K,-)$ is right adjoint to\n$K\\otimes^{\\mathrm L}_{\\Lambda_X}-$ ([sk-def-sfb-derived-tensor-hom]). Both functors preserve\nbounded constructible complexes, and their restrictions commute with the inclusion\n([def-sfb-dc-tensor], [def-sfb-dc-hom]). So the Hom-bijections restrict to $D_{\\mathrm{cons}}(X,\\Lambda)$.",
+   "text": "Put $\\mathcal D=D(\\Mod_{\\Lambda_X})$ and $\\mathcal C=D_{\\mathrm{cons}}(X,\\Lambda)$. Write $\\iota:\\mathcal C\\hookrightarrow\\mathcal D$ for the inclusion. For the fixed $K\\in\\mathcal C$ let $T_K=(\\iota K)\\otimes^{\\mathrm L}_{\\Lambda_X}-$ and $H_K=\\RHom_{\\Lambda_X}(\\iota K,-)$ on $\\mathcal D$. The layer-B internal-hom clause of [sk-def-sfb-derived-tensor-hom] gives the ambient adjunction $a:T_K\\dashv H_K$, hence natural bijections $a_{A,B}:\\Hom_{\\mathcal D}(T_K A,B)\\simeq\\Hom_{\\mathcal D}(A,H_K B)$. This uses the relative tensor over $\\Lambda_X$, not the tensor of coefficient-valued sheaves in layer A.",
    "uses": [
-    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor-hom-adjunction.proof.md",
+    "place": "first sentence: the ambient relative tensor–hom adjunction"
+   }
+  },
+  {
+   "text": "By [def-sfb-dc-tensor] and [def-sfb-dc-hom], the two preservation properties are simultaneous hypotheses on $\\Lambda$ in this item. Let $t_K,h_K:\\mathcal C\\to\\mathcal C$ be their specified fixed-$K$ restrictions. Write $H=\\RHom_{\\Lambda_X}(-,-)$ for the ambient bifunctor. The internal-Hom definition gives $h_K(B)=H(\\iota K,\\iota B)$ with its bounded-constructibility property, and $h_K(v)=H(1_{\\iota K},\\iota v)$ on morphisms. Its displayed fixed-$K$ compatibility and the tensor definition give $\\iota h_K=H_K\\iota$ and $\\iota t_K=T_K\\iota$ on objects and morphisms. The internal-Hom comparison has identity components, as explicitly stated in [def-sfb-dc-hom]. Thus the endpoints of both Hom identifications in step 3 are the specified ambient objects, with the same maps; $t_KA$ and $h_KB$ belong to $\\mathcal C$ for every $A,B\\in\\mathcal C$. This uses the preservation assumptions themselves and requires no coefficient-specific finiteness theorem.",
+   "uses": [
     "def-sfb-dc-tensor",
     "def-sfb-dc-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor-hom-adjunction.proof.md",
+    "place": "second sentence: both functors restrict and commute with inclusion"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-bounded-constructible], $\\mathcal C$ is a full subcategory with morphisms computed in $\\mathcal D$. For $A,B\\in\\mathcal C$, define $b_{A,B}$ to be the composite $\\Hom_{\\mathcal C}(t_KA,B)=\\Hom_{\\mathcal D}(T_K\\iota A,\\iota B)\\xrightarrow{a_{\\iota A,\\iota B}}\\Hom_{\\mathcal D}(\\iota A,H_K\\iota B)=\\Hom_{\\mathcal C}(A,h_KB)$. Its inverse is the same composite with $a^{-1}$ and the equalities reversed. For $u:A\\to A\\prime$, $v:B\\to B\\prime$ and $f:t_KA\\prime\\to B$, ambient naturality says $b_{A,B\\prime}(v\\circ f\\circ t_Ku)=h_Kv\\circ b_{A\\prime,B}(f)\\circ u$ after inclusion; the inclusions use the same composition, so this is the naturality identity in $\\mathcal C$. These mutually inverse natural Hom maps define $t_K\\dashv h_K$. Their unit is $b_{A,t_KA}(1_{t_KA})$ and their counit is $b^{-1}_{h_KB,B}(1_{h_KB})$. Under $\\iota$, these become $a_{\\iota A,T_K\\iota A}(1_{T_K\\iota A})$ and $a^{-1}_{H_K\\iota B,\\iota B}(1_{H_K\\iota B})$, respectively, which are the ambient unit and counit at the included objects. Thus the adjunction is the specified restriction, with no additional choice of adjunction data.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor-hom-adjunction.proof.md",
+    "place": "last sentence: restrict Hom-bijections, with naturality and defining adjunction data written out"
+   }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-derived-tensor-hom",
   "def-sfb-dc-tensor",
-  "def-sfb-dc-hom"
+  "def-sfb-dc-hom",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor-hom-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor-hom-adjunction.proof.md",
+  "place": "entire proof, expanded as explicit Hom bijections and naturality"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorHomAdjunction|derivedTensorHomAdjunction|Adjunction",
+   "results": "none; scope: WeilConjectures/SixFunctors/ProEtale/Derived",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope (not a subdirectory of Mathlib); rerun with CategoryTheory; not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor internal hom adjunction restricted to a full bounded constructible subcategory",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.exp.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.Closed.adj; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Types.tensorProductAdjunction; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction, tensor hom, CategoryTheory",
+   "results": "none; loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-16",
+   "verdict": "query error: loogle: unknown identifier 'Adjunction'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of the derived tensor internal hom adjunction to bounded constructible complexes",
+   "results": "LightCondensed.instMonoidalClosedLightCondMod; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; instMonoidalClosedLightCondSet; LightCondensed.ihomPoints; instMonoidalClosedCondensedSet; LightCondensed.ihomPoints_symm_comp; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|internalHomAdjunction|derivedTensorHomAdjunction",
+   "results": "none; scope: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope (not a subdirectory of Mathlib); rerun with CategoryTheory; not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "full subcategory restriction of an adjunction when both functors preserve the subcategory",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Coreflective.mk; CondensedSet.compactlyGeneratedAdjunction; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction of derived tensor and internal Hom on a full subcategory of constructible complexes",
+   "results": "CategoryTheory.ihom.adjunction; CategoryTheory.exp.adjunction; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; LightCondensed.instMonoidalClosedLightCondMod; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; instMonoidalClosedLightCondSet; instMonoidalClosedCondensedSet; CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|derivedTensorHom|D_cons",
+   "results": "none; scope: Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|internalHomAdjunction|derivedTensorHomAdjunction",
+   "results": "Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean; Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; scope: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the project-specific derived module-object/constructible functors; general restriction and closed-adjunction machinery only"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictFullyFaithful|def ofHomEquiv|fullSubcategory.*[Aa]djunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; scope: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: restrictFullyFaithful supplies the general categorical construction (Mathlib/CategoryTheory/Adjunction/Restrict.lean:42-59), with unit/counit formulas at lines 63 and 70. The project-specific ambient module-object adjunction and restricted constructible functors remain inputs from the existing cited nodes; no new generic restriction node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction lifts through fully faithful functors via natural isomorphisms of the left and right functors",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv; CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful; CategoryTheory.Adjunction.whiskerRight_unit_iso_of_R_fully_faithful; CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: restrictFullyFaithful supplies the general categorical construction (Mathlib/CategoryTheory/Adjunction/Restrict.lean:42-59), with unit/counit formulas at lines 63 and 70. The project-specific ambient module-object adjunction and restricted constructible functors remain inputs from the existing cited nodes; no new generic restriction node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|restrictFullyFaithful",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; 25 actual hits; scope: CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: Mathlib/CategoryTheory/Adjunction/Restrict.lean lines 31-59 constructs the general restriction from the supplied ambient adjunction, fully faithful inclusions and comparison isomorphisms; lines 63-72 identify its unit and counit. The existing project definitions supply those inputs; no helper node is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; 10 actual hits; scope: ",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: Mathlib/CategoryTheory/Adjunction/Restrict.lean lines 31-59 constructs the general restriction from the supplied ambient adjunction, fully faithful inclusions and comparison isomorphisms; lines 63-72 identify its unit and counit. The existing project definitions supply those inputs; no helper node is required."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -54,5 +188,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors"
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-tensor-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Repair of landing return at 7054ff796d: re-read all four current cited statements, especially the expanded and reviewed def-sfb-dc-hom. Updated step 1 to distinguish K in the full subcategory from its ambient image, and step 2 to use the current explicit object/morphism assignments and identity inclusion comparison. Regenerated every step/node quote from the current DAG, and preserved the retained second-reader Hom-bijection argument, statement, route, and dependencies. No new nodes, Lean writing, or compiling. Fresh delivery-base citation checking found two additional landed changes hidden by the older shared checkout: the ambient relative-tensor definition citation was corrected upstream and the tensor restriction setting/coefficient examples were made precise. Re-read both current live-mirror statements and refreshed all four quotes against that mirror; the adjunction, preservation hypotheses, and fixed-K inclusion compatibility used here are unchanged.",
+  "blueprint": "Realizes the three sentences of the current main-20261015 item proof and the Hom-bijection restriction paragraph of its parent unit. Parent chapter and unit JSON metadata are absent; read the current blueprint chapter/unit directly. No route or unit realization is changed.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "The parent unit explicitly calls this ambient relative tensor–hom adjunction; restriction of its Hom bijections is exactly the prescribed route."
+   },
+   {
+    "node": "sk-def-sfb-bounded-constructible",
+    "why": "Supplies the definition of the full bounded-constructible subcategory and that its morphisms are ambient morphisms, needed for the elementary restriction calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-bb26e3114",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-bb26e3114 (reviewer sub-agent of L); spot-checked: Reviewed item, all four dependencies, blueprint route, source statements, proof steps, Mathlib searches, tool uses, cycles, coefficient category, and edge cases. No repairs or new nodes are needed; review.md records the checks."
+ }
 }

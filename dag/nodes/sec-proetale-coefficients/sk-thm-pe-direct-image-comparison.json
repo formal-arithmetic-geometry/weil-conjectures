@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-thm-pe-direct-image-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Direct-image comparison",
- "statement": "Let $g\\colon X\\to Y$ be a morphism of schemes. Base change of site objects gives\nthe commutative square of topoi\n\n$$\n\\begin{array}{ccc}\nX_{\\Proet}&\\xrightarrow{\\ \\nu_X\\ }&X_{\\Et}\\\\\n{\\scriptstyle g_{\\Proet}}\\downarrow&&\\downarrow{\\scriptstyle g_{\\Et}}\\\\\nY_{\\Proet}&\\xrightarrow{\\ \\nu_Y\\ }&Y_{\\Et}\n\\end{array}\n$$\n\nand an isomorphism $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ of functors\n$\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda)$, compatible with composition;\nsince all four functors are exact, it is also an isomorphism of functors\n$D(Y_{\\Et},\\Lambda)\\to D(X_{\\Proet},\\Lambda)$.\n\nIf $g$ is quasi-compact and quasi-separated, the canonical natural\ntransformation of functors $D^+(X_{\\Et},\\Lambda)\\to D^+(Y_{\\Proet},\\Lambda)$\n\n$$\n\\nu_Y^*Rg_{\\Et,*}K\\longrightarrow Rg_{\\Proet,*}\\nu_X^*K\n$$\n\nis an isomorphism for $K\\in D^+(X_{\\Et},\\Lambda)$. In particular, direct image of\na bounded-below classical pro-étale complex is classical. The isomorphism is\ncompatible with units, counits and composition.",
+ "statement": "Fix a discrete commutative ring $\\Lambda$, using its constant sheaves as coefficients. Let $g\\colon X\\to Y$ be a morphism of schemes. Base change of site objects gives\nthe commutative square of topoi\n\n$$\n\\begin{array}{ccc}\nX_{\\Proet}&\\xrightarrow{\\ \\nu_X\\ }&X_{\\Et}\\\\\n{\\scriptstyle g_{\\Proet}}\\downarrow&&\\downarrow{\\scriptstyle g_{\\Et}}\\\\\nY_{\\Proet}&\\xrightarrow{\\ \\nu_Y\\ }&Y_{\\Et}\n\\end{array}\n$$\n\nand an isomorphism $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ of functors\n$\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda)$, compatible with composition;\nsince all four functors are exact, it is also an isomorphism of functors\n$D(Y_{\\Et},\\Lambda)\\to D(X_{\\Proet},\\Lambda)$.\n\nIf $g$ is quasi-compact and quasi-separated, the canonical natural\ntransformation of functors $D^+(X_{\\Et},\\Lambda)\\to D^+(Y_{\\Proet},\\Lambda)$\n\n$$\n\\nu_Y^*Rg_{\\Et,*}K\\longrightarrow Rg_{\\Proet,*}\\nu_X^*K\n$$\n\nis an isomorphism for $K\\in D^+(X_{\\Et},\\Lambda)$. In particular, direct image of\na bounded-below classical pro-étale complex is classical. The isomorphism is\ncompatible with units, counits and composition.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
   "place": "node sk-thm-pe-direct-image-comparison, order 730",
@@ -22,38 +22,184 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-derived-categories",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
  "proof": [
   {
-   "text": "The isomorphism $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ is\n[lem-weil-pbc-comparison-pullback]. The map of the theorem is adjoint to the\ncomposite of $g_{\\Proet}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\Et}^*$ with the counit of the\nadjunction $g_{\\Et}^*\\dashv Rg_{\\Et,*}$ between $D^+(Y_{\\Et},\\Lambda)$ and\n$D^+(X_{\\Et},\\Lambda)$; built from these adjunctions, it is compatible with\ntheir units and counits. To show it is an isomorphism, work over an affine open\nof $Y$ and evaluate on the covering basis $V=\\varprojlim_iV_i$, with $V_i$ affine\nand étale over $Y$. For a sheaf $F$ the map in degree $q$ is the continuity map\n\n$$\n\\varinjlim_iH^q_{\\Et}(X\\times_YV_i,F)\\longrightarrow H^q_{\\Et}(X\\times_YV,F).\n$$",
+   "text": "Write $i_T:T_{\\Et}\\to T_{\\Proet}$ for inclusion and $b_g(W)=X\\times_Y W$ for either base-change functor. The comparison morphisms and the scheme morphisms of sites are those of [def-weil-pbc-site-comparison-morphism], [def-weil-proetale-inverse-image] and [def-weil-pbc-inverse-image], with the evaluation formula of [def-weil-pbc-direct-image]. On every étale object $W/Y$ and every pro-étale sheaf $G$ on $X$, both $\\nu_{Y,*}g_{\\Proet,*}G$ and $g_{\\Et,*}\\nu_{X,*}G$ have value $G(X\\times_Y W)$, with the same restriction maps. Thus their direct images agree canonically, giving the displayed square of topoi. Its inverse-image identification is precisely the inverse of the isomorphism in [lem-weil-pbc-comparison-pullback]; that statement supplies its identity and composition compatibility on sheaves.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback"
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, paragraph immediately before lemma-morphism-comparison; comparison-pullback for coherence"
+   }
   },
   {
-   "text": "Since $g$ is quasi-compact and quasi-separated, so are its base changes, and the\nmap is an isomorphism by Stacks Project, Tag 03Q6\n([lemma-weil-pbc-etale-cohomology-continuity]). Bounded-below resolutions, or\nthe convergent hypercohomology spectral sequences, extend this from sheaves to\n$K$. This is the proof of Stacks Project, Tag 09A6, carried out in\n[prop-weil-pbc-comparison-direct-image]. The statement about classical\ncomplexes is [det-pe-direct-image-comparison-classical].",
+   "text": "For any one of the four geometric inverse images $L$, its effect on a constant ring is the canonical constant-ring identification: the constant sheaf functor is left adjoint to global sections (a map out of the sheafified constant presheaf is a compatible family of maps on objects, determined at the terminal object). Hence the composite of $L$ with the source constant-sheaf functor is left adjoint to target global sections, since direct image evaluates at the base-changed terminal object. Uniqueness of left adjoints identifies this composite with the target constant-sheaf functor. The identification respects each ring operation. Give $LF$ its scalar endomorphisms by $L(\\lambda_a)$ for $a\\in\\Lambda$; the module identities and linearity of every comparison follow by applying $L$ to their defining equations. Sheafified constant scalars act by gluing these constant actions. This works for every discrete commutative ring, without a finiteness assumption. Exactness on underlying abelian sheaves is [lem-weil-pbc-site-pullback-abelian-exact]. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], so forgetting the action detects exactness. All four module inverse images are therefore exact. Since cohomology is a kernel modulo an image, preservation of kernels and cokernels gives $\\mathcal H^r(LF^\\bullet)\\cong L\\mathcal H^r(F^\\bullet)$; in particular these functors preserve every cohomological lower bound. Apply [lem-weil-pbc-exact-functor-derived-factorization] to obtain their termwise functors on unbounded derived categories. Apply the sheaf comparison degreewise to complexes and then localize: its inverse, naturality, identity and composition equations remain equations after localization. This proves the first derived assertion.",
    "uses": [
-    "lemma-weil-pbc-etale-cohomology-continuity",
-    "prop-weil-pbc-comparison-direct-image"
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact; constant coefficient specialization; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "In the derived categories put $L_1=g_{\\Et}^*$, $R_1=Rg_{\\Et,*}$, $L_2=g_{\\Proet}^*$, $R_2=Rg_{\\Proet,*}$, $G=\\nu_Y^*$, $H=\\nu_X^*$ and let $c:L_2G\\xrightarrow{\\sim}HL_1$ be step 2. Restrict the input to bounded-below complexes. The exact inverse images preserve this condition by step 2, and $R_1$ preserves it by [def-weil-pbc-direct-image]. Initially regard $R_2H$ in the unbounded target; step 4 identifies it with the bounded-below object $GR_1$ and hence makes the comparison a map in the full bounded-below subcategory. Use the constant-coefficient étale derived adjunction specified in the first paragraph of [sbc-def-base-change-map] (only that general adjunction, with no base-change assertion), with the derived adjunction of [def-weil-pbc-proetale-operations] on the pro-étale side. Define the canonical map to be the mate of $c$ in [def-weil-pbc-adjunction-mate]. Explicitly, for $K$ it is\n$$G R_1K\\xrightarrow{\\eta_{2,GR_1K}}R_2L_2GR_1K\\xrightarrow{R_2(c_{R_1K})}R_2HL_1R_1K\\xrightarrow{R_2H(\\varepsilon_{1,K})}R_2HK.$$\nIts transpose is $H(\\varepsilon_{1,K})\\circ c_{R_1K}$, exactly the comparison map specified in the source. All factors are natural in $K$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate",
+    "sbc-def-base-change-map",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; blueprint direct-image-comparison proof, opening paragraph"
+   }
+  },
+  {
+   "text": "Now impose that $g$ is quasi-compact and quasi-separated. For $B=K$, [prop-weil-pbc-comparison-direct-image] gives an isomorphism $e:S\\xrightarrow{\\sim}T$, where $S=GR_1B$ and $T=R_2HB$. We use only this existence assertion, and do not assume e is the mate. By [sk-prop-sf-comparison], both G and H are fully faithful on bounded-below derived categories. For every $A\\in D^+(Y_{\\Et},\\Lambda)$ the following identifications are bijections:\n$$\\operatorname{Hom}(GA,S)\\cong\\operatorname{Hom}(A,R_1B)\\cong\\operatorname{Hom}(L_1A,B),$$\n$$\\operatorname{Hom}(GA,T)\\cong\\operatorname{Hom}(L_2GA,HB)\\xrightarrow{c_A}\\operatorname{Hom}(HL_1A,HB)\\cong\\operatorname{Hom}(L_1A,B).$$\nIn the second line the c_A identification sends a map v out of L2 GA to $v\\circ c_A^{-1}$. Under these identifications, postcomposition with the canonical $\\beta_B$ of step 3 is the identity: a map $G(t):GA\\to GR_1B$ has transpose\n$$H(\\varepsilon_{1,B})\\circ c_{R_1B}\\circ L_2G(t)=H(\\varepsilon_{1,B}\\circ L_1(t))\\circ c_A,$$\nby naturality of c, which gives exactly the original adjoint of t. Thus postcomposition with $\\beta_B$ is bijective on Hom(GA,-). Take $A=R_1B$, so $GA=S$. Surjectivity supplies $t:S\\to S$ with $\\beta_Bt=e$. Put $h=te^{-1}:T\\to S$. Then $\\beta_Bh=1_T$; injectivity applied to $h\\beta_B$ and $1_S$ gives $h\\beta_B=1_S$. Hence the specified canonical map is invertible, independently of the choice of e. The hypotheses used for e are exactly qcqs g and bounded-below B, with the same discrete coefficients; full faithfulness imposes no properness or constructibility assumption.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+    "place": "Direct-image isomorphism clause; agent argument identifies the canonical mate using the existing existence statement and full faithfulness, without taking extra clauses from a cited proof"
+   }
+  },
+  {
+   "text": "Use classicality exactly as defined in the current [sk-def-pe-classical-definition]: for every integer $q$ and every pro-étale affine presentation $U\\cong\\varprojlim_{i\\in I}U_i$, with $I$ small cofiltered and the $U_i$ affine and étale over the base scheme, the restriction map $\\varinjlim_{i\\in I^{\\mathrm{op}}}H^q(M)(U_i)\\to H^q(M)(U)$ is an isomorphism of $\\Lambda$-modules. Thus a bounded-below classical $M$ lies in $D^+_{\\mathrm{class}}(X_{\\Proet},\\Lambda)$ as used by [det-pe-classical-derived-equivalence]; this is the same continuity predicate as in the blueprint, not an additional hypothesis. [sk-prop-sf-comparison] supplies the bounded-below derived unit required by that equivalence. Its part 2 therefore gives $K=R\\nu_{X,*}M\\in D^+(X_{\\Et},\\Lambda)$ and a counit isomorphism $\\nu_X^*K\\xrightarrow{\\sim}M$. Applying $Rg_{\\Proet,*}$ and step 4 identifies $Rg_{\\Proet,*}M$ with $\\nu_Y^*Rg_{\\Et,*}K$. Since $Rg_{\\Et,*}K$ is bounded below by step 3, part 1 of [det-pe-classical-derived-equivalence] for $Y$ makes the latter a bounded-below classical complex. Classicality is invariant under this derived isomorphism: in each degree it gives an isomorphism of cohomology sheaves, whose evaluations and inverses induce inverse maps on the colimits; for a cohomology-sheaf isomorphism $\\phi:F\\xrightarrow{\\sim}F^{\\prime}$, naturality of restriction gives $c_{F^{\\prime},U}\\circ(\\varinjlim_i\\phi_{U_i})=\\phi_U\\circ c_{F,U}$. Both $\\phi_U$ and $\\varinjlim_i\\phi_{U_i}$ are invertible, with inverses induced by $\\phi^{-1}$. Thus $c_{F^{\\prime},U}=\\phi_U\\circ c_{F,U}\\circ(\\varinjlim_i\\phi_{U_i})^{-1}$. Hence each continuity map for $H^q(Rg_{\\Proet,*}M)$ is invertible, for every $q$ and every presentation, as required by [sk-def-pe-classical-definition]. Boundedness is also invariant under this isomorphism, since the cohomology sheaves vanish in the same degrees. The coefficients throughout are the same discrete constant ring $\\Lambda$.",
+   "uses": [
+    "sk-def-pe-classical-definition",
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/_section.md",
+    "place": "Derived equivalence and its two inverse functors; sk-def-pe-classical-definition/_section.md, continuity map and all-cohomology clause; direct-image-comparison final consequence"
+   }
+  },
+  {
+   "text": "Write $\\beta:GR_1\\to R_2H$ for step 3. Its defining mate formula and its inverse give the two equations\n$$\\beta_{L_1A}\\circ G(\\eta_{1,A})=R_2(c_A)\\circ\\eta_{2,GA},\\qquad \\varepsilon_{2,HB}\\circ L_2(\\beta_B)=H(\\varepsilon_{1,B})\\circ c_{R_1B}.$$\nFor the first substitute the mate formula and move $G\\eta_1$ through $\\eta_2$ and $c$ by naturality; the remaining factor is $\\varepsilon_1L_1\\circ L_1\\eta_1=1$. For the second substitute that formula and use $\\varepsilon_2L_2\\circ L_2\\eta_2=1$ after counit naturality. These are exactly compatibility with the units and counits, with their domains displayed. For composable scheme maps, step 2 gives the pasted inverse-image comparison. Apply clause 2 of [lem-weil-pbc-mate-pasting], with the composite adjunctions, to identify its mate with the composite of the two whiskered direct-image comparisons. Clause 4 gives the identity case. This proves composition compatibility for the specified canonical maps, rather than for arbitrarily chosen isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7, 0E46 and 0E47, remark-base-change and the two composition remarks; unit and counit equations expanded by the mate formula"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-inverse-image",
   "lem-weil-pbc-comparison-pullback",
-  "lemma-weil-pbc-etale-cohomology-continuity",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "sbc-def-base-change-map",
   "prop-weil-pbc-comparison-direct-image",
-  "sk-prop-sf-comparison"
+  "sk-prop-sf-comparison",
+  "sk-def-pe-classical-definition",
+  "det-pe-classical-derived-equivalence",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
-  "place": "## Proof"
+  "place": "Statement and imported proof route; canonical map and coherence made explicit using existing comparison and mate nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "general mate correspondence is used through the existing mate nodes; no match for the scheme comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]t|[Cc]omparisonUpperStar",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state the etale/pro-etale derived direct-image comparison and all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale comparison commutes with derived pushforward along quasi compact quasi separated morphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, TopCat.Sheaf.pushforwardForgetIso, RingHom.Etale",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state the etale/pro-etale derived direct-image comparison and all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism etale to proetale comparison pullback commutes with bounded below derived direct image",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state the etale/pro-etale derived direct-image comparison and all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?[ée]tale|proetale|comparisonUpperStar",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state the etale/pro-etale derived direct-image comparison and all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward of an etale origin classical proetale bounded below complex is classical for a quasicompact quasiseparated map",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state the etale/pro-etale derived direct-image comparison and all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Pp]ushforward|[Pp]ushforward.*comparison|[Pp]ro[Ee]tale.*[Dd]erived",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism between small etale and weakly etale sites the exact comparison inverse image commutes with the right derived direct image of a quasicompact quasiseparated scheme map",
+   "results": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no exact match; hits concern generic underived sheafification or composition, not etale/pro-etale derived direct-image comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -75,5 +221,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-direct-image-comparison"
+ "unit": "sk-thm-pe-direct-image-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-thm-pe-direct-image-comparison",
+  "worker": "stage1",
+  "summary": "Reused existing pullback and direct-image comparisons and classical derived equivalence; supplied exactness for arbitrary discrete constant coefficients, the actual mate formula, unit/counit equations and composition pasting. Removed stale proof citations; no new nodes. The coefficient ring is now explicitly bound with the convention already fixed in the subsection. Repair of returned head 19ac2d636f: revalidated the revised classicality definition against the current DAG and blueprint; step 5 now cites its small-cofiltered, all-cohomology continuity predicate explicitly and proves its invariance under the displayed derived isomorphism. All retained proof citations still match their current statements.",
+  "blueprint": "Realizes the displayed square and pullback comparison, bounded-below direct-image isomorphism, classicality consequence and final coherence sentence of the main-20261015 unit. Uses the continuity comparison already proved by prop-weil-pbc-comparison-direct-image; no change of route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-b9a147ca1",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-b9a147ca1 (reviewer sub-agent of L); spot-checked: Read the full item, six proof steps, all 18 dependencies, current blueprint route, cited literature, and edge cases. The canonical mate, arbitrary discrete coefficient exactness, bounded-below comparison, classicality transfer, and coherence are supported; no new nodes or duplicates. Review written to review.md."
+ }
 }
