@@ -1,0 +1,102 @@
+{
+ "id": "lem-coef-free-factor-hammock-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Integral exceptional-adjoint proof, paragraph 2, the displayed derived coefficient-adjunction and inverse-limit calculation; mapping-space foundation used by the finite-adjunction-diagram realization and its cosimplicial-frame comparison. Technical input: The comparison from actual reduced hammocks to free simplicial resolution localization, before passing to infinity categories. Supporting input: Dwyer–Kan, Calculating simplicial localizations, Comparison Lemma 2.3, printed p.20; proof in Section 5.8, printed pp.24–25",
+   "via": [
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Hammocks for a free factor agree with ordinary inversion",
+ "statement": "Use simplicial categories and weak homotopy equivalences as in [lem-coef-coherent-nerve-comparison]. For an ordinary category $P$ with a wide subcategory $T$, write $H(P,T)(x,y)_k$ for reduced commutative rectangular zigzags with $k+1$ rows from $x$ to $y$: vertical arrows point down and lie in $T$, endpoint vertical arrows are identities, each horizontal column has uniform direction, leftward arrows lie in $T$, directions alternate, and no column is entirely identities. Include the length-zero diagram when $x=y$. Operators delete or repeat rows and then reduce by deleting identity columns and composing adjacent columns with the same direction. Composition concatenates and reduces. For a simplicial pair $(A,U)$ with a fixed object set, $\\operatorname{diag}H(A,U)(x,y)_n=H(A_n,U_n)(x,y)_n$, with both simplicial operators applied together. Let $O$ be a small set and let $D,V$ be free ordinary categories with object set $O$: each has a chosen set of nonidentity generating arrows, and every arrow has a unique finite composable word in those generators, with the empty word representing an identity. Let $P=D*_O V$ be their coproduct among categories with object set $O$ and functors fixing $O$, and identify $V$ with its canonical wide subcategory of $P$. Let $P[V^{-1}]$ be the category with the same objects obtained by adjoining inverses to arrows of $V$, subject to the composition and inverse relations. Regard its mapping sets as discrete simplicial sets. Sending a hammock to the composite of any row in $P[V^{-1}]$, using inverses for leftward arrows, defines a simplicial functor $H(P,V)\\to P[V^{-1}]$ which is the identity on objects and induces a weak homotopy equivalence on every mapping simplicial set. This functor is natural for functors of such pairs preserving $V$; no chosen generators need be preserved by these functors.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan, Calculating simplicial localizations, Comparison Lemma 2.3, printed p.20; proof in Section 5.8, printed pp.24–25 No Stacks tag states this simplicial-localization result."
+ },
+ "stmt_deps": [
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a free product of free categories D and W the hammock localization of D star W at W maps by weak equivalence to ordinary localization",
+   "results": "{\"t\": \"2026-10-16T15:09:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a free product of free categories D and W the hammock localization of D star W at W maps by weak equivalence to ordinary localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.q_isLocalization\", \"HomRel.FactorsThroughLocalization.isLocalizedEquivalence\", \"CategoryTheory.Localization.Construction.lift\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse_obj_map\", \"CategoryTheory.Localization.qCompEquivalenceFromModelFunctorIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.Localization.Construction.lift_map\"], \"digest\": \"29c4c55fe35b8ab7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Localization.Construction.lift and FreeGroupoid construct ordinary inversion, without a hammock weak-equivalence assertion. Read Localization/Construction.lean:45–105 and Groupoid/FreeGroupoidOfCategory.lean:25–80. The free-factor/hammock grep and FreeCategory–Localization Loogle searches have no hits; both semantic phrasings concern ordinary localization or path quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories freely generated by arrows, inverting a free factor strictly computes the homotopy type of reduced hammocks",
+   "results": "{\"t\": \"2026-10-16T15:10:10Z\", \"tool\": \"leanfinder\", \"query\": \"For categories freely generated by arrows, inverting a free factor strictly computes the homotopy type of reduced hammocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.toQuotientPaths_map\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"CategoryTheory.FreeGroupoid.homMk\", \"Quiver.FreeGroupoid.of_eq\", \"CategoryTheory.quotientPathsTo_map\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"CategoryTheory.Cat.FreeRefl.morphismPropertyHomMk_homMk\", \"CategoryTheory.FreeGroupoid.homRel\"], \"digest\": \"2fb3e97b7a89b79f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Localization.Construction.lift and FreeGroupoid construct ordinary inversion, without a hammock weak-equivalence assertion. Read Localization/Construction.lean:45–105 and Groupoid/FreeGroupoidOfCategory.lean:25–80. The free-factor/hammock grep and FreeCategory–Localization Loogle searches have no hits; both semantic phrasings concern ordinary localization or path quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FreeCategory\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T15:10:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"FreeCategory\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Localization.Construction.lift and FreeGroupoid construct ordinary inversion, without a hammock weak-equivalence assertion. Read Localization/Construction.lean:45–105 and Groupoid/FreeGroupoidOfCategory.lean:25–80. The free-factor/hammock grep and FreeCategory–Localization Loogle searches have no hits; both semantic phrasings concern ordinary localization or path quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|free.*factor.*localiz|localiz.*free.*factor",
+   "results": "{\"t\": \"2026-10-16T15:10:09Z\", \"tool\": \"grep\", \"query\": \"hammock|free.*factor.*localiz|localiz.*free.*factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Localization.Construction.lift and FreeGroupoid construct ordinary inversion, without a hammock weak-equivalence assertion. Read Localization/Construction.lean:45–105 and Groupoid/FreeGroupoidOfCategory.lean:25–80. The free-factor/hammock grep and FreeCategory–Localization Loogle searches have no hits; both semantic phrasings concern ordinary localization or path quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan hammock localization of a free product of free categories agrees with ordinary inversion",
+   "results": "{\"t\": \"2026-10-16T15:10:10Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan hammock localization of a free product of free categories agrees with ordinary inversion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Construction.relations.Winv₂\", \"CategoryTheory.Localization.HasProductsOfShapeAux.inverts\", \"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Localization.Construction.lift\", \"CategoryTheory.Localization.Construction.relations.Winv₁\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.instCategory\", \"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\"], \"digest\": \"cb45351613e68f99\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Localization.Construction.lift and FreeGroupoid construct ordinary inversion, without a hammock weak-equivalence assertion. Read Localization/Construction.lean:45–105 and Groupoid/FreeGroupoidOfCategory.lean:25–80. The free-factor/hammock grep and FreeCategory–Localization Loogle searches have no hits; both semantic phrasings concern ordinary localization or path quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial localization mapping spaces of a free category relative to a freely generated subgraph have contractible components",
+   "results": "{\"t\": \"2026-10-16T15:44:08Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial localization mapping spaces of a free category relative to a freely generated subgraph have contractible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\", \"instCategorySimplexCategoryGenRel\", \"SimplexCategoryGenRel.toSimplexCategory\", \"CategoryTheory.instNonemptyFreeGroupoid\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.instIsDiscreteHomotopyCategoryObjTruncatedOfNatNatTruncationSimplexCategoryStdSimplexMk\", \"SSet.Truncated.HomotopyCategory.quotientFunctor\"], \"digest\": \"b30e7124919730bc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits and LocalizerMorphism declarations concern equivalences of ordinary localized categories, not weak equivalences of reduced-hammock mapping simplicial sets. FreeGroupoid.instIsLocalizationOfTopMorphismProperty is ordinary inversion of every arrow, without the relative free-factor homotopy claim. Read FreeGroupoidOfCategory.lean:30–105, CofibrantObjectHomotopy.lean:55–105, and the returned signatures. The independent source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Simplicial.*Localiz|Hammock|DKEquivalence|FreeCategory.*localiz",
+   "results": "{\"t\": \"2026-10-16T15:44:39Z\", \"tool\": \"grep\", \"query\": \"Simplicial.*Localiz|Hammock|DKEquivalence|FreeCategory.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits and LocalizerMorphism declarations concern equivalences of ordinary localized categories, not weak equivalences of reduced-hammock mapping simplicial sets. FreeGroupoid.instIsLocalizationOfTopMorphismProperty is ordinary inversion of every arrow, without the relative free-factor homotopy claim. Read FreeGroupoidOfCategory.lean:30–105, CofibrantObjectHomotopy.lean:55–105, and the returned signatures. The independent source grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocalizerMorphism\", \"IsLocalizedEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T15:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocalizerMorphism\\\", \\\"IsLocalizedEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.id\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedFullyFaithfulOfIsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_isInduced\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedEquivalenceOppositeOpOp\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.comp\"], \"digest\": \"aff41fb774d49abf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search. The semantic hits and LocalizerMorphism declarations concern equivalences of ordinary localized categories, not weak equivalences of reduced-hammock mapping simplicial sets. FreeGroupoid.instIsLocalizationOfTopMorphismProperty is ordinary inversion of every arrow, without the relative free-factor homotopy claim. Read FreeGroupoidOfCategory.lean:30–105, CofibrantObjectHomotopy.lean:55–105, and the returned signatures. The independent source grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dk-cofibrant-localization-comparison",
+  "date": "2026-10-16",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

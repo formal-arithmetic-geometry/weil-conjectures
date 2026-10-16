@@ -3,38 +3,194 @@
  "blueprint": {
   "is": "lem-sfb-eta-ring-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\eta_f$ is a morphism of ring objects",
- "statement": "Give $f_*\\Lambda_X$ the ring object structure induced by the lax monoidal\nfunctor $f_*$ ([sk-def-sfb-finite-pushforward-pullback]). Then\n$\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda_X$ ([def-sfb-eta]) is a morphism of ring\nobjects.",
+ "statement": "Let $\\Lambda$ be a condensed ring ([sk-def-sfb-condensed-ring]), let $f\\colon X\\to Y$ be a morphism of schemes, and use the pulled-back coefficient ring objects $\\Lambda_X,\\Lambda_Y$ of [sk-def-sfb-pulled-back-coefficients]. Use the strong monoidal structure on $f^*$ of [def-sfb-finite-upper-star-monoidal] and the lax monoidal structure on $f_*$ of [def-sfb-finite-lower-star-lax-monoidal]. Give $f_*\\Lambda_X$ the induced ring object structure of [det-def-sfb-ring-object-transport]. Then $\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda_X$ of [def-sfb-eta] is a morphism of ring objects, in the sense of [det-def-sfb-ring-object-monoid].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.md",
   "place": "node lem-sfb-eta-ring-hom, order 1563"
  },
  "stmt_deps": [
-  "def-sfb-eta"
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "det-def-sfb-ring-object-transport",
+  "def-sfb-eta",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof": [
   {
-   "text": "The adjunction $f^*\\dashv f_*$ is monoidal\n([sk-def-sfb-finite-pushforward-pullback]). So its unit is a monoidal natural\ntransformation, and its component $\\Lambda_Y\\to f_*f^*\\Lambda_Y$ is a morphism\nof ring objects. By [lem-sfb-alpha-ring-hom], $\\alpha_f$ is a morphism of\nring objects, and the lax monoidal $f_*$ sends it to a morphism of ring\nobjects. A composite of morphisms of ring objects is one.",
+   "text": "Put $F=f^*$, $G=f_*$, and $R=\\Lambda_Y$. By [sk-def-sfb-pulled-back-coefficients], $R$ is a ring object. By [lem-sfb-finite-monoidal-adjunction], for exactly the monoidal structures in the statement the adjunction $F\\dashv G$ has monoidal unit $u\\colon\\mathrm{id}\\Rightarrow GF$. Apply clause 3 of [det-def-sfb-ring-object-transport] to this transformation and to $R$. It gives a morphism of ring objects $u_R\\colon R\\to GFR$, where $GFR$ has the structure obtained first by $F$ and then by $G$. These iterated structure maps are those for the composite $GF$: its tensor map is $G(\\mu^F)\\circ\\mu^G$, and its unit map is $G(\\varepsilon^F)\\circ\\varepsilon^G$. Thus the intermediate ring object is precisely $f_*f^*\\Lambda_Y$ with the required transported structure.",
    "uses": [
-    "lem-sfb-alpha-ring-hom"
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-finite-monoidal-adjunction",
+    "det-def-sfb-ring-object-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.proof.md",
+    "place": "sentences 1–2: the monoidal adjunction and its unit"
+   }
+  },
+  {
+   "text": "By [lem-sfb-alpha-ring-hom], $a=\\alpha_f\\colon FR\\to\\Lambda_X$ is a morphism of the ring objects obtained using this same strong monoidal structure on $F$. By [def-sfb-finite-lower-star-lax-monoidal], $G$ is lax monoidal. Clause 1 of [det-def-sfb-ring-object-transport], applied to $G$ and $a$, therefore gives a morphism of ring objects $v=G(a)\\colon GFR\\to G\\Lambda_X$. Its target structure is exactly the lax-monoidal pushforward structure specified in the statement.",
+   "uses": [
+    "lem-sfb-alpha-ring-hom",
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.proof.md",
+    "place": "sentence 3: alpha is a ring morphism and pushforward preserves it"
+   }
+  },
+  {
+   "text": "By [def-sfb-eta], $\\eta_f=v\\circ u_R$. Write $(m_R,e_R)$, $(m_T,e_T)$ and $(m_S,e_S)$ for the multiplication and unit of $R$, $T=GFR$ and $S=G\\Lambda_X$. The two morphisms constructed in steps 1–2 satisfy the equations of [det-def-sfb-ring-object-monoid]. Hence $(vu_R)e_R=ve_T=e_S$ and $(vu_R)m_R=vm_T(u_R\\otimes u_R)=m_S(v\\otimes v)(u_R\\otimes u_R)=m_S((vu_R)\\otimes(vu_R))$. These are the two defining conditions for $\\eta_f$ to be a morphism of ring objects.",
+   "uses": [
+    "def-sfb-eta",
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.proof.md",
+    "place": "last sentence: compose the two ring morphisms"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-alpha-ring-hom"
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-finite-monoidal-adjunction",
+  "det-def-sfb-ring-object-transport",
+  "lem-sfb-alpha-ring-hom",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-eta",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-eta-ring-hom.proof.md",
+  "place": "entire proof, expanded into the unit, pushforward, and composition steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitAlgHom|isMonHom_unit|isMonHom_map|isMonHom_app|isMonHom_comp",
+   "results": "0 hits; ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit is a morphism of monoid objects for a monoidal adjunction",
+   "results": "8 hits; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.CoreUnitCounit.unit, CategoryTheory.Adjunction.toMonad_η, CategoryTheory.Adjunction.unit, CategoryTheory.ihom.coev, CategoryTheory.exp.coev, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsMonHom",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a morphism of monoid objects under a monoidal adjunction is a morphism of monoid objects",
+   "results": "8 hits; CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.mapMon_unit, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon|map_monoid|monoidal.*[Uu]nit|instIsMonoidalUnit|Mon_",
+   "results": "25 hits; Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Bimon_.lean; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon_, CategoryTheory.Adjunction",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Mon_'",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor sends monoid homomorphisms to monoid homomorphisms and components of monoidal natural transformations preserve multiplication and unit",
+   "results": "8 hits; CategoryTheory.Functor.map.instIsMonHom, CategoryTheory.Functor.mapMon_obj_mon_mul, CategoryTheory.Functor.mapMon_map_hom, CategoryTheory.Functor.mapMonNatTrans, CategoryTheory.Functor.mapMon, CategoryTheory.Functor.obj.μ_def, CategoryTheory.Functor.monObjObj, CategoryTheory.Functor.mon_ClassObj",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "grep",
+   "query": "isMonHom|mapMon|unitAlgHom",
+   "results": "5 hits; 213, 218, 221, 228, 232; searched Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "12 hits; CategoryTheory.Functor.mapMon, CategoryTheory.Functor.Faithful.mapMon, CategoryTheory.Functor.mapMonIdIso, CategoryTheory.Functor.FullyFaithful.mapMon, CategoryTheory.Functor.Full.mapMon, CategoryTheory.Functor.mapMon_obj_X, CategoryTheory.Functor.instLaxMonoidalMonMapMon, CategoryTheory.Functor.essImage_mapMon",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "grep",
+   "query": "^(instance instIsMonHomComp|def mapMon|.*isMonHom_app|.*unitAlgHom|.*instIsMonHom).*",
+   "results": "5 hits; Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "related generic monoid/monoidal infrastructure; not an exact match for the scheme-specific coefficient morphism with its specified structures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of monoidal categories induces an adjunction on categories of monoid objects, so adjoint transpose preserves monoid morphisms",
+   "results": "8 hits; CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.mapMon_unit, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.mapCommMon_unit, MonCat.adj",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic monoidal/monoid-object infrastructure only; the specific scheme functors, monoidal adjunction and alpha ring morphism require the cited DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "unitAlgHom|isMonHom_unitAlgHom|homEquiv.*[Mm]on|mapMon_unit",
+   "results": "7 hits; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic monoidal/monoid-object infrastructure only; the specific scheme functors, monoidal adjunction and alpha ring morphism require the cited DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapMon|mapMonNatTrans|instIsMonHomComp|instance map.instIsMonHom",
+   "results": "6 hits; Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Grp.lean; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic monoidal/monoid-object infrastructure only; the specific scheme functors, monoidal adjunction and alpha ring morphism require the cited DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoidal adjunction the adjunct of a monoid homomorphism is a monoid homomorphism",
+   "results": "8 hits; CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Adjunction.mapGrp, CategoryTheory.Functor.homMonoidHom, CategoryTheory.Adjunction.mapMon_unit, CategoryTheory.Mon.EquivLaxMonoidalFunctorPUnit.isMonHom_counitIsoAux, CategoryTheory.Mon.EquivLaxMonoidalFunctorPUnit.counitIsoAux_IsMon_Hom, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: generic Adjunction.mapMon requires the monoidal adjunction premise and alpha ring morphism supplied by existing DAG nodes; no exact scheme-specific leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural transformation induces homomorphisms between the monoid objects obtained by applying its functors",
+   "results": "8 hits; CategoryTheory.Functor.mapMonNatTrans, CategoryTheory.Functor.mapMonNatTrans_app_hom, CategoryTheory.Functor.homMonoidHom, CategoryTheory.Mon.Hom.hom, CategoryTheory.Functor.mapMonFunctor_map_app_hom, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functor_map_app_hom, CategoryTheory.Functor.homMonoidHom_apply, CategoryTheory.Functor.mapMon_map_hom",
+   "date": "2026-10-16",
+   "verdict": "fresh second reading: generic transport of monoid objects and monoidal transformations; the scheme-specific monoidal adjunction and alpha morphism remain existing DAG premises, so no exact Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMonNatTrans|comp_mapMon_(one|mul)|mapMonCompIso",
+   "results": "6 hits; Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Grp.lean; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "fresh second reading: generic transport of monoid objects and monoidal transformations; the scheme-specific monoidal adjunction and alpha morphism remain existing DAG premises, so no exact Mathlib leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +211,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-coefficient-morphisms"
+ "unit": "sk-def-sfb-coefficient-morphisms",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-eta-ring-hom",
+  "worker": "Q30 stage1",
+  "summary": "Expanded the original monoidal-adjunction proof into three justified steps using the existing monoidal-adjunction and ring-object-transport results, followed by an explicit elementary composition calculation; no new nodes. Made the original implicit objects and the specified strong/lax monoidal structures explicit without changing hypotheses or conclusion. The repair declares the generic transport tool in split_report.tool_uses. This delivery contains the item and its report only; it does not include a unit realization update.",
+  "blueprint": "Original lem-sfb-eta-ring-hom proof: sentences 1–2 become step 1; sentence 3 becomes step 2; the final composition sentence becomes step 3. This realizes the eta assertion of sk-def-sfb-coefficient-morphisms along its given route.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-transport",
+    "why": "Generic transport of ring objects along lax monoidal functors and monoidal natural transformations; the coefficient-morphisms unit route supplies the scheme-specific adjunction and alpha hypotheses, while no node in this unit replaces this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-ece375d7b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-ece375d7b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three steps are valid; coefficients and mate construction match master, with no cycle, missing dependency, or new duplicate. Accepted the transport tool use. Corrected only the stale split_report.summary claiming a unit file was included; review.md records source checks and edge cases.; 1 file(s) fixed by the reviewer"
+ }
 }
