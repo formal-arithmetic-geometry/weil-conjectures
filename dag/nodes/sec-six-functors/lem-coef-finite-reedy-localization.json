@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-direct-wfs-extension"
  ],
  "proof": [
   {
@@ -250,5 +251,49 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-5db6a0103 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Checked all ten steps and four new nodes against Hovey, Cisinski, and Hinich; verified induction, mapping-space compatibility, empty/parallel-arrow cases, dependencies, duplicates, route, and exact master target signatures. No repairs or accepted tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteReedyLocalization",
+  "declaration": "HomotopicalAlgebra.FiniteReedy.finite_reedy_localization",
+  "declarations": [
+   "HomotopicalAlgebra.FiniteReedy.largeNerve",
+   "HomotopicalAlgebra.FiniteReedy.strictEvaluation",
+   "HomotopicalAlgebra.FiniteReedy.comparison",
+   "HomotopicalAlgebra.FiniteReedy.Inverts",
+   "HomotopicalAlgebra.FiniteReedy.localDiagrams",
+   "HomotopicalAlgebra.FiniteReedy.IsLocalization",
+   "HomotopicalAlgebra.FiniteReedy.IsDirect",
+   "HomotopicalAlgebra.FiniteReedy.IsInverse",
+   "HomotopicalAlgebra.FiniteReedy.matchingArrow",
+   "HomotopicalAlgebra.FiniteReedy.finiteIndexColimits",
+   "HomotopicalAlgebra.FiniteReedy.finiteIndexLimits",
+   "HomotopicalAlgebra.FiniteReedy.transformation",
+   "HomotopicalAlgebra.FiniteReedy.diagram",
+   "HomotopicalAlgebra.FiniteReedy.object",
+   "HomotopicalAlgebra.FiniteReedy.IsColimitEdge",
+   "HomotopicalAlgebra.FiniteReedy.IsLimitEdge",
+   "HomotopicalAlgebra.FiniteReedy.Composes",
+   "HomotopicalAlgebra.FiniteReedy.EquivalentObjects",
+   "HomotopicalAlgebra.FiniteReedy.IsColimitAdjunction",
+   "HomotopicalAlgebra.FiniteReedy.IsLimitAdjunction",
+   "HomotopicalAlgebra.FiniteReedy.DirectConclusion",
+   "HomotopicalAlgebra.FiniteReedy.InverseConclusion",
+   "HomotopicalAlgebra.FiniteReedy.finite_reedy_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteReedyLocalization.lean",
+  "statement": "theorem finite_reedy_localization (M : Type u) [Category.{v} M] [ModelCategory M] (I : Type w) [Category.{z} I] [Finite I] [∀ i j : I, Finite (i ⟶ j)] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (d : I → ℕ) (hd : IsDirect d ∨ IsInverse d) (C : SSet.{max u v w z t}) (q : largeNerve.{u, v, max w z t} M ⟶ C) (hq : IsLocalization.{u, v, max w z t} (weakEquivalences M) q) : IsLocalization.{max w u v z, max w v, t} ((weakEquivalences M).functorCategory I) (comparison.{u, v, w, z, t} I M C q) ∧ (∀ (H : SSet.{max u v w z t}) (r : largeNerve.{max w u v z, max w v, t} (I ⥤ M) ⟶ H), IsLocalization.{max w u v z, max w v, t} ((weakEquivalences M).functorCategory I) r → ∃ E : H ⟶ (ihom (largeNerve.{w, z, max u v t} I)).obj C, SSet.Enhanced.IsFunctorEquivalence E ∧ SSet.Enhanced.AreNaturallyEquivalent (r ≫ E) (comparison.{u, v, w, z, t} I M C q)) ∧ (IsDirect d → DirectConclusion.{u, v, w, z, t} I M C q) ∧ (IsInverse d → InverseConclusion.{u, v, w, z, t} I M C q)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical evaluation and degreewise universe-lifted nerves; the full quasicategorical localization universal property, coherent universal units/counits, and replacement triangles are explicit helper definitions of this node. Uses the landed canonical latching construction of lem-coef-direct-wfs-extension (added to stmt_deps); matching maps are its opposite. No other DAG statement is restated. Second reading explicitly retains both functorial factorizations in each Reedy model structure, as required by Hovey Definition 1.1.3."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9a7d9d7fe",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Wrote review.md. Checked statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py reproduced clean sandbox and library compilation. No defects or fixes needed; branch unchanged."
  }
 }
