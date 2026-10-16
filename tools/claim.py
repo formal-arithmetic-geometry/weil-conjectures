@@ -130,6 +130,13 @@ def take(who, m, quiet=False) -> bool:
         if not quiet:
             print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
         return False
+    if li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
+            and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()):
+        # launcher, 2026-10-16: a module proved on the main branch is not claimable even while the queue still lists it
+        # (between a landing and the next queue refresh groups claimed just-proved modules and ended BLOCKED)
+        if not quiet:
+            print(f"{m} has no sorry on the main branch; nothing to claim")
+        return False
     if node_finished(m) and repair_note(m).get('state') != 'released':   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
         if not quiet:
             print(f"{m} is already split, matched or attached; nothing to claim")
