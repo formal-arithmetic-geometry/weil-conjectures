@@ -35,7 +35,8 @@
   "def-pur-derived-internal-hom",
   "lem-sf-baer-criterion",
   "def-weil-finite-tor-amplitude",
-  "def-weil-pbc-projective-module"
+  "def-weil-pbc-projective-module",
+  "def-sf-coefficient-duality"
  ],
  "proof": [
   {
@@ -285,5 +286,30 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-03ea69260 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all ten proof steps, three new nodes, edge cases, Stacks tags 0AVF/066U/066Z/07VI/0A66, and Mathlib matches. Each new node's created object omitted required by/date/group fields. Corrected whole JSON files are provided under fixes/dag/nodes/sec-six-functors/; review.md records the checks.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2c7caf3f0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical evaluation, universes, edge cases, records, and report sections. Both Lean modules reproduced successfully through scompile.py. No errors or fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFrobenius",
+  "declaration": "WeilConjectures.coefficient_frobenius",
+  "declarations": [
+   "WeilConjectures.coefficient_frobenius",
+   "WeilConjectures.integral_coefficient_ordinary_duality",
+   "WeilConjectures.integral_coefficient_derived_duality",
+   "WeilConjectures.perfect_coefficient_derived_evaluation",
+   "WeilConjectures.finiteTor_point_coefficient_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientFrobenius.lean",
+  "statement": "theorem coefficient_frobenius (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : coefficientFrobeniusProperties (Padic.coefficientExtensionRing l E n) ∧ coefficientFrobeniusProperties E ∧ coefficientFrobeniusProperties (AlgebraicClosure (Padic l))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

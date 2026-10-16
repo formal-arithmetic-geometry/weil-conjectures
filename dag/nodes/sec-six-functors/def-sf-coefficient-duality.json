@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-coefficient-duality",
+ "kind": "definition",
+ "title": "Coefficient duality and bounded finite-cohomology complexes",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring and use $R$-modules in a common universe. In the module derived category $D(R)$ [def-weil-abstract-derived-category], define $D^b_{\\mathrm{fg}}(R)$ to be the full subcategory of objects $K$ with bounded cohomology and each $H^i(K)$ finitely generated [def-weil-finitely-generated-module]. Define $D_R:D(R)^{\\mathrm{op}}\\to D(R)$ by $D_R(K)=R\\operatorname{Hom}_R(K,R[0])$, the one-object ringed-site case of [def-pur-derived-internal-hom]. Define $\\delta_K:K\\to D_R D_R K$ to be the transpose of evaluation $K\\otimes^L D_R K\\to R[0]$ after interchanging the tensor factors by the canonical Koszul braiding. Finally, let $\\operatorname{FrobDual}(R)$ abbreviate the conjunction of the following assertions: $R$ is injective over itself in the sense of [lem-sf-baer-criterion] and Artinian; ordinary algebraic $\\operatorname{Hom}_R(-,R)$ takes every short exact sequence of modules to a short exact sequence in the reverse direction; for every finite module $M$ its dual is finite and its canonical evaluation $M\\to M^{**}$ is an isomorphism; and $D_R$ restricts to an anti-equivalence $D^b_{\\mathrm{fg}}(R)^{\\mathrm{op}}\\simeq D^b_{\\mathrm{fg}}(R)$. The last phrase means there exists an equivalence whose composite with the full inclusion is naturally isomorphic to the full inclusion followed by $D_R$. The first two conditions are precisely the commutative quasi-Frobenius convention.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pur-derived-internal-hom",
+  "lem-sf-baer-criterion"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-coefficient-frobenius.md",
+  "place": "All three clauses; Stacks Project Tags 08J7 (derived Hom), 07VI (canonical evaluation), 0AVF (injectivity)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived coefficient duality exact anti equivalence bounded finite cohomology Artinian self injective rings",
+   "results": "Service unavailable: Internal Server Error. No mathematical inference from this unavailable service.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded derived category of modules with finitely generated cohomology and coefficient duality Hom into the coefficient ring",
+   "results": "8 hits on Ext and projective-resolution cohomology; no bounded finite-cohomology coefficient-duality package.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedFiniteCoefficient|coefficientDerived|coefficientFrobeniusProperties|toIhomIhomUnit|internalHom",
+   "results": "Mathlib CategoryTheory/Monoidal: internalHom exists, but no coefficient-specialized package. Upstream: DerivedCategory monoidal closed structure and MonoidalClosed.toIhomIhomUnit; reused, not reimplemented. Project lean/Sheaf: no matching specialized definitions. DAG blueprint_refs search coefficient duality and bounded finite finds the assigned theorem but no definition of this package.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-coefficient-frobenius",
+  "date": "2026-10-16",
+  "group": "Q08"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-coefficient-frobenius",
+   "place": "The bounded finite-cohomology coefficient category, coefficient dual, canonical evaluation, and conjunction of the first clause.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientDuality",
+  "declaration": "WeilConjectures.boundedFiniteCoefficientComplex",
+  "declarations": [
+   "WeilConjectures.boundedFiniteCoefficientComplex",
+   "WeilConjectures.coefficientDerivedDual",
+   "WeilConjectures.coefficientDerivedEvaluation",
+   "WeilConjectures.coefficientFrobeniusProperties"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientDuality.lean",
+  "statement": "def boundedFiniteCoefficientComplex (R : Type u) [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)] : ObjectProperty (DerivedCategory (ModuleCat.{u} R))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Timeout repair: canonical evaluation directly curries DerivedMonoidal.braiding followed by ihom.ev, the formula of MonoidalClosed.toIhomIhomUnit, with nested ihom as its definitionally identical double-dual target. This avoids the expensive kernel conversion through the entire concrete braided-category structure; no mathematical statement changes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2c7caf3f0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2c7caf3f0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical evaluation, universes, edge cases, records, and report sections. Both Lean modules reproduced successfully through scompile.py. No errors or fixes required; branch head unchanged."
+ }
+}

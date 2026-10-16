@@ -59,33 +59,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.FiniteTypeExceptionalInverseImage",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteTypeExceptionalInverseImage",
+  "module": "Sheaf.Paper.FiniteExceptionalInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.finiteExceptionalInverseImage",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteTypeHasBoundedBelowUpperShriek",
-   "AlgebraicGeometry.ProEtale.finiteTypeExceptionalInverseImage",
-   "WeilConjectures.PurityFiniteSetting.finiteCoefficient",
-   "WeilConjectures.PurityFiniteSetting.exceptionalBoundedBelow",
-   "WeilConjectures.PurityFiniteSetting.noetherian",
-   "WeilConjectures.PurityFiniteSetting.unitPlus",
-   "WeilConjectures.PurityFiniteSetting.exceptional",
-   "WeilConjectures.PurityFiniteSetting.dualizing",
-   "WeilConjectures.PurityFiniteSetting.counit"
+   "AlgebraicGeometry.Scheme.finiteExceptionalInverseImage"
   ],
-  "file": "lean/Sheaf/Paper/FiniteTypeExceptionalInverseImage.lean",
-  "statement": "def finiteTypeExceptionalInverseImage (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))",
+  "file": "lean/Sheaf/Paper/FiniteExceptionalInverseImage.lean",
+  "statement": "def finiteExceptionalInverseImage (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n) ⥤ proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)",
   "branch": "newtargets-dag",
-  "by": "Q03",
+  "by": "Q09",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Reuse the interface already delivered by Q11, extending its owning module with the canonical diagonal-comparison helpers and finite-setting specializations used here. Previously unstated dependency: supplies the finite-level field-base exceptional inverse image needed here. The published ProEtale.rightDerivedUpperShriek now requires a mapwise bounded-below etale exceptional interface, absent from the consumer context; the named theorem states the unconditional finite-type field-base interface and the definition uses it. The data are exactly the published comparison transport of the etale right adjoint. Higher coefficient clauses of this node are not used by the finite-level consumer."
+  "note": "Section 1(B), intrinsic constant-ring coefficient interface: the current recorded ProEtale.finiteTypeExceptionalInverseImage has fixed-scalar ModuleCat sheaves as source and target, whereas the recorded interval predicate uses intrinsic constant-ring SheafOfModules. This module supplies the same canonical composite nu_X^* f^times Rnu_Y,* in that intrinsic presentation. It uses the published realization equivalence directly, the ordinary-etale right adjoint, and Nagata compactifiability; it assumes no ambient pro-etale adjunction. The narrow realization and comparison imports avoid the redundant extension-by-zero import implicated in the returned duplicate UpperLowerStar declarations. Only finite coefficients are consumed by this item."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-819753ec9",
-  "group": "Q03",
+  "reviewer": "NT-stage2-Codex-abd1ba976",
+  "group": "Q09",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, canonical maps, universes, edge cases, and report. All four modules passed per-file scompile.py checks. No defects found; review.md written and branch unchanged."
+  "note": "Reviewed immutable files, all statement dependencies, sources, canonical constructions, universes, edge cases, and report. Both Lean files passed all five scompile.py checks without diagnostics. review.md written; branch unchanged."
  }
 }
