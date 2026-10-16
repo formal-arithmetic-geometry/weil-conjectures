@@ -47,7 +47,9 @@
   "def-trf-coefficient-conventions",
   "def-weil-abstract-derived-category",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-pc-perfect-ring-complex",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
@@ -297,5 +299,24 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-65ffd83d9 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master blueprint, unit/chapter route, and cited Stacks sources. All six steps satisfy their hypotheses and preserve both equivalences. Confirmed coefficient-category distinction, source-proof corrections, edge cases, and absence of dependency cycles. Accepted four generic tool uses. No new nodes or repairs; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect",
+  "declaration": "DerivedCategory.finiteTorAmplitude_iff_perfect_iff_finiteFree",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/FiniteTorAmplitudePerfect.lean",
+  "statement": "theorem finiteTorAmplitude_iff_perfect_iff_finiteFree (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) [HasDerivedCategory.{w} (ModuleCat.{u} (Padic.coefficientExtensionRing l E n))] (C : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionRing l E n))) (hbounded : TStructure.t.bounded C) (hfinite : ∀ i : ℤ, Module.Finite (Padic.coefficientExtensionRing l E n) ((homologyFunctor (ModuleCat.{u} (Padic.coefficientExtensionRing l E n)) i).obj C)) : ((∃ a b : ℤ, a ≤ b ∧ torAmplitudeIn (ModuleCat.{u} (Padic.coefficientExtensionRing l E n)) a b C) ↔ IsPerfectRingComplex C) ∧ (IsPerfectRingComplex C ↔ ∃ (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionRing l E n)) ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free (Padic.coefficientExtensionRing l E n) (P.X i) ∧ Module.Finite (Padic.coefficientExtensionRing l E n) (P.X i)) ∧ Nonempty (C ≅ Q.obj P))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the already landed IsPerfectRingComplex interface for the perfect-category clause of def-trf-categorical-trace and the recorded concrete Padic.coefficientExtensionRing for the coefficient conventions. The two added statement dependencies already have Lean records. The ordinary-module Tor condition is written with ordered bounds and the upstream torAmplitudeIn; no sheaf Tor predicate is substituted. Both equivalences are stated separately, and the localization universe remains arbitrary."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bd2e4f00a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all eight statement dependencies, sources, exact declarations, hypotheses, both equivalences, universes, edge cases, report sections, and pilot gates. Immutable module reproduced cleanly through scompile.py in sandbox and library modes. No delivery errors or fixes required."
  }
 }
