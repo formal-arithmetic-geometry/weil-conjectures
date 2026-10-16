@@ -27,9 +27,149 @@
   "lem-coef-projective-cochain-monoidal-model",
   "lem-coef-combinatorial-localization-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-projective-cochain-monoidal-model] over the given commutative ring $R$. It supplies the unbounded combinatorial closed symmetric monoidal model, its generating sets, its degreewise split cofibrations with dg-projective cokernel, and its cofibrant unit $R[0]$. In particular $C\\to0$ is degreewise surjective for every complex $C$, so every object is fibrant. Keep its total tensor and total Hom conventions throughout.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.3.11 and Proposition 4.2.13, cochain reindexing; all-fibrant assertion immediately after Theorem 2.3.11."
+   }
+  },
+  {
+   "text": "For every integer $n$, the sphere $S^n$ of Step 1 is dg-projective: its terms are free or zero and $\\underline{\\operatorname{Hom}}(S^n,N)$ is the reindexed complex $N$ with the shift sign, hence is acyclic when $N$ is acyclic. Thus $0\\to S^n$ is a cofibration by the cokernel criterion in [lem-coef-projective-cochain-monoidal-model]. Since $S^{n+1}\\to D^n$ is a generating cofibration, composition with $0\\to S^{n+1}$ makes $D^n$ cofibrant too; composition preserves the left lifting property by composing two diagonal fillers. The sources and targets of both generating sets $S^{n+1}\\to D^n$ and $0\\to D^n$ are therefore cofibrant. Local presentability and generation of both lifting systems by sets already come from Step 1. These assertions give tractability, also with the convention requiring both generating sets to have cofibrant sources.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.3.3 and Theorem 2.3.11; cofibrant generating objects checked directly."
+   }
+  },
+  {
+   "text": "For left properness, let $i:A\\to B$ be a cofibration and $f:A\\to A'$ a quasi-isomorphism. Put $B'=B\\amalg_AA'$, let $g:B\\to B'$ be the induced map, and put $T=B/A$. The degreewise splitting in [lem-coef-projective-cochain-monoidal-model] identifies the pushout degree by degree with $A'\\oplus T$, so $0\\to A'\\to B'\\to T\\to0$ is exact and the map on quotients is $1_T$. Using the cone differential of [def-weil-abstract-derived-category], the two inclusions $A\\to B$ and $A'\\to B'$ give a degreewise short exact sequence\n$$0\\to\\operatorname{Cone}(f)\\to\\operatorname{Cone}(g)\\to\\operatorname{Cone}(1_T)\\to0.$$\nWriting $i':A'\\to B'$ for the pushout inclusion and $p:B\\to T$, $p':B'\\to T$ for the quotient maps, the cone inclusion is $(a',a)\\mapsto(i'a',ia)$ and the cone quotient is $(b',b)\\mapsto(p'b',pb)$. The equality $gi=i'f$ makes these chain maps; degreewise split exactness of the two rows makes their kernel and image agree. Its degree-$n$ quotient is $T^n\\oplus T^{n+1}$ and its differential is $(x,y)\\mapsto(d_Tx+y,-d_Ty)$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent cone calculation of the pushout of a degreewise split monomorphism; cone convention from the cited definition."
+   }
+  },
+  {
+   "text": "By [lem-pur-quasi-iso-cone-acyclic], $\\operatorname{Cone}(f)$ is acyclic. The degree-$(-1)$ map $(x,y)\\mapsto(0,x)$ contracts $\\operatorname{Cone}(1_T)$: applying its differential before and after this map gives sum $(x,y)$. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to the short exact sequence of Step 3. The segment $H^n\\operatorname{Cone}(f)\\to H^n\\operatorname{Cone}(g)\\to H^n\\operatorname{Cone}(1_T)$ has zero outside terms, so the middle term is zero in every degree. The cone criterion now makes $g$ a quasi-isomorphism. This proves left properness for arbitrary $A,A'$, without a cofibrancy assumption on them.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic, and its cone-triangle interpretation; homology.tex Tag 0117, lemma-long-exact-sequence-cochain. Agent application to Step 3."
+   }
+  },
+  {
+   "text": "Let $j:A\\to B$ be a trivial cofibration and $Q=B/A$. By [lem-coef-projective-cochain-monoidal-model], $j$ is degreewise split and $Q$ is dg-projective. In the long exact sequence of [lem-weil-pbc-complex-ses-homology-long-exact], both $H^n(A)\\to H^n(B)$ and $H^{n+1}(A)\\to H^{n+1}(B)$ are isomorphisms, forcing $H^n(Q)=0$. Thus $\\underline{\\operatorname{Hom}}(Q,Q)$ is acyclic by dg-projectivity. Its degree-zero cycle $1_Q$ is a boundary, giving a degree-$(-1)$ map $s:Q\\to Q$ with $d_Qs+sd_Q=1_Q$. Here the Hom differential on a degree-$r$ map $u$ is $D(u)=d u-(-1)^r u d$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Paragraph after Theorem 2.3.11: trivial cofibrations have projective complex cokernels; direct contraction argument from the cited dg-projective criterion."
+   }
+  },
+  {
+   "text": "Choose a graded section $t:Q\\to B$ of $B\\to Q$. Its defect $d_Bt-td_Q$ factors uniquely as $j a$, with $a:Q\\to A$ of degree $1$, and squaring the differential gives $d_Aa+ad_Q=0$. With $s$ from Step 5, set $u=t+j a s$. Since $D(a s)=-a(d_Qs+sd_Q)=-a$, we obtain $D(u)=0$, and the projection of $u$ to $Q$ remains $1_Q$. Consequently $(j,u):A\\oplus Q\\to B$ is an isomorphism of complexes identifying $j$ with the first summand inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent explicit splitting calculation for the projective cokernel described after Theorem 2.3.11; the sign in the correction is plus."
+   }
+  },
+  {
+   "text": "For any complex $C$, the isomorphism of Step 6 identifies $j\\otimes C$ with $A\\otimes C\\to(A\\otimes C)\\oplus(Q\\otimes C)$. The map $S(q\\otimes c)=s(q)\\otimes c$ contracts $Q\\otimes C$: for homogeneous $q$ of degree $a$, the two terms involving $s(q)\\otimes d_Cc$ have signs $(-1)^{a-1}$ and $(-1)^a$, so they cancel, and $dS+Sd=(d_Qs+sd_Q)\\otimes1=1$. A pushout along any map $A\\otimes C\\to V$ is therefore $V\\to V\\oplus(Q\\otimes C)$, a chain homotopy equivalence. For the inclusion $k:V\\to V\\oplus(Q\\otimes C)$, its projection $r$ satisfies $rk=1_V$. On the direct sum, the degree-$(-1)$ map $H(v,w)=(0,S(w))$ satisfies $dH+Hd=1-kr$, proving the other inverse identity up to chain homotopy. On cohomology a homotopy contributes only boundaries, so this pushout is a quasi-isomorphism. No flatness assumption on $C$ is needed. Coproducts of such maps have the same description, using $\\bigoplus_\\lambda H_\\lambda$; every element has finite support, so this degree-$(-1)$ map is defined and satisfies the contraction identity componentwise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Example 5.11, monoid-axiom hypothesis of Theorem 5.8; agent tensor-sign and pushout calculations supplying the argument."
+   }
+  },
+  {
+   "text": "Consider a small ordinal-indexed continuous sequence $(V_\\alpha)$ whose successor maps are pushouts as in Step 7. Prove by transfinite induction that $V_0\\to V_\\alpha$ is a quasi-isomorphism. At $0$ it is the identity; at successors use Step 7 and composition of cohomology isomorphisms. At a nonzero limit ordinal $\\beta$, its predecessors are a nonempty directed set and $V_\\beta=\\varinjlim_{\\alpha<\\beta}V_\\alpha$ degreewise. Exact filtered colimits of modules, supplied by [lem-weil-pbc-ring-modules-grothendieck-abelian], give\n$$H^n(V_\\beta)\\cong\\varinjlim_{\\alpha<\\beta}H^n(V_\\alpha).$$\nFor this equality, apply exactness to the sequences $0\\to Z^nV_\\alpha\\to V_\\alpha^n\\to\\operatorname{im}d_\\alpha^n\\to0$ and $0\\to\\operatorname{im}d_\\alpha^{n-1}\\to Z^nV_\\alpha\\to H^nV_\\alpha\\to0$ and to the inclusions of the images in the adjacent terms: kernels, images and the indicated quotients are thereby identified with those after the colimit. The induction maps from $H^n(V_0)$ identify this diagram with a constant diagram of isomorphisms, whose colimit is $H^n(V_0)$. This proves the limit step and hence the monoid axiom. A zero-length composite is included as the identity.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB, lemma-directed-colimit-exact. Agent transfinite induction applied to Step 7; consistent with Haugseng Example 5.11."
+   }
+  },
+  {
+   "text": "If $P$ is cofibrant, [lem-coef-projective-cochain-monoidal-model] says that $P$ is dg-projective. For an acyclic $N$, any chain map $P\\to N$ is a degree-zero cycle in the acyclic complex $\\underline{\\operatorname{Hom}}(P,N)$, hence is $d_Nh+hd_P$ for a degree-$(-1)$ map $h$. Thus $P$ is K-projective in the null-homotopy convention of [lem-coef-kprojective-derived-hom-bijection]. Apply that bijection with $\\mathcal A=\\operatorname{Mod}(R)$, which is abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian], to any complex $C$. Its domain is exactly chain maps modulo the homotopies $f-g=d_Ch+hd_P$. The projective model has a zero object, and [lem-coef-pointed-model-stability] identifies the ordinary homotopy category of its coherent localization with its ordinary localization. By [def-weil-abstract-derived-category] the latter is $D(R)$. Thus these are precisely the morphisms asserted in the item, with no boundedness restriction on $P$ or $C$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-coef-pointed-model-stability",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+    "place": "Qh_map_bijective, lines 43-48, applied to the degree-zero consequence of dg-projectivity; Hovey Theorem 1.2.10(ii) provides the corresponding model-category interpretation."
+   }
+  },
+  {
+   "text": "All hypotheses of [lem-coef-combinatorial-localization-presentability] hold: combinatoriality, closed symmetric monoidality, the cofibrant unit and the pushout-product condition are supplied by [lem-coef-projective-cochain-monoidal-model]. Apply that localization theorem. The result is presentable, its symmetric monoidal tensor is $q(QC\\otimes QD)$ on cofibrant replacements, and this tensor preserves small colimits separately, including the empty colimit. With the conventions of that theorem, $\\mathbf D_\\infty(R)$ is exactly the homotopy coherent localization of unbounded $R$-module cochain complexes at quasi-isomorphisms; this identifies the localization and its derived tensor as asserted. It retains the mapping spaces and their coherences, rather than merely the ordinary derived category.",
+   "uses": [
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Example 5.11, associated monoidal infinity-category of unbounded module complexes; general localization theorem cited in the step supplies presentability and separate cocontinuity."
+   }
+  },
+  {
+   "text": "A quasi-isomorphism becomes an equivalence by the defining localization property in [lem-coef-combinatorial-localization-presentability]. Conversely, if the image of a chain map $f$ is an equivalence, its image in the ordinary homotopy category is an isomorphism. Step 9 identifies that category and functor with the derived localization. The cohomology functors $H^n:D(R)\\to\\operatorname{Mod}(R)$ of [def-weil-abstract-derived-category] send this isomorphism to an isomorphism and have composite with localization equal to ordinary cohomology. Therefore every $H^n(f)$ is an isomorphism, which is exactly the definition of a quasi-isomorphism. This proves the reverse implication without assuming a separate saturation theorem.",
+   "uses": [
+    "lem-coef-combinatorial-localization-presentability",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 1.2.10(iv), saturation clause; here deduced directly from the cohomology factorization of the cited derived-category definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-coef-pointed-model-stability",
+  "lem-coef-combinatorial-localization-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Example 5.11 and Theorem 5.8 hypotheses; explicit supplementary arguments from the projective model of Hovey Theorem 2.3.11, the existing localization theorem, Stacks 0117/05RT/00DB, and the pinned Mathlib K-projective Hom theorem. Primary sources read online where absent locally; archives requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -149,15 +289,74 @@
    "results": "{\"t\": \"2026-10-16T14:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"Projective complexes are cofibrant and every chain complex is fibrant; derived morphisms from a cofibrant complex are chain homotopy classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.projectiveResolutions\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"CategoryTheory.ProjectiveResolution.iso\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\"], \"digest\": \"055594a27580cc5f\"}",
    "date": "2026-10-16",
    "verdict": "no match: No match: independently read CochainComplex.IsKProjective.Qh_map_bijective at Algebra/Homology/DerivedCategory/KProjective.lean:43-49. It computes morphisms for ordinary derived categories, but supplies neither the projective model structure supplement nor enhanced monoidal localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective model structure on unbounded cochain complexes is left proper tractable and satisfies the monoid axiom",
+   "results": "{\"t\": \"2026-10-16T14:42:32Z\", \"tool\": \"leanfinder\", \"query\": \"The projective model structure on unbounded cochain complexes is left proper tractable and satisfies the monoid axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\"], \"digest\": \"f659fdb85085642b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the model-category hits are CochainComplex.Plus, the bounded-below injective model (ModelCategory/Injective.lean:17-26,202-206), not this unbounded projective model. KProjective hits describe ordinary complexes. HomologicalComplex.HasGoodTensor and CategoryTheory.LocalizedMonoidal describe ordinary tensor/localization, not left properness, tractability, the monoid axiom or infinity-categorical localization. Read the cited sources; no declaration states the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"CochainComplex\"",
+   "results": "{\"t\": \"2026-10-16T14:42:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"CochainComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the model-category hits are CochainComplex.Plus, the bounded-below injective model (ModelCategory/Injective.lean:17-26,202-206), not this unbounded projective model. KProjective hits describe ordinary complexes. HomologicalComplex.HasGoodTensor and CategoryTheory.LocalizedMonoidal describe ordinary tensor/localization, not left properness, tractability, the monoid axiom or infinity-categorical localization. Read the cited sources; no declaration states the item."
+  },
+  {
+   "tool": "grep",
+   "query": "monoid.?axiom|tractable|left.?proper",
+   "results": "{\"t\": \"2026-10-16T14:42:33Z\", \"tool\": \"grep\", \"query\": \"monoid.?axiom|tractable|left.?proper\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the model-category hits are CochainComplex.Plus, the bounded-below injective model (ModelCategory/Injective.lean:17-26,202-206), not this unbounded projective model. KProjective hits describe ordinary complexes. HomologicalComplex.HasGoodTensor and CategoryTheory.LocalizedMonoidal describe ordinary tensor/localization, not left properness, tractability, the monoid axiom or infinity-categorical localization. Read the cited sources; no declaration states the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived infinity category of a ring is the monoidal localization of the projective model category of complexes",
+   "results": "{\"t\": \"2026-10-16T14:43:02Z\", \"tool\": \"leansearch\", \"query\": \"The unbounded derived infinity category of a ring is the monoidal localization of the projective model category of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizedMonoidal\", \"HasDerivedCategory.standard\", \"HasDerivedCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\"], \"digest\": \"ef8a9893add9ef0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the model-category hits are CochainComplex.Plus, the bounded-below injective model (ModelCategory/Injective.lean:17-26,202-206), not this unbounded projective model. KProjective hits describe ordinary complexes. HomologicalComplex.HasGoodTensor and CategoryTheory.LocalizedMonoidal describe ordinary tensor/localization, not left properness, tractability, the monoid axiom or infinity-categorical localization. Read the cited sources; no declaration states the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products of acyclic cofibrations of complexes satisfy the monoid axiom and the projective model structure is left proper",
+   "results": "{\"t\": \"2026-10-16T14:43:05Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor products of acyclic cofibrations of complexes satisfy the monoid axiom and the projective model structure is left proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.instHasTensorOfHasTensorX\", \"HomologicalComplex.ιTensorObj\"], \"digest\": \"c1a2e3dc33a38ae2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the model-category hits are CochainComplex.Plus, the bounded-below injective model (ModelCategory/Injective.lean:17-26,202-206), not this unbounded projective model. KProjective hits describe ordinary complexes. HomologicalComplex.HasGoodTensor and CategoryTheory.LocalizedMonoidal describe ordinary tensor/localization, not left properness, tractability, the monoid axiom or infinity-categorical localization. Read the cited sources; no declaration states the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-enrichment-rectification",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-projective-chains-monoidal-model",
+  "worker": "stage1",
+  "summary": "Reused the existing projective monoidal model and general coherent-localization statements. Proved tractability from the generating spheres and disks, left properness by an exact sequence of cones, and the monoid axiom by an explicit contracting cokernel, corrected chain section, arbitrary-tensor contraction and transfinite induction with exact filtered module colimits. Used one new exact Mathlib leaf for arbitrary K-projective derived Hom sets; used cohomology to detect equivalences. No statement change and no new unsplit node.",
+  "blueprint": "Realizes the generic projective-chain foundation below paragraph 2 of main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md: coherent finite-coefficient mapping-complex adjunction before the displayed derived inverse limit. The inherited chapter/unit records were read. The geometric and coefficient route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion for quasi-isomorphisms, used only in the algebraic left-properness calculation; the item unit has no corresponding cone criterion. Its statement applies to arbitrary integer complexes in an abelian category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-2f6a52a29",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-2f6a52a29 (reviewer sub-agent of L); spot-checked: Read all eleven steps, the new K-projective leaf, cited statements and primary sources. Cone exactness, splitting signs, arbitrary-tensor contraction and transfinite induction pass. Mathlib match is exact; no duplicate or cycle found. Checked archived target signatures and distinct coefficient categories. Accepted the generic cone-criterion tool use. Concrete checks recorded in review.md; no repairs needed."
+ }
 }
