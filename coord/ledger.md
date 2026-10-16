@@ -15612,7 +15612,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization (stage 3; reviewer PASS; first push; landing 20261016T221602-L-1612444 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261016T221602-L-1612596 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility (stage 3; reviewer PASS; first push; landing 20261016T221603-L-1612718 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/condensed-qbar-sync-retirement.md)
-- 22:16 L: merged deliver/D3/Sheaf.AlgebraicGeometry.PushforwardSupportClosed (stage 3; reviewer PASS; first push; landing 20261016T221604-L-1612820 (interface); batch 20261016T221550; modules 2; new nodes 1)
 - 22:16 L: merged deliver/D4/Sheaf.Paper.StrictHenselizationPointEvaluationPointed (stage 3; reviewer PASS; first push; landing 20261016T221605-L-1613049 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (stage 3; reviewer PASS; first push; landing 20261016T221607-L-1613839 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/E3/Sheaf.Paper.StrictHenselizationPointEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261016T221607-L-1614019 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15667,3 +15666,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:56 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 06:58 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 06:59 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu

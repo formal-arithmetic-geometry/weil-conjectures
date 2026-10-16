@@ -7,8 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.ClosedSupportPushforwardSupport
-import Sheaf.AlgebraicGeometry.ProperPushforwardSupportClosed
+import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-! # Closed support of a proper coherent pushforward
 
@@ -50,19 +51,6 @@ theorem pushforward_support_closed_subset
       (D : Set Z) =
         {x : Z | ¬ Subsingleton (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)} ∧
       (D : Set Z) ⊆ q '' (C : Set Y) := by
-  obtain ⟨D, hD⟩ := exists_pushforward_support_closed q F
-  refine ⟨D, hD, ?_⟩
-  let T : TopologicalSpace.Closeds Z :=
-    ⟨q.base '' (C : Set Y), q.isClosedMap _ C.isClosed⟩
-  have hsub : {x : Z | ¬ Subsingleton
-      (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)} ⊆ (T : Set Z) := by
-    apply Scheme.Modules.pushforward_support_subset_of_closed_support q F.obj T
-    intro y hy
-    change q.base y ∈ (T : Set Z)
-    exact ⟨y, by rw [hC]; exact hy, rfl⟩
-  rw [hD]
-  intro x hx
-  exact hsub hx
-
+  sorry
 
 end AlgebraicGeometry
