@@ -194,5 +194,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-b16e11bfb (reviewer sub-agent of L); spot-checked: Read all seven steps, both new nodes, cited statements, sources, and unit/chapter route. The exact-target homotopy lemma validates quotient restriction; the comparison square proves inflation explicitly. Mathlib matches, duplicate searches, edge cases, 1,548 finite-basis checks, and dependency checks passed. Accepted the declared homotopy tool use. Findings recorded in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-76893a844",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read immutable node, dependencies, sources, module and report; verified all clauses, universes, edge cases, docstrings and verbatim signature. Snapshot module reproducibly compiles cleanly through scompile.py in sandbox and library form. No delivery defects found."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ResolutionInflationComparison",
+  "declaration": "groupCohomology.resolution_inflation_comparison",
+  "file": "lean/Sheaf/RepresentationTheory/ResolutionInflationComparison.lean",
+  "statement": "theorem resolution_inflation_comparison {G G' : Type u} [Group G] [Group G'] (π : G' →* G) (hπ : Function.Surjective π) (M : Rep.{u} (ULift.{u} ℤ) G) (P : ProjectiveResolution (Rep.trivial (ULift.{u} ℤ) G (ULift.{u} ℤ))) (P' : ProjectiveResolution (Rep.trivial (ULift.{u} ℤ) G' (ULift.{u} ℤ))) (f : P'.complex ⟶ ((Rep.resFunctor (k := ULift.{u} ℤ) π).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex) (hf : f.f 0 ≫ (Rep.resFunctor π).map (P.π.f 0) = P'.π.f 0) : ∃ F : P.complex.linearYonedaObj (ULift.{u} ℤ) M ⟶ P'.complex.linearYonedaObj (ULift.{u} ℤ) (Rep.res π M), (∀ (n : ℕ) (h : P.complex.X n ⟶ M), (F.f n) h = f.f n ≫ (Rep.resFunctor π).map h) ∧ ∀ s : ℕ, (groupCohomologyIso M s P).hom ≫ HomologicalComplex.homologyMap F s = groupCohomology.map π (𝟙 (Rep.res π M)) s ≫ (groupCohomologyIso (Rep.res π M) s P').hom",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
