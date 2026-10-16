@@ -1,0 +1,122 @@
+{
+ "id": "def-weil-pbc-ringed-tensor-section-calculus",
+ "kind": "definition",
+ "title": "Section calculus for the actual sheaf tensor and scalar extension",
+ "statement": "For a commutative ring sheaf R on a small site, use the actual sheaf tensor [def-pur-sheaf-tensor-product]. Define pure_R(m,n) as the sheafification-unit image of m tensor n followed by the inverse tensor/sheafification comparison. This is bilinear, commutes with restrictions, is natural in both modules, and determines linear maps out of the tensor. For c:A→B construct the sheafified extension-of-scalars functor T_c with objects changeOfRings c M, its restriction-of-scalars right adjoint, and their adjunction. Its underlying unit sends m to the sheafification image of 1 tensor m. Module sheafification is [def-weil-presheaf-modules-sheafification].",
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK: scalar extension adjunction and the sheaf tensor construction"
+ },
+ "proof": [
+  {
+   "text": "Construct the public scalar-extension functor sectionwise with ModuleCat.extendScalars, then compose with module sheafification. Combine the sectionwise extension/restriction Hom equivalences with the sheafification adjunction. Import all Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction and use its existing tensorRestriction_tmul and both tensorHomEquiv naturality theorems in the construction. Its existing tensorUnit_apply and tensorAdjunction_underlying supply the insertion and mate formulas directly in the scalar-comparison and final-assembly proofs; no duplicate statement is declared.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define pure tensors using the actual sheafification unit and tensorObjIsoSheafification. Naturality of those maps gives restriction compatibility. The sheafification adjunction and sectionwise tensor induction prove extensionality. The two whiskering identities for tensorObjIsoSheafification give simultaneous naturality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK: scalar extension adjunction and the sheaf tensor construction",
+  "note": "Explicit scalar-extension and pure-section constructions; the five existing private scalar-extension helper theorems are reused through proof-only import all, rather than declared again."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*tensor|tensor.*sheafification",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "7 hits: TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.distribBaseChange_tmul, TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul, ModuleCat.extendScalars_δ, ModuleCat.extendScalars_μ, Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply, Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of sheaves of modules preserves tensor products and the isomorphism sends one tensor a pure tensor to the tensor of inserted sections",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, PresheafOfModules.Monoidal.tensorObj_map_tmul, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendScalars.map_tmul, ModuleCat.extendScalarsId_hom_app_one_tmul",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of sheaves of modules commutes with tensor products by the bilinear universal property",
+   "results": "8 hits: ModuleCat.ExtendScalars.map', TensorProduct.mapBilinear, TensorProduct.AlgebraTensorModule.mapBilinear, TensorProduct.isBaseChange, IsBaseChange, TensorProduct.AlgebraTensorModule.lift, ModuleCat.ExtendScalars.obj', TensorProduct.lift",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiTensorComparisonConstruction",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Ordinary normalized tensor comparison in the four-corners construction; Tags 03D7 and 03EK: scalar extension adjunction and the sheaf tensor construction",
+   "via": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedTopoiTensorSections",
+  "file": "lean/Sheaf/Paper/RingedTopoiTensorSections.lean",
+  "declaration": "SheafOfModules.RingedTensor.pure",
+  "statement": "def pure (M N : SheafOfModules.{u} (ringSheaf R))\n    (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :\n    ((monoidalCategory R).tensorObj M N).val.obj W",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

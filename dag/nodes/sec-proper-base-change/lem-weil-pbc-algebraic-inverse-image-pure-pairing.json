@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-algebraic-inverse-image-pure-pairing",
+ "kind": "statement",
+ "title": "The canonical bilinear pairing of the specified inverse image",
+ "statement": "Let F:Sh(J,Set)→Sh(K,Set) preserve finite limits and let I be the specified AlgebraicInverseImage of R in RI [def-weil-pbc-algebraic-inverse-image]. Transport the actual pure pairing [def-weil-pbc-ringed-tensor-section-calculus] by the finite-product comparison and I.moduleUnderlying. For all R-modules M,N there is an RI-linear map b:I(M) tensor_RI I(N)→I(M tensor_R N) whose values on pure sections equal this transported pairing. For every test sheaf Z and arrows x,y,z with z=pure_R(x,y), b sends pure_RI(Fx,Fy), identified by I.moduleUnderlying.inv, to Fz identified by the same iso. The transported pairing is natural in M,N.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, transporting bilinear maps under inverse image"
+ },
+ "proof": [
+  {
+   "text": "Construct pureSheaf as the actual natural pure-tensor map on underlying set sheaves. Transport it using the chosen finite-product monoidal comparison and the supplied module-underlying isomorphisms.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each additivity or scalar law, take the universal sheaf of its three operands. Product preservation supplies a section above each target triple. Apply I.moduleAdd or I.moduleSMul both to the input operation and to the source bilinear identity. The product projection equations give the four laws. Since the pairing is a sheaf morphism, it commutes with restrictions.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sheaf tensor bilinear universal property. The monoidal lift comparison proves the formula for every generalized pair. Naturality of the underlying iso, the product comparison, and pureSheaf proves naturality of the transported pairing.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, transporting bilinear maps under inverse image",
+  "note": "Explicit expansion of the cited universal-property and finite-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|bilinear.*[Aa]djunction",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.lift_μ",
+   "results": "1 hits: CategoryTheory.Functor.Monoidal.lift_μ",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image preserves the universal bilinear pairing of sheaves of modules by its finite product comparisons and algebraic operation graph identities",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric inverse image functor preserves the tensor product of sheaves of modules and its universal bilinear pairing",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj_map_tmul, AlgebraicGeometry.Scheme.Modules.pullback, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.pullback, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiTensorComparisonConstruction",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Ordinary normalized tensor comparison in the four-corners construction; Tag 03EL, transporting bilinear maps under inverse image",
+   "via": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedTopoiInverseImagePairing",
+  "file": "lean/Sheaf/Paper/RingedTopoiInverseImagePairing.lean",
+  "declaration": "SheafOfModules.RingedTensor.exists_inverseImageTensorPairing",
+  "statement": "theorem exists_inverseImageTensorPairing\n    (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})\n    (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]\n    (I : AlgebraicInverseImage F R RI)\n    (M N : SheafOfModules.{u} (ringSheaf R)) :\n    ∃ b : (monoidalCategory RI).tensorObj (I.modules.obj M) (I.modules.obj N) ⟶\n        I.modules.obj ((monoidalCategory R).tensorObj M N),\n      (∀ W m n, b.val.app W (pure RI _ _ W m n) =\n        (inverseImagePurePairing R RI F I M N).hom.app W (m, n)) ∧\n      ∀ (Z : Sheaf J (Type u)) (x : Z ⟶ (underlying R).obj M)\n        (y : Z ⟶ (underlying R).obj N)\n        (z : Z ⟶ (underlying R).obj ((monoidalCategory R).tensorObj M N)),\n        (∀ W t, z.hom.app W t = pure R M N W (x.hom.app W t) (y.hom.app W t)) →\n        ∀ W t, b.val.app W\n          (pure RI _ _ W ((F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t)\n            ((F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t)) =\n          (F.map z ≫ I.moduleUnderlying.inv.app\n            ((monoidalCategory R).tensorObj M N)).hom.app W t",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

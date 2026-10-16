@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-scalar-extension-tensor-comparison",
+ "kind": "statement",
+ "title": "Scalar extension preserves the normalized sheaf tensor",
+ "statement": "On a small site let c:A→B be a morphism of commutative ring sheaves. There exists a simultaneous natural family of isomorphisms T_c(M tensor_A N) ≅ T_c(M) tensor_B T_c(N), for the actual sheafified scalar extension and pure pairing [def-weil-pbc-ringed-tensor-section-calculus]. It sends the insertion of pure_A(m,n) to pure_B(insert(m),insert(n)). No flatness or nonzero-ring hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, scalar-extension equalities; Tag 0GMW, tensor and module sheafification"
+ },
+ "proof": [
+  {
+   "text": "Pair the two scalar-extension units, extend this A-bilinear map by the sheaf tensor universal property, and transpose through the scalar-extension adjunction.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the inverse before sheafification by (s tensor m) tensor (t tensor n) ↦ st tensor pure_A(m,n), using Mathlib distribBaseChange.symm. Tensor induction proves restriction compatibility. Extend uniquely through both sheafifications, then through the sheaf tensor.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction and pure-tensor generation determine maps from the extended tensor. For maps from the tensor of extensions, localize the tensor of both sheafification units and apply extension-of-scalars extensionality twice. These two extensionality arguments prove the inverse identities and simultaneous naturality on original inserted pure tensors.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, scalar-extension equalities; Tag 0GMW, tensor and module sheafification",
+  "note": "Explicit expansion of the cited universal-property and finite-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*tensor|tensor.*sheafification",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "7 hits: TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.distribBaseChange_tmul, TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul, ModuleCat.extendScalars_δ, ModuleCat.extendScalars_μ, Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply, Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of sheaves of modules preserves tensor products and the isomorphism sends one tensor a pure tensor to the tensor of inserted sections",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, PresheafOfModules.Monoidal.tensorObj_map_tmul, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendScalars.map_tmul, ModuleCat.extendScalarsId_hom_app_one_tmul",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of sheaves of modules commutes with tensor products by the bilinear universal property",
+   "results": "8 hits: ModuleCat.ExtendScalars.map', TensorProduct.mapBilinear, TensorProduct.AlgebraTensorModule.mapBilinear, TensorProduct.isBaseChange, IsBaseChange, TensorProduct.AlgebraTensorModule.lift, ModuleCat.ExtendScalars.obj', TensorProduct.lift",
+   "date": "2026-10-16",
+   "verdict": "No complete sheaf-level match; use the sectionwise and cartesian comparison APIs in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedTopoiTensorComparisonConstruction",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Ordinary normalized tensor comparison in the four-corners construction; Tag 03EL, scalar-extension equalities; Tag 0GMW, tensor and module sheafification",
+   "via": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedTopoiScalarTensorComparison",
+  "file": "lean/Sheaf/Paper/RingedTopoiScalarTensorComparison.lean",
+  "declaration": "SheafOfModules.RingedTensor.exists_scalarTensorComparison",
+  "statement": "theorem exists_scalarTensorComparison :\n    ∃ e : ∀ M N : SheafOfModules.{u} (ringSheaf A),\n        changeOfRings.{u, u, u} c ((monoidalCategory A).tensorObj M N) ≅\n          (monoidalCategory B).tensorObj (changeOfRings.{u, u, u} c M)\n            (changeOfRings.{u, u, u} c N),\n      (∀ {M M' N N' : SheafOfModules.{u} (ringSheaf A)} (f : M ⟶ M') (g : N ⟶ N'),\n        (tensorFunctor c).map ((monoidalCategory A).tensorHom f g) ≫ (e M' N').hom =\n          (e M N).hom ≫ (monoidalCategory B).tensorHom\n            ((tensorFunctor c).map f) ((tensorFunctor c).map g)) ∧\n      ∀ M N W m n, (e M N).hom.val.app W\n        ((tensorUnit c ((monoidalCategory A).tensorObj M N)).hom.app W\n          (pure A M N W m n)) =\n        pure B _ _ W ((tensorUnit c M).hom.app W m) ((tensorUnit c N).hom.app W n)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T130052-L-3034909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

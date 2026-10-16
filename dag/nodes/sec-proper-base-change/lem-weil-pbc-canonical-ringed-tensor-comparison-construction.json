@@ -13,40 +13,38 @@
  },
  "proof": [
   {
-   "text": "Use the given sheaf adjunction uInv ⊣ uPush and finite-product preservation to transport balanced bilinear maps. Apply the graph equations of AlgebraicInverseImage to the universal pairs and triples: the mates preserve addition and the RI-action. The sheaf tensor universal property then yields I(M⊗R N)≅I(M)⊗RI I(N), natural and characterized on generalized pure tensors. This uses the given algebraic lift; the existential module-adjunction theorem is not an identification of this lift.",
+   "text": "Use the normalized tensor comparison for the specified algebraic inverse image, with its simultaneous naturality and generalized pure formula.",
    "uses": [
-    "def-weil-pbc-algebraic-inverse-image",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Extend scalars by the mutually inverse balanced formulas s⊗(m⊗n) ↦ (s⊗m)⊗(1⊗n) and (s⊗m)⊗(t⊗n) ↦ st⊗(m⊗n). Check balancing and restriction compatibility, then sheafify. Checking inverse identities on pure tensors gives an isomorphism.",
+   "text": "Use the proved scalar-extension comparison, natural and normalized on inserted pure sections.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-scalar-extension-tensor-comparison"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Compose both comparisons, transport by hobj, and define q by insertion of 1. The explicit formulas prove q_one and the generalized-element pure equation; naturality and hmap prove simultaneous naturality. These supply the fields of the normalized comparison.",
+   "text": "Build the natural iso ε:L≅I.modules⋙T from hobj; hmap is its naturality equation. Whisker and compose the two tensor comparisons with ε. Define q by the scalar-extension unit followed by ε.inv. The unit formula proves q_one; naturality of the composite proves naturality. Its pure formula follows from the inverse-image formula, naturality of the scalar unit, the scalar comparison formula, and naturality of the actual pure pairing.",
    "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
     "def-weil-pbc-canonical-ringed-tensor-comparison"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-algebraic-inverse-image",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-scalar-extension-tensor-comparison",
+  "def-weil-pbc-ringed-tensor-section-calculus",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, lemma-tensor-product-pullback; the canonical pure-tensor map and scalar-extension construction"
+  "place": "Tag 03EL: explicit composition of inverse image and scalar extension, transported by hobj"
  },
  "mathlib_searches": [
   {
@@ -142,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-40a17",
-  "group": "A4",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261016T011142-L-263526",
+  "landing": "20261016T130052-L-3034909",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet; all 13 delivered/importer modules compile cleanly, interface changes are recorded, statements and DAG nodes agree, and no prohibited declarations or unaccounted adaptations were found."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
