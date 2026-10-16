@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-qbar-idempotent-complete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Qbar-l category is idempotent complete",
@@ -35,34 +35,184 @@
  },
  "stmt_deps": [
   "def-weil-pbc-qbar-category",
-  "def-weil-karoubi-envelope"
+  "def-weil-karoubi-envelope",
+  "def-weil-triangulated-category"
  ],
  "proof": [
   {
-   "text": "By [thm-weil-pbc-finite-stage-karoubian] every finite-stage category\n$\\Dbc(T,E)$ is idempotent complete, so [prop-weil-filtered-retract-descent]\napplies with $\\mathcal P_T=\\Dbc(T,\\Qlb)$, as defined in\n[def-weil-pbc-qbar-category]: every idempotent of $\\Dbc(T,\\Qlb)$ splits. The\ncanonical functor into the Karoubi envelope is fully faithful, and it is\nessentially surjective: an object $((E,K),e)$ of the envelope is split by\nthe splitting of $e$ in $\\mathcal P_T$ (the idempotent completeness just\nproved), say by $K'\\in\\mathcal P_T$, $i:K'\\to(E,K)$, $p:(E,K)\\to K'$ with\n$p\\,i=\\operatorname{id}$ and $i\\,p=e$, and then $i$ and $p$ exhibit the\nisomorphism $((E,K),e)\\cong(K',\\operatorname{id}_{K'})$ of the envelope (the\nKaroubi-morphism conditions $p=p\\circ e$ and $i=e\\circ i$ follow from\n$p\\,i=\\operatorname{id}$ and $i\\,p=e$). Hence the functor is essentially\nsurjective, and exact because the envelope of a triangulated category is\ntriangulated with the canonical functor exact.",
+   "text": "Fix exactly the prime, algebraic closure and scheme hypotheses of [def-weil-pbc-qbar-category]: $T$ is noetherian of finite dimension and $\\ell$ is invertible on $T$. Its category $\\mathcal P_T$ is the pair category of [def-weil-pbc-finite-stage-pair-category], with stages the raw rational categories $\\mathcal C_E(T)=\\Dbc(T,E)$, not their formally adjoined retracts. For every finite intermediate coefficient field $E$, [thm-weil-pbc-finite-stage-karoubian] says that this very $\\Dbc(T,E)$ is idempotent complete. These are precisely the hypotheses of the current [prop-weil-filtered-retract-descent]; its conclusion gives that every idempotent $e:X\\to X$ of $\\mathcal P_T$ has a splitting $i:S\\to X$, $p:X\\to S$ with $p\\circ i=\\operatorname{id}_S$ and $i\\circ p=e$, and that the splitting may be represented over one finite coefficient field. Thus $\\mathcal P_T$ is idempotent complete.",
    "uses": [
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-finite-stage-pair-category",
     "thm-weil-pbc-finite-stage-karoubian",
-    "prop-weil-filtered-retract-descent",
-    "def-weil-pbc-qbar-category"
+    "prop-weil-filtered-retract-descent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
+    "place": "Proof, first sentence: finite-stage Karoubianity and filtered retract descent."
+   }
+  },
+  {
+   "text": "Write $J:\\mathcal P_T\\to\\Kar(\\mathcal P_T)$ for the canonical functor $X\\mapsto(X,\\operatorname{id}_X)$ of [def-weil-karoubi-envelope]. The category $\\mathcal P_T$ is additive, since [thm-weil-pbc-verdier-axioms] makes it an ordinary triangulated category. Apply the current [lem-weil-karoubi-envelope-fully-faithful], whose hypothesis is exactly that the input category is additive: $J$ is fully faithful.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "thm-weil-pbc-verdier-axioms",
+    "lem-weil-karoubi-envelope-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
+    "place": "Proof, second sentence: full faithfulness of the canonical functor."
+   }
+  },
+  {
+   "text": "For any $Q=(X,e)$ of the envelope of [def-weil-karoubi-envelope], take a splitting $(S,i,p)$ supplied by step 1. In ordinary right-to-left composition, $e\\circ i=i\\circ p\\circ i=i$ and $p\\circ e=p\\circ i\\circ p=p$. Hence $i$ is an envelope morphism $J(S)\\to Q$ and $p$ an envelope morphism $Q\\to J(S)$. Their composites are $p\\circ i=\\operatorname{id}_S$, the identity of $J(S)$, and $i\\circ p=e$, the identity of $Q$. Thus they exhibit $J(S)\\cong Q$. This proves essential surjectivity directly from the two splitting equations.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
+    "place": "Proof, middle sentences: the splitting gives an isomorphism to an object in the image."
+   }
+  },
+  {
+   "text": "Here is the equivalence data, without an additional equivalence criterion. For each $Q=(X,e)$ choose a splitting $(S_Q,i_Q,p_Q)$ as above, choosing the trivial splitting $S_{J(X)}=X$, $i_{J(X)}=p_{J(X)}=\\operatorname{id}_X$ for identity idempotents. Define $G(Q)=S_Q$ and $G(u)=p_R\\circ u\\circ i_Q$ for an envelope morphism $u:Q\\to R=(Y,d)$. By the morphism condition in [def-weil-karoubi-envelope], $u=d\\circ u\\circ e$, so $d\\circ u=d^2\\circ u\\circ e=d\\circ u\\circ e=u$ and $u\\circ e=d\\circ u\\circ e^2=d\\circ u\\circ e=u$. Thus $G(\\operatorname{id}_Q)=p_Q\\circ e\\circ i_Q=\\operatorname{id}_{S_Q}$ and, for $v:R\\to U$, $G(v)\\circ G(u)=p_U\\circ v\\circ d\\circ u\\circ i_Q=G(v\\circ u)$. This defines a functor with $GJ=\\operatorname{id}_{\\mathcal P_T}$. The maps $i_Q:JG(Q)\\to Q$ and $p_Q$ are mutually inverse by step 3 and are natural: $i_R\\circ JG(u)=d\\circ u\\circ i_Q=u\\circ i_Q$. For the inverse, $JG(u)\\circ p_Q=p_R\\circ u\\circ i_Q\\circ p_Q=p_R\\circ u\\circ e=p_R\\circ u$, so the maps $p_Q$ are natural too. They give a natural isomorphism $JG\\cong\\operatorname{id}_{\\Kar(\\mathcal P_T)}$. Its component at $J(X)$ is the identity, and $G(i_Q)=p_Q\\circ i_Q=\\operatorname{id}_{S_Q}$, so the triangle identities with the identity unit also hold. Consequently $J$ and $G$ are an equivalence. The quasi-inverse is additive as well: $G(u+v)=p_R\\circ(u+v)\\circ i_Q=p_R\\circ u\\circ i_Q+p_R\\circ v\\circ i_Q=G(u)+G(v)$ and $G(0)=0$, by bilinearity in the additive category $\\mathcal P_T$.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
+    "place": "Proof, consequence of essential surjectivity: explicit quasi-inverse, functor laws, counit and triangle identities."
+   }
+  },
+  {
+   "text": "By [thm-weil-pbc-verdier-axioms], the particular common-stage shift and cone triangles on $\\mathcal P_T$ form an ordinary triangulated category. Therefore [lem-weil-karoubi-envelope-triangulated] applies to $\\mathcal T=\\mathcal P_T$: its envelope has the shift $(X,e)[1]=(X[1],e[1])$ and the retract triangulation, and the canonical functor $J$ is exact. Here exactness has precisely the shift-compatible distinguished-triangle meaning of [def-weil-triangulated-category]. Combining this exactness with the equivalence of step 4 proves the asserted exact equivalence.",
+   "uses": [
+    "thm-weil-pbc-verdier-axioms",
+    "lem-weil-karoubi-envelope-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
+    "place": "Proof, final clause: canonical exactness for the envelope of this triangulated category."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-finite-stage-pair-category",
   "thm-weil-pbc-finite-stage-karoubian",
   "prop-weil-filtered-retract-descent",
-  "def-weil-pbc-qbar-category",
+  "def-weil-karoubi-envelope",
+  "thm-weil-pbc-verdier-axioms",
   "lem-weil-karoubi-envelope-fully-faithful",
-  "lem-weil-karoubi-envelope-triangulated"
+  "lem-weil-karoubi-envelope-triangulated",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-weil-pbc-qbar-idempotent-complete.md",
-  "place": "## Proof"
+  "place": "Proof, expanded into five steps. Original blueprint read in the read-only reference tree /home/ubuntu/work-bp/sheaf/literature/blueprint/master; Stacks homology.tex Tags 09SG, 09SH, 05QV and derived.tex Tags 05QW, 014V, and Balmer--Schlichting Definitions 1.2, 1.10 and Theorem 1.5 were also checked (physical source locations in report)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isEquivalence_toKaroubi|isIdempotentComplete|filtered.*[Ii]dempotent",
+   "results": "25 hits: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/FunctorCategories.lean, Mathlib/CategoryTheory/Idempotents/FunctorCategories.lean. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: toKaroubi_isEquivalence assumes the input category is idempotent complete; it does not establish completeness of this finite-coefficient pair category or its triangulated exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered common-stage category of bounded constructible l-adic complexes over finite coefficient extensions is idempotent complete and its Karoubi inclusion is an exact equivalence",
+   "results": "8 hits: HomologicalComplex.ab5OfSize, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex, Condensed.instAB4CondensedMod, LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence_functor. ",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic idempotent and complex-category infrastructure does not assert completeness of the specified finite-coefficient pair category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete, CategoryTheory.Idempotents.toKaroubi",
+   "results": "4 hits: CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete, CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi, CategoryTheory.Idempotents.whiskeringLeft_obj_preimage_app. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: toKaroubi_isEquivalence assumes the input category is idempotent complete; it does not establish completeness of this finite-coefficient pair category or its triangulated exactness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of idempotent complete categories of constructible l-adic complexes is idempotent complete",
+   "results": "0 hits: . service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Ii]dempotent|[Ii]dempotent.*filtered|toKaroubi_isEquivalence|toKaroubiEquivalence",
+   "results": "6 hits: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: toKaroubi_isEquivalence assumes the input category is idempotent complete; it does not establish completeness of this finite-coefficient pair category or its triangulated exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents split in a filtered direct limit of categories when they split at every stage; equivalence with the idempotent completion",
+   "results": "8 hits: CategoryTheory.IsIdempotentComplete.idempotents_split, CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi, CategoryTheory.Idempotents.Karoubi.karoubi_hasFiniteBiproducts, CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject, CategoryTheory.Idempotents.Karoubi, CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete, CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, CategoryTheory.Idempotents.Karoubi.decompId_i. ",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic idempotent and complex-category infrastructure does not assert completeness of the specified finite-coefficient pair category"
+  },
+  {
+   "tool": "grep",
+   "query": "Karoubi.*[Tt]riangulat|[Tt]riangulat.*Karoubi|[Ii]dempotent.*[Cc]olimit",
+   "results": "5 hits: Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean. ",
+   "date": "2026-10-15",
+   "verdict": "no match for the item: the five hits concern equalizer/cofork constructions, not filtered coefficient categories or Karoubi triangulation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.Karoubi, CategoryTheory.Functor.IsEquivalence",
+   "results": "4 hits: CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: conditional equivalences assume IsIdempotentComplete C; no declaration establishes the coefficient-category completeness and triangulated exactness of the entire item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category in which every idempotent splits is equivalent to its Karoubi envelope via the canonical embedding",
+   "results": "8 hits: CategoryTheory.Idempotents.toKaroubiEquivalence, CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.karoubiUniversal, CategoryTheory.Idempotents.karoubiUniversal₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂, CategoryTheory.Idempotents.karoubiUniversal₁, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: conditional equivalences assume IsIdempotentComplete C; no declaration establishes the coefficient-category completeness and triangulated exactness of the entire item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The embedding into the idempotent completion of a Karoubian category is an equivalence of categories",
+   "results": "8 hits: CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.toKaroubiEquivalence, CategoryTheory.Idempotents.karoubiUniversal, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension, CategoryTheory.Idempotents.karoubiUniversal₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi, CategoryTheory.Idempotents.karoubiUniversal₁. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: generic toKaroubi equivalences require IsIdempotentComplete C; none proves completeness of the specified coefficient pair category together with triangulated exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "toKaroubi_isEquivalence|toKaroubiEquivalence|[Ii]dempotent.*filtered",
+   "results": "6 hits: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean. ",
+   "date": "2026-10-15",
+   "verdict": "partial match only: generic toKaroubi equivalences require IsIdempotentComplete C; none proves completeness of the specified coefficient pair category together with triangulated exactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.toKaroubi, CategoryTheory.Functor.EssSurj",
+   "results": "1 hit: CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete, in Mathlib.CategoryTheory.Idempotents.Karoubi.",
+   "date": "2026-10-15",
+   "verdict": "partial match only: the declaration assumes IsIdempotentComplete C and supplies essential surjectivity of toKaroubi; it does not prove completeness of this pair category or its exact triangulation. Read Karoubi.lean lines 222-240."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toKaroubiEquivalence\"",
+   "results": "2 hits: CategoryTheory.Idempotents.toKaroubiEquivalence, CategoryTheory.Idempotents.toKaroubiEquivalence_functor_additive. Read Mathlib/CategoryTheory/Idempotents/Karoubi.lean lines 222–243: the equivalence and its additive functor require IsIdempotentComplete C.",
+   "date": "2026-10-16",
+   "verdict": "partial match only: this constructs an equivalence after completeness is known; it does not prove completeness of the specified pair category or give its triangulated exactness"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -101,5 +251,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-weil-pbc-qbar-idempotent-complete",
+  "worker": "stage1",
+  "summary": "Repaired the operational return by rereading all nine current cited node statements and rechecking all twelve literal citation pairs before rebuilding against the current DAG with the delivery tool. The current filtered-retract statement gives splitting over one finite stage, and the current full-faithfulness Mathlib leaf applies to the additive pair category. Added the explicit additivity calculation for the constructed quasi-inverse. The exact statement, coefficient category, five-step route and dependency lists remain as reviewed; zero new nodes. Independent second reading expanded both projector absorption equations and the naturality equation for the inverse counit; checked the same statement and all twelve citations and ran a fresh Loogle query. Fresh second reading on 2026-10-16 confirmed all five steps against the blueprint, all nine current dependencies and the retained Stacks/Balmer–Schlichting sources; no mathematical repair was needed. Recorded an independent exact-name Loogle query and revalidated all twelve citations.",
+  "blueprint": "The imported Proof first sentence is step 1; canonical full faithfulness is step 2; the displayed splitting and envelope isomorphism are step 3; the previously implicit equivalence argument is step 4; the final exactness clause is step 5. This is auxiliary coefficient-category work within the compact-support base-change unit, whose key statement and empty recorded step list are unchanged.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-finite-stage-karoubian",
+    "why": "The finite-stage coefficient category completeness input explicitly used by this blueprint proof; the compact-support unit has no substitute for this coefficient-category theorem."
+   },
+   {
+    "node": "lem-weil-karoubi-envelope-fully-faithful",
+    "why": "Generic Karoubi inclusion full faithfulness for the already constructed additive pair category; no node of this unit states this general tool."
+   },
+   {
+    "node": "lem-weil-karoubi-envelope-triangulated",
+    "why": "Generic triangulation and exact inclusion theorem for Karoubi envelopes; used only after the same-unit Verdier theorem establishes the input triangulation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-finite-stage-karoubian",
+  "lem-weil-karoubi-envelope-fully-faithful",
+  "lem-weil-karoubi-envelope-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-05231c269",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-05231c269 (reviewer sub-agent of L); spot-checked: Read the item, all nine cited statements, report, route and cited source passages in full. All five steps hold; projector edge cases and dependency-cycle checks pass. Balmer–Schlichting supports the exact envelope triangulation. No new nodes or repairs. Accepted generic tool uses are documented in review.md; no target coefficient comparison is assumed."
+ }
 }
