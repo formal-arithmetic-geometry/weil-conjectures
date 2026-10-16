@@ -142,5 +142,37 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-25e04ed27 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, item statement identical byte for byte to the main-20261015 _section.md, so no target is weakened. Step 1 cites the det setup node (clauses 1-2: j=i∘j_Z, j_Z a qc open immersion, Xbar and Z qcqs, V qc with complement Z), then det-sf-open-closed-pullback-limits (2), whose hypotheses hold (qcqs, closed immersion with qc open complement, any ring sheaf B=Λ_Xbar). That citation is not strictly needed but it is true and from the correct unit; the triangle sketch has no node and the other open-closed nodes are limited to finite Dctf coefficients. The step's derived conclusion is exactly the unbounded clause of det-nagata-density-normalization-sheaves. Step 2 takes exactly the statement of det-nagata-density-normalization-pushforward. Setup (1) and (4) together with sk-def-nagata-sketch-data (which agrees with def-nagata-compactification) show the closure is again a dense compactification. The coefficient category and the morphisms (unit with base change, Rp_*Ri_*≃R(p∘i)_*) match the blueprint det proofs; no seeded comparison is used as a theorem. Dependency closure (407 nodes) has no cycle and every id exists; proof_deps equals the union of uses; no SGA cited; unit realization is permitted. Tested K=0, X empty, X dense, a disjoint extra component, and non-reduced Xbar. No changes and no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1febfeca4",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Snapshot module compiles cleanly via nt_compile.py (rc=0, 6.4 s, no warnings); lean.statement is byte-identical to the file signature and the node changes only its lean field. Every clause matches node 748: Compactification with [IsNoetherian c.Z] (makes the open immersion qc, so equivalent to BoundaryCompactification), Mathlib scheme-theoretic image for the closure, Λ with only MonObj (framework functors checked by #check need no IsCommMonObj), all unbounded K. eZ is pinned by two-sided inverse equations to the canonical unit/base-change comparison; eS is pinned to whiskering by Rp_* plus the conjugate derived composition iso, and its domain is definitionally Rf_!(c). Helpers are real constructions (#print axioms: no sorryAx), justified because the existing pullback API needs commutativity; only the main theorem is sorry. EssentiallySmall is the framework size convention; single universe u, nothing unbound. Edge cases empty X, K=0, zero ring, dense, extra component, non-reduced are covered. Report has Worker report and Second reading by Q89 sections; the worker section is stale but explicitly superseded (cosmetic only)."
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.NagataDensityNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nagata_density_normalization",
+  "file": "lean/Sheaf/Compactification/NagataDensityNormalization.lean",
+  "statement": "theorem nagata_density_normalization {X S : Scheme.{u}} (f : X ⟶ S) (c : Compactification f) [IsNoetherian c.Z] [EssentiallySmall.{u + 1} Profinite.{u}] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : ∃ eZ : D((c.i)_!open⟦Λ⟧) ≅ D((c.i.toImage)_!open⟦Λ⟧) ⋙ R((c.i.imageι)_*⟦Λ⟧), ∃ eS : rightDerivedLowerShriekOfCompactification Λ c ≅ D((c.i.toImage)_!open⟦Λ⟧) ⋙ R((c.i.imageι ≫ c.g)_*⟦Λ⟧), (∀ K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), nagataClosureOpenComparison c Λ K ≫ ((nagataDerivedPullbackAdjunction c.i.imageι Λ).homEquiv _ _).symm (eZ.hom.app K) = 𝟙 _ ∧ ((nagataDerivedPullbackAdjunction c.i.imageι Λ).homEquiv _ _).symm (eZ.hom.app K) ≫ nagataClosureOpenComparison c Λ K = 𝟙 _) ∧ eS = Functor.isoWhiskerRight eZ R((c.g)_*⟦Λ⟧) ≪≫ Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (nagataClosurePushforwardCompIso c Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataCoefficientChangeEquivalence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullbackAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataDerivedPullbackAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataDerivedOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullbackComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosurePullbackCompIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosureOpenComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosurePushforwardCompIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nagata_density_normalization"
+  ],
+  "note": "Canonical natural identifications, normalized by the open-extension unit and derived direct-image composition. The coefficient transport helpers use the existing coefficient isomorphisms and work for arbitrary condensed rings, without the commutativity requirement of the K-flat pullback API. No pointwise arbitrary isomorphism, let binder or chosen closure compactification is used."
  }
 }
