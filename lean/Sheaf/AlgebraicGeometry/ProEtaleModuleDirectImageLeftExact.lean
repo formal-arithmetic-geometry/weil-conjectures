@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Left exactness of pro-etale module direct image

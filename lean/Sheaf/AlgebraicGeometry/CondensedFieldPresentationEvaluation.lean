@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Compatible evaluation functors for two lifts of a scheme point

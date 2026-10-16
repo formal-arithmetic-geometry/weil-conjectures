@@ -4,6 +4,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.AlgebraicGeometry.GrothendieckHypercoverComparisonCocone
+import Sheaf.AlgebraicGeometry.GrothendieckHypercoverCohomology
+import Sheaf.AlgebraicGeometry.GrothendieckHypercoverResolution
+import Sheaf.AlgebraicGeometry.GrothendieckInjectiveHypercoverRow
+import Sheaf.Paper.HypercoverBottomRefinement
 
 /-! # The colimit of the explicit hypercover comparison maps -/
 

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.GrothendieckHypercoverCohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.FiniteHypercoverDescentParts
+import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 
 /-! # Finite cochain descent generates limit hypercover cohomology -/
 

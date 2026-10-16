@@ -5,6 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal
+import Sheaf.Paper.ContinuousConstructibleIntegralGluing
 
 /-! # Integral models on a locally finitely presented stratum
 

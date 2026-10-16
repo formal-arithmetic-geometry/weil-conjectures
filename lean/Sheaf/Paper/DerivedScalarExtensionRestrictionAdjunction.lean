@@ -21,6 +21,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Derived reduction and restriction of scalars
 

@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.Paper.ContinuousConstructibleIntegralImage
+import Sheaf.Paper.ContinuousIntegralScalarExact
 
 /-! # Assembling given integral models on a finite stratification
 

@@ -8,6 +8,9 @@ module
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import Sheaf.CategoryTheory.HomColimitExtension
 public import Mathlib.CategoryTheory.Category.ULift
+import Sheaf.Paper.CondensedFiniteFreeHomContinuity
+import Sheaf.Paper.CondensedOpenClosedRecollement
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 
 /-! # Sequential Hom continuity for a constructible integral sheaf -/
 
