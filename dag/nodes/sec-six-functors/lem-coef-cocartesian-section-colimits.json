@@ -29,9 +29,106 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(T,\\mathcal E)$, $C=\\operatorname{Fun}(T,\\mathcal B)$, and $F=D\\times_C\\{g\\}$. First [lem-coef-infinity-cocartesian-mapping-criterion] converts the given horn-cocartesian lifts to the mapping-square convention of the transport lemma. By [lem-coef-infinity-pointwise-cocartesian-transport], postcomposition $p_T:D\\to C$ is a cocartesian fibration, so $F$ is a quasicategory. Fix a diagram $A:K\\to F$. The join/comma comparison of [lem-coef-infinity-join-cone-calculus] is available also for right cocones: apply it to $K^{\\mathrm{op}}$ and the opposite target and reverse back, using the opposite mapping-space and cone duality of [lem-coef-infinity-relative-cone-equivalence](4). The joint-projection clause fixes the boundary diagram and apex. We can therefore represent the following coherent cocones by right-join diagrams. For each vertex $t$ choose a colimit cocone $c_t$ on $A_t:K\\to\\mathcal E_{g(t)}$, using the fiber hypothesis. Every outgoing transport sends $c_t$ to a colimit cocone by the preservation hypothesis. Thus [lem-coef-infinity-fiber-relative-colimit-criterion] makes $c_t$, viewed in $\\mathcal E$, a $p$-colimit diagram. The identity outgoing edge is included in that criterion. These choices are only proof witnesses; no definition is made by choosing arbitrary data.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-fiber-relative-colimit-criterion",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3(i), fiberwise cocones and relative colimits, with HTT Proposition 4.3.1.10."
+   }
+  },
+  {
+   "text": "Transpose $A$ to $a:T\\times K\\to\\mathcal E$ and prescribe $h:T\\times K^{\\triangleright}\\to\\mathcal B$ by $h(t,k)=g(t)$, constant in the cone direction. Apply [lem-coef-infinity-relative-cocone-parameters] with $U=p$, $B=T$, and the particular $p$-colimit extensions $c_t$ from step 1. It supplies an extension $c:T\\times K^{\\triangleright}\\to\\mathcal E$ with $pc=h$ exactly and with each $c_t$ fixed exactly. Transposition gives a cocone $\\bar A:K^{\\triangleright}\\to F$. The second clause of the same node makes its image in $D$ a $p_T$-colimit diagram. This constructs the higher coherence over every simplex of $T$, rather than inferring it just from the edge maps.",
+   "uses": [
+    "lem-coef-infinity-relative-cocone-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3(i), coherent existence; expanded by Kerodon Corollary 7.1.8.8 and Proposition 7.1.8.10."
+   }
+  },
+  {
+   "text": "We check directly that this relative colimit is a colimit in $F$. For any test cocone $v:K^{\\triangleright}\\to F$, relative universality in [def-coef-infinity-relative-cone] says that the outgoing mapping square for restriction from $K^{\\triangleright}$ to $K$, with target $v$, is a homotopy pullback. Take its homotopy fibers at the identity transformations of the constant $g$ diagrams. The natural mapping-fiber formula in [lem-coef-infinity-pointwise-cocartesian-transport], applied to $p_T$ and its exponentiations for both shapes, identifies the resulting equivalence as\n$$\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleright},F)}(\\bar A,v)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,F)}(A,v|_K).$$\nNow fix the boundary $v|_K=A$ and take the fiber at $1_A$. The space of cocone morphisms from $\\bar A$ to $v$ is contractible. Equivalently, restriction to $K$ makes $\\bar A$ relatively initial and [lem-coef-infinity-relative-cone-initial-corner] for $F\\to\\Delta^0$ identifies it with an initial object of the fixed-boundary cocone category. The right-cocone version of the join/comma comparison established in step 1 identifies this fixed-boundary category with the coherent comma cocone category of the statement. This is the colimit universal property. The identical argument proves sufficiency for any cocone that is colimiting in each fiber: step 1 makes its components relative colimits, and the second clause of step 2 applies to that very cocone.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-fiber-relative-colimit-criterion",
+    "lem-coef-infinity-relative-cocone-parameters",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3(i)-(ii), relative universality restricted to a fixed-base fiber."
+   }
+  },
+  {
+   "text": "For necessity, let $d$ be any colimit cocone on $A$ in $F$. Steps 1-3 constructed a colimit cocone $\\bar A$ whose evaluations are the chosen fiber colimits. The full category of initial objects in the cocone category is a contractible Kan complex by [lem-cbc-enhanced-functor-cone-calculus]; hence $d$ and $\\bar A$ are equivalent as cocones. Evaluation takes this equivalence to an equivalence of cocones in every fiber, since functors take the inverse edges and their two triangle witnesses to inverse edges and triangle witnesses. The mapping-space colimit test of [lem-coef-infinity-yoneda-presheaf-limits] is invariant under such an equivalence. Therefore every evaluation of $d$ is colimiting. This proves both directions of the evaluation criterion, including necessity, which cannot be obtained just by checking one constructed cocone.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3(ii), uniqueness of colimiting cocones."
+   }
+  },
+  {
+   "text": "Suppose each $A_k$ carries every edge of $H$ to a $p$-cocartesian edge, and let $L$ be the apex of any colimit cocone in $F$. Fix $e:t\\to t'$ in $H$, write $f=g(e):b\\to b'$, and fix $z\\in\\mathcal E_d$. For every $h:b'\\to d$, the mapping-fiber formula in [lem-coef-infinity-pointwise-cocartesian-transport] identifies the homotopy fibers of precomposition by $L(e)$ with\n$$\\operatorname{Map}_{\\mathcal E_d}(h_!L_{t'},z)\\longrightarrow\\operatorname{Map}_{\\mathcal E_d}((hf)_!L_t,z).$$\nStep 4 and transport preservation identify its two sides, naturally and compatibly with precomposition, with\n$$\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E_d}(h_!A_{t'}(k),z)\\longrightarrow\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E_d}((hf)_!A_t(k),z),$$\nusing [lem-coef-infinity-yoneda-presheaf-limits]. For each $k$ this comparison is an equivalence: the homotopy-pullback square for the cocartesian edge $A_k(e)$, supplied by [lem-coef-infinity-cocartesian-mapping-criterion], gives exactly this equivalence on fibers at $h$. Naturality of the transport mapping-fiber formula identifies the entire $K^{\\mathrm{op}}$-diagram of maps, so its limit is an equivalence. Apply [lem-coef-spaces-homotopy-fiber-detection] over the identity of $\\operatorname{Map}_{\\mathcal B}(b',d)$ to the map from $\\operatorname{Map}_{\\mathcal E}(L_{t'},z)$ to the homotopy pullback of $\\operatorname{Map}_{\\mathcal E}(L_t,z)$ along precomposition by $f$. All its fiber maps are the equivalences just proved; thus this map is an equivalence. The mapping-square criterion now makes $L(e)$ cocartesian. Since this holds for every $e\\in H$, the claimed full subcategory is closed under colimits.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3(iii) and Lemma A.5.2, expanded on mapping-space fibers; no assumption of colimits in the entire total category."
+   }
+  },
+  {
+   "text": "If $T=\\varnothing$, the section category is the terminal quasicategory, its unique cocone is colimiting, and the evaluation condition is vacuous. If $H=\\varnothing$, the specified full subcategory is all of $F$. If $K=\\Delta^0$, the colimit condition says that the one cocone edge is an equivalence, and evaluation preserves its inverse witnesses. The proof uses only preservation of the stated $K$-colimits, never preservation of all small colimits. In fact the relative-cocone argument works for arbitrary $K$ under those hypotheses; it therefore applies in particular to the weakly contractible $K$ of the unchanged statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.5.3, empty parameter and singleton indexing cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-fiber-relative-colimit-criterion",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-relative-cocone-parameters",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-cone-initial-corner",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1312.3178",
+  "place": "Agent expansion of Gepner-Haugseng Theorem A.5.3 using HTT Proposition 4.3.1.10 and Kerodon Corollary 7.1.8.8 and Proposition 7.1.8.10; mapping-fiber universal property and selected-edge closure are written explicitly. Online references are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -112,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-colorwise-sifted-colimits",
@@ -120,5 +217,20 @@
   "group": "NQ"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-section-colimits",
+  "worker": "stage1",
+  "summary": "Second reading repaired the false equivalence in the pointwise construction, supplied coherent extension and relative universality via two smaller general nodes, proved both directions of evaluation detection, and checked selected-edge closure on mapping-space fibers. Statement unchanged; two new unsplit nodes; no Mathlib leaves.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 .proof.md: finite-level operadic graph adjunction uses pointwise colimits of sections and closure of inert-preserving functors, supplied here by Gepner–Haugseng Theorem A.5.3(i)-(iii)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-e66055338",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-e66055338 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, the statements of all 12 cited nodes, the unit and the ancestor. Sources checked online at the cited places. Gepner-Haugseng arXiv:1312.3178v4 Theorem A.5.3 and Lemma A.5.2: the item matches them hypothesis by hypothesis and clause by clause, with the statement unchanged and not weakened. HTT Prop 4.3.1.10 matches lem-coef-infinity-fiber-relative-colimit-criterion exactly, specialised from locally cocartesian to cocartesian fibrations. Kerodon 02XG (exact vertex cocones) and 02XK with A empty (relative universality) match lem-coef-infinity-relative-cocone-parameters. Steps 1-6 were checked against what the cited statements actually say. Step 2's compatibility conditions hold exactly (h = g composed with the projection, so the extension lands in the fibre). Step 3's fibre-over-identity argument gives the absolute colimit in F, and step 4 gets necessity from the uniqueness of initial objects. Step 5 checks the fibres at each h, using naturality of the transport formula. The proof never uses weak contractibility, which is valid (K empty was checked); this proves the unchanged statement. Edge cases tested on both new nodes: B empty, a point and an interval; K empty and a point; p the identity; a product fibration; an empty fibre. No cycle across 301 reachable nodes, and proof_deps equals the union of the step uses. DAG-wide duplicate search: lem-coef-infinity-parameter-cone-extension is the absolute version and lem-coef-local-transport-section-colimits covers locally cocartesian sections over the identity of a quasicategory with no edge clause; neither is a duplicate. No existing node states HTT 4.3.1.10. Accepted tool_use: lem-coef-infinity-cbc-enhanced-functor-cone-calculus is cited as lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc); step 4 uses only the contractibility of the initial objects, as 68 reviewed nodes of the same unit already do. No SGA. No fixes made."
+ }
 }
