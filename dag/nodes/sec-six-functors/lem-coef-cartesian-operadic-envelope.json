@@ -28,69 +28,202 @@
   "def-coef-complete-algebroid",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define an ordinary category $\\Gamma^{\\times}$: its objects are $(\\langle n\\rangle,S)$ with $S\\subseteq\\{1,\\ldots,n\\}$, and an arrow over $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ exists precisely when $\\alpha^{-1}(T)\\subseteq S$; it is then unique over $\\alpha$. Composition is composition of pointed maps, since inverse images preserve inclusions. The projection $v:N(\\Gamma^{\\times})\\to N(\\mathsf{Fin}_*)$ is a cartesian fibration in [def-coef-infinity-fibrations]. Indeed every inner $2$-horn fills by composition, and every higher inner horn fills by its prescribed string of arrows. For a target $(\\langle m\\rangle,T)$ the lift of $\\alpha$ with source $(\\langle n\\rangle,\\alpha^{-1}T)$ is cartesian: the missing edge of a right outer $2$-horn over $\\beta$ exists exactly when $(\\alpha\\beta)^{-1}T\\subseteq R$, equivalently $\\beta^{-1}(\\alpha^{-1}T)\\subseteq R$, and is unique. In higher right outer horns all edges are already specified; each missing triangle commutes because its base triangle commutes and there is at most one arrow over a specified base arrow. Thus the horn criterion holds. Its fiber is $N(B_n)$, where $B_n$ is the finite subset poset with reverse inclusion.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2; explicit nerve/horn verification of its cartesian projection"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-enhanced-relative-exponential] with base $N(\\mathsf{Fin}_*)$, cartesian fibration $v$ from step 1, and target $\\mathcal C$. It constructs an actual simplicial set $Q$ whose simplices over $\\sigma:\\Delta^k\\to N(\\mathsf{Fin}_*)$ are maps $\\Delta^k\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^{\\times})\\to\\mathcal C$. The lemma says that $Q$ is a quasicategory and $q:Q\\to N(\\mathsf{Fin}_*)$ a cocartesian fibration, with fiber $\\operatorname{Fun}(N(B_n),\\mathcal C)$. Its cocartesian-edge criterion says that the arrows over $\\alpha$ whose maps $f(\\alpha^{-1}T)\\to g(T)$ are equivalences for every subset $T$ are cocartesian. In particular transport is $\\alpha_!f(T)=f(\\alpha^{-1}T)$: over the arrow $\\alpha$, the indexing category retracts onto $B_n$ by sending $(0,S)$ to $S$ and $(1,T)$ to $\\alpha^{-1}T$. A crossing arrow exists exactly when $\\alpha^{-1}T\\subseteq S$, so this is a functor; composing with $f$ gives a lift taking cartesian edges to identities. This description also retains the higher simplices supplied by the lemma.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.4.1.4 and Proposition 2.4.1.5(1),(2); HTT Corollary 3.2.2.13 via the existing relative-exponential node"
+   }
+  },
+  {
+   "text": "Let $A_n\\subseteq B_n$ be the full, discrete subposet of singleton subsets, with inclusion $j_n$. For $S\\in B_n$, the objects of $(A_n)_{\\geq S}$ are exactly $\\{i\\}$ for $i\\in S$. Thus [lem-coef-infinity-finite-poset-kan-extension], in its right-hand form, gives a coherent right extension $R_n(c)$ of every tuple $c=(c_i)$, with $R_n(c)(S)\\simeq\\prod_{i\\in S}c_i$ and the specified product projections. Only finite discrete limits are required here, so the hypothesis is exactly finite products, including $R_n(c)(\\varnothing)$ terminal. Let $P_n$ be the full subcategory of $\\operatorname{Fun}(N(B_n),\\mathcal C)$ of these product diagrams. The same lemma's unit and counit identify $f$ with $R_nj_n^*f$ whenever $f\\in P_n$: at every $S$ the unit is the comparison of the same product cone, and hence an equivalence by the mapping-space universal property. The componentwise-equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes this a functor-category equivalence; its closure assertion ensures that these functor categories and their full subcategories are quasicategories. Its adjunction formula, restricted to $P_n$, gives $\\operatorname{Map}(f,g)\\simeq\\operatorname{Map}(j_n^*f,j_n^*g)$ because $g\\simeq R_nj_n^*g$. Consequently restriction gives $P_n\\simeq\\mathcal C^n$. For $n=0$ the input poset is empty and its right extension is a terminal object; $P_0\\simeq *$.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.5(4), singleton-subset restriction and right Kan extension"
+   }
+  },
+  {
+   "text": "Define $\\mathcal C^{\\times}$ to be the full simplicial subset of $Q$ on vertices in the $P_n$. It is stable under the cocartesian transports of step 2. To check this without choosing coherent products, let $f\\in P_n$ and put $g(T)=f(\\alpha^{-1}T)$. For every $x\\in\\mathcal C$, the product-cone equivalences give\n$$\\operatorname{Map}(x,g(T))\\simeq\\prod_{i\\in\\alpha^{-1}T}\\operatorname{Map}(x,f(\\{i\\}))\\simeq\\prod_{j\\in T}\\operatorname{Map}(x,f(\\alpha^{-1}\\{j\\})).$$\nThe middle equality is merely the regrouping of a finite disjoint union, since distinct non-basepoints have disjoint inverse images. The maps are exactly the cone maps $g(T)\\to g(\\{j\\})$, so $g\\in P_m$. The full-subcategory assertion of [lem-cbc-enhanced-functor-cone-calculus] supplies quasicategory closure. Fullness supplies the inner-horn fillers and retains the ambient cocartesian lifts; those lifts satisfy the mapping-space cocartesian squares also when tested on the full subcategory: [lem-coef-infinity-cocartesian-mapping-criterion] turns the horn-cocartesian lifts of the inner fibration $q$ into homotopy-pullback squares for every test vertex, the mapping spaces of a full subcategory are the ambient ones, and the same criterion converts the squares back into the horn condition for the restricted inner fibration, as in [lem-coef-cocartesian-straightening]. Hence $r_{\\mathcal C}:\\mathcal C^{\\times}\\to N(\\mathsf{Fin}_*)$ is a cocartesian fibration with the fibers of step 3. For an inert map, every retained block is a singleton, so its transport selects the indicated coordinates. These are precisely the required Segal equivalences, which make this fibration a symmetric monoidal infinity category in [lem-coef-symmetric-monoidal-segal-classification]. Its fold operation is finite product and its nullary operation is terminal, so the structure is cartesian.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.1.5(3),(4),(5); disjoint-block verification of transport stability"
+   }
+  },
+  {
+   "text": "Fix $f\\in P_n$, $g\\in P_m$ and $\\alpha$. The explicit cocartesian lift of step 2 ends at $a(T)=f(\\alpha^{-1}T)\\in P_m$. Its cocartesian square, which this horn-cocartesian edge of the inner fibration $r_{\\mathcal C}$ satisfies by [lem-coef-infinity-cocartesian-mapping-criterion] (the intrinsic square of [lem-coef-cocartesian-straightening]), pulled back to $\\operatorname{id}_{\\langle m\\rangle}$ in the mapping space of the base, identifies the mapping space over $\\alpha$ with $\\operatorname{Map}_{P_m}(a,g)$. This uses the same node's identification of the simplicial fiber with the infinity-categorical fiber. Applying the right Kan adjunction of [lem-coef-infinity-finite-poset-kan-extension] to $g\\simeq R_mj_m^*g$ identifies this with\n$$\\operatorname{Map}_{\\mathcal C^m}((f(\\alpha^{-1}\\{j\\}))_j,(g(\\{j\\}))_j)=\\prod_{j=1}^m\\operatorname{Map}_{\\mathcal C}(f(\\alpha^{-1}\\{j\\}),g(\\{j\\})).$$\nThe equality follows degreewise from the product simplicial-set definition of functor categories and mapping spaces. Substitute the product-cone identifications of step 3 and write $c_i=f(\\{i\\})$, $d_j=g(\\{j\\})$. This gives exactly the asserted tuple mapping-space formula, naturally, rather than merely a bijection on homotopy classes.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Component mapping-space consequence of Construction 2.4.1.4 and Proposition 2.4.1.5"
+   }
+  },
+  {
+   "text": "For a second pointed map $\\beta:\\langle m\\rangle\\to\\langle l\\rangle$, the indexing diagram has the equality $(\\beta\\alpha)^{-1}U=\\alpha^{-1}(\\beta^{-1}U)$. If arrows have singleton components $u_j:\\prod_{\\alpha(i)=j}c_i\\to d_j$ and $v_k:\\prod_{\\beta(j)=k}d_j\\to e_k$, their composite component is\n$$\\prod_{\\beta(\\alpha(i))=k}c_i\\simeq\\prod_{\\beta(j)=k}\\prod_{\\alpha(i)=j}c_i\\xrightarrow{\\prod_j u_j}\\prod_{\\beta(j)=k}d_j\\xrightarrow{v_k}e_k.$$\nThe right Kan adjunction from step 5 identifies this formula with restriction of the composite of the original diagram maps; their projections are the displayed $u_j$ and $v_k$. Coordinates mapped to $*$ belong to no inverse image of a non-basepoint and are therefore discarded. Identities restrict to identity block maps. This is a calculation in the already constructed simplicial category $Q$, so associativity and every face/degeneracy compatibility come from its simplices; no inference from binary coherence to higher coherence is made.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.4.1.4, composition on diagrams; explicit substitution formula"
+   }
+  },
+  {
+   "text": "An arrow over $\\alpha$ factors, by the mapping-space equivalence in step 5, as the chosen cocartesian lift followed by a fiber arrow $w:a\\to g$. The mapping-space squares of [lem-coef-infinity-cocartesian-mapping-criterion], which characterize horn-cocartesian edges of the inner fibration $r_{\\mathcal C}$ in both directions (the intrinsic squares of [lem-coef-cocartesian-straightening]), show that this arrow is cocartesian if and only if $w$ is an equivalence: in the forward direction, testing on every $z\\in P_m$ yields equivalences $\\operatorname{Map}(g,z)\\to\\operatorname{Map}(a,z)$. At $z=a$, the inverse image of $\\operatorname{id}_a$ is a map $\\ell:g\\to a$ with $\\ell w=\\operatorname{id}_a$. At $z=g$, the map obtained by applying the inverse to $w$ is $\\operatorname{id}_g$; since $(w\\ell)w=w=\\operatorname{id}_g w$ and precomposition with $w$ is an equivalence, this gives $w\\ell=\\operatorname{id}_g$. In the reverse direction, precomposition by an equivalence preserves each of the cocartesian mapping-space squares. The fully faithful restriction $P_m\\simeq\\mathcal C^m$ from step 3 detects equivalences, and in a product category an inverse is specified coordinatewise, so $w$ is an equivalence exactly when each displayed block component is. This also shows that no additional cocartesian arrows arise on restricting from $Q$. When $m=0$ the criterion is vacuous and the fiber is terminal; when a block is empty its source is terminal but its component must still be an equivalence.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.1.5(2),(3); necessity as well as sufficiency on the full product-diagram subcategory"
+   }
+  },
+  {
+   "text": "For $h:\\mathcal C\\to\\mathcal D$ preserving finite products, postcompose every simplex of $Q_{\\mathcal C}$ with $h$. This defines a simplicial map over $N(\\mathsf{Fin}_*)$ and preserves the full subcategories of product diagrams, since $h$ carries every specified finite product cone to a product cone. It gives $h^{\\times}$. A cocartesian edge sends the cartesian indexing edges to equivalences by [lem-cbc-enhanced-relative-exponential]; postcomposition preserves equivalence edges (apply $h$ to their two inverse triangles), so $h^{\\times}$ preserves cocartesian arrows. Equivalently use the component criterion of step 7. It is therefore strong in the convention of [lem-coef-symmetric-monoidal-segal-classification]. On singleton evaluation it is coordinatewise $h$, and on a block its source comparison is the inverse of the canonical product-preservation equivalence $h(\\prod c_i)\\simeq\\prod h(c_i)$, followed by the image of the block map. Postcomposition commutes strictly with composition, identities and simplicial operators in this model; parameterized maps give the corresponding higher coherences.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.4.1.4, functoriality by postcomposition; compare Corollaries 2.4.1.8-2.4.1.9"
+   }
+  },
+  {
+   "text": "There is no product choice in the definition of the total simplicial set: all product diagrams with their cones are retained. The only choices in its tuple presentation are the right Kan extensions and the specified restriction identifications from step 3. The adjunction in [lem-coef-infinity-finite-poset-kan-extension] makes these universal arrows for $j_n^*$. Apply [lem-coef-parametric-universal-arrows] to that restriction functor, with domain all tuples: it says explicitly that the universal-arrow choices, including the coherent extension functor and its counit, form a contractible space, and that the mapping equivalences remain natural for arbitrary simplicial parameters. This justifies both the contractible choices of tuple/product-cone identifications and their higher coherence. Together with the fixed relative-exponential construction and functorial postcomposition in step 8, it proves the asserted canonicity and coherent functoriality of the construction.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Right Kan product-cone choices in Proposition 2.4.1.5; construction-level uniqueness compatible with Corollaries 2.4.1.8-2.4.1.9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-infinity-finite-poset-kan-extension",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-symmetric-monoidal-segal-classification",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Agent-expanded proof of Construction 2.4.1.4 and Proposition 2.4.1.5 using the existing relative-exponential and finite-poset Kan-extension nodes; HA/HTT read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An infinity category with finite products has a canonical Cartesian symmetric monoidal structure whose finite tuples have maps over a pointed map alpha given by products of mapping spaces out of each input block",
-   "results": "{\"t\": \"2026-10-16T16:10:30Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category with finite products has a canonical Cartesian symmetric monoidal structure whose finite tuples have maps over a pointed map alpha given by products of mapping spaces out of each input block\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"LightProfinite.instCartesianMonoidalCategory\", \"CategoryTheory.Dial\", \"CategoryTheory.monoidalOfHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.tensorObj\", \"SSet.instCartesianMonoidalCategory\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\"], \"digest\": \"57ec74cffefde603\"}",
+   "query": "An infinity category with finite products has a canonical cartesian symmetric monoidal structure over finite pointed sets with tuple mapping spaces",
+   "results": "{\"t\": \"2026-10-16T18:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category with finite products has a canonical cartesian symmetric monoidal structure over finite pointed sets with tuple mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Dial\", \"LightProfinite.instCartesianMonoidalCategory\", \"CategoryTheory.Dial.tensorUnitImpl\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.monoidalOfHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts\", \"CategoryTheory.monoidalOfHasFiniteProducts.instMonoidal\", \"CategoryTheory.symmetricOfHasFiniteProducts\"], \"digest\": \"5ad83aa9db3b2336\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits are ordinary CartesianMonoidalCategory.ofHasFiniteProducts and Functor.Monoidal.ofChosenFiniteProducts, or the ordinary category SSet. Read Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:14-36,100-107 and AlgebraicTopology/SimplicialSet/Monoidal.lean:14-35. These have ordinary Category instances and no infinity-operadic tuple mapping-space statement."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "loogle",
-   "query": "\"CartesianMonoidalCategory\"",
-   "results": "{\"t\": \"2026-10-16T16:10:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianMonoidalCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.toSemiCartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory.toMonoidalCategory\", \"CategoryTheory.BraidedCategory.ofCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instNonemptyBraidedCategory\"], \"digest\": \"b3bfa54cd5b1a2d4\"}",
+   "query": "CartesianMonoidalCategory, Functor.Monoidal.ofChosenFiniteProducts",
+   "results": "{\"t\": \"2026-10-16T18:08:07Z\", \"tool\": \"loogle\", \"query\": \"CartesianMonoidalCategory, Functor.Monoidal.ofChosenFiniteProducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CartesianMonoidalCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits are ordinary CartesianMonoidalCategory.ofHasFiniteProducts and Functor.Monoidal.ofChosenFiniteProducts, or the ordinary category SSet. Read Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:14-36,100-107 and AlgebraicTopology/SimplicialSet/Monoidal.lean:14-35. These have ordinary Category instances and no infinity-operadic tuple mapping-space statement."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "grep",
-   "query": "cartesianMonoidalCategory|ofChosenFiniteProducts",
-   "results": "{\"t\": \"2026-10-16T16:10:38Z\", \"tool\": \"grep\", \"query\": \"cartesianMonoidalCategory|ofChosenFiniteProducts\", \"sub\": \"CategoryTheory/Monoidal/Cartesian\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean\"], \"digest\": \"23a99db1991c8a88\"}",
+   "query": "CartesianMonoidalCategory|ofChosenFiniteProducts|Fin_\\*",
+   "results": "{\"t\": \"2026-10-16T18:08:07Z\", \"tool\": \"grep\", \"query\": \"CartesianMonoidalCategory|ofChosenFiniteProducts|Fin_\\\\*\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Types/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Types/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Types/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Types/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\"], \"digest\": \"e87c4ae7c8490d60\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits are ordinary CartesianMonoidalCategory.ofHasFiniteProducts and Functor.Monoidal.ofChosenFiniteProducts, or the ordinary category SSet. Read Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:14-36,100-107 and AlgebraicTopology/SimplicialSet/Monoidal.lean:14-35. These have ordinary Category instances and no infinity-operadic tuple mapping-space statement."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "leansearch",
-   "query": "The cartesian symmetric monoidal infinity operad has finite tuple objects and block product mapping spaces",
-   "results": "{\"t\": \"2026-10-16T16:10:39Z\", \"tool\": \"leansearch\", \"query\": \"The cartesian symmetric monoidal infinity operad has finite tuple objects and block product mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.symmetricOfHasFiniteProducts\", \"SSet.instFiniteTensorUnit\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"SSet.whiskerRight_app_apply\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"CategoryTheory.CartesianMonoidalCategory.toSymmetricCategory\"], \"digest\": \"ff2b6e27be6f67f3\"}",
+   "query": "canonical cartesian symmetric monoidal infinity category finite products",
+   "results": "{\"t\": \"2026-10-16T18:08:08Z\", \"tool\": \"leansearch\", \"query\": \"canonical cartesian symmetric monoidal infinity category finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.symmetricOfHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.toSymmetricCategory\", \"CategoryTheory.monoidalOfHasFiniteProducts\", \"CategoryTheory.symmetricOfHasFiniteCoproducts\", \"SSet.instCartesianMonoidalCategory\"], \"digest\": \"45eeceb50bc8d016\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits are ordinary CartesianMonoidalCategory.ofHasFiniteProducts and Functor.Monoidal.ofChosenFiniteProducts, or the ordinary category SSet. Read Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:14-36,100-107 and AlgebraicTopology/SimplicialSet/Monoidal.lean:14-35. These have ordinary Category instances and no infinity-operadic tuple mapping-space statement."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "leanfinder",
-   "query": "For quasicategories any finite product preserving functor extends uniquely to a strong symmetric monoidal functor between Cartesian symmetric monoidal infinity categories",
-   "results": "{\"t\": \"2026-10-16T16:10:41Z\", \"tool\": \"leanfinder\", \"query\": \"For quasicategories any finite product preserving functor extends uniquely to a strong symmetric monoidal functor between Cartesian symmetric monoidal infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.monoidalOfHasFiniteProducts.δ_eq\", \"CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts\", \"SSet.Truncated.hoFunctor.monoidal\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.Functor.OplaxMonoidal.ofChosenFiniteProducts\", \"CategoryTheory.Functor.Monoidal.instSubsingleton\"], \"digest\": \"2b0081e8cdeb4525\"}",
+   "query": "For a quasicategory finite products form a symmetric monoidal infinity operad via product diagrams indexed by subsets",
+   "results": "{\"t\": \"2026-10-16T18:24:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory finite products form a symmetric monoidal infinity operad via product diagrams indexed by subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.Truncated.hoFunctor.monoidal\", \"SSet.instCartesianMonoidalCategory\", \"SSet.instFiniteTensorUnit\", \"SSet.instFiniteTensorObj\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"SSet.prodStdSimplex.instFiniteTensorObjObjSimplexCategoryStdSimplexMk\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\"], \"digest\": \"a77a887c844da3ca\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits are ordinary CartesianMonoidalCategory.ofHasFiniteProducts and Functor.Monoidal.ofChosenFiniteProducts, or the ordinary category SSet. Read Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:14-36,100-107 and AlgebraicTopology/SimplicialSet/Monoidal.lean:14-35. These have ordinary Category instances and no infinity-operadic tuple mapping-space statement."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Quasicategory with finite products admits a symmetric monoidal operadic nerve whose multimorphism spaces are maps from products",
-   "results": "{\"t\": \"2026-10-16T16:42:09Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory with finite products admits a symmetric monoidal operadic nerve whose multimorphism spaces are maps from products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.cechNerveTerminalFrom\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveFunctor\", \"SSet.instCartesianMonoidalCategory\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.nerve\"], \"digest\": \"ff965cb6a1306a26\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second reading. CartesianMonoidalCategory is for ordinary categories (Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-102); the nerve and Cech hits do not construct arbitrary infinity-operad mapping spaces."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "loogle",
    "query": "\"CartesianMonoidalCategory\"",
-   "results": "{\"t\": \"2026-10-16T16:42:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianMonoidalCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.toSemiCartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory.toMonoidalCategory\", \"CategoryTheory.BraidedCategory.ofCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instNonemptyBraidedCategory\"], \"digest\": \"b3bfa54cd5b1a2d4\"}",
+   "results": "{\"t\": \"2026-10-16T18:24:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianMonoidalCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.toSemiCartesianMonoidalCategory\", \"CategoryTheory.SemiCartesianMonoidalCategory.toMonoidalCategory\", \"CategoryTheory.BraidedCategory.ofCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instNonemptyBraidedCategory\"], \"digest\": \"b3bfa54cd5b1a2d4\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second reading. CartesianMonoidalCategory is for ordinary categories (Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-102); the nerve and Cech hits do not construct arbitrary infinity-operad mapping spaces."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   },
   {
    "tool": "grep",
-   "query": "LaxCartesian|laxCartesian|Straightening|Unstraightening|CartesianOperad",
-   "results": "{\"t\": \"2026-10-16T16:42:11Z\", \"tool\": \"grep\", \"query\": \"LaxCartesian|laxCartesian|Straightening|Unstraightening|CartesianOperad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CartesianOperad|relativeExponential|[Uu]nstraighten|[Ss]traightening|[Ll]axCartesian",
+   "results": "{\"t\": \"2026-10-16T18:24:26Z\", \"tool\": \"grep\", \"query\": \"CartesianOperad|relativeExponential|[Uu]nstraighten|[Ss]traightening|[Ll]axCartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second reading. CartesianMonoidalCategory is for ordinary categories (Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-102); the nerve and Cech hits do not construct arbitrary infinity-operad mapping spaces."
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "ofHasFiniteProducts|ofChosenFiniteProducts|nonempty_monoidal_iff",
+   "results": "{\"t\": \"2026-10-16T18:24:26Z\", \"tool\": \"grep\", \"query\": \"ofHasFiniteProducts|ofChosenFiniteProducts|nonempty_monoidal_iff\", \"sub\": \"CategoryTheory/Monoidal/Cartesian\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/InfSemilattice.lean\"], \"digest\": \"5e9aab00bab6019d\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "def ofHasFiniteProducts|def ofChosenFiniteProducts|nonempty_monoidal_iff_preservesFiniteProducts",
+   "results": "{\"t\": \"2026-10-16T18:24:34Z\", \"tool\": \"grep\", \"query\": \"def ofHasFiniteProducts|def ofChosenFiniteProducts|nonempty_monoidal_iff_preservesFiniteProducts\", \"sub\": \"CategoryTheory/Monoidal/Cartesian\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"19c6150a3d59a869\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact or one-line match: inspected Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:99-116,944-970 and AlgebraicTopology/SimplicialSet/Monoidal.lean:17-35. These have ordinary Category instances, Hom-set finite products or a monoidal structure on the ordinary category SSet; none constructs the product-diagram infinity category over N(Fin_*) or its block mapping spaces. The unqualified-name Loogle query was rejected with unknown identifier, so it proves no absence; the quoted-name Loogle rerun succeeds and returns only ordinary-category declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-monoidal-straightening",
@@ -98,5 +231,39 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-operadic-envelope",
+  "worker": "stage1",
+  "summary": "Constructed the subset-indexed relative exponential and its full product-diagram subcategory. Reused existing finite-poset right Kan extension, relative exponential, cocartesian mapping-square and parametric universal-arrow statements to establish all tuple, cocartesian, substitution, functoriality and contractible-choice clauses. No new nodes; statement unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent external products: realizes the finite-tuple presentation foundation named in the item ancestry, with subset diagrams rather than an assumed coherent family of product functors.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Generic relative-exponential theorem converts the explicitly verified cartesian subset-index fibration to the cocartesian diagram fibration, exactly as HA Proposition 2.4.1.5 uses HTT 3.2.2.13; no node in this unit supplies that relative construction."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Foundational definitions of ordinary nerves, coherent functor simplicial sets and mapping spaces, already used by the statement conventions."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure of functor/full subcategories and detection of transformation equivalences on components; used to identify product diagrams with tuples, not to replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-705de20fd",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-705de20fd (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has one commit with the item and its report, no new nodes, and the statement, stmt_deps and blueprint fields are unchanged from base. The route matches HA Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, with the subset-diagram construction feeding HTT 3.2.2.13 and 4.3.2.15. HA/HTT are not archived, so I checked against my own knowledge of them, and proof_origin=agent with WANTED lines is correct. Every step checks out. Step 1: the inverse-image cartesian lift is correct and the horns fill because the functor to Fin_* is faithful. Step 2: the retraction (0,S)->S, (1,T)->alpha^{-1}T is a functor, so transport is f(alpha^{-1}T). Step 3: under reverse inclusion (A_n)_{>=S} is the discrete set of singletons in S, so only finite products are needed, and S empty or n=0 gives the terminal object. Step 4: the disjoint regrouping works, empty blocks give terminal objects, inert transport selects coordinates, fold is the product and the nullary operation is terminal. Step 5: the base mapping space is discrete, so the homotopy fiber is the strict fiber. Step 6: the block composite factors through (1,beta^{-1}k). Step 7: the two-out-of-three plus Yoneda argument gives the inverse, and the empty-block and m=0 cases are right. Step 8: the product comparison goes in the right direction. Step 9: the parametric universal-arrow node is applied to j^*. There is no cycle (91-node closure) and no duplicate: the nearest nodes are the Segal classification (ordinary operadic nerve only), relative symmetric monoidal localization, def-coef-monoidal-infinity-category and the two citers, whose uses match the unchanged statement. FIX: steps 4, 5 and 7 need the fact that horn-cocartesian edges of the simplicial inner fibrations satisfy the mapping-space square, and step 7 also needs the converse. They cited only lem-coef-cocartesian-straightening, which states the equivalence of the two conventions only 'after replacement over S'. I added the exact same-unit bridge, lem-coef-infinity-cocartesian-mapping-criterion (HTT 2.4.4.3, an iff for inner fibrations), to those three steps and to proof_deps; the corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-cartesian-operadic-envelope.json. Accepted tool uses: lem-cbc-enhanced-relative-exponential (HTT 3.2.2.13; this unit has no node stating it) and lem-cbc-enhanced-functor-cone-calculus (generic quasicategory foundations). def-cbc-enhanced-diagrams-cones is a definition. The three kinds of Mathlib search are recorded and there is no Mathlib leaf.; 1 file(s) fixed by the reviewer"
+ }
 }

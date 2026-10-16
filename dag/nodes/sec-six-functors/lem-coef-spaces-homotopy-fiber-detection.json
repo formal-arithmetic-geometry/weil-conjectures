@@ -27,9 +27,93 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H:qu\\simeq vr$, $F_s=\\operatorname{hofib}_s(r)$ and $G_s=\\operatorname{hofib}_{v(s)}(q)$ using [def-cbc-enhanced-diagrams-cones]. Put $E=P(r)$ and $E'=P(q)$, with endpoint maps $R:E\\to S$, $Q:E'\\to T$ and projections $e:E\\to X$, $e':E'\\to Y$. By [lem-coef-space-path-fibration-replacement], $R,Q$ are Kan fibrations, the constant-path sections $\\delta_X:X\\to E$, $\\delta_Y:Y\\to E'$ are weak equivalences, and the strict vertex fibers of $R,Q$ are the homotopy fibers of $r,q$. Since $e\\delta_X=1_X$ and $e'\\delta_Y=1_Y$, the projections also induce bijections on components and isomorphisms on every positive-degree based group. The total spaces $E,E'$ are Kan: fill a horn in the base, then lift that simplex through the fibration. Their strict fibers are exactly $F_s,G_s$, hence are Kan by lifting horns over the constant base simplex.\n\nWe construct an actual strict square before using naturality. Over $E$, the paths $H_{e(-)}$ and $v(\\gamma)$ define a map $E\\times\\Lambda_1^2\\to T$, with edges $01$ and $12$ respectively. The inclusion $\\Lambda_1^2\\hookrightarrow\\Delta^2$ is inner anodyne directly from the definition of inner fibration. Apply [lem-coef-inner-anodyne-pushout-product] to this inner horn inclusion and the degreewise injection $\\varnothing\\hookrightarrow E$, and interchange the two product coordinates. Since the Kan complex $T$ fills inner horns, $T\\to\\Delta^0$ is an inner fibration; the resulting lifting property extends the map to $E\\times\\Delta^2\\to T$. Its edge $02$, together with $ue$, defines $U:E\\to E'$ satisfying $QU=vR$ and $e'U=ue$ strictly. On the fiber at $s$, this is the specified map $\\phi_s$ with path $H_x\\cdot v(\\gamma)$. Any two such coherent composites are homotopic relative to the two given edges: apply the same inner pushout-product statement to $\\Lambda_1^2\\hookrightarrow\\Delta^2$ and the degreewise injection $E\\times\\partial\\Delta^1\\hookrightarrow E\\times\\Delta^1$, and interchange product coordinates to extend the two fillers and their common horn to $E\\times\\Delta^1\\times\\Delta^2$. Restricting to edge $02$ gives the homotopy, preserving both endpoints and therefore all fiber maps.\n\nBy [lem-coef-kan-realization-serre], $|R|,|Q|$ are Serre fibrations. By the natural finite-limit assertion of [lem-coef-realization-finite-limits], their fibers are $|F_s|,|G_s|$ and their strict square is the realization of $(U,v)$. Apply [lem-coef-serre-homotopy-exact-sequence] to these two Serre fibrations and this strict square. At every chosen fiber vertex this gives natural exact sequences, component actions, orbit identifications and stabilizers. The unpointed orbit identification also holds for an empty fiber: if a total-space component mapped to the chosen base component, choose a path from the image of a point in that component to the base vertex and lift it, using the path-lifting clause of the same Serre statement. Its endpoint would lie in the supposedly empty fiber. Thus the relevant total-space component fiber is empty too; the empty fiber-component set has the unique action and empty orbit set, and no pointed sequence is needed there. Identify their total-space groups and components with those of $X,Y$ by $e,e'$. The equality $e'U=ue$ makes the total-space comparison exactly $u_*$ and the base comparison is $v_*$. At $z=(x,\\gamma)\\in F_s$ and $z'=U(z)$ the based maps to $S,T$ become $r_{\\gamma,*}$ and $q_{H_x\\cdot v\\gamma,*}$: evaluation of the universal path gives a homotopy from $re$ to $R$, and on a based cube its boundary follows precisely $\\gamma$; the corresponding evaluation in $E'$ has boundary path $H_x\\cdot v\\gamma$. This is the defining change of base point on homotopy classes of cubes. Write $i,j$ for the fiber-to-total maps after these identifications. All exact sequences, actions and stabilizer statements used below refer to these identified sequences. No fibration hypothesis on $r$ or $q$ has been introduced.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10 for mapping-path replacement; explicit parameterized horn filling supplies the strict square. Hovey Lemma 2.4.16, Corollary 3.6.2 and Lemma 3.2.4 give the realization and exact-sequence route already stated by the cited DAG nodes."
+   }
+  },
+  {
+   "text": "Suppose first that $u$ is a weak homotopy equivalence, and fix $s$. Its map on components and that of $v$ are bijective. The orbit identifications in [lem-coef-serre-homotopy-exact-sequence] therefore make $\\pi_0\\phi_s$ bijective on orbit sets: these orbit sets are the fibers of $\\pi_0r$ and $\\pi_0q$ over $[s]$ and $[v(s)]$. Put $P=\\pi_1(S,s)$ and $P'=\\pi_1(T,v(s))$. The map $v_*:P\\to P'$ is an isomorphism and $\\pi_0\\phi_s$ is equivariant. At every $z=(x,\\gamma)$ its source stabilizer is $\\operatorname{im}(r_{\\gamma,*}:\\pi_1(X,x)\\to P)$, and the target stabilizer is $\\operatorname{im}(q_{H_x\\cdot v\\gamma,*}:\\pi_1(Y,u(x))\\to P')$. Commutativity and the isomorphism $u_*$ show that $v_*$ carries the first subgroup onto the second. An equivariant map of transitive orbits with the same stabilizer is bijective: write the orbit elements as $g\\cdot[z]$, and two such elements have the same image exactly when their quotient lies in that stabilizer. Thus the map on each orbit is bijective, and bijectivity on orbit sets proves $\\pi_0\\phi_s$ bijective. If one component set is empty, the bijection on orbit sets forces both to be empty; no base point was chosen for that case.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XC",
+    "place": "Proposition 3.2.8.1, proof in both directions; agent-expanded homotopy-fiber formulation using the natural exact sequence and component actions, with explicit diagram chases."
+   }
+  },
+  {
+   "text": "Still suppose $u$ is a weak equivalence. Fix any $z=(x,\\gamma)\\in F_s$ and $n\\geq1$. Use the exact sequences of [lem-coef-serre-homotopy-exact-sequence], with base-point transports as in step 1. To prove injectivity of $\\phi_{s,*}$ on $\\pi_n$, take $b$ mapping to $1$. Since $u_*$ is injective, $i_*b=1$, so $b=\\partial c$ for some $c\\in\\pi_{n+1}(S,s)$. Then $\\partial'v_*c=1$, whence $v_*c=q_*d'$ for some $d'\\in\\pi_{n+1}(Y,u(x))$. Lift $d'$ to $d$ by the isomorphism $u_*$; naturality and injectivity of $v_*$ give $c=r_*d$. Consequently $b=\\partial r_*d=1$. For surjectivity take $b'\\in\\pi_n(G_s,z')$. Lift $j_*b'$ to $a\\in\\pi_n(X,x)$ by $u_*$. Its image under $r_*$ is $1$, since $v_*$ is injective and $q_*j_*b'=1$. Write $a=i_*b$. The element $b'(\\phi_{s,*}b)^{-1}$ lies in $\\ker j_*$, so it is $\\partial'c'$ for some $c'\\in\\pi_{n+1}(T,v(s))$. Lift $c'$ to $c$ by $v_*$. Naturality now gives $b'=\\phi_{s,*}((\\partial c)b)$. This is a group calculation even when $n=1$ and never assumes commutativity. Together with step 2 and the definition of weak equivalence in [def-cbc-enhanced-diagrams-cones], it proves every $\\phi_s$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XC",
+    "place": "Proposition 3.2.8.1, proof in both directions; agent-expanded homotopy-fiber formulation using the natural exact sequence and component actions, with explicit diagram chases."
+   }
+  },
+  {
+   "text": "Conversely assume every $\\phi_s$ is a weak homotopy equivalence. In particular its component map is bijective and equivariant for the isomorphism $v_*:\\pi_1(S,s)\\to\\pi_1(T,v(s))$. It therefore induces a bijection on orbit sets (an equivariant bijection and an isomorphism of acting groups preserve and reflect membership in a common orbit). By [lem-coef-serre-homotopy-exact-sequence], this is exactly the map from the fiber of $\\pi_0r$ over $[s]$ to the fiber of $\\pi_0q$ over $[v(s)]$. Since $\\pi_0v$ is bijective, these fiberwise bijections prove $\\pi_0u$ bijective: for surjectivity choose the unique source base component of a given target component and use its fiberwise surjectivity; for injectivity two source components with the same image have the same base component and fiberwise injectivity applies. Every base component has a vertex representative, and empty component fibers cause no exception.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XC",
+    "place": "Proposition 3.2.8.1, proof in both directions; agent-expanded homotopy-fiber formulation using the natural exact sequence and component actions, with explicit diagram chases."
+   }
+  },
+  {
+   "text": "For positive-degree groups choose $x\\in X$, set $s=r(x)$, $z=(x,\\mathrm{const}_s)$ and $z'=\\phi_s(z)$. For $n\\geq1$ use the natural exact sequences of [lem-coef-serre-homotopy-exact-sequence]. If $a\\in\\pi_n(X,x)$ satisfies $u_*a=1$, then $r_*a=1$ by injectivity of $v_*$. Thus $a=i_*b$ for $b\\in\\pi_n(F_s,z)$. Now $j_*\\phi_{s,*}b=1$, so $\\phi_{s,*}b=\\partial'c'$ for some $c'\\in\\pi_{n+1}(T,v(s))$. Lift $c'$ to $c$ by $v_*$ and use injectivity of $\\phi_{s,*}$ and naturality to get $b=\\partial c$. Hence $a=1$. For surjectivity let $a'\\in\\pi_n(Y,u(x))$ and choose $c\\in\\pi_n(S,s)$ with $v_*c=q_*a'$. Naturality gives $\\phi_{s,*}(\\partial c)=\\partial' q_*a'$, the distinguished point. If $n=1$, the relevant $\\phi_{s,*}$ is the bijection on $\\pi_0$ from the fiber equivalence; otherwise it is an isomorphism on $\\pi_{n-1}$. In either case $\\partial c$ is the distinguished point. Exactness gives $a\\in\\pi_n(X,x)$ with $r_*a=c$. Then $a'(u_*a)^{-1}$ lies in $\\ker q_*$, so equals $j_*b'$ for some $b'\\in\\pi_n(G_s,z')$. Lift $b'$ to $b$ by $\\phi_{s,*}$. We have $u_*((i_*b)a)=a'$. Thus $u_*$ is an isomorphism on every positive-degree based group, including the nonabelian fundamental group.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XC",
+    "place": "Proposition 3.2.8.1, proof in both directions; agent-expanded homotopy-fiber formulation using the natural exact sequence and component actions, with explicit diagram chases."
+   }
+  },
+  {
+   "text": "Step 4 gives bijectivity on components and step 5 gives all positive-degree isomorphisms at vertices. Each point of a geometric realization lies in a simplex and is joined within that simplex to a vertex. Changing a base point along this path identifies the homotopy-group map with the vertex-based map; at degree one this identification is conjugation by the path. The same observation applies in step 3 to fiber realizations. Therefore these are precisely the weak homotopy equivalences defined in [def-cbc-enhanced-diagrams-cones]. If $S$ is empty, $X$ is empty, and bijectivity of $\\pi_0v$ forces $T$, then $Y$, to be empty, proving the vacuous fiber case directly. With nonempty bases, the orbit arguments already include empty fibers and empty total spaces. Both implications have now been proved for the specified homotopy and its induced fiber maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00XC",
+    "place": "Proposition 3.2.8.1, proof in both directions; agent-expanded homotopy-fiber formulation using the natural exact sequence and component actions, with explicit diagram chases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00XC",
+  "place": "Agent-expanded proof of Kerodon Proposition 3.2.8.1: explicit path-space strictification followed by the existing realization and Serre exact-sequence nodes; component/orbit arguments and nonabelian diagram chases are written in the item. Online sources read; archival copies WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +177,73 @@
    "results": "{\"t\": \"2026-10-16T15:52:11Z\", \"tool\": \"grep\", \"query\": \"homotopyFiber|homotopy[Ff]iber|homotopy_fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Precylinder.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\"], \"digest\": \"d0b9a31a07fae162\"}",
    "date": "2026-10-16",
    "verdict": "no match: second-reader independent searches. Read Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:120-126: FibrantObject.weakEquivalence_homMk_iff merely identifies a full-subcategory weak equivalence with the ambient one. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:25-56: these fibers are of homological complexes, not Kan spaces. Loogle returned zero hits. SimplicialSet/CategoryWithFibrations.lean defines horn-lifting fibrations and does not state equivalence detection on fibers."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyFiber|homotopy_fiber|weakEquivalence.*fiber|fiber.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T16:35:26Z\", \"tool\": \"grep\", \"query\": \"homotopyFiber|homotopy_fiber|weakEquivalence.*fiber|fiber.*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FibrantObject.weakEquivalence_homMk_iff in Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:122-126 and weakEquivalences_over_iff in ModelCategory/Over.lean:100-102 merely unfold inherited weak equivalences. Pullback instances in ModelCategory/Instances assume a trivial fibration; they do not give detection on all fibers. The other hits concern model-category homotopies or Brown factorizations. Loogle and the fiber grep return no hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weakEquivalence\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-16T16:35:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"weakEquivalence\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FibrantObject.weakEquivalence_homMk_iff in Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:122-126 and weakEquivalences_over_iff in ModelCategory/Over.lean:100-102 merely unfold inherited weak equivalences. Pullback instances in ModelCategory/Instances assume a trivial fibration; they do not give detection on all fibers. The other hits concern model-category homotopies or Brown factorizations. Loogle and the fiber grep return no hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak homotopy equivalences of spaces are detected by the induced maps on homotopy fibers over equivalent bases",
+   "results": "{\"t\": \"2026-10-16T16:35:27Z\", \"tool\": \"leansearch\", \"query\": \"Weak homotopy equivalences of spaces are detected by the induced maps on homotopy fibers over equivalent bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.weakEquivalences_over_def\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverWeakEquivalences\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.weakEquivalences_over_iff\"], \"digest\": \"176b17b6ed4616cc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FibrantObject.weakEquivalence_homMk_iff in Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:122-126 and weakEquivalences_over_iff in ModelCategory/Over.lean:100-102 merely unfold inherited weak equivalences. Pullback instances in ModelCategory/Instances assume a trivial fibration; they do not give detection on all fibers. The other hits concern model-category homotopies or Brown factorizations. Loogle and the fiber grep return no hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy commutative square of Kan complexes with a weak equivalence on bases has a weak equivalence on total spaces if and only if every homotopy fiber comparison is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T16:35:35Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy commutative square of Kan complexes with a weak equivalence on bases has a weak equivalence on total spaces if and only if every homotopy fiber comparison is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\"], \"digest\": \"24585d6716f83553\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FibrantObject.weakEquivalence_homMk_iff in Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:122-126 and weakEquivalences_over_iff in ModelCategory/Over.lean:100-102 merely unfold inherited weak equivalences. Pullback instances in ModelCategory/Instances assume a trivial fibration; they do not give detection on all fibers. The other hits concern model-category homotopies or Brown factorizations. Loogle and the fiber grep return no hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of Kan complexes over an equivalence of base spaces is a weak homotopy equivalence exactly when all derived fiber maps are equivalences",
+   "results": "{\"t\": \"2026-10-16T16:36:16Z\", \"tool\": \"leanfinder\", \"query\": \"A map of Kan complexes over an equivalence of base spaces is a weak homotopy equivalence exactly when all derived fiber maps are equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\"], \"digest\": \"58a72827fd5eb08e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FibrantObject.weakEquivalence_homMk_iff in Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean:122-126 and weakEquivalences_over_iff in ModelCategory/Over.lean:100-102 merely unfold inherited weak equivalences. Pullback instances in ModelCategory/Instances assume a trivial fibration; they do not give detection on all fibers. The other hits concern model-category homotopies or Brown factorizations. Loogle and the fiber grep return no hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy fiber exact sequence Kan complex",
+   "results": "{\"t\": \"2026-10-16T16:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy fiber exact sequence Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.homotopy₀₁\"], \"digest\": \"2a0768a2c4b466a4\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second-reader check. Valid Loogle and the focused SimplicialSet grep had no hits. Semantic results are Dold-Kan chain homotopies, covering-map monodromy, homotopy-group definitions and a generic cylinder fibration, not the homotopy-fiber exact sequence or fiberwise equivalence detector. Read Topology/Homotopy/Lifting.lean:376-440, HomotopyGroup.lean:13-40 and Algebra/Homology/HomotopyFiber.lean:25-56. Reused existing DAG tools instead of creating the proposed child."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyGroup\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-16T16:55:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyGroup\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second-reader check. Valid Loogle and the focused SimplicialSet grep had no hits. Semantic results are Dold-Kan chain homotopies, covering-map monodromy, homotopy-group definitions and a generic cylinder fibration, not the homotopy-fiber exact sequence or fiberwise equivalence detector. Read Topology/Homotopy/Lifting.lean:376-440, HomotopyGroup.lean:13-40 and Algebra/Homology/HomotopyFiber.lean:25-56. Reused existing DAG tools instead of creating the proposed child."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kan homotopy fiber long exact sequence with fundamental group action",
+   "results": "{\"t\": \"2026-10-16T16:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"Kan homotopy fiber long exact sequence with fundamental group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyQToZero\", \"IsCoveringMap.monodromyFunctor\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"IsCoveringMap.monodromyFunctor_map\", \"homotopyGroupEquivFundamentalGroup\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\"], \"digest\": \"c6db7296a98c3422\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second-reader check. Valid Loogle and the focused SimplicialSet grep had no hits. Semantic results are Dold-Kan chain homotopies, covering-map monodromy, homotopy-group definitions and a generic cylinder fibration, not the homotopy-fiber exact sequence or fiberwise equivalence detector. Read Topology/Homotopy/Lifting.lean:376-440, HomotopyGroup.lean:13-40 and Algebra/Homology/HomotopyFiber.lean:25-56. Reused existing DAG tools instead of creating the proposed child."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*fiber|fundamental.*group|long.*exact|exact.*sequence|monodromy",
+   "results": "{\"t\": \"2026-10-16T17:11:02Z\", \"tool\": \"grep\", \"query\": \"homotopy.*fiber|fundamental.*group|long.*exact|exact.*sequence|monodromy\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second-reader check. Valid Loogle and the focused SimplicialSet grep had no hits. Semantic results are Dold-Kan chain homotopies, covering-map monodromy, homotopy-group definitions and a generic cylinder fibration, not the homotopy-fiber exact sequence or fiberwise equivalence detector. Read Topology/Homotopy/Lifting.lean:376-440, HomotopyGroup.lean:13-40 and Algebra/Homology/HomotopyFiber.lean:25-56. Reused existing DAG tools instead of creating the proposed child."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-grothendieck-limits-colimits",
@@ -104,5 +251,20 @@
   "group": "Q38"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spaces-homotopy-fiber-detection",
+  "worker": "stage1",
+  "summary": "Second reader removed the redundant homotopy-fiber exact-sequence child. The six-step proof now constructs a strict square of mapping-path fibrations by parameterized horn filling, applies existing realization and Serre homotopy-sequence nodes, and writes both equivalence comparisons explicitly, including components and nonabelian degree one. Zero new nodes; original item statement unchanged. Landing-return repair: refreshed the finite-limit citation after its boundary-definition clarification; replaced the general anodyne pushout-product leaf by the existing inner-anodyne leaf, which is sufficient for the inner 2-horns used here and avoids its new dependency path back to the item. Maintainer reader (2026-10-17): step 1 now cites the coefficient unit's own lem-coef-space-path-fibration-replacement instead of the off-unit lem-cbc-kan-fibration-fiber-criterion (C7); the cited statement gives exactly the Kan fibration, the constant-path weak equivalence and the strict-fiber/homotopy-fiber identification used.",
+  "blueprint": "Retains the inherited ancestry to prop-coef-integral-exceptional-adjoint proof paragraph 2 (current main-20261015 path sec-six-functors/sk-thm-sf-package): the base-and-fiber mapping-space test used by lem-coef-infinity-grothendieck-limits-colimits on the route to the finite-coefficient coherent adjunction before the derived limit. No chapter/unit change."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-a939b196b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a939b196b (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full and checked them against Kerodon 00XC (Prop. 3.2.8.1, read online). The statement is correct and unweakened: arbitrary vertical maps, a specified homotopy qu=>vr, and empty spaces and fibers are all handled. I checked the empty base, empty fibers, discrete spaces, a point base, and nontrivial pi_1 with a disconnected fiber. Step 1: the path replacement is right, and the strict square comes from filling an inner horn Lambda^2_1 over E. That uses the inner pushout-product Mathlib leaf (one map inner anodyne, the other degreewise injective, T to a point an inner fibration), and the same leaf gives the homotopy relative to endpoints. Realization gives Serre fibrations, and the fibers are identified through finite limits. The Serre node is applied correctly, and the empty-fiber orbit case is proved by path lifting. Steps 2-5: I verified the orbit/stabilizer bijection and all four nonabelian diagram chases, including the n=1 pointed-set case. Step 6 is a genuinely elementary basepoint change. There are no new nodes, no cycle and no duplicate; no coefficient category or base change is involved. FIX (C7): step 1 cited lem-cbc-kan-fibration-fiber-criterion from unit sk-prop-sf-cbc, which is off this unit's route and had no declared tool use. The item's own unit has lem-coef-space-path-fibration-replacement, which states exactly what step 1 uses. I repointed step 1 and proof_deps to it in fixes/. No tool_uses are needed or accepted.; 1 file(s) fixed by the reviewer"
+ }
 }

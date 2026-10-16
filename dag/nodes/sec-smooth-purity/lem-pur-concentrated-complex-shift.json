@@ -1,286 +1,296 @@
 {
-  "id": "lem-pur-concentrated-complex-shift",
-  "blueprint": {
-    "is": "lem-pur-concentrated-complex-shift",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Complexes with cohomology in a single degree",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a separated\nfinite-type $k$-scheme, let $K\\in D^b_{ctf}(T,\\Lambda)$ and let\n$r\\in\\mathbf Z$.\n\n1. *concentration in one degree.* If the\n[def-weil-derived-cohomology-sheaves] cohomology sheaves\n$\\mathcal H^i(K)$ vanish for every $i\\neq r$, then the\ntruncation triangles induce a canonical isomorphism\n$$\nK\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal H^r(K)[-r].\n$$\n1. *local constancy detected on an etale cover.* Let\n$u:U\\to T$ be a surjective\netale morphism and suppose\nthat $Lu^*K\\cong\\underline L[-r]$ for a\nlocally constant\n$\\Lambda$-sheaf $\\underline L$ with finite stalks on $U$.\nThen $\\mathcal H^i(K)=0$ for every $i\\neq r$, and\n$\\mathcal H^r(K)$ is locally constant with finite stalks on\n$T$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-    "place": "node lem-pur-concentrated-complex-shift, order 2000"
-  },
-  "stmt_deps": [
-    "def-pur-conventions",
+ "id": "lem-pur-concentrated-complex-shift",
+ "blueprint": {
+  "is": "lem-pur-concentrated-complex-shift",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Complexes with cohomology in a single degree",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a separated\nfinite-type $k$-scheme, let $K\\in D^b_{ctf}(T,\\Lambda)$ and let\n$r\\in\\mathbf Z$.\n\n1. *concentration in one degree.* If the\n[def-weil-derived-cohomology-sheaves] cohomology sheaves\n$\\mathcal H^i(K)$ vanish for every $i\\neq r$, then the\ntruncation triangles induce a canonical isomorphism\n$$\nK\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal H^r(K)[-r].\n$$\n1. *local constancy detected on an etale cover.* Let\n$u:U\\to T$ be a surjective\netale morphism and suppose\nthat $Lu^*K\\cong\\underline L[-r]$ for a\nlocally constant\n$\\Lambda$-sheaf $\\underline L$ with finite stalks on $U$.\nThen $\\mathcal H^i(K)=0$ for every $i\\neq r$, and\n$\\mathcal H^r(K)$ is locally constant with finite stalks on\n$T$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
+  "place": "node lem-pur-concentrated-complex-shift, order 2000"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-etale-morphism",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-type-morphism",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a cochain representative of $K$ and apply the following canonical constructions; the functoriality assertion of [lem-weil-pbc-truncation-triangle] ensures that their derived maps are the canonical truncation maps. Let $c_r:\\tau_{\\leq r}K\\to K$ be the canonical truncation inclusion and let $j_r:\\tau_{\\leq r}K\\to\\mathcal H^r(K)[-r]$ be the map supplied by the truncation triangle. By [lem-weil-pbc-truncation-cohomology], $c_r$ induces isomorphisms on cohomology in degrees $i\\leq r$ and $\\tau_{\\leq r}K$ has zero cohomology for $i>r$. The hypothesis gives $\\mathcal H^i(K)=0$ for $i>r$, so $c_r$ induces isomorphisms in every degree. The explicit kernel/image description of $j_r$ in [lem-weil-pbc-truncation-triangle], together with the same truncation calculation, shows that $\\mathcal H^i(j_r)$ is an isomorphism in every degree: at $i=r$ it is the cycles-to-cohomology quotient, and for $i\\ne r$ both source and target vanish. The cohomology-sheaf interpretation is [def-weil-derived-cohomology-sheaves]. Here the single complex has its only nonzero term in degree $r$, since $(M[-r])^i=M^{i-r}$ for $M$ placed in degree zero; hence its degree-$r$ cohomology is $M$ and its other cohomology vanishes.",
+   "uses": [
     "def-weil-derived-cohomology-sheaves",
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "proof": [
-    {
-      "text": "Choose a cochain representative of $K$ and apply the following canonical constructions; the functoriality assertion of [lem-weil-pbc-truncation-triangle] ensures that their derived maps are the canonical truncation maps. Let $c_r:\\tau_{\\leq r}K\\to K$ be the canonical truncation inclusion and let $j_r:\\tau_{\\leq r}K\\to\\mathcal H^r(K)[-r]$ be the map supplied by the truncation triangle. By [lem-weil-pbc-truncation-cohomology], $c_r$ induces isomorphisms on cohomology in degrees $i\\leq r$ and $\\tau_{\\leq r}K$ has zero cohomology for $i>r$. The hypothesis gives $\\mathcal H^i(K)=0$ for $i>r$, so $c_r$ induces isomorphisms in every degree. The explicit kernel/image description of $j_r$ in [lem-weil-pbc-truncation-triangle], together with the same truncation calculation, shows that $\\mathcal H^i(j_r)$ is an isomorphism in every degree: at $i=r$ it is the cycles-to-cohomology quotient, and for $i\\ne r$ both source and target vanish. The cohomology-sheaf interpretation is [def-weil-derived-cohomology-sheaves].",
-      "uses": [
-        "def-weil-derived-cohomology-sheaves",
-        "lem-weil-pbc-truncation-cohomology",
-        "lem-weil-pbc-truncation-triangle"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 1: the truncation triangles"
-      }
-    },
-    {
-      "text": "By [lem-weil-pbc-unbounded-derived-iso-cohomology], a morphism in the derived category is an isomorphism when it induces isomorphisms on all cohomology sheaves. Hence both $c_r$ and $j_r$ are isomorphisms, and their composite $j_r\\circ c_r^{-1}:K\\xrightarrow{\\sim}\\mathcal H^r(K)[-r]$ is canonical and functorial in $K$.",
-      "uses": [
-        "lem-weil-pbc-unbounded-derived-iso-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 1: the truncation triangles"
-      }
-    },
-    {
-      "text": "Work with $\\Lambda=A=A_{E,n}$, the finite-torsion setting stipulated by [def-pur-conventions]; the other coefficient versions are the separate transports specified there. Clause (4) of [def-weil-l-adic-coefficient-extension] states explicitly that $A_{E,n}$ is a finite local ring, so the finite discrete coefficient hypotheses below hold. Since $u:U\\to T$ is etale and surjective, the singleton family $\\{u\\}$ is a pro-etale covering by [lem-pur-etale-proetale-cover]. By [prop-weil-pbc-proetale-constant-exact], inverse image on these constant-coefficient module sheaves is exact. On a cochain representative it preserves kernels, images, and their quotient, hence sends $\\Ker d^i/\\Im d^{i-1}$ to $\\Ker(u^*d^i)/\\Im(u^*d^{i-1})$ and sends quasi-isomorphisms to quasi-isomorphisms. Thus termwise $u^*$ computes $Lu^*$ and gives $u^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lu^*K)$. The assumed isomorphism with $\\underline L[-r]$ makes this zero for $i\\ne r$. The covering-family clause of [lem-cbc-proetale-stalk-conservative], applied to $\\{u\\}$, gives $\\mathcal H^i(K)=0$ for $i\\ne r$.",
-      "uses": [
-        "def-pur-conventions",
-        "def-weil-l-adic-coefficient-extension",
-        "lem-pur-etale-proetale-cover",
-        "prop-weil-pbc-proetale-constant-exact",
-        "lem-cbc-proetale-stalk-conservative"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 2: an etale cover"
-      }
-    },
-    {
-      "text": "Put $G=\\mathcal H^r(K)$, so step 3 gives $u^*G\\cong\\underline L$. We check that this is also the localized restriction $G|_U$, rather than silently identifying the two sites. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}$ is $T_{\\mathrm{proet}}/U$, with the restricted constant coefficient ring. For an object $V\\to U$, the pairs $(W,\\phi:V\\to U\\times_TW)$ in the inverse-image formula of [def-weil-proetale-inverse-image] are precisely $T$-maps $V\\to W$. Their category has initial object $(V,\\mathrm{graph}(V\\to U))$, since $V\\to T$ is a valid object by the localization lemma. Indeed an arrow from this pair to $(W,\\phi)$ must be the $T$-map $V\\to W$ obtained by projecting $\\phi$, and this map satisfies the required equality by the fibre-product universal property. Its opposite therefore has a terminal object, and the displayed colimit is $G(V)$. These identifications commute with restriction maps. This presheaf is already a sheaf by the site equivalence, so sheafification leaves it unchanged. The coefficient identification is the identity on constant sections, hence respects the transported module actions of [prop-weil-pbc-proetale-constant-exact]. Thus $u^*G\\cong G|_U$ as module sheaves, and $G|_U\\cong\\underline L$.",
-      "uses": [
-        "lem-weil-proetale-weakly-etale-localization",
-        "def-weil-proetale-inverse-image",
-        "prop-weil-pbc-proetale-constant-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 2: an etale cover"
-      }
-    },
-    {
-      "text": "Choose a pro-etale covering $\\{v_j:V_j\\to U\\}$ trivializing $\\underline L$, as in [def-weil-proetale-locally-constant-sheaf]. The localization equivalence of [lem-weil-proetale-weakly-etale-localization] identifies its constant module models and restrictions with those in $T_{\\mathrm{proet}}/U$: both are the sheafifications of the same constant presheaves on the identified sites. The composite family $\\{u\\circ v_j:V_j\\to T\\}$ is a covering by the composition axiom in [def-weil-pbc-sites-and-cohomology], applied to the singleton cover from step 3. On each $V_j$ the restriction of $G$ is the corresponding constant model of $\\underline L$, by step 4 and evaluation of iterated restriction at $W\\to V_j$. This is exactly local constancy of $G$ on $T$.",
-      "uses": [
-        "def-weil-proetale-locally-constant-sheaf",
-        "lem-weil-proetale-weakly-etale-localization",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 2: an etale cover"
-      }
-    },
-    {
-      "text": "Finally let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be any geometric point. The singleton etale cover lifts it to $\\bar u:\\operatorname{Spec}\\Omega\\to U$ by [lem-weil-pbc-etale-cover-geometric-point-lift]. Use the representative-and-refinement description of stalks and the filtered opposite neighbourhood category in [def-weil-proetale-geometric-stalk]. By [lem-weil-proetale-weakly-etale-localization], forgetting the map to $U$ sends a pointed neighbourhood of $\\bar u$ to one of $\\bar t$, and defines a map $(G|_U)_{\\bar u}\\to G_{\\bar t}$. It is surjective: a representative $s\\in G(W)$ restricts to $W\\times_TU$, pointed by $(\\bar w,\\bar u)$, which is a neighbourhood over $U$ by the localization lemma. It is injective: if representatives on pointed neighbourhoods $V_1,V_2$ over $U$ become equal in $G_{\\bar t}$, filteredness gives a pointed common refinement $R\\to V_1,V_2$ where the sections agree. The two composites $R\\rightrightarrows U$ preserve the chosen point; the equalization condition gives a further pointed refinement $R'\\to R$ on which these composites agree. With that common map to $U$, both $R'\\to V_i$ are $U$-morphisms, so the representatives already agree in $(G|_U)_{\\bar u}$. These sectionwise restriction maps preserve the module operations. Thus $G_{\\bar t}\\cong(G|_U)_{\\bar u}\\cong\\underline L_{\\bar u}$, which is finite by hypothesis. This proves finiteness of every geometric stalk without a uniform bound on their sizes; on the empty scheme the assertion is vacuous.",
-      "uses": [
-        "lem-weil-pbc-etale-cover-geometric-point-lift",
-        "def-weil-proetale-geometric-stalk",
-        "lem-weil-proetale-weakly-etale-localization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-        "place": "Proof Step 2: an etale cover"
-      }
-    }
-  ],
-  "proof_deps": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 1: the truncation triangles"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-unbounded-derived-iso-cohomology], a morphism in the derived category is an isomorphism when it induces isomorphisms on all cohomology sheaves. Hence both $c_r$ and $j_r$ are isomorphisms, and their composite $j_r\\circ c_r^{-1}:K\\xrightarrow{\\sim}\\mathcal H^r(K)[-r]$ is canonical and functorial in $K$.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 1: the truncation triangles"
+   }
+  },
+  {
+   "text": "Work with $\\Lambda=A=A_{E,n}$, the finite-torsion setting stipulated by [def-pur-conventions]; the other coefficient versions are the separate transports specified there. Clause (4) of [def-weil-l-adic-coefficient-extension] states explicitly that $A_{E,n}$ is a finite local ring, so the finite discrete coefficient hypotheses below hold. Since $u:U\\to T$ is etale and surjective, the singleton family $\\{u\\}$ is a pro-etale covering by [lem-pur-etale-proetale-cover]. By [prop-weil-pbc-proetale-constant-exact], inverse image on these constant-coefficient module sheaves is exact. On a cochain representative it preserves kernels, images, and their quotient, hence sends $\\Ker d^i/\\Im d^{i-1}$ to $\\Ker(u^*d^i)/\\Im(u^*d^{i-1})$ and sends quasi-isomorphisms to quasi-isomorphisms. Thus termwise $u^*$ computes $Lu^*$, which at finite level is exactly the representation of $Lu^*$ recorded in [def-weil-derived-pullback-tensor-hom] (termwise $u^{-1}$ with the action transported along the coefficient isomorphism), and gives $u^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lu^*K)$. The assumed isomorphism with $\\underline L[-r]$ makes this zero for $i\\ne r$. Apply the derived covering-family clause of [lem-cbc-proetale-stalk-conservative] to the morphism $0\\to\\mathcal H^i(K)$, with the sheaf placed in degree zero. Its inverse image is an isomorphism by the preceding vanishing, so the morphism itself is an isomorphism. This gives $\\mathcal H^i(K)=0$ for $i\\ne r$.",
+   "uses": [
     "def-pur-conventions",
-    "def-weil-derived-cohomology-sheaves",
     "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-proetale-geometric-stalk",
-    "def-weil-proetale-inverse-image",
-    "def-weil-proetale-locally-constant-sheaf",
-    "lem-cbc-proetale-stalk-conservative",
     "lem-pur-etale-proetale-cover",
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-pbc-truncation-cohomology",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-weil-proetale-weakly-etale-localization",
-    "prop-weil-pbc-proetale-constant-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.md",
-    "place": "Proof Steps 1-2, with the truncation and etale-cover arguments made explicit"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "derived complex with cohomology in one degree canonical truncation isomorphism and etale-local detection",
-      "results": "8 hits: CochainComplex.quasiIso_πTruncGE_iff; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.quasiIso_ιTruncLE_iff; CochainComplex.isIso_ιTruncLE_iff; CochainComplex.isIso_πTruncGE_iff; CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE",
-      "date": "2026-10-16",
-      "verdict": "generalization: Mathlib has truncation quasi-isomorphism/isomorphism criteria but no combined sheaf or etale-local statement"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory homologyFunctor truncation singleFunctor",
-      "results": "0 hits: loogle: Unknown identifier `homologyFunctor`",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "truncation.*homology|homology.*truncation|locally constant.*finite",
-      "results": "3 hits: Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean:13; Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean:14; Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:189",
-      "date": "2026-10-16",
-      "verdict": "no match for the combined item"
-    },
-    {
-      "tool": "leansearch",
-      "query": "complex cohomology concentrated in one degree locally constant after etale cover",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A complex in a derived category concentrated in degree n is canonically isomorphic to its nth homology shifted, and exact restriction detects cohomology locally",
-      "results": "8 hits including DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; DerivedCategory.isZero_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE. Read DerivedCategory/TStructure.lean:173-199.",
-      "date": "2026-10-16",
-      "verdict": "partial match only: the derived-category result supplies an existential single-object model but not the combined canonical cohomology isomorphism and etale descent clauses"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory.singleFunctor",
-      "results": "12 hits: DerivedCategory.singleFunctor; instAdditiveSingleFunctor; singleFunctorIsoCompQ; singleFunctorIsoCompQh; Q_obj_single_obj; singleFunctorIsoCompQ_hom_app; singleFunctorIsoCompQ_inv_app; Q_map_single_map; instFaithfulSingleFunctor; instFullSingleFunctor; singleFunctorCompHomologyFunctorIso; CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt. The displayed types concern the single-object embedding and its homology, not the combined etale-local assertion.",
-      "date": "2026-10-16",
-      "verdict": "partial match only: single-complex and homology infrastructure; no full match for both clauses of the item"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2000,
-  "blueprint_uses": [
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties",
-    "lem-cbc-proetale-stalk-conservative"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-dnc",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-pur-concentrated-complex-shift",
-    "worker": "stage1",
-    "summary": "Re-audited the returned split against the current shared DAG and sources after the landing-lock timeout. Replaced the unnecessary new local-constancy descent lemma by explicit inverse-image/localized-restriction, covering-composition and geometric-stalk arguments using existing nodes. Retained the Mathlib covering-comparison leaf and canonical truncation argument. The item statement is unchanged; no extra finiteness or quasi-compactness hypotheses are used. The independent second reading made the inverse-image indexing arrow explicit and replaced the stalk cofinality assertion by an elementwise surjectivity and injectivity proof.",
-    "blueprint": "Proof Step 1 is realized by steps 1-2 (canonical truncation maps and cohomology detection). Proof Step 2 is realized by steps 3-6 (exact pullback and covering detection, an explicit inverse-image/localized-restriction identification, composition of local trivializations, and geometric-stalk comparison).",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-truncation-cohomology",
-        "why": "Generic canonical-truncation cohomology calculation; no node of sk-thm-dnc supplies it."
-      },
-      {
-        "node": "lem-weil-pbc-truncation-triangle",
-        "why": "Generic distinguished truncation triangle; no node of sk-thm-dnc supplies it."
-      },
-      {
-        "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
-        "why": "Generic derived-category cohomology detection; no node of sk-thm-dnc supplies it."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-exact",
-        "why": "Generic exactness of pro-etale inverse image on constant-coefficient module sheaves; no node of sk-thm-dnc supplies it."
-      },
-      {
-        "node": "lem-cbc-proetale-stalk-conservative",
-        "why": "Generic pro-etale covering-family conservativity; no node of sk-thm-dnc supplies it."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Generic identification of the small pro-etale site of a weakly etale object with the localized site, including coefficient rings; needed to compare inverse image with literal restriction. No node of sk-thm-dnc supplies it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-truncation-cohomology",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "prop-weil-pbc-proetale-constant-exact",
-    "lem-cbc-proetale-stalk-conservative",
-    "lem-weil-proetale-weakly-etale-localization"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NW-994ea31a9",
-    "group": "NW",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-994ea31a9 (reviewer sub-agent of L); spot-checked: Independent full stage-1 review completed. Item and new Mathlib leaf match their sources; all six proof steps, hypotheses, coefficient category, localization, stalk comparison, route, searches, edge cases, and duplicate checks pass. Review written to review.md."
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 2: an etale cover"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-953434c38",
-    "group": "NL",
-    "result": "pass",
-    "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings and records. Both Lean files compile cleanly through scompile.py. No fixes needed; detailed review written to review.md."
+  {
+   "text": "Put $G=\\mathcal H^r(K)$, so step 3 gives $u^*G\\cong\\underline L$. We check that this is also the localized restriction $G|_U$, rather than silently identifying the two sites. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}$ is $T_{\\mathrm{proet}}/U$, with the restricted constant coefficient ring. For an object $V\\to U$, the pairs $(W,\\phi:V\\to U\\times_TW)$ in the inverse-image formula of [def-weil-proetale-inverse-image] are precisely $T$-maps $V\\to W$. Their category has initial object $(V,\\mathrm{graph}(V\\to U))$, since $V\\to T$ is a valid object by the localization lemma. Indeed an arrow from this pair to $(W,\\phi)$ must be the $T$-map $V\\to W$ obtained by projecting $\\phi$, and this map satisfies the required equality by the fibre-product universal property. Its opposite therefore has a terminal object, and the displayed colimit is $G(V)$: map each $G(W)$ to $G(V)$ by restriction along the projected map $V\\to W$. These maps form a cocone; its map back to the colimit is the coprojection at $W=V$, and the colimit relations make both composites identities. These identifications commute with restriction maps. This presheaf is already a sheaf by the site equivalence, so sheafification leaves it unchanged. The coefficient identification is the identity on constant sections, hence respects the transported module actions of [prop-weil-pbc-proetale-constant-exact]. Thus $u^*G\\cong G|_U$ as module sheaves, and $G|_U\\cong\\underline L$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 2: an etale cover"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.ConcentratedComplexShift",
-    "declaration": "AlgebraicGeometry.Scheme.concentratedComplexShift",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.proEtaleConstantDerivedPullback",
-      "AlgebraicGeometry.Scheme.concentratedComplexShift"
-    ],
-    "file": "lean/Sheaf/Paper/ConcentratedComplexShift.lean",
-    "statement": "theorem concentratedComplexShift (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) (a : T ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (K : proEtaleDerivedCategory T P.Ring) (hK : WeilConjectures.finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T K) (r : ℤ) : ((∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) → ∃! e : K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) 0).obj ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))⟦-r⟧, (DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).map (e.hom ≫ (((DerivedCategory.singleFunctors (proEtaleRingModules T (proEtaleConstantRing T P.Ring))).shiftIso (-r) r 0 (neg_add_cancel r)).hom.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).inv.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)) ∧ ∀ (U : Scheme.{u}) (u : U ⟶ T) [Surjective u] [Etale u], ∀ (L : proEtaleRingModules U (proEtaleConstantRing U P.Ring)), Nonempty ((proEtaleConstantDerivedPullback P u).obj K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules U (proEtaleConstantRing U P.Ring)) 0).obj L)⟦-r⟧) → IsLocallyConstantProEtaleModuleSheaf U P.Ring L ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ U), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing U P.Ring) L)) → (∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) ∧ IsLocallyConstantProEtaleModuleSheaf T P.Ring ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing T P.Ring) ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)))",
-    "branch": "newtargets-dag",
-    "by": "NL",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Second reading: clauses have independent hypotheses; the canonical truncation isomorphism is characterized uniquely by identity on H^r using the standard single-degree and shift comparisons. The constant derived pullback specializes the published exact module pullback with its canonical invertible coefficient map, reusing finiteCoefficientCommRingMap_isIso rather than restating it."
+  {
+   "text": "Choose a pro-etale covering $\\{v_j:V_j\\to U\\}$ trivializing $\\underline L$, as in [def-weil-proetale-locally-constant-sheaf]. The localization equivalence of [lem-weil-proetale-weakly-etale-localization] identifies its constant module models and restrictions with those in $T_{\\mathrm{proet}}/U$: both are the sheafifications of the same constant presheaves on the identified sites. The composite family $\\{u\\circ v_j:V_j\\to T\\}$ is a covering by the composition axiom in [def-weil-pbc-sites-and-cohomology], applied to the singleton cover from step 3. On each $V_j$ the restriction of $G$ is the corresponding constant model of $\\underline L$, by step 4 and evaluation of iterated restriction at $W\\to V_j$. This is exactly local constancy of $G$ on $T$.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 2: an etale cover"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of [def-pur-conventions],\nlet $T$ be a separated\nfinite-type $k$-scheme, let $K\\in D^b_{ctf}(T,\\Lambda)$ and let\n$r\\in\\mathbf Z$.\n\n1. *concentration in one degree.* If the\n[def-weil-derived-cohomology-sheaves] cohomology sheaves\n$\\mathcal H^i(K)$ vanish for every $i\\neq r$, then the\ntruncation triangles induce a canonical isomorphism\n$$\nK\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal H^r(K)[-r].\n$$\n1. *local constancy detected on an etale cover.* Let\n$u:U\\to T$ be a surjective\netale morphism and suppose\nthat $Lu^*K\\cong\\underline L[-r]$ for a\nlocally constant\n$\\Lambda$-sheaf $\\underline L$ with finite stalks on $U$.\nThen $\\mathcal H^i(K)=0$ for every $i\\neq r$, and\n$\\mathcal H^r(K)$ is locally constant with finite stalks on\n$T$.",
-    "proof": [
-      {
-        "text": "Step 1: the truncation triangles. By\n[def-weil-derived-cohomology-sheaves] the sheaves\n$\\mathcal H^i(K)$ are the cohomology sheaves for the standard\nt-structure, and for every $a\\in\\mathbf Z$ there are exact triangles\n$\\tau_{\\leq a-1}K\\to\\tau_{\\leq a}K\\to\\mathcal H^a(K)[-a]\\to$ and\n$\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$. A complex all of whose\ncohomology sheaves vanish is zero in the derived category of\n[def-weil-pbc-proetale-site], that category being the\nlocalization at the quasi-isomorphisms. If therefore\n$\\mathcal H^i(K)=0$ for every $i\\neq r$, then\n$\\tau_{\\geq r+1}K\\simeq0$ and $\\tau_{\\leq r-1}K\\simeq0$, and the two\ntriangles exhibit $K$ and $\\mathcal H^r(K)[-r]$ as models of one\nand the same object; this is (1).\nStep 2: an etale cover. Pullback of sheaves is exact, so the derived\npullback $Lu^*$ commutes with cohomology sheaves, and etale\nmorphisms are weakly etale, hence covering families in the sense of\n[def-weil-pbc-proetale-site] (an etale morphism is flat with\nflat diagonal, which is the description of weakly etale in\n[def-weil-scheme-morphism-properties]); the description of etale\nmorphisms is that of [def-sbc-smooth-morphisms]. Since $u$ is a\nmember of a pro-etale covering family, inverse image along $u$\nreflects vanishing of a sheaf, by clause (1) of\n[lem-cbc-proetale-stalk-conservative]; as $Lu^*K\\cong \\underline L[-r]$ has cohomology only in degree $r$, the sheaves\n$u^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lu^*K)$ vanish for $i\\neq r$,\nand therefore so do the sheaves $\\mathcal H^i(K)$. For the remaining\ndegree, $u^*\\mathcal H^r(K)\\cong\\underline L$ is constant along the\ncovering $u$, so $\\mathcal H^r(K)$ is locally constant in the sense\nrecalled in [def-weil-scheme-morphism-properties]; the stalks of a\nconstructible object may be computed at geometric points, by part (3) of\n[lem-cbc-proetale-stalk-conservative], and they are the stalks of\n$\\underline L$ there, hence finite. This is (2).",
-        "uses": [
-          "def-weil-derived-cohomology-sheaves",
-          "def-weil-pbc-proetale-site",
-          "def-weil-scheme-morphism-properties",
-          "def-sbc-smooth-morphisms",
-          "lem-cbc-proetale-stalk-conservative"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Finally let $\\bar t:\\operatorname{Spec}\\Omega\\to T$ be any geometric point. The singleton etale cover lifts it to $\\bar u:\\operatorname{Spec}\\Omega\\to U$ by [lem-weil-pbc-etale-cover-geometric-point-lift]. Apply [lem-pur-proetale-inverse-image-stalk] to the underlying abelian sheaf $G$: it gives a canonical isomorphism $(u^{-1}G)_{\\bar u}\\cong G_{\\bar t}$. Since $\\Lambda$ is commutative, [prop-weil-pbc-proetale-constant-exact] identifies the module pullback $u^*G$ (with its transported action) with this module inverse image. Step 4 identifies $u^*G$ with $G|_U$, so $G_{\\bar t}\\cong(G|_U)_{\\bar u}\\cong\\underline L_{\\bar u}$ as $\\Lambda$-modules. This stalk is finite by hypothesis, and the point $\\bar t$ was arbitrary; on the empty scheme the assertion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-pur-proetale-inverse-image-stalk",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+    "place": "Step 2: an etale cover"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-etale-proetale-cover",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-pur-proetale-inverse-image-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/lem-pur-concentrated-complex-shift.proof.md",
+  "place": "Steps 1-2; explicit canonical truncation, inverse-image/localized-restriction, local-trivialization, and stalk arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived complex with cohomology concentrated in one degree canonical truncation isomorphism etale local detection",
+   "results": "8 hits; scope=all Mathlib; DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, HomologicalComplex.isIso_ιTruncLE_iff, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, HomologicalComplex.quasiIsoAt_ιTruncLE, CochainComplex.isIso_ιTruncLE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "partial match: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE gives an existential single-object model, not the full canonical-cohomology and etale-descent statement; read TStructure.lean:170-194"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "1 hits; scope=all Mathlib; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "partial match: the one hit is the existential single-object model in DerivedCategory/TStructure.lean:189-194; no etale-descent clause"
+  },
+  {
+   "tool": "grep",
+   "query": "truncation.*homology|homology.*truncation|locally constant.*finite",
+   "results": "0 hits; scope=Mathlib; ",
+   "date": "2026-10-17",
+   "verdict": "no conclusion: 0 hits because the supplied subdirectory Mathlib resolved to the nonexistent nested Mathlib/Mathlib; corrected by the later Algebra/Homology grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "complex concentrated in one cohomological degree and locally constant finite cohomology detected on a surjective etale cover",
+   "results": "8 hits; scope=all Mathlib; CochainComplex.exists_iso_single, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CondensedSet.LocallyConstant.functorFullyFaithful, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.functor_obj_val, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondensed.lanLightCondSet, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: CochainComplex.exists_iso_single assumes strict support of terms; the other hits concern condensed sets and modules rather than this pro-etale descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over a finite constant ring an etale surjection detects a derived object which is a shifted finite locally constant sheaf",
+   "results": "8 hits; scope=all Mathlib; SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CompHausLike.LocallyConstantModule.functor, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-17",
+   "verdict": "no match: finite presentation/type predicates and condensed locally constant functors do not state the two clauses of the item"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_singleFunctor_obj_of_isGE_of_isLE|singleFunctorCompHomologyFunctorIso|LocallyConstant",
+   "results": "7 hits; scope=Algebra/Homology; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "date": "2026-10-17",
+   "verdict": "partial match: read DerivedCategory/TStructure.lean:170-194 and FullyFaithful.lean:25-66; singleFunctor homology and existence infrastructure do not give the etale-descent clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2000,
+ "blueprint_uses": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-cbc-proetale-stalk-conservative"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-dnc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-concentrated-complex-shift",
+  "worker": "stage1",
+  "summary": "Q62 repaired return B3: compared the retained sandbox with the current shared baseline and verified the direct statement dependencies def-weil-finite-type-morphism (finite type of the structure map), def-weil-proper-morphism (its separatedness definition), and def-weil-etale-morphism (the cover hypothesis). Also retained direct definitions of surjectivity and geometric stalks. Reread the current main-20261015 source and every proof citation; the six-step truncation/local-cover route and item statement are unchanged. Refreshed one citation quote to the current definition text. No new nodes or Mathlib leaves; historical search records and maintainer-owned fields retained. Independent second reader refreshed the Step 3 def-pur-conventions quote after a concurrent baseline wording update; its finite-coefficient scope and the six-step proof remain unchanged. Maintainer reader (2026-10-17): added the direct definition def-weil-derived-pullback-tensor-hom of the derived pullback Lu^* used in clause 2 to stmt_deps and to step 3, whose termwise computation of Lu^* it states.",
+  "blueprint": "Current blueprint proof Step 1 is realized by steps 1-2 (canonical truncation maps, cohomology, and inversion). Step 2 is realized by steps 3-6 (finite constant coefficients and exact pullback, explicit localized restriction, composition of trivializing covers, and the cited inverse-image stalk comparison). This is the shift-of-a-lisse-sheaf reduction used in sk-thm-dnc; no change to the DNC or smooth-purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-cohomology",
+    "why": "Generic canonical-truncation cohomology calculation; no node of sk-thm-dnc supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic distinguished truncation triangle; no node of sk-thm-dnc supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic derived-category cohomology detection; no node of sk-thm-dnc supplies it."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness of pro-etale inverse image on constant-coefficient module sheaves; no node of sk-thm-dnc supplies it."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Generic pro-etale covering-family conservativity; no node of sk-thm-dnc supplies it."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the small pro-etale site of a weakly etale object with the localized site, including coefficient rings; needed to compare inverse image with literal restriction. No node of sk-thm-dnc supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-71aa9a8d8",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-71aa9a8d8 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the main-20261015 statement and proof, the sk-thm-dnc unit and the chapter, and every cited node statement. I compared the delivery with the unsplit side base: only split-owned fields changed, and the statement matches the blueprint hypothesis by hypothesis (separated finite-type T, D^b_ctf, any r, surjective étale u, no finiteness on U). Coefficients: finite level Λ=A_{E,n}, per def-pur-conventions. Step checks: (1) H^i(c_r) and H^i(j_r) are isomorphisms in every degree, from the truncation-cohomology lemma and the explicit j_r of the triangle lemma, and the shift sign is correct. (2) The derived-iso criterion applies in D(Sh(T_proet,A)). (3) A_{E,n} is finite and {u} is a pro-étale cover by lem-pur-etale-proetale-cover. Exact u* gives u*H^i ≅ H^i(Lu*), and clause (1) of lem-cbc-proetale-stalk-conservative detects vanishing; no geometric-stalk conservativity is used. (4) I checked that I_V is the category of T-maps out of V, whose initial object is the graph, so u^{-1}G equals G|_U, and the module actions agree. (5) Trivializing covers compose by site axiom (ii), with no quasi-compactness assumption. (6) Each geometric point lifts with the same Ω, and lem-pur-proetale-inverse-image-stalk transfers finiteness of stalks. The route stays on sk-thm-dnc and its cited units (sk-def-purity-conv, sk-prop-a1-inv). I accept the six declared generic tool uses. No SGA is used. There are no new nodes. lem-sf-derived-concentrated-single is only an existential Mathlib leaf, not a duplicate. Edge cases checked: T empty, K=0, r=0 and ±1, U not quasi-compact; surjectivity is necessary. FIX: step 3 identified termwise u* with Lu* without citing the definition of Lu*. I added def-weil-derived-pullback-tensor-hom, whose finite-level clause states exactly this, to stmt_deps, to step 3's uses and to proof_deps; it creates no cycle. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-concentrated-complex-shift.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-953434c38",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings and records. Both Lean files compile cleanly through scompile.py. No fixes needed; detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcentratedComplexShift",
+  "declaration": "AlgebraicGeometry.Scheme.concentratedComplexShift",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantDerivedPullback",
+   "AlgebraicGeometry.Scheme.concentratedComplexShift"
+  ],
+  "file": "lean/Sheaf/Paper/ConcentratedComplexShift.lean",
+  "statement": "theorem concentratedComplexShift (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) (a : T ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (K : proEtaleDerivedCategory T P.Ring) (hK : WeilConjectures.finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T K) (r : ℤ) : ((∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) → ∃! e : K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) 0).obj ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))⟦-r⟧, (DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).map (e.hom ≫ (((DerivedCategory.singleFunctors (proEtaleRingModules T (proEtaleConstantRing T P.Ring))).shiftIso (-r) r 0 (neg_add_cancel r)).hom.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).inv.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)) ∧ ∀ (U : Scheme.{u}) (u : U ⟶ T) [Surjective u] [Etale u], ∀ (L : proEtaleRingModules U (proEtaleConstantRing U P.Ring)), Nonempty ((proEtaleConstantDerivedPullback P u).obj K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules U (proEtaleConstantRing U P.Ring)) 0).obj L)⟦-r⟧) → IsLocallyConstantProEtaleModuleSheaf U P.Ring L ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ U), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing U P.Ring) L)) → (∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) ∧ IsLocallyConstantProEtaleModuleSheaf T P.Ring ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing T P.Ring) ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading: clauses have independent hypotheses; the canonical truncation isomorphism is characterized uniquely by identity on H^r using the standard single-degree and shift comparisons. The constant derived pullback specializes the published exact module pullback with its canonical invertible coefficient map, reusing finiteCoefficientCommRingMap_isIso rather than restating it."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of [def-pur-conventions],\nlet $T$ be a separated\nfinite-type $k$-scheme, let $K\\in D^b_{ctf}(T,\\Lambda)$ and let\n$r\\in\\mathbf Z$.\n\n1. *concentration in one degree.* If the\n[def-weil-derived-cohomology-sheaves] cohomology sheaves\n$\\mathcal H^i(K)$ vanish for every $i\\neq r$, then the\ntruncation triangles induce a canonical isomorphism\n$$\nK\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal H^r(K)[-r].\n$$\n1. *local constancy detected on an etale cover.* Let\n$u:U\\to T$ be a surjective\netale morphism and suppose\nthat $Lu^*K\\cong\\underline L[-r]$ for a\nlocally constant\n$\\Lambda$-sheaf $\\underline L$ with finite stalks on $U$.\nThen $\\mathcal H^i(K)=0$ for every $i\\neq r$, and\n$\\mathcal H^r(K)$ is locally constant with finite stalks on\n$T$.",
+  "proof": [
+   {
+    "text": "Step 1: the truncation triangles. By\n[def-weil-derived-cohomology-sheaves] the sheaves\n$\\mathcal H^i(K)$ are the cohomology sheaves for the standard\nt-structure, and for every $a\\in\\mathbf Z$ there are exact triangles\n$\\tau_{\\leq a-1}K\\to\\tau_{\\leq a}K\\to\\mathcal H^a(K)[-a]\\to$ and\n$\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$. A complex all of whose\ncohomology sheaves vanish is zero in the derived category of\n[def-weil-pbc-proetale-site], that category being the\nlocalization at the quasi-isomorphisms. If therefore\n$\\mathcal H^i(K)=0$ for every $i\\neq r$, then\n$\\tau_{\\geq r+1}K\\simeq0$ and $\\tau_{\\leq r-1}K\\simeq0$, and the two\ntriangles exhibit $K$ and $\\mathcal H^r(K)[-r]$ as models of one\nand the same object; this is (1).\nStep 2: an etale cover. Pullback of sheaves is exact, so the derived\npullback $Lu^*$ commutes with cohomology sheaves, and etale\nmorphisms are weakly etale, hence covering families in the sense of\n[def-weil-pbc-proetale-site] (an etale morphism is flat with\nflat diagonal, which is the description of weakly etale in\n[def-weil-scheme-morphism-properties]); the description of etale\nmorphisms is that of [def-sbc-smooth-morphisms]. Since $u$ is a\nmember of a pro-etale covering family, inverse image along $u$\nreflects vanishing of a sheaf, by clause (1) of\n[lem-cbc-proetale-stalk-conservative]; as $Lu^*K\\cong \\underline L[-r]$ has cohomology only in degree $r$, the sheaves\n$u^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lu^*K)$ vanish for $i\\neq r$,\nand therefore so do the sheaves $\\mathcal H^i(K)$. For the remaining\ndegree, $u^*\\mathcal H^r(K)\\cong\\underline L$ is constant along the\ncovering $u$, so $\\mathcal H^r(K)$ is locally constant in the sense\nrecalled in [def-weil-scheme-morphism-properties]; the stalks of a\nconstructible object may be computed at geometric points, by part (3) of\n[lem-cbc-proetale-stalk-conservative], and they are the stalks of\n$\\underline L$ there, hence finite. This is (2).",
+    "uses": [
+     "def-weil-derived-cohomology-sheaves",
+     "def-weil-pbc-proetale-site",
+     "def-weil-scheme-morphism-properties",
+     "def-sbc-smooth-morphisms",
+     "lem-cbc-proetale-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

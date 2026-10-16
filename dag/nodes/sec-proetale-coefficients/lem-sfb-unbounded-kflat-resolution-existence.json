@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Unbounded K-flat replacements from functorial flat resolutions",
- "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a monoidal structure $(\\otimes,\\mathbf 1)$ whose tensor product is additive in each variable. Colimits are as in [def-weil-pbc-category-colimit]; countable coproducts mean colimits over countable discrete categories, and $\\mathbf Z$-indexed colimits mean colimits over the ordered set $(\\mathbf Z,\\leq)$. Assume countable coproducts exist, $\\mathbf Z$-indexed colimits exist and their colimit functor preserves short exact sequences, and tensoring on either side with any fixed object preserves both those coproducts and those colimits. A flat object means an object whose tensor functors on both sides preserve short exact sequences. Assume there is a functor $P:\\mathcal C\\to\\mathcal C$ with flat values and a natural epimorphism $P\\Rightarrow\\mathrm{id}_{\\mathcal C}$. For every unbounded cochain complex $K$ in $\\mathcal C$ [def-weil-abstract-derived-category], there are a K-flat complex $Q$ [def-sfb-preserves-kflat-quasi-iso] and a quasi-isomorphism $q:Q\\to K$.",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a monoidal structure $(\\otimes,\\mathbf 1)$ [def-sfb-monoidal-category] whose tensor product is additive in each variable. Colimits are as in [def-weil-pbc-category-colimit]; countable coproducts mean colimits over countable discrete categories, and $\\mathbf Z$-indexed colimits mean colimits over the ordered set $(\\mathbf Z,\\leq)$. Assume countable coproducts exist, $\\mathbf Z$-indexed colimits exist and their colimit functor preserves short exact sequences, and tensoring on either side with any fixed object preserves both those coproducts and those colimits. A flat object means an object whose tensor functors on both sides preserve short exact sequences. Assume there is a functor $P:\\mathcal C\\to\\mathcal C$ with flat values and a natural epimorphism $P\\Rightarrow\\mathrm{id}_{\\mathcal C}$. For every unbounded cochain complex $K$ in $\\mathcal C$ [def-weil-abstract-derived-category], there are a K-flat complex $Q$ [def-sfb-preserves-kflat-quasi-iso] and a quasi-isomorphism $q:Q\\to K$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
   "place": "first paragraph, existence of K-flat resolutions under the general monoidal hypotheses; supporting source code: WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat, lines 378–437"
@@ -20,11 +20,93 @@
   "def-sp-abelian",
   "def-weil-pbc-category-colimit",
   "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal P$ be the isomorphism-stable class of all two-sided flat objects. It contains zero, because additive tensor functors take zero to zero. It is closed under finite biproducts: tensoring with $F\\oplus G$ is the biproduct of tensoring with $F$ and with $G$, and a finite biproduct of short exact sequences is short exact (kernels and cokernels of a block-diagonal morphism are the biproducts of the respective kernels and cokernels). The given epimorphism $P(M)\\to M$ supplies a quotient cover of each object by this class.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution, first sentence of proof, verifying the hypotheses of the resolution-system lemma; the finite-biproduct argument is valid in any abelian category."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-subcategory-truncation-resolution-system] to this class and $K$. It gives, for $n\\ge1$, bounded-above complexes $E_n$ of flat objects and strictly compatible quasi-isomorphisms $e_n:E_n\\to T_n=\\tau_{\\le n}K$. The hypotheses are exactly those verified in step 1. In particular the compatibility is an equality of complex morphisms, so the augmentations form a natural transformation of sequential diagrams; compatibility only up to homotopy would not suffice here.",
+   "uses": [
+    "lem-sfb-subcategory-truncation-resolution-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution, application of Derived Categories Tag 06XX (derived-lemma-special-direct-system)."
+   }
+  },
+  {
+   "text": "Extend both diagrams to the ordered set $\\mathbf Z$ by setting $E_n=T_n=0$ for $n<1$, with zero maps into the first stage. Set $Q=\\operatorname{colim}_{n\\in\\mathbf Z}E_n$ termwise. The differentials are the maps induced by the compatible differentials of the stages; their square is zero after precomposition with every colimit map and hence is zero by the universal property. For each degree $i$, the diagram $T_n^i$ is constantly $K^i$ with identity transitions once $n>\\max(i,0)$. Its augmentation to $K^i$ is therefore a colimit cocone: any compatible family is uniquely determined by its value at one such stage. These identifications respect the differentials. Thus $\\operatorname{colim}_n T_n\\cong K$, and the colimit of $(e_n)$ gives a complex map $q:Q\\to K$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution, formation of the direct-limit map; the explicit zero extension uses only the integer-indexed colimits assumed by this item."
+   }
+  },
+  {
+   "text": "For any $\\mathbf Z$-diagram of complexes $A_n$, write $Z_n^i=\\ker d_{A_n}^i$, $B_n^{i+1}=\\operatorname{im}d_{A_n}^i$ and $H_n^i=Z_n^i/B_n^i$. Exactness of the colimit functor applied to $0\\to Z_n^i\\to A_n^i\\to B_n^{i+1}\\to0$ and $0\\to B_n^{i+1}\\to A_n^{i+1}\\to A_n^{i+1}/B_n^{i+1}\\to0$ identifies the kernel and image of the colimit differential with $\\operatorname{colim}Z_n^i$ and $\\operatorname{colim}B_n^{i+1}$. Apply it once more to $0\\to B_n^i\\to Z_n^i\\to H_n^i\\to0$ to obtain the natural identification $H^i(\\operatorname{colim}A_n)\\cong\\operatorname{colim}H^i(A_n)$. Naturality follows from the induced kernel, image and quotient maps in these three short exact sequences. Apply this to $(e_n)$: every $H^i(e_n)$ is an isomorphism, including the zero stages, so their colimit is an isomorphism. With step 3 this says $H^i(q)$ is an isomorphism for every $i$, hence $q$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution, direct-limit quasi-isomorphism assertion; expanded using only the assumed preservation of short exact sequences and the definition of cohomology."
+   }
+  },
+  {
+   "text": "For each $n\\ge1$, choose its upper bound $b_n$ and apply [lem-sfb-bounded-above-flat-kflat] to $E_n$: the terms are flat and all ambient colimit and tensor hypotheses are exactly the hypotheses of the item. Thus $E_n$ is K-flat. The added stages $E_n=0$ for $n<1$ are K-flat too, because tensoring with the zero complex gives the zero complex and hence sends every map to a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution, bounded-above K-flat stages; Tag 064K is the ring-module analogue, with its project generalization used here."
+   }
+  },
+  {
+   "text": "Let $s:L\\to M$ be any quasi-isomorphism of unbounded complexes. Preservation of the integer-indexed colimits by tensoring with fixed objects, followed by interchange of two colimits, gives natural complex isomorphisms $Q\\otimes L\\cong\\operatorname{colim}_n(E_n\\otimes L)$ and $L\\otimes Q\\cong\\operatorname{colim}_n(L\\otimes E_n)$, and the analogous isomorphisms for $M$. For example, in degree $i$ the first identification is $\\bigoplus_{a+b=i}(\\operatorname{colim}_n E_n^a)\\otimes L^b\\cong\\operatorname{colim}_n\\bigoplus_{a+b=i}E_n^a\\otimes L^b$: the interchange is obtained because maps out of either side are exactly families of maps from the summands compatible in $n$. On each summand the two differential components are $d_E\\otimes1$ and $(-1)^a1\\otimes d_L$, so the identification respects differentials, and the identical summand calculation respects $1\\otimes s$. For the second identification the degree-$i$ objects are $\\bigoplus_{a+b=i}L^a\\otimes(\\operatorname{colim}_n E_n^b)$ and $\\operatorname{colim}_n\\bigoplus_{a+b=i}L^a\\otimes E_n^b$. Preservation of colimits by $L^a\\otimes-$ and the coproduct universal property identify maps out of both with families of maps from $L^a\\otimes E_n^b$ compatible in $n$. On this summand the differential components are $d_L\\otimes1$ and $(-1)^a1\\otimes d_E$; the two components agree under that identification, and $s\\otimes1$ agrees summand by summand as well. Applying these constructions with $L$ replaced by $M$ gives the two target identifications. By step 5 and the definition of two-sided K-flatness, $E_n\\otimes s$ and $s\\otimes E_n$ are quasi-isomorphisms for every $n$. The cohomology calculation in step 4 shows their colimits are quasi-isomorphisms. Under these natural identifications they are $Q\\otimes s$ and $s\\otimes Q$. Hence $Q$ is K-flat, and together with $q$ from step 4 it satisfies the conclusion.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y3, more-algebra-lemma-colimit-K-flat, proof (expanded for two-sided tensor in the present category); conclusion of Tag 06Y4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sfb-subcategory-truncation-resolution-system",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-bounded-above-flat-kflat",
   "def-sfb-preserves-kflat-quasi-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y4 (more-algebra-lemma-K-flat-resolution), using Tag 06XX (derived-lemma-special-direct-system), the closed project generalization of Tag 064K, and the colimit argument of Tag 06Y3 expanded to the item's general monoidal setting."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -336,10 +418,96 @@
    },
    "date": "2026-10-16",
    "verdict": "no match: the completed search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unbounded cochain complex has a K flat replacement from a functorial flat cover and exact integer indexed colimits",
+   "results": {
+    "t": "2026-10-16T18:12:45Z",
+    "tool": "leanfinder",
+    "query": "Every unbounded cochain complex has a K flat replacement from a functorial flat cover and exact integer indexed colimits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKProjective",
+     "CochainComplex.cm5b.I",
+     "CochainComplex.IsKInjective",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "CochainComplex.isKProjective_of_projective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "digest": "3da35f1346943324"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives K-projectivity, derived localizations, ordinary object resolutions and module-flatness lemmas; none states this general unbounded K-flat existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"CochainComplex\"",
+   "results": {
+    "t": "2026-10-16T18:12:38Z",
+    "tool": "loogle",
+    "query": "\"KFlat\", \"CochainComplex\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives K-projectivity, derived localizations, ordinary object resolutions and module-flatness lemmas; none states this general unbounded K-flat existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlatResolution|HasFunctorialFlatResolution",
+   "results": {
+    "t": "2026-10-16T18:12:38Z",
+    "tool": "grep",
+    "query": "KFlat|kFlatResolution|HasFunctorialFlatResolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives K-projectivity, derived localizations, ordinary object resolutions and module-flatness lemmas; none states this general unbounded K-flat existence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded complexes in a monoidal abelian category with functorial flat covers admit K-flat quasi-isomorphisms",
+   "results": {
+    "t": "2026-10-16T18:12:38Z",
+    "tool": "leansearch",
+    "query": "Unbounded complexes in a monoidal abelian category with functorial flat covers admit K-flat quasi-isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CochainComplex.cm5b"
+    ],
+    "digest": "1025b93a4f67a798"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives K-projectivity, derived localizations, ordinary object resolutions and module-flatness lemmas; none states this general unbounded K-flat existence theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-sfb-derived-categories",
@@ -347,5 +515,20 @@
   "group": "N1"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-categories"
+ "unit": "sk-def-sfb-derived-categories",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-unbounded-kflat-resolution-existence",
+  "worker": "stage1",
+  "summary": "Kept the general monoidal statement unchanged. Replaced the unsupported direct totalization claim by the compatible bounded-above resolution system of Stacks 06XX, specialized to flat objects. Proved the colimit quasi-isomorphism and the two-sided K-flatness by explicit short-exact-sequence and universal-property calculations. Added only the generic resolution-system lemma and the bounded-above-flat K-flat criterion, with the latter attached as a source candidate to a transitively sorry-free project theorem.",
+  "blueprint": "Realizes sk-def-sfb-derived-categories left-derived-functor existence and the Derived adjunctions sentences choosing and refining by K-flat resolutions; expands the first paragraph of def-sfb-left-derived-functor.proof.md by first taking compatible bounded-above stages and then an exact integer-indexed colimit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-655fe342e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-655fe342e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited definition, the unit and blueprint proof (def-sfb-left-derived-functor.proof.md), and the Stacks sources: derived.tex 06XX (lines 9214-9306) and more-algebra.tex 064K, 06Y3, 06Y4 (lines 14284-14415). The item's hypotheses match the unit's left-derived-functor bullet word for word. The only change to the statement is the added citation [def-sfb-monoidal-category], and the item is still unsplit in the live DAG. The route builds compatible bounded-above resolutions of the good truncations (06XX) and takes their exact Z-colimit (06Y4/06Y3). This is a sound expansion of the blueprint's one-sentence totalization claim, stays inside the unit, and needs no tool_uses. Step checks: step 1 shows two-sided flat objects contain zero and are closed under isomorphisms and finite biproducts, with P(M)->M as the quotient cover. Step 2 uses node A's strict equality e_{n+1}u_n=j_n e_n. Step 3 extends by zero to (Z,<=); T_n^i=K^i for n>max(i,0), so colim T_n is K. Step 4 identifies kernel and image through two short exact sequences, so H^i commutes with the colimit naturally and q is a quasi-isomorphism. Step 5 applies node B stage by stage with separate bounds b_n. Step 6 interchanges tensor and colimit on both sides, keeping factor order and signs (no braiding), then uses step 4. proof_deps equals the union of the uses. Node A (06XX for an arbitrary quotient-generating class) matches Stacks clause by clause and is strictly smaller than the item. Node B (bounded-above flat implies K-flat in a two-sided monoidal abelian category) is true: proved from the single-object case, induction over termwise-split stupid truncations, and an exact eventually-constant Z-colimit. Small cases tested: zero, single objects in various degrees, vector spaces, bimodules. No duplicates: the existing 06XX and 064K nodes are module-sheaf, ring, site or scheme special cases, and no general blueprint node exists. The attachment candidate CochainComplex.kFlat_of_isStrictlyLE_of_flat (KFlat.lean:338) is at least as general as node B; the attachment decision is left to the maintainer, and I did not re-run the sorry map. The report wrongly says the declaration was put in lean_audit; that field is maintainer-owned and absent, which is correct. No fixes made."
+ }
 }
