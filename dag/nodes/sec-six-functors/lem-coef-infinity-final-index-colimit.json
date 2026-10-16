@@ -233,5 +233,30 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-9476dc0fb (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; verified all five steps, both new lemmas, edge cases, duplicate candidates and acyclic dependencies. Completed missing creation/audit metadata in both new records. Statements unchanged; review.md and corrected JSON files written.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-edff61629",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, and compiler evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinalIndexColimit",
+  "declaration": "SSet.Enhanced.exists_colimiting_cocone_of_final",
+  "declarations": [
+   "SSet.Enhanced.coconeHomotopy",
+   "SSet.Enhanced.simplexFinalPrism",
+   "SSet.Enhanced.exists_colimiting_cocone_of_final",
+   "SSet.Enhanced.exists_colimiting_simplex_final_cocone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FinalIndexColimit.lean",
+  "statement": "theorem exists_colimiting_cocone_of_final {J C : SSet.{u}} [Quasicategory J] [Quasicategory C] (t : J _⦋0⦌) (ht : IsTerminal J t) (p : J ⟶ C) : ∃ c : (coconeCategory p) _⦋0⦌, c.1.1 = p.app _ t ∧ IsColimiting p c ∧ (coconeHomotopy p c).app (op ⦋1⦌) (J.σ 0 t, stdSimplex.objEquiv.symm (𝟙 ⦋1⦌)) = C.σ 0 (p.app _ t)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The general normalized final-index assertion and the specified standard-simplex cocone are separate theorem declarations of this same node. Helpers extract the existing coherent cocone transformation and construct the canonical prism into the right cone; both have real data. IsColimiting uses the published coherent comma-category universal property."
  }
 }
