@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-pulled-back-coefficients-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\Lambda_X$ is a ring object, functorially and preserving commutativity",
@@ -15,28 +15,85 @@
  "stmt_deps": [
   "det-def-sfb-pulled-back-coefficients-definition"
  ],
- "proof": [
-  {
-   "text": "A strong monoidal functor is in particular lax monoidal, with structure maps $\\delta_{F,G}$ and\n$\\epsilon$ satisfying the associativity and unit coherences. The multiplication and unit of\n$\\Lambda_X$ are exactly $\\mu_{FR}$ and $\\eta_{FR}$ of [det-def-sfb-ring-object-transport] for\n$F=p_X^*$ and $R=\\Lambda$. So 1 and 2 are part 1 of [det-def-sfb-ring-object-transport]\n(functoriality of $\\varphi\\mapsto p_X^*\\varphi$ is functoriality of $p_X^*$). Since $p_X^*$ is\nbraided ([def-sfb-upper-star-from-point]), i.e. carries the symmetry of $\\Lambda\\otimes\\Lambda$ to\nthat of $\\Lambda_X\\otimes\\Lambda_X$ under $\\delta$, part 2 of [det-def-sfb-ring-object-transport]\ngives 3.",
-   "uses": [
-    "det-def-sfb-ring-object-transport",
-    "def-sfb-upper-star-from-point"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "det-def-sfb-ring-object-transport",
-  "def-sfb-upper-star-from-point"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/det-def-sfb-pulled-back-coefficients-ring.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/det-def-sfb-pulled-back-coefficients-ring.proof.md",
+  "place": "Single proof paragraph; all three clauses specialize directly from the pinned Mathlib declarations recorded in mathlib_match."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a pulled-back coefficient ring object is a ring object, morphisms are functorial, and commutativity is preserved",
+   "results": "8 generic algebraic and sheaf hits; no project-specific declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match for project-specific item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon, CategoryTheory.Functor.mapCommMon, CategoryTheory.Functor.mapMonNatTrans",
+   "results": "0 hits for combined pattern; generic declarations searched separately.",
+   "date": "2026-10-16",
+   "verdict": "no match for combined item query"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedRingObj|coefficientRing|isCommMonObj_condensedRingObj [Mathlib/CategoryTheory/Monoidal]",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for project-specific construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong braided monoidal inverse image functor sends ring objects to ring objects, preserves morphisms and commutativity",
+   "results": "Generic mapCommMon and isCommMonObj_obj hits only.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic categorical transport only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor from ring objects of sheaves on the pro-etale point to ring objects on a scheme preserves commutativity",
+   "results": "Generic algebraic geometry and sheaf hits; no project-specific construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for project-specific item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "12 hits led by mapMon in Mathlib/CategoryTheory/Monoidal/Mon.lean.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic transport represented by existing DAG node"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon|mapCommMon|mapMonNatTrans [Mathlib/CategoryTheory/Monoidal]",
+   "results": "20 hits including Mon.lean:867 mapMon and CommMon_.lean:169 mapCommMon.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic categorical ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapMon mapCommMon mapMonNatTrans for a braided monoidal functor",
+   "results": "8 generic transport hits including mapCommMon and instMonoidalMonMapMon.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic categorical transport only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon|isCommMonObj_obj in pinned Mathlib/CategoryTheory/Monoidal/Mon.lean and CommMon_.lean; read Mon.lean:73–84,815–875 and CommMon_.lean:146–176",
+   "results": "mapMon at Mon.lean:867; monObjObj at 827; map.instIsMonHom at 850; isCommMonObj_obj at CommMon_.lean:157; mapCommMon at 169. Exact operation formulas read in source.",
+   "date": "2026-10-17",
+   "verdict": "match: direct specialization, one declaration per clause, with p_X^* already an input"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapMon",
+  "file": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+  "line": 867,
+  "how": "One declaration per clause, specialized to the already given strong monoidal braided functor F=p_X^*. Clause 1: CategoryTheory.Functor.monObjObj, Mathlib/CategoryTheory/Monoidal/Mon.lean:827–836, gives a MonObj on F.obj Lambda with one := epsilon F followed by F.map eta and mul := LaxMonoidal.mu F Lambda Lambda followed by F.map mu. The defining equations obj.η_def and obj.μ_def at lines 844–847 identify exactly eta_X and mu_X of det-def-sfb-pulled-back-coefficients-definition. Clause 2: CategoryTheory.Functor.mapMon, Mon.lean:867–869, is the functor with object F.obj A.X and morphism F.map f.hom; map.instIsMonHom at lines 850–852 gives preservation of unit and multiplication. Clause 3: CategoryTheory.Functor.isCommMonObj_obj, Mathlib/CategoryTheory/Monoidal/CommMon_.lean:157–159, preserves commutativity under F.LaxBraided; mapCommMon at lines 169–176 packages the same construction. Read Mon.lean:73–84, 815–875 and CommMon_.lean:146–176. MonObj is the tensor-monoid convention for ring objects, not cartesian RingObj. F.LaxMonoidal and F.LaxBraided follow from the strong monoidal braided structure already supplied as input by def-sfb-upper-star-from-point and the coefficient definition. The source and target have the sheafified tensor over Z. This does not construct p_X^* or prove its monoidality; those remain statement dependencies through the coefficient definition. No hypothesis on X, no commutativity for clauses 1–2, and no change of coefficient category is needed."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +108,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pulled-back-coefficients"
+ "unit": "sk-def-sfb-pulled-back-coefficients",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-pulled-back-coefficients-ring",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the current blueprint and read-only project sources. No sorry-free project declaration carries the exact item. The proof applies the existing generic transport theorem to the strong monoidal braided functor p_X^*, yielding the ring-object structure, morphism functoriality, and preservation of commutativity. No new nodes were needed and the whole-blueprint search found no duplicate statement. Maintainer reader correction: the supplied strong monoidal braided functor is already an input, so the generic Mathlib constructions specialize directly, one per clause. Recorded the exact match, changed status to mathlib, and removed the unnecessary proof/dependency list without changing the statement or its statement dependencies.",
+  "blueprint": "The item is its own imported blueprint node (blueprint.is). The single proof paragraph is realized by the transport theorem for clauses 1 and 2 and its braided clause for commutativity; from remains null and same_as is empty. The Mathlib leaf realizes the same single detail proof paragraph and all three conclusions; its recorded operation formulas are exactly those of the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-b13d5d3d7",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-b13d5d3d7 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; the proof, hypotheses, operation maps, braided commutativity, route, and edge cases check out. Corrected the item to a Mathlib leaf using mapMon and isCommMonObj_obj, with exact source lines. Statement and dependencies remain unchanged. Corrected JSON and detailed review.md supplied; no new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ }
 }

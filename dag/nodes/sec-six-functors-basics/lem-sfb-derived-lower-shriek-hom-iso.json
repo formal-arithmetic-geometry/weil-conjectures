@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-derived-lower-shriek-hom-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "(Shriek) is an isomorphism when (Push) is one",
@@ -18,26 +18,114 @@
  ],
  "proof": [
   {
-   "text": "By [def-sfb-derived-lower-shriek-hom], (Shriek) is a composite of associativity isomorphisms,\nthe whiskering of (Push) for $g$ by $D(i_!)$, and the whiskering by $R(g_*)$ of the isomorphism\nof [def-sfb-derived-open-immersion-shriek-iso]. Whiskerings of isomorphisms are isomorphisms, so\nif (Push) for $g$ is an isomorphism, so is the composite.",
+   "text": "Put $I_\\Lambda=D(i_!)$ for the source coefficients and $I_{\\Lambda'}=D(i_!)$ for the target coefficients, and put $P_\\Lambda=R(g_*)$, $P_{\\Lambda'}=R(g_*)$. By [def-sfb-derived-push-hom], the hypothesis gives a natural isomorphism $\\beta:T^Y\\circ P_\\Lambda\\longrightarrow P_{\\Lambda'}\\circ T^Z$. By [def-sfb-derived-open-immersion-shriek-iso], there is a natural isomorphism $\\sigma:T^Z\\circ I_\\Lambda\\longrightarrow I_{\\Lambda'}\\circ T^X$. The definition [def-sfb-derived-lower-shriek-hom] says that, after the canonical reassociations, (Shriek) is $v\\circ u$, where $u_K=\\beta_{I_\\Lambda K}$ and $v_K=P_{\\Lambda'}(\\sigma_K)$ for every $K\\in D(\\Mod_{\\Lambda_X})$.",
    "uses": [
-    "def-sfb-derived-lower-shriek-hom",
-    "def-sfb-derived-open-immersion-shriek-iso"
+    "def-sfb-derived-push-hom",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "def-sfb-derived-lower-shriek-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-derived-lower-shriek-hom-iso.proof.md",
+    "place": "Proof, sole paragraph: expand the composite and its inverse"
+   }
+  },
+  {
+   "text": "The natural transformations $u$ and $v$ from step 1 have inverses with components $u^{-1}_K=(\\beta^{-1})_{I_\\Lambda K}$ and $v^{-1}_K=P_{\\Lambda'}(\\sigma^{-1}_K)$. Naturality is respectively the naturality of $\\beta^{-1}$ evaluated on $I_\\Lambda$ of a morphism and functoriality of $P_{\\Lambda'}$ applied to the naturality equation for $\\sigma^{-1}$. The two inverse equations for $u$ are those of $\\beta$ evaluated at $I_\\Lambda K$. For $v$, one has $v^{-1}_K\\circ v_K=P_{\\Lambda'}(\\sigma^{-1}_K\\circ\\sigma_K)=P_{\\Lambda'}(1)=1$ and $v_K\\circ v^{-1}_K=P_{\\Lambda'}(\\sigma_K\\circ\\sigma^{-1}_K)=1$. Thus both inverse equations hold as equations of natural transformations, component by component.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-derived-lower-shriek-hom-iso.proof.md",
+    "place": "Proof, sole paragraph: expand the composite and its inverse"
+   }
+  },
+  {
+   "text": "For the suppressed-associator expression $v\\circ u$, use $u^{-1}\\circ v^{-1}$ as inverse: $(u^{-1}\\circ v^{-1})\\circ(v\\circ u)=u^{-1}\\circ(v^{-1}\\circ v)\\circ u=1$ and $(v\\circ u)\\circ(u^{-1}\\circ v^{-1})=v\\circ(u\\circ u^{-1})\\circ v^{-1}=1$. To retain the actual parenthesization, denote the canonical reassociations before, between and after the two whiskered factors by $w_0,w_1,w_2$ (an absent reassociation is an identity), so that $S=\\mathrm{(Shriek)}=w_2\\circ v\\circ w_1\\circ u\\circ w_0$. Set $Q=w_0^{-1}\\circ u^{-1}\\circ w_1^{-1}\\circ v^{-1}\\circ w_2^{-1}$. Associativity gives $Q\\circ S=w_0^{-1}\\circ u^{-1}\\circ w_1^{-1}\\circ(v^{-1}\\circ v)\\circ w_1\\circ u\\circ w_0=w_0^{-1}\\circ(u^{-1}\\circ u)\\circ w_0=1$, where the first equality cancels $w_2^{-1}\\circ w_2$ and the second cancels $w_1^{-1}\\circ w_1$. In the other order, cancelling $w_0\\circ w_0^{-1}$ gives $S\\circ Q=w_2\\circ v\\circ w_1\\circ(u\\circ u^{-1})\\circ w_1^{-1}\\circ v^{-1}\\circ w_2^{-1}=w_2\\circ(v\\circ v^{-1})\\circ w_2^{-1}=1$, using $w_1\\circ w_1^{-1}=1$. Thus $Q$ is the inverse of (Shriek).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-derived-lower-shriek-hom-iso.proof.md",
+    "place": "Proof, sole paragraph: expand the composite and its inverse"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-derived-lower-shriek-hom",
-  "def-sfb-derived-open-immersion-shriek-iso"
+  "def-sfb-derived-push-hom",
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "def-sfb-derived-lower-shriek-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-derived-lower-shriek-hom-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-derived-lower-shriek-hom-iso.proof.md",
+  "place": "Proof, sole paragraph; explicit componentwise inverse calculation supplied by the worker"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedLowerShriekHom|derivedPushHom|isIso_whisker|whisker.*[Ii]so",
+   "results": "25 hits; top results: Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.whiskerLeft, CategoryTheory.IsIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.whiskerLeft'",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid namespace in this first query; corrected in the later Loogle query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Whiskering and composing natural isomorphisms gives a natural isomorphism",
+   "results": "8 hits; top results: CategoryTheory.Functor.isIso_whiskerRight, Mathlib.Tactic.Bicategory.naturality_comp, CategoryTheory.Functor.whiskeringLeftObjCompIso, CategoryTheory.Join.mapIsoWhiskerLeft, Mathlib.Tactic.Monoidal.naturality_comp, CategoryTheory.Functor.isIso_whiskerLeft, CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerRight",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived coefficient change comparison for lower shriek is an isomorphism when the proper pushforward comparison is an isomorphism",
+   "results": "SheafOfModules.pushforwardCongr, pushforwardNatIso, pushforwardComp and associated component lemmas; PresheafOfModules.pushforwardComp. These concern underived sheaves, not the named derived comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "instance isIso_whisker|def isoWhisker|theorem isIso_whisker|derivedLowerShriekHom|derivedPushHom",
+   "results": "4 hits; top results: 218, 243, 266, 271; raw search printed line numbers in the file column for this single-file query. Read Mathlib/CategoryTheory/Whiskering.lean:218,243,266,271 and reran with directory CategoryTheory to obtain correctly formatted paths.",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerLeft, CategoryTheory.IsIso",
+   "results": "10 hits; top results: CategoryTheory.Functor.isIso_whiskerLeft, CategoryTheory.Functor.inv_whiskerLeft, CategoryTheory.Limits.isIso_app_coconePt_of_preservesColimit, CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful, CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful, CategoryTheory.Functor.isLeftKanExtension_iff_isIso, CategoryTheory.Functor.isRightKanExtension_iff_isIso, CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation which is a composite of a whiskered invertible natural transformation and a whiskered natural isomorphism is invertible",
+   "results": "8 hits; top results: CategoryTheory.Functor.isIso_whiskerRight, CategoryTheory.Limits.CatCospanTransform.instIsIsoWhiskerLeft, CategoryTheory.Functor.isIso_whiskerLeft, Mathlib.Tactic.Bicategory.naturality_inv, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.inv_whiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.isoWhiskerRight_trans",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "grep",
+   "query": "instance isIso_whisker|def isoWhisker",
+   "results": "4 hits; top results: Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison; general whiskering isomorphism facts found and read, but their elementary inverse argument is written out in steps 2–3 rather than made a new node"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLowerShriekHom|derivedPushHom",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match for the concrete comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -59,5 +147,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-derived-lower-shriek-hom-iso",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its coefficient/compactification hypotheses. Expanded the defining two comparison factors, constructed both whiskered inverses componentwise, and checked the inverse of the composite. No new nodes: the formal categorical argument is elementary, while the open-immersion isomorphism and the named comparisons are cited exactly as existing statements. No completed slopmaster2 declaration exists under the blueprint names or tag.",
+  "blueprint": "Unit sk-def-sfb-coefficient-comparisons, step 5 (Shriek), and the sole paragraph of lem-sfb-derived-lower-shriek-hom-iso.proof.md: steps 1–3 expand the stated composite, whiskering and invertibility argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-0ea96d6d3",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0ea96d6d3 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited node statements, blueprint proof/source locations, unit/chapter route, and exact master implementation. The three steps correctly factor Shriek, construct whiskered inverses, and handle associators; hypotheses, coefficient categories, orientations, edge cases, duplicates, searches, and route constraints check out. No new nodes or repairs are needed."
+ }
 }

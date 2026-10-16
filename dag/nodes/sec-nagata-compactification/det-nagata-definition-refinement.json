@@ -3,25 +3,153 @@
  "blueprint": {
   "is": "det-nagata-definition-refinement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Refinement of compactifications",
- "statement": "Let $f:X\\to S$ be a morphism and let\n$c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}S)$ and\n$c'=(X\\xrightarrow{j'}\\overline X'\\xrightarrow{p'}S)$ be compactifications of\n$f$ in the sense of [def-nagata-compactification], with $j,j'$ quasi-compact\nopen immersions. A *refinement* $h:c'\\to c$ is a morphism of schemes\n$h:\\overline X'\\to\\overline X$ such that\n\n1. $p\\circ h=p'$ ($h$ is an $S$-morphism);\n1. $h\\circ j'=j$ ($h$ is compatible with the identifications of $X$ with the\n   opens $j'(X)\\subseteq\\overline X'$ and $j(X)\\subseteq\\overline X$);\n1. $h^{-1}(j(X))=j'(X)$ as open subschemes of $\\overline X'$.\n\nBy the second condition, $h$ restricts on $j'(X)$ to the isomorphism\n$j\\circ(j')^{-1}:j'(X)\\xrightarrow{\\sim}j(X)$, so the third condition says\nthat $h$ maps the boundary $\\overline X'\\setminus j'(X)$ into the boundary\n$\\overline X\\setminus j(X)$. Refinements compose: if $h:c'\\to c$ and\n$h':c''\\to c'$ are refinements, then $p\\circ h\\circ h'=p''$,\n$h\\circ h'\\circ j''=h\\circ j'=j$, and\n$(h\\circ h')^{-1}(j(X))=h'^{-1}(j'(X))=j''(X)$; the identity of\n$\\overline X$ is a refinement $c\\to c$. Compactifications of $f$ with their\nrefinements thus form a category, and the *dense* compactifications\n([def-nagata-dense-compactification]) form a full subcategory.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let\n$c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}S)$ and\n$c'=(X\\xrightarrow{j'}\\overline X'\\xrightarrow{p'}S)$ be compactifications of\n$f$ in the sense of [def-nagata-compactification], with $j,j'$ quasi-compact [def-weil-finite-type-morphism]\nopen immersions [def-weil-open-immersion]. A *refinement* $h:c'\\to c$ is a morphism of schemes\n$h:\\overline X'\\to\\overline X$ such that\n\n1. $p\\circ h=p'$ ($h$ is an $S$-morphism [def-weil-scheme-over-base]);\n1. $h\\circ j'=j$ ($h$ is compatible with the identifications of $X$ with the\n   opens $j'(X)\\subseteq\\overline X'$ and $j(X)\\subseteq\\overline X$);\n1. $h^{-1}(j(X))=j'(X)$ as open subschemes of $\\overline X'$.\n\nHere $h^{-1}(j(X))$ denotes the open subscheme on the inverse image of the underlying open subset $j(X)$, with its restricted structure sheaf. Boundaries denote complements of the underlying open subsets, without a chosen closed subscheme structure.\n\nBy the second condition, $h$ restricts on $j'(X)$ to the isomorphism\n$j\\circ(j')^{-1}:j'(X)\\xrightarrow{\\sim}j(X)$, so the third condition says\nthat $h$ maps the boundary $\\overline X'\\setminus j'(X)$ into the boundary\n$\\overline X\\setminus j(X)$. Refinements compose: if $h:c'\\to c$ and\n$h':c''\\to c'$ are refinements, then $p\\circ h\\circ h'=p''$,\n$h\\circ h'\\circ j''=h\\circ j'=j$, and\n$(h\\circ h')^{-1}(j(X))=h'^{-1}(j'(X))=j''(X)$; the identity of\n$\\overline X$ is a refinement $c\\to c$. Compactifications of $f$ whose open immersions are quasi-compact, with their\nrefinements, thus form a category [def-nagata-category], and the *dense* compactifications\n([def-nagata-dense-compactification]) form a full subcategory: its objects are the dense compactifications and its morphisms between any two of these objects are all the refinements in the ambient category.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
   "place": "node det-nagata-definition-refinement, order None"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-nagata-compactification",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-scheme-over-base",
+  "def-nagata-dense-compactification",
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $U=j(X)$ and $U'=j'(X)$. By [def-weil-open-immersion], the maps $j:X\\to U$ and $j':X\\to U'$ are isomorphisms. The equation $h\\circ j'=j$ therefore identifies the restriction of $h$ to $U'$ with $j\\circ(j')^{-1}$. In particular $U'\\subseteq h^{-1}(U)$. The equality $h^{-1}(U)=U'$ is consequently equivalent to saying that every point outside $U'$ maps outside $U$. Equality here is also equality of open subschemes, since both carry the restricted structure sheaf on the same open subset. This proves the stated boundary interpretation without assigning scheme structures to the complements.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
+    "place": "paragraph beginning By the second condition"
+   }
+  },
+  {
+   "text": "For any object $c$, the identity on $\\overline X$ satisfies $p\\circ\\mathrm{id}=p$, $\\mathrm{id}\\circ j=j$, and $\\mathrm{id}^{-1}(j(X))=j(X)$. Thus it satisfies all three defining conditions for a refinement $c\\to c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
+    "place": "last paragraph, identity clause"
+   }
+  },
+  {
+   "text": "For refinements $h:c'\\to c$ and $h':c''\\to c'$, associativity gives $p\\circ(h\\circ h')=(p\\circ h)\\circ h'=p'\\circ h'=p''$ and $(h\\circ h')\\circ j''=h\\circ(h'\\circ j'')=h\\circ j'=j$. On underlying open subsets, $(h\\circ h')^{-1}(j(X))=(h')^{-1}(h^{-1}(j(X)))=(h')^{-1}(j'(X))=j''(X)$. All these opens have the restricted structure sheaf, so the last equality is an equality of open subschemes. The composite therefore satisfies all three defining conditions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
+    "place": "last paragraph, Refinements compose and its three displayed identities"
+   }
+  },
+  {
+   "text": "Use compactifications with quasi-compact open immersion as objects, the prescribed scheme morphisms satisfying the three conditions as morphisms, and the identity and composition of Steps 2 and 3. The category of schemes in [def-pc-scheme] supplies the identity and associativity equalities for these underlying morphisms. Since a refinement contains just an underlying morphism with properties, these equalities are equalities of refinements, giving exactly the category axioms [def-nagata-category]. Restrict the objects to compactifications satisfying [def-nagata-dense-compactification] and leave each morphism set unchanged. Identities and composites remain those already constructed, and the inclusion is the identity on each morphism set; this is the full subcategory asserted in the statement. No density preservation theorem is required.",
+   "uses": [
+    "def-pc-scheme",
+    "def-nagata-category",
+    "def-nagata-dense-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
+    "place": "last sentence, category and full subcategory clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-nagata-category",
   "def-nagata-dense-compactification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/det-nagata-definition-refinement.md",
+  "place": "definition and final paragraph; elementary checks written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Refinements of scheme compactifications are morphisms over the base fixing the open subscheme and whose inverse image of the open subscheme is exactly the source open; identities and composition define a category",
+   "results": "Open-diagram, over-scheme, partial-map and scheme-category declarations; no refinement definition with the boundary condition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|refinement",
+   "results": "15 hits, all for refinements of scheme covers or affine covers; no scheme compactification refinement. Search subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Limits.IsPullback",
+   "results": "Loogle returned zero hits and the error: unknown identifier CategoryTheory.Limits.IsPullback. Retried below with AlgebraicGeometry.IsOpenImmersion.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; retried"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of compactifications of a scheme morphism with refinement maps preserving the boundary",
+   "results": "8 hits: instCategoryCompactum, topToCompHaus, QuasiCompact.compactSpace_of_compactSpace, QuasiCompact.mk, QuasiCompact, quasiCompact_iff_isSpectralMap, quasiCompact_comp, compHausToTop.reflective; none states the definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Factorisation|WideSubcategory",
+   "results": "5 file-local documentation hits at lines 12, 14, 16, 18, 20 of Mathlib/CategoryTheory/Category/Factorisation.lean. The wrapper parsed the line numbers as file names because a file, rather than a directory, was supplied. Retried on the directory below. Search subdirectory: CategoryTheory/Category/Factorisation.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion",
+   "results": "12 hits for the open-immersion predicate, its composition/base-change properties, opensRange, mono, of_isIso and pullbacks; these do not define boundary-preserving compactification refinements.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category whose objects are factorizations of a morphism as an open immersion followed by a proper scheme morphism and whose arrows are commutative triangles preserving the inverse image of the open subset",
+   "results": "8 hits including specTargetImageFactorization, UniversallyClosed, Scheme.instCategory, Scheme.CanonicallyOver, IsPreimmersion and UniversallyOpen; no compactification refinement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Factorisation|structure Hom|instance.*Category.*Factorisation|def hom",
+   "results": "Mathlib/CategoryTheory/Category/Factorisation.lean:34 Factorisation, :53 Factorisation.Hom, :67 category instance (source read through line 72). These impose two commuting triangles, but neither the compactification object conditions nor the additional boundary condition. Other hits are unrelated category Hom definitions. Search subdirectory: CategoryTheory/Category",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Factorisation|namespace Factorisation|WideSubcategory",
+   "results": "Seventeen hits. Read Factorisation.lean:34-70 and Widesubcategory.lean:90-104. Factorisation.Hom has only the two triangles. WideSubcategory.category requires an already multiplicative morphism predicate; it does not supply the boundary condition or its identity/composition checks. Neither is an exact match or a one-line specialization of this definition. Search subdirectory: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of factorizations of a fixed arrow, restricting arrows to those giving a cartesian square with the first factor",
+   "results": "Eight hits, including CategoryTheory.Factorisation.instCategory, Factorisation.Hom, and generic morphism-property factorization data. Read Mathlib/CategoryTheory/Category/Factorisation.lean:34-70: the two triangles have no inverse-image/boundary condition, so this is not the compactification-refinement definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -34,5 +162,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
- "unit": "sk-def-nagata-sketch-data"
+ "unit": "sk-def-nagata-sketch-data",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-nagata-definition-refinement",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 definition, its unit, existing DAG notions, and both Lean source trees. Kept the three-condition refinement notion, including its boundary condition; the existing Lean Refinement only imposes the two commuting triangles and is not an attachment. Added existing definition dependencies for schemes, quasi-compactness, open immersions, S-morphisms and category. Made the open inverse image, underlying-set boundary and full-subcategory meanings explicit. Wrote the elementary restriction, identity, composition and category checks in four steps instead of creating elementary or clause-restating nodes. No new nodes are needed. Second reading retained the explicit quasi-compact-open hypothesis in the category object class and normalized prime notation.",
+  "blueprint": "The defining three numbered clauses remain intact. Step 1 realizes the paragraph By the second condition; Steps 2 and 3 realize the identity clause and Refinements compose with its three identities; Step 4 realizes the final category and dense full-subcategory sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-8a5ae5e06",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-8a5ae5e06 (reviewer sub-agent of L); spot-checked: Read the full item, four proof steps, seven dependency statements, current blueprint sources, and unit/chapter route. Boundary, identity, composition, and full-subcategory arguments are valid. Checked empty and disjoint-union cases; older DAG/Lean refinements omit the substantive boundary condition. No new nodes, missing dependencies, cycles, or accepted tool_uses. Detailed checks recorded in review.md."
+ }
 }
