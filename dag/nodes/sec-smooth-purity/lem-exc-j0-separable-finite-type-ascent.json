@@ -28,9 +28,94 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $\\mathfrak p_0\\in U$. By the Zariski topology in [def-weil-affine-spectrum], the complement of $U$ is $V(I)$ for an ideal $I\\subseteq R$. Some $f\\in I$ is not in $\\mathfrak p_0$, so $f\\ne0$ and $\\mathfrak p_0\\in D(f)\\subseteq U$: a prime not containing $f$ cannot contain $I$. Write $A=R_f$ and $B=S_{\\varphi(f)}$, where $\\varphi:R\\to S$ is the given injection. Both are the subrings of $K$ and $F$ consisting respectively of $r/f^n$ and $s/\\varphi(f)^n$. Nonzero denominators exist because $f\\ne0$ and $\\varphi$ is injective.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof: replacement of the base by a principal localization."
+   }
+  },
+  {
+   "text": "The ring $A$ is Noetherian by [lem-weil-pbc-localization-noetherian], applied to the multiplicative set of powers of $f$. By [lem-weil-pbc-principal-localization-open-immersion], its spectrum identifies with $D(f)$. For a prime $\\mathfrak P\\subset A$, let $\\mathfrak p$ be its contraction to $R$, so $f\\notin\\mathfrak p$ and $\\mathfrak p\\in U$. The local rings $A_{\\mathfrak P}$ and $R_{\\mathfrak p}$ are canonically isomorphic: the fraction map sends $(r/f^i)/(u/f^j)$ to $rf^j/(uf^i)$, and its inverse sends $r/u$ to $(r/1)/(u/1)$; Here $u/f^j\\notin\\mathfrak P$ exactly when $u\\notin\\mathfrak p$, since $f$ is a unit in $A$, so $uf^i\\notin\\mathfrak p$. Both maps respect the fraction equivalence from [def-weil-pbc-localization-at-prime]: equality is equality after cross multiplication in the common fraction field $K$. Each composite preserves the numerator and denominator of every fraction, hence is the identity. Hence every $A_{\\mathfrak P}$ is regular local by the hypothesis on $U$, and $A$ is a regular ring by [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof; the regularity of the principal localization is expanded."
+   }
+  },
+  {
+   "text": "The localized map $A\\to B$, $r/f^n\\mapsto\\varphi(r)/\\varphi(f)^n$, is injective since both rings embed in $F$ through the original injection. They remain nonzero domains. If $s_1,\\ldots,s_m$ generate $S$ over $R$, their images generate $B$ over $A$: write $s/\\varphi(f)^n$ by expressing $s$ as a polynomial in the $s_i$ and dividing each coefficient by $f^n$. Thus $A\\to B$ is finite type by [def-weil-pbc-finite-type-algebra]. Its fraction field embedding is the original $K\\to F$: one inclusion follows from $R\\subseteq A\\subseteq K$ and $S\\subseteq B\\subseteq F$, and every element of $K$ or $F$ is already a ratio of elements of $R$ or $S$. Therefore the fraction field extension for $A\\to B$ is separable by the given hypothesis, with no perfection assumption.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof; the unchanged domain, finite-type and separable-fraction-field hypotheses after localization."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-generic-smooth-domain] to $A\\to B$. Step 3 verifies injectivity, finite type, the domain assumptions and the separable fraction field extension. We obtain $h\\in B$, $h\\ne0$, for which $A\\to T=B_h$ is smooth.",
+   "uses": [
+    "lem-exc-generic-smooth-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, second and third sentences of proof; the cited generic-smoothness input is Algebra Tag 07ND, lemma-smooth-at-generic-point."
+   }
+  },
+  {
+   "text": "The base $A$ is a regular ring by step 2 and $A\\to T$ is smooth by step 4. Hence [lem-weil-pbc-regular-ring-smooth-ascent] makes $T$ a regular ring. In particular each of its local rings at prime ideals is regular local.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-smooth-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, final sentence of proof, using Algebra Tag 07NF, lemma-regular-goes-up."
+   }
+  },
+  {
+   "text": "Write $h=s/\\varphi(f)^n$ with $s\\in S$. Since $h\\ne0$ in the domain $B$, $s\\ne0$. Put $a=\\varphi(f)s\\ne0$. The ring $T=(S_{\\varphi(f)})_{s/\\varphi(f)^n}$ is canonically $S_a$: in $T$, $\\varphi(f)$ and $h$ are units, hence so are $s=h\\varphi(f)^n$ and $a$; in $S_a$, both $\\varphi(f)$ and $s$ are units, with inverses $s/a$ and $\\varphi(f)/a$, so $h$ is a unit as well. The fraction maps fixing $S$ in the two directions are inverse since all fractions are built from $S$ and these inverses. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}T$ identifies with $V=D(a)\\subseteq\\operatorname{Spec}S$. This is nonempty since the prime $(0)$ of the domain $S$ does not contain $a$. For $\\mathfrak q\\in V$, localization of $S_a$ at the corresponding prime equals $S_{\\mathfrak q}$: the maps are $(u/a^i)/(v/a^j)\\mapsto ua^j/(va^i)$ and $u/v\\mapsto(u/1)/(v/1)$, where $v/a^j$ avoids the corresponding prime exactly when $v\\notin\\mathfrak q$. Since $a\\notin\\mathfrak q$, $va^i$ is then an allowed denominator. Cross multiplication in $F$ verifies that the maps respect the fraction equivalence [def-weil-pbc-localization-at-prime], and each composite fixes both $S$ and all inverted denominators, so fixes every fraction. Thus step 5 and [def-weil-regular-scheme] make every $S_{\\mathfrak q}$ for $\\mathfrak q\\in V$ regular local, as required.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PB, lemma-J-0-goes-up, conclusion after the two principal localizations; Tag 07P7, definition-J, expansion of J-0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-exc-generic-smooth-domain",
+  "lem-weil-pbc-regular-ring-smooth-ascent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PB, lemma-J-0-goes-up, proof; the principal localization and local-ring identifications are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,15 +172,74 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-16",
    "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type domain over a Noetherian J0 domain has a nonempty regular open if the fraction fields form a separable extension",
+   "results": "{\"t\": \"2026-10-16T02:53:25Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type domain over a Noetherian J0 domain has a nonempty regular open if the fraction fields form a separable extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteMaximalSpectrumOfIsFractionRing\", \"Algebra.QuasiFinite.instOfIsFractionRing\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"instFiniteDimensionalFractionRingOfFinite\", \"isDedekindRing_iff\", \"IsIntegralClosure.finite\", \"isDedekindDomain_iff\", \"integralClosure.isNoetherianRing\"], \"digest\": \"7b44a10aac5cc271\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types. Local descriptions of maps already known smooth, smooth localization maps, or finiteness of fraction fields do not deduce generic smoothness or existence of a regular open from the hypotheses searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant generically smooth finite type map of integral affine schemes over a base with a dense regular open has a dense regular open in its source",
+   "results": "{\"t\": \"2026-10-16T02:54:02Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant generically smooth finite type map of integral affine schemes over a base with a dense regular open has a dense regular open in its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"76d06307ec961705\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types. Local descriptions of maps already known smooth, smooth localization maps, or finiteness of fraction fields do not deduce generic smoothness or existence of a regular open from the hypotheses searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, IsOpen",
+   "results": "{\"t\": \"2026-10-16T02:53:25Z\", \"tool\": \"loogle\", \"query\": \"IsRegularRing, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits; no declaration returned."
+  },
+  {
+   "tool": "grep",
+   "query": "JZero|J-0|regularLocus|regular_locus",
+   "results": "{\"t\": \"2026-10-16T02:53:24Z\", \"tool\": \"grep\", \"query\": \"JZero|J-0|regularLocus|regular_locus\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\"], \"digest\": \"c6df37718e58d713\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern GradedRing.projZeroRingHom, not J-0 or a regular open locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective finite type extension of Noetherian domains with separable fraction fields, a nonempty regular open of the base gives a nonempty regular open of the target",
+   "results": "{\"t\": \"2026-10-16T02:55:35Z\", \"tool\": \"leansearch\", \"query\": \"For an injective finite type extension of Noetherian domains with separable fraction fields, a nonempty regular open of the base gives a nonempty regular open of the target\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-j2-residue-field-criterion",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-j0-separable-finite-type-ascent",
+  "worker": "stage1",
+  "summary": "Read Tags 07PB, 07P7, 07ND and 07NF and checked the exact statements of all cited nodes. Kept the statement and its hypotheses. Expanded the base localization, unchanged fraction fields, localization of the source and final regular open in six steps. Added only the missing generic smoothness input as a statement-only node; reused the existing regularity-ascent and principal-localization nodes. No project attachment or Mathlib leaf matched.",
+  "blueprint": "Realizes the second-paragraph field-excellence input of thm-exc-curve-open-dimension-general through lem-exc-field-algebra-strict-henselization-excellent, lem-exc-fields-excellent and lem-exc-j2-residue-field-criterion: the separable-fraction-field J-0 ascent used in the J-2 criterion. The proof follows 07PB below the unit level.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic commutative algebra input: a smooth algebra over a regular ring is regular. It is filed in sk-thm-p1; no node of this item's unit states it, and this black box implements the regularity-ascent step of 07PB rather than replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-ring-smooth-ascent"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-b5ae17a91",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-b5ae17a91 (reviewer sub-agent of L); spot-checked: Read both nodes, all six proof steps, cited statements and sources, and the unit/chapter route. Tags 07PB, 07ND and 07NF support the argument; edge cases, duplicates, target coefficient categories and dependency cycles checked. Accepted regularity ascent as a generic tool. Supplied corrected new-node metadata under fixes/dag/nodes; mathematics unchanged. Full findings in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
