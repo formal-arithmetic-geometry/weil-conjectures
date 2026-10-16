@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import all Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
+import WeilConjectures.AlgebraicGeometry.Modules.HomOfBasis
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # The normalized quotient comparison for an ideal-power closed immersion
 
@@ -27,7 +29,75 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem power_iso {X : Scheme.{v}} (J : X.IdealSheafData) (n : ℕ) :
     ∃ e : (Scheme.idealSheafPower J.toModulesι n).1 ≅ (J ^ n).toModules,
       e.hom ≫ (J ^ n).toModulesι = (Scheme.idealSheafPower J.toModulesι n).2 := by
-  sorry
+  have : Mono (Scheme.idealSheafPower J.toModulesι n).2 := by
+    induction n using Nat.twoStepInduction with
+    | zero => dsimp [Scheme.idealSheafPower]; infer_instance
+    | one => dsimp [Scheme.idealSheafPower]; infer_instance
+    | more n _ ih =>
+      change Mono (Scheme.idealModuleProductι J.toModulesι
+        (Scheme.idealSheafPower J.toModulesι (n + 1)).1 ≫
+          (Scheme.idealSheafPower J.toModulesι (n + 1)).2)
+      have := ih
+      have : Mono (Scheme.idealModuleProductι J.toModulesι
+          (Scheme.idealSheafPower J.toModulesι (n + 1)).1) := by
+        dsimp [Scheme.idealModuleProductι]
+        infer_instance
+      infer_instance
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have hr (U : X.affineOpens) :
+      Set.range ((Scheme.idealSheafPower J.toModulesι n).2.app U.1) =
+        Set.range ((J ^ n).toModulesι.app U.1) := by
+    rw [(J ^ n).range_toModulesι_app]
+    simp only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply]
+    cases n with
+    | zero => simp [Scheme.idealSheafPower]
+    | succ n =>
+      exact (((Scheme.Modules.ideal_times_quasiCoherent_affine_sections J
+        (SheafOfModules.unit X.ringCatSheaf)).2.2.2.1 U).2.2.2 (n + 1)
+          (Nat.zero_lt_succ n))
+  let K := J ^ n
+  let P := (Scheme.idealSheafPower J.toModulesι n).1
+  let i := (Scheme.idealSheafPower J.toModulesι n).2
+  have hz : i ≫ K.toPushforwardSubscheme = 0 := by
+    apply Scheme.Modules.hom_ext
+    intro W
+    ext s
+    change (i ≫ K.toPushforwardSubscheme).app W s = 0
+    let N : X.Modules :=
+      (SheafOfModules.pushforward K.subschemeι.toRingCatSheafHom).obj
+        (SheafOfModules.unit K.subscheme.ringCatSheaf)
+    refine TopCat.Sheaf.eq_of_locally_eq' ⟨N.presheaf, N.isSheaf⟩
+      (fun t : {U : X.affineOpens // U.1 ≤ W} ↦ t.1.1) W
+      (fun t ↦ homOfLE t.2) ?_ _ _ ?_
+    · intro x hx
+      obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUW⟩ :=
+        X.isBasis_affineOpens.exists_subset_of_mem_open hx W.2
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨U, hU⟩, hUW⟩, hxU⟩
+    · intro t
+      rw [← Scheme.Modules.Hom.app_presheaf_map, map_zero]
+      let z := P.presheaf.map (homOfLE t.2).op s
+      obtain ⟨b, hb⟩ := (hr t.1).subset ⟨z, rfl⟩
+      change K.subschemeι.app t.1.1 (i.app t.1.1 z) = 0
+      rw [← hb]
+      exact (K.range_toModulesι_app_eq t.1.1).subset ⟨b, rfl⟩
+  let f : P ⟶ K.toModules := kernel.lift K.toPushforwardSubscheme i hz
+  have hf : f ≫ K.toModulesι = i := kernel.lift_ι _ _ hz
+  have : Mono f := mono_of_mono_fac hf
+  have hB : TopologicalSpace.Opens.IsBasis
+      (Set.range (fun U : X.affineOpens ↦ U.1)) := by
+    rw [Subtype.range_coe]
+    exact X.isBasis_affineOpens
+  have : IsIso f := Scheme.Modules.isIso_of_bijective_app_of_basis hB f (by
+    intro U
+    constructor
+    · have : Mono ((SheafOfModules.evaluation X.ringCatSheaf (.op U.1)).map f) :=
+        inferInstance
+      exact (ModuleCat.mono_iff_injective _).mp this
+    · intro b
+      obtain ⟨a, ha⟩ := (hr U).symm.subset ⟨b, rfl⟩
+      refine ⟨a, K.injective_toModulesι_app U.1 ?_⟩
+      exact (congrArg (fun g ↦ g.app U.1 a) hf).trans ha)
+  exact ⟨asIso f, hf⟩
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotient by an ideal power is the pushforward of restriction, with its

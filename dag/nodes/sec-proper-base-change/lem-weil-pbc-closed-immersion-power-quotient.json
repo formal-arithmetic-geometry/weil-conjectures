@@ -16,13 +16,11 @@
  ],
  "proof": [
   {
-   "text": "Reuse power_inclusion_iso from ThickeningSystemPushforwardAdic for every positive exponent. For exponent zero, power_inclusion_mono makes the recursively defined inclusion monic, and its affine range is the whole ring, equal to the range of (J^0).toModulesι. Apply subobject_le_of_affine_range in both directions, then Subobject.isoOfMkEqMk to obtain the inclusion-preserving isomorphism. The existing positive-power helper uses ideal_times_quasiCoherent_affine_sections on the quasi-coherent structure sheaf. No quasi-coherence of F is needed. Zero ideals, unit ideals and empty schemes are covered without additional hypotheses.",
+   "text": "Prove monicity of the recursively constructed power inclusion by two-step induction: the zero power is the identity, the first power is the ideal inclusion, and each further inclusion is an image inclusion followed by the preceding monomorphism. On each affine U the proved ideal_times_quasiCoherent_affine_sections formula identifies the inclusion range with J(U)^n for positive n; the zero-power identity has the whole ring as range. IdealSheafData.range_toModulesι_app gives the same ranges for (J^n).toModulesι. Thus the recursive inclusion followed by (J^n).toPushforwardSubscheme is zero on affine opens, and hence zero everywhere by sheaf separatedness. Lift through its kernel (J^n).toModules. The resulting map is monic because its composite with the ideal inclusion is monic. It is surjective on each affine open by equal ranges and injectivity of the ideal inclusion. The public isIso_of_bijective_app_of_basis criterion makes this kernel lift an isomorphism. No quasi-coherence of F is needed; n=0, zero/unit ideals, empty schemes and zero modules require no extra hypotheses.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "def-sbc-ideal-sheaf-powers",
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-thickening-system-pushforward-adic",
-    "lem-weil-pbc-affine-pushforward-ideal-product"
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false,
    "source": {
@@ -57,16 +55,14 @@
   "def-pc-module-pullback",
   "def-sbc-ideal-sheaf-powers",
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-affine-pushforward-ideal-product",
   "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-thickening-system-pushforward-adic"
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Lemma 087T (lemma-i-star-equivalence), equation 0880 (equation-completion-functor); closed-immersion unit quotient calculation of Modules, Lemma 08KS",
-  "note": "N2 repaired the returned delivery by deleting the duplicate power_mono helper and reusing the existing proved power_inclusion_mono via import all ThickeningSystemPushforwardAdic. The kernel lift, affine basis criterion, cokernel comparison and adjunction normalization remain unchanged. No new holes. The dependency on the thickening-system module is only for its monicity helper, not its adic theorem. Second reading also reuses the existing positive-power power_inclusion_iso and proves exponent zero by affine-range subobject comparison, deleting the repeated kernel lift and affine_hom_ext helper. The affine-pushforward node supplies only its proved subobject comparison helper."
+  "note": "C3 proves the remaining private power_iso hole from monicity induction, the proved affine section power formula, a kernel lift, sheaf separatedness and the public basis-isomorphism criterion. Neither ThickeningSystemPushforwardAdic nor the private helper from AffinePushforwardIdealProduct is needed. The cokernel comparison and adjunction normalization are unchanged. No new lemmas or holes."
  },
  "mathlib_searches": [
   {
@@ -152,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-24477",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T010617-L-2671894",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its node, dependencies, change record, report, and earlier return; delivery and both direct importers compile cleanly; axiom checks show only propext, Classical.choice, and Quot.sound."
+  "landing": "20261016T221558-L-1611743",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
