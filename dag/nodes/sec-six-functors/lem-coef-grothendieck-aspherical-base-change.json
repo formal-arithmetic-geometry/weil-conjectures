@@ -28,60 +28,241 @@
   "lem-coef-thomason-grothendieck-comparison",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We will use the following explicit prism calculation with the realization quotient of [def-cbc-enhanced-diagrams-cones]. A simplicial map $H:X\\times\\Delta^1\\to Y$ gives a continuous homotopy between its two endpoint realizations: triangulate $|\\Delta^n|\\times[0,1]$ by the $n+1$ simplices with ordered vertices $(0,0),\\ldots,(i,0),(i,1),\\ldots,(n,1)$, and on this simplex apply the affine realization of $H$ to the degenerate $(n+1)$-simplex of $X$ repeating vertex $i$ and the displayed monotone $0,1$ string. The definitions of face and degeneracy make these formulas agree on common faces and with the realization identifications. Each formula is continuous; finite closed-simplex pasting proves continuity on each prism. To descend jointly in the interval coordinate apply [lem-cbc-quotient-cylinder-continuity] to the realization quotient and $T=[0,1]$, which is locally compact since a neighborhood contains a closed interval neighborhood. In particular a natural transformation $V\\Rightarrow W$ of functors gives such a homotopy of nerve maps: for a chain $c_0\\to\\cdots\\to c_n$ and $\\theta:[n]\\to[1]$, use $V(c_j)$ when $\\theta(j)=0$, $W(c_j)$ when $\\theta(j)=1$, and the transformation across the single change; naturality is exactly the equality needed for faces. Hence if $p:E\\to C$ has a section $s$ with $ps=1$ and either $sp\\Rightarrow1_E$ or $1_E\\Rightarrow sp$, then $|Np|$ and $|Ns|$ are inverse up to homotopy. A category with initial or terminal object has contractible realization, using its unique maps as that transformation. These homotopies preserve the weak-equivalence condition: on components the maps coincide, and on a based homotopy group their maps are related by change of basepoint along $t\\mapsto |H|(x,t)$, whose inverse is the reversed path. Explicitly, transport a based cube $f:([0,1]^r,\\partial[0,1]^r)\\to(Y,y_0)$ along a path $\\gamma:y_0\\leadsto y_1$ by using $f(2v-\\tfrac12)$ on the central cube $[\\tfrac14,\\tfrac34]^r$ and $\\gamma(2\\rho(v)-1)$ on its complement, where $\\rho(v)=\\max_i|2v_i-1|$. The two formulas agree on the central boundary. Relative homotopies transport by this formula with their extra parameter. Nesting two collars realizes transport along the concatenated paths after a piecewise-linear change of the radial coordinate. A path followed by its reverse contracts relative to endpoints by the formula $\\gamma((1-s)\\min(2t,2-2t))$, $0\\leq s,t\\leq1$; the reversed order has the corresponding formula for the reversed path. A constant collar can be removed continuously by expanding the central cube from side length $1/2$ to side length $1$ and rescaling its coordinates affinely. These formulas show that transport and reverse transport are inverse bijections on based homotopy classes. For completeness let $K:|X|\\times[0,1]\\to|Y|$ be the homotopy under consideration, $x$ its source basepoint, $\\gamma(t)=K(x,t)$, and $f$ a cube based at $x$. A homotopy relative to the outer boundary from the transported $K(-,0)f$ to $K(-,1)f$ uses $K(f(2v-\\tfrac12),s)$ on the central cube and $\\gamma(s+(1-s)(2\\rho(v)-1))$ outside it, then removes the constant collar. The formulas agree on the central boundary, where both equal $\\gamma(s)$, and the outer boundary stays $\\gamma(1)$. Thus the endpoint maps on homotopy classes differ by a bijection. Since induced maps of based homotopy groups are homomorphisms, bijectivity of one endpoint map is equivalent to that of the other, proving the asserted weak-equivalence invariance.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Theorems 1.9–1.10: agent expansion of the nerve/prism argument; quotient-product continuity is supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Opposites preserve the homotopy types needed here. Send a realization point represented by $c_0\\to\\cdots\\to c_n$ and $(t_0,\\ldots,t_n)$ to the reversed opposite chain $c_n\\to\\cdots\\to c_0$ with coordinates $(t_n,\\ldots,t_0)$. Reversal sends deletion/composition at $i$ to deletion/composition at $n-i$, and identity insertion at $i$ to identity insertion at $n-i$ in the reversed chain; on coordinates it sends insertion of a zero, and addition of neighboring coordinates, to the reversed operations. Thus it respects the quotient relations in [def-cbc-enhanced-diagrams-cones]. The affine coordinate reversals are continuous, and reversing twice is the identity, so this gives a homeomorphism $|NC|\\cong|N(C^{\\mathrm{op}})|$, natural in functors. In particular weak contractibility and weak equivalence of functor nerves are preserved by opposites. Directly from the commuting-triangle definitions, $(b\\downarrow u^{\\mathrm{op}})\\cong(u\\downarrow b)^{\\mathrm{op}}$. Consequently $u$ is right aspherical if and only if $u^{\\mathrm{op}}$ is left aspherical, proving the last assertion. This is a homeomorphism of realizations, not a claimed simplicial isomorphism of the ordinary nerves.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Remark 1.8, printed p. 6; coordinate reversal and comma identification written out."
+   }
+  },
+  {
+   "text": "We prove the nerve implication for a left aspherical $u$ by a two-sided bisimplicial set. Let $Z_{p,q}$ consist of chains $b_0\\to\\cdots\\to b_q\\xrightarrow{\\alpha}u(a_0)$ and $a_0\\to\\cdots\\to a_p$. Operators in the $b$ direction delete/compose or repeat $b$-vertices; deleting the last one composes its incoming arrow with $\\alpha$. Operators in the $a$ direction do the same on the $a$-chain; deleting $a_0$ replaces $\\alpha$ by its composite with $u(a_0\\to a_1)$. The two operations commute because they act by pre- and postcomposition on $\\alpha$. Thus this is a bisimplicial set, including degrees zero. Forgetting the $b$-chain gives $Z\\to C^A$ with $C^A_{p,q}=(NA)_p$ constant in $q$, and forgetting the $a$-chain gives $Z\\to C^B$ with $C^B_{p,q}=(NB)_q$ constant in $p$. The nerve convention and the degreewise simplicial constructions are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Theorem 1.9, printed p. 6; agent two-sided comma-nerve proof of the stated theorem."
+   }
+  },
+  {
+   "text": "For each fixed $a$-chain of length $p$, its fiber in $Z_{p,\\bullet}$ is $N(B/u(a_0))$; this category has terminal object $u(a_0)\\xrightarrow{1}u(a_0)$. Step 1 contracts each fiber. Thus $Z_{p,\\bullet}\\to C^A_{p,\\bullet}$ is a weak homotopy equivalence: both realizations are disjoint unions over the same discrete set of $a$-chains, each source component is contractible, and all based homotopy groups are computed in that component. For each fixed $b$-chain of length $q$, the fiber in $Z_{\\bullet,q}$ is $N(b_q\\downarrow u)$, weakly contractible by left asphericity. The realization of this row is the disjoint union of those comma-nerve realizations: no realization relation changes the fixed $b$-chain, so each summand is open and closed by the quotient topology. Each summand is nonempty and path connected, and has trivial based homotopy groups, by left asphericity. Its map to the point labelled by that chain is therefore a weak homotopy equivalence. Taking all chains gives a bijection on components and the same isomorphisms on based groups, proving that $Z_{\\bullet,q}\\to C^B_{\\bullet,q}$ is a weak homotopy equivalence, also when the set of chains is empty. Apply [lem-coef-bisimplicial-diagonal-equivalence], first in one direction and then in the exchanged direction. Both hypotheses are exactly the degreewise weak equivalences just established, with all index sets small. We obtain weak homotopy equivalences $r_A:\\operatorname{diag}Z\\to NA$ and $r_B:\\operatorname{diag}Z\\to NB$ given by the two forgetting maps.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Theorem 1.9, printed p. 6; agent proof using the existing rowwise/columnwise diagonal theorem."
+   }
+  },
+  {
+   "text": "The two maps $r_B$ and $(Nu)r_A$ are simplicially homotopic, with the map itself specified as follows. For a diagonal $n$-simplex of $Z$ and $\\theta:[n]\\to[1]$, the $j$th vertex is $b_j$ if $\\theta(j)=0$ and $u(a_j)$ if $\\theta(j)=1$. Within either block use its original chain arrows; across the unique transition from $i$ to $i+1$ use the composite $b_i\\to b_n\\xrightarrow{\\alpha}u(a_0)\\to u(a_{i+1})$. More generally the cross arrow from any zero vertex $i$ to a later one vertex $j$ is $b_i\\to b_n\\xrightarrow{\\alpha}u(a_0)\\to u(a_j)$. Composing consecutive arrows reproduces that formula, so restriction or repetition of vertices agrees with every simultaneous simplicial operator, including those that change the bridge $\\alpha$. This defines $\\operatorname{diag}Z\\times\\Delta^1\\to NB$, with endpoints $r_B$ and $(Nu)r_A$. Step 1 supplies the continuous homotopy and its weak-equivalence invariance. Since $r_B$ is a weak equivalence, so is $(Nu)r_A$. Two-out-of-three for the weak equivalences of [lem-coef-kan-quillen-right-proper], together with the weak equivalence $r_A$, gives that $Nu$ is a weak equivalence. If $u$ is right aspherical, Step 2 makes $u^{\\mathrm{op}}$ left aspherical; apply this result and the natural reversal homeomorphisms of Step 2 to obtain the same conclusion for $u$. This proves both nerve implications without invoking either implication as a new node.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Theorem 1.9 and Remark 1.8, printed p. 6; explicit bridge homotopy and opposite argument."
+   }
+  },
+  {
+   "text": "Now let $u$ be left aspherical, $F:B\\to\\mathrm{Cat}$, and let $v:\\operatorname{Th}_A(Fu)\\to\\operatorname{Th}_B F$ be the canonical functor using the definitions of [lem-coef-thomason-grothendieck-comparison]. Fix $t=(b,z)$ in the target. Write $H=(b\\downarrow u)$. An object of $E=(t\\downarrow v)$ is $(a,x,\\alpha,h)$ where $\\alpha:b\\to u(a)$ and $h:F(\\alpha)z\\to x$ in $F(u(a))$. An arrow to $(a',x',\\alpha',h')$ is $r:a\\to a'$ and $k:F(u(r))x\\to x'$ with $u(r)\\alpha=\\alpha'$ and $kF(u(r))(h)=h'$. Projection gives $p:E\\to H$. Define a section $s(a,\\alpha)=(a,F(\\alpha)z,\\alpha,1)$, sending an arrow $r$ of $H$ to $(r,1)$; the identity fiber arrow is well typed because $F(u(r))F(\\alpha)z=F(\\alpha')z$. Then $ps=1$, and $(1_a,h)$ defines $sp\\Rightarrow1_E$: its naturality along $(r,k)$ is exactly the already required equality $kF(u(r))(h)=h'$. Step 1 shows $NE$ is homotopy equivalent on realization to $NH$. Since $NH$ is weakly contractible by the hypothesis on $u$, so is $NE$. As this holds for every $t$, $v$ is left aspherical. The displayed formulas also show explicitly that $v$ fixes fiber objects and sends a base arrow $r$ to $u(r)$.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.5 and Theorem 1.10(ii), printed pp. 5–7; explicit comma projection, section, and natural transformation."
+   }
+  },
+  {
+   "text": "For $w:\\operatorname{Gr}_A(Fu)\\to\\operatorname{Gr}_B F$, fix again $t=(b,z)$ and $H=(b\\downarrow u)$, using [lem-coef-thomason-grothendieck-comparison]. An object of $E'=(w\\downarrow t)$ is $(a,x,\\alpha,h)$ with $\\alpha:b\\to u(a)$ and $h:x\\to F(\\alpha)z$. Its arrow to $(a',x',\\alpha',h')$ consists of $r:a'\\to a$ and $k:x\\to F(u(r))x'$ with $u(r)\\alpha'=\\alpha$ and $F(u(r))(h')k=h$. Projection gives $p':E'\\to H^{\\mathrm{op}}$. Define $s'(a,\\alpha)=(a,F(\\alpha)z,\\alpha,1)$ and send a reversed arrow represented by $r:a'\\to a$ to $(r,1)$. The equality $F(u(r))F(\\alpha')z=F(\\alpha)z$ types this arrow. We have $p's'=1$ and a transformation $1_{E'}\\Rightarrow s'p'$ whose component is $(1_a,h)$. On $(r,k)$ its naturality equation is exactly $F(u(r))(h')k=h$. Step 1 gives $|NE'|\\simeq|N(H^{\\mathrm{op}})|$, and Step 2 identifies the latter with $|NH|$. Left asphericity of $u$ therefore makes every such comma nerve weakly contractible. This proves that $w$ is right aspherical. The definition fixes each fiber object and applies $u$ to the reversed base arrow as asserted. Empty categories cause no extra hypothesis: if $B$ is empty then so is $A$ and every conclusion is vacuous or the identity empty nerve map; otherwise left asphericity ensures each needed $H$ is nonempty, and every transported object used in the sections is supplied by the actual functor $F(\\alpha)$.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.5 and Theorem 1.10(ii), printed pp. 5–7; explicit dual comma projection and identity section."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-quotient-cylinder-continuity",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-thomason-grothendieck-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, mapping-space foundation inherited through the item's blueprint ancestry. Low arXiv:1409.8062 Definitions 1.7–1.8 and Theorems 1.9–1.10, printed pp. 6–7, checked online; local copy WANTED. Full two-sided bisimplicial proof of Theorem A and explicit comma retractions of Theorem 1.10 supplied here, rather than outsourcing either clause."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A functor with contractible comma category nerves induces a weak equivalence of nerves and this asphericity is preserved by Grothendieck constructions",
-   "results": "[leanfinder] OK 8 hit(s); top hits: SSet.OneTruncation₂.nerveEquiv, CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map, SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.Truncated.HomotopyCategory.functorEquiv, SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj, CategoryTheory.nerve.fullyFaithfulNerveFunctor₂, CategoryTheory.nerve.functorOfNerveMap, CategoryTheory.Nerve.cosk₂Iso",
+   "query": "A functor of small categories whose comma categories have weakly contractible nerves induces a weak homotopy equivalence on nerves",
+   "results": "{\"t\": \"2026-10-16T15:53:07Z\", \"tool\": \"leanfinder\", \"query\": \"A functor of small categories whose comma categories have weakly contractible nerves induces a weak homotopy equivalence on nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\"], \"digest\": \"ab2d087bebbd2434\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ordinary final-functor colimit and Grothendieck fiberwise-colimit results require connected comma categories and concern ordinary colimits, not weak equivalences of nerves from contractible comma nerves."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
   },
   {
    "tool": "loogle",
-   "query": "\"Aspherical\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T15:53:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ordinary final-functor colimit and Grothendieck fiberwise-colimit results require connected comma categories and concern ordinary colimits, not weak equivalences of nerves from contractible comma nerves."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
   },
   {
    "tool": "grep",
-   "query": "[Aa]spherical|[Qq]uillen.*[Tt]heorem|[Hh]omotopy[Cc]ofinal",
-   "results": "[grep] OK 0 hit(s)",
+   "query": "aspherical|Thomason|Quillen.*[Tt]heorem.?A",
+   "results": "{\"t\": \"2026-10-16T15:53:08Z\", \"tool\": \"grep\", \"query\": \"aspherical|Thomason|Quillen.*[Tt]heorem.?A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ordinary final-functor colimit and Grothendieck fiberwise-colimit results require connected comma categories and concern ordinary colimits, not weak equivalences of nerves from contractible comma nerves."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
   },
   {
    "tool": "leansearch",
-   "query": "Homotopy cofinality for Grothendieck lax colimits and Quillen theorem A for a functor whose comma categories have contractible nerves",
-   "results": "[leansearch] OK 8 hit(s); top hits: CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc, CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence, CategoryTheory.Functor.colimitIsoColimitGrothendieck, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv, CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone, CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc, CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj",
+   "query": "Aspherical functors remain aspherical under base change of lax and oplax Grothendieck constructions",
+   "results": "{\"t\": \"2026-10-16T15:53:08Z\", \"tool\": \"leansearch\", \"query\": \"Aspherical functors remain aspherical under base change of lax and oplax Grothendieck constructions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Grothendieck.pre_map_base\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeFunctorFunctorCategoryOfHasPullbacks\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.Grothendieck.map_obj_base\", \"CategoryTheory.Pseudofunctor.mkOfOplax'_toPrelaxFunctor\", \"CategoryTheory.Grothendieck.map_map_base\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_map_base\"], \"digest\": \"15d34ef73fcd1ed2\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ordinary final-functor colimit and Grothendieck fiberwise-colimit results require connected comma categories and concern ordinary colimits, not weak equivalences of nerves from contractible comma nerves."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
   },
   {
    "tool": "leanfinder",
    "query": "Homotopy final functors remain homotopy final after base change by a Grothendieck opfibration",
-   "results": "[leanfinder] OK 8 hit(s); top: CategoryTheory.Grothendieck.final_map, CategoryTheory.StructuredArrow.final_pre, CategoryTheory.Grothendieck.final_pre, CategoryTheory.Comma.map_final, CategoryTheory.Functor.final_of_final_costructuredArrowToOver, CategoryTheory.StructuredArrow.final_post, CategoryTheory.StructuredArrow.final_map, CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence",
+   "results": "{\"t\": \"2026-10-16T15:54:01Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy final functors remain homotopy final after base change by a Grothendieck opfibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.final_map\", \"CategoryTheory.StructuredArrow.final_pre\", \"CategoryTheory.Grothendieck.final_pre\", \"CategoryTheory.Comma.map_final\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.StructuredArrow.final_post\", \"CategoryTheory.StructuredArrow.final_map\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\"], \"digest\": \"2d134c743d8e8972\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Grothendieck.final_pre and final_map use Final, defined by connected comma categories at Final.lean:96-105; they do not assert weak contractibility or nerve equivalence."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
   },
   {
    "tool": "grep",
-   "query": "aspherical|homotopy.?final|homotopy.?initial|Quillen.*[Tt]heorem.?A",
-   "results": "[grep] OK 0 hit(s); top: ",
+   "query": "theorem final_pre|lemma final_pre|def pre |class Final",
+   "results": "{\"t\": \"2026-10-16T15:53:54Z\", \"tool\": \"grep\", \"query\": \"theorem final_pre|lemma final_pre|def pre |class Final\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\"], \"digest\": \"5e62ec7a489b7588\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Grothendieck.final_pre and final_map use Final, defined by connected comma categories at Final.lean:96-105; they do not assert weak contractibility or nerve equivalence."
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "instance final_pre",
+   "results": "{\"t\": \"2026-10-16T15:54:21Z\", \"tool\": \"grep\", \"query\": \"instance final_pre\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "final_pre",
+   "results": "{\"t\": \"2026-10-16T15:54:29Z\", \"tool\": \"grep\", \"query\": \"final_pre\", \"sub\": \"CategoryTheory/Limits/Final.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"1061\", \"1103\"], \"digest\": \"db3ee91d0f5078f2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits give ordinary nerve/truncation adjunctions, Grothendieck constructions, or ordinary Final functors. Final uses connected comma categories (Final.lean:96-98); Grothendieck.final_pre (Final.lean:1103) supplies only ordinary finality, not weak contractibility. None states the nerve criterion or both homotopical base-change clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen theorem A weak homotopy equivalence of nerves from contractible comma categories",
+   "results": "{\"t\": \"2026-10-16T16:41:27Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen theorem A weak homotopy equivalence of nerves from contractible comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"d5315ca36f6e8bd1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected result types concern ordinary nerve/truncation adjunctions and ordinary final-functor colimits; none asserts weak contractibility of comma nerves, Quillen Theorem A, or homotopical Th/Gr base-change asphericity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T16:41:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected result types concern ordinary nerve/truncation adjunctions and ordinary final-functor colimits; none asserts weak contractibility of comma nerves, Quillen Theorem A, or homotopical Th/Gr base-change asphericity."
+  },
+  {
+   "tool": "grep",
+   "query": "aspherical|Thomason|Quillen.*[Tt]heorem.?A",
+   "results": "{\"t\": \"2026-10-16T16:41:22Z\", \"tool\": \"grep\", \"query\": \"aspherical|Thomason|Quillen.*[Tt]heorem.?A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected result types concern ordinary nerve/truncation adjunctions and ordinary final-functor colimits; none asserts weak contractibility of comma nerves, Quillen Theorem A, or homotopical Th/Gr base-change asphericity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy final functor induces left aspherical maps between lax colimits and right aspherical maps between oplax colimits",
+   "results": "{\"t\": \"2026-10-16T16:41:22Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy final functor induces left aspherical maps between lax colimits and right aspherical maps between oplax colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.colimitIso\", \"CategoryTheory.Functor.Final.colimit_pre_isIso\", \"CategoryTheory.MorphismProperty.colimitsOfShape_le_of_final\", \"CategoryTheory.Functor.Final.colimitIso_hom\", \"CategoryTheory.Functor.Final.colimIso\", \"CategoryTheory.Functor.final_iff_isIso_colimit_pre\", \"CategoryTheory.Functor.Final.preservesColimitsOfShape_of_final\", \"CategoryTheory.Functor.Final.comp_hasColimit\"], \"digest\": \"b8bd9fabb42e9144\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected result types concern ordinary nerve/truncation adjunctions and ordinary final-functor colimits; none asserts weak contractibility of comma nerves, Quillen Theorem A, or homotopical Th/Gr base-change asphericity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cofinal change of indexing category for Grothendieck constructions using contractible nerves of slices",
+   "results": "{\"t\": \"2026-10-16T16:42:12Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cofinal change of indexing category for Grothendieck constructions using contractible nerves of slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"309b2fb2b4983bb0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected result types concern ordinary nerve/truncation adjunctions and ordinary final-functor colimits; none asserts weak contractibility of comma nerves, Quillen Theorem A, or homotopical Th/Gr base-change asphericity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy final functors and weak equivalences on classifying spaces of categories",
+   "results": "{\"t\": \"2026-10-16T16:49:34Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy final functors and weak equivalences on classifying spaces of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\"], \"digest\": \"854f511286c08ecf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight displayed hits concern homotopy classes and localization in an already given model category; none asserts weak contractibility of comma nerves, the nerve criterion, or these Grothendieck base-change assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyFinal|HomotopyFinal|aspherical|Aspherical|theoremA|TheoremA",
+   "results": "{\"t\": \"2026-10-16T16:49:43Z\", \"tool\": \"grep\", \"query\": \"homotopyFinal|HomotopyFinal|aspherical|Aspherical|theoremA|TheoremA\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/Tactic/FunProp/Theorems.lean\", \"Mathlib/Tactic/FunProp/Theorems.lean\", \"Mathlib/Tactic/FunProp/Theorems.lean\", \"Mathlib/Tactic/FunProp/Theorems.lean\", \"Mathlib/Tactic/FunProp/Theorems.lean\"], \"digest\": \"a2e167b31d3f3bd8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: six incidental textual hits concern the PrimeNumberTheoremAnd project or LambdaTheoremArgs in the FunProp tactic; none is a categorical homotopy result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-special-resolution-zigzag-nerve",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-grothendieck-aspherical-base-change",
+  "worker": "stage1",
+  "summary": "Preserved every clause and hypothesis. Proved the nerve implication by a two-sided comma bisimplicial set, the existing diagonal theorem, and an explicit bridge homotopy. Proved both Grothendieck base-change asphericities by explicit comma projection/section transformations. Proved opposite duality by a coordinate-reversal homeomorphism. No new nodes; the provisional extraction of Quillen Theorem A was discarded as a clause of the item. No Lean writes or builds.",
+  "blueprint": "Preserves the inherited prop-coef-integral-exceptional-adjoint paragraph-2 mapping-space foundation: Low 1.7–1.10 used by the two Grothendieck-index changes in lem-coef-special-resolution-zigzag-nerve, Steps 4–5. It does not alter the six-functor unit route or its coefficient adjunction.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Only its explicit simplicial realization quotient, product, and ordinary nerve conventions are used; no enhanced-category theorem is taken from this other unit."
+   },
+   {
+    "node": "lem-cbc-quotient-cylinder-continuity",
+    "why": "The Mathlib leaf descends continuity of the explicit prism from each simplex times the locally compact interval to the realization quotient times the interval."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-quotient-cylinder-continuity"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-10ef3cebe",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-10ef3cebe (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps in full, plus the full statements of the 5 cited nodes, both citers, the unit and chapter records, and the briefs. The delivery is one commit with the item and report only, and no new nodes. Low arXiv:1409.8062 is not in literature/: the report files a WANTED line and proof_origin=agent is correct. Because I could not open Low, I checked each clause against the node's own definitions rather than Low's naming. (i) Either asphericity gives Nu a weak equivalence: Quillen Theorem A, proved in Steps 3-5 by the two-sided bisimplicial Z_{p,q}. The fibers N(B/u(a0)) (terminal object) and N(b_q↓u) are right; the two directional clauses of lem-coef-bisimplicial-diagonal-equivalence are used as stated. I checked the bridge homotopy b_i→b_n→u(a0)→u(a_j) under d_0/d_n; two-out-of-three comes from lem-coef-kan-quillen-right-proper. (ii) I recomputed both comma calculations. For Th, the composite (u(r)α, kF(u(r))h) gives the arrow equations; section s=(a,F(α)z,α,1) and counit (1,h) is natural iff kF(u(r))h=h'. For Gr, the composite (u(r)α', F(u(r))(h')k), projection to H^op, unit (1,h) natural iff F(u(r))(h')k=h. Since Gr_C F=(Th_C F^op)^op, the two directions are consistent. (iii) (b↓u^op)≅(u↓b)^op, and |NC|≅|NC^op| by chain-plus-coordinate reversal. Step 1's prism, continuity through Mathlib Topology.IsQuotientMap.continuous_lift_prod_left (CompactOpen.lean:584-598) and basepoint transport are correct. The directions match both citers (special-resolutions-aspherical; zigzag-nerve Steps 4-5). proof_deps equals the union of uses; a traversal of 41 reachable nodes found no cycle. There is no SGA citation. I accept both declared tool_uses (def-cbc-enhanced-diagrams-cones and the quotient-cylinder Mathlib leaf: a definition and a leaf, so notions rather than route). rg over the DAG and Mathlib found no duplicate. Small cases checked: F constant at the terminal category; u:1→[1] picking the terminal vs the initial object; empty categories. No statement is weakened and no fixes were needed. review.md is written."
+ }
 }
