@@ -43,7 +43,8 @@
   "def-weil-pbc-four-arrows",
   "lemma-weil-pbc-perfect-projection-formula",
   "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-tower-compatibility"
+  "lem-weil-pbc-tower-compatibility",
+  "def-weil-pbc-strict-tower-operations"
  ],
  "proof": [
   {
@@ -316,5 +317,51 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictTowerExchangeMateNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exchangeConstant_coherent",
+   "AlgebraicGeometry.Scheme.exchangeConstantSquare",
+   "AlgebraicGeometry.Scheme.exchangeScalar",
+   "AlgebraicGeometry.Scheme.exchangeScalar_comm",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_exact",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteLimits",
+   "AlgebraicGeometry.Scheme.exchangeTowerModuleRes_finiteColimits",
+   "AlgebraicGeometry.Scheme.exchangeTowerRes",
+   "AlgebraicGeometry.Scheme.exchangeConstantPull",
+   "AlgebraicGeometry.Scheme.exchangeConstantPush",
+   "AlgebraicGeometry.Scheme.exchangeModuleResPull",
+   "AlgebraicGeometry.Scheme.exchangeResPull",
+   "AlgebraicGeometry.Scheme.exchangeTowerDerivedUnit",
+   "AlgebraicGeometry.Scheme.exchangeModuleResPush",
+   "AlgebraicGeometry.Scheme.ExchangeResPushNormalized",
+   "AlgebraicGeometry.Scheme.exchangeResPush_existsUnique",
+   "AlgebraicGeometry.Scheme.exchangeResPush",
+   "AlgebraicGeometry.Scheme.exchangeCornerB",
+   "AlgebraicGeometry.Scheme.exchangeCornerD",
+   "AlgebraicGeometry.Scheme.exchangeRealizationH",
+   "AlgebraicGeometry.Scheme.exchangeRealizationHPrime",
+   "AlgebraicGeometry.Scheme.exchangeStrict_naturality",
+   "AlgebraicGeometry.Scheme.exchangeStrictNatTrans",
+   "AlgebraicGeometry.Scheme.strictTowerExchangeMateNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/StrictTowerExchangeMateNormalization.lean",
+  "statement": "theorem strictTowerExchangeMateNormalization (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) : d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom ∧ (∀ n : ℕ, ∃ α : ∀ i : Fin 4, (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).obj (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K i) ≅ (reductionDerivedRestrict Y' (d.projection Y' n)).obj (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n i), (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 1).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 3).hom = (α 2).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h'.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV sq K) ≫ (α 2).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV' sq K) ≫ (α 3).hom = (α 1).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v'.hom) ∧ (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (exchangeCornerD d g' f').hom.app ((completedReductionTower X d).obj K) = (exchangeCornerB d f g).hom.app ((completedReductionTower X d).obj K) ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return L at 8bd1b06c9256: the signature now explicitly asserts the H inverse / reduction of ambient e / H-prime formula, the finite-level corner and arrow comparisons using the retained witnesses, and the scalar-restricted equality in the derived category of strict towers. The H and H-prime definitions display B and D as their actual targets and use the canonical diagram projection adjunct."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aabc57a4f",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Checked statement clauses, dependencies, sources, canonical constructions, universes, edge cases, docstrings, and records. Both modules passed per-file scompile.py reproduction. No delivery defects found; branch unchanged."
  }
 }
