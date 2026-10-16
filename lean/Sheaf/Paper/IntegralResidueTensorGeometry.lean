@@ -5,10 +5,11 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.Paper.IntegralResidueTensorPresentation
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
-public import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
-import Sheaf.Paper.IntegralResiduePullSquare
+public import Sheaf.Paper.IntegralResidueTensorPullPresentation
+import Sheaf.Paper.IntegralResiduePullbackPreservesFlat
+import Sheaf.Paper.IntegralResidueTensorRouteModel
+import Sheaf.Paper.IntegralResidueScalarRouteModel
 
 /-! # Ordinary pullback data and the derived residue tensor square
 
@@ -25,40 +26,15 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
+private def rightTensorComparison {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.OplaxMonoidal] (B : C) :
+    tensorRight B ⋙ F ⟶ F ⋙ tensorRight (F.obj B) where
+  app M := Functor.OplaxMonoidal.δ F M B
+  naturality _ _ g := (Functor.OplaxMonoidal.δ_natural_left F g B).symm
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-
-/-- Pullback identifies the restricted residue regular coefficient in degree zero.
-The isomorphism is constructed using exact pullback and its ordinary unit comparison. -/
-@[irreducible] noncomputable def residueExchangeCoefficientPullIso
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (residueExchangeUpperStar (integralCoeff ℓ E) f).obj
-        (residueExchangeCoefficient ℓ E Y) ≅ residueExchangeCoefficient ℓ E X := by
-  let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)
-  let P := Mod.regular (condensedRingObj A Y)
-  let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-    (coefficientMap (integralReductionMap ℓ E) Y)
-  let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap (integralReductionMap ℓ E) X)
-  letI := residueOrdinaryUpperStarMonoidal A f
-  let e : (f)^*⟦integralCoeff ℓ E⟧.obj (SY.obj P) ≅
-      SX.obj (Mod.regular (condensedRingObj A X)) :=
-    (comapUpperStarIso (integralReductionMap ℓ E) f).symm.app P ≪≫
-      SX.mapIso (Functor.Monoidal.εIso (f)^*⟦A⟧).symm
-  unfold residueExchangeUpperStar
-  exact ((f)^*⟦integralCoeff ℓ E⟧.singleFunctorCompLeftDerivedFunctorIso).app (SY.obj P) ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso e
-
-/-- The tensor presentation on X, with its coefficient identified with pullback from Y. -/
-@[irreducible] noncomputable def residueExchangeTensorPullIso
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X ≅
-      tensorRight ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj
-        (residueExchangeCoefficient ℓ E Y)) :=
-  residueExchangeTensorIso ℓ E X ≪≫
-    (curriedTensor (residueExchangeDerived (integralCoeff ℓ E) X)).flip.mapIso
-      (residueExchangeCoefficientPullIso ℓ E f).symm
 
 /-- Ordinary pullback has a strong monoidal structure preserving flat modules,
 and its derived tensor comparison agrees with the canonical scalar pull square.
@@ -106,6 +82,39 @@ theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
               (residueExchangeRestriction ℓ E X).map
                 (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫
               (residueExchangeTensorPullIso ℓ E f).hom.app
-                ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) := by sorry
+                ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) := by
+  let hFlat := integralResidue_pullback_preservesFlat ℓ E f
+  refine ⟨hFlat, ?_⟩
+  let := residueExchangePullMonoidal ℓ E f
+    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
+  let F := residueExchangeUpperStar (integralCoeff ℓ E) f
+  let RY := residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y
+  let B := F.obj (residueExchangeCoefficient ℓ E Y)
+  let α : RY ⋙ F ⟶ F ⋙ tensorRight B :=
+    Functor.whiskerRight (residueExchangeTensorIso ℓ E Y).hom F ≫
+      rightTensorComparison F (residueExchangeCoefficient ℓ E Y)
+  let β : RY ⋙ F ⟶ F ⋙ tensorRight B :=
+    (Functor.whiskerLeft (residueExchangeReduction ℓ E Y)
+      (residueExchangeRestrictPullIso ℓ E f).hom) ≫
+    (Functor.whiskerRight ((residueExchangePullComparisons ℓ E).pull f).inv
+      (residueExchangeRestriction ℓ E X)) ≫
+    (Functor.whiskerLeft F (residueExchangeTensorPullIso ℓ E f).hom)
+  intro M
+  obtain ⟨P, hP, ⟨e⟩⟩ :=
+    CategoryTheory.Functor.residue_exists_kFlatMap_iso (f)^*⟦integralCoeff ℓ E⟧ M
+  have h : α.app (DerivedCategory.Qh.obj P) = β.app (DerivedCategory.Qh.obj P) := by
+    have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
+      delta residueExchangeTensorModelTarget residueExchangeUpperStar
+      exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
+        (residueExchangeOrdinaryCoefficient ℓ E Y) P hP
+    apply (cancel_mono (residueExchangeTensorModelTarget ℓ E f P)).mp
+    simpa only [α, β, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, rightTensorComparison, Category.assoc] using
+        (integralResidue_tensorRoute_model ℓ E f hFlat P).trans
+          (integralResidue_scalarRoute_model ℓ E f hFlat P).symm
+  have hα := α.naturality e.hom
+  have hβ := β.naturality e.hom
+  rw [h, ← hβ] at hα
+  exact (cancel_epi ((RY ⋙ F).map e.hom)).mp hα
 
 end AlgebraicGeometry.ProEtale.CondensedRing

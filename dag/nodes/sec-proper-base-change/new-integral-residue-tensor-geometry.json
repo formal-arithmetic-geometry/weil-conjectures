@@ -16,40 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Construct f*B_Y ≅ B_X using the exact pullback comparison with the degree-zero single functor, ordinary comapUpperStarIso, and the residue ordinary monoidal unit. Compose the canonical right-tensor presentation on X with that coefficient isomorphism to define tX.",
+   "text": "Use the unchanged explicit coefficient-pullback and tensor-pull constructions, now re-exported from their acyclic presentation module.",
    "uses": [
-    "new-integral-residue-tensor-presentation",
-    "new-integral-residue-ordinary-monoidal"
+    "def-weil-pbc-integral-residue-tensor-pull-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Inverse image preserves flat module sheaves: flatness is local and invariant under the coefficient-pullback isomorphism. It preserves colimits, so flat resolutions are sent to K-flat resolutions. Use the constructed derived monoidal API with this flat-preservation property.",
+   "text": "Use flat preservation for actual ordinary integral inverse image and install its already constructed derived strong monoidal structure.",
+   "uses": [
+    "new-integral-residue-pullback-preserves-flat",
+    "new-integral-residue-derived-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the two routes as natural transformations. On a homotopy representative whose image under ordinary inverse image is K-flat, postcompose both with the invertible common-model target comparison. The tensor-route and scalar-route computation formulas identify both composites with the same explicit model map, so cancellation proves the square on this representative.",
+   "uses": [
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-tensor-route-model",
+    "new-integral-residue-scalar-route-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use residue_exists_kFlatMap_iso to choose such a representative for any derived object. Naturality of both transformations along its isomorphism gives the desired square after precomposition with an isomorphism; cancel that isomorphism.",
    "uses": [
     "new-integral-residue-derived-monoidal"
    ],
-   "elementary": false
-  },
-  {
-   "text": "On flat resolutions the two routes in the square are balanced tensor associativity and multiply the same scalar factors. The scalar-counit identity for the inverse mate identifies the pull-comparison map with this scalar multiplication map. The explicit tensor presentation uses the extension counit and the balanced tensor isomorphism. Uniqueness of left-derived comparisons descends the equality to all M. No flatness of the residue quotient over the integral coefficients is required.",
-   "uses": [
-    "new-integral-residue-derived-pull-square",
-    "new-integral-residue-tensor-presentation"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-integral-residue-tensor-presentation",
-  "new-integral-residue-ordinary-monoidal",
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-pullback-preserves-flat",
   "new-integral-residue-derived-monoidal",
-  "new-integral-residue-derived-pull-square"
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-tensor-route-model",
+  "new-integral-residue-scalar-route-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+  "note": "A4: natural-transformation descent and cancellation through an explicit common homotopy tensor model. The two route computations and flat-preservation step are isolated separately; no target statement or coefficient construction changes."
  },
  "mathlib_searches": [
   {
@@ -113,11 +123,9 @@
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorGeometry",
   "statement": "theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat,\n        letI := residueExchangePullMonoidal ℓ E f\n          (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat\n          ∀ M : residueExchangeDerived (integralCoeff ℓ E) Y,\n            (residueExchangeUpperStar (integralCoeff ℓ E) f).map\n                ((residueExchangeTensorIso ℓ E Y).hom.app M) ≫\n              Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)\n                M (residueExchangeCoefficient ℓ E Y) =\n            (residueExchangeRestrictPullIso ℓ E f).hom.app\n                ((residueExchangeReduction ℓ E Y).obj M) ≫\n              (residueExchangeRestriction ℓ E X).map\n                (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫\n              (residueExchangeTensorPullIso ℓ E f).hom.app\n                ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M)",
   "branch": "sheaf-dag",
-  "by": "D3",
+  "by": "A4",
   "date": "2026-10-16",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficientPullIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorPullIso",
    "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorGeometry"
   ]
  },
@@ -134,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-56663",
-  "group": "D3",
+  "reviewer": "X-50c91",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T101204-L-2230257",
+  "landing": "20261016T134405-L-3314624",
   "kind": "interface",
-  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+  "note": "independent Codex review: Matched Lean signatures, relocated construction bodies, DAG statements and proof dependencies against the baseline; all seven modules and sole direct importer Sheaf.Paper.IntegralResidueTensorSquare compile cleanly; axiom checks show only standard axioms and expected sorryAx dependencies."
  }
 }

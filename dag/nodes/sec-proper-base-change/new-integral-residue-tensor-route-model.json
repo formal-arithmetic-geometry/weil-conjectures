@@ -1,0 +1,149 @@
+{
+ "id": "new-integral-residue-tensor-route-model",
+ "kind": "statement",
+ "title": "Tensor-route computation in the ordinary homotopy model",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface], [new-integral-residue-tensor-presentation], [new-integral-residue-derived-monoidal], [new-integral-residue-tensor-model]. For prime ℓ, normed E over ℚ_ℓ, f:X→Y, a proof that ordinary integral pullback preserves flat objects, and any homotopy complex P of integral module sheaves on Y, compose the canonical tensor-route LF(tY) followed by the derived tensor comparison at QP and B_Y with the explicit target comparison of new-integral-residue-tensor-model. The result is the explicit model map defined there. No K-flatness of P or flatness of the residue coefficient is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the counit identities of leftDerivedUnique and leftDerivedNatIso to normalize the fixed tensor presentation: after removing its braiding, transporting B[0] to Q of the single complex, and composing with the tensor counit, it is the specified scalar tensor counit followed by Q of the inverse homotopy single-tensor comparison.",
+   "uses": [
+    "new-integral-residue-tensor-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary inverse-image comparison preserves braiding, checked on balanced presentation epimorphisms. Derive that equality using K-flat representatives and the derived comparison counit identity; the Koszul signs agree degreewise. Move the degree-zero coefficient comparison through by naturality and apply the derived tensor-comparison counit identity. Naturality of the exact-pullback counit then gives the model map.",
+   "uses": [
+    "new-integral-residue-ordinary-monoidal",
+    "new-integral-residue-derived-monoidal",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "A4: explicit counit-normalized computation and descent; original unit route retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules over a sheaf of commutative rings preserves flat objects",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.FaithfullyFlat.toFlat, Module.Flat.of_ulift, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedUnique",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mapMod|mapMod.*flat|tensorPresentation",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of internal sheaves of modules preserves flatness and the canonical derived tensor comparison is compatible with the tensor counit and coefficient restriction",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.Flat.instMorphismRestrict, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardNatIso_inv, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier",
+   "verdict": "Generic sheaf-module pullback and scalar tensor ingredients; no exact internal-module canonical residue tensor-square statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit of a left derived tensor functor identifies the canonical tensor presentation with the homotopy tensor product",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Tor'_obj_map, TensorProduct.counit_def, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj",
+   "verdict": "Second reading: generic pullback, counit or scalar-adjunction ingredients only; no theorem with the stated internal-module model computation. Upstream text searches confirm the same gap."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison_app_app_comp_tensorHom|derivedTensorPresentationIso|tensorPresentationDerivedCounit",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Second reading: generic pullback, counit or scalar-adjunction ingredients only; no theorem with the stated internal-module model computation. Upstream text searches confirm the same gap."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueTensorGeometry",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Flat preservation and compatibility of the fixed residue tensor square",
+   "via": [
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorRouteModel",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorRouteModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_model"
+  ],
+  "statement": "theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    letI := residueExchangePullMonoidal ℓ E f\n      (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat\n    let M := DerivedCategory.Qh.obj P\n    (residueExchangeUpperStar (integralCoeff ℓ E) f).map\n          ((residueExchangeTensorIso ℓ E Y).hom.app M) ≫\n        Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)\n          M (residueExchangeCoefficient ℓ E Y) ≫\n        residueExchangeTensorModelTarget ℓ E f P =\n      residueExchangeTensorModelMap ℓ E f P",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated construction bodies, DAG statements and proof dependencies against the baseline; all seven modules and sole direct importer Sheaf.Paper.IntegralResidueTensorSquare compile cleanly; axiom checks show only standard axioms and expected sorryAx dependencies."
+ }
+}

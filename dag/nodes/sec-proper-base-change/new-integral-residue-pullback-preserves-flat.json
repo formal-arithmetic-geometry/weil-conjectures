@@ -1,0 +1,120 @@
+{
+ "id": "new-integral-residue-pullback-preserves-flat",
+ "kind": "statement",
+ "title": "Integral continuous-coefficient pullback preserves flatness",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For prime ℓ, a normed extension E of ℚ_ℓ, and every scheme map f:X→Y, the actual ordinary pullback (f)^*⟦integralCoeff ℓ E⟧ preserves flat internal modules.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Identify extension along the coefficient-pullback isomorphism with restriction along its inverse, using Mod.extendScalarsIsoComapInv and whiskering with inverse image on module objects. Apply inverseImageModule_preservesFlat and invariance of flatness under isomorphism.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-proetale-inverse-image-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat",
+  "note": "A4: specialize inverseImageModule_preservesFlat via the explicit extension/restriction-along-inverse isomorphism; no monoidal pullback construction is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules over a sheaf of commutative rings preserves flat objects",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.FaithfullyFlat.toFlat, Module.Flat.of_ulift, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedUnique",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mapMod|mapMod.*flat|tensorPresentation",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of internal sheaves of modules preserves flatness and the canonical derived tensor comparison is compatible with the tensor counit and coefficient restriction",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.Flat.instMorphismRestrict, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardNatIso_inv, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier",
+   "verdict": "Generic sheaf-module pullback and scalar tensor ingredients; no exact internal-module canonical residue tensor-square statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueTensorGeometry",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Flat preservation and compatibility of the fixed residue tensor square",
+   "via": [
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullbackPreservesFlat",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullbackPreservesFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_pullback_preservesFlat",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_pullback_preservesFlat"
+  ],
+  "statement": "theorem integralResidue_pullback_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated construction bodies, DAG statements and proof dependencies against the baseline; all seven modules and sole direct importer Sheaf.Paper.IntegralResidueTensorSquare compile cleanly; axiom checks show only standard axioms and expected sorryAx dependencies."
+ }
+}

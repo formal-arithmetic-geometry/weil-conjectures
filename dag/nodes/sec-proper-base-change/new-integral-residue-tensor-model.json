@@ -1,0 +1,134 @@
+{
+ "id": "new-integral-residue-tensor-model",
+ "kind": "statement",
+ "title": "Explicit homotopy tensor model and its invertible target comparison",
+ "statement": "Use [new-integral-residue-ordinary-monoidal], [def-weil-pbc-residue-exchange-comparison-interface], [new-integral-residue-tensor-presentation], [new-integral-residue-derived-monoidal]. Let F:C→D be an exact additive functor between braided monoidal Grothendieck abelian categories with monoidal closed structures and functorial flat resolutions. For B∈C and P∈K(C), define the target comparison from LF(QP) tensor LF(B[0]) to Q(KF(B[0]) tensor KF(P)) by inverse braiding, the coefficient degree-zero comparison, both LF counits, and the tensor counit of Q. If KF(P) is K-flat, this comparison is invertible. For monoidal left adjoint F and a specified tensor-derived counit ε:QH→K(B tensor -)Q, also construct the model map LF(H(QP))→Q(KF(B[0]) tensor KF(P)) using LF(ε), its counit, the homotopy single-tensor comparison, and the ordinary tensor comparison. Specialize these explicit constructions to the integral residue coefficients and actual inverse image.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-ordinary-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Construct all maps from the displayed standard comparisons. Exactness makes both LF counits invertible; the degree-zero comparison and inverse braiding are isomorphisms. Since KF(P) is K-flat, the tensor counit of Q is invertible. Compose these isomorphisms.",
+   "uses": [
+    "new-integral-residue-derived-monoidal",
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-ordinary-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "A4: explicit counit-normalized computation and descent; original unit route retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules over a sheaf of commutative rings preserves flat objects",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.FaithfullyFlat.toFlat, Module.Flat.of_ulift, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedUnique",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mapMod|mapMod.*flat|tensorPresentation",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic ingredients only; no exact internal-module coefficient comparison. See the actual Lean proof for the generic comparisons used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of internal sheaves of modules preserves flatness and the canonical derived tensor comparison is compatible with the tensor counit and coefficient restriction",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.Flat.instMorphismRestrict, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardNatIso_inv, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier",
+   "verdict": "Generic sheaf-module pullback and scalar tensor ingredients; no exact internal-module canonical residue tensor-square statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueTensorGeometry",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Flat preservation and compatibility of the fixed residue tensor square",
+   "via": [
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorModel",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorModel.lean",
+  "declaration": "CategoryTheory.Functor.tensorModelTarget_isIso",
+  "declarations": [
+   "CategoryTheory.Functor.tensorModelCoefficient",
+   "CategoryTheory.Functor.tensorModelCoefficientIso",
+   "CategoryTheory.Functor.tensorModelTarget",
+   "CategoryTheory.Functor.tensorModelTarget_isIso",
+   "CategoryTheory.Functor.tensorModelMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeOrdinaryCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorModelTarget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorModelMap"
+  ],
+  "statement": "theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))\n    (hP : F.kFlatMap P) : IsIso (tensorModelTarget F B P)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-50c91",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314624",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated construction bodies, DAG statements and proof dependencies against the baseline; all seven modules and sole direct importer Sheaf.Paper.IntegralResidueTensorSquare compile cleanly; axiom checks show only standard axioms and expected sorryAx dependencies."
+ }
+}
