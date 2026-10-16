@@ -3,47 +3,149 @@
  "blueprint": {
   "is": "sk-def-sfb-finite-derived-functors",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived pushforward and pullback (finite coefficients)",
- "statement": "Let $\\mathcal A$ be a Grothendieck abelian category and $g\\colon Z\\to Y$ a morphism of\nschemes. Write $D(X_{\\mathrm{proét}},\\mathcal A)=D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$ and\n$D^+(X_{\\mathrm{proét}},\\mathcal A)$ for its bounded below part, and use the derived functors\nof [sk-def-sfb-derived-categories]. With $g_*$, $g^*$ as in\n[sk-def-sfb-finite-pushforward-pullback], define\n\n$$\nRg_*:=R(g_*)\\colon D(Z_{\\mathrm{proét}},\\mathcal A)\\to D(Y_{\\mathrm{proét}},\\mathcal A),\n$$\n\ncomputed on K-injective resolutions, and its bounded below version\n$R^+g_*\\colon D^+(Z_{\\mathrm{proét}},\\mathcal A)\\to D^+(Y_{\\mathrm{proét}},\\mathcal A)$,\ncomputed on injective resolutions.\n\nAssume moreover that $\\mathcal A$ is closed symmetric monoidal with additive tensor\nproduct and has functorial flat resolutions. Define\n\n$$\nLg^*:=L(g^*)\\colon D(Y_{\\mathrm{proét}},\\mathcal A)\\to D(Z_{\\mathrm{proét}},\\mathcal A),\n$$\n\ncomputed on K-flat resolutions. Then:\n\n1. $Lg^*\\cong D(g^*)$, the functor induced levelwise by the exact functor $g^*$.\n2. $Lg^*\\dashv Rg_*$, and on bounded below categories $D^+(g^*)\\dashv R^+g_*$.\n3. For an open immersion $j$, the exact functors $j_!$ and $j^*$\n   ([sk-def-sfb-finite-lower-shriek]) induce an adjunction $D(j_!)\\dashv D(j^*)$, and\n   likewise $D^+(j_!)\\dashv D^+(j^*)$.",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category and $g\\colon Z\\to Y$ a morphism of\nschemes. Write $D(X_{\\mathrm{proét}},\\mathcal A)=D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$ and\n$D^+(X_{\\mathrm{proét}},\\mathcal A)$ for its bounded below part, and use the derived functors\nof [sk-def-sfb-derived-categories]. With $g_*$, $g^*$ as in\n[def-sfb-finite-lower-star] and [def-sfb-finite-upper-star], define\n\n$$\nRg_*:=R(g_*)\\colon D(Z_{\\mathrm{proét}},\\mathcal A)\\to D(Y_{\\mathrm{proét}},\\mathcal A),\n$$\n\ncomputed on K-injective resolutions, and its bounded below version\n$R^+g_*\\colon D^+(Z_{\\mathrm{proét}},\\mathcal A)\\to D^+(Y_{\\mathrm{proét}},\\mathcal A)$,\ncomputed on injective resolutions.\n\nAssume moreover that $\\mathcal A$ is closed symmetric monoidal with additive tensor\nproduct and has functorial flat resolutions. Define\n\n$$\nLg^*:=L(g^*)\\colon D(Y_{\\mathrm{proét}},\\mathcal A)\\to D(Z_{\\mathrm{proét}},\\mathcal A),\n$$\n\ncomputed on K-flat resolutions. Then:\n\n1. $Lg^*\\cong D(g^*)$, the functor induced levelwise by the exact functor $g^*$.\n2. $Lg^*\\dashv Rg_*$, and on bounded below categories $D^+(g^*)\\dashv R^+g_*$.\n3. For an open immersion $j$, the exact functors $j_!$ and $j^*$\n   ([sk-def-sfb-finite-lower-shriek]) induce an adjunction $D(j_!)\\dashv D(j^*)$, and\n   likewise $D^+(j_!)\\dashv D^+(j^*)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
   "place": "node sk-def-sfb-finite-derived-functors, order 1681"
  },
  "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-proetale-site",
   "sk-def-sfb-derived-categories",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-star",
   "sk-def-sfb-finite-lower-shriek"
  ],
  "proof": [
   {
-   "text": "$\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$ is Grothendieck abelian, so K-injective resolutions\nexist and $Rg_*$, $R^+g_*$ are defined. Under the monoidal hypotheses the sheaf categories\nhave functorial K-flat resolutions, so $Lg^*$ is defined. Item 1 is\n[def-sfb-finite-derived-pullback-iso]. Item 2 is [def-sfb-finite-derived-adjunction] and\n[def-sfb-finite-derived-adjunction-plus]. Item 3 is\n[def-sfb-finite-derived-extension-by-zero-adjunction] and\n[def-sfb-finite-derived-extension-by-zero-adjunction-plus].",
+   "text": "Put $\\mathcal C_X=\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ for $X=Z,Y$. These categories are Grothendieck abelian by [lem-sfb-proetale-sheaves-grothendieck]. Use the restriction functor $g_*$ of [def-sfb-finite-lower-star] and the adjunction $g^*\\dashv g_*$ of [def-sfb-finite-upper-lower-star-adjunction]. The latter makes $g_*$ left exact: a cone to $g_*H$ represents, under the adjunction, exactly a cone from $g^*$ of the test object to $H$, so the limit universal property is preserved. In particular finite products and the zero object are preserved. Together with the restriction formula on maps this preserves addition, so $g_*$ is additive. Every complex of $\\mathcal C_Z$ has a K-injective resolution by [lem-sfb-grothendieck-k-injective]. Applying the right-derived construction of [sk-def-sfb-derived-categories] to this additive functor defines $Rg_*$; on a quasi-isomorphism $K\\to I$ with $I$ K-injective it is represented by $g_*I$.",
+   "uses": [
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-sfb-grothendieck-k-injective",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
+    "place": "Proof, first sentence; Stacks Tag 079P, theorem-K-injective-embedding-grothendieck, and derived.tex Tags 070K/070Y"
+   }
+  },
+  {
+   "text": "The category $\\mathcal C_Z$ has enough injectives by [lem-sp-grothendieck-enough-injectives]. An object of $D^+$ has a representative $K$ with $H^i(K)=0$ for $i<a$. Replace $K$ by the complex zero below $a$, with $\\operatorname{coker}(d_K^{a-1})$ in degree $a$ and $K^i$ in degrees $i>a$, using the differential induced by $d_K^a$. The canonical chain map from $K$ induces the same cohomology in degrees $i\\geq a$ and has zero cohomology on both sides for $i<a$, so it is a quasi-isomorphism. For this bounded below representative, [lem-sc-bounded-below-injective-resolution-existence] supplies a quasi-isomorphism to a bounded below complex $I$ of injectives. Such an $I$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence the formula of step 1 represents the restriction of $Rg_*$ by $g_*I$. Since the additive functor sends zero to zero, $g_*I$ is still zero below that bound. This defines $R^+g_*$ on $D^+$, computed by injective resolutions, and identifies it with the bounded below restriction of $Rg_*$.",
+   "uses": [
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
+    "place": "Proof, first sentence, bounded below assertion; Mathlib CochainComplex.Plus.exists_quasiIso_injective and CochainComplex.isKInjective_of_injective"
+   }
+  },
+  {
+   "text": "Now impose precisely the stated closed symmetric monoidal, additive-tensor and functorial-flat-resolution hypotheses on $\\mathcal A$. The existing node [def-sfb-finite-derived-pullback-iso] supplies the K-flat-computed left derived pullback and its natural isomorphism $Lg^*\\cong D(g^*)$. Its hypotheses coincide with ours and its underived functor is [def-sfb-finite-upper-star]. The current exact-functor clause of [sk-def-sfb-derived-categories] is conditional on the respective derived-existence hypotheses. Here the cited [def-sfb-finite-derived-pullback-iso] has already supplied the K-flat-computed left derived pullback under exactly our coefficient hypotheses, so this condition is met. Exactness of $g^*$ is explicitly stated by [lem-sfb-finite-upper-star-exact]: applying $g^*$ to a K-flat resolution $P\\to K$ gives a quasi-isomorphism $g^*P\\to g^*K$, so the resolution formula agrees with the levelwise functor on every object. Thus item 1 uses the existing K-flat existence/comparison statement and does not assert an additional uncited functorial K-flat construction.",
    "uses": [
     "def-sfb-finite-derived-pullback-iso",
+    "def-sfb-finite-upper-star",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
+    "place": "Proof, Item 1 = def-sfb-finite-derived-pullback-iso"
+   }
+  },
+  {
+   "text": "The functors just defined are the ones appearing in [def-sfb-finite-derived-adjunction]: K-flat-computed $Lg^*$ and K-injective-computed $Rg_*$. That node induces $Lg^*\\dashv Rg_*$ from the underived adjunction. Its bounded below counterpart [def-sfb-finite-derived-adjunction-plus] gives $D^+(g^*)\\dashv R^+g_*$ with the injective-resolution formula of step 2. Both nodes assume exactly the additional coefficient hypotheses now in force. These are the two adjunctions in item 2.",
+   "uses": [
     "def-sfb-finite-derived-adjunction",
-    "def-sfb-finite-derived-adjunction-plus",
+    "def-sfb-finite-derived-adjunction-plus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
+    "place": "Proof, Item 2 = def-sfb-finite-derived-adjunction and def-sfb-finite-derived-adjunction-plus"
+   }
+  },
+  {
+   "text": "For an open immersion $j$, [sk-def-sfb-finite-lower-shriek] gives the exact extension by zero $j_!$ and its underived adjunction with $j^*$. The existing [def-sfb-finite-derived-extension-by-zero-adjunction] asserts exactness of both functors and the induced adjunction $D(j_!)\\dashv D(j^*)$ for the same coefficient hypotheses. Applying the levelwise functors preserves lower bounds because their cohomology is obtained by applying the exact sheaf functors. The restriction statement [def-sfb-finite-derived-extension-by-zero-adjunction-plus] therefore supplies $D^+(j_!)\\dashv D^+(j^*)$. This is item 3, with no constructibility or Tor-amplitude condition.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek",
     "def-sfb-finite-derived-extension-by-zero-adjunction",
     "def-sfb-finite-derived-extension-by-zero-adjunction-plus"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
+    "place": "Proof, Item 3 = def-sfb-finite-derived-extension-by-zero-adjunction and its plus version"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-sfb-grothendieck-k-injective",
+  "sk-def-sfb-derived-categories",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
   "def-sfb-finite-derived-pullback-iso",
+  "def-sfb-finite-upper-star",
+  "lem-sfb-finite-upper-star-exact",
   "def-sfb-finite-derived-adjunction",
   "def-sfb-finite-derived-adjunction-plus",
+  "sk-def-sfb-finite-lower-shriek",
   "def-sfb-finite-derived-extension-by-zero-adjunction",
   "def-sfb-finite-derived-extension-by-zero-adjunction-plus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/_section.md",
-  "place": "## Proof"
+  "place": "Proof, sole paragraph, expanded with resolution existence and the five pre-existing component nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and pushforward adjunction on unbounded derived categories of pro etale sheaves with Grothendieck abelian coefficients",
+   "results": "{\"t\": \"2026-10-16T16:55:09Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pullback and pushforward adjunction on unbounded derived categories of pro etale sheaves with Grothendieck abelian coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"2569d82e72f5e516\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale construction with all clauses: abstract derived-adjunction results and bounded below right derivation are components; they do not supply the sheaf constructions, coefficient resolution input, and both open-immersion adjunctions in one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total derived adjunction exact inverse image right derived direct image bounded below and unbounded derived categories",
+   "results": "{\"t\": \"2026-10-16T16:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"Total derived adjunction exact inverse image right derived direct image bounded below and unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"a69f403503ea5351\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale construction with all clauses: abstract derived-adjunction results and bounded below right derivation are components; they do not supply the sheaf constructions, coefficient resolution input, and both open-immersion adjunctions in one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "{\"t\": \"2026-10-16T16:57:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"ecb89a2541633757\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale construction with all clauses: abstract derived-adjunction results and bounded below right derivation are components; they do not supply the sheaf constructions, coefficient resolution input, and both open-immersion adjunctions in one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|leftDerivedUpperStar|rightDerivedFunctorPlus|mapDerivedCategoryAdjunction",
+   "results": "{\"t\": \"2026-10-16T16:57:50Z\", \"tool\": \"grep\", \"query\": \"derivedAdjunction|leftDerivedUpperStar|rightDerivedFunctorPlus|mapDerivedCategoryAdjunction\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"8ff5e85a26ff240b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full pro-etale construction with all clauses: abstract derived-adjunction results and bounded below right derivation are components; they do not supply the sheaf constructions, coefficient resolution input, and both open-immersion adjunctions in one-line specialization."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -76,5 +178,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-finite-derived-functors"
+ "unit": "sk-def-sfb-finite-derived-functors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sfb-finite-derived-functors",
+  "worker": "stage1",
+  "summary": "Expanded the imported aggregation into five checked steps. Replaced its nonexistent pushforward/pullback reference by the two existing definition nodes. Added one support theorem for Grothendieck abelianness of arbitrary-coefficient pro-etale sheaves, distinguishing it from the conditional Mathlib sheaf theorem. Reused all five existing compatibility/adjunction nodes and existing bounded injective-resolution leaves; no new clause nodes or Lean attachment proposed. Revalidated the changed derived-categories statement after the return, refreshed all three citation quotes, and made the exact-functor existence condition explicit in step 3. In rechecking C4, removed the unnecessary same-lower-bound assertion and wrote out the elementary truncation that realizes a cohomologically bounded-below object by a bounded-below complex.",
+  "blueprint": "The sole blueprint proof paragraph: steps 1-2 realize right-derived existence and bounded below computation; step 3 realizes item 1; step 4 item 2; step 5 item 3. The K-flat construction/comparison is cited from the existing def-sfb-finite-derived-pullback-iso, rather than silently re-proved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NM-d286c576e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d286c576e (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. The item statement matches the main-20261015 _section.md except for one replacement: [sk-def-sfb-finite-pushforward-pullback] becomes [def-sfb-finite-lower-star] and [def-sfb-finite-upper-star]. That replacement is correct. No DAG node with the old id exists (in the blueprint it is the topos-level unit, and its realized field is empty), and the two definition nodes define exactly the g_* and g^* on Sh(-_proet,A) that the item uses. The coefficient category is unchanged: Sh(X_proet,A), finite-coefficient layer A. This is not a target node and it has no base-change morphism. Steps 1-5 follow the blueprint's one proof paragraph. Step 1: Sh is Grothendieck by the new node; g_* is a right adjoint, so it is additive; lem-sfb-grothendieck-k-injective supplies K-injective resolutions; the right-derived clause of sk-def-sfb-derived-categories, read in its current statement, then gives Rg_*. Step 2: I recomputed the truncation tau_{>=a}; the step then uses three Mathlib leaves (enough injectives, bounded-below injective resolution, bounded-below injective implies K-injective), and g_*I stays bounded below, so R^+g_* is the restriction of Rg_*. Steps 3-5 cite the five component nodes of this unit for items 1, 2 and 3. Their hypotheses are the item's monoidal hypotheses, and the blueprint proof itself says 'Item k is [...]', so this is not a relabelling. The route is valid: lem-sfb-finite-upper-star-exact belongs to sk-def-sfb-finite-pushforward-pullback, which the unit reaches transitively, and the other off-unit nodes are Mathlib leaves. No tool_uses are needed and no SGA source is cited. tools/review_split.py passes on the snapshot. The new node lem-sfb-proetale-sheaves-grothendieck is statement-only and self-contained, and it is true: on a small site with a complete AB5 A, the plus construction gives an exact sheafification, and the sheafified a(h_U tensor G) give a generator. I tested it on the empty scheme and on A=0. It is smaller than the item and does not restate any clause of it. I searched the DAG for duplicates and found none: lem-weil-pbc-sheaf-tensor-closed needs a monoidal A, and the other candidates concern Ab, module sheaves or diagrams. The Mathlib candidate is correctly recorded as conditional: Sheaf.lean:72-85 requires HasSheafify, and Mathlib has no such instance for arbitrary Grothendieck A."
+ }
 }

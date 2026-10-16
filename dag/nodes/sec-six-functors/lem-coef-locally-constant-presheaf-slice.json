@@ -27,9 +27,139 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-presheaf-localization-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_x=N(C/x)$ over $NC$. Degreewise co-Yoneda gives $\\int^{x\\in C}h_x\\times F(x)\\cong F$: the pair $(a:y\\to x,z\\in F(x)_n)$ goes to $F(a)z$, with inverse represented by $(1_y,z)$. Likewise $\\int^x A_x\\times F(x)$ has degree-$n$ representatives $(c_0\\to\\cdots\\to c_n\\to x,z)$, identified with $(c_0\\to\\cdots\\to c_n,F(c_n\\to x)z)$. This is exactly $\\mathcal N_C(F)$ with the stated operators. The coend universal property gives the enriched adjunction with $\\mathcal S_C(T)(x)=\\underline{\\operatorname{Map}}_{/NC}(A_x,T)$, in each simplicial degree as well as on vertices. In particular $\\mathcal N_C(h_x)=A_x$ and $\\mathcal N_C(F\\times K)=\\mathcal N_C(F)\\times K$. Enriched Yoneda is explicit: a natural map $h_y\\times\\Delta^n\\to F$ is determined by its value on $1_y$, giving the isomorphism $\\underline{\\operatorname{Map}}(h_y,F)\\cong F(y)$. The inverse sends $(a:z\\to y,t)$ to $F(a)(s(t))$ for the selected simplex $s:\\Delta^n\\to F(y)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "By [lem-coef-model-over-structure] and [lem-coef-kan-quillen-right-proper], $\\mathsf{sSet}/NC$ has the stated slice model structure, including when $NC$ is not Kan, and every object of this slice is cofibrant. It is simplicial with the mapping objects in the statement: a lifting problem for a mapping-object map against a boundary or horn is adjoint to the corresponding pushout-product lifting problem for the underlying cofibration and fibration in $\\mathsf{sSet}$. The Cartesian simplicial-model axiom for $\\mathsf{sSet}$ in [lem-coef-simplicial-presheaf-projective-model] supplies the lift, also in the slice since the original square is over $NC$. The projective generating maps from that same node are carried by $\\mathcal N_C$ to $A_x\\times\\partial\\Delta^n\\to A_x\\times\\Delta^n$ and $A_x\\times\\Lambda_i^n\\to A_x\\times\\Delta^n$. They are respectively cofibrations and trivial cofibrations by the Cartesian simplicial-model axiom. The coend formula preserves colimits and retracts, so $\\mathcal N_C\\dashv\\mathcal S_C$ is projectively Quillen. The maps $\\varnothing\\to h_x$ are generating cofibrations, so each $h_x$ is projectively cofibrant.",
+   "uses": [
+    "lem-coef-model-over-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "The object $1_x$ is terminal in $C/x$. The unique arrows to it give a natural transformation from the identity to the constant functor at $1_x$. By [lem-coef-nerve-natural-homotopy-equivalence], $A_x$ is contractible, and $\\{x\\}\\to A_x$ is a weak equivalence and a monomorphism over $NC$. Every arrow $a:x\\to x'$ induces a weak equivalence $A_x\\to A_{x'}$, since both spaces are contractible. For a fibrant slice object $T\\to NC$, the mapping-space formula of [lem-coef-simplicial-model-nerve-localization] therefore shows that $\\mathcal S_C(T)(x)$ is Kan and that $\\mathcal S_C(T)(x')\\to\\mathcal S_C(T)(x)$ is a weak equivalence. Moreover restriction along $\\{x\\}\\to A_x$ is a trivial Kan fibration $\\mathcal S_C(T)(x)\\to T_x$ by the slice simplicial-model axiom of step 2. Thus $\\mathcal S_C(T)$ is local fibrant. Here is the precise localization fibrancy check. Factor each representable arrow $h_x\\to h_{x'}$ in the projective model as a cofibration $i_a:h_x\\to M_a$ followed by a trivial fibration $M_a\\to h_{x'}$. Both endpoints of $i_a$ are cofibrant. By the mapping-space formula of [lem-coef-simplicial-model-nerve-localization], the derived local tests for $i_a$ and the original representable arrow agree. The small family of $i_a$ therefore has the same local objects and local equivalences as the family in the statement. Apply [lem-coef-simplicial-bousfield-model-structure] to this family in the left proper combinatorial simplicial projective model of step 2. It supplies the localized simplicial model with unchanged cofibrations and precisely the original fibrant local objects. Its weak equivalences are the prescribed local equivalences, so it is the model $P_{\\mathrm{lc}}(C)$ in the statement. By the enriched Yoneda calculation in step 1, its fibrant objects are exactly the objectwise Kan presheaves inverting all arrows. In particular the presheaves $\\mathcal S_C(T)$ just constructed are localized fibrant.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-bousfield-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "The localization leaves the projective cofibrations unchanged by the application of [lem-coef-simplicial-bousfield-model-structure] in step 3. The class of projectively fibrant local objects is closed under objectwise weak equivalences between projectively fibrant objects: the defining derived mapping-space tests are invariant under such weak equivalences by [lem-coef-simplicial-model-nerve-localization]. Let $i:F\\to G$ be a cofibration and a local equivalence. For every fibrant slice object $T$, step 3 makes $\\mathcal S_C(T)$ fibrant local. By [lem-coef-cofibration-local-mapping-test], $\\underline{\\operatorname{Map}}(i,\\mathcal S_C(T))$ is a trivial Kan fibration, without any cofibrancy assumption on $F,G$. By step 1 this equals $\\underline{\\operatorname{Map}}_{/NC}(\\mathcal N_C(i),T)$. All slice objects are cofibrant, so by [lem-coef-simplicial-model-nerve-localization] these are the derived mapping-space tests of $\\mathcal N_C(i)$. On components they show that precomposition by $\\mathcal N_C(i)$ gives bijections of Hom sets into every object of the slice homotopy category (each has a fibrant representative). Write $f=q\\mathcal N_C(i):X\\to Y$ in that homotopy category. Surjectivity of $f^*:\\operatorname{Hom}(Y,X)\\to\\operatorname{Hom}(X,X)$ gives $g:Y\\to X$ with $gf=1_X$. Since $(fg)f=f=1_Yf$, injectivity of $f^*:\\operatorname{Hom}(Y,Y)\\to\\operatorname{Hom}(X,Y)$ gives $fg=1_Y$. Thus $f$ is invertible. By [lem-coef-model-localization-detects-weak-equivalences], $\\mathcal N_C(i)$ is a weak equivalence. It is already a cofibration by step 2. Hence the given simplicial adjunction is Quillen for the localized model as well.",
+   "uses": [
+    "lem-coef-cofibration-local-mapping-test",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-simplicial-bousfield-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "Here is the homotopy-fiber argument left implicit in HAGII. For an arrow-inverting presheaf $F$ form the simplicial diagram of spaces $E_n=\\coprod_{c_0\\to\\cdots\\to c_n}qF(c_n)$ and the discrete simplicial diagram $B_n=\\coprod_{c_0\\to\\cdots\\to c_n}*$. These disjoint unions agree with the images under $q$ of the disjoint unions of simplicial sets: all simplicial sets are cofibrant, and enriched maps from a disjoint union into a Kan complex form the product of the individual mapping Kan complexes. The mapping-space formula of [lem-coef-simplicial-model-nerve-localization] therefore verifies the coherent coproduct universal property directly. For a monotone map $\\alpha:[m]\\to[n]$, the fiber over a string in $B_n$ of the naturality square is the map $qF(c_n)\\to qF(c_{\\alpha(m)})$ induced by the composite $c_{\\alpha(m)}\\to c_n$. It is an equivalence, so this square is a pullback of spaces: both sides decompose over that discrete indexing set. By [lem-coef-space-geometric-descent], $E_0\\to|E_\\bullet|$ over $B_0\\to|B_\\bullet|$ is a pullback square. By [lem-coef-bisimplicial-diagonal-space-colimit], the two realizations, with these maps, are $q\\mathcal N_C(F)$ and $qNC$. Pulling the square back along $\\{x\\}\\to B_0$ therefore identifies the canonical map from $qF(x)$ to the homotopy fiber of $q\\mathcal N_C(F)\\to qNC$ at $x$ as an equivalence. This is a statement about that canonical inclusion, not an unspecified equivalence of spaces. No assumption that $NC$ is Kan has been made.",
+   "uses": [
+    "lem-coef-space-geometric-descent",
+    "lem-coef-bisimplicial-diagonal-space-colimit",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 6.1.3.9(4) and Corollary A.2.9.30 / Example A.2.9.31; explicit application to the simplicial replacement in HAGII Appendix A, Proposition A.0.3."
+   }
+  },
+  {
+   "text": "We spell out the comparison with strict fibers even over the possibly non-Kan base $B=NC$. If $T\\to B$ is a Kan fibration, choose a trivial cofibration $B\\to RB$ with $RB$ Kan and factor $T\\to RB$ as a weak equivalence $T\\to\\widehat T$ followed by a fibration. Then $\\widehat T$ is Kan. By right properness in [lem-coef-kan-quillen-right-proper], $B\\times_{RB}\\widehat T\\to\\widehat T$ is a weak equivalence. Hence $T\\to B\\times_{RB}\\widehat T$ is a weak equivalence between Kan fibrations over $B$. By [lem-coef-kan-fibration-arbitrary-base-fibers], its strict-fiber maps are weak equivalences. Since $RB$ and $\\widehat T$ are Kan, the homotopy-pullback clause of [lem-coef-kan-quillen-right-proper] identifies $\\widehat T_x$ with the homotopy fiber of $qT\\to qB$ at $x$. Consequently $T_x$ computes that homotopy fiber, naturally in $T$ and with the map from any object mapping into $T$ over $B$. Functorial factorizations make all the squares used here natural. This justifies applying the conclusion of step 5 to a slice fibrant replacement of $\\mathcal N_C(F)$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-fibration-arbitrary-base-fibers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "For an objectwise weak equivalence $F\\to G$, apply [lem-coef-bisimplicial-diagonal-equivalence] to the bisimplicial sets $\\coprod_{c_0\\to\\cdots\\to c_n}F(c_n)_m$ and its analogue for $G$. In each fixed $n$ the map is a coproduct of weak equivalences, hence a weak equivalence: its realization is a disjoint union, so the component and based homotopy-group conditions are checked on each summand. Thus $\\mathcal N_C(F)\\to\\mathcal N_C(G)$ is a weak equivalence. In particular for a local fibrant $F$ and projective cofibrant replacement $QF\\to F$, the maps $\\mathcal N_C(QF)\\to\\mathcal N_C(F)$ are weak equivalences. So $\\mathbf L\\mathcal N_C(F)$ is represented by $\\mathcal N_C(F)$ itself. Choose a slice fibrant replacement $\\mathcal N_C(F)\\to T$. By [lem-coef-model-infinity-derived-adjunction], the derived unit is computed by $QF\\to\\mathcal S_C(T)$, adjoint to $\\mathcal N_C(QF)\\to\\mathcal N_C(F)\\to T$, after inverting $QF\\to F$. Define $u_F:F\\to\\mathcal S_C(T)$ to be adjoint to $\\mathcal N_C(F)\\to T$. Naturality of the ordinary adjunction says exactly that the preceding map from $QF$ is $u_F\\circ(QF\\to F)$. Hence $u_F$ represents the derived unit without requiring $F$ to be projectively cofibrant. Its value at $x$, followed by the restriction $\\mathcal S_C(T)(x)\\to T_x$ of step 3, is precisely the canonical map $F(x)\\to T_x$: in degree $n$, the unit sends $z\\in F(x)_n$ to the map on $A_x\\times\\Delta^n$ whose value on a chain ending in $c\\to x$ is $F(c\\to x)z$ with the matching simplicial restriction. Restricting to the identity chain gives $z$ itself. Steps 5 and 6 say that this map to $T_x$ is a weak equivalence; step 3 says the restriction from $\\mathcal S_C(T)(x)$ is a weak equivalence. Thus the derived unit is objectwise a weak equivalence, hence is an equivalence in the localized model. Every object has a local fibrant replacement, so the derived unit is an equivalence everywhere.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "The right derived functor is conservative. Represent a map in the slice homotopy category by a map $u:T\\to T'$ between fibrant slice objects; such representatives exist after cofibrant and fibrant replacement by [lem-coef-simplicial-model-nerve-localization], and all slice objects are cofibrant. If $\\mathbf R\\mathcal S_C(u)$ is an equivalence, mapping out of the cofibrant $h_x$ in the localized model and using step 1 shows $\\mathcal S_C(u)(x)$ is an equivalence for every $x$. The restriction weak equivalences of step 3 identify these maps with $u_x:T_x\\to T'_x$. By [lem-coef-kan-fibration-arbitrary-base-fibers], $u$ is a weak equivalence over $NC$. Apply [lem-coef-model-infinity-derived-adjunction] to the Quillen adjunction from step 4. Its triangle identity gives $\\mathbf R\\mathcal S_C(\\epsilon_T)\\circ\\eta_{\\mathbf R\\mathcal S_C(T)}\\simeq1$. The unit is an equivalence by step 7, so conservativity makes the counit an equivalence. Therefore the derived adjunction is an equivalence, which proves the Quillen equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-fibration-arbitrary-base-fibers",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  },
+  {
+   "text": "Each $h_y$ is cofibrant (step 2), each localized fibrant $F$ is fibrant in the simplicial localized model, and $\\mathcal N_C(h_x)=N(C/x)$ (step 1). The mapping-space formula of [lem-coef-simplicial-model-nerve-localization], the derived adjunction of [lem-coef-model-infinity-derived-adjunction], and the unit equivalences of step 7 give\n$$\\operatorname{Map}^h(h_y,h_x)\\simeq\\operatorname{Map}^h_{/NC}(N(C/y),N(C/x)).$$\nThe same mapping-space formula and the explicit enriched Yoneda isomorphism of step 1 give $\\operatorname{Map}^h(h_y,F)\\simeq F(y)$. These are the comparisons induced by the displayed enriched adjunction: step 1 computes them on actual representable maps, while the two cited nodes give coherent naturality and compatibility with composition. Inserting the derived unit and counit therefore carries identity maps to identity maps and composition to composition with its specified homotopies. This proves every comparison and its coherence clause.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+    "place": "Appendix A, proof of Proposition A.0.3, printed pp. 207-208 (PDF pages 214-215)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-bisimplicial-diagonal-space-colimit",
+  "lem-coef-cofibration-local-mapping-test",
+  "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-over-structure",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-simplicial-bousfield-model-structure",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-space-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://perso.math.univ-toulouse.fr/btoen/files/2012/04/HAGII.pdf",
+  "place": "Appendix A, Proposition A.0.3 and proof, pp. 207-208; expanded with HTT geometric descent and bisimplicial realization, explicit coend/Yoneda and localization arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -107,10 +237,45 @@
    "results": "{\"t\": \"2026-10-16T16:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a model category, derived Yoneda on the subcategory of weak equivalences is a local fibrant replacement of the ordinary representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"0deba91b8284c1b1\"}",
    "date": "2026-10-16",
    "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:45-100 and ModelCategory/CofibrantObjectHomotopy.lean:25-120. These construct ordinary nerves and localizer morphisms/homotopy-category equivalences, not a simplicial-presheaf slice Quillen equivalence or a fibrant local replacement of weak-equivalence representables."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left Bousfield localization of simplicial presheaves inverting all category arrows is Quillen equivalent to simplicial sets over the nerve",
+   "results": "{\"t\": \"2026-10-16T18:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"A left Bousfield localization of simplicial presheaves inverting all category arrows is Quillen equivalent to simplicial sets over the nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Nerve.cosk₂Iso\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"7b39f1989048ea1c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction), Localization/Bousfield.lean:13-55 (ordinary Hom-bijection tests), and SingularSet.lean:14-37,76-82 (ordinary geometric realization). The Kan fibrations hits state horn lifting, not the locally constant simplicial-presheaf/slice Quillen equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy invariant contravariant diagrams of Kan complexes on a category are modeled by Kan fibrations over the category nerve",
+   "results": "{\"t\": \"2026-10-16T18:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy invariant contravariant diagrams of Kan complexes on a category are modeled by Kan fibrations over the category nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.nerve.functorOfNerveMap\"], \"digest\": \"5744f359e33ff4a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction), Localization/Bousfield.lean:13-55 (ordinary Hom-bijection tests), and SingularSet.lean:14-37,76-82 (ordinary geometric realization). The Kan fibrations hits state horn lifting, not the locally constant simplicial-presheaf/slice Quillen equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Presheaf\", \"Quillen\"",
+   "results": "{\"t\": \"2026-10-16T18:31:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Presheaf\\\", \\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction), Localization/Bousfield.lean:13-55 (ordinary Hom-bijection tests), and SingularSet.lean:14-37,76-82 (ordinary geometric realization). The Kan fibrations hits state horn lifting, not the locally constant simplicial-presheaf/slice Quillen equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*SSet|[Ss]implicial.*[Pp]resheaf|Bousfield",
+   "results": "{\"t\": \"2026-10-16T18:31:26Z\", \"tool\": \"grep\", \"query\": \"locallyConstant.*SSet|[Ss]implicial.*[Pp]resheaf|Bousfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"5b080f0e1d786c96\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction), Localization/Bousfield.lean:13-55 (ordinary Hom-bijection tests), and SingularSet.lean:14-37,76-82 (ordinary geometric realization). The Kan fibrations hits state horn lifting, not the locally constant simplicial-presheaf/slice Quillen equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy locally constant presheaves of spaces correspond to spaces over the category nerve",
+   "results": "{\"t\": \"2026-10-16T18:31:26Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy locally constant presheaves of spaces correspond to spaces over the category nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.const\", \"CompHausLike.LocallyConstant.functor_map_val\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"Condensed.locallyConstantPresheaf\", \"CondensedSet.LocallyConstant.iso\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstant.functorToPresheaves_map_app\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\"], \"digest\": \"7eac4f1fcebe9ee0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction), Localization/Bousfield.lean:13-55 (ordinary Hom-bijection tests), and SingularSet.lean:14-37,76-82 (ordinary geometric realization). The Kan fibrations hits state horn lifting, not the locally constant simplicial-presheaf/slice Quillen equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-weak-equivalence-nerve",
@@ -118,5 +283,20 @@
   "group": "NG"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-locally-constant-presheaf-slice",
+  "worker": "stage1",
+  "summary": "Expanded the coend adjunction, projective and local Quillen checks, derived unit and conservativity, and coherent mapping comparisons. Reused geometric descent to prove the bar-construction fiber formula. Added only a general bisimplicial realization bridge, the non-Kan-base fiber criterion, and the Mathlib over-model leaf. The statement is unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, enhanced mapping-complex adjunction, through the inherited weak-equivalence-nerve branch; expands HAGII A.0.3 rather than assuming it."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-342b0ca17",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-342b0ca17 (reviewer sub-agent of L); spot-checked: I read every step, every new node and every cited node's statement in full. The math is sound; the only faults are three small record errors in the new Mathlib leaf. Sources read: HAGII Appendix A setup, the definitions of N and S, and A.0.3 with its proof (fetched PDF, printed pp. 207-208; the page citation is correct); HTT A.2.9.21, A.2.9.29, A.2.9.30 with proof, and A.2.9.31 (printed pp. 844-850); Kerodon 00ZN; and the pinned Mathlib files Over.lean:1-147, ModelCategory/Basic.lean:49-66, Limits/Constructions/Over/Basic.lean:45-49, Limits/Over.lean:48 and MorphismProperty/Comma.lean:844-856. Item statement: unchanged and faithful to A.0.3. The proof never uses C inside M_W, so the generalization to any small C is legitimate. The last face restricts along c_{n-1}->c_n as it must for a contravariant F. The fibrant objects are correctly the objectwise-Kan, arrow-inverting presheaves. Edge cases checked: C empty, [0], discrete, and [1] (a non-Kan nerve). Steps 1-9: each cited statement says what the step takes from it. Step 1: co-Yoneda in each degree and the adjunction were checked by hand. Step 2: lifts in the slice come from the Cartesian pushout-product axiom, and h_x is cofibrant because empty->h_x is the n=0 generating cofibration. Step 3: the Bousfield node is applied to cofibrations factored to have cofibrant endpoints, as its hypotheses require. Step 4: the class of local fibrant objects is shown closed under weak equivalences, as the mapping-test node requires, and the Yoneda inverse argument is correct. Step 5: the Cartesian-naturality clause is checked on F(c_n)->F(c_alpha(m)); the coend cocone Z_0->diag Z is the strict-fiber inclusion, so the equivalence is the canonical map. Step 6: right properness, two-out-of-three, the new fiber criterion, then the Kan homotopy-pullback clause; the elementary flag is acceptable. Step 7: the replacement triangle identifies the derived unit, and evaluation at the identity chain gives the canonical map. Step 8: conservativity uses the converse direction of the fiber criterion, then a triangle identity. Step 9: correct. Route: every cited statement is in unit sk-prop-sf-biduality-general apart from one definition; no tool_uses. No cycle. New node lem-coef-bisimplicial-diagonal-space-colimit: true by HTT A.2.9.21/30/31, since every bisimplicial set is Reedy cofibrant so gamma is an iso. It does not duplicate bisimplicial-diagonal-equivalence, bousfield-kan-comparison-calculus or model-colimit-localization-comparison: none gives the coherent colimit cocone. New node lem-coef-kan-fibration-arbitrary-base-fibers: Kerodon 00ZN with v the identity and no Kan hypotheses. It does not duplicate spaces-homotopy-fiber-detection, which requires all objects Kan, nor kan-fibration-fiber-criterion, which tests a single fibration. Both new nodes are statement-only, self-contained and searched. New node lem-coef-model-over-structure: ModelCategory.over and the three class lemmas are confirmed at the stated lines. Faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-model-over-structure.json: (B6) mathlib_match.file lacked its Mathlib/ prefix. (B8) the how field did not cover the completeness, cocompleteness and functorial-factorization clauses that the node's model-category notion includes beyond Mathlib's ModelCategory; it now cites Over.hasLimits, the HasColimits instance at Limits/Over.lean:48 and HasFactorization.over, each a one-line supply. (B7) the first leanfinder search was recorded as a match although its logged hits do not include ModelCategory.over; it is now no match, and the leaf rests on the loogle, grep and second leanfinder hits. No statement changed and no node dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

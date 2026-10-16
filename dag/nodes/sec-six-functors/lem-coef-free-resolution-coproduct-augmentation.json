@@ -1,0 +1,105 @@
+{
+ "id": "lem-coef-free-resolution-coproduct-augmentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: mapping-space foundation reached through the finite-adjunction-diagram and cosimplicial-frame comparisons; cofibrant inversion input to the hammock-localization comparison. Technical input: the augmentation comparison in Dwyer--Kan Proposition 2.7(iii), used to remove the degreewise-free-factor restriction.",
+   "via": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free-category resolution augmentation after adjoining an ordinary category",
+ "statement": "Let $O$ be a small set and let $A,C$ be small ordinary categories [def-nagata-category] with object set $O$. All functors considered below fix $O$. For categories on $O$, write $D*_O E$ for their coproduct among categories with object set $O$ and functors fixing $O$: its arrows are composable words of arrows from the two factors, modulo the composition and identity relations within each factor. Let $F$ be the free-category comonad on these categories. The category $FD$ has object set $O$ and one graph generator $[d]:x\\to y$ for every nonidentity arrow $d:x\\to y$ of $D$; its arrows are finite composable words of generators, including empty words as identities. For a functor $u:D\\to E$, the functor $Fu:FD\\to FE$ sends $[d]$ to $[u(d)]$ if $u(d)$ is nonidentity and to the identity otherwise. The counit $\\epsilon_D:FD\\to D$ composes a word; the comultiplication $\\delta_D:FD\\to F^2D$ sends $[d]$ to $[[d]]$. Define the augmented simplicial category $F_\\bullet C\\to C$ by $(F_\\bullet C)_n=F^{n+1}C$, faces $d_i=F^i\\epsilon F^{n-i}$ and degeneracies $s_i=F^i\\delta F^{n-i}$ for $0\\leq i\\leq n$. Regard $A$ and $A*_O C$ as constant simplicial categories, and set $R_n=A*_O F^{n+1}C$, with operators identity on $A$ and the indicated operators on the other factor. For every $x,y\\in O$, composition of the nested words induces a weak homotopy equivalence of simplicial sets [def-weil-pbc-simplicial-set], [lem-coef-kan-quillen-right-proper]\n$$R_\\bullet(x,y)\\longrightarrow\\operatorname{const}\\bigl((A*_O C)(x,y)\\bigr).$$\nThere is no freeness or cofibrancy hypothesis on $A$ or $C$.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Dwyer--Kan, Simplicial localizations of categories, Section 2.4 (free-category comonad), Section 2.5 (standard resolution), Proposition 2.6, and proof of Proposition 2.7(iii), printed pp.270-271, specialized to constant A and C. Read online, not archived locally. No Stacks tag states this enriched-category resolution comparison."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cotriple|comonad.*resolution|free.*categor.*resolution|resolution.*free.*categor",
+   "results": "{\"t\": \"2026-10-16T18:31:55Z\", \"tool\": \"grep\", \"query\": \"cotriple|comonad.*resolution|free.*categor.*resolution|resolution.*free.*categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"resolution\"",
+   "results": "{\"t\": \"2026-10-16T18:31:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"resolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cotriple free category resolution augmentation is a weak homotopy equivalence after coproduct with a fixed category",
+   "results": "{\"t\": \"2026-10-16T18:31:56Z\", \"tool\": \"leansearch\", \"query\": \"The cotriple free category resolution augmentation is a weak homotopy equivalence after coproduct with a fixed category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.augment\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"CategoryTheory.CosimplicialObject.Augmented\", \"CategoryTheory.CosimplicialObject.instCategoryAugmented\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"df4fe27cd7362699\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories on a fixed object set the augmented free simplicial resolution of one factor remains a weak equivalence after free product with an arbitrary constant category",
+   "results": "{\"t\": \"2026-10-16T18:32:07Z\", \"tool\": \"leanfinder\", \"query\": \"For categories on a fixed object set the augmented free simplicial resolution of one factor remains a weak equivalence after free product with an arbitrary constant category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\"], \"digest\": \"d185f575f659db52\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation from a cotriple resolution in categories to the resolved category is homotopically invariant under adjoining a fixed category by coproduct",
+   "results": "{\"t\": \"2026-10-16T18:32:26Z\", \"tool\": \"leanfinder\", \"query\": \"The augmentation from a cotriple resolution in categories to the resolved category is homotopically invariant under adjoining a fixed category by coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans_app\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\"], \"digest\": \"79b0aca052ef2f08\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "grep",
+   "query": "Comonad.*(simplicial|resolution)|extraDegeneracy|ExtraDegeneracy|SimplicialObject.*(contract|augment)",
+   "results": "{\"t\": \"2026-10-16T18:56:51Z\", \"tool\": \"grep\", \"query\": \"Comonad.*(simplicial|resolution)|extraDegeneracy|ExtraDegeneracy|SimplicialObject.*(contract|augment)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"8991abe5cd47e2a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ExtraDegeneracy.lean lines 122-151, 158-224 and 407-438. These supply a section/homotopy only after an extra degeneracy has been constructed (and homotopyEquiv is for preadditive chain complexes); none constructs the relative free-category resolution or its mappingwise augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The standard simplicial resolution associated to the free category comonad is a local weak equivalence under coproduct with a discrete category",
+   "results": "{\"t\": \"2026-10-16T18:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"The standard simplicial resolution associated to the free category comonad is a local weak equivalence under coproduct with a discrete category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsConnectedLeftResolutionWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"3bc9cfbb4dd9b2bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations are abstract model-category cofibrant replacements and localization results; none states the specified free-category comonad augmentation after adjoining an arbitrary ordinary category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject.Augmented.ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-16T18:57:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject.Augmented.ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.section_\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\"], \"digest\": \"b676cbbaf9d29122\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ExtraDegeneracy.lean lines 122-151, 158-224 and 407-438. These supply a section/homotopy only after an extra degeneracy has been constructed (and homotopyEquiv is for preadditive chain complexes); none constructs the relative free-category resolution or its mappingwise augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-fixed-object-simplicial-free-calculus",
+  "date": "2026-10-17",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

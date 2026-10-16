@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-sf-pf-adic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open direct image and projection formula",
@@ -31,33 +31,180 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-sf-operations"
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "The first assertion is the integral case of [sk-prop-open-coefficients]. In\ndetail: $Rj_*K$ is derived complete by Stacks, Tag 099L, and\n\n$$\n(Rj_*K)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathbf F_{E,X}\n\\simeq Rj_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,U}}\\mathbf F_{E,U})\n$$\n\nin $D(X_{\\mathrm{proét}},\\mathcal O_E)$, where $\\mathbf F_E=\\mathcal O_E/\\pi_E$\nis the residue field, because reduction is a cone. The right side is bounded\nconstructible by [sk-cor-geo-open-finiteness], which applies to $\\mathbf F_E$\nsince it is a finite free extension of $\\mathbf F_\\ell$, and the residue\ncriterion (Stacks, Tag 09C1) gives $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the standing scheme and coefficient conventions of [sk-def-sfb-dc-setting] and [sk-def-localizing-closure], with $\\Lambda=\\mathcal O_E$. In particular the schemes are separated of finite type over the standing field of characteristic different from $\\ell$, hence qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their structure maps to $\\operatorname{Spec}k$. Clause (2) of [det-def-localizing-closure-ctf-equals-bc], specialized to $\\mathcal O_E$, identifies $\\Dctf(T,\\mathcal O_E)=\\Dbc(T,\\mathcal O_E)$ and their localizing closures, for each scheme $T$ under consideration. We use these identifications throughout the following steps; they do not identify the localizing closure with the derived-complete subcategory.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-localizing-closure",
+    "lem-weil-pbc-qcqs-over-affine",
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Clause (2), integral coefficient specialization"
+   }
   },
   {
-   "text": "Proper base change on $\\Loc(\\Dctf(-,\\mathcal O_E))$ is the integral case of\n[sk-prop-proper-base-change-unbounded], using the estimates of\n[sk-prop-int-compactness]. For the projection formula, let $p$ be proper,\n$K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$. Both sides of\n\n$$\nRp_*K\\otimes^{\\mathbf L}L\\longrightarrow Rp_*(K\\otimes^{\\mathbf L}p^*L)\n\\quad\\text{in }D(Y_{\\mathrm{proét}},\\mathcal O_E)\n$$\n\nare derived complete, by [sk-lem-int-tensor] and proper\nfiniteness. Its reduction modulo $\\pi_E$ is the torsion projection formula map\nin $D(Y_{\\mathrm{proét}},\\mathbf F_E)$, an isomorphism by Stacks, Tag 0F0G. The\ncone is derived complete with zero reduction modulo $\\pi_E$, so it vanishes by\nderived Nakayama (Stacks, Tag 099I). The categories $\\Loc(\\Dbc(-,\\mathcal O_E))$\nare closed under $\\otimes^{\\mathbf L}$ by [sk-lem-int-tensor]\nand the two-variable localizing argument, and $Rp_*$ preserves direct sums\nthere, so the localizing argument of [sk-thm-sf-pf-field] extends the\nprojection formula to all of $\\Loc(\\Dbc(-,\\mathcal O_E))$.",
+   "text": "Let $j:U\\hookrightarrow X$ be quasi-compact open and let $K\\in\\Dctf(U,\\mathcal O_E)$. Check the explicit hypotheses of the current statement of [det-thm-sf-pf-adic-open]: by step 1, $U$ and $X$ are separated finite-type schemes over the same field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and $E/\\mathbf Q_\\ell$ is finite with ring of integers $\\mathcal O_E$. Its coefficient sheaves $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}$, for $T=U,X$, are precisely the pulled-back condensed coefficient sheaves used here, and its derived direct image and tensor are the module-object operations of the item. Step 1 identifies the input as $K\\in\\Dbc(U,\\mathcal O_E)$. The final conclusion of that cited statement now gives $Rj_*K\\in\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$, proving the first assertion. No unrestricted open-direct-image theorem for arbitrary schemes or discrete constant non-torsion coefficients is used.",
    "uses": [
-    "sk-lem-int-tensor"
+    "det-thm-sf-pf-adic-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.md",
+    "place": "Current DAG statement (reviewed Q28), explicit standing-setting and pulled-back-coefficient hypotheses and final conclusion; blueprint statement and Conclusion paragraph"
+   }
+  },
+  {
+   "text": "Fix a cartesian square with $p:X\\to Y$ proper and projections $g:Y'\\to Y$, $p':X'\\to Y'$, $g':X'\\to X$. The statement of [det-thm-sf-pf-adic-base-change] gives the canonical base change map $g^*Rp_*K\\to Rp'_*g'^*K$ as an isomorphism between objects of $\\Loc(\\Dbc(Y',\\mathcal O_E))$ for every $K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$. Step 1 converts both source and target categories to the claimed $\\Loc(\\Dctf)$ categories. We also record a specialization needed below: taking $g=\\mathrm{id}_Y$ and $g'=\\mathrm{id}_X$ in this statement shows that $Rp_*K$ belongs to $\\Loc(\\Dbc(Y,\\mathcal O_E))$; inverse image along the identity is the identity, so the functor typing in that statement gives precisely this membership.",
+   "uses": [
+    "det-thm-sf-pf-adic-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-base-change.md",
+    "place": "Statement, including its functor codomain; identity-square specialization"
+   }
+  },
+  {
+   "text": "Let $K\\in\\Loc(\\Dctf(X,\\mathcal O_E))$ and $L\\in\\Loc(\\Dctf(Y,\\mathcal O_E))$, with $p:X\\to Y$ proper. Convert these memberships using step 1. Clause (2) of [det-thm-sf-pf-adic-projection] states both tensor closure of $\\Loc(\\Dbc(-,\\mathcal O_E))$ and invertibility of the proper projection formula map $Rp_*K\\otimes^{\\mathbf L}_{\\mathcal O_{E,Y}}L\\to Rp_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}p^*L)$ in the ambient derived category. Its source belongs to $\\Loc(\\Dbc(Y,\\mathcal O_E))$: step 3 places $Rp_*K$ there, and tensor closure then applies to $Rp_*K$ and $L$. Its target belongs there as well, because this full subcategory is replete by [sk-def-localizing-closure] and is isomorphic to the source. Fullness also puts the inverse in the same subcategory. Thus this very map is an isomorphism in $\\Loc(\\Dctf(Y,\\mathcal O_E))$, as asserted. All tensors here are ordinary relative derived tensors in the ambient module-object category; no completion is applied to the localizing closure.",
+   "uses": [
+    "det-thm-sf-pf-adic-projection",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-projection.md",
+    "place": "Clause (2), with codomain verification from the identity-square case of the preceding step"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-int-tensor"
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-qcqs-over-affine",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-thm-sf-pf-adic-open",
+  "det-thm-sf-pf-adic-base-change",
+  "det-thm-sf-pf-adic-projection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Assembly using the three existing detail statements in the same main-20261015 unit; explicit Dctf/Dbc conversion and localizing codomain verification"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Sheaf, IsIso",
+   "results": "0 hits: . loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-17",
+   "verdict": "invalid identifier query; no absence conclusion from this query; followed by name-substring queries"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|proetale|pro.etale|[Pp]rojection[Ff]ormula",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral l-adic constructible complexes on pro-etale sites, quasi-compact open direct image preserves constructibility and proper base change and projection formula hold on their localizing closure.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper projection formula and base change for derived constructible l-adic sheaves on the pro-etale topology",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange, Algebra.Etale.baseChange, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.smallEtalePretopology, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|derived|baseChange|projection",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward of a quasi compact open immersion preserves bounded constructible integral l-adic complexes, and proper pushforward satisfies the projection formula.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full integral pro-etale theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "HasProjectionFormula|derivedCompleteIntegral|boundedConstructibleBaseChange|LocallyNoetherian.*QuasiCompact",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No match for the item under this independent terminology search."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMap\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No match for the item under this independent terminology search."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived direct image functor on sheaves of modules satisfies the proper projection formula for integral adic coefficients and preserves constructibility along open immersions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforward, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-17",
+   "verdict": "No match: the semantic hits concern underived structure-sheaf pushforward, ordinary sheaf-of-modules adjunctions, or light condensed monoidal structures; none states the integral pro-etale derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|HasProjectionFormula|boundedConstructibleBaseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No occurrence of these projection-formula or constructible-base-change names in the searched Mathlib sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pushforward\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-17",
+   "verdict": "No match for the full item: returned declarations concern underived (pre)sheaf pushforward or light-condensed monoidal structures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of complexes of module sheaves commutes with derived tensor products, and open immersions preserve bounded constructible adic cohomology",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardComp_hom_app_val_app, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "No match for the full item: returned declarations concern underived (pre)sheaf pushforward or light-condensed monoidal structures."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -88,5 +235,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-pf-adic"
+ "unit": "sk-thm-sf-pf-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-sf-pf-adic",
+  "worker": "stage1",
+  "summary": "Kept the main-20261015 statement verbatim and split its assembly using the existing integral open-image, localizing proper-base-change, and integral proper-projection-formula detail nodes. Cited the integral Dctf=Dbc identification explicitly, used the identity-square specialization of the base-change statement to type proper direct image on the localizing closure, and verified the projection map and its inverse stay in that full replete category. Replaced the obsolete statement dependency on the old six-operations package by the current condensed module-object definitions. No new nodes or Mathlib leaves; no attachment to the old discrete-etale Lean theorem. The stale master unit record is reported and is not falsely realized. Second reading added the existing qcqs-over-affine leaf for the scheme hypothesis and independently repeated semantic, name and source searches. Repair after the landing refusal: re-read the expanded, reviewed statement of det-thm-sf-pf-adic-open against its previous quoted statement; verified its scheme and coefficient hypotheses in step 2 and regenerated the quote from the current DAG. All other cited statements were revalidated and their previous quotes still match.",
+  "blueprint": "Main-20261015 sk-thm-sf-pf-adic.proof.md paragraph 1 is supplied by its existing open-image detail node (step 2). Paragraph 2 is supplied by its base-change and projection detail nodes (steps 3 and 4), retaining their integral reduction and localizing-extension route below this one-level split. Step 1 cites the already imported ctf-equals-bc detail required to translate their categories. The master-era dag/units record has a different statement and cannot faithfully be given realized fields for this current main unit.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Generic identification of integral Dctf with Dbc, needed to use the current unit detail statements; it replaces no proof step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-ctf-equals-bc"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-d81a375ef",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d81a375ef (reviewer sub-agent of L); spot-checked: I read every step of the split, the main-20261015 key node, its proof and the three detail statements and proofs, every cited DAG statement and the Stacks tags table. The item statement matches _section.md word for word. Step 1: the dc-setting plus the qcqs leaf supply the qcqs hypothesis of det-def-localizing-closure-ctf-equals-bc clause 2, giving Dctf=Dbc and Loc(Dctf)=Loc(Dbc) at O_E; I checked this independently (O_E is a DVR, so constructibles have Tor amplitude [-1,0]). Step 2: every hypothesis of the reviewed det-thm-sf-pf-adic-open holds, with the same coefficients p_T^*O_E and the same module-object Rj_*. Step 3: the base-change detail's functor typing Loc(Dbc(X))->Loc(Dbc(Y')), specialised to the identity square, gives Rp_*K in Loc; this is a legitimate reading of the stated codomain. Step 4: clause (2) of the projection detail gives tensor closure, which puts the source in Loc; repleteness puts the isomorphic target there and fullness the inverse. No new nodes. No duplicate of the item in the DAG (det-thm-sf-pf-field-localizing, det-ctf-finite-proper-localizing and thm-sf-pf-adic state other things). No cycle. I accept the declared tool use of the integral ctf=bc identification. No SGA source. Fix: added def-weil-open-immersion to the item's stmt_deps, since 'open immersion' was not reachable through the existing statement dependencies; nothing else changed. Maintainer note: dag/units/sk-thm-sf-pf-adic.json is still the master-era unit and needs a refresh from main-20261015. The imported Stacks pointers 099L, 09C1 and 099I are imprecise but no step uses them.; 1 file(s) fixed by the reviewer"
+ }
 }

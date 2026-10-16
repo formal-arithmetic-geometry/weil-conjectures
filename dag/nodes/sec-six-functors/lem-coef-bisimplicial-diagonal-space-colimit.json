@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-bisimplicial-diagonal-space-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: passage from module resolutions to spaces of finite enhanced adjunction data; classifying spaces of weak equivalences, not only their component sets. Technical presheaf input: Appendix A, Proposition A.0.3 and its proof, printed pp. 207-208 (PDF pp. 214-215); enriched evaluation is the projective simplicial Yoneda formula; Bisimplicial diagonals compute geometric realizations in spaces",
+   "via": [
+    "lem-coef-locally-constant-presheaf-slice",
+    "lem-coef-model-weak-equivalence-nerve",
+    "lem-coef-dgcat-bimodule-mapping-space",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bisimplicial diagonals compute geometric realizations in spaces",
+ "statement": "Use simplicial sets, nerves, spaces and coherent colimits as in [def-cbc-enhanced-diagrams-cones], the Kan model structure of [lem-coef-kan-quillen-right-proper], and the coherent localization $q:\\mathsf{sSet}\\to\\mathcal S$ of [lem-coef-simplicial-model-nerve-localization]. Let $Z:\\Delta^{\\mathrm{op}}\\to\\mathsf{sSet}$ be any small simplicial diagram of simplicial sets. Its diagonal is $(\\operatorname{diag}Z)_n=Z_n{}_n$, with every simplicial operator applied in both variables. There is a natural equivalence\n$$\\operatorname{colim}_{N(\\Delta^{\\mathrm{op}})}q(Z_n)\\simeq q(\\operatorname{diag}Z).$$\nIt identifies the colimit cocone with the coherent cocone furnished by the simplicial coend $\\int^{[n]\\in\\Delta} Z_n\\times\\Delta^n\\cong\\operatorname{diag}Z$. Here the coend in simplicial degree $r$ is the quotient of $\\coprod_{n\\geq0}(Z_n)_r\\times\\operatorname{Hom}_\\Delta([r],[n])$ by $((Z(\\alpha))_r z,t)\\sim(z,\\alpha\\circ t)$ for $\\alpha:[m]\\to[n]$, $z\\in(Z_n)_r$ and $t:[r]\\to[m]$. In particular the map from $q(Z_0)$ is induced by $Z_0\\times\\Delta^0\\to\\operatorname{diag}Z$. Naturality is with respect to all maps of bisimplicial sets and includes these cocones. No Kan condition on the rows and no extra cofibrancy hypothesis are imposed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Example A.2.9.21, Example A.2.9.29, Corollary A.2.9.30 and Example A.2.9.31, printed pp. 844, 849-850; Proposition 4.2.4.4 and Theorem 4.2.4.1 identify model homotopy-colimit cocones with coherent colimit cocones. Read online, not archived in literature/. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a bisimplicial set is the homotopy colimit or geometric realization of its rows as spaces",
+   "results": "{\"t\": \"2026-10-16T18:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of a bisimplicial set is the homotopy colimit or geometric realization of its rows as spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.S1\", \"SSet.ι₁\", \"SSet.toTop\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.SimplicialObject.diagonal\", \"SimplexCategory.toTopObj\", \"SSet.ι₀\", \"SSet.cosk\"], \"digest\": \"568504ca0fc98bb1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are SSet.toTop (SingularSet.lean:76-82), ordinary SSet.hasColimits and SimplicialObject.diagonal (Basic.lean:103, an n-to-1 edge map). None identifies a bisimplicial diagonal with a coherent colimit. Read those source definitions; Loogle has no hits and the grep only finds a diagonal path of a topological homotopy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bisimplicial set geometrically realizes to the homotopy colimit of its rows, naturally in the bisimplicial set",
+   "results": "{\"t\": \"2026-10-16T18:32:14Z\", \"tool\": \"leanfinder\", \"query\": \"A bisimplicial set geometrically realizes to the homotopy colimit of its rows, naturally in the bisimplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.N.toS\", \"SSet.toTop\", \"SSet.hoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.sk\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"23d487c9c35de942\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are SSet.toTop (SingularSet.lean:76-82), ordinary SSet.hasColimits and SimplicialObject.diagonal (Basic.lean:103, an n-to-1 edge map). None identifies a bisimplicial diagonal with a coherent colimit. Read those source definitions; Loogle has no hits and the grep only finds a diagonal path of a topological homotopy."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:31:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are SSet.toTop (SingularSet.lean:76-82), ordinary SSet.hasColimits and SimplicialObject.diagonal (Basic.lean:103, an n-to-1 edge map). None identifies a bisimplicial diagonal with a coherent colimit. Read those source definitions; Loogle has no hits and the grep only finds a diagonal path of a topological homotopy."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|diagonal.*[Hh]omotopy|[Hh]omotopy[Cc]olimit|[Hh]omotopy [Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|diagonal.*[Hh]omotopy|[Hh]omotopy[Cc]olimit|[Hh]omotopy [Cc]olimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\"], \"digest\": \"dd923830a236c947\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are SSet.toTop (SingularSet.lean:76-82), ordinary SSet.hasColimits and SimplicialObject.diagonal (Basic.lean:103, an n-to-1 edge map). None identifies a bisimplicial diagonal with a coherent colimit. Read those source definitions; Loogle has no hits and the grep only finds a diagonal path of a topological homotopy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bisimplicial set its diagonal represents the colimit of the simplicial diagram of spaces",
+   "results": "{\"t\": \"2026-10-16T18:31:47Z\", \"tool\": \"leansearch\", \"query\": \"For a bisimplicial set its diagonal represents the colimit of the simplicial diagram of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.diagonal\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"SSet.hasDimensionLT_of_isColimit\", \"SimplicialObject.Splitting.desc\", \"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.Limits.ColimitPresentation.bind\"], \"digest\": \"2990e1fb94036365\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are SSet.toTop (SingularSet.lean:76-82), ordinary SSet.hasColimits and SimplicialObject.diagonal (Basic.lean:103, an n-to-1 edge map). None identifies a bisimplicial diagonal with a coherent colimit. Read those source definitions; Loogle has no hits and the grep only finds a diagonal path of a topological homotopy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The realization functor on simplicial objects in simplicial sets is the diagonal functor and computes their derived colimit",
+   "results": "{\"t\": \"2026-10-16T19:01:36Z\", \"tool\": \"leanfinder\", \"query\": \"The realization functor on simplicial objects in simplicial sets is the diagonal functor and computes their derived colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.sk\", \"SSet.toTop\", \"SSet.uliftFunctor\", \"SSet.toTopSimplex\", \"SSet.Augmented.stdSimplex\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"28d08500db243db4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SimplicialNerve.lean constructs a nerve and leaves the Kan-complex infinity category among its projects; SingularSet.lean:70-89 constructs the ordinary topological realization adjunction. Neither states the coherent-colimit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|[Hh]omotopy.?[Cc]olimit|[Rr]eedy",
+   "results": "{\"t\": \"2026-10-16T19:02:05Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|[Hh]omotopy.?[Cc]olimit|[Rr]eedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:14-24 defines Reedy structures and explicitly lists the Reedy model structure as TODO; no bisimplicial diagonal-colimit theorem appears."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-locally-constant-presheaf-slice",
+  "date": "2026-10-17",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

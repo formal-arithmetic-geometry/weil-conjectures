@@ -28,9 +28,104 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take sorts $O\\times O$, with a constant $1_x$ in sort $(x,x)$ and a binary composition operation from sorts $(x,y),(y,z)$ to $(x,z)$, imposing precisely associativity and the two unit equations. Form the small finite-product theory whose objects are finite lists of sorts and whose morphisms are tuples of such formal terms modulo these equations. A product-preserving simplicial algebra is exactly a simplicial category with object set $O$: evaluation at $(x,y)$ is its mapping simplicial set and the operations are its identities and compositions. Apply [lem-coef-sorted-simplicial-algebra-model] to this theory. It supplies the model structure, completeness and cocompleteness, functorial factorizations, and boundary-cell generators $F_{xy}(\\partial\\Delta^m)\\to F_{xy}(\\Delta^m)$. Here $F_{xy}(K)$ is explicitly the path category of the simplicial graph $K$ in sort $(x,y)$ and the empty simplicial set in every other sort: specifying a functor out is specifying a map $K\\to B(x,y)$. This remains correct for $x=y$, when paths include all powers of the new loop. Coproducts are degreewise coproducts of ordinary categories: a simplicial cocone out of those degreewise coproducts is, by their universal property, exactly a pair of simplicial functors. The empty object set gives the terminal category of such algebras and the same assertions hold.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Example 3.5; evaluation/free adjunction before Theorem 4.7; Theorem 4.7 and its proof, pp.1937,1942-1943."
+   }
+  },
+  {
+   "text": "In the Bergner structure of [lem-coef-coherent-nerve-comparison], a trivial fibration is exactly a functor surjective on objects and a trivial Kan fibration on every mapping set. Indeed its local maps are trivial Kan fibrations by the definitions; essential surjectivity on $\\pi_0$ and the equivalence-lifting condition give actual surjectivity on objects. Conversely, surjectivity on objects gives essential surjectivity, and the local weak equivalences give bijections on every $\\pi_0$ mapping set. For an isomorphism $v:p(e)\\to d$ in $\\pi_0D$, choose $e^{\\prime}$ with $p(e^{\\prime})=d$. The bijection on mapping sets lifts $v$ and $v^{-1}$ to classes between $e$ and $e^{\\prime}$; injectivity on the two endomorphism sets makes their composites identities. This is the required equivalence lift, and the local maps are already Kan fibrations. Thus a fixed-object local trivial fibration is a Bergner trivial fibration. Every Bergner cofibration fixing $O$ therefore has the fixed-object left lifting property. For the converse let $i:A\\to B$ be a fixed-object cofibration and consider a lifting square against any Bergner trivial fibration $p:E\\to D$, with top $a:A\\to E$ and bottom $b:B\\to D$. Define categories $E_a,D_b$ on $O$ by $E_a(x,y)=E(a x,a y)$ and $D_b(x,y)=D(bx,by)$. They have the restricted compositions and units, even if the object functions are not injective. The induced $E_a\\to D_b$ is a fixed-object local trivial fibration. Lift the square $A\\to E_a$, $B\\to D_b$ by step 1, then compose the lift with $E_a\\to E$. It solves the original square. This proves the equality of the two classes of cofibrations on maps fixing $O$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1; comparison with the Bergner trivial-fibration lifting characterization."
+   }
+  },
+  {
+   "text": "Track a pushout of one boundary generator $F_{xy}(\\partial\\Delta^m)\\to F_{xy}(\\Delta^m)$ along any attaching map into a category $C$. In degree $k$, the new free graph generators are precisely the surjections $\\alpha:[k]\\twoheadrightarrow[m]$, tagged with this cell and endpoints $(x,y)$; all non-surjective simplices lie in the boundary and are identified with their specified arrows of $C_k$. Every arrow in the pushout is a word in old arrows and these new generators, subject only to relations already in $C_k$. Consequently its degree-$k$ category is $C_k*F(Q_k)$, and $C_k$ embeds. A degeneracy precomposes $\\alpha$ by a surjection and therefore remains one of the chosen new generators. For a coproduct of cells, use one tagged generator for each pair consisting of a cell and a surjection in that cell. The boundary identifications assign only the other simplices to old arrows of $C_k$; the pushout universal property therefore identifies this degree with $C_k*F(Q_k)$ for the disjoint union $Q_k$ of these tagged graphs, with no relation involving a new generator. For a transfinite composite, take the union of the tagged generator graphs at successor stages; at limit stages the category consists of finite words from earlier stages, so no further relation is introduced. Hence every relative boundary-cell map $A\\to B'$ is free in the sense of the item. Factor any cofibration $i:A\\to B$ by the functorial boundary small-object factorization of [lem-coef-sorted-simplicial-algebra-model] as $A\\xrightarrow{j}B'\\xrightarrow{p}B$, with $p$ a trivial fibration. Lifting $i$ against $p$ in the square with top $j$ and bottom $1_B$ gives $s:B\\to B'$ with $si=j$ and $ps=1_B$. Thus $i$ is a retract of the free map $j$ with domain $A$ fixed, as required.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Definition 7.4 and strong-retract construction of Proposition 7.6, pp.277-278; boundary generators from Bergner Theorem 4.7."
+   }
+  },
+  {
+   "text": "The initial object in the fixed-object category is $I_O$, whereas the global initial simplicial category is empty. The map $\\varnothing\\to I_O$ is a Bergner cofibration: a lifting problem against a trivial fibration is solved by choosing a preimage of each target object, using the surjectivity proved in step 2; the identity arrows then have their forced images. If $I_O\\to A$ is a fixed-object cofibration, step 2 makes it a global cofibration, and these two successive left lifting properties make $\\varnothing\\to A$ a global cofibration. Conversely, if $A$ is globally cofibrant, lift $\\varnothing\\to A$ against any fixed-object local trivial fibration $E\\to D$ and any given $A\\to D$. Since $E\\to D$ fixes $O$, every resulting lift $A\\to E$ fixes $O$ automatically, and therefore extends the unique fixed-object map $I_O\\to E$. This gives the fixed-object cofibrancy of $A$. Apply step 3 to $I_O\\to A$: since $(I_O)_k$ has only identities, its free extension is free in each degree, so $A$ is a retract of a degreewise-free simplicial category.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 7.6, cofibrant-object conclusion, with explicit comparison of the two initial objects."
+   }
+  },
+  {
+   "text": "First let $P$ be a constant free category on a graph $Q$ with vertices $O$. For any simplicial category $A$ on $O$, an arrow of $A*P$ has a unique expression as a finite sequence of graph edges $e_1,\\ldots,e_r$ with one $A$-arrow before, between, and after them; those $A$-arrows are allowed to be identities. Thus $(A*P)(x,y)$ is the coproduct, over all finite composable edge patterns (and the intervening endpoints), of products\n$$A(x,s(e_1))\\times A(t(e_1),s(e_2))\\times\\cdots\\times A(t(e_r),y).$$\nFor $r=0$ the summand is $A(x,y)$. Uniqueness follows by composing each maximal consecutive block of $A$-arrows and splitting each free $P$-word into its graph edges; no relation removes a graph edge. Simplicial operators act on the $A$ factors, so this is a simplicial-set isomorphism, including loops and empty mapping sets. If $A\\to A'$ is a local weak equivalence, each product map and hence this coproduct map is a weak equivalence. To justify this last assertion directly, [lem-coef-realization-finite-limits] identifies realization with finite products and disjoint unions in k-spaces. Maps and homotopies from a sphere into a finite product are exactly tuples of maps and homotopies, giving the product formula for based homotopy groups and for path components; in a disjoint union each path and based sphere stays in its component. Therefore products of finitely many weak homotopy equivalences and disjoint unions of them induce the required bijections and group isomorphisms.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(i), pp.270-271: discrete free factor, with the word and homotopy-group calculations expanded."
+   }
+  },
+  {
+   "text": "Suppose now that $P$ is simplicial and free in every degree; its faces need not preserve generators. For each $x,y$ form the bisimplicial sets $D_{p,q}=(A_q*P_p)(x,y)$ and $D'_{p,q}=(A'_q*P_p)(x,y)$, applying the $P$ operators in $p$ and the $A$ operators in $q$. These operators commute: both composites restrict to the prescribed $A$ operator on the first factor and the prescribed $P$ operator on the second, so they agree by the coproduct universal property. For each fixed $p$, step 5 applies to the constant free category $P_p$, so $D_{p,\\bullet}\\to D'_{p,\\bullet}$ is a weak equivalence. The rowwise diagonal theorem [lem-coef-bisimplicial-diagonal-equivalence] gives a weak equivalence on diagonals. These diagonals are exactly $(A*P)(x,y)$ and $(A'*P)(x,y)$, with both operators applied together. This proves invariance when the unchanged factor is degreewise free, without any compatible choice of its generators.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(ii), using Section 1.4(vii), pp.269-271."
+   }
+  },
+  {
+   "text": "For arbitrary simplicial $C$, use the explicit free-category comonad $F$ and its augmentation from [lem-coef-free-resolution-coproduct-augmentation] degreewise. For each $x,y$ put\n$$E^A_{p,q}=(A_q*F^{p+1}C_q)(x,y),\\qquad T^A_{p,q}=(A_q*C_q)(x,y),$$\nwhere $T^A$ is constant in $p$. For each fixed $q$, the cited augmentation theorem, applied to the ordinary categories $A_q,C_q$, makes $E^A_{\\bullet,q}\\to T^A_{\\bullet,q}$ a weak equivalence; its hypotheses allow arbitrary $A_q,C_q$. The diagonal theorem [lem-coef-bisimplicial-diagonal-equivalence], with directions exchanged, gives $\\operatorname{diag}E^A\\to(A*C)(x,y)$ a weak equivalence. For $A'$, apply the augmentation theorem to each ordinary pair $A'_q,C_q$ and then the exchanged-direction diagonal theorem to obtain $\\operatorname{diag}E^{A'}\\to(A'*C)(x,y)$ as a weak equivalence. For fixed $p$ the simplicial category $q\\mapsto F^{p+1}C_q$ is free in every degree; step 6 makes $E^A_{p,\\bullet}\\to E^{A'}_{p,\\bullet}$ a weak equivalence. The diagonal theorem gives $\\operatorname{diag}E^A\\to\\operatorname{diag}E^{A'}$ a weak equivalence. The augmentation square commutes because applying $A\\to A'$ commutes with composition of the nested words in the other factor. Two-out-of-three in [lem-coef-kan-quillen-right-proper] therefore proves $(A*C)(x,y)\\to(A'*C)(x,y)$ a weak equivalence. Finally factor the map in the item as $X*Y\\to X'*Y\\to X'*Y'$ and apply this result to the first factor, and to the second factor using the canonical symmetry of the coproduct. Composition of weak equivalences gives the asserted result for both varying factors, with no cofibrancy assumptions.",
+   "uses": [
+    "lem-coef-free-resolution-coproduct-augmentation",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(iii), expanded as a two-direction diagonal argument and the final two-out-of-three square, pp.270-271."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-free-resolution-coproduct-augmentation",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-sorted-simplicial-algebra-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Expanded proof following Dwyer--Kan Proposition 2.7 and Sections 7.1,7.4-7.6; fixed-object existence is specialized from Bergner Theorem 4.7. Both sources read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +168,52 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "No match: this independent vocabulary search finds no Bergner or simplicial-category model/free-product theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|fixed.object.*model|free.product.*weak",
+   "results": "{\"t\": \"2026-10-16T18:30:50Z\", \"tool\": \"grep\", \"query\": \"Bergner|fixed.object.*model|free.product.*weak\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free products of simplicial categories on a fixed set of objects preserve weak homotopy equivalences on mapping spaces",
+   "results": "{\"t\": \"2026-10-16T18:30:51Z\", \"tool\": \"leansearch\", \"query\": \"Free products of simplicial categories on a fixed set of objects preserve weak homotopy equivalences on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.toTop\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.hoFunctor.preservesTerminal'\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\"], \"digest\": \"2e4bb8faa9441e1d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"Cofibration\"",
+   "results": "{\"t\": \"2026-10-16T18:30:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"Cofibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed object simplicial categories admit a model structure whose cofibrations are retracts of free boundary cell maps and coproduct preserves local weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:31:02Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed object simplicial categories admit a model structure whose cofibrations are retracts of free boundary cell maps and coproduct preserves local weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.IsCofibrant\"], \"digest\": \"8dfe71a11485f9e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofibrant simplicial categories are retracts of free simplicial categories and free products preserve local weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:31:21Z\", \"tool\": \"leanfinder\", \"query\": \"Cofibrant simplicial categories are retracts of free simplicial categories and free products preserve local weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat\"], \"digest\": \"b50727e1a2807660\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak homotopy equivalences of simplicial sets are stable under finite products and arbitrary disjoint unions and simplicial homotopy equivalences are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"Weak homotopy equivalences of simplicial sets are stable under finite products and arbitrary disjoint unions and simplicial homotopy equivalences are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"02001a14d51c938c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cofibrant-simplicial-inversion",
@@ -84,5 +221,21 @@
   "group": "Q28"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-simplicial-free-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Specialized the existing many-sorted algebra theorem, proved equality with Bergner cofibrations by fixed-object lifting, tracked boundary-cell generators and a retract with fixed domain, and compared initial objects. Expanded free-product invariance through the discrete free word formula and two diagonal arguments. Created only the ordinary relative free-resolution augmentation input used to remove freeness; no clause of the item is outsourced unchanged. Read Dwyer--Kan and Bergner online; no project Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes the mapping-space foundation in paragraph 2 of prop-coef-integral-exceptional-adjoint along its existing cofibrant-inversion ancestry: the fixed-object free-cell and coproduct calculus needed by the inversion comparison. This is below the unit route, with the same ancestry and unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-97d98e9f5",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-97d98e9f5 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, and Dwyer-Kan in the online scan: printed pp.269-271 (1.4, 2.1-2.9) and pp.276-278 (7.1-7.6). The statement is unchanged and matches DK 7.2, 7.4-7.6 and 2.7: free maps are 1-1 with degeneracy-stable generators, retracts keep the domain fixed, and the free-product clause needs no cofibrancy. Step 1 correctly specializes lem-coef-sorted-simplicial-algebra-model, including O empty. Step 2 is correct: Bergner trivial fibrations are exactly the maps surjective on objects with local trivial Kan fibrations, and the E_a/D_b restriction works when object maps are not injective. Step 3: in degree k a boundary-cell pushout adds exactly the surjections [k]->[m] as generators, degeneracies keep them as generators, and the retract argument is the standard one. Step 4 handles the two different initial objects (the empty category and I_O) correctly. Step 5 is the identity-allowed normal-form product/coproduct formula. Steps 6-7 follow DK 2.7(ii)-(iii) by diagonal arguments and are correct. The new node lem-coef-free-resolution-coproduct-augmentation matches DK 2.4-2.6 (face/degeneracy indices, how Fu acts on generators). It is DK 2.7(iii) as DK state it, specialized to constant A, and it is true: it is 2.7 applied to the weak equivalence F_*C->C of 2.6. It is strictly smaller than the item, has no proof deps, and duplicates no existing node: lem-coef-dk-cofibrant-localization-comparison covers only A=I_O and lem-coef-extra-degeneracy-contraction is generic. Its form passes B1-B9. Warning for whoever splits it later: wrapping each F-block into one generator is not an extra degeneracy (counterexample: the word u a v a^-1 u' with eps(v)=1). The worker honestly flagged this. Route: all cited statements are in sk-prop-sf-biduality-general, there are no tool_uses, no SGA is cited, and there is no cycle. FIX (C1/C4): step 2 uses 'Kan fibration + weak equivalence = trivial Kan fibration' and step 5 checks weak homotopy equivalences, both from lem-coef-kan-quillen-right-proper, which those steps did not cite. I added it to the uses of steps 2 and 5. proof_deps is unchanged. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ }
 }
