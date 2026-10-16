@@ -204,5 +204,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0be8a521b (reviewer sub-agent of L); spot-checked: I read the item, the one new node (lem-coef-infinity-marked-coanodyne-rlp-saturation, a Mathlib leaf) and all six cited statements in full. The removed horn-test node does not exist in the snapshot and nothing cites it. The item statement is unchanged and is the correct opposite of HTT Prop 3.1.1.6 for small quasicategories; the duals of generators (ii) and (iii) match def-coef-infinity-marked-coanodyne. HTT is not archived, so the item keeps proof_origin=agent with a WANTED. All five steps hold. Step 1: the leaf applies to an arbitrary marked map, with no fibrancy hypothesis. Step 2: (i) gives inner fibration; (ii) with n>=2 gives the cocartesian horn condition for marked edges; (ii) with n=1 gives lifts from a prescribed source. For the reverse inclusion, the comparison triangle (t,u,e) lies over s_1(alpha), so u lies in the fibre and composition-initiality says it is an equivalence there. The fibre is a quasicategory and its map to the point is an isofibration, so its core is a Kan complex containing u; (iv) marks u and then (iii) marks e. Step 3 is correctly marked elementary. Step 4 uses the composition clause. Step 5: Kan edges are equivalences, f preserves equivalences by the 2-simplex definition, and lem-cbc-inner-fibration-equivalence-outer-horn-lift then makes the image edges cocartesian. I accept that tool use: it is a generic black box from unit sk-prop-sf-cbc, no node of this unit states it, and it replaces no route step. I checked the leaf's Mathlib lines in LiftingProperty.lean (43, 51, 61, 72, 112, 116, 123) and TransfiniteCompositionLifting.lean (265, 275); all are exact, and the argument J ⊆ closure ⊆ J.rlp.llp, then antitonicity and rlp_llp_rlp, is correct. The leaf does not duplicate lem-coef-lifting-class-closure, lem-coef-transfinite-left-lifting, the right-anodyne saturation node or the anodyne lifting calculus. Edge cases checked: the walking isomorphism over a point fails (iv) as it should, the identity map with the sharp marking, empty E, n=1 and n=2, and empty K. Remark, no change: the existing unsplit node lem-coef-relative-marked-anodyne-calculus states the cartesian analogue. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedCocartesianLifting",
+  "declaration": "SSet.Enhanced.markedCoanodyne_rlp_iff_cocartesianFibration",
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedCocartesianLifting.lean",
+  "statement": "theorem markedCoanodyne_rlp_iff_cocartesianFibration {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (T : Set (E.obj (op ⦋1⦌))) (hT : ∀ x : E.obj (op ⦋0⦌), E.σ 0 x ∈ T) : SSet.Marked.markedCoanodyne.rlp (⟨p, fun _ _ ↦ Set.mem_univ _⟩ : ({ underlying := E, marking := T, degenerate := hT } : SSet.Marked.{u}) ⟶ SSet.Marked.sharp B) ↔ (cocartesianFibration p ∧ ∀ e : E.obj (op ⦋1⦌), e ∈ T ↔ IsCocartesianEdge p (SSet.yonedaEquiv.symm e))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9933f7d4",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause check of SSet.Enhanced.markedCoanodyne_rlp_iff_cocartesianFibration against the node and HTT 3.1.1.6/3.1.1.10 (opposite dual): small quasicategories E,B in one universe u; arbitrary p; hT is exactly Marked.degenerate; marked arrow to sharp B has underlying p; markedCoanodyne.rlp in the marking-preserving category; RHS = cocartesianFibration p ∧ (T = cocartesian edges, as iff). Dependency declarations read in side clone (Marked/Hom/sharp, coanodyneGenerators/markedCoanodyne, IsCocartesianEdge/cocartesianFibration). Node statement unchanged vs side, only lean differs; lean.statement verbatim. Imports match recorded deps; proof deps without Lean records are correctly not imported. No defs, sorry only, docstrings with source and blueprint plus 5 proof steps; report has Worker report and Second reading by NX. Edge cases: empty E/B, identity, n=1,2, empty Kan, walking iso over point. nt_compile --json rc=0, no errors or warnings. Cosmetic only: HTT numbers in a worker-report sentence replaced by 'the project server'. No fixes."
  }
 }

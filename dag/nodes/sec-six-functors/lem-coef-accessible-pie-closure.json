@@ -28,7 +28,8 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-inserter"
  ],
  "proof": [
   {
@@ -316,5 +317,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessiblePieClosure",
+  "declaration": "CategoryTheory.accessible_pie_closure",
+  "file": "lean/Sheaf/CategoryTheory/AccessiblePieClosure.lean",
+  "statement": "theorem accessible_pie_closure : (∀ (S : Type w) (A : S → Type u₁) [∀ s, Category.{w} (A s)] [∀ s, IsAccessibleCategory.{w} (A s)], IsAccessibleCategory.{w} (∀ s, A s) ∧ ∀ s, (Pi.eval A s).IsAccessible.{w}) ∧ (∀ (A : Type u₁) [Category.{w} A] (B : Type u₂) [Category.{w} B] (F G : A ⥤ B) [IsAccessibleCategory.{w} A] [IsAccessibleCategory.{w} B] [F.IsAccessible.{w}] [G.IsAccessible.{w}], IsAccessibleCategory.{w} (Inserter F G) ∧ (Inserter.forget F G).IsAccessible.{w}) ∧ (∀ (A : Type u₁) [Category.{w} A] (B : Type u₂) [Category.{w} B] (F G : A ⥤ B) (α β : F ⟶ G) [IsAccessibleCategory.{w} A] [IsAccessibleCategory.{w} B] [F.IsAccessible.{w}] [G.IsAccessible.{w}], IsAccessibleCategory.{w} (ObjectProperty.FullSubcategory (fun X : A ↦ α.app X = β.app X)) ∧ (ObjectProperty.ι (fun X : A ↦ α.app X = β.app X)).IsAccessible.{w})",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0375943c",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps, both delivered modules and the report. The 3-clause statement (product/Pi.eval, Inserter/forget, FullSubcategory {α.app X = β.app X}/ι) matches the node clause by clause. The definitions of Functor.IsAccessible, IsAccessibleCategory and pi were read in Mathlib. Hom universe is w throughout (confirmed by #check); object universes u₁,u₂ are free; there is no common cardinal and no extra hypothesis. Mathlib IsAccessible lacks the node's source-existence clause, which is equivalent here because the source is assumed accessible. The new def-coef-inserter has real data, its arrow equation equals G(f)u=vF(f) (Ching-Riehl Def. A.3), and no duplicate was found in Mathlib, the side clone or slopmaster2. Both lean.statement records are verbatim in their files. The item JSON changes only lean and stmt_deps. The docstrings carry source and blueprint ids and all 12 proof steps; the only proof is sorry; the report has both sections. Edge cases checked: empty S, empty factor, empty categories, F=G, α=β, ℵ₀. Both files compile with nt_compile.py --json (0.8 s / 0.9 s, no messages); a control copy with a false rfl errored as expected. No findings."
  }
 }
