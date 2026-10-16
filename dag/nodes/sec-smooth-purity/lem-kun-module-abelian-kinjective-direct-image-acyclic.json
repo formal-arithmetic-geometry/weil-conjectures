@@ -14,49 +14,35 @@
  },
  "proof": [
   {
-   "text": "On the small etale site of a scheme T, identify ModuleCat Lambda-valued sheaves with modules over the constant ring sheaf Lambda_T, using the underlying-abelian-compatible equivalence. Identify abelian sheaves with modules over Z_T (using ULift integers in the coefficient universe when necessary) by the sectionwise equivalence between abelian groups and Z-modules. These are additive exact equivalences. Their termwise functors therefore preserve quasi-isomorphisms and K-injectivity: the latter follows by transporting the defining null-homotopy condition against acyclic complexes through the inverse equivalence. To match the abstract ringed-topos interface, replace each small etale site by ULiftHom with morphisms lifted to the object universe, and equip it with the topology induced by the inverse site equivalence. Precomposition transports ring sheaves and module sheaves to this site; the inverse precomposition and the unit/counit identities give an exact equivalence on module categories compatible with underlying additive sheaves. Conjugate the base-change functor and the set inverse-image adjunction by these site equivalences. Their counit identities identify the transported direct image with the conjugated base-change direct image, and equivalences preserve finite limits. Thus ring sheaves, set sheaves and module carriers all have the coefficient universe required by the composition theorem, without lifting the schemes or changing the statement.",
+   "text": "Apply the fully proved simultaneous underived ringed presentation. Its equivalences send the module category and the two abelian sheaf categories to module categories on small sites, and its natural isomorphisms identify restriction of scalars with coefficient forgetting and the second direct image with abelian etale direct image.",
    "uses": [
-    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+    "lem-kun-etale-module-abelian-ringed-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Let r:(A,Lambda_A) to (A,Z_A) be restriction along the canonical constant-ring map Z_A to Lambda_A, with identity inverse and direct image on set sheaves. Its module functor is restriction of scalars and its underlying additive functor is forgetting. Let p:(A,Z_A) to (B,Z_B) be the geometric morphism induced by v, with constant-integer structural map. Its module direct image is precomposition by etale base change, with sectionwise integer action. Thus, under step 1, r.modules is U_A and p.modules is v_* on abelian sheaves. The structural maps preserve the zero, one, addition, and multiplication graphs: inverse image preserves the terminal object and binary products, and the integer structural map is a ring map. The module action graph is preserved in the same way, with addition and scalar multiplication sectionwise. This supplies the RingedToposMorphism data, including its generalized-element identities, and identifies both direct-image functors naturally on objects and maps.",
-   "uses": [
-    "def-weil-pbc-ringed-topos-morphism",
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-constant-ring-inverse-image-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the given I, J, and j through the equivalences of step 1 and the forgetting isomorphism of step 2. They become a K-injective Lambda_A-module complex I, a K-injective Z_A-module complex J, and a quasi-isomorphism r_*I to J. Apply the final resolution-normalization clause of the ringed-topos derived pushforward composition theorem to r and p. That clause states directly that p_*j is a quasi-isomorphism. Only this clause is needed; there is no assertion that r_*I is K-injective.",
+   "text": "The three equivalences are additive because they preserve binary products. Their termwise equivalences preserve K-injectivity and quasi-isomorphisms. Put j′ = alpha_I followed by eA(j). Apply the final resolution-normalization clause of ringedToposDerivedPushforwardComposition to the restriction morphism followed by the geometric morphism. It proves that the second module direct image of j′ is a quasi-isomorphism.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The natural identification of p.modules with abelian v_* in step 2 identifies this p_*j with the termwise map v_*j of the statement, conjugated by the termwise encoding isomorphisms. Exact equivalences reflect quasi-isomorphisms, and conjugation by chain isomorphisms preserves them. Transporting back gives the required QuasiIso. The identity morphism, zero ring, zero complex, empty etale objects, and arbitrary shifts are included; no boundedness or finite cohomological dimension was used.",
+   "text": "Cancel the isomorphism given by the image of alpha_I. Naturality of the direct-image comparison beta identifies the remaining map, up to composition with beta, with eB(v_*j). Cancel beta. The exact equivalence eB reflects quasi-isomorphisms, so v_*j is a quasi-isomorphism. This uses no claim that the underlying abelian complex of I is K-injective.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
-  "def-weil-pbc-ringed-topos-morphism",
-  "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-constant-ring-inverse-image-comparison",
+  "lem-kun-etale-module-abelian-ringed-presentation",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F4",
+  "group": "F2",
   "date": "2026-10-16",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6J(3) and 0D6E; coefficient-restriction specialization of the composition normalization"
+  "place": "Tags 0D6J(3), 0D6E; explicit constant-ring presentation and termwise transport"
  },
  "mathlib_searches": [
   {
@@ -168,13 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-baaba",
-  "group": "F4",
+  "reviewer": "COMPILER",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261015T224820-L-2950168",
+  "landing": "20261016T000943-L-3677782",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, DAG nodes, declarations, and direct importers match the packet and compile successfully with no mechanical findings."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,143 @@
+{
+ "id": "lem-kun-etale-module-abelian-ringed-presentation",
+ "kind": "statement",
+ "title": "Simultaneous ringed presentations of coefficient forgetting and abelian etale direct image",
+ "statement": "Let Lambda be a commutative ring in Type (u+1), let A and B be schemes in universe u, and let v:A to B be a scheme morphism [def-weil-pbc-etale-sheaves]. There are small sites (C,T),(D,S) in Type (u+1), commutative ring sheaves R,Z on T and W on S, equivalences eM from Lambda-module-valued sheaves on A to modules over R, eA from abelian sheaves on A to modules over Z, and eB from abelian sheaves on B to modules over W [lem-weil-pbc-module-sheaf-constant-ring-equivalence]. There are ringed-topos morphisms r:(T,R) to (T,Z) and p:(T,Z) to (S,W) [def-weil-pbc-ringed-topos-morphism] and natural isomorphisms eM followed by r.modules with coefficient forgetting followed by eA, and eA followed by p.modules with abelian v_* followed by eB. Rings in these module categories are the underlying RingCat sheaves of R,Z,W. No complexes, K-injectivity or derived functors enter this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6J(3) and 0D6E, coefficient restriction followed by direct image; constant ring/module identification in sites-modules.tex, Tag 093I"
+ },
+ "proof": [
+  {
+   "text": "Use AsSmall.equiv to replace each etale site by a category with both objects and homs in Type (u+1). Equip it with the topology induced by the inverse equivalence. SheafCongr and pushforwardPushforwardEquivalence transport sheaves of rings and their module categories by precomposition; their units and counits give inverse equivalences. Transport the constant Lambda ring and the constant ULift-integer rings. Apply the underlying-additive-compatible constant-ring module equivalence.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source-library equivalence between ULift-integer-module-valued sheaves and abelian sheaves and the constant-ring module equivalence imply that toSheaf for the integer ring is an equivalence. Transporting by the site equivalence retains this property. Choose eA,eB as the inverses of these forgetful equivalences, after the corresponding equivalences of abelian sheaves. Choose eM by the Lambda equivalence and module site transport.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a continuous site functor F, a left-exact left adjoint L to set precomposition, and a ring map S to F_*R, construct the ringed morphism directly. Use ordinary module pushforward for modules and the adjunct of the ring map for its structural map. Define a paired map to the direct image of a product sectionwise. Testing its adjunct on the two projections identifies it with the pair of adjuncts. Right naturality of the adjunction therefore transposes every binary-operation equation; terminal uniqueness transposes constant-operation equations. Apply these formulas to zero, one, addition, multiplication and scalar action, proving all RingedToposMorphism fields. The existing geometric-module-construction module is used only for its concrete private operation maps, not its construction theorem.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct r with identity set functors and restriction of scalars along the constant-ring map induced by ULift Z to Lambda. Base change on etale sites is continuous; conjugate it and its set pullback adjunction by the site equivalences. Left exactness follows by unfolding the set pullback into left Kan extension and sheafification, with the AB5 instance for Type. Construct the integer structural direct map by the sheafification adjunction applied to the whiskered unit of the constant integer presheaf. Apply step 3 to obtain p.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After applying toSheaf over the integer ring, restriction of scalars is definitionally the underlying additive functor, and module pushforward is the continuous additive-sheaf pushforward. Site precomposition commutes definitionally with base-change pushforward for AsSmall. The counits of the integer-forgetful equivalences and the given compatibility of the Lambda equivalence therefore give both required natural isomorphisms after toSheaf. Fully faithfulness of toSheaf lifts them to isomorphisms of module-valued functors. All constructions and identities include zero rings, empty schemes and identity morphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-etale-base-change-continuous"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6J(3), 0D6E, using constant-ring modules from Tag 093I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves over a constant integer ring are equivalent to abelian sheaves, compatibly with direct image",
+   "results": "Service unavailable: Internal Server Error; actual request recorded by msearch.py. Other kinds and source grep were used.",
+   "date": "2026-10-16",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between sheaves of modules over a constant ring and module-valued sheaves compatible with forgetting and continuous pushforward",
+   "results": "Eight hits, including SheafOfModules.toSheafCompSheafToPresheafIso, forgetToSheafModuleCat, and pushforwardCongr. None supplies simultaneous constant-ring presentations and the RingedToposMorphism generalized-element fields.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardPushforwardEquivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence and its unit/counit component lemmas in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous. Read its signature and used it for module site transport; it does not give the full presentation.",
+   "date": "2026-10-16",
+   "verdict": "no match; auxiliary theorem used"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Mm]odule|[Mm]odule.*constant",
+   "results": "25 Mathlib hits in unrelated Lie, locally constant functions, module freeness and Lean environment files. Project source search supplies the separate constant-ring equivalence and ULift-integer forgetful equivalence, which are used.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-module-abelian-kinjective-direct-image-acyclic",
+   "place": "Proof steps 1 and 2: construct the three exact equivalences and both underived direct-image identifications",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleAbelianRingedPresentation.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleModuleAbelianRingedPresentation",
+  "statement": "theorem etaleModuleAbelianRingedPresentation\n    (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :\n    ∃ (C D : Type (u + 1)) (_ : SmallCategory C) (_ : SmallCategory D)\n      (T : GrothendieckTopology C) (S : GrothendieckTopology D)\n      (R Z : Sheaf T CommRingCat.{u + 1}) (W : Sheaf S CommRingCat.{u + 1})\n      (eM : Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌\n        SheafOfModules.{u + 1}\n          ((sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n      (eA : Sheaf A.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n        SheafOfModules.{u + 1}\n          ((sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj Z))\n      (eB : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n        SheafOfModules.{u + 1}\n          ((sheafCompose S (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj W))\n      (r : RingedToposMorphism\n        ((sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)\n        ((sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj Z))\n      (p : RingedToposMorphism\n        ((sheafCompose T (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj Z)\n        ((sheafCompose S (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj W)),\n      Nonempty (eM.functor ⋙ r.modules ≅ moduleAbelianForget Λ A ⋙ eA.functor) ∧\n      Nonempty (eA.functor ⋙ p.modules ≅ (v)_*[AddCommGrpCat.{u + 1}] ⋙ eB.functor)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
