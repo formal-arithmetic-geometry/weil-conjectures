@@ -1,0 +1,43 @@
+{
+ "state": "released",
+ "stage": "2",
+ "item": "def-coefficient-twists-detailed",
+ "consumer": "det-def-sp-tate-twist-locally-free",
+ "by": "NR maintenance",
+ "date": "2026-10-16",
+ "note": "Incomplete rational/common-stage twist interface withdrawn; repair owning definition.",
+ "reason": "The accepted CoefficientTwistsDetailed interface does not implement the rational and common-stage twist functors promised by its final K(m) formula. rationalComplexTwist and algebraicClosureComplexTwist take an object and return an object; neither has a map on morphisms. CoefficientTateTwistData records only coefficient-object families. finiteComplexTwist and integralComplexTwist are genuine functors. An isomorphism between coefficient-line objects under scalar extension does not specify the missing rational/common-stage morphism actions or their coherent scalar-extension comparisons. The incomplete stage-2 completion falsely makes det-def-sp-tate-twist-locally-free eligible; its clause 3 requires the specified tensor twist functors to be autoequivalences. The current bottom-up brief correctly prevents the consumer worker from stating this other DAG node. Repeating the consumer cannot repair its owning definition.\n\nRepair def-coefficient-twists-detailed as its own normal stage-2 item, after its\nstatement prerequisites are stated. Keep its mathematical statement, dependencies,\nexisting public declarations and object assignments. Supply canonical functors for\nrational and algebraically closed/common-stage complex twisting. The rational\nmorphism action must descend integral tensor to the specified raw Hom scalar\nlocalization. The algebraically closed action must descend the finite-stage actions\nto the specified common-stage Hom colimits, with the necessary coherent comparisons\nunder finite coefficient extension (including identity and composite extensions).\nA coefficient-line object comparison alone does not provide this descent. Do not\nsubstitute an arbitrary functor, a mere Nonempty choice, or an extra functor/linearity/\ncomparison hypothesis. Record all added declarations and their source/blueprint\ndocstrings; postponed property proofs follow the ordinary stage-2 DAG rules.\n\nRequired consumer validation: in a scratch file with the actual small pro-etale\nsite (object universe u+1, morphism universe u), instantiate the rational and\ncommon-stage operations as endofunctors, access both .obj and .map, and check that\ntheir object assignments agree with rationalComplexTwist and\nalgebraicClosureComplexTwist. Check compatibility with localization and with\ncommon-stage representatives, including m=0, positive and negative twists,\nidentity and composite coefficient extensions, and an empty scheme. The subsequent\nconsumer must be able to refer to those specific functors and their negative\ntwists when stating autoequivalence. This validation checks the interface; proving\nthe consumer theorem is not part of this repair. Compile files individually using\ntools/lean_file.sh (60 seconds per file), then use normal independent review.\n\nThe original consumer keeps all three clauses, including arbitrary finite rings\nA killed by an ell power and its canonical Kummer scalar-extension comparison.\nResume it when the owning definition's repaired completion lands. It must use the\npublished canonical functors; an unspecified equivalence with the right objects\ndoes not encode the required morphism action. Do not restore the archived binding\nor merely re-alias coefficientTateTwists without fixing this defect.\n",
+ "invalidated_lean": {
+  "module": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "declaration": "WeilConjectures.coefficientTateTwists",
+  "declarations": [
+   "WeilConjectures.coefficientTwistPower",
+   "WeilConjectures.coefficientTwistLine",
+   "WeilConjectures.coefficientTwistLine_exact",
+   "WeilConjectures.coefficientTwistIntegralRank",
+   "WeilConjectures.coefficientTwistFiniteRank",
+   "WeilConjectures.finiteCoefficientTwist",
+   "WeilConjectures.finiteComplexTwist",
+   "WeilConjectures.integralComplexTwist",
+   "WeilConjectures.integralCoefficientTwist",
+   "WeilConjectures.integralCoefficientTwist_constructible",
+   "WeilConjectures.rationalCoefficientTwist",
+   "WeilConjectures.integralComplexTwist_constructible",
+   "WeilConjectures.rationalComplexTwist",
+   "WeilConjectures.rationalCoefficientTwist_scalarExtension",
+   "WeilConjectures.algebraicClosureCoefficientTwist",
+   "WeilConjectures.algebraicClosureComplexTwist",
+   "WeilConjectures.CoefficientTateTwistData",
+   "WeilConjectures.coefficientTateTwists"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientTwistsDetailed.lean",
+  "statement": "def coefficientTateTwists (n : ℕ) (_hn : 1 ≤ n) : CoefficientTateTwistData D ℓ hℓ E S Ω n",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the published concrete purTwistZlOne, purTwistIntegralModule and purTwistFiniteOne, with completed coefficient scalars. Signed powers use the exact sheaf tensor and internal Hom; derived twisting is its exact termwise model. Rational and common-stage objects are formed on integral representatives, without idempotent completion."
+ },
+ "archive": "coord/reports/maintenance/det-def-sp-tate-twist-locally-free.invalidated-lean.json",
+ "report": "coord/reports/maintenance/det-def-sp-tate-twist-locally-free.md"
+}
