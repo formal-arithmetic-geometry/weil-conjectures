@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-bimodule-word-path-approximation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar. Supporting input: Replace the ordered-word algebra diagram by its composable-path presentation, before gluing short paths.",
+   "via": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-two-sided-coherent-bar-construction",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composable paths approximate the operad of ordered bimodule words",
+ "statement": "Use the universes, ordinary nerves, quasicategories and coherent functor categories of [def-cbc-enhanced-diagrams-cones], and inert arrows and relative mapping-space Segal products of [def-coef-monoidal-infinity-category]. A planar infinity operad is an inner fibration $p:\\mathcal X^\\otimes\\to N(\\Delta^{\\mathrm{op}})$ admitting cocartesian lifts of inert arrows, with fiber equivalences $\\mathcal X_{[n]}^\\otimes\\simeq(\\mathcal X_{[1]}^\\otimes)^n$ and the relative mapping-space product condition stated there. Only inert lifts, not lifts of all arrows, are required.\n\nFor an integer $k\\geq0$ let $\\mathsf W_k$ be the ordinary planar coloured operad with colours $(i,j)$, $0\\leq i\\leq j\\leq k$, $j-i\\leq1$. An operation from a nonempty ordered list $((i_1,j_1),\\ldots,(i_r,j_r))$ to $(i,j)$ exists uniquely when $i_1=i$, $j_r=j$ and $j_t=i_{t+1}$ for $1\\leq t<r$, and is absent otherwise. A nullary operation into $(i,j)$ exists uniquely if $i=j$. Substitution concatenates these paths. Its operator category $\\mathsf W_k^\\otimes$ has finite ordered colour lists as objects; over the opposite of $h:[m]\\to[n]$, a morphism from $(c_1,\\ldots,c_n)$ to $(d_1,\\ldots,d_m)$ chooses an operation $(c_{h(t-1)+1},\\ldots,c_{h(t)})\\to d_t$ for each $1\\leq t\\leq m$. Inputs outside $[h(0)+1,h(m)]$ are discarded; empty blocks use nullary operations. Composition substitutes blocks, and the functor to $\\Delta^{\\mathrm{op}}$ records the lengths. Inert arrows select consecutive sublists by identity operations.\n\nDefine $\\mathsf{Step}_k$ to have objects monotone maps $f:[n]\\to[k]$ such that $f(t)-f(t-1)\\leq1$ for $1\\leq t\\leq n$. A morphism $f\\to g$, $g:[m]\\to[k]$, is a monotone map $h:[m]\\to[n]$ with $g=fh$; composition is composition of these maps in the opposite direction. Its base arrow is $[n]\\to[m]$ in $\\Delta^{\\mathrm{op}}$, and it is marked inert when $h(t)=a+t$. There is a functor $\\Phi_k:\\mathsf{Step}_k\\to\\mathsf W_k^\\otimes$ sending $f$ to the word $((f(0),f(1)),\\ldots,(f(n-1),f(n)))$ and $h$ to the indicated consecutive block operations. When $h(t)=h(t-1)$ the output colour is $(f(h(t)),f(h(t)))$, with its nullary operation.\n\nLet $\\mathcal D_k(\\mathcal X)$ be the full subcategory of $\\operatorname{Fun}_{N(\\Delta^{\\mathrm{op}})}(N(\\mathsf{Step}_k),\\mathcal X^\\otimes)$ on functors carrying marked inert edges to $p$-cocartesian edges. Define $\\operatorname{Alg}_{\\mathsf W_k}(\\mathcal X)$ in the same manner using $N(\\mathsf W_k^\\otimes)$. Then precomposition induces an equivalence of infinity categories $\\Phi_k^*:\\operatorname{Alg}_{\\mathsf W_k}(\\mathcal X)\\to\\mathcal D_k(\\mathcal X)$. This equivalence includes arbitrary coherent transformations over the base and is natural under inert-preserving maps of target planar infinity operads and under inclusions of nonempty consecutive vertex intervals into $[k]$. No target colimits or presentability are assumed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definition 4.4.1.12 and Proposition 4.4.1.17, with the proof on printed pp. 568-570; planar form via Theorem 4.1.3.14 and the ordered-word fiber of Definition 4.4.1.1. This is the path approximation, not the Segal gluing theorem 4.4.1.11. Online 2017 source read; WANTED: archived Higher Algebra. No Stacks tag states this operadic approximation."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inert preserving coherent functors from an operad of ordered bimodule words are equivalent to diagrams on composable paths",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"leanfinder\", \"query\": \"inert preserving coherent functors from an operad of ordered bimodule words are equivalent to diagrams on composable paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quiv.pathsEquiv\", \"CategoryTheory.Quiv.freeMapPathsOfCompPathCompositionIso\", \"CategoryTheory.Paths.ext_functor\", \"CategoryTheory.Quiv.pathCompositionNaturality\", \"CategoryTheory.pathComposition\", \"CategoryTheory.Quiv.freeMap_pathsOf_pathComposition\", \"CategoryTheory.Paths.lift\", \"CategoryTheory.Paths.lift_unique\"], \"digest\": \"43e05a90da21eecb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|preoperad|Step.*bimod|Tens.*operad",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"grep\", \"query\": \"operadic|preoperad|Step.*bimod|Tens.*operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction to the category of composable paths models algebras over a planar infinity operad",
+   "results": "{\"t\": \"2026-10-16T21:40:45Z\", \"tool\": \"leansearch\", \"query\": \"restriction to the category of composable paths models algebras over a planar infinity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Paths.categoryPaths\", \"CategoryTheory.composePath_comp\", \"HomotopicalAlgebra.PrepathObject\", \"HomotopicalAlgebra.PathObject\", \"CategoryTheory.pathComposition_map\", \"CategoryTheory.Paths\", \"CategoryTheory.composePath_cons\", \"CategoryTheory.Quiv.pathCompositionNaturality\"], \"digest\": \"52b8a774e118d0f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nonsymmetric coloured operad nerve admits composable string approximation preserving categories of algebras",
+   "results": "{\"t\": \"2026-10-16T21:41:42Z\", \"tool\": \"leanfinder\", \"query\": \"nonsymmetric coloured operad nerve admits composable string approximation preserving categories of algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve\", \"CategoryTheory.nerve_obj\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerveMap\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveMap_app\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\"], \"digest\": \"a2e1038e91621a59\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Segal",
+   "results": "{\"t\": \"2026-10-16T21:41:42Z\", \"tool\": \"grep\", \"query\": \"operad|Segal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Category/Quiv.lean:269-272 (ordinary path-category universal property), Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-60,525-539 (strict set-valued Segal data and ordinary nerves). These do not compare marked coherent operadic functor categories. The second phrasing returns ordinary nerves; grep found no operadic approximation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-composable-bimodule-operad-segal",
+  "date": "2026-10-17",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

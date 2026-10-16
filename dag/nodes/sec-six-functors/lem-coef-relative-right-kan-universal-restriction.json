@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-relative-right-kan-universal-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar. Supporting input: Construct extension from short paths using relative inert products, and retain transformations and cone universality.",
+   "via": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-two-sided-coherent-bar-construction",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Relative right Kan extensions: universal restriction and cone comparison",
+ "statement": "Use quasicategories, coherent functor categories, mapping spaces, full subcategories and cones of [def-cbc-enhanced-diagrams-cones], relative limit diagrams of [def-coef-infinity-relative-cone], and isofibrations of [lem-coef-infinity-isofibration-exponentiation]. Work in any fixed sufficiently large universe. Let $A\\subseteq C$ be a full subcategory of a small quasicategory, let $p:D\\to B$ be an isofibration of quasicategories, and let $s:C\\to B$ be a fixed functor. Write $\\operatorname{Fun}_s(C,D)$ for the simplicial set of functors over $s$: an $r$-simplex is $H:C\\times\\Delta^r\\to D$ with $pH=s\\operatorname{pr}_C$.\n\nFor $c\\in C$ put $L_c=A\\times_C C_{c/}$, with projection $a_c:L_c\\to A$ and canonical cone $l_c:L_c^{\\triangleleft}\\to C$. The coslice records arrows starting at $c$, with all commuting simplices, and projects by their final face. Say that $H\\in\\operatorname{Fun}_s(C,D)$ is a pointwise $p$-right Kan extension of $H|_A$ if $Hl_c$ is a $p$-limit diagram for every $c$. Let $R\\subseteq\\operatorname{Fun}_s(C,D)$ be the full subcategory of such extensions, and let $T\\subseteq\\operatorname{Fun}_{s|_A}(A,D)$ be the full subcategory of functors $h$ for which, for every $c$, $ha_c$ admits a $p$-limit cone over the specified base cone $sl_c$, with exactly the prescribed boundary $ha_c$. Then restriction $R\\to T$ is a trivial Kan fibration of simplicial sets, in particular an equivalence of full infinity categories. Here a trivial Kan fibration means a map with the right lifting property against every boundary inclusion $\\partial\\Delta^r\\hookrightarrow\\Delta^r$, $r\\geq0$; the boundary is the union of proper faces of the standard simplex. The assertion is about all transformations and higher simplices, not only objects.\n\nThere is also a cone comparison. If $H:C\\to D$ is a pointwise $p$-right Kan extension of $H|_A$, $b:C^{\\triangleleft}\\to B$ extends $pH$, and $q_A:A^{\\triangleleft}\\to D$ restricts to $H|_A$ and satisfies $pq_A=b|_{A^{\\triangleleft}}$, then $q_A$ extends to $q:C^{\\triangleleft}\\to D$ with $q|_C=H$, $q|_{A^{\\triangleleft}}=q_A$ and $pq=b$, whenever $q_A$ is a $p$-limit diagram. Any such $q$ is a $p$-limit diagram if and only if $q_A$ is. Thus existence and the universal property of a relative limit of a right Kan extended diagram can be checked on the full subcategory from which it was extended. Neither $D$ nor its fibers are assumed complete.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 4.3.2.15 (printed p. 284), Lemmas 4.3.2.13 and 4.3.2.7 (printed pp. 282 and 274), with the right-hand dual of Remark 4.3.2.18. The cone comparison retains the prescribed base cone and boundary. Online 2017 source read; WANTED: archived Higher Topos Theory. No Stacks tag states this relative quasicategorical calculus."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative right Kan extension restriction is a trivial fibration of quasicategories and pointwise relative limits compose",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"leanfinder\", \"query\": \"relative right Kan extension restriction is a trivial fibration of quasicategories and pointwise relative limits compose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.ranObjObjIsoLimit_hom_π_assoc\"], \"digest\": \"1ae45dfafd750ed8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"de71b04be3f89c8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightKanExtension|rightKanExtension",
+   "results": "{\"t\": \"2026-10-16T21:40:44Z\", \"tool\": \"grep\", \"query\": \"IsRightKanExtension|rightKanExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"b7d745e01067f113\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pointwise relative right Kan extension coherent functor category restriction equivalence",
+   "results": "{\"t\": \"2026-10-16T21:40:45Z\", \"tool\": \"leansearch\", \"query\": \"pointwise relative right Kan extension coherent functor category restriction equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.hasPointwiseRightKanExtensionAt_of_equivalence\", \"CategoryTheory.Functor.hasPointwiseRightKanExtensionAt_iff_of_equivalence\", \"CategoryTheory.Functor.pointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.isRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.hasRightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension\", \"CategoryTheory.Functor.HasPointwiseRightKanExtensionAt\"], \"digest\": \"32591208bacea3de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal coherent right Kan extensions along full subcategories form a category equivalent to extendible diagrams with relative limit pasting",
+   "results": "{\"t\": \"2026-10-16T21:41:42Z\", \"tool\": \"leanfinder\", \"query\": \"universal coherent right Kan extensions along full subcategories form a category equivalent to extendible diagrams with relative limit pasting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtension_iff_postcomp₁\", \"CategoryTheory.Functor.RightExtension.isUniversalPostcomp₁Equiv\", \"CategoryTheory.Functor.isRightKanExtension_iff_precomp\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.hasRightExtension_iff_postcomp₁\", \"CategoryTheory.Functor.RightExtension.isUniversalEquivOfIso₂\", \"CategoryTheory.Functor.RightExtension.isUniversalPrecompEquiv\"], \"digest\": \"9c22c315e62adc3a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|relative.*Kan|Kan.*relative|trivial.*fibration",
+   "results": "{\"t\": \"2026-10-16T21:41:43Z\", \"tool\": \"grep\", \"query\": \"quasicategory|relative.*Kan|Kan.*relative|trivial.*fibration\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-composable-bimodule-operad-segal",
+  "date": "2026-10-17",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
