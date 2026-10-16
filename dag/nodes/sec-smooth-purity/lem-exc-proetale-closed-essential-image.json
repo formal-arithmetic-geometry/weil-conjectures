@@ -3,44 +3,182 @@
  "blueprint": {
   "is": "lem-exc-proetale-closed-essential-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The essential image of closed direct image",
- "statement": "For a closed immersion $i:Z\\hookrightarrow X$ with quasi-compact open\ncomplement $j$, a pro-etale module sheaf $F$ lies in the image of $i_*$ if\nand only if $j^*F=0$. For such a sheaf the canonical unit $F\\to i_*i^*F$ is\nan isomorphism.",
+ "statement": "For a closed immersion $i:Z\\hookrightarrow X$ with complementary open immersion $j:U\\hookrightarrow X$ that is quasi-compact as a morphism, a pro-etale module sheaf $F$ lies in the image of $i_*$ if\nand only if $j^*F=0$. For such a sheaf the canonical unit $F\\to i_*i^*F$ is\nan isomorphism. Here the coefficient convention is that of [def-weil-pbc-proetale-operations]: fix a sheaf $A_X$ of commutative rings on $X_{\\mathrm{proet}}$, sheaves $A_Z,A_U$ on $Z_{\\mathrm{proet}},U_{\\mathrm{proet}}$, and isomorphisms $c_i:i^{-1}A_X\\xrightarrow{\\sim}A_Z$, $c_j:j^{-1}A_X\\xrightarrow{\\sim}A_U$. The functors $i^*,i_*,j^*$ use these identifications, and $F$ is any $A_X$-module sheaf [def-weil-sheaf-of-modules-category]. Being in the image means being isomorphic to $i_*G$ for some $A_Z$-module sheaf $G$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-essential-image.md",
   "place": "node lem-exc-proetale-closed-essential-image, order 1857"
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof": [
   {
-   "text": "Evaluation on an object of the open complement gives $j^*i_*G=0$, by\n[lem-exc-closed-localization], since its closed fibre is empty. Conversely\nsuppose $j^*F=0$ and consider the unit $\\eta:F\\to i_*i^*F$ of the pro-etale\noperations. Its closed inverse image is an isomorphism: the triangle\nidentity says that $i^*\\eta$, followed by the counit, is the identity, and\nthe counit is an isomorphism by [lem-exc-proetale-closed-fully-faithful].\nIts open inverse image is the map between two zero sheaves. Both inverse\nimages are exact by the exactness of constant-coefficient pro-etale inverse\nimage, so the kernel and cokernel of $\\eta$ have zero open and closed\ninverse images. [lem-exc-open-closed-detection] makes them zero. This proves\nthe unit isomorphism and the essential-image assertion.",
+   "text": "First normalize the coefficient identifications. The formula in [def-weil-pbc-proetale-operations] identifies $u^*M=u^{-1}M\\otimes_{u^{-1}A_X,c_u}A_T$ with $u^{-1}M$ carrying the transported action $a\\cdot m=c_u^{-1}(a)m$: the map is $m\\otimes a\\mapsto c_u^{-1}(a)m$, with inverse $m\\mapsto m\\otimes1$, and the balancing relation proves that they are inverse. Likewise transport an $A_Z$-module $G$ to an $i^{-1}A_X$-module by $b\\cdot g=c_i(b)g$. Its direct-image $A_X$-action is unchanged, since the action through the adjoint of $c_i$ becomes the action through the inverse-image ring unit after this transport. These maps are natural in module maps; the adjunction bijections in the operations definition are consequently identified. More explicitly, let $T_i$ be this transport from $i^{-1}A_X$-modules to $A_Z$-modules and let $\\theta_F:i^*F\\xrightarrow{\\sim}T_i(i^{-1}F)$ be the displayed tensor isomorphism. The identity of $i^*F$ corresponds, after transport, to $\\theta_F^{-1}$. Transposing by the inverse-image adjunction gives $\\eta_F^{c}=i_*(\\theta_F^{-1})\\circ\\eta_F^{0}$, where $\\eta^c$ is the specified module unit and $\\eta^0$ the unit with inverse-image coefficients; hence $i_*(\\theta_F)\\circ\\eta_F^c=\\eta_F^0$. Thus invertibility of the actual unit is preserved. We may therefore work with $A_Z=i^{-1}A_X$, $A_U=j^{-1}A_X$, and $i^*=i^{-1}$, $j^*=j^{-1}$. This preserves zero objects, essential-image membership, and the specified unit map.",
    "uses": [
-    "lem-exc-closed-localization",
-    "lem-exc-proetale-closed-fully-faithful",
-    "lem-exc-open-closed-detection"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; scalar transport and adjunction formulas explicitly stated in def-weil-pbc-proetale-operations"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=A_X$. Its geometric hypotheses are exactly the closed immersion $i$ and its complementary quasi-compact open immersion $j$ in the item. It gives $j^{-1}i_*=0$, the adjunction $j_!\\dashv j^{-1}$, and for every module sheaf $F$ the short exact sequence $0\\to j_!j^{-1}F\\to F\\xrightarrow{\\eta_F}i_*i^{-1}F\\to0$. The middle-to-right arrow is the actual closed adjunction unit, not an unspecified map. The additional quasi-compact and quasi-separated hypothesis on $X$ in that node is only for its filtered-colimit clause, which is not used here.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+   }
+  },
+  {
+   "text": "If $F\\cong i_*G$, applying $j^{-1}$ to the isomorphism identifies $j^{-1}F$ with $j^{-1}i_*G=0$ by step 2. Thus every object in the essential image has zero open restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+   }
+  },
+  {
+   "text": "Suppose $j^{-1}F=0$. By the adjunction of step 2, for every module sheaf $N$, $\\operatorname{Hom}(j_!0,N)\\cong\\operatorname{Hom}(0,j^{-1}N)$ is a singleton. Thus $j_!0$ is initial and hence a zero object in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. The sequence in step 2 is consequently $0\\to0\\to F\\xrightarrow{\\eta_F}i_*i^{-1}F\\to0$. By [def-weil-pbc-exact-sequence], exactness at $F$ says $\\ker\\eta_F=0$, and the last zero says $\\eta_F$ is epic. By the abelian-category definition [def-sp-abelian], the epimorphism $\\eta_F$ is a cokernel of some map $h:T\\to F$. Since $\\eta_Fh=0$ and $\\ker\\eta_F=0$, the kernel universal property gives $h=0$. The cokernel universal property therefore factors $1_F$ uniquely as $r\\circ\\eta_F$ for a map $r:i_*i^{-1}F\\to F$. Now $(\\eta_F\\circ r)\\circ\\eta_F=\\eta_F$, so cancellation of the epimorphism gives $\\eta_F\\circ r=1_{i_*i^{-1}F}$. Thus $r$ is an explicit two-sided inverse of the actual unit. Step 1 carries this conclusion back to the originally specified coefficient identifications.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+   }
+  },
+  {
+   "text": "For $j^*F=0$, the inverse of the unit isomorphism in step 4 is an isomorphism $i_*i^*F\\xrightarrow{\\sim}F$, exhibiting $G=i^*F$ as a witness to essential-image membership. Conversely step 3 gives $j^*F=0$ for every such member. This proves both directions and the canonical-unit assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+   }
   }
  ],
  "proof_deps": [
-  "lem-exc-closed-localization",
-  "lem-exc-proetale-closed-fully-faithful",
-  "lem-exc-open-closed-detection",
-  "prop-weil-pbc-proetale-constant-exact"
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-proetale-ringed-open-closed"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-essential-image.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open: elementary supported-sheaf consequence of the canonical localization short exact sequence, using its existing arbitrary ring-sheaf version"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "essential image of closed immersion direct image iff open restriction vanishes pro-etale sheaf",
+   "results": "AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_range; AlgebraicGeometry.Scheme.Hom.mem_opensRange; AlgebraicGeometry.Scheme.Hom.map_mem_image_iff; AlgebraicGeometry.Scheme.Hom.apply_mem_image_iff; AlgebraicGeometry.Scheme.Hom.opensRange; AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale closed-support criterion; generic adjunction facts and site definitions cover only parts"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.essImage, IsZero, IsIso",
+   "results": "loogle: unknown identifier 'Functor.essImage'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; later retried with quoted name substrings"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage|lowerStar_essImage|isIso_upperStarLowerStarAdjunction_unit",
+   "results": "0 hits; the supplied subdirectory Mathlib resolved to Mathlib/Mathlib and was invalid. Corrected by later searches in CategoryTheory and AlgebraicGeometry/Sites.",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit map to closed direct image is an isomorphism when open restriction is zero",
+   "results": "AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme; AlgebraicGeometry.Scheme.Hom.isIso_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isIso_of_subset; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor; AlgebraicGeometry.Scheme.Opens.isoOfLE; AlgebraicGeometry.Scheme.ofRestrict_appIso; AlgebraicGeometry.Scheme.Hom.isoImage",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale closed-support criterion; generic adjunction facts and site definitions cover only parts"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Adjunction.unit, IsZero",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; later retried with quoted name substrings"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarLowerStarAdjunction|essImage",
+   "results": "0 hits; the supplied subdirectory Mathlib resolved to Mathlib/Mathlib and was invalid. Corrected by later searches in CategoryTheory and AlgebraicGeometry/Sites.",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"unit\"",
+   "results": "CategoryTheory.Adjunction.mem_essImage_of_counit_isIso; CategoryTheory.Adjunction.mem_essImage_of_unit_isIso; CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage; CategoryTheory.Adjunction.isIso_unit_app_iff_mem_essImage; CategoryTheory.Functor.EssImageSubcategory.toUnit_def; CategoryTheory.mem_essImage_of_counit_isSplitEpi; CategoryTheory.mem_essImage_of_unit_isSplitMono; CategoryTheory.Functor.essImage.counit_isIso. Read Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:202-248: generic essential-image/unit lemmas assume full faithfulness and do not supply the geometric vanishing/support criterion.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale closed-support criterion; generic adjunction facts and site definitions cover only parts"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage|isZero.*(closed|open)|closed.*(unit|counit)",
+   "results": "Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale closed-support criterion; generic adjunction facts and site definitions cover only parts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules on the pro etale site is supported on a closed subscheme exactly when its open restriction vanishes and the closed adjunction unit is invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|closed.*(unit|counit)|essImage",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale closed-support criterion; generic adjunction facts and site definitions cover only parts"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact.*[Ii]sIso|[Ii]sIso.*shortExact|[Ii]sZero.*[Ii]sIso|[Ii]sIso.*[Ii]sZero",
+   "results": "Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean; Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean; Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean; Mathlib/CategoryTheory/Abelian/Preradical/Radical.lean; Mathlib/CategoryTheory/Abelian/EpiWithInjectiveKernel.lean",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic short-exact isomorphism criterion found by Loogle; semantic hits concern Zariski module sheaves, and grep hits concern preradicals. None states the geometric pro-etale support criterion. The generic zero-term implication is written elementarily in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence with zero first term has an invertible second map; localization of sheaves supported on a closed subset",
+   "results": "ModuleCat.Tilde.exists_const; ModuleCat.Tilde.isLocallyFraction; ModuleCat.Tilde.isLocallyFraction_pred; AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor; ModuleCat.Tilde.const; ModuleCat.Tilde.isFractionPrelocal; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization; ModuleCat.Tilde.isUnit_toStalk",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic short-exact isomorphism criterion found by Loogle; semantic hits concern Zariski module sheaves, and grep hits concern preradicals. None states the geometric pro-etale support criterion. The generic zero-term implication is written elementarily in step 4."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"isIso\"",
+   "results": "CategoryTheory.ShortComplex.ShortExact.isIso_f_iff; CategoryTheory.ShortComplex.ShortExact.isIso_g_iff; CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃; CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃'; CategoryTheory.ShortComplex.ShortExact.isIso_δ",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: generic short-exact isomorphism criterion found by Loogle; semantic hits concern Zariski module sheaves, and grep hits concern preradicals. None states the geometric pro-etale support criterion. The generic zero-term implication is written elementarily in step 4."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +210,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-proetale-closed-essential-image",
+  "worker": "stage1",
+  "summary": "Made explicit the arbitrary commutative ring-sheaf coefficients already specified by the operations dependency, rejected the fixed-ring sorry-backed Lean attachment, and proved the supported-sheaf criterion using the existing ringed canonical localization sequence. Coefficient transport, vanishing on the open, the zero left term, the invertible actual unit and the essential-image witness are written out. No new nodes. Second reading writes the coefficient-unit comparison equation and constructs the inverse using the normal-epimorphism clause of the existing abelian-category definition.",
+  "blueprint": "Realizes both conclusions of the blueprint proof: vanishing on the complementary open and the isomorphism of the canonical unit. Uses the existing canonical open-closed short exact sequence below the fixed closed-immersion-unit route; it supplies the same sheaf-level closed support and adjunction input without changing any unit or chapter step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale localization sequence with the actual unit, and open restriction of closed pushforward equal to zero, for arbitrary ring-sheaf coefficients. The current unit has no such sequence stated at this coefficient generality; this is a tool below its closed-adjunction route."
+   },
+   {
+    "node": "def-weil-pbc-exact-sequence",
+    "why": "Definition of short exactness used to identify the kernel and epicity of the actual unit after its left term vanishes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-b899cbabc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-b899cbabc (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All five steps are sound, including coefficient transport and the actual canonical unit. Accepted the declared localization and exactness tools. Checked edge cases, duplicate candidates, and the 474-node dependency closure; no cycle or repair needed. Detailed review written to review.md."
+ }
 }
