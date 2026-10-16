@@ -19,7 +19,7 @@
 | `Sheaf.Paper.CondensedFiniteLocalSubmodules` | 8 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarScalarPullback` | 8 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteDerivedCoefficientData` | 8 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarFieldEvaluationLinearity` | 9 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarFieldCoefficientSquare` | 10 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorGeometry` | 10 | 1 | proof |
 | `Sheaf.Paper.ProEtaleLisseOrigin` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum` | 11 | 1 | proof |
