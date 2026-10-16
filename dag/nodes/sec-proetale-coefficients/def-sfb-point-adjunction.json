@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-point-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The adjunction $p^*\\dashv p_*$",
@@ -16,22 +16,46 @@
   "def-sfb-point-upper-star",
   "def-sfb-point-lower-star"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Let $F$ be a sheaf on $*_{\\mathrm{proét}}$ and $G$ a sheaf on\n$(\\Spec\\Z)_{\\mathrm{proét}}$. Sheafification is left adjoint to the inclusion\nof sheaves into presheaves, and $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ is left\nadjoint to restriction along $u^{\\mathrm{op}}$. Hence\n$$\n\\Hom(p^*F,G)=\\Hom(\\operatorname{Lan}_{u^{\\mathrm{op}}}F,G)=\\Hom(F,G\\circ u^{\\mathrm{op}})=\\Hom(F,p_*G),\n$$\nnaturally in $F$ and $G$.",
-   "uses": [],
-   "elementary": null
+   "tool": "leanfinder",
+   "query": "the sheafification of left Kan extension along a continuous functor is left adjoint to pushforward of sheaves",
+   "results": "8 hits, including CategoryTheory.Functor.sheafAdjunctionContinuous and CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib/CategoryTheory/Sites/Pullback), and the constructed pushforward IsRightAdjoint instance. Read the construction-specific adjunction at Pullback.lean:75.",
+   "date": "2026-10-16",
+   "verdict": "match: the construction-specific adjunction specializes directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionContinuous\"",
+   "results": "2 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous and CategoryTheory.Functor.sheafAdjunctionContinuous, both Mathlib.CategoryTheory.Sites.Pullback. The former has the constructed Kan-extension/sheafification pullback.",
+   "date": "2026-10-16",
+   "verdict": "match: construction-specific declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionContinuous",
+   "results": "Subdirectory CategoryTheory/Sites: 6 hits. Mathlib/CategoryTheory/Sites/Pullback.lean:23,59,75,82,87 and Mathlib/CategoryTheory/Sites/Point/Comap.lean:71. The required declaration is Pullback.lean:75; its constructed left adjoint is defined at line 70.",
+   "date": "2026-10-16",
+   "verdict": "match: source and hypotheses read at Pullback.lean:42-78"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous functor of sites gives an adjunction between sheafification of left Kan extension and restriction of abelian sheaves",
+   "results": "8 hits, including CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.presheafToSheaf, CategoryTheory.sheafificationAdjunction, CategoryTheory.Sheaf.adjunction, and CategoryTheory.plusPlusAdjunction. Read the construction-specific match in Mathlib/CategoryTheory/Sites/Pullback.lean:75.",
+   "date": "2026-10-16",
+   "verdict": "match: construction-specific declaration"
   }
  ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-point-adjunction.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+  "file": "Mathlib/CategoryTheory/Sites/Pullback.lean",
+  "line": 75,
+  "how": "specializes in one line: sheafPullbackConstruction.sheafAdjunctionContinuous u Ab (coherentTopology Profinite) (ProEt.topology specZ), where u(S) = Spec LC(S, Z). Its left adjoint is sheafToPresheaf followed by u.op.lan and presheafToSheaf (line 70), exactly p^* of def-sfb-point-upper-star; its right adjoint is sheafPushforwardContinuous, exactly restriction p_* of def-sfb-point-lower-star. The hypotheses are continuity of u, existence of left Kan extensions of abelian presheaves along u.op, and target weak sheafification, which are the well-definedness prerequisites of those two functors. Use the general-universe declaration (lines 42-78), with Ab in the coefficient universe of the point definitions; no small-index assumption is added here."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -49,5 +73,20 @@
   "AlgebraicGeometry.ProEtale.pointUpperStarLowerStarAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-point-adjunction",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and point functor definitions, searched the project Lean source for an exact attachment (absent), and verified the construction-specific Mathlib adjunction at Pullback.lean:75. The item is a direct specialization, so no helper nodes or proof steps are needed. Fresh logged searches replace inaccurate summaries from the earlier attempt. Removed the finite-scheme adjunction from same_as because its sites and functors differ.",
+  "blueprint": "Realizes sk-def-sfb-pullback-from-point, clause 3, sentence Then p^* is left adjoint to p_*. The entire def-sfb-point-adjunction.proof.md Hom-bijection argument is implemented by Mathlib/CategoryTheory/Sites/Pullback.lean:75-78, composing the Kan-extension and sheafification adjunctions and restricting to sheaves."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-3af693dfc",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-3af693dfc (reviewer sub-agent of L); spot-checked: Reviewed the complete item, report, blueprint unit/source, cited definitions, DAG candidates, and Mathlib Pullback.lean:42–78. The statement and Ab coefficient category match exactly; sheafPullbackConstruction.sheafAdjunctionContinuous at line 75 supplies the stated adjunction with correct functor orientation and hypotheses. Edge cases, route, duplicates, searches, and no-tool-use status checked; no new nodes or repairs required. Review written to review.md."
+ }
 }
