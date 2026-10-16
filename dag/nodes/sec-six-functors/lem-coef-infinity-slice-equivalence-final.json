@@ -227,5 +227,28 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-49957d75c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-mapping-composition, and the full statements of every cited node: def-cbc-enhanced-diagrams-cones, slice-right-fibration, slice-arrow-equivalence, cbc-enhanced-functor-cone-calculus and pinch-comparison. I also read the unit sk-prop-sf-biduality-general and Kerodon online, which is not archived and is listed as WANTED. Kerodon 02J2 (Prop. 4.7.3.20) matches the item hypothesis for hypothesis: any quasicategory, f is an isomorphism iff f is final in C_{/Y}, with no finality assumption on t. The statement is unchanged. Step 1: the join slice with K=Δ^0 is literally S_t. δ(f)=f because ρ_0 is the identity. The Kan property comes from cone-calculus with K=Δ^0. Step 2 is elementary from associativity, unitality and dependence on component classes. Step 3 transports finality in both directions, using full faithfulness, the quasi-inverse L, and the counit components, which are equivalences by the componentwise criterion; the direction of precomposition is correct. Step 4: with K=Δ^0 the cone category is degreewise T and μ=f, so the cone criterion becomes 'P_z=f∘- is an equivalence for all z'. Step 5 inverts each P_z by post_g. Step 6 gets a two-sided inverse on π_0 from surjectivity at t and injectivity at x, then applies the new node's inverse-triangle criterion. The new node agrees with Kerodon 01PF: Cor. 4.6.8.5 and 4.6.8.8, Constr. 4.6.8.9, Rem. 4.6.8.10, Props. 4.6.8.11 and 4.6.8.12, Rem. 4.6.8.14, Notation 4.6.8.15. In it, V is the fixed-vertex Δ^2-string space, θ goes to the 12 and 01 edges in that order, and c is unique up to homotopy because j is a homotopy equivalence. It is statement-only (B1–B7 hold), its blueprint from/via is correct, and it is not a restatement of the item. I tested small cases: N([1]) with f=id_1, with the non-invertible edge 0→1 (incoming space empty) and with t=0 (not final); the empty quasicategory; nerves of ordinary categories; one-object groupoids. I found no duplicate after rg over dag/nodes and opening kan-mapping-restriction, join-cone-calculus, arrow-morphism-square, right-fibration-fibers, normalized-final-cone, terminal-anodyne, complete-algebroid and others, plus a blueprint grep. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) as a black box for the generic mapping-space and cone criteria; no node of this unit gives them, and sibling nodes of the unit already cite it. No SGA source is used, nothing is weakened, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceEquivalenceFinal",
+  "declaration": "SSet.Enhanced.joinSlice_vertex_equivalence_iff_final",
+  "declarations": [
+   "SSet.Enhanced.joinSliceVertexEdge",
+   "SSet.Enhanced.joinSlice_vertex_equivalence_iff_final"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SliceEquivalenceFinal.lean",
+  "statement": "theorem joinSlice_vertex_equivalence_iff_final (C : SSet.{u}) [Quasicategory C] (x t : C _⦋0⦌) (f : (joinSliceFiber (SSet.yonedaEquiv.symm t) x).toSSet _⦋0⦌) : IsEquivalenceEdge C (joinSliceVertexEdge t x f) ↔ ∀ a : (joinSlice (SSet.yonedaEquiv.symm t)) _⦋0⦌, KanComplex (mappingSpace (joinSlice (SSet.yonedaEquiv.symm t)) a f.val) ∧ IsContractible (mappingSpace (joinSlice (SSet.yonedaEquiv.symm t)) a f.val)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper `joinSliceVertexEdge` evaluates the canonical top simplex to recover the edge represented by a degree-zero vertex in the strict source fiber; the theorem states the equivalence/finality criterion with right-pinched mapping spaces and their Kan property."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-647cbb8b4",
+  "group": "NS",
+  "result": "pass",
+  "note": "Commit 647cbb8 has 3 files; the node changed only in its lean record; statement field verbatim. Clause-by-clause match with the node and Kerodon 02J2: quasicategory C; vertices x,t; f as a slice vertex over x, with the helper joinSliceVertexEdge recovering the edge x->t (one-to-one with edges by the join-slice dependency); IsEquivalenceEdge iff for all slice vertices a, the mapping space into f is Kan and weakly contractible. No finality assumed on t; single universe u; edge cases (empty, non-invertible edge, non-final t, identities) OK. Helper is real data (standard axioms only); theorem proof is sorry only; source/blueprint docstrings with the proof steps present; dependency declarations used directly; no duplicate found by rg or Mathlib searches; the 3 unstated proof dependencies have no Lean record, so no imports owed. nt_compile --json: rc 0, no errors or warnings. Non-blocking: no Main statements list in the module docstring."
  }
 }
