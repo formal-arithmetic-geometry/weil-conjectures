@@ -15479,3 +15479,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.AlgebraicGeometry.MeromorphicModule (not in the queue: pruned or finished)
 - 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (not in the queue: pruned or finished)
 - 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.NumberTheory.Padics.CoefficientExtension (not in the queue: pruned or finished)
+- 08:23 L: returned deliver/A4/Sheaf.Paper.IntegralLfpLocalTorsionCharts (reviewer RETURN: (the landing tools, head e689186ba) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
