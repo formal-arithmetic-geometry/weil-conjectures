@@ -31,9 +31,135 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=N_{\\mathrm{hc}}(\\mathcal A^{cf})$. There is a natural isomorphism $\\mathfrak C[S^{\\mathrm{op}}]\\cong\\mathfrak C[S]^{\\mathrm{op}}$: on a standard simplex reverse its vertices and send a subset of an interval to its reversed subset; this preserves inclusion of subsets and union, hence composition, and extends over the colimit of simplices defining $\\mathfrak C$. Choose a locally Kan replacement $v:\\mathfrak C[S]^{\\mathrm{op}}\\to I$. By projective model calculus, $v_!\\dashv v^*$ is a simplicial Quillen equivalence; the derived-adjunction theorem gives its derived unit and counit. They are weak equivalences by the defining Quillen-equivalence test: the unit at cofibrant $P$ is adjoint to $v_!P\\to Rv_!P$, and the counit at fibrant $Q$ is adjoint to $Qv^*Q\\to v^*Q$. Their localizations are therefore inverse natural equivalences. Since $v^*$ preserves all objectwise weak equivalences, its directly localized functor agrees with this derived equivalence. The model-nerve localization and the coherent-diagram rectification, applied to $K=S^{\\mathrm{op}}$ and $u=v$, therefore give a natural equivalence $\\mathcal D_{\\mathcal A}(S)\\simeq\\operatorname{Fun}(S^{\\mathrm{op}},\\mathcal C)$. For $a:T\\to S$ the square of restrictions is obtained by precomposing with $\\mathfrak C[a]^{\\mathrm{op}}$ on strict diagrams and with $a^{\\mathrm{op}}$ on coherent diagrams; the naturality in the cited comparisons identifies its two composites. This also identifies transformations and higher simplices. Only $I$ and the bifibrant model categories are required to be locally Kan; $\\mathfrak C[S]$ need not be.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions A.3.3.7-A.3.3.8 and 4.2.4.4, Remark 4.2.4.5; model localization as HA Theorem 1.3.4.20. Opposite coherent realization is checked from its subset-poset definition."
+   }
+  },
+  {
+   "text": "If $S=\\coprod_j S_j$, coherent realization is the coproduct of the $\\mathfrak C[S_j]$, since it is a left adjoint. An enriched diagram on $\\mathfrak C[S]^{\\mathrm{op}}$ is exactly a family of enriched diagrams on its components. Projective weak equivalences and fibrations are componentwise. Cofibrations are also componentwise, by their left lifting characterization against componentwise trivial fibrations. Consequently the bifibrant enriched diagram category is the product of the component bifibrant categories, including their mapping simplicial sets. The coherent nerve preserves this product: a simplicial functor from $\\mathfrak C[\\Delta^n]$ to a product is exactly a family of such functors. The model-nerve localization now gives $\\mathcal D_{\\mathcal A}(S)\\simeq\\prod_j\\mathcal D_{\\mathcal A}(S_j)$, with comparison equal to restriction. For the empty family the enriched diagram category has one object and terminal mapping simplicial set, giving the terminal infinity category.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.6.18, coproduct instance; expanded directly using the coherent-nerve adjunction and projective diagram model structure."
+   }
+  },
+  {
+   "text": "For $P=B\\amalg_A C$ assume, interchanging $B,C$ if necessary, that $A\\to B$ is a monomorphism. Opposite simplicial sets preserve this degreewise pushout and monomorphism. The definition of the internal functor simplicial set gives a strict pullback $\\operatorname{Fun}(P^{\\mathrm{op}},\\mathcal C)=\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal C)\\times_{\\operatorname{Fun}(A^{\\mathrm{op}},\\mathcal C)}\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal C)$: an $n$-simplex on either side is a pair of maps from $B^{\\mathrm{op}}\\times\\Delta^n$ and $C^{\\mathrm{op}}\\times\\Delta^n$ agreeing on $A^{\\mathrm{op}}\\times\\Delta^n$, since product with $\\Delta^n$ preserves this degreewise pushout. Restriction from $B^{\\mathrm{op}}$ to $A^{\\mathrm{op}}$ is an isofibration by exponential restriction. The isofibration-pullback lemma therefore makes this strict square a pullback in $\\mathrm{Cat}_\\infty$. Step 1 identifies all four corners and all restriction maps with those in the asserted formula. The calculation is a pullback of entire infinity categories, so it includes noninvertible transformations.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.6.18, pushout instance. Direct functor-category computation via Kerodon Corollary 4.4.5.3 (01F3) and Corollary 4.5.3.28 (033R)."
+   }
+  },
+  {
+   "text": "First compute inverse towers in any model category $\\mathcal M$ covered by the cited derived-adjunction and rectification results. Give $\\mathbb N^{\\mathrm{op}}$ its inverse Reedy structure, with degree $n$ and only identities in the direct subcategory. Latching objects are initial, so Reedy (trivial) cofibrations are objectwise. Thus the constant-diagram functor preserves cofibrations and trivial cofibrations, making $\\Delta:\\mathcal M\\rightleftarrows\\mathcal M^{\\mathbb N^{\\mathrm{op}}}:\\lim$ a Quillen adjunction. The derived-adjunction theorem and ordinary-diagram rectification identify its derived left adjoint with the coherent constant-diagram functor. Its derived right adjoint is therefore the limit functor, including the counit cone. A tower $X$ is Reedy fibrant exactly when $X_0$ is fibrant and $X_n\\to X_{n-1}$ is a fibration for $n>0$: the matching category at $n>0$ has initial object $n\\to n-1$, so its matching object is $X_{n-1}$. For such $X$ the right derived limit is the strict limit. This proves its coherent universal property, rather than just fibrancy of the limit.\n\nApply this calculation to the Joyal model category. By coherent-nerve comparison its infinity localization is $\\mathrm{Cat}_\\infty$. Set $X_n=\\operatorname{Fun}(S_n^{\\mathrm{op}},\\mathcal C)$. Exponential restriction gives quasicategories and isofibrations $X_{n+1}\\to X_n$; the Joyal-fibration characterization makes these a Reedy fibrant tower. Its strict limit is $\\operatorname{Fun}(S^{\\mathrm{op}},\\mathcal C)$: in every degree a map from $S^{\\mathrm{op}}\\times\\Delta^k$ is exactly a compatible sequence of maps from $S_n^{\\mathrm{op}}\\times\\Delta^k$. Hence this strict limit, with its restriction cone, is the infinity-categorical limit of the $X_n$. The natural equivalences of Step 1 give the required $\\mathcal D_{\\mathcal A}(S)\\simeq\\lim_n\\mathcal D_{\\mathcal A}(S_n)$, including essential surjectivity through the limit universal property.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.6.18, increasing-union instance. The inverse-tower computation uses Hovey Theorem 5.2.5; Cisinski Theorems 7.5.30 and 7.9.8; HTT Theorem 2.2.5.1 for the Joyal presentation."
+   }
+  },
+  {
+   "text": "We establish the mapping-space formula for $L=\\lim_J H$ independently of diagram descent. Write $\\operatorname{Arr}(D)=\\operatorname{Fun}(\\Delta^1,D)$. The cartesian closedness of $\\mathrm{Cat}_\\infty$ in the functor-pushout node and the representable limit test give, for every test category $Q$,\n$$\\operatorname{Map}(Q,\\operatorname{Arr}(L))\\simeq\\operatorname{Map}(Q\\times\\Delta^1,L)\\simeq\\lim_j\\operatorname{Map}(Q\\times\\Delta^1,H(j))\\simeq\\lim_j\\operatorname{Map}(Q,\\operatorname{Arr}(H(j))).$$\nThus $\\operatorname{Arr}(L)\\simeq\\lim_j\\operatorname{Arr}(H(j))$, with both endpoint projections. The identification $D^\\simeq=\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(\\Delta^0,D)$ in the isofibration-pullback node shows that cores also preserve limits, by the same representable limit test. For any $D$, endpoint restriction $\\operatorname{Arr}(D)\\to D\\times D$ is an isofibration, and hence its core map is a Kan fibration. Its strict fiber over $(x,y)$ is $U_D(x,y)$: this fiber is Kan by the pinch-comparison node, so its edges have inverses whose images in $\\operatorname{Arr}(D)$ are inverses, and it already lies in the core. The Kan-model homotopy-pullback calculation therefore identifies this strict fiber with the homotopy fiber of $\\operatorname{Arr}(D)^\\simeq\\to(D^\\simeq)^2$. The natural pinch comparison identifies the fiber with $\\operatorname{Map}_D(x,y)$.\n\nTake these fibers for $D=L$ and $D=H(j)$. Limits of spaces commute with this fiber construction: for any test space $T$, a map from $T$ into either iterated limit is precisely a coherent $J$-family of arrows together with homotopies fixing their two endpoint families to $(x_j,y_j)$; the endpoint families are the images of $(x,y)$. The two iterated universal properties therefore identify the spaces, naturally in $T$. It follows that $\\operatorname{Map}_L(x,y)\\simeq\\lim_j\\operatorname{Map}_{H(j)}(x_j,y_j)$, with comparison induced by the cone projections. This also covers $J$ empty.",
+   "uses": [
+    "lem-coef-infinity-functor-pushout",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.2.27. Expanded proof from internal-Hom adjunction, representable limits, and endpoint fibers; pinch comparison is Kerodon Proposition 4.6.5.10 (01L5)."
+   }
+  },
+  {
+   "text": "Let $L=\\lim_J H$ and $\\alpha:\\mathcal E\\to L$ be the given cone comparison. By Step 5 its displayed mapping-space comparison is the map induced by $\\alpha$ followed by $\\operatorname{Map}_L(\\alpha x,\\alpha y)\\simeq\\lim_j\\operatorname{Map}_{H(j)}(\\alpha_jx,\\alpha_jy)$. If $\\alpha$ is an equivalence, it induces equivalences of mapping spaces by the endpoint-fiber calculation of Step 5: postcomposition by $\\alpha$ and a coherent quasi-inverse gives inverse equivalences on arrow categories and on cores, since postcomposing their two natural equivalences supplies the two inverse homotopies. Thus the induced map of endpoint diagrams is objectwise an equivalence of spaces. Homotopy-pullback invariance makes its homotopy fibers equivalent; the natural pinch comparison identifies the map of fibers with the map of mapping spaces. Conversely, equivalence of every displayed comparison makes $\\alpha$ fully faithful, by two-out-of-three. For every $z\\in L$, essential surjectivity of the assumed equivalence $\\alpha\\beta$ gives $b\\in\\mathcal B$ and an equivalence $z\\simeq\\alpha\\beta(b)$. Thus the full replete essential image of $\\alpha$ is all of $L$. The full-essential-image theorem gives a coherent quasi-inverse for $\\alpha$, proving the criterion.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.2.28; essential-image equivalence criterion is Kerodon Theorem 4.8.4.1 (01JX)."
+   }
+  },
+  {
+   "text": "For a tower $K_0\\leftarrow K_1\\leftarrow\\cdots$ of Kan complexes with Kan-fibration transitions, the Kan model structure makes $K_0$ fibrant and every transition a fibration. Its inverse Reedy matching objects are $M_0=*$ and $M_n=K_{n-1}$ for $n>0$, so the tower is Reedy fibrant. The constant functor is left Quillen because inverse Reedy cofibrations and trivial cofibrations are objectwise. The derived adjunction $\\Delta\\dashv\\mathbf R\\lim$ together with ordinary-diagram rectification identifies $\\mathbf R\\lim$ with the limit of the corresponding coherent diagram of spaces, and since this tower is already fibrant it is evaluated by $\\lim_n K_n$. The simplicial-model localization identifies Kan-model localization with spaces. This proves precisely the final assertion with its projection maps. The strict limit is also Kan directly: fill a horn at level zero; given a filler at level $n-1$, lift it across $K_n\\to K_{n-1}$ with the prescribed horn to obtain a compatible filler at level $n$. A constant tower reduces to its value; a tower all of whose values are empty has empty limit, as permitted for Kan complexes.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "The inverse-Reedy diagram computation of Hovey Theorem 5.2.5, with Cisinski Theorems 7.5.30 and 7.9.8 identifying the derived right adjoint with the coherent limit; Kan-space presentation as HA Theorem 1.3.4.20."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-small-diagram-model-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary A.3.6.18 and Proposition A.3.2.27/Corollary A.3.2.28 motivate the assertions. Second-reader proof expanded in seven steps via existing rectification, isofibration-pullback, cartesian-closedness and inverse-Reedy model nodes; auxiliary exact sources appear in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +202,24 @@
    "results": "{\"t\": \"2026-10-16T20:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial localization homotopy colimit indexing category enriched diagrams limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.hoFunctor\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\"], \"digest\": \"df4a3e0228a0cd53\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search returned related ordinary simplicial, enriched-category or model-category declarations, but none states this marked-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant functor quasicategories take unions and gluing of indexing simplicial sets to limits retaining natural transformation spaces",
+   "results": "{\"t\": \"2026-10-16T21:24:41Z\", \"tool\": \"leanfinder\", \"query\": \"Contravariant functor quasicategories take unions and gluing of indexing simplicial sets to limits retaining natural transformation spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2082\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2081\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"869a5b84aa5fb53e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: LeanFinder returned horn/subcomplex colimit declarations and the nerve quasicategory instance, not descent of localized enriched diagram categories; the independent CategoryTheory grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "isLimit.*[Rr]eedy|[Rr]eedy.*[Ll]imit|[Ii]so[Ff]ibration|homotopyLimit",
+   "results": "{\"t\": \"2026-10-16T21:26:32Z\", \"tool\": \"grep\", \"query\": \"isLimit.*[Rr]eedy|[Rr]eedy.*[Ll]imit|[Ii]so[Ff]ibration|homotopyLimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: LeanFinder returned horn/subcomplex colimit declarations and the nerve quasicategory instance, not descent of localized enriched diagram categories; the independent CategoryTheory grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -87,5 +227,20 @@
   "group": "Q111"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-diagram-homotopy-descent",
+  "worker": "stage1",
+  "summary": "Second reader repaired the split into seven steps: correctly contravariant enriched rectification; component products; isofibration pullback descent; inverse-Reedy union descent with coherent universal property; arrow-fiber computation of mapping spaces in arbitrary limits; the full-essential-image criterion; and the Kan tower specialization. Statement unchanged; zero new nodes or Mathlib leaves.",
+  "blueprint": "The steps realize the proof paragraph of prop-coef-integral-exceptional-adjoint describing the finite-coefficient mapping-complex adjunction, specifically the technical input ‘Descent of enriched diagram homotopy theories and mapping-space limits’ and its coproduct, pushout, tower, and mapping-space-limit clauses."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-386156317",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-386156317 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged, and the delivery adds no new nodes. I opened the full statements of all 18 cited nodes. All are in the same unit, sk-prop-sf-biduality-general, so no tool_uses are needed; none is merged; there is no cycle (289-node closure). proof_deps equals the union of the steps' uses. Step 1: C[S^op]=C[S]^op by vertex reversal on subset posets. Locally Kan replacement gives a DK equivalence, and projective calculus gives the Quillen equivalence. Derived unit and counit pass the test as that node states it. Nerve-localization and coherent-diagrams with K=S^op give D_A(S)=Fun(S^op,C). Square-by-square naturality is enough because spans and towers are free shapes. Step 2: the coproduct argument is componentwise. Cofibrations are componentwise by lifting. The empty family gives the terminal category. One point is uncited: infinite products of quasicategories are products in Cat_inf. I judge it elementary from the core and Yoneda nodes. Step 3: a strict pullback of functor quasicategories, plus the exponentiation isofibration, plus the isofibration-pullback-limit node. Step 4: inverse Reedy on N^op checked against reedy-model-structure (initial latching objects, M_n=X_{n-1} via initial object n->n-1). The derived right adjoint to constants is the strict limit, applied in the Joyal model via joyal-quasicategory-characterizations (1). Step 5: Arr and the core preserve limits by cartesian closedness and the representable test. The endpoint core map is a Kan fibration, its fiber U is Kan, the pinch comparison identifies it with Map, and limits interchange. Step 6: full faithfulness by two-out-of-three, essential surjectivity from alpha-beta, then full-essential-image. Step 7: Kan towers by the same Reedy argument, with direct horn filling. Edge cases tested: S empty, Delta^0, Lambda^2_1, pushout with A empty, constant sequences, J empty, the empty tower. The statement gives exactly what the citer marked-cone-straightening-quillen uses in steps 9-11. Duplicate search by rg found no duplicate (directed-union-local-colimits and simplicial-pullback-equivalence are different). No SGA is used; HTT is online-only, with a WANTED line and proof_origin agent. No fixes."
+ }
 }
