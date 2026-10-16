@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-ctf-finite-comparison-localizing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\nu_X^*$ identifies the localizing closures",
- "statement": "Let $A$ be a finite admissible ring. The functor $\\nu_X^*$ restricts to an exact equivalence\n$\\Loc(\\Dctf(X_{\\mathrm{ét}},A))\\xrightarrow{\\sim}\\Loc(\\Dctf(X,A))$ preserving sums, compatible with $g^*$, $Rg_*$,\n$j_!$ for open immersions $j$, and hence with $Rf_!=Rp_*j_!$ computed through a compactification.",
+ "statement": "Work in the standing setting of finite-type schemes [def-pc-scheme, def-weil-finite-type-morphism] over $k=\\overline{\\mathbf F}_q$. Let $\\ell\\ne\\operatorname{char}k$ be a prime and $A$ a finite commutative ring annihilated by a power of $\\ell$ (a finite admissible ring). For a scheme $X$ in this setting, use the unbounded derived categories of ordinary module sheaves over the constant discrete ring $A$ on the small étale and pro-étale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], and the comparison morphism $\\nu_X$ [def-weil-pbc-site-comparison-morphism]. The finite-discrete coefficient identifications [lem-weil-pbc-finite-discrete-condensed-ring-constant, lem-weil-pbc-finite-discrete-scheme-ring-constant] identify this constant ring sheaf with the pulled-back condensed ring used in [sk-def-sfb-constructible] and [sk-def-localizing-closure]; their module categories are transported along this ring isomorphism. On either site, $\\Dctf$ means the full subcategory of bounded complexes with constructible cohomology and finite Tor amplitude: some interval $[a,b]$ contains the cohomology of $K\\otimes_A^{\\mathbf L}N$ for every module sheaf $N$ in degree zero [sk-def-sfb-constructible, def-weil-pbc-constructible-complexes]. On either derived category, $\\Loc(\\mathcal S)$ means the smallest full replete triangulated subcategory containing $\\mathcal S$ and closed under arbitrary small coproducts, with ambient coproducts (the convention [sk-def-localizing-closure]).\n\nThen $\\nu_X^*$ restricts to an exact equivalence\n$\\Loc(\\Dctf(X_{\\mathrm{ét}},A))\\xrightarrow{\\sim}\\Loc(\\Dctf(X,A))$\npreserving arbitrary small sums. For every finite-type morphism $g:X\\to Y$ of standing schemes, the canonical comparisons with $g^*$ and $Rg_*$ are isomorphisms on complexes in these closures whenever evaluated in the ambient derived categories. For an open immersion [def-weil-open-immersion] $j:U\\hookrightarrow X$ the comparison $\\nu_X^*j^{\\mathrm{ét}}_!\\simeq j^{\\mathrm{proét}}_!\\nu_U^*$ is an isomorphism there as well. Consequently, for every chosen compactification $f=p\\circ j$ in the standing setting, with $j$ open and $p$ proper [def-weil-proper-morphism], the composite definition $Rf_!:=Rp_*j_!$ is compatible with comparison: $\\nu_Y^*Rf_{\\mathrm{ét},!}\\simeq Rf_{\\mathrm{proét},!}\\nu_X^*$. This is a comparison in the ambient categories; no separate stability theorem for the operations is asserted here.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.md",
   "place": "node det-ctf-finite-comparison-localizing, order None",
@@ -18,42 +18,212 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
  "proof": [
   {
-   "text": "By [sk-prop-pe-unbounded-classical], $\\nu_X^*$ is exact, fully faithful and preserves sums on the unbounded\ncategories; by [sk-cor-pe-finite-tor-comparison] it maps $\\Dctf(X_{\\mathrm{ét}},A)$ essentially surjectively onto\n$\\Dctf(X,A)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Image of the closure.* The objects $K\\in\\Loc(\\Dctf(X_{\\mathrm{ét}},A))$ with $\\nu_X^*K\\in\\Loc(\\Dctf(X,A))$ form a\nlocalizing subcategory (exactness and sum preservation) containing the generators; hence all of\n$\\Loc(\\Dctf(X_{\\mathrm{ét}},A))$ maps into $\\Loc(\\Dctf(X,A))$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Essential surjectivity.* The essential image $\\mathcal I$ of $\\Loc(\\Dctf(X_{\\mathrm{ét}},A))$ under the fully faithful\nexact sum-preserving $\\nu_X^*$ is a triangulated subcategory closed under sums (a cone of\n$\\nu_X^*K\\to\\nu_X^*K'$ is $\\nu_X^*$ of the cone of the preimage of the map), and it contains $\\Dctf(X,A)$. So\n$\\mathcal I\\supset\\Loc(\\Dctf(X,A))$ ([sk-def-localizing-closure]). Together with full faithfulness this is an\nequivalence.",
+   "text": "First identify the coefficient conventions. By [lem-weil-pbc-finite-discrete-condensed-ring-constant] the continuous-function condensed ring of finite discrete $A$ is its sheafified constant ring on profinite sets. By [lem-weil-pbc-finite-discrete-scheme-ring-constant] its pullback to $X$ is the constant $A$-ring sheaf. Transporting module actions along this ring isomorphism leaves the underlying abelian sheaves and maps unchanged; its inverse transports along the inverse ring isomorphism. These exact inverse functors apply termwise to complexes and identify ambient sums, tensor products, finite Tor amplitude and the finite constant local models in the constructibility definition. Thus the ordinary coefficient categories specified here realize the finite-$A$ categories in the cited constructibility and closure nodes. By [lem-sfb-unbounded-site-comparison], $\\nu_X^*$ is exact, fully faithful and preserves arbitrary sums on the unbounded derived categories. By [det-pe-finite-tor-comparison-noetherian], specialized to the finite Noetherian coefficient ring $A$, it restricts to an equivalence $\\Dctf(X_{\\mathrm{ét}},A)\\simeq\\Dctf(X,A)$. Thus the finite-Tor generators correspond under $\\nu_X^*$.",
    "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+    "place": "opening paragraph"
+   }
+  },
+  {
+   "text": "Write $L_{\\mathrm{ét}}=\\Loc(\\Dctf(X_{\\mathrm{ét}},A))$ and $L_{\\mathrm{proét}}=\\Loc(\\Dctf(X,A))$. The full replete inverse image of $L_{\\mathrm{proét}}$ under $\\nu_X^*$ is triangulated and closed under sums by [lem-sfb-unbounded-site-comparison]: shifts and distinguished triangles are preserved, and the image of a sum is the sum of its images. It contains every étale finite-Tor generator by Step 1. By the defining intersection property of $L_{\\mathrm{ét}}$, it contains $L_{\\mathrm{ét}}$. Thus $\\nu_X^*(L_{\\mathrm{ét}})\\subseteq L_{\\mathrm{proét}}$. The target closure and its ambient sums use [sk-def-localizing-closure]; the same intersection definition on the étale side was specified in the statement.",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
     "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+    "place": "Image of the closure"
+   }
   },
   {
-   "text": "*Operations.* $\\nu^*$ commutes with inverse image ($\\nu_{X}^*g^*=g^*\\nu_Y^*$, composition of inverse images of\nmorphisms of sites), with extension by zero along open immersions (stalkwise description; Stacks, Tag 09AF),\nand with direct image by the direct-image comparison of [sk-prop-pe-unbounded-classical]. Composing the\nlast two for a compactification $f=p\\circ j$ gives $\\nu_Y^*Rp_*j_!\\simeq Rp_*j_!\\nu_X^*$.",
+   "text": "Let $\\mathcal I$ be the full replete essential image of $L_{\\mathrm{ét}}$. For $M_i\\cong\\nu_X^*K_i$ with $K_i\\in L_{\\mathrm{ét}}$, the ambient coproduct satisfies $\\bigoplus_i M_i\\cong\\nu_X^*(\\bigoplus_i K_i)$ by [lem-sfb-unbounded-site-comparison], and $\\bigoplus_i K_i\\in L_{\\mathrm{ét}}$. Likewise $M[n]\\cong\\nu_X^*(K[n])$ for every integer $n$; the empty coproduct gives the zero object. For a map $\\nu_X^*K\\to\\nu_X^*K'$ with $K,K'\\in L_{\\mathrm{ét}}$, fullness lifts the map to $u:K\\to K'$. Complete $u$ to a distinguished triangle with third object $C\\in L_{\\mathrm{ét}}$; exactness sends it to a distinguished triangle with the prescribed first arrow. Its third object is isomorphic to any cone of that arrow, so $\\mathcal I$ is triangulated. It contains $\\Dctf(X,A)$ by [det-pe-finite-tor-comparison-noetherian]. The smallest-localizing-subcategory property of [sk-def-localizing-closure] therefore gives $L_{\\mathrm{proét}}\\subseteq\\mathcal I$. Step 2 gives the reverse inclusion. Full faithfulness restricts to full subcategories, so this is an equivalence; its exactness and sum preservation are those of $\\nu_X^*$, since both closures have the ambient triangles and sums.",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "det-pe-finite-tor-comparison-noetherian",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+    "place": "Essential surjectivity"
+   }
+  },
+  {
+   "text": "For any $g:X\\to Y$, [sk-thm-pe-direct-image-comparison] states the inverse-image comparison $g_{\\mathrm{proét}}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\mathrm{ét}}^*$ on the unbounded derived categories, compatible with composition. For an open immersion $j:U\\hookrightarrow X$, [lem-cbc-proetale-extension-zero-comparison] supplies the natural sheaf comparison $\\nu_X^*j^{\\mathrm{ét}}_!\\simeq j^{\\mathrm{proét}}_!\\nu_U^*$, compatible with open composition. Both $j_!$ are exact by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact], and $\\nu^*$ is exact by [lem-sfb-unbounded-site-comparison]. Thus applying the comparison degreewise yields an isomorphism of complexes compatible with differentials; naturality makes it commute with chain maps, and exactness lets it descend through quasi-isomorphisms. The result holds for unbounded complexes. For finite-type $g$, [lem-sfb-unbounded-direct-image-comparison] supplies the canonical unbounded direct-image isomorphism. Restricting these ambient comparisons to the closures gives the asserted compatibilities.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sfb-unbounded-site-comparison",
+    "lem-sfb-unbounded-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+    "place": "Operations"
+   }
+  },
+  {
+   "text": "For a fixed compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, compose the two isomorphisms of Step 4:\n$\\nu_Y^*Rp_{\\mathrm{ét},*}j^{\\mathrm{ét}}_!K\\xrightarrow{\\alpha_{p,j_!K}}Rp_{\\mathrm{proét},*}\\nu_{\\overline X}^*j^{\\mathrm{ét}}_!K\\xrightarrow{Rp_*(e_{j,K})}Rp_{\\mathrm{proét},*}j^{\\mathrm{proét}}_!\\nu_X^*K$.\nThe first is an isomorphism for every unbounded input and the second is the image of an isomorphism under a functor. Their composite is natural in $K$ and is precisely the comparison for the stipulated composite definition $Rf_!=Rp_*j_!$. This proves the last clause without assuming any stability property of $Rg_*$ on the closures.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+    "place": "Operations"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure"
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "sk-def-localizing-closure",
+  "sk-thm-pe-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact equivalence of localizing closures under an exact fully faithful sum-preserving comparison functor",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.IsLocalization.of_equivalence_source",
+     "CategoryTheory.Localization.isEquivalence",
+     "CategoryTheory.LocalizerMorphism.isEquivalence_iff",
+     "CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence",
+     "CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'",
+     "CategoryTheory.LocalizerMorphism.isEquivalence",
+     "CategoryTheory.LocalizerMorphism.isEquivalence_imp",
+     "CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not assert the etale/pro-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing subcategory generated by equivalent finite Tor constructible complexes",
+   "results": {
+    "hits": [
+     "HasDerivedCategory.standard",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not assert the etale/pro-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.Full.id",
+     "CategoryTheory.Functor.Full",
+     "CategoryTheory.Functor.FullyFaithful.full",
+     "CategoryTheory.Functor.FullyFaithful.ofFullyFaithful",
+     "CategoryTheory.Functor.Full.of_iso",
+     "CategoryTheory.Functor.Full.comp",
+     "CategoryTheory.Functor.Full.of_comp_faithful",
+     "CategoryTheory.Functor.preimageIso"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not assert the etale/pro-etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "n_hits": 10,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not assert the etale/pro-etale derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison functor between unbounded derived categories is fully faithful and preserves arbitrary coproducts",
+   "results": {
+    "hits": [
+     "CategoryTheory.Functor.FullyFaithful.ctorIdx",
+     "CategoryTheory.Limits.FormalCoproduct.fullyFaithfulIncl",
+     "CategoryTheory.fullyFaithfulInducedFunctor",
+     "CategoryTheory.Functor.FullyFaithful",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.Full",
+     "DerivedCategory.instFaithfulSingleFunctor",
+     "CategoryTheory.Limits.coprodComparison"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not assert the etale/pro-etale derived comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -69,5 +239,59 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ctf-finite-comparison"
+ "unit": "sk-prop-ctf-finite-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ctf-finite-comparison-localizing",
+  "worker": "stage1",
+  "summary": "Expanded implicit standing hypotheses and coefficient conventions, proved the two inclusions of the localizing closures using full faithfulness and sums, and wrote the canonical operation comparisons explicitly. Existing finite-Tor and open-extension comparisons are reused; two missing unbounded-comparison consequences are stated as unsplit dependencies from the current blueprint.",
+  "blueprint": "Steps 1-3 realize the opening, Image of the closure, and Essential surjectivity paragraphs; steps 4-5 realize Operations, including the actual compactification composite. The two new statement-only nodes materialize the missing DAG statements at current-blueprint det-pe-unbounded-classical-unit and det-pe-unbounded-classical-direct-image, with precise places under this item as ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Step 4 needs the sheaf-level comparison of etale and pro-etale extension by zero, which is supplied by this existing node from the compact-support comparison unit."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic exactness/pullback comparison needed for the Operations paragraph; used without replacing the prescribed comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness/pullback comparison needed for the Operations paragraph; used without replacing the prescribed comparison route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic exactness/pullback comparison needed for the Operations paragraph; used without replacing the prescribed comparison route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "The comparison-unit route explicitly invokes the finite-Tor comparison unit; this existing Noetherian-coefficient refinement supplies precisely that generator equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Finite discrete coefficient-ring identification needed to apply the pulled-back condensed constructibility and closure conventions in the ordinary constant-A module category; no geometric comparison route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Finite discrete coefficient-ring identification needed to apply the pulled-back condensed constructibility and closure conventions in the ordinary constant-A module category; no geometric comparison route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "sk-thm-pe-direct-image-comparison",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-a734bcb68",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-a734bcb68 (reviewer sub-agent of L); spot-checked: Reviewed all five steps, both new nodes, cited statements, sources and route. Added missing finite-discrete coefficient-identification citations and explicit module transport; completed the Stacks 09AF filename/label. Canonical mate and compactification comparisons check out. No target weakened or delivery cycle introduced. Detailed checks are in review.md; corrected item JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
