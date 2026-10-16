@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 beginning For $K\\in D^b_c(X,R)$, derived coefficient adjunction before the displayed derived-limit calculation: auxiliary ordinary accessibility infrastructure in the inherited simplicial model-localization route; two-presentation comparison Lemma A.2.6.6 used in the second paragraph of HTT A.2.6.5.",
+   "place": "Inherited accessibility infrastructure for prop-coef-integral-exceptional-adjoint: derived coefficient adjunction, through the simplicial localization and accessible-subdiagram criterion; HTT A.2.6.5 second proof paragraph uses A.2.6.6. This split expands that auxiliary comparison, without changing the integral adjunction or unit route.",
    "via": [
     "lem-coef-accessible-subdiagram-criterion",
     "lem-coef-accessible-arrow-inverse-image",
@@ -30,9 +30,124 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first spell out the ordinary Hom-set calculation that will be used repeatedly. If $P$ is $\\tau$-presentable and $(L,(z_i))$ is a colimit of a small $\\tau$-filtered poset diagram $Z$, its defining preservation property says that $(\\operatorname{Hom}(P,L),(h\\mapsto z_i h))$ is a colimit of the sets $\\operatorname{Hom}(P,Z_i)$. The index poset is nonempty and ordinarily filtered, since $\\tau$ is infinite. Apply clauses (1) and (2) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to these sets. Every $h:P\\to L$ factors as $z_i h_i$; and if $z_i h_i=z_j h_j$, there is $k\\geq i,j$ with $Z(i\\leq k)h_i=Z(j\\leq k)h_j$. Thus factorization and equality detection use the original $\\tau$-filtered presentation, never a smaller presentation that might fail to be $\\tau$-filtered.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), element representatives and eventual equality after Definition 002V, applied to the Hom colimit from the definition of presentability."
+   }
+  },
+  {
+   "text": "Choose a colimit $L$ of $X$ with legs $x_a:X_a\\to L$. Compose the colimit cocone of $Y$ with the given isomorphism to obtain a colimit cocone with this same apex, with legs $y_b:Y_b\\to L$. This remains colimiting: a cocone out of $Y$ factors uniquely through its original apex, and composition with the inverse isomorphism identifies such factorizations with maps out of $L$. Write $X_{aa'}$ and $Y_{bb'}$ for transition maps, and compose maps right to left. Local presentability supplies all the small colimits used here and in the last two steps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.6, printed pp. 819-820: common colimit; ordinary universal-property expansion by the worker."
+   }
+  },
+  {
+   "text": "Here is the recursion invariant and its base. For ordinals $\\xi<\\sigma$ keep increasing subsets $S_\\xi\\subseteq A$, $T_\\xi\\subseteq B$, each of size less than $\\tau$, starting with $S_0=A_0$, $T_0=B_0$. Also keep any factorization maps chosen at earlier stages, without changing them. At stage $\\xi$, choose $u_\\xi\\in A$ above every element of $S_\\xi$ and $v_\\xi\\in B$ above every element of $T_\\xi$. These exist because the ambient posets are $\\tau$-filtered and the two sets are $\\tau$-small, including when they are empty. Put $P_\\xi=S_\\xi\\cup\\{u_\\xi\\}$ and $Q_\\xi=T_\\xi\\cup\\{v_\\xi\\}$. The next three steps prescribe the indices to adjoin to these two sets in forming $S_{\\xi+1},T_{\\xi+1}$. At a nonzero limit $\\lambda<\\sigma$ take the unions of the preceding sets and retain all previously chosen maps. Step 7 verifies the size invariant, so the recursion never asks for an unavailable upper bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.6 and the transfinite back-and-forth idea of Lemma 5.4.6.3; explicit ordinary construction by the worker, base and invariant."
+   }
+  },
+  {
+   "text": "For every $a\\in P_\\xi$ without an assigned factorization, apply Step 1 with $P=X_a$ to choose $\\beta(a)\\in B$ and $f_a:X_a\\to Y_{\\beta(a)}$ satisfying $y_{\\beta(a)}f_a=x_a$. For every $b\\in Q_\\xi$ without an assigned factorization, choose $\\alpha(b)\\in A$ and $g_b:Y_b\\to X_{\\alpha(b)}$ satisfying $x_{\\alpha(b)}g_b=y_b$. Keep assignments already made. Adjoin all $\\beta(a)$ for $a\\in P_\\xi$ to $T_{\\xi+1}$ and all $\\alpha(b)$ for $b\\in Q_\\xi$ to $S_{\\xi+1}$. Each application has $\\tau$-presentable domain by the hypotheses on $X$ and $Y$, small Hom sets, and the original small $\\tau$-filtered index poset. An index first added as a target need not have a factorization until a later stage.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, stage representation, used through the Hom-set calculation of Step 1; ordinary back-and-forth factor choices."
+   }
+  },
+  {
+   "text": "Impose compatibility for every comparable pair $a\\leq a'$ in $P_\\xi$. The maps $f_a:X_a\\to Y_{\\beta(a)}$ and $f_{a'}X_{aa'}:X_a\\to Y_{\\beta(a')}$ have equal composites to $L$, since both are $x_a$. Step 1, with presentable domain $X_a$, supplies $d\\geq\\beta(a),\\beta(a')$ with $Y_{\\beta(a)d}f_a=Y_{\\beta(a')d}f_{a'}X_{aa'}$; adjoin this $d$ to $T_{\\xi+1}$. For every $b\\leq b'$ in $Q_\\xi$, the corresponding calculation $x_{\\alpha(b)}g_b=y_b=y_{b'}Y_{bb'}=x_{\\alpha(b')}g_{b'}Y_{bb'}$ supplies $c\\geq\\alpha(b),\\alpha(b')$ with $X_{\\alpha(b)c}g_b=X_{\\alpha(b')c}g_{b'}Y_{bb'}$; adjoin $c$ to $S_{\\xi+1}$. These are equalities in actual diagram objects, not merely equalities after mapping to the total colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, eventual equality of two representatives, applied to Hom sets as in Step 1."
+   }
+  },
+  {
+   "text": "Impose inverse identities whenever the needed factor maps are already assigned at this stage. For each $a\\in P_\\xi$ with $\\beta(a)\\in Q_\\xi$, compare $g_{\\beta(a)}f_a:X_a\\to X_{\\alpha(\\beta(a))}$ with $1_{X_a}:X_a\\to X_a$. Their composites to $L$ agree, because $x_{\\alpha(\\beta(a))}g_{\\beta(a)}f_a=y_{\\beta(a)}f_a=x_a$. Step 1 supplies $c\\geq a,\\alpha(\\beta(a))$ with $X_{\\alpha(\\beta(a))c}g_{\\beta(a)}f_a=X_{ac}$; adjoin $c$ to $S_{\\xi+1}$. For each $b\\in Q_\\xi$ with $\\alpha(b)\\in P_\\xi$, the equality $y_{\\beta(\\alpha(b))}f_{\\alpha(b)}g_b=x_{\\alpha(b)}g_b=y_b$ supplies $d\\geq b,\\beta(\\alpha(b))$ with $Y_{\\beta(\\alpha(b))d}f_{\\alpha(b)}g_b=Y_{bd}$; adjoin $d$ to $T_{\\xi+1}$. Requirements whose target has not yet appeared are handled when it does appear; no inverse map is presumed before it has been chosen.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, eventual equality, applied to the two composite-versus-identity comparisons."
+   }
+  },
+  {
+   "text": "Define $S_{\\xi+1}$ to be $P_\\xi$ together with all indices in $A$ prescribed in Steps 4-6, and define $T_{\\xi+1}$ analogously. To check the induction, put $\\theta=\\max(\\aleph_0,|P_\\xi|,|Q_\\xi|)<\\tau$; the inequality uses $\\tau>\\sigma\\geq\\aleph_0$. There are at most $\\theta$ factor choices and inverse tests and at most $\\theta^2=\\theta$ comparable-pair tests, using the square clause of [lem-coef-infinite-cardinal-square-power]. Each test adds one index, so both successor sets have cardinality at most a finite multiple of $\\theta$, hence less than $\\tau$. At a limit $\\lambda<\\sigma$, there are fewer than $\\tau$ previous sets, each of size less than $\\tau$, and regularity of $\\tau$ bounds their unions. Previously assigned maps agree on their common domains because no assignment is ever changed. This verifies the invariant at the base, successors and limits and completes the indicated transfinite recursion. The choices are over small sets of indices, tests and Hom elements.",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+    "place": "Cardinal.mul_eq_self, line 45 (square clause of the cited node); ordinary transfinite bookkeeping using the regularity assumed in the item."
+   }
+  },
+  {
+   "text": "Set $A_1=\\bigcup_{\\xi<\\sigma}S_\\xi$ and $B_1=\\bigcup_{\\xi<\\sigma}T_\\xi$. They contain the prescribed subsets. Regularity of $\\tau$ and $\\sigma<\\tau$ give $|A_1|,|B_1|<\\tau$. For any subset $E\\subseteq A_1$ of size less than $\\sigma$, choose for each of its elements a stage containing it. Regularity of $\\sigma$ bounds these fewer than $\\sigma$ ordinals by some $\\xi<\\sigma$, so $E\\subseteq S_\\xi$; then $u_\\xi\\in S_{\\xi+1}\\subseteq A_1$ bounds $E$. For $E=\\varnothing$ use $u_0$. The identical argument with $v_\\xi$ proves $\\sigma$-filteredness of $B_1$. All successor stages mentioned remain below the infinite initial ordinal $\\sigma$. Every final index receives a factorization at some stage; its target is adjoined at the next stage. Every comparable pair eventually occurs together in some $P_\\xi$ or $Q_\\xi$, and every inverse test eventually has both required indices present. Thus every witness required in Steps 5 and 6 belongs to the final subsets. This includes $\\sigma=\\aleph_0$, when only finite sets need upper bounds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.6, required size and filteredness conclusions; worker expansion of the transfinite construction using regularity."
+   }
+  },
+  {
+   "text": "Choose restricted colimits $U=\\operatorname{colim}_{a\\in A_1}X_a$ and $V=\\operatorname{colim}_{b\\in B_1}Y_b$, with legs $\\widetilde x_a$ and $\\widetilde y_b$. They exist since both subsets are small and $\\mathcal C$ is cocomplete. For $a\\leq a'$ the witness $d\\in B_1$ of Step 5 and the cocone relations give $\\widetilde y_{\\beta(a)}f_a=\\widetilde y_dY_{\\beta(a)d}f_a=\\widetilde y_dY_{\\beta(a')d}f_{a'}X_{aa'}=\\widetilde y_{\\beta(a')}f_{a'}X_{aa'}$. Hence these maps form a cocone and the universal property gives $F:U\\to V$ with $F\\widetilde x_a=\\widetilde y_{\\beta(a)}f_a$. The witnesses for $b\\leq b'$ similarly give a cocone and $G:V\\to U$ with $G\\widetilde y_b=\\widetilde x_{\\alpha(b)}g_b$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), induced maps from compatible cocones; the compatibility witnesses were constructed in Step 5."
+   }
+  },
+  {
+   "text": "For $a\\in A_1$, use the witness $c\\in A_1$ of Step 6 to calculate $GF\\widetilde x_a=\\widetilde x_{\\alpha(\\beta(a))}g_{\\beta(a)}f_a=\\widetilde x_cX_{\\alpha(\\beta(a))c}g_{\\beta(a)}f_a=\\widetilde x_cX_{ac}=\\widetilde x_a$. Uniqueness in the colimit universal property gives $GF=1_U$. For $b\\in B_1$, its witness $d\\in B_1$ gives $FG\\widetilde y_b=\\widetilde y_{\\beta(\\alpha(b))}f_{\\alpha(b)}g_b=\\widetilde y_dY_{\\beta(\\alpha(b))d}f_{\\alpha(b)}g_b=\\widetilde y_dY_{bd}=\\widetilde y_b$, hence $FG=1_V$. Therefore $F$ is an isomorphism with inverse $G$, proving the claimed restricted-colimit comparison. No cancellation of a map to $L$ occurs in this argument.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), uniqueness of maps out of a colimit, applied to the inverse witnesses of Step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinite-cardinal-square-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.2.6.6 (statement) and Lemma 5.4.6.3 (transfinite back-and-forth idea); explicit ordinary Hom-set saturation argument written by Q67 using Stacks Tags 04AX and 002F. HTT was read online and is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +197,73 @@
    "results": "{\"t\": \"2026-10-16T20:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphic colimits of two compact object diagrams admit isomorphic bounded directed subcolimits extending specified parts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.ObjectProperty.ColimitOfShape.ofIso_toColimitPresentation\", \"CategoryTheory.Limits.IndObjectPresentation.extend\", \"CategoryTheory.Limits.Cocone.isColimit_iff_isIso_colimMap_ι\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Limits.IsColimit.isIso_colimMap_ι\"], \"digest\": \"ad4333461fde71c5\"}",
    "date": "2026-10-17",
    "verdict": "No match: Basic.lean:286-312 only factors individual maps and detects their eventual equality. CardinalFilteredPresentation.lean:43-51 bounds presentability of one given colimit. Neither constructs two prescribed sigma-filtered restrictions with isomorphic colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two filtered presentations of the same object by presentable objects admit isomorphic small directed subcolimits containing specified subsets",
+   "results": "{\"t\": \"2026-10-16T21:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"Two filtered presentations of the same object by presentable objects admit isomorphic small directed subcolimits containing specified subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.mk.inj\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\"], \"digest\": \"72f331cc0ce3d544\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_of_isColimit|exists_eq_of_isColimit",
+   "results": "{\"t\": \"2026-10-16T21:25:05Z\", \"tool\": \"grep\", \"query\": \"exists_hom_of_isColimit|exists_eq_of_isColimit\", \"sub\": \"CategoryTheory/Presentable/Basic.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"286\", \"294\", \"304\"], \"digest\": \"cc17a7a2818252d9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_hom_of_isColimit\", \"IsCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-16T21:25:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"exists_hom_of_isColimit\\\", \\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\"], \"digest\": \"8dcadfbee8b299d0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a cardinal presentable object to a filtered colimit factor through a stage and equal factorizations become equal at a later stage",
+   "results": "{\"t\": \"2026-10-16T21:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms from a cardinal presentable object to a filtered colimit factor through a stage and equal factorizations become equal at a later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"CategoryTheory.isCardinalPresentable_of_isColimit\"], \"digest\": \"6c3ccade742d704c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_of_isColimit|exists_eq_of_isColimit",
+   "results": "{\"t\": \"2026-10-16T21:25:39Z\", \"tool\": \"grep\", \"query\": \"exists_hom_of_isColimit|exists_eq_of_isColimit\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\"], \"digest\": \"93398f88c41eba48\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphic filtered colimits of presentable objects have isomorphic small filtered subdiagrams extending any specified small parts",
+   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphic filtered colimits of presentable objects have isomorphic small filtered subdiagrams extending any specified small parts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\"], \"digest\": \"53be9cf907750f65\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_eq_of_isColimit\", \"IsCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"exists_eq_of_isColimit\\\", \\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\"], \"digest\": \"f7efe317e19e10bb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a kappa presentable object maps into a kappa filtered colimit factor through a stage and two stage maps with equal colimit image agree at a common later stage",
+   "results": "{\"t\": \"2026-10-16T21:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a kappa presentable object maps into a kappa filtered colimit factor through a stage and two stage maps with equal colimit image agree at a common later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\"], \"digest\": \"17cbd437bd9c6b9f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "presentation.*compar|common.*refin|subdiagram|exists_eq_of_isColimit",
+   "results": "{\"t\": \"2026-10-16T21:26:52Z\", \"tool\": \"grep\", \"query\": \"presentation.*compar|common.*refin|subdiagram|exists_eq_of_isColimit\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/Finite.lean\"], \"digest\": \"9b7c189057970915\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: hits give Hom-set factorization/eventual equality for a single presentation or ordinary colimit calculus, not two prescribed sigma-filtered restrictions with isomorphic colimits. Basic.lean:286-312 read. Those Hom facts are derived in Step 1 from the existing filtered-colimit-of-sets leaf, so no new node is needed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-subdiagram-criterion",
@@ -93,5 +271,20 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presentable-presentation-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replaced the empty proof by a transfinite ordinary back-and-forth saturation of the two presentations. Hom-set preservation and the existing filtered-set-colimit Mathlib leaf give factorization and eventual equality. All naturality and inverse equations are imposed at actual stages. Regularity gives the final size and sigma-filteredness. Reused existing cardinal-square and colimit leaves; no new nodes.",
+  "blueprint": "Inherited auxiliary route from the integral exceptional-adjoint derived coefficient adjunction through accessible-subdiagram criterion: expands the A.2.6.6 comparison used in A.2.6.5. Steps 1-6 give explicit ordinary compatibility and inverse witnesses; steps 7-10 complete the transfinite closure and colimit comparison. The current main-20261015 ancestor text contains the integral-adjunction statement rather than an explicit accessibility proof; inherited ancestry is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-21ff66cb6",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-21ff66cb6 (reviewer sub-agent of L); spot-checked: Read the brief, stage contract, delivery-errors A-F, GOAL and dag-sync, the item in full, the three cited nodes (filtered-colimit-sets-elementwise clauses 1-2, category-colimit, cardinal square; all Mathlib leaves, so no route issue and no tool_uses), and the parent accessible-subdiagram-criterion steps that apply the item with prescribed subsets S and empty. HTT is not in literature/; I fetched it into /tmp. Lemma A.2.6.6 (printed p.819) matches the statement hypothesis by hypothesis: tau >> kappa (=sigma), tau > kappa, presentable D, tau-compact objects, tau-filtered posets, tau-small prescribed subsets, tau-small kappa-filtered restrictions with isomorphic colimits. Prop A.2.6.5's proof (p.820) uses the lemma exactly as the parent does. The ordinary back-and-forth proof is correct. Step 1 is Hom preservation plus filtered-set clauses. Steps 5-6 put compatibility and inverse witnesses at actual stages, with types checked and correct timing (beta(a) is assigned at stage xi+1 before the inverse test there). Step 7 keeps sizes below tau via theta^2=theta and regularity of tau; the power condition is unused but kept from the source. Step 8 gets sigma-filteredness from regularity of sigma, with xi+1<sigma. Steps 9-10 use only cocone and uniqueness, with no cancellation. Small cases checked: empty prescribed subsets, singletons, sigma=aleph_0 with tau=aleph_1, uncountable sigma, non-monic transitions. No new nodes. No duplicate: common-refinement is infinity-categorical and yields only omega-filtered refinements. Statement unchanged; no fixes."
+ }
 }
