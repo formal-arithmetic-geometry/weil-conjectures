@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wcb-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coverings by w-contractible affines",
@@ -12,45 +12,105 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.md",
   "place": "node det-pe-wcb-cover, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "det-pe-wlocal-strict-contractible",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
  "proof": [
   {
-   "text": "Let $\\{\\operatorname{Spec}B_i\\}$ be the family of all affine opens of $U$. For each $i$,\nlet $B_i\\to C_i$ be the strict w-local cover of [lem-weil-pbc-strict-w-cover] (faithfully\nflat, ind-étale, w-strictly local), and $C_i\\to D_i$ the faithfully flat ind-Zariski\nalgebra of [det-pe-wc-cover-second-stage], applied with a Stonean cover of\n$\\pi_0(\\operatorname{Spec}C_i)$; then $D_i$ is w-contractible and $B_i\\to D_i$ is\nfaithfully flat and ind-étale ([lem-weil-pbc-ind-etale-stability]).",
+   "text": "Let $\\{\\operatorname{Spec}B_i\\}$ be the family of all affine opens of $U$. For each $i$, [lem-weil-pbc-strict-w-cover] gives a faithfully flat ind-étale map $B_i\\to C_i$ whose spectrum is w-local and whose local rings at maximal ideals are strictly henselian; by the definition in [det-pe-wlocal-strict-contractible], $C_i$ is w-strictly local. Apply [det-pe-wc-cover-second-stage] with a Stonean cover of $\\pi_0(\\operatorname{Spec}C_i)$ to obtain a faithfully flat ind-Zariski map $C_i\\to D_i$ with $D_i$ w-contractible. The map $B_i\\to D_i$ is ind-étale by the composition clause of [lem-weil-pbc-ind-etale-stability]. It is faithfully flat as well: if a complex of $B_i$-modules becomes exact after tensoring with $D_i$, faithful flatness of $C_i\\to D_i$ reflects exactness after tensoring with $C_i$, and faithful flatness of $B_i\\to C_i$ then reflects exactness over $B_i$, using the criterion in [def-weil-pbc-faithfully-flat-ring-map].",
    "uses": [
     "lem-weil-pbc-strict-w-cover",
+    "det-pe-wlocal-strict-contractible",
     "det-pe-wc-cover-second-stage",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-faithfully-flat-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
+    "place": "proof, first paragraph"
+   }
   },
   {
-   "text": "The composite $\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\to U\\to X$ is weakly étale\n(ind-étale maps and open immersions are weakly étale, and weakly étale maps compose), so\n$\\operatorname{Spec}D_i$ is an object of $X_{\\mathrm{proét}}$, and\n$\\operatorname{Spec}D_i\\to U$ is a morphism there.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The family is a pro-étale covering [def-weil-pbc-proetale-covering]: let $W\\subset U$ be an\naffine open. Then $W$ itself is one of the $\\operatorname{Spec}B_i$, and\n$\\operatorname{Spec}D_i$ is an affine open of $\\operatorname{Spec}D_i\\times_UW\n=\\operatorname{Spec}D_i$ whose image is all of $W$ by faithful flatness. So one index\nsuffices for each $W$.",
+   "text": "The composite $\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\to U\\to X$ is weakly étale. The first map is weakly étale by the affine ind-étale clause of [det-pe-morphisms-etale-comparison], and the second is weakly étale because an open immersion is étale by [lem-weil-pbc-open-immersion-etale] and étale morphisms are weakly étale by that same comparison node. The last map is weakly étale because $U$ is an object of the site [def-weil-pbc-proetale-site]. Composition is stable by [lem-weil-pbc-weakly-etale-composition-base-change]. Thus $\\operatorname{Spec}D_i$ is an object of $X_{\\mathrm{proét}}$, and its map to $U$ is a morphism there.",
    "uses": [
-    "def-weil-pbc-proetale-covering"
+    "det-pe-morphisms-etale-comparison",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
+    "place": "proof, second paragraph"
+   }
+  },
+  {
+   "text": "The family is a pro-étale covering by [def-weil-pbc-proetale-covering]. Let $W\\subset U$ be an affine open. Since the family includes every affine open, $W=\\operatorname{Spec}B_i$ for some $i$. The pullback $\\operatorname{Spec}D_i\\times_U W$ is $\\operatorname{Spec}D_i$, because the map factors through $W$; this is affine, and its image is all of $W$ because $B_i\\to D_i$ is faithfully flat and faithfully flat maps induce surjections on spectra by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Hence the one index $i$ and this affine open satisfy the finite refinement condition for $W$.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
+    "place": "proof, third paragraph"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-strict-w-cover",
+  "det-pe-wlocal-strict-contractible",
   "det-pe-wc-cover-second-stage",
   "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "det-pe-morphisms-etale-comparison",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
   "def-weil-pbc-proetale-covering",
-  "lem-trf-weakly-etale-between-objects"
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
+  "place": "Proof; the three paragraphs are expanded with explicit weak-étale and faithful-flatness citations."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every object of a scheme proetale site has a covering by affine w-contractible spectra with faithfully flat ind-etale maps",
+   "results": "8 hits: Scheme.instInhabitedOpenCover, Scheme.etalePretopology, instIsAffineXSchemeAffineCover, Scheme.etaleTopology, Scheme.affineCover, Scheme.AffineCover, Scheme.smallEtalePretopology, Scheme.Etale; no w-contractible-cover theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "proetale covering, weakly etale, ind-etale, w-contractible",
+   "results": "0 hits; Unknown identifier proetale.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "w-contractible|pro.?etale|ind.?étale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean defines proetalePrecoverage and its weakly-etale/fpqc inequalities; no w-contractible cover theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "covering by affine w-contractible objects in the pro-etale site",
+   "results": "8 hits: Scheme.affineCover, Scheme.AffineCover.covers, Scheme.affineOpenCover, Scheme.AffineZariskiSite.directedCover, Scheme.affineBasisCover, Scheme.instInhabitedOpenCover, instIsAffineXSchemeAffineCover, Scheme.AffineOpenCover; no w-contractible-cover theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +126,20 @@
   "lem-trf-weakly-etale-between-objects"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wcb-cover",
+  "worker": "stage1",
+  "summary": "Checked the imported construction against the current blueprint and Stacks pro-étale covering definition. No new nodes were needed: the strict cover, Stonean second stage, ind-étale stability, weakly étale composition, open-immersion étaleness, site definition, and faithful-flat spectrum surjectivity already exist. Rewrote the three proof paragraphs so the composition of faithful flat maps, weak étaleness of each factor, and the finite covering refinement are explicit and cited.",
+  "blueprint": "The first paragraph realizes the strict-cover and Stonean second-stage construction; the second realizes the object-of-the-site argument; the third realizes the affine-test-open covering verification."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-a1a0d7029",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-a1a0d7029 (reviewer sub-agent of L); spot-checked: Read the item, report, blueprint proof, all 11 cited DAG nodes, exact Stacks/Bhatt–Scholze passages, and route data. Verified all three proof steps, hypotheses, faithful-flat and weakly-etale compositions, affine pullback/refinement, edge cases, duplicate checks, and Mathlib searches. No repairs or dropped nodes needed. Review written to review.md."
+ }
 }
