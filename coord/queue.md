@@ -25,6 +25,6 @@
 | `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
 | `Sheaf.Paper.InverseImageModuleFlat` | 12 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
-| `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp` | 14 | 1 | proof |
+| `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
