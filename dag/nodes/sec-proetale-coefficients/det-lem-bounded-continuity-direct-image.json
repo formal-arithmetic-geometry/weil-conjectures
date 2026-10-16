@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-lem-bounded-continuity-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-pe-bounded-continuity-direct-image"
+  ]
  },
  "kind": "statement",
  "title": "Higher direct images commute with bounded-below filtered colimits",
@@ -12,27 +14,78 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-direct-image.md",
   "place": "node det-lem-bounded-continuity-direct-image, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "det-pe-topos-functoriality-inverse-image",
+  "def-sfb-right-derived-functor"
+ ],
  "proof": [
   {
-   "text": "For $K$ bounded below, $R^qg_*K$ is the sheaf associated with the presheaf\n$V\\mapsto H^q(Y\\times_ZV,K|_{Y\\times_ZV})$ on $Z_{\\mathrm{proét}}$ (compute $Rg_*$ with a\nK-injective resolution, whose restriction to the object $Y\\times_ZV$ of $Y_{\\mathrm{proét}}$\ncomputes its cohomology). Affine objects $V$ form a basis of $Z_{\\mathrm{proét}}$, so it\nsuffices to use them. For affine $V$, $Y\\times_ZV$ is quasi-compact and quasi-separated\nbecause $g$ is, and restriction to it is exact and commutes with colimits. So by\n[det-lem-bounded-continuity-sections] (3) applied on $Y\\times_ZV$, the presheaf map\n$\\varinjlim_iH^q(Y\\times_ZV,K_i)\\to H^q(Y\\times_ZV,\\varinjlim_iK_i)$ is an isomorphism for every\naffine $V$. Sheafification is a left adjoint, so it commutes with colimits; sheafifying gives\nthe claim.",
+   "text": "Apply [det-pe-bounded-continuity-direct-image] with its $X=Y$, its $Y=Z$, $f=g$, and $\\mathcal R=A$. The same diagram has the same common lower bound $a$, and the morphism is quasi-compact and quasi-separated by hypothesis. The source becomes $\\varinjlim_i R^qg_*K_i^\\bullet$ and the target becomes $R^qg_*(\\varinjlim_iK_i^\\bullet)$. The cited canonical map is induced by applying $R^qg_*$ to the colimit cocone maps $K_i^\\bullet\\to\\varinjlim_j K_j^\\bullet$, exactly the natural map in the item. Thus it is an isomorphism of sheaves on $Z_{\\mathrm{proét}}$ for every $q$.",
    "uses": [
-    "det-lem-bounded-continuity-sections"
+    "det-pe-bounded-continuity-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-direct-image.proof.md",
+    "place": "Proof: the stated higher-direct-image filtered-colimit comparison"
+   }
   }
  ],
  "proof_deps": [
-  "det-lem-bounded-continuity-sections"
+  "det-pe-bounded-continuity-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-direct-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-direct-image.proof.md",
+  "place": "Proof, reduced to the existing same-unit duplicate det-pe-bounded-continuity-direct-image by renaming variables"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images on the pro etale site of a quasi compact quasi separated scheme morphism commute with filtered colimits of uniformly bounded below complexes of sheaves of modules",
+   "results": "SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans_comp, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.GeneratingSections.opEpi_comp; no higher-direct-image continuity theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image on a quasi compact quasi separated pro etale site preserves filtered colimits of bounded below complexes",
+   "results": "CategoryTheory.Limits.PreservesFilteredColimits; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall; CategoryTheory.Sheaf.isColimitSheafifyCocone; generic sheafification and filtered-colimit infrastructure only",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|derivedPushforward|bounded.*[Cc]olimit",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the derived pushforward of a filtered diagram of complexes with a common lower bound commutes with its termwise filtered colimit",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, mapDerivedCategoryFactorsh_hom_app, mapDerivedCategorySingleFunctor, rightDerived_map_eq and related generic derived-category declarations; no continuity theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits.*[Dd]erived|[Dd]erived.*PreservesFilteredColimits|pro[Ee]tale",
+   "results": "10 hits, all generic pro-étale topology or sheaf infrastructure (Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean); no derived-direct-image filtered-colimit declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -43,5 +96,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-bounded-continuity-direct-image",
+  "worker": "stage1",
+  "summary": "The existing blueprint node det-pe-bounded-continuity-direct-image states the same result after renaming X,Y,f,mathcal R to Y,Z,g,A. The coefficient sheaf is arbitrary, as explicitly stated in sk-cor-pe-sections. Reused that node instead of creating a duplicate and identified the canonical comparison by its colimit cocone. Statement dependencies define the site, direct image and right derived functor. Second reading revalidated the current right-derived definition and restored its statement dependency: the notation needs this definition even though step 1 uses no theorem from its proof. No statement change and no new nodes.",
+  "blueprint": "The single step gives the direct-image clause of sk-cor-pe-bounded-continuity (including its Complement), using its existing detail det-pe-bounded-continuity-direct-image. Both details lie in the same blueprint unit and use the same bounded-continuity route; only the node-level repetition is bypassed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-37fe7128f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-37fe7128f (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and current blueprint sources and route. The sole step validly reuses the existing same-unit theorem, preserving arbitrary ring-sheaf coefficients, the common lower bound, and the canonical colimit map. Checked edge cases, duplicates, acyclicity, searches, and exact target-source coefficient categories and base-change directions. No new nodes or repairs; review.md records the checks."
+ }
 }

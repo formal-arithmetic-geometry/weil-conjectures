@@ -3,34 +3,155 @@
  "blueprint": {
   "is": "def-sfb-pullback-from-point-comp-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The comparison $f^*\\circ p_Y^*\\cong p_X^*$",
- "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes, and let $p_X^*$, $p_Y^*$ be as\nin [def-sfb-upper-star-from-point]. The natural isomorphism\n$$\nf^*\\circ p_Y^*\\ \\cong\\ p_X^*\n$$\nof functors $\\Sh(*_{\\mathrm{proét}},\\Ab)\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ is\ndefined as the composite\n$$\nf^*\\circ\\pi_Y^*\\circ p^*\\ \\cong\\ (\\pi_Y\\circ f)^*\\circ p^*=\\pi_X^*\\circ p^*.\n$$\nThe first step is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of\n[sk-def-sfb-finite-pushforward-pullback], whiskered by $p^*$. The equality\nholds because $\\pi_Y\\circ f=\\pi_X$, as $\\Spec\\Z$ is terminal.",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes, and let $f^*$ be the pullback of abelian pro-étale sheaves of [def-sfb-finite-upper-star]. Write $\\pi_X\\colon X\\to\\Spec\\Z$ and $\\pi_Y\\colon Y\\to\\Spec\\Z$ for the structure morphisms, and let $p_X^*=\\pi_X^*\\circ p^*$ and $p_Y^*=\\pi_Y^*\\circ p^*$ be as in [def-sfb-upper-star-from-point]. The natural isomorphism\n$$\nf^*\\circ p_Y^*\\ \\cong\\ p_X^*\n$$\nof functors $\\Sh(*_{\\mathrm{proét}},\\Ab)\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ is defined as the composite\n$$\nf^*\\circ\\pi_Y^*\\circ p^*\\ \\cong\\ (\\pi_Y\\circ f)^*\\circ p^*=\\pi_X^*\\circ p^*.\n$$\nThe first step is the inverse of the composition isomorphism $(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of [def-sfb-finite-upper-star-comp], precomposed with $p^*$. The equality uses $\\pi_Y\\circ f=\\pi_X$, since $\\Spec\\Z$ is terminal, as recorded in [sk-def-sfb-pullback-from-point].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.md",
   "place": "node def-sfb-pullback-from-point-comp-iso, order 1556"
  },
  "stmt_deps": [
-  "def-sfb-upper-star-from-point"
+  "def-sfb-finite-upper-star",
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-star-comp",
+  "sk-def-sfb-pullback-from-point"
  ],
  "proof": [
   {
-   "text": "Both steps are natural isomorphisms, and so is their composite.",
+   "text": "By [def-sfb-upper-star-from-point], $p^*$ is the fixed inverse-image functor from the point, and $p_X^*$ and $p_Y^*$ are its composites with structure-morphism pullback for abelian coefficients. Thus the source functor is $f^*\\circ\\pi_Y^*\\circ p^*$ and the target functor is $\\pi_X^*\\circ p^*$. The setting in [def-sfb-finite-lower-star] permits arbitrary scheme morphisms and Grothendieck abelian coefficients, so neither $f$ nor $\\pi_Y$ needs to be finite and we may take $\\mathcal A=\\Ab$. Apply [def-sfb-finite-upper-star-comp] to $h_1=f\\colon X\\to Y$ and $h_2=\\pi_Y\\colon Y\\to\\Spec\\Z$ to obtain the natural isomorphism $c\\colon(\\pi_Y\\circ f)^*\\xrightarrow{\\sim}f^*\\circ\\pi_Y^*$. In particular both $c$ and $c^{-1}$ are natural transformations with inverse components.",
+   "uses": [
+    "def-sfb-upper-star-from-point",
+    "def-sfb-finite-upper-star-comp",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.md",
+    "place": "Definition: inverse composition isomorphism, precomposed with p*."
+   }
+  },
+  {
+   "text": "[sk-def-sfb-pullback-from-point] states $\\pi_Y\\circ f=\\pi_X$ for every scheme morphism $f\\colon X\\to Y$, since $\\Spec\\Z$ is terminal. Substitution gives equality of the chosen functors $(\\pi_Y\\circ f)^*$ and $\\pi_X^*$, including their object and morphism maps. Denote the resulting identification by $e\\colon(\\pi_Y\\circ f)^*\\xrightarrow{\\sim}\\pi_X^*$. After substitution $e_H$ and $e_H^{-1}$ are identity arrows for every sheaf $H$, so naturality and both inverse equations reduce to the identity laws.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.md",
+    "place": "Definition: the equality holds because Spec Z is terminal."
+   }
+  },
+  {
+   "text": "For a condensed abelian group $F$, define $\\theta_F=e_{p^*F}\\circ c^{-1}_{p^*F}\\colon f^*\\pi_Y^*p^*F\\to\\pi_X^*p^*F$. For $a\\colon F\\to G$, naturality of $c^{-1}$ at $p^*a$ gives $(\\pi_Y\\circ f)^*(p^*a)\\circ c^{-1}_{p^*F}=c^{-1}_{p^*G}\\circ f^*\\pi_Y^*(p^*a)$. Compose with $e_{p^*G}$ and use naturality of $e$ to obtain $\\pi_X^*(p^*a)\\circ\\theta_F=\\theta_G\\circ f^*\\pi_Y^*(p^*a)$. Define the reverse natural transformation by $\\psi_F=c_{p^*F}\\circ e^{-1}_{p^*F}$; its naturality follows by the same two equations with $c^{-1},e$ replaced by $e^{-1},c$, namely $(\\pi_Y\\circ f)^*(p^*a)\\circ e^{-1}_{p^*F}=e^{-1}_{p^*G}\\circ\\pi_X^*(p^*a)$ and $f^*\\pi_Y^*(p^*a)\\circ c_{p^*F}=c_{p^*G}\\circ(\\pi_Y\\circ f)^*(p^*a)$. The component composites are $\\psi_F\\circ\\theta_F=c_{p^*F}\\circ e^{-1}_{p^*F}\\circ e_{p^*F}\\circ c^{-1}_{p^*F}=\\mathrm{id}_{f^*p_Y^*F}$ and $\\theta_F\\circ\\psi_F=e_{p^*F}\\circ c^{-1}_{p^*F}\\circ c_{p^*F}\\circ e^{-1}_{p^*F}=\\mathrm{id}_{p_X^*F}$. Reassociating the three functors has identity components and the same action on arrows. Hence $\\theta$ is exactly the specified inverse composition comparison precomposed with $p^*$, followed by the equality identification.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.proof.md",
+    "place": "Entire proof: Both steps are natural isomorphisms, and so is their composite; component verification."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-upper-star-from-point",
+  "def-sfb-finite-upper-star-comp",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-finite-lower-star"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/def-sfb-pullback-from-point-comp-iso.proof.md",
+  "place": "Entire proof, expanded using the construction in the companion definition; naturality and inverse identities checked componentwise."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperStarFromPointComp|upperStarFromPoint|pointUpperStar",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of abelian pro-etale sheaves commutes with inverse image from the point via the structure morphism to Spec Z.",
+   "results": "8 hits; SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.GrothendieckTopology.overMapPullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: module-sheaf pullbacks and over-site pullbacks do not state the particular point comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarComp\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism f from X to Y, the pullback of the inverse image of a condensed abelian group from the point to Y is canonically isomorphic to its inverse image from the point to X.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern structure-sheaf modules, their adjunctions and composition, not condensed abelian pro-étale sheaves from the point."
+  },
+  {
+   "tool": "grep",
+   "query": "def (isoWhiskerLeft|sheafPullbackComp|pullbackComp)|upperStarComp",
+   "results": "7 hits; Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Sites/Grothendieck.lean, Mathlib/CategoryTheory/Sites/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for item: Functor.isoWhiskerLeft is the general operation used in the elementary component step; pullbackComp hits are for over categories and subobjects, not this point comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isoWhiskerLeft",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.isoWhiskerLeft'",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle reports unknown identifier CategoryTheory.isoWhiskerLeft (the actual declaration is CategoryTheory.Functor.isoWhiskerLeft)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image functors on sheaves followed by a fixed functor gives a natural isomorphism by whiskering the inverse pullback composition isomorphism.",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.GrothendieckTopology.overMapPullback_comp_id_assoc, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: over-site pullback composition and continuous pushforward composition are related categorical tools, but do not supply this point comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 hits; CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_refl, CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-16",
+   "verdict": "General whiskering operation found: CategoryTheory.Functor.isoWhiskerLeft, Mathlib/CategoryTheory/Whiskering.lean:215–219, with hom and inverse at 222–229. It supplies step 3 from the existing composition isomorphism, not the item-specific functors or their composition comparison; no new node needed."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*Comp|isoWhiskerLeft|pullbackCongr",
+   "results": "25 hits; Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+   "date": "2026-10-16",
+   "verdict": "The first 25 grep hits are generic whiskering uses in categorical constructions, not the specified point pullback comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Iso.symm",
+   "results": "12 hits; CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_twice, CategoryTheory.Functor.isoWhiskerLeft_right, CategoryTheory.Functor.isoWhiskerRight_left, CategoryTheory.Functor.isoWhiskerLeft_right_assoc, CategoryTheory.Functor.isoWhiskerRight_left_assoc, CategoryTheory.Equivalence.trans_counitIso, CategoryTheory.Equivalence.trans_unitIso",
+   "date": "2026-10-16",
+   "verdict": "General whiskering operation or its inverse compatibility only; it does not state the scheme-specific point comparison. The component argument is elementary from the existing comparison node, so no new node or item Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposing two naturally isomorphic functors with another functor produces a natural isomorphism whose components and inverses are evaluated at the image objects.",
+   "results": "8 hits; CategoryTheory.Functor.functorialityCompPrecompose_hom_app_hom, CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.NatIso.hcomp, CategoryTheory.Functor.precomp_map_heq, CategoryTheory.Functor.functorialityCompPrecompose, CategoryTheory.Functor.isoWhiskerRight, CategoryTheory.Functor.precomposeWhiskerLeftMapCocone_hom_hom, CategoryTheory.Functor.isIso_whiskerLeft",
+   "date": "2026-10-16",
+   "verdict": "General whiskering operation or its inverse compatibility only; it does not state the scheme-specific point comparison. The component argument is elementary from the existing comparison node, so no new node or item Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "def isoWhiskerLeft|def sheafPullbackComp|def upperStarFromPointComp",
+   "results": "1 hits; Mathlib/CategoryTheory/Whiskering.lean",
+   "date": "2026-10-16",
+   "verdict": "General whiskering operation or its inverse compatibility only; it does not state the scheme-specific point comparison. The component argument is elementary from the existing comparison node, so no new node or item Mathlib match."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -50,5 +171,39 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point-comp"
+ "unit": "sk-def-sfb-pullback-from-point-comp",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-pullback-from-point-comp-iso",
+  "worker": "stage1",
+  "summary": "Repair of returned head fcd79af0192ef9bdf28990149edf3c854359f62d: compared every statement/proof dependency with the current DAG and re-read the only changed statement, def-sfb-upper-star-from-point. Its defining composite and coefficient category are unchanged; the current exact paragraph is quoted in citations.json. Retained the repaired component proof, elementary equality substitution on objects and morphisms, and explicit arbitrary-morphism setting. Rechecked naturality and inverse equations, current blueprint route, source attachment search and retained logged Mathlib searches. Corrected the report: the chapter record exists, while the unit record is absent. No new nodes, statement dispute or route change. The prescribed no-push delivery reconstructs the split on current origin/newtargets-dag for preflight. Second reader: cited the arbitrary-morphism coefficient setting directly and expanded equality identification, naturality, inverse composites and reassociation componentwise; no new nodes.",
+  "blueprint": "The definition sentence specifying inverse composition precomposed with p*, the terminal-object equality sentence, and the entire proof sentence are realized by steps 1, 2 and 3 respectively. The parent unit sk-def-sfb-pullback-from-point-comp first proof paragraph delegates exactly this isomorphism to the item; monoidality remains its separate child.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-finite-upper-star-comp",
+    "why": "Supplies the generic pullback composition isomorphism explicitly required by this unit; its own comparison does not construct the point comparison."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Supplies the structure-morphism equality and the setting of inverse image from the point explicitly used by the unit."
+   },
+   {
+    "node": "def-sfb-upper-star-from-point",
+    "why": "Unfolds the point inverse-image functors that the unit explicitly cites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-finite-upper-star-comp",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-upper-star-from-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-8b7ae9c9f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-8b7ae9c9f (reviewer sub-agent of L); spot-checked: Read the full item, all three steps, cited statements, current blueprint route and master construction. Comparison direction, abelian coefficient category, naturality and inverse equations agree; identity, empty-scheme and zero-object cases pass. No new nodes, cycles, missing mathematical citations or target weakening. Accepted tool uses are documented in review.md. The report incorrectly says unit metadata is absent; the snapshot contains it, with no effect on this split."
+ }
 }
