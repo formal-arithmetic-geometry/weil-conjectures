@@ -263,5 +263,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-099c10085 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and checked Stacks 07K6, 07K7, 06XN, cited statements, route, duplicates and edge cases. All six proof steps pass, including N=0 and the upper-bound boundary. Corrected missing creation and initial Lean-audit metadata in both new nodes; statements and dependencies unchanged. Full checks recorded in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound",
+  "declaration": "CategoryTheory.finiteCDDerivedUpperBound",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/FiniteCDDerivedUpperBound.lean",
+  "statement": "theorem finiteCDDerivedUpperBound {A : Type u₁} [Category.{v₁} A] [Abelian A] [EnoughInjectives A] {B : Type u₂} [Category.{v₂} B] [Abelian B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B] (N : ℤ) (hN0 : 0 ≤ N) (hN : ∀ (q : ℕ), N < (q : ℤ) → ∀ (X : A), IsZero ((F.rightDerived q).obj X)) : ∃ (RF : DerivedCategory A ⥤ DerivedCategory B) (α : (F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ (DerivedCategory.Q : CochainComplex B ℤ ⥤ DerivedCategory B)) ⟶ (DerivedCategory.Q : CochainComplex A ℤ ⥤ DerivedCategory A) ⋙ RF), RF.IsRightDerivedFunctor α (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) ∧ ∀ (t : ℤ) (E : DerivedCategory A), (∀ (i : ℤ), t < i → IsZero ((DerivedCategory.homologyFunctor A i).obj E)) → ∀ (i : ℤ), t + N < i → IsZero ((DerivedCategory.homologyFunctor B i).obj (RF.obj E))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dcfa0a2f9",
+  "group": "N3",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source Tag 07K7, module/docstrings, edge cases, searches, and report sections. Reproduced scompile.py successfully for sandbox and library paths; no substantive or mechanical defects found. Review written to review.md."
  }
 }
