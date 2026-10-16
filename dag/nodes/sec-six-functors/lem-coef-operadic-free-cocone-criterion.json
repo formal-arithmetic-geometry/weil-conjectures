@@ -30,9 +30,79 @@
   "lem-coef-operadic-algebra-presentability",
   "def-coef-operadic-correspondence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-operadic-collage-comparison] to $u$ and denote its correspondence by $\\mathcal P_u$. It is small, constant over $[0]$, and has space zero-fibers by exactly the hypotheses on $u$. For a target color $n$, its source active slice is $\\mathcal M\\times_{\\mathcal N}(\\mathcal N_{\\mathrm{act}})_{/n}$. This is the $K_n$ in the statement: any source arrow in this pullback has active image in $\\mathcal N$, hence active base arrow in $\\Delta^{\\mathrm{op}}$, hence belongs to $\\mathcal M_{\\mathrm{act}}$, since $u$ lies over the base. The same observation holds on all simplices of these wide active subcategories. The comparison respects the source diagram and the canonical base cocone. The coherent comma description identifies a functor $H:\\mathcal P_u\\to\\mathcal V^\\otimes$ preserving fiberwise inert edges with a triple $(B,A,\\eta)$, and identifies its cocone at $(m,\\alpha)$ with $B(m)\\xrightarrow{\\eta_m}A(u(m))\\xrightarrow{A(\\alpha)}A(n)$. Thus, by [def-coef-operadic-correspondence], this $H$ is an operadic left Kan extension exactly when the induced cocones in the statement are operadically colimiting.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2 and Definition A.3.3; identify the active slices and their actual cocones."
+   }
+  },
+  {
+   "text": "If a pair $(A,\\eta)$ as in the statement exists, its induced cocone at each color is itself the required extension of $T_n$. Its projection is the specified canonical base cocone because $\\eta$ is over the identity in $\\Delta^{\\mathrm{op}}$ and $A(\\alpha)$ projects to the base of $\\alpha$. This proves necessity without any colimit existence assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.1 and the necessary direction of Proposition A.4.4."
+   }
+  },
+  {
+   "text": "Conversely assume the specified operadically colimiting extensions of every $T_n$ exist. By step 1 they supply exactly the local active cocones for $B$ on the source of $\\mathcal P_u$. The existence assertion of [lem-coef-operadic-correspondence-kan-filling] therefore gives an inert-preserving $H:\\mathcal P_u\\to\\mathcal V^\\otimes$ restricting to $B$, which is an operadic left Kan extension. All its hypotheses were checked in step 1; its target may be any monoidal infinity category. Under [lem-coef-operadic-collage-comparison] this gives $A$ and $\\eta$ together. The comparison respects cocones, so their cocones have the required operadic colimit property by [def-coef-operadic-correspondence]. This assembles coherent algebra data rather than choosing operations separately.",
+   "uses": [
+    "lem-coef-operadic-correspondence-kan-filling",
+    "lem-coef-operadic-collage-comparison",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem A.3.4(1), Remark A.4.2, and the sufficient direction of Proposition A.4.4."
+   }
+  },
+  {
+   "text": "For any pair $(A,\\eta)$ with the cocone property, put $H=(B,A,\\eta)$ in $\\mathcal E=\\mathcal E_{\\mathcal P_u}(\\mathcal V)$. It is an operadic left Kan extension by step 1. For any $G\\in\\mathcal E$ with source restriction $Y$, consider restriction\n$$\\rho:\\operatorname{Map}_{\\mathcal E}(H,G)\\longrightarrow\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)}(B,Y).$$\nWe verify lifting against every $\\partial\\Delta^q\\hookrightarrow\\Delta^q$, including $q=0$. Use the right-pinched definition in [def-cbc-enhanced-diagrams-cones]. For $q>0$, a map from $\\partial\\Delta^q$ to the left mapping space specifies all proper faces of $\\Delta^{q+1}$ containing its final vertex. Adjoin the entire initial face $\\Delta^{\\{0,\\ldots,q\\}}$ as the constant simplex $H$. For $q=0$ the mapping-space boundary is empty, so instead prescribe both vertices of $\\Delta^1$ directly: vertex $0$ is $H$ and vertex $1$ is the fixed target $G$. In either case these data specify the whole boundary $\\partial\\Delta^{q+1}$, with the final vertex fixed at $G$. The proposed simplex on the right supplies the compatible source diagram on $\\mathcal M\\times\\Delta^{q+1}$ with that initial face constant at $B$. These are precisely the prescribed data of the relative boundary assertion in [lem-coef-operadic-correspondence-kan-filling], with $m=q+1>0$. Its initial vertex is $H$, an operadic left Kan extension. A filler preserves the initial face and final vertex and hence is the required right-pinched simplex. For $q=0$, it fills the edge with prescribed vertices $H,G$, so surjectivity on vertices is included. The collage comparison guarantees that $\\mathcal E$ and its endpoint algebra categories are quasicategories. By [lem-coef-kan-quillen-right-proper], lifting every boundary makes $\\rho$ a trivial Kan fibration, therefore a weak homotopy equivalence. This proves universality on mapping spaces, not just on their components.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-operadic-correspondence-kan-filling",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.3 via the relative boundary consequence of Theorem A.3.4; explicit mapping-simplex calculation."
+   }
+  },
+  {
+   "text": "For an $\\mathcal N$-algebra $C$, take $G_C=(u^*C,C,\\operatorname{id})$. The natural mapping formula of [lem-coef-operadic-collage-comparison] gives, writing $D=\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)}(B,u^*C)$ and $F=\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal N}(\\mathcal V)}(A,C)$,\n$$\\operatorname{Map}_{\\mathcal E}(H,G_C)\\simeq D\\times_D^h F,$$\nwhere the first leg is the identity and the second is $h\\mapsto u^*(h)\\circ\\eta$. Projection to $F$ is an equivalence: its fiber over $h$ is the space of paths with arbitrary initial point and fixed endpoint $u^*(h)\\eta$, contracted by moving the initial point along the path toward that endpoint. Its inverse chooses the constant path. Under this equivalence $\\rho$ is the displayed map $F\\to D$, with its specified coherent composition homotopy. Step 4 proves that map is an equivalence. The comma formula is natural in all morphism parameters, and restriction and composition define coherent transformations. Consequently the displayed map is natural in $C$ on its whole infinity category, retaining all higher homotopies.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.3: apply the coherent comma mapping formula to the target with identity structure map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-collage-comparison",
+  "def-coef-operadic-correspondence",
+  "lem-coef-operadic-correspondence-kan-filling",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Online reading of Definitions A.3.1–A.3.3 and A.4.1, Remark A.4.2, Theorem A.3.4, Propositions A.4.3–A.4.4; source not archived locally. Explicit boundary and comma calculation using existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +160,45 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"14\", \"text\": \"# The strict bicategory of quasicategories\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"17\", \"text\": \"are quasicategories.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"20\", \"text\": \"the `Cat`-enriched ordinary category of quasicategories whose hom-categories are the\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"25\", \"text\": \"between the underlying category and the full subcategory of quasicategories. Thus the\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"11\", \"text\": \"# The nerve of a category is a quasicategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"13\", \"text\": \"In `AlgebraicTopology.Quasicategory.StrictSegal`, we show that any\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"14\", \"text\": \"strict Segal simplicial set is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"19\", \"text\": \"a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"12\", \"text\": \"# Strict Segal simplicial sets are quasicategories\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"19\", \"text\": \"condition is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"33\", \"text\": \"/-- Any `StrictSegal` simplicial set is a `Quasicategory`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"34\", \"text\": \"theorem quasicategory {X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"12\", \"text\": \"# 2-truncated quasicategories and homotopy relations\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"14\", \"text\": \"We define 2-truncated quasicategories `Quasicategory₂` by three horn-filling properties,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"18\", \"text\": \"We prove that for 2-truncated quasicategories, both homotopy relations are equivalence\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"21\", \"text\": \"For a 2-truncated quasicategory `A`, we define a category `HomotopyCategory₂ A` whose\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"28\", \"text\": \"The two constructions agree for 2-truncated quasicategories (TODO: handled by future PR).\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"31\", \"text\": \"  complex for every pair of objects `X Y : C`, is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"32\", \"text\": \"* Define the quasicategory of anima as the simplicial nerve of the simplicial category of\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"11\", \"text\": \"# Quasicategories\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"13\", \"text\": \"In this file we define quasicategories,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"15\", \"text\": \"We show that every Kan complex is a quasicategory.\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:39-58 (ordinary Category and CostructuredArrow), Monoidal/Limits/Colimits.lean:32-76 (ordinary tensor cocones), and AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-32,46-74 (quasicategory bicategory infrastructure). None states conditional assembly of inert-preserving generalized operadic algebras or its mapping-space equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free algebra for a generalized nonsymmetric infinity operad map exists when active slice operadic colimits exist and satisfies a mapping space adjunction",
+   "results": "8 hits: AlgCat.free, AlgCat.adj, CategoryTheory.Monad.FreeCoequalizer.topMap/bottomMap/π, AlgCat.free_map/free_obj, CategoryTheory.Quiv.adj.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary ring algebras, monads, and free categories; none is the generalized infinity-operadic conditional criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftKanExtension\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Functor.KanExtension.Basic, including IsLeftKanExtension, homEquivOfIsLeftKanExtension, descOfIsLeftKanExtension and leftKanExtension instances.",
+   "date": "2026-10-17",
+   "verdict": "no match: source Basic.lean:265–310 read; these are ordinary category Kan extensions, with Hom bijections instead of infinity-operadic mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|Operad|free.*cocone",
+   "results": "CategoryTheory: one hit, Mathlib/CategoryTheory/Distributive/Monoidal.lean:55, bibliography title Operads: Proceedings of Renaissance.",
+   "date": "2026-10-17",
+   "verdict": "no match: bibliography only, no operadic cocone declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Operadic left Kan extension of generalized nonsymmetric infinity operads with conditional colimits",
+   "results": "8 hits: Functor.leftKanExtension, Bicategory.lanIsKan, Functor.lanCompColimIso, Functor.leftKanExtensionObjIsoColimit, Functor.pointwiseLeftKanExtension, Presheaf.preservesColimitsOfSize_of_isLeftKanExtension, Functor.isColimitCoconeOfIsLeftKanExtension, Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary functor/bicategory Kan extensions; read Adjunction.lean:37–82, which assumes ordinary Category instances and ordinary pointwise Kan extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative initial objects in infinity categories and pointwise left Kan extension computed by colimits over comma categories",
+   "results": "8 hits in Mathlib/CategoryTheory/Functor/KanExtension/Pointwise and Adjunction: pointwiseLeftKanExtension_obj/map/Unit_app, leftKanExtensionObjIsoColimit, LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit, pointwiseLeftKanExtensionIsPointwiseLeftKanExtension, LeftExtension.IsPointwiseLeftKanExtensionAt and IsPointwiseLeftKanExtension.",
+   "date": "2026-10-17",
+   "verdict": "no match: second semantic phrasing again returns ordinary category Kan extensions; no generalized nonsymmetric infinity-operadic assembly."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-cocomplete-extensions",
@@ -113,5 +218,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-free-cocone-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the conditional statement for arbitrary monoidal targets. Reused the existing collage and correspondence boundary-filling nodes to assemble local cocones and derive the mapping-space equivalence by right-pinched boundary lifting and the natural comma formula. No new nodes; no presentability or unconditional colimit existence assumption.",
+  "blueprint": "Historical ancestry and current main-20261015: prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient adjunction in the displayed inverse-limit calculation. The current proof is in the separate prop-coef-integral-exceptional-adjoint.proof.md file. This split supplies the inherited conditional operadic universal-property tool through Remark A.4.2 and Theorem A.3.4; it does not replace the unit route or change the maintained binding."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-b55d9fe58",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-b55d9fe58 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, plus the full statements of all cited nodes: collage-comparison, def-coef-operadic-correspondence, correspondence-kan-filling, def-cbc-enhanced-diagrams-cones, kan-quillen-right-proper, and the stmt deps. Checked against Gepner–Haugseng arXiv:1312.3178v4, App. A, pp. 89–92 (PDF text). Statement: A.4.1, A.4.3 and A.4.4 are stated for an arbitrary non-symmetric ∞-operad O. The item specialises to O = V⊗ for monoidal V. Dropping the cocompleteness of the A.4 preamble is faithful to these statements. The 'over the base cocone' clause matches A.4.4. K_n = M_act ×_{N_act}(N_act)/n equals the source's A ×_B (B_act)/b on all simplices because activeness is detected in the base. Tested u = id, empty colours, an empty slice and nullary inputs; none is false. Step 1: the collage hypotheses match exactly, and the slice and cocone identification turns the item's condition into the definition's LKE condition. Step 2 is elementary and correct. Step 3: the existence clause of kan-filling with any monoidal V gives H, and the collage gives (B,A,η); this matches A.3.4(i) and Remark A.4.2. Step 4: right-pinched boundary data plus a constant initial face fill ∂Δ^{q+1}; the relative-boundary clause applies with m = q+1 > 0 and LKE initial vertex, and q = 0 is handled. The RLP against all ∂Δ^n, including n = 0, is the trivial-fibration characterisation of the cited node. Step 5: the comma formula with θ = id gives a homotopy pullback whose projection to F is an equivalence. Its first leg is id∘a, homotopic to the identity rather than equal; this does not affect the argument. Naturality comes from the collage clause. No new nodes, no cycle (dependency closure of 513 nodes excludes the item), all statements in unit sk-prop-sf-biduality-general, no tool_uses needed, no SGA. The existing stronger lem-coef-operadic-free-cocone-characterization (presentable case) is not a duplicate created here. Searches are recorded in all three kinds. No changes."
  }
 }

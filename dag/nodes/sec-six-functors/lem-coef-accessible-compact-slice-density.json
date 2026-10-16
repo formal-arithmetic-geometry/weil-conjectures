@@ -30,9 +30,110 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By accessibility choose an essentially small full subcategory $G\\subseteq\\mathcal C$ of $\\kappa$-compact generators. If $d\\in D$, choose its small $\\kappa$-filtered presentation $F:I\\to G$ with colimit $d$. Apply [lem-coef-infinity-compact-stage-factorization] to $1_d$: there are $d\\xrightarrow{v}F(i)\\xrightarrow{r}d$ with $rv$ homotopic to $1_d$. Thus $D$ is contained in the replete full subcategory of homotopy retracts of objects of $G$, which is essentially small by [lem-coef-locally-small-infinity-size-calculus]. A full replete subcategory of an essentially small category is essentially small: take the full subcategory of a small representative on the objects whose images lie in $D$, and restrict the equivalence. This proves the first assertion without claiming that every compact object belongs to the original generator family.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-compact-stage-factorization",
+    "lem-coef-locally-small-infinity-size-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.2(3) and the homotopy-retract argument of Lemma 5.4.2.4, printed pp. 424-425; Proposition 5.4.1.7 for size."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal C$. Apply [lem-coef-infinity-relative-slice-sections] with the essentially small replete full subcategory $D$, the one-point simplicial set $K=\\Delta^0$, and $p$ selecting $x$. Its category of sections is precisely the coherent category of pairs $(d,d\\to x)$, hence $D_{/x}$, and the cited essential-smallness clause makes it essentially small. Fix a small equivalent quasicategory $S\\simeq D_{/x}$ for all later uses of small-index colimits and cofinality. Work with the original slice when constructing cones, and transport along this equivalence when a small index is required. An equivalence and its coherent quasi-inverse transport cones and their universal properties, so this choice changes no assertion.",
+   "uses": [
+    "lem-coef-infinity-relative-slice-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7 and the relative-slice construction in Proposition 5.4.4.3, with base a point; local smallness is part of accessibility."
+   }
+  },
+  {
+   "text": "Choose a small $\\kappa$-filtered presentation $F:I\\to G\\subseteq D$ of $x$. Apply [lem-coef-infinity-cofinal-kappa-poset] to $I$: there are a small nonempty partially ordered set $A$, in which every subset of cardinality less than $\\kappa$ has an upper bound, and $u:N(A)\\to I$. The cited node asserts colimit invariance for targets admitting all small colimits; do not assume that $\\mathcal C$ is such a target. Instead apply that assertion to every diagram $I\\to\\mathcal S$, where small colimits of spaces exist by [lem-coef-spaces-small-colimits-universe]. This is condition (2) of [lem-coef-infinity-cofinality-space-test], so its condition (3) gives weak contractibility of all $(i\\downarrow u)$. Now [lem-coef-infinity-cofinal-comma-criterion], which requires no colimit-existence condition on the target, implies that the given colimiting cocone on $F$ restricts to a colimiting cocone on $p=Fu:N(A)\\to D$, with the same apex $x$. The dual of [lem-coef-infinity-join-cone-calculus], applied in the opposite quasicategory, represents this coherent cocone by a join cocone $\\bar p:N(A)^{\\triangleright}\\to\\mathcal C$, with cone vertex $x$; its comparison preserves the source diagram, the vertex and the colimit property. Use this induced coherent cocone to define $q:N(A)\\to D_{/x}$, sending $a$ to its leg $p(a)\\to x$ with the coherent triangles. Compose with a quasi-inverse $D_{/x}\\to S$ whenever using the small representative.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.1.18 (April 2017 numbering; Proposition 5.3.1.16 in the 2012 text cited by the poset node); join-versus-coherent cocone comparison."
+   }
+  },
+  {
+   "text": "To prove $\\kappa$-filteredness, take any $\\kappa$-small simplicial set $K$, including $\\varnothing$, and any diagram $h:K\\to D_{/x}$. Use a quasi-inverse of [lem-coef-infinity-slice-arrow-equivalence] to obtain an equivalent diagram in the join slice, still with sources in $D$ since $D$ is replete and the comparison is over $\\mathcal C$. Unpacking this join-slice diagram gives $u:K\\star\\{\\infty\\}\\to\\mathcal C$ with apex $x$ and source diagram $d:K\\to D$. Apply [lem-coef-compact-relative-cocone-factorization] to $K'=\\varnothing\\subseteq K$, this $d$, the presentation $\\bar p$ of step 3, $r=\\bar p$ (the join with the empty set is the other factor), and the cocone $u$. Every vertex of $d$ is $\\kappa$-compact, the indexing poset has the required upper bounds, and both cocones have the same apex $x$, so all hypotheses hold. The result is $v:K\\star\\Delta^1\\to\\mathcal C$, restricting to $d$ on $K$, to $u$ on $K\\star\\{1\\}$, and to $p(a)\\to x$ on $\\Delta^1$ for some $a\\in A$. Since $K\\star\\Delta^1=(K\\star\\Delta^0)\\star\\Delta^0$, with the last vertex interpreted as $x$, this is exactly a join-slice cocone on the chosen diagram, with new vertex $p(a)\\to x$. Its sources lie in $D$, so fullness puts the cocone in the compact-source slice. Apply the slice comparison back and compose with the coherent equivalence of boundary diagrams to obtain a cocone on $h$. For $K=\\varnothing$ the construction produces the object $p(a)\\to x$, proving nonemptiness as well. This verifies the defining cone condition for $D_{/x}$, and hence for its small representative $S$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-compact-relative-cocone-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14 and the relative lifting argument of Lemma 5.5.4.13, specialized to empty prescribed subdiagram; Kerodon slice diagonal comparison."
+   }
+  },
+  {
+   "text": "We next show that the presentation functor $q$ is cofinal; this also keeps track of the specific tautological cocone. Fix $b=(d\\xrightarrow{f}x)\\in D_{/x}$ and put $B=\\operatorname{Map}_{\\mathcal C}(d,x)$. The cone mapping-space formula in [lem-cbc-enhanced-functor-cone-calculus], with the fixed target diagram the point $x$, identifies naturally in $a$\n$$\\operatorname{Map}_{D_{/x}}(b,q(a))\\simeq\\operatorname{hofib}_{f}\\big(\\operatorname{Map}_{\\mathcal C}(d,p(a))\\longrightarrow B\\big).$$\nFullness of $D_{/x}$ gives the same mapping space as the ambient slice. All computations may be made in the larger space universe, where these mapping spaces are small; $N(A)$ is small there too. By $\\kappa$-compactness of $d$, the canonical map $\\operatorname{colim}_a\\operatorname{Map}_{\\mathcal C}(d,p(a))\\to B$ induced by the legs of $\\bar p$ is an equivalence. Small colimits of these spaces exist by [lem-coef-spaces-small-colimits-universe]. By the constant-diagram and filtered-contractibility clauses of [lem-coef-infinity-coslice-colimit-formula], applied to the infinity category of spaces, the identity cocones on the constant diagrams $B$ and $\\{f\\}\\simeq *$ are colimiting. Apply [lem-coef-spaces-kappa-limit-filtered-colimit] to the finite pullback shape defining the homotopy fiber; this shape is $\\kappa$-small even for $\\kappa=\\aleph_0$. It follows that\n$$\\operatorname{colim}_{a\\in N(A)}\\operatorname{Map}_{D_{/x}}(b,q(a))\\simeq\\operatorname{hofib}_{f}(B\\xrightarrow{\\mathrm{id}}B)\\simeq *.$$\nThe middle map is the canonical compactness equivalence, identified with the identity of $B$; it is not an arbitrary map between equivalent spaces. The last fiber is contractible: its points are a point of $B$ together with a path to $f$, and this path space contracts to the constant path at $f$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.3.3 (filtered colimits commute with small limits), compactness Definition 5.3.4.5, and the slice mapping-space fiber calculation; the cofinal compact-presentation argument is agent-written."
+   }
+  },
+  {
+   "text": "Transfer the mapping-space calculation of step 5 across $S\\simeq D_{/x}$; equivalences induce equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. For the resulting functor $q_S:N(A)\\to S$, condition (4) of [lem-coef-infinity-cofinality-space-test] holds for every object of $S$. Its equivalent condition (3) says that every coherent comma category $(s\\downarrow q_S)$ is weakly contractible. Now apply [lem-coef-infinity-cofinal-comma-criterion] to $q_S$ and the source diagram $H:S\\to D_{/x}\\to\\mathcal C$. This theorem identifies coherent cocone categories over $\\mathcal C$, and says a given cocone is colimiting if and only if its restriction along $q_S$ is. The restriction of the tautological cocone $H\\to x$ is the chosen presentation cocone $p\\to x$, up to the coherent equivalences used above, and it is colimiting by step 3. Thus the tautological cocone itself is colimiting. This proves the claimed colimit with apex $x$ using a small representative of $D_{/x}$ and without assuming that $\\mathcal C$ has any colimits other than its given small $\\kappa$-filtered ones.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Kerodon Proposition 7.4.3.11 (cofinality tested on corepresentables), Theorem 7.2.3.1, and HTT Proposition 4.1.1.8 (equivalence of cocone categories); applied to the compact presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-compact-relative-cocone-factorization",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-compact-stage-factorization",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-relative-slice-sections",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-locally-small-infinity-size-calculus",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written compact-presentation proof using the existing DAG interfaces; checked online against Proposition 5.4.2.2, Lemma 5.4.2.4, Corollary 5.3.4.14, Proposition 5.3.3.3 and the cofinality criterion. HTT is not archived in literature/; archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +176,52 @@
    "results": "{\"t\": \"2026-10-16T20:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"Cardinal presentable generators and costructured arrow density in higher categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsStrongGenerator.isDense_colimitsCardinalClosure_ι\"], \"digest\": \"a3cfe4f74c247529\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. Returned ordinary CategoryTheory declarations require Category instances with Hom sets; StrictSegal declarations give strict simplex/path bijections. Neither covers the stated quasicategorical mapping-space theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*slice|accessible.*quasicategory|IsCardinalFilteredCostructuredArrow",
+   "results": "{\"t\": \"2026-10-16T21:23:29Z\", \"tool\": \"grep\", \"query\": \"compact.*slice|accessible.*quasicategory|IsCardinalFilteredCostructuredArrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"CostructuredArrow\"",
+   "results": "{\"t\": \"2026-10-16T21:23:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalPresentable\\\", \\\"CostructuredArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\"], \"digest\": \"8c26471e0258facf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full infinity category of compact objects over an object of an accessible quasicategory is essentially small and filtered and its source projection has colimit that object",
+   "results": "{\"t\": \"2026-10-16T21:23:30Z\", \"tool\": \"leanfinder\", \"query\": \"The full infinity category of compact objects over an object of an accessible quasicategory is essentially small and filtered and its source projection has colimit that object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"172ba67a4f0e7418\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact objects in an accessible infinity category form a small subcategory and canonically present each object by a filtered colimit",
+   "results": "{\"t\": \"2026-10-16T21:24:19Z\", \"tool\": \"leansearch\", \"query\": \"Compact objects in an accessible infinity category form a small subcategory and canonically present each object by a filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsFinitelyAccessibleCategory.instEssentiallySmallIsFinitelyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator\"], \"digest\": \"6179753cbf69b215\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent compact source comma category is a filtered category of elements of a restricted Yoneda functor",
+   "results": "{\"t\": \"2026-10-16T21:24:20Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent compact source comma category is a filtered category of elements of a restricted Yoneda functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsIndObject.isFiltered\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.isFiltered_costructuredArrow_yoneda_of_preservesFiniteLimits\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.isIndObject_iff\", \"CategoryTheory.instIsFilteredOrEmptyGrothendieckOfαCategoryObjCat\", \"CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat\"], \"digest\": \"3bb00f97d2f4eee3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalFilteredCostructuredArrow|final_toCostructuredArrow|instIsDense",
+   "results": "{\"t\": \"2026-10-16T21:25:12Z\", \"tool\": \"grep\", \"query\": \"IsCardinalFilteredCostructuredArrow|final_toCostructuredArrow|instIsDense\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"2e1a8a1dff58c4de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:30-80; its Category instance and set-valued Hom make these ordinary-category density and filtered-comma theorems, not the coherent mapping-space assertion for arbitrary quasicategories. The second semantic phrasing likewise returns ordinary Ind-object results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-diagram-presentations",
@@ -98,5 +241,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-compact-slice-density",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved compact-source essential smallness by homotopy retracts of a fixed generator family, slice essential smallness by the existing relative-sections theorem, filteredness by the existing relative compact-cocone factorization with empty prescribed boundary, and canonical density by an explicit mapping-space fiber computation and the two-way cofinal cocone criterion. Added no nodes; searched source Lean, Mathlib, the whole DAG and blueprint; checked the empty shape and countable compactness cardinal. Self-review repaired the poset lemma's cocomplete-target restriction by the space test and the general two-way comma criterion.",
+  "blueprint": "Expands the compact-source slice input to lem-coef-accessible-diagram-presentations (HTT Proposition 5.4.4.3) within the finite-coefficient mapping-complex adjunction infrastructure of prop-coef-integral-exceptional-adjoint, proof paragraph beginning 'For K'. This is below the unit route; the current blueprint's integral adjunction proof and its coefficient categories are not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-slice mapping-space fiber formula and mapping-space invariance under equivalence, used in steps 5-6; this unit has no alternative statement of that general quasicategory foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-b72bf9469",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b72bf9469 (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited node statements, the unit record and the report in full; there are no new nodes and I made no fixes. The statement is unchanged and correct: it is the standard result from HTT 5.4.2.2, Lemma 5.4.2.4 and Cor. 5.3.5.4. Every citer uses only the clauses the statement gives. Edge cases checked: empty C, terminal C and kappa = aleph_0 all hold. Step 1: the compact-stage factorization gives a homotopy retract of a generator, and the size calculus gives essential smallness of retracts. Step 2: relative-slice-sections with K = Delta^0 is exactly D_{/x}, and it is essentially small. Step 3: the poset node's cocomplete-target restriction is handled correctly. The poset node is applied only to diagrams into spaces, giving space-test (2) and then (3). The comma criterion, which needs no colimits in the target, then transfers the colimit of the presentation in C. The join-cone dual gives the join cocone p-bar. Step 4: compact-relative-cocone-factorization applies with K' empty, r = p-bar and apex x. All its hypotheses hold, and K*Delta^1 = (K*Delta^0)*Delta^0 gives a cocone in the slice, which proves kappa-filteredness including K empty. Step 5: the cone-calculus fiber formula with K a point is correct, as a cone rather than a cocone. Compactness, the constant-diagram clause and commutation of filtered colimits with the finite cospan give a contractible fiber of id_B. Step 6: space-test (4) gives (3), and the comma criterion then shows the tautological cocone is colimiting with apex x. Minor points, all acceptable: slice-arrow-equivalence and the spaces lemmas are applied with the universe shifted to U', and they are size-agnostic statements. The kappa-filteredness of N(A) follows elementarily from the upper-bound property of the poset. I accept the tool use lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, which this unit's route does not reach); it is a generic foundation. No cycle: I checked the 380-node closure of the cited nodes. A duplicate search over the DAG for HTT 5.4.2.2/5.3.5.4 and compact-slice wording found nothing that states this result. HTT is not in literature/; the proof is marked agent-written and the WANTED line is recorded. No SGA source is cited and no target is touched. One report inaccuracy: the second reading says it changed created.item, but the file keeps lem-coef-accessible-diagram-presentations, which is correct for this existing node."
  }
 }

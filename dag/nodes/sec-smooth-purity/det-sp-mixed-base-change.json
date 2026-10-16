@@ -3,40 +3,184 @@
  "blueprint": {
   "is": "det-sp-mixed-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change commutes with change of finite coefficients",
- "statement": "In a Cartesian square $f\\circ u=v\\circ f'$ as in the sketch, with $f$ smooth of\npure relative dimension $d$, let $A\\to B$ be a map of finite commutative rings\nkilled by a power of $\\ell$. Let $b^f,c^f_{A,B}$ (and $b^{f'},c^{f'}_{A,B}$) be the\ncoefficient comparisons of [det-sp-reduction-direct-image] and\n[det-sp-reduction-exceptional], $\\beta_{f,A}(M):v_A^*Rf_{!,A}M\\xrightarrow{\\sim}R(f')_{!,A}u_A^*M$\ncompact-support base change, and $e_{f,A}(K):u_A^*f_A^!K\\xrightarrow{\\sim}(f')_A^!v_A^*K$\nexceptional base change (the transpose of\n$v_A^*(\\varepsilon_{f,A}(K))\\circ\\beta_{f,A}(f^!_AK)^{-1}$). Then for\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ and $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$:\n\n$$\n\\beta_{f,B}(M_B)\\circ v_B^*(b^f(M))\n=b^{f'}(u_A^*M)\\circ\\bigl(\\beta_{f,A}(M)\\bigr)_B\n\\quad\\text{in }\\Dctf(Y'_{\\mathrm{proét}},B),\n$$\n\n$$\nc^{f'}_{A,B}(v_A^*K)\\circ(e_{f,A}(K))_B\n=e_{f,B}(K_B)\\circ u_B^*c^f_{A,B}(K)\n\\quad\\text{in }\\Dctf(X'_{\\mathrm{proét}},B),\n$$\n\nthe sources and targets being identified by the evident commutations of\npullback with extension of scalars.",
+ "statement": "Work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $p>0$, $\\ell\\ne p$ is prime, all schemes are separated of finite type over $k$, and all maps are $k$-morphisms. Let $f:X\\to Y$, $v:Y'\\to Y$, $X'=X\\times_Y Y'$ with projections $u:X'\\to X$, $f':X'\\to Y'$ be the Cartesian square of [def-cbc-compact-support-square], and suppose $f$ is smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Use a coefficient-independent compactification $f=pj$ and its pullback for $f'$. On each scheme use the ordinary, uncompleted constant-ring pro-etale module derived categories and bounded intrinsically constructible finite-Tor subcategories specified in [det-sp-reduction-direct-image]; scalar extension $(-)_B$ means the $B$-linear derived tensor functor of [det-sp-scalar-extension-functor]. Let $A\\to B$ be a map of finite commutative rings\nkilled by a power of $\\ell$. Let $b^f,c^f_{A,B}$ (and $b^{f'},c^{f'}_{A,B}$) be the\ncoefficient comparisons of [det-sp-reduction-direct-image] and\n[det-sp-reduction-exceptional], $\\beta_{f,A}(M):v_A^*Rf_{!,A}M\\xrightarrow{\\sim}R(f')_{!,A}u_A^*M$\ncompact-support base change, and $e_{f,A}(K):u_A^*f_A^!K\\xrightarrow{\\sim}(f')_A^!v_A^*K$\nexceptional base change (the transpose of\n$v_A^*(\\varepsilon_{f,A}(K))\\circ\\beta_{f,A}(f^!_AK)^{-1}$). Then for\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ and $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$:\n\n$$\n\\beta_{f,B}(M_B)\\circ v_B^*(b^f(M))\n=b^{f'}(u_A^*M)\\circ\\bigl(\\beta_{f,A}(M)\\bigr)_B\n\\quad\\text{in }\\Dctf(Y'_{\\mathrm{proét}},B),\n$$\n\n$$\nc^{f'}_{A,B}(v_A^*K)\\circ(e_{f,A}(K))_B\n=e_{f,B}(K_B)\\circ u_B^*c^f_{A,B}(K)\n\\quad\\text{in }\\Dctf(X'_{\\mathrm{proét}},B),\n$$\n\nthe sources and targets being identified by the evident commutations of\npullback with extension of scalars.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.md",
   "place": "node det-sp-mixed-base-change, order None"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-cbc-compact-support-square",
+  "def-sbc-smooth-morphisms",
+  "det-sp-scalar-extension-functor",
   "det-sp-reduction-direct-image",
-  "det-sp-reduction-exceptional"
+  "det-sp-reduction-exceptional",
+  "thm-cbc-finite-level-proetale"
  ],
  "proof": [
   {
-   "text": "*Direct images.* Choose a compactification $f=\\bar f\\circ j$ and pull it back to\n$Y'$, giving $f'=\\bar f'\\circ j'$. Both $b$ and $\\beta$ are composites of the\ncorresponding maps for $j$ and for $\\bar f$, so it suffices to treat these\nseparately. For the open immersion $j$ both sides are the evident\nidentification of extensions by zero ($j_!$ commutes with pullback and with\nextension of scalars on the nose). For the proper map $\\bar f$, both $b^{\\bar f}$\nand proper base change are transposes of the counit of $L\\bar f^*\\dashv R\\bar f_*$\non the derived categories of $A$-module sheaves on the pro-étale sites, after\nextension of scalars and after pullback respectively. Both sides of the first\nidentity are maps $v_B^*((R\\bar f_*N)_B)\\to R\\bar f'_*(u_B^*(N_B))$; transposing\nunder $L\\bar f'^*\\dashv R\\bar f'_*$, each becomes the pulled-back counit\n$u^*\\bar f^*R\\bar f_*N\\to u^*N$ with scalars extended, by naturality of the counits\nand the compatibility of transposition with pullback and with extension of\nscalars. Hence the two sides agree.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose the coefficient-independent compactification $f=\\bar f\\circ j$ used for $b^f$ and its pullback $f'=\\bar f'\\circ j'$. The construction [def-cbc-compact-support-square] says that the pullback is again a compactification. Moreover [lem-sbc-smooth-relative-dimension-permanence] (1) makes $f'$ smooth of the same relative dimension, so the exceptional coefficient comparison applies to both vertical maps. Write $T_Z=(-)_B$ on each scheme $Z$, computed by the $B$-linear K-flat tensor construction [det-sp-scalar-extension-functor]. For any scheme morphism $h:Z\\to W$ the constant-ring identifications [prop-weil-pbc-proetale-constant-ring-map] and derived pullback construction [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give $h_B^*T_W\\simeq T_Zh_A^*$. These are $B$-linear identifications and are compatible with composition: on a flat K-flat representative $P$ of [lem-pc-kflat-resolution], both composite maps send a local tensor $b\\otimes p$ to $b\\otimes h^{-1}p$, with the appropriate composite inverse image. Multiplication of nested scalar factors is associative, and all coefficient maps preserve constant sections. Thus this equality also commutes with the square comparison $\\theta_R:(\\bar f')_R^*v_R^*\\simeq w_R^*\\bar f_R^*$, where $w:\\bar X'=\\bar X\\times_Y Y'\\to\\bar X$. Pullbacks preserve flat K-flat representatives by the cited derived tensor node; hence these computations give the claimed identities in the derived categories, not just on sheaves. The derived adjunctions used below are those of [def-weil-pbc-proetale-operations].",
+   "uses": [
+    "def-cbc-compact-support-square",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "det-sp-scalar-extension-functor",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+    "place": "Direct images: pullback and coefficient identifications"
+   }
   },
   {
-   "text": "*Exceptional images.* Both sides of the second identity are maps\n$(u_A^*f_A^!K)_B\\to(f')_B^!v_B^*K_B$. Transpose under\n$R(f')_{!,B}\\dashv(f')_B^!$, i.e. compose $R(f')_{!,B}$ of each side with\n$\\varepsilon_{f',B}(v_B^*K_B)$. Since $c^{f'}$ is defined by transposing the\ncounit composed with $b^{f'}$, and $e_{f,A}$ by transposing the pulled-back\ncounit composed with $\\beta_{f,A}^{-1}$, the transpose of the left side is\n$(v_A^*\\varepsilon_{f,A}(K))_B$ composed with the inverses of\n$b^{f'}(u_A^*f_A^!K)$ and $(\\beta_{f,A}(f^!_AK))_B$; the transpose of the right\nside is $v_B^*(\\varepsilon_{f,B}(K_B))\\circ v_B^*Rf_{!,B}(c^f_{A,B}(K))$ composed with\nthe inverse of $\\beta_{f,B}((f_A^!K)_B)$, which by the defining identity of $c^f$\nequals $v_B^*((\\varepsilon_{f,A}(K))_B\\circ b^f(f^!_AK)^{-1})\\circ\\beta_{f,B}^{-1}$.\nThe first identity, applied to $M=f^!_AK$, says exactly that these two inverse\ncomposites agree. Hence the transposes agree and so do the maps.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $p=\\bar f$ and $p'=\\bar f'$, and let $\\gamma_N:T_YRp_{*,A}N\\to Rp_{*,B}T_{\\bar X}N$ be the proper coefficient comparison in [det-sp-reduction-direct-image]. Its defining equation is $\\varepsilon^B_{TN}\\,p_B^*\\gamma_N=T_{\\bar X}\\varepsilon^A_N$. Let $q_{R,N}:v_R^*Rp_{*,R}N\\to Rp'_{*,R}w_R^*N$ be the proper exchange, that is the mate [def-weil-pbc-adjunction-mate] of $\\theta_R$; thus $\\varepsilon'^R_{w_R^*N}(p')_R^*q_{R,N}=w_R^*\\varepsilon^R_N\\,\\theta_{R,Rp_{*,R}N}$. Suppress only Step 1's compatible identifications. For the two maps\n$$L=q_{B,TN}\\,v_B^*\\gamma_N,\\qquad R=\\gamma'_{w_A^*N}\\,T_{Y'}q_{A,N}$$\nwith source $T_{Y'}v_A^*Rp_{*,A}N$ and target $Rp'_{*,B}T_{\\bar X'}w_A^*N$, their transposes under $(p')_B^*\\dashv Rp'_{*,B}$ are\n$$\\begin{aligned}\n\\varepsilon'^B(p')_B^*L\n&=w_B^*\\varepsilon^B_{TN}\\,\\theta_B\\,(p')_B^*v_B^*\\gamma_N\\\\\n&=w_B^*(\\varepsilon^B_{TN}p_B^*\\gamma_N)\\,\\theta_B\n=T_{\\bar X'}(w_A^*\\varepsilon^A_N\\,\\theta_A),\\\\\n\\varepsilon'^B(p')_B^*R\n&=T_{\\bar X'}\\varepsilon'^A_{w_A^*N}\\,T_{\\bar X'}((p')_A^*q_{A,N})\n=T_{\\bar X'}(w_A^*\\varepsilon^A_N\\,\\theta_A).\n\\end{aligned}$$\nThe second line for $L$ is naturality of $\\theta_B$, then the defining equation for $\\gamma$ and Step 1. The line for $R$ uses the defining equations for $\\gamma'$ and $q_A$. The adjunction bijection makes $L=R$ as $B$-linear maps. No assertion that restriction of scalars is faithful on derived morphisms is used.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+    "place": "Direct images: explicit proper-factor transposes"
+   }
+  },
+  {
+   "text": "Keep the compactification $f=pj$ and its pullback $f'=p'j'$ chosen in Step 1. Write $E_M:T_{\\bar X}j_{!,A}M\\simeq j_{!,B}T_XM$ for the open tensor map of [det-sp-reduction-direct-image], and $a_{R,M}:w_R^*j_{!,R}M\\simeq j'_{!,R}u_R^*M$ for [lem-cbc-proetale-extension-zero-base-change]. Their mixed square is\n$$a_{B,T M}\\,w_B^*E_M=E'_{u_A^*M}\\,T_{\\bar X'}a_{A,M}.$$\nHere is a check of the canonical maps: use a flat K-flat representative $P\\to M$. The sheaf tensor identity [lem-weil-pbc-ringed-slice-extension-tensor] and exactness of $j_!,j^*$ [lem-cbc-proetale-extension-zero, def-weil-pbc-proetale-operations] show $j_!P$ has flat terms and is K-flat: for a flat term $P^i$, tensoring by $j_!P^i$ is $j_!(P^i\\otimes j^*(-))$, a composite of exact functors; for the complex, tensoring it with an acyclic $Q$ gives $j_!(P\\otimes j^*Q)$, which is acyclic; $j_!$ preserves sums as a left adjoint, so the formula also holds for total complexes. Thus both open scalar maps are represented by the termwise tensor maps. Under open base change both sides of the displayed square have source canonically $j'_{!,B}((u_A^*P)_B)$. Restriction to $X'$ sends both maps to the identity on $(u_A^*P)_B$: the open base-change map restricts to the pullback identity, and the tensor map restricts to $b\\otimes p\\mapsto b\\otimes p$. The unit of $j'_!\\dashv j'^*$ is the identity since the presheaf defining [def-weil-extension-by-zero] restricts to the original sheaf on objects over $X'$. Consequently this restriction is injective on maps from $j'_!((u_A^*P)_B)$, by the adjunction; the two chain maps are equal, and give equal derived maps. This proves the open square without using pro-etale geometric stalks to detect morphisms.\n\nBy [det-sp-reduction-direct-image], $b^f_M=Rp_{*,B}(E_M)\\gamma_{j_!M}$, and compact-support base change is the ordered composite $\\beta_{f,R}(M)=Rp'_{*,R}(a_{R,M})q_{R,j_!M}$. Here this is the formula of [def-cbc-exchange-map] transported by [thm-cbc-finite-level-proetale]. Its etale-origin hypothesis holds: [lem-weil-pbc-finite-ring-constructible-derived-origin] gives bounded etale representatives for $M$ and $M_B$ (the latter is bounded intrinsically constructible by [det-sp-scalar-extension-functor] (2)). Applying the sheaf comparison [lem-cbc-proetale-extension-zero-comparison] termwise gives etale-origin representatives for their open extensions; exactness of the two open extensions preserves their lower bounds. For the proper factors, [lem-weil-pbc-transport-identifies-exchange] identifies the transported exchange with the precise counit-mate $q_R$ of Step 2. Its qcqs hypotheses hold because $p,p'$ are proper. Thus the formula uses the actual specified pro-etale exchange, with no change of coefficient model. For the assembly set $N=j_{!,A}M$, $a_A=a_{A,M}$, and $a_B=a_{B,T_XM}$. With Step 1's compatible identifications suppressed, the complete calculation is\n$$\\begin{aligned}\n\\beta_{f,B}(T_XM)\\,v_B^*b^f_M\n&=Rp'_{*,B}(a_B)\\,q_{B,j_{!,B}T_XM}\\,v_B^*Rp_{*,B}(E_M)\\,v_B^*\\gamma_N\\\\\n&=Rp'_{*,B}(a_B\\,w_B^*E_M)\\,q_{B,T_{\\bar X}N}\\,v_B^*\\gamma_N\\\\\n&=Rp'_{*,B}(E'_{u_A^*M}\\,T_{\\bar X'}a_A)\\,\\gamma'_{w_A^*N}\\,T_{Y'}q_{A,N}\\\\\n&=Rp'_{*,B}(E'_{u_A^*M})\\,\\gamma'_{j'_{!,A}u_A^*M}\\,T_{Y'}Rp'_{*,A}(a_A)\\,T_{Y'}q_{A,N}\\\\\n&=b^{f'}_{u_A^*M}\\,T_{Y'}\\beta_{f,A}(M).\n\\end{aligned}$$\nThe first equality substitutes the two compactification formulas. The second uses naturality of $q_B$ at $E_M:T_{\\bar X}N\\to j_{!,B}T_XM$. The third uses the open mixed square and Step 2 at $N$. The fourth uses naturality of $\\gamma'$ at $a_A:w_A^*N\\to j'_{!,A}u_A^*M$. The last equality substitutes the primed coefficient and the $A$-coefficient exchange formulas. This proves the first displayed identity. These calculations use the chosen compactification and its pullback throughout, as in the blueprint proof; no coefficient-dependent change of compactification is made.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-extension-by-zero",
+    "thm-cbc-finite-level-proetale",
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-sp-scalar-extension-functor",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+    "place": "Direct images: open factor and assembly"
+   }
+  },
+  {
+   "text": "Put $N=f_A^!K$, $F_R=Rf_{!,R}$, $F'_R=R(f')_{!,R}$, and $E_R=(f')_R^!$. All objects below belong to the indicated constructible finite-Tor categories by the adjunctions in [det-sp-reduction-exceptional]. Suppress Step 1's scalar/pullback identifications. The transpose under $F'_B\\dashv E_B$ of the left side $c^{f'}_{v_A^*K}T_{X'}e_{f,A}(K)$ is\n$$\\begin{aligned}\n\\varepsilon'_B F'_B(c^{f'}T e_A)\n&=T\\varepsilon'_A\\,(b^{f'}_{E_Av_A^*K})^{-1}F'_B(T e_A)\\\\\n&=T(\\varepsilon'_A F'_A e_A)\\,(b^{f'}_{u_A^*N})^{-1}\\\\\n&=T(v_A^*\\varepsilon_A(K))\\,(T\\beta_{f,A}(N))^{-1}(b^{f'}_{u_A^*N})^{-1}.\n\\end{aligned}$$\nThe first equality is the defining counit equation for $c^{f'}$ in [det-sp-reduction-exceptional]; the second is naturality of $b^{f'}$ in [det-sp-reduction-direct-image]; the third is the defining transpose equation for $e_A$ in the item statement. For the right side $e_{f,B}(K_B)u_B^*c^f_K$, its transpose is\n$$\\begin{aligned}\n\\varepsilon'_B F'_B(e_Bu_B^*c^f_K)\n&=v_B^*\\varepsilon_B(K_B)\\,\\beta_{f,B}(f_B^!K_B)^{-1}F'_B(u_B^*c^f_K)\\\\\n&=v_B^*(\\varepsilon_B(K_B)F_Bc^f_K)\\,\\beta_{f,B}(T_XN)^{-1}\\\\\n&=T(v_A^*\\varepsilon_A(K))\\,v_B^*(b^f_N)^{-1}\\,\\beta_{f,B}(T_XN)^{-1}.\n\\end{aligned}$$\nHere the second equality is naturality of compact-support base change and the third is the defining counit equation for $c^f$. Step 3 at $M=N$ says $\\beta_{f,B}(T_XN)v_B^*b^f_N=b^{f'}_{u_A^*N}T\\beta_{f,A}(N)$. Taking inverses equates precisely the last two factors of the two computed transposes. The transposes agree, so the adjunction bijection [def-weil-pbc-adjunction-mate] proves the second displayed identity.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+    "place": "Exceptional images: both transposes with naturality equations"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "det-sp-reduction-direct-image",
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "thm-cbc-finite-level-proetale"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct images and Exceptional images"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport|exceptionalInverse|upperShriek|baseChange.*[Cc]oefficient",
+   "results": "No hits. Search subdirectory: CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support base change commutes with derived extension of finite coefficient rings",
+   "results": "IsBaseChange.finsuppPow; IsBaseChange.basis.congr_simp; Algebra.Extension.baseChange; IsBaseChange.finitePow; LinearEquiv.baseChange_trans; RingHom.IsStableUnderBaseChange; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; IsBaseChange.toDualBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite coefficients commutes with compact support base change and exceptional inverse image exchange maps",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; ComplexShape.Embedding.homRestrict_comp_extendMap; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc; HomologicalComplex.extendMap_comp; CategoryTheory.Abelian.Ext.mapExactFunctor; LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "grep",
+   "query": "def mateEquiv|theorem mateEquiv_counit|lemma mateEquiv_counit|mateEquiv_vcomp",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean Search subdirectory: CategoryTheory/Adjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed coefficient and geometric base change compatibility for exceptional pushforward adjunction",
+   "results": "IsBaseChange.basis_repr_comp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; IsBaseChange.directSum; IsBaseChange.linearMapLeftRight; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj; WeierstrassCurve.baseChange_preΨ₄; IsBaseChange.endHom_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction mates for change of coefficients and Cartesian pullback of derived sheaf functors",
+   "results": "CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.sheafComposeNatTrans; SheafOfModules.pullbackObjFreeIso_hom_naturality; CategoryTheory.sheafComposeNatIso; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: these are generic mates, underived sheaf comparisons, or algebraic tensor base-change results; none is the two finite-coefficient pro-etale compact-support/exceptional identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic adjunction-mate composition and counit laws support the existing mate node, but do not state the mixed pro-etale compact-support and exceptional identities."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic adjunction-mate composition and counit laws support the existing mate node, but do not state the mixed pro-etale compact-support and exceptional identities."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -62,5 +206,104 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-mixed-base-change",
+  "worker": "stage1",
+  "summary": "Audited the existing four-step counit calculation. Made the inherited standing scheme setting and ordinary constant-coefficient model explicit. Supplied the arbitrary-finite-ring etale-origin witnesses and specified exchange-transport citation needed for the compactification formula. Updated all citations and recorded actual item-level Mathlib searches. No new nodes. Second reading replaces the compactification assembly prose by the fully typed five-line composite calculation, with naturality of the proper exchange applied before the mixed proper identity.",
+  "blueprint": "Steps 1-3 expand the paragraph Direct images (pullback/scalar coherence, proper counit transposes, open tensor square and compactification assembly); Step 4 expands Exceptional images (both counit transposes and inversion of the first identity). These supply the finite-level mixed identity used in unit proof step 1.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-compact-support-square",
+    "why": "It constructs the pullback compactification from the chosen one in Step 1. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "Its explicit compactification composite fixes the order of the proper mate and open map in Step 3; it is used on the pro-etale site through the cited transport theorem. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "def-weil-extension-by-zero",
+    "why": "Its explicit presheaf restricts to the original sheaf on the open, giving the unit normalization in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Its explicit transpose formula and bijection identify the proper and exceptional transposes in Steps 2 and 4. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Its exact module pullbacks and ordinary derived adjunctions type the computations in Steps 1 and 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "It gives exactness and the open adjunction needed in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "It supplies the actual canonical open base-change map used in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Its natural sheaf isomorphism, applied termwise, supplies etale origin of the open extensions in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "It supplies flat K-flat representatives for the explicit tensor calculations in Steps 1 and 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Clause (1) preserves smoothness and the relative dimension under the given base change in Step 1. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "It supplies bounded etale-origin witnesses for arbitrary finite commutative coefficients in Step 3; the residue-DVR-only origin lemma does not suffice. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Its sheaf tensor identity proves the open K-flat and mixed-square calculation in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Its K-flat pullback and tensor computation justify the scalar/pullback comparison in Step 1. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "It identifies the transported etale proper exchange with the actual constant-ring pro-etale counit mate in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "It identifies scheme pullbacks of each finite constant ring, preserving constant sections in Step 1. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "It supplies the specified transported compact-support exchange on etale-origin inputs in Step 3. This is a generic construction or comparison tool; it does not replace the unit purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-665da30ec",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-665da30ec (reviewer sub-agent of L); spot-checked: I read the item, all 19 cited statements, the blueprint mixed.md and proof.md (Direct images and Exceptional images paragraphs) and the unit; no new nodes. The statement only spells out 'as in the sketch': standing setting, compactification pulled back to f', ordinary uncompleted constant-ring categories of det-sp-reduction-direct-image. The ring hypotheses and both identities are unchanged, so nothing is weakened. I recomputed every step. Step 2: the transposes of L and R agree, by the mate formula of def-weil-pbc-adjunction-mate and naturality of theta. Step 3: the open square holds by flat K-flat j_!P (Stacks 0E8I, sites-modules l.4051) and the adjunction; the five-line assembly has its naturality moves in the correct order. Etale-origin hypothesis: lem-weil-pbc-finite-ring-constructible-derived-origin (Stacks 09AL, proetale l.5357, Noetherian Λ) works for any finite ring; transport-identifies-exchange applies because p, p' are proper (qcqs), so β is invertible where Step 4 needs β^{-1}. Step 4: both transposes rechecked; inverting identity 1 at N=f^!K matches the leftover factors exactly. Edge cases checked: identity coefficient map, B=0, M=0/K=0, empty schemes, d=0, v=id, nonflat Z/ℓ²→Z/ℓ. No duplicate: lem-fix-compact-support-coefficient-change is a narrower partial overlap. All proof dependencies are on the unit route; the declared tool_uses are acceptable; no SGA. Remark for the maintainer: the statement writes e with an iso arrow as notation, but the item does not prove e is invertible. The citer lem-pur-dnc-coefficient-transport should take that from det-sf-cohsm-base-change. No fixes."
  }
 }

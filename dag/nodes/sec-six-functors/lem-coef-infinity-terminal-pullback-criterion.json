@@ -28,9 +28,150 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Terminality is exactly the mapping-space condition by [def-cbc-enhanced-diagrams-cones]: its word 'contractible' means weakly contractible, including nonemptiness. For later use set $E_F(x)=\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathscr E)}(\\Delta_Kx,F)$, the space of coherent cones with fixed apex $x$. The cone criterion of [lem-cbc-enhanced-functor-cone-calculus] says that a specified cone $\\lambda:\\Delta_Kp\\to F$ is limiting if and only if composition with it gives an equivalence $\\operatorname{Map}_{\\mathscr E}(x,p)\\to E_F(x)$ for every $x$. This criterion concerns the given transformation and all its higher data, rather than a set of compatible morphisms in the homotopy category.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 6.2.2, Remark 6.2.5 and Example 6.2.8 (printed pp. 277-279): cone universal property and the empty diagram. Online text read 2026-10-17; agent expansion through the cited enhanced-cone interface, not archived."
+   }
+  },
+  {
+   "text": "We establish the elementary Kan-space comparisons needed below without using the Kan-Quillen localization theorem, which depends on the present item. For maps $u:U\\to W$, $v:V\\to W$ of Kan complexes, first use the path model $P^-(u,v)$ of triples $(a,b,\\gamma:v(b)\\to u(a))$. By [lem-cbc-kan-fibration-fiber-criterion], $E_v=V\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\to W$, with projection $\\operatorname{ev}_1$, is a Kan fibration, and $V\\to E_v$ is a weak equivalence. Thus $P^-(u,v)=U\\times_WE_v$ is Kan, by projecting a horn to $U$, filling it, and lifting the resulting simplex along $E_v\\to W$. If $v$ is a Kan fibration, the map $U\\times_WV\\to P^-(u,v)$ inserts constant paths. Both projections to $U$ are Kan fibrations. Over $a\\in U$ their strict fiber map is $V_{u(a)}\\to\\operatorname{hofib}_{u(a)}(v)$, a weak equivalence by [lem-cbc-right-fibration-space-fiber], since a Kan fibration is a right fibration. Apply that same node to the two projections to identify their strict fibers with homotopy fibers, and then [lem-coef-spaces-homotopy-fiber-detection] over $1_U$. It proves that the constant-path comparison is a weak equivalence. To obtain the stated orientation when $v$ is the fibration, apply this argument to the opposite simplicial sets. Opposite means reversing the ordinal operators; it exchanges horn $i$ with horn $n-i$, so preserves Kan complexes and Kan fibrations. Reversing the interval identifies $P^+(u,v)^{\\mathrm{op}}$ with $P^-(u^{\\mathrm{op}},v^{\\mathrm{op}})$, preserving constant paths. The barycentric reversal homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$ preserves weak homotopy equivalences. Hence the constant-path comparison for $P^+$ is an equivalence when $v$ is a fibration. If $u$ is the fibration instead, interchange $U,V$: $P^+(u,v)=P^-(v,u)$ after reordering the two object coordinates. This proves both fibration cases with no choice of a simplicial path-inversion operation. The same reversal and the already proved Kan property show that $P^+$ is Kan even when neither leg is a fibration.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 6.6.11 identifies Cartesian squares of spaces with homotopy Cartesian squares; Sections 3.8 and 4.2 give fiber foundations. The displayed path model is constructed here from the cited mapping-path and fiber statements, not quoted from the remark. Online text read 2026-10-17; agent expansion, not archived."
+   }
+  },
+  {
+   "text": "These path pullbacks preserve objectwise weak equivalences of spans. Here are the details used subsequently. A commuting weak equivalence of spans gives a map $E_v\\to E_{v'}$ of mapping-path replacements, weakly equivalent to $V\\to V'$ by their constant-path weak equivalences from step 2; hence it is a weak equivalence by two-out-of-three. It lies over the weak equivalence $W\\to W'$. Apply [lem-coef-spaces-homotopy-fiber-detection] to obtain weak equivalences on every homotopy fiber of these two path-replacement projections. The projections are Kan fibrations; [lem-cbc-right-fibration-space-fiber] identifies their strict and homotopy fibers naturally. Pulling the projections back along $u$ and $u'$ now gives a map $P^-(u,v)\\to P^-(u',v')$ over $U\\to U'$, with precisely those equivalent strict fibers. Apply the same two cited nodes again to conclude that this map is a weak equivalence. For $P^+$, reverse all ordinal operators on the two spans. Their objectwise maps remain weak equivalences by the barycentric reversal homeomorphism of step 2. The $P^-$ comparison just proved is therefore a weak equivalence on the opposite spans; the identification $P^+(u,v)^{\\mathrm{op}}=P^-(u^{\\mathrm{op}},v^{\\mathrm{op}})$ and the same homeomorphisms give the $P^+$ comparison. This reasoning also works for homotopy-commuting squares with specified coherent homotopies: the map on a path triple appends the specified endpoint homotopies to the image path, and the homotopy-fiber detection node explicitly permits such homotopies. The associativity and inverse homotopies of [lem-cbc-simplicial-composition-spine] give the same comparisons when these paths are composed, with all higher simplices retained. The path compositions here are coherent choices, not a canonical strict operation on 1-simplices. For an entire parameter simplicial set $T$, regard its paths as edges in $Q=\\operatorname{Fun}(T,W)$, which is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. The spine lifts of [lem-cbc-simplicial-composition-spine] in $Q$ give a map $T\\times\\Delta^2\\to W$ and hence a composite path on the whole of $T$ at once. Its restrictions supply every face and degeneracy compatibility. Boundary lifting for that same spine map joins two such choices and supplies their higher homotopies. Inverses needed to append endpoint homotopies are available since every edge in the Kan complex $W$ has inverse-triangle witnesses (fill the two outer 2-horns); a parameter edge in $Q$ is then an equivalence by the vertexwise-equivalence clause of the cone-calculus node. Its inverse edge supplies the inverse homotopy on all of $T$. Thus the asserted path comparison is a map of spaces with coherent choices, without a strict simplicial path-inversion operation.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 6.6.11; fiberwise verification of homotopy-pullback invariance; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "We compute coherent transformation spaces on a union of shapes directly. Let $K=B\\amalg_A D$, with $A\\hookrightarrow D$ a monomorphism, and let $F,G:K\\to\\mathscr E$. Put $Q_S=\\operatorname{Fun}(S,\\mathscr E)$ and $H_S=U_{Q_S}(F|_S,G|_S)$, where $U$ is the arrow mapping space of [lem-coef-infinity-pinch-comparison]. In every degree, a map from $K\\times\\Delta^n$ is exactly two maps from $B\\times\\Delta^n$ and $D\\times\\Delta^n$ agreeing on $A\\times\\Delta^n$; product with a set preserves a set pushout, as seen by its quotient presentation. Thus $Q_K=Q_B\\times_{Q_A}Q_D$ and, by fixing the two endpoints, $H_K=H_B\\times_{H_A}H_D$ strictly. All $Q_S$ are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. By [lem-coef-infinity-isofibration-exponentiation], restriction $Q_D\\to Q_A$ is an isofibration, and its map $H_D\\to H_A$ is a Kan fibration between Kan complexes. Step 2 therefore identifies $H_K$ with the path pullback of $H_B\\to H_A\\leftarrow H_D$ by the actual restriction-and-constant-path map. The natural pinch equivalences identify $\\operatorname{Map}_{Q_S}(F|_S,G|_S)$ with $H_S$. They commute strictly with restriction because both operations precompose the same simplicial maps. Step 3 consequently replaces all three $H$-spaces by the right-pinched mapping spaces. We obtain an equivalence from $\\operatorname{Map}_{Q_K}(F,G)$ to their path pullback, given by the two restrictions and the constant path on $A$. Precomposition, postcomposition, and restriction in a parameter simplex commute on these same prisms, proving naturality and composition compatibility of this specified equivalence. For composition compatibility, the restriction maps also commute with the consecutive-edge restrictions of [lem-cbc-simplicial-composition-spine]. A simplex exhibiting a composite therefore restricts to a simplex exhibiting each local composite; its other faces give the compatibility homotopies. The parameter-functor construction in step 3 supplies these coherences on a whole parameter simplicial set; boundary lifting joins the different possible choices. Only this coherent compatibility, rather than strictly chosen composition on pinched mapping spaces, is used below.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.3.16, mapping-space calculation underlying gluing along a monomorphism; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "Every diagram $F:\\Delta^n\\to\\mathscr E$ has a limiting cone at $F(0)$, natural in $F$: this is the opposite of the standard-simplex clause of [lem-coef-infinity-final-index-colimit]. To check conventions, replace an operator $\\alpha:[m]\\to[n]$ by $i\\mapsto n-\\alpha(m-i)$. This involution exchanges inner horns with inner horns, reverses cones to cocones, and preserves finite nondegenerate-simplex counts. The mapping-space issue is handled by [lem-coef-infinity-pinch-comparison]: reversing the arrow prism identifies $U_{Q^{\\mathrm{op}}}(a,b)$ with $U_Q(b,a)^{\\mathrm{op}}$. Reversing barycentric coordinates gives a homeomorphism between the realizations of a simplicial set and its opposite, since it intertwines exactly the reversed operators. Contractibility and equivalences of these mapping spaces therefore agree. The standard-simplex cocone in the cited node consequently reverses to the initial-vertex limiting cone. By the cone criterion of step 1, evaluation of a cone at vertex $0$ identifies $E_F(x)$ with $\\operatorname{Map}_{\\mathscr E}(x,F(0))$, up to its natural inverse, composition with this standard cone. In particular, for $F=(a\\xrightarrow{f}c)$, the restriction to vertex $c$ is postcomposition by $f$; the cone's triangle supplies this equality up to its specified homotopy.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.4.5 specialized to the initial vertex of a standard simplex; finite-shape proof in Theorem 7.3.27; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "Write the cospan shape as the union of its two edges $J=\\Delta^1_{a,c}\\amalg_{\\{c\\}}\\Delta^1_{b,c}$. Apply step 4 with $F$ there the constant diagram at $x$ and $G$ the given cospan. It identifies $E_G(x)$ with the path pullback of the two edge-cone spaces over $\\operatorname{Map}_{\\mathscr E}(x,c)$. Step 5 identifies these edge-cone spaces with $\\operatorname{Map}_{\\mathscr E}(x,a)$ and $\\operatorname{Map}_{\\mathscr E}(x,b)$; their maps to the common space are postcomposition with the cospan arrows. By step 3, this identifies $E_G(x)$ with exactly the path-pullback space displayed in the statement. To verify the comparison map, a cone from $p$ has legs to $a,c,b$ and the coherent triangles along the two edges. Precomposing its triangles by $x\\to p$ gives paths between each composite and the middle leg; concatenate one with the inverse of the other to obtain the path from the composite through $a$ to the composite through $b$. This is the specified square coherence under the two edge-cone identifications. The prism restrictions of step 4 prove the same identity for all parameter simplices. Substituting this identification into the cone criterion of step 1 proves both directions of the pullback criterion.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.6.9 and Remark 6.6.11, Cartesian-square mapping-space criterion; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "The comparisons are natural in maps of cones: on any parameter simplex, they restrict the same prism to the two edges and concatenate its two compatibility paths as in step 6. Restriction commutes with every face and degeneracy, and composition respects the simplicial coherences of [lem-cbc-simplicial-composition-spine]. For invariance, an equivalence between apices induces homotopy equivalences on incoming mapping spaces by composing with its inverse and the inverse-triangle homotopies. An equivalence of cospan diagrams induces equivalences between the two coherent cone spaces $E_G(x)$: the inverse equivalence and its two natural homotopies can be composed in the functor quasicategory, which exists by [lem-cbc-enhanced-functor-cone-calculus]. The mapping-space criterion of step 1 is therefore preserved and reflected by two-out-of-three. Under the explicit identification of step 6 this is precisely invariance of the path-pullback test, retaining the square's coherence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.6.9, functoriality of the actual cone comparison; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "For finite-limit existence we first spell out the gluing operation, rather than invoke the existing finite-shape theorem whose present dependency closure returns to this item. Suppose $K=B\\amalg_A D$ with $A\\hookrightarrow D$ monic, and a diagram $F:K\\to\\mathscr E$ has chosen limiting cones on $B,A,D$, with apices $X,Y,Z$. The cone criterion in [lem-cbc-enhanced-functor-cone-calculus] induces maps $X\\to Y$ and $Z\\to Y$ with coherent identifications between their composed $A$-cones and the restrictions of the chosen $B,D$-cones. Indeed each restricted cone is a point of $E_{F|_A}(X)$ or $E_{F|_A}(Z)$; the equivalence from the relevant mapping space gives the map and a path to that point. These two maps form a cospan, which has a limiting cone with apex $P$ by the assumed pullback existence. Compose its legs with the $B,D$-cones. Their restrictions to $A$ are coherently identified by the pullback cone and the two chosen paths; hence they determine a point of $E_{F|_B}(P)\\times^h_{E_{F|_A}(P)}E_{F|_D}(P)$. The equivalence of step 4 is surjective on components, so choose an actual cone $\\lambda$ on $F$ whose restriction triple is joined to that point by a path. For every $x$, the local limiting cones and step 3 identify this path pullback of local cone spaces with $\\operatorname{Map}(x,X)\\times^h_{\\operatorname{Map}(x,Y)}\\operatorname{Map}(x,Z)$. Step 6 identifies the latter with $\\operatorname{Map}(x,P)$, by the given pullback cone. The compatibility with composition proved in step 4 means that the composite equivalence is the map induced by $\\lambda$, up to the chosen path. Step 1 therefore proves $\\lambda$ limiting. No global limit existence or Yoneda theorem has been used in this construction.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.3.16, finite gluing of existing local limits; details for the actual coherent cone; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to $\\varnothing\\hookrightarrow K$, where $K$ has finitely many nondegenerate simplices. Its stages attach exactly the nondegenerate $n$-simplices along $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. There are finitely many cells in total and a largest cell dimension if $K$ is nonempty. Within each stage, order its finite set of cells arbitrarily and attach them successively: this gives the same pushout, because maps out of either presentation are one map on the previous stage and one on each simplex, agreeing with the prescribed boundary maps. Thus $K$ is obtained from the empty shape by finitely many single-cell attachments. A boundary $\\partial\\Delta^n$ has as its nondegenerate simplices the injective proper ordinal maps to $[n]$, so is finite of dimension $<n$ (and is empty for $n=0$). All statements here concern nondegenerate simplices, not degreewise finiteness, and allow distinct faces of an attached simplex to become identified in $K$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.3.26, finite simplicial cell induction; boundary-cell construction; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  },
+  {
+   "text": "Assume a terminal object and limiting cones on every cospan. Prove existence for all finite diagrams by induction on their dimension, with the empty diagram first, and within a dimension by induction on the number of top-dimensional cells. The empty diagram has a limiting cone by the assumed terminal object and the definition in [def-cbc-enhanced-diagrams-cones]. For an attachment $K=K_0\\amalg_{\\partial\\Delta^n}\\Delta^n$ of step 9, the restriction to $K_0$ has a limit by the inner induction, or by the outer induction if its dimension has dropped. The restriction to $\\partial\\Delta^n$ has a limit by the outer induction; for $n=0$ this is the terminal object. The restriction to $\\Delta^n$ has its initial-vertex limit by step 5. The boundary inclusion into the simplex is a monomorphism, so step 8 glues these three limits using a pullback. This completes both inductions. For $n=0$ it constructs finite products by pullbacks over the terminal object, and higher attachments allow noninjective boundary attaching maps without alteration. The resulting cone is limiting in the prescribed coherent sense. This proves the last assertion for every simplicial set with finitely many nondegenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.3.27, expansion of the finite cell-induction argument; online text read 2026-10-17, not archived. Agent expansion through the cited elementary foundations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-monomorphism-boundary-cells"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent localization foundation; agent expansion checked against Cisinski CatLR Theorems 6.6.9 and 7.3.27, Remark 6.6.11 and Proposition 7.3.16, online but not archived. Direct cone-space proof avoids dependency cycles through Brown localization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +221,80 @@
    "results": "{\"t\": \"2026-10-16T21:25:35Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|hasFiniteLimits_of_hasTerminal_and_pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"7995bea4bf800fd0\"}",
    "date": "2026-10-17",
    "verdict": "no match: SSet.hasLimits and the simplicial-object instances are ordinary categorical limits; ModelCategory.cm1a assumes a model structure. The grep candidate at LimitsOfProductsAndEqualizers.lean:270 is an ordinary Category theorem, not a quasicategorical coherent-limit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "hasFiniteLimits_of_hasTerminal_and_pullbacks|[Qq]uasicategory.*[Ll]imit|[Hh]omotopy[Pp]ullback",
+   "results": "{\"t\": \"2026-10-16T21:54:40Z\", \"tool\": \"grep\", \"query\": \"hasFiniteLimits_of_hasTerminal_and_pullbacks|[Qq]uasicategory.*[Ll]imit|[Hh]omotopy[Pp]ullback\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/MorphismProperty.lean\"], \"digest\": \"235402495263d98a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.hasFiniteLimits_of_hasTerminal_and_pullbacks, Quasicategory, IsPullback",
+   "results": "{\"t\": \"2026-10-16T21:54:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.hasFiniteLimits_of_hasTerminal_and_pullbacks, Quasicategory, IsPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Quasicategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle rejected the unqualified identifier Quasicategory; a subsequent quoted-name query ran and returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "terminal objects in an infinity category are detected by contractible mapping spaces and pullback cones by homotopy pullbacks of mapping spaces",
+   "results": "{\"t\": \"2026-10-16T21:54:41Z\", \"tool\": \"leanfinder\", \"query\": \"terminal objects in an infinity category are detected by contractible mapping spaces and pullback cones by homotopy pullbacks of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsTerminal\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.hoFunctor.preservesTerminal\", \"CategoryTheory.Limits.HasStrictTerminalObjects\", \"HomotopicalAlgebra.FibrantObject\", \"SSet.Truncated.HomotopyCategory.isTerminal\", \"HomotopicalAlgebra.IsFibrant\", \"SSet.stdSimplex.isTerminalObj₀\"], \"digest\": \"8152598d498ce1d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "terminal|pullback|limit",
+   "results": "{\"t\": \"2026-10-16T22:22:12Z\", \"tool\": \"grep\", \"query\": \"terminal|pullback|limit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"c6c0d02adcddc538\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a quasicategory a coherent square is a pullback if maps from every test object form a homotopy pullback of Kan mapping spaces",
+   "results": "{\"t\": \"2026-10-16T22:22:12Z\", \"tool\": \"leansearch\", \"query\": \"In a quasicategory a coherent square is a pullback if maps from every test object form a homotopy pullback of Kan mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Square.IsPullback\", \"CategoryTheory.Square.IsPullback.map_iff\", \"CategoryTheory.IsPullback\", \"CategoryTheory.Square.isPullback_iff_map_coyoneda_isPullback\", \"CategoryTheory.IsPullback.mk\", \"CategoryTheory.IsPullback.of_isLimit'\", \"CategoryTheory.Square.IsPullback.mk\", \"CategoryTheory.BicartesianSq.toIsPullback\"], \"digest\": \"27779e1d3cb21ef1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-16T22:22:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite homotopy coherent limits inside a quasicategory are constructed from the empty cone and Cartesian squares",
+   "results": "{\"t\": \"2026-10-16T22:22:15Z\", \"tool\": \"leanfinder\", \"query\": \"Finite homotopy coherent limits inside a quasicategory are constructed from the empty cone and Cartesian squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.instFiniteTensorUnit\", \"SSet.instFinitePullback\", \"SSet.Truncated.Quasicategory₂\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"bfe27fd33ced716c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; the hits concern ordinary CategoryTheory limits, the homotopy-category functor, or primitive simplicial-set/quasicategory definitions. LimitsOfProductsAndEqualizers.lean:270-276 assumes an ordinary Category C; Quasicategory/Basic.lean:34-42 only defines inner-horn fillers. None states the coherent mapping-space or finite-simplicial-limit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limits of finite simplicial diagrams in a quasi category from final objects and fiber squares, characterized via function complexes",
+   "results": "{\"t\": \"2026-10-16T22:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"Limits of finite simplicial diagrams in a quasi category from final objects and fiber squares, characterized via function complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"SSet.instFinitePullback\"], \"digest\": \"b8711bb83275fa8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set limit instances are limits in the ordinary category of simplicial sets, and Nerve.quasicategory gives only inner horn fillers. The ordinary terminal-and-pullback theorem at Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:270-276 does not state coherent limits internal to an arbitrary quasicategory. The independent Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|isPullback.*coyoneda|hasFiniteLimits_of_hasTerminal_and_pullbacks",
+   "results": "{\"t\": \"2026-10-16T22:44:09Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|isPullback.*coyoneda|hasFiniteLimits_of_hasTerminal_and_pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set limit instances are limits in the ordinary category of simplicial sets, and Nerve.quasicategory gives only inner horn fillers. The ordinary terminal-and-pullback theorem at Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:270-276 does not state coherent limits internal to an arbitrary quasicategory. The independent Loogle query returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-16T22:44:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set limit instances are limits in the ordinary category of simplicial sets, and Nerve.quasicategory gives only inner horn fillers. The ordinary terminal-and-pullback theorem at Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:270-276 does not state coherent limits internal to an arbitrary quasicategory. The independent Loogle query returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-fibrant-localization-pullbacks",
@@ -103,5 +314,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-terminal-pullback-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the entire statement and supplied ten direct proof steps with no new nodes. Proved the required Kan path-pullback comparisons fiberwise, computed transformation spaces by strict gluing and isofibration exponentiation, specialized to the cospan, and expanded finite simplicial cell induction. Replaced an initially circular use of existing Yoneda/path-invariance/finite-shape nodes by their explicit smaller-input calculations, since their dependencies return through Brown localization to this item.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint: steps 1-7 establish the mapping-space and Cartesian-square criterion used by the coherent localization infrastructure; steps 8-10 construct all finite coherent limits via local gluing and finite cell induction. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Fixed-apex mapping-space criterion for a limiting coherent cone, Kan mapping spaces and functor quasicategories. This is a general simplicial categorical tool, not a replacement for the coefficient-adjunction route."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Mapping-path replacement of maps of Kan complexes; needed for a direct acyclic construction of the path-pullback comparison. The coefficient unit has no lower-level replacement."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Natural comparison of strict fibers and path homotopy fibers of a Kan fibration, used to prove the required path-pullback comparisons without the circular Kan-Quillen localization theorem."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Coherent composition, unit and inverse homotopies on simplicial transformations and Kan path data, needed to identify the actual comparison and its naturality. This is generic horn calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-b36f58518",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-b36f58518 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item in full; this split adds no new nodes. The statement is byte-identical to the side-project node, which is still unsplit, so no target was weakened. Statement checks: it is true (Cisinski CatLR 6.6.9 and 6.6.11 for the pullback criterion, 7.3.27 for finite limits). Small cases tested: ordinary nerves, where it becomes the ordinary pullback; the empty quasicategory; the empty diagram, whose limit is the terminal object; Delta^0+Delta^0, which gives products over the terminal object; and simplices with identified faces, which step 4 allows because it only needs A->D monic. No cycle: the dependency closure has 120 nodes, does not contain the item, and has no missing or merged node. I confirmed with BFS that both finite-shape-generation and yoneda-presheaf-limits reach the item through kan-quillen-right-proper and brown-fibrant-localization-pullbacks, so re-proving those calculations in the steps is justified. Steps: step 1 is the def-cbc terminality convention plus the cone criterion of cone-calculus. Step 2: the strict fibre map is exactly the map of right-fibration-space-fiber, and fiber-detection over 1_U finishes it; the orientation argument via P+(u,v)=P-(v,u) and opposites is sound. Step 3 uses 2-of-3 and fiber-detection twice, within that node's hypotheses. Step 4 uses strict degreewise gluing, isofibration-exponentiation (restriction along a mono is an isofibration, so H_D->H_A is a Kan fibration), and natural pinch equivalences. Step 5 dualizes final-index-colimit, handling the pinch convention through U_{Q^op}(a,b)=U_Q(b,a)^op. Steps 6-8 give the cospan criterion, naturality and invariance, and the gluing argument of HTT 4.4.2.2 without its completeness hypothesis. Step 9 reads the boundary-cells leaf correctly. Step 10 is a double induction with the correct base case. The parent's steps 7, 11 and 12 use only the stated clauses. Sources: Cisinski is not archived; WANTED is declared and proof_origin is agent; no SGA is used. Mathlib: LeanSearch, LeanFinder, Loogle and grep were all run; the only candidate is the ordinary-category theorem at LimitsOfProductsAndEqualizers.lean:270-276, which I read and which does not match. I accept the four declared tool uses from sk-prop-sf-cbc (cone-calculus, kan-fibration-fiber-criterion, right-fibration-space-fiber, composition-spine), which many existing sec-six-functors nodes already use. Maintenance note, not a fault of this delivery: finite-shape-generation now duplicates the finite-limit clause by a cyclic route."
  }
 }
