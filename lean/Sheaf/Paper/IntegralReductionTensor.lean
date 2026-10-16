@@ -28,7 +28,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
   (φ : R ⟶ S) [IsMonHom φ] (M : Mod C R)
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
-private lemma extendTensorHom_linear :
+lemma extendTensorHom_linear :
     γ[R,((comap φ).obj ((extendScalars φ).obj M)).X] ≫
         (extendForgetTensorObjIso φ M).hom =
       R ◁ (extendForgetTensorObjIso φ M).hom ≫
@@ -46,7 +46,7 @@ private lemma extendTensorHom_linear :
     (α_ R S M.X).inv ≫ (φ ▷ S ≫ μ[S]) ▷ M.X ≫ _
   rw [associator_inv_naturality_left_assoc, comp_whiskerRight, Category.assoc]
 
-private noncomputable def extendComapTensorIso :
+noncomputable def extendComapTensorIso :
     extendScalars φ ⋙ comap φ ≅ tensorLeft ((comap φ).obj (regular S)) :=
   NatIso.ofComponents
     (fun M ↦ Mod.isoMk (extendForgetTensorObjIso φ M) (extendTensorHom_linear φ M))
@@ -55,7 +55,7 @@ private noncomputable def extendComapTensorIso :
       apply (forget R).map_injective
       exact (extendForgetTensorIso φ).hom.naturality f)
 
-private noncomputable def extendComapCounit :
+noncomputable def extendComapCounit :
     DerivedCategory.Qh ⋙ ((extendScalars φ).leftDerivedFunctor ⋙
         (comap φ).mapDerivedCategory) ⟶
       (extendScalars φ ⋙ comap φ).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
@@ -70,14 +70,14 @@ private noncomputable def extendComapCounit :
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (extendScalars φ ⋙ comap φ)) (.up ℤ)).hom
       DerivedCategory.Qh
 
-private instance tensorLeft_preservesKFlatQuasiIso (B : Mod C R) :
+instance tensorLeft_preservesKFlatQuasiIso (B : Mod C R) :
     (tensorLeft B).PreservesKFlatQuasiIso := by
   refine Functor.PreservesKFlatQuasiIso.mk' _ ?_
   intro K hK hKa
   exact (CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa B).of_iso
     ((NatIso.mapHomologicalComplex (BraidedCategory.tensorLeftIsoTensorRight B) _).app K).symm
 
-private noncomputable def tensorPresentationHomotopyIso :
+noncomputable def tensorPresentationHomotopyIso :
     (extendScalars φ ⋙ comap φ).mapHomotopyCategory (.up ℤ) ≅
       (tensorLeft ((comap φ).obj (regular S))).mapHomotopyCategory (.up ℤ) :=
   let e := extendComapTensorIso φ
@@ -86,7 +86,7 @@ private noncomputable def tensorPresentationHomotopyIso :
     hom_inv_id := by rw [← NatTrans.mapHomotopyCategory_comp]; simp
     inv_hom_id := by rw [← NatTrans.mapHomotopyCategory_comp]; simp }
 
-private noncomputable def tensorPresentationDerivedCounit :
+noncomputable def tensorPresentationDerivedCounit :
     DerivedCategory.Qh ⋙ ((extendScalars φ).leftDerivedFunctor ⋙
         (comap φ).mapDerivedCategory) ⟶
       (tensorLeft ((comap φ).obj (regular S))).mapHomotopyCategory (.up ℤ) ⋙
@@ -94,7 +94,7 @@ private noncomputable def tensorPresentationDerivedCounit :
   extendComapCounit φ ≫
     Functor.whiskerRight (tensorPresentationHomotopyIso φ).hom DerivedCategory.Qh
 
-private lemma tensorPresentationDerivedCounit_isLeftDerivedFunctor :
+lemma tensorPresentationDerivedCounit_isLeftDerivedFunctor :
     ((extendScalars φ).leftDerivedFunctor ⋙ (comap φ).mapDerivedCategory).IsLeftDerivedFunctor
       (tensorPresentationDerivedCounit φ) (HomotopyCategory.quasiIso (Mod C R) (.up ℤ)) := by
   apply ((tensorLeft ((comap φ).obj (regular S))).isLeftDerivedFunctor_iff_isIso_app_of_kFlat

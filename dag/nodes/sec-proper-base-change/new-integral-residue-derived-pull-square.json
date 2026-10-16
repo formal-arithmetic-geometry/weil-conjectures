@@ -1,0 +1,137 @@
+{
+ "id": "new-integral-residue-derived-pull-square",
+ "kind": "statement",
+ "title": "Canonical derived residue pull square",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. Define S_T as exact restriction from residue to integral modules. The restriction/pullback isomorphism q_f:S_Y followed by integral f* ≅ residue f* followed by S_X is the ordinary restriction comparison transported through exact derived pullback. Let p_f be its inverse mate under the derived extension/restriction adjunctions. Every p_f is invertible. For all composable f:X→Y, g:Y→Z and every integral derived complex K on Z, reduction of the canonical pull-composition map followed by p_f and residue f* applied to p_g equals p_(fg) followed by the residue pull-composition map. Thus asIso(p_f) defines a coherent family c. Its scalar-counit identity is proved from the mates equivalence.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Construct q_f using derivedComapUpperStarIso and exact-pullback comparisons, and p_f as its inverse adjunction mate. Apply mateEquiv_counit_symm to prove its scalar-counit identity.",
+   "uses": [
+    "def-weil-pbc-residue-exchange-comparison-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar tensor associativity on flat resolutions. Inverse image preserves the balanced tensor coequalizers and the coefficient-pullback isomorphisms identify the base rings. The inverse mate p_f is the resulting derived scalar comparison, hence invertible. For composable maps the two composites multiply the same three scalar factors; associativity and coefficient-map composition give precisely the displayed composition identity.",
+   "uses": [
+    "def-weil-pbc-residue-exchange-comparison-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use asIso only after the IsIso property; its inverse is uniquely determined. Assemble c using the proved composition property, and derive the scalar-counit identity for c from that for p_f.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|iso)|pullback.*(tensor|scalar)",
+   "date": "2026-10-16",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit_symm",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse mate of the scalar restriction pullback square for derived sheaves of modules is invertible and compatible with composition without flatness of the coefficient change",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'_inv_app, SheafOfModules.pullbackObjFreeIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjUnitToUnit",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of exact scalar restriction and pullback is an isomorphism commuting with composition of derived sheaf pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.restrictScalarsId'App_inv_naturality, SheafOfModules.restrictScalars, ModuleCat.restrictScalarsComp'App_inv_naturality, PresheafOfModules.restrictScalars, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Canonical derived residue pull square",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullSquare",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_pullSquare",
+  "statement": "theorem integralResidue_pullSquare :\n    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (residueExchangePullHom ℓ E f)) ∧\n      ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n        (K : residueExchangeDerived (integralCoeff ℓ E) Z),\n        (residueExchangeReduction ℓ E X).map\n            ((residueExchangeUpperStarComp (integralCoeff ℓ E) f g).hom.app K) ≫\n          (residueExchangePullHom ℓ E f).app\n            ((residueExchangeUpperStar (integralCoeff ℓ E) g).obj K) ≫\n          (residueExchangeUpperStar\n            (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map\n            ((residueExchangePullHom ℓ E g).app K) =\n        (residueExchangePullHom ℓ E (f ≫ g)).app K ≫\n          (residueExchangeUpperStarComp\n            (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f g).hom.app\n            ((residueExchangeReduction ℓ E Z).obj K)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeRestrictPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullHom_counit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_pullSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullComparisons_counit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "new-integral-residue-derived-tensor-square",
+ "kind": "statement",
+ "title": "Assemble the canonical derived residue tensor square",
+ "statement": "Use [new-integral-residue-tensor-geometry]. For each f:X→Y there is a strong monoidal structure on the actual integral derived pullback together with natural right-tensor presentations tY and tX of restricted reduction. The coefficient in tY is B_Y and that in tX is f*B_Y. Their tensor compatibility equation uses the canonical restriction/pullback square and the inverse canonical coherent scalar pull comparison. The witnesses are the explicitly constructed ordinary-derived monoidal structure and the two canonical tensor presentations. The pull square, coefficient object and canonical monoidal instance are those of [new-integral-residue-derived-pull-square], [new-integral-residue-tensor-presentation], and [new-integral-residue-derived-monoidal].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "new-integral-residue-tensor-geometry",
+  "new-integral-residue-derived-pull-square",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Obtain flat preservation and the fixed-map compatibility equation from the tensor-geometry property. Supply the explicit derived monoidal structure, residueExchangeTensorIso on Y, and residueExchangeTensorPullIso on X. The required componentwise equation is exactly the supplied compatibility equation.",
+   "uses": [
+    "new-integral-residue-tensor-geometry"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-tensor-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived tensor products with the adjunction mate of extension and restriction of coefficients under inverse image",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*mate|mate.*tensor|derived.*comap",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor isomorphisms and the derived monoidal structure assemble the scalar extension pullback tensor square",
+   "date": "2026-10-16",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.distribBaseChange, CategoryTheory.Functor.Monoidal.μIso, CategoryTheory.MonoidalCategory.tensorIso, MonoidAlgebra.tensorEquiv, Algebra.TensorProduct.basisAux, Algebra.IsPushout.cancelBaseChangeAux, CategoryTheory.GradedObject.Monoidal.tensorIso, CategoryTheory.MonoidalCategory.tensorMonoidal",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Assemble the canonical derived residue tensor square",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorSquare",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorSquare",
+  "statement": "theorem integralResidue_tensorSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ m : (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal,\n      letI := m\n      ∃ (tY : residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y ≅\n            tensorRight (residueExchangeCoefficient ℓ E Y))\n        (tX : residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X ≅\n            tensorRight ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj\n              (residueExchangeCoefficient ℓ E Y))),\n        ∀ M : residueExchangeDerived (integralCoeff ℓ E) Y,\n          (residueExchangeUpperStar (integralCoeff ℓ E) f).map (tY.hom.app M) ≫\n              Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)\n                M (residueExchangeCoefficient ℓ E Y) =\n            (residueExchangeRestrictPullIso ℓ E f).hom.app\n                ((residueExchangeReduction ℓ E Y).obj M) ≫\n              (residueExchangeRestriction ℓ E X).map\n                (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫\n              tX.hom.app ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ }
+}

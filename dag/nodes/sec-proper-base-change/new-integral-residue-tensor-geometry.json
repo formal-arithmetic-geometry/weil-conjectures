@@ -1,0 +1,144 @@
+{
+ "id": "new-integral-residue-tensor-geometry",
+ "kind": "statement",
+ "title": "Flat preservation and compatibility of the fixed residue tensor square",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface], [new-integral-residue-derived-pull-square], [new-integral-residue-tensor-presentation], [new-integral-residue-ordinary-monoidal] and [new-integral-residue-derived-monoidal]. For every scheme map f:X→Y the actual ordinary integral pullback preserves flat objects. Give its derived pullback the already constructed monoidal structure induced by that property and the constructed ordinary monoidal structure. For every integral derived complex M on Y, applying f* to the fixed right-tensor presentation on Y and then the oplax tensor comparison equals the fixed restriction/pullback comparison evaluated at reduction(M), followed by restriction of the inverse canonical scalar pull comparison, and then the fixed tensor presentation on X with B_X identified with f*B_Y. Both tensor presentations and the coefficient-pullback isomorphism are explicit constructions before the statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "new-integral-residue-derived-pull-square",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Construct f*B_Y ≅ B_X using the exact pullback comparison with the degree-zero single functor, ordinary comapUpperStarIso, and the residue ordinary monoidal unit. Compose the canonical right-tensor presentation on X with that coefficient isomorphism to define tX.",
+   "uses": [
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-ordinary-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image preserves flat module sheaves: flatness is local and invariant under the coefficient-pullback isomorphism. It preserves colimits, so flat resolutions are sent to K-flat resolutions. Use the constructed derived monoidal API with this flat-preservation property.",
+   "uses": [
+    "new-integral-residue-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On flat resolutions the two routes in the square are balanced tensor associativity and multiply the same scalar factors. The scalar-counit identity for the inverse mate identifies the pull-comparison map with this scalar multiplication map. The explicit tensor presentation uses the extension counit and the balanced tensor isomorphism. Uniqueness of left-derived comparisons descends the equality to all M. No flatness of the residue quotient over the integral coefficients is required.",
+   "uses": [
+    "new-integral-residue-derived-pull-square",
+    "new-integral-residue-tensor-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-derived-pull-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived tensor products with the adjunction mate of extension and restriction of coefficients under inverse image",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*mate|mate.*tensor|derived.*comap",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor presentation of restriction after derived scalar extension commutes with sheaf pullback and its inverse adjunction mate",
+   "date": "2026-10-16",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.restrictScalars_rTensor, ModuleCat.ExtendRestrictScalarsAdj.unit, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.restrictScalars, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Flat preservation and compatibility of the fixed residue tensor square",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorGeometry",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorGeometry",
+  "statement": "theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat,\n        letI := residueExchangePullMonoidal ℓ E f\n          (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat\n          ∀ M : residueExchangeDerived (integralCoeff ℓ E) Y,\n            (residueExchangeUpperStar (integralCoeff ℓ E) f).map\n                ((residueExchangeTensorIso ℓ E Y).hom.app M) ≫\n              Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)\n                M (residueExchangeCoefficient ℓ E Y) =\n            (residueExchangeRestrictPullIso ℓ E f).hom.app\n                ((residueExchangeReduction ℓ E Y).obj M) ≫\n              (residueExchangeRestriction ℓ E X).map\n                (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫\n              (residueExchangeTensorPullIso ℓ E f).hom.app\n                ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficientPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorGeometry"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ }
+}

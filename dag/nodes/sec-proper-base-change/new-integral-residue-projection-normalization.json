@@ -12,37 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Inverse image preserves balanced tensor coequalizers, so its strong monoidal comparison gives the relative module tensor comparison. Check unit and associativity after precomposing with the presentation epimorphisms. The coefficient-pullback isomorphism and preservation of flat modules and colimits give K-flat pullback resolutions, hence a strong monoidal derived pullback. On these resolutions, relative tensor associativity constructs the scalar-pull comparison. The associativity pentagon transported through the canonical left-derived composition comparison gives its composition equation, producing c.",
+   "text": "Construct the canonical coherent scalar pull comparisons as inverse mates of exact restriction/pullback; their invertibility and composition property assemble c.",
+   "uses": [
+    "new-integral-residue-derived-pull-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical tensor-square assembly to obtain the actual derived monoidal structure and both tensor presentations, including the coefficient-pullback identification.",
+   "uses": [
+    "new-integral-residue-derived-tensor-square",
+    "new-integral-residue-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private doubleMate lemma derives the conjugated right-adjoint counit identity from the scalar-counit identity. The private normalization lemma transposes the desired map equality under the integral adjunction, then uses naturality, the mates counit identity, and the tensor-square equation. The remaining transpose is exactly the defining counit identity for rightAdjointProjectionMap. The normalization_family helper packages these identities, and the final theorem specializes it to the actual four adjunctions. No invertibility of a projection map is asserted or used.",
    "uses": [
     "def-weil-pbc-residue-exchange-comparison-interface"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the supplied left-derived tensor universal property on K-flat resolutions, then tensor symmetry, to identify restricted reduction with right tensor by the restricted residue regular module in degree zero. At the integral direct image this gives s. On X the coefficient-pullback isomorphism identifies f^* B_Y with B_X, giving e. The target comparison after pushforward is then the already proved restrictPushIso from the interface followed by Rf_* applied to e. No injective-preservation claim for restriction is used.",
-   "uses": [
-    "def-weil-pbc-continuous-integral-coefficients"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the claimed equality under the integral derived pull-push adjunction. Use the counit equation for the defined mate, tensor associativity, and the scalar-pull isomorphism. Both transposes are the oplax tensor comparison followed by the counit tensored with the coefficient identity. This is the defining equation of rightAdjointProjectionMap. This argument identifies maps; it does not use dualizability or prove that the projection map is invertible.",
-   "uses": [
-    "lem-weil-pbc-integral-residue-push-counit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-residue-exchange-comparison-interface",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-integral-residue-push-counit"
+  "new-integral-residue-derived-pull-square",
+  "new-integral-residue-derived-tensor-square",
+  "new-integral-residue-derived-monoidal",
+  "def-weil-pbc-residue-exchange-comparison-interface"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "Structural part of the parent comparison argument. The parent now proves the perfect-projection invertibility and conservative-restriction steps from this map identity."
+  "note": "D3 proves the generic double-mate and projection-normalization calculation and specializes it to canonical pull and tensor data. Canonical tensor presentation and ordinary/derived monoidal APIs are constructed with proofs. Only the strictly geometric pull-square property and fixed tensor-square compatibility remain as two named obligations; this is a decomposition, not an axiom-free closure."
  },
  "mathlib_searches": [
   {
@@ -135,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-61c2e",
-  "group": "B4",
+  "reviewer": "X-56663",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261016T070240-L-770386",
+  "landing": "20261016T101204-L-2230257",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged theorem signature and extracted interface with the published library, and delivered proofs and normalization statement with their DAG nodes; all three modules, sole direct importer Sheaf.Paper.BoundedExchangeAmbient, and 13 axiom probes compile cleanly. Only the reported normalization hole contributes sorryAx."
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
  }
 }

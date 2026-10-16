@@ -1,0 +1,138 @@
+{
+ "id": "new-integral-residue-tensor-presentation",
+ "kind": "definition",
+ "title": "Canonical right-tensor presentation of restricted reduction",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For every scheme T construct a specific natural isomorphism residueExchangeReduction(T) followed by exact residue restriction S_T ≅ tensorRight(B_T), where B_T is the restricted residue regular module in degree zero. The construction is determined by the ordinary balanced tensor presentation, the extension-adjunction counit, uniqueness of left derived functors, and derived symmetry; it is not an arbitrary witness of an existence assertion. The construction uses the existing explicit left-derived tensor counit from [lem-weil-pbc-integral-reduction-tensor]. Exact restriction S_T is the wrapper in [new-integral-residue-derived-pull-square].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "new-integral-residue-derived-pull-square",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Import the proved canonical balanced tensor and left-derived counit API from IntegralReductionTensor (lem-weil-pbc-integral-reduction-tensor). This is the single existing proof of integral linearity, the ordinary tensor isomorphism, the homotopy comparison and its canonical derived counit; do not repeat these declarations.",
+   "uses": [
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensorPresentationDerivedCounit_isLeftDerivedFunctor for the specific exposed counit. Uniqueness of left derived functors identifies this restricted scalar extension with the left-derived tensor functor; the comparison is fixed by that counit.",
+   "uses": [
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify derived tensor with a single degree-zero object using BifunctorSingle, the quotient's strong monoidal comparison, and localization uniqueness. Use symmetry in the generic derived category to put the coefficient on the right, and specialize to integral residue reduction.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "Repair of the returned D3 delivery: reuse the canonical API of IntegralReductionTensor in place, removing the copied tensor-linearity and counit constructions; keep only the new derived tensor/single-object comparison and residue specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map.*Single.*Iso|single.*Tensor.*Iso|tensorLeft.*Derived",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/CategoryTheory/GradedObject/Single.lean, Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-16",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction after derived extension of scalars is derived tensor product with the coefficient ring as a complex concentrated in degree zero",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalarsId_inv_app_apply",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction after derived extension of scalars is tensor with the coefficient ring concentrated in degree zero",
+   "date": "2026-10-16",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', Submodule.restrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor, PresheafOfModules.restrictScalarsObj, ModuleCat.instModuleCarrierObjRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Canonical right-tensor presentation of restricted reduction",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorPresentation",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorIso",
+  "statement": "def residueExchangeTensorIso (T : Scheme.{u}) :\n    residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T ≅\n      tensorRight (residueExchangeCoefficient ℓ E T)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.genericTensorLeft_preservesKFlatQuasiIso",
+   "CategoryTheory.homotopyTensorSingleIso",
+   "CategoryTheory.derivedTensorSingleIso",
+   "CategoryTheory.derivedTensorPresentationIso",
+   "CategoryTheory.Mod.residueDerivedTensorIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ }
+}
