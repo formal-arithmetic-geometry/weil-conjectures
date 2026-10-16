@@ -30,7 +30,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper",
-  "lem-coef-reedy-model-structure"
+  "lem-coef-reedy-model-structure",
+  "def-coef-segal-space"
  ],
  "proof": [
   {
@@ -230,5 +231,41 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5d8818d",
+  "group": "N1",
+  "result": "pass",
+  "note": "Checked every clause of the item against Rezk §14 and the Lean; all match. W:Space.{u}, hypothesis only IsSegal (Reedy fibrant via the dependency's proper-face matchingFrom with Kan horn RLP, plus spine weak equivalences for n>=2). Conclusion: IsComplete of the completion, weak equivalence on strict-fibre mapping spaces for all x,y, and essential surjectivity via equivalence arrows; naturality comes from completion being a functor and completionUnit a NatTrans. E(m) = nerve of codiscrete ULift Fin(m+1), F(n), cK and Mathlib internalHom (HomObj on coyoneda (n,q) = maps A×F(n)×cΔ^q→W). Diagonal index (n,q)↦(q,(n,q)), collapse via curry snd, ReedyReplacement universally quantified with nothing stronger assumed. New node def-coef-segal-space matches Rezk §§2.4,4-6,7.4 (IsEquivalenceArrow forces g:y→x and gives the two inverse equations; W_eq is a union of components; IsComplete uses the actual s0 factor). Edge cases (empty, n=0, m=0, groupoid nerves) and universe u are fine. Gates: no hollow definitions, single sorry, source/blueprint docstrings with all 8 proof steps verbatim, node changes only lean and stmt_deps, lean.statement verbatim, report sections present. nt_compile.py --json on both files: clean, rc=0; a broken-copy control produced an error. Non-blocking: the concurrently landed def-coef-homotopy-segal-space (Q59) is a distinct, non-Reedy homotopy-fibre notion; no clash."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RezkExplicitCompletion",
+  "declaration": "CategoryTheory.SegalSpace.rezk_explicit_completion",
+  "declarations": [
+   "CategoryTheory.SegalSpace.outerDiscrete",
+   "CategoryTheory.SegalSpace.outerRepresentable",
+   "CategoryTheory.SegalSpace.innerConstant",
+   "CategoryTheory.SegalSpace.equivalenceResolution",
+   "CategoryTheory.SegalSpace.powerResolution",
+   "CategoryTheory.SegalSpace.resolutionDiagonalIndex",
+   "CategoryTheory.SegalSpace.resolutionDiagonal",
+   "CategoryTheory.SegalSpace.tilde",
+   "CategoryTheory.SegalSpace.powerResolutionUnit",
+   "CategoryTheory.SegalSpace.constantResolutionDiagonalIso",
+   "CategoryTheory.SegalSpace.tildeUnit",
+   "CategoryTheory.SegalSpace.ReedyReplacement",
+   "CategoryTheory.SegalSpace.completion",
+   "CategoryTheory.SegalSpace.completionUnit",
+   "CategoryTheory.SegalSpace.rezk_explicit_completion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RezkExplicitCompletion.lean",
+  "statement": "theorem rezk_explicit_completion (R : ReedyReplacement.{u}) (W : Space.{u}) (hW : IsSegal W) : IsComplete ((completion R).obj W) ∧ (∀ x y : (row W ⦋0⦌) _⦋0⦌, SSet.Enhanced.IsWeakHomotopyEquivalence (mappingSpaceMap ((completionUnit R).app W) x y)) ∧ IsEssentiallySurjective ((completionUnit R).app W)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The explicit equivalence-groupoid powers, diagonal, collapse map and composite completion map are actual functorial constructions. The theorem holds for every chosen functorial Reedy fibrant replacement, as in the source; no arbitrary completion or comparison map is substituted."
  }
 }

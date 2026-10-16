@@ -1,0 +1,122 @@
+{
+ "id": "def-coef-segal-space",
+ "kind": "definition",
+ "title": "Segal spaces, strict mapping fibres and completeness",
+ "status": "split",
+ "statement": "Use the small simplicial sets and realization-based weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], the Kan fibrations of [lem-coef-kan-quillen-right-proper], and Reedy matching maps of [lem-coef-reedy-model-structure]. A simplicial space is a functor $W:\\Delta^{\\mathrm{op}}\\times\\Delta^{\\mathrm{op}}\\to\\mathrm{Sets}$; its first coordinate is the outer degree, and write $W_n$ for the simplicial set in the second coordinate. Let $e_W=(d_1,d_0):W_1\\to W_0\\times W_0$, and define $M_W(x,y)=W_1\\times_{W_0\\times W_0}\\{(x,y)\\}$ for vertices $x,y$ of $W_0$. A map $f:W\\to V$ induces the strict-pullback map $M_W(x,y)\\to M_V(fx,fy)$. Let $P_n(W)$ be the simplicial set with inner $q$-simplices strings of $n$ consecutive outer edges of $W_{\\bullet,q}$, with their $n+1$ vertices and equality of matched endpoints. Restriction to the consecutive edges defines $W_n\\to P_n(W)$. Say $W$ is Reedy fibrant if each outer matching map $W_n\\to M_nW$ is a Kan fibration, using the nonidentity opposite-injective maps for the matching diagram. Say $W$ is Segal if it is Reedy fibrant and each consecutive-edge map is a weak homotopy equivalence for $n\\geq2$.\n\nTwo outer edges with fixed source $x$ and target $y$ have the same mapping component if their lifts to the strict fibre $M_W(x,y)$ have equal classes in $\\pi_0M_W(x,y)$. An outer edge $a:x\\to y$ is an equivalence arrow if it has an inverse edge $g:y\\to x$ and outer $2$-simplices with consecutive edges $(a,g)$ and $(g,a)$, respectively, whose long edges have the same mapping components as $s_0x$ and $s_0y$. For Segal $W$ these are exactly the arrows invertible in its homotopy category, whose morphisms are the mapping-fibre components and whose composition is given by the degree-two Segal map and $d_1$. Define $W_{\\mathrm{eq}}\\subseteq W_1$ to be the union of components containing equivalence arrows: an inner simplex belongs precisely when all its vertices are in such components. Say $W$ is complete if it is Segal and the actual degeneracy $s_0:W_0\\to W_1$ factors through $W_{\\mathrm{eq}}$ by a weak homotopy equivalence. A map $f:W\\to V$ is essentially surjective if every vertex $z$ of $V_0$ is the target of an equivalence arrow whose source is $fx$ for some vertex $x$ of $W_0$.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure"
+ ],
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk, A model for the homotopy theory of homotopy theory, Sections 2.3-2.4, 4.1, 5.1, 5.3, 5.5, 5.7-5.8, 6 and 7.4; the strict mapping fibres, inverse equations in their components, and identity degeneracy are the conventions used by Section 14."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Segal space is a Reedy fibrant simplicial space with weak equivalence consecutive edge maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegalCore.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {n : ℕ} →\\n    (concat :\\n        (x : X.obj (Opposite.op (SimplexCategory.mk 1))) →\\n          (s : X.obj (Opposite.op (SimplexCategory.mk n))) →\\n            CategoryTheory.SimplicialObject.δ X 0 x =\\n                X.map ((SimplexCategory.mk 0).const (SimplexCategory.mk n) 0).op s →\\n  \", \"doc\": \"For a simplicial set $X$ and natural number $n$, this constructor defines the strict Segal condition at level $n$ by specifying a concatenation operation that maps pairs of 1-simplices and $n$-simplic\"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(sx : StrictSegal X) : SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any strict Segal space $X$ is a 2-coskeletal simplicial set, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}\n  {\"name\": \"SSet.IsStrictSegal.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet}, (∀ (n : ℕ), Function.Bijective (X.spine n)) → X.IsStrictSegal\", \"doc\": \"For a simplicial set $ X $, if for every natural number $ n $, the function $ \\\\text{spine}_n(X) $ is bijective, then $ X $ satisfies the strict Segal condition.\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"{X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(h : ∀ n, X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal'\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"[IsStrictSegal X] : SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any simplicial set satisfying the strict Segal condition is 2-coskeletal, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal space Reedy fibrant simplicial space weak equivalence spine maps and complete Segal space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → X.obj (Opposite.op (SimplexCategory.mk n)) ≃ X.Path n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) _auto_36✝) →\\n          X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h }) ≃ X.Path m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a path in the 1-truncated simplicial set $ X $ at level $ n $, this function constructs an element of $ X $ evaluated at the opposite of t\"}\n  {\"name\": \"SSet.StrictSegal.mk.inj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} {spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))}\\n  {spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id}\\n  {spineToSimplex_spine : ∀ (n : ℕ), spineToSimplex ∘ X.spine n = id}\\n  {spineToSimplex_1 : {n : ℕ} → X.Path n → X.obj (Opposite.op (S\", \"doc\": \"If two strict Segal space structures on a simplicial set $X$ have families of functions $\\\\text{spineToSimplex}_n: X_{\\\\text{Path}}(n) \\\\to X([n])$ that satisfy $\\\\text{spine}_n \\\\circ \\\\text{spineToSimplex\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplex_spine\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) {n : ℕ} (s : X.obj (Opposite.op (SimplexCategory.mk n))),\\n  SSet.StrictSegalCore.spineToSimplex h (X.spine n s) = s\", \"doc\": \"For a simplicial set $X$ satisfying the strict Segal condition and any $n$-simplex $s$ in $X$, applying the spine-to-simplex reconstruction function to the spine of $s$ recovers the original simplex $\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSegal|SegalSpace|CompleteSegal|complete Segal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-rezk-explicit-completion",
+  "date": "2026-10-16",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The Rezk Section 14 mapping-space completion used in the diagonal/coherent-nerve comparison: definitions of Reedy fibrant Segal spaces, strict mapping spaces, homotopy-category equivalence arrows and completeness (Sections 4-6).",
+   "via": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SegalSpace",
+  "declaration": "CategoryTheory.SegalSpace.IsSegal",
+  "declarations": [
+   "CategoryTheory.SegalSpace.Space",
+   "CategoryTheory.SegalSpace.row",
+   "CategoryTheory.SegalSpace.endpoints",
+   "CategoryTheory.SegalSpace.mappingSpace",
+   "CategoryTheory.SegalSpace.mappingSpaceMap",
+   "CategoryTheory.SegalSpace.chains",
+   "CategoryTheory.SegalSpace.segalMap",
+   "CategoryTheory.SegalSpace.IsReedyFibrant",
+   "CategoryTheory.SegalSpace.IsSegal",
+   "CategoryTheory.SegalSpace.SameMappingComponent",
+   "CategoryTheory.SegalSpace.IsEquivalenceArrow",
+   "CategoryTheory.SegalSpace.equivalenceArrows",
+   "CategoryTheory.SegalSpace.IsComplete",
+   "CategoryTheory.SegalSpace.IsEssentiallySurjective"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SegalSpace.lean",
+  "statement": "def IsSegal (W : Space.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5d8818d",
+  "group": "N1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5d8818d",
+  "group": "N1",
+  "result": "pass",
+  "note": "Checked every clause of the item against Rezk §14 and the Lean; all match. W:Space.{u}, hypothesis only IsSegal (Reedy fibrant via the dependency's proper-face matchingFrom with Kan horn RLP, plus spine weak equivalences for n>=2). Conclusion: IsComplete of the completion, weak equivalence on strict-fibre mapping spaces for all x,y, and essential surjectivity via equivalence arrows; naturality comes from completion being a functor and completionUnit a NatTrans. E(m) = nerve of codiscrete ULift Fin(m+1), F(n), cK and Mathlib internalHom (HomObj on coyoneda (n,q) = maps A×F(n)×cΔ^q→W). Diagonal index (n,q)↦(q,(n,q)), collapse via curry snd, ReedyReplacement universally quantified with nothing stronger assumed. New node def-coef-segal-space matches Rezk §§2.4,4-6,7.4 (IsEquivalenceArrow forces g:y→x and gives the two inverse equations; W_eq is a union of components; IsComplete uses the actual s0 factor). Edge cases (empty, n=0, m=0, groupoid nerves) and universe u are fine. Gates: no hollow definitions, single sorry, source/blueprint docstrings with all 8 proof steps verbatim, node changes only lean and stmt_deps, lean.statement verbatim, report sections present. nt_compile.py --json on both files: clean, rc=0; a broken-copy control produced an error. Non-blocking: the concurrently landed def-coef-homotopy-segal-space (Q59) is a distinct, non-Reedy homotopy-fibre notion; no clash."
+ }
+}

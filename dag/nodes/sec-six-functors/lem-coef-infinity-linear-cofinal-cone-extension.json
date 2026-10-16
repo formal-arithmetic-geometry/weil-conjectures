@@ -317,5 +317,28 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-551a6c1a2 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item, all ten steps, the full statements of the three cited nodes (def-cbc-enhanced-diagrams-cones, and the Mathlib leaves lem-weil-pbc-transfinite-recursion and lem-weil-pbc-well-ordering-theorem) and the parent lem-coef-infinity-cofinal-common-image, which uses the item. The statement is true and not weakened: U is included in N(A) by a monomorphism that is a Joyal equivalence (HTT 5.4.6.2), so a strict extension to any quasicategory exists. The delivery proves this directly by inner-horn filling; HTT is not archived, the delivery records it as WANTED and marks the proof agent-written. Step checks: (3) a not in B makes a<b strict, and inserting b pairs the missing chains with no overlaps and no gaps. (4) b sits at an interior index; deleting a or infinity gives an old simplex, and deleting any other vertex gives an earlier pair. (5)-(7) the induction is set up explicitly, the inverse image is exactly the horn including degenerate simplices, and pieces of the same rank meet only inside H_r. (8) the cited quasicategory clause gives the fillers. (9)-(10) the well-order and transfinite recursion fit the statements of the two Mathlib leaves, limit stages work by finite support, and the result restricts exactly to h. Edge cases checked: A0=B=empty, A0=B, and an empty target. Small cases checked by hand: {a<b} with B={b}, and {a1<a2<b} with a non-monotone insertion order (inner horns 2-horn index 1 and 3-horn index 2). The parent's two uses (B containing the maximum, and the even ordinals below a limit) satisfy the hypotheses. No new nodes. An rg search of dag/nodes found no duplicate. blueprint.from and its via list are consistent. No cycle, no SGA source, no tool_uses needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dec34036",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones (fullSubcomplex checks every vertex), the module, the report and the delivery diff (only the node's lean field changed). Every clause matches: WithTop A₀ and its nerve, N(A₀) and N(B∪{∞}) as full subcomplexes, degreewise ⊔ union, any quasicategory C in SSet.{u}, strict extension via ι. Edge cases checked: empty order, B=∅, B=univ, existing maximum, empty C. Single universe u, autoImplicit false. Real helper data, sorry only in the theorem, source and blueprint docstrings present, lean.statement verbatim, no duplicate found. nt_compile clean, rc=0, 1.6-1.7 s; the tool's error reporting was confirmed with a broken scratch copy; axioms only sorryAx plus the standard ones."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LinearCofinalConeExtension",
+  "declaration": "SSet.Enhanced.exists_linearCofinalConeExtension",
+  "declarations": [
+   "SSet.Enhanced.linearCofinalUnion",
+   "SSet.Enhanced.exists_linearCofinalConeExtension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LinearCofinalConeExtension.lean",
+  "statement": "theorem exists_linearCofinalConeExtension (A₀ : Type u) [LinearOrder A₀] (B : Set A₀) (hcof : ∀ a : A₀, ∃ b : A₀, b ∈ B ∧ a ≤ b) (C : SSet.{u}) [Quasicategory C] (h : (linearCofinalUnion A₀ B : SSet) ⟶ C) : ∃ (barh : CategoryTheory.nerve (WithTop A₀) ⟶ C), (linearCofinalUnion A₀ B).ι ≫ barh = h",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The union helper is the specified degreewise union of the existing full subcomplexes inside the WithTop nerve; the theorem asserts exact extension into any quasicategory, including the empty-order case."
  }
 }
