@@ -375,9 +375,12 @@ lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
 
 omit [IsOpenImmersion j] [Nonempty U] in
 /-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
-`W(C₀)` if it is surjective (e.g. `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`),
-since it preserves degrees; on the underlying
-elements of `π₁(U₀)` it is that map (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`). -/
+`W(C₀)` if it is surjective (e.g. for `C₀` regular,
+`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`), since it preserves
+degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
+`AlgebraicGeometry.WeilGroup.restrictionMap` (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`),
+so on the geometric subgroups it is the surjection of part (1) of
+`lem-wf-dense-open-pi1-surjective`. -/
 lemma map_ker_weilGroupDeg_restrictionHom
     (hsurj : Function.Surjective (restrictionHom j hj τ GU GC)) :
     (weilGroupDeg pU sU GU).ker.map (restrictionHom j hj τ GU GC) =
