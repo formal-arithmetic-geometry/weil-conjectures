@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, derived coefficient adjunction before the displayed R Hom / R lim calculation: enriched-diagram rectification uses globally enriched functorial factorizations before forming small chunks (HTT A.3.4.15, first proof paragraph).",
+   "place": "Proof paragraph 2 in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, before the displayed R Hom / R lim calculation: enriched-diagram rectification uses globally enriched functorial factorizations before forming small chunks (HTT A.3.4.15, first proof paragraph).",
    "via": [
     "lem-coef-simplicial-small-chunks",
     "lem-coef-enriched-diagram-rectification",
@@ -30,9 +30,129 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Ordinary colimits here have an enriched universal property. For a small diagram $D$, any $T$, and every $n\\geq0$, the given cotensor adjunction and the ordinary colimit universal property give\n$$\\underline{\\operatorname{Map}}(\\operatorname{colim}D,T)_n=\\operatorname{Hom}(\\operatorname{colim}D,T^{\\Delta[n]})=\\lim_a\\operatorname{Hom}(D_a,T^{\\Delta[n]})=(\\lim_a\\underline{\\operatorname{Map}}(D_a,T))_n.$$\nThe maps are induced by the colimit injections; naturality of the adjunction makes these bijections commute with every simplicial operator. Thus they are isomorphisms of simplicial sets, including for empty diagrams. Moreover $K\\otimes-$ preserves these ordinary colimits: its ordinary right adjoint is $(-)^K$, so maps from $K\\otimes\\operatorname{colim}D$ to $T$ are exactly compatible maps $K\\otimes D_a\\to T$. This is a direct application of [def-weil-pbc-category-colimit] and the adjunctions in the statement; full weighted bicompleteness is unnecessary.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Theorem 7.5.3 and its dual, printed pp.90-91 (PDF pp.105-106); section 13.1, printed p.176 (PDF p.191)."
+   }
+  },
+  {
+   "text": "Pointwise colimits of enriched diagrams are enriched functors. Explicitly, suppose $F_a$ are simplicial functors on a simplicial category $\\mathcal A$ and the diagram maps are enriched natural. Put $F(x)=\\operatorname{colim}_aF_a(x)$. For $H=\\underline{\\operatorname{Map}}_{\\mathcal A}(x,y)$, the actions $H\\otimes F_a(x)\\to F_a(y)\\to F(y)$ are compatible. Step 1 gives a unique action $H\\otimes F(x)\\to F(y)$, hence a simplicial map $H\\to\\underline{\\operatorname{Map}}(F(x),F(y))$. Identity and composition equations hold after precomposition with each colimit injection, where they are the equations for $F_a$; the colimit universal property gives the equations on $F$. Any compatible family of enriched natural maps out of the diagram induces an enriched natural map out of $F$ by the identical injection test. This proves, in particular, enriched functoriality of the coproducts, pushouts and ordinal colimits used below.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.1, last paragraph; section 13.2, proof after diagram (13.2.2): conical colimits give enriched functors."
+   }
+  },
+  {
+   "text": "For $j:A_j\\to B_j$ set $S_j(f)=\\operatorname{Sq}(j,f)$, the mapping simplicial set in the arrow category from the statement. It is small, being a degreewise equalizer of products of small mapping sets. Composition defines $\\operatorname{Sq}(f,g)\\times S_j(f)\\to S_j(g)$ by $(h,s)\\mapsto h\\circ s$. Tensor adjunction makes $f\\mapsto S_j(f)\\otimes A_j$ and $f\\mapsto S_j(f)\\otimes B_j$ enriched functors: for a parameter $H=\\operatorname{Sq}(f,g)$ their actions are the maps\n$$H\\otimes(S_j(f)\\otimes A_j)\\cong(H\\times S_j(f))\\otimes A_j\\longrightarrow S_j(g)\\otimes A_j,$$\nand the displayed formula with $B_j$. The associativity isomorphism follows by applying the tensor adjunction twice. The action equations are the associativity and unit equations of composition. Projection of a square onto its two components and evaluation give enriched natural maps $S_j(f)\\otimes A_j\\to\\operatorname{dom}f$ and $S_j(f)\\otimes B_j\\to\\operatorname{cod}f$; their square commutes because $s$ satisfies the defining equalizer equation. Their naturality is $(h\\circ s)_0=h_0\\circ s_0$, $(h\\circ s)_1=h_1\\circ s_1$, as equalities of simplicial maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.1, equation (13.1.1) and Remark 13.1.2; section 13.2, formula for L_0."
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$ form $P(f)=\\coprod_{j\\in J}S_j(f)\\otimes A_j$ and $Q(f)=\\coprod_{j\\in J}S_j(f)\\otimes B_j$. The maps from step 3 give a square from $a_f:P(f)\\to Q(f)$ to $f$. Let $V(f)=X\\amalg_{P(f)}Q(f)$, let $c_f:X\\to V(f)$ be its injection and $r_f:V(f)\\to Y$ its induced map, so $r_fc_f=f$. By step 2 all these assignments are enriched functors or enriched natural transformations. More explicitly, an $H$-parameterized square $f\\to g$ gives maps $H\\otimes X\\to X'\\to V(g)$ and $H\\otimes Q(f)\\to Q(g)\\to V(g)$ agreeing on $H\\otimes P(f)$ by step 3. Since $H\\otimes-$ preserves the pushout, they induce $H\\otimes V(f)\\to V(g)$. Its equations on the two pushout injections give $V(h)c_f=c_g h_0$ and $r_gV(h)=h_1r_f$ with the same parameter $H$. Identity and composition follow from those equations on both injections.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.2, diagram (13.2.2), printed p.177 (PDF p.192)."
+   }
+  },
+  {
+   "text": "For each $j\\in J$, [lem-coef-object-presentability-rank] gives an infinite regular $\\tau_j\\in\\mathcal U$ for which $\\operatorname{Hom}(A_j,-)$ preserves small $\\tau_j$-filtered colimits. Apply [lem-coef-small-family-regular-bound] to the family of sets of ordinals below $\\tau_j$. Obtain an infinite regular $\\lambda\\in\\mathcal U$ greater than the cardinality of their disjoint union, hence greater than every $\\tau_j$. This also works when $J$ is empty. Regard $\\lambda$ as its initial ordinal. It is a nonzero limit ordinal, and its category of predecessors is $\\tau_j$-filtered for every $j$: a set of fewer than $\\tau_j$ ordinals below $\\lambda$ has supremum below $\\lambda$ by regularity, providing the cocone (use $0$ for an empty diagram). This choice of $\\lambda$ is independent of $f$.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.2, smallness convention referring to Theorem 12.2.2; replace the compact-domain countable notation by a uniform regular ordinal using the existing presentability and cardinal-bound leaves."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-transfinite-recursion] up to $\\lambda$, choosing the colimits of [def-weil-pbc-category-colimit] once. The records at stage $\\alpha$ consist of enriched functors $Z_\\alpha$ on the arrow category, enriched maps $p_\\alpha:Z_\\alpha\\to\\operatorname{cod}$, and enriched transition maps $t_{\\alpha\\beta}$, with $t_{\\alpha\\alpha}=1$, $t_{\\beta\\gamma}t_{\\alpha\\beta}=t_{\\alpha\\gamma}$ and $p_\\beta t_{\\alpha\\beta}=p_\\alpha$. At zero take $Z_0(f)=X$ and $p_0(f)=f$. At a successor apply step 4 to $p_\\alpha(f)$: put $Z_{\\alpha+1}(f)=V(p_\\alpha(f))$, $p_{\\alpha+1}(f)=r_{p_\\alpha(f)}$, $t_{\\alpha,\\alpha+1}=c_{p_\\alpha(f)}$, and compose this transition with the earlier ones. The assignment $f\\mapsto p_\\alpha(f)$ is enriched as an arrow-valued functor because $p_\\alpha$ is enriched natural; hence the successor records are enriched by step 4. At a nonzero limit $\\beta\\leq\\lambda$, take $Z_\\beta(f)=\\operatorname{colim}_{\\alpha<\\beta}Z_\\alpha(f)$ with its injections as transitions; the compatible $p_\\alpha(f)$ induce $p_\\beta(f)$. Step 2 proves enrichment of these records. At successors the invariant follows from $r_qc_q=q$; at limits it follows on every injection by the cocone equations and uniqueness. This is a total recursion rule by assigning a dummy record to an incoherent input prefix; well-order induction using the checks just given shows that the actual prefixes are coherent and never receive the dummy. All colimit shapes and attaching sets are $\\mathcal U$-small. Set $E=Z_\\lambda$, $i=t_{0\\lambda}$ and $p=p_\\lambda$; the invariant gives $pi=f$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.2, Quillen construction in the final proof paragraph, printed pp.177-178 (PDF pp.192-193), with the transfinite iteration of Theorem 12.2.2 instead of the compact-domain countable illustration."
+   }
+  },
+  {
+   "text": "Each summand $S_j(q)\\otimes j$ of $a_q$ is in $L$ by the item hypothesis, since $S_j(q)$ is small. Their coproduct is in $L$: for any $r\\in R$ and square from that coproduct to $r$, restrict to each summand, choose a filler there, and combine the fillers by the coproduct universal property. By pushout stability in [lem-coef-lifting-class-closure], every $c_q$ lies in $L$. The chain of step 6 is continuous at every nonzero limit, so [lem-coef-transfinite-left-lifting], with $T=R$ and $\\theta=\\lambda$, puts $i_f=t_{0\\lambda}(f)$ in $L$. No assertion that the maps $S_j(q)\\otimes j$ are themselves $J$-cellular is used.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.2, hypothesis (star) and proof invoking Lemma 11.1.4; transfinite version of the left-class argument."
+   }
+  },
+  {
+   "text": "Fix $j:A_j\\to B_j$ and an ordinary square $a:A_j\\to E(f)$, $b:B_j\\to Y$ with $p_fa=bj$. By step 5, $\\operatorname{Hom}(A_j,-)$ preserves the colimit $E(f)=\\operatorname{colim}_{\\alpha<\\lambda}Z_\\alpha(f)$. Clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] gives $\\alpha<\\lambda$ and $a_\\alpha:A_j\\to Z_\\alpha(f)$ with $t_{\\alpha\\lambda}a_\\alpha=a$. Then $p_\\alpha a_\\alpha=p_ft_{\\alpha\\lambda}a_\\alpha=bj$, so $(a_\\alpha,b)$ is a vertex of $S_j(p_\\alpha(f))$. This requires no presentability of $B_j$ and no descent of an equality to a later stage: the codomain is the fixed $Y$ throughout.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.2, final lifting argument, printed p.178 (PDF p.193), applied after the regular-ordinal smallness bound."
+   }
+  },
+  {
+   "text": "Tensor the vertex $\\Delta[0]\\to S_j(p_\\alpha(f))$ with $B_j$, using $\\Delta[0]\\otimes B_j\\cong B_j$, and include its image in $Q(p_\\alpha(f))$. Its composite with the pushout injection is $d:B_j\\to Z_{\\alpha+1}(f)$. The pushout equation and evaluation at this vertex give $dj=t_{\\alpha,\\alpha+1}a_\\alpha$ and $p_{\\alpha+1}d=b$. Thus $h=t_{\\alpha+1,\\lambda}d$ satisfies $hj=a$ and $p_fh=b$. Here $\\alpha+1<\\lambda$ because $\\lambda$ is a limit ordinal. Every square for every $j$ has this filler, so $p_f\\in J^\\square=R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Remark 13.1.2 and section 13.2, last diagram and following paragraph, printed pp.176-178 (PDF pp.191-193)."
+   }
+  },
+  {
+   "text": "The enriched recursion supplies simplicial maps $\\operatorname{Sq}(f,g)\\to\\underline{\\operatorname{Map}}(E(f),E(g))$ preserving identities and composition, and enriched naturality of $i$ and $p$. In particular, on an $n$-simplex $(b,c)$ with $gb=cf$, these maps satisfy $E(b,c)i_f=i_gb$ and $p_gE(b,c)=cp_f$ as equalities of $n$-simplices. They commute with all face and degeneracy maps by construction, which is exactly the asserted enriched naturality. Together with $p_fi_f=f$, step 7 and step 9, these are all parts of the conclusion. For $J=\\varnothing$, every $P(q)$ and $Q(q)$ is initial; choosing the canonical pushouts gives $Z_\\alpha(f)=X$ throughout, hence $i_f=1_X$ and $p_f=f$. Empty tensors and empty colimits require no exception to any step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+    "place": "Section 13.1 arrow enrichment and section 13.2 conclusion; explicit unpacking of the constructed enriched factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+  "place": "Theorem 13.2.1, Quillen proof, printed pp.177-178 (PDF pp.192-193); Theorem 7.5.3 and section 13.1. The countable illustration is replaced by the transfinite construction allowed by its smallness convention."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -131,10 +251,31 @@
    "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"422\", \"text\": \"lemma UniversalFactorizationRing.fromTensor_comp_universalFactorizationMap :\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"423\", \"text\": \"  (fromTensor m k hn p).comp (MvPolynomial.universalFactorizationMap R n m k hn) =\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"429\", \"text\": \"lemma UniversalFactorizationRing.fromTensor_comp_universalFactorizationMap' :\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"430\", \"text\": \"  (fromTensor m k hn p).comp (MvPolynomial.universalFactorizationMap R n m k hn) =\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"432\", \"text\": \"  rw [UniversalFactorizationRing.fromTensor_comp_universalFactorizationMap, Equiv.eq_symm_apply]\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: the five hits concern universal polynomial factorization rings and not enriched categorical factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "Enriched|Simplicial|tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: enriched functor composition/whiskering machinery only; SmallObject grep found no enriched or simplicial tensor construction. No declaration states enriched functorial factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"HasFunctorialFactorization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: enriched functor composition/whiskering machinery only; SmallObject grep found no enriched or simplicial tensor construction. No declaration states enriched functorial factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial natural transformation enriched functorial weak factorization via tensor copowers of lifting squares",
+   "results": "8 hits: CategoryTheory.SimplicialThickening.functor, CategoryTheory.Enriched.FunctorCategory.enrichedComp_π, CategoryTheory.Enriched.FunctorCategory.diagram, CategoryTheory.EnrichedCat.whiskerRight, AugmentedSimplexCategory.tensorHom, CategoryTheory.EnrichedCat.whiskerLeft, CategoryTheory.SimplicialObject.instEnrichedCategorySSet, CategoryTheory.Enriched.Functor.whiskerLeft_app_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: enriched functor composition/whiskering machinery only; SmallObject grep found no enriched or simplicial tensor construction. No declaration states enriched functorial factorization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-small-chunks",
@@ -142,5 +283,20 @@
   "group": "Q40"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-functorial-factorizations",
+  "worker": "N5",
+  "summary": "Second reader replaced the general-theorem restatement by the enriched attaching-square pushout construction, a uniform presentability bound, explicit enriched transfinite recursion, and checks of both lifting classes. Both proposed new nodes were removed; all non-elementary inputs are existing Mathlib leaves. Item statement unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 before the displayed derived R Hom / R lim calculation: enriched functorial factorizations used for global diagram rectification."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N5-7adab9405",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-7adab9405 (reviewer sub-agent of L); spot-checked: I read the item in full and the statements of all 8 cited nodes, which are all Mathlib leaves. The statement is unchanged. It is Riehl 13.2.1 specialized to sSet, and it holds on these test cases: sSet with boundary inclusions, J empty, and the terminal one-object category. I checked each of the 10 steps. Step 1: the enriched colimit property comes from the cotensor adjunction on vertices, and K⊗- preserves colimits. Steps 2-4: pointwise colimits and the single pushout V(f) along the coproduct of Sq(j,f)⊗j are enriched; the evaluation square commutes by the equalizer equation. Step 5: a uniform regular λ above every τ_j comes from the presentability-rank and regular-bound leaves, and the empty J is fine. Step 6: the enriched transfinite records and the invariant p_β t_αβ = p_α hold. Step 7: i_f is in L by the tensor hypothesis, by coproduct fillers written out, by the pushout leaf and by the transfinite-lifting leaf. Steps 8-9: the square descends because the codomain is fixed, and the filler satisfies hj=a and p_f h=b with α+1<λ. Step 10: correct unpacking. The J-empty remark that Z_α(f)=X holds only up to the chosen-colimit isomorphism, which is harmless. The delivery has no new nodes: the second reader rightly dropped the two author nodes, and one of them restated the item. Every citation is a Mathlib leaf, so there is no route departure and no tool_uses. No duplicate: the existing small-object nodes are ordinary or about dg categories. No SGA is used. The blueprint from/via fields match the parent. The parent's uses in steps 0, 2 and 6 agree with the item. Riehl is not archived (WANTED) and the reviewer has no network access, so I could not check the source pages; the proof is self-contained and I verified it independently. No fixes were made."
+ }
 }
