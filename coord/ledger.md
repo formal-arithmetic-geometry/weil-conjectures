@@ -15381,3 +15381,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:31 L: merged deliver/D4/Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent (stage 3; reviewer PASS; first push; landing 20261016T043121-L-2930776 (interface); batch 20261016T043119; modules 5; new nodes 4)
 - 04:37 L: returned deliver/C4/Sheaf.Paper.ContinuousConstructibleIntegralStratum (reviewer RETURN: (reviewer X-8b32e, head 8b32e2ca7) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ContinuousCons)
 - 04:37 L: returned deliver/C1/Sheaf.Paper.ContinuousConstructibleIntegralGluing (reviewer RETURN: (reviewer X-a6080, head a60809c63) 6: In dag/nodes/sec-proper-base-change/lem-weil-pbc-continuous-constructible-integral)
+- 04:44 L: returned deliver/B3/Sheaf.Paper.IntegralConstructibleSheafHom (reviewer RETURN: (the landing tools, head 85220d198) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
