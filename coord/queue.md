@@ -1,6 +1,6 @@
 # Work queue
 
-24 items; claim with `tools/claim.py next <group> [--stage N]`.
+23 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (24)
+## Stage 3: modules to prove (23)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,6 +33,5 @@
 | `WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 12 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCopowers` | 20 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension` | 21 | 1 | proof |
 | `Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
