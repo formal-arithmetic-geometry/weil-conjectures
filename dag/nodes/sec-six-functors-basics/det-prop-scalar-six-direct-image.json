@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-prop-scalar-six-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient comparison for ordinary direct image",
- "statement": "Let $f\\colon X\\to Y$ be a morphism of standing schemes and $\\Lambda\\to\\Lambda'$ a listed\ncoefficient map. For $K\\in\\D(X_{\\mathrm{proét}},\\Lambda)$ let\n$$\n\\gamma_{f,K}\\colon(Rf_*K)_{\\Lambda'}\\longrightarrow Rf_*f^*\\bigl((Rf_*K)_{\\Lambda'}\\bigr)\\simeq Rf_*\\bigl((f^*Rf_*K)_{\\Lambda'}\\bigr)\\xrightarrow{Rf_*((\\epsilon_K)_{\\Lambda'})}Rf_*(K_{\\Lambda'})\n$$\nbe the composite of the unit of $f^*\\dashv Rf_*$ on $\\D(-_{\\mathrm{proét}},\\Lambda')$, the\npullback identification of [det-prop-scalar-six-pullback] (1), and the extension of\nscalars of the counit $\\epsilon_K\\colon f^*Rf_*K\\to K$. Then:\n\n1. $\\gamma_{f,K}$ is an isomorphism for $K\\in\\Dctf(X,\\Lambda)$; both sides lie in\n   $\\Dctf(Y,\\Lambda')$.\n2. $\\gamma$ is natural in $K$, compatible with composition\n   ($\\gamma_{gf,K}=Rg_*(\\gamma_{f,K})\\circ\\gamma_{g,Rf_*K}$ under $R(gf)_*=Rg_*Rf_*$), and\n   compatible with the units and counits of $f^*\\dashv Rf_*$ over $\\Lambda$ and $\\Lambda'$:\n   $\\gamma_{f,f^*N}\\circ(\\eta_N)_{\\Lambda'}$ is the unit $\\eta_{N_{\\Lambda'}}$ composed with the\n   pullback identification.",
+ "statement": "Work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $p>0$, $\\ell\\ne p$ is prime, $X,Y$ are separated finite-type $k$-schemes, and $f\\colon X\\to Y$ is a $k$-morphism. The listed coefficient maps mean homomorphisms $A\\to B$ of finite commutative rings killed by powers of $\\ell$; $\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$ for finite extensions $F/E$ inside $\\overline{\\mathbf Q}_\\ell$; $\\mathcal O_E\\to E$; $E\\to\\overline{\\mathbf Q}_\\ell$; continuous homomorphisms $\\mathcal O_E\\to A$ to finite rings killed by powers of $\\ell$; and finite composites of these maps. Here $E/\\mathbf Q_\\ell$ is finite and $\\mathcal O_E$ is its valuation ring [def-weil-l-adic-coefficient-extension]; the topological rings are regarded as condensed rings [sk-def-sfb-condensed-ring], with the filtered-colimit condensed convention for $\\overline{\\mathbf Q}_\\ell$ [sk-def-sfb-qlbar-condensed]. Write $K_{\\Lambda'}=\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}K$ for the derived coefficient change [sk-def-sfb-coefficient-change], and $\\Dctf$ for bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible]. Use the derived module adjunctions of [def-sfb-module-derived-pushpull-adjunction].\n\nFor such a listed coefficient map $\\Lambda\\to\\Lambda'$ and $K\\in\\D(X_{\\mathrm{proét}},\\Lambda)$ let\n$$\n\\gamma_{f,K}\\colon(Rf_*K)_{\\Lambda'}\\longrightarrow Rf_*f^*\\bigl((Rf_*K)_{\\Lambda'}\\bigr)\\simeq Rf_*\\bigl((f^*Rf_*K)_{\\Lambda'}\\bigr)\\xrightarrow{Rf_*((\\epsilon_K)_{\\Lambda'})}Rf_*(K_{\\Lambda'})\n$$\nbe the composite of the unit of $f^*\\dashv Rf_*$ on $\\D(-_{\\mathrm{proét}},\\Lambda')$, the\npullback identification of [det-prop-scalar-six-pullback] (1), and the extension of\nscalars of the counit $\\epsilon_K\\colon f^*Rf_*K\\to K$. Then:\n\n1. $\\gamma_{f,K}$ is an isomorphism for $K\\in\\Dctf(X,\\Lambda)$; both sides lie in\n   $\\Dctf(Y,\\Lambda')$.\n2. $\\gamma$ is natural in $K$, compatible with composition\n   ($\\gamma_{gf,K}=Rg_*(\\gamma_{f,K})\\circ\\gamma_{g,Rf_*K}$ under $R(gf)_*=Rg_*Rf_*$), and\n   compatible with the units and counits of $f^*\\dashv Rf_*$ over $\\Lambda$ and $\\Lambda'$:\n   writing $T_Z=(-)_{\\Lambda'}$ and $c_f\\colon f_{\\Lambda'}^*T_Y\\xrightarrow{\\sim}T_Xf_\\Lambda^*$ for the inverse of the pullback identification, the unit and counit equations are\n   $$\\gamma_{f,f_\\Lambda^*N}\\circ T_Y(\\eta_N)=Rf_{*,\\Lambda'}(c_{f,N})\\circ\\eta'_{T_YN},$$\n   $$\\epsilon'_{T_XK}\\circ f_{\\Lambda'}^*(\\gamma_{f,K})=T_X(\\epsilon_K)\\circ c_{f,Rf_{*,\\Lambda}K}.$$\n   These identities hold on the ambient derived categories wherever the displayed objects are defined.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.md",
   "place": "node det-prop-scalar-six-direct-image, order None",
@@ -19,65 +19,315 @@
   ]
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "def-sfb-module-derived-pushpull-adjunction",
   "det-prop-scalar-six-pullback"
  ],
  "proof": [
   {
-   "text": "*(2) Formal properties.* $\\gamma_{f,K}$ is the mate of the pullback identification\n$f^*((-)_{\\Lambda'})\\simeq(f^*-)_{\\Lambda'}$ under the adjunctions $f^*\\dashv Rf_*$ over\n$\\Lambda$ and over $\\Lambda'$. Mates of natural isomorphisms compatible with\ncomposition are compatible with composition, and the stated compatibility with\nunits and counits is the triangle identity for mates. Naturality is clear. Note\nthat $Rf_*$ commutes with restriction of scalars (it is computed on the\nunderlying complexes of abelian sheaves), and restriction of scalars is\nconservative; so to see that $\\gamma_{f,K}$ is an isomorphism we may regard it as a\nmap of complexes of $\\Lambda$-modules.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $T_Z=(-)_{\\Lambda'}$, $L=f_\\Lambda^*$, $R=Rf_{*,\\Lambda}$, $L'=f_{\\Lambda'}^*$, $R'=Rf_{*,\\Lambda'}$, and let $c_f:L'T_Y\\xrightarrow{\\sim}T_XL$ be the inverse of [det-prop-scalar-six-pullback](1). The adjunctions exist by [def-sfb-module-derived-pushpull-adjunction], and [sk-prop-sfb-cartesian-coefficients] identifies underived module pullback canonically with the exact lift of inverse image: its underlying sheaf functor is $f^{-1}$ and its coefficient action is transported using $\\alpha_f^{-1}$. We use this natural identification, with its transported action, whenever identifying module pullback with inverse image below. The component formula in [def-weil-pbc-adjunction-mate] gives precisely\n$\\gamma_K=R'(T_X\\epsilon_K)\\,R'(c_{f,RK})\\,\\eta'_{T_YRK}$.\nThus $\\gamma$ is a natural transformation. Apply [lem-weil-pbc-mate-pasting](2) to the pullback squares for $g$ and $f$, using the composition compatibility in [det-prop-scalar-six-pullback](1): its mate is $Rg_{*,\\Lambda'}(\\gamma_{f,K})\\circ\\gamma_{g,Rf_{*,\\Lambda}K}$. Apply part (1) of the same pasting lemma to successive coefficient changes, and [det-prop-scalar-six-pullback](3): for $\\Lambda\\to\\Lambda'\\to\\Lambda''$ one gets $\\gamma^{\\Lambda\\to\\Lambda''}_{f,K}=\\gamma^{\\Lambda'\\to\\Lambda''}_{f,T_XK}\\circ T_Y^{\\Lambda'\\to\\Lambda''}(\\gamma^{\\Lambda\\to\\Lambda'}_{f,K})$, with the tensor reassociations. No assertion that an arbitrary mate of an isomorphism is invertible is used.",
+   "uses": [
+    "det-prop-scalar-six-pullback",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties: definition, naturality, and the two pasting laws"
+   }
   },
   {
-   "text": "*Preservation.* $K_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$ by [det-prop-scalar-six-ctf], and $Rf_*$\npreserves $\\Dctf$ ([sk-thm-sf-ctf-stability]); so both sides of $\\gamma_{f,K}$ lie in\n$\\Dctf(Y,\\Lambda')$. It remains to prove that $\\gamma_{f,K}$ is an isomorphism, and by\n[det-prop-scalar-six-pullback] (3) and compatibility of the mates with composition\nof coefficient maps it suffices to treat the elementary maps.",
+   "text": "The counit equation is exactly the transpose description in [def-weil-pbc-adjunction-mate]. For the unit equation, transpose $\\gamma_{LN}T_Y\\eta_N$ under $L'\\dashv R'$. Its transpose is $T_X\\epsilon_{LN}\\,c_{f,RLN}\\,L'T_Y\\eta_N$. By naturality of $c_f$ this equals $T_X(\\epsilon_{LN}L\\eta_N)c_{f,N}=c_{f,N}$, using the triangle identity for $L\\dashv R$. The transpose of $R'c_{f,N}\\,\\eta'_{T_YN}$ is also $c_{f,N}$ by the other triangle identity. The bijection of mates proves the unit equation. This proves all the requested adjunction compatibility, without assuming that $\\gamma$ is already invertible.",
    "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties: explicit unit and counit equations"
+   }
+  },
+  {
+   "text": "Restriction of scalars must be handled at the derived level. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_Z=\\Lambda_Z$, $S_Z=\\Lambda'_Z$ and the Cartesian identifications of [sk-prop-sfb-cartesian-coefficients]. The commuting ring square is part of [sk-def-sfb-coefficient-change]. This gives the canonical restriction/direct-image isomorphism and says that restriction reflects isomorphisms and respects transposes, with no flatness assumption on $\\Lambda\\to\\Lambda'$. Consequently, after restricting $\\gamma$ to $\\Lambda$, it is the projection morphism for the coefficient complex $\\Lambda'_Y$: both have transpose $f^*(\\Lambda'_Y\\otimes^L Rf_*K)\\simeq\\Lambda'_X\\otimes^L f^*Rf_*K\\to\\Lambda'_X\\otimes^L K$. The tensor comparison and this exact projection morphism are those of [lem-weil-pbc-ringed-projection-mate-exact]. It is therefore enough below to prove that the underlying projection morphism is invertible.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties: restriction of scalars and normalization of the projection map"
+   }
+  },
+  {
+   "text": "The morphism $f$ is finite type by [lemma-nagata-finite-type-to-separated-target], applied to $X\\to Y\\to\\operatorname{Spec}k$: $X$ is finite type and $Y$ is separated over $k$ by [sk-def-sfb-dc-setting]. Its diagonal is the base change of the closed diagonal $X\\to X\\times_kX$ along $X\\times_YX\\to X\\times_kX$; the identification of this pullback with $X$ follows directly from the fibre-product universal property. Hence $f$ is separated by [lem-weil-pbc-closed-immersion-base-change] and the definition in [def-weil-proper-morphism]. In particular it is quasi-compact and quasi-separated. Thus [det-thm-sf-ctf-stability-direct-images](3) applies to $f$ at both coefficient stages. For $K\\in\\Dctf(X,\\Lambda)$, its pushforward lies in $\\Dctf(Y,\\Lambda)$, so [det-prop-scalar-six-ctf](3) puts the source of $\\gamma$ in $\\Dctf(Y,\\Lambda')$. The same coefficient-change assertion first on $X$, followed by the direct-image assertion over $\\Lambda'$, puts its target there too. The coefficient pasting law in step 1 now reduces invertibility for finite composites to invertibility for each elementary listed map; the intermediate complexes stay in $\\Dctf$ by [det-prop-scalar-six-ctf](3).",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "det-thm-sf-ctf-stability-direct-images",
     "det-prop-scalar-six-ctf",
-    "det-prop-scalar-six-pullback"
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Preservation and reduction to elementary coefficient maps"
+   }
   },
   {
-   "text": "*Finite rings $A\\to B$.* By [sk-prop-ctf-finite-comparison], $K=\\nu_X^*K'$ for some\n$K'\\in\\D(X_{\\mathrm{ét}},A)$, and $Rf_*$ and pullback on $\\D(-_{\\mathrm{proét}})$ agree with\ntheir classical étale versions transported by $\\nu^*$. The functor $\\nu^*$ commutes\nwith extension of scalars by the argument of [det-prop-scalar-six-pullback] (1)\n(it is the pullback of a morphism of ringed topoi with $\\nu^{-1}A=A$). So it\nsuffices to show that the étale comparison $(Rf_*K')_B\\to Rf_*(K'_B)$ is an\nisomorphism in $\\D(Y_{\\mathrm{ét}},B)$. Let $V\\to Y$ be a quasi-compact étale test object and\n$X_V=X\\times_YV$. The scalar projection formula (Stacks, Tag 0F12), which only needs\nthe cohomological dimension bounds for $\\ell$-primary coefficients valid on the\nstanding schemes and therefore applies to every $B$ regardless of its projective\ndimension over $A$, gives on $V$ and on $X_V$\n$$\nR\\Gamma(V,(Rf_*K')_B)\\simeq R\\Gamma(V,Rf_*K')\\otimes^{\\mathbf L}_AB=R\\Gamma(X_V,K')\\otimes^{\\mathbf L}_AB\\simeq R\\Gamma(X_V,K'_B)=R\\Gamma(V,Rf_*(K'_B)),\n$$\nand this composite is $R\\Gamma(V,\\gamma)$, since all maps are the canonical ones. The\nisomorphisms commute with restriction along $V'\\to V$, so on cohomology sheaves\n(sheafifications of $V\\mapsto H^q(V,-)$) $\\gamma$ induces isomorphisms. Hence $\\gamma$ is\nan isomorphism in $\\D(Y_{\\mathrm{ét}},B)$, and so in $\\D(Y_{\\mathrm{proét}},B)$.",
+   "text": "For a finite admissible ring $A$, the discrete condensed ring on the point is the sheafification of the constant ring $A$: a continuous function $S\\to A$ is locally constant and is therefore constant on a finite clopen partition. The inverse image $p_Z^*$ preserves colimits and finite limits, so it takes this constant ring to the constant ring on $Z_{\\mathrm{proét}}$; compare [sk-def-sfb-condensed-ring] and [sk-def-sfb-pullback-from-point]. In particular these are precisely the finite coefficients to which [det-pe-finite-tor-comparison-noetherian] applies. (A finite ring is Noetherian because every ideal is generated by its finite underlying set.) That node supplies $K'\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{ét}},A)$ and $\\nu_X^*K'\\simeq K$. Define the étale derived extension $K'_B$ using [lem-pur-derived-change-of-rings]. After restriction to $A$, its K-flat model is the derived $A$-tensor with $B_X$. For $B$ finite, $K'_B$ is bounded: its underlying $A$-complex has cohomology in the Tor interval of $K'$. The comparison $\\nu^*$ commutes with this derived tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the comparison morphism with $\\nu^{-1}A=A$, $\\nu^{-1}B=B$. For $f$ qcqs, [sk-thm-pe-direct-image-comparison] identifies the two direct images of these bounded-below complexes, compatibly with units and counits. Write $\\beta_{f,L}^A:\\nu_Y^*Rf_{*,A}^{\\mathrm{ét}}L\\xrightarrow{\\sim}Rf_{*,A}^{\\mathrm{proét}}\\nu_X^*L$ for this comparison, and define $\\beta^B$ likewise. Under $K\\simeq\\nu_X^*K'$, the pro-étale coefficient map is the composite\n$$(Rf_{*,A}^{\\mathrm{proét}}\\nu_X^*K')_B\n\\xrightarrow{(\\beta^A_{f,K'})^{-1}_B}(\\nu_Y^*Rf_{*,A}^{\\mathrm{ét}}K')_B\n\\simeq\\nu_Y^*((Rf_{*,A}^{\\mathrm{ét}}K')_B)\n\\xrightarrow{\\nu_Y^*\\gamma^{\\mathrm{ét}}}\\nu_Y^*Rf_{*,B}^{\\mathrm{ét}}K'_B\n\\xrightarrow{\\beta^B_{f,K'_B}}Rf_{*,B}^{\\mathrm{proét}}\\nu_X^*K'_B.$$\nIndeed, take its $B$-coefficient pro-étale $f$-transpose. The counit compatibility of $\\beta^B$ replaces the last arrow followed by the pro-étale counit by the pullback of the étale counit. The defining transpose of $\\gamma^{\\mathrm{ét}}$ then gives the $B$-extension of $\\nu_X^*\\epsilon^A_{K'}$. The counit compatibility of $\\beta^A$, together with its inverse in the first arrow, identifies this with the $B$-extension of the pro-étale counit. This is precisely the defining transpose of $\\gamma^{\\mathrm{proét}}$, so the adjunction bijection proves equality. Thus invertibility of the étale map proves the pro-étale case.",
    "uses": [
-    "det-prop-scalar-six-pullback"
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-pur-derived-change-of-rings"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings: passage to the classical étale category"
+   }
   },
   {
-   "text": "*Finite free and finitely presented coefficient extensions.* For a complex $F$ of\ncondensed $\\Lambda$-modules, finite free in each degree and bounded, consider the\nnatural map $F_Y\\otimes_{\\Lambda_Y}Rf_*K\\to Rf_*(F_X\\otimes_{\\Lambda_X}K)$ defined in the same way.\nIt is an isomorphism for $F=\\Lambda$, it is compatible with finite sums, and it is a\nmorphism of triangles for a cone, because $Rf_*$ is exact. Hence it is an\nisomorphism for every bounded complex of finite free modules.\n- For $\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$, $\\Lambda'_X$ is finite free over $\\Lambda_X$\n  ([sk-prop-sfb-cartesian-coefficients] (2)); take $F=\\Lambda'$.\n- For $\\mathcal O_E\\to A$ with $A$ finite, $A$ is a finitely generated torsion\n  $\\mathcal O_E$-module, so there is an exact sequence\n  $0\\to\\mathcal O_E^m\\xrightarrow{\\phi}\\mathcal O_E^m\\to A\\to0$. Its condensed version is exact: a\n  continuous map from a profinite set to the finite discrete quotient $A$ is locally\n  constant, hence lifts on a finite clopen partition. Pulling back along $p_X$ gives\n  an exact sequence $0\\to\\mathcal O_{E,X}^m\\to\\mathcal O_{E,X}^m\\to A_X\\to0$, a finite free\n  resolution of $A_X$. Hence $K_A\\simeq\\operatorname{cone}(\\phi\\colon K^m\\to K^m)$ as\n  $\\mathcal O_E$-modules, and the case $F=[\\mathcal O_E^m\\xrightarrow{\\phi}\\mathcal O_E^m]$ applies.",
+   "text": "Use the relative, rather than absolute, cohomological dimension. By [lem-kun-0f10](1), $\\operatorname{cd}(f)<\\infty$ for the $k$-morphism $f$ between finite-type $k$-schemes. By [def-kun-cd] this bounds all torsion abelian higher direct images by one integer $N$. Every $A$-module sheaf is killed by a power of $\\ell$, and [lem-weil-pbc-module-abelian-derived-direct-image-comparison] identifies its higher direct images after forgetting coefficients with the abelian ones. Thus the bound required by [lem-sf-projection-finite-constant] holds for all $A$-module sheaves. The finite $A$-module $B$ is finitely presented by [lem-sc-noetherian-finite-module-finite-presentation], and $K'$ is bounded, hence in $D^-$. Apply [lem-sf-projection-finite-constant] with $M=B$: the underlying $A$-projection $Rf_*K'\\otimes_A^L B_Y\\to Rf_*(K'\\otimes_A^L B_X)$ is invertible. To identify the actual $B$-linear map, let $Q=(Rf_{*,A}K')_B$. The underlying $A$-complex of $Q$ is the left side of the projection isomorphism just proved; its right side is $Rf_{*,A}$ of the bounded complex underlying $K'_B$. Hence $Q$ is bounded below. Thus both $Q$ and $K'_B$ meet the bounded-below hypotheses of [lem-sbc-canonical-restrict-scalars-functor-comparisons] and [lem-sbc-restrict-scalars-derived-adjunction-identities]. Use their canonical restriction/direct-image isomorphism to identify the restriction of the target with $Rf_{*,A}\\operatorname{Res}(K'_B)$. The stated unit and counit identities show that the $A$-adjunct of the restricted $B$-coefficient $\\gamma$ is\n$$f_A^*\\bigl(Rf_{*,A}K'\\otimes_A^LB_Y\\bigr)\\simeq f_A^*Rf_{*,A}K'\\otimes_A^LB_X\\xrightarrow{\\epsilon^A_{K'}\\otimes1}K'\\otimes_A^LB_X.$$\nThis is the defining adjunct of the projection map supplied by [lem-sf-projection-finite-constant], so the two maps agree by the adjunction bijection. Restriction is exact and conservative because it leaves underlying sheaves unchanged ([lem-weil-pbc-module-sheaves-colimits-forgetful]); in particular it detects isomorphisms on cohomology. No faithfulness of restriction on derived morphisms is needed. Therefore the étale comparison, and hence the pro-étale comparison in step 5, is invertible. This works even when $B$ has infinite projective dimension over $A$.",
    "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sf-projection-finite-constant",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings: relative cohomological-dimension projection argument; repair of the absolute-dimension inference"
+   }
+  },
+  {
+   "text": "For a bounded complex $F$ of finite free condensed $\\Lambda$-modules, put $F_Z=p_Z^*F$. The monoidal natural isomorphism of [sk-def-sfb-pullback-from-point-comp] identifies $f^*F_Y$ with $F_X$: its compatibility with the action map $\\Lambda\\otimes F\\to F$ makes it module-linear, and naturality makes it commute with the differentials. Apply the exact natural projection transformation of [lem-weil-pbc-ringed-projection-mate-exact] to the second variable $F_Y$. It is the identity for $F=\\Lambda$, hence an isomorphism for every finite direct sum of shifts of $\\Lambda$. Its compatibility with triangles, including connecting maps, is explicitly part of the cited node. Build $F$ by the successive brutal truncation triangles, adding its single finite-free terms one at a time. Induction on the number of nonzero terms and [lem-sf-triangle-morphism-iso] prove the projection is an isomorphism for $F$. By [sk-prop-sfb-cartesian-coefficients](2), for $\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$, the second coefficient sheaf is finite free over the first on every scheme. For these two maps, apply the same projection transformation directly to $P=\\Lambda'_Y$ in degree zero. Choose a finite-free basis on $Y$, so $P\\simeq\\Lambda_Y^{\\oplus r}$; pull back this basis to identify $f^*P\\simeq\\Lambda'_X$ using [sk-prop-sfb-cartesian-coefficients](1). Naturality with the $r$ summand inclusions identifies its projection map with $r$ copies of the unit-coefficient identity. It is therefore invertible, and step 3 proves these cases of $\\gamma$. This uses finite freeness of the coefficient sheaf on $Y$, exactly as stated in the cited node.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso",
     "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite free and finite-complex coefficient extensions"
+   }
   },
   {
-   "text": "*$\\mathcal O_E\\to E$.* By [sk-prop-sfb-qlbar-colimit-x], $E_X=\\varinjlim(\\mathcal O_{E,X}\\xrightarrow{\\ell}\\mathcal O_{E,X}\\xrightarrow{\\ell}\\cdots)$,\nwhich is flat over $\\mathcal O_{E,X}$. So $K_E$ is represented by the termwise colimit of\n$K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$ for a bounded representative $K$; these\ncomplexes vanish below a common degree. By [sk-cor-pe-bounded-continuity], $R^qf_*$\ncommutes with this filtered colimit, so\n$\\mathcal H^q(Rf_*(K_E))=\\varinjlim(\\mathcal H^qRf_*K\\xrightarrow{\\ell}\\cdots)=\\mathcal H^q((Rf_*K)_E)$, and\nthe identification is induced by $\\gamma$ (which is compatible with the transition\nmaps). Hence $\\gamma$ is an isomorphism.",
+   "text": "For a listed continuous $\\mathcal O_E\\to A$ with $A$ finite, put $O=\\mathcal O_E$. Continuity and discreteness imply $\\pi_E^n A=0$ for some $n\\ge1$. The ring $O$ is a DVR, in particular a PID, by [lem-weil-l-adic-extension-integers-dvr], and is Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Choose finitely many generators of the finite $O$-module $A$ and a surjection $O^r\\to A$. Its kernel $P$ is finitely generated by [lem-weil-pbc-noetherian-submodule-finite] and is torsion-free as a submodule of $O^r$, so [lem-sc-dvr-fg-torsionfree-free] makes it finite free. Thus $0\\to O^s\\xrightarrow{\\phi}O^r\\to A\\to0$ is a finite free resolution. Since $\\pi_E^nO^r\\subseteq P$, its inclusion becomes an isomorphism after passing to $E$, so $s=r$ and the matrix $\\phi$ is invertible over $E$. Its inverse matrix over $E$ is continuous, so the bijection $O^r\\to P$ is a homeomorphism onto its image with the induced topology. For every profinite $S$, a continuous map $S\\to A$ lifts to $O^r$ by choosing one lift for each of its finitely many values; a continuous map to the kernel lifts through $\\phi$ by the continuous inverse just described. Using [sk-def-sfb-condensed-ring], this proves exactness of the sequence of condensed modules, including at its left term. Pulling it back by $p_Z^*$ preserves exactness by [lem-weil-pbc-site-pullback-abelian-exact] and finite free terms by [sk-def-sfb-pullback-from-point]. The resulting two-term complex of finite free $O_Z$-modules in degrees $-1,0$ resolves $A_Z$; its only nonzero terms are in degrees $-1,0$ and are flat, so [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. The source of this precise criterion is Stacks Tag 06YQ, label lemma-bounded-flat-K-flat in sites-cohomology.tex; Tag 06YS is the distinct existence theorem for K-flat resolutions. Thus this two-term resolution computes tensoring with $A_Z$ even when $K$ is not flat. Apply step 7 to this two-term complex and step 3 to detect invertibility after restriction. This proves $O\\to A$. For the zero ring $A$, take the zero module and both sides are zero.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "sk-def-sfb-condensed-ring",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "sk-def-sfb-pullback-from-point",
+    "lem-pc-bounded-above-flat-kflat-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite presented coefficient extension: the two-term condensed free resolution; its K-flatness uses Stacks sites-cohomology.tex, Tag 06YQ, label lemma-bounded-flat-K-flat (not Tag 06YS, lemma-K-flat-resolution)."
+   }
   },
   {
-   "text": "*$E\\to\\Qlb$.* By [sk-prop-sfb-qlbar-colimit-x], $\\QbarX=\\varinjlim_FF_X$ over the finite\nextensions $F/E$ in $\\Qlb$, a filtered colimit of finite free $E_X$-modules. So\n$K_{\\Qlb}=\\varinjlim_FK_F$ termwise, with a common lower bound. Combine\n[sk-cor-pe-bounded-continuity] with the case $E\\to F$ treated above.",
+   "text": "We record explicitly the colimit calculation used for the last two coefficient maps. By [lem-weil-pbc-module-sheaves-colimits-forgetful], module colimits and their underlying sheaf colimits agree. By [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], filtered colimits of these modules are exact. If $S_Z=\\varinjlim_i P_{i,Z}$ with each $P_{i,Z}$ finite free over $R_Z$, then $S_Z\\otimes_{R_Z}M=\\varinjlim_i(P_{i,Z}\\otimes_{R_Z}M)$ by the balanced-coequalizer construction in [sk-def-sfb-change-of-scalars]: an $R_Z$-balanced bilinear map out of $(\\varinjlim_iP_{i,Z})\\times M$ is exactly a compatible family of balanced bilinear maps out of $P_{i,Z}\\times M$. The tensor universal property therefore gives the displayed isomorphism, with each colimit coprojection corresponding to its tensor with $M$. Each functor on the right is exact, so their filtered colimit is exact: $S_Z$ is flat. Consequently ordinary termwise tensor with $S_Z$ sends quasi-isomorphisms to quasi-isomorphisms and computes derived scalar extension, by its K-flat definition [sk-def-sfb-derived-extension-of-scalars]. It also commutes with cohomology, as does the termwise filtered colimit. To apply bounded continuity, choose a representative $C$ of $K$ and a degree $a$ below its cohomology; replace it by the good lower truncation, with $\\operatorname{coker}(d^{a-1})$ in degree $a$ and zero below $a$. The map to this truncation is a quasi-isomorphism because its cohomology agrees in every degree. Tensoring its terms with each flat $P_{i,X}$ gives complexes zero below the same $a$. Thus every colimit diagram below meets the literal common lower bound required by [det-pe-bounded-continuity-direct-image].",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "det-pe-bounded-continuity-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Bounded representatives, exact filtered colimits, and flatness for the two localization cases"
+   }
+  },
+  {
+   "text": "For $O=\\mathcal O_E\\to E$, [sk-prop-sfb-qlbar-colimit-x] identifies $E_Z$ with the sequential colimit $O_Z\\xrightarrow{\\ell}O_Z\\xrightarrow{\\ell}\\cdots$, compatibly with pullback. Each term is rank-one free, so step 9 applies and $K_E$ is represented by $\\varinjlim(C\\xrightarrow{\\ell}C\\to\\cdots)$ with a common lower bound. Since $f$ is qcqs, [det-pe-bounded-continuity-direct-image] gives\n$H^q(Rf_*(K_E))\\simeq\\varinjlim(H^q(Rf_*K)\\xrightarrow{\\ell}H^q(Rf_*K)\\to\\cdots)$.\nFlatness and exactness from step 9 identify this last sheaf with $H^q((Rf_*K)_E)$. This is the map induced by $\\gamma$, not merely an abstract isomorphism: the $i$th colimit coprojection $O_Y\\to E_Y$ is the $O_Y$-linear map $x\\mapsto\\ell^{-i}x$ (with initial index $0$), and need not be a ring homomorphism, and naturality of the projection transformation [lem-weil-pbc-ringed-projection-mate-exact] makes $\\gamma$ compose with it as $Rf_*$ of the corresponding coprojection on $X$. Therefore the continuity isomorphism is $H^q(\\gamma)$ for every $q$. By [lem-weil-pbc-unbounded-derived-iso-cohomology] and the conservative restriction in step 3, $\\gamma$ is invertible.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-pe-bounded-continuity-direct-image",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Localization $\\mathcal O_E\\to E$: canonical map on every cohomology sheaf"
+   }
+  },
+  {
+   "text": "For $E\\to\\overline{\\mathbf Q}_\\ell$, [sk-prop-sfb-qlbar-colimit-x] presents the target coefficient sheaf as the filtered colimit of the $F_Z$ for finite extensions $F/E$ inside $\\overline{\\mathbf Q}_\\ell$. Restricting its original index of all finite extensions of $\\mathbf Q_\\ell$ to those containing $E$ is cofinal: any finite extension is contained in its compositum with $E$, still finite. By [sk-prop-sfb-cartesian-coefficients](2), each $F_Z$ is finite free over $E_Z$. Use the representative $C$ of step 9, zero below the fixed degree $a$; $C_F$ is termwise a finite sum of $C$, so the complexes $C_F$ have a common lower bound. The case $E\\to F$ in step 7 and [det-pe-bounded-continuity-direct-image] give\n$H^q((Rf_*K)_{\\overline{\\mathbf Q}_\\ell})\\simeq\\varinjlim_F H^q((Rf_*K)_F)\\xrightarrow{\\varinjlim H^q(\\gamma_F)}\\varinjlim_FH^q(Rf_*K_F)\\simeq H^q(Rf_*(K_{\\overline{\\mathbf Q}_\\ell}))$.\nThe middle maps are isomorphisms. For an inclusion $F\\subseteq G$, the square of these maps commutes by naturality of the projection transformation in its coefficient complex [lem-weil-pbc-ringed-projection-mate-exact]. For the maps $F_Z\\to\\overline{\\mathbf Q}_{\\ell,Z}$ the same naturality identifies the displayed colimit map with $H^q(\\gamma)$. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] and step 3 prove this last case. Together with step 4 and the formal properties of steps 1–2, this finishes both clauses.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-pe-bounded-continuity-direct-image",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Algebraic-closure coefficient extension: compatible filtered-colimit comparison"
+   }
   }
  ],
  "proof_deps": [
-  "det-prop-scalar-six-ctf",
   "det-prop-scalar-six-pullback",
+  "def-sfb-module-derived-pushpull-adjunction",
   "sk-prop-sfb-cartesian-coefficients",
-  "sk-prop-sfb-qlbar-colimit-x"
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "sk-def-sfb-coefficient-change",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "sk-def-sfb-dc-setting",
+  "det-thm-sf-ctf-stability-direct-images",
+  "det-prop-scalar-six-ctf",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sf-projection-finite-constant",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "sk-def-sfb-pullback-from-point-comp",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "det-pe-bounded-continuity-direct-image",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties; preservation; finite rings; finite free and finitely presented extensions; localization; algebraic closure. Finite-ring argument repaired using the relative dimension of f and lem-sf-projection-finite-constant."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(lowerStar|pushforward)|((lowerStar|pushforward).*[eE]xtendScalars)|scalar.*direct image",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"extendScalars\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with derived pushforward for constructible proetale sheaves",
+   "results": "SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; PresheafOfModules.pushforward₀_obj; PresheafOfModules.pushforward_obj_map_apply; PresheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforward_obj_val; PresheafOfModules.pushforward_obj_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficients commutes with derived direct image of constructible finite Tor amplitude pro-etale sheaves",
+   "results": "PresheafOfModules.Derivation.d_map; KaehlerDifferential.isBaseChange_of_formallyEtale; PresheafOfModules.Derivation'.mk_app; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|extendScalars.*[iI]so",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula derived pushforward tensor with constant coefficient ring change for sheaves of modules",
+   "results": "SheafOfModules.pushforwardCongr; SheafOfModules.pushforward_map_val; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforwardSections; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.pushforwardSections_coe; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|def pushforwardCongr|def extendScalars|def sheafExtendScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned definitions of underived pushforward, change of rings, or unrelated etale algebra; none states derived coefficient comparison for constructible pro-etale complexes with all listed coefficients and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|[Ff]ormula.*projection|[Ii]sIso.*[Pp]ushforward.*[Tt]ensor|[Tt]ensor.*[Pp]ushforward",
+   "results": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; Mathlib/RingTheory/WittVector/Identities.lean; Mathlib/RingTheory/WittVector/Identities.lean; Mathlib/Analysis/InnerProductSpace/Projection/Basic.lean; Mathlib/Analysis/InnerProductSpace/Projection/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: five hits concern manifold connections, Witt vectors, and orthogonal projection, rather than sheaf direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi, the projection formula with a finite constant module and bounded constructible complex is an isomorphism",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; SheafOfModules.bijective_pushforwardSections; LightCondensed.ihomPoints_symm_comp; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; LightCondMod.LocallyConstant.functorIsoDiscrete; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: the hits concern underived unit pullbacks, discrete condensed objects, and internal projectivity; none states derived direct-image coefficient comparison with these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward of a sheaf complex commutes with tensoring by a perfect complex of constant modules",
+   "results": "SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardComp; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforward_assoc; SheafOfModules.pushforward_map_val; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are underived sheaf-module pushforward comparisons and composition; the source grep has no hits in Algebra/Category/ModuleCat. None states this derived ordinary-direct-image coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|[iI]sIso.*[eE]xtendScalars|[eE]xtendScalars.*[iI]sIso",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are underived sheaf-module pushforward comparisons and composition; the source grep has no hits in Algebra/Category/ModuleCat. None states this derived ordinary-direct-image coefficient comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -97,5 +347,70 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-scalar-six"
+ "unit": "sk-prop-scalar-six",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-scalar-six-direct-image",
+  "worker": "stage1",
+  "summary": "Expanded the imported argument into explicit mate identities, conservative ring-change comparison, finite-ring relative projection formula, two-term condensed free resolution, and canonical bounded-below colimit calculations. Reused existing nodes only; clarified the standing setting and coefficient list inline. Replaced missing parent IDs by actual detail statements. No Lean written or compiled. Second reading: made étale/pro-étale mate normalization explicit, cited bounded-below étale restriction adjunction identities with their bounds verified, and applied finite freeness directly on Y. Returned-delivery repair: checked the current cited definitions and corrected the K-flat criterion bibliography locally in step 8 to Stacks 06YQ (lemma-bounded-flat-K-flat), without changing the cited dependency file. Current independent second reading: made the balanced tensor/colimit universal-property argument explicit and corrected the common representative wording to bounded below; no statement or dependency changed. Repair retry 2026-10-17: compared the refused immutable snapshot with all 45 current immediate dependencies, re-read changed statements and proofs, and refreshed the coefficient-change commuting-square quotation. Made the localization coprojections explicitly O-linear maps x ↦ ell^(-i)x, rather than calling them coefficient ring maps. The external K-flat node remains untouched. Current repair revalidation: re-read the revised Cartesian coefficient theorem against steps 1, 3, 7 and 11; retained the transported-action natural isomorphism and narrowed its four verbatim quotations to the clauses actually used. All 58 citation pairs match the current DAG; no Tate-twist assertion is used.",
+  "blueprint": "Steps 1–3 realize Formal properties; step 4 Preservation; steps 5–6 Finite rings; steps 7–8 Finite free and finitely presented coefficient extensions; steps 9–10 localization; step 11 algebraic-closure extension. Current unit sk-prop-scalar-six, steps 3 and 4, supplies the direct-image route. The absolute-cd inference in unit step 3 is repaired by the documented relative-cd argument. The chapter and unit metadata are now present on the current base and are preserved by the delivery tool.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Generic finite-presentation constant-coefficient projection formula; repairs the absolute-cd gap while retaining the finite-ring projection route."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Only its relative finite-cohomological-dimension clause (1) is used, valid over the arbitrary standing field."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "General Cartesian ring-sheaf restriction and derived-adjunction normalization; does not require flat coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General mate pasting for scheme and coefficient composition."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "General exact, shift-compatible projection transformation with unit normalization."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Generic finite torsion-free DVR module freeness for the kernel of a coefficient presentation."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic bounded-below étale restriction/direct-image comparison for arbitrary coefficient maps, used only after bounding both inputs."
+   },
+   {
+    "node": "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "why": "Generic exact identities for the canonical restricted étale units and counits; identify the actual finite-ring projection map."
+   }
+  ],
+  "source_error": {
+   "place": "Current blueprint direct-image proof, Finite rings paragraph invoking Stacks 0F12 on V and X_V.",
+   "failed_inference": "Finite type over the arbitrary standing field does not imply finite absolute ell-cohomological dimension. Stacks 0F10(1) bounds the relative dimension of f; its absolute bound has an extra finite-cd(field) hypothesis, absent here. Thus applying the global-sections projection lemma 0F12 with an absolute bound is unjustified.",
+   "counterexample": "For k = algebraic_closure(F_p)(t_1,t_2,...) and ell unequal to p, Kummer symbols in arbitrarily many variables survive successive variable-adic residue maps, so cd_ell(k) is infinite. Even V = Spec(k) is not bounded in absolute ell-cohomological dimension.",
+   "replacement": "Keep the finite-ring projection-formula route, applying the existing relative projection lemma lem-sf-projection-finite-constant with the uniform relative bound from lem-kun-0f10(1). Its finitely presented constant module B need not be flat or have finite projective dimension."
+  }
+ },
+ "tool_uses": [
+  "lem-sf-projection-finite-constant",
+  "lem-kun-0f10",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-f07875c6f",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-f07875c6f (reviewer sub-agent of L); spot-checked: I read the item in full and all 50 cited node statements, plus the main-20261015 statement, proof, section (_section.md) and unit, and the Stacks sources: 0F10 (lemma-finite-cd), 0F12 (lemma-pull-out-constant-mod-n), the definition of cd, and 06YQ (lemma-bounded-flat-K-flat, checked against tags/tags). The statement is faithful. Admissible A means a finite ring killed by a power of ell (sk-def-localizing-closure). gamma is the source's unit/pullback/counit composite on D(X_proet, Lambda_X). The added counit equation is just the mate's defining transpose. Steps 1-2: I re-derived the mate formula, both pasting laws and both transposes; they are correct. Step 3: Cartesian ring-sheaf restriction identifies the restricted gamma with the projection map, without any flatness assumption. Step 4: finite type and separatedness follow from the diagonal base change, and Dctf holds at every coefficient stage. Step 5: K' and K'_B are bounded, so the bounded-below etale/pro-etale comparison applies, and the composite is correctly identified with the pro-etale map. Step 6: the source error is real, because 0F12 needs cd(X) finite and the standing field is arbitrary (e.g. Fpbar(t1,t2,...) has infinite cd_ell). The repair uses relative cd from 0F10(1), which needs no assumption on cd(K), together with lem-sf-projection-finite-constant (A Noetherian, K' in D^-, B finitely presented, one uniform bound), and it correctly identifies the actual map. Steps 7-8: the finite-free induction is sound; for O_E to A the kernel of the presentation is free over the DVR, the inverse matrix over E is continuous, and lifts exist on finite clopen pieces, so the two-term resolution is exact and K-flat by 06YQ. Steps 9-11: the coefficient sheaves are flat as filtered colimits, there is one common lower bound, the localization coprojections are module maps, naturality identifies the colimit maps with H^q(gamma), and the finite subextensions containing E are cofinal. proof_deps equals the union of step uses, there is no cycle, nothing cites SGA, and there are no new nodes. I checked duplicate candidates (det-sfb-coefficient-comparisons-direct-image, lem-coef-finite-direct-image); neither is a duplicate. Edge cases checked: K=0, empty X, zero rings, identity maps and F=E, the nonflat map Z/ell^2 to Z/ell, and a field of infinite cd. Accepted tool uses: the 8 the worker declared, plus 8 generic off-route ones that were not declared (listed in review.md). I made no fixes."
+ }
 }
