@@ -30,9 +30,97 @@
   "def-coef-infinity-relative-join",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unwind the pullback in [def-coef-infinity-relative-join]. Over a monotone parameter $\\epsilon:[n]\\to[1]$, put $I=\\epsilon^{-1}(0)$ and $J_1=\\epsilon^{-1}(1)$. If both blocks are nonempty, an $n$-simplex of $E_R$ is exactly $(\\epsilon,\\sigma,\\tau)$ with $\\sigma\\in\\mathcal Y_n$, $\\tau:\\Delta^{J_1}\\to\\mathcal X$, and $\\sigma|_{J_1}=R\\tau$: the first join factor is forced to be $\\sigma|_I$. Restriction along $\\alpha$ restricts $\\sigma$ and restricts $\\tau$ to the inverse image of $J_1$; an empty final block discards $\\tau$. For $\\epsilon=0$ the data are just $\\sigma\\in\\mathcal Y_n$; for $\\epsilon=1$ they are just $\\tau\\in\\mathcal X_n$ with $\\sigma=R\\tau$. Thus the fibers are exactly $\\mathcal Y$ and $\\mathcal X$, and they are full, since a monotone parameter all of whose vertices have one value is constant. The second pullback projection defines a simplicial map $q:E_R\\to\\mathcal Y$, given by $q(\\epsilon,\\sigma,\\tau)=\\sigma$, with $q|_{\\mathcal Y}=1$ and $q|_{\\mathcal X}=R$. The induced-map formula in the same definition gives $h(\\epsilon,\\xi)=(\\epsilon,R\\xi,\\xi|_{J_1})$ in the mixed case and the corresponding pure-factor formulas. It commutes with every restriction, has endpoints $R,1_{\\mathcal X}$, and sends the interval at $x$ to the mixed edge $e_x:Rx\\to x$ whose $\\mathcal Y$ coordinate is the degenerate identity at $Rx$.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0242",
+    "place": "Construction 5.2.3.1, specialized degreewise coordinates, inclusions and induced maps; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  },
+  {
+   "text": "We verify the inner-horn lifting property of $p$ directly. Fix $n\\geq2$, $0<i<n$, a parameter $\\epsilon:\\Delta^n\\to\\Delta^1$, and a lift of its $i$th inner horn. If $\\epsilon$ is constant, fill the horn in $\\mathcal Y$ or $\\mathcal X$, respectively. Otherwise its initial block $I$ and final block $J_1$ are nonempty. There is $j\\in I$ with $j\\ne i$: if $I$ is a singleton it is $\\{0\\}$, whereas $i>0$. The included face $d_j$ contains the whole final block and supplies a simplex $\\tau:\\Delta^{J_1}\\to\\mathcal X$. Any other included face deleting an initial vertex supplies the same $\\tau$, because its intersection with $d_j$ contains $J_1$; an included face deleting a final vertex supplies the corresponding face of $\\tau$, by compatibility on its intersection with $d_j$. Project the horn by $q$ to $\\mathcal Y$ and fill it there by $\\sigma\\in\\mathcal Y_n$. The face $\\Delta^{J_1}$ lies in $d_j$, so $\\sigma|_{J_1}=R\\tau$ is already forced by the horn. The coordinates of step 1 therefore give a filler $(\\epsilon,\\sigma,\\tau)$ in $E_R$ with every prescribed face. This proves that $p$ is an inner fibration in [def-coef-infinity-fibrations]. Finally $\\Delta^1$ is a quasicategory directly from its definition: an inner $2$-horn gives an ordered chain of its three vertex labels, and for $n\\geq3$ every edge belongs to the horn, so all vertex labels are ordered; these labels determine the extending monotone map uniquely. Projecting an arbitrary inner horn in $E_R$ to this extension and using the lifting property just proved shows that $E_R$ is a quasicategory.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/024K",
+    "place": "Variant 5.2.3.19, explicit verification of the inner fibration assertion; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal X$. In a cartesian-edge test for $e_x$ as defined in [def-coef-infinity-fibrations], the last edge of $\\Lambda_n^n$, $n\\geq2$, maps to $e_x$. The bottom simplex of $\\Delta^1$ must therefore have labels $0,\\ldots,0,1$: its last two labels are $0,1$ and monotonicity forces all earlier labels to be $0$. Thus its final block is the singleton $\\{n\\}$, and its $\\mathcal X$ coordinate is fixed to be $x$. Project the given horn along $q$. It is an outer horn $\\Lambda_n^n\\to\\mathcal Y$ whose final edge is $1_{Rx}$. A degenerate identity is an equivalence, with itself as inverse and constant $2$-simplices as the two witnesses. The final-horn clause of [lem-cbc-equivalence-outer-horn-filling], applied to the quasicategory $\\mathcal Y$, extends this projected horn to $\\sigma:\\Delta^n\\to\\mathcal Y$. Its last vertex remains $Rx$, so $(\\epsilon,\\sigma,x)$ is a simplex of $E_R$; its faces are exactly those prescribed by the horn. It lies over the specified parameter. This proves all required outer-horn lifts and hence that each $e_x$ is $p$-cartesian.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "Theorem 4.4.2.6, final outer-horn extension for an equivalence, applied to the coordinates of Variant 5.2.3.19; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  },
+  {
+   "text": "The only edges of $\\Delta^1$ are $1_0$, $1_1$, and $0\\to1$. An edge $0\\to1$ with a specified target $x$ in the fiber over $1$ has the cartesian lift $e_x$ of step 3. For a constant base edge and any target $z\\in E_R$, use $1_z$. It is an equivalence by the degenerate inverse-triangle witnesses. Apply the final-horn clause of [lem-cbc-inner-fibration-equivalence-outer-horn-lift] to $p:E_R\\to\\Delta^1$, which is an inner fibration between quasicategories by step 2, with the given bottom simplex in each lifting problem. It gives all the outer-horn lifts for $1_z$ over that bottom simplex. Therefore $1_z$ is $p$-cartesian. These cases give a cartesian lift for every base edge and target, so $p$ is a cartesian fibration by [def-coef-infinity-fibrations]. Together with step 1 this proves the asserted realization and its transport witness $h$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, equivalence edges are cartesian for an inner fibration; completion of Variant 5.2.3.19; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  },
+  {
+   "text": "Compute right-pinched mapping simplices using [def-cbc-enhanced-diagrams-cones]. An $n$-simplex from $a$ to $b$ is an $(n+1)$-simplex whose whole initial face is constant at $a$ and whose last vertex is $b$. For two endpoints in the same fiber, monotonicity makes its interval parameter constant; the full-fiber calculation in step 1 gives exactly the mapping simplices in $\\mathcal Y$ or $\\mathcal X$. For endpoints $y\\in\\mathcal Y$, $x\\in\\mathcal X$, the parameter has $n+1$ zeros followed by one $1$, and the final-block coordinate is just $x$. Thus $q$ identifies such a mapping simplex bijectively with $\\sigma:\\Delta^{n+1}\\to\\mathcal Y$ having constant initial face $y$ and final vertex $Rx$. Its inverse sends $\\sigma$ to $(\\epsilon,\\sigma,x)$. Both formulas commute with every mapping-space operator, which restricts the initial block and retains the last vertex. Hence this is the asserted simplicial isomorphism $\\operatorname{Map}_{E_R}(y,x)\\cong\\operatorname{Map}_{\\mathcal Y}(y,Rx)$. For endpoints $x\\in\\mathcal X$, $y\\in\\mathcal Y$, even an edge would require a monotone map with labels $1,0$; there is no simplex in any mapping degree. This gives the empty simplicial set and completes all four formulas. In degree zero the mixed isomorphism takes $f$ to $u=qf$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/024F",
+    "place": "Remark 5.2.3.14, right-pinched mapping spaces, verified degreewise rather than invoking the remark as a lemma; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  },
+  {
+   "text": "It remains to identify composition, including its homotopies. Write $M$ for right-pinched mapping spaces and $U,V,\\theta,\\ell,j$ for the arrow and triangle models in [lem-coef-infinity-mapping-composition] and [lem-coef-infinity-pinch-comparison]. For any simplicial functor $T$, postcomposition gives $T_M,T_U,T_V$. Restriction of a triangle commutes exactly with postcomposition, so $\\theta T_V=(T_U\\times T_U)\\theta$ and $\\ell T_V=T_U\\ell$ (with the appropriate endpoint subscripts). The naturality of the specified pinch map gives $jT_M=T_Uj$. Substitute these three identities into the characterization $[j]c=[\\ell][\\theta]^{-1}([j]\\times[j])$ from the composition node and cancel the invertible $[j]$ and $[\\theta]$. This gives $[T_M]c=c([T_M]\\times[T_M])$ in simplicial homotopy classes. Apply it to $T=q$ and the vertices $(y,x,z)$ with $x,z\\in\\mathcal X$. Step 5 makes the maps $q_M:M_{E_R}(y,x)\\to M_{\\mathcal Y}(y,Rx)$ and $q_M:M_{E_R}(y,z)\\to M_{\\mathcal Y}(y,Rz)$ the displayed isomorphisms, while on $M_{\\mathcal X}(x,z)$ it is the map induced by $R$. Restrict the second input to the vertex $f$, whose image is $u$. The resulting identity is precisely $v\\mapsto R(v)\\circ u$ for precomposition by $f$. The equality is a homotopy of maps of the entire mapping spaces, not merely equality on components. Moreover the identities with $T_V$ hold for every simplex parameter, and commute with faces and degeneracies; applying $q$ to the parameterized triangle witnesses, and to the associative and unital homotopies supplied by the composition node, preserves those witnesses and homotopies. This supplies the claimed coherent composition homotopies under the displayed isomorphisms.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9 and Propositions 4.6.8.11–12; the explicit functoriality calculation for the realization of Variant 5.2.3.19; read online 2026-10-17, not archived; the detailed argument here is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/024K",
+  "place": "Variant 5.2.3.19 with Constructions 5.2.3.1 and Remark 5.2.3.14: explicit coordinate and horn proof, followed by naturality of mapping composition. Online sources read; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +142,73 @@
    "results": "{\"t\": \"2026-10-16T19:58:11Z\", \"tool\": \"grep\", \"query\": \"relativeJoin|relative.join|cartesian.*transport\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: read candidate signatures; ordinary CategoryTheory fibered categories/adjunctions and the nerve/hoFunctor adjunction do not state this quasicategorical assertion. QCat.bicategory (StrictBicategory.lean:49-70) only constructs a bicategory; no interval transport theorem. AlgebraicTopology grep has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative join of infinity categories realizes a functor as a cartesian fibration over the interval",
+   "results": "{\"t\": \"2026-10-16T21:37:08Z\", \"tool\": \"leanfinder\", \"query\": \"The relative join of infinity categories realizes a functor as a cartesian fibration over the interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.compFunctor\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Join.instFinalInclRightOfIsConnected\"], \"digest\": \"52f9b2258839a5cd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categorical joins, strict Segal right Kan extensions, simplicial thickening, or model-category cylinders; none gives the relative join cartesian fibration with the four pinched mapping-space identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"horn\"",
+   "results": "{\"t\": \"2026-10-16T21:37:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"a7d5b141fb3f011c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.Quasicategory.hornFilling and hornFilling' (Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:39-50) are the defining inner-horn filler, not the relative-join realization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeJoin|relative.join|cartesian.*transport",
+   "results": "{\"t\": \"2026-10-16T21:37:09Z\", \"tool\": \"grep\", \"query\": \"relativeJoin|relative.join|cartesian.*transport\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits for the queried simplicial relative-join/transport terms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of quasicategories gives a cartesian mapping cylinder with specified mapping spaces",
+   "results": "{\"t\": \"2026-10-16T21:37:09Z\", \"tool\": \"leansearch\", \"query\": \"A functor of quasicategories gives a cartesian mapping cylinder with specified mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HomotopicalAlgebra.Precylinder.I\", \"CategoryTheory.Functor.IsCartesian.mk\", \"CategoryTheory.Functor.IsCartesian\", \"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.Functor.of\", \"CategoryTheory.Functor.IsStronglyCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.mk\"], \"digest\": \"91815fa1a8e9edf5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: candidate IsCartesian/IsStronglyCartesian source read at Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:47-86; these are ordinary-category predicates and do not state the simplicial construction. Precylinder is an unrelated model-category object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping simplicial sets of a simplicial relative join and cartesian edges in the mapping cylinder of an infinity functor",
+   "results": "{\"t\": \"2026-10-16T21:37:51Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping simplicial sets of a simplicial relative join and cartesian edges in the mapping cylinder of an infinity functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.trans_i₀\", \"HomotopicalAlgebra.Cylinder.trans_i₁\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₁\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₀\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.Precylinder.inr_i\", \"HomotopicalAlgebra.Cylinder.trans_π\", \"SSet.ι₀_comp\"], \"digest\": \"b73d4d08ee7f5efb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categorical joins, strict Segal right Kan extensions, simplicial thickening, or model-category cylinders; none gives the relative join cartesian fibration with the four pinched mapping-space identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeJoin|relative_join|relative join|mappingCylinder",
+   "results": "{\"t\": \"2026-10-16T21:37:51Z\", \"tool\": \"grep\", \"query\": \"relativeJoin|relative_join|relative join|mappingCylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits for the queried simplicial relative-join/transport terms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cartesian\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-16T21:37:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"cartesian\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits for the queried simplicial relative-join/transport terms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial mapping cylinder for a quasicategory functor is fibered over the nerve of the ordered two point category",
+   "results": "{\"t\": \"2026-10-16T21:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial mapping cylinder for a quasicategory functor is fibered over the nerve of the ordered two point category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"02157779fe5a02ef\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight signatures concern maps into ordinary nerves or 2-truncated ordinary-category nerves. Read NerveAdjunction.lean:284-304 (functorEquiv); it identifies functors out of a homotopy category with maps into an ordinary nerve, and does not construct a cartesian relative join for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "CartesianFibration|cartesianFibration|relativeJoin|mappingCylinder|MappingCylinder",
+   "results": "{\"t\": \"2026-10-16T21:49:34Z\", \"tool\": \"grep\", \"query\": \"CartesianFibration|cartesianFibration|relativeJoin|mappingCylinder|MappingCylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent case-insensitive search throughout Mathlib returned zero hits for the construction and fibration names."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-local-adjoint-criterion",
@@ -65,5 +216,34 @@
   "group": "NS"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-join-cartesian-realization",
+  "worker": "stage1",
+  "summary": "Gave a six-step proof from the relative-join coordinates. Verified mixed inner horns directly, established the displayed edges by final outer-horn filling along identities, and supplied identity lifts for constant base arrows. Computed all right-pinched mapping simplices degreewise and checked precomposition by the natural arrow/triangle models. Reused existing generic outer-horn and pinch-comparison nodes; no new nodes, no statement change, no attachment.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent assembly of the coefficient adjunction beneath the local universal-arrow criterion; the same exact ancestry and via list are retained. The six steps spell out the interval correspondence and mapping-space computation used by lem-coef-infinity-local-adjoint-criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic final outer-horn filling along an equivalence in a quasicategory, used for the identity in Y; the biduality unit does not state this foundational simplicial tool."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic relative final outer-horn lifting along an equivalence for an inner fibration, used for identity lifts over constant base arrows; the biduality unit supplies no such lifting lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-b4375ff99",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-b4375ff99 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement and all six steps, every cited node's statement (relative-join, fibrations and enhanced-diagrams definitions; both outer-horn lemmas; mapping-composition; pinch-comparison), the unit record sk-prop-sf-biduality-general, and the user lem-coef-infinity-local-adjoint-criterion. I read Kerodon 024K online. It has G:D->C with no further hypothesis, C star_C D -> Delta^1 cartesian, and h exhibits G as contravariant transport. This matches the item with G=R, C=Y, D=X and the same orientation. I redid the steps. Step 1: the coordinates (eps,sigma,tau) with sigma|J1 = R tau. Step 2: an included face d_j with j in I and j != i always exists (i > 0) and contains the whole final block J1; I checked the n=2 horns by hand. Step 3: the last outer horn forces labels 0..0,1, so tau = x, and the projected horn is filled along 1_{Rx} by the final-horn clause. Step 4: identity lifts over constant edges via the relative lemma, which needs the inner fibration from step 2. Step 5: the right-pinched mapping spaces are isomorphisms degreewise, and Map(x,y) is empty. Step 6: I verified the naturality algebra, [j']T_M = T_U[j] with strict theta and l, then cancelling j', and the restriction to f gives v -> R(v) o u. Small cases checked: X empty, Y empty, points, discrete and ordinary nerves. There are no new nodes and no duplicate (I checked fiberwise-relative-join, arrow-join-geometry, relative-kan-existence and straightening). I accept both tool uses of the sk-prop-sf-cbc outer-horn lemmas. No SGA source, no fixes."
+ }
 }

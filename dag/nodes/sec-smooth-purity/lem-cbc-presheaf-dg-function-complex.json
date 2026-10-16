@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Current main-20261015 proof opening 'Choose a compactification c=(j,p)': arbitrary-site descent foundation for the affine-local compactification repair; bounded-below hypersheaf model step 4: derived mapping calculations and recognition of local objects, before any sheaf-derived-category comparison.",
+   "place": "Current main-20261015 proof opening 'Choose a compactification c=(j,p)': the arbitrary-site derived mapping calculation used in the affine-local compactification repair; bounded-below hypersheaf model step 4 identifies derived Hom and coherent mapping spaces before any sheaf-derived-category comparison.",
    "via": [
     "lem-cbc-hyperdescent-local-orthogonality",
     "lem-cbc-bounded-below-hypersheaf-model",
@@ -26,9 +26,88 @@
   "def-weil-abstract-derived-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a presheaf $F$, evaluation on the generator $[\\mathrm{id}_T]$ identifies $\\operatorname{Hom}_{\\mathcal P}(L_T,F)$ with $F(T)$: the inverse sends $x\\in F(T)$ to the map $[u:V\\to T]\\mapsto F(u)(x)$, extended $\\Lambda$-linearly. The two composites are identities by naturality. Consequently $L_T$ has the lifting property against an objectwise surjection, since $x$ lifts in $F(T)$. A map from $\\bigoplus_iL_{T_i}$ is a family of such elements; lift each independently and use the coproduct property. Choice and smallness are allowed by the fixed universes. Hence every term of $A$ is projective. This proves the required free-presheaf assertion without a new lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Example 3.8, printed p. 10; explicit free-module evaluation and lifting argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-bounded-above-projective-kprojective] to the abelian category $\\mathcal P$ and to $A$. Its projective-term hypothesis was proved in Step 1, and boundedness above is a hypothesis of the item. Thus the ordinary Hom complex from $A$ into every objectwise acyclic complex is acyclic. In this presheaf category acyclicity is objectwise because kernels and cokernels are objectwise. This is precisely homotopical projectivity, and imposes no boundedness on the target.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 3.10, printed p. 10 (chain convention); existing Mathlib K-projective criterion in cochain convention."
+   }
+  },
+  {
+   "text": "Form the small dg category $\\mathcal B$ with the objects of $\\mathcal C$ and $\\mathcal B(U,V)=\\Lambda[\\operatorname{Hom}_{\\mathcal C}(U,V)]$ in degree zero, viewed over $\\mathbf Z$, with bilinear composition. Right dg $\\mathcal B$-modules are exactly presheaves of cochain complexes of $\\Lambda$-modules: the action of $\\lambda[\\mathrm{id}_U]$ gives the scalar action and the action of $[u:U\\to V]$ gives restriction; the module axioms give their commutation and functoriality. Conversely these formulas define the action. Graded module maps are exactly graded $\\Lambda$-linear presheaf maps, so their degree $r$ term is $\\prod_p\\operatorname{Hom}_{\\mathcal P}(X^p,G^{p+r})$ with differential $d_Gh-(-1)^rhd_X$. Apply [lem-coef-dg-module-projective-resolution] to $\\mathcal B$: it gives homotopically projective replacements $QX\\to X$ for arbitrary $X$, the dg presentation of the enhanced localization, and the derived Hom model $\\underline{\\operatorname{Hom}}_{\\mathcal B}(QX,G)$. For the homotopically projective $A$ of Step 2 its stated comparison permits $A$ itself as source. This proves the first clause, including naturality in actual maps between the specified sources and in $G$, by the comparison theorem's composition compatibility.",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Lemma 3.16 and Corollary 3.17, printed p. 12; dg-module presentation supplied by the cited generic theorem."
+   }
+  },
+  {
+   "text": "For arbitrary $X,G$, take homotopically projective replacements $QX,QG$ from Step 3. The full dg category of these projectives presents $\\mathbf D(\\mathcal P)$ by [lem-coef-dg-module-projective-resolution]. Apply the generic simplicial realization of [lem-cbc-dold-kan-homology] to this dg category (it is small after enlarging the universe). Its mapping simplicial modules are $S(E)$ with $E=\\underline{\\operatorname{Hom}}_{\\mathcal B}(QX,QG)$; that realization is locally Kan and realizes the underlying enhanced category. By [lem-coef-coherent-nerve-comparison], these mapping simplicial sets represent the right-pinched mapping spaces of its coherent nerve, naturally and compatibly with composition. Finally $QG\\to G$ induces a quasi-isomorphism on Hom complexes from $QX$: its cone is the Hom complex into the acyclic cone of $QG\\to G$ and is acyclic by homotopical projectivity. Thus this $E$ is a model of the same derived Hom as in Step 3. Taking this Hom complex as the chosen cochain-complex model of $R\\operatorname{Hom}_{\\mathcal P}(X,G)$ gives the stated mapping-space model rather than assuming it from the homotopy-group calculation. The same representation holds for any other cochain-complex model $E'$, that is, a complex of modules over the coefficient ring $R$ ($R=\\mathbf Z$ or $\\Lambda$) isomorphic to $E$ in the derived category of [def-weil-abstract-derived-category]. Apply [lem-coef-dg-module-projective-resolution] to the one-object dg category $R$: it gives a homotopically projective $q:PE'\\to E'$, and since its Hom complexes compute the localization, the composite isomorphism $PE'\\to E'\\cong E$ in the derived category is the class of a closed degree-zero map $g:PE'\\to E$. As the cohomology functors factor through the localization, $g$ and $q$ are quasi-isomorphisms, so by the weak-equivalence criterion of [lem-cbc-dold-kan-homology] the zigzag $S(E')\\leftarrow S(PE')\\to S(E)$ consists of weak homotopy equivalences.",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution",
+    "lem-cbc-dold-kan-homology",
+    "lem-coef-coherent-nerve-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 1.3.1.13 and Proposition 1.3.1.17, printed pp. 83–85; generic dg realization and the existing coherent-nerve comparison."
+   }
+  },
+  {
+   "text": "The normalized chains of $S(E)$ are $t(E)$ by [lem-cbc-dold-kan-homology], and that node identifies its homotopy groups with $H^{-m}(E)$, including $m=0$. The degree-zero cycles in $t(E)_0$ are essential: its degree-zero homology is $Z^0(E)/d_E(E^{-1})=H^0(E)$, while its positive homology is $H^{-m}(E)$. Translation by a vertex carries that vertex to zero; composition with a fixed source map is a homomorphism of the simplicial abelian group models, so translation treats every basepoint. The natural comparisons in Step 4 identify precomposition with these maps in the enhanced homotopy theory. The weak-equivalence criterion in the same node is therefore exactly the asserted criterion on all nonpositive cohomology groups.",
+   "uses": [
+    "lem-cbc-dold-kan-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 3.14(3)–(4), printed p. 11; good truncation and translation."
+   }
+  },
+  {
+   "text": "Write the shift convention of [def-weil-abstract-derived-category] as $(X[k])^p=X^{p+k}$ and $d_{X[k]}=(-1)^kd_X$. On the ordinary Hom complexes the map $F_r:\\underline{\\operatorname{Hom}}(X[k],G)^r\\to\\underline{\\operatorname{Hom}}(X,G)[-k]^r$ is $(F_rh)^q=(-1)^{kr}h^{q-k}$. For the $d_G$ term the signs in $F_{r+1}d$ and $dF_r$ are both $(-1)^{kr+k}$; for the $hd_X$ term they are both $-(-1)^{kr+r}$. Thus $F$ is a chain isomorphism. It commutes with precomposition by a degree-zero cochain map because the scalar depends only on $k,r$. The same formula shows shifts preserve homotopical projectivity, since shifting an acyclic Hom complex preserves acyclicity. Hence $QX[k]\\to X[k]$ is an admissible replacement in Step 3; apply $F$ there to get $R\\operatorname{Hom}(X[k],G)\\simeq R\\operatorname{Hom}(X,G)[-k]$. Its compatibility with precomposition descends from the displayed equality and the composition-compatible comparison of Step 3.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; explicit Hom shift sign computation. The shift convention is also stated by the cited abstract-derived-category definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-cbc-dold-kan-homology",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1511.02828",
+  "place": "Expanded argument following Example 3.8, Fact 3.10, Fact 3.14 and Lemma 3.16 (printed pp. 10–12), with dg realization from Higher Algebra 1.3.1.12–17 and the cited existing dg-module presentation. Online sources are not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hyperdescent-local-orthogonality",
@@ -89,5 +168,34 @@
   "group": "Q30"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-presheaf-dg-function-complex",
+  "worker": "stage1",
+  "summary": "Replaced the earlier free-projective auxiliary by an explicit elementary evaluation/lifting step and the existing bounded-above K-projective Mathlib leaf. Corrected the dg reduction to the Lambda-linearization of the indexing category. One generic Dold–Kan simplicial-realization auxiliary, together with the existing coherent-nerve comparison, now supplies the missing mapping-space comparison. Wrote the actual Hom-shift sign, checked arbitrary target boundedness and replaced all citations by precise statement quotations. Item statement unchanged; corrected source page references.",
+  "blueprint": "The steps realize the main-20261015 ancestor thm-cbc-finite-level-proetale proof opening 'Choose a compactification c=(j,p)', specifically the arbitrary-site derived mapping calculation and bounded-below hypersheaf model step 4 before sheaf-derived-category comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-module-projective-resolution",
+    "why": "Generic dg-module localization presents module presheaves after Lambda-linearization and computes their derived mapping complexes; no compact-support-base-change node supplies this foundation."
+   },
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic comparison between locally Kan simplicial enrichment and right-pinched coherent-nerve mapping spaces, needed after Dold–Kan realization; no node of the compact-support-base-change unit gives this foundational comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-f5e8b889b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-f5e8b889b (reviewer sub-agent of L); spot-checked: I read the whole item and new node, every cited node statement, the unit and chapter, and the citers' steps. Only the item's Step 4 is changed. The statement is unchanged, nothing is weakened and no node is dropped. Steps 1 to 6 are sound. Step 1: evaluating at [id_T] shows each L_T is projective. Step 2: the bounded-above K-projective Mathlib leaf applies (Mathlib KProjective.lean:111-124 needs only IsStrictlyLE and projective terms), and the target can be unbounded. Step 3: I checked the Lambda-linearization by hand; right dg B-modules are presheaves of complexes of Lambda-modules, and the Hom differential matches lem-coef-dg-module-projective-resolution. Step 4 combines the projective presentation, Dold-Kan realization and the coherent-nerve comparison; the locally Kan hypothesis holds because simplicial groups are Kan. Step 5: the truncation gives H_0 = H^0 and H_m = H^{-m}. Step 6: I recomputed the shift signs (-1)^{kr} for both differential terms. One gap: the statement allows any chosen cochain model of RHom, but Step 4 proved the representation only for Hom(QX,G). I added a three-sentence zigzag argument: a homotopically projective replacement over the one-object dg category Z or Lambda, a closed degree-zero representative, and the new node's weak-equivalence criterion. def-weil-abstract-derived-category is added to Step 4's uses and was already in proof_deps. The new node lem-cbc-dold-kan-homology is correct. Stacks 019G gives only the equivalence N. The Alexander-Whitney lax structure and Higher Algebra 1.3.1.13/1.3.1.17 match the standard results; Higher Algebra and Choudhury-Gallauer are not in the local archive and are listed as WANTED. It passes B1-B9 and is generic, not a restatement of an item clause. It is not a duplicate: lem-cbc-dold-kan-hypercover-quillen and the lem-coef dg nodes state other things. I accept the declared tool_uses lem-coef-dg-module-projective-resolution and lem-coef-coherent-nerve-comparison as generic black boxes. Edge cases checked: empty and terminal C, Lambda = 0, A = 0, A = L_T[0], unbounded G, k = 0, 1, -1, and E = Lambda[m] or an acyclic two-term complex. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; review.md has the step-by-step checks.; 1 file(s) fixed by the reviewer"
+ }
 }

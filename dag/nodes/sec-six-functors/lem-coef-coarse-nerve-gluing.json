@@ -27,9 +27,130 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=A\\setminus\\{a\\}$, $B=A\\cup\\{b\\}$ and $K=G_A\\cup G_{\\{a,b\\}}\\subseteq G_B$. In every degree the two subsets intersect in the single constant word at $a$, which is $(G_{\\{a\\}})_m$. Thus their degreewise pushout is exactly $K$, compatibly with every operator. Its words are precisely those not containing both $b$ and an element of $C$. If $C$ is empty, $K=G_B$ and the assertion is the empty composite of horn attachments. Henceforth allow $C\\ne\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "A word is degenerate exactly when two adjacent entries agree: a degeneracy repeats an entry, and any adjacent repetition can be removed by that degeneracy. Compressing each maximal constant run gives a unique nondegenerate word, together with the unique monotone surjection recording its run lengths. The compressed word is also a face of the original word, obtained by selecting one position in each maximal run. Since a simplicial subset is closed under faces and degeneracies, a word belongs to it if and only if its compressed word does. In particular all vertices already belong to $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "For a nondegenerate word $w$ outside $K$, erase its occurrences of $a$, and colour the remaining letters by $L$ for $C$ and $R$ for $b$. Both colours occur. Let $\\beta(w)\\geq1$ count consecutive colour changes in this erased list; choose its first colour change, with original endpoint positions $i<j$. The entries between these endpoints can only be $a$, so nondegeneracy forces $j=i+1$ or $j=i+2$; in the second case the intervening entry is $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Call the word lower when $j=i+1$, and upper when $j=i+2$. Inserting $a$ between the selected endpoints of a lower word $v$ gives an upper word $u$; deleting that intervening $a$ recovers $v$. Both words are nondegenerate because the two endpoint letters have different colours and neither is $a$. Erasing $a$ gives exactly the same list before and after this operation, so the selected change and $\\beta$ are unchanged. These operations are inverse bijections between all lower and upper words outside $K$. Write $n=\\dim v\\geq1$, $r=\\beta(v)$ and $k=i+1$ for this pair. Then $\\dim u=n+1$, $1\\leq r\\leq n$, $d_k u=v$, and $0<k<n+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Deleting one non-$a$ letter cannot increase $\\beta$: at an end it removes zero or one change; internally the decrease in the count is $\\epsilon(P,X)+\\epsilon(X,Q)-\\epsilon(P,Q)$, which is either $0$ or $2$ for the two colours, where $\\epsilon$ is $0$ on equal colours and $1$ otherwise. Deleting an $a$ leaves the erased colour list unchanged. If a resulting face is degenerate, its compressed word has dimension at most $n-1$ when the face is a face of an $(n+1)$-dimensional upper word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Fix a pair $(v,u)$ of rank $(n,r)$, and denote its chosen local string by $x,a,y$, with $x,y$ of opposite colours. Consider a nondegenerate face $d_\\ell u$ with $\\ell\\ne k$ which deletes neither $x$ nor $y$. The displayed $a$ and its endpoints survive. Removing an earlier letter from a constant-colour initial portion cannot introduce an earlier colour change, and removing a later letter cannot change this first one. Thus the surviving displayed gap is still the selected gap and this face is upper. This also treats deletion of any occurrence of $a$ other than the displayed one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Consider instead the face deleting $x$. In the erased colour list, all letters preceding $x$ have the colour of $x$, since $(x,y)$ is the first change. If there is a preceding non-$a$ letter $z$, its colour is that of $x$, so the surviving displayed $a$ separates $z$ from $y$ at the first change: the face is upper whenever it is nondegenerate. (If another $a$ becomes adjacent to the displayed one, the face is degenerate.) If no such $z$ exists, deleting $x$ removes the initial change, so $\\beta$ drops by one; the face might also fall in $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "For the face deleting $y$, let $z$ be the next non-$a$ letter, if any. If $z$ has the colour of $y$, the displayed $a$ now separates $x,z$ at the first change, so a nondegenerate face is upper. If $z$ has the colour of $x$, the two consecutive colour changes through $y$ disappear and $\\beta$ drops by two. If there is no $z$, the last change disappears and $\\beta$ drops by one. Consecutive $a$'s created by this deletion give a degenerate face. Consequently every face $d_\\ell u$ other than $v=d_k u$ is in $K$, is degenerate with compressed dimension at most $n-1$, is upper of dimension $n$, or is lower of dimension $n$ with strictly smaller $\\beta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Construct the attachment sequence by increasing $n\\geq1$, then increasing $r=1,\\ldots,n$, and then by any finite enumeration of the pairs of rank $(n,r)$. At every stage the current subset has exactly the nondegenerate words of $K$ and the two members of each already processed pair. Before dimension $n$ it also contains every nondegenerate simplex of dimension less than $n$. Initially no pair has been processed and all vertices are in $K$, so both assertions hold. In the preceding face classification, an upper $n$-simplex is the upper member of a pair whose lower dimension is $n-1$, and a lower $n$-simplex with smaller $\\beta$ has already occurred at this dimension. Therefore every face of $u$ other than $v$ is in the current subset $H$. Every face of $v$ has dimension less than $n$ and is also in $H$. Adjoining $v,u$ and their degeneracies consequently gives a simplicial subset $H'$; the two designated words are not already in $H$, because the current pair is unprocessed, the pairs partition the words outside $K$, and the exact description of $H$ contains only processed pairs. The face checks show that this exact description remains valid after adjoining the current pair. After all ranks for $n$ the invariant holds for the next dimension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "The characteristic map $\\Delta^{n+1}\\to G_B$ associated to $u$ sends a monotone map $\\theta:[m]\\to[n+1]$ to the word $u\\theta$. By the horn definition in [def-cbc-enhanced-diagrams-cones], $\\theta$ lies outside $\\Lambda_k^{n+1}$ exactly when its image contains every index other than $k$. Its image is therefore either $[n+1]$ or $[n+1]\\setminus\\{k\\}$. Thus every simplex outside the horn maps to a run expansion of $u$ or of $v$, respectively. The horn itself maps into $H$ by the preceding face check.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "For either of these two images, a run expansion uniquely determines $\\theta$: the reduced words $u,v$ have distinct adjacent entries, so their successive run lengths recover the unique surjection onto the specified ordered image. The reduced words $u$ and $v$ are different and are both new in $H'$. Hence the characteristic map bijects the degree-$m$ complement of the horn with the degree-$m$ complement of $H$ in $H'$, for every $m$. The degreewise pushout $H\\amalg_{\\Lambda_k^{n+1}}\\Delta^{n+1}$ is consequently $H'$: the horn elements are identified with their prescribed images in $H$, and all remaining elements are exactly the distinct new elements just described. These identifications commute with operators because the two maps are simplicial. This proves the attachment square directly, even when nonadjacent vertices of $u$ coincide.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  },
+  {
+   "text": "Each attachment is a pushout of the inner horn $\\Lambda_k^{n+1}\\hookrightarrow\\Delta^{n+1}$ because $0<k<n+1$. There are finitely many words of each fixed length, since $B$ is finite, so each rank requires finitely many individual attachments; no closure under arbitrary coproducts is being assumed. The dimension/rank order gives a countable composite, with union $G_B$, since each nondegenerate word outside $K$ occurs in its unique pair. Closure under pushouts and transfinite composition in the stated definition of inner anodyne now proves $K\\hookrightarrow G_B$ inner anodyne. Through the identification in step 1 this is precisely the canonical map in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, proof, coarse-nerve horn filtration; agent expansion with first-colour-change matching"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite-coefficient derived mapping-complex adjunction; inherited enriched completion input. Explicit first-colour-change horn filtration expanding Gepner-Haugseng, Theorem 5.2.5, read at https://arxiv.org/html/1312.3178v4, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +214,66 @@
    "results": "{\"t\": \"2026-10-16T20:43:14Z\", \"tool\": \"grep\", \"query\": \"SegalSpace|innerAnodyneExtensions|CoherentIso|NerveCodiscrete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"ed9c6b86a07b2c2c\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned types. StrictSegal.lean:39-56 treats strict simplicial sets, NerveCodiscrete.lean:30-40 gives only degreewise tuples, CoherentIso.lean:16-27 and 118-129 treat ordinary functors or specified inverses, and Inner/Basic.lean:38-62 defines inner-anodyne maps; none states this prerequisite."
+  },
+  {
+   "tool": "grep",
+   "query": "codiscrete|indiscrete|innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"grep\", \"query\": \"codiscrete|indiscrete|innerAnodyneExtensions\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"5c42c8d82a786a93\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read NerveCodiscrete.lean:30-36 (equivFun only describes tuples), CoherentIso.lean:39-40,118-145 (walking isomorphism and its nerve), and AnodyneExtensions/Inner/Basic.lean:38-62 (the class and generators). None gives the amalgamated codiscrete-nerve inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The union of nerves of two contractible groupoids along a shared vertex is inner anodyne in the nerve on all vertices",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"leansearch\", \"query\": \"The union of nerves of two contractible groupoids along a shared vertex is inner anodyne in the nerve on all vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Grpd\", \"CategoryTheory.Groupoid.noConfusionType\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"d368bd5212a007cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned nerve quasicategory/StrictSegal results, horn/subcomplex colimit infrastructure and nerve adjunctions do not assert that this coarse-nerve union inclusion is inner anodyne. Read Quasicategory/Nerve.lean:30-35 and SubcomplexColimits.lean:82-100; these supply other conclusions or assume the requisite lattice square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the conjunction of innerAnodyneExtensions and nerve has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner horn cell decomposition for amalgamating nerves of indiscrete categories along a common object",
+   "results": "{\"t\": \"2026-10-16T21:24:45Z\", \"tool\": \"leanfinder\", \"query\": \"An inner horn cell decomposition for amalgamating nerves of indiscrete categories along a common object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.horn.multicoequalizerDiagram\", \"CategoryTheory.nerve\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.edgeMk\"], \"digest\": \"65c3b8aa44283642\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned nerve quasicategory/StrictSegal results, horn/subcomplex colimit infrastructure and nerve adjunctions do not assert that this coarse-nerve union inclusion is inner anodyne. Read Quasicategory/Nerve.lean:30-35 and SubcomplexColimits.lean:82-100; these supply other conclusions or assume the requisite lattice square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the union of two codiscrete groupoid nerves intersecting at one vertex into their combined codiscrete nerve is inner anodyne",
+   "results": "{\"t\": \"2026-10-16T21:24:45Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of the union of two codiscrete groupoid nerves intersecting at one vertex into their combined codiscrete nerve is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"6079d14f34bac253\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Returned nerve quasicategory/StrictSegal results, horn/subcomplex colimit infrastructure and nerve adjunctions do not assert that this coarse-nerve union inclusion is inner anodyne. Read Quasicategory/Nerve.lean:30-35 and SubcomplexColimits.lean:82-100; these supply other conclusions or assume the requisite lattice square."
+  },
+  {
+   "tool": "grep",
+   "query": "Codiscrete|codiscrete|innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-16T21:38:58Z\", \"tool\": \"grep\", \"query\": \"Codiscrete|codiscrete|innerAnodyneExtensions\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\"], \"digest\": \"ece9dbf81f8dcc90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader inspected the returned declarations and NerveCodiscrete.lean:30-40, Inner/Basic.lean:38-98 and SubcomplexColimits.lean:83-100. The tuple equivalence, inner-anodyne generators and abstract bicartesian-square pushout do not state this inclusion is inner anodyne. The partial-order nerve injectivity criterion assumes a partial order and does not apply to a codiscrete groupoid."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A wedge of nerves of connected thin groupoids at one vertex is an inner anodyne subcomplex of the codiscrete nerve on the union of their objects",
+   "results": "{\"t\": \"2026-10-16T21:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"A wedge of nerves of connected thin groupoids at one vertex is an inner anodyne subcomplex of the codiscrete nerve on the union of their objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"PartialOrder.mem_nerve_nonDegenerate_iff_injective\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"02be0ea80c141eae\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader inspected the returned declarations and NerveCodiscrete.lean:30-40, Inner/Basic.lean:38-98 and SubcomplexColimits.lean:83-100. The tuple equivalence, inner-anodyne generators and abstract bicartesian-square pushout do not state this inclusion is inner anodyne. The partial-order nerve injectivity criterion assumes a partial order and does not apply to a codiscrete groupoid."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\", \"Codiscrete\"",
+   "results": "{\"t\": \"2026-10-16T21:41:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"Codiscrete\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently ran the conjunction of Mathlib inner-anodyne and codiscrete vocabulary; the service succeeded with zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-equivalence-nerve",
@@ -104,5 +281,20 @@
   "group": "NW"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coarse-nerve-gluing",
+  "worker": "stage1",
+  "summary": "Proved the unchanged coarse-nerve inclusion by an explicit pairing of all missing nondegenerate words, inserting the pivot at the first colour change after erasing the pivot. Checked all other faces by dimension and transition count, and proved every attachment square degreewise, including repeated nonadjacent vertices. All intermediate word calculations and the defining closure argument are written out as elementary steps, so no new nodes are needed. Searched both project source trees, the whole DAG and blueprint, and Mathlib with the required logged tools.",
+  "blueprint": "Realizes the coarse-nerve horn-filtration prerequisite used in step 4 of lem-coef-algebroid-equivalence-nerve, inherited from prop-coef-integral-exceptional-adjoint proof paragraph 2 (the finite-coefficient derived mapping-complex adjunction before R lim), through the ancestry already recorded in blueprint.from. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-39ea09527",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-39ea09527 (reviewer sub-agent of L); spot-checked: I read the item, its sole cited node def-cbc-enhanced-diagrams-cones, the parent lem-coef-algebroid-equivalence-nerve with its Step 4 that uses this item, the unit sk-prop-sf-biduality-general, and the coord documents A-F. The statement is self-contained and has the hypotheses the parent's Step 4 needs: A nonempty finite, a in A, b not in A. Its saturation definition of inner anodyne matches the closure properties the parent uses. Steps 1-12 check out by hand. Step 1: the pushout is the union K, the words not containing both b and an element of A minus {a}. Step 2: a word is degenerate exactly when two adjacent letters agree, and a word lies in a simplicial subset iff its compressed form does. Steps 3-4: the first-colour-change pairing is a bijection, with k=i+1, 0<k<n+1 and 1<=r<=n. Steps 5-8: the classification of the faces d_l u for l not equal to k is exhaustive. Step 9: the (n, r) induction is explicitly set up, with invariant, base and step. Steps 10-11: the complement of the horn maps bijectively onto H' minus H in every degree, even when nonadjacent letters repeat. Step 12: the attachments form a countable composite whose union is G_B. Edge cases checked: A={a}, the n=1 cells b,a,c and c,a,b, and the word b,a,c,b. My own script (alphabet a,b,c,d; 960 pairs up to lower dimension 5) found 0 face failures and 0 missing words. There are no new nodes. An rg search of the DAG for inner anodyne and codiscrete/coarse found no duplicate: the spine, Segal-inverse, free-product and indiscrete-algebroid nodes state other things. A grep of Mathlib's SimplicialSet files found no matching theorem, and the 17 recorded searches cover all three kinds. The cited source, Gepner-Haugseng arXiv 1312.3178v4 Thm 5.2.5, is not archived and its online HTML was truncated before Section 5, so I could not check the source text or the report's remarks on its indexing. The proof is marked agent-written with a WANTED line, as the rules require, and I verified it independently. No route issue and no tool_uses. No fixes made."
+ }
 }

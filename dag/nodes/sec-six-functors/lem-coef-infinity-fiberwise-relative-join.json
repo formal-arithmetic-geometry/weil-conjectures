@@ -31,9 +31,73 @@
   "def-coef-infinity-relative-join",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose one of the assumed diagrams $v_c$ for each vertex $c$ of $C$. Let $\\pi:J\\to C$ be the projection in [def-coef-infinity-relative-join], and put $C^{(0)}=\\operatorname{sk}_0C$, the simplicial subset of all degenerate simplices of vertices. In each degree it is the disjoint union of the constant simplices at the distinct vertices. The degreewise relative-join formula identifies $\\pi^{-1}(\\{c\\})$ with $K_c\\star\\Delta^0=K_c^{\\triangleright}$: the common base simplex is constant at $c$, so the old block lies in $K_c$ and the new block is the unique simplex of the point. Distinct such fibers are disjoint. Thus $A_0=i_K(K)\\cup\\pi^{-1}(C^{(0)})$ is obtained by adjoining the separate fiber cones to $K$ along $K_c$. Define $F_0:A_0\\to D$ by $f$ on $K$ and $v_c$ on each cone. These maps agree on their entire intersections because $v_c|_{K_c}=f|_{K_c}$. Gluing degreewise gives a simplicial map, and $pF_0=g|_{A_0}$ since these equalities hold on every piece. In particular every vertex fiber cone is already fixed exactly.",
+   "uses": [
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Lemma 7.3.4.6, amalgamating the chosen fiber cones over the zero skeleton."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to the inclusion of the empty simplicial set into $C$. After its dimension-zero stage it gives $C^{(0)}$; write $C^{(r)}$ for the stage containing all cells of dimension at most $r$. For $r\\geq1$, the next step is the pushout of $\\partial\\Delta^r\\hookrightarrow\\Delta^r$ indexed by the nondegenerate $r$-simplices $\\sigma$ of $C$, and $\\bigcup_r C^{(r)}=C$. Put $A_r=i_K(K)\\cup\\pi^{-1}(C^{(r)})$. For each such $\\sigma$ put $Y_\\sigma=J\\times_C\\Delta^r$, $X_\\sigma=K\\times_C\\Delta^r$, and $M_\\sigma=i_{X_\\sigma}(X_\\sigma)\\cup(Y_\\sigma\\times_{\\Delta^r}\\partial\\Delta^r)$. Then $A_r$ is the pushout of the maps $M_\\sigma\\hookrightarrow Y_\\sigma$ along their maps into $A_{r-1}$. To verify this, pull back the base cell-pushout in each degree: a simplex over the old base is already in $\\pi^{-1}(C^{(r-1)})$; every other simplex has the unique new base-cell representative of that pushout. Its choice of simplex in $J$ is unchanged. Adjoining the whole copy of $K$ puts the entire $X_\\sigma$ in the attaching domain, so a new simplex in this copy is identified with its already prescribed simplex of $K$. These are precisely the relations of the displayed pushout, and they commute with the simplicial operators. This argument does not require $\\sigma$ to be injective on vertices.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Skeletal expansion of the reduction to one simplex in Lemma 7.3.4.5, used in Lemma 7.3.4.6; the cell presentation is Kerodon 0077."
+   }
+  },
+  {
+   "text": "For a base cell $\\sigma:\\Delta^r\\to C$, the pullback $X_\\sigma\\to\\Delta^r$ is a cocartesian fibration in the sense of [def-coef-infinity-fibrations]. Indeed any inner-horn lifting problem projects to one for $u$, and its filler together with the specified simplex of $\\Delta^r$ gives a pullback filler. A cocartesian lift in $K$ of the image of a base edge, paired with that edge, is cocartesian in $X_\\sigma$: every defining outer-horn lifting problem projects to the one for that lift, and its filler again pairs with the given base simplex. Since $\\Delta^r$ fills inner horns (it is the nerve of the ordered set, where a compatible chain is its filler), the same inner-horn argument shows $X_\\sigma$ is a quasicategory. Moreover [def-coef-infinity-relative-join] identifies $Y_\\sigma$ with $X_\\sigma\\star_{\\Delta^r}\\Delta^r$ over $\\Delta^r$. Explicitly an $m$-simplex is a time cut $[m]\\to[1]$, a base simplex $\\tau:\\Delta^m\\to\\Delta^r$, and an old-block simplex of $K$ lying over the corresponding restriction of $\\sigma\\tau$. Giving that old block together with the restriction of $\\tau$ is exactly an old block of $X_\\sigma$. Pure old and pure new blocks obey the same rule. Restriction and repetition of these lists commute with this identification. It also identifies $M_\\sigma$ with the domain of the local boundary-extension lemma and its vertex-zero cone with the original cone at $\\sigma(0)$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Degreewise base-change identification and horn checks needed for the one-simplex reduction of 02ZR."
+   }
+  },
+  {
+   "text": "Inductively suppose $F_{r-1}:A_{r-1}\\to D$ extends $F_0$, restricts to $f$ on $K$, and satisfies $pF_{r-1}=g|_{A_{r-1}}$. Pull it back to $M_\\sigma$ for each nondegenerate $r$-cell. Together with $g|_{Y_\\sigma}$ this is an exactly commuting lifting square. Since $r\\geq1$, every vertex of $\\Delta^r$, in particular vertex zero, belongs to its boundary. The restriction to the entire vertex-zero cone is therefore the previously fixed $v_{\\sigma(0)}$, with its assumed $p$-colimit property. Apply [lem-coef-infinity-relative-join-simplex-extension] using the cocartesian fibration and the identifications of Step 3, and the original isofibration $p$. Obtain a map on $Y_\\sigma$ agreeing with the given map on all of $M_\\sigma$ and lying over $g$ exactly. Choose these fillers for the small set of cells and glue them with $F_{r-1}$ using the pushout of Step 2. They agree on the whole attaching domains, so this gives $F_r:A_r\\to D$ with the same inductive properties and $F_r|_{A_{r-1}}=F_{r-1}$. The base case is Step 1. No transition functor has been required to preserve a colimit.",
+   "uses": [
+    "lem-coef-infinity-relative-join-simplex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Lemma 7.3.4.5 for each positive-dimensional base cell, preserving the already chosen fiber cones as in 7.3.4.6."
+   }
+  },
+  {
+   "text": "Because the base filtration is exhaustive, every simplex of $J$ lies in some $A_r$. Define $\\bar f$ on that simplex by $F_r$ there. Compatibility of the extensions makes this independent of $r$, and all simplicial identities hold at a common finite stage. Hence $\\bar f:J\\to D$ is a simplicial map with $\\bar f i_K=f$ and $p\\bar f=g$ exactly. Every fiber cone is contained in $A_0$, so $\\bar f j_c=v_c$ as a whole simplicial diagram. It is consequently a $p$-colimit diagram by the choice of $v_c$. This proves precisely the requested conclusion without any appeal to global left Kan extension or to colimit-preserving transport.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Union of the compatible skeletal extensions; concludes Lemma 7.3.4.6 and the fiber-cone conclusion of Proposition 7.3.4.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-join",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-join-simplex-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02ZU",
+  "place": "Lemma 7.3.4.6, expanded by the relative skeletal filtration and the positive-dimensional simplex case of Lemma 7.3.4.5 (02ZR). Online sources read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -104,10 +168,73 @@
    "results": "{\"t\": \"2026-10-16T19:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"A universal cocone in an infinity category can be extended simultaneously over a parameter space along a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.extendCocone\", \"CategoryTheory.Functor.Final.extendCocone_obj_ι_app\", \"CategoryTheory.Functor.LeftExtension.coconeAt\", \"CategoryTheory.Functor.Final.extendCocone_obj_ι_app'\", \"CategoryTheory.Functor.LeftExtension.coconeAtFunctor\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.costructuredArrowMapCocone\"], \"digest\": \"8d8da7fd0242b17c\"}",
    "date": "2026-10-16",
    "verdict": "No match. Independent second reading: returned signatures concern ordinary categories, Quillen Kan fibrations, nerves, or the primitive inner-horn property. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:55-123. None states this relative quasicategorical assertion; no one-line specialization. The exact-name global grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local relative colimit cones on fibers of a cocartesian fibration assemble to a relative join lift over an isofibration",
+   "results": "{\"t\": \"2026-10-16T20:16:30Z\", \"tool\": \"leanfinder\", \"query\": \"Local relative colimit cones on fibers of a cocartesian fibration assemble to a relative join lift over an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\"], \"digest\": \"cd4c19e832873945\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeJoin|relativeColimit|isofibration|relative.?join",
+   "results": "{\"t\": \"2026-10-16T20:16:41Z\", \"tool\": \"grep\", \"query\": \"relativeJoin|relativeColimit|isofibration|relative.?join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"innerFibrations\"",
+   "results": "{\"t\": \"2026-10-16T20:16:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"innerFibrations\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_from_innerFibrations\", \"SSet.Quasicategory.from_innerFibrations\"], \"digest\": \"1ae50576d8b6875d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"hornFilling\"",
+   "results": "{\"t\": \"2026-10-16T20:16:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"hornFilling\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"a7d5b141fb3f011c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocartesian fibration admits coherent relative colimit cone lifts over an isofibration",
+   "results": "{\"t\": \"2026-10-16T20:16:41Z\", \"tool\": \"leansearch\", \"query\": \"A cocartesian fibration admits coherent relative colimit cone lifts over an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.liftColimit\", \"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.Limits.IsLimit.ofIsoLimit_lift\", \"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.LiftableCocone.noConfusionType\", \"CategoryTheory.liftsToColimitOfCreates\"], \"digest\": \"214a993e1c5e68f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a quasicategory diagram from the boundary of a standard simplex relative join when the initial fiber cone is a relative colimit",
+   "results": "{\"t\": \"2026-10-16T20:16:42Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a quasicategory diagram from the boundary of a standard simplex relative join when the initial fiber cone is a relative colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₁.ι₂_desc\"], \"digest\": \"4b14bbc47b5a358f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fill a prescribed simplex boundary for a family of universal cocones in infinity categories over a target base",
+   "results": "{\"t\": \"2026-10-16T20:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"Fill a prescribed simplex boundary for a family of universal cocones in infinity categories over a target base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.desc\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.horn₃₁.desc.multicofork\"], \"digest\": \"0b339c7dca92683b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a relative join over a simplex from its full boundary and a diagram on the total cocartesian fibration while fixing relative colimit cones",
+   "results": "{\"t\": \"2026-10-16T20:17:13Z\", \"tool\": \"leansearch\", \"query\": \"Extend a relative join over a simplex from its full boundary and a diagram on the total cocartesian fibration while fixing relative colimit cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Limits.IsColimit.extendIso\", \"CategoryTheory.Limits.IsColimit.ofExtendIso\", \"CategoryTheory.extendCofanIsColimit\", \"CategoryTheory.Limits.Cocones.extendComp\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_fac\", \"CategoryTheory.Over.isColimitLiftCocone\"], \"digest\": \"0ff651049b5886f1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal cocones on every fiber form a coherent extension on the mapping cylinder of a cocartesian infinity category fibration",
+   "results": "{\"t\": \"2026-10-16T20:17:17Z\", \"tool\": \"leanfinder\", \"query\": \"Universal cocones on every fiber form a coherent extension on the mapping cylinder of a cocartesian infinity category fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_ι_app\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"cd52781d2a4878fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103, InnerFibration.lean:55-123, CategoryTheory/Limits/Shapes/Grothendieck.lean:35-120, CategoryTheory/Limits/Creates.lean:40-110, and AlgebraicTopology/SimplicialSet/Coskeletal.lean:38-75. The quasicategory hits only fill inner horns, not an entire boundary with prescribed lift over p. Grothendieck colimits and creation/lifting of cocones require ordinary Category instances. The StrictSegal construction is an ordinary right Kan extension of a simplicial presheaf from its truncation. None asserts relative join extension for arbitrary quasicategories or relative colimit cones. The focused source grep returned zero hits. No exact or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-kan-existence",
@@ -115,5 +242,20 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fiberwise-relative-join",
+  "worker": "stage1",
+  "summary": "Preserve the exact statement. Assemble the assumed fiber cones over the zero skeleton, pull the existing boundary-cell presentation back to the relative join, extend one positive-dimensional base cell at a time with one new local relative lifting lemma, and glue the exhaustive union. Verify cocartesian base change and relative-join base change from their degreewise/horn definitions. No ordinary-category restriction or extra colimit preservation hypothesis is introduced.",
+  "blueprint": "Paragraph 2, derived coefficient-adjunction and inverse-limit calculation, of prop-coef-integral-exceptional-adjoint: foundational pointwise-Kan cone assembly via the existing ancestry through suspension-square-comparison. Steps 1-5 expand the local filling/assembly input, rather than replace a unit-level route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-9001ca189",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-9001ca189 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement (relative-join def current version, relative-cone/p-colimit, fibrations, boundary-cells Mathlib leaf, def-cbc equivalence edges), the parent relative-kan-existence step 2, the unit, and Kerodon 02ZR/02ZU/02ZW online (not in literature/, WANTED). The item statement is unchanged and matches 02ZW (2)=>(1) with 02ZU's exact preservation of the chosen cones; the omitted left-Kan clause is not used by the parent. Step 1: fibers over sk0 are exactly j_c(K_c^▷), and the pieces glue with exact equalities. Step 2: the pushout A_r = A_{r-1} ⊔_{∐M_σ} ∐Y_σ checked degreewise; it holds for non-injective σ. Step 3: base change of inner fibrations and cocartesian edges, and Y_σ ≅ X_σ⋆_{Δ^r}Δ^r on (ε,τ,k) data. Step 4: all hypotheses of the new node verified; the vertex-0 cone is v_{σ(0)}; the induction is stated. Step 5: the union is valid. New node = 02ZR with C=Δ^n, C0=∂Δ^n, n≥1. Non-boundary simplices are surjective, so (*) reduces to the vertex-0 cone. The node is self-contained and statement-only, with same_as [] confirmed by a blueprint grep. Small cases: p=id, n=1 square with a poset counterexample showing the hypothesis is needed, empty fibers, n=0 excluded. Duplicate candidates read: fiber-cocone-simplex-extension (ordinary-category special case of the new node), relative-exponential-restriction, cartesian-initial-boundary-lift, fiber-colimit-collage, relative-join-cartesian-realization. None restates the new node or specializes to it in one line. No cycle, no off-unit statements, no tool_uses, no SGA. No changes made."
+ }
 }
