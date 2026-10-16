@@ -1,0 +1,129 @@
+{
+ "id": "lem-coef-presheaf-bounded-intersection-replacement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Theorem 2.2.5.1 (Joyal model structure), Corollary 2.2.5.4 and Proposition 1.2.7.3; supporting input: Model recognition from a presheaf interval and anodyne extensions; supporting input: Uniform bounded enlargement inside a weak presheaf monomorphism. Supporting construction: the functorial presheaf replacement and cardinal controls in Cisinski 2.4.36-2.4.37, used before closing a small subobject under a relative homotopy.",
+   "via": [
+    "lem-coef-presheaf-weak-mono-bounded-enlargement",
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-simplicial-shape-categorification",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded intersection-preserving replacement for a set of presheaf monomorphisms",
+ "statement": "Fix an input universe $\\mathcal U$ as in [def-weil-size-convention]. Let $A$ be a $\\mathcal U$-small ordinary category, $\\mathcal P=\\operatorname{Fun}(A^{\\mathrm{op}},\\operatorname{Set}_{\\mathcal U})$, $B$ any presheaf in $\\mathcal P$, and $\\Lambda$ a $\\mathcal U$-small set of monomorphisms in $\\mathcal P$. Let $\\operatorname{wsat}(\\Lambda)$ denote closure under isomorphisms, pushouts, $\\mathcal U$-small transfinite compositions continuous at limits, and retracts in the arrow category. A presheaf $Z$ is $\\Lambda$-injective if every map $D\\to Z$ extends to $E\\to Z$ for every $(D\\hookrightarrow E)\\in\\Lambda$. Write $|F|=|\\coprod_{a\\in\\operatorname{Ob}(A)}F(a)|$ for total-element size.\n\nThere exist an endofunctor $R:\\mathcal P\\to\\mathcal P$, a natural transformation $\\eta:\\mathrm{id}\\to R$, and infinite regular cardinals $\\lambda<\\alpha$ in $\\mathcal U$, with $\\alpha>|\\operatorname{Mor}(A)|$ and $\\alpha>|B|$, having all the following properties. Regular means that a union of fewer than the cardinal many sets, each of smaller cardinality, still has smaller cardinality.\n\n(1) Each $\\eta_F:F\\to R(F)$ belongs to $\\operatorname{wsat}(\\Lambda)$, and $R(F)$ is $\\Lambda$-injective.\n\n(2) The functor $R$ preserves monomorphisms. For any subpresheaves $S,T\\subseteq Y$, identify their $R$-images with subpresheaves of $R(Y)$. The canonical map identifies $R(S\\cap T)$ with $R(S)\\cap R(T)$.\n\n(3) If $|F|<\\alpha$, then $|R(F)|<\\alpha$ and $|B\\times R(F)|<\\alpha$.\n\n(4) For every $Y$, the union of $R(T)\\subseteq R(Y)$ over all subpresheaves $T\\subseteq Y$ with $|T|<\\alpha$ is $R(Y)$.\n\n(5) For every increasing family $(T_\\xi)_{\\xi<\\lambda}$ of subpresheaves of $Y$, indexed by the initial ordinal of cardinality $\\lambda$, the canonical map identifies $\\bigcup_{\\xi<\\lambda}R(T_\\xi)$ with $R(\\bigcup_{\\xi<\\lambda}T_\\xi)$ as subpresheaves of $R(Y)$. All these constructions and colimits remain in $\\mathcal U$.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Cisinski, Higher Categories and Homotopical Algebra, construction 2.4.36 and Lemma 2.4.37, printed pp. 64-65 (PDF pp. 79-80). Agent formulation with separate preservation rank lambda and larger size bound alpha, so lambda < alpha; the source gives preservation of sufficiently long unions and small supports. The fixed auxiliary B only increases the size bound. Read online 2026-10-17, not archived in literature/. No Stacks tag states this arbitrary-set small-object replacement with intersection and cardinal controls."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fibrantReplacement|fibrant.replacement|preserv.*intersections",
+   "results": "{\"t\": \"2026-10-16T21:50:13Z\", \"tool\": \"grep\", \"query\": \"fibrantReplacement|fibrant.replacement|preserv.*intersections\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small object fibrant replacement for presheaves preserves monomorphisms intersections filtered colimits and bounded cardinal size",
+   "results": "{\"t\": \"2026-10-16T21:50:13Z\", \"tool\": \"leansearch\", \"query\": \"Small object fibrant replacement for presheaves preserves monomorphisms intersections filtered colimits and bounded cardinal size\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.Types.instIsStableUnderFilteredColimitsMonomorphismsType\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsMonomorphismsOfAB5OfSize\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"CategoryTheory.Limits.preservesSmallestFilteredColimits_of_preservesFilteredColimits\"], \"digest\": \"ea3dcaaa396829c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FibrantReplacement\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-16T21:50:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"FibrantReplacement\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functorial fibrant replacement on presheaves generated by monomorphisms preserves intersections and sufficiently filtered colimits and has a uniform cardinal size bound",
+   "results": "{\"t\": \"2026-10-16T21:50:20Z\", \"tool\": \"leanfinder\", \"query\": \"A functorial fibrant replacement on presheaves generated by monomorphisms preserves intersections and sufficiently filtered colimits and has a uniform cardinal size bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor\", \"CategoryTheory.IsGrothendieckAbelian.preservesColimit_coyoneda_obj_of_mono\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.instIsWellOrderContinuousFunctor\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂\", \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\"], \"digest\": \"f5538705f0ad5374\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "smallObject|SmallObject|factorization",
+   "results": "{\"t\": \"2026-10-16T21:50:26Z\", \"tool\": \"grep\", \"query\": \"smallObject|SmallObject|factorization\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean\"], \"digest\": \"6d3b1d4a3c56cdb7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small generated anodyne class on set presheaves has an intersection preserving accessible fibrant replacement endofunctor with uniformly bounded small values",
+   "results": "{\"t\": \"2026-10-16T21:50:37Z\", \"tool\": \"leanfinder\", \"query\": \"A small generated anodyne class on set presheaves has an intersection preserving accessible fibrant replacement endofunctor with uniformly bounded small values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"SSet.Finite.instIsFinitelyPresentable\"], \"digest\": \"ab1e9d247e0def95\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "SmallObject.*(Preserves|Mono)|Preserves.*SmallObject|intersection.*small.object",
+   "results": "{\"t\": \"2026-10-16T21:51:41Z\", \"tool\": \"grep\", \"query\": \"SmallObject.*(Preserves|Mono)|Preserves.*SmallObject|intersection.*small.object\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"1d6b4f53779bda1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SmallObject\", \"PreservesPullbacks\"",
+   "results": "{\"t\": \"2026-10-16T21:51:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"SmallObject\\\", \\\"PreservesPullbacks\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial injective replacement for presheaves with respect to a set of monomorphisms preserves intersections and admits cardinal size bounds",
+   "results": "{\"t\": \"2026-10-16T21:51:42Z\", \"tool\": \"leansearch\", \"query\": \"Functorial injective replacement for presheaves with respect to a set of monomorphisms preserves intersections and admits cardinal size bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects.casesOn\", \"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.injective_obj\", \"CategoryTheory.Functor.injective_of_map_injective\", \"CategoryTheory.MonoOver.inf\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective\"], \"digest\": \"28276311bddf097b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small set of monomorphisms of presheaves there is a functorial injective replacement preserving binary intersections, bounded size, small supports, and unions of a sufficiently long regular chain",
+   "results": "{\"t\": \"2026-10-16T21:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a small set of monomorphisms of presheaves there is a functorial injective replacement preserving binary intersections, bounded size, small supports, and unions of a sufficiently long regular chain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"CategoryTheory.IsGrothendieckAbelian.instHasSmallObjectArgumentGeneratingMonomorphisms\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor\", \"CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver\", \"CategoryTheory.presheaf_mono_of_mono\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\"], \"digest\": \"76b68d4761e27fa3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SmallObject/Construction.lean:104-122 (one-step pushout, no intersection or size theorem), SmallObject/IsCardinalForSmallObjectArgument.lean:80-116 (Hom preservation assumed), and Abelian/GrothendieckCategory/EnoughInjectives.lean:100,311-338 (abelian hypothesis and fixed generating monomorphisms). OrthogonalReflection.lean:18-49 constructs unique extension by coequalizers, not injectivity with nonunique fillers. None supplies an intersection-preserving replacement with these simultaneous cardinal controls for arbitrary set-valued presheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-presheaf-weak-mono-bounded-enlargement",
+  "date": "2026-10-17",
+  "group": "Q58"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

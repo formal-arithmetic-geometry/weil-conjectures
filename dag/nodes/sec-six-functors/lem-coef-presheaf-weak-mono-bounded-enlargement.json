@@ -28,9 +28,122 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First, for every naive fibrant $Z$, direct $I$-homotopy of maps $K\\to Z$ is already an equivalence relation. Constant homotopies give reflexivity. Given homotopies $h:u\\sim v$ and $k:u\\sim w$, put them on the two faces $I\\times\\{0,1\\}\\times K$ and put the constant $u$ on $\\{0\\}\\times I\\times K$. They agree on intersections. The union's inclusion in $I\\times I\\times K$ is $e_0\\square(\\delta\\times K)$, hence is anodyne by the hypothesis. A filler into $Z$ restricts on $\\{1\\}\\times I\\times K$ to a homotopy $v\\sim w$. Taking $w=u$ gives symmetry, and applying this operation to $v\\sim u$ and $v\\sim w$ gives transitivity. Thus equality in $[K,Z]_I$ is represented by one homotopy.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 2.4.24, three-face filling argument, written out."
+   }
+  },
+  {
+   "text": "Every $a:K\\to L$ in $\\mathrm{An}$ belongs to $W_I$: a map $K\\to Z$ extends by naive fibrancy, giving surjectivity. For injectivity, if $f_0,f_1:L\\to Z$ have equal restricted classes, Step 1 gives a homotopy on $K$. This and $f_0,f_1$ glue on $(I\\times K)\\amalg_{\\{0,1\\}\\times K}(\\{0,1\\}\\times L)$. Its inclusion in $I\\times L$ is $\\delta\\square a\\in\\mathrm{An}$, so a filler is a homotopy between $f_0,f_1$. Also $W_I$ has two-out-of-three: precomposition respects homotopies, and the composite testing function is the composite of the two testing functions; two bijections among these three imply the third is a bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 2.4.25 and Remark 2.4.21, before the model structure."
+   }
+  },
+  {
+   "text": "Choose a small set $\\Lambda$ generating $\\mathrm{An}$. Apply [lem-coef-presheaf-bounded-intersection-replacement] with $B=I$. Obtain $R,\\eta,\\lambda<\\alpha$ and all its numbered properties. The objects $R(F)$ are naive fibrant: they lift against $\\Lambda$, and lifting extends to its weak saturation. More explicitly, a right lifting class is closed under arrow retracts by [lem-coef-lifting-class-closure]; on the left, pushouts and finite compositions preserve lifting by that same statement, and continuous transfinite compositions preserve it by [lem-coef-transfinite-left-lifting]. Thus every generator lifting extends to every map of $\\mathrm{An}$. By Step 2, every $\\eta_F$ is in $W_I$. Fix a weak monomorphism $i:X\\hookrightarrow Y$. Functoriality gives $R(i)\\eta_X=\\eta_Yi$, so two-out-of-three shows that the monomorphism $k=R(i):R(X)\\hookrightarrow R(Y)$ lies in $W_I$.",
+   "uses": [
+    "lem-coef-presheaf-bounded-intersection-replacement",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 2.4.36, Lemma 2.4.37 and the first paragraph of Lemma 2.4.38. The separate ranks correct the later size inference."
+   }
+  },
+  {
+   "text": "The presheaf category is locally finitely presentable by [lem-coef-presheaf-local-finite-presentability]; its Hom sets are small subsets of products of component function sets. Apply [lem-coef-accessible-small-object-factorization] to $\\Lambda$ and the arrow $k$, obtaining $k=qj$ with $j\\in\\mathrm{An}$ and $q\\in\\Lambda^\\square$. The lifting-closure and transfinite-lifting statements used in Step 3 show $q\\in\\mathrm{An}^\\square$. Since $j,k\\in W_I$, two-out-of-three gives $q\\in W_I$. Its codomain is the naive fibrant $R(Y)$, so [lem-coef-presheaf-naive-fibration-whitehead] says $q$ lifts against every monomorphism. Lift the square with top $j$, left $k$, right $q$, and bottom $1_{R(Y)}$. Its diagonal $d:R(Y)\\to\\operatorname{cod}(j)$ satisfies $dk=j$ and $qd=1$. Therefore the arrow maps $(1,d):k\\to j$ and $(1,q):j\\to k$ exhibit $k$ as a retract of $j$. The assumed retract closure of $\\mathrm{An}$ proves $k\\in\\mathrm{An}$.",
+   "uses": [
+    "lem-coef-presheaf-local-finite-presentability",
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-presheaf-naive-fibration-whitehead"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 2.4.29, with the small-object, Whitehead, and retract arguments supplied explicitly; used in Proposition 2.4.34 and Lemma 2.4.38."
+   }
+  },
+  {
+   "text": "Since $R(X)$ is naive fibrant, the identity of $R(X)$ extends across $k\\in\\mathrm{An}$ to a map $r:R(Y)\\to R(X)$ satisfying $rk=1$. On $(I\\times R(X))\\amalg_{\\{0,1\\}\\times R(X)}(\\{0,1\\}\\times R(Y))$ define a map to $R(Y)$ by $k\\operatorname{pr}_{R(X)}$ on the cylinder over $R(X)$, and by $(1_{R(Y)},kr)$ on its two other faces. The formulas agree because $rk=1$. The inclusion of this union in $I\\times R(Y)$ is $\\delta\\square k\\in\\mathrm{An}$, so naive fibrancy of $R(Y)$ supplies a map $h:I\\times R(Y)\\to R(Y)$ with $h_0=1$, $h_1=kr$, and $h|_{I\\times R(X)}=k\\operatorname{pr}_{R(X)}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 2.4.33 and Proposition 2.4.34: the strong deformation retraction is constructed by two specified fillers, not assumed."
+   }
+  },
+  {
+   "text": "For any $T\\subseteq Y$ of size $<\\alpha$, the image $E_T$ of $I\\times R(T)$ under $h$ has size $<\\alpha$ by property (3) of [lem-coef-presheaf-bounded-intersection-replacement]. For each total element $z$ of $E_T$, property (4) gives a subpresheaf $T_z\\subseteq Y$ of size $<\\alpha$ with $z\\in R(T_z)$. The collection of subpresheaves of $Y$ is a small set (it is coded by subsets of the total-element set of $Y$); well-order it by [lem-weil-pbc-well-ordering-theorem] and choose its least eligible $T_z$. Put $T^+=T\\cup\\bigcup_{z\\in E_T}T_z$. There are fewer than $\\alpha$ summands, so regularity makes $|T^+|<\\alpha$. Functoriality and preservation of monomorphisms give $R(T_z)\\subseteq R(T^+)$, whence $h(I\\times R(T))\\subseteq R(T^+)$. This defines a fixed enlargement rule on all small subpresheaves of $Y$.",
+   "uses": [
+    "lem-coef-presheaf-bounded-intersection-replacement",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 2.4.38, middle paragraph: small support for the homotopy image, with the cardinality and witness choices explicit."
+   }
+  },
+  {
+   "text": "Starting with the given $U$, use [lem-weil-pbc-transfinite-recursion] on the initial ordinal $\\lambda$ to form $V_0=U$, $V_{\\xi+1}=V_\\xi^+$ by Step 6, and $V_\\xi=\\bigcup_{\\zeta<\\xi}V_\\zeta$ at every nonzero limit $\\xi<\\lambda$. The recursion rule may return $U$ on an incoherent prefix; induction shows that this fallback never occurs. The invariant is that these are increasing subpresheaves containing $U$, each of size $<\\alpha$, with $h(I\\times R(V_\\xi))\\subseteq R(V_{\\xi+1})$ at every successor. At limits, the number of earlier terms is $<\\lambda<\\alpha$, so regularity verifies the size invariant. Set $V=\\bigcup_{\\xi<\\lambda}V_\\xi$. Since $\\lambda<\\alpha$, regularity also gives $|V|<\\alpha$ at this final union. Property (5) of [lem-coef-presheaf-bounded-intersection-replacement] gives $R(V)=\\bigcup_{\\xi<\\lambda}R(V_\\xi)$. Thus every element of $I\\times R(V)$ lies in $I\\times R(V_\\xi)$ for some $\\xi$; its image by $h$ lies in $R(V_{\\xi+1})\\subseteq R(V)$. An infinite cardinal's initial ordinal has no last element, so $\\xi+1<\\lambda$ whenever $\\xi<\\lambda$. We have proved $h(I\\times R(V))\\subseteq R(V)$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "lem-coef-presheaf-bounded-intersection-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 2.4.38, closing-up construction. SOURCE ERROR repaired: the printed alpha-stage construction gives at best size alpha; use the smaller preservation rank lambda < alpha instead."
+   }
+  },
+  {
+   "text": "Let $S=V\\cap X$. At the endpoint $1$, Step 7 gives $kr(R(V))=h_1(R(V))\\subseteq R(V)$. Since $kr$ also lands in $R(X)\\subseteq R(Y)$, property (2) of [lem-coef-presheaf-bounded-intersection-replacement] gives $kr(R(V))\\subseteq R(V)\\cap R(X)=R(S)$. The map $k:R(X)\\hookrightarrow R(Y)$ is monic, so from $k(r(z))\\in k(R(S))$ we cancel $k$ and obtain $r(z)\\in R(S)$ for every $z\\in R(V)$; thus $r$ restricts to $r_V:R(V)\\to R(S)$, with $r_VR(S\\hookrightarrow V)=1$. The homotopy $h$ restricts to $I\\times R(V)\\to R(V)$, with endpoints $1$ and $R(S\\hookrightarrow V)r_V$; its restriction to $R(S)$ is constant by Step 5. Consequently $R(S)\\hookrightarrow R(V)$ is an $I$-homotopy equivalence. For each naive fibrant testing object $Z$, precomposition by $r_V$ is an inverse on $[-,Z]_I$ to precomposition by this inclusion: one composite is the identity strictly, and the other is the identity modulo the displayed homotopy after postcomposing with any map to $Z$. Hence $R(S)\\hookrightarrow R(V)$ belongs to $W_I$.",
+   "uses": [
+    "lem-coef-presheaf-bounded-intersection-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Last paragraph of Lemma 2.4.38: use preservation of intersections to restrict r, and check the testing bijections directly."
+   }
+  },
+  {
+   "text": "Naturality supplies the square with horizontal maps $\\eta_S:S\\to R(S)$ and $\\eta_V:V\\to R(V)$ and vertical inclusions $S\\hookrightarrow V$ and $R(S)\\hookrightarrow R(V)$. Both horizontal maps lie in $W_I$ by Steps 2-3, and the right map lies in $W_I$ by Step 8. Apply two-out-of-three to the equality of the two composites to conclude $S\\hookrightarrow V\\in W_I$. Step 7 gives $U\\subseteq V$ and $|V|<\\alpha$, and Step 3 chose $\\alpha>|\\operatorname{Mor}(A)|$ independently of $X,Y,U$. All subobject sets, ordinals, choices, images and unions used here are small in the input universe by the replacement statement and the fixed-universe well-ordering and recursion leaves. No model structure has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Conclusion of Lemma 2.4.38, with the weak-equivalence square and all bounds checked."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-presheaf-bounded-intersection-replacement",
+  "lem-coef-presheaf-local-finite-presentability",
+  "lem-coef-presheaf-naive-fibration-whitehead",
+  "lem-coef-transfinite-left-lifting",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-well-ordering-theorem"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Agent expansion of Lemma 2.4.38 using construction 2.4.36, Lemma 2.4.37 and Proposition 2.4.34; repairs the final size inference by using lambda < alpha. Read online; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +193,45 @@
    "results": "{\"t\": \"2026-10-16T20:55:03Z\", \"tool\": \"grep\", \"query\": \"subobject.*size|size.*subobject|weak.*equivalence.*cardinal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary presheaf monomorphism/finite-generation facts and Grothendieck abelian generating monomorphisms. The latter require an abelian category; set-valued presheaves are not abelian. The anodyne grep hits in AnodyneExtensions/Basic.lean:110-119 are the small-object theorem for the already specified simplicial horn class, without this bounded-subobject assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subpresheaf\", \"Cardinal\"",
+   "results": "{\"t\": \"2026-10-16T21:50:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Subpresheaf\\\", \\\"Cardinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Subobject and presheaf-monomorphism facts and fixed Kan-Quillen generating inclusions are not a uniform bounded enlargement theorem. Read the small-object construction and its cardinal assumptions; none states the required weak-equivalence subobject assertion without a pre-existing model structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cisinski bounded subobject lemma for weak equivalence monomorphisms without an assumed model structure",
+   "results": "{\"t\": \"2026-10-16T21:50:13Z\", \"tool\": \"leansearch\", \"query\": \"Cisinski bounded subobject lemma for weak equivalence monomorphisms without an assumed model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.Subobject.mk\", \"CategoryTheory.Subobject.mk_surjective\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"CategoryTheory.Subobject.ofLEMk\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_iff_of_objectProperty\", \"CategoryTheory.Subobject.instMonoOfLE\"], \"digest\": \"198b802002c6978c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Subobject and presheaf-monomorphism facts and fixed Kan-Quillen generating inclusions are not a uniform bounded enlargement theorem. Read the small-object construction and its cardinal assumptions; none states the required weak-equivalence subobject assertion without a pre-existing model structure."
+  },
+  {
+   "tool": "grep",
+   "query": "Cisinski|bounded.*subpresheaf|presheaf.*bounded.*weak",
+   "results": "{\"t\": \"2026-10-16T21:50:14Z\", \"tool\": \"grep\", \"query\": \"Cisinski|bounded.*subpresheaf|presheaf.*bounded.*weak\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Subobject and presheaf-monomorphism facts and fixed Kan-Quillen generating inclusions are not a uniform bounded enlargement theorem. Read the small-object construction and its cardinal assumptions; none states the required weak-equivalence subobject assertion without a pre-existing model structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bounded enlargement of a weak equivalence monomorphism of set valued presheaves relative to an interval and anodyne extensions",
+   "results": "{\"t\": \"2026-10-16T21:50:19Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform bounded enlargement of a weak equivalence monomorphism of set valued presheaves relative to an interval and anodyne extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"CategoryTheory.Meq.refine\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"CategoryTheory.Meq.refine_apply\", \"SSet.skeletonOfMono\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\", \"CategoryTheory.MorphismProperty.presheaf_mono_of_le\", \"CategoryTheory.MorphismProperty.fst'_self_eq_snd\"], \"digest\": \"103a9ff172693343\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Subobject and presheaf-monomorphism facts and fixed Kan-Quillen generating inclusions are not a uniform bounded enlargement theorem. Read the small-object construction and its cardinal assumptions; none states the required weak-equivalence subobject assertion without a pre-existing model structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalence inclusions of presheaves admit small subobjects closed under a homotopy inverse and homotopy with a cardinal bound independent of the inclusion",
+   "results": "{\"t\": \"2026-10-16T21:50:37Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalence inclusions of presheaves admit small subobjects closed under a homotopy inverse and homotopy with a cardinal bound independent of the inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapFullSubcategoryι\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceHomFullSubcategory\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"9939258b5549e874\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Subobject and presheaf-monomorphism facts and fixed Kan-Quillen generating inclusions are not a uniform bounded enlargement theorem. Read the small-object construction and its cardinal assumptions; none states the required weak-equivalence subobject assertion without a pre-existing model structure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presheaf-cylinder-model-recognition",
@@ -103,5 +251,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presheaf-weak-mono-bounded-enlargement",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave nine explicit steps: anodyne weak equivalences; intersection-preserving bounded replacement; Whitehead/retract and relative homotopy; small supports; lambda-stage closure below alpha; restriction to the intersection and descent through natural replacement maps. One new general statement-only replacement lemma, with no weak-equivalence conclusion. Corrected the printed source proof cardinal gap, reported separately. No Lean attachment found.",
+  "blueprint": "Realizes the finite coefficient mapping-complex adjunction infrastructure of prop-coef-integral-exceptional-adjoint, proof paragraph 2, through cylinder-model recognition: specifically the uniform bounded enlargement supporting its generating trivial-cofibration set. Steps 3,6,7,8 implement Cisinski 2.4.36-2.4.38; Steps 1,2,4,5 supply the pre-model homotopy arguments of 2.4.24-2.4.34.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-33ceff479",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-33ceff479 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit and the parent's step 9. CatLR is not in literature/ and network access is blocked, so I could not open Cisinski 2.4.36-2.4.38. I checked the mathematics independently instead. All nine steps hold: e0□(δ×K) gives direct homotopy as an equivalence relation; An is contained in W_I; R(F) is naive fibrant by lifting-class closure plus transfinite lifting; k is a retract of j through the factorization and Whitehead nodes, whose hypotheses I checked; the strong-deformation-retract filler is valid; the size bounds come from regularity with λ<α; clause (2) identifies R(V∩X); the last step is 2-of-3. The new replacement node is true. I checked it by my own one-step attachment construction (Λ consists of monos, so attaching cells along maps into an intersection gives preservation of monos and intersections; λ-presentable domains; α=(2^ν)^+). Edge cases A=∅, Λ=∅, empty generator domains, B=∅ and F=∅ pass. It is not a restatement of the item. No duplicate exists among the 8 small-object, presentability and accessibility nodes I read or in an rg over dag/nodes. There is no cycle, the route stays inside the unit apart from Mathlib leaves, there is no SGA, and no tool_uses are accepted. The one fault (B form, brief §3): the new node had no lean_audit. The repaired whole file is in fixes/. The report's source-error claim about the printed 2.4.38 proof is unverified here; the maintainer should check the PDF before recording it. The delivered proof does not depend on it.; 1 file(s) fixed by the reviewer"
  }
 }

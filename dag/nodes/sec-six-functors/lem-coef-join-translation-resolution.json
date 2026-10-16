@@ -32,9 +32,160 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_{n,m}=X_{n+m+1}$. For monotone maps $\\alpha:[n']\\to[n]$ and $\\beta:[m']\\to[m]$, the two restriction operators commute, since $(\\alpha\\star1)(1\\star\\beta)=\\alpha\\star\\beta=(1\\star\\beta)(\\alpha\\star1)$ on the ordered blocks. Composition and identity operators follow from the same equality. This defines the bisimplicial set $B$ and the diagram $n\\mapsto t_nX$. The first-block inclusion commutes with every last-block operator; hence its restriction is the simplicial map $p_n$ to the constant set $X_n$. The last-block inclusion commutes with every first-block operator; hence its restriction is an augmented simplicial diagram $e_\\bullet$. For $f:X\\to Y$, the equality $fX(\\gamma)=Y(\\gamma)f$ for every ordinal map $\\gamma$ proves naturality of both maps and of all displayed operators.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 1.3.4.11; verification of both ordinal-sum variables and augmentations."
+   }
+  },
+  {
+   "text": "Fix $n$. The faces and degeneracies of $t_nX$ in degree $m$ are $D_i=d_{n+1+i}$ and $S_i=s_{n+1+i}$, respectively. For the augmentation $p_n$ define $h_{-1}:X_n\\to X_{n+1}$ and $h_m:X_{n+m+1}\\to X_{n+m+2}$ by the same formula $s_n$: duplicate the last vertex of the first block, placing its copy at the start of the second block. Then $p_{n,0}h_{-1}=1$, $D_0h_m=d_{n+1}s_n=1$, and $D_1h_0=d_{n+2}s_n=s_nd_{n+1}=h_{-1}p_{n,0}$. For $0\\leq i\\leq m+1$, $D_{i+1}h_{m+1}=d_{n+2+i}s_n=s_nd_{n+1+i}=h_mD_i$; for $0\\leq i\\leq m$, $S_{i+1}h_m=s_{n+2+i}s_n=s_ns_{n+1+i}=h_{m+1}S_i$. Thus every hypothesis of [lem-coef-extra-degeneracy-contraction] holds, including the augmented degree $-1$, and it gives a simplicial section and a simplicial homotopy of its composite with $p_n$ to the identity.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-extra-degeneracy-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.12; explicit contraction replacing the omitted contractibility assertion."
+   }
+  },
+  {
+   "text": "A simplicial homotopy $A\\times\\Delta^1\\to A$ realizes to a continuous homotopy: by [lem-coef-realization-finite-limits], $|A\\times\\Delta^1|=|A|\\times_k[0,1]$, and composing the realized map with this identification gives the homotopy with the prescribed endpoints. Apply this to the section and homotopy in Step 2. On realizations $p_n$ is a homotopy equivalence. It induces a bijection on components; at a basepoint its two induced homomorphisms are inverse up to the basepoint-change isomorphism along the homotopy path. Therefore every based homotopy-group map is an isomorphism, exactly the weak-equivalence definition in [def-cbc-enhanced-diagrams-cones]. This proves the first clause for arbitrary $X$, without requiring any horn fillers.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.12; passage from the explicit simplicial contraction to weak equivalence."
+   }
+  },
+  {
+   "text": "Fix $m$ and instead vary $n$. The augmented simplicial set $H_n=B_{n,m}$ has faces $d_i$ and degeneracies $s_i$ in the first block, and augmentation to the constant set $X_m$ by deleting that block. Reverse this simplicial direction: set $V_n=H_n$, with $d_i^V=d_{n-i}$ and $s_i^V=s_{n-i}$ in degree $n$. These are simplicial operators, since conjugating an ordinal map $\\alpha:[a]\\to[b]$ to $i\\mapsto b-\\alpha(a-i)$ preserves its order and composition. Set $h_{-1}=s_0:X_m\\to X_{m+1}$ and $h_n=s_{n+1}:X_{n+m+1}\\to X_{n+m+2}$. Its extra-degeneracy equations are $\\varepsilon h_{-1}=1$, $d_0^Vh_n=d_{n+1}s_{n+1}=1$, $d_1^Vh_0=d_0s_1=s_0d_0=h_{-1}\\varepsilon_0$, and\n$$d_{i+1}^Vh_{n+1}=d_{n+1-i}s_{n+2}=s_{n+1}d_{n+1-i}=h_nd_i^V,$$\n$$s_{i+1}^Vh_n=s_{n-i}s_{n+1}=s_{n+2}s_{n-i}=h_{n+1}s_i^V.$$\nThe ranges are respectively $0\\leq i\\leq n+1$ and $0\\leq i\\leq n$. Apply [lem-coef-extra-degeneracy-contraction] and Step 3's realized-homotopy argument. The reversal does not change the realized homotopy type: the formula $[z;(u_0,\\ldots,u_n)]\\mapsto[z;(u_n,\\ldots,u_0)]$ gives an involutive homeomorphism $|V|\\to|H|$, since conjugation of every ordinal operator reverses the same coordinates in the quotient relation. It commutes with augmentation to $X_m$. Thus $H\\to\\operatorname{disc}(X_m)$ is a weak homotopy equivalence. These contractions need not commute with the other variable; the augmentation itself does, by Step 1.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.13; agent proof by contracting the other direction, with the reversal and all extra-degeneracy equations explicit."
+   }
+  },
+  {
+   "text": "Let $E_{n,m}=X_m$, constant in $n$. The maps $B_{n,m}\\to E_{n,m}$ of Step 1 form a map of bisimplicial sets and, for each fixed $m$, Step 4 proves a weak equivalence in the $n$ direction. Apply the exchanged-direction clause of [lem-coef-bisimplicial-diagonal-equivalence]. Its diagonal is the weak equivalence\n$$a:\\operatorname{diag}B\\longrightarrow X,\\qquad a_r:X_{2r+1}\\to X_r$$\ngiven by restriction to the last $r+1$ vertices. We next verify the coherent colimit property, rather than equating a weak-equivalence assertion with that property.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.13; diagonal weak equivalence of the augmentation."
+   }
+  },
+  {
+   "text": "Work with the Kan model structure of [lem-coef-kan-quillen-right-proper], and its Reedy diagram model structure on $\\mathsf{sSet}^{\\Delta^{\\mathrm{op}}}$ from [lem-coef-reedy-model-structure]. Every such bisimplicial object is Reedy cofibrant. Indeed, in each fixed inner degree its latching colimit consists of the outer degenerate simplices: the unique surjection/nondegenerate factorization of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] identifies two presentations exactly through their common nondegenerate presentation. Thus the latching map is degreewise injective, including degree zero where its source is empty. Cofibrations in the Kan model structure are precisely these monomorphisms, so in particular $B$ is Reedy cofibrant. All index categories here are the small ordinary category $\\Delta^{\\mathrm{op}}$ in the same universe.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Examples A.2.9.8 and A.2.9.21; direct latching verification."
+   }
+  },
+  {
+   "text": "For a bisimplicial set $Z$, let $LZ=\\int^{[n]}Z_n\\times\\Delta^n$. In degree $r$ its elements are classes $(z,\\alpha)$, $z\\in Z_{n,r}$, $\\alpha:[r]\\to[n]$, with relation $(Z(\\gamma)z,\\alpha)\\sim(z,\\gamma\\alpha)$. The map $(z,\\alpha)\\mapsto Z(\\alpha)z\\in Z_{r,r}$ is well-defined, with inverse $z\\mapsto(z,1_{[r]})$; the relation shows both composites are identities. The inner operator and the outer operator commute, so this is a simplicial identification $LZ=\\operatorname{diag}Z$. Giving a map from this coend to $K$ is, by the same relation and cartesian currying, giving a natural family $Z_n\\to\\operatorname{Fun}(\\Delta^n,K)$. Hence $L$ is left adjoint to $R(K)_n=\\operatorname{Fun}(\\Delta^n,K)$. These are explicit set-valued coends and adjunctions, with no homotopy-colimit assertion assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.2.9.29; explicit coend, inverse and adjunction."
+   }
+  },
+  {
+   "text": "The adjunction in Step 7 is Quillen. For a Kan fibration $u:K\\to K'$, the relative matching map of $R(u)$ in outer degree $n$ is\n$$\\operatorname{Fun}(\\Delta^n,K)\\longrightarrow\\operatorname{Fun}(\\partial\\Delta^n,K)\\times_{\\operatorname{Fun}(\\partial\\Delta^n,K')}\\operatorname{Fun}(\\Delta^n,K').$$\nThis follows by restricting a map to all proper faces, whose union is the boundary (also $n=0$, with empty boundary). Lifting a horn against this map is, by cartesian currying, lifting $u$ against the pushout product of $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ with that horn. The boundary is mono and the horn is anodyne by the trivial-cofibration characterization of [lem-coef-kan-quillen-right-proper]; their pushout product is anodyne by [lem-coef-sset-anodyne-pushout-product]. Thus the matching map is a Kan fibration. If $u$ is trivial, lift boundaries instead of horns: the pushout product of two monomorphisms is a monomorphism, since degreewise its domain is the union of two subsets of the product. A trivial Kan fibration lifts against every monomorphism, by the cited model structure and its weak factorization system. The matching map is therefore a trivial fibration. The relative matching characterization of [lem-coef-reedy-model-structure] proves that $R$ preserves fibrations and trivial fibrations. By adjunction of lifting squares, preservation of these two right classes says that $L$ preserves cofibrations and trivial cofibrations, exactly the left-side hypothesis of the derived-adjunction theorem. Apply [lem-coef-model-infinity-derived-adjunction] to obtain the coherent derived adjunction.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Examples A.2.9.29-31; direct relative matching proof of the coend Quillen adjunction."
+   }
+  },
+  {
+   "text": "We now construct the comparison with spaces by enriched functors. Let $\\mathcal S_*,\\mathcal K_*,H_0,H_{\\mathcal S},H_{\\mathcal K}$ and $a,b,j,h,i,v$ be exactly those of [lem-coef-kan-enriched-hammock-comparison]. The three specified functors $a,b,j$ are Dwyer--Kan equivalences. Apply the functorial locally Kan replacement $R$ and coherent nerve of [lem-coef-coherent-nerve-comparison] to the entire zigzag, including its commutative square $ahi=jbv$. This gives equivalences\n$$N_{\\mathrm{hc}}(R\\mathcal K_*)\\xrightarrow{\\simeq}N_{\\mathrm{hc}}(RH_{\\mathcal K})\\xrightarrow{\\simeq}N_{\\mathrm{hc}}(RH_{\\mathcal S})\\xleftarrow{\\simeq}N_{\\mathrm{hc}}(RH_0).$$\nThe category $\\mathcal K_*$ is locally Kan: [lem-cbc-kan-mapping-homotopy-invariance] states that $\\operatorname{Fun}(A,K)$ is Kan whenever $K$ is Kan, for every $A$. Thus its replacement map induces an equivalence $N_{\\mathrm{hc}}(\\mathcal K_*)\\simeq N_{\\mathrm{hc}}(R\\mathcal K_*)$. Put $\\mathcal S=N_{\\mathrm{hc}}(\\mathcal K_*)$, the coherent category of spaces and their simplicial mapping objects in the statement. By [lem-coef-hammock-infinity-localization], $N_{\\mathrm{hc}}(RH_0)$ together with $N(h)$ and replacement is the universal localization $\\mathcal S_0[W^{-1}]_\\infty$, compatible with actual maps. Inverting the first two displayed equivalences and the replacement equivalence constructs a functor equivalence $E:\\mathcal S_0[W^{-1}]_\\infty\\to\\mathcal S$. The equality $ahi=jbv$ makes $Eqi$ coherently equivalent to $N_{\\mathrm{hc}}(v)$, where $q$ is localization; hence this comparison is already compatible with the actual functor on all ordinary Kan complexes, not just its objectwise mapping spaces.\n\nFor all simplicial sets, choose a functorial fibrant replacement $\\eta:1\\to T$ by factoring the terminal maps in [lem-coef-kan-quillen-right-proper]; $TX$ is Kan and $\\eta_X$ is a trivial cofibration. Applying $Eq$ to $\\eta$ gives a coherent transformation from $Eq$ to $EqiT$, and every component is an equivalence because $q$ inverts $W$. The componentwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes it a natural equivalence. Combining it with $Eqi\\simeq N_{\\mathrm{hc}}(v)$ gives $Eq\\simeq N_{\\mathrm{hc}}(v)T$ as functors on the entire ordinary category of simplicial sets. This identifies $qX$, its maps, every diagram and its transformations with $\\langle X\\rangle$ and their specified Kan-replacement images. The derived adjunction of Step 8 can therefore be transported through this actual functor equivalence and the corresponding functor-category equivalence. Composition coherence comes from the cited simplicial functors and their commutative square; no composition compatibility is inferred from separate frame mapping spaces.",
+   "uses": [
+    "lem-coef-kan-enriched-hammock-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433, with Section 7.4, p.437; independent enriched-hammock route to spaces. Universal-localization and derived coherent-nerve inputs are separately cited nodes; functor compatibility from the strict square and the natural fibrant-replacement transformation."
+   }
+  },
+  {
+   "text": "For Kan $K$, the natural maps $K\\to R(K)_n$ are constant maps on $\\Delta^n$. Each is a simplicial homotopy equivalence by [lem-cbc-kan-mapping-homotopy-invariance], applied to $\\Delta^n\\to\\Delta^0$: its realization is the collapse of a convex simplex and is a weak equivalence, with no nonemptiness assumption on $K$. These maps commute with every ordinal operator. Since $R$ is right Quillen, $R(K)$ is Reedy fibrant; its derived image is consequently represented by this diagram. The constant-diagram comparison and restriction compatibility in [lem-coef-small-diagram-model-rectification] identify it with the coherent constant diagram on $\\langle K\\rangle$. Step 6 says $B$ is already cofibrant. The derived adjunction of [lem-coef-model-infinity-derived-adjunction] therefore gives, naturally in every space $\\langle K\\rangle$,\n$$\\operatorname{Map}(\\langle\\operatorname{diag}B\\rangle,\\langle K\\rangle)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N\\Delta^{\\mathrm{op}},\\mathcal S)}(\\langle B_\\bullet\\rangle,\\operatorname{const}\\langle K\\rangle).$$\nBy the dual mapping-space criterion for cocones in [lem-cbc-enhanced-functor-cone-calculus], this is the full universal property of a colimiting cocone: its corepresented map is an equivalence for every target. Its cocone is furnished by the coend maps $B_n\\times\\Delta^n\\to\\operatorname{diag}B$: these are the ordinary adjunction unit, followed by the inverse of the constant-diagram equivalence, and the derived-adjunction theorem identifies the unit coherently. Finally compose with the weak equivalence $a$ of Step 5. The composite $B_n\\times\\Delta^n\\to\\operatorname{diag}B\\xrightarrow a X$ is exactly $e_n$ after projection to $B_n$. Indeed in degree $r$, a pair $z\\in X_{n+r+1}$, $\\alpha:[r]\\to[n]$ first restricts along $\\alpha\\star1_{[r]}$, then along the last block; the composite is the original last-block inclusion, independent of $\\alpha$. Hence the resulting coherent cocone is the specified $e_\\bullet$, and is colimiting with apex $\\langle X\\rangle$. All coend formulas, adjunction units and the last-block equality commute with maps of $X$; thus this is the asserted natural cocone, not merely an equivalence of possible apex objects.",
+   "uses": [
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-infinity-derived-adjunction",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.9.30 and Example A.2.9.31; mapping-space and actual augmentation verification for HA Lemma 1.3.4.13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-realization-finite-limits",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-kan-enriched-hammock-comparison",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-coef-hammock-infinity-localization",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-small-diagram-model-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "HA Notation 1.3.4.11 and Lemmas 1.3.4.12-13; explicit two-direction contractions and Reedy coend argument using HTT A.2.9.29-31. Repaired space comparison via the independent enriched-hammock functors of Dwyer--Kan Proposition 4.8, not HA 1.3.4.20. Online sources read; local copies WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -91,10 +242,45 @@
    "results": "{\"t\": \"2026-10-16T20:18:57Z\", \"tool\": \"leanfinder\", \"query\": \"The decalage construction on a simplicial set is weakly equivalent to its set of n simplices and augments to a homotopy colimit resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cosk\", \"SSet.cosk\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.SimplicialObject.sk\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\"], \"digest\": \"c02ff673d46f4aff\"}",
    "date": "2026-10-17",
    "verdict": "no match: coskeleton and skeleton constructions and an extra degeneracy for a classifying-space cover are different constructions. Read ExtraDegeneracy.lean:409-420: ExtraDegeneracy.homotopyEquiv assumes a preadditive category with zero object and contracts an alternating face complex, not a simplicial set or a coherent colimit in spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial set X the ordinal sum translation with m simplices X n+m+1 is weakly equivalent to discrete X n and its simplicial homotopy colimit is X",
+   "results": "{\"t\": \"2026-10-16T20:49:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial set X the ordinal sum translation with m simplices X n+m+1 is weakly equivalent to discrete X n and its simplicial homotopy colimit is X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.iSup_skeleton\", \"SSet.hasColimits\", \"SSet.Truncated.hasColimits\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn.isColimit\", \"SSet.Truncated\", \"SSet.sk\"], \"digest\": \"5dee81a4acc7e635\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: reviewed returned skeleton/ordinary-colimit and standard-simplex extra-degeneracy declarations. ExtraDegeneracy.homotopyEquiv is a preadditive alternating-complex result, not the translation resolution. The actual simplicial contraction in ExtraDegeneracy.lean:126-174 is already the existing node lem-coef-extra-degeneracy-contraction. SingularSet.lean:15-45 provides ordinary realization and explicitly leaves its Quillen equivalence TODO. No hit states both translation clauses or is a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-16T20:49:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\"], \"digest\": \"c14011ea5b070afd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: reviewed returned skeleton/ordinary-colimit and standard-simplex extra-degeneracy declarations. ExtraDegeneracy.homotopyEquiv is a preadditive alternating-complex result, not the translation resolution. The actual simplicial contraction in ExtraDegeneracy.lean:126-174 is already the existing node lem-coef-extra-degeneracy-contraction. SingularSet.lean:15-45 provides ordinary realization and explicitly leaves its Quillen equivalence TODO. No hit states both translation clauses or is a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|décalage|join.*translation|translation.*join",
+   "results": "{\"t\": \"2026-10-16T20:49:49Z\", \"tool\": \"grep\", \"query\": \"decalage|décalage|join.*translation|translation.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: reviewed returned skeleton/ordinary-colimit and standard-simplex extra-degeneracy declarations. ExtraDegeneracy.homotopyEquiv is a preadditive alternating-complex result, not the translation resolution. The actual simplicial contraction in ExtraDegeneracy.lean:126-174 is already the existing node lem-coef-extra-degeneracy-contraction. SingularSet.lean:15-45 provides ordinary realization and explicitly leaves its Quillen equivalence TODO. No hit states both translation clauses or is a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The decalage ordinal sum bisimplicial resolution of a simplicial set has contractible fibers and realizes to the original space",
+   "results": "{\"t\": \"2026-10-16T20:50:36Z\", \"tool\": \"leansearch\", \"query\": \"The decalage ordinal sum bisimplicial resolution of a simplicial set has contractible fibers and realizes to the original space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"sSetTopAdj\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"SSet.instBalanced\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SimplexCategory.toTop\", \"SSet.δ_comp_σ_self_apply\"], \"digest\": \"675cb5f801c1e1d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: reviewed returned skeleton/ordinary-colimit and standard-simplex extra-degeneracy declarations. ExtraDegeneracy.homotopyEquiv is a preadditive alternating-complex result, not the translation resolution. The actual simplicial contraction in ExtraDegeneracy.lean:126-174 is already the existing node lem-coef-extra-degeneracy-contraction. SingularSet.lean:15-45 provides ordinary realization and explicitly leaves its Quillen equivalence TODO. No hit states both translation clauses or is a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented simplicial set with an extra degeneracy is a homotopy equivalence to its augmentation and bisimplicial diagonals compute homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T20:50:38Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented simplicial set with an extra degeneracy is a homotopy equivalence to its augmentation and bisimplicial diagonals compute homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.mk.inj\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"d6449347fba298ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: reviewed returned skeleton/ordinary-colimit and standard-simplex extra-degeneracy declarations. ExtraDegeneracy.homotopyEquiv is a preadditive alternating-complex result, not the translation resolution. The actual simplicial contraction in ExtraDegeneracy.lean:126-174 is already the existing node lem-coef-extra-degeneracy-contraction. SingularSet.lean:15-45 provides ordinary realization and explicitly leaves its Quillen equivalence TODO. No hit states both translation clauses or is a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-marked-realization",
@@ -114,5 +300,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-translation-resolution",
+  "worker": "stage1",
+  "summary": "Repair of returned head ad7fbeb25b: statement unchanged. Retained Steps 1-8 and 10; replaced Step 9, which incorrectly promoted frame mapping-space comparisons to a coherent localization equivalence. One new statement-only node specifies the three canonical enriched-hammock Dwyer--Kan equivalences of DK Proposition 4.8, including their strict vertex square. Step 9 now constructs the functor equivalence by applying the derived coherent nerve to that zigzag, and checks compatibility with q on all simplicial sets using a natural fibrant replacement. No parent changes or downstream simplicial-model-nerve-localization theorem are used. All off-unit proof tools are declared below.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, via the complete inherited enriched-marked-realization ancestry: realizes HA Notation 1.3.4.11 and Lemmas 1.3.4.12-13 underlying the interval comparison. This is below-unit foundational work, not a change to the biduality unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic precomposition homotopy invariance for maps into a Kan complex identifies the right derived coend adjoint with the constant diagram; this unit has no alternate Kan mapping lemma."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone mapping-space criterion converts the derived adjunction into the colimiting-cocone assertion; the biduality unit has no replacement for this infinity-categorical definition/theorem comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-ef1868d63",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ef1868d63 (reviewer sub-agent of L); spot-checked: I read all of it: the item's 10 steps, the new node `lem-coef-kan-enriched-hammock-comparison`, and the statements of all 19 cited nodes. The cited sources (HA, HTT, Dwyer–Kan, Hinich) are not in `literature/` and the review service blocks network access, so I could not reopen the source pages. I checked each step against the cited DAG statements instead, and checked DK Prop. 4.8 by direct verification; the report's WANTED lines stand. Steps 2 and 4: every extra-degeneracy identity and index range was rechecked; the reversed direction uses d^V_i=d_{n-i}, h_n=s_{n+1}. Step 5: the exchanged-direction clause of the diagonal lemma applies, and the diagonal is the last-block restriction. Step 6: the latching map is injective by the unique nondegenerate decomposition, and the degree-0 source is empty. Step 7: the coend equals the diagonal, with an explicit adjunction. Step 8: relative matching maps and pushout products (mono with anodyne, mono with mono) give a Quillen pair, then the derived adjunction. Step 9 is repaired: it is now a genuine functor equivalence built from the DK zigzag, the coherent nerve, hammock localization, the strict square ahi=jbv and a natural fibrant replacement with the componentwise criterion. No node that depends on the item is used, so there is no cycle (I computed the full dependency closure). Step 10: the cocone is e_n after projection, checked degree by degree. One phrase is loose: 'inverse of the constant-diagram equivalence' should be read after Kan replacement of diag B; it is correct in substance. The item's statement was tested on X = empty, Δ⁰ and Δ¹, and no Kan hypothesis is used. New node: it is DK 4.8 specialized to sSet with the Kan model structure. I checked directly that the square commutes strictly, including identities. j is a DK equivalence degreewise via the enriched Ex^∞ functor. a works at the π₀ level by the cylinder argument, and b is the classical DK theorem. It is not a duplicate of simplicial-model-nerve-localization (which is downstream of the item), hammock-pair-homotopy-invariance or the other hammock nodes. It restates no clause of the item, and its form fields are complete. FIX: the new node's statement used P^disc and W^disc inside S_0^disc without defining them (a B2 self-containment fault). Two defining sentences were added in fixes/dag/nodes/sec-six-functors/lem-coef-kan-enriched-hammock-comparison.json, with no mathematical change. Accepted tool_uses: lem-cbc-kan-mapping-homotopy-invariance and lem-cbc-enhanced-functor-cone-calculus, both generic tools. Report inaccuracy only: the second reading says it changed the item's created metadata to Q52, but the file still has Q83/lem-coef-enriched-marked-realization, which is the correct value. No SGA source is used and no target is weakened.; 1 file(s) fixed by the reviewer"
  }
 }

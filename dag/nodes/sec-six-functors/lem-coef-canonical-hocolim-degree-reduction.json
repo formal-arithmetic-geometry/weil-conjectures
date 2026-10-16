@@ -30,9 +30,84 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-hocolim-reindexing-zigzags"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $W:K\\to\\mathcal M$ by $W(d,[n],u)=A_d^0$ and $W(a,\\alpha)=A_a^0$. For the unique $c_n:[n]\\to[0]$, put $\\eta_{(d,[n],u)}=A_d(c_n):T(d,[n],u)\\to W(d,[n],u)$. Naturality is the equality $A_e(c_m)A_e(\\alpha)A_a^n=A_a^0A_d(c_n)$, since $c_m\\alpha=c_n$ and $A_a$ is cosimplicially natural. Every component is a weak equivalence by the resolution hypothesis, and $\\eta i=1_{V_0}$. Hence [lem-coef-hocolim-reindexing-zigzags], whose constructions preserve objectwise weak equivalences, gives the isomorphism $\\eta_*=H_K(\\eta)=\\operatorname{colim}_KQ_K(\\eta):\\operatorname{hocolim}_K T\\to\\operatorname{hocolim}_K W$. The reindexing square $\\eta_*\\,i^T_*=i^W_*$ commutes in the homotopy category; here $i^T_*,i^W_*$ are the canonical comparisons of that node for the value diagrams $T$ and $W$, both with restriction $Ti=Wi=V_0$. This naturality in the value diagram is not part of the cited statement, so we check it. Apply the localization $q$ of Step 3. By [lem-coef-model-colimit-localization-comparison] the ordinary colimit cocones $\\lambda_T,\\lambda_W,\\lambda_{V_0}$ of $Q_KT,Q_KW,Q_0V_0$ become colimit cocones of $qT,qW,qV_0$, and the canonical comparison $i^Y_*$ ($Y=T,W$) is the map out of the colimit $q\\operatorname{hocolim}_{I_0}V_0$ inducing the restricted cocone $\\lambda_Y|_i$ (Step 5 checks this on the explicit lift representative). Functoriality of $Q_K$ and of ordinary colimits gives the strict equality $\\operatorname{const}(H_K(\\eta))\\circ\\lambda_T=\\lambda_W\\circ Q_K(\\eta)$ of ordinary cocones; after $q$ and the identifications $qQ_KT\\simeq qT$, $qQ_KW\\simeq qW$, its restriction along $i$ is $\\lambda_W|_i$ because $\\eta i=1_{V_0}$. Thus $qH_K(\\eta)\\circ qi^T_*$ and $qi^W_*$ induce homotopic cocones on $qV_0$. By the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], precomposition with the colimit cocone is an equivalence $\\operatorname{Map}(q\\operatorname{hocolim}_{I_0}V_0,x)\\simeq\\operatorname{Map}(qV_0,\\operatorname{const}x)$, hence injective on components, so the two maps agree in $h\\mathcal C$, which Step 3 identifies with the homotopy category. We will prove that the lower comparison $\\operatorname{hocolim}_{I_0}V_0\\to\\operatorname{hocolim}_K W$ is an isomorphism.",
+   "uses": [
+    "lem-coef-hocolim-reindexing-zigzags",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 4.6, Section 8 and Appendix A: replace the values by degree zero using the resolution augmentation; explicit agent regrouping of the same canonical diagram."
+   }
+  },
+  {
+   "text": "For $\\alpha:[n]\\to[m]$ define $\\alpha^*:I_m\\to I_n$ by $(d,u)\\mapsto(d,uA_d(\\alpha))$, and keep the arrow $a:d\\to e$. The arrow condition follows from $A_e(\\alpha)A_a^n=A_a^mA_d(\\alpha)$. Composition of precomposition maps makes $[n]\\mapsto I_n$ a strict functor $\\Delta^{\\mathrm{op}}\\to\\mathrm{Cat}$, and $V_n\\alpha^*=V_m$ strictly. Its Cartesian Grothendieck total category over $\\Delta$ is exactly $K$: a fiber arrow $(d,u)\\to\\alpha^*(e,u')$ is precisely an $a:d\\to e$ with $u'A_e(\\alpha)A_a^n=u$. Under this equality $W$ restricts to $V_n$ on each fiber and sends every transport arrow $(1_d,\\alpha)$ to $1_{A_d^0}$. The transport for $c_n$ is the functor $i_n:I_0\\to I_n$. These are small categories in the fixed containing universe: $D$ and $\\Delta$ are small and the objects of each $I_n$ form a small union of the Hom sets $\\operatorname{Hom}_{\\mathcal M}(A_d^n,X)$. Enlarge that universe once if necessary, as allowed by the statement conventions, so all these categories remain small for both cited colimit theorems.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Section 8 proof of Proposition 4.6: explicit indexing-category version of assembling all singular degrees; the Cartesian total category and its variance are checked directly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-model-colimit-localization-comparison] to work in $\\mathcal C=\\mathcal M[W_{\\mathcal M}^{-1}]_\\infty$, writing $q$ for localization. Every small ordinary-indexed model homotopy-colimit cocone becomes its coherent colimit cocone. Use $h\\mathcal C$ of [lem-coef-infinity-mapping-composition], whose morphisms are components of mapping spaces and whose composition is specified by triangles. For an ordinary category $J$, a functor $h\\mathcal C\\to J$ is exactly a simplicial map $\\mathcal C\\to N(J)$: triangles enforce composition, a path in a mapping space is a triangle with a degenerate edge and hence preserves the assigned arrow, and higher simplices of $N(J)$ are uniquely determined by their edge strings. Apply the universal property of $q$ with target $N(J)$. It identifies these functors with the functors $\\mathcal M\\to J$ inverting $W_{\\mathcal M}$, including natural transformations. Thus $h\\mathcal C$ is the ordinary localization used in the hypothesis, and the ordinary and coherent comparisons below have the same classes. The same cited node states exactly that an edge is an equivalence if and only if its component class is invertible. Thus $F_n=\\operatorname{colim}_{N(I_n)}qV_n$ exists. Apply [lem-coef-cartesian-grothendieck-colimit-formula] to $B=\\Delta$, $U([n])=I_n$ and $H=qW$: Step 2 verifies that transport arrows have identity images. It gives the coherent simplicial diagram $F:N(\\Delta)^{\\mathrm{op}}\\to\\mathcal C$, whose map for $\\alpha:[n]\\to[m]$ is $(\\alpha^*)_*:F_m\\to F_n$, and the equivalence $\\operatorname{colim}F\\simeq q\\operatorname{hocolim}_K W$. Step 4 below supplies existence of $\\operatorname{colim}F$ before the displayed equivalence is invoked; constructing $F$ requires only its fiber colimits. The fiber-inclusion clause identifies $F_0\\to\\operatorname{colim}F$ with the lower comparison of Step 1.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-cartesian-grothendieck-colimit-formula",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Section 8, Proposition 8.2: the total-versus-iterated homotopy-colimit comparison, expressed by the general Cartesian Grothendieck colimit formula rather than by presheaf realization."
+   }
+  },
+  {
+   "text": "The unique maps $c_n:[n]\\to[0]$ form a natural transformation $\\mathrm{id}_{\\Delta}\\to\\operatorname{const}([0])$: for $\\alpha:[n]\\to[m]$ one has $c_m\\alpha=c_n$. Taking opposites gives $\\operatorname{const}([0])\\to\\mathrm{id}_{\\Delta^{\\mathrm{op}}}$. Its nerve is a map $N(\\Delta)^{\\mathrm{op}}\\times\\Delta^1\\to N(\\Delta)^{\\mathrm{op}}$; postcomposing with the coherent functor $F$ of Step 3 gives $s:\\operatorname{const}(F_0)\\to F$, including all its higher coherences. Its component is $F(c_n^{\\mathrm{op}})=(i_n)_*$ by the transition formula of Step 3, and $(\\alpha^*)_*s_m=s_n$ is the displayed naturality equation. The hypothesis says exactly that every $s_n$ is an equivalence, by the invertible-component criterion and localization identification established in Step 3. By [lem-coef-infinity-pointwise-equivalences], $s$ is an equivalence of diagrams. The identity-augmented constant diagram with value $F_0$ extends to $N(\\Delta_{-\\infty})^{\\mathrm{op}}$ by the constant functor: every object goes to $F_0$ and every simplex to its degenerate simplex. Thus it is split in the exact sense of [lem-coef-infinity-split-augmentation-colimit], whose statement makes its identity augmentation a colimit cocone, without requiring any other colimits in $\\mathcal C$. Precompose this cocone with an inverse equivalence $s^{-1}:F\\to\\operatorname{const}(F_0)$, giving a cocone $\\mu$ on $F$ with apex $F_0$. By the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], $\\mu$ is colimiting if and only if, for every $x$, the map $\\operatorname{Map}_{\\mathcal C}(F_0,x)\\to\\operatorname{Map}_{D}(F,\\operatorname{const}x)$, $a\\mapsto\\operatorname{const}(a)\\circ\\mu$, is an equivalence, where $D=\\operatorname{Fun}(N(\\Delta)^{\\mathrm{op}},\\mathcal C)$ is a quasicategory by the same node. Up to homotopy this map is the corresponding map for the identity cocone on $\\operatorname{const}(F_0)$, an equivalence by the criterion applied to the colimit cocone just obtained, followed by precomposition with $s^{-1}$ on mapping spaces of $D$. By [lem-coef-infinity-mapping-composition] in $D$, precomposition depends only on component classes and composition is associative and unital up to homotopy, so precomposition with $s$ is a homotopy inverse of precomposition with $s^{-1}$. Hence $\\mu$ is colimiting. It gives a colimit with apex $F_0$. Its degree-zero leg is an equivalence because $s_0=1$. Therefore $F_0\\to\\operatorname{colim}F$ is the canonical degree-zero equivalence. This proves existence of the outer colimit required in Step 3 before that comparison is used.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-split-augmentation-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proof of Proposition 4.6, printed p. 196: collapse the homotopically constant simplicial homotopy colimit. Constant split augmentation supplies the colimit directly; HA 4.7.2.1-4 is the source of the cited generic theorem."
+   }
+  },
+  {
+   "text": "Steps 3-4 prove that the lower arrow in the reindexing square of Step 1 is an isomorphism. Its right vertical arrow $\\eta_*$ is an isomorphism, and its left vertical arrow is the identity because $\\eta i=1$. Therefore $i_*:\\operatorname{hocolim}_{I_0}V_0\\to\\operatorname{hocolim}_K T$ is an isomorphism in the homotopy category.  An actual representative can be chosen as follows. Write $Q_0V_0\\to V_0$ and $Q_KT\\to T$ for the projective cofibrant replacements. The restriction $i^*Q_KT\\to V_0$ is a projective trivial fibration, because these are objectwise trivial fibrations. Lift $Q_0V_0\\to V_0$ through it using projective cofibrancy of $Q_0V_0$. Take the colimit of the lift and compose with the ordinary reindexing cocone to obtain $\\operatorname{colim}_{I_0}Q_0V_0\\to\\operatorname{colim}_KQ_KT$. The lift equation makes this a representative of the canonical $i_*$ and makes its composite with the evaluation augmentation to $X$ equal to the source augmentation. Apply [lem-coef-model-localization-detects-weak-equivalences] to the actual homotopy-colimit comparison representing $i_*$: its image in the ordinary localization is an isomorphism, so it is a weak equivalence. No cofibrancy or fibrancy of its endpoints is required by that node. Finally the original $T$-cocone has component $u:A_d^n\\to X$, since an arrow of $K$ satisfies exactly $u'T(a,\\alpha)=u$. Restricting it along $i$ gives $u:A_d^0\\to X$, the $V_0$-augmentation. Thus the original comparison commutes with the augmentations, before passing to the homotopy category; the auxiliary $W$ need not have a strict augmentation to $X$. For a fixed $n$, choose the last-vertex map $v_n:[0]\\to[n]$. The $V_n$-augmentation has component $uA_d(v_n)$; it is natural in $I_n$ by naturality of $A_a$. On the image of $i_n$ this is $u_0A_d(c_n)A_d(v_n)=u_0$, because $c_nv_n=1_{[0]}$. Thus each assumed degree comparison also respects its augmentation to $X$. No step used fibrancy of $X$.",
+   "uses": [
+    "lem-coef-hocolim-reindexing-zigzags",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Conclusion of Proposition 4.6, printed p. 196; augmentation compatibility checked from the actual original cocones, not from a putative strict augmentation of W."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cartesian-grothendieck-colimit-formula",
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-split-augmentation-colimit",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Proposition 4.6, Section 8: explicit alternative regrouping proof using the resolution augmentation and Cartesian Grothendieck colimit formula; no bisimplicial-set result is applied to arbitrary model-category objects."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dugger-homotopically-surjective-map",
@@ -91,5 +166,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-canonical-hocolim-degree-reduction",
+  "worker": "stage1",
+  "summary": "Repair of landing return L against current main d26ac3a45b7f and returned head 6a6067af16. Re-read the current cited statements: none changed; the reindexing node has since been split and reviewed. Step 4 replaces the old sifted-index/locally-constant input by the present split-augmentation theorem and obtains all coherences of s by applying F to the nerve of the collapse natural transformation. Step 2 makes smallness explicit. Five steps and one generic statement-only Cartesian Grothendieck colimit node; statement unchanged; no compilation or push. Independent second reading: made the ordinary/coherent localization identification and the actual comparison representative explicit; fresh Mathlib searches confirm no exact leaf. The invertible-component criterion is cited from the existing mapping-composition node rather than reproved.",
+  "blueprint": "Ancestor proof paragraph 2, small model-category presentation input: realizes the same Dugger Proposition 4.6 / Section 8 degree-reduction argument by regrouping the comma homotopy colimits. The new generic fiber-colimit formula supplies only the total-versus-iterated comparison; the hypothesis, constant-diagram argument and degree-zero conclusion remain proved in the item.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1 and 4 use its generic cocone mapping-space criterion (maps out of a colimit are determined by the induced cocone; a cocone is colimiting iff the precomposition map of mapping spaces is an equivalence) and that functor simplicial sets are quasicategories; no node of sk-prop-sf-biduality-general states this black box, already accepted as a tool on lem-coef-hocolim-reindexing-zigzags and lem-coef-model-colimit-localization-comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-5b0366c43",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-5b0366c43 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no false statement and no circular or restated split; I repaired three small faults. Dugger and Du are not under literature/ and network access is blocked, so I could not open either at the cited place (both are recorded as WANTED). The item's statement is unchanged from the earlier import and its proof establishes it. I checked the new Cartesian Grothendieck colimit node mathematically: the composition is well-typed, the variance is right (L_c to L_b over B^op), and it holds for B=[1] (colim_E H = L_0, while without transport inversion U(0) is not final), for an empty base, for a one-object base and for empty fibers. It does not restate a clause of the item, and none of the ten related DAG statements I read duplicates it. Its four Mathlib searches are valid ('no match'). Item: Step 1 eta naturality checked; Step 2 elementary, K equals E term by term and W sends transport arrows to identities; Step 3 transition maps are (alpha^*)_*; Step 4 s(c_n) = (i_n)_*, and the constant split extension gives the colimit; Step 5 lift, weak-equivalence detection, and augmentations u A_d(v_n) checked. Repairs: (1) C3: Step 1 used naturality of g_* in the value diagram, which is only in the proof of lem-coef-hocolim-reindexing-zigzags. Step 1 now proves it via lem-coef-model-colimit-localization-comparison and the cocone criterion. (2) C1: Step 4's transport of a colimit cocone along an equivalence of diagrams had no citation. It now cites the cocone criterion of lem-cbc-enhanced-functor-cone-calculus and lem-coef-infinity-mapping-composition in Fun(N(Delta)^op, C). (3) The new node lacked merged_into and lean_audit, although the report said they were added; I added them. proof_deps is the union of the uses, and I accepted lem-cbc-enhanced-functor-cone-calculus as a tool use (already accepted on two nodes of the same unit). No cycle; no SGA; no node dropped.; 2 file(s) fixed by the reviewer"
  }
 }

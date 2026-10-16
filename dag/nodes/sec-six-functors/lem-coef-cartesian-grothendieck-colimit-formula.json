@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-cartesian-grothendieck-colimit-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: technical homotopy-colimit regrouping in the small model-category presentation input, underneath Dugger Proposition 4.6; integrate the degreewise comma categories before using homotopical constancy.",
+   "via": [
+    "lem-coef-canonical-hocolim-degree-reduction",
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Colimits of Cartesian Grothendieck diagrams inverting transport arrows",
+ "statement": "Use quasicategories, ordinary nerves, coherent diagrams, equivalence edges, mapping spaces and colimits in fixed containing universes as in [def-cbc-enhanced-diagrams-cones]. Let $B$ be a small ordinary category and $U:B^{\\mathrm{op}}\\to\\mathrm{Cat}$ a strict functor to small ordinary categories. Define $E$ to have objects $(b,x)$ with $x\\in U(b)$ and arrows $(b,x)\\to(c,y)$ the pairs $(f,u)$ with $f:b\\to c$ and $u:x\\to U(f)y$. Composition is $(g,v)(f,u)=(gf,U(f)(v)u)$. For $f:b\\to c$ and $y\\in U(c)$ call $(f,1):(b,U(f)y)\\to(c,y)$ a transport arrow. Let $H:N(E)\\to\\mathcal C$ be a coherent diagram in a quasicategory sending every transport arrow to an equivalence, and put $H_b=H|_{N(U(b))}$. Suppose every $L_b=\\operatorname{colim}_{N(U(b))}H_b$ exists. These fiber colimits form a coherent diagram $L:N(B)^{\\mathrm{op}}\\to\\mathcal C$: for $f:b\\to c$, its map $L_c\\to L_b$ is the composite\n$$L_c\\xrightarrow{\\ \\sim\\ }\\operatorname{colim}_{N(U(c))}(H_b\\circ N(U(f)))\\longrightarrow L_b,$$\nwhere the first arrow is the inverse of the colimit of the equivalence $H_b\\circ N(U(f))\\to H_c$ supplied by the transport arrows, and the second is reindexing along $U(f)$. If $\\operatorname{colim}_{N(B)^{\\mathrm{op}}}L$ exists, then $\\operatorname{colim}_{N(E)}H$ exists and there is a natural equivalence\n$$\\operatorname{colim}_{N(B)^{\\mathrm{op}}}L\\simeq\\operatorname{colim}_{N(E)}H.$$\nUnder this equivalence each map $L_b\\to\\operatorname{colim}L$ is the comparison induced by the fiber inclusion $U(b)\\to E$. The equivalence is an equivalence of colimit cocones, natural in $H$, and includes compatibility with any specified coherent cocone from $H$ to a fixed object. No nonemptiness condition on the base or its fibers is imposed; an empty fiber requires an initial object.",
+ "source": {
+  "document": "https://arxiv.org/pdf/2308.01798v1",
+  "place": "Peng Du, Reshaping limit diagrams and cofinality in higher category theory, Theorem 4.2 and Theorem 4.4(1), printed pp. 4-5: Cartesian total category localized at transport arrows, then decomposition of a colimit-indexing category. The displayed transition formula is the ordinary-base specialization, with the existence-only refinement from the colimit universal property; source read online 2026-10-17, not archived in literature/. No Stacks tag states this coherent-colimit result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of a diagram on a Cartesian Grothendieck construction that inverts Cartesian arrows is the iterated colimit of its fibre colimits over the opposite base",
+   "results": "{\"t\": \"2026-10-16T20:29:30Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of a diagram on a Cartesian Grothendieck construction that inverts Cartesian arrows is the iterated colimit of its fibre colimits over the opposite base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitFiberwiseColimitIso\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_inv\", \"CategoryTheory.Limits.hasColimit_fiberwiseColimit\", \"CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_hom\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\"], \"digest\": \"768e02777c2e066b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The Grothendieck hits, inspected in Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105 and its colimitFiberwiseColimitIso, are ordinary colimits on a covariant total category in an ordinary target. They do not assert this Cartesian-total coherent-colimit formula, invert transport arrows, or provide the higher coherences. KanExtension/Adjunction is also ordinary left Kan extension; the Fubini hit concerns an ordinary product index."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:29:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\"], \"digest\": \"a279e0222c24a4b7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The Grothendieck hits, inspected in Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105 and its colimitFiberwiseColimitIso, are ordinary colimits on a covariant total category in an ordinary target. They do not assert this Cartesian-total coherent-colimit formula, invert transport arrows, or provide the higher coherences. KanExtension/Adjunction is also ordinary left Kan extension; the Fubini hit concerns an ordinary product index."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*[Cc]olimit|[Cc]olimit.*Grothendieck",
+   "results": "{\"t\": \"2026-10-16T20:29:32Z\", \"tool\": \"grep\", \"query\": \"Grothendieck.*[Cc]olimit|[Cc]olimit.*Grothendieck\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\"], \"digest\": \"1165f3391592dcab\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The Grothendieck hits, inspected in Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105 and its colimitFiberwiseColimitIso, are ordinary colimits on a covariant total category in an ordinary target. They do not assert this Cartesian-total coherent-colimit formula, invert transport arrows, or provide the higher coherences. KanExtension/Adjunction is also ordinary left Kan extension; the Fubini hit concerns an ordinary product index."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits over a Cartesian Grothendieck construction can be computed as colimits of fibre colimits if the diagram sends Cartesian arrows to equivalences",
+   "results": "{\"t\": \"2026-10-16T20:29:32Z\", \"tool\": \"leansearch\", \"query\": \"Colimits over a Cartesian Grothendieck construction can be computed as colimits of fibre colimits if the diagram sends Cartesian arrows to equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\", \"CategoryTheory.Limits.fiberwiseColim\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Limits.colimitFiberwiseColimitIso\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\"], \"digest\": \"6c26c91208efd798\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The Grothendieck hits, inspected in Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105 and its colimitFiberwiseColimitIso, are ordinary colimits on a covariant total category in an ordinary target. They do not assert this Cartesian-total coherent-colimit formula, invert transport arrows, or provide the higher coherences. KanExtension/Adjunction is also ordinary left Kan extension; the Fubini hit concerns an ordinary product index."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated coherent colimits over the opposite base of a category fibred in categories compute the total diagram colimit after Cartesian arrows become equivalences",
+   "results": "{\"t\": \"2026-10-16T21:27:35Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated coherent colimits over the opposite base of a category fibred in categories compute the total diagram colimit after Cartesian arrows become equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitFiberwiseColimitIso\", \"CategoryTheory.Limits.fiberwiseColimCompColimIso\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.hasColimit_fiberwiseColimit\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.fiberwiseColimCompColimIso_hom_app\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\"], \"digest\": \"d31000265836a1f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105,175-209. colimitFiberwiseColimitIso and isColimitCoconeOfFiberwiseCocone concern ordinary covariant Grothendieck constructions and ordinary target categories. They do not state the coherent Cartesian-transport-inverting result for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitFiberwiseColimitIso|isColimitCoconeOfFiberwiseCocone",
+   "results": "{\"t\": \"2026-10-16T21:35:54Z\", \"tool\": \"grep\", \"query\": \"colimitFiberwiseColimitIso|isColimitCoconeOfFiberwiseCocone\", \"sub\": \"CategoryTheory/Limits/Shapes\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\"], \"digest\": \"f7ed56f9fab94a70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-105,175-209. colimitFiberwiseColimitIso and isColimitCoconeOfFiberwiseCocone concern ordinary covariant Grothendieck constructions and ordinary target categories. They do not state the coherent Cartesian-transport-inverting result for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fubini theorem for colimits over a category of elements of a contravariant functor with transition maps inverted",
+   "results": "{\"t\": \"2026-10-16T22:21:24Z\", \"tool\": \"leanfinder\", \"query\": \"Fubini theorem for colimits over a category of elements of a contravariant functor with transition maps inverted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation_inv_colimit_map\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation_ι_inv\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation_inv_colimit_map_assoc\", \"CategoryTheory.Limits.colimit_map_colimitObjIsoColimitCompEvaluation_hom\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim_ι_ι_inv\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim_ι_hom\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation_ι_app_hom\"], \"digest\": \"84cdf735d4272325\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Mathlib/CategoryTheory/Limits/Fubini.lean:480-520, FunctorCategory/Basic.lean:340-365, and Shapes/Grothendieck.lean:33-105,175-209. These are ordinary functor-category or covariant Grothendieck colimits, not coherent colimits in an arbitrary quasicategory with Cartesian transport inverted."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitUncurryIsoColimitCompColim|colimitFiberwiseColimitIso",
+   "results": "{\"t\": \"2026-10-16T22:22:05Z\", \"tool\": \"grep\", \"query\": \"colimitUncurryIsoColimitCompColim|colimitFiberwiseColimitIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\"], \"digest\": \"ad6294c9ac3430c2\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Mathlib/CategoryTheory/Limits/Fubini.lean:480-520, FunctorCategory/Basic.lean:340-365, and Shapes/Grothendieck.lean:33-105,175-209. These are ordinary functor-category or covariant Grothendieck colimits, not coherent colimits in an arbitrary quasicategory with Cartesian transport inverted."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-canonical-hocolim-degree-reduction",
+  "date": "2026-10-17",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
