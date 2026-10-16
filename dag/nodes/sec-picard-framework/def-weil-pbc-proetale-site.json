@@ -142,21 +142,21 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.ModuleDerivedCategory",
-  "declaration": "AlgebraicGeometry.ProEtale.ModuleDerivedCategory",
-  "statement": "abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _",
-  "branch": "slopmaster2",
-  "by": "Q27",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedCategory",
+  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{t}) (A : Type t) [CommRing A] : Type _",
+  "branch": "newtargets-dag",
+  "by": "Q01",
   "date": "2026-10-16",
   "existing": true,
-  "note": "§1(B): the former SheafOfModules record does not supply the module-valued presentation used by the recorded compact-support functor. The existing upstream AlgebraicGeometry.ProEtale.ModuleDerivedCategory supplies exactly that presentation, with scheme universe u, site object universe u+1 and morphism universe u, and coefficients/modules in u+1. Its body is DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)). Confirmed with scompile.py --source; use this existing declaration instead of a duplicate abbreviation. The former declaration remains available to existing users."
+  "note": "§1(B), record-only repair: the current record supplies fixed-scalar ModuleCat-valued sheaves, while the recorded constructible intervals, intrinsic constructibility, Tor tests and coefficient reduction used by this item have the intrinsic constant-ring SheafOfModules category. The existing proEtaleDerivedCategory is precisely that ordinary unbounded localization on the same small pro-etale site. It uses the canonical ULift of coefficients, module values in t+1, site objects in t+1 and morphisms in t; no size equality or new category is introduced. The fixed-scalar realization remains publicly available through the existing finite-module comparison."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-651908ad2",
-  "group": "Q27",
+  "reviewer": "NT-stage2-Codex-2926977e6",
+  "group": "Q01",
   "result": "pass",
-  "note": "Wrote review.md. Checked all six statement dependencies, source context, exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, uniqueness and verbatim signature. Immutable module compiled through scompile.py with no diagnostics. No fixes or repository changes."
+  "note": "Reviewed immutable packet, node statement, source/proof dependencies, Lean declarations, docstrings, report sections, edge cases, and scompile evidence. No substantive or mechanical correction required."
  }
 }

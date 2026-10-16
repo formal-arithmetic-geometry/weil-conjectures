@@ -23,7 +23,11 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude",
   "def-weil-derived-tensor",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-reduction-flat-model",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof": [
   {
@@ -295,5 +299,43 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-a6a687255 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, and source locations. Verified both morphism cases, constructibility and Tor intervals, B-valued coefficient comparison, hypotheses, edge cases, and uniformity. No new nodes, duplicates, circularity, or repairs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2926977e6",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Reviewed immutable packet, node statement, source/proof dependencies, Lean declarations, docstrings, report sections, edge cases, and scompile evidence. No substantive or mechanical correction required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExplicitExceptionalPreservation",
+  "declaration": "AlgebraicGeometry.Scheme.explicitExceptional_preservation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.explicitCoefficientIso",
+   "AlgebraicGeometry.Scheme.explicitExceptionalPullback",
+   "AlgebraicGeometry.Scheme.explicitExceptionalDirectImage",
+   "AlgebraicGeometry.Scheme.explicitExceptionalPullbackAdjunction",
+   "AlgebraicGeometry.Scheme.explicitScalarUnitNormalized",
+   "AlgebraicGeometry.Scheme.explicitDerivedUnitNormalized",
+   "AlgebraicGeometry.Scheme.explicitReductionRestriction",
+   "AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction_existsUnique",
+   "AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction",
+   "AlgebraicGeometry.Scheme.explicitReductionRestrictionAdditive",
+   "AlgebraicGeometry.Scheme.explicitReductionCounit",
+   "AlgebraicGeometry.Scheme.explicitReductionRestrictionLimits",
+   "AlgebraicGeometry.Scheme.explicitReductionRestrictionColimits",
+   "AlgebraicGeometry.Scheme.explicitReductionAdjunction_existsUnique",
+   "AlgebraicGeometry.Scheme.explicitReductionAdjunction",
+   "AlgebraicGeometry.Scheme.explicitReductionDirectImageComparison",
+   "AlgebraicGeometry.Scheme.explicitExceptionalCoefficientComparison",
+   "AlgebraicGeometry.Scheme.explicitExceptional_preservation"
+  ],
+  "file": "lean/Sheaf/Paper/ExplicitExceptionalPreservation.lean",
+  "statement": "theorem explicitExceptional_preservation (hn : ℕ) (_hf : IsOpenImmersion f ∨ (IsFinite f ∧ Etale f)) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hV : ∀ v : V, IsUnit (l : V.presheaf.stalk v)) : (∀ (a b : ℤ) (_hab : a ≤ b) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (hn + 1))), WeilConjectures.constructibleInterval l E (hn + 1) (Nat.le_add_left 1 hn) X a b K → WeilConjectures.constructibleInterval l E (hn + 1) (Nat.le_add_left 1 hn) V a b ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hn + 1))).obj K)) ∧ (∀ (c d : ℤ) (_hcd : c ≤ d) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (hn + 1))), intrinsicFiniteTorsionConstructible l E (hn + 1) (Nat.le_add_left 1 hn) X K → HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (hn + 1)) K c d → HasProEtaleTorAmplitude V (Padic.coefficientExtensionRing l E (hn + 1)) ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hn + 1))).obj K) c d) ∧ (∀ (hm : ℕ) (hmn' : hm ≤ hn) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (hn + 1))), IsIso ((explicitExceptionalCoefficientComparison l E hm hn hmn' f).app K)) ∧ ∀ (hm : ℕ) (hmn' : hm ≤ hn) (c d : ℤ) (_hcd : c ≤ d) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (hn + 1))), intrinsicFiniteTorsionConstructible l E (hn + 1) (Nat.le_add_left 1 hn) X K → HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (hn + 1)) K c d → (intrinsicFiniteTorsionConstructible l E (hm + 1) (Nat.le_add_left 1 hm) V ((flatModelReduction l E (hm + 1) (hn + 1) (Nat.add_le_add_right hmn' 1) V).obj ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hn + 1))).obj K)) ∧ HasProEtaleTorAmplitude V (Padic.coefficientExtensionRing l E (hm + 1)) ((flatModelReduction l E (hm + 1) (hn + 1) (Nat.add_le_add_right hmn' 1) V).obj ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hn + 1))).obj K)) c d) ∧ (intrinsicFiniteTorsionConstructible l E (hm + 1) (Nat.le_add_left 1 hm) V ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hm + 1))).obj ((flatModelReduction l E (hm + 1) (hn + 1) (Nat.add_le_add_right hmn' 1) X).obj K)) ∧ HasProEtaleTorAmplitude V (Padic.coefficientExtensionRing l E (hm + 1)) ((explicitExceptionalPullback f (Padic.coefficientExtensionRing l E (hm + 1))).obj ((flatModelReduction l E (hm + 1) (hn + 1) (Nat.add_le_add_right hmn' 1) X).obj K)) c d)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

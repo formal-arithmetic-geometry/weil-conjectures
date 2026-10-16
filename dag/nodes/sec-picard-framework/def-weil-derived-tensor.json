@@ -119,19 +119,19 @@
    "AlgebraicGeometry.Scheme.derivedTensor",
    "AlgebraicGeometry.Scheme.derivedTensorRing"
   ],
-  "statement": "def derivedTensor\n    (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)\n    (_f : P ⟶ K₁) (_hf : QuasiIso _f)\n    (_hP : CochainComplex.IsKFlat.{w + 1, w} (R := 𝓡) P) :\n    proEtaleDerivedCategory Y A",
+  "statement": "def derivedTensor (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ) (_f : P ⟶ K₁) (_hf : QuasiIso _f) (_hP : CochainComplex.IsKFlat.{w + 1, w} (R := 𝓡) P) : proEtaleDerivedCategory Y A",
   "branch": "newtargets-dag",
-  "by": "Q16",
+  "by": "Q01",
   "date": "2026-10-16",
   "existing": true,
-  "note": "Section 1(B), existing-declaration repair: the recorded WeilConjectures.SixFunctors.ProEtale.Derived.Tensor is a bifunctor on sheaves valued in a fixed monoidal coefficient category, not on modules over the completed ring sheaf used by the consumer. Importing it with the published completed-coefficient closure also produces a duplicate pro-etale notation declaration (confirmed by scompile.py). Reuse the published K-flat representative-level constant-coefficient operation and its ring-change specialization in Sheaf.Algebra.Homology.DerivedTensor, which state precisely this definition node. The consumer already imports this module. Its completed-ring tensor is separately computed from the existing total tensor by localization with its supplied bounded K-flat representative; no fixed-coefficient bifunctor is misapplied and no new general derived-tensor definition is introduced."
+  "note": "§1(B): the current record selects the fixed-scalar sheaf presentation, whereas this consumer and the recorded constructible intervals and reduction functors use intrinsic constant-ring SheafOfModules. Reuse the existing intrinsic interface unchanged; it states the same node in exactly those categories. No new definition is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ebec3abf9",
-  "group": "Q16",
+  "reviewer": "NT-stage2-Codex-2926977e6",
+  "group": "Q01",
   "result": "pass",
-  "note": "Wrote review.md. Verified source, all statement dependencies, canonical constructions, hypotheses, conclusions, universes, edge cases, report sections, and verbatim signature. Per-file scompile.py reproduction passed without errors or warnings. No fixes required; branch unchanged."
+  "note": "Reviewed immutable packet, node statement, source/proof dependencies, Lean declarations, docstrings, report sections, edge cases, and scompile evidence. No substantive or mechanical correction required."
  }
 }
