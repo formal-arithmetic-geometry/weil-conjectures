@@ -314,5 +314,36 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-0c62136e6 (reviewer sub-agent of L); spot-checked: I read the whole item: statement and all ten steps. Statement: it agrees with Kerodon Cor 4.6.2.14 (01J0), checked online. That corollary assumes A↪B right anodyne and concludes θ: B⊔_A(A⋄Δ⁰)↪B⋄Δ⁰ is a categorical equivalence; the item matches that and is not strengthened to inner anodyne. The strict-extension clause is 01FS, obtained by Joyal lifting. Small cases checked by hand: A=∅ (P(∅)=Q(∅)=Δ⁰, c_∅ the identity) and i=Λ¹₁, where the domain of θ is Λ²₁ inside P(Δ¹)≃Δ². Steps: (1) the normal form P(K)_r={v}⊔K_r×T_r gives monicity. (2) The cut map to the join formula is correct. (3) I checked the section s_n, c_n s_n=1, monotonicity and descent of the homotopy H (all cases), the endpoints u=0 and u=1, and the degenerate vertex edges, including n=0. (4) The cited prism-extension lemma (01DP) applies with A=∅, B=K, its hypothesis exactly the componentwise one; the converse clause of the outer-horn lemma (019F) then makes such an edge an equivalence. This is done for the components and then for the transformation itself, with a universe enlargement, giving a functor equivalence. (5) Every hypothesis of the cellular criterion holds: injections and connected colimits are preserved, and the empty and simplex cases are done. (6) The pushout-join with ∅→Δ⁰ is Λ^{m+1}_j, which is inner since 0<j≤m; saturation for fixed k then covers every right anodyne map. (7) Inner anodyne maps are trivial cofibrations by the lifting characterization. (8) Fun(−,E) turns the pushout into a strict pullback. p and q are isofibrations by the 'in particular' clause of isofibration-exponentiation, v=c_A^* is an equivalence by step 5, and qv=p; isofibration-base-change has no fibration hypothesis on v or h. (9) The square commutes, and two-out-of-three gives θ_i. (10) Lifting against the fibration C→Δ⁰ gives fθ_i=f₀ strictly. No new nodes. No cycle: the cited nodes have empty proof_deps, except definitions. No duplicate: I checked right-anodyne, cone-mono, anodyne-cocones (a descendant), join-cone-calculus (a left fat cone) and functor-pushout (a homotopy pullback). No SGA source is used. Route: lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling are unsplit statements of sk-prop-sf-cbc, which is outside the transitive route of sk-prop-sf-biduality-general. Both are generic black-box quasicategory tools used in step 4, and I accept them as tool_uses. FIX: the second reader had removed split_report.tool_uses, so the merge would not record these two. The corrected item at fixes/dag/nodes/sec-six-functors/lem-coef-infinity-blunt-join-comparison.json restores them; split_report is the only field that differs.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe6a358cc",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Kerodon 01HR/01J0/01FS. bluntJoin is the two endpoint pushouts of (X×Δ1)×Y with the coordinate projections (real colimits). θ_i = pushout.desc (bluntJoinBaseIncl B) (bluntJoinMap i id) on pushout i (bluntJoinBaseIncl A): canonical. Hypotheses rightAnodyneExtensions (landed def, matches the inline definition, reused) and Mono i (the node's inclusion, implied anyway). Conclusions: Mono θ; hoFunctor.map of the restriction (MonoidalClosed.pre (ulift θ)).app C is an equivalence for every quasicategory C : SSet.{max u v} (probe confirmed restriction direction and Mathlib SSet.Quasicategory); strict extension ulift θ ≫ f = f₀. All four return points of 4eb315fdd8b9 fixed. Edge cases A=∅, iso i, Λ¹₁, empty target, v=0 covered. No duplicate bluntJoin in Mathlib, side or slopmaster2. Only the main theorem is sorry; source and blueprint docstrings present; ten proof steps in the docstring; lean.statement verbatim; only the lean field changed; lines ≤97; no unbound variables. nt_compile --json: BluntJoinComparison 1.6 s clean, dependencies clean. Minor: the maintainer should add import Sheaf.CategoryTheory.EquivalenceOuterHornFilling after the next build (rule 7; that dependency landed after the worker's reading); report link texts garbled cosmetically."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BluntJoinComparison",
+  "declaration": "SSet.Enhanced.blunt_join_comparison",
+  "declarations": [
+   "SSet.Enhanced.bluntJoinEndpoint",
+   "SSet.Enhanced.bluntJoinLeftProjection",
+   "SSet.Enhanced.bluntJoinRightProjection",
+   "SSet.Enhanced.bluntJoinFirst",
+   "SSet.Enhanced.bluntJoin",
+   "SSet.Enhanced.bluntJoinFirstMap",
+   "SSet.Enhanced.bluntJoinMap",
+   "SSet.Enhanced.bluntJoinBaseIncl",
+   "SSet.Enhanced.bluntJoinComparison",
+   "SSet.Enhanced.blunt_join_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BluntJoinComparison.lean",
+  "statement": "theorem blunt_join_comparison {A B : SSet.{u}} (i : A ⟶ B) (hi : SSet.rightAnodyneExtensions i) [Mono i] : Mono (bluntJoinComparison i) ∧ (∀ (C : SSet.{max u v}) (_ : Quasicategory C), (SSet.hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{v}.map (bluntJoinComparison i))).app C)).toFunctor.IsEquivalence) ∧ (∀ (C : SSet.{max u v}) (_ : Quasicategory C) (f₀ : SSet.uliftFunctor.{v}.obj (pushout i (bluntJoinBaseIncl A Δ[0])) ⟶ C), ∃ f : SSet.uliftFunctor.{v}.obj (bluntJoin B Δ[0]) ⟶ C, SSet.uliftFunctor.{v}.map (bluntJoinComparison i) ≫ f = f₀)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repairs returned 4eb315fdd8b9: real endpoint-pushout blunt join, canonical induced maps/base inclusion and pushout.desc comparison; monicity, hFun-restriction categorical equivalence in every containing universe, and literal strict extension along that exact comparison. All helpers belong to this node."
  }
 }
