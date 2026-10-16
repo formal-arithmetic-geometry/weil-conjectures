@@ -28,9 +28,205 @@
   "def-weil-extension-by-zero",
   "lem-weil-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the sectionwise meaning of the map, including its normalization. For an open immersion $j$, restriction of the defining zero-or-one-summand presheaf to objects over the open is the original sheaf. The localization equivalence identifies its coverings with the intrinsic site's coverings, so its sheafification restricted there is the original sheaf as well. Thus the open unit $M\\to j^*j_!M$ is an isomorphism. Direct image is evaluation on the fibre product, so $i^*p_*k_!M=r_*k^*k_!M$ by the equality of fibre products in the statement, with the same restriction and scalar maps. These identifications give precisely $\\lambda_M$. Under the stated adjunction, $\\gamma_M$ is the unique map whose open restriction, followed by $\\lambda_M$, is the identity on $r_*M$; the triangle identity gives this directly from $\\gamma_M=\\varepsilon_i i_!(\\lambda_M^{-1})$.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE (definition-extension-zero), 09BN (lemma-open-immersion); sectionwise verification of the chosen transpose"
+   }
+  },
+  {
+   "text": "For any module sheaf $N$, the counit $j_!j^*N\\to N$ is induced by the presheaf map which is the identity $N(B)\\to N(B)$ when $B$ factors through the open, and is $0\\to N(B)$ otherwise. This map is sectionwise injective. Exact module sheafification makes the counit a monomorphism. Consequently $\\gamma_M$ is a monomorphism, since $i_!(\\lambda_M^{-1})$ is invertible. The same argument shows that, for opens $O_0\\subset O\\subset H$ and a sheaf $F$ on $O$, the canonical map $(O_0\\hookrightarrow H)_!(F|_{O_0})\\to(O\\hookrightarrow H)_!F$ is monic: the map of defining presheaves is the identity on objects over $O_0$ and the inclusion of zero on all other objects. We will use these inclusions to glue local lifts.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE and the zero-extension presheaf; module-sheafification exactness is sites-modules.tex Tag 03EI, lemma-sheafification-exact"
+   }
+  },
+  {
+   "text": "It suffices to prove surjectivity on every affine object $Q\\to T$ of the small pro-etale site: every site object has an affine Zariski covering, which is a pro-etale covering, and sections and their equalities glue. Localize the square at $Q$, writing $V_Q=V\\times_TQ$, $W_Q=W\\times_TQ$, and $U_Q=V_Q\\times_QW_Q$; restrict $M$ to $U_Q$. All coefficient identifications are those of localization of the same constant ring. The extension-by-zero base-change isomorphism identifies restrictions of $i_!$ and $k_!$ with extension by zero for these opens; direct image restricts by its fibre-product evaluation formula. These identifications preserve $\\gamma$, because its restriction to $W_Q$ is the inverse of the same $\\lambda$, and the open adjunction makes that restriction determine the map. Properness of $p_Q$ and openness of $k_Q$ follow by base change. We may therefore work over an affine base $Q=\\operatorname{Spec}R$, and prove the assertion there. Properness gives quasi-compactness and separatedness of $V_Q\\to Q$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE, 09BN; localization and fibre-product evaluations, not proper base change for arbitrary sheaves"
+   }
+  },
+  {
+   "text": "First suppose that $W_Q\\subset Q$ is quasi-compact. The principal opens form a basis directly from the Zariski topology: the complement of $V(J)$ is $\\bigcup_{f\\in J}D(f)$. Quasi-compactness therefore gives a finite list $f_1,\\ldots,f_t$ with $W_Q=\\bigcup_aD(f_a)$, allowing the empty list. Put $I=(f_1,\\ldots,f_t)$, $Z=\\operatorname{Spec}(R/I)$, $S=\\{s\\in R:s\\bmod I\\text{ is a unit}\\}$, and $Q^\\sim=\\operatorname{Spec}(S^{-1}R)$. The closed-localization covering theorem supplies the pro-etale cover $\\{D(f_a)\\to Q,Q^\\sim\\to Q\\}$. Every point of $Q^\\sim$ specializes within $Q^\\sim$ to $Z^\\sim=Z\\times_QQ^\\sim$ by the arbitrary-ideal specialization-localization theorem. On every $D(f_a)$ the map $\\gamma$ is already the identity through $\\lambda$, by Step 1. It remains to show that both sheaves have zero sections over $Q^\\sim$.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-closed-localization",
+    "lem-weil-pbc-affine-closed-specialization-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), finite localization cover in the proof; Tag 096V (lemma-localization), f=1"
+   }
+  },
+  {
+   "text": "The source $(i_!r_*M)(Q^\\sim)$ is zero. Indeed base change for extension by zero identifies its restriction with extension by zero from $W_Q\\times_QQ^\\sim$. The closed-immersion base-change theorem makes $Z^\\sim\\hookrightarrow Q^\\sim$ a closed immersion. That open is disjoint from $Z^\\sim$, and $Q^\\sim$ is affine with every point specializing into $Z^\\sim$. Apply the specialization-zero theorem. Although that theorem is stated for abelian sheaves, it applies to the underlying abelian sheaf of this module extension: the module-sheafification definition says its underlying abelian sheaf is the abelian sheafification of the same zero-extension presheaf. A module whose underlying abelian group is zero is zero.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG (lemma-jshriek-zero), applied to the affine specialization localization"
+   }
+  },
+  {
+   "text": "Write $P=V_Q\\times_QQ^\\sim$ and $C=P\\times_{Q^\\sim}Z^\\sim$. The map $h:P\\to Q^\\sim$ is proper, and $C\\hookrightarrow P$ is a closed immersion by closed-immersion base change. For each $x\\in P$, choose a specialization $z$ of $h(x)$ in $Z^\\sim$. Since $h$ is closed, $h(\\overline{\\{x\\}})$ is closed and contains $h(x)$; hence it contains $z$. Choose $x_z\\in\\overline{\\{x\\}}$ over $z$. Thus every $x$ specializes to a point of $C$. This argument uses the closed-map part of the definition of properness, after base change, and proves the required specialization lifting without any claim about geometric-stalk conservativity. The scheme $P$ is quasi-compact because it is proper over the affine scheme $Q^\\sim$. It is also separated over the affine base $Q^\\sim$, by the definition of properness.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 01W1 (definition-proper), universally closed condition, combined with Tag 096V"
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $P=\\bigcup_b B_b$. For the ideal $J_b$ defining $C\\cap B_b$ in $B_b=\\operatorname{Spec}R_b$, form $L_b=\\operatorname{Spec}(S_b^{-1}R_b)$ with $S_b$ the elements invertible modulo $J_b$. The specialization-localization theorem makes $L_b\\to B_b$ weakly etale and identifies its image with the points specializing inside $B_b$ to $C\\cap B_b$. Every point $x\\in P$ lies in the image of some $L_b$: its specialization $x_z\\in C$ from Step 6 lies in some $B_b$; an open containing $x_z$ also contains its generalization $x$, so this specialization occurs inside $B_b$. The finite family $L_b\\to P$ is a pro-etale covering. To check its covering condition on an affine open $B\\subset P$, note that $B\\cap B_b$ is affine, hence quasi-compact, by the affine-open intersection theorem for a separated scheme over an affine base, and its inverse image in $L_b$ is quasi-compact: cover $B\\cap B_b$ by finitely many principal opens of $B_b$; their localization inverse images are principal affine opens of $L_b$. Finitely many such affine opens, as $b$ varies, cover $B$ by joint surjectivity. This is exactly the fpqc covering condition in the pro-etale-site definition.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-closed-specialization-localization",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096V (lemma-localization), applied on finitely many affine charts; covering condition of the small pro-etale site"
+   }
+  },
+  {
+   "text": "On each $L_b$, every point specializes into $C\\times_PL_b$. The open $U_Q\\times_{V_Q}P$ is disjoint from $C$, so the specialization-zero theorem applied to the affine site object $L_b\\to P$ says that its extension-by-zero sheaf has zero sections on $L_b$. The underlying abelian sheaf of the module extension is the abelian sheafification of its zero-extension presheaf, so the vanishing applies to its underlying groups and hence to its modules. Base change for extension by zero identifies this sheaf with the restriction of $k_!M$ to $P$. Separatedness of a sheaf on the covering from Step 7 therefore gives $(k_!M)(P)=0$. By direct-image evaluation this is $(p_*k_!M)(Q^\\sim)=0$. Consequently, a section of $p_*k_!M$ over $Q$ lifts over every member of the covering in Step 4: uniquely over each $D(f_a)$ by Step 1, and by zero over $Q^\\sim$. Monicity from Step 2 makes these lifts agree on every overlap, so they glue to a preimage over $Q$. This proves bijectivity of $\\gamma(Q)$. The affine base $Q$ in this argument was arbitrary. For any affine site object $B\\to Q$, Step 3 identifies the restricted comparison with the comparison for $V_Q\\times_Q B\\to B$. This morphism is proper, and the inverse image of $W_Q=\\bigcup_aD(f_a)$ is the finite union of the corresponding principal opens of $B$. Thus the just-proved assertion about sections over an arbitrary affine base applies to this base-changed square and gives bijectivity of $\\gamma(B)$. Bijectivity on these affine objects and the sheaf condition prove the quasi-compact-open case. We do not assert that the restrictions to $Q^\\sim$ are zero sheaves: only their sections on its identity object vanish.",
+   "uses": [
+    "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG (lemma-jshriek-zero), followed by separatedness on the explicit specialization cover"
+   }
+  },
+  {
+   "text": "Now allow $W_Q$ to be an arbitrary open. Take $s\\in(k_!M)(V_Q)=(p_*k_!M)(Q)$. This section has local representatives in the defining extension presheaf. More explicitly, module sheafification is abelian sheafification; its unit becomes an isomorphism after sheafification by the reflector's universal property. Applying the sheafification/local-bijection theorem to that unit makes it locally surjective. Thus there is a pro-etale covering on which $s$ is represented by presheaf sections. Since $V_Q$ is quasi-compact, first choose a finite affine open cover and then use the fpqc covering condition over each of these affines to refine to a finite family of affine objects $H_c\\to V_Q$ carrying representatives. A representative is zero unless $H_c\\to V_Q$ factors through $U_Q$. For each of the finitely many objects carrying a nonzero representative (which therefore do factor through $U_Q$), the image of the affine $H_c$ in $Q$ is quasi-compact and contained in $W_Q$. Cover those images by finitely many principal opens of $Q$ contained in $W_Q$, and let $W_0$ be their union. Then $W_0\\subset W_Q$ is a quasi-compact open and every $H_c$ carrying a nonzero representative factors through $U_0=V_Q\\times_QW_0$: image containment gives a unique map $H_c\\to W_0$ by the open-factorization theorem, and then the fibre-product universal property gives the map to $U_0$. The map $H_c\\to U_0$ is a site object by weakly etale localization. The empty union is allowed when all representatives are zero.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 00WK (sites-lemma-sections-sheafification), via the existing local-bijection criterion; Tag 09AE and finite affine refinement of fpqc coverings"
+   }
+  },
+  {
+   "text": "Put $M_0=M|_{U_0}$ and let $k_0:U_0\\hookrightarrow V_Q$. The canonical map $k_{0!}M_0\\to k_!M$ is monic by Step 2. Every local representative of $s$ constructed in Step 9 lifts to $k_{0!}M_0$: use the same section of $M$ on an $H_c$ factoring through $U_0$, and zero on all other $H_c$. Their lifts agree on overlaps because their images agree with $s$ and the map is monic. The sheaf condition glues them to a section $s_0\\in(k_{0!}M_0)(V_Q)$ mapping to $s$. This establishes the needed quasi-compact support reduction directly on sections, with no assertion that proper pro-etale direct image preserves arbitrary colimits.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+    "place": "Tags 09AE and 00WK; monomorphism and gluing of the finite local lifts from Step 9"
+   }
+  },
+  {
+   "text": "Apply the quasi-compact-open case (Steps 4--8) to $W_0\\hookrightarrow Q$ and the same proper map $V_Q\\to Q$. Its isomorphism $\\gamma_0$ gives a section $t_0\\in(i_{0!}r_{0*}M_0)(Q)$ mapping to $s_0$. There is a canonical map $a:i_{0!}r_{0*}M_0\\to i_!r_*M$: restriction of $r_*M$ to $W_0$ is $r_{0*}M_0$ by fibre-product evaluation, and on zero-extension presheaves $a$ is the identity on objects over $W_0$ and zero elsewhere. Let $b:p_*k_{0!}M_0\\to p_*k_!M$ be the inclusion-induced map. Then $\\gamma\\circ a=b\\circ\\gamma_0$: both maps have source $i_{0!}r_{0*}M_0$, and under the open adjunction for $i_0$ their transposes agree, since on $W_0$ all the open-unit identifications and the inclusions in question are the identity on $r_{0*}M_0$. It follows that $a(t_0)$ maps to $s$. Hence $\\gamma$ is surjective on sections of every affine site object, as well as injective by Step 2, and is therefore an isomorphism of module sheaves.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09BN; explicit open-adjunction compatibility for the finite-support reduction"
+   }
+  },
+  {
+   "text": "Finally all identifications in $\\lambda_M$ are natural in $M$: fibre-product evaluation commutes with a morphism of sheaves, and the open unit is a natural transformation. Thus for $u:M\\to N$, $\\lambda_N\\circ i^*p_*k_!(u)=r_*(u)\\circ\\lambda_M$. Taking inverses and using naturality of the counit in the defining formula gives $p_*k_!(u)\\circ\\gamma_M=\\gamma_N\\circ i_!r_*(u)$. The componentwise inverses satisfy the inverse naturality square by cancellation. This proves naturality of the isomorphism for the exact map specified in the statement. No step imposed boundedness, etale origin, or quasi-compactness of the original open immersion.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, adjunction naturality; normalization required before the exceptional-adjoint mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-pbc-proetale-site",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-wcontractible-closed-localization",
+  "lem-weil-pbc-affine-closed-specialization-localization",
+  "lem-weil-pbc-proetale-shriek-specialization-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Agent proof of the extracted pro-etale sheaf obligation using Tags 096V, 09AG, 09AH, 09AE, 09BN, 00WK and 03EI; not an application of the etale proper-base-change theorem 0F7B."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,15 +262,169 @@
    "results": "{\"t\": \"2026-10-16T13:42:23Z\", \"tool\": \"leansearch\", \"query\": \"For a Cartesian square with proper vertical morphisms and open horizontal immersions, extension by zero of an injective proetale module sheaf is acyclic for direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeSndIsOpenImmersion\"], \"digest\": \"8cd432a108ee2773\"}",
    "date": "2026-10-16",
    "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|proper.*[Ss]heaf|[Ss]heaf.*proper",
+   "results": "{\"t\": \"2026-10-16T14:18:42Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|openImmersionLowerShriek|proper.*[Ss]heaf|[Ss]heaf.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/Condensed/Light/Explicit.lean\", \"Mathlib/Condensed/Light/Explicit.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"1a15aec659e3bf66\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"proper\"",
+   "results": "{\"t\": \"2026-10-16T14:18:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"proper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PresheafOfModules.sections_property\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"CategoryTheory.MorphismProperty.presheaf\", \"CategoryTheory.MorphismProperty.presheaf_mono_of_le\", \"CategoryTheory.MorphismProperty.presheaf_monomorphisms_le_monomorphisms\"], \"digest\": \"b1faf8f006f8b9b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward commutes with extension by zero in a Cartesian square of open immersions for arbitrary proetale module sheaves",
+   "results": "{\"t\": \"2026-10-16T14:18:43Z\", \"tool\": \"leansearch\", \"query\": \"Proper pushforward commutes with extension by zero in a Cartesian square of open immersions for arbitrary proetale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardComp\", \"PresheafOfModules.pushforward₀_obj\"], \"digest\": \"0163c9a21b717e9a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism and a Cartesian square of open immersions, direct image of any proetale module sheaf extended by zero is extension by zero of its direct image",
+   "results": "{\"t\": \"2026-10-16T14:18:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper scheme morphism and a Cartesian square of open immersions, direct image of any proetale module sheaf extended by zero is extension by zero of its direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\"], \"digest\": \"83facd3eadf191c2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|[Pp]ro[Ee]tale.*[Pp]roper|[Pp]roper.*[Pp]ro[Ee]tale",
+   "results": "{\"t\": \"2026-10-16T14:18:58Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|[Pp]ro[Ee]tale.*[Pp]roper|[Pp]roper.*[Pp]ro[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"263ac124048607e2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open extension by zero counit into proper direct image is an isomorphism by a support argument on the small pro etale site",
+   "results": "{\"t\": \"2026-10-16T14:19:00Z\", \"tool\": \"leanfinder\", \"query\": \"The open extension by zero counit into proper direct image is an isomorphism by a support argument on the small pro etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"Condensed.profiniteSolidCounit\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedMod.IsSolid.isIso_solidification_map\"], \"digest\": \"402cbc15cb2370b5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved declarations define Zariski or generic module pushforward, generic counits, or the pro-etale site; none is the proper/open comparison for arbitrary pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "isProper.*(shriek|extension)|extension.*(proper|pushforward)|proetale.*shriek",
+   "results": "{\"t\": \"2026-10-16T14:42:33Z\", \"tool\": \"grep\", \"query\": \"isProper.*(shriek|extension)|extension.*(proper|pushforward)|proetale.*shriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Tactic/FunProp/Decl.lean\", \"Mathlib/Tactic/FunProp/Decl.lean\", \"Mathlib/FieldTheory/Extension.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"03bf361f043784a3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: broad grep found unrelated extension properties; the targeted AlgebraicGeometry grep returned zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves commutes with direct image under a proper map in a Cartesian square with open immersions",
+   "results": "{\"t\": \"2026-10-16T14:42:38Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero of sheaves commutes with direct image under a proper map in a Cartesian square with open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\"], \"digest\": \"85fdd5dfee021da6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits are Zariski restriction identities, topological pullback adjunction, or generic module pushforward composition; no proper/open pro-etale comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|properBaseChange|proper_base_change",
+   "results": "{\"t\": \"2026-10-16T14:43:11Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|extensionByZero|properBaseChange|proper_base_change\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: broad grep found unrelated extension properties; the targeted AlgebraicGeometry grep returned zero hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"shriek\"",
+   "results": "{\"t\": \"2026-10-16T14:44:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"shriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero declarations returned for sheaf/shriek vocabulary"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-exc-base-change-proper",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-proetale-proper-open-sheaf-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the entire statement, including arbitrary open immersions and arbitrary finite-coefficient pro-etale module sheaves. Proved the normalized open-adjunction map monic, proved the quasi-compact-open case on specialization-localization covers using proper closedness and 09AG, then reduced any section to a quasi-compact subopen using finitely many local extension-presheaf representatives. Reused existing nodes throughout; no new nodes and no Mathlib leaves. No geometric-stalk conservativity or unrestricted derived proper base change used. Independent second reading supplied closed-immersion and open-factorization citations, made the affine-base instantiation explicit, and clarified the zero-representative edge case.",
+  "blueprint": "prop-exc-base-change-proper, Steps 3--4, degree-zero proper/open support input needed to normalize the exceptional-adjoint mate; the current blueprint proof itself does not prove this extracted pro-etale obligation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic localization, open adjunction, or scheme base-change/quasi-separatedness tool needed for the explicit sheaf support argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic localization, open adjunction, or scheme base-change/quasi-separatedness tool needed for the explicit sheaf support argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic exact sheafification preserves the sectionwise zero-extension inclusions."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Restriction of the sheafified open zero-extension to a localized pro-etale site, used on sheaves in degree zero; no direct-image base change is inferred."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic localization, open adjunction, or scheme base-change/quasi-separatedness tool needed for the explicit sheaf support argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic localization, open adjunction, or scheme base-change/quasi-separatedness tool needed for the explicit sheaf support argument; no node of the unit states this input."
+   },
+   {
+    "node": "lem-weil-pbc-wcontractible-closed-localization",
+    "why": "Only its finite pro-etale covering assertion for a finitely generated complement ideal is used; no weak-contractibility hypothesis is needed for that assertion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-closed-specialization-localization",
+    "why": "Explicit arbitrary-ideal localization with its specialization image, used on base and source affine charts."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "why": "The 09AG affine specialization vanishing is the geometric support tool; it applies to arbitrary abelian sheaves, and module sheafification has that underlying abelian sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic abelian sheafification criterion applied to its unit to obtain local representatives."
+   },
+   {
+    "node": "lem-weil-pbc-separated-affine-open-intersection",
+    "why": "Affineness of intersections of affine opens in the source, separated over the affine specialization localization; verifies the finite affine fpqc covering condition."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme tool verifying the closed-subscheme hypothesis of specialization-zero on both localization covers."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic open-factorization tool used to turn containment of the finitely many representative images into scheme maps to the smaller open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-wcontractible-closed-localization",
+  "lem-weil-pbc-affine-closed-specialization-localization",
+  "lem-weil-pbc-proetale-shriek-specialization-zero",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-18df10250",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-18df10250 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, cited statements, source passages, and unit/chapter route. All twelve steps support the unchanged arbitrary-open, arbitrary pro-etale module-sheaf comparison, with the specified adjunction transpose. No cycles, duplicates, or new nodes found. Corrected source locations, including exact sheafification tag 03EI instead of 03CO; replacement JSON and detailed checks are in fixes/ and review.md. Accepted all thirteen declared tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }
