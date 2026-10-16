@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SmoothPurity.Defs
-public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.Slop.Basic
 
 /-!
 
@@ -94,6 +94,11 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 /-! ### The identity and composition isomorphisms of the exceptional functors -/
@@ -106,7 +111,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The identity isomorphism `R(𝟙 X)_! ≅ 𝟭` of the derived lower shriek on bounded constructible
 `ℚ̄_ℓ`-sheaves: the identification `R(𝟙 X)_! ≅ R(𝟙 X)_*` of the lower shriek of a proper morphism
 with its pushforward, followed by `R(𝟙 X)_* ≅ 𝟭`. -/
-noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
+noncomputable def Slop.boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
     boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
@@ -115,7 +120,7 @@ noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
 
 /-- The identity isomorphism `R(𝟙 X)^! ≅ 𝟭` of the exceptional inverse image: the conjugate of
 `boundedConstructibleLowerShriekId` for the adjunctions `R(𝟙 X)_! ⊣ R(𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/
-noncomputable def boundedConstructibleUpperShriekId (X : Over (Spec (.of k)))
+noncomputable def Slop.boundedConstructibleUpperShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
     boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
@@ -131,7 +136,7 @@ variable {X Y Z : Over (Spec (.of k))}
 /-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of the exceptional inverse image: the
 conjugate of the composition isomorphism `boundedConstructibleLowerShriekComp` of the lower
 shriek. -/
-noncomputable def boundedConstructibleUpperShriekComp (f : X ⟶ Y) (g : Y ⟶ Z) :
+noncomputable def Slop.boundedConstructibleUpperShriekComp (f : X ⟶ Y) (g : Y ⟶ Z) :
     boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g) ≅
       boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
         boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
@@ -152,7 +157,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The *dualizing complex* `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type
 (blueprint `def-trf-dualizing-complex`). -/
-noncomputable abbrev dualizingComplex (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+noncomputable abbrev Slop.dualizingComplex (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj (𝟙_ _)
 
@@ -162,14 +167,14 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The composition isomorphism `Rf^! ω_Y ≅ ω_X` of the dualizing complexes (blueprint
 `thm-trf-dualizing-complex-composition`). -/
-noncomputable def dualizingComplexComp (f : X ⟶ Y) :
+noncomputable def Slop.dualizingComplexComp (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
         (dualizingComplex ℓ Y) ≅ dualizingComplex ℓ X :=
   ((boundedConstructibleUpperShriekComp ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
 
 /-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def tateTwistDerivedZeroIso (T : Scheme.{u}) :
+noncomputable def Slop.tateTwistDerivedZeroIso (T : Scheme.{u}) :
     tateTwistDerived T ℓ 0 ≅ 𝟙_ _ :=
   DerivedCategory.singleFunctorObjUnitIso _
 
@@ -177,7 +182,7 @@ noncomputable def tateTwistDerivedZeroIso (T : Scheme.{u}) :
 relative dimension `0`, that is étale, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X`. This is
 `ProEtale.CondensedRing.smoothPurityIso` for `d = 0`, lifted along the fully faithful inclusion
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def etalePurityIso (f : X ⟶ Y) [SmoothOfRelativeDimension 0 f.left] :
+noncomputable def Slop.etalePurityIso (f : X ⟶ Y) [SmoothOfRelativeDimension 0 f.left] :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≅
       𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
@@ -190,7 +195,7 @@ variable (X) in
 /-- **Smooth purity for the dualizing complex**: for `X` smooth of pure dimension `d` over `s`,
 `ω_X ≅ ℚ̄_ℓ,X(d)[2d]`, after the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. This is
 `ProEtale.CondensedRing.smoothPurityIso` for the structure morphism `a_X`. -/
-noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
+noncomputable def Slop.dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
     (dualizingComplex ℓ X).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   haveI : SmoothOfRelativeDimension d (toPoint X).left :=
@@ -202,7 +207,7 @@ variable (k) in
 `a_s = toPoint s` is the identity of `s`, and this is the identity isomorphism
 `R(𝟙 s)^! ≅ 𝟭` of the exceptional inverse image (`boundedConstructibleUpperShriekId`) at the
 unit. -/
-noncomputable def dualizingComplexPointIso :
+noncomputable def Slop.dualizingComplexPointIso :
     dualizingComplex ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
@@ -216,13 +221,13 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The *Borel–Moore sections* of `X`: the morphisms `ℚ̄_ℓ,X ⟶ ω_X` (blueprint `sk-d-integral`). -/
-abbrev BorelMooreSection (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+abbrev Slop.BorelMooreSection (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Type _ :=
   𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ dualizingComplex ℓ X
 
 variable {ℓ} {X U : Over (Spec (.of k))} [QuasiCompact X.hom] [QuasiCompact U.hom]
 
-namespace BorelMooreSection
+namespace Slop.BorelMooreSection
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] [LocallyOfFiniteType U.hom]
   [IsSeparated U.hom] in
@@ -288,7 +293,7 @@ theorem integral_eq_sum_localTerm [IsProper X.hom] {ι : Type*} [Fintype ι]
     α.integral = ∑ i, α.localTerm (j i) :=
   sorry
 
-instance : IsProper (point k).hom :=
+instance Slop.instDualizing7 : IsProper (point k).hom :=
   inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
 
 /-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
@@ -319,7 +324,7 @@ theorem integral_point (α : BorelMooreSection ℓ (point k)) :
   simp only [Category.assoc]
   rfl
 
-end BorelMooreSection
+end Slop.BorelMooreSection
 
 end BorelMoore
 

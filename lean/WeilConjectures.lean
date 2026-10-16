@@ -4404,14 +4404,14 @@ public import WeilConjectures.Topology.SpectralSpace.WLocal.Pullback
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.Topology.TopologicalFilteredCohomology
-public import WeilConjectures.TraceFormula.Basic
-public import WeilConjectures.TraceFormula.CompactCohomology
-public import WeilConjectures.TraceFormula.Correspondence
-public import WeilConjectures.TraceFormula.Dualizing
-public import WeilConjectures.TraceFormula.FixedPoint
-public import WeilConjectures.TraceFormula.Frobenius
-public import WeilConjectures.TraceFormula.Main
-public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.TraceFormula.Slop.Basic
+public import WeilConjectures.TraceFormula.Slop.CompactCohomology
+public import WeilConjectures.TraceFormula.Slop.Correspondence
+public import WeilConjectures.TraceFormula.Slop.Dualizing
+public import WeilConjectures.TraceFormula.Slop.FixedPoint
+public import WeilConjectures.TraceFormula.Slop.Frobenius
+public import WeilConjectures.TraceFormula.Slop.Main
+public import WeilConjectures.TraceFormula.Slop.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
@@ -4576,3 +4576,4 @@ public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
+public import WeilConjectures.TraceFormula.Basic

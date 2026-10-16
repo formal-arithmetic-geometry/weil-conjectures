@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusPoints
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
-public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.Slop.Frobenius
 
 /-!
 # The fixed points of the model Frobenius
@@ -42,6 +42,11 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} {Φ : X ⟶ X}
@@ -50,7 +55,7 @@ variable {k : Type u} [Field k] {X : Over (Spec (.of k))} {Φ : X ⟶ X}
 
 /-- The iterates of the model Frobenius are the base changes of the iterates of `F₀`:
 `Φ_m ≫ p = p ≫ F₀^m` for any `F₀` with `Φ ≫ p = p ≫ F₀`. -/
-lemma IsModelFrobenius.frobeniusIterate_left_comp {F₀ : X₀ ⟶ X₀} (hp : Φ.left ≫ p = p ≫ F₀)
+lemma Slop.IsModelFrobenius.frobeniusIterate_left_comp {F₀ : X₀ ⟶ X₀} (hp : Φ.left ≫ p = p ≫ F₀)
     (m : ℕ) : (frobeniusIterate Φ m).left ≫ p = p ≫ End.asHom (End.of F₀ ^ m) := by
   rw [frobeniusIterate_left]
   exact End.asHom_pow_comp_eq_comp_asHom_pow hp m
@@ -58,7 +63,7 @@ lemma IsModelFrobenius.frobeniusIterate_left_comp {F₀ : X₀ ⟶ X₀} (hp : �
 /-- A morphism `x : Spec k ⟶ X` is fixed by `Φ_m` if and only if the `k`-point
 `x ≫ p` of `X₀` is fixed by `Spec σ^m`, for `σ : a ↦ a ^ #k₀` the arithmetic Frobenius of
 `k`. -/
-lemma IsModelFrobenius.comp_frobeniusIterate_left_eq_iff [Fintype k₀]
+lemma Slop.IsModelFrobenius.comp_frobeniusIterate_left_eq_iff [Fintype k₀]
     (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) (x : Spec (.of k) ⟶ X.left) :
     x ≫ (frobeniusIterate Φ m).left = x ↔
       Spec.map (CommRingCat.ofHom
@@ -77,14 +82,14 @@ lemma IsModelFrobenius.comp_frobeniusIterate_left_eq_iff [Fintype k₀]
 
 omit [Algebra k₀ k] in
 /-- The underlying morphism of a rational point of `X` is a section of `a_X`. -/
-lemma rationalPoint_left_comp_hom (x : RationalPoint X) : x.left ≫ X.hom = 𝟙 _ :=
+lemma Slop.rationalPoint_left_comp_hom (x : RationalPoint X) : x.left ≫ X.hom = 𝟙 _ :=
   Over.w x
 
 /-- **The fixed points of the model Frobenius** (blueprint `thm-trf-frobenius-fixed-points`):
 the rational points `x` of `X = X₀ ×_{k₀} k` fixed by `Φ_m` correspond, through
 `x ↦ x ≫ p`, to the `k`-points of `X₀` over `k₀` fixed by the `m`-th power of the arithmetic
 Frobenius `a ↦ a ^ #k₀` of `k`, that is to the points of `X₀` rational over `𝔽_{q^m}`. -/
-noncomputable def IsModelFrobenius.fixedPointEquiv [Fintype k₀]
+noncomputable def Slop.IsModelFrobenius.fixedPointEquiv [Fintype k₀]
     (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) : FixedPoint Φ m ≃
       f₀.fixedFieldPoints ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k) where
   toFun x := ⟨x.1.left ≫ p, by

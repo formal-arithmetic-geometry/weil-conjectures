@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
-public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.Slop.Basic
 
 /-!
 
@@ -75,6 +75,11 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 /-! ### Iterates of an endomorphism -/
@@ -84,34 +89,34 @@ section Iterate
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} (Φ : X ⟶ X)
 
 /-- The `m`-th iterate `Φ_m = Φ^m : X ⟶ X` of an endomorphism `Φ`. -/
-noncomputable def frobeniusIterate (m : ℕ) : X ⟶ X :=
+noncomputable def Slop.frobeniusIterate (m : ℕ) : X ⟶ X :=
   End.asHom (End.of Φ ^ m)
 
 @[simp]
-lemma frobeniusIterate_zero : frobeniusIterate Φ 0 = 𝟙 X :=
+lemma Slop.frobeniusIterate_zero : frobeniusIterate Φ 0 = 𝟙 X :=
   rfl
 
-lemma frobeniusIterate_succ (m : ℕ) :
+lemma Slop.frobeniusIterate_succ (m : ℕ) :
     frobeniusIterate Φ (m + 1) = Φ ≫ frobeniusIterate Φ m := by
   rw [frobeniusIterate, pow_succ]
   rfl
 
-lemma frobeniusIterate_add (m n : ℕ) :
+lemma Slop.frobeniusIterate_add (m n : ℕ) :
     frobeniusIterate Φ (m + n) = frobeniusIterate Φ n ≫ frobeniusIterate Φ m := by
   rw [frobeniusIterate, pow_add]
   rfl
 
-lemma frobeniusIterate_mul (d n : ℕ) :
+lemma Slop.frobeniusIterate_mul (d n : ℕ) :
     frobeniusIterate Φ (d * n) = frobeniusIterate (frobeniusIterate Φ d) n := by
   rw [frobeniusIterate, pow_mul]
   rfl
 
 @[simp]
-lemma frobeniusIterate_one : frobeniusIterate Φ 1 = Φ := by
+lemma Slop.frobeniusIterate_one : frobeniusIterate Φ 1 = Φ := by
   rw [frobeniusIterate_succ, frobeniusIterate_zero, Category.comp_id]
 
 /-- `Φ` commutes with its iterates. -/
-lemma comp_frobeniusIterate_comm (m : ℕ) :
+lemma Slop.comp_frobeniusIterate_comm (m : ℕ) :
     Φ ≫ frobeniusIterate Φ m = frobeniusIterate Φ m ≫ Φ := by
   have h₁ := frobeniusIterate_add Φ m 1
   have h₂ := frobeniusIterate_add Φ 1 m
@@ -119,7 +124,7 @@ lemma comp_frobeniusIterate_comm (m : ℕ) :
   rw [← h₁, ← h₂, add_comm]
 
 /-- The underlying morphism of schemes of `Φ_m` is the `m`-th iterate of `Φ.left`. -/
-lemma frobeniusIterate_left (m : ℕ) :
+lemma Slop.frobeniusIterate_left (m : ℕ) :
     (frobeniusIterate Φ m).left = End.asHom (End.of Φ.left ^ m) := by
   induction m with
   | zero => rfl
@@ -129,19 +134,19 @@ lemma frobeniusIterate_left (m : ℕ) :
 
 variable {Φ} in
 /-- A point fixed by `Φ` is fixed by every iterate `Φ_m`. -/
-lemma comp_frobeniusIterate_of_comp {T : Over (Spec (.of k))} {x : T ⟶ X} (hx : x ≫ Φ = x)
+lemma Slop.comp_frobeniusIterate_of_comp {T : Over (Spec (.of k))} {x : T ⟶ X} (hx : x ≫ Φ = x)
     (m : ℕ) : x ≫ frobeniusIterate Φ m = x := by
   induction m with
   | zero => simp
   | succ m ih => rw [frobeniusIterate_succ, ← Category.assoc, hx, ih]
 
 /-- The rational points `x : s ⟶ X` fixed by the iterate `Φ_m`. -/
-abbrev FixedPoint (m : ℕ) : Type u :=
+abbrev Slop.FixedPoint (m : ℕ) : Type u :=
   {x : RationalPoint X // x ≫ frobeniusIterate Φ m = x}
 
 variable {Φ} in
 /-- A morphism intertwining two endomorphisms intertwines their iterates. -/
-lemma frobeniusIterate_comp_of_comp {Y : Over (Spec (.of k))} {ΦY : Y ⟶ Y} {f : X ⟶ Y}
+lemma Slop.frobeniusIterate_comp_of_comp {Y : Over (Spec (.of k))} {ΦY : Y ⟶ Y} {f : X ⟶ Y}
     (hf : Φ ≫ f = f ≫ ΦY) (m : ℕ) :
     frobeniusIterate Φ m ≫ f = f ≫ frobeniusIterate ΦY m := by
   induction m with
@@ -153,14 +158,14 @@ lemma frobeniusIterate_comp_of_comp {Y : Over (Spec (.of k))} {ΦY : Y ⟶ Y} {f
 variable {Φ} in
 /-- The image of a point fixed by `Φ_m` under a morphism intertwining `Φ` and `Φ_Y` is fixed by
 `Φ_{Y,m}`. -/
-lemma comp_comp_frobeniusIterate_of_comp {Y T : Over (Spec (.of k))} {ΦY : Y ⟶ Y} {f : X ⟶ Y}
+lemma Slop.comp_comp_frobeniusIterate_of_comp {Y T : Over (Spec (.of k))} {ΦY : Y ⟶ Y} {f : X ⟶ Y}
     (hf : Φ ≫ f = f ≫ ΦY) {x : T ⟶ X} {m : ℕ} (hx : x ≫ frobeniusIterate Φ m = x) :
     (x ≫ f) ≫ frobeniusIterate ΦY m = x ≫ f := by
   rw [Category.assoc, ← frobeniusIterate_comp_of_comp hf, ← Category.assoc, hx]
 
 variable {Φ} in
 /-- If `x` is fixed by `Φ_m`, so is its Frobenius translate `x ≫ Φ`. -/
-lemma comp_comp_frobeniusIterate {T : Over (Spec (.of k))} {x : T ⟶ X} {m : ℕ}
+lemma Slop.comp_comp_frobeniusIterate {T : Over (Spec (.of k))} {x : T ⟶ X} {m : ℕ}
     (hx : x ≫ frobeniusIterate Φ m = x) : (x ≫ Φ) ≫ frobeniusIterate Φ m = x ≫ Φ := by
   rw [Category.assoc, comp_frobeniusIterate_comm, ← Category.assoc, hx]
 
@@ -278,7 +283,7 @@ over the finite field `k₀ ⊆ k`: the square
 is cartesian, so that `X = X₀ ×_{k₀} k`, and `Φ = F₀ × 𝟙` is the base change of the
 `#k₀`-power Frobenius `F₀` of `X₀`, that is `Φ ≫ p = p ≫ F₀`. Since the square is cartesian, the
 two equations `Φ ≫ p = p ≫ F₀` and `Φ ≫ a_X = a_X` determine `Φ` (blueprint `sk-d-weil`). -/
-structure IsModelFrobenius : Prop where
+structure Slop.IsModelFrobenius : Prop where
   /-- `X` is the base change `X₀ ×_{k₀} k`. -/
   isPullback : IsPullback p X.hom f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
   /-- `Φ` is the base change of the `#k₀`-power Frobenius of `X₀`. -/
@@ -288,7 +293,7 @@ variable {Φ f₀ p}
 
 /-- The iterates `Φ_m` of the model Frobenius are universal homeomorphisms (blueprint
 `i-relative-frob`, Step 2). -/
-lemma IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) :
+lemma Slop.IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) :
     IsUniversalHomeomorphism (frobeniusIterate Φ m).left := by
   obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
   have : IsUniversalHomeomorphism Φ.left :=
@@ -301,7 +306,7 @@ lemma IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ 
 
 /-- The iterates `Φ_m` of the model Frobenius of a model locally of finite type are finite
 (blueprint `i-relative-frob`, Step 1). -/
-lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
+lemma Slop.IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (m : ℕ) : IsFinite (frobeniusIterate Φ m).left := by
   obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
   have : IsFinite Φ.left := hF₀.isFinite_of_isPullback hΦ.isPullback (Over.w Φ) hp
@@ -312,7 +317,7 @@ lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobeni
     infer_instance
 
 /-- For `m ≥ 1` there are finitely many rational points of `X` fixed by `Φ_m`. -/
-theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [QuasiCompact f₀]
+theorem Slop.IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [QuasiCompact f₀]
     [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) {m : ℕ} (hm : m ≠ 0) :
     Finite (FixedPoint Φ m) :=
   sorry
@@ -323,7 +328,7 @@ theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [QuasiCompact f₀]
 points, the conjugates `x ≫ Φ_i`, `i < d`, of one of them (blueprint
 `thm-trf-frobenius-fixed-points`). The sum may be taken over any finite set `T` of closed
 points containing those of degree dividing `m`. -/
-theorem IsModelFrobenius.sum_fixedPoint [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f₀ p)
+theorem Slop.IsModelFrobenius.sum_fixedPoint [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f₀ p)
     {m : ℕ} (hm : m ≠ 0) [Fintype (FixedPoint Φ m)] {M : Type*} [AddCommMonoid M] (h : X₀ → M)
     {T : Finset X₀.finitePoints} (hT : ∀ y : X₀.finitePoints, f₀.degreeOver y.1 ∣ m → y ∈ T) :
     ∑ x : FixedPoint Φ m, h ((x.1.left ≫ p).base (default : Spec (.of k))) =

@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.CompactCohomology
-public import WeilConjectures.TraceFormula.Dualizing
+public import WeilConjectures.TraceFormula.Slop.CompactCohomology
+public import WeilConjectures.TraceFormula.Slop.Dualizing
 
 /-!
 
@@ -89,6 +89,11 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -105,7 +110,7 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 `k`-scheme of finite type `C` with morphisms `c₁, c₂ : C ⟶ X`, the support map
 `c = (c₁, c₂) : C ⟶ X × X`, and a coefficient map `u : Lc₂^* K ⟶ Rc₁^! K`. The leg `c₂` is the
 ordinary pullback leg. -/
-structure Correspondence (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) where
+structure Slop.Correspondence (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) where
   /-- the support `C` of the correspondence. -/
   C : Over (Spec (.of k))
   [locallyOfFiniteType : LocallyOfFiniteType C.hom]
@@ -119,7 +124,7 @@ structure Correspondence (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧
   u : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).obj K ⟶
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c₁).obj K
 
-namespace Correspondence
+namespace Slop.Correspondence
 
 attribute [instance] locallyOfFiniteType quasiCompact isSeparated
 
@@ -162,7 +167,7 @@ noncomputable def ofEnd (v : K ⟶ K) : Correspondence ℓ K where
   u := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app K ≫ v ≫
     (boundedConstructibleUpperShriekId ℓ X).inv.app K
 
-instance (v : K ⟶ K) : IsProper (ofEnd K v).c₂.left :=
+instance Slop.instCorrespondence1 (v : K ⟶ K) : IsProper (ofEnd K v).c₂.left :=
   inferInstanceAs (IsProper (𝟙 X.left))
 
 /-- The global operator of the diagonal correspondence of `v` is `RΓ_c(X, v)`. -/
@@ -209,11 +214,11 @@ noncomputable def fixedLocusOfEnd (v : K ⟶ K) : (ofEnd K v).FixedLocus where
   isLimit := Fork.IsLimit.mk _ (fun s ↦ s.ι) (fun _ ↦ Category.comp_id _)
     (fun _ _ hm ↦ by simpa using hm)
 
-end Correspondence
+end Slop.Correspondence
 
 end
 
-namespace Correspondence
+namespace Slop.Correspondence
 
 variable {ℓ} [QuasiCompact X.hom] [IsProper X.hom]
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
@@ -230,7 +235,7 @@ theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     trace c.globalOperator = (c.traceClass F).integral :=
   sorry
 
-instance (v : K ⟶ K) : IsProper (fixedLocusOfEnd v).F.hom :=
+instance Slop.instCorrespondence2 (v : K ⟶ K) : IsProper (fixedLocusOfEnd v).F.hom :=
   inferInstanceAs (IsProper X.hom)
 
 attribute [local instance] boundedConstructibleBraiding in
@@ -242,7 +247,7 @@ theorem integral_traceClass_ofEnd {K : Dᵇc((point k).left)⟦Profinite.padicAl
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral = trace v :=
   sorry
 
-end Correspondence
+end Slop.Correspondence
 
 /-! ### The Frobenius graph correspondence -/
 
@@ -262,7 +267,7 @@ noncomputable def graph (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
   c₂ := frobeniusIterate Φ m
   u := (K.iterateStr m).hom ≫ (boundedConstructibleUpperShriekId ℓ X).inv.app K.carrier
 
-instance (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) [IsFinite (frobeniusIterate Φ m).left] :
+instance Slop.instCorrespondence3 (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) [IsFinite (frobeniusIterate Φ m).left] :
     IsProper (K.graph m).c₂.left :=
   inferInstanceAs (IsProper (frobeniusIterate Φ m).left)
 

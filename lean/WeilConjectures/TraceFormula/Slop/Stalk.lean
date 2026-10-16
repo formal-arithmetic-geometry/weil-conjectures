@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
-public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.Slop.Frobenius
 
 /-!
 
@@ -72,6 +72,11 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -87,19 +92,19 @@ variable (Φ : X ⟶ X)
 /-- The *stalk functor* at a rational point `x` fixed by `Φ`: the derived pullback `Lx^*` of
 Weil objects along the square `𝟙 s ≫ x = x ≫ Φ`, from Weil objects for `Φ` on `X` to Weil
 objects for the identity of the base point `s`. -/
-noncomputable def weilStalk (x : RationalPoint X) (hx : x ≫ Φ = x) :
+noncomputable def Slop.weilStalk (x : RationalPoint X) (hx : x ≫ Φ = x) :
     WeilBoundedConstructible ℓ Φ ⥤ WeilBoundedConstructible ℓ (𝟙 (point k)) :=
   weilUpperStar ℓ (𝟙 (point k)) Φ x (by rw [Category.id_comp, hx])
 
 @[simp]
-lemma weilStalk_obj_carrier (x : RationalPoint X) (hx : x ≫ Φ = x)
+lemma Slop.weilStalk_obj_carrier (x : RationalPoint X) (hx : x ≫ Φ = x)
     (K : WeilBoundedConstructible ℓ Φ) :
     ((weilStalk ℓ Φ x hx).obj K).carrier =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier :=
   rfl
 
 /-- The stalk functor lifts the derived pullback `Lx^*` along the forgetful functors. -/
-lemma weilStalk_comp_forget (x : RationalPoint X) (hx : x ≫ Φ = x) :
+lemma Slop.weilStalk_comp_forget (x : RationalPoint X) (hx : x ≫ Φ = x) :
     weilStalk ℓ Φ x hx ⋙ WeilBoundedConstructible.forget ℓ (𝟙 (point k)) =
       WeilBoundedConstructible.forget ℓ Φ ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x :=

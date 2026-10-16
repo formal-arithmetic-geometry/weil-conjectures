@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Correspondence
-public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.TraceFormula.Slop.Correspondence
+public import WeilConjectures.TraceFormula.Slop.FixedPoint
 
 /-!
 
@@ -86,6 +86,11 @@ open CategoryTheory Limits MonoidalCategory Endofunctor
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace Slop
+end Slop
+open Slop
+
 
 open Scheme
 
@@ -455,7 +460,7 @@ variable (ℓ) {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
 /-- The trace formula over a model `X₀` of finite type over `k₀`: for every base change `X` of
 `X₀` to `k` with its model Frobenius `Φ`, every Weil object `(K, φ)` for `Φ` and every `m ≥ 1`,
 the trace formula holds (`WeilBoundedConstructible.TraceFormula`). -/
-def ModelTraceFormula {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f₀] :
+def Slop.ModelTraceFormula {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f₀] :
     Prop :=
   ∀ (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] (Φ : X ⟶ X) (p : X.left ⟶ X₀) (hΦ : IsModelFrobenius Φ f₀ p)
@@ -469,7 +474,7 @@ variable {ℓ}
 /-- **The trace formula in dimension zero** (blueprint `sk-thm-trace-formula`, Step 1): for a
 finite model `X₀`, the fixed points of `Φ_m` are isolated and both sides are computed on the
 finitely many points of `X`. -/
-theorem modelTraceFormula_of_isFinite [IsAlgClosed k] {X₀ : Scheme.{u}}
+theorem Slop.modelTraceFormula_of_isFinite [IsAlgClosed k] {X₀ : Scheme.{u}}
     (f₀ : X₀ ⟶ Spec (.of k₀)) [IsFinite f₀] : ModelTraceFormula ℓ (k := k) f₀ :=
   sorry
 
@@ -478,7 +483,7 @@ theorem modelTraceFormula_of_isFinite [IsAlgClosed k] {X₀ : Scheme.{u}}
 over `k₀`, the trace formula follows from the Lefschetz–Verdier formula on a compactification,
 the decomposition of the integral of the trace class into local terms along the finite fixed
 locus, and the computation of the local terms of the Frobenius correspondence. -/
-theorem modelTraceFormula_of_smoothOfRelativeDimension_one [IsAlgClosed k] {X₀ : Scheme.{u}}
+theorem Slop.modelTraceFormula_of_smoothOfRelativeDimension_one [IsAlgClosed k] {X₀ : Scheme.{u}}
     (f₀ : X₀ ⟶ Spec (.of k₀)) [IsSeparated f₀] [QuasiCompact f₀]
     [SmoothOfRelativeDimension 1 f₀] :
     haveI := SmoothOfRelativeDimension.smooth 1 f₀
@@ -488,7 +493,7 @@ theorem modelTraceFormula_of_smoothOfRelativeDimension_one [IsAlgClosed k] {X₀
 /-- **The trace formula is additive** (blueprint `sk-i-global-additivity`): for a closed
 subscheme `i₀ : Z₀ ⟶ X₀` with open complement `j₀ : U₀ ⟶ X₀`, the trace formula over `U₀` and
 over `Z₀` gives the trace formula over `X₀`. -/
-theorem modelTraceFormula_of_isCompl {X₀ U₀ Z₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
+theorem Slop.modelTraceFormula_of_isCompl {X₀ U₀ Z₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
     [LocallyOfFiniteType f₀] (j₀ : U₀ ⟶ X₀) (i₀ : Z₀ ⟶ X₀) [IsOpenImmersion j₀]
     [IsClosedImmersion i₀] (hcompl : IsCompl (Set.range j₀.base) (Set.range i₀.base))
     (hU : ModelTraceFormula ℓ (k := k) (j₀ ≫ f₀)) (hZ : ModelTraceFormula ℓ (k := k) (i₀ ≫ f₀)) :
@@ -500,7 +505,7 @@ induction from `modelTraceFormula_of_isCompl`, `modelTraceFormula_of_isFinite`,
 `modelTraceFormula_of_smoothOfRelativeDimension_one` and the fibration step of
 `nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso` and
 `nonempty_weilStalk_weilLowerShriekOfFrobenius_iso`. -/
-theorem modelTraceFormula [IsAlgClosed k] {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
+theorem Slop.modelTraceFormula [IsAlgClosed k] {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
     [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀] :
     ModelTraceFormula ℓ (k := k) f₀ :=
   sorry
@@ -523,7 +528,7 @@ tr(F_{c,m} | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr(F_{x,m} | K_x̄),
 the sum running over the rational points `x` of `X` fixed by `Φ_m`, where `F_{c,m}` is the
 Frobenius of the compactly supported cohomology `RΓ_c(X, (K, φ_m))` and `F_{x,m}` the Frobenius
 of the stalk of `(K, φ_m)` at `x`, both Weil objects for the identity of the base point. -/
-theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSeparated f₀]
+theorem Slop.trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSeparated f₀]
     [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (hm : 1 ≤ m)
     [Fintype (FixedPoint Φ m)]
@@ -542,7 +547,7 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSepa
 /-- **The Grothendieck–Lefschetz trace formula in `ℚ̄_ℓ`**: the trace formula
 `trace_globalOperator_eq_sum_trace_stalkFrobenius` read through
 `End (ℚ̄_ℓ,s) ≅ ℚ̄_ℓ` (`unitEndRingEquiv`). -/
-theorem trace_globalOperator_eq_sum_trace_stalkFrobenius_padicAlgCl [IsAlgClosed k]
+theorem Slop.trace_globalOperator_eq_sum_trace_stalkFrobenius_padicAlgCl [IsAlgClosed k]
     [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (hm : 1 ≤ m)
     [Fintype (FixedPoint Φ m)]
@@ -684,7 +689,7 @@ end WeilBoundedConstructible
 /-- **Counting points** (blueprint `cor-trf-point-counting`): the trace of the global operator
 `F_{c,m}` on `RΓ_c(X, ℚ̄_ℓ)` is the number of points of `X₀` rational over `𝔽_{q^m}`, the
 number of rational points of `X` fixed by `Φ_m`. -/
-theorem trace_globalOperator_unit_eq_card [IsAlgClosed k] [IsSeparated f₀]
+theorem Slop.trace_globalOperator_unit_eq_card [IsAlgClosed k] [IsSeparated f₀]
     [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ)
     (hm : 1 ≤ m) [Fintype (FixedPoint Φ m)]
     [HasRightDual

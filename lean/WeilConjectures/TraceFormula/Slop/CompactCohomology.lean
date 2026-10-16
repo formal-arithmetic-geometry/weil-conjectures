@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.TraceFormula.Slop.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
 /-!
@@ -88,6 +88,11 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+namespace Slop
+end Slop
+open Slop
+
+
 open Scheme
 
 /-! ### Topological invariance -/
@@ -104,7 +109,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- **Topological invariance** of the bounded constructible derived category: for a finite
 universal homeomorphism `r`, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of the adjunction `Lr^* ⊣ Rr_*` is an
 isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*` (blueprint `i-topology`). -/
-theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction :
+theorem Slop.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction :
     IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ r).unit :=
   sorry
 
@@ -130,7 +135,7 @@ omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsUniversalHomeomorphism r.left] in
 include sq hrp hrf in
 /-- The Frobenius endomorphisms are compatible with `f`: `Φ_X ≫ f = f ≫ Φ_Y`. -/
-lemma frobenius_comp_eq_comp_frobenius : ΦX ≫ f = f ≫ ΦY :=
+lemma Slop.frobenius_comp_eq_comp_frobenius : ΦX ≫ f = f ≫ ΦY :=
   calc ΦX ≫ f = r ≫ p ≫ f := by rw [← hrp, Category.assoc]
     _ = r ≫ f' ≫ ΦY := by rw [sq.w]
     _ = f ≫ ΦY := by rw [← Category.assoc, hrf]
@@ -140,7 +145,7 @@ cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and the relative Frobenius `r` wit
 `r ≫ f' = f`, a finite universal homeomorphism: compact-support base change for `sq`, the unit
 of `Lr^* ⊣ Rr_*`, the identification `Rr_! ≅ Rr_*` and the composition isomorphisms of the
 lower shriek and of the pullback (blueprint `sk-d-weil-push`). -/
-noncomputable def weilLowerShriekFrobeniusComparison :
+noncomputable def Slop.weilLowerShriekFrobeniusComparison :
     boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦY ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX ⋙
@@ -167,19 +172,19 @@ noncomputable def weilLowerShriekFrobeniusComparison :
 endomorphisms: a Weil object `(K, φ)` for `Φ_X` is sent to `Rf_! K` with the Weil structure
 `Φ_Y^* Rf_! K ≅ Rf_! Φ_X^* K --Rf_! φ--> Rf_! K` given by
 `weilLowerShriekFrobeniusComparison` (blueprint `def-trf-weil-shriek-pushforward`). -/
-noncomputable def weilLowerShriekOfFrobenius :
+noncomputable def Slop.weilLowerShriekOfFrobenius :
     WeilBoundedConstructible ℓ ΦX ⥤ WeilBoundedConstructible ℓ ΦY :=
   IsoAlgebra.mapOfNatIso (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf)
 
 @[simp]
-lemma weilLowerShriekOfFrobenius_obj_carrier (K : WeilBoundedConstructible ℓ ΦX) :
+lemma Slop.weilLowerShriekOfFrobenius_obj_carrier (K : WeilBoundedConstructible ℓ ΦX) :
     ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K).carrier =
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
   rfl
 
 /-- The lower shriek of Weil objects lifts the lower shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the forgetful
 functors. -/
-lemma weilLowerShriekOfFrobenius_comp_forget :
+lemma Slop.weilLowerShriekOfFrobenius_comp_forget :
     weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf ⋙ WeilBoundedConstructible.forget ℓ ΦY =
       WeilBoundedConstructible.forget ℓ ΦX ⋙
         boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
@@ -197,7 +202,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 omit [Fact (ringChar k).Prime] in
 /-- The trivial cartesian square `𝟙 X ≫ a_X = a_X ≫ 𝟙 s` of the structure morphism. -/
-lemma isPullback_toPoint (X : Over (Spec (.of k))) :
+lemma Slop.isPullback_toPoint (X : Over (Spec (.of k))) :
     IsPullback (𝟙 X) (toPoint X) (toPoint X) (𝟙 (point k)) :=
   IsPullback.of_horiz_isIso ⟨by simp⟩
 
@@ -207,13 +212,13 @@ variable (Φ : X ⟶ X) [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
 universal homeomorphism `Φ`: the lower shriek of Weil objects along the structure morphism
 `a_X : X ⟶ s`, with the identity of the base point and the trivial cartesian square, the relative
 Frobenius being `Φ` itself. -/
-noncomputable def weilCompactCohomology :
+noncomputable def Slop.weilCompactCohomology :
     WeilBoundedConstructible ℓ Φ ⥤ WeilBoundedConstructible ℓ (𝟙 (point k)) :=
   weilLowerShriekOfFrobenius ℓ Φ (𝟙 (point k)) (toPoint X) (isPullback_toPoint X) Φ
     (Category.comp_id Φ) (comp_toPoint Φ)
 
 @[simp]
-lemma weilCompactCohomology_obj_carrier (K : WeilBoundedConstructible ℓ Φ) :
+lemma Slop.weilCompactCohomology_obj_carrier (K : WeilBoundedConstructible ℓ Φ) :
     ((weilCompactCohomology ℓ Φ).obj K).carrier =
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         K.carrier :=
@@ -328,7 +333,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 the global operators): the compactly supported cohomology of `Rf_! K` is that of `K`,
 `RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, as Weil objects for the identity of the base point. In
 particular the global operators of `K` and of `Rf_! K` have the same trace. -/
-theorem nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso
+theorem Slop.nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso
     (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilCompactCohomology ℓ ΦY).obj
         ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K) ≅
@@ -347,7 +352,7 @@ Frobenius `Φ_Z` compatible with `Φ_X`, the stalk at `y` of `Rf_! K` is the com
 cohomology of the restriction of `K` to the fibre, `(Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)`, as Weil objects
 for the identity of the base point. In particular the local Frobenius of `Rf_! K` at `y` and the
 global operator of `K|_Z` have the same trace. -/
-theorem nonempty_weilStalk_weilLowerShriekOfFrobenius_iso (K : WeilBoundedConstructible ℓ ΦX) :
+theorem Slop.nonempty_weilStalk_weilLowerShriekOfFrobenius_iso (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilStalk ℓ ΦY y hy).obj
         ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K) ≅
       (weilCompactCohomology ℓ ΦZ).obj ((weilUpperStar ℓ ΦZ ΦX i hi).obj K)) :=
