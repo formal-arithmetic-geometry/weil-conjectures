@@ -3,42 +3,161 @@
  "blueprint": {
   "is": "det-constructible-compactness-bounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactness of a constructible sheaf against uniformly bounded families",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$, $a\\leq b$ integers, and $(K_\\lambda)$ a family in\n$\\Dic(X,\\Lambda)$ with $H^n(K_\\lambda)=0$ for $n\\notin[a,b]$ and all $\\lambda$. Then for every\n$s\\in\\mathbf Z$ the natural map $\\bigoplus_\\lambda\\Hom(C,K_\\lambda[s])\\to\\Hom(C,\\bigoplus_\\lambda K_\\lambda[s])$\nis an isomorphism.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$, in the standing setting of [sk-def-sfb-dc-setting]. Fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a finite subextension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or $\\underline{\\Qlb}$ be the condensed coefficient ring of [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed], and let $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. All sheaves below are $\\Lambda_X$-module objects [sk-def-sfb-module-objects], and all Hom groups and direct sums are in the ordinary unbounded derived category $D(X_{\\mathrm{pro\\acute et}},\\Lambda)=D(\\Mod_{\\Lambda_X})$ [def-weil-abstract-derived-category]. In particular no derived-completion condition is imposed.\n\nWrite $\\Cons(X,\\Lambda)$ for the full subcategory of constructible sheaves [sk-def-sfb-constructible], $\\IndCons(X,\\Lambda)$ for the full subcategory of filtered colimits of constructible sheaves computed in $\\Mod_{\\Lambda_X}$, and\n$$\n\\Dic(X,\\Lambda)=\\{K\\in D(\\Mod_{\\Lambda_X}):H^n(K)\\in\\IndCons(X,\\Lambda)\\text{ for all }n\\in\\mathbf Z\\}.\n$$\nLet $C\\in\\Cons(X,\\Lambda)$, viewed as a complex concentrated in degree $0$, let $a\\le b$ be integers, let $I$ be a small set in the fixed universe, and let $(K_\\lambda)_{\\lambda\\in I}$ be a family in $\\Dic(X,\\Lambda)$ with $H^n(K_\\lambda)=0$ for $n\\notin[a,b]$ and every $\\lambda$. Then for every $s\\in\\mathbf Z$ the natural homomorphism\n$$\n\\alpha_s:\\bigoplus_{\\lambda\\in I}\\Hom(C,K_\\lambda[s])\\longrightarrow\\Hom\\bigl(C,(\\bigoplus_{\\lambda\\in I}K_\\lambda)[s]\\bigr),\\qquad (f_\\lambda)\\longmapsto\\sum_\\lambda\\iota_\\lambda[s]\\circ f_\\lambda,\n$$\nis an isomorphism. The sum in this formula is finite because $(f_\\lambda)$ has finite support, and $\\iota_\\lambda$ denotes the coprojection. The shift convention is $(K[s])^n=K^{n+s}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
   "place": "node det-constructible-compactness-bounded, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category"
+ ],
  "proof": [
   {
-   "text": "Induction on $b-a$, for all $s$ simultaneously.",
+   "text": "For $N\\in\\mathbf N$, let $P(N)$ mean the asserted bijectivity for every pair $a\\le b$ with $b-a=N$, every family with that common bound, and every shift $s\\in\\mathbf Z$. Induct on $N$, keeping all shifts in the inductive assertion. Empty families give the map between zero groups, and are also included in this induction.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, opening sentence: induction on b-a for all s simultaneously"
+   }
   },
   {
-   "text": "*$a=b$.* Then $K_\\lambda\\cong B_\\lambda[-a]$ with $B_\\lambda=H^a(K_\\lambda)\\in\\IndCons(X,\\Lambda)$, and\n$\\bigoplus K_\\lambda\\cong(\\bigoplus B_\\lambda)[-a]$. The map is\n$\\bigoplus_\\lambda\\Ext^{s-a}(C,B_\\lambda)\\to\\Ext^{s-a}(C,\\bigoplus B_\\lambda)$, an isomorphism by\n[sk-cor-ind-heart-ii].",
-   "uses": [],
-   "elementary": null
+   "text": "Suppose $a=b$. Set $B_\\lambda=H^a(K_\\lambda)$; this is in $\\IndCons(X,\\Lambda)$ by the definition of $\\Dic$. For a representing complex, the inclusion $\\tau_{\\le a}K_\\lambda\\to K_\\lambda$ induces the identity on cohomology in degrees $\\le a$ by [lem-weil-pbc-truncation-cohomology], and both sides have zero cohomology above $a$. The projection $j_a:\\tau_{\\le a}K_\\lambda\\to B_\\lambda[-a]$ in [lem-weil-pbc-truncation-triangle] induces $\\ker d^a/\\operatorname{im}d^{a-1}\\to B_\\lambda$ identically in degree $a$; its other cohomology maps are between zero objects. These are quasi-isomorphisms and hence invertible in the derived category [def-weil-abstract-derived-category]. Thus $K_\\lambda\\simeq B_\\lambda[-a]$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, base case a=b: K_lambda is B_lambda[-a]"
+   }
   },
   {
-   "text": "*Induction step.* For $b>a$, the triangles\n\n$$\n\\tau_{\\leq b-1}K_\\lambda\\to K_\\lambda\\to H^b(K_\\lambda)[-b]\\to(\\tau_{\\leq b-1}K_\\lambda)[1]\n$$\n\nhave outer terms with cohomology in $[a,b-1]$ resp. $[b,b]$. A direct sum of distinguished triangles\nis distinguished, and since $H^n$ commutes with direct sums ([sk-cor-ambient-ind-derived]), the sum\ntriangle is the truncation triangle of $\\bigoplus K_\\lambda$. Applying $\\Hom(C,-[s])$ gives a map from\nthe direct sum of the long exact sequences for the $K_\\lambda$ (exact, because direct sums of abelian\ngroups are exact) to the long exact sequence for $\\bigoplus K_\\lambda$. In the resulting ladder\n\n$$\n\\begin{matrix}\n\\oplus\\Hom(C,H^bK_\\lambda[s-b-1])&\\to&\\oplus\\Hom(C,\\tau_{\\leq b-1}K_\\lambda[s])&\\to&\\oplus\\Hom(C,K_\\lambda[s])&\\to&\\oplus\\Hom(C,H^bK_\\lambda[s-b])&\\to&\\oplus\\Hom(C,\\tau_{\\leq b-1}K_\\lambda[s+1])\\\\\n\\downarrow&&\\downarrow&&\\downarrow&&\\downarrow&&\\downarrow\\\\\n\\Hom(C,\\oplus H^bK_\\lambda[s-b-1])&\\to&\\Hom(C,\\oplus\\tau_{\\leq b-1}K_\\lambda[s])&\\to&\\Hom(C,\\oplus K_\\lambda[s])&\\to&\\Hom(C,\\oplus H^bK_\\lambda[s-b])&\\to&\\Hom(C,\\oplus\\tau_{\\leq b-1}K_\\lambda[s+1])\n\\end{matrix}\n$$\n\nthe four outer vertical maps are isomorphisms by induction, so the middle one is by the five lemma.",
+   "text": "By [det-def-localizing-closure-existence](1), coproducts are computed termwise on complexes. Consequently the coproduct of the $B_\\lambda[-a]$ is $(\\bigoplus_\\lambda B_\\lambda)[-a]$, and shifting this coproduct by $s$ agrees with the coproduct of the shifts: both have exactly the same terms and signed differentials. Under the isomorphisms in step 2, $\\alpha_s$ is precisely\n$$\\bigoplus_\\lambda\\Ext^{s-a}(C,B_\\lambda)\\longrightarrow\\Ext^{s-a}(C,\\bigoplus_\\lambda B_\\lambda),$$\nwhere, for every integer $q$, $\\Ext^q(C,B)$ denotes $\\Hom_{D(\\Mod_{\\Lambda_X})}(C[0],B[0][q])$. This map is an isomorphism by [det-ind-heart-ii-sums], whose statement allows every integer $q$, with $q=s-a$. The identification respects the natural map since a summand $f$ is sent to the shifted coprojection composed with $f$. This proves $P(0)$.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "det-ind-heart-ii-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, base case: identify the comparison with Ext^{s-a} and apply sk-cor-ind-heart-ii"
+   }
+  },
+  {
+   "text": "Now take $b>a$ and suppose $P(N)$ holds for $N<b-a$. Put $A_\\lambda=\\tau_{\\le b-1}K_\\lambda$ and $B_\\lambda=H^b(K_\\lambda)[-b]$. The cohomology formula in [lem-weil-pbc-truncation-cohomology] shows that $A_\\lambda$ has cohomology in $[a,b-1]$; the definition of a one-term complex shows that $B_\\lambda$ has cohomology in $[b,b]$, with its single sheaf ind-constructible. Moreover $A_\\lambda\\in\\Dic$ by [det-ambient-ind-derived-sums](2). Apply [lem-weil-pbc-truncation-triangle] with $q=b$ and identify $\\tau_{\\le b}K_\\lambda\\simeq K_\\lambda$, since its inclusion is a quasi-isomorphism by the same cohomology formula [def-weil-abstract-derived-category]. We obtain distinguished triangles\n$$T_\\lambda:\\quad A_\\lambda\\xrightarrow{u_\\lambda}K_\\lambda\\xrightarrow{v_\\lambda}B_\\lambda\\xrightarrow{\\delta_\\lambda}A_\\lambda[1].$$",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "det-ambient-ind-derived-sums",
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, induction step: truncation triangles and the two smaller cohomological intervals"
+   }
+  },
+  {
+   "text": "The componentwise coproduct of the $T_\\lambda$ is a distinguished triangle by [det-def-localizing-closure-existence](1), with objects $A=\\bigoplus A_\\lambda$, $K=\\bigoplus K_\\lambda$, $B=\\bigoplus B_\\lambda$, and boundary $\\delta:B\\to A[1]$ induced by the $\\delta_\\lambda$. The shift/coproduct identification is the termwise one from step 3. Each coprojection triple is a morphism of these triangles: for example $\\delta\\,\\iota^B_\\lambda=\\iota^A_\\lambda[1]\\,\\delta_\\lambda$, by the definition of the coproduct arrow. By [det-ambient-ind-derived-sums](1), the sum objects are in $\\Dic$ and retain the respective bounds $[a,b-1]$, $[a,b]$, $[b,b]$. The argument only needs this sum triangle, not an additional theorem identifying it with a chosen truncation triangle of $K$.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "det-ambient-ind-derived-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, induction step: a direct sum of distinguished triangles is distinguished; cohomology commutes with direct sums"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-hom-into-triangle-exact] to each $T_\\lambda$, to its rotations and to the sum triangle. The rotations and shifts are those of [def-weil-triangulated-category]; repeated rotation supplies the exact Hom sequence in every integer degree, with the usual signed connecting maps. Thus, for fixed $s$, obtain a commutative diagram whose top row is the direct sum of the five-term exact sequences\n$$\\Hom(C,B_\\lambda[s-1])\\longrightarrow\\Hom(C,A_\\lambda[s])\\longrightarrow\\Hom(C,K_\\lambda[s])\\longrightarrow\\Hom(C,B_\\lambda[s])\\longrightarrow\\Hom(C,A_\\lambda[s+1]),$$\nand whose bottom row is the analogous sequence for $(A,K,B)$. The top row is exact: a finitely supported tuple in a kernel has a preimage in each of its finitely many nonzero components, and these preimages form a finitely supported tuple; the reverse inclusion follows from zero composites. The vertical maps are the comparison maps $\\alpha$ for these families. They commute with every arrow, including the connecting arrows: for $h:C\\to B_\\lambda[s-1]$ the boundary identity from step 5 gives $\\delta[s-1]\\iota^B_\\lambda[s-1]h=\\iota^A_\\lambda[s]\\delta_\\lambda[s-1]h$; summing these identities proves the connecting square, and the squares for $u,v$ follow by the identical coprojection equation. Here the Hom-exactness lemma supplies exactness, rather than a definition of a homological functor being used as a theorem.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, induction step: the natural ladder of five-term Hom sequences"
+   }
+  },
+  {
+   "text": "The vertical maps in positions $1,2,4,5$ of the diagram in step 6 are bijective: use $P(0)$ for the $B_\\lambda$ family at shifts $s-1,s$, and $P(b-a-1)$ for the $A_\\lambda$ family at shifts $s,s+1$. For completeness write either exact row as $L\\xrightarrow{d_1}M\\xrightarrow{d_2}N\\xrightarrow{d_3}P\\xrightarrow{d_4}Q$ and the vertical maps as $f_L,\\ldots,f_Q$, with primes for the bottom row. If $f_N(n)=0$, then $f_Pd_3(n)=0$, so $d_3(n)=0$ and $n=d_2(m)$. Since $d'_2f_M(m)=0$, write $f_M(m)=d'_1(l')$; lift $l'$ along $f_L$ to $l$. Injectivity of $f_M$ gives $m=d_1(l)$ and hence $n=0$. For $n'\\in N'$, lift $d'_3(n')$ along $f_P$ to $p$. Since $f_Qd_4(p)=d'_4d'_3(n')=0$, injectivity of $f_Q$ gives $p=d_3(n)$ for some $n$. Then $n'-f_N(n)=d'_2(m')$; lift $m'$ along $f_M$ and add its image under $d_2$ to $n$. This gives a preimage of $n'$. Thus $f_N=\\alpha_s$ is bijective. This proves $P(b-a)$ for every $s$ and finishes the induction.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
+    "place": "Proof, last sentence: the four outer vertical maps are isomorphisms, so the middle one is (five-lemma diagram chase)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "def-weil-abstract-derived-category",
+  "det-def-localizing-closure-existence",
+  "det-ind-heart-ii-sums",
+  "det-ambient-ind-derived-sums",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness-bounded.md",
-  "place": "## Proof"
+  "place": "Full proof in sk-thm-constructible-compactness-bounded.proof.md, with explicit cohomology checks, naturality and diagram chase"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf with rational l-adic coefficients is compact against coproducts of uniformly cohomologically bounded ind-constructible complexes",
+   "results": "Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; Condensed.lanSheafProfinite; LightCondensed; Condensed.hasExactColimitsOfShape; CompHausLike.LocallyConstantModule.functor; LightCondensed.lanLightCondSet; CondensedMod.IsSolid",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state rational constructible bounded-family compactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state rational constructible bounded-family compactness"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*compact|compact.*constructible",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state rational constructible bounded-family compactness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible rational adic sheaf Hom commutes with coproducts of bounded complexes",
+   "results": "HomologicalComplex.instHasBinaryBiproduct; CategoryTheory.Sheaf.instHasFiniteCoproducts; SheafOfModules.Hom; CategoryTheory.instPreadditiveSheaf; AlgebraicGeometry.LocallyRingedSpace.coproduct; CategoryTheory.presheafToSheaf_additive; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; SheafOfModules.instPreadditive",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state rational constructible bounded-family compactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category Hom from a constructible sheaf preserves direct sums of complexes in a fixed finite cohomological interval by induction using Ext and truncation triangles",
+   "results": "DerivedCategory.instAdditiveCochainComplexIntQ; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.hasExt_of_hasDerivedCategory; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state rational constructible bounded-family compactness"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -48,5 +167,34 @@
   "sk-cor-ambient-ind-derived"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-constructible-compactness-bounded",
+  "worker": "stage1",
+  "summary": "Retained the blueprint width induction, made its standing scheme and condensed-coefficient setting explicit, supplied the definitions of IndCons and Dic inline, cited existing Ext-sum/ambient-sum/triangle/Hom-exactness statements, and wrote out finite-support exactness, boundary naturality and the final five-lemma chase. No new nodes or attachments.",
+  "blueprint": "Steps 1-3 realize the opening induction and the a=b paragraph; steps 4-7 realize the truncation-triangle induction paragraph and the displayed five-term ladder. No departure from the unit route.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Part (1) supplies ambient coproducts and coproducts of distinguished triangles; this is a generic derived-category input required by the blueprint induction."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "The statement is for D(A) of every abelian category, hence applies to sheaves of Lambda_X-modules without an etale/torsion restriction; it supplies the successive truncation triangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-existence",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-eb6ceb26c",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-eb6ceb26c (reviewer sub-agent of L); spot-checked: Read the complete item and all cited statements against blueprint main-20261015 and Stacks 0118, 08J5, 0145, 0146 and 0149. All seven induction steps, coefficient categories, natural maps and edge cases check out; no new nodes or repairs. Accepted both declared generic tool uses. review.md records inherited metadata gaps and unrelated downstream cycles; no cycle passes through this item."
+ }
 }
