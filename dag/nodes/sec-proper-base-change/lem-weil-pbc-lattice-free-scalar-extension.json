@@ -1,0 +1,160 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-lattice-free-scalar-extension",
+ "title": "Scalar extension of a finite free coefficient-module sheaf with its standard basis",
+ "statement": "Let X be a scheme [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site], R and S sheaves of commutative rings, a:R -> S, U a site object, and I a finite index type. The sheafified scalar extension [def-pur-sheaf-tensor-product] of the free R|U-module with basis I is isomorphic to the free S|U-module with that basis [def-weil-sheaf-of-modules-category]. There is such an isomorphism which sends the sheafification-unit image of 1 tensor each standard integral basis section to the corresponding standard rational basis section on every test object over U. Empty objects, zero rings and empty I are allowed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Identify sections of each free finite sheaf with the finite product of the section ring, using freeSectionsLinearEquiv. Transport the tensor source along that equivalence, commute tensor product with the finite product by TensorProduct.piRight, use S tensor_R R = S in each coordinate by AlgebraTensorModule.rid, and transport back to the sections of the target free sheaf. These are explicit linear equivalences, not witnesses chosen from an unproved existence assertion.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module"
+   }
+  },
+  {
+   "text": "The coordinate formula sends b tensor m to the vector whose ith entry is b times a applied to the ith coordinate of m. On pure tensors 1 tensor m, naturality of the free coordinate projections and of the coefficient map proves that this formula commutes with restriction. Pure tensors generate, so the sectionwise linear equivalences define a presheaf isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module"
+   }
+  },
+  {
+   "text": "Sheafify the presheaf isomorphism. Its target is already the free S-module sheaf, so the sheafification adjunction counit identifies its sheafification with itself. Naturality of the unit followed by the adjunction triangle identifies the composite on each original tensor section with the sectionwise coordinate formula.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module"
+   }
+  },
+  {
+   "text": "Apply the formula to each standard basis section. The free basis inclusions and projections satisfy the Kronecker-delta identities, and the coefficient map preserves zero and one. The image therefore has exactly the coordinates of the corresponding target basis section. Injectivity of the target coordinate equivalence proves the required normalization. No point is chosen and no nonzero basis index is assumed to exist, so the empty and rank-zero cases are included.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, scalar extension of the standard finite free integral module",
+  "note": "Proved in Lean by an explicit sectionwise tensor/product isomorphism, its restriction compatibility, and the sheafification unit/counit identities. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of a finite free sheaf of modules is the finite free sheaf over the target coefficient ring",
+   "results": "8 hits including freeness of scalar extension for ordinary modules and the definition of the free sheaf; no exact sheafified scalar-extension comparison.",
+   "date": "2026-10-16",
+   "verdict": "useful ingredients; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piRight",
+   "results": "4 hits in Mathlib.LinearAlgebra.TensorProduct.Pi. TensorProduct.piRight is the finite-product tensor comparison used in the proof.",
+   "date": "2026-10-16",
+   "verdict": "useful ingredients; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*free|free.*changeOfRings|mapFreeIso",
+   "results": "11 hits about mapFreeIso for an already constructed cocontinuous functor. No direct comparison for this sheafified tensor construction.",
+   "date": "2026-10-16",
+   "verdict": "useful ingredients; no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+   "place": "Proof step 4: rationalization of the standard integral free module",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_latticeFreeScalarExtensionIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_latticeFreeScalarExtensionIso"
+  ],
+  "statement": "theorem exists_latticeFreeScalarExtensionIso [Finite I] :\n    ∃ e : SheafOfModules.changeOfRings.{u, u + 1, u + 1}\n        (latticeScalarMap a U) (SheafOfModules.free (R := (sheafCompose _\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I) ≅\n        SheafOfModules.free (R := (sheafCompose _\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over U)) I,\n      ∀ (T : (Over U)ᵒᵖ) (i : I), e.hom.val.app T\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose _\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over U)).obj)).unit.app\n            (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}\n              (latticeScalarMap a U) (SheafOfModules.free (R := (sheafCompose _\n                (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) I))).app T\n          ((1 : (S.over U).obj.obj T) ⊗ₜ[(R.over U).obj.obj T,\n            ((latticeScalarMap a U).hom.app T).hom]\n              ((SheafOfModules.ιFree (R := (sheafCompose _\n                (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)) i).val.app T\n                  (1 : (R.over U).obj.obj T)))) =\n        (SheafOfModules.ιFree (R := (sheafCompose _\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over U)) i).val.app T\n            (1 : (S.over U).obj.obj T)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+ }
+}

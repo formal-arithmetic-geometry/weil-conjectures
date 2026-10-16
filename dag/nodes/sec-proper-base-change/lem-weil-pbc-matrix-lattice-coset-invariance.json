@@ -1,0 +1,150 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-matrix-lattice-coset-invariance",
+ "title": "Constant matrix lattice images are classified by integral matrix cosets",
+ "statement": "Let X be a scheme [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site], K a topological field, A a subring with its induced topology, U a site object, and n a natural number. In the free rank-n sheaf of continuous K-valued coefficient modules [def-weil-sheaf-of-modules-category], define the constant lattice image of g in GL_n(K) on T over U to be all coordinate sums g b, where b is a vector of continuous A-valued functions. Equal left cosets g GL_n(A) and h GL_n(A) give equal lattice images on every test object. Conversely, if U is nonempty, equality of these images at the identity slice object implies equality of the cosets. Consequently, for nonempty U, equality of cosets is equivalent to equality of all their embedded lattice images. No positivity hypothesis on n is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Right multiplication by an invertible integral matrix preserves the lattice image. Given an integral coefficient vector b for g h, change it to h b for g; finite sums and the ring map from constant integral to rational coefficients identify the coordinate expressions. Apply the inverse integral matrix for the reverse inclusion. QuotientGroup.leftRel_apply identifies equal left cosets with such right multiplication. This direction holds over empty objects as well.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates"
+   }
+  },
+  {
+   "text": "The free-sheaf coordinate projections recover each coefficient in a finite coordinate sum, since the basis inclusions and projections satisfy the Kronecker-delta identities. For each column of h, use the delta integral coefficient vector to see it in the h lattice. Equality with the g lattice supplies continuous integral coefficients expressing that column in the g basis.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates"
+   }
+  },
+  {
+   "text": "If U is nonempty, choose a point x of U and evaluate each of these continuous coefficients at x. Matrix multiplication by g inverse shows that every entry of g inverse times h lies in A. Reverse the equality to prove the same for h inverse times g. The two matrices of their subtype entries in A multiply to the identity: the induced matrix ring map into K is injective and sends the products to the identity. They therefore form an invertible matrix over A whose image is g inverse times h. QuotientGroup.leftRel_apply then proves equality of the cosets.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates"
+   }
+  },
+  {
+   "text": "Combine the forward direction on all test objects with the converse on the identity slice object. When n is zero the same finite-sum and invertibility calculations apply; no basis index is selected. The nonempty hypothesis is necessary for the evaluation converse: over an empty object all section images coincide, so global coset equality cannot generally be recovered.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates",
+  "note": "Proved in Lean from the free-sheaf basis identities, finite matrix algebra, subtype injectivity and evaluation of continuous coefficients. No new sorry and no positive-rank assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two constant matrix lattices g A to the n and h A to the n are equal if and only if g and h have the same coset modulo GL n A",
+   "results": "8 hits including matrix and general-linear-group extensionality, none states the sheaf lattice criterion.",
+   "date": "2026-10-16",
+   "verdict": "useful elementary identities; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.mulVec_mulVec",
+   "results": "One match in Mathlib.Data.Matrix.Mul; used to compare matrix actions and multiply the column equation by the inverse matrix.",
+   "date": "2026-10-16",
+   "verdict": "useful elementary identities; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeneralLinearGroup.*[Ll]attice|[Ll]attice.*GeneralLinearGroup|leftRel_apply",
+   "results": "25 hits, including QuotientGroup.leftRel_apply in Coset/Defs. No general-linear-group sheaf lattice criterion.",
+   "date": "2026-10-16",
+   "verdict": "useful elementary identities; no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+   "place": "Proof step 4: invariance under integral matrices and evaluation over nonempty objects",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_iff",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.matrixLatticeImage_eq_of_coset_eq",
+   "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_of_eq",
+   "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_iff"
+  ],
+  "statement": "theorem matrixLatticeImage_coset_eq_iff\n    (g h : Matrix.GeneralLinearGroup (Fin n) K) (hU : Nonempty U.left) :\n    (Quotient.mk _ g : integralMatrixCosets A n) = Quotient.mk _ h ↔\n      ∀ T, matrixLatticeImage X K A U n g T = matrixLatticeImage X K A U n h T",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+ }
+}

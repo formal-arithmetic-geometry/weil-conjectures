@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-constant-matrix-lattice-pair",
+ "title": "A constant matrix lattice is realized by a finite free lattice pair",
+ "statement": "Let X be a scheme [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site], K a topological field, A a subring with the induced topology, U a site object, n a natural number, L a sheaf of continuous K-coefficient modules [def-weil-sheaf-of-modules-category], and e:L|U isomorphic to the free rank-n coefficient-module sheaf. For every g in GL_n(K) there exists a pair consisting of a finite locally free continuous A-coefficient-module sheaf M on Over U and a rationalization isomorphism K|U tensor_A|U M -> L|U [def-pur-sheaf-tensor-product]. Under e, its embedded image on every test object T is exactly the image of g acting on the continuous A-valued coefficient vectors in the standard basis. The assertion includes rank zero and empty test objects.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite free integral coefficient-module sheaf with its standard lifted finite index set as M. Its standard global generators restrict to local bases on the identity covering of all objects. The index set remains finite under restriction, so this is finite locally free. All this is explicit, without choosing a witness from an unproved existence theorem.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization"
+   }
+  },
+  {
+   "text": "Construct the constant matrix automorphism of the free rational coefficient-module sheaf sectionwise. Its coordinate linear equivalence is the action of the invertible matrix obtained by applying the constant-function ring map to g, conjugated by the finite free-section coordinate equivalence. The coordinate projections commute with restrictions, and constant functions restrict to the same constants, so these equivalences give a sheaf automorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization"
+   }
+  },
+  {
+   "text": "Apply the explicit isomorphism of [lem-weil-pbc-lattice-free-scalar-extension] to rationalize M. Compose it with the constant matrix automorphism and the inverse of e. This is the rationalization isomorphism of the required pair. The scalar-extension construction is the already fixed sheafified tensor, so its sheafification-unit formula describes the embedding on each section.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lattice-free-scalar-extension",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization"
+   }
+  },
+  {
+   "text": "After composing the embedding with e, cancel e inverse. Apply the free coordinate projections. The scalar-extension unit sends the integral coordinates to their coefficient images, and the constant matrix automorphism multiplies this vector by g. The coordinate sum is therefore exactly the one defining the matrix lattice image. Conversely every integral coefficient vector is the coordinate vector of a section of the free integral sheaf. These two directions identify the ranges on every T. The calculations use finite sums and invertibility only, hence also cover the empty index type and empty objects.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lattice-free-scalar-extension",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-free-scalar-extension",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, construction of the constant lattice g A^n and its rationalization",
+  "note": "Proved in Lean by constructing the free integral module, its rationalization and the constant matrix automorphism explicitly. Coordinate projections prove the exact image formula. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible constant matrix defines an integral lattice pair in a trivialized finite free sheaf by its image of the standard integral lattice",
+   "results": "8 hits about linear equivalences induced by invertible ordinary matrices; no sheaf lattice-pair construction.",
+   "date": "2026-10-16",
+   "verdict": "useful matrix action; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.GeneralLinearGroup.toLin",
+   "results": "5 hits, including the equivalence from invertible matrices to invertible linear maps, used sectionwise in the construction.",
+   "date": "2026-10-16",
+   "verdict": "useful matrix action; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "matrixIntegralLatticePair|constantMatrixSheafIso|IntegralLatticePair",
+   "results": "No Mathlib hits; there is no existing exact lattice-pair construction.",
+   "date": "2026-10-16",
+   "verdict": "useful matrix action; no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+   "place": "Proof step 4: construction of the actual finite free lattice pair with image g A^n",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_matrixIntegralLatticePair",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_matrixIntegralLatticePair"
+  ],
+  "statement": "theorem exists_matrixIntegralLatticePair (X : Scheme.{u}) (K : Type u) [Field K]\n    [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (U : X.ProEt) (n : ℕ)\n    (L : SheafOfModules.{u + 1} (latticeModuleRing X K))\n    (e : L.over U ≅ latticeFreeSheaf X K U n)\n    (g : Matrix.GeneralLinearGroup (Fin n) K) :\n    ∃ P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype\n        continuous_subtype_val) L U,\n      ∀ T, Set.image (e.hom.val.app T) (P.image T) = matrixLatticeImage X K A U n g T",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+ }
+}

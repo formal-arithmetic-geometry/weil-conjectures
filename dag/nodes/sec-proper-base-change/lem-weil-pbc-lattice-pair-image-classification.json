@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-lattice-pair-image-classification",
+ "kind": "statement",
+ "title": "Embedded images classify integral lattice pairs and their intertwining maps",
+ "statement": "Let X be a scheme [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site]. Let R and S be sheaves of commutative rings, a:R -> S, U a site object, and L a sheaf of S-modules [def-weil-sheaf-of-modules-category]. Suppose every section ring map of a restricted to Over U is injective. A pair consists of a finite locally free R|U-module M together with an S|U-linear isomorphism alpha:S|U tensor_R|U M -> L|U [def-pur-sheaf-tensor-product]. Its embedded image on T is the range of m |-> alpha(eta(1 tensor m)), where eta is the module sheafification unit [def-weil-presheaf-modules-sheafification]. Two pairs P and Q admit an integral module isomorphism intertwining their rationalizations if and only if these images agree for every T in Over U. Such an intertwining isomorphism is unique. In particular the image criterion holds for the continuous integral-to-rational coefficient inclusion of a finite extension of Q_l [def-weil-l-adic-coefficient-extension].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "For a lattice pair P over U, define j_P(m)=alpha_P(eta(1 tensor m)). Naturality of scalar extension and of sheafification makes j_P an A-linear sheaf morphism. Naturality of eta implies that an intertwining isomorphism identifies the embedded images.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps"
+   }
+  },
+  {
+   "text": "The map j_P is injective on sections. Apply the inverse rationalization to an equality. Local injectivity of the sheafification unit gives a covering where the sectionwise tensors agree. Refine using a finite local basis of P.module. The source freeSectionsLinearEquiv identifies each restricted section module with a finite product of the coefficient ring, hence a free module. Mathlib Module.Flat.tensorProduct_mk_injective applies to the injective coefficient map. The restricted integral sections agree. Transitivity of covers and separatedness of P.module give their equality on the original object. Empty objects and zero rank use exactly the same arguments; no point is chosen.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps"
+   }
+  },
+  {
+   "text": "If the embedded images agree on every test object, lift j_P uniquely through the injective j_Q with LinearMap.codRestrictOfInjective. Injectivity proves that the sectionwise lifts commute with restriction. Lift in the reverse direction as well; the two composites are identities by injectivity. The resulting isomorphism intertwines rationalization: use the sheafification hom equivalence and test the extended morphisms on 1 tensor m. This proves the reverse implication of the image criterion.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps"
+   }
+  },
+  {
+   "text": "Two intertwining isomorphisms have the same composite with j_Q and therefore agree on every section by its injectivity. Extensionality gives equality of isomorphisms. For the prescribed A-to-E coefficient map, pointwise evaluation of continuous functions and subtype injectivity verify the coefficient-injectivity hypothesis, also on empty objects.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60, first local calculation: embedded integral lattices and unique intertwining maps",
+  "note": "Proved in Lean; the source local-basis argument is implemented using local injectivity of sheafification, finite-free section coordinates, and injectivity of tensoring a scalar inclusion with a free module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice pairs are isomorphic compatibly with rationalization if and only if their images agree",
+   "results": "8 hits, about rational integer casts, period-pair and Z-lattice constructions. None states the sheaf image criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice pairs are isomorphic compatibly with rationalization if and only if their images agree",
+   "results": "8 hits about root pairings and Z-lattices; none states the sheaf image criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.tensorProduct_mk_injective",
+   "results": "Module.Flat.tensorProduct_mk_injective in Mathlib.RingTheory.Flat.Basic: tensor unit is injective for flat modules and a faithful scalar algebra. Used on finite-free coordinate modules.",
+   "date": "2026-10-16",
+   "verdict": "useful local algebra lemma; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalent_iff_image_eq|intertwiningIso|codRestrictOfInjective",
+   "results": "7 hits, including LinearMap.codRestrictOfInjective and its composition formula in Mathlib.Algebra.Module.Submodule.Equiv. Used to lift the embeddings. No sheaf lattice classification theorem.",
+   "date": "2026-10-16",
+   "verdict": "useful lifting construction; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+   "place": "Proof step 1: embedded images and unique intertwining integral isomorphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralLatticePair.equivalent_iff_image_eq",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.equivalent_iff_image_eq",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.intertwiningIso_unique",
+   "AlgebraicGeometry.ProEtale.integralLatticePair_equivalent_iff_image_eq"
+  ],
+  "statement": "theorem IntegralLatticePair.equivalent_iff_image_eq\n    (ha : ∀ T, Function.Injective (((latticeScalarMap a U).hom.app T).hom))\n    (P Q : IntegralLatticePair a L U) :\n    P.Equivalent Q ↔ ∀ T, P.image T = Q.image T",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1f92e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T062623-L-449261",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+ }
+}
