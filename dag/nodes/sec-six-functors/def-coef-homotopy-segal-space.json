@@ -1,0 +1,124 @@
+{
+ "id": "def-coef-homotopy-segal-space",
+ "kind": "definition",
+ "title": "Homotopy Segal spaces, mapping fibers and homotopy-category isomorphisms",
+ "status": "split",
+ "statement": "Use simplicial sets, Kan complexes, internal functor simplicial sets, weak homotopy equivalences and the path-model homotopy fibers of [def-cbc-enhanced-diagrams-cones]. A simplicial space is a functor $X:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$. For $r\\geq2$, form the simplicial set $H_r(X)$ of $r$ edges $e_0,\\ldots,e_{r-1}\\in X_1$ and $r-1$ paths $p_j\\in\\operatorname{Fun}(\\Delta^1,X_0)$ satisfying $\\operatorname{ev}_0p_j=d_0e_j$ and $\\operatorname{ev}_1p_j=d_1e_{j+1}$ in every inner degree, with coordinatewise operators. The canonical comparison $X_r\\to H_r(X)$ takes the consecutive edges and constant paths at their common vertices. Define a homotopy Segal space by requiring every $X_n$ to be Kan and every such comparison to be a weak homotopy equivalence. For a list $\\mathbf x=(x_0,\\ldots,x_n)$ of vertices of $X_0$, set $T_X(\\mathbf x)=\\operatorname{hofib}_{\\mathbf x}(X_n\\to X_0^{n+1})$, using all the vertex inclusions. Write $M_X(x,y)=T_X(x,y)$; the finite power $X_0^2$ is the degreewise product $X_0\\times X_0$ and the map is $(d_1,d_0)$. Restriction along a monotone simplex map restricts both a simplex and its entire vertex-list path. A map $F:X\\to Y$ induces $M_X(x,y)\\to M_Y(Fx,Fy)$ by applying $F_1$ to the edge and postcomposing the endpoint path with $F_0\\times F_0$. The morphisms of $hX$ are $\\pi_0M_X(x,y)$; the identity is the component of $s_0x$ with the constant endpoint path. Record composition by its graph: $[g]\\circ[f]=[h]$ precisely when a component of $T_X(x,y,z)$ restricts under $d_2,d_0,d_1$ to $[f],[g],[h]$, respectively. For a homotopy Segal space this is the degree-two Segal composition, equivalently its graph, with associative unital laws from the degree-three simplicial identities and degeneracies. Define $x\\cong y$ in $hX$ by the existence of $[f]\\in\\pi_0M_X(x,y)$ and $[g]\\in\\pi_0M_X(y,x)$ with $[g]\\circ[f]=[\\mathrm{id}_x]$ and $[f]\\circ[g]=[\\mathrm{id}_y]$. No inverse comparison or triangle is chosen as data.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk Sections 4, 5.1, 5.3-5.5; the path-model version outside the Reedy fibrant case is the explicit homotopy-Segal convention in lem-coef-segal-dk-diagonal-equivalence. The triangle-fiber composition graph records the same composition without choosing an inverse."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopy Segal space mapping spaces homotopy category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{X Y : CofibrantObject C} {f g : X ⟶ Y} (h : homRel C f g) : toHoCat.map f = toHoCat.map g\", \"doc\": \"If two morphisms between cofibrant objects in a model category are right homotopic, then their images under the canonical functor to the homotopy category of cofibrant objects are equal. This reflects\"}\n  {\"name\": \"SSet.Truncated.mapHomotopyCategory_obj\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \"(x : V _⦋0⦌₂) : (mapHomotopyCategory f).obj (.mk x) = .mk (f.app _ x)\", \"doc\": \"For a morphism $ f: V \\to W $ between 2-truncated simplicial sets, the induced functor from the homotopy category of $ V $ to the homotopy category of $ W $ maps the equivalence class of a 0-simplex $ \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{X Y : CofibrantObject C} [IsFibrant Y.obj] (f g : X ⟶ Y) : toHoCat.map f = toHoCat.map g ↔ homRel C f g\", \"doc\": \"For morphisms $ f, g : X \\to Y $ between cofibrant objects in a model category (with $ Y $ fibrant), their images under the canonical functor to the homotopy category of cofibrant objects are equal if \"}\n  {\"name\": \"instCategoryHomotopyCategory\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory\", \"type\": \": Category (HomotopyCategory V c)\", \"doc\": \"Given a preadditive category $ V $ and a complex shape $ c $, the homotopy category of chain complexes in $ V $ with shape $ c $ forms a category. This category is obtained by quotienting the category\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) → [inst : CategoryTheory.Category.{v_1, u_1} C] → [HomotopicalAlgebra.ModelCategory C] → Type u_1\", \"doc\": \"The quotient category of the full subcategory of cofibrant objects in a model category, where morphisms are identified up to right homotopy. This category is constructed by taking the homotopy relatio\"}\n  {\"name\": \"SSet.Truncated.instCategoryHomotopyCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \"(V : SSet.Truncated 2) → CategoryTheory.Category.{u_1, u_1} V.HomotopyCategory\", \"doc\": \"For a 2-truncated simplicial set $ V $, this is the quotient category of the free reflexive quotient category $ \\\\text{FreeRefl}(\\\\text{OneTruncation}_2 V) $ by the homotopy relation $ \\\\text{HoRel}_2 $,\"}\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \": SSet.{u} ⥤ Cat.{u, u}\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.Truncated.hoFunctor₂\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \": SSet.Truncated.{u} 2 ⥤ Cat.{u, u}\", \"doc\": \"The functor from the category of 2-truncated simplicial sets to the category of small categories, which sends each 2-truncated simplicial set $ V $ to its homotopy category $ \\text{Ho}(V) $ and each mo\"}\n",
+   "date": "2026-10-16",
+   "verdict": "No match. These concern homotopy categories of a single simplicial set or a model category, not levelwise Kan simplicial spaces and their endpoint homotopy fibers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy Segal space with Kan levels, path-model consecutive-edge comparison and mapping homotopy fibers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToSimplex_map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} {X Y : SSet.Truncated (n + 1)} (sx : X.StrictSegal) (sy : Y.StrictSegal) (m : ℕ) (h : m ≤ n)\\n  (f : X.Path (m + 1)) (σ : X ⟶ Y),\\n  sy.spineToSimplex (m + 1) ⋯ (f.map σ) =\\n    σ.app (Opposite.op { obj := SimplexCategory.mk (m + 1), property := ⋯ }) (sx.spineToSimplex (m + 1) ⋯ f)\", \"doc\": \"For $(n+1)$-truncated simplicial sets $X$ and $Y$ satisfying strict Segal conditions, any morphism $\\\\sigma: X \\\\to Y$ and path $f$ in $X$ at level $m+1$ satisfy the equation: applying $\\\\sigma$ to the s\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToSimplex_arrow\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} {X : SSet.Truncated (n + 1)} (sx : X.StrictSegal) (m : ℕ) (h : m ≤ n + 1) (i : Fin m) (f : X.Path m),\\n  X.map (SimplexCategory.Truncated.Hom.tr (SimplexCategory.mkOfSucc i) ⋯ h).op (sx.spineToSimplex m h f) = f.arrow i\", \"doc\": \"For a natural number $ m $, an $(m+1)$-truncated simplicial set $ X $, and a path $ f $ in $ X $ at level $ m $, the application of the functor $ X $ to the opposite of the morphism $ \\\\text{mkOfSucc}(\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) SSet.Truncated.StrictSegal._auto_1) →\\n          X.Path m → X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h })\", \"doc\": \"For an `(n+1)`-truncated simplicial set `X` that satisfies the strict Segal condition, and for any natural number `m ≤ n + 1`, this function defines a map from the set of paths of length `m` in `X` to\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X Y : SSet} (sx : X.StrictSegal) (sy : Y.StrictSegal) {n : ℕ} (f : X.Path (n + 1)) (σ : X ⟶ Y),\\n  sy.spineToSimplex (f.map σ) = σ.app (Opposite.op (SimplexCategory.mk (n + 1))) (sx.spineToSimplex f)\", \"doc\": \"For strict Segal spaces $X$ and $Y$, a morphism $\\\\sigma : X \\\\to Y$, and a path $f$ in the 1-truncated simplicial set $X$ at level $n+1$, the spine-to-simplex map commutes with $\\\\sigma$. Specifically, \"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        autoParam (m ≤ n + 1) _auto_44✝ → X.Path m → X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := ⋯ })\", \"doc\": \"The function composes the spine-to-simplex map with the action of the opposite diagonal morphism on an $(n+1)$-truncated simplicial set $X$, sending a path of $m$-simplices to the corresponding 1-simp\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a path in the 1-truncated simplicial set $ X $ at level $ n $, this function constructs an element of $ X $ evaluated at the opposite of t\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineToSimplex_edge\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} {X : SSet.Truncated (n + 1)} (sx : X.StrictSegal) (m : ℕ) (h : m ≤ n + 1) (f : X.Path m) (j l : ℕ)\\n  (hjl : j + l ≤ m),\\n  X.map (SimplexCategory.Truncated.Hom.tr (SimplexCategory.intervalEdge j l hjl) ⋯ h).op (sx.spineToSimplex m h f) =\\n    sx.spineToDiagonal l ⋯ (f.interval j l hjl)\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$, a path $f$ of $m$-simplices, and natural numbers $j,l$ satisfying $j + l \\\\leq m$, applying the functor $X$ to the opposite of the interval edge morphism $[\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.f₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X Y : SSet.Truncated 2} →\\n  (f₀ :\\n      X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n        Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ })) →\\n    (f₁ :\\n        X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ })\", \"doc\": \"The function $ f_2 $ constructs a 2-simplex in the target simplicial set $ Y $ by applying the inverse of the spine-path equivalence to a concatenated path formed from images of 1-simplices under $ f_\"}\n",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned StrictSegal interfaces have bijective spine maps of a single simplicial set, not the homotopy-Segal comparisons of a simplicial space."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopySegal|homotopySegal|SegalSpace|DwyerKan",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "No Mathlib match. Direct rg with the same expression in WeilConjectures found no matches; in lean/Sheaf it found DwyerKanEquivalence for enriched categories, not simplicial spaces. DAG rg and blueprint_refs.py search found no definition node for this notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-segal-dk-diagonal-equivalence",
+  "date": "2026-10-16",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Mapping-space foundation: the explicit homotopy-Segal comparisons, endpoint mapping fibers, and isomorphisms in their homotopy category used to state the DK diagonal criterion.",
+   "via": [
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopySegalSpace",
+  "declaration": "SSet.HomotopySegal.IsHomotopySegalSpace",
+  "declarations": [
+   "SSet.HomotopySegal.constantPathValue",
+   "SSet.HomotopySegal.edgeInclusion",
+   "SSet.HomotopySegal.targetCondition",
+   "SSet.HomotopySegal.target",
+   "SSet.HomotopySegal.comparison",
+   "SSet.HomotopySegal.IsHomotopySegalSpace",
+   "SSet.HomotopySegal.vertexPower",
+   "SSet.HomotopySegal.vertices",
+   "SSet.HomotopySegal.simplexFiber",
+   "SSet.HomotopySegal.fiberMap",
+   "SSet.HomotopySegal.vertexRestriction",
+   "SSet.HomotopySegal.fiberRestriction",
+   "SSet.HomotopySegal.fiberVertex",
+   "SSet.HomotopySegal.identity",
+   "SSet.HomotopySegal.Composes",
+   "SSet.HomotopySegal.AreIsomorphic",
+   "SSet.HomotopySegal.vertexPowerMap",
+   "SSet.HomotopySegal.mappingSpaceMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomotopySegalSpace.lean",
+  "statement": "def IsHomotopySegalSpace (X : SimplexCategoryᵒᵖ ⥤ SSet.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Every construction has explicit data and structural proofs, with no postponed theorem or sorry. Composition and isomorphism are expressed by their canonical graph on components of triangle homotopy fibers, retaining the same morphisms and both inverse equations. The node owns the definitions introduced in the parent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7e1cf5e",
+  "group": "Q59",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7e1cf5e",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the item node, new def node def-coef-homotopy-segal-space, both Lean modules, report (Worker report / New nodes / Second reading by Q59 present) and the dependency declarations Enhanced.homotopyFiber/comma (path fiber ev0=f a, ev1=b), evaluation, constantDiagrams, IsWeakHomotopyEquivalence, BousfieldKan.diagonal. Every clause matches the node: levelwise Kan for all degrees; comparisons for each degree n+2>=2 with the node's path model (ev0 p_j=d0 e_j, ev1 p_j=d1 e_{j+1}, constant path at vertex j+1); M_X(x,y)=homotopy fiber of (d1,d0); induced fiberMap via F1 and F0xF0; pi0 homs, s0 identity; composition graph via triangle fibre restricted by delta2,delta0,delta1 (checked it is the Segal composite then d1); AreIsomorphic with both inverse equations; hess for every target vertex; conclusion is the weak equivalence of the canonical diagonal map; no Reedy fibrancy, nonemptiness or universe restriction. Edge cases (empty, degree 2, discrete nerves, constant Kan) fine. No duplicate notion in Mathlib, upstream or side lean/Sheaf. New node fields valid; item changes only lean and stmt_deps (new node plus landed Bousfield-Kan node, allowed by gained_landed_deps); lean_audit kept; both lean.statement fields verbatim. No hollow data; only sorry is the theorem's; docstrings carry source and blueprint, all five proof steps included. nt_compile.py --json on both snapshot modules against the side overlay: rc 0, clean, run twice. Non-blocking: docstring cites Rezk Sections 4-7 and 14 (Prop 7.6, Thm 7.7); node source.place says 4-5, Thm 7.7, Section 12."
+ }
+}

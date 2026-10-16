@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -305,5 +306,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectedCoverColimitAssembly",
+  "declaration": "SSet.Enhanced.directed_cover_colimit_assembly",
+  "declarations": [
+   "SSet.Enhanced.directedCoverIncidence",
+   "SSet.Enhanced.directedCoverToShape",
+   "SSet.Enhanced.directedCoverToIndex",
+   "SSet.Enhanced.directedCoverFiber",
+   "SSet.Enhanced.directed_cover_colimit_assembly"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DirectedCoverColimitAssembly.lean",
+  "statement": "theorem directed_cover_colimit_assembly (K : SSet.{u}) (I : Type u) [PartialOrder I] [Nonempty I] (hdir : Directed (· ≤ ·) (fun i : I ↦ i)) (U : I → K.Subcomplex) (hmono : Monotone U) (hcover : iSup U = ⊤) (E : SSet.{max u v}) [Quasicategory E] (hcolimits : ∀ (L : SSet.{u}) (F : SSet.uliftFunctor.{v}.obj L ⟶ E), ∃ q : (coconeCategory F) _⦋0⦌, IsColimiting F q) (p : SSet.uliftFunctor.{v}.obj K ⟶ E) (q : ∀ i : I, (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)) _⦋0⦌) (hq : ∀ i : I, IsColimiting (SSet.uliftFunctor.{v}.map (U i).ι ≫ p) (q i)) : ∃ (c : SSet.uliftFunctor.{v}.obj (nerve I) ⟶ E) (a : SSet.uliftFunctor.{v}.obj (directedCoverIncidence U).toSSet ⊗ Δ[1] ⟶ E) (l : (coconeCategory p) _⦋0⦌) (ν : (coconeCategory c) _⦋0⦌), (∀ i : I, c.app (op ⦋0⦌) (ULift.up (ComposableArrows.mk₀ i)) = (q i).1.1) ∧ SSet.ι₀ ≫ a = SSet.uliftFunctor.{v}.map (directedCoverToShape U) ≫ p ∧ SSet.ι₁ ≫ a = SSet.uliftFunctor.{v}.map (directedCoverToIndex U) ≫ c ∧ (∀ i : I, (SSet.uliftFunctor.{v}.map (directedCoverFiber U i) ▷ Δ[1]) ≫ a = coconeHomotopy (SSet.uliftFunctor.{v}.map (U i).ι ≫ p) (q i)) ∧ IsColimiting p l ∧ IsColimiting c ν ∧ ν.1.1 = l.1.1 ∧ ∃ t : SSet.uliftFunctor.{v}.obj (directedCoverIncidence U).toSSet ⊗ Δ[2] ⟶ E, (_ ◁ (stdSimplex.δ 2 : Δ[1] ⟶ Δ[2])) ≫ t = a ∧ (_ ◁ (stdSimplex.δ 0 : Δ[1] ⟶ Δ[2])) ≫ t = (SSet.uliftFunctor.{v}.map (directedCoverToIndex U) ▷ Δ[1]) ≫ coconeHomotopy c ν ∧ (_ ◁ (stdSimplex.δ 1 : Δ[1] ⟶ Δ[2])) ≫ t = (SSet.uliftFunctor.{v}.map (directedCoverToShape U) ▷ Δ[1]) ≫ coconeHomotopy p l",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical incidence projections and fibers belong to this assembly statement. Compatibility is an actual coherent transformation on the incidence simplicial set and a triangle identifying its composites with the global cocone. The added landed statement dependency supplies the existing coconeHomotopy extractor; its final-index theorem is not used. Small shapes and the ambient infinity category have independent universes via the canonical degreewise ULift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94539c5e5",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause of lean.statement against the node: directed nonempty poset, monotone covering subcomplexes, quasicategory E in an independent universe max u v with all u-small colimits, prescribed colimiting local cocones, strict vertex equation c(i)=(q i).1.1, incidence transformation a with both endpoint equations and strict cover-piece equation via coconeHomotopy, global colimiting l, colimiting nu on c with the same apex, compatibility triangle t with the face directions checked against Mathlib SSet.ι₀/ι₁ and coconeHomotopy. Argued the strict equalities are attainable by induction over chains of the index poset using initiality of q_{i0}, so the statement is not falsely stronger than the source. Edge cases: empty K, empty pieces U i, one-element index, degenerate chains. lean.statement equals the file verbatim. The added stmt_dep lem-coef-infinity-final-index-colimit has landed and has no cycle (this item is not in its 120-node closure). The four helpers are real constructions; the theorem is the only sorry. Docstrings cite the HTT place and the blueprint id; the theorem docstring carries the six proof steps. Report has both required sections. No duplicate declaration found. nt_compile.py --json on the snapshot file: rc=0, no errors or warnings, 1.6 s. No findings."
  }
 }

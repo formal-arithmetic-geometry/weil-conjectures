@@ -28,7 +28,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-bousfield-kan-comparison-calculus"
  ],
  "proof": [
   {
@@ -228,5 +230,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SegalDKDiagonalEquivalence",
+  "declaration": "SSet.segal_dk_diagonal_equivalence",
+  "declarations": [
+   "SSet.segal_dk_diagonal_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SegalDKDiagonalEquivalence.lean",
+  "statement": "theorem segal_dk_diagonal_equivalence (X Y : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (F : X ⟶ Y) (hX : HomotopySegal.IsHomotopySegalSpace X) (hY : HomotopySegal.IsHomotopySegalSpace Y) (hmap : ∀ x y : (X.obj (op ⦋0⦌)) _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (HomotopySegal.mappingSpaceMap F x y)) (hess : ∀ y : (Y.obj (op ⦋0⦌)) _⦋0⦌, ∃ x : (X.obj (op ⦋0⦌)) _⦋0⦌, HomotopySegal.AreIsomorphic Y ((F.app (op ⦋0⦌)).app _ x) y) : Enhanced.IsWeakHomotopyEquivalence (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map F) : BousfieldKan.diagonal X ⟶ BousfieldKan.diagonal Y)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Mapping spaces are the canonical endpoint homotopy fibers. Essential surjectivity is rendered by two inverse equations on their components using the triangle-fiber composition graph. The diagonal reuses SSet.BousfieldKan.diagonal and its canonical uncurried map. No Reedy fibrancy is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7e1cf5e",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the item node, new def node def-coef-homotopy-segal-space, both Lean modules, report (Worker report / New nodes / Second reading by Q59 present) and the dependency declarations Enhanced.homotopyFiber/comma (path fiber ev0=f a, ev1=b), evaluation, constantDiagrams, IsWeakHomotopyEquivalence, BousfieldKan.diagonal. Every clause matches the node: levelwise Kan for all degrees; comparisons for each degree n+2>=2 with the node's path model (ev0 p_j=d0 e_j, ev1 p_j=d1 e_{j+1}, constant path at vertex j+1); M_X(x,y)=homotopy fiber of (d1,d0); induced fiberMap via F1 and F0xF0; pi0 homs, s0 identity; composition graph via triangle fibre restricted by delta2,delta0,delta1 (checked it is the Segal composite then d1); AreIsomorphic with both inverse equations; hess for every target vertex; conclusion is the weak equivalence of the canonical diagonal map; no Reedy fibrancy, nonemptiness or universe restriction. Edge cases (empty, degree 2, discrete nerves, constant Kan) fine. No duplicate notion in Mathlib, upstream or side lean/Sheaf. New node fields valid; item changes only lean and stmt_deps (new node plus landed Bousfield-Kan node, allowed by gained_landed_deps); lean_audit kept; both lean.statement fields verbatim. No hollow data; only sorry is the theorem's; docstrings carry source and blueprint, all five proof steps included. nt_compile.py --json on both snapshot modules against the side overlay: rc 0, clean, run twice. Non-blocking: docstring cites Rezk Sections 4-7 and 14 (Prop 7.6, Thm 7.7); node source.place says 4-5, Thm 7.7, Section 12."
  }
 }
