@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-qbar-condensed-pullback-cube",
+ "kind": "statement",
+ "title": "Composition coherence of the specified coefficient pullback comparisons",
+ "statement": "Fix a prime ℓ, a field k of prime characteristic different from ℓ, a finite coefficient field E inside PadicAlgCl ℓ, and separated schemes X,Y,X′,Y′ of finite type over k. Let f:X→Y, g:Y′→Y, f′:X′→Y′ and g′:X′→X be k-morphisms with g′≫f=f′≫g. Use the bounded constructible categories, pullbacks and square comparison θ_A of [def-weil-pbc-condensed-e-module-category], and scalar extension T and the specified pullback comparisons α_h of [def-weil-pbc-qbar-condensed-comparisons]. For each V in C_E(Y), α_f′(Lg_E V)⁻¹, followed by T_X′(θ_E(V)) and α_g′(Lf_E V), equals Lf′_Ω(α_g(V)), followed by θ_Ω(T_Y V) and Lg′_Ω(α_f(V)⁻¹). Here both paths start at Lf′_Ω(T_Y′(Lg_E V)) and end at Lg′_Ω(T_X(Lf_E V)). No properness, Cartesianity, push comparison or exchange morphism is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean",
+  "place": "comapLowerStarIso, derivedComapLowerStarIso and derivedPullIso; UpperLowerStar/Defs.lean upperStarComp; Derived/UpperLowerStar.lean leftDerivedUpperStarComp; TwoColimit.lean final transport paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-qbar-condensed-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Restriction of scalars followed by geometric direct image and geometric\ndirect image followed by restriction have the same underlying sheaf functor; the natural\nisomorphism comapLowerStarIso is the identity on underlying sheaves. Its compatibility\nwith direct-image composition follows by forgetting the action, which is faithful, and\nusing associativity of direct-image composition. The change-of-coefficients square for\nthe coefficient maps follows from their naturality. Derive these commuting diagrams using\nK-injective resolutions: restriction is exact and preserves K-injectives since its left\nadjoint is exact, and direct images preserve K-injectives. The universal property of the\nright derived functor identifies the resulting comparison with derivedComapLowerStarIso\nand preserves its composition equation. Conjugate that equation along the two geometric\nadjunctions and the extension/restriction adjunctions. Conjugation respects composition\nand associators, giving compatibility of derivedPullIso with geometric composition.\nThe geometric composition maps are the specified leftDerivedUpperStarComp: derive the\nunderived adjunction-conjugate composition equation and use uniqueness of derived\nadjunctions, with exact pullbacks computed termwise. Apply this composition equation to\n(f', g) and (g', f), transport along sq.w, and cancel the common comparison for the equal\ncomposite. Naturality under equality and proof irrelevance handle the commutativity proof.\nThis gives the pullback cube in the displayed inverse-alpha_f' orientation. Restrict along\nthe fully faithful bounded constructible inclusions, whose composition constraints are\nrestrictions of these same maps. This proof uses no base-change exchange morphism, no\npush comparison, and no properness or Cartesianity. For identity morphisms the equation\nreduces to the unit coherence; for a zero object both sides are its unique morphism.",
+   "uses": [
+    "def-weil-pbc-qbar-condensed-comparisons",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-qbar-condensed-comparisons",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean",
+  "place": "Geometric composition coherence in parent exchange proof, isolated before taking mates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates for two adjunction squares and commutativity of a cube implies compatibility with the Beck Chevalley base change transformation",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv. These give generic mate identities, not the specified derived coefficient composition coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Functor.comp",
+   "results": "12 hits: CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_adjunction_id_symm, CategoryTheory.conjugateEquiv_leftUnitor_hom, CategoryTheory.conjugateEquiv_rightUnitor_hom, CategoryTheory.conjugateEquiv_counit, CategoryTheory.unit_conjugateEquiv, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.conjugateEquiv_counit_symm. These give generic mate identities, not the specified derived coefficient composition coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullIsoOfComapIso|pushHomOfComapIso|mateEquiv_counit",
+   "results": "4 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean. These give generic mate identities, not the specified derived coefficient composition coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension pullback comparisons commute with composition of geometric pullback functors and the induced comparison for a commutative square",
+   "results": "service unavailable: Internal Server Error; no search results available",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of scalar extension natural isomorphism with associativity of inverse image of sheaves",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackComp. Second reader inspected the relevant definitions: generic or underived tools, not the specified derived coefficient-square coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic coherence tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.conjugateEquiv_leftUnitor_hom, CategoryTheory.conjugateEquiv_rightUnitor_hom, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.conjugateEquiv_whiskerLeft, CategoryTheory.conjugateEquiv_whiskerRight, CategoryTheory.conjugateEquiv_associator_hom, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv. Second reader inspected the relevant definitions: generic or underived tools, not the specified derived coefficient-square coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic coherence tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate.*(comp|assoc)|rightDerived.*conjugate",
+   "results": "25 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean. Second reader inspected the relevant definitions: generic or underived tools, not the specified derived coefficient-square coherence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic coherence tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Functor.associator",
+   "date": "2026-10-16",
+   "results": "Two results: conjugateEquiv_associator_hom and Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm. Generic tools, no specified coefficient cube.",
+   "verdict": "generic or underived tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(comp|whisker)|mateEquiv_square",
+   "date": "2026-10-16",
+   "results": "Twenty-five reported source hits, including conjugateEquiv_comp, conjugateEquiv_symm_comp and mateEquiv_square. Generic identities, no specialized derived cube.",
+   "verdict": "generic or underived tools only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of extension of scalars with composition of pullback functors on derived sheaves, from conjugating restriction of scalars and pushforward composition",
+   "date": "2026-10-16",
+   "results": "Eight results, including SheafOfModules.conjugateEquiv_pullbackComp_inv, Scheme.Modules.conjugateEquiv_pullbackComp_inv and SheafOfModules.pullbackComp. These concern underived sheaves and do not state the specified bounded derived Qbar cube.",
+   "verdict": "generic or underived tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarExchangeEquality",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qbar-condensed-exchange-equality",
+   "place": "Parent exchange proof step 2: coefficient pullback comparisons commute with the specified geometric square comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarPullbackCube",
+  "file": "lean/Sheaf/Paper/CondensedQbarPullbackCube.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbar_pullback_cube",
+  "statement": "theorem constructibleToQbar_pullback_cube\n    (sq : CommSq g' f' f g) (V : PadicSubfieldConstructible Y ℓ E) :\n    (constructibleToQbarPullIso ℓ k E f'\n      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj V)).inv ≫\n      (constructibleToPadicAlgCl X' ℓ E).map\n        ((boundedConstructiblePullbackSquareComparison\n          (Profinite.continuousMapRingObj E) ℓ k sq).hom.app V) ≫\n      (constructibleToQbarPullIso ℓ k E g'\n        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).obj V)).hom =\n    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map\n      (constructibleToQbarPullIso ℓ k E g V).hom ≫\n      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ)\n        ℓ k sq).hom.app ((constructibleToPadicAlgCl Y ℓ E).obj V) ≫\n      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').map\n        (constructibleToQbarPullIso ℓ k E f V).inv",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1ca87",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T091300-L-1890425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1ca87",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T091300-L-1890425",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, interface changes and DAG records matched against the packet, repository originals, six artifact compiles, 14 direct-importer compiles and axiom probes."
+ }
+}

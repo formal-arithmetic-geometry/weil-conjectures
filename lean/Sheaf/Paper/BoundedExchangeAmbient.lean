@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.IntegralResidueComparisons
 public import Sheaf.CategoryTheory.Functor.TransportedCompositeIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
 /-! # The specified bounded exchange viewed in the ambient category
 

@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-condensed-basechange-counit",
+ "kind": "statement",
+ "title": "Counit identity for the specified condensed base-change map",
+ "statement": "Let Λ be any commutative condensed ring, ℓ a prime, k a field of prime characteristic distinct from ℓ, and X,Y,X′,Y′ schemes separated of finite type over k, with k-morphisms f:X→Y, g:Y′→Y, f′:X′→Y′, g′:X′→X and a commutative square sq: g′≫f=f′≫g. Write L_h and R_h for the specified bounded constructible pullback and pushforward, ε_h for their adjunction counit, θ_sq: L_g⋙L_f′≅L_f⋙L_g′ for the specified pullback comparison, and β_sq: R_f⋙L_g→L_g′⋙R_f′ for the specified unit-square-counit base-change map, as in def-weil-pbc-condensed-e-module-category. For every K in C_Λ(X), L_f′(β_sq(K))≫ε_f′(L_g′K)=θ_sq(R_f K)≫L_g′(ε_f(K)). No properness or Cartesianity is assumed.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "mateEquiv_counit, applied to the square comparison; source MorphismDefs.lean unit-square-counit definition"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing source theorem boundedConstructibleBaseChange_adjunct. It specializes squareExchange_map_counit for the specified adjunctions and square comparison. The source also proves equality of this exchange with the original unit-square-counit composite.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-adjunction-square-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-adjunction-square-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/MorphismDefs.lean",
+  "place": "Existing boundedConstructibleBaseChange_adjunct; duplicate Sheaf counit API withdrawn"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change natural transformation constructed from unit square transport and counit is the mate of the square comparison and satisfies the counit identity",
+   "results": "8 hits; mateEquiv_counit is the relevant generic identity; also mateEquiv, unit_mateEquiv, mateEquiv_counit_symm, unit_mateEquiv_symm, mateEquiv_square, mateEquiv_apply, mateEquiv_symm_apply.",
+   "date": "2026-10-16",
+   "verdict": "generic match; identify the specified map with the mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hit: Mathlib.CategoryTheory.Adjunction.Mates, CategoryTheory.mateEquiv_counit.",
+   "date": "2026-10-16",
+   "verdict": "generic match; actual construction identification needed"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|squareTransport_hom_app",
+   "results": "4 hits in Mathlib: mateEquiv_counit, mateEquiv_counit_symm, its use in Mates, and Monoidal.Closed.Functor. No specialized condensed base-change identity.",
+   "date": "2026-10-16",
+   "verdict": "generic match used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change map constructed from an adjunction unit a square natural isomorphism and an adjunction counit is the mate of the square and satisfies the counit identity",
+   "results": "service unavailable: Internal Server Error; no search results available",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarExchangeEquality",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qbar-condensed-exchange-left-adjunct",
+   "place": "Normalize the base-change adjunct using its specified counit formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChange_adjunct",
+  "statement": "theorem boundedConstructibleBaseChange_adjunct (sq : CommSq g' f' f g)\n    (N : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :\n    (boundedConstructibleUpperStar Λ ℓ k f').map\n        ((boundedConstructibleBaseChange Λ ℓ k sq).app N) ≫\n      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f').counit.app\n        ((boundedConstructibleUpperStar Λ ℓ k g').obj N) =\n    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq).hom.app\n        ((boundedConstructibleLowerStar Λ ℓ k f).obj N) ≫\n      (boundedConstructibleUpperStar Λ ℓ k g').map\n        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app N)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1ca87",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T091300-L-1890425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1ca87",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T091300-L-1890425",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, interface changes and DAG records matched against the packet, repository originals, six artifact compiles, 14 direct-importer compiles and axiom probes."
+ }
+}
