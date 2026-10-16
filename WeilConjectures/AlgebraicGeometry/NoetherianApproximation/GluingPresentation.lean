@@ -100,7 +100,7 @@ that the finitely many gluing equations hold at this stage:
 structure Stage where
   /-- The coefficient subrings. -/
   A : ∀ a, Subring Γ(S, G.U a)
-  fg : ∀ a, (A a).FG
+  fg : ∀ a, ∃ s : Finset Γ(S, G.U a), Subring.closure (s : Set Γ(S, G.U a)) = A a
   f_mem : ∀ a b r, G.f a b r ∈ A a
   g_mem : ∀ a b r, G.g a b r ∈ A b
   unit_self : ∀ a, ∃ c : G.κ a a → Γ(S, G.U a), (∀ r, c r ∈ A a) ∧
@@ -146,5 +146,14 @@ instance : Nonempty G.Stage := sorry
 /-- Cofinality of the valid stages: every section of every chart lies in the coefficient
 subring of some valid stage. -/
 theorem exists_stage_mem (a : G.ι) (x : Γ(S, G.U a)) : ∃ l : G.Stage, x ∈ l.A a := sorry
+
+end AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
+
+namespace AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
+
+variable {S : Scheme.{u}} {G : S.FiniteAffineGluingPresentation}
+
+/-- The coefficient rings of a stage are finitely generated `ℤ`-algebras. -/
+instance Stage.finiteType (l : G.Stage) (a : G.ι) : Algebra.FiniteType ℤ (l.A a) := sorry
 
 end AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
