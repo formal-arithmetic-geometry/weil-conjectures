@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-linearized-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The linearized adjunction $P_{\\mathcal B}\\dashv G_{\\mathcal B}$",
@@ -14,30 +14,137 @@
  },
  "stmt_deps": [
   "def-sfb-modobj-linearization-right-adjoint",
-  "def-sfb-modobj-linearization"
+  "def-sfb-modobj-linearization",
+  "sk-def-sfb-module-objects"
  ],
  "proof": [
   {
-   "text": "Let $\\varphi\\colon PM\\to N$ have adjoint $\\varphi^\\flat\\colon M\\to GN$, so that\n$\\varphi=c_N\\circ P\\varphi^\\flat$. By [def-sfb-modobj-linearization], $\\varphi$ is\n$\\mathcal B$-linear if and only if\n$$\n\\varphi\\circ P\\gamma_M=\\gamma_N(\\mathcal B\\otimes\\varphi)\\pi_{\\mathcal B,M}.\n$$\nNaturality of $\\pi$ in $M$ gives\n$(\\mathcal B\\otimes\\varphi)\\pi_{\\mathcal B,M}\n=(\\mathcal B\\otimes c_N)\\pi_{\\mathcal B,GN}P(S\\mathcal B\\otimes\\varphi^\\flat)$. So the\nadjoint of the right side is\n$G(\\gamma_N)\\theta_{\\mathcal B,N}(S\\mathcal B\\otimes\\varphi^\\flat)$. The adjoint of the left\nside is $\\varphi^\\flat\\gamma_M$. Hence $\\varphi$ is $\\mathcal B$-linear if and only if\n$\\varphi^\\flat$ is $S\\mathcal B$-linear for the action of\n[def-sfb-modobj-linearization-right-adjoint]. Naturality is inherited from $P\\dashv G$.",
+   "text": "Let $M$ be an $S\\mathcal B$-module and $N$ a $\\mathcal B$-module, with actions $\\gamma_M$ and $\\gamma_N$. By [def-sfb-modobj-linearization], the action on $P_{\\mathcal B}M$ is $a_M=P\\gamma_M\\circ\\pi_{\\mathcal B,M}^{-1}$. By the module-morphism equation of [sk-def-sfb-module-objects], a map $\\varphi:PM\\to N$ is $\\mathcal B$-linear if and only if $\\varphi\\circ a_M=\\gamma_N\\circ(\\mathcal B\\otimes\\varphi)$. Precomposing both sides with the isomorphism $\\pi_{\\mathcal B,M}$ gives the equivalent equation\n$$\\varphi\\circ P\\gamma_M=\\gamma_N\\circ(\\mathcal B\\otimes\\varphi)\\circ\\pi_{\\mathcal B,M}.$$",
    "uses": [
     "def-sfb-modobj-linearization",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.proof.md",
+    "place": "first linearity equation"
+   }
+  },
+  {
+   "text": "Use the adjunction $P\\dashv G$ with counit $c$ from [def-sfb-modobj-linearization-right-adjoint]. Write its unit as $u$ and its hom-bijection as $H_{X,Y}:\\operatorname{Hom}(PX,Y)\\simeq\\operatorname{Hom}(X,GY)$. Explicitly $H(a)=G(a)\\circ u_X$ and $H^{-1}(b)=c_Y\\circ P(b)$. For $t:X'\\to X$ and $v:Y\\to Y'$, functoriality and naturality of $u$ give\n$$H(v\\circ a\\circ P(t))=G(v)\\circ G(a)\\circ G(P(t))\\circ u_{X'}=G(v)\\circ H(a)\\circ t.$$\nFor $\\psi=H(\\varphi)$, we therefore have $\\varphi=c_N\\circ P\\psi$ and $H(\\varphi\\circ P\\gamma_M)=\\psi\\circ\\gamma_M$. These are substitutions into the hom-bijection of the assumed adjunction.",
+   "uses": [
     "def-sfb-modobj-linearization-right-adjoint"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.proof.md",
+    "place": "adjoints and counit expression"
+   }
+  },
+  {
+   "text": "By naturality in the second variable of the projection formula [def-sfb-projection-formula], applied to $\\psi:M\\to GN$,\n$$ (\\mathcal B\\otimes\\varphi)\\circ\\pi_{\\mathcal B,M}=(\\mathcal B\\otimes c_N)\\circ(\\mathcal B\\otimes P\\psi)\\circ\\pi_{\\mathcal B,M}=(\\mathcal B\\otimes c_N)\\circ\\pi_{\\mathcal B,GN}\\circ P(S\\mathcal B\\otimes\\psi). $$\nBy [def-sfb-modobj-linearization-right-adjoint], $\\theta_{\\mathcal B,N}=H((\\mathcal B\\otimes c_N)\\circ\\pi_{\\mathcal B,GN})$. Apply the formula of step 2 to this composite, with precomposition $S\\mathcal B\\otimes\\psi$ and postcomposition $\\gamma_N$. The right side of the linearity equation in step 1 has adjoint\n$$G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}\\circ(S\\mathcal B\\otimes\\psi).$$\nSince $H$ preserves and reflects equality, step 1 is equivalent to\n$$\\psi\\circ\\gamma_M=G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}\\circ(S\\mathcal B\\otimes\\psi).$$",
+   "uses": [
+    "def-sfb-projection-formula",
+    "def-sfb-modobj-linearization-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.proof.md",
+    "place": "naturality of the projection formula and the two adjoints"
+   }
+  },
+  {
+   "text": "The composite $b_N=G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}$ is exactly the action on $G_{\\mathcal B}N$ in [def-sfb-modobj-linearization-right-adjoint]. Hence the last equation of step 3 is precisely the $S\\mathcal B$-linearity equation for $\\psi$ from [sk-def-sfb-module-objects]. Both directions hold because $H$ is a bijection. Define the module hom-bijection by $\\varphi\\mapsto H(\\varphi)$, with inverse $\\psi\\mapsto H^{-1}(\\psi)$; their inverse identities are those of $H$. For module maps $m:M'\\to M$ and $n:N\\to N'$, its naturality is the explicit formula $H(n\\circ\\varphi\\circ Pm)=G(n)\\circ H(\\varphi)\\circ m$ of step 2. These are the underlying maps of the linearized functors [def-sfb-modobj-linearization] and [def-sfb-modobj-linearization-right-adjoint], so these natural hom-bijections define the claimed adjunction $P_{\\mathcal B}\\dashv G_{\\mathcal B}$.",
+   "uses": [
+    "def-sfb-modobj-linearization-right-adjoint",
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.proof.md",
+    "place": "restricted hom-bijection and its naturality"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-modobj-linearization",
-  "def-sfb-modobj-linearization-right-adjoint"
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-linearization-right-adjoint",
+  "def-sfb-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearized-adjunction.proof.md",
+  "place": "the sole proof paragraph, expanded into four explicit calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "linearized adjunction between module object categories from a projection formula",
+   "results": "Eight hits: ModuleCat.adj, ModuleCat.adj_homEquiv, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.monoidalClosed_pre_app, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.monoidalClosedHomEquiv. They concern ordinary module categories or Grothendieck abelian categories, not the stated arbitrary monoidal-category construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|ProjectionFormula|lineariz",
+   "results": "CategoryTheory subdirectory: Mathlib/CategoryTheory/Monoidal/Mon.lean:856 contains only the TODO mapMod F A : Mod A ⥤ Mod (F.mapMon A); read lines 840–865.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula induces an adjunction on module objects",
+   "results": "Eight hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.freeAdjunction, CategoryTheory.Subobject.lowerAdjunction, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction. These have specialized concrete categories or unrelated subobject constructions; none states the claimed generic restriction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate correspondence preserves module linearity for a projection formula",
+   "results": "Eight hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, LinearMap.conjugate_i, CategoryTheory.mateEquiv_counit, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv. The generic mate declarations concern natural transformations, not module-object linearity; the linear-map hit concerns group representations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def (adjunction|pushforwardPushforwardAdj|extendRestrictScalarsAdj|pullbackPushforwardAdjunction|restrictCoextendScalarsAdj)|mapModAdjunction|smul_comp_eq_iff",
+   "results": "Algebra/Category/ModuleCat subdirectory: Sheaf/PushforwardContinuous.lean:274 pushforwardPushforwardAdj; Sheaf/PullbackContinuous.lean:60 pullbackPushforwardAdjunction and :79 adjunction; Presheaf/Pullback.lean:50 pullbackPushforwardAdjunction; ChangeOfRings.lean:659 restrictCoextendScalarsAdj and :885 extendRestrictScalarsAdj. Read the sheaf hypotheses and scalar-change signatures; these are adjunctions for sheaves of rings or ordinary rings, not arbitrary monoidal categories. No mapModAdjunction or smul_comp_eq_iff hit.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between monoidal categories restricts to hom sets of internal module objects using a tensor projection isomorphism",
+   "results": "Eight hits: ModuleCat.monoidalClosed_uncurry, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.monoidalClosedHomEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ihom_ev_app, Rep.homEquiv, Rep.homEquiv_apply_hom, ModuleCat.monoidalClosed_pre_app. Their returned signatures are for modules over commutative rings or group representations; none constructs the claimed adjunction for arbitrary monoidal categories and arbitrary projection-formula data.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"adjunction\"",
+   "results": "Twelve returned hits, all PresheafOfModules or PresheafOfModulesOfCommRing declarations: freeAdjunction and its unit/homEquiv formulas, pullbackPushforwardAdjunction, colimitAdjunction and its homEquiv formulas, sheafificationAdjunction and its counit-isomorphism instance. The returned signatures impose presheaves of rings, scalar morphisms, colimit, or sheafification hypotheses; they do not state the arbitrary internal-module construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "module object|namespace Mod|mapMod|projection.formula",
+   "results": "CategoryTheory/Monoidal: 16 hits in Bimod.lean, Internal/Module.lean, Cartesian/Mod.lean, Mon.lean, Internal/FunctorCategory.lean and Mod.lean. Read Mod.lean declarations (module-object definitions, homs, forgetful functor, scalar restriction, comap), Internal/Module.lean:1–100 (internal algebras over a commutative ring), and Mon.lean:842–860 (mapMod remains a TODO at line 856). None states the projection-formula-induced adjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +162,21 @@
   "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-linearized-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement after checking the current blueprint source and its proof. No exact project declaration was found. Expanded the mate calculation into four steps: cancel the projection-formula isomorphism in the module-morphism equation; write the original adjunction hom-bijection and derive its composition formula; compute the adjoint of the right side using projection-formula naturality and the definition of theta; restrict both inverse maps and verify naturality explicitly. Added the missing module-morphism statement dependency and the missing proof citations of module objects and projection-formula naturality. These are elementary calculations from the cited definitions and assumed adjunction, so no new lemma nodes are required. Mathlib searches find no matching generic module adjunction.",
+  "blueprint": "Steps 1–4 realize, respectively, the first linearity equation, the adjunction/counit substitution, the projection-formula naturality and mate calculation, and the inherited naturality in the sole proof paragraph of def-sfb-modobj-linearized-adjunction.proof.md; this is clause 3 of the sk-def-sfb-transport blueprint unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-eb05f2088",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-eb05f2088 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, current blueprint sources, and chapter/unit route. All four steps correctly establish and naturally restrict the adjunction hom-bijection. Small cases, including a nonidentity adjunction with a noncommutative monoid, pass. No cycle, duplicate replacement, hidden hypothesis, or repair needed. Detailed checks are in review.md; accepted tool_uses is empty."
+ }
 }
