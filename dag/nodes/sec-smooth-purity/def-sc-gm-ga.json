@@ -1,70 +1,255 @@
 {
-  "id": "def-sc-gm-ga",
-  "blueprint": {
-    "is": "def-sc-gm-ga",
-    "from": null,
-    "same_as": null
+ "id": "def-sc-gm-ga",
+ "blueprint": {
+  "is": "def-sc-gm-ga",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The multiplicative group, the additive group, and their finite subgroups",
+ "statement": "Let $k$ be a field [def-weil-field]. Use affine spectra and their contravariant morphisms [def-weil-affine-spectrum], polynomial rings [def-weil-polynomial-ring], Laurent polynomial rings [def-weil-laurent-polynomial-ring], and quotient algebras [def-weil-pbc-algebra-hom-quotient]. Tensor products below are tensor products of commutative $k$-algebras, with the multiplication and universal property of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The *multiplicative group* is the\ngroup scheme\n$\\mathbf G_m=\\Spec k[t,t^{-1}]$, with comultiplication, counit and\nantipode the $k$-algebra maps $m^*(t)=t\\otimes t$,\n$\\varepsilon(t)=1$, $i^*(t)=t^{-1}$, in the sense of\n[def-sc-group-scheme]. The *additive group* is\n$\\mathbf G_a=\\Spec k[y]$, with $m^*(y)=y\\otimes1+1\\otimes y$,\n$\\varepsilon(y)=0$, $i^*(y)=-y$. For $n\\geq1$,\n\n$$\n\\mu_n:=\\Spec k[t]/(t^n-1)\\subseteq\\mathbf G_m\n$$\n\nis the *group scheme of $n$-th roots of unity*, and, when\n$\\operatorname{char}k=p>0$,\n\n$$\n\\alpha_p:=\\Spec k[y]/(y^p)\\subseteq\\mathbf G_a\n$$\n\nis the *Frobenius kernel* of $\\mathbf G_a$; both are closed\nsubgroup schemes [def-sc-group-scheme-subgroup], the closed\nimmersion being the one induced by the displayed surjections of\ncoordinate rings.\nHere a closed immersion has the affine quotient-ring meaning of [def-weil-closed-immersion]. In characteristic $p>0$, the Frobenius kernel means the kernel in [def-sc-group-scheme] of the $k$-group morphism $F:\\mathbf G_a\\to\\mathbf G_a$ whose coordinate map $k[z]\\to k[y]$ fixes $k$ and sends $z$ to $y^p$. This is relative Frobenius after identifying the Frobenius twist of the affine line with the affine line by its coordinate; it does not assert that absolute Frobenius fixes $k$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-sc-gm-ga.md",
+  "place": "node def-sc-gm-ga, order 1963"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=k[t,t^{-1}]$ and $P=k[y]$ using [def-weil-laurent-polynomial-ring, def-weil-polynomial-ring]. Substitution into any commutative $k$-algebra $B$ defines $k[y]\\to B$, $\\sum a_i y^i\\mapsto\\sum a_i b^i$, for every $b\\in B$, and $L\\to B$, $\\sum a_i t^i\\mapsto\\sum a_i u^i$, for every unit $u\\in B^\\times$. Finite distributivity shows these preserve addition, multiplication and constants; conversely a $k$-algebra map has exactly this formula, being determined by $y$, or by $t$ with $t^{-1}$ forced to its inverse. Use the commutative algebra structure and pure-tensor multiplication of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}A\\times_k\\operatorname{Spec}A=\\operatorname{Spec}(A\\otimes_k A)$ with the indicated two coordinate inclusions. Apply the substitutions to $A=L$ with $u=t\\otimes t$ (inverse $t^{-1}\\otimes t^{-1}$), and to $A=P$ with $b=y\\otimes1+1\\otimes y$; also substitute $1,t^{-1}$ and $0,-y$ for the counits and antipodes respectively. Thus all six displayed maps are actual $k$-algebra maps. The spectrum correspondence in [def-weil-affine-spectrum] turns them into the required multiplication, identity and inverse morphisms.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring",
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Examples Tags 022U (example-multiplicative-group) and 022V (example-additive-group); affine products: schemes.tex, Tag 01I4 (lemma-fibre-product-affine-schemes)"
+   }
   },
-  "kind": "definition",
-  "title": "The multiplicative group, the additive group, and their finite subgroups",
-  "statement": "Let $k$ be a field. The *multiplicative group* is the\ngroup scheme\n$\\mathbf G_m=\\Spec k[t,t^{-1}]$, with comultiplication, counit and\nantipode the $k$-algebra maps $m^*(t)=t\\otimes t$,\n$\\varepsilon(t)=1$, $i^*(t)=t^{-1}$; the group-scheme axioms of\n[def-sc-group-scheme] hold because the identities\n$(t_1t_2)t_3=t_1(t_2t_3)$, $1\\cdot t=t=t\\cdot1$ and $t^{-1}t=1$\nhold in the Laurent polynomial ring. The *additive group* is\n$\\mathbf G_a=\\Spec k[y]$, with $m^*(y)=y\\otimes1+1\\otimes y$,\n$\\varepsilon(y)=0$, $i^*(y)=-y$; here the axioms are the\ncorresponding identities for addition. For $n\\geq1$,\n\n$$\n\\mu_n:=\\Spec k[t]/(t^n-1)\\subseteq\\mathbf G_m\n$$\n\nis the *group scheme of $n$-th roots of unity*, and, when\n$\\operatorname{char}k=p>0$,\n\n$$\n\\alpha_p:=\\Spec k[y]/(y^p)\\subseteq\\mathbf G_a\n$$\n\nis the *Frobenius kernel* of $\\mathbf G_a$; both are closed\nsubgroup schemes, the closed\nimmersion being the one induced by the displayed surjections of\ncoordinate rings. The group schemes $\\mathbf G_m$ and $\\mu_n$ are\nthe ones occurring in the\n$\\mathbf G_m$-torsors and in the\nKummer sequence of the smooth-curve chapter.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-sc-gm-ga.md",
-    "place": "node def-sc-gm-ga, order 1963"
-  },
-  "stmt_deps": [
+  {
+   "text": "Check the diagrams of [def-sc-group-scheme] on the coordinate generators. Use the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] to identify the two triple tensor products by $(a\\otimes b)\\otimes c\\mapsto a\\otimes(b\\otimes c)$, with inverse $a\\otimes(b\\otimes c)\\mapsto(a\\otimes b)\\otimes c$; the unit identifications are $a\\otimes c\\mapsto ca$ and $c\\otimes a\\mapsto ca$ for $c\\in k$. For $L$, the two iterated comultiplications send $t$ to $t\\otimes t\\otimes t$; the two counit composites send $t$ to $t$; multiplication after either antipode composite sends $t$ to $t^{-1}t=1=tt^{-1}$, the identity section's value. For $P$, the corresponding values of $y$ are $y\\otimes1\\otimes1+1\\otimes y\\otimes1+1\\otimes1\\otimes y$, $y$, and $-y+y=0=y-y$. These are equal $k$-algebra maps by the generator determination in Step 1; the spectrum correspondence [def-weil-affine-spectrum] gives equality of the scheme morphisms. Thus the displayed data make $\\mathbf G_m$ and $\\mathbf G_a$ group schemes, with $R$-points $R^\\times$ and the additive group of $R$ for every commutative $k$-algebra $R$.",
+   "uses": [
     "def-sc-group-scheme",
-    "def-sc-gm-torsor",
-    "def-sc-group-scheme-subgroup",
-    "def-sc-kummer-sequence"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1963,
-  "blueprint_uses": [
-    "def-sc-gm-torsor",
-    "def-sc-group-scheme",
-    "def-sc-group-scheme-subgroup",
-    "def-sc-kummer-sequence"
-  ],
-  "uses_not_cited": [
-    "def-sc-gm-torsor",
-    "def-sc-group-scheme-subgroup",
-    "def-sc-kummer-sequence"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-gm-ga.proof.md",
+    "place": "the complete proof paragraph; coordinate calculations expanded"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-an",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a field. The *multiplicative group* is the\ngroup scheme\n$\\mathbf G_m=\\Spec k[t,t^{-1}]$, with comultiplication, counit and\nantipode the $k$-algebra maps $m^*(t)=t\\otimes t$,\n$\\varepsilon(t)=1$, $i^*(t)=t^{-1}$, in the sense of\n[def-sc-group-scheme]. The *additive group* is\n$\\mathbf G_a=\\Spec k[y]$, with $m^*(y)=y\\otimes1+1\\otimes y$,\n$\\varepsilon(y)=0$, $i^*(y)=-y$. For $n\\geq1$,\n\n$$\n\\mu_n:=\\Spec k[t]/(t^n-1)\\subseteq\\mathbf G_m\n$$\n\nis the *group scheme of $n$-th roots of unity*, and, when\n$\\operatorname{char}k=p>0$,\n\n$$\n\\alpha_p:=\\Spec k[y]/(y^p)\\subseteq\\mathbf G_a\n$$\n\nis the *Frobenius kernel* of $\\mathbf G_a$; both are closed\nsubgroup schemes, the closed\nimmersion being the one induced by the displayed surjections of\ncoordinate rings.",
-    "proof": [
-      {
-        "text": "The group-scheme axioms of [def-sc-group-scheme] hold for $\\mathbf G_m$\nbecause the identities $(t_1t_2)t_3=t_1(t_2t_3)$, $1\\cdot t=t=t\\cdot1$ and\n$t^{-1}t=1$ hold in the Laurent polynomial ring; for $\\mathbf G_a$ they are the\ncorresponding identities for addition.",
-        "uses": [
-          "def-sc-group-scheme"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For $n\\geq1$ set $Q=k[t]/(t^n-1)$, a quotient algebra with surjective quotient map by [def-weil-pbc-algebra-hom-quotient], and write $\\bar t$ for its coordinate. For a polynomial $h$, any substitution killing $h$ factors through $k[t]/(h)$: define the value of $[f]$ to be the value of $f$, which is independent of the representative because a difference $hg$ evaluates to zero. Since $\\bar t\\,\\bar t^{n-1}=\\bar t^n=1$, substitution gives a surjection $q:L\\to Q$ with $q(t)=\\bar t$ and $q(t^{-1})=\\bar t^{n-1}$. Its kernel is the ideal $(t^n-1)L$: indeed the natural map $k[t]/(t^n-1)\\to L/(t^n-1)L$ is inverse to the induced map from $q$, since both composites fix the generator and its forced inverse. Hence $\\operatorname{Spec}q$ is a closed immersion by [def-weil-closed-immersion]. The formulas $\\Delta(\\bar t)=\\bar t\\otimes\\bar t$, $\\varepsilon(\\bar t)=1$, $S(\\bar t)=\\bar t^{n-1}$ descend to $Q$: their defining relation maps to $\\bar t^n\\otimes\\bar t^n-1=0$, $1^n-1=0$, and $(\\bar t^{-1})^n-1=0$. The two iterated comultiplications take $\\bar t$ to $\\bar t\\otimes\\bar t\\otimes\\bar t$; both counit composites take it to $\\bar t$; the two inverse composites take it to $\\bar t^{n-1}\\bar t=\\bar t\\bar t^{n-1}=1$, its counit value. Equality on the generator proves the group diagrams. The inclusion respects these formulas, so it is a group morphism. On every $R$, its image is exactly $\\{u\\in R^\\times:u^n=1\\}$, closed under products and inverses because $(uv)^n=u^nv^n$ and $(u^{-1})^n=(u^n)^{-1}$. Thus it is a closed subgroup scheme in [def-sc-group-scheme-subgroup], with the asserted roots-of-unity interpretation.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Example Tag 040M (example-roots-of-unity), with the quotient map and subgroup checks expanded; closed immersions: morphisms.tex, Tag 01QO (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "Suppose $\\operatorname{char}k=p>0$, so $p$ is prime. For any commutative $k$-algebra $B$, [def-weil-ring-frobenius] gives $(a+b)^p=a^p+b^p$. Put $Q_p=k[y]/(y^p)$ using [def-weil-pbc-algebra-hom-quotient] and write $\\bar y$ for its coordinate. The maps $\\Delta(\\bar y)=\\bar y\\otimes1+1\\otimes\\bar y$, $\\varepsilon(\\bar y)=0$, $S(\\bar y)=-\\bar y$ are well-defined because the relation maps to $\\bar y^p\\otimes1+1\\otimes\\bar y^p=0$, $0$, and $(-1)^p\\bar y^p=0$. The two iterated comultiplications take $\\bar y$ to $\\bar y\\otimes1\\otimes1+1\\otimes\\bar y\\otimes1+1\\otimes1\\otimes\\bar y$; both counit composites take it to $\\bar y$, and the inverse composites take it to $-\\bar y+\\bar y=\\bar y-\\bar y=0$, its counit value. These generator identities prove the group diagrams. The quotient $P\\to Q_p$ is surjective, hence defines a closed immersion by [def-weil-closed-immersion]. On $R$-points it is $\\{a\\in R:a^p=0\\}\\subseteq(R,+)$; it contains $0$ and is closed under addition and negatives by the displayed Frobenius and sign identities. This verifies [def-sc-group-scheme-subgroup] without assuming that $R$ is reduced or that $k$ is perfect.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-gm-ga.md",
+    "place": "the alpha_p clause, its omitted verification supplied; binomial identity: varieties.tex, Section Tag 0CC6 (section-frobenius)"
+   }
+  },
+  {
+   "text": "The substitution $k[z]\\to k[y]$, $z\\mapsto y^p$, fixes coefficients and defines a $k$-scheme map $F$ by [def-weil-affine-spectrum]; it respects addition because $(y_1+y_2)^p=y_1^p+y_2^p$ [def-weil-ring-frobenius]. Its kernel, by [def-sc-group-scheme] and [lem-weil-pbc-fibre-product-affine-spectra], is $\\operatorname{Spec}(k[y]\\otimes_{k[z]}k)$ with $z\\mapsto y^p$ and $z\\mapsto0$. The map $k[y]\\otimes_{k[z]}k\\to Q_p$, $f\\otimes c\\mapsto c\\bar f$, exists by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Its inverse is induced by $y\\mapsto y\\otimes1$: this kills $y^p$ since $y^p\\otimes1=1\\otimes0=0$; both composites fix $k$ and the coordinate, so they are identities. Hence this kernel is exactly $\\alpha_p$, including its scheme structure. To check the relative-Frobenius terminology directly, its twist algebra is $k[y]\\otimes_{k,F_k}k$ by the same affine-product formula, and the maps $a y^i\\otimes b\\mapsto a^pb z^i$ and $z\\mapsto y\\otimes1$, $b\\mapsto1\\otimes b$, are mutually inverse $k$-algebra maps (the balancing relation is $ac\\otimes b=a\\otimes c^pb$). The composite on $k[z]$ fixes $z$ and $k$, while the other composite takes $a y^i\\otimes b$ to $y^i\\otimes a^p b=a y^i\\otimes b$ by that balancing relation. The twist coordinate $y\\otimes1$ has additive comultiplication $(y\\otimes1)\\otimes1+1\\otimes(y\\otimes1)$ and counit zero, so this identification also respects the additive group law. The relative Frobenius coordinate map $f\\otimes b\\mapsto f^p b$ becomes $z\\mapsto y^p$ under this identification. This proves the asserted kernel interpretation over every field of characteristic $p$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-ring-frobenius",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definition Tag 0CC9 (definition-relative-frobenius), specialized to the affine line with the tensor and kernel calculations written out"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-gm-ga.proof.md",
+  "place": "full paragraph, expanded with the subgroup and Frobenius-kernel clauses from the statement; checked against Stacks Tags 022U, 022V, 040M, 01I4, 01QO, 0CC9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LaurentPolynomial, HopfAlgebra",
+   "results": "{\"t\": \"2026-10-16T13:39:45Z\", \"tool\": \"loogle\", \"query\": \"LaurentPolynomial, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.antipode_C\", \"LaurentPolynomial.antipode_C_mul_T\"], \"digest\": \"689002780e8ff61c\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match: LaurentPolynomial.instHopfAlgebra supplies the multiplicative Hopf algebra, not the additive group or either finite subgroup scheme; source read at Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean:69-97"
+  },
+  {
+   "tool": "grep",
+   "query": "MultiplicativeGroupScheme|AdditiveGroupScheme|alphaP|muN|LaurentPolynomial|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-16T13:39:45Z\", \"tool\": \"grep\", \"query\": \"MultiplicativeGroupScheme|AdditiveGroupScheme|alphaP|muN|LaurentPolynomial|HopfAlgebra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"a3a28107ae998288\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The additive group and multiplicative group as affine group schemes with roots of unity and Frobenius kernel",
+   "results": "{\"t\": \"2026-10-16T13:39:45Z\", \"tool\": \"leansearch\", \"query\": \"The additive group and multiplicative group as affine group schemes with roots of unity and Frobenius kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroup\", \"AddGrpCat.toGrp_obj_coe\", \"AddCommGrpCat.toCommGrp\", \"AddGroup.fg_iff_mul_fg\", \"AddGroupWithOne\", \"AddEquiv.additiveMultiplicative\", \"Additive.addGroup\", \"AddCommGrpCat.toCommGrp_obj_coe\"], \"digest\": \"11c9500170ca522c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative and additive group schemes Spec LaurentPolynomial and Polynomial, roots of unity and alpha p closed subgroup schemes",
+   "results": "{\"t\": \"2026-10-16T13:39:50Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplicative and additive group schemes Spec LaurentPolynomial and Polynomial, roots of unity and alpha p closed subgroup schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.spec\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.over_over\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\"], \"digest\": \"25b0acca09021a29\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "instHopfAlgebra|comul_X|counit_X|antipode_X|comul_T|counit_T|antipode_T",
+   "results": "{\"t\": \"2026-10-16T13:40:33Z\", \"tool\": \"grep\", \"query\": \"instHopfAlgebra|comul_X|counit_X|antipode_X|comul_T|counit_T|antipode_T\", \"sub\": \"RingTheory/HopfAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\"], \"digest\": \"bf5097e5017463ed\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match: MonoidAlgebra.lean:69-97 supplies the multiplicative Hopf algebra only; no exact match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, HopfAlgebra",
+   "results": "{\"t\": \"2026-10-16T13:40:33Z\", \"tool\": \"loogle\", \"query\": \"Polynomial, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine group scheme of units represented by Laurent polynomials; additive affine line group and group schemes of roots of unity and kernel of relative Frobenius",
+   "results": "{\"t\": \"2026-10-16T13:40:37Z\", \"tool\": \"leanfinder\", \"query\": \"Affine group scheme of units represented by Laurent polynomials; additive affine line group and group schemes of roots of unity and kernel of relative Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\"], \"digest\": \"0520faa92e11f187\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "additive group scheme|multiplicative group scheme|roots of unity.*scheme|Frobenius kernel|α_p|μ_n",
+   "results": "{\"t\": \"2026-10-16T13:41:05Z\", \"tool\": \"grep\", \"query\": \"additive group scheme|multiplicative group scheme|roots of unity.*scheme|Frobenius kernel|α_p|μ_n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"accad7be1564806f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "LaurentPolynomial|rootsOfUnity|RootsOfUnity|Frobenius|Polynomial",
+   "results": "{\"t\": \"2026-10-16T13:41:35Z\", \"tool\": \"grep\", \"query\": \"LaurentPolynomial|rootsOfUnity|RootsOfUnity|Frobenius|Polynomial\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration covers all four group schemes and the two closed subgroup inclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "group scheme|HopfAlgebra|frobenius|rootsOfUnity",
+   "results": "{\"t\": \"2026-10-16T13:52:11Z\", \"tool\": \"grep\", \"query\": \"group scheme|HopfAlgebra|frobenius|rootsOfUnity\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"1364981dc8f68ff4\"}",
+   "date": "2026-10-16",
+   "verdict": "partial components only: affine group objects from Hopf algebras, group-like elements, and affine spaces; no declaration stating the four coordinate group schemes and the two subgroup inclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine group objects from the Hopf algebras k[X] and k[X,X⁻¹], with quotient group schemes defined by X^n - 1 and X^p",
+   "results": "{\"t\": \"2026-10-16T13:52:14Z\", \"tool\": \"leanfinder\", \"query\": \"Affine group objects from the Hopf algebras k[X] and k[X,X⁻¹], with quotient group schemes defined by X^n - 1 and X^p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.term𝔸(_;_)\", \"GroupLike.instGroup\", \"AlgebraicGeometry.AffineSpace.over\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"GroupLike.instCommGroup\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\"], \"digest\": \"940cb2bf2b4bcaed\"}",
+   "date": "2026-10-16",
+   "verdict": "partial components only: affine group objects from Hopf algebras, group-like elements, and affine spaces; no declaration stating the four coordinate group schemes and the two subgroup inclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1963,
+ "blueprint_uses": [
+  "def-sc-gm-torsor",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-kummer-sequence"
+ ],
+ "uses_not_cited": [
+  "def-sc-gm-torsor",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-kummer-sequence"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a field. The *multiplicative group* is the\ngroup scheme\n$\\mathbf G_m=\\Spec k[t,t^{-1}]$, with comultiplication, counit and\nantipode the $k$-algebra maps $m^*(t)=t\\otimes t$,\n$\\varepsilon(t)=1$, $i^*(t)=t^{-1}$, in the sense of\n[def-sc-group-scheme]. The *additive group* is\n$\\mathbf G_a=\\Spec k[y]$, with $m^*(y)=y\\otimes1+1\\otimes y$,\n$\\varepsilon(y)=0$, $i^*(y)=-y$. For $n\\geq1$,\n\n$$\n\\mu_n:=\\Spec k[t]/(t^n-1)\\subseteq\\mathbf G_m\n$$\n\nis the *group scheme of $n$-th roots of unity*, and, when\n$\\operatorname{char}k=p>0$,\n\n$$\n\\alpha_p:=\\Spec k[y]/(y^p)\\subseteq\\mathbf G_a\n$$\n\nis the *Frobenius kernel* of $\\mathbf G_a$; both are closed\nsubgroup schemes, the closed\nimmersion being the one induced by the displayed surjections of\ncoordinate rings.",
+  "proof": [
+   {
+    "text": "The group-scheme axioms of [def-sc-group-scheme] hold for $\\mathbf G_m$\nbecause the identities $(t_1t_2)t_3=t_1(t_2t_3)$, $1\\cdot t=t=t\\cdot1$ and\n$t^{-1}t=1$ hold in the Laurent polynomial ring; for $\\mathbf G_a$ they are the\ncorresponding identities for addition.",
+    "uses": [
+     "def-sc-group-scheme"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sc-gm-ga",
+  "worker": "stage1",
+  "summary": "Followed the current main-20261015 definition and proof, named its underlying ring and affine-scheme notions, removed unused torsor and Kummer dependencies, and expanded the coordinate calculations for both group laws, both closed subgroup inclusions, and the relative-Frobenius kernel. All prerequisites already exist; no new nodes or Mathlib leaves. The Frobenius convention is explicit over arbitrary, possibly imperfect, fields.",
+  "blueprint": "Steps 1-2 realize the entire current proof paragraph; Steps 3-5 verify the mu_n and alpha_p closed-subgroup and Frobenius-kernel clauses omitted from that proof. This is a supporting definition in sk-prop-an, not its key proposition; no unit realization is changed. Whole-blueprint searches for multiplicative group, additive group, roots of unity and Frobenius kernel found no equivalent full node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-7448be430",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-7448be430 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All five steps check out, including relative Frobenius over imperfect fields and the scheme-theoretic kernel. Small-ring tests passed; no new nodes, duplicates, missing dependencies, cycles, or repairs. Detailed checks are in review.md."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-symmetric-bimodules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Module objects over a commutative monoid are symmetric bimodules",
@@ -13,29 +13,151 @@
   "place": "node lem-sfb-modobj-symmetric-bimodules, order 1576"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-ring-object-monoid",
+  "def-sfb-bimod-objects"
  ],
  "proof": [
   {
-   "text": "The right unit law says that $\\rho_M(M\\otimes\\eta)$ is the right unitor of $M$. It\nfollows from naturality of $\\beta$, which gives\n$\\beta_{M,\\mathcal R}(M\\otimes\\eta)=(\\eta\\otimes M)\\beta_{M,\\mathbf 1}$, together with the\nleft unit law and the fact that braiding with $\\mathbf 1$ is the unitor identification. Right associativity and the compatibility of the two actions\nfollow from naturality of $\\beta$ and the hexagon identities. These reduce both sides to\nthe action of $\\mathcal R\\otimes\\mathcal R$ on $M$, up to the order of the two factors of\n$\\mathcal R$. The two orders agree because $\\mathcal R$ is commutative:\n$\\mu\\beta_{\\mathcal R,\\mathcal R}=\\mu$, so\n$\\gamma_M(\\mu\\beta_{\\mathcal R,\\mathcal R}\\otimes M)=\\gamma_M(\\mu\\otimes M)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $R=\\mathcal R$, $a=\\gamma_M$ and $r=a\\circ\\beta_{M,R}$. All compositions below use ordinary right-to-left order; $\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\to X\\otimes(Y\\otimes Z)$, and $\\varrho$ denotes the right unitor, distinct from the action $r$. By [sk-def-sfb-module-objects],\n$$a\\circ(\\eta\\otimes M)=\\lambda_M,\\qquad a\\circ(R\\otimes a)=a\\circ(\\mu\\otimes M)\\circ\\alpha_{R,R,M}^{-1}.$$\nThe five laws in [def-sfb-bimod-objects] specialize to these two left action laws, the right unit law, the right associative law and the middle compatibility law. Thus the left laws are already satisfied; the next three steps verify the other three for the specified morphism $r$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-bimod-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+    "place": "First paragraph: the left module supplies the left action; define the right action."
+   }
   },
   {
-   "text": "A morphism of module objects commutes with the right actions by naturality of $\\beta$.\nA morphism of bimodules is in particular a morphism of left modules. Morphisms in both\ncategories are morphisms of $\\mathcal C$, so the functor is fully faithful. The values are\nsymmetric by the definition of $\\rho_M$.",
-   "uses": [],
-   "elementary": null
+   "text": "Naturality of the braiding [lem-sfb-braiding-naturality], with $f=\\mathrm{id}_M$ and $g=\\eta:\\mathbf 1\\to R$, and the left module unit law [sk-def-sfb-module-objects] give\n$$r\\circ(M\\otimes\\eta)=a\\circ\\beta_{M,R}\\circ(M\\otimes\\eta)=a\\circ(\\eta\\otimes M)\\circ\\beta_{M,\\mathbf 1}=\\lambda_M\\circ\\beta_{M,\\mathbf 1}=\\varrho_M.$$\nThe last equality is [lem-sfb-braiding-unitors]. This is precisely the right unit law.",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-braiding-unitors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+    "place": "First paragraph: right unit and braiding with the monoidal unit."
+   }
+  },
+  {
+   "text": "For compatibility, naturality [lem-sfb-braiding-naturality] applied to $a:R\\otimes M\\to M$ and $\\mathrm{id}_R$, the left module associativity [sk-def-sfb-module-objects], and the first formula of [lem-sfb-braiding-hexagon] with $(X,Y,Z)=(R,M,R)$ give\n$$\\begin{aligned}\nr\\circ(a\\otimes R)\n&=a\\circ(R\\otimes a)\\circ\\beta_{R\\otimes M,R}\\\\\n&=a\\circ(\\mu\\otimes M)\\circ\\alpha_{R,R,M}^{-1}\\circ\\beta_{R\\otimes M,R}\\\\\n&=a\\circ((\\mu\\circ\\beta_{R,R})\\otimes M)\\circ\\alpha_{R,R,M}^{-1}\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\\\\\n&=a\\circ(\\mu\\otimes M)\\circ\\alpha_{R,R,M}^{-1}\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\\\\\n&=a\\circ(R\\otimes a)\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\n=a\\circ(R\\otimes r)\\circ\\alpha_{R,M,R}.\n\\end{aligned}$$\nThe third line cancels the adjacent inverse associators after expanding the hexagon. The fourth line uses exactly $\\mu\\circ\\beta_{R,R}=\\mu$, the definition of commutativity in [det-def-sfb-ring-object-monoid]. Tensor functoriality and the definition of $r$ give the final equality. This proves the middle compatibility law, without assuming that the braiding is symmetric.",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-braiding-hexagon",
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+    "place": "First paragraph: compatibility of left and right actions from naturality, hexagon and commutativity."
+   }
+  },
+  {
+   "text": "For right associativity, the compatibility just proved in step 3 and tensor functoriality give\n$$\\begin{aligned}\nr\\circ(r\\otimes R)\n&=r\\circ(a\\otimes R)\\circ(\\beta_{M,R}\\otimes R)\\\\\n&=a\\circ(R\\otimes a)\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\\circ(\\beta_{M,R}\\otimes R).\n\\end{aligned}$$\nOn the other hand, naturality [lem-sfb-braiding-naturality] with $\\mathrm{id}_M,\\mu$, and the second formula of [lem-sfb-braiding-hexagon] with $(X,Y,Z)=(M,R,R)$ give\n$$\\begin{aligned}\nr\\circ(M\\otimes\\mu)\\circ\\alpha_{M,R,R}\n&=a\\circ(\\mu\\otimes M)\\circ\\beta_{M,R\\otimes R}\\circ\\alpha_{M,R,R}\\\\\n&=a\\circ(\\mu\\otimes M)\\circ\\alpha_{R,R,M}^{-1}\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\\circ(\\beta_{M,R}\\otimes R)\\\\\n&=a\\circ(R\\otimes a)\\circ(R\\otimes\\beta_{M,R})\\circ\\alpha_{R,M,R}\\circ(\\beta_{M,R}\\otimes R).\n\\end{aligned}$$\nHere the second equality cancels the final $\\alpha_{M,R,R}^{-1}\\circ\\alpha_{M,R,R}$ from the hexagon, and the third uses the left module associativity [sk-def-sfb-module-objects]. The two calculations have the same last composite, so $r\\circ(r\\otimes R)=r\\circ(M\\otimes\\mu)\\circ\\alpha_{M,R,R}$. Together with steps 1-3 this supplies all five bimodule laws of [def-sfb-bimod-objects].",
+   "uses": [
+    "lem-sfb-braiding-naturality",
+    "lem-sfb-braiding-hexagon",
+    "sk-def-sfb-module-objects",
+    "def-sfb-bimod-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+    "place": "First paragraph: right associativity from naturality and hexagon; use compatibility proved in step 3."
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be a left module morphism. Its defining equation [sk-def-sfb-module-objects] and braiding naturality [lem-sfb-braiding-naturality] give\n$$\\begin{aligned}\nf\\circ r_M&=f\\circ\\gamma_M\\circ\\beta_{M,R}\n=\\gamma_N\\circ(R\\otimes f)\\circ\\beta_{M,R}\\\\\n&=\\gamma_N\\circ\\beta_{N,R}\\circ(f\\otimes R)\n=r_N\\circ(f\\otimes R).\n\\end{aligned}$$\nThus $f$ preserves both actions and is a bimodule morphism [def-sfb-bimod-objects]. The assignment on morphisms is its underlying morphism $f$; identities and composition are preserved because both categories inherit them from $\\mathcal C$. Conversely, a bimodule morphism between the constructed bimodules preserves the left action, hence defines a left module morphism. These two operations on hom-sets are inverse: both keep the underlying morphism, which determines a morphism in either category. Hence each hom-set map is bijective and the functor is fully faithful. Each value is symmetric because its right action was defined as $\\gamma_M\\circ\\beta_{M,R}$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-sfb-braiding-naturality",
+    "def-sfb-bimod-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+    "place": "Second paragraph: functoriality, both directions on hom-sets, full faithfulness and symmetry."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-bimod-objects",
+  "det-def-sfb-ring-object-monoid",
+  "lem-sfb-braiding-hexagon",
+  "lem-sfb-braiding-naturality",
+  "lem-sfb-braiding-unitors",
+  "sk-def-sfb-module-objects"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-symmetric-bimodules.proof.md",
+  "place": "Both paragraphs; expanded action-law calculations with all associators written."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module object over commutative monoid gives symmetric bimodule and fully faithful functor",
+   "results": "Returned ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, ModuleCat.MonoidalCategory.symmetricCategory, CategoryTheory.CommMon.fullyFaithfulForget₂Mon, CategoryTheory.SymmetricCategory.ofFullyFaithful, CommMonCat.fullyFaithfulForgetToMonCat, ModuleCat.MonoidalCategory.instBraidedCategory, CategoryTheory.symmetricCategoryOfFullyFaithful, CategoryTheory.Functor.FullyFaithful.mapCommGrp",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module object over commutative monoid braided monoidal category induces symmetric bimodule fully faithful",
+   "results": "Returned CategoryTheory.CommMon.fullyFaithfulForget₂Mon, CategoryTheory.CommMon.fullyFaithfulForget₂Mon_, CategoryTheory.IsCommMon, ModuleCat.MonoidalCategory.symmetricCategory, CategoryTheory.Functor.FullyFaithful.mapCommMon, ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, LightCondensed.instSymmetricCategoryLightCondMod, CategoryTheory.CommMon.instFullMonForget₂Mon",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, Bimod, FullyFaithful",
+   "results": "Loogle rejected the query: unknown identifier 'FullyFaithful'. This is not evidence of absence; subsequent valid semantic and source searches supply the search evidence.",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "toBimod|fullyFaithfulToBimod|IsSymmetric",
+   "results": "No hits; subdirectory Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical functor from module objects over commutative monoid to symmetric bimodules is fully faithful",
+   "results": "Returned FGModuleCat.fullyFaithfulULift, CategoryTheory.CommMon.fullyFaithfulForget₂Mon_, CategoryTheory.CommMon.fullyFaithfulForget₂Mon, ModuleCat.MonModuleEquivalenceAlgebra.functor_obj_carrier, ModuleCat.MonModuleEquivalenceAlgebra.functor_map_hom_apply, ModuleCat.MonModuleEquivalenceAlgebra.functor, ModuleCat.MonoidalCategory.symmetricCategory, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Bimod.*fully faithful|toBimod",
+   "results": "No hits; subdirectory CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "assoc_flip|toBimod|fullyFaithfulToBimod|IsSymmetric",
+   "results": "Returned Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean; subdirectory CategoryTheory/Monoidal; read Mod.lean:94-97: assoc_flip is the left module axiom precomposed with the inverse associator, not the module-to-bimodule functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal modules over a commutative algebra object embed fully faithfully into bimodule objects in a braided category",
+   "results": "Second reader: 8 hit(s); returned AlgCat.instBraidedModuleCatForget₂, ModuleCat.MonoidalCategory.instBraidedCategory, ModuleCat.MonModuleEquivalenceAlgebra.functor_obj_carrier, Bimod.instInhabited, Bimod.regular_X, CategoryTheory.Mod_.regular_X, ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_X_isModule, CategoryTheory.Mod_.instInhabited",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +176,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-category"
+ "unit": "sk-prop-sfb-module-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-symmetric-bimodules",
+  "worker": "stage1",
+  "summary": "Rebuilt the earlier sandbox attempt. Kept the imported statement, expanded the five action laws and the hom-set bijection, corrected composition directions in every helper, replaced the unnecessary commutativity helper by the existing definition, and reran all recorded helper searches with msearch.py. Four new nodes are exact Mathlib leaves. The new snapshot has no chapter/unit records for the source folder; report.md records this metadata gap without editing maintainer fields.",
+  "blueprint": "Steps 1-4 realize the first paragraph of lem-sfb-modobj-symmetric-bimodules.proof.md, including its suppressed naturality/hexagon calculation. Step 5 realizes the second paragraph. The module-category unit clause 2 supplies the route, and no coequalizer construction is used."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-10272e598",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-10272e598 (reviewer sub-agent of L); spot-checked: Read all five nodes, cited statements, current blueprint route, and Mathlib source locations. All five proof steps and four new leaves check out; nonsymmetric braided small-case tests pass. No duplicates, missing dependencies, cycles, or target weakening found. Report’s missing-metadata warning is stale. Full findings written to review.md; no repairs required."
+ }
 }

@@ -1,0 +1,83 @@
+{
+ "id": "def-sfb-bimod-objects",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-modobj-symmetric-bimodules",
+   "place": "Proof, first paragraph: \"make M an R-R-bimodule\"; second paragraph: \"A morphism of bimodules is in particular a morphism of left modules\".",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Bimodule objects and their morphisms",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\varrho)$ be a monoidal category, with $\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\to X\\otimes(Y\\otimes Z)$, and let $(A,\\mu_A,\\eta_A)$ and $(B,\\mu_B,\\eta_B)$ be monoid objects [det-def-sfb-ring-object-monoid]. An $A$-$B$-bimodule is an object $P$ with actions $a_P:A\\otimes P\\to P$ and $r_P:P\\otimes B\\to P$ satisfying\n$$a_P\\circ(\\eta_A\\otimes P)=\\lambda_P,\\qquad a_P\\circ(\\mu_A\\otimes P)=a_P\\circ(A\\otimes a_P)\\circ\\alpha_{A,A,P},$$\n$$r_P\\circ(P\\otimes\\eta_B)=\\varrho_P,\\qquad r_P\\circ(r_P\\otimes B)=r_P\\circ(P\\otimes\\mu_B)\\circ\\alpha_{P,B,B},$$\n$$r_P\\circ(a_P\\otimes B)=a_P\\circ(A\\otimes r_P)\\circ\\alpha_{A,P,B}.$$\nHere an object in a tensor product of morphisms denotes its identity morphism. A morphism of bimodules $f:P\\to Q$ is a morphism in $\\mathcal C$ satisfying\n$$f\\circ a_P=a_Q\\circ(A\\otimes f),\\qquad f\\circ r_P=r_Q\\circ(f\\otimes B).$$\nThese objects and morphisms form the category of $A$-$B$-bimodules, with identities and composition inherited from $\\mathcal C$; two bimodule morphisms are equal if their underlying morphisms are equal.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+  "place": "exact: Bimod at line 80 (five action laws, lines 85-96), Bimod.Hom at line 107 (both morphism equations), Bimod.instCategory at line 126 (composition via Bimod.comp at line 124), and Bimod.hom_ext at line 132. The displayed right associativity is the field at lines 91-93 precomposed with the associator; this is one-line cancellation of an isomorphism."
+ },
+ "stmt_deps": [
+  "det-def-sfb-ring-object-monoid"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bimodule object structure with left and right actions and bimodule morphisms",
+   "results": "Bimod, Bimod.Hom, Bimod.instCategory in Mathlib/CategoryTheory/Monoidal/Bimod; same objects and morphisms.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod",
+   "results": "Bimod, Bimod.Hom, Bimod.instCategory, Bimod.id' and Bimod.forget in Mathlib.CategoryTheory.Monoidal.Bimod.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Bimod|structure Hom",
+   "results": "With subdirectory CategoryTheory/Monoidal: Mathlib/CategoryTheory/Monoidal/Bimod.lean:80 structure Bimod, :107 structure Hom; other monoidal-object Hom structures also returned.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bimodule object with left and right actions in monoidal category",
+   "results": "Bimod.mk, Bimod.regular, Bimod.actLeft and Bimod.middle_assoc_assoc; source confirms Bimod and Hom.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal bimodule morphisms are maps commuting with both monoid actions",
+   "results": "Second reader: 8 hit(s); returned Bimod.Hom.hom, Bimod.Hom, Bimod.Hom.mk.inj, Bimod.homInhabited, Bimod.Hom.left_act_hom, Bimod.Hom.right_act_hom, CategoryTheory.Mod_.Hom, Bimod.Hom.left_act_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^structure Bimod|^structure Hom|^lemma hom_ext|^instance : Category",
+   "results": "Second reader: 4 hit(s); returned 80, 107, 126, 132; source subpath CategoryTheory/Monoidal/Bimod.lean; the single-file grep wrapper parses the line number as its file field; independently read and verified the actual declarations in this file.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Bimod; Bimod.Hom; Bimod.instCategory; Bimod.hom_ext",
+  "file": "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+  "line": 80,
+  "how": "exact: Bimod at line 80 (five action laws, lines 85-96), Bimod.Hom at line 107 (both morphism equations), Bimod.instCategory at line 126 (composition via Bimod.comp at line 124), and Bimod.hom_ext at line 132. The displayed right associativity is the field at lines 91-93 precomposed with the associator; this is one-line cancellation of an isomorphism."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sfb-modobj-symmetric-bimodules",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-module-category"
+}
