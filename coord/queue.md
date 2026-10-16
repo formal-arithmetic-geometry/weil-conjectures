@@ -37,6 +37,7 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
@@ -45,7 +46,6 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.SpectralObjectPageTwoMap` | 12 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
