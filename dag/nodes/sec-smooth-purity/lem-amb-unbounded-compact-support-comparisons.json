@@ -33,9 +33,208 @@
   "lem-amb-etale-compact-comparisons",
   "thm-cbc-finite-torsion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the structural comparisons that will be inserted in all formulas. By [lem-weil-pbc-extension-by-zero-exact] and [prop-weil-pbc-inverse-image-modules-exact], open extension and constant-module inverse image are exact, hence act termwise on every complex. The sheaf open adjunction of [lem-weil-pbc-extension-by-zero-adjunction] induces the termwise adjunction on homotopy categories by [lem-weil-pbc-termwise-adjunction-homotopy]. Its unit and counit descend by [lem-weil-pbc-localization-universal-property], since both functors are exact; their triangle identities descend as equalities. Hence $Dj_!\\dashv j^*$ on the unbounded derived categories for every open immersion, without needing a finite-type hypothesis. The open composition and identity maps of [lem-cbc-extension-zero-composition] consequently descend, with their same equations, by [lem-weil-pbc-localization-universal-property]. For proper maps use the canonical unbounded direct-image comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Its associativity and units can be checked under the inverse-image/direct-image adjunctions specified in [def-kun-unbounded-exchange]: for three maps $a,b,c$, both comparisons are adjoint to the composite evaluation\n$$a^*b^*c^*Rc_*Rb_*Ra_*\\xrightarrow{a^*b^*\\varepsilon_c}a^*b^*Rb_*Ra_*\\xrightarrow{a^*\\varepsilon_b}a^*Ra_*\\xrightarrow{\\varepsilon_a}1.$$\nTermwise inverse-image composition identifies the two parenthesizations. The mate-pasting identities and identity clause of [lem-weil-pbc-mate-pasting] therefore give the same right-adjoint comparisons. They also show that proper exchange commutes with composition of proper maps and successive changes of base: take the mates of the pasted inverse-image square isomorphisms. This establishes the structural coherence used below on the entire derived categories.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7H, 0F7J: structural direct-image and open-extension comparisons; sites-cohomology Tags 0D6E, 0D6G, 0E46 and 0E47"
+   }
+  },
+  {
+   "text": "Use [lem-amb-unbounded-proper-open-interchange] for a square $Q=(U\\xrightarrow{k}V,r,p,W\\xrightarrow{i}Z)$ with open horizontal maps and proper vertical maps. Denote its specified isomorphism by $\\Gamma_Q:Di_!Rr_*\\to Rp_*Dk_!$. This is available on all of $D(U_{\\mathrm{et}},A)$, including for noncartesian refinement squares. For a cartesian square the same node fixes its adjunct to be the inverse proper open-restriction exchange followed by the open unit identification. Thus this is precisely the tower normalization required in the statement, rather than an arbitrary isomorphism of the two functors. Retain both pasting identities and the base-change equation of this node throughout the construction.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, case (b), and Tags 0F7C, 0F7D, 0F7F"
+   }
+  },
+  {
+   "text": "For a refinement $u:c_1\\to c_2$, write $c_i=(j_i,r_i)$, so $u j_1=j_2$ and $r_2u=r_1$. Apply $\\Gamma$ to the square with top $j_1$, bottom $j_2$, and vertical maps $1_X,u$. It gives $\\gamma_u:Dj_{2!}\\to Ru_*Dj_{1!}$. For the candidates of [def-amb-etale-compact-support] define\n$$\\tau_u: F_{c_2}=Rr_{2,*}Dj_{2!}\\xrightarrow{Rr_{2,*}\\gamma_u}Rr_{2,*}Ru_*Dj_{1!}\\xrightarrow{\\sim}Rr_{1,*}Dj_{1!}=F_{c_1}.$$\nIt is a natural isomorphism by [lem-amb-unbounded-proper-open-interchange] and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. On the open $X$ the sheaf identification in $\\gamma_u$ is the identity. The vertical pasting identity for $\\Gamma$ gives $\\gamma_{vu}=(Rv_*\\gamma_u)\\gamma_v$ for $u:c_1\\to c_2$, $v:c_2\\to c_3$, and the identity-square clause gives $\\gamma_1=1$. Step 1's direct-image comparisons then give $\\tau_{vu}=\\tau_u\\tau_v$ and $\\tau_1=1$.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined: refinement maps and their transitivity"
+   }
+  },
+  {
+   "text": "The compactification category is nonempty and cofiltered, and base change acts on it, by [lem-cbc-compactifiable-cofiltered]; a compactification is part of our hypotheses. For $c,d$ choose $u:e\\to c$, $v:e\\to d$ and put $\\rho_{d,c}=\\tau_v^{-1}\\tau_u:F_c\\to F_d$. To check independence, choose a common refinement of two possible $e$'s. Its two induced maps to $c$, and its two induced maps to $d$, can be equalized successively by cofilteredness. At that refinement Step 3 makes both candidate expressions equal: replacing $e$ by $t:e'\\to e$ replaces the expression by $(\\tau_t\\tau_v)^{-1}(\\tau_t\\tau_u)=\\tau_v^{-1}\\tau_u$. Cancellation also shows independence of parallel arrows. For three compactifications make these choices simultaneously; then\n$$(\\tau_w^{-1}\\tau_v)(\\tau_v^{-1}\\tau_u)=\\tau_w^{-1}\\tau_u.$$\nThis is the cocycle condition, and the expression for $c=d$ is the identity. Hence the $F_c$ are canonically identified as $Rf_!$. No limit over a possibly large category is being formed: choose one compactification and use these specified pairwise comparisons.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, cofiltered comparison and cancellation argument"
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$ and $g:Y\\to Z$, choose a compactification $d=(i,s)$ of $g$ and one of $gf$. The compatible-tower lemma [lem-cbc-compactifiable-compatible-tower] gives a compactification $(a,p)$ of $if$, a refinement of the supplied compactification of $gf$, and $V=\\overline X\\times_{\\overline Y}Y$ with open $b:V\\to\\overline X$, $j:X\\to V$ and proper $q:V\\to Y$, satisfying $bj=a$, $qj=f$, $pb=iq$. These are compactifications $c_f=(j,q)$, $c_{gf}=(a,sp)$. Using [def-amb-etale-compact-support], define on these choices\n$$\\alpha^T=\\bigl(Rs_*Rp_*Db_!Dj_!\\xrightarrow{\\sim}R(sp)_*D(bj)_!\\bigr)\\circ(Rs_*\\Gamma_QDj_!):Rs_*Di_!Rq_*Dj_!\\longrightarrow R(sp)_*Da_!.$$\nAll arrows are isomorphisms by [lem-amb-unbounded-proper-open-interchange], [lem-cbc-extension-zero-composition] and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Use Step 4 to compare its three candidates with arbitrary chosen candidates. The formula is the proper/open tower comparison in the question, including its open-adjunction normalization from Step 2.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "def-amb-etale-compact-support",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, tower and four displayed identifications"
+   }
+  },
+  {
+   "text": "Here is the independence calculation for $\\alpha^T$. Any two towers admit a common refining tower by [lem-cbc-compactifiable-compatible-tower], so consider a refining tower $1\\to2$ with proper maps $v:\\overline X_1\\to\\overline X_2$, $u:\\overline Y_1\\to\\overline Y_2$, $w:V_1\\to V_2$. Write $Q_1,Q_2$ for their cartesian proper/open squares and abbreviate all direct-image/open composition identifications by Step 1. Set\n$$A:Dj_{2!}\\to Rw_*Dj_{1!},\\quad D:Di_{2!}\\to Ru_*Di_{1!},\\quad F:Db_{2!}Rw_*\\to Rv_*Db_{1!},\\quad E:D(b_2j_2)_!\\to Rv_*D(b_1j_1)_!,$$\neach the $\\Gamma$ for its indicated square. These squares have proper vertical maps by the tower lemma; they need not be cartesian. Horizontal pasting gives $E=(F Dj_{1!})(Db_{2!}A)$. Vertical pasting, applied to the rectangle from $V_1$ to $\\overline Y_2$ in its two decompositions, gives\n$$(Rp_{2,*}F)(\\Gamma_{Q_2}Rw_*)=(Ru_*\\Gamma_{Q_1})(D Rq_{1,*}).$$\nBoth equations are clauses of [lem-amb-unbounded-proper-open-interchange]. Now apply $Rs_{2,*}$, insert $A$ on the input, and use naturality of $\\Gamma_{Q_2}$ to move this insertion past that comparison. The first displayed identity replaces the resulting $F,A$ by $E$; the second replaces the remaining two square maps. The left route is $\\tau_{gf}\\alpha^{T_2}$ and the right route is $\\alpha^{T_1}(\\tau_g\\tau_f)$, where the $\\tau$'s are precisely Step 3's maps. Therefore the composition square commutes with refinements. Comparing through a common tower proves independence, including independence of the maps to the original chosen compactifications by Step 4's parallel-arrow calculation.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, refinement diagram A,B,C,D,E,F and the two pasting calculations"
+   }
+  },
+  {
+   "text": "For associativity take $f:X\\to Y$, $g:Y\\to Z$, $h:Z\\to T$. Choose $Z\\xrightarrow{i}\\overline Z\\xrightarrow{t}T$. Apply [lem-cbc-compactifiable-compatible-tower] to $(g,h)$, using a compactification of $hg$, to obtain $Y\\hookrightarrow\\overline Y\\xrightarrow{s}\\overline Z$. Apply it to $(f,hg)$, using this compactification of $hg$ and one of $hgf$, to obtain $X\\hookrightarrow\\overline X\\xrightarrow{p}\\overline Y$. Put $W=\\overline Y\\times_{\\overline Z}Z$, $V=\\overline X\\times_{\\overline Y}W$, and $U=\\overline X\\times_{\\overline Y}Y$. Write $k:W\\hookrightarrow\\overline Y$, $d:Y\\hookrightarrow W$, $b:V\\hookrightarrow\\overline X$, $a:U\\hookrightarrow V$, and $l:X\\hookrightarrow U$ for the opens, and $q:W\\to Z$, $r:V\\to W$, $m:U\\to Y$ for the proper projections. Here $p,s,t$ are proper, and $q,r,m$ are their base changes; no properness of $f,g,h$ is claimed. Define the three squares\n$$A=\\begin{array}{ccc}U&\\xrightarrow{a}&V\\\\ m\\downarrow&&\\downarrow r\\\\ Y&\\xrightarrow{d}&W\\end{array},\\quad\nB=\\begin{array}{ccc}V&\\xrightarrow{b}&\\overline X\\\\ r\\downarrow&&\\downarrow p\\\\ W&\\xrightarrow{k}&\\overline Y\\end{array},\\quad\nC=\\begin{array}{ccc}W&\\xrightarrow{k}&\\overline Y\\\\ q\\downarrow&&\\downarrow s\\\\ Z&\\xrightarrow{i}&\\overline Z\\end{array}.$$\nAll have proper vertical and open horizontal edges. With Step 1's structural composition identifications, put $\\mathsf A=\\Gamma_A:Dd_!Rm_*\\to Rr_*Da_!$, $\\mathsf B=\\Gamma_B:Dk_!Rr_*\\to Rp_*Db_!$, and $\\mathsf C=\\Gamma_C:Di_!Rq_*\\to Rs_*Dk_!$. Horizontal and vertical pasting of [lem-amb-unbounded-proper-open-interchange] give\n$$\\Gamma_{A+B}=(\\mathsf B Da_!)\\circ(Dk_!\\mathsf A),\\qquad\n\\Gamma_{B+C}=(Rs_*\\mathsf B)\\circ(\\mathsf C Rr_*).$$\nThe starting triple functor is $Rt_*Di_!Rq_*Dd_!Rm_*Dl_!$. Expanding Step 5, composition first for $(g,f)$ and then for $(h,gf)$ gives\n$$(Rt_*Rs_*\\mathsf B Da_!Dl_!)\\circ(Rt_*\\mathsf C Rr_*Da_!Dl_!)\\circ(Rt_*Di_!Rq_*\\mathsf A Dl_!),$$\nwhereas composition first for $(h,g)$ and then for $(hg,f)$ gives\n$$(Rt_*Rs_*\\mathsf B Da_!Dl_!)\\circ(Rt_*Rs_*Dk_!\\mathsf A Dl_!)\\circ(Rt_*\\mathsf C Dd_!Rm_*Dl_!).$$\nFor every $K\\in D(X_{\\mathrm{et}},A)$, set $z=\\mathsf A_{Dl_!K}:Dd_!Rm_*Dl_!K\\to Rr_*Da_!Dl_!K$. Naturality of $\\mathsf C$ is exactly\n$$Rs_*Dk_!(z)\\circ\\mathsf C_{Dd_!Rm_*Dl_!K}\n=\\mathsf C_{Rr_*Da_!Dl_!K}\\circ Di_!Rq_*(z).$$\nApplying $Rt_*$ and then the common first factor identifies the two composites. Step 1 supplies the structural parentheses, and Step 6 passes from this tower to arbitrary choices. For an identity morphism choose its identity compactification; the tower squares have either both proper or both open maps identities, so the identity clause for $\\Gamma$ and Step 1 give the identity comparison. This proves associativity and the unit normalizations.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7K, lemma-pseudo-functor, grid and A,B,C pasting; Tag 0F7E, remark-going-around"
+   }
+  },
+  {
+   "text": "Construct base change first on a compactification $c=(j,r)$ and its fibre-product base change $c_v=(j',r')$. These are compactifications and refinements base-change functorially by [lem-cbc-compactifiable-cofiltered]. Write $\\bar v:\\overline X'\\to\\overline X$. Since $A$ is finite, two of $0,1,1+1,\\ldots$ coincide, so $n1_A=0$ for some $n>0$. Thus [lem-kun-proper-base-change-torsion-ring] applies to the proper $r$ and arbitrary $v$, with the unbounded mate of [def-kun-unbounded-exchange]. Let $\\beta:Dj'_!v'^*\\to\\bar v^*Dj_!$ be the degreewise comparison of [def-weil-pbc-etale-shriek-base-change-map]. The open-specialization in [lem-cbc-extension-zero-base-change] identifies its inverse with $\\bar v^*Dj_!\\to Dj'_!v'^*$: the map $\\beta$ and the inverse of the comparison in that lemma both have adjunct the open-unit map under $Dj'_!\\dashv j'^*$. For $\\beta$, expand its composite-adjunction mate formula: the unit and counit for the base-change inverse image cancel by a triangle identity, leaving the pulled-back open unit. This is the pasting calculation of [lem-weil-pbc-mate-pasting]. Hence the adjunction bijection identifies the specified maps. Their degreewise isomorphisms descend on every complex, using exactness and the localization clauses in Step 1. Define\n$$C^c_{f,v}=(Rr'_*\\beta^{-1})\\circ\\operatorname{Ex}_{r,v,Dj_!}:v^*Rr_*Dj_!\\longrightarrow Rr'_*Dj'_!v'^*.$$\nBoth factors are natural isomorphisms on unbounded complexes. The proper base-change theorem imposes no restriction on the residue characteristics, $v$, or the cohomological amplitude of the input.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-kun-proper-base-change-torsion-ring",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek, chosen compactification; etale-cohomology Tag 0F0C for unbounded torsion coefficients"
+   }
+  },
+  {
+   "text": "For a refinement $u:c_1\\to c_2$, apply the base-change equation of [lem-amb-unbounded-proper-open-interchange] to its square with proper edges $1_X,u$ and open edges $j_1,j_2$. It states that the proper/open arrow $\\gamma_u$ commutes with proper exchange and the inverse degreewise open comparisons. Whisker that equation by the remaining proper direct image. The proper composition/exchange compatibility proved by taking mates in Step 1, using [def-kun-unbounded-exchange] and [lem-weil-pbc-mate-pasting], identifies the result as\n$$C^{c_1}_{f,v}\\circ v^*\\tau_u=(\\tau_{u_v}v'^*)\\circ C^{c_2}_{f,v}.$$\nThus the $C^c$ commute with every refinement comparison. Step 4, using [lem-cbc-compactifiable-cofiltered], proves agreement under pairwise comparisons independently of the common refinement. This defines $C_{f,v}$ for the compactification-independent functors.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, independence of compactification, expanded using Tag 0F7F and sites-cohomology Tag 0E46"
+   }
+  },
+  {
+   "text": "For successive changes of base $Y''\\xrightarrow{w}Y'\\xrightarrow{v}Y$, choose $c$, then its two successive base changes. For the proper factor, [def-kun-unbounded-exchange] defines exchange as the mate of the inverse-image square; horizontal pasting in [lem-weil-pbc-mate-pasting] gives $\\operatorname{Ex}_{r,vw}=(\\operatorname{Ex}_{r_v,w}\\bar v^*)\\circ(w^*\\operatorname{Ex}_{r,v})$. For the open factor the two comparisons are the same: under the adjunction $Dj''_!\\dashv j''^*$ constructed in Step 1, compare the maps in the direction $Dj''_!\\to(\\text{inverse image})Dj_!$ before inverting them. Both the single map and the pasted pair of maps of [def-weil-pbc-etale-shriek-base-change-map] have adjunct the composite open unit followed by the iterated inverse-image identification. Thus those maps agree, and so do their inverses used in $C$. The units satisfy the triangle identities, and their degreewise equations descend by Step 1. Substituting these two equalities in Step 8's formula, with naturality to interchange the middle factors, yields\n$$C_{f,vw}=(C_{f_v,w}v'^*)\\circ w^*C_{f,v}.$$\nFor the identity base change, the identity clause of mate pasting and the identity open unit make both factors identities. Step 9 gives the same assertions after any compactification comparisons.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-etale-shriek-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L; sites-cohomology Tags 0E46 and 0E47 and degreewise open adjunction"
+   }
+  },
+  {
+   "text": "Finally base-change a chosen compatible tower for $(f,g)$; [lem-cbc-compactifiable-compatible-tower] says this is again such a tower. Write $v_Z:Z'\\to Z$, $v_Y:Y'\\to Y$, $v_X:X'\\to X$ for projections. Expand $\\alpha$ by Step 5 and $C$ by Step 8. The resulting diagram has exactly three types of nontrivial factor squares: exchange with the composition of proper direct images, exchange with the composition of two open extensions, and exchange with the proper/open interchange. The first commutes by the mate-pasting calculation of Step 1 ([def-kun-unbounded-exchange, lem-weil-pbc-mate-pasting]); the second commutes by composing the open-unit adjuncts of Step 10, inserting the composition identification of [lem-cbc-extension-zero-composition]. For the third, the required equality is precisely\n$$(Rp'_*e_b)(\\operatorname{Ex}_{p}Db_!)(v_{\\overline Y}^*\\Gamma_Q)\n=(\\Gamma_{Q'}v_V^*)(Di'_!\\operatorname{Ex}_q)(e_iRq_*),$$\nthe base-change equation of [lem-amb-unbounded-proper-open-interchange] for the tower square $Q=(V,b,q,p,Y,i,\\overline Y)$. Whisker this equality by the outer proper functor and the inner open extension. Composing the three factor squares and canceling the structural identifications gives the full equality\n$$C_{gf,v_Z}\\circ v_Z^*\\alpha_{g,f}\n=(\\alpha_{g',f'}v_X^*)\\circ(Rg'_!C_{f,v_Y})\\circ(C_{g,v_Z}Rf_!).$$\nStep 6 and Step 9 then give this equation for arbitrary compactification choices. This explicitly proves the composition/exchange compatibility which the proof of Tag 0F7L leaves to its three factor compatibilities.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-extension-zero-composition",
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, the three compatibility checks (1), (2), (3), with the equation of Tag 0F7F"
+   }
+  },
+  {
+   "text": "Check the final bounded-below normalization on actual maps. The category of module sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and [lem-weil-pbc-dplus-injective-representative] provides bounded-below injective representatives, which are also K-injective. Exact open extension preserves the lower bound, so bounded-below resolutions can be chosen again after every open extension. Both bounded-below and unbounded $Rr_*$ are then represented by $r_*I$ on the same injective resolution, naturally in the input; equality of the induced morphisms is checked by [lem-weil-pbc-kinjective-hom-derived]. On these representatives, the new $\\Gamma$ of [lem-amb-unbounded-proper-open-interchange] and the bounded-below $\\gamma$ of [lem-cbc-proper-open-interchange-coherence] are represented by the identical map $i_!r_*J\\cong p_*k_!J\\to p_*I$. Thus all refinement and tower-composition maps agree with [lem-amb-etale-compact-comparisons]. For the proper exchange, the two constructions are the same adjunction mate: on an injective representative $I$, the derived counit is induced by the sheaf evaluation $r^*r_*I\\to I$, and both inverse images and square isomorphisms are termwise. Hence the unit--square--counit formula in [def-kun-unbounded-exchange] restricts to the identical formula in [def-cbc-exchange-map]. The open factor there is the same inverse degreewise comparison by Step 8. Therefore the whole exchange restricts to the specified map of [thm-cbc-finite-torsion], and the already proved coherence equations restrict with it. This is equality of the named maps; no assertion that cohomology or stalks detect equality of derived morphisms is used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-amb-etale-compact-comparisons",
+    "def-kun-unbounded-exchange",
+    "def-cbc-exchange-map",
+    "thm-cbc-finite-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7H-0F7L, same construction in the bounded-below torsion and unbounded torsion-ring cases; Tag 070J for bounded-below injectives being K-injective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-cbc-exchange-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-cbc-finite-torsion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I, 0F7J, 0F7K, 0F7L, using the unbounded torsion-ring case in Tag 0F7H; explicit mate normalizations and the omitted factor-pasting details are written out in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +278,113 @@
    "date": "2026-10-16",
    "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified",
    "verdict": "no match: these are scheme/ring etaleness and base-change stability results, not derived compact-support comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived etale direct image with compact support is independent of compactification and satisfies coherent composition and arbitrary base change",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T00:51:03Z",
+    "tool": "leanfinder",
+    "query": "Unbounded derived etale direct image with compact support is independent of compactification and satisfies coherent composition and arbitrary base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful"
+    ],
+    "digest": "08b6de1aba74e038"
+   },
+   "verdict": "no match: hits are underived pushforward/restriction, scheme morphism properties or unrelated topology, not unbounded etale proper/open interchange or compact-support coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T00:51:03Z",
+    "tool": "loogle",
+    "query": "\"shriek\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|properSupport|compactSupport|compactification",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T00:51:02Z",
+    "tool": "grep",
+    "query": "lowerShriek|properSupport|compactSupport|compactification",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived etale compact support functor comparison composition and base change",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T00:51:04Z",
+    "tool": "leansearch",
+    "query": "Unbounded derived etale compact support functor comparison composition and base change",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor with proper support for torsion sheaves, compactification independence, associativity of lower shriek and exchange with pullback",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T00:52:05Z",
+    "tool": "leanfinder",
+    "query": "Derived functor with proper support for torsion sheaves, compactification independence, associativity of lower shriek and exchange with pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforward_assoc",
+     "SheafOfModules.pullbackComp",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility"
+    ],
+    "digest": "be20bada4f5b6d80"
+   },
+   "verdict": "no match: hits are underived pushforward/restriction, scheme morphism properties or unrelated topology, not unbounded etale proper/open interchange or compact-support coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-amb-vector-bundle-purity",
   "by": "worker",
@@ -98,5 +400,134 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-amb-unbounded-compact-support-comparisons",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0F7I-L in the unbounded torsion-ring case. Reused the cofiltered compactification and compatible-tower geometry, unbounded proper base change and categorical mate pasting. Added only the local unbounded proper/open interchange lemma; proved the global comparisons and coherence by explicit refinement and tower calculations and identified all bounded-below maps on common injective representatives. The item statement is unchanged. The second reading names the proper edges in the associativity grid and expands both whiskered composites and their naturality equality.",
+  "blueprint": "Realizes thm-amb-vector-bundle-purity proof paragraph 2 (restriction of the actual affine-space counit) and unit sk-prop-an Steps 6 and 7 (iterated compact-support composition and base restriction), with the missing unbounded comparisons made explicit.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "The chosen-compactification definition fixes the ordinary unbounded functors, without assuming any independence. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "The previously fixed bounded-below compact-support exchange formula is compared with the unbounded formula. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "The unit-square-counit definition supplies the specified unbounded proper exchange and adjunctions. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "def-weil-pbc-etale-shriek-base-change-map",
+    "why": "The specified open-extension mate fixes the direction and actual map of the open factor. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "The previously fixed bounded-below comparisons are identified at the end, not used to infer the unbounded assertion. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Cofiltered compactification geometry is needed to compare choices; model-purity Steps 6 and 7 require it as a tool. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Common refining towers give the geometric diagrams for composition independence and associativity. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "The degreewise open base-change isomorphism identifies the open mate without imposing boundedness. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Open extension composition is a generic operation tool used inside every tower; it does not replace the affine-line or vector-bundle route. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Its bounded-below K-injective normalization is used only to identify the restriction of the unbounded maps. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Unbounded proper base change with a finite constant coefficient ring proves invertibility of the proper factor of exchange. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Common bounded-below K-injective representatives compare the unbounded and bounded-below maps. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The general sheaf adjunction provides the open unit and counit without a finite-type restriction. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exact open extension on ordinary module sheaves is the generic tool allowing degreewise maps on arbitrary complexes. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The full embedding of K-injectives checks equality and naturality of the resolution comparisons. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Descent and equality of exact termwise maps is a generic categorical localization tool. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "The general mate-pasting equations prove the structural proper-exchange coherence; the model-purity unit has no replacement for this category-theoretic identity. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives is the generic module-sheaf tool for common bounded-below representatives. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical unbounded composition of proper direct images is a generic derived-category tool. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "The general termwise adjunction on homotopy categories allows exact open adjunctions to descend to all derived complexes. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-module inverse image provides the unbounded pullbacks and their termwise identities. No step of sk-prop-an is replaced."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "The bounded-below exchange and its normalizations are identified as restrictions, not used for arbitrary unbounded input. No step of sk-prop-an is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "def-cbc-exchange-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-amb-etale-compact-comparisons",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-cbc-finite-torsion"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-bc85994b3",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-bc85994b3 (reviewer sub-agent of L); spot-checked: Read the item, new node, all cited statements, unit/chapter route, and Stacks Tags 0F7B/0F7C/0F7D/0F7F plus 0F7H–0F7L. Checked every proof step, hypotheses, coefficient category, base-change direction, edge cases, duplicate candidates, and route/tool use. No mathematical or structural faults found; review.md records the checks."
  }
 }
