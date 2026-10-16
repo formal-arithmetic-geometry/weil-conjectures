@@ -16,7 +16,8 @@ on top of sheaf-dag containing only:
       is a named theorem with its source, a natural-language proof in its docstring, and a DAG node);
   (4) node files dag/nodes/<chapter>/<id>.json: NEW nodes (stage-1 fields plus a `lean` record), or EXISTING nodes
       changed only in STAGE3_OWNS (lean, proof, proof_deps, proof_origin) and, for a changed statement (stage 3 §3),
-      in statement / stmt_deps / statement_change (node_fields.check_statement_change);
+      in statement / stmt_deps / statement_change (node_fields.check_statement_change); obsolete top-level
+      tool_uses entries may be pruned, but never added, replaced or reordered;
   (5) change records coord/changes/<name>.md (stage 3 §3.3) when the delivery changes what other modules see;
   (6) the report coord/reports/<G>/<module>.md (worker.md §3).
 
@@ -42,6 +43,7 @@ from node_fields import changed_fields_except, check_statement_change  # noqa: E
 ROOT = li.ROOT
 STAGE3_OWNS = ("lean", "proof", "proof_deps", "proof_origin")
 STAGE3_STATEMENT = ("statement", "stmt_deps", "statement_change")      # only with a change record (stage 3 §3)
+STAGE3_PRUNES = ("tool_uses",)                    # removal of obsolete approvals only
 OK_AXIOMS = ("propext", "Classical.choice", "Quot.sound")               # AGENTS.md §4-§5, GOAL.md
 FORBIDDEN = re.compile(r"(?<![\w.'])(?:axiom|unsafe|implemented_by|extern|opaque|sorryAx|debug\.skipKernelTC)(?![\w'])")
 SORRY = re.compile(r"(?<![\w.'])(?:sorry|admit)(?![\w'])")
@@ -74,6 +76,37 @@ run_cmd do
       unless ok.contains a do logInfo m!"SHEAF-AXIOM {c} {a}"
   logInfo m!"SHEAF-PROBED {cnt}"
 """
+
+
+def pruned_tool_uses(before: dict, after: dict) -> collections.Counter[str]:
+    """Accept only deletion from the ordered list of maintainer-approved tools."""
+    old, new = before.get("tool_uses"), after.get("tool_uses")
+    if old == new:
+        return collections.Counter()
+    old, new = ([] if old is None else old), ([] if new is None else new)
+    if not all(isinstance(xs, list) and all(isinstance(x, str) for x in xs) for xs in (old, new)):
+        raise ValueError("tool_uses may only prune existing entries from a list of node ids")
+    remaining = iter(old)
+    if any(not any(x == y for y in remaining) for x in new):
+        raise ValueError("tool_uses may only prune existing entries; additions, replacements and reordering require the maintainer")
+    return collections.Counter(old) - collections.Counter(new)
+
+
+def apply_tool_uses_pruning(current: dict, base: dict, delivered: dict) -> None:
+    """Apply only the delivery's removals; keep approvals added on the current tip."""
+    removed = pruned_tool_uses(base, delivered)
+    if not removed:
+        return
+    kept = []
+    for x in current.get("tool_uses") or []:
+        if removed[x]:
+            removed[x] -= 1
+        else:
+            kept.append(x)
+    if kept or delivered.get("tool_uses") is not None:
+        current["tool_uses"] = kept
+    else:
+        current.pop("tool_uses", None)
 
 
 def module_of_path(p: str) -> str:
@@ -383,10 +416,14 @@ def check_nodes(D, f, git, base, group, item, nodes_base):
     for nid, x in D["nodes"].items():
         d, b, p = x["node"], x["base_node"], x["path"]
         if x["role"] == "changed":
-            bad = changed_fields_except(b, d, owns=STAGE3_OWNS + STAGE3_STATEMENT)
+            bad = changed_fields_except(b, d, owns=STAGE3_OWNS + STAGE3_STATEMENT + STAGE3_PRUNES)
             if bad:
                 f("b", f"{p}: changes {', '.join(bad)} (a stage-3 delivery sets only {', '.join(STAGE3_OWNS)}, and "
-                       f"{', '.join(STAGE3_STATEMENT)} with a change record)")
+                       f"{', '.join(STAGE3_STATEMENT)} with a change record; tool_uses permits pruning only)")
+            try:
+                pruned_tool_uses(b, d)
+            except ValueError as exc:
+                f("b", f"{p}: {exc}")
             if any(b.get(k) != d.get(k) for k in STAGE3_STATEMENT):
                 citers = sorted(i for i, n in nodes_base.items()
                                 if nid in (n.get("stmt_deps") or []) or nid in (n.get("proof_deps") or []))

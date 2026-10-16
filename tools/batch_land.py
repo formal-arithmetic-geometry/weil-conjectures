@@ -482,6 +482,7 @@ def land_one(plan: dict, batch_id: str) -> dict:
                         nd[k] = x["node"][k]
                     else:
                         nd.pop(k, None)
+                s3.apply_tool_uses_pruning(nd, x["base_node"] or {}, x["node"])
             nd["reviewed_proof"] = rv
             tree.write(x["path"], md.dump(nd)); paths.append(x["path"])
         for p in plan["item_nodes"]:                             # the node(s) of the item's module
