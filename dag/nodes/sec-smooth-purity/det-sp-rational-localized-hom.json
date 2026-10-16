@@ -3,46 +3,200 @@
  "blueprint": {
   "is": "det-sp-rational-localized-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rational Hom groups from integral models",
- "statement": "Let $E/\\Ql$ be finite and $T$ a scheme. Every object of $\\Dbc(T,E)$ is\nisomorphic to $K_0[1/\\ell]$ for some $K_0\\in\\Dbc(T,\\mathcal O_E)$, and for\n$K_0,L_0\\in\\Dbc(T,\\mathcal O_E)$ and $q\\in\\mathbf Z$ the natural map\n\n$$\n\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}E\\xrightarrow{\\ \\sim\\ }\n\\Hom_{\\Dbc(T,E)}\\bigl(K_0[1/\\ell],L_0[1/\\ell][q]\\bigr)\n$$\n\nis an isomorphism. Moreover, for $f:X\\to Y$ separated of finite type,\n$f^*(K_0[1/\\ell])=(f^*K_0)[1/\\ell]$ and\n$Rf_{!}(M_0[1/\\ell])\\simeq(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]$ in $\\Dbc(Y,E)$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, $p\\ne\\ell$. Let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $\\mathcal O_E$. Work with Noetherian separated schemes of finite type over $k$, the standing setting of [sk-def-sfb-dc-setting]. For such a scheme $T$, use the coefficient sheaves $\\mathcal O_{E,T}$ and $E_T$ pulled back from the corresponding condensed topological rings, and let $\\Dbc(T,\\Lambda)$ be the full bounded constructible subcategory of $D(T_{\\mathrm{proét}},\\Lambda_T)$ for $\\Lambda=\\mathcal O_E,E$. In particular the integral category is the derived-complete constructible category, as identified by [sk-lem-integral-models]. Put $K_0[1/\\ell]=E_T\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}K_0$.\n\nEvery object of $\\Dbc(T,E)$ is isomorphic to $K_0[1/\\ell]$ for some $K_0\\in\\Dbc(T,\\mathcal O_E)$. For $K_0,L_0\\in\\Dbc(T,\\mathcal O_E)$ and $q\\in\\mathbf Z$, the natural $E$-linear map\n$$\n\\Hom_{\\Dbc(T,\\mathcal O_E)}(K_0,L_0[q])\\otimes_{\\mathcal O_E}E\\longrightarrow\n\\Hom_{\\Dbc(T,E)}(K_0[1/\\ell],L_0[1/\\ell][q]),\\qquad h\\otimes e\\longmapsto e\\,h[1/\\ell],\n$$\nis an isomorphism. Moreover, if $f:X\\to Y$ is a separated finite-type $k$-morphism between schemes of this setting, $K_0\\in\\Dbc(Y,\\mathcal O_E)$, and $M_0\\in\\Dbc(X,\\mathcal O_E)$, there are canonical natural isomorphisms\n$$\nf_E^*(K_0[1/\\ell])\\simeq(f_{\\mathcal O_E}^*K_0)[1/\\ell]\\quad\\text{in }\\Dbc(X,E),\n$$\n$$\nRf_{!,E}(M_0[1/\\ell])\\simeq(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]\\quad\\text{in }\\Dbc(Y,E),\n$$\nwhere $Rf_!$ is the ambient compactification composite $R\\bar f_*j_!$, restricted to the indicated constructible categories.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.md",
   "place": "node det-sp-rational-localized-hom, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-lem-integral-models",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "def-weil-l-adic-coefficient-extension"
+ ],
  "proof": [
   {
-   "text": "*Essential surjectivity* is the existence of integral models for rational\nconstructible complexes (Lemma on integral models, item (4), in the\nconstruction of the rational categories).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Hom groups.* $L_0[1/\\ell]$ is the colimit of\n$L_0\\xrightarrow{\\ell}L_0\\xrightarrow{\\ell}\\cdots$, and $\\Hom(K_0,-[q])$ commutes\nwith this sequential colimit (Hom out of an integral constructible complex\ncommutes with such colimits, by the Ext-continuity lemma for integral\ncoefficients). The colimit of $\\Hom(K_0,L_0[q])\\xrightarrow{\\ell}\\Hom(K_0,L_0[q])\\to\\cdots$\nis $\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}\\mathcal O_E[1/\\ell]=\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}E$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Functors.* Pullback is exact and commutes with colimits, so\n$f^*(K_0[1/\\ell])=(f^*K_0)[1/\\ell]$. For $Rf_!$, with a compactification\n$f=\\bar f\\circ j$: $Rf_{!,\\mathcal O_E}M_0=R\\bar f_*j_!M_0$ by\n[det-sp-integral-direct-image-tower]; $j_!$ commutes with colimits, and $R\\bar f_*$\ncommutes with the colimit along $\\ell$ on bounded constructible objects (bounded\ncontinuity of the direct image). Hence\n$Rf_!(M_0[1/\\ell])=R\\bar f_*j_!(\\operatorname{colim}_\\ell M_0)\\simeq\\operatorname{colim}_\\ell R\\bar f_*j_!M_0=(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]$.",
+   "text": "Write $R=\\mathcal O_{E,T}$ and $S=E_T$. The coefficient-localization node identifies $S$ with $\\operatorname{colim}(R\\xrightarrow{\\ell}R\\to\\cdots)$ and states its flatness over $R$. Consequently scalar extension is exact; the exact-functor clause of [sk-def-sfb-derived-categories] identifies $F_T=S\\otimes_R^{\\mathbf L}-$ with this termwise scalar-extension functor. Tensoring the displayed coefficient colimit with a module gives $\\operatorname{Res}F_TN=\\operatorname{colim}(N\\xrightarrow{\\ell}N\\to\\cdots)$: tensor is a left adjoint, and the tensor-over-$R$ relations are imposed by a coequalizer, so they commute with this colimit. Use the chosen small skeleton of the pro-étale site, in its larger universe. Sheaves of $R$-modules have exact filtered colimits by the ringed-site Grothendieck theorem. Applying the preceding identity degreewise therefore preserves quasi-isomorphisms, and for every complex $L$ gives $\\operatorname{Res}F_TL\\simeq\\operatorname{colim}_n(L\\xrightarrow{\\ell}L\\to\\cdots)$ in the derived category. The structure map at stage $n$ is multiplication by $\\ell^{-n}$ after the scalar-extension unit.",
    "uses": [
-    "det-sp-integral-direct-image-tower"
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-derived-categories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Hom groups: identification of localization with the sequential colimit; exactness made explicit"
+   }
+  },
+  {
+   "text": "The constructible categories are full subcategories of the ambient derived categories. Derived scalar extension is left adjoint to restriction, so\n$\\Hom_{D(S)}(F_TK_0,F_TL_0[q])=\\Hom_{D(R)}(K_0,\\operatorname{Res}F_TL_0[q])$.\nChoose a bounded-below representative of $L_0$ by truncating below its lowest nonzero cohomological degree; all copies in its $\\ell$-multiplication diagram have this same lower bound. Apply the integral Ext-continuity statement with $C=K_0$, this diagram, and the given integer $q$, and then step 1. It identifies the last group with\n$\\operatorname{colim}_n\\Hom_{D(R)}(K_0,L_0[q])$, with transition maps multiplication by $\\ell$. Under the adjunction the stage-$n$ element $h$ maps to $\\ell^{-n}F_T(h)$; thus the identification concerns the natural map in the statement, not just an abstract group isomorphism.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "det-lem-int-ext-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Hom groups: integral Ext continuity, with its common lower bound and scalar-extension adjunction supplied"
+   }
+  },
+  {
+   "text": "For any $\\mathcal O_E$-module $A$, the colimit of repeated multiplication by $\\ell$ is $A[1/\\ell]$: the class of $a$ at stage $n$ is sent to $a/\\ell^n$, and two representatives agree precisely when a further power of $\\ell$ kills their cross-multiplied difference. The valuation description of $\\mathcal O_E$ gives $E=\\mathcal O_E[1/\\ell]$: for each $x\\in E$, choose $n$ with $|\\ell|_E^n|x|_E\\le1$, so $\\ell^nx\\in\\mathcal O_E$. The maps $a/\\ell^n\\mapsto a\\otimes\\ell^{-n}$ and $a\\otimes(b/\\ell^n)\\mapsto ba/\\ell^n$ are inverse; finite sums have a common denominator and the tensor relations are exactly the fraction relations. Apply this to $A=\\Hom(K_0,L_0[q])$ and step 2. This proves the asserted isomorphism and its $E$-linearity for every $q$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Hom groups: explicit computation of the module colimit and of the natural map"
+   }
+  },
+  {
+   "text": "Now prove essential surjectivity, rather than assuming it from generation. The integral-generators node says that every rational constructible complex is built by finitely many cones and shifts from $(a_!L_0)[1/\\ell]$, and that each $a_!L_0$ is integral constructible. Shifts of integral models are integral models. For the cone step, suppose its endpoints have models $A_0,B_0$ and its arrow, after those identifications, is $u:F_TA_0\\to F_TB_0$. The Hom calculation just proved writes $u=\\ell^{-n}F_T(v)$ for a single integral arrow $v:A_0\\to B_0$ (combine finitely many tensor summands over a common denominator). The integral category is triangulated, so $C_0=\\operatorname{Cone}(v)$ is integral constructible. The cone description of the derived triangulated structure in [def-weil-abstract-derived-category] shows that exact termwise scalar extension preserves these triangles: it commutes with shifts and finite direct sums, and sends the block differential of a cone to the block differential of the image cone. Thus it sends the distinguished triangle of $v$ to a cone triangle for $F_T(v)$. Multiplication by $\\ell^{-n}$ on $F_TB_0$, with the identity on $F_TA_0$, is an isomorphism from the arrow $F_T(v)$ to $u$; TR3 in [def-weil-triangulated-category] extends these two maps to a morphism of the distinguished cone triangles. Its first two components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes its third component an isomorphism $F_TC_0\\simeq\\operatorname{Cone}(u)$. Thus induction on the finite cone-and-shift construction gives an integral model for every object. The empty construction gives the zero model. All uses of the full triangulated subcategory are on the Noetherian schemes explicitly in the statement.",
+   "uses": [
+    "det-lem-integral-models-generators",
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-derived-categories",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Essential surjectivity: expand item (4) of integral models by the Hom calculation and cone lifting"
+   }
+  },
+  {
+   "text": "Apply the coefficient-comparison isomorphism (Pull) to $\\mathcal O_E\\to E$. Its flatness hypothesis was verified in step 1; it gives $F_XLf_{\\mathcal O_E}^*\\simeq Lf_E^*F_Y$. The cartesian-coefficient statement identifies both pullbacks with the exact inverse-image functors, so the derived symbols may be omitted. Integral pullback preserves $\\Dbc$ by clause (1) of [det-lem-integral-models-operations]. Scalar extension preserves constructibility here: after the finite stratification in the constructibility definition, a finite constant local presentation tensors to the same finite presentation over $E$; exactness gives $H^i(FK)=F H^i(K)$, so boundedness is preserved too. Hence the ambient comparison restricts to the stated isomorphism in $\\Dbc(X,E)$, natural in $K_0$.",
+   "uses": [
+    "sk-def-sfb-coefficient-comparisons",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-lem-integral-models-operations",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Functors: pullback commutes with the coefficient localization"
+   }
+  },
+  {
+   "text": "Choose the compactification $f=p\\circ j$ supplied by the standing-setting node, with $p$ proper and $j$ open, and use $Rf_!=Rp_*j_!$ for both coefficient rings. Put $N_0=j_!M_0$. The integral-operations node gives $N_0\\in\\Dbc(\\overline X,\\mathcal O_E)$, and the $\\underline{\\mathcal O}_E$ direct-image preservation clause of [sk-def-sfb-dc-restricted-functors] gives $Rp_*N_0\\in\\Dbc(Y,\\mathcal O_E)$. Choose a representative of $N_0$ vanishing below some fixed $a$. Proper $p$ is quasi-compact and quasi-separated. Apply bounded direct-image continuity to the sequential diagram consisting of this representative with transition $\\ell$. For every $r$ it identifies\n$\\operatorname{colim}(H^r(Rp_*N_0)\\xrightarrow{\\ell}H^r(Rp_*N_0)\\to\\cdots)$ with $H^r(Rp_*\\operatorname{colim}_{\\ell}N_0)$. By exact filtered colimits as in step 1, this says the canonical map\n$\\operatorname{colim}_{\\ell}Rp_*N_0\\to Rp_*\\operatorname{colim}_{\\ell}N_0$\nis a quasi-isomorphism. In coefficient-change notation this is\n$F_YRp_*N_0\\xrightarrow{\\sim}Rp_*F_{\\overline X}N_0$.\nTo compare coefficient categories, the explicit isomorphism of [def-sfb-derived-comap-lower-star-iso] makes restriction of scalars commute with derived pushforward (its flatness hypothesis holds by step 1); the displayed colimit calculation is its (Push) comparison on restriction. Restriction is exact and reflects zero cohomology sheaves, so the comparison is also an isomorphism over $E_Y$.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "det-lem-integral-models-operations",
+    "sk-def-sfb-dc-restricted-functors",
+    "det-pe-bounded-continuity-direct-image",
+    "sk-def-sfb-coefficient-comparisons",
+    "def-sfb-derived-comap-lower-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Functors: compactification and bounded continuity for the proper part; replace the smooth-only tower citation"
+   }
+  },
+  {
+   "text": "The extension-by-zero coefficient comparison gives $F_{\\overline X}j_!M_0\\simeq j_!F_XM_0$, with no extra flatness or smoothness hypothesis. Compose this with step 6:\n$$\n(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]\n=F_YRp_*j_!M_0\\xrightarrow{\\sim}Rp_*F_{\\overline X}j_!M_0\n\\xrightarrow{\\sim}Rp_*j_!F_XM_0=Rf_{!,E}(M_0[1/\\ell]).\n$$\nThe integral output is constructible by step 6, and its scalar extension is bounded constructible by the local-presentation argument of step 5, so this is an isomorphism in $\\Dbc(Y,E)$. Its inverse is the orientation stated in the conclusion. These are the coefficient-comparisons node's (Shriek) maps for the chosen compactification; naturality of its (Push) and extension-by-zero maps proves the asserted naturality. No claim that an arbitrary unbounded direct image commutes with all colimits has been used.",
+   "uses": [
+    "sk-def-sfb-coefficient-comparisons",
+    "sk-def-sfb-module-derived-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+    "place": "Proof, Functors: compose the open and proper comparisons"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-integral-direct-image-tower"
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-bounded-constructible",
+  "det-lem-int-ext-continuity",
+  "def-weil-l-adic-coefficient-extension",
+  "det-lem-integral-models-generators",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "sk-def-sfb-coefficient-comparisons",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-lem-integral-models-operations",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-def-sfb-dc-restricted-functors",
+  "det-pe-bounded-continuity-direct-image",
+  "def-sfb-derived-comap-lower-star-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational-hom.proof.md",
+  "place": "All three paragraphs; expanded using existing integral generators, Ext continuity, and bounded direct-image continuity"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rational constructible pro-etale complexes admit integral models and Hom groups are obtained by inverting ell, compatible with pullback and compactly supported direct image",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale; inspected returned types: derived-category quasi-isomorphism localization, general category localization, scheme site infrastructure, or basic ell-adic cohomology only; none states the constructible coefficient comparison or all clauses of this item",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, ModuleCat",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalization|integral.model|constructible",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of Hom groups of integral constructible sheaves to rational coefficients commutes with proper direct image",
+   "results": "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Localization.Preadditive.addCommGroup, CategoryTheory.Localization.instLinearLocalization, HomologicalComplexUpToQuasiIso.homologyFunctorFactors, IsLocalization.map_mk', isIntegral_localization', AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom; inspected returned types: derived-category quasi-isomorphism localization, general category localization, scheme site infrastructure, or basic ell-adic cohomology only; none states the constructible coefficient comparison or all clauses of this item",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|pro.etale|adic.*constructible|constructible.*adic",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; inspected returned types: derived-category quasi-isomorphism localization, general category localization, scheme site infrastructure, or basic ell-adic cohomology only; none states the constructible coefficient comparison or all clauses of this item",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex of l-adic sheaves is the rationalization of an integral complex and Ext groups localize by inverting l",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; inspected returned types: derived-category quasi-isomorphism localization, general category localization, scheme site infrastructure, or basic ell-adic cohomology only; none states the constructible coefficient comparison or all clauses of this item",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -55,5 +209,29 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-rational"
+ "unit": "sk-prop-sp-rational",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-rational-localized-hom",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the arbitrary-scheme statement fails for a countable disjoint union of geometric points (unbounded denominators in rational endomorphisms). Restored the explicit standing setting of separated finite-type schemes over a field of characteristic different from ell, stated the ambient coefficient-sheaf categories, and corrected the pullback codomain. Proved Hom localization before using it to lift the finitely many cones in the integral-generator theorem. Replaced the smooth-only tower dependency by general compactification, integral extension-by-zero and proper integral direct-image statements plus bounded continuity. No new nodes.",
+  "blueprint": "The Essential surjectivity paragraph is step 4, Hom groups is steps 1–3, and Functors is steps 5–7. These realize the first proof paragraph of sk-prop-sp-rational, through integral models, integral Ext and bounded direct-image continuity. The immutable review snapshot contains dag/units/sk-prop-sp-rational.json and binds this subordinate lemma to that unit; its key adjunction statement and second proof paragraph belong to other nodes, so no unit realization fields are changed here.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact filtered colimits of sheaves of modules on the chosen small ringed site are needed to compute the localization diagram; this generic sheaf-theoretic tool does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-89d510cd6",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-89d510cd6 (reviewer sub-agent of L); spot-checked: Read all seven steps, dependency statements, cited sources, and unit/chapter route. Localization, cone descent, and coefficient comparisons check out. Corrected two off-route preservation citations using existing on-route statements and repaired stale unit-metadata reporting. Statement unchanged; no new nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }

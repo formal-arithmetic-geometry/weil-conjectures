@@ -3,46 +3,138 @@
  "blueprint": {
   "is": "sk-def-sfb-pullback-from-point-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$f^*\\circ p_Y^*\\cong p_X^*$",
- "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes. Let $f^*$ be the pullback of\nabelian pro-étale sheaves along $f$, and let\n$p_X^*=\\pi_X^*\\circ p^*$, $p_Y^*=\\pi_Y^*\\circ p^*$ be the inverse images from\nthe point ([sk-def-sfb-finite-pushforward-pullback],\n[sk-def-sfb-pullback-from-point]). Since $\\Spec\\Z$ is terminal,\n$\\pi_Y\\circ f=\\pi_X$. The natural isomorphism\n$$\nf^*\\circ p_Y^*=f^*\\pi_Y^*p^*\\ \\cong\\ (\\pi_Y\\circ f)^*p^*=\\pi_X^*p^*=p_X^*\n$$\nis $p^*$ composed with the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of\n[sk-def-sfb-finite-pushforward-pullback], followed by the identification\n$(\\pi_Y\\circ f)^*=\\pi_X^*$.\n\nIt is a monoidal natural isomorphism for the strong monoidal structures of\n$f^*\\circ p_Y^*$ and $p_X^*$ and the tensor products of\n[sk-def-sfb-sheaf-tensor].",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes. Let $f^*$ be the pullback of\nabelian pro-étale sheaves along $f$, and let\n$p_X^*=\\pi_X^*\\circ p^*$, $p_Y^*=\\pi_Y^*\\circ p^*$ be the inverse images from\nthe point ([det-pe-topos-functoriality-inverse-image],\n[sk-def-sfb-pullback-from-point]). Since $\\Spec\\Z$ is terminal,\n$\\pi_Y\\circ f=\\pi_X$. The natural isomorphism\n$$\nf^*\\circ p_Y^*=f^*\\pi_Y^*p^*\\ \\cong\\ (\\pi_Y\\circ f)^*p^*=\\pi_X^*p^*=p_X^*\n$$\nis $p^*$ composed with the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of\n[det-pe-topos-functoriality-inverse-image], followed by the identification\n$(\\pi_Y\\circ f)^*=\\pi_X^*$.\n\nIt is a monoidal natural isomorphism for the strong monoidal structures of\n$f^*\\circ p_Y^*$ and $p_X^*$ and the tensor products of\n[sk-def-sfb-sheaf-tensor].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
   "place": "node sk-def-sfb-pullback-from-point-comp, order 856"
  },
  "stmt_deps": [
+  "det-pe-topos-functoriality-inverse-image",
   "sk-def-sfb-pullback-from-point",
   "sk-def-sfb-sheaf-tensor"
  ],
  "proof": [
   {
-   "text": "The isomorphism is [def-sfb-pullback-from-point-comp-iso], and its\nmonoidality is [lem-sfb-pullback-from-point-comp-monoidal].",
+   "text": "The comparison natural isomorphism is exactly [def-sfb-pullback-from-point-comp-iso]. Its compatibility with the tensor unit and tensor comparison maps is [lem-sfb-pullback-from-point-comp-monoidal]. Therefore these two cited declarations provide the required natural isomorphism and its monoidal structure.",
    "uses": [
     "def-sfb-pullback-from-point-comp-iso",
     "lem-sfb-pullback-from-point-comp-monoidal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/sk-def-sfb-pullback-from-point-comp.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "On test objects the isomorphism is the canonical one. Under the adjunctions,\nit corresponds to an isomorphism of right adjoints\n$$\np_*\\pi_{Y*}f_*\\cong p_*\\pi_{X*}.\n$$\nAt a sheaf $G$ on $X_{\\mathrm{proét}}$ and a profinite set $S$, this is the\nmap\n$$\nG\\bigl(Y[S]\\times_YX\\bigr)\\cong G(X[S])\n$$\ninduced by the canonical isomorphism $X\\times_YY[S]\\cong X[S]$ of iterated\nfibre products.",
-   "uses": [],
-   "elementary": null
+   "text": "Using [def-sfb-finite-lower-star-comp] with $h_1=f$ and $h_2=\\pi_Y$, the right-adjoint composition identifies $p_*\\pi_{Y*}f_*$ with $p_* (\\pi_Y\\circ f)_*$, and the terminal identification $\\pi_Y\\circ f=\\pi_X$ gives $p_*\\pi_{X*}$. The right-adjoint description in [sk-def-sfb-pullback-from-point] then evaluates this comparison at a sheaf $G$ on $X$ and a profinite set $S$ as $G(Y[S]\\times_Y X)\\cong G(X[S])$, induced by the canonical iterated-fibre-product identification $X\\times_Y Y[S]\\cong X[S]$.",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/sk-def-sfb-pullback-from-point-comp.proof.md",
+    "place": "second paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-finite-lower-star-comp",
   "def-sfb-pullback-from-point-comp-iso",
-  "lem-sfb-pullback-from-point-comp-monoidal"
+  "lem-sfb-pullback-from-point-comp-monoidal",
+  "sk-def-sfb-pullback-from-point"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/sk-def-sfb-pullback-from-point-comp.proof.md",
+  "place": "Both proof paragraphs; the test-object calculation uses the explicit pushforward composition and point right-adjoint statements."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism pullback of pro-etale sheaves along a scheme morphism composed with inverse image from the point",
+   "results": "Hits included TopCat.Sheaf.pullbackIso; AlgebraicGeometry.Scheme.Modules.pullbackComp; no declaration for the pro-etale point-pullback comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.comp upperStar composition isomorphism pullback, CategoryTheory.Functor",
+   "results": "0 hits; service reported Unknown identifier `upperStar`.",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFromPointComp|isMonoidal_upperStarFromPointComp|sheaf.*pullback.*composition [Mathlib]",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical natural isomorphism f inverse image composed with pullback from point equals pullback from point over X",
+   "results": "Hits included CategoryTheory.Limits.CategoricalPullback.* and TopCat.Presheaf.stalkPullbackHom; no exact pro-etale declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.comp, Scheme.Modules.pullbackComp",
+   "results": "0 hits; service reported unknown identifier `Scheme.Modules.pullbackComp`.",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition isomorphism for inverse image functors of morphisms of schemes and monoidal compatibility",
+   "results": "Hits included AlgebraicGeometry.Scheme.Modules.pullbackComp and related open-immersion/module pullback declarations; no pro-etale point-pullback comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|upperStarComp|isMonoidal_upperStarComp [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition isomorphism pullback inverse image along composable scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst, AlgebraicGeometry.Scheme.Pullback.t'.",
+   "date": "2026-10-16",
+   "verdict": "generic module pullback or continuous-site pushforward declarations; no complete match for the pro-étale point-pullback construction and monoidality"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFromPoint|pointUpperStar|sheafPushforwardContinuousComp",
+   "results": "10 hits: Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean.",
+   "date": "2026-10-16",
+   "verdict": "generic module pullback or continuous-site pushforward declarations; no complete match for the pro-étale point-pullback construction and monoidality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "results": "OK: 0 hits; no unknown-identifier error.",
+   "date": "2026-10-16",
+   "verdict": "no match for this combined pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFromPointComp|pullbackComp|sheafPushforwardContinuousComp",
+   "results": "25 displayed hits in CategoryTheory/Sites, including Grothendieck.lean:536,675 (cover pullbacks), Over.lean:456,459 (over-site pullbacks), Point/Map.lean:148 and CoverLifting.lean:326,334,352,369 (generic continuous-site pushforward references). Also read Continuous.lean:383-429 for the generic composition declarations.",
+   "date": "2026-10-16",
+   "verdict": "no complete match: the generic continuous-site pushforward construction does not supply this concrete pro-etale point comparison and its monoidality"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +159,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point-comp"
+ "unit": "sk-def-sfb-pullback-from-point-comp",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-pullback-from-point-comp",
+  "worker": "stage1",
+  "summary": "Reused the existing comparison-isomorphism and monoidality nodes. The missing aggregate blueprint reference is represented by det-pe-topos-functoriality-inverse-image, clause 5. The test-object paragraph explicitly cites pushforward composition and the point right-adjoint formula; no new nodes.",
+  "blueprint": "Step 1 realizes the proof paragraph identifying the isomorphism with def-sfb-pullback-from-point-comp-iso and its monoidality with lem-sfb-pullback-from-point-comp-monoidal. Step 2 realizes the remainder of the proof paragraph: the right-adjoint calculation on G and S via X times_Y Y[S] congruent to X[S]."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-6742c9566",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-6742c9566 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited nodes and sources. The statement, inverse comparison direction, abelian coefficient category, monoidal conclusion, proof steps, dependencies, edge cases, searches, and route all check out. No new nodes or repairs are required; review.md records the detailed checks."
+ }
 }
