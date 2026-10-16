@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-adjoint-mate",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Mates along an isomorphism of left adjoints",
@@ -15,30 +15,105 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "In the framework of [rem-trf-classical-framework], for every\n$x\\in\\mathcal C_1$, $y\\in\\mathcal C_2$, the adjunctions give\nnatural bijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}(x,G_1y)\n&\\simeq\\operatorname{Hom}(F_1x,y)\\\\\n&\\xrightarrow{\\ h\\mapsto h\\circ\\alpha_x^{-1}\\ }\n\\operatorname{Hom}(F_2x,y)\n\\simeq\\operatorname{Hom}(x,G_2y).\n\\end{aligned}\n$$\n\nYoneda gives a unique natural isomorphism $\\beta:G_1\\to G_2$.\nApplying the bijection to $x=G_1y$ and\n$\\operatorname{id}_{G_1y}$ gives exactly the formula for $\\beta_y$\nin (1). Replacing $\\alpha^{-1}$ with $\\alpha$ in the reversed\nbijection gives the displayed formula for $\\beta^{-1}$; these maps\nare inverse because the two Hom-bijections are inverse.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the generic conjugation construction of [def-weil-pbc-adjunction-conjugate] to the two adjunctions with $L_1=F_1$, $R_1=G_1$, $L_2=F_2$, $R_2=G_2$ and the transformation $\\tau=\\alpha^{-1}:F_2\\to F_1$. Its component formula is exactly $G_1\\xrightarrow{\\eta_2G_1}G_2F_2G_1\\xrightarrow{G_2\\alpha^{-1}G_1}G_2F_1G_1\\xrightarrow{G_2\\varepsilon_1}G_2$, so it defines $\\beta:G_1\\to G_2$. The same construction for $\\alpha:F_1\\to F_2$ gives the displayed $\\beta^{-1}$; the bijection and inverse clauses of the cited statement show that these are inverse, and its isomorphism clause shows that $\\beta$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+    "place": "Proof, first paragraph: Hom-bijection construction and the two displayed mate formulas"
+   }
   },
   {
-   "text": "The unit $\\eta_{1,x}$ corresponds to\n$\\operatorname{id}_{F_1x}$. The displayed bijection sends it to the\nadjoint of $\\alpha_x^{-1}:F_2x\\to F_1x$, namely\n$G_2(\\alpha_x^{-1})\\eta_{2,x}$.\nConsequently $\\beta_{F_1x}\\eta_{1,x} =G_2(\\alpha_x^{-1})\\eta_{2,x}$, which proves the unit formula.\nThe counit corresponds to the identity of $G_1y$. Hence\n$\\beta_y$ is adjoint to\n$\\varepsilon_{1,y}\\alpha_{G_1y}^{-1}$, giving\n\n$$\n\\varepsilon_{2,y}F_2(\\beta_y)\n=\\varepsilon_{1,y}\\alpha_{G_1y}^{-1}.\n$$",
+   "text": "For the unit, expand the component of $\\beta$ from Step 1 and compose it on the left with $\\eta_1$. Naturality of $\\eta_2$ and then of $\\alpha^{-1}$ moves the two units through the first two factors; the triangle identity for $(F_1,G_1)$ cancels $G_2(\\varepsilon_1F_1)$ with $G_2(F_1\\eta_1)$, giving $\\eta_1\\,;\\,\\beta F_1=G_2(\\alpha^{-1})\\,;\\,\\eta_2$. Naturality of $\\alpha$ rewrites this as $G_2(\\alpha)\\,;\\,\\beta F_1\\,;\\,\\eta_1=\\eta_2$, the first compatibility identity. For the inverse, expand $\\beta^{-1}=G_1(\\varepsilon_2);G_1(\\alpha);\\eta_1G_2$, use naturality of $\\eta_1$ and $\\alpha$, and cancel with the triangle identity for $(F_2,G_2)$; this gives $G_1(\\alpha^{-1});\\beta^{-1}F_2;\\eta_2=\\eta_1$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+    "place": "Proof, second paragraph: unit compatibility"
+   }
   },
   {
-   "text": "Precompose with $\\alpha_{G_1y}$ and use naturality of $\\alpha$ to\nobtain\n$\\varepsilon_{2,y}\\alpha_{G_2y}F_1(\\beta_y)=\\varepsilon_{1,y}$,\nthe counit formula of (2). The reversed bijections give the analogous\nidentities for the inverse. Finally, either adjunction compatibility\nforces the displayed Hom-bijection, so Yoneda proves uniqueness.",
+   "text": "For the counit, expand $\\beta=G_2(\\varepsilon_1);G_2(\\alpha^{-1});\\eta_2G_1$. Naturality of $\\alpha^{-1}$ moves $F_2\\beta$ past $\\alpha^{-1}G_1$, and the triangle identity for $(F_2,G_2)$ then gives $\\varepsilon_2;F_2\\beta=\\varepsilon_1;\\alpha^{-1}$. Postcompose with $\\alpha$ at $G_1(-)$ and use naturality of $\\alpha$ for $\\beta$ to obtain $\\varepsilon_2;\\alpha G_2;F_1\\beta=\\varepsilon_1$. For the inverse, expand $\\beta^{-1}=G_1(\\varepsilon_2);G_1(\\alpha);\\eta_1G_2$; naturality of $\\alpha$ and the triangle identity for $(F_1,G_1)$ give $\\varepsilon_1;\\alpha^{-1}G_1;F_2\\beta^{-1}=\\varepsilon_2$. These are the two counit identities.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+    "place": "Proof, second paragraph: counit compatibility and reversed identities"
+   }
+  },
+  {
+   "text": "Let $\\beta':G_1\\to G_2$ satisfy the stated unit compatibility (the additional counit compatibility is not needed). By the unit identity already proved for $\\beta$, for every $c\\in\\mathcal C_1$ we have $\\eta_{1,c};\\beta'_{F_1c}=\\eta_{1,c};\\beta_{F_1c}$. For any $d\\in\\mathcal C_2$, naturality of $\\beta'$ and the triangle identity for $(F_1,G_1)$ give $\\beta'_d=G_2(\\varepsilon_{1,d});\\beta'_{F_1G_1d};\\eta_{1,G_1d}$, and the identical expansion gives $\\beta_d=G_2(\\varepsilon_{1,d});\\beta_{F_1G_1d};\\eta_{1,G_1d}$. The equality at $c=G_1d$ therefore implies $\\beta'_d=\\beta_d$ for every $d$, so $\\beta'=\\beta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
+    "place": "Proof, third paragraph: uniqueness by the adjunction bijection/Yoneda"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-adjoint-mate.md",
-  "place": "## Proof"
+  "place": "## Proof, all three paragraphs; generic conjugation is supplied by def-weil-pbc-adjunction-conjugate"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mates along an isomorphism of left adjoints with explicit formula and unit counit compatibility",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateEquiv_counit; CategoryTheory.unit_conjugateEquiv; CategoryTheory.conjugateEquiv_iso",
+   "date": "2026-10-16",
+   "verdict": "match: the general conjugation equivalence and its component/compatibility lemmas cover all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv_apply_hom",
+   "results": "CategoryTheory.conjugateIsoEquiv_apply_hom in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-16",
+   "verdict": "match: explicit component formula for the induced right-adjoint isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv_apply_hom|conjugateIsoEquiv_apply_inv|conjugateEquiv_counit|unit_conjugateEquiv [Mathlib/CategoryTheory/Adjunction]",
+   "results": "The wrapper returned no parsed hits for this anchored pattern; the source was read directly at Mathlib/CategoryTheory/Adjunction/Mates.lean:285-315 and :425-435, where conjugateEquiv_counit, unit_conjugateEquiv, conjugateIsoEquiv and generated apply_hom/apply_inv declarations are defined.",
+   "date": "2026-10-16",
+   "verdict": "match after direct source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism between right adjoints induced by an isomorphism between left adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural isomorphism of left adjoints induces a unique natural isomorphism of right adjoints with explicit unit and counit formulas",
+   "results": "CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-16",
+   "verdict": "related matches; conjugateIsoEquiv supplies the explicit formulas and compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_counit",
+   "results": "CategoryTheory.conjugateEquiv_counit in Mathlib.CategoryTheory.Adjunction.Mates",
+   "date": "2026-10-16",
+   "verdict": "match: counit compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|unit_conjugateEquiv|conjugateEquiv_counit Mathlib/CategoryTheory/Adjunction",
+   "results": "No parsed hits from the search wrapper; direct source inspection found Mathlib/CategoryTheory/Adjunction/Mates.lean declarations at lines 285, 300, 425 and generated apply lemmas.",
+   "date": "2026-10-16",
+   "verdict": "match after direct source inspection"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark"
@@ -62,5 +137,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil"
+ "unit": "sk-d-weil",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-trf-adjoint-mate",
+  "worker": "stage1",
+  "summary": "The imported Mathlib-leaf claim was repaired to an explicit four-step split. The existing generic conjugation node supplies the mate construction, inverse and invertibility; the steps spell out both unit identities, both counit identities, and the objectwise uniqueness calculation.",
+  "blueprint": "The blueprint proof's Hom-bijection/Yoneda construction is exactly the construction encoded by Mathlib's conjugateEquiv and conjugateIsoEquiv; the explicit formulas and compatibility clauses are the corresponding Mathlib component lemmas.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Step 1 uses the generic mate/conjugation equivalence as a black-box categorical tool; the sk-d-weil route has no node supplying this general adjunction calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-61ed1109d",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-61ed1109d (reviewer sub-agent of L); spot-checked: The mate construction and four proof steps are mathematically sound, with hypotheses and edge cases checked. Step 1 cites the cross-unit node def-weil-pbc-adjunction-conjugate but split_report.tool_uses was empty; I added the required declaration in fixes/dag/nodes/sec-trace-formula/lem-trf-adjoint-mate.json. The delivery report also incorrectly calls the item a Mathlib leaf despite the JSON being split with four proof steps; correct that report inconsistency before merge.; 1 file(s) fixed by the reviewer"
+ }
 }
