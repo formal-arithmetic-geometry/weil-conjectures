@@ -3,56 +3,176 @@
  "blueprint": {
   "is": "det-proper-image-localizing-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero on the localizing categories",
- "statement": "Let $\\Lambda$ be admissible and $j\\colon U\\to X$ an open immersion. Then $j_!$ maps $\\Dctf(U,\\Lambda)$ into\n$\\Dctf(X,\\Lambda)$, preserves direct sums, and restricts to an exact, sum-preserving functor\n$\\Loc(\\Dctf(U,\\Lambda))\\to\\Loc(\\Dctf(X,\\Lambda))$.",
+ "statement": "Work in the standing scheme setting of [sk-def-sfb-dc-setting]: fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and let $j\\colon U\\hookrightarrow X$ be an open immersion of separated finite-type $k$-schemes. Let $\\Lambda$ be an admissible coefficient ring of [sk-def-localizing-closure]: a finite commutative ring killed by a power of $\\ell$, or one of $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, where $E/\\mathbf Q_\\ell$ is finite inside a fixed algebraic closure and $\\mathcal O_E$ is its valuation ring. Regard these as condensed rings with their indicated topologies. Use the ordinary unbounded module-object derived categories $D(\\Mod_{\\Lambda_T})$, where $\\Lambda_T=p_T^*\\Lambda$, and the bounded constructible finite-Tor subcategories $\\Dctf(T,\\Lambda)$ of [sk-def-sfb-constructible], for $T=U,X$.\nThen extension by zero $j_!=D(j_!)$ maps $\\Dctf(U,\\Lambda)$ into $\\Dctf(X,\\Lambda)$, preserves all small direct sums on the ambient derived categories, and restricts to an exact, sum-preserving functor\n$$\n\\Loc(\\Dctf(U,\\Lambda))\\longrightarrow\\Loc(\\Dctf(X,\\Lambda)).\n$$\nThe localizing closures and their direct sums are taken in the ordinary ambient derived categories as in [sk-def-localizing-closure].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
   "place": "node det-proper-image-localizing-open, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-lower-shriek"
+ ],
  "proof": [
   {
-   "text": "*Formal properties.* $j_!$ on sheaves is exact, so it is computed termwise on complexes and is an exact\nfunctor of triangulated categories. It is left adjoint to $j^*$, hence preserves all direct sums.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Constructibility.* If $K\\in\\Dbc(U,\\Lambda)$ has cohomology sheaves locally constant on the strata of a\nfinite stratification of $U$, then $\\mathcal H^n(j_!K)=j_!\\mathcal H^n(K)$ (exactness) is locally constant on the\nsame strata, viewed in $X$, and zero on the added closed stratum $X\\setminus U$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Finite Tor amplitude.* For finite $A$: [lem-trf-open-ctf] (stalkwise, extension by zero does not change\nthe Tor amplitude). For $\\mathcal O_E$, $E$ and $\\Qlb$: $\\Dctf=\\Dbc$, and preservation of $\\Dbc$ is the\nextension-by-zero part of [sk-def-sfb-dc-restricted-functors] (via the local models of constructible\nsheaves).",
+   "text": "For any of the stated coefficient rings, [sk-def-sfb-module-lower-shriek] states that the module-object functor $j_!$ is exact and left adjoint to $j^*$. Apply [lem-sf-exact-functor-derived-triangulated] to this additive exact functor. It gives the ambient triangulated functor $J=D(j_!)$ on the unbounded derived categories. Exactness also gives, directly on a complex representative,\n$$H^r(JK)=\\ker(j_!d^r)/\\operatorname{im}(j_!d^{r-1})\\cong j_!(\\ker d^r/\\operatorname{im}d^{r-1})=j_!H^r(K).$$\nIndeed $j_!$ preserves the kernels and cokernels defining the image and its quotient. Thus $J$ preserves any cohomological vanishing interval; this calculation applies even when $K$ is unbounded.",
    "uses": [
-    "lem-trf-open-ctf",
-    "sk-def-sfb-dc-restricted-functors"
+    "sk-def-sfb-module-lower-shriek",
+    "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; blueprint Formal properties paragraph"
+   }
   },
   {
-   "text": "*Localizing categories.* Apply [det-proper-image-localizing-principle] with $F=j_!$, $\\mathcal G=\\Dctf(U,\\Lambda)$,\n$\\mathcal G'=\\Dctf(X,\\Lambda)$.",
+   "text": "By [sk-def-sfb-sheaf-tensor] with $\\mathcal A=\\Ab$, abelian sheafification exists and is strong symmetric monoidal. Thus its local equivalences are monoidal: if $a(f)$ is invertible then $a(f\\otimes P)\\cong a(f)\\otimes a(P)$ is invertible for every presheaf $P$. The ring object $\\Lambda_T$ in abelian sheaves is a sheaf of rings, and its internal module objects identify with sectionwise module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Apply [lem-weil-pbc-ring-sheaves-grothendieck] on a small model of $T_{\\mathrm{pro\\acute et}}$, in the fixed sheaf-value universe, for $T=U,X$. For each internal module category, let $E_T$ be this equivalence to sectionwise modules. A colimit is obtained by applying a quasi-inverse of $E_T$ to the colimit of the image diagram: the equivalence of Hom sets verifies its universal property. Kernels and cokernels are identified by those same universal properties, so exactness of filtered colimits is inherited. A quasi-inverse image of a generator is a generator, since the fully faithful $E_T$ detects distinct maps. Thus both internal module categories are Grothendieck abelian. By [lem-kun-grothendieck-derived-coproducts], both ambient derived categories have all small coproducts, computed by termwise coproducts of arbitrary representatives. The sheaf-level adjunction $j_!\\dashv j^*$ of [sk-def-sfb-module-lower-shriek] and [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the small discrete indexing category $I$, give\n$$j_!\\Bigl(\\bigoplus_{s\\in I}K_s^r\\Bigr)\\cong\\bigoplus_{s\\in I}j_!K_s^r.$$\nWrite $\\iota_s^r$ for the degree-$r$ coprojections. The comparison identifies the target coprojection with $j_!\\iota_s^r$, and functoriality gives $(j_!d^r)(j_!\\iota_s^r)=(j_!\\iota_s^{r+1})(j_!d_s^r)$. Equality on every coprojection proves compatibility with the differentials. Thus the comparisons give an isomorphism of complexes and hence $J(\\bigoplus_sK_s)\\cong\\bigoplus_sJ(K_s)$ in the derived category. For $I=\\varnothing$, both coproduct complexes are zero and the exact additive $j_!$ sends zero to zero, so this comparison is also invertible. No boundedness or constructibility assumption is imposed on this family.",
    "uses": [
-    "det-proper-image-localizing-principle"
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 07D9 (lemma-derived-products), together with categories.tex Tag 0038 (lemma-adjoint-exact); blueprint Formal properties paragraph"
+   }
+  },
+  {
+   "text": "Let $K\\in\\Dctf(U,\\Lambda)$. By [sk-def-sfb-constructible] it is bounded constructible in the module-object sense. Apply [lem-sfb-dc-open-lower-shriek-preserves] to $j$ and $\\Lambda$. Its scheme hypothesis is exactly our standing separated finite-type setting, and it allows every commutative condensed ring, hence each of the admissible rings here. It concludes that the same levelwise object $JK$ is bounded constructible on $X$. Thus this use is the extension-by-zero preservation theorem already available in the restricted-functor package, with no passage to a different coefficient category.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-dc-open-lower-shriek-preserves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+    "place": "entire proof (extension of a constructible stratification by the reduced closed complement); blueprint Constructibility paragraph"
+   }
+  },
+  {
+   "text": "Choose a Tor interval $[a,b]$ for $K$, meaning that $H^r(K\\otimes^L_{\\Lambda_U}N)=0$ for $r\\notin[a,b]$ for every module sheaf $N$ on $U$, as in [sk-def-sfb-constructible]. Let $M$ be any module sheaf on $X$, placed in degree zero. By [sk-prop-sfb-cartesian-coefficients], $j^*$ is the exact inverse image, so its derived functor sends $M[0]$ to $(j^*M)[0]$. Specialize [det-lem-int-tensor-projection] to the locally closed immersion with open part $u=j$ and closed part $i=\\operatorname{id}_X$ (thus $\\overline S=X$). The identity direct and inverse images are identity functors, giving\n$$(JK)\\otimes^L_{\\Lambda_X}M\\cong j_!(K\\otimes^L_{\\Lambda_U}j^*M).$$\nThe Tor hypothesis applies to the sheaf $j^*M$. The exactness calculation in step 1 therefore identifies the degree $r$ cohomology on the right with $j_!H^r(K\\otimes^L j^*M)$, which is zero outside $[a,b]$. Since $M$ was arbitrary, this is precisely finite Tor amplitude for $JK$. Together with step 3 it gives $JK\\in\\Dctf(X,\\Lambda)$. This uniform calculation covers finite, integral and field coefficients, and requires neither a geometric-stalk conservativity assertion nor an equality $\\Dctf=\\Dbc$ at an integral stage.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-lem-int-tensor-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version and open immersion case; blueprint Finite Tor amplitude paragraph, replacing its unsupported integral equality"
+   }
+  },
+  {
+   "text": "Apply [det-proper-image-localizing-principle] with $\\mathcal T=D(\\Mod_{\\Lambda_U})$, $\\mathcal T'=D(\\Mod_{\\Lambda_X})$, $F=J$, $\\mathcal G=\\Dctf(U,\\Lambda)$ and $\\mathcal G'=\\Dctf(X,\\Lambda)$. The ambient categories have all small direct sums by step 2; $J$ is triangulated by step 1 and preserves those sums by step 2. Step 4 gives $J(\\mathcal G)\\subseteq\\mathcal G'\\subseteq\\Loc(\\mathcal G')$, where the second inclusion is part of the definition [sk-def-localizing-closure]. All hypotheses of the cited principle hold. Its conclusion gives the required restricted functor and says that it is exact and preserves direct sums; these are the ambient sums, since both localizing closures are full triangulated subcategories closed under them.",
+   "uses": [
+    "det-proper-image-localizing-principle",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Localizing categories paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "lem-trf-open-ctf",
-  "sk-def-sfb-dc-restricted-functors",
-  "det-proper-image-localizing-principle"
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sf-exact-functor-derived-triangulated",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "sk-def-sfb-constructible",
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-lem-int-tensor-projection",
+  "det-proper-image-localizing-principle",
+  "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+  "place": "four proof paragraphs, with the module-object projection-formula argument for finite Tor amplitude"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek|LocalizingSubcategory",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: LocalizingSubcategory is Verdier localization, not a sheaf extension-by-zero preservation theorem; the CategoryTheory query has no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of constructible sheaves preserves finite Tor amplitude",
+   "results": "ContMDiff.extend_zero, HasCompactSupport.extend_zero, CategoryTheory.ShortComplex.hasRightHomology_of_preserves, HomologicalComplex.extendMap_zero, FractionalIdeal.extended_zero, CategoryTheory.Abelian.Ext.mk₀_zero, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.Abelian.Ext.zero_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: smooth functions extended by zero, support, and generic homology lemmas, not derived constructible sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no extensionByZero declaration; the sheaf/colimit query returns presheaf and sheafification colimit functors, not the statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves finite Tor constructible complexes and all coproducts in the derived category",
+   "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.TStructure.t, DerivedCategory.IsGE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Condensed.instAB5CondensedMod, CategoryTheory.Functor.isHomological_of_localization, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-16",
+   "verdict": "no match: exact-functor derived constructions, t-structures and condensed AB properties, not constructible extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion of schemes induces an exact extension by zero functor on derived sheaves preserving coproducts and constructibility",
+   "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat",
+   "date": "2026-10-16",
+   "verdict": "no match: structure-sheaf restriction and pushforward on the Zariski site, not pro-etale extension by zero or finite Tor constructibility"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|extension.by.zero",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: LocalizingSubcategory is Verdier localization, not a sheaf extension-by-zero preservation theorem; the CategoryTheory query has no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"PreservesColimits\"",
+   "results": "CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension, CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.evaluation_preservesColimitsOfSize",
+   "date": "2026-10-16",
+   "verdict": "no match: no extensionByZero declaration; the sheaf/colimit query returns presheaf and sheafification colimit functors, not the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|extend.?by.?zero|lower.?shriek|constructibleTor",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no CategoryTheory extension-by-zero, lower-shriek, or constructible-Tor theorem matched"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules, extension by zero along an open embedding preserves constructible complexes of finite Tor dimension",
+   "results": "SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, ComplexShape.Embedding.extendFunctor_obj, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.map_isStrictlySupported, HomologicalComplex.isZero_extend_X, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern local finite presentation of module sheaves and extension of complex shapes, not preservation of constructibility and Tor amplitude by an open immersion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -67,5 +187,69 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
- "unit": "sk-lem-sf-open-ctf"
+ "unit": "sk-lem-sf-open-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-image-localizing-open",
+  "worker": "stage1",
+  "summary": "Made the source standing scheme setting and ordinary module-object categories explicit; supplied exactness, arbitrary derived coproducts, bounded constructibility and a uniform Tor-interval proof from existing nodes. No new nodes. Recorded the omitted-setting issue and the unsupported integral equality in the report.",
+  "blueprint": "Steps 1-2 realize Formal properties; step 3 realizes Constructibility using the theorem beneath the cited restricted-functor package; step 4 realizes Finite Tor amplitude uniformly by its open tensor argument; step 5 realizes Localizing categories. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Derives the exact additive sheaf functor as a triangulated functor; this general categorical construction is not a separate result of this unit."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Identifies internal module objects with ring-sheaf modules for applying the general Grothendieck theorem; no new operation or route is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Supplies Grothendieck abelianness for the two ringed-site module categories; the unit has no such general existence theorem."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Computes arbitrary coproducts in the unbounded derived categories termwise; this general derived-category tool is not a constructibility result."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Turns the existing sheaf-level open adjunction into preservation of all small coproducts; this is a generic categorical tool."
+   },
+   {
+    "node": "lem-sfb-dc-open-lower-shriek-preserves",
+    "why": "The extension-by-zero preservation theorem underlying the restricted-functor package explicitly used by the blueprint proof; it treats all condensed coefficient rings."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies the coefficient pullback with exact inverse image for the Tor test sheaf; it is a generic coefficient-compatibility tool."
+   },
+   {
+    "node": "det-lem-int-tensor-projection",
+    "why": "The general module-object locally closed projection formula, specialized to an open immersion, proves the Tor interval without assuming the unsupported integral equality."
+   },
+   {
+    "node": "det-proper-image-localizing-principle",
+    "why": "The exact sum-preserving functor criterion for localizing closures is the final formal argument explicitly required by the blueprint proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-lem-int-tensor-projection",
+  "det-proper-image-localizing-principle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-ea02dce06",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-ea02dce06 (reviewer sub-agent of L); spot-checked: Reviewed the repaired statement and all five proof steps against the current blueprint, cited DAG statements, Stacks locations, unit route, hypotheses, coefficient categories, base-change specialization, edge cases, duplicate searches, and delivery-error criteria. No new nodes or repairs are needed."
+ }
 }

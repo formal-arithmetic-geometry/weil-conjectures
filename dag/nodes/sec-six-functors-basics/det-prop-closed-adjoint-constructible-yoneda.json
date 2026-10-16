@@ -3,42 +3,317 @@
  "blueprint": {
   "is": "det-prop-closed-adjoint-constructible-yoneda",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Identification of $i^!$ with sections with support",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $i:Z\\hookrightarrow X$ a closed immersion and $i^!$\nthe right adjoint of $Ri_!=i_*$ on the localizing categories\n$\\Loc(\\Dbc(-,\\Lambda))$ ([sk-prop-sf-existence]). For $K\\in\\Dbc(X,\\Lambda)$\nthere is an isomorphism $i^!K\\simeq R\\underline\\Gamma_ZK$ in\n$\\Loc(\\Dbc(Z,\\Lambda))$, natural in $K$ and compatible with the counits\n$i_*i^!K\\to K$ and $i_*R\\underline\\Gamma_ZK\\to K$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Z$ be separated finite-type $k$-schemes in the standing setting [sk-def-sfb-dc-setting], and let $i:Z\\hookrightarrow X$ be a closed immersion of $k$-schemes [def-weil-closed-immersion]. Let $E/\\mathbf Q_\\ell$ be finite inside a fixed algebraic closure $\\Qlb$, and let $\\Lambda=E$ or $\\Qlb$, with the pulled-back condensed module-object coefficients and bounded constructible categories $\\Dbc(-,\\Lambda)$ of [sk-def-sfb-constructible]. Write $\\mathcal C_T=\\Loc(\\Dbc(T,\\Lambda))$ for the full localizing subcategory of the ambient unbounded category $D(T_{\\mathrm{proét}},\\Lambda)$, as in [sk-def-localizing-closure]; here $\\Dbc=\\Dctf$ by [sk-lem-coefficient-heart]. Let $i^!:\\mathcal C_X\\to\\mathcal C_Z$ be the right adjoint of $Ri_!=i_*$ on these localizing categories [sk-prop-sf-existence], with the closed-immersion normalization $Ri_!=i_*$ understood as part of this adjunction. Let $R\\underline\\Gamma_Z$ be the derived sections-with-support functor of [sk-lem-formal-closed-support]. For every $K\\in\\Dbc(X,\\Lambda)$ there is an isomorphism\n$$i^!K\\simeq R\\underline\\Gamma_ZK$$\nin $\\mathcal C_Z$, natural in $K$ and compatible with the counits $i_*i^!K\\to K$ and $i_*R\\underline\\Gamma_ZK\\to K$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md",
   "place": "node det-prop-closed-adjoint-constructible-yoneda, order None"
  },
  "stmt_deps": [
-  "sk-prop-sf-existence"
- ],
- "proof": [
-  {
-   "text": "By [det-prop-closed-adjoint-constructible-support],\n$R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\Lambda)\\subset\\Loc(\\Dbc(Z,\\Lambda))$. For a\nclosed immersion the trivial compactification gives $Ri_!=i_*$ on the\nlocalizing categories, so for every $A\\in\\Loc(\\Dbc(Z,\\Lambda))$ the adjunction\nof [sk-prop-sf-existence] gives a bijection, natural in $A$ and $K$,\n$\\Hom(A,i^!K)\\simeq\\Hom(i_*A,K)$, induced by the counit. The adjunction\n$i_*\\dashv R\\underline\\Gamma_Z$ of [sk-lem-formal-closed-support](1) gives a\nbijection $\\Hom(A,R\\underline\\Gamma_ZK)\\simeq\\Hom(i_*A,K)$, also induced by\nthe counit, with Hom groups in $D(Z_{\\mathrm{proét}},\\Lambda)$ and\n$D(X_{\\mathrm{proét}},\\Lambda)$. The categories $\\Loc(\\Dbc(-,\\Lambda))$ are\nfull subcategories of these, so both bijections are between the same groups.\nThus $i^!K$ and $R\\underline\\Gamma_ZK$ represent the same functor on\n$\\Loc(\\Dbc(Z,\\Lambda))$, and the Yoneda lemma gives a unique isomorphism\n$i^!K\\simeq R\\underline\\Gamma_ZK$ compatible with the counits; uniqueness\nmakes it natural in $K$. In particular $i^!K\\in\\Dbc(Z,\\Lambda)$.",
-   "uses": [
-    "det-prop-closed-adjoint-constructible-support",
-    "sk-prop-sf-existence",
-    "sk-lem-formal-closed-support"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "det-prop-closed-adjoint-constructible-support",
+  "sk-def-sfb-dc-setting",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-lem-coefficient-heart",
   "sk-prop-sf-existence",
   "sk-lem-formal-closed-support"
  ],
+ "proof": [
+  {
+   "text": "Put $H_K=i^!K$ and $S_K=R\\underline\\Gamma_ZK$. The field-coefficient equality $\\Dctf=\\Dbc$ in [sk-lem-coefficient-heart] identifies the localizing categories in the statement with those in [sk-prop-sf-existence]. The generating-subcategory containment in [sk-def-localizing-closure] gives $K\\in\\mathcal C_X$, so the adjoint is defined on $K$ and $H_K\\in\\mathcal C_Z$. By [det-prop-closed-adjoint-constructible-support], $S_K\\in\\Dbc(Z,\\Lambda)$, hence $S_K\\in\\mathcal C_Z$. By [sk-def-localizing-closure], the categories $\\mathcal C_Z,\\mathcal C_X$ are full subcategories of the ambient unbounded module-object derived categories. In particular all the Hom sets involving their objects below are the ambient Hom sets.",
+   "uses": [
+    "sk-lem-coefficient-heart",
+    "sk-prop-sf-existence",
+    "det-prop-closed-adjoint-constructible-support",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
+    "place": "First sentence and the sentence identifying the full localizing subcategories."
+   }
+  },
+  {
+   "text": "For $A\\in\\mathcal C_Z$, use the stipulated adjunction $i_*\\dashv i^!$ of [sk-prop-sf-existence] and the ambient adjunction $i_*\\dashv R\\underline\\Gamma_Z$ of [sk-lem-formal-closed-support](1). With their counits denoted by $\\varepsilon^!_K$ and $\\varepsilon^S_K$, respectively, these give bijections\n$$\\alpha_{A,K}:\\Hom_{\\mathcal C_Z}(A,H_K)\\xrightarrow{\\sim}\\Hom_{D(X)}(i_*A,K),\\quad a\\longmapsto\\varepsilon^!_K\\circ i_*(a),$$\n$$\\beta_{A,K}:\\Hom_{\\mathcal C_Z}(A,S_K)\\xrightarrow{\\sim}\\Hom_{D(X)}(i_*A,K),\\quad b\\longmapsto\\varepsilon^S_K\\circ i_*(b).$$\nThe first uses $i_*A\\in\\mathcal C_X$, supplied by the lower-shriek functor on the localizing categories; the second is valid for every ambient $A$, so in particular for this one. Fullness from step 1 identifies the indicated groups exactly. Both bijections are natural in $A$ and in bounded constructible $K$, because they are adjunction bijections. Consequently $\\tau_{A,K}=\\beta_{A,K}^{-1}\\alpha_{A,K}$ and its inverse form mutually inverse natural transformations $h_{H_K}\\leftrightarrows h_{S_K}$ on $\\mathcal C_Z$.",
+   "uses": [
+    "sk-prop-sf-existence",
+    "sk-lem-formal-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
+    "place": "The two adjunction Hom bijections and their identification using fullness."
+   }
+  },
+  {
+   "text": "Apply [lem-galois-yoneda-fully-faithful] in $\\mathcal C_Z$ to $\\tau_{-,K}$ and its inverse. It gives unique maps $\\theta_K:H_K\\to S_K$ and $\\rho_K:S_K\\to H_K$ whose postcomposition transformations are these two transformations; explicitly $\\theta_K=\\tau_{H_K,K}(1_{H_K})$. Since the transformations are mutually inverse, the injectivity in that same Yoneda statement gives $\\rho_K\\theta_K=1_{H_K}$ and $\\theta_K\\rho_K=1_{S_K}$. Thus $\\theta_K$ is an isomorphism in $\\mathcal C_Z$. Evaluating $\\beta\\tau=\\alpha$ at $A=H_K$ and $1_{H_K}$ gives\n$$\\varepsilon^S_K\\circ i_*(\\theta_K)=\\varepsilon^!_K.$$\nAny map satisfying this equality has the same image under the bijection $\\beta_{H_K,K}$, hence equals $\\theta_K$. This proves the asserted counit compatibility, including uniqueness for the specified adjunctions.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda: full faithfulness and evaluation at the identity; applied to the two representations in the blueprint proof."
+   }
+  },
+  {
+   "text": "Let $q:K\\to K'$ be a morphism of bounded constructible complexes. The two maps $S(q)\\circ\\theta_K$ and $\\theta_{K'}\\circ i^!(q)$ from $H_K$ to $S_{K'}$ have the same image under $\\beta_{H_K,K'}$: by naturality of the support counit in [sk-lem-formal-closed-support](1), the first has image $q\\circ\\varepsilon^S_K\\circ i_*\\theta_K=q\\circ\\varepsilon^!_K$; by naturality of the exceptional counit in [sk-prop-sf-existence], the second has image $\\varepsilon^!_{K'}\\circ i_*i^!(q)=q\\circ\\varepsilon^!_K$. Injectivity of $\\beta_{H_K,K'}$ makes these maps equal. Hence the isomorphism is natural in $K$. For the final constructibility consequence, [sk-def-sfb-constructible] defines $\\Dbc$ by bounded constructible cohomology. Each $H^n(\\theta_K)$ is an isomorphism, so $H^n(i^!K)$ vanishes whenever $H^n(S_K)$ does and is constructible whenever $H^n(S_K)$ is. Since $S_K\\in\\Dbc(Z,\\Lambda)$ by step 1, this gives $i^!K\\in\\Dbc(Z,\\Lambda)$.",
+   "uses": [
+    "sk-lem-formal-closed-support",
+    "sk-prop-sf-existence",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
+    "place": "Final sentence: uniqueness makes the comparison natural in K; the two transposes are written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-coefficient-heart",
+  "sk-prop-sf-existence",
+  "det-prop-closed-adjoint-constructible-support",
+  "sk-def-localizing-closure",
+  "sk-lem-formal-closed-support",
+  "lem-galois-yoneda-fully-faithful",
+  "sk-def-sfb-constructible"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
+  "place": "Entire proof, expanded into the object-membership check, two counit-induced Hom bijections, Yoneda comparison, and naturality computation."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedUpperShriek|sectionsWithSupport|rightAdjointUniq",
+   "results": {
+    "hits": 19,
+    "top": [
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*support|rightAdjointUniq|preimageIso",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean",
+     "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq",
+     "CategoryTheory.Adjunction.rightAdjointUniq_refl",
+     "CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exceptional inverse image agrees with derived sections with support on constructible pro-etale complexes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.IsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.mk",
+     "AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion",
+     "AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine",
+     "AlgebraicGeometry.IsOpenImmersion.ΓIso",
+     "AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yoneda, CategoryTheory.FullyFaithful",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'CategoryTheory.FullyFaithful'"
+   },
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reports unknown identifier CategoryTheory.FullyFaithful; no absence conclusion is drawn from this call"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoints are naturally isomorphic by transposing their counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc",
+     "CategoryTheory.Adjunction.counitAsIsoOfIso",
+     "CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_refl",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two objects representing naturally isomorphic Hom functors are uniquely isomorphic by Yoneda; compatibility with adjunction counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.compYonedaIso_hom_app_app",
+     "CategoryTheory.Adjunction.compYonedaIso_inv_app_app",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso",
+     "CategoryTheory.Adjunction.compYonedaIso",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_hom",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_inv",
+     "CategoryTheory.Adjunction.leftAdjointsCoyonedaEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the exceptional inverse image on localizing constructible pro-etale derived categories is naturally isomorphic to derived sections with support compatibly with counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply",
+     "AlgebraicGeometry.IsOpenImmersion.ΓIso_inv",
+     "AlgebraicGeometry.liftCoborder_app",
+     "AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom",
+     "AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the geometric theorem; generic right-adjoint uniqueness and Yoneda results cover only the formal comparison after establishing membership and restricting ambient Hom sets"
+  },
+  {
+   "tool": "grep",
+   "query": "def fullyFaithful|fullyFaithful_preimage|def uniqueUpToIso",
+   "results": {
+    "hits": 5,
+    "top": [
+     "134",
+     "142",
+     "185",
+     "199",
+     "207"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "grep returned five lines, but passing a single file caused malformed file/line parsing; declarations were verified by reading the source directly, and no new leaf is claimed from this log entry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Yoneda embedding reflects isomorphisms: an invertible natural transformation between representable presheaves determines a unique isomorphism of representing objects",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Yoneda.isIso",
+     "CategoryTheory.Functor.IsRepresentedBy.of_natIso",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_inv",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_hom",
+     "CategoryTheory.isRepresentable_of_natIso",
+     "CategoryTheory.Yoneda.ext",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso",
+     "CategoryTheory.Functor.representableByEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Formal Yoneda/representability ingredients found; the existing Mathlib leaf lem-galois-yoneda-fully-faithful covers the comparison. These results do not establish support membership or the geometric coefficient-category hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "representableBy|uniqueUpToIso|fullyFaithful_preimage",
+   "results": {
+    "hits": 9,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+     "Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+     "Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+     "Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Formal Yoneda/representability ingredients found; the existing Mathlib leaf lem-galois-yoneda-fully-faithful covers the comparison. These results do not establish support membership or the geometric coefficient-category hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso",
+   "results": {
+    "hits": 3,
+    "top": [
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_hom",
+     "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Formal Yoneda/representability ingredients found; the existing Mathlib leaf lem-galois-yoneda-fully-faithful covers the comparison. These results do not establish support membership or the geometric coefficient-category hypotheses."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -53,5 +328,35 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-closed-adjoint-constructible"
+ "unit": "sk-prop-closed-adjoint-constructible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-closed-adjoint-constructible-yoneda",
+  "worker": "stage1",
+  "group": "Q25",
+  "summary": "Made the source's standing finite-type separated k-scheme scope explicit, and named the actual module-object coefficient categories, support functor, and full localizing closures. Used the existing same-layer field-coefficient equality to reconcile Dbc with the Dctf closures of the existence theorem. Expanded the imported Yoneda paragraph into four complete steps, including both counit-induced bijections, inverse maps, and the explicit naturality calculation. No new nodes were needed. Second reading made the k-morphism hypothesis and input membership explicit, expanded invariance of bounded constructible cohomology under the comparison, and corrected invalid/malformed search verdicts.",
+  "blueprint": "Realizes step 2 of unit sk-prop-closed-adjoint-constructible and all sentences of det-prop-closed-adjoint-constructible-yoneda.proof.md. The support membership of unit step 1 is used through det-prop-closed-adjoint-constructible-support; no alternative geometric route is introduced.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-coefficient-heart",
+    "why": "Only its explicit equality Dctf=Dbc for E and Qlbar, in the same pulled-back condensed module-object layer, reconciles the localizing-closure notation with sk-prop-sf-existence; it does not replace a geometric step."
+   },
+   {
+    "node": "sk-def-localizing-closure",
+    "why": "Its definition supplies the full subcategory and containment of the generating subcategory, precisely the fullness used by the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-coefficient-heart",
+  "sk-def-localizing-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-41ef89bbc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-41ef89bbc (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All four steps, cited statements and source locations check out: same-layer coefficient equality, support membership, counit-induced Hom bijections, Yoneda inverses, and naturality. Closed normalization is explicitly stipulated in the source statement. No new nodes, duplicate split, item dependency cycle, or repairs; declared tool uses accepted."
+ }
 }

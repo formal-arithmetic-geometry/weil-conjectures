@@ -29,9 +29,102 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\theta_{i,k}$ for the stated map. Identify a monomorphism with its image inclusion. Degreewise its domain is the union $(A\\times L)\\cup(B\\times K)$ inside $B\\times L$, since the intersection is $A\\times K$. This union is a pushout: compatible maps out of the two subsets agree exactly on the intersection. Operators preserve all three subsets, so the same universal map is simplicial. Thus $\\theta_{i,k}$ is a monomorphism. Commutative squares in either input induce maps on products and on this pushout, respecting identities and composition. In particular section and retraction squares in either input give section and retraction squares of the corresponding $\\theta$-maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, degreewise details of the pushout-product construction and its functoriality."
+   }
+  },
+  {
+   "text": "The class $W$ of right-anodyne maps is weakly saturated by [def-coef-infinity-right-anodyne], with exactly the nonzero-index horn convention in the item. Apply [lem-coef-infinity-right-anodyne-saturation] to this $W$. For each fixed monomorphism $k$, the monomorphisms $i$ with $\\theta_{i,k}$ right anodyne form a weakly saturated class; the same holds in the other variable with $i$ fixed. Consequently it is enough in the first variable to check the generating right horns, and it is enough in the second variable to check boundary inclusions once all monomorphisms are expressed by boundary attachments as below.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-saturation",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof: weak saturation of T and T-prime."
+   }
+  },
+  {
+   "text": "Put $e:\\{1\\}\\hookrightarrow\\Delta^1$ and $b_m:\\partial\\Delta^m\\hookrightarrow\\Delta^m$, where the boundary is the union of proper faces and $\\partial\\Delta^0=\\varnothing$. By Step 1, $\\theta_{e,b_m}$ is $X_0\\hookrightarrow\\Delta^1\\times\\Delta^m$ from [lem-coef-infinity-right-prism-boundary]. Each successor $X_q\\hookrightarrow X_{q+1}$ is a pushout of $\\Lambda_{q+1}^{m+1}\\hookrightarrow\\Delta^{m+1}$. Because $1\\leq q+1\\leq m+1$, every attaching horn is a right horn. Pushout and finite-composition closure therefore make $\\theta_{e,b_m}$ right anodyne. At $m=0$ there is one attachment, $\\Lambda_1^1=\\{1\\}\\hookrightarrow\\Delta^1$; this includes the zero-dimensional boundary case omitted in the source's last paragraph.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Lemma 3.1.2.12 (00TH), finite horn filtration, including m=0."
+   }
+  },
+  {
+   "text": "Let $h:U\\hookrightarrow V$ be any small simplicial monomorphism. The existing relative skeletal filtration [lem-coef-infinity-monomorphism-boundary-cells] presents it as a countable composite of pushouts of coproducts of the maps $b_m$. To handle a coproduct indexed by a small set $S$, well-order $S$ and at stage $\\alpha$ take the coproduct of full simplices at indices $<\\alpha$ and boundaries at indices $\\geq\\alpha$. A successor map is a pushout of one $b_m$, and a limit is the union of earlier stages; the empty coproduct is an identity. Thus the class in Step 2 with first variable $e$ contains each coproduct, each skeletal attachment and the final composite. It follows that $\\theta_{e,h}$ is right anodyne for every $h$. All indexing sets and their well-order types are small.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-right-anodyne-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0077",
+    "place": "Proposition 1.5.5.14 (0077), proof of (b): relative skeleton and well-ordered serialization of coproducts; applied to T-prime in Proposition 4.2.5.3."
+   }
+  },
+  {
+   "text": "For a generating right horn $f:\\Lambda_a^n\\hookrightarrow\\Delta^n$, $n\\geq1$ and $0<a\\leq n$, put $P=(\\Delta^1\\times\\Lambda_a^n)\\cup(\\{1\\}\\times\\Delta^n)$ and $g=\\theta_{e,f}:P\\hookrightarrow\\Delta^1\\times\\Delta^n$. The section of arrows $f\\to g$ inserts the vertex $0$ in both source and target. Define the retraction on vertices by $r(0,t)=t$ and $r(1,t)=\\max(a,t)$. It is monotone on each level, and across levels $t\\leq u$ implies $r(0,t)=t\\leq\\max(a,u)=r(1,u)$. For an $s$-simplex given by increasing maps $\\epsilon:[s]\\to[1]$ and $t:[s]\\to[n]$, its image is the increasing map $j\\mapsto r(\\epsilon(j),t(j))$; this formula commutes with precomposition by every simplicial operator. Thus it defines a simplicial map, and $r(0,t)=t$ proves the retraction identities on both source and target. A simplex in $\\Delta^1\\times\\Lambda_a^n$ omits in its second coordinate some vertex $v\\ne a$; applying $r$ can only add $a$, so still omits $v$. On $\\{1\\}\\times\\Delta^n$ the image has vertices at least $a>0$, so omits $0\\ne a$. Hence $r(P)\\subseteq\\Lambda_a^n$, which proves both commutative squares and makes $f$ an arrow retract of $g$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TG",
+    "place": "Lemma 3.1.2.10 (00TG), explicit monotone retraction; its horn-preservation check is written out here."
+   }
+  },
+  {
+   "text": "Fix an arbitrary monomorphism $k:K\\hookrightarrow L$ and the horn $f$ of Step 5. Functoriality in Step 1 makes $\\theta_{f,k}$ a retract of $\\theta_{g,k}$. Set $h=\\theta_{f,k}$; it is a monomorphism by Step 1. Both $\\theta_{g,k}$ and $\\theta_{e,h}$ identify, after the coordinate associator, with the inclusion into $\\Delta^1\\times\\Delta^n\\times L$ of the same union\n$$ (\\{1\\}\\times\\Delta^n\\times L)\\cup(\\Delta^1\\times\\Lambda_a^n\\times L)\\cup(\\Delta^1\\times\\Delta^n\\times K). $$\nIndeed distributing the two domains degreewise gives precisely these three subsets, with the redundant subset $\\{1\\}\\times\\Delta^n\\times K$ already included. Their operators and inclusion maps coincide. Step 4 makes $\\theta_{e,h}$ right anodyne. Isomorphism and retract closure therefore make $\\theta_{f,k}$ right anodyne.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, proof: reduction of g to the endpoint inclusion; the triple-union identification is explicit."
+   }
+  },
+  {
+   "text": "For each fixed $k$, Step 6 puts all generating right horns in the weakly saturated class of Step 2. That class contains isomorphisms as well, hence contains the smallest class generated from these horns and isomorphisms under pushouts, transfinite compositions and retracts. This is exactly the right-anodyne class [def-coef-infinity-right-anodyne]. Thus $\\theta_{i,k}$ is right anodyne for every right-anodyne monomorphism $i$ and every simplicial monomorphism $k$, with precisely the map in the statement.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Proposition 4.2.5.3, completion of the weak-saturation reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-right-anodyne-saturation",
+  "lem-coef-infinity-right-prism-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0153",
+  "place": "Expanded from Kerodon Proposition 4.2.5.3 (0153), Lemmas 3.1.2.10 (00TG), 3.1.2.12 (00TH), and Proposition 1.5.5.14 (0077). These online sources are not archived under literature/; WANTED in report.md. The proof supplies the horn retraction, triple-union identification, and the m=0 case explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,15 +181,66 @@
    "results": "{\"t\": \"2026-10-16T13:53:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyneExtensions\\\", \\\"pushoutObjObjι\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SSet.innerAnodyneExtensions_pushoutObjObjι\", \"SSet.innerAnodyneExtensions_pushoutObjObjι'\", \"SSet.anodyneExtensions_pushoutObjObjι\", \"SSet.anodyneExtensions_pushoutObjObjι'\"], \"digest\": \"bbe000e2c0983ae1\"}",
    "date": "2026-10-16",
    "verdict": "Four hits, all read at AnodyneExtensions/PushoutProduct.lean:95-111 and AnodyneExtensions/Inner/PushoutProduct.lean:93-110. None states the right-anodyne version; weakening to Kan-anodyne would not suffice."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|right.?fibration|pushoutObjObjι",
+   "results": "{\"t\": \"2026-10-16T15:23:16Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|right.?fibration|pushoutObjObjι\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"a2fde9a81f32847c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.anodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/PushoutProduct.lean:95-111) give Kan-anodyne maps; SSet.innerAnodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/Inner/PushoutProduct.lean:93-109) give inner-anodyne maps. Neither specializes in one line to the class generated by all nonzero-index horns. The other hits give degreewise unions, generic pushouts, or individual horn faces, not this conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian pushout product of a right anodyne simplicial map with a monomorphism is right anodyne",
+   "results": "{\"t\": \"2026-10-16T15:23:16Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian pushout product of a right anodyne simplicial map with a monomorphism is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adhesive.isPullback_of_isPushout_of_mono_right\", \"CategoryTheory.Adhesive.mono_of_isPushout_of_mono_right\", \"CategoryTheory.IsPushout.IsVanKampen.isPullback_of_mono_right\", \"CategoryTheory.Limits.Types.instMonoPushoutInr\", \"CategoryTheory.Adhesive.mono_of_isPushout_of_mono_left\", \"CategoryTheory.Limits.Types.pushoutCocone_inr_mono_of_isColimit\", \"CategoryTheory.IsPushout.mono_of_isPullback_of_mono\", \"CategoryTheory.Square.IsPushout\"], \"digest\": \"90a3b9705ea57d18\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.anodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/PushoutProduct.lean:95-111) give Kan-anodyne maps; SSet.innerAnodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/Inner/PushoutProduct.lean:93-109) give inner-anodyne maps. Neither specializes in one line to the class generated by all nonzero-index horns. The other hits give degreewise unions, generic pushouts, or individual horn faces, not this conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T15:23:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SSet.innerAnodyneExtensions_pushoutObjObjι\", \"SSet.innerAnodyneExtensions_pushoutObjObjι'\", \"SSet.anodyneExtensions_pushoutObjObjι\", \"SSet.anodyneExtensions_pushoutObjObjι'\"], \"digest\": \"bbe000e2c0983ae1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.anodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/PushoutProduct.lean:95-111) give Kan-anodyne maps; SSet.innerAnodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/Inner/PushoutProduct.lean:93-109) give inner-anodyne maps. Neither specializes in one line to the class generated by all nonzero-index horns. The other hits give degreewise unions, generic pushouts, or individual horn faces, not this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian pushout product of a right anodyne simplicial map with a monomorphism is right anodyne",
+   "results": "{\"t\": \"2026-10-16T15:23:25Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian pushout product of a right anodyne simplicial map with a monomorphism is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.Subcomplex.BicartSq\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.ofSimplexProd_eq_range\", \"SSet.Subcomplex.prod\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₂₀.isPushout\"], \"digest\": \"1ea451710977ba6d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.anodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/PushoutProduct.lean:95-111) give Kan-anodyne maps; SSet.innerAnodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/Inner/PushoutProduct.lean:93-109) give inner-anodyne maps. Neither specializes in one line to the class generated by all nonzero-index horns. The other hits give degreewise unions, generic pushouts, or individual horn faces, not this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leibniz product of nonzero horn generated simplicial anodyne maps and degreewise injections",
+   "results": "{\"t\": \"2026-10-16T15:23:26Z\", \"tool\": \"leanfinder\", \"query\": \"Leibniz product of nonzero horn generated simplicial anodyne maps and degreewise injections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.faceι_ι\", \"SSet.horn.ι_ι\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn.ι\", \"SSet.horn.faceι\", \"SSet.horn.faceSingletonComplIso_inv_ι\", \"SSet.PtSimplex.MulStruct.map\", \"SSet.horn.ι_ι_assoc\"], \"digest\": \"15c04b5bb5cc1268\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.anodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/PushoutProduct.lean:95-111) give Kan-anodyne maps; SSet.innerAnodyneExtensions_pushoutObjObjι and its primed variant (AnodyneExtensions/Inner/PushoutProduct.lean:93-109) give inner-anodyne maps. Neither specializes in one line to the class generated by all nonzero-index horns. The other hits give degreewise unions, generic pushouts, or individual horn faces, not this conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-right-fibration-exponentiation",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-right-anodyne-product",
+  "worker": "stage1",
+  "summary": "Kept the item statement unchanged. Replaced the inherited attempt with a complete two-variable reduction: cite generic weak saturation and the existing Mathlib boundary-cell filtration, deduce the endpoint prism case from its finite right-horn filtration, prove the horn retract explicitly, and identify the iterated pushout products by a triple union. Two statement-only helper nodes remain. Reran and recorded actual logged Mathlib searches for each; no project Lean attachment or exact Mathlib match.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: finite-shape control of coherent diagrams in the stable flat-model enhancement; Steps 1-7 expand the Cartesian right-anodyne pushout-product input of Kerodon Proposition 4.2.5.3 along this inherited finite-shape enhancement branch. Helper saturation serves the two closure reductions; helper prism filtration serves Lemma 3.1.2.12. No unit-level route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-d21a3afca",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-d21a3afca (reviewer sub-agent of L); spot-checked: Read the full packet, item, new nodes, cited DAG statements, unit/chapter route, worker report, and Kerodon sources 0153, 00TH, 00TG, and 0077. Verified every proof step, hypotheses, edge cases, dependencies, searches, duplicate checks, and route constraints. Review written to review.md; no repairs needed."
+ }
 }

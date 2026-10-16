@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-sf-comp-coherence-refinement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The refinement map on the localizing category",
- "statement": "Let $\\Lambda$ be admissible, $f:X\\to Y$ separated of finite type, and let\n$j:X\\to Z$, $j':X\\to Z'$ be dense compactifications of $f$ over $Y$ together\nwith a refinement $h:Z'\\to Z$, i.e. a proper $Y$-morphism with $h\\circ j'=j$\nand $h^{-1}(X)=X$. Let\n\n$$\ne_{h,K}:j_!K\\longrightarrow Rh_*j'_!K\\quad\\text{in }D(Z_{\\mathrm{proét}},\\Lambda)\n$$\n\nbe the adjoint, under $j_!\\dashv j^*$, of the isomorphism\n$K\\simeq j^*Rh_*j'_!K$. Then:\n\n1. $e_{h,K}$ is the unique map $j_!K\\to Rh_*j'_!K$ whose restriction to $X$ is\nthe identity of $K$;\n2. $e_{h,K}$ is an isomorphism for every $K\\in\\Loc(\\Dctf(X,\\Lambda))$;\n3. $e_{\\mathrm{id},K}=\\mathrm{id}$, and for successive refinements\n$Z''\\xrightarrow{k}Z'\\xrightarrow{h}Z$ one has\n$e_{hk,K}=Rh_*(e_{k,K})\\circ e_{h,K}$ under $R(hk)_*=Rh_*Rk_*$.",
+ "statement": "Work in the standing setting of [sk-def-sfb-dc-setting]: fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, $p\\ne\\ell$; all schemes below are separated and of finite type over $k$, and all morphisms are $k$-morphisms. Let $\\Lambda$ be an admissible coefficient as in [sk-def-localizing-closure]: a finite commutative ring killed by a power of $\\ell$, or $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, where $E/\\mathbf Q_\\ell$ is finite in the fixed algebraic closure, with the indicated discrete or $\\ell$-adic topology. Put $\\Lambda_T=p_T^*\\Lambda$ and $D(T_{\\mathrm{proét}},\\Lambda)=D(\\operatorname{Mod}_{\\Lambda_T})$, the unbounded module-object derived category, with the fixed universe convention [def-weil-size-convention]. Use $\\Dctf$ and its ambient localizing closure as in [det-def-sfb-constructible-tor-amplitude] and [sk-def-localizing-closure], and the module operations [sk-def-sfb-module-pushforward-pullback], [sk-def-sfb-module-derived-pushpull], [sk-def-sfb-module-lower-shriek].\n\nLet $f:X\\to Y$ be separated of finite type. Let $X\\xrightarrow{j}Z\\xrightarrow{q}Y$ and $X\\xrightarrow{j'}Z'\\xrightarrow{q'}Y$ be dense compactifications of $f$ in the sense of [sk-def-nagata-sketch-data]: $j,j'$ are quasi-compact open immersions, $q,q'$ are proper, and $j,j'$ are scheme-theoretically dense. Let $h:Z'\\to Z$ be a refinement, namely a proper $Y$-morphism such that $h\\circ j'=j$ and $h^{-1}(j(X))=j'(X)$, identified with $X$ via $j,j'$. For every $K\\in D(X_{\\mathrm{proét}},\\Lambda)$ let\n$$\\theta_{h,K}:j^*Rh_*j'_!K\\xrightarrow{\\sim}K$$\nbe the canonical open-restriction isomorphism (restriction of direct image to $X$, followed by the inverse of the open-extension unit), and let $e_{h,K}:j_!K\\to Rh_*j'_!K$ be adjoint to $\\theta_{h,K}^{-1}$ under $j_!\\dashv j^*$. Then:\n\n1. $e_{h,K}$ is the unique map whose restriction to $X$ is the identity of $K$, meaning $\\theta_{h,K}\\circ j^*(e_{h,K})\\circ\\eta_{j,K}=\\operatorname{id}_K$, where $\\eta_j:\\operatorname{id}\\xrightarrow{\\sim}j^*j_!$ is the unit.\n2. $e_{h,K}$ is an isomorphism for every $K\\in\\operatorname{Loc}(\\Dctf(X,\\Lambda))$.\n3. $e_{\\operatorname{id},K}=\\operatorname{id}$ under the canonical identity identifications. For successive refinements $Z''\\xrightarrow{a}Z'\\xrightarrow{h}Z$, with open $j'':X\\to Z''$, one has $e_{ha,K}=Rh_*(e_{a,K})\\circ e_{h,K}$ under the canonical derived-composition isomorphism $R(ha)_*\\xrightarrow{\\sim}Rh_*Ra_*$, for every $K\\in D(X_{\\mathrm{proét}},\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.md",
   "place": "node det-sf-comp-coherence-refinement, order None",
@@ -18,46 +18,312 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "def-weil-size-convention",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-nagata-sketch-data"
+ ],
  "proof": [
   {
-   "text": "*The restriction to $X$.* The open immersion $j:X\\to Z$ has an exact left\nadjoint $j_!$ of $j^*$, so $j^*$ preserves K-injective complexes and commutes\nwith derived direct images: $j^*Rh_*=R(h|_{h^{-1}(X)})_*j'^*$ on the open\n$h^{-1}(X)=X$, where $h$ restricts to the identity. Hence\n$j^*Rh_*j'_!K\\simeq j'^*j'_!K\\simeq K$, the last map the inverse of the unit,\nwhich is an isomorphism for an open immersion.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(1) Uniqueness.* By $j_!\\dashv j^*$, maps $j_!K\\to Rh_*j'_!K$ correspond\nbijectively to maps $K\\to j^*Rh_*j'_!K\\simeq K$, the correspondence being\nrestriction to $X$. So there is exactly one map restricting to the identity,\nand $e_{h,K}$ is it by construction.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(2) Isomorphism.* Both $K\\mapsto j_!K$ and $K\\mapsto Rh_*j'_!K$ are exact\nfunctors $\\Loc(\\Dctf(X,\\Lambda))\\to D(Z_{\\mathrm{proét}},\\Lambda)$ preserving direct\nsums ([det-sf-comp-coherence-single] applied to $j$ and to $h\\circ j'$), and\n$e_h$ is a natural transformation of exact functors. By\n[det-sf-determination-localizing] it suffices to show that $e_{h,K}$ is an\nisomorphism for $K\\in\\Dctf(X,\\Lambda)$. Let $i:Z\\setminus X\\to Z$ be the\nclosed complement. Over $X$, $e_{h,K}$ restricts to the identity. Over\n$Z\\setminus X$: since $h^{-1}(Z\\setminus X)=Z'\\setminus X$ and the restriction\nof $j'_!K$ to $Z'\\setminus X$ vanishes, proper base change for $h$ along $i$\n(the localizing form, valid on $\\Dctf$) gives $i^*Rh_*j'_!K\\simeq0$; also\n$i^*j_!K=0$. By the open–closed exact sequence applied in each degree (Stacks,\nTag 09AH), the pair $(j^*,i^*)$ detects isomorphisms of complexes, so\n$e_{h,K}$ is an isomorphism. (For finite coefficients and étale-origin $K$\nthis is the stalkwise argument of [lem-weil-pbc-proper-open-comparison-iso].)",
+   "text": "Exact open operations and the derived adjunction. By [lem-sfb-alpha-iso], the coefficient comparison for every map here is an isomorphism, so module pullback along an immersion is inverse image with its action transported along that isomorphism. Thus [lem-weil-pbc-proetale-immersion-limit-preservation] gives exact $j^*,j'^*,i^*$ whenever $i$ is a closed complementary immersion. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the ring sheaf $\\Lambda_Z$ (and likewise on $Z'$): $j_!$ is exact, $j_!\\dashv j^*$, the open unit is invertible, and $i^*j_!=0$. The module definition [sk-def-sfb-module-lower-shriek] is this same extension by zero: both are left adjoints of the identified pullback, with the same unit normalization. The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] descends to the derived categories: both exact functors preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-functor], and their natural unit and counit descend and still satisfy the two triangle identities. Consequently the displayed adjunction, unit and vanishing hold on the unbounded derived categories, with these exact functors evaluated termwise.",
    "uses": [
-    "det-sf-comp-coherence-single",
-    "det-sf-determination-localizing",
-    "lem-weil-pbc-proper-open-comparison-iso"
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "The restriction to X; exact module operations and derived adjunction. Stacks Tags 09AH, 09BN, 03DI, 03DJ, 08BJ and 015F supply the generic ingredients."
+   }
   },
   {
-   "text": "*(3) Identity and transitivity.* For $h=\\mathrm{id}$ the identity map restricts\nto the identity, so $e_{\\mathrm{id},K}=\\mathrm{id}$ by (1). For successive\nrefinements both $e_{hk,K}$ and $Rh_*(e_{k,K})\\circ e_{h,K}$ are maps\n$j_!K\\to R(hk)_*j''_!K$; restricted to $X$, where $h$, $k$ and $hk$ are\nidentities, both are the identity of $K$. By the uniqueness in (1), applied to\nthe refinement $hk$, they are equal.",
+   "text": "Construct the open-restriction isomorphism for arbitrary unbounded $K$, without using proper base change on arbitrary complexes. Choose a K-injective resolution $j'_!K\\to I$ by [prop-pur-kinjective-resolutions-exist], on the small pro-étale site in the fixed universe. The module derived direct image of [sk-def-sfb-module-derived-pushpull] is represented by $h_*I$. The site localization [lem-weil-proetale-weakly-etale-localization], clause (1), identifies open restriction with restriction to objects over $X$. For each such object $V\\to X$, the definition [def-sfb-finite-lower-star] gives $(h_*I)(V)=I(V\\times_ZZ')=I(V)$, since $h^{-1}(X)=X$ and $h|_X=\\operatorname{id}$. This equality respects the module action of [def-sfb-module-lower-star], induced by the same cartesian coefficient maps. Hence $j^*h_*I=j'^*I$ as complexes with identified coefficients. The same argument with a K-injective resolution of any $M\\in D(Z',\\Lambda)$ constructs a natural isomorphism $\\rho_h:j^*Rh_*M\\simeq j'^*M$; the present $\\theta$ is its composite with the inverse open unit. Exactness from step 1 gives the quasi-isomorphism $K\\simeq j'^*j'_!K\\to j'^*I$. Moreover [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to the exact left adjoint $j'_!$, says that $j'^*I$ is K-injective. Inverting the preceding quasi-isomorphism defines $\\theta_{h,K}$. The construction is natural in $K$, using a functorial resolution, and in maps between such resolutions; it is therefore independent of the chosen representatives.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "The restriction to X; explicit sectionwise calculation, rather than a stronger proper-base-change theorem."
+   }
+  },
+  {
+   "text": "Existence, uniqueness, naturality and shifts. The adjunction of step 1 identifies maps $b:j_!K\\to Rh_*j'_!K$ bijectively with maps $K\\to j^*Rh_*j'_!K$ by $b\\mapsto j^*b\\circ\\eta_{j,K}$. Compose with $\\theta_{h,K}$ from step 2. This is a bijection to $\\operatorname{Hom}(K,K)$, so exactly one map corresponds to $\\operatorname{id}_K$, namely $e_{h,K}$. For $u:K\\to L$, the two composites $j_!K\\to Rh_*j'_!L$ have adjoints $\\theta_{h,L}^{-1}u$ by naturality of $\\theta$; hence they are equal. The same construction on shifted representatives yields the shifted $\\theta$ and unit (the termwise restriction and direct-image identities commute with the differentials and shifts). The adjunction bijection then identifies $e_{h,K[1]}$ with $e_{h,K}[1]$ under the standard shift isomorphisms. Thus $e_h$ is a natural transformation compatible with shifts.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(1) Uniqueness; naturality and compatibility with the shifts required in (2)."
+   }
+  },
+  {
+   "text": "The two functors on the localizing category are exact and preserve sums. The quasi-compact open $j:X\\to Z$ is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; it is separated because its diagonal is an isomorphism ($X\\times_ZX=X$). Apply [det-sf-comp-coherence-single] to this morphism $j$ and its two compactifications $(j,\\operatorname{id}_Z)$ and $(j',h)$. The target $Z$ is a standing scheme, hence qcqs, and both compactifications are over $Z$. This gives exact sum-preserving functors $F_1=j_!$ and $F_2=Rh_*j'_!$ on $\\operatorname{Loc}(\\Dctf(X,\\Lambda))$, with values in $\\operatorname{Loc}(\\Dctf(Z,\\Lambda))\\subset D(Z,\\Lambda)$. Its sums are the ambient sums by [sk-def-localizing-closure]. The inclusion is full triangulated and respects those sums, so the same assertions hold with ambient target. Also apply [det-sf-comp-coherence-single] to $j':X\\to Z'$ and $(j',\\operatorname{id}_{Z'})$; its conclusion gives $j'_!K\\in\\Dctf(Z',\\Lambda)$ whenever $K\\in\\Dctf(X,\\Lambda)$.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "det-sf-comp-coherence-single",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, first three sentences: exactness, coproducts and generator preservation."
+   }
+  },
+  {
+   "text": "The closed restriction on generators. Let $K\\in\\Dctf(X,\\Lambda)$ and $L=j'_!K$, which lies in $\\Dctf(Z',\\Lambda)$ by step 4. Choose the reduced closed complement $i:B=Z\\setminus X\\hookrightarrow Z$ and form $B'=Z'\\times_ZB$ with inclusion $i'$ and projection $h_B:B'\\to B$. The maps $B\\to Z$ and $B'\\to Z'$ are closed immersions, hence proper and therefore separated and finite type; their composites to $\\operatorname{Spec}k$ are separated and finite type by [lem-weil-pbc-proper-fp-permanence], so $B,B'$ are again standing schemes. The same node gives properness of the base change $h_B$. The open complement of $B'$ is exactly $j'(X)$. The vanishing in [lem-weil-pbc-proetale-ringed-open-closed] therefore gives $i'^*L=0$ and $i^*j_!K=0$, with the coefficient identifications of step 1. For finite $\\Lambda=A$, clause (2) of [det-thm-sfb-proper-base-change-finite] gives $i^*Rh_*L\\simeq R(h_B)_*i'^*L=0$. For $\\Lambda=\\mathcal O_E$ use clause (3) of [det-thm-sfb-proper-base-change-integral]; for $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$ use clause (3) of [det-thm-sfb-proper-base-change-rational]. Their $\\Dbc$ hypotheses hold because $L\\in\\Dctf\\subset\\Dbc$ by [det-def-sfb-constructible-tor-amplitude], clause (4). The cases $\\mathbf Z_\\ell,\\mathbf Q_\\ell$ are the respective $\\mathcal O_E,E$ cases with $E=\\mathbf Q_\\ell$. No assertion of proper base change on arbitrary unbounded complexes is used here.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "det-thm-sfb-proper-base-change-finite",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-thm-sfb-proper-base-change-rational",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, closed-complement calculation; the three coefficient clauses of the unit proper-base-change route."
+   }
+  },
+  {
+   "text": "The generator comparison is an isomorphism. For $K$ as in step 5 let $C$ be a cone of $e_{h,K}$. By step 3 the open restriction is the identity after $\\theta$ and the unit, so $j^*C=0$. By step 5 both terms have zero closed restriction, so $i^*C=0$. The exact inverse images from step 1 commute with cohomology: kernels and cokernels defining $H^n$ are preserved. Thus every sheaf $H^n(C)$ has zero open and closed inverse images. Apply [lem-exc-open-closed-detection] with $R_Z=\\Lambda_Z$ to get $H^n(C)=0$ for all $n$. The cone is acyclic, hence zero in the derived category, and $e_{h,K}$ is an isomorphism.",
+   "uses": [
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, open–closed detection in each degree; Stacks Tag 09AH."
+   }
+  },
+  {
+   "text": "Pass from generators to the localizing closure. Apply [det-sf-determination-localizing] with $\\mathcal S=\\Dctf(X,\\Lambda)$ and the two exact sum-preserving functors of step 4, valued in the ambient unbounded derived category of $Z$. Step 3 verifies that their natural transformation $e_h$ is compatible with shifts, and step 6 verifies the isomorphism on every object of $\\mathcal S$. The cited criterion says its isomorphism locus contains $\\operatorname{Loc}(\\mathcal S)$, proving clause (2).",
+   "uses": [
+    "det-sf-determination-localizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, localizing determination."
+   }
+  },
+  {
+   "text": "Normalize composition on the open. Use [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $a:Z''\\to Z'$ and $h:Z'\\to Z$, with their module coefficient maps; these are morphisms of small ringed topoi, and their underived composition is the one of [sk-def-sfb-module-pushforward-pullback]. Its normalization describes $\\kappa:R(ha)_*\\xrightarrow{\\sim}Rh_*Ra_*$ as follows: choose K-injective $I$ representing $j''_!K$ and a K-injective resolution $v:a_*I\\to J$; then $\\kappa$ is represented by $h_*a_*I\\xrightarrow{h_*v}h_*J$. Restrict to $X$. The sectionwise identities of step 2 turn this map into $j'^*v:j''^*I\\to j'^*J$. It is a quasi-isomorphism since $v$ is one and $j'^*$ is exact. The restriction identification for $Ra_*$ uses exactly this resolution map: its identification of $j'^*J$ with $j''^*I$ is the inverse of $j'^*v$. Therefore, under the open-restriction identifications for $h$, $a$ and $ha$, the restricted composition comparison is $(j'^*v)^{-1}(j'^*v)=\\operatorname{id}$. The same computation for maps of representatives proves naturality of this identification. It is the canonical composition comparison, not an arbitrary isomorphism of the two functors.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(3) Identity and transitivity; verification of the implicit compatibility with canonical derived composition. Stacks Tag 0D6E."
+   }
+  },
+  {
+   "text": "Identity and transitivity. For the identity refinement, the identity map of $j_!K$ has identity restriction under the units used to define $\\theta$, so it equals $e_{\\operatorname{id},K}$ by step 3. For successive refinements, $ha$ is proper by [lem-weil-pbc-proper-fp-permanence], is over $Y$, and satisfies $(ha)^{-1}(X)=a^{-1}(h^{-1}(X))=X$ and $ha\\circ j''=j$, so it is again a refinement. Transport $Rh_*(e_{a,K})\\circ e_{h,K}$ to a map with target $R(ha)_*j''_!K$ using the inverse of the canonical comparison in step 8. On $X$, step 3 gives identity restrictions of each $e$, and step 8 identifies the composition comparison with the identity. Thus this transported map has identity restriction. Uniqueness in step 3, now for $ha$, makes it equal to $e_{ha,K}$. This proves clause (3), for arbitrary unbounded $K$ as asserted.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(3) Identity and transitivity, uniqueness argument after checking the comparison normalization."
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sfb-finite-lower-star",
+  "def-sfb-module-lower-star",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
   "det-sf-comp-coherence-single",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-thm-sfb-proper-base-change-finite",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-exc-open-closed-detection",
   "det-sf-determination-localizing",
-  "lem-weil-pbc-proper-open-comparison-iso"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "The restriction to X; (1) Uniqueness; (2) Isomorphism; (3) Identity and transitivity. Generic exact-module and K-injective arguments made explicit, following Stacks Tags 09AH, 08BJ, 015F and 0D6E."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "refinement map j_! K to derived proper pushforward Rh_* j'_! K is an isomorphism and transitive",
+   "sub": "",
+   "results": "SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_inv_app_val_app, PresheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, CategoryTheory.Functor.sheafPushforwardContinuousIso",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, IsIso, Functor.mapIso",
+   "sub": "",
+   "results": "none; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; unknown identifier; no absence conclusion drawn, followed by the lowerShriek substring query"
+  },
+  {
+   "tool": "grep",
+   "query": "open.?closed|proper.?base.?change|j_!|derived.*direct",
+   "sub": "Mathlib/CategoryTheory",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (duplicated Mathlib prefix); not used as evidence of absence; corrected subdirectory queries are recorded below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension by zero along an open immersion is invariant under proper refinement and transitive",
+   "sub": "",
+   "results": "AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.IsLocalAtSource.respectsLeft_isOpenImmersion, AlgebraicGeometry.IsLocalAtSource.of_isOpenImmersion, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.OpenCover.instIsOpenImmersionMapI₀FunctorOfLocallyDirected, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper modification unchanged on an open has derived pushforward of extension by zero canonically equal to extension by zero for constructible complexes",
+   "sub": "",
+   "results": "HomologicalComplex.extend.rightHomologyData_p, HomologicalComplex.extend.rightHomologyData_g', HomologicalComplex.pOpcycles_extendOpcyclesIso_hom, HomologicalComplex.extend.rightHomologyData_Q, HomologicalComplex.extend.rightHomologyData_H, HomologicalComplex.extend.leftHomologyData_H, HomologicalComplex.extend.leftHomologyData_i, SheafOfModules.pushforwardCongr_inv_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "sub": "",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*[Dd]erived|[Dd]erived.*compactification",
+   "sub": "",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|lemma pushforward_assoc|theorem pushforward_assoc",
+   "sub": "Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (duplicated Mathlib prefix); not used as evidence of absence; corrected subdirectory queries are recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforward_assoc",
+   "sub": "Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (duplicated Mathlib prefix); not used as evidence of absence; corrected subdirectory queries are recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforward_assoc",
+   "sub": "Algebra/Category/ModuleCat/Sheaf",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactification.*[Dd]erived|[Dd]erived.*compactification",
+   "sub": "CategoryTheory",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward composition, shape extension of complexes, or geometric open/proper properties; none asserts this refinement theorem for pro-etale module derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived refinement map on localizing category for proper compactification open immersion",
+   "sub": "",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.t, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.lift, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.of_isLocalization",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric immersion statements and underived right-adjoint composition do not state the derived compactification-refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, Derived pushforward composition",
+   "sub": "",
+   "results": "none; loogle: Unknown identifier `Derived`",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: loogle: Unknown identifier `Derived`; no absence conclusion drawn; successful lowerShriek query already recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|pushforwardComp|open immersion",
+   "sub": "CategoryTheory",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric immersion statements and underived right-adjoint composition do not state the derived compactification-refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper refinement of a compactification induces an isomorphism from extension by zero to derived pushforward of extension by zero on the localizing subcategory of constructible complexes",
+   "sub": "",
+   "results": "LightCondensed.lanPresheafExt, Condensed.lanPresheafExt, LightCondensed.lanPresheafNatIso, LightCondensed.lanPresheafIso, Condensed.lanPresheafIso, HomologicalComplex.quasiIsoAt_extendMap_iff, Condensed.lanPresheafNatIso, HomologicalComplex.quasiIso_extendMap_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed Kan-extension comparisons and shape-extension quasi-isomorphisms do not state the proper-refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardComp\"",
+   "sub": "",
+   "results": "PresheafOfModules.pushforwardCompToPresheaf, PresheafOfModules.pushforwardComp, PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardCompForgetToSheafModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: underived module pushforward composition and forgetful-functor formulas do not include extension by zero or derived proper base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension by zero is invariant under proper compactification refinements for constructible sheaves",
+   "sub": "",
+   "results": "HasCompactSupport.extend_zero, HasCompactSupport.continuous_extend_zero, ContMDiff.extend_zero, DerivedCategory.instHasZeroObject, HasCompactSupport.tsupport_extend_zero, ContinuousLinearMap.extend_zero, ContDiffMapSupportedIn.zero_on_compl, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero",
+   "date": "2026-10-16",
+   "verdict": "no match: compactly supported functions, the derived zero object, and closure of zero objects under extensions do not state the sheaf refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement|lowerShriek",
+   "sub": "Algebra/Category/ModuleCat/Sheaf",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no refinement or lowerShriek declaration in the module-sheaf directory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -73,5 +339,104 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-sf-comp-coherence"
+ "unit": "sk-prop-sf-comp-coherence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sf-comp-coherence-refinement",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: imported text suppressed the standing scheme/coefficient context required by its own current-blueprint proper-base-change route. Restored the explicit standing k-scheme setting and admissible coefficient module categories. Preserved all three clauses and proved restriction and coherence for arbitrary unbounded K, isomorphism on the ambient localizing closure. Replaced the finite etale-only parenthetical citation by the existing finite/integral/rational proper-base-change statements; added explicit exact adjunction, restriction, cone detection and canonical-composition normalization. No new nodes. No Lean changes or builds.",
+  "blueprint": "Steps 1–2 realize The restriction to X; step 3 realizes (1) Uniqueness; steps 4–7 realize (2) Isomorphism along the same generator/closed-complement/localizing route; steps 8–9 realize (3) Identity and transitivity. The current main-20261015 unit proof is used; the unit record still carries an older master statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Cartesian coefficients identify immersion module pullback with ordinary inverse image; the compactification unit does not prove this coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Exact inverse image with identified ring coefficients allows termwise restriction and cohomology detection."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Exact extension by zero, its adjunction/unit, and closed-support vanishing are generic ringed localization facts, not compactification coherence."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "The generic complex/homotopy adjunction supplies the unit and counit used to descend the exact open adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact module functors are computed termwise on the unbounded derived category."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small ringed sites admit functorial K-injective resolutions; this is generic homological algebra."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Open restriction is localization of the pro-etale site, needed for the sectionwise direct-image calculation."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "An exact left adjoint implies that open restriction preserves K-injectives, the generic fact invoked by the source."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Quasi-compact open immersions are finite type; this checks the input to the same-unit single-compactification theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Proper base change and composition check geometric hypotheses for the complement and the composite refinement."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-finite",
+    "why": "Finite-coefficient proper base change on Dctf, exactly the coefficient-specific proper-base-change route of the current unit."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-integral",
+    "why": "Integral proper base change on Dbc supplies the integral coefficient clause of that same route."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Rational proper base change on Dbc supplies the E and algebraic-closure coefficient clauses of that same route."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic module-sheaf zero detection for complementary restrictions, applied to cohomology of the cone."
+   },
+   {
+    "node": "det-sf-determination-localizing",
+    "why": "Generic localizing isomorphism-locus criterion, explicitly required by the current unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical unbounded derived-composition isomorphism and its resolution normalization; supplies no refinement comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-thm-sfb-proper-base-change-finite",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-exc-open-closed-detection",
+  "det-sf-determination-localizing",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-fd22c895c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-fd22c895c (reviewer sub-agent of L); spot-checked: Review written to review.md. The item, route, cited nodes, blueprint sources, hypotheses, edge cases, and searches were checked; the standing-context correction is documented and preserves all target conclusions."
+ }
 }

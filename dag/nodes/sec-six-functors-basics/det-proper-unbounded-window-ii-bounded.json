@@ -3,46 +3,189 @@
  "blueprint": {
   "is": "det-proper-unbounded-window-ii-bounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Direct sums of uniformly bounded families",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $p\\colon X\\to Y$ proper, and $(M_\\alpha)$ a family in $\\Dic(X,\\Lambda)$ with\ncohomology in a common interval $[a,b]$. Then\n$\\bigoplus_\\alpha Rp_*M_\\alpha\\to Rp_*(\\bigoplus_\\alpha M_\\alpha)$ is an isomorphism.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite subextension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or $\\underline{\\Qlb}$ be the condensed coefficient ring of [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed], and let $p:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism]. For $T=X,Y$, use the pulled-back coefficient ring $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], its category of module sheaves [sk-def-sfb-module-objects], and its unbounded derived category $D(T_{\\mathrm{proet}},\\Lambda)=D(\\operatorname{Mod}_{\\Lambda_T})$ [sk-def-sfb-derived-categories], in the fixed site and indexing universes [def-weil-pbc-proetale-site]. Write $\\operatorname{IndCons}(T,\\Lambda)$ for the module sheaves that are small filtered colimits, in $\\operatorname{Mod}_{\\Lambda_T}$, of constructible module sheaves [sk-def-sfb-constructible], and $D_{\\mathrm{ic}}(T,\\Lambda)$ for the full subcategory whose cohomology sheaves belong to $\\operatorname{IndCons}(T,\\Lambda)$ in every degree. Let $F=Rp_*$ be the total right derived functor of module pushforward [sk-def-sfb-module-derived-pushpull].\n\nLet $I$ be any small set, $a,b\\in\\mathbf Z$, and $(M_\\alpha)_{\\alpha\\in I}$ a family in $D_{\\mathrm{ic}}(X,\\Lambda)$ satisfying $H^r(M_\\alpha)=0$ whenever $r<a$ or $r>b$. For the ambient derived coproducts, the canonical comparison\n$$\n\\eta_M:\\bigoplus_{\\alpha\\in I}F(M_\\alpha)\\longrightarrow F\\Bigl(\\bigoplus_{\\alpha\\in I}M_\\alpha\\Bigr),\n\\qquad \\eta_M\\circ\\iota_\\alpha=F(\\iota_\\alpha),\n$$\nis an isomorphism in $D(Y_{\\mathrm{proet}},\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
   "place": "node det-proper-unbounded-window-ii-bounded, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
  "proof": [
   {
-   "text": "The comparison map is adjoint to the sum of the maps $Rp_*M_\\alpha\\to Rp_*\\bigoplus M_\\alpha$ induced by the\ninclusions. Induction on $b-a$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*$a=b$.* $M_\\alpha\\cong B_\\alpha[-a]$ with $B_\\alpha\\in\\IndCons(X,\\Lambda)$ and\n$\\bigoplus M_\\alpha\\cong(\\bigoplus B_\\alpha)[-a]$. Since cohomology commutes with direct sums of complexes of\nsheaves, $\\mathcal H^{n}$ of the comparison map is $\\bigoplus_\\alpha R^{n+a}p_*B_\\alpha\\to R^{n+a}p_*\\bigoplus B_\\alpha$,\nan isomorphism by [sk-lem-proper-heart-bound]. A map in the derived category inducing isomorphisms on all\ncohomology sheaves is an isomorphism.",
+   "text": "Set $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$. On the small site skeletons and in the universes fixed in the statement, these are Grothendieck abelian categories and have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]; this theorem applies to the commutative ring sheaf $\\Lambda_T$, not to a discrete constant replacement. They also have enough injectives by [lem-sp-grothendieck-enough-injectives], so the bounded-below comparisons used in step 4 have this hypothesis. Module pushforward is additive and left exact by [sk-def-sfb-module-pushforward-pullback], and $F$ is its unbounded derived functor by [sk-def-sfb-module-derived-pushpull]. Thus [lem-pc-right-derived-functor-triangulated] makes $F$ additive, shift-compatible and triangulated. For every family $N$, define $\\eta_N$ by the coproduct equation $\\eta_N\\iota_\\alpha=F(\\iota_\\alpha)$. The universal property gives existence, uniqueness and naturality in componentwise maps of families; this is the comparison under consideration.",
    "uses": [
-    "sk-lem-proper-heart-bound"
+    "prop-pur-kinjective-resolutions-exist",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, comparison-map paragraph; K-injective framework: Stacks Tags 07A5 and 079P; triangulated derived functor: cited project theorem"
+   }
   },
   {
-   "text": "*Induction step.* The truncation triangles $\\tau_{\\leq b-1}M_\\alpha\\to M_\\alpha\\to\\mathcal H^b(M_\\alpha)[-b]\\to$\nsum to the truncation triangle of $\\bigoplus M_\\alpha$ (cohomology commutes with sums,\n[sk-cor-ambient-ind-derived]). Applying $Rp_*$, and using that a sum of distinguished triangles is\ndistinguished, the comparison maps form a morphism of triangles\n\n$$\n\\Bigl(\\bigoplus Rp_*\\tau_{\\leq b-1}M_\\alpha\\to\\bigoplus Rp_*M_\\alpha\\to\\bigoplus Rp_*\\mathcal H^b(M_\\alpha)[-b]\\to\\Bigr)\n\\longrightarrow\n\\Bigl(Rp_*\\textstyle\\bigoplus\\tau_{\\leq b-1}M_\\alpha\\to Rp_*\\bigoplus M_\\alpha\\to Rp_*\\bigoplus\\mathcal H^b(M_\\alpha)[-b]\\to\\Bigr),\n$$\n\nwhose outer components are isomorphisms by induction. On cohomology sheaves the five lemma shows the\nmiddle component induces isomorphisms, hence is an isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "We record the elementary cone calculation used below. By [lem-kun-grothendieck-derived-coproducts], coproducts in each $D(\\mathcal A_T)$ are represented by termwise sums of arbitrary representative complexes. For chain maps $u_\\alpha:A_\\alpha\\to B_\\alpha$, the cone formula of [def-weil-abstract-derived-category] gives a canonical isomorphism\n$\\bigoplus_\\alpha C(u_\\alpha)\\cong C(\\bigoplus_\\alpha u_\\alpha)$: in degree $r$, both sides are $(\\bigoplus_\\alpha B_\\alpha^r)\\oplus(\\bigoplus_\\alpha A_\\alpha^{r+1})$, and their differential matrices are $\\left(\\begin{smallmatrix}\\oplus d_B&\\oplus u\\\\0&-\\oplus d_A\\end{smallmatrix}\\right)$. This identification respects the inclusions, projections and the signed boundary. Representing each distinguished triangle by a cone triangle and summing its isomorphism proves that any small sum of distinguished triangles is distinguished. Also $\\bigoplus N_\\alpha[s]\\cong(\\bigoplus N_\\alpha)[s]$ by the degreewise shift formula. Finally [det-ambient-ind-derived-sums](1) supplies the canonical, coprojection-compatible identifications $H^r(\\bigoplus N_\\alpha)\\cong\\bigoplus H^r(N_\\alpha)$ on $X$ and $Y$, as well as closure of $D_{\\mathrm{ic}}$ under these sums. No assertion that an arbitrary triangulated category has exact infinite sums is used.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-abstract-derived-category",
+    "det-ambient-ind-derived-sums"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, base-case cohomology and induction-step sum of triangles; Stacks Tag 07D9 (injectives-lemma-derived-products) and cone definition in Tag 05RU"
+   }
+  },
+  {
+   "text": "The direct-sum input on sheaves is [det-proper-heart-continuity-direct-image], applied to $p$ and $A=\\Lambda_X$, with target scalars restricted along $\\Lambda_Y\\to p_*\\Lambda_X$ as in the module pushforward. Its hypotheses hold: proper means finite type and separated [def-weil-proper-morphism]; finite type includes quasi-compactness [def-weil-finite-type-morphism]; separated implies quasi-separated by [lem-pc-separated-quasi-separated]. Consequently, for every family of module sheaves $B_\\alpha$ and $q\\geq0$, the canonical map $\\bigoplus R^qp_*B_\\alpha\\to R^qp_*(\\bigoplus B_\\alpha)$ is an isomorphism. This uses exactly the continuity assertion underlying the direct-sum clause of the blueprint's proper-heart-bound lemma; it needs no uniform bound on fibre dimensions. The unit's invocation of the proper-heart-bound lemma cannot supply a uniform integer d from properness alone: the disjoint union of the proper maps $\\mathbf P^m_k\\to\\operatorname{Spec}k$, for $m\\geq0$, is a proper morphism to the disjoint union of these points, since properness is local on the target, but its fibre dimensions are unbounded. This is the missing hypothesis in that invocation; the existing continuity statement supplies just its direct-sum input while preserving the unit's shifted-heart and truncation induction.",
+   "uses": [
+    "det-proper-heart-continuity-direct-image",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, base-case use of proper-heart-bound; its direct-sum input is the current continuity node in sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-proper-heart-continuity-direct-image.md; proper/qcqs definitions: Stacks Tags 01W1, 01T0, 01QO, 01KK"
+   }
+  },
+  {
+   "text": "We prove the assertion for all intervals by induction on $b-a\\geq0$, after disposing of empty intervals. If $a>b$, each $M_\\alpha$ has zero cohomology in every degree, so $0\\to M_\\alpha$ is an isomorphism by [lem-weil-pbc-unbounded-derived-iso-cohomology]. The comparison is then the isomorphism $0\\to F(0)=0$, including when $I$ is empty. Suppose $a=b$. By [lem-sf-derived-concentrated-single], $M_\\alpha\\cong B_\\alpha[-a]$, with $B_\\alpha\\cong H^a(M_\\alpha)\\in\\operatorname{IndCons}(X,\\Lambda)$. Transport the family and its coprojections through these isomorphisms. The shift comparisons from step 1 and the sum/shift and sum/cohomology identifications of step 2 identify $H^n(\\eta_M)$ with\n$$\n\\bigoplus_\\alpha R^{n-a}p_*B_\\alpha\\longrightarrow R^{n-a}p_*\\Bigl(\\bigoplus_\\alpha B_\\alpha\\Bigr).\n$$\nHere $H^q(F(B[0]))=R^qp_*B$ naturally for $q\\geq0$ by [lem-sp-derived-functor-single-identification] and the bounded-below/unbounded compatibility [src-right-derived-functor-plus-compatibility]. For $q<0$ both sides vanish, since the same identification computes $F(B[0])$ by an injective resolution starting in degree zero. The displayed map is the canonical one: on the $\\alpha$th summand it is $R^{n-a}p_*(\\iota_\\alpha)$, by naturality of these identifications and the defining equation of $\\eta$. For $n-a\\geq0$ it is an isomorphism by step 3, and for $n-a<0$ it is $0\\to0$. Hence $\\eta_M$ is an isomorphism by [lem-weil-pbc-unbounded-derived-iso-cohomology]. The index is $n-a$, since $H^n(K[-a])=H^{n-a}(K)$.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sf-derived-concentrated-single",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, base case a=b, with corrected shift sign; Stacks Tags 08J5, 015A, 05TH, 05TI and 05RT"
+   }
+  },
+  {
+   "text": "Assume $a<b$, and assume the assertion for every family supported in any interval of smaller nonnegative length. Put $L_\\alpha=\\tau_{\\leq b-1}M_\\alpha$ and $T_\\alpha=H^b(M_\\alpha)[-b]$. The canonical truncations of [def-kun-truncations] show that $L_\\alpha$ has cohomology in $[a,b-1]$ and $T_\\alpha$ in $[b,b]$. They belong to $D_{\\mathrm{ic}}(X,\\Lambda)$: truncation stability is [det-ambient-ind-derived-sums](2), while $T_\\alpha$ has just the ind-constructible sheaf $H^b(M_\\alpha)$ as its nonzero cohomology. By [lem-weil-pbc-truncation-triangle] and $\\tau_{\\leq b}M_\\alpha\\xrightarrow{\\sim}M_\\alpha$ (its cohomology map is the identity in the retained degrees and all other groups are zero, so use [lem-weil-pbc-unbounded-derived-iso-cohomology]), there is a canonical distinguished triangle $L_\\alpha\\to M_\\alpha\\to T_\\alpha\\to L_\\alpha[1]$. The induction hypothesis makes $\\eta_L$ invertible; the already proved length-zero case makes $\\eta_T$ invertible.",
+   "uses": [
+    "def-kun-truncations",
+    "det-ambient-ind-derived-sums",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, induction-step truncation triangles; Stacks Tag 08J5 (derived-remark-truncation-distinguished-triangle), with index b-1"
+   }
+  },
+  {
+   "text": "Sum the distinguished triangles $F(L_\\alpha)\\to F(M_\\alpha)\\to F(T_\\alpha)\\to F(L_\\alpha)[1]$ to form the upper row, and apply $F$ to the summed triangles $\\bigoplus L_\\alpha\\to\\bigoplus M_\\alpha\\to\\bigoplus T_\\alpha\\to(\\bigoplus L_\\alpha)[1]$ to form the lower row. Both rows are distinguished by the cone calculation of step 2 and [lem-pc-right-derived-functor-triangulated]. The maps $(\\eta_L,\\eta_M,\\eta_T)$ form a morphism of these triangles. Indeed the square for either of the first two arrows, after precomposing with the $\\alpha$th coprojection, is just $F$ applied to the defining coprojection square of the summed source triangle. For the boundary square the same calculation uses the coprojection $L_\\alpha[1]\\to(\\bigoplus L_\\alpha)[1]$; naturality of the shift isomorphism of $F$ identifies its composite with $\\eta_L[1]$ with the shifted $F(\\iota_\\alpha)$. Thus the last square commutes with precisely the required shifted first component. Since the first and third vertical components are isomorphisms by step 5, [lem-sf-triangle-morphism-iso] makes the middle component $\\eta_M$ an isomorphism. This completes the induction and proves the claimed comparison for every small family.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
+    "place": "Proof, final morphism of triangles and five-lemma conclusion; Stacks Tag 014A (derived-lemma-third-isomorphism-triangle)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-proper-heart-bound"
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-abstract-derived-category",
+  "det-ambient-ind-derived-sums",
+  "det-proper-heart-continuity-direct-image",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sf-derived-concentrated-single",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "def-kun-truncations",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md",
-  "place": "## Proof"
+  "place": "Proof, comparison, shifted-heart base case, and truncation-triangle induction; corrected sign and made continuity input explicit, with Stacks Tags 07D9, 08J5, 05RT and 014A as supporting sources"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*(coproduct|direct.sum)|((coproduct|direct.sum).*proper)",
+   "results": "25 hits in Mathlib: Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/LinearAlgebra/DFinsupp.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived proper pushforward preserves coproducts of uniformly bounded constructible l-adic complexes",
+   "results": "CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, CategoryTheory.Limits.PreservesFiniteCoproducts, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.Limits.PreservesCoproduct.iso, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier in query; corrected by second Loogle query; no match established by this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes, derived direct image commutes with direct sums of complexes of rational l-adic sheaves whose cohomology is in a common bounded interval",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  },
+  {
+   "tool": "grep",
+   "query": "Preserves.*(Coproduct|Colimit)|coproductComparison",
+   "results": "5 hits in Algebra/Homology/DerivedCategory: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coproduct\", \"derived\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor preserves coproducts of bounded complexes when its higher derived functors preserve sums on the heart",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper pro-etale rational-coefficient pushforward continuity for uniformly bounded families"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -56,5 +199,54 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window-ii"
+ "unit": "sk-lem-proper-unbounded-window-ii",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-unbounded-window-ii-bounded",
+  "worker": "stage1",
+  "summary": "Clarified the coefficient/module categories and canonical coproduct map without adding geometric hypotheses. Expanded the bounded-length induction, including empty intervals and empty families. Reused existing ringed-site, derived-coproduct, truncation, continuity and triangle-isomorphism interfaces; created no nodes. Replaced a missing ambient parent citation by its actual detail node, corrected n+a to n-a, and used the existing qcqs continuity input instead of assuming an unavailable global fibre-dimension bound. Continuation audit explicitly cites the existing enough-injectives theorem and records the unit's missing-d counterexample in the proof step itself.",
+  "blueprint": "Steps 1-2 realize the comparison paragraph and the sum/cohomology and sum/triangle facts of the base and induction paragraphs. Step 3 supplies the direct-sum input underlying proper-heart-bound. Step 4 realizes the a=b paragraph with the corrected shift. Steps 5-6 realize the full truncation-triangle induction paragraph, including the last boundary square. The unit first paragraph is preserved: induction on a common interval via the shifted heart and truncation triangles.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General theorem on module sheaves over a small commutative ringed site; supplies Grothendieckness and K-injective resolutions without changing the proper-direct-image route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "General termwise model of derived coproducts, needed for the explicit cone calculation; not a substitute for proper continuity."
+   },
+   {
+    "node": "det-ambient-ind-derived-sums",
+    "why": "Exactly the sums/cohomology and truncation assertions named in the blueprint proof by its missing parent sk-cor-ambient-ind-derived."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Natural identification of cohomology of a derived functor on a sheaf with the ordinary higher derived functor; makes the shifted-heart base case precise."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "General comparison of unbounded and bounded-below right derived functors needed to apply the natural single-object cohomology formula."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General canonical successive-truncation triangle and its maps; realizes exactly the induction triangle in the unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-grothendieck-derived-coproducts",
+  "det-ambient-ind-derived-sums",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-a662a21f6",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-a662a21f6 (reviewer sub-agent of L); spot-checked: Read the full item, unit route, blueprint proof, all 19 cited node statements and sources, and delivery requirements. Verified coefficient categories, base-change/module pushforward map, qcqs continuity hypotheses, corrected n-a shift, induction, cone and triangle arguments, edge cases, searches, and absence of new nodes or duplicates. Wrote review.md; no repairs needed."
+ }
 }

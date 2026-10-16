@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Proof opening compactification choice, via the local compact-support-extension split: the mapping-space cone argument and functor-category parameters needed to compare choices.",
+   "place": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint.",
    "via": [
     "lem-cbc-cofiltered-coherent-equivalence-diagrams",
     "lem-cbc-etale-local-compact-support-extension"
@@ -22,67 +22,217 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-internal-hom-quasicategory] with $A=K$, $X=\\mathscr C$. A horn in a full subcategory fills in the ambient quasicategory; an inner horn contains every vertex of its simplex, so the filler has the prescribed vertices and belongs to the full subcategory. This proves functor-category and full-subcategory closure.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, basic fact (1); full-subcategory closure from the definition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pinch-comparison] to any quasicategory $Q$ and vertices $x,y$. Its statement directly gives that both the right-pinched mapping space $\\operatorname{Map}_Q(x,y)$ and the edge mapping space $U_Q(x,y)$ are Kan complexes. Taking $Q$ to be the functor quasicategory or any full subcategory from step 1 proves the mapping-space assertion with exactly the mapping convention in the item.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, together with the Kan assertions stated in the existing pinch-comparison node."
+   }
+  },
+  {
+   "text": "For the core of any quasicategory $Q$, fill an inner horn in $Q$, or an outer horn using [lem-cbc-equivalence-outer-horn-filling]. If $n>2$ the horn already contains every edge. If $n=2$, its new edge is a composite of the given equivalences or a composite with an inverse, and hence has an inverse by reversing these composites, using the triangle and associativity homotopies of [lem-cbc-simplicial-composition-spine]. Dimension-one horns fill by identities. Each filler therefore lies in the core, which is Kan.",
+   "uses": [
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-cbc-simplicial-composition-spine",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "Core closure, with its dimension-two edge check."
+   }
+  },
+  {
+   "text": "Evaluation preserves inverse edges and triangle witnesses, so an equivalence transformation has equivalence components. Conversely assume the components of $\\eta$ are equivalences. Any outer horn $\\Lambda_0^n\\to\\operatorname{Fun}(K,\\mathscr C)$ with initial edge $\\eta$ adjoints to $K\\times\\Lambda_0^n\\to\\mathscr C$. Apply [lem-cbc-invertible-prism-extension] with $A=\\varnothing$, $B=K$. Its vertical-edge condition is exactly the component hypothesis. The extension adjoints to a filler. The converse implication of [lem-cbc-equivalence-outer-horn-filling], applied in this functor quasicategory, now makes $\\eta$ an equivalence.",
+   "uses": [
+    "lem-cbc-invertible-prism-extension",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Prism extension with A empty, followed by the outer-horn criterion."
+   }
+  },
+  {
+   "text": "Let $u:C\\to D$ have quasi-inverse $v$ and natural equivalences $\\alpha:vu\\simeq\\mathrm{id}_C$, $\\beta:uv\\simeq\\mathrm{id}_D$. Define $T(f)=\\alpha_Bv(f)\\alpha_A^{-1}$ on mapping spaces. The multiarrow spaces and face maps of [lem-cbc-simplicial-composition-spine], together with the natural pinch comparison of [lem-coef-infinity-pinch-comparison], supply composition maps and homotopies on the whole Kan spaces. A naturality square for $\\alpha$ has edges $vu(a),a,\\alpha_A,\\alpha_B$; its two triangles identify $\\alpha_Bvu(a)$ with $a\\alpha_A$. Applying this square to every simplex of the mapping space gives $T(u(a))\\simeq a$. Put $\\delta_A=u(\\alpha_A)\\beta_{uA}^{-1}$ and $k(f)=\\delta_B f\\delta_A^{-1}$. The naturality squares for $\\beta$ similarly give $u_*T\\simeq k$. Composition with inverse edges gives a homotopy inverse $k^{-1}(f)=\\delta_B^{-1}f\\delta_A$. Since $Tu_*\\simeq\\mathrm{id}$, we have $ku_*\\simeq u_*Tu_*\\simeq u_*$ and hence $k^{-1}u_*\\simeq u_*$. Consequently $R=T k^{-1}$ satisfies $u_*R\\simeq\\mathrm{id}$ and $Ru_*\\simeq Tu_*\\simeq\\mathrm{id}$. Thus $u_*$ is a homotopy equivalence, and induces a bijection on components and isomorphisms on the based homotopy groups in the definition of weak equivalence. No triangle-compatible choices of the unit and counit were assumed.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Explicit conjugated quasi-inverse calculation using coherent composition."
+   }
+  },
+  {
+   "text": "Put $D=\\operatorname{Fun}(K,\\mathscr C)$ and $E_F=\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\{F\\}$. By [lem-coef-infinity-arrow-target-right-fibration], its source projection $q_F:E_F\\to D$ is a right fibration. The exact degreewise pullback defining $P=(\\Delta_K\\downarrow F)$ is $\\mathscr C\\times_D E_F$. A horn lifting problem for $p:P\\to\\mathscr C$ therefore gives a horn lifting problem for $q_F$ over the simplex composed with $\\Delta_K$; its lift pairs with that simplex to give the required lift in $P$. Thus $p$ is a right fibration. An inner horn in $P$ projects to one in $\\mathscr C$; fill there and use this lifting property. Therefore $P$ is a quasicategory. Its fiber $P_x$ is exactly the edge mapping space $U_D(\\Delta_Kx,F)$. The existing node [lem-coef-infinity-pinch-comparison] says this is Kan and gives a natural homotopy equivalence from $\\operatorname{Map}_D(\\Delta_Kx,F)$ to it.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13, pulled back along the constant-diagram functor by the explicit horn-lifting argument; pinch comparison is Proposition 4.6.5.10 (01L5)."
+   }
+  },
+  {
+   "text": "For $\\mu\\in P_y$, transport along $a:x\\to y$ is $a^*\\mu=\\mu\\circ\\Delta_K(a)$: a lift is the square with upper edge $\\Delta_K(a)$, lower edge the identity of $F$, and the composition triangle. The contractible composition-span fibers of [lem-cbc-simplicial-composition-spine] retain its higher compatibilities. Apply [lem-cbc-right-fibration-morphism-space]. It identifies $\\operatorname{Map}_P(\\lambda,\\mu)$ with pairs $(a,\\gamma)$, where $\\gamma$ is a path from $\\mu\\Delta_K(a)$ to $\\lambda$ in $P_x$. Using the natural pinch comparison of step 6 gives exactly the homotopy fiber in the item, with the path direction of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-simplicial-composition-spine",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TL",
+    "place": "Generic right-fibration mapping formula with explicit precomposition transport."
+   }
+  },
+  {
+   "text": "Fix $\\mu$, and denote the displayed map by $t_x$. Step 7 identifies its homotopy fiber over every target vertex $\\lambda$ with $\\operatorname{Map}_P(\\lambda,\\mu)$. By [lem-cbc-kan-fibration-fiber-criterion], $t_x$ is an equivalence exactly when all these fibers are contractible. As $x$ and $\\lambda$ vary, they exhaust the objects of $P$. Thus this is terminality of $\\mu$, the definition of a limiting cone. Empty target spaces cause no exception: existence of $t_x$ then forces its source empty as well.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZP",
+    "place": "Mapping-path replacement and Proposition 3.3.7.6."
+   }
+  },
+  {
+   "text": "Let $T$ be the full subcategory of terminal objects of a quasicategory $Q$, and suppose it has a vertex. By step 1 it is a quasicategory. For $n\\geq1$, a boundary $\\partial\\Delta^n\\to T$ has terminal last vertex. The criterion [lem-cbc-terminal-boundary-extension] fills it in $Q$; its vertices are the boundary vertices, so fullness places it in $T$. For $n=0$ choose the given vertex. Hence $T\\to\\Delta^0$ lifts every boundary. To fill a horn, first fill its missing face from that face's boundary (when $n=1$, choose its missing vertex), then fill the whole boundary. Thus $T$ is Kan. Now [lem-cbc-kan-fibration-fiber-criterion] makes $T\\to\\Delta^0$ a weak equivalence, proving contractibility of the full subcategory itself. With no terminal vertices it and its core are empty.",
+   "uses": [
+    "lem-cbc-terminal-boundary-extension",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06R1",
+    "place": "Boundary criterion followed by the trivial Kan fibration criterion."
+   }
+  },
+  {
+   "text": "Replace $\\mathscr C$ by its opposite, reversing simplex vertex order. This sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, so preserves quasicategories and exchanges terminal with initial. A cone $\\Delta_{K^{\\mathrm{op}}}x\\to F^{\\mathrm{op}}$ becomes a cocone $F\\to\\Delta_Kx$, reversing cone-category arrows. Do not identify the opposite of a right-pinched simplicial set with a right-pinched simplicial set strictly. Instead apply [lem-coef-infinity-pinch-comparison] separately in $\\mathscr C$ and $\\mathscr C^{\\mathrm{op}}$. Reversing the arrow interval identifies $U_{\\mathscr C^{\\mathrm{op}}}(x,y)$ with $U_{\\mathscr C}(y,x)^{\\mathrm{op}}$. For any simplicial set $S$, the coordinate reversal $(s;t_0,\\ldots,t_n)\\mapsto(s;t_n,\\ldots,t_0)$ gives a homeomorphism $|S^{\\mathrm{op}}|\\cong|S|$: the realization relations agree because the opposite operator sends a monotone map $\\alpha:[m]\\to[n]$ to $i\\mapsto n-\\alpha(m-i)$. Hence these comparisons identify the two mapping-space homotopy types and preserve contractibility. Steps 6-8 therefore give the cocone mapping formula and the criterion that $\\operatorname{Map}_{\\mathscr C}(y,x)\\to\\operatorname{Map}_D(F,\\Delta_Kx)$ be an equivalence for a cocone $F\\to\\Delta_Ky$. Step 9 in the opposite proves contractibility for the initial-object full subcategory. No argument used filteredness, nonempty $K$, or invertibility of diagram arrows.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Opposite and pinch comparisons with the explicit dual universal map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-cbc-invertible-prism-extension",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-terminal-boundary-extension",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Agent synthesis of the explicitly sourced horn and right-fibration results; the blueprint supplies the compactification-choice application, not the foundation proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a quasicategory C and a simplicial set K the functor object C to the power K is a quasicategory and cone mapping spaces are homotopy fibers of spaces of natural transformations",
-   "results": "8 hits: SSet.QCat.bicategory, SSet.QCat.catEnrichedOrdinaryCategory, SSet.QCat.strictBicategory, SSet.QCat, SSet.hoFunctor, CategoryTheory.Nerve.quasicategory, SSet.Quasicategory, SSet.StrictSegal.quasicategory'; digest f61f2f76fd576267",
+   "query": "Coherent functor and cone calculus in a quasicategory with mapping spaces and terminal objects",
+   "results": "8 hits; note: ; top: SSet.QCat.bicategory, SSet.Quasicategory.hornFilling, SSet.Quasicategory, CategoryTheory.Functor.RightExtension.coneAtFunctor, SSet.Quasicategory.hornFilling', CategoryTheory.Functor.structuredArrowMapCone, CategoryTheory.Nerve.quasicategory, SSet.quasicategory_of_filler; digest 5178a6fa1b431fd4",
    "date": "2026-10-16",
-   "verdict": "no full match: functor-category closure alone is SSet.instQuasicategoryObjIhom, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:153-154, read in source; cone fibers and contractible spaces of terminal objects are not supplied. IsLimit.homEquiv and hasLimit_iff_hasTerminal_cone are ordinary-category statements with hom sets. StrictBicategory.lean:19-32 retains homotopy categories rather than the required mapping spaces."
+   "verdict": "No full match; hits are primitive quasicategory or ordinary cone declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor.*cone|mapping.*space.*fiber|terminal.*contractib",
+   "results": "0 hits; note: ; top: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib source declaration for the full coherent cone calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent functor categories and cone mapping space criterion in infinity categories",
+   "results": "8 hits; note: ; top: CategoryTheory.Functor.mapCone, CategoryTheory.Functor.mapConeMorphism, CategoryTheory.Functor.cocones_obj, CategoryTheory.Limits.isLimitMapConeFanMkEquiv, CategoryTheory.Functor.mapCoconePrecompose, CategoryTheory.Limits.Cocones.functoriality_obj_ι_app, CategoryTheory.Functor.mapCocone, CategoryTheory.Limits.Cocones.functoriality; digest b34c6be8d5263f28",
+   "date": "2026-10-16",
+   "verdict": "No full match; hits are ordinary CategoryTheory cone/cocone declarations."
   },
   {
    "tool": "loogle",
    "query": "\"Quasicategory\", \"ihom\"",
-   "results": "2 hits: SSet.instQuasicategoryObjIhom, SSet.instQuasicategoryObjIhomTerminal; digest 4bf963e126f428d2",
+   "results": "{\"t\": \"2026-10-16T13:07:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"ihom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryObjIhom\", \"SSet.instQuasicategoryObjIhomTerminal\"], \"digest\": \"4bf963e126f428d2\"}",
    "date": "2026-10-16",
-   "verdict": "no full match: functor-category closure alone is SSet.instQuasicategoryObjIhom, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:153-154, read in source; cone fibers and contractible spaces of terminal objects are not supplied. IsLimit.homEquiv and hasLimit_iff_hasTerminal_cone are ordinary-category statements with hom sets. StrictBicategory.lean:19-32 retains homotopy categories rather than the required mapping spaces."
-  },
-  {
-   "tool": "grep",
-   "query": "quasicategor.*(ihom|internalHom|functor)|equivalence.*pointwise|homotopy.*fiber.*cone",
-   "results": "7 hits: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/CategoryTheory/Limits/FilteredColimitCommutesProduct.lean, Mathlib/CategoryTheory/Limits/FilteredColimitCommutesProduct.lean, Mathlib/CategoryTheory/Limits/FilteredColimitCommutesProduct.lean; digest 828510c86dfaf657",
-   "date": "2026-10-16",
-   "verdict": "no full match: functor-category closure alone is SSet.instQuasicategoryObjIhom, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:153-154, read in source; cone fibers and contractible spaces of terminal objects are not supplied. IsLimit.homEquiv and hasLimit_iff_hasTerminal_cone are ordinary-category statements with hom sets. StrictBicategory.lean:19-32 retains homotopy categories rather than the required mapping spaces."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Mapping space criterion for a homotopy limiting cone in an infinity category and equivalences detected componentwise in functor categories",
-   "results": "8 hits: CategoryTheory.Limits.isLimitMapConeFanMkEquiv, CategoryTheory.MorphismProperty.limitsOfShape.mk, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Limits.Cone.isLimitOfIsIsoLimMapπ, CategoryTheory.Limits.IsLimit.homEquiv_apply, CategoryTheory.Limits.IsLimit.homEquiv, HomologicalComplex.isLimitOfEval, CategoryTheory.Limits.IsColimit.homEquiv; digest 5748477116a05190",
-   "date": "2026-10-16",
-   "verdict": "no full match: functor-category closure alone is SSet.instQuasicategoryObjIhom, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:153-154, read in source; cone fibers and contractible spaces of terminal objects are not supplied. IsLimit.homEquiv and hasLimit_iff_hasTerminal_cone are ordinary-category statements with hom sets. StrictBicategory.lean:19-32 retains homotopy categories rather than the required mapping spaces."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The infinity category of cones has mapping spaces given by homotopy fibers and a cone is limiting exactly when mapping into it is contractible",
-   "results": "8 hits: LightDiagram.isLimit, CategoryTheory.Limits.hasLimit_iff_hasTerminal_cone, SSet.hasLimits, CategoryTheory.Limits.IsLimit.ofRepresentableBy, CategoryTheory.Limits.diagramOfConesInhabited, CategoryTheory.Limits.isLimitConstCone, CategoryTheory.Limits.IsLimit.OfNatIso.coneOfHom, CategoryTheory.Limits.IsLimit.OfNatIso.limitCone; digest 568787f920c8f53e",
-   "date": "2026-10-16",
-   "verdict": "no full match: functor-category closure alone is SSet.instQuasicategoryObjIhom, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:153-154, read in source; cone fibers and contractible spaces of terminal objects are not supplied. IsLimit.homEquiv and hasLimit_iff_hasTerminal_cone are ordinary-category statements with hom sets. StrictBicategory.lean:19-32 retains homotopy categories rather than the required mapping spaces."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Mapping spaces in an overcategory are derived fibers of postcomposition; final objects form either the empty space or a contractible space",
-   "results": "{\"t\": \"2026-10-16T08:20:29Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in an overcategory are derived fibers of postcomposition; final objects form either the empty space or a contractible space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"CategoryTheory.Over.instHasTerminal\", \"CategoryTheory.ExponentiableMorphism.instChosenPullbacksAlongHomDiscretePUnitMk\", \"CategoryTheory.Over.over_hasTerminal\", \"CategoryTheory.Over.map\", \"CategoryTheory.Over\", \"CategoryTheory.instCategoryOver\"], \"digest\": \"f95700f7fbfe9933\"}",
-   "date": "2026-10-16",
-   "verdict": "no full match: the semantic hits are ordinary overcategories or model-category fibrations, not mapping spaces of a quasicategorical comma category. Read Quasicategory/StrictBicategory.lean:14-32 and SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:142-154; internal-hom quasicategory closure is a partial match, not the cone-fiber/terminal-space statement."
-  },
-  {
-   "tool": "grep",
-   "query": "pinched|rightHom|mappingSpace|homotopyFiber|terminal.*contractib|contractib.*terminal",
-   "results": "{\"t\": \"2026-10-16T08:21:10Z\", \"tool\": \"grep\", \"query\": \"pinched|rightHom|mappingSpace|homotopyFiber|terminal.*contractib|contractib.*terminal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"b414692f0c4fc18a\"}",
-   "date": "2026-10-16",
-   "verdict": "no full match: the semantic hits are ordinary overcategories or model-category fibrations, not mapping spaces of a quasicategorical comma category. Read Quasicategory/StrictBicategory.lean:14-32 and SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:142-154; internal-hom quasicategory closure is a partial match, not the cone-fiber/terminal-space statement."
+   "verdict": "Partial match only: the internal-hom closure declaration is the Mathlib leaf used in step 1. It does not give the other clauses of the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-cofiltered-coherent-equivalence-diagrams",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-enhanced-functor-cone-calculus",
+  "worker": "stage1",
+  "summary": "Resumed the saved ten-step split, checked its sources and all verbatim citations/search logs, and found two newly available coefficient-foundation nodes supplying the arrow-target right fibration and natural pinch comparison. Reused those nodes and removed the redundant unpublished slice/model node. Seven new nodes remain, one an exact Mathlib internal-hom leaf and six statement-only unsplit foundations. The item statement is unchanged. A fresh resumption checked all primitive sources and log-backed searches again and made the opposite mapping-space comparison explicit through arrow spaces and reversal of realization coordinates.",
+  "blueprint": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint. Current source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-arrow-target-right-fibration",
+    "why": "Generic arrow-target right-fibration theorem, used only to construct the coherent cone category by degreewise pullback; the current compact-support-base-change unit has no such foundational theorem."
+   },
+   {
+    "node": "lem-coef-infinity-pinch-comparison",
+    "why": "Generic natural comparison of right-pinched and edge mapping spaces, including their Kan property; preserves the fixed mapping convention without changing the compact-support-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-9cd263e32",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-9cd263e32 (reviewer sub-agent of L); spot-checked: Read all ten steps, seven new nodes, cited statements and sources. Checked horn hypotheses, mapping-space models, transport orientation, empty cases, duplicates, and master coefficient categories. The 16-node dependency closure is acyclic; both declared generic tool uses are accepted. No repairs needed. Full assessment written to review.md."
+ }
 }
