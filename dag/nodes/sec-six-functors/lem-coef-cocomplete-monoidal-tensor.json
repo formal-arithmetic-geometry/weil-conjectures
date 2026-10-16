@@ -26,9 +26,92 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=V\\times W$. Let $R$ consist of all cocones $(p,w):K^{\\triangleright}\\to C$ with $p$ a small colimiting cocone in $V$ and $w\\in W$ fixed, and all $(v,q)$ with $q$ a small colimiting cocone in $W$ and $v\\in V$ fixed. Include $K=\\varnothing$. These need not be colimiting cocones of the product $C$; they are prescribed relations. Apply [lem-coef-infinity-relative-colimit-completion] to this $C,R$, and define $T=P_R(C)$ and $\\mu=j_R$. The category $T$ is cocomplete. Since $j_R$ sends these prescribed cocones to colimiting cocones, $\\mu$ preserves small colimits separately. The set of small shapes and the collection $R$ fit in an enlarged ambient universe; the cited theorem keeps the colimit shapes in the original smaller universe.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 4.8.1.7 and proof of Proposition 4.8.1.3; Variant 4.8.1.11 Online source, not archived; argument written out here."
+   }
+  },
+  {
+   "text": "For any cocomplete $Z$, the unary equivalence of [lem-coef-infinity-relative-colimit-completion] identifies $\\operatorname{Fun}_{\\mathrm{colim}}(T,Z)$ with $\\operatorname{Fun}_R(V\\times W,Z)$ by restriction along $\\mu$. A functor lies in the latter full category exactly when, for each fixed $w$, it preserves every small colimiting cocone in $V$, and, for each fixed $v$, every such cocone in $W$. This is exactly separate cocontinuity, on objects, transformations and all higher simplices. Thus this equivalence is the required unstructured universal property, without a presentability hypothesis on $Z$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.8.1.3 (universal property); Haugseng Observation 3.9, paragraph following its first sentence Online source, not archived; argument written out here."
+   }
+  },
+  {
+   "text": "Define $h:C\\times C\\to T$ by $h((v,w),(v',w'))=\\mu(v\\otimes_Vv',w\\otimes_Ww')$. It sends $R$ to colimiting cocones in each $C$ variable: for instance a relation $(p,w)$ in the first variable is sent first to $(p\\otimes_Vv',w\\otimes_Ww')$, whose $V$ coordinate is a colimiting cocone because $-\\otimes_Vv'$ preserves colimits, and then to a colimiting cocone by separate cocontinuity of $\\mu$ from step 1. A relation $(v,q)$ uses $-\\otimes_Ww'$ instead; relations in the second input use $v\\otimes_V-$ and $w\\otimes_W-$. The two-variable equivalence of [lem-coef-infinity-relative-colimit-completion] therefore extends $h$ to a separately cocontinuous functor $m:T\\times T\\to T$, with a specified coherent equivalence $m(\\mu(-),\\mu(-))\\simeq\\mu((- )\\otimes_C(-))$. Set the unit to $e=\\mu(\\mathbf1_V,\\mathbf1_W)$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 4.8.1.3, using HTT Proposition 5.3.6.11; Remark 4.8.1.9 Online source, not archived; argument written out here."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-straightening] with its small universe chosen large enough to contain $V,W,C,T$ and the total spaces of the fibrations (and with a still larger outer universe). This change concerns only the size bound for straightening; colimit shapes throughout remain in the original $\\mathcal U$. Apply it to the given monoidal fibrations over $N(\\Delta^{\\mathrm{op}})$, so that their fibers and coherent transport diagrams give the original ordered block-tensor operations. For each $n>0$ put $h_n:C^n\\to T$, $((v_i,w_i))\\mapsto\\mu(\\bigotimes_i v_i,\\bigotimes_i w_i)$; its arity-zero value is $e$. Each positive-arity $h_n$ sends $R$ to colimiting cocones separately by the calculation in step 3. The finite-variable equivalences of [lem-coef-infinity-relative-colimit-completion] extend these to $n$-ary operations on $T$, with the unary operation identified with the identity. Define a diagram with value $T^n$ over $[n]$; for an arrow of $\\Delta^{\\mathrm{op}}$ its output coordinates are these tensor operations on the corresponding ordered input blocks, using $e$ for an empty block and discarding unused inputs. A projection that discards an input is not claimed cocontinuous in that input: extension is applied separately to each output block, only in the variables used there. For a composition of such arrows, the two resulting operations on each nonempty output block are separately cocontinuous in its leaves, and on $C$-inputs their comparison is $\\mu$ of the coherent comparison of the original block tensors. Full faithfulness in that block's arity lifts this comparison, its inverse and all compatibility homotopies. For example the two ternary bracketings lift the original associator, and the arity-four pentagon lifts its compatibility. Every longer string and every higher simplex is lifted in the same full functor categories; thus the whole coherent composition diagram lifts, not merely the binary constraints. Empty output blocks are the already specified value $e$ (arity zero), and inert projection comparisons are the product projections themselves. Restriction of a substituted lifted operation is the corresponding substituted original operation followed by $\\mu$, which verifies compatibility of these restrictions with composition. The space of lifts of each specified coherent diagram is contractible since the restriction functor is an equivalence. This constructs a coherent functor $N(\\Delta^{\\mathrm{op}})\\to\\operatorname{Cat}_\\infty$ with values $T^n$ and the Segal projection equivalences. Unstraightening by [lem-coef-cocartesian-straightening] gives a cocartesian fibration $p:T^\\otimes\\to N(\\Delta^{\\mathrm{op}})$. To check the relative-limit clause of [def-coef-monoidal-infinity-category], fix $D\\in T^m$, $Y=(Y_1,\\ldots,Y_n)\\in T^n$ (a new letter, since $C$ denotes $V\\times W$), and $\\phi:[m]\\to[n]$. The cocartesian mapping-space criterion of [lem-coef-cocartesian-straightening] identifies $\\operatorname{Map}^\\phi(D,Y)$ with $\\operatorname{Map}_{T^n}(\\phi_!D,Y)$. In the product $T^n$ this is $\\prod_i\\operatorname{Map}_T((\\phi_!D)_i,Y_i)$, and each factor is $\\operatorname{Map}^{\\rho_i\\phi}(D,Y_i)$ by that same criterion. These identifications are precisely composition with the inert projections. For $n=0$ the mapping space in $T^0$ is contractible. Thus both clauses of the monoidal definition hold. The coherently compatible maps $\\mu^n:C^n\\to T^n$ give, under the same straightening equivalence, a functor of fibrations preserving cocartesian arrows, hence a strong monoidal $\\mu$. Its binary tensor is $m$, already separately cocontinuous.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 4.8.1.9 and Proposition 4.8.1.10; aritywise coherent extension as in proof of Proposition 4.8.1.3 Online source, not archived; argument written out here. For the cocartesian-fibration model, HTT Theorem 3.2.0.1 with Proposition 4.2.4.4, cocartesian dual, as stated in lem-coef-cocartesian-straightening."
+   }
+  },
+  {
+   "text": "Now let $Z$ be monoidal with separately cocontinuous tensor, and let $b:C\\to Z$ be separately cocontinuous and strong monoidal. Step 2 gives $\\bar b:T\\to Z$ preserving colimits and a coherent equivalence $\\bar b\\mu\\simeq b$. On $T^n$ compare $\\bar b$ applied to its $n$-fold tensor with the $n$-fold tensor of the $\\bar b$ values. Both functors preserve colimits separately, since $m$, $\\bar b$, and tensor in $Z$ do. Their restrictions to $C^n$ have the coherent comparison equivalence supplied by the strong monoidal structure of $b$. The full finite-variable equivalences of [lem-coef-infinity-relative-colimit-completion] lift these comparison maps and their inverses. For each ordered substitution of operations, the required compatibility diagram restricts to the specified diagram of the strong monoidal functor $b$. The equivalence of full functor categories identifies the space of such diagrams with prescribed boundary before and after restriction, so lifts this compatibility and its higher compatibility simplices coherently; in arity zero the comparison is $\\bar b(e)\\simeq b(\\mathbf1_C)\\simeq\\mathbf1_Z$. Thus $\\bar b$ is strong monoidal and $b\\simeq\\bar b\\mu$ is a monoidal equivalence. Conversely a strong monoidal cocontinuous $\\bar b$ restricts to such a $b$. For two such functors and a monoidal transformation between their restrictions, step 2 first lifts the underlying transformation. Its compatibility square with the $n$-fold tensor is a diagram between separately cocontinuous functors on $T^n$; its restriction is the given compatibility square on $C^n$. Full faithfulness in arity $n$ identifies the spaces of fillers of these squares with their prescribed boundaries. It therefore lifts the square and each higher compatibility diagram, with contractible space of choices. In arity zero the square is already the specified comparison at the units. Applying this to a simplex of transformations with its boundary specified proves the equivalence on all mapping spaces. It follows that restriction is an equivalence of the infinity categories of strong monoidal functors specified in the statement, not just a bijection of their equivalence classes.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.8.1.10 (structured universal property); Remark 4.8.1.9 Online source, not archived; argument written out here."
+   }
+  },
+  {
+   "text": "Suppose $V,W$ are presentable. Choose the small presentations $i:A\\to V$, $j:B\\to W$ and small families $R_A,R_B$ of bounded colimit relations supplied by [lem-coef-infinity-bounded-colimit-presentation]. Let $R_{AB}$ consist of $(r,b)$ for $r\\in R_A,b\\in B$ and $(a,s)$ for $a\\in A,s\\in R_B$. The category $A\\times B$ and this family are small; hence $Q=P_{R_{AB}}(A\\times B)$ is presentable by the small-data clause of [lem-coef-infinity-relative-colimit-completion]. Its generator functor respects $R_A,R_B$ separately, so the finite-variable clause of that node, using $P_{R_A}(A)\\simeq V$ and $P_{R_B}(B)\\simeq W$, extends it to a separately cocontinuous $V\\times W\\to Q$. Step 2 factors this through a cocontinuous $f:T\\to Q$. Conversely $\\mu(i(-),j(-))$ respects $R_{AB}$ and gives a cocontinuous $g:Q\\to T$. The restrictions of $fg$ and $\\mathrm{id}_Q$ to $A\\times B$ agree; the unary universal property for $Q$ makes them equivalent. The restrictions of $gf\\mu$ and $\\mu$ to $A\\times B$ agree; finite-variable full faithfulness for the two small presentations first makes them equivalent on $V\\times W$, and step 2 then gives $gf\\simeq\\mathrm{id}_T$. Thus $T\\simeq Q$ is presentable. Its universal property from step 2, restricted to presentable targets, is the defining bilinear universal property of the tensor of presentable categories, which identifies $T$ with that tensor. By [def-coef-complete-algebroid], presentability of $T$ together with separate cocontinuity of $m$ is exactly presentable monoidality. The small presentations show this is presentability in the original universe, not merely in the enlarged ambient one.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-infinity-bounded-colimit-presentation",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.8.1.15 (small generators and relations); compare HTT Example 5.3.6.8 Online source, not archived; argument written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-infinity-relative-colimit-completion",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-bounded-colimit-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Explicit relative-cocompletion and aritywise extension argument following section 4.8.1, especially proof of Proposition 4.8.1.3, Remark 4.8.1.9, Proposition 4.8.1.10, Variant 4.8.1.11 and Proposition 4.8.1.15; read online, not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +168,88 @@
    "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cocomplete tensor product of monoidal infinity categories universally represents separately colimit preserving strong monoidal bifunctors",
+   "results": "{\"t\": \"2026-10-16T18:22:34Z\", \"tool\": \"leanfinder\", \"query\": \"cocomplete tensor product of monoidal infinity categories universally represents separately colimit preserving strong monoidal bifunctors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ι_map_tensorHom_eq\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\", \"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.MonoidalCategory.DayFunctor.tensorDesc\", \"CategoryTheory.MonoidalCategory.DayConvolution.term_⊛_\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.MonoidalCategory.externalProductBifunctorCurried_obj_obj_obj_obj\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\"], \"digest\": \"cd08b24c5faeef14\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary monoidal categories, ordinary Day convolution, or localization at arrows; none gives a tensor of cocomplete quasicategories and the coherent bilinear/strong-monoidal universal property. Read the ordinary Category hypotheses in Monoidal/Cartesian/FunctorCategory and Localization/Monoidal/Basic, and the Type-valued free-cocompletion description in Limits/Presheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "cocomplete.*tensor|presentable.*monoidal|bilinear.*functor",
+   "results": "{\"t\": \"2026-10-16T18:22:35Z\", \"tool\": \"grep\", \"query\": \"cocomplete.*tensor|presentable.*monoidal|bilinear.*functor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary monoidal categories, ordinary Day convolution, or localization at arrows; none gives a tensor of cocomplete quasicategories and the coherent bilinear/strong-monoidal universal property. Read the ordinary Category hypotheses in Monoidal/Cartesian/FunctorCategory and Localization/Monoidal/Basic, and the Type-valued free-cocompletion description in Limits/Presheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cocomplete tensor product of monoidal infinity categories universally represents separately colimit preserving strong monoidal bifunctors",
+   "results": "{\"t\": \"2026-10-16T18:22:36Z\", \"tool\": \"leansearch\", \"query\": \"cocomplete tensor product of monoidal infinity categories universally represents separately colimit preserving strong monoidal bifunctors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.term_⊗ᵢ_\", \"CategoryTheory.Monoidal.FunctorCategory.tensorObj\", \"CategoryTheory.Functor.Monoidal.RepresentableBy.tensorObj\", \"CategoryTheory.MonoidalCategory.tensor\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"CategoryTheory.CartesianMonoidalCategory.tensorProductIsBinaryProduct\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\"], \"digest\": \"257eec32f327ffb8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary monoidal categories, ordinary Day convolution, or localization at arrows; none gives a tensor of cocomplete quasicategories and the coherent bilinear/strong-monoidal universal property. Read the ordinary Category hypotheses in Monoidal/Cartesian/FunctorCategory and Localization/Monoidal/Basic, and the Type-valued free-cocompletion description in Limits/Presheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T18:28:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monoidal\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\"], \"digest\": \"db3aff70048fd8f2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary monoidal categories, ordinary Day convolution, or localization at arrows; none gives a tensor of cocomplete quasicategories and the coherent bilinear/strong-monoidal universal property. Read the ordinary Category hypotheses in Monoidal/Cartesian/FunctorCategory and Localization/Monoidal/Basic, and the Type-valued free-cocompletion description in Limits/Presheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of cocomplete infinity categories represents bilinear functors via localization of presheaves at coordinate colimit cocones",
+   "results": "{\"t\": \"2026-10-16T18:28:04Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of cocomplete infinity categories represents bilinear functors via localization of presheaves at coordinate colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.RepresentableBy.tensorObj\", \"CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost\", \"CategoryTheory.IsSifted.instIsIsoObjFunctorTypeColimTensorObjProdComparison\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\"], \"digest\": \"da97d5dc74e50cde\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary monoidal categories, ordinary Day convolution, or localization at arrows; none gives a tensor of cocomplete quasicategories and the coherent bilinear/strong-monoidal universal property. Read the ordinary Category hypotheses in Monoidal/Cartesian/FunctorCategory and Localization/Monoidal/Basic, and the Type-valued free-cocompletion description in Limits/Presheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory tensor preserves colimits",
+   "results": "{\"t\": \"2026-10-16T18:22:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory tensor preserves colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `tensor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Invalid query: Loogle returned Unknown identifier tensor. This attempt gives no evidence of absence; replaced by the valid query \"Monoidal\", \"PreservesColimits\"."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of cocomplete infinity categories represents separately cocontinuous functors",
+   "results": "{\"t\": \"2026-10-16T19:27:21Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of cocomplete infinity categories represents separately cocontinuous functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instMonoidalClosedCondensedSet\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\"], \"digest\": \"467762b5b83b15f3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T19:27:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monoidal\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\"], \"digest\": \"db3aff70048fd8f2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of cocomplete infinity categories represents separately colimit preserving functors",
+   "results": "{\"t\": \"2026-10-16T19:27:32Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product of cocomplete infinity categories represents separately colimit preserving functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.RepresentableBy.tensorObj\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.Functor.Monoidal.RepresentableBy.tensorObj_homEquiv\", \"CategoryTheory.MonoidalCategory.Limits.preservesLimit_curriedTensor\", \"CategoryTheory.preservesFiniteColimits_of_coflat\", \"CategoryTheory.FunctorCategory.prod_preservesColimits\", \"CategoryTheory.coflat_of_preservesFiniteColimits\", \"CategoryTheory.Limits.PreservesColimit.mk\"], \"digest\": \"d09a62abca884766\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "cocomplete.*tensor|presentable.*monoidal|bilinear.*functor",
+   "results": "{\"t\": \"2026-10-16T19:27:32Z\", \"tool\": \"grep\", \"query\": \"cocomplete.*tensor|presentable.*monoidal|bilinear.*functor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"PreservesColimits\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-16T19:44:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"PreservesColimits\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\"], \"digest\": \"db3aff70048fd8f2\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Read the ordinary Category/Type-valued presentability, quotient-colimit and pointwise monoidal hypotheses; they do not specialize to the coherent infinity-category universal property of this statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-bilinear-colimits",
@@ -96,5 +257,20 @@
   "group": "Q05"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocomplete-monoidal-tensor",
+  "worker": "stage1",
+  "summary": "Constructed the tensor as relative free cocompletion of V x W at coordinate colimit relations; extended all finite-arity operations and coherence maps through full functor-category equivalences, and proved presentability using small bounded presentations. Added two statement-only completion/presentation lemmas after DAG, blueprint, Lean and logged Mathlib searches. No semantic statement change; normalized doubled TeX backslashes. No project attachment found. Sources read online and WANTED because not archived. Resumed audit required every bounded relation to be an actual colimiting cocone, checked the relative-limit clause explicitly from the cited cocartesian mapping criterion, and corrected HTT 5.5.3.7 to Remark. Second reader made prescribed cocone notation self-contained and expanded structured-functor coherence and transformation lifting; retained both nonduplicate foundational lemmas.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: enriched coefficient tensor cocontinuity used by the finite-coefficient mapping-complex adjunction, before the derived inverse limit; via the existing algebroid/enriched-category tensor-calculus chain. Supplies its cocomplete coefficient tensor foundation without changing the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-bcb4c4dcb",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-bcb4c4dcb (reviewer sub-agent of L); spot-checked: I read the item, all six steps and both new nodes in full, plus every cited statement (def-coef-complete-algebroid, def-coef-monoidal-infinity-category, lem-coef-cocartesian-straightening, def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category), the unit record and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint (proof paragraph 2). The item's statement is byte-identical to the live node, which is still unsplit. No target, base-change morphism or coefficient category is involved. HTT, HA and Haugseng are not archived, and the review service blocks network access, so I could not open the PDFs. I checked each cited place against the content of the standard results instead: HTT 5.3.6.2 (R need not be colimiting), 5.3.6.11 (multivariable form, empty list included), 5.3.5.4, 5.3.4.15, 5.4.2/5.5.1.1 and 5.5.4.15, and HA 4.8.1.3/4.8.1.10/4.8.1.15. proof_origin=agent with WANTED lines is the correct marking. Steps: (1) the coordinate relations are not colimits in VxW, which the completion node and HTT 5.3.6.2 allow; K empty forces mu(0,w) to be initial; R fits after universe enlargement. (2) Elementary is justified: R contains every colimiting cocone, so Fun_R is exactly the separately cocontinuous functors. (3) I checked all four coordinate cases through the tensors and the separately cocontinuous mu, and the unit e is an explicit object. (4) Output blocks of Delta^op maps are disjoint, so composites stay separately cocontinuous; coherence is lifted simplex by simplex through the restriction equivalences on mapping spaces. Straightening at a larger universe pair is legitimate. The relative-limit clause follows from the cocartesian criterion, with fibers as pullbacks, giving Map^phi(D,Y) = prod Map^{rho_i phi}(D,Y_i), and n=0 holds. (5) The strong-monoidal comparisons, inverses, higher simplices and monoidal transformations lift the same way, including arity 0. (6) A x B and R_AB are small, so Q is presentable; f and g are built from the universal properties and fg ~ id, gf ~ id, so T ~ Q is presentable in the original universe and presentably monoidal. proof_deps equals the union of the step uses, every cited statement is in the unit or is a definition, there is no cycle and no tool use. New nodes: relative-colimit-completion is true as stated (HTT 5.3.6.2/5.3.6.11; the small-data local-presheaf model is presentable by 5.5.4.15). I tested it on C empty, C a point, and a point with the empty-cocone relation (terminal completion, j not fully faithful). bounded-colimit-presentation is true: C^kappa is essentially small and closed under kappa-small colimits, the R-local presheaves are Ind_kappa(A) ~ C, and requiring every relation to be a genuine colimit is necessary. I tested it on C terminal and C = S. Neither node is a duplicate: I compared presheaf-free-cocompletion (a special case of the new node), presentable-adjoints, presentable-presheaf-presentation, space-presheaf-presentability and compact-small-colimits. Neither is a clause of the item. Both are statement-only (B1-B9 satisfied) with all four search kinds recorded. FIX: step 4 reused the letter C, which denotes VxW, for an object of T^n; I renamed it to Y in all four places, a notation-only change to the proof text, in fixes/dag/nodes/sec-six-functors/lem-coef-cocomplete-monoidal-tensor.json. No node dropped. lean_audit is absent on all three files, as on 2080 other nodes here, and the preflight passed; I did not count it as a fault.; 1 file(s) fixed by the reviewer"
+ }
 }

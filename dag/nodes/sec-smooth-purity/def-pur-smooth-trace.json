@@ -1,67 +1,159 @@
 {
-  "id": "def-pur-smooth-trace",
-  "blueprint": {
-    "is": "def-pur-smooth-trace",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-smooth-trace",
+ "blueprint": {
+  "is": "def-pur-smooth-trace",
+  "from": null,
+  "same_as": [
+   "sk-def-sp-trace"
+  ]
+ },
+ "kind": "definition",
+ "title": "Smooth trace",
+ "statement": "Work in the purity conventions [def-pur-conventions]. Thus $k$ is the fixed algebraic closure of $k_0=\\mathbf F_q$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $X,Y$ be finite-type $k$-schemes, and let $f:X\\to Y$ be smooth and separated of pure relative dimension $d\\in\\mathbf Z_{\\geq0}$, with smooth relative dimension as in [def-sbc-smooth-morphisms]. Use the coefficient units $\\Lambda_X,\\Lambda_Y$, the compact-support functor $Rf_!$ of [def-compact-support-direct-image-detailed], the constructible exceptional inverse image $Rf^!$ and adjunction $Rf_!\\dashv Rf^!$ of [def-weil-exceptional-inverse-image]. Write $\\operatorname{Tr}_{f,K}:Rf_!Rf^!K\\to K$ for its counit at $K$, and use the smooth purity map $\\gamma_{f,K}:Lf^*K(d)[2d]\\to Rf^!K$ of [def-pur-smooth-purity-map], with the twists of [def-coefficient-twists-detailed].\n\nThe *smooth trace* is the composite\n$$\n\\operatorname{Tr}_f^{\\mathrm{sm}}:\nRf_!\\bigl(\\Lambda_X(d)[2d]\\bigr)\n\\xrightarrow{\\ Rf_!(\\gamma_{f,\\Lambda_Y})\\ }\nRf_!Rf^!\\Lambda_Y\n\\xrightarrow{\\ \\operatorname{Tr}_{f,\\Lambda_Y}\\ }\\Lambda_Y.\n$$\nHere the first arrow includes the canonical identification $Lf^*\\Lambda_Y\\cong\\Lambda_X$: finite-level derived pullback is the termwise inverse image with coefficient action transported along the canonical constant-ring isomorphism, as in [def-weil-derived-pullback-tensor-hom, prop-weil-pbc-proetale-constant-ring-map].\n\nFor every $K\\in D^b_{ctf}(Y,\\Lambda)$, the bounded constructible finite-Tor category of [def-weil-finite-tor-amplitude], the *coefficient-valued smooth trace* is the composite\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}:\nRf_!\\bigl(Lf^*K(d)[2d]\\bigr)\n\\xrightarrow{\\ Rf_!(\\gamma_{f,K})\\ }\nRf_!Rf^!K\n\\xrightarrow{\\ \\operatorname{Tr}_{f,K}\\ }K.\n$$\nBoth composites are morphisms of $D(Y_{\\mathrm{proet}},\\Lambda)$ whose source and target lie in the bounded constructible category $D^b_c(Y,\\Lambda)$ specified in [def-pur-conventions]: the sources because $Rf_!$ carries $D^b_c(X,\\Lambda)$ into $D^b_c(Y,\\Lambda)$ [prop-finite-compact-support-constructibility], applied to $\\Lambda_X(d)[2d]$ and to $Lf^*K(d)[2d]\\cong Rf^!K\\in D^b_c(X,\\Lambda)$; since $D^b_c(Y,\\Lambda)$ is a full subcategory, they are morphisms of $D^b_c(Y,\\Lambda)$. The case $K=\\Lambda_Y$, read through the displayed unit identification, is the first composite.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/def-pur-smooth-trace.md",
+  "place": "node def-pur-smooth-trace, order 2021"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-finite-tor-amplitude",
+  "prop-finite-compact-support-constructibility"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smoothTrace|smooth_trace|purityMap|upperShriek",
+   "results": "0 hits. None.",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
   },
-  "kind": "definition",
-  "title": "Smooth trace",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, and let $f:X\\to Y$ be a smooth separated morphism of\nrelative dimension $d$. The *smooth trace* is the composite\n\n$$\n\\operatorname{Tr}_f^{\\mathrm{sm}}:\nRf_!\\Lambda_X(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,\\Lambda_Y})\\ }\nRf_!Rf^!\\Lambda_Y\n\\xrightarrow{\\ \\operatorname{Tr}_f\\ }\\Lambda_Y,\n$$\n\nwhere $\\operatorname{Tr}_f$ is the counit of the adjunction\n$Rf_!\\dashv Rf^!$ of\n[def-weil-exceptional-adjoint-admissibility]; for\n$K\\in D^b_{ctf}(Y,\\Lambda)$ the coefficient-valued smooth trace is\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}:\nRf_!Lf^*K(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,K})\\ }\nRf_!Rf^!K\n\\xrightarrow{\\ \\operatorname{Tr}_{f,K}\\ }K.\n$$\n\nFor $K=\\Lambda_Y$ this is the preceding normalized trace; the projection\nformula identifies it with $K\\otimes^L\\operatorname{Tr}_f^{\\mathrm{sm}}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/def-pur-smooth-trace.md",
-    "place": "node def-pur-smooth-trace, order 2021"
+  {
+   "tool": "leansearch",
+   "query": "Smooth trace for finite etale coefficients defined using smooth purity and the counit of compact support pushforward and exceptional pullback",
+   "results": "8 hits. AlgebraicGeometry.IsSmooth.casesOn, Algebra.FormallyEtale.instFormallySmooth, RingHom.Smooth, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
   },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2021,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, AlgebraicGeometry.Scheme.Hom.Smooth",
+   "results": "0 hits. None. loogle: unknown identifier 'AlgebraicGeometry.Scheme.Hom.Smooth'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected for unknown identifier; repeated successfully with CategoryTheory.Adjunction.counit"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let $f:X\\to Y$ be a smooth separated morphism of\nrelative dimension $d$. The *smooth trace* is the composite\n\n$$\n\\operatorname{Tr}_f^{\\mathrm{sm}}:\nRf_!\\Lambda_X(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,\\Lambda_Y})\\ }\nRf_!Rf^!\\Lambda_Y\n\\xrightarrow{\\ \\operatorname{Tr}_f\\ }\\Lambda_Y,\n$$\n\nwhere $\\operatorname{Tr}_f$ is the counit of the adjunction\n$Rf_!\\dashv Rf^!$ of\n[def-weil-exceptional-adjoint-admissibility]; for\n$K\\in D^b_{ctf}(Y,\\Lambda)$ the coefficient-valued smooth trace is\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}:\nRf_!Lf^*K(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,K})\\ }\nRf_!Rf^!K\n\\xrightarrow{\\ \\operatorname{Tr}_{f,K}\\ }K.\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of schemes define the finite coefficient smooth trace as compact support pushforward of the purity map followed by the exceptional adjunction counit, for every bounded constructible finite Tor complex",
+   "results": "8 hits. AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
+  },
+  {
+   "tool": "grep",
+   "query": "UpperShriek|LowerShriek|smooth.*[Tt]race|[Tt]race.*smooth",
+   "results": "Directory Mathlib/CategoryTheory. 0 hits. None.",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration trace in etale cohomology smooth purity exceptional inverse image adjunction counit",
+   "results": "8 hits. CategoryTheory.Adjunction.functorialityCounit, CategoryTheory.ObjectProperty.isColocal_adj_counit_app, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, CompHausLike.LocallyConstant.counit, CategoryTheory.Adjunction.inv_counit_map, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.inv_map_unit",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "12 hits. CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.mk'_counit, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.id_counit, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor",
+   "date": "2026-10-17",
+   "verdict": "no match: general adjunction counit only; the required purity map and exceptional functors are not supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality integration map Rf shriek of f star K Tate twisted and shifted to K is pushforward of the orientation followed by adjunction counit",
+   "results": "8 hits. SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforward_map_val, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-coefficient smooth-purity trace construction"
+  },
+  {
+   "tool": "grep",
+   "query": "counit :|def ofNatIsoRight|theorem ofNatIsoRight_counit",
+   "results": "Directory Mathlib/CategoryTheory/Adjunction/Basic.lean. 5 hits. 112, 182, 341, 345, 389",
+   "date": "2026-10-17",
+   "verdict": "no match: Adjunction.Basic contains the general counit and constructors, not the smooth-purity trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration along a morphism in a six functor formalism: apply the left adjoint to a purity natural transformation from twisted inverse image to the right adjoint, then compose with the counit",
+   "results": "8 hits. SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-17",
+   "verdict": "no match: results describe ordinary sheaf pushforward adjunctions and exponentiable morphisms, not the finite-coefficient smooth-purity trace"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2021,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let $f:X\\to Y$ be a smooth separated morphism of\nrelative dimension $d$. The *smooth trace* is the composite\n\n$$\n\\operatorname{Tr}_f^{\\mathrm{sm}}:\nRf_!\\Lambda_X(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,\\Lambda_Y})\\ }\nRf_!Rf^!\\Lambda_Y\n\\xrightarrow{\\ \\operatorname{Tr}_f\\ }\\Lambda_Y,\n$$\n\nwhere $\\operatorname{Tr}_f$ is the counit of the adjunction\n$Rf_!\\dashv Rf^!$ of\n[def-weil-exceptional-adjoint-admissibility]; for\n$K\\in D^b_{ctf}(Y,\\Lambda)$ the coefficient-valued smooth trace is\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}:\nRf_!Lf^*K(d)[2d]\n\\xrightarrow{\\ Rf_!(\\gamma_{f,K})\\ }\nRf_!Rf^!K\n\\xrightarrow{\\ \\operatorname{Tr}_{f,K}\\ }K.\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-smooth-trace",
+  "worker": "stage1",
+  "summary": "Q102: definition split with no new nodes. Followed blueprint_update/main-20261015: retained both finite-coefficient trace composites, removed the obsolete projection-formula assertion, made Lambda=A and all geometric hypotheses explicit, cited the existing smooth purity map, and replaced the inapplicable exceptional-adjoint-admissibility reference by the existing constructible exceptional inverse image. Made the unit pullback identification explicit using its existing definitions and constant-ring comparison. Searched both Lean checkouts and the full DAG/blueprint; existing Lean traces cover only the unit-object clause and require an orientation argument. Recorded all actual Mathlib searches; no full match.",
+  "blueprint": "Realizes both defining composites of main-20261015/sec-smooth-purity/sk-def-sp-trace/def-pur-smooth-trace.md, also the finite-coefficient specialization of sk-def-sp-trace. The inherited unit sk-thm-purity-transport is kept; the current snapshot files this definition under sk-def-sp-trace. No theorem, projection-formula assertion, or extra coefficient stage is included."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-3379db962",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-3379db962 (reviewer sub-agent of L); spot-checked: I read the whole item against the current blueprint main-20261015/sec-smooth-purity/sk-def-sp-trace/def-pur-smooth-trace.md (order 2365), its _section.md (sk-def-sp-trace), the old master text (order 2021) and every cited node's statement. Both composites are correct. gamma_{f,K}: Lf^*K(d)[2d] -> Rf^!K has the same direction in def-pur-smooth-purity-map and its blueprint_update (1⊗Pi_f^{-1}, then phi). The unit identification Lf^*Lambda_Y ≅ Lambda_X follows from def-weil-derived-pullback-tensor-hom (finite level) and prop-weil-pbc-proetale-constant-ring-map. Dropping the projection-formula sentence follows the current snapshot. None of the 18 citers depends on it: they use Tr = eps∘Rf_!(gamma) and cite fix-prop-projection-formula separately. Replacing the adjunction reference def-weil-exceptional-adjoint-admissibility with def-weil-exceptional-inverse-image is justified. The elliptic-curve Warning shows the admissibility clause fails for a smooth proper f, while the constructible adjunction is stated with no ambient datum, as def-pur-conventions prescribes. This adds no hypothesis and leaves the morphism unchanged. Coefficients are the finite stage A_{E,n} on the pro-etale site throughout, with no SGA. There are no new nodes and no proof steps. sk-def-sp-trace in same_as is correct. Edge cases checked: K=0, K=Lambda_Y with Tor [0,0], f=id with d=0, X empty, n=1. FIX, two repairable faults: (1) E1/C4: 'Both composites are taken in D^b_c(Y,Lambda)' assumed Rf_! preserves D^b_c, which no cited node stated. I reworded it as morphisms of D(Y_proet,Lambda) with objects in D^b_c(Y,Lambda) by the existing prop-finite-compact-support-constructibility (same chapter), and added it to stmt_deps; this creates no cycle. (2) The source still pointed to the old master file (order 2021) although the report said it had been updated; it now points to the main-20261015 path, order 2365. The whole corrected node is in fixes/dag/nodes/sec-smooth-purity/def-pur-smooth-trace.json; only statement, stmt_deps and source changed. Noted for the maintainer: the unit field (sk-thm-purity-transport vs the snapshot's sk-def-sp-trace) is maintainer-owned and was not changed. No tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

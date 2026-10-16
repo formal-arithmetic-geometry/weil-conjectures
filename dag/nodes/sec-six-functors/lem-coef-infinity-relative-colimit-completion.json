@@ -1,0 +1,125 @@
+{
+ "id": "lem-coef-infinity-relative-colimit-completion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before the displayed derived inverse limit: cocomplete coefficient tensor in the enriched tensor-cocontinuity foundation. Proposition 5.3.6.2 and Remark 5.3.6.3, printed pp. 412-414; Proposition 5.3.6.11 and its proof, pp. 416-417 (finite-variable form); Remark 5.5.3.7 and Proposition 5.5.4.15, pp. 468 and 482 (small-data localization is presentable).",
+   "via": [
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Relative free cocompletion with prescribed cocones and finite-variable universal property",
+ "statement": "Use the universes and infinity categories of [def-coef-complete-algebroid] and the coherent diagrams, cocones and functor categories of [def-cbc-enhanced-diagrams-cones]; small always means in the fixed universe $\\mathcal U$. Let $C$ be an infinity category and $R$ a collection of specified coherent cocones $r_\\alpha$, each consisting of a diagram $F_\\alpha:K_\\alpha\\to C$, an apex $x_\\alpha\\in C$ and a coherent transformation $F_\\alpha\\to\\Delta_{K_\\alpha}x_\\alpha$, where $K_\\alpha$ is a small simplicial set and $\\Delta_{K_\\alpha}$ denotes the constant-diagram functor. Empty bases are allowed. These cocones need not be colimiting in $C$. After enlarging the ambient universe to contain the data, there exist a cocomplete infinity category $P_R(C)$ and $j_R:C\\to P_R(C)$ sending every member of $R$ to a colimiting cocone. For every infinity category $Z$ admitting all small colimits, restriction is an equivalence\n$$\\operatorname{Fun}_{\\mathrm{colim}}(P_R(C),Z)\\simeq\\operatorname{Fun}_R(C,Z),$$\nwhere the right side is the full coherent functor category on functors sending the specified cocones to colimiting cocones, and the left side is the full category on functors preserving small colimits. All these equivalences include natural transformations and higher simplices.\n\nFor every finite list $(C_i,R_i)$, restriction along $\\prod_i j_{R_i}$ likewise gives an equivalence from the full category of functors $\\prod_iP_{R_i}(C_i)\\to Z$ preserving small colimits separately to the full category of functors $\\prod_iC_i\\to Z$ sending each $R_i$ to colimiting cocones when the other variables are fixed. This includes the empty list (both functor categories are $Z$). These restriction equivalences are natural in $Z$ and compatible with restriction to any variables; their full faithfulness identifies spaces of coherent transformations, equivalences and all their compatibility homotopies.\n\nIf $C$ and the collection $R$ are small, $P_R(C)$ is presentable, in the meaning of [def-coef-presentable-infinity-category], relative to $\\mathcal U$. More precisely, let $y:C\\to\\mathcal P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$ be the Yoneda functor $c\\mapsto\\operatorname{Map}_C(-,c)$, where $\\mathcal S$ is the infinity category of small spaces. For each $r_\\alpha$ let $s_\\alpha:\\operatorname{colim}_{K_\\alpha}yF_\\alpha\\to y(x_\\alpha)$ be the map induced by its cocone. One may take $P_R(C)$ to be the full subcategory of $\\mathcal P(C)$ on objects $X$ for which every $\\operatorname{Map}(s_\\alpha,X)$ is an equivalence, with $j_R=Ly$, where $L$ is the left adjoint to this inclusion. Colimits throughout are only the original $\\mathcal U$-small colimits, even in the large-data case.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 5.3.6.2 and Remark 5.3.6.3, printed pp. 412-414; Proposition 5.3.6.11 and its proof, pp. 416-417 (finite-variable form); Remark 5.5.3.7 and Proposition 5.5.4.15, pp. 468 and 482 (small-data localization is presentable). Read online; not archived in literature/. No Stacks Project tag states this quasicategorical theorem."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An infinity category freely completed under specified colimits subject to prescribed cocone relations has a universal equivalence of coherent functor categories",
+   "results": "{\"t\": \"2026-10-16T18:26:07Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category freely completed under specified colimits subject to prescribed cocone relations has a universal equivalence of coherent functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.Functor.Final.coconesEquiv_functor\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\"], \"digest\": \"a8bc280faa1ab7c4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Limits/Presheaf.lean:17-40 and 60-78 concern ordinary Type-valued presheaves and ordinary Category instances; Generator/Presheaf freeYoneda is also ordinary. ColimitPresentation binds diagrams presenting a single object, not a quasicategory subject to coherent cocone relations. The semantic hits on Kan extensions, cocone equivalences and hoFunctor do not state the space-valued, full infinity-functor-category universal property or its finite-variable form."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Free\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:26:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Free\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork\", \"SheafOfModules.instPreservesColimitsOfSizeFreeFunctor\", \"SheafOfModules.isColimitFreeCofan\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\"], \"digest\": \"10ee0a290e110500\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Limits/Presheaf.lean:17-40 and 60-78 concern ordinary Type-valued presheaves and ordinary Category instances; Generator/Presheaf freeYoneda is also ordinary. ColimitPresentation binds diagrams presenting a single object, not a quasicategory subject to coherent cocone relations. The semantic hits on Kan extensions, cocone equivalences and hoFunctor do not state the space-valued, full infinity-functor-category universal property or its finite-variable form."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*[Cc]ocompletion|relative.*[Cc]ocompletion|colimit.*relations|presheaf.*free",
+   "results": "{\"t\": \"2026-10-16T18:26:07Z\", \"tool\": \"grep\", \"query\": \"free.*[Cc]ocompletion|relative.*[Cc]ocompletion|colimit.*relations|presheaf.*free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Sheaf.lean\", \"Mathlib/CategoryTheory/Generator/Presheaf.lean\", \"Mathlib/CategoryTheory/EffectiveEpi/Basic.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"b4156d32b7331272\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Limits/Presheaf.lean:17-40 and 60-78 concern ordinary Type-valued presheaves and ordinary Category instances; Generator/Presheaf freeYoneda is also ordinary. ColimitPresentation binds diagrams presenting a single object, not a quasicategory subject to coherent cocone relations. The semantic hits on Kan extensions, cocone equivalences and hoFunctor do not state the space-valued, full infinity-functor-category universal property or its finite-variable form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal free cocompletion of a quasicategory enforcing a family of coherent colimiting cones",
+   "results": "{\"t\": \"2026-10-16T18:26:08Z\", \"tool\": \"leansearch\", \"query\": \"Universal free cocompletion of a quasicategory enforcing a family of coherent colimiting cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Limits.Types.colimitCocone\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.Limits.Types.TypeMax.colimitCocone\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinsetColimitCocone_isColimit_desc\"], \"digest\": \"e3fc095d3a271573\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Limits/Presheaf.lean:17-40 and 60-78 concern ordinary Type-valued presheaves and ordinary Category instances; Generator/Presheaf freeYoneda is also ordinary. ColimitPresentation binds diagrams presenting a single object, not a quasicategory subject to coherent cocone relations. The semantic hits on Kan extensions, cocone equivalences and hoFunctor do not state the space-valued, full infinity-functor-category universal property or its finite-variable form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prescribed colimit completion of infinity categories and its multivariable universal property with small generators and relations",
+   "results": "{\"t\": \"2026-10-16T18:26:10Z\", \"tool\": \"leanfinder\", \"query\": \"Prescribed colimit completion of infinity categories and its multivariable universal property with small generators and relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation\", \"CategoryTheory.Cat.instHasColimits\", \"CategoryTheory.Limits.ColimitPresentation.bind\", \"CategoryTheory.Limits.ColimitPresentation.instLocallySmallTotal\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.instHasColimitsOfShapeWalkingParallelPairInd\", \"CategoryTheory.Limits.ColimitPresentation.instCategoryTotal\"], \"digest\": \"7484a5885469b3b2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Limits/Presheaf.lean:17-40 and 60-78 concern ordinary Type-valued presheaves and ordinary Category instances; Generator/Presheaf freeYoneda is also ordinary. ColimitPresentation binds diagrams presenting a single object, not a quasicategory subject to coherent cocone relations. The semantic hits on Kan extensions, cocone equivalences and hoFunctor do not state the space-valued, full infinity-functor-category universal property or its finite-variable form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free cocompletion of an infinity category subject to prescribed colimit cocones",
+   "results": "{\"t\": \"2026-10-16T19:27:23Z\", \"tool\": \"leanfinder\", \"query\": \"Free cocompletion of an infinity category subject to prescribed colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind\", \"SSet.QCat\", \"CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.Cat.instHasColimits\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.instHasColimitsOfShapeWalkingParallelPairInd\"], \"digest\": \"2a9e597348bd92df\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presheaf\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T19:27:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Presheaf\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\"], \"digest\": \"07ac75cac7db3ec5\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free cocompletion of a quasicategory subject to specified coherent colimit cocones",
+   "results": "{\"t\": \"2026-10-16T19:27:32Z\", \"tool\": \"leansearch\", \"query\": \"Free cocompletion of a quasicategory subject to specified coherent colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Limits.ColimitCocone\", \"AddCommGrpCat.Colimits.colimitCocone\", \"CategoryTheory.Limits.CompleteLattice.colimitCocone\", \"CategoryTheory.Limits.colimit.cocone\", \"MonCat.Colimits.colimitCocone\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\"], \"digest\": \"1a42cf44a24d31d9\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cocompletion|prescribed.*cocone|free.*cocompletion",
+   "results": "{\"t\": \"2026-10-16T19:27:32Z\", \"tool\": \"grep\", \"query\": \"relative.*cocompletion|prescribed.*cocone|free.*cocompletion\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"45cb4427fd683402\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read the returned ordinary Category/Type-valued Ind, presheaf, presentability, tensor or Kan-extension hypotheses; they do not state this coherent quasicategory construction or its full functor-category equivalence.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free completion of a category under all colimits respecting specified relations",
+   "results": "{\"t\": \"2026-10-16T19:43:43Z\", \"tool\": \"leanfinder\", \"query\": \"Free completion of a category under all colimits respecting specified relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Free\", \"CategoryTheory.Quotient.CompClosure\", \"CategoryTheory.Quotient\", \"CategoryTheory.Quotient.category\", \"CategoryTheory.FreeGroupoid\", \"CategoryTheory.Quotient.functor\", \"CategoryTheory.Functor.ColimitTypeRel\", \"CategoryTheory.Quotient.induction\"], \"digest\": \"69ce03765a82e6e9\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Read the ordinary Category/Type-valued presentability, quotient-colimit and pointwise monoidal hypotheses; they do not specialize to the coherent infinity-category universal property of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*[Cc]ompletion|colimit.*[Rr]elation|[Rr]elation.*colimit",
+   "results": "{\"t\": \"2026-10-16T19:43:43Z\", \"tool\": \"grep\", \"query\": \"free.*[Cc]ompletion|colimit.*[Rr]elation|[Rr]elation.*colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Types/Colimits.lean\", \"Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean\", \"Mathlib/CategoryTheory/Limits/Types/ColimitType.lean\", \"Mathlib/CategoryTheory/Limits/Types/Filtered.lean\"], \"digest\": \"a4e96d8c6fc6f8df\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Read the ordinary Category/Type-valued presentability, quotient-colimit and pointwise monoidal hypotheses; they do not specialize to the coherent infinity-category universal property of this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cocomplete-monoidal-tensor",
+  "date": "2026-10-17",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
