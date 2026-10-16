@@ -24,7 +24,11 @@
   "def-sfb-finite-extension-by-zero",
   "def-nagata-scheme-theoretic-image",
   "lemma-nagata-immersion-open-in-scheme-image",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
@@ -482,5 +486,38 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-3e193195b (reviewer sub-agent of L); spot-checked: Reviewed the full item, all nine proof steps, cited statements and sources, route, coefficient category, base-change arguments, edge cases, duplicate/cycle checks, and delivery report. The mathematics and repaired proof are sound; no new nodes or fixes are needed. The copied unit retains stale smooth-purity metadata while the current item is in six-functors-basics; this maintainer-owned binding issue is recorded for metadata synchronization."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FlatModelGeneration",
+  "declaration": "AlgebraicGeometry.etale_flatConstructible_orderedStratification",
+  "declarations": [
+   "AlgebraicGeometry.FlatModelOrderedStratification",
+   "AlgebraicGeometry.FlatModelExtensionFiltration",
+   "AlgebraicGeometry.FlatModelEtaleLisseProjective",
+   "AlgebraicGeometry.FlatModelProEtaleLisseProjective",
+   "AlgebraicGeometry.flatModelEtaleExtension",
+   "AlgebraicGeometry.flatModelProEtaleExtension",
+   "AlgebraicGeometry.etale_flatConstructible_orderedStratification",
+   "AlgebraicGeometry.proEtale_flatConstructible_orderedStratification",
+   "AlgebraicGeometry.etale_flatConstructible_extensionFiltration",
+   "AlgebraicGeometry.etale_flatConstructible_thickGeneration",
+   "AlgebraicGeometry.proEtale_flatConstructible_extensionFiltration",
+   "AlgebraicGeometry.proEtale_flatConstructible_thickGeneration"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FlatModelGeneration.lean",
+  "statement": "theorem etale_flatConstructible_orderedStratification (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [Finite A] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (_hc : IsConstructibleEtaleModuleSheaf F) (_hf : ObjectProperty.flat F) : ∃ str : LocallyClosedStratification X, FlatModelOrderedStratification str ∧ ∀ k : Fin str.n, FlatModelEtaleLisseProjective A ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three clauses are stated separately for both sites. The six helper definitions are constituents of this node: ordered tails, its finite extension filtration, lisse finite-projective stalk conditions, and canonical locally closed extensions through the scheme-theoretic image. Dctf is expanded as bounded constructible cohomology and the recorded finite Tor-amplitude condition, as the node conventions specify. Four already-landed statement dependencies are added for the coefficient-linear stalk, retained local-constancy construction, intrinsic realization, and inverse image. No other DAG node is stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2502b4bb",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, definitions, report sections, and compiler evidence checked; scompile local and server confirmation exited 0."
  }
 }
