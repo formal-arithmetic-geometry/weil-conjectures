@@ -30,7 +30,8 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-finite-stage-pair-category"
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-finite-completed-coefficient-map"
  ],
  "proof": [
   {
@@ -293,5 +294,61 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-a0a6facee (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, chapter/unit route, every cited node and source. Checked all ten proof steps, associator and shift directions, coefficient categories, finite-stage witnesses, additive/biproduct laws, edge cases, searches, and duplicate/cycle status. No new nodes or repairs are needed; review.md records the detailed checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a03b25335",
+  "group": "NS",
+  "result": "pass",
+  "note": "Full statement, dependencies, source, universes, edge cases, docstrings, declarations, report sections, and compiler evidence checked; delivery is correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageCalculus",
+  "declaration": "AlgebraicGeometry.Scheme.commonStageCalculus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcIntegralStableShift",
+   "AlgebraicGeometry.Scheme.pbcIntegralShiftLinear",
+   "AlgebraicGeometry.Scheme.PbcRationalShiftNormalized",
+   "AlgebraicGeometry.Scheme.pbcRationalShift_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalHasShift",
+   "AlgebraicGeometry.Scheme.pbcRationalShiftAdditive",
+   "AlgebraicGeometry.Scheme.pbcRationalizationShift_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalizationCommShift",
+   "AlgebraicGeometry.Scheme.pbcScalarRestrictCommShift",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarCommShift",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarCommShift",
+   "AlgebraicGeometry.Scheme.pbcScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcScalarCommShift",
+   "AlgebraicGeometry.Scheme.pbcScalarAssociatorCommShift",
+   "AlgebraicGeometry.Scheme.pbcStageFiniteBiproducts",
+   "CategoryTheory.StageSystem.pbcStageShift_coherence",
+   "CategoryTheory.StageSystem.pbcStageShift",
+   "CategoryTheory.StageSystem.pbcPairShift",
+   "CategoryTheory.StageSystem.pbcPairShiftZero_naturality",
+   "CategoryTheory.StageSystem.pbcPairShiftZero",
+   "CategoryTheory.StageSystem.pbcPairShiftAdd_naturality",
+   "CategoryTheory.StageSystem.pbcPairShiftAdd",
+   "CategoryTheory.StageSystem.pbcPairShift_laws",
+   "CategoryTheory.StageSystem.pbcPairShiftCore",
+   "CategoryTheory.StageSystem.pbcPairHasShift",
+   "CategoryTheory.StageSystem.pbcStageInclusionShiftIso",
+   "CategoryTheory.StageSystem.pbcStageInclusionShift_laws",
+   "CategoryTheory.StageSystem.pbcStageInclusionCommShift",
+   "CategoryTheory.StageSystem.pbcPairShift_additive",
+   "CategoryTheory.StageSystem.pbcPairZero_isZero",
+   "CategoryTheory.StageSystem.pbcPairHasZeroObject",
+   "CategoryTheory.StageSystem.pbcFiniteGraph_representation",
+   "CategoryTheory.StageSystem.pbcPairFiniteBiproducts",
+   "CategoryTheory.StageSystem.pbcFiniteEqualities_detection",
+   "CategoryTheory.StageSystem.CommonStageCalculusSpec",
+   "AlgebraicGeometry.Scheme.commonStageCalculus"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageCalculus.lean",
+  "statement": "theorem commonStageCalculus (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (T : Scheme.{u}) [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m) (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) : CommonStageCalculusSpec (pbcScalarSystem l Ω T hdim hl)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

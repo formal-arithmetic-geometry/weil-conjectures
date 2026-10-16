@@ -1,0 +1,129 @@
+{
+ "id": "def-weil-pbc-finite-completed-coefficient-map",
+ "kind": "definition",
+ "title": "Canonical completed coefficient map for finite coefficient extensions",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and finite intermediate fields $E\\subseteq F$ of [def-weil-finite-subextension-directed-set]. For a scheme $T$ and the completed integral coefficient sheaves of [def-weil-pbc-bounded-constructible-complete], define the canonical map $\\widehat{\\mathcal O}_{T,E}\\to\\widehat{\\mathcal O}_{T,F}$ as follows. Transport each finite-dimensional coefficient field to a small model using its canonical algebra equivalence, preserving the fields and their valuation rings of [def-weil-l-adic-coefficient-extension]. Conjugate the actual field inclusion by those equivalences, use the valuation-ring inclusion of [lem-weil-integral-scalar-extension-well-defined] and lift it to the prescribed coefficient universe. For each $n\\geq0$, its preservation of the $(n+1)$st powers of maximal ideals induces the quotient ring map. Through the recorded constant-section-normalized finite coefficient identifications this gives $c_n:\\mathcal O_{T,E,n}\\to\\mathcal O_{T,F,n}$. The completed map is the unique $c$ with $c\\,\\pi_{F,n}=\\pi_{E,n}\\,c_n$ for every $n$. Define its ambient scalar extension to be the K-flat derived tensor functor of [lem-pur-derived-change-of-rings] along this map. The algebraic-closure and scheme universes are independent.",
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "order 1307: completed integral coefficient scalar extension and its finite quotient normalization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map of completed integral coefficient ring sheaves for two nested finite extensions of a p-adic field fixed by its finite quotient projections",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, algebraMap_adicCompletionIntegers_apply, PadicInt.coe_adicCompletionIntegersEquiv_apply, IsDedekindDomain.FiniteAdeleRing.algebraMap, Padic.adicCompletionEquiv, BDeRhamPlus, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, PadicInt.adicCompletionIntegersEquiv. None is the completed PBC coefficient sheaf map.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Map of completed coefficient sheaves from a finite extension of p-adic coefficient fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pbcCompletedScalarMap|pbcIntegerInclusion|completed.*coefficient.*map",
+   "results": "msearch grep CategoryTheory: 0 hits. rg of WeilConjectures and published lean/Sheaf: no declaration of these maps. DAG and blueprint_refs search finite.*completed.*coefficient.*map|completed.*scalar.*map: no node defining the map. An unpublished NQ sandbox supplies a construction, reused here and generalized to independent closure and scheme universes; no delivered exact declaration was found.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalarIntegerInclusion|integralScalarQuotientSheafMap; source of IntegralScalarExtensionWellDefined",
+   "results": "Found WeilConjectures.integralScalarIntegerInclusion and its absolute-value preservation in Sheaf.Paper.IntegralScalarExtensionWellDefined; reused its integer-ring inclusion under ULift. Its completed tower realization uses integralCoefficientCommRingSheaf and integralTowerModules, not the recorded PbcAdicCompletion and PBC full subcategory, so it does not replace the completed PBC map or stage system.",
+   "date": "2026-10-16",
+   "verdict": "reuse exact integer-ring helper; no exact completed PBC map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Map of completed coefficient sheaves from a finite extension of p-adic coefficient fields",
+   "results": "Successful recheck: 8 hits: AbstractCompletion.compare, LightCondensed.lanLightCondSet, PresheafOfModules.toSheafify, PresheafOfModules.sheafifyMap, Padic.adicCompletionEquiv, Condensed.lanSheafProfinite, Padic.field, PadicComplex.coe_eq. None is the projection-normalized map between the recorded completed PBC coefficient sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-common-stage-calculus",
+  "date": "2026-10-16",
+  "group": "NS"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-common-stage-calculus",
+   "place": "Finite-stage coefficient tensor transports in the common-stage calculus",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcFiniteCompletedCoefficientMap",
+  "declaration": "AlgebraicGeometry.Scheme.pbcCompletedScalarMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcFiniteStageAbSheafify",
+   "AlgebraicGeometry.Scheme.pbcFiniteStageAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.pbcFiniteFieldSmall",
+   "AlgebraicGeometry.Scheme.pbcFiniteField",
+   "AlgebraicGeometry.Scheme.pbcFiniteFieldField",
+   "AlgebraicGeometry.Scheme.pbcFiniteFieldAlgebra",
+   "AlgebraicGeometry.Scheme.pbcFiniteFieldFinite",
+   "AlgebraicGeometry.Scheme.pbcStageDatum",
+   "AlgebraicGeometry.Scheme.pbcStageUniformizer",
+   "AlgebraicGeometry.Scheme.pbcFiniteFieldInclusion",
+   "AlgebraicGeometry.Scheme.pbcIntegerInclusion",
+   "AlgebraicGeometry.Scheme.pbcIntegerInclusion_ideal",
+   "AlgebraicGeometry.Scheme.pbcQuotientInclusion",
+   "AlgebraicGeometry.Scheme.pbcFiniteScalarMap",
+   "AlgebraicGeometry.Scheme.pbcCompletedScalarMap_exists",
+   "AlgebraicGeometry.Scheme.pbcCompletedScalarMap",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/PbcFiniteCompletedCoefficientMap.lean",
+  "statement": "def pbcCompletedScalarMap (h : E ≤ F) : pbcAdicCompletion T (pbcStageDatum.{u} l Ω E) ⟶ pbcAdicCompletion T (pbcStageDatum.{u} l Ω F)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a03b25335",
+  "group": "NS",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a03b25335",
+  "group": "NS",
+  "result": "pass",
+  "note": "Full statement, dependencies, source, universes, edge cases, docstrings, declarations, report sections, and compiler evidence checked; delivery is correct."
+ }
+}
