@@ -296,5 +296,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-9ed664ccb (reviewer sub-agent of L); spot-checked: Read the full item, all 18 cited statements, source passages, report, and unit/chapter route. All seven steps preserve the exact [a,b+N] bound; projection and residue-test hypotheses match ordinary étale A-module categories. Edge cases and dependency-cycle checks pass. No new nodes or repairs. Detailed checks and accepted tool_uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImageTorAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.sf_directImage_torAmplitude",
+  "file": "lean/Sheaf/Paper/DirectImageTorAmplitude.lean",
+  "statement": "theorem sf_directImage_torAmplitude (k : Type u) [Field k] [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (_hl : l ≠ ringChar k) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (_hf : f ≫ aY = aX) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (N : ℤ) (_hN : 0 ≤ N) (_hUDV : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (r : ℤ), N < r → IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj ((rightDerivedLowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj M)))) (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X) (_hK : @DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) X K) (_hTor : DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) X a b K) : @DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) Y ((rightDerivedLowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K) ∧ DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a (b + N) ((rightDerivedLowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) f).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-968664061",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked all nine statement dependencies, sources, exact declarations, clauses, universes, edge cases, docstrings, and report sections. Signature matches verbatim; immutable module compiled cleanly through scompile.py."
  }
 }
