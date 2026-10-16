@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.PoincareDuality.ProjectionFormula
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-!
 
@@ -38,14 +38,18 @@ monoidal closed structure on `Dᵇc` is that of
   dualizing complex `ω_X = Ra^! ℚ̄_ℓ,S`, and `ProEtale.CondensedRing.verdierDual`: the Verdier
   dual `𝔻_X K = RHom(K, ω_X)`.
 - `ProEtale.CondensedRing.verdierBiduality`: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`.
+- `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y` and `a_Y : Y ⟶ S`,
+  the identification `γ : Rf^! ω_Y ≅ ω_X` with `ω_X` relative to `f ≫ a_Y`, the composition
+  isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
+  (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp`) at the unit.
 - `ProEtale.CondensedRing.absoluteVerdierExchange` and
-  `ProEtale.CondensedRing.dualVerdierExchange`: for an `S`-morphism `f` and a given
-  identification `γ : Rf^! ω_Y ≅ ω_X`, the absolute exchange `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` and the
-  opposite exchange `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`.
+  `ProEtale.CondensedRing.dualVerdierExchange`: the absolute exchange
+  `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` and the opposite exchange `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, built
+  with `γ`.
 
-The identification `γ` is taken as an argument: it is an instance of the composition
-isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` for exceptional inverse images, which depends on the
-compatibility of the chosen compactifications and is not yet available.
+The isomorphism `γ` is constructed from the composition isomorphism of lower shrieks
+`R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_Y_!`, which is still `sorry`
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp`).
 
 ## Main results
 
@@ -151,32 +155,40 @@ variable {X Y S : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
   [IsSeparated S.hom]
-  (f : X ⟶ Y) (aX : X ⟶ S) (aY : Y ⟶ S)
-  (γ : (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ aY) ≅
-    dualizingComplex ℓ aX)
+  (f : X ⟶ Y) (aY : Y ⟶ S)
 
-/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`, given an
-identification `γ : Rf^! ω_Y ≅ ω_X`: the exchange morphism `Φ_{f,K,ω_Y}` precomposed with
-`γ⁻¹`. -/
+/-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes `ω_Y = Ra_Y^! ℚ̄_ℓ,S` and
+`ω_X = R(f ≫ a_Y)^! ℚ̄_ℓ,S`: the composition isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
+`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp` at the unit. -/
+noncomputable def upperShriekDualizingComplexIso :
+    (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ aY) ≅
+      dualizingComplex ℓ (f ≫ aY) :=
+  ((boundedConstructibleUpperShriekComp _ ℓ f aY).app (𝟙_ _)).symm
+
+/-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`, with `𝔻_X` relative to
+`f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the exchange morphism `Φ_{f,K,ω_Y}` precomposed with the
+inverse of `γ = upperShriekDualizingComplexIso`. -/
 noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ aX K) ⟶
+    (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
       verdierDual ℓ aY ((boundedConstructibleLowerShriek _ ℓ f).obj K) :=
   Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleExceptionalProjection _ ℓ f)
-    (dualizingComplex ℓ aX) (dualizingComplex ℓ aY) γ K
+    (dualizingComplex ℓ (f ≫ aY)) (dualizingComplex ℓ aY)
+    (upperShriekDualizingComplexIso ℓ f aY) K
 
-/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, given an
-identification `γ : Rf^! ω_Y ≅ ω_X`: the double-dual morphism of `Rf_! 𝔻_X K`, followed by the
-dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`. The familiar `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its
-inverse, when it is invertible. -/
+/-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, with `𝔻_X`
+relative to `f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the double-dual morphism of `Rf_! 𝔻_X K`,
+followed by the dual of `Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K ⟶ 𝔻_Y Rf_! 𝔻_X K`. The familiar
+`𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` is its inverse, when it is invertible. -/
 noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek _ ℓ f).obj (verdierDual ℓ aX K) ⟶
+    (boundedConstructibleLowerShriek _ ℓ f).obj (verdierDual ℓ (f ≫ aY) K) ⟶
       verdierDual ℓ aY ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
   Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
     (boundedConstructibleUpperShriekAdjunction _ ℓ f)
     (boundedConstructibleExceptionalProjection _ ℓ f)
-    (dualizingComplex ℓ aX) (dualizingComplex ℓ aY) γ K
+    (dualizingComplex ℓ (f ≫ aY)) (dualizingComplex ℓ aY)
+    (upperShriekDualizingComplexIso ℓ f aY) K
 
 end Absolute
 

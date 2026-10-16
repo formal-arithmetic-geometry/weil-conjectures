@@ -324,8 +324,10 @@ section AbsoluteExchange
 
 /-!
 In the application, `ωX` and `ωY` are the dualizing complexes `ω_X` and `ω_Y`
-(`ProEtale.CondensedRing.dualizingComplex`) of the structure morphisms `a_X : X ⟶ S` and
-`a_Y : Y ⟶ S`, and `γ : Rf^! ω_Y ≅ ω_X` is a chosen identification.
+(`ProEtale.CondensedRing.dualizingComplex`) of the structure morphisms `a_X = f ≫ a_Y : X ⟶ S`
+and `a_Y : Y ⟶ S`, and `γ : Rf^! ω_Y ≅ ω_X` is the composition isomorphism
+`R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` at the unit,
+`ProEtale.CondensedRing.upperShriekDualizingComplexIso`.
 -/
 
 variable (ωX : C) (ωY : D) (γ : S.obj ωY ≅ ωX)
