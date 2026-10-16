@@ -257,5 +257,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-9c0ba4cc3 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 19 cited statements, parent sk-prop-sf-comparison step 3, and Stacks 099U/099V/099W in proetale.tex (l.3866/3953/3986) and 03FD/03F3 in sites-cohomology.tex (l.1862/608), including their proofs. The statement and stmt_deps are byte-identical to the copies in weil-newtargets and in the live DAG, so no target is weakened. The statement is true for any associative Lambda; small cases checked: empty X, Lambda=0, F_p, where I_ab is not injective, and M_n(k). Step 2: the slice-restriction adjunction (projection and graph) is correct, and comparison-pullback covers abelian sheaves for any u. Steps 3-4: the vanishing passes 03FD(X_et) -> injective vanishing -> 03F3 + X_et/W = W_et -> 099W on W -> 03F3 + 03FD on X_proet, and injectivity of I_ab is never assumed. Step 5: the sectionwise exactness of J(W) gives a zero sheafified cohomology, which is elementary. No cycle: no dependency's closure reaches the item. No new nodes. Commutative, finite-ring and abelian variants exist (sk-lem-pe-injective-acyclicity, lem-weil-pbc-comparison-grothendieck-injective-acyclicity, lem-cbc-abelian-comparison-injective-acyclicity), but none duplicates this item. Declared tool_uses accepted; the entry for lem-cbc-abelian-etale-proetale-cohomology-comparison is unnecessary but harmless, because that node is in the item's own unit. No SGA citation. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-67d906fef",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable node, all eight statement dependencies, source passages, exact existing declaration and verbatim signature. Arbitrary-ring specialization and positive-degree vanishing compiled cleanly through scompile.py’s local overlay. No delivery faults or fixes required."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+  "declaration": "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective",
+  "statement": "theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})\n    (I : Sheaf X.smallEtaleTopology A)\n    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I)",
+  "branch": "slopmaster2",
+  "by": "NV",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Existing generic coefficient theorem, read in the source and in current server source via scompile.py --source. Specialize its ambient A to ModuleCat.{u + 1} Λ with Λ : Type (u + 1) and [Ring Λ]. Mathlib.Algebra.Category.ModuleCat.AB supplies IsGrothendieckAbelian.{u + 1} with no commutativity or finiteness assumption; all required instances and the exact specialization were checked with scompile.py. Sheaf-valued left modules are the first, fixed-scalar encoding explicitly allowed in the node. The upstream comparison functors are restriction and canonical left Kan extension followed by sheafification, the same constructions as the recorded geometric comparison. Functor.rightAcyclic unfolds to every positive rightDerived degree. The stored signature is verbatim; A and its categorical instances are the surrounding variables in that source module. No duplicate module is delivered."
  }
 }
