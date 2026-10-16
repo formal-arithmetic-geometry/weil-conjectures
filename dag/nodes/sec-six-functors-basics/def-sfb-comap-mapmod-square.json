@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-comap-mapmod-square",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars along a square of ring objects",
@@ -18,24 +18,134 @@
  ],
  "proof": [
   {
-   "text": "Restriction of scalars is strictly compatible with composition,\n$\\operatorname{Res}_{\\varphi_Y}\\circ\\operatorname{Res}_{\\eta_S}\\cong\n\\operatorname{Res}_{\\eta_S\\circ\\varphi_Y}$, and along equal morphisms; and\n$\\mathrm{mapMod}(F)$ commutes with restriction of scalars,\n$\\mathrm{mapMod}(F)\\circ\\operatorname{Res}_{\\varphi_X}\\cong\n\\operatorname{Res}_{F\\varphi_X}\\circ\\mathrm{mapMod}(F)$ ([sk-def-sfb-transport]). Composing these\nisomorphisms with the commutativity of the square gives the asserted one; every step is the\nidentity on underlying objects.",
+   "text": "Write $\\mu^F_{A,B}:FA\\otimes FB\\to F(A\\otimes B)$ for the lax structure map. Let $M$ be an $S_X$-module with action $\\gamma:S_X\\otimes M\\to M$. By [def-sfb-modobj-transport] and [def-sfb-modobj-restriction], the left composite has underlying object $FM$ and action $a_L=F(\\gamma)\\circ\\mu^F_{S_X,M}\\circ(\\eta_S\\otimes 1_{FM})\\circ(\\varphi_Y\\otimes 1_{FM})=F(\\gamma)\\circ\\mu^F_{S_X,M}\\circ((\\eta_S\\circ\\varphi_Y)\\otimes 1_{FM})$. The equality is functoriality of tensoring with $FM$. Thus it is transport followed by restriction along $\\eta_S\\circ\\varphi_Y$.",
    "uses": [
-    "sk-def-sfb-transport"
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-mapmod-square.proof.md",
+    "place": "the single proof paragraph, expanded on module actions"
+   }
+  },
+  {
+   "text": "The same definitions give the right composite the underlying object $FM$ and action $a_R=F(\\gamma\\circ(\\varphi_X\\otimes 1_M))\\circ\\mu^F_{R_X,M}\\circ(\\eta_R\\otimes 1_{FM})$. Functoriality of $F$ and naturality of its lax structure in the first variable give $F(\\varphi_X\\otimes 1_M)\\circ\\mu^F_{R_X,M}=\\mu^F_{S_X,M}\\circ(F\\varphi_X\\otimes 1_{FM})$. Hence $a_R=F(\\gamma)\\circ\\mu^F_{S_X,M}\\circ((F\\varphi_X\\circ\\eta_R)\\otimes 1_{FM})$. The assumed square says $F\\varphi_X\\circ\\eta_R=\\eta_S\\circ\\varphi_Y$, so $a_R=a_L$. This also identifies the right composite with restriction along that same common composite.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-mapmod-square.proof.md",
+    "place": "the single proof paragraph, expanded on module actions"
+   }
+  },
+  {
+   "text": "For each $M$, take $1_{FM}$ in both directions between the two resulting $R_Y$-module objects. By [sk-def-sfb-module-objects], clause 2, the module-linearity equation is $1_{FM}\\circ a_L=a_R\\circ(1_{R_Y}\\otimes1_{FM})$, which follows from $a_L=a_R$ and the identity laws. The two composites are identities. Both composite functors send a module morphism $h:M\\to N$ to $Fh$ on underlying morphisms by [def-sfb-modobj-transport] and [def-sfb-modobj-restriction]; naturality of the chosen components is therefore $Fh\\circ1_{FM}=1_{FN}\\circ Fh$. This defines the asserted natural isomorphism, whose identifications with transport followed by restriction along the common composite are precisely the identity identifications of steps 1 and 2.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-mapmod-square.proof.md",
+    "place": "the single proof paragraph, expanded on module actions"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-transport"
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-mapmod-square.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-mapmod-square.proof.md",
+  "place": "the single proof paragraph, expanded on module actions"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comapMapModComapIso|comap.*[Mm]apMod|mapMod.*comap",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for module objects commutes with a lax monoidal functor on a commutative square of monoid objects",
+   "results": "8 hits: RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.instModuleCarrierObjRestrictScalars, RestrictScalars.module, CategoryTheory.Mod_.comap",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap, CategoryTheory.MonoidalCategory.LaxMonoidalFunctor.mapMod",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.MonoidalCategory.LaxMonoidalFunctor.mapMod'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for module objects commutes with transport by a lax monoidal functor along a commutative square of monoid objects",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalarsComp'App_hom_naturality, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|scalarRestriction|def comap|comapComp",
+   "results": "6 hits: Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean; read Mathlib/CategoryTheory/Monoidal/Mod.lean:351–417 (scalarRestriction, scalarRestriction_hom, comap; composition is a TODO) and Mon.lean:850–870 (mapMod is a TODO).",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\"",
+   "results": "12 hits: Equivalence.comap, IsEquiv.comap, IsTrans.comap, Symmetric.comap, Std.Refl.comap, Std.Symm.comap, Set.SurjOn.comap_nonempty, Archimedean.comap",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor on internal modules is compatible with restriction of scalars and composition of monoid homomorphisms",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.comap, RingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, ModuleCat.restrictScalarsComp'_hom_app, ModuleCat.restrictScalarsComp'App_hom_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square isomorphism: scalar restriction alone and ordinary ring-module composition do not provide lax monoidal transport of internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp",
+   "results": "5 hits in the supplied file Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean at lines 248, 258, 259, 262, 263: restrictScalarsComp'App and identity-component formulas. Read lines 240–272. The single-file grep output omits the file prefix, so msearch's generic parser prints line numbers in its file field; the query root identifies the file.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square: these give restriction or ordinary ring-module restriction composition, without general lax monoidal transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap",
+   "results": "4 hits: CategoryTheory.Mod.comap, CategoryTheory.Mod.comap_obj_X, CategoryTheory.Mod.comap_obj_mod, CategoryTheory.Mod.comap_map_hom in Mathlib.CategoryTheory.Monoidal.Mod; pinned source already read at lines 351–417.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole square: these give restriction or ordinary ring-module restriction composition, without general lax monoidal transport"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModComap|comapComp|comapIsoOfEq|scalarRestriction.*[Ii]so",
+   "results": "4 hits: Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Pi/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match for the general square. Semantic hits give scalar restriction or ordinary ring-module identity comparisons; grep hits are reindexing functors for families and graded objects, not transport of internal modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism comparing scalarRestriction with a lax monoidal functor on internal module objects",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.restrictScalarsId'App_hom_naturality_assoc, ModuleCat.restrictScalarsId'App_hom_naturality",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match for the general square. Semantic hits give scalar restriction or ordinary ring-module identity comparisons; grep hits are reindexing functors for families and graded objects, not transport of internal modules."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -56,5 +166,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-comap-mapmod-square",
+  "worker": "stage1",
+  "summary": "Kept the source statement and its square orientation unchanged. Expanded the construction into three elementary steps: calculate the left action, calculate the right action using lax naturality and the square, and construct mutually inverse natural identity components. Reused the existing transport and scalar-restriction definitions; no new nodes and no Mathlib match for the whole item. The upstream master construction is reference only, not a finished attachment. Second reading made step 3 cite the module-morphism definition and the two underlying-morphism formulas explicitly; the statement and action calculation are unchanged.",
+  "blueprint": "Realizes the formal-input portion of unit sk-def-sfb-coefficient-comparisons, step 1. Steps 1–2 expand all three compatibilities invoked in the item proof paragraph (restriction composition, equal maps, and transport/restriction); step 3 assembles their identity components. The imported blueprint node has from=null and there is no other blueprint node with the same full statement."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-53d3520f3",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-53d3520f3 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item def-sfb-comap-mapmod-square and its report, and no new nodes. The statement is word for word the main-20261015 blueprint source (def-sfb-comap-mapmod-square.md, order 1727). F is lax monoidal, and the square orientation and the direction of the isomorphism match the source. stmt_deps equal the source's uses (sk-def-sfb-transport, sk-def-sfb-change-of-scalars). The source proof credits 'mapMod(F) commutes with Res' to sk-def-sfb-transport, but that node's statement does not say it. The delivery correctly replaces this with an explicit calculation, which repairs C3/C4/E5. Step 1: the transport action Fγ∘μ^F (def-sfb-modobj-transport) followed by restriction precomposition (def-sfb-modobj-restriction) gives a_L with (η_S∘φ_Y)⊗1, by bifunctoriality of the tensor. Step 2: uses naturality of μ^F in its first variable, F(φ_X⊗1)∘μ_{R_X,M} = μ_{S_X,M}∘(Fφ_X⊗1); I checked the domains and codomains. Then the square Fφ_X∘η_R = η_S∘φ_Y, in its stated orientation, gives a_R = a_L, with no strength or inverse tensorator. Step 3: the identity components are linear by sk-def-sfb-module-objects clause 2, mutually inverse, and natural because both sides send h to Fh. All three steps are genuinely elementary. proof_deps equal the union of the steps' uses; all are definitions, so there is no route or tool_use issue. There is no cycle: the item does not cite lem-sfb-comap-mapmod-square-underlying, and no SGA source is cited. Small cases tested: F = id, identity φ's, noncommutative monoids in (Set,×), the lax power set functor, and the zero module. None gives a counterexample. rg over dag/nodes found no duplicate of the square isomorphism or a separate Res-composition node. The Mathlib searches record all three kinds, and the Loogle error is recorded as an error, not as absence. No fixes were made."
+ }
 }
