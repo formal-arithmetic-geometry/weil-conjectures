@@ -5,11 +5,10 @@ Authors: SHEAF group H1
 -/
 module
 public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Sheaf.CategoryTheory.SheafPullbackUnitPresentation
-import Sheaf.CategoryTheory.ModuleInverseImageAction
 import all Sheaf.CategoryTheory.ModuleInverseImageAdjunction
-import all Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! Unit compatibility for module inverse-image comparisons. -/
 
