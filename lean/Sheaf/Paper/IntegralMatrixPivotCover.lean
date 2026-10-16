@@ -6,6 +6,8 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.IntegralScalarContractive
 
 /-! # A single integral matrix pivot
 
