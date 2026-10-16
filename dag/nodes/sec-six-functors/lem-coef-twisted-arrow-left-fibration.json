@@ -12,62 +12,149 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each monotone map $\\theta:[m]\\to[n]$, the join map $\\theta^{\\mathrm{op}}\\star\\theta$ preserves both ordered blocks. Its composite with the join map for $\\psi:[\\ell]\\to[m]$ is the join map for $\\theta\\psi$. Precomposition therefore gives all simplicial identities and commutes with restriction to the two blocks. Thus $\\operatorname{Tw}(\\mathcal C)$ is a simplicial set and $\\lambda$ is a simplicial map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JG",
+    "place": "Construction 8.1.1.1 and Notation 8.1.1.6"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $0\\leq k<n$ and a lifting square for $\\Lambda_k^n\\hookrightarrow\\Delta^n$ against $\\lambda$. The base simplex supplies maps on both pure blocks of $J_n=\\{\\bar n<\\cdots<\\bar0<0<\\cdots<n\\}$. For each face $d_j$ with $j\\neq k$, the upper horn map supplies a map on the face obtained by deleting the pair $\\bar j,j$. On intersections these maps agree by the simplicial identities and the lifting square. The prescribed domain is exactly $H_{n,k}$ in [lem-coef-twisted-arrow-join-horn], so that node's finite filtration extends this map to $N(J_n)$: at each stage apply the defining inner-horn filler of $\\mathcal C$, and glue the extension across the displayed pushout. The resulting $(2n+1)$-simplex restricts to the prescribed base and horn and is the required lift. This proves the left-fibration assertion with the full range $0\\leq k<n$. The base $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C$ is a quasicategory: opposite reverses the horn index from $j$ to $n-j$, and products fill inner horns coordinatewise. To fill an inner horn in $\\operatorname{Tw}(\\mathcal C)$, fill its image in this base and then use the just-proved lifting property. Hence $\\operatorname{Tw}(\\mathcal C)$ is a quasicategory as well.",
+   "uses": [
+    "lem-coef-twisted-arrow-join-horn",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JT",
+    "place": "Proposition 8.1.1.15, paired-face subcomplex, followed by Proposition 8.1.1.11 and Corollary 8.1.1.12"
+   }
+  },
+  {
+   "text": "Fix $x$ and put $P_x=\\{x\\}\\times_{\\mathcal C^{\\mathrm{op}}}\\operatorname{Tw}(\\mathcal C)$. Its second-block projection $P_x\\to\\mathcal C$ is a left fibration: regard any lifting square as a square for $\\lambda$ with constant first coordinate $x$ and use Step 2; the lift stays in $P_x$. Filling an inner horn first in $\\mathcal C$ then over it shows $P_x$ is a quasicategory. Applying [lem-coef-infinity-slice-right-fibration] to $\\mathcal C^{\\mathrm{op}}$ and then reversing ordered vertices identifies $((\\mathcal C^{\\mathrm{op}})_{/x})^{\\mathrm{op}}$ with $\\mathcal C_{x/}$, and turns its right-horn range $0<j\\leq n$ into the left-horn range $0\\leq n-j<n$. Thus $\\mathcal C_{x/}\\to\\mathcal C$ is also a left fibration of quasicategories. The order map $[n]^{\\mathrm{op}}\\star[n]\\to[0]\\star[n]$ constant on the first block and the identity on the second induces by precomposition a simplicial map $u:\\mathcal C_{x/}\\to P_x$. It commutes with the second-block projections, and in degree zero is the identity on the represented edges, including $\\operatorname{id}_x$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03K0",
+    "place": "Proposition 8.1.2.10, commutative diagram and left-fibration hypotheses; explicit collapse map"
+   }
+  },
+  {
+   "text": "The identity edge at $x$ is an equivalence, witnessed by its degenerate inverse triangles. Apply [lem-coef-infinity-slice-equivalence-final] in $\\mathcal C^{\\mathrm{op}}$: this edge is final in $(\\mathcal C^{\\mathrm{op}})_{/x}$. It is therefore initial in its opposite $\\mathcal C_{x/}$. To check this last duality with the fixed right-pinched mapping convention, use the homotopy equivalences to the arrow mapping spaces supplied by [lem-coef-infinity-pinch-comparison]. For any quasicategory $D$, simultaneous reversal of the parameter simplex and of $\\Delta^1$ identifies $U_{D^{\\mathrm{op}}}(a,b)$ with $U_D(b,a)^{\\mathrm{op}}$. The realizations of $K$ and $K^{\\mathrm{op}}$ are homeomorphic by reversing barycentric coordinates on each simplex; the defining face and degeneracy identifications agree with that reversal. Thus weak contractibility of the arrow mapping spaces is preserved, and the pinch comparison transfers it back to the right-pinched mapping spaces. This establishes initiality in exactly the convention of the item. The realization-cylinder theorem [lem-coef-simplicial-realization-cylinder] turns the simplicial inverse homotopies of the pinch maps into continuous homotopies, and [lem-coef-homotopy-equivalence-weak] makes their realizations weak homotopy equivalences. Bijections on components and isomorphisms on all homotopy groups then transfer weak contractibility in both directions.",
+   "uses": [
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J2",
+    "place": "Proposition 4.7.3.20, identity edge and opposite-category dual of the final-slice criterion"
+   }
+  },
+  {
+   "text": "The explicit degreewise description of $P_x$ in Step 3 is exactly the one in [lem-coef-infinity-twisted-pullback-identity-initial], and Step 3 verified its quasicategory hypothesis. Apply that node to $\\operatorname{id}_x$ to obtain its initiality in $P_x$. Step 3 shows $u$ is a map over $\\mathcal C$ between left fibrations and carries $\\operatorname{id}_x$ to itself; Step 4 gives its initiality in the domain. Consequently [lem-coef-infinity-left-fibration-initial-equivalence] applies with $E=\\mathcal C_{x/}$, $F=P_x$, $B=\\mathcal C$, and $e=\\operatorname{id}_x$. It gives the claimed equivalence over $\\mathcal C$ for this actual collapse map.",
+   "uses": [
+    "lem-coef-infinity-twisted-pullback-identity-initial",
+    "lem-coef-infinity-left-fibration-initial-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03K0",
+    "place": "Proposition 8.1.2.10, application of initiality (03JW) and the left-fibration criterion (03J6)"
+   }
+  },
+  {
+   "text": "Apply the source-fixed result of Steps 3–5 to $\\mathcal C^{\\mathrm{op}}$ and $y$. Ordered reversal identifies $(\\mathcal C^{\\mathrm{op}})_{y/}$ with $(\\mathcal C_{/y})^{\\mathrm{op}}$. There is a simplicial isomorphism $\\operatorname{Tw}(\\mathcal C^{\\mathrm{op}})\\cong\\operatorname{Tw}(\\mathcal C)$: interpret a map $N(J_n)\\to\\mathcal C^{\\mathrm{op}}$ as a map $N(J_n)^{\\mathrm{op}}\\to\\mathcal C$ and precompose by the order isomorphism $J_n\\to J_n^{\\mathrm{op}}$ exchanging $\\bar j$ and $j$. It commutes with every $\\theta^{\\mathrm{op}}\\star\\theta$, and exchanges the two block projections. Therefore it takes the source-fixed pullback for $\\mathcal C^{\\mathrm{op}}$ to the target-fixed pullback for $\\mathcal C$, over $\\mathcal C^{\\mathrm{op}}$. Under these two isomorphisms the first-block collapse becomes exactly the second-block collapse in the statement. This gives $(\\mathcal C_{/y})^{\\mathrm{op}}\\to\\operatorname{Tw}(\\mathcal C)\\times_{\\mathcal C}\\{y\\}$ as an equivalence over $\\mathcal C^{\\mathrm{op}}$. The order reversal and collapse leave the degenerate identity edge fixed.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JL",
+    "place": "Remark 8.1.1.7, duality isomorphism (without an extra opposite on Tw), applied to Proposition 8.1.2.10"
+   }
+  },
+  {
+   "text": "For a simplicial functor $F:\\mathcal C\\to\\mathcal D$, postcomposition sends every defining map on $N(J_n)$ to its composite with $F$. This defines $\\operatorname{Tw}(F)$ over $F^{\\mathrm{op}}\\times F$. For either block-collapse order map $c$, associativity gives $F\\circ(\\sigma\\circ N(c))=(F\\circ\\sigma)\\circ N(c)$ in every degree. These equalities commute with all simplicial operators, so both slice comparisons commute with $F$ strictly. A degenerate edge at $x$ is sent to the degenerate edge at $F(x)$, which proves the identity and functoriality clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JG",
+    "place": "Construction 8.1.1.1 and the degreewise collapse maps of Proposition 8.1.2.10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-infinity-left-fibration-initial-equivalence",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-twisted-pullback-identity-initial",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-twisted-arrow-join-horn"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03K0",
+  "place": "Construction 8.1.1.1, Propositions 8.1.1.11 and 8.1.1.15, and Proposition 8.1.2.10 with its dual. Online sources read, archival copies unavailable; expanded argument and dependency split by Q48."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Edgewise subdivision of a quasicategory projects as a left fibration to its opposite times itself",
-   "results": "{\"t\": \"2026-10-16T17:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"Edgewise subdivision of a quasicategory projects as a left fibration to its opposite times itself\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.Quasicategory.hornFilling'\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\"], \"digest\": \"b86093080b65abcf\"}",
+   "query": "Twisted arrow quasicategory left fibration over its opposite times itself with coslice and slice equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Over\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (S : C) [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X Y : CategoryTheory.Over S} (f : X ⟶ Y) [HomotopicalAlgebra.Fibration f], HomotopicalAlgebra.Fibration f.left\", \"doc\": \"For any fibration $ f $ in the over category $ \\\\mathcal{C}/S $, the underlying morphism $ f.left $ in the base category $ \\\\mathcal{C} $ is also a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.fibrations_over_iff\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Over\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (S : C) [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X Y : CategoryTheory.Over S} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ HomotopicalAlgebra.Fibration f.left\", \"doc\": \"In the over category $\\\\mathcal{C}/S$, a morphism $f$ is a fibration if and only if its underlying morphism $f.left$ in $\\\\mathcal{C}$ is a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.fibrations_over_def\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Over\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (S : C) [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C],\\n  HomotopicalAlgebra.fibrations (CategoryTheory.Over S) = (HomotopicalAlgebra.fibrations C).over\", \"doc\": \"For any category $\\\\mathcal{C}$ equipped with fibrations and an object $S$ in $\\\\mathcal{C}$, the over category $\\\\mathcal{C}/S$ inherits a canonical category with fibrations structure. A morphism in $\\\\m\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read all returned types and Subdivision.lean:35-56: sd is barycentric subdivision using nonempty finite chains, not edgewise subdivision or the twisted-arrow left fibration. The horn-filling hits concern inner horns only."
+   "verdict": "no match: inspected the returned signatures. These are ordinary-category undercategories, Grothendieck constructions, and Kan-Quillen fibrations. No hit constructs twisted arrows of a quasicategory, the left fibration, or its slice comparisons; the focused source grep found no twisted-arrow or edgewise-subdivision declaration."
   },
   {
    "tool": "loogle",
    "query": "\"TwistedArrow\"",
-   "results": "{\"t\": \"2026-10-16T17:57:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"TwistedArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
-   "verdict": "No match. Read all returned types and Subdivision.lean:35-56: sd is barycentric subdivision using nonempty finite chains, not edgewise subdivision or the twisted-arrow left fibration. The horn-filling hits concern inner horns only."
+   "verdict": "no match: inspected the returned signatures. These are ordinary-category undercategories, Grothendieck constructions, and Kan-Quillen fibrations. No hit constructs twisted arrows of a quasicategory, the left fibration, or its slice comparisons; the focused source grep found no twisted-arrow or edgewise-subdivision declaration."
   },
   {
    "tool": "grep",
-   "query": "twisted.?arrow|edgewise|[Ss]ubdivision",
-   "results": "{\"t\": \"2026-10-16T17:57:07Z\", \"tool\": \"grep\", \"query\": \"twisted.?arrow|edgewise|[Ss]ubdivision\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"17e06286c8b596a6\"}",
+   "query": "twisted.?arrow|edgewise",
+   "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
-   "verdict": "No match. Read all returned types and Subdivision.lean:35-56: sd is barycentric subdivision using nonempty finite chains, not edgewise subdivision or the twisted-arrow left fibration. The horn-filling hits concern inner horns only."
+   "verdict": "no match: inspected the returned signatures. These are ordinary-category undercategories, Grothendieck constructions, and Kan-Quillen fibrations. No hit constructs twisted arrows of a quasicategory, the left fibration, or its slice comparisons; the focused source grep found no twisted-arrow or edgewise-subdivision declaration."
   },
   {
    "tool": "leansearch",
-   "query": "Twisted arrow quasicategory is a left fibration over the opposite category times the category and its restrictions are slice categories",
-   "results": "{\"t\": \"2026-10-16T19:27:30Z\", \"tool\": \"leansearch\", \"query\": \"Twisted arrow quasicategory is a left fibration over the opposite category times the category and its restrictions are slice categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.cofibrations_op\", \"HomotopicalAlgebra.instCategoryWithFibrationsOpposite\", \"HomotopicalAlgebra.fibrations_op\", \"HomotopicalAlgebra.fibrations_eq_unop\", \"HomotopicalAlgebra.cofibrations_eq_unop\", \"HomotopicalAlgebra.fibration_unop_iff\", \"CategoryTheory.Arrow.opEquiv\", \"HomotopicalAlgebra.instFibrationUnopOfCofibrationOpposite\"], \"digest\": \"f98ce571b5c2814b\"}",
+   "query": "The source fixed two sided edgewise subdivision of a quasicategory is equivalent to the undercategory",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.algebraEquivUnder\", \"module\": \"Mathlib.CategoryTheory.Monad.Products\", \"type\": \": Monad.Algebra (coprodMonad X) ≌ Under X\", \"doc\": \"For a category $\\\\mathcal{C}$ with binary coproducts and an object $X$, the Eilenberg-Moore category of the coproduct monad $T(X) = X \\\\sqcup X$ is equivalent to the under category $X/\\\\mathcal{C}$. This\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.isEquivalence_toUnder\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \"(X : T) (F : D ⥤ T) [F.IsEquivalence] : (toUnder X F).IsEquivalence\", \"doc\": \"Given an object $X$ in a category $\\\\mathcal{T}$ and a functor $F : \\\\mathcal{D} \\\\to \\\\mathcal{T}$ that is an equivalence of categories, the canonical functor from the structured arrow category $\\\\text{St\"}\n  {\"name\": \"CategoryTheory.Over.opEquivOpUnder\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \": Over (op X) ≌ (Under X)ᵒᵖ\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{T}$, the over category $\\\\mathcal{T}^\\\\text{op}/X$ (where $X$ is viewed in the opposite category $\\\\mathcal{T}^\\\\text{op}$) is equivalent to the opposite of the \"}\n  {\"name\": \"CategoryTheory.Under.postEquiv_functor\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \"∀ {T : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} T] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (X : T) (F : T ≌ D), (CategoryTheory.Under.postEquiv X F).functor = CategoryTheory.Under.post F.functor\", \"doc\": \"Given categories $\\\\mathcal{T}$ and $\\\\mathcal{D}$, and an equivalence $F : \\\\mathcal{T} \\\\simeq \\\\mathcal{D}$, there exists an equivalence between the under category $X/\\\\mathcal{T}$ and the under category\"}\n  {\"name\": \"CategoryTheory.instCategoryUnder\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \"(X : T) : Category (Under X)\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{T}$, the under category (or coslice category) of $X$—whose objects are pairs $(T, f: X \\\\to T)$ and whose morphisms are commutative triangles involving identi\"}\n  {\"name\": \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_ι_app_of\", \"module\": \"Mathlib.CategoryTheory.WithTerminal.Cone\", \"type\": \"(Y : J) : (coconeEquiv.functor.obj t).ι.app (of Y) = (t.ι.app Y).right\", \"doc\": \"There is a natural equivalence between the category of cocones for a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{C} \\\\downarrow X $ in the under category and the category of cocones for the lifted diagram $\"}\n  {\"name\": \"CategoryTheory.Under.hasLimit_of_hasLimit_comp_forget\", \"module\": \"Mathlib.CategoryTheory.Limits.Over\", \"type\": \"(F : J ⥤ Under X) [i : HasLimit (F ⋙ forget X)] : HasLimit F\", \"doc\": \"For any categories $\\\\mathcal{J}$ and $\\\\mathcal{T}$, an object $X$ in $\\\\mathcal{T}$, and a functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{T}\\\\downarrow X$, if the composition of $F$ with the forgetful functor $\\\\\"}\n  {\"name\": \"CategoryTheory.Under.instIsRightAdjointForget\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \": (forget X).IsRightAdjoint\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{T}$, the forgetful functor from the under category $X/\\\\mathcal{T}$ to $\\\\mathcal{T}$—which maps each object $(T, f: X \\\\to T)$ to $T$ and each morphism $(g: T \"}",
    "date": "2026-10-17",
-   "verdict": "no match: inspected the returned signatures. Ordinary enriched Hom and coherent-nerve definitions do not assert twisted-arrow recognition or unstraightening; the model-category fibration results concern all horns, not one-sided fibrations. No exact match or one-line specialization."
+   "verdict": "no match: inspected the returned signatures. These are ordinary-category undercategories, Grothendieck constructions, and Kan-Quillen fibrations. No hit constructs twisted arrows of a quasicategory, the left fibration, or its slice comparisons; the focused source grep found no twisted-arrow or edgewise-subdivision declaration."
   },
   {
    "tool": "leanfinder",
-   "query": "The two sided edgewise subdivision models the mapping space bifunctor of an infinity category via source and target",
-   "results": "{\"t\": \"2026-10-16T19:27:34Z\", \"tool\": \"leanfinder\", \"query\": \"The two sided edgewise subdivision models the mapping space bifunctor of an infinity category via source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"e2f721ebf134186f\"}",
+   "query": "The mapping bifunctor of an infinity category is modeled by a left fibration of twisted arrows whose source fibers are coslices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasTerminal C] → CategoryTheory.Functor (HomotopicalAlgebra.FibrantObject C) C\", \"doc\": \"The inclusion functor from the full subcategory of fibrant objects in a category with cofibrations to the original category, mapping each fibrant object and morphism between them to themselves.\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{i n : ℕ} →\\n  (SimplexCategory.mk i ⟶ SimplexCategory.mk n) →\\n    autoParam (i ≤ 2) SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂._auto_1 →\\n      CategoryTheory.StructuredArrow (Opposite.op (SimplexCategory.mk n)) (SimplexCategory.Truncated.inclusion 2).op\", \"doc\": \"For natural numbers $i,n$ with $i \\\\leq 2$, given a morphism $[i] \\\\to [n]$ in the simplex category $\\\\Delta$, this constructs a structured arrow in the comma category formed by the opposite of the inclu\"}\n  {\"name\": \"CategoryTheory.nerve.functorOfNerveMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.SmallCategory C] →\\n    [inst_1 : CategoryTheory.SmallCategory D] →\\n      (CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of C) ⟶\\n          CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of D)) →\\n        CategoryTheory.Functor C D\", \"doc\": \"Given a natural transformation $\\\\phi$ between the 2-truncated nerves of small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, this defines a functor $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ by mapping objects via th\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasInitial C] →\\n        [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n          [inst_4 : CategoryTheory.Limits.HasTerminal C] \", \"doc\": \"The inclusion functor from the full subcategory of bifibrant objects in a category $\\\\mathcal{C}$ (objects where the unique morphism from the initial object is a cofibration and to the terminal object \"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.Grothendieck.functorFrom\", \"module\": \"Mathlib/CategoryTheory/Grothendieck\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n      {E : Type u_1} →\\n        [inst_1 : CategoryTheory.Category.{v_1, u_1} E] →\\n          (fib : (c : C) → CategoryTheory.Functor (↑(F.obj c)) E) →\\n            (hom : {c c' : C} → (f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a family of functors $\\\\text{fib}_c : F(c) \\\\to \\\\mathcal{E}$ compatible with $F$'s morphisms via natural transformations\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Over\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (S : C) [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X Y : CategoryTheory.Over S} (f : X ⟶ Y) [HomotopicalAlgebra.Fibration f], HomotopicalAlgebra.Fibration f.left\", \"doc\": \"For any fibration $ f $ in the over category $ \\\\mathcal{C}/S $, the underlying morphism $ f.left $ in the base category $ \\\\mathcal{C} $ is also a fibration.\"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorToComma\", \"module\": \"Mathlib/CategoryTheory/Comma/StructuredArrow/Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            (L : CategoryTheory.Functor C D) →\\n              (R : CategoryTheory\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $R : \\\\mathcal{E} \\\\to \\\\mathcal{D}$, this defines a functor from the Grothendieck category of \"}",
    "date": "2026-10-17",
-   "verdict": "no match: inspected the returned signatures. Ordinary enriched Hom and coherent-nerve definitions do not assert twisted-arrow recognition or unstraightening; the model-category fibration results concern all horns, not one-sided fibrations. No exact match or one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The mapping space functor of a quasicategory is represented by edgewise subdivision with fixed source and target",
-   "results": "{\"t\": \"2026-10-16T19:38:13Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping space functor of a quasicategory is represented by edgewise subdivision with fixed source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerveFunctor\", \"SSet.Edge.map\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.spine\", \"CategoryTheory.nerve.edgeMk\", \"SSet.cosk\"], \"digest\": \"c253c9f82bf14327\"}",
-   "date": "2026-10-17",
-   "verdict": "No match. Read the returned types: ordinary Grothendieck arrows, simplicial Hom objects and ordinary nerves do not compare quasicategorical transport; Kan-Quillen model fibrations lift all horns, and their slice structure is not the covariant model structure. The Mathlib source grep found no one-sided fibration or twisted-arrow declaration."
-  },
-  {
-   "tool": "grep",
-   "query": "left.?fibration|right.?fibration|straighten|edgewise|twisted.?arrow",
-   "results": "{\"t\": \"2026-10-16T19:40:07Z\", \"tool\": \"grep\", \"query\": \"left.?fibration|right.?fibration|straighten|edgewise|twisted.?arrow\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "No match. Read the returned types: ordinary Grothendieck arrows, simplicial Hom objects and ordinary nerves do not compare quasicategorical transport; Kan-Quillen model fibrations lift all horns, and their slice structure is not the covariant model structure. The Mathlib source grep found no one-sided fibration or twisted-arrow declaration."
+   "verdict": "no match: inspected the returned signatures. These are ordinary-category undercategories, Grothendieck constructions, and Kan-Quillen fibrations. No hit constructs twisted arrows of a quasicategory, the left fibration, or its slice comparisons; the focused source grep found no twisted-arrow or edgewise-subdivision declaration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-transport-classification",
@@ -105,5 +192,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-twisted-arrow-left-fibration",
+  "worker": "stage1",
+  "summary": "Repaired the returned horn argument using a statement-only finite paired-face inner-horn filtration; cited the existing final-slice criterion through explicit opposite mapping-space comparison for coslice initiality; added independent initiality and left-fibration comparison lemmas, avoiding downstream classification and cycles. Corrected the retained duality step to Tw(C^op) isomorphic to Tw(C), with no extra opposite. The item statement is unchanged.",
+  "blueprint": "Realizes the first and last derived Hom / inverse-limit comparisons in paragraph 2 of prop-coef-integral-exceptional-adjoint: construction and functoriality of coherent mapping functors, their left-fibration model, and fixed-source/target slice comparisons. The current main-20261015 proof retains those comparisons; no chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-c60f7733a",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c60f7733a (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all three new nodes in full, together with the statements of every cited node. Kerodon is not under literature/, so I checked the cited tags online, read-only, and the WANTED line and proof_origin.by=agent are correct. 03JT (Prop 8.1.1.15): its horns are Λ^n_{n-i}, and the basic subsets are exactly H_{n,k} of join-horn with k=n-i. 03JW (Prop 8.1.2.1): an isomorphism X→Y is initial in {X}×_{C^op}Tw(C). That matches twisted-pullback-identity-initial, whose extra hypothesis that P_x is a quasicategory is proved in Step 3, so there is no cycle. 03J6 (Cor 5.6.6.20): left fibrations U,V over C, F over C, an initial X̃, and F an equivalence iff F(X̃) is initial. That matches the criterion node in its sufficient direction over the base. 03K0 (Prop 8.1.2.10): two left fibrations, id_X initial, the image initial, then 5.6.6.20; Steps 3-5 follow this exactly. Step 2: the faces d_j delete the pair (j̄, j), the intersections are compatible, and Tw is a quasicategory only after the fibration property is proved. Step 4: the final-to-initial transfer through U_{D^op}(a,b)≅U_D(b,a)^op, |K^op|≅|K|, the cylinder lemma and the homotopy-weak lemma is valid for right-pinched mapping spaces. Step 6: Tw(C^op)≅Tw(C) via the swap j̄↔j exchanges the blocks and adds no extra opposite. Small cases: my own check/joinhorn.py finds an inner-horn filtration for every n≤4 and 0≤k<n, and none for the excluded k=n. For n=1 H is the spine of Δ^3. With n=0, and for ordinary categories (P_x≅x/C), both comparison maps behave as stated. The criterion holds over a point base. Duplicate search with rg over dag/nodes (twisted arrow, initial and left fibration, coslice, inner anodyne, corepresent; eleven candidates read) found none. No new node restates a clause of the item. Route: all proof deps are in sk-prop-sf-biduality-general apart from the definition def-cbc. No tool_uses are needed or accepted, and no SGA source is used. A transitive closure over 119 dependencies shows no cycle. Mathlib has no TwistedArrow or LeftFibration result and no such filtration, so no new node is a Mathlib leaf. No target, coefficient category or base-change morphism is touched. No fixes."
  }
 }
