@@ -3,68 +3,283 @@
  "blueprint": {
   "is": "det-def-localizing-closure-ctf-equals-bc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$D^b_{ctf}=D^b_c$ for integral and rational coefficients",
- "statement": "Let $X$ be a qcqs scheme and $\\Lambda\\in\\{\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb\\}$. Then:\n\n1. every constructible $\\Lambda_X$-module has Tor amplitude in $[-1,0]$, and in $[0,0]$ if\n   $\\Lambda$ is a field;\n2. every $K\\in\\Dbc(X,\\Lambda)$ with cohomology in $[a,b]$ has Tor amplitude in $[a-1,b]$;\n   hence $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ and\n   $\\Loc(\\Dctf(X,\\Lambda))=\\Loc(\\Dbc(X,\\Lambda))$.\n\nFor a finite nonregular ring the condition is essential: $\\mathbf F_\\ell$ over\n$\\mathbf Z/\\ell^2$ is constructible but has infinite projective dimension. Finite Tor\namplitude is a condition on the whole complex: for $A=\\mathbf Z/\\ell^2$ the complex\n$[A\\xrightarrow{\\ell}A]$ is perfect, whereas its nonzero cohomology modules are\n$\\mathbf F_\\ell$, which are not perfect; so $\\Dctf(X,A)$ is thick but need not be stable\nunder standard truncations.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\cO_E$. Use the condensed coefficient rings of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], pulled back to the small pro-étale site. Let $X$ be a qcqs scheme and $\\Lambda\\in\\{\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb\\}$. Then:\n\n1. every constructible $\\Lambda_X$-module has Tor amplitude in $[-1,0]$, and in $[0,0]$ if\n   $\\Lambda$ is a field;\n2. every $K\\in\\Dbc(X,\\Lambda)$ with cohomology in $[a,b]$ has Tor amplitude in $[a-1,b]$;\n   hence $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ and\n   $\\Loc(\\Dctf(X,\\Lambda))=\\Loc(\\Dbc(X,\\Lambda))$.\n\nThe following counterexamples are over the scalar ring, or as constant sheaves on $X=\\operatorname{Spec}k$ for a separably closed field $k$. For scalar complexes, perfect means isomorphic to a bounded complex of finitely generated projective modules [def-pc-perfect-ring-complex]; for the constant-sheaf examples, perfect means locally isomorphic to such a complex of finite projective $A_X$-modules. For a finite nonregular ring the condition is essential: $\\mathbf F_\\ell$ over\n$\\mathbf Z/\\ell^2$ is constructible but has infinite projective dimension. Finite Tor\namplitude is a condition on the whole complex: for $A=\\mathbf Z/\\ell^2$ the complex\n$[A\\xrightarrow{\\ell}A]$ is perfect, whereas its nonzero cohomology modules are\n$\\mathbf F_\\ell$, which are not perfect. So for every qcqs scheme $X$ and every finite commutative ring $A$\n(with its discrete condensed structure), $\\Dctf(X,A)$ is thick, but it need not be stable\nunder standard truncations (already for $A=\\mathbf Z/\\ell^2$ and $X=\\operatorname{Spec}k$).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
   "place": "node det-def-localizing-closure-ctf-equals-bc, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-def-localizing-closure-existence",
+  "def-pc-perfect-ring-complex"
+ ],
  "proof": [
   {
-   "text": "The scalar ring $\\Lambda(*)$ is the discrete valuation ring $\\mathbf Z_\\ell$ or $\\cO_E$, or\nthe field $\\mathbf Q_\\ell$, $E$ or $\\Qlb$.",
-   "uses": [],
-   "elementary": null
+   "text": "Scalar algebra. Put $R=\\Lambda(*)$. Evaluation on the singleton in [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed] gives $R=\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E$, or $\\Qlb$. The integral rings are discrete valuation rings by [lem-weil-l-adic-extension-integers-dvr], including $E=\\mathbf Q_\\ell$. For a finitely presented $R$-module $P$, choose a surjection $R^n\\twoheadrightarrow P$. Over a discrete valuation ring its kernel $T\\subseteq R^n$ has a basis of at most $n$ elements by [lem-sc-dvr-saturation-line-smith-normal-form]. Thus $0\\to R^m\\to R^n\\to P\\to0$ is exact for some finite $m$. Over a field, take a spanning subset of the given finite generating set minimal under inclusion. Any nontrivial dependence lets one solve for an element with nonzero coefficient, contradicting minimality. It is therefore a finite basis and $P\\cong R^r$. This includes $P=0$ and rank zero.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, scalar-ring sentence and Local models, finite free resolution"
+   }
   },
   {
-   "text": "*Local models.* A finitely presented $\\Lambda(*)$-module $P$ has a finite projective\nresolution $0\\to\\Lambda(*)^m\\xrightarrow{A}\\Lambda(*)^n\\to P\\to0$ of length at most one over a\ndiscrete valuation ring and of length zero over a field. Pulling it back along\n$\\Lambda(*)\\to\\Lambda_U$ is exact: for fields because every module is flat over a field, and\nfor $\\cO_E$ because $\\cO_{E,U}$ is flat over the constant sheaf $(\\cO_E)_U$\n([det-prop-integral-criterion-constant-coefficients]). So a module with a finite constant\nlocal model ([det-def-sfb-constructible-local-model]) is, on each $U_i$, quasi-isomorphic to\n$[\\Lambda_{U_i}^m\\to\\Lambda_{U_i}^n]$ in degrees $[-1,0]$, a complex of flat modules; its\nderived tensor product with any $N$ is $[N^m\\to N^n]$, with cohomology in $[-1,0]$.",
+   "text": "Pass the integral exact sequence from step 1 to constant sheaves on any scheme $V$. This preserves exactness: the constant-sheaf functor is inverse image for the structural morphism to the point topos, so [lem-weil-pbc-site-pullback-abelian-exact] applies, with no finiteness assumption on the ring. By clause 1 of [det-prop-integral-criterion-constant-coefficients], $R_V\\to\\Lambda_V$ is flat for $R=\\mathcal O_E$, and also for $R=\\mathbf Z_\\ell$ by taking $E=\\mathbf Q_\\ell$. Scalar extension therefore yields $0\\to\\Lambda_V^m\\to\\Lambda_V^n\\to\\Lambda_V\\otimes_R P\\to0$. In the field case scalar extension of $P\\cong R^r$ gives $\\Lambda_V\\otimes_R P\\cong\\Lambda_V^r$ directly; no assertion that the ring sheaf $\\Lambda_V$ is itself a field is used. Hence each finite constant local model of [det-def-sfb-constructible-local-model] has a flat resolution in degrees $[-1,0]$, or a free model in degree zero for field coefficients.",
    "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
     "det-prop-integral-criterion-constant-coefficients",
     "det-def-sfb-constructible-local-model"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Local models, exact scalar extension and finite constant local models"
+   }
   },
   {
-   "text": "*Locality.* Restriction to the members of a pro-étale cover is exact, commutes with\n$\\otimes^{\\mathbf L}$, and is jointly conservative; so Tor amplitude may be checked on a\ncover.",
-   "uses": [],
-   "elementary": null
+   "text": "The finite free sheaves in step 2 are flat: tensoring with $\\Lambda_V^r$ is the finite direct-sum functor $N\\mapsto N^r$, which preserves exact sequences, by the definition [def-pc-flat-sheaf-modules]. The bounded flat resolution is K-flat by [lem-pc-kflat-closure]. Derived tensor may be computed by resolving one factor, by [lem-weil-pbc-ringed-projection-mate-exact]. Therefore for any module sheaf $N$ on $V$, its tensor with the integral model is the complex $[N^m\\to N^n]$ in degrees $[-1,0]$, while with a field model it is $N^r$ in degree zero. Its cohomology vanishes outside the indicated interval. This proves the local-model amplitude calculation.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Local models, computation of the derived tensor"
+   }
   },
   {
-   "text": "*Strata.* Let $M$ be constructible, with a finite stratification. Choose an open stratum\n$j\\colon U\\hookrightarrow X$ with closed complement $i\\colon Z\\hookrightarrow X$ a union of\nstrata (Noetherian induction on the number of strata). The localization sequence\n$0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$ and the projection formulas\n$(j_!B)\\otimes^{\\mathbf L}N=j_!(B\\otimes^{\\mathbf L}j^*N)$ and\n$(i_*C)\\otimes^{\\mathbf L}N=i_*(C\\otimes^{\\mathbf L}i^*N)$ (both sides are computed by flat\nresolutions, and $j_!$, $i_*$, $j^*$, $i^*$ are exact) reduce (1) to $j^*M$ and to $i^*M$,\nand by induction to a single stratum, where it is the local model computation.",
-   "uses": [],
-   "elementary": null
+   "text": "Cover locality. For a pro-étale covering $\\{V_i\\to T\\}$, [lem-weil-proetale-weakly-etale-localization] identifies the small sites of its members with the slice sites. Restriction to a slice is exact by [lem-pur-site-restriction-module-adjunction-exact], and it commutes with derived tensor by [lem-weil-pbc-ringed-projection-restriction]. If a sheaf $F$ restricts to zero on the cover, then for any site object $W\\to T$ its restriction is zero on $W\\times_TV_i$, which cover $W$; the uniqueness part of the sheaf axiom forces every section of $F(W)$ to be zero. Thus these restrictions are jointly conservative on sheaves. Exactness gives $H^q(C)|_{V_i}=H^q(C|_{V_i})$. Apply this to $C=M\\otimes^{\\mathbf L}N$, separately for every $N$, to conclude that the common Tor interval in step 3 holds on any scheme where $M$ has a finite constant local model. The same argument applies to an open cover and to any fixed tensor product complex.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Locality; explicit sheaf-axiom argument"
+   }
   },
   {
-   "text": "*Complexes.* For $K\\in\\Dbc(X,\\Lambda)$ with cohomology in $[a,b]$, induct on $b-a$ with the\ntruncation triangles $\\tau_{<b}K\\to K\\to H^b(K)[-b]\\to$: the extension property of\n[det-def-sfb-constructible-tor-amplitude] and (1) give Tor amplitude in $[a-1,b]$. Thus\n$\\Dbc\\subseteq\\Dctf$; the reverse inclusion is the definition. The equality of localizing\nclosures follows from [det-def-localizing-closure-existence] (3).",
+   "text": "Prepare the strata induction. Let $I=[-1,0]$ for integral coefficients and $I=[0,0]$ for field coefficients. Prove the claim for all qcqs schemes and all constructible modules with a chosen partition into at most $n$ strata, simultaneously, by induction on $n$. The case $n=0$ is the empty scheme, on which all module sheaves vanish. For every $n\\geq1$, use the following open--closed argument, also when the sole stratum has the whole underlying space but a different scheme structure [def-constructible-stratification]. The finite locally closed constructible partition and the local models on its strata are supplied by [sk-def-sfb-constructible]. For $n\\geq1$ and $x\\in T$, let $S$ be its stratum. The stratum immersion $Z_S\\to T$ factors as a closed immersion into an open subscheme $O\\subseteq T$ containing $S$. By [lem-weil-pbc-constructible-open-restriction] every stratum meets $O$ in a constructible subset of $O$, and it is still locally closed, so the strata restrict to a finite locally closed constructible partition of $O$. By [lem-sf-constructible-partition-local-closed-stratum] applied to $O$, choose an affine open $W\\subseteq O$ with $x\\in W$ such that $Z=S\\cap W$ is closed in $W$, every $S_\\nu\\cap W$ is locally closed and constructible in $W$, and $U=W\\setminus Z$ is quasi-compact. Give $Z$ the restriction $Z_S\\times_TW$ of its stratum structure; since $W\\subseteq O$, its immersion into $W$ is closed. Then $Z$ is affine and $U$ is qcqs (an open of the affine $W$, with the stated quasi-compactness). On $Z$, the restriction of $M$ still has a finite constant local model; on $U$, the other strata restrict to a partition with at most $n-1$ nonempty strata, which are locally closed and, by [lem-weil-pbc-constructible-open-restriction] for the open $U\\subseteq W$, constructible in $U$; their immersions are the base changes $Z_{S_\\nu}\\times_TU\\to U$. Restrict their covers and presentations; by clause 1 and the final paragraph of [sk-prop-sfb-cartesian-coefficients], coefficient sheaves are identified by the canonical inverse-image isomorphism and module pullback is the corresponding exact inverse-image lift. Hence $M|_Z$ has interval $I$ by steps 2--4 and $M|_U$ has interval $I$ by the induction hypothesis. This uses the number of strata, not Noetherian induction and not an assumed globally open stratum.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sf-constructible-partition-local-closed-stratum",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-constructible-stratification",
+    "lem-weil-pbc-constructible-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Strata; corrected local induction replacing the unsupported open-stratum choice"
+   }
+  },
+  {
+   "text": "Detect the vanishing on $W$. Write $j:U\\hookrightarrow W$, $i:Z\\hookrightarrow W$, and let $N$ be any $\\Lambda_W$-module. Set $C=(M|_W)\\otimes^{\\mathbf L}_{\\Lambda_W}N$. By the final paragraph of [sk-prop-sfb-cartesian-coefficients], the module pullbacks $j^*,i^*$ are exact, so are their own derived functors and commute with cohomology. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $j^*C=(M|_U)\\otimes^{\\mathbf L}j^*N$ and $i^*C=(M|_Z)\\otimes^{\\mathbf L}i^*N$. Step 5 gives $j^*H^q(C)=i^*H^q(C)=0$ for $q\\notin I$. Apply the short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] to the sheaf $H^q(C)$: its two outer terms $j_!j^*H^q(C)$ and $i_*i^*H^q(C)$ are zero, hence $H^q(C)=0$. Its hypothesis is met because $j$ is the quasi-compact open from step 5. This proves interval $I$ on each $W$, and step 4 for the open covering by these $W$ proves it on $T$. The induction closes, proving clause 1. This is the open--closed detection form of the blueprint's strata argument; it requires no additional derived projection formula.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Strata; open--closed detection of the tensor cohomology"
+   }
+  },
+  {
+   "text": "Complexes. For $K$ with constructible cohomology supported in $[a,b]$, induct on $b-a$. If $K$ is zero the assertion is immediate. If $a=b$, [lem-sf-derived-concentrated-single] identifies $K$ with $H^a(K)[-a]$, which has interval $[a-1,a]$ by clause 1 and the shift rule of [det-def-sfb-constructible-tor-amplitude]. For $a<b$, take the truncation triangle $K'\\to K\\to K''\\to K'[1]$ of [lem-sf-derived-truncation-triangle] at $b$. The long exact sequence [lem-sf-derived-homology-long-exact] gives $H^q(K')=H^q(K)$ for $q<b$, zero otherwise, and $H^q(K'')=0$ unless $q=b$, with $H^b(K'')=H^b(K)$. Thus $K'$ has constructible cohomology supported in $[a,b-1]$ and $K''\\cong H^b(K)[-b]$ by [lem-sf-derived-concentrated-single]. Induction gives interval $[a-1,b-1]$ for $K'$ and clause 1 gives $[b-1,b]$ for $K''$. Enlarge both intervals to $[a-1,b]$ and use the extension rule of [det-def-sfb-constructible-tor-amplitude]. This proves clause 2, including complexes whose extreme cohomology happens to vanish.",
+   "uses": [
+    "lem-sf-derived-concentrated-single",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Complexes; base case and full truncation induction"
+   }
+  },
+  {
+   "text": "By [det-def-sfb-constructible-tor-amplitude], $\\Dctf$ is the full subcategory of $\\Dbc$ satisfying finite Tor amplitude. Step 7 shows every object of $\\Dbc$ satisfies this extra condition, so the two full replete subcategories have the same objects and morphisms. The defining intersections for their localizing closures in [det-def-localizing-closure-existence] therefore have identical indexing collections and are equal as well. No compactness or Brown representability assertion is needed.",
    "uses": [
     "det-def-sfb-constructible-tor-amplitude",
     "det-def-localizing-closure-existence"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, Complexes, equality of categories and localizing closures"
+   }
   },
   {
-   "text": "*The examples.* Over $A=\\mathbf Z/\\ell^2$, the module $\\mathbf F_\\ell$ has the infinite\nperiodic resolution $\\cdots\\xrightarrow{\\ell}A\\xrightarrow{\\ell}A\\to\\mathbf F_\\ell$, and\n$\\operatorname{Tor}^A_q(\\mathbf F_\\ell,\\mathbf F_\\ell)=\\mathbf F_\\ell$ for all $q\\ge0$; so it has\ninfinite Tor amplitude. The complex $[A\\xrightarrow{\\ell}A]$ is a bounded complex of finite\nfree modules, hence of finite Tor amplitude, but its cohomology is $\\mathbf F_\\ell$ in both\ndegrees.",
-   "uses": [],
-   "elementary": null
+   "text": "Finite-ring thickness. For a finite commutative ring $A$, a finitely presented scalar module is a finite set, and conversely a finite module has a finite presentation: take finitely many generators and then all elements of the finite kernel in a finite free module. Thus finite constant local models are exactly finite locally constant modules, so the constructibility notion agrees with that in [lem-weil-pbc-finite-ring-constructible-sheaf-origin]. By that equivalence and the exact classical-sheaf equivalence [sk-thm-pe-classical-sheaves], constructible pro-étale modules are the corresponding classical sheaves. The classical subcategory is closed under kernels, cokernels and extensions by [det-pe-classical-derived-weak-serre]; exactness and full faithfulness of the equivalence identify these operations with those on the étale side. Apply [thm-constructible-serre] there, and then the constructible-origin equivalence, to obtain the same three closure properties on the pro-étale side. The constructibility notion in [prop-weil-pbc-module-bounded-constructible-triangulated] also agrees here: a constant-matrix presentation is a finite presentation, and conversely the finitely many entries of a local presentation matrix over the constant ring sheaf $A$ become constant on a common cover, so its cokernel has a finite constant local model. Hence that theorem applies with the closure properties just proved. A direct summand of bounded constructible cohomology is constructible, since it is the kernel of $1-e$ for the corresponding idempotent $e$; its cohomological bound is unchanged. Consequently $\\Dbc(X,A)$ is thick, and its intersection with the thick subcategory of finite-Tor complexes, as described in [det-def-sfb-constructible-tor-amplitude], shows that $\\Dctf(X,A)$ is thick. This argument needs no regularity of $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "sk-thm-pe-classical-sheaves",
+    "det-pe-classical-derived-weak-serre",
+    "thm-constructible-serre",
+    "prop-weil-pbc-module-bounded-constructible-triangulated",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Statement, final thickness clause; Proof, The examples, with the finite-coefficient Serre inputs made explicit"
+   }
+  },
+  {
+   "text": "The examples. Take $A=\\mathbf Z/\\ell^2$, $F=A/\\ell A=\\mathbf F_\\ell$ and a point $X=\\operatorname{Spec}k$ with $k$ separably closed. In $A$, $\\ker(\\ell:A\\to A)=\\ell A=\\operatorname{im}(\\ell:A\\to A)$, while $\\ker(A\\to F)=\\ell A$. Thus the augmented periodic free resolution $\\cdots\\xrightarrow{\\ell}A\\xrightarrow{\\ell}A\\to F\\to0$ is exact. Passing to constant sheaves preserves exactness by [lem-weil-pbc-site-pullback-abelian-exact]. It is bounded above and flat, hence K-flat by [lem-pc-kflat-closure]; using the one-factor computation of derived tensor in [lem-weil-pbc-ringed-projection-mate-exact], tensor with $F$ gives the complex with term $F$ in every nonpositive degree and all differentials zero. Therefore $\\operatorname{Tor}^A_q(F,F)=F\\ne0$ for every $q\\ge0$. A finite projective resolution would force these groups to vanish above its length (projective modules are direct summands of free modules, so are flat), a contradiction. Thus $F$ has infinite projective dimension and infinite Tor amplitude, although its constant sheaf is constructible: it has one stratum and the finite presentation $A\\xrightarrow{\\ell}A\\to F\\to0$ of [det-def-sfb-constructible-local-model]. The two-term complex $P=[A\\xrightarrow{\\ell}A]$ in degrees $[-1,0]$ is itself a bounded finite free complex, hence perfect by [def-pc-perfect-ring-complex] over the scalar ring and by the same constant finite free model on the site; it is K-flat and has Tor amplitude $[-1,0]$ by the same calculation as step 3. Its cohomology is $\\ell A\\cong F$ in degree $-1$ (send $\\bar a\\mapsto\\ell a$) and $A/\\ell A=F$ in degree zero. The cohomology module $F$ is not perfect: a bounded complex $Q$ of finitely generated projective $A$-modules is a bounded complex of flat modules, so $H^{-q}(Q\\otimes_AF)=0$ for $q$ large, against $\\operatorname{Tor}^A_q(F,F)\\ne0$. Likewise the constant sheaf $F$ is not locally perfect: on a nonempty member $V$ of a cover the same calculation gives $H^{-q}(F_V\\otimes^{\\mathbf L}F_V)=F_V\\ne0$ for all $q\\ge0$, whereas a bounded complex of finite projective (direct summands of finite free, hence flat) $A_V$-modules is K-flat by [lem-pc-kflat-closure] and gives bounded cohomology. Thus $P\\in\\Dctf(X,A)$ but $\\tau_{\\ge0}P\\cong F$ and $\\tau_{\\le-1}P\\cong F[1]$ have infinite Tor amplitude, by the shift rule of [det-def-sfb-constructible-tor-amplitude]. This proves the asserted failure of stability under standard truncations, compatibly with step 9.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "det-def-sfb-constructible-local-model",
+    "det-def-sfb-constructible-tor-amplitude",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Proof, The examples; periodic resolution, perfect complex, and explicit truncations"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-weil-pbc-site-pullback-abelian-exact",
   "det-prop-integral-criterion-constant-coefficients",
   "det-def-sfb-constructible-local-model",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "sk-def-sfb-constructible",
+  "lem-sf-constructible-partition-local-closed-stratum",
+  "lem-weil-pbc-constructible-open-restriction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-derived-concentrated-single",
   "det-def-sfb-constructible-tor-amplitude",
-  "det-def-localizing-closure-existence"
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "det-def-localizing-closure-existence",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "sk-thm-pe-classical-sheaves",
+  "det-pe-classical-derived-weak-serre",
+  "thm-constructible-serre",
+  "prop-weil-pbc-module-bounded-constructible-triangulated",
+  "def-pc-perfect-ring-complex",
+  "def-constructible-stratification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
-  "place": "## Proof"
+  "place": "Entire blueprint proof, expanded: scalar algebra, Local models, Locality, Strata (repaired by local induction and open--closed detection), Complexes, and The examples; finite-coefficient thickness additionally follows the existing Serre/comparison nodes."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|tor.amplitude|constructibleFiniteTor|finiteTor",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded constructible l-adic complex has finite Tor dimension",
+   "results": "8 hits: CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.injectiveDimension_ne_top_iff, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instHasLimitsOfShape, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instHasLimit, HomologicalComplex.instHasFiniteColimits, CategoryTheory.ShortComplex.hasFiniteColimits",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of integral or rational l-adic coefficients on a qcqs scheme have Tor amplitude at most one",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field every finitely presented module is finite free; over a discrete valuation ring a finitely presented module has a finite free resolution of length one",
+   "results": "8 hits: Module.FinitePresentation.exists_fin, Module.FinitePresentation, Module.free_of_maximalIdeal_rTensor_injective, Module.Finite.exists_free_surjective, Module.finitePresentation_iff_finite, Module.Flat.projective_of_finitePresentation, FGModuleRepr, Module.freeLocus_eq_univ_iff",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes over completed l-adic integers and l-adic fields have bounded derived tensor amplitude on the proetale site",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, DerivedCategory.IsGE",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; component facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves over l-adic integers have Tor dimension at most one",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.hasLimitsOfSize, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfShape, SheafOfModules.mk, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; returned abelian-category, limit, condensed-module exactness or t-structure declarations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes of condensed l-adic coefficients have finite Tor amplitude",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, Condensed.profiniteSolid, Condensed.instAB5CondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, DerivedCategory.IsGE",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; returned abelian-category, limit, condensed-module exactness or t-structure declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]or|[Tt]or.*constructible|[Cc]onstructible.*[Pp]erfect",
+   "results": "3 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: general projective/injective dimension, derived cohomological bounds, condensed category infrastructure, or constructible subsets of spectra do not state the condensed-coefficient constructible Tor bounds or closure equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectiveDimension\"",
+   "results": "12 hits: CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.projectiveDimension, CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective, CategoryTheory.instHasProjectiveDimensionLTSucc, CategoryTheory.instProjectiveOfHasProjectiveDimensionLTOfNatNat, CategoryTheory.isZero_of_hasProjectiveDimensionLT_zero, CategoryTheory.Limits.IsZero.hasProjectiveDimensionLT_zero",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: general projective/injective dimension, derived cohomological bounds, condensed category infrastructure, or constructible subsets of spectra do not state the condensed-coefficient constructible Tor bounds or closure equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible sheaf complexes over a discrete valuation ring have finite Tor dimension",
+   "results": "8 hits: CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasInjectiveDimensionLT, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: general projective/injective dimension, derived cohomological bounds, condensed category infrastructure, or constructible subsets of spectra do not state the condensed-coefficient constructible Tor bounds or closure equality"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -80,5 +295,124 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-localizing-closure"
+ "unit": "sk-def-localizing-closure",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-def-localizing-closure-ctf-equals-bc",
+  "worker": "stage1",
+  "summary": "Expanded all imported proof paragraphs using existing DAG nodes; no new nodes or Mathlib leaves. Added the coefficient conventions and explicitly placed the nonregular-ring examples on a point. Repaired the unjustified global-open-stratum choice by local induction on the number of strata, and detected tensor cohomology by the ringed open--closed exact sequence, avoiding unstated projection formulas. Supplied the truncation induction, finite-coefficient thickness, and periodic-resolution counterexample in full. Searched the project, DAG, whole blueprint and Mathlib; no exact project attachment or full Mathlib match.",
+  "blueprint": "Scalar-ring sentence and Local models: steps 1--3. Locality: step 4. Strata: steps 5--6 (local form of the same open--closed route). Complexes: steps 7--8. The examples and the final thickness/truncation clause: steps 9--10.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Only the scalar valuation-ring theorem, needed for the local-model resolution; no geometric route is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Bounded-above flat complexes compute derived tensor, in the local-model and periodic calculations."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of passing scalar modules to constant sheaves; valid for arbitrary coefficient rings."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its stated one-factor K-flat tensor computation is used, without a projection-formula isomorphism."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction to a slice, as a generic sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies cover-member sites with slices; this is the locality input to the blueprint calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-restriction",
+    "why": "Only the derived tensor restriction comparison, for arbitrary ring sheaves and no cohomological bound."
+   },
+   {
+    "node": "lem-sf-constructible-partition-local-closed-stratum",
+    "why": "Chooses the local closed stratum with quasi-compact complement needed for the corrected finite induction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tensor/pullback comparison at the two immersions in the strata step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "The exact sequence for arbitrary ring sheaves is the blueprint open--closed input; includes completed coefficients."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "The single-cohomology base and top truncation term, independent of coefficient stage."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "The standard truncation triangle used by the blueprint Complexes paragraph."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Determines the cohomology of the two truncation terms."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "For the finite-ring thickness remark only, transfers intrinsic constructibility to the etale site."
+   },
+   {
+    "node": "det-pe-classical-derived-weak-serre",
+    "why": "Ensures kernels, cokernels and extensions in the ambient pro-etale category stay classical in the finite-ring thickness argument."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Exact equivalence identifies those ambient abelian operations with their etale counterparts."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Finite-coefficient constructible Serre closure, for the thickness assertion, with no nonregular ring excluded."
+   },
+   {
+    "node": "prop-weil-pbc-module-bounded-constructible-triangulated",
+    "why": "A general homological tool once finite-coefficient Serre closure has been checked."
+   },
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Only clause 1, the flatness of constant-to-completed integral coefficients, used exactly as the blueprint Local models paragraph requires."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic identification of pulled-back coefficients and exact module pullback; supplies the restriction input to the local open--closed argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-sf-constructible-partition-local-closed-stratum",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-derived-concentrated-single",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "det-pe-classical-derived-weak-serre",
+  "sk-thm-pe-classical-sheaves",
+  "thm-constructible-serre",
+  "prop-weil-pbc-module-bounded-constructible-triangulated",
+  "det-prop-integral-criterion-constant-coefficients",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-e584d7651",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-e584d7651 (reviewer sub-agent of L); spot-checked: I read the item, all 30 cited statements, the main-20261015 statement and proof, the unit sk-def-localizing-closure and Stacks 005J. The delivery has no new nodes. Mathematics: the DVR and Smith-normal-form resolution, flatness from clause 1 of det-prop-integral-criterion-constant-coefficients, K-flat local-model tensor, locality through the sheaf-axiom argument, the truncation induction with intervals [a-1,b-1] and [b-1,b], Loc equality, finite-ring thickness through the etale Serre closure and the classical equivalence, and the Z/l^2 periodic resolution are all sound. The Strata source error is genuine (three lines with cyclic crossings give no open stratum). The local open-closed induction on the number of strata replaces it correctly with the same route. Fixed in fixes/dag/nodes/sec-proetale-coefficients/det-def-localizing-closure-ctf-equals-bc.json: (1) the statement's final sentence had restricted 'Dctf(X,A) is thick' to X=Spec k. It now states thickness for every qcqs X and finite commutative A, as the source does and step 9 proves; the truncation failure stays on the point. (2) Step 5's unexplained 'shrink W' and the uncited constructibility of the restricted strata on U: I factor the stratum through an open O, apply the partition lemma on O, and cite the Mathlib leaf lem-weil-pbc-constructible-open-restriction (Stacks 005J), adding it to uses and proof_deps. (3) Step 10 proved infinite projective dimension but not that F_l is not perfect, scalar or local. I added the two-line bounded-flat argument. No cycle (checked by DFS over the reachable DAG); no duplicate (checked sk-lem-int-integral-heart, sk-lem-coefficient-heart, thm-sf-direct-image-tor-amplitude); no SGA. All 20 declared tool_uses accepted as black-box uses.; 1 file(s) fixed by the reviewer"
+ }
 }

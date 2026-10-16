@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-nagata-density-normalization-pushforward",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image through the schematic closure",
@@ -13,40 +13,145 @@
   "place": "node det-nagata-density-normalization-pushforward, order None"
  },
  "stmt_deps": [
-  "det-nagata-density-normalization-sheaves"
+  "det-nagata-density-normalization-sheaves",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof": [
   {
-   "text": "*Step 1: $Ri_*=i_*$.* The functor $i_*$ on $\\Lambda$-module sheaves is\nexact ([sk-prop-sf-open-closed-triangle], as in\n[det-nagata-density-normalization-sheaves], Step 1), so its derived functor\nis computed degreewise: $Ri_*K'\\simeq i_*K'$ for every complex $K'$.",
+   "text": "The statement of [det-nagata-density-normalization-setup] assumes that $\\overline X$ is Noetherian (locally Noetherian and quasi-compact), and its clause (2) gives that $i:Z\\hookrightarrow\\overline X$ is the closed complement of the quasi-compact open $V$ in the qcqs scheme $\\overline X$. The required quasi-compactness is quasi-compactness of the open immersion: for every affine open $W\\subseteq\\overline X$, the intersection $V\\cap W$ is an open subscheme of the Noetherian scheme $\\overline X$, so [lem-weil-pbc-noetherian-open-subscheme-noetherian] says that its underlying space is quasi-compact. Apply the sheaf-exactness clause of [lem-weil-pbc-condensed-open-closed-recollement] to this pair and to the given condensed coefficient ring with its pulled-back coefficient sheaves. It says that both $i^*$ and $i_*$ come from exact functors on module sheaves. Only this sheaf clause is used; its bounded-below derived adjunctions are not being applied to an unbounded object. Therefore [def-sfb-right-derived-exact], with $F=i_*$, gives the canonical comparison $Ri_*\\simeq D(i_*)$ on the whole unbounded derived category. Here $D(i_*)$ is the functor applying $i_*$ degreewise, denoted simply by $i_*$ in the statement.",
+   "uses": [
+    "det-nagata-density-normalization-setup",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "def-sfb-right-derived-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact; condensed module-sheaf version in Hemo–Richarz–Scholbach Lemma 3.4; exact derived comparison: derived.tex Tag 015F, lemma-right-derived-exact-functor; blueprint Step 1"
+   }
+  },
+  {
+   "text": "The module-sheaf adjunction of [def-sfb-module-upper-lower-adjunction] for $i$ is $i^*\\dashv i_*$. Its left adjoint is exact by step 1, so [lem-weil-pbc-right-adjoint-preserves-kinjective], with $v=i^*$ and $u=i_*$, shows that degreewise $i_*$ takes every K-injective complex of $\\Lambda_Z$-modules to a K-injective complex of $\\Lambda_{\\overline X}$-modules. These are the actual module functors for the same pulled-back coefficient ring; no comparison with a different coefficient category or with derived abelian-sheaf direct images is used.",
+   "uses": [
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; supplies the resolution argument for blueprint Step 2"
+   }
+  },
+  {
+   "text": "We construct, rather than assume, the derived composition comparison. Put $h=p\\circ i$ and write $Q_T$ for homotopy-category localization on $T$. By [sk-def-sfb-module-derived-pushpull], all three derived direct images are total right derived functors of the indicated module functors, computed on K-injective resolutions. The underived natural isomorphism $c:p_*i_*\\xrightarrow{\\sim}h_*$ is exactly [def-sfb-module-lower-star-comp], with $f=i$ and $g=p$.\n\nLet $\\eta_i,\\eta_p,\\eta_h$ be the right-derived units of [def-sfb-right-derived-functor]. On a homotopy complex $A$ on $Z$, form\n$$Q_S(p_*i_*A)\\xrightarrow{\\eta_{p,i_*A}}Rp_*Q_{\\overline X}(i_*A)\\xrightarrow{Rp_*(\\eta_{i,A})}Rp_*Ri_*Q_Z(A).$$\nPrecomposing with $Q_S(c_A^{-1})$ gives a natural transformation $Q_Sh_*\\to Rp_*Ri_*Q_Z$. The universal property in [def-sfb-right-derived-functor] yields a unique natural transformation $\\theta:Rh_*\\to Rp_*Ri_*$ whose composite with $\\eta_h$ is this transformation.\n\nFor a K-injective $I$ on $Z$, the unit $\\eta_{h,I}$ and $\\eta_{i,I}$ are isomorphisms. The complex $i_*I$ is K-injective by step 2, so $\\eta_{p,i_*I}$ is also an isomorphism. The defining equation for $\\theta$ thus shows that $\\theta_{Q_ZI}$ is an isomorphism. Every object of $D(Z_{\\mathrm{pro\\acute{e}t}},\\Lambda_Z)$ has a K-injective representative by the resolution description in [sk-def-sfb-module-derived-pushpull]; naturality then shows that every component of $\\theta$ is invertible. Its inverse is the required canonical natural isomorphism $Rp_*Ri_*\\simeq R(p\\circ i)_*$. This uses no boundedness or finite cohomological dimension. Uniqueness in the displayed universal property makes the comparison independent of resolution choices.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies); explicit derived-unit construction elaborating blueprint Step 2"
+   }
+  },
+  {
+   "text": "For the given $K$, the unbounded-complex clause of [det-nagata-density-normalization-sheaves] gives the canonical natural isomorphism $j_!K\\simeq i_*j_{Z,!}K$ in the derived category on $\\overline X$. Apply the functor $Rp_*$, replace degreewise $i_*$ by $Ri_*$ using step 1, and apply step 3 to $j_{Z,!}K$. Their composite is\n$$Rp_*j_!K\\xrightarrow{\\sim}Rp_*i_*j_{Z,!}K\\xrightarrow{\\sim}Rp_*Ri_*j_{Z,!}K\\xrightarrow{\\sim}R(p\\circ i)_*j_{Z,!}K.$$\nThe three factors are natural isomorphisms for the same coefficient ring, so their composite is the canonical isomorphism asserted, with target in $D(S_{\\mathrm{pro\\acute{e}t}},\\Lambda_S)$.",
    "uses": [
     "det-nagata-density-normalization-sheaves"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2: composition.* On module sheaves with pulled-back coefficients one\nhas $(p\\circ i)^*=i^*p^*$, so passing to right adjoints\n$(p\\circ i)_*=p_*i_*$. On derived categories $Ri_*$ is right adjoint to\n$i^*$ (which is exact, so equals its derived functor) and $Rp_*$ is right\nadjoint to $Lp^*$; hence $Rp_*\\circ Ri_*$ is right adjoint to\n$i^*\\circ Lp^*\\simeq L(p\\circ i)^*$. By uniqueness of adjoints,\n$Rp_*Ri_*\\simeq R(p\\circ i)_*$ canonically.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3: conclusion.* Apply $Rp_*$ to the isomorphism\n$j_!K\\simeq i_*j_{Z,!}K$ of [det-nagata-density-normalization-sheaves] and\nuse Steps 1 and 2:\n\n$$\nRp_*j_!K\\simeq Rp_*i_*j_{Z,!}K\\simeq Rp_*Ri_*j_{Z,!}K\n\\simeq R(p\\circ i)_*j_{Z,!}K .\n$$",
-   "uses": [
-    "det-nagata-density-normalization-sheaves"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-pushforward.proof.md",
+    "place": "Step 3: conclusion"
+   }
   }
  ],
  "proof_deps": [
+  "det-nagata-density-normalization-setup",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "def-sfb-right-derived-exact",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-right-derived-functor",
   "det-nagata-density-normalization-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-pushforward.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-pushforward.proof.md",
+  "place": "Steps 1–3, expanded by the derived-unit/K-injective argument of Stacks Tags 015F, 08BJ, 070Y and 070K"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed schematic closure i and open immersion j in a compactification, derived direct image Rp_* j_! is canonically isomorphic to R(p i)_* j_Z,! on unbounded pro-etale modules with condensed coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CondensedMod.IsSolid.isIso_solidification_map, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state this condensed-coefficient unbounded pro-etale schematic-closure comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicClosure|densityNormalization|rightDerivedFunctorCompIso|rightDerivedFunctorCompMapDerivedCategoryIso",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state this condensed-coefficient unbounded pro-etale schematic-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorComp, CategoryTheory.Functor.rightDerivedFunctorCompIso",
+   "results": "0 hits: none; loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctorComp'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown expected identifier; retried with SheafOfModules.pushforwardComp"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward through the schematic closure of an open immersion on the proetale site with condensed coefficient modules",
+   "results": "8 hits: SheafOfModules.pushforward_obj_val, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, PresheafOfModules.pushforward₀_obj, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state this condensed-coefficient unbounded pro-etale schematic-closure comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|rightDerived.*[Cc]omp|derived.*[Cc]omp",
+   "results": "8 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139–151",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: this is underived pushforward composition on SheafOfModules, not the derived extension-by-zero/schematic-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforward_id_comp, SheafOfModules.pushforward_comp_id, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139–151",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: this is underived pushforward composition on SheafOfModules, not the derived extension-by-zero/schematic-closure comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero supported on a closed subscheme commutes with derived pushforward along a compactification, replacing the compactification by its scheme theoretic image",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.support_map",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state this condensed-coefficient unbounded pro-etale schematic-closure comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Cc]omp|preservesKInjective|IsRightDerivedFunctor.*[Cc]omp",
+   "results": "5 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:55–83; the declaration constructs a generic comparison map, not this comparison isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of total right derived functors when the inner right adjoint preserves K-injective cochain complexes",
+   "results": "8 hits: CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc, CategoryTheory.Functor.rightDerived_fac",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: generic derived-functor and natural-transformation declarations do not state the schematic-closure comparison on condensed-coefficient pro-etale modules"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -60,5 +165,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-nagata-density-normalization"
+ "unit": "sk-lem-nagata-density-normalization",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-nagata-density-normalization-pushforward",
+  "worker": "stage1",
+  "summary": "Preserved the statement, added its derived-pushforward definition dependency, replaced the unsupported exactness citation and the uncited derived-adjoint composition argument by precise existing statements, and wrote out the natural derived composition comparison via units and K-injective resolutions. No new nodes or Mathlib leaves. Repair of the returned delivery: re-read the current setup statement, whose new definition references and Noetherian gloss preserve all four conclusions; made its hypothesis/clause distinction explicit in step 1 and refreshed the verbatim setup quotation against the current DAG. Revalidated every other cited statement without changing the item statement or adding nodes. Further repair revalidation cites the existing Mathlib leaf for quasi-compactness of the open subschemes V intersect W, rather than leaving that Noetherian consequence implicit. All ten proof citations were re-read against the current DAG. Maintainer reader (2026-10-17): corrected the recollement tool-use justification, since the open–closed unit does have nodes (closed-pullback exactness) but none stating condensed-coefficient closed-pushforward exactness.",
+  "blueprint": "Blueprint Step 1 is realized by proof step 1; blueprint Step 2 by proof steps 2–3, including canonicality; blueprint Step 3 by proof step 4. This realizes the second proof paragraph of sk-lem-nagata-density-normalization without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Only the exactness of i^* and i_* on condensed-coefficient module sheaves is used. The unit's cited open–closed unit sk-prop-sf-open-closed-triangle has no node for its own statement; its existing nodes give exactness of the closed pullback (det-sf-open-closed-pullback-limits) and finite-coefficient or bounded constructible statements (lem-exc-*, prop-sf-open-closed-triangle-all-stages), but none states exactness of the closed pushforward i_* for a general condensed coefficient ring on unbounded module sheaves, which the recollement statement supplies."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic unbounded homological-algebra tool: an additive right adjoint to an exact functor preserves K-injective complexes. It proves the derived composition comparison prescribed by the unit, without replacing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-4eff60f92",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-4eff60f92 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, its 4 steps, the 10 cited statements, the unit sk-lem-nagata-density-normalization and the main-20261015 blueprint statement and proof. The statement is verbatim the blueprint statement. Coefficients (condensed Λ pulled back) and unbounded D(-_proét) are unchanged. The recollement module category and its i^*, i_* are given by the same formulas as the sfb Mod_{Λ_T} functors, and exactness transfers through the underlying abelian sheaves. Step 1: the Noetherian-open-subscheme leaf gives quasi-compactness of V∩W, which is the recollement's qc-morphism hypothesis; i_* is exact, so def-sfb-right-derived-exact gives Ri_* ≅ D(i_*). Checked against Stacks 09BM (lemma-closed-immersion-complement-retrocompact-exact), 015F and Hemo–Richarz–Scholbach Lemma 3.4, p. 7. Step 2: with i^* ⊣ i_* and i^* exact, i_* preserves K-injectives; the direction matches Stacks 08BJ. Step 3: θ comes from the universal property of η_h applied to Rp_*(η_i)∘η_p∘Q(c^{-1}). It is invertible at K-injective I, because i_*I is K-injective, and then everywhere by naturality. Correct. It proves the composition isomorphism of the unit's step below the unit route, with no new node. The general lem-weil-pbc-ringed-topoi-derived-pushforward-composition was noted as a candidate, but proving the case inline creates no duplicate. Step 4 is elementary composition. No cycle, no new nodes, no SGA. Small cases checked: K=0, X empty, Z = ambient scheme, nonreduced Z, unbounded K. Tool uses accepted: right-adjoint-preserves-K-injective and condensed recollement (exactness only). FIX: the recollement tool-use 'why' wrongly said unit sk-prop-sf-open-closed-triangle has no node. It does (det-sf-open-closed-pullback-limits gives i^* exactness), but none of its nodes states closed-pushforward exactness for general condensed coefficients. I corrected that text in fixes/dag/nodes/sec-proetale-coefficients/det-nagata-density-normalization-pushforward.json; no statement, step or dependency changed.; 1 file(s) fixed by the reviewer"
+ }
 }

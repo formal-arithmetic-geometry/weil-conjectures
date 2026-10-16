@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, coherent derived coefficient adjunction before the displayed derived-limit calculation; auxiliary model-category tool: Accessible small-object factorizations.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (current main-20261015 path sk-thm-sf-package), coherent derived coefficient adjunction before the displayed derived-limit calculation; auxiliary accessible small-object construction for the model-localization infrastructure.",
    "via": [
     "lem-coef-simplicial-bousfield-model-structure",
     "lem-coef-simplicial-presheaf-localization-comparison",
@@ -29,62 +29,255 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-lifting-class-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the generating maps as $i:A_i\\to B_i$, $i\\in I$, and denote the fixed universe by $\\mathcal U$. Apply [lem-coef-object-presentability-rank] separately to every $A_i$ and $B_i$. Obtain infinite regular ranks $\\tau_{i,0},\\tau_{i,1}\\in\\mathcal U$ for which their respective Hom functors preserve all small filtered colimits of those ranks. Its assumptions are precisely the local presentability, Hom-smallness and cocompleteness of this item. Both ends are needed below; smallness of the domains alone would not prove accessibility of the attaching-square functor.",
+   "uses": [
+    "lem-coef-object-presentability-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean",
+    "place": "Lines 93-101; HTT Proposition A.1.2.5(2), selection of compactness bounds for both ends."
+   }
+  },
+  {
+   "text": "For each $(i,e)\\in I\\times\\{0,1\\}$ take the set of ordinals below the initial ordinal of cardinality $\\tau_{i,e}$. Their disjoint union $T$ is $\\mathcal U$-small. Apply [lem-coef-small-family-regular-bound] to this family to choose an infinite regular $\\kappa\\in\\mathcal U$ with $|T|<\\kappa$. The inclusion of each summand gives $\\tau_{i,e}\\leq |T|<\\kappa$. This also works for $I=\\varnothing$. Fix this one cardinal for the entire construction, independently of the arrow being factored.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/SetTheory/Cardinal/HasCardinalLT.lean",
+    "place": "Lines 199-206, applied to the small family of both endpoint ranks."
+   }
+  },
+  {
+   "text": "Every $\\kappa$-filtered category is $\\tau_{i,e}$-filtered, simply because a diagram with fewer than $\\tau_{i,e}$ morphisms has fewer than $\\kappa$ morphisms. Thus both endpoint Hom functors preserve small $\\kappa$-filtered colimits. The ordinal category $\\{\\alpha:\\alpha<\\kappa\\}$ is itself $\\kappa$-filtered: the images of a diagram with fewer than $\\kappa$ morphisms have fewer than $\\kappa$ objects, hence form fewer than $\\kappa$ ordinals below $\\kappa$; their supremum is below $\\kappa$ by regularity and provides a cocone. For an empty diagram use $0$. The infinite initial ordinal $\\kappa$ is a nonzero limit, since $\\alpha+1<\\kappa$ for every $\\alpha<\\kappa$. All these ordinal categories are small in $\\mathcal U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, regular ordinal used for iteration; details of filteredness supplied from the definitions."
+   }
+  },
+  {
+   "text": "For an arrow $q:V\\to Y$ define the small set $Q_i(q)=\\{(a,b):a:A_i\\to V,\\ b:B_i\\to Y,\\ qa=bi\\}$, and let $Q(q)=\\coprod_{i\\in I}Q_i(q)$. It is small because each $Q_i(q)$ is a subset of the product of two small Hom sets and $I$ is small. For a commuting square $(c,d):q\\to q'$ the formula $(a,b)\\mapsto(ca,db)$ gives a function $Q_i(q)\\to Q_i(q')$: indeed $q'ca=dqa=dbi$. The formulas preserve identities and composites. Thus each $Q_i$ and their disjoint union are genuine functors on the arrow category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, functors F_i; their extension to varying targets is written explicitly."
+   }
+  },
+  {
+   "text": "Choose the coproducts $A(q)=\\coprod_{(i,a,b)\\in Q(q)}A_i$ and $B(q)=\\coprod_{(i,a,b)\\in Q(q)}B_i$. Their summands give maps $A(q)\\to V$, $A(q)\\to B(q)$ and $B(q)\\to Y$ with commuting composite to $Y$. Form the pushout $S(q)=V\\amalg_{A(q)}B(q)$. By [def-weil-pbc-category-colimit], applied to small discrete and span diagrams, these objects exist and the compatible maps to $Y$ induce $q^+:S(q)\\to Y$. If $c_q:V\\to S(q)$ is the pushout leg, then $q^+c_q=q$. For every attaching triple the other leg gives $d_{i,a,b}:B_i\\to S(q)$ satisfying $d_{i,a,b}i=c_qa$ and $q^+d_{i,a,b}=b$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, displayed successor pushout; Stacks Tags 002D, 002F for its universal property."
+   }
+  },
+  {
+   "text": "For a square $(c,d):q\\to q'$, the function on triples in step 4 gives coproduct maps $A(q)\\to A(q')$ and $B(q)\\to B(q')$, using the identity on each corresponding $A_i$ or $B_i$. Together with $c$ these induce the unique $S(c,d):S(q)\\to S(q')$ satisfying $S(c,d)c_q=c_{q'}c$ and carrying the summand map of $(i,a,b)$ to that of $(i,ca,db)$. Equality after the two pushout legs proves $q'^+S(c,d)=dq^+$. The same uniqueness proves identity and composition laws. Hence $q\\mapsto q^+$ is an endofunctor of the arrow category and $c_q$ is natural; its middle-object functor is $S$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, functoriality of successor pushouts, expanded via Stacks Tag 002F."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-transfinite-recursion] on $\\{\\beta:\\beta\\leq\\kappa\\}$, for each input $f:X\\to Y$. The stage records consist of $Z_\\beta$, $p_\\beta:Z_\\beta\\to Y$ and maps $u_{\\alpha\\beta}:Z_\\alpha\\to Z_\\beta$ with invariant $u_{\\alpha\\alpha}=1$, $u_{\\beta\\gamma}u_{\\alpha\\beta}=u_{\\alpha\\gamma}$ and $p_\\beta u_{\\alpha\\beta}=p_\\alpha$. At zero use $Z_0=X$, $p_0=f$. At a successor use $Z_{\\alpha+1}=S(p_\\alpha)$, $p_{\\alpha+1}=p_\\alpha^+$, $u_{\\alpha,\\alpha+1}=c_{p_\\alpha}$, and $u_{\\delta,\\alpha+1}=c_{p_\\alpha}u_{\\delta\\alpha}$. At a nonzero limit $\\beta$ take $Z_\\beta=\\varinjlim_{\\alpha<\\beta}Z_\\alpha$, its cocone maps as transitions, and the induced map $p_\\beta$ to $Y$, using [def-weil-pbc-category-colimit]. The successor identities follow from $p_\\alpha^+c_{p_\\alpha}=p_\\alpha$ and the previous invariant; at limits they are the cocone and induced-map equations. Thus the invariant holds at every stage. To make the recursion rule total on arbitrary prefixes of records, include a dummy record and return it on any incoherent prefix; the displayed checks prove by induction that it never occurs. Every required diagram has small index, since $\\beta\\leq\\kappa\\in\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, transfinite chain; recursion leaf has Stacks provenance Tag 03C3 and Mathlib Order/RelClasses.lean:304-313."
+   }
+  },
+  {
+   "text": "A square $(a,b):f\\to g$ induces maps $m_\\beta:Z_\\beta(f)\\to Z_\\beta(g)$ by the same recursion: $m_0=a$, $m_{\\alpha+1}=S(m_\\alpha,b)$, and at a nonzero limit $m_\\beta$ is induced by the compatible maps $u_{\\alpha\\beta}(g)m_\\alpha$. The induction invariant is $m_\\beta u_{\\alpha\\beta}(f)=u_{\\alpha\\beta}(g)m_\\alpha$ and $p_\\beta(g)m_\\beta=bp_\\beta(f)$. Step 6 proves the successor case; the cocone equations prove the limit case. For an identity square these maps are identities by induction and uniqueness at limits. For composable squares the maps are the composites by step 6 at successors and the same uniqueness at limits. This verifies functoriality and natural transition maps, rather than choosing unrelated factorizations of individual arrows.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5 proof, functorial transfinite construction; successor and limit equations expanded."
+   }
+  },
+  {
+   "text": "Set $E(f)=Z_\\kappa(f)$, $i_f=u_{0\\kappa}$, $p_f=p_\\kappa$. The invariant gives $p_fi_f=f$. Put $E(a,b)=m_\\kappa$; step 8 gives a functor and the equations $E(a,b)i_f=i_ga$ and $p_gE(a,b)=bp_f$. Its chain is continuous at nonzero limits, and every successor is a pushout of the small coproduct indexed by $Q(p_\\alpha)$. It remains to check membership in the specified weak saturation, right lifting, and preservation of filtered colimits for this very construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5(1)-(2), defining the final factorization from the continuous chain."
+   }
+  },
+  {
+   "text": "Let $W$ be any weakly saturated class containing $I$. For any successor pushout $V\\to V\\amalg_{\\coprod_t A_{i_t}}\\coprod_t B_{i_t}$, well-order its small attaching set by [lem-weil-pbc-well-ordering-theorem], and identify its order type with a small ordinal $\\theta$. For $\\beta\\leq\\theta$ put $V_\\beta=V\\amalg_{\\coprod_{t<\\beta}A_{i_t}}\\coprod_{t<\\beta}B_{i_t}$, using the original attaching maps to $V$. Then $V_0\\cong V$, each $V_\\beta\\to V_{\\beta+1}$ is a pushout of $i_\\beta$, and at a nonzero limit $\\delta$ the maps $V_\\beta\\to V_\\delta$ exhibit the colimit: a compatible family of maps out is exactly a map from $V$ and maps from $B_{i_t}$ for $t<\\delta$ agreeing on each $A_{i_t}$. These assertions follow from [def-weil-pbc-category-colimit] and also identify $V_\\theta$ with the original simultaneous pushout. Thus that successor belongs to $W$ by pushout and transfinite-composition closure. The empty attaching set gives an isomorphism, also in $W$. Apply transfinite-composition closure once more to the continuous $\\kappa$-chain of step 7: $i_f\\in W$. Since $W$ was arbitrary, $i_f$ belongs to the weakly saturated class generated by $I$. No closure under coproducts was assumed without justification.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5(1) and Definition A.1.2.2; explicit serialization of simultaneous attachments. Well-ordering leaf has Stacks provenance Tag 065T."
+   }
+  },
+  {
+   "text": "For right lifting, fix $i:A_i\\to B_i$ in $I$ and a square $p_fa=bi$ with $a:A_i\\to Z_\\kappa$ and $b:B_i\\to Y$. By step 3, $\\operatorname{Hom}(A_i,-)$ preserves the colimit of the small filtered ordinal chain $\\alpha<\\kappa$. Hence its colimit is $\\operatorname{Hom}(A_i,Z_\\kappa)$. Apply clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to $a$, obtaining $\\alpha<\\kappa$ and $a_\\alpha:A_i\\to Z_\\alpha$ with $u_{\\alpha\\kappa}a_\\alpha=a$. The invariant gives $p_\\alpha a_\\alpha=p_fu_{\\alpha\\kappa}a_\\alpha=p_fa=bi$, so $(i,a_\\alpha,b)$ is an actual attaching triple at stage $\\alpha$. No factorization of $b$ or eventual-equality assertion is needed, since the target remains $Y$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, section-directed-colimits, the quotient description after Definition 002V; applied to the preserved Hom colimit."
+   }
+  },
+  {
+   "text": "The summand map $d:B_i\\to Z_{\\alpha+1}$ of step 5 satisfies $di=u_{\\alpha,\\alpha+1}a_\\alpha$ and $p_{\\alpha+1}d=b$. Since $\\alpha+1<\\kappa$, set $h=u_{\\alpha+1,\\kappa}d$. The transition identities give $hi=u_{\\alpha\\kappa}a_\\alpha=a$ and $p_fh=p_{\\alpha+1}d=b$. Thus $p_f$ has the right lifting property against every member of $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5(1), explicit next-stage filler and passage to the final chain."
+   }
+  },
+  {
+   "text": "Now let $J$ be any small $\\kappa$-filtered category and let $(q_j:V_j\\to Y_j)_{j\\in J}$ be a diagram of arrows. Write $V=\\varinjlim_j V_j$, $Y=\\varinjlim_j Y_j$, and let $q:V\\to Y$ be the induced arrow; these endpoint colimits form the colimit of the arrow diagram. For each $i$ there is a natural equality $Q_i(q)=\\operatorname{Hom}(A_i,V)\\times_{\\operatorname{Hom}(A_i,Y)}\\operatorname{Hom}(B_i,Y)$, where the two maps are composition with $q$ and precomposition with $i$. All three Hom functors preserve the $J$-colimits by step 3, and $J$ is filtered because $\\kappa$ is infinite. Apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to this fibre-product diagram of sets. It gives the canonical bijection $\\varinjlim_j Q_i(q_j)\\cong Q_i(q)$, natural in $i$ and the input diagram. This is precisely where presentability of the codomains $B_i$ is used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002W, lemma-directed-commutes, applied to the finite pullback-shaped category."
+   }
+  },
+  {
+   "text": "For a fixed object $D$, write $T\\odot D=\\coprod_{t\\in T}D$ for a small set $T$. Its coproduct universal property gives $\\operatorname{Hom}(T\\odot D,H)=\\operatorname{Map}(T,\\operatorname{Hom}(D,H))$. If $T$ is a colimit of sets $T_j$, maps from $T$ into this last set are exactly compatible maps from $T_j$; thus $\\varinjlim_j(T_j\\odot D)\\cong T\\odot D$, with the canonical summand maps. Apply this to $D=A_i,B_i$ and the bijections in step 13. Interchange the small coproduct over $i$ and the colimit over $j$ using [lem-pc-colimit-fubini], with its second index the discrete category on $I$. Consequently the canonical maps $\\varinjlim_j A(q_j)\\to A(q)$ and $\\varinjlim_j B(q_j)\\to B(q)$ are isomorphisms. These identifications also respect the attaching maps, since on a summand $(i,a,b)$ they use exactly $a$, $i$, and $b$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002F and 002M, lemma-colimits-commute, with a discrete small index; copower preservation proved from its universal property."
+   }
+  },
+  {
+   "text": "The three vertices of the pushout span $V_j\\leftarrow A(q_j)\\to B(q_j)$ have $J$-colimits $V\\leftarrow A(q)\\to B(q)$ by steps 13-14 and the source colimit. Use [lem-pc-colimit-fubini] with the finite span category to interchange this pushout and $\\varinjlim_j$. It identifies $\\varinjlim_j S(q_j)$ with $S(q)$ by the canonical map, so the one-step middle-object functor $S$ preserves every small $\\kappa$-filtered colimit. The maps to $Y$ agree under this identification, because on $V_j$ and every attaching summand both composites are their specified maps to $Y$. Hence the arrow-valued one-step functor $q\\mapsto q^+$ also preserves these colimits. No preservation of finite limits in $\\mathcal C$ has been used; only the finite limit of sets in step 13 is involved.",
+   "uses": [
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002M, lemma-colimits-commute, with the pushout-shaped finite category."
+   }
+  },
+  {
+   "text": "For every $\\beta\\leq\\kappa$, prove by transfinite induction that $f\\mapsto Z_\\beta(f)$ preserves small $\\kappa$-filtered colimits. At $0$ it is source evaluation, which preserves them since arrow colimits are computed on endpoints. If it holds at $\\alpha$, then $f\\mapsto p_\\alpha(f):Z_\\alpha(f)\\to\\operatorname{cod}(f)$ preserves them as an arrow-valued functor: both endpoint comparisons are isomorphisms and the comparison square commutes by naturality in step 8. Compose this with $S$, whose preservation was proved in step 15, to obtain the successor assertion. At a nonzero limit $\\beta$, step 8 makes $(\\alpha,j)\\mapsto Z_\\alpha(f_j)$ a genuine diagram on $(\\alpha<\\beta)\\times J$. Each $\\alpha$-stage comparison is an isomorphism by induction. Apply [lem-pc-colimit-fubini] to get $\\varinjlim_j Z_\\beta(f_j)\\cong\\varinjlim_{\\alpha<\\beta}\\varinjlim_j Z_\\alpha(f_j)\\cong\\varinjlim_{\\alpha<\\beta}Z_\\alpha(\\varinjlim_j f_j)=Z_\\beta(\\varinjlim_j f_j)$. All comparisons are canonical and hence commute with the transition maps. Both index categories are small; no bound $\\beta<\\kappa$ is needed for colimits to commute. In particular the assertion at $\\beta=\\kappa$ says that $E$ preserves the required colimits, completing all clauses of the item.",
+   "uses": [
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002M, lemma-colimits-commute, used at limit stages of the explicit transfinite induction; HTT Proposition A.1.2.5(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-pc-colimit-fubini"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction; auxiliary small-object infrastructure. Explicit expansion of the construction of HTT Proposition A.1.2.5, read online, with generic Mathlib/Stacks leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "IsAccessible|IsCardinalAccessible|IsLocallyPresentable",
-   "results": "[grep] OK 0 hit(s)\n",
+   "query": "accessible|IsCardinalAccessible|Preserves.*Filtered|functorialFactorizationData",
+   "sub": "CategoryTheory/SmallObject",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"1172420f26eaea03\"}",
    "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Accessible small object argument functorial factorization preserving filtered colimits in locally presentable categories",
+   "sub": "",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Limits.preservesSmallestFilteredColimits_of_preservesFilteredColimits\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible_of_essentiallySmall\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\", \"CategoryTheory.Functor.IsAccessible.mk\"], \"digest\": \"d7fd37cb948ae76a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsAccessible, CategoryTheory.MorphismProperty.FunctorialFactorizationData",
+   "sub": "",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small set of arrows in a locally presentable category there is a functorial small object factorization whose middle object functor preserves sufficiently filtered colimits",
+   "sub": "",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.SmallObject.functorialFactorizationData_Z_map\", \"CategoryTheory.SmallObject.succStruct\", \"CategoryTheory.SmallObject.locallySmall\", \"CategoryTheory.SmallObject.functorialFactorizationData_Z_obj\", \"CategoryTheory.SmallObject.functorialFactorizationData_p_app\", \"CategoryTheory.MorphismProperty.smallObjectκ_isRegular\"], \"digest\": \"14df78d1ac09a7c1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial small object argument preserves kappa filtered colimits when the domains and codomains of the generating maps are kappa presentable",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.MorphismProperty C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → [OrderBot κ.ord.ToType] → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, a regular cardinal $\\\\kappa$, and an order with bottom element on the underlying type of $\\\\kappa$'s ordinal, this proposition d\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {I : CategoryTheory.MorphismProperty C} {κ : Cardinal.{w}}\\n  {inst_1 : Fact κ.IsRegular} {inst_2 : OrderBot κ.ord.ToType} [self : I.IsCardinalForSmallObjectArgument κ]\\n  {A B X Y : C} (i : A ⟶ B),\\n  I i →\\n    ∀ (f : X ⟶ Y) (hf : HomotopicalAlg\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $I$ satisfying the cardinality condition for the small object argument with a regular cardinal $\\\\kappa$, and a relative cell complex $f$ constructed\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.HasSmallObjectArgument.exists_cardinal\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {I : CategoryTheory.MorphismProperty C}\\n  [self : I.HasSmallObjectArgument], ∃ κ, ∃ (x : Fact κ.IsRegular), ∃ x_1, I.IsCardinalForSmallObjectArgument κ\", \"doc\": \"For any category $\\\\mathcal{C}$ and morphism property $P$ in $\\\\mathcal{C}$, if $P$ satisfies the conditions required for the small object argument, then there exists a regular cardinal $\\\\kappa$ such th\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasIterationOfShape\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} (I : CategoryTheory.MorphismProperty C) {κ : Cardinal.{w}}\\n  {inst_1 : Fact κ.IsRegular} {inst_2 : OrderBot κ.ord.ToType} [self : I.IsCardinalForSmallObjectArgument κ],\\n  CategoryTheory.Limits.HasIterationOfShape κ.ord.ToType C\", \"doc\": \"If a morphism property $ I $ in a category $ \\\\mathcal{C} $ satisfies the cardinality constraints required for the small object argument with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C\"}\n  {\"name\": \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : C} {J : Type w} [inst_1 : CategoryTheory.SmallCategory J]\\n  (p : CategoryTheory.Limits.ColimitPresentation J X) (κ : Cardinal.{w}) [inst_2 : Fact κ.IsRegular],\\n  (∀ (j : J), CategoryTheory.IsCardinalPresentable (p.diag.obj j) κ) →\\n    ∀ [\", \"doc\": \"Given a colimit presentation of an object $X$ with diagrams of shape $\\\\mathcal{J}$, if each object in the diagram is $\\\\kappa$-presentable, $\\\\kappa$ is a regular cardinal, and there exists a regular ca\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C} {X : C} {J : Type w}\\n  [inst_1 : CategoryTheory.SmallCategory J] (p : P.ColimitOfShape J X) {κ : Cardinal.{w}} [inst_2 : Fact κ.IsRegular],\\n  P ≤ CategoryTheory.isCardinalPresentable C κ →\\n    ∀ [CategoryT\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category, $J$ a small category, and $X$ an object in $\\\\mathcal{C}$ that is a colimit of a diagram of shape $J$ satisfying property $P$. Suppose $\\\\kappa$ and $\\\\kapp\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalForSmallObjectArgument_smallObjectκ\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C)\\n  [inst_1 : I.HasSmallObjectArgument], I.IsCardinalForSmallObjectArgument I.smallObjectκ\", \"doc\": \"For any category $\\\\mathcal{C}$ and morphism property $P$ satisfying the small object argument conditions, the underlying type of the ordinal associated to the regular cardinal $\\\\kappa$ selected for $P\"}\n  {\"name\": \"CategoryTheory.SmallObject.hasIterationOfShape\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  CategoryTheory.Limits.HasIterationOfShape κ.ord.ToType C\", \"doc\": \"The category $\\\\mathcal{C}$ has all iterations of diagrams indexed by the ordinal type associated with the regular cardinal $\\\\kappa$, ensuring compatibility with $\\\\kappa$-filtered colimits required for\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
   },
   {
    "tool": "loogle",
    "query": "\"functorialFactorizationData\"",
+   "sub": "",
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (W₁ W₂ : CategoryTheory.MorphismProperty C) : Type (max u_1 v_1)\", \"doc\": \"The data of a functorial factorization of any morphism in `C` as a morphism in `W₁`\\nfollowed by a morphism in `W₂`. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.functorialFactorizationData\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (W₁ W₂ : CategoryTheory.MorphismProperty C) [W₁.HasFunctorialFactorization W₂] : W₁.FunctorialFactorizationData W₂\", \"doc\": \"A chosen term in `FunctorialFactorizationData W₁ W₂` when the functorial factorization\\naxiom `HasFunctorialFactorization W₁ W₂` holds. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.factorizationData\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (data : W₁.FunctorialFactorizationData W₂) : W₁.FactorizationData W₂\", \"doc\": \"The term in `FactorizationData W₁ W₂` that is deduced from a functorial factorization. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.HasFunctorialFactorization.nonempty_functorialFactorizationData\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {W₁ W₂ : CategoryTheory.MorphismProperty C} [self : W₁.HasFunctorialFactorization W₂] : Nonempty (W₁.FunctorialFactorizationData W₂)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.Z\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (self : W₁.FunctorialFactorizationData W₂) : CategoryTheory.Functor (CategoryTheory.Arrow C) C\", \"doc\": \"the intermediate objects in the factorizations \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (data : W₁.FunctorialFactorizationData W₂) (J : Type u_3) [CategoryTheory.Category.{v_3, u_3} J] : (W₁.functorCategory J).FunctorialFactorizationData (W₂.functorCategory J)\", \"doc\": \"A functorial factorization in the category `C` extends to the functor category `J ⥤ C`. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory.Z\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (data : W₁.FunctorialFactorizationData W₂) (J : Type u_3) [CategoryTheory.Category.{v_3, u_3} J] : CategoryTheory.Functor (CategoryTheory.Arrow (CategoryTheory.Functor J C)) (CategoryTheory.Functor J C\", \"doc\": \"Auxiliary definition for `FunctorialFactorizationData.functorCategory`. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.i\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (self : W₁.FunctorialFactorizationData W₂) : CategoryTheory.Arrow.leftFunc ⟶ self.Z\", \"doc\": \"the first morphism in the factorizations \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.p\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (self : W₁.FunctorialFactorizationData W₂) : self.Z ⟶ CategoryTheory.Arrow.rightFunc\", \"doc\": \"the second morphism in the factorizations \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.hi\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (self : W₁.FunctorialFactorizationData W₂) (f : CategoryTheory.Arrow C) : W₁ (self.i.app f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.hp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (self : W₁.FunctorialFactorizationData W₂) (f : CategoryTheory.Arrow C) : W₂ (self.p.app f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.mapZ\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {W₁ W₂ : CategoryTheory.MorphismProperty C} (data : W₁.FunctorialFactorizationData W₂) {X Y X' Y' : C} {f : X ⟶ Y} {g : X' ⟶ Y'} (φ : CategoryTheory.Arrow.mk f ⟶ CategoryTheory.Arrow.mk g) : (data.factorizationData f).Z ⟶ (data.factorizationData\", \"doc\": \"When `data : FunctorialFactorizationData W₁ W₂`, this is the\\nmorphism `(data.factorizationData f).Z ⟶ (data.factorizationData g).Z` expressing the\\nfunctoriality of the intermediate objects of the fact\"}\n",
    "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
   },
   {
    "tool": "grep",
-   "query": "accessible|preserves.*filtered|preservesColimit|functorialFactorizationData",
-   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"line\": \"83\", \"text\": \"  preservesColimit {A B X Y : C} (i : A ⟶ B) (_ : I i) (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"line\": \"85\", \"text\": \"    PreservesColimit hf.F (coyoneda.obj (Opposite.op A))\"}\n  {\"file\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"line\": \"113\", \"text\": \"lemma preservesColimit {A B X Y : C} (i : A ⟶ B) (hi : I i) (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"line\": \"115\", \"text\": \"    PreservesColimit hf.F (coyoneda.obj (Opposite.op A)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"line\": \"116\", \"text\": \"  IsCardinalForSmallObjectArgument.preservesColimit i hi f hf\"}\n",
+   "query": "IsAccessible|IsCardinalAccessible|IsLocallyPresentable",
+   "sub": "CategoryTheory/SmallObject",
+   "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "In a locally presentable category the small object argument can choose functorial factorizations preserving sufficiently filtered colimits",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] → I.rlp.llp.FunctorialFactorizat\", \"doc\": \"This definition constructs a functorial factorization system in the context of the small object argument. Given a morphism property $I$ and a regular cardinal $\\\\kappa$, it specifies: (1) a functor $Z:\"}\n  {\"name\": \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on morphisms in $\\\\mathcal{C}$ required for the small obj\"}\n  {\"name\": \"CategoryTheory.SmallObject.succStruct\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] →\\n              CategoryTheory.S\", \"doc\": \"The successor structure on the category of endofunctors of the arrow category $\\\\mathcal{C}^\\\\to$, constructed using the natural transformation $\\\\varepsilon$ from the identity functor to the small objec\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C)\\n  [I.HasSmallObjectArgument], I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"For any morphism in a category with hom-sets in universe $\\\\max(u, v+1)$, there exists a functorial assignment of factorizations into a morphism with the left lifting property against $I$-right lifting\"}\n  {\"name\": \"CategoryTheory.SmallObject.locallySmall\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  CategoryTheory.LocallySmall.{w, v, u} C\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on $P$-morphisms required for the small object argument.\"}\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData_Z_obj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ]\\n  (f : CategoryTheory.Arrow C),\\n  (CategoryTheory.SmallObject.functorialF\", \"doc\": \"In the context of the small object argument with a regular cardinal $\\\\kappa$, for any morphism $f$ in the arrow category of a category $\\\\mathcal{C}$ equipped with a morphism property $I$ satisfying ca\"}\n  {\"name\": \"CategoryTheory.SmallObject.iterationFunctor\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] →\\n              CategoryTheory.F\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition asserts that $P$-morphisms satisfy cardinality constraints compatible with $\"}\n  {\"name\": \"CategoryTheory.SmallObject.iteration\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] →\\n              CategoryTheory.F\", \"doc\": \"The functor from the arrow category $\\\\mathcal{C}^\\\\to$ to itself, constructed using the successor structure and transfinite iteration over the ordinal corresponding to a regular cardinal $\\\\kappa$. This\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Accessible functorial factorization into a relative cell map and a right lifting map for a small set of arrows in a locally presentable category",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"module\": \"Mathlib.CategoryTheory.SmallObject.Basic\", \"type\": \": HasFunctorialFactorization I.rlp.llp I.rlp\", \"doc\": \"For any morphism in a category with hom-sets in universe $\\\\max(u, v+1)$, there exists a functorial assignment of factorizations into a morphism with the left lifting property against $I$-right lifting\"}\n  {\"name\": \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"module\": \"Mathlib.CategoryTheory.SmallObject.IsCardinalForSmallObjectArgument\", \"type\": \": HasFunctorialFactorization I.rlp.llp I.rlp\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on morphisms in $\\\\mathcal{C}$ required for the small obj\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.HasFunctorialFactorization\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    CategoryTheory.MorphismProperty C → CategoryTheory.MorphismProperty C → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$ and two morphism properties $P$ and $Q$, the proposition that there exists a functorial assignment of factorizations for every morphism $f: X \\\\to Y$ as $f = q \\\\circ p$, wh\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.mk'\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.WeakFactorizationSystem\", \"type\": \"[HasFactorization W₁ W₂] [W₁.IsStableUnderRetracts] [W₂.IsStableUnderRetracts]\\n  (h : ∀ {A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y), W₁ i → W₂ p → HasLiftingProperty i p) : IsWeakFactorizationSystem W₁ W₂\", \"doc\": \"Given two morphism properties $ L $ and $ R $ in a category $ \\\\mathcal{C} $, if (1) every morphism factors as an $ L $-morphism followed by an $ R $-morphism, (2) both $ L $ and $ R $ are stable under\"}\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData\", \"module\": \"Mathlib.CategoryTheory.SmallObject.IsCardinalForSmallObjectArgument\", \"type\": \": FunctorialFactorizationData I.rlp.llp I.rlp\", \"doc\": \"This definition constructs a functorial factorization system in the context of the small object argument. Given a morphism property $I$ and a regular cardinal $\\\\kappa$, it specifies: (1) a functor $Z:\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {W₁ W₂ : CategoryTheory.MorphismProperty C} →\\n      (Z : CategoryTheory.Functor (CategoryTheory.Arrow C) C) →\\n        (i : CategoryTheory.Arrow.leftFunc ⟶ Z) →\\n          (p : Z ⟶ CategoryTheory.Arrow.rightFunc) →\\n            auto\", \"doc\": \"Given a category $\\\\mathcal{C}$ and morphism properties $W_1$ and $W_2$, this constructor defines a functorial factorization system by specifying: (1) a functor $Z: \\\\text{Arrow}(\\\\mathcal{C}) \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.fac_app\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \"{f : Arrow C} : data.i.app f ≫ data.p.app f = f.hom\", \"doc\": \"For any morphism $ f $ in the arrow category of $ \\\\mathcal{C} $, the composition of the components $ i_f $ and $ p_f $ of the natural transformations $ i $ and $ p $ at $ f $ equals the original morph\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Factorization\", \"type\": \": FunctorialFactorizationData (W₁.functorCategory J) (W₂.functorCategory J)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with morphism properties $W_1$ and $W_2$ and a small category $\\\\mathcal{J}$, this defines a functorial factorization system in the functor category $[\\\\mathcal{J\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.SmallObject",
-   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.SmallObject'\n",
-   "date": "2026-10-17",
-   "verdict": "No match: IsCardinalForSmallObjectArgument.lean:74-85 assumes cardinal smallness and preservesColimit is a condition on coyoneda along one cell sequence. Its functorialFactorizationData does not assert accessibility of its middle-object functor. The additional grep for IsAccessible/IsLocallyPresentable in SmallObject returned zero."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "There exists a filtered colimit preserving functorial factorization into relative cell complexes and maps with right lifting property in a locally presentable category",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] → I.rlp.llp.FunctorialFactorizat\", \"doc\": \"This definition constructs a functorial factorization system in the context of the small object argument. Given a morphism property $I$ and a regular cardinal $\\\\kappa$, it specifies: (1) a functor $Z:\"}\n  {\"name\": \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on morphisms in $\\\\mathcal{C}$ required for the small obj\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C)\\n  [I.HasSmallObjectArgument], I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"For any morphism in a category with hom-sets in universe $\\\\max(u, v+1)$, there exists a functorial assignment of factorizations into a morphism with the left lifting property against $I$-right lifting\"}\n  {\"name\": \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [inst_3 : I.IsCardinalForSmallObjectArgument κ] →\\n              {X Y : \", \"doc\": \"A relative cell complex constructed by transfinite composition using the successor structure and initial morphism $\\\\iota$ in the small object argument, parameterized by a regular cardinal $\\\\kappa$. Th\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered index set $J$ with a least element and successor structure, families of objects $A_j(i)$ and $B_j(i)$ in $\\\\mathcal{C}$ indexed by $j \\\\in J$ and $i \\\\in \\\\a\"}\n  {\"name\": \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [inst_3 : I.IsCardinalForSmallObjectArgument κ] →\\n              {F G : \", \"doc\": \"Given a natural transformation $\\\\phi: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{C}^\\\\to \\\\to \\\\mathcal{C}^\\\\to$ satisfying the successor structure property for a morphism class $I$ and regular car\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [OrderBot J] →\\n          [SuccOrder J] →\\n            [WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n                  ((j : J) →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered index set $J$ with a least element and successor structure, and families of objects $A_j(i)$ and $B_j(i)$ in $\\\\mathcal{C}$ indexed by $j \\\\in J$ and $i \\\\i\"}\n  {\"name\": \"CategoryTheory.SmallObject.preservesColimit\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ] {A B X Y : C}\\n  (i : A ⟶ B),\\n  I i →\\n    ∀ (f : X ⟶ Y) (hf : HomotopicalAlgebra.Re\", \"doc\": \"Given a category $\\\\mathcal{C}$, morphisms $i : A \\\\to B$ and $f : X \\\\to Y$ satisfying the morphism property $I$ (with $\\\\kappa$-smallness conditions), and a relative cell complex $f$ constructed from tr\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: SmallObject.functorialFactorizationData (IsCardinalForSmallObjectArgument.lean:460-468) assumes the small-object cardinal and gives a functorial factorization; its type does not assert filtered-colimit preservation of the middle-object functor. SmallObject.preservesColimit concerns the domain Hom functor on a cell chain, not preservation by the factorization functor."
+   "verdict": "no match: source inspected at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473. The cardinal smallness hypothesis concerns Hom along one cell chain; functorialFactorizationData supplies no accessibility assertion for its middle-object functor. The semantic hits on IsCardinalAccessible are definitions or preservation consequences, not this theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-bousfield-model-structure",
@@ -92,5 +285,20 @@
   "group": "N8"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-small-object-factorization",
+  "worker": "stage1",
+  "summary": "Expanded the accessible small-object construction itself, with common bounds on both generator endpoints, small attaching-square functors, functorial transfinite iteration, explicit weak saturation and lifting arguments, and canonical filtered-colimit comparisons. Reused eight existing Mathlib tool nodes; no new nodes or statement change. No project declaration supplies all clauses.",
+  "blueprint": "Realizes the generic accessible small-object auxiliary used below paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent derived coefficient adjunction before R lim. Read the inherited chapter/unit and the main-20261015 statement/proof at sk-thm-sf-package; historical blueprint ancestry and maintainer unit metadata are retained. This changes no unit step or geometric/coefficient route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-9f2e9885d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-9f2e9885d (reviewer sub-agent of L); spot-checked: I read all 16 steps in full; they write out the HTT A.1.2.5 construction. The item statement is byte-identical to the base copy and is not weakened. HTT is not archived, so I checked the statement against the proposition from memory: presentable C, small I, weak saturation, right lifting against I, functoriality and kappa-filtered accessibility all agree. I read the statements of all 9 cited nodes. All 8 proof dependencies are Mathlib leaves (object rank LocallyPresentable.lean:93-101, regular bound HasCardinalLT.lean:199-206, transfinite recursion, well-ordering, filtered colimits of sets elementwise, filtered colimits commuting with finite limits Stacks 002W, Fubini 002M), and each says what its step takes. Stacks tags 002D/002F/002M/002W/04AX resolve to the labels named. Step checks: both endpoint ranks are bounded below one regular kappa, including I empty; kappa-filtered implies tau-filtered; the ordinal kappa is kappa-filtered; the square and attaching-set functors satisfy qa=bi; pushout maps come from uniqueness; the recursion invariants cover zero, successor and limit; maps on squares are functorial; simultaneous attachments are serialized as pushouts of single generators, so i_f is in every weakly saturated W containing I without assuming coproduct closure; the lift uses a_alpha with the target Y fixed and h=u_{alpha+1,kappa}d; Q_i is a fibre product of Hom sets that commutes with filtered colimits (this needs the codomain ranks); copower, coproduct and pushout comparisons use Fubini; the final induction preserves colimits at 0, successors and limits. Steps 3, 4, 9 and 12 are genuinely elementary. Small cases tested: I empty, an empty attaching set, initial domains, identity generators, terminal C. There are no new nodes. The near candidates (cardinal, cell, presentable and presentable-cellular small-object factorization nodes) lack the accessibility clause, so there is no duplicate. No tool_uses are needed and nothing comes from SGA. The unit is unchanged; from.place names paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint, which I read. One reading point, not a fault: I take 'generated under kappa-filtered colimits' in the standard sense (every object is such a colimit), which matches Mathlib and the rank leaf. No fixes were written."
+ }
 }
