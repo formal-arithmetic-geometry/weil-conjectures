@@ -1,0 +1,136 @@
+{
+ "id": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-piece",
+ "kind": "statement",
+ "title": "exists nonempty support open piece model",
+ "statement": "theorem exists_nonempty_support_open_piece_model\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ))\n    (S : Scheme.Stratification T)\n    (hS : ∀ a : Fin S.n,\n      ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n        (M_E : Mod (Sheaf (Scheme.ProEt.topology (S.domain a)) Ab.{u + 1})\n          ((upperStar Ab.{u + 1} (S.immersion a)).obj (padicSubfieldRingObj T ℓ E))),\n        IsLocallyFinitelyPresented\n          ((upperStar Ab.{u + 1} (S.immersion a)).obj (padicSubfieldRingObj T ℓ E)) M_E ∧\n        Nonempty ((Mod.extendScalars ((upperStar Ab.{u + 1} (S.immersion a)).map\n          (padicSubfieldRingObjToPadicAlgCl T ℓ E))).obj M_E ≅\n            (((upperStar Ab.{u + 1} (S.immersion a)).mapMod\n              (padicAlgClRingObj T ℓ)).obj M)))\n    (Y : Scheme.{u}) (i : Y ⟶ T) [IsClosedImmersion i] [Nonempty Y]\n    :\n    ∃ (U : Scheme.{u}) (j : U ⟶ Y), IsOpenImmersion j ∧ Nonempty U ∧\n      ∃ (EU : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n        (PU : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n          (padicSubfieldRingObj U ℓ EU)),\n        IsConstructibleModuleObject (padicSubfieldRingObj U ℓ EU) PU ∧\n        Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl U ℓ EU)).obj PU ≅\n          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (j ≫ i)).obj M). This is the exact Lean statement, with the definitions cited in stmt_deps.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-constructible-stratification",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "support induction; stratum restriction and strict closed complement"
+ },
+ "proof": [
+  {
+   "text": "Pull the stratification back to Y. Its union of stratum interiors is dense. Pick a point in this union and let U be the interior of its stratum; the range of U -> T lies in the original stratum. This uses the proved source lemma dense_iUnion_interior_stratum, not irreducible-component induction.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "prop-constructible-generic-constancy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Normalize the supplied raw stratum model by extending along condensedPullbackHom. Extension along this ring isomorphism preserves local finite presentation; the coefficient square and extendScalarsComp identify its scalar extension with normalized pullback of M.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the normalized finite model through the stratum immersion to U, then use the trivial stratification to obtain constructibility.",
+   "uses": [
+    "new-lem-weil-pbc-condensed-finite-model-immersion-restriction",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-constructible-pullback",
+  "lemma-constructible-pullback-stratification",
+  "new-lem-weil-pbc-condensed-finite-model-immersion-restriction",
+  "prop-constructible-generic-constancy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G4",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "support induction; stratum restriction and strict closed complement"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of a nonempty space has a stratum whose preimage contains a nonempty open subset",
+   "results": "Eight hits, including NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent and finite_irreducibleComponents. A shorter exact lemma dense_iUnion_interior_stratum was found by rg in WeilConjectures.Topology.StratificationDense.",
+   "date": "2026-10-16",
+   "verdict": "source library exact lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective",
+   "results": "Twelve hits, including Surjective.of_comp and stability and iso instances. These support the geometric arguments but do not state finite-model transport or pro-etale cover lifting.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(nilpotent|thickening)|surjective.*closed|dense_iUnion_interior_stratum",
+   "results": "Twenty-five hits, including closed embeddings on prime spectra and the fact that a surjective closed immersion into a reduced scheme is an isomorphism. No pro-etale covering or module-presentation result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally closed stratification of a nonempty scheme has a stratum containing a nonempty open; its closed complement has strictly smaller support",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.Opens.nonempty_iff, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.zeroLocus_mono, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover. No exact pro-etale module or support-induction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed",
+   "place": "nonempty open/closed support induction, open part",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenPiece",
+  "file": "lean/Sheaf/Paper/CondensedStratumModelInductionStepNonemptyOpenPiece.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_nonempty_support_open_piece_model",
+  "statement": "theorem exists_nonempty_support_open_piece_model\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ))\n    (S : Scheme.Stratification T)\n    (hS : ∀ a : Fin S.n,\n      ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n        (M_E : Mod (Sheaf (Scheme.ProEt.topology (S.domain a)) Ab.{u + 1})\n          ((upperStar Ab.{u + 1} (S.immersion a)).obj (padicSubfieldRingObj T ℓ E))),\n        IsLocallyFinitelyPresented\n          ((upperStar Ab.{u + 1} (S.immersion a)).obj (padicSubfieldRingObj T ℓ E)) M_E ∧\n        Nonempty ((Mod.extendScalars ((upperStar Ab.{u + 1} (S.immersion a)).map\n          (padicSubfieldRingObjToPadicAlgCl T ℓ E))).obj M_E ≅\n            (((upperStar Ab.{u + 1} (S.immersion a)).mapMod\n              (padicAlgClRingObj T ℓ)).obj M)))\n    (Y : Scheme.{u}) (i : Y ⟶ T) [IsClosedImmersion i] [Nonempty Y]\n    :\n    ∃ (U : Scheme.{u}) (j : U ⟶ Y), IsOpenImmersion j ∧ Nonempty U ∧\n      ∃ (EU : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n        (PU : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n          (padicSubfieldRingObj U ℓ EU)),\n        IsConstructibleModuleObject (padicSubfieldRingObj U ℓ EU) PU ∧\n        Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl U ℓ EU)).obj PU ≅\n          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (j ≫ i)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched against the packet, repository baseline, full compilation, and forced importer checks"
+ }
+}

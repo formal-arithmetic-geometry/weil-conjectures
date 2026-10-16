@@ -7,16 +7,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.Paper.CondensedSheafExtContinuity
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenPiece
+import Sheaf.Paper.CondensedStratumModelInductionStepNonemptyComplement
 
 /-! Intermediate support-induction branch. -/
 
@@ -92,7 +84,17 @@ theorem exists_nonempty_support_open_closed_models
             (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (j ≫ i)).obj M) ∧
           Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Z ℓ EZ)).obj PZ ≅
             (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (k ≫ i)).obj M) := by
-  sorry
+  intro D hD Y i _ _ hYi
+  obtain ⟨U, j, hj, hU, EU, PU, hPU, eU⟩ :=
+    exists_nonempty_support_open_piece_model T ℓ M S hS Y i
+  let : IsOpenImmersion j := hj
+  let : Nonempty U := hU
+  obtain ⟨Z, k, hk, hcover, hdisj, D', hD', hkD'⟩ :=
+    exists_strict_closed_complement_support T D Y i hYi U j
+  let : IsClosedImmersion k := hk
+  obtain ⟨EZ, PZ, hPZ, eZ⟩ := hD D' hD' Z (k ≫ i) hkD'
+  refine ⟨U, j, Z, k, hj, hk, hcover, hdisj, ?_⟩
+  exact ⟨EU, PU, EZ, PZ, hPU, hPZ, eU, eZ⟩
 
 
 end AlgebraicGeometry.ProEtale

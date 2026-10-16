@@ -99,7 +99,7 @@ lemma localFinitePresentation_of_iso {M N : Mod _ R} (e : M ≅ N)
     (((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod R).mapIso e)
     (h𝒰 i)⟩
 
-private lemma localFinitePresentation_comap (φ : S ⟶ R) [IsMonHom φ] [IsIso φ]
+lemma localFinitePresentation_comap (φ : S ⟶ R) [IsMonHom φ] [IsIso φ]
     {M : Mod _ R} (hM : AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented R M) :
     AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented S ((Mod.comap φ).obj M) := by
   obtain ⟨𝒰, h𝒰⟩ := hM
@@ -151,7 +151,7 @@ instance upperStarComp_inv_monoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
     exact Adjunction.isMonoidal_comp _ _
   exact isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f g).inv
 
-private lemma localFinitePresentation_pullback
+lemma localFinitePresentation_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}} [MonObj R] {M : Mod _ R}
     (hM : IsLocallyFinitelyPresented R M) :

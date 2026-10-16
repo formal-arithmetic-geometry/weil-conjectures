@@ -1,0 +1,125 @@
+{
+ "id": "new-lem-weil-pbc-condensed-surjective-closed-local-presentation",
+ "kind": "statement",
+ "title": "lfp lowerStar of surjective closed",
+ "statement": "theorem lfp_lowerStar_of_surjective_closed\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] [Surjective i]\n    (P : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))\n    (hP : IsLocallyFinitelyPresented (condensedRingObj Λ Z) P) :\n    IsLocallyFinitelyPresented (condensedRingObj Λ X)\n      ((CondensedRing.lowerStar Λ i).obj P). This is the exact Lean statement, with the definitions cited in stmt_deps.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09AA, 09AH, 09AB; closed support and topological invariance"
+ },
+ "proof": [
+  {
+   "text": "Refine the given pro-etale presentation cover by one obtained from X. Keep the cartesian square as scheme-and-morphism data, so the presentation argument uses an abstract scheme instead of unfolding the chosen scheme pullback.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite presentations are invariant under isomorphisms and are preserved by additive functors preserving finite colimits and the regular module: transport the two finite free modules and their cokernel presentation. An equivalence preserving the regular module also reflects this property by applying its additive inverse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Normalize each presentation and pull it back along the refinement map. The composition comparison and cartesian-square equation, followed by the closed counit, identify it with the pullback of the restriction of i_*P. Pullback along the base-changed surjective closed immersion is an equivalence preserving the regular module, so it reflects finite presentation. Undo coefficient normalization to obtain the presentations on the cover of X.",
+   "uses": [
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G4",
+  "document": "Stacks Project",
+  "place": "Tags 09AA, 09AH, 09AB; closed support and topological invariance"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale cover of a surjective closed subscheme has a refinement pulled back from a pro-etale cover of the ambient scheme",
+   "results": "Eight hits about etale pretopologies, etale morphisms and surjective singleton covers; no pro-etale closed-immersion model or covering-refinement theorem. The source library affine ind-etale closed-site lift supplies the missing geometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective",
+   "results": "Twelve hits, including Surjective.of_comp and stability and iso instances. These support the geometric arguments but do not state finite-model transport or pro-etale cover lifting.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(nilpotent|thickening)|surjective.*closed|dense_iUnion_interior_stratum",
+   "results": "Twenty-five hits, including closed embeddings on prime spectra and the fact that a surjective closed immersion into a reduced scheme is an isomorphism. No pro-etale covering or module-presentation result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective closed immersion induces an equivalence on module sheaves on the pro-etale site, preserving locally finite presentation and finite coefficient models under restriction",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.IsClosedImmersion.spec_of_surjective, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme. No exact pro-etale module or support-induction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed",
+   "place": "nonempty open/closed support induction, push part",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedSurjectiveClosedLocalPresentation",
+  "file": "lean/Sheaf/Paper/CondensedSurjectiveClosedLocalPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.lfp_lowerStar_of_surjective_closed",
+  "statement": "theorem lfp_lowerStar_of_surjective_closed\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] [Surjective i]\n    (P : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))\n    (hP : IsLocallyFinitelyPresented (condensedRingObj Λ Z) P) :\n    IsLocallyFinitelyPresented (condensedRingObj Λ X)\n      ((CondensedRing.lowerStar Λ i).obj P)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched against the packet, repository baseline, full compilation, and forced importer checks"
+ }
+}

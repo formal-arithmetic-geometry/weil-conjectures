@@ -1,0 +1,128 @@
+{
+ "id": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+ "kind": "statement",
+ "title": "exists cover refinement surjective closed",
+ "statement": "theorem exists_cover_refinement_surjective_closed {X Z : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i]\n    (C : Cover.{u} proetalePrecoverage Z) :\n    ∃ B : Cover.{u} proetalePrecoverage X, ∀ b,\n      ∃ (a : C.I₀) (W : Scheme.{u}) (q : W ⟶ B.X b) (p : W ⟶ Z)\n        (r : W ⟶ C.X a), IsPullback q p (B.f b) i ∧ r ≫ C.f a = p. This is the exact Lean statement, with the definitions cited in stmt_deps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09AB, 09BK; affine ind-etale closed-site lift"
+ },
+ "proof": [
+  {
+   "text": "For Spec(A/I) -> Spec(A), refine the input cover by a finite jointly surjective family from the affine ind-etale basis. Apply closedSiteLift to each member. The closed-fibre cartesian square and surjectivity of the closed immersion imply that these lifts cover Spec(A). Finitely many affine weakly etale maps to an affine scheme form a quasi-compact pro-etale cover.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-affine-closed-site-functor-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed-fibre cartesian squares give maps from the base changes of the lifted members into the original cover. Present any affine closed immersion using its defining ideal and the affine isomorphisms, transporting this construction across those isomorphisms.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the affine construction to an affine open cover of X and bind the resulting pro-etale covers. The iterated pullback maps give the required refinement. Return its scheme and two projections with the cartesian-square proof as explicit witnesses. Empty schemes use the same possibly empty finite families.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G4",
+  "document": "Stacks Project",
+  "place": "Tags 09AB, 09BK; affine ind-etale closed-site lift"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale cover of a surjective closed subscheme has a refinement pulled back from a pro-etale cover of the ambient scheme",
+   "results": "Eight hits about etale pretopologies, etale morphisms and surjective singleton covers; no pro-etale closed-immersion model or covering-refinement theorem. The source library affine ind-etale closed-site lift supplies the missing geometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective",
+   "results": "Twelve hits, including Surjective.of_comp and stability and iso instances. These support the geometric arguments but do not state finite-model transport or pro-etale cover lifting.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(nilpotent|thickening)|surjective.*closed|dense_iUnion_interior_stratum",
+   "results": "Twenty-five hits, including closed embeddings on prime spectra and the fact that a surjective closed immersion into a reduced scheme is an isomorphism. No pro-etale covering or module-presentation result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every pro-etale cover of a surjective closed subscheme admits a refinement pulled back from a pro-etale cover of the ambient scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver, AlgebraicGeometry.Scheme.instHasPullbacksPrecoverageOfHasPullbacks, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver', AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instOverPullbackCoverOverProp, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover. No exact pro-etale module or support-induction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed",
+   "place": "nonempty open/closed support induction, cover part",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement",
+  "file": "lean/Sheaf/Paper/ProEtaleSurjectiveClosedCoverRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_cover_refinement_surjective_closed",
+  "statement": "theorem exists_cover_refinement_surjective_closed {X Z : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i]\n    (C : Cover.{u} proetalePrecoverage Z) :\n    ∃ B : Cover.{u} proetalePrecoverage X, ∀ b,\n      ∃ (a : C.I₀) (W : Scheme.{u}) (q : W ⟶ B.X b) (p : W ⟶ Z)\n        (r : W ⟶ C.X a), IsPullback q p (B.f b) i ∧ r ≫ C.f a = p",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched against the packet, repository baseline, full compilation, and forced importer checks"
+ }
+}

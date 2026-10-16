@@ -1,0 +1,117 @@
+{
+ "id": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-complement",
+ "kind": "statement",
+ "title": "exists strict closed complement support",
+ "statement": "theorem exists_strict_closed_complement_support\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (D : TopologicalSpace.Closeds T)\n    (Y : Scheme.{u}) (i : Y ⟶ T) [IsClosedImmersion i] [Nonempty Y]\n    (hYi : Set.range i ⊆ D)\n    (U : Scheme.{u}) (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U] :\n    ∃ (Z : Scheme.{u}) (k : Z ⟶ Y), IsClosedImmersion k ∧\n      Set.range j ∪ Set.range k = Set.univ ∧\n      Disjoint (Set.range j) (Set.range k) ∧\n      ∃ (D' : TopologicalSpace.Closeds T), D' < D ∧ Set.range (k ≫ i) ⊆ D'. This is the exact Lean statement, with the definitions cited in stmt_deps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "support induction; stratum restriction and strict closed complement"
+ },
+ "proof": [
+  {
+   "text": "Use j.closedComplement. Its range is the complement of range j, giving the union and disjointness. The image of its composite with i is closed because both maps are closed immersions.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take this closed image as D'. It lies in D. A point of nonempty U maps to D but cannot lie in D': injectivity of i would put its image under j in the complementary closed subset. Thus D' < D.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G4",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "support induction; stratum restriction and strict closed complement"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of a nonempty space has a stratum whose preimage contains a nonempty open subset",
+   "results": "Eight hits, including NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent and finite_irreducibleComponents. A shorter exact lemma dense_iUnion_interior_stratum was found by rg in WeilConjectures.Topology.StratificationDense.",
+   "date": "2026-10-16",
+   "verdict": "source library exact lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective",
+   "results": "Twelve hits, including Surjective.of_comp and stability and iso instances. These support the geometric arguments but do not state finite-model transport or pro-etale cover lifting.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(nilpotent|thickening)|surjective.*closed|dense_iUnion_interior_stratum",
+   "results": "Twenty-five hits, including closed embeddings on prime spectra and the fact that a surjective closed immersion into a reduced scheme is an isomorphism. No pro-etale covering or module-presentation result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally closed stratification of a nonempty scheme has a stratum containing a nonempty open; its closed complement has strictly smaller support",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.Opens.nonempty_iff, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.zeroLocus_mono, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover. No exact pro-etale module or support-induction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed",
+   "place": "nonempty open/closed support induction, complement part",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-open-closed"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyComplement",
+  "file": "lean/Sheaf/Paper/CondensedStratumModelInductionStepNonemptyComplement.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_strict_closed_complement_support",
+  "statement": "theorem exists_strict_closed_complement_support\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (D : TopologicalSpace.Closeds T)\n    (Y : Scheme.{u}) (i : Y ⟶ T) [IsClosedImmersion i] [Nonempty Y]\n    (hYi : Set.range i ⊆ D)\n    (U : Scheme.{u}) (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U] :\n    ∃ (Z : Scheme.{u}) (k : Z ⟶ Y), IsClosedImmersion k ∧\n      Set.range j ∪ Set.range k = Set.univ ∧\n      Disjoint (Set.range j) (Set.range k) ∧\n      ∃ (D' : TopologicalSpace.Closeds T), D' < D ∧ Set.range (k ≫ i) ⊆ D'",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d5582",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T052146-L-3987657",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched against the packet, repository baseline, full compilation, and forced importer checks"
+ }
+}
