@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-condensed-lfp-hom-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-local-piece-hom-continuity",
+   "place": "Finite locally free calculation and costalk steps of the given proof"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered Hom continuity for locally finitely presented condensed field modules",
+ "statement": "Let ℓ be prime, E a finite intermediate field of the algebraic closure of Q_ℓ, X a scheme with noetherian underlying space, and P a locally finitely presented internal module over the condensed coefficient field E on X. For any (u+1)-small filtered diagram N of cochain complexes with a common termwise lower bound and any integer n, the canonical map colim Hom(P[0],QN_i[n]) → Hom(P[0],Q(colim N)[n]) is an isomorphism.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-hom-colimit-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the existing private finite_lf theorem from Sheaf.AlgebraicGeometry.CondensedConstructibleSerre via import all. This is the already-proved specialization of condensed-field local triviality to the small finite intermediate coefficient field E: its proof transports continuous coefficients through ULift(E) and the inverse coefficient isomorphism. Do not redeclare its coefficient isomorphism or its finite-free/isomorphism transport helpers.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Apply finite locally free Hom continuity to this pro-etale finite free trivialization of P.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-condensed-finite-free-hom-continuity",
+  "lem-weil-pbc-condensed-lfp-local-triviality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedLfpHomContinuity.lean",
+  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2); 2026-10-16 returned-delivery repair reuses finite_lf from Sheaf.AlgebraicGeometry.CondensedConstructibleSerre instead of duplicate helper proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local finite presentation over a continuous p adic coefficient field gives locally free modules and filtered derived Hom continuity",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical conclusion inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation over a continuous p adic coefficient field gives locally free modules and filtered derived Hom continuity",
+   "date": "2026-10-15",
+   "results": "8 hits: RingHom.finitePresentation_isLocal, BDeRham, BDeRhamPlus, Module.FinitePresentation.exists_free_localizedModule_powers, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, RingHom.smooth_def, instCommRingBDeRhamPlus, IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*[Ff]ree|[Ff]ree.*FinitePresentation",
+   "date": "2026-10-15",
+   "results": "15 hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceHomContinuity",
+  "date": "2026-10-16",
+  "group": "H3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLfpHomContinuity",
+  "file": "lean/Sheaf/Paper/CondensedLfpHomContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_lfp_hom_continuity",
+  "statement": "theorem condensed_lfp_hom_continuity\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E.val) X))\n    (hP : IsLocallyFinitelyPresented\n      (condensedRingObj (Profinite.continuousMapRingObj E.val) X) P)\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (N : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (Profinite.continuousMapRingObj E.val) X)) ℤ)\n    (hN : ∃ a : ℤ, ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r))\n    (n : ℤ) :\n    IsIso (colimit.desc _\n      ((condensedShiftedHom (Profinite.continuousMapRingObj E.val) X\n        ((DerivedCategory.singleFunctor _ 0).obj P) n).mapCocone (colimit.cocone N)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+ }
+}

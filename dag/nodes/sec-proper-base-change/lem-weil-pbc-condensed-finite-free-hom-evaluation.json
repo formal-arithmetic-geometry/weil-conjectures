@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-free-hom-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-local-piece-hom-continuity",
+   "place": "Finite locally free calculation and costalk steps of the given proof"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived evaluation for locally finite free internal modules",
+ "statement": "Let X have noetherian underlying space, Λ be a commutative condensed ring, and P an internal Λ_X-module made finite free by a pro-etale covering. For each integer n, the functor K ↦ Hom(P[0],QK[n]) on all cochain complexes is naturally isomorphic to degree-n cohomology of RΓ of the termwise internal Hom Mod.ihom P applied to K. Here Γ is the specified condensedModuleSections functor. The assertion contains neither colimit preservation nor a filtered diagram.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-hom-colimit-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Finite free trivializations show module tensor with P is exact. Its right adjoint internal Hom from P therefore preserves K-injective complexes, by transporting the acyclic Hom tests.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "On a functorial K-injective resolution J, ordinary sections of internal Hom from P are the additive Hom complex from P. Degree n cycles are chain maps P[0]→J[n], boundaries are homotopies, and K-injectivity identifies these classes with derived maps. Compute the specified right derived sections on the same K-injective complex. Transport the ringed-site evaluation formula to internal module objects over the identical ring.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-locally-free-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Evaluation commutes with chain maps, addition and the signed shift differential. Consequently the identifications form the required natural isomorphism of functors for every integer n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-site-locally-free-derived-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived maps from a single finite locally free internal module identify naturally with derived global sections of internal Hom for arbitrary complexes",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical conclusion inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived maps from a single finite locally free internal module identify naturally with derived global sections of internal Hom for arbitrary complexes",
+   "date": "2026-10-15",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, LightCondensed.ihomPoints, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_symm_comp",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|IsKInjective",
+   "date": "2026-10-15",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceHomContinuity",
+  "date": "2026-10-16",
+  "group": "H3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteFreeHomEvaluation",
+  "file": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_finite_free_hom_evaluation",
+  "statement": "theorem condensed_finite_free_hom_evaluation\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))\n        (((upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ X)).obj P))\n    (n : ℤ) : Nonempty\n      (DerivedCategory.Q ⋙ shiftFunctor _ n ⋙\n          preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj P)) ≅\n        (Mod.ihom P).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⋙\n          (condensedModuleSections Λ X).rightDerivedFunctor ⋙\n            DerivedCategory.homologyFunctor _ n)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+ }
+}

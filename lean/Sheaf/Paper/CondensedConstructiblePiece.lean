@@ -7,8 +7,7 @@ module
 
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import Sheaf.Paper.CondensedLocallyClosedPiece
 
 /-! # Locally closed generators for constructible condensed modules -/
 
@@ -31,15 +30,6 @@ def condensedConstructiblePiece
     ObjectProperty (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
         (condensedRingObj (Profinite.continuousMapRingObj E.val) T))) :=
-  fun K ↦ ∃ (Z U : Scheme.{u}) (i : Z ⟶ T) (j : U ⟶ Z),
-    Exists fun [_hi : IsClosedImmersion i] ↦ Exists fun [_hj : IsOpenImmersion j] ↦
-      QuasiCompact j ∧ ∃ (P : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
-        (condensedRingObj (Profinite.continuousMapRingObj E.val) U)),
-        IsLocallyFinitelyPresented
-          (condensedRingObj (Profinite.continuousMapRingObj E.val) U) P ∧
-        Nonempty (K ≅ (DerivedCategory.singleFunctor _ 0).obj
-          ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E.val) i).obj
-            ((CondensedRing.openImmersionLowerShriek
-              (Profinite.continuousMapRingObj E.val) j).obj P)))
+  condensedLocallyClosedPiece (Profinite.continuousMapRingObj E.val) T
 
 end AlgebraicGeometry.ProEtale

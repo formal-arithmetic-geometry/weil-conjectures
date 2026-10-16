@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-condensed-local-piece-costalk-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-local-piece-hom-continuity",
+   "place": "Finite locally free calculation and costalk steps of the given proof"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A compatible bounded-below costalk diagram for a locally closed piece",
+ "statement": "Let T have noetherian underlying space, Λ be a commutative condensed ring, i:Z→T a closed immersion, j:U→Z a quasi-compact open immersion, and P any internal Λ_U-module. Given a (u+1)-small filtered diagram N of internal Λ_T-module cochain complexes with common termwise lower bound and n∈Z, define F(K)=Hom((i_*j_!P)[0],K[n]) on the ordinary derived category and G(C)=Hom(P[0],QC[n]) on cochain complexes. There is a diagram L of internal Λ_U-module cochain complexes with common termwise lower bound, a natural isomorphism e:(N⋙Q)⋙F≅L⋙G, and a vertex isomorphism v:F(Q(colim N))≅G(colim L), such that F(Q(ι_s)) followed by v equals e_s followed by G(ι_s) for every s. This asserts neither that either Hom cocone is a colimit nor any finiteness assumption on P.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-hom-colimit-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the closed exceptional right adjoint and exact open pullback. Their bounded-below derived adjunctions identify the two Hom functors naturally, including the shift and single-functor comparisons.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Use the functorial bounded injective resolutions at the common bound, apply the exceptional functor and open restriction, and take good truncation to construct L with a common termwise bound. The Grothendieck and K-injective results ensure the required resolution models exist.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "For the complementary quasi-compact open k, recollement identifies i_*Ri! with Cone(id→Rk_*k*)[-1]. Qcqs pushforward continuity and exact filtered colimits identify the colimit of the models with j*Ri! of the original colimit. Fully faithful exact i_* reflects this comparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Apply Hom(P[0],-[n]) to the comparison and use the natural derived adjunctions. Their naturality gives the displayed leg equation, with the original cocone legs. The same construction covers zero P and empty schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedLocalPieceCostalkModel.lean",
+  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion exceptional inverse image preserves filtered uniformly bounded below derived colimits via the open closed recollement triangle",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical conclusion inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion exceptional inverse image preserves filtered uniformly bounded below derived colimits via the open closed recollement triangle",
+   "date": "2026-10-15",
+   "results": "8 hits: Condensed.hasExactColimitsOfShape, HomologicalComplex.ab5OfSize, Condensed.instAB5CondensedMod, AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget, CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits, CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits, localCohomology.isoOfFinal, CategoryTheory.IsGrothendieckAbelian.preservesColimit_coyoneda_obj_of_mono",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|exceptional|costalk",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceHomContinuity",
+  "date": "2026-10-16",
+  "group": "H3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocalPieceCostalkModel",
+  "file": "lean/Sheaf/Paper/CondensedLocalPieceCostalkModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_local_piece_costalk_model",
+  "statement": "theorem condensed_local_piece_costalk_model\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (j : U ⟶ Z) [IsOpenImmersion j] [QuasiCompact j]\n    (P : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (N : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ)\n    (hN : ∃ a : ℤ, ∀ (s : I) (r : ℤ), r < a → IsZero ((N.obj s).X r))\n    (n : ℤ) :\n    let F := shiftFunctor\n      (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n        (condensedRingObj Λ T))) n ⋙ preadditiveCoyoneda.obj\n      (op ((DerivedCategory.singleFunctor _ 0).obj\n        ((CondensedRing.lowerStar Λ i).obj\n          ((CondensedRing.openImmersionLowerShriek Λ j).obj P))))\n    let G := condensedShiftedHom Λ U ((DerivedCategory.singleFunctor _ 0).obj P) n\n    ∃ L : I ⥤ CochainComplex\n        (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) ℤ,\n      (∃ a : ℤ, ∀ (s : I) (r : ℤ), r < a → IsZero ((L.obj s).X r)) ∧\n      ∃ (e : (N ⋙ DerivedCategory.Q) ⋙ F ≅ L ⋙ G)\n        (v : F.obj (DerivedCategory.Q.mapCocone (colimit.cocone N)).pt ≅\n          G.obj (colimit.cocone L).pt),\n        ∀ s : I, F.map ((DerivedCategory.Q.mapCocone (colimit.cocone N)).ι.app s) ≫ v.hom =\n          e.hom.app s ≫ G.map ((colimit.cocone L).ι.app s)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+ }
+}

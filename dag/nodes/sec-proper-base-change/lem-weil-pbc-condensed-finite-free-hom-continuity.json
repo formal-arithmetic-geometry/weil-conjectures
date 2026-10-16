@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-free-hom-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-local-piece-hom-continuity",
+   "place": "Finite locally free calculation and costalk steps of the given proof"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered Hom continuity for a locally finite free internal module",
+ "statement": "Let X have noetherian underlying space, Λ be a commutative condensed ring, and P an internal Λ_X-module which becomes finite free on a pro-etale covering. For any (u+1)-small filtered diagram N of cochain complexes with a common termwise lower bound and any integer n, the canonical map colim Hom(P[0],QN_i[n]) → Hom(P[0],Q(colim N)[n]) is an isomorphism of abelian groups.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-hom-colimit-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact, colimit-preserving additive H and the natural derived Hom formula of the finite locally free calculation.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Termwise H preserves zero objects and therefore the common lower bound. Apply qcqs derived global sections continuity to N followed by termwise H. At the common termwise lower bound the good truncation projection is an actual isomorphism of complexes, so its cocone is a colimit cocone. Transport the resulting colimit along its unique isomorphism to the canonical cocone.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "H on complexes preserves colimits. Compose the two colimit cocones and transport through the natural derived Hom isomorphism. The universal property identifies this with the canonical colimit.desc.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-finite-free-derived-hom",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomContinuity.lean",
+  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits commute with derived maps from locally finite free sheaves on quasi compact quasi separated schemes for complexes bounded below",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical conclusion inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits commute with derived maps from locally finite free sheaves on quasi compact quasi separated schemes for complexes bounded below",
+   "date": "2026-10-15",
+   "results": "8 hits: SheafOfModules.mapFree, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.GeneratingSections.opEpi_comp, SheafOfModules.Presentation.map, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "Derived.*[Cc]olimit|[Cc]olimit.*Derived|PreservesFilteredColimits",
+   "date": "2026-10-15",
+   "results": "24 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean",
+   "verdict": "No exact match for this internal-module statement. Existing general ingredients are used in the proof or retained in its proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceHomContinuity",
+  "date": "2026-10-16",
+  "group": "H3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteFreeHomContinuity",
+  "file": "lean/Sheaf/Paper/CondensedFiniteFreeHomContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_finite_free_hom_continuity",
+  "statement": "theorem condensed_finite_free_hom_continuity\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))\n        (((upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ X)).obj P))\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (N : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj Λ X)) ℤ)\n    (hN : ∃ a : ℤ, ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r))\n    (n : ℤ) :\n    IsIso (colimit.desc _\n      ((condensedShiftedHom Λ X\n        ((DerivedCategory.singleFunctor _ 0).obj P) n).mapCocone (colimit.cocone N)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-bef8e",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T011145-L-265743",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+ }
+}
