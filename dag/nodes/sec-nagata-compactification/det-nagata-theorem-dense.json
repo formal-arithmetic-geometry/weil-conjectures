@@ -75,12 +75,18 @@
  "chapter": "sec-nagata-compactification",
  "unit": "sk-thm-nagata-compactification",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Compactification.Dense",
+  "declaration": "AlgebraicGeometry.exists_isDense_compactification",
   "declarations": [
    "AlgebraicGeometry.exists_isDense_compactification",
    "AlgebraicGeometry.Compactification.quasiCompact_openImmersion"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 17:58 UTC for group NA, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The existence theorem supplies the proper compactification with open immersion and scheme-theoretic density, while quas"
+  "statement": "theorem exists_isDense_compactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] :\n    ∃ c : Compactification f, c.IsDense",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing theorem has exactly the hypotheses: finite type is locally finite type plus quasi-compact. Compactification records the proper structure map, open immersion and factorization. Its open immersion is automatically quasi-compact by Compactification.quasiCompact_openImmersion applied to the theorem's QuasiCompact f hypothesis. Compactification.IsDense unfolds to the dependency's IsSchemeTheoreticallyDominant c.i. With this quasi-compactness, Scheme.Hom.app_injective gives injectivity on every open, hence the stated injective structure-sheaf map. No new module or declaration is needed. The second listed declaration is in WeilConjectures.Compactification.Defs, publicly imported by Dense."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -110,5 +116,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-521401cd2",
+  "group": "NH",
+  "result": "pass",
+  "note": "Existing-declaration delivery; only the lean record changes. Hypotheses match exactly (CompactSpace/QuasiSeparatedSpace Y, IsSeparated f, LocallyOfFiniteType+QuasiCompact = finite type), one arbitrary universe. Conclusion ∃ c : Compactification f, c.IsDense: proper g, open immersion i, f = i ≫ g; quasi-compact i from Compactification.quasiCompact_openImmersion (listed); IsDense = IsSchemeTheoreticallyDominant c.i, the dependency's recorded declaration; injectivity via Scheme.Hom.app_injective. Statement field verbatim; Dense/Defs identical in slopmaster2, side and newtargets trees. nt_compile.py refuses files outside the side tree, so a /tmp scratch check went through lcompile.py against the live build: derives the node's full conclusion, compiles clean, axioms [propext, Classical.choice, Quot.sound]. Report has a real Worker report and Second reading by NH. No findings."
  }
 }
