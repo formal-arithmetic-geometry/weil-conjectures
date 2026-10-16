@@ -15606,7 +15606,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient (stage 3; reviewer PASS; first push; landing 20261016T221558-L-1611743 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:15 L: merged deliver/C3/Sheaf.Paper.SectionModuleAlgebraicInverseImage (stage 3; reviewer PASS; first push; landing 20261016T221559-L-1611841 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/C3/Sheaf.Paper.StrictHenselizationPointedMap (stage 3; reviewer PASS; first push; landing 20261016T221600-L-1611985 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/C4/Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale (stage 3; reviewer PASS; first push; landing 20261016T221600-L-1612112 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/C4/Sheaf.Paper.IntegralResiduePullFlatModel (stage 3; reviewer PASS; first push; landing 20261016T221601-L-1612212 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization (stage 3; reviewer PASS; first push; landing 20261016T221602-L-1612444 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261016T221602-L-1612596 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15669,3 +15668,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:59 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 07:01 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 07:02 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
