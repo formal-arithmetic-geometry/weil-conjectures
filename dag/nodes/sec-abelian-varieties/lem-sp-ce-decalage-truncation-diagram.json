@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-ce-decalage-truncation-diagram",
+ "kind": "statement",
+ "title": "Homology comparison square for decalage and the Grothendieck spectral object",
+ "statement": "Let F,G be additive left exact functors satisfying injective acyclicity [def-sp-composite-acyclicity], with P a presentation [def-sp-cartan-eilenberg-presentation], its second filtration L, and prescribed common augmentation a. For q>=0 and n>=0 there exist isomorphisms from H^n(Tot(GI)) and H^n(Dec(L)^(-q)) [def-sp-filtered-complex-decalage] to the full and truncated values of the canonical Grothendieck spectral object. They intertwine the decalage inclusion and the spectral-object map from bottom->q+1 to bottom->top. The full isomorphism is normalized by the augmentation and P.J.isoRightDerivedObj.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tags 015X and 015N, canonical resolution normalization"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtered-complex-decalage",
+  "def-sp-composite-acyclicity"
+ ],
+ "proof": [
+  {
+   "text": "Use the compatible bounded-below injective full and cut models. Their right-derived-functor unit maps are isomorphisms. Compare them using naturality of the unit and the localization-homology isomorphisms, and apply RG to the derived truncation square. The explicit spectral-object formula identifies its map with RG of the truncation inclusion.",
+   "uses": [
+    "lem-sp-ce-decalage-injective-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the full total isomorphism, the derived unit, inverse localization of b, and the canonical resolution-derived comparison to obtain e. Define d similarly using r and truncation of the resolution comparison. The normalized resolution-unit comparison identifies the composite with the original augmentation computation; cancel the invertible localization of b to prove the required normalization.",
+   "uses": [
+    "lem-pc-grothendieck-resolution-unit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-decalage-injective-model",
+  "lem-pc-grothendieck-resolution-unit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tags 015X and 015N, canonical resolution normalization; explicit Lean construction and compatibility proofs by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|truncLE.*total|total.*truncLE",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good horizontal truncation of a Cartan Eilenberg bicomplex total resolves the canonical derived truncation and equals the decalage subcomplex",
+   "results": "8 hits: HomologicalComplex.πTruncGE, HomologicalComplex.truncGEXIso, ComplexShape.Embedding.πTruncGENatTrans_app, HomologicalComplex.ιTruncLE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, HomologicalComplex.truncGE'.XIso, HomologicalComplex.truncGE'XIso, HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits: CochainComplex.truncLE, CochainComplex.acyclic_truncLE_iff, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.truncLEXIsoCycles, CochainComplex.truncLEXIso, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.ιTruncLE",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of the total of a good horizontal truncation of a first-quadrant bicomplex is the intersection of the second filtration with the inverse image of its next step under the total differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation",
+  "date": "2026-10-16",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Second total filtration compared with the canonical truncation filtration",
+   "via": [
+    "lem-sp-ce-acyclic-abutment",
+    "lem-sp-ce-second-image-truncation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergDecalageTruncationDiagram",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergDecalageTruncationDiagram.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_decalage_truncation_diagram",
+  "statement": "theorem cartanEilenberg_decalage_truncation_diagram\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]\n    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)\n    (P : CartanEilenbergPresentation F)\n    (L : DecreasingFiltration (P.total G))\n    (hL : ∀ p m : ℤ, L.complexStep p m =\n      ((((CartanEilenbergPresentation.mappedFunctor G).obj P.I).secondFiltration m).step p))\n    (a : (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj P.J.cocomplex).extend\n        ComplexShape.embeddingUpNat ⟶ P.total G)\n    (ha : (∀ n : ℕ, a.f (n : ℤ) =\n      (HomologicalComplex.extendXIso\n        (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj P.J.cocomplex)\n        ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).hom ≫\n      G.map (F.map (P.J.cocomplex.extendXIso ComplexShape.embeddingUpNat\n        (rfl : (n : ℤ) = n)).inv ≫ (P.e.f (n : ℤ)).f 0) ≫\n      (HomologicalComplex.extendXIso\n        ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj (P.I.X (n : ℤ)))\n        ComplexShape.embeddingUpNat (rfl : (0 : ℤ) = 0)).inv ≫\n      HomologicalComplex₂.ιTotalOrZero\n        ((CartanEilenbergPresentation.mappedFunctor G).obj P.I)\n        (ComplexShape.up ℤ) (n : ℤ) 0 (n : ℤ)))\n    (q : ℤ) (n : ℕ) (hq0 : 0 ≤ q) :\n    ∃ (e : (P.total G).homology (n : ℤ) ≅\n        ((F.grothendieckSpectralObject G P.X).H (n : ℤ)).obj\n          (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))))\n      (d : (L.decalageComplex (-q)).homology (n : ℤ) ≅\n        ((F.grothendieckSpectralObject G P.X).H (n : ℤ)).obj\n          (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ((q + 1 : ℤ) : EInt))))),\n      HomologicalComplex.homologyMap (L.decalageι (-q)) (n : ℤ) ≫ e.hom =\n        d.hom ≫ ((F.grothendieckSpectralObject G P.X).H (n : ℤ)).map\n          (twoδ₂Toδ₁' (⊥ : EInt) ((q + 1 : ℤ) : EInt) ⊤ bot_le le_top) ∧\n      HomologicalComplex.homologyMap a (n : ℤ) ≫ e.hom ≫\n          (F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app P.X =\n        (HomologicalComplex.extendHomologyIso\n          (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj P.J.cocomplex)\n          ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).hom ≫\n          (P.J.isoRightDerivedObj (F ⋙ G) n).inv",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

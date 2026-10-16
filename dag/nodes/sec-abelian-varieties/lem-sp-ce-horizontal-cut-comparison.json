@@ -1,0 +1,116 @@
+{
+ "id": "lem-sp-ce-horizontal-cut-comparison",
+ "kind": "statement",
+ "title": "Horizontal-cut comparison normalized on total summands",
+ "statement": "Under the column and horizontal cycle quasi-isomorphism hypotheses for a first-quadrant augmented bicomplex I [def-sp-cartan-eilenberg-presentation], fix bounded-below models T and S equal to the actual full and good-cut flipped totals and the normalized augmentation b:K->T. For left exact additive G and second filtration L [def-sp-double-complex-total], there exist the cut inclusion i, the canonical derived truncation comparison r, the full mapped-total isomorphism c, and d identifying G(S) with decalage [def-sp-filtered-complex-decalage]. Both inclusion squares commute, and c has its prescribed degree-zero diagonal components.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tag 015X, second filtration; finite-diagonal total comparisons"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-decalage"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the supplied equalities identifying T and S with their actual totals and define i by total.map of the truncated bicomplex inclusion. Obtain u from the additive mapped-total theorem and set c to u inverse followed by totalFlipIso. Apply the good-cut identification to get r,d and the two squares. Finally specialize the diagonal component formula for u to vertical degree zero, cancel u, and use the total-flip inclusion formula, whose sign is one in degree zero.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-sp-ce-good-cut-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-ce-good-cut-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tag 015X, second filtration; finite-diagonal total comparisons; explicit Lean construction and compatibility proofs by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|truncLE.*total|total.*truncLE",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good horizontal truncation of a Cartan Eilenberg bicomplex total resolves the canonical derived truncation and equals the decalage subcomplex",
+   "results": "8 hits: HomologicalComplex.πTruncGE, HomologicalComplex.truncGEXIso, ComplexShape.Embedding.πTruncGENatTrans_app, HomologicalComplex.ιTruncLE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, HomologicalComplex.truncGE'.XIso, HomologicalComplex.truncGE'XIso, HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits: CochainComplex.truncLE, CochainComplex.acyclic_truncLE_iff, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.truncLEXIsoCycles, CochainComplex.truncLEXIso, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.ιTruncLE",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of the total of a good horizontal truncation of a first-quadrant bicomplex is the intersection of the second filtration with the inverse image of its next step under the total differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation",
+  "date": "2026-10-16",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Second total filtration compared with the canonical truncation filtration",
+   "via": [
+    "lem-sp-ce-acyclic-abutment",
+    "lem-sp-ce-second-image-truncation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergHorizontalCutComparison",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergHorizontalCutComparison.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_horizontal_cut_comparison",
+  "statement": "theorem cartanEilenberg_horizontal_cut_comparison\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory B]\n    (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]\n    (K : CochainComplex.Plus B)\n    (I : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (e : ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K.obj ⟶ I)\n    (hzero : ∀ p : ℤ, p < 0 → IsZero (I.X p))\n    (hcolumns : ∀ p : ℤ, QuasiIso (e.f p))\n    (hcycles : ∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap e p))\n    (q : ℤ) (hq : 0 ≤ q)\n    (T S : CochainComplex.Plus B)\n    (hT : T.obj = (((CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (hS : S.obj = (((CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj\n      (CochainComplex.truncLE I q)).flip).total (ComplexShape.up ℤ))\n    (b : K ⟶ T) (hb : QuasiIso b.hom)\n    (haug : ∀ m : ℤ, b.hom.f m ≫ (eqToHom hT).f m =\n      (e.f m).f 0 ≫\n        (HomologicalComplex.extendXIso\n          (((𝟭 B).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X m))\n          ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n        (((CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj I).flip).ιTotal\n          (ComplexShape.up ℤ) 0 m m (zero_add m))\n    (L : DecreasingFiltration\n      (((CartanEilenbergPresentation.mappedFunctor G).obj I).total (ComplexShape.up ℤ)))\n    (hL : ∀ p m : ℤ, L.complexStep p m =\n      ((((CartanEilenbergPresentation.mappedFunctor G).obj I).secondFiltration m).step p)) :\n    let t := DerivedCategory.Plus.TStructure.t (C := B)\n    ∃ (i : S ⟶ T)\n      (r : (t.truncLT (q + 1)).obj (DerivedCategory.Plus.Q.obj K) ≅\n        DerivedCategory.Plus.Q.obj S)\n      (c : (G.mapCochainComplexPlus.obj T).obj ≅\n        (((CartanEilenbergPresentation.mappedFunctor G).obj I).total (ComplexShape.up ℤ)))\n      (d : (G.mapCochainComplexPlus.obj S).obj ≅ L.decalageComplex (-q)),\n      r.hom ≫ DerivedCategory.Plus.Q.map i =\n        (t.truncLTι (q + 1)).app (DerivedCategory.Plus.Q.obj K) ≫\n          DerivedCategory.Plus.Q.map b ∧\n      (G.mapCochainComplexPlus.map i).hom ≫ c.hom = d.hom ≫ L.decalageι (-q) ∧\n      (∀ m : ℤ, G.map (\n          (HomologicalComplex.extendXIso\n            (((𝟭 B).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X m))\n            ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n          (((CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj I).flip).ιTotal\n            (ComplexShape.up ℤ) 0 m m (zero_add m) ≫\n          inv ((eqToHom hT).f m)) ≫ c.hom.f m =\n        (HomologicalComplex.extendXIso\n          ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X m))\n          ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n        ((CartanEilenbergPresentation.mappedFunctor G).obj I).ιTotalOrZero\n          (ComplexShape.up ℤ) m 0 m)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

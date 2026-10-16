@@ -1,0 +1,112 @@
+{
+ "id": "lem-sp-good-truncation-total-boundary-image",
+ "kind": "statement",
+ "title": "Boundary-kernel image on a first-quadrant total diagonal",
+ "statement": "For an integer-indexed first-quadrant bicomplex M in a Grothendieck abelian category and integers 0<=q<=n, the image of the degree-n component of the totalized good horizontal truncation inclusion equals the second filtration step n-q [def-sp-double-complex-total] intersected with the inverse image under the total differential of the next-degree second filtration step n-q+1.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tag 015X, finite-diagonal boundary-kernel calculation"
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "In degree n the total is the finite direct sum of M^(p,n-p) for 0<=p<=n. Its second filtration step n-q is the sum over p<=q. The inverse-image condition is the kernel of its total differential followed by projection modulo the next vertical step. Every vertical differential and each horizontal differential from p<q already land in that next step. Only the outgoing horizontal differential of the boundary p=q survives, so the intersection is the direct sum of the full strict terms and its boundary kernel. The good horizontal truncation has precisely these terms. Use the direct-sum inclusions and kernel lifts to prove both subobject containments. At q=0 the strict direct sum is empty and the same kernel argument applies.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tag 015X, finite-diagonal boundary-kernel calculation; explicit Lean construction and compatibility proofs by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|truncLE.*total|total.*truncLE",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good horizontal truncation of a Cartan Eilenberg bicomplex total resolves the canonical derived truncation and equals the decalage subcomplex",
+   "results": "8 hits: HomologicalComplex.πTruncGE, HomologicalComplex.truncGEXIso, ComplexShape.Embedding.πTruncGENatTrans_app, HomologicalComplex.ιTruncLE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, HomologicalComplex.truncGE'.XIso, HomologicalComplex.truncGE'XIso, HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits: CochainComplex.truncLE, CochainComplex.acyclic_truncLE_iff, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.truncLEXIsoCycles, CochainComplex.truncLEXIso, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.ιTruncLE",
+   "date": "2026-10-16",
+   "verdict": "No match for this full comparison; use the listed truncation API and prove the remaining compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of the total of a good horizontal truncation of a first-quadrant bicomplex is the intersection of the second filtration with the inverse image of its next step under the total differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation",
+  "date": "2026-10-16",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Second total filtration compared with the canonical truncation filtration",
+   "via": [
+    "lem-sp-ce-acyclic-abutment",
+    "lem-sp-ce-second-image-truncation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage",
+  "file": "lean/Sheaf/CategoryTheory/GoodTruncationTotalBoundaryImage.lean",
+  "declaration": "HomologicalComplex₂.good_truncation_total_boundary_image",
+  "statement": "theorem good_truncation_total_boundary_image\n    {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]\n    (M : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    (hM : ∀ p r : ℤ, p < 0 ∨ r < 0 → IsZero ((M.X p).X r))\n    (q : ℤ) (hq : 0 ≤ q) (n : ℤ) (hqn : q ≤ n) :\n    imageSubobject ((total.map (CochainComplex.ιTruncLE M q)\n      (ComplexShape.up ℤ)).f n) =\n      (M.secondFiltration n).step (n - q) ⊓\n        (Subobject.pullback ((M.total (ComplexShape.up ℤ)).d n (n + 1))).obj\n          ((M.secondFiltration (n + 1)).step (n - q + 1))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261016T003200-L-3927483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

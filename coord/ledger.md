@@ -15314,3 +15314,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: merged deliver/E4/Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261016T003159-L-3926928 (proof); batch 20261016T003156; modules 1; new nodes 0)
 - 00:32 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ClosedPointField (stage 3; reviewer PASS; first push; landing 20261016T003159-L-3927115 (proof); batch 20261016T003156; modules 1; new nodes 0)
 - 00:32 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg (stage 3; reviewer PASS; first push; landing 20261016T003200-L-3927285 (proof); batch 20261016T003156; modules 1; new nodes 0)
+- 00:32 L: merged deliver/K1/Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation (stage 3; reviewer PASS; after a return; landing 20261016T003200-L-3927483 (interface); batch 20261016T003156; modules 14; new nodes 13)
