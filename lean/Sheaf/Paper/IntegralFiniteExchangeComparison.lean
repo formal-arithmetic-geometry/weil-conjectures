@@ -13,7 +13,6 @@ import Sheaf.Paper.IntegralResidueExchange
 import Sheaf.Paper.IntegralResiduePerfect
 import Sheaf.Paper.IntegralReductionTensor
 import Sheaf.Paper.FiniteDiscreteExchangeComparison
-import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
 
 /-! # Comparison of integral reduction with finite etale exchange
 
@@ -93,11 +92,6 @@ theorem integralFiniteExchange_comparison
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))
   obtain ⟨F, L, ⟨e₂⟩⟩ :=
     finiteDiscreteExchange_comparison ℓ (integralResidue ℓ E) k hA sq N
-      (fun T ↦ by
-        have : ((Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
-          GrothendieckTopology.W.monoidal (J := Scheme.ProEt.topology T) (A := Ab.{u + 1})
-        exact constantInternalModuleSheaf_equivalence (Scheme.ProEt.topology T)
-          (ULift.{u + 1} (integralResidue ℓ E)))
   exact ⟨F, L, ⟨e₁ ≪≫ e₂⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

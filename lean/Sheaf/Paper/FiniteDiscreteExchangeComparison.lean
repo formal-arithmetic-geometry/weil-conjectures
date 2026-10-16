@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import Sheaf.Paper.FiniteDiscreteExchangeRealization
+import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite discrete internal coefficients and etale exchange
@@ -110,9 +111,10 @@ Proof in words. A continuous map to the discrete ring B is locally constant, so 
 condensed continuous-function ring is the constant ring, and its inverse image on
 T is the constant B ring sheaf. Internal modules over this ring and sheaves of
 ULift B-modules are identified by retaining the underlying additive sheaf and scalar
-action. The supplied hEncoding gives the equivalence from internal modules over the
-sheafified constant ring to module-valued sheaves, together with its underlying
-abelian sheaf comparison. Transfer along the constant-ring identification. These
+action. The proved constantInternalModuleSheaf_equivalence constructs the
+equivalence from internal modules over the sheafified constant ring to module-valued
+sheaves, with its comparison on underlying abelian sheaves. Transfer along the
+constant-ring identification. These
 inverse constructions are additive and exact, as detected on abelian sheaves.
 Derive this equivalence and compose it
 with exact etale-to-pro-etale inverse image to obtain the realization functor F.
@@ -131,20 +133,7 @@ theorem finiteDiscreteExchange_comparison
     (hB : (ℓ : B) = 0)
     (sq : CommSq g' f' f g)
     (N : ProEtale.BoundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))
-    (hEncoding : ∀ T : Scheme.{u},
-      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-            ((Functor.const T.ProEtᵒᵖ).obj
-              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤
-            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),
-        G.IsEquivalence ∧ Nonempty (G ⋙
-          sheafCompose (Scheme.ProEt.topology T)
-            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅
-          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-              ((Functor.const T.ProEtᵒᵖ).obj
-              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X)) :
     ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology
           (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤
         DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})
@@ -156,7 +145,11 @@ theorem finiteDiscreteExchange_comparison
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L))) := by
   obtain ⟨F0, cs, hfull, htri, hsingle, F1, hsteps⟩ :=
-    finiteDiscreteExchange_stepRealization B ℓ k hB sq hEncoding
+    finiteDiscreteExchange_stepRealization B ℓ k hB sq (fun T ↦ by
+      have : ((Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
+        GrothendieckTopology.W.monoidal (J := Scheme.ProEt.topology T) (A := Ab.{u + 1})
+      exact constantInternalModuleSheaf_equivalence (Scheme.ProEt.topology T)
+        (ULift.{u + 1} B))
   let := cs
   let := hfull
   let := htri
