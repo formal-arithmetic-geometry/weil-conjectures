@@ -373,5 +373,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-097074eb5 (reviewer sub-agent of L); spot-checked: I read the whole item and all eight steps, re-derived each step by hand, and checked them against Stacks sites.tex. 04TQ is lemma-glue-maps (lines 5638-5671) and 04TR is lemma-glue-sheaves (5823-5896, including the gluing datum before it); the tag-to-label mapping is in tags/tags lines 6263-6264. The statement matches both results hypothesis by hypothesis: a=b is included, the cocycle and the direction e_b=phi_ab e_a are the same, and the morphism clause is 04TQ applied to C/U. Nothing is weakened and no hypothesis is added. Step 1: the component sheaves follow from 00VH(iii) base change in def-weil-pbc-sites-and-cohomology(1). Step 2: the sectionwise equalizer of products is a sheaf by lem-weil-pbc-site-sheaf-sets-limits-sectionwise(1). That node is a Mathlib leaf, so no tool_use is needed. Step 3: restricting the (a,a,a) cocycle to the diagonal gives alpha=alpha^2, so the diagonal pullback of phi_aa is the identity; nothing is claimed off the diagonal. Steps 4-5: I checked the graph maps d_a and (pr_W, W->U_a, pr_b), the cocycle on W_bc, both inverse identities and naturality. Step 6: pulling back along the graph into W_ab gives phi_ab e_a = e_b. Steps 7-8: I checked amalgamation on the base-changed cover, naturality by separatedness, the restriction identity f_W(s)=d_a^*f_a(r_a^*s)=f_a(s), and uniqueness. I tested an empty cover (everything is terminal and the result holds), an identity cover, a non-mono singleton cover with phi_aa not the identity off the diagonal, repeated members and empty section sets. Delivery shape is correct: 0 new nodes, proof_deps equals the union of the step uses, no SGA, no doubled backslashes, and no off-route statements. Mathlib has the IsStack class but no instance for the sheaf pseudofunctor, so the item is not a leaf. The parent det-pe-torsor-comparison-affine (Steps 4-5, main-20261015) uses exactly these two clauses. This is a generic set-sheaf lemma, not a target node, so the base-change and coefficient-category check does not apply. Maintainer note, not a fault of this delivery: the existing unsplit lem-pe-site-sheaf-gluing (N4, 2026-10-16) states exactly clause 1 of this item and should be merged into it. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SetSheafCoverDescent",
+  "declaration": "CategoryTheory.setSheafCoverDescent",
+  "file": "lean/Sheaf/CategoryTheory/SetSheafCoverDescent.lean",
+  "statement": "theorem setSheafCoverDescent {C : Type u} [Category.{v} C] [HasPullbacks C] (J : GrothendieckTopology C) {I : Type (max u v)} (U : C) (X : I → C) (f : ∀ i, X i ⟶ U) (hcov : Sieve.ofArrows X f ∈ J U) : (∀ D : (J.pseudofunctorOver (Type (max u v))).DescentData f, ∃ F : Sheaf (J.over U) (Type (max u v)), Nonempty (D ≅ ((J.pseudofunctorOver (Type (max u v))).toDescentData f).obj F)) ∧ Nonempty (((J.pseudofunctorOver (Type (max u v))).toDescentData f).FullyFaithful)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-08158da0f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Checked node, source Tags 04TR/04TQ, dependencies, Lean declarations, universes, edge cases, docstrings, report sections, and scompile.py local/server evidence; delivery is correct."
  }
 }
