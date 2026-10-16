@@ -187,5 +187,27 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-8a2b99b00 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, blueprint route, and cited sources. All five steps check out; strict fibers, horn orientations, empty cases, and canonical induced map are correct. Eight-node dependency closure is acyclic. No new nodes or repairs. Accepted tool use: lem-cbc-equivalence-outer-horn-filling. Full findings written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c5acf3e3",
+  "group": "NB",
+  "result": "pass",
+  "note": "Checked every clause against the node and Kerodon sources: B,E,F:SSet.{u} quasicategories; right-fibration hp/hq as HasLiftingProperty (horn n i).ι for 1≤n, 0<i (Fin gives i≤n); Kan strict fibers pullback (const (X:=Δ[0]) b) for every vertex with no premise on h; for h with w : h≫q=p and the recorded IsFunctorEquivalence, the canonical rightFibrationFiberMap (real pullback.map, no hollow data) has an inverse g with two Nonempty SSet.Homotopy (X⊗Δ[1]); matches consumer RightPinchComparison. Empty fibers/B, n=0 and universes fine, no extra assumptions. lean.statement verbatim; node unchanged apart from the lean record; docstrings carry Kerodon tags, the blueprint tag and five proof steps; proof is only sorry. No existing right-fibration Lean predicate (def-coef-infinity-fibrations is unsplit with no lean record). nt_compile.py: clean, 1.5 s; axioms only sorryAx plus standard; injected error surfaced. Process note only: NB reconstructed the missing first-worker artifacts, so its second reading was not independent; this review is the independent reading."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationFibers",
+  "declaration": "SSet.Enhanced.rightFibration_fibers",
+  "declarations": [
+   "SSet.Enhanced.rightFibrationFiberMap",
+   "SSet.Enhanced.rightFibration_fibers"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationFibers.lean",
+  "statement": "theorem rightFibration_fibers {B E F : SSet.{u}} [Quasicategory B] [Quasicategory E] [Quasicategory F] (p : E ⟶ B) (q : F ⟶ B) (hp : ∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι p) (hq : ∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι q) : (∀ b : B _⦋0⦌, KanComplex (pullback (SSet.const (X := Δ[0]) b) p) ∧ KanComplex (pullback (SSet.const (X := Δ[0]) b) q)) ∧ (∀ (h : E ⟶ F) (w : h ≫ q = p), IsFunctorEquivalence h → ∀ b : B _⦋0⦌, ∃ g : pullback (SSet.const (X := Δ[0]) b) q ⟶ pullback (SSet.const (X := Δ[0]) b) p, Nonempty (SSet.Homotopy (rightFibrationFiberMap p q h w b ≫ g) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (g ≫ rightFibrationFiberMap p q h w b) (𝟙 _)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
