@@ -37,9 +37,239 @@
   "def-amb-p1-trace",
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Top tensor comparison, with arbitrary coefficients. Write $R=\\mathbf Z/N$. For any separated flat finitely presented compactifiable morphism $a:Z\\to S$ of Noetherian schemes with nonempty geometric fibres pure of dimension one and $N$ invertible on $S$, use [lem-amb-proper-coproducts-projection] on a proper compactification and [lem-weil-pbc-ringed-slice-extension-tensor] on its open part to form the natural projection map\n$$F\\otimes_R^L Ra_!\\mu_N\\longrightarrow Ra_!(a^*F\\otimes_R\\mu_N).$$\nFor the open part apply the stated sheaf tensor isomorphism termwise to a flat resolution of $F$: restriction is exact, extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], and $j_!\\mu_N$ is flat since its stalks are either the rank-one free $R$-module or zero. For flatness of $j_!\\mu_N$, tensor a short exact sequence with it and take geometric stalks: the resulting sequence is exact because the stalk tensor is either tensor with $R$ or tensor with zero. Exactness and conservativity of geometric stalks, applied to the kernel and cokernel, then give exactness before taking stalks. The twist is locally free by [lem-asd-etale-finite-twist-pullback]. Thus this map is an isomorphism by the proper projection formula, without flatness or finite generation of $F$. By [lem-pur-compact-top-localization], $Ra_!\\mu_N$ has cohomology only in degrees $0,1,2$ and its stalks compute compact cohomology. Pulling the derived tensor to a geometric stalk is permitted by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply [lem-kun-bounded-tensor-tor-spectral-sequence] there with the second argument $F_{\\bar s}[0]$: in total degree two the only term is $\\operatorname{Tor}_0(H^2,F_{\\bar s})$, since positive Tor lowers degree and $H^q=0$ for $q>2$. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] and conservativity [lemma-weil-pbc-geometric-stalk-conservative] therefore give the natural sheaf isomorphism\n$$\\alpha_{a,F}:R^2a_!\\mu_N\\otimes_R F\\xrightarrow{\\sim}R^2a_!a^*F(1).$$\nThe same construction for $S=\\operatorname{Spec}k$ gives the tensor comparison with every $R$-module $M$.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-compact-top-localization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.3.4 and 1.1.6.1; XVII 5.2.6"
+   }
+  },
+  {
+   "text": "Geometric Kummer coordinates. First use $F=R$ over an algebraically closed field $k$. The reduction map is a universal homeomorphism by [lem-weil-pbc-reduction-universal-homeomorphism], so [thm-weil-pbc-universalHomeomorphism_pullback] identifies the etale topoi and their cohomology. This also identifies compact supports: in a proper compactification the reduction equivalence carries extension by zero to extension by zero, since the presheaf construction [def-weil-pbc-extension-by-zero] uses the same open subset and the same restrictions; its cohomology is therefore unchanged. Choose a proper compactification of $Z_{\\mathrm{red}}$ by [thm-nagata-compactification], which applies because this curve is separated and finite type over the quasi-compact quasi-separated scheme $\\operatorname{Spec}k$. Take the closure of $Z_{\\mathrm{red}}$ there and give it its reduced structure, obtaining a reduced proper completion $\\overline Z$. Only components meeting $Z_{\\mathrm{red}}$ are retained, so this is a pure one-dimensional proper curve with the same generic components. Its boundary is finite by [lem-sc-dense-open-finite-complement]. The dense-open isomorphism of [lem-pur-compact-top-localization] identifies $H_c^2(Z_{\\mathrm{red}},\\mu_N)$ with $H^2(\\overline Z,\\mu_N)$. The Kummer boundary of [lem-sc-second-kummer-divisors] identifies this with $\\operatorname{Pic}(\\overline Z)/N$, and [lem-pur-proper-reduced-curve-multidegree] identifies the latter with $R^I$ by the degrees on its reduced components. These maps define the claimed coordinates; on a proper reduced curve they send every Kummer line-bundle class to its multidegree. For general $M$, tensor with $M$ using Step 1 to get $H_c^2(Z,M(1))\\cong\\bigoplus_I M$. Define $D_{Z,M}$ to be the coordinate sum weighted by the generic lengths $m_i$.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universalHomeomorphism_pullback",
+    "def-weil-pbc-extension-by-zero",
+    "lem-sc-dense-open-finite-complement",
+    "lem-pur-compact-top-localization",
+    "lem-sc-second-kummer-divisors",
+    "lem-pur-proper-reduced-curve-multidegree",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.3.1–1.1.3.4"
+   }
+  },
+  {
+   "text": "Dense-open independence and supported generators. Remove the finite component intersections [lem-sc-component-intersections-finite] and shrink each reduced component to a smooth dense open. Such opens exist by [lem-kun-geometric-reduced-perfect] and [lem-pur-geometrically-reduced-dense-smooth-open], since $k$ is perfect. Their complements are finite by [lem-sc-dense-open-finite-complement]. In each component choose a closed $k$-point $P_i$ in this smooth open by [lem-pc-rational-points-dense]. It is Cartier there by [lem-sc-point-cartier], hence Cartier in any completion under comparison: away from $P_i$ its ideal is the unit ideal. By [lem-pc-degree-base-change], $\\mathcal O(P_i)$ has degree one on this component and degree zero on the others. Its Kummer class is therefore the $i$th coordinate generator by Step 2. The supported Kummer boundary [lem-asd-ordinary-supported-kummer] constructs this class already on any neighbourhood of $P_i$, with its canonical trivialization off $P_i$, and is natural under restricting to a smaller such neighbourhood. Applying compact cohomology to $Ri_{P_i*}R\\to\\mu_N[2]$ produces a class in $H_c^2$; the source has $H_c^0=R$. Extension to a proper completion gives $c_1(\\mathcal O(P_i))$ by the relation $c_{P_i,R}u_{P_i}=c_1(\\mathcal O(P_i))$ in that node. The composition identifications [lem-amb-etale-compact-comparisons] give the same class through any intermediate open. Hence the extension maps from a common smooth dense open into any two reduced completions preserve every coordinate generator, so preserve the entire degree coordinate isomorphism; those maps are isomorphisms by [lem-pur-compact-top-localization]. This proves independence of completion. For an arbitrary open $W\\hookrightarrow Z$, choose the points $P_i$ in $W$ on the components it meets and use the same argument there. Its top extension is the inclusion of just those coordinates. Generic lengths are unchanged on each retained component, so $D_Z\\circ\\operatorname{ext}=D_W$. Tensoring by Step 1 proves the same statements for every $M$.",
+   "uses": [
+    "lem-sc-component-intersections-finite",
+    "lem-kun-geometric-reduced-perfect",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-sc-dense-open-finite-complement",
+    "lem-sc-point-cartier",
+    "lem-pc-degree-base-change",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-amb-etale-compact-comparisons",
+    "lem-pur-compact-top-localization",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.4 and independence in 1.1.3"
+   }
+  },
+  {
+   "text": "Compatibility over a field with a quasi-finite flat source map. Let $u:X\\to Y$ be a separated quasi-finite flat finitely presented map of pure one-dimensional curves over the algebraically closed field $k$. By [lem-sbc-flat-locally-quasi-finite-coheight], source generic points have target generic points (both have coheight zero). Remove the finite component intersections and the complements of smooth dense opens in the reductions, using [lem-sc-component-intersections-finite], [lem-kun-geometric-reduced-perfect] and [lem-pur-geometrically-reduced-dense-smooth-open]. Remove from the target also the images of the finitely many excluded source points, and restrict the source over the remaining target. These images are closed $k$-points, so the removed sets are finite; the extension maps preserve all top coordinates by Step 3. The remaining reduced source and target are disjoint unions of smooth connected curves, and each source component maps nonconstantly to a target component.\n\nChoose their smooth proper completions by [lem-sc-compactification], then extend each reduced map by [lem-pur-smooth-curve-map-completion] to a finite locally free map $\\overline u$. In particular the original reduced map factors as an open immersion into $\\overline u^{-1}(Y_{\\mathrm{red}})$ followed by the finite locally free map to $Y_{\\mathrm{red}}$; it is quasi-finite and flat, so its weighted trace is defined by [lem-pur-quasifinite-flat-weighted-trace].\n\nFix a source component with generic point $\\xi$ and its target component with generic point $\\eta$. Write $A=\\mathcal O_{Y,\\eta}$ for the target generic local ring and $B=\\mathcal O_{X,\\xi}$ for the source generic local ring, with residue fields $K=\\kappa(\\eta)$ and $L=\\kappa(\\xi)$ respectively. Thus the flat local map is $A\\to B$, and the reduced function-field extension is $K\\to L$. Put $f=\\operatorname{length}(A)$, $e=\\operatorname{length}(B)$ and $d=\\operatorname{length}_B(B/\\mathfrak m_A B)$. Tensoring a composition series of $A$ with the flat $A$-module $B$ gives $f$ quotients $B/\\mathfrak m_A B$, so $e=fd$ [def-weil-pbc-flat-ring-map]. To check the sheaf trace after reduction, let $\\Omega$ be an algebraic closure of $K$. A composition series of the $K$-algebra $Q=B/\\mathfrak m_A B$ has $d$ factors $L$. Tensoring with $\\Omega$ is exact, so at every point of $\\operatorname{Spec}(L\\otimes_K\\Omega)$ the local length of $Q\\otimes_K\\Omega$ is $d$ times that of $L\\otimes_K\\Omega$. The geometric-stalk formula of [lem-pur-quasifinite-flat-weighted-trace] therefore identifies the trace for $u$ with $d$ times the reduced trace at the geometric generic target point, including inseparable $L/K$. The equality holds as sheaf maps on the remaining smooth target: the difference sends any local section to a section of the constant sheaf $\\mu_N$ vanishing generically; on connected etale neighbourhoods such a section is constant and hence zero.\n\nOn the proper completions, [lem-pur-finite-flat-kummer-norm-degree] and the surjective Kummer boundary [lem-sc-second-kummer-divisors] show that transfer preserves degree. To return to the opens, factor each source inclusion through $\\overline u^{-1}(Y_{\\mathrm{red}})$. Trace composition and the open-extension counits of [lem-pur-quasifinite-flat-weighted-trace] identify the map extended to $\\overline Y$ with transfer by $\\overline u$ after extension to $\\overline X$. Step 3 identifies these extension maps with the degree-coordinate inclusions. Therefore on this source component,\n$$f\\,D_{Y_{\\mathrm{red}},R}\\,dH_c^2(\\tau_{u_{\\mathrm{red}}})=fd\\,D_{X_{\\mathrm{red}},R}=e\\,D_{X_{\\mathrm{red}},R}.$$\nSum over source components and tensor with $M$ by Step 1. This proves $D_{X,M}=D_{Y,M}\\circ H_c^2(\\tau_u)$.",
+   "uses": [
+    "lem-sc-component-intersections-finite",
+    "lem-kun-geometric-reduced-perfect",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "def-weil-pbc-flat-ring-map",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-pur-smooth-curve-map-completion",
+    "lem-pur-finite-flat-kummer-norm-degree",
+    "lem-sc-second-kummer-divisors",
+    "lem-sbc-flat-locally-quasi-finite-coheight",
+    "lem-sc-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.5, including the reedition correction for nonreduced curves"
+   }
+  },
+  {
+   "text": "Dense relative Cohen–Macaulay locus and local line charts. The fibre Cohen–Macaulay locus $U\\subset C$ is open by [lem-sbc-fibre-cohen-macaulay-locus-open], and [lem-pur-cohen-macaulay-field-extension] identifies it with the geometric-fibre locus and makes it stable under base change. It contains every fibre generic point: its local ring has dimension zero, the empty regular sequence gives depth at least zero [def-weil-pbc-depth], and [lem-weil-pbc-depth-le-support-dimension] gives the reverse inequality. Since the fibres are pure of dimension one, their complements have dimension zero or are empty by [lem-sbc-nowhere-dense-closed-fibre-dimension]. Thus [lem-pur-compact-top-localization] identifies $R^2(c|_U)_!\\mu_N$ with $R^2c_!\\mu_N$. On affine opens of $S$, [lem-sbc-cohen-macaulay-flat-quasi-finite-chart] and [lem-sbc-affine-base-flat-quasi-finite-chart-core] supply an open cover of $U$ by flat locally quasi-finite locally finitely presented maps to affine spaces over affine opens of $S$. Their dimensions are one: apply [lem-sbc-equidimensional-open-local-dimension] to the pure curve fibres and [lem-sbc-flat-quasi-finite-smooth-local-dimension] to the charts, using [sbc-lem-affine-space-smooth]. Shrink each source chart to an affine open. Its target affine space over an affine base is affine too, so the resulting map is affine, hence quasi-compact and separated; being locally quasi-finite and locally finitely presented, it is quasi-finite and finitely presented. Compose with $\\mathbf A^1\\hookrightarrow\\mathbf P^1$. These are the required quasi-finite flat line charts. Take finite subcovers since the schemes are Noetherian. All maps used are compactifiable by [thm-nagata-compactification], so the top-support comparisons apply.",
+   "uses": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-pur-cohen-macaulay-field-extension",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-sbc-nowhere-dense-closed-fibre-dimension",
+    "lem-pur-compact-top-localization",
+    "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+    "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+    "sbc-lem-affine-space-smooth",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "proof of 1.1.6, pp. 489–490"
+   }
+  },
+  {
+   "text": "Construct and glue the scalar trace. For a chart $q:V\\to\\mathbf P^1_{S_0}$ and its projection $p$, define\n$$b_q=H^0(t_p)\\circ R^2p_!(\\tau_{q,\\mu_N}):R^2(pq)_!\\mu_N\\longrightarrow R_{S_0}.$$\nUse the normalized trace $t_p$ of [def-amb-p1-trace] and the actual projective-line decomposition [lem-asd-ordinary-finite-p1-adjunction] with $A=R$. The corner isomorphism and compact-support composition are those of [lem-pur-compact-top-localization] and [lem-amb-etale-compact-comparisons]; the quasi-finite functor is exact by [lem-pur-quasifinite-flat-weighted-trace]. The projective-line trace on a geometric fibre is the degree map since $c_1(\\mathcal O(1))$ generates its degree-two group. The compact-support exchange and its pasting compatibility [thm-cbc-finite-torsion], together with the stated base-change compatibilities of $t_p$ and $\\tau_q$, identify the stalk of this composite with the composite on the geometric fibre. Step 4 then says that the stalks of $b_q$ are exactly $D_{V_{\\bar s},R}$. On overlapping charts their restrictions agree by Step 3. Exactness of stalks [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative], applied to their equalizer inclusion, detect this equality of sheaf maps. The finite-cover coequalizer of [lem-pur-compact-top-localization] therefore gives a unique map on $R^2(c|_U)_!\\mu_N$. Transfer it through the dense-open isomorphism in Step 5 to obtain $\\delta_{c,R}$. Its restrictions over affine base opens agree by the same stalk criterion, and hence give a map over $S$. Its stalks are $D_{C_{\\bar s},R}$.",
+   "uses": [
+    "def-amb-p1-trace",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-pur-compact-top-localization",
+    "lem-amb-etale-compact-comparisons",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "thm-cbc-finite-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "proof of 1.1.6, pp. 489–490"
+   }
+  },
+  {
+   "text": "Coefficients, uniqueness, and normalization. Define\n$$\\delta_{c,F}=(\\delta_{c,R}\\otimes1_F)\\circ\\alpha_{c,F}^{-1}.$$\nStep 1 gives $\\alpha$ for every module sheaf $F$. Its stalks identify this map with the weighted sum $\\sum_i m_i a_i$, so this is the required map. Naturality in $F$ follows directly from the tensor construction. Any other sheaf map with these stalks is equal to it: the equalizer inclusion is an isomorphism by [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative]. For $\\mathbf P^1_S$ the map is the trace of [def-amb-p1-trace], since the fibre has one reduced component of multiplicity one; its relation $t_ph=1$ sends $c_1(\\mathcal O(1))$ to $1$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.6 and 1.1.6.1"
+   }
+  },
+  {
+   "text": "Base change and coefficient reduction. Let $S'\\to S$ be a morphism of Noetherian schemes. The compact-support exchange of [thm-cbc-finite-torsion] is defined for all the bounded-below sheaves here, with its composition and pasting compatibilities. The relative CM open of Step 5 pulls back to the relative CM open by [lem-pur-cohen-macaulay-field-extension]. Pull back the chosen finite cover and line charts. In Step 6, the projective-line trace commutes with base change by [lem-asd-ordinary-finite-p1-adjunction], and $\\tau_q$ does by [lem-pur-quasifinite-flat-weighted-trace]. Thus each pulled-back local map $b_q$ is exactly the local map for the pulled-back chart. The cover coequalizer and dense-open isomorphism [lem-pur-compact-top-localization] are the extension maps used in the same construction; exact inverse image carries that coequalizer to the pulled-back coequalizer, and the pasting property identifies the extension arrows. Their unique induced maps therefore coincide. The tensor comparison of Step 1 is formed from natural projection maps, so gives the same conclusion for every $F$.\n\nFor $N'=dN$, use the diagram of Kummer exact sequences [lem-amb-kummer-any-base] with vertical maps $z\\mapsto z^d$ on $\\mu_{N'}$, $z\\mapsto z^d$ on the first $\\mathbf G_m$, and the identity on the second $\\mathbf G_m$. Its middle square commutes since $(z^d)^N=z^{N'}$. Its boundary sends $c_{1,N'}(L)$ to $c_{1,N}(L)$; on the coordinates of Step 2 this is reduction $\\mathbf Z/N'\\to\\mathbf Z/N$. The integers $m_i$ do not depend on $N$, so both weighted sums commute with reduction. Step 1 extends this equality to any compatible coefficient map $F'\\to F$, in particular to a sheaf $F$ killed by $N$ viewed at both levels. Exactness and conservativity of geometric stalks [prop-weil-pbc-geometric-stalks-exact], [lemma-weil-pbc-geometric-stalk-conservative] give the equality of sheaf maps. No flatness of $\\mathbf Z/N$ over $\\mathbf Z/N'$ is used.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-pur-cohen-macaulay-field-extension",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-pur-compact-top-localization",
+    "lem-amb-kummer-any-base",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.3.5–1.1.3.6 and conclusion of 1.1.6"
+   }
+  },
+  {
+   "text": "Source compatibility and open extension. For a separated quasi-finite flat finitely presented morphism $u:C'\\to C$, [lem-pur-quasifinite-flat-weighted-trace] supplies its exact compact-support functor and trace, stable under base change. Use the top composition comparison [lem-pur-compact-top-localization] and the coherent composition isomorphism [lem-amb-etale-compact-comparisons] to identify the source of the composite. On the stalk at $\\bar s$ the asserted equality is exactly Step 4 for $u_{\\bar s}$, with coefficients $F_{\\bar s}$. It is therefore an equality of sheaf maps by exactness and conservativity of stalks [prop-weil-pbc-geometric-stalks-exact], [lemma-weil-pbc-geometric-stalk-conservative]. If $u$ is an open immersion, its weighted trace is the extension counit, all nonempty point weights being one; alternatively apply Step 3 to the fibre. This proves the open-extension clause, including opens which omit entire fibre components.",
+   "uses": [
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-pur-compact-top-localization",
+    "lem-amb-etale-compact-comparisons",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.7"
+   }
+  },
+  {
+   "text": "A quasi-finite flat map on the base: the multiplicity calculation omitted from the original proof. Let $T$ be Noetherian and $v:S\\to T$ separated, quasi-finite, flat and finitely presented, with $vc$ compactifiable and $N$ invertible on $T$; take a geometric point $\\bar t$ of $T$ with algebraically closed field $k$. The finite $k$-scheme $S_{\\bar t}$ is the disjoint union of its Artinian local factors $\\operatorname{Spec}A_y$; put $n_y=\\operatorname{length}(A_y)$. These are precisely the weights in [lem-pur-quasifinite-flat-weighted-trace]. On $C_y=C\\times_S\\operatorname{Spec}A_y$ its special fibre $C_{y,0}$ is a nilpotent closed subscheme, so it has the same components and compact cohomology by the reduction argument of Step 2. At the generic point $\\eta_i$ of a component set $B=\\mathcal O_{C_y,\\eta_i}$ and let $r_i$ be the length of $B/\\mathfrak m_yB$. The map $A_y\\to B$ is flat because $c$ is flat [def-weil-flat-morphism]. Choose a composition series $0=J_0\\subset\\cdots\\subset J_{n_y}=A_y$ with successive quotients $k$. By flatness [def-weil-pbc-flat-ring-map] tensoring gives a filtration $0=J_0B\\subset\\cdots\\subset J_{n_y}B=B$ whose every quotient is $B/\\mathfrak m_yB$. Refining each quotient by its composition series shows\n$$\\operatorname{length}_B(B)=n_y r_i.$$\nConsequently $\\delta_{vc,F}$ has on this component the weight $n_y r_i$. The other composite first has weight $r_i$, from the geometric fibre of $c$ over $y$, and then weight $n_y$ from $\\tau_v$. Both send $(a_{y,i})$ to $\\sum_{y,i}n_y r_i a_{y,i}$. This also covers nonreduced fibres of $c$; replacing $r_i$ by $1$ would be incorrect. The composition identification is provided by [lem-pur-compact-top-localization] (outer dimension zero and inner dimension one), using exactness of $v_!$. Thus exactness and conservativity of stalks [prop-weil-pbc-geometric-stalks-exact], [lemma-weil-pbc-geometric-stalk-conservative] prove the base-composition identity. Empty fibres give empty sums throughout. This completes all clauses.",
+   "uses": [
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-flat-ring-map",
+    "lem-pur-compact-top-localization",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "1.1.8 and editorial note 4, p. 491"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-compact-top-localization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universalHomeomorphism_pullback",
+  "def-weil-pbc-extension-by-zero",
+  "lem-sc-dense-open-finite-complement",
+  "lem-sc-second-kummer-divisors",
+  "lem-pur-proper-reduced-curve-multidegree",
+  "thm-nagata-compactification",
+  "lem-sc-component-intersections-finite",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sc-point-cartier",
+  "lem-pc-degree-base-change",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-etale-compact-comparisons",
+  "lem-pc-rational-points-dense",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pur-quasifinite-flat-weighted-trace",
+  "lem-pur-smooth-curve-map-completion",
+  "lem-pur-finite-flat-kummer-norm-degree",
+  "lem-sbc-flat-locally-quasi-finite-coheight",
+  "lem-sc-compactification",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-pur-cohen-macaulay-field-extension",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sbc-nowhere-dense-closed-fibre-dimension",
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+  "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+  "sbc-lem-affine-space-smooth",
+  "def-amb-p1-trace",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "thm-cbc-finite-torsion",
+  "lem-amb-kummer-any-base",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+  "place": "XVIII 1.1.3–1.1.8, including editorial note 4; tensor comparison 1.1.6.1 expanded using the existing projection and Tor inputs"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,15 +326,244 @@
    "date": "2026-10-16",
    "digest": "4f53cda18c2baa0c",
    "verdict": "no match: independent source grep returned zero declarations for Cohen-Macaulay geometry or etale Kummer cohomology/trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer degree functional for flat families of nonreduced curves on compactly supported etale cohomology",
+   "results": "{\"t\": \"2026-10-16T07:12:58Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer degree functional for flat families of nonreduced curves on compactly supported etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ'\", \"WeierstrassCurve.natDegree_preΨ\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"9acd1ce0862e9a78\"}",
+   "date": "2026-10-16",
+   "digest": "9acd1ce0862e9a78",
+   "verdict": "no match: hits concern polynomial degrees, analytic integrals, etale/flat definitions and ring traces, not integration on etale compact supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative integration R2 f shriek of roots of unity weighted by generic multiplicities",
+   "results": "{\"t\": \"2026-10-16T07:13:00Z\", \"tool\": \"leanfinder\", \"query\": \"Relative integration R2 f shriek of roots of unity weighted by generic multiplicities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.logMahlerMeasure\", \"Polynomial.mahlerMeasure\", \"Polynomial.derivRootWeight\", \"NumberField.dedekindZeta\", \"NumberField.dedekindZeta_residue\", \"Polynomial.mahlerMeasure_def_of_ne_zero\", \"DirichletCharacter.rootNumber\", \"Polynomial.cyclotomic_mahlerMeasure_eq_one\"], \"digest\": \"81ffd20d0290e150\"}",
+   "date": "2026-10-16",
+   "digest": "81ffd20d0290e150",
+   "verdict": "no match: hits concern polynomial degrees, analytic integrals, etale/flat definitions and ring traces, not integration on etale compact supports"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"trace\"",
+   "results": "{\"t\": \"2026-10-16T07:12:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\", \\\"trace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: hits concern polynomial degrees, analytic integrals, etale/flat definitions and ring traces, not integration on etale compact supports"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(cohom|trace)|Picard.*degree|degree.*Picard",
+   "results": "{\"t\": \"2026-10-16T07:12:49Z\", \"tool\": \"grep\", \"query\": \"Kummer.*(cohom|trace)|Picard.*degree|degree.*Picard\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: hits concern polynomial degrees, analytic integrals, etale/flat definitions and ring traces, not integration on etale compact supports"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace on second etale cohomology with compact support in a flat family of curves",
+   "results": "{\"t\": \"2026-10-16T07:12:50Z\", \"tool\": \"leansearch\", \"query\": \"Trace on second etale cohomology with compact support in a flat family of curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"Algebra.trace_eq_of_equiv_equiv\"], \"digest\": \"9491d432a0ab837d\"}",
+   "date": "2026-10-16",
+   "digest": "9491d432a0ab837d",
+   "verdict": "no match: hits concern polynomial degrees, analytic integrals, etale/flat definitions and ring traces, not integration on etale compact supports"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-torsion-top-trace",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-curve-kummer-degree-functional",
+  "worker": "stage1",
+  "summary": "Followed the complete SGA4 XVIII 1.1.3–1.1.8 construction: geometric Kummer degrees, reduced norm comparison with generic multiplicities, flat line charts on the dense relative CM locus, top coequalizer gluing, arbitrary coefficients, and the local Artinian length product for base composition. Created only the three underlying Picard/norm/completion inputs. Statement unchanged. Repair after the merge-lock return: compared the returned head with the current DAG, re-read the now-reviewed weighted-trace dependency, and explicitly fixed target/source generic-ring notation in Step 4 so that its flat length calculation has the stated orientation. Step 2 now cites Nagata explicitly for the reduced proper completion, with its hypotheses verified. Fresh second reading: made the pointwise flatness argument explicit, cited compact-support exchange at the chart-stalk comparison, and supplied direct Euler-characteristic and etale-cohomology definition references in the new inputs.",
+  "blueprint": "Seed chain below sk-thm-purity-transport Step 1 finite normalized trace; no imported blueprint ancestor. Realizes XVIII 1.1.3–1.1.8 used in coordinate independence in 2.9(b).",
+  "tool_uses": [
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "thm-weil-pbc-universalHomeomorphism_pullback",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-dense-open-finite-complement",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-second-kummer-divisors",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-component-intersections-finite",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-point-cartier",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-flat-locally-quasi-finite-coheight",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-nowhere-dense-closed-fibre-dimension",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic etale sheaf, tensor, dimension or flat-chart input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic curve geometry/Kummer input to the SGA4 XVIII 1.1 construction, stated with the required hypotheses; this unit has no substitute for that tool and no unit step is replaced."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Density of rational points in a nonempty smooth scheme over the algebraically closed field supplies degree-one supported generators; the unit has no replacement for this general point-existence tool."
+   },
+   {
+    "node": "lem-sc-compactification",
+    "why": "Existence of smooth proper completions of individual smooth connected curves, needed before the map-extension input can be applied in Step 4; this is a curve-geometry tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universalHomeomorphism_pullback",
+  "lem-sc-dense-open-finite-complement",
+  "lem-sc-second-kummer-divisors",
+  "lem-sc-component-intersections-finite",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sc-point-cartier",
+  "lem-pc-degree-base-change",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-etale-compact-comparisons",
+  "lem-sbc-flat-locally-quasi-finite-coheight",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sbc-nowhere-dense-closed-fibre-dimension",
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+  "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+  "sbc-lem-affine-space-smooth",
+  "thm-nagata-compactification",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "thm-cbc-finite-torsion",
+  "lem-amb-kummer-any-base",
+  "lem-pc-rational-points-dense",
+  "lem-sc-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-bb0df84ba",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-bb0df84ba (reviewer sub-agent of L); spot-checked: Read all ten steps and three new nodes; checked SGA4 XVIII 1.1.3–1.1.8, IX 4.7–4.8, XVII 6.3.18.2, Stacks sources, coefficient categories, exchange morphisms, duplicates and edge cases. No repair needed. Concrete checks and accepted tool uses are recorded in review.md."
+ }
 }
