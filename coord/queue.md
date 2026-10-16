@@ -1,6 +1,6 @@
 # Work queue
 
-38 items; claim with `tools/claim.py next <group> [--stage N]`.
+35 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (38)
+## Stage 3: modules to prove (35)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -41,12 +41,9 @@
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit` | 9 | 1 | proof |
-| `Sheaf.NumberTheory.Padics.CoefficientExtensionFinite` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
-| `Sheaf.Paper.FiniteSplitHypercoverRefinement` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
-| `Sheaf.Paper.FiniteSplitReplacementAttachmentStructure` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent` | 40 | 1 | proof |
