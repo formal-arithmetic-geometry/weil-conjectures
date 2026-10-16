@@ -23,11 +23,134 @@
   "place": "Corollaries 5.5.2.4 and 5.5.2.9, Proposition 5.5.4.15, and section 5.2.7 Read online where available; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:J\\to\\mathcal C$ be any small coherent diagram. In the space-valued presheaf category form $H=\\lim_{j\\in J}\\operatorname{Map}_{\\mathcal C}(-,p(j))$, using [lem-coef-infinity-yoneda-presheaf-limits]. Its values are small spaces. For $c=\\operatorname{colim}_{k\\in K}q(k)$ the same node gives\n$$H(c)\\simeq\\lim_j\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}(q(k),p(j))\\simeq\\lim_{k\\in K^{\\mathrm{op}}}H(q(k)).$$\nThe second equivalence just interchanges two small limits: a cone to either iterated limit is the same compatible family indexed by $J\\times K^{\\mathrm{op}}$. Thus [lem-coef-infinity-continuous-presheaf-representability] represents $H$ by an object $l$. Under the fully faithful Yoneda functor the projections $H\\to\\operatorname{Map}(-,p(j))$ give a coherent cone $l\\to p$, and its tested mapping spaces are exactly $H(x)$. The cone criterion in [lem-coef-infinity-yoneda-presheaf-limits] proves it limiting. This proves existence of all small limits, including the terminal object when $J$ is empty, for every presentable infinity category, in particular both $\\mathcal C$ and $\\mathcal D$. No limit indexed by the large category $\\mathcal C$ is taken.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-continuous-presheaf-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.5.2.4, using Proposition 5.5.2.2 and infinity Yoneda"
+   }
+  },
+  {
+   "text": "If $F$ preserves small colimits, then for each $d\\in\\mathcal D$ the presheaf $H_d(c)=\\operatorname{Map}_{\\mathcal D}(F(c),d)$ carries small colimits to limits by [lem-coef-infinity-yoneda-presheaf-limits]. By [lem-coef-infinity-continuous-presheaf-representability] it is representable. Apply [lem-coef-infinity-pointwise-adjoint-criterion] to assemble these representations into a right adjoint with its coherent adjunction. Conversely, if $F\\dashv R$, and $c=\\operatorname{colim}_Jq$, the adjunction and the mapping-space colimit criterion give, naturally in $d$,\n$$\\operatorname{Map}_{\\mathcal D}(F(c),d)\\simeq\\operatorname{Map}_{\\mathcal C}(c,Rd)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(q(j),Rd)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal D}(Fq(j),d).$$\nThese are the maps of the image cocone, so the same criterion proves that $F(c)$ is its colimit. The argument includes the empty diagram.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-continuous-presheaf-representability",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.5.2.9(1) and Proposition 5.2.4.2"
+   }
+  },
+  {
+   "text": "Fix the small set $S$ in the statement, and let $W$ be its replete strongly saturated closure as defined in [lem-coef-small-saturated-coslice-presentability]. For an $S$-local object $Z$, let $E_Z$ be the arrows inverted by $\\operatorname{Map}_{\\mathcal C}(-,Z)$. It contains equivalences and has two-out-of-three. Pushouts go to homotopy pullbacks, so pushing out a member still gives a member. For a small diagram of arrows in $E_Z$, its source and target colimits are computed objectwise in the arrow category by [lem-coef-infinity-yoneda-presheaf-limits]. Mapping these colimits into $Z$ gives the limits of a coherent transformation of space-valued diagrams whose components are equivalences. This transformation is an equivalence by [lem-cbc-enhanced-functor-cone-calculus]; applying the limit functor carries it and its inverse to inverse maps. Thus the colimit arrow still belongs to $E_Z$. Therefore $E_Z$ is strongly saturated and contains $S$, whence $W\\subset E_Z$. Conversely $S\\subset W$. Thus $S$-local and $W$-local mean exactly the same condition. This is a closure argument, not an additional localization theorem.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15, proof of (2); Definition 5.5.4.5"
+   }
+  },
+  {
+   "text": "For each $X\\in\\mathcal C$, [lem-coef-small-saturated-coslice-presentability] makes the full coherent coslice category $\\mathcal D_X$ of arrows $X\\to Y$ in $W$ presentable: its hypotheses are precisely presentability of $\\mathcal C$ and smallness of $S$. Step 1, now applied to $\\mathcal D_X$ and the empty diagram, gives a final object $s:X\\to Y$ of $\\mathcal D_X$. We use this finality only inside the full subcategory on $W$, retaining all triangle homotopies.",
+   "uses": [
+    "lem-coef-small-saturated-coslice-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, first paragraph, using Lemma 5.5.4.14, Proposition 5.4.6.6 and Lemma 5.5.4.12"
+   }
+  },
+  {
+   "text": "We prove that the target $Y$ of $s$ is $W$-local. Take $t:A\\to B$ in $W$ and any $g:A\\to Y$. Form the pushout $Z=Y\\amalg_A B$ and its arrow $t':Y\\to Z$, which is in $W$. Its composite $s'=t's:X\\to Z$ is also in $W$. Fullness and finality of $s$ make both $\\operatorname{Map}_{\\mathcal C_{X/}}(s',s)$ and $\\operatorname{Map}_{\\mathcal C_{X/}}(s,s)$ contractible. Composition with the triangle $s\\to s'$ is consequently an equivalence between these spaces, and its homotopy fiber at $1_s$ is contractible by [lem-coef-space-contractible-fiber-equivalence].\n\nBy the dual coslice mapping-space formula of [lem-cbc-enhanced-functor-cone-calculus], the two spaces above are respectively $\\operatorname{Map}(Z,Y)\\times^h_{\\operatorname{Map}(X,Y)}\\{s\\}$ and $\\operatorname{Map}(Y,Y)\\times^h_{\\operatorname{Map}(X,Y)}\\{s\\}$. Composition with the triangle is the base change of $t'^*:\\operatorname{Map}(Z,Y)\\to\\operatorname{Map}(Y,Y)$. Its fiber at $1_s$ is therefore the fiber of $t'^*$ at $1_Y$, simply by associating the homotopy pullbacks. The same dual formula identifies this with $\\operatorname{Map}_{\\mathcal C_{Y/}}(t',1_Y)$; it specifies a map $q:Z\\to Y$ and the homotopy $qt'\\simeq1_Y$ with all its higher data. The pushout mapping-space formula of [lem-coef-infinity-yoneda-presheaf-limits] identifies that fiber with the fiber at $g$ of $\\operatorname{Map}(B,Y)\\to\\operatorname{Map}(A,Y)$: mapping out of $Z$ is the pullback of the two mapping spaces over $\\operatorname{Map}(A,Y)$. Every such fiber is thus contractible. All these mapping spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus], so [lem-coef-space-contractible-fiber-equivalence] proves the latter map an equivalence. This holds for every $t$ and $g$; hence $Y$ is $W$-local, including when the space of $g$ is empty.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, remainder of proof; its Lemmas 5.5.5.12 and 5.5.5.13 are obtained here by the cited general cone formula and the pushout universal property; Kerodon Remark 3.4.0.6 for the fiber criterion"
+   }
+  },
+  {
+   "text": "Let $\\mathcal E$ be the replete full subcategory of $S$-local objects, equivalently of $W$-local objects by step 3. The construction of steps 4 and 5 gives $s_X:X\\to Y_X$ in $W$ with $Y_X\\in\\mathcal E$. For every $Z\\in\\mathcal E$, precomposition with $s_X$ is a natural equivalence $\\operatorname{Map}_{\\mathcal E}(Y_X,Z)=\\operatorname{Map}_{\\mathcal C}(Y_X,Z)\\simeq\\operatorname{Map}_{\\mathcal C}(X,iZ)$, exactly because $Z$ is $W$-local. The dual criterion in [lem-coef-infinity-pointwise-adjoint-criterion] supplies a coherent left adjoint $L:\\mathcal C\\to\\mathcal E$ to the inclusion $i$. Its units agree, up to equivalences in the coherent coslices, with the universal maps $s_X$; in particular every unit $\\eta_X:X\\to iLX$ is in $W$. This invokes representability of covariant mapping-space functors on $\\mathcal E$, not the presentable adjoint theorem before $\\mathcal E$ is known presentable.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15(3); Proposition 5.2.4.2 dual; section 5.2.7"
+   }
+  },
+  {
+   "text": "Let $q:J\\to\\mathcal E$ be small. Its limit $l=\\lim_J iq$ exists in $\\mathcal C$ by step 1. For $A\\to B$ in $S$, [lem-coef-infinity-yoneda-presheaf-limits] identifies $\\operatorname{Map}(B,l)\\to\\operatorname{Map}(A,l)$ with the limit of the equivalences $\\operatorname{Map}(B,iq(j))\\to\\operatorname{Map}(A,iq(j))$. The pointwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes that transformation an equivalence of space-valued diagrams; the limit functor carries its inverse to an inverse for the displayed map. Thus $l$ is local; fullness and the same mapping-space criterion give the limit in $\\mathcal E$. For colimits put $c=\\operatorname{colim}_J iq$ in $\\mathcal C$. For every $Z\\in\\mathcal E$ the adjunction gives\n$$\\operatorname{Map}_{\\mathcal E}(Lc,Z)\\simeq\\operatorname{Map}_{\\mathcal C}(c,iZ)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E}(q(j),Z).$$\nThe colimit criterion in [lem-coef-infinity-yoneda-presheaf-limits] proves $Lc=\\operatorname{colim}_{\\mathcal E}q$. Both formulas include empty diagrams, proving in particular that $\\mathcal E$ has all small colimits.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15 and the mapping-space universal properties of limits and colimits"
+   }
+  },
+  {
+   "text": "Let $T$ be all arrows inverted by $iL$. If $f:A\\to B$ belongs to $W$, precomposition gives an equivalence of mapping spaces into every local $Z$ by step 3. The adjunction identifies these maps with $\\operatorname{Map}_{\\mathcal E}(LB,Z)\\to\\operatorname{Map}_{\\mathcal E}(LA,Z)$, so the fully faithful Yoneda functor for $\\mathcal E^{\\mathrm{op}}$ in [lem-coef-infinity-yoneda-presheaf-limits] detects that $Lf$ is an equivalence. Thus $W\\subset T$. Conversely, for $f\\in T$ the coherent naturality square $iL(f)\\eta_A\\simeq\\eta_B f$ has both units in $W$ by step 6, and $iL(f)$ is an equivalence, hence lies in $W$. Two-out-of-three gives $f\\in W$. Therefore $T=W$, and its local objects are exactly the $S$-local objects by step 3. The coherence of this square is part of the units supplied by [lem-coef-infinity-pointwise-adjoint-criterion].",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15(4), using the mapping-space universal property of the reflector"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-reflector-accessibility] to the adjunction already constructed. The source $\\mathcal C$ is accessible since it is presentable; $\\mathcal E$ is replete and full; and the small set $S_0=S$ lies in $T=W$ by step 8 and detects all $T$-local objects by step 3. The criterion proves that $\\mathcal E$ and $iL$ are accessible. Step 7 supplies all small colimits, so $\\mathcal E$ is presentable. Finally $L:\\mathcal C\\to\\mathcal E$ preserves all small colimits: for any small $q:J\\to\\mathcal C$, adjunction and the colimit criterion in [lem-coef-infinity-yoneda-presheaf-limits] give $\\operatorname{Map}_{\\mathcal E}(L\\operatorname{colim}q,Z)\\simeq\\lim_{J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E}(Lq(j),Z)$. It therefore preserves small $\\kappa$-filtered colimits for every regular $\\kappa$; its source and target are accessible, so it is accessible. The adjunctions in steps 2 and 6 already have the units, counits and coherent triangle identities furnished by the pointwise adjoint criterion; no passage to homotopy categories is used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-reflector-accessibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(3), applied as in Proposition 5.5.4.15(1); Proposition 5.2.2.8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-continuous-presheaf-representability",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-small-saturated-coslice-presentability",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-contractible-fiber-equivalence",
+  "lem-coef-infinity-reflector-accessibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, before inverse limit of the finite coefficient mapping-complex adjunction; expanded using HTT 5.5.2 and 5.5.4 online (not archived), with the final-coslice proof of HTT 5.5.5.14 and Kerodon 3.4.0.6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +193,74 @@
    "results": "{\"t\": \"2026-10-16T12:28:49Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit preserving functors on presentable quasicategories admit right adjoints and small orthogonality classes are reflective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.OrthogonalReflection.corepresentableBy\", \"CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating\", \"CategoryTheory.IsUniversalColimit.map_reflective\"], \"digest\": \"ca4ccb7d8c088736\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentable infinity categories have small limits and colimit preserving functors admit right adjoints",
+   "results": "{\"t\": \"2026-10-16T13:34:58Z\", \"tool\": \"leanfinder\", \"query\": \"Presentable infinity categories have small limits and colimit preserving functors admit right adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.isRightAdjoint_of_preservesLimits_of_solutionSetCondition\"], \"digest\": \"62d5ab6637d2b682\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; Presentable/OrthogonalReflection.lean:460 and :475 concern ordinary Category instances and Hom sets. The Quasicategory and simplicial-set hits do not construct accessible infinity categories of arrows or prove accessibility of coherent reflectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T13:34:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLeftAdjoint\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating\"], \"digest\": \"6dfc114478d60a34\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; Presentable/OrthogonalReflection.lean:460 and :475 concern ordinary Category instances and Hom sets. The Quasicategory and simplicial-set hits do not construct accessible infinity categories of arrows or prove accessibility of coherent reflectors."
+  },
+  {
+   "tool": "grep",
+   "query": "presentable|accessible|adjoint",
+   "results": "{\"t\": \"2026-10-16T13:34:53Z\", \"tool\": \"grep\", \"query\": \"presentable|accessible|adjoint\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; Presentable/OrthogonalReflection.lean:460 and :475 concern ordinary Category instances and Hom sets. The Quasicategory and simplicial-set hits do not construct accessible infinity categories of arrows or prove accessibility of coherent reflectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint functor theorem for presentable infinity categories",
+   "results": "{\"t\": \"2026-10-16T13:34:54Z\", \"tool\": \"leansearch\", \"query\": \"Adjoint functor theorem for presentable infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.isRightAdjoint_of_preservesLimits_of_solutionSetCondition\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.isRightAdjoint_of_preservesLimits_of_isCoseparating\", \"CategoryTheory.Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating\"], \"digest\": \"519eb1d58e18cc9e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; Presentable/OrthogonalReflection.lean:460 and :475 concern ordinary Category instances and Hom sets. The Quasicategory and simplicial-set hits do not construct accessible infinity categories of arrows or prove accessibility of coherent reflectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small localizations of quasicategories at a set of maps are accessible reflective subcategories",
+   "results": "{\"t\": \"2026-10-16T13:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"Small localizations of quasicategories at a set of maps are accessible reflective subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Functor.q_isLocalization\", \"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.MorphismProperty.locallySmall_of_hasLocalization\", \"CategoryTheory.Localization.hasSmallLocalizedHom_of_isLocalization\", \"CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall'_def\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall'\"], \"digest\": \"923308b26c3ba77a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; Presentable/OrthogonalReflection.lean:460 and :475 concern ordinary Category instances and Hom sets. The Quasicategory and simplicial-set hits do not construct accessible infinity categories of arrows or prove accessibility of coherent reflectors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-presentable-infinity-adjoints",
+  "worker": "stage1",
+  "summary": "Kept the statement. Gave nine steps constructing small limits by space-valued representability, proving the adjoint criterion, and constructing small-set local replacements by final objects in strongly saturated coherent coslices. Proved locality through explicit homotopy fibers, then the reflector, limit/colimit formulas, inverted-arrow classification and accessibility. Six new statement-only foundational nodes; ordinary-category Mathlib analogues are not infinity-category results. Reused the existing enhanced cone calculus rather than duplicate its coslice mapping-space formula. Second reading makes the pointwise-equivalence citations explicit, tightens the strong-saturation source, and marks all nine substantive steps non-elementary.",
+  "blueprint": "Main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2: the finite-coefficient mapping-complex adjunction and the subsequent R lim require coherent adjoints and limits; this is foundational infrastructure reached through the existing enriched-calculus chain, not a replacement for its derived-section computation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Its coherent coslice mapping-space fiber formula and Kan property identify the two finality mapping spaces as homotopy pullbacks, and identify the fiber over the identity in the locality proof; our unit has no such general quasicategory formula. This is a foundational tool, not a replacement for a coefficient or purity route. Its pointwise-equivalence criterion also justifies the transformations of space-valued diagrams in steps 3 and 7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-99b501392",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-99b501392 (reviewer sub-agent of L); spot-checked: Corrected the left-adjoint variance error (“corepresentable” to “representable”) and added required created.group metadata to all six new nodes. Detailed checks are in review.md; repaired whole-node JSON files are under fixes/dag/nodes/sec-six-functors/.; 6 file(s) fixed by the reviewer"
+ }
 }

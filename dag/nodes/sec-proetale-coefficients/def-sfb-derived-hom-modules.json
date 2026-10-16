@@ -3,25 +3,86 @@
  "blueprint": {
   "is": "def-sfb-derived-hom-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived internal hom of module objects",
- "statement": "For a commutative condensed ring $\\Lambda$ and a scheme $X$, the *derived internal hom*\n$$\n\\RHom_{\\Lambda_X}(-,-)\\colon D(\\Mod_{\\Lambda_X})^{\\mathrm{op}}\\times D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_X})\n$$\nis the internal hom of the closed monoidal structure on\n$(D(\\Mod_{\\Lambda_X}),\\otimes^{\\mathrm L}_{\\Lambda_X})$ [def-sfb-derived-tensor-modules],\n[lem-sfb-derived-monoidal-closed].",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $X$ a scheme. Put $\\Lambda_X=p_X^*\\Lambda$, the commutative ring object of [sk-def-sfb-pulled-back-coefficients], and let $\\Mod_{\\Lambda_X}=\\Mod_{\\Lambda_X}(\\Sh(X_{\\mathrm{proét}},\\Ab))$ be the category of module objects of [sk-def-sfb-module-objects]. Write $\\mathcal D=D(\\Mod_{\\Lambda_X})$ for its unbounded derived category [def-weil-abstract-derived-category], with the relative derived tensor product of [def-sfb-derived-tensor-modules].\n\nThe *derived internal hom* is the internal-hom bifunctor of this closed monoidal structure [lem-sfb-derived-monoidal-closed]:\n$$\n\\RHom_{\\Lambda_X}(-,-)\\colon\\mathcal D^{\\mathrm{op}}\\times\\mathcal D\\longrightarrow\\mathcal D.\n$$\nExplicitly, for fixed $K\\in\\mathcal D$, $\\RHom_{\\Lambda_X}(K,-)$ is the right adjoint supplied by the closed structure to $K\\otimes^{\\mathrm L}_{\\Lambda_X}-$; its defining adjunction has bijections\n$$\n\\operatorname{Hom}_{\\mathcal D}(K\\otimes^{\\mathrm L}_{\\Lambda_X}M,N)\n\\cong\\operatorname{Hom}_{\\mathcal D}(M,\\RHom_{\\Lambda_X}(K,N)).\n$$\nThe dependence on $K$ is contravariant and that on $N$ is covariant, as in the internal hom of any closed monoidal category.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-hom-modules.md",
   "place": "node def-sfb-derived-hom-modules, order 1623"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
   "def-sfb-derived-tensor-modules",
   "lem-sfb-derived-monoidal-closed"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived internal Hom of module objects over a commutative condensed ring on a scheme is the internal Hom bifunctor of the closed monoidal unbounded derived category.",
+   "results": "LightCondensed.ihomPoints; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.ihomPoints_apply; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; AlgebraicGeometry.Scheme.Modules.pseudofunctor; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints_symm_apply.",
+   "date": "2026-10-16",
+   "verdict": "no match: these concern underived light condensed modules over an ordinary ring, or modules over the scheme structure sheaf, not the unbounded derived category of internal modules over a pulled-back arbitrary condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|derivedHom",
+   "results": "15 hits in CategoryTheory/Monoidal, including Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:292 internalHom, :296 its right-adjoint instance, :305 internalHomAdjunction₂; other hits use the generic functor in Arrow, PushoutProduct, functor categories and Day convolution.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.MonoidalClosed.internalHom, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:292-294, specializes in one line to the closed monoidal derived category already named in the statement dependencies; the generic adjunction is at lines 305-307.",
+   "sub": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived internal Hom of module objects over a commutative condensed ring is the internal Hom of a monoidal closed derived category.",
+   "results": "CategoryTheory.MonoidalClosed.closed; CategoryTheory.internalHom; CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.ihom; CategoryTheory.Pi.ihom; ModuleCat.monoidalClosed_uncurry; ModuleCat.monoidalClosed_curry; CategoryTheory.MonoidalClosed.internalHom_obj.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.MonoidalClosed.internalHom, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:292-294, specializes in one line to the closed monoidal derived category already named in the statement dependencies; the generic adjunction is at lines 305-307."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.internalHom",
+   "results": "12 hits including CategoryTheory.MonoidalClosed.internalHom; internalHomAdjunction₂; instIsRightAdjointObjOppositeFunctorInternalHom; internalHom_obj; internalHomAdjunction₂_adj; internalHom_map, plus six Arrow PullbackHom lemmas.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.MonoidalClosed.internalHom, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:292-294, specializes in one line to the closed monoidal derived category already named in the statement dependencies; the generic adjunction is at lines 305-307."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed category, define the internal Hom bifunctor contravariant in its first argument by the right adjoints to tensorLeft.",
+   "results": "CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.internalHom; CategoryTheory.MonoidalClosed.closed; CategoryTheory.ihom; CategoryTheory.ihom.adjunction; CategoryTheory.exp; CategoryTheory.Exponentiable.mk; CategoryTheory.MonoidalClosed.curry.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.MonoidalClosed.internalHom, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:292-294, specializes in one line to the closed monoidal derived category already named in the statement dependencies; the generic adjunction is at lines 305-307."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed monoidal category the right adjoints to left tensoring form a functor C opposite to the category of endofunctors of C.",
+   "results": "8 hits: CategoryTheory.internalHom; CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.Closed.rightAdj; CategoryTheory.exp; CategoryTheory.ihom; CategoryTheory.Functor.functorCategoryClosed; CategoryTheory.MonoidalClosed.FunctorCategory.adj; CategoryTheory.Functor.functorCategoryMonoidalClosed.",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader phrasing returns CategoryTheory.MonoidalClosed.internalHom. Read the pinned Basic.lean:292-294 and 82-83, 305-307; these define exactly the bifunctor and displayed adjunction after specializing the input category."
+  },
+  {
+   "tool": "grep",
+   "query": "def internalHom|def adjunction|def internalHomAdjunction",
+   "sub": "CategoryTheory/Monoidal/Closed",
+   "results": "3 hits, all in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:82 def adjunction, :292 def internalHom, :305 def internalHomAdjunction₂.",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader grep confirms the declarations and line numbers in the pinned source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MonoidalClosed.internalHom",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+  "line": 292,
+  "how": "specializes in one line: take C = D(Mod_{Λ_X}(Sh(X_proet, Ab))) with the relative derived monoidal structure of def-sfb-derived-tensor-modules and its closedness from lem-sfb-derived-monoidal-closed. CategoryTheory.MonoidalClosed.internalHom at lines 292-294 is exactly the internal-Hom bifunctor used to define RHom, with obj X = ihom X.unop and map f = pre f.unop. The fixed-K defining adjunction is CategoryTheory.ihom.adjunction at lines 82-83; its natural Hom equivalence is the displayed universal property. CategoryTheory.MonoidalClosed.internalHomAdjunction₂ at lines 305-307 gives naturality in K. All these declarations are in the same file. The retained statement dependencies supply the coefficient-specific input category and closed derived tensor structure; this leaf does not claim that Mathlib constructs those input structures."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -41,5 +102,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-hom-modules",
+  "worker": "stage1",
+  "summary": "Read the current chapter, unit, definition and unit proof, the exact reference-master module-object definition, all six statement dependencies, and pinned Mathlib source. No matching module-object declaration exists in slopmaster2. The actual semantic searches, fully qualified Loogle search and grep identify CategoryTheory.MonoidalClosed.internalHom: the definition is its one-line specialization to the closed derived category already specified by the retained dependencies. Corrected the earlier sandbox classification from split to mathlib, with exact file and lines; the generic construction need not itself rebuild the project-specific input structures. Expanded only the constituent notation and defining adjunction, without changing hypotheses or coefficient categories. No new nodes or proof steps.",
+  "blueprint": "Realizes the entire definition def-sfb-derived-hom-modules.md, the Layer B instance of the Internal hom bullet of sk-def-sfb-derived-tensor-hom/_section.md, and the third paragraph of its unit proof. The individual definition has no proof object. Mathlib internalHom defines the functor on the closed derived monoidal structure supplied by the existing dependencies.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-6bf9f1661",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-6bf9f1661 (reviewer sub-agent of L); spot-checked: Read the full item, blueprint route, all six cited dependency statements, exact module-object master source (Hom.lean:58–73), and pinned Mathlib internalHom/adjunction declarations (Basic.lean:82–83, 290–307). The pulled-back condensed-ring module category, relative derived tensor, hypotheses, variance, adjunction, edge cases, searches, duplicate checks, and route all agree. No new nodes, repairs, SGA citations, or mathematical gaps. Review written to review.md."
+ }
 }
