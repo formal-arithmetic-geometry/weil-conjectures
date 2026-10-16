@@ -235,5 +235,28 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-db0f1b4d9 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the one new node (lem-coef-fixed-object-scat-left-proper) and the full statements of the 5 cited nodes: interval-lifting, realization-finite-limits, kan-quillen-right-proper, filtered-colimit-weak-equivalences and the new node. I also read both citers of the item (coherent-nerve-comparison and rigidification-equivalence-detection), the unit file and the main-20261015 proof of the ancestor (prop-coef-integral-exceptional-adjoint). Source check: network access is blocked for reviewers, so I could not reopen Bergner math/0406507, Dwyer-Kan Prop. 7.3 or Kerodon 00XE (none is in literature/; the WANTED lines are kept). Instead I checked each step against the cited statements. The item statement is unchanged and is Bergner's theorem: the DK class is retract-closed and has two-out-of-three, and J-cell maps are DK with no Kan condition, exactly as the citers use it. Step 1: edge homotopies are realized through k-space products and the (|Δ^1|,|∂Δ^1|) pair; correct. Step 2: I checked all three two-out-of-three cases, including the e'kv comparison square and retract essential surjectivity. Step 3: the free-arrow bijection and the T_F device work, including a=b. Step 4: X→H' and X→C'' are cofibrations and q' is an objectwise trivial fibration. Step 5: two left-properness pushouts in sCat_X with every hypothesis met. Step 6: the explicit P'' conjugation formula, the square with q, and y≅x in π0D. Step 7: the directed colimit is computed on mapping sets. Step 8: the constant source over a filtered tail, the empty start, and essential surjectivity. Step 9: the single-cell refinement is elementary. New node: it is true. I checked it independently: reduce to I-cell attachments, filter by word length, then use the gluing lemma in left-proper sSet, as in HTT A.3.2. It holds for O empty and O a singleton. It does not restate the item and is not a duplicate: all-cofibrant-left-proper needs all objects cofibrant; fixed-object-simplicial-free-calculus gives only free-product invariance and sits above the item, so citing it would make a cycle. Its searches cover all three kinds and its blueprint fields are correct. No cycles, everything is in one unit, no tool_uses, no SGA. The fix: in fixes/, only step 4's text changes, saying that the cofibrant replacement q comes from factoring O→C as a cofibration followed by an objectwise trivial Kan fibration. The step's later claim that q' is a trivial fibration needs this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialIntervalCellStability",
+  "declaration": "SSet.Bergner.simplicial_interval_cell_stability",
+  "declarations": [
+   "SSet.Bergner.dwyerKanEquivalences",
+   "SSet.Bergner.simplicial_interval_cell_stability"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialIntervalCellStability.lean",
+  "statement": "theorem simplicial_interval_cell_stability : dwyerKanEquivalences.{u}.IsStableUnderRetracts ∧ dwyerKanEquivalences.{u}.HasTwoOutOfThreeProperty ∧ ∀ (R : IntervalRepresentatives.{u}), cells (J R) ≤ dwyerKanEquivalences.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The real definition of W bundles the existing CategoryTheory.DwyerKanEquivalence predicate; no second definition of DK equivalence. Uses the landed Bergner IntervalRepresentatives, J and cells with no Kan restriction. The theorem asserts retract closure, all three two-out-of-three cases and every relative J-cell map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c51045e9f",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node (9 steps), Bergner source place, dependency SimplicialIntervalLifting (cells/J/IsInterval/IntervalRepresentatives), CoherentNerveComparison DK predicates, EnhancedDiagramsCones weak equivalence, Mathlib retract/2-of-3/transfinite-composition defs. Lean matches every clause: W wraps the existing DwyerKanEquivalence (local weak equivalences + pi0 full faithfulness and essential surjectivity), IsStableUnderRetracts, HasTwoOutOfThreeProperty (all 3 cases), forall R, cells (J R) <= W with transfinite composites and pushouts of coproducts, no Kan hypothesis, single universe u. Edge cases (empty category, empty->nonempty excluded, empty coproducts, zero-length composites, horns n>=1, coincident objects) fine. Gates: real def, sole sorry, docstrings with source/blueprint and all 9 steps, lines <=100, imports per rule 7. Node differs from base only in lean; statement verbatim. nt_compile --json local overlay rc=0, no warnings. Note for stage 3: importing CoherentNerveComparison means the reverse proof-dep import must be left out (rule 7), and stage 3 will need the DK predicates in a lower module."
  }
 }

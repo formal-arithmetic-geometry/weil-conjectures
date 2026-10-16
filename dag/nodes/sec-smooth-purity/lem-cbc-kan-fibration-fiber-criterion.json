@@ -325,5 +325,30 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-88554e53b (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 8 cited statements in full. Kerodon 00ZP: the arbitrary-base equivalence trivial Kan <=> weak equivalence <=> contractible Kan fibers matches the item's three conditions, and no target is weakened. Kerodon 00UB: the new node is its true forward implication for arbitrary simplicial sets (single cylinder homotopies, either order). Mathlib leaf SSet.fibration_pullbackObjObjπ at PushoutProduct.lean:70-72 is an exact match: Fibration = J.rlp horn lifting including outer horns, Mono = degreewise injective. Steps 1-9 checked: Kan vertex fiber and k-fiber; pi0 via orbit/stabilizer; all pi_n vanish by exactness at every basepoint; step 4's contraction plus three corner-map lifts (monotone c, edge direction harmless, n=0 case); trivial Kan to weak equivalence via section and homotopy; endpoint map Kan; the P(f) pullback/composite argument, which is genuinely elementary; the monotone min homotopy; two-out-of-three in k-spaces with the strict fiber equal to the homotopy fiber; the empty-base cases. The item is not in its own 34-node closure, and none of its 5 citers is in that closure. All 6 declared tool_uses are accepted as generic black boxes. No new node duplicates or restates a clause of the item. Maintainer note: the existing nodes lem-coef-space-kan-fibration-fiber-criterion, lem-coef-space-path-fibration-replacement and lem-coef-space-contractible-fiber-equivalence are special cases or clauses of this item and are candidates for a later merge; proving those clauses in-unit is consistent with C7 and is not a fault. No fixes made. Minor: the item's source.place still mentions Kerodon 3.1.3.1. Review is in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFibrationFiberCriterion",
+  "declaration": "SSet.Enhanced.kan_fibration_fiber_criterion",
+  "declarations": [
+   "SSet.Enhanced.mappingPathSubcomplex",
+   "SSet.Enhanced.mappingPath",
+   "SSet.Enhanced.mappingPathProjection",
+   "SSet.Enhanced.mappingPathInclusion",
+   "SSet.Enhanced.kan_fibration_fiber_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanFibrationFiberCriterion.lean",
+  "statement": "theorem kan_fibration_fiber_criterion : (∀ (X Y : SSet.{u}) (p : X ⟶ Y), Fibration p → (IsWeakHomotopyEquivalence p ↔ modelCategoryQuillen.I.rlp p) ∧ (modelCategoryQuillen.I.rlp p ↔ ∀ y : Y _⦋0⦌, KanComplex (pullback (SSet.const (X := Δ[0]) y) p) ∧ IsContractible (pullback (SSet.const (X := Δ[0]) y) p))) ∧ (∀ (A B : SSet.{u}) [KanComplex A] [KanComplex B] (f : A ⟶ B), Fibration (mappingPathProjection f) ∧ IsWeakHomotopyEquivalence (mappingPathInclusion f) ∧ (IsWeakHomotopyEquivalence f ↔ ∀ b : B _⦋0⦌, IsContractible (homotopyFiber f b)))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad0475e44",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Checked all 12 clauses of the node against SSet.Enhanced.kan_fibration_fiber_criterion: Fibration = J.rlp (all horns, outer included; base and total space not assumed Kan); I.rlp = boundary lifting for n>=0 (boundary_zero); vertex fibres are the strict pullback along const y from Δ[0], required Kan and IsContractible; mapping path is a real degreewise subcomplex with ev0 γ = f a, projection is ev1, inclusion is the constant path with a real proof; homotopyFiber is the stmt dep's comma with both endpoint equations. Edge cases fine: n=0, empty base/fibre, empty Kan complexes, single universe u. lean.statement is verbatim in the file; node equals the side node apart from the lean record. Docstrings carry the source place, blueprint id and all nine proof steps. Report has a real Worker report and a substantive Second reading by Q110. Imports: stmt dep public; the five proof deps with a recorded module or Mathlib match imported privately; the three unrecorded ones correctly absent. No hollow definition, only the main theorem uses sorry, no line over 100 chars, no duplicate mappingPath definition. nt_compile.py --json against the side overlay: rc=0, no errors or warnings (warn.sorry=false). Minor: source.place still mentions Kerodon 3.1.3.1, harmless. No fixes."
  }
 }

@@ -27,7 +27,8 @@
   "place": "Cisinski, Higher Categories and Homotopical Algebra, July 30, 2026 revision: Theorem 7.9.8, printed pp. 409-412, applied to the nerve of an ordinary bicomplete model category; Remark 7.9.7 supplies heredity from closure of sequential (trivial) cofibrations, while the dual of Definition 7.7.2 is satisfied by coproduct lifting in a bicomplete model category; Proposition 7.7.4 records the resulting localized (co)completeness. The comparison is induced by evaluation, so restriction and constants agree. Read online, not archived under literature/. No Stacks tag states this coherent rectification theorem."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -260,5 +261,30 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-08fbd6760 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and all six cited node statements in full. I also read the citer step in lem-coef-model-colimit-localization-comparison and paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint proof. I could not open Cisinski's CatLR: it is not archived and network access is blocked here. proof_origin is correctly 'agent', and I checked every statement mathematically myself. Item: the statement is unchanged and true. It is the rectification theorem for ordinary model categories with functorial factorizations. Edge cases I∅ and I=* both work, and with W the isomorphisms it reduces to the ordinary functor comparison. Steps: step 1's cofibrant replacement is valid (2-of-3 and naturality). In step 2 I checked every cocompletion hypothesis for Fun(I,M_c) with pointwise classes: pushouts, coproducts, factorizations and the constant initial object. Step 3 uses the Brown split factorization exactly as stated (i,s in C; p in F∩W; ps=1) to show coproducts preserve W, and the adjunction descent is correct. Step 4's co-Yoneda extension, small final K_F and adjoint criterion are right. Step 5's triangle identity and the free-density generation are right. Step 6's transfer, restriction and constants are right. New nodes: cocomplete-cofibration-localization is true (all-cofibrant Brown lemma plus coproducts and pushouts) and is not the finite dual brown-fibrant-localization-pullbacks. coherent-diagram-coyoneda has the correct N(I)^op variance; I checked its density by hand for I=[1]. free-diagram-homotopy-density is a generation statement with an independent bar-construction proof, so it is neither circular nor a clause of the item. All three nodes pass B1-B9; searches of all three kinds are recorded. There is no cycle: the 83 nodes reached from the item do not include it. The rg duplicate search found nothing. The declared tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. Fix (C1): steps 2 and 3 used componentwise detection of equivalences without citing it (W_I inversion; the identification ΘT(i,x)≃i!x). I added lem-cbc-enhanced-functor-cone-calculus to their uses; proof_deps is unchanged. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-small-diagram-model-rectification.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9ab16e3c",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Every node hypothesis is rendered exactly: universe and U-small Homs, U-small (co)limits, classes C/F/W, retract closure, two-out-of-three, both weak factorization systems with functorial factorizations, and q via the landed IsLocalization; no extra assumptions. Conclusion: conj1 says the evaluation comparison is a localization at W.functorCategory I; conj4 gives, for every localization r, an equivalence Theta with r≫Theta naturally equivalent to the comparison; conj2 (restriction over N(J⥤I)) and conj3 (constants) are strict equations, checked true by hand. Universes are consistent (max u v t throughout, v separate from u, t free). Edge cases empty I, one-object I, infinite discrete I and W = isos are covered. Node differs from the side clone only in lean and an acyclic stmt_deps addition; the recorded signature matches the file verbatim. Helpers are real maps, only the main proof is sorry, docstrings carry source and blueprint tag, no duplicate declaration found. nt_compile --json with the side overlay: clean, rc=0, and a deliberately broken /tmp copy errors as expected. Cisinski's PDF could not be opened here (no network), so the statement was judged on the mathematics. Cosmetic only: report.md lines 8 and 151 have '(the project server)' where equation numbers were meant."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallDiagramModelRectification",
+  "declaration": "HomotopicalAlgebra.SmallDiagram.small_diagram_model_rectification",
+  "declarations": [
+   "HomotopicalAlgebra.SmallDiagram.strictRestriction",
+   "HomotopicalAlgebra.SmallDiagram.coherentRestriction",
+   "HomotopicalAlgebra.SmallDiagram.strictConstants",
+   "HomotopicalAlgebra.SmallDiagram.small_diagram_model_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallDiagramModelRectification.lean",
+  "statement": "theorem small_diagram_model_rectification (M : Type v) [Category.{u} M] [HasLimitsOfSize.{u, u} M] [HasColimitsOfSize.{u, u} M] (C F W : MorphismProperty M) [W.IsStableUnderRetracts] [W.HasTwoOutOfThreeProperty] [MorphismProperty.IsWeakFactorizationSystem C (F ⊓ W)] [MorphismProperty.IsWeakFactorizationSystem (C ⊓ W) F] [MorphismProperty.HasFunctorialFactorization C (F ⊓ W)] [MorphismProperty.HasFunctorialFactorization (C ⊓ W) F] (L : SSet.{max u v t}) (q : FiniteReedy.largeNerve.{v, u, max u v t} M ⟶ L) (hq : FiniteReedy.IsLocalization.{v, u, max u v t} W q) : (∀ (I : Type u) [Category.{u} I], FiniteReedy.IsLocalization.{max u v, u, max u v t} (W.functorCategory I) (FiniteReedy.comparison.{v, u, u, u, max u v t} I M L q)) ∧ (∀ (J I : Type u) [Category.{u} J] [Category.{u} I], strictRestriction.{u, v, t} J I M ≫ FiniteReedy.comparison.{v, u, u, u, max u v t} J M L q = (𝟙 _ ⊗ₘ FiniteReedy.comparison.{v, u, u, u, max u v t} I M L q) ≫ coherentRestriction.{u, max v t} J I L) ∧ (∀ (I : Type u) [Category.{u} I], strictConstants.{u, v, t} I M ≫ FiniteReedy.comparison.{v, u, u, u, max u v t} I M L q = q ≫ SSet.Enhanced.constantDiagrams (FiniteReedy.largeNerve.{u, u, max u v t} I) L) ∧ (∀ (I : Type u) [Category.{u} I] (A : SSet.{max u v t}) (r : FiniteReedy.largeNerve.{max u v, u, max u v t} (I ⥤ M) ⟶ A), FiniteReedy.IsLocalization.{max u v, u, max u v t} (W.functorCategory I) r → ∃ Θ : A ⟶ (ihom (FiniteReedy.largeNerve.{u, u, max u v t} I)).obj L, SSet.Enhanced.IsFunctorEquivalence Θ ∧ SSet.Enhanced.AreNaturallyEquivalent (r ≫ Θ) (FiniteReedy.comparison.{v, u, u, u, max u v t} I M L q))",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed definition-node interface def-coef-coherent-localization-interface (added to stmt_deps), without using the finite-Reedy theorem. The first conjunct realizes all localized diagram categories simultaneously by their canonical coherent-diagram presentations; the parametrized restriction identity retains every simplex of indexing functors and the final conjunct compares every alternative localization presentation."
  }
 }
