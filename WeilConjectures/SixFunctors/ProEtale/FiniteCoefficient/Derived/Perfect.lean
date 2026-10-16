@@ -683,6 +683,25 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c
     (Etale.boundedConstructible_derivedHom Λ aX a b 0 0 hK' hKt' hU hUt)
 
+/-- Blueprint `rem-ptr-pod-coefficient-dual-on-x-4`: Pointer to the properties of the coefficient
+dual.
+
+The coefficient dual `K^∨ = RHom(K, Λ_X)` of a perfect complex `K ∈ Dctf(X, Λ)` is again perfect,
+and it lies in `Dctf(X, Λ)`: these are the two clauses of `lem-pod-coefficient-dual-perfect`
+(`AlgebraicGeometry.ProEtale.isDualizable_derivedDual` and
+`AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`). -/
+theorem isDualizable_derivedDual_and_constructibleFiniteTor {k : Type u} [Field k] {p : ℕ}
+    [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [HasInvertibleExponent Λ X]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hKd : IsDualizable K) :
+    IsDualizable ((derivedDual (ModuleCat.{u + 1} Λ) X).obj (op K)) ∧
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+        ((derivedDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
+  ⟨isDualizable_derivedDual hKd, constructibleFiniteTor_derivedDual Λ (p := p) aX hK hKd⟩
+
 end ProEtale
 
 end AlgebraicGeometry
