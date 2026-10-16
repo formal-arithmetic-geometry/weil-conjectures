@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-cbc-bounded-representable-hypercover"
  ],
  "proof": [
   {
@@ -201,5 +202,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DenseRepresentableHypercovers",
+  "declaration": "CategoryTheory.DerivedHypersheaf.exists_small_dense_representable_hypercovers",
+  "declarations": [
+   "CategoryTheory.DerivedHypersheaf.exists_small_dense_representable_hypercovers"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DenseRepresentableHypercovers.lean",
+  "statement": "theorem exists_small_dense_representable_hypercovers {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) : ∃ κ : Cardinal.{max u w}, Cardinal.aleph0 < κ ∧ κ.IsRegular ∧ Cardinal.lift.{max u w} (Cardinal.mk (Σ X Y : C, (X ⟶ Y))) < κ ∧ (∀ (T : C) (U : AugmentedOver.{u, w} C T), IsHypercover J (augmentedOverToAugmented U) → ∃ V : AugmentedOver.{u, w} C T, IsHypercover J (augmentedOverToAugmented V) ∧ HasSummandBound V κ ∧ Nonempty (V ⟶ U)) ∧ ∃ (I : C → Type (max u w)) (H : ∀ T : C, I T → AugmentedOver.{u, w} C T), (∀ (T : C) (i : I T), IsHypercover J (augmentedOverToAugmented (H T i)) ∧ HasSummandBound (H T i) κ) ∧ (∀ (T : C) (U : AugmentedOver.{u, w} C T), IsHypercover J (augmentedOverToAugmented U) → HasSummandBound U κ → ∃! i : I T, Nonempty (H T i ≅ U)) ∧ (∀ (T : C) (U : AugmentedOver.{u, w} C T), IsHypercover J (augmentedOverToAugmented U) → ∃ i : I T, Nonempty (H T i ⟶ U))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10d3604cf",
+  "group": "N9",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: small site with no extra hypotheses; same-target refinement as a map in the slice over h_T; reused IsHypercover (degree-0 terminal, degree-1 fibre product, higher boundary limits in presheaves, epi after sheafification); uncountable regular kappa in Cardinal.{max u w} above all arrows; bounded hypercover refinement; one representative index per isomorphism class; density over the same target. The statement is true; the summand count does not depend on the presentation. New def node is not hollow, not a duplicate, has correct fields, and creates no dependency cycle. The item changed only in lean and stmt_deps. Docstrings carry source, blueprint tag and all 8 proof steps; single sorry; lean.statement fields verbatim. nt_compile of both files clean (rc=0, error reporting checked with a control). Edge cases (empty C, empty sieves and levels, n=0/1, degenerate summands, non-subcanonical sites, automorphisms) and universes checked; SmallCategory follows the size convention and the report says so. No blocking findings."
  }
 }
