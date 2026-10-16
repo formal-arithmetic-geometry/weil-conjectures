@@ -75,12 +75,18 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Compactification.Dense",
+  "declaration": "AlgebraicGeometry.exists_isDense_compactification",
   "declarations": [
    "AlgebraicGeometry.exists_isDense_compactification",
    "AlgebraicGeometry.Compactification.quasiCompact_openImmersion"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:00 UTC for group NH, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: The first gives the proper factorization with a scheme-theoretically dense open immersion under exactly the node’"
+  "statement": "theorem exists_isDense_compactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] :\n    ∃ c : Compactification f, c.IsDense :=",
+  "branch": "slopmaster2",
+  "by": "Q90",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing upstream declaration in WeilConjectures.Compactification.Dense (theorem at lines 75–78). Under the project convention, finite type means quasi-compact and locally of finite type; the theorem has exactly those hypotheses, together with separatedness and a quasi-compact quasi-separated base. Its conclusion is existence of a Compactification whose open immersion is scheme-theoretically dominant, i.e. a dense compactification. The companion theorem Compactification.quasiCompact_openImmersion records that the open immersion is quasi-compact under the QuasiCompact f hypothesis."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -112,5 +118,13 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-thm-nagata-compactification"
+ "unit": "sk-thm-nagata-compactification",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0bb536b2",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Existing binding to AlgebraicGeometry.exists_isDense_compactification (WeilConjectures.Compactification.Dense L75-77), with companion Compactification.quasiCompact_openImmersion. Only the item's lean field and the report changed, and the record is complete. The statement is verbatim from the source file (live tree and slopmaster2 identical). Node statement is verbatim main-20261015 _section.md. Clauses match: qcqs base = CompactSpace+QuasiSeparatedSpace; separated; finite type = LocallyOfFiniteType+QuasiCompact; Compactification gives proper g, open immersion i, f = i ≫ g; quasi-compactness of i via the companion theorem; IsDense = IsSchemeTheoreticallyDominant, equivalent to O→j_*O injective for qc i. No extra hypotheses; single universe u. Edge cases checked: empty X, empty S, proper f, nonreduced. Axioms are propext/Classical.choice/Quot.sound. nt_compile probe (imports Dense + Sheaf BoundaryRefinement; checks both declarations and proves qc ∧ dominant ∧ app-injective from the theorem) is clean. Worker report and Second reading by Q90 are present and accurate. No findings beyond a cosmetic wording point in the worker report."
+ }
 }
