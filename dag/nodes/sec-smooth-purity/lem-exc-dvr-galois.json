@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-exc-dvr-galois",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The prime-to-characteristic local Galois calculation",
- "statement": "Let $R$ be an excellent discrete valuation ring which is\nstrictly henselian,\nwith algebraically closed residue field of characteristic $p>0$.\nPut $F=\\operatorname{Frac}(R)$, let $G=\\operatorname{Gal}(F^{\\rm sep}/F)$,\nand fix $\\ell\\neq p$. If $A$ is a finite ring killed by a power\nof $\\ell$, then for every\ndiscrete continuous\n$A[G]$-module $M$ one has\n\n$$\nH^q(G,M)=0\\quad(q>1).\n$$\n\nIf $M$ is finite, then $H^0(G,M)$ and $H^1(G,M)$ are finite.",
+ "statement": "Let $R$ be an excellent discrete valuation ring [def-exc-excellent-ring, def-sc-discrete-valuation-ring] which is\nstrictly henselian [def-weil-pbc-henselian-terminology],\nwith algebraically closed residue field of characteristic $p>0$.\nPut $F=\\operatorname{Frac}(R)$, let $G=\\operatorname{Gal}(F^{\\rm sep}/F)$,\nand fix a prime $\\ell\\neq p$. If $A$ is a finite ring killed by a power\nof $\\ell$, then for every\ndiscrete continuous\n$A[G]$-module $M$, with cohomology as in [def-exc-continuous-cohomology], one has\n\n$$\nH^q(G,M)=0\\quad(q>1).\n$$\n\nIf $M$ is finite, then $H^0(G,M)$ and $H^1(G,M)$ are finite.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-dvr-galois.md",
   "place": "node lem-exc-dvr-galois, order 1916",
@@ -18,53 +18,142 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-exc-continuous-cohomology"
+ ],
  "proof": [
   {
-   "text": "We give the ramification and homological calculations separately.\nFor a finite Galois extension of $F$, the integral closure of $R$\nis finite by excellence and is local by henselianity. Its residue field\nis the given algebraically closed field. If $t$ is a uniformizer\nof that integral closure, the map\n$\\sigma\\mapsto\\sigma(t)/t\\bmod t$ is the tame inertia character.\nIts image is a finite cyclic group of order prime to $p$.\nIts kernel is a $p$-group: filter the kernel by the order of\n$\\sigma(t)-t$; the successive nontrivial quotients embed in the\nadditive residue field and hence have exponent $p$, and the\nfiltration terminates for a finite group. The equality between degree\nand ramification index used here follows from the length of the finite\nfree integral closure modulo a uniformizer. This is the elementary\ndiscrete-valuation ramification calculation; for its algebraic formulation\nsee [Stacks Project,\nSection 15.114](https://stacks.math.columbia.edu/tag/09E3).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Taking inverse limits of finite Galois extensions therefore gives\n\n$$\n1\\longrightarrow P\\longrightarrow G\\longrightarrow\n\\prod_{r\\neq p}\\mathbf Z_r(1)\\longrightarrow1,\n$$\n\nwhere $P$ is pro-$p$. The tame quotient is the whole displayed\nproduct: for every $m$ prime to $p$, the roots of unity lift to\n$R$ by the henselian property of\n[def-weil-pbc-henselian-terminology], and adjoining an $m$-th\nroot of a uniformizer gives a cyclic extension of degree $m$.\nLet $H$ be the inverse image of\n$\\prod_{r\\neq p,\\ell}\\mathbf Z_r(1)$. Every finite quotient of\n$H$ has order prime to $\\ell$, and $G/H=\\mathbf Z_\\ell(1)$.",
+   "text": "The strictly henselian ring in the statement is henselian by [def-weil-pbc-henselian-terminology]. Apply [lem-exc-henselian-dvr-tame-sequence] to this excellent DVR $R$ with its algebraically closed residue field of characteristic $p>0$ and fraction field $F$. Fix the continuous surjection $\\theta:G\\to T=\\prod_{r\\neq p}(\\mathbf Z_r,+)$ supplied by that lemma, with closed normal pro-$p$ kernel $P$ and topological quotient $G/P\\cong T$.",
    "uses": [
+    "lem-exc-henselian-dvr-tame-sequence",
     "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, first two paragraphs; finite and infinite ramification calculation made a structural dependency"
+   }
   },
   {
-   "text": "The functor $M\\mapsto M^H$ is exact. Indeed, to lift an invariant\nelement through a surjection, first choose any lift. Its finite orbit\ngenerates a finite module, since $A$ is finite. Its action factors\nthrough a finite quotient $Q$ of $H$. Averaging the lift by\n$|Q|^{-1}\\sum_{h\\in Q}h$ gives an invariant lift. Thus its\nhigher derived functors vanish. It also sends injectives to injectives\nas a functor to $G/H$-modules, since its left adjoint is exact\ninflation. Applying it to an injective resolution, and then taking\n$G/H$-invariants, gives\n\n$$\nR\\Gamma(G,M)=R\\Gamma(\\mathbf Z_\\ell(1),M^H)\n$$\n\nfor the continuous cohomology of [def-exc-continuous-cohomology].",
-   "uses": [
-    "def-exc-continuous-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a topological generator $\\tau$ of $\\mathbf Z_\\ell(1)$.\nIts continuous invariants are computed by\n\n$$\n[\\,M^H\\xrightarrow{\\tau-1}M^H\\,]\n\\quad\\text{in degrees }0,1.\n$$",
+   "text": "Let $B=\\prod_{r\\neq p,\\ell}\\mathbf Z_r$, and let $H=\\ker(\\operatorname{pr}_{\\ell}\\circ\\theta)$, a closed normal subgroup of $G$. Then $H/P\\cong B$ and $G/H\\cong(\\mathbf Z_\\ell,+)$ as topological groups. For a finite continuous quotient $Q$ of $H$, the image of $P$ is a finite continuous quotient of $P$, hence a $p$-group by Step 1. The quotient of $Q$ by this image is a finite continuous quotient of $B$. Its kernel is open, so it contains a basic open subgroup restricting only finitely many coordinates to $r^{n_r}\\mathbf Z_r$; consequently this quotient is a quotient of a finite product of groups $\\mathbf Z/r^{n_r}\\mathbf Z$ with $r\\neq\\ell$. Its order is prime to $\\ell$. The order formula for a finite group and a normal subgroup now shows $\\ell\\nmid |Q|$. The topological quotient identifications follow from the continuous surjections between compact Hausdorff groups.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, second paragraph, construction of H and its finite quotients"
+   }
   },
   {
-   "text": "This formula is [lem-exc-procyclic-two-term], applied after\nidentifying the chosen generator with $1\\in\\mathbf Z_\\ell$.\nIt proves vanishing above degree one. If $M$ is finite, both\nterms are finite; their kernel and cokernel are finite as well.",
+   "text": "Write $\\mathcal C_G$ and $\\mathcal C_{G/H}$ for the categories in [lem-exc-discrete-modules-abelian]. Choose $s\\geq0$ with $\\ell^s A=0$. Define $V:\\mathcal C_G\\to\\mathcal C_{G/H}$ by $V(N)=N^H$ with the induced action and restriction on morphisms. Restrictions of sums of morphisms are sums, so $V$ is additive. Normality of $H$ makes $N^H$ stable under $G$; its stabilizers in $G/H$ are open because their preimages are the open stabilizers in $G$ of its elements. Kernels are preserved: an element of the kernel is $H$-fixed exactly when it belongs to the kernel of the restricted map. For a surjection $N\\to N'$ and $y\\in(N')^H$, choose a lift $x\\in N$. The $H$-orbit of $x$ is finite because its stabilizer is open in the compact group $H$. The $A$-span $L$ of this orbit is a finite, $H$-stable module, since $A$ is finite. Intersect the stabilizers of all elements of $L$ to obtain an open normal subgroup $U\\triangleleft H$ acting trivially on $L$. Thus $Q=H/U$ acts on $L$, and Step 2 gives $\\ell\\nmid |Q|$. Choose integers $a,b$ with $a|Q|+b\\ell^s=1$, where $\\ell^sA=0$. The element $x_0=a\\sum_{q\\in Q}qx$ is independent of coset representatives, is fixed by $H$, and maps to $a|Q|y=y$. This proves surjectivity on fixed elements. Exactness on underlying modules is exactness in both categories by the cited node, so $V$ is exact.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, third paragraph, the averaging argument with its finite quotient and inverse of the group order written out"
+   }
+  },
+  {
+   "text": "Let $\\operatorname{Inf}:\\mathcal C_{G/H}\\to\\mathcal C_G$ be inflation along $G\\to G/H$: it keeps the underlying $A$-module and precomposes the action. The inverse image of an open stabilizer is open, so inflation is defined. It preserves monomorphisms, since these are underlying injections by [lem-exc-discrete-modules-abelian]. A $G$-equivariant map $\\operatorname{Inf}(X)\\to N$ has image in $N^H$, and factoring through this submodule gives exactly a $(G/H)$-equivariant map $X\\to V(N)$; the two operations are inverse. To check that $V(I)$ is injective when $I$ is injective, take a monomorphism $X\\hookrightarrow Y$ and a map $X\\to V(I)$. The corresponding map $\\operatorname{Inf}(X)\\to I$ extends to $\\operatorname{Inf}(Y)\\to I$ by the definition of injectivity in [def-sp-injective-resolutions]. Factoring the extension through $V(I)$ extends the original map. This proves that $V(I)$ is injective.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, third paragraph, exact inflation and preservation of injectives by the fixed-submodule functor"
+   }
+  },
+  {
+   "text": "Choose an injective resolution $M\\to I^\\bullet$ in $\\mathcal C_G$, which exists by [lem-exc-discrete-modules-abelian]. Step 3 makes $M^H\\to V(I^\\bullet)$ exact, and Step 4 makes every $V(I^n)$ injective in $\\mathcal C_{G/H}$; thus it is an injective resolution there. For each term one has $(I^n)^G=((I^n)^H)^{G/H}$ as the very same submodule of $I^n$, and the differentials on these submodules are the same restrictions. By the injective-resolution definition of continuous cohomology in [def-exc-continuous-cohomology] and of right derived functors in [def-sp-left-exact-additive], this single complex therefore computes both $H^q(G,M)$ and $H^q(G/H,M^H)$. Identifying $G/H$ with $\\mathbf Z_\\ell$ from Step 2 just relabels the action through the topological group isomorphism: the equivariant maps and fixed submodules are identical under that relabelling. Consequently $H^q(G,M)\\cong H^q(\\mathbf Z_\\ell,M^H)$ for every $q\\geq0$.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian",
+    "def-exc-continuous-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, third paragraph, comparison by the same injective-resolution complex"
+   }
+  },
+  {
+   "text": "The submodule $M^H$ is a discrete continuous $A[\\mathbf Z_\\ell]$-module by Step 3 and the topological identification of Step 2, and $\\ell^sM^H=0$ because $\\ell^sA=0$. Apply [lem-exc-procyclic-two-term] with the prime $\\ell$, the finite ring $A$, and this module, using the generator $1\\in\\mathbf Z_\\ell$. Its two-term complex $[M^H\\xrightarrow{\\tau-1}M^H]$ computes the right-hand cohomology of Step 5. The complex is zero outside degrees zero and one, so its cohomology vanishes in every degree $q>1$. Its degree-zero cohomology is $\\ker(\\tau-1)$ and its degree-one cohomology is $M^H/(\\tau-1)M^H$. If $M$ is finite, its submodule $M^H$ is finite, and these kernel and quotient sets are finite. The identification in Step 5 proves both finiteness clauses and the required vanishing for $G$.",
    "uses": [
     "lem-exc-procyclic-two-term"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+    "place": "Proof, final two paragraphs, procyclic calculation and finiteness"
+   }
   }
  ],
  "proof_deps": [
+  "lem-exc-henselian-dvr-tame-sequence",
   "def-weil-pbc-henselian-terminology",
+  "lem-exc-discrete-modules-abelian",
+  "def-sp-injective-resolutions",
   "def-exc-continuous-cohomology",
+  "def-sp-left-exact-additive",
   "lem-exc-procyclic-two-term"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-dvr-galois.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-dvr-galois.proof.md",
+  "place": "All paragraphs, with Stacks Tag 0BUB for the ramification dependency and explicit averaging and injective-resolution arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tameInertia|wildInertia|cohomologicalDimension|procyclic",
+   "results": "0 hits; none. ",
+   "date": "2026-10-16",
+   "verdict": "No match: inertia definitions, finite-extension degree formulas, Hilbert 90, and continuous-cohomology infrastructure do not state this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, groupCohomology",
+   "results": "0 hits; none. ",
+   "date": "2026-10-16",
+   "verdict": "No match: inertia definitions, finite-extension degree formulas, Hilbert 90, and continuous-cohomology infrastructure do not state this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Galois cohomology of the fraction field of a strictly henselian discrete valuation ring vanishes above degree one for prime to residue characteristic torsion",
+   "results": "[leansearch] OK 8 hit(s); continuousCohomology (Mathlib.Algebra.Category.ContinuousCohomology.Basic); ContinuousCohomology.MultiInd.complex (Mathlib.Algebra.Category.ContinuousCohomology.Basic); groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units (Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90); ContinuousCohomology.continuousCohomologyZeroIso (Mathlib.Algebra.Category.ContinuousCohomology.Basic); cyclotomicCharacter.continuous (Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter); groupCohomology.H1ofAutOnUnitsUnique (Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90); ContinuousCohomology.kerHomogeneousCochainsZeroEquiv (Mathlib.Algebra.Category.ContinuousCohomology.Basic); ContinuousCohomology.homogeneousCochains (Mathlib.Algebra.Category.ContinuousCohomology.Basic)",
+   "date": "2026-10-16",
+   "verdict": "No match: inertia definitions, finite-extension degree formulas, Hilbert 90, and continuous-cohomology infrastructure do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an excellent strictly henselian discrete valuation ring with algebraically closed residue characteristic p, the absolute Galois group has ell cohomological dimension one and finite H0 and H1 for finite ell primary modules",
+   "results": "[leanfinder] OK 8 hit(s); Field.absoluteGaloisGroup (Mathlib/FieldTheory/AbsoluteGaloisGroup); Field.absoluteGaloisGroupAbelianization (Mathlib/FieldTheory/AbsoluteGaloisGroup); Field.instGroupAbsoluteGaloisGroup (Mathlib/FieldTheory/AbsoluteGaloisGroup); WittVector.isocrystal_classification (Mathlib/RingTheory/WittVector/Isocrystal); Field.instTopologicalSpaceAbsoluteGaloisGroup (Mathlib/FieldTheory/AbsoluteGaloisGroup); groupCohomology.exists_mul_galRestrict_of_norm_eq_one (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90); Algebra.IsStandardSmooth.subsingleton_h1Cotangent (Mathlib/RingTheory/Smooth/StandardSmoothCotangent); IsGaloisGroup.iff_isFractionRing (Mathlib/FieldTheory/Galois/IsGaloisGroup)",
+   "date": "2026-10-16",
+   "verdict": "No match: inertia definitions, finite-extension degree formulas, Hilbert 90, and continuous-cohomology infrastructure do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to residue characteristic torsion modules over a local field with separably closed residue field have zero continuous Galois cohomology in degrees at least two",
+   "results": "[leanfinder] OK 8 hit(s); groupCohomology.Hilbert90.aux_ne_zero (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90); groupCohomology.exists_mul_galRestrict_of_norm_eq_one (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90); groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90); groupCohomology.Hilbert90.aux (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90); isZero_groupCohomology_succ_of_subsingleton (Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic); Field.absoluteGaloisGroupAbelianization (Mathlib/FieldTheory/AbsoluteGaloisGroup); IsLocalRing.finrank_cotangentSpace_eq_zero (Mathlib/RingTheory/Ideal/Cotangent); groupCohomology.H1ofAutOnUnitsUnique (Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90)",
+   "date": "2026-10-16",
+   "verdict": "No match: inertia definitions, finite-extension degree formulas, Hilbert 90, and continuous-cohomology infrastructure do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.*dimension|procyclic|tame.*inertia|IsDiscreteValuationRing",
+   "results": "[grep] OK 0 hit(s); none; searched Mathlib/RepresentationTheory",
+   "date": "2026-10-16",
+   "verdict": "No match: no procyclic or local Galois cohomological-dimension computation in this directory."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -91,5 +180,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-dvr-galois",
+  "worker": "stage1",
+  "summary": "Made ell explicitly prime (the source coefficient convention), supplied statement dependencies, isolated the structural tame Galois sequence, and wrote out the finite-quotient averaging, fixed-submodule/inflation lifting, common injective resolution, and two-term finiteness arguments. No Lean declaration attached and no Mathlib match found.",
+  "blueprint": "Steps 1-2 realize proof paragraphs 1-2, steps 3-5 realize paragraph 3, and step 6 realizes the final two paragraphs. Current main-20261015 has the same proof in sec-six-functors-basics; the inherited chapter/unit binding is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-discrete-modules-abelian",
+    "why": "Generic category infrastructure: exactness on underlying modules and enough injectives for discrete modules over either profinite group; the unit contains no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-discrete-modules-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-d6799c3f6",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-d6799c3f6 (reviewer sub-agent of L); spot-checked: Reviewed all six proof steps, the new tame-sequence node, cited DAG statements, current blueprint route, Stacks Tags 0BUA/0BUB, edge cases, searches, citations, and acyclicity. No mathematical or structural fault found; review written to review.md."
+ }
 }
