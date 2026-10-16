@@ -18,7 +18,7 @@
  },
  "proof": [
   {
-   "text": "Restrict G to the etale site over each weakly etale Y by the composite of Scheme.toProEt Y.left and MorphismProperty.Over.map for Y.hom. Their existing continuity instances make this a sheaf. Restrict alpha_U to Y times_X U, transpose using the etale inverse-image adjunction and evaluate at Y to construct beta_Y.",
+   "text": "For each pro-etale X-object Y, restrict G to Y_et along Scheme.toProEt Y.left followed by composition with Y.hom. Continuity makes this a sheaf G_Y. Restrict alpha_U along Y times_X U to define F to (Y.hom)_* G_Y. Transpose under the existing inverse-image adjunction and evaluate at the identity of Y; compose with e_F,Y and transport along the identity-object isomorphism to define beta_Y.",
    "uses": [
     "lem-weil-pbc-weakly-etale-composition-base-change",
     "lem-weil-pbc-etale-base-change-finite-limits"
@@ -26,17 +26,17 @@
    "elementary": false
   },
   {
-   "text": "The composition-unit equality proves naturality under Z to Y using hres. On etale U, the inverse-image/restriction unit formula identifies beta on the specified diagonal section with alpha_U, proving surjectivity.",
+   "text": "The inverse-image composition-unit identity and naturality identify successive local transposes with the transpose for the composite. Naturality of the chosen pullback-composition isomorphism and its explicit terminal transport, together with hres, show beta commutes with every pro-etale restriction. At an etale U, naturality along the diagonal and the local transpose unit equation give beta of the prescribed diagonal section equal to alpha_U. This constructs a preimage of every alpha.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
   },
   {
-   "text": "For any extension beta, its components on etale V over Y decode to a morphism Y.hom inverse image F to G restricted to Y_et. Naturality at Y times_X U to U and the diagonal formula fix its adjoint transpose. Injectivity of the etale adjunction hom equivalence identifies it with the constructed transpose. Evaluation at Y proves uniqueness and hence injectivity.",
+   "text": "For injectivity, suppose beta and gamma agree on the prescribed diagonal sections. Apply the local surjectivity of toSheafify to e_F,Y(s), obtaining a covering sieve of the terminal object of Y_et. The left Kan representative theorem expresses each local representative as restriction along a:V to Y times_X W of the inverse-image unit of t in F(W). The composition-unit equation, the explicit pullback-composition projections and the diagonal formula identify the decoded restriction of s to V with restriction of the prescribed diagonal section of t along V to W. Naturality of beta and gamma and their diagonal agreement imply equality on this covering sieve. Separatedness of G_Y then proves beta_Y(s)=gamma_Y(s). The argument does not require a point or a nonempty cover and applies to empty schemes and empty section sets.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-inverse-image-section-description-representation"
    ],
    "elementary": false
   }
@@ -45,13 +45,14 @@
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+  "lem-weil-pbc-etale-inverse-image-section-description-representation"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "D2 second reader, stage 3",
+  "agent": "F2 stage-3 worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0GLZ; explicit diagonal-unit construction and reduction"
+  "place": "Tag 0GLZ, sectionwise transpose; uniqueness by local left Kan representatives as in Etale Cohomology Tag 09XN",
+  "note": "Complete Lean proof, with private proved pullback and adjunction-pasting helpers. No inverse-image/restriction isomorphism or new sorry is needed."
  },
  "mathlib_searches": [
   {
@@ -123,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-2a5cd",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261016T015246-L-721346",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261016T025203-L-1450672",
+  "kind": "proof",
+  "note": "independent Codex review: Lean matches the node; existing unit body and theorem signature unchanged; only permitted DAG proof fields changed. Delivered module and sole direct importer ProEtaleComparisonSectionAdjunction compile cleanly; both public declarations use only propext, Classical.choice, Quot.sound."
  }
 }
