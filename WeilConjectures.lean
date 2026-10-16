@@ -1089,6 +1089,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantExtension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurveDualTateModule
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.CurvePairing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen

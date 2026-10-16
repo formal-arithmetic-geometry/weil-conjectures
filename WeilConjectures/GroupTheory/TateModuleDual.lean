@@ -228,4 +228,39 @@ lemma toZModPow_torsionDualLimitAddEquiv_apply (ψ : torsionDualLimit ℓ M) (t 
 
 end tateModule
 
+omit [Fact ℓ.Prime] in
+/-- **Divisibility of the torsion by counting.** If `M[ℓⁿ]` has `ℓ ^ (r n)` elements for every
+`n`, then every `y ∈ M[ℓⁿ]` is `ℓ • z` for some `z ∈ M[ℓⁿ⁺¹]`: the kernel of multiplication by
+`ℓ` from `M[ℓⁿ⁺¹]` to `M[ℓⁿ]` is `M[ℓ]`, with `ℓ ^ r` elements, so its image has `ℓ ^ (r n)`
+elements. -/
+theorem exists_zsmul_eq_of_natCard_torsionBy {r : ℕ} (hℓ : ℓ ≠ 0)
+    (hcard : ∀ n, Nat.card (AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n)) = ℓ ^ (r * n)) (n : ℕ)
+    (y : M) (hy : (ℓ : ℤ) ^ n • y = 0) : ∃ z : M, (ℓ : ℤ) • z = y := by
+  let φ : AddSubgroup.torsionBy M ((ℓ : ℤ) ^ (n + 1)) →+ AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n) :=
+    { toFun z := ⟨(ℓ : ℤ) • (z : M), AddSubgroup.zsmul_mem_torsionBy_pow z.2⟩
+      map_zero' := Subtype.ext (smul_zero _)
+      map_add' z z' := Subtype.ext (smul_add _ _ _) }
+  let eK : φ.ker ≃ AddSubgroup.torsionBy M ((ℓ : ℤ) ^ 1) :=
+    { toFun z := ⟨z.1.1, (Submodule.mem_torsionBy_iff _ _).2 (by
+        rw [pow_one]
+        exact congrArg Subtype.val (AddMonoidHom.mem_ker.mp z.2))⟩
+      invFun w := by
+        have hw : (ℓ : ℤ) • (w : M) = 0 := by
+          simpa using (Submodule.mem_torsionBy_iff _ _).1 w.2
+        exact ⟨⟨w.1, (Submodule.mem_torsionBy_iff _ _).2 (by rw [pow_succ, mul_smul, hw,
+          smul_zero])⟩, AddMonoidHom.mem_ker.2 (Subtype.ext hw)⟩
+      left_inv z := rfl
+      right_inv w := rfl }
+  have hfin : Finite (AddSubgroup.torsionBy M ((ℓ : ℤ) ^ (n + 1))) :=
+    Nat.finite_of_card_ne_zero (by rw [hcard]; exact pow_ne_zero _ hℓ)
+  have h1 := φ.ker.card_mul_index
+  rw [AddSubgroup.index_ker, Nat.card_congr eK, hcard, hcard, mul_one] at h1
+  have hrange : Nat.card φ.range = Nat.card (AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n)) := by
+    rw [hcard]
+    refine Nat.eq_of_mul_eq_mul_left (pow_pos (Nat.pos_of_ne_zero hℓ) r) ?_
+    rw [h1, ← pow_add, mul_add, mul_one, add_comm]
+  have : Finite φ.range := Set.finite_range φ
+  obtain ⟨z, hz⟩ := AddMonoidHom.range_eq_top.mp (AddSubgroup.eq_top_of_card_eq _ hrange) ⟨y, hy⟩
+  exact ⟨z, congrArg Subtype.val hz⟩
+
 end AddCommGroup
