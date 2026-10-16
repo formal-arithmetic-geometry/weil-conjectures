@@ -3,44 +3,181 @@
  "blueprint": {
   "is": "thm-sf-pf-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rational and algebraically closed stages",
- "statement": "In the setting of [def-sf-datum], let $K,L$ be obtained by\nrationalization from $\\mathcal O_E$-objects, or represented at a finite\nstage $E'/\\mathbf Q_\\ell$. Then $\\operatorname{PF}_{f,K,L}$ is an\nisomorphism over $E$ and over $\\overline{\\mathbf Q}_\\ell$, compatible with\nthe extension functors and with finite reduction.",
+ "statement": "Use the finite-field and coefficient setting of [def-sf-datum]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite coefficient field $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi_E$, and a separated finite-type morphism $f:X\\to Y$ of finite-type $k$-schemes. Use the completed integral operations and their rational and common-stage extensions [def-weil-derived-pullback-tensor-hom, def-weil-integral-rational-qbar-compact-support], and the projection transformation [def-sf-pf, def-exchange-projection]. Let $K_0\\in D^b_c(X,R)$ and $L_0\\in D^b_c(Y,R)$ be integral objects in the derived-complete sense [def-weil-derived-complete-integral-detailed]. Write $K=Q_XK_0$, $L=Q_YL_0$ in the raw rationalized categories [def-weil-rationalization-karoubi]. Then\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes_E^L L\\longrightarrow Rf_!(K\\otimes_E^L Lf^*L)\n$$\nis an isomorphism, natural in $K,L$ and compatible with rationalization and finite scalar extension. The same assertion holds over $\\overline{\\mathbf Q}_\\ell$ for objects represented by such objects over a common finite coefficient field, in the common-stage category [def-weil-algebraically-closed-coefficients], independently of that presentation. Compatibility with finite reduction means the following statement about the chosen integral representatives: $\\operatorname{PF}_{f,K_0,L_0}$ reduces to $\\operatorname{PF}_{f,K_{0,n},L_{0,n}}$ for $K_{0,n}=K_0\\otimes_R^L R/\\varpi_E^n$, $L_{0,n}=L_0\\otimes_R^L R/\\varpi_E^n$, compatibly for all $n\\geq1$, and its rationalization is the displayed field-stage map. No reduction of a field-coefficient object independent of its integral representative is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-pf-field/thm-sf-pf-field.md",
   "place": "node thm-sf-pf-field, order 2098"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-pf",
+  "def-exchange-projection",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof": [
   {
-   "text": "The projection transformation is that of [def-sf-pf]; rationalization\nis [def-weil-rationalization-karoubi].\nThe rationalization functor $-\\otimes^L_{\\mathcal O_E}E$ is exact,\ncommutes with $Rf_!$, $-\\otimes^L$ and $Lf^*$, and carries the\nmate-theoretic projection transformation to the mate-theoretic projection\ntransformation (the units and counits are transported, being those of the\naxioms); an exact functor carries isomorphisms to isomorphisms, so\n[thm-sf-pf-adic] gives the $E$-statement. For\n$\\overline{\\mathbf Q}_\\ell$, each object is represented over a finite stage\n$E'/\\mathbf Q_\\ell$ by [def-weil-algebraically-closed-coefficients],\nthe $E'$-statement is the previous paragraph, and compatibility with\nscalar extension makes the finite-stage system descend to the\n$2$-colimit.",
+   "text": "Fix the objects and morphism in the statement. The geometric and coefficient hypotheses are those of [def-sf-datum]. First apply [lem-coef-integral-residue-tor] to $K_0$ on $X$ and to $L_0$ on $Y$: these are derived-complete bounded constructible integral objects and $\\ell$ is invertible, so that lemma gives $D^b_c(-,R)=D^b_{ctf}(-,R)$ and the uniform finite-level Tor intervals. Thus $K_0,L_0$ satisfy exactly the derived-complete finite-Tor hypotheses of [thm-sf-pf-adic], without an additional hypothesis on the chosen integral models. Apply that theorem to obtain an isomorphism $p_0=\\operatorname{PF}_{f,K_0,L_0}$, with inverse $b_0$, and its compatible finite reductions. Throughout, $\\operatorname{PF}$ denotes the specified projection transformation of [def-sf-pf]. This uses the integral projection theorem, not axiom (A3) asserting the desired projection formula at the field stage.",
    "uses": [
-    "def-sf-pf",
-    "def-weil-rationalization-karoubi",
+    "def-sf-datum",
+    "lem-coef-integral-residue-tor",
     "thm-sf-pf-adic",
-    "def-weil-algebraically-closed-coefficients"
+    "def-sf-pf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "first paragraph: apply the integral theorem before rationalization"
+   }
+  },
+  {
+   "text": "Let $Q_W:D^b_c(W,R)\\to D^b_c(W,E)$ be the scalar localization in [def-weil-rationalization-karoubi]. By [def-weil-derived-pullback-tensor-hom] the rational pullback and tensor are the localized completed integral operations, and by [def-weil-integral-rational-qbar-compact-support] rational compact support is the localized integral compact support. The coefficient comparisons preserve the tensor maps and the actual units and counits by [lem-fix-operation-reduction]. Consequently the composite defining the projection map in [def-exchange-projection] localizes to the corresponding composite over $E$: if $f=pj$ is the chosen compactification, its two factors $\\pi_{p;j_!K_0,L_0}$ and $Rp_*(\\gamma_{K_0,L_0})$ localize to their rational factors. Under the resulting source and target comparisons, $p_E=Q_Y(p_0)=p_0\\otimes1$. Its inverse is $Q_Y(b_0)$: $Q_Y(b_0)Q_Y(p_0)=Q_Y(b_0p_0)=1$ and $Q_Y(p_0)Q_Y(b_0)=1$. Thus this is the specified field-stage projection map, not just an unspecified isomorphism between its endpoints. Preservation of inverses uses only the functor laws.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "first paragraph: localization of operations and of the projection composite; preservation of its inverse"
+   }
+  },
+  {
+   "text": "Naturality extends to every rational morphism, not only to integral ones. In [def-weil-rationalization-karoubi] each Hom group is $\\operatorname{Hom}_R(-,-)\\otimes_RE$, the morphism formulas for pullback and tensor in [def-weil-derived-pullback-tensor-hom] extend linearly in each input, and the rational compact support of [def-weil-integral-rational-qbar-compact-support], whose value on a rational object is the integral value regarded in the scalar localization, acts on a rational arrow $u\\otimes a$ by $Rf_!(u)\\otimes a$. For the two bifunctors $U_E(K,L)=Rf_!K\\otimes_E^L L$ and $V_E(K,L)=Rf_!(K\\otimes_E^L Lf^*L)$, integral naturality from [def-exchange-projection] says $V_0(u,v)p_{0,K,L}=p_{0,K',L'}U_0(u,v)$. Tensor this equality with $ab$ to obtain $V_E(u\\otimes a,v\\otimes b)p_{E,K,L}=p_{E,K',L'}U_E(u\\otimes a,v\\otimes b)$. Additivity proves the equality for sums of pure tensors, hence all rational arrows. For specified rational isomorphisms presenting the same objects, this equality identifies the two projection maps by the induced isomorphisms of source and target; their inverse maps agree too, since an inverse is unique.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "first paragraph: naturality and independence of rational integral presentation, expanded by linearity"
+   }
+  },
+  {
+   "text": "For a finite extension $E\\subset F$ inside the fixed algebraic closure, write $T=-\\otimes_EF$. Set $U_E(K,L)=Rf_{!,E}K\\otimes_E^L L$ and $V_E(K,L)=Rf_{!,E}(K\\otimes_E^L Lf_E^*L)$. The operation comparisons of [lem-fix-operation-reduction] give source and target isomorphisms $c_U:T U_E(K,L)\\xrightarrow{\\sim}U_F(TK,TL)$ and $c_V:T V_E(K,L)\\xrightarrow{\\sim}V_F(TK,TL)$. That lemma preserves precisely the tensor comparisons, units and counits appearing in the defining composite [def-exchange-projection]. Apply this to its first factor $\\pi_p=Rp_*( (\\varepsilon_p\\otimes1)\\mu_p)\\eta_p$ and then its second factor $Rp_*(\\gamma)$; composing the two resulting squares cancels the intermediate comparison and gives\n$$c_V\\,T(p_{E,K,L})=p_{F,TK,TL}\\,c_U.$$\nThus $p_{F,TK,TL}=c_VT(p_{E,K,L})c_U^{-1}$, and its inverse is $c_UT(p_{E,K,L}^{-1})c_V^{-1}$. The identity and tower coherence use the coherent coefficient comparison data specified in [def-exchange-projection] with the composition identifications of [lem-weil-scalar-extension-composition]. In particular the same equation holds after any further common finite extension. Only the coefficient-comparison assertion of the lemma is used; invertibility at field coefficients has already been proved in Step 2.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-exchange-projection",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "last sentence: compatibility of the finite-stage system with scalar extension, expanded on both factors of PF"
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, choose a common finite field $F$ representing the two inputs. This is possible by [def-weil-algebraically-closed-coefficients], taking a compositum if the initial fields differ. Form the projection map at that stage using [def-weil-derived-pullback-tensor-hom] and [def-weil-integral-rational-qbar-compact-support]; in [def-exchange-projection] its common-stage morphism class is the algebraically closed projection map. Step 2 gives $p_F^{-1}$. In the common-stage Hom groups the two composites $[p_F^{-1}][p_F]=[1]$ and $[p_F][p_F^{-1}]=[1]$ are represented by the corresponding equalities already over $F$. Thus the projection class is invertible. Step 4 identifies this class with the one obtained after enlarging $F$. For different specified presentations or representatives of input arrows, pass to a common finite overfield where the presenting equalities hold, as in the displayed Hom-colimit definition. Step 3 gives naturality there and Step 4 commutes with further extensions; taking classes gives equality independently of the chosen common stage. For inverse classes the same conclusion follows either from the transported inverse formula in Step 4 or from uniqueness of an inverse. No infinite scalar-extension theorem for ambient derived categories is used.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "second paragraph: construction of the algebraically closed map and inverse over a common finite stage"
+   }
+  },
+  {
+   "text": "Finally keep the chosen integral representatives $K_0,L_0$. The finite-reduction clause of [thm-sf-pf-adic] identifies the reductions of $p_0$ with the actual maps $p_n=\\operatorname{PF}_{f,K_{0,n},L_{0,n}}$, compatibly with all transition maps. The comparisons of [lem-fix-operation-reduction] identify their endpoints and preserve the maps defining the projection composite [def-exchange-projection]. Step 2 identifies $Q_Y(p_0)$ with $p_E$, and Step 5 takes that finite-field map to its algebraically closed morphism class. This gives exactly the stated compatibility with finite reduction of the integral representative. No functor from rational or algebraically closed coefficients to finite coefficients is used: the two comparisons start at $p_0$, one going to its reductions and one to its rationalization. Replacing an integral representative gives the same field map by Step 3, but does not assert equality of the different integral reductions.",
+   "uses": [
+    "thm-sf-pf-adic",
+    "lem-fix-operation-reduction",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+    "place": "first paragraph and final compatibility clause: finite reductions belong to integral representatives"
+   }
   }
  ],
  "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-datum",
   "def-sf-pf",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
   "def-weil-rationalization-karoubi",
-  "thm-sf-pf-adic",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction",
+  "lem-weil-scalar-extension-composition",
+  "thm-sf-pf-adic"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-pf-field/thm-sf-pf-field.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "entire proof, expanded using the existing coefficient-comparison statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compact support of rationalized l adic constructible complexes compatible with finite coefficient extension",
+   "results": "Eight unrelated Profinite.NobelingProof and AdicCompletion hits; no projection formula for these coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.projectionFormula",
+   "results": "Zero hits; Loogle reports unknown identifier CategoryTheory.MonoidalCategory.projectionFormula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rationalization",
+   "results": "CategoryTheory: zero hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for derived compact support with rational l adic coefficients and algebraic closure coefficients",
+   "results": "Eight unrelated support_ker, AdicCompletion, Algebra.PreSubmersivePresentation and linear projection hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor maps an isomorphism to an isomorphism; projection morphisms under scalar localization of a linear category",
+   "results": "CategoryTheory.Localization.functor_linear_iff, linear, instLinearLocalization variants, functor_linear (Mathlib/CategoryTheory/Localization/Linear); IsLocalizedModule.iso_apply_mk. These supply generic linear localization only, not the stated geometric coefficient theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso",
+   "results": "CategoryTheory.Functor.map_isIso and map_inv in Mathlib.CategoryTheory.Iso, plus generic NatIso and adjunction hits. Preservation of an inverse is elementary here and does not identify the projection map or give the coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_isIso|projection.*formula|ProjectionFormula",
+   "results": "CategoryTheory: 19 hits. CategoryTheory.Functor.map_isIso, Mathlib/CategoryTheory/Iso.lean:493 (read lines 480-505), is the generic functor lemma, not the whole item; the other hits apply map_isIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +203,39 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-pf-field"
+ "unit": "sk-thm-sf-pf-field",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-pf-field",
+  "worker": "stage1",
+  "summary": "Expanded the integral-to-rational-to-common-stage proof using existing operation coefficient comparisons, explicit inverse formulas, fractional naturality, and representative-aware finite reduction. No new nodes. Exact project attachment rejected because the Lean rational theorem explicitly omits finite scalar extension and the common-stage category. Clarified the finite-reduction clause, which cannot mean reduction of a rational object without an integral model; used the existing integral residue-Tor theorem to obtain the required finite-Tor bounds without restricting integral representatives. Did not invoke field-stage axiom (A3) or use coefficient compatibility as an uncited theorem.",
+  "blueprint": "Current main-20261015 thm-sf-pf-field.proof.md: first paragraph realized by Steps 1-3 and 6; last paragraph by Steps 4-5. The inherited sk-thm-sf-pf-field unit record has the older rationalization route, also realized by these steps; the current broader sketch unit has additional localizing/PBC claims, which this subordinate node does not state.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic DVR coefficient residue test gives uniform finite-Tor bounds for all integral constructible representatives, allowing application of the integral projection theorem without narrowing the field-stage statement."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coefficient comparisons for pullback, tensor, compact support, units and counits; they identify the specified projection maps under rationalization and finite scalar extension. The item unit supplies no such comparison theorem."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Generic composition identifications for coefficient transition functors used when taking common finite overfields; this is coefficient-category coherence, not a replacement of the integral projection-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-2a39ed512",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-2a39ed512 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item in full: the statement, all six steps and every cited statement (def-sf-datum, def-sf-pf, def-exchange-projection including its paragraph on other coefficient stages, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients, def-weil-derived-pullback-tensor-hom, def-weil-integral-rational-qbar-compact-support, def-weil-derived-complete-integral-detailed, thm-sf-pf-adic, lem-coef-integral-residue-tor, lem-fix-operation-reduction, lem-weil-scalar-extension-composition). I compared it with the master and main-20261015 blueprint statement and proof, which are identical. The new main-20261015 _section is broader (tensor closure, proper PF/PBC on Loc), but that belongs to the det-thm-sf-pf-field-* nodes and is correctly left out. Statement: every rational object is Q of an integral object, and every Qlb object is a pair (E',K). Integral models are arbitrary D^b_c objects, and finite Tor comes from lem-coef-integral-residue-tor, so the statement is not narrowed. The finite-reduction clause now speaks of the integral representative. I checked why: l is invertible over Q_l but zero on Z_l/l, and def-exchange-projection says there is no reduction functor out of rational coefficients. So this is the only well-typed reading, it is reported as STATEMENT-DISPUTED, and it is not a weakening. Steps: (1) hypotheses checked (l invertible on X, derived-complete D^b_c), and the conclusion D^b_c = D^b_ctf meets thm-sf-pf-adic. (2) def-exchange-projection defines rational maps as rationalizations of integral ones, and lem-fix-operation-reduction preserves units and counits; the inverse follows from the functor laws. (3) Elementary bilinearity in Hom⊗E. (4) I re-derived c_V T(p_E) = p_F c_U and the inverse formula, with the identity and cocycle data from def-exchange-projection. (5) Elementary computation in the common-stage colimit. (6) The reduction clause of thm-sf-pf-adic plus the integral finite-reduction identifications. Edge cases checked: K_0 = 0, K_0 = R/ϖ (rationally zero), f = id, E = F, a tower of fields, inputs over different fields. No cycle: the closure reaches 11,735 nodes but not the item. No duplicate: fix-prop-projection-formula is a broader all-stages package. No SGA source. Rejecting the slopmaster2 Rational.lean attachment is correct: it is étale only, assumes finite Tor, and has no Qlb stage or scalar extension. Accepted tool use: lem-coef-integral-residue-tor, the only real off-route citation. lem-fix-operation-reduction and lem-weil-scalar-extension-composition are already on the transitive route (sk-prop-sf-pf-reduction, sk-def-sf-operations), so declaring them was harmless but unnecessary. Fix: step 3 used Rf_! on rational arrows without citing its definition. I added def-weil-integral-rational-qbar-compact-support to its uses, with one clause saying Rf_! acts on u⊗a by Rf_!(u)⊗a. proof_deps is unchanged. Corrected file: fixes/dag/nodes/sec-six-functors/thm-sf-pf-field.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
