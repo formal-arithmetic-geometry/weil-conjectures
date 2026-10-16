@@ -1,0 +1,114 @@
+{
+ "id": "def-kun-commutative-derived-exchange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0ezt",
+   "place": "Proof sentence invoking Tag 0EYM for continuity: the transition and projection comparison morphisms in the first two paragraphs of Tag 0EYM require exchange for arbitrary commutative squares.",
+   "via": [
+    "lem-kun-0eym"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Derived exchange for an arbitrary commutative square of schemes",
+ "statement": "Let $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$ be morphisms of schemes [def-pc-scheme] with a specified equality $fg'=gf'$. No cartesian hypothesis or chosen pullback identification is part of this datum. For every corner $T$, use the bounded below derived category $\\Dplus(T_{\\Et})$ of abelian sheaves on its small etale site [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-derived-categories]. For each edge $u$, use the exact inverse image on these derived categories [def-weil-pbc-derived-inverse-image], the derived direct image $Ru_*$ [def-weil-pbc-direct-image], and the canonical adjunction $u^{-1}\\dashv Ru_*$, with unit $\\eta_u$ and counit $\\varepsilon_u$ [prop-weil-pbc-derived-inverse-image-adjunction].\n\nWrite $c^D_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(uv)^{-1}$ for the composition isomorphisms [lem-weil-pbc-derived-inverse-image-composition]. Define the commutative-square inverse-image isomorphism by the composite\n$$\n\\theta:f'^{-1}g^{-1}\\xrightarrow{c^D_{g,f'}}(gf')^{-1}\\xrightarrow{\\sim}(fg')^{-1}\\xrightarrow{(c^D_{f,g'})^{-1}}g'^{-1}f^{-1},\n$$\nwhere the middle isomorphism is transport along the specified equality $gf'=fg'$.\n\nThe derived exchange for this commutative square is the mate [def-weil-pbc-adjunction-mate] of $\\theta$ under $f^{-1}\\dashv Rf_*$ and $f'^{-1}\\dashv Rf'_*$, a natural transformation\n$$\n\\operatorname{Ex}:g^{-1}Rf_*\\longrightarrow Rf'_*g'^{-1}.\n$$\nExplicitly, for $K\\in\\Dplus(X_{\\Et})$, its component is\n$$\ng^{-1}Rf_*K\\xrightarrow{\\eta_{f',g^{-1}Rf_*K}}Rf'_*f'^{-1}g^{-1}Rf_*K\\xrightarrow{Rf'_*(\\theta_{Rf_*K})}Rf'_*g'^{-1}f^{-1}Rf_*K\\xrightarrow{Rf'_*g'^{-1}(\\varepsilon_{f,K})}Rf'_*g'^{-1}K.\n$$\nThis definition specifies a morphism, without asserting that it is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7, remark-base-change: general commutative diagram of ringed topoi and the adjunct of inverse image of the counit; exact abelian etale inverse images and bounded below derived categories. The explicit project construction is AlgebraicGeometry.Etale.baseChange, WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean:234-246, with pullbackSquareComparison at lines 145-153."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived exchange for arbitrary commutative squares of schemes is the mate of the inverse image composition isomorphism on bounded below derived categories",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact', CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact', CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure', CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure', CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract mates are already def-weil-pbc-adjunction-mate; underived sheaf pullback coherence and localization derivability squares do not construct the specified etale D^+ inverse images and derived direct images. Project baseChange does give this interface and is attached separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the natural transformation from pullback of derived direct image to derived direct image of pullback by the unit square comparison and counit",
+   "results": "8 hits: SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract mates are already def-weil-pbc-adjunction-mate; underived sheaf pullback coherence and localization derivability squares do not construct the specified etale D^+ inverse images and derived direct images. Project baseChange does give this interface and is attached separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract mates are already def-weil-pbc-adjunction-mate; underived sheaf pullback coherence and localization derivability squares do not construct the specified etale D^+ inverse images and derived direct images. Project baseChange does give this interface and is attached separately."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|derived.*exchange|pullbackSquareComparison",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract mates are already def-weil-pbc-adjunction-mate; underived sheaf pullback coherence and localization derivability squares do not construct the specified etale D^+ inverse images and derived direct images. Project baseChange does give this interface and is attached separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change morphism for an arbitrary commutative square of schemes as an adjunction mate",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Adjunction.derived, CategoryTheory.CommSq.left_adjoint, CategoryTheory.TwoSquare.lanBaseChange_app, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.derivedη, CategoryTheory.TwoSquare.lanBaseChange, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract mates are already def-weil-pbc-adjunction-mate; underived sheaf pullback coherence and localization derivability squares do not construct the specified etale D^+ inverse images and derived direct images. Project baseChange does give this interface and is attached separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley natural transformation on derived categories of sheaves from a commuting diagram of geometric morphisms",
+   "results": "8 hits: SheafOfModules.pullbackComp, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.sheafComposeNatTrans, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousNatTrans, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-16",
+   "verdict": "No exact match: the hits concern underived sheaf pullback, composition and sheafification, without the specified etale derived mate or its local-cohomology chart equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorComparison\"",
+   "results": "6 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-16",
+   "verdict": "No exact match: PointwiseRightDerived.lean:38-75 defines an abstract comparison and its factorization, not a square of etale topoi or the cohomology-chart identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|rightDerivedFunctorComparison|cohomologyPresheaf",
+   "results": "10 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "No exact match: SheafCohomology/Basic.lean:24-36,69-94 defines the Ext-valued cohomology presheaf; MayerVietoris.lean uses restrictions on a fixed site, without a derived exchange map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-kun-0eym",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-kun-relative-continuity",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
