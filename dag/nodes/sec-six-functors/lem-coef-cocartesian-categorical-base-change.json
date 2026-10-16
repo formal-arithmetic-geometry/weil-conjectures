@@ -282,5 +282,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianCategoricalBaseChange",
+  "declaration": "SSet.Enhanced.cocartesian_categorical_base_change",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianCategoricalBaseChange.lean",
+  "statement": "theorem cocartesian_categorical_base_change (S Z A B : SSet.{u}) [SSet.Quasicategory S] [SSet.Quasicategory Z] (r : Z ⟶ S) (hr : cocartesianFibration r) (b : B ⟶ S) (u : A ⟶ B) (hu : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map u)).app C)).toFunctor).IsEquivalence) : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.map (u ≫ b) r b r u (𝟙 Z) (𝟙 S) (by simp) (by simp)))).app C)).toFunctor).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b83c4726c",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Checked each clause of the node against SSet.Enhanced.cocartesian_categorical_base_change. S Z A B are in SSet.{u}; Quasicategory instances are on S and Z only; hr uses the recorded cocartesianFibration (InfinityFibrations.lean:73); b and u are arbitrary. hu and the conclusion are the exact weak-equivalence clause of SSet.exists_joyal_model_structure, with test universe max u v and v free. The map is pullback.map (u≫b) r b r u (𝟙 Z) (𝟙 S), i.e. (a,z)↦(u a,z). The statement is true (HTT 3.3.1.3 dual, Kerodon 029H) and has no statement_change. The node differs from the live one only in its lean field. lean.statement is verbatim in the file. The proof is only sorry: no definitions, no axioms, no duplicate in side Sheaf, Mathlib or slopmaster2. Docstrings carry the source and blueprint id. Imports are correct: public imports of the statement-dependency modules and a private import of the only proof dependency with a module. No line exceeds 100 characters, and the report has Worker report and Second reading by Q71. Edge cases checked: empty S or Z, u=id, S=Δ[0], non-quasicategory B, non-injective u. nt_compile --json with side overlay: rc=0, no errors or warnings. No findings."
  }
 }
