@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-compact-hausdorff-surjection-quotient",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-continuous-map-condensed-ring",
+   "place": "Proof, paragraph checking (b), sentence: a continuous surjection from a compact space onto a Hausdorff space is closed and hence a quotient map.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compact-to-Hausdorff surjections are quotient maps",
+ "statement": "Let $X,Y$ be topological spaces and $U\\subseteq X$, $V\\subseteq Y$ subsets, endowed with their subspace topologies [def-kun-subspace-topology]. Suppose $U$ is quasi-compact (every open cover has a finite subcover) and $V$ is Hausdorff. Let $q:U\\to V$ be continuous and surjective. Then $q$ is a quotient map: for every subset $W\\subseteq V$, $W$ is open in $V$ if and only if $q^{-1}(W)$ is open in $U$. This includes the case $U=X$ and $V=Y$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 08YD, lemma-closed-map (compact-to-Hausdorff maps are closed); Tag 0AAU, lemma-closed-morphism-quotient-topology, part (3). Mathlib exact combined theorem: Topology/Separation/Hausdorff.lean:682-684."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous surjective map from a compact space to a Hausdorff space is a quotient map",
+   "results": "IsQuotientMap.of_surjective_continuous, Mathlib/Topology/Separation/Hausdorff; also IsClosedMap.isQuotientMap.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a compact topological space onto a Hausdorff space gives the target the quotient topology",
+   "results": "IsQuotientMap.of_surjective_continuous; IsClosedMap.isQuotientMap; quotient compactness instances.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous surjection from a compact space to a Hausdorff space is a quotient map",
+   "results": "IsQuotientMap.of_surjective_continuous; Topology.isQuotientMap_iff; Topology.isQuotientMap_iff'; IsClosedMap.isQuotientMap.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap.of_surjective_continuous\"",
+   "results": "Topology.IsQuotientMap.of_surjective_continuous, Mathlib.Topology.Separation.Hausdorff, with CompactSpace X and T2Space Y.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem IsQuotientMap.of_surjective_continuous|lemma IsQuotientMap.of_surjective_continuous",
+   "results": "No hits: actual source name has the Topology namespace prefix.",
+   "date": "2026-10-16",
+   "verdict": "no match for this unqualified spelling; rerun found the namespace-qualified theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "of_surjective_continuous",
+   "results": "Mathlib/Topology/Separation/Hausdorff.lean:682, Topology.IsQuotientMap.of_surjective_continuous. Search subdirectory: Topology/Separation; source read through line 684.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedMap.isQuotientMap|IsQuotientMap.of_",
+   "results": "19 hits in Topology, including Separation/Hausdorff.lean:682,684 and its applications in Category/CompHausLike/EffectiveEpi.lean:39,47,50,59. Read the theorem at Hausdorff.lean:682-684 and the compact-to-Hausdorff closed-map theorem at 674-675.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, Function.Surjective, Topology.IsQuotientMap",
+   "results": "One hit: IsClosedMap.isQuotientMap in Mathlib.Topology.Maps.Basic; continuous closed surjections are quotient.",
+   "date": "2026-10-16",
+   "verdict": "match: supporting closed-surjection theorem; the combined exact match remains Topology.IsQuotientMap.of_surjective_continuous"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuotientMap|isClosedMap",
+   "results": "Five hits in Topology/Separation/Hausdorff.lean, including Continuous.isClosedMap at 673-674 and Topology.IsQuotientMap.of_surjective_continuous at 682-684.",
+   "date": "2026-10-16",
+   "verdict": "match: recorded combined theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map with compact domain and a Hausdorff codomain is closed and is quotient if onto",
+   "results": "Eight hits; first IsQuotientMap.of_surjective_continuous in Topology/Separation/Hausdorff; also Continuous.isClosedMap, Continuous.isProperMap and IsClosedMap.isQuotientMap.",
+   "date": "2026-10-16",
+   "verdict": "match: Topology.IsQuotientMap.of_surjective_continuous"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsQuotientMap.of_surjective_continuous",
+  "file": "Mathlib/Topology/Separation/Hausdorff.lean",
+  "how": "specializes in one line: apply the theorem to the spaces U and V with their subtype topologies; lines 682-684, read with Continuous.isClosedMap at 673-675. CompactSpace means quasi-compact, without any Hausdorff hypothesis on U; T2Space is the stated Hausdorff hypothesis on V. IsQuotientMap means the target has the quotient topology, equivalently the displayed open-set criterion.",
+  "line": 682
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-continuous-map-condensed-ring",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-condensed-ring"
+}

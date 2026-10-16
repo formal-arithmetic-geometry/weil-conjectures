@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-continuous-map-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The condensed ring of continuous maps",
@@ -17,44 +17,131 @@
  ],
  "proof": [
   {
-   "text": "The functions $C(S,T)$ form a ring under pointwise operations, because $T$ is a\ntopological ring. Precomposition is a ring homomorphism and is strictly functorial, so\n$\\underline T$ is a presheaf of rings. The forgetful functor from rings to sets preserves\nand reflects limits. So it suffices that the presheaf of sets $S\\mapsto C(S,T)$ is a\nsheaf.",
+   "text": "Put $P(S)=C(S,T)$. Addition and multiplication of continuous functions are continuous by composing $S\\to T\\times T$, $s\\mapsto(a(s),b(s))$, with the continuous addition and multiplication of $T$; negation is composition with continuous negation, and the constant zero and one functions are continuous. All ring identities hold after evaluation at each $s\\in S$. Precomposition preserves these operations, since $(a+b)\\circ u=(a\\circ u)+(b\\circ u)$ and $(ab)\\circ u=(a\\circ u)(b\\circ u)$, and preserves zero and one. The identities $a\\circ\\mathrm{id}=a$ and $(a\\circ u)\\circ v=a\\circ(u\\circ v)$ give the presheaf laws. This constructs the presheaf of unital rings directly, for noncommutative $T$ as well.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "First paragraph: pointwise ring structure and precomposition."
+   }
   },
   {
-   "text": "Profinite sets have finite disjoint coproducts, and their effective epimorphisms are the\ncontinuous surjections. Hence a presheaf is a sheaf for the coherent topology if and only\nif both of the following hold:",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-sfb-profinite-coherent-sheaf-criterion] with $\\mathcal A$ the category of unital rings. It suffices to check that $P$ takes finite disjoint coproducts to products of rings and that the kernel-pair diagram for every continuous surjection is an equalizer of rings. This uses the ring-valued version of the criterion directly.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Second paragraph and conditions (a), (b)."
+   }
   },
   {
-   "text": "- (a) it takes finite coproducts to products;\n- (b) for every continuous surjection $q\\colon S'\\to S$ it satisfies the equalizer\n  condition $F(S)\\to F(S')\\rightrightarrows F(S'\\times_SS')$.",
+   "text": "For a finite family $(S_i)$, restriction gives $C(\\coprod_iS_i,T)\\to\\prod_i C(S_i,T)$. Its inverse sends $(a_i)$ to the function $a(i,s)=a_i(s)$. For every open $V\\subseteq T$, its inverse image is $\\bigcup_i\\{i\\}\\times a_i^{-1}(V)$, open in the disjoint union, so the inverse function is continuous. Both directions preserve every ring operation by evaluation on each component. Thus this is the product of rings, including the empty family: $C(\\varnothing,T)$ is the one-element ring, terminal among unital rings.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Paragraph checking (a): maps out of a finite disjoint union."
+   }
   },
   {
-   "text": "(a) holds because a finite disjoint union of profinite sets is a union of clopen pieces,\nso a map out of it is continuous exactly when it is continuous on each piece. For (b), let\n$b\\in C(S',T)$ agree on both projections from $S'\\times_SS'$, i.e. let $b$ be constant on\nthe fibres of $q$. Then $b=a\\circ q$ for a unique map of sets $a\\colon S\\to T$, unique\nbecause $q$ is surjective. Now $q$ is a continuous surjection from a compact space onto a\nHausdorff space, so it is closed and hence a quotient map. Therefore $a$ is continuous.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $q:S'\\to S$ be a continuous surjection and let $b\\in C(S',T)$ have equal pullbacks along both projections from $S'\\times_S S'$. For $x,y$ with $q(x)=q(y)$ the pair $(x,y)$ lies in that fibre product, so $b(x)=b(y)$. Define $a(s)$ to be this common value on the nonempty fibre $q^{-1}(s)$. Then $a\\circ q=b$, and surjectivity gives uniqueness. The source $S'$ is compact and the target $S$ is Hausdorff, so [lem-sfb-compact-hausdorff-surjection-quotient] applies to $q$ with both spaces regarded as whole subspaces of themselves. For any open $V\\subseteq T$, $q^{-1}(a^{-1}(V))=b^{-1}(V)$ is open; the quoted quotient criterion makes $a^{-1}(V)$ open. Hence $a$ is continuous. No Hausdorffness or completeness of $T$ is used.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Paragraph checking (b): fibrewise descent and continuity of the descended map."
+   }
   },
   {
-   "text": "By part 3 of [sk-def-sfb-ring-object], the underlying abelian sheaf of the sheaf of rings\n$\\underline T$ is a ring object. It is commutative when all the rings $C(S,T)$ are, which\nholds when $T$ is commutative.",
+   "text": "The equalizer assertion holds in rings, not just on elements. Given any unital ring $R$ and ring homomorphism $h:R\\to C(S',T)$ whose two pullbacks agree, apply the preceding descent to $h(r)$ for each $r$ to obtain $\\widetilde h(r)\\in C(S,T)$. Evaluating at a lift $x$ of $s$ gives $\\widetilde h(r+r')(s)=h(r+r')(x)=h(r)(x)+h(r')(x)$ and $\\widetilde h(rr')(s)=h(r)(x)h(r')(x)$; $\\widetilde h(0)(s)=h(0)(x)=0$ and $\\widetilde h(1)(s)=h(1)(x)=1$. Thus $\\widetilde h$ is a ring homomorphism with $q^*\\widetilde h=h$. Surjectivity of $q$ makes it the unique such homomorphism. This is the equalizer universal property. Together with the finite product calculation, [lem-sfb-profinite-coherent-sheaf-criterion] now proves that $P$ is a sheaf of rings. Define $\\underline T$ to be this sheaf with the already constructed sections and restrictions.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Conditions (a), (b), with the first paragraph reduction replaced by the explicit ring-valued universal property."
+   }
+  },
+  {
+   "text": "Use the tensor and size convention in the current statement of [sk-def-sfb-ring-object]: abelian sheaves have the sheafified objectwise tensor product over $\\mathbf Z$ with unit $a(\\underline{\\mathbf Z})$, on an essentially small site. Fix the universe of the profinite sets and take a larger ambient universe for the sheaf categories, so that this site is essentially small there; the cited statement explicitly includes the coherent site of profinite sets. Its part 3 says that the underlying abelian sheaf of any sheaf of rings on this site is a ring object for this tensor product, commutative when all its section rings are. Apply it to the sheaf $\\underline T$ constructed in steps 1–5. If $T$ is commutative, $(ab)(s)=a(s)b(s)=b(s)a(s)=(ba)(s)$ for every $s$, so every $C(S,T)$ is commutative and the ring object is commutative.",
    "uses": [
     "sk-def-sfb-ring-object"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Last paragraph: part 3 of the ring-object construction and commutativity."
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-profinite-coherent-sheaf-criterion",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
   "sk-def-sfb-ring-object"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+  "place": "Full proof, supplemented by explicit ring-valued product and equalizer universal properties; quotient-map step follows Stacks Tags 08YD and 0AAU."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a topological ring T the continuous maps from profinite sets to T form a condensed ring",
+   "results": "Condensed.profiniteFree, CondensedMod.ofSheafProfinite, LightCondMod, TopCat.commRingYoneda: none states all clauses of this item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The presheaf S maps to continuous functions from the profinite space S into an arbitrary topological ring is a sheaf of rings and a ring object in condensed abelian groups",
+   "results": "CondensedMod.ofSheafProfinite, Condensed.isSheafProfinite, Condensed.ofSheafProfinite and module constructors; no whole-item match.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous maps from profinite sets to a topological ring form a sheaf of rings",
+   "results": "ContinuousMap.instRing, continuousSubring, TopCat.continuousFunctions, TopCat.presheafToTopCommRing; these give sectionwise ring structures or a different site, not the whole item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaPresheaf\"",
+   "results": "ContinuousMap.yonedaPresheaf, equalizerCondition_yonedaPresheaf and finite-product instances; only the underlying set presheaf and its conditions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousMap\", \"Ring\"",
+   "results": "ContinuousMap.instRing and related ring instances; sectionwise only.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_iff_preservesFiniteProducts_and_equalizerCondition|equalizerCondition_yonedaPresheaf|yonedaPresheaf",
+   "results": "Mathlib/Condensed/TopComparison.lean:65 and references in Condensed/Explicit.lean. Search subdirectory: Condensed. No condensed ring-object construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapRing|ring.*Yoneda|Ring.*yoneda",
+   "results": "No hits in Mathlib/Condensed.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; candidates cover only separate ingredients"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -75,5 +162,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-condensed-ring"
+ "unit": "sk-def-sfb-condensed-ring",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-continuous-map-condensed-ring",
+  "worker": "stage1",
+  "summary": "Checked current main blueprint statement, proof, unit and chapter; searched slopmaster2 with no project attachment. Retained the arbitrary-topological-ring statement and ring-object dependency. Added two Mathlib tool leaves: the profinite coherent sheaf criterion and compact-to-Hausdorff quotient-map theorem. Wrote the pointwise algebra, finite coproduct calculation including the empty case, descent and ring equalizer universal property explicitly. No change of proof route or extra separation/completeness assumption on T. Independent second reading: checked every cited statement, current blueprint and local Mathlib declarations; made the zero/unit checks explicit and completed the finite-cover topology identification in the criterion leaf record. Repair of the returned delivery: re-read the current ring-object statement and made its essentially-small-site convention, sheafified tensor over the integers and sheafified constant unit explicit in step 6; regenerated the citation against that current statement. Current landing-return repair: the maintainer has now registered sk-def-sfb-condensed-ring and bound the imported item to it. Restored that valid unit on both new leaves, replacing the prior null-unit workaround, and refreshed the item copy with current chapter/unit metadata. Re-read the registered chapter and unit, all current cited statements, and both Mathlib leaf sources; the six-step proof and current ring-object quotation remain valid. No mathematical statement or proof-route change. Current independent second reading: rechecked all six steps and both new leaves against main-20261015, Stacks Tags 08YD/0AAU, and the pinned Mathlib sources; retained the proof and statements, added fresh independent search records, and corrected the supporting closed-map line reference to 673-675.",
+  "blueprint": "Steps 1-2 realize proof paragraphs 1-2 and conditions (a),(b); step 3 realizes (a); steps 4-5 realize (b) and the passage to a sheaf of rings; step 6 realizes the final paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-35ba79de7",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-35ba79de7 (reviewer sub-agent of L); spot-checked: Read the full item and both new nodes; verified all six steps against main-20261015, Mathlib’s arbitrary-category coherent sheaf criterion, and Stacks 08YD/0AAU. Checked ring-object conventions, empty and noncommutative cases, duplicates, dependencies and route. No repairs needed. Detailed checks are in review.md."
+ }
 }
