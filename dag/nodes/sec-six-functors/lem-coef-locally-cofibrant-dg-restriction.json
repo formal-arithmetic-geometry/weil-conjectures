@@ -32,9 +32,107 @@
   "lem-coef-enriched-projective-diagram-model",
   "lem-coef-dgcat-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=f_!$ and $R=f^*$. The projective structures and the free-diagram/evaluation adjunctions exist by [lem-coef-enriched-projective-diagram-model]. Construct $LF$ at $e\\in\\mathcal E$ by the coequalizer\n$$\\coprod_{c,c'}\\mathcal E(fc',e)\\otimes\\mathcal C(c,c')\\otimes F(c)\\rightrightarrows\\coprod_c\\mathcal E(fc,e)\\otimes F(c).$$\nOne arrow composes in $\\mathcal E$ after applying $f$; the other uses the action of $\\mathcal C$ on $F$. Composition in $\\mathcal E$ gives its dg-diagram action. A map out of the coequalizer is precisely a family compatible with these two actions, so the tensor adjunction identifies its complex of maps into a diagram $G$ with the complex of maps $F\\to RG$. This constructs the enriched adjunction. All sums are small because $\\mathcal C$ is small. The colimits used here, and all colimits of enriched diagrams, are computed objectwise: tensoring by any complex is a left adjoint, so it commutes with colimits and extends each action to the objectwise colimit, with its identities checked on the colimit injections. Precomposition therefore preserves all colimits, as well as all objectwise weak equivalences and fibrations. Transposing a lifting square shows that $L$ preserves cofibrations and trivial cofibrations. Thus $L\\dashv R$ is a Quillen adjunction.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: explicit enriched Kan extension and Quillen adjunction; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "For a cofibrant $P\\in\\mathcal N$, the tensor adjunction $-\\otimes P:\\mathrm{Ch}(\\mathbf Z)\\rightleftarrows\\mathcal N:\\underline{\\operatorname{Hom}}(P,-)$ is Quillen. Indeed, put $0\\to P$ into the enriched model axiom of [lem-coef-enriched-projective-diagram-model]; its displayed map reduces to $\\underline{\\operatorname{Hom}}(P,X)\\to\\underline{\\operatorname{Hom}}(P,Y)$ for a (trivial) fibration $X\\to Y$, because $\\underline{\\operatorname{Hom}}(0,-)=0$. The projective model structure on complexes is [lem-coef-projective-cochain-monoidal-model], at $R=\\mathbf Z$. The weak-equivalence preservation clause of [lem-coef-model-infinity-derived-adjunction] now shows that $K\\otimes P\\to K'\\otimes P$ is a weak equivalence whenever $K\\to K'$ is a quasi-isomorphism between cofibrant complexes. This uses cofibrancy of both complexes, not preservation of all quasi-isomorphisms by tensoring.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: homotopical tensor on cofibrant complexes; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "Write $h_cP=\\mathcal C(c,-)\\otimes P$ and $h_{fc}P=\\mathcal E(fc,-)\\otimes P$. For cofibrant $P$, these diagrams are cofibrant by the free-diagram/evaluation adjunction of [lem-coef-enriched-projective-diagram-model]: evaluation preserves trivial fibrations. The two adjunctions identify $L(h_cP)$ with $h_{fc}P$, since maps from either into $G$ are maps $P\\to G(fc)$. Under this identification the unit $\\eta_{h_cP}$ at $c'$ is\n$$\\mathcal C(c,c')\\otimes P\\xrightarrow{f_{c,c'}\\otimes1}\\mathcal E(fc,fc')\\otimes P.$$\nThe map $f_{c,c'}$ is a quasi-isomorphism by the quasi-equivalence definition in [lem-coef-dgcat-model-structure], and its two complexes are cofibrant by the assumption that every morphism complex of $\\mathcal C$ and $\\mathcal E$ is cofibrant. Step 2 therefore makes this unit an objectwise weak equivalence.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: unit calculation on free diagrams; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "Let $I$ be the specified set of generating cofibrations of $\\mathcal N$. By [lem-coef-enriched-projective-diagram-model], $I_{\\mathcal C}=\\{h_c i:c\\in\\mathcal C,\\ i\\in I\\}$ generates the projective cofibrations, its domains and codomains are cofibrant, and $\\mathcal N^{\\mathcal C}$ is locally presentable. Apply [lem-coef-presentable-cellular-factorization] to the initial map $0\\to F$ of a cofibrant diagram. It gives $0\\to Z\\xrightarrow{p}F$, where $Z$ has a small continuous filtration starting from $0$, with successor stages pushouts of coproducts of $I_{\\mathcal C}$, and $p$ has the right lifting property against $I_{\\mathcal C}$. The generator characterization makes $p$ a trivial fibration. Cofibrancy of $F$ supplies a section $s:F\\to Z$ with $ps=1_F$, by lifting $0\\to F$ against $p$. Thus $F$ is a retract of $Z$. Every stage is cofibrant: a lift against a coproduct of generating cofibrations is obtained by taking the lift on each summand; a lift against its pushout is the same lifting problem by the pushout universal property. Compositions of left lifting maps remain in the class, and at a limit the compatible lifts extend uniquely along the defining colimit. This last statement follows by choosing the lift successively, starting at $0$, and using the colimit cocone at each limit.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: cellular filtration and retract of a cofibrant diagram; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "For each $c'\\in\\mathcal C$, compare the two colimit-preserving functors $A(F)=F(c')$ and $B(F)=(LF)(fc')$ from $\\mathcal N^{\\mathcal C}$ to $\\mathcal N$, with natural transformation $\\eta(F)(c'):A(F)\\to B(F)$. Both send cofibrant objects to cofibrant objects and cofibrations to cofibrations: for $A$ use local cofibrancy of $\\mathcal C$ and evaluation in [lem-coef-enriched-projective-diagram-model]; for $B$ use the Quillen property of $L$ and local cofibrancy of $\\mathcal E$ before evaluation at $fc'$. Prove that $\\eta(Z_\\alpha)(c')$ is a weak equivalence by transfinite induction on the filtration of step 4. At $0$ both values are initial and the unit is the identity. At a successor stage, the coproducts of units on attaching domains and codomains are weak equivalences by step 3 and clause (a) of [lem-coef-model-cofibrant-colimit-comparison]. Apply clause (b) to the map between the two evaluated attaching pushout squares: the attaching leg is a cofibration in each square, all three input objects in each span are cofibrant, and the third comparison is the inductive hypothesis. At a nonzero limit stage use clause (c): both evaluated chains are continuous, start cofibrantly, and have cofibration successor maps. This proves the induction, including a limit final stage. Naturality of $\\eta$ makes $\\eta_F(c')$ a retract of $\\eta_Z(c')$ via $s,p$ from step 4, so it too is a weak equivalence. As $c'$ is arbitrary, the unit $F\\to RLF$ is an objectwise weak equivalence for every cofibrant $F$.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: successor, limit and retract steps for the unit; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "Restriction reflects objectwise weak equivalences of actual maps. First verify the homotopy fact needed for essential surjectivity. Let $J$ be the complex with generators $e_0,e_1$ in degree zero and $h$ in degree $-1$, differential $dh=e_1-e_0$. Its endpoint inclusion $\\mathbf Z[0]\\oplus\\mathbf Z[0]\\to J$ is a termwise split injection with dg-projective cokernel the sphere concentrated in degree $-1$, hence a cofibration by [lem-coef-projective-cochain-monoidal-model]. The collapse $p:J\\to\\mathbf Z[0]$, sending both endpoints to $1$ and $h$ to zero, is a quasi-isomorphism between cofibrant complexes: $J\\cong\\mathbf Z[0]\\oplus D^{-1}$, and Hom from the sphere or the contractible disk into an acyclic complex is respectively an acyclic shift or a contractible complex. For cofibrant $X\\in\\mathcal N$, step 2 therefore makes $p\\otimes X:J\\otimes X\\to X$ a weak equivalence. If $a,b:X\\to Y$ have a degree-$-1$ enriched homotopy $t$ with $dt=b-a$, the assignment $(e_0,e_1,h)\\mapsto(a,b,t)$ transposes to a map $J\\otimes X\\to Y$. In the ordinary localization of $\\mathcal N$ the two endpoints $X\\to J\\otimes X$ are equal, since composing either with the invertible $p\\otimes X$ gives $1_X$. Hence $a,b$ have equal localized images. In particular a closed degree-zero map with an enriched homotopy inverse, between cofibrant objects, becomes an isomorphism there.\n\nNow let $u:G\\to H$ be a map of $\\mathcal E$-diagrams with $Ru$ an objectwise weak equivalence. Choose functorial projective cofibrant replacements $QG\\to G$, $QH\\to H$ and their induced map $Qu$, using [lem-coef-enriched-projective-diagram-model]. Their values are cofibrant in $\\mathcal N$ because $\\mathcal E$ is locally cofibrant. The natural replacement squares and two-out-of-three imply that $(Qu)(fc)$ is a weak equivalence for every $c$.\n\nFor $e\\in\\mathcal E$, essential surjectivity in [lem-coef-dgcat-model-structure] gives $c$ and closed degree-zero arrows $a:fc\\to e$, $b:e\\to fc$ representing inverse morphisms in $H^0\\mathcal E$. Thus $ba-1$ and $ab-1$ are boundaries of degree-$-1$ morphisms. The strict dg diagrams $QG,QH$ carry these equalities to enriched homotopies between their composites and identities. By the cylinder calculation above, their maps along $a$ are isomorphisms in the ordinary localization of $\\mathcal N$. Write $\\gamma:\\mathcal N\\to\\mathcal N[W^{-1}]$ for ordinary localization. Naturality along $a$ gives the explicit equality $\\gamma((Qu)(e))=\\gamma(QH(a))\\circ\\gamma((Qu)(fc))\\circ\\gamma(QG(a))^{-1}$. Each factor on the right is an isomorphism, so the left side is an isomorphism. By [lem-coef-model-localization-detects-weak-equivalences], $(Qu)(e)$ is a weak equivalence. The replacement square and two-out-of-three then imply the same for $u(e)$. This holds for every $e$. The argument uses cofibrant replacements of strict diagrams, not enriched replacement functors on $\\mathcal N$.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: essential surjectivity, explicit chain-interval homotopy, and detection of weak equivalences; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-model-infinity-derived-adjunction] to $L\\dashv R$ from step 1 and pass to the ordinary homotopy categories of its enhanced localizations. Since $R$ preserves every objectwise weak equivalence, its derived functor is directly induced by $R$. Choose a functorial fibrant replacement $V\\to TV$ in $\\mathcal N^{\\mathcal E}$. For cofibrant $F$, the derived unit is represented by $F\\xrightarrow{\\eta_F}RLF\\to R(TLF)$; the first arrow is a weak equivalence by step 5 and the second by preservation of weak equivalences by $R$. Hence the derived unit is an isomorphism on all objects after cofibrant replacement. For a fibrant $G$ on the $\\mathcal E$ side, choose a cofibrant replacement $q:QRG\\to RG$. The derived counit is represented by the adjoint $a:LQRG\\to G$ of $q$. The ordinary adjunction identity gives\n$$R(a)\\circ\\eta_{QRG}=q.$$\nBoth $q$ and $\\eta_{QRG}$ are weak equivalences, the latter by step 5; two-out-of-three gives that $R(a)$ is one. Step 6 then makes $a$ an objectwise weak equivalence. Fibrant replacements cover every object, so the derived counit is also an isomorphism everywhere. These natural unit and counit isomorphisms exhibit the derived functors as inverse equivalences, proving the asserted Quillen equivalence and the displayed equivalence induced by $f^*$. Throughout, only the stated axioms on $\\mathcal N$ and local cofibrancy of $\\mathcal C,\\mathcal E$ were used; any additional dg category presenting $\\mathcal N$ as a module category is untouched.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle finite mapping-complex comparison: derived unit and counit, and ordinary localized equivalence; agent expansion of Toën, Proposition 3.2(2), read online at https://arxiv.org/pdf/math/0408337, pp. 12–13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-enriched-projective-diagram-model",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-projective-cochain-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite mapping-complex comparison: agent-written expansion of the dg-index invariance foundation; Toën Proposition 3.2(2) read online but absent from literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -112,15 +210,66 @@
    "results": "{\"t\": \"2026-10-16T14:03:54Z\", \"tool\": \"grep\", \"query\": \"enriched.*(cofibration|fibration|quasiIso)|((cofibration|fibration|quasiIso).*[Ee]nriched)|projectiveModel|QuillenEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader search. Read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-105, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:75-155, and Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:14-110. These assume a model structure, localize ordinary complexes, or enrich ordinary-index diagrams; none constructs dg-indexed projective model structures or proves invariance under dg quasi-equivalence. The Loogle and enriched-cofibration source searches have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi equivalence of differential graded categories with cofibrant morphism complexes induces a Quillen equivalence on enriched diagram categories",
+   "results": "{\"t\": \"2026-10-16T14:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi equivalence of differential graded categories with cofibrant morphism complexes induces a Quillen equivalence on enriched diagram categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"51fb606493650e40\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FunctorCategory.lean:14-65 treats enrichment of ordinary-index diagrams. LocalizerMorphism.lean:164-202 assumes that a localized functor is an equivalence. CofibrantObjectHomotopy.lean:55-115 localizes cofibrant objects of one model category, without dg-index change. ChangeOfRings gives module scalar extension along an ordinary ring map, with equivalence only for a ring isomorphism. None supplies dg quasi-equivalence invariance."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*[Qq]uillen|[Qq]uillen.*enriched|QuillenEquivalence|quasi.*equivalence.*[Dd]iagram",
+   "results": "{\"t\": \"2026-10-16T14:37:34Z\", \"tool\": \"grep\", \"query\": \"enriched.*[Qq]uillen|[Qq]uillen.*enriched|QuillenEquivalence|quasi.*equivalence.*[Dd]iagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FunctorCategory.lean:14-65 treats enrichment of ordinary-index diagrams. LocalizerMorphism.lean:164-202 assumes that a localized functor is an equivalence. CofibrantObjectHomotopy.lean:55-115 localizes cofibrant objects of one model category, without dg-index change. ChangeOfRings gives module scalar extension along an ordinary ring map, with equivalence only for a ring isomorphism. None supplies dg quasi-equivalence invariance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension and restriction of scalars along a dg quasi equivalence induce a Quillen equivalence of model categories of enriched diagrams",
+   "results": "{\"t\": \"2026-10-16T14:37:34Z\", \"tool\": \"leansearch\", \"query\": \"Extension and restriction of scalars along a dg quasi equivalence induce a Quillen equivalence of model categories of enriched diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\"], \"digest\": \"b1b1ed761970af41\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FunctorCategory.lean:14-65 treats enrichment of ordinary-index diagrams. LocalizerMorphism.lean:164-202 assumes that a localized functor is an equivalence. CofibrantObjectHomotopy.lean:55-115 localizes cofibrant objects of one model category, without dg-index change. ChangeOfRings gives module scalar extension along an ordinary ring map, with equivalence only for a ring isomorphism. None supplies dg quasi-equivalence invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-16T14:37:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FunctorCategory.lean:14-65 treats enrichment of ordinary-index diagrams. LocalizerMorphism.lean:164-202 assumes that a localized functor is an equivalence. CofibrantObjectHomotopy.lean:55-115 localizes cofibrant objects of one model category, without dg-index change. ChangeOfRings gives module scalar extension along an ordinary ring map, with equivalence only for a ring isomorphism. None supplies dg quasi-equivalence invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of enriched functors along a quasi fully faithful essentially surjective dg functor gives an equivalence on localized diagram categories",
+   "results": "{\"t\": \"2026-10-16T14:37:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of enriched functors along a quasi fully faithful essentially surjective dg functor gives an equivalence on localized diagram categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\", \"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\"], \"digest\": \"3a62cf89a659e0c7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FunctorCategory.lean:14-65 treats enrichment of ordinary-index diagrams. LocalizerMorphism.lean:164-202 assumes that a localized functor is an equivalence. CofibrantObjectHomotopy.lean:55-115 localizes cofibrant objects of one model category, without dg-index change. ChangeOfRings gives module scalar extension along an ordinary ring map, with equivalence only for a ring isomorphism. None supplies dg quasi-equivalence invariance."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-module-diagram-classification",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-locally-cofibrant-dg-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and both local-cofibrancy hypotheses. Constructed enriched Kan extension explicitly, calculated its unit on free diagrams, proved the unit on cofibrant diagrams by cellular induction and retracts, and proved weak-equivalence detection using an explicit chain-interval cylinder on cofibrant diagram values and essential surjectivity on H0. Two new general model-category foundation nodes, both statement-only and searched in Mathlib. No attachment or statement dispute. Removed a cyclic draft citation of lem-coef-dg-model-mapping-comparison; its required homotopy calculation is now proved directly. External Toën and Hovey references read online and requested for archival in report.md.",
+  "blueprint": "Realizes the additional dg-index independence foundation under paragraph 2 of prop-coef-integral-exceptional-adjoint, namely the middle finite R Hom comparison before taking the total derived inverse limit. It expands the descendant lemma rather than changing a unit step. The current main-20261015 ancestor proof, chapter and unit records were read.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-c3a2c5257",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-c3a2c5257 (reviewer sub-agent of L); spot-checked: Read the complete item, both new nodes, cited statements, Toën 3.2(2)–3.3, and Hovey’s colimit and saturation passages. All seven steps retain the required hypotheses; both children are genuine smaller tools. Checked target coefficient categories and base-change directions against archived master. Dependency closure is acyclic; no repairs or tool_uses needed. Detailed findings written to review.md."
+ }
 }

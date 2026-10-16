@@ -1,269 +1,289 @@
 {
-  "id": "lem-kun-geometric-reduced-perfect",
-  "blueprint": {
-    "is": "lem-kun-geometric-reduced-perfect",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Geometric reducedness over a perfect field",
-  "statement": "Let $X$ be a reduced scheme of finite type over a perfect field\n$K$. For every field extension $L/K$, the scheme $X_L$ is\nreduced. Consequently $X\\to\\Spec(K)$ is flat and of finite\npresentation and has geometrically reduced fibres.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.md",
-    "place": "node lem-kun-geometric-reduced-perfect, order 1730"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-reduced-scheme",
-    "def-weil-field",
-    "def-pc-field-extension",
-    "def-weil-scheme-over-base",
+ "id": "lem-kun-geometric-reduced-perfect",
+ "blueprint": {
+  "is": "lem-kun-geometric-reduced-perfect",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric reducedness over a perfect field",
+ "statement": "Let $X$ be a reduced scheme of finite type over a perfect field\n$K$, where perfect means that $K$ has characteristic $0$, or has\ncharacteristic $p>0$ and the map $a\\mapsto a^p$ is surjective on $K$.\nFor every field extension $L/K$, the scheme $X_L$ is\nreduced. Consequently $X\\to\\Spec(K)$ is flat and of finite\npresentation and has geometrically reduced fibres.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.md",
+  "place": "node lem-kun-geometric-reduced-perfect, order 1730"
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:X\\to\\operatorname{Spec}K$ for the structure morphism. By [def-weil-finite-type-morphism], choose a finite affine open cover $X=\\bigcup_{i=1}^r U_i$, $U_i=\\operatorname{Spec}A_i$, with each $A_i$ a finitely generated $K$-algebra. Each $A_i=\\mathcal O_X(U_i)$ is reduced by the section-wise characterization in [def-pc-reduced-scheme]. The empty cover is allowed when $X=\\varnothing$.",
+   "uses": [
     "def-weil-finite-type-morphism",
-    "def-pc-fibre-product",
-    "def-pc-geometrically-irreducible"
-  ],
-  "proof": [
-    {
-      "text": "Write $f:X\\to\\operatorname{Spec}K$ for the structure morphism. By [def-weil-finite-type-morphism], choose a finite affine open cover $X=\\bigcup_{i=1}^r U_i$, $U_i=\\operatorname{Spec}A_i$, with each $A_i$ a finitely generated $K$-algebra. Each $A_i=\\mathcal O_X(U_i)$ is reduced by the section-wise characterization in [def-pc-reduced-scheme]. The empty cover is allowed when $X=\\varnothing$. Here perfect means characteristic zero, or characteristic $p>0$ with the map $a\\mapsto a^p$ surjective.",
-      "uses": [
-        "def-weil-finite-type-morphism",
-        "def-pc-reduced-scheme"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/schemes.tex",
-        "place": "Tag 01J1, lemma-reduced; finite affine cover as in the blueprint proof opening and the finite-type definition"
-      }
-    },
-    {
-      "text": "Fix an arbitrary field extension $L/K$. A field is reduced: if $b^n=0$ and $b\\ne0$, multiplication by $(b^{-1})^n$ gives $1=0$. Thus both $A_i$ and $L$ are reduced $K$-algebras. Apply [lem-weil-pbc-perfect-reduced-tensor] with $k=K$, $R=A_i$, $S=L$ to obtain that $A_i\\otimes_K L$ is reduced for every $i$. This application needs neither that $L/K$ be algebraic nor that $L$ be finitely generated.",
-      "uses": [
-        "lem-weil-pbc-perfect-reduced-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/algebra.tex",
-        "place": "Tag 00I4, lemma-perfect-reduced, second assertion"
-      }
-    },
-    {
-      "text": "Let $p:X_L=X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L\\to X$ be the first projection. Apply [lem-weil-pbc-open-fibre-product] with base open $\\operatorname{Spec}K$, source open $U_i$, and second-factor open $\\operatorname{Spec}L$. It identifies $p^{-1}(U_i)$ with $U_i\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L$ as an open subscheme. By [lem-weil-pbc-fibre-product-affine-spectra] this scheme is $\\operatorname{Spec}(A_i\\otimes_K L)$, which is reduced by step 2 and [lem-weil-pbc-affine-scheme-reduced-iff]. The inverse images $p^{-1}(U_i)$ cover $X_L$ because the $U_i$ cover $X$.",
-      "uses": [
-        "lem-weil-pbc-open-fibre-product",
-        "lem-weil-pbc-fibre-product-affine-spectra",
-        "lem-weil-pbc-affine-scheme-reduced-iff"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/schemes.tex",
-        "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), 01J2 (lemma-affine-reduced)"
-      }
-    },
-    {
-      "text": "For any open $V\\subseteq X_L$ and nilpotent section $s\\in\\mathcal O_{X_L}(V)$, its restriction to each $V\\cap p^{-1}(U_i)$ is nilpotent and therefore zero, since the open subschemes in step 3 are reduced. The uniqueness part of the sheaf axiom gives $s=0$. The section-wise criterion in [def-pc-reduced-scheme] now proves $X_L$ reduced. Since $L/K$ was arbitrary, this is geometric reducedness in [def-pc-geometrically-irreducible] (its reducedness clause). By [def-weil-affine-spectrum], $\\operatorname{Spec}K$ has a single point $y$ with residue field $K$. Its canonical residue-field morphism is the identity, since the local ring and residue field are both $K$ and their quotient map is the identity. By [def-pc-scheme-fibre], $X_y=X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K$ along this identity. Let $a:X_y\\to X$ and $b:X_y\\to\\operatorname{Spec}K$ be its projections. By [def-pc-fibre-product], the pair $(\\mathrm{id}_X,f)$ induces $j:X\\to X_y$ with $a\\circ j=\\mathrm{id}_X$ and $b\\circ j=f$. Since $b=f\\circ a$, the composites $j\\circ a$ and $\\mathrm{id}_{X_y}$ have equal composites with both projections and are equal by uniqueness. Thus $a$ is an isomorphism over $K$. Its base change to any $L/K$ is also an isomorphism: apply fibre-product functoriality to $a,j$; their composites are identities by the same uniqueness. Consequently $(X_y)_L\\cong X_L$ is reduced for every $L/K$, so $f$ has geometrically reduced fibres.",
-      "uses": [
-        "def-pc-reduced-scheme",
-        "def-pc-geometrically-irreducible",
-        "def-weil-affine-spectrum",
-        "def-pc-fibre-product",
-        "def-pc-scheme-fibre"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/schemes.tex",
-        "place": "Tag 01J1, lemma-reduced, sheaf-local argument; geometric reducedness over the single-point base"
-      }
-    },
-    {
-      "text": "Apply [lem-pc-flat-field] to the $K$-scheme $X$. It states that every morphism of a scheme to the spectrum of a field is flat, so $f$ is flat, with no reducedness or finiteness hypothesis needed for this step.",
-      "uses": [
-        "lem-pc-flat-field"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
-        "place": "Flat instance for a subsingleton integral target, lines 115-121 (field case)"
-      }
-    },
-    {
-      "text": "The field $K$ is Noetherian, since an ideal containing a nonzero element contains its inverse multiple $1$, so the only ideals are $(0)$ and $K$. For each chart from step 1, [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes the finitely generated $K$-algebra $A_i$ finitely presented over $K$. These affine neighbourhoods of every point are exactly the local condition of [def-sbc-locally-finite-presentation]. Thus $f$ is locally of finite presentation.",
-      "uses": [
-        "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-        "def-sbc-locally-finite-presentation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/algebra.tex",
-        "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation, assertion (3); affine local definition of finite presentation"
-      }
-    },
-    {
-      "text": "The one affine chart $\\operatorname{Spec}K$ is locally Noetherian by [pqf-def-locnoeth] and the ideal argument in step 6, and its one-point space is quasi-compact. Therefore it is Noetherian in the sense of [lem-weil-pbc-finite-type-over-noetherian]. Apply that node to the finite-type morphism $f$ to obtain that $X$ is Noetherian, in particular locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is quasi-separated. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] then makes $f$ quasi-separated. This argument does not assume that $f$ is separated.",
-      "uses": [
-        "pqf-def-locnoeth",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OY, lemma-locally-Noetherian-quasi-separated; source-quasi-separated permanence"
-      }
-    },
-    {
-      "text": "The finite-type hypothesis already includes quasi-compactness by [def-weil-finite-type-morphism]. Together with local finite presentation from step 6 and quasi-separatedness from step 7, this proves that $f$ is of finite presentation by the finite-presentation convention in [def-sbc-locally-finite-presentation]. Combining this with steps 4 and 5 gives all clauses of the statement.",
-      "uses": [
-        "def-weil-finite-type-morphism",
-        "def-sbc-locally-finite-presentation"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.md",
-        "place": "Proof, final sentence, with the finite-presentation convention made explicit"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-finite-type-morphism",
-    "def-pc-reduced-scheme",
-    "lem-weil-pbc-perfect-reduced-tensor",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J1, lemma-reduced; finite affine cover as in the blueprint proof opening and the finite-type definition"
+   }
+  },
+  {
+   "text": "Fix an arbitrary field extension $L/K$. A field is reduced: if $b^n=0$ and $b\\ne0$, multiplication by $(b^{-1})^n$ gives $1=0$. Thus both $A_i$ and $L$ are reduced $K$-algebras. Apply [lem-weil-pbc-perfect-reduced-tensor] with $k=K$, $R=A_i$, $S=L$ to obtain that $A_i\\otimes_K L$ is reduced for every $i$. This application needs neither that $L/K$ be algebraic nor that $L$ be finitely generated.",
+   "uses": [
+    "lem-weil-pbc-perfect-reduced-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I4, lemma-perfect-reduced, second assertion"
+   }
+  },
+  {
+   "text": "Let $p:X_L=X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L\\to X$ be the first projection. Apply [lem-weil-pbc-open-fibre-product] with base open $\\operatorname{Spec}K$, source open $U_i$, and second-factor open $\\operatorname{Spec}L$. It identifies $p^{-1}(U_i)$ with $U_i\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L$ as an open subscheme. By [lem-weil-pbc-fibre-product-affine-spectra] this scheme is $\\operatorname{Spec}(A_i\\otimes_K L)$, which is reduced by step 2 and [lem-weil-pbc-affine-scheme-reduced-iff]. Reducedness is invariant under these isomorphisms because their induced isomorphisms on local rings take nilpotent elements to nilpotent elements in both directions. The inverse images $p^{-1}(U_i)$ cover $X_L$ because the $U_i$ cover $X$.",
+   "uses": [
     "lem-weil-pbc-open-fibre-product",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), 01J2 (lemma-affine-reduced)"
+   }
+  },
+  {
+   "text": "For any open $V\\subseteq X_L$ and nilpotent section $s\\in\\mathcal O_{X_L}(V)$, its restriction to each $V\\cap p^{-1}(U_i)$ is nilpotent and therefore zero, since the open subschemes in step 3 are reduced. The uniqueness part of the sheaf axiom gives $s=0$. The section-wise criterion in [def-pc-reduced-scheme] now proves $X_L$ reduced. Since $L/K$ was arbitrary, this is geometric reducedness in [def-pc-geometrically-irreducible] (its reducedness clause). By [def-weil-affine-spectrum], $\\operatorname{Spec}K$ has a single point $y$ with residue field $K$. The only prime ideal of $K$ is $(0)$, and localization at its complement inverts elements already invertible in $K$. Thus the local ring and residue field are canonically $K$, their quotient map is the identity under these identifications, and the canonical residue-field morphism is identified with the identity of $\\operatorname{Spec}K$. By [def-pc-scheme-fibre], $X_y=X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K$ along this identity. Let $a:X_y\\to X$ and $b:X_y\\to\\operatorname{Spec}K$ be its projections. By [def-pc-fibre-product], the pair $(\\mathrm{id}_X,f)$ induces $j:X\\to X_y$ with $a\\circ j=\\mathrm{id}_X$ and $b\\circ j=f$. Since $b=f\\circ a$, the composites $j\\circ a$ and $\\mathrm{id}_{X_y}$ have equal composites with both projections and are equal by uniqueness. Thus $a$ is an isomorphism over $K$. Its base change to any $L/K$ is also an isomorphism: apply fibre-product functoriality to $a,j$; their composites are identities by the same uniqueness. Consequently $(X_y)_L\\cong X_L$ is reduced for every $L/K$, so $f$ has geometrically reduced fibres.",
+   "uses": [
+    "def-pc-reduced-scheme",
     "def-pc-geometrically-irreducible",
     "def-weil-affine-spectrum",
     "def-pc-fibre-product",
-    "def-pc-scheme-fibre",
-    "lem-pc-flat-field",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J1, lemma-reduced, sheaf-local argument; geometric reducedness over the single-point base"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-flat-field] to the $K$-scheme $X$. It states that every morphism of a scheme to the spectrum of a field is flat, so $f$ is flat, with no reducedness or finiteness hypothesis needed for this step.",
+   "uses": [
+    "lem-pc-flat-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+    "place": "Flat instance for a subsingleton integral target, lines 115-121 (field case)"
+   }
+  },
+  {
+   "text": "The field $K$ is Noetherian, since an ideal containing a nonzero element contains its inverse multiple $1$, so the only ideals are $(0)$ and $K$. For each chart from step 1, [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes the finitely generated $K$-algebra $A_i$ finitely presented over $K$. These affine neighbourhoods of every point are exactly the local condition of [def-sbc-locally-finite-presentation]. Thus $f$ is locally of finite presentation.",
+   "uses": [
     "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "def-sbc-locally-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation, assertion (3); affine local definition of finite presentation"
+   }
+  },
+  {
+   "text": "The one affine chart $\\operatorname{Spec}K$ is locally Noetherian by [pqf-def-locnoeth] and the ideal argument in step 6, and its one-point space is quasi-compact. Therefore it is Noetherian in the sense of [lem-weil-pbc-finite-type-over-noetherian]. Apply that node to the finite-type morphism $f$ to obtain that $X$ is Noetherian, in particular locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is quasi-separated. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] then makes $f$ quasi-separated. This argument does not assume that $f$ is separated.",
+   "uses": [
     "pqf-def-locnoeth",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-qcqs-morphism-permanence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.md",
-    "place": "Proof, affine reduction and final sentence, repaired using Stacks 00I4, 00FP, 01J1, 01JR, 01I4, 01J2, 01T6, 01OY and existing Mathlib leaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OY, lemma-locally-Noetherian-quasi-separated; source-quasi-separated permanence"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A reduced scheme of finite type over a perfect field stays reduced after every field extension and its structure morphism is flat and of finite presentation",
-      "results": "Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, AlgebraicGeometry.affine_isReduced_iff, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
-      "date": "2026-10-16",
-      "verdict": "no match for the full item; hits are definitions, criteria, or other special hypotheses, not reduced schemes over perfect fields with all the concluding properties"
-    },
-    {
-      "tool": "grep",
-      "query": "perfectField|PerfectField|affine_isReduced_iff",
-      "results": "Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
-      "date": "2026-10-16",
-      "verdict": "no match for the full item; hits are definitions, criteria, or other special hypotheses, not reduced schemes over perfect fields with all the concluding properties"
-    },
-    {
-      "tool": "leansearch",
-      "query": "reduced schemes over perfect fields are geometrically reduced",
-      "results": "No hits; service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.GeometricallyReduced",
-      "results": "AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced, AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.GeometricallyReduced.eq_geometrically, AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced, AlgebraicGeometry.GeometricallyReduced.mk, AlgebraicGeometry.geometricallyReduced_iff, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced",
-      "date": "2026-10-16",
-      "verdict": "no match for the full item; hits are definitions, criteria, or other special hypotheses, not reduced schemes over perfect fields with all the concluding properties"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Over a perfect field base extension of a reduced algebra or reduced scheme is reduced",
-      "results": "Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.of_forall_fg",
-      "date": "2026-10-16",
-      "verdict": "no match for the full item; hits are definitions, criteria, or other special hypotheses, not reduced schemes over perfect fields with all the concluding properties"
-    },
-    {
-      "tool": "grep",
-      "query": "PerfectField|perfectField|perfect.*reduced|reduced.*perfect",
-      "results": "No hits",
-      "date": "2026-10-16",
-      "verdict": "no match for the full item; hits are definitions, criteria, or other special hypotheses, not reduced schemes over perfect fields with all the concluding properties"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1730,
-  "blueprint_uses": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-geometric-reduced-perfect",
-    "worker": "stage1",
-    "summary": "Statement retained. Replaced the unsupported separable-degree parenthesis by the existing perfect-reduced-tensor lemma, expanded the affine cover and reducedness gluing arguments, and supplied all parts of finite presentation including quasi-separatedness over a field. No new nodes; the split uses the existing tensor theorem and locally-Noetherian definition as declared off-unit tools, with the remaining dependencies Mathlib leaves. Re-read the current DAG after the failed landing and verified every cited quotation; the project perfect-field theorem proves only geometric reducedness, so the item is not attachable as a whole. The fibre-definition citation and identity-fibre base-change argument are explicit.",
-    "blueprint": "Steps 1-4 realize the opening affine reduction and the tensor-product-reducedness paragraph; steps 5-8 realize the final flatness, finite-presentation and geometric-fibre claims. The unit has no proof steps and this item is an auxiliary lemma, not its key proposition.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-perfect-reduced-tensor",
-        "why": "Step 2 uses the generic commutative-algebra tensor theorem over a perfect field; this auxiliary unit has no theorem with that statement. The existing node is already Lean-closed."
-      },
-      {
-        "node": "pqf-def-locnoeth",
-        "why": "Step 7 uses only the definition of locally Noetherian schemes to check the one affine chart of Spec K; this unit has no definition of that notion. No step of the unit is replaced."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-perfect-reduced-tensor",
-    "pqf-def-locnoeth"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q44-fba541a0e",
-    "group": "Q44",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-fba541a0e (reviewer sub-agent of L); spot-checked: Reviewed the complete item, eight steps, 17 dependencies, master source, unit/chapter route, Stacks citations, Mathlib attachments, tool uses, and edge cases. The statement and base-change morphism are exact; no new nodes or mathematical gaps remain. Review written to review.md."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField",
-    "file": "lean/Sheaf/AlgebraicGeometry/GeometricReducedFiniteTypePerfectField.lean",
-    "declaration": "AlgebraicGeometry.geometricallyReduced_finiteType_of_perfectField",
-    "statement": "theorem geometricallyReduced_finiteType_of_perfectField (K : Type u) [Field K] [PerfectField K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] : (∀ (L : Type u) [Field L] [Algebra K L], IsReduced (pullback (X ↘ Spec (.of K)) (Spec.map (CommRingCat.ofHom (algebraMap K L))))) ∧ Flat (X ↘ Spec (.of K)) ∧ LocallyOfFinitePresentation (X ↘ Spec (.of K)) ∧ QuasiCompact (X ↘ Spec (.of K)) ∧ QuasiSeparated (X ↘ Spec (.of K)) ∧ GeometricallyReduced (X ↘ Spec (.of K))",
-    "branch": "newtargets-dag",
-    "by": "Q42",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-5b01089c1",
-    "group": "Q42",
-    "result": "pass",
-    "note": "Full delivery reviewed; Lean module compiles via scompile.py with no errors, and no substantive or mechanical defects found."
+  {
+   "text": "The finite-type hypothesis already includes quasi-compactness by [def-weil-finite-type-morphism]. Together with local finite presentation from step 6 and quasi-separatedness from step 7, this proves that $f$ is of finite presentation by the finite-presentation convention in [def-sbc-locally-finite-presentation]. Combining this with steps 4 and 5 gives all clauses of the statement.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.proof.md",
+    "place": "Proof, final sentence; finite-presentation definition is Stacks Tag 01TP (morphisms-definition-finite-presentation)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "def-pc-geometrically-irreducible",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-geometric-reduced-perfect.proof.md",
+  "place": "Affine reduction and final sentence, with the unsupported separable-degree explanation replaced by Stacks 00I4; local-to-global details and quasi-separatedness supplied using 01J1, 01JR, 01I4, 01J2, 00FP, 01T6, 01OY, 01KV and 01TP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme of finite type over a perfect field remains reduced under any field extension; the structure morphism is flat and finitely presented with geometrically reduced fibres",
+   "results": "8 hits: Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.IsGeometricallyReduced, AlgebraicGeometry.IsReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isGeometricallyReduced_iff",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced, AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.GeometricallyReduced.eq_geometrically, AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced, AlgebraicGeometry.GeometricallyReduced.mk, AlgebraicGeometry.geometricallyReduced_iff, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectField|perfectField|perfect.*reduced|reduced.*perfect",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean; Smooth.lean:347-363 generic smoothness over perfect fields; Group/Smooth.lean:49 uses density of the smooth locus for group schemes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "reduced schemes over perfect fields are geometrically reduced",
+   "results": "8 hits: Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.mk, Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.casesOn, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.IsReduced.of_openCover",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect field the tensor product of two reduced algebras is reduced and reduced schemes are geometrically reduced",
+   "results": "8 hits: Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, IsReduced.tensorProduct_of_flat_of_forall_fg",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|IsGeometricallyReduced|perfectField",
+   "results": "5 hits: Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean; GeometricallyReduced.lean:17,23,26,54,58 are documentation and the algebraic-geometric-reducedness class, not a perfect-field theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the hits are definitions, reducedness criteria with extra geometric-reducedness assumptions, generic-smoothness results, or group-scheme results, not the stated conjunction for arbitrary reduced finite-type schemes over perfect fields",
+   "directory": "Mathlib/RingTheory/Nilpotent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a reduced scheme to the spectrum of a perfect field has geometrically reduced fibers and is flat; finite type implies finite presentation",
+   "results": "8 hits: Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.IsReduced, Algebra.IsGeometricallyReduced, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.FormallyUnramified.isReduced_of_field, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: no match for the complete item; the field-algebra formal-smoothness result assumes its algebra is a field, the scheme results concern the smooth locus or group schemes, and the remaining hits are definitions or require geometric reducedness or formal unramifiedness as an input"
+  },
+  {
+   "tool": "grep",
+   "query": "of_perfectField|isReduced.*[Tt]ensor|[Tt]ensor.*isReduced",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: no match for the complete item; the field-algebra formal-smoothness result assumes its algebra is a field, the scheme results concern the smooth locus or group schemes, and the remaining hits are definitions or require geometric reducedness or formal unramifiedness as an input",
+   "directory": "Mathlib/AlgebraicGeometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1730,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-geometric-reduced-perfect",
+  "worker": "stage1",
+  "summary": "Q70 independently audited the inherited eight-step proof against the current main-20261015 blueprint, Stacks sources and every cited node statement. Retained the exact statement and existing dependencies for the tensor, affine pullback, flatness and finite-presentation arguments. Added direct statement dependencies for spectrum, flatness, finite presentation and scheme-theoretic fibres instead of the conventions index. Made reducedness under isomorphism and the canonical residue-field identification explicit. Re-ran and recorded Mathlib searches; no full Mathlib or project attachment, and no new nodes. Repair of the literature-review B3 return: moved the characteristic-zero/surjective-Frobenius definition of perfectness from proof step 1 into the statement itself. This only expands the existing perfect-field hypothesis; the proof route and all conclusions are retained.",
+  "blueprint": "The current main-20261015 statement is unchanged from master. Steps 1-4 realize the affine reduction and reduced tensor argument; steps 5-8 realize the final flatness, finite presentation and geometric-fibre claims. The blueprint separable-degree parenthesis is invalid; Stacks 00I4 supplies the existing tensor tool. This auxiliary item does not realize the whole unit statement; the unit has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Step 2 uses the existing Lean-closed generic algebra theorem for tensor products of reduced algebras over a perfect field. No statement of this unit supplies it."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Step 7 uses the definition of a locally Noetherian scheme on the single affine chart of Spec K; the unit has no definition of that notion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "pqf-def-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-3a782b2c5",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-3a782b2c5 (reviewer sub-agent of L); spot-checked: Read the full item, report, 21 dependency statements, blueprint route, and cited sources. All eight steps pass; perfectness, arbitrary field extensions, canonical fibre identification, and full finite presentation are justified. Confirmed the blueprint source defect and valid Stacks 00I4 replacement. No new nodes or repairs. Accepted both declared tool uses; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricReducedFiniteTypePerfectField.lean",
+  "declaration": "AlgebraicGeometry.geometricallyReduced_finiteType_of_perfectField",
+  "statement": "theorem geometricallyReduced_finiteType_of_perfectField (K : Type u) [Field K] [PerfectField K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] : (∀ (L : Type u) [Field L] [Algebra K L], IsReduced (pullback (X ↘ Spec (.of K)) (Spec.map (CommRingCat.ofHom (algebraMap K L))))) ∧ Flat (X ↘ Spec (.of K)) ∧ LocallyOfFinitePresentation (X ↘ Spec (.of K)) ∧ QuasiCompact (X ↘ Spec (.of K)) ∧ QuasiSeparated (X ↘ Spec (.of K)) ∧ GeometricallyReduced (X ↘ Spec (.of K))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b01089c1",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Full delivery reviewed; Lean module compiles via scompile.py with no errors, and no substantive or mechanical defects found."
+ }
 }

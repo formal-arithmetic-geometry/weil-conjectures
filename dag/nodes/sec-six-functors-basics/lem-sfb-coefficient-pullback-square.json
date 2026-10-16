@@ -3,41 +3,234 @@
  "blueprint": {
   "is": "lem-sfb-coefficient-pullback-square",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient changes commute with $\\alpha_f$",
- "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed abelian groups (in particular of\ncondensed rings), $f\\colon X\\to Y$ a morphism of schemes, and\n$\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$, $\\alpha'_f\\colon f^*\\Lambda'_Y\\to\\Lambda'_X$ the\ncoefficient morphisms of [sk-def-sfb-coefficient-morphisms], with $f^*$ the pullback of abelian\nsheaves ([sk-def-sfb-finite-pushforward-pullback]). Then\n\n$$\n\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda'_X ,\n$$\n\nwith $a_X$, $a_Y$ the coefficient changes of [def-sfb-coefficient-map].",
+ "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed rings, that is, a morphism of ring objects in condensed abelian groups ([sk-def-sfb-condensed-ring]), and let $f\\colon X\\to Y$ be a morphism of schemes. Let $\\Lambda_X,\\Lambda_Y,\\Lambda'_X,\\Lambda'_Y$ be the pulled-back coefficient ring objects of [sk-def-sfb-pulled-back-coefficients]. Write $f^*$ for the pullback of abelian pro-étale sheaves defined by [def-sfb-finite-upper-star] with $\\mathcal A=\\Ab$. Let\n$$\n\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda_X,\\qquad\n\\alpha'_f\\colon f^*\\Lambda'_Y\\longrightarrow\\Lambda'_X\n$$\nbe the coefficient ring-object morphisms of [sk-def-sfb-coefficient-morphisms], and let\n$$\na_X\\colon\\Lambda_X\\longrightarrow\\Lambda'_X,\\qquad\na_Y\\colon\\Lambda_Y\\longrightarrow\\Lambda'_Y\n$$\nbe the coefficient changes of [def-sfb-coefficient-map]. Then, on the underlying abelian sheaves,\n$$\n\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda'_X.\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pullback-square.md",
   "place": "node lem-sfb-coefficient-pullback-square, order 1724"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star",
   "sk-def-sfb-coefficient-morphisms",
   "def-sfb-coefficient-map"
  ],
- "proof": [
-  {
-   "text": "By [sk-def-sfb-coefficient-morphisms], $\\alpha_f$ and $\\alpha'_f$ are the components at\n$\\Lambda$ and at $\\Lambda'$ of the natural isomorphism $f^*\\circ p_Y^*\\cong p_X^*$ of\n[sk-def-sfb-pullback-from-point-comp]. The asserted identity is the naturality square of this\nisomorphism at the morphism $a$, since $f^*p_Y^*a=f^*a_Y$ and $p_X^*a=a_X$.",
-   "uses": [
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-pullback-from-point-comp"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-pullback-from-point-comp"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pullback-square.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-pullback-square.proof.md",
+  "place": "Sole proof paragraph: naturality of the comparison, applied to the ring-coefficient maps of the parent unit; the one-line Mathlib specialization is recorded in mathlib_match"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality specializes directly after unfolding the named maps"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|coefficientMap|condensedPullbackHom",
+   "results": "0 hit(s); ",
+   "date": "2026-10-16",
+   "verdict": "no direct match in these returned hits; subsequent naturality searches give the one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation commutes with a morphism between two objects, the naturality square",
+   "results": "8 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality', CategoryTheory.NatTrans.naturality_app, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.MorphismProperty.naturalityProperty, CategoryTheory.CommSq.of_arrow, CategoryTheory.CatCommSq, CategoryTheory.CatCommSq.iso_hom_naturality",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality specializes directly after unfolding the named maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient pullback comparison is natural in a morphism of condensed abelian groups",
+   "results": "8 hit(s); CategoryTheory.Limits.pullbackComparison, CondensedMod.hom_naturality_apply, LightCondMod.hom_naturality_apply, CondensedSet.hom_naturality_apply, LightCondSet.hom_naturality_apply, CategoryTheory.NatTrans.PullbackShift.natIsoComp, LocallyConstant.comapₗ, CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-16",
+   "verdict": "no direct match in these returned hits; subsequent naturality searches give the one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "structure NatTrans|naturality|coefficientMap|condensedPullbackHom",
+   "results": "5 hit(s); 16, 19, 50, 53, 56",
+   "date": "2026-10-16",
+   "verdict": "no direct match in these returned hits; subsequent naturality searches give the one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural isomorphism between functors F and G and a morphism a, G.map a composed with the component at the source equals the component at the target composed with F.map a",
+   "results": "8 hit(s); CategoryTheory.NatIso.naturality_1, CategoryTheory.NatIso.naturality_1', CategoryTheory.NatIso.naturality_1'_assoc, CategoryTheory.NatIso.naturality_2, CategoryTheory.NatIso.naturality_2', CategoryTheory.NatIso.naturality_1_assoc, CategoryTheory.NatIso.naturality_2_assoc, CategoryTheory.NatIso.naturality_2'_assoc",
+   "date": "2026-10-16",
+   "verdict": "no direct match in these returned hits; subsequent naturality searches give the one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "structure NatTrans|naturality ⦃",
+   "results": "3 hit(s); Mathlib/CategoryTheory/Profunctor/Basic.lean, Mathlib/CategoryTheory/NatTrans.lean, Mathlib/CategoryTheory/NatTrans.lean",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality specializes directly after unfolding the named maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"naturality\"",
+   "results": "4 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality specializes directly after unfolding the named maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"map\"",
+   "results": "12 hit(s); CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.comonadToFunctor_map, CategoryTheory.monadToFunctor_map, CategoryTheory.Functor.mapActionCongr_hom, CategoryTheory.Functor.mapActionComp_hom, CategoryTheory.Functor.mapActionCongr_inv, CategoryTheory.Functor.mapActionComp_inv",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: returned related square constructions or mapped naturality; none is needed in place of the directly inspected naturality field"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality.*F.map|F.map f.*app|structure NatTrans",
+   "results": "25 hit(s); Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: returned related square constructions or mapped naturality; none is needed in place of the directly inspected naturality field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Components of a natural transformation satisfy a commutative square for every arrow in the domain category",
+   "results": "8 hit(s); CategoryTheory.CommSq.of_arrow, CategoryTheory.NatTrans.mapSquare, CategoryTheory.CatCommSq, CategoryTheory.TwoSquare.natTrans, CategoryTheory.Square.mapFunctor_map, CategoryTheory.TwoSquare, CategoryTheory.Arrow.w_mk_right, CategoryTheory.Arrow.w",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: returned related square constructions or mapped naturality; none is needed in place of the directly inspected naturality field"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality ⦃X Y : C⦄",
+   "results": "1 hit(s); Mathlib/CategoryTheory/NatTrans.lean",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: exact naturality field found; read Mathlib/CategoryTheory/NatTrans.lean:53-57 and verified the recorded specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"naturality\", CategoryTheory.NatTrans",
+   "results": "4 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: exact naturality field found; read Mathlib/CategoryTheory/NatTrans.lean:53-57 and verified the recorded specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient pullback square for a morphism of condensed rings and scheme pullback",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-16",
+   "verdict": "no match in returned hits: these are other scheme/module or underlying-ring constructions, not this coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, AlgebraicGeometry.ProEtale.coefficientMap",
+   "results": "0 hit(s); ; loogle: unknown identifier 'AlgebraicGeometry.ProEtale.coefficientMap'",
+   "date": "2026-10-16",
+   "verdict": "no match: the query returned an unknown-identifier diagnostic, not an absence proof; the subsequent generic naturality query succeeds"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientMap|condensedPullbackHom|naturality",
+   "results": "25 hit(s); Mathlib/CategoryTheory/DifferentialObject.lean, Mathlib/CategoryTheory/DifferentialObject.lean, Mathlib/CategoryTheory/DifferentialObject.lean, Mathlib/CategoryTheory/DifferentialObject.lean, Mathlib/CategoryTheory/DifferentialObject.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean; scope: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "related naturality hits; not used for an absence conclusion; subsequent precise grep locates the naturality field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a natural isomorphism at the underlying morphism of a ring object",
+   "results": "8 hit(s); CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.NatIso.hom_app_isIso, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.Iso.commRingCatIsoToRingEquiv_toRingHom, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality, CommRingCat.Hom.hom', CategoryTheory.Free.ext",
+   "date": "2026-10-16",
+   "verdict": "no match in returned hits: these are other scheme/module or underlying-ring constructions, not this coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation commutes with a morphism of ring objects after forgetting to the underlying category",
+   "results": "8 hit(s); CommRingCat.forget_map_apply, RingCat.forget_map_apply, CommRingCat.forgetToRingCat_map_hom, CommRingCat.forget_map, CommRingCat.commMon_forget₂_map, RingCat.forget_map, RingCat.Colimits.cocone_naturality, CommAlgCat.forget₂_commRingCat_map",
+   "date": "2026-10-16",
+   "verdict": "no match in returned hits: these are other scheme/module or underlying-ring constructions, not this coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "match: read Mathlib/CategoryTheory/NatTrans.lean:43-57; the naturality field specializes at the underlying morphism of the given condensed-ring morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality ⦃X Y : C⦄",
+   "results": "1 hit(s); Mathlib/CategoryTheory/NatTrans.lean; scope: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/CategoryTheory/NatTrans.lean:57; read source and checked the ring-input specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation satisfies the naturality square at the underlying morphism of a condensed ring morphism",
+   "results": "8 hit(s); CondensedMod.hom_naturality_apply, CondensedSet.hom_naturality_apply, LightCondMod.hom_naturality_apply, LightCondSet.hom_naturality_apply, LightCondensed.forget_map_val_app, LightCondensed.ihom_map_val_app, Condensed.underlying_map, LightCondensed.underlying_map",
+   "date": "2026-10-16",
+   "verdict": "related condensed-sheaf naturality hits; not a direct match to the coefficient square; the generic naturality field below supplies the exact specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality at the underlying morphism of the given condensed-ring morphism; read Mathlib/CategoryTheory/NatTrans.lean:43-57 and the existing coefficient-map/component definitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality square of a natural transformation at a ring morphism",
+   "results": "8 hit(s); CategoryTheory.MorphismProperty.naturalityProperty, CategoryTheory.NatTrans.naturality_apply, CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.app_naturality, CategoryTheory.NatTrans.naturality', CategoryTheory.NatTrans.mk, CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.NatTrans.naturality_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality at the underlying morphism of the given condensed-ring morphism; read Mathlib/CategoryTheory/NatTrans.lean:43-57 and the existing coefficient-map/component definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality ⦃X Y : C⦄",
+   "results": "1 hit(s); Mathlib/CategoryTheory/NatTrans.lean; scope: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.NatTrans.naturality at the underlying morphism of the given condensed-ring morphism; read Mathlib/CategoryTheory/NatTrans.lean:43-57 and the existing coefficient-map/component definitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"naturality_app\"",
+   "results": "0 hit(s); ",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: No returned hits; no absence conclusion drawn."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For functors from C to D, the components of a natural isomorphism commute with the image of every morphism a : L ⟶ M",
+   "results": "8 hit(s); CategoryTheory.NatIso.naturality_1, CategoryTheory.NatIso.naturality_2, CategoryTheory.NatTrans.naturality_1, CategoryTheory.NatTrans.naturality_2, CategoryTheory.NatIso.naturality_2', CategoryTheory.NatIso.naturality_1', CategoryTheory.NatTrans.naturality_1_assoc, CategoryTheory.NatIso.naturality_2'_assoc",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: Returned related NatIso naturality identities with inverse components; read the exact NatTrans field locally instead."
+  },
+  {
+   "tool": "grep",
+   "query": "F.map f ≫ app Y = app X ≫ G.map f",
+   "results": "1 hit(s); Mathlib/CategoryTheory/NatTrans.lean",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: Exact field read at Mathlib/CategoryTheory/NatTrans.lean:57; direct specialization at the underlying morphism of the given ring morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, _ = _",
+   "results": "7 hit(s); CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map, CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_1",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: Exact NatTrans.naturality among returned hits; verified locally at Mathlib/CategoryTheory/NatTrans.lean:43-57."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.NatTrans.naturality",
+  "file": "Mathlib/CategoryTheory/NatTrans.lean",
+  "line": 57,
+  "how": "specializes in one line: apply CategoryTheory.NatTrans.naturality (Mathlib/CategoryTheory/NatTrans.lean:57) to the hom of the comparison natural isomorphism theta_f : f^* composed with p_Y^* ≅ p_X^* from sk-def-sfb-pullback-from-point-comp, at the underlying condensed-abelian-group morphism of the GIVEN condensed-ring morphism a. Set C = Sh(*_proet, Ab), D = Sh(X_proet, Ab), F = p_Y^* followed by f^*, G = p_X^*. By the existing definitions sk-def-sfb-coefficient-morphisms and def-sfb-coefficient-map, the components are the underlying alpha_f and alpha_prime_f, F.map(a) = f^*(a_Y), and G.map(a) = a_X. Thus the field is exactly the displayed equality. The input is a ring morphism and all named coefficient maps retain their existing ring-object definitions; nothing is redefined on arbitrary abelian-group inputs."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -60,5 +253,53 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-change"
+ "unit": "sk-def-sfb-coefficient-change",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-coefficient-pullback-square",
+  "worker": "stage1",
+  "summary": "Repair of E7/F1: restored morphisms of condensed rings and the original ring-object coefficient maps; removed the returned delivery's newly defined arbitrary-abelian-group maps. Resolved the missing direct finite-pushforward-pullback reference by citing the existing, Lean-closed def-sfb-finite-upper-star at Ab, which defines precisely the same pullback for every scheme morphism. The unchanged naturality specialization still makes the item a Mathlib leaf, with no new nodes. Read current blueprint statement/proof, parent unit and chapter source, all definition statements, source Lean and Mathlib naturality. The current DAG already supplies the chapter and unit bindings; they were verified in the shared snapshot and are retained unchanged. Independent second reading corrected the citer-impact record: the pushforward-square sibling retains the same broad additive-input typing defect and is marked holds=false, rather than claiming its full current statement remains supported.",
+  "blueprint": "The sole proof paragraph of lem-sfb-coefficient-pullback-square.proof.md, restricted to the condensed-ring inputs of its referenced definitions and the parent sk-def-sfb-coefficient-change/_section.md, is NatTrans.naturality after unfolding those existing definitions. This realizes the pullback compatibility square of that parent unit. The missing aggregate sk-def-sfb-finite-pushforward-pullback is replaced only for the required pullback notion by its already imported child def-sfb-finite-upper-star; no unit proof step or chapter route is replaced.",
+  "statement_change": {
+   "date": "2026-10-16",
+   "by": "N8 stage 1",
+   "old_statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed abelian groups (in particular of\ncondensed rings), $f\\colon X\\to Y$ a morphism of schemes, and\n$\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$, $\\alpha'_f\\colon f^*\\Lambda'_Y\\to\\Lambda'_X$ the\ncoefficient morphisms of [sk-def-sfb-coefficient-morphisms], with $f^*$ the pullback of abelian\nsheaves ([sk-def-sfb-finite-pushforward-pullback]). Then\n\n$$\n\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda'_X ,\n$$\n\nwith $a_X$, $a_Y$ the coefficient changes of [def-sfb-coefficient-map].",
+   "new_statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed rings, that is, a morphism of ring objects in condensed abelian groups ([sk-def-sfb-condensed-ring]), and let $f\\colon X\\to Y$ be a morphism of schemes. Let $\\Lambda_X,\\Lambda_Y,\\Lambda'_X,\\Lambda'_Y$ be the pulled-back coefficient ring objects of [sk-def-sfb-pulled-back-coefficients]. Write $f^*$ for the pullback of abelian pro-étale sheaves defined by [def-sfb-finite-upper-star] with $\\mathcal A=\\Ab$. Let\n$$\n\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda_X,\\qquad\n\\alpha'_f\\colon f^*\\Lambda'_Y\\longrightarrow\\Lambda'_X\n$$\nbe the coefficient ring-object morphisms of [sk-def-sfb-coefficient-morphisms], and let\n$$\na_X\\colon\\Lambda_X\\longrightarrow\\Lambda'_X,\\qquad\na_Y\\colon\\Lambda_Y\\longrightarrow\\Lambda'_Y\n$$\nbe the coefficient changes of [def-sfb-coefficient-map]. Then, on the underlying abelian sheaves,\n$$\n\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda'_X.\n$$",
+   "what": "The imported wording quantified over arbitrary condensed-abelian-group morphisms while the cited coefficient-map and coefficient-morphism definitions require a morphism of condensed rings (ring objects). For example, an arbitrary additive map between constant condensed groups need not be a unital ring morphism, so the named coefficient maps are not defined at every original input. The corrected statement follows the parent coefficient-change unit and the existing definitions, retaining the full naturality square for the ring-object inputs.",
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/_section.md",
+    "place": "statement and first-square clause; coefficient-map and coefficient-morphism definitions"
+   },
+   "citers": [
+    {
+     "id": "def-sfb-comap-open-immersion-shriek-iso",
+     "holds": true,
+     "note": "uses the pullback-square lemma for the coefficient-change comparison; the ring-object formulation is exactly the parent interface."
+    },
+    {
+     "id": "sk-def-sfb-coefficient-change",
+     "holds": true,
+     "note": "the parent unit states the first square for a morphism of commutative condensed rings."
+    },
+    {
+     "id": "lem-sfb-coefficient-pushforward-square",
+     "holds": false,
+     "note": "Its current statement also quantifies over arbitrary condensed-abelian-group morphisms, although its named coefficient changes and coefficient morphisms require ring objects and a ring morphism. Its displayed proof can use this corrected lemma for ring-morphism inputs, but cannot apply it to all inputs currently quantified by that sibling. The sibling needs its own explicit statement-dispute repair; it is outside this delivery and is not edited here."
+    },
+    {
+     "id": "def-sfb-comap-upper-star-iso",
+     "holds": true,
+     "note": "uses the coefficient-change pullback compatibility for ring-object coefficients, unchanged."
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-fc70514c7",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-fc70514c7 (reviewer sub-agent of L); spot-checked: Read the complete item, required guidance, blueprint route, every cited node and source, exact NatTrans.naturality declaration, edge cases, citer impacts, and duplicate candidates. The ring-object typing correction is explicitly recorded and justified; no new nodes or repairs are needed. Review written to review.md."
+ }
 }

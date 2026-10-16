@@ -1,0 +1,105 @@
+{
+ "id": "lem-coef-model-cofibrant-colimit-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle finite mapping-complex comparison before the total inverse limit: cell induction on the unit for free dg diagrams",
+   "via": [
+    "lem-coef-locally-cofibrant-dg-restriction",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Weak-equivalence comparisons for cofibrant colimit constructions",
+ "statement": "Let $\\mathcal M$ be a model category in the sense of [lem-coef-model-infinity-derived-adjunction], with all small limits and colimits; smallness is relative to fixed universes, which may be enlarged. The following colimit comparison assertions hold.\n\n(a) A small coproduct of weak equivalences between cofibrant objects is a weak equivalence, and these coproducts are cofibrant.\n\n(b) Given a map of spans $(X\\leftarrow A\\xrightarrow{i}B)\\to(X'\\leftarrow A'\\xrightarrow{i'}B')$, assume all six objects are cofibrant, $i,i'$ are cofibrations, and the three component maps are weak equivalences. Then the induced map $X\\amalg_A B\\to X'\\amalg_{A'}B'$ is a weak equivalence, and both pushouts are cofibrant.\n\n(c) Let $\\theta$ be a small nonzero limit ordinal. Let $(X_\\alpha)_{\\alpha<\\theta}$ and $(Y_\\alpha)_{\\alpha<\\theta}$ be ordinal-indexed diagrams with cofibrant initial objects, cofibration successor maps, and colimit cocones at every nonzero limit ordinal less than $\\theta$. Every natural transformation $u_\\alpha:X_\\alpha\\to Y_\\alpha$ whose components are weak equivalences induces a weak equivalence $\\operatorname{colim}_{\\alpha<\\theta}X_\\alpha\\to\\operatorname{colim}_{\\alpha<\\theta}Y_\\alpha$; both colimits are cofibrant. No properness hypothesis on $\\mathcal M$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Additional model-category foundation for the finite mapping-complex comparison: cell induction on the unit for free dg diagrams. This is not an assertion of a Stacks tag.",
+  "external": [
+   {
+    "document": "Mark Hovey, Model categories, https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf (read online; not archived in literature/)",
+    "place": "Definition 5.1.1, Theorem 5.1.3 and Corollary 5.1.6 (discrete and ordinal direct categories), and Lemma 5.2.6 (cube lemma)."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pushouts coproducts and transfinite compositions of weak equivalences between cofibrant diagrams in a model category preserve weak equivalences",
+   "results": "{\"t\": \"2026-10-16T14:34:27Z\", \"tool\": \"leanfinder\", \"query\": \"Pushouts coproducts and transfinite compositions of weak equivalences between cofibrant diagrams in a model category preserve weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"CategoryTheory.MorphismProperty.transfiniteCompositions_pushouts_coproducts_le_llp_rlp\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"CategoryTheory.MorphismProperty.transfiniteCompositionsOfShape_pushouts_coproducts_le_llp_rlp\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\"], \"digest\": \"379945053c19fe4e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "grep",
+   "query": "cube.?lemma|gluing.?lemma|colimit.*weakEquivalence|weakEquivalence.*colimit|coproduct.*[Ww]eak|transfinite.*[Ww]eak",
+   "results": "{\"t\": \"2026-10-16T14:37:15Z\", \"tool\": \"grep\", \"query\": \"cube.?lemma|gluing.?lemma|colimit.*weakEquivalence|weakEquivalence.*colimit|coproduct.*[Ww]eak|transfinite.*[Ww]eak\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"43ea0a3dee0de344\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits of cofibrant diagrams of cofibrations preserve objectwise weak equivalences in every model category",
+   "results": "{\"t\": \"2026-10-16T14:37:16Z\", \"tool\": \"leansearch\", \"query\": \"Colimits of cofibrant diagrams of cofibrations preserve objectwise weak equivalences in every model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations_1\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"1b3c413d8a3c8aff\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T14:37:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cube lemma for weak equivalences of pushout squares of cofibrant objects and homotopy invariance of colimits of continuous ordinal chains of cofibrations",
+   "results": "{\"t\": \"2026-10-16T14:37:17Z\", \"tool\": \"leanfinder\", \"query\": \"The cube lemma for weak equivalences of pushout squares of cofibrant objects and homotopy invariance of colimits of continuous ordinal chains of cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.CofibrantObject.homMk_homMk_assoc\"], \"digest\": \"16765be214f7c2de\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite.*[Ww]eak|[Ww]eak.*transfinite|[Cc]ube[Ll]emma|[Gg]luing[Ll]emma",
+   "results": "{\"t\": \"2026-10-16T14:37:49Z\", \"tool\": \"grep\", \"query\": \"transfinite.*[Ww]eak|[Ww]eak.*transfinite|[Cc]ube[Ll]emma|[Gg]luing[Ll]emma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EpiMono.lean\", \"Mathlib/CategoryTheory/EpiMono.lean\"], \"digest\": \"6513add551335b0f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source reads Instances.lean:120-235 give closure of trivial cofibrations and pushouts of trivial cofibrations, not weak-equivalence comparisons of two cofibrant spans. TransfiniteCompositionLifting.lean:35-75 concerns diagonal lifts, not weak equivalences between chains. EpiMono.lean:242-279 is an ordinary epi/mono cube lemma. Semantic hits and Loogle supply no theorem covering (b) or (c), even though Mathlib has component closure results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit functor from a direct diagram model structure preserves weak equivalences between cofibrant diagrams, including coproducts and ordinal sequences",
+   "results": "{\"t\": \"2026-10-16T14:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit functor from a direct diagram model structure preserves weak equivalences between cofibrant diagrams, including coproducts and ordinal sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"HomotopicalAlgebra.CofibrantObject.instHasQuotientWeakEquivalencesHomRel\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\"], \"digest\": \"9b1ccdf54a906d1d\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Instances.lean:137-140 and 180-183 concern closure of trivial cofibrations and cofibrations under coproducts, not arbitrary weak equivalences between cofibrant objects. Cylinder.lean and PathObject.lean glue cylinders and path objects. None of these hits supplies the one-leg weak-equivalence cube comparison or continuous ordinal-chain comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Ww]eak|[Ww]eak.*colimit|[Cc]oproduct|[Gg]luing|[Cc]ube",
+   "results": "{\"t\": \"2026-10-16T14:58:42Z\", \"tool\": \"grep\", \"query\": \"colimit.*[Ww]eak|[Ww]eak.*colimit|[Cc]oproduct|[Gg]luing|[Cc]ube\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\"], \"digest\": \"9b07b7b0a8766a14\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Instances.lean:137-140 and 180-183 concern closure of trivial cofibrations and cofibrations under coproducts, not arbitrary weak equivalences between cofibrant objects. Cylinder.lean and PathObject.lean glue cylinders and path objects. None of these hits supplies the one-leg weak-equivalence cube comparison or continuous ordinal-chain comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-locally-cofibrant-dg-restriction",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

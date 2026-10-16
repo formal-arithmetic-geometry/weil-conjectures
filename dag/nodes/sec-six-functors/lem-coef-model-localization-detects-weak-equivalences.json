@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-model-localization-detects-weak-equivalences",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle finite mapping-complex comparison before the total inverse limit: detecting weak equivalences after evaluation on cofibrant dg diagram values",
+   "via": [
+    "lem-coef-locally-cofibrant-dg-restriction",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Model-category localization detects weak equivalences",
+ "statement": "Let $\\mathcal M$ be a model category in the sense of [lem-coef-model-infinity-derived-adjunction], with weak equivalences $W$, and let $\\gamma:\\mathcal M\\to\\mathcal H$ be an ordinary localization at $W$ (initial among functors sending $W$ to isomorphisms). Work in universes in which this localization exists. For every morphism $u:X\\to Y$ of $\\mathcal M$, $u\\in W$ if and only if $\\gamma(u)$ is an isomorphism in $\\mathcal H$. Neither $X$ nor $Y$ is assumed cofibrant or fibrant.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Additional model-category foundation for the finite mapping-complex comparison: detecting weak equivalences after evaluation on cofibrant dg diagram values. This is not an assertion of a Stacks tag.",
+  "external": [
+   {
+    "document": "Mark Hovey, Model categories, https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf (read online; not archived in literature/)",
+    "place": "Theorem 1.2.10(iv), with the forward implication furnished by the definition of localization."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in a model category is a weak equivalence if and only if its image in the homotopy category is an isomorphism",
+   "results": "{\"t\": \"2026-10-16T14:34:29Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism in a model category is a weak equivalence if and only if its image in the homotopy category is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\", \"HomotopicalAlgebra.WeakEquivalence.mem\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"eb5748daa7274c2a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*[Ii]so|[Ii]so.*weakEquivalence|[Ss]aturated",
+   "results": "{\"t\": \"2026-10-16T14:36:57Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*[Ii]so|[Ii]so.*weakEquivalence|[Ss]aturated\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean\"], \"digest\": \"f35ba413635b80a6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak equivalences in a model category are exactly the maps inverted by its homotopy category",
+   "results": "{\"t\": \"2026-10-16T14:36:57Z\", \"tool\": \"leansearch\", \"query\": \"Weak equivalences in a model category are exactly the maps inverted by its homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\"], \"digest\": \"2fc683f862d2d309\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-16T14:36:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.instIsIsoHoCatMapToHoCatOfWeakEquivalence\"], \"digest\": \"208b33bdfc1b316f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences in a model category form a saturated class detected by the ordinary localization functor",
+   "results": "{\"t\": \"2026-10-16T14:36:58Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences in a model category form a saturated class detected by the ordinary localization functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.WeakEquivalence.mem\"], \"digest\": \"eb100545d799baf9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*iff.*[Ii]so|[Ii]so.*iff.*weakEquivalence|isIso.*[Ll]ocaliz|[Ss]aturat",
+   "results": "{\"t\": \"2026-10-16T14:37:49Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*iff.*[Ii]so|[Ii]so.*iff.*weakEquivalence|isIso.*[Ll]ocaliz|[Ss]aturat\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"8ff4f109f8d610f1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*[Ii]ff|[Ii]so.*[Ii]ff|[Ww]eak.*[Ii]so",
+   "results": "{\"t\": \"2026-10-16T14:37:49Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*[Ii]ff|[Ii]so.*[Ii]ff|[Ww]eak.*[Ii]so\", \"sub\": \"AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"102\", \"108\", \"139\", \"274\", \"307\"], \"digest\": \"165533cbb41370e6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:85-92 detects membership in the weak-equivalence class transported to a quotient; that quotient still has noninvertible weak equivalences and is subsequently localized. Lines 250-279 prove that resolution maps are inverted, not the converse for arbitrary arrows. BifibrantObjectHomotopy.lean:129-139 gives only weak-equivalence implies isomorphism. Instances.lean:328-350 gives isomorphisms imply weak equivalences in the original category. None proves reflection from the actual localization for arbitrary model-category objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a model category, the inverse image of the isomorphisms under any localization at the weak equivalences equals the weak equivalences",
+   "results": "{\"t\": \"2026-10-16T14:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"In a model category, the inverse image of the isomorphisms under any localization at the weak equivalences equals the weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.mem_weakEquivalences\"], \"digest\": \"620990e6f7f2dd87\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. FundamentalLemma.lean:69-133 identifies maps in a localization with homotopy classes when the source is cofibrant and the target fibrant; it does not assert reflection of isomorphisms for arbitrary endpoints. BifibrantObjectHomotopy.lean:133-139 only gives the forward inversion implication. CofibrantObjectHomotopy.lean:123-125 and 235-245 transfer localization structures and equivalences; they do not state saturation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|IsSaturated|isIso.*map|map.*isIso",
+   "results": "{\"t\": \"2026-10-16T14:58:42Z\", \"tool\": \"grep\", \"query\": \"IsLocalization|IsSaturated|isIso.*map|map.*isIso\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\"], \"digest\": \"820ab4f64c55784a\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. FundamentalLemma.lean:69-133 identifies maps in a localization with homotopy classes when the source is cofibrant and the target fibrant; it does not assert reflection of isomorphisms for arbitrary endpoints. BifibrantObjectHomotopy.lean:133-139 only gives the forward inversion implication. CofibrantObjectHomotopy.lean:123-125 and 235-245 transfer localization structures and equivalences; they do not state saturation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-locally-cofibrant-dg-restriction",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

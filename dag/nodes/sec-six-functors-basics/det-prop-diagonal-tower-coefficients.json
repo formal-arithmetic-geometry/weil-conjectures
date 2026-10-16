@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-diagonal-tower-coefficients",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Change of coefficients and base change for the diagonal class",
@@ -12,35 +12,112 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.md",
   "place": "node det-prop-diagonal-tower-coefficients, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-qlbar-condensed",
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-trace",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "sk-def-sp-tate-twist",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-change-of-scalars"
+ ],
  "proof": [
   {
-   "text": "(1) $\\mathcal O_E$ is finite free over $\\Zl$, so extension of scalars along\n$\\Zl\\to\\mathcal O_E$ is tensoring with a finite free module; it is exact and\ncommutes with products and with $R\\varprojlim$, and with $Rq_*$, $Rp_{i*}$.\nSince $\\ell^n\\mathcal O_E=\\pi_E^{en}\\mathcal O_E$ up to a unit, where $e$ is\nthe ramification index, the systems of reductions modulo $\\ell^n$ and modulo\n$\\pi_E^n$ are cofinal, so the $\\mathcal O_E$-objects are derived complete with\nthe expected reductions. Applying the functor to $\\delta_{\\Zl}$, to the trace\nand to the identities of [det-prop-diagonal-tower-trace](2) gives the\n$\\mathcal O_E$-statements.",
+   "text": "(1) Use the finite free coefficient extension in [sk-prop-sfb-cartesian-coefficients](2) for $\\mathbf Q_\\ell\\subset E$. Choosing a $\\mathbf Z_\\ell$-basis identifies the underlying scalar-extension functor with a finite biproduct functor $K\\mapsto K^{\\oplus [E:\\mathbf Q_\\ell]}$. Thus it is exact and commutes with products and the cone of $1-\\mathrm{shift}$ defining the derived inverse limit. An additive derived direct-image functor preserves finite biproducts, so the canonical scalar/direct-image comparison is an isomorphism: in this basis it is the identity on each copy of $Rq_*K$, or $Rp_{i*}K$. Apply this functor to the class of [det-prop-diagonal-tower-limit](3), the traces and the equality of composites in [det-prop-diagonal-tower-trace](1),(2). This constructs the integral classes, traces and identities. The coefficient-ring limit is [det-prop-sfb-qlbar-colimit-x-integral-limit](3). Writing $\\ell=u\\pi_E^e$ with $u$ a unit shows that the $\\ell$-power tower is the cofinal subsystem of levels $en$ of the $\\pi_E$-power tower. More explicitly, for every $m\\ge1$, $A=\\mathcal O_E/\\pi_E^m$ is killed by $\\ell^r$ for $er\\ge m$. Reduction of the integral morphisms to $A$ is reduction modulo $\\ell^r$ followed by derived extension along $\\mathbf Z/\\ell^r\\to A$. The former reduction is given by [det-prop-diagonal-tower-limit](3) and [det-prop-diagonal-tower-trace](1); the latter is the torsion Cartier class by coefficient compatibility in [sk-lem-geo-cartier]. The torsion trace is the inverse of the unit/section decomposition followed by a summand projection, so extension of that finite biproduct decomposition carries it to the trace for $A$ of [sk-lem-geo-p1-cohomology]. This identifies every $\\pi_E^m$ reduction, not just the cofinal levels.",
    "uses": [
-    "det-prop-diagonal-tower-trace"
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-prop-diagonal-tower-limit",
+    "det-prop-diagonal-tower-trace",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "sk-lem-geo-cartier",
+    "sk-lem-geo-p1-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "paragraph (1): finite free extension, all quotient reductions and identities"
+   }
   },
   {
-   "text": "(2) Rationalization $-\\otimes\\mathbf Q$ is the colimit of\n$K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$, and extension to $\\Qlb$ is the\nfiltered colimit over finite extensions $E'/E$. Both are colimits of systems\nwith a common lower bound, so the direct images $Rq_*$ and $Rp_{i*}$ commute\nwith them ([sk-cor-pe-bounded-continuity]). Applying them to the morphisms of (1)\ngives $\\delta_E$, $\\delta_{\\Qlb}$ and the traces, and the identities, being\nequalities of morphisms, are preserved.",
-   "uses": [],
-   "elementary": null
+   "text": "(2) By [sk-prop-sfb-qlbar-colimit-x], $E_X=\\mathcal O_{E,X}[1/\\ell]$ and $\\QbarX=\\varinjlim_{E\\subset\\Qlb}E_X$. Localization is the colimit of $K\\xrightarrow{\\ell}K\\xrightarrow{\\ell}\\cdots$; composita make the finite-extension system filtered. Here the coefficient sheaves are in degree zero and their twists/shifts in degrees at least $-2$, a common lower bound. The maps $q,p_1,p_2$ are relative projective-line projections: over each affine open of the base they have the two standard affine charts, their overlap is affine, and their diagonal is cut out by $x_0y_1-x_1y_0$. Hence their inverse images of affine opens and their diagonals are quasi-compact, verifying the qcqs hypotheses directly. Apply [det-lem-bounded-continuity-direct-image] to the localization and finite-extension diagrams for these maps. Work with underlying abelian sheaves (so all diagrams have the common coefficient ring $\\mathbf Z$). Filtered colimits are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]; hence they commute with cohomology of complexes, and the canonical colimit/direct-image maps induce isomorphisms in every cohomological degree. Applying the coefficient colimits to the morphisms and composites in (1) therefore gives the $E$- and $\\Qlb$-linear classes and traces and preserves both integration identities.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-lem-bounded-continuity-direct-image",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "paragraph (2): localization and finite-extension colimits"
+   }
   },
   {
-   "text": "(3) After base change along $g$, the diagonal and the sections remain\neffective Cartier divisors, and the Cartier extension and the Kummer\nsequences are natural under pullback, so the morphisms of systems of\n[det-prop-diagonal-tower-system] and [det-prop-diagonal-tower-trace](1) pull\nback to the corresponding morphisms over $Y'$. The adjunction between the\nconstant-system functor and $R\\varprojlim$ gives, for an inverse system\n$K_\\bullet$ of sheaves on $T_{\\mathrm{proét}}$ with $T$ one of $Y$,\n$\\mathbf P^1_Y$, $\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$, a natural comparison\n$g^{-1}R\\varprojlim K_\\bullet\\to R\\varprojlim g^{-1}K_\\bullet$ in\n$D((T\\times_YY')_{\\mathrm{proét}},\\underline{\\mathbf Z_\\ell})$. For the\nsystems used here it is an isomorphism, by\n[sk-prop-sfb-cartesian-coefficients] for the coefficient systems, closed base\nchange for $\\Delta_*$, and the compatibility of the Tate twist with pullback.\nNaturality of this comparison gives the compatibility of $\\delta_\\Lambda$\nwith base change, and the base-changed decomposition of $Rq_*$ gives that of\nthe trace; the statements for $\\mathcal O_E$, $E$, $\\Qlb$ follow by applying\nthe coefficient functors of (1) and (2), which commute with pullback.",
+   "text": "(3a) Put $P=\\mathbf P^1_Y$, $W=P\\times_YP$ and use primes for base changes to $Y'$. The diagonal has local equation $a-b$ in the chart where both projective coordinates have the same nonzero entry. Along the diagonal these charts cover it, and $a-b$ is monic in $a$, hence a nonzerodivisor over any base ring. The section $[1:0]$ has coordinate equation $t$ on its affine chart. These facts remain true over $Y'$, including nonflat base change, so all the relevant pulled-back divisors are Cartier. To compare the actual morphisms of systems of [det-prop-diagonal-tower-system], use its Cartier roof before reduction: pull units by $u\\mapsto g^*u$ and the local Cartier generator by $t^{-1}\\mapsto (g^*t)^{-1}$. A change $t\\mapsto vt$ changes the latter generator by $(g^*v)^{-1}$, exactly the pulled-back relation; the maps glue and preserve the quotient generator $+1$. They give a commuting diagram of two-term Cartier complexes and their boundary roofs, with the natural map $g^{-1}\\mathbf G_m\\to\\mathbf G'_m$ (no isomorphism of these multiplicative sheaves is assumed). Exact inverse image and compatibility with composition are [det-pe-topos-functoriality-inverse-image](4),(5). Apply the derived tensor functor to this single diagram, using the inverse-image/tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. At level $n$, the free resolution $[\\mathbf Z\\xrightarrow{\\ell^n}\\mathbf Z]$ has transition $\\ell$ in degree $-1$ and $1$ in degree $0$; pulling this resolution preserves both maps. The root transitions are consequently $\\zeta\\mapsto\\zeta^\\ell$ on both sides. Thus the commuting diagram is a diagram in the derived category of systems, not an inference from equality of arbitrary derived maps at each level. The level classes and their coefficient compatibility are those of [sk-lem-geo-cartier].",
    "uses": [
     "det-prop-diagonal-tower-system",
-    "det-prop-diagonal-tower-trace",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-lem-geo-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "paragraph (3), first sentence: explicit naturality of the Cartier and Kummer systems"
+   }
+  },
+  {
+   "text": "(3b) For a base-changed diagonal square, write $h:W'\\to W$ and $h_D:P'\\to P$. Its open complement is quasi-compact: on the displayed charts it is a principal open, and the projective charts form a finite cover over every base affine. The same holds after base change. The closed-support unit and counit in [lem-weil-pbc-proetale-abelian-closed-support] imply the required closed base change for any abelian coefficient sheaf $M$: $h^{-1}\\Delta_*M$ restricts to zero on the complementary open (by the direct-image evaluation formula in [det-pe-topos-functoriality-inverse-image](2)), and its restriction to $P'$ is $h_D^{-1}M$, by composition of inverse images and the closed counit. The support unit therefore gives $h^{-1}\\Delta_*M\\simeq\\Delta'_*h_D^{-1}M$. Apply this to $M=\\mathbf Z/\\ell^n$ and $M=\\Zl$. The limit identifications in [det-prop-diagonal-tower-limit](1),(2) and the coefficient/twist identifications in [sk-prop-sfb-cartesian-coefficients](1) now show that the canonical comparison $h^{-1}R\\varprojlim\\to R\\varprojlim h^{-1}$ is an isomorphism on both the source system $\\Delta_*\\mathbf Z/\\ell^\\bullet$ and the target system $\\mathbf Z/\\ell^\\bullet(1)[2]$. Indeed on the supported source it is the just-displayed closed comparison, and on the target it is the coefficient/twist comparison. Naturality of this comparison applied to the single commuting diagram of (3a) gives $h^{-1}\\delta_{\\Zl}=\\delta'_{\\Zl}$ with the indicated source and target identifications. This only uses the two specified systems; no preservation of arbitrary inverse limits by inverse image is asserted.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "det-pe-topos-functoriality-inverse-image",
+    "det-prop-diagonal-tower-limit",
     "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "paragraph (3): closed base change and the derived-limit comparison on the specified systems"
+   }
+  },
+  {
+   "text": "(3c) The schemes $Y,Y',P,P'$ are Noetherian: a field has only two ideals, and the finite-type-over-Noetherian theorem [lem-weil-pbc-finite-type-over-noetherian] applies to their structure maps. At finite levels [sk-lem-geo-p1-cohomology] identifies the base-change map for $q$ with the direct sum of the coefficient comparisons on the unit and section-class summands. The section-class map as a morphism of systems is the one constructed in (3a), and the unit is natural by adjunction. Thus the base-change map carries the whole inverse-system decomposition of [det-prop-diagonal-tower-trace](1) to its primed decomposition. Applying $R\\varprojlim$, which commutes with derived direct image by [det-prop-diagonal-tower-limit](1), reduces its comparison to the finite direct sum of the coefficient and twist comparisons of [sk-prop-sfb-cartesian-coefficients](1). These comparisons are isomorphisms. Inverting the decomposition and projecting onto the twisted second summand commutes with this diagram, so the trace over $\\Zl$ pulls back to the primed trace. For $p_i$, take the base $P$ in exactly this construction and its base-change map $P'\\to P$; the same unit/diagonal-section diagram gives the asserted trace comparison for each $i$. Finally exact inverse image preserves colimits by [det-pe-topos-functoriality-inverse-image](3),(4), and its tensor comparison in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], together with the coefficient identifications in [det-prop-sfb-qlbar-colimit-x-pullback], commutes with the finite free scalar extension, localization, and finite-subextension colimit of (1),(2). Applying those functors to the class and trace diagrams just proved gives the base-change assertion for $\\mathcal O_E$, $E$, and $\\Qlb$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-lem-geo-p1-cohomology",
+    "det-prop-diagonal-tower-trace",
+    "det-prop-diagonal-tower-limit",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-prop-sfb-qlbar-colimit-x-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "paragraph (3): trace decomposition comparison and subsequent coefficient changes"
+   }
   }
  ],
  "proof_deps": [
-  "det-prop-diagonal-tower-trace",
+  "det-lem-bounded-continuity-direct-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-diagonal-tower-limit",
   "det-prop-diagonal-tower-system",
+  "det-prop-diagonal-tower-trace",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-lem-geo-cartier",
+  "sk-lem-geo-p1-cohomology",
   "sk-prop-sfb-cartesian-coefficients",
-  "det-prop-diagonal-tower-limit"
+  "sk-prop-sfb-qlbar-colimit-x"
  ],
  "proof_origin": {
   "by": "agent",
@@ -49,7 +126,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -70,5 +147,74 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-diagonal-tower"
+ "unit": "sk-prop-diagonal-tower",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-diagonal-tower-coefficients",
+  "worker": "stage1",
+  "summary": "Independent second reading removed the bundled pullback helper and wrote the Cartier-system, closed-support, specified derived-limit, and trace-decomposition comparisons as actual proof steps. Corrected the finite-biproduct direct-image argument and explained every uniformizer quotient reduction. No new nodes or Mathlib leaves.",
+  "blueprint": "Paragraph (1) is step 1; paragraph (2) is step 2; paragraph (3) is steps 3-5: the Cartier/Kummer diagram, the supported-source and twist limit comparisons, and the trace-decomposition diagram and scalar functors.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "The coefficient-ring finite-freeness, exact inverse-image coefficient identification, and Tate-twist identification are generic coefficient tools outside the diagonal-tower unit."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "The integral-limit, localization, and filtered finite-subextension colimit descriptions are generic coefficient tools used to form the E and Qbar stages."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "The explicit completed O_E coefficient limit is a generic coefficient construction used to identify the reductions."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-pullback",
+    "why": "Pullback compatibility for the coefficient limit, localization, and Qbar colimit is supplied by this generic coefficient-system lemma."
+   },
+   {
+    "node": "det-lem-bounded-continuity-direct-image",
+    "why": "Commutation of q_* and p_i* with bounded-below filtered colimits is the generic pro-etale continuity tool used in rationalization."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-abelian-closed-support",
+    "why": "The closed-support unit/counit supplies closed base change for the supported coefficient source, required explicitly by blueprint paragraph (3)."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Exactness, colimits, composition, and the direct-image evaluation formula justify the inverse-image diagrams."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The generic monoidal derived pullback comparison supplies naturality of tensoring the Cartier complex and the coefficient stages."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies the Noetherian hypothesis of the projective-line decomposition for the standing schemes."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Exact filtered colimits identify the cohomology of the colimit complex with the colimit of cohomology in step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "det-lem-bounded-continuity-direct-image",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-8fd2a76c6",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-8fd2a76c6 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, all cited node statements, source locations, unit/chapter records, and delivery report. The five proof steps correctly establish integral coefficient extension and all reductions, filtered rationalization, Cartier/Kummer system base change, specified derived-limit comparisons, and trace compatibility. Hypotheses, coefficient categories, nonflat base change, ramified reductions, edge cases, and route-lock restrictions were checked. The earlier bundled helper was removed; no new nodes remain. Review written to review.md."
+ }
 }
