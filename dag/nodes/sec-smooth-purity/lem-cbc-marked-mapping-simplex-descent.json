@@ -25,9 +25,155 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-relative-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathsf M_S^{\\mathrm{co}}$ for the cocartesian relative marked model category. Its cofibrations are monomorphisms, every object is cofibrant, and its fibrant objects are the naturally marked cocartesian fibrations. Use the opposite of the relative marked lifting calculus whenever it is stated in cartesian form. Opposite reverses the simplex order; the order-reversing identification $[n]^{\\mathrm{op}}\\cong[n]$ identifies the opposite of a standard simplex, its boundary, and its flat or sharp marking with the corresponding standard object. It also preserves products and colimits. More precisely, applying opposite to a parameterized map gives $\\operatorname{Map}^{\\epsilon}_{S^{\\mathrm{op}}}(U^{\\mathrm{op}},(Z^{\\mathrm{op}})^\\natural)\\cong(\\operatorname{Map}^{\\epsilon}_S(U,Z^\\natural))^{\\mathrm{op}}$ for $\\epsilon=\\flat,\\sharp$; inner-horn fillers, Kan fillers and the inverse-triangle definition of equivalence edges are preserved by reversal. In particular the opposite lifting calculus says that $\\operatorname{Map}^{\\flat}_S(U,Z^\\natural)$ is a quasicategory for every marked source $U$, and its sharp mapping complex is its core. A marked map $U\\times(\\Delta^k)^\\flat\\to Z^\\natural$ is exactly a map whose restrictions at every parameter vertex preserve the marked edges of $U$: a marked product edge has a constant second coordinate. Thus $\\mathcal F_S(U,Z)=\\operatorname{Map}^{\\flat}_S(U,Z^\\natural)$, with precisely the operators and unrestricted parameter simplices in the statement.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1 and Remark 3.1.3.9; identify the flat mapping object"
+   }
+  },
+  {
+   "text": "For a simplex $\\sigma:\\Delta^n\\to S$, composition with $\\sigma$ is a left Quillen functor $\\sigma_!: \\mathsf M_{\\Delta^n}^{\\mathrm{co}}\\to\\mathsf M_S^{\\mathrm{co}}$. A left Quillen functor preserves weak equivalences between cofibrant objects, and all marked objects here are cofibrant. Consequently the assumed weak equivalence $f_\\sigma$ is also a weak equivalence when its source and target are regarded simply as objects over $S$. In the remainder of the descent argument all weak equivalences and all colimits are in the one model category $\\mathsf M_S^{\\mathrm{co}}$. In particular no pullback functor is being assumed to preserve arbitrary weak equivalences.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7 and base-composition Quillen adjunction; setup for the gluing argument of Proposition 3.2.2.8"
+   }
+  },
+  {
+   "text": "For any small simplicial set $T\\to S$ put $X_T=X\\times_S T$ and $Y_T=Y\\times_S T$, with the inherited markings and maps to $S$. The boundary-cell decomposition gives $T^{(-1)}=\\varnothing$ and $T^{(n)}$, its $n$-skeleton, with union $T$. Let $I_n$ be the set of nondegenerate $n$-simplices $\\tau:\\Delta^n\\to T$. There is a pushout\n$$T^{(n)}=T^{(n-1)}\\amalg_{\\coprod_{\\tau\\in I_n}\\partial\\Delta^n}\\coprod_{\\tau\\in I_n}\\Delta^n.$$\nPulling these pieces back to $X$ gives the marked pushout\n$$X_{T^{(n)}}=X_{T^{(n-1)}}\\amalg_{\\coprod_{\\tau\\in I_n}X_{\\partial\\Delta^n}}\\coprod_{\\tau\\in I_n}X_{\\Delta^n},$$\nwhere each factor is pulled back using $\\tau$ and $T\\to S$; the same formula holds for $Y$. To check the identity, in each degree represent an element of the base pushout by a simplex in one of its pieces and keep its fixed $X$-coordinate; the identifications are exactly those on the common boundary. Use the explicit marked-pushout convention of [def-coef-infinity-marked-coanodyne]. An edge of any such piece is marked precisely when its $X$-coordinate is marked, so this bijection and its inverse preserve markings, including the quotient markings of the pushout. The boundary-to-simplex maps and the skeleton inclusions remain monomorphisms after pullback. The same degreewise description gives $X_T=\\operatorname{colim}_{n\\geq0}X_{T^{(n)}}$ and the corresponding formula for $Y$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-marked-coanodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.8, degreewise base-change pushout identities; boundary-cell decomposition"
+   }
+  },
+  {
+   "text": "Prove simultaneously for all maps $T\\to S$ that $f_T:X_T\\to Y_T$ is a weak equivalence whenever $T$ has dimension at most $n$. For $n=-1$ both objects are empty and the map is the identity. Suppose the assertion is known in dimension at most $n-1$ and let $\\dim T\\leq n$. In the two pushout spans of Step 3, the comparison at $T^{(n-1)}$ is a weak equivalence by induction. Each boundary comparison is one by induction too, since $\\partial\\Delta^n$ has dimension $n-1$, with $\\partial\\Delta^0=\\varnothing$. Each simplex comparison is one by Step 2 applied to the composite $\\Delta^n\\to T\\to S$. Part (a) of the cofibrant colimit comparison makes the two coproduct comparisons weak equivalences. All six objects in the resulting map of spans are cofibrant; both boundary-to-simplex coproduct maps are cofibrations. Part (b) therefore makes the pushout comparison $f_T$ a weak equivalence. This proves the induction, including arbitrary sets $I_n$ and the empty set. The boundary-to-old-skeleton map need not be injective, and no injectivity of $f$ is used.",
+   "uses": [
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.8, induction on cells, applied in the relative marked model; cofibrant colimit comparison (a),(b)"
+   }
+  },
+  {
+   "text": "For an arbitrary small $T\\to S$, every $T^{(n)}$ has finite dimension, so Step 4 applies to $f_{T^{(n)}}$. The skeleton inclusions give cofibration sequences of cofibrant objects on both sides by Step 3. Apply part (c) of the cofibrant colimit comparison to the ordinal $\\omega$: there are no nonzero limit stages below $\\omega$ to check, and the initial objects $X_{T^{(0)}}$ and $Y_{T^{(0)}}$ are cofibrant. The degreewise colimit identities of Step 3 now imply that $f_T$ is a weak equivalence in $\\mathsf M_S^{\\mathrm{co}}$. Take $T=S$ with the identity base map to conclude that $f$ is a relative cocartesian weak equivalence. Neither a finite simplex category nor a general filtered-colimit theorem for this model structure was used.",
+   "uses": [
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.8, passage from skeleta to the entire base; cofibrant colimit comparison (c)"
+   }
+  },
+  {
+   "text": "Use the coanodyne class of [def-coef-infinity-marked-coanodyne]: a marked map is coanodyne exactly when its opposite is marked anodyne. Take the opposite of the functorial relative marked-anodyne replacement to obtain $i_U:U\\to RU$ over $S$ for every marked $U$, with $RU$ a naturally marked cocartesian fibration. Each $i_U$ is coanodyne and a trivial cofibration in $\\mathsf M_S^{\\mathrm{co}}$. Functoriality gives $Rf:RX\\to RY$ and $Rf\\,i_X=i_Y f$. By Step 5 and two-out-of-three $Rf$ is a weak equivalence. The fibrant-object inverse criterion in the relative model theorem supplies a marked map $r:RY\\to RX$ over $S$ and paths $rRf\\simeq1_{RX}$ and $Rf r\\simeq1_{RY}$ in the appropriate relative sharp mapping Kan complexes.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-replacement",
+    "lem-coef-marked-relative-cartesian-model",
+    "def-coef-infinity-marked-coanodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5 and Proposition 3.1.4.1, cocartesian dual; functorial naturally marked replacement"
+   }
+  },
+  {
+   "text": "Fix the test cocartesian fibration $Z\\to S$. If $i:U\\to V$ is coanodyne, restriction $i^*:\\mathcal F_S(V,Z)\\to\\mathcal F_S(U,Z)$ lifts every simplicial boundary inclusion. Indeed a lifting problem against $\\partial\\Delta^k\\hookrightarrow\\Delta^k$ is, by the flat mapping adjunction from Step 1, a marked lifting problem over $S$ against\n$$ (V\\times(\\partial\\Delta^k)^\\flat)\\amalg_{U\\times(\\partial\\Delta^k)^\\flat}(U\\times(\\Delta^k)^\\flat)\\longrightarrow V\\times(\\Delta^k)^\\flat.$$\nThe opposite marked-anodyne pushout-product theorem makes this map coanodyne. The opposite relative lifting criterion for $Z^\\natural\\to S^\\sharp$ fills the problem. This includes $k=0$ and hence surjectivity on vertices. To pass from boundaries to an arbitrary monomorphism of simplicial sets, use its boundary-cell decomposition: choose lifts on the coproduct of new cells at each stage, retaining the already prescribed boundary values, and take their union at the limit. Hence $i^*$ has right lifting against every monomorphism. The Joyal model structure identifies such maps with trivial fibrations, so $i^*$ is a Joyal weak equivalence. Its two objects are quasicategories by Step 1, and the Joyal quasicategory characterization makes it a coherent functor equivalence. Apply this in particular to $i_X$ and $i_Y$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.4, the flat-boundary pushout-product lifting argument, cocartesian dual"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal F_S(RX,Z)$ and $B=\\mathcal F_S(RY,Z)$. Precomposition with $r$ gives the functor $r^*:A\\to B$. Write the sharp homotopies of Step 6 as $H_X:RX\\times(\\Delta^1)^\\sharp\\to RX$ from $rRf$ to $1_{RX}$ and $H_Y:RY\\times(\\Delta^1)^\\sharp\\to RY$ from $Rf r$ to $1_{RY}$, treating each edge of a path separately if necessary. Define $\\Phi_X:A\\times\\Delta^1\\to A$ as follows: on a $k$-simplex $(a,\\tau)$, where $a:RX\\times\\Delta^k\\to Z$ represents a simplex of $A$ and $\\tau:\\Delta^k\\to\\Delta^1$, its output is the map $(x,v)\\mapsto a(H_X(x,\\tau(v)),v)$. At each parameter vertex $v$, $H_X(-,\\tau(v))$ preserves marked edges, so this output is a simplex of $A$. Substituting a simplicial operator in $v$ commutes with the formula; hence it defines the stated simplicial map, with endpoints $(Rf)^*r^*$ and $1_A$. At a vertex $a$ of $A$, the component is $aH_X:RX\\times(\\Delta^1)^\\sharp\\to Z^\\natural$, which preserves markings because both $a$ and $H_X$ do. It is therefore an edge of the relative sharp mapping complex, hence an equivalence edge of $A$ by the opposite relative lifting calculus. Apply pointwise detection with $K=A$ and $\\mathcal C=A$ to conclude that $\\Phi_X$ is an equivalence edge in $\\operatorname{Fun}(A,A)$. For the other identity define $\\Phi_Y:B\\times\\Delta^1\\to B$ on $(b,\\tau)$ by $(y,v)\\mapsto b(H_Y(y,\\tau(v)),v)$. Its parameter-vertex restrictions preserve marked edges since $b_v$ and $H_Y(-,\\tau(v))$ do, and restriction in $v$ commutes with this formula. Its endpoints are $r^*(Rf)^*$ and $1_B$; its component at $b$ is the sharp edge $bH_Y$ in the core of $B$. Pointwise detection with $K=B$ and $\\mathcal C=B$ gives an equivalence edge in $\\operatorname{Fun}(B,B)$. For a multi-edge path, these constructions give a chain of equivalence edges; their inverses and composites give an equivalence of the endpoints. These are the two coherent inverse identities for $(Rf)^*$ and $r^*$ on the entire mapping quasicategories; no edge in a parameter simplex $a$ or $b$ is required to be invertible.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-infinity-pointwise-equivalences",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, strong inverse data; Remark 3.1.3.1; the pointwise natural-equivalence test is Kerodon Theorem 4.4.4.4, Tag 01DK"
+   }
+  },
+  {
+   "text": "Precomposition and $Rf\\,i_X=i_Y f$ give the strictly commuting square whose top map is $(Rf)^*:\\mathcal F_S(RY,Z)\\to\\mathcal F_S(RX,Z)$, bottom map is $f^*:\\mathcal F_S(Y,Z)\\to\\mathcal F_S(X,Z)$, and vertical maps are $i_Y^*$ and $i_X^*$. The top is a coherent functor equivalence by Step 8, and the vertical maps are such equivalences by Step 7. Regard these as Joyal weak equivalences by the quasicategory characterization. Two-out-of-three applied to the two equal composites makes $f^*$ a Joyal weak equivalence, and the same characterization makes this specified simplicial precomposition map a coherent functor equivalence. This proves the entire mapping-quasicategory assertion, rather than only its assertion about cores.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.3, equivalence on flat mapping objects, established here via naturally marked replacements"
+   }
+  },
+  {
+   "text": "All indexing sets $I_n$, the countable skeleton sequence, degreewise constructions, and functorial marked replacements lie in the universe of the input. To check compatibility with a larger universe, use the same replacements and $Rf$. The small marked inverse $r$ and its sharp homotopies from Step 6 are still inverse data there. The same small coanodyne replacement maps are still trivial cofibrations: their opposite marked-anodyne cell presentations remain such presentations in the larger universe, where those same generating maps are allowed. The relative model inverse criterion and two-out-of-three consequently show that a small relative weak equivalence remains one after enlargement; the converse follows by restricting the class of test fibrations. Steps 7-9 then apply also to test cocartesian fibrations $Z$ from the larger universe. In particular the same simplicial precomposition comparison has the required meaning in every containing universe.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-replacement",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universe-relative constructions in Sections 3.1.1-3.1.4; small inverse witnesses and marked cell presentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "def-coef-infinity-marked-coanodyne",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-relative-marked-anodyne-replacement",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-formulated marked analogue of the skeletal gluing proof of Proposition 3.2.2.8, using existing general model colimit nodes. The full mapping-object argument is written out from Remark 3.1.3.4 and Proposition 3.1.3.5; it proves the criterion of Proposition 3.1.3.3 without adding that criterion as a new node. Read online; WANTED: project-local archive of HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -126,10 +272,59 @@
    "results": "{\"t\": \"2026-10-16T21:39:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
    "date": "2026-10-17",
    "verdict": "no match: the twelve displayed hits concern model structures and injective replacements of ordinary cochain complexes; none is the marked relative nerve or simplex locality."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.?equivalence|marked.?simplicial|mapping.*simplex.*descent",
+   "results": "{\"t\": \"2026-10-16T22:24:49Z\", \"tool\": \"grep\", \"query\": \"cartesian.?equivalence|marked.?simplicial|mapping.*simplex.*descent\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplex descent for relative marked mapping quasicategories into cocartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T22:24:49Z\", \"tool\": \"leansearch\", \"query\": \"Simplex descent for relative marked mapping quasicategories into cocartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.instHasStrongEpiMonoFactorisations\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SimplexCategory.toCat\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"e76a8600a5d6e5f7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-16T22:24:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial mapping objects turn relative cocartesian equivalences into equivalences of entire infinity categories",
+   "results": "{\"t\": \"2026-10-16T22:24:51Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial mapping objects turn relative cocartesian equivalences into equivalences of entire infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.CostructuredArrow.isEquivalenceMap₂\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\"], \"digest\": \"65ab78cd8ea5825e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked map over a simplicial base is a cocartesian weak equivalence if its pullback to each simplex is one",
+   "results": "{\"t\": \"2026-10-16T22:24:52Z\", \"tool\": \"leanfinder\", \"query\": \"A marked map over a simplicial base is a cocartesian weak equivalence if its pullback to each simplex is one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\"], \"digest\": \"9680307146420156\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStronglyCocartesian|IsCocartesian",
+   "results": "{\"t\": \"2026-10-16T22:26:18Z\", \"tool\": \"grep\", \"query\": \"IsStronglyCocartesian|IsCocartesian\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"042cf2c37145e04a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "instCategoryWithCofibrations|fibrations_eq",
+   "results": "{\"t\": \"2026-10-16T22:26:21Z\", \"tool\": \"grep\", \"query\": \"instCategoryWithCofibrations|fibrations_eq\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\"], \"digest\": \"6929741c2877ed36\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the cocartesian hits concern ordinary categories with Hom sets (FiberedCategory/Cocartesian.lean:45-79), and the simplicial-set hits concern the unmarked Kan-Quillen cofibration/fibration classes (SimplicialSet/CategoryWithFibrations.lean:35-85). The simplex factorization hits concern maps in the ordinary simplex category. None states marked relative descent or equivalence of entire marked mapping quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-strict-presentation-transport-representation",
@@ -149,5 +344,74 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-marked-mapping-simplex-descent",
+  "worker": "stage1",
+  "summary": "Ten proof steps retain the statement and derive marked simplex descent from a simultaneous finite-dimensional skeletal induction and the ordinal omega colimit comparison. Functorial coanodyne replacements, explicit flat-boundary lifting and marked inverse homotopies establish the equivalence on entire mapping quasicategories. All supporting nodes already exist: no new nodes or Mathlib leaves. Checked the empty and zero-dimensional cases, noninjective maps, arbitrary cell sets, both markings, and universe enlargement.",
+  "blueprint": "Opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: the existing strict-presentation transport ancestry needs the marked local-to-global comparison as a generic simplicial foundation. No compact-support or purity step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-marked-relative-cartesian-model",
+    "why": "Relative marked model axioms, Quillen base composition, and marked inverse criterion are general simplicial tools; this unit supplies no substitute for this foundation."
+   },
+   {
+    "node": "lem-coef-relative-marked-anodyne-calculus",
+    "why": "Uses the relative lifting criterion and the identification of sharp mapping complexes with cores of flat mapping quasicategories, for arbitrary marked sources."
+   },
+   {
+    "node": "lem-coef-model-infinity-derived-adjunction",
+    "why": "Uses only preservation of weak equivalences between cofibrant objects by a left Quillen functor."
+   },
+   {
+    "node": "lem-coef-infinity-monomorphism-boundary-cells",
+    "why": "Uses the ordinary boundary-cell decomposition of a simplicial set or monomorphism, to expose the skeletal argument and boundary lifting."
+   },
+   {
+    "node": "lem-coef-model-cofibrant-colimit-comparison",
+    "why": "Uses general model-category coproduct, pushout, and continuous ordinal colimit comparisons on cofibrant objects; these are not another compact-support proof route."
+   },
+   {
+    "node": "lem-coef-relative-marked-anodyne-replacement",
+    "why": "Uses a functorial naturally marked replacement with a marked-anodyne map; its opposite supplies the cocartesian version."
+   },
+   {
+    "node": "lem-coef-marked-anodyne-lifting-calculus",
+    "why": "Uses the general marked-anodyne pushout-product theorem and its universe-relative generating cell presentations."
+   },
+   {
+    "node": "lem-coef-joyal-model-structure",
+    "why": "Uses only the Joyal weak factorization system with monomorphism cofibrations and two-out-of-three."
+   },
+   {
+    "node": "lem-coef-joyal-quasicategory-characterizations",
+    "why": "Identifies the obtained Joyal weak equivalences between mapping quasicategories with coherent functor equivalences."
+   },
+   {
+    "node": "lem-coef-infinity-pointwise-equivalences",
+    "why": "Detects natural equivalences between the full mapping-quasicategory endofunctors by their vertex components."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-relative-marked-anodyne-replacement",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N6-0862880bd",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-0862880bd (reviewer sub-agent of L); spot-checked: Read the item and all 10 steps in full, the full statements of all 12 cited nodes, and HTT Prop. 3.1.3.3 with its proof, Remark 3.1.3.4 and Prop. 3.2.2.8 with its full proof (a local copy of the HTT PDF, pp. 155-156 and 181). The statement and stmt_deps are byte-identical to the base on the side DAG; nothing is weakened. No new nodes. Checks by step: (1) the flat product marking is (marked edge, degenerate edge), so F_S equals the flat mapping object, and taking opposites gives the cocartesian form. (2) sigma_! is left Quillen and every object is cofibrant. (3) Pulling back the skeletal pushout works degreewise; I checked the markings myself, and the boundary-cell node with X empty gives the skeleta. (4) Induction over all T of dimension at most n; parts (a) and (b) of the colimit comparison need cofibrant spans with a monomorphism leg, which holds, and no left properness is needed. (5) Part (c) with theta = omega has no limit stages to check. (6)-(7) The coanodyne replacement and the order of the pushout product match the calculus; lifting against all monomorphisms makes i^* a Joyal trivial fibration. (8) The formula Phi_X(a,tau) = a(H_X(x,tau(v)),v) is over S, simplicial, has the right endpoints, and its components are sharp edges; the pointwise criterion applies with K = C = A, and the Y side is symmetric. (9) i_X^*(Rf)^* = f^* i_Y^*, so two-out-of-three gives f^*. (10) The universe enlargement is fine. Small cases: S = Delta^0 with (Delta^1)^flat (the hypothesis fails, correctly) and with (Delta^1)^sharp (true), S empty, f = identity. My own traversal of 338 reachable nodes finds no cycle. Duplicate candidates (cartesian-base-equivalence-invariance, mapping-simplex-universal-equivalence, cocartesian-categorical-base-change, cocartesian-mapping-criterion) state other results. All 10 declared tool_uses are accepted as generic foundations from sk-prop-sf-biduality-general. No SGA is cited and no coefficient category or base-change morphism is involved. Cosmetic only: the mathlib_searches list repeats queries with verdict strings that do not line up. No fixes."
  }
 }

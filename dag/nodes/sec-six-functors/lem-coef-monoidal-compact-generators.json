@@ -28,9 +28,129 @@
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-coef-complete-algebroid] the underlying $\\mathcal V$ is presentable and its tensor preserves small colimits separately. Choose an infinite regular $\\lambda\\in\\mathcal U$ for which $\\mathcal V$ is $\\lambda$-accessible, using [def-coef-presentable-infinity-category]. Apply [lem-coef-accessible-compact-slice-density] at $\\lambda$: the full subcategory of all $\\lambda$-compact objects is essentially small. Choose a small set $G$ of representatives. The family consisting of $\\mathbf1$ and all $g\\otimes h$ for $g,h\\in G$ is small. Apply [lem-coef-infinity-common-compactness-rank] to this family in $\\mathcal V$, obtaining an infinite regular $\\rho$ for which every member of this family is $\\rho$-compact. This bounds tensor products only of the original $\\lambda$-compact representatives, not yet of all objects at the new rank.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-accessible-compact-slice-density",
+    "lem-coef-infinity-common-compactness-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, first two sentences of proof (bound the images of the small family of old compact generators)."
+   }
+  },
+  {
+   "text": "Choose an infinite cardinal $\\theta\\in\\mathcal U$ with $\\theta\\geq\\lambda,\\rho,\\aleph_0$ and put $\\kappa=(2^\\theta)^+$. By [lem-coef-infinite-cardinal-successor-regular], $\\kappa$ is infinite regular, and it is uncountable. By [lem-coef-infinite-cardinal-square-power], for $\\mu<\\kappa$ and $\\nu<\\lambda$ we have $\\mu^\\nu\\leq(2^\\theta)^\\theta=2^\\theta<\\kappa$. Thus $\\lambda\\ll\\kappa$ in the precise sense of [lem-coef-accessible-infinity-rank-calculus]. That node gives $\\kappa$-accessibility of $\\mathcal V$ and the bounded retract presentations used below. A $\\kappa$-filtered category is $\\rho$-filtered, since every $\\rho$-small simplicial set is $\\kappa$-small. Hence every $\\rho$-compact object is $\\kappa$-compact, directly from [def-coef-presentable-infinity-category]. In particular $\\mathbf1$ and all $g\\otimes h$ above are $\\kappa$-compact. Applying [lem-coef-accessible-compact-slice-density] at $\\kappa$ also shows that $D=\\mathcal V^\\kappa$ is essentially small. Every object of $\\mathcal V$ is a small $\\kappa$-filtered colimit of objects of $D$, by $\\kappa$-accessibility.",
+   "uses": [
+    "lem-coef-infinite-cardinal-successor-regular",
+    "lem-coef-infinite-cardinal-square-power",
+    "lem-coef-accessible-infinity-rank-calculus",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-accessible-compact-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, choice of kappa much larger than lambda; HTT Proposition 5.4.2.9 and Remark 5.4.2.11."
+   }
+  },
+  {
+   "text": "Let $x,y\\in D$. The bounded retract clause of [lem-coef-accessible-infinity-rank-calculus] gives $x$ as a retract of $P=\\operatorname{colim}_{i\\in I}a_i$ and $y$ as a retract of $Q=\\operatorname{colim}_{j\\in J}b_j$, where $I,J$ are $\\kappa$-small $\\lambda$-filtered coherent diagrams and all $a_i,b_j$ are $\\lambda$-compact. Their colimits exist since $\\mathcal V$ is presentable. Each $a_i\\otimes b_j$ is equivalent to some $g\\otimes h$ of step 1, so is $\\kappa$-compact. Separate colimit preservation, as asserted in [def-coef-complete-algebroid], gives $a_i\\otimes Q\\simeq\\operatorname{colim}_{j\\in J}(a_i\\otimes b_j)$. The shape is $\\kappa$-small, so [lem-coef-compact-small-colimits] makes each $a_i\\otimes Q$ $\\kappa$-compact. A second application to $P\\otimes Q\\simeq\\operatorname{colim}_{i\\in I}(a_i\\otimes Q)$ makes $P\\otimes Q$ $\\kappa$-compact. Tensor the retract arrows and their identity homotopies to make $x\\otimes y$ a retract of $P\\otimes Q$. The next elementary step verifies explicitly that this implies compactness. No assertion that an arbitrary larger regular cardinal works is used.",
+   "uses": [
+    "lem-coef-accessible-infinity-rank-calculus",
+    "def-coef-complete-algebroid",
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, bounded old-compact presentations and two uses of HTT Corollary 5.3.4.15; using the existing bounded-retract form of the rank lemma."
+   }
+  },
+  {
+   "text": "For completeness, if $z\\xrightarrow{u}t\\xrightarrow{v}z$ has $vu\\simeq1_z$, precomposition makes $\\operatorname{Map}(z,-)$ a retract of $\\operatorname{Map}(t,-)$. The small space colimits used here exist by [lem-coef-spaces-small-colimits-universe]. For any small $\\kappa$-filtered diagram, its compactness comparison arrow for $z$ is therefore a retract of the comparison arrow for $t$; functors, including the colimit functor on spaces, preserve the displayed retract identities. A retract $f:A\\to B$ of an equivalence $g:C\\to D$ is an equivalence: writing the inclusions as $i_A,i_B$ and retractions as $r_A,r_B$, the inverse is $r_Ag^{-1}i_B$, since the two composites reduce to $r_Ai_A$ and $r_Bi_B$. Apply this to $z=x\\otimes y$, $t=P\\otimes Q$. Thus $D$ is closed under binary tensor, and step 2 already put the nullary tensor $\\mathbf1$ in $D$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, compactness conclusion; HTT Remark 5.3.4.16 (retract closure), with its retract argument written out."
+   }
+  },
+  {
+   "text": "Consider the full subcategory $D^\\otimes\\subseteq\\mathcal V^\\otimes$ whose fiber over $[n]$ consists of tuples in $D^n$ under the Segal equivalence of [def-coef-monoidal-infinity-category]. For a base arrow $\\alpha:[n]\\to[m]$, its opposite is an order-preserving map $a:[m]\\to[n]$. The $i$th output, by the Segal projections, is the fold of the consecutive block with endpoints $a(i-1),a(i)$: factor this component base arrow as restriction to that subinterval followed by its active fold. If the endpoints agree this is the nullary fold. Thus the transport gives tensor products of these blocks, allowing empty blocks and discarded initial or final entries. Binary tensor closure and the unit clause prove closure under all these transports. Thus every ambient cocartesian lift with source in $D^\\otimes$ has target there. Its mapping-space pullback condition restricts to the full subcategory, by [lem-coef-cocartesian-straightening]. Inner horn fillers also stay in the full subcategory, since their vertices do. Consequently $D^\\otimes\\to\\Delta^{\\mathrm{op}}$ is cocartesian and the inclusion preserves cocartesian arrows. The Segal equivalences and relative mapping-space product axiom in [def-coef-monoidal-infinity-category] restrict to the same full subcategory. This proves the monoidal axioms with their inherited higher coherences.\n\nHere is the size and replacement argument for the word small. Each fiber $D^n$ is essentially small; choose representatives for all finite tuples in a small model of $D$, for all $n$. This is a small family of objects of $D^\\otimes$. For two objects over $[n],[m]$, respectively, the mapping space lies over the finite discrete set $\\operatorname{Hom}_{\\Delta^{\\mathrm{op}}}([n],[m])$. Its fiber at $\\alpha$ is $\\operatorname{Map}_{D^m}(\\alpha_!a,b)$, by the cocartesian mapping-space square in [lem-coef-cocartesian-straightening]. These fibers are small up to equivalence, so the mapping space is small up to equivalence (take the finite disjoint union of small Kan representatives). Hence $D^\\otimes$ is locally small. Apply [lem-coef-infinity-small-full-subcategory] to the chosen tuple representatives in $D^\\otimes$, obtaining a small equivalent total category $T$. The composite $T\\to D^\\otimes\\to\\Delta^{\\mathrm{op}}$ is an intrinsic cocartesian fibration: its lifts and mapping-space pullback squares are carried across the equivalence. By the intrinsic-to-simplicial replacement assertion of [lem-coef-cocartesian-straightening], formed in the same small universe, replace it by a small simplicial cocartesian fibration $C^\\otimes\\to\\Delta^{\\mathrm{op}}$ equivalent over the base. Its fiber $C$ over $[1]$ is small, the equivalence transports both Segal axioms, and the resulting $j:C\\to\\mathcal V$ is fully faithful and strong monoidal with essential image $D$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-small-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final sentence (inherit cocartesian arrows); HTT Theorem 3.2.0.1 for small replacement, Proposition 5.4.1.7 for a small full model."
+   }
+  },
+  {
+   "text": "Define the coherent functor $R(v)=\\operatorname{Map}_{\\mathcal V}(j(-),v)$ by restricting the Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] along $j^{\\mathrm{op}}$. Local smallness ensures its values are small spaces. The category of small spaces admits small colimits and its inclusion into the larger space universe is fully faithful and preserves them by [lem-coef-spaces-small-colimits-universe]. Thus compactness, defined using the larger universe, gives the same filtered-colimit comparison for these small values. For each $c\\in C$, $j(c)$ is $\\kappa$-compact, so the comparison $\\operatorname{colim}_I\\operatorname{Map}(j(c),v_i)\\to\\operatorname{Map}(j(c),\\operatorname{colim}_I v_i)$ is an equivalence for every small $\\kappa$-filtered diagram, by [def-coef-presentable-infinity-category]. Presheaf colimits are objectwise by [lem-coef-infinity-yoneda-presheaf-limits], and equivalences are objectwise by [lem-cbc-enhanced-functor-cone-calculus]. Thus $R$ preserves these colimits as a coherent functor. Full faithfulness of $j$ identifies $Rj$ naturally with the Yoneda embedding $y:C\\to P(C)$, including the maps and their higher coherences.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.16, restricted Yoneda and filtered-colimit argument; HTT Proposition 5.1.2.2 and Corollary 5.1.2.3."
+   }
+  },
+  {
+   "text": "Use the full subcategory $\\operatorname{Ind}_\\kappa(C)\\subseteq P(C)$ of [lem-coef-ind-kappa-presentability]; its inclusion $i$ is fully faithful and preserves small $\\kappa$-filtered colimits. Apply [lem-coef-ind-kappa-extension] to $j:C\\to\\mathcal V$: its target is locally small and admits the required colimits, $j$ is fully faithful with $\\kappa$-compact values, and its image generates $\\mathcal V$ under those colimits by step 2. We obtain an equivalence $F:\\operatorname{Ind}_\\kappa(C)\\simeq\\mathcal V$ preserving these colimits and extending $j$. The two functors $RF,i:\\operatorname{Ind}_\\kappa(C)\\to P(C)$ preserve the indicated filtered colimits and restrict to $y$ on $C$. The equivalence of coherent functor categories in [lem-coef-ind-kappa-extension], now with target $P(C)$, gives $RF\\simeq i$. This target meets the hypotheses of that lemma: since $C$ is small, [lem-coef-infinity-presheaf-presentability] makes $P(C)$ presentable, hence accessible and so locally small by [def-coef-presentable-infinity-category], with all small colimits, in particular the small $\\kappa$-filtered ones, computed objectwise by [lem-coef-infinity-yoneda-presheaf-limits]. Since $F$ is an equivalence and $i$ is fully faithful, so is $R$; the mapping spaces are preserved under the equivalence by [lem-cbc-enhanced-functor-cone-calculus]. Its full essential image is exactly $\\operatorname{Ind}_\\kappa(C)$. By [lem-coef-ind-kappa-presentability] this is precisely the full subcategory generated by representables under small $\\kappa$-filtered colimits: its objects are such colimits and the subcategory is closed under them. Combining $F$ with these presentations proves the final generation clause in $\\mathcal V$. The functor-category uniqueness used here includes transformations and all higher simplices, so the result concerns coherent infinity categories, not just their homotopy categories.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-ind-kappa-extension",
+    "lem-coef-infinity-presheaf-presentability",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Propositions 5.3.5.3, 5.3.5.10 and 5.3.5.11; Proposition 5.4.2.2(3); restricted-Yoneda argument of Chu–Haugseng Corollary 7.16."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-accessible-compact-slice-density",
+  "lem-coef-infinity-common-compactness-rank",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-accessible-infinity-rank-calculus",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-spaces-small-colimits-universe",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-small-full-subcategory",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-ind-kappa-extension",
+  "lem-coef-infinity-presheaf-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2006.08269v2",
+  "place": "Proposition 7.15 and Corollary 7.16, assembled with HTT rank, size and Ind lemmas; read online, archives WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +207,52 @@
    "results": "{\"t\": \"2026-10-16T19:46:39Z\", \"tool\": \"leanfinder\", \"query\": \"Strongly accessible tensor functor closed subcategory of cardinal presentable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCardinalPresentableObjIsCardinalPresentable\", \"CategoryTheory.instIsCardinalPresentableObjFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.ObjectProperty.colimitsCardinalClosure_le_isCardinalPresentable\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.instIsCardinalAccessibleObjOppositeFunctorTypeUliftCoyonedaOpOfIsCardinalPresentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.IsStrongGenerator.colimitsCardinalClosure_eq_isCardinalPresentable\"], \"digest\": \"cfc4eba1b4a343fc\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reading search returned ordinary category declarations or simplicial-set/quasicategory constructions, not the stated coherent infinity-category theorem; the returned signatures use ordinary Hom sets and do not specialize to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presentably monoidal infinity category has tensor closed kappa compact generators and a fully faithful restricted Yoneda embedding",
+   "results": "{\"t\": \"2026-10-16T22:24:31Z\", \"tool\": \"leanfinder\", \"query\": \"A presentably monoidal infinity category has tensor closed kappa compact generators and a fully faithful restricted Yoneda embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentialIdeal\", \"CategoryTheory.InternallyProjective\", \"CategoryTheory.isInternallyProjective\", \"CategoryTheory.ObjectProperty.IsMonoidalClosed\", \"CategoryTheory.ExponentialIdeal.mk'\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"instMonoidalClosedCondensedSet\", \"CategoryTheory.Functor.functorCategoryClosed\"], \"digest\": \"9312f0f7c341f2f8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalPresentable, CategoryTheory.IsCardinalAccessibleCategory",
+   "results": "{\"t\": \"2026-10-16T22:24:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalPresentable, CategoryTheory.IsCardinalAccessibleCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Cardinal.SharplyLT.exists_retract_of_isCardinalPresentable\", \"CategoryTheory.Arrow.instIsCardinalPresentableLeft\", \"CategoryTheory.Arrow.instIsCardinalPresentableRight\", \"CategoryTheory.Comma.isCardinalPresentable_iff\", \"CategoryTheory.IsCardinalAccessibleCategory.mono_iff\"], \"digest\": \"1e9a50b5071b82bc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*tensor|tensor.*compact|instIsDenseFullSubcategoryIsCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T22:24:55Z\", \"tool\": \"grep\", \"query\": \"compact.*tensor|tensor.*compact|instIsDenseFullSubcategoryIsCardinalPresentable\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presentably monoidal infinity category has a dense small monoidal subcategory of kappa compact objects",
+   "results": "{\"t\": \"2026-10-16T22:24:55Z\", \"tool\": \"leansearch\", \"query\": \"A presentably monoidal infinity category has a dense small monoidal subcategory of kappa compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι\", \"CategoryTheory.Functor.isDenseAt\", \"CategoryTheory.IsLocallyPresentable.mk\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.IsStrongGenerator.colimitsCardinalClosure_eq_isCardinalPresentable\"], \"digest\": \"a4e76d884f142b5c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|instIsDenseFullSubcategory|exists_retract_of_isCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T22:25:34Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|instIsDenseFullSubcategory|exists_retract_of_isCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"e1d9fc1ecff8a485\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a larger regular cardinal so the compact objects of a monoidal quasicategory contain the unit and are closed under tensor product",
+   "results": "{\"t\": \"2026-10-16T22:25:36Z\", \"tool\": \"leanfinder\", \"query\": \"Choose a larger regular cardinal so the compact objects of a monoidal quasicategory contain the unit and are closed under tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.IsCardinalFiltered\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.HasCardinalFilteredColimits\"], \"digest\": \"ed20466765cd8ceb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary categories with Hom sets, ordinary monoidal closedness, or compact simplicial sets as objects; none states mapping-space compactness and tensor-closed generators of a monoidal quasicategory. Read Presentable/Dense.lean:31-73 and Basic.lean:43-56; the online Loogle Uniformization hit is absent from this pinned checkout."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -110,5 +272,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-monoidal-compact-generators",
+  "worker": "stage1",
+  "summary": "No closed project attachment found. Kept the statement and gave the cardinal-bound, two-stage bounded-colimit tensor proof, explicit compact-retract calculation, coherent monoidal small replacement and restricted-Yoneda Ind recognition. Reused all general infrastructure from existing DAG nodes; no new node and no ordinary-category substitution. Sources were read online and archival copies are requested in report.md.",
+  "blueprint": "Auxiliary presentable-monoidal compact-density input below paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction); realizes the Proposition 7.15 / Corollary 7.16 input recorded in the item ancestry, not a new unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise-equivalence criterion for coherent functor categories and invariance of mapping spaces under equivalence, used in steps 6 and 7. No node of this unit supplies those tests; this does not replace any geometric or coefficient-adjunction step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-85173ea2d",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-85173ea2d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps and the statements of all 16 cited nodes. It has one commit and no new nodes, and the statement and stmt_deps are unchanged from base. The statement is true (the standard tensor-closed kappa-compact generators result: Chu–Haugseng 7.15/7.16 with HTT 5.3.5/5.4.2). Those archives are absent, the WANTED lines are recorded and proof_origin is agent. No SGA source is used. Steps checked: (1) the presentability and essentially-small G, plus the common rank rho for {1} and the g⊗h; (2) kappa=(2^theta)^+, where mu^nu <= (2^theta)^theta = 2^theta < kappa gives lambda << kappa exactly as defined in the rank calculus, kappa is uncountable, and rho-compact implies kappa-compact in the right direction; (3) the bounded retract presentations and two successive applications of compact-small-colimits; (4) the retract-of-equivalence inverse r_A g^-1 i_B, checked; (5) the D^⊗ block/fold description, checked: empty blocks give the unit, and cocartesian lifts, Segal and relative-limit conditions restrict to the full subcategory; local smallness then gives a small replacement through infinity-small-full-subcategory and straightening; (6) the restricted Yoneda functor preserves kappa-filtered colimits objectwise, with the universe comparison; (7) the Ind-extension gives F, and the uniqueness argument gives RF ≃ i. FIX (C1/C4): step 7 applies lem-coef-ind-kappa-extension with target P(C), which needs P(C) locally small, but no cited node said so. I added the same-unit node lem-coef-infinity-presheaf-presentability (P(D) is presentable for small D, hence locally small via def-coef-presentable-infinity-category) to step 7's uses and to proof_deps. A cycle check found no path back to the item. I accept the tool_use of lem-cbc-enhanced-functor-cone-calculus, which is only the generic pointwise-equivalence test and is already accepted on sibling nodes. Minor: the report wrongly says created.item was changed; the file correctly keeps Q39's created field.; 1 file(s) fixed by the reviewer"
  }
 }
