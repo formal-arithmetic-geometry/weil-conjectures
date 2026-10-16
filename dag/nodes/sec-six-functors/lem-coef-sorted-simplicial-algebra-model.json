@@ -196,5 +196,31 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-faa842caf (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 9 steps and metadata. I also read the statements of all six cited nodes, the unit sk-prop-sf-biduality-general, both citers, and Bergner arXiv math/0508152 (AGT 6, 2006): Defs 3.1 and 3.6, Thm 4.1, the U_α/F_α paragraph on p.1942, and Thm 4.7 with its whole proof on pp.1943-1944. The statement matches Bergner hypothesis by hypothesis: specified finite products including the empty one, a small sort set, sortwise weak equivalences and fibrations, and the same generator families FI/FJ. Nothing is weakened. Step 1 is a correct specialization of lem-coef-finite-limit-sketch-models and its product-cone sketch. Step 2 gives the free adjunction as copowers of representables, and I checked the Yoneda and simplicial-operator directions. Step 3 transposes lifting squares to get I^⋔=Fib∩W and J^⋔=Fib, including n=0. Step 4 is finite-face ℵ0-smallness and matches Bergner's display on p.1943. Step 5 meets every hypothesis of lem-coef-small-object-cell-factorization. Step 6 checks that Ex^∞ preserves products and the unit is natural. In step 7 both pushout-product transpositions are correct: horn × ∂Δ^1 for (e_0,e_1), and boundary × the endpoint Λ^1 inclusion for e_a. In step 8 I checked that the second lifting square commutes, and the cancellation (a 2-out-of-6 argument on π_0 and on the based π_n) is correct. In step 9 the retract argument correctly gives L=Cof∩W. I confirm the reported source error: p.1944 says 'any fibration of simplicial sets occurs as U_αX→U_αY', which is false (for groups, ∅→Δ^0 cannot occur since every simplicial group has an identity vertex), and the delivery's steps 6-8 replace that inference with a valid argument. Every dependency is in the same unit, so there are no tool_uses. There are no new nodes and no cycle (the item is not in its 100-node dependency closure). The DAG duplicate search found nothing that states the item: the accessible-monad, associative-algebra-transfer and projective-model nodes differ, and the fixed-object nodes are consumers. Edge cases checked: empty S, empty sorts, nullary constants, n=0 boundary, n=1 horns, and the one-sort theory of sSet itself. The base-change and coefficient checks do not apply because this is not a target node. Minor point, not a fault: the report's 'Files written' section still lists the dropped draft nodes, but the branch contains only the item and the report."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-343c5d9b1",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Checked node, both stmt deps (SSet leaf; KanQuillen weq = Enhanced.IsWeakHomotopyEquivalence, fib = J.rlp), Mathlib ModelCategory fields, and the module clause by clause: small one-universe SortedTheory with HasFiniteProducts and generation incl. empty product; StrictSimplicialAlgebra via Mathlib PreservesFiniteProducts; real evaluation functor; free adjoints; HasLimits/ColimitsOfSize.{u,u}; sortwise weq/fib; boundary n>=0 and horn n>=1 generators with rlp equalities; functorial cell factorizations; Cof = retracts of relative I-cell maps; trivial cof = J.rlp.llp. Edge cases (empty S, nullary products, n=0/1, empty sorts) admitted; no extra assumptions. Docstrings/blueprint ids present, only sorry, statement verbatim, node changed only in lean field, report has Worker report and Second reading by Q102. nt_compile.py --json on snapshot module: clean, no warnings. No findings beyond cosmetic leftover superseded report section."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SortedSimplicialAlgebraModel",
+  "declaration": "AlgebraicTopology.sorted_simplicial_algebra_model",
+  "file": "lean/Sheaf/AlgebraicTopology/SortedSimplicialAlgebraModel.lean",
+  "statement": "theorem sorted_simplicial_algebra_model {S : Type u} (T : SortedTheory S) : HasLimitsOfSize.{u, u} (StrictSimplicialAlgebra T) ∧ HasColimitsOfSize.{u, u} (StrictSimplicialAlgebra T) ∧ ∃ (F : ∀ s : S, SSet.{u} ⥤ StrictSimplicialAlgebra T), (∀ s : S, Nonempty ((F s) ⊣ evaluation s)) ∧ ∃ (m : ModelCategory (StrictSimplicialAlgebra T)), m.categoryWithWeakEquivalences.weakEquivalences = (fun _ _ f ↦ ∀ s : S, SSet.Enhanced.IsWeakHomotopyEquivalence ((evaluation s).map f)) ∧ m.categoryWithFibrations.fibrations = (fun _ _ f ↦ ∀ s : S, SSet.modelCategoryQuillen.J.rlp ((evaluation s).map f)) ∧ m.categoryWithCofibrations.cofibrations = (boundaryGenerators F).rlp.llp ∧ (boundaryGenerators F).rlp = (m.categoryWithFibrations.fibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences) ∧ (hornGenerators F).rlp = m.categoryWithFibrations.fibrations ∧ HasFunctorialFactorization (transfiniteCompositions.{u} (coproducts.{u} (boundaryGenerators F)).pushouts) (boundaryGenerators F).rlp ∧ HasFunctorialFactorization (transfiniteCompositions.{u} (coproducts.{u} (hornGenerators F)).pushouts) (hornGenerators F).rlp ∧ (hornGenerators F).rlp.llp = (fun _ _ f ↦ (boundaryGenerators F).rlp.llp f ∧ m.categoryWithWeakEquivalences.weakEquivalences f) ∧ (boundaryGenerators F).rlp.llp = (transfiniteCompositions.{u} (coproducts.{u} (boundaryGenerators F)).pushouts).retracts",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicTopology.SortedTheory",
+   "AlgebraicTopology.StrictSimplicialAlgebra",
+   "AlgebraicTopology.evaluation",
+   "AlgebraicTopology.boundaryGenerators",
+   "AlgebraicTopology.hornGenerators",
+   "AlgebraicTopology.sorted_simplicial_algebra_model"
+  ]
  }
 }
