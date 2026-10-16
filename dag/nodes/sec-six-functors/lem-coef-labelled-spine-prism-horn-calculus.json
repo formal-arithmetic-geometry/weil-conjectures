@@ -27,9 +27,133 @@
  "stmt_deps": [
   "def-coef-segal-presheaf-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-space-universal-colimits], pullback in spaces preserves small colimits; by the objectwise (co)limit assertion of [lem-coef-infinity-yoneda-presheaf-limits], the same holds for space-valued presheaves. Restriction $p^*$ also preserves colimits objectwise. Hence $K\\mapsto\\Delta^n(\\boldsymbol c)\\times_{p^*\\Delta^n}p^*K$ on $P(\\Delta)_{/\\Delta^n}$ preserves colimits. To identify its simplices, let $\\alpha:[r]\\to[n]$. Cartesian transport in [def-coef-segal-presheaf-localization] gives $\\alpha^*\\boldsymbol c$ and, for a test $[l](\\boldsymbol e)$, identifies the space of arrows to $[n](\\boldsymbol c)$ over $\\alpha\\beta$ with the space of arrows to $[r](\\alpha^*\\boldsymbol c)$ over $\\beta$, for every $\\beta:[l]\\to[r]$. Taking the coproduct over $\\beta$ proves, naturally in the test object,\n$$\\Delta^n(\\boldsymbol c)\\times_{p^*\\Delta^n}p^*\\Delta^r\\simeq\\Delta^r(\\alpha^*\\boldsymbol c).$$\nThus a face pulls back to the represented face with the transported tensor labels, and intersections pull back to the corresponding labelled intersections. In particular the ordinary spine pulls back to the spine defined by glued represented edges.",
+   "uses": [
+    "lem-coef-space-universal-colimits",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-segal-presheaf-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1-6.2; Corollary 6.5; Proposition 7.1, single-factor cartesian-lift calculation"
+   }
+  },
+  {
+   "text": "All ordinary attaching squares below also give pushouts of discrete space-valued presheaves. Colimits in $P(\\Delta)$ are computed objectwise by [lem-coef-infinity-yoneda-presheaf-limits]. In one degree let $A\\leftarrow C\\to B$ be a span of sets with $C\\to A$ injective, and put $A'=A\\setminus C$. The span is the coproduct of the spans $C\\leftarrow C\\to B$ and $A'\\leftarrow\\varnothing\\to\\varnothing$. The pushout in spaces of the first is $B$, since one leg is an identity; that of the second is $A'$, since the other two corners are initial. Colimits commute with coproducts, so the pushout in spaces is the discrete set $B\\amalg A'$, which is the set pushout. Simultaneously prove by strong induction on $n$ that $P(n)$: spine $\\to\\Delta^n$ has a finite inner-horn filtration of dimensions at most $n$, and $H(n,i)$: spine $\\to\\Lambda_i^n$ has one of dimensions less than $n$, for every $0<i<n$. For $n=0,1$, $P(n)$ is the identity and there is no $H(n,i)$. Fix $n\\geq2$ and $0<i<n$. Put $V=\\{0,\\ldots,n\\}$ and $Y=\\Delta^{\\{0,\\ldots,i\\}}\\cup\\Delta^{\\{i,\\ldots,n\\}}$. These two blocks meet at the vertex $i$. Applying $P(i)$ and $P(n-i)$, with each attachment pushed out along the other block's spine, fills the two blocks from the original spine. Both block dimensions are less than $n$, so every horn used has dimension less than $n$. Also $Y\\subseteq\\Lambda_i^n$: each block omits a vertex different from $i$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 6.4; explicit strong-induction proof of the finite combinatorics"
+   }
+  },
+  {
+   "text": "Starting from $Y$, take all proper subsets $T\\subsetneq V$ containing $i$ and at least one vertex on each side of $i$, in increasing order of $|T|$; break ties arbitrarily. Pair $T$ with $S=T\\setminus\\{i\\}$. The vertex $i$ is strictly internal in the ordered set $T$, so $\\Lambda_i^T\\hookrightarrow\\Delta^T$ denotes an inner horn of dimension $|T|-1$, between $2$ and $n-1$. If $t\\in T\\setminus\\{i\\}$, then $T\\setminus\\{t\\}$ either lies wholly in a block of $Y$, or is a smaller cross-block set containing $i$ and was filled earlier. Thus every face except $S$ is already present. The face $S$ is not in $Y$, and cannot occur in any earlier attached $T'$: such a $T'$ contains $i$, has $|T'|\\leq|T|$, and containing $S$ would force $T'=S\\cup\\{i\\}=T$. Nor is $T$ present earlier. The intersection with $\\Delta^T$ is therefore exactly $\\Lambda_i^T$, so attach $\\Delta^T$ by that horn pushout, adding precisely the pair $(S,T)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 6.4; paired cells and verification of each attaching intersection"
+   }
+  },
+  {
+   "text": "Every nondegenerate simplex of $\\Lambda_i^n$ not already in $Y$ has vertices on both sides of $i$. If it contains $i$, its vertex set is one of the proper sets $T$ just attached. If it omits $i$, call its vertex set $S$; the horn condition excludes $S=V\\setminus\\{i\\}$, so $T=S\\cup\\{i\\}$ is proper and $(S,T)$ is one of the pairs. This exhausts the horn in finitely many steps and proves $H(n,i)$. Appending $\\Lambda_i^n\\to\\Delta^n$ proves $P(n)$, completing the simultaneous induction. For $n=2$, $Y$ is already the spine and the inner horn, and the pair list is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 6.4; exhaustion, dimension bound and induction closure"
+   }
+  },
+  {
+   "text": "Apply the colimit-preserving functor of step 1 to the finite filtration of steps 2-4, over $\\Delta^n$. On an attaching simplex $\\Delta^T$, its value is the represented simplex with labels transported from $\\boldsymbol c$; its horn is the pullback of the ordinary inner horn within that simplex. Hence each square becomes a pushout of exactly a labelled inner horn, with unchanged dimension less than $n$. This proves the required labelled spine-to-horn filtration. Composing with the labelled horn inclusion gives the labelled spine inclusion. The defining class contains the generators and is closed under these finite compositions and pushouts, so the spine inclusion is inner anodyne.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 6.5 and Definitions 6.1-6.2"
+   }
+  },
+  {
+   "text": "For the boundary take the finite poset $P$ of all nonempty proper vertex subsets $U\\subsetneq\\{0,\\ldots,m\\}$, with inclusions, and the diagram $U\\mapsto\\Delta^U\\subseteq\\Delta^m$. Colimits in $P(\\Delta)$ are objectwise by [lem-coef-infinity-yoneda-presheaf-limits]. At a test $[l]$ the value at $U$ is the discrete set of $\\beta:[l]\\to[m]$ with $\\operatorname{im}\\beta\\subseteq U$. This is the coproduct over all $\\beta$ of the diagrams $\\chi_\\beta$ with value $*$ when $\\operatorname{im}\\beta\\subseteq U$ and $\\varnothing$ otherwise, and colimits commute with coproducts. If $\\beta$ is surjective, then $\\chi_\\beta$ is empty and contributes nothing. Otherwise $P_\\beta=\\{U\\in P:\\operatorname{im}\\beta\\subseteq U\\}$ is upward closed in $P$ and has the initial element $\\operatorname{im}\\beta$. Let $j:P_\\beta\\subseteq P$. By [lem-coef-infinity-finite-poset-kan-extension], $j_!(*)$ exists and its value at $U$ is the colimit of $*$ over $(P_\\beta)_{\\leq U}$. That poset is empty when $U\\notin P_\\beta$, giving $\\varnothing$. When $U\\in P_\\beta$ it has the terminal element $U$. The inclusion $\\{U\\}\\subseteq(P_\\beta)_{\\leq U}$ is then final by condition (3) of [lem-coef-infinity-cofinality-space-test], because every comma category $(V\\downarrow\\{U\\})$ is a point, so the value is $*$. The full subcategory of spaces on $\\varnothing$ and $*$ is the ordered set $\\{\\varnothing<*\\}$: its mapping spaces are $\\operatorname{Map}(\\varnothing,x)=*$, $\\operatorname{Map}(*,*)=*$ and $\\operatorname{Map}(*,\\varnothing)=\\varnothing$. Hence a diagram with these values is determined by the set where it is $*$, and $\\chi_\\beta\\simeq j_!(*)$. The adjunction of the same node gives, for every space $T$, $\\operatorname{Map}(\\operatorname{colim}_P\\chi_\\beta,T)\\simeq\\operatorname{Map}(j_!(*),\\Delta_PT)\\simeq\\operatorname{Map}(*,\\Delta_{P_\\beta}T)$, so $\\operatorname{colim}_P\\chi_\\beta\\simeq\\operatorname{colim}_{P_\\beta}*$. Finally $P_\\beta\\to\\Delta^0$ satisfies condition (3) of [lem-coef-infinity-cofinality-space-test]: its comma category is $P_\\beta$ itself. Its nerve is weakly contractible, because the transformation from the constant functor at $\\operatorname{im}\\beta$ to the identity gives a simplicial homotopy $N(P_\\beta)\\times\\Delta^1\\to N(P_\\beta)$ from a constant map to the identity. Condition (2) then gives $\\operatorname{colim}_{P_\\beta}*\\simeq*$. Thus each boundary simplex contributes one contractible component, and the colimit of this diagram is the boundary, not the full simplex. Apply step 1 to obtain the claimed finite colimit of represented labelled faces with their intersections and transported labels. Every face has dimension below $m$. At $m=0$ the poset is empty and its colimit is empty; at $m=1$ it consists of the two vertices.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 7.1 and Corollary 7.5 proof, decomposition of the boundary"
+   }
+  },
+  {
+   "text": "Use [lem-coef-inner-anodyne-pushout-product] with the ordinary inner horn and the boundary inclusion. The horn has the left lifting property against inner fibrations by their definition, and the boundary is degreewise injective. This gives the ordinary rectangular map $u:K\\to L=\\Delta^n\\times\\Delta^m$ in the lifting-property inner-anodyne class. Here is the comparison with the generated class needed below. Apply [lem-coef-small-object-cell-factorization] to simplicial sets and the small, countable set $I$ of inner horn inclusions, with $\\kappa=\\aleph_0$. Simplicial sets have small Hom sets and colimits formed degreewise in sets. Every horn has finitely many nondegenerate simplices: a map from it into a continuous chain factors at one finite stage containing their finitely many images, and its finitely many compatibility equalities hold at a later finite stage. The same finite-data argument detects equality of two maps. This verifies the node's smallness hypothesis. Its last assertion makes $u$ a retract of a transfinite composite of pushouts of small coproducts of inner horns. This is precisely the comparison named SSet.innerAnodyneExtensions_eq_retracts_transfiniteCompositions at Inner/Basic.lean:89-92. Such cell pushouts also give pushouts in $P(\\Delta)$: in each degree the horn leg is injective, so the homotopy pushout of the discrete span has contractible components and equals its set pushout. At a limit ordinal $\\lambda$, the stage is the increasing union in each degree. Write it as the coproduct over its elements $x$ of the diagrams equal to $*$ on the set $Q_x$ of earlier stages containing $x$ and to $\\varnothing$ elsewhere. Each $Q_x$ is an upward-closed tail of $\\lambda$ with an initial element. For each stage $b<\\lambda$ the comma category $(b\\downarrow Q_x)$ is the part of $Q_x$ above $b$. It is nonempty and has an initial element, so its nerve is weakly contractible: the transformation from the constant functor at that element gives a homotopy to the identity. By condition (3) of [lem-coef-infinity-cofinality-space-test] the inclusion $Q_x\\subseteq\\lambda$ is final. The same condition, applied to $Q_x\\to\\Delta^0$, gives $\\operatorname{colim}_{Q_x}*\\simeq*$. Since colimits commute with coproducts, the homotopy colimit of the chain is the union. A small coproduct of horn attachments can be performed one at a time along a well-order. Thus $u$ lies in the weakly saturated class $\\mathcal A_\\Delta$ of [lem-coef-simple-inner-anodyne-base-change], with its space-valued-presheaf convention.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-simple-inner-anodyne-base-change",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 7.4, ordinary pushout-product input; Mathlib Inner/Basic.lean:89-92 via the existing general small-object leaf"
+   }
+  },
+  {
+   "text": "Set $E=(C\\times D)_\\otimes$, $r:E\\to\\Delta$, and $Z=\\Delta^n(\\boldsymbol c)\\boxtimes\\Delta^m(\\boldsymbol d)$, using [def-coef-segal-presheaf-localization]. For $\\alpha=(\\sigma,\\tau):\\Delta^k\\to L$, evaluate the pullback $Z_\\alpha=Z\\times_{r^*L}r^*\\Delta^k$ at $[l](\\boldsymbol e,\\boldsymbol f)$. By the same cartesian-lift calculation as step 1 its value is\n$$\\coprod_{\\gamma:[l]\\to[k]}\\operatorname{Map}_{C^l}(\\boldsymbol e,\\gamma^*\\sigma^*\\boldsymbol c)\\times\\operatorname{Map}_{D^l}(\\boldsymbol f,\\gamma^*\\tau^*\\boldsymbol d).$$\nThis is the value of the representable $\\Delta^k(\\sigma^*\\boldsymbol c,\\tau^*\\boldsymbol d)$, naturally over $r^*\\Delta^k$. Also $r_!y_E(e)\\simeq y_\\Delta(r(e))$: the adjunction and Yoneda identify maps from either side into $F$ with $F(r(e))$. Hence the adjoint $r_!Z_\\alpha\\to\\Delta^k$ is the identity under these identifications, not merely an abstract equivalence of unrelated objects. Therefore $Z\\to r^*L$ is simple in the exact sense of [lem-coef-simple-inner-anodyne-base-change]. Apply that node to $u$ from step 7 to conclude that $Z\\times_{r^*L}r^*K\\to Z$ is labelled inner anodyne.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-simple-inner-anodyne-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 7.1 mapping-space calculation; Corollary 7.2; Definition 6.7 and Proposition 6.9"
+   }
+  },
+  {
+   "text": "Identify the last pullback. Pulling back $\\Lambda_i^n\\times\\Delta^m\\subset L$ gives $\\Lambda_i^n(\\boldsymbol c)\\boxtimes\\Delta^m(\\boldsymbol d)$; pulling back $\\Delta^n\\times\\partial\\Delta^m$ gives $\\Delta^n(\\boldsymbol c)\\boxtimes\\partial\\Delta^m(\\boldsymbol d)$; their intersection gives the external product of horn and boundary. These identities follow by reassociating the pointwise fiber products in the definitions. Restriction and pullback preserve the gluing pushout by step 1, so the pullback of their union $K$ is exactly the displayed pushout domain in the item. The inner-anodyne conclusion of step 8 is therefore the asserted prism map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 7.4 proof, explicit identification of the pullback square"
+   }
+  },
+  {
+   "text": "When $m=0$, the unique monotone map $[l]\\to[0]$ transports the empty label list to $(\\mathbf1_D,\\ldots,\\mathbf1_D)$ by the empty-tensor convention of [def-coef-segal-presheaf-localization]. Thus evaluating $\\Delta^n(\\boldsymbol c)\\boxtimes v_D$ gives the coproduct over $\\phi:[l]\\to[n]$ of\n$$\\operatorname{Map}_{C^l}(\\boldsymbol e,\\phi^*\\boldsymbol c)\\times\\operatorname{Map}_{D^l}(\\boldsymbol f,(\\mathbf1_D)^l),$$\nwhich represents $\\Delta^n((c_j,\\mathbf1_D)_j)$. Restricting the base maps $\\phi$ to the horn gives its labelled horn, proving the vertex formula. No uniqueness of maps from arbitrary objects of $D$ to its unit is asserted. Finally swapping the pointwise product factors, together with the symmetry $C\\times D\\simeq D\\times C$, swaps the face diagrams, their intersections, and all the pushout-product legs. This gives all asserted factor-exchange compatibilities.",
+   "uses": [
+    "def-coef-segal-presheaf-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 7.5 proof, vertex case; Corollary 7.4 with factors exchanged"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-finite-poset-kan-extension",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-simple-inner-anodyne-base-change",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-space-universal-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Repair: explicit paired-cell strong induction for Proposition 6.4/Corollary 6.5; cartesian-lift calculations of Proposition 7.1 and Corollaries 7.2,7.4-7.5. Simple-map base change is isolated as a cited statement-only node; source read online and requested for archival."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -96,7 +220,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-external-local-equivalences",
@@ -104,5 +228,20 @@
   "group": "Q45"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-labelled-spine-prism-horn-calculus",
+  "worker": "stage1",
+  "summary": "Repaired E3 with a simultaneous strong induction through two blocks and paired (S,S union {i}) inner-horn attachments, including the exact attaching intersection. Repaired E5/C1 by isolating the genuine simple-map base-change lemma, checking its actual projection criterion and citing the existing general small-object Mathlib leaf for the lifting/saturation comparison with finite-horn smallness proved explicitly. Added a general space-colimit universality prerequisite rather than attributing it to a definition; supplied represented transported faces, corrected boundary wording, and removed the false uniqueness claim for maps to the unit. Statement unchanged. Second reading corrects the attribution of the base-change source and makes the ordinary-to-space-valued attaching-square comparison explicit before its first use. Maintainer review fix (2026-10-17): step 6 was marked elementary but computed a homotopy colimit over the face poset without a citation. It now proves this from lem-coef-infinity-finite-poset-kan-extension and lem-coef-infinity-cofinality-space-test. Steps 2 and 7 replace the tree and contractible-tail remarks with a coproduct decomposition and the same finality test.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 before R lim: enriched tensor cocontinuity foundation, following Haugseng Corollary 6.5 and Proposition 6.9 through Proposition 7.1 and Corollaries 7.2,7.4-7.5."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-436d184f2",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-436d184f2 (reviewer sub-agent of L); spot-checked: I read all of it: the item, both new nodes, every cited statement, both parents that cite the item, the unit sk-prop-sf-biduality-general (it has no steps), and Haugseng arXiv:2311.13362v1 Def. 6.1-6.2, Prop. 6.4/Cor. 6.5, Def. 6.7, Prop. 6.9, Prop. 7.1, Cor. 7.2, 7.4, 7.5 and Kerodon 05V5, both online. The item's statement is unchanged, and every clause the parents use is in it. Steps 3-5 and 8-10 are correct. I checked the filtration by hand on n=2 and on n=3, i=1. The labelled-face pullbacks, the simplicity computation (including k=0), the prism domain and the vertex formula (no uniqueness of maps into the unit is claimed) all hold. New node lem-coef-space-universal-colimits agrees with Kerodon 05V5; I tested J empty and f identity, and found no duplicate in the DAG. New node lem-coef-simple-inner-anodyne-base-change agrees exactly with Haugseng Def. 6.7 and Prop. 6.9, including all a>=0, representability and the adjoint projection being an equivalence. It is strictly more general than the item and not a restatement. Every statement cited is in the same unit, the graph stays acyclic, no SGA is used and no tool_uses are needed. One repairable fault, C2/C1, now fixed in fixes/dag/nodes/sec-six-functors/lem-coef-labelled-spine-prism-horn-calculus.json. Step 6 was marked elementary but computed a homotopy colimit over the face poset with no citation, and steps 2 and 7 relied on unstated colimit facts ('the graph is a tree', 'a contractible tail'). Step 6 now cites lem-coef-infinity-finite-poset-kan-extension and lem-coef-infinity-cofinality-space-test, and is no longer marked elementary. Step 2 now uses an elementary coproduct decomposition of the span. Step 7 cites the finality test for ordinal tails. proof_deps is the union of the steps' uses, and split_report.summary has one added sentence. No other field changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

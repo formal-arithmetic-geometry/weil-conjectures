@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "A connected étale finite-Tor lisse complex has one perfect constant value",
- "statement": "Let $X$ be a nonempty connected scheme [def-pc-scheme], and let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Use the small étale site [def-weil-pbc-etale-site], constant sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category] and their derived category [def-weil-abstract-derived-category]. Suppose $L\\in D(X_{\\mathrm{ét}},\\underline R)$ has bounded cohomology, each $H^q(L)$ is locally constant with finitely generated $R$-module values [def-weil-finitely-generated-module], and there are integers $a\\leq b$ such that $H^q(L\\otimes_R^L F)=0$ for every degree-zero étale $R$-module sheaf $F$ and $q\\notin[a,b]$ [lem-pur-derived-change-of-rings]. Then there is a perfect ring complex $E\\in D(R)$ [def-pc-perfect-ring-complex] and an étale covering $\\{V_i\\to X\\}$ with $L|_{V_i}\\simeq\\underline E|_{V_i}$. For every geometric point $\\bar x$ [def-weil-geometric-point, def-weil-pbc-geometric-stalks], $E\\simeq L_{\\bar x}$.\n\nMoreover, if $W\\to X$ is an affine object of the small pro-étale site [def-weil-pbc-proetale-site] that is weakly contractible (evaluation at $W$ takes every epimorphism of sheaves of sets to a surjection), then $(\\nu_X^*L)|_W\\simeq\\underline E|_W$, where $\\nu_X$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Neither $R$ nor its finitely generated modules are required to be finite sets.",
+ "statement": "Let $X$ be a nonempty connected scheme [def-pc-scheme], and let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Use the small étale site [def-weil-pbc-etale-site], constant sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category] and their derived category [def-weil-abstract-derived-category]. Suppose $L\\in D(X_{\\mathrm{ét}},\\underline R)$ has bounded cohomology, each $H^q(L)$ is locally constant with finitely generated $R$-module values [def-weil-finitely-generated-module], and there are integers $a\\leq b$ such that $H^q(L\\otimes_R^L F)=0$ for every degree-zero étale $R$-module sheaf $F$ and $q\\notin[a,b]$ [lem-weil-pbc-site-derived-tensor-descent]. Then there is a perfect ring complex $E\\in D(R)$ [def-pc-perfect-ring-complex] and an étale covering $\\{V_i\\to X\\}$ with $L|_{V_i}\\simeq\\underline E|_{V_i}$. For every geometric point $\\bar x$ [def-weil-geometric-point, def-weil-pbc-geometric-stalks], $E\\simeq L_{\\bar x}$.\n\nMoreover, if $W\\to X$ is an affine object of the small pro-étale site [def-weil-pbc-proetale-site] that is weakly contractible (evaluation at $W$ takes every epimorphism of sheaves of sets to a surjection) [sk-def-pe-weak-contractible], then $(\\nu_X^*L)|_W\\simeq\\underline E|_W$, where $\\nu_X$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Neither $R$ nor its finitely generated modules are required to be finite sets.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09BI, lemma-connected-ctf-locally-constant; the weakly contractible corollary is the trivialization used in proetale.tex, proof of Tag 09C6, together with the covering-splitting condition of sites.tex Tag 090K."
@@ -28,16 +28,125 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-finitely-generated-module",
-  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "def-pc-perfect-ring-complex",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-pe-weak-contractible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take a K-flat flat-term representative P of L. The constant ring sheaf in degree zero is K-flat (tensoring with it is the identity); the derived-tensor model identifies L\\otimes_R^L\\underline R with P\\otimes_R\\underline R\\cong P, by x\\otimes r\\mapsto rx and inverse x\\mapsto x\\otimes1. Taking F=\\underline R therefore gives H^q(L)=0 off [a,b]. Apply the existing bounded-constant-model lemma on the small étale site: obtain a covering {V_i\\to X} and complexes M_i^\\bullet of finitely generated R-modules, zero outside [a,b], with L|_{V_i}\\simeq\\underline{M_i^\\bullet}. Discard empty V_i. On a nonempty V_i\\times_XV_j choose a geometric point; exact geometric stalks, and the constant-sheaf stalk isomorphism termwise, give M_i^\\bullet\\simeq M_j^\\bullet in D(R). These isomorphisms are R-linear since the constant-stalk maps commute with every scalar endomorphism. If the images of V_i and V_j meet, choose a geometric point above a point of intersection and lifts to both étale schemes; the more precise clause of the cited geometric-lifting lemma gives lifts above the chosen points of both fibres. Thus their fibre product is nonempty. For each derived-isomorphism class M among the M_i, form the union of the images of its V_i. These unions are open by the cited openness theorem, are pairwise disjoint by the overlap argument, and cover X. Nonemptiness and connectedness imply exactly one class occurs. Choose its representative M^\\bullet. Each geometric point of X lifts to some V_i, so the same exact-stalk calculation gives M^\\bullet\\simeq L_{\\bar x} for every geometric point \\bar x.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-site-bounded-constant-model",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09BI, lemma-connected-ctf-locally-constant; local models from Sites Tag 094G and connectedness grouping in the displayed proof"
+   }
+  },
+  {
+   "text": "Fix a geometric point \\bar x of X (one exists because X is nonempty). Its stalk is the inverse image of the topos point p supplied by the cited topos-point lemma. The constant-stalk isomorphism identifies p^{-1}\\underline R with R, so module pullback along p is precisely the exact stalk functor, and Lp^*=p^*. For an arbitrary R-module N in degree zero, apply the Tor hypothesis with F=\\underline N. The derived tensor/pullback comparison and the constant-stalk isomorphism give p^*(L\\otimes_R^L\\underline N)\\simeq L_{\\bar x}\\otimes_R^L N\\simeq M^\\bullet\\otimes_R^L N. Exactness of the stalk functor commutes with cohomology, hence this object vanishes in cohomology off [a,b]. Thus the bounded finite-module complex M^\\bullet has Tor amplitude [a,b]. The cited bounded-finite-Tor-perfect theorem gives a complex E of finitely generated projective R-modules, zero outside [a,b], isomorphic to M^\\bullet in D(R). Termwise constant presheaves preserve exact sequences, and the cited module sheafification theorem is exact; consequently constant-sheaf construction preserves quasi-isomorphisms and induces a functor on derived categories. Applying it to E\\simeq M^\\bullet gives L|_{V_i}\\simeq\\underline E|_{V_i}. Step 1 also gives E\\simeq L_{\\bar x} for every geometric point.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-bounded-finite-tor-perfect",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09BI proof, final perfectness sentence; Stacks Tags 03PT and 07A4 for stalk/tensor comparison"
+   }
+  },
+  {
+   "text": "Let W\\to X be affine and weakly contractible. The geometric comparison inverse image preserves constant sheaves: the constant sheaf of a set is the sheaf coproduct of that many copies of the terminal object; inverse image preserves these coproducts and the terminal object. Preservation of finite products identifies the ring and module operations as well, for arbitrary R. The cited classical-module comparison supplies exactness on R-module sheaves, so it acts termwise on derived categories. Next, \\nu^* commutes with restriction to each étale V_i. Write u:V_i\\to X. For an object T\\to V_i of (V_i)_{proét}, the indexing category of the pro-étale inverse-image colimit at T has the initial object (T\\to X,(\\mathrm{str},\\mathrm{id}_T):T\\to V_i\\times_XT): a map from it to (V,\\varphi) must be \\mathrm{pr}_2\\varphi, because a map into V_i\\times_XV over V_i is determined by its second component. So the presheaf inverse image along u is F\\mapsto F(T\\to X), which is already a sheaf by the weakly-étale localization lemma; hence u_{proét}^{-1} is restriction to X_{proét}/V_i\\simeq(V_i)_{proét}. The same initial-object argument identifies u_{ét}^{-1} with restriction to X_{ét}/V_i, which the étale localization lemma identifies with (V_i)_{ét}. The cited comparison-pullback isomorphism \\nu_{V_i}^*u_{ét}^{-1}\\simeq u_{proét}^{-1}\\nu_X^* therefore gives (\\nu_X^*G)|_{V_i}\\simeq\\nu_{V_i}^*(G|_{V_i}), natural in the sheaf G. By naturality it respects addition and every scalar endomorphism, so it is an isomorphism of module sheaves, and it is exact. Apply it termwise, then use relocalization along W\\times_XV_i\\to V_i. Step 2 then gives (\\nu_X^*L)|_{W\\times_XV_i}\\simeq\\underline E there. The projections W\\times_XV_i\\to W are étale and jointly surjective by the cited covering base-change lemma. As W is affine, the refinement lemma gives a finite affine refinement {U_j\\to W}. Each U_j still has this local isomorphism, by exact restriction and the constant-restriction isomorphism. Let U=\\coprod_{j=1}^m U_j, with q:U\\to W. The scheme-coproduct lemma makes its summands pairwise disjoint and clopen. U is affine, being a finite coproduct of affines. So q is an étale map of affine schemes, given by an étale ring map. That map is ind-étale (a constant filtered colimit), hence weakly étale by the ind-étale stability lemma. Its composite with the weakly étale W\\to X is weakly étale by the composition lemma, so U is an object of X_proét over W, as in the localization lemma. The covering {U_j\\to W} gives an epimorphism h_U\\to h_W: any map T\\to W lifts after the covering {T\\times_WU_j\\to T}. The pro-étale topology is subcanonical, so weak contractibility gives a sheaf section h_W\\to h_U and Yoneda identifies it with a scheme map s:W\\to U satisfying q\\circ s=id_W.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-pe-topos-functoriality-site",
+    "sk-def-pe-weak-contractible",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, lemma-connected-adic-lisse, proof at the weakly contractible covering W_t; sites.tex Tag 090K, lemma-w-contractible; topologies.tex Tag 0218, lemma-etale-affine; sites.tex Tag 00XZ (section-localize) and proetale.tex Tags 09A5, 099R (functoriality, comparison) for restriction to étale objects; morphisms.tex Tag 02GO; more-morphisms.tex Tag 094T"
+   }
+  },
+  {
+   "text": "Combine the finitely many isomorphisms on U_j to an isomorphism (\\nu_X^*L)|_U\\simeq\\underline E|_U as follows. For any object T\\to U, put T_j=T\\times_UU_j. The T_j are disjoint and cover T, so the sheaf condition is F(T)=\\prod_{j=1}^m F(T_j); no overlap compatibility remains because all distinct intersections are empty and a module sheaf on the empty object is zero. This identifies module sheaves on the slice over U with the finite product of their categories on the slices over U_j, with restriction and inverse assembly exact. Apply the identification termwise to complexes: differentials, chain maps, homotopies and cohomology are computed on each component. In particular the finite family of roofs representing the local derived isomorphisms assembles to a roof on U, and its quasi-isomorphism legs remain quasi-isomorphisms componentwise. Now restrict this isomorphism along s:W\\to U, using exact derived restriction and its relocalization identity. Since q\\circ s=id_W, its left-hand object becomes (\\nu_X^*L)|_W; constant-restriction naturality identifies the right-hand object with \\underline E|_W. This proves the moreover clause, including disconnected W. If W is empty both restrictions are zero, and the same conclusion holds.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 090K, lemma-w-contractible; componentwise sheaf condition and exact restriction on the finite disjoint covering of the coproduct, spelling out the use implicit in proetale.tex Tag 09C6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-topos-functoriality-site",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-pc-kflat-resolution",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-bounded-constant-model",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sk-def-pe-weak-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09BI, lemma-connected-ctf-locally-constant; weakly contractible pro-étale trivialization from proetale.tex Tag 09C6 and sites.tex Tag 090K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +196,31 @@
    "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
    "date": "2026-10-16",
    "verdict": "no match: ordinary completion, module finiteness and generic derived-category declarations do not state this derived sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant derived sheaf with a fixed fiber becomes constant on a projective object of the topos",
+   "results": "{\"t\": \"2026-10-16T21:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"A locally constant derived sheaf with a fixed fiber becomes constant on a projective object of the topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.locallyConstantPresheaf\", \"Condensed.locallyConstantPresheaf\", \"CompHausLike.LocallyConstant.functor\", \"CompHausLike.LocallyConstant.functor_obj_val\", \"CompHausLike.LocallyConstant.presheaf_ext\", \"CompHausLike.LocallyConstant.unit\", \"LightCondSet.LocallyConstant.functor\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\"], \"digest\": \"9cc3bba1668a1e61\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: discrete condensed functors, projective-site comparison, and unrelated perfect-field declarations do not state the derived étale assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-16T21:27:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Projective, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.coherentExtensiveEquivalence\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_obj\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_obj\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_hom\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_hom\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso_hom_app_hom_app\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso_inv_app_hom_app\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso_hom_app_hom_app\"], \"digest\": \"cdd48c0546bf65eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: discrete condensed functors, projective-site comparison, and unrelated perfect-field declarations do not state the derived étale assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*[Cc]omplex|[Cc]omplex.*locallyConstant|[Pp]erfect.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-16T21:27:54Z\", \"tool\": \"grep\", \"query\": \"locallyConstant.*[Cc]omplex|[Cc]omplex.*locallyConstant|[Pp]erfect.*[Ss]heaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Complex.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"3d097e7052fb8960\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: discrete condensed functors, projective-site comparison, and unrelated perfect-field declarations do not state the derived étale assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-residue-lisse-perfect-lift",
@@ -98,5 +228,149 @@
   "group": "Q93"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-integral-models"
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-connected-etale-perfect-constant",
+  "worker": "stage1",
+  "summary": "Second reading: four-step proof using existing DAG tools only. Stacks 09BI gives the connectedness argument; exact stalk and tensor interfaces give the Tor upgrade. The weakly contractible clause is expanded through a finite affine refinement, a representable split coproduct covering, componentwise derived roofs, and restriction along the section. Arbitrary Noetherian coefficients are retained; no semantic statement change or new node. Maintainer reader (2026-10-17): step 3 now cites the comparison/étale-inverse-image compatibility, étale covering base change and étale-implies-weakly-étale.",
+  "blueprint": "Realizes the local perfect-model input in det-lem-integral-models-stacks, first sentence invoking sk-prop-integral-criterion, along its ancestry through lem-sfb-integral-cohomological-adic-criterion, lem-sfb-adic-stratified-perfect and lem-sfb-adic-residue-lisse-perfect-lift. Steps 1–2 implement Stacks 09BI; steps 3–4 justify the weakly contractible trivialization used in Stacks 09C6.",
+  "tool_uses": [
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "def-weil-pbc-ringed-derived-restriction",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Provides the etale/pro-etale comparison inverse image used in the weakly contractible clause."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-bounded-finite-tor-perfect",
+    "why": "Upgrades the finite R-complex with the transferred Tor amplitude to a perfect ring complex; it is a generic ring-theoretic tool outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Identifies the stalk of a constant R-module sheaf with the underlying R-module in the Tor test."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-affine-refinement",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Derived tensor commutes with geometric inverse image; this generic homological interface is not supplied by the integral-models unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-bounded-constant-model",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-constant-restriction",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site, sheaf, geometric or derived-category infrastructure for the stated Stacks 09BI/09C6 argument; it does not replace a step of the integral-models unit route."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exact geometric stalks are a generic site tool needed to transfer the sheaf Tor bound to the ring complex; this unit has no replacement statement."
+   },
+   {
+    "node": "sk-def-pe-weak-contractible",
+    "why": "Its section-lifting definition is the generic pro-etale input used to split the pulled-back covering."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Generic étale geometric-point lifting, including the prescribed-fibre-point clause, justifies the nonempty-overlap test and the assertion about every geometric stalk."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Comparison inverse image commutes with inverse image along the étale V_i\\to X; used to move the étale-local constant model to the pro-étale site."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic identification of X_et/V with V_et for an étale V\\to X, needed to read restriction as inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic ring fact: an ind-étale (in particular étale) ring map is weakly étale; used for U\\to W."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-topos-functoriality-site",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-pc-kflat-resolution",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-bounded-constant-model",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sk-def-pe-weak-contractible",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-2d1e96eac",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-2d1e96eac (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its four steps and the statement of every cited node. Sources checked at the cited places: Stacks 09BI (etale-cohomology.tex l.13850), 09C6 (the weakly contractible W_t passage), 090K and 094G. The statement matches 09BI hypothesis by hypothesis: connected, Noetherian R, bounded cohomology, locally constant with finitely generated values, uniform Tor interval. Its extra conclusions (E≃L_x̄ for every geometric point, and the weakly contractible trivialisation that 09C6 uses) are proved. R need not be finite, and the parent lem-sfb-adic-residue-lisse-perfect-lift needs exactly that. Step 1 is correct: the 094G local model, open images, overlap via the 03PR prescribed-point lift, and one class by connectedness. Step 2 is correct: the topos point gives Lp^*=p^*, 07A4 gives Tor amplitude in [a,b], 0658 gives perfectness, and exact sheafification makes the constant-sheaf functor exact. Step 4 is an acceptable elementary assembly over a finite disjoint cover. Repaired in step 3 (C1/E5): (a) the move from L|V_i≅E to (ν^*L)|_{W×V_i}≅E used without citation that ν^* commutes with restriction to an étale V_i. I added lem-weil-pbc-comparison-pullback, def-weil-proetale-inverse-image, def-weil-pbc-inverse-image and lem-weil-pbc-etale-site-localization-open, and wrote out the initial-object argument identifying u^{-1} with restriction. (b) Two facts had no citation: base change of the étale cover, and étale implies weakly étale for U→W. I added lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-ind-etale-stability and lem-weil-pbc-weakly-etale-composition-base-change. proof_deps is updated, there is no cycle, and three tool_uses are added. The statement is unchanged. There are no new nodes and no duplicate in the DAG; lem-weil-pbc-finite-ring-derived-local-constancy covers only finite rings. Edge cases tested: L=0, R=0, a=b, R=Z with Z/2 over a field, empty or disconnected W. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ }
 }
