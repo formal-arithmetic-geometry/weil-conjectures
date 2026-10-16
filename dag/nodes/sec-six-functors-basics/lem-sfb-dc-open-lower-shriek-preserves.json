@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sfb-dc-open-lower-shriek-preserves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$j_!$ preserves bounded constructible complexes",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and let $j\\colon U\\to X$ be an open immersion of\nthe setting of [sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_U})$ is bounded constructible\n([sk-def-sfb-bounded-constructible]), then so is the levelwise extension by zero\n$D(j_!)K\\in D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-module-lower-shriek],\n[sk-prop-sfb-module-derived-factorization]).",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and let $j\\colon U\\to X$ be an open immersion of\nthe setting of [sk-def-sfb-dc-setting]. If $K\\in D(\\Mod_{\\Lambda_U})$ is bounded constructible\n([sk-def-sfb-bounded-constructible]), then so is the levelwise extension by zero\n$D(j_!)K\\in D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-module-lower-shriek],\n[sk-def-sfb-derived-categories]).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.md",
   "place": "node lem-sfb-dc-open-lower-shriek-preserves, order 1784"
@@ -15,30 +15,171 @@
  "stmt_deps": [
   "sk-def-sfb-dc-setting",
   "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-module-lower-shriek"
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories"
  ],
  "proof": [
   {
-   "text": "The extension by zero $j_!$ on module objects is exact ([sk-def-sfb-module-lower-shriek]). So\n$H^q(D(j_!)K)\\cong j_!H^q(K)$, and $D(j_!)K$ is bounded. Let $M$ be a constructible\n$\\Lambda_U$-module ([sk-def-sfb-constructible]) with finite stratification $U=\\bigsqcup_aU_a$\nsuch that each $M|_{U_a}$ is locally finitely presented. Each $U_a$ is locally closed in $X$, since\n$U$ is open. So the $U_a$ together with the reduced closed complement $X\\setminus U$ form a\nfinite stratification of $X$. On $U_a$ the restriction of $j_!M$ is $M|_{U_a}$, because\n$j^*j_!\\cong\\mathrm{id}$. On $X\\setminus U$ it is $0$, which is finitely presented. Hence $j_!M$\nis constructible.",
+   "text": "The setting [sk-def-sfb-dc-setting] makes $X$ and $U$ finite type over the field $k$. The field has only the ideals $0$ and $k$, hence is Noetherian, and its one-point spectrum is quasi-compact. Applying [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms shows that $X$ and $U$ are Noetherian. In particular their underlying spaces are Noetherian, as also recalled explicitly for finite-type schemes over a field in [def-weil-constructible-subset]. Every subset of such a space is retrocompact. Since the whole space is quasi-compact, taking it as the quasi-compact open in the definition of retrocompactness shows that every subset is quasi-compact. In particular, the inverse image of every affine open under the absolute diagonal of either scheme is quasi-compact, so both $X$ and $U$ are quasi-separated by [def-weil-quasi-separated-morphism]. Thus both schemes are qcqs, as required by the finite-stratification clause of constructibility. Consequently the open $U$ is retrocompact in $X$ and $j$ is quasi-compact. Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to the closed subset $X\\setminus U$ to obtain its reduced induced closed subscheme $i:Z\\hookrightarrow X$. These facts verify the geometric hypotheses of the ringed open/closed lemma used below.",
    "uses": [
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; topology.tex Tag 005L, lemma-constructible-Noetherian-space; schemes.tex Tags 01J3/01J4, lemma-reduced-closed-subscheme and definition-reduced-induced-scheme"
+   }
+  },
+  {
+   "text": "The module functor $j_!$ is additive and exact by [def-sfb-module-open-lower-shriek]. Represent $K$ by a cochain complex $C$; the exact-functor clause of [sk-def-sfb-derived-categories] computes $D(j_!)K$ by the termwise complex $j_!C$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to $j_!$ in each degree to obtain $H^q(D(j_!)K)\\cong j_!H^q(K)$. Choose $a\\leq b$ with $H^q(K)=0$ for $q\\notin[a,b]$, as supplied by [sk-def-sfb-bounded-constructible]. An additive functor sends a zero object to a zero object: the identity on its image is the image of the zero identity, hence zero. Therefore $H^q(D(j_!)K)=0$ for the same degrees; the cohomological bound is unchanged.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, applied to cycles, boundaries and their quotient; blueprint proof first two sentences"
+   }
+  },
+  {
+   "text": "Fix a constructible $\\Lambda_U$-module $M$. By [sk-def-sfb-constructible], choose a finite constructible locally closed stratification $U=\\coprod_a U_a$ such that each $M|_{U_a}$ has a finite constant local model over $\\Lambda(*)$. By the definition of immersion in [def-weil-closed-immersion], each immersion $U_a\\to U$ is closed in an open subscheme of $U$; that open subscheme is also open in $X$, so its composite $U_a\\to X$ is an immersion. On underlying spaces, writing $U_a=V_a\\cap F_a$ with $V_a$ open in $U$ and $F_a$ closed in $U$, choose a closed $C_a\\subseteq X$ with $F_a=U\\cap C_a$; then $U_a=V_a\\cap C_a$ is locally closed in $X$. Along with $Z$ from step 1 these give a finite disjoint locally closed partition of $X$ in the sense of [def-constructible-stratification]. By the Noetherian clause of [def-weil-constructible-subset], all these subsets are constructible in $X$. Empty strata may be omitted.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+    "place": "Proof, finite stratification and reduced closed complement; topology.tex Tag 005L, lemma-constructible-Noetherian-space"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with the arbitrary commutative ring sheaf $A=\\Lambda_X$ and the complementary pair $(j,i)$ from step 1. The coefficient comparisons $g^{-1}\\Lambda_X\\simeq\\Lambda_T$ for $g:T\\to X$ are part of the restriction convention in [sk-def-sfb-constructible]; [sk-def-sfb-module-pushforward-pullback] defines the module pullback by transport followed by extension along this invertible comparison. Thus the ringed functors act on exactly our module categories. The $j_!$ of [sk-def-sfb-module-lower-shriek] is the same ringed extension by zero: after identifying the source coefficient ring, both are left adjoint to the same restriction $R$. Explicitly, if these two left adjoints are $L,L\\prime$, with units $\\eta,\\eta\\prime$ and counits $\\epsilon,\\epsilon\\prime$, their comparison at $M$ is $\\epsilon_{L\\prime M}\\circ L(\\eta\\prime_M):LM\\to L\\prime M$, with inverse $\\epsilon\\prime_{LM}\\circ L\\prime(\\eta_M)$. Write these maps as $c_M:LM\\to L\\prime M$ and $d_M:L\\prime M\\to LM$. Under the adjunction bijections, their definitions give $R(c_M)\\circ\\eta_M=\\eta\\prime_M$ and $R(d_M)\\circ\\eta\\prime_M=\\eta_M$. Therefore $R(d_M\\circ c_M)\\circ\\eta_M=\\eta_M$, so injectivity of the first adjunction bijection gives $d_M\\circ c_M=\\operatorname{id}_{LM}$. The second bijection gives $c_M\\circ d_M=\\operatorname{id}_{L\\prime M}$ in the same way, since $R(c_M\\circ d_M)\\circ\\eta\\prime_M=\\eta\\prime_M$. Thus the comparison is an isomorphism of module objects. The quoted ringed lemma therefore gives $j^*j_!M\\cong M$ and $i^*j_!M=0$ as module objects. If $s_a:U_a\\to U$ denotes a stratum, the composition isomorphism of [def-sfb-module-upper-star-comp] gives $(j\\circ s_a)^*j_!M\\cong s_a^*j^*j_!M\\cong s_a^*M$. Hence on $U_a$ the extension has the very same covers and scalar modules $P$ over $\\Lambda(*)$ as $M$, not merely some finite presentation over the coefficient sheaf. On $Z$ its restriction is zero, which has the finite constant local model $\\Lambda_Z\\otimes_{\\Lambda(*)}0$; the scalar module $0$ is finitely presented by the empty matrix. The partition in step 3 therefore witnesses constructibility of $j_!M$ according to [sk-def-sfb-constructible].",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-pushforward-pullback",
     "sk-def-sfb-module-lower-shriek",
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); ringed-site linearization: sites-modules.tex Tags 03DI and 03DJ; blueprint proof last three sentences"
+   }
+  },
+  {
+   "text": "For every $q$, the sheaf $M=H^q(K)$ is constructible by [sk-def-sfb-bounded-constructible]. Step 4 proves $j_!H^q(K)$ constructible, and the isomorphism in step 2 identifies it with $H^q(D(j_!)K)$. A local-model isomorphism remains a local-model isomorphism after composition with another isomorphism, so constructibility is invariant under this identification. Step 2 supplies the finite cohomological interval. These are precisely the two conditions of [sk-def-sfb-bounded-constructible], and prove the claim. If $U$ or $Z$ is empty the corresponding family of nonempty strata is empty; the same zero model handles $K=0$ and the zero coefficient ring.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
     "sk-def-sfb-constructible"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+    "place": "Proof, boundedness and final conclusion"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-def-sfb-module-pushforward-pullback",
   "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-constructible"
+  "def-sfb-module-upper-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+  "place": "Entire proof, expanded using Stacks Tags 01T6, 005L, 01J3, 010N, 09BN, 09AG, 09AH and 03DI/03DJ; preserves the supplied exactness and stratification route"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(lowerShriek|extensionByZero)|(?:lowerShriek|extensionByZero).*constructible",
+   "results": "; hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected hits; topology constructibility and general complex extensions do not give pro-etale condensed-module extension by zero preserving bounded constructibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves bounded constructible complexes of pro etale modules over a condensed ring",
+   "results": "; hits: HomologicalComplex.extendMap_zero, HomologicalComplex.extend.instHasHomology, HomologicalComplex.extend.d_comp_eq_zero_iff, Condensed.instAB4CondensedMod, HomologicalComplex.instInhabitedOfHasZeroObject, ContinuousLinearMap.extend_zero, HomologicalComplex.extend.isZero_X, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff'",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected hits; topology constructibility and general complex extensions do not give pro-etale condensed-module extension by zero preserving bounded constructibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"Constructible\", \"Shriek\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; hits: ",
+   "date": "2026-10-16",
+   "verdict": "No usable query: unknown identifier; replaced by the subsequent quoted-name query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves bounded complexes with constructible cohomology for pro-etale sheaves of modules over a condensed ring",
+   "results": "; hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid, CondensedMod.ofSheafCompHaus, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-16",
+   "verdict": "No match: condensed-sheaf constructions and Grothendieck abelianness do not assert preservation of constructible cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|extensionByZero|lowerShriek",
+   "results": "; hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected hits; topology constructibility and general complex extensions do not give pro-etale condensed-module extension by zero preserving bounded constructibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "; hits: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected hits; topology constructibility and general complex extensions do not give pro-etale condensed-module extension by zero preserving bounded constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on sheaves maps bounded constructible cohomology complexes to bounded constructible cohomology complexes if extension by zero preserves constructible sheaves",
+   "results": "; hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: exact derived functors and Ext maps have no constructibility conclusion. The cohomology substep is already an existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Does an open immersion extension by zero functor take constructible module sheaves to constructible module sheaves and induce a functor on their bounded derived subcategories?",
+   "results": "; hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-16",
+   "verdict": "No match: the returned structure-sheaf restriction functors and locally constant condensed-module constructions do not state preservation of bounded constructible pro-etale module objects."
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|[Ee]xtension[Bb]y[Zz]ero|[Oo]penImmersionLowerShriek",
+   "results": "; hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits for the independent source-search vocabulary."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -53,5 +194,39 @@
   "sk-prop-sfb-module-derived-factorization"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-open-lower-shriek-preserves",
+  "worker": "stage1",
+  "summary": "Expanded the exactness/stratification proof, reusing the Mathlib cohomology leaf and the existing arbitrary-ringed pro-etale open/closed theorem. Checked the scalar constant local models, all geometric hypotheses and degenerate cases. Replaced the nonexistent derived-factorization citation with the existing exact-functor derived-category interface. No new nodes.",
+  "blueprint": "Main-20261015 proof: steps 1 and 3 realize the finite stratification with reduced closed complement; step 2 realizes exactness and the cohomology calculation; steps 4 and 5 realize the two restriction calculations and constructibility conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type geometry verifies the Noetherian hypotheses of the given stratification route; no preservation result is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction of the reduced closed complement explicitly chosen in the blueprint proof."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ringed pro-etale restriction identities j^*j_!=id and i^*j_!=0, used to fill precisely the restriction calculations in the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-abc744ce3",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-abc744ce3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, current blueprint route and source passages. All five steps check; no new nodes, missing citations or cycles through the item. Accepted the three proposed generic tool uses. review.md records edge cases and the upstream constructibility distinction; no target-category comparison is certified by this split."
+ }
 }
