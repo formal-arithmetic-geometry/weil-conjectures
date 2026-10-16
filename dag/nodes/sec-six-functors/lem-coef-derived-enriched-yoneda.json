@@ -32,9 +32,82 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with right actions, so a homogeneous module map $f$ satisfies $f(ma)=f(m)a$, without a sign. Its differential is $df=d_Pf-(-1)^{|f|}f d_{h_X}$. On the ordinary complex of dg-module maps define\n$$e_{X,P}(f)=f_X(1_X),\\qquad (s_{X,P}(p))_Y(a)=pa\\quad(a\\in\\mathcal A(Y,X)).$$\nFor $a:Z\\to Y$ and $b:Y\\to X$, associativity gives $(pb)a=p(ba)$, so $s(p)$ is a graded right-module map. The unit gives $e(s(p))=p$, while right-linearity gives $s(e(f))_Y(a)=f_X(1_X)a=f_Y(a)$. Since $d(1_X)=0$, $e(df)=d_P(e(f))$. Conversely, for $|p|=r$, the Leibniz identity gives\n$$d_P(pa)-(-1)^rp\\,d_{\\mathcal A}(a)=(d_Pp)a,$$\nso $d(s(p))=s(d_Pp)$. Thus $e$ and $s$ are mutually inverse chain maps. Module maps commute with the right action, so these formulas are natural in $P$. Precomposing with the map $h_{X'}\\to h_X$ determined by a closed degree-zero arrow $a:X'\\to X$ sends evaluation $p$ to $pa$, giving naturality in $X$. For a homogeneous arrow $a:X\\to Y$ of degree $s$ and $f:h_Y\\to P$ of degree $r$, contravariance of the enriched Hom functor sends $f$ to $(-1)^{sr}f\\circ h_a$, where $(h_a)_Z(c)=ac$. Evaluation gives $e_{X,P}((-1)^{sr}f\\circ h_a)=(-1)^{sr}f_X(a)=(-1)^{sr}f_Y(1_Y)a$. The dg functor associated to the right action has $P(a)(p)=(-1)^{s|p|}pa$, so this is exactly $P(a)(e_{Y,P}(f))$. For a homogeneous module map $g:P\\to P\\prime$, evaluation gives $e_{X,P\\prime}(g\\circ f)=g_X(e_{X,P}(f))$. These equations prove dg naturality in both variables with the signs explicit. No statement about derived modules is assumed in this calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent chain-level calculation for the enriched Yoneda input to proof paragraph 2; compare Keller section 3.1 equation (1), and Genovese Theorem 2.8 and Remark 2.7"
+   }
+  },
+  {
+   "text": "If $N$ is objectwise acyclic, step 1 identifies $\\underline{\\operatorname{Hom}}_{\\mathcal A}(h_X,N)$ with the acyclic complex $N(X)$. Hence $h_X$ is homotopically projective by the definition in the statement. Apply [lem-coef-dg-module-projective-resolution] with $\\mathcal B=\\mathcal A$, $Q=h_X$ and arbitrary $M=P$: its computation of derived mapping complexes identifies $R\\operatorname{Hom}(h_X,P)$ with $\\underline{\\operatorname{Hom}}_{\\mathcal A}(h_X,P)$. Composing with $e_{X,P}$ is the asserted derived evaluation equivalence. More concretely, if $q:QP\\to P$ is a homotopically projective replacement from the same node, it is the zigzag\n$$\\underline{\\operatorname{Hom}}_{\\mathcal A}(h_X,QP)\\xrightarrow{\\ e\\ }QP(X)\\xrightarrow{q(X)}P(X).$$\nThe first arrow is an isomorphism and the second a quasi-isomorphism. Step 1 is natural before localization; evaluation preserves objectwise quasi-isomorphisms by definition. The compatibility with localization in the cited node therefore gives naturality in the enhanced variables $X$ and $P$, independently of the chosen replacements. This also justifies the homotopically projective presentation used in the statement.",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph 2: computing derived evaluation on projective modules; Keller sections 3.1-3.2, Genovese sections 4.1-4.2"
+   }
+  },
+  {
+   "text": "Set $P=h_Y$ in step 1. It gives an isomorphism of complexes\n$$\\underline{\\operatorname{Hom}}_{\\mathcal A}(h_X,h_Y)\\xrightarrow{\\sim}\\mathcal A(X,Y).$$\nIts inverse sends $a:X\\to Y$ to postcomposition by $a$. Composing these maps sends $b\\otimes a$ to postcomposition by $ba$, and $1_X$ to $1_{h_X}$, because $b(ac)=(ba)c$ and $1_Xc=c$. Thus $h:X\\mapsto h_X$ is a dg functor inducing these isomorphisms on all Hom complexes. By step 2 the same complexes compute the derived maps, proving derived full faithfulness. Let $\\mathcal E$ be the full dg subcategory of homotopically projective modules whose images in the localization are equivalent to some $h_X$. The localization presentation in [lem-coef-dg-module-projective-resolution] identifies these equivalences with isomorphisms in $H^0$ of the projective model. Therefore $H^0h:\\!H^0\\mathcal A\\to H^0\\mathcal E$ is essentially surjective, while the displayed isomorphism gives the local quasi-isomorphisms. By the definition of quasi-equivalence, $h:\\mathcal A\\to\\mathcal E$ is a quasi-equivalence. This identifies $\\mathcal A$ with the asserted full essential image, without choosing a strict inverse dg functor.",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph 2: representing-object uniqueness via a quasi-equivalence onto the full essential image; Genovese section 4.2"
+   }
+  },
+  {
+   "text": "Let a homotopy coherent diagram $F$ in the enhanced module category be given, indexed by a small dg category $\\mathcal J$ in the universes of the statement. Use the projective-module presentation of [lem-coef-dg-module-projective-resolution]. Every vertex of $F$ then belongs to $\\mathcal E$ of step 3. Corestriction to this full enhanced subcategory requires no new arrows or homotopies: each component of each simplex of the coherent diagram has its vertices in $\\mathcal E$, and the full-subcategory condition retains all such mapping and composition data. For a quasi-functor model this can equally be read after the source replacement permitted by [lem-coef-dg-quasifunctor-invariance]: a representing dg functor into the projective-module category lands in its full dg subcategory $\\mathcal E$. The same full-subcategory observation applies to transformations between such diagrams. Apply [lem-coef-dg-quasifunctor-invariance] to the quasi-equivalence $h:\\mathcal A\\to\\mathcal E$ proved in step 3. It gives an enhanced equivalence\n$$h_*:\\mathbf R\\operatorname{Fun}_{\\mathrm{dg}}(\\mathcal J,\\mathcal A)\\xrightarrow{\\simeq}\\mathbf R\\operatorname{Fun}_{\\mathrm{dg}}(\\mathcal J,\\mathcal E).$$\nEssential surjectivity now supplies a lifted diagram $\\widetilde F$ and an invertible coherent transformation $h_*\\widetilde F\\simeq F$. The original diagram, including all its coherences, was input to this equivalence; none has been reconstructed just from an $H^0$ diagram. The use of derived functor categories and of source replacements is essential, since strict dg functor categories need not preserve quasi-equivalences.",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-dg-quasifunctor-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph 2: coherent realization using derived internal Hom; Keller sections 4.2-4.3, Theorems 4.1-4.5"
+   }
+  },
+  {
+   "text": "The space of pairs $(\\widetilde F,\\theta:h_*\\widetilde F\\simeq F)$ is the homotopy fiber over $F$ of the equivalence on maximal homotopy groupoids in [lem-coef-dg-quasifunctor-invariance], applied to $h$. For completeness, take an inverse equivalence $v$ with its unit and counit homotopies. A point of this fiber corresponds to an object $G$ and a path $G\\simeq vF$; this space contracts to $(vF,1_{vF})$ by the path itself. This is the homotopy fiber of an identity equivalence at $vF$, so the contraction includes paths between choices and all their higher homotopies. Consequently the factorization space with its specified comparison is contractible. The comparison is part of the pair: the space of representing objects alone can have nontrivial automorphisms.",
+   "uses": [
+    "lem-coef-dg-quasifunctor-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent homotopy-fiber argument following the derived-functor equivalence in proof paragraph 2"
+   }
+  },
+  {
+   "text": "For any two lifted diagrams $\\widetilde F,\\widetilde G$, the same [lem-coef-dg-quasifunctor-invariance] gives the equivalence of transformation complexes\n$$\\operatorname{Map}(\\widetilde F,\\widetilde G)\\simeq\\operatorname{Map}(h_*\\widetilde F,h_*\\widetilde G).$$\nUse the specified comparison transformations of step 4 to identify the right side with transformations of the original diagrams. The inverse equivalence therefore lifts every coherent transformation, and the homotopy fiber over any specified transformation or higher homotopy is contractible by the argument of step 5. Postcomposition by $h$ preserves composition and identities; its inverse as an enhanced equivalence comes with the corresponding coherent comparison homotopies. For example, the two candidates obtained by lifting a composite or by composing the lifts map to the same composite on the right, so that fiber supplies their comparison and all its higher compatibilities. This proves the assertions about transformations and higher homotopies. All arguments concern the supplied enhanced diagrams and do not assert that arbitrary diagrams in an ordinary homotopy category lift.",
+   "uses": [
+    "lem-coef-dg-quasifunctor-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent completion of proof paragraph 2: full transformation objects, their compositions, and higher homotopies"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-dg-quasifunctor-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, finite enriched adjunction: explicit chain-level Yoneda calculation, projective dg-module computation, and equivalence on full derived dg functor categories. Keller and Genovese were read online but are absent from local literature; WANTED entries are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -126,15 +199,65 @@
    "results": "4 hits: CategoryTheory.enrichedNatTransYoneda, CategoryTheory.enrichedNatTransYoneda_obj, CategoryTheory.enrichedNatTransYoneda_map, CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans",
    "date": "2026-10-16",
    "verdict": "no match: independently read Enriched/Basic.lean:497-546; enrichedNatTransYoneda defines a transformation presheaf and its Type specialization, not dg-module localization or derived coherent representability. The remaining semantic hits concern ordinary linear Yoneda or complexes in abelian categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived enriched Yoneda for differential graded categories mapping complexes from representable dg modules and coherent representability",
+   "results": "8 hits: ChainComplex.linearYonedaObj, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, HomologicalComplex.evalCompCoyonedaCorepresentative, ChainComplex.linearYonedaObj_X, CategoryTheory.eCoyoneda, CategoryTheory.enrichedNatTransYoneda_map_app, HomologicalComplex.instIsCorepresentableCompEvalObjOppositeFunctorTypeCoyonedaOp, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId",
+   "date": "2026-10-16",
+   "verdict": "no match: read Enriched/Basic.lean:497-546, Yoneda.lean:134-142 and Algebra/Homology/DerivedCategory/FullyFaithful.lean:12-48. These are ordinary/enriched transformation presheaves or the fully faithful single-complex functor, not arbitrary dg-module enhanced Yoneda or coherent quasi-representability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"yoneda\"",
+   "results": "7 hits: CategoryTheory.enrichedNatTransYoneda, CategoryTheory.enrichedNatTransYoneda_obj, CategoryTheory.enrichedNatTransYoneda_map, CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans, CategoryTheory.Enriched.HasConicalLimit.preservesLimit_eCoyoneda, CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv, CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality",
+   "date": "2026-10-16",
+   "verdict": "no match: read Enriched/Basic.lean:497-546, Yoneda.lean:134-142 and Algebra/Homology/DerivedCategory/FullyFaithful.lean:12-48. These are ordinary/enriched transformation presheaves or the fully faithful single-complex functor, not arbitrary dg-module enhanced Yoneda or coherent quasi-representability."
+  },
+  {
+   "tool": "grep",
+   "query": "dgYoneda|quasiRepresentable|homotopicallyProjective|derivedYoneda",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read Enriched/Basic.lean:497-546, Yoneda.lean:134-142 and Algebra/Homology/DerivedCategory/FullyFaithful.lean:12-48. These are ordinary/enriched transformation presheaves or the fully faithful single-complex functor, not arbitrary dg-module enhanced Yoneda or coherent quasi-representability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda lemma for differential graded modules evaluation at identity gives derived mapping complex",
+   "results": "8 hits: CategoryTheory.yonedaEquiv_apply, CategoryTheory.yonedaEvaluation, CategoryTheory.yonedaMap, ChainComplex.linearYonedaObj_d, CategoryTheory.yonedaLemma, PresheafOfModules.Elements.fromFreeYoneda_app_apply, ChainComplex.linearYonedaObj, CategoryTheory.curriedYonedaLemma",
+   "date": "2026-10-16",
+   "verdict": "no match: read Enriched/Basic.lean:497-546, Yoneda.lean:134-142 and Algebra/Homology/DerivedCategory/FullyFaithful.lean:12-48. These are ordinary/enriched transformation presheaves or the fully faithful single-complex functor, not arbitrary dg-module enhanced Yoneda or coherent quasi-representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded Yoneda lemma identifies natural transformation complex from a representable module with evaluation",
+   "results": "8 hits: PresheafOfModules.freeYonedaEquiv, PresheafOfModules.Elements.fromFreeYoneda_app_apply, PresheafOfModules.freeYonedaEquiv_symm_app, PresheafOfModules.freeYonedaEquiv_comp, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply, PresheafOfModules.Elements.fromFreeYoneda, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: read Enriched/Basic.lean:497-546, Yoneda.lean:134-142 and Algebra/Homology/DerivedCategory/FullyFaithful.lean:12-48. These are ordinary/enriched transformation presheaves or the fully faithful single-complex functor, not arbitrary dg-module enhanced Yoneda or coherent quasi-representability."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-cartesian-section-adjoint-mates",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-derived-enriched-yoneda",
+  "worker": "stage1",
+  "summary": "Proved evaluation by explicit inverse chain maps, verified representables are homotopically projective, and computed derived evaluation using a new general dg-module resolution node. The Yoneda map is a quasi-equivalence onto the full subcategory of quasi-representable modules; a second general node on derived internal Hom gives coherent diagram factorization. Wrote out the homotopy-fiber contraction and transformation/composition argument. Preserved the statement and the limitation to diagrams already supplied in the enhancement. No exact project attachment or Mathlib match was found.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite derived mapping-complex adjunction before R lim): all six steps justify enriched representing objects and their coherent transformation data required by lem-coef-cartesian-section-adjoint-mates. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-afc96560c",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-afc96560c (reviewer sub-agent of L); spot-checked: Read all six proof steps and both new nodes; checked Keller, Genovese and Toën at the cited passages. Verified graded signs, source replacement, coherent factorization fibers, edge cases, dependencies and duplicate candidates. No repairs or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
