@@ -127,28 +127,23 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f90c1ef27",
-  "group": "Q04",
-  "result": "pass",
-  "note": "Wrote review.md. Checked the immutable modules, all statement dependencies, source passages, hypotheses, conclusions, universes, edge cases, docstrings, and dependency repair. Both files compile cleanly through scompile.py; no fixes required."
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.SequentialDerivedInverseLimit",
-  "declaration": "AlgebraicGeometry.ProEtale.IsAdicSequentialDerivedLimit",
+  "module": "Sheaf.Paper.CompletedDerivedInverseLimit",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedDerivedInverseLimit",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.adicModuleLocallyBijective",
-   "AlgebraicGeometry.ProEtale.adicComplexTowerEvaluation",
-   "AlgebraicGeometry.ProEtale.adicComplexTowerEvaluation_inverts",
-   "AlgebraicGeometry.ProEtale.adicDerivedTowerEvaluation",
-   "AlgebraicGeometry.ProEtale.adicDerivedTowerEvaluationFactors",
-   "AlgebraicGeometry.ProEtale.IsAdicSequentialDerivedLimit"
+   "AlgebraicGeometry.Scheme.CompletedDerivedInverseLimit"
   ],
-  "statement": "def IsAdicSequentialDerivedLimit (M : DerivedCategory (Scheme.CompletedAdicTowers T d)) (L : DerivedCategory (Scheme.CompletedAdicModules T d)) : Prop",
+  "file": "lean/Sheaf/Paper/CompletedDerivedInverseLimit.lean",
+  "statement": "structure CompletedDerivedInverseLimit (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : DerivedCategory (reductionTowerCategory T (reductionModuleRing T (completedReductionCoefficient T d)))) [HasProduct (completedTowerDerivedSequence T d M)]",
   "branch": "newtargets-dag",
-  "by": "Q04",
+  "by": "Q44",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B), existing sequential-limit interface with import repair. The recorded CompletedSequentialDerivedLimit imports the separate adicDatum* presentation through CompletedConstantFiniteComplexRealization, whose published overlay fails on unknown SheafOfModules.isMonoidal_W_independentCoefficients. Reuse the existing SequentialDerivedInverseLimit and all of its declarations over the actual completed finite-function coefficient sheaf and current AdicCoefficientDatum. Its independent existing-declaration probe additionally exposed overlapping KFlat imports. Replace only its first import by the recorded AdicCoefficientDatum module, which reexports CompletedAdicCoefficientDatum and gives the coherent import closure used successfully by the consumer. All mathematical declarations of this dependency module are unchanged: localization retains the complete evaluated inverse system, and IsAdicSequentialDerivedLimit is existence of its distinguished Roos triangle, without choosing a limit or a functor. The small-site universes are unchanged.",
-  "file": "lean/Sheaf/Paper/SequentialDerivedInverseLimit.lean"
+  "note": "Section 1(B): the generic IsDerivedLimitTriangle is retained by import; supply its precise derived strict-tower evaluation and transition specialization, with the Roos object and triangle bundled. No cone functor or arbitrary chosen limit is introduced."
  }
 }

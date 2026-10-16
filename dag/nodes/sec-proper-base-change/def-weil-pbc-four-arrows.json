@@ -139,36 +139,28 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-64d90957e",
-  "group": "NP",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, dependency records, sources, canonical maps, hypotheses, universes, edge cases, docstrings, and verbatim signatures. Three-file scompile.py reproduction passed without diagnostics. No corrections required."
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProperBaseChangeFourArrows",
-  "declaration": "AlgebraicGeometry.Scheme.properBaseChangeFourArrows",
+  "module": "Sheaf.Paper.FourArrows",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourArrows",
   "declarations": [
-   "AlgebraicGeometry.Scheme.fourArrowQuotient",
-   "AlgebraicGeometry.Scheme.fourArrowQuotient_finite",
-   "AlgebraicGeometry.Scheme.fourArrowQuotient_topology",
-   "AlgebraicGeometry.Scheme.fourArrowQuotient_discrete",
-   "AlgebraicGeometry.Scheme.fourArrowOriginTransport",
-   "AlgebraicGeometry.Scheme.fourArrowReductionPullback",
-   "AlgebraicGeometry.Scheme.fourArrowProjection",
-   "AlgebraicGeometry.Scheme.fourArrowProjection_isIso",
-   "AlgebraicGeometry.Scheme.fourArrowProjectionIso",
-   "AlgebraicGeometry.Scheme.fourArrowIntegralCoefficients_comm",
-   "AlgebraicGeometry.Scheme.fourArrowFiniteCoefficients_comm",
-   "AlgebraicGeometry.Scheme.fourArrowFiniteExchange",
-   "AlgebraicGeometry.Scheme.fourArrowFiniteExchange_isIso",
-   "AlgebraicGeometry.Scheme.properBaseChangeFourArrows"
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.finiteProjection",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.finiteProjection_isIso",
+   "AlgebraicGeometry.Scheme.FourFiniteLevelArrows",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.finiteExchange_isIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.finiteExchangeIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourArrows"
   ],
-  "file": "lean/Sheaf/Paper/ProperBaseChangeFourArrows.lean",
-  "statement": "def properBaseChangeFourArrows (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (d : ProEtaleAdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : fourCornerDerived X (adicDatumRing X d)) (C : CochainComplex (proEtaleRingModules X (adicDatumRing X d)) ℤ) (eC : DerivedCategory.Q.obj C ≅ K) (hK : IsCompletedIntrinsicallyDerivedComplete X d r a ha C eC) (W : ∀ n : ℕ, ProEtale.FiniteCoefficientDerivedCategoryPlus X (fourArrowQuotient d n)) (w : ∀ n : ℕ, ProEtale.EtaleOriginWitness X (fourArrowQuotient d n) (W n)) (e : ∀ n : ℕ, (fourArrowOriginTransport X d n).obj (W n).obj ≅ (adicDatumReduction X d n).obj K) (n : ℕ) : ((properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).1 ≅ (properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.1) × ((properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.2.1 ≅ (properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.2.2) × ((properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).1 ⟶ (properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.2.1) × ((properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.1 ≅ (properBaseChangeFourCorners g' f' f g sq d r a ha K C eC hK n).2.2.2)",
+  "file": "lean/Sheaf/Paper/FourArrows.lean",
+  "statement": "def AdicCoefficientDatum.fourArrows [IsProper f] (K : d.derived X) (_hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) (n : ℕ) : FourFiniteLevelArrows (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n)",
   "branch": "newtargets-dag",
-  "by": "NP",
+  "by": "Q44",
   "date": "2026-10-16",
   "existing": false,
-  "note": " Reused verbatim from delivered NG/def-weil-pbc-four-arrows; its prerequisite is supplied here because no corresponding module is yet published. The recorded interface cannot expose the new canonical finite-level construction until this module is present."
+  "note": "Section 1(B): the recorded properBaseChangeFourArrows uses the ProEtaleAdicCoefficientDatum presentation. Supply the same four canonical arrows over the current AdicCoefficientDatum reduction tower and normalized ringed adjunctions. The retained finite witness is transported by the specified constants-to-functions coefficient isomorphism. Only h, h-prime and v-prime have asserted invertibility; no rectangle is built into the structure."
  }
 }

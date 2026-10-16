@@ -124,21 +124,42 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6b8c323dc (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements and cited sources. The retained pair matches master blueprint order 1289; the revised dependencies cover finite left-module coefficients without imposing commutativity. Checked edge cases, duplicate candidates, dependency cycles and the unit route. No condensed/discrete comparison theorem is inferred. Full checks recorded in review.md; no fixes needed."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a78e9ed40",
-  "group": "Q02",
-  "result": "pass",
-  "note": "Wrote review.md. Verified immutable files, source agreement, all dependencies, retained witness data, universes, edge cases, docstrings, report sections, and verbatim Lean statement. scompile.py passed cleanly in sandbox and library modes. No defects found; no clone or branch changes."
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.EtaleOriginWitness",
-  "declaration": "AlgebraicGeometry.ProEtale.EtaleOriginWitness",
-  "file": "lean/Sheaf/Paper/EtaleOriginWitness.lean",
-  "statement": "structure EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (K : FiniteCoefficientDerivedCategoryPlus T Λ)",
+  "module": "Sheaf.Paper.RingedEtaleOriginWitness",
+  "declaration": "AlgebraicGeometry.Scheme.EtaleOriginWitness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleOriginRing",
+   "AlgebraicGeometry.Scheme.etaleOriginScalars",
+   "AlgebraicGeometry.Scheme.etaleOriginScalars_locallyBijective",
+   "AlgebraicGeometry.Scheme.etaleOriginScalars_isLocallyInjective",
+   "AlgebraicGeometry.Scheme.etaleOriginScalars_isLocallySurjective",
+   "AlgebraicGeometry.Scheme.etaleOriginRealization",
+   "AlgebraicGeometry.Scheme.etaleOriginRealization_properties",
+   "AlgebraicGeometry.Scheme.etaleOriginRealization_additive",
+   "AlgebraicGeometry.Scheme.etaleOriginRealization_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.etaleOriginRealization_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.etaleOriginComparison",
+   "AlgebraicGeometry.Scheme.EtaleOriginWitness",
+   "AlgebraicGeometry.Scheme.finiteOriginFunctionRing",
+   "AlgebraicGeometry.Scheme.finiteOriginConstantComparison_isIso",
+   "AlgebraicGeometry.Scheme.finiteOriginConstantIso",
+   "AlgebraicGeometry.Scheme.finiteOriginToConstant",
+   "AlgebraicGeometry.Scheme.FiniteEtaleOriginWitness"
+  ],
+  "file": "lean/Sheaf/Paper/RingedEtaleOriginWitness.lean",
+  "statement": "abbrev EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (K : ProEtale.FiniteCoefficientDerivedCategoryPlus T Λ)",
   "branch": "newtargets-dag",
-  "by": "Q02",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q44",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): retain the general-ring witness module by import and expose its constant-ring-sheaf realization with a specified bounded-below object and isomorphism. FiniteEtaleOriginWitness is the same general witness after exact scalar restriction along the canonical constants-to-functions isomorphism to the current reduction coefficients. The general witness imposes no finiteness condition.",
+  "fixed_by": "NT-stage2-Codex-1f3350d30"
  }
 }

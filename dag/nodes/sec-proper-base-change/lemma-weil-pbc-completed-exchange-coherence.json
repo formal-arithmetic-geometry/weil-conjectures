@@ -252,5 +252,42 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-5ec3b927e (reviewer sub-agent of L); spot-checked: Full mathematical review passed. The new node’s created metadata omitted required by/date fields; corrected whole DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-strict-tower-exchange-mate-normalization.json. Sources, hypotheses, coefficient categories, tower mate normalization, Rlim transport, projection/direct-image comparisons, identity/pasting, naturality, edge cases, and duplicate searches were checked.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedExchangeCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.integralRingIso_comp",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pullComp",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pushComp",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId_existsUnique",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pullId",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pushId",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp_existsUnique",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId_existsUnique",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_naturality",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_identity_horizontal",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_identity_vertical",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_horizontal",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_vertical"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedExchangeCoherence.lean",
+  "statement": "theorem AdicCoefficientDatum.completedExchange_naturality {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (K H : d.derived X) (hK : d.TowerComplete X K) (hH : d.TowerComplete X H) (WK : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) (WH : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj H)) (k : K ⟶ H) : (d.completedPull g).map ((d.push f).map k) ≫ d.completedBaseChangeMap sq H hH WH = d.completedBaseChangeMap sq K hK WK ≫ (d.push f').map ((d.completedPull g').map k)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The four clauses are stated by completedExchange_naturality, completedExchange_identity_horizontal, completedExchange_identity_vertical, completedExchange_horizontal, and completedExchange_vertical. Canonical comparison helpers are normalized by ordinary section maps, conjugate adjunctions, and completion-unit equations. The raw completedExchange is the same ordered construction on ambient inputs, used at intermediate vertices without adding hypotheses on witnesses."
  }
 }

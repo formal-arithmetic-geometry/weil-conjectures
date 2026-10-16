@@ -310,38 +310,33 @@
   ]
  },
  "lean": {
-  "module": "Sheaf.Paper.CompletedTowerDerivedLimitFunctor",
-  "declaration": "AlgebraicGeometry.Scheme.completedTowerRlim_properties",
+  "module": "Sheaf.Paper.CompletedRlimFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.completedRlim_computation",
   "declarations": [
-   "AlgebraicGeometry.Scheme.completedTowers_hasKInjectiveResolutions",
-   "AlgebraicGeometry.Scheme.completedTowerLimit_additive",
-   "AlgebraicGeometry.Scheme.completedTowerRlim",
-   "AlgebraicGeometry.Scheme.completedTowerConstant",
-   "AlgebraicGeometry.Scheme.completedTowerConstant_exact",
-   "AlgebraicGeometry.Scheme.completedTowerConstant_additive",
-   "AlgebraicGeometry.Scheme.completedTowerConstant_finiteLimits",
-   "AlgebraicGeometry.Scheme.completedTowerConstant_finiteColimits",
-   "AlgebraicGeometry.Scheme.completedDerivedConstant",
-   "AlgebraicGeometry.Scheme.completedConstantLimitUnit",
-   "AlgebraicGeometry.Scheme.completedConstantRlimUnit_exists",
-   "AlgebraicGeometry.Scheme.completedConstantRlimUnit",
-   "AlgebraicGeometry.Scheme.completedTowerRlim_properties",
-   "AlgebraicGeometry.Scheme.completedTowerRlim_roos"
+   "AlgebraicGeometry.Scheme.completedTowerLimit",
+   "AlgebraicGeometry.Scheme.coherenceTowerLimit_additive",
+   "AlgebraicGeometry.Scheme.completedRlim",
+   "AlgebraicGeometry.Scheme.completedRlimUnit",
+   "AlgebraicGeometry.Scheme.completedRlim_computation",
+   "AlgebraicGeometry.Scheme.completedRlimProjection",
+   "AlgebraicGeometry.Scheme.completedRlim_properties",
+   "AlgebraicGeometry.Scheme.completedRlimRoosProjection",
+   "AlgebraicGeometry.Scheme.completedRlim_roos"
   ],
-  "file": "lean/Sheaf/Paper/CompletedTowerDerivedLimitFunctor.lean",
-  "statement": "theorem completedTowerRlim_properties (T : Scheme.{u}) : (∃ (_ : (completedTowerRlim d T).CommShift ℤ), (completedTowerRlim d T).IsTriangulated) ∧ ∀ (RF : DerivedCategory (pbcTowers T (pbcAdicCompletion T d)) ⥤ DerivedCategory (pbcModules T (pbcAdicCompletion T d))) (η : (lim : pbcTowers T (pbcAdicCompletion T d) ⥤ pbcModules T (pbcAdicCompletion T d)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF), RF.IsRightDerivedFunctor η (HomotopyCategory.quasiIso (pbcTowers T (pbcAdicCompletion T d)) (.up ℤ)) → Nonempty (RF ≅ completedTowerRlim d T)",
+  "file": "lean/Sheaf/Paper/CompletedRlimFunctor.lean",
+  "statement": "theorem completedRlim_computation (T : Scheme.{t}) (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) (J : CochainComplex (reductionTowerCategory T (reductionModuleRing T R)) ℤ) [J.IsKInjective] : IsIso ((completedRlimUnit T R).app ((HomotopyCategory.quotient _ _).obj J))",
   "branch": "newtargets-dag",
-  "by": "Q31",
+  "by": "Q44",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B): the newly recorded sequential interface uses scheme-sized coefficients and the CompletedAdicTowers presentation. This consumer retains independent coefficient size u+1 on the small site with object/Hom sizes u+1/u. The ordinary strict-tower limit and its universal K-injective right derived functor retain triangulatedness and invariance under resolution choice, with the canonical constant-tower unit."
+  "note": "Section 1(B): the current CompletedTowerDerivedLimitFunctor supplies the canonical total right derivation of inverse limit. Extend that same Mathlib rightDerivedFunctor construction to the explicit universal unit, actual derived projections and their specified Roos first arrow required by the direct-image comparison. No arbitrary functorial cone or unrelated inverse limit is selected."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c2271f7ed",
-  "group": "Q31",
-  "result": "pass",
-  "note": "Statement, dependencies, source alignment, edge cases, canonical constructions, docstrings, and recorded scompile/dry-run evidence checked; no findings.; reverted the delivery's change of existing node(s) def-weil-pbc-derived-inverse-limit (--revert-nodes; kept as on newtargets-dag)"
+  "reviewer": "NT-stage2-Codex-1f3350d30",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
  }
 }
