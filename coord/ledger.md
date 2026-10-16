@@ -15615,7 +15615,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/F4/WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek (stage 3; reviewer PASS; first push; landing 20261016T221610-L-1615266 (interface); batch 20261016T221550; modules 2; new nodes 1; change records: coord/changes/isLeftAdjoint_rightDerivedLowerStar_of_isProper.md)
 - 22:16 L: merged deliver/H3/WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs (stage 3; reviewer PASS; first push; landing 20261016T221612-L-1615819 (proof); batch 20261016T221550; modules 1; new nodes 2)
 - 22:16 L: merged deliver/J1/WeilConjectures.Compactification.OverRefinement (stage 3; reviewer PASS; first push; landing 20261016T221612-L-1615939 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/J2/Sheaf.RingTheory.LciConormalFreeRankCodimension (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616058 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616160 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J4/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616260 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K2/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion (stage 3; reviewer PASS; first push; landing 20261016T221615-L-1616737 (interface); batch 20261016T221550; modules 3; new nodes 0; change records: coord/changes/K2-second-adic-torsion-cokernel-restoration.md)
@@ -15676,3 +15675,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:18 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
 
 - 07:20 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
+
+- 07:21 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
