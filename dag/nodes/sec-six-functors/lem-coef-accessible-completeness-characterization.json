@@ -210,5 +210,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-aea832ccf (reviewer sub-agent of L); spot-checked: I read the item's full statement and all ten steps, both new leaves, the cited statements (lem-coef-accessible-pie-closure, def-weil-pbc-category-colimit, def-nagata-category), the blueprint ancestor's paragraph 2, and the pinned Mathlib sources: WeaklyInitial.lean:46-66, WideEqualizers.lean:697, Monad/Limits.lean:338-350 and Reflective.lean:38-42. Mathlib has no completeness characterization in Presentable/, so the item is correctly not a leaf. The statement is unchanged and true; it is AR 2.47 (Ching–Riehl A.2, not archived, so the proof is correctly marked agent-written). It also holds on the empty category, the terminal category and Set. Step 2: the inserter of the constant and diagonal functors gives maps h with h u_j = u'_j; accessibility of F, G, H, K holds via coordinatewise colimits, constant functors on connected filtered indices, and lambda at least kappa_A and nu; the equifier of alpha, beta is exactly Cocone(D), including J empty. Step 3: limits of cocones are computed on vertices. Step 4: the product of the generators is weakly initial, and S is nonempty because there is a terminal object. Step 5: the Freyd lemma applies with every hypothesis met. Steps 6-9: fully faithful restricted Yoneda, left adjoint through the small category of elements, and pointwise presheaf limits are each written out correctly. Step 10: the reflective leaf applies with the same U-small Homs and diagrams. Both leaves are exact matches to the Mathlib declarations, including the empty-family wide-equalizer case, with correct lines (46 and 348) and all three search kinds recorded. Neither leaf is a clause of the item. rg over the DAG found no duplicate. The route stays within unit sk-prop-sf-biduality-general plus Mathlib tools; no tool_uses are needed and no SGA source is used. One fix: lem-coef-reflective-subcategory-limits defined completeness with an undeclared letter E; reworded to 'a category E is complete if ...' in fixes/dag/nodes/sec-six-functors/lem-coef-reflective-subcategory-limits.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a3b52ff4",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Theorem CategoryTheory.accessible_completeness_characterization matches the node clause by clause (checked against Mathlib Presentable/LocallyPresentable, CardinalFilteredPresentation, Basic, IsCardinalFiltered): Category.{v} with U-small Homs and free object universe u; Cardinal.{v} regular so infinite; IsCardinalFiltered counts arrows; IsCardinalPresentable is coyoneda accessibility; IsAccessibleCategory.{v} = small kappa-filtered colimits + essentially small presenting generator; HasLimitsOfSize.{v,v} and HasColimitsOfSize.{v,v}; IsLocallyPresentable.{v}; (A and Lim iff A and Colim) and (A and Colim iff LocPres) with no extra hypotheses. Edge cases fine (empty shapes, empty C, kappa = aleph0). Node unchanged except lean; lean.statement verbatim; stmt_dep colimit API imported publicly; proof leaves are Mathlib matches; pie-closure is a proof-only dep. No definitions, sorry only, source and blueprint docstrings with all 10 steps. No duplicate in Mathlib or side lean/Sheaf. nt_compile --json side overlay: clean, only sorry; #check confirms universes; axioms propext/sorryAx/choice/Quot.sound. Cosmetic only: the second reading misdescribes the two Mathlib leaves as having no Lean declarations."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleCompletenessCharacterization",
+  "declaration": "CategoryTheory.accessible_completeness_characterization",
+  "file": "lean/Sheaf/CategoryTheory/AccessibleCompletenessCharacterization.lean",
+  "statement": "theorem accessible_completeness_characterization (C : Type u) [Category.{v} C] : ((IsAccessibleCategory.{v} C ∧ HasLimitsOfSize.{v, v} C) ↔ (IsAccessibleCategory.{v} C ∧ HasColimitsOfSize.{v, v} C)) ∧ ((IsAccessibleCategory.{v} C ∧ HasColimitsOfSize.{v, v} C) ↔ IsLocallyPresentable.{v} C)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
