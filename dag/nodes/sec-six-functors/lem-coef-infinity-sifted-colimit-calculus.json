@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -271,5 +272,32 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-367d737b2 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 5 steps, the source and the searches. I also read the full statements of all 5 cited nodes, the citer lem-coef-operadic-colorwise-sifted-colimits, the unit sk-prop-sf-biduality-general and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. The statement is unchanged from the side DAG; only split-owned fields changed. It has exactly the hypotheses of HTT Prop. 5.5.8.6, with 5.5.8.7 for weak contractibility, 5.5.8.4 for N(Delta^op) and 5.5.8.11-12 for the space-valued definition. HTT is not archived, so I checked it from my knowledge of the text; the agent proof origin is correct. Small cases: empty K is excluded by the empty-product clause; K a point is trivial; a two-point discrete K is correctly not sifted, and the bifunctor claim does fail there for tensor products. Step 1 cites the arbitrary-K first paragraph of lem-coef-sifted-nerve-index-calculus (diagonal finality and weak contractibility); its cocomplete-only nerve clause is not used. Step 3: the dual parametric-universal-arrows formula with T = Delta_K, a row-colimit comparison that is an equivalence at each point and so overall, then currying. The chain of mapping-space equivalences is correct and uses only K-colimits. Step 4 restricts along the final diagonal; the product-category cocone test is correct. Step 5 is a direct citation. There is no cycle: the 274-node closure of the cited nodes does not contain the item. There are no new nodes and no duplicate: the nerve-index node gives the bifunctor clause only for nerves and cocomplete categories, while the citer needs arbitrary sifted K with only K-colimits; the overlapping clauses are cited, not restated. No blueprint node mentions siftedness, so same_as is []. The Mathlib IsSifted and PreservesColimit2 results are for ordinary categories, so there is no match. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus; the same tool use was already accepted for two nodes of this unit. One repair, step 2: it was marked elementary but formed an uncited horn-filler composite in Fun(KxK,E), with legs only 'up to homotopy'. I replaced it with the explicit cocone gamma(i,j,t)=F(p(i,t),q(j,t)) and the explicit 2-simplex Theta(i,j,s)=F(p(i,s1),q(j,s2)), for the simplex (0,0),(0,1),(1,1) of Delta^1xDelta^1. Theta exhibits gamma as the row cocone followed by the outer cocone, with legs exactly F(p_i,q_j). The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-sifted-colimit-calculus.json; its uses and elementary flag are unchanged. The checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySiftedColimitCalculus",
+  "declaration": "SSet.Enhanced.infinity_sifted_colimit_calculus",
+  "declarations": [
+   "SSet.Enhanced.IsInfinitySifted",
+   "SSet.Enhanced.HasInfinityColimitsOfShape",
+   "SSet.Enhanced.IsInfinityImageCocone",
+   "SSet.Enhanced.PreservesInfinityColimitsOfShape",
+   "SSet.Enhanced.IsInfinityBifunctorCocone",
+   "SSet.Enhanced.infinity_sifted_colimit_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinitySiftedColimitCalculus.lean",
+  "statement": "theorem infinity_sifted_colimit_calculus : (∀ (K : SSet.{u}) [Quasicategory K], IsInfinitySifted K → IsContractible K ∧ ∀ (C D E : SSet.{max u v}) [Quasicategory C] [Quasicategory D] [Quasicategory E], HasInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) C → HasInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) D → HasInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) E → ∀ F : C ⊗ D ⟶ E, (∀ y : D _⦋0⦌, PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) (lift (𝟙 C) (SSet.const y) ≫ F)) → (∀ x : C _⦋0⦌, PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) (lift (SSet.const x) (𝟙 D) ≫ F)) → PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{v}.obj K) F ∧ ∀ (P : SSet.uliftFunctor.{v}.obj K ⟶ C) (Q : SSet.uliftFunctor.{v}.obj K ⟶ D) (p : (coconeCategory P) _⦋0⦌) (q : (coconeCategory Q) _⦋0⦌), IsColimiting P p → IsColimiting Q q → ∃ r : (coconeCategory (lift P Q ≫ F)) _⦋0⦌, IsInfinityBifunctorCocone F p q r ∧ IsColimiting (lift P Q ≫ F) r) ∧ IsInfinitySifted (SSet.uliftFunctor.{u}.obj (nerve SimplexCategoryᵒᵖ))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Siftedness uses the equivalent quasicategorical cofinal-diagonal comma criterion of HTT 5.5.8.1 and 4.1.3.1; finite-product preservation on spaces including the empty product is the equivalent condition (HTT 5.5.8.11-12, Kerodon 0704). Canonical image cocones are specified by their apex and entire cylinder. No ordinary-category siftedness is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0faa40b9",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Clause-by-clause match. IsInfinitySifted is HTT Def 5.5.8.1 (nonempty + weakly contractible diagonal commas, orientation checked); it is equivalent to the node's space-valued definition by HTT 4.1.3.1 and 5.5.8.11-12, an equivalence already recorded in lem-coef-sifted-nerve-index-calculus, and the project has no Lean infinity-category of spaces. IsContractible is a true weak homotopy equivalence. Colimits are assumed for shape K only, with a universe lift and no forced equalities. Separate preservation uses the actual partial functors; preservation and the bifunctor cocone fix apex and full cocone, so it is canonical. N(Delta^op) clause present. Edge cases (empty, one-point, two-point discrete K; v=0) correct. Node changed only in lean and stmt_deps (added landed final-index node, no cycle); statement verbatim; no hollow defs; only the theorem's sorry; docstrings and imports OK. nt_compile.py exit 0, no errors or warnings. Cosmetic only: report.md has HTT numbers scrubbed to 'the project server'."
  }
 }

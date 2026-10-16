@@ -23,7 +23,9 @@
   "place": "Higher Topos Theory, Theorem 4.1.3.1 and Propositions 4.1.1.7-8, printed pp. 226 and 236-238: specialize to the nerve of an ordinary right adjoint; the comma category j/R has initial object (Lj,unit_j). Fixed-vertex cocone spaces are the fibers in Proposition 4.1.1.7, expressed in the coherent comma convention of the definition node. Read online 2026-10-17; archival copy WANTED. No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-excision",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -301,5 +303,24 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-df4bf730b (reviewer sub-agent of L); spot-checked: I read in full the item, the five cited node statements (pinch-comparison, mapping-composition, enhanced-functor-cone-calculus, realization-cylinder, homotopy-equivalence-weak), def-cbc, the parent split-augmentation node (its steps 4 and 6 apply the item with R=j^op, L=r^op), the unit record and paragraph 2 of the main-20261015 ancestor proof. The statement is unchanged and in the right-adjoint direction: (Lj,eta_j) is initial in j/R. Checked on R:I->pt, which picks the initial object; on R:pt->J, which picks the terminal object; on the identity adjunction; on chain->point, where R is not full; and on empty/empty. With L and R swapped the claim would be false. HTT and Kerodon are not in literature/; the report lists them as WANTED and the proof is marked by=agent. Step 1: the unit/counit formulas and both triangle identities check. Step 2: restriction along N(R) is a simplicial functor, and the pinch comparison is natural, so the square commutes strictly. Step 3: the two triangles of a square family give V-maps, and the [l][theta]^-1 formula identifies diagonal with composite as maps from the whole parameter space; compatibility with functors follows in a few lines from the composition node's formula. Steps 5 and 6: I checked the corners and edges of the two evaluation squares (alpha on eta, beta on epsilon) and the triangle R eps . eta R = 1, so both composites are homotopic to the identity on all of A_U and B_U. The realization-cylinder and homotopy-equivalence-weak nodes give the weak equivalence, and 2-of-3 on the strict pinch square gives it for r itself. Step 7: the dual cocone criterion of lem-cbc together with r.c_a ~ c_{aR} gives preservation and detection with the same vertex. Duplicates: the unsplit lem-coef-infinity-cofinality-space-test would give only one direction, and neither the mapping-space equivalence nor the reflection, so the item is not a duplicate. There are no new nodes; proof_deps is exact; there is no cycle and no SGA source. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (generic functor-category closure and cocone criterion; the parent uses it the same way). No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityRightAdjointReindexing",
+  "declaration": "SSet.Enhanced.infinity_right_adjoint_reindexing",
+  "file": "lean/Sheaf/CategoryTheory/InfinityRightAdjointReindexing.lean",
+  "statement": "theorem infinity_right_adjoint_reindexing {I J : Type u} [SmallCategory I] [SmallCategory J] (L : J ⥤ I) (R : I ⥤ J) (adj : L ⊣ R) (E : SSet.{max u v}) [Quasicategory E] : (∀ (p : SSet.uliftFunctor.{v}.obj (nerve J) ⟶ E) (e : E _⦋0⦌), IsWeakHomotopyEquivalence (excisionMappingRestriction (SSet.uliftFunctor.{v}.map (nerveMap R)) p (SSet.const e))) ∧ constantDiagrams (SSet.uliftFunctor.{v}.obj (nerve J)) E ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map (nerveMap R))).app E = constantDiagrams (SSet.uliftFunctor.{v}.obj (nerve I)) E ∧ (∀ (T : SSet.{max u v}) (H : T ⟶ (ihom (SSet.uliftFunctor.{v}.obj (nerve J))).obj E), MonoidalClosed.uncurry (H ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map (nerveMap R))).app E) = (SSet.uliftFunctor.{v}.map (nerveMap R) ▷ T) ≫ MonoidalClosed.uncurry H) ∧ (∀ (p : SSet.uliftFunctor.{v}.obj (nerve J) ⟶ E) (a : (coconeCategory p) _⦋0⦌), (IsColimiting p a ↔ IsColimiting (SSet.uliftFunctor.{v}.map (nerveMap R) ≫ p) ((gluingCoconeRestrict (SSet.uliftFunctor.{v}.map (nerveMap R)) p).app _ a)) ∧ ((gluingCoconeRestrict (SSet.uliftFunctor.{v}.map (nerveMap R)) p).app _ a).1.1 = a.1.1)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the already landed canonical mapping-space and coherent cocone restriction helpers, whose owning nodes are added to stmt_deps under brief-stage2 §5. Naturality is the all-parameter uncurry formula together with preservation of constant diagrams. The cocone conclusion uses the recorded IsColimiting predicate and explicitly retains its vertex; no other colimits are assumed. Index nerves are canonically universe-lifted, so the target universe may independently be larger."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbf28adcd",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read node, def-cbc and the two added deps (excisionMappingRestriction = mappingSpaceMap of pre, the restriction map itself; gluingCoconeRestrict keeps apex .1.1), Mathlib uliftFunctor/curry_pre_app/uncurry_pre_app. All clauses match in order and none is stronger: adj : L ⊣ R (correct final direction), E : SSet.{max u v} with canonical ulift nerves (no universe equality), weak-equivalence clause on right-pinched spaces Map(p, Δ_J e) → Map(N(R)≫p, Δ_I e), colimiting iff with the same vertex, no extra colimit, fullness or nonempty hypotheses. Edge cases checked: identity adjunction, initial/terminal-object adjunctions, non-full R, empty I/J, empty E. Gates: no definitions, only sorry; source-place and blueprint docstrings with the 7-step plan; node statement verbatim; added stmt_deps landed and acyclic; only module, report and node changed; Worker report and Second reading by Q106 present. nt_compile.py (JSON mode, real path) compiled clean twice, rc=0, about 2 s; an error control confirmed the tool reports errors. Remark only: the naturality conjuncts are formal (curry_pre_app, uncurry_pre_app), following the mapping-excision convention. No fixes."
  }
 }

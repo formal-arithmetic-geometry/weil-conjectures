@@ -16,7 +16,7 @@
  },
  "kind": "statement",
  "title": "Product total complexes compute cosimplicial homotopy limits",
- "statement": "Let $\\Lambda$ be a commutative ring and let $K:\\Delta\\to\\operatorname{Ch}(\\operatorname{Mod}_\\Lambda)$ be a cosimplicial diagram of unbounded cochain complexes [def-weil-abstract-derived-category]. The category $\\Delta$ has finite nonempty ordered sets $[n]=\\{0,\\ldots,n\\}$ and order-preserving maps. Write $K^{n,q}=K([n])^q$, let $d$ denote its internal cochain differential, and let $\\delta=\\sum_{i=0}^{n+1}(-1)^i d^i:K^{n,q}\\to K^{n+1,q}$ be the alternating sum of cofaces. Form the product total complex\n$$\\operatorname{Tot}_{\\Pi}(K)^r=\\prod_{n\\ge0}K^{n,r-n},\\qquad D=\\delta+(-1)^n d\\ \\text{on bidegree }(n,q).$$\nAll products are taken in the universes of [def-weil-size-convention]. There is a natural equivalence $\\operatorname{Tot}_{\\Pi}(K)\\simeq\\operatorname{holim}_{[n]\\in\\Delta}K([n])$ in the enhanced derived category $\\mathbf D(\\Lambda)$, with homotopy limit interpreted by coherent limiting cones [def-cbc-enhanced-diagrams-cones]. This is an identification with the derived limit, and no boundedness in the internal degree is required. For a strict augmentation $a:\\operatorname{const}(M)\\to K$ of cosimplicial complexes, the map $M\\to\\operatorname{Tot}_{\\Pi}(K)$ with degree-zero-cosimplicial component $a^0$ and all positive-cosimplicial-degree components zero represents the map from the augmented cone to that homotopy limit.",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $K:\\Delta\\to\\operatorname{Ch}(\\operatorname{Mod}_\\Lambda)$ be a cosimplicial diagram of unbounded cochain complexes [def-weil-abstract-derived-category]. The category $\\Delta$ has finite nonempty ordered sets $[n]=\\{0,\\ldots,n\\}$ and order-preserving maps. Write $K^{n,q}=K([n])^q$, let $d$ denote its internal cochain differential, and let $\\delta=\\sum_{i=0}^{n+1}(-1)^i d^i:K^{n,q}\\to K^{n+1,q}$ be the alternating sum of cofaces. Form the product total complex\n$$\\operatorname{Tot}_{\\Pi}(K)^r=\\prod_{n\\ge0}K^{n,r-n},\\qquad D=\\delta+(-1)^n d\\ \\text{on bidegree }(n,q).$$\nAll products are taken in the universes of [def-weil-size-convention]. There is a natural equivalence $\\operatorname{Tot}_{\\Pi}(K)\\simeq\\operatorname{holim}_{[n]\\in\\Delta}K([n])$ in the enhanced derived category $\\mathbf D(\\Lambda)$, with homotopy limit interpreted by coherent limiting cones [def-cbc-enhanced-diagrams-cones]. This is an identification with the derived limit, and no boundedness in the internal degree is required. For a strict augmentation $a:\\operatorname{const}(M)\\to K$ of cosimplicial complexes, the map $M\\to\\operatorname{Tot}_{\\Pi}(K)$ with degree-zero-cosimplicial component $a^0$ and all positive-cosimplicial-degree components zero represents the map from the augmented cone to that homotopy limit.\n\nHere the enhanced derived category is presented by a homotopy coherent localization $q:N(\\operatorname{Ch}(\\operatorname{Mod}_\\Lambda))\\to\\mathbf D(\\Lambda)$ at the quasi-isomorphisms, in the sense of [def-coef-coherent-localization-interface]. The assertion holds in every such presentation; this specifies the enhancement, rather than taking the nerve of the ordinary derived category.",
  "source": {
   "document": "https://arxiv.org/pdf/1511.02828",
   "place": "Choudhury--Gallauer Alves de Souza, Homotopy theory of dg sheaves, arXiv:1511.02828v1, Lemmas 3.18-3.19, printed pp. 12-13, with cochain reindexing; the augmentation clause is the natural cone comparison in that totalization model. Read online 2026-10-17; archive WANTED in report.md. No Stacks tag in the supplied DAG states this enhanced result."
@@ -24,7 +24,8 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-size-convention",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -325,5 +326,53 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1e7f37839 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the full statements of the 9 cited nodes. There are no new nodes and the statement is unchanged. Statement checks: D^2=0; the constant case gives M with augmentation m->(m,0,...); unbounded internal degrees need the product total, and it is used. Step 1: I verified the dg axiom (kernel Hom(coker i, ker p); acyclic dg-projective Q is contractible) and stability (homotopy pushout C+_Q C -> Q[1] with contraction (b,a)->(0,b)). Rectification is applied to the constant Delta-system, as in the reviewed lem-cbc-bounded-below-hypersheaf-model. Step 2: the prepend-0 contraction holds in degrees 0 and -1, and the Koszul cross terms cancel. Step 3: P^{-n}=L_[n] on C=Delta^op satisfies the bounded-above free-source clause of lem-cbc-presheaf-dg-function-complex. Step 4: B preserves surjections and trivial fibrations through the acyclic kernel. Step 5: both functors are homotopical; the counit cone plus the cone-calculus criterion gives the coherent limit. Step 6: I recomputed eps(r,n)=(-1)^{rn+n(n-1)/2}; the ratio exponent r+2n-1 gives coface coefficient +1. Step 7: the transpose is nonzero only on P^0 and equals a^0, and delta a^0=0. Accepted tool_uses: lem-coef-projective-cochain-monoidal-model, lem-coef-pointed-model-stability, lem-coef-quillen-section-rectification, lem-coef-model-infinity-derived-adjunction (general model-category tools, three with precedent in sk-prop-sf-cbc nodes). No duplicates: coherent-end, cosimplicial-frame, proetale-hypercover-total (coproduct) and dold-kan checked. No cycle, no SGA. Choudhury-Gallauer Lemma 3.19 is not archived (WANTED), so I could not check the page; the proof does not depend on it and is correctly marked agent-written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CosimplicialComplexHolim",
+  "declaration": "CochainComplex.cosimplicial_complex_holim",
+  "declarations": [
+   "CochainComplex.CosimplicialProductTotal",
+   "CochainComplex.cosimplicialTotalConstants",
+   "CochainComplex.cosimplicialConeAt",
+   "CochainComplex.cosimplicial_complex_holim"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CosimplicialComplexHolim.lean",
+  "statement": "theorem cosimplicial_complex_holim (Λ : Type u) [CommRing Λ] (D : SSet.{max (u + 1) t}) (q : largeNerve.{u + 1, u, max (u + 1) t} (CochainComplex (ModuleCat.{u} Λ) ℤ) ⟶ D) (hq : IsLocalization (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ)) q) : ∃ (T : CosimplicialProductTotal Λ) (c : ((ihom (largeNerve.{u + 1, u, max (u + 1) t} (CosimplicialObject (CochainComplex (ModuleCat.{u} Λ) ℤ)))).obj ((ihom (largeNerve.{0, 0, max (u + 1) t} SimplexCategory)).obj D)) _⦋1⦌), ((ihom _).obj ((ihom _).obj D)).δ 1 c = SSet.Enhanced.diagramVertex (cosimplicialTotalConstants D q T) ∧ ((ihom _).obj ((ihom _).obj D)).δ 0 c = SSet.Enhanced.diagramVertex (comparison.{u + 1, u, 0, 0, max (u + 1) t} SimplexCategory _ D q) ∧ (∀ K : CosimplicialObject (CochainComplex (ModuleCat.{u} Λ) ℤ), IsLimitEdge (diagram.{u + 1, u, 0, 0, max (u + 1) t} q K) (object q (T.functor.obj K)) (cosimplicialConeAt D c K)) ∧ (∀ (M : CochainComplex (ModuleCat.{u} Λ) ℤ) (K : CosimplicialObject (CochainComplex (ModuleCat.{u} Λ) ℤ)) (a : (Functor.const SimplexCategory |>.obj M) ⟶ K), Composes ((SSet.Enhanced.constantDiagrams _ D).app _ (q.app _ (ULift.up (ComposableArrows.mk₁ (T.augmentation a))))) (cosimplicialConeAt D c K) (transformation.{u + 1, u, 0, 0, max (u + 1) t} q a))",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Constructs a fully characterized product-total functor and a coherent natural limiting cone, including the specified strict augmentation comparison. Helpers bundle the construction in this same node; no object is chosen from the existential theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5642150e",
+  "group": "Q103",
+  "result": "pass",
+  "note": "All node clauses match the Lean: Λ CommRing; unbounded cochain complexes over the full SimplexCategory; coordinates is a linear equiv to the full product ∏_n K([n])^(r-n); differential_zero/differential_succ give D=δ+(-1)^n d (internal sign (-1)^(n+1) on coordinate n+1, coface sum (-1)^i over Fin(n+2), HEq only for r-n=(r+1)-(n+1)); map_coordinates pins functoriality; one coherent edge c from the localized constant Tot to the canonical comparison, with IsLimitEdge at every K fixing apex and cone; the augmentation (a^0, then 0) is a chain map; the Composes 2-simplex has correct face orientation and consistent vertices. Universes u,t: modules in Type u, target SSet.{max (u+1) t}, nothing unbound. Statement correction preserves the old text and only specifies the coherent localization via the existing IsLocalization (def-coef-coherent-localization-interface); the sole citer lem-cbc-hyperdescent-local-orthogonality (steps 2, 6) holds. Gates: no hollow defs, single sorry, source/blueprint docstrings with all 7 proof steps, statement verbatim, lines ≤100, no duplicate found by rg on side lean and Mathlib. nt_compile --json on the snapshot against the side overlay: rc 0, item 3.4 s, no errors or warnings. No findings.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "Q103 stage 2",
+  "old_statement": "Let $\\Lambda$ be a commutative ring and let $K:\\Delta\\to\\operatorname{Ch}(\\operatorname{Mod}_\\Lambda)$ be a cosimplicial diagram of unbounded cochain complexes [def-weil-abstract-derived-category]. The category $\\Delta$ has finite nonempty ordered sets $[n]=\\{0,\\ldots,n\\}$ and order-preserving maps. Write $K^{n,q}=K([n])^q$, let $d$ denote its internal cochain differential, and let $\\delta=\\sum_{i=0}^{n+1}(-1)^i d^i:K^{n,q}\\to K^{n+1,q}$ be the alternating sum of cofaces. Form the product total complex\n$$\\operatorname{Tot}_{\\Pi}(K)^r=\\prod_{n\\ge0}K^{n,r-n},\\qquad D=\\delta+(-1)^n d\\ \\text{on bidegree }(n,q).$$\nAll products are taken in the universes of [def-weil-size-convention]. There is a natural equivalence $\\operatorname{Tot}_{\\Pi}(K)\\simeq\\operatorname{holim}_{[n]\\in\\Delta}K([n])$ in the enhanced derived category $\\mathbf D(\\Lambda)$, with homotopy limit interpreted by coherent limiting cones [def-cbc-enhanced-diagrams-cones]. This is an identification with the derived limit, and no boundedness in the internal degree is required. For a strict augmentation $a:\\operatorname{const}(M)\\to K$ of cosimplicial complexes, the map $M\\to\\operatorname{Tot}_{\\Pi}(K)$ with degree-zero-cosimplicial component $a^0$ and all positive-cosimplicial-degree components zero represents the map from the augmented cone to that homotopy limit.",
+  "what": "The cited abstract-derived-category node defines an ordinary localization only. The phrase enhanced derived category did not specify its presentation and could be misread as the nerve of that ordinary category, which loses higher mapping information. Make explicit that it means the homotopy coherent localization of complexes at quasi-isomorphisms. No hypothesis on the ring or complexes, bound, differential, naturality or augmentation conclusion changes.",
+  "source": {
+   "document": "https://arxiv.org/pdf/1511.02828",
+   "place": "Choudhury--Gallauer Alves de Souza, Lemma 3.19, printed p. 13: R lim is a model-categorical derived limit; the node proof steps 1 and 5 identify its enhanced localization and coherent counit."
+  },
+  "citers": [
+   {
+    "id": "lem-cbc-hyperdescent-local-orthogonality",
+    "holds": true,
+    "note": "Uses the coherent product-total limit and its strict augmentation clause; specifying the coherent localization leaves both unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category",
+   "def-weil-size-convention",
+   "def-cbc-enhanced-diagrams-cones"
+  ]
  }
 }
