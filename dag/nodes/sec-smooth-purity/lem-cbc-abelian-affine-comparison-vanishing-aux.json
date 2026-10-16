@@ -1,258 +1,147 @@
 {
-  "id": "lem-cbc-abelian-affine-comparison-vanishing-aux",
-  "kind": "statement",
-  "title": "Finite affine ind-etale Cech exactness for comparison pullbacks of injectives",
-  "statement": "Let Y be an affine scheme [def-pc-scheme], J an injective abelian sheaf on Y_et [def-sp-injective-resolutions, def-weil-pbc-etale-site], and F = nu_Y^{-1}J for the comparison inverse image [def-weil-pbc-site-comparison-morphism]. Let V be an affine ind-etale Y-object [def-weil-pbc-ind-etale-basis]. For a finite pro-etale covering U_i -> V whose nonempty repeated intersections are affine ind-etale Y-objects, the ordered Cech complex of F [def-weil-pbc-site-cech-complex] is exact at every degree q+1, for q a natural number. Intersections include the one-factor terms, so the members themselves belong to the basis up to isomorphism. The empty covering is allowed.",
-  "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099U, lemma-affine-vanishing, verification of condition (3); https://stacks.math.columbia.edu/tag/099U"
+ "id": "lem-cbc-abelian-affine-comparison-vanishing-aux",
+ "kind": "statement",
+ "title": "Finite affine ind-etale Cech exactness for comparison pullbacks of injectives",
+ "statement": "Let Y be an affine scheme [def-pc-scheme], J an injective abelian sheaf on Y_et [def-sp-injective-resolutions, def-weil-pbc-etale-site], and F = nu_Y^{-1}J for the comparison inverse image [def-weil-pbc-site-comparison-morphism]. Let V be an affine ind-etale Y-object [def-weil-pbc-ind-etale-basis]. For a finite pro-etale covering U_i -> V whose nonempty repeated intersections are affine ind-etale Y-objects, the ordered Cech complex of F [def-weil-pbc-site-cech-complex] is exact at every degree q+1, for q a natural number. Intersections include the one-factor terms, so the members themselves belong to the basis up to isomorphism. The empty covering is allowed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, lemma-affine-vanishing, verification of condition (3); https://stacks.math.columbia.edu/tag/099U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite positive-degree exactness of the ordered Cech complex as the assertion that every cocycle is a coboundary. For a degree q+1 cocycle c, apply exists_etale_cech_cocycle_lift. This gives a finite covering T_i -> W in the original Y_et site, a morphism phi from its categorical Cech complex C with coefficients J to the original ordered complex, and a cocycle c_prime in C with phi(c_prime)=c. This uses the existing geometric descent theorem for arbitrary coefficients, without any injectivity assumption, and includes empty covers.",
+   "uses": [
+    "lem-cbc-affine-comparison-cech-cocycle-descent"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-site-cech-complex"
-  ],
-  "proof": [
-    {
-      "text": "Original Tag 099U proof step 1: Put $F=\\nu_Y^{-1}J$. Apply the comparison section formula to the underlying sheaf of sets of $J$: for every pro-etale $f:V\\to Y$, $F(V)=\\Gamma(V_{\\mathrm{et}},f_{\\mathrm{et}}^{-1}J)$, naturally for arrows $V'\\to V$ over $Y$. By the underlying-set and group-law compatibility of inverse image in [def-weil-pbc-sites-and-cohomology] (3), this is an identification of abelian groups, not just sets: apply naturality to zero, negation and the addition map $J\\times J\\to J$; the inverse images preserve finite products, so the identification preserves each operation. For etale $V\\to Y$ the formula identifies $F(V)$ with $J(V)$ and identifies all restriction maps between etale objects with those of $J$.",
-      "uses": [
-        "lem-cbc-comparison-pullback-sections",
-        "def-weil-pbc-site-comparison-morphism",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 2: For later use, let $V=\\varprojlim_a V_a$ be a small nonempty directed inverse system of affine pro-etale $Y$-schemes with affine transitions. The affine case of the etale cohomology limit theorem, in degree zero, applied to the abelian sheaf $J$ on $Y_{\\mathrm{et}}$ gives $\\varinjlim_a\\Gamma((V_a)_{\\mathrm{et}},f_a^{-1}J)\\cong\\Gamma(V_{\\mathrm{et}},f^{-1}J)$. By step 1 this says $\\varinjlim_a F(V_a)\\cong F(V)$. Its maps are the ordinary restriction maps: both cited statements specify section pullback along the transition followed by inverse-image composition. Hence the formula is compatible with every projection omitting a factor in a fibre product, as well as with transitions of $a$. All schemes used here are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs].",
-      "uses": [
-        "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-        "lem-cbc-comparison-pullback-sections",
-        "lem-weil-pbc-affine-scheme-qcqs"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 3: Use the following elementary consequence of exactness of filtered colimits of abelian groups. For finitely many compatible directed systems $M_{t,a}$, the map $\\varinjlim_a\\prod_t M_{t,a}\\to\\prod_t\\varinjlim_aM_{t,a}$ is an isomorphism: a finite product of groups is their finite direct sum, and maps from that sum to a group $N$ are finite families of maps; the colimit universal property on each component therefore gives precisely the universal property on the left. The same argument covers the empty product, the zero group. For a directed system of cochain complexes $C_a$, write $Z_a^p=\\ker d_a^p$ and $B_a^p=\\operatorname{im}d_a^{p-1}$. Exactness of colimits applied to $0\\to Z_a^p\\to C_a^p\\to B_a^{p+1}\\to0$ and to $0\\to B_a^p\\to Z_a^p\\to H^p(C_a)\\to0$ makes the colimit inclusions of $Z_a^p$ and $B_a^p$ monomorphisms. In the factorization $C_a^{p-1}\\twoheadrightarrow B_a^p\\hookrightarrow C_a^p$, the first map stays surjective and the second stays injective, so the colimit of $B_a^p$ is the image of the colimit differential. Likewise the first exact sequence identifies the colimit of $Z_a^p$ with its kernel. The second sequence therefore gives $H^p(\\varinjlim_a C_a)\\cong\\varinjlim_aH^p(C_a)$. Consequently, if every finite intersection of a finite covering is the inverse limit of its stage intersections, step 2 and the Cech formula give a degreewise colimit of Cech complexes and the same formula for Cech cohomology. Compatibility with the differential is explicit: its $(i_0,\\ldots,i_{p+1})$ component is the alternating sum of restrictions omitting each factor, and each of these restrictions commutes with the section colimit comparison by step 2.",
-      "uses": [
-        "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-        "def-weil-pbc-site-cech-complex"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "The nerve hypothesis in degree zero identifies each cover member, up to the canonical one-factor product isomorphism, with an affine ind-etale Y-object. The target V is also such an object. Any arrow between two affine ind-etale Y-objects is ind-etale, by ind-etale stability. Thus the following finite-cover argument applies to precisely the displayed family; no cohomology vanishing criterion is included in this auxiliary statement.",
-      "uses": [
-        "def-weil-pbc-ind-etale-basis",
-        "lem-weil-pbc-ind-etale-stability"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, definition of Cov and condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 5: Fix a member $\\mathcal U=\\{U_i\\to U\\}_{i=1}^n$ of $\\mathrm{Cov}$. For each $i$, an ind-etale presentation and the directed-cofinal-category theorem give a small directed system of affine etale $U$-schemes $U_{i,a}$ with limit $U_i$. Put $A=\\prod_{i=1}^n A_i$ with coordinatewise ordering. It is nonempty and directed, because the list is finite; the limit of each coordinate system over $A$ is its limit over $A_i$. Explicitly, restrict a cone over $A$ to tuples with all other coordinates fixed to obtain a cone over $A_i$. For any other tuple, choose common upper bounds in the other coordinates; cone compatibility then identifies its component with the one just obtained. Thus the construction is independent of the fixed coordinates and gives mutually inverse correspondences of cones. This also handles repeated indices in the fibre products below. The family $\\mathcal U_a=\\{U_{i,a_i}\\to U\\}_{i=1}^n$ is etale and jointly surjective at every $a$: any point of $U$ has a preimage in some $U_i$, and its image in $U_{i,a_i}$ still maps to that point. For every tuple $(i_0,\\ldots,i_p)$ the fibre-product limit theorem (iterated $p$ times) identifies $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ with $\\varprojlim_{a\\in A}(U_{i_0,a_{i_0}}\\times_U\\cdots\\times_UU_{i_p,a_{i_p}})$. All stage objects and intersections are affine and pro-etale over $Y$, by ind-etale composition and base change. The indicated limits exist by the affine-limit theorem. If $n=0$, a covering forces $U$ to be empty; every Cech term is then the zero group and the required positive Cech vanishing is immediate, so the subsequent steps concern $n>0$.",
-      "uses": [
-        "def-weil-pbc-ind-etale-algebra",
-        "lem-weil-pbc-filtered-category-directed-cofinal",
-        "lem-kun-fibre-product-limits",
-        "lem-weil-pbc-limit-affine-transition",
-        "lem-weil-pbc-ind-etale-stability",
-        "def-weil-pbc-site-cech-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 6: Apply step 2 to the systems of intersections in step 5 and step 3 to their finite Cech products. The resulting isomorphism of complexes and its cohomology isomorphism are $\\check C^\\bullet(\\mathcal U,F)\\cong\\varinjlim_{a\\in A}\\check C^\\bullet(\\mathcal U_a,F)$ and $\\check H^p(\\mathcal U,F)\\cong\\varinjlim_{a\\in A}\\check H^p(\\mathcal U_a,F)$. Thus it suffices to prove positive Cech vanishing for a finite affine etale covering of any $U\\in\\mathcal B_Y$. This reduction makes no claim that $J$ pulled back to $U_{\\mathrm{et}}$ is injective.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 7: Now let $\\mathcal V=\\{V_i\\to U\\}_{i=1}^n$ be a finite affine etale covering of a basis object $U$. Write $U=\\varprojlim_b U_b$ with $U_b$ affine etale over $Y$, using the ind-etale presentation and the directed-cofinal-category theorem. The affine-etale-site colimit theorem, specifically clause (4), says that this covering is isomorphic to the base change of a finite affine etale covering $\\mathcal V_{b_0}=\\{V_{i,b_0}\\to U_{b_0}\\}_{i=1}^n$ at some stage $b_0$. To fix the target, first call the descended target $W_{b_0}$. Its base change is isomorphic to the identity object $U$ of $U_{\\mathrm{et}}$. Both $W_{b_0}$ and the identity $U_{b_0}$ are objects of $(U_{b_0})_{affine,\\mathrm{et}}$. Clause (3) descends this isomorphism and its inverse to a common later stage and then makes both composites identities at a further common stage. Composing each descended cover arrow with the resulting isomorphism $W_b\\cong U_b$ yields the required covering of $U_b$, with the same base change. Rename this stage $b_0$. For $b\\ge b_0$ set $V_{i,b}=U_b\\times_{U_{b_0}}V_{i,b_0}$; these are affine etale covers of $U_b$. They and all their intersections are etale $Y$-schemes by etale composition and cancellation and the etale base-change finite-limits theorem. The fibre-product limit theorem and affine-limit theorem identify their limits with $V_i$ and its intersections. The tail $b\\ge b_0$ is cofinal: for any $b$ choose an upper bound of $b$ and $b_0$. All bases are affine and therefore qcqs by [lem-weil-pbc-affine-scheme-qcqs], so every qcqs hypothesis of the affine-etale-site colimit theorem holds.",
-      "uses": [
-        "def-weil-pbc-ind-etale-algebra",
-        "lem-weil-pbc-filtered-category-directed-cofinal",
-        "lem-weil-pbc-affine-etale-site-colimit",
-        "lem-kun-fibre-product-limits",
-        "lem-weil-pbc-limit-affine-transition",
-        "def-weil-pbc-etale-site",
-        "lem-weil-pbc-etale-composition-cancellation",
-        "lem-weil-pbc-etale-base-change-finite-limits",
-        "lem-weil-pbc-etale-base-change-continuous",
-        "lem-weil-pbc-affine-scheme-qcqs"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "Original Tag 099U proof step 8: For each tuple $(i_0,\\ldots,i_p)$, step 7 identifies its intersection with the limit of the corresponding intersections of $\\mathcal V_b$. Step 2 identifies its $F$-sections with their colimit. Taking the finite product over all tuples gives the degree-$p$ Cech group by step 3. Each omitted-factor projection commutes with the limit projections, so naturality in step 2 identifies every restriction term in the alternating differential. These degreewise identifications are therefore an isomorphism of complexes; the kernel/image calculation in step 3 gives $\\check H^p(\\mathcal V,F)\\cong\\varinjlim_{b\\ge b_0}\\check H^p(\\mathcal V_b,F)$. Step 1 identifies the entire stage complex with $\\check C^\\bullet(\\mathcal V_b,J)$, since its objects and face arrows belong to $Y_{\\mathrm{et}}$. Indeed, in each degree the component at $(i_0,\\ldots,i_p)$ is the isomorphism $F(V_{i_0,b}\\times_{U_b}\\cdots\\times_{U_b}V_{i_p,b})\\cong J(V_{i_0,b}\\times_{U_b}\\cdots\\times_{U_b}V_{i_p,b})$; naturality for each omitted-factor projection identifies the alternating differentials. The injective-sheaf Cech theorem applies to $J$ on $Y_{\\mathrm{et}}$ and the covering of the object $U_b$: $J$ is injective on this fixed site by the assumption that $J$ is an injective abelian sheaf on $Y_{\\mathrm{et}}$, and the theorem works over every object of the site. Thus $\\check H^p(\\mathcal V_b,J)=0$ for $p>0$, and so $\\check H^p(\\mathcal V,F)=0$. No injectivity assertion on a different site is used.",
-      "uses": [
-        "lem-cbc-comparison-pullback-sections",
-        "lem-weil-pbc-injective-sheaf-cech-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, verification of condition (3)"
-      }
-    },
-    {
-      "text": "The preceding two filtered-colimit reductions annihilate every positive Cech cohomology group. In the category of abelian groups this is exactly ExactAt in degree q+1 of the constructed ordered Cech complex. The finite ordered products and alternating omitted-factor restrictions are the same ones throughout; uniqueness of fibre products identifies any different choices. For an empty family every term is the zero group, so exactness holds directly.",
-      "uses": [
-        "def-weil-pbc-site-cech-complex"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099U, end of verification of condition (3)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-cbc-comparison-pullback-sections",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-filtered-category-directed-cofinal",
-    "lem-kun-fibre-product-limits",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-base-change-continuous",
+  {
+   "text": "Apply injective_sheaf_cech_acyclic to J on the fixed site Y_et and the covering T_i -> W, indexed by ULift(Fin n). Its degree q+1 homology is zero because q+1>0. The Mathlib equivalence exactAt_iff_isZero_homology and ab_exact_iff give a degree q cochain b with d(b)=c_prime. No injectivity on W_et or on the pro-etale site is used.",
+   "uses": [
     "lem-weil-pbc-injective-sheaf-cech-acyclic"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099U, condition (3), finite Cech part only; official source read at https://stacks.math.columbia.edu/tag/099U"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "cech.*injective|injective.*cech|proetale.*vanish|comparison.*acyclic",
-      "results": "5 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"ExactAt\", \"Injective\"",
-      "results": "2 hits: CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
-      "date": "2026-10-16",
-      "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The finite Cech complex of the inverse image of an injective etale sheaf is exact on an affine ind etale cover",
-      "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀",
-      "date": "2026-10-16",
-      "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The finite Cech complex of the inverse image of an injective etale sheaf is exact on an affine ind etale cover",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing",
-    "date": "2026-10-16",
-    "group": "V3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-cbc-proetale-stalk-conservative",
-      "place": "Proof Step 4, affine cohomology comparison input: Tag 099U condition (3), two finite Cech limit reductions",
-      "via": [
-        "lem-cbc-abelian-affine-comparison-vanishing",
-        "lem-cbc-abelian-comparison-injective-acyclicity",
-        "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-        "lem-cbc-proetale-functions-quotient-sections"
-      ]
-    },
-    "same_as": []
-  },
-  "merged_into": null,
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-comparison",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux",
-    "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonInjectiveVanishingAux.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.exactAt_cechComplex_comparisonUpperStar_of_injective",
-    "statement": "theorem exactAt_cechComplex_comparisonUpperStar_of_injective (Y : Scheme.{u}) [IsAffine Y] (J : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective J] (V : Y.ProEt) (hV : proAffineEtale V.hom) {n : ℕ} (U : Fin n → Over V) (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n), proAffineEtale (Presheaf.cechNerveObj U y).left.hom) (hcover : Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ Scheme.ProEt.topology Y V) (q : ℕ) : ((Presheaf.cechComplex U).obj ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).ExactAt (q + 1)",
-    "branch": "sheaf-dag",
-    "by": "V3",
-    "date": "2026-10-16"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-04d1c",
-    "group": "V3",
-    "result": "pass",
-    "landing": "20261015T224822-L-2950964",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-04d1c",
-    "group": "V3",
-    "result": "pass",
-    "landing": "20261015T224822-L-2950964",
-    "kind": "interface",
-    "note": "independent Codex review: Matched the delivered Lean modules and DAG nodes against the packet, published clone, compiler results, and direct importer; all checks pass."
+  {
+   "text": "The degree q image phi(b) is a primitive of c: the complex-map equation gives d(phi(b))=phi(d(b))=phi(c_prime)=c. Apply exactAt_cechComplex_iff in the reverse direction. The argument uses the same descent theorem and exactness equivalence for empty indexing families and empty schemes, so no nonemptiness hypothesis is needed.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-cbc-affine-comparison-cech-cocycle-descent",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3): use the already proved finite affine cocycle descent theorem, injective etale Cech acyclicity, and the complex-map equation to transport a primitive."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*injective|injective.*cech|proetale.*vanish|comparison.*acyclic",
+   "results": "5 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactAt\", \"Injective\"",
+   "results": "2 hits: CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+   "date": "2026-10-16",
+   "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite Cech complex of the inverse image of an injective etale sheaf is exact on an affine ind etale cover",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀",
+   "date": "2026-10-16",
+   "verdict": "no match: injective-resolution exactness and Mayer-Vietoris exactness do not give finite Cech exactness of an etale-to-pro-etale inverse image; upstream generic Cech lemmas require injectivity on the pro-etale site, which is not assumed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite Cech complex of the inverse image of an injective etale sheaf is exact on an affine ind etale cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing",
+  "date": "2026-10-16",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof Step 4, affine cohomology comparison input: Tag 099U condition (3), two finite Cech limit reductions",
+   "via": [
+    "lem-cbc-abelian-affine-comparison-vanishing",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonInjectiveVanishingAux.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exactAt_cechComplex_comparisonUpperStar_of_injective",
+  "statement": "theorem exactAt_cechComplex_comparisonUpperStar_of_injective (Y : Scheme.{u}) [IsAffine Y] (J : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective J] (V : Y.ProEt) (hV : proAffineEtale V.hom) {n : ℕ} (U : Fin n → Over V) (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n), proAffineEtale (Presheaf.cechNerveObj U y).left.hom) (hcover : Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ Scheme.ProEt.topology Y V) (q : ℕ) : ((Presheaf.cechComplex U).obj ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-04d1c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261015T224822-L-2950964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T092211-L-1941311",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

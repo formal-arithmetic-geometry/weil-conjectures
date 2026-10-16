@@ -10,20 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.AlgebraicGeometry.FibreProductLimit
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent
 import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.RingTheory.IndPrincipalZariski
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.CategoryTheory.SiteCechComplex
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite affine Čech exactness for comparison pullbacks of injectives
@@ -91,6 +79,21 @@ theorem exactAt_cechComplex_comparisonUpperStar_of_injective
       Scheme.ProEt.topology Y V) (q : ℕ) :
     ((Presheaf.cechComplex U).obj
       ((comparisonUpperStar AddCommGrpCat.{u + 1} Y).obj J).obj).ExactAt (q + 1) := by
-  sorry
+  rw [Presheaf.exactAt_cechComplex_iff]
+  intro c hc
+  obtain ⟨W, T, f, hcover', φ, c', hc', hφ⟩ :=
+    exists_etale_cech_cocycle_lift Y J V hV U hU hcover q c hc
+  let C := (cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+    ((Over.forget W).op ⋙ J.obj)
+  have hzero : IsZero (C.homology (q + 1)) :=
+    injective_sheaf_cech_acyclic Y J W _ T f hcover' (q + 1) (Nat.zero_lt_succ q)
+  have hex : C.ExactAt (q + 1) :=
+    (HomologicalComplex.exactAt_iff_isZero_homology C (q + 1)).mpr hzero
+  rw [HomologicalComplex.exactAt_iff' C q (q + 1) (q + 2) (by simp) (by simp),
+    ShortComplex.ab_exact_iff] at hex
+  obtain ⟨b, hb⟩ := hex c' hc'
+  refine ⟨φ.f q b, ?_⟩
+  have h := ConcreteCategory.congr_hom (φ.comm q (q + 1)) b
+  exact h.trans ((congrArg (φ.f (q + 1)) hb).trans hφ)
 
 end AlgebraicGeometry.ProEtale
