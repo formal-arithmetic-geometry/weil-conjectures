@@ -1,0 +1,173 @@
+{
+ "id": "lem-pur-rhom-global-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "the proof paragraph beginning \"For L represented by a K-flat complex and M by a K-injective complex\" and its final identification of H^0 with Hom in the derived category",
+   "via": [
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Global sections of the derived internal Hom",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$; let $D(\\mathcal O)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], and $\\Gamma(\\mathcal C,-)=\\operatorname{Hom}_{\\mathcal O}(\\mathcal O,-)$ the global sections functor. For $K\\in D(\\mathcal O)$ put $H^0(\\mathcal C,K)=H^0(\\Gamma(\\mathcal C,\\mathcal J^\\bullet))$ for a K-injective complex $\\mathcal J^\\bullet$ [def-pur-kinjective-complex] representing $K$ (one exists by [prop-pur-kinjective-resolutions-exist]; the result does not depend on the choice up to canonical isomorphism, as two K-injective complexes representing $K$ are homotopy equivalent). Then for $L,M\\in D(\\mathcal O)$ there is a canonical isomorphism\n\n$$\n H^0\\bigl(\\mathcal C,R\\mathcal Hom_{\\mathcal O}(L,M)\\bigr)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(L,M),\n$$\n\nwith $R\\mathcal Hom_{\\mathcal O}$ the derived internal Hom [def-pur-derived-internal-hom].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08JA (sites-cohomology-lemma-section-RHom-over-U), the global statement; its proof uses Lemma 0A94 (sites-cohomology-lemma-RHom-into-K-injective) and the lemma sites-cohomology-lemma-RHom-from-K-flat-into-K-injective"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof": [
+  {
+   "text": "Take the already constructed functorial K-injective replacement I with η: identity → I, using the proved Grothendieck property of module sheaves and the source-library resolution functor. The comparison in [def-pur-derived-internal-hom] computes derivedInternalHom after Q.op.prod Q as Q of Hom(L,I(M)). Apply [lem-pur-hom-complex-hypercohomology] to identify its hypercohomology naturally with homotopy-category Hom(L,I(M)).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-complex-hypercohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive bijection DerivedCategory.Qh.mapAddHom from [lem-weil-pbc-kinjective-hom-derived]. Compose with Iso.homCongr for quotientCompQhIso and with the inverse of Q(η_M) to obtain derived morphisms Q(L) → Q(M). Prove naturality explicitly: Q(I(f)) followed by Q(η) inverse equals Q(η) inverse followed by Q(f), by η.naturality and cancellation. Naturality of quotientCompQhIso transports this equality through the homotopy-to-derived comparison. ULift puts the two abelian-group-valued functors in a common universe.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the three natural isomorphisms, then descend along the product localization Q.op.prod Q using Localization.fullyFaithfulWhiskeringLeft.preimageIso. Turn the components into additive equivalences and remove the universe lifts. Evaluating the descended naturality square at ULift.up x gives exactly the precomposition/postcomposition equation of rhom_global_sections.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "lem-pur-hom-complex-hypercohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08JA (global assertion), using Lemmas 0A95 and 0A96 and Equation 0A8Z; source read at https://stacks.math.columbia.edu/tag/08JA, /0A95, /0A96.",
+  "description": "V4: Lean proof of the localization, additive derived comparison, and two-variable naturality; the complex-level hypercohomology calculation is isolated in a strictly intermediate node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom global sections K-injective K-flat Hom complex",
+   "results": "CategoryTheory.Sheaf.H and cohomology declarations; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective; no sheaf-valued global-sections theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory Hom, KInjective, KFlat",
+   "results": "0 hits; unknown identifier Hom",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'RHom\\|internalHom\\|ihom' Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "none for derived internal Hom; only group-valued HomComplex analogue",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections of derived internal Hom equal morphisms in derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pur-derived-internal-hom",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-rhom-global-sections",
+  "worker": "stage1",
+  "summary": "Split the global-sections identification into representative choice, computation by a Hom complex with K-injective target, and the degree-zero/naturality conclusion. No new child node was needed: the K-injective localization input is the existing Mathlib leaf lem-weil-pbc-kinjective-hom-derived. The Stacks source text is absent from this checkout, so the proof is recorded as agent reconstruction and the missing source is reported.",
+  "blueprint": "Realizes the proof paragraph beginning \"For L represented by a K-flat complex and M by a K-injective complex\" and its final identification of H^0 with Hom in the derived category.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Step 2 needs the generic theorem that maps into a K-injective complex are computed in the homotopy/derived localization; no node in the purity unit supplies this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rgs3058",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rgs3058 (reviewer sub-agent of L); spot-checked: Statement unchanged vs sheaf-dag (E7); citers lem-pc-derived-internal-hom-pullback-adjunction step 3 and lem-pc-global-hom-pullback-adjunction step 4 use only the H^0 clause with naturality, which the statement and step 3 give. All cited statements read (prop-pur-kinjective-resolutions-exist, def-pur-derived-internal-hom, def-pur-hom-complex, lem-pur-rhom-well-defined, leaf lem-weil-pbc-kinjective-hom-derived); small-site hypothesis honest (needed for K-injective resolutions). Tool use lem-weil-pbc-kinjective-hom-derived accepted as generic abelian-category fact. FIX more, RETURN less: dag/nodes/sec-smooth-purity/lem-pur-rhom-global-sections.json step 1: the statement defines H^0(C,-) through a K-injective representative, but the proof computed Gamma of Hom^bullet(L,I) without showing it K-injective (the second reading removed the K-flat step that 08JA needs) (C1); now L is K-flat by [lem-pc-kflat-resolution] and Hom^bullet(L,I) is K-injective by the new statement-only node dag/nodes/sec-smooth-purity/lem-pur-hom-kflat-into-kinjective.json (Stacks sites-cohomology-lemma-RHom-from-K-flat-into-K-injective; grep search recorded); step 2: plain-text arrows written as TeX (B4), and Gamma of the Hom complex written as the degreewise tensor-Hom bijection with K=O, H^0 = Hom_{K(O)} spelled out; proof_deps updated.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RhomGlobalSections",
+  "declaration": "CategoryTheory.rhom_global_sections",
+  "file": "lean/Sheaf/Algebra/Homology/RhomGlobalSections.lean",
+  "statement": "theorem rhom_global_sections {C : Type u₁} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u₁}) [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] : ∃ e : ∀ P : (DerivedCategory (SheafOfModules.{u₁} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{u₁} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)), ((ringedSiteZerothHypercohomology J R).obj ((derivedInternalHom J R).obj P)) ≃+ (P.1.unop ⟶ P.2), ∀ (P P' : (DerivedCategory (SheafOfModules.{u₁} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{u₁} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (f : P ⟶ P') (x : (ringedSiteZerothHypercohomology J R).obj ((derivedInternalHom J R).obj P)), e P' ((ringedSiteZerothHypercohomology J R).map ((derivedInternalHom J R).map f) x) = f.1.unop ≫ e P x ≫ f.2",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rgs",
+  "group": "H1",
+  "result": "fix",
+  "note": "small site C,J; R sheaf of comm rings; SheafOfModules + HasDerivedCategory; H0 = rightDerived of Hom(O,-) then H^0 (new def, needed: no site-level form in Mathlib/slopmaster2/lean); RHom = landed derivedInternalHom; e natural AddEquiv family, naturality directions checked; new def switched to proved SheafOfModules.isGrothendieckAbelian"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T082421-L-1650839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,389 @@
+{
+ "id": "lem-dg-compact-support-amplitude",
+ "blueprint": {
+  "is": "lem-dg-compact-support-amplitude",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The compact-support bound uses the original fibres",
+ "statement": "Let $f:X\\to Y$ be a separated finite-type morphism of finite-type\nschemes over a field, with geometric fibres of dimension at most $d$.\nLet $A$ be a finite ring whose additive exponent is invertible on\n$Y$. For every etale $A$-module sheaf $F$, its\ncompact-support direct image\nsatisfies\n\n$$\nR^qf_!F=0\\qquad(q>2d).\n$$\n\nAll functors here act on ordinary\nderived categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+  "place": "node lem-dg-compact-support-amplitude, order 1625"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "def-amb-etale-compact-support",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian because its only ideals are zero and the whole field. Hence $X$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. In particular $Y$ is quasi-compact, and it is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [thm-nagata-compactification] to the given separated finite-type $f$ to choose a factorization $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ with $j$ open and $r$ proper. Proper includes finite type, so the same Noetherian lemma shows that $\\overline X$ is Noetherian. By [def-amb-etale-compact-support] the chosen candidate on $F[0]$ is $Rr_*j_!F$, and [lem-amb-etale-compact-comparisons] identifies this candidate with $Rf_!F$. This application uses only bounded-below objects: $j_!F$ is a sheaf in degree zero. The ordinary unbounded and bounded-below computations agree here: [lem-weil-pbc-dplus-injective-representative] gives a bounded-below injective resolution of this sheaf which is K-injective, and both [def-amb-etale-compact-support] and [def-weil-pbc-direct-image] compute $Rr_*$ by applying $r_*$ to that same resolution.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, first paragraph: choose a compactification and compute the ordinary compact-support candidate"
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$, choose the geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega=\\overline{\\kappa(y)}$, and put $T=\\overline X_{\\bar y}$ and $U=X_{\\bar y}$. The base-changed map $j_{\\bar y}:U\\to T$ is open by [lem-weil-pbc-open-immersion-base-change]. Write $F_{\\bar y}$ for the inverse image of $F$ on $U$. The first, derived-category clause of [cor-weil-pbc-geometric-fiber-finite], applied to $r$ and $j_!F[0]$, and [lem-cbc-extension-zero-base-change] give $\\bar y^{-1}Rf_!F\\simeq Ra_{T,*}G$, where $G=j_{\\bar y!}F_{\\bar y}$ and $a_T:T\\to\\operatorname{Spec}\\Omega$. Here the corollary allows every $K\\in D^+(\\overline X_{\\Et},A)$; its later clause for finite module sheaves is not being applied to the possibly infinite sheaf $F$. Inverse image of constant-ring module sheaves is exact by [prop-weil-pbc-inverse-image-modules-exact], hence commutes with cohomology of complexes (preserve kernels, images and cokernels). On $\\operatorname{Spec}\\Omega$, sections at the identity etale object equal the geometric stalk by [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk], compatibly with addition and scalar multiplication because the map is restriction of sections. Thus sections there are exact, and taking degree $q$ of the displayed derived isomorphism gives $(R^qf_!F)_{\\bar y}\\cong H^q_A(T,G)$: on an injective resolution of $G$, sections of $a_{T,*}$ are precisely sections on $T$, by [def-weil-pbc-direct-image]. Finally [lem-weil-pbc-etale-module-cohomology-forget] identifies the underlying abelian group of this module cohomology with $H^q(T,G_{ab})$, where $G_{ab}$ is the underlying abelian sheaf.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-cbc-extension-zero-base-change",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, first paragraph: geometric-stalk formula, including extension-by-zero base change and coefficient forgetting"
+   }
+  },
+  {
+   "text": "By [lem-pc-proper-base-change], $T\\to\\operatorname{Spec}\\Omega$ is proper. Therefore $T$ is finite type over $\\Omega$ by [def-weil-proper-morphism], and Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Let $|C|$ be the closure of the open subset $|U|$ in $|T|$, and equip it with its reduced induced closed subscheme structure $i:C\\hookrightarrow T$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. By [lem-weil-pbc-closed-immersion-proper], $C$ is proper over $\\Omega$, hence finite type. The closed subset $|C|$ has finitely many irreducible components $C_1,\\ldots,C_s$ by [lem-sc-noetherian-closed-subset-finite-components]. Equip each component with its reduced induced closed subscheme structure in $T$ using the same construction; each is again proper and finite type over $\\Omega$. It is integral by the reduced-and-irreducible characterization in [def-pc-integral-scheme]. These assertions concern the closed subscheme structures in $T$; no factorization of the possibly nonreduced scheme $U$ through the reduced scheme $C$ is asserted.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph, first sentence: reduced closure of the original fibre and its finite-type components"
+   }
+  },
+  {
+   "text": "Every $C_a$ meets $|U|$. If $C_a\\cap |U|$ were empty, then $|U|$ would be contained in the finite union of the other irreducible components. That union is closed, so it would also contain the closure $|C|$ of $|U|$, contradicting that $C_a$ is an irreducible component and is not contained in the union of the other components. Thus $V_a=C_a\\cap |U|$ is nonempty. It is open in the integral finite-type $\\Omega$-scheme $C_a$, so [lem-sc-integral-locally-algebraic-opens-dimension] gives $\\dim C_a=\\dim V_a$. Also $V_a$ is closed in $|U|$, because $C_a$ is closed in $|T|$. Every chain of irreducible closed subsets of $V_a$ is therefore such a chain in $|U|$. By [def-kun-topological-krull-dimension] and the fibre hypothesis, $\\dim C_a=\\dim V_a\\leq\\dim U\\leq d$. This uses the integral finite-type dimension theorem, rather than asserting that an arbitrary dense open in an arbitrary Noetherian scheme has the same dimension.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-kun-topological-krull-dimension",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph: dimension of a component equals the dimension of its nonempty open in the original fibre (Stacks Tag 0A21, lemma-dimension-locally-algebraic, part (3))"
+   }
+  },
+  {
+   "text": "If $C$ is nonempty, any finite strict chain of nonempty irreducible closed subsets of $|C|$ lies in one of the components $C_a$: its largest member is irreducible and the finite family of closed subsets $C_a$ covers $|C|$, so that largest member lies in one $C_a$. All members of the chain are closed and irreducible in $C_a$ as well, and all its strict inclusions are unchanged. The component bound from the previous step and [def-kun-topological-krull-dimension] show $\\dim C\\leq d$. If $C$ is empty, then $U$ is empty and [lem-weil-pbc-extension-by-zero-stalks] makes $G_{ab}$ zero at every geometric point of $T$; [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to G_{ab}$ gives $G_{ab}=0$, hence all its cohomology groups are zero by the zero resolution in [def-weil-pbc-etale-cohomology]. In this case the stalk in step 2 already vanishes. Henceforth suppose $C$ nonempty.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph: pass from component bounds to the closed-support bound; explicit empty-fibre case"
+   }
+  },
+  {
+   "text": "The stalk formula of [lem-weil-pbc-extension-by-zero-stalks] says that $G_{ab}$ is zero outside $|U|$, hence outside $|C|$. Apply [lem-kun-04ca] to the actual closed immersion $i:C\\hookrightarrow T$: there is an abelian sheaf $H$ on $C_{\\Et}$ with $G_{ab}\\cong i_*H$, and its left-inverse clause permits $H\\cong i^{-1}G_{ab}$. Let $N\\geq1$ be the additive exponent of the finite coefficient ring $A$. Then $N$ kills every $A$-module, since $(N\\cdot1_A)m=0$, so it kills $G_{ab}$. The additive exact inverse image of [prop-weil-pbc-inverse-image-exact] shows that $N$ kills $H$ as well. In particular $H$ is a torsion abelian sheaf, without any finiteness or constructibility assumption on its stalks.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph: extension by zero is a closed direct image from its reduced closed support (Stacks Tag 04CA, proposition-closed-immersion-pushforward)"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite]. Apply [lem-weil-pbc-finite-pushforward-cohomology] to the abelian sheaf $H$: for every $q\\geq0$ it gives $H^q(T,G_{ab})\\cong H^q(T,i_*H)\\cong H^q(C,H)$. This cites the cohomology comparison itself, not merely exactness of closed direct image.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph: compute cohomology on the closed support (Stacks Tag 035C, lemma-closed-immersion-finite; Tag 0A5D, lemma-finite-pushforward-statements)"
+   }
+  },
+  {
+   "text": "The field $\\Omega$ is algebraically closed, hence separably closed: a nonconstant separable polynomial has a root in $\\Omega$. Therefore [lem-sf-separably-closed-torsion-cd] supplies $\\operatorname{cd}_{\\rm tor}(\\Omega)\\leq0$ in exactly the sense of [def-sc-etale-torsion-cd]. Apply [thm-sc-finite-type-torsion-cd] to the nonempty finite-type $\\Omega$-scheme $C$ with $e=\\dim C\\leq d$. It gives $\\operatorname{cd}_{\\rm tor}(C)\\leq2e$. Since $H$ is torsion, the definition yields $H^q(C,H)=0$ whenever $q>2d\\geq2e$. By steps 2 and 7 the stalk $(R^qf_!F)_{\\bar y}$ is zero. Invertibility of the exponent is among the hypotheses stated in the item and is retained; this particular torsion cohomological-dimension argument does not require a stronger coefficient hypothesis.",
+   "uses": [
+    "lem-sf-separably-closed-torsion-cd",
+    "def-sc-etale-torsion-cd",
+    "thm-sc-finite-type-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, second paragraph: vanishing above twice the dimension of the closed support, with the precise torsion cohomological-dimension convention"
+   }
+  },
+  {
+   "text": "For fixed $q>2d$, the preceding argument applies to the chosen algebraic closure over every point $y$ of $Y$. By [lem-kun-support-geometric-point-independent], vanishing at that geometric stalk implies vanishing at every geometric point over $y$. Thus all geometric stalks of the underlying abelian sheaf of $R^qf_!F$ vanish. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the morphism from the zero sheaf to this underlying sheaf: it is an isomorphism. An $A$-module sheaf with zero underlying abelian sheaf is the zero module sheaf, since its groups of sections and all its structure maps are zero. Therefore $R^qf_!F=0$. Only $\\dim U$ and the dimension of its closed support were bounded; no bound was imposed on the entire compactified fibre $T$.",
+   "uses": [
+    "lem-kun-support-geometric-point-independent",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+    "place": "Proof, last sentences: geometric stalks detect zero; no bound on the entire compactified fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "def-weil-proper-morphism",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-open-immersion-base-change",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-cbc-extension-zero-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-cohomology",
+  "lem-kun-04ca",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-sf-separably-closed-torsion-cd",
+  "def-sc-etale-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-kun-support-geometric-point-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md",
+  "place": "Imported proof, both paragraphs, expanded using the cited existing DAG statements; primary Stacks texts consulted online for 0A21, 04CA, 095T and 03S5; local literature source files are absent (see report WANTED entries)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated morphism of finite type with geometric fibres of dimension at most d, the compact support higher direct images of torsion etale sheaves vanish in degrees greater than 2d",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, AlgebraicGeometry.exists_of_res_zero_of_qcqs, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-15",
+   "verdict": "no match: none of the returned declarations states an etale proper-support fibre-dimension vanishing bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compact\", \"cohomology\"",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: none of the returned declarations states an etale proper-support fibre-dimension vanishing bound"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support|cohomological.?dimension|higher.*shriek",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: none of the returned declarations states an etale proper-support fibre-dimension vanishing bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology with compact support vanishes above twice the dimension of the geometric fibres",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image with proper support for torsion sheaves on the small etale site has cohomological amplitude bounded by twice the maximum fibre dimension",
+   "results": "DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-15",
+   "verdict": "no match: none of the returned declarations states an etale proper-support fibre-dimension vanishing bound"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*etale|lowerShriek",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: none of the returned declarations states an etale proper-support fibre-dimension vanishing bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1625,
+ "blueprint_uses": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-cd-sep-closed-point",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-nagata-compactification",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-dg-compact-support-amplitude",
+  "worker": "stage1",
+  "summary": "Expanded the compactification/closed-support proof into nine steps with exact statement citations, the finite-ring module-to-abelian cohomology comparison, the general derived clause of proper fibre base change, a componentwise integral finite-type dimension calculation and the empty-support case. Reused all required facts from the existing DAG; created no nodes and changed no assertion of the item.",
+  "blueprint": "Steps 1-2 realize the first paragraph; steps 3-5 the reduced-closure dimension argument of the second paragraph; steps 6-7 its closed-support cohomology comparison; steps 8-9 its torsion vanishing and geometric-stalk conclusion. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic tool in the compactification/closed-support proof: Nagata compactification, [stacks-project]. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic tool in the compactification/closed-support proof: Finite-coefficient geometric-fiber formula. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool in the compactification/closed-support proof: Inverse image of etale sheaves of modules over a constant ring is exact. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+    "why": "Generic tool in the compactification/closed-support proof: Identity stalk computation for algebraically closed étale sheaves. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic tool in the compactification/closed-support proof: Natural comparison of etale module cohomology with underlying abelian cohomology. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool in the compactification/closed-support proof: Proper and smooth morphisms are stable under base change. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic tool in the compactification/closed-support proof: Reduced induced closed subscheme structure on a closed subset: existence and uniqueness. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic tool in the compactification/closed-support proof: Nonempty opens of an integral locally algebraic scheme have its dimension. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic tool in the compactification/closed-support proof: Geometric stalks of extension by zero along an open immersion. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool in the compactification/closed-support proof: Conservativity of geometric stalks. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic tool in the compactification/closed-support proof: Pushforward along a closed immersion. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic tool in the compactification/closed-support proof: Exactness of inverse image. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-cohomology",
+    "why": "Generic tool in the compactification/closed-support proof: Finite direct image does not change etale cohomology (edge map). The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic tool in the compactification/closed-support proof: Torsion cohomological dimension of a separably closed field. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   },
+   {
+    "node": "lem-kun-support-geometric-point-independent",
+    "why": "Generic tool in the compactification/closed-support proof: The support does not depend on the chosen geometric point. The unit has no replacement for this specific interface; the proof retains its original compactification, proper base change, closed support and torsion-dimension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-04ca",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-kun-support-geometric-point-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-138a54310",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-138a54310 (reviewer sub-agent of L); spot-checked: The nine-step proof and all 33 cited node statements/source locations check out, including coefficient category, fibre base change, support dimension, torsion cohomological dimension, and edge cases. `stmt_deps` omitted the explicitly used `def-weil-pbc-derived-categories` and `def-weil-pbc-scheme-conventions` (also flagged by `uses_not_cited`). Corrected JSON is in `fixes/dag/nodes/sec-smooth-purity/lem-dg-compact-support-amplitude.json`; review details are in `review.md`.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e238c0968",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, all four statement dependencies, exact declarations, hypotheses, edge cases, universes, docstrings, and verbatim signature. Reproduced both per-file compilations cleanly. No defects or fixes required; project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportAmplitudeCompactification",
+   "AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportAmplitude.lean",
+  "statement": "theorem isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasInvertibleExponent Λ Y] (d : ℕ) (hd : ∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : 2 * (d : ℤ) < q) : IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) (compactSupportAmplitudeCompactification k Y f)).obj ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The real-data helper specializes the existing Nagata compactification to the finite-type field base by supplying derived locally Noetherian and compact-space instances. The theorem uses the recorded ordinary unbounded candidate for this compactification on F[0]; the existing compactification comparisons identify it with Rf_! on this bounded-below input. There is no extra compactification, boundedness, constructibility, or finite-stalk hypothesis."
+ }
+}

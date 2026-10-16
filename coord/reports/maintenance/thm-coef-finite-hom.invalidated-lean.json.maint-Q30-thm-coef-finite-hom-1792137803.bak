@@ -1,0 +1,32 @@
+{
+ "item": "def-weil-derived-pullback-tensor-hom",
+ "consumer": "thm-coef-finite-hom",
+ "by": "Q30 maintenance",
+ "date": "2026-10-16",
+ "at": "2026-10-16T08:10:21.444271+00:00",
+ "reason": "The completion record names only proEtaleRingDerivedPullback and its termwise factorization. The recorded node defines pullback, derived tensor and internal Hom at finite, integral, rational and common-extension coefficient levels. Its own note explicitly limits coverage to one consumer's finite pullback clause. The referenced DerivedTensor takes chosen representatives and asserts no resolution independence; DerivedInternalHomOfUniverses supplies localized Hom and representative comparisons, but their recorded interface has no normalized tensor-Hom evaluation/adjunction on the intrinsic small pro-etale module derived category. The fixed-scalar adjunction and the exact intrinsic realization are partial alternatives without the required tensor/Hom/evaluation compatibility. Thus a pullback-only alias is not a complete stage-2 binding for this node. It falsely makes thm-coef-finite-hom ready; the worker correctly refuses to state another DAG node under the current bottom-up rule. This is a record defect, not a tool or permission failure.",
+ "previous_lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOperations",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullback",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors"
+  ],
+  "statement": "abbrev proEtaleRingDerivedPullback :\n    DerivedCategory (proEtaleRingModules Y R) ⥤ DerivedCategory (proEtaleRingModules X S)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "§1(B), finite-stage intrinsic presentation: the old Derived.Hom module imports legacy UpperLowerStar declarations that collide with the FiniteCoefficient declarations required by the recorded intrinsic extension-by-zero construction. Reuse the published intrinsic exact derived module pullback proEtaleRingDerivedPullback and its termwise factorization. For constant coefficients use the canonical constant-ring inverse-image identification. Tensor and internal Hom remain the existing constructions in Sheaf.Algebra.Homology.DerivedTensor and Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses, respectively; this consumer needs only the finite-level pullback clause, not integral, rational or common-stage operations. No new operation or arbitrary coefficient identification is supplied."
+ },
+ "previous_reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e5e8665f4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all nine dependencies, sources, constructions, docstrings, universes, edge cases and verbatim signature. Per-file scompile.py passed both views without diagnostics. No repairs required; branch unchanged."
+ },
+ "source_side_commit": "4edbfe7ec836ad07f39a71088ae2cfd8573e6e32",
+ "source_shared_commit": "30f82511f7"
+}

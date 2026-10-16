@@ -1,0 +1,124 @@
+{
+ "id": "lem-etale-proper-geometric-point-derived-copowers",
+ "kind": "statement",
+ "title": "Proper geometric-point derived direct image preserves copowers",
+ "statement": "Let Λ be a finite commutative ring, k an algebraically closed field, and p : X → Spec k proper. For every indexing type I and every object E in the ordinary unbounded derived category of small-etale Λ-module sheaves on X, the right derived direct image Rp_* preserves the coproduct cocone of the constant I-family at E.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F11",
+  "place": "Lemma 59.96.3 and its coproduct comparison argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Represent E by a K-injective complex. The termwise coproduct of I copies is again direct-image-acyclic by the finite torsion cohomological-dimension bound and filtered-colimit compatibility of proper etale cohomology. The finite-cohomological-dimension acyclic-complex theorem computes the unbounded derived direct image termwise, and the resulting degree-zero comparison is the canonical copower comparison. Localizing gives an isomorphism of the image cocone with a coproduct cocone.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-finite-cd-acyclic-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-finite-cd-acyclic-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F11",
+  "place": "Finite-coefficient proper cohomology and derived coproduct comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper derived direct image preserves copowers of finite coefficient etale sheaf complexes",
+   "results": "No exact result found.",
+   "verdict": "No exact Mathlib match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimit (Discrete.functor (fun _ => _)) rightDerived",
+   "results": "No exact result found.",
+   "verdict": "No exact Mathlib match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*copower|rightDerived.*copower",
+   "results": "No exact result found in the local library.",
+   "verdict": "No existing theorem matches the finite-coefficient proper geometric-point statement.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCoproducts",
+  "date": "2026-10-15",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-etale-proper-geometric-point-derived-coproducts",
+   "place": "Copower component of the target proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCopowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricPointDerivedCopowers.lean",
+  "declaration": "AlgebraicGeometry.Etale.proper_geometricPoint_preservesCopowers",
+  "statement": "theorem proper_geometricPoint_preservesCopowers\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (p : X ⟶ Spec (.of k)) [IsProper p]\n    (I : Type (u + 1))\n    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    PreservesColimit (Discrete.functor (fun _ : I ↦ E))\n      (R((p)_*[ModuleCat.{u + 1} Λ]))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T210832-L-2878482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T210832-L-2878482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
