@@ -15368,3 +15368,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:28 L: merged deliver/A2/WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity (stage 3; reviewer PASS; after a return; landing 20261016T032812-L-1930622 (interface); batch 20261016T032809; modules 9; new nodes 9)
 - 03:41 L: returned deliver/G4/Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed (reviewer RETURN: (reviewer X-3a0ba, head 3a0ba4da5) C1/C4: In dag/nodes/sec-proper-base-change/new-lem-weil-pbc-condensed-stratum-model-i)
 - 04:01 L: returned deliver/B2/Sheaf.Paper.ContinuousIntegralPushComparison (reviewer RETURN: (the landing tools, head ac838e96a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 04:01 L: returned deliver/C2/Sheaf.Paper.IntegralResidueExchange (reviewer RETURN: (the landing tools, head ca2b90cda) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
