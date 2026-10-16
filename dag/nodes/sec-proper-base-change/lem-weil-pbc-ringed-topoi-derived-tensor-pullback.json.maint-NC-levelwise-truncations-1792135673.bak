@@ -1,0 +1,285 @@
+{
+ "id": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "statement: canonical isomorphism between derived pullback of a derived tensor and tensor of derived pullbacks, with ordinary termwise pullback/tensor comparison and K-flat preservation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived tensor comparison for arbitrary ringed topoi",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to the universe of module sheaves, with sheaves of commutative rings $R,S$, and let $u:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, meaning an adjunction $u^{-1}\\dashv u_*$ whose left adjoint preserves finite limits. Equip it with a ring map $u^{-1}R\\to S$. Write $D(R)$ and $D(S)$ for the unbounded derived categories of the abelian categories of sheaves of modules over these rings [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Module pullback is $u^*M=S\\otimes_{u^{-1}R}u^{-1}M$, using the sheaf tensor product [def-pur-sheaf-tensor-product]; $Lu^*:D(R)\\to D(S)$ is its total left derived functor, computed by applying $u^*$ to K-flat resolutions with flat terms [def-pc-kflat-complex, lem-pc-kflat-resolution, lem-weil-pbc-ringed-topoi-derived-pullback]. Here a sheaf of modules is flat when tensoring with it is exact [def-pc-flat-sheaf-modules]. If $P$ is K-flat with flat terms, then $u^*P$ is K-flat with flat terms. Derived tensor is computed by the total tensor complex [def-pc-tensor-complex-sheaves] of K-flat resolutions [lem-weil-pbc-site-derived-tensor-descent]. For all $F,G\\in D(R)$ there is a canonical isomorphism\n$$\n Lu^*(F\\otimes_R^{\\mathbf L}G)\n \\xrightarrow{\\sim}Lu^*F\\otimes_S^{\\mathbf L}Lu^*G\n$$\nin $D(S)$, natural simultaneously in $F$ and $G$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, lines 3683-3724; and Tag 0G7E, label lemma-pullback-K-flat, lines 3507-3515"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Construct normalized ordinary comparison data using the specified algebraic inverse-image presentation, rather than a module lift specified only on underlying sets. Prove uniqueness directly: q_one identifies the insertion maps; transport arbitrary pairs of sections through the preserved binary product, apply the pure equations, and use the tensor/sheafification and extension-of-scalars universal properties twice to identify inverse tensorators. Proof irrelevance identifies all laws.",
+   "uses": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose quasi-isomorphisms $P\\to F$, $Q\\to G$ with $P,Q$ K-flat with flat terms using [lem-pc-kflat-resolution]. By [lem-weil-pbc-site-derived-tensor-descent], $T=\\operatorname{Tot}(P\\otimes_RQ)$ represents $F\\otimes_R^{\\mathbf L}G$, functorially on these representatives. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $u^*P,u^*Q$ are K-flat with flat terms (this also proves the preservation clause of the item), without a flatness assumption on the ring map. By [lem-weil-pbc-ringed-topoi-derived-pullback] they represent $Lu^*F,Lu^*G$. Applying the tensor descent statement over $S$, $\\operatorname{Tot}(u^*P\\otimes_Su^*Q)$ represents $Lu^*F\\otimes_S^{\\mathbf L}Lu^*G$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, choice of representatives; Tag 0G7E, lemma-pullback-K-flat"
+   }
+  },
+  {
+   "text": "The complex $T$ is K-flat directly from [def-pc-kflat-complex]. For an acyclic test complex $A$, reassociate the summands of the total tensors to identify $A\\otimes_R T$ with $(A\\otimes_RP)\\otimes_RQ$. The associator on the $(a,p,q)$ summand is the ordinary tensor associator, defined by $(a_0\\otimes p_0)\\otimes q_0\\leftrightarrow a_0\\otimes(p_0\\otimes q_0)$ and the balanced relations [def-pur-sheaf-tensor-product]. Distributivity over sums follows from the tensor universal property: a bilinear map from a direct sum is a family of bilinear maps from its summands. Both differentials have signs $1,(-1)^a,(-1)^{a+p}$ by [def-pc-tensor-complex-sheaves], so this is a chain isomorphism. The first inner tensor is acyclic by K-flatness of $P$, and tensoring it with $Q$ remains acyclic by K-flatness of $Q$. This is the elementary argument of Tag 07A2; no ringed-space tensor lemma is used.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2, lemma-tensor-product-K-flat, proof"
+   }
+  },
+  {
+   "text": "Each $P^p\\otimes_RQ^q$ is flat: tensoring a short exact sequence with it is, via the ordinary tensor associator, the composite of tensoring with $P^p$ and with $Q^q$, both exact by [def-pc-flat-sheaf-modules]. The associator is the balanced pure-tensor map of Step 2 [def-pur-sheaf-tensor-product]. For each $n$, $T^n=\\bigoplus_{p\\in\\mathbf Z}P^p\\otimes_RQ^{n-p}$ by [def-pc-tensor-complex-sheaves]. This is a countable sum of flat sheaves, hence flat by the explicit countable-flat-sum clause of [lem-pc-kflat-closure]. Together with Step 2 this permits the comparison $\\epsilon_T$ of [lem-weil-pbc-ringed-topoi-derived-pullback] to identify $Lu^*(F\\otimes_R^{\\mathbf L}G)$ with $Q_S(u^*T)$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 proof; Tag 0G6Q, sites-modules lemma-tensor-flats; Tag 03EU, sites-modules lemma-colimits-flat (2)"
+   }
+  },
+  {
+   "text": "Pullback commutes with the sums used in the total complex. Indeed [lem-weil-pbc-ringed-topoi-module-adjunction] gives, for any family $(M_i)$ and any $S$-module $H$, $\\operatorname{Hom}_S(u^*(\\bigoplus_iM_i),H)\\cong\\operatorname{Hom}_R(\\bigoplus_iM_i,u_*H)\\cong\\prod_i\\operatorname{Hom}_R(M_i,u_*H)\\cong\\prod_i\\operatorname{Hom}_S(u^*M_i,H)$. Thus $u^*(\\bigoplus_iM_i)$ with coprojections $u^*\\iota_i$ satisfies the coproduct universal property; its comparison with $\\bigoplus_iu^*M_i$ is an isomorphism, natural in all $M_i$. In particular this applies to the countable family indexed by $p+q=n$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 total-complex comparison; Tag 03D7, sites-modules lemma-adjoint-pullback-pushforward-modules"
+   }
+  },
+  {
+   "text": "For each $(p,q)$ invert the natural module isomorphism [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] to obtain $u^*P^p\\otimes_Su^*Q^q\\to u^*(P^p\\otimes_RQ^q)$. Take their direct sum and compose with the coproduct isomorphism of Step 4. This gives a degreewise isomorphism $\\beta:\\operatorname{Tot}(u^*P\\otimes_Su^*Q)\\to u^*T$. Module naturality makes it commute with $d_P\\otimes1$ and $1\\otimes d_Q$ separately. Pullback on modules is additive (its map is $1_S\\otimes u^{-1}(-)$), so the scalar signs $(-1)^p$ in [def-pc-tensor-complex-sheaves] are preserved. Hence $\\beta$ is a chain isomorphism, natural simultaneously in all complex maps $P\\to P_1,Q\\to Q_1$.",
+   "uses": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final displayed isomorphism"
+   }
+  },
+  {
+   "text": "On the K-flat representatives define the comparison in the direction of the statement as $\\epsilon_T$ followed by $Q_S(\\beta)^{-1}$, with the representative identifications of Step 1. Every factor is an isomorphism by Steps 1--5. The transformation $\\epsilon$ is natural on the homotopy category by [lem-weil-pbc-ringed-topoi-derived-pullback], and $\\beta$ is natural in each complex variable by Step 5, so this comparison is natural on $\\mathcal P_R\\times\\mathcal P_R$. By [lem-weil-pbc-site-derived-tensor-descent], localizing $\\mathcal P_R$ at quasi-isomorphisms is equivalent to $D(R)$, and natural transformations extend uniquely along this localization in both variables. Therefore these comparisons give a canonical natural isomorphism on $D(R)\\times D(R)$. In particular the naturality equations for quasi-isomorphisms remain valid after inversion, which proves independence of the representative resolutions and simultaneous naturality for arbitrary derived morphisms. No localization of ordinary termwise pullback on all complexes is asserted.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 conclusion, using Tag 06YY computation and Tags 06YT/06YU tensor descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and 0G7E as before; ordinary normalization and uniqueness use sites-modules Tag 03EL, with construction separated from the proved uniqueness argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of ringed topoi derived pullback is compatible with derived tensor products of arbitrary unbounded complexes",
+   "results": "Hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback, PresheafOfModules.pullbackComp. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived inverse image functor for sheaves of modules on a ringed site preserves the tensor product of two unbounded derived complexes",
+   "results": "Hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Tor'_obj_map. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "Hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|[Tt]ensor.*[Dd]erived|pullbackComp",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a tensor product is the derived tensor product of pullbacks on ringed topoi",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived pullback functor on module sheaves is strong monoidal for the derived tensor product",
+   "results": "8 hits; top: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits; top: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|monoidal|tensor",
+   "results": "0 hits; top: ; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "def-weil-pbc-four-corners",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "worker": "stage1",
+  "summary": "Repair: corrected the derived-pullback comparison and removed nonexistent ordinary pullback localization; proved site-level K-flat tensor closure directly; justified flat total terms using exactness and countable sums; derived coproduct preservation from a generic module adjunction; made two-variable descent explicit. Four smaller statement-only inputs, all searched afresh, replace the two returned nodes and add the missing adjunction and generic tensor descent.",
+  "blueprint": "Realizes def-weil-pbc-four-corners statement clauses \"Apply the canonical ordinary pullback/tensor comparison\", \"choose a K-flat representative\", and \"On these representatives the comparison is the natural tensor map\". This is a foundational tool, not a replacement for any geometric step of sk-thm-properbasechange.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Uses only its generic countable direct sums of flat sheaves clause to check the total tensor has flat terms; the proper-base-change unit contains no such homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-2b14a4187",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-2b14a4187 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements. Stacks 07A4/06YY/03EL/03D7 and K-flat descent sources support all six steps and four new nodes; nonflat Z→F₂ checks confirm the corrected comparison domain/direction. Accepted lem-pc-kflat-closure as a generic tool. Master coefficient categories and base-change morphisms remain distinct and unchanged. Detailed review and excluded checker-path diagnostics recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleCanonicalTensorPullback",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCanonicalTensorPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensor",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPreadditive",
+   "AlgebraicGeometry.Scheme.proEtaleFlatRepresentatives",
+   "AlgebraicGeometry.Scheme.ProEtaleTensorModel",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPair",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback_naturality",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotal",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotal_isIso",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotalIso",
+   "AlgebraicGeometry.Scheme.proEtaleCanonicalTensorPullback",
+   "AlgebraicGeometry.Scheme.proEtaleCanonicalTensorComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleCanonicalTensorPullback.lean",
+  "statement": "theorem proEtaleCanonicalTensorPullback (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) : (∀ P : CochainComplex (proEtaleRingModules Y R) ℤ, proEtaleFlatRepresentatives Y R P → proEtaleFlatRepresentatives X S (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) ∧ ∃! alpha : a.tensor ⋙ proEtaleRingDerivedPullback f R S c ≅ ((proEtaleRingDerivedPullback f R S c).prod (proEtaleRingDerivedPullback f R S c)) ⋙ b.tensor, ∀ (P Q : CochainComplex (proEtaleRingModules Y R) ℤ) (hp : proEtaleFlatRepresentatives Y R P) (hq : proEtaleFlatRepresentatives Y R Q), ∃ (hp' : proEtaleFlatRepresentatives X S (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) (hq' : proEtaleFlatRepresentatives X S (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)), (proEtaleRingDerivedPullback f R S c).map (a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫ alpha.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫ b.tensor.map (Prod.mkHom ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P) ((proEtaleRingDerivedPullbackFactors f R S c).hom.app Q)) = (proEtaleRingDerivedPullbackFactors f R S c).hom.app (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor Y R)) ≫ (DerivedCategory.Q.mapIso (proEtaleTensorPullbackTotalIso f R S c P Q)).inv ≫ b.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Section 1(B): the old ringedTopoiDerivedTensorPullback record returns only Nonempty of a natural isomorphism, with no equation relating it to rR/rS or the ordinary comparison. The replacement retains K-flat/flat-term preservation and characterizes the unique derived natural isomorphism by its square on every pair of K-flat flat-term representatives. Helpers construct the signed total comparison from ordinary pure-tensor maps and supply its ordinary unit normalization. Qh-to-Q transports are explicit. The old module is imported and its declaration remains available; no mathematical statement or other node field is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6454912c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Full independent review completed; all three delivered modules compile together via scompile.py with no errors or warnings, and no substantive defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dbf98",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261016T061028-L-328141",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, Lean files, DAG metadata, change record, and direct importer behavior matched the stage-3 review brief; all delivered files compiled cleanly."
+ }
+}
