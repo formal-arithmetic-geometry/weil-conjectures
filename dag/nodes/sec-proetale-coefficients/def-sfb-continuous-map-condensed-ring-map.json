@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-continuous-map-condensed-ring-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Functoriality of $\\underline T$ in $T$",
- "statement": "Let $\\varphi\\colon T\\to T'$ be a continuous ring homomorphism of topological rings. The\nmaps\n\n$$\n\\varphi_*\\colon\\underline T(S)=C(S,T)\\to C(S,T')=\\underline{T'}(S),\\qquad a\\mapsto\\varphi\\circ a,\n$$\n\nform a morphism of condensed rings $\\varphi_*\\colon\\underline T\\to\\underline{T'}$\n([def-sfb-continuous-map-condensed-ring]). Hence they also form a morphism of the\nunderlying ring objects ([sk-def-sfb-ring-object]). This construction is strictly\nfunctorial: $(\\mathrm{id}_T)_*=\\mathrm{id}$, and $(\\psi\\circ\\varphi)_*=\\psi_*\\circ\\varphi_*$\nfor a further continuous ring homomorphism $\\psi\\colon T'\\to T''$.",
+ "statement": "Let $\\varphi\\colon T\\to T'$ be a continuous ring homomorphism of topological rings. For every profinite set $S$, the\nmaps\n\n$$\n\\varphi_*\\colon\\underline T(S)=C(S,T)\\to C(S,T')=\\underline{T'}(S),\\qquad a\\mapsto\\varphi\\circ a,\n$$\n\nform a morphism of condensed rings $\\varphi_*\\colon\\underline T\\to\\underline{T'}$\n([def-sfb-continuous-map-condensed-ring]). Hence they also form a morphism of the\nunderlying ring objects ([sk-def-sfb-ring-object]). This construction is strictly\nfunctorial: $(\\mathrm{id}_T)_*=\\mathrm{id}$, and $(\\psi\\circ\\varphi)_*=\\psi_*\\circ\\varphi_*$\nfor every topological ring $T''$ and further continuous ring homomorphism $\\psi\\colon T'\\to T''$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.md",
   "place": "node def-sfb-continuous-map-condensed-ring-map, order 1524"
@@ -18,24 +18,127 @@
  ],
  "proof": [
   {
-   "text": "A composite of continuous maps is continuous, so $\\varphi\\circ a\\in C(S,T')$. Because\n$\\varphi$ is a ring homomorphism and the operations are pointwise, $a\\mapsto\\varphi\\circ a$\nis a ring homomorphism. It commutes with precomposition, since\n$\\varphi\\circ(a\\circ u)=(\\varphi\\circ a)\\circ u$, so it is a morphism of sheaves of rings.\nBy part 3 of [sk-def-sfb-ring-object], it is then a morphism of ring objects. The identities\n$\\mathrm{id}\\circ a=a$ and $(\\psi\\circ\\varphi)\\circ a=\\psi\\circ(\\varphi\\circ a)$ give\nfunctoriality.",
+   "text": "For each profinite set $S$ define $f_S(a)=\\varphi\\circ a$. This lies in $C(S,T')$ because $a$ and $\\varphi$ are continuous. The rings of sections in [def-sfb-continuous-map-condensed-ring] have pointwise operations. For every $s\\in S$ one has $f_S(a+b)(s)=\\varphi(a(s)+b(s))=\\varphi(a(s))+\\varphi(b(s))$, and $f_S(ab)(s)=\\varphi(a(s)b(s))=\\varphi(a(s))\\varphi(b(s))$; also $f_S(0)=0$ and $f_S(1)=1$. Thus $f_S$ is a ring homomorphism, including when $S$ is empty.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "entire proof"
+   }
+  },
+  {
+   "text": "For a continuous map $u:S'\\to S$ of profinite sets and a section $a$, the restriction maps of [def-sfb-continuous-map-condensed-ring] give $f_{S'}(a\\circ u)=\\varphi\\circ(a\\circ u)=(\\varphi\\circ a)\\circ u=f_S(a)\\circ u$. Hence the $f_S$ form a natural transformation of presheaves of rings. Both presheaves are sheaves by the cited statement. A morphism of sheaves is a natural transformation between their underlying presheaves, so these components define the required morphism of condensed rings; there is no further descent condition for a morphism.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "entire proof"
+   }
+  },
+  {
+   "text": "Part 3 of [sk-def-sfb-ring-object] applies on the site of profinite sets to the sheaf-of-rings morphism just constructed. Its statement says that a morphism of sheaves of rings is a morphism of their underlying ring objects. Therefore the same underlying abelian-sheaf map is compatible with the multiplications and units in the item.",
    "uses": [
     "sk-def-sfb-ring-object"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "entire proof"
+   }
+  },
+  {
+   "text": "At every $S$ and every section $a$, postcomposition with $\\mathrm{id}_T$ sends $a$ to $a$, and postcomposition with $\\psi\\circ\\varphi$ sends $a$ to $\\psi\\circ(\\varphi\\circ a)$. Thus the component ring homomorphisms for identity and composition equal those of the identity and composite sheaf morphisms, respectively. Equality of natural transformations is equality of components, so $(\\mathrm{id}_T)_*=\\mathrm{id}$ and $(\\psi\\circ\\varphi)_*=\\psi_*\\circ\\varphi_*$. Forgetting to underlying abelian sheaves keeps these same maps, so the equalities also hold for their ring-object morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "entire proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-continuous-map-condensed-ring",
   "sk-def-sfb-ring-object"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring-map.proof.md",
+  "place": "entire proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "continuousMapRingSheafMap|continuousMapRingPresheafMap",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "Mathlib/"
+  },
+  {
+   "tool": "leansearch",
+   "query": "postcomposition by a continuous ring homomorphism defines a morphism of condensed ring sheaves",
+   "results": "8 hits: TopCat.continuousFunctions.map; LocallyConstant.mapRingHom; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; ContinuousMapZero.nonUnitalStarAlgHom_postcomp; ContinuousMap.compRightAlgHom; AlgebraicGeometry.Spec.sheafedSpaceMap; SheafOfModules.pushforward; ContinuousLinearMap.postcomp_uniformConvergenceCLM",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match; sectionwise postcomposition is an ingredient only"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousMapRingSheafMap, RingCat, Sheaf",
+   "results": "0 hits: loogle: unknown identifier 'continuousMapRingSheafMap'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: unknown identifier; followed by a second Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous map induced morphism of condensed rings by postcomposition",
+   "results": "8 hits: CondensedMod.hom_naturality_apply; CondensedSet.hom_naturality_apply; LightCondSet.toTopCatMap; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; CondensedSet.toTopCatMap; TopCat.continuousFunctions.pullback; lightCondSetToTopCat_map; topCatToSheafCompHausLike_map_val_app",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match; sectionwise postcomposition is an ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousFunctions.*map|compRightAlgHom",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "Mathlib/Topology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functorial map between sheaves of continuous maps induced by continuous ring homomorphism",
+   "results": "8 hits: TopCat.continuousFunctions.map; TopCat.Sheaf.pushforward; CategoryTheory.Functor.sheafPushforwardContinuous; AlgebraicGeometry.LocallyRingedSpace.Hom; AlgebraicGeometry.Spec.toSheafedSpace_map; AlgebraicGeometry.Spec.sheafedSpaceMap; AlgebraicGeometry.Spec.locallyRingedSpaceMap; SheafOfModules.pushforward_map_val",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match; sectionwise postcomposition is an ingredient only"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.continuousFunctions.map, ContinuousMap.compRightAlgHom",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "postcomposition continuous ring homomorphism on continuous maps sheaf",
+   "results": "8 hits: RingHom.compLeftContinuous_apply_apply; RingHom.compLeftContinuous; TopCat.continuousFunctions.map; TopCat.continuousFunctions.pullback; ContinuousMap.compRightAlgHom; AlgebraicGeometry.Spec.sheafedSpaceMap_comp; CommRingCat.HomTopology.continuous_precomp; LocallyConstant.comapRingHom",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match; sectionwise postcomposition is an ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "compLeftContinuous",
+   "results": "15 hits: Mathlib/Topology/ContinuousMap/Algebra.lean; Mathlib/Topology/ContinuousMap/Algebra.lean; Mathlib/Topology/ContinuousMap/Algebra.lean; Mathlib/Topology/ContinuousMap/Algebra.lean; Mathlib/Topology/ContinuousMap/Algebra.lean; Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean; Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean; Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match; sectionwise postcomposition is an ingredient only",
+   "subdirectory": "Topology/ContinuousMap"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -53,5 +156,20 @@
   "Profinite.continuousMapRingSheafMap"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-continuous-map-condensed-ring-map",
+  "worker": "stage1",
+  "summary": "Retained the imported functoriality statement and expanded its proof into the sectionwise postcomposition, sheaf morphism, ring-object morphism, and strict functoriality argument. The existing condensed-ring and ring-object nodes supply the non-elementary interfaces; no new nodes or Mathlib leaves were created.",
+  "blueprint": "The first two sentences of the blueprint proof give step 1 (well-defined sectionwise ring maps); its precomposition equality gives step 2 (naturality between the specified sheaves); its part-3 citation gives step 3 (underlying ring objects); its final two identities give step 4 (strict functoriality). This follows the functoriality clause of sk-def-sfb-condensed-ring without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-faf61d31d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-faf61d31d (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, and current blueprint sources in full. All four steps are valid; naturality, ring-object compatibility, and strict functoriality match the sources. Edge cases and whole-DAG reuse checks found no gap or duplicate. No new nodes or repairs; detailed checks are in review.md."
+ }
 }
