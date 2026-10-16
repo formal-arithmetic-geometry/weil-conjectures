@@ -3,24 +3,149 @@
  "blueprint": {
   "is": "sk-def-sp-scalar-extension",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-sp-scalar-extension-functor"
+  ]
  },
  "kind": "definition",
  "title": "Extension of coefficients",
- "statement": "Let $A\\to B$ be a map of finite commutative rings, each killed by a power of\n$\\ell$, and let $T$ be a scheme. For $K\\in\\Dctf(T_{\\mathrm{proét}},A)$ we write\n\n$$\nK_B=K\\otimes^{\\mathbf L}_{A_T}B_T\\in\\Dctf(T_{\\mathrm{proét}},B),\n$$\n\nand for a morphism $u:K\\to L$ we write\n$u_B=u\\otimes^{\\mathbf L}_{A_T}\\mathrm{id}_{B_T}$; this is a functor\n$\\Dctf(T_{\\mathrm{proét}},A)\\to\\Dctf(T_{\\mathrm{proét}},B)$. For a further map\n$B\\to C$, associativity of the tensor product gives $(K_B)_C\\simeq K_C$,\ncompatibly with morphisms.",
+ "statement": "Fix a prime $\\ell$. For a scheme $T$, use the small pro-étale site and the ordinary derived categories of sheaves of modules of [def-weil-pbc-proetale-site]. For a finite commutative ring $R$, write $R_T$ for its constant sheaf of rings [def-weil-pbc-constant-sheaf]. Write $\\Dctf(T_{\\mathrm{proét}},R)$ for the full subcategory whose objects have bounded constructible cohomology, with constructibility as in [def-weil-proetale-constructible-sheaf], and finite Tor amplitude as in [def-weil-proetale-tor-amplitude].\n\nLet $A\\to B$ be a map of finite commutative rings, each killed by a power of\n$\\ell$, and let $T$ be a scheme. For $K\\in\\Dctf(T_{\\mathrm{proét}},A)$ we write\n\n$$\nK_B=K\\otimes^{\\mathbf L}_{A_T}B_T\\in\\Dctf(T_{\\mathrm{proét}},B),\n$$\n\nand for a morphism $u:K\\to L$ we write\n$u_B=u\\otimes^{\\mathbf L}_{A_T}\\mathrm{id}_{B_T}$; this is a functor\n$\\Dctf(T_{\\mathrm{proét}},A)\\to\\Dctf(T_{\\mathrm{proét}},B)$. For a further map\n$B\\to C$ to a finite commutative ring $C$ killed by a power of $\\ell$, associativity of the tensor product gives $(K_B)_C\\simeq K_C$,\ncompatibly with morphisms.\n\nPrecisely, $(-)_B$ is the restriction to these full subcategories of the derived change-of-rings functor for $A_T\\to B_T$ in [lem-pur-derived-change-of-rings], with the $B_T$-action on the tensor factor $B_T$. This restriction is well-defined by clause 2 of [det-sp-scalar-extension-functor]. For $A\\to B\\to C$ the displayed comparison is the natural associativity isomorphism of clause 4 of [det-sp-scalar-extension-functor].\n\nFor compatibility with the unit's coefficient convention, give each finite ring $R$ the discrete topology and use the condensed ring $\\underline R$ of [sk-def-sfb-condensed-ring], together with the pullback from the point [sk-def-sfb-pullback-from-point] and the internal/sectionwise module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use the canonical ring identification $p_T^*\\underline R\\cong R_T$. Under these identifications, the displayed associativity isomorphism is the finite-discrete instance of clause 3 of [det-prop-scalar-six-pullback], while the restriction to the finite-Tor constructible subcategories is supplied by [det-sp-scalar-extension-functor].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/_section.md",
   "place": "node sk-def-sp-scalar-extension, order 1819"
  },
  "stmt_deps": [
-  "sk-lem-sf-flat-model"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "lem-pur-derived-change-of-rings",
+  "det-sp-scalar-extension-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-scalar-six-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For the coefficient convention, a continuous map from a profinite set $S$ to a finite discrete ring $R$ has a finite clopen fibre partition. On this covering its restrictions are constant, so the sheaf $S\\mapsto C(S,R)$ of [sk-def-sfb-condensed-ring] is the sheafification of the constant presheaf $R$, as in [def-weil-pbc-constant-sheaf]. Present the additive group of $R$ as a cokernel of a map between free abelian groups. The tensor unit is the constant abelian sheaf $\\mathbf Z$ by [sk-def-sfb-sheaf-tensor]. The strong monoidal left adjoint $p_T^*$ of [sk-def-sfb-pullback-from-point] preserves sums, cokernels, and the tensor unit, so it takes this constant presentation to the constant presentation of $R_T$. This identifies $p_T^*\\underline R$ with $R_T$, naturally in $R$; multiplication and unit agree since the strong monoidal structure preserves their maps between these constant presentations.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-weil-pbc-constant-sheaf",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/_section.md",
+    "place": "Final compatibility paragraph: finite-discrete condensed coefficient convention and canonical identification p_T^* underline R ≅ R_T (the coefficient presentation and strong-monoidal comparison)."
+   }
+  },
+  {
+   "text": "The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] leaves underlying abelian sheaves and section maps unchanged. Relative tensor products on the two sides represent the same balanced bilinear sheaf maps, so they agree canonically. Apply this equivalence termwise to complexes: cohomology, acyclicity, and the K-flat condition of [def-pc-kflat-complex] are unchanged. Consequently the derived coefficient tensors and their associativity maps agree under this equivalence, rather than merely agreeing after forgetting the coefficient actions. The small site and coefficient universe are chosen as in [def-weil-pbc-proetale-site]. The strong monoidal sheafification of [sk-def-sfb-sheaf-tensor] supplies the equivalence's monoidal-localization hypothesis: if $a(f)$ is invertible, then $a(f\\otimes1)=a(f)\\otimes1$ is invertible.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-proetale-site",
+    "def-pc-kflat-complex",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/_section.md",
+    "place": "Final compatibility paragraph: internal/sectionwise module equivalence and comparison of derived coefficient tensors under the chosen coefficient categories."
+   }
+  },
+  {
+   "text": "For $A_T\\to B_T$, [lem-pur-derived-change-of-rings] supplies the ambient derived functor, with its $B_T$ action on the right factor. Clause 2 of [det-sp-scalar-extension-functor] supplies its restriction to the stated constructible finite-Tor subcategories. Clause 4 supplies the natural comparison $(K_B)_C\\cong K_C$, including $\\alpha_L\\circ(u_B)_C=u_C\\circ\\alpha_K$. Under the coefficient identifications of steps 1 and 2, clause 3 of [det-prop-scalar-six-pullback] is this ambient associator: both are induced on a K-flat representative by $((x\\otimes b)\\otimes c)\\mapsto x\\otimes\\varphi(b)c$, for the given map $\\varphi:B\\to C$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "det-sp-scalar-extension-functor",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/_section.md",
+    "place": "Definition statement: restriction to Dctf and associativity for A→B→C; together with the cited det-sp-scalar-extension-functor clauses and finite-discrete instance of det-prop-scalar-six-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "det-sp-scalar-extension-functor",
+  "det-prop-scalar-six-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/_section.md",
+  "place": "Coefficient convention and well-definedness of the displayed restriction and associativity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|baseChange|[Cc]onstructible",
+   "results": "{\"t\": \"2026-10-16T15:00:30Z\", \"tool\": \"grep\", \"query\": \"scalarExtension|changeOfRings|baseChange|[Cc]onstructible\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"bb0d3ce43307be64\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for finite-coefficient derived scalar extension on constructible finite-Tor pro-etale categories; the returned files do not state that construction or its preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "{\"t\": \"2026-10-16T15:00:31Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the service returned no declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor extension of coefficients preserves bounded constructible sheaves with finite Tor amplitude on the proetale site",
+   "results": "{\"t\": \"2026-10-16T15:00:31Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor extension of coefficients preserves bounded constructible sheaves with finite Tor amplitude on the proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"Algebra.FormallyEtale.instTensorProduct\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"LightCondensed.lanLightCondSet\", \"CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\"], \"digest\": \"c496f2c7d28bf0e4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module, ring-theoretic, or generic sheaf statements do not construct this derived coefficient functor or assert its constructible finite-Tor preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a map of finite commutative rings preserves bounded constructible proetale complexes of finite Tor amplitude and composes by tensor associativity",
+   "results": "{\"t\": \"2026-10-16T15:00:34Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of scalars along a map of finite commutative rings preserves bounded constructible proetale complexes of finite Tor amplitude and composes by tensor associativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.Extension.tensorCotangentSpace\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"Condensed.profiniteSolid\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\"], \"digest\": \"3a1d0e316d775519\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module, ring-theoretic, or generic sheaf statements do not construct this derived coefficient functor or assert its constructible finite-Tor preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(scalar|coefficien|change.of.rings)|[Cc]onstructible.*(sheaf|[Tt]or)|[Kk][Ff]lat",
+   "results": "{\"t\": \"2026-10-16T15:00:53Z\", \"tool\": \"grep\", \"query\": \"derived.*(scalar|coefficien|change.of.rings)|[Cc]onstructible.*(sheaf|[Tt]or)|[Kk][Ff]lat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/Submonoid/Pointwise.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\"], \"digest\": \"fb3a28e8a35102c0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for finite-coefficient derived scalar extension on constructible finite-Tor pro-etale categories; the returned files do not state that construction or its preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"extension\"",
+   "results": "{\"t\": \"2026-10-16T15:00:53Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the service returned no declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring for derived categories of sheaves is functorial under tensor product, preserves constructible complexes of finite Tor dimension, and successive changes are naturally isomorphic to direct change",
+   "results": "{\"t\": \"2026-10-16T15:00:55Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficient ring for derived categories of sheaves is functorial under tensor product, preserves constructible complexes of finite Tor dimension, and successive changes are naturally isomorphic to direct change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Tor\"], \"digest\": \"961eedbbc4975279\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: mapDerivedCategory and its factors require an exact underived functor; coefficient tensor is not assumed exact, and no returned declaration gives constructible finite-Tor preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "def changeOfRings|def mapDerivedCategory|mapDerivedCategoryFactors",
+   "results": "{\"t\": \"2026-10-16T15:01:41Z\", \"tool\": \"grep\", \"query\": \"def changeOfRings|def mapDerivedCategory|mapDerivedCategoryFactors\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\"], \"digest\": \"a51b45cee3071dda\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for finite-coefficient derived scalar extension on constructible finite-Tor pro-etale categories; the returned files do not state that construction or its preservation theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -39,5 +164,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-scalar-extension"
+ "unit": "sk-def-sp-scalar-extension",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sp-scalar-extension",
+  "worker": "stage1",
+  "summary": "Split this definition by naming the existing site/module-derived-category, constant coefficient, intrinsic constructibility, Tor-amplitude and derived-change-of-rings interfaces. Retained every clause and all original hypotheses; the existing same-unit det-sp-scalar-extension-functor supplies the restriction and natural associativity, so no new node or proof obligation is duplicated. Replaced the inapplicable direct flat-model dependency, searched both source checkouts and the whole blueprint, and recorded the actual Mathlib queries. No attachment or Mathlib leaf was found. Preflight repair: made the finite-discrete incarnation of the existing general coefficient associator explicit, including the constant-ring and module-category identifications; this realizes the unit's scalar-six citation without adding scheme hypotheses or identifying non-finite coefficients. Second reading: stated the type of C explicitly and separated the finite-discrete coefficient comparison into cited justification steps, retaining the existing preservation interface.",
+  "blueprint": "Realizes the full current _section.md: object notation K_B, morphism notation u_B, restriction to Dctf, and natural comparison for A -> B -> C. The existing detailed blueprint node det-sp-scalar-extension-functor states the underlying construction and all well-definedness/associativity clauses. The unit has no proof steps; this definition adds no independent theorem proof. The final paragraph realizes the unit's explicit sk-prop-scalar-six reference using only the ambient associativity clause of det-prop-scalar-six-pullback, with finite-discrete coefficient and internal/sectionwise module identifications written out. The three justification steps check the finite-discrete coefficient presentation and the final associativity sentence; no new lemma replaces the same-unit construction."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-a10a5eb52",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-a10a5eb52 (reviewer sub-agent of L); spot-checked: One repairable stage-1 fault: all three proof steps lacked mandatory source document/place fields. Added precise blueprint source locations in fixes/dag/nodes/sec-smooth-purity/sk-def-sp-scalar-extension.json. Mathematics, hypotheses, routes, citations, and edge cases otherwise pass; no new nodes.; 1 file(s) fixed by the reviewer"
+ }
 }
