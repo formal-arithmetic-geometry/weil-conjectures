@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1324**, closure **37**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1325**, closure **38**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -45,14 +45,14 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1123 | 30 |
+| Sheaf | 1124 | 31 |
 | WeilConjectures | 201 | 7 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2282 | 780 | 1502 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2236 | 778 | 1458 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1980 | 36 | 1944 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2282 | 781 | 1501 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2236 | 779 | 1457 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1980 | 37 | 1943 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
@@ -60,7 +60,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3601 |
 | decomposed | 52 |
-| moved | 3990 |
+| moved | 3991 |
 | pruned | 131 |
 | other | 603 |
 
@@ -73,7 +73,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | A3 | 122 | 118 | 78 | 40 | 53/122 (43.4%) |
 | A4 | 69 | 73 | 45 | 28 | 35/69 (50.7%) |
 | B2 | 125 | 131 | 83 | 48 | 52/125 (41.6%) |
-| B3 | 143 | 150 | 85 | 65 | 60/143 (42.0%) |
+| B3 | 144 | 151 | 87 | 64 | 61/144 (42.4%) |
 | B4 | 65 | 68 | 45 | 23 | 30/65 (46.2%) |
 | C1 | 141 | 144 | 107 | 37 | 72/141 (51.1%) |
 | C2 | 122 | 117 | 83 | 34 | 56/122 (45.9%) |
@@ -190,8 +190,8 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation | 7 | 1 | B2 |
 | Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover | 7 | 1 | E4 |
 | Sheaf.Paper.CondensedConstructibleOneStep | 7 | 1 | J1 |
-| Sheaf.Paper.IntegralConstructibleSheafHom | 7 | 1 | B3 |
 | Sheaf.Paper.IntegralMatrixAnalyticCover | 7 | 1 | C1 |
+| Sheaf.Paper.IntegralResidueComparisons | 7 | 1 | B4 |
 
 Modules pruned since the imports baseline:
 
