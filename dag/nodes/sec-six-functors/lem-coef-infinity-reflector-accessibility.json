@@ -18,18 +18,144 @@
  },
  "kind": "statement",
  "title": "Small local tests make an existing infinity reflector accessible",
- "statement": "Use accessible infinity categories and universes as in [def-coef-complete-algebroid], and coherent mapping spaces as in [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal C$ be accessible, let $\\mathcal E\\subset\\mathcal C$ be a replete full subcategory with inclusion $i$, and suppose a mapping-space adjunction $L:\\mathcal C\\rightleftarrows\\mathcal E:i$ is already given with $L$ left adjoint, meaning a natural equivalence $\\operatorname{Map}_{\\mathcal E}(LX,e)\\simeq\\operatorname{Map}_{\\mathcal C}(X,ie)$ of mapping-space bifunctors. Let $T$ consist of all arrows $f$ of $\\mathcal C$ for which $iL(f)$ is an equivalence. Suppose there exists a small set $S_0\\subset T$ such that every object $Z$ for which $\\operatorname{Map}_{\\mathcal C}(B,Z)\\to\\operatorname{Map}_{\\mathcal C}(A,Z)$ is an equivalence for each $(A\\to B)\\in S_0$ has the same property for every $(A\\to B)\\in T$. Then $\\mathcal E$ is accessible and the endofunctor $iL:\\mathcal C\\to\\mathcal C$ is accessible. Accessibility of a functor between accessible infinity categories means preservation of small $\\kappa$-filtered colimits for some regular $\\kappa$; no existence of an adjoint is asserted here.",
+ "statement": "Use the universes of [def-coef-complete-algebroid], smallness and accessible infinity categories as in [def-coef-presentable-infinity-category], and coherent mapping spaces, equivalences and full subcategories as in [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal C$ be accessible, let $\\mathcal E\\subset\\mathcal C$ be a replete (closed under equivalence in $\\mathcal C$) full subcategory with inclusion $i$, and suppose a mapping-space adjunction $L:\\mathcal C\\rightleftarrows\\mathcal E:i$ is already given with $L$ left adjoint, meaning a natural equivalence $\\operatorname{Map}_{\\mathcal E}(LX,e)\\simeq\\operatorname{Map}_{\\mathcal C}(X,ie)$ of mapping-space bifunctors. Let $T$ consist of all arrows $f$ of $\\mathcal C$ for which $iL(f)$ is an equivalence. Suppose there exists a small set $S_0\\subset T$ such that every object $Z$ for which $\\operatorname{Map}_{\\mathcal C}(B,Z)\\to\\operatorname{Map}_{\\mathcal C}(A,Z)$ is an equivalence for each $(A\\to B)\\in S_0$ has the same property for every $(A\\to B)\\in T$. Then $\\mathcal E$ is accessible and the endofunctor $iL:\\mathcal C\\to\\mathcal C$ is accessible. Accessibility of a functor between accessible infinity categories means preservation of small $\\kappa$-filtered colimits for some regular $\\kappa$; no existence of an adjoint is asserted here.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Proposition 5.5.4.2(3), implication (iii) to (i) and (ii), for an existing localization functor Read online; not archived in literature/. No matching Stacks tag for this assertion."
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Accessibility of $\\mathcal C$ gives local smallness, and fullness identifies each mapping space of $\\mathcal E$ with one of $\\mathcal C$, so the small-mapping-space hypothesis of the adjoint criterion holds. Write $\\eta_X:X\\to iLX$ and $\\epsilon_e:Lie\\to e$ for the coherent unit and counit supplied by the given mapping-space adjunction; the cited adjoint criterion supplies their triangle identities. Full faithfulness of $i$ and the adjunction identify precomposition with $\\epsilon_e$ with an equivalence $\\operatorname{Map}_{\\mathcal E}(e,e\\prime)\\simeq\\operatorname{Map}_{\\mathcal E}(Lie,e\\prime)$, naturally in $e\\prime$. Taking $e\\prime=Lie$ gives $r:e\\to Lie$ with $r\\epsilon_e\\simeq\\mathrm{id}$. Taking $e\\prime=e$ and using injectivity on components then gives $\\epsilon_e r\\simeq\\mathrm{id}$, since both composites with $\\epsilon_e$ agree. Thus $\\epsilon_e$ is an equivalence. The triangle $\\epsilon_{LX}\\circ L\\eta_X\\simeq\\mathrm{id}_{LX}$ implies that $L\\eta_X$, and therefore $iL\\eta_X$, is an equivalence. In particular $\\eta_X\\in T$ for every $X$. These inverse equations are equations in the homotopy category witnessed by paths in the stated mapping spaces, hence give equivalences under the enhanced definition.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: units, counits and the localization unit"
+   }
+  },
+  {
+   "text": "For $e\\in\\mathcal E$ and $f:A\\to B$ in $T$, full faithfulness of $i$ reflects equivalences: the inverse of $iLf$ lifts in the full subcategory with its inverse homotopies. Thus $Lf$ is an equivalence, and the adjunction identifies $\\operatorname{Map}_{\\mathcal C}(f,ie)$ with $\\operatorname{Map}_{\\mathcal E}(Lf,e)$, an equivalence. So every $ie$ is $T$-local. Conversely let $Z$ be $T$-local. Step 1 puts $\\eta_Z$ in $T$, so precomposition $\\operatorname{Map}_{\\mathcal C}(iLZ,Z)\\to\\operatorname{Map}_{\\mathcal C}(Z,Z)$ supplies $r:iLZ\\to Z$ with $r\\eta_Z\\simeq\\mathrm{id}_Z$. The target $iLZ$ is already $T$-local, so precomposition with $\\eta_Z$ into that target is an equivalence too. The maps $\\eta_Zr$ and $\\mathrm{id}_{iLZ}$ have homotopic composites with $\\eta_Z$, hence are homotopic. Therefore $\\eta_Z$ is an equivalence, and repleteness puts $Z$ in $\\mathcal E$. We have identified $\\mathcal E$ with the $T$-local objects. Since $S_0\\subset T$, every $T$-local object is $S_0$-local; the detecting hypothesis gives the converse. Consequently $\\mathcal E$ is exactly the full subcategory of $S_0$-local objects.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: identify the local objects using the given adjunction and two inverse equations"
+   }
+  },
+  {
+   "text": "Under the current definition, $\\kappa$-small means fewer than $\\kappa$ nondegenerate simplices, and $\\kappa$-filteredness tests every such simplicial set, including the empty one. Thus all filtered index categories below are nonempty and all diagram sizes use this simplicial convention. The endpoints of the arrows of $S_0$ form a small family. Apply the common compactness-rank lemma to that family in the accessible category $\\mathcal C$. Fix the resulting infinite regular $\\kappa$, so that $\\mathcal C$ is $\\kappa$-accessible and both endpoints of each arrow of $S_0$ are $\\kappa$-compact. Choose an essentially small full subcategory $\\mathcal G\\subset\\mathcal C$ of $\\kappa$-compact generators as supplied by the definition of $\\kappa$-accessibility. All subsequent filtered diagrams are small $\\kappa$-filtered diagrams in the fixed smaller universe.",
+   "uses": [
+    "lem-coef-infinity-common-compactness-rank",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: one cardinal for accessibility and all local tests"
+   }
+  },
+  {
+   "text": "Let $p:I\\to\\mathcal E$ be a small $\\kappa$-filtered coherent diagram. Its composite $ip$ has a colimit $c$ in $\\mathcal C$ by step 3. For $s:A\\to B$ in $S_0$, compactness gives the natural comparison equivalences $\\operatorname{Map}_{\\mathcal C}(B,c)\\simeq\\operatorname{colim}_{j\\in I}\\operatorname{Map}_{\\mathcal C}(B,ip_j)$ and $\\operatorname{Map}_{\\mathcal C}(A,c)\\simeq\\operatorname{colim}_{j\\in I}\\operatorname{Map}_{\\mathcal C}(A,ip_j)$. The comparison arrow between the two space diagrams is an equivalence at every vertex by step 2, hence an equivalence in the coherent functor category by the cited functor calculus. Its induced map on colimits is an equivalence: precomposition induces an equivalence of cocone categories, carrying initial cocones to initial cocones, or equivalently this follows by applying the cited mapping-space criterion for colimits. These small space colimits exist by the presheaf-presentability statement with $D$ the one-object identity category, since $N(D)=\\Delta^0$ and $\\operatorname{Fun}(\\Delta^0,\\mathcal S)=\\mathcal S$. Naturality of the compactness comparisons identifies this map with $\\operatorname{Map}_{\\mathcal C}(s,c)$. Thus $c$ is $S_0$-local, and step 2 puts $c$ in $\\mathcal E$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: closure of local objects under filtered colimits, with coherent comparisons"
+   }
+  },
+  {
+   "text": "The ambient colimit cocone of step 4 lies in the full subcategory $\\mathcal E$. For every $e\\in\\mathcal E$, fullness and the ambient colimit give $\\operatorname{Map}_{\\mathcal E}(c,e)\\simeq\\operatorname{Map}_{\\mathcal C}(ic,ie)\\simeq\\lim_{j\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(ip_j,ie)\\simeq\\lim_{j\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E}(p_j,e)$, naturally in $e$. The cited colimit criterion therefore makes it a colimit cocone in $\\mathcal E$. Conversely any colimit cocone for $p$ in $\\mathcal E$ is equivalent to this one, since the full subcategory of initial cocones is contractible; its image in $\\mathcal C$ is therefore colimiting too. Hence $\\mathcal E$ admits small $\\kappa$-filtered colimits and $i$ preserves them. Fullness also makes $\\mathcal E$ locally small, since $\\mathcal C$ is locally small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: the full inclusion computes and preserves filtered colimits"
+   }
+  },
+  {
+   "text": "For any small $\\kappa$-filtered $q:I\\to\\mathcal C$, let $x=\\operatorname{colim}_{\\mathcal C}q$. Apply $L$ to its coherent cocone. For every $e\\in\\mathcal E$ the adjunction and the colimit criterion give $\\operatorname{Map}_{\\mathcal E}(Lx,e)\\simeq\\operatorname{Map}_{\\mathcal C}(x,ie)\\simeq\\lim_{j\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(q_j,ie)\\simeq\\lim_{j\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E}(Lq_j,e)$. All equivalences are natural in the cocone and the testing object, so they are the comparison maps for the $L$-image cocone. The same criterion says it is colimiting in $\\mathcal E$. Thus $L$ preserves these filtered colimits. Combining this with step 5 proves directly that the endofunctor $iL$ preserves small $\\kappa$-filtered colimits; since $\\mathcal C$ is accessible, $iL$ is accessible in the sense of the item.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: preservation by the given left adjoint, then by its composite with the inclusion"
+   }
+  },
+  {
+   "text": "For $g\\in\\mathcal G$ and $p:I\\to\\mathcal E$ small $\\kappa$-filtered, step 5 and the adjunction give $\\operatorname{Map}_{\\mathcal E}(Lg,\\operatorname{colim}_{\\mathcal E}p)\\simeq\\operatorname{Map}_{\\mathcal C}(g,\\operatorname{colim}_{\\mathcal C}ip)\\simeq\\operatorname{colim}_{j\\in I}\\operatorname{Map}_{\\mathcal C}(g,ip_j)\\simeq\\operatorname{colim}_{j\\in I}\\operatorname{Map}_{\\mathcal E}(Lg,p_j)$. The middle equivalence is precisely $\\kappa$-compactness of $g$, and naturality makes the composite the inverse of the canonical compactness comparison. Therefore each $Lg$ is $\\kappa$-compact in $\\mathcal E$.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: the three-line compactness calculation for reflected generators"
+   }
+  },
+  {
+   "text": "Choose a small quasicategory $\\mathcal G_0$ and an equivalence $\\mathcal G_0\\to\\mathcal G$, as permitted by essential smallness. Its vertices form a small set, and their images under $L$ give a small family $(Lg_a)$ in the locally small category $\\mathcal E$. Apply the small-full-subcategory lemma to obtain an essentially small replete full subcategory $\\mathcal H\\subset\\mathcal E$ on that family. Every object of $\\mathcal H$ is equivalent to some $Lg_a$, hence is $\\kappa$-compact by step 7: precomposition with an inverse equivalence identifies the two represented mapping-space functors and their colimit comparisons. Every $Lg$, with $g\\in\\mathcal G$, belongs to $\\mathcal H$, because the chosen equivalence is essentially surjective and $L$ carries inverse equivalences to inverse equivalences.",
+   "uses": [
+    "lem-coef-infinity-small-full-subcategory",
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: a genuinely essentially small full family of reflected compact generators"
+   }
+  },
+  {
+   "text": "For $e\\in\\mathcal E$, accessibility of $\\mathcal C$ expresses $ie$ as a colimit of a small $\\kappa$-filtered diagram $q:I\\to\\mathcal G$. Step 6 makes $Lie$ a colimit of $Lq$ in $\\mathcal E$, and step 1 gives the counit equivalence $Lie\\simeq e$. By step 8 all vertices of $Lq$ lie in $\\mathcal H$, so the coherent diagram factors through $\\mathcal H$: a full subcategory contains every simplex whose vertices it contains. Thus every object of $\\mathcal E$ is a small $\\kappa$-filtered colimit of objects of the essentially small full subcategory $\\mathcal H$ of $\\kappa$-compact objects. Along with local smallness and existence of these colimits from step 5, this is exactly $\\kappa$-accessibility under the cited definition. This proves accessibility of $\\mathcal E$ as well as the already established accessibility of $iL$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2; agent-written foundational reflector argument: assemble the defining accessibility data from the reflected generators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-common-compactness-rank",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-small-full-subcategory",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-presheaf-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, foundational existing-reflector criterion; direct compact-generator proof of HTT Proposition 5.5.4.2(3)(iii) to (i),(ii). HTT is read online but not archived; see WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +205,72 @@
    "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"isLocal|IsAccessible\", \"sub\": \"CategoryTheory/Presentable/OrthogonalReflection.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"21\", \"50\", \"51\", \"52\"], \"digest\": \"25bb130916cacad2\"}",
    "date": "2026-10-16",
    "verdict": "No match: inspected OrthogonalReflection.lean:430-483, with ordinary Category, Type-valued coyoneda and Hom-equivalences, not coherent spaces. Grep output for the single file was parsed poorly by msearch, so its actual declarations were read directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An accessible infinity category with a reflective subcategory detected by a small family of mapping space orthogonality conditions has an accessible reflector",
+   "results": "{\"t\": \"2026-10-16T16:19:51Z\", \"tool\": \"leanfinder\", \"query\": \"An accessible infinity category with a reflective subcategory detected by a small family of mapping space orthogonality conditions has an accessible reflector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\"], \"digest\": \"132fbd027e4128be\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read OrthogonalReflection.lean:95,475 and Adjunction.lean:85; these theorems use ordinary Category structures and Hom sets. They neither state the quasicategorical result nor specialize in one line to coherent mapping spaces. Existing quasicategory-source grep also has no accessibility/reflection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isCardinalAccessible_ι_isLocal|isCardinalAccessibleCategory|IsAccessible",
+   "results": "{\"t\": \"2026-10-16T16:21:29Z\", \"tool\": \"grep\", \"query\": \"isCardinalAccessible_ι_isLocal|isCardinalAccessibleCategory|IsAccessible\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\"], \"digest\": \"2d9aa816867f2466\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read OrthogonalReflection.lean:95,475 and Adjunction.lean:85; these theorems use ordinary Category structures and Hom sets. They neither state the quasicategorical result nor specialize in one line to coherent mapping spaces. Existing quasicategory-source grep also has no accessibility/reflection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isCardinalAccessible_ι_isLocal\"",
+   "results": "{\"t\": \"2026-10-16T16:21:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"isCardinalAccessible_ι_isLocal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"32777ddd4a269f3c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read OrthogonalReflection.lean:95,475 and Adjunction.lean:85; these theorems use ordinary Category structures and Hom sets. They neither state the quasicategorical result nor specialize in one line to coherent mapping spaces. Existing quasicategory-source grep also has no accessibility/reflection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization endofunctor of an accessible quasicategory is accessible if its local objects are determined by a small set of arrows",
+   "results": "{\"t\": \"2026-10-16T16:21:32Z\", \"tool\": \"leansearch\", \"query\": \"A localization endofunctor of an accessible quasicategory is accessible if its local objects are determined by a small set of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.ObjectProperty.isLocalization_isLocal\", \"CategoryTheory.MorphismProperty.locallySmall_of_hasLocalization\", \"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"CategoryTheory.MorphismProperty.Q'\", \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"CategoryTheory.Functor.IsLocalization\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"275fb6d7e7c78637\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read OrthogonalReflection.lean:95,475 and Adjunction.lean:85; these theorems use ordinary Category structures and Hom sets. They neither state the quasicategorical result nor specialize in one line to coherent mapping spaces. Existing quasicategory-source grep also has no accessibility/reflection theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-infinity-adjoints",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-reflector-accessibility",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the existing-reflector criterion into nine explicit coherent mapping-space steps. Identified local objects using the unit, proved filtered-colimit closure from compact test endpoints, and proved accessibility from reflected compact generators. Added only the uniform compactness-cardinal and small-full-subcategory size inputs, both statement-only after recorded searches; no Lean attachment or Mathlib match. Repair after the landing refusal: revalidated the current accessibility definition, made its simplicial size and nonempty filtered-index conventions explicit in step 3, and replaced the repeated blanket definition quotations by the precise current clauses used at each step. Independent second reading: made local smallness explicit before applying the adjoint criterion, sharpened the small-subcategory source to HTT 5.4.1.7, and repeated Mathlib/duplicate searches; no statement change. Maintainer review fix: the statement now cites [def-coef-presentable-infinity-category], which defines accessibility and smallness (def-coef-complete-algebroid only fixes the universes), and spells out repleteness; mathematical content unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: finite-coefficient mapping-complex adjunction before R lim. This is the inherited foundational accessibility input to the coherent-adjunction chain, not a replacement of the six-functor construction.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 4-5 use pointwise equivalences of coherent transformations and contractibility of initial cocones. This is generic quasicategory calculus; the biduality unit supplies no such theorem."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Steps 1-2,5,8-9 use the shared definitions of equivalences, full subcategories and coherent diagrams; these are foundational notions rather than an alternative unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-1f23e245d",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-1f23e245d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of all 8 cited nodes, the unit sk-prop-sf-biduality-general and the blueprint ancestor proof paragraph 2. I also read HTT from an extracted reading copy at 5.5.4.2 with its full proof of (3), and at 5.4.2.9, 5.4.2.10, 5.3.4.15, 5.4.1.2 and 5.4.1.7. The item is HTT 5.5.4.2(3), (iii) implies (i) and (ii). HTT also assumes C only accessible, and every hypothesis matches. Steps 1-2 are 5.5.4.2(1): the counit is an equivalence via the triangle identity and Yoneda, and E equals the T-local objects, which equal the S0-local objects. Steps 3-4 match HTT's choice of kappa and its closure under kappa-filtered colimits. Steps 5-9 use reflected compact generators L(G) instead of HTT's subset-approximation Lemmas 5.5.4.3-4. I checked this route and it is correct: i preserves kappa-filtered colimits, L preserves them, each Lg is kappa-compact (step 7 is genuinely elementary), the small model H comes from the new lemma, and the counit gives generation. proof_deps equals the union of the steps' uses, and a DFS found no cycle. New node lem-coef-infinity-common-compactness-rank is true: take kappa sharply larger than lambda, then 5.4.2.9 and 5.3.4.15 apply. It avoids the false 'every larger cardinal' form (5.4.2.10) and is not a duplicate. lem-coef-presentable-cardinal-enlargement needs presentable C and states more; compact-approximation does not give compactness of prescribed objects. New node lem-coef-infinity-small-full-subcategory is HTT 5.4.1.7 (1) to (2) plus replete closure; it is true, the empty and one-object cases hold, and it has no duplicate. Neither new node restates a clause of the item. I accepted the tool use lem-cbc-enhanced-functor-cone-calculus, which is generic quasicategory calculus. FIX (B3): the item's statement cited def-coef-complete-algebroid for 'accessible', which that node does not define. In the corrected item file it now cites def-coef-presentable-infinity-category (added to stmt_deps; it was already in proof_deps), and 'replete' is written out. The mathematical content is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }
