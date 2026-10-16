@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-quasifinite-finite-parts-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Seed refinement of sk-thm-purity-transport Step 1, finite trace construction: SGA 4 XVII 6.2.1 and Proposition 6.2.2 supply the generators and refinement relations used to construct the quasi-finite trace in XVII 6.2.3, proof p. 425. This seed chain has no imported blueprint ancestor.",
+   "via": [
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-pur-torsion-top-trace",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-parts presentation of a pulled-back sheaf with proper support",
+ "statement": "Let $f:X\\to S$ be a separated quasi-finite morphism of finite presentation between Noetherian schemes [def-pc-scheme, pqf-def-quasifinite, def-sbc-locally-finite-presentation, def-weil-proper-morphism, def-weil-pbc-noetherian-ring]. Here Noetherian means admitting a finite affine cover by spectra of Noetherian rings. Let $B$ be a commutative ring, and let $F,G$ be sheaves of $B$-modules on the small etale site $S_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $f^*$ for inverse image [def-weil-pbc-inverse-image]. For a sheaf $H$ on $X_{\\mathrm{et}}$, let $f_!^{\\mathrm{supp}}H\\subset f_*H$ be the sheaf whose sections on $U\\to S$ have support proper over $U$, as in [lem-cbc-proper-support-sheaf-composition, def-weil-pbc-direct-image].\n\nA finite-parts decomposition over an etale $U\\to S$ of finite presentation consists of a finite pointed set $(I,0)$ and an open-and-closed disjoint decomposition $X\\times_SU=\\coprod_{i\\in I}V_i$, where $v_i:V_i\\to U$ is finite for $i\\ne0$ [def-pc-fibre-product, def-weil-finite-integral-morphism, def-weil-open-immersion]. The piece $V_0$ need not be finite. There is a canonical map\n$$\\eta_\\phi:(F|_U)^{\\oplus(I\\setminus\\{0\\})}\\longrightarrow (f_!^{\\mathrm{supp}}f^*F)|_U$$\nwhose $i$-th component is the adjunction unit $F|_U\\to v_{i*}v_i^*(F|_U)$ followed by inclusion as sections supported on the clopen finite piece $V_i$.\n\nFor a refinement $\\phi'$ of $\\phi$ specified by a pointed map $\\sigma:I'\\to I$ with $V_i=\\coprod_{\\sigma(j)=i}V'_j$ for every $i$, let $t_\\sigma:F^{\\oplus(I\\setminus\\{0\\})}|_U\\to F^{\\oplus(I'\\setminus\\{0\\})}|_U$ send a tuple $a$ to the tuple with $j$-th entry $a_{\\sigma(j)}$ if $\\sigma(j)\\ne0$, and $0$ otherwise. Then $\\eta_\\phi=\\eta_{\\phi'}t_\\sigma$.\n\nThese generators and relations give the following presentation: composing with all $\\eta_\\phi$ is a bijection between $B$-linear sheaf morphisms $f_!^{\\mathrm{supp}}f^*F\\to G$ and families of $B$-linear maps $g_\\phi:F^{\\oplus(I\\setminus\\{0\\})}|_U\\to G|_U$ compatible with all etale restrictions and satisfying $g_\\phi=g_{\\phi'}t_\\sigma$ for every refinement. Equivalently this is a colimit presentation in the etale-local sense; one can work on a small skeleton of the basis of finite-presentation etale objects. The generators commute with change of base under the proper-support comparison and with homomorphisms of coefficient rings.\n\nFor every geometric point $\\bar s$ of $S$ there is a pointed etale neighbourhood $U$ of finite presentation and such a decomposition for which $(V_0)_{\\bar s}$ is empty and every $(V_i)_{\\bar s}$ for $i\\ne0$ has exactly one geometric point. The stalk of $\\eta_\\phi$ at this point is the isomorphism from one copy of $F_{\\bar s}$ per point of $X_{\\bar s}$ onto $(f_!^{\\mathrm{supp}}f^*F)_{\\bar s}$ [def-weil-geometric-point, def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 6.2.1, maps (6.2.1.1) and (6.2.1.2), Proposition 6.2.2 and its proof, pp. 420–422; the universal-property reformulation is the first two paragraphs of the proof of 6.2.3, p. 425. These are finite-parts presentation results, before the trace is constructed. No Stacks tag for this sheaf presentation was found."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-quasifinite",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-cbc-proper-support-sheaf-composition",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf pulled back along a separated quasi finite morphism has compactly supported pushforward presented by finite clopen pieces and diagonal refinement maps",
+   "results": "{\"t\": \"2026-10-16T07:10:52Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf pulled back along a separated quasi finite morphism has compactly supported pushforward presented by finite clopen pieces and diagonal refinement maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.lanSheafProfinite\", \"CompHausLike.LocallyConstantModule.functor\", \"Condensed.ofSheafForgetCompHaus\", \"CompHausLike.LocallyConstant.functor\", \"LightCondensed.lanLightCondSet\", \"Condensed.isSheafProfinite\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"LightCondensed.ofSheafForgetLightProfinite\"], \"digest\": \"c9b722d2adb07b4d\"}",
+   "date": "2026-10-16",
+   "digest": "c9b722d2adb07b4d",
+   "verdict": "no match: returned declarations concern condensed sheaves, general presheaf colimits, or quasi-compact scheme geometry; none states this etale-local presentation by finite clopen parts. Two semantic phrasings were tried and the returned signatures read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T07:10:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\"], \"digest\": \"07ac75cac7db3ec5\"}",
+   "date": "2026-10-16",
+   "digest": "07ac75cac7db3ec5",
+   "verdict": "no match: returned declarations concern condensed sheaves, general presheaf colimits, or quasi-compact scheme geometry; none states this etale-local presentation by finite clopen parts. Two semantic phrasings were tried and the returned signatures read."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?finite.*(shriek|support)|finite.*clopen.*sheaf|shriek.*pullback",
+   "results": "{\"t\": \"2026-10-16T07:10:50Z\", \"tool\": \"grep\", \"query\": \"quasi.?finite.*(shriek|support)|finite.*clopen.*sheaf|shriek.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: returned declarations concern condensed sheaves, general presheaf colimits, or quasi-compact scheme geometry; none states this etale-local presentation by finite clopen parts. Two semantic phrasings were tried and the returned signatures read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local presentation of direct image with proper support of a pulled back sheaf by finite open and closed components of a quasi finite scheme",
+   "results": "{\"t\": \"2026-10-16T07:11:23Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local presentation of direct image with proper support of a pulled back sheaf by finite open and closed components of a quasi finite scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"93a21880c5ee117a\"}",
+   "date": "2026-10-16",
+   "digest": "93a21880c5ee117a",
+   "verdict": "no match: returned declarations concern condensed sheaves, general presheaf colimits, or quasi-compact scheme geometry; none states this etale-local presentation by finite clopen parts. Two semantic phrasings were tried and the returned signatures read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image for quasi finite schemes as a colimit of finite clopen decompositions",
+   "results": "{\"t\": \"2026-10-16T07:11:22Z\", \"tool\": \"leansearch\", \"query\": \"Compact support direct image for quasi finite schemes as a colimit of finite clopen decompositions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"AlgebraicGeometry.QuasiCompact.recOn\", \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"AlgebraicGeometry.QuasiCompact.casesOn\", \"AlgebraicGeometry.isCompact_iff_exists\"], \"digest\": \"26c9d5b83750a525\"}",
+   "date": "2026-10-16",
+   "digest": "26c9d5b83750a525",
+   "verdict": "no match: returned declarations concern condensed sheaves, general presheaf colimits, or quasi-compact scheme geometry; none states this etale-local presentation by finite clopen parts. Two semantic phrasings were tried and the returned signatures read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An étale sheaf is the colimit of finite clopen decompositions of a quasi finite scheme and pullback adjunction units",
+   "results": "{\"t\": \"2026-10-16T07:24:18Z\", \"tool\": \"leanfinder\", \"query\": \"An étale sheaf is the colimit of finite clopen decompositions of a quasi finite scheme and pullback adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"LightCondensed.fintypeCatAsCofanIsColimit\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"CompHausLike.LocallyConstant.counit_app_val\"], \"digest\": \"505ccda6d906b1d1\"}",
+   "date": "2026-10-16",
+   "digest": "505ccda6d906b1d1",
+   "verdict": "no match: independent second reading; the returned signatures concern generic presheaf colimits, condensed locally constant sheaves, or scheme etale sites, rather than the proper-support presentation by finite clopen pieces"
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|IsClopen|decomposition).*(Sheaf|sheaf|colimit)|(Sheaf|sheaf|colimit).*(clopen|IsClopen|decomposition)",
+   "results": "{\"t\": \"2026-10-16T07:24:34Z\", \"tool\": \"grep\", \"query\": \"(clopen|IsClopen|decomposition).*(Sheaf|sheaf|colimit)|(Sheaf|sheaf|colimit).*(clopen|IsClopen|decomposition)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: independent second reading; the broader clopen/decomposition and sheaf/colimit source search returned zero hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T07:24:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\"], \"digest\": \"07ac75cac7db3ec5\"}",
+   "date": "2026-10-16",
+   "digest": "07ac75cac7db3ec5",
+   "verdict": "no match: independent second reading; the returned signatures concern generic presheaf colimits, condensed locally constant sheaves, or scheme etale sites, rather than the proper-support presentation by finite clopen pieces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-16T07:26:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"cd77d45a9e50cf2e\"}",
+   "date": "2026-10-16",
+   "digest": "cd77d45a9e50cf2e",
+   "verdict": "no match: independent second reading with broader vocabulary; all returned signatures construct or compare generic presheaf-of-modules pushforward, without a quasi-finite scheme or proper-support finite-parts presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pur-quasifinite-flat-weighted-trace",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

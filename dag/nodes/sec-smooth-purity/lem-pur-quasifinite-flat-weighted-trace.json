@@ -31,11 +31,216 @@
   "def-weil-etale-morphism",
   "def-weil-geometric-fibre",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-module-length"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the sheaf functor and its derived value. By [lem-weil-pbc-quasifinite-fp-finite-factorization], write $u=pj$ with $j:X\\hookrightarrow T$ a quasi-compact open immersion and $p:T\\to Y$ finite of finite presentation. The base is quasi-compact by its finite affine cover and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-finite-proper] this is a compactification. The identities of [lem-cbc-proper-support-sheaf-composition] identify the sheaf of sections with proper support with $p_*j_!$, naturally as a subsheaf of $u_*$. Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact]; finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]. The latter abelian-sheaf assertion applies to module sheaves as well: direct image forgets to the same abelian direct image, and kernels and cokernels carry their induced $B$-actions. Thus $u_!=p_*j_!$ is exact. On a degree-zero sheaf $H$, finite direct image has no higher cohomology, so $Rp_*Dj_!H=p_*j_!H$ in degree zero. The comparisons in [lem-amb-etale-compact-comparisons] identify this value with the given compactification-independent $Ru_!H$; only the bounded-below restriction is used here.",
+   "uses": [
+    "lem-weil-pbc-quasifinite-fp-finite-factorization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-proper",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.1.2–6.1.4; compactification construction 5.1.11"
+   }
+  },
+  {
+   "text": "Compute the stalks, without assuming flatness. Apply [lemma-weil-pbc-finite-stalk-formula] to the finite $p$ of Step 1 and $j_!H$. The inside/outside formula of [lem-weil-pbc-extension-by-zero-stalks] removes exactly the points outside $X$, leaving\n$$(u_!H)_{\\bar y}=\\bigoplus_{x\\in|X_{\\bar y}|}H_{\\bar x}.$$\nThese are the canonical restriction-of-germs maps, not arbitrarily chosen isomorphisms. For $H=u^*F$, the pullback-to-geometric-fibre identification [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant] gives $H_{\\bar x}=F_{\\bar y}$. Its naturality preserves addition and every $b\\in B$ action, so the formula is $B$-linear. The support-composition and base-change maps in [lem-cbc-proper-support-sheaf-composition] preserve the underlying sections, and hence give the corresponding reindexing identifications on these sums.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-cbc-proper-support-sheaf-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.1.4(ii),(iii), and the stalk calculation in 6.2.2"
+   }
+  },
+  {
+   "text": "Record the geometric fibre algebra. The fibre $T_{\\bar y}$ of the finite $p$ in Step 1 is finite over $\\Omega$: on an affine chart a finite set of module generators remains generating after tensoring with $\\Omega$. By [lem-weil-pbc-finite-over-field-affine-finite-dim] write it as $\\operatorname{Spec}A$, with $A$ finite-dimensional over $\\Omega$. By [lem-weil-pbc-finite-dim-algebra-artinian], $A$ is Artinian. It has finitely many maximal ideals: otherwise successive intersections of distinct maximal ideals strictly decrease (a product of elements lying in the earlier maximal ideals and outside the new one witnesses strictness), contradicting the descending chain condition. Every element $a$ of its Jacobson radical is nilpotent: stabilization $a^nA=a^{n+1}A$ gives $a^n=a^{n+1}b$, and $1-ab$ is a unit because it lies in no maximal ideal, so $a^n=0$. Therefore [lem-weil-pbc-product-of-localizations-at-maximal] gives $A\\cong\\prod_x A_x$ with local factors. Each factor is Artinian, since a decreasing chain of its ideals pulls back to a decreasing chain in $A$. By [lem-weil-pbc-artinian-local-unique-prime] its spectrum is a singleton. The open subscheme $X_{\\bar y}\\subset T_{\\bar y}$ is consequently a union of some of these finitely many clopen factors and is itself finite over $\\Omega$. Each residue field is $\\Omega$ by [lem-weil-pbc-closed-point-residue-field-base]. This proves all the geometric assertions needed to interpret the weights, including the empty fibre.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J6 (lemma-finite-dimensional-algebra), 00JA (lemma-product-local); geometric interpretation used in XVII 6.2.2–6.2.3"
+   }
+  },
+  {
+   "text": "For a local factor $C$ of Step 3, its module length equals $\\dim_\\Omega C$. Indeed [lem-weil-pbc-artinian-ring-self-finite-length] and [lem-weil-pbc-finite-length-module-simple-filtration] give a finite filtration by simple $C$-modules. Every simple module over the commutative local ring $C$ is its residue field: a nonzero element generates the simple module, the resulting surjection $C\\to M$ has maximal kernel, and that kernel is the unique maximal ideal. Thus every simple quotient is $\\Omega$. Additivity [lem-weil-pbc-length-additive-short-exact] makes the length of $C$ the number of these quotients. The dimension is the same number: in each short exact sequence lift a basis of the quotient and append a basis of the subspace. Induction on the filtration gives $\\operatorname{length}_C C=\\dim_\\Omega C$. Consequently a finite geometric fibre algebra has dimension equal to the sum of the lengths of its local factors.",
+   "uses": [
+    "lem-weil-pbc-artinian-ring-self-finite-length",
+    "lem-weil-pbc-finite-length-module-simple-filtration",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00JB (lemma-artinian-finite-length), 00J3 (lemma-simple-pieces), 00IV (lemma-length-additive)"
+   }
+  },
+  {
+   "text": "Construct the map on actual sheaves. Use the finite-parts presentation [lem-pur-quasifinite-finite-parts-presentation]. In a decomposition $X_U=\\coprod_{i\\in I}V_i$, each finite $v_i$ for $i\\ne0$ is flat and locally finitely presented. For clarity, these properties survive the base change to $U$: [lem-weil-pbc-flat-module-base-change] on affine charts and the local criterion [lem-weil-pbc-flat-map-local-criterion] give flatness; [lem-weil-pbc-qcqs-morphism-permanence](3) gives local finite presentation. Restriction to an open-and-closed source piece does not change its local rings or local presentations. By [lem-weil-pbc-finite-flat-rank-iso], its rank $n_i:U\\to\\mathbf N$ is locally constant and stable under every base change. Define on each open where these finitely many functions are constant\n$$g_\\phi:(a_i)_{i\\ne0}\\longmapsto\\sum_{i\\ne0} n_i a_i.$$\nThe formulas agree on overlaps, so define a sheaf morphism on $U$. For a refinement $\\sigma:I'\\to I$, the finite algebra of $V_i$ is the product of those of $V'_j$ with $\\sigma(j)=i$, hence $n_i=\\sum_{\\sigma(j)=i}n'_j$ for $i\\ne0$. Thus\n$$g_{\\phi'}t_\\sigma(a)=\\sum_{j:\\sigma(j)\\ne0}n'_j a_{\\sigma(j)}=\\sum_{i\\ne0}n_i a_i=g_\\phi(a).$$\nThe new finite pieces carved out of $V_0$ receive the coordinate zero in $t_\\sigma$ and contribute nothing. Etale restriction compatibility follows from rank base change. The presentation's universal property now gives the desired $B$-linear map $\\tau_{u,F}:u_!u^*F\\to F$. In particular its existence is proved by compatible generators and relations, not inferred from an arbitrary assignment on stalks.",
+   "uses": [
+    "lem-pur-quasifinite-finite-parts-presentation",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-map-local-criterion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.3, construction p. 425; finite flat rank and its base change, Stacks 04MH"
+   }
+  },
+  {
+   "text": "Calculate the trace and prove uniqueness. At $\\bar y$ take the finite-parts decomposition supplied in [lem-pur-quasifinite-finite-parts-presentation] with remainder having empty fibre and one geometric point in each finite piece. Its generators identify the stalk with the sum in Step 2. The rank $n_i(\\bar y)$ is the $\\Omega$-dimension of the single local fibre algebra by [lem-weil-pbc-finite-flat-rank-iso]; Step 4 identifies it with its self-length. Thus $\\tau_{u,F}$ has exactly the displayed weighted-sum formula. If two sheaf maps have that formula, their equalizer inclusion is an isomorphism on every geometric stalk. By [lemma-weil-pbc-geometric-stalk-conservative] it is an isomorphism, and the maps are equal. This uses the sheaf category only.",
+   "uses": [
+    "lem-pur-quasifinite-finite-parts-presentation",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.2 and 6.2.3, proof pp. 424–425"
+   }
+  },
+  {
+   "text": "Naturality and arbitrary Noetherian base change. Any morphism $F\\to F'$ commutes on each generator with the integer multiplication $n_i$; the presentation in [lem-pur-quasifinite-finite-parts-presentation] therefore proves naturality. For $g:Y'\\to Y$, use the actual support base-change isomorphism of [lem-cbc-proper-support-sheaf-composition]. Pullback sends the generator for $V_i/U$ to that for $V_i\\times_YY'$ over $U\\times_YY'$, and [lem-weil-pbc-finite-flat-rank-iso](2) leaves its coefficient $n_i$ unchanged. The inverse-image functor on module sheaves is exact and left adjoint to direct image by [prop-weil-pbc-inverse-image-modules-exact], so preserves the colimit presentation and its epimorphic family of generators. The two maps agree on these pulled-back generators and hence agree everywhere. All schemes to which the finite-parts result is applied are Noetherian: base change preserves finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3), and finite type over the Noetherian $Y'$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Separatedness and local quasi-finiteness pass to this base change by [lem-weil-pbc-separated-lqf-base-change]. Its quasi-compactness is part of the finite presentation just verified, so [pqf-lem-qf-locqf-qc] gives quasi-finiteness. Flatness follows from the affine base-change argument of Step 5. No flatness of $g$ or invertibility of the order of $B$ is used.",
+   "uses": [
+    "lem-pur-quasifinite-finite-parts-presentation",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.3 (Var 1),(Var 2), construction p. 425"
+   }
+  },
+  {
+   "text": "Composition, including the nonreduced intermediate fibre. Let $v:Z\\to X$ be another separated quasi-finite flat morphism of finite presentation. For the composite $w=u\\circ v$, local finite presentation follows on affine charts from [lem-weil-pbc-finite-presentation-base-change-composition](2), and flatness from [lem-pc-flat-compose]. The Noetherian schemes $Z$ and $Y$ are quasi-compact and, by [lem-weil-pbc-locally-noetherian-quasi-separated], quasi-separated. Thus [lem-weil-pbc-qcqs-morphism-permanence](1) gives quasi-compactness and quasi-separatedness of $w$, completing finite presentation. Separatedness follows by factoring the composite diagonal as the diagonal of $v$ followed by the base change of the diagonal of $u$, both closed immersions: on affine charts their ring maps are surjective, tensoring a surjective ring map is still surjective, and a composite of surjections is surjective. For any $y\\in Y$, the space $|X_y|$ is discrete by quasi-finiteness of $u$. Thus, in $|Z_y|$, the inverse image of each singleton $\\{x\\}$ is open and is homeomorphic to the underlying fibre $|Z_x|$ of $v$; its points are isolated by quasi-finiteness of $v$. Every point of $|Z_y|$ is therefore isolated, proving quasi-finiteness of $w$ directly from its definition. Thus $w$ is in the asserted class. At a geometric $\\bar y$ of $Y$, write $A_x=\\mathcal O_{X_{\\bar y},x}$ as in Step 3. Over $\\operatorname{Spec}A_x$, the pullback of $v$ is separated and locally quasi-finite by [lem-weil-pbc-separated-lqf-base-change], and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3), hence quasi-finite by [pqf-lem-qf-locqf-qc]. It is finite: apply the factorization of [lem-weil-pbc-quasifinite-fp-finite-factorization] over this Artinian Noetherian base; its finite ambient scheme is finite-dimensional over $\\Omega$, and the product argument of Step 3 makes every open subscheme a finite union of clopen local factors. Thus its coordinate algebra splits into local Artinian $\\Omega$-algebras $C_z$, one for each $z$ lying over $x$. Each $C_z$ is flat over $A_x$: [lem-weil-pbc-flat-module-base-change] and [lem-weil-pbc-flat-map-local-criterion] give the base-changed flatness, and restriction to its one-point clopen component gives the same local map. The maximal ideal $\\mathfrak m_x$ is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent]. Choose a basis of $C_z/\\mathfrak m_xC_z$ over $\\Omega=A_x/\\mathfrak m_x$ and lift it to $C_z$. By [lem-weil-pbc-local-artinian-basis-when-flat] these lifts form an $A_x$-basis. With $e_z=\\dim_\\Omega(C_z/\\mathfrak m_xC_z)$, counting the resulting $\\Omega$-basis gives\n$$\\dim_\\Omega C_z=e_z\\dim_\\Omega A_x.$$\nStep 4 applies both to $C_z$ and to the local fibre ring $C_z/\\mathfrak m_xC_z$. Therefore the multiplicities satisfy\n$$m_{uv}(z)=m_u(x)m_v(z).$$\nThe sheaf composition identification is the equality of sections in [lem-cbc-proper-support-sheaf-composition]; by Step 2 it identifies the stalk of $u_!v_!$ with the iterated direct sum indexed by $x$ and $z$ over $x$. On a tuple $(a_z)$ the iterated trace is\n$$\\sum_xm_u(x)\\Bigl(\\sum_{z\\mapsto x}m_v(z)a_z\\Bigr)=\\sum_zm_{uv}(z)a_z,$$\nwhich is the trace of the composite by Step 6. Equality follows by the equalizer argument of Step 6, using [lemma-weil-pbc-geometric-stalk-conservative]. In particular one must retain the thickening $\\operatorname{Spec}A_x$ in this calculation; replacing it by its reduced point prematurely would lose $m_u(x)$.",
+   "uses": [
+    "lem-weil-pbc-quasifinite-fp-finite-factorization",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-map-local-criterion",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-local-artinian-basis-when-flat",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "pqf-lem-qf-locqf-qc",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.3 (Var 3), last paragraph of proof p. 425; algebraic expansion using Stacks 00J8 and 051F"
+   }
+  },
+  {
+   "text": "Coefficient changes. Restriction of scalars leaves all underlying sums and integer multiplications unchanged. For a homomorphism $B\\to B'$ of finite commutative rings, sheafified scalar extension $B'\\otimes_B-$ is left adjoint to restriction of scalars: the usual sectionwise tensor/Hom adjunction descends to sheaves by the universal property of sheafification. Hence it preserves the generators and relations of [lem-pur-quasifinite-finite-parts-presentation]. Put $F' = B'\\otimes_B F$. The unit $F\\to\\operatorname{Res}_B F'$ induces $u_!u^*F\\to\\operatorname{Res}_B(u_!u^*F')$: restriction of scalars leaves the pullback and proper-support sections unchanged. Applying the scalar-extension/restriction adjunction to this map defines the canonical comparison\n$$B'\\otimes_Bu_!u^*F\\longrightarrow u_!u^*(B'\\otimes_BF)$$\nThis is an isomorphism: by [lem-pod-etale-stalk-tensor-scalar] and Step 2 it is the canonical bijection $B'\\otimes_B\\bigoplus_xF_{\\bar y}\\cong\\bigoplus_x(B'\\otimes_BF_{\\bar y})$ at each geometric stalk, and [lemma-weil-pbc-geometric-stalk-conservative] applies. On each tensor generator both trace maps send $b'\\otimes(a_x)_x$ to $\\sum_xm_x(b'\\otimes a_x)$, so they agree. Tensor relations show this calculation respects addition and balancing. Thus the coefficient compatibility is ordinary sheaf scalar extension; no claim that a nonflat scalar extension is exact is needed.",
+   "uses": [
+    "lem-pur-quasifinite-finite-parts-presentation",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.3 (Var 1) and 6.2.7 for the additive trace; scalar-extension compatibility is the module-coefficient argument written in this step, using the tensor/restriction adjunction and lem-pod-etale-stalk-tensor-scalar."
+   }
+  },
+  {
+   "text": "Etale and degree normalization. If $u$ is etale, its geometric fibres are reduced: etaleness is preserved by base change by [lem-weil-pbc-etale-base-change-finite-limits], and [etale-proposition-etale-reduced] applies over the reduced field $\\Omega$. Each local Artinian factor of Step 3 is then a field: its maximal ideal is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent], hence zero in a reduced ring. Its residue field is $\\Omega$, so its length is one. By [lem-asd-etale-compact-support-normalization] the compact-support functor is etale sum extension and its counit is the sum/evaluation map; the weights just computed and uniqueness in Step 6 identify $\\tau$ with it. Finally, if $u$ is finite locally free of constant rank $r$, its unit $F\\to u_*u^*F$ sends $a$ to the diagonal tuple $(a)_x$, by the adjunction-unit description of the generators in [lem-pur-quasifinite-finite-parts-presentation]. By [lem-weil-pbc-finite-flat-rank-iso] and Step 4, $\\sum_xm_x=\\dim_\\Omega\\Gamma(X_{\\bar y},\\mathcal O)=r$, so the composite sends $a$ to $ra$ on every stalk. The equalizer argument gives multiplication by $r$ as a sheaf map. For $r=0$ the source fibre is empty and the map is zero; for the identity all weights and the trace are one.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-pur-quasifinite-finite-parts-presentation",
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 6.2.3 (Var 4), 6.2.11"
+   }
+  }
+ ],
+ "proof_deps": [
+  "etale-proposition-etale-reduced",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-pc-flat-compose",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-quasifinite-finite-parts-presentation",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-local-artinian-basis-when-flat",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasifinite-fp-finite-factorization",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-qf-locqf-qc",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 6.1.2–6.1.4, 6.2.1–6.2.3, especially construction p. 425 and Variances 1–4; 6.2.11 for etale normalization. The Artinian multiplicity calculation is expanded in the steps using the cited Stacks algebra lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,15 +297,241 @@
    "date": "2026-10-16",
    "digest": "4f53cda18c2baa0c",
    "verdict": "no match: independent source grep returned zero declarations for Cohen-Macaulay geometry or etale Kummer cohomology/trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace for quasi finite flat separated morphisms of schemes on etale module sheaves weighted by geometric fibre multiplicities",
+   "results": "{\"t\": \"2026-10-16T07:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"Trace for quasi finite flat separated morphisms of schemes on etale module sheaves weighted by geometric fibre multiplicities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"trace_quotient_eq_trace_localization_quotient\", \"Algebra.traceMatrix_localizationLocalization\", \"Algebra.trace_localization\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.trace_quotient_mk\", \"Algebra.trace_trace\"], \"digest\": \"368083db37b56ddc\"}",
+   "date": "2026-10-16",
+   "digest": "368083db37b56ddc",
+   "verdict": "no match: the returned signatures define scheme etaleness/flatness or algebraic traces of ring elements; none constructs the trace on etale module sheaves with ramified geometric-fibre lengths. The pre-existing record also contains a second phrasing search."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"trace\"",
+   "results": "{\"t\": \"2026-10-16T07:14:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"trace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: the returned signatures define scheme etaleness/flatness or algebraic traces of ring elements; none constructs the trace on etale module sheaves with ramified geometric-fibre lengths. The pre-existing record also contains a second phrasing search."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?finite.*trace|trace.*quasi.?finite|weighted.*trace|etale.*transfer",
+   "results": "{\"t\": \"2026-10-16T07:14:38Z\", \"tool\": \"grep\", \"query\": \"quasi.?finite.*trace|trace.*quasi.?finite|weighted.*trace|etale.*transfer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: the returned signatures define scheme etaleness/flatness or algebraic traces of ring elements; none constructs the trace on etale module sheaves with ramified geometric-fibre lengths. The pre-existing record also contains a second phrasing search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weighted trace transfer for ramified finite flat scheme morphisms on etale sheaves",
+   "results": "{\"t\": \"2026-10-16T07:14:39Z\", \"tool\": \"leansearch\", \"query\": \"Weighted trace transfer for ramified finite flat scheme morphisms on etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"LinearMap.trace_baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"Algebra.trace_trace\"], \"digest\": \"3e274be1cf38e112\"}",
+   "date": "2026-10-16",
+   "digest": "3e274be1cf38e112",
+   "verdict": "no match: the returned signatures define scheme etaleness/flatness or algebraic traces of ring elements; none constructs the trace on etale module sheaves with ramified geometric-fibre lengths. The pre-existing record also contains a second phrasing search."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-torsion-top-trace",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-quasifinite-flat-weighted-trace",
+  "worker": "stage1",
+  "summary": "Followed SGA 4 XVII 6.2.3 by defining compatible rank-weighted maps on the finite-parts presentation; reused all existing finite factorization, proper-support, exactness, stalk, rank and Artinian length nodes. Added just the finite-parts presentation, which contains no trace assertion. Expanded the nonreduced-fibre multiplication of lengths for composition, distinguished sheaf equality from derived equality, and checked arbitrary Noetherian base changes and ordinary coefficient changes. No statement correction or Lean attachment.",
+  "blueprint": "Refines the seed chain for sk-thm-purity-transport Step 1: normalized finite trace construction used in lem-pur-torsion-top-trace Step 3 and XVIII 2.9(a),(b),(e). No imported blueprint ancestor exists, as blueprint_refs.py ancestor confirms; from.place is retained and same_as was searched across the entire blueprint.",
+  "tool_uses": [
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic Etale morphisms over reduced schemes are reduced, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic Normalization of compactified etale support and its exchange, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Generic Composition and pullback of the underived sheaf of sections with proper support, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic Flatness is transitive, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "why": "Generic An Artinian local ring is Noetherian with nilpotent maximal ideal, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-local-unique-prime",
+    "why": "Generic An Artinian local ring has exactly one prime ideal, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-ring-self-finite-length",
+    "why": "Generic An Artinian ring has finite length over itself, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Residue fields of closed points over an algebraically closed field, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic The base-change functor between small etale sites commutes with finite limits, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "why": "Generic Pullback to a geometric fibre is the constant sheaf of the geometric stalk, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site), used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dim-algebra-artinian",
+    "why": "Generic A finite-dimensional algebra over a field is Artinian, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-flat-rank-iso",
+    "why": "Generic Rank of a finite flat morphism: locally constant, stable under base change, rank one means isomorphism, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "Generic A finite-length module has a filtration with simple quotients, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Generic A scheme finite over a field is affine, the spectrum of a finite-dimensional algebra, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic Finite presentation: base change and composition, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6), used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-map-local-criterion",
+    "why": "Generic Flatness of a ring map is local on the target, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic Base change of a flat module is flat, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-length-additive-short-exact",
+    "why": "Generic Length is additive in short exact sequences, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-artinian-basis-when-flat",
+    "why": "Generic Bases of flat modules over a local ring with nilpotent maximal ideal, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY), used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-product-of-localizations-at-maximal",
+    "why": "Generic A ring with finitely many maximal ideals and nil Jacobson radical is the product of its localizations, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasifinite-fp-finite-factorization",
+    "why": "Generic Finitely presented Zariski main finite factorization, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic Separated and locally quasi-finite morphisms are stable under base change (Stacks 01KU, 01TM), used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic Quasi-finite = locally quasi-finite + quasi-compact, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact, used only for the specific statement quoted in citations.json; the finite trace unit supplies no replacement for this sheaf, scheme, or module tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "etale-proposition-etale-reduced",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-pc-flat-compose",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-local-artinian-basis-when-flat",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasifinite-fp-finite-factorization",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-qf-locqf-qc",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-814fa2acd",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-814fa2acd (reviewer sub-agent of L); spot-checked: Read both nodes and checked all ten steps against SGA XVII 6.2.1–6.2.3, cited Stacks statements, and the unit/master-source route. Mathematics accepted, including nonreduced multiplicities and nonflat coefficient changes. Supplied corrected JSON for missing new-node metadata and an irrelevant Step 9 source reference. Detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
