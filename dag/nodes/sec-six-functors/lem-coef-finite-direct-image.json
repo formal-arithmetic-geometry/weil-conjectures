@@ -30,7 +30,8 @@
   "def-kun-projection-formula-map",
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-weil-pbc-witness-compatibility"
  ],
  "proof": [
   {
@@ -253,5 +254,44 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-00c2d1f02 (reviewer sub-agent of L); spot-checked: Read the item, source/unit route, every cited DAG statement and literature source. The corrected statement is fully typed, preserves the target strength, and all four proof steps check with hypotheses, coefficient categories, composition, pro-étale transport, and edge cases. No repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4de5f22b7",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Reviewed the immutable node, source, dependencies, Lean module, docstrings, report, edge cases, and pro-etale declarations. scompile.py compiled sandbox and library files successfully with no errors; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientDirectImage",
+  "declaration": "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteCoefficientSiteSize",
+   "AlgebraicGeometry.Etale.finiteCoefficientRestrictionPullback",
+   "AlgebraicGeometry.Etale.IsFiniteCoefficientDirectImageMap",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_existsUnique",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap",
+   "AlgebraicGeometry.ProEtale.IsFiniteCoefficientDirectImageMap",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientChangeDirectImageMap",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_naturality",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_comp",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_coefficientChain",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_naturality",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_comp",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_coefficientChain",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_isIso",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_etaleOrigin_isIso",
+   "AlgebraicGeometry.Etale.finiteCoefficientRestrictionDirectImageMap",
+   "AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_restriction_projection"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDirectImage.lean",
+  "statement": "theorem finiteCoefficientDirectImageMap_isIso (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (B : Type (u + 1)) [CommRing B] [Algebra (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) B] [Module.Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) B] (T X : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (f : T ⟶ X) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (K : DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) T.left) (_hK : @DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) T.left K) (_hTor : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) T.left a b K) : IsIso (finiteCoefficientDirectImageMap (algebraMap (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) B) f.left K)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The recorded declarations jointly render the etale and etale-origin pro-etale assertions, canonical counit normalization, scalar-unit restriction/projection equation, naturality and both composition identities. Scalar extension reuses the landed pbcFixedScalarExtension and its canonical coherence; its owning landed node is added to stmt_deps. No statement correction, new node or dependency replacement. Second reading: renamed the pro-etale derived map to finiteCoefficientChangeDirectImageMap to avoid the existing ring-sheaf map; used leftDerivedUpperStarRestrictScalarsIso directly instead of a duplicate wrapper."
  }
 }
